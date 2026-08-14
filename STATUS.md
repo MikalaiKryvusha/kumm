@@ -122,4 +122,9 @@ Nexus half without the deploy half (verified: `npm pack --dry-run` → 4 files, 
 Framework tickets (not this project's code, kept visible until an update retires them):
 - 🟡 `bugs/KAIF/01_package_json_reformatted_wholesale.md` — the `kaif:*` wiring re-serializes the whole
   `package.json`; 24 of 31 diff lines are whitespace-only. Semantically empty, accepted locally, filed
-  upstream. Expect it again at the next `/kaif-update`.
+  upstream as [KAIF#16](https://github.com/MikalaiKryvusha/KAIF/issues/16). Expect it again at the next
+  `/kaif-update`.
+- The install's own field report went upstream as
+  [KAIF#17](https://github.com/MikalaiKryvusha/KAIF/issues/17); the placeholder-gate rake was a known
+  signal and got a +1 observation on [KAIF#3](https://github.com/MikalaiKryvusha/KAIF/issues/3) rather
+  than a duplicate ticket.

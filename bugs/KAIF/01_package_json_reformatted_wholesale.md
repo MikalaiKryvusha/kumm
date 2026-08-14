@@ -12,6 +12,10 @@ ticket) and origin issues (`gh issue list --repo MikalaiKryvusha/KAIF --state al
 `package.json`"* — it does not report the reformatting; `--search "reformat formatting"` → no results).
 No match found.
 
+**Delivered upstream:** https://github.com/MikalaiKryvusha/KAIF/issues/16 (2026-08-15, on the owner's
+behalf — their word: *"По окончанию - отчёт в KAIF issues рипозиторий gh"*). Keep this document open
+until an update retires the behavior.
+
 ## Gap
 
 The install step announces a narrow, additive action:
