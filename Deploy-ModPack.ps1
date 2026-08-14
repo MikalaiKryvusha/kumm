@@ -283,8 +283,16 @@ function Resolve-ModSource {
     if ($script:SourceCache.ContainsKey($Mod.name)) { return $script:SourceCache[$Mod.name] }
 
     if ($Mod.source.folder) {
-        $p = Join-Path $ModsDir ($Mod.source.folder -replace '/', '\')
-        if (-not (Test-Path $p)) { throw "source folder missing: $($Mod.source.folder) (looked in $ModsDir)" }
+        # Папки-источники - это исходники сборки: моды, распакованные и
+        # правленные руками. Их место рядом с манифестом, поэтому ищем сперва
+        # у сборки, а уже потом в библиотеке - там они лежали, пока библиотека
+        # и сборка были одной папкой.
+        $rel = $Mod.source.folder -replace '/', '\'
+        $p = Join-Path $RootDir $rel
+        if (-not (Test-Path $p)) { $p = Join-Path $ModsDir $rel }
+        if (-not (Test-Path $p)) {
+            throw "source folder missing: $($Mod.source.folder) (looked in $RootDir and $ModsDir)"
+        }
         $res = [pscustomobject]@{ Path = $p; Archive = $null }
     }
     else {

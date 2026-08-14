@@ -459,7 +459,9 @@ function parseArchive(fileName) {
 
 async function library() {
   const manifest = JSON.parse(await readFile(MANIFEST, 'utf8'))
-  const modsDir = path.join(ROOT, manifest.library || 'mods')
+  // resolve, а не join: библиотека скачанного может лежать вне сборки, и тогда
+  // "library" в манифесте - абсолютный путь.
+  const modsDir = path.resolve(ROOT, manifest.library || 'mods')
   const files = (await readdir(modsDir, { withFileTypes: true }))
     .filter(d => d.isFile())
     .map(d => ({ file: d.name, ...(parseArchive(d.name) || {}) }))
@@ -572,9 +574,12 @@ function pickCard(cards, archive, modId, prefer = null) {
 // Скачать главный файл каждого мода, у которого версия на Nexus разошлась с
 // библиотекой. Кладём в отдельную папку: подменять архивы в библиотеке - шаг
 // осознанный, старое уезжает в mods/OLD руками или скриптом деплоя.
-async function update({ outDir = 'mods/_incoming', only = null } = {}) {
+async function update({ outDir = null, only = null } = {}) {
   const cdp = await need()
-  const { mods } = await library()
+  const { mods, modsDir } = await library()
+  // Скачанное складываем в библиотеку, а не в папку сборки: сборка - это
+  // манифест и правленые исходники, чужие архивы ей не принадлежат.
+  outDir ??= path.join(modsDir, '_incoming')
   const targets = mods.filter(m =>
     (!only || only.includes(m.nexusId) || only.includes(m.name)))
   const done = [], skipped = [], failed = []
@@ -602,8 +607,9 @@ async function update({ outDir = 'mods/_incoming', only = null } = {}) {
   if (skipped.length) { log(`  уже актуальны (${skipped.length}): ${skipped.join(', ')}`) }
   if (failed.length) { log(`  не вышло (${failed.length}):`); for (const f of failed) log('    ' + f) }
   log('')
-  log(`  файлы в ${path.resolve(ROOT, outDir)} - переносить в библиотеку осознанно,`)
-  log('  старые архивы при этом убирать в mods/OLD.')
+  log(`  файлы в ${path.resolve(ROOT, outDir)}`)
+  log('  Переносить к остальным архивам осознанно, а отработавшие убирать в OLD/:')
+  log('  подмена версии в библиотеке - это решение, а не побочный эффект загрузки.')
   return { done, skipped, failed }
 }
 
@@ -637,7 +643,8 @@ switch (cmd) {
   case 'check': await check({ json: !!flags.json }); break
 
   case 'update':
-    await update({ outDir: flags.out || 'mods/_incoming', only: args.length ? args : null })
+    // Без --out решает update: скачанное едет в _incoming внутри библиотеки.
+    await update({ outDir: flags.out || null, only: args.length ? args : null })
     break
 
   case 'files': {
@@ -663,7 +670,8 @@ switch (cmd) {
       : cards.filter(c => !c.old).sort((a, b) => (b.uploaded || '').localeCompare(a.uploaded || ''))[0]
     if (!card) { cdp.close(); die(`файл не найден у мода ${modId}`) }
     log(`  качаю: ${card.name}  v${card.version}  (file_id=${card.fileId})`)
-    const r = await download(cdp, modId, card.fileId, flags.out || 'mods', { card })
+    const outDir = flags.out || (await library()).modsDir
+    const r = await download(cdp, modId, card.fileId, outDir, { card })
     cdp.close()
     log(`  готово: ${r.file}  (${Math.round(r.bytes / 1024)} KB)`)
     log(`  куда:   ${r.dir}`)
