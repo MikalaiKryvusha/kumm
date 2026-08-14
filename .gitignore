@@ -2,3 +2,13 @@ node_modules/
 mods/
 *.log
 .vscode/
+.kaif/install/
+KAIF.md
+KAIF-LOADER.mjs
+KAIF_ADAPTATION_TASK.md
+KAIF_UPDATE_TASK.md
+KAIF_UPDATE_TASK.superseded.md
+KAIF_ADAPTATION_TASK.superseded.md
+.kaif/backup-*/
+.kaif/heartbeat.log
+.kaif/refresh-marker.json

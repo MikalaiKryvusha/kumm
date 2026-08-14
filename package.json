@@ -3,10 +3,31 @@
   "version": "0.1.0",
   "description": "Krinik Universal Mod Manager - Nexus Mods from the command line through Chrome DevTools Protocol, works on free accounts",
   "type": "module",
-  "bin": { "kumm": "kumm.mjs" },
-  "engines": { "node": ">=22" },
+  "bin": {
+    "kumm": "kumm.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
   "license": "MIT",
   "author": "Mikalai Kryvusha",
-  "keywords": ["nexusmods", "mods", "modding", "cdp", "chrome-devtools-protocol", "cli", "mod-manager"],
-  "files": ["kumm.mjs", "README.md", "LICENSE"]
+  "keywords": [
+    "nexusmods",
+    "mods",
+    "modding",
+    "cdp",
+    "chrome-devtools-protocol",
+    "cli",
+    "mod-manager"
+  ],
+  "files": [
+    "kumm.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "kaif:version": "node .kaif/kaif-core.mjs version",
+    "kaif:check": "node .kaif/kaif-core.mjs check",
+    "kaif:update": "node .kaif/kaif-core.mjs update"
+  }
 }
