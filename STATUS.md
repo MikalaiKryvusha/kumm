@@ -35,6 +35,21 @@
 - Engine split from pack (`7ead876`, `a0bfa7f`): `-PackDir` / `--root`; the archive library may sit
   outside the pack entirely. This repo ships the ENGINE only — packs are private, with their own git.
 
+### FPS regression traced and tuned out, 2026-08-15 01:4x +03:00 ⏳ awaiting the owner's measurement
+- Symptom: average FPS fell from ~120 (peaks 140) to ~80 after the 14 Aug deploy. **Cause was not the
+  game's weather** but the pack's own mods: Ultra Graphics 1.2.2 introduced a runtime `CVars` block that
+  applies AFTER `Engine.ini` and overwrote **26 lines** of the 31 Jul Pareto tuning. The mod logs what it
+  overwrote itself — `UltraGraphics_CVarOriginalValues.txt` beside its config; the pre-1.2.2
+  `Scripts/config.lua` (246 lines) held no cvars at all, so it is a regression of the update.
+- Fix (pack commit `bc892d8`, redeployed into both targets): the block was reviewed line by line, not
+  rolled back wholesale. Cheaper-or-free author findings moved INTO `Engine.ini` (reflection roughness
+  0.25 + fade 0.25, `SmoothBias`, reflections temporal 8, translucency volume 8/1/2, BentNormal-off +
+  SSAO-on, DLSS motion-vector dilation); the expensive ones were rejected by name with reasons
+  (`OcclusionCull=0`, `MaxIterations=128`, `TracingOctahedronResolution=16`, `ViewDistanceScale=4`,
+  `LandscapeLOD*=4`, `VolumetricFog=1`). `CVars.Enabled=false` in the mod; Ultra Weather untouched.
+- **Still open:** the FPS number is the owner's observation — the block carries `[NOT-TESTED]` until he
+  measures. Where to look: `_config/Krinik-Palworld-UE5-Engine.ini` → block "ПРИНЯТО ОТ ULTRA GRAPHICS".
+
 ### KAIF 2.2 deployed, 2026-08-15 01:0x +03:00 ✅
 - Bootstrap clean: loader → sha256-verified machinery → mechanical deploy. 35 skills × 5 agent systems.
 - Canonical name recorded as **KUMM** (owner's answer); sphere `programming`; tracking mode `origin`.
@@ -79,6 +94,11 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
       table are three hand-maintained copies of one list. One source, the rest generated or checked.
 - [ ] **`kumm status` after `close`** — confirm it reports cleanly rather than throwing; cheap, and it
       is the command a session runs first.
+- [ ] **Warn when a mod overrides `Engine.ini` at runtime** — the 15 Aug regression was invisible to the
+      engine: deploy verified every file and still shipped a build whose graphics a Lua mod rewrote in
+      the world. A cheap first cut needs no game running: scan each mod's source for `[SystemSettings]`
+      or `r.*=` assignments and report which of them collide with the pack's `Engine.ini`. This is the
+      concrete, autonomous slice of Phase 3 (`MASTER_PLAN.md`) — conflicts reported before launch.
 
 ---
 
@@ -89,6 +109,11 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 - *(none open)* — the one identity question of the KAIF deployment (canonical name) was answered:
   **KUMM**, 2026-08-15.
+- ⏳ **Measure the FPS after the cvar tuning** (2026-08-15). Everything is deployed and verified by file;
+  what remains is one session in-game. If it is back near 120 — flip the `[NOT-TESTED]` marker in
+  `_config/Krinik-Palworld-UE5-Engine.ini` to `[TESTED: date · average FPS]`. If it is still ~80, the
+  next suspect is Ultra Weather's `Mode = "UltraWeather"` (volumetric clouds Palworld ships without) —
+  `VanillaPlus` is the cheaper step down, and the owner chose to keep the mod as-is for now.
 - 🧰 Anything needing a real Nexus login, a real game install, or the owner's own mod pack is his to
   run — the agent can build the fixture path but cannot verify the live path alone.
 

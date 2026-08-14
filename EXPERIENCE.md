@@ -41,6 +41,46 @@
 
 ## Entries
 
+### EXP-0006 · 2026-08-15 · ✅ · #palworld #mods #config #regression
+**Context:** после деплоя средний FPS упал со 120 до 80. Подозрение падало на игровую погоду.
+**Tried / did:** не гадал по симптому, а нашёл ЗАПИСЬ самого мода: Ultra Graphics 1.2.2 кладёт рядом
+с конфигом `UltraGraphics_CVarOriginalValues.txt` — список значений, которые он перебил. Сверил его с
+`Engine.ini`, с авторскими комментариями в `config.lua` и с `_config/Pareto-audit.md`.
+**Result:** ✅ — 26 cvar-ов тюнинга были перезаписаны рантайм-блоком, которого в прошлой версии мода
+не существовало (старый `Scripts/config.lua` — 246 строк, ни одного cvar-а).
+**Lesson:** Lua-мод применяет cvar-ы ПОСЛЕ `Engine.ini` и потому всегда сильнее его. Обновление мода —
+это потенциальная тихая правка графики сборки, а не только нового кода. Прежде чем объяснять просадку
+внешними причинами (погода, драйвер, троттлинг), ищи, не оставил ли мод собственный протокол того, что
+он изменил.   → link: pack commit `bc892d8` · `_config/Pareto-audit.md`
+**Repro:** `Get-ChildItem <game>\Pal\Binaries\Win64\ue4ss\Mods -Recurse -Filter '*OriginalValues*'` —
+непустой файл означает, что мод перебивает конфиг сборки прямо сейчас.
+**Trigger:** обновление любого графического мода → после первого запуска сверить этот файл с `Engine.ini`.
+**Not for:** pak-моды и моды без рантайм-доступа к консоли — они `Engine.ini` перебить не могут.
+
+### EXP-0005 · 2026-08-15 · ❌→✅ · #windows #probe #hardware
+**Context:** проба окружения — сколько VRAM у карты.
+**Tried / did:** `Get-CimInstance Win32_VideoController` → `AdapterRAM` = 4 GB на RTX 5070 Ti.
+**Result:** ❌ — поле 32-битное и переполняется, у любой карты >4 ГБ оно упирается в 4 ГБ. Реальные
+16303 MiB показал `nvidia-smi` в той же пробе.
+**Lesson:** у пробы окружения тоже есть цена доверия: WMI-поле может быть не «неточным», а структурно
+неспособным вернуть правду. Для VRAM источник — `nvidia-smi`, WMI годится только на имя адаптера.
+**Repro:** `nvidia-smi --query-gpu=name,driver_version,memory.total,power.limit --format=csv,noheader`
+**Trigger:** любая проба «сколько памяти у GPU» → nvidia-smi, а не WMI.
+**Not for:** машины без NVIDIA — там придётся мириться с WMI и помечать факт как приблизительный.
+
+### EXP-0004 · 2026-08-15 · ❌→✅ · #shell #windows #crossshell #git
+**Context:** коммит в git с длинным многострочным сообщением на русском.
+**Tried / did:** `git commit -F - <<'EOF' ... EOF` — bash-heredoc, отправленный в инструмент PowerShell.
+**Result:** ❌ — каскад ParserError: `<` в PowerShell зарезервирован, а русский текст движок принялся
+разбирать как выражения. Досье окружения к тому моменту было прочитано — и не применено.
+**Lesson:** прочитать досье и применить его — разные действия. PowerShell — это PowerShell: heredoc
+`<<'EOF'`, `&&`, `$(...)` там не существуют. Многострочный текст (сообщение коммита, тело PR, документ)
+доставляется в программу ФАЙЛОМ: записать `Write`-ом в скретчпад и передать `git commit -F <файл>` —
+заодно кодировка не зависит от кодовой страницы консоли.   → link: [[EXP-0002]] · AGENT_GUIDE → Environment dossier
+**Repro:** `git commit -F C:\...\scratchpad\msg.txt` вместо любой формы inline-heredoc.
+**Trigger:** текст длиннее одной строки уходит в CLI → сначала файл, потом флаг `-F`/`--file`.
+**Not for:** однострочные сообщения — `git commit -m "..."` работает и в PowerShell.
+
 ### EXP-0003 · 2026-08-15 · ✅ · #kaif #gates #placeholders
 **Context:** KAIF 2.2 adaptation — the `placeholders` item lists only `.claude/` paths, but the gate
 behind `checkpoint placeholders` also scans the four mirrored agent systems and the DECLARED sphere

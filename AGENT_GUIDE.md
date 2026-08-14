@@ -188,7 +188,10 @@ honest, an invented one is a defect (`PHILOSOPHY.md` → the three doors).
 | Fact | Value | Probe |
 |---|---|---|
 | OS | Windows 11 Pro, 10.0.26200.0 | `(Get-CimInstance Win32_OperatingSystem).Caption; [Environment]::OSVersion.Version` |
-| CPU / RAM | 16 logical cores · 31.9 GB | `$env:NUMBER_OF_PROCESSORS`; `(Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory/1GB` |
+| CPU / RAM | **AMD Ryzen 7 5700G** · 8 cores / 16 threads · 3.8 GHz · 31.9 GB | `Get-CimInstance Win32_Processor \| % {$_.Name,$_.NumberOfCores,$_.NumberOfLogicalProcessors}`; `(Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory/1GB` |
+| GPU / driver | **NVIDIA GeForce RTX 5070 Ti**, 16 GB VRAM, driver 610.88 (WDDM 32.0.16.1088, 2026-07-22), 300 W limit. **`Win32_VideoController.AdapterRAM` reports 4 GB — it is a 32-bit field and it LIES; trust `nvidia-smi`.** A second adapter (SudoMaker Virtual Display Adapter) is present. | `nvidia-smi --query-gpu=name,driver_version,memory.total,power.limit --format=csv,noheader` |
+| Display at probe time | `\\.\DISPLAY1` 1280×720 through the virtual adapter — **NOT the gaming display**: the game is configured for 3840×2160 (`GameUserSettings.ini`). Never infer the game's resolution from the desktop probe. | `[System.Windows.Forms.Screen]::AllScreens` |
+| Upscaling runtime in the build | `nvngx_dlss` 3.1.30 · `nvngx_dlssg` 310.4 · `sl.*` 2.9 — all under `Pal\Plugins\DLSS` and `Pal\Plugins\StreamlineCore`, **not** in `Pal\Binaries\Win64`. Frame Generation therefore has its libraries; a "FG must be broken" theory needs evidence, not assumption. | `Get-ChildItem <game> -Recurse -Include 'nvngx*.dll','sl.*.dll'` |
 | Shells available | **Windows PowerShell 5.1** (Desktop edition — `pwsh` is NOT installed) · **Git Bash 5.2.21** · `cmd` | `$PSVersionTable`; `Get-Command pwsh`; `bash --version` |
 | Console / ANSI encoding | console output UTF-8; **system ANSI codepage 1251** — `Set-Content`/`Add-Content` default to 1251, so pass `-Encoding utf8` explicitly for any file another tool reads | `[Console]::OutputEncoding.WebName`; `(Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage').ACP` |
 | Locale per shell | PowerShell `ru-RU` (localized CIM strings, decimal comma) · Git Bash `LANG` unset | `(Get-Culture).Name`; `locale` |
@@ -196,7 +199,7 @@ honest, an invented one is a defect (`PHILOSOPHY.md` → the three doors).
 | `tar` / `curl` / `find` per shell | **The two shells are different worlds.** PowerShell: `tar` → `C:\Windows\system32\tar.exe` (bsdtar — rejects `D:\…` paths as a remote host), `curl` → **an ALIAS for `Invoke-WebRequest`**, not the binary. Git Bash: `tar` → `/usr/bin/tar` GNU 1.35, `curl` → `/mingw64/bin/curl` 8.4.0 (real), `find` → `/usr/bin/find` (GNU). | `Get-Command tar,curl \| % {"$($_.CommandType) $($_.Definition)"}`; `type -p tar curl find` |
 | VCS line-ending policy | `core.autocrlf = true` (CRLF in the working tree, LF in the repo) | `git config --get core.autocrlf` |
 | Package manager | `winget` (system) · `npm` (JS). The project itself has **zero runtime dependencies** — there is nothing to install to run it. | `winget --version`; `npm -v` |
-| Quirks paid for by incidents | `— none logged yet —` (first entries go to `EXPERIENCE.md`; link them here by id, never copy the text) | grep `EXPERIENCE.md` |
+| Quirks paid for by incidents | `EXP-0002` — a file written in one shell and read by a program of the other needs a Windows-resolvable path · `EXP-0004` — the PowerShell tool is PowerShell: bash heredocs (`<<'EOF'`), `&&`, `$(...)` are parse errors there; multi-line text reaches `git` through a file · `EXP-0005` — `Win32_VideoController.AdapterRAM` is a 32-bit field and caps at 4 GB, so VRAM comes from `nvidia-smi` | grep `EXPERIENCE.md` |
 
 **The DRY boundary with "Document and text hygiene"** below: the dossier holds FACTS of the
 machine (what is installed, what `tar` is, which encoding); hygiene holds RULES OF BEHAVIOUR
