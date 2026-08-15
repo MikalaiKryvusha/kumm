@@ -27,5 +27,20 @@
 
 ## Entries (newest first)
 
+### v0.1.0 — the two halves, 2026-08-14/15 ✅
+- `kumm.mjs` (637 lines, zero deps, Node ≥22): CDP transport to a dedicated debug-port Chrome;
+  `launch`/`login`/`status`/`check`/`update`/`files`/`get`/`changelog`/`eval`/`close`.
+  Downloads via the site's own `GenerateDownloadUrl` request — works on a free Nexus account.
+- `Deploy-ModPack.ps1` (1003 lines, Windows PowerShell 5.1): resolves each mod's source, deploys into
+  every target game folder, writes `Engine.ini` (per machine) and `steam_emu.ini` (per target),
+  verifies itself. Interactive menu when run with no switches.
+- Engine split from pack (`7ead876`, `a0bfa7f`): `-PackDir` / `--root`; the archive library may sit
+  outside the pack entirely. This repo ships the ENGINE only — packs are private, with their own git.
+
+### KAIF 2.2 deployed, 2026-08-15 01:0x +03:00 ✅
+- Bootstrap clean: loader → sha256-verified machinery → mechanical deploy. 35 skills × 5 agent systems.
+- Canonical name recorded as **KUMM** (owner's answer); sphere `programming`; tracking mode `origin`.
+- Both maps, `MASTER_PLAN.md`, the environment dossier and the placeholder set filled by the agent.
+
 ### <date> — <session/phase/release title> <✅/🎉>
 `<The entry as it lived in STATUS.md — verbatim: what was done, key numbers, file pointers.>`

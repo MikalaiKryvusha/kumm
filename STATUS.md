@@ -25,15 +25,7 @@
 
 ## What's done (the short tail — older entries live in PROJECT_HISTORY.md)
 
-### v0.1.0 — the two halves, 2026-08-14/15 ✅
-- `kumm.mjs` (637 lines, zero deps, Node ≥22): CDP transport to a dedicated debug-port Chrome;
-  `launch`/`login`/`status`/`check`/`update`/`files`/`get`/`changelog`/`eval`/`close`.
-  Downloads via the site's own `GenerateDownloadUrl` request — works on a free Nexus account.
-- `Deploy-ModPack.ps1` (1003 lines, Windows PowerShell 5.1): resolves each mod's source, deploys into
-  every target game folder, writes `Engine.ini` (per machine) and `steam_emu.ini` (per target),
-  verifies itself. Interactive menu when run with no switches.
-- Engine split from pack (`7ead876`, `a0bfa7f`): `-PackDir` / `--root`; the archive library may sit
-  outside the pack entirely. This repo ships the ENGINE only — packs are private, with their own git.
+> v0.1.0 (the two halves) and the KAIF 2.2 deployment closed and moved to `PROJECT_HISTORY.md`.
 
 ### FPS regression traced and tuned out, 2026-08-15 01:4x +03:00 ✅ measured: 100–130 FPS (was 80)
 - Symptom: average FPS fell from ~120 (peaks 140) to ~80 after the 14 Aug deploy. **Cause was not the
@@ -62,10 +54,35 @@
   (`_unpacked/UltraGraphics/config.lua`); `Engine.ini` keeps start-of-engine settings (DX12, ConsoleKeys,
   hang fixes) and the same values as documentation. Lesson recorded as `EXP-0009`.
 
-### KAIF 2.2 deployed, 2026-08-15 01:0x +03:00 ✅
-- Bootstrap clean: loader → sha256-verified machinery → mechanical deploy. 35 skills × 5 agent systems.
-- Canonical name recorded as **KUMM** (owner's answer); sphere `programming`; tracking mode `origin`.
-- Both maps, `MASTER_PLAN.md`, the environment dossier and the placeholder set filled by the agent.
+### Latency and frame generation, 2026-08-15 03:xx–05:00 +03:00 ✅ measured
+- Owner reported input lag "up to 120 ms" and a mushy feel. Measured with PresentMon: `input → photon`
+  p50 41.6 / p95 75.5 / p99 91 ms — the 120 is the tail of a real distribution, not a fluke.
+- **Two agent conclusions were WRONG and are retired** — both recorded as lessons because the class
+  repeats: (a) "CPU is the bottleneck" from averages (`EXP-0011`: the same sample had CPU busy p50 =
+  0.48 ms against p90 = 36 — averages describe a multimodal scene and mean nothing); (b) "frame
+  generation is not working" from an empty `FrameType` column (`EXP-0010`: open PresentMon simply
+  cannot label DLSS-G frames; the owner's overlay could, and he was right).
+- **What the overlay showed:** DLSS SR "Balanced" at 58% of 4K, and frame generation at **3x** — not
+  because the game asked (its `DLSSGeneratedFrames=1` means 2x) but because **NVIDIA App was
+  overriding it** ("Замещение DLSS", dynamic mode, target 120). The driver silently outranks the game.
+- **Fix and its measured result** (pack `2258d5a`, `54edbca`): dynamic target 120 → 80 (which yields
+  ~2x, since the multiplier is a ceiling and the target sets the real ratio), plus
+  `D3D12.MaximumFrameLatency` 3 → 2 and `r.OneFrameThreadLag` 1 → 0 in `Engine.ini` (these are read at
+  RHI init, so `Engine.ini` DOES work for them). **Latency p50 fell 41.6 → 26.8 ms, −36%.**
+- **What did not move: the tails** (p95 73.4, p99 93.9). They are held by base frame rate, not by
+  generation: `GPU busy` p95 = 33.5 ms, `CPU busy` p95 = 37.7 ms. Only lowering graphics load moves them.
+- **Panel measured: 3840×2160 @ 144 Hz** (a TV). The game's `FrameRateLimit=141` is correct; the
+  generation target of 80 leaves half the panel unused. Full write-up with numbers, retired
+  conclusions and "what not to trust" lives in the pack: `_config/Latency-and-FrameGen-audit.md`.
+- Also this session, **deployed but NOT yet confirmed by the owner** — say so, don't claim them done:
+  - **Aim camera** `aim_offset_y` 0 → 45 (the mod's own recommendation for a centred camera; ПКМ
+    should now shift to the shoulder). Deployed to the target and verified in the file; the owner
+    tested other things that run and never reported back on this one.
+  - **Streaming range halved** 153600 → 76800, synchronised across `HLODLoadingRange/Scripts/config.lua`
+    and `UltraGraphics/config.lua` (they must match — the manifest says so). Effect on the 1% low
+    problem not measured yet.
+- **Confirmed:** the 1.0.2.101103 build deleted at the owner's request — 38.4 GB freed, `targets.json`
+  lists one target, `-Verify` clean (20 checks, 0 missing).
 
 ---
 
@@ -121,11 +138,16 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 - *(none open)* — the one identity question of the KAIF deployment (canonical name) was answered:
   **KUMM**, 2026-08-15.
-- ⏳ **Measure the FPS after the cvar tuning** (2026-08-15). Everything is deployed and verified by file;
-  what remains is one session in-game. If it is back near 120 — flip the `[NOT-TESTED]` marker in
-  `_config/Krinik-Palworld-UE5-Engine.ini` to `[TESTED: date · average FPS]`. If it is still ~80, the
-  next suspect is Ultra Weather's `Mode = "UltraWeather"` (volumetric clouds Palworld ships without) —
-  `VanillaPlus` is the cheaper step down, and the owner chose to keep the mod as-is for now.
+- 🎮 **Raise the BASE frame rate, then set the generation target under the panel** — the one open
+  performance task, and it needs the owner because it trades picture for feel. Base is ~30–42 real
+  renders/s; latency tails follow it directly. Order of leverage, measured or reasoned:
+  DLSS SR "Balanced" (58%) → "Performance" (50%) · shadows `r.Shadow.MaxCSMResolution` 4096 → 2048
+  (vanilla is 1536) · grass/foliage distances (`grass.CullDistanceScale=4`,
+  `foliage.LODDistanceScale=4`, CPU side). With base at 55–60, the target can go to 138 under the
+  144 Hz panel and still need only ~2.3x. **Do NOT raise the multiplier to buy smoothness** — it costs
+  latency, proven this session.
+- ⏳ **Verify the halved streaming range** (76800, was 153600). Deployed but not yet measured against
+  the 1% low problem (36.6 при median 95.2 — the spikes are streaming, not rendering).
 - 🧰 Anything needing a real Nexus login, a real game install, or the owner's own mod pack is his to
   run — the agent can build the fixture path but cannot verify the live path alone.
 
@@ -136,17 +158,40 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-1. `git log --oneline -5` and `git status` — see whether the KAIF deployment commit is the tip.
-2. Read `AGENT_GUIDE.md` → "Test harness" and "Build". There is no build; `node --check kumm.mjs` is
-   the syntax gate.
-3. Take the first autonomous-backlog item (the naming-scheme round trip). Plan it with `/plan-task` —
+**If the owner is here and wants engine work** (the project's own roadmap, Phase 1):
+
+1. `git log --oneline -5` and `git status`. There is no build; `node --check kumm.mjs` is the syntax gate.
+2. Take the first autonomous-backlog item (the naming-scheme round trip). Plan it with `/plan-task` —
    it is ordinary, not heavy.
-4. The functions live in `kumm.mjs`: `parseArchive` (line 450), `libraryName` (412), `sameFile`/`stamp`
+3. The functions live in `kumm.mjs`: `parseArchive` (line 450), `libraryName` (412), `sameFile`/`stamp`
    (541–543), `pickCard` (548), `parseArgv` (59), `globToRe` (447).
-5. Decide the check runner BEFORE writing checks — the project has zero dependencies and that is a
+4. Decide the check runner BEFORE writing checks — the project has zero dependencies and that is a
    design constraint (`MASTER_PLAN.md` → Guiding principles). `node:test` + `node --test` is built in
    and costs nothing; anything requiring an install is an interview question, not an agent decision.
-6. Never loop live Nexus calls while testing (`AGENT_GUIDE.md` → "Live-path rule").
+5. Never loop live Nexus calls while testing (`AGENT_GUIDE.md` → "Live-path rule").
+
+**If the owner comes back about the game** (performance, shadows, latency) — read this first, it will
+save you his evening:
+
+6. **The pack is at `D:\work\ai_sandbox\Palworld`** (private, own git, no remote). Read
+   `_config/Latency-and-FrameGen-audit.md` and `_config/Pareto-audit.md` §6 before touching anything —
+   they carry the measured prices and the retired conclusions.
+7. **`Engine.ini` is NOT where graphics cvars take effect.** Palworld overwrites them on world load.
+   Working values live in the `CVars` block of `_unpacked/UltraGraphics/config.lua`; `Engine.ini` keeps
+   what is read at engine start (DX12, ConsoleKeys, hang fixes, `MaximumFrameLatency`) and the same
+   graphics values as documentation. Testing a graphics hypothesis via `Engine.ini` returns a FALSE
+   "not guilty" — that cost the owner fourteen sessions (`EXP-0009`).
+8. **How to measure:** Intel PresentMon 2.5.1 (thin CLI, downloaded to the session scratchpad; get it
+   again from GitHub if gone). Own ETW session name is mandatory — a neighbour project (KAGO) captures
+   the same game under `kago-pw2`, and NVIDIA FrameView runs its own. Never `Stop-Process` by mask;
+   stop your session with `logman stop <name> -ets`, or the next launch dies silently (`EXP-0008`).
+9. **Read the numbers by medians and percentiles, never by averages** (`EXP-0011`), and remember the
+   frame-generation multiplier: what the counter shows is displayed frames, real renders are that
+   divided by the multiplier. Frame type is read from the owner's NVIDIA overlay, not from PresentMon
+   (`EXP-0010`).
+10. **Baseline to compare against** (night, same scene, 4K@144, DLSS Balanced, generation ~2x):
+    latency p50 26.8 / p95 73.4 ms · displayed median 95.2 · 1% low 36.6 · GPU busy p50 6.7 / p95 33.5 ·
+    CPU busy p50 6.4 / p95 37.7.
 
 ---
 
