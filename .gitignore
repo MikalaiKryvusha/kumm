@@ -12,3 +12,8 @@ KAIF_ADAPTATION_TASK.superseded.md
 .kaif/backup-*/
 .kaif/heartbeat.log
 .kaif/refresh-marker.json
+
+# Личные настройки сессии агента: пути к каталогам ЭТОЙ машины и разрешения
+# на команды. У каждого свои - в общий репозиторий не входят. Права, общие
+# для проекта, при необходимости живут в .claude/settings.json.
+.claude/settings.local.json
