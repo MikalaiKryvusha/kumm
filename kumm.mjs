@@ -447,15 +447,48 @@ async function download(cdp, modId, fileId, outDir, { card = null } = {}) {
 const globToRe = g => new RegExp(
   '^' + g.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*').replace(/\?/g, '.') + '$', 'i')
 
+// Вторая схема: так называет файл сама кнопка Download на Nexus, и библиотека,
+// собранная руками через сайт, лежит именно в ней:
+// "Better Sneak v3-1921-3-5-1747646868.zip" -> id 1921, версия 3.5, метка времени.
+//              ^id ^версия ^дата загрузки (секунды Unix)
+// Имя файла само может содержать дефисы (" - Remastered", "2x - Shades"), поэтому
+// id ищем как ЛЕВЕЙШИЙ сегмент из цифр, у которого весь хвост до метки — версия.
+// Метка обязательна: без неё сверять нечего, а sameFile сравнивает именно даты.
+// Число в ней то же, что сайт отдаёт в dt.dataset.date, так что сравнение точное.
+const isVersionPart = s => /^[vV]?\d+[A-Za-z]?$/.test(s) || /^[A-Za-z]$/.test(s)
+
+function parseNexusName(base) {
+  const parts = base.replace(/ \(\d+\)$/, '').split('-')   // " (1)" - дубль скачивания
+  const last = parts[parts.length - 1]
+  if (parts.length < 3 || !/^\d{10}$/.test(last)) return null
+  for (let i = 1; i < parts.length - 1; i++) {
+    if (!/^\d{1,6}$/.test(parts[i])) continue
+    const version = parts.slice(i + 1, parts.length - 1)
+    if (!version.length || !version.every(isVersionPart)) continue
+    return {
+      modId: parts[i],
+      version: version.join('.'),
+      uploaded: new Date(Number(last) * 1000).toISOString().replace(/\.\d+Z$/, 'Z'),
+    }
+  }
+  return null
+}
+
 function parseArchive(fileName) {
-  const parts = path.basename(fileName, path.extname(fileName)).split(' ')
+  const base = path.basename(fileName, path.extname(fileName))
+  const parts = base.split(' ')
   for (let i = 0; i < parts.length - 1; i++) {
     if (/^\d{4}$/.test(parts[i]) && /^\d{4}-\d{2}-\d{2}T/.test(parts[i + 2] || '')) {
       return { modId: parts[i], version: parts[i + 1], uploaded: parts[i + 2] }
     }
   }
-  return null
+  return parseNexusName(base)
 }
+
+// Наружу - только разбор имён: чистые функции без сети и диска, их и проверяют.
+// Импорт этого файла ЗАПУСКАЕТ CLI (диспетчер лежит на верхнем уровне), поэтому
+// импортировать его из test-раннера пока нельзя - сначала нужен запуск-гард.
+export { parseArchive, parseNexusName }
 
 async function library() {
   const manifest = JSON.parse(await readFile(MANIFEST, 'utf8'))
@@ -474,7 +507,14 @@ async function library() {
       nexusId: String(m.nexusId),
       manifestVersion: m.version,
       enabled: m.enabled !== false,
-      archive: files.find(f => f.modId === String(m.nexusId)) || null,
+      // Маска source.archive, если она есть, решает, какой файл этого мода наш:
+      // один modId на Nexus часто отдаёт несколько РАЗНЫХ файлов (ArmorSkills x2
+      // и x10 с одной страницы, UORP и его Deluxe-дополнение). Без маски - первый
+      // файл с этим id, как было; не совпала ни с чем - тоже откат на id, иначе
+      // опечатка в маске молча превратила бы мод в "архива нет".
+      archive: (m.source?.archive
+        && files.find(f => f.modId === String(m.nexusId) && globToRe(m.source.archive).test(f.file)))
+        || files.find(f => f.modId === String(m.nexusId)) || null,
     }))
 
   // Базовый Engine.ini приезжает архивом с Nexus, но модом в manifest.mods не
@@ -554,7 +594,10 @@ function pickCard(cards, archive, modId, prefer = null) {
     if (hit) return hit
   }
   if (archive?.file) {
-    const oldBase = squash(archive.file.split(` ${modId} `)[0])
+    // Отрезаем служебный хвост имени и берём только имя файла, как его писал
+    // автор: в нашей схеме оно до " <id> ", в схеме Nexus - до "-<id>-".
+    const noExt = path.basename(archive.file, path.extname(archive.file))
+    const oldBase = squash(noExt.split(` ${modId} `)[0].split(`-${modId}-`)[0])
     const exact = pool.find(c => squash(c.name) === oldBase)
     if (exact) return exact
     // Иначе - у кого длиннее общий префикс с прежним именем, а при равном

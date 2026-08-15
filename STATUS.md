@@ -27,24 +27,34 @@
 
 > v0.1.0 (the two halves) and the KAIF 2.2 deployment closed and moved to `PROJECT_HISTORY.md`.
 
-### Графическая сессия Palworld, 2026-08-15 ✅ закрыта, перенесена в PROJECT_HISTORY.md
+> Три графические сессии Palworld 15.08.2026 (регрессия FPS, латентность, большой разбор) закрыты и
+> лежат в `PROJECT_HISTORY.md`. Всё для продолжения работы по игре — в **`games/Palworld/README.md`**
+> (досье) и **`researches/ue5-cvars/`**; выжимка для рук — в эстафете ниже, пункты 6–12.
 
-> Три сессии одного дня (регрессия FPS, латентность, большой графический разбор) закрыты и
-> перенесены в `PROJECT_HISTORY.md`. Всё, что нужно для продолжения работы по игре, живёт в
-> **`games/Palworld/README.md`** (досье: железо, панель, замеры, чему не верить) и
-> **`researches/ue5-cvars/`** (конспект по cvar-ам UE5 на 920 КБ, девять разделов).
+### Подготовка сборки Oblivion Remastered к патчу, 2026-08-15 ✅
 
-Коротко, что изменилось в картине мира — детали в досье:
+Владелец удалил игру с диска — остались библиотека архивов (177 файлов) и его текстовый мод-лист.
+Задача была снять инвентарь и подготовиться к дню, когда выйдет патч: накачать свежие версии и
+собрать сборку заново.
 
-- **Panorama упирается в игровой поток, а не в видеокарту** (замер: `CPU busy` 28.1 мс против
-  `GPU busy` 6.2 при 25–45 к/с). Значит DLSS и прочие GPU-рычаги её не лечат.
-- **У Palworld собственная подсистема листвы** — движковые `grass.*` к ней не относятся.
-  Ручка `pal.Foliage.RegisterInstances.TimeSlicing` (`EXP-0017`).
-- **`cvars-registered.txt` был неполон** — не содержал ни одного из 75 `pal.*`. Починено
-  `_config/scan-cvars-full.py`, 4458 → 4668 имён (`EXP-0016`).
-- **Отозван вывод про «фантомы»:** `[SystemSettings]` до сцены доезжает (`EXP-0013`).
-- **Заведены приватные репозитории сборок:** `palworld-modpack`, `oblivion-remastered-modpack`.
-
+- **Главное открытие: движок не читал эту библиотеку вообще — 0 файлов из 177.** У Nexus ДВЕ схемы
+  имён, и библиотека, собранная руками через браузер, лежит во второй (`Имя-1921-3-5-1747646868.zip`,
+  поля через дефис, в конце секунды Unix). `parseArchive` знал только ту, что пишет сам движок, и
+  требовал ровно четырёхзначный `modId` — здесь они от двух до пяти цифр. Записано как `EXP-0018`.
+- **Правки в `kumm.mjs`** (все проверены на живых данных, регрессии на Palworld нет):
+  `parseArchive` разбирает обе схемы (168 из 177) · `library()` привязывает архив по маске
+  `source.archive`, а `nexusId` только сужает поиск · `pickCard` отрезает служебный хвост в обеих
+  схемах · наружу экспортированы два разборщика имён.
+  **Зачем маска:** одна страница Nexus часто отдаёт несколько РАЗНЫХ файлов (`ArmorSkills` x2 и x10,
+  UORP и его Deluxe, `Descension` и патч к нему). Привязка «по id» брала первый попавшийся и
+  **в 19 случаях из 168 брала чужой файл**.
+- **Собрано в сборке** (`D:\work\ai_sandbox\OblivionRemastered`, приватный репозиторий):
+  `modpack.json` — 171 запись, 138 включённых (сборка июня 2025) и 33 выключенных (кандидаты и
+  отработавшие версии) · `_config/library-inventory-2025.md` — тот же инвентарь для чтения глазами ·
+  `README.md` — порядок действий на день патча, семь шагов.
+- **Не сделано намеренно:** правил раскладки (`install`/`verify`) нет ни у одного мода, `targets.json`
+  пуст. Игры на диске нет, а сборка после патча собирается заново — раскладка пишется, когда мод
+  отобран. Манифест в режиме ОТСЛЕЖИВАНИЯ: `kumm check`/`update` его исполняют, `Deploy-ModPack.ps1` — нет.
 
 ---
 
@@ -60,7 +70,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 |-------|--------|--------------|
 | Phase 0 — the two halves | ✅ done | v0.1.0 in daily use |
 | Phase 1 — trustworthy unattended | 🔲 next | no tests exist yet; the deterministic core is the target |
-| Phase 2 — the second game | 🔲 todo | waits on the owner starting Oblivion Remastered |
+| Phase 2 — the second game | 🟡 подготовлена | Oblivion Remastered: инвентарь снят, манифест на 168 модов исполняется движком; ждёт патча и установки игры |
 | Phase 3 — compatibility | 🔲 todo | needs a research doc first |
 | Phase 4 — optimization presets | 🔲 todo | |
 
@@ -72,9 +82,16 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > without the human and without resources only the human can provide. The loop skills
 > (`/autoloop`, `/dayloop`, `/nightloop`) grind this pool.
 
+- [ ] **Запуск-гард перед любыми тестами (блокер).** Импорт `kumm.mjs` ЗАПУСКАЕТ CLI: диспетчер команд
+      лежит на верхнем уровне, и под `node --test` он получит путь тест-файла вместо команды, свалится
+      в `default` и напечатает шапку в поток TAP. Пока гарда нет, юнит-тест написать нельзя — проверка
+      разбора имён 15.08 делалась разовым скриптом в скретчпаде. Гард: сравнить
+      `pathToFileURL(process.argv[1]).href` с `import.meta.url`. Правка механическая, но задевает
+      ~250 строк отступов — поэтому отдельным заходом и с `node --check` после.
 - [ ] **Round-trip check for the archive naming scheme** — `libraryName()` writes it, `parseArchive()`
       reads it; they must agree. Pure functions, no network, no disk. This is the single most exposed
-      pair in the codebase.
+      pair in the codebase. **Схем теперь две** (своя и Nexus-download, `EXP-0018`) — круговой ход
+      проверяется для своей, разбор чужой — по образцам из библиотеки Oblivion. Идёт ПОСЛЕ гарда.
 - [ ] **Cases for `sameFile`/`stamp` and `pickCard`** — upload-date comparison rounded to the minute;
       variant selection between Steam/Gamepass, Capped/plain, presets. Pure, autonomous.
 - [ ] **A fixture pack** (throwaway `modpack.json` + zero-byte correctly-named archives, built under the
@@ -116,6 +133,14 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
   `ConsoleEnablerMod` включён в `mods.txt`. С рабочей консолью проверка гипотезы занимает секунды
   вместо цикла «правка → деплой → перезапуск». Стоит починить ПЕРВЫМ делом — половина блужданий
   15.08 была бы не нужна.
+- 🗺️ **Две строки мод-листа Oblivion не сопоставлены с архивами** (`modpack.json` → `$unresolved`).
+  «Костры наносят урон всем, не только игроку» — id 1701 отдаёт два файла (`Camp fire damage` и
+  `Not so deadly trap`), какой из них эта строка, по именам не видно. «Локальная карта в высоком
+  разрешении» — кандидат `Ultra Quality 4K All World Maps` (id 2020), но тот про карты мира.
+  Догадку не писали намеренно: в сборку молча уехал бы не тот мод. Спросить, когда дойдут руки
+  до отбора модов, — до патча это не срочно.
+- 🎨 **Двух решейдов из мод-листа в библиотеке нет вовсе** — `Project O` и `BloodyFreak's Reshade`;
+  качать заново, ссылок владелец не оставил.
 - 🧰 Anything needing a real Nexus login, a real game install, or the owner's own mod pack is his to
   run — the agent can build the fixture path but cannot verify the live path alone.
 
@@ -137,6 +162,12 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    design constraint (`MASTER_PLAN.md` → Guiding principles). `node:test` + `node --test` is built in
    and costs nothing; anything requiring an install is an interview question, not an agent decision.
 5. Never loop live Nexus calls while testing (`AGENT_GUIDE.md` → "Live-path rule").
+
+**Если вышел патч Oblivion Remastered** — весь порядок действий лежит в `README.md` сборки
+(`D:\work\ai_sandbox\OblivionRemastered`), семь шагов. Коротко: `kumm check --root <сборка>` из
+удалённой папки движка (игра для сверки не нужна), читать вывод как список КАНДИДАТОВ, качать
+выборочно по id — `kumm update` без аргументов возьмёт все 168 модов и флаг `enabled` не посмотрит.
+Начинать с загрузчиков: они привязаны к версии экзешника и ломаются патчем первыми.
 
 **Если владелец вернулся с игрой** (производительность, тени, латентность) — читай ЭТИ ПЯТЬ ПУНКТОВ
 раньше, чем откроешь конфиг. Они оплачены вечерами владельца 15.08.2026.
