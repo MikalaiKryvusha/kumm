@@ -35,7 +35,7 @@
 - Engine split from pack (`7ead876`, `a0bfa7f`): `-PackDir` / `--root`; the archive library may sit
   outside the pack entirely. This repo ships the ENGINE only — packs are private, with their own git.
 
-### FPS regression traced and tuned out, 2026-08-15 01:4x +03:00 ⏳ awaiting the owner's measurement
+### FPS regression traced and tuned out, 2026-08-15 01:4x +03:00 ✅ measured: 100–130 FPS (was 80)
 - Symptom: average FPS fell from ~120 (peaks 140) to ~80 after the 14 Aug deploy. **Cause was not the
   game's weather** but the pack's own mods: Ultra Graphics 1.2.2 introduced a runtime `CVars` block that
   applies AFTER `Engine.ini` and overwrote **26 lines** of the 31 Jul Pareto tuning. The mod logs what it
@@ -47,8 +47,20 @@
   SSAO-on, DLSS motion-vector dilation); the expensive ones were rejected by name with reasons
   (`OcclusionCull=0`, `MaxIterations=128`, `TracingOctahedronResolution=16`, `ViewDistanceScale=4`,
   `LandscapeLOD*=4`, `VolumetricFog=1`). `CVars.Enabled=false` in the mod; Ultra Weather untouched.
-- **Still open:** the FPS number is the owner's observation — the block carries `[NOT-TESTED]` until he
-  measures. Where to look: `_config/Krinik-Palworld-UE5-Engine.ini` → block "ПРИНЯТО ОТ ULTRA GRAPHICS".
+- **Verified in game:** the owner's session read **100–130 FPS against 80**; the mod did not rewrite
+  `UltraGraphics_CVarOriginalValues.txt` this run (it kept the previous session's timestamp), which is
+  the independent proof that nothing is being overridden. Marker flipped to `[TESTED]`; the result is
+  written up in the pack's `_config/Pareto-audit.md` → section 6.
+- **Shadow flicker — closed the same night** (pack `f6ab2fa`). Culprit: `r.InstanceCulling.OcclusionCull`,
+  exactly the line the mod's author documents as causing "dynamic shadows to disappear or flicker at
+  certain viewing distances and/or angles". Cost of calm shadows, measured: GPU busy 7.21 ms vs 6.6,
+  median 137.8 vs 142 — about four frames.
+- **The finding that outlives the fix:** `[SystemSettings]` lines **do not survive into the scene** —
+  Palworld overwrites part of `Engine.ini` with its own graphics settings on world load (the pack's
+  `ForceLumenGI` exists for that reason). Fourteen owner sessions of "one cvar per run via ini" produced
+  fourteen FALSE acquittals. Graphics cvars now live in the mod's runtime `CVars` block
+  (`_unpacked/UltraGraphics/config.lua`); `Engine.ini` keeps start-of-engine settings (DX12, ConsoleKeys,
+  hang fixes) and the same values as documentation. Lesson recorded as `EXP-0009`.
 
 ### KAIF 2.2 deployed, 2026-08-15 01:0x +03:00 ✅
 - Bootstrap clean: loader → sha256-verified machinery → mechanical deploy. 35 skills × 5 agent systems.
