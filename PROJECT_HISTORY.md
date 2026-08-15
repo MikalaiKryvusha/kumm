@@ -27,6 +27,50 @@
 
 ## Entries (newest first)
 
+### Графическая сессия Palworld, 2026-08-15 ~09:00–13:30 +03:00 ✅ закрыта
+Полный разбор — `games/Palworld/README.md` (досье) и `games/Palworld/tuning-2026-08-15-base-fps.md`
+(журнал правок с порядком отката). Здесь только то, что закрылось.
+
+- **Замерено, что панорама упирается в ИГРОВОЙ ПОТОК, а не в видеокарту.** Разбивка захвата по
+  полосам частоты при выключенной генерации: на 25–45 к/с `CPU busy` 28.1 мс против `GPU busy` 6.2.
+  Следствие, стоившее половины дня: снижение разрешения (шаг DLSS вниз) панораму не лечит.
+- **Найдена настоящая причина «трава растёт перед носом»:** у Palworld своя подсистема листвы
+  (`UPalFoliageGridModel`, `UPalFoliageISMComponentBase`), к которой движковые `grass.*` не относятся
+  вовсе. Ручка — `pal.Foliage.RegisterInstances.TimeSlicing`. Урок `EXP-0017`.
+- **Починен инструмент проверки:** `cvars-registered.txt` не содержал ни одного из 75 собственных
+  cvar-ов игры (`pal.*`) — сканер читал только ASCII, а они широкие UTF-16. Новый
+  `_config/scan-cvars-full.py`, список 4458 → 4668 имён. Урок `EXP-0016`.
+- **Отозван вывод про «21 фантом»:** `[SystemSettings]` в `Engine.ini` до сцены ДОЕЗЖАЕТ; ненадёжны
+  `[ConsoleVariables]` и `[/Script/Engine.RendererSettings]`. Цена ошибки — снятое
+  `MaxCSMResolution=4096` вернуло «линию по земле» в тот же заход. Урок `EXP-0013`.
+- **Задержка и генерация:** подтверждено скриншотом, что FG живёт только через замещение в NVIDIA App;
+  при базе 30 и цели 80 кратность ~2.7 и даёт микромерцание листвы, шлейф и мыло по краям.
+- **Ветка многопоточности закрыта:** из пяти включённых cvar-ов мод менял ровно один — остальные
+  движок уже держал включёнными. Игровой поток не распараллеливается в принципе.
+- **Заведён `researches/ue5-cvars/`** — постоянный конспект по cvar-ам UE5 на 920 КБ, девять разделов.
+- **Заведены приватные репозитории сборок:** `palworld-modpack`, `oblivion-remastered-modpack`
+  (в последний перенесён мод-лист владельца на ~150 модов из `Мои моды.odt`).
+
+### FPS regression traced and tuned out, 2026-08-15 01:4x +03:00 ✅ measured: 100–130 FPS (was 80)
+- Symptom: average FPS fell from ~120 (peaks 140) to ~80 after the 14 Aug deploy. **Cause was not the
+  game's weather** but the pack's own mods: Ultra Graphics 1.2.2 introduced a runtime `CVars` block that
+  applies AFTER `Engine.ini` and overwrote **26 lines** of the 31 Jul Pareto tuning.
+- Fix (pack commit `bc892d8`): the block was reviewed line by line; cheaper-or-free author findings moved
+  INTO `Engine.ini`, expensive ones rejected by name. `CVars.Enabled=false` in the mod.
+- **Verified in game:** the owner's session read **100–130 FPS against 80**.
+- **Shadow flicker — closed the same night** (pack `f6ab2fa`). Culprit: `r.InstanceCulling.OcclusionCull`.
+  Cost of calm shadows, measured: GPU busy 7.21 ms vs 6.6, median 137.8 vs 142.
+- Lesson recorded as `EXP-0009` (superseded in part by `EXP-0013`: `[SystemSettings]` does arrive).
+
+### Latency and frame generation, 2026-08-15 03:xx–05:00 +03:00 ✅ measured
+- Owner reported input lag "up to 120 ms". Measured: `input → photon` p50 41.6 / p95 75.5 / p99 91 ms.
+- **Two agent conclusions were WRONG and retired** — `EXP-0011` (averages on a multimodal scene) and
+  `EXP-0010` (PresentMon cannot label DLSS-G frames).
+- **Fix and its measured result** (pack `2258d5a`, `54edbca`): NVIDIA App dynamic target 120 → 80, plus
+  `D3D12.MaximumFrameLatency` 3 → 2 and `r.OneFrameThreadLag` 1 → 0. **Latency p50 41.6 → 26.8 ms, −36%.**
+- **What did not move: the tails** — they are held by base frame rate, not by generation.
+- **Panel measured: 3840×2160 @ 144 Hz.**
+
 ### v0.1.0 — the two halves, 2026-08-14/15 ✅
 - `kumm.mjs` (637 lines, zero deps, Node ≥22): CDP transport to a dedicated debug-port Chrome;
   `launch`/`login`/`status`/`check`/`update`/`files`/`get`/`changelog`/`eval`/`close`.

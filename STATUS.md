@@ -27,64 +27,27 @@
 
 > v0.1.0 (the two halves) and the KAIF 2.2 deployment closed and moved to `PROJECT_HISTORY.md`.
 
-### FPS regression traced and tuned out, 2026-08-15 01:4x +03:00 ✅ measured: 100–130 FPS (was 80)
-- Symptom: average FPS fell from ~120 (peaks 140) to ~80 after the 14 Aug deploy. **Cause was not the
-  game's weather** but the pack's own mods: Ultra Graphics 1.2.2 introduced a runtime `CVars` block that
-  applies AFTER `Engine.ini` and overwrote **26 lines** of the 31 Jul Pareto tuning. The mod logs what it
-  overwrote itself — `UltraGraphics_CVarOriginalValues.txt` beside its config; the pre-1.2.2
-  `Scripts/config.lua` (246 lines) held no cvars at all, so it is a regression of the update.
-- Fix (pack commit `bc892d8`, redeployed into both targets): the block was reviewed line by line, not
-  rolled back wholesale. Cheaper-or-free author findings moved INTO `Engine.ini` (reflection roughness
-  0.25 + fade 0.25, `SmoothBias`, reflections temporal 8, translucency volume 8/1/2, BentNormal-off +
-  SSAO-on, DLSS motion-vector dilation); the expensive ones were rejected by name with reasons
-  (`OcclusionCull=0`, `MaxIterations=128`, `TracingOctahedronResolution=16`, `ViewDistanceScale=4`,
-  `LandscapeLOD*=4`, `VolumetricFog=1`). `CVars.Enabled=false` in the mod; Ultra Weather untouched.
-- **Verified in game:** the owner's session read **100–130 FPS against 80**; the mod did not rewrite
-  `UltraGraphics_CVarOriginalValues.txt` this run (it kept the previous session's timestamp), which is
-  the independent proof that nothing is being overridden. Marker flipped to `[TESTED]`; the result is
-  written up in the pack's `_config/Pareto-audit.md` → section 6.
-- **Shadow flicker — closed the same night** (pack `f6ab2fa`). Culprit: `r.InstanceCulling.OcclusionCull`,
-  exactly the line the mod's author documents as causing "dynamic shadows to disappear or flicker at
-  certain viewing distances and/or angles". Cost of calm shadows, measured: GPU busy 7.21 ms vs 6.6,
-  median 137.8 vs 142 — about four frames.
-- **The finding that outlives the fix:** `[SystemSettings]` lines **do not survive into the scene** —
-  Palworld overwrites part of `Engine.ini` with its own graphics settings on world load (the pack's
-  `ForceLumenGI` exists for that reason). Fourteen owner sessions of "one cvar per run via ini" produced
-  fourteen FALSE acquittals. Graphics cvars now live in the mod's runtime `CVars` block
-  (`_unpacked/UltraGraphics/config.lua`); `Engine.ini` keeps start-of-engine settings (DX12, ConsoleKeys,
-  hang fixes) and the same values as documentation. Lesson recorded as `EXP-0009`.
+### Графическая сессия Palworld, 2026-08-15 ✅ закрыта, перенесена в PROJECT_HISTORY.md
 
-### Latency and frame generation, 2026-08-15 03:xx–05:00 +03:00 ✅ measured
-- Owner reported input lag "up to 120 ms" and a mushy feel. Measured with PresentMon: `input → photon`
-  p50 41.6 / p95 75.5 / p99 91 ms — the 120 is the tail of a real distribution, not a fluke.
-- **Two agent conclusions were WRONG and are retired** — both recorded as lessons because the class
-  repeats: (a) "CPU is the bottleneck" from averages (`EXP-0011`: the same sample had CPU busy p50 =
-  0.48 ms against p90 = 36 — averages describe a multimodal scene and mean nothing); (b) "frame
-  generation is not working" from an empty `FrameType` column (`EXP-0010`: open PresentMon simply
-  cannot label DLSS-G frames; the owner's overlay could, and he was right).
-- **What the overlay showed:** DLSS SR "Balanced" at 58% of 4K, and frame generation at **3x** — not
-  because the game asked (its `DLSSGeneratedFrames=1` means 2x) but because **NVIDIA App was
-  overriding it** ("Замещение DLSS", dynamic mode, target 120). The driver silently outranks the game.
-- **Fix and its measured result** (pack `2258d5a`, `54edbca`): dynamic target 120 → 80 (which yields
-  ~2x, since the multiplier is a ceiling and the target sets the real ratio), plus
-  `D3D12.MaximumFrameLatency` 3 → 2 and `r.OneFrameThreadLag` 1 → 0 in `Engine.ini` (these are read at
-  RHI init, so `Engine.ini` DOES work for them). **Latency p50 fell 41.6 → 26.8 ms, −36%.**
-- **What did not move: the tails** (p95 73.4, p99 93.9). They are held by base frame rate, not by
-  generation: `GPU busy` p95 = 33.5 ms, `CPU busy` p95 = 37.7 ms. Only lowering graphics load moves them.
-- **Panel measured: 3840×2160 @ 144 Hz** (a TV). The game's `FrameRateLimit=141` is correct; the
-  generation target of 80 leaves half the panel unused. Full write-up with numbers, retired
-  conclusions and "what not to trust" lives in the pack: `_config/Latency-and-FrameGen-audit.md`.
-- Also this session, **deployed but NOT yet confirmed by the owner** — say so, don't claim them done:
-  - **Aim camera** `aim_offset_y` 0 → 45 (the mod's own recommendation for a centred camera; ПКМ
-    should now shift to the shoulder). Deployed to the target and verified in the file; the owner
-    tested other things that run and never reported back on this one.
-  - **Streaming range halved** 153600 → 76800, synchronised across `HLODLoadingRange/Scripts/config.lua`
-    and `UltraGraphics/config.lua` (they must match — the manifest says so). Effect on the 1% low
-    problem not measured yet.
-- **Confirmed:** the 1.0.2.101103 build deleted at the owner's request — 38.4 GB freed, `targets.json`
-  lists one target, `-Verify` clean (20 checks, 0 missing).
+> Три сессии одного дня (регрессия FPS, латентность, большой графический разбор) закрыты и
+> перенесены в `PROJECT_HISTORY.md`. Всё, что нужно для продолжения работы по игре, живёт в
+> **`games/Palworld/README.md`** (досье: железо, панель, замеры, чему не верить) и
+> **`researches/ue5-cvars/`** (конспект по cvar-ам UE5 на 920 КБ, девять разделов).
+
+Коротко, что изменилось в картине мира — детали в досье:
+
+- **Panorama упирается в игровой поток, а не в видеокарту** (замер: `CPU busy` 28.1 мс против
+  `GPU busy` 6.2 при 25–45 к/с). Значит DLSS и прочие GPU-рычаги её не лечат.
+- **У Palworld собственная подсистема листвы** — движковые `grass.*` к ней не относятся.
+  Ручка `pal.Foliage.RegisterInstances.TimeSlicing` (`EXP-0017`).
+- **`cvars-registered.txt` был неполон** — не содержал ни одного из 75 `pal.*`. Починено
+  `_config/scan-cvars-full.py`, 4458 → 4668 имён (`EXP-0016`).
+- **Отозван вывод про «фантомы»:** `[SystemSettings]` до сцены доезжает (`EXP-0013`).
+- **Заведены приватные репозитории сборок:** `palworld-modpack`, `oblivion-remastered-modpack`.
+
 
 ---
+
 
 ## Where we are now
 
@@ -138,16 +101,21 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 - *(none open)* — the one identity question of the KAIF deployment (canonical name) was answered:
   **KUMM**, 2026-08-15.
-- 🎮 **Raise the BASE frame rate, then set the generation target under the panel** — the one open
-  performance task, and it needs the owner because it trades picture for feel. Base is ~30–42 real
-  renders/s; latency tails follow it directly. Order of leverage, measured or reasoned:
-  DLSS SR "Balanced" (58%) → "Performance" (50%) · shadows `r.Shadow.MaxCSMResolution` 4096 → 2048
-  (vanilla is 1536) · grass/foliage distances (`grass.CullDistanceScale=4`,
-  `foliage.LODDistanceScale=4`, CPU side). With base at 55–60, the target can go to 138 under the
-  144 Hz panel and still need only ~2.3x. **Do NOT raise the multiplier to buy smoothness** — it costs
-  latency, proven this session.
-- ⏳ **Verify the halved streaming range** (76800, was 153600). Deployed but not yet measured against
-  the 1% low problem (36.6 при median 95.2 — the spikes are streaming, not rendering).
+- 🎮 **НЕ ПРОВЕРЕНА правка `pal.Foliage.RegisterInstances.TimeSlicing=0`.** Раскатана 15.08.2026, но
+  владелец не смог протестировать: он на удалённом доступе, интернет слабый, нативной картинки не видит.
+  Это ЕДИНСТВЕННАЯ правка дня, бьющая прямо в механизм «трава растёт перед носом» (справка игры:
+  «0 = add all pending instances immediately»). **Первое, что нужно спросить у владельца в следующем
+  чате.** Вопрос ровно один: дорастает ли трава на глазах. Цена, если пойдёт не так: работа,
+  размазанная по тикам, соберётся в один → возможен рывок при въезде в чанк; тогда вернуть 1 и
+  поднимать `pal.Foliage.RegisterInstances.BatchSize`.
+- ⏳ **`LoadingRange` стоит на ванильных 25600, и владелец не назвал, на что возвращать.** Путь за день:
+  153600 → 76800 → 51200 → 38400 → 25600. Последние два шага **не дали ничего измеримого** по
+  `CPU busy`, а горизонт уплощили. Варианты, которые предлагались: 51200 или 76800. Правится в ДВУХ
+  файлах: `UltraGraphics/config.lua` → `LoadingRange` и `HLODLoadingRange/Scripts/config.lua` → `Range`.
+- 🎮 **Консоль в игре не открывается**, хотя `ConsoleKeys=Tilde,F10` прописаны в `Engine.ini` и
+  `ConsoleEnablerMod` включён в `mods.txt`. С рабочей консолью проверка гипотезы занимает секунды
+  вместо цикла «правка → деплой → перезапуск». Стоит починить ПЕРВЫМ делом — половина блужданий
+  15.08 была бы не нужна.
 - 🧰 Anything needing a real Nexus login, a real game install, or the owner's own mod pack is his to
   run — the agent can build the fixture path but cannot verify the live path alone.
 
@@ -170,28 +138,46 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    and costs nothing; anything requiring an install is an interview question, not an agent decision.
 5. Never loop live Nexus calls while testing (`AGENT_GUIDE.md` → "Live-path rule").
 
-**If the owner comes back about the game** (performance, shadows, latency) — read this first, it will
-save you his evening:
+**Если владелец вернулся с игрой** (производительность, тени, латентность) — читай ЭТИ ПЯТЬ ПУНКТОВ
+раньше, чем откроешь конфиг. Они оплачены вечерами владельца 15.08.2026.
 
-6. **The pack is at `D:\work\ai_sandbox\Palworld`** (private, own git, no remote). Read
-   `_config/Latency-and-FrameGen-audit.md` and `_config/Pareto-audit.md` §6 before touching anything —
-   they carry the measured prices and the retired conclusions.
-7. **`Engine.ini` is NOT where graphics cvars take effect.** Palworld overwrites them on world load.
-   Working values live in the `CVars` block of `_unpacked/UltraGraphics/config.lua`; `Engine.ini` keeps
-   what is read at engine start (DX12, ConsoleKeys, hang fixes, `MaximumFrameLatency`) and the same
-   graphics values as documentation. Testing a graphics hypothesis via `Engine.ini` returns a FALSE
-   "not guilty" — that cost the owner fourteen sessions (`EXP-0009`).
-8. **How to measure:** Intel PresentMon 2.5.1 (thin CLI, downloaded to the session scratchpad; get it
-   again from GitHub if gone). Own ETW session name is mandatory — a neighbour project (KAGO) captures
-   the same game under `kago-pw2`, and NVIDIA FrameView runs its own. Never `Stop-Process` by mask;
-   stop your session with `logman stop <name> -ets`, or the next launch dies silently (`EXP-0008`).
-9. **Read the numbers by medians and percentiles, never by averages** (`EXP-0011`), and remember the
-   frame-generation multiplier: what the counter shows is displayed frames, real renders are that
-   divided by the multiplier. Frame type is read from the owner's NVIDIA overlay, not from PresentMon
-   (`EXP-0010`).
-10. **Baseline to compare against** (night, same scene, 4K@144, DLSS Balanced, generation ~2x):
-    latency p50 26.8 / p95 73.4 ms · displayed median 95.2 · 1% low 36.6 · GPU busy p50 6.7 / p95 33.5 ·
-    CPU busy p50 6.4 / p95 37.7.
+6. **Сначала два документа, потом руки.** `games/Palworld/README.md` — досье сборки (железо, панель
+   4K@144, замеренная база, чему нельзя верить в собственных цифрах). `researches/ue5-cvars/` —
+   конспект по cvar-ам UE5, девять разделов; там же пять правил пользования. **И `README.md` самого
+   пака** (`D:\work\ai_sandbox\Palworld`, 89 КБ) — в нём разобраны прошлые артефакты с таблицами
+   тестов. 15.08 агент правил тени, не открыв раздел про тени, и предложил владельцу как свежую
+   гипотезу тест, закрытый 31.07.
+7. **Проверь, ТОТ ЛИ ЭТО СЛОЙ, прежде чем крутить значение.** У Palworld своя подсистема листвы:
+   `grass.*` к ней не относятся вовсе (`EXP-0017`). И сверяй имена **пересобранным**
+   `_config/cvars-registered.txt` (4668 имён): старый не содержал ни одного из 75 `pal.*` и выдавал
+   уверенные ложноотрицательные ответы (`EXP-0016`). Позитивный контроль:
+   `grep -ci '^pal\.' _config/cvars-registered.txt` → 95 (75 строчных `pal.*` + 20 `Pal.*`).
+8. **Где cvar-ы работают.** `[SystemSettings]` в `Engine.ini` до сцены **доезжает** (доказано прибором);
+   `[ConsoleVariables]` и `[/Script/Engine.RendererSettings]` — нет. Рабочее место для правок —
+   блок `CVars` в `_unpacked/UltraGraphics/config.lua`, он применяется в загруженном мире и переживает
+   фаст-тревел. **Прибор:** мод пишет `UltraGraphics_CVarOriginalValues.txt` — значения, которые застал
+   ПЕРЕД перезаписью. Сверять и ВРЕМЯ файла. Правило прибора: значения по обе стороны должны
+   ОТЛИЧАТЬСЯ, иначе гипотезы неразличимы (`EXP-0013`).
+9. **Как мерить.** Intel PresentMon 2.5.1 (тонкий CLI; если пропал — заново с GitHub). Своё имя
+   ETW-сессии обязательно: соседний KAGO снимает ту же игру под `kago-pw2`. Останавливать
+   `logman stop <name> -ets`, никогда не `Stop-Process` по маске (`EXP-0008`). Читать медианы и
+   перцентили, не средние (`EXP-0011`). **При включённой генерации базу мерить нельзя вообще:**
+   PresentMon не метит кадры DLSS-G (`EXP-0010`), а `MsBetweenPresents` даёт бессмыслицу — в замере
+   15.08 «медиану 150 к/с» при лимите 141. База читается только с оверлея NVIDIA.
+10. **Сначала выясни, во что упирается сцена.** Разбивка захвата по полосам частоты 15.08: на панораме
+    (25–45 к/с) `CPU busy` 28.1 мс против `GPU busy` 6.2 — **игра упирается в игровой поток**, и
+    снижение разрешения там не помогает. Ryzen 7 5700G, мир грузится в один поток; распараллелить
+    игровой поток нельзя, движок уже параллелен там, где умеет.
+    **База для сравнения** (DLSS Performance, генерация ВЫКЛЮЧЕНА, смешанный заход): медиана
+    83 настоящих кадра · 1% low 25.6 · `CPU busy` p50 10.3 / p95 55.4 · `GPU busy` p50 3.2 / p95 46.5.
+    Захваты лежат в скретчпаде сессии 15.08 (`capture-*.csv`), скрипт разбора — `analyze.py` там же.
+11. **Неразобранный пласт CPU-рычагов**, найденный, но не испробованный: `pal.CustomURO.*` (частота и
+    параллелизм обновления анимации), `pal.ParallelAnimationUpdateTask`, `pal.BuildObjectPhysicsBudget.*`,
+    `pal.ObjectCollector.UseSpatialGrid`, `pal.SignificanceManager.EnableSort`. Это собственные ручки
+    игры, целящие ровно в игровой поток. Начинать оттуда, а не с движковых `r.*`.
+12. **Дисциплина, которой 15.08 не хватило:** одно изменение за заход. За день трижды менялось по
+    десять-двенадцать строк, и каждый раз результат оказывался неатрибутируемым; один раз это стоило
+    возвращённого артефакта и часа работы.
 
 ---
 
