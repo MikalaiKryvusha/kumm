@@ -1,0 +1,466 @@
+<title>Два опыта с драйвером</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@500;600;700&family=Fira+Mono:wght@400;500&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+
+<style>
+:root{
+  --bg:#EFF2F1; --surface:#FFFFFF; --surface-2:#F7F9F8;
+  --ink:#14191A; --muted:#58676A; --rule:#CFD8D6;
+  --accent:#0F6E70; --accent-soft:#E2EEED;
+  --warn:#9B2C1F; --warn-soft:#F8E8E5;
+  --amber:#7E5A08; --amber-soft:#F4EDDA;
+  --shadow:0 1px 0 rgba(20,25,26,.04);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1415; --surface:#161D1E; --surface-2:#131A1B;
+    --ink:#E6EDEC; --muted:#8FA3A4; --rule:#2A3536;
+    --accent:#5AC8C4; --accent-soft:#11292A;
+    --warn:#E8837A; --warn-soft:#2B1917;
+    --amber:#D6A94A; --amber-soft:#282013;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1415; --surface:#161D1E; --surface-2:#131A1B;
+  --ink:#E6EDEC; --muted:#8FA3A4; --rule:#2A3536;
+  --accent:#5AC8C4; --accent-soft:#11292A;
+  --warn:#E8837A; --warn-soft:#2B1917;
+  --amber:#D6A94A; --amber-soft:#282013;
+  --shadow:none;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"PT Serif",Georgia,"Times New Roman",serif;
+  font-size:17px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:60rem; margin:0 auto; padding:3rem 1.5rem 6rem}
+
+h1,h2,h3,.ui{font-family:"Fira Sans Condensed","Arial Narrow",system-ui,sans-serif}
+h1{font-size:clamp(2.4rem,6vw,3.6rem); line-height:1.02; font-weight:700;
+   letter-spacing:-.015em; margin:0 0 .6rem; text-wrap:balance}
+h2{font-size:1.7rem; font-weight:700; line-height:1.15; margin:0; text-wrap:balance}
+h3{font-size:1.12rem; font-weight:600; margin:2rem 0 .5rem; text-wrap:balance}
+p{margin:0 0 1rem}
+a{color:var(--accent)}
+strong{font-weight:700}
+
+.eyebrow{
+  font-family:"Fira Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  font-size:.76rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ---------- masthead ---------- */
+.masthead{border-bottom:2px solid var(--ink); padding-bottom:1.6rem; margin-bottom:2rem}
+.lede{font-size:1.16rem; color:var(--ink); max-width:44rem; margin:0}
+.meta{
+  display:flex; flex-wrap:wrap; gap:.4rem 1.6rem; margin-top:1.4rem;
+  font-family:"Fira Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  font-size:.86rem; color:var(--muted);
+}
+.meta b{color:var(--ink); font-weight:600}
+
+/* ---------- who does it ---------- */
+.who{
+  display:inline-block; vertical-align:.12em;
+  font-family:"Fira Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  padding:.15rem .5rem; border-radius:2px; white-space:nowrap;
+}
+.who-you{background:var(--accent); color:var(--bg)}
+.who-me{background:transparent; color:var(--muted); border:1px solid var(--rule)}
+
+/* ---------- steps ---------- */
+.step{
+  display:grid; grid-template-columns:4.5rem 1fr; gap:0 1.5rem;
+  padding:2.2rem 0; border-top:1px solid var(--rule);
+}
+.step:first-of-type{border-top:2px solid var(--ink)}
+.num{
+  font-family:"Fira Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  font-size:2.6rem; font-weight:700; line-height:.9; color:var(--accent);
+  font-variant-numeric:tabular-nums; padding-top:.15rem;
+}
+.step-body>*:last-child{margin-bottom:0}
+.step-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:.7rem; margin-bottom:.9rem}
+
+@media (max-width:640px){
+  .step{grid-template-columns:1fr; gap:0}
+  .num{font-size:1.5rem; margin-bottom:.3rem}
+}
+
+/* ---------- command blocks ---------- */
+.cmd{position:relative; margin:1.1rem 0; border:1px solid var(--rule); background:var(--surface-2)}
+.cmd-bar{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:.35rem .7rem; border-bottom:1px solid var(--rule);
+  font-family:"Fira Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  font-size:.74rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted);
+}
+.cmd pre{
+  margin:0; padding:.85rem .9rem; overflow-x:auto;
+  font-family:"Fira Mono",ui-monospace,Consolas,monospace;
+  font-size:.83rem; line-height:1.65; color:var(--ink);
+}
+button.copy{
+  font:inherit; font-size:.74rem; letter-spacing:.1em; text-transform:uppercase;
+  background:none; border:1px solid var(--rule); color:var(--muted);
+  padding:.1rem .5rem; cursor:pointer; border-radius:2px;
+}
+button.copy:hover{border-color:var(--accent); color:var(--accent)}
+button.copy:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+code{
+  font-family:"Fira Mono",ui-monospace,Consolas,monospace;
+  font-size:.86em; background:var(--surface-2); padding:.08em .3em;
+  border:1px solid var(--rule); border-radius:2px;
+}
+
+/* ---------- asides ---------- */
+.note{border-left:3px solid var(--rule); padding:.1rem 0 .1rem 1rem; margin:1.1rem 0; color:var(--muted)}
+.predict{background:var(--amber-soft); border:1px solid var(--amber); padding:.9rem 1.1rem; margin:1.2rem 0}
+.predict .eyebrow{color:var(--amber)}
+.stop{background:var(--warn-soft); border:1px solid var(--warn); padding:.9rem 1.1rem; margin:1.2rem 0}
+.stop .eyebrow{color:var(--warn)}
+.predict>*:last-child,.stop>*:last-child,.note>*:last-child{margin-bottom:0}
+
+/* ---------- rules list ---------- */
+.rules{list-style:none; padding:0; margin:1.2rem 0 0; counter-reset:r}
+.rules li{
+  counter-increment:r; position:relative; padding:.75rem 0 .75rem 2.6rem;
+  border-top:1px solid var(--rule);
+}
+.rules li::before{
+  content:counter(r); position:absolute; left:0; top:.78rem;
+  font-family:"Fira Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  font-size:.9rem; font-weight:700; color:var(--accent);
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto; margin:1.2rem 0; border:1px solid var(--rule)}
+table{border-collapse:collapse; width:100%; background:var(--surface); font-size:.92rem}
+th,td{text-align:left; padding:.55rem .8rem; border-bottom:1px solid var(--rule); vertical-align:top}
+th{
+  font-family:"Fira Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  font-size:.78rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); background:var(--surface-2); white-space:nowrap;
+}
+tr:last-child td{border-bottom:none}
+td.n{font-family:"Fira Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums; white-space:nowrap}
+td.blank{color:var(--muted)}
+
+/* ---------- checklist ---------- */
+.check{list-style:none; padding:0; margin:1rem 0}
+.check li{position:relative; padding:.3rem 0 .3rem 1.9rem}
+.check li::before{
+  content:""; position:absolute; left:0; top:.72rem;
+  width:.85rem; height:.85rem; border:1.5px solid var(--accent); border-radius:2px;
+}
+
+footer{margin-top:3.5rem; padding-top:1.5rem; border-top:2px solid var(--ink); color:var(--muted); font-size:.92rem}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <div class="eyebrow">Задание владельцу · Palworld · драйвер 610.88</div>
+  <h1>Два опыта с драйвером</h1>
+  <p class="lede">В профиле приложения Palworld нашлись два переопределения, и оба платятся кадром
+  видеокарты. Здесь — порядок, в котором их проверяют, чтобы результат можно было приписать
+  причине, а не совпадению.</p>
+  <div class="meta">
+    <span><b>Создан:</b> 2026-08-21</span>
+    <span><b>Родитель:</b> researches/nvidia-tuning</span>
+    <span><b>Статус:</b> ждёт выполнения</span>
+    <span><b>Вовне:</b> результаты — в конспект и STATUS</span>
+  </div>
+</header>
+
+<h2>Что уже сделано, повторять не надо</h2>
+<ul class="check">
+  <li>Копия базы профилей драйвера снята — откат есть, sha256 сошлись.</li>
+  <li>Фоновая запись Game DVR выключена, Игровой режим Windows включён.</li>
+  <li><code>Fixed Refresh Rate</code> в глобальных уже стоит: его записало «Восстановить», когда ты выключал G-SYNC.</li>
+  <li>Профиль Palworld прочитан целиком — 24 настройки, разбор в конспекте.</li>
+</ul>
+
+<h2 style="margin-top:2.4rem">Правила, которые действуют во всех шагах</h2>
+<p>Каждое из них уже однажды испортило замер в этом проекте. Нарушишь одно — заход придётся
+переделывать целиком, потому что результат станет неатрибутируемым.</p>
+
+<ol class="rules">
+  <li><strong>Одна правка за заход.</strong> Пачка даёт пакетный результат и не отвечает, какая
+  строка сработала.</li>
+  <li><strong>После каждой правки драйвера — перезапуск игры.</strong> NVIDIA применяет настройку
+  при инициализации процесса: без перезапуска ты меряешь старое значение.</li>
+  <li><strong>Два захвата на каждое состояние, не один.</strong> Разброс между прогонами иначе не
+  отделить от эффекта правки.</li>
+  <li><strong>Одна и та же точка в мире и тот же маршрут.</strong> Тот утёс с панорамой, на котором
+  мерили дальность прорисовки.</li>
+  <li><strong>Не открывай карту во время захвата.</strong> Мод <code>UltraGraphics</code>
+  переприменяет весь свой блок cvar-ов при входе в мир, открытии карты и фаст-тревеле — и посреди
+  замера у тебя окажется две переменные вместо одной.</li>
+  <li><strong>Закрывай игру крестиком, а не диспетчером задач.</strong> Так сохранение успевает
+  записаться — проверено дважды.</li>
+  <li><strong>Имена файлов и меток — латиницей.</strong> Кириллица через аргумент командной строки
+  приезжает мусором, а команда при этом отработает с кодом 0.</li>
+</ol>
+
+<div class="stop">
+  <div class="eyebrow">Стоп-правило</div>
+  <p>Генерация кадров должна оставаться <strong>выключенной</strong> (<code>DLSSFrameGenerationMode=Off</code>,
+  сейчас так и есть). При включённой FG мерить нечем: PresentMon не метит сгенерированные кадры,
+  и все числа становятся бессмыслицей.</p>
+</div>
+
+<!-- ============ STEP 1 ============ -->
+<section class="step">
+  <div class="num">1</div>
+  <div class="step-body">
+    <div class="step-head"><h2>Гигиена: два переключателя</h2><span class="who who-you">ты</span></div>
+
+    <p>Делается <strong>до</strong> базовых захватов, иначе база окажется снята в одном состоянии
+    фона, а опыты — в другом. Кадров от этих двух правок ждать не надо: они покупают чистоту
+    замера, а не частоту.</p>
+
+    <h3>Размер кэша шейдеров → 10 ГБ</h3>
+    <p>Панель управления NVIDIA → <em>Управление параметрами 3D</em> → вкладка
+    <em>Программные настройки</em> → в списке найти <strong>Palworld</strong> →
+    <em>Размер кэша шейдеров</em> → <strong>10 GB</strong>.</p>
+    <p>Сейчас размер не задан нигде — во всей базе эта настройка встречается один раз, и не у нас.
+    Слишком маленький потолок заставляет драйвер вытеснять ещё нужные шейдеры и <em>производит</em>
+    ровно тот симптом, который мы ищем. Явное большое значение убирает вытеснение из списка гипотез
+    навсегда.</p>
+
+    <h3>Оверлей NVIDIA App → выключить</h3>
+    <p>NVIDIA App → <em>Настройки</em> → <em>Функции</em> → <em>Оверлей</em> → выкл.</p>
+    <p>Это не пассивный HUD: пять процессов, 530 МБ, и NVIDIA в release notes этого же драйвера
+    чинит краш при выходе из игры с включённым оверлеем — значит он участвует в тракте. Выключаем
+    как контроль на время работ, а не навсегда.</p>
+
+    <div class="note">
+      <p>Обе правки — в панели и в App, куда у меня рук нет. Всё остальное ниже я могу проверить
+      сам, читая базу профилей.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 2 ============ -->
+<section class="step">
+  <div class="num">2</div>
+  <div class="step-body">
+    <div class="step-head"><h2>Включить прибор: индикатор DLSS</h2><span class="who who-you">ты</span></div>
+
+    <p>Это не настройка производительности, а <strong>единственный источник</strong>, который
+    показывает, что рантайм DLSS сделал на самом деле, — а не что попросили меню игры и NVIDIA App.
+    Без него в опыте&nbsp;3 ты будешь доверять двум интерфейсам, которые могут расходиться с тем,
+    что реально загрузилось.</p>
+
+    <p>Запусти <strong>консоль от администратора</strong> (PowerShell → правой кнопкой →
+    «Запуск от имени администратора»):</p>
+
+    <div class="cmd">
+      <div class="cmd-bar"><span>PowerShell (админ)</span><button class="copy" type="button">копировать</button></div>
+<pre>New-ItemProperty -Path 'HKLM:\SOFTWARE\NVIDIA Corporation\Global\NGXCore' `
+  -Name ShowDlssIndicator -PropertyType DWord -Value 0x400 -Force</pre>
+    </div>
+
+    <p>Значение именно <code>0x400</code>, а не <code>1</code>: единица работает для отладочных
+    библиотек, а у тебя розничные. Ключ на машине есть, значения в нём нет — правка реальна.</p>
+
+    <p>Выключить потом:</p>
+    <div class="cmd">
+      <div class="cmd-bar"><span>PowerShell (админ)</span><button class="copy" type="button">копировать</button></div>
+<pre>Remove-ItemProperty -Path 'HKLM:\SOFTWARE\NVIDIA Corporation\Global\NGXCore' `
+  -Name ShowDlssIndicator</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 3 ============ -->
+<section class="step">
+  <div class="num">3</div>
+  <div class="step-body">
+    <div class="step-head"><h2>База: два захвата на нынешнем состоянии</h2><span class="who who-you">ты</span> <span class="who who-me">разбор — агент</span></div>
+
+    <p>Запусти игру, дойди до той же точки на утёсе, встань лицом в ту же сторону. Права
+    администратора не нужны. Каждая команда пишет 30 секунд и сама выходит.</p>
+
+    <div class="cmd">
+      <div class="cmd-bar"><span>PowerShell · захват 1</span><button class="copy" type="button">копировать</button></div>
+<pre>cd 'D:\work\ai_sandbox\_tools\perf-harness\captures-2026-08-21'
+& 'D:\work\ai_sandbox\_tools\PresentMon-2.5.1-x64.exe' `
+  --process_name Palworld-Win64-Shipping.exe --output_file E0-base-1.csv `
+  --timed 30 --terminate_after_timed `
+  --session_name kumm-pw --stop_existing_session --no_console_stats</pre>
+    </div>
+
+    <p>Подожди полминуты, не сходя с места, и сними второй — <code>E0-base-2.csv</code>, всё
+    остальное в команде без изменений.</p>
+
+    <div class="note">
+      <p><strong>Почему в команде именно эти ключи.</strong> <code>--session_name kumm-pw</code> —
+      своё имя обязательно: соседний проект снимает ту же игру, а две ETW-сессии с одним именем
+      убивают друг друга. <code>--terminate_after_timed</code> — без него запись остановится, но
+      программа не выйдет и консоль повиснет. Никаких <code>--v1_metrics</code> и
+      <code>--v2_metrics</code>: с ними в CSV приезжают другие имена колонок, и все скрипты разбора
+      молча найдут ноль строк — а это читается как «правка ничего не дала».</p>
+    </div>
+
+    <p>Дальше файлы разбираю я. Если захочешь глянуть сам — первым читается
+    <code>felt.py</code>, у него пороги абсолютные:</p>
+
+    <div class="cmd">
+      <div class="cmd-bar"><span>bash</span><button class="copy" type="button">копировать</button></div>
+<pre>cd D:/work/ai_sandbox/_tools/perf-harness
+python felt.py "base=captures-2026-08-21/E0-base-1.csv" \
+               "test=captures-2026-08-21/E0-base-2.csv"</pre>
+    </div>
+
+    <p>Два базовых захвата между собой должны сойтись. Если они разъезжаются сильнее, чем на пару
+    процентов, — эффект любой правки утонет в этом разбросе, и надо сперва понять, что шумит.</p>
+  </div>
+</section>
+
+<!-- ============ STEP 4 ============ -->
+<section class="step">
+  <div class="num">4</div>
+  <div class="step-body">
+    <div class="step-head"><h2>Опыт A: замещение DLSS</h2><span class="who who-you">ты</span></div>
+
+    <p>Что сейчас навязано игре: <code>DLSS - Enable DLL Override = On</code> и
+    <code>Forced Preset Letter = Preset L (Transformer Gen 2)</code>. То есть родная библиотека
+    сборки — <code>nvngx_dlss</code> 3.1.30 — подменяется свежей, и ей навязана трансформерная
+    модель. Она даёт картинку лучше, но стоит дороже по кадру, а видеокарта у тебя занята почти на
+    всю длину кадра.</p>
+
+    <p>NVIDIA App → <em>Графика</em> → <strong>Palworld</strong> → раздел настроек драйвера →
+    <em>DLSS Override</em>: снять <em>Model Presets</em> и <em>DLL override</em> обратно в
+    «управляется приложением».</p>
+
+    <div class="note">
+      <p><strong>Путь в App не проверен — я в него не заходил.</strong> Ищи по словам
+      «DLSS Override». Если не найдёшь — скажи, зайдём с другой стороны. Что бит действительно лёг,
+      проверю я: перечитаю базу профилей и покажу строку до и после. Интерфейсу верить не обязательно.</p>
+    </div>
+
+    <div class="predict">
+      <div class="eyebrow">Предсказание, объявленное до опыта</div>
+      <p><code>GPU busy</code> p50 <strong>обязан сдвинуться</strong>, и индикатор DLSS в углу
+      экрана обязан показать другую версию либо другой пресет. Не сдвинулось и не показал —
+      замещение ни при чём, возвращаем как было и вычёркиваем эту гипотезу.</p>
+    </div>
+
+    <p>Перезапусти игру, вернись на ту же точку, сними два захвата:
+    <code>EA-dlss-1.csv</code> и <code>EA-dlss-2.csv</code>.</p>
+  </div>
+</section>
+
+<!-- ============ STEP 5 ============ -->
+<section class="step">
+  <div class="num">5</div>
+  <div class="step-body">
+    <div class="step-head"><h2>Опыт Б: RTX HDR</h2><span class="who who-you">ты</span></div>
+
+    <p>В базовом профиле драйвера стоит <code>RTX HDR - Enable = On</code>, то есть
+    <strong>для всех процессов системы</strong>. Это нейросетевой тонмаппер SDR&nbsp;→&nbsp;HDR,
+    работающий на видеокарте каждый кадр. Он включается для SDR-приложения, когда дисплей в режиме
+    HDR, — и у тебя выполнены сразу все три условия: рабочий стол в HDR, игра отдаёт SDR, играешь в
+    окне.</p>
+
+    <p>NVIDIA App → <em>Графика</em> → <em>Глобальные настройки</em> → <strong>RTX HDR</strong> → выкл.</p>
+
+    <div class="predict">
+      <div class="eyebrow">Предсказание, объявленное до опыта</div>
+      <p><code>GPU busy</code> p50 сдвинется, и картинка станет визуально бледнее — фильтр
+      перестанет растягивать яркость. Если кадр не изменился, а картинка изменилась — значит фильтр
+      выключился, но стоил он немного, и это тоже ответ.</p>
+    </div>
+
+    <div class="stop">
+      <div class="eyebrow">Не путать два выключателя</div>
+      <p><strong>RTX HDR в драйвере</strong> и <strong>HDR рабочего стола в Windows</strong> — это
+      разные вещи, и гасить их надо по одному. Выключишь оба сразу — результат не скажет, какой из
+      них сработал, и заход придётся повторять.</p>
+    </div>
+
+    <p>Перезапуск игры, та же точка, два захвата: <code>EB-rtxhdr-1.csv</code> и
+    <code>EB-rtxhdr-2.csv</code>.</p>
+  </div>
+</section>
+
+<!-- ============ STEP 6 ============ -->
+<section class="step">
+  <div class="num">6</div>
+  <div class="step-body">
+    <div class="step-head"><h2>Потом отдельно: HDR рабочего стола</h2><span class="who who-me">позже</span></div>
+
+    <p>Третий кандидат, и он ждёт своей очереди. Параметры → Система → Дисплей → «Использовать HDR».
+    Двухминутный опыт с заранее объявленным предсказанием: после выключения <code>dxdiag</code>
+    покажет <code>MPO MaxPlanes &gt; 1</code> — либо не покажет, и тогда виноват сам линк 4K144 по
+    HDMI с DSC, а не HDR.</p>
+
+    <p>Платим за него не бесплатно: SDR-картинка изменится, HDR-видео потребует вернуть, а на 4K144
+    смена 10&nbsp;→&nbsp;8 бит может передоговорить режим — кратковременный чёрный экран, телевизор
+    может переключить пресет. Обратимо, но заметно. Поэтому — после первых двух опытов.</p>
+  </div>
+</section>
+
+<h2 style="margin-top:2.8rem">Куда писать результаты</h2>
+<p>Имена файлов ниже — договорённость, чтобы разбор не гадал, что где. Числа заполню я.</p>
+
+<div class="tw">
+<table>
+  <thead>
+    <tr><th>Состояние</th><th>Файлы</th><th>Кадров &gt;33 мс/с</th><th>GPU busy p50</th><th>Вердикт</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>База, как сейчас</td><td class="n">E0-base-1/2</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+    <tr><td>Опыт A — замещение DLSS снято</td><td class="n">EA-dlss-1/2</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+    <tr><td>Опыт Б — RTX HDR выключен</td><td class="n">EB-rtxhdr-1/2</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Что уже можно смотреть прямо сейчас</h3>
+<p>Ничего: артефактов на восприятие в этом задании нет, здесь всё меряется приборами. Единственное,
+что судишь глазами, — не в этом документе, а долг по траве.</p>
+
+<h3>Вынесенные вердикты</h3>
+<p>Пока пусто. Сюда дословно ляжет твоё решение по каждому опыту — оставляем как стало или
+возвращаем.</p>
+
+<footer>
+  <p>Разбор, из которого выросло это задание, — <code>researches/nvidia-tuning/README.md</code>,
+  раздел «Профиль приложения Palworld». Правила замера — <code>_tools/perf-harness/README.md</code>.
+  Читалка базы профилей, которая ничего не пишет, — <code>_tools/nvidia-drs-reader/</code>.</p>
+</footer>
+
+</div>
+
+<script>
+document.querySelectorAll("button.copy").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var pre = btn.closest(".cmd").querySelector("pre");
+    var done = function () {
+      btn.textContent = "скопировано";
+      setTimeout(function () { btn.textContent = "копировать"; }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(pre.textContent).then(done, function () { btn.textContent = "не вышло"; });
+    } else {
+      var r = document.createRange(); r.selectNodeContents(pre);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      try { document.execCommand("copy"); done(); } catch (e) { btn.textContent = "не вышло"; }
+      s.removeAllRanges();
+    }
+  });
+});
+</script>
