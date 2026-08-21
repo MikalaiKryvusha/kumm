@@ -74,6 +74,9 @@ strong{font-weight:700}
 }
 .who-you{background:var(--accent); color:var(--bg)}
 .who-me{background:transparent; color:var(--muted); border:1px solid var(--rule)}
+.who-done{background:transparent; color:var(--accent); border:1px solid var(--accent)}
+.step.done .num{color:var(--muted)}
+.step.done h2{color:var(--muted)}
 
 /* ---------- steps ---------- */
 .step{
@@ -189,6 +192,8 @@ footer{margin-top:3.5rem; padding-top:1.5rem; border-top:2px solid var(--ink); c
   <li>Фоновая запись Game DVR выключена, Игровой режим Windows включён.</li>
   <li><code>Fixed Refresh Rate</code> в глобальных уже стоит: его записало «Восстановить», когда ты выключал G-SYNC.</li>
   <li>Профиль Palworld прочитан целиком — 24 настройки, разбор в конспекте.</li>
+  <li><strong>Шаги 1 и 2 закрыты 21.08:</strong> оверлей выключен, кэш шейдеров без ограничений,
+  индикатор DLSS включён. Следующее живое действие — <strong>шаг 3</strong>, базовые захваты.</li>
 </ul>
 
 <h2 style="margin-top:2.4rem">Правила, которые действуют во всех шагах</h2>
@@ -221,14 +226,24 @@ footer{margin-top:3.5rem; padding-top:1.5rem; border-top:2px solid var(--ink); c
 </div>
 
 <!-- ============ STEP 1 ============ -->
-<section class="step">
+<section class="step done">
   <div class="num">1</div>
   <div class="step-body">
-    <div class="step-head"><h2>Гигиена: два переключателя</h2><span class="who who-you">ты</span></div>
+    <div class="step-head"><h2>Гигиена: два переключателя</h2><span class="who who-done">сделано 21.08</span></div>
 
     <p>Делается <strong>до</strong> базовых захватов, иначе база окажется снята в одном состоянии
     фона, а опыты — в другом. Кадров от этих двух правок ждать не надо: они покупают чистоту
     замера, а не частоту.</p>
+
+    <div class="note">
+      <p><strong>Итог.</strong> Оверлей выключен владельцем. Размер кэша шейдеров выставлен
+      в <strong>«Без ограничений»</strong> — проверено чтением базы: в Base Profile появилась
+      строка <code>Shader Cache - Cache Size = 0xFFFFFFFF</code>, счётчик поколения ушёл с
+      <code>0x0716</code> на <code>0x0719</code>. <strong>Оставляем так.</strong> Для нашей цели
+      это даже лучше 10 ГБ — вытеснение исчезает как класс, а не отодвигается; на C: свободно
+      100.8 ГБ при кэше в 274 МБ, так что рост несущественен. Вернуться к вопросу стоит только
+      если C: станет тесно — там же лежит файл подкачки с потолком 65 ГБ.</p>
+    </div>
 
     <h3>Размер кэша шейдеров → 10 ГБ</h3>
     <p>Панель управления NVIDIA → <em>Управление параметрами 3D</em> → вкладка
@@ -270,10 +285,17 @@ footer{margin-top:3.5rem; padding-top:1.5rem; border-top:2px solid var(--ink); c
 </section>
 
 <!-- ============ STEP 2 ============ -->
-<section class="step">
+<section class="step done">
   <div class="num">2</div>
   <div class="step-body">
-    <div class="step-head"><h2>Включить прибор: индикатор DLSS</h2><span class="who who-you">ты</span></div>
+    <div class="step-head"><h2>Включить прибор: индикатор DLSS</h2><span class="who who-done">сделано 21.08 — агентом</span></div>
+
+    <div class="note">
+      <p><strong>Итог.</strong> VS Code запущен с правами администратора, так что ключ поставил я:
+      <code>ShowDlssIndicator = 0x400</code>, тип DWORD, значение прочитано обратно. Индикатор
+      появится в углу экрана при следующем запуске игры. Команда ниже оставлена для истории и для
+      отката.</p>
+    </div>
 
     <p>Это не настройка производительности, а <strong>единственный источник</strong>, который
     показывает, что рантайм DLSS сделал на самом деле, — а не что попросили меню игры и NVIDIA App.
