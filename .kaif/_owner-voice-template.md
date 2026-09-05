@@ -1,4 +1,4 @@
-# The Owner's Voice Portrait — <OWNER> ("the stylistic LoRA" of kumm)
+# The Owner's Voice Portrait — <OWNER> ("the stylistic LoRA" of KUMM)
 
 > **Canonical file: `AUTHOR_STYLOMETRY.md`, in the project root** — the DEFAULT name for a KAIF
 > deployment, so that every reference (router, checklist, pipeline prompt) points at ONE string and

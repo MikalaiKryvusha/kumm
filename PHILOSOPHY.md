@@ -82,6 +82,16 @@ strictness modes, the division by model strength). This is Occam applied to the 
 spend cognition where determinism suffices — and the 20% left for the model is not a shortfall but
 the part that actually needs a mind.
 
+The owner's razor for WHERE each thing lives (his word, distilled): models understand GUIDANCE
+well and PROHIBITIONS poorly; they are weak at precise instruction-following and strong at
+predicting what would be best. Therefore whatever demands strictness and precision is regulated
+and moved into code and hooks; whatever demands the model's creativity and good intuition stays
+as prose and agreements — but written as CONCRETE STEP-BY-STEP PLANS of concrete actions, never
+as vague prose. "Work without bugs" is the vague kind; "write test cases, test against them, file
+the defects" is the executable kind. A prohibition earns its keep only restated as positive
+guidance or moved into a guard that reddens by itself (the form rule for canon obligations —
+`AGENT_GUIDE.md`).
+
 ### Murphy's Law — anything unforeseen tends to happen
 If a risk isn't accounted for, it has a good chance of being exactly what bites you. You can't defend
 against every risk in the universe, so tier them: **(a)** the highest risks — take seriously and build
@@ -153,6 +163,23 @@ the canon, the owner's word); a placeholder without a source is a bug by definit
 is worse than a missing one**. And what the AI *does* legitimately write into the owner's canon stays
 visibly marked (`[AI]…[/AI]` provenance marks — `AGENT_GUIDE.md`) until the owner accepts it: AI text
 must never dissolve into the owner's text unnoticed.
+
+**The fourth door — a fork is closed by recon of the domain's authorities, not by reasoning
+(KAIF 2.5).** The three doors are about a missing FACT. Between them and the owner's forks of vision (`/interview`)
+lies a class the canon used to hand to the agent silently: the ENGINEERING FORK — how to flush a
+buffer, which threshold to take, where to draw a refusal boundary. Formally no fact is missing (the
+agent "knows" the options) and formally it is not vision (the owner does not want to decide it) —
+and it is exactly where a plausible argument is the worst available source: subjectively convincing,
+carrying no trace of anyone else's burns. Field-paid (origin issue #36): a black box was set to dump
+"on trip and on close only — never per tick", reasoned from the model's head; the machine froze, the
+box wrote zero bytes — and flight recorders, write-ahead logs and crash dumps had all settled the
+question decades ago: flush continuously. So: **a fork is not the agent's property.** It is decided
+EITHER by the owner OR by the domain's authorities found by recon (industry practice, specifications,
+incident reviews — not the first search hit); the agent's own judgment stops being FIRST and can
+never be the ONLY source. The mark of a fork is ≥ 2 options plus a non-zero price of error or
+irreversibility; where both are small, recon costs more than it buys and the choice is made on the
+spot (a variable name, the order of two lines). The forced artifact at the decision point is the
+`FORK:` line (`AGENT_GUIDE.md` → the fable loop), and `/fable-judge` hunts a fork decided without it.
 
 ### Descartes' Square — a decision tool for hard forks
 When the right choice isn't intuitively obvious, analyze it through four questions: **What happens if I DO

@@ -16,7 +16,7 @@
 >   trim is overdue.
 > - **Closed work is MOVED OUT, not accumulated:** when a phase/session's entry is no longer "now",
 >   move it VERBATIM into `PROJECT_HISTORY.md` (the chronicle — that is what it is for).
->   `/end-chat` carries a "bonsai trim" step for exactly this (`/pause` stays ceremony-free by design).
+>   `/end-chat-soft` carries a "bonsai trim" step for exactly this (`/pause` stays ceremony-free by design).
 > - **Leave the file the way you'd want to find it:** fresh summary of what works, what's in
 >   progress, what's next, the pitfalls, and WHERE TO LOOK for the details (plans, bugs, history) —
 >   pointers, not retellings.
@@ -27,6 +27,11 @@
 
 > v0.1.0 (the two halves) и развёртывание KAIF 2.2 закрыты, лежат в `PROJECT_HISTORY.md`.
 > Три графические сессии Palworld 15.08 и подготовка Oblivion Remastered — там же.
+> **KAIF обновлён 2.2 → 2.5 (2026-09-05, маршрут бутстрап)** — запись в хронике, полевой отчёт
+> `reports/KAIF_UPDATES/KUMM_KAIF_2.5_UPDATE_REPORT.md`. Новое для сессий: символ веры и молитва в шапке
+> `AGENT_GUIDE.md`; строки `FORK:` (развилка) и `DELIVERY:` (закрытие сессии, итерация цикла); лестница
+> тяжести дефектов S1/S2/S3; пара `/end-chat-soft` · `/end-chat-force` вместо `/end-chat`. Бюджет STATUS —
+> ~200 строк, сейчас 345: стрижка бонсай — долг ближайшего `/end-chat-soft`.
 
 ### 🟢 Регрессия Palworld ЗАКРЫТА, 2026-08-21 (дневная сессия 09:00–11:15 +03:00)
 
@@ -108,6 +113,12 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > Decisions the agent must not make alone (brand/UX/architecture), or actions only the human can do
 > (test on real hardware, external accounts). Filed in `interviews/` and `homeworks/`.
 
+- ❓ **Интервью #001 — метрика поставки и каденция молитвы (KAIF 2.5), 2026-09-05.** Два вопроса, оба
+      — настройки владельца, которые агент не выбирает сам: (1) ОДНА метрика поставки для
+      `MASTER_PLAN.md` — предложен вектор «автономные проверки ядра 0 из 5 · игры на одном манифесте
+      1 из 2», по слову владельца о векторе (issue #46 в origin KAIF); (2) каденция молитвы — полный
+      текст перед каждой задачей (умолчание 2.5) или раз за сессию (выбор владельца в KAGO). Пока не
+      отвечено — действуют предложение агента и умолчание. Файл: `interviews/interview_001_delivery-metric.md`.
 - ✅ **ДОЛГ ПО ТРАВЕ ЗАКРЫТ 2026-08-22 ~01:30 +03:00.** Развязка оказалась НЕ той, что предлагалась:
       `grass.*` до листвы Palworld не доходит вовсе — у игры своя подсистема `UPalFoliageGridModel`
       (`EXP-0031`). Настоящая пара — `r.ViewDistanceScale` × `foliage.DensityScale`. Принято

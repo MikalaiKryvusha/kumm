@@ -41,6 +41,46 @@
 
 ## Entries
 
+### EXP-0035 · 2026-09-05 · ✅ · #kaif #update #placeholders
+**Context:** the 2.5 update task handed `/autoloop`, `/dayloop`, `/nightloop` to the hand as "carries local edits" and kept `/end-chat` as an edited deprecated artifact — the only local difference in all four is the placeholder fill the 2.2 adaptation required (`<BUILD_COMMAND>`, `<TEST_HARNESS>`, the trailer).
+**Tried / did:** compared the 2.2 manifest's `shas` snapshot with `git HEAD` for the four files — equal for all four; the pristine template sha differs; the agent-filled slots are not in the manifest's `values`.
+**Result:** ✅ — three one-line module merges and one five-path `git rm`, ≈ 10 minutes; S3 by the ladder, signal carried in the 2.5 field report (R2), no ticket.
+**Lesson:** expect the same three modules and any deprecated placeholder-filled skill to come back as hand items on EVERY interval until the origin classifies "template + fills" as untouched; budget ten minutes, do not investigate them as real edits.   → link: reports/KAIF_UPDATES/KUMM_KAIF_2.5_UPDATE_REPORT.md §2 R2
+**Repro:** `node -e` compare of `.kaif/deploy-manifest.json → shas[f]` with `sha256(git show HEAD:f)` for each module file the task lists — equal means "fills only".
+**Trigger:** a KAIF update task lists a skill whose only local content is a filled placeholder → merge the one upstream line, skip the diagnosis.
+**Not for:** modules the owner actually reworded — those need the real merge.
+**Mechanization:** `none-cheap: the fix belongs upstream (fills-aware classification, field report §4 wish 2)`.
+
+### EXP-0034 · 2026-09-05 · ❌→✅ · #permissions #scratchpad #shell
+**Context:** preparing a sandbox copy of the tree for the KAIF update with `rm -rf "$SB"; mkdir -p "$SB"; git archive …` in one command.
+**Tried / did:** ran the compound command through the Bash tool.
+**Result:** ❌ — the WHOLE command was denied: `.claude/settings.local.json` denies `Bash(rm -rf:*)`, deny beats allow, and a denied compound runs none of its parts. Re-run without the removal → ✅.
+**Lesson:** never compose `rm -rf` into a command that also does the real work; scratch trees get a fresh directory name instead of a wipe.   → link: `.claude/settings.local.json` deny list · [[EXP-0002]]
+**Repro:** `SB="<scratchpad>/sandbox-$(date +%H%M%S)"; mkdir -p "$SB"; git archive HEAD | tar -x -C "$SB"` — no removal needed.
+**Trigger:** writing any command containing `rm -rf` on this machine → drop it or run it alone, expecting the refusal.
+**Not for:** single-file `rm` and `git rm` — allowed.
+**Mechanization:** `mechanized: the deny list itself — it fired as designed; the lesson is how to compose around it`.
+
+### EXP-0033 · 2026-09-05 · ✅ · #kaif #update #templates
+**Context:** the update task's `owner-conventions` item names seven owner documents whose TEMPLATES changed in 2.3–2.5 but shows no diff (owner content is never touched mechanically).
+**Tried / did:** extracted every `FILE:` block of the 2.2 and 2.5 release bundles with a 20-line parser (`extract-bundle.mjs`, text in the 2.5 field report §6) and ran `git diff --no-index` over the two template trees.
+**Result:** ✅ — 43 template files changed overall; for the seven owner documents the whole delta was three lines (two `/end-chat` → `/end-chat-soft`, one new delivery-metric line in `MASTER_PLAN.md`); maps, `GOAL.md` and `KAIF_FRAMEWORK.md` templates unchanged.
+**Lesson:** the release bundle is the only complete template baseline on disk; diffing two extracted bundles turns "conventions changed" into an exact line list.   → link: reports/KAIF_UPDATES/KUMM_KAIF_2.5_UPDATE_REPORT.md §6
+**Repro:** `node extract-bundle.mjs <bundle-old> tplA && node extract-bundle.mjs <bundle-new> tplB && git diff --no-index tplA/STATUS.md tplB/STATUS.md` (bundles: `gh release download v<X> --repo MikalaiKryvusha/KAIF --pattern KAIF-CORE-BUNDLE.md`).
+**Trigger:** a KAIF update task item that names files without a diff → extract both bundles and diff the templates before touching the owner's copy.
+**Not for:** files the machinery replaced or merged — their diffs are already in the task.
+**Mechanization:** `none-cheap: the extractor is 20 lines and lives in the report; promote it to _tools/ if a third update needs it`.
+
+### EXP-0032 · 2026-09-05 · ✅ · #kaif #update #bootstrap #rehearsal
+**Context:** KAIF 2.2 → 2.5, three versions in one hop; the deployed 2.2 core's `update` would run the interval with the OLD core, so the bootstrap route (thin `KAIF.md` → loader → 2.5 core) was taken.
+**Tried / did:** real bootstrap in a `git archive` sandbox copy with a local `--source` dir holding the sha256-verified release assets → copied the sandbox receipt to `.kaif/update-rehearsal.json` → live bootstrap with the same `--source`.
+**Result:** ✅ — `rehearsal verdicts loaded … (1 file(s))`, live counters equal to the sandbox (23 replaced · 12 merged · 11 added · 55 kept), 0 `verdict-mismatch`; the two run logs differ only by the rehearsal line and two git-ignored rules files absent from the archive.
+**Lesson:** on the bootstrap route the canon's `--rehearsal <receipt>` flag is REFUSED by `install`'s whitelist (origin issue #42) AFTER the loader has already swapped the core in — the receipt at the default path is the binding that works; a local `--source` makes sandbox and live byte-deterministic.   → link: origin issue #42 · reports/KAIF_UPDATES/KUMM_KAIF_2.5_UPDATE_REPORT.md
+**Repro:** `cp <sandbox>/.kaif/last-update.json .kaif/update-rehearsal.json && node KAIF-LOADER.mjs --lang ru --source <release-assets-dir>`; verify with `grep -c "rehearsal verdicts loaded" <live-log>` → 1 and `grep -c "^- \*\*verdict-mismatch" KAIF_UPDATE_TASK.md` → 0.
+**Trigger:** any KAIF update taken by the thin-`KAIF.md` route → sandbox first, receipt to the default path, never the `--rehearsal` flag.
+**Not for:** the `update` route (the flag is legal there) and intervals where the deployed core is already ≥ 2.5 (its own `diff --source` records the rehearsal).
+**Mechanization:** `none-cheap: the fix belongs upstream (#42, open); until then the workaround is the one cp in Repro`.
+
 ### EXP-0031 · 2026-08-22 · ❌→✅ · #palworld #foliage #wrongknob #positivecontrol #ownerwasright
 **Context:** владелец: «трава опять растёт перед носом, хочу сильно дальше». Очевидная ручка —
 `grass.CullDistanceScale`, она и в конфиге мода стоит, и в эстафете названа развязкой долга.

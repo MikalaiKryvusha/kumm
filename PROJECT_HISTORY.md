@@ -3,7 +3,7 @@
 > The APPEND-ONLY chronicle of how this project lived and grew: closed sessions, shipped phases,
 > releases, big decisions in the order they happened. This is where `STATUS.md` sheds its past —
 > STATUS stays a short live summary of NOW; everything finished moves HERE (the "bonsai trim" step
-> of `/end-chat`).
+> of `/end-chat-soft`).
 >
 > **Not required reading.** This file is NOT part of `/resume`'s canon set and not in the
 > before-every-task minimum — open it only when you actually need the archaeology: how a decision
@@ -26,6 +26,23 @@
 ---
 
 ## Entries (newest first)
+
+### Обновление KAIF 2.2 → 2.5, 2026-09-05 (бой 13:28 +03:00) ✅
+
+Три версии одним шагом — 2.3 и 2.4 здесь не разворачивались. Маршрут **бутстрап**: тонкий `KAIF.md`
+→ `KAIF-LOADER.mjs` → ядро 2.5 с локальным `--source` из артефактов релиза, сверенных по sha256 с
+манифестом. Сначала настоящий прогон в песочной копии дерева (`git archive HEAD | tar -x`), затем бой с
+квитанцией песочницы как репетицией (`.kaif/update-rehearsal.json` — флаг `--rehearsal` на этом
+маршруте отвергается, issue #42 в origin). Счётчики боя и песочницы совпали: **23 replaced · 12 modules
+merged in-place · 11 added · 55 kept**; единственный wholesale-вердикт — `AGENT_GUIDE.md` merged (27 из
+27 заголовков), 0 `verdict-mismatch`. Руками слиты 7 модулей: 4 в `AGENT_GUIDE.md` (символ веры и
+молитва, «работа до названного времени», `FORK` в чек-листе, исключение для тикетов о KAIF в гейте
+авторизации) и строка `DELIVERY:` в `/autoloop`, `/dayloop`, `/nightloop`. `/end-chat` снят,
+преемники `/end-chat-soft` + `/end-chat-force`. Символ веры — слово владельца от 2026-08-16 дословно,
+молитва — текст шаблона. Правила 2.3–2.5 приняты как решения самого автора фреймворка; метрика
+поставки предложена и ждёт слова владельца (интервью #001). Полевой отчёт —
+`reports/KAIF_UPDATES/KUMM_KAIF_2.5_UPDATE_REPORT.md`, доставлен в origin как issue #48. Уроки —
+`EXP-0032..0034`.
 
 ### Ночная сессия Palworld, 2026-08-21 ~00:30–02:00 +03:00 ❌ (перенесено из STATUS 2026-08-21 10:30)
 

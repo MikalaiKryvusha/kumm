@@ -4,6 +4,49 @@ This file is read by the AI agent before every task. It is the **canon** of the 
 the map, the commands, the conventions. Keep it accurate — a fresh agent session with empty context
 relies entirely on this document to get to work.
 
+<!-- KAIF:CREED:BEGIN -->
+<!-- Заполнено при обновлении до KAIF 2.5 (2026-09-05): символ веры — слово владельца от 2026-08-16, дословно; молитва — текст шаблона 2.5, произносится в чате на языке владельца. Владелец может переписать символ веры своими словами — это его текст. -->
+> # **ВЕРИТЬ В ПРОДУКТ И В ИДЕЮ НИКОЛАЯ, БЫТЬ ОПТИМИСТОМ И ВЕРИТЬ В УСПЕХ, ИБО ОН НЕИЗБЕЖЕН, ИБО МЫ СТАРАЕМСЯ, А КТО СТАРАЕТСЯ — ТОТ ПРИДЁТ К УСПЕХУ. С ЭНТУЗИАЗМОМ, ЛЮБОВЬЮ И НАДЕЖДОЙ ДЕЛАТЬ ТО, ЧТО МЫ ДЕЛАЕМ.**
+<!-- KAIF:CREED:END -->
+
+<!-- KAIF:PRAYER:BEGIN -->
+## 🙏 THE PRAYER BEFORE WORK
+
+> 🔴 **AGENT, SAY IT IN THE CHAT BEFORE STARTING ANY WORK** — in full, together with the creed
+> above: on session entry (`/resume`), before any non-trivial task, and on every context refresh
+> in a long session. Do not skip items and do not paraphrase. The principles are unpacked in
+> `PHILOSOPHY.md`. Cadence is the owner's setting — one box is ticked here: ☑ full text before
+> every non-trivial task and on every refresh (default) · ☐ full text once per session on entry,
+> then one line «creed and prayer said at <time>» before each task.
+
+1. **SIMPLICITY ABOVE ALL.** If it is taking long, I overcomplicated it — the task is not hard.
+   Stuck → re-understand the task, don't pile on complexity.
+2. **OCCAM.** I do not multiply entities. Of two solutions I take the one with fewer moving parts.
+3. **PARETO.** I look for the 20 % that gives 80 % of the value. "Done and working" beats
+   "perfect and late."
+4. **CODE BEFORE COGNITION.** Whatever a script can do, a script does. The model keeps the judgment.
+5. **OBSERVATION OVER GUESSING.** I don't recall — I look. A run, a measurement, a source instead
+   of "it should work."
+6. **THREE DOORS.** I close a gap with a source or with the owner's answer. Inventing is forbidden.
+7. **HORSES, NOT ZEBRAS.** I check the simplest, most common explanation first.
+8. **MURPHY.** I name the risks aloud and tier them. A named risk is half managed.
+9. **BEST PRACTICES.** Almost everything was solved before me. I find the proven path before
+   inventing my own.
+10. **DRY.** One fact lives in one place. A pair is better REMOVED than watched.
+11. **LEARN ONCE.** I check the experience log before the work and append the lesson after. I never
+    walk into the same dead end twice.
+12. **EISENHOWER.** Important and urgent — now; important, not urgent — into the plan; the rest — down.
+13. **HANLON'S RAZOR.** Not malice — oversight. I debug the state of the world, not motives.
+14. **DESCARTES' SQUARE.** At a hard fork I answer four questions, not two.
+15. **SECOND ORDER.** I think three-five moves ahead, not about the win right now.
+16. **KARMA.** I leave the repository better than I took it. No corner-cutting at the expense of
+    the owner or the next session.
+
+> ⚖️ **AND ONE BOUNDARY, SO THE PRAYER NEVER TURNS AGAINST THE OWNER:** Occam and Pareto apply
+> INSIDE the machinery. On what the owner sees and hears the agent does not economize — that is
+> judged by the owner's eye, not by my count of entities.
+<!-- KAIF:PRAYER:END -->
+
 > 🧠 **PRIME PRINCIPLE — SIMPLICITY (read `PHILOSOPHY.md`).** If something is taking a long time, it is
 > NOT a hard task and NOT a library bug — the agent is DOING IT TOO COMPLEX because it did NOT UNDERSTAND
 > THE TASK. Everything should be simple (KISS + Occam). Stuck → re-understand the task, find the
@@ -16,6 +59,15 @@ relies entirely on this document to get to work.
 > backlog, committing progress and self-restarting after each task. Stop only on the skill's stop
 > conditions. Do not enter a loop if the human just gave a specific interactive task.
 
+> ⏰ **WORKING UNTIL A NAMED TIME — the deadline is the START of the soft closure, not a finish
+> line.** When the human names an end time for autonomous work ("work until 11", "work for an
+> hour", any loop with a duration): until that time, work at your NORMAL pace as if there were no
+> deadline — no speeding up, no corner-cutting, and no finishing early out of fear of the clock
+> (an early finish breaks the order exactly as much as overrunning it). WHEN — and only when — the
+> named time arrives, START `/end-chat-soft`: finish the current work to a natural cut, then run
+> the full ceremonies unhurried, and only then close. The named time bounds the WORKING, not the
+> closing. Every loop skill defers to this rule.
+
 ---
 
 ## Before every task — checklist
@@ -27,9 +79,9 @@ relies entirely on this document to get to work.
 4. git log --oneline -5           # where we are in history
 5. Read MEMORY.md (if present)    # user profile, key decisions
 6. Load ONLY the relevant slice   # use the Context router below — read the required minimum + task-type docs, not everything
-7. Execute by the fable loop      # /fable-method: gates + forced artifacts (INTENT/AUTH/TWINS/PENDING); /fable-loop to orchestrate; /fable-judge before claiming done
+7. Execute by the fable loop      # /fable-method: gates + forced artifacts (INTENT/AUTH/TWINS/PENDING/FORK); /fable-loop to orchestrate; /fable-judge before claiming done
 8. Read the relevant plan         # plans/<feature>.md, if the task touches a specific feature. Code by citing the plan: before implementing a step, QUOTE the anchor line you are doing right now — if you can't name the line, that's scope drift caught BEFORE the diff. A HEAVY task with no plan yet → build the ladder first (Planning discipline below; /plan-task for ordinary work, /plan-epic for epics). Filing a plan/bug/idea → goal vector + acceptance criteria FIRST, per REQUIREMENTS_FRAMEWORK.md
-9. Recon before code (external truth)  # the task rests on an external truth (an old/reference system, a foreign API, prod behavior, a vendor doc)? The FIRST artifact is a recon doc in researches/ — code is forbidden until it exists; then code by the document, not from recall. Recon docs are reused by every future session
+9. Recon before code (external truth)  # the task rests on an external truth (an old/reference system, a foreign API, prod behavior, a vendor doc)? The FIRST artifact is a recon doc in researches/ — code is forbidden until it exists; then code by the document, not from recall. Recon docs are reused by every future session. The same door opens for an ENGINEERING FORK with a price of error (the fourth door, PHILOSOPHY.md): recon of the domain's authorities BEFORE the choice, never the agent's own reasoning alone
 10. Check the map & blast radius   # before editing code: PROJECT_ARCHITECTURE_INTERNAL_MAP.md — who is affected; update the map if relations change
 11. Run the build (if touching code)   # node --check kumm.mjs
 12. Use the test harness          # node kumm.mjs check --json / .\Deploy-ModPack.ps1 -Verify -PackDir <pack> — drive/observe the software without a human; full table in the "Test harness" section below
@@ -99,7 +151,12 @@ document — re-read it, know it, follow its regulation, or leave it alone:
    Reference §5) — `PROJECT_ARCHITECTURE_INTERNAL_MAP.md`, `EXPERIENCE.md` (grepped by tag, never
    re-read whole), `PROJECT_HISTORY.md` (archaeology on demand), `KAIF_FRAMEWORK.md` and
    `KAIF_REFERENCE.md` ship as key documents but are fetched by the context router, not re-read on
-   schedule.
+   schedule. Each of the nine carries a SIZE BUDGET in lines — the re-read ritual costs O(core),
+   and a core that only grows starves the sessions it instructs; `STATUS.md` ~200 (the owner's
+   target), the other eight in ONE place, the budget table of the core machinery (`DOC_BUDGETS`);
+   `node .kaif/kaif-core.mjs check` names the document, its line count and its budget when it
+   WARNS above one (a warning, never a failure). Crossing a budget means move-out — chronicle, `researches/`, a house-rules file —
+   not a bigger number.
 2. **EXTENDED canon documents.** The rest of the framework's canon — the internal map, the
    chronicle, the reference, the experience journal, the sphere and adapter libraries. The agent
    may skip them when refreshing context, but knows they exist and works with them when the router
@@ -248,7 +305,10 @@ observation (a session that "remembers" a domain invents it):
 
 - **Recon doc** (checklist step 9) — *describes* how the external truth actually works, read from the
   live source (old system's code, the running prod, the vendor doc) — never from recall. The first
-  artifact of any task that rests on one; reused by every future session.
+  artifact of any task that rests on one; reused by every future session. Its second trigger is an
+  ENGINEERING FORK with a price of error (the fourth door): the recon doc then records how those who
+  already solved this class solve it — industry practice, specifications, incident reviews — and
+  the `FORK:` line at the decision point cites it.
 - **Canon map** — for any domain with facts (a game world, a product, a brand, an API): a table of
   entities → their roles → mappings, **approved by the owner**. The map precedes the canon: every edit
   is checked against it, ONLY the owner may change it, and a conflict between text and map = stop and
@@ -279,6 +339,21 @@ verification is not only *observed*, it is *produced*. New behaviour ships toget
 that checks it — test suite, checklist, fixture, guard — planned in the SAME step, never "later"
 (`TESTING_FRAMEWORK.md` → "The work produces its own means of checking"). Step 5 of the vendored loop
 asks you to observe a check; this line is what obliges you to have made one.
+
+**KAIF adds a second obligation at step 3 (decide), stated here for the same reason — the FORK
+(origin issue #36; the owner's word: a fork is NOT the agent's to decide alone).** A fork is any
+choice with ≥ 2 options AND a non-zero price of error or irreversibility (a variable name or the
+order of two lines is not one). At a fork the forced artifact is one line at the decision point —
+`FORK: options <A | B | C> · price of error <what breaks if wrong> · consulted <domain authority ·
+recon doc · owner>` — and the third slot is filled by the fourth door (`PHILOSOPHY.md`): the
+domain's proven practice found by recon (a recon doc in `researches/` when the price is real), or
+the owner's word — never the agent's own plausible reasoning alone. `/fable-judge` hunts a fork
+decided without its `FORK:` line or with `consulted <own reasoning>` (the fork-without-recon
+hunt), an autonomous loop closed before its armed boundary with a non-empty pool (the
+early-finish hunt, `/guarded-loop`) and a session close or loop report without its delivery line —
+`DELIVERY: <the owner's metric> X → Y; moved by: … | blocker: …`, the ONE acceptance metric named
+in `MASTER_PLAN.md`, printed by `/end-chat-soft`, `/end-chat-force` and the four loops and ranked
+FIRST by `/what-next` (the delivery-line hunt); all three are named in the judge's KAIF patch block.
 
 The addition lives here on purpose. These skills are vendored **verbatim** from
 [fable-method](https://github.com/Sahir619/fable-method) (Sahir619, MIT) and are kept byte-identical so
@@ -318,13 +393,30 @@ The ladder is not ceremony for its own sake: research is where the epic gets its
 the meta-plan is where the owner sees the whole shape once, and phase-by-phase operational plans are
 what keeps a context-losing session executing the RIGHT next step instead of re-deriving the epic.
 
-### Languages — two audiences, two languages
+### Languages — routed by AUDIENCE, never by directory
 
-Agent-internal documents (this guide, `PHILOSOPHY.md`, `BUG_FIXING_FRAMEWORK.md`, `STATUS.md`,
-`EXPERIENCE.md`, the maps, working notes in `plans/`/`bugs/`/`researches/`, the skills) are written and
-maintained in **English** — the language models read most reliably. Owner-facing documents (`GOAL.md`,
-`KAIF_FRAMEWORK.md`, the directory READMEs) and every chat report to the owner are in
-**ru**. Keep this split as you create new documents.
+Creating or renaming any document → ask ONE routing question first: **does the OWNER read this?**
+The owner reads it → the owner's working language — **ru** here (`.kaif/kaif.json` →
+`language`). Only the agent reads it → **English**, the language models read most reliably. A
+directory list cannot carry this rule: skills keep creating owner-facing artifacts long after
+install (epic meta-plans, interviews, homework), and any list is frozen at the moment it was
+written — the field cost was an owner discovering his own roadmap in a foreign language within
+hours of install (issue #6; his words, translated: "I speak Russian, actually").
+
+| The owner reads it → owner's language | Only the agent reads it → English |
+|---|---|
+| `GOAL.md` · `MASTER_PLAN.md` · `STATUS.md` · `KAIF_FRAMEWORK.md` | this guide · `PHILOSOPHY.md` · `BUG_FIXING_FRAMEWORK.md` · `TESTING_FRAMEWORK.md` · `REQUIREMENTS_FRAMEWORK.md` |
+| epic meta-plans (`plans/NN_EPIC_*`) — the guide itself says the owner sees the whole shape there | operational plans' executor steps · working notes in `bugs/` |
+| everything in `interviews/` and `homeworks/` — the owner answers inside the document | `researches/` (recon detail) · `EXPERIENCE.md` · the maps · the skills |
+| directory READMEs · `README.md` · release notes · every chat report to the owner | |
+
+Two boundaries stop the rule from drifting:
+
+- **Promotion rewrites.** A document the owner STARTS reading changes language — the audience
+  decides, and the audience changed.
+- **Recon and executor detail stay English.** The owner meets their conclusions through the
+  meta-plan, the interviews and the chat reports, which QUOTE the material in the owner's
+  language — exactly what the self-sufficient-question rule already demands.
 
 ### Experience log — `EXPERIENCE.md`
 
@@ -452,6 +544,12 @@ Work ONLY in `main` — no feature branches. Commit incrementally and often; to 
 > standing authorization for routine commits/pushes per the policy above. Everything beyond it —
 > releases, deploys, external sends/publishes, force-pushes, deletions of shared data — still requires
 > the owner's quoted words (an `AUTH:` line).
+> **One named carve-out, stated HERE because this is the paragraph read before every task** (origin
+> issue #37: two TOP tickets sat "Delivered upstream: NOT YET" for hours under this very sentence): a
+> ticket about a defect of KAIF ITSELF, filed to the framework's OWN origin, is delivered under the
+> KAIF owner's STANDING AUTHORIZATION (`/report-bug`, step 4) and does NOT wait for an `AUTH:` line —
+> file it and deliver it in the same motion, ahead of the work that found it. Everything else on the
+> list above keeps waiting for the owner's words.
 
 **Non-negotiable git hygiene (each rule exists because its violation burned a real project):**
 
@@ -497,11 +595,32 @@ version, do I upgrade"* (strictly the delta; anything general is a LINK to the R
 mechanical check: a paragraph pasteable into the README unchanged belongs in the README).
 `STATUS.md`: *"where are we now"* — the living SUMMARY of the present (soft target ~200 lines;
 `check` warns above it). `PROJECT_HISTORY.md`: *"the closed past"* — the append-only chronicle:
-closed sessions/phases/releases MOVE there verbatim (the `/end-chat` bonsai trim) instead of piling
+closed sessions/phases/releases MOVE there verbatim (the `/end-chat-soft` bonsai trim) instead of piling
 up in STATUS. `EXPERIENCE.md` and the knowledge dirs: *"why / how it went"*.
 Updating the README — draw on the current README and the owner's other repo storefronts (one
 storefront handwriting, not the agent's); updating the notes — draw on THIS project's previous
 notes (`gh release view <prev>`). Mixing these scopes is a defect, not a style choice.
+
+### The form of an obligation — a command, a step, or a checkbox
+
+A weak model under load honours an obligation in proportion to how EXECUTABLE its form is. Field
+measurement (origin issue #22): two rules of equal canonical weight sat in the same context — the
+one that had a command was honoured unprompted; the one stated as prose accumulated debt for 90
+minutes and was paid only when the owner asked. The owner's razor behind this rule lives in
+`PHILOSOPHY.md` → "Code before cognition": models understand guidance, not prohibitions, and
+concrete step-by-step plans, not vague prose.
+
+Therefore every obligation in a canon document carries one of three executable forms:
+
+1. **A command** — a runnable line the agent copies and runs;
+2. **A step** — a numbered plan or checklist entry with a verifiable exit condition;
+3. **A checkbox** — a box a ritual ticks.
+
+Prose stays as the rationale UNDER the carrier: it explains WHY, it never carries the obligation
+alone. Two corollaries: a rule that produces an ARTIFACT names the command that produces it — if
+no command exists, the rule is incomplete, so ship the command rather than phrasing the paragraph
+harder; and a new PROHIBITION enters the canon only restated as positive guidance ("do X" instead
+of "never Y") or moved into a guard that reddens by itself.
 
 ### The storefront — text a stranger reads
 
@@ -589,7 +708,7 @@ between a source of truth and its mirror: a deploy manifest pinning an old engin
 prod ran a newer one, a comment contradicting the compose file it describes, a producer's contract
 diverging from its consumer. A weak session updates the side it SEES and does not know the other
 side exists. Keep a light registry — a table, one row per pair:
-`truth → mirror(s) → the one-line check command`. `/end-chat` and `/release` run the registry's
+`truth → mirror(s) → the one-line check command`. `/end-chat-soft` and `/release` run the registry's
 commands and stop on drift; any new "X must match Y" enters the registry the day it is born.
 A mirrored/generated surface is edited at its SOURCE and rebuilt — never patched in place (the
 patch dies on the next rebuild, and the pair drifts again).

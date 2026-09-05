@@ -18,3 +18,6 @@ KAIF_ADAPTATION_TASK.superseded.md
 # для проекта, при необходимости живут в .claude/settings.json.
 .claude/settings.local.json
 .claude/settings.local.json.bak-*
+.kaif/update-journal.json
+.kaif/guarded-loop.json
+.kaif/update-rehearsal.json

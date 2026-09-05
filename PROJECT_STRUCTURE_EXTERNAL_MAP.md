@@ -28,7 +28,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── EXPERIENCE.md · PROJECT_HISTORY.md · KAIF_FRAMEWORK.md
 ├── plans/ ideas/ bugs/ researches/ interviews/ homeworks/ reports/   # KAIF knowledge dirs
 ├── .kaif/                         # framework core: kaif.json, kaif-core.mjs, spheres/, tools/, hooks/
-├── .claude/skills/ .agents/skills/ .grok/skills/ .cline/skills/ .roo/  # 35 skills × 5 agent systems
+├── .claude/skills/ .agents/skills/ .grok/skills/ .cline/skills/ .roo/  # 38 skills × 5 agent systems
 ├── CLAUDE.md · AGENTS.md · .clinerules/ · .roo/rules/                 # context pointers
 └── mods/                          # gitignored — never in this repo
 

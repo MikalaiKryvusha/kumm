@@ -25,8 +25,12 @@ Stop the loop ONLY if one of:
    ❗ **Non-critical errors are NOT a stop condition — just keep working:** a failed build (fix it), a
    flaky connection (reconnect), a bug in the software (file it and fix or defer), a hard/unclear task
    (take another), a crash (investigate/fix). These are normal working situations.
+3. **The owner NAMED an end time when starting this run** ("work until 11", "for an hour") and it
+   has arrived → **start `/end-chat-soft`**; until that time — normal pace, no early finish out of
+   deadline fear (`AGENT_GUIDE.md` → Working until a named time).
 
-⚠️ **No time-stop, no pauses, no time checks.** Unlike the night loop, don't stop at any hour and don't
+⚠️ **No time-stop, no pauses, no time checks** (unless the owner named an end time — condition 3).
+Unlike the night loop, don't stop at any hour and don't
 look at the clock. Work **CONTINUOUSLY**: finished one — take the next. Don't pause, don't wait for
 confirmations, don't schedule big "wake up later" gaps. The only stop is a stop condition above. A
 **short** `ScheduleWakeup` (≈60s) is NOT a pause — it's the loop's heartbeat to continue in a new turn
@@ -65,7 +69,9 @@ when the current one is exhausted (see step 8).
    minutes. `git add -A && git commit -m "<msg>" && git push`. **The one-step rule:** one meaningful change = one full gate run = one
    commit — no batch commits of half a day's work (a big diff can't be honestly reviewed; a judged
    failure then rolls back one file, not a session). `/fable-judge` pass before every push.
-7. **Short chat report** (1–3 lines): what you did, what's next — so the human sees progress on a break.
+7. **Short chat report** (1–3 lines): what you did, what's next — so the human sees progress on a break;
+   opened by `DELIVERY: <the owner's metric> X → Y; moved by: … | blocker: …` (the metric from
+   `MASTER_PLAN.md`; zero delta only with a named blocker — the judge's delivery-line hunt).
 8. **Continue CONTINUOUSLY**: finished a task — next iteration in the same turn. No pauses, no waiting,
    no time checks. **Don't assess how much context is left and don't end the turn yourself** — the
    harness does that.

@@ -12,6 +12,14 @@
 
 One command assembles, updates and repairs a modded game build — for any game, on a free Nexus account.
 
+**Delivery metric (one line):** `deterministic core covered by autonomous checks: 0 of 5 · games running
+on a manifest alone: 1 of 2` — two components on two axes of the same distance (trusted vs. built), the
+form the owner himself asked for in KAIF origin issue #46; the LEADING component takes the
+`DELIVERY: X → Y` slot at every session close and loop iteration (`AGENT_GUIDE.md` → the fable loop).
+**PROPOSED by the agent on 2026-09-05, awaiting the owner's word — interview #001, Q1**; changed only by
+the owner's word. The five checks are the five steps of Phase 1 below; the two games are Palworld (live)
+and Oblivion Remastered (manifest ready, game not yet installed).
+
 ## Guiding principles
 
 - **The engine is stateless; the pack owns everything.** No database, no cache, no hidden config.
@@ -91,6 +99,7 @@ hygiene). Decided and recorded are two moments — tell them apart when they dif
 | 2026-08-15 00:33 +03:00 (recorded — commit `7ead876`), extended 00:44 (`a0bfa7f`) | Split the engine from the pack — `-PackDir` / `--root`, and let the library live outside the pack | The engine ships publicly; a pack is the owner's private collection with its own git |
 | 2026-08-15 01:02 +03:00 (recorded) | Canonical name is **KUMM**; `kumm` stays the npm id and the CLI command | Identity is the owner's call, not the machinery's guess from `package.json` (owner's answer at the KAIF deployment) |
 | 2026-08-15 01:02 +03:00 (recorded) | KAIF 2.2 deployed, sphere `programming`, tracking mode `origin` | The project is worked on across context-losing agent sessions; the framework externalizes the memory and discipline that a chat cannot keep |
+| 2026-09-05 13:28 +03:00 (recorded) | KAIF updated 2.2 → 2.5 by the bootstrap route; the 2.3–2.5 rule changes accepted; the delivery metric PROPOSED, not yet the owner's | The project owner is the KAIF author — the framework's policy changes are his own origin decisions; the one per-project setting (the metric) is his call: interview #001 |
 
 ---
 

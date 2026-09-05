@@ -17,6 +17,9 @@ time and on the human appearing**, and **self-restart via `ScheduleWakeup`**.
 Stop the loop ONLY if one of:
 1. **It is ≥ the wake time** (default 09:00 local; set it when starting the loop). ⏰ Check the time
    (`date "+%H:%M"`) PERIODICALLY — don't miss the wake hour. The human comes online in the morning.
+   Reaching the wake time means **START `/end-chat-soft`** — never a rushed stop and never an EARLY
+   finish out of deadline fear: work at your normal pace right up to the hour (`AGENT_GUIDE.md` →
+   Working until a named time).
 2. **The human wrote in the chat — classify before you switch** (the drive-by rule, `AGENT_GUIDE.md`): a direct request →
    exit, switch to them immediately; a **drive-by idea/bug not about the current task** → capture it
    (`/propose-idea` / `/report-bug`, source: "tossed by the owner"), confirm in one line and
@@ -56,7 +59,9 @@ Until one fires — don't stop, don't wait for confirmations, work.
    `git add -A && git commit -m "<msg>" && git push`. **The one-step rule:** one meaningful change = one full gate run = one commit —
    no batch commits (a big diff can't be honestly reviewed; a judged failure rolls back one file, not a
    night). `/fable-judge` pass before every push.
-7. **Short chat report** (1–3 lines): so in the morning the human sees the progress.
+7. **Short chat report** (1–3 lines): so in the morning the human sees the progress; opened by
+   `DELIVERY: <the owner's metric> X → Y; moved by: … | blocker: …` (the metric from `MASTER_PLAN.md`;
+   zero delta only with a named blocker — the judge's delivery-line hunt).
 8. **Self-restart**: if there's work left in the turn — just continue the next iteration in the same
    turn; don't assess how much context is left and don't end the turn yourself (the harness does that).
    `ScheduleWakeup` (same `/nightloop` input, short listen) is a *mechanical fallback* for when the
@@ -79,10 +84,12 @@ Until one fires — don't stop, don't wait for confirmations, work.
 
 ## Finishing (when a stop condition fired)
 
-- Get the current micro-step compiling, **commit and push** (don't leave broken/uncommitted main).
-- Update `STATUS.md`: what got done overnight, where you stopped, what's next, any "awaiting human review".
-- If stop = wake time or the human wrote — write a short summary of the night in the chat.
-- If stop = a critical error — describe it, what you tried, why you can't continue; wait.
+- Stop = the wake time → **start `/end-chat-soft`**: finish the current item to a natural cut at
+  your normal pace, then the full unhurried ceremonies (status + baton, judge pass, commit AND
+  push, the night's summary in the chat). The wake time bounds the WORKING, not the closing.
+- Stop = the human wrote — switch to them; give a short summary of the night.
+- Stop = a critical error — get the current micro-step compiling if you can, **commit and push**
+  (don't leave broken/uncommitted main), describe what happened and what you tried; wait.
 
 ## Notes
 

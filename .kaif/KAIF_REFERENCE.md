@@ -81,8 +81,8 @@ Fourteen key documents ship with a deployment (thirteen project documents plus t
 | `REQUIREMENTS_FRAMEWORK.md` | How requirements are written and checked: goal vector + acceptance criteria first, the ten quality criteria, EARS, fit criterion, the stop-word dictionary as a lintable guard (2.2, epic N). | Deployed verbatim. |
 | `GOAL.md` | The owner's vision. | **The owner.** |
 | `MASTER_PLAN.md` | The phased road from the current state to the GOAL. | Agent derives (`/revision`). |
-| `STATUS.md` | The living SUMMARY of now and the baton between sessions (soft target ~200 lines; closed work moves to the chronicle — the bonsai trim). | Agent, after every task. |
-| `PROJECT_HISTORY.md` | The append-only chronicle: closed sessions/phases/releases, newest first; NOT in `/resume`'s canon set — archaeology on demand (2.1, epic H). | Agent, at `/end-chat`'s trim. |
+| `STATUS.md` | The living SUMMARY of now and the baton between sessions (soft target ~200 lines — the first of the re-read core's size budgets that `check` warns above, all nine since 2.5; closed work moves to the chronicle — the bonsai trim). | Agent, after every task. |
+| `PROJECT_HISTORY.md` | The append-only chronicle: closed sessions/phases/releases, newest first; NOT in `/resume`'s canon set — archaeology on demand (2.1, epic H). | Agent, at `/end-chat-soft`'s trim. |
 | `EXPERIENCE.md` | The grep-friendly journal of lessons with trigger tags. | Agent (`/experience`). |
 | `PROJECT_STRUCTURE_EXTERNAL_MAP.md` | The external map: directories, files. | Agent maintains. |
 | `PROJECT_ARCHITECTURE_INTERNAL_MAP.md` | The internal map: abstractions and interactions. | Agent maintains. |
@@ -111,11 +111,11 @@ project's working language); **OTHER KAIF documents** — the project's local "h
 
 ## 6. The skill system
 
-Thirty-five skills — the verbs of project work — deploy to `.claude/skills/` (canonical) and are
+Thirty-seven skills — the verbs of project work — deploy to `.claude/skills/` (canonical) and are
 mirrored into every declared agent system (§7.3). Groups:
 
 - **Session:** `resume` (read ALL canon documents, pick one main thing) · `pause` (soft-park the
-  chat: logical stopping point, green tree, local commit, NO pushes) · `end-chat` (full closure:
+  chat: logical stopping point, green tree, local commit, NO pushes) · `end-chat-soft` (the unhurried full closure) + `end-chat-force` (the urgent capture-and-go closure:
   STATUS baton, judge, commit AND push) · `refresh-context` · `check-backlog`.
 - **Autonomy loops:** `autoloop` · `dayloop` · `nightloop` — grind the backlog; every item ends
   with a mandatory judge pass; an owner's drive-by note is filed to the backlog, not a task switch —
@@ -166,8 +166,10 @@ placeholders from project reality (package.json, git config, LICENSE); writes fi
 mirrors; wires the marker, npm handles and the deploy manifest (v2, §12.2); writes ONE cognitive
 deliverable — `KAIF_ADAPTATION_TASK.md`, whose items close only via `checkpoint <id>` commands
 (the `field-report` item requires the mandatory field install report to exist in
-`reports/KAIF_UPDATES/` before it ticks); `verify-final` runs the final gates (§7.5) and
-self-cleans the installer.
+`reports/KAIF_UPDATES/` before it ticks; the `owner-voice` item closes the voice-portrait
+question BEFORE any owner-facing text is written — portrait installed, or a canonical
+`no voice portrait` line recorded in the deployed AGENT_GUIDE); `verify-final` runs the final
+gates (§7.5) and self-cleans the installer.
 
 ### 7.3 Agent systems
 
@@ -178,11 +180,19 @@ never edited by hand.
 
 ### 7.4 Languages
 
-Nine language packs (ru, es, pt, fr, de, zh-Hans, ja, hi, ar) override the owner-facing documents
-and inject trigger aliases into each skill's `description:`. Agent documents stay English by
-default. A project that translated its wrapper wholesale declares `"i18n": "translated"` in the
-marker: mechanical replacement is then disabled in favor of per-module diffs, and the machinery
-never wars with the translation (§10.2).
+Two language packs are MAINTAINED: `en` (the source language itself) and `ru`. The other eight —
+es, pt, fr, de, zh-Hans, ja, hi, ar — are FROZEN at their full KAIF 2.2 state (owner's decision
+#56, named in the open: nine parallel packs are heavy to maintain and do not yet pay for
+themselves). A frozen pack STAYS in the bundle and deploys exactly as it did in 2.2 — the
+owner-facing documents plus skill trigger aliases — but receives no updates with new releases;
+its byte state is pinned by the origin's guard, so silent degradation cannot ride a release. A
+frozen pack is REVIVED on community demand: open an issue at the origin. Deploying with one stays
+legal, and the install log says its status honestly.
+
+A pack overrides the owner-facing documents and injects trigger aliases into each skill's
+`description:`. Agent documents stay English by default. A project that translated its wrapper
+wholesale declares `"i18n": "translated"` in the marker: mechanical replacement is then disabled
+in favor of per-module diffs, and the machinery never wars with the translation (§10.2).
 
 ### 7.5 The final gates
 
@@ -237,13 +247,48 @@ Reconstruction starts from the DISK order (the owner's inserted sections keep th
 A module untouched since deploy takes the new template's text; a localized module is never
 replaced by a template that carries none of the owner's script; an edited module is kept — and
 lands in the task WITH a "your version → new template" diff ONLY when upstream actually changed
-it. New template modules insert by template order.
+it. New template modules insert by template order. A file whose body carries the owner's
+script prints its verdict WITH the numbers that produced it — `baseFound N of M, ceiling K →
+frozen | merged` (2.5: a rehearsal and the live run compare line by line, not by outcome).
+The H1 is OUT of that count (2.5, origin bug 100): it is the one heading that carries a deploy-time
+value, and a synthetic baseline fills it from whatever the folder resolves to — one tree under two
+folder names once got two verdicts, ±1 at the ceiling; the polygon now runs exactly that and
+demands one verdict. The rehearsal is BINDING (2.5, origin issue #27 R1): `diff --source` prints the same verdicts
+over the same candidate set and records them in `.kaif/update-rehearsal.json`; the next `update`
+over that tree (or one given `--rehearsal <receipt>` from a sandbox copy) freezes any file whose
+live verdict is `merged` where the rehearsal said `frozen` — kept intact, the template delta in
+the task, both number sets in the `verdict-mismatch` item — so what the rehearsal showed the
+owner stays true; every candidate's verdict also rides the receipt (`verdicts`), and a record
+for another version interval is named and ignored.
+Anchored blocks — `<!-- KAIF:NAME:BEGIN -->` … `<!-- KAIF:NAME:END -->` (the creed, the prayer)
+— are indivisible units (2.5, origin issue #27): the merge plan is judged as a whole, and a
+pair that was balanced on disk but would come out unbalanced (its markers live in different
+modules — one carrier applied, the other kept) rolls every changed carrier back to the disk
+state and lands in the task as ONE item, `(anchored block KAIF:NAME)`, with the diff of all its
+carriers; a NEW module whose insertion point falls inside a pair open on disk is inserted after
+the module that closes it (a localized prayer cut into the owner's headings never receives
+upstream text between its markers); a pair already broken on disk is not rolled back — the item
+names it, and `check` reddens the document with the weight of a two-headed document until it is
+restored by hand.
 
 ### 10.3 The update task
 
-`KAIF_UPDATE_TASK.md` lists: per-module merges with diffs · whole-file merges · owner-convention
-transfers · deprecations carrying local edits · stale claims (lines still asserting the OLD
-version anywhere in the project) · the news interval · executing checkpoints (`recheck` runs the
+`KAIF_UPDATE_TASK.md` lists: per-module merges with diffs · whole-file merges (a
+translated-wholesale file also names its UPSTREAM path and a ready `git diff v<from> v<to> --
+<src>` — the dest → src map ships in the bundle meta as `sources`, 2.5) · owner-convention
+transfers · deprecations carrying local edits (every deprecation names its SUCCESSOR in the log
+and in the item, and the kept ones are counted in the task's context line and the receipt —
+2.5, origin issue #32 R-D) · stale claims (lines still asserting the OLD
+version anywhere in the project — prose AND the project's own scripts: `package.json`,
+`*.mjs/js/ts/sh/ps1/py/yml/toml`, lock files excluded, 2.5; the item is UNCONDITIONAL on a
+version change — an empty scan says `no lines found`, so a silent scanner failure can never pass
+as a clean tree, 2.5) ·
+language arrivals (NEW files of the release that arrived English on a non-English deployment,
+2.5) · verdict mismatches (files frozen because the recorded rehearsal's wholesale verdict
+differed from this run's — both number sets named, 2.5) · mode switch (on an anonymous →
+origin transition, the kept files that were deployed with the anonymous wording — named for a
+re-read, 2.5) · the news interval · executing
+checkpoints (`recheck` runs the
 actual check; `judge` requires `--verdict` with evidence; `field-report` demands the mandatory
 field update report on disk in `reports/KAIF_UPDATES/`, pinned to the delivered version — an
 update does not verify green without its report).
@@ -270,11 +315,20 @@ meta block's `policyChanges`, keyed by version. The update task prints them in a
 
 ### 10.7 Commands
 
-`update` (mechanical pass) · `diff` (audit: protected vs replace-eligible; `--source`: per-module
-preview against another version — a v1 manifest gets a synthetic baseline of the deployed version,
-`--baseline` overrides its source) · `adopt-current` (after a MANUAL migration: re-adopt reality so
-the mechanical road stays alive) · `sync` (re-mirror skills) · `modules` (print the machinery's
-module cut) · `checkpoint` · `update-verify` · `check` · `version`.
+`update` (mechanical pass; writes a crash journal before its first tree mutation and removes it
+as its last act — a run killed mid-flight stays visible) · `resume` (after a crashed update:
+restore the pre-update tree byte-exact from the journal's backup, remove files the dead run
+created, consume the journal) · `diff` (audit: protected vs replace-eligible; `--source`:
+per-module preview against another version — a v1 manifest gets a synthetic baseline of the
+deployed version, `--baseline` overrides its source; a bare `github.com/<owner>/<repo>` source
+resolves to its latest-release assets) · `adopt-current` (after a MANUAL migration: re-adopt
+reality so the mechanical road stays alive) · `sync` (re-mirror skills) · `modules` (print the
+machinery's module cut) · `checkpoint` · `update-verify` · `check` · `version` · `report
+<ticket>` (2.5, epic SG: deliver a `bugs/KAIF/` ticket to the origin through `gh` under the KAIF
+owner's standing authorization — origin issue #15 — with an authorship trailer, and write the
+issue URL into its `Delivered upstream:` line; refusals named: `tracking: anonymous`, no `gh`,
+not a ticket, `gh` refused; a timeout is OUTCOME UNKNOWN, exit 3, never a refusal; `--dry-run`
+calls nothing; the `KAIF_GH` seam lets a polygon stand in for `gh`).
 
 ### 10.8 Predicting a pass
 
@@ -353,6 +407,16 @@ reconcile the canon by hand) · `marker` (pristine marker snapshot backing self-
 the owner's local clock — full ISO 8601 (`2026-08-08T07:13:00+03:00`), never a bare date: on a
 day carrying two updates a date-only receipt cannot say which one it proves.
 
+### 12.4 The crash journal (`.kaif/update-journal.json`)
+
+Written by `update` (and a version-moving bootstrap) after the pre-update backup and BEFORE the
+first tree mutation; removed as the run's last act. `from`, `to`, `source`, `route`,
+`startedAt` (a moment, §12.3 convention), `backupDir`, `born` (paths the run will create). A run
+killed mid-flight therefore leaves either an untouched tree or a visible journal — never a
+half-updated tree without a trace. While the journal exists, `update` and the bootstrap refuse
+and name `resume`, which restores every backed-up file byte-exact, removes the `born` files and
+consumes the journal. Git-ignored (ignore-first): it is transient run state, not history.
+
 ## 13. Conventions
 
 1. **The DONE tag.** A closed bug/idea/homework is renamed `NN_DONE_…` with a status section;
@@ -379,6 +443,8 @@ Shipped to `.kaif/tools/`, active only when the project opts in:
 | `kaif-provenance.mjs` | The acceptance gate for AI text in owner canon (§13.3). |
 | `kaif-canon-lint.mjs` | The growing canon linter: revoked decision → forbidden wording; accepted decision → guarded full unique line; `selftest` proves every guard can fire. |
 | `kaif-requirements-lint.mjs` | The stop-word dictionary of `REQUIREMENTS_FRAMEWORK.md` as an advisory grep guard over requirement sections (`check` / `selftest`); quotes, ❌ examples, code, and `(justified: …)` lines are legal by construction. |
+| `kaif-guard-lint.mjs` | The guard-declaration block of `TESTING_FRAMEWORK.md` gate 5 (second half, 2.5) as an advisory linter (`check` / `selftest`): every `@guard` carries `THREAT` · `PROVED-AGAINST` · `GAP` · `ON-REAL-PATH`, every `@forensic` carries `EXPLAINS` · `DURABLE-AT` (with `close` / `exit` / `trip-only` rejected), every `@fork` carries `OPTIONS` · `COST` · `RECON` · `DECIDED`; fires only on explicit markers, `SKIPPED=3` when a tree carries none. |
+| `kaif-scenario-lint.mjs` | The scenario form of an acceptance criterion (`REQUIREMENTS_FRAMEWORK.md` → "The scenario form", 2.5) as an advisory linter (`check` / `selftest`): a started four-line scenario — Situation · Action · Result · Check, keywords mirrored per language — keeps its shape under seven rules-as-data (order · one action · observable result · no implementation words · third person · a runnable Check · concrete values); an empty owner-written Check is a warning; never demands a scenario, `SKIPPED=3` when a tree carries none. |
 
 A sibling optional module ships to `.kaif/hooks/` (2.2, epic O) — the **refresh-hooks module**:
 mechanical injections of the context-refresh canon (`AGENT_GUIDE.md` → Context refresh) for
