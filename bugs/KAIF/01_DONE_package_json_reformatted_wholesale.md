@@ -128,3 +128,9 @@ what it changed.
 None. The reformatting is accepted as-is in this project and committed together with the deployment —
 reverting it would fight the machinery on every future `kaif:*` rewiring, and the change is semantically
 empty. Recorded here so the next `/kaif-update` sees the divergence coming rather than stepping into it.
+
+## Status — DONE 2026-09-05 (closed by observation at the 2.5 update)
+
+- **Upstream:** origin issue #16 closed 2026-08-21 (KAIF 2.3: *"wiring kaif:* scripts SPLICES your package.json byte-exact instead of reserializing it (#16)"* — the 2.3 template news as delivered by the 2.5 update task).
+- **Observed here:** the 2.2 → 2.5 bootstrap update printed `= kaif:* handles already wired — package.json untouched`, and `git diff --name-only HEAD -- package.json` after the update → empty. The divergence this ticket warned the next update about did not happen.
+- **Local remediation:** none needed; the 2.2 reformatting stays as committed. Field report of the update: `reports/KAIF_UPDATES/KUMM_KAIF_2.5_UPDATE_REPORT.md` (origin issue #48).
