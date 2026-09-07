@@ -25,6 +25,16 @@
 
 ## What's done (the short tail — older entries live in PROJECT_HISTORY.md)
 
+> **Сессия 2026-09-08 — заведена третья игра, Conan Exiles Enhanced 2.1.1.** Игра перенесена в
+> `D:\Games\Conan Exiles`, ярлык исправлен; пак `D:\work\ai_sandbox\ConanExiles` с приватным
+> репозиторием `conan-exiles-modpack`; движок принял игру **без единой правки**. Применены
+> настройки владельца (4K, кап 141, DLSS с пресетом M, дальность, туман, консоль) — **ни одна не
+> проверена в живой игре**. Написаны конспекты `docs/01…03` и план `plans/02_conan_deploy_gaps.md`.
+> **Инцидент S1:** агент уничтожил два бинарника игры; восстановлено, доказано хешами, класс
+> закрыт (`bugs/02_DONE_*`, `AGENT_GUIDE.md` → Boundaries for subagents, `EXP-0036…0039`).
+> Стрижка бонсай выполнена; STATUS 267 строк при бюджете 200 — остаток это живое: открытый
+> беклог, ожидания владельца и два игровых батона, резать их ради числа было бы вредно.
+>
 > v0.1.0 (the two halves) и развёртывание KAIF 2.2 закрыты, лежат в `PROJECT_HISTORY.md`.
 > Три графические сессии Palworld 15.08 и подготовка Oblivion Remastered — там же.
 > **KAIF обновлён 2.2 → 2.5 (2026-09-05, маршрут бутстрап)** — запись в хронике, полевой отчёт
@@ -127,20 +137,15 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 - 🔴 **Оставшееся предупреждение:** НЕ запускать `Clear-Quarantine.ps1 -Stamp 2026-08-17_2335
       -Execute`, пока не забраны три вещи ниже — там **единственный экземпляр** сохранения
       Elden Ring и личное видео `ref.mp4` (3.59 ГБ, съёмка с телефона 04.08.2024).
-- 🎬 **Настройки OBS: виноват не карантин, а деинсталляция iTunes.** Конфиг цел, в карантине OBS нет
-      вовсе. Изменился один файл `basic.ini`: этап 2 уборки снёс iTunes, вместе с ним пропал
-      кодировщик **CoreAudio AAC**, и OBS 20.08 молча свалился на `ffmpeg_aac` и переписал профиль.
-      Хорошие значения живы в теневых копиях; **файл целиком копировать нельзя** — там же старый
-      OAuth-токен YouTube и раскладка доков. Возвращать значения руками, и только после того, как
-      кодировщик снова появится в системе. Единственный наблюдаемый путь к нему — переставить
-      `D:\Soft\iTunes64Setup.exe` целиком; отдельного пакета Apple Application Support в нём нет
-      (проверено). Спросить владельца, нужен ли ему CoreAudio настолько.
-- 🖱️ **Задача автозапуска RTSS снята уборкой и до сих пор отсутствует.** RivaTuner на диске,
-      процесс не запущен, копия задачи цела и валидна. Возврат — одной командой:
-      `.\restore.ps1 -Id task-rtss -Execute` из `F:\_QUARANTINE_C\2026-08-17_2325\deadweight\`,
-      повышенная консоль. **Сначала спросить, нужна ли она вообще:** задача `MSIAfterburner` жива и
-      в состоянии Ready, а Afterburner сам поднимает RTSS — возврат может создать дубль запуска.
-      Влияние на остаточные рывки НЕ измерялось; измерить после возврата, прибор готов.
+- 🎬 **Настройки OBS: виноват не карантин, а деинсталляция iTunes** (с ней ушёл кодировщик
+      CoreAudio AAC, OBS молча свалился на `ffmpeg_aac`). Разбор и порядок возврата —
+      `researches/cleanup-2026-08-17/README.md`. **Файл `basic.ini` целиком копировать нельзя** —
+      там OAuth-токен YouTube. Вопрос владельцу: нужен ли CoreAudio настолько, чтобы ставить
+      iTunes обратно.
+- 🖱️ **Задача автозапуска RTSS снята уборкой и отсутствует.** Возврат одной командой:
+      `.\restore.ps1 -Id task-rtss -Execute` из `F:\_QUARANTINE_C\2026-08-17_2325\deadweight\`
+      (повышенная консоль). **Сначала спросить, нужна ли:** `MSIAfterburner` жива и сама поднимает
+      RTSS — возврат может дать дубль.
 - 📦 **Три вещи ждут возврата из карантина** (пробные прогоны выполнены, боевые НЕ запускались):
       `orphan-national-instruments` (432 МБ, продукт числится установленным, 11 записей LabVIEW в
       реестре, назначение пусто — вернуть штатно из повышенной консоли) · сохранение Elden Ring
@@ -171,73 +176,52 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-### 🔜 Первым делом в новой сессии (после обновления KAIF 2.5, 2026-09-05)
+### 🗡️ Первым делом в новой сессии (после сессии Конана, 2026-09-08)
 
-1. **Перезапустить клиент** — три новых навыка (`/end-chat-soft`, `/end-chat-force`, `/team-deployment`)
-   появляются в списке команд только после перезапуска.
-2. **Символ веры и молитва** из шапки `AGENT_GUIDE.md` — произнести в чате при входе (правило 2.5;
-   каденция — Q2 интервью #001, до ответа действует умолчание: полный текст перед нетривиальной задачей).
-3. **`interviews/interview_001_delivery-metric.md`** — если владелец ответил, применить по плану внутри
-   интервью (метрика → `MASTER_PLAN.md`, клетка каденции → `AGENT_GUIDE.md`) и снять пункт из
-   «Awaiting human review». Пока не ответил — `DELIVERY:` писать по предложенной метрике с пометкой
-   «предложена».
-4. **Новые обязательные строки:** `FORK:` на каждой инженерной развилке, `DELIVERY:` при каждом закрытии
-   сессии и в каждой итерации цикла; дефекты — по лестнице S1/S2/S3 (`BUG_FIXING_FRAMEWORK.md`).
-5. Проверка каркаса — `node .kaif/kaif-core.mjs check` (зелёный 2026-09-05: 89 файлов + 152 артефакта).
+1. **Владелец ещё НЕ запускал игру после правок.** Всё, что применено — 4K, кап 141, DLSS с
+   пресетом M, дальность, выключенный объёмный туман, починенная консоль — **непроверено**.
+   Порядок пяти проверок расписан в паке: `ConanExiles/docs/01-графика-и-DLSS.md`, раздел 8.
+2. **После первого выхода из игры** — `python _config/deploy-config.py --dry-run` в паке Конана:
+   покажет, что игра переписала. Это ответ на вопрос, нужен ли `Engine.ini` флаг «только чтение»
+   (в манифесте `setReadOnly` пока `false`, и это осознанно).
+3. **Секцию `[/Script/ConanSandbox.SystemSettings]` проверить первой** при любом «правка не
+   сработала»: `dw.*` живут именно там, а не в `[SystemSettings]` — три независимых источника.
+4. **Перед любой автономной работой рядом с игрой** — `python _config/verify-install.py` в паке
+   Конана (правило `AGENT_GUIDE.md` → Boundaries for subagents; оплачено багом 02).
+5. Проверка каркаса — `node .kaif/kaif-core.mjs check`.
 
-### Состояние машины на момент передачи (уточнено вечером 21.08 ~21:40 +03:00)
-
-Проверено, не по памяти. Новый чат начинает отсюда:
+### Состояние машины — только живое (остальное в хронике, запись 2026-09-08)
 
 | Что | Состояние |
 |---|---|
-| Palworld | закрыт штатно, сохранение записано 10:12:40 |
-| Мод-пак | активен всеми тремя частями (загрузчик UE4SS, `~mods`, `Engine.ini`), `vanilla.ps1` без ключей это показывает |
-| `r.ViewDistanceScale` | **1.0** — в источнике пака и в игре, файлы совпадают байт в байт |
-| Глобальные параметры 3D (Base Profile) | заводские после «Восстановить», плюс восемь строк, которые оно само и записало (VSync, Tear Control, Preferred Refreshrate, Smooth AFR, четыре G-SYNC). **G-SYNC выключен**, `Application State = Fixed Refresh Rate` — телевизор мерцает на VRR, обратно не включать. **Исключение из «заводских»: `RTX HDR - Enable = On`** — оно пережило сброс и действует на все процессы |
-| Профиль приложения Palworld | **НЕ пустой, 24 настройки. ПЕРЕЧИТАН 31.08 — владелец правил его сам, состав изменился:** `Forced Preset Letter = Preset M (Transformer Gen 2)` (было `Preset L`), `Forced Quality Level = N/A` и `Forced Scaling Ratio = Off` (были `Performance`/`50%` — теперь ратио задаёт игра), `DLSS-FG - Enable DLL Override = On`, `DLSS-FG - Forced Mode = Dynamic`, `DLSS-MFG - Dynamic Frame Generation Count = Up to 3x`, `DLSS-MFG - Target Dynamic Frame Rate = 140 FPS`, `Maximum Pre-Rendered Frames = 1`, `RTX Dynamic Vibrance 40%`. Разбор и порядок опытов — `researches/nvidia-tuning/`, раздел «Профиль приложения Palworld». Правки для игры делать ЗДЕСЬ, а не в глобальных: профиль приложения перекрывает глобальный |
-| Копия базы профилей драйвера | снята 21.08 20:53 в `_tools\nvidia-drs-backup\2026-08-21_post-restore\` (три файла + `update.bin`, sha256 сошлись). Читалка базы — `_tools\nvidia-drs-reader\`, она только читает |
-| Фоновая запись Game DVR | **выключена агентом 21.08 ~21:35** (было 1). Вернуть: `Set-ItemProperty 'HKCU:\System\GameConfigStore' -Name GameDVR_Enabled -Value 1` |
-| Игровой режим Windows | **включён агентом 21.08 ~21:35** (было 0). Вернуть: `Set-ItemProperty 'HKCU:\Software\Microsoft\GameBar' -Name AutoGameModeEnabled -Value 0`. Если испортятся сессии Parsec/Apollo — вернуть |
-| Shader Cache Size | **не задан ни в Base Profile, ни где-либо** (во всей базе настройка встречается один раз, и не там). Рекомендация «явные 10 ГБ» не выполнена — это правка через панель, агент её сделать не может |
-| Оверлей NVIDIA App | **включён**, не трогали — выключается только в самом App |
-| HDR рабочего стола | **ВКЛЮЧЁН** и, вероятно, владельцем не замечен (в игре HDR выключен — это другой переключатель). Кандидат №3 конспекта. **Не путать с `RTX HDR` в профиле драйвера — это два разных выключателя, и гасить их надо по одному** |
-| Задача автозапуска RTSS | **отсутствует**, снята уборкой; копия цела |
-| Файл подкачки | **ПЕРЕНЕСЁН ОБРАТНО НА D: 21.08 ~22:45** по прямому разрешению владельца («Разрешаю, можешь переносить, потом перезагружу»). В реестре `PagingFiles = D:\pagefile.sys 0 0`, записи для C: нет. **Вступает в силу после перезагрузки** — до неё живым остаётся `C:\pagefile.sys`. Проверить ПОСЛЕ загрузки: `Get-CimInstance Win32_PageFileUsage` должен показать D:, а осиротевший `C:\pagefile.sys` (9.8 ГБ) — исчезнуть сам; не исчез — удалить вручную. Откат: вернуть запись для C: и убрать D:. Дампы ядра выключены (`CrashDumpEnabled = 0`), подкачка на C: ничего не держала |
-| Parsec | возвращён (агент убивал его в ходе проверки) |
-| Карантин уборки | `F:\_QUARANTINE_C`, 9.4 ГБ, **ничего не восстанавливалось** |
-| Оба дерева git | чистые и запушены. Хэши здесь намеренно не записаны — они устаревают от следующего же коммита; смотреть `git log --oneline -5` в `KUMM` и в `D:\work\ai_sandbox\Palworld` |
+| Файл подкачки | **ПЕРЕНЕСЁН НА D: 21.08 ~22:45** по слову владельца. **Вступает в силу после перезагрузки** — до неё жив `C:\pagefile.sys`. Проверить ПОСЛЕ загрузки: `Get-CimInstance Win32_PageFileUsage` должен показать D:, осиротевший `C:\pagefile.sys` (9.8 ГБ) исчезнуть сам; не исчез — удалить вручную |
+| Фоновая запись Game DVR | **выключена агентом 21.08** (было 1). Вернуть: `Set-ItemProperty 'HKCU:\System\GameConfigStore' -Name GameDVR_Enabled -Value 1` |
+| Игровой режим Windows | **включён агентом 21.08** (было 0). Вернуть: `Set-ItemProperty 'HKCU:\Software\Microsoft\GameBar' -Name AutoGameModeEnabled -Value 0`. Испортятся сессии Parsec/Apollo — вернуть |
+| HDR рабочего стола | **ВКЛЮЧЁН** и, вероятно, владельцем не замечен. **Не путать с `RTX HDR` в профиле драйвера — это два разных выключателя, гасить по одному** |
+| G-SYNC | **выключен**, `Application State = Fixed Refresh Rate` — телевизор мерцает на VRR, обратно не включать |
+| aria2 | поставлен агентом 08.09 (`winget install aria2.aria2`) ради выборочной загрузки из набора файлов |
+| Оба дерева git | чистые и запушены; третье — `D:\work\ai_sandbox\ConanExiles`. Хэши смотреть `git log --oneline -5` |
 
-**Первым делом по уборке — доложить владельцу разбор и получить три решения:**
-
-1. **Доложить владельцу итог разбора уборки** — он закончен и лежит в
-   `researches/cleanup-2026-08-17/README.md` (377 строк, с доказательствами и дословными выводами
-   пробных прогонов). Начать с **двух предупреждений по безопасности** (раздел «Awaiting human
-   review» выше), затем три его решения: RTSS, iTunes ради кодировщика OBS, три вещи из карантина
-   (файл подкачки уже решён — возвращён на D: 21.08, баг 01 закрыт). **Ничего не восстанавливать без его слова.** Отдельно там же — семь
-   дефектов в его собственной тулзе (раздел 5 отчёта), это ему нужнее всего: у сторожа нет понятия
-   «настройки», `Remove-Product.ps1` не делает копий вообще, а сгенерированный `restore.ps1` опасен.
+**Долг по уборке 17.08 — доложить владельцу и получить три решения** (RTSS · iTunes ради
+кодировщика OBS · три вещи из карантина). Разбор закончен и лежит в
+`researches/cleanup-2026-08-17/README.md`, 377 строк с доказательствами. Начинать с двух
+предупреждений по безопасности выше. **Ничего не восстанавливать без его слова.** Там же раздел
+5 — семь дефектов в его собственной тулзе уборки, и это ему нужнее всего.
 
 ---
 
 ### 🎮 Игровой батон (Palworld) — открытые опыты
 
-1. **Опыт Б — RTX HDR, и он изменился в пользу владельца.** У Palworld ЕСТЬ свой HDR
-   (`bUseHDRDisplayOutput=False`, `HDRDisplayOutputNits=1000` ⚑). Родной HDR и дешевле, и честнее
-   по данным, а RTX HDR к приложению, отдающему HDR, применяться перестаёт САМ. То есть опыт —
-   не «выключить HDR», а **«включить родной HDR игры»**: картинка остаётся, стоимость нейрофильтра
-   уходит. Оговорка: игра идёт в окне (`FullscreenMode=2`), вывод HDR из UE5 в окне может не
-   завестись — проверять, а не предполагать.
-2. **HDR рабочего стола** — вторым и отдельно от пункта 1: это разные выключатели.
+1. **Опыт Б — включить РОДНОЙ HDR игры** (`bUseHDRDisplayOutput=False`,
+   `HDRDisplayOutputNits=1000`). Не «выключить HDR»: родной честнее по данным, а RTX HDR к
+   приложению, отдающему HDR, перестаёт применяться САМ. Оговорка: игра идёт в окне
+   (`FullscreenMode=2`), вывод HDR из UE5 в окне может не завестись — проверять.
+2. **HDR рабочего стола** — вторым и отдельно: это разные выключатели.
+3. **Замер после правок 31.08** (генерация кадров `Auto`, `r.ViewDistanceScale` 2.0 — ни одна не
+   замерена) на той же панораме; прибор готов, сцену «пейзаж» владелец не назвал.
 
-Порядок прежний: ОДИН опыт за заход, перезапуск игры после каждой правки драйвера, значение
-сверять мостом **до и после** каждого захвата (за отсутствие сверки уже заплачено одним ложным
-замером 22.08 — мод переприменил свой блок посреди серии).
-
-**Если владелец за игрой** — незакрытых игровых дел два: опыт с родным HDR (пункт 1 выше) и замер после
-правок 31.08 (генерация кадров `Auto`, `r.ViewDistanceScale` 2.0 — ни одна не замерена) на той же
-панораме; прибор готов (`_tools/perf-harness/`), сцену «пейзаж» владелец не назвал. Трава закрыта 22.08
-(хроника).
+Порядок: ОДИН опыт за заход, перезапуск игры после каждой правки драйвера, значение сверять
+мостом **до и после** каждого захвата (за отсутствие сверки заплачено ложным замером 22.08).
 
 **Как мерить — обязательное чтение перед любым замером:**
 `D:\work\ai_sandbox\_tools\perf-harness\README.md`. Коротко, но не вместо него:
@@ -274,19 +258,20 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 ## Open bugs
 
-*(none in the project's own code)* — the known defect worth filing when someone picks it up is the
-packaging drift: `package.json` `"files"` omits `Deploy-ModPack.ps1`, so `npm i -g kumm` installs the
-Nexus half without the deploy half (verified: `npm pack --dry-run` → 4 files, 15.2 kB).
+*(none open in the project's own code)*. Оба закрыты: `bugs/01_DONE_*` (замирания Palworld — виновата
+была подкачка на системном диске) и `bugs/02_DONE_*` (агент уничтожил два бинарника Конана,
+восстановлено и доказано хешами, класс закрыт правилом в `AGENT_GUIDE.md` и сторожем
+`verify-install.py`).
 
-Framework tickets (not this project's code, kept visible until an update retires them):
-- ✅ `bugs/KAIF/01_DONE_package_json_reformatted_wholesale.md` — closed by observation 2026-09-05: the 2.5
-  update left `package.json` untouched (`= kaif:* handles already wired — package.json untouched`); the
-  origin switched to byte-exact splicing in 2.3 ([KAIF#16](https://github.com/MikalaiKryvusha/KAIF/issues/16)).
-- The 2.5 update's field report went upstream as [KAIF#48](https://github.com/MikalaiKryvusha/KAIF/issues/48);
-  the bootstrap-route `--rehearsal` rake got a +1 on [KAIF#42](https://github.com/MikalaiKryvusha/KAIF/issues/42);
-  rake R2 (placeholder-filled skills classified as local edits on every interval) is S3 — recorded in the
-  report and `EXP-0035`, no ticket. Expect the same three one-line skill merges at the next `/kaif-update`.
-- The install's own field report went upstream as
-  [KAIF#17](https://github.com/MikalaiKryvusha/KAIF/issues/17); the placeholder-gate rake was a known
-  signal and got a +1 observation on [KAIF#3](https://github.com/MikalaiKryvusha/KAIF/issues/3) rather
-  than a duplicate ticket.
+Известный дефект, ждущий, когда его возьмут: **дрейф упаковки** — `package.json` `"files"` не
+включает `Deploy-ModPack.ps1`, поэтому `npm i -g kumm` ставит половину движка (проверено:
+`npm pack --dry-run` → 4 файла, 15.2 КБ).
+
+Тикеты по самому фреймворку — все доставлены наверх, держатся до ретирования обновлением:
+[KAIF#16](https://github.com/MikalaiKryvusha/KAIF/issues/16) (закрыт наблюдением 2026-09-05),
+[#48](https://github.com/MikalaiKryvusha/KAIF/issues/48) (полевой отчёт 2.5),
+[#42](https://github.com/MikalaiKryvusha/KAIF/issues/42) (+1 к граблям маршрута бутстрап),
+[#17](https://github.com/MikalaiKryvusha/KAIF/issues/17) и
+[#3](https://github.com/MikalaiKryvusha/KAIF/issues/3) (+1 к воротам плейсхолдеров).
+Грабля R2 — S3, живёт в `EXP-0035`; ждать те же три однострочных слияния навыков при следующем
+`/kaif-update`.
