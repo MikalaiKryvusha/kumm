@@ -46,9 +46,29 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 |-------|--------|--------------|
 | Phase 0 — the two halves | ✅ done | v0.1.0 in daily use |
 | Phase 1 — trustworthy unattended | 🔲 next | no tests exist yet; the deterministic core is the target |
-| Phase 2 — the second game | 🟡 подготовлена | Oblivion Remastered: инвентарь снят, манифест на 168 модов исполняется движком; ждёт патча и установки игры |
+| Phase 2 — the second game | 🟢 **доказана на Конане** | движок принял Conan Exiles Enhanced **без единой правки**: слаг `conanexilesenhanced` из манифеста, `game_id` со страницы. Oblivion Remastered остаётся подготовленным (манифест на 168 модов), ждёт патча |
 | Phase 3 — compatibility | 🔲 todo | needs a research doc first |
 | Phase 4 — optimization presets | 🔲 todo | |
+
+### 🗡️ Третья игра — Conan Exiles Enhanced 2.1.1 (заведена 2026-09-08)
+
+Пак: **`D:\work\ai_sandbox\ConanExiles`** · приватный GH `MikalaiKryvusha/conan-exiles-modpack` ·
+игра `D:\Games\Conan Exiles` (перенесена туда 08.09, ярлык исправлен) · библиотека
+`D:\Games\Conan Exiles Mods\mods`. UE **5.6.1**, билд `++exiles+release-CL-373655`, установка не из Steam.
+
+**Не пересказываю — три конспекта в паке, `docs/`:** `01-графика-и-DLSS.md` (перечисления настроек,
+снятые чтением бинарника; лестница приоритетов cvar-ов UE 5.6) · `02-моды-и-инструменты.md`
+(pak+utoc+ucas, `modlist.txt`, анонимный `steamcmd` appid 440900, каталог Nexus, Dev Kit, требование
+к камере) · `03-cvars-конана.md` (**собственное пространство `dw.*` — 264 переменные слоя Dreamworld,
+нигде публично не описанные**; девять семей).
+
+Что уже применено к игре: 4K, кап 141, VSync off, DLSS с пресетом **M** (`r.NGX.DLSS.Preset=13` —
+это и есть «DLSS 4.5»), Reflex, дальность и листва подняты, объёмный туман выключен, **консоль
+починена** (в Enhanced из `Input.ini` пропала секция клавиш). **Ничего из этого ещё не проверено в
+живой игре** — это первое, что делает следующая сессия.
+
+Движку KUMM для Конана не хватает двух вещей: генерации `modlist.txt` из порядка `mods[]` и
+установки мода как ТРОЙКИ файлов (`.pak` + `.utoc` + `.ucas`, переименовывать нельзя).
 
 ---
 

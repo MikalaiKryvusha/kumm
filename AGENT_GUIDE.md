@@ -325,6 +325,37 @@ kind of invention with observation — the owner's own texts instead of a sessio
 style — but it is a CANON document the owner accepts, and it is routed by task type ("writing into the
 owner's artifact"), not by external truth.
 
+### Boundaries for subagents working next to the owner's data (field-paid, S1)
+
+A subagent obeys the boundaries its PROMPT states, not the ones the parent had in mind. On
+2026-09-08 an agent tasked with reading strings out of a game's binaries redirected its own report
+INTO the files it was scanning (`> "$f"` instead of `>> report`), destroying
+`ConanSandbox-Win64-Shipping.exe` (192 MB) and `Dreamworld.dll` (5.6 MB) with a zero exit code. The
+agent broke no rule: the prompt named an OUTPUT path and never named a boundary, so writing into the
+game folder was inside what it had been allowed. `bugs/02_agent_overwrote_game_binaries.md`.
+
+Three obligations, in executable form. They apply to every spawned agent — subagent, workflow agent,
+teammate — whose task comes near a game install, a library of the owner's files, or any tree the
+project does not own:
+
+1. **Put the boundary in the prompt, as a sentence the agent can check itself against.** Copy this
+   line verbatim into the prompt: *"Читать можно всё; ПИСАТЬ можно только в scratchpad и в
+   репозиторий сборки. Ни одна твоя команда не создаёт и не изменяет файл внутри папки игры.
+   Перенаправление оболочки (`>`, `>>`, `tee`) в путь внутри папки игры запрещено."*
+2. **Binary and bulk-file analysis belongs to the MAIN session, done by a script.** A script names
+   its output file as a constant next to the declaration; a shell loop builds the output name from
+   the input name, and that is the whole defect class. Where a subagent must analyse binaries, it
+   receives an EXTRACT produced by the main session, not the path to the original.
+3. **Run the integrity guard before and after any autonomous batch that touches such a tree.** For a
+   game with a checksum manifest that is one command — for Conan
+   `python _config/verify-install.py`, which prints a countable list of files to re-fetch with their
+   expected hashes. No manifest? Snapshot sizes and hashes of the tree's executables first; a
+   diff of two numbers is the check any session performs perfectly.
+
+The reason this sits in the canon rather than in a bug document: the incident cost the owner a
+198 MB re-download and, worse, the belief that autonomous work is safe near his files. That belief
+is the project's actual working capital.
+
 ### Task execution discipline — the fable loop
 
 Any non-trivial task is executed by the **fable-method** loop (`.claude/skills/fable-method/`): classify
