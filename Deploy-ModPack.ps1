@@ -277,6 +277,36 @@ function Clear-Sources {
     $script:SourceCache = @{}
 }
 
+function Expand-Archive7z {
+    # Распаковка архива в папку. .zip - силами .NET, без всякой внешней программы
+    # (правило проекта: нулевые зависимости). Всё остальное (.rar, .7z) - через
+    # 7-Zip, ЕСЛИ он на машине есть: это внешний ИНСТРУМЕНТ, а не зависимость
+    # кода, и его отсутствие не ломает обычный путь. Нет 7-Zip - говорим прямо,
+    # что делать руками, вместо невнятной ошибки про формат.
+    param([string]$Archive, [string]$Dest)
+    $ext = [System.IO.Path]::GetExtension($Archive).ToLower()
+    if ($ext -eq '.zip') {
+        Add-Type -AssemblyName System.IO.Compression.FileSystem
+        [System.IO.Compression.ZipFile]::ExtractToDirectory($Archive, $Dest)
+        return
+    }
+    $exe = @(
+        'C:\Program Files\7-Zip\7z.exe',
+        'C:\Program Files (x86)\7-Zip\7z.exe'
+    ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+    if (-not $exe) {
+        $cmd = Get-Command '7z.exe' -ErrorAction SilentlyContinue
+        if ($cmd) { $exe = $cmd.Source }
+    }
+    if (-not $exe) {
+        throw ("cannot unpack '$ext': 7-Zip not found. Either install it, or unpack this " +
+               "archive by hand into <library>\_unpacked\<name> and point the mod at it " +
+               'with "source": { "folder": "_unpacked/<name>" }.')
+    }
+    & $exe x $Archive "-o$Dest" -y -bso0 -bsp0 | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw "7-Zip failed ($LASTEXITCODE) on $([System.IO.Path]::GetFileName($Archive))" }
+}
+
 function Resolve-ModSource {
     param($Mod)
     # unpack once per action, then reuse for every target
@@ -295,6 +325,22 @@ function Resolve-ModSource {
         }
         $res = [pscustomobject]@{ Path = $p; Archive = $null }
     }
+    elseif (-not $Mod.source.archive -and $Mod.nexusId) {
+        # Маски source.archive нет - находим архив ПО nexusId, разобрав имя по
+        # схеме библиотеки. Так мод-лист можно писать, не зная имён файлов
+        # заранее: они появятся только после первой загрузки с Nexus.
+        $want = [string]$Mod.nexusId
+        $hits = @(Get-ChildItem -Path $ModsDir -File |
+                  Where-Object { (Get-ArchiveModId $_.Name) -eq $want } |
+                  Sort-Object LastWriteTime -Descending)
+        if ($hits.Count -eq 0) { throw "no archive for nexusId $want in $ModsDir (not downloaded yet?)" }
+        if ($hits.Count -gt 1) { Warn "$($Mod.name): $($hits.Count) archives for id $want, using newest -> $($hits[0].Name)" }
+        $dest = Join-Path (Get-TempRoot) $Mod.name
+        if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
+        New-Item -ItemType Directory -Path $dest -Force | Out-Null
+        Expand-Archive7z -Archive $hits[0].FullName -Dest $dest
+        $res = [pscustomobject]@{ Path = $dest; Archive = $hits[0].Name }
+    }
     else {
         $hits = @(Get-ChildItem -Path $ModsDir -Filter $Mod.source.archive -File |
                   Sort-Object LastWriteTime -Descending)
@@ -304,12 +350,80 @@ function Resolve-ModSource {
         $dest = Join-Path (Get-TempRoot) $Mod.name
         if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
         New-Item -ItemType Directory -Path $dest -Force | Out-Null
-        Add-Type -AssemblyName System.IO.Compression.FileSystem
-        [System.IO.Compression.ZipFile]::ExtractToDirectory($hits[0].FullName, $dest)
+        Expand-Archive7z -Archive $hits[0].FullName -Dest $dest
         $res = [pscustomobject]@{ Path = $dest; Archive = $hits[0].Name }
     }
     $script:SourceCache[$Mod.name] = $res
     return $res
+}
+
+# --- Моды-паки: .pak и его спутники .utoc / .ucas ---------------------------
+# Устройство модов в Conan Exiles Enhanced (и в любой игре на IoStore): мод это
+# НЕ один файл, а тройка - .pak плюс .utoc/.ucas, если сборщик собрал его в
+# IoStore. Все они кладутся в <manifest.modsDir> ПЛОСКО и БЕЗ ПЕРЕИМЕНОВАНИЯ:
+# прямое предупреждение Funcom - переименованный .pak не загрузится и не скажет
+# об этом. Порядок загрузки задаёт <manifest.modList>, и его мы генерируем из
+# порядка mods[]. Вся ветка включается только при наличии manifest.modsDir, так
+# что для Palworld не меняется ничего. [NOT-TESTED]
+
+function Get-ArchiveModId {
+    # Имя файла в библиотеке: "<имя> <modId> <версия> <дата> <токен>.<ext>"
+    # (kumm.mjs -> libraryName). Это зеркало parseArchive из kumm.mjs: ищем поле
+    # из четырёх цифр, за которым через одно поле стоит дата ISO. Пара должна
+    # оставаться согласованной - если сменится схема имён, править ОБА места.
+    param([string]$FileName)
+    $base = [System.IO.Path]::GetFileNameWithoutExtension($FileName)
+    $p = $base -split ' '
+    for ($i = 2; $i -lt $p.Count; $i++) {
+        if ($p[$i] -match '^\d{4}-\d{2}-\d{2}T' -and $p[$i - 2] -match '^\d+$') { return $p[$i - 2] }
+    }
+    return $null
+}
+
+function Get-PakFiles {
+    # Ищем рекурсивно: авторы кладут файлы и в корень архива, и в подпапку.
+    param([string]$Path)
+    return @(Get-ChildItem -Path $Path -Recurse -File |
+             Where-Object { $_.Extension -in '.pak', '.utoc', '.ucas' })
+}
+
+function Install-PakMod {
+    # Копирует тройку в modsDir как есть. Возвращает имена .pak (без пути) -
+    # именно они идут в modlist.txt.
+    param($Mod, $Source, $Target, [switch]$Plan)
+    $dir = $script:pack.modsDir -replace '/', '\'
+    $dest = Join-Path $Target.Path $dir
+    $files = Get-PakFiles -Path $Source.Path
+    if ($files.Count -eq 0) { throw "no .pak in the archive - layout changed?" }
+
+    $paks = @()
+    foreach ($f in $files) {
+        if ($f.Extension -eq '.pak') { $paks += $f.Name }
+        if ($Plan) { Say "  would copy $($f.Name)  ->  $dir\$($f.Name)" DarkGray; continue }
+        if (-not (Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force | Out-Null }
+        Copy-Item $f.FullName (Join-Path $dest $f.Name) -Force
+    }
+    return [pscustomobject]@{ Paks = $paks; Files = $files.Count }
+}
+
+function Write-ModList {
+    # Порядок в файле есть порядок загрузки; кто ниже - грузится позже и
+    # перебивает. Меню игры пишет этот же файл само, поэтому раскатка его
+    # ПЕРЕЗАПИСЫВАЕТ: хозяин порядка - манифест, а не меню.
+    param($Target, [string[]]$Paks, [switch]$Plan)
+    $rel = $script:pack.modList -replace '/', '\'
+    $path = Join-Path $Target.Path $rel
+    if ($Plan) {
+        Say "  would write $rel  ($($Paks.Count) mods, in manifest order)" DarkGray
+        foreach ($p in $Paks) { Say "      $p" DarkGray }
+        return
+    }
+    $parent = Split-Path $path -Parent
+    if (-not (Test-Path $parent)) { New-Item -ItemType Directory -Path $parent -Force | Out-Null }
+    # ASCII без BOM: игра читает этот файл сама, и BOM в первой строке съел бы
+    # имя первого мода (класс "текст через границу", BUG_FIXING_FRAMEWORK).
+    Set-Content -Path $path -Value $Paks -Encoding ASCII
+    Ok "$rel  ($($Paks.Count) mods, in manifest order)"
 }
 
 function Copy-Tree {
@@ -531,8 +645,46 @@ function Invoke-VerifyTarget {
             }
         }
     }
+    # Моды-паки не перечисляют verify поимённо: имена .pak известны только после
+    # распаковки архива. Поэтому проверяем их ПО modlist.txt, и заодно ловим то,
+    # чего поимённый список не поймал бы никогда - осиротевшие паки.
+    if ($script:pack.modList) {
+        $r = Test-ModList -Target $Target
+        $present += $r.Present; $missing += $r.Missing
+    }
+
     $emu = Test-SteamEmu -Target $Target
     $present += $emu.Present; $missing += $emu.Missing
+    return [pscustomobject]@{ Present = $present; Missing = $missing }
+}
+
+function Test-ModList {
+    # Три вопроса, и третий важнее первых двух:
+    #   1. modlist.txt на месте?
+    #   2. каждый перечисленный в нём .pak действительно лежит в modsDir?
+    #   3. НЕТ ЛИ в modsDir паков, которых нет в списке? Такой пак не загрузится
+    #      (игра читает только список), но будет лежать и путать - а поимённый
+    #      verify его не увидит по определению.
+    param($Target)
+    $present = 0; $missing = 0
+    $listRel = $script:pack.modList -replace '/', '\'
+    $listPath = Join-Path $Target.Path $listRel
+    if (-not (Test-Path $listPath)) { Bad "modlist: $listRel"; return [pscustomobject]@{ Present = 0; Missing = 1 } }
+    Ok "modlist: $listRel"; $present++
+
+    $dir = Join-Path $Target.Path ($script:pack.modsDir -replace '/', '\')
+    $listed = @(Get-Content $listPath | ForEach-Object { $_.Trim() } | Where-Object { $_ })
+    foreach ($p in $listed) {
+        if (Test-Path (Join-Path $dir $p)) { Ok "modlist: $p"; $present++ }
+        else { Bad "modlist names a missing pak: $p"; $missing++ }
+    }
+
+    if (Test-Path $dir) {
+        $onDisk = @(Get-ChildItem $dir -File -Filter '*.pak' | ForEach-Object { $_.Name })
+        foreach ($f in $onDisk) {
+            if ($listed -notcontains $f) { Bad "pak not in modlist (will NOT load): $f"; $missing++ }
+        }
+    }
     return [pscustomobject]@{ Present = $present; Missing = $missing }
 }
 
@@ -560,10 +712,16 @@ function Invoke-RemoveTarget {
 function Invoke-DeployTarget {
     param($Target, $Mods, [switch]$Plan)
     $failed = @(); $files = 0; $installed = 0
+    $script:PakOrder = @()
     foreach ($m in $Mods) {
         try {
             $src = Resolve-ModSource -Mod $m
             $total = 0
+            if ($m.kind -eq 'pak' -and $script:pack.modsDir) {
+                $r = Install-PakMod -Mod $m -Source $src -Target $Target -Plan:$Plan
+                $total += $r.Files
+                $script:PakOrder += $r.Paks
+            }
             foreach ($step in $m.install) {
                 $from = if ($step.from -eq '.') { $src.Path } else { Join-Path $src.Path ($step.from -replace '/', '\') }
                 if (-not (Test-Path $from)) { throw "archive layout changed - '$($step.from)' not found" }
@@ -583,9 +741,20 @@ function Invoke-DeployTarget {
         }
     }
 
-    # official mod support toggle - the game writes this itself, but seed it anyway
+    # modlist.txt - порядок загрузки, собранный из порядка mods[]. Пишется ПОСЛЕ
+    # всех модов, чтобы порядок был полным, и только если манифест его просит.
+    if ($script:pack.modList -and $script:PakOrder.Count -gt 0) {
+        try { Write-ModList -Target $Target -Paks $script:PakOrder -Plan:$Plan }
+        catch { Bad "modlist: $($_.Exception.Message)"; $failed += 'modlist.txt' }
+    }
+
+    # official mod support toggle - the game writes this itself, but seed it anyway.
+    # ТОЛЬКО ДЛЯ PALWORLD. Признак - отсутствие modsDir в манифесте: игры, которые
+    # грузят моды списком паков (Conan Exiles Enhanced), этот ключ объявляют, и
+    # файл с именем Pal* в их папке был бы мусором. Найдено фикстурой 08.09.2026:
+    # раскатка в цель Конана честно создавала там Mods\PalModSettings.ini.
     $palModSettings = Join-Path $Target.Path 'Mods\PalModSettings.ini'
-    if (-not (Test-Path $palModSettings) -and -not $Plan) {
+    if (-not $script:pack.modsDir -and -not (Test-Path $palModSettings) -and -not $Plan) {
         New-Item -ItemType Directory -Path (Split-Path $palModSettings -Parent) -Force | Out-Null
         @('[PalModSettings]', 'bGlobalEnableMod=True', 'WorkshopRootDir=', 'ConfigVersion=1.0') |
             Set-Content -Path $palModSettings -Encoding ASCII
@@ -600,10 +769,46 @@ function Invoke-DeployTarget {
 }
 
 # ---------------------------------------------------------------- Engine.ini
+function Get-EngineIniPaths {
+    # Куда ложится Engine.ini - свойство ИГРЫ, а не движка, и случаев два:
+    #   * путь АБСОЛЮТНЫЙ (Palworld: %LOCALAPPDATA%\Pal\...) - файл ОДИН на
+    #     машину и общий для всех установок;
+    #   * путь ОТНОСИТЕЛЬНЫЙ (Conan: ConanSandbox\Saved\Config\Windows\...) -
+    #     файл СВОЙ у каждой установки, внутри её папки.
+    # Раньше путь всегда считался абсолютным. Цена: -Verify на паке Конана
+    # печатал "not found" для существующего файла, а -Deploy -WithEngineIni
+    # записал бы конфиг относительно ТЕКУЩЕЙ папки, то есть куда попало.
+    # Манифест без engineIni теперь просто даёт пустой список, а не падение.
+    param($TargetList)
+    if (-not $pack.engineIni -or -not $pack.engineIni.target) { return @() }
+    $raw = [Environment]::ExpandEnvironmentVariables(($pack.engineIni.target -replace '/', '\'))
+    if ([System.IO.Path]::IsPathRooted($raw)) {
+        return @([pscustomobject]@{ Path = $raw; Shared = $true; Owner = '' })
+    }
+    return @(foreach ($t in $TargetList) {
+        [pscustomobject]@{ Path = (Join-Path $t.Path $raw); Shared = $false; Owner = $t.Name }
+    })
+}
+
+function Get-EngineIniHead {
+    param($Paths)
+    if ($Paths.Count -eq 0) { return 'Engine.ini (not described in the manifest)' }
+    if ($Paths[0].Shared) { return 'Engine.ini (one file per machine, shared by every install above)' }
+    return 'Engine.ini (one file per game install)'
+}
+
 function Write-EngineIni {
-    param([switch]$Plan)
-    Head 'Engine.ini (shared by every Palworld install on this PC)'
-    $target = [Environment]::ExpandEnvironmentVariables(($pack.engineIni.target -replace '/', '\'))
+    param($TargetList, [switch]$Plan)
+    $paths = Get-EngineIniPaths -TargetList $TargetList
+    Head (Get-EngineIniHead $paths)
+    if ($paths.Count -eq 0) { Say '  manifest has no engineIni - nothing to write' DarkGray; return }
+    foreach ($p in $paths) { Write-EngineIniFile -Destination $p.Path -Owner $p.Owner -Plan:$Plan }
+}
+
+function Write-EngineIniFile {
+    param([string]$Destination, [string]$Owner = '', [switch]$Plan)
+    $target = $Destination
+    if ($Owner) { Say "  -> $Owner" DarkGray }
 
     # engineIni.file - файл сборки копируется как есть, байт в байт. Так и
     # надо, когда Engine.ini давно перерос "база с Nexus + добавка": в нём
@@ -669,18 +874,26 @@ function Write-EngineIni {
 }
 
 function Test-EngineIni {
-    Head 'Engine.ini (shared by every Palworld install on this PC)'
-    $ini = [Environment]::ExpandEnvironmentVariables(($pack.engineIni.target -replace '/', '\'))
-    if (Test-Path $ini) {
-        if (Select-String -Path $ini -Pattern '^\[SystemSettings\]' -Quiet) {
-            Ok "present with [SystemSettings]  ($ini)"
-            return $true
-        }
-        Warn "present but has no [SystemSettings] block  ($ini)"
-        return $false
+    param($TargetList)
+    $paths = Get-EngineIniPaths -TargetList $TargetList
+    Head (Get-EngineIniHead $paths)
+    if ($paths.Count -eq 0) { Say '  manifest has no engineIni - nothing to check' DarkGray; return $true }
+
+    $allGood = $true
+    foreach ($p in $paths) {
+        $ini = $p.Path
+        $who = if ($p.Owner) { "$($p.Owner): " } else { '' }
+        if (-not (Test-Path $ini)) { Warn "$who`not found: $ini"; $allGood = $false; continue }
+        # Секция, в которой живут cvar-ы, у разных игр РАЗНАЯ: у Palworld это
+        # [SystemSettings], у Conan Exiles - [/Script/ConanSandbox.SystemSettings]
+        # (доказано словами самой игры в её журнале). Поэтому имя секции берём из
+        # манифеста, а [SystemSettings] оставляем умолчанием для старых паков.
+        $section = if ($pack.engineIni.section) { $pack.engineIni.section } else { '[SystemSettings]' }
+        $pattern = '^' + [regex]::Escape($section)
+        if (Select-String -Path $ini -Pattern $pattern -Quiet) { Ok "$who`present with $section  ($ini)" }
+        else { Warn "$who`present but has no $section block  ($ini)"; $allGood = $false }
     }
-    Warn "not found: $ini"
-    return $false
+    return $allGood
 }
 
 # --------------------------------------------------------------- action loop
@@ -701,7 +914,7 @@ function Invoke-Action {
     $script:CheckedUserConfig = @()
 
     if ($Action -eq 'engineini') {
-        try { Write-EngineIni -Plan:$Plan; return $false }
+        try { Write-EngineIni -TargetList $TargetList -Plan:$Plan; return $false }
         catch { Bad $_.Exception.Message; return $true }
     }
 
@@ -761,15 +974,15 @@ function Invoke-Action {
         }
 
         if ($Action -eq 'verify') {
-            if (-not (Test-EngineIni)) { $problems = $true }
+            if (-not (Test-EngineIni -TargetList $live)) { $problems = $true }
         }
         elseif ($Action -eq 'deploy') {
             if ($AlsoEngineIni) {
-                try { Write-EngineIni -Plan:$Plan }
+                try { Write-EngineIni -TargetList $live -Plan:$Plan }
                 catch { Bad $_.Exception.Message; $problems = $true }
             }
             else {
-                Say "`nEngine.ini not touched (it lives in %LOCALAPPDATA% and is shared by every build above)." DarkGray
+                Say "`nEngine.ini not touched (pass -WithEngineIni to write it)." DarkGray
             }
         }
         elseif ($Action -eq 'remove') {
@@ -788,7 +1001,13 @@ function Invoke-Action {
     Say ''
     if ($problems) { Bad 'finished with problems (see above)' }
     elseif ($Plan) { Say 'Dry run clean. Nothing was written.' Green }
-    elseif ($Action -eq 'deploy') { Say 'Deploy complete. Launch the game, then check Pal\Binaries\Win64\ue4ss\UE4SS.log.' Green }
+    elseif ($Action -eq 'deploy') {
+        # Куда смотреть после запуска - зависит от игры, а не от движка.
+        if ($script:pack.modsDir) {
+            Say "Deploy complete. Launch the game, then check the mod list in the main menu (Mods) and $($script:pack.modList)." Green
+        }
+        else { Say 'Deploy complete. Launch the game, then check Pal\Binaries\Win64\ue4ss\UE4SS.log.' Green }
+    }
     elseif ($Action -eq 'verify') { Say 'Verify clean.' Green }
     else { Say 'Remove complete.' Green }
 

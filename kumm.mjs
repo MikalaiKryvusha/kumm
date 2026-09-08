@@ -477,9 +477,17 @@ function parseNexusName(base) {
 function parseArchive(fileName) {
   const base = path.basename(fileName, path.extname(fileName))
   const parts = base.split(' ')
-  for (let i = 0; i < parts.length - 1; i++) {
-    if (/^\d{4}$/.test(parts[i]) && /^\d{4}-\d{2}-\d{2}T/.test(parts[i + 2] || '')) {
-      return { modId: parts[i], version: parts[i + 1], uploaded: parts[i + 2] }
+  // Якорь - МЕТКА ВРЕМЕНИ, а не длина id. Она стоит на фиксированном месте от
+  // modId (схема libraryName: "<имя> <modId> <версия> <дата> <токен>"), тогда
+  // как само имя файла произвольно и запросто содержит и числа, и точки
+  // ("Camera Control 1.0.4 3659 1.0.4 ...", "Palworld - ... (No VRR) 2972 13 ...").
+  // Раньше здесь искался modId из РОВНО четырёх цифр: это работало для Palworld
+  // (id 2972..3762) и молча не находило ничего у игр с короткими id - у Conan
+  // Exiles Enhanced они одно- и двузначные (1, 29, 41), то есть НИ ОДИН его
+  // архив не опознавался.
+  for (let i = 2; i < parts.length; i++) {
+    if (/^\d{4}-\d{2}-\d{2}T/.test(parts[i]) && /^\d+$/.test(parts[i - 2])) {
+      return { modId: parts[i - 2], version: parts[i - 1], uploaded: parts[i] }
     }
   }
   return parseNexusName(base)
