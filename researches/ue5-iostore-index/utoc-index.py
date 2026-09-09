@@ -109,32 +109,71 @@ def _parse_at(data, start):
         raise ValueError('обошли %d путей из %d заявленных' % (len(out), nfiles))
     return mount_point, out
 
-def parse(path):
-    """Перебрать все кандидаты на точку монтирования; вернуть первый разбор, который сошёлся."""
+def parse_all(path):
+    """Все индексы каталога, какие есть в файле, — в порядке появления.
+
+    ⚠️ ВОЗВРАЩАЕТ СПИСОК, А НЕ ПЕРВУЮ НАХОДКУ. Оплачено 2026-09-09: мод Мастерской
+    `UIMod_Hosav.pak` оказался ОБЁРТКОЙ — внутри лежат три полноценных контейнера
+    IoStore (Windows, WindowsServer, LinuxServer). Прибор возвращал первый
+    разобравшийся и молчал об остальных, то есть выдавал СЕРВЕРНУЮ сборку мода за
+    весь мод: 199 файлов вместо 204, без шейдеров и без `Slate/Hyborian_Copy`.
+    Ошибка того же класса, что EXP-0058 — частичный разбор неотличим от полного,
+    если не считать. Поэтому берём ВСЕ и называем каждый по смещению.
+    """
     data = open(path, 'rb').read()
     starts, off = [], data.find(b'../')
     while off != -1:
         if off >= 4:
             starts.append(off - 4)                 # четыре байта назад — поле длины FString
         off = data.find(b'../', off + 1)
+    found, claimed = [], set()
     for start in starts:
         try:
-            return _parse_at(data, start)
+            mp, files = _parse_at(data, start)
         except Exception:
             continue
-    return None
+        # Один и тот же индекс может «зацепиться» с двух соседних якорей —
+        # различаем по смещению начала, а не по содержимому: два контейнера
+        # внутри одного пака бывают и полностью одинаковыми (серверные сборки).
+        if start in claimed:
+            continue
+        claimed.add(start)
+        found.append((start, mp, files))
+    return found
+
+def parse(path):
+    """Совместимость: первый разобравшийся индекс или None."""
+    found = parse_all(path)
+    if not found:
+        return None
+    return found[0][1], found[0][2]
 
 if __name__ == '__main__':
+    # ⚠️ ВЫВОД ТОЛЬКО В UTF-8, И ЭТО НЕ ВКУСОВЩИНА. Оплачено 2026-09-09: прогон
+    # по 44 пакам сборки Конана оборвался на `MSCasaDesFlores_Nails_Enhanced` —
+    # в путях мода есть `ñ`, а перенаправление на этой машине пишет системной
+    # кодировкой cp1251, где такого символа нет. Прибор упал на 25-м паке из 44,
+    # и половина каталога выглядела бы полным каталогом. Тот же класс, что
+    # EXP-0058: частичный результат неотличим от полного, если его не считать.
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except AttributeError:
+        pass                                       # питон старее 3.7 — оставляем как есть
     total = 0
     for p in sys.argv[1:]:
-        r = parse(p)
+        found = parse_all(p)
         short = os.path.basename(p)
-        if r is None:
+        if not found:
             print('# %s: индекс каталога не найден' % short); continue
-        mp, files = r
-        total += len(files)
-        print('# %s: точка монтирования=%s файлов=%d' % (short, mp, len(files)))
-        base = mp.rstrip('/')
-        for f in files:
-            print(base + '/' + f)
+        if len(found) > 1:
+            # Вложенный пак: сводка сразу говорит, что контейнеров несколько,
+            # иначе читатель примет список одного из них за весь мод.
+            print('# %s: ВЛОЖЕННЫЙ ПАК — индексов внутри: %d' % (short, len(found)))
+        for start, mp, files in found:
+            total += len(files)
+            print('# %s@%d: точка монтирования=%s файлов=%d' % (short, start, mp, len(files)))
+            base = mp.rstrip('/')
+            for f in files:
+                print(base + '/' + f)
     print('ВСЕГО %d' % total, file=sys.stderr)

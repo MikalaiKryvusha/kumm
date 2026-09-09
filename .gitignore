@@ -21,3 +21,7 @@ KAIF_ADAPTATION_TASK.superseded.md
 .kaif/update-journal.json
 .kaif/guarded-loop.json
 .kaif/update-rehearsal.json
+
+# Кэш питона от приборов в researches/ — мусор сборки, в репозиторий не идёт
+__pycache__/
+*.pyc
