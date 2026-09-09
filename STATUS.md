@@ -386,6 +386,7 @@ python _config/read-applied-cvars.py && python _config/check-conflicts.py
 [KAIF#16](https://github.com/MikalaiKryvusha/KAIF/issues/16) (закрыт наблюдением 2026-09-05),
 [#48](https://github.com/MikalaiKryvusha/KAIF/issues/48) (полевой отчёт 2.5),
 [#42](https://github.com/MikalaiKryvusha/KAIF/issues/42) (+1 к граблям маршрута бутстрап),
+[#57](https://github.com/MikalaiKryvusha/KAIF/issues/57) (термин «baton» → «handover»: не индустриальный и превращается в «батон» при переводе — заведён по прямому указанию владельца 09.09.2026),
 [#17](https://github.com/MikalaiKryvusha/KAIF/issues/17) и
 [#3](https://github.com/MikalaiKryvusha/KAIF/issues/3) (+1 к воротам плейсхолдеров).
 Грабля R2 — S3, живёт в `EXP-0035`; ждать те же три однострочных слияния навыков при следующем
