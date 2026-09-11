@@ -203,6 +203,11 @@ execution — фаза 4 эпика. ⚠️ **Игра отвергает пак
 > Decisions the agent must not make alone (brand/UX/architecture), or actions only the human can do
 > (test on real hardware, external accounts). Filed in `interviews/` and `homeworks/`.
 
+- ❓ **Интервью #002 — вычитка русского перевода мода «Hosav's Custom UI», 2026-09-12.**
+      172 подписи интерфейса с предложенным переводом (термины сверены со словарём игры из кита)
+      и три вопроса формы (согласование · буквы компаса · тон подсказок). После ответа — опыт
+      «свой `.locres` поверх мода» (фаза 2 эпика `plans/06`). Файл: `interviews/interview_002_hosav_ru_perevod.md`;
+      источник строк — `researches/conan-devkit/hosav-ftext.csv` (794 ключа, 294 уникальных).
 - ❓ **Интервью #001 — метрика поставки и каденция молитвы (KAIF 2.5), 2026-09-05.** Два вопроса, оба
       — настройки владельца, которые агент не выбирает сам: (1) ОДНА метрика поставки для
       `MASTER_PLAN.md` — предложен вектор «автономные проверки ядра 0 из 5 · игры на одном манифесте

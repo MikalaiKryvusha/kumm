@@ -1,0 +1,61 @@
+Follower               -            NOT IN GAME
+Followers              Exiles_UI    Спутники (6)
+Thrall                 Exiles_UI    Раб (2)
+Corruption             Exiles_UI    Скверна (8) | скверна (1)
+Stamina                Exiles_UI    Stamina (2)
+Endurance              Exiles_UI    Выносливость (2)
+Shelter                -            NOT IN GAME
+Consciousness          -            NOT IN GAME
+Encumbrance            -            NOT IN GAME
+Bazaar                 Exiles_UI    Базар (2)
+Buffs                  -            NOT IN GAME
+Hotbar                 -            NOT IN GAME
+Compass                Exiles_Items Компас (4)
+Minimap                -            NOT IN GAME
+Level                  Exiles_UI    Уровень (11)
+Health                 Exiles_UI    Здоровье (4)
+Mount                  Exiles_UI    Скакун (2)
+Party                  -            NOT IN GAME
+Clan                   Exiles_UI    Клан (5)
+Server                 Exiles_UI    Сервер (7)
+Ping                   Exiles_UI    Пинг (2)
+Temperature            Exiles_UI    Температура (2)
+Food                   Exiles_UI    Еда (4)
+Water                  Exiles_UI    Water (2)
+Weight                 -            NOT IN GAME
+Armor                  Exiles_UI    Доспехи (5) | Доспех (4)
+Damage                 Exiles_UI    Урон (4)
+Experience             -            NOT IN GAME
+Crafting               Exiles_UI    Создание предметов (12) | Создание Предметов (4)
+Time of Day            -            NOT IN GAME
+Settings               Exiles_UI    Настройки (5)
+Save                   Exiles_UI    Сохранить (2)
+Close                  Exiles_UI    Закрыть (14)
+Cancel                 Exiles_UI    Отмена (32)
+OK                     Exiles_UI    ОК (2)
+Remove                 Exiles_UI    Удалить (4)
+Leave                  -            NOT IN GAME
+Disband                -            NOT IN GAME
+Invite                 -            NOT IN GAME
+Hue                    Exiles_UI    Тон (2)
+Saturation             Exiles_UI    Saturation (2) | Насыщенность (2)
+Value                  Exiles_UI    Стоимость (3)
+Alpha                  Exiles_UI    Вожак (6)
+Metric                 -            NOT IN GAME
+Imperial               -            NOT IN GAME
+Healthbar              -            NOT IN GAME
+Armor Penetration      -            NOT IN GAME
+Damage Reduction       -            NOT IN GAME
+Target                 -            NOT IN GAME
+Enemy                  -            NOT IN GAME
+Ally                   -            NOT IN GAME
+Disabled               Exiles_UI    Не работает (2) | Отключено (1)
+Enabled                Exiles_UI    Включено (1)
+Small                  Exiles_UI    Small (2)
+Medium                 Exiles_UI    Средний (22)
+Large                  Exiles_UI    Large (2)
+Top                    -            NOT IN GAME
+Middle                 -            NOT IN GAME
+Bottom                 -            NOT IN GAME
+Unavailable            Exiles_UI    Недоступен (1)
+Crippled               Exiles_UI    Увечье (4)
