@@ -74,8 +74,19 @@
   сторож журнала игры (`MountMod`, `ModCompat`, `ValidateMod`).
 - **Тестовый груз:** мод-переопределение одной таблицы данных. Какой именно и с какими
   числами — развилка 1 (владелец).
-- **Главный риск (а):** кит новее игры (CL 374980 beta против CL 373655). Проверяется ровно
-  этой фазой на выброшенном сохранении; откат — одна строка `modlist.txt`.
+- **Главный риск (а):** кит новее игры (CL 374980 beta против CL 373655), а игра по своим же
+  строкам отвергает пакет НОВЕЕ себя (*«Package is unloadable … Version is too new /
+  LicenseeVersion is too new / Custom version is too new»*, *«Incompatible Mods Detected»*).
+  Правило: точное совпадение не нужно, нужно «не новее». **Шаг 0 фазы — офлайн-сверка:** блок
+  версий в `.uheader` мода, который грузится сегодня (Chest Labels, ревизия кита 1001), против
+  блока версий пакета, скукованного нашим китом на пустом моде. Совпало — фаза идёт; не
+  совпало — ждать обновления игры до ветки кита либо искать кит релизной ветки. Дальше —
+  выброшенное сохранение; откат — одна строка `modlist.txt`.
+- **Готовый образец (MIT):** `jvdberg1/exileforge` — PowerShell + Unreal-Python CLI, строит
+  мод потолка уровня без окна на `5.6.1-366792`; проверенная строка
+  `RunUAT.bat -NoCompile BuildMod -Mod=<М> -Project="<кит>/UE4/ConanSandbox.uproject" -Cook -Pak
+  -Compress -ScriptDir="<кит>/UE4/"` (**`-ScriptDir` — корень `UE4/`**, без него «Failed to find
+  command BuildMod»). Брать как отправную точку, не переписывать с нуля.
 - **Ворота:** A3, A4; снимок «Хар-ки» с ожидаемым числом опыта.
 
 ### Фаза 2 — Локализация 🔲
@@ -95,6 +106,14 @@
 - **Цель фазы:** интерактивный канал в запущенный редактор для задач, где командлет слишком
   медленный (каждый запуск — ~2 мин инициализации): `devkit-remote.py "<python>"` через
   remote execution; оценка готовых MCP-серверов по веб-разведке.
+- **Что известно из разведки (`researches/conan-devkit/web-recon.md` §8):** в ките лежат
+  ЗАГЛУШКИ без бинарников — Epic «Unreal MCP» (`ModelContextProtocol`), AI Assistant, Remote
+  Control, CmdLinkServer; собрать их нельзя (installed build без компилятора). Живой канал один —
+  Python remote execution (UDP `239.0.0.1:6766` + TCP `127.0.0.1:6776`). Кандидаты MCP без
+  компиляции плагина: `radial-hks/mcp-unreal-server` (чистый remote-exec, Apache-2.0);
+  прекомпилированные под 5.8 (`GenOrca/unreal-mcp`, `ChiR24/Unreal_mcp`) — риск несовпадения
+  ABI с лицензиатской 5.8.2. Все, кому нужен свой C++-плагин (`chongdashu/unreal-mcp`,
+  `UnrealGenAISupport`, `unreal-ai-connection`) — мимо.
 - **Условие:** ОКОННЫЙ запуск редактора — плановое событие с владельцем (30–60 мин шейдеров,
   окно отбирает экран удалённого стола). Развилка 2.
 - **Ворота:** одна команда из чата возвращает ответ живого редактора за ≤ 5 с.
@@ -110,7 +129,7 @@
 | `dt-export.py` | таблица данных → CSV; список таблиц по маске | `devkit-run.ps1 -Python dt-export.py -- /Game/Systems/Progression/DT_ExperienceSystemLevel` | Unreal Python внутри кита | имена колонок несут GUID-хвосты (`LevelStart_3_AA3E…`) — резать до подчёркивания |
 | `pak-inspect.py` | `-List`/`-Extract` обёртки и внутреннего контейнера, `modinfo.json`, матрица ванильных путей | `python pak-inspect.py <pak> [--extract <dir>]` | `UnrealPak.exe` из кита | писать ТОЛЬКО в скретчпад/пак; папка игры — только чтение |
 | `mod-skeleton.py` | папка мода в `UE4/Content/Mods/<Имя>/` со `modinfo.json` и `CookInfo.ini` | `python mod-skeleton.py <Имя> --override /Game/...` | имя мода — слово владельца (идентичность) | `active.txt` — только один активный мод |
-| `build-mod.ps1` | Cook → Pak → FinalPak через `RunUAT BuildMod` | `.\build-mod.ps1 -Mod <Имя>` | `-ScriptDir=UE4\Build\ModDevKit.Automation`, `UE_SKIP_UBT_SDK_SETUP=1` | `UnrealPak 5.8` не перезаписывает выход; три платформы всегда |
+| `build-mod.ps1` | Cook → Pak → FinalPak через `RunUAT BuildMod` | `.\build-mod.ps1 -Mod <Имя>` | `-ScriptDir="<кит>/UE4/"` (проверено exileforge; `UE4\Build\ModDevKit.Automation` — запасной), `UE_SKIP_UBT_SDK_SETUP=1` ставит сам скрипт | `UnrealPak 5.8` не перезаписывает выход; три платформы всегда; длинные пути ломают кук |
 | `loc-audit.py` | манифест локализации против `ru/*.locres`; `FText` модов без ключей | `python loc-audit.py --target Exiles_UI` | разбор `.locres` (формат открытый) | `.archive` в ките нет — только компилят |
 | `devkit-env.py` | страж: версия кита vs игры, место на дисках, живой `zenserver`, USN-журнал | `python devkit-env.py` | — | версии РАЗНЫЕ уже сейчас; страж не чинит, а называет |
 | `devkit-remote.py` (фаза 4) | команда в живой редактор через remote execution | `python devkit-remote.py "<python>"` | запущенный редактор с включённым плагином | окно редактора на экране владельца |

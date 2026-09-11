@@ -31,7 +31,8 @@
 ## Что уже доказано (не переделывать)
 
 - Запуск: `UnrealEditor-Cmd.exe <uproject> -run=PythonScript -Script=<py> -EnablePlugins=PythonScriptPlugin -unattended -nopause -NullRHI -nosplash -stdout -FullStdOutLogOutput -abslog=<log>` — 1 мин 52 с, скрипт 20 мс. Образец: `researches/conan-devkit/smoke-dump-xp.py`.
-- В `unreal.DataTableFunctionLibrary` есть `get_data_table_row_names`, `get_data_table_column_names`, `get_data_table_column_as_string`; **нет** `export_data_table_to_csv` (проверено — `AttributeError`). CSV собираем сами из колонок.
+- В `unreal.DataTableFunctionLibrary` есть `get_data_table_row_names`, `get_data_table_column_names`, `get_data_table_column_as_string`; **нет** `export_data_table_to_csv` (проверено — `AttributeError`). По веб-разведке (`exileforge/tools/ef_editor.py`) существует **`export_data_table_to_csv_file`** и обратный `fill_data_table_from_csv_string` — проверить первым; свой сборщик CSV из колонок остаётся запасным.
+- Офлайн-сверка версий (шаг 0 фазы 1, готовить здесь): у мода, который грузится сегодня, распакованный `.uheader` несёт блок версий (versioned cook); тот же блок у пакета, скукованного нашим китом, обязан быть НЕ НОВЕЕ. Прибор — `pak-inspect.py versions <uheader>`.
 - `UnrealPak.exe <обёртка>.pak -List | -Extract <dir>` и `UnrealPak.exe <Мод>-Windows.utoc -List | -Extract <dir>` работают; распаковка контейнера даёт `.uheader` + `.uexp` (+ `.ubulk`) на ассет — Zen-формат, содержимое расжато.
 
 ## Шаги

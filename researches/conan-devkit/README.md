@@ -177,21 +177,24 @@ cook.
 ### 3.5 Channels into a RUNNING editor — the raw material for a CLI or an MCP (owner's second question)
 
 Nothing Conan-specific is attached to this kit (no MCP, no CLI beyond `RunUAT`). What the kit
-DOES ship, all standard Unreal, all usable by an agent:
+DOES ship — checked plugin by plugin for a `Binaries/` folder (an installed licensee build has
+no compiler, so a plugin without binaries is a stub that cannot be loaded):
 
-| Channel | What it is | State in the kit |
+| Channel | What it is | State in the kit (`ls <plugin>/Binaries`) |
 |---|---|---|
-| **Python remote execution** | `remote_execution.py`: UDP multicast discovery (`239.0.0.1:6766`) + TCP command socket (`127.0.0.1:6776`); modes ExecuteFile / ExecuteStatement / EvaluateStatement. This is what most community "UE MCP servers" wrap. | plugin present, disabled by default; enable with `-EnablePlugins` or in the project |
-| **Remote Control API** | HTTP + WebSocket server to call functions and read/write properties (`Engine/Plugins/VirtualProduction/RemoteControl`, plus `RemoteControlWebInterface`) | present, not enabled |
-| **CmdLink** | `CmdLink.exe` (client, in Binaries) + `Engine/Plugins/CmdLinkServer` — send console/commandlet-style commands to a live editor; `CmdLink.exe -help` answers "Failed to connect to UE" (no editor running — expected) | plugin explicitly **disabled** in `ConanSandbox.uproject` (`"CmdLinkServer": false`) |
-| **AI Assistant** | `Engine/Plugins/Experimental/AIAssistant` — Epic's experimental plugin ("Version 1.0", `EnabledByDefault: false`, empty description, only `Config/` + `Resources/`, no binaries in this kit — grep finds no `modelcontextprotocol` string) | present as a stub; what it does in 5.8 → web recon §8 |
-| **Commandlets** | the headless route above — no live editor needed at all | proven |
+| **Python remote execution** | `remote_execution.py`: UDP multicast discovery (`239.0.0.1:6766`) + TCP command socket (`127.0.0.1:6776`); modes ExecuteFile / ExecuteStatement / EvaluateStatement. This is what the remote-exec-based "UE MCP servers" wrap. | **HAS BINARIES — the one live channel.** Enable per run with `-EnablePlugins=PythonScriptPlugin`; "Remote Execution" itself is a project setting (no `RemoteExecution` key in the kit's ini yet) |
+| **Commandlets** | the headless route above — no live editor needed at all | proven (§7) |
+| **Epic "Unreal MCP"** | `Engine/Plugins/Experimental/ModelContextProtocol` — *"Anthropic MCP (Model Context Protocol) server implementation for Unreal Engine"*, HTTP+SSE on `127.0.0.1:8000/mcp`, console `ModelContextProtocol.StartServer` (Epic docs, `web-recon.md` §8) | **NO BINARIES** — `.uplugin` + `Resources` only; same for its `ToolsetRegistry`/`AllToolsets` dependencies. A stub. |
+| **AI Assistant** | `Engine/Plugins/Experimental/AIAssistant` — Epic's hosted-LLM editor assistant (5.7+); an MCP *client*, not a server | **NO BINARIES** — stub |
+| **Remote Control API** | HTTP `:30010` / WebSocket `:30020` property and function access (`Engine/Plugins/VirtualProduction/RemoteControl`) | **NO BINARIES** — stub |
+| **CmdLink** | `CmdLink.exe` client is in `Binaries/Win64`; server is `Engine/Plugins/CmdLinkServer` | client present, **server NO BINARIES**; also `"CmdLinkServer": false` in the uproject |
 
 Conclusion for the owner: **a CLI we get today by wrapping commandlets (no editor window ever
-opens); an interactive channel (MCP-shaped) needs an editor left running — and that editor's
-first launch compiles shaders for 30–60 min and takes the screen over the remote desktop
-(`EXP`, owner-works-over-remote-desktop).** Whether a ready-made UE MCP server works against a
-licensee 5.8 build is `NOT YET` — §8.
+opens). An interactive, MCP-shaped channel is possible ONLY through Python remote execution
+into a running `-ModDevKit` editor — and that editor's first windowed launch compiles shaders
+for 30–60 min and takes the screen over the remote desktop.** Of the community MCP servers,
+the ones that need no plugin compile (they drive remote execution) are the only candidates for
+this licensee build — `web-recon.md` §8 lists them; the compiled-plugin ones are out.
 
 ## 4. The mod's anatomy on disk (what our tools must produce and consume)
 
@@ -330,13 +333,45 @@ the shape of `FText` localization keys (`NSLOCTEXT`-style key per text), i.e. th
 Route 3 — re-cooking the author's widgets with Russian text — is possible with the kit but is
 the worst: it forks the mod and dies on every update.
 
-## 8. Web recon — `NOT YET` (a subagent is sweeping; its report lands here as a section)
+## 8. Web recon — done 2026-09-12, full digest in `web-recon.md` (every claim with its URL)
 
-Questions in flight: official Enhanced modding workflow · headless cook and the
-"Found no script module records" breakage · kit/game version mismatch rules · DataTable modding
-practice (ModController, row merging) for Enhanced · localization modding for Enhanced ·
-open-source Enhanced mods (Kharzette/ConanMods) and UE5 licensee package readers · MCP/CLI
-attempts (Epic AI Assistant, UnrealMCP and kin, Remote Control, CmdLink).
+What changed the plans, in order of weight:
+
+1. **The version rule, from the game's own strings and the kit's:** a package cooked by a NEWER
+   engine/licensee/custom version is refused — the shipping exe carries *"Package is unloadable:
+   %s. Reason: Version is too new / LicenseeVersion is too new / Custom version is too new"* and
+   *"Incompatible Mods Detected … The following mods failed mounting"*; the kit's UI carries
+   *"Mod is too new and incompatible for this game version"* (via `ModCompat.bin`, which records
+   "cooked against engine %s"). **Exact match is not required; "not newer" is.** Our kit is
+   newer → phase 1 opens with an OFFLINE compatibility check: read the versioning block of a
+   `.uheader` from a mod that loads today (Chest Labels, kit revision 1001) and compare with a
+   header our kit cooks. Funcom re-cooks are routine ("major update, most mods will need a
+   re-cook" — three times in 2026).
+2. **Prior art exists and is MIT:** `jvdberg1/exileforge` — a PowerShell + Unreal-Python CLI
+   that builds a level-cap mod headlessly on `5.6.1-366792`; verified command line
+   `RunUAT.bat -NoCompile BuildMod -Mod=<M> -Project="<kit>/UE4/ConanSandbox.uproject" -Cook -Pak
+   -Compress -ScriptDir="<kit>/UE4/"` (note: `-ScriptDir` is the **`UE4/` root**, not the
+   automation folder), and `ef_editor.py` using
+   `unreal.DataTableFunctionLibrary.export_data_table_to_csv_file` / `fill_data_table_from_csv_string`
+   (a different name from the one our smoke tried — use this one). Its gotchas: long paths break
+   cooks; `LogModController: Invalid class` → drop the ModController and use the overlay override.
+3. **Two ways to change a table:** overlay override (author the table at
+   `Mods/<M>/Content/Systems/Progression/DT_…`, the cooker remaps it onto `/Game/…` — whole-table
+   replace, conflicts with any other mod touching it) or a `ModController` blueprint with
+   `Merge Data Tables (With Control Table)` — row/column-level merge, the legacy-documented
+   Conan way (wiki pages in the digest). Level-cap mods on Nexus do not say which they use.
+4. **Localization for mods — no official Enhanced doc.** The generic UE5 mechanism: a mod ships
+   `Content/Localization/<Target>/<culture>/<Target>.locres` inside its pak at the same path as
+   the game's; CSV round-trip tools exist (`ue-localization-tools`, `UEExtractor`). Still an
+   experiment (§7.1).
+5. **Readers for cooked Enhanced packages:** `retoc` (UE 5.3+, zen↔legacy), `UAssetGUI` 1.1.0
+   (5.6/5.7, opens `.utoc/.ucas`); no public `.usmap` for Enhanced — a licensee 5.8.2 needs a
+   self-generated mapping. The kit's own editor stays the authority.
+6. **"Found no script module records"** is documented by one repo (`aegis-ue5-modkit`) that is
+   **404 today**; the record file exists in our kit (`UE4/Intermediate/ScriptModules/ModDevKit.Automation.json`).
+   Treat the breakage as unconfirmed until our own run.
+7. **Disk truth from the store:** Epic lists the kit at 145 GB download / 166 GB installed
+   (ours: 169 GB on disk). First-launch duration: not published anywhere.
 
 ## 9. Risks, tiered (Murphy)
 

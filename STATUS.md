@@ -139,8 +139,12 @@ Reflex, дальность и листва через группы качест�
 (2) **`UnrealPak.exe` кита читает и распаковывает любой пак мода вместе с Oodle** — `UIMod_Hosav`
 распакован (404 файла), в нём 369 английских фраз в 46 виджетах с ключами `FText`;
 (3) штатная сборка модов — `RunUAT BuildMod` с обязательным `-ScriptDir=UE4\Build\ModDevKit.Automation`,
-исходник конвейера лежит в ките. **MCP/CLI к киту никто не прикручивал**; каналы в живой
-редактор есть (Python remote execution, Remote Control API, CmdLink) — фаза 4 эпика.
+исходник конвейера лежит в ките; проверенный ключ — `-ScriptDir="<кит>/UE4/"` (exileforge).
+**MCP/CLI к киту никто не прикручивал**; Epic «Unreal MCP», AI Assistant, Remote Control и
+CmdLinkServer лежат в ките ЗАГЛУШКАМИ без бинарников, живой канал один — Python remote
+execution — фаза 4 эпика. ⚠️ **Игра отвергает пакеты НОВЕЕ себя** («Version is too new»), а
+кит новее игры — фаза 1 открывается офлайн-сверкой версий, не куком. Веб-разведка с
+источниками — `researches/conan-devkit/web-recon.md` (греп по `NOT FOUND`, `too new`, `exileforge`).
 Побочный след запуска: `zenserver.exe` живёт в фоне (порт 8558, `%LOCALAPPDATA%\UnrealEngine`),
 остановить `zen.exe service down`. ⚠️ Оконный запуск кита — только по договорённости
 с владельцем: окно отбирает экран удалённого стола на 30–60 минут шейдеров.
