@@ -126,6 +126,25 @@ Reflex, дальность и листва через группы качест�
 (`D:\Games\Conan Exiles Mods\_save-backup\`). **Как только он объявит начало партии — рамка
 закрывается, и цена любого опыта над сохранением становится настоящей.**
 
+### 🧰 Dev Kit Конана — найден, изучен, ни разу не открывался окном (12.09.2026)
+
+**Лежит в `F:\CEDevKit\CEUE5Devkit`** (169 ГБ, скачан 10.09, не через Epic). UE **5.8.2**,
+лицензиатская ветка `++exiles+release-beta` CL **374980** — **новее игры** (CL 373655), это
+риск (а) для модов-переопределений. Разведка — **`researches/conan-devkit/README.md`**,
+эпик — **`plans/06_EPIC_conan_devkit_toolchain.md`**, первая фаза — `plans/07_epic06_phase0_chtenie.md`.
+
+Доказано 12.09 запусками, не чтением: (1) **безоконный командлет с Python читает игру за
+2 минуты** (`-run=PythonScript -NullRHI`; шейдеры компилирует только ОКНО) — кривая опыта
+`DT_ExperienceSystemLevel` прочитана, 60 уровней, `researches/conan-devkit/DT_ExperienceSystemLevel.csv`;
+(2) **`UnrealPak.exe` кита читает и распаковывает любой пак мода вместе с Oodle** — `UIMod_Hosav`
+распакован (404 файла), в нём 369 английских фраз в 46 виджетах с ключами `FText`;
+(3) штатная сборка модов — `RunUAT BuildMod` с обязательным `-ScriptDir=UE4\Build\ModDevKit.Automation`,
+исходник конвейера лежит в ките. **MCP/CLI к киту никто не прикручивал**; каналы в живой
+редактор есть (Python remote execution, Remote Control API, CmdLink) — фаза 4 эпика.
+Побочный след запуска: `zenserver.exe` живёт в фоне (порт 8558, `%LOCALAPPDATA%\UnrealEngine`),
+остановить `zen.exe service down`. ⚠️ Оконный запуск кита — только по договорённости
+с владельцем: окно отбирает экран удалённого стола на 30–60 минут шейдеров.
+
 ## 🤖 Autonomous backlog pool (no human / no special hardware needed)
 
 > Tasks the agent can do FULLY autonomously: write code → build → test on the harness → fix → commit,
