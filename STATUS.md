@@ -202,8 +202,9 @@ execution — фаза 4 эпика. ⚠️ **Игра отвергает пак
       **Редкий случай — кук НЕ нужен:** множители уже наружу (`PlayerMovementSpeedScale`,
       `PlayerSprintSpeedScale`, `PlayerStaminaCost*`, семейство `dw.Climb*`), высота прыжка — через
       `JumpZVelocity` из Lua. Одобрения не требует — идея его.
-      **Шаг 1 (12.09 вечер): адрес атрибута снят у Dev Kit безоконно, зонд написан и раскатан, в игре
-      НЕ ЗАПУСКАЛСЯ.** `ConanCharacter:GetIntStat(StatID, Mode)`; `ATTRIBUTE_ATHLETICISM`=19,
+      **Шаг 1 (12.09 23:40): вызов из Lua РАБОТАЕТ — `LEVEL`=14, но все атрибуты 0** (прочитано за
+      4 с до входа в мир; зонд уже умеет повторы +30/+60 с и `StatHolder`, ждёт любого запуска игры и
+      ответа владельца: его уровень 14? очки вложены?). Разбор — конец `ideas/03_*`. `ConanCharacter:GetIntStat(StatID, Mode)`; `ATTRIBUTE_ATHLETICISM`=19,
       `LEVEL`=4 (контроль нумерации — кит новее игры), `Mode` FULL=0 / BASE=1. Зонд
       `ConanExiles/_unpacked/ConanAttributeProbe` (в игре — `ue4ss/Mods/ConanAttributeProbe`): сам
       читает через 10 с после появления героя, Numpad . — заново; итог — строки `[ConanAttributeProbe]`
