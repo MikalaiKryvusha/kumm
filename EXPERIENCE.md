@@ -41,6 +41,33 @@
 
 ## Entries
 
+### EXP-0100 · 2026-09-13 · ❌→✅ · #git #revert #amend #falseok
+**Context:** откатывал свой незапушенный коммит в паке Конана.
+**Tried / did:** `git revert --no-edit <sha> -q` и сразу за ним `git commit --amend -m "Revert …"`.
+**Result:** ❌ — `revert` не знает `-q`, напечатал справку и НЕ выполнился; `--amend` переписал сообщение самого откатываемого коммита. Получился коммит «Revert» с той самой правкой внутри. Поймано `git show --stat` перед докладом; не запушено — снято `reset --soft HEAD~1` + `restore`.
+**Lesson:** не склеивать две git-команды так, что вторая молча доделывает несостоявшуюся первую. После любого отката — `git show --stat HEAD`: сообщение ничего не доказывает, доказывает диф.
+**Repro:** `git show --stat HEAD` после revert — в дифе должно быть обратное изменение.
+**Trigger:** откат, amend, rebase — любое переписывание истории.
+**Not for:** —
+
+### EXP-0099 · 2026-09-13 · ✅ · #devkit #blueprint #t3d #formula #unreal
+**Context:** как Конан считает скорость бега — из C++ отражения видно только имена полей, не формулу.
+**Tried / did:** безоконный кит выгрузил блюпринт героя в T3D (`AssetExportTask`, 148 МБ, **UTF-16**); свой трассировщик `t3d_trace.py` разобрал узлы/пины/связи и раскрутил поток данных назад от записи `MaxWalkSpeed`.
+**Result:** ✅ за один проход — формула целиком: `NewSpeed × Agi15Perk × Snare × Emote × Encumbrance`, база приходит из C++ через событие `ApplyNewMovementSpeed`.
+**Lesson:** «как устроено» у блюпринта Конана читается текстом без окна редактора: T3D + трассировка назад от интересующей записи. Первая выборка по подстроке ничего не нашла из-за UTF-16 — перекодируй перед поиском.   → link: `researches/conan-devkit/bp_speed.py` · `researches/conan-devkit/t3d_trace.py` · `ideas/03_*`
+**Repro:** `python researches/conan-devkit/t3d_trace.py <file.utf8.t3d> ApplyNewMovementSpeed 12`
+**Trigger:** нужна формула / логика блюпринта игры, а не только имена полей.
+**Not for:** логика внутри C++ (`UpdateMaxMovementSpeed` сам) — её T3D не показывает.
+
+### EXP-0098 · 2026-09-13 · ❌ · #conan #input #ini #chat #falseok
+**Context:** владелец: «чат бы вообще убрать». Одиночная игра, Numpad * открывал чат поверх клавиш модов.
+**Tried / did:** пять строк `-ActionMappings=(…)` в `Saved/Config/Windows/Input.ini`, дословно как в игровом `DefaultInput.ini` (извлечён `UnrealPak` из `pakchunk0`).
+**Result:** ❌ — строки пережили выход игры, но Numpad * всё равно открыл чат. Откачено.
+**Lesson:** у Конана привязки из `Input.ini` не последнее слово — «строка на месте» ≠ «привязка снята». Проверять кадром в игре, а не содержимым файла.
+**Repro:** после правки — в игре голая Numpad * и снимок: панель «Local» не должна появиться.
+**Trigger:** снимать/переназначать клавиши Конана.
+**Not for:** `ConsoleKeys` — те из `Input.ini` работают (консоль F10/Insert).
+
 ### EXP-0097 · 2026-09-12 · ✅ · #harness #input #ue4ss #keybind #devkit #attributes #idea03
 **Context:** идея 03 — прочитать атрибут живого героя из Lua; адрес неизвестен, герой ещё не качан (все нули не отличают верный адрес от неверного).
 **Tried / did:** (1) адрес спросил не у игры, а у Dev Kit безоконным Python-командлетом: `dir(unreal)` → у кого есть `get_int_stat`, плюс номера `CharIntStatID`/`StatModifierMode`; (2) в игре атомарно: Tab → «Хар-ки» → вложил очки РАЗНЫМ числом (1/2/3/4, потом 4 в шестой) → Numpad . → греп журнала.
