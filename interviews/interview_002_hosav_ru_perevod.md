@@ -42,18 +42,18 @@
 | 3 | Custom Personal UI | Свой личный интерфейс | «Custom» здесь = «мой вместо ванильного» |
 | 4 | Healthbar Settings | Полоса здоровья | |
 | 5 | Healthbar Visbillity | Показывать полосу здоровья | опечатка автора в EN — оставляем |
-| 6 | Healthbar Values | Числа на полосе здоровья | |
+| 6 | Healthbar Values | Значения Здоровья | правило владельца 12.09: «X Values» = «Значения X» (мн. ч.) |
 | 7 | Healthbar Custom Color | Свой цвет полосы здоровья | |
 | 8 | Health Color Picker | Выбор цвета здоровья | |
 | 9 | Health Numeric Text | Здоровье числом | |
 | 10 | Staminabar Settings | Полоса выносливости | |
 | 11 | Staminabar Visbillity | Показывать полосу выносливости | |
-| 12 | Staminabar Values | Числа на полосе выносливости | |
+| 12 | Staminabar Values | Значения Выносливости | правило владельца 12.09: «X Values» = «Значения X» (мн. ч.) |
 | 13 | Staminabar Custom Color | Свой цвет полосы выносливости | |
 | 14 | Stamina Color Picker | Выбор цвета выносливости | |
 | 15 | Health and Stamina/Endurance Text Custom Color | Свой цвет текста здоровья и выносливости | |
 | 16 | Health and Stamina/Endurance Text Color Picker | Выбор цвета текста здоровья и выносливости | |
-| 17 | Corruption Values  | Скверна числом | |
+| 17 | Corruption Values  | Значения Скверны | правило владельца 12.09: «X Values» = «Значения X» (мн. ч.) |
 | 18 | Corruption Bar Custom Color | Свой цвет полосы скверны | |
 | 19 | Corruption Bar Color Picker  | Выбор цвета полосы скверны | |
 | 20 | Consciousness Percentage | Сознание в процентах | ⚠ нет в словаре игры («Consciousness» — шкала оглушения) |
@@ -65,12 +65,12 @@
 | 26 | Experience Progress Custom Color | Свой цвет полосы опыта | |
 | 27 | Experience Color Picker | Выбор цвета опыта | |
 | 28 | Additional HUD Settings | Настройки дополнительного HUD | ✅ правка владельца 12.09 |
-| 29 | Armor Values | Доспехи числом | |
-| 30 | Damage Values | Урон числом | |
-| 31 | Weight Values | Вес числом | |
-| 32 | Food Values | Еда числом | |
-| 33 | Water Values | Вода числом | |
-| 34 | Temperature Values | Температура числом | |
+| 29 | Armor Values | Значения Брони | правило владельца 12.09: «X Values» = «Значения X» (мн. ч.) |
+| 30 | Damage Values | Значения Урона | правило владельца 12.09: «X Values» = «Значения X» (мн. ч.) |
+| 31 | Weight Values | Значения Веса | правило владельца 12.09: «X Values» = «Значения X» (мн. ч.) |
+| 32 | Food Values | Значения Еды | правило владельца 12.09: «X Values» = «Значения X» (мн. ч.) |
+| 33 | Water Values | Значения Воды | правило владельца 12.09: «X Values» = «Значения X» (мн. ч.) |
+| 34 | Temperature Values | Значения Температуры | правило владельца 12.09: «X Values» = «Значения X» (мн. ч.) |
 | 35 | Temperature Type  | Единицы температуры | |
 | 36 | Shelter Percentage | Укрытие в процентах | ⚠ нет в словаре игры |
 | 37 | Crafting Time in Seconds | Время создания в секундах | |
@@ -127,11 +127,11 @@
 | 88 | Kill XP Feedback Sound | Звук уведомления об опыте | |
 | 89 | Mount Settings | Скакун | |
 | 90 | Mount Healthbar Visbillity | Показывать здоровье скакуна | |
-| 91 | Mount Healthbar Values | Здоровье скакуна числом | |
+| 91 | Mount Healthbar Values | Значения Здоровья скакуна | правило владельца 12.09: «X Values» = «Значения X» (мн. ч.) |
 | 92 | Mount Healthbar Custom Color | Свой цвет здоровья скакуна | |
 | 93 | Mount Health Color Picker | Выбор цвета здоровья скакуна | |
 | 94 | Mount Endurancebar Visibillity | Показывать выносливость скакуна | |
-| 95 | Mount Endurancebar Values | Выносливость скакуна числом | |
+| 95 | Mount Endurancebar Values | Значения Выносливости скакуна | правило владельца 12.09: «X Values» = «Значения X» (мн. ч.) |
 | 96 | Mount Endurancebar Custom Color | Свой цвет выносливости скакуна | |
 | 97 | Mount Endurance Color Picker | Выбор цвета выносливости скакуна | |
 | 98 | Mount Level Display | Уровень скакуна | |
