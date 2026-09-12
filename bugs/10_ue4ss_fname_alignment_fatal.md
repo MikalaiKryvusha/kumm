@@ -55,6 +55,17 @@ Fatal Error: [FName::StaticAlignment] StaticAlignment_Private is not valid
 > проверена. Снята подозрение с нового Lua-мода `HosavRU`? — НЕТ, A/B (запуск с
 > `enabled.txt.off`) владелец не успел сделать; но на 10.09 фатал был и без него. Веб-разведка
 > по ошибке — `researches/conan-devkit/ue4ss-fatal-recon.md`. Чинить — в новом чате.
+>
+> **Следующие шаги (из веб-разведки 12.09, по одному на запуск, журнал читать после каждого):**
+> 1. `UE4SS-settings.ini` → `[General] bForceGUObjectArrayForIteration = true` — лечение
+>    сопровождающего для такого же старт-крэша на UE 5.6.1 (issue #1405: сборка 1101 падала на
+>    чтении FUObjectHashTables, 1009 работала; с ключом заработала 1101).
+> 2. `[EngineVersionOverride] DebugBuild = false` (принудительно Shipping вместо автоопределения).
+> 3. `[EngineVersionOverride] Stats = false`.
+> 4. Откат UE4SS на сборку **1009 (2026-07-04)** с сохранением нашего `VTableLayout.ini` и
+>    `[EngineVersionOverride] 5.6`.
+> Гипотеза гонки по строке `Constructed 0 of 0 objects` **снята**: сопровождающий пишет (#1208),
+> что строка безобидна. Наша сборка UE4SS — апстрим main от 2026-09-08 (SHA 2bfa839f), не форк.
 
 ## Спусковой крючок НЕ НАЙДЕН — и это записано честно
 

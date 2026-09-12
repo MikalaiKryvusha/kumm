@@ -245,8 +245,9 @@ execution — фаза 4 эпика. ⚠️ **Игра отвергает пак
 1. 🔴 **ПЕРВЫМ — оживить UE4SS (`bugs/10`), без него мёртв весь Lua-слой сборки.** Два фатала
    12.09 (11:41 и 12:39, второй сразу после перезагрузки); A/B «с выключенным `HosavRU`» владелец
    сделать не успел (мод лежит в `ue4ss/Mods/HosavRU` с `enabled.txt.off`). Порядок: прочесть
-   `researches/conan-devkit/ue4ss-fatal-recon.md` → пробовать настройки `UE4SS-settings.ini` по
-   одной за запуск (гипотеза гонки: перед фаталом `Constructed 0 of 0 objects`) → при успехе
+   `researches/conan-devkit/ue4ss-fatal-recon.md` → пробовать по одному ключу за запуск:
+   `bForceGUObjectArrayForIteration = true` (лечение сопровождающего, issue #1405) → `DebugBuild =
+   false` → `Stats = false` → откат UE4SS на сборку 1009 → при успехе
    включить `HosavRU` (`enabled.txt`) и проверить перевод.
 
 1а. 🟡 **Локализация Hosav — состояние опыта 12.09** (разбор `researches/conan-devkit/README.md` §7.2):
