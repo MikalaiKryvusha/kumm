@@ -362,6 +362,38 @@ live mods); the loader extracts platform paks to `Saved/ExtractedMods/` and skip
 by hash; `AssetRegistry.bin` is required in the platform pak (`ValidateMod_MissingAssetRegistry`),
 a foreign one (Chest Labels') passed the manifest stage.
 
+### 7.3 The localization experiment — SOLVED 2026-09-12 14:43, and the door was the plainest one
+
+Two more doors were tried after §7.2, one per launch, each answered by a screenshot of the mod's
+own settings panel (`Tab` → the character screen → **UI Settings**, bottom-left):
+
+| door | verdict |
+|---|---|
+| our merged `Exiles_UI.locres` LOOSE at the game's own path | ❌ pointless by design — in Unreal a **pak beats a loose file** (`FPakPlatformFile::FileExists` searches the mounted paks first), and `Exiles_UI` lives in `pakchunk0` |
+| a private target registered by config: `[Internationalization] +LocalizationPaths=%GAMEDIR%Content/Localization/HosavRU` in `Saved/Config/Windows/Engine.ini`, files loose | ❌ no effect. The game read the section and preserved it across its own exit rewrite, so the config layer is live — the localization manager still did not take the target. Launch 14:27, panel English |
+| **the engine's DEFAULT game target, loose: `Content/Localization/Game/{Game.locmeta, ru/Game.locres}`** | ✅ **works, no config change at all.** Launch 14:35 → panel fully Russian. Re-verified 14:41 with BOTH `+LocalizationPaths` lines removed and `UE4SS-settings.ini` restored byte-for-byte |
+
+Why this one is allowed where §7.2's was not: `%GAMEDIR%Content/Localization/Game` is in the
+engine's localization paths **by default**; the target exists in **no pak of the game**, so the
+"pak wins" rule never fires; and a `.locres` is readable loose — the shipping exclusion list for
+non-pak files is `uasset/umap/uexp/ubulk/upipelinecache/ushaderbytecode`, localization is not in it.
+**Neither the mod loader nor UE4SS takes part**, which is what makes it survive bug 10.
+
+**Attribution is not an impression — the Lua route reported itself out.** `HosavRU` was running
+during both successful launches, and with the panel OPEN it logged: *«тик 40: надписей мода в
+памяти 199, английских из таблицы среди них нет»* — 199 mod TextBlocks seen, zero replacements
+made. The `.locres` had already translated them. The Lua mod is therefore **removed from the game**
+and kept in `_unpacked/HosavRU/` as the fallback for the day a patch puts a `Game` target in a pak.
+
+What the translation reaches: **567 mod keys** — the settings panel (`W_ExampleWidget_User`, 171)
+and all twenty colour-picker widgets. What it cannot reach: the HUD's own `Light / 0 / 0% dr`,
+`3 / 0% / 6 dps` — those strings are in **no** `FText` key of the mod, it composes them at runtime.
+
+Pack-side: `ConanExiles/_config/localization/` (source + README with the rebuild recipe) and
+`ConanExiles/_config/deploy-localization.py` (`--check` · `--remove`), because a game integrity
+check or a reinstall wipes those two files **silently** — the symptom is an English panel and no
+error anywhere.
+
 ## 8. Web recon — done 2026-09-12, full digest in `web-recon.md` (every claim with its URL)
 
 What changed the plans, in order of weight:

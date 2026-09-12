@@ -799,3 +799,148 @@ ConanSandbox/Content/Mods/UIMod_Hosav/UMGColorPicker/UMG/ColorPickerWidget_Targe
 ConanSandbox/Content/Mods/UIMod_Hosav/UMGColorPicker/UMG/ColorPickerWidget_TargetTorporColor.uexp,,71E1F75D41363826AEE078A154CA3EF5,Hex:
 ConanSandbox/Content/Mods/UIMod_Hosav/Vanilla_UI/NewBuff/W_HUD_BuffEntry.uexp,,B73C48F14E948419D833AC911427E7F9,Regain 5 health every 10 seconds
 ConanSandbox/Content/Mods/UIMod_Hosav/Vanilla_UI/NewBuff/W_HUD_BuffEntry.uexp,,2BCBDA42467A6FCCB614C2B4D4B82923,999s
+ConanSandbox/Content/Mods/UIMod_Hosav/ModController_UI_Hosav.uexp,,9200301E44FF95986A0B7D9CEF1F0C11,"Gamepad Input detected, disabling Minimap to prevent input issues."
+ConanSandbox/Content/Mods/UIMod_Hosav/ModController_UI_Hosav.uexp,,EC06FCE145276849ACD4909879B945A7,Add Thrall to Party
+ConanSandbox/Content/Mods/UIMod_Hosav/ModController_UI_Hosav.uexp,,043A1F274078918E15E2C2B48EF1F74F,Invite Player To Party
+ConanSandbox/Content/Mods/UIMod_Hosav/ModController_UI_Hosav.uexp,,7B7DF1C143E1AD291391289BA732B40D,Remove Thrall from Party 
+ConanSandbox/Content/Mods/UIMod_Hosav/ModController_UI_Hosav.uexp,,451CE13B4EF7DF3C1C6A88A48125A750,Remove Player from Party
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,E66AB202420B6DA9882F7B9602DC6CF9,{percent}% ( {time} ) 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,872EFF4D4BBCB3A2A63C75B0E018BB08,{percent}% ( {time} )  
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,A9028423402520D78BBA7A966F5730FC,{percent}% ( {time} ) 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,DAECC32E4D302FEFFA810DA334F45AA1,{percent}% ( {time} ) 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,41AD14CD49AE290E872B70B16395A47E,{damage}{suffix1} / {arrmorpen}% / {damagetotal}{suffix2} dps 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,CDC6B36047BADDDC06095BA3E4735003,{damage}{suffix1} / {arrmorpen}% / {damagetotal}{suffix2} dps 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,CD5B0E184BBCB55C918CAAAD93D36379,{xpCurrent}{suffix1} / {xpMax}{suffix2} ({xpNeeded}{suffix3})
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,88CCE01348FF72400A1FDEAF6F8C9086,Max
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,C02B37644B95A36F88EDC2B97C052DC2,{0}%
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,D347F55D40DF2DA017F1788DE2F6BCE0,{currrentWeight} / {maxWeight} ({percent}%)  
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,749B29D143D79A29C0398E884959AA93,Light
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,BB05EFA646F3500342540DAAC85EC01D,{armortype} / {armor}{suffix} / {damagereduction}% dr 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,DB7952D841B17CEDC63273806A0CEFBD,Medium
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,0BB7ED214986587E6633F7B84F54F3CD,Heavy
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,7A7044DC445F303FA086A8A24D0A2739,Health reduced by {hp} / {percenthp}%
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,DF30D27E47E69A42F463E2B9444EA3A6,{current} / {max} 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,7094140E4EEED1348B64DCB8DFCF4F9C,{current} / {max} 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,F245C35D48FFEEB269AB7CA83737D209, {0}% 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,A1F018B04AC514FFF8083189036B4904,{0} 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,65BA920F4FAAEA8658CE52A44D024E19,{0} ms 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,4CE443E741C65FF2F7E6AE8F484F1B66,-200 ms 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uexp,,6A991DF546639A46CC92E483DC306653, {hour} : {minutes} 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,8753D4C24EA76F988C368AA381AC4AA8,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,266E59204F0D132343EEDB95622C29B3,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,83E641A84820B421E8F5C685FF1B7084,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,5387B3A84377489210C43398804BA031,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,BDF5DC7F4DCB0F0B83BE62BE1D90B1C6,{damage} / {arrmorpen}% / {damagetotal} total
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,BE1DFA2D48B035125A60ECACE12CB8FF,{damage} / {arrmorpen}% / {damagetotal} total
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,AD9F8CE24BE67CAB94D534A98CD23624,{xpCurrent} / {xpNeeded}
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,12BE6BE4464FEA2760C56CB7CFC0E7F5,{0}%
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,BE1E55E642AB54A7143B6A83768B3C1E,Light
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,08DBA3684C64F70EBD675A9A574AB50A,{armortype} / {armor} / {damagereduction}%
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,20B00C964C426212A07CB3B0230DF50C,Medium
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,E1D63A6C45A4BB0FB7BCF8972CC9AF1D,Heavy
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,1FBF4A394BF0100686896D86D0B905E4,Health reduced by {hp} / {percenthp}%
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,9246D84547518BE83769268DA3D29782,{current} / {max} 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP_Horse.uexp,,28EDCF1849C6A856785A9FBC4C2E8753,{current} / {max} 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_UI_ClanMate_HealthAndStamina.uexp,,5C76192E4249CFF466407E9EB94DC1AE, {0} 
+ConanSandbox/Content/Mods/UIMod_Hosav/W_UI_ClanMate_HealthAndStamina.uexp,,563851614A44653F208973B2057E9302,DEAD
+ConanSandbox/Content/Mods/UIMod_Hosav/W_UI_ClanMate_HealthAndStamina.uexp,,1E60A701482C9B682C032BA028E51441,{0}
+ConanSandbox/Content/Mods/UIMod_Hosav/W_UI_TimeIndicator.uexp,,9A704BFC4C1F10AA58B5899B0E9FC5F8,{hour} : {minutes}
+ConanSandbox/Content/Mods/UIMod_Hosav/BlueprintLibrary/BPFL_Hosav_UI.uexp,,508EDDAB4FF7A4B1141A3986ABFCA415,k
+ConanSandbox/Content/Mods/UIMod_Hosav/BlueprintLibrary/BPFL_Hosav_UI.uexp,,2E34052749EBC0519DACC9AB88FE7A32,m
+ConanSandbox/Content/Mods/UIMod_Hosav/BlueprintLibrary/BPFL_Hosav_UI.uexp,,DCCEA41540EE006E34C32DA63662378C,k
+ConanSandbox/Content/Mods/UIMod_Hosav/CustomHUD_Elements/InHUD_Healthbar/W_EnemyHealthbar_InHUD.uexp,,6C79C775443133F10D3D90843D073CE6,-{text}
+ConanSandbox/Content/Mods/UIMod_Hosav/CustomHUD_Elements/InHUD_Healthbar/W_EnemyHealthbar_InHUD.uexp,,56FC974F47432F7D983910B9F73379F5,{0}%
+ConanSandbox/Content/Mods/UIMod_Hosav/CustomHUD_Elements/InHUD_Healthbar/W_EnemyHealthbar_InHUD.uexp,,1F4C9AED46BDED1916FAF2B249673813,{currentHealth}{suffix} / {maxhealth}{suffixMax} ({percentage}%)
+ConanSandbox/Content/Mods/UIMod_Hosav/CustomHUD_Elements/InHUD_Healthbar/W_EnemyHealthbar_InHUD.uexp,,C891D51248F8F83F09F96395B94C9993, {0} 
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown.uexp,,C044DA4F425EB4D971CC6BBAB29D2025,bonus damage
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown.uexp,,CC802D57479C285658DF6593BBA0894F,damage
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown.uexp,,7D7121A04276A7BEF85571AC93608312, {0} 
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown.uexp,,C174A5774D85BD08C03A0983BECEEE69, {0} {dmg} to {1} 
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown_Log.uexp,,0C258CF04CFC07E80BD2B1B5E7F0C948,bonus damage
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown_Log.uexp,,7A429A654E055DF847C80CBF2CBE721A,damage
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown_Log.uexp,,9F8A97474079EE7426F4C3AC622618CD,you
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown_Log.uexp,,8EC1F92D42A4CC51434EB9ACE1A51316,your Follower
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown_Log.uexp,,0835D2364949713D39F96CBA5F73C505, {0} 
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown_Log.uexp,,655F54824F97D33CB60473B0D9358D4E, {0} {dmg} to {1} 
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown_Thralls.uexp,,65F6C0AF424091E58077FD8A44542CC2,bonus damage
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown_Thralls.uexp,,C3D6B9634671D91EAA7B8A9847B4BA7A,damage
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown_Thralls.uexp,,2468C2EC4AD4B8C143D9F89740A2E68E,{0} 
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown_Thralls.uexp,,2A8059864B1CE37BCA51B7873D8337E6, {0} 
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_DamageShown_Thralls.uexp,,25B865264955645F66ED27BD69075DA9, Follower - {0} {damage} to {1} 
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_Kill_xp.uexp,,1FA3F02C4E23A92B5AE0D39431DC7B2E,Successfully bound kill xp to player via UI
+ConanSandbox/Content/Mods/UIMod_Hosav/Kill_XP/W_Kill_xp.uexp,,DACE4C3C4E4F6A34516D4A81F827732C, +{0} XP 
+ConanSandbox/Content/Mods/UIMod_Hosav/Minimap_Elements/W_LocalTime.uexp,,AC61B9604326A3360B6C03AAB19ED4FA, {0} 
+ConanSandbox/Content/Mods/UIMod_Hosav/PartySystem/PlayerPartyComponent_UIH.uexp,,B028B2FB477B34FB55069889A799752E,Your follower party is already full
+ConanSandbox/Content/Mods/UIMod_Hosav/PartySystem/PlayerPartyComponent_UIH.uexp,,0671236E43B9AE368F2F1E8D4E127B56,Follower party disbanded
+ConanSandbox/Content/Mods/UIMod_Hosav/PartySystem/PlayerPartyComponent_UIH.uexp,,401E4F6F414C4CB6AA1EC5AE431144EC,Wait a bit before sending another invite
+ConanSandbox/Content/Mods/UIMod_Hosav/PartySystem/PlayerPartyComponent_UIH.uexp,,8479956A42ECB1F3B717A9878B9F2B3A,Admin has not enabled the option to invite any players outside your clan
+ConanSandbox/Content/Mods/UIMod_Hosav/PartySystem/PlayerPartyComponent_UIH.uexp,,38AB84A6410343D9438F26A66182EFAD,Player is unavailable
+ConanSandbox/Content/Mods/UIMod_Hosav/PartySystem/PlayerPartyComponent_UIH.uexp,,750AB91541D225DA02A39FACAC32BC00,Player party disbanded
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,1814B7A941EB1F12EF9C53B8004D98AD,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,42DB42534750BED800BA8794220BDA89,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,E8A3B4CF4B23D83FABC12685D897AF22,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,90A5A66C479A4C088A3C2E8C848A25BD,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,2E8B783842FFB5D56094948F81E64567,{damage} / {arrmorpen}% / {damagetotal} total
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,660B0037454059D53C4454BBE30C3471,{damage} / {arrmorpen}% / {damagetotal} total
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,1EED37C2407A3E49E6567DB39E7781D2,{xpCurrent} / {xpNeeded}
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,26EEFD30482D78586D46FFACBBA4D771,{0}%
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,DBDE244D4A9CB1A33F488D96DDA664D6,{currrentWeight} / {maxWeight} ({percent}%)
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,9FFC9C9A4F5069A3E6527A98514AE65F,Light
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,5FCDD43B4035E7B3D88DC9AA90F78D14,{armortype} / {armor} / {damagereduction}%
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,546426D54DDF1F2F839AACB596074989,Medium
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,675273A649E6834CDD3BC7A04D165E7E,Heavy
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,51ED0C1646B009CB8DC35595F662E4A1,Health reduced by {hp} / {percenthp}%
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,B3E8DB6047F5EBCC480B88BB82E4E896,{current} / {max}
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/Old.uexp,,A3A11969406DA408FC4BE4AC4C13167C,{current} / {max}
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,B9E205CF49B8D470216F05A9EEEBD9B0,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,79FBDB144D879463C63217900079A6E7,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,6F607C5E4173144E1A5371A5D1218362,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,6A6D9D1A4EA36219C2CAE593D2AFFE21,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,71A0935E430344146D9339B87B4E8143,{damage}{suffix1} / {arrmorpen}% / {damagetotal}{suffix2} total
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,AC3B01E544BB8E1EBDF56F96B75363E8,{damage}{suffix1} / {arrmorpen}% / {damagetotal}{suffix2} total
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,E0E981E446C9DEFFD39C33A7BD85A14C,{xpCurrent}{suffix1} / {xpNeeded}{suffix2}
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,608BF63346B3E0BAE005008427B61E4B,{0}%
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,810862EC42FB7165D180FCB9292B3BA7,{currrentWeight} / {maxWeight} ({percent}%)
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,081876874E78853F831684A9F7EBE6BF,Light
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,9FFEC359417F49541B9DA1A0CA4D27C1,{armortype} / {armor}{suffix} / {damagereduction}%
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,693F9FB548A64F0EF5703A950B452C3B,Medium
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,D90DB6614D249AC964DEB9AB8E66E0B8,Heavy
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,69C1A9494A72D364DDE50C9E912CB8E6,Health reduced by {hp} / {percenthp}%
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,217A9BD543EA93C50301038843FBB82A,{current} / {max}
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,8A53131146024C5316371DBE7246C2D0,{current} / {max}
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,554DE5BE455EBAC34EDC969BA757E149,{0} 
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,16A75B0743ADAD1F89B7F8AB03AA8888,Could not get PlayerCount! GetSharedDebugInfo is None
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,B5519D0D42C48CDECAD70EA65BC77A3B,{0} 
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,63D5136E4FF4D3E6A8AA2AB99A915FE1, --
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,548676DA47040D4BBBB44E8BABA2CE85,{0} ms 
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,C4578B01456C409D930CF8946F8B9750,-200 ms 
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,C225F7264DE7F8CF4FF9B2B31DB7398B,0
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,A9153C61420D453B776204B49D373824,0
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP.uexp,,7A0003B54FE18DF804AD289A98CC22F7, {1}{hour} : {0}{minutes}  
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,669A973747E822C40E1444B23CFF466B,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,AA82648447795879EA477C9943754652,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,16C501B9423C9C10A18628982F5D97FB,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,F671F7624ACC4FF0E73894ADCB78B8F8,{percent}% ( {time} )
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,E44FD1FE4F392AAF3B7C2491EB21FB01,{damage} / {arrmorpen}% / {damagetotal} total
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,44FC423D4DEBA92BDBD47D8CFCF8C60C,{damage} / {arrmorpen}% / {damagetotal} total
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,85BDF0BA4FA27C5DFF2D2B9A448646C4,{xpCurrent} / {xpNeeded}
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,0B54D3484A2BE2E6C3A83FBA3B4C2988,{0}%
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,61E3A2C045F330935734ACB1F056D7AE,Light
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,26298B464E0CD0D0288C1F9E8CFFF470,{armortype} / {armor} / {damagereduction}%
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,1EFB08DF43946E6C02150DA0FDCAFC4B,Medium
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,9947024440D760C292CD70BB6F6AD9EE,Heavy
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,8FC211FE4AF25D06AC86998BD9CF72DA,Health reduced by {hp} / {percenthp}%
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,915BAD8F49091986302439BC5AF7F204,{current} / {max}
+ConanSandbox/Content/Mods/UIMod_Hosav/SUPERUI_Backup_ForFuckups/W_SmoothHP_Horse.uexp,,F75D58714C210EA7299CEA89681D94E5,{current} / {max}
+ConanSandbox/Content/Mods/UIMod_Hosav/UI/W_EnemyHealthbar_Test.uexp,,3D0DCFE2493DB5F9AD2116ADA2CE9010,{currentHealth}{suffix} / {maxhealth}{suffixMax} ({percentage}%)
+ConanSandbox/Content/Mods/UIMod_Hosav/UI/W_EnemyHealthbar_Test.uexp,,54B132664260AB33F3A89F8B0AA04BE6,{level}
+ConanSandbox/Content/Mods/UIMod_Hosav/UI_Exported/W_ExampleWidget_User.uexp,,93EC4B3A41C14C7F47288A96330F16A7,{0}%
+ConanSandbox/Content/Mods/UIMod_Hosav/UI_Exported/W_ExampleWidget_User.uexp,,E50E349E466DB0C4B6A5B8912E6BCEF2,HealthCustomColor is {bool}
+ConanSandbox/Content/Mods/UIMod_Hosav/UI_Exported/W_PopupDamage.uexp,,2F6E191742D0C2718A233C97E35F10EB,{0}
+ConanSandbox/Content/Mods/UIMod_Hosav/UI_Exported/W_PopupDamage.uexp,,749AF49543A1525F70376597B97012D8,{0}!
+ConanSandbox/Content/Mods/UIMod_Hosav/UI_Exported/W_PopupDamage.uexp,,625A0FE84E5796B0EDF874867B9CA0F2,{0}  
+ConanSandbox/Content/Mods/UIMod_Hosav/Vanilla_UI/W_TestHudOverlay.uexp,,DBB0C2EB4B9BCC9B7660A680DBD4DA57,{current} / {max}
+ConanSandbox/Content/Mods/UIMod_Hosav/Vanilla_UI/ImplementSmoothHP/W_SmoothHP_TestImplementation.uexp,,877B4A7A496C0A77B58C70910D228C26,{current} / {Max}
+ConanSandbox/Content/Mods/UIMod_Hosav/Vanilla_UI/NewBuff/W_HUD_BuffEntry.uexp,,2424E31C47B54FDC092B0B9E604E2357,{BuffDesc}
+ConanSandbox/Content/Mods/UIMod_Hosav/Vanilla_UI/NewBuff/W_HUD_BuffEntry.uexp,,8429DEA640101F82B880B5B11987F028,{BuffDurationMin}
+ConanSandbox/Content/Mods/UIMod_Hosav/Vanilla_UI/NewBuff/W_HUD_BuffEntry.uexp,,87B4A7C945CF65001C7D80B44F492AA5,{BuffDuration}s

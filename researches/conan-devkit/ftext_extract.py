@@ -1,6 +1,15 @@
 # Extract FText (namespace, key, source) triples from cooked Zen-split packages (.uexp).
 # Serialized shape in a cooked package: [int32 nsLen][ns\0][int32 33]["<32 hex>"\0][int32 srcLen][src\0]
-# srcLen > 0 = ANSI bytes incl. null; srcLen < 0 = UTF-16 code units incl. null. [NOT-TESTED]
+# srcLen > 0 = ANSI bytes incl. null; srcLen < 0 = UTF-16 code units incl. null.
+#
+# ВТОРАЯ ФОРМА, и её пропуск стоил нам всей строки HUD (12.09.2026): литерал FText, вкомпилированный
+# в БАЙТКОД Blueprint — EX_TextConst (0x29) + тип литерала 0x01 (LocalizedText), затем ТРИ
+# EX_StringConst (0x1F) — ANSI-строки с нулём на конце, в порядке SourceString, Key, Namespace.
+# Префиксов длины там нет вовсе, поэтому скан первой формы проходит мимо. Именно во второй форме
+# живут строки-шаблоны виджета («{armortype} / {armor} / {damagereduction}% dr ») и слова, которые
+# в них подставляются («Light», «Medium», «Heavy», «DEAD»).
+# [TESTED: 2026-09-12 — на UIMod_Hosav первая форма дала 794 ключа, вторая ещё 145; строки второй
+#  формы переведены и проверены в игре]
 import sys, os, re, struct, json, csv
 
 root = sys.argv[1]
@@ -63,6 +72,25 @@ for dp, dn, fn in os.walk(root):
                         break
             rows.append({'file': rel, 'namespace': ns, 'key': key, 'source': src})
 
+# ---- вторая форма: литералы FText из байткода Kismet -------------------------------------
+BYTECODE_RE = re.compile(rb'\x29\x01\x1f([\x20-\x7e]{0,400})\x00\x1f([0-9A-F]{32})\x00\x1f([\x20-\x7e]{0,200})\x00')
+seen = {(r['key'], r['source']) for r in rows}
+bytecode_rows = 0
+for dp, dn, fn in os.walk(root):
+    for f in fn:
+        if not f.endswith('.uexp'):
+            continue
+        p = os.path.join(dp, f)
+        d = open(p, 'rb').read()
+        rel = os.path.relpath(p, root).replace(os.sep, '/')
+        for m in BYTECODE_RE.finditer(d):
+            src, key, ns = m.group(1).decode('ascii'), m.group(2).decode(), m.group(3).decode('ascii')
+            if (key, src) in seen:
+                continue
+            seen.add((key, src))
+            rows.append({'file': rel, 'namespace': ns, 'key': key, 'source': src})
+            bytecode_rows += 1
+
 with open(out_csv, 'w', encoding='utf-8', newline='') as fh:
     w = csv.DictWriter(fh, fieldnames=['file', 'namespace', 'key', 'source'])
     w.writeheader()
@@ -71,6 +99,7 @@ with open(out_csv, 'w', encoding='utf-8', newline='') as fh:
 uniq = {}
 for r in rows:
     uniq.setdefault(r['source'], []).append(r)
+print('from bytecode (shape B):', bytecode_rows)
 print('triples:', len(rows), 'files:', len({r['file'] for r in rows}), 'unique sources:', len(uniq))
 print('empty sources:', sum(1 for r in rows if r['source'] == ''))
 print('namespaces:', sorted({r['namespace'] for r in rows})[:10])
