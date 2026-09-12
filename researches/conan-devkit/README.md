@@ -385,7 +385,7 @@ during both successful launches, and with the panel OPEN it logged: *«тик 40
 made. The `.locres` had already translated them. The Lua mod is therefore **removed from the game**
 and kept in `_unpacked/HosavRU/` as the fallback for the day a patch puts a `Game` target in a pak.
 
-What the translation reaches, after the second pass: **585 mod keys across 33 widgets** (242
+What the translation reaches, after the second pass: **622 mod keys across 40 widgets** (264
 distinct strings) — the settings panel, all twenty colour-picker widgets, **and the HUD header**
 («Лёгкая / 0 / 0% сниж.», «3 / 0% / 6 ур/с», verified 15:08).
 
