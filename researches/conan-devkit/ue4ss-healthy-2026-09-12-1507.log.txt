@@ -1,0 +1,1703 @@
+[2026-09-12 15:07:01.6071602] Console created
+[2026-09-12 15:07:01.6135003] UE4SS - v3.0.1 Beta #0 - Git SHA #2bfa839f
+[2026-09-12 15:07:01.6135415] Timezone: Europe/Minsk
+[2026-09-12 15:07:01.6135569] UE4SS Build Configuration: Game__Shipping__Win64 (MSVC)
+[2026-09-12 15:07:01.6151620] Setting up mods...
+[2026-09-12 15:07:01.6151941] Loading mods from: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods
+[2026-09-12 15:07:01.6156632] Starting mods (from mods.txt (D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods\mods.txt) load order)...
+[2026-09-12 15:07:01.6158702] Starting mods (from enabled.txt (D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods), no defined load order)...
+[2026-09-12 15:07:01.6160585] No specific game configuration found, using default configuration file
+[2026-09-12 15:07:01.6160796] Config: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\UE4SS-settings.ini
+
+[2026-09-12 15:07:01.6160923] root directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
+[2026-09-12 15:07:01.6161031] working directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
+[2026-09-12 15:07:01.6161130] game executable directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64
+[2026-09-12 15:07:01.6161333] game executable: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ConanSandbox-Win64-Shipping.exe (192270696 bytes)
+
+
+[2026-09-12 15:07:01.6161447] mods directories: 
+[2026-09-12 15:07:01.6161593] [0] D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods
+[2026-09-12 15:07:01.6161702] 
+[2026-09-12 15:07:01.6161803] log directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
+[2026-09-12 15:07:01.6161904] object dumper directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
+
+
+[2026-09-12 15:07:01.6273637] Getting ordered lists from ini file
+[2026-09-12 15:07:01.6274521] UObjectBase
+[2026-09-12 15:07:01.6274757] UObjectBase::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6274899] UObjectBase::RegisterDependencies = 0x8
+[2026-09-12 15:07:01.6275012] UObjectBase::DeferredRegister = 0x10
+[2026-09-12 15:07:01.6275121] UObjectBase::GetFNameForStatID = 0x18
+[2026-09-12 15:07:01.6275223] UObjectBaseUtility
+[2026-09-12 15:07:01.6275370] UObjectBaseUtility::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6275483] UObjectBaseUtility::CanBeClusterRoot = 0x20
+[2026-09-12 15:07:01.6275590] UObjectBaseUtility::CanBeInCluster = 0x28
+[2026-09-12 15:07:01.6275694] UObjectBaseUtility::CreateCluster = 0x30
+[2026-09-12 15:07:01.6275798] UObjectBaseUtility::OnClusterMarkedAsPendingKill = 0x38
+[2026-09-12 15:07:01.6275903] UObjectBaseUtility::GetVersePath = 0x40
+[2026-09-12 15:07:01.6276003] UObject
+[2026-09-12 15:07:01.6276114] UObject::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6276213] UObject::GetDetailedInfoInternal = 0x48
+[2026-09-12 15:07:01.6276314] UObject::PostInitProperties = 0x50
+[2026-09-12 15:07:01.6276416] UObject::PostReinitProperties = 0x58
+[2026-09-12 15:07:01.6276518] UObject::PostCDOContruct = 0x60
+[2026-09-12 15:07:01.6276617] UObject::PreSaveRoot = 0x68
+[2026-09-12 15:07:01.6276717] UObject::PostSaveRoot = 0x70
+[2026-09-12 15:07:01.6276815] UObject::PreSave = 0x78
+[2026-09-12 15:07:01.6276916] UObject::CollectSaveOverrides = 0x80
+[2026-09-12 15:07:01.6277056] UObject::ResolveSubobject = 0x88
+[2026-09-12 15:07:01.6277162] UObject::IsReadyForAsyncPostLoad = 0x90
+[2026-09-12 15:07:01.6277274] UObject::PostLoad = 0x98
+[2026-09-12 15:07:01.6277377] UObject::PostLoadSubobjects = 0xA0
+[2026-09-12 15:07:01.6277478] UObject::BeginDestroy = 0xA8
+[2026-09-12 15:07:01.6277576] UObject::IsReadyForFinishDestroy = 0xB0
+[2026-09-12 15:07:01.6277675] UObject::FinishDestroy = 0xB8
+[2026-09-12 15:07:01.6277776] UObject::Serialize__FStructuredArchiveRecord = 0xC0
+[2026-09-12 15:07:01.6277875] UObject::Serialize__Ref_FArchive = 0xC8
+[2026-09-12 15:07:01.6277975] UObject::ShutdownAfterError = 0xD0
+[2026-09-12 15:07:01.6278075] UObject::PostInterpChange = 0xD8
+[2026-09-12 15:07:01.6278173] UObject::PostRename = 0xE0
+[2026-09-12 15:07:01.6278274] UObject::PreDuplicate = 0xE8
+[2026-09-12 15:07:01.6278374] UObject::PostDuplicate__EDuplicateMode_Type = 0xF0
+[2026-09-12 15:07:01.6279090] UObject::PostDuplicate__bool = 0xF8
+[2026-09-12 15:07:01.6279274] UObject::NeedsLoadForClient = 0x100
+[2026-09-12 15:07:01.6279473] UObject::NeedsLoadForServer = 0x108
+[2026-09-12 15:07:01.6279589] UObject::NeedsLoadForTargetPlatform = 0x110
+[2026-09-12 15:07:01.6279693] UObject::NeedsLoadForEditorGame = 0x118
+[2026-09-12 15:07:01.6279795] UObject::IsEditorOnly = 0x120
+[2026-09-12 15:07:01.6279897] UObject::HasNonEditorOnlyReferences = 0x128
+[2026-09-12 15:07:01.6280031] UObject::IsPostLoadThreadSafe = 0x130
+[2026-09-12 15:07:01.6280135] UObject::IsDestructionThreadSafe = 0x138
+[2026-09-12 15:07:01.6280236] UObject::GetPreloadDependencies = 0x140
+[2026-09-12 15:07:01.6280337] UObject::GetPrestreamPackages = 0x148
+[2026-09-12 15:07:01.6280439] UObject::ExportCustomProperties = 0x150
+[2026-09-12 15:07:01.6280543] UObject::ImportCustomProperties = 0x158
+[2026-09-12 15:07:01.6280645] UObject::PostEditImport = 0x160
+[2026-09-12 15:07:01.6280742] UObject::PostReloadConfig = 0x168
+[2026-09-12 15:07:01.6280842] UObject::Rename = 0x170
+[2026-09-12 15:07:01.6280941] UObject::GetDesc = 0x178
+[2026-09-12 15:07:01.6281040] UObject::GetWorld = 0x180
+[2026-09-12 15:07:01.6281137] UObject::GetNativePropertyValues = 0x188
+[2026-09-12 15:07:01.6281236] UObject::GetResourceSizeEx = 0x190
+[2026-09-12 15:07:01.6281335] UObject::GetExporterName = 0x198
+[2026-09-12 15:07:01.6281434] UObject::GetRestoreForUObjectOverwrite = 0x1A0
+[2026-09-12 15:07:01.6281604] UObject::AreNativePropertiesIdenticalTo = 0x1A8
+[2026-09-12 15:07:01.6281732] UObject::GetAssetRegistryTags_C__Ref_TArray_UObject_FAssetRegistryTag_TSizedDefaultAllocator_32_ = 0x1B0
+[2026-09-12 15:07:01.6281848] UObject::GetAssetRegistryTags_C__FAssetRegistryTagsContext = 0x1B8
+[2026-09-12 15:07:01.6281955] UObject::IsAsset = 0x1C0
+[2026-09-12 15:07:01.6282057] UObject::GetPrimaryAssetId = 0x1C8
+[2026-09-12 15:07:01.6282165] UObject::IsLocalizedResource = 0x1D0
+[2026-09-12 15:07:01.6282266] UObject::IsSafeForRootSet = 0x1D8
+[2026-09-12 15:07:01.6282368] UObject::TagSubobjects = 0x1E0
+[2026-09-12 15:07:01.6282466] UObject::GetLifetimeReplicatedProps = 0x1E8
+[2026-09-12 15:07:01.6282568] UObject::GetReplicatedCustomConditionState = 0x1F0
+[2026-09-12 15:07:01.6282668] UObject::RegisterReplicationFragments = 0x1F8
+[2026-09-12 15:07:01.6282768] UObject::IsNameStableForNetworking = 0x200
+[2026-09-12 15:07:01.6282867] UObject::IsFullNameStableForNetworking = 0x208
+[2026-09-12 15:07:01.6282966] UObject::IsSupportedForNetworking = 0x210
+[2026-09-12 15:07:01.6283067] UObject::GetSubobjectsWithStableNamesForNetworking = 0x218
+[2026-09-12 15:07:01.6283172] UObject::PreNetReceive = 0x220
+[2026-09-12 15:07:01.6283270] UObject::PostNetReceive = 0x228
+[2026-09-12 15:07:01.6283368] UObject::PostRepNotifies = 0x230
+[2026-09-12 15:07:01.6283464] UObject::PreDestroyFromReplication = 0x238
+[2026-09-12 15:07:01.6283563] UObject::BuildSubobjectMapping = 0x240
+[2026-09-12 15:07:01.6283736] UObject::GetConfigOverridePlatform = 0x248
+[2026-09-12 15:07:01.6283843] UObject::OverrideConfigSection = 0x250
+[2026-09-12 15:07:01.6283944] UObject::OverridePerObjectConfigSection = 0x258
+[2026-09-12 15:07:01.6284044] UObject::Unk_ProcessEvent_0 = 0x260
+[2026-09-12 15:07:01.6284145] UObject::Unk_ProcessEvent_1 = 0x268
+[2026-09-12 15:07:01.6284246] UObject::Unk_ProcessEvent_2 = 0x270
+[2026-09-12 15:07:01.6284347] UObject::ProcessEvent = 0x278
+[2026-09-12 15:07:01.6284446] UObject::GetFunctionCallspace = 0x280
+[2026-09-12 15:07:01.6284547] UObject::CallRemoteFunction = 0x288
+[2026-09-12 15:07:01.6284648] UObject::ProcessConsoleExec = 0x290
+[2026-09-12 15:07:01.6284747] UObject::RegenerateClass = 0x298
+[2026-09-12 15:07:01.6284846] UObject::MarkAsEditorOnlySubobject = 0x2A0
+[2026-09-12 15:07:01.6284949] UObject::CheckDefaultSubobjectsInternal = 0x2A8
+[2026-09-12 15:07:01.6285049] UObject::ValidateGeneratedRepEnums = 0x2B0
+[2026-09-12 15:07:01.6285146] UObject::SetNetPushIdDynamic = 0x2B8
+[2026-09-12 15:07:01.6285246] UObject::GetNetPushIdDynamic = 0x2C0
+[2026-09-12 15:07:01.6285370] UField
+[2026-09-12 15:07:01.6285487] UField::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6285598] UField::AddCppProperty = 0x2C8
+[2026-09-12 15:07:01.6285702] UField::Bind = 0x2D0
+[2026-09-12 15:07:01.6285799] UEngine
+[2026-09-12 15:07:01.6285903] UEngine::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6286010] UEngine::WorldAdded = 0x2C8
+[2026-09-12 15:07:01.6286109] UEngine::WorldDestroyed = 0x2D0
+[2026-09-12 15:07:01.6286207] UEngine::IsInitialized = 0x2D8
+[2026-09-12 15:07:01.6286305] UEngine::GetDefaultWorldFeatureLevel = 0x2E0
+[2026-09-12 15:07:01.6286405] UEngine::Init = 0x2E8
+[2026-09-12 15:07:01.6286502] UEngine::Start = 0x2F0
+[2026-09-12 15:07:01.6286600] UEngine::PreExit = 0x2F8
+[2026-09-12 15:07:01.6286697] UEngine::ReleaseAudioDeviceManager = 0x300
+[2026-09-12 15:07:01.6286803] UEngine::Tick = 0x308
+[2026-09-12 15:07:01.6286903] UEngine::UpdateTimeAndHandleMaxTickRate = 0x310
+[2026-09-12 15:07:01.6287002] UEngine::CorrectNegativeTimeDelta = 0x318
+[2026-09-12 15:07:01.6287098] UEngine::GetMaxTickRate = 0x320
+[2026-09-12 15:07:01.6287196] UEngine::GetMaxFPS = 0x328
+[2026-09-12 15:07:01.6287298] UEngine::SetMaxFPS = 0x330
+[2026-09-12 15:07:01.6287396] UEngine::UpdateRunningAverageDeltaTime = 0x338
+[2026-09-12 15:07:01.6287494] UEngine::IsAllowedFramerateSmoothing = 0x340
+[2026-09-12 15:07:01.6287595] UEngine::IsRenderingSuspended = 0x348
+[2026-09-12 15:07:01.6287694] UEngine::OnLostFocusPause = 0x350
+[2026-09-12 15:07:01.6287794] UEngine::ShouldThrottleCPUUsage = 0x358
+[2026-09-12 15:07:01.6287897] UEngine::IsControllerIdUsingPlatformUserId = 0x360
+[2026-09-12 15:07:01.6287997] UEngine::ShouldDrawBrushWireframe = 0x368
+[2026-09-12 15:07:01.6288095] UEngine::GetMapBuildCancelled = 0x370
+[2026-09-12 15:07:01.6288196] UEngine::SetMapBuildCancelled = 0x378
+[2026-09-12 15:07:01.6288294] UEngine::AllowSelectTranslucent = 0x380
+[2026-09-12 15:07:01.6288399] UEngine::OnlyLoadEditorVisibleLevelsInPIE = 0x388
+[2026-09-12 15:07:01.6288498] UEngine::GetUnifiedTimeBudgetForStreaming = 0x390
+[2026-09-12 15:07:01.6288597] UEngine::HandleUnifiedStreaming = 0x398
+[2026-09-12 15:07:01.6288699] UEngine::PreferToStreamLevelsInPIE = 0x3A0
+[2026-09-12 15:07:01.6288799] UEngine::GetSpriteCategoryIndex = 0x3A8
+[2026-09-12 15:07:01.6288897] UEngine::GetTimeBetweenGarbageCollectionPasses_C__bool = 0x3B0
+[2026-09-12 15:07:01.6288997] UEngine::StartFPSChart = 0x3B8
+[2026-09-12 15:07:01.6289096] UEngine::StopFPSChart = 0x3C0
+[2026-09-12 15:07:01.6289193] UEngine::ProcessToggleFreezeCommand = 0x3C8
+[2026-09-12 15:07:01.6289292] UEngine::ProcessToggleFreezeStreamingCommand = 0x3D0
+[2026-09-12 15:07:01.6289392] UEngine::ShouldForceGarbageCollection = 0x3D8
+[2026-09-12 15:07:01.6289491] UEngine::GetIncrementalGCTimePerFrame = 0x3E0
+[2026-09-12 15:07:01.6289592] UEngine::HasMultipleLocalPlayers = 0x3E8
+[2026-09-12 15:07:01.6289692] UEngine::IsSettingUpPlayWorld = 0x3F0
+[2026-09-12 15:07:01.6289795] UEngine::GetGameViewportWidget = 0x3F8
+[2026-09-12 15:07:01.6289895] UEngine::FocusNextPIEWorld = 0x400
+[2026-09-12 15:07:01.6289997] UEngine::ResetPIEAudioSetting = 0x408
+[2026-09-12 15:07:01.6290097] UEngine::GetNextPIEViewport = 0x410
+[2026-09-12 15:07:01.6290196] UEngine::RemapGamepadControllerIdForPIE = 0x418
+[2026-09-12 15:07:01.6290295] UEngine::NotifyToolsOfObjectReplacement = 0x420
+[2026-09-12 15:07:01.6290392] UEngine::UseSound = 0x428
+[2026-09-12 15:07:01.6290488] UEngine::CreatePIEWorldByDuplication = 0x430
+[2026-09-12 15:07:01.6290585] UEngine::PostCreatePIEWorld = 0x438
+[2026-09-12 15:07:01.6290688] UEngine::Experimental_ShouldPreDuplicateMap = 0x440
+[2026-09-12 15:07:01.6290787] UEngine::InitializeAudioDeviceManager = 0x448
+[2026-09-12 15:07:01.6290885] UEngine::InitializeHMDDevice = 0x450
+[2026-09-12 15:07:01.6290983] UEngine::InitializeEyeTrackingDevice = 0x458
+[2026-09-12 15:07:01.6291082] UEngine::RecordHMDAnalytics = 0x460
+[2026-09-12 15:07:01.6291181] UEngine::InitializeObjectReferences = 0x468
+[2026-09-12 15:07:01.6291279] UEngine::InitializePortalServices = 0x470
+[2026-09-12 15:07:01.6291380] UEngine::InitializeRunningAverageDeltaTime = 0x478
+[2026-09-12 15:07:01.6291509] UEngine::SpawnServerActors = 0x480
+[2026-09-12 15:07:01.6291620] UEngine::HandleNetworkFailure = 0x488
+[2026-09-12 15:07:01.6291722] UEngine::HandleTravelFailure = 0x490
+[2026-09-12 15:07:01.6291823] UEngine::HandleNetworkLagStateChanged = 0x498
+[2026-09-12 15:07:01.6292017] UEngine::NetworkRemapPath__Ptr_UPendingNetGame__Ref_FString__bool = 0x4A0
+[2026-09-12 15:07:01.6292137] UEngine::NetworkRemapPath__Ptr_UNetConnection__Ref_FString__bool = 0x4A8
+[2026-09-12 15:07:01.6292251] UEngine::HandleOpenCommand = 0x4B0
+[2026-09-12 15:07:01.6292358] UEngine::HandleTravelCommand = 0x4B8
+[2026-09-12 15:07:01.6292462] UEngine::HandleStreamMapCommand = 0x4C0
+[2026-09-12 15:07:01.6292648] UEngine::HandleServerTravelCommand = 0x4C8
+[2026-09-12 15:07:01.6292763] UEngine::HandleDisconnectCommand = 0x4D0
+[2026-09-12 15:07:01.6292867] UEngine::HandleReconnectCommand = 0x4D8
+[2026-09-12 15:07:01.6292970] UEngine::Browse = 0x4E0
+[2026-09-12 15:07:01.6293067] UEngine::TickWorldTravel = 0x4E8
+[2026-09-12 15:07:01.6293166] UEngine::LoadMap = 0x4F0
+[2026-09-12 15:07:01.6293263] UEngine::RedrawViewports = 0x4F8
+[2026-09-12 15:07:01.6293359] UEngine::TriggerStreamingDataRebuild = 0x500
+[2026-09-12 15:07:01.6293457] UEngine::LoadMapRedrawViewports = 0x508
+[2026-09-12 15:07:01.6293555] UEngine::CancelAllPending = 0x510
+[2026-09-12 15:07:01.6293657] UEngine::CancelPending__Ptr_UNetDriver = 0x518
+[2026-09-12 15:07:01.6293757] UEngine::CancelPending__Ref_FWorldContext = 0x520
+[2026-09-12 15:07:01.6293855] UEngine::CancelPending__Ptr_UWorld__Ptr_UPendingNetGame = 0x528
+[2026-09-12 15:07:01.6293960] UEngine::WorldIsPIEInNewViewport = 0x530
+[2026-09-12 15:07:01.6294061] UEngine::CheckAndHandleStaleWorldObjectReferences = 0x538
+[2026-09-12 15:07:01.6294164] UEngine::DestroyWorldContext = 0x540
+[2026-09-12 15:07:01.6294262] UEngine::AreEditorAnalyticsEnabled = 0x548
+[2026-09-12 15:07:01.6294362] UEngine::CreateStartupAnalyticsAttributes = 0x550
+[2026-09-12 15:07:01.6294460] UEngine::IsAutosaving = 0x558
+[2026-09-12 15:07:01.6294559] UEngine::ShouldDoAsyncEndOfFrameTasks = 0x560
+[2026-09-12 15:07:01.6294658] UEngine::MovePendingLevel = 0x568
+[2026-09-12 15:07:01.6294757] UEngine::ShouldShutdownWorldNetDriver = 0x570
+[2026-09-12 15:07:01.6294857] UEngine::HandleBrowseToDefaultMapFailure = 0x578
+[2026-09-12 15:07:01.6294954] UEngine::HandleNetworkFailure_NotifyGameInstance = 0x580
+[2026-09-12 15:07:01.6295052] UEngine::HandleTravelFailure_NotifyGameInstance = 0x588
+[2026-09-12 15:07:01.6295148] UScriptStruct::ICppStructOps
+[2026-09-12 15:07:01.6295254] UScriptStruct::ICppStructOps::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6295361] UScriptStruct::ICppStructOps::GetCapabilities = 0x8
+[2026-09-12 15:07:01.6295458] UScriptStruct::ICppStructOps::Construct = 0x10
+[2026-09-12 15:07:01.6295556] UScriptStruct::ICppStructOps::ConstructForTests = 0x18
+[2026-09-12 15:07:01.6295655] UScriptStruct::ICppStructOps::Destruct = 0x20
+[2026-09-12 15:07:01.6295755] UScriptStruct::ICppStructOps::Serialize__FStructuredArchiveSlot__Ptr_void__Ptr_UStruct__Ptr_C_void = 0x28
+[2026-09-12 15:07:01.6295864] UScriptStruct::ICppStructOps::Serialize__Ref_FArchive__Ptr_void__Ptr_UStruct__Ptr_C_void = 0x30
+[2026-09-12 15:07:01.6295973] UScriptStruct::ICppStructOps::Serialize__FStructuredArchiveSlot__Ptr_void = 0x38
+[2026-09-12 15:07:01.6296075] UScriptStruct::ICppStructOps::Serialize__Ref_FArchive__Ptr_void = 0x40
+[2026-09-12 15:07:01.6296194] UScriptStruct::ICppStructOps::PostSerialize = 0x48
+[2026-09-12 15:07:01.6296297] UScriptStruct::ICppStructOps::NetSerialize = 0x50
+[2026-09-12 15:07:01.6296398] UScriptStruct::ICppStructOps::NetDeltaSerialize = 0x58
+[2026-09-12 15:07:01.6296497] UScriptStruct::ICppStructOps::PostScriptConstruct = 0x60
+[2026-09-12 15:07:01.6296597] UScriptStruct::ICppStructOps::GetPreloadDependencies = 0x68
+[2026-09-12 15:07:01.6296697] UScriptStruct::ICppStructOps::Copy = 0x70
+[2026-09-12 15:07:01.6296797] UScriptStruct::ICppStructOps::Identical = 0x78
+[2026-09-12 15:07:01.6296896] UScriptStruct::ICppStructOps::ExportTextItem = 0x80
+[2026-09-12 15:07:01.6297457] UScriptStruct::ICppStructOps::ImportTextItem = 0x88
+[2026-09-12 15:07:01.6297629] UScriptStruct::ICppStructOps::FindInnerPropertyInstance = 0x90
+[2026-09-12 15:07:01.6297747] UScriptStruct::ICppStructOps::AddStructReferencedObjects = 0x98
+[2026-09-12 15:07:01.6297854] UScriptStruct::ICppStructOps::SerializeFromMismatchedTag = 0xA0
+[2026-09-12 15:07:01.6297961] UScriptStruct::ICppStructOps::StructuredSerializeFromMismatchedTag = 0xA8
+[2026-09-12 15:07:01.6298066] UScriptStruct::ICppStructOps::GetStructTypeHash = 0xB0
+[2026-09-12 15:07:01.6298172] UScriptStruct::ICppStructOps::InitializeIntrusiveUnsetOptionalValue = 0xB8
+[2026-09-12 15:07:01.6298277] UScriptStruct::ICppStructOps::IsIntrusiveOptionalValueSet = 0xC0
+[2026-09-12 15:07:01.6298380] UScriptStruct::ICppStructOps::ClearIntrusiveOptionalValue = 0xC8
+[2026-09-12 15:07:01.6298482] UScriptStruct::ICppStructOps::IsIntrusiveOptionalSafeForGC = 0xD0
+[2026-09-12 15:07:01.6298582] UScriptStruct::ICppStructOps::Visit = 0xD8
+[2026-09-12 15:07:01.6298680] UScriptStruct::ICppStructOps::ResolveVisitedPathInfo = 0xE0
+[2026-09-12 15:07:01.6298780] FField
+[2026-09-12 15:07:01.6298885] FField::GetFieldSize = 0x0
+[2026-09-12 15:07:01.6298987] FField::__vecDelDtor = 0x8
+[2026-09-12 15:07:01.6299086] FField::Serialize = 0x10
+[2026-09-12 15:07:01.6299184] FField::PostLoad = 0x18
+[2026-09-12 15:07:01.6299291] FField::GetPreloadDependencies = 0x20
+[2026-09-12 15:07:01.6299398] FField::BeginDestroy = 0x28
+[2026-09-12 15:07:01.6299498] FField::AddReferencedObjects = 0x30
+[2026-09-12 15:07:01.6299600] FField::AddCppProperty = 0x38
+[2026-09-12 15:07:01.6299700] FField::Bind = 0x40
+[2026-09-12 15:07:01.6299807] FField::PostDuplicate = 0x48
+[2026-09-12 15:07:01.6299905] FField::GetInnerFieldByName = 0x50
+[2026-09-12 15:07:01.6300034] FField::GetInnerFields = 0x58
+[2026-09-12 15:07:01.6300134] FProperty
+[2026-09-12 15:07:01.6300311] FProperty::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6300429] FProperty::GetCPPMacroType = 0x60
+[2026-09-12 15:07:01.6300532] FProperty::GetCPPType = 0x68
+[2026-09-12 15:07:01.6300631] FProperty::HasSetter = 0x70
+[2026-09-12 15:07:01.6300730] FProperty::HasGetter = 0x78
+[2026-09-12 15:07:01.6300827] FProperty::HasSetterOrGetter = 0x80
+[2026-09-12 15:07:01.6300926] FProperty::CallSetter = 0x88
+[2026-09-12 15:07:01.6301023] FProperty::CallGetter = 0x90
+[2026-09-12 15:07:01.6301124] FProperty::Visit_C__Ref_FPropertyVisitorContext__C_TFunctionRef_enum_EPropertyVisitorControlFlow_cdecl_FPropertyVisitorContext_const_&_ = 0x98
+[2026-09-12 15:07:01.6301237] FProperty::ResolveVisitedPathInfo = 0xA0
+[2026-09-12 15:07:01.6301343] FProperty::LinkInternal = 0xA8
+[2026-09-12 15:07:01.6301441] FProperty::ConvertFromType = 0xB0
+[2026-09-12 15:07:01.6301538] FProperty::Identical = 0xB8
+[2026-09-12 15:07:01.6301635] FProperty::SerializeItem = 0xC0
+[2026-09-12 15:07:01.6301732] FProperty::NetSerializeItem = 0xC8
+[2026-09-12 15:07:01.6301832] FProperty::SupportsNetSharedSerialization = 0xD0
+[2026-09-12 15:07:01.6301935] FProperty::GetValueAddressAtIndex_Direct = 0xD8
+[2026-09-12 15:07:01.6302093] FProperty::ExportText_Internal = 0xE0
+[2026-09-12 15:07:01.6302204] FProperty::ImportText_Internal = 0xE8
+[2026-09-12 15:07:01.6302306] FProperty::CopyValuesInternal = 0xF0
+[2026-09-12 15:07:01.6302406] FProperty::GetValueTypeHashInternal = 0xF8
+[2026-09-12 15:07:01.6302505] FProperty::CopySingleValueToScriptVM = 0x100
+[2026-09-12 15:07:01.6302603] FProperty::CopyCompleteValueToScriptVM = 0x108
+[2026-09-12 15:07:01.6302703] FProperty::CopyCompleteValueToScriptVM_InContainer = 0x110
+[2026-09-12 15:07:01.6302806] FProperty::CopyCompleteValueFromScriptVM_InContainer = 0x118
+[2026-09-12 15:07:01.6302906] FProperty::CopySingleValueFromScriptVM = 0x120
+[2026-09-12 15:07:01.6303006] FProperty::CopyCompleteValueFromScriptVM = 0x128
+[2026-09-12 15:07:01.6303103] FProperty::ClearValueInternal = 0x130
+[2026-09-12 15:07:01.6303202] FProperty::DestroyValueInternal = 0x138
+[2026-09-12 15:07:01.6303301] FProperty::ContainsClearOnFinishDestroyInternal = 0x140
+[2026-09-12 15:07:01.6303425] FProperty::FinishDestroyInternal = 0x148
+[2026-09-12 15:07:01.6303542] FProperty::InitializeValueInternal = 0x150
+[2026-09-12 15:07:01.6303643] FProperty::GetID = 0x158
+[2026-09-12 15:07:01.6303741] FProperty::InstanceSubobjects = 0x160
+[2026-09-12 15:07:01.6303839] FProperty::GetMinAlignment = 0x168
+[2026-09-12 15:07:01.6303938] FProperty::ContainsObjectReference = 0x170
+[2026-09-12 15:07:01.6304034] FProperty::EmitReferenceInfo = 0x178
+[2026-09-12 15:07:01.6304132] FProperty::UseBinaryOrNativeSerialization = 0x180
+[2026-09-12 15:07:01.6304228] FProperty::LoadTypeName = 0x188
+[2026-09-12 15:07:01.6304325] FProperty::SaveTypeName = 0x190
+[2026-09-12 15:07:01.6304420] FProperty::CanSerializeFromTypeName = 0x198
+[2026-09-12 15:07:01.6304518] FProperty::SameType = 0x1A0
+[2026-09-12 15:07:01.6304614] FProperty::HasIntrusiveUnsetOptionalState = 0x1A8
+[2026-09-12 15:07:01.6304712] FProperty::InitializeIntrusiveUnsetOptionalValue = 0x1B0
+[2026-09-12 15:07:01.6304808] FProperty::IsIntrusiveOptionalValueSet = 0x1B8
+[2026-09-12 15:07:01.6304904] FProperty::ClearIntrusiveOptionalValue = 0x1C0
+[2026-09-12 15:07:01.6305000] FProperty::EmitIntrusiveOptionalReferenceInfo = 0x1C8
+[2026-09-12 15:07:01.6305096] FNumericProperty
+[2026-09-12 15:07:01.6305196] FNumericProperty::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6305299] FNumericProperty::IsFloatingPoint = 0x1D0
+[2026-09-12 15:07:01.6305396] FNumericProperty::IsInteger = 0x1D8
+[2026-09-12 15:07:01.6305494] FNumericProperty::GetIntPropertyEnum = 0x1E0
+[2026-09-12 15:07:01.6305593] FNumericProperty::SetIntPropertyValue_C__Ptr_void__int64 = 0x1E8
+[2026-09-12 15:07:01.6305698] FNumericProperty::SetIntPropertyValue_C__Ptr_void__uint64 = 0x1F0
+[2026-09-12 15:07:01.6305798] FNumericProperty::SetFloatingPointPropertyValue = 0x1F8
+[2026-09-12 15:07:01.6305896] FNumericProperty::SetNumericPropertyValueFromString = 0x200
+[2026-09-12 15:07:01.6305995] FNumericProperty::SetNumericPropertyValueFromString_InContainer = 0x208
+[2026-09-12 15:07:01.6306105] FNumericProperty::GetSignedIntPropertyValue = 0x210
+[2026-09-12 15:07:01.6306208] FNumericProperty::GetSignedIntPropertyValue_InContainer = 0x218
+[2026-09-12 15:07:01.6306309] FNumericProperty::GetUnsignedIntPropertyValue = 0x220
+[2026-09-12 15:07:01.6306407] FNumericProperty::GetUnsignedIntPropertyValue_InContainer = 0x228
+[2026-09-12 15:07:01.6306511] FNumericProperty::GetFloatingPointPropertyValue = 0x230
+[2026-09-12 15:07:01.6306610] FNumericProperty::GetNumericPropertyValueToString = 0x238
+[2026-09-12 15:07:01.6306710] FNumericProperty::GetNumericPropertyValueToString_InContainer = 0x240
+[2026-09-12 15:07:01.6306811] FNumericProperty::CanHoldDoubleValueInternal = 0x248
+[2026-09-12 15:07:01.6306912] FNumericProperty::CanHoldSignedValueInternal = 0x250
+[2026-09-12 15:07:01.6307009] FNumericProperty::CanHoldUnsignedValueInternal = 0x258
+[2026-09-12 15:07:01.6307105] FMulticastDelegateProperty
+[2026-09-12 15:07:01.6307205] FMulticastDelegateProperty::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6307303] FMulticastDelegateProperty::GetMulticastDelegate = 0x1D0
+[2026-09-12 15:07:01.6307402] FMulticastDelegateProperty::SetMulticastDelegate = 0x1D8
+[2026-09-12 15:07:01.6307499] FMulticastDelegateProperty::AddDelegate = 0x1E0
+[2026-09-12 15:07:01.6307596] FMulticastDelegateProperty::RemoveDelegate = 0x1E8
+[2026-09-12 15:07:01.6307694] FMulticastDelegateProperty::ClearDelegate = 0x1F0
+[2026-09-12 15:07:01.6307791] FMulticastDelegateProperty::GetMulticastScriptDelegate = 0x1F8
+[2026-09-12 15:07:01.6307887] FObjectPropertyBase
+[2026-09-12 15:07:01.6307987] FObjectPropertyBase::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6308088] FObjectPropertyBase::GetCPPTypeCustom = 0x1D0
+[2026-09-12 15:07:01.6308185] FObjectPropertyBase::LoadObjectPropertyValue = 0x1D8
+[2026-09-12 15:07:01.6308283] FObjectPropertyBase::SetObjectPropertyValueUnchecked = 0x1E0
+[2026-09-12 15:07:01.6308385] FObjectPropertyBase::SetObjectPtrPropertyValueUnchecked = 0x1E8
+[2026-09-12 15:07:01.6308486] FObjectPropertyBase::SetObjectPropertyValueUnchecked_InContainer = 0x1F0
+[2026-09-12 15:07:01.6308605] FObjectPropertyBase::SetObjectPtrPropertyValueUnchecked_InContainer = 0x1F8
+[2026-09-12 15:07:01.6308714] FObjectPropertyBase::GetObjectPropertyValue = 0x200
+[2026-09-12 15:07:01.6308815] FObjectPropertyBase::GetObjectPtrPropertyValue = 0x208
+[2026-09-12 15:07:01.6308927] FObjectPropertyBase::GetObjectPropertyValue_InContainer = 0x210
+[2026-09-12 15:07:01.6309032] FObjectPropertyBase::GetObjectPtrPropertyValue_InContainer = 0x218
+[2026-09-12 15:07:01.6309132] FObjectPropertyBase::CheckValidObject = 0x220
+[2026-09-12 15:07:01.6309229] FObjectPropertyBase::AllowObjectTypeReinterpretationTo = 0x228
+[2026-09-12 15:07:01.6309328] FObjectPropertyBase::AllowCrossLevel = 0x230
+[2026-09-12 15:07:01.6309423] UStruct
+[2026-09-12 15:07:01.6309528] UStruct::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6309629] UStruct::GetInheritanceSuper = 0x2D8
+[2026-09-12 15:07:01.6309727] UStruct::Link = 0x2E0
+[2026-09-12 15:07:01.6309825] UStruct::SerializeBin_C__FStructuredArchiveSlot__Ptr_void = 0x2E8
+[2026-09-12 15:07:01.6309928] UStruct::SerializeBin_C__Ref_FArchive__Ptr_void = 0x2F0
+[2026-09-12 15:07:01.6310030] UStruct::SerializeTaggedProperties_C__FStructuredArchiveSlot__Ptr_uint8__Ptr_UStruct__Ptr_uint8__Ptr_C_UObject = 0x2F8
+[2026-09-12 15:07:01.6310138] UStruct::SerializeTaggedProperties_C__Ref_FArchive__Ptr_uint8__Ptr_UStruct__Ptr_uint8__Ptr_C_UObject = 0x300
+[2026-09-12 15:07:01.6310244] UStruct::PreloadChildren = 0x308
+[2026-09-12 15:07:01.6310341] UStruct::InitializeStruct = 0x310
+[2026-09-12 15:07:01.6310525] UStruct::DestroyStruct = 0x318
+[2026-09-12 15:07:01.6310637] UStruct::CustomFindProperty = 0x320
+[2026-09-12 15:07:01.6310739] UStruct::SerializeExpr = 0x328
+[2026-09-12 15:07:01.6310837] UStruct::GetPrefixCPP = 0x330
+[2026-09-12 15:07:01.6310934] UStruct::SetSuperStruct = 0x338
+[2026-09-12 15:07:01.6311031] UStruct::GetAuthoredNameForField_C__Ptr_C_FField = 0x340
+[2026-09-12 15:07:01.6311129] UStruct::GetAuthoredNameForField_C__Ptr_C_UField = 0x348
+[2026-09-12 15:07:01.6311227] UStruct::IsStructTrashed = 0x350
+[2026-09-12 15:07:01.6311330] UStruct::Visit_C__Ref_FPropertyVisitorContext__C_TFunctionRef_enum_EPropertyVisitorControlFlow_cdecl_FPropertyVisitorContext_const_&_ = 0x358
+[2026-09-12 15:07:01.6311442] UStruct::ResolveVisitedPathInfo = 0x360
+[2026-09-12 15:07:01.6311542] UStruct::FindPropertyNameFromGuid = 0x368
+[2026-09-12 15:07:01.6311639] UStruct::FindPropertyGuidFromName = 0x370
+[2026-09-12 15:07:01.6311736] UStruct::ArePropertyGuidsAvailable = 0x378
+[2026-09-12 15:07:01.6311830] FOutputDevice
+[2026-09-12 15:07:01.6311929] FOutputDevice::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6312032] FOutputDevice::Serialize__Ptr_C_wchar_t__ELogVerbosity_Type__Ref_C_FName__C_double = 0x8
+[2026-09-12 15:07:01.6312411] FOutputDevice::Serialize__Ptr_C_wchar_t__ELogVerbosity_Type__Ref_C_FName = 0x10
+[2026-09-12 15:07:01.6312522] FOutputDevice::SerializeRecord = 0x18
+[2026-09-12 15:07:01.6312624] FOutputDevice::Flush = 0x20
+[2026-09-12 15:07:01.6312724] FOutputDevice::TearDown = 0x28
+[2026-09-12 15:07:01.6312822] FOutputDevice::Dump = 0x30
+[2026-09-12 15:07:01.6312918] FOutputDevice::IsMemoryOnly = 0x38
+[2026-09-12 15:07:01.6313019] FOutputDevice::CanBeUsedOnAnyThread = 0x40
+[2026-09-12 15:07:01.6313128] FOutputDevice::CanBeUsedOnMultipleThreads = 0x48
+[2026-09-12 15:07:01.6313226] FOutputDevice::CanBeUsedOnPanicThread = 0x50
+[2026-09-12 15:07:01.6313322] FMalloc
+[2026-09-12 15:07:01.6313419] FMalloc::Unk_0 = 0x0
+[2026-09-12 15:07:01.6313518] FMalloc::Unk_1 = 0x10
+[2026-09-12 15:07:01.6313614] FMalloc::Unk_2 = 0x18
+[2026-09-12 15:07:01.6313714] FMalloc::__vecDelDtor = 0x20
+[2026-09-12 15:07:01.6313810] FMalloc::Malloc = 0x28
+[2026-09-12 15:07:01.6313909] FMalloc::TryMalloc = 0x30
+[2026-09-12 15:07:01.6314006] FMalloc::Realloc = 0x38
+[2026-09-12 15:07:01.6314107] FMalloc::TryRealloc = 0x40
+[2026-09-12 15:07:01.6314204] FMalloc::Free = 0x48
+[2026-09-12 15:07:01.6314308] FMalloc::MallocZeroed = 0x50
+[2026-09-12 15:07:01.6314406] FMalloc::TryMallocZeroed = 0x58
+[2026-09-12 15:07:01.6314502] FMalloc::QuantizeSize = 0x60
+[2026-09-12 15:07:01.6314619] FMalloc::GetAllocationSize = 0x68
+[2026-09-12 15:07:01.6314731] FMalloc::Trim = 0x70
+[2026-09-12 15:07:01.6314832] FMalloc::SetupTLSCachesOnCurrentThread = 0x78
+[2026-09-12 15:07:01.6314931] FMalloc::MarkTLSCachesAsUsedOnCurrentThread = 0x80
+[2026-09-12 15:07:01.6315028] FMalloc::MarkTLSCachesAsUnusedOnCurrentThread = 0x88
+[2026-09-12 15:07:01.6315127] FMalloc::ClearAndDisableTLSCachesOnCurrentThread = 0x90
+[2026-09-12 15:07:01.6315224] FMalloc::InitializeStatsMetadata = 0x98
+[2026-09-12 15:07:01.6315362] FMalloc::UpdateStats = 0xA0
+[2026-09-12 15:07:01.6315466] FMalloc::GetAllocatorStats = 0xA8
+[2026-09-12 15:07:01.6315569] FMalloc::DumpAllocatorStats = 0xB0
+[2026-09-12 15:07:01.6315674] FMalloc::IsInternallyThreadSafe = 0xB8
+[2026-09-12 15:07:01.6315773] FMalloc::ValidateHeap = 0xC0
+[2026-09-12 15:07:01.6315873] FMalloc::GetDescriptiveName = 0xC8
+[2026-09-12 15:07:01.6315973] FMalloc::OnMallocInitialized = 0xD0
+[2026-09-12 15:07:01.6316073] FMalloc::OnPreFork = 0xD8
+[2026-09-12 15:07:01.6316170] FMalloc::OnPostFork = 0xE0
+[2026-09-12 15:07:01.6316269] FMalloc::GetImmediatelyFreeableCachedMemorySize = 0xE8
+[2026-09-12 15:07:01.6316370] FMalloc::GetTotalFreeCachedMemorySize = 0xF0
+[2026-09-12 15:07:01.6316467] AActor
+[2026-09-12 15:07:01.6316566] AActor::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6316664] AActor::OnRep_ReplicateMovement = 0x2C8
+[2026-09-12 15:07:01.6316762] AActor::TearOff = 0x2D0
+[2026-09-12 15:07:01.6316859] AActor::HasNetOwner = 0x2D8
+[2026-09-12 15:07:01.6316955] AActor::HasLocalNetOwner = 0x2E0
+[2026-09-12 15:07:01.6317052] AActor::OnRep_Owner = 0x2E8
+[2026-09-12 15:07:01.6317152] AActor::SetReplicateMovement = 0x2F0
+[2026-09-12 15:07:01.6317252] AActor::OnRep_AttachmentReplication = 0x2F8
+[2026-09-12 15:07:01.6317352] AActor::IsReplicationPausedForConnection = 0x300
+[2026-09-12 15:07:01.6317456] AActor::OnReplicationPausedChanged = 0x308
+[2026-09-12 15:07:01.6317555] AActor::ReplicateSubobjects = 0x310
+[2026-09-12 15:07:01.6317655] AActor::OnSubobjectCreatedFromReplication = 0x318
+[2026-09-12 15:07:01.6317754] AActor::OnSubobjectDestroyFromReplication = 0x320
+[2026-09-12 15:07:01.6317854] AActor::PreReplication = 0x328
+[2026-09-12 15:07:01.6317951] AActor::PreReplicationForReplay = 0x330
+[2026-09-12 15:07:01.6318051] AActor::RewindForReplay = 0x338
+[2026-09-12 15:07:01.6318148] AActor::OnRep_Instigator = 0x340
+[2026-09-12 15:07:01.6318248] AActor::EnableInput = 0x348
+[2026-09-12 15:07:01.6318345] AActor::CreateInputComponent = 0x350
+[2026-09-12 15:07:01.6318443] AActor::DisableInput = 0x358
+[2026-09-12 15:07:01.6318541] AActor::SupportsIncrementalPreRegisterComponents = 0x360
+[2026-09-12 15:07:01.6318638] AActor::SupportsIncrementalPreUnregisterComponents = 0x368
+[2026-09-12 15:07:01.6318738] AActor::GetActorBounds = 0x370
+[2026-09-12 15:07:01.6318835] AActor::GetVelocity = 0x378
+[2026-09-12 15:07:01.6318931] AActor::SetActorHiddenInGame = 0x380
+[2026-09-12 15:07:01.6319029] AActor::K2_DestroyActor = 0x388
+[2026-09-12 15:07:01.6319129] AActor::AddTickPrerequisiteActor = 0x390
+[2026-09-12 15:07:01.6319229] AActor::AddTickPrerequisiteComponent = 0x398
+[2026-09-12 15:07:01.6319327] AActor::RemoveTickPrerequisiteActor = 0x3A0
+[2026-09-12 15:07:01.6319425] AActor::RemoveTickPrerequisiteComponent = 0x3A8
+[2026-09-12 15:07:01.6319521] AActor::BeginPlay = 0x3B0
+[2026-09-12 15:07:01.6319618] AActor::EndPlay = 0x3B8
+[2026-09-12 15:07:01.6319713] AActor::NotifyActorBeginOverlap = 0x3C0
+[2026-09-12 15:07:01.6319812] AActor::NotifyActorEndOverlap = 0x3C8
+[2026-09-12 15:07:01.6319914] AActor::NotifyActorBeginCursorOver = 0x3D0
+[2026-09-12 15:07:01.6320038] AActor::NotifyActorEndCursorOver = 0x3D8
+[2026-09-12 15:07:01.6320139] AActor::NotifyActorOnClicked = 0x3E0
+[2026-09-12 15:07:01.6320238] AActor::NotifyActorOnReleased = 0x3E8
+[2026-09-12 15:07:01.6320337] AActor::NotifyActorOnInputTouchBegin = 0x3F0
+[2026-09-12 15:07:01.6320437] AActor::NotifyActorOnInputTouchEnd = 0x3F8
+[2026-09-12 15:07:01.6320534] AActor::NotifyActorOnInputTouchEnter = 0x400
+[2026-09-12 15:07:01.6320634] AActor::NotifyActorOnInputTouchLeave = 0x408
+[2026-09-12 15:07:01.6321037] AActor::NotifyHit = 0x410
+[2026-09-12 15:07:01.6321185] AActor::SetLifeSpan = 0x418
+[2026-09-12 15:07:01.6321292] AActor::GetLifeSpan = 0x420
+[2026-09-12 15:07:01.6321391] AActor::IsEditorOnlyLoadedInPIE = 0x428
+[2026-09-12 15:07:01.6321496] AActor::IsRuntimeOnly = 0x430
+[2026-09-12 15:07:01.6321592] AActor::PreDuplicateFromRoot = 0x438
+[2026-09-12 15:07:01.6321695] AActor::PreSaveFromRoot = 0x440
+[2026-09-12 15:07:01.6321793] AActor::PostSaveFromRoot = 0x448
+[2026-09-12 15:07:01.6321890] AActor::GatherCurrentMovement = 0x450
+[2026-09-12 15:07:01.6321990] AActor::GetDefaultAttachComponent = 0x458
+[2026-09-12 15:07:01.6322087] AActor::ApplyWorldOffset = 0x460
+[2026-09-12 15:07:01.6322183] AActor::IsLevelBoundsRelevant = 0x468
+[2026-09-12 15:07:01.6322346] AActor::IsHLODRelevant = 0x470
+[2026-09-12 15:07:01.6322449] AActor::HasHLODRelevantComponents = 0x478
+[2026-09-12 15:07:01.6322551] AActor::GetHLODRelevantComponents = 0x480
+[2026-09-12 15:07:01.6322647] AActor::GetNetPriority = 0x488
+[2026-09-12 15:07:01.6322744] AActor::GetReplayPriority = 0x490
+[2026-09-12 15:07:01.6322843] AActor::GetNetDormancy = 0x498
+[2026-09-12 15:07:01.6322940] AActor::OnActorChannelOpen = 0x4A0
+[2026-09-12 15:07:01.6323039] AActor::UseShortConnectTimeout = 0x4A8
+[2026-09-12 15:07:01.6323136] AActor::OnSerializeNewActor = 0x4B0
+[2026-09-12 15:07:01.6323233] AActor::OnNetCleanup = 0x4B8
+[2026-09-12 15:07:01.6323331] AActor::SetActorTickEnabled = 0x4C0
+[2026-09-12 15:07:01.6323488] AActor::TickActor = 0x4C8
+[2026-09-12 15:07:01.6323589] AActor::AsyncPhysicsTickActor = 0x4D0
+[2026-09-12 15:07:01.6323690] AActor::PostActorCreated = 0x4D8
+[2026-09-12 15:07:01.6323786] AActor::LifeSpanExpired = 0x4E0
+[2026-09-12 15:07:01.6323884] AActor::PostNetReceiveRole = 0x4E8
+[2026-09-12 15:07:01.6323983] AActor::PostNetInit = 0x4F0
+[2026-09-12 15:07:01.6324079] AActor::OnRep_ReplicatedMovement = 0x4F8
+[2026-09-12 15:07:01.6324177] AActor::PostNetReceiveLocationAndRotation = 0x500
+[2026-09-12 15:07:01.6324276] AActor::PostNetReceiveVelocity = 0x508
+[2026-09-12 15:07:01.6324375] AActor::PostNetReceivePhysicState = 0x510
+[2026-09-12 15:07:01.6324473] AActor::SetOwner = 0x518
+[2026-09-12 15:07:01.6324572] AActor::CheckStillInWorld = 0x520
+[2026-09-12 15:07:01.6324671] AActor::GetPhysicsVolume = 0x528
+[2026-09-12 15:07:01.6324767] AActor::Tick = 0x530
+[2026-09-12 15:07:01.6324864] AActor::ShouldTickIfViewportsOnly = 0x538
+[2026-09-12 15:07:01.6324960] AActor::IsNetRelevantFor = 0x540
+[2026-09-12 15:07:01.6325054] AActor::IsReplayRelevantFor = 0x548
+[2026-09-12 15:07:01.6325152] AActor::IsRelevancyOwnerFor = 0x550
+[2026-09-12 15:07:01.6325249] AActor::PreInitializeComponents = 0x558
+[2026-09-12 15:07:01.6325347] AActor::PostInitializeComponents = 0x560
+[2026-09-12 15:07:01.6325445] AActor::DispatchPhysicsCollisionHit = 0x568
+[2026-09-12 15:07:01.6325542] AActor::GetNetOwner = 0x570
+[2026-09-12 15:07:01.6325639] AActor::GetNetOwningPlayer = 0x578
+[2026-09-12 15:07:01.6325737] AActor::GetNetOwningPlayerAnyRole = 0x580
+[2026-09-12 15:07:01.6325833] AActor::GetNetConnection = 0x588
+[2026-09-12 15:07:01.6325929] AActor::DestroyNetworkActorHandled = 0x590
+[2026-09-12 15:07:01.6326026] AActor::IsSelectionParentOfAttachedActors = 0x598
+[2026-09-12 15:07:01.6326124] AActor::IsSelectionChild = 0x5A0
+[2026-09-12 15:07:01.6326221] AActor::GetSelectionParent = 0x5A8
+[2026-09-12 15:07:01.6326319] AActor::GetRootSelectionParent = 0x5B0
+[2026-09-12 15:07:01.6326417] AActor::SupportsSubRootSelection = 0x5B8
+[2026-09-12 15:07:01.6326515] AActor::PushSelectionToProxies = 0x5C0
+[2026-09-12 15:07:01.6326615] AActor::RegisterAllComponents = 0x5C8
+[2026-09-12 15:07:01.6326714] AActor::PreRegisterAllComponents = 0x5D0
+[2026-09-12 15:07:01.6326812] AActor::PostRegisterAllComponents = 0x5D8
+[2026-09-12 15:07:01.6326909] AActor::UnregisterAllComponents = 0x5E0
+[2026-09-12 15:07:01.6327006] AActor::PostUnregisterAllComponents = 0x5E8
+[2026-09-12 15:07:01.6327103] AActor::ReregisterAllComponents = 0x5F0
+[2026-09-12 15:07:01.6327216] AActor::MarkComponentsAsPendingKill = 0x5F8
+[2026-09-12 15:07:01.6327325] AActor::MarkComponentsAsGarbage = 0x600
+[2026-09-12 15:07:01.6327425] AActor::InvalidateLightingCacheDetailed = 0x608
+[2026-09-12 15:07:01.6327525] AActor::TeleportTo = 0x610
+[2026-09-12 15:07:01.6327623] AActor::TeleportSucceeded = 0x618
+[2026-09-12 15:07:01.6327720] AActor::ClearCrossLevelReferences = 0x620
+[2026-09-12 15:07:01.6327817] AActor::IsBasedOnActor = 0x628
+[2026-09-12 15:07:01.6327914] AActor::IsAttachedTo = 0x630
+[2026-09-12 15:07:01.6328011] AActor::OnConstruction = 0x638
+[2026-09-12 15:07:01.6328107] AActor::BeginReplication = 0x640
+[2026-09-12 15:07:01.6328204] AActor::EndReplication = 0x648
+[2026-09-12 15:07:01.6328299] AActor::RegisterActorTickFunctions = 0x650
+[2026-09-12 15:07:01.6328396] AActor::Destroyed = 0x658
+[2026-09-12 15:07:01.6328492] AActor::FellOutOfWorld = 0x660
+[2026-09-12 15:07:01.6328589] AActor::OutsideWorldBounds = 0x668
+[2026-09-12 15:07:01.6328687] AActor::GetComponentsBoundingBox = 0x670
+[2026-09-12 15:07:01.6328787] AActor::CalculateComponentsBoundingBoxInLocalSpace = 0x678
+[2026-09-12 15:07:01.6328886] AActor::GetComponentsBoundingCylinder = 0x680
+[2026-09-12 15:07:01.6328984] AActor::GetSimpleCollisionCylinder = 0x688
+[2026-09-12 15:07:01.6329082] AActor::IsRootComponentCollisionRegistered = 0x690
+[2026-09-12 15:07:01.6329181] AActor::TornOff = 0x698
+[2026-09-12 15:07:01.6329277] AActor::GetComponentsCollisionResponseToChannel = 0x6A0
+[2026-09-12 15:07:01.6329373] AActor::CanBeBaseForCharacter = 0x6A8
+[2026-09-12 15:07:01.6329473] AActor::TakeDamage = 0x6B0
+[2026-09-12 15:07:01.6329570] AActor::InternalTakeRadialDamage = 0x6B8
+[2026-09-12 15:07:01.6329668] AActor::InternalTakePointDamage = 0x6C0
+[2026-09-12 15:07:01.6329766] AActor::BecomeViewTarget = 0x6C8
+[2026-09-12 15:07:01.6329863] AActor::EndViewTarget = 0x6D0
+[2026-09-12 15:07:01.6329959] AActor::CalcCamera = 0x6D8
+[2026-09-12 15:07:01.6330055] AActor::HasActiveCameraComponent = 0x6E0
+[2026-09-12 15:07:01.6330157] AActor::HasActivePawnControlCameraComponent = 0x6E8
+[2026-09-12 15:07:01.6330255] AActor::GetHumanReadableName = 0x6F0
+[2026-09-12 15:07:01.6330352] AActor::Reset = 0x6F8
+[2026-09-12 15:07:01.6330449] AActor::GetLastRenderTime = 0x700
+[2026-09-12 15:07:01.6330546] AActor::ForceNetRelevant = 0x708
+[2026-09-12 15:07:01.6330642] AActor::ForceNetUpdate = 0x710
+[2026-09-12 15:07:01.6330738] AActor::PrestreamTextures = 0x718
+[2026-09-12 15:07:01.6330837] AActor::GetActorEyesViewPoint = 0x720
+[2026-09-12 15:07:01.6330935] AActor::GetTargetLocation = 0x728
+[2026-09-12 15:07:01.6331034] AActor::PostRenderFor = 0x730
+[2026-09-12 15:07:01.6331132] AActor::FindComponentByClass = 0x738
+[2026-09-12 15:07:01.6331231] AActor::FindComponentByInterface = 0x740
+[2026-09-12 15:07:01.6331328] AActor::AllowActorComponentToReplicate = 0x748
+[2026-09-12 15:07:01.6331427] AActor::IsComponentRelevantForNavigation = 0x750
+[2026-09-12 15:07:01.6331523] AActor::DisplayDebug = 0x758
+[2026-09-12 15:07:01.6331619] AGameModeBase
+[2026-09-12 15:07:01.6331718] AGameModeBase::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6331821] AGameModeBase::InitializeHUDForPlayer_Implementation = 0x760
+[2026-09-12 15:07:01.6331924] AGameModeBase::InitStartSpot_Implementation = 0x768
+[2026-09-12 15:07:01.6332022] AGameModeBase::SpawnDefaultPawnAtTransform_Implementation = 0x770
+[2026-09-12 15:07:01.6332123] AGameModeBase::SpawnDefaultPawnFor_Implementation = 0x778
+[2026-09-12 15:07:01.6332223] AGameModeBase::PlayerCanRestart_Implementation = 0x780
+[2026-09-12 15:07:01.6332321] AGameModeBase::FindPlayerStart_Implementation = 0x788
+[2026-09-12 15:07:01.6332419] AGameModeBase::ChoosePlayerStart_Implementation = 0x790
+[2026-09-12 15:07:01.6332517] AGameModeBase::CanSpectate_Implementation = 0x798
+[2026-09-12 15:07:01.6332627] AGameModeBase::MustSpectate_Implementation = 0x7A0
+[2026-09-12 15:07:01.6332725] AGameModeBase::HandleStartingNewPlayer_Implementation = 0x7A8
+[2026-09-12 15:07:01.6332824] AGameModeBase::ShouldReset_Implementation = 0x7B0
+[2026-09-12 15:07:01.6332922] AGameModeBase::GetDefaultPawnClassForController_Implementation = 0x7B8
+[2026-09-12 15:07:01.6333039] AGameModeBase::InitGame = 0x7C0
+[2026-09-12 15:07:01.6333146] AGameModeBase::InitGameState = 0x7C8
+[2026-09-12 15:07:01.6333266] AGameModeBase::GetGameSessionClass = 0x7D0
+[2026-09-12 15:07:01.6333369] AGameModeBase::GetNumPlayers = 0x7D8
+[2026-09-12 15:07:01.6333471] AGameModeBase::GetNumSpectators = 0x7E0
+[2026-09-12 15:07:01.6333573] AGameModeBase::StartPlay = 0x7E8
+[2026-09-12 15:07:01.6333671] AGameModeBase::HasMatchStarted = 0x7F0
+[2026-09-12 15:07:01.6333771] AGameModeBase::HasMatchEnded = 0x7F8
+[2026-09-12 15:07:01.6333869] AGameModeBase::SetPause = 0x800
+[2026-09-12 15:07:01.6333966] AGameModeBase::ClearPause = 0x808
+[2026-09-12 15:07:01.6334065] AGameModeBase::AllowPausing = 0x810
+[2026-09-12 15:07:01.6334164] AGameModeBase::IsPaused = 0x818
+[2026-09-12 15:07:01.6334261] AGameModeBase::ResetLevel = 0x820
+[2026-09-12 15:07:01.6334362] AGameModeBase::ReturnToMainMenuHost = 0x828
+[2026-09-12 15:07:01.6334462] AGameModeBase::CanServerTravel = 0x830
+[2026-09-12 15:07:01.6334564] AGameModeBase::ProcessServerTravel = 0x838
+[2026-09-12 15:07:01.6334664] AGameModeBase::GetSeamlessTravelActorList = 0x840
+[2026-09-12 15:07:01.6334769] AGameModeBase::SwapPlayerControllers = 0x848
+[2026-09-12 15:07:01.6334870] AGameModeBase::GetPlayerControllerClassToSpawnForSeamlessTravel = 0x850
+[2026-09-12 15:07:01.6334974] AGameModeBase::HandleSeamlessTravelPlayer = 0x858
+[2026-09-12 15:07:01.6335075] AGameModeBase::PostSeamlessTravel = 0x860
+[2026-09-12 15:07:01.6335173] AGameModeBase::StartToLeaveMap = 0x868
+[2026-09-12 15:07:01.6335273] AGameModeBase::GameWelcomePlayer = 0x870
+[2026-09-12 15:07:01.6335377] AGameModeBase::PreLogin = 0x878
+[2026-09-12 15:07:01.6335475] AGameModeBase::PreLoginAsync = 0x880
+[2026-09-12 15:07:01.6335576] AGameModeBase::Login = 0x888
+[2026-09-12 15:07:01.6335674] AGameModeBase::PostLogin = 0x890
+[2026-09-12 15:07:01.6335771] AGameModeBase::OnPostLogin = 0x898
+[2026-09-12 15:07:01.6335870] AGameModeBase::Logout = 0x8A0
+[2026-09-12 15:07:01.6335969] AGameModeBase::SpawnPlayerController__ENetRole__Ref_C_UE_Math_TVector_double___Ref_C_UE_Math_TRotator_double_ = 0x8A8
+[2026-09-12 15:07:01.6336075] AGameModeBase::SpawnPlayerController__ENetRole__Ref_C_FString = 0x8B0
+[2026-09-12 15:07:01.6336184] AGameModeBase::SpawnReplayPlayerController = 0x8B8
+[2026-09-12 15:07:01.6336284] AGameModeBase::ChangeName = 0x8C0
+[2026-09-12 15:07:01.6336383] AGameModeBase::RestartPlayer = 0x8C8
+[2026-09-12 15:07:01.6336483] AGameModeBase::RestartPlayerAtPlayerStart = 0x8D0
+[2026-09-12 15:07:01.6336580] AGameModeBase::RestartPlayerAtTransform = 0x8D8
+[2026-09-12 15:07:01.6336679] AGameModeBase::SetPlayerDefaults = 0x8E0
+[2026-09-12 15:07:01.6336779] AGameModeBase::AllowCheats = 0x8E8
+[2026-09-12 15:07:01.6336877] AGameModeBase::IsHandlingReplays = 0x8F0
+[2026-09-12 15:07:01.6336975] AGameModeBase::SpawnPlayerFromSimulate = 0x8F8
+[2026-09-12 15:07:01.6337073] AGameModeBase::UpdatePlayerStartSpot = 0x900
+[2026-09-12 15:07:01.6337170] AGameModeBase::ShouldStartInCinematicMode = 0x908
+[2026-09-12 15:07:01.6337268] AGameModeBase::UpdateGameplayMuteList = 0x910
+[2026-09-12 15:07:01.6337366] AGameModeBase::InitNewPlayer = 0x918
+[2026-09-12 15:07:01.6337467] AGameModeBase::GenericPlayerInitialization = 0x920
+[2026-09-12 15:07:01.6337566] AGameModeBase::ReplicateStreamingStatus = 0x928
+[2026-09-12 15:07:01.6337664] AGameModeBase::ShouldSpawnAtStartSpot = 0x930
+[2026-09-12 15:07:01.6337760] AGameModeBase::FinishRestartPlayer = 0x938
+[2026-09-12 15:07:01.6337861] AGameModeBase::FailedToRestartPlayer = 0x940
+[2026-09-12 15:07:01.6337960] AGameModeBase::ProcessClientTravel = 0x948
+[2026-09-12 15:07:01.6338057] AGameModeBase::InitSeamlessTravelPlayer = 0x950
+[2026-09-12 15:07:01.6338155] AGameModeBase::SpawnPlayerControllerCommon = 0x958
+[2026-09-12 15:07:01.6338307] AGameMode
+[2026-09-12 15:07:01.6338413] AGameMode::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6338515] AGameMode::ReadyToEndMatch_Implementation = 0x948
+[2026-09-12 15:07:01.6338615] AGameMode::ReadyToStartMatch_Implementation = 0x950
+[2026-09-12 15:07:01.6338732] AGameMode::IsMatchInProgress = 0x958
+[2026-09-12 15:07:01.6338840] AGameMode::StartMatch = 0x960
+[2026-09-12 15:07:01.6338940] AGameMode::EndMatch = 0x968
+[2026-09-12 15:07:01.6339038] AGameMode::RestartGame = 0x970
+[2026-09-12 15:07:01.6339135] AGameMode::AbortMatch = 0x978
+[2026-09-12 15:07:01.6339232] AGameMode::SetMatchState = 0x980
+[2026-09-12 15:07:01.6339336] AGameMode::OnMatchStateSet = 0x988
+[2026-09-12 15:07:01.6339437] AGameMode::HandleMatchIsWaitingToStart = 0x990
+[2026-09-12 15:07:01.6339537] AGameMode::HandleMatchHasStarted = 0x998
+[2026-09-12 15:07:01.6339637] AGameMode::HandleMatchHasEnded = 0x9A0
+[2026-09-12 15:07:01.6339737] AGameMode::HandleLeavingMap = 0x9A8
+[2026-09-12 15:07:01.6339836] AGameMode::HandleMatchAborted = 0x9B0
+[2026-09-12 15:07:01.6339934] AGameMode::GetNetworkNumber = 0x9B8
+[2026-09-12 15:07:01.6340053] AGameMode::GetTravelType = 0x9C0
+[2026-09-12 15:07:01.6340154] AGameMode::Say = 0x9C8
+[2026-09-12 15:07:01.6340253] AGameMode::Broadcast = 0x9D0
+[2026-09-12 15:07:01.6340350] AGameMode::BroadcastLocalized = 0x9D8
+[2026-09-12 15:07:01.6340449] AGameMode::AddInactivePlayer = 0x9E0
+[2026-09-12 15:07:01.6340547] AGameMode::FindInactivePlayer = 0x9E8
+[2026-09-12 15:07:01.6340645] AGameMode::OverridePlayerState = 0x9F0
+[2026-09-12 15:07:01.6340745] AGameMode::SetSeamlessTravelViewTarget = 0x9F8
+[2026-09-12 15:07:01.6340843] AGameMode::PreCommitMapChange = 0xA00
+[2026-09-12 15:07:01.6340941] AGameMode::PostCommitMapChange = 0xA08
+[2026-09-12 15:07:01.6341040] AGameMode::NotifyPendingConnectionLost = 0xA10
+[2026-09-12 15:07:01.6341138] AGameMode::HandleDisconnect = 0xA18
+[2026-09-12 15:07:01.6341289] UPlayer
+[2026-09-12 15:07:01.6341393] UPlayer::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6341499] UPlayer::SwitchController = 0x2C8
+[2026-09-12 15:07:01.6341600] UPlayer::ReceivedPlayerController = 0x2D0
+[2026-09-12 15:07:01.6341698] ULocalPlayer
+[2026-09-12 15:07:01.6341800] ULocalPlayer::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6341899] ULocalPlayer::GetViewPoint = 0x2D8
+[2026-09-12 15:07:01.6342003] ULocalPlayer::GetSlateUser_C = 0x2E0
+[2026-09-12 15:07:01.6342101] ULocalPlayer::GetSlateUser = 0x2E8
+[2026-09-12 15:07:01.6342201] ULocalPlayer::CalcSceneViewInitOptions = 0x2F0
+[2026-09-12 15:07:01.6342299] ULocalPlayer::CalcSceneView = 0x2F8
+[2026-09-12 15:07:01.6342398] ULocalPlayer::PlayerAdded__Ptr_UGameViewportClient__FPlatformUserId = 0x300
+[2026-09-12 15:07:01.6342497] ULocalPlayer::PlayerAdded__Ptr_UGameViewportClient__int32 = 0x308
+[2026-09-12 15:07:01.6342601] ULocalPlayer::InitOnlineSession = 0x310
+[2026-09-12 15:07:01.6342706] ULocalPlayer::PlayerRemoved = 0x318
+[2026-09-12 15:07:01.6342805] ULocalPlayer::SpawnPlayActor = 0x320
+[2026-09-12 15:07:01.6342903] ULocalPlayer::PreBeginHandshake = 0x328
+[2026-09-12 15:07:01.6343004] ULocalPlayer::SendSplitJoin__Ref_TArray_FString_TSizedDefaultAllocator_32___Ptr_UNetDriver__UE_Net_EJoinFlags = 0x330
+[2026-09-12 15:07:01.6343108] ULocalPlayer::SendSplitJoin__Ref_TArray_FString_TSizedDefaultAllocator_32_ = 0x338
+[2026-09-12 15:07:01.6343207] ULocalPlayer::SetControllerId = 0x340
+[2026-09-12 15:07:01.6343306] ULocalPlayer::SetPlatformUserId = 0x348
+[2026-09-12 15:07:01.6343405] ULocalPlayer::GetPlatformUserIndex = 0x350
+[2026-09-12 15:07:01.6343502] ULocalPlayer::GetLocalPlayerIndex = 0x358
+[2026-09-12 15:07:01.6343599] ULocalPlayer::GetNickname = 0x360
+[2026-09-12 15:07:01.6343696] ULocalPlayer::GetGameLoginOptions = 0x368
+[2026-09-12 15:07:01.6343794] ULocalPlayer::GetUniqueNetIdForPlatformUser = 0x370
+[2026-09-12 15:07:01.6343895] ULocalPlayer::GetPreferredUniqueNetId = 0x378
+[2026-09-12 15:07:01.6343994] ULocalPlayer::GetProjectionData = 0x380
+[2026-09-12 15:07:01.6344092] ULocalPlayer::CleanupViewState = 0x388
+[2026-09-12 15:07:01.6344188] UDataTable
+[2026-09-12 15:07:01.6344289] UDataTable::__vecDelDtor = 0x0
+[2026-09-12 15:07:01.6344390] UDataTable::GetNonConstRowMap = 0x2D8
+[2026-09-12 15:07:01.6344489] UDataTable::AddRowInternal = 0x2E0
+[2026-09-12 15:07:01.6344589] UDataTable::RemoveRowInternal = 0x2E8
+[2026-09-12 15:07:01.6344703] UDataTable::GetRowMap = 0x2F0
+[2026-09-12 15:07:01.6344812] UDataTable::GetRowMap_C = 0x2F8
+[2026-09-12 15:07:01.6344911] UDataTable::AllowDuplicateRowsOnImport = 0x300
+[2026-09-12 15:07:01.6345010] UDataTable::EmptyTable = 0x308
+[2026-09-12 15:07:01.6345107] UDataTable::RemoveRow = 0x310
+[2026-09-12 15:07:01.6345210] UDataTable::AddRow__FName__Ptr_C_uint8__Ptr_C_UScriptStruct = 0x318
+[2026-09-12 15:07:01.6345320] UDataTable::AddRow__FName__Ref_C_FTableRowBase = 0x320
+[2026-09-12 15:07:01.6361874] PS Scan attempt 1 (Phase 2)
+[2026-09-12 15:07:01.6362211] [PS] Reading image
+[2026-09-12 15:07:01.6362926] [PS] Starting scan
+[2026-09-12 15:07:02.3348602] [PS] Scan finished in 698.4374ms
+[2026-09-12 15:07:02.3349188] [PS] Found BuildConfiguration: Shipping
+[2026-09-12 15:07:02.3349354] [PS] Found Stats: Off
+[2026-09-12 15:07:02.3349507] [PS] Found GUObjectArray: 0x7ff77769e020
+[2026-09-12 15:07:02.3349629] [PS] Found GMalloc: 0x7ff7775ad328
+[2026-09-12 15:07:02.3349742] [PS] Found FName::ToString: 0x7ff76dbd43e0
+[2026-09-12 15:07:02.3349872] [PS] Found FName::FName(wchar_t*): 0x7ff76dbc34a0
+[2026-09-12 15:07:02.3349986] [PS] Found StaticConstructObject_Internal: 0x7ff76de350b0
+[2026-09-12 15:07:02.3350117] [PS] Found FUObjectHashTables::Get(): 0x7ff76de409e0
+[2026-09-12 15:07:02.3350228] [PS] Found GNatives: 0x7ff77769c990
+[2026-09-12 15:07:02.3350331] [PS] Found ConsoleManagerSingleton: 0x7ff76da37060
+[2026-09-12 15:07:02.3350432] [PS] Found GameEngineTick: 0x7ff7706d6c30
+[2026-09-12 15:07:02.3352653] PS scan successful
+[2026-09-12 15:07:02.3354654] Build configuration: shipping, detected
+[2026-09-12 15:07:02.3354857] Stats: off, detected
+[2026-09-12 15:07:02.3426182] Running second pass of Lua override scans
+[2026-09-12 15:07:02.3426789] Lua Scan attempt 1 (Phase 2)
+[2026-09-12 15:07:02.3435461] Verifying FName constructor...
+[2026-09-12 15:07:02.3492883] [UE4SS.FNameConstructor.FNameConstructorVerificationHook] Added posthook with Id '0X8000200000000001'!
+[2026-09-12 15:07:02.5792152] [UE4SS.EngineTick.FNameConstructorUnhooker] Added prehook with Id '0X6020000000000001'!
+[2026-09-12 15:07:02.5796286] FName constructor verified at 0x00007FF76DBC34A0
+[2026-09-12 15:07:02.5798388] Using engine version: 5.6
+[2026-09-12 15:07:02.5798596] Waiting for object construction...
+[2026-09-12 15:07:04.1386884] Locating KismetStringLibrary...
+[2026-09-12 15:07:04.1999992] Locating KismetStringLibrary:Conv_NameToString...
+[2026-09-12 15:07:06.2610499] Still searching for KismetStringLibrary:Conv_NameToString after 40 attempts
+[2026-09-12 15:07:08.3202848] Still searching for KismetStringLibrary:Conv_NameToString after 80 attempts
+[2026-09-12 15:07:08.6789781] Locating KismetStringLibrary CDO...
+[2026-09-12 15:07:08.8297336] Already constructed: ["/Script/CoreUObject", "Class"]
+[2026-09-12 15:07:08.8298057] Already constructed: ["/Script/CoreUObject"]
+[2026-09-12 15:07:08.8298387] Already constructed: ["/Script/CoreUObject", "Struct"]
+[2026-09-12 15:07:08.8300047] Already constructed: ["/Script/Engine", "Pawn"]
+[2026-09-12 15:07:08.8301036] Already constructed: ["/Script/Engine", "Character"]
+[2026-09-12 15:07:08.8301405] Already constructed: ["/Script/Engine", "Actor"]
+[2026-09-12 15:07:08.8329753] Already constructed: ["/Script/Engine", "Default__DefaultPawn"]
+[2026-09-12 15:07:08.8351685] Already constructed: ["/Script/Engine", "Default__MaterialExpression"]
+[2026-09-12 15:07:08.8352319] Already constructed: ["/Script/Engine", "ActorComponent"]
+[2026-09-12 15:07:08.8352811] Already constructed: ["/Script/Engine", "MovementComponent"]
+[2026-09-12 15:07:08.8353197] Already constructed: ["/Script/Engine", "HUD"]
+[2026-09-12 15:07:08.8353574] Already constructed: ["/Script/Engine", "PlayerController"]
+[2026-09-12 15:07:08.8353916] Already constructed: ["/Script/Engine", "PlayerCameraManager"]
+[2026-09-12 15:07:08.8355015] Already constructed: ["/Script/CoreUObject", "Vector"]
+[2026-09-12 15:07:08.8356451] Already constructed: ["/Script/Engine", "HitResult"]
+[2026-09-12 15:07:08.8357595] Already constructed: ["/Script/CoreUObject", "OrientedBox"]
+[2026-09-12 15:07:08.8358579] Already constructed: ["/Script/CoreUObject", "EInterpCurveMode"]
+[2026-09-12 15:07:08.8360976] Already constructed: ["/Script/Engine", "ENetRole"]
+[2026-09-12 15:07:08.8369781] Already constructed: ["/Script/MovieScene", "MovieSceneEditorData"]
+[2026-09-12 15:07:08.8370450] Already constructed: ["/Script/UMG", "Widget"]
+[2026-09-12 15:07:08.8370894] Already constructed: ["/Script/UMG", "ComboBoxString"]
+[2026-09-12 15:07:08.8371132] Already constructed: ["/Script/CoreUObject", "Interface"]
+[2026-09-12 15:07:08.9695771] GameEngine::LoadMap address 0x7ff770ef6c80
+[2026-09-12 15:07:08.9696443] GameEngine::Tick address (vtable: 0x7ff7706ceef0; scan: 0x7ff7706d6c30)
+[2026-09-12 15:07:08.9696649] WARNING: VTable and scan addresses differ for UGameEngine::Tick. Potentially customized vtables.
+[2026-09-12 15:07:08.9696877] GameEngine: 0x7ff40e0da490 GameEngine /Script/Engine.Default__GameEngine
+[2026-09-12 15:07:08.9697093] VTable entries:
+[2026-09-12 15:07:08.9697308] -8: 0x7ff770f15460
+[2026-09-12 15:07:08.9697479] -7: 0x7ff770f15470
+[2026-09-12 15:07:08.9697712] -6: 0x7ff7701b7e40
+[2026-09-12 15:07:08.9697947] -5: 0x7ff7706d8480
+[2026-09-12 15:07:08.9698144] -4: 0x7ff7706b5ca0
+[2026-09-12 15:07:08.9698359] -3: 0x7ff770f003d0
+[2026-09-12 15:07:08.9698559] -2: 0x7ff7706c9e80
+[2026-09-12 15:07:08.9698759] -1: 0x7ff7706d5240
+[2026-09-12 15:07:08.9698930] S0: 0x7ff7706ceef0
+[2026-09-12 15:07:08.9699100] +1: 0x7ff770f0c4f0
+[2026-09-12 15:07:08.9699314] +2: 0x7ff6f0760000
+[2026-09-12 15:07:08.9699508] +3: 0x7ff770f14640
+[2026-09-12 15:07:08.9699685] +4: 0x7ff770efc350
+[2026-09-12 15:07:08.9699804] +5: 0x7ff7706c4260
+[2026-09-12 15:07:08.9699906] +6: 0x7ff770f00df0
+[2026-09-12 15:07:08.9700010] +7: 0x7ff770f10530
+[2026-09-12 15:07:08.9700113] +8: 0x7ff770f145d0
+[2026-09-12 15:07:08.9700206] Using scan address for GameEngine::Tick
+[2026-09-12 15:07:08.9700437] [UE4SS.EngineTick.GameThreadInitializer] Added prehook with Id '0X6020000000000002'!
+[2026-09-12 15:07:08.9700576] GameModeBase::InitGameState address 0x7ff77070b8e0
+[2026-09-12 15:07:08.9700691] AActor::BeginPlay address 0x7ff77026a760
+[2026-09-12 15:07:08.9700801] AActor::EndPlay address 0x7ff770250dd0
+[2026-09-12 15:07:08.9700905] AActor::Tick address 0x7ff770253190
+[2026-09-12 15:07:08.9701016] GameViewportClient::Tick address 0x7ff7706eefc0
+[2026-09-12 15:07:08.9701124] ProcessEvent address 0x7ff76de06d10
+[2026-09-12 15:07:08.9701256] ProcessConsoleExec address 0x7ff76dc4c9d0
+[2026-09-12 15:07:08.9701389] UStruct::Link address 0x7ff76dccd920
+[2026-09-12 15:07:08.9704838] Constructed 0 of 0 objects
+[2026-09-12 15:07:09.1170295] FText size detected as 0x10 bytes.
+[2026-09-12 15:07:09.1198202] FSoftObjectPath layout: size 0x20, SubPathString at 0x10, FTopLevelAssetPath shape, from reflection
+[2026-09-12 15:07:09.1204225] ProcessInternal address: 0x7ff76de07100
+[2026-09-12 15:07:09.1204571] ProcessLocalScriptFunction address: 0x7ff76de07200
+[2026-09-12 15:07:09.1204701] UnrealConfig.FExecVTableOffsetInLocalPlayer: 28
+[2026-09-12 15:07:09.1204808] Post-initialization: GMalloc: 0x7ff7775ad328 -> 0x2107a9681f0
+[2026-09-12 15:07:09.1204941] Starting callback garbage collector![2026-09-12 15:07:09.1210450] [UE4SS.StaticConstructObject.ObjectSearcherPoolHook] Added posthook with Id '0X9000000000000001'!
+[2026-09-12 15:07:09.1210696] FAssetData Size: 0x68
+[2026-09-12 15:07:09.1210817] FVector Size: 0x18
+[2026-09-12 15:07:09.1210926] FQuat Size: 0x20
+[2026-09-12 15:07:09.1211025] FFieldVariant Size: 0x8
+[2026-09-12 15:07:09.1211123] FText Size: 0x10
+[2026-09-12 15:07:09.1211220] FName Size: 0x8
+[2026-09-12 15:07:09.1211318] FName Alignment: 0x74ABC788
+[2026-09-12 15:07:09.1211424] 
+##### MEMBER OFFSETS START (Coalesced) #####
+
+[2026-09-12 15:07:09.1211534] UObjectBase::NamePrivate = 0x18
+[2026-09-12 15:07:09.1211636] UObjectBase::ObjectFlags = 0x8
+[2026-09-12 15:07:09.1211737] UObjectBase::ClassPrivate = 0x10
+[2026-09-12 15:07:09.1211834] UObjectBase::InternalIndex_Private = 0xC
+[2026-09-12 15:07:09.1211965] UObjectBase::OuterPrivate = 0x20
+[2026-09-12 15:07:09.1212084] UObjectBase::UEP_TotalSize = 0x28
+[2026-09-12 15:07:09.1212189] UScriptStruct::ICppStructOps::Size = 0x8
+[2026-09-12 15:07:09.1212286] UScriptStruct::ICppStructOps::Alignment = 0xC
+[2026-09-12 15:07:09.1212468] UScriptStruct::ICppStructOps::UEP_TotalSize = 0x10
+[2026-09-12 15:07:09.1212795] UStruct::SuperStruct = 0x40
+[2026-09-12 15:07:09.1212959] UStruct::ChildProperties = 0x50
+[2026-09-12 15:07:09.1213076] UStruct::Children = 0x48
+[2026-09-12 15:07:09.1213184] UStruct::PropertiesSize = 0x58
+[2026-09-12 15:07:09.1213294] UStruct::UnresolvedScriptProperties = 0xA0
+[2026-09-12 15:07:09.1213403] UStruct::MinAlignment = 0x5C
+[2026-09-12 15:07:09.1213508] UStruct::PropertyLink = 0x70
+[2026-09-12 15:07:09.1213617] UStruct::Script = 0x60
+[2026-09-12 15:07:09.1213725] UStruct::StructStateFlags = 0x5E
+[2026-09-12 15:07:09.1213829] UStruct::RefLink = 0x78
+[2026-09-12 15:07:09.1213933] UStruct::DestructorLink = 0x80
+[2026-09-12 15:07:09.1214036] UStruct::PostConstructLink = 0x88
+[2026-09-12 15:07:09.1214141] UStruct::ScriptAndPropertyObjectReferences = 0x90
+[2026-09-12 15:07:09.1214247] UStruct::UEP_TotalSize = 0xB0
+[2026-09-12 15:07:09.1214353] UScriptStruct::UEP_TotalSize = 0xC0
+[2026-09-12 15:07:09.1214459] UScriptStruct::CppStructOps = 0xB8
+[2026-09-12 15:07:09.1214565] UScriptStruct::StructFlags = 0xB0
+[2026-09-12 15:07:09.1214670] UScriptStruct::bPrepareCppStructOpsCompleted = 0xB4
+[2026-09-12 15:07:09.1214777] UClass::ClassConstructor = 0xB0
+[2026-09-12 15:07:09.1214885] UClass::AllFunctionsCacheLock = 0x1D0
+[2026-09-12 15:07:09.1214993] UClass::ClassVTableHelperCtorCaller = 0xB8
+[2026-09-12 15:07:09.1215098] UClass::ClassUnique = 0xC8
+[2026-09-12 15:07:09.1215203] UClass::ClassCastFlags = 0xD8
+[2026-09-12 15:07:09.1215306] UClass::FirstOwnedClassRep = 0xCC
+[2026-09-12 15:07:09.1215412] UClass::ClassWithin = 0xE0
+[2026-09-12 15:07:09.1215517] UClass::bLayoutChanging = 0xD1
+[2026-09-12 15:07:09.1215621] UClass::ClassConfigName = 0xE8
+[2026-09-12 15:07:09.1215723] UClass::bCooked = 0xD0
+[2026-09-12 15:07:09.1215829] UClass::ClassFlags = 0xD4
+[2026-09-12 15:07:09.1215933] UClass::NetFields = 0x100
+[2026-09-12 15:07:09.1216037] UClass::ClassDefaultObject = 0x110
+[2026-09-12 15:07:09.1216141] UClass::SparseClassData = 0x118
+[2026-09-12 15:07:09.1216245] UClass::SparseClassDataStruct = 0x120
+[2026-09-12 15:07:09.1216350] UClass::FuncMap = 0x128
+[2026-09-12 15:07:09.1216454] UClass::FuncMapLock = 0x178
+[2026-09-12 15:07:09.1216561] UClass::AllFunctionsCache = 0x180
+[2026-09-12 15:07:09.1216666] UClass::Interfaces = 0x1D8
+[2026-09-12 15:07:09.1216770] UClass::ReferenceSchema = 0x1E8
+[2026-09-12 15:07:09.1216874] UClass::NativeFunctionLookupTable = 0x1F0
+[2026-09-12 15:07:09.1216978] UClass::UEP_TotalSize = 0x200
+[2026-09-12 15:07:09.1217080] UEnum::CppType = 0x30
+[2026-09-12 15:07:09.1217184] UEnum::EnumFlags_Internal = 0x51
+[2026-09-12 15:07:09.1217288] UEnum::Names = 0x40
+[2026-09-12 15:07:09.1217391] UEnum::CppForm = 0x50
+[2026-09-12 15:07:09.1217493] UEnum::EnumPackage = 0x54
+[2026-09-12 15:07:09.1217597] UEnum::EnumDisplayNameFn = 0x60
+[2026-09-12 15:07:09.1217701] UEnum::UEP_TotalSize = 0x68
+[2026-09-12 15:07:09.1217806] UFunction::FunctionFlags = 0xB0
+[2026-09-12 15:07:09.1217908] UFunction::NumParms = 0xB4
+[2026-09-12 15:07:09.1218012] UFunction::ParmsSize = 0xB6
+[2026-09-12 15:07:09.1218115] UFunction::FirstPropertyToInit = 0xC0
+[2026-09-12 15:07:09.1218220] UFunction::RPCId = 0xBA
+[2026-09-12 15:07:09.1218323] UFunction::ReturnValueOffset = 0xB8
+[2026-09-12 15:07:09.1218427] UFunction::RPCResponseId = 0xBC
+[2026-09-12 15:07:09.1218530] UFunction::EventGraphFunction = 0xC8
+[2026-09-12 15:07:09.1218633] UFunction::EventGraphCallOffset = 0xD0
+[2026-09-12 15:07:09.1218737] UFunction::Func = 0xD8
+[2026-09-12 15:07:09.1218839] UFunction::UEP_TotalSize = 0xE0
+[2026-09-12 15:07:09.1218943] UField::Next = 0x28
+[2026-09-12 15:07:09.1219048] UField::UEP_TotalSize = 0x30
+[2026-09-12 15:07:09.1219153] FField::ClassPrivate = 0x8
+[2026-09-12 15:07:09.1219256] FField::Owner = 0x10
+[2026-09-12 15:07:09.1219389] FField::Next = 0x18
+[2026-09-12 15:07:09.1219510] FField::FlagsPrivate = 0x28
+[2026-09-12 15:07:09.1219615] FField::NamePrivate = 0x20
+[2026-09-12 15:07:09.1219719] FField::UEP_TotalSize = 0x30
+[2026-09-12 15:07:09.1219821] FProperty::RepIndex = 0x40
+[2026-09-12 15:07:09.1219924] FProperty::ArrayDim = 0x30
+[2026-09-12 15:07:09.1220027] FProperty::ElementSize = 0x34
+[2026-09-12 15:07:09.1220130] FProperty::PropertyLinkNext = 0x48
+[2026-09-12 15:07:09.1220233] FProperty::PropertyFlags = 0x38
+[2026-09-12 15:07:09.1220337] FProperty::Offset_Internal = 0x44
+[2026-09-12 15:07:09.1220440] FProperty::NextRef = 0x50
+[2026-09-12 15:07:09.1220544] FProperty::DestructorLinkNext = 0x58
+[2026-09-12 15:07:09.1220649] FProperty::PostConstructLinkNext = 0x60
+[2026-09-12 15:07:09.1220753] FProperty::RepNotifyFunc = 0x68
+[2026-09-12 15:07:09.1220857] FProperty::UEP_TotalSize = 0x70
+[2026-09-12 15:07:09.1220960] FNumericProperty::RepIndex = 0x40
+[2026-09-12 15:07:09.1221064] FNumericProperty::ArrayDim = 0x30
+[2026-09-12 15:07:09.1221166] FNumericProperty::ElementSize = 0x34
+[2026-09-12 15:07:09.1221271] FNumericProperty::PropertyLinkNext = 0x48
+[2026-09-12 15:07:09.1221375] FNumericProperty::PropertyFlags = 0x38
+[2026-09-12 15:07:09.1221477] FNumericProperty::Offset_Internal = 0x44
+[2026-09-12 15:07:09.1221580] FNumericProperty::NextRef = 0x50
+[2026-09-12 15:07:09.1221682] FNumericProperty::DestructorLinkNext = 0x58
+[2026-09-12 15:07:09.1221784] FNumericProperty::PostConstructLinkNext = 0x60
+[2026-09-12 15:07:09.1221889] FNumericProperty::RepNotifyFunc = 0x68
+[2026-09-12 15:07:09.1221994] FNumericProperty::UEP_TotalSize = 0x70
+[2026-09-12 15:07:09.1222099] FObjectPropertyBase::PropertyClass = 0x70
+[2026-09-12 15:07:09.1222204] FObjectPropertyBase::UEP_TotalSize = 0x78
+[2026-09-12 15:07:09.1222307] FStructProperty::Struct = 0x70
+[2026-09-12 15:07:09.1222410] FStructProperty::UEP_TotalSize = 0x78
+[2026-09-12 15:07:09.1222513] FArrayProperty::Inner = 0x78
+[2026-09-12 15:07:09.1223512] FArrayProperty::ArrayFlags = 0x70
+[2026-09-12 15:07:09.1223678] FArrayProperty::UEP_TotalSize = 0x80
+[2026-09-12 15:07:09.1223789] FMapProperty::KeyProp = 0x70
+[2026-09-12 15:07:09.1223893] FMapProperty::MapLayout = 0x80
+[2026-09-12 15:07:09.1223996] FMapProperty::ValueProp = 0x78
+[2026-09-12 15:07:09.1224099] FMapProperty::MapFlags = 0x98
+[2026-09-12 15:07:09.1224200] FMapProperty::UEP_TotalSize = 0xA0
+[2026-09-12 15:07:09.1226559] FSetProperty::ElementProp = 0x70
+[2026-09-12 15:07:09.1226810] FSetProperty::UEP_TotalSize = 0x90
+[2026-09-12 15:07:09.1226929] FSetProperty::SetLayout = 0x78
+[2026-09-12 15:07:09.1227028] FBoolProperty::ByteOffset = 0x71
+[2026-09-12 15:07:09.1227129] FBoolProperty::FieldSize = 0x70
+[2026-09-12 15:07:09.1227223] FBoolProperty::FieldMask = 0x73
+[2026-09-12 15:07:09.1227319] FBoolProperty::ByteMask = 0x72
+[2026-09-12 15:07:09.1227414] FBoolProperty::UEP_TotalSize = 0x78
+[2026-09-12 15:07:09.1227511] FByteProperty::Enum = 0x70
+[2026-09-12 15:07:09.1227607] FByteProperty::UEP_TotalSize = 0x78
+[2026-09-12 15:07:09.1227702] FEnumProperty::UEP_TotalSize = 0x80
+[2026-09-12 15:07:09.1227798] FEnumProperty::UnderlyingProp = 0x70
+[2026-09-12 15:07:09.1227893] FEnumProperty::Enum = 0x78
+[2026-09-12 15:07:09.1227992] FClassProperty::MetaClass = 0x78
+[2026-09-12 15:07:09.1228086] FClassProperty::UEP_TotalSize = 0x80
+[2026-09-12 15:07:09.1228181] FSoftClassProperty::MetaClass = 0x78
+[2026-09-12 15:07:09.1228277] FSoftClassProperty::UEP_TotalSize = 0x80
+[2026-09-12 15:07:09.1228373] FDelegateProperty::SignatureFunction = 0x70
+[2026-09-12 15:07:09.1228471] FDelegateProperty::UEP_TotalSize = 0x78
+[2026-09-12 15:07:09.1228571] FMulticastDelegateProperty::SignatureFunction = 0x70
+[2026-09-12 15:07:09.1228669] FMulticastDelegateProperty::UEP_TotalSize = 0x78
+[2026-09-12 15:07:09.1228768] FInterfaceProperty::InterfaceClass = 0x70
+[2026-09-12 15:07:09.1228863] FInterfaceProperty::UEP_TotalSize = 0x78
+[2026-09-12 15:07:09.1228960] FFieldPathProperty::PropertyClass = 0x70
+[2026-09-12 15:07:09.1229053] FFieldPathProperty::UEP_TotalSize = 0x78
+[2026-09-12 15:07:09.1229586] FWorldContext::ThisCurrentWorld = 0x2C0
+[2026-09-12 15:07:09.1229744] FWorldContext::ExternalReferences = 0x2B0
+[2026-09-12 15:07:09.1229850] FWorldContext::LastRemoteURL = 0x128
+[2026-09-12 15:07:09.1229948] FWorldContext::ContextHandle = 0xA0
+[2026-09-12 15:07:09.1230044] FWorldContext::PendingMapChangeFailureDescription = 0x1C8
+[2026-09-12 15:07:09.1230145] FWorldContext::TravelURL = 0xA8
+[2026-09-12 15:07:09.1230241] FWorldContext::TravelType = 0xB8
+[2026-09-12 15:07:09.1230333] FWorldContext::LastURL = 0xC0
+[2026-09-12 15:07:09.1230430] FWorldContext::LevelsToLoadForPendingMapChange = 0x1A8
+[2026-09-12 15:07:09.1230526] FWorldContext::GarbageObjectsToVerify = 0x260
+[2026-09-12 15:07:09.1230622] FWorldContext::bShouldCommitPendingMapChange = 0x1D8
+[2026-09-12 15:07:09.1230720] FWorldContext::GameViewport = 0x200
+[2026-09-12 15:07:09.1230815] FWorldContext::PIEInstance = 0x220
+[2026-09-12 15:07:09.1230913] FWorldContext::PIEFixedTickSeconds = 0x258
+[2026-09-12 15:07:09.1231007] FWorldContext::PIEPrefix = 0x228
+[2026-09-12 15:07:09.1231105] FWorldContext::RunAsDedicated = 0x23C
+[2026-09-12 15:07:09.1231201] FWorldContext::bWaitingOnOnlineSubsystem = 0x23D
+[2026-09-12 15:07:09.1231302] FWorldContext::bIsPrimaryPIEInstance = 0x23E
+[2026-09-12 15:07:09.1231397] FWorldContext::AudioDeviceID = 0x240
+[2026-09-12 15:07:09.1231495] FWorldContext::CustomDescription = 0x248
+[2026-09-12 15:07:09.1231591] FWorldContext::PIEAccumulatedTickSeconds = 0x25C
+[2026-09-12 15:07:09.1231686] FWorldContext::UEP_TotalSize = 0x2C8
+[2026-09-12 15:07:09.1231783] FOutputDevice::bSuppressEventTag = 0x8
+[2026-09-12 15:07:09.1231879] FOutputDevice::bAutoEmitLineTerminator = 0x9
+[2026-09-12 15:07:09.1231975] FOutputDevice::UEP_TotalSize = 0x10
+[2026-09-12 15:07:09.1232069] FArchiveState::ArIsTextFormat = 0x28
+[2026-09-12 15:07:09.1232165] FArchiveState::ArIsLoading = 0x28
+[2026-09-12 15:07:09.1232261] FArchiveState::ArIsLoadingFromCookedPackage = 0x28
+[2026-09-12 15:07:09.1232358] FArchiveState::ArPortFlags = 0x34
+[2026-09-12 15:07:09.1232453] FArchiveState::ArIsTransacting = 0x28
+[2026-09-12 15:07:09.1232548] FArchiveState::ArIsSaving = 0x28
+[2026-09-12 15:07:09.1232643] FArchiveState::ArForceUnicode = 0x28
+[2026-09-12 15:07:09.1232738] FArchiveState::ArIsModifyingWeakAndStrongReferences = 0x2B
+[2026-09-12 15:07:09.1232837] FArchiveState::ArUseUnversionedPropertySerialization = 0x28
+[2026-09-12 15:07:09.1232932] FArchiveState::ArWantBinaryPropertySerialization = 0x28
+[2026-09-12 15:07:09.1233028] FArchiveState::ArIsObjectReferenceCollector = 0x2B
+[2026-09-12 15:07:09.1233124] FArchiveState::ArIsPersistent = 0x29
+[2026-09-12 15:07:09.1233219] FArchiveState::ArForceByteSwapping = 0x2A
+[2026-09-12 15:07:09.1233314] FArchiveState::ArIsError = 0x29
+[2026-09-12 15:07:09.1233410] FArchiveState::ArUEVer = 0x40
+[2026-09-12 15:07:09.1233505] FArchiveState::ArIsCriticalError = 0x29
+[2026-09-12 15:07:09.1233601] FArchiveState::ArMaxSerializeSize = 0x38
+[2026-09-12 15:07:09.1233696] FArchiveState::ArShouldSkipCompilingAssets = 0x29
+[2026-09-12 15:07:09.1233793] FArchiveState::ArShouldSkipUpdateCustomVersion = 0x29
+[2026-09-12 15:07:09.1233890] FArchiveState::ArCustomPropertyList = 0x60
+[2026-09-12 15:07:09.1233985] FArchiveState::ArContainsCode = 0x29
+[2026-09-12 15:07:09.1234081] FArchiveState::ArIsNetArchive = 0x2B
+[2026-09-12 15:07:09.1234175] FArchiveState::ArContainsMap = 0x29
+[2026-09-12 15:07:09.1234273] FArchiveState::ArRequiresLocalizationGather = 0x29
+[2026-09-12 15:07:09.1234369] FArchiveState::ArIgnoreArchetypeRef = 0x2A
+[2026-09-12 15:07:09.1234463] FArchiveState::ArNoDelta = 0x2A
+[2026-09-12 15:07:09.1234557] FArchiveState::ArNoIntraPropertyDelta = 0x2A
+[2026-09-12 15:07:09.1234652] FArchiveState::ArIgnoreOuterRef = 0x2A
+[2026-09-12 15:07:09.1234751] FArchiveState::ArIgnoreClassGeneratedByRef = 0x2A
+[2026-09-12 15:07:09.1234845] FArchiveState::ArLicenseeUEVer = 0x48
+[2026-09-12 15:07:09.1234941] FArchiveState::ArMergeOverrides = 0x2C
+[2026-09-12 15:07:09.1235036] FArchiveState::ArIgnoreClassRef = 0x2A
+[2026-09-12 15:07:09.1235152] FArchiveState::ArAllowLazyLoading = 0x2A
+[2026-09-12 15:07:09.1235261] FArchiveState::NextProxy = 0x88
+[2026-09-12 15:07:09.1235356] FArchiveState::ArIsCountingMemory = 0x2B
+[2026-09-12 15:07:09.1235452] FArchiveState::bCustomVersionsAreReset = 0x80
+[2026-09-12 15:07:09.1235550] FArchiveState::ArShouldSkipBulkData = 0x2B
+[2026-09-12 15:07:09.1235644] FArchiveState::ArIsFilterEditorOnly = 0x2B
+[2026-09-12 15:07:09.1235739] FArchiveState::ArIsSaveGame = 0x2B
+[2026-09-12 15:07:09.1235835] FArchiveState::ArUseCustomPropertyList = 0x2B
+[2026-09-12 15:07:09.1235929] FArchiveState::ArPreserveArrayElements = 0x2C
+[2026-09-12 15:07:09.1236024] FArchiveState::UEP_TotalSize = 0x90
+[2026-09-12 15:07:09.1236118] FArchiveState::ArSerializingDefaults = 0x30
+[2026-09-12 15:07:09.1236212] FArchiveState::ArEngineVer = 0x4C
+[2026-09-12 15:07:09.1236306] FArchiveState::CustomVersionContainer = 0x58
+[2026-09-12 15:07:09.1236400] FArchiveState::SavePackageData = 0x68
+[2026-09-12 15:07:09.1236494] FArchiveState::SerializedProperty = 0x70
+[2026-09-12 15:07:09.1236594] AActor::PrimaryActorTick = 0x28
+[2026-09-12 15:07:09.1236689] AActor::bNetTemporary = 0x58
+[2026-09-12 15:07:09.1236785] AActor::ActorHasBegunPlay = 0x5D
+[2026-09-12 15:07:09.1236882] AActor::bReplicateUsingRegisteredSubObjectList = 0x5B
+[2026-09-12 15:07:09.1236980] AActor::bIsEditorOnlyActor = 0x5B
+[2026-09-12 15:07:09.1237075] AActor::bReplicateMovement = 0x58
+[2026-09-12 15:07:09.1237171] AActor::bAlwaysRelevant = 0x58
+[2026-09-12 15:07:09.1237266] AActor::bNetStartup = 0x58
+[2026-09-12 15:07:09.1237359] AActor::bActorIsBeingConstructed = 0x5D
+[2026-09-12 15:07:09.1237455] AActor::bActorBeginningPlayFromLevelStreaming = 0x5C
+[2026-09-12 15:07:09.1237552] AActor::bNetCheckedInitialPhysicsState = 0x5B
+[2026-09-12 15:07:09.1237648] AActor::bOnlyRelevantToOwner = 0x58
+[2026-09-12 15:07:09.1237742] AActor::bCallPreReplicationForReplay = 0x58
+[2026-09-12 15:07:09.1237838] AActor::bCallPreReplication = 0x58
+[2026-09-12 15:07:09.1237932] AActor::bReplayRewindable = 0x59
+[2026-09-12 15:07:09.1238026] AActor::bHidden = 0x58
+[2026-09-12 15:07:09.1238123] AActor::bTearOff = 0x59
+[2026-09-12 15:07:09.1238217] AActor::bForceNetAddressable = 0x59
+[2026-09-12 15:07:09.1238312] AActor::InputPriority = 0x16C
+[2026-09-12 15:07:09.1238406] AActor::bCanBeInCluster = 0x5B
+[2026-09-12 15:07:09.1238501] AActor::bAllowTickBeforeBeginPlay = 0x5A
+[2026-09-12 15:07:09.1238596] AActor::bExchangedRoles = 0x59
+[2026-09-12 15:07:09.1238691] AActor::bNetLoadOnClient = 0x59
+[2026-09-12 15:07:09.1238788] AActor::AutoReceiveInput = 0x16B
+[2026-09-12 15:07:09.1238884] AActor::bHasPreRegisteredAllComponents = 0x5C
+[2026-09-12 15:07:09.1238980] AActor::bNetUseOwnerRelevancy = 0x59
+[2026-09-12 15:07:09.1239075] AActor::Role = 0x168
+[2026-09-12 15:07:09.1239171] AActor::bGenerateOverlapEventsDuringLevelStreaming = 0x5A
+[2026-09-12 15:07:09.1239268] AActor::bCollideWhenPlacing = 0x5A
+[2026-09-12 15:07:09.1239363] AActor::bRelevantForNetworkReplays = 0x59
+[2026-09-12 15:07:09.1239460] AActor::bEnableAutoLODGeneration = 0x5B
+[2026-09-12 15:07:09.1239554] AActor::bHasRegisteredAllComponents = 0x5C
+[2026-09-12 15:07:09.1239646] AActor::bActorInitialized = 0x5C
+[2026-09-12 15:07:09.1239742] AActor::bRelevantForLevelBounds = 0x59
+[2026-09-12 15:07:09.1239837] AActor::bHasFinishedSpawning = 0x5C
+[2026-09-12 15:07:09.1239931] AActor::bAutoDestroyWhenFinished = 0x5A
+[2026-09-12 15:07:09.1240026] AActor::bCanBeDamaged = 0x5A
+[2026-09-12 15:07:09.1240121] AActor::SpawnCollisionHandlingMethod = 0x16A
+[2026-09-12 15:07:09.1240217] AActor::bIgnoresOriginShifting = 0x5A
+[2026-09-12 15:07:09.1240311] AActor::bBlockInput = 0x5A
+[2026-09-12 15:07:09.1240408] AActor::bFindCameraComponentWhenViewTarget = 0x5A
+[2026-09-12 15:07:09.1240503] AActor::bActorSeamlessTraveled = 0x5B
+[2026-09-12 15:07:09.1240599] AActor::bReplicates = 0x5B
+[2026-09-12 15:07:09.1240693] AActor::bActorEnableCollision = 0x5D
+[2026-09-12 15:07:09.1240788] AActor::bAllowReceiveTickEventOnDedicatedServer = 0x5B
+[2026-09-12 15:07:09.1240902] AActor::bTickFunctionsRegistered = 0x5C
+[2026-09-12 15:07:09.1241008] AActor::bHasDeferredComponentRegistration = 0x5C
+[2026-09-12 15:07:09.1241105] AActor::AttachmentReplication = 0x70
+[2026-09-12 15:07:09.1241201] AActor::bRunningUserConstructionScript = 0x5C
+[2026-09-12 15:07:09.1241296] AActor::bActorIsBeingDestroyed = 0x5D
+[2026-09-12 15:07:09.1241391] AActor::bActorWantsDestroyDuringBeginPlay = 0x5D
+[2026-09-12 15:07:09.1241487] AActor::bAsyncPhysicsTickEnabled = 0x5D
+[2026-09-12 15:07:09.1241583] AActor::UpdateOverlapsMethodDuringLevelStreaming = 0x5E
+[2026-09-12 15:07:09.1241679] AActor::DefaultUpdateOverlapsMethodDuringLevelStreaming = 0x5F
+[2026-09-12 15:07:09.1241775] AActor::RemoteRole = 0x60
+[2026-09-12 15:07:09.1241869] AActor::ActorCategory = 0x61
+[2026-09-12 15:07:09.1241965] AActor::InitialLifeSpan = 0x64
+[2026-09-12 15:07:09.1242058] AActor::CustomTimeDilation = 0x68
+[2026-09-12 15:07:09.1242152] AActor::RayTracingGroupId = 0x6C
+[2026-09-12 15:07:09.1242247] AActor::ReplicatedMovement = 0xD0
+[2026-09-12 15:07:09.1242341] AActor::Owner = 0x158
+[2026-09-12 15:07:09.1242436] AActor::NetDriverName = 0x160
+[2026-09-12 15:07:09.1242530] AActor::NetDormancy = 0x169
+[2026-09-12 15:07:09.1242624] AActor::CreationTime = 0x170
+[2026-09-12 15:07:09.1242716] AActor::InputComponent = 0x178
+[2026-09-12 15:07:09.1242810] AActor::NetTag = 0x180
+[2026-09-12 15:07:09.1242907] AActor::NetCullDistanceSquared = 0x184
+[2026-09-12 15:07:09.1243002] AActor::NetUpdateFrequency = 0x188
+[2026-09-12 15:07:09.1243097] AActor::MinNetUpdateFrequency = 0x18C
+[2026-09-12 15:07:09.1243192] AActor::NetPriority = 0x190
+[2026-09-12 15:07:09.1243286] AActor::PhysicsReplicationMode = 0x194
+[2026-09-12 15:07:09.1243382] AActor::LastRenderTime = 0x198
+[2026-09-12 15:07:09.1243476] AActor::Children = 0x1A8
+[2026-09-12 15:07:09.1243572] AActor::RootComponent = 0x1B8
+[2026-09-12 15:07:09.1243666] AActor::TimerHandle_LifeSpanExpired = 0x1C0
+[2026-09-12 15:07:09.1243807] AActor::Layers = 0x1C8
+[2026-09-12 15:07:09.1243906] AActor::ParentComponent = 0x1D8
+[2026-09-12 15:07:09.1244000] AActor::Tags = 0x1E0
+[2026-09-12 15:07:09.1244095] AActor::OnTakeAnyDamage = 0x1F0
+[2026-09-12 15:07:09.1244190] AActor::OnTakePointDamage = 0x1F1
+[2026-09-12 15:07:09.1244285] AActor::OnTakeRadialDamage = 0x1F2
+[2026-09-12 15:07:09.1244379] AActor::OnActorBeginOverlap = 0x1F3
+[2026-09-12 15:07:09.1244473] AActor::OnActorEndOverlap = 0x1F4
+[2026-09-12 15:07:09.1244567] AActor::OnBeginCursorOver = 0x1F5
+[2026-09-12 15:07:09.1244665] AActor::OnEndCursorOver = 0x1F6
+[2026-09-12 15:07:09.1244758] AActor::OnClicked = 0x1F7
+[2026-09-12 15:07:09.1244851] AActor::OnReleased = 0x1F8
+[2026-09-12 15:07:09.1244945] AActor::OnInputTouchBegin = 0x1F9
+[2026-09-12 15:07:09.1245039] AActor::OnInputTouchEnd = 0x1FA
+[2026-09-12 15:07:09.1245135] AActor::OnInputTouchEnter = 0x1FB
+[2026-09-12 15:07:09.1245229] AActor::OnInputTouchLeave = 0x1FC
+[2026-09-12 15:07:09.1245324] AActor::OnActorHit = 0x1FD
+[2026-09-12 15:07:09.1245418] AActor::OnDestroyed = 0x1FE
+[2026-09-12 15:07:09.1245514] AActor::OnEndPlay = 0x1FF
+[2026-09-12 15:07:09.1245607] AActor::ReplicatedSubObjects = 0x200
+[2026-09-12 15:07:09.1245701] AActor::ReplicatedComponentsInfo = 0x210
+[2026-09-12 15:07:09.1245797] AActor::DetachFence = 0x2A0
+[2026-09-12 15:07:09.1245892] AActor::UEP_TotalSize = 0x2A8
+[2026-09-12 15:07:09.1245987] AGameModeBase::OptionsString = 0x2A8
+[2026-09-12 15:07:09.1246084] AGameModeBase::ServerStatReplicator = 0x310
+[2026-09-12 15:07:09.1246179] AGameModeBase::GameSessionClass = 0x2B8
+[2026-09-12 15:07:09.1246274] AGameModeBase::PlayerStateClass = 0x2D0
+[2026-09-12 15:07:09.1246367] AGameModeBase::HUDClass = 0x2D8
+[2026-09-12 15:07:09.1246463] AGameModeBase::SpectatorClass = 0x2E8
+[2026-09-12 15:07:09.1246557] AGameModeBase::GameSession = 0x300
+[2026-09-12 15:07:09.1246652] AGameModeBase::ServerStatReplicatorClass = 0x2F8
+[2026-09-12 15:07:09.1246746] AGameModeBase::DefaultPlayerName = 0x318
+[2026-09-12 15:07:09.1246842] AGameModeBase::bUseSeamlessTravel = 0x328
+[2026-09-12 15:07:09.1246953] AGameModeBase::bStartPlayersAsSpectators = 0x328
+[2026-09-12 15:07:09.1247061] AGameModeBase::bPauseable = 0x328
+[2026-09-12 15:07:09.1247160] AGameModeBase::GameNetDriverReplicationSystem = 0x32C
+[2026-09-12 15:07:09.1247255] AGameModeBase::UEP_TotalSize = 0x340
+[2026-09-12 15:07:09.1247349] AGameMode::NumBots = 0x354
+[2026-09-12 15:07:09.1247443] AGameMode::MatchState = 0x340
+[2026-09-12 15:07:09.1247539] AGameMode::NumSpectators = 0x34C
+[2026-09-12 15:07:09.1247635] AGameMode::NumPlayers = 0x350
+[2026-09-12 15:07:09.1247730] AGameMode::bDelayedStart = 0x348
+[2026-09-12 15:07:09.1247824] AGameMode::MinRespawnDelay = 0x358
+[2026-09-12 15:07:09.1247919] AGameMode::EngineMessageClass = 0x360
+[2026-09-12 15:07:09.1248013] AGameMode::NumTravellingPlayers = 0x35C
+[2026-09-12 15:07:09.1248106] AGameMode::InactivePlayerArray = 0x368
+[2026-09-12 15:07:09.1248199] AGameMode::InactivePlayerStateLifeSpan = 0x378
+[2026-09-12 15:07:09.1248294] AGameMode::MaxInactivePlayers = 0x37C
+[2026-09-12 15:07:09.1248387] AGameMode::bHandleDedicatedServerReplays = 0x380
+[2026-09-12 15:07:09.1248482] AGameMode::UEP_TotalSize = 0x388
+[2026-09-12 15:07:09.1248579] UEngine::NamePrivate = 0x18
+[2026-09-12 15:07:09.1248672] UEngine::ObjectFlags = 0x8
+[2026-09-12 15:07:09.1248766] UEngine::ClassPrivate = 0x10
+[2026-09-12 15:07:09.1248860] UEngine::InternalIndex_Private = 0xC
+[2026-09-12 15:07:09.1248954] UEngine::OuterPrivate = 0x20
+[2026-09-12 15:07:09.1249048] UEngine::UEP_TotalSize = 0x28
+[2026-09-12 15:07:09.1249145] UGameViewportClient::ViewportConsole = 0x40
+[2026-09-12 15:07:09.1249239] UGameViewportClient::SplitscreenInfo = 0x58
+[2026-09-12 15:07:09.1249336] UGameViewportClient::HardwareCursorCache = 0x180
+[2026-09-12 15:07:09.1249432] UGameViewportClient::DebugProperties = 0x48
+[2026-09-12 15:07:09.1249528] UGameViewportClient::ActiveSplitscreenType = 0x70
+[2026-09-12 15:07:09.1249623] UGameViewportClient::World = 0x78
+[2026-09-12 15:07:09.1249717] UGameViewportClient::ViewportOverlayWidget = 0x120
+[2026-09-12 15:07:09.1249813] UGameViewportClient::bHasAudioFocus = 0x10C
+[2026-09-12 15:07:09.1249907] UGameViewportClient::MaxSplitscreenPlayers = 0x68
+[2026-09-12 15:07:09.1250001] UGameViewportClient::bDisableWorldRendering = 0x6C
+[2026-09-12 15:07:09.1250098] UGameViewportClient::bIsPlayInEditorViewport = 0x6C
+[2026-09-12 15:07:09.1250194] UGameViewportClient::CurrentLumenVisualizationMode = 0x150
+[2026-09-12 15:07:09.1250292] UGameViewportClient::bSuppressTransitionMessage = 0x88
+[2026-09-12 15:07:09.1250385] UGameViewportClient::ViewModeIndex = 0xB0
+[2026-09-12 15:07:09.1250480] UGameViewportClient::EngineShowFlags = 0xB8
+[2026-09-12 15:07:09.1250574] UGameViewportClient::Viewport = 0xF8
+[2026-09-12 15:07:09.1250671] UGameViewportClient::MouseLockMode = 0x3BC
+[2026-09-12 15:07:09.1250766] UGameViewportClient::ViewportFrame = 0x100
+[2026-09-12 15:07:09.1250860] UGameViewportClient::AudioDeviceHandle = 0x108
+[2026-09-12 15:07:09.1250955] UGameViewportClient::bDisableSplitScreenOverride = 0x3B8
+[2026-09-12 15:07:09.1251051] UGameViewportClient::Window = 0x110
+[2026-09-12 15:07:09.1251146] UGameViewportClient::CurrentGroomVisualizationMode = 0x160
+[2026-09-12 15:07:09.1251243] UGameViewportClient::GameLayerManagerPtr = 0x130
+[2026-09-12 15:07:09.1251337] UGameViewportClient::UEP_TotalSize = 0x3C0
+[2026-09-12 15:07:09.1251432] UGameViewportClient::CurrentBufferVisualizationMode = 0x140
+[2026-09-12 15:07:09.1251527] UGameViewportClient::CurrentNaniteVisualizationMode = 0x148
+[2026-09-12 15:07:09.1251621] UGameViewportClient::CurrentSubstrateVisualizationMode = 0x158
+[2026-09-12 15:07:09.1251716] UGameViewportClient::CurrentVirtualShadowMapVisualizationMode = 0x168
+[2026-09-12 15:07:09.1251819] UGameViewportClient::HighResScreenshotDialog = 0x170
+[2026-09-12 15:07:09.1251913] UGameViewportClient::HardwareCursors = 0x1D0
+[2026-09-12 15:07:09.1252006] UGameViewportClient::CursorWidgets = 0x220
+[2026-09-12 15:07:09.1252100] UGameViewportClient::bUseSoftwareCursorWidgets = 0x270
+[2026-09-12 15:07:09.1252195] UGameViewportClient::StatUnitData = 0x3A8
+[2026-09-12 15:07:09.1252307] UGameViewportClient::StatHitchesData = 0x3B0
+[2026-09-12 15:07:09.1252408] UGameViewportClient::bIgnoreInput = 0x3B9
+[2026-09-12 15:07:09.1252505] UGameViewportClient::MouseCaptureMode = 0x3BA
+[2026-09-12 15:07:09.1252600] UGameViewportClient::bHideCursorDuringCapture = 0x3BB
+[2026-09-12 15:07:09.1252695] UGameViewportClient::bIsMouseOverClient = 0x3BD
+[2026-09-12 15:07:09.1252793] UPlayer::CurrentNetSpeed = 0x38
+[2026-09-12 15:07:09.1252889] UPlayer::UEP_TotalSize = 0x48
+[2026-09-12 15:07:09.1252983] UPlayer::ConfiguredLanSpeed = 0x40
+[2026-09-12 15:07:09.1253077] UPlayer::ConfiguredInternetSpeed = 0x3C
+[2026-09-12 15:07:09.1253173] ULocalPlayer::SlateOperations = 0x1F8
+[2026-09-12 15:07:09.1253268] ULocalPlayer::ControllerId = 0xE0
+[2026-09-12 15:07:09.1253362] ULocalPlayer::CachedUniqueNetId = 0x48
+[2026-09-12 15:07:09.1253456] ULocalPlayer::ViewportClient = 0x78
+[2026-09-12 15:07:09.1253550] ULocalPlayer::AspectRatioAxisConstraint = 0xB8
+[2026-09-12 15:07:09.1253643] ULocalPlayer::bSentSplitJoin = 0xC8
+[2026-09-12 15:07:09.1253736] ULocalPlayer::PlatformUserId = 0x100
+[2026-09-12 15:07:09.1253830] ULocalPlayer::UEP_TotalSize = 0x2B0
+[2026-09-12 15:07:09.1253928] UWorld::PerModuleDataObjects = 0x80
+[2026-09-12 15:07:09.1254023] UWorld::ExtraReferencedObjects = 0x70
+[2026-09-12 15:07:09.1254122] UWorld::bShouldForceVisibleStreamingLevels = 0x18E
+[2026-09-12 15:07:09.1254219] UWorld::bSupportsMakingVisibleTransactionRequests = 0x110
+[2026-09-12 15:07:09.1254313] UWorld::bAggressiveLOD = 0x18C
+[2026-09-12 15:07:09.1254408] UWorld::StreamingLevelsPrefix = 0xD0
+[2026-09-12 15:07:09.1254502] UWorld::bSupportsMakingInvisibleTransactionRequests = 0x112
+[2026-09-12 15:07:09.1254596] UWorld::bPlayersOnly = 0x18D
+[2026-09-12 15:07:09.1254693] UWorld::DeltaTimeSeconds = 0x7BC
+[2026-09-12 15:07:09.1254788] UWorld::bDoDelayedUpdateCullDistanceVolumes = 0x18C
+[2026-09-12 15:07:09.1254885] UWorld::PendingVisibilityLock = 0x118
+[2026-09-12 15:07:09.1254981] UWorld::bIsRunningConstructionScript = 0x18C
+[2026-09-12 15:07:09.1255077] UWorld::bAllowDeferredPhysicsStateCreation = 0x158
+[2026-09-12 15:07:09.1255172] UWorld::LastRenderTime = 0x180
+[2026-09-12 15:07:09.1255268] UWorld::bPlayersOnlyPending = 0x18D
+[2026-09-12 15:07:09.1255362] UWorld::bWorldWasLoadedThisTick = 0x18B
+[2026-09-12 15:07:09.1255458] UWorld::StreamingVolumeUpdateDelay = 0x754
+[2026-09-12 15:07:09.1255552] UWorld::bIsLevelStreamingFrozen = 0x18B
+[2026-09-12 15:07:09.1255647] UWorld::bTriggerPostLoadMap = 0x18B
+[2026-09-12 15:07:09.1255740] UWorld::bInTick = 0x18B
+[2026-09-12 15:07:09.1255835] UWorld::TimeSeconds = 0x798
+[2026-09-12 15:07:09.1255930] UWorld::bIsBuilt = 0x18B
+[2026-09-12 15:07:09.1256025] UWorld::DeltaRealTimeSeconds = 0x7B8
+[2026-09-12 15:07:09.1256120] UWorld::bTickNewlySpawned = 0x18B
+[2026-09-12 15:07:09.1256216] UWorld::AuthorityGameMode = 0x1A8
+[2026-09-12 15:07:09.1256315] UWorld::bPostTickComponentUpdate = 0x18B
+[2026-09-12 15:07:09.1256410] UWorld::bShouldSimulatePhysics = 0x18C
+[2026-09-12 15:07:09.1256506] UWorld::bIsWorldInitialized = 0x18B
+[2026-09-12 15:07:09.1256602] UWorld::bRequestedBlockOnAsyncLoading = 0x18C
+[2026-09-12 15:07:09.1256697] UWorld::bDropDetail = 0x18C
+[2026-09-12 15:07:09.1256791] UWorld::PlayerNum = 0x750
+[2026-09-12 15:07:09.1256884] UWorld::bIsDefaultLevel = 0x18C
+[2026-09-12 15:07:09.1256980] UWorld::bIsBeingCleanedUp = 0x190
+[2026-09-12 15:07:09.1257075] UWorld::bActorsInitialized = 0x18C
+[2026-09-12 15:07:09.1257170] UWorld::bBegunPlay = 0x18D
+[2026-09-12 15:07:09.1257265] UWorld::bIsCameraMoveableWhenPaused = 0x18E
+[2026-09-12 15:07:09.1257358] UWorld::bMatchStarted = 0x18D
+[2026-09-12 15:07:09.1257453] UWorld::bStartup = 0x18D
+[2026-09-12 15:07:09.1257547] UWorld::bAreConstraintsDirty = 0x18E
+[2026-09-12 15:07:09.1257644] UWorld::bIsTearingDown = 0x18D
+[2026-09-12 15:07:09.1257737] UWorld::bKismetScriptError = 0x18D
+[2026-09-12 15:07:09.1257831] UWorld::bDebugPauseExecution = 0x18D
+[2026-09-12 15:07:09.1257928] UWorld::ActiveLevelCollectionIndex = 0x1E8
+[2026-09-12 15:07:09.1258034] UWorld::bAllowAudioPlayback = 0x18E
+[2026-09-12 15:07:09.1258136] UWorld::bRequiresHitProxies = 0x18E
+[2026-09-12 15:07:09.1258230] UWorld::bShouldTick = 0x18E
+[2026-09-12 15:07:09.1258324] UWorld::bStreamingDataDirty = 0x18E
+[2026-09-12 15:07:09.1258421] UWorld::bShouldForceUnloadStreamingLevels = 0x18E
+[2026-09-12 15:07:09.1258515] UWorld::NextURL = 0x818
+[2026-09-12 15:07:09.1258611] UWorld::RealTimeSeconds = 0x7A8
+[2026-09-12 15:07:09.1258708] UWorld::bMaterialParameterCollectionInstanceNeedsDeferredUpdate = 0x18F
+[2026-09-12 15:07:09.1258810] UWorld::NextSwitchCountdown = 0x7F8
+[2026-09-12 15:07:09.1258905] UWorld::bHasEverBeenInitialized = 0x18F
+[2026-09-12 15:07:09.1258999] UWorld::PreparingLevelNames = 0x828
+[2026-09-12 15:07:09.1259092] UWorld::IsInBlockTillLevelStreamingCompleted = 0x194
+[2026-09-12 15:07:09.1259187] UWorld::BlockTillLevelStreamingCompletedEpoch = 0x198
+[2026-09-12 15:07:09.1259281] UWorld::BuildStreamingDataTimer = 0x558
+[2026-09-12 15:07:09.1259376] UWorld::URL = 0x680
+[2026-09-12 15:07:09.1259472] UWorld::LastTimeUnbuiltLightingWasEncountered = 0x790
+[2026-09-12 15:07:09.1259568] UWorld::UnpausedTimeSeconds = 0x7A0
+[2026-09-12 15:07:09.1259662] UWorld::CommittedPersistentLevelName = 0x838
+[2026-09-12 15:07:09.1259758] UWorld::AudioTimeSeconds = 0x7B0
+[2026-09-12 15:07:09.1259851] UWorld::PauseDelay = 0x7C0
+[2026-09-12 15:07:09.1259945] UWorld::NumStreamingLevelsBeingLoaded = 0x812
+[2026-09-12 15:07:09.1260040] UWorld::bMarkedObjectsPendingKill = 0x840
+[2026-09-12 15:07:09.1260134] UWorld::CleanupWorldTag = 0x844
+[2026-09-12 15:07:09.1260227] UWorld::UEP_TotalSize = 0x9E8
+[2026-09-12 15:07:09.1260322] UDataTable::RowStruct = 0x28
+[2026-09-12 15:07:09.1260417] UDataTable::RowMap = 0x30
+[2026-09-12 15:07:09.1260511] UDataTable::bStripFromClientBuilds = 0x80
+[2026-09-12 15:07:09.1260606] UDataTable::bPreserveExistingValues = 0x80
+[2026-09-12 15:07:09.1260701] UDataTable::bIgnoreExtraFields = 0x80
+[2026-09-12 15:07:09.1260795] UDataTable::bIgnoreMissingFields = 0x80
+[2026-09-12 15:07:09.1260888] UDataTable::UEP_TotalSize = 0xB0
+[2026-09-12 15:07:09.1260982] UDataTable::ImportKeyField = 0x88
+[2026-09-12 15:07:09.1261076] FUObjectItem::Object = 0x0
+[2026-09-12 15:07:09.1261170] FUObjectItem::Flags = 0x8
+[2026-09-12 15:07:09.1261264] FUObjectItem::RefCount = 0x14
+[2026-09-12 15:07:09.1261358] FUObjectItem::ClusterRootIndex = 0xC
+[2026-09-12 15:07:09.1261453] FUObjectItem::SerialNumber = 0x10
+[2026-09-12 15:07:09.1261548] FUObjectItem::UEP_TotalSize = 0x18
+[2026-09-12 15:07:09.1261642] FUObjectArray::ObjFirstGCIndex = 0x0
+[2026-09-12 15:07:09.1261736] FUObjectArray::ObjLastNonGCIndex = 0x4
+[2026-09-12 15:07:09.1261830] FUObjectArray::MaxObjectsNotConsideredByGC = 0x8
+[2026-09-12 15:07:09.1261924] FUObjectArray::ObjObjects = 0x10
+[2026-09-12 15:07:09.1262018] FUObjectArray::UObjectCreateListeners = 0x68
+[2026-09-12 15:07:09.1262112] FUObjectArray::OpenForDisregardForGC = 0xC
+[2026-09-12 15:07:09.1262208] FUObjectArray::UObjectDeleteListeners = 0x78
+[2026-09-12 15:07:09.1262301] FUObjectArray::ObjAvailableList = 0x58
+[2026-09-12 15:07:09.1262396] FUObjectArray::PrimarySerialNumber = 0xB0
+[2026-09-12 15:07:09.1262493] FUObjectArray::bShouldRecycleObjectIndices = 0xB4
+[2026-09-12 15:07:09.1262587] FUObjectArray::UEP_TotalSize = 0xB8
+[2026-09-12 15:07:09.1262682] TUObjectArray::NumChunks = 0x1C
+[2026-09-12 15:07:09.1262776] TUObjectArray::Objects = 0x0
+[2026-09-12 15:07:09.1262871] TUObjectArray::UEP_TotalSize = 0x20
+[2026-09-12 15:07:09.1262964] TUObjectArray::PreAllocatedObjects = 0x8
+[2026-09-12 15:07:09.1263059] TUObjectArray::MaxElements = 0x10
+[2026-09-12 15:07:09.1263153] TUObjectArray::NumElements = 0x14
+[2026-09-12 15:07:09.1263246] TUObjectArray::MaxChunks = 0x18
+[2026-09-12 15:07:09.1263341] 
+##### MEMBER OFFSETS END (Coalesced) #####
+
+[2026-09-12 15:07:09.1263571] [UE4SS.EngineTick.HashTableSelfTest] Added posthook with Id '0X20000000000003'!
+[2026-09-12 15:07:09.1263700] Unreal Engine modules (non-modular):
+[2026-09-12 15:07:09.1267212] MainExe @ 0x7ff76c840000 size=0xbb98000
+[2026-09-12 15:07:09.1267714] m_shared_functions: 0x21078d330b0
+[2026-09-12 15:07:09.1278947] Input source set to: Win32Async
+[2026-09-12 15:07:09.1288126] [UE4SS.LoadMap.LuaModImpl] Added prehook with Id '0X2040000000000001'!
+[2026-09-12 15:07:09.1288441] [UE4SS.LoadMap.LuaModImpl] Added posthook with Id '0X40000000000002'!
+[2026-09-12 15:07:09.1293416] [UE4SS.InitGameState.LuaModImpl] Added prehook with Id '0X2010000000000001'!
+[2026-09-12 15:07:09.1293684] [UE4SS.InitGameState.LuaModImpl] Added posthook with Id '0X10000000000002'!
+[2026-09-12 15:07:09.1295558] [UE4SS.BeginPlay.LuaModImpl] Added prehook with Id '0X2008000000000001'!
+[2026-09-12 15:07:09.1295773] [UE4SS.BeginPlay.LuaModImpl] Added posthook with Id '0X8000000000002'!
+[2026-09-12 15:07:09.1299277] [UE4SS.EndPlay.LuaModImpl] Added prehook with Id '0X2004000000000001'!
+[2026-09-12 15:07:09.1299515] [UE4SS.EndPlay.LuaModImpl] Added posthook with Id '0X4000000000002'!
+[2026-09-12 15:07:09.1299673] [UnknownMod.StaticConstructObject.PostHook] Added posthook with Id '0X1000000000000002'!
+[2026-09-12 15:07:09.1558739] [UnknownMod.ULocalPlayerExec.PreHook] Added prehook with Id '0X2000400000000001'!
+[2026-09-12 15:07:09.1559373] [UnknownMod.ULocalPlayerExec.PostHook] Added posthook with Id '0X400000000002'!
+[2026-09-12 15:07:09.1561603] [UnknownMod.CallFunctionByNameWithArguments.PreHook] Added prehook with Id '0X2000800000000001'!
+[2026-09-12 15:07:09.1561799] [UnknownMod.CallFunctionByNameWithArguments.PostHook] Added posthook with Id '0X800000000002'!
+[2026-09-12 15:07:09.1563233] [UnknownMod.ProcessConsoleExec.PostHook] Added posthook with Id '0X400000000000001'!
+[2026-09-12 15:07:09.1563497] [UnknownMod.ProcessConsoleExec.PreHook] Added prehook with Id '0X2400000000000002'!
+[2026-09-12 15:07:09.1563648] [UnknownMod.ProcessConsoleExec.PostHook] Added posthook with Id '0X400000000000003'!
+[2026-09-12 15:07:09.1563781] [UnknownMod.ProcessConsoleExec.PostHook] Added posthook with Id '0X400000000000004'!
+[2026-09-12 15:07:09.1563911] [UnknownMod.ProcessConsoleExec.PostHook] Added posthook with Id '0X400000000000005'!
+[2026-09-12 15:07:09.1564008] Enabling custom events
+[2026-09-12 15:07:09.1566018] [UE4SS.ProcessLocalScriptFunction.LuaModImplScriptHook] Added posthook with Id '0X80000000000001'!
+[2026-09-12 15:07:09.1568827] Starting mods (from mods.txt (D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods\mods.txt) load order)...
+[2026-09-12 15:07:09.1570534] Starting Lua mod 'CheatManagerEnablerMod'
+[2026-09-12 15:07:09.1620783] [RegisterHook] Registered native hook (1, 2) for Function /Script/Engine.PlayerController:ClientRestart
+[2026-09-12 15:07:09.1621397] Starting Lua mod 'ConsoleCommandsMod'
+[2026-09-12 15:07:09.1652145] Starting Lua mod 'ConsoleEnablerMod'
+[2026-09-12 15:07:09.1661978] [UE4SS.EngineTick.LuaModImpl] Added prehook with Id '0X2020000000000004'!
+[2026-09-12 15:07:09.1668222] [RegisterHook] Registered native hook (3, 4) for Function /Script/Engine.PlayerController:ClientRestart
+[2026-09-12 15:07:09.1668435] Mod 'SplitScreenMod' disabled in mods.txt.
+[2026-09-12 15:07:09.1668564] Mod 'LineTraceMod' disabled in mods.txt.
+[2026-09-12 15:07:09.1668685] Starting Lua mod 'BPML_GenericFunctions'
+[2026-09-12 15:07:09.1675342] Mod 'BPModLoaderMod' disabled in mods.txt.
+[2026-09-12 15:07:09.1675747] Starting Lua mod 'Keybinds'
+[2026-09-12 15:07:09.1684795] Starting mods (from enabled.txt (D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods), no defined load order)...
+[2026-09-12 15:07:09.1685980] Mod 'ConanCameraControl' has enabled.txt, starting mod.
+[2026-09-12 15:07:09.1726849] [Lua] [ConanCameraControl] config.lua прочитан
+[2026-09-12 15:07:09.1727483] [Lua] [ConanCameraControl] ВНИМАНИЕ: config.lua перебил 8 настроек кода:
+[2026-09-12 15:07:09.1727664] [Lua] [ConanCameraControl]     camera_pitch: код 0.0 -> файл 4.0
+[2026-09-12 15:07:09.1727813] [Lua] [ConanCameraControl]     disable_collision_test: код true -> файл false
+[2026-09-12 15:07:09.1727939] [Lua] [ConanCameraControl]     preset_arm_length: код 0.0 -> файл 190.0
+[2026-09-12 15:07:09.1728094] [Lua] [ConanCameraControl]     preset_offset_x: код 0.0 -> файл -100.0
+[2026-09-12 15:07:09.1728236] [Lua] [ConanCameraControl]     preset_offset_z: код 0.0 -> файл 65.0
+[2026-09-12 15:07:09.1728360] [Lua] [ConanCameraControl]     preset_saved: код false -> файл true
+[2026-09-12 15:07:09.1728483] [Lua] [ConanCameraControl]     zoom_interp_speed: код 0.0001 -> файл 9.0
+[2026-09-12 15:07:09.1728602] [Lua] [ConanCameraControl]     zoom_min: код 60.0 -> файл 30.0
+[2026-09-12 15:07:09.1728883] [NotifyOnNewObject] Registered notification for /Script/ConanSandbox.BasePlayerChar
+[2026-09-12 15:07:09.1729534] [Lua] [ConanCameraControl] удержание ПОКАДРОВОЕ: по разу на кадр, ограничитель снят
+[2026-09-12 15:07:09.1729718] [Lua] [ConanCameraControl] сторож цели: штатный цикл на игровом потоке, 30 мс
+[2026-09-12 15:07:09.1729902] [Lua] [ConanCameraControl] канал agent-cmd.txt открыт (опрос раз в секунду)
+[2026-09-12 15:07:09.1730075] [Lua] [ConanCameraControl] загружен. Нумпад: 8/2 вперёд-назад · 4/6 влево-вправо · 9/3 выше-ниже · 5 ЦЕНТР · 7/1 и Ctrl+9/3 НАКЛОН взгляда · Ctrl+5 штатный ракурс · / записать посадку · 0 применить · Ctrl+0 пересобрать · +/− дистанция. Num Lock должен быть включён.
+[2026-09-12 15:07:09.1730420] Mod 'ConanModPackStatus' has enabled.txt, starting mod.
+[2026-09-12 15:07:09.1754500] [Lua] [ConanModPackStatus] config.lua прочитан
+[2026-09-12 15:07:09.1756186] [Lua] [ConanModPackStatus] загружен
+[2026-09-12 15:07:09.1756735] Mod 'HosavRU' has enabled.txt, starting mod.
+[2026-09-12 15:07:09.1764744] [Lua] [HosavRU] config.lua прочитан
+[2026-09-12 15:07:09.1770888] [Lua] [HosavRU] таблица перевода: 238 строк
+[2026-09-12 15:07:09.1771163] [Lua] [HosavRU] старт: опрос каждые 2000 мс, хозяин виджета содержит «/Game/Mods/UIMod_Hosav/»
+[2026-09-12 15:07:09.1771935] Event loop start
+[2026-09-12 15:07:12.2148553] [Lua] [ConanModPackStatus] СБОРКА: моды 7/44, нет: SimpleModlist, PackRat_Helper, DamageNumber, DiverseBarkeepers, JaarFishing, OstavarSalon, TrueHairColorsEnhanced, Beyond_Decor_II, ModControlPanel, No_Building_Placement_Restrictions, EnhancedPlayerIgnoresFollowerCollision, ProximityParty, Heritage, SortingBox, Inventory_compactor, DeaHair, Simple_Minimap, LLHighlight, HighmanesArsenal, EnhancedArmoryAndArsenal, ChestLabels, automatic_fish_trap_enhanced, Better_Tavern_PATRONS_E, MSCasaDesFlores_Weapons_Enhanced, MSCasaDesFlores_Nails_Enhanced, Emberlight, StorageReachExpanded, Thrall_Scanner, Asghaard_Ancient_Civilization, AlMerayah_Reborn, LegitReligious_Enhanced, UIMod_Hosav, Frequent_meteors, storage_size, EAA_ThrallLevelIncrease, ExtendedThrallStatsEnhanced, MrS_Level1000 (эталон 44 модов)
+[2026-09-12 15:07:12.2546984] [Lua] [ConanModPackStatus] гашение ждёт: сообщение игры=nil, живых окон=0
+[2026-09-12 15:07:14.2953728] [Lua] [ConanModPackStatus] СБОРКА: моды 15/44, нет: ModControlPanel, No_Building_Placement_Restrictions, EnhancedPlayerIgnoresFollowerCollision, ProximityParty, Heritage, SortingBox, Inventory_compactor, DeaHair, Simple_Minimap, LLHighlight, HighmanesArsenal, EnhancedArmoryAndArsenal, ChestLabels, automatic_fish_trap_enhanced, Better_Tavern_PATRONS_E, MSCasaDesFlores_Weapons_Enhanced, MSCasaDesFlores_Nails_Enhanced, Emberlight, StorageReachExpanded, Thrall_Scanner, Asghaard_Ancient_Civilization, AlMerayah_Reborn, LegitReligious_Enhanced, UIMod_Hosav, Frequent_meteors, storage_size, EAA_ThrallLevelIncrease, ExtendedThrallStatsEnhanced, MrS_Level1000 (эталон 44 модов)
+[2026-09-12 15:07:16.3830970] [Lua] [ConanModPackStatus] СБОРКА: моды 23/44, нет: Simple_Minimap, LLHighlight, HighmanesArsenal, EnhancedArmoryAndArsenal, ChestLabels, automatic_fish_trap_enhanced, Better_Tavern_PATRONS_E, MSCasaDesFlores_Weapons_Enhanced, MSCasaDesFlores_Nails_Enhanced, Emberlight, StorageReachExpanded, Thrall_Scanner, Asghaard_Ancient_Civilization, AlMerayah_Reborn, LegitReligious_Enhanced, UIMod_Hosav, Frequent_meteors, storage_size, EAA_ThrallLevelIncrease, ExtendedThrallStatsEnhanced, MrS_Level1000 (эталон 44 модов)
+[2026-09-12 15:07:18.4800357] [Lua] [ConanModPackStatus] СБОРКА: моды 26/44, нет: EnhancedArmoryAndArsenal, ChestLabels, automatic_fish_trap_enhanced, Better_Tavern_PATRONS_E, MSCasaDesFlores_Weapons_Enhanced, MSCasaDesFlores_Nails_Enhanced, Emberlight, StorageReachExpanded, Thrall_Scanner, Asghaard_Ancient_Civilization, AlMerayah_Reborn, LegitReligious_Enhanced, UIMod_Hosav, Frequent_meteors, storage_size, EAA_ThrallLevelIncrease, ExtendedThrallStatsEnhanced, MrS_Level1000 (эталон 44 модов)
+[2026-09-12 15:07:20.5857573] [Lua] [ConanModPackStatus] СБОРКА: моды 36/44, нет: AlMerayah_Reborn, LegitReligious_Enhanced, UIMod_Hosav, Frequent_meteors, storage_size, EAA_ThrallLevelIncrease, ExtendedThrallStatsEnhanced, MrS_Level1000 (эталон 44 модов)
+[2026-09-12 15:07:22.7105648] [Lua] [ConanModPackStatus] СБОРКА: моды 44/44 (эталон 44 модов)
+[2026-09-12 15:07:35.4484110] [Lua] [ConsoleEnabler] ConsoleKey[1]: Insert
+[2026-09-12 15:07:35.4484786] [Lua] [ConsoleEnabler] ConsoleKey[2]: Tilde
+[2026-09-12 15:07:35.4485030] [Lua] [ConsoleEnabler] ConsoleKey[3]: F10
+[2026-09-12 15:07:35.4537329] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.4740750] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.4789085] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.4979285] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.5029107] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.5218586] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.5265879] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.5449179] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.5494405] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.5681457] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.5731001] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.5935585] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.5984799] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.6175875] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.6225523] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.6423773] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.6473285] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.6660403] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.6706194] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.6883572] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.6935307] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.7137366] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.7190666] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.7389223] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.7436770] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.7626147] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.7813193] [HashTables] Get at 0x7ff76de409e0, tables at 0x7ff77769e190, package maps present
+[2026-09-12 15:07:35.7814980] [HashTables] UClass instances: hash 5597 in 0.126 ms, array 5597 in 7.353 ms
+[2026-09-12 15:07:35.7815280] [HashTables] AActor instances including derived: hash 378 in 0.126 ms, array 378 in 7.353 ms
+[2026-09-12 15:07:35.7815428] [HashTables] Objects with outer /Script/CoreUObject: hash 342 in 0.126 ms, array 342 in 7.353 ms
+[2026-09-12 15:07:35.7815543] [HashTables] Package /Script/CoreUObject: hash 0x7ff40d7fe288 in 0.126 ms, array 0x7ff40d7fe288 in 7.353 ms
+[2026-09-12 15:07:35.7815661] [HashTables] Class /Script/CoreUObject.Object: hash 0x7ff40d540070 in 0.126 ms, array 0x7ff40d540070 in 7.353 ms
+[2026-09-12 15:07:35.7815762] [HashTables] Self test passed (5781 classes with instances)
+[2026-09-12 15:07:35.7841337] [HashTables] Searcher pools and GUObjectArray listeners retired
+[2026-09-12 15:07:35.7904569] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:35.7914231] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:35.7914565] [Lua] [ConanCameraControl] подходящего компонента не нашлось
+[2026-09-12 15:07:35.7914873] [Lua] [ConanCameraControl] agent-cmd: arm_length = 190
+[2026-09-12 15:07:35.7915062] [Lua] [ConanCameraControl] agent-cmd: offset_x = -100
+[2026-09-12 15:07:35.7915223] [Lua] [ConanCameraControl] agent-cmd: offset_y = 0
+[2026-09-12 15:07:35.7915373] [Lua] [ConanCameraControl] agent-cmd: offset_z = 65
+[2026-09-12 15:07:35.7915524] [Lua] [ConanCameraControl] agent-cmd: camera_pitch = 0
+[2026-09-12 15:07:35.7915663] [Lua] [ConanCameraControl] agent-cmd: применено настроек: 5
+[2026-09-12 15:07:36.1242798] [FCallbackGarbageCollector] Freed invalid callbacks!
+[2026-09-12 15:07:37.5124952] [Lua] [ConanModPackStatus] модалка убрана: окон 1 из 1 (remove)
+[2026-09-12 15:07:39.1243869] [FCallbackGarbageCollector] Freed invalid callbacks!
+[2026-09-12 15:07:39.2046386] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:39.2057137] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:40.8145219] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:07:40.8155079] [Lua] [ConanCameraControl] компонентов камеры не найдено ни по одному из 4 классов. Скорее всего, мы ещё не в мире.
+[2026-09-12 15:07:40.8155447] [Lua] [ConanCameraControl] подходящего компонента не нашлось
+[2026-09-12 15:08:03.0701070] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:08:03.0708707] [Lua] [ConanCameraControl] класс SpringArmComponent: найдено 4
+[2026-09-12 15:08:03.0721141] [Lua] [ConanCameraControl] класс CameraComponent: найдено 21
+[2026-09-12 15:08:03.0728839] [Lua] [ConanCameraControl] найдено пружинных штанг: 4
+[2026-09-12 15:08:03.0729420] [Lua] [ConanCameraControl]   [1] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.DeathCameraActor_C_2147475075.SpringArm
+[2026-09-12 15:08:03.0729732] [Lua] [ConanCameraControl]   [2] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.FirstPersonCameraArm
+[2026-09-12 15:08:03.0729959] [Lua] [ConanCameraControl]   [3] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.ThirdPersonSpringArm
+[2026-09-12 15:08:03.0730172] [Lua] [ConanCameraControl]   [4] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.SpringArm_VanityCamera
+[2026-09-12 15:08:03.0730643] [Lua] [ConanCameraControl] ВЫБРАН компонент: SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.ThirdPersonSpringArm  (попытка 18)
+[2026-09-12 15:08:03.0731532] [Lua] [ConanCameraControl] число сброса игры взято при захвате: 200.0
+[2026-09-12 15:08:03.0732110] [RegisterHook] Registered script hook (5, 5) for Function /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraZoomOut
+[2026-09-12 15:08:03.0732555] [RegisterHook] Registered script hook (6, 6) for Function /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraZoomIn
+[2026-09-12 15:08:03.0732970] [RegisterHook] Registered script hook (7, 7) for Function /Game/Characters/BasePlayerChar.BasePlayerChar_C:InpActEvt_ZoomOut_K2Node_InputActionEvent_28
+[2026-09-12 15:08:03.0733360] [RegisterHook] Registered script hook (8, 8) for Function /Game/Characters/BasePlayerChar.BasePlayerChar_C:InpActEvt_ZoomIn_K2Node_InputActionEvent_29
+[2026-09-12 15:08:03.0733731] [RegisterHook] Registered script hook (9, 9) for Function /Game/Characters/BasePlayerChar.BasePlayerChar_C:AdjustCameraToSpringArm
+[2026-09-12 15:08:03.0733976] [Lua] [ConanCameraControl] предел отдаления 1000: перехваты стоят на CameraZoomOut, CameraZoomIn, InpActEvt_ZoomOut_K2Node_InputActionEvent_28, InpActEvt_ZoomIn_K2Node_InputActionEvent_29, AdjustCameraToSpringArm (попытка 1)
+[2026-09-12 15:08:03.0734293] [Lua] [ConanCameraControl] сглаживание камеры выключено: да
+[2026-09-12 15:08:03.0735676] [Lua] [ConanCameraControl] зум ThirdPersonCameraMinArmLength: было 130.0 -> 30
+[2026-09-12 15:08:03.0735983] [Lua] [ConanCameraControl] зум ThirdPersonCameraMaxArmLength: было 3000.0 -> 1000
+[2026-09-12 15:08:03.0736239] [Lua] [ConanCameraControl] зум TP_SpringArmInterpSpeed: было 1.5 -> 9
+[2026-09-12 15:08:03.0736467] [Lua] [ConanCameraControl] зум: сохранённая игрой дистанция = 230.0 (это значение сброса)
+[2026-09-12 15:08:03.0737079] [Lua] [ConanCameraControl] штатная цель третьего лица запомнена: X=0.0 Y=52.0 Z=0.0
+[2026-09-12 15:08:03.0737618] [Lua] [ConanCameraControl] ЦЕЛЬ ПРИТЯЖЕНИЯ переписана на X=-100.0 Y=0.0 Z=65.0 - дальше игра приведёт камеру сама
+[2026-09-12 15:08:03.0743101] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:08:03.0747553] [Lua] [ConanCameraControl] класс SpringArmComponent: найдено 4
+[2026-09-12 15:08:03.0755753] [Lua] [ConanCameraControl] класс CameraComponent: найдено 21
+[2026-09-12 15:08:03.0760181] [Lua] [ConanCameraControl] найдено пружинных штанг: 4
+[2026-09-12 15:08:03.0762957] [Lua] [ConanCameraControl]   [1] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.DeathCameraActor_C_2147475075.SpringArm
+[2026-09-12 15:08:03.0763274] [Lua] [ConanCameraControl]   [2] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.FirstPersonCameraArm
+[2026-09-12 15:08:03.0763656] [Lua] [ConanCameraControl]   [3] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.ThirdPersonSpringArm
+[2026-09-12 15:08:03.0763984] [Lua] [ConanCameraControl]   [4] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.SpringArm_VanityCamera
+[2026-09-12 15:08:03.0764673] [Lua] [ConanCameraControl] ВЫБРАН компонент: SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.ThirdPersonSpringArm  (попытка 18)
+[2026-09-12 15:08:03.0764942] [Lua] [ConanCameraControl] сглаживание камеры выключено: да
+[2026-09-12 15:08:03.0766180] [Lua] [ConanCameraControl] зум ThirdPersonCameraMinArmLength: было 30.0 -> 30
+[2026-09-12 15:08:03.0766440] [Lua] [ConanCameraControl] зум ThirdPersonCameraMaxArmLength: было 1000.0 -> 1000
+[2026-09-12 15:08:03.0766639] [Lua] [ConanCameraControl] зум TP_SpringArmInterpSpeed: было 9.0 -> 9
+[2026-09-12 15:08:03.0767074] [Lua] [ConanCameraControl] ЦЕЛЬ ПРИТЯЖЕНИЯ переписана на X=-100.0 Y=0.0 Z=65.0 - дальше игра приведёт камеру сама
+[2026-09-12 15:08:03.0771423] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:08:03.0775997] [Lua] [ConanCameraControl] класс SpringArmComponent: найдено 4
+[2026-09-12 15:08:03.0782762] [Lua] [ConanCameraControl] класс CameraComponent: найдено 21
+[2026-09-12 15:08:03.0785886] [Lua] [ConanCameraControl] найдено пружинных штанг: 4
+[2026-09-12 15:08:03.0786180] [Lua] [ConanCameraControl]   [1] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.DeathCameraActor_C_2147475075.SpringArm
+[2026-09-12 15:08:03.0786390] [Lua] [ConanCameraControl]   [2] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.FirstPersonCameraArm
+[2026-09-12 15:08:03.0786583] [Lua] [ConanCameraControl]   [3] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.ThirdPersonSpringArm
+[2026-09-12 15:08:03.0786767] [Lua] [ConanCameraControl]   [4] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.SpringArm_VanityCamera
+[2026-09-12 15:08:03.0787162] [Lua] [ConanCameraControl] ВЫБРАН компонент: SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.ThirdPersonSpringArm  (попытка 18)
+[2026-09-12 15:08:03.0787433] [Lua] [ConanCameraControl] сглаживание камеры выключено: да
+[2026-09-12 15:08:03.0788502] [Lua] [ConanCameraControl] зум ThirdPersonCameraMinArmLength: было 30.0 -> 30
+[2026-09-12 15:08:03.0788745] [Lua] [ConanCameraControl] зум ThirdPersonCameraMaxArmLength: было 1000.0 -> 1000
+[2026-09-12 15:08:03.0788950] [Lua] [ConanCameraControl] зум TP_SpringArmInterpSpeed: было 9.0 -> 9
+[2026-09-12 15:08:03.0789310] [Lua] [ConanCameraControl] ЦЕЛЬ ПРИТЯЖЕНИЯ переписана на X=-100.0 Y=0.0 Z=65.0 - дальше игра приведёт камеру сама
+[2026-09-12 15:08:03.0792681] [Lua] [ConanCameraControl] PlayerController есть, пешки ещё нет
+[2026-09-12 15:08:03.0796375] [Lua] [ConanCameraControl] класс SpringArmComponent: найдено 4
+[2026-09-12 15:08:03.0803398] [Lua] [ConanCameraControl] класс CameraComponent: найдено 21
+[2026-09-12 15:08:03.0806317] [Lua] [ConanCameraControl] найдено пружинных штанг: 4
+[2026-09-12 15:08:03.0806589] [Lua] [ConanCameraControl]   [1] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.DeathCameraActor_C_2147475075.SpringArm
+[2026-09-12 15:08:03.0806788] [Lua] [ConanCameraControl]   [2] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.FirstPersonCameraArm
+[2026-09-12 15:08:03.0806973] [Lua] [ConanCameraControl]   [3] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.ThirdPersonSpringArm
+[2026-09-12 15:08:03.0807152] [Lua] [ConanCameraControl]   [4] SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.SpringArm_VanityCamera
+[2026-09-12 15:08:03.0807549] [Lua] [ConanCameraControl] ВЫБРАН компонент: SpringArmComponent /Game/Maps/ConanSandbox/ConanSandbox.ConanSandbox:PersistentLevel.BasePlayerChar_C_2147461116.ThirdPersonSpringArm  (попытка 18)
+[2026-09-12 15:08:03.0807756] [Lua] [ConanCameraControl] сглаживание камеры выключено: да
+[2026-09-12 15:08:03.0808739] [Lua] [ConanCameraControl] зум ThirdPersonCameraMinArmLength: было 30.0 -> 30
+[2026-09-12 15:08:03.0808978] [Lua] [ConanCameraControl] зум ThirdPersonCameraMaxArmLength: было 1000.0 -> 1000
+[2026-09-12 15:08:03.0809174] [Lua] [ConanCameraControl] зум TP_SpringArmInterpSpeed: было 9.0 -> 9
+[2026-09-12 15:08:03.0809482] [Lua] [ConanCameraControl] ЦЕЛЬ ПРИТЯЖЕНИЯ переписана на X=-100.0 Y=0.0 Z=65.0 - дальше игра приведёт камеру сама
+[2026-09-12 15:08:03.0815611] [Lua] [ConanCameraControl] чужая камера заглушена: EAA_Zoom_C (раз 1)
+[2026-09-12 15:08:03.0816259] [Lua] [ConanCameraControl] ЗУМ: штанга=200.0 | цель=230.0 | ДистанцияВозврата=200.0 | FOV=90.0
+[2026-09-12 15:08:03.0816647] [Lua] [ConanCameraControl] зум: игра вернула своё CameraZoomAmount=69.00 - поставил 20.00 (раз 1)
+[2026-09-12 15:08:03.6944617] [Lua] [ConanCameraControl] ---- ТИПЫ КАМЕРНЫХ СВОЙСТВ ПЕРСОНАЖА (без чтения значений) ----
+[2026-09-12 15:08:03.6951481] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SpringArm_VanityCamera
+[2026-09-12 15:08:03.6952041] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraVanity
+[2026-09-12 15:08:03.6953184] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraThirdPerson
+[2026-09-12 15:08:03.6953473] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:AdjustableCamera
+[2026-09-12 15:08:03.6953680] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:FirstPersonCameraArm
+[2026-09-12 15:08:03.6954188] [Lua] [ConanCameraControl]   FloatProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm_Value_93C6AB90480E52EE478DD488790E9E87
+[2026-09-12 15:08:03.6954442] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm__Direction_93C6AB90480E52EE478DD488790E9E87
+[2026-09-12 15:08:03.6954646] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm
+[2026-09-12 15:08:03.6956391] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ToggleCamera
+[2026-09-12 15:08:03.6958961] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:PreVanity3PCameraStatus
+[2026-09-12 15:08:03.6959218] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:IsInVanityCameraMode
+[2026-09-12 15:08:03.6959451] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraDefaultTargetArmLength
+[2026-09-12 15:08:03.6959677] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:NewTargetArmLength
+[2026-09-12 15:08:03.6960623] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraMaxArmLength
+[2026-09-12 15:08:03.6960836] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraMinArmLength
+[2026-09-12 15:08:03.6961121] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraDefaultTargetArmLength
+[2026-09-12 15:08:03.6961345] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraMaxArmLength
+[2026-09-12 15:08:03.6961557] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraMinArmLength
+[2026-09-12 15:08:03.6961809] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:BlockVanityCam
+[2026-09-12 15:08:03.6962015] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraZoomAmount
+[2026-09-12 15:08:03.6962983] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:PostProcessFirstPersonCamera
+[2026-09-12 15:08:03.6963370] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CurrentCameraMode
+[2026-09-12 15:08:03.6963563] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraSocketOffsetTarget
+[2026-09-12 15:08:03.6963773] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraTargetOffsetTarget
+[2026-09-12 15:08:03.6964734] [Lua] [ConanCameraControl]   MulticastInlineDelegateProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SignalCameraModeChange
+[2026-09-12 15:08:03.6965245] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraStateTickTimer
+[2026-09-12 15:08:03.6965552] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:OriginalArmLength
+[2026-09-12 15:08:03.6966095] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:KeepHUDWhenInVanityCamera
+[2026-09-12 15:08:03.6967203] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraShouldRotate
+[2026-09-12 15:08:03.6967707] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:AdjustCameraForTargetLock
+[2026-09-12 15:08:03.6968833] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:LastMountCameraOrientationUpdateTime
+[2026-09-12 15:08:03.6969791] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraSocketOffsetTarget
+[2026-09-12 15:08:03.6974960] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraLocationOffsetTarget
+[2026-09-12 15:08:03.6975253] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:BlockVanityCamBySmartObject
+[2026-09-12 15:08:03.6975456] [Lua] [ConanCameraControl]   MulticastInlineDelegateProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SignalVanityCamChange
+[2026-09-12 15:08:03.6975709] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonDefaultCamMode
+[2026-09-12 15:08:03.6975930] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CustomCamModeSettings
+[2026-09-12 15:08:03.6976346] [Lua] [ConanCameraControl]   всего подходящих свойств: 37
+[2026-09-12 15:08:03.6976490] [Lua] [ConanCameraControl] ---- КОНЕЦ ----
+[2026-09-12 15:08:03.6976639] [Lua] [ConanCameraControl] ---- ТИПЫ КАМЕРНЫХ СВОЙСТВ ПЕРСОНАЖА (без чтения значений) ----
+[2026-09-12 15:08:03.6978374] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SpringArm_VanityCamera
+[2026-09-12 15:08:03.6978583] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraVanity
+[2026-09-12 15:08:03.6979503] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraThirdPerson
+[2026-09-12 15:08:03.6979727] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:AdjustableCamera
+[2026-09-12 15:08:03.6979905] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:FirstPersonCameraArm
+[2026-09-12 15:08:03.6980260] [Lua] [ConanCameraControl]   FloatProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm_Value_93C6AB90480E52EE478DD488790E9E87
+[2026-09-12 15:08:03.6980460] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm__Direction_93C6AB90480E52EE478DD488790E9E87
+[2026-09-12 15:08:03.6980632] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm
+[2026-09-12 15:08:03.6981772] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ToggleCamera
+[2026-09-12 15:08:03.6983658] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:PreVanity3PCameraStatus
+[2026-09-12 15:08:03.6983889] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:IsInVanityCameraMode
+[2026-09-12 15:08:03.6984079] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraDefaultTargetArmLength
+[2026-09-12 15:08:03.6984260] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:NewTargetArmLength
+[2026-09-12 15:08:03.6985018] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraMaxArmLength
+[2026-09-12 15:08:03.6985207] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraMinArmLength
+[2026-09-12 15:08:03.6985434] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraDefaultTargetArmLength
+[2026-09-12 15:08:03.6985621] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraMaxArmLength
+[2026-09-12 15:08:03.6985802] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraMinArmLength
+[2026-09-12 15:08:03.6986027] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:BlockVanityCam
+[2026-09-12 15:08:03.6986204] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraZoomAmount
+[2026-09-12 15:08:03.6987003] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:PostProcessFirstPersonCamera
+[2026-09-12 15:08:03.6987338] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CurrentCameraMode
+[2026-09-12 15:08:03.6987518] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraSocketOffsetTarget
+[2026-09-12 15:08:03.6987695] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraTargetOffsetTarget
+[2026-09-12 15:08:03.6988504] [Lua] [ConanCameraControl]   MulticastInlineDelegateProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SignalCameraModeChange
+[2026-09-12 15:08:03.6988961] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraStateTickTimer
+[2026-09-12 15:08:03.6989150] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:OriginalArmLength
+[2026-09-12 15:08:03.6989449] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:KeepHUDWhenInVanityCamera
+[2026-09-12 15:08:03.6989888] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraShouldRotate
+[2026-09-12 15:08:03.6990195] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:AdjustCameraForTargetLock
+[2026-09-12 15:08:03.6991200] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:LastMountCameraOrientationUpdateTime
+[2026-09-12 15:08:03.6992083] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraSocketOffsetTarget
+[2026-09-12 15:08:03.6993936] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraLocationOffsetTarget
+[2026-09-12 15:08:03.6994163] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:BlockVanityCamBySmartObject
+[2026-09-12 15:08:03.6994351] [Lua] [ConanCameraControl]   MulticastInlineDelegateProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SignalVanityCamChange
+[2026-09-12 15:08:03.6994537] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonDefaultCamMode
+[2026-09-12 15:08:03.6994713] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CustomCamModeSettings
+[2026-09-12 15:08:03.6995080] [Lua] [ConanCameraControl]   всего подходящих свойств: 37
+[2026-09-12 15:08:03.6995217] [Lua] [ConanCameraControl] ---- КОНЕЦ ----
+[2026-09-12 15:08:03.6995354] [Lua] [ConanCameraControl] ---- ТИПЫ КАМЕРНЫХ СВОЙСТВ ПЕРСОНАЖА (без чтения значений) ----
+[2026-09-12 15:08:03.6996972] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SpringArm_VanityCamera
+[2026-09-12 15:08:03.6997179] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraVanity
+[2026-09-12 15:08:03.6998038] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraThirdPerson
+[2026-09-12 15:08:03.6998250] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:AdjustableCamera
+[2026-09-12 15:08:03.6998421] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:FirstPersonCameraArm
+[2026-09-12 15:08:03.6998770] [Lua] [ConanCameraControl]   FloatProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm_Value_93C6AB90480E52EE478DD488790E9E87
+[2026-09-12 15:08:03.6998955] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm__Direction_93C6AB90480E52EE478DD488790E9E87
+[2026-09-12 15:08:03.6999124] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm
+[2026-09-12 15:08:03.7000209] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ToggleCamera
+[2026-09-12 15:08:03.7002023] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:PreVanity3PCameraStatus
+[2026-09-12 15:08:03.7002202] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:IsInVanityCameraMode
+[2026-09-12 15:08:03.7002385] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraDefaultTargetArmLength
+[2026-09-12 15:08:03.7003182] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:NewTargetArmLength
+[2026-09-12 15:08:03.7004051] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraMaxArmLength
+[2026-09-12 15:08:03.7004247] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraMinArmLength
+[2026-09-12 15:08:03.7004473] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraDefaultTargetArmLength
+[2026-09-12 15:08:03.7004656] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraMaxArmLength
+[2026-09-12 15:08:03.7004840] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraMinArmLength
+[2026-09-12 15:08:03.7005052] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:BlockVanityCam
+[2026-09-12 15:08:03.7005225] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraZoomAmount
+[2026-09-12 15:08:03.7005995] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:PostProcessFirstPersonCamera
+[2026-09-12 15:08:03.7006325] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CurrentCameraMode
+[2026-09-12 15:08:03.7009193] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraSocketOffsetTarget
+[2026-09-12 15:08:03.7009392] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraTargetOffsetTarget
+[2026-09-12 15:08:03.7010138] [Lua] [ConanCameraControl]   MulticastInlineDelegateProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SignalCameraModeChange
+[2026-09-12 15:08:03.7010561] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraStateTickTimer
+[2026-09-12 15:08:03.7010846] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:OriginalArmLength
+[2026-09-12 15:08:03.7011247] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:KeepHUDWhenInVanityCamera
+[2026-09-12 15:08:03.7011603] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraShouldRotate
+[2026-09-12 15:08:03.7011865] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:AdjustCameraForTargetLock
+[2026-09-12 15:08:03.7012805] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:LastMountCameraOrientationUpdateTime
+[2026-09-12 15:08:03.7013650] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraSocketOffsetTarget
+[2026-09-12 15:08:03.7015450] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraLocationOffsetTarget
+[2026-09-12 15:08:03.7015670] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:BlockVanityCamBySmartObject
+[2026-09-12 15:08:03.7015851] [Lua] [ConanCameraControl]   MulticastInlineDelegateProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SignalVanityCamChange
+[2026-09-12 15:08:03.7016024] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonDefaultCamMode
+[2026-09-12 15:08:03.7016197] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CustomCamModeSettings
+[2026-09-12 15:08:03.7016553] [Lua] [ConanCameraControl]   всего подходящих свойств: 37
+[2026-09-12 15:08:03.7016687] [Lua] [ConanCameraControl] ---- КОНЕЦ ----
+[2026-09-12 15:08:03.7016822] [Lua] [ConanCameraControl] ---- ТИПЫ КАМЕРНЫХ СВОЙСТВ ПЕРСОНАЖА (без чтения значений) ----
+[2026-09-12 15:08:03.7018402] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SpringArm_VanityCamera
+[2026-09-12 15:08:03.7018623] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraVanity
+[2026-09-12 15:08:03.7019488] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraThirdPerson
+[2026-09-12 15:08:03.7019701] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:AdjustableCamera
+[2026-09-12 15:08:03.7019876] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:FirstPersonCameraArm
+[2026-09-12 15:08:03.7020214] [Lua] [ConanCameraControl]   FloatProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm_Value_93C6AB90480E52EE478DD488790E9E87
+[2026-09-12 15:08:03.7020401] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm__Direction_93C6AB90480E52EE478DD488790E9E87
+[2026-09-12 15:08:03.7020570] [Lua] [ConanCameraControl]   ObjectProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraToSpringArm
+[2026-09-12 15:08:03.7021655] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ToggleCamera
+[2026-09-12 15:08:03.7023567] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:PreVanity3PCameraStatus
+[2026-09-12 15:08:03.7023835] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:IsInVanityCameraMode
+[2026-09-12 15:08:03.7024043] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraDefaultTargetArmLength
+[2026-09-12 15:08:03.7024228] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:NewTargetArmLength
+[2026-09-12 15:08:03.7024932] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraMaxArmLength
+[2026-09-12 15:08:03.7025107] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraMinArmLength
+[2026-09-12 15:08:03.7025326] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraDefaultTargetArmLength
+[2026-09-12 15:08:03.7025503] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraMaxArmLength
+[2026-09-12 15:08:03.7025675] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonCameraMinArmLength
+[2026-09-12 15:08:03.7025884] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:BlockVanityCam
+[2026-09-12 15:08:03.7026052] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraZoomAmount
+[2026-09-12 15:08:03.7026823] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:PostProcessFirstPersonCamera
+[2026-09-12 15:08:03.7027149] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CurrentCameraMode
+[2026-09-12 15:08:03.7027325] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraSocketOffsetTarget
+[2026-09-12 15:08:03.7027494] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraTargetOffsetTarget
+[2026-09-12 15:08:03.7028261] [Lua] [ConanCameraControl]   MulticastInlineDelegateProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SignalCameraModeChange
+[2026-09-12 15:08:03.7028693] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CameraStateTickTimer
+[2026-09-12 15:08:03.7028870] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:OriginalArmLength
+[2026-09-12 15:08:03.7029194] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:KeepHUDWhenInVanityCamera
+[2026-09-12 15:08:03.7029550] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraShouldRotate
+[2026-09-12 15:08:03.7029816] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:AdjustCameraForTargetLock
+[2026-09-12 15:08:03.7030737] [Lua] [ConanCameraControl]   DoubleProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:LastMountCameraOrientationUpdateTime
+[2026-09-12 15:08:03.7031611] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:VanityCameraSocketOffsetTarget
+[2026-09-12 15:08:03.7033371] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:TPCameraLocationOffsetTarget
+[2026-09-12 15:08:03.7033589] [Lua] [ConanCameraControl]   BoolProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:BlockVanityCamBySmartObject
+[2026-09-12 15:08:03.7033765] [Lua] [ConanCameraControl]   MulticastInlineDelegateProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:SignalVanityCamChange
+[2026-09-12 15:08:03.7033934] [Lua] [ConanCameraControl]   ByteProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:ThirdPersonDefaultCamMode
+[2026-09-12 15:08:03.7034100] [Lua] [ConanCameraControl]   StructProperty /Game/Characters/BasePlayerChar.BasePlayerChar_C:CustomCamModeSettings
+[2026-09-12 15:08:03.7034455] [Lua] [ConanCameraControl]   всего подходящих свойств: 37
+[2026-09-12 15:08:03.7034586] [Lua] [ConanCameraControl] ---- КОНЕЦ ----
+[2026-09-12 15:08:03.7629144] [Lua] [CheatManagerEnabler] CheatManager already exist, skipping restoration
+[2026-09-12 15:08:03.7645852] Unregistering native pre-hook (3) for /Script/Engine.PlayerController:ClientRestart
+[2026-09-12 15:08:03.7646344] Unregistering native post-hook (4) for /Script/Engine.PlayerController:ClientRestart
+[2026-09-12 15:08:03.7725659] [Lua] [ConanCameraControl] зум: игра вернула своё TP_SpringArmInterpSpeed=1.50 - поставил 9.00 (раз 2)
+[2026-09-12 15:08:04.0918834] [Lua] [ConanCameraControl] ЗУМ: штанга=229.45989990234 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:05.1029289] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:05.6885806] [Lua] [HosavRU] тик 28: надписей мода в памяти 211, английских из таблицы среди них нет (нечитаемых 0)
+[2026-09-12 15:08:06.1238465] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:06.8147265] [Lua] [ConanModPackStatus] HUD W_SmoothHP_C: живых на экране 2, масштаб выставлен на 2 (x1.25)
+[2026-09-12 15:08:06.8292678] [Lua] [ConanModPackStatus] привязка WBP_MainHotbar_C: живых 1, поправлено 2 (точка 0.50;1.00, сдвиг 150)
+[2026-09-12 15:08:07.1612976] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:08.1773733] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:08.7763884] [Lua] [ConanCameraControl] зум: игра вернула своё TP_SpringArmInterpSpeed=1.00 - поставил 9.00 (раз 3)
+[2026-09-12 15:08:08.8542144] [Lua] [ConanCameraControl] зум: игра вернула своё TP_SpringArmInterpSpeed=1.50 - поставил 9.00 (раз 4)
+[2026-09-12 15:08:09.1994477] [Lua] [ConanCameraControl] ЗУМ: штанга=230.9183807373 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:10.2242149] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:11.2411586] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:12.2710851] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:13.2756765] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:14.3129016] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:15.3184085] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:16.3230118] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:17.3240464] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:18.3432300] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:19.3723418] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:20.3896488] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:21.4092234] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:22.4441149] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:23.4638470] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:24.4690740] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:25.4713124] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:26.4744436] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:27.4865725] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:28.5087278] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:29.5165908] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:30.5273767] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:31.5439775] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:32.5852201] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:33.0778541] [Lua] [ConanCameraControl] ВНИМАНИЕ: перехваты зума стоят, но НЕ СРАБОТАЛИ ни разу за 30 секунд
+[2026-09-12 15:08:33.6039462] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:34.6346364] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:35.6438914] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:36.6671538] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:37.6678788] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:38.6940824] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:39.7259208] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:40.7446055] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:41.7501581] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:42.7820985] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:43.7862137] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:44.8191043] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:45.8219048] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:46.8226552] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:47.8323836] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:48.8496520] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:49.8591409] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:50.8843791] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:51.8944420] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:52.9393241] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:53.9658928] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
+[2026-09-12 15:08:54.9941366] [Lua] [ConanCameraControl] ЗУМ: штанга=230.0 | цель=230.0 | ДистанцияВозврата=230.0 | FOV=112.32723999023
