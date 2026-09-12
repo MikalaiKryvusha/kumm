@@ -180,6 +180,17 @@ execution — фаза 4 эпика. ⚠️ **Игра отвергает пак
       и три вопроса формы (согласование · буквы компаса · тон подсказок). После ответа — опыт
       «свой `.locres` поверх мода» (фаза 2 эпика `plans/06`). Файл: `interviews/interview_002_hosav_ru_perevod.md`;
       источник строк — `researches/conan-devkit/hosav-ftext.csv` (794 ключа, 294 уникальных).
+- 🅿️ **Стрельба из лука «по-обливионски» — В ДАЛЬНЕМ ЯЩИКЕ по слову владельца 12.09 ~15:50.**
+      Разведка закончена и оказалась неожиданной: **механика уже в игре, обе половины.** Баллистика —
+      `UConanProjectileMovementComponent`, `ProjectileGravityScale`, `ProjectileGravityCurve`,
+      `ProjectileSpeedCurve`, зависимость от натяжения. Втыкание — отдельный чертёж
+      `BP_DummyProjectile` с `K2_AttachToComponent`, `MyBoneName`, `PenetrationDepth`, `IsLootable`,
+      `SetLifeSpan`, а в родителе `BP_BaseProjectile` — `ShouldAttach`, `SpawnAttached`,
+      `DummyProjectileAttachedToCharacterLifetime`, `DummyProjectileOnGroundLifetime`. То есть задача,
+      скорее всего, **не «сделать», а «настроить»**. Прочитаны ИМЕНА полей, не значения. Всё с адресами
+      ассетов, тремя дорогами доставки и рисками — `researches/conan-archery/README.md`; наблюдение в
+      игре владелец взял на себя — `homeworks/02_conan_strely_nablyudenie.md`. **Не поднимать, пока он
+      не скажет.**
 - ❓ **Интервью #001 — метрика поставки и каденция молитвы (KAIF 2.5), 2026-09-05.** Два вопроса, оба
       — настройки владельца, которые агент не выбирает сам: (1) ОДНА метрика поставки для
       `MASTER_PLAN.md` — предложен вектор «автономные проверки ядра 0 из 5 · игры на одном манифесте
