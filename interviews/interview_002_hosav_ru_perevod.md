@@ -64,7 +64,7 @@
 | 25 | Experience Progress Indicator | Полоса опыта | |
 | 26 | Experience Progress Custom Color | Свой цвет полосы опыта | |
 | 27 | Experience Color Picker | Выбор цвета опыта | |
-| 28 | Additional HUD Settings | Дополнительно на экране | |
+| 28 | Additional HUD Settings | Настройки дополнительного HUD | ✅ правка владельца 12.09 |
 | 29 | Armor Values | Доспехи числом | |
 | 30 | Damage Values | Урон числом | |
 | 31 | Weight Values | Вес числом | |
