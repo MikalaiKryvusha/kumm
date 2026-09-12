@@ -607,9 +607,12 @@ Work ONLY in `main` — no feature branches. Commit incrementally and often; to 
   - **The tool stores no secrets.** User name, host name and home directory are asked of the OS at
     run time: a deny-list of the owner's identifiers, committed to a public repo, would BE the leak.
   - **A "manual" class the tool refuses to rewrite itself** — where a placeholder would destroy the
-    surrounding sentence (the provenance of the game install: the owner asked that this never be
-    shown anywhere, 2026-09-12). The gate BLOCKS and a human or agent rewrites it neutrally, keeping
-    the technical meaning («подменённая библиотека Steam API», «манифест установки»).
+    surrounding sentence. The gate BLOCKS and a human or agent rewrites it neutrally, keeping the
+    technical meaning. Its vocabulary is deliberately NOT in the tool: it lives in
+    `tools/scrub-local.json`, which `.gitignore` closes, because **a public list of what we hide
+    tells the reader exactly what we hide** — the first version of the rule made that mistake.
+    No such file → the rule is off, and the tool says so on every run instead of implying it checked
+    everything.
   - `tools/hooks/pre-commit` blocks the commit; enable it once per clone with
     `node tools/scrub-identity.mjs --install-hook`. Proven both ways on 2026-09-12: a profile path
     stopped the commit (HEAD unchanged), a clean file went through.

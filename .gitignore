@@ -25,3 +25,7 @@ KAIF_ADAPTATION_TASK.superseded.md
 # Кэш питона от приборов в researches/ — мусор сборки, в репозиторий не идёт
 __pycache__/
 *.pyc
+
+# Локальный запретный словарь для tools/scrub-identity.mjs.
+# ЗАКРЫТ НАМЕРЕННО: публичный список того, что мы прячем, сам всё и рассказывает.
+tools/scrub-local.json
