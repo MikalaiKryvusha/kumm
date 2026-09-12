@@ -385,14 +385,47 @@ during both successful launches, and with the panel OPEN it logged: *«тик 40
 made. The `.locres` had already translated them. The Lua mod is therefore **removed from the game**
 and kept in `_unpacked/HosavRU/` as the fallback for the day a patch puts a `Game` target in a pak.
 
-What the translation reaches: **567 mod keys** — the settings panel (`W_ExampleWidget_User`, 171)
-and all twenty colour-picker widgets. What it cannot reach: the HUD's own `Light / 0 / 0% dr`,
-`3 / 0% / 6 dps` — those strings are in **no** `FText` key of the mod, it composes them at runtime.
+What the translation reaches, after the second pass: **585 mod keys across 33 widgets** (242
+distinct strings) — the settings panel, all twenty colour-picker widgets, **and the HUD header**
+(«Лёгкая / 0 / 0% сниж.», «3 / 0% / 6 ур/с», verified 15:08).
+
+The header needed §7.4: `Light`/`Medium`/`Heavy` and the format strings themselves live in
+**Kismet bytecode**, not in asset data, and `ftext_extract.py` was blind to that shape. Only the
+numbers and the `{}` placeholders stay untranslatable — the engine substitutes those.
 
 Pack-side: `ConanExiles/_config/localization/` (source + README with the rebuild recipe) and
 `ConanExiles/_config/deploy-localization.py` (`--check` · `--remove`), because a game integrity
 check or a reinstall wipes those two files **silently** — the symptom is an English panel and no
 error anywhere.
+
+### 7.4 The second shape of FText — 145 keys the extractor walked straight past (2026-09-12 15:00)
+
+The owner looked at the finished panel and asked the one question that broke the assumption:
+*«а класс брони Light — это можешь перевести?»*. The answer on file was "no — `Light` is in no
+`FText` key of the mod, it is composed at runtime". **That answer was wrong, and the tool was why.**
+
+`FText` reaches a cooked package in **two shapes**, and `ftext_extract.py` only knew the first:
+
+| shape | where | layout |
+|---|---|---|
+| A — asset data | property data of a widget | `[int32 nsLen][ns\0][int32 33][<32 hex>\0][int32 srcLen][src\0]` — length-prefixed |
+| **B — Kismet bytecode** | a Blueprint's compiled graph | `EX_TextConst (0x29)` + literal type `0x01` (LocalizedText) + **three** `EX_StringConst (0x1F)` null-terminated ANSI strings, in the order **SourceString, Key, Namespace** — **no length prefixes at all** |
+
+Shape B is where a widget's *format* strings live and where the words they interpolate live:
+`{armortype} / {armor}{suffix} / {damagereduction}% dr `, `Light`, `Medium`, `Heavy`, `DEAD`,
+the whole party system's messages. Scanning for shape A's length prefix cannot see any of them.
+
+Numbers: **794 keys / 294 sources → 939 / 359** on the same mod. Of the 65 new sources, five were
+approved by the owner in chat the same minute (armour classes; `dr` → «сниж.», `dps` → «ур/с»),
+compiled, deployed and **verified on screen at 15:08: «Лёгкая / 0 / 0% сниж.», «3 / 0% / 6 ур/с»**.
+The remaining 61 went to `interviews/interview_003_hosav_hud_bytecode.md` for the owner's reading —
+23 with a proposed translation, 38 marked "do not translate" (pure `{}` templates, three of the
+author's debug strings, and the `k`/`m` number suffixes, which are a question of their own).
+
+**The lesson is about the instrument, not the mod:** a "there is no such string" verdict is only
+as good as the shapes the scanner knows. Before answering "it cannot be done", check what the
+extractor is blind to — here it was one of two serialisation forms, and it hid the very line the
+owner looks at most.
 
 ## 8. Web recon — done 2026-09-12, full digest in `web-recon.md` (every claim with its URL)
 
