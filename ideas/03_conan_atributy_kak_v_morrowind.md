@@ -121,3 +121,23 @@
 
 **Первый шаг остаётся прежним и он крошечный:** прочитать из Lua значение ОДНОГО атрибута живого
 персонажа и напечатать в журнал. Пока этого нет, всё остальное — теория.
+
+## Шаг 1, 12.09 вечер — адрес атрибута снят у Dev Kit, зонд готов, в игре не запускался
+
+Два безоконных прогона `UnrealEditor-Cmd -run=PythonScript -NullRHI` (по 1,5–2 мин, экран не
+занимают) спросили отражение кита, у кого есть `get_int_stat`:
+
+| владелец | сигнатура |
+|---|---|
+| `ConanCharacter` (родитель `Character`) | `GetIntStat(StatID: ECharIntStatID, Mode: EStatModifierMode) -> int32`, также `SetIntStat`, `AddToIntStat`, `GetTotalIntStatModification` |
+| `StatHolder` (компонент, родитель `PersistenceComponent`) | те же четыре; `SetIntStat` возвращает `bool` |
+| `ProgressionSystem` (компонент персонажа) | `GetAttributePointsEarned(CurrentLevel)` |
+
+Номера по киту: `HEALTH_MAX`=0, `STAMINA_MAX`=6, `LEVEL`=4, `ATTRIBUTE_HEALTH`=14, `STAMINA`=15,
+`ENCUMBRANCE`=16, `MIGHT`=17, `ACCURACY`=18, `ATHLETICISM`=19, `METABOLISM`=20, `RESILIENCE`=21,
+`LEADERSHIP`=27. `EStatModifierMode`: `FULL`=0, `BASE`=1. ⚠️ Кит новее игры — нумерация проверяется
+в игре по `LEVEL`.
+
+Зонд — `ConanExiles/_unpacked/ConanAttributeProbe/Scripts/main.lua`: только чтение, без вечных
+циклов, сам пробует до шести раз через 10 с после появления героя, Numpad . — прочитать заново.
+Раскатан в `ue4ss/Mods/ConanAttributeProbe`. **Опыт в игре не проводился** — это следующий шаг.
