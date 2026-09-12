@@ -333,6 +333,35 @@ the shape of `FText` localization keys (`NSLOCTEXT`-style key per text), i.e. th
 Route 3 — re-cooking the author's widgets with Russian text — is possible with the kit but is
 the worst: it forks the mod and dies on every update.
 
+### 7.2 The localization experiment — 2026-09-12 10:40–12:45, what each door said
+
+The owner accepted the table (interview 002) and asked for the mod the same morning. Run as
+atomic steps; every verdict below is a log line, not a guess.
+
+| step | done | verdict |
+|---|---|---|
+| game's own `ru/Exiles_UI.locres` extracted from `pakchunk0-Windows.pak` (index unencrypted, pak v11) | `UnrealPak -Extract -Filter` | 13 cultures + locmeta, 1.87 MB |
+| `.locres` v3 reader/writer (`ConanExiles/_config/devkit/locres.py`) | selftest on the game's file | **round trip byte-identical, 15 553 entries** |
+| SourceStringHash algorithm = `FCrc::StrCrc32` over UTF-16 code units, 4 rounds per unit | kit manifest sources vs game locres | **15 282 of 15 282 match** |
+| KeyHash algorithm | 19 CRC variants tried against engine-written hashes | **none match — unknown**; not needed: the engine writes it |
+| overlay compiled by the kit itself: `UnrealEditor-Cmd -run=GatherText -config=<Compile.ini>` with a private target `UE4/Saved/Loc/HosavRU` (manifest + en/ru archives from `hosav-ru-entries.py`) | headless, 2 min | **260 keys / 238 strings → `ru/HosavRU.locres`, 123 ms** |
+| merged locres (game 15 553 + ours 260) inside a mod wrapper built with the kit's `UnrealPak` | game launch | ❌ `Invalid pak file version (12)` — **the 5.8 UnrealPak writes pak v12, the game reads ≤ 11**; no switch to lower it |
+| same, repacked with `repak` 0.2.3 `--version V11` (`_tools/repak`, sha256 verified) | game launch | pak accepted; ❌ `Mod pak file … failed check … (Error: Filename '../../../ConanSandbox/Content/Localization/Exiles_UI/ru/Exiles_UI.locres' is not allowed in pak)` — **the mod loader whitelists file names in the platform pak; overriding a game file by path is refused by design** (`ValidateMod_FilenameNotAllowed`) |
+| runtime route: UE4SS Lua mod `HosavRU` (sweep `TextBlock`/`RichTextBlock` owned by `/Game/Mods/UIMod_Hosav/`, `SetText` from `ru_table.lua`) | deployed to `ue4ss/Mods/HosavRU`, `luac -p` green | ❓ **UNTESTED** — UE4SS itself died on both launches (`FName::StaticAlignment` fatal, bug 10) before any Lua mod ran; the mod is deployed with `enabled.txt.off` for an A/B |
+
+What the game's strings say about the proper pak route: `PolyglotDataToText` (Kismet, BP-callable)
+registers translations at runtime from an `FPolyglotTextData`; `LocalizationTargetsToChunk` /
+"Skipped loading localization data for chunk %d (from PAK '%s')" show chunked-localization
+loading from paks, but only for targets the game already knows, and the loader's filename
+whitelist blocks that path for mods. So a pak-based translation = a cooked ModController that
+calls `PolyglotDataToText` for each key — phase 1 of the epic (needs a cook, hence the version
+check first). Until then the Lua sweep is the only route that needs no cook.
+
+Side facts: mods without `ModCompat.bin` mount fine ("skipping compatibility check" — 12 of 44
+live mods); the loader extracts platform paks to `Saved/ExtractedMods/` and skips re-extraction
+by hash; `AssetRegistry.bin` is required in the platform pak (`ValidateMod_MissingAssetRegistry`),
+a foreign one (Chest Labels') passed the manifest stage.
+
 ## 8. Web recon — done 2026-09-12, full digest in `web-recon.md` (every claim with its URL)
 
 What changed the plans, in order of weight:
