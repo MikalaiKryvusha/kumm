@@ -595,6 +595,26 @@ Work ONLY in `main` — no feature branches. Commit incrementally and often; to 
 - **Ignore first, then the tool.** Any new tool, export, dump, key, or binary enters the project ONLY
   after its `.gitignore` line exists. A secret caught by a gate is a success of procedure; a secret
   caught by the owner is a failure of the framework.
+- **Nothing that deanonymises the owner or his machine enters the repository — and that is enforced
+  by code, not by memory.** `kumm` is PUBLIC. On 2026-09-12 two UE4SS logs went in raw, and before
+  them the owner's Windows profile path and his SteamID sat in three reports; nobody broke a rule,
+  because there was no rule — there was memory. His instruction, verbatim: *«это должно стать
+  ОБЯЗАТЕЛЬСТВОМ этого проекта KUMM, чтобы оно всегда так работало, кодом, проверками, хуками, а не
+  на памяти Николая и ИИ агента»*. The machinery:
+  - `node tools/scrub-identity.mjs` — checks every tracked file; `--fix` anonymises what can be
+    anonymised mechanically (profile paths, `ls` owner column, host name, SteamID, e-mail, MAC,
+    LAN IP; in LOGS also the timezone line and absolute paths → `<GAME>\…`, `<WORK>\…`).
+  - **The tool stores no secrets.** User name, host name and home directory are asked of the OS at
+    run time: a deny-list of the owner's identifiers, committed to a public repo, would BE the leak.
+  - **A "manual" class the tool refuses to rewrite itself** — where a placeholder would destroy the
+    surrounding sentence (the provenance of the game install: the owner asked that this never be
+    shown anywhere, 2026-09-12). The gate BLOCKS and a human or agent rewrites it neutrally, keeping
+    the technical meaning («подменённая библиотека Steam API», «манифест установки»).
+  - `tools/hooks/pre-commit` blocks the commit; enable it once per clone with
+    `node tools/scrub-identity.mjs --install-hook`. Proven both ways on 2026-09-12: a profile path
+    stopped the commit (HEAD unchanged), a clean file went through.
+  - **Anonymising now does NOT clean git history.** What was pushed stays in the history of the
+    public repository; removing it means a rewrite and a force-push, and that is the owner's call.
 - **The owner's originals are inviolable.** A document from the owner is committed verbatim BEFORE any
   edit (checklist step 18) — never "improve" an original that isn't safely in history yet.
 

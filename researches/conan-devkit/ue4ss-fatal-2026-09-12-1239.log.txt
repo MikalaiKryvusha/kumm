@@ -1,25 +1,25 @@
 [2026-09-12 12:39:06.6248266] Console created
 [2026-09-12 12:39:06.6311022] UE4SS - v3.0.1 Beta #0 - Git SHA #2bfa839f
-[2026-09-12 12:39:06.6311373] Timezone: Europe/Minsk
+[2026-09-12 12:39:06.6311373] Timezone: <redacted>
 [2026-09-12 12:39:06.6311529] UE4SS Build Configuration: Game__Shipping__Win64 (MSVC)
 [2026-09-12 12:39:06.6327375] Setting up mods...
-[2026-09-12 12:39:06.6327670] Loading mods from: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods
-[2026-09-12 12:39:06.6354088] Starting mods (from mods.txt (D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods\mods.txt) load order)...
-[2026-09-12 12:39:06.6356482] Starting mods (from enabled.txt (D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods), no defined load order)...
+[2026-09-12 12:39:06.6327670] Loading mods from: <GAME>\ConanSandbox\Binaries\Win64\ue4ss\Mods
+[2026-09-12 12:39:06.6354088] Starting mods (from mods.txt (<GAME>\ConanSandbox\Binaries\Win64\ue4ss\Mods\mods.txt) load order)...
+[2026-09-12 12:39:06.6356482] Starting mods (from enabled.txt (<GAME>\ConanSandbox\Binaries\Win64\ue4ss\Mods), no defined load order)...
 [2026-09-12 12:39:06.6358327] No specific game configuration found, using default configuration file
-[2026-09-12 12:39:06.6358582] Config: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\UE4SS-settings.ini
+[2026-09-12 12:39:06.6358582] Config: <GAME>\ConanSandbox\Binaries\Win64\ue4ss\UE4SS-settings.ini
 
-[2026-09-12 12:39:06.6358724] root directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
-[2026-09-12 12:39:06.6358840] working directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
-[2026-09-12 12:39:06.6358947] game executable directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64
-[2026-09-12 12:39:06.6359151] game executable: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ConanSandbox-Win64-Shipping.exe (192270696 bytes)
+[2026-09-12 12:39:06.6358724] root directory: <GAME>\ConanSandbox\Binaries\Win64\ue4ss
+[2026-09-12 12:39:06.6358840] working directory: <GAME>\ConanSandbox\Binaries\Win64\ue4ss
+[2026-09-12 12:39:06.6358947] game executable directory: <GAME>\ConanSandbox\Binaries\Win64
+[2026-09-12 12:39:06.6359151] game executable: <GAME>\ConanSandbox\Binaries\Win64\ConanSandbox-Win64-Shipping.exe (192270696 bytes)
 
 
 [2026-09-12 12:39:06.6359272] mods directories: 
-[2026-09-12 12:39:06.6359419] [0] D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods
+[2026-09-12 12:39:06.6359419] [0] <GAME>\ConanSandbox\Binaries\Win64\ue4ss\Mods
 [2026-09-12 12:39:06.6359532] 
-[2026-09-12 12:39:06.6359637] log directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
-[2026-09-12 12:39:06.6359742] object dumper directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
+[2026-09-12 12:39:06.6359637] log directory: <GAME>\ConanSandbox\Binaries\Win64\ue4ss
+[2026-09-12 12:39:06.6359742] object dumper directory: <GAME>\ConanSandbox\Binaries\Win64\ue4ss
 
 
 [2026-09-12 12:39:06.6495587] Getting ordered lists from ini file

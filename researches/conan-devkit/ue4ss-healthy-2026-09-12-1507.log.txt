@@ -1,25 +1,25 @@
 [2026-09-12 15:07:01.6071602] Console created
 [2026-09-12 15:07:01.6135003] UE4SS - v3.0.1 Beta #0 - Git SHA #2bfa839f
-[2026-09-12 15:07:01.6135415] Timezone: Europe/Minsk
+[2026-09-12 15:07:01.6135415] Timezone: <redacted>
 [2026-09-12 15:07:01.6135569] UE4SS Build Configuration: Game__Shipping__Win64 (MSVC)
 [2026-09-12 15:07:01.6151620] Setting up mods...
-[2026-09-12 15:07:01.6151941] Loading mods from: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods
-[2026-09-12 15:07:01.6156632] Starting mods (from mods.txt (D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods\mods.txt) load order)...
-[2026-09-12 15:07:01.6158702] Starting mods (from enabled.txt (D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods), no defined load order)...
+[2026-09-12 15:07:01.6151941] Loading mods from: <GAME>\ConanSandbox\Binaries\Win64\ue4ss\Mods
+[2026-09-12 15:07:01.6156632] Starting mods (from mods.txt (<GAME>\ConanSandbox\Binaries\Win64\ue4ss\Mods\mods.txt) load order)...
+[2026-09-12 15:07:01.6158702] Starting mods (from enabled.txt (<GAME>\ConanSandbox\Binaries\Win64\ue4ss\Mods), no defined load order)...
 [2026-09-12 15:07:01.6160585] No specific game configuration found, using default configuration file
-[2026-09-12 15:07:01.6160796] Config: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\UE4SS-settings.ini
+[2026-09-12 15:07:01.6160796] Config: <GAME>\ConanSandbox\Binaries\Win64\ue4ss\UE4SS-settings.ini
 
-[2026-09-12 15:07:01.6160923] root directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
-[2026-09-12 15:07:01.6161031] working directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
-[2026-09-12 15:07:01.6161130] game executable directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64
-[2026-09-12 15:07:01.6161333] game executable: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ConanSandbox-Win64-Shipping.exe (192270696 bytes)
+[2026-09-12 15:07:01.6160923] root directory: <GAME>\ConanSandbox\Binaries\Win64\ue4ss
+[2026-09-12 15:07:01.6161031] working directory: <GAME>\ConanSandbox\Binaries\Win64\ue4ss
+[2026-09-12 15:07:01.6161130] game executable directory: <GAME>\ConanSandbox\Binaries\Win64
+[2026-09-12 15:07:01.6161333] game executable: <GAME>\ConanSandbox\Binaries\Win64\ConanSandbox-Win64-Shipping.exe (192270696 bytes)
 
 
 [2026-09-12 15:07:01.6161447] mods directories: 
-[2026-09-12 15:07:01.6161593] [0] D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods
+[2026-09-12 15:07:01.6161593] [0] <GAME>\ConanSandbox\Binaries\Win64\ue4ss\Mods
 [2026-09-12 15:07:01.6161702] 
-[2026-09-12 15:07:01.6161803] log directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
-[2026-09-12 15:07:01.6161904] object dumper directory: D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss
+[2026-09-12 15:07:01.6161803] log directory: <GAME>\ConanSandbox\Binaries\Win64\ue4ss
+[2026-09-12 15:07:01.6161904] object dumper directory: <GAME>\ConanSandbox\Binaries\Win64\ue4ss
 
 
 [2026-09-12 15:07:01.6273637] Getting ordered lists from ini file
@@ -1314,7 +1314,7 @@
 [2026-09-12 15:07:09.1563911] [UnknownMod.ProcessConsoleExec.PostHook] Added posthook with Id '0X400000000000005'!
 [2026-09-12 15:07:09.1564008] Enabling custom events
 [2026-09-12 15:07:09.1566018] [UE4SS.ProcessLocalScriptFunction.LuaModImplScriptHook] Added posthook with Id '0X80000000000001'!
-[2026-09-12 15:07:09.1568827] Starting mods (from mods.txt (D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods\mods.txt) load order)...
+[2026-09-12 15:07:09.1568827] Starting mods (from mods.txt (<GAME>\ConanSandbox\Binaries\Win64\ue4ss\Mods\mods.txt) load order)...
 [2026-09-12 15:07:09.1570534] Starting Lua mod 'CheatManagerEnablerMod'
 [2026-09-12 15:07:09.1620783] [RegisterHook] Registered native hook (1, 2) for Function /Script/Engine.PlayerController:ClientRestart
 [2026-09-12 15:07:09.1621397] Starting Lua mod 'ConsoleCommandsMod'
@@ -1326,7 +1326,7 @@
 [2026-09-12 15:07:09.1668685] Starting Lua mod 'BPML_GenericFunctions'
 [2026-09-12 15:07:09.1675342] Mod 'BPModLoaderMod' disabled in mods.txt.
 [2026-09-12 15:07:09.1675747] Starting Lua mod 'Keybinds'
-[2026-09-12 15:07:09.1684795] Starting mods (from enabled.txt (D:\Games\Conan Exiles\ConanSandbox\Binaries\Win64\ue4ss\Mods), no defined load order)...
+[2026-09-12 15:07:09.1684795] Starting mods (from enabled.txt (<GAME>\ConanSandbox\Binaries\Win64\ue4ss\Mods), no defined load order)...
 [2026-09-12 15:07:09.1685980] Mod 'ConanCameraControl' has enabled.txt, starting mod.
 [2026-09-12 15:07:09.1726849] [Lua] [ConanCameraControl] config.lua прочитан
 [2026-09-12 15:07:09.1727483] [Lua] [ConanCameraControl] ВНИМАНИЕ: config.lua перебил 8 настроек кода:

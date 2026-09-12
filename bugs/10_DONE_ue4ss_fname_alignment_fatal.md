@@ -85,7 +85,7 @@ Fatal Error: [FName::StaticAlignment] StaticAlignment_Private is not valid
 | правка `ServerSettings.ini` | откачена → **FATAL** |
 | файлы игры | `verify-install.py`: 490 совпало, **битых 0, отсутствующих 0** |
 | `UE4SS.dll`, `dwmapi.dll` | sha1 против эталона в библиотеке — **байт в байт** |
-| оверлеи в процессе игры | перечислены модули: только `steam_api64.dll` от установки |
+| оверлеи в процессе игры | перечислены модули: только `steam_api64.dll` из состава установки |
 
 Отдельно снята версия про `gamingservicesproxy_13.dll` в очереди `PendingFileRenameOperations`:
 очередь **пережила перезагрузку**, то есть она хроническая, а не сегодняшняя. Помогла сама
