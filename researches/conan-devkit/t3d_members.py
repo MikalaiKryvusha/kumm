@@ -1,6 +1,10 @@
 """List the variables and functions a blueprint graph references, from a UE T3D export.
 
 usage: t3d_members.py <file.utf8.t3d> <GraphName> [<GraphName> ...]
+       t3d_members.py <file.utf8.t3d> --uses <Name>     which graphs reference <Name>
+
+The reverse mode found the JumpZ reset on 2026-09-13: `--uses SigilLongJumpDisable` over
+BaseBPCombat named TakeHealthDamage, OnSubstateChanged_Sprint and ServerAction.
 
 Why (2026-09-13, idea 03): hooking Conan's ApplyNewMovementSpeed from UE4SS installs
 and never fires. The working lever was the DATA the formula reads — the graph of
@@ -40,6 +44,11 @@ def main() -> int:
         return 2
     sys.stdout.reconfigure(encoding="utf-8")
     g = members(sys.argv[1])
+    if sys.argv[2] == "--uses" and len(sys.argv) > 3:
+        name = sys.argv[3]
+        users = sorted(k for k, v in g.items() if name in v["variables"] or name in v["calls"])
+        print(f"{name} is referenced by: {users if users else 'no graph'}")
+        return 0 if users else 1
     rc = 0
     for name in sys.argv[2:]:
         if name not in g:
