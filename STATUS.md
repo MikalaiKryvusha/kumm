@@ -128,7 +128,7 @@ execution — фаза 4 эпика. ⚠️ **Игра отвергает пак
 кит новее игры — фаза 1 открывается офлайн-сверкой версий, не куком. Веб-разведка с
 источниками — `researches/conan-devkit/web-recon.md` (греп по `NOT FOUND`, `too new`, `exileforge`).
 Побочный след запуска: `zenserver.exe` живёт в фоне (порт 8558, `%LOCALAPPDATA%\UnrealEngine`),
-остановить `zen.exe service down`. ⚠️ Оконный запуск кита — только по договорённости
+остановить `F:\CEDevKit\CEUE5Devkit\Engine\Binaries\Win64\zen.exe down` (проверено 13.09: «shutdown complete»; `service down` — ошибка, службы нет). ⚠️ Оконный запуск кита — только по договорённости
 с владельцем: окно отбирает экран удалённого стола на 30–60 минут шейдеров.
 
 ## 🤖 Autonomous backlog pool (no human / no special hardware needed)
