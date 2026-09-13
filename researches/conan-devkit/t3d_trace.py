@@ -9,7 +9,11 @@ import re, sys
 path, target = sys.argv[1], sys.argv[2]
 DEPTH = int(sys.argv[3]) if len(sys.argv) > 3 else 10
 
-nodes = {}   # name -> dict(cls, member, graph, pins: {pinid: pin})
+# Keyed by (graph, node name), NOT by name alone. Fixed 2026-09-13: node names are unique only
+# inside a graph — BasePlayerChar.t3d defines 21 703 nodes under 8 164 names (7 206 names
+# repeat), so a name-keyed table silently traced the wrong graph's node: the multiplier of
+# MaxAcceleration came out as "InternalWasCorpseCreated". LinkedTo refers to the same graph.
+nodes = {}   # (graph, name) -> dict(cls, member, graph, pins: {pinid: pin})
 cur = None
 graph = None
 for line in open(path, encoding='utf-8'):
@@ -21,7 +25,7 @@ for line in open(path, encoding='utf-8'):
     m = re.match(r'Begin Object Name="([^"]+)" ExportPath="/Script/\w+\.(K2Node_\w+)\'.*?:([^.\']+)\.', s)
     if m:
         cur = {'name': m.group(1), 'cls': m.group(2), 'graph': m.group(3), 'member': '', 'extra': '', 'pins': {}}
-        nodes[m.group(1)] = cur
+        nodes[(m.group(3), m.group(1))] = cur
         continue
     if cur is None:
         continue
@@ -64,8 +68,8 @@ def label(n):
         return 'SET ' + base
     return base + (' [' + n['extra'].strip() + ']' if n['extra'] else '')
 
-def expr(node_name, out_pin_id, depth, seen):
-    n = nodes.get(node_name)
+def expr(graph, node_name, out_pin_id, depth, seen):
+    n = nodes.get((graph, node_name))
     if not n:
         return '<?' + node_name + '>'
     pin = n['pins'].get(out_pin_id, {'name': '?'})
@@ -78,7 +82,7 @@ def expr(node_name, out_pin_id, depth, seen):
             continue
         if p['links']:
             ln, lp = p['links'][0]
-            args.append(p['name'] + '=' + expr(ln, lp, depth - 1, seen | {node_name}))
+            args.append(p['name'] + '=' + expr(graph, ln, lp, depth - 1, seen | {node_name}))
         elif p['default'] not in ('', 'None'):
             args.append(p['name'] + '=' + p['default'])
     return head + ('(' + ', '.join(args) + ')' if args else '')
@@ -92,6 +96,6 @@ for n in hits:
             continue
         if p['links']:
             ln, lp = p['links'][0]
-            print('  ', p['name'], '=', expr(ln, lp, DEPTH, set()))
+            print('  ', p['name'], '=', expr(n['graph'], ln, lp, DEPTH, set()))
         else:
             print('  ', p['name'], '= default', p['default'])
