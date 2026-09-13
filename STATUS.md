@@ -289,6 +289,9 @@ execution — фаза 4 эпика. ⚠️ **Игра отвергает пак
    ⚠️ `deploy-config.py` НЕ запускать: на 13.09 все четыре конфига игры разошлись с паком, раскатка
    затрёт `Engine.ini` и `GameUserSettings.ini` — сперва разобрать расхождение.
 
+0г. 🟢 **Идея 04 — уровень без потолка (аналог Level Uncap, 13.09):** уровни = строки `DT_ExperienceSystemLevel`, опыт int32; закон `175·L^p` (p 0,5 → 69 713 ур., 0,8 → 12 024), генератор `ConanExiles/_config/xp-table.py`, график — артефакт https://claude.ai/code/artifact/24229e38-b572-4dca-9f12-d08efd6569d7.
+   Дальше: владелец выбирает p; посчитать очки атрибутов и знаний; проверить, примет ли игра таблицу из кита — всё в `ideas/04_conan_uroven_bez_potolka.md`.
+
 0. ✅ **UE4SS работает, баг 10 закрыт 12.09 — не открывать.** Моды UE4SS умерли — сторож
    `_config/enter-world.ps1` сам называет лечение (строка `Unknown_1` в `VTableLayout.ini`); полная
    страховка — `PROJECT_HISTORY.md`, запись 13.09, и `bugs/10_DONE_*`.
