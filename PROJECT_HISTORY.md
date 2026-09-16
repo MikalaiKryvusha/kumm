@@ -1,5 +1,23 @@
 # KUMM — Project History (the chronicle)
 
+
+## 2026-09-13 вечер — пункты передачи 0г и 0д (перенесены из STATUS 2026-09-16 при мягком закрытии)
+
+> Перенесено ДОСЛОВНО: оба пункта перекрыты работой 16.09 (кривая опыта поднята до якоря 500,
+> мод паузы доведён до 0.6.0 с двумя замедлениями) и перестали быть «сейчас».
+
+0г. 🟢 **Идея 04 — уровень без потолка (аналог Level Uncap, 13.09):** уровни = строки `DT_ExperienceSystemLevel`, опыт int32; закон `175·L^p` (p 0,5 → 69 713 ур., 0,8 → 12 024), генератор `ConanExiles/_config/xp-table.py`, график — артефакт https://claude.ai/code/artifact/24229e38-b572-4dca-9f12-d08efd6569d7.
+   **13.09 вечер — мод `KrinikLevelUncapped` стоит в игре вместо MrS и работает** («супер!» владельца): 10 000 уровней p = 0,5, очко атрибута за уровень, знания 16/48; HUD сошёлся с таблицей, герой взял 17-й по ней. Сборка — `ConanExiles/_config/devkit/build-level-mod.py` (распаковка MrS, не кит: кит — для патча 2.2.0). Не проверено: очки атрибутов и знаний на экране «Хар-ки». После патча 2.2.0 — пересобрать китом. Всё — `ideas/04_conan_uroven_bez_potolka.md`.
+
+0д. 🟢 **Пауза (13.09 вечер):** `PauseGame` из Мастерской — пауза в ESC-меню («пауза заработала»); наш
+   `KrinikPauseGameInMenu` 0.2.0 — замедление времени, пока открыт полноэкранный интерфейс в мире (меню с
+   вкладками проверено 23:08, ESC вместе с PauseGame не залипает — 23:16; сундуки/станции/смерть — нет); грабли —
+   `EXP-0111`, разбор — `ideas/05`. Мод камеры:
+   временный герой при входе в мир больше не ломает захват (36 падений → 0, проверено 22:54). Вход в мир агентом
+   без владельца — `ConanExiles/_config/enter-world-focused.ps1` после `Start-Process` (ALT-касание +
+   `SetForegroundWindow`, клик «Продолжить» каждые 5 с; простой клик уходил в VS Code).
+   Сохранение возвращено к 21:59 (Проворство 2), копия с 532 — `_save-backup\…2248_agility-532-before-restore.db`.
+
 > The APPEND-ONLY chronicle of how this project lived and grew: closed sessions, shipped phases,
 > releases, big decisions in the order they happened. This is where `STATUS.md` sheds its past —
 > STATUS stays a short live summary of NOW; everything finished moves HERE (the "bonsai trim" step
