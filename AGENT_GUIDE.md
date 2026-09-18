@@ -17,9 +17,11 @@ relies entirely on this document to get to work.
 > 🔴 **AGENT, SAY IT IN THE CHAT BEFORE STARTING ANY WORK** — in full, together with the creed
 > above: on session entry (`/resume`), before any non-trivial task, and on every context refresh
 > in a long session. Do not skip items and do not paraphrase. The principles are unpacked in
-> `PHILOSOPHY.md`. Cadence is the owner's setting — one box is ticked here: ☑ full text before
-> every non-trivial task and on every refresh (default) · ☐ full text once per session on entry,
-> then one line «creed and prayer said at <time>» before each task.
+> `PHILOSOPHY.md`. Cadence is the owner's setting — one box is ticked here: ☐ full text before
+> every non-trivial task and on every refresh (default) · ☑ full text once per session on entry,
+> then one line «creed and prayer said at <time>» before each task — in this project the line also
+> names the three principles most relevant to that task, and a context refresh gets the same one line
+> (`[OWNER]` «да, как в KAGO» · 2026-09-18 — interview #001, Q2; the same setting the owner chose in KAGO).
 
 1. **SIMPLICITY ABOVE ALL.** If it is taking long, I overcomplicated it — the task is not hard.
    Stuck → re-understand the task, don't pile on complexity.
