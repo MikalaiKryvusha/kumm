@@ -7,7 +7,7 @@
 // это и есть проверка, что тикет закрыт по делу. Маркеры не нашлись — код 2, а не тишина.
 //
 // [TESTED: 2026-09-18 · два прогона по ядру 2.7 этого дерева, вывод прочитан: без скобок — оба слота выучены,
-//  с `<pack>` — null]
+//  с `<pack>` — null; отчёт testcases/reports/2026-09-18_kaif-update-sweep.md, прогон 5]
 import { readFileSync } from 'node:fs';
 const src = readFileSync(process.argv[2], 'utf8').split(String.fromCharCode(13) + String.fromCharCode(10)).join(String.fromCharCode(10));
 const a = src.indexOf('const slotsIn = ');

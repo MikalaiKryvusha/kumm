@@ -96,8 +96,8 @@ One such value unmatches the WHOLE module, so the plain neighbour slot is not le
 
 `kaif-experience-lint check` → `0 findings, 88 warning(s) above`: 88 lines of `no-class: EXP-NNNN … a failure
 entry with no class`, on every run of the closing ritual, for entries the release notes say are outside the
-field rules. Exit 0, so nothing breaks — but the one line that matters will sit under 88 that do not. No ticket
-(S3, a wish — §4).
+field rules. Exit 0, so nothing breaks — but the one line that matters will sit under 88 that do not. The
+delivered version said "no ticket (S3, a wish — §4)"; after the owner's word on feedback it has one: #80.
 
 ### R4 — S3 — executor-side: three classes, the third one FIVE times in one session
 
@@ -115,8 +115,17 @@ a pre-commit check refusing a today-dated stamp later than the clock) were first
 `ideas/06_strazhi_ot_lzhi_obolochki_i_chasov.md`. That filing was itself a defect (R6): his word already stands
 — «кодом, проверками, хуками, а не на памяти Николая и ИИ агента», 2026-09-12 — and the canon says two strikes
 make a mechanism. They are the agent's own work. State when this report goes out: NOT built yet, next in line.
+**Update after delivery (posted on the issue as comment 5733585024):** both guards were built and proven on the real path
+the same evening — `tools/check-claim-before-evidence.mjs` in the pre-commit hook (a real commit of a probe file
+with a future stamp and an unbacked `[TESTED:` marker was refused, HEAD did not move) and
+`tools/hooks/no-backslash-heredoc.mjs` as a `PreToolUse` hook on Bash (a live call with a backslash in a heredoc
+body was refused by the harness). While building them the executor typed `[TESTED]` into both unrun headers and a
+closing stamp a minute ahead of the clock — which is why the commit gate also checks the marker, not only the time.
+Run report: `testcases/reports/2026-09-18_claim-and-heredoc-guards.md`.
 
 ### R5 — S3 — "byte-equal" was wider than the observation (the judge's F1 — and a field datum for the origin)
+
+Ticket, filed after this report was delivered: #81.
 
 The first draft of this report and `STATUS.md` said the live pass was byte-equal to the rehearsal. Observed were:
 equal counters, a byte-identical task file, a 3-line log diff. The TREES differ in line endings: `git archive
@@ -347,5 +356,6 @@ that contains `<pack>`. Output in R2.
 ---
 
 The delivery state of this report is the `**Delivered upstream:**` line under its title. Its defects have their
-own tickets: #72, #73 and #78 (R6). The first committed version of this footer read "NOT YET — a
+own tickets: #72 (R1), #73 (R2), #78 (R6, the canon half); filed after delivery — #80 (R3), #81 (R5), #82 (R6, the
+chat half). The first committed version of this footer read "NOT YET — a
 field report stays local until the owner says otherwise" — the sentence the owner's word of 2026-09-18 overrules.

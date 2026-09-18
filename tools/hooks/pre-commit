@@ -21,13 +21,22 @@ fi
 STAGED=$(git diff --cached --name-only --diff-filter=ACM -z | tr '\0' '\n' | grep -c . || true)
 if [ "$STAGED" -eq 0 ]; then exit 0; fi
 
-if git diff --cached --name-only --diff-filter=ACM -z \
+if ! git diff --cached --name-only --diff-filter=ACM -z \
    | xargs -0 -r node tools/scrub-identity.mjs --check; then
-  exit 0
+  echo "" >&2
+  echo "КОММИТ ОСТАНОВЛЕН: в отправляемых файлах есть опознаватели." >&2
+  echo "  автоматически:  node tools/scrub-identity.mjs --fix   (потом git add)" >&2
+  echo "  вручную:        места «ручного» класса перепиши нейтрально — заглушка там сломает смысл" >&2
+  exit 1
 fi
 
-echo "" >&2
-echo "КОММИТ ОСТАНОВЛЕН: в отправляемых файлах есть опознаватели." >&2
-echo "  автоматически:  node tools/scrub-identity.mjs --fix   (потом git add)" >&2
-echo "  вручную:        места «ручного» класса перепиши нейтрально — заглушка там сломает смысл" >&2
-exit 1
+# Второй гейт (2026-09-18, класс claim-before-evidence, EXP-0121): время впереди часов и отметка [TESTED: …]
+# без существующего отчёта прогона. Судит только добавленные строки файлов проекта.
+if ! node tools/check-claim-before-evidence.mjs --staged >&2; then
+  echo "" >&2
+  echo "КОММИТ ОСТАНОВЛЕН: утверждение записано раньше наблюдения (строки выше)." >&2
+  echo "  время бери из часов: date '+%Y-%m-%d %H:%M %:z';  отметку [TESTED: …] ставь после прогона, с путём к его отчёту" >&2
+  exit 1
+fi
+
+exit 0

@@ -745,7 +745,8 @@ Work ONLY in `main` — no feature branches. Commit incrementally and often; to 
     everything.
   - `tools/hooks/pre-commit` blocks the commit; enable it once per clone with
     `node tools/scrub-identity.mjs --install-hook`. Proven both ways on 2026-09-12: a profile path
-    stopped the commit (HEAD unchanged), a clean file went through.
+    stopped the commit (HEAD unchanged), a clean file went through. Since 2026-09-18 the same hook runs a
+    second gate — `tools/check-claim-before-evidence.mjs` (Tools table).
   - **Anonymising now does NOT clean git history.** What was pushed stays in the history of the
     public repository; removing it means a rewrite and a force-push, and that is the owner's call.
 - **The owner's originals are inviolable.** A document from the owner is committed verbatim BEFORE any
@@ -995,6 +996,8 @@ for KAIF tickets too and contradicted the carve-out twenty lines above it — fo
 | `node .kaif/kaif-core.mjs report bugs/KAIF/NN_*.md` | file AND deliver a KAIF bug/improvement upstream in one move (`--dry-run` to preview); no `AUTH:` line — the one carve-out |
 | `node tools/kaif-update-merge-skills.mjs <root> <tplRoot> [--write]` | hand half of a KAIF update for skills that differ from the template only by our fills (origin #73) — check its `FILES`/`FILLS` first |
 | `node tools/kaif-update-probe-matchfills.mjs .kaif/kaif-core.mjs` | acceptance check of origin #73: prints `null` for a fill with `<pack>` while the defect stands |
+| `node tools/check-claim-before-evidence.mjs --staged` | runs by itself as the SECOND gate of `tools/hooks/pre-commit`: refuses a today-dated stamp ahead of the clock and a `[TESTED: <date>` marker without an existing `testcases/reports/*.md` (class `claim-before-evidence`, `EXP-0121`); `claim-ok: <why>` on the line is the declared exception |
+| `tools/hooks/no-backslash-heredoc.mjs` | a Claude Code `PreToolUse` hook on Bash: refuses a heredoc whose body carries a backslash (`EXP-0120`). Wired in the LOCAL `.claude/settings.local.json` (not in git) — in a new clone add under `hooks.PreToolUse` the entry `{"matcher": "Bash", "hooks": [{"type": "command", "command": "node", "args": ["${CLAUDE_PROJECT_DIR}/tools/hooks/no-backslash-heredoc.mjs"], "timeout": 10}]}` |
 
 ---
 

@@ -80,27 +80,40 @@
 
 ## Entries
 
+### EXP-0122 · 2026-09-18 · ❌→✅ · #owner #questions #archaeology #kaif #feedback
+class: question-already-answered
+**Context:** closing the KAIF 2.7 update; the final chat reply listed three things "awaiting your word": two guards against my own repeated errors, sending the field report upstream, the prayer cadence (interview #001 Q2).
+**Tried / did:** put all three to the owner in the tail of a chat message — labels in my vocabulary, links instead of the matter, no scenario, nothing searched first.
+**Result:** ❌ the owner answered with questions: «Что тебе KAIF обо всём этом говорит, к чему тебя обязывает?» and «тебе каиф не говорит, что отчёты в исток идут без слов владельца?» — then ordered it written into the report that he had to rub my nose in it. The search I then ran settled two of three without him: the guards (the canon's "two strikes → a mechanism"; his 2026-09-12 «кодом, проверками, хуками»), the report (origin #15; this project's own #48 "under the standing authorization"; 18 field reports upstream). The third was a real owner setting — and `review.mjs --queue --list` showed it waiting 13 days, NEVER shown. ✅ guards built, report and ticket delivered (#79, #78), Q2 shown properly.
+**Lesson:** "awaiting your word" is a CLAIM that the canon and the owner's past words do not already decide the matter — the same claim the 2.7 archaeology door checks for interviews, and a chat reply passes no door. Run the search per ask BEFORE writing the line; what survives goes to `interviews/` as a scenario and is shown, the rest is done.   → link: `bugs/KAIF/05_*` (origin #78) · `reports/KAIF_UPDATES/KUMM_KAIF_2.7_UPDATE_REPORT.md` R6 · `interviews/interview_001_delivery-metric.md`
+**Repro:** `node .kaif/tools/contour/review.mjs --queue --list` (a NEVER SHOWN line = a question owed); per ask: `grep -rniE "<the ask's words>" interviews/ GOAL.md MASTER_PLAN.md plans/ AGENT_GUIDE.md` and, for anything about KAIF itself, `gh issue list --repo MikalaiKryvusha/KAIF --state all --search "<words>"`.
+**Trigger:** typing «ждёт вашего слова», «awaiting your word», «shall I», «отправлять ли» in a reply → stop and run the Repro for each item.
+**Not for:** task-level ambiguity about what the owner meant RIGHT NOW (fable Step 0: one pointed question with a recommendation).
+**Mechanization:** `none-cheap: first classed strike of this class in this journal — no fate owed yet; the machine for the chat surface does not exist (the reply never lands on disk); an improvement request for a Stop-time check is filed upstream as origin #82 (bugs/KAIF/08_*)`.
+
 ### EXP-0121 · 2026-09-18 · ❌→✅ · #claims #stamps #tested #judge
 class: claim-before-evidence
 **Context:** KAIF 2.5 → 2.7 update; writing a guard header, two tickets, a run report and the field report in one long session.
 **Tried / did:** typed a fact INTO a document before the observation that would produce it — FIVE times in one session: a `[TESTED]` marker with "25 lines in two files" before the guard ever ran (the run said 121 in 11); a DONE stamp `18:25` typed at 18:15; a correction stamp `≈18:35` typed at 18:18; a run-report `Создан 18:20` typed at 18:16; "run 4" named in a tool header before run 4 existed. And one claim WIDER than its observation: "the live pass is byte-equal to the rehearsal" — observed were equal counters, a byte-identical task file and a 3-line log diff; the TREES differed in line endings (sandbox CRLF from `git archive` under `autocrlf=true`, live LF).
 **Result:** ❌ every one of them read as plausible. ✅ two caught by my own read-back, three stamps and the "byte-equal" sentence by an INDEPENDENT clean-context judge (finding F1, F4) — before the commit.
-**Lesson:** writing about a run and running it are two acts, and the writing hand is faster. The same session that had just recorded this lesson repeated it ten minutes later — text does not hold this class. What held it: a judge who re-ran everything and compared my stamps with `ls -l` and the GitHub comment time.   → link: `ideas/06_strazhi_ot_lzhi_obolochki_i_chasov.md` · `reports/KAIF_UPDATES/KUMM_KAIF_2.7_UPDATE_REPORT.md` §5
+**Lesson:** writing about a run and running it are two acts, and the writing hand is faster. The same session that had just recorded this lesson repeated it ten minutes later — and twice more while BUILDING the guard against it (`[TESTED]` in the headers of two unrun tools; a DONE stamp `20:14` typed at 20:13) — text does not hold this class. What held it: a judge who re-ran everything and compared my stamps with `ls -l` and the GitHub comment time; now also the commit gate.   → link: `ideas/06_DONE_strazhi_ot_lzhi_obolochki_i_chasov.md` · `reports/KAIF_UPDATES/KUMM_KAIF_2.7_UPDATE_REPORT.md` §5 · `testcases/reports/2026-09-18_claim-and-heredoc-guards.md`
 **Repro:** `date '+%Y-%m-%d %H:%M %:z'` immediately BEFORE typing any stamp, paste its output; for a number — the command's output is on screen before the sentence is written. Check after the fact: `ls -l --time-style='+%H:%M:%S' <file>` against the stamps inside it.
 **Trigger:** fingers on `[TESTED`, `Created:`, `Создан:`, `STATUS: DONE (`, "byte-equal", "identical", or any count → stop, run, paste.
 **Not for:** the owner's quoted dates and external events (a release time from `gh release view`) — those are copied, not observed by me.
-**Mechanization:** `none-cheap: half of it IS cheaply possible — a pre-commit check that refuses a today-dated stamp later than the clock (a stamp in the future is always invented); it touches the owner's commit hook, so it is filed for his word as ideas/06, second guard. The other half (a stamp in the past, a claim wider than its observation) has no cheap machine — the independent judge pass is its mechanism, and it fired`.
+mechanized: tools/check-claim-before-evidence.mjs
+<!-- The two mechanical halves (a today-stamp ahead of the clock; a dated [TESTED marker without an existing run report) run in tools/hooks/pre-commit since 2026-09-18. The rest of the class (a stamp in the past, a claim wider than its observation) has no cheap machine — the independent judge pass stays its mechanism. -->
 
 ### EXP-0120 · 2026-09-18 · ❌→✅ · #shell #heredoc #backslash #windows
 class: escaping-layer
 **Context:** KAIF update; a Node merge script written to the scratchpad through a QUOTED bash heredoc (`cat > f.mjs <<'EOF'`).
 **Tried / did:** trusted the quoted heredoc to carry the text verbatim — although [[EXP-0029]] and the agent's own memory note both say it does not on this machine.
 **Result:** ❌ `\\` collapsed to `\`: the fill `'.\\Deploy-ModPack.ps1'` became `'.\Deploy-ModPack.ps1'` (JavaScript then drops the backslash: `.Deploy-ModPack.ps1`), and a regex class `[\\/]` lost a level. ✅ caught by grepping the written file before the first `--write`; rewritten with the Write tool, backslash built as `String.fromCharCode(92)`. SECOND strike of this class.
-**Lesson:** a second strike means the text failed — this rule is known, recorded twice, and was still broken under load. It needs a machine, not a third sentence.   → link: [[EXP-0029]] · `ideas/06_strazhi_ot_lzhi_obolochki_i_chasov.md`
+**Lesson:** a second strike means the text failed — this rule is known, recorded twice, and was still broken under load. It needs a machine, not a third sentence.   → link: [[EXP-0029]] · `ideas/06_DONE_strazhi_ot_lzhi_obolochki_i_chasov.md`
 **Repro:** `grep -n 'Deploy-ModPack' <the file you just wrote>` — one backslash where you typed two = the layer ate it.
 **Trigger:** a script body contains `\` → the Write tool; a backslash INSIDE generated code → `String.fromCharCode(92)`.
 **Not for:** pure-ASCII bodies without backslashes — a quoted heredoc carries them fine.
-**Mechanization:** `none-cheap: the mechanism is cheap to BUILD (a PreToolUse hook refusing a Bash heredoc whose body carries a backslash) but it edits the owner's harness settings — filed for his word as ideas/06, first guard; until he answers, the third strike of this class will redden kaif-experience-lint, which is the right pressure`.
+mechanized: tools/hooks/no-backslash-heredoc.mjs
+<!-- A PreToolUse hook on Bash, wired in .claude/settings.local.json on 2026-09-18; a live call with a backslash in a heredoc body was refused by the harness in the same session. A new clone must add the hook entry to its local settings again (AGENT_GUIDE → Tools). -->
 
 ### EXP-0119 · 2026-09-18 · ❌→✅ · #shell #eol #grep #windows
 class: shell-lied

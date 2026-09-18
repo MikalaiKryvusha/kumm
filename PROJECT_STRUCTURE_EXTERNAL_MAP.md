@@ -28,7 +28,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── EXPERIENCE.md · PROJECT_HISTORY.md · KAIF_FRAMEWORK.md
 ├── plans/ ideas/ bugs/ researches/ interviews/ homeworks/ reports/   # KAIF knowledge dirs
 ├── testcases/reports/             # run reports, one per executed run: <YYYY-MM-DD>_<work>.md (KAIF 2.7)
-├── tools/                         # project-own tools: scrub-identity.mjs (+ hooks/pre-commit), kaif-update-sweep.mjs
+├── tools/                         # project-own tools: scrub-identity.mjs + check-claim-before-evidence.mjs (both run by hooks/pre-commit), hooks/no-backslash-heredoc.mjs (Claude Code hook), kaif-update-*.mjs
 ├── games/                         # per-game dossiers
 ├── .kaif/                         # framework core: kaif.json, kaif-core.mjs, spheres/, tools/ (10 lints + contour/), hooks/
 ├── .claude/skills/ .agents/skills/ .grok/skills/ .cline/skills/ .roo/  # 37 skills × 5 agent systems
@@ -53,6 +53,8 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 | `.kaif/` | KAIF core: `kaif.json` (marker: version, lang, sphere, mode, origin), `kaif-core.mjs` (backs `kaif:*`), `spheres/`, `tools/`, `hooks/`. | — |
 | `tools/scrub-identity.mjs` | The identity gate of a PUBLIC repo: checks every tracked file for what deanonymises the owner or his machine; `tools/hooks/pre-commit` runs it on every commit. | `tools/scrub-local.json` (gitignored vocabulary) |
 | `tools/kaif-update-sweep.mjs` | After any `/kaif-update` pass: compares every deployed framework file with the NEW release bundle and names upstream lines that did not reach the disk. Exit 0 clean · 1 lines named · 2 could not read. Born from origin #72. | two `KAIF-CORE-BUNDLE.md` files (old, new) |
+| `tools/check-claim-before-evidence.mjs` | Second gate of `tools/hooks/pre-commit`: refuses a today-dated stamp ahead of the clock and a dated `[TESTED:` marker without an existing run report. | `testcases/reports/` |
+| `tools/hooks/no-backslash-heredoc.mjs` | Claude Code `PreToolUse` hook on Bash: refuses a heredoc body with a backslash (it is eaten on this machine). Wired in the local, git-ignored `.claude/settings.local.json`. | — |
 | `testcases/reports/` | One report per EXECUTED run, seven fields; judged by `node .kaif/tools/kaif-testrun-lint.mjs check`. | `.kaif/_testrun-report-template.md` |
 | `mods/`, `*.log`, `node_modules/` | Gitignored. The archive library never enters this repo. | — |
 
