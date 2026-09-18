@@ -706,6 +706,11 @@ Work ONLY in `main` — no feature branches. Commit incrementally and often; to 
 > KAIF owner's STANDING AUTHORIZATION (`/report-bug`, step 3 "File AND deliver") and does NOT wait for an `AUTH:` line —
 > file it and deliver it in the same motion, ahead of the work that found it. Everything else on the
 > list above keeps waiting for the owner's words.
+> **In THIS project the carve-out is wider, by the owner's own word of 2026-09-18** (`[OWNER]` «ОТПРАВКА В
+> KAIF ВСЕГДА РАЗРЕШЕНА И ОБЯЗАТЕЛЬНА!!!! БЕЗ ДОПОЛНИТЕЛЬНОГО ЗАПРОСА РАЗРЕШЕНИЯ У ВЛАДЕЛЬЦА!!!»): EVERY
+> feedback signal to the KAIF origin — a ticket, an improvement request, the FIELD REPORT of an update, a
+> correction of our own delivered statement — goes out without asking. The command and the form are in
+> "Push / GitHub authentication" below. The list above still governs every OTHER destination.
 
 **Non-negotiable git hygiene (each rule exists because its violation burned a real project):**
 
@@ -954,9 +959,22 @@ node .kaif/kaif-core.mjs report bugs/KAIF/NN_*.md          # add --dry-run first
 
 The command files the origin issue under the KAIF owner's standing authorization and writes the URL into
 the ticket's `**Delivered upstream:**` line; `node .kaif/kaif-core.mjs check` names a ticket whose line does
-not prove a delivery. Everything ELSE that goes outward on the owner's behalf — a field report, a release —
-still needs his words (an `AUTH:` line), and any body travels through a `--body-file`, never through a
-command-line argument (the Cyrillic-in-argv rule below). Until 2026-09-18 this paragraph ordered `gh issue create` plus an `AUTH:` line
+not prove a delivery.
+
+**Sending to KAIF is ALWAYS allowed and MANDATORY — the owner's word, 2026-09-18, verbatim:**
+`[OWNER]` «ОТПРАВКА В KAIF ВСЕГДА РАЗРЕШЕНА И ОБЯЗАТЕЛЬНА!!!! БЕЗ ДОПОЛНИТЕЛЬНОГО ЗАПРОСА РАЗРЕШЕНИЯ У
+ВЛАДЕЛЬЦА!!! КТО РАБОТАЕТ ПО КАИФ, ТОТ ОБЯЗАТ В КАИФ НЕСТИ ОБРАТНУЮ СВЯЗЬ ОБЯЗАТЕЛЬНО, ЭТО КАНОН!!!!»
+That covers EVERY feedback signal to the framework's origin — a defect ticket, an improvement request, the
+field report of an install or an update, a correction of a statement of ours that already stands there. The
+field report is delivered in the same move as it is finished: give it the H1 the tracker uses
+(`# Field report: KUMM — KAIF X → Y update (…)`) and a `**Delivered upstream:** NOT YET` line, then run the
+same `report` command on it. Asking the owner "shall I send it?" is the defect, not the courtesy: on
+2026-09-18 an agent of this project held its report back on the word of the shipped `reports/README.md`
+("stays LOCAL until the owner says otherwise"), and the owner had to say it twice (`bugs/KAIF/05_*`).
+
+Everything that goes outward on the owner's behalf to anywhere ELSE — another project's tracker, a release,
+a publication — still needs his words (an `AUTH:` line). Any body travels through a `--body-file`, never
+through a command-line argument (the Cyrillic-in-argv rule below). Until 2026-09-18 this paragraph ordered `gh issue create` plus an `AUTH:` line
 for KAIF tickets too and contradicted the carve-out twenty lines above it — found by the judge of the 2.7 update.
 
 ---
@@ -1332,8 +1350,15 @@ From this project's owner (recorded 2026-08-15, at the KAIF deployment):
   READMEs are Russian; agent-internal documents and the skills stay English (see "Languages" above).
   The README is the owner's own handwriting — edit it from the meaning, never as a translation, and
   never put `[AI]` marks in it.
-- **This deployment is tied to origin.** Tracking mode `standard`: KAIF defects go upstream as tickets
-  to `MikalaiKryvusha/KAIF` on the owner's behalf, through the send gate.
+- **This deployment is tied to origin.** KAIF defects, improvement requests and FIELD REPORTS go upstream
+  to `MikalaiKryvusha/KAIF` by the agent, without asking. The 2026-08-15 wording of this note said "on the
+  owner's behalf, through the send gate" — superseded by his word of 2026-09-18, recorded verbatim:
+  `[OWNER]` «будешь писать отчёт в KAIF, напиши, что ты не разобрался, что отправлять нужно без спроса
+  владельца, и владельцу пришлось тебя тыкать в это носом. ОТПРАВКА В KAIF ВСЕГДА РАЗРЕШЕНА И
+  ОБЯЗАТЕЛЬНА!!!! БЕЗ ДОПОЛНИТЕЛЬНОГО ЗАПРОСА РАЗРЕШЕНИЯ У ВЛАДЕЛЬЦА!!! КТО РАБОТАЕТ ПО КАИФ, ТОТ ОБЯЗАТ В
+  КАИФ НЕСТИ ОБРАТНУЮ СВЯЗЬ ОБЯЗАТЕЛЬНО, ЭТО КАНОН!!!!» The same word stands in the KAIF origin since issue
+  #15 («Все баги, которые ИИ агенты находят при работе с KAIF — без участия человека рапортуются агентом в
+  KAIF github»).
 - The owner plays Palworld now and will play Oblivion Remastered next — the second game is the standing
   reason every game-specific value lives in the manifest instead of the code.
 
