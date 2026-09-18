@@ -199,6 +199,8 @@ said aloud: `KAIF_FRAMEWORK.md` and `STATUS.md` were written without a portrait)
 baseline · `kaif-ranking-lint` · `check --gate-budgets` as a door (it would exit 1 today on `STATUS.md`) ·
 `/team-deployment` and the constitution axis.
 
+*Addendum, the same evening:* `check --gate-budgets` was then exercised as a door at the soft closure. It exited 1 on `STATUS.md` (447 own lines of 200), the bonsai trim moved the text out, and it exits 0 now. Numbers and two notes: [#79 comment](https://github.com/MikalaiKryvusha/KAIF/issues/79#issuecomment-5734232445).
+
 ## 4. Wishes for the next version (by cost, descending)
 
 1. **Close #72** — bind `oldE = oldBySig.get(o)` when the old anchor is absent and the new one is on disk; drop
