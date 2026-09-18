@@ -23,7 +23,9 @@ equal: counters (30 · 26 · 11 · 55), the verdicts, the task file (byte-identi
 ```
 
 `git archive HEAD | tar -x` on a tree with `core.autocrlf=true` writes CRLF files; the live framework files of this
-deployment are LF. No verdict changed — `normSha`, `fileShaNorm` and `normEol` normalize before hashing — but the
+deployment are mostly LF (**correction, posted on the issue:** the first wording said "are LF" — a byte count over
+the 100 deployed framework files gives 90 LF and 10 CRLF, among them the hand-merged skills and `KAIF_REFERENCE.md`;
+an independent judge counting its own set got 78 LF + 9 CRLF). No verdict changed — `normSha`, `fileShaNorm` and `normEol` normalize before hashing — but the
 `oldShas` branch for v1 manifests compares a raw `fileSha` (read in the core, not run), so a tree on that branch
 could see the rehearsal and the live pass disagree.
 

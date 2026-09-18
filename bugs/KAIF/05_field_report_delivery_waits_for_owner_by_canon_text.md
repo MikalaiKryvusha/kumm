@@ -16,8 +16,12 @@ owner's live time was spent on making it leave.
 
 ## The owner's word — verbatim, 2026-09-18, in the project chat
 
-First, as a question, when the agent listed "whether to send the field report upstream" among three things
-"awaiting your word":
+First, in reply to the agent's closing message, which listed "whether to send the field report upstream" among
+three things "awaiting your word" (the owner quoted the three items under his question):
+
+> `[OWNER]` «Что тебе KAIF обо всём этом говорит, к чему тебя обязывает?»
+
+Then, while the agent was reading the canon for the answer:
 
 > `[OWNER]` «тебе каиф не говорит, что отчёты в исток идут без слов владельца?»
 
@@ -67,6 +71,7 @@ stays local until the owner says otherwise (`reports/README.md`)", wrote the sam
 question to the owner in the tail of a chat message. An independent clean-context judge of that update read the
 same canon and found nothing wrong with holding the report — the text is convincing. The owner's answer is above.
 
+<!-- attribution-ok: the owner's order is quoted verbatim in "The owner's word" above (the third message) -->
 **The executor's own share, said plainly as the owner ordered:** I did not work out that sending to KAIF needs
 no permission, and the owner had to rub my nose in it. The evidence was one command away the whole time — the
 header of this project's own #48 names the standing authorization for field signals, and `gh issue list

@@ -27,22 +27,28 @@
 // @guard claim-before-evidence
 // THREAT:         агент вписывает время, число прогона или отметку о проверке раньше, чем оно наблюдалось, и это
 //                 уезжает в коммит под видом факта
-// PROVED-AGAINST: файл с четырьмя сломанными утверждениями (штамп +10 мин местный и UTC, отметка без отчёта, отметка
-//                 со ссылкой на несуществующий отчёт) — код 1, все четыре названы; настоящий `git commit` пробного
-//                 файла — остановлен хуком, HEAD не сдвинулся
+// PROVED-AGAINST: `node tools/test-guards.mjs`, parts B–D: 10 file cases, 6 staged cases in throwaway repos, and the
+//                 whole pre-commit hook refusing a RENAME that carries a future stamp (HEAD unmoved); the same suite
+//                 against the FIRST version (commit fae2731) is red on fractional seconds, `[TESTED:` without a space,
+//                 a directory argument, a content line `++ `, a non-ASCII file name, a report on disk but not in the
+//                 commit, and the rename — the holes an independent judge found; plus a real commit of a probe file
+//                 in this repository refused by the first version (still covered: the rules only widened)
 // GAP:            штамп в прошлом, набранный наугад, не виден по построению; штамп без даты («в 18:35») и дата ДД.ММ
 //                 не видны; отметка без даты и числа в прозе («121 строка») не видны — это держит судья; правило 2
-//                 проверяет, что отчёт ЕСТЬ, а не что он про этот прогон
-// ON-REAL-PATH:   tools/hooks/pre-commit этого репозитория, 2026-09-18 — коммит пробного файла остановлен
+//                 проверяет, что отчёт ЕСТЬ в коммите, а не что он про этот прогон
+// ON-REAL-PATH:   tools/hooks/pre-commit этого репозитория, 2026-09-18 — коммит пробного файла остановлен первой
+//                 версией; вторая версия подключена в тот же хук, её отказ на настоящем пути показан в одноразовом
+//                 репозитории с этим же хуком (набор, часть D)
 //
-// [TESTED: 2026-09-18 · четыре прогона, вывод прочитан; отчёт testcases/reports/2026-09-18_claim-and-heredoc-guards.md]
+// [TESTED: 2026-09-18 · прогоны 1–4 и 8–9, вывод прочитан; отчёт testcases/reports/2026-09-18_claim-and-heredoc-guards.md]
 import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 const CR = String.fromCharCode(13);
 const LF = String.fromCharCode(10);
-const STAMP = /(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?(?:\s*(Z|[+-]\d{2}:?\d{2})(?![\d:]))?/g;
-const TESTED = /\[TESTED: \d{4}-\d{2}-\d{2}/;
+const STAMP = /(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(?:\s*(Z|[+-]\d{2}:?\d{2})(?![\d:]))?/g;
+const TESTED = /\[TESTED:\s*\d{4}-\d{2}-\d{2}/;
 const REPORT = /testcases\/reports\/[^\s\]`'"»)]+\.md/g;
 const OK_MARK = 'claim-ok';
 const FRAMEWORK = /^(\.kaif|\.claude|\.agents|\.grok|\.cline|\.roo)\//;
@@ -65,6 +71,17 @@ function stampEpoch(m) {
 }
 
 const findings = [];
+const STAGED = process.argv[2] === '--staged';
+// Отчёт существует там, куда уходит коммит: в режиме --staged — в индексе (файл, лежащий на диске, но не
+// добавленный, в коммит не попадёт); в режиме файлов — на диске, от текущего каталога или от корня репозитория.
+let TOP = null;
+try { TOP = execFileSync('git', ['rev-parse', '--show-toplevel'], { encoding: 'utf8' }).trim(); } catch { /* not a repo */ }
+function reportExists(p) {
+  if (STAGED) {
+    try { execFileSync('git', ['cat-file', '-e', ':' + p], { stdio: 'ignore' }); return true; } catch { return false; }
+  }
+  return existsSync(p) || (TOP !== null && existsSync(join(TOP, p)));
+}
 // lines: [{ no, text }] — подряд идущие строки одного файла (добавленные, либо весь файл)
 function judge(file, lines) {
   if (FRAMEWORK.test(file.split(String.fromCharCode(92)).join('/'))) return;
@@ -82,7 +99,7 @@ function judge(file, lines) {
       }
       const paths = [...span.matchAll(REPORT)].map((r) => r[0]);
       if (!paths.length) findings.push(`${file}:${no} — отметка [TESTED: …] не называет отчёт прогона (testcases/reports/<дата>_<работа>.md)`);
-      for (const p of paths) if (!existsSync(p)) findings.push(`${file}:${no} — отметка [TESTED: …] ссылается на отчёт, которого нет: ${p}`);
+      for (const p of paths) if (!reportExists(p)) findings.push(`${file}:${no} — отметка [TESTED: …] ссылается на отчёт, которого нет${STAGED ? ' в коммите' : ''}: ${p}`);
     }
   });
 }
@@ -93,17 +110,27 @@ const args = process.argv.slice(2);
 if (args[0] === '--staged') {
   let diff;
   try {
-    diff = execFileSync('git', ['diff', '--cached', '-U0', '--no-color', '--no-ext-diff', '--diff-filter=ACMR'],
-      { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
+    // core.quotepath=false — иначе git печатает кириллическое имя файла восьмеричными кодами в кавычках, и путь
+    // не узнаётся (находка судьи 2026-09-18)
+    diff = execFileSync('git', ['-c', 'core.quotepath=false', 'diff', '--cached', '-U0', '--no-color', '--no-ext-diff',
+      '--diff-filter=ACMR'], { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
   } catch (e) { die('git diff --cached не выполнился: ' + (e && e.message)); }
   const added = new Map();           // файл → [{ no, text }]
-  let file = null, lineNo = 0;
+  let file = null, lineNo = 0, inHeader = false;
   for (const raw of diff.split(LF)) {
     const line = raw.endsWith(CR) ? raw.slice(0, -1) : raw;
-    if (line.startsWith('+++ ')) { file = line.startsWith('+++ b/') ? line.slice(6) : null; continue; }
+    // Заголовок файла — только между `diff --git` и первым `@@`: добавленная строка с содержимым `++ …` выглядит в
+    // diff как `+++ …`, и прежняя версия принимала её за новый файл и теряла всё до конца (находка судьи).
+    if (line.startsWith('diff --git ')) { inHeader = true; file = null; continue; }
+    if (inHeader && line.startsWith('+++ ')) {
+      let name = line.slice(4);
+      if (name.startsWith('"') && name.endsWith('"')) name = name.slice(1, -1);
+      file = name.startsWith('b/') ? name.slice(2) : null;
+      continue;
+    }
     const hunk = line.match(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/);
-    if (hunk) { lineNo = +hunk[1]; continue; }
-    if (!file) continue;
+    if (hunk) { inHeader = false; lineNo = +hunk[1]; continue; }
+    if (inHeader || !file) continue;
     if (line.startsWith('+')) {
       if (!added.has(file)) added.set(file, []);
       added.get(file).push({ no: lineNo, text: line.slice(1) });
@@ -114,7 +141,9 @@ if (args[0] === '--staged') {
 } else if (args.length) {
   for (const f of args) {
     if (!existsSync(f)) die('нет файла ' + f);
-    const lines = readFileSync(f, 'utf8').split(LF).map((l, i) => ({ no: i + 1, text: l.endsWith(CR) ? l.slice(0, -1) : l }));
+    let text;
+    try { text = readFileSync(f, 'utf8'); } catch (e) { die(f + ': ' + (e && e.code || e)); }   // каталог и т.п. → «не прочёл», а не падение
+    const lines = text.split(LF).map((l, i) => ({ no: i + 1, text: l.endsWith(CR) ? l.slice(0, -1) : l }));
     judge(f, lines);
   }
 } else {

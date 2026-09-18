@@ -15,20 +15,28 @@
 //
 // @guard no-backslash-heredoc
 // THREAT:         агент пишет через bash-heredoc файл с обратным слэшем, слэш исчезает молча, код 0
-// PROVED-AGAINST: десять синтетических событий (четыре со слэшем в теле — код 2, шесть контрольных — код 0) и
-//                 настоящий вызов Bash с `<<'EOF'` и `C:\probe\path` в теле — отклонён харнессом, файл не записан
+// PROVED-AGAINST: `node tools/test-guards.mjs`, part A: 9 forms with a slash in the body refused (code 2) and 7 controls
+//                 passed; the same suite against the FIRST version (commit fae2731) is red on `<<\EOF`, `<<'END.'`,
+//                 `<<'my-eof'` — the forms an independent judge walked past it, one of them live, with the very
+//                 EXP-0120 damage; a live `<<\EOF` call is now refused by the harness
 // GAP:            `<<<` (here-string) не судит — там другое правило экранирования; heredoc, чьё тело собрано
 //                 переменной (`cat <<EOF` + `$VAR` со слэшем), не видит — слэша нет в тексте команды; инструмент
-//                 PowerShell не судит — там heredoc нет
-// ON-REAL-PATH:   .claude/settings.local.json этого проекта (хук PreToolUse, matcher Bash), сессия 2026-09-18 — живой
-//                 вызов отклонён, чистый heredoc прошёл. В новом клоне запись хука добавляется в местные настройки
-//                 заново: файл настроек в git не уходит (AGENT_GUIDE → Tools)
+//                 PowerShell не судит — там heredoc нет; разделитель из смешанных кусков (`E"O"F`) читается по
+//                 первому куску. ЛОЖНЫЕ срабатывания: `<<` внутри строки, комментария или арифметики (`$((x<<y))`),
+//                 если ниже в команде есть строка со слэшем — вызов отклонён зря, выход тот же: Write
+// ON-REAL-PATH:   .claude/settings.local.json этого проекта (хук PreToolUse, matcher Bash), 2026-09-18 — живые вызовы
+//                 `<<'EOF'` и `<<\EOF` со слэшем отклонены, чистый heredoc прошёл. В новом клоне запись хука
+//                 добавляется в местные настройки заново: файл настроек в git не уходит (AGENT_GUIDE → Tools)
 //
-// [TESTED: 2026-09-18 · прогоны 5–7, вывод прочитан; отчёт testcases/reports/2026-09-18_claim-and-heredoc-guards.md]
+// [TESTED: 2026-09-18 · прогоны 5–10, вывод прочитан; отчёт testcases/reports/2026-09-18_claim-and-heredoc-guards.md]
 import { readFileSync } from 'node:fs';
 
 const BS = String.fromCharCode(92);
-const OPENER = /(?<!<)<<(-?)[ \t]*(['"]?)([A-Za-z_][A-Za-z0-9_]*)\2/g;
+// Разделитель heredoc — любое слово оболочки: в одинарных кавычках, в двойных, либо без кавычек, где обратный слэш
+// экранирует символ (`<<\EOF` — это разделитель EOF с запретом подстановок). После снятия кавычек и слэшей
+// получается строка, которой закрывается тело.
+const OPENER = /(?<!<)<<(-?)[ \t]*(?:'([^']*)'|"([^"]*)"|((?:\\.|[^\s;&|<>()'"])+))/g;
+const delimOf = (m) => (m[2] !== undefined ? m[2] : m[3] !== undefined ? m[3] : m[4].replace(/\\(.)/g, '$1'));
 
 function heredocBodiesWithBackslash(command) {
   const lines = command.split(/\r?\n/);
@@ -42,7 +50,7 @@ function heredocBodiesWithBackslash(command) {
       if (line.includes(BS)) hits.push({ delim: cur.delim, line });
       continue;
     }
-    for (const m of line.matchAll(OPENER)) pending.push({ dash: m[1] === '-', delim: m[3] });
+    for (const m of line.matchAll(OPENER)) pending.push({ dash: m[1] === '-', delim: delimOf(m) });
   }
   return hits;
 }

@@ -18,10 +18,12 @@ if ! command -v node >/dev/null 2>&1; then
   exit 1
 fi
 
-STAGED=$(git diff --cached --name-only --diff-filter=ACM -z | tr '\0' '\n' | grep -c . || true)
+# ACMR, не ACM: переименованный файл тоже уезжает с содержимым, и коммит из одних переименований не должен
+# проходить мимо обоих гейтов (находка судьи 2026-09-18: `git mv` + правка пронесли и путь профиля, и штамп).
+STAGED=$(git diff --cached --name-only --diff-filter=ACMR -z | tr '\0' '\n' | grep -c . || true)
 if [ "$STAGED" -eq 0 ]; then exit 0; fi
 
-if ! git diff --cached --name-only --diff-filter=ACM -z \
+if ! git diff --cached --name-only --diff-filter=ACMR -z \
    | xargs -0 -r node tools/scrub-identity.mjs --check; then
   echo "" >&2
   echo "КОММИТ ОСТАНОВЛЕН: в отправляемых файлах есть опознаватели." >&2

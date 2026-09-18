@@ -129,7 +129,8 @@ Ticket, filed after this report was delivered: #81.
 
 The first draft of this report and `STATUS.md` said the live pass was byte-equal to the rehearsal. Observed were:
 equal counters, a byte-identical task file, a 3-line log diff. The TREES differ in line endings: `git archive
-HEAD | tar -x` under `core.autocrlf=true` writes a CRLF sandbox, while the live framework files are LF.
+HEAD | tar -x` under `core.autocrlf=true` writes a CRLF sandbox, while the live framework files are mostly LF (90 of
+100 by byte count, 10 CRLF — the delivered wording "are LF" was wider than that; corrected on the issue).
 
 ```
 sandbox PHILOSOPHY.md: 257 CR of 17554 B        live PHILOSOPHY.md: 0 CR of 17297 B
@@ -221,7 +222,9 @@ baseline · `kaif-ranking-lint` · `check --gate-budgets` as a door (it would ex
 `2.2 → 2.5` and `2.5 → 2.7, route bootstrap, 2026-09-18T17:59:31+03:00`. Manifest green (100 + 152), 37 skills
 in 5 systems. Engine byte-unchanged. One owner question stays open (interview #001 Q2, the prayer cadence).
 New in the repository: three `tools/kaif-update-*.mjs`, one run report, one idea awaiting the owner's word
-(`ideas/06`).
+(`ideas/06`). **Correction, after delivery (comment 5733856679 on the issue):** that idea was never the owner's to approve (R6) — it is closed as
+`ideas/06_DONE_*`, both guards are built, and a second, judged version with its test suite (`tools/test-guards.mjs`)
+is in the repository.
 
 `REAL WORLD:` accumulated — the update ran on the owner's LIVE tree, not on a stand: verified on the real world
 (`check`, the sweep, the mirrors, the engine diff, all on that tree). Data and machine — the owner's agent client
