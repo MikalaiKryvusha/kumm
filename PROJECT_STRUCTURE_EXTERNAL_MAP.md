@@ -27,8 +27,11 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── REQUIREMENTS_FRAMEWORK.md · TESTING_FRAMEWORK.md · BUG_FIXING_FRAMEWORK.md
 ├── EXPERIENCE.md · PROJECT_HISTORY.md · KAIF_FRAMEWORK.md
 ├── plans/ ideas/ bugs/ researches/ interviews/ homeworks/ reports/   # KAIF knowledge dirs
-├── .kaif/                         # framework core: kaif.json, kaif-core.mjs, spheres/, tools/, hooks/
-├── .claude/skills/ .agents/skills/ .grok/skills/ .cline/skills/ .roo/  # 38 skills × 5 agent systems
+├── testcases/reports/             # run reports, one per executed run: <YYYY-MM-DD>_<work>.md (KAIF 2.7)
+├── tools/                         # project-own tools: scrub-identity.mjs (+ hooks/pre-commit), kaif-update-sweep.mjs
+├── games/                         # per-game dossiers
+├── .kaif/                         # framework core: kaif.json, kaif-core.mjs, spheres/, tools/ (10 lints + contour/), hooks/
+├── .claude/skills/ .agents/skills/ .grok/skills/ .cline/skills/ .roo/  # 37 skills × 5 agent systems
 ├── CLAUDE.md · AGENTS.md · .clinerules/ · .roo/rules/                 # context pointers
 └── mods/                          # gitignored — never in this repo
 
@@ -48,6 +51,9 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 | `package.json` | Declares the `kumm` bin and the `kaif:*` script handles. `files` ships only `kumm.mjs`, `README.md`, `LICENSE` — **`Deploy-ModPack.ps1` is NOT in the npm tarball** (see the drift note below). | `kumm.mjs` |
 | `README.md` | The storefront, Russian, owner's voice. Exempt from `[AI]` provenance marks. | the two engine files |
 | `.kaif/` | KAIF core: `kaif.json` (marker: version, lang, sphere, mode, origin), `kaif-core.mjs` (backs `kaif:*`), `spheres/`, `tools/`, `hooks/`. | — |
+| `tools/scrub-identity.mjs` | The identity gate of a PUBLIC repo: checks every tracked file for what deanonymises the owner or his machine; `tools/hooks/pre-commit` runs it on every commit. | `tools/scrub-local.json` (gitignored vocabulary) |
+| `tools/kaif-update-sweep.mjs` | After any `/kaif-update` pass: compares every deployed framework file with the NEW release bundle and names upstream lines that did not reach the disk. Exit 0 clean · 1 lines named · 2 could not read. Born from origin #72. | two `KAIF-CORE-BUNDLE.md` files (old, new) |
+| `testcases/reports/` | One report per EXECUTED run, seven fields; judged by `node .kaif/tools/kaif-testrun-lint.mjs check`. | `.kaif/_testrun-report-template.md` |
 | `mods/`, `*.log`, `node_modules/` | Gitignored. The archive library never enters this repo. | — |
 
 ## Cross-references & dependency rules

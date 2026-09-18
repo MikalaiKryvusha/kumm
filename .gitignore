@@ -29,3 +29,5 @@ __pycache__/
 # Локальный запретный словарь для tools/scrub-identity.mjs.
 # ЗАКРЫТ НАМЕРЕННО: публичный список того, что мы прячем, сам всё и рассказывает.
 tools/scrub-local.json
+.kaif/voice-marker.json
+.kaif/contour-window/

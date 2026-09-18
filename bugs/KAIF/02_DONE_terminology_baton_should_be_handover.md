@@ -128,3 +128,28 @@ instantly legible. A word that (a) must be learned from this framework alone and
 **Delivered upstream:** https://github.com/MikalaiKryvusha/KAIF/issues/57 (2026-09-09, on the owner's
 direct instruction: *«заведи в KAIF запрос на улучшение — переименование»*). Keep this document open
 until an update retires the term.
+
+## ✅ STATUS: DONE (2026-09-18 18:15 +03:00 — the file's own write time; an earlier draft carried a typed guess)
+
+Retired by the KAIF 2.5 → 2.7 update of this deployment (live pass 2026-09-18 17:59 +03:00). Origin #57
+was closed upstream on 2026-09-18T14:25:29Z, and 2.7 ships the term this ticket asked for (release notes,
+item 11: "the hand-off is called a handover"). The local divergence recorded in `STATUS.md` on 2026-09-09
+is therefore gone: the seven hand-merged skill files now equal "2.7 template + this project's fills".
+
+Hygiene: `grep -rIil 'baton' .claude/skills .kaif/KAIF_REFERENCE.md .kaif/hooks .kaif/spheres` → empty;
+the merge tool re-run prints `=` for all seven files; `node .kaif/kaif-core.mjs check` → manifest satisfied.
+Functional run: NONE — a terminology change has no product path to walk; what was READ is the delivered
+text itself (the seven files diffed against the extracted 2.7 bundle).
+
+The second half of this ticket — "an anchor lookup that finds nothing must ASK, not stay silent" — was
+NOT fully delivered by 2.7: the log line exists, the upstream delta of the two pre-renamed modules was
+still dropped. That is its own ticket now: `bugs/KAIF/03_rename_anchor_absent_upstream_delta_lost.md`
+(origin #72).
+
+## Decisions made without the owner
+
+- `[AI]` Closed this ticket on the evidence above rather than waiting for the owner's word: its own
+  closing condition ("until an update retires the term") was written on 2026-09-09 and is now met.
+- `[AI]` Kept every quotation of the word `baton` that DESCRIBES the defect (this ticket, `STATUS.md`,
+  `PROJECT_HISTORY.md`, `AGENT_GUIDE.md` lines quoting the field owner) — renaming a quotation would
+  forge the record; the same call both projects made on 2026-09-09.

@@ -13,6 +13,7 @@
 >
 > ```
 > ### EXP-0001 · 2026-01-01 · ✅ · #tag #area
+> class: <slug from the class list below — the UNIT OF RECURRENCE>
 > **Context:** one line — what was being done.
 > **Tried / did:** the approach, briefly.
 > **Result:** ✅/❌ — what happened.
@@ -33,6 +34,44 @@
 > executable (a linter rule, a guard, a gate), and the entry gains the line
 > `mechanized: <the tool>`. Two strikes → a mechanism, never a third reminder.
 >
+> **The deadline is RUN, not remembered** (2.7, epic EL; origin issue #69 — a field audit of one
+> project's journal: 14 of 15 failure classes recurred AFTER their lesson was written, five lessons
+> written 6–17 times in different words, 5.8 % mechanized): `node .kaif/tools/kaif-experience-lint.mjs
+> check` reads the `class:` field as the UNIT of recurrence and reddens on the SECOND failure entry of
+> one class with no `mechanized:`, naming the class and both entries by id. Two fates clear it, both
+> WRITTEN: name the guard in the entry (`mechanized: <the tool>`), or re-check the price once for the
+> WHOLE class and declare it — `<!-- class-ok: <slug> — <why it is not cheaply possible> -->` (an empty
+> declaration is itself a finding; the declared classes are printed on the summary line and that list
+> only shrinks). A third record is never a fate. It also warns when
+> `mechanized:` names a command this project does not contain, and when a slug is outside the list
+> below; `--shrink EXP-NNNN` collapses a MECHANIZED entry to one line pointing at its guard (shows by
+> default, `--yes` writes — the text itself stays in the git history). The command belongs in the
+> closing ritual (`/end-chat-soft`).
+>
+> **The class list of this journal** — a CONTROLLED list, not a closed one: pick a slug from it, and
+> when a lesson genuinely brings a new class, add the slug here in the same write (the linter warns
+> about an unlisted slug, it never refuses). The starter list below is what a field audit had already
+> measured (origin issue #69) — replace and grow it with your project's own classes.
+>
+> <!-- classes: question-already-answered, guard-not-proven-against-threat, shown-as-link,
+>      claim-before-evidence, owner-decision-not-applied, text-in-agents-world,
+>      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
+>      field-dropped-in-rebuild -->
+>
+> | Class slug | The failure it names |
+> |---|---|
+> | `question-already-answered` | the owner is asked what his own past word, the goal doc or a run already decided |
+> | `guard-not-proven-against-threat` | a guard shipped without being seen red on the threat it claims to stop |
+> | `shown-as-link` | showing replaced by a link or a path instead of the thing itself |
+> | `claim-before-evidence` | a claim written wider than the observation behind it |
+> | `owner-decision-not-applied` | a decision the owner gave is recorded and not carried into the artifact |
+> | `text-in-agents-world` | text written for the agent's own world instead of the owner's |
+> | `etalon-from-dirty-tree` | a reference/etalon captured from a tree that was not clean |
+> | `shell-lied` | the shell or the tool swallowed/rewrote what was passed to it |
+> | `escaping-layer` | one escaping level lost between the tool and the file |
+> | `twins-missed` | one of two layers/copies moved and the twin stayed behind |
+> | `field-dropped-in-rebuild` | a field or section silently lost when an artifact was regenerated |
+>
 > The `#tags` are **trigger-tags**: before a task, grep by the task's tags and QUOTE the relevant
 > lessons in your report (id + one line) — or state "no relevant lessons". An unquoted recall is
 > unverifiable; `/fable-judge` checks for this line.
@@ -40,6 +79,61 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0121 · 2026-09-18 · ❌→✅ · #claims #stamps #tested #judge
+class: claim-before-evidence
+**Context:** KAIF 2.5 → 2.7 update; writing a guard header, two tickets, a run report and the field report in one long session.
+**Tried / did:** typed a fact INTO a document before the observation that would produce it — FIVE times in one session: a `[TESTED]` marker with "25 lines in two files" before the guard ever ran (the run said 121 in 11); a DONE stamp `18:25` typed at 18:15; a correction stamp `≈18:35` typed at 18:18; a run-report `Создан 18:20` typed at 18:16; "run 4" named in a tool header before run 4 existed. And one claim WIDER than its observation: "the live pass is byte-equal to the rehearsal" — observed were equal counters, a byte-identical task file and a 3-line log diff; the TREES differed in line endings (sandbox CRLF from `git archive` under `autocrlf=true`, live LF).
+**Result:** ❌ every one of them read as plausible. ✅ two caught by my own read-back, three stamps and the "byte-equal" sentence by an INDEPENDENT clean-context judge (finding F1, F4) — before the commit.
+**Lesson:** writing about a run and running it are two acts, and the writing hand is faster. The same session that had just recorded this lesson repeated it ten minutes later — text does not hold this class. What held it: a judge who re-ran everything and compared my stamps with `ls -l` and the GitHub comment time.   → link: `ideas/06_strazhi_ot_lzhi_obolochki_i_chasov.md` · `reports/KAIF_UPDATES/KUMM_KAIF_2.7_UPDATE_REPORT.md` §5
+**Repro:** `date '+%Y-%m-%d %H:%M %:z'` immediately BEFORE typing any stamp, paste its output; for a number — the command's output is on screen before the sentence is written. Check after the fact: `ls -l --time-style='+%H:%M:%S' <file>` against the stamps inside it.
+**Trigger:** fingers on `[TESTED`, `Created:`, `Создан:`, `STATUS: DONE (`, "byte-equal", "identical", or any count → stop, run, paste.
+**Not for:** the owner's quoted dates and external events (a release time from `gh release view`) — those are copied, not observed by me.
+**Mechanization:** `none-cheap: half of it IS cheaply possible — a pre-commit check that refuses a today-dated stamp later than the clock (a stamp in the future is always invented); it touches the owner's commit hook, so it is filed for his word as ideas/06, second guard. The other half (a stamp in the past, a claim wider than its observation) has no cheap machine — the independent judge pass is its mechanism, and it fired`.
+
+### EXP-0120 · 2026-09-18 · ❌→✅ · #shell #heredoc #backslash #windows
+class: escaping-layer
+**Context:** KAIF update; a Node merge script written to the scratchpad through a QUOTED bash heredoc (`cat > f.mjs <<'EOF'`).
+**Tried / did:** trusted the quoted heredoc to carry the text verbatim — although [[EXP-0029]] and the agent's own memory note both say it does not on this machine.
+**Result:** ❌ `\\` collapsed to `\`: the fill `'.\\Deploy-ModPack.ps1'` became `'.\Deploy-ModPack.ps1'` (JavaScript then drops the backslash: `.Deploy-ModPack.ps1`), and a regex class `[\\/]` lost a level. ✅ caught by grepping the written file before the first `--write`; rewritten with the Write tool, backslash built as `String.fromCharCode(92)`. SECOND strike of this class.
+**Lesson:** a second strike means the text failed — this rule is known, recorded twice, and was still broken under load. It needs a machine, not a third sentence.   → link: [[EXP-0029]] · `ideas/06_strazhi_ot_lzhi_obolochki_i_chasov.md`
+**Repro:** `grep -n 'Deploy-ModPack' <the file you just wrote>` — one backslash where you typed two = the layer ate it.
+**Trigger:** a script body contains `\` → the Write tool; a backslash INSIDE generated code → `String.fromCharCode(92)`.
+**Not for:** pure-ASCII bodies without backslashes — a quoted heredoc carries them fine.
+**Mechanization:** `none-cheap: the mechanism is cheap to BUILD (a PreToolUse hook refusing a Bash heredoc whose body carries a backslash) but it edits the owner's harness settings — filed for his word as ideas/06, first guard; until he answers, the third strike of this class will redden kaif-experience-lint, which is the right pressure`.
+
+### EXP-0119 · 2026-09-18 · ❌→✅ · #shell #eol #grep #windows
+class: shell-lied
+**Context:** KAIF update; deciding which line endings a merge script must write back.
+**Tried / did:** measured with `grep -c $'\r' <file>` in Git Bash and built a table "every file is CRLF" from it.
+**Result:** ❌ grep reported 116 CR lines for a file with ZERO CR bytes — `autoloop`, `dayloop` and `AGENT_GUIDE.md` are LF. ✅ caught when the merge script's own count disagreed; resolved by counting bytes.
+**Lesson:** on this machine the shell is not a measuring instrument for bytes. Bytes are counted by a program that reads bytes — or by git, which already knows.   → link: `AGENT_GUIDE.md` → Document & text hygiene, face 4
+**Repro:** `git ls-files --eol -- <file>` (columns `i/` index, `w/` working tree) — or `node -e "const s=require('fs').readFileSync(process.argv[1]);let cr=0,lf=0;for(const b of s){if(b===13)cr++;if(b===10)lf++}console.log('CR',cr,'LF',lf)" <file>`.
+**Trigger:** about to decide anything by line endings → `git ls-files --eol`, never `grep $'\r'`.
+**Not for:** files outside a git tree — there only the byte count works.
+mechanized: git ls-files --eol
+
+### EXP-0118 · 2026-09-18 · ✅ · #kaif #update #fills #ticket
+class: claim-before-evidence
+**Context:** the 2.7 task handed `/autoloop`, `/dayloop`, `/nightloop` to the hand again although 2.6 promised that files differing only by hand-filled slots are replaced mechanically ([[EXP-0035]] predicted they would keep coming).
+**Tried / did:** read `fills` in the new `.kaif/deploy-manifest.json` (→ `{}`), read `deriveFills`/`matchFills` in the core, then RAN the core's own `matchFills` lifted verbatim on a one-line module with and without `<pack>` in the value.
+**Result:** ✅ cause proven, not guessed: the capture is `[^\n<>]+?`, so a fill that contains a bracketed argument (`-PackDir <pack>`, `-m "<msg>"`) unmatches the WHOLE module and the plain neighbour slot is not learned either. Filed and delivered as origin #73 (`bugs/KAIF/04_*`).
+**Lesson:** a mechanism suspected in someone else's code is cheap to confirm by lifting the function and calling it — twenty lines, one minute, and the ticket carries an output instead of a theory.   → link: `bugs/KAIF/04_fills_with_angle_brackets_never_derived.md` · origin #73
+**Repro:** `node tools/kaif-update-probe-matchfills.mjs .kaif/kaif-core.mjs` → `null` for the value with `<pack>` while #73 is open; both slots learned once upstream fixes the capture.
+**Trigger:** writing "most likely cause" into a ticket about foreign code → lift the function and run it before the sentence is written.
+**Not for:** functions with heavy closure state — lifting costs more than reading; then quote the lines and say "read, not run".
+**Mechanization:** `none-cheap: the fix belongs upstream (#73); until then expect the three loop skills as hand items and merge them with tools/kaif-update-merge-skills.mjs (check its FILES and FILLS against the new interval first)`.
+
+### EXP-0117 · 2026-09-18 · ✅ · #kaif #update #renames #guard #sandbox
+class: field-dropped-in-rebuild
+**Context:** KAIF 2.5 → 2.7 by the bootstrap route; the pass exited 0, `check` was green, the live run matched the sandbox byte for byte — and two modules had silently lost their upstream delta.
+**Tried / did:** did NOT stop at the task list: extracted both release bundles and diffed EVERY deployed file against the 2.7 template. `/end-chat-soft` Step 1 (the `kaif-experience-lint` run, the `check --gate-budgets` door) and `/end-chat-force` Step 1 (the standing-falsehood line) were absent from disk AND from `KAIF_UPDATE_TASK.md`. Cause read in `mergeModules`: this tree had renamed those headings itself on 2026-09-09 (the local remediation of #57), so the old anchor was absent, the new one present, `oldE` came back `undefined` and no branch made a task item.
+**Result:** ✅ both modules merged by script; class filed and delivered as origin #72 (`bugs/KAIF/03_*`); the sweep became a repository guard proven red on the untouched sandbox (121 lines / 11 files, exit 1) and green on the live tree (0, exit 0).
+**Lesson:** the update task shows what the classifier NOTICED; what it lost is invisible from inside. After any KAIF pass the truth is "bundle vs disk", and a log line that says "arrives as new" is a claim to check, not a delivery. A local fix that pre-empts an upstream rename is exactly what triggers the loss.   → link: `bugs/KAIF/03_rename_anchor_absent_upstream_delta_lost.md` · origin #72 · `testcases/reports/2026-09-18_kaif-update-sweep.md`
+**Repro:** `gh release download v<old> --repo MikalaiKryvusha/KAIF --pattern KAIF-CORE-BUNDLE.md` (and `v<new>`, into two dirs) → `node tools/kaif-update-sweep.mjs <old bundle> <new bundle>` → must end with `недоехавших строк: 0`, exit 0.
+**Trigger:** `KAIF-BOOT: loader exit 0` or `update` finished → run the sweep BEFORE the first checkpoint, read its list as the hand's to-do, run it again after the merges.
+**Not for:** owner-seeded documents (STATUS, GOAL, MASTER_PLAN, the maps, directory READMEs) — the tool skips them by name, their templates are skeletons, not content.
+mechanized: tools/kaif-update-sweep.mjs
 
 ### EXP-0116 · 2026-09-18 · ❌→✅ · #tools #honesty #falseok #network #conan
 **Context:** писал `_config/check-mod-updates.py` — прибор, который спрашивает у Steam и Nexus, пересобраны ли моды сборки под патч 2.2.0.
