@@ -97,7 +97,8 @@ KAIF 2.5 требует, чтобы `MASTER_PLAN.md` называл **одну �
   - Проверка. В директиве появляется третья клетка с этим вариантом, галочка на ней.
 - **D) Свой вариант владельца.**
 
-**Ответ:**
+**Ответ:** да, как в KAGO
+<!-- owner-review:answer by="Mikalai Kryvusha" transport="chat" at="≈ 2026-09-18 21:03 +03:00" (recorded; the chat carries no exact minute) — verbatim chat reply to the question shown in chat the same evening -->
 
 ## План после ответов
 
