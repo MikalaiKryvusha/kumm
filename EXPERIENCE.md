@@ -80,6 +80,28 @@
 
 ## Entries
 
+### EXP-0124 · 2026-09-25 · ❌→✅ · #conan #recon #mods #workshop #nexus #versions
+class: claim-before-evidence
+**Context:** разведка 18.09 и повторная 25.09 — какие моды сборки Конана пересобраны под 2.2.x. Прибор `check-mod-updates.py` спрашивает каждый мод в ОДНОМ источнике — там, откуда он записан в манифест.
+**Tried / did:** 18.09 разведка записала Immersive Warriors Enhanced «единственной настоящей потерей», а More Katanas — отставшим: их страницы Nexus не обновлялись с августа. 25.09 я повторил этот вывод владельцу в чате.
+**Result:** ❌ вывод был шире наблюдения: наблюдалась страница Nexus, а утверждалось про мод. Во `modinfo.json` внутри обоих паков лежит `steamWorkshopFileIds` — у авторов есть копии в Мастерской, и обе перевыложены после патча (More Katanas 1.1.2 — 16.09, IWE 1.1.0 — 21.09). ✅ скачал обе анонимным steamcmd в скретчпад и прочёл заголовки `zen_versions.py`: UE5 **1018** у обеих (у прежней копии More Katanas с Nexus — 1017; у IWE с Nexus заголовок не читался, по `modinfo.json` кит 1001 → 1002). Настоящих потерь из пяти отставших осталась одна (Doubled Storage Size, удалён из Мастерской).
+**Lesson:** **дата на одной витрине — не состояние мода.** Авторы Конана часто выкладывают в Мастерскую и на Nexus, и витрины расходятся на недели. Прежде чем назвать мод «не пересобранным», прочитать `steamWorkshopFileIds` из его `modinfo.json` и спросить каждый id. А решающий признак — не дата, а версия пакета в заголовке: UE5 1017 — сварено под 2.1.x, 1018 — под 2.2.x.   → link: `researches/conan-2.2.0-gotovnost/README.md` (поправка 25.09) · `games/ConanExiles/README.md` · [[EXP-0109]]
+**Repro:** `repak get <мод>.pak ConanSandbox/Mods/modinfo.json` (или `UnrealPak <мод>.pak -Extract <папка>`) → поле `steamWorkshopFileIds`; каждый id — в `GetPublishedFileDetails`; сомнение в «пересобран» снимает `UnrealPak <Мод>-Windows.utoc -Extract <папка> -Filter=*/DT/*` и `python _config/devkit/zen_versions.py <таблица>.uheader`.
+**Trigger:** пишешь «не пересобран», «отстал», «потеря» про чужой мод → сперва все витрины из `modinfo.json`, потом заголовок.
+**Not for:** модов, у которых в `modinfo.json` один источник, — там дата витрины и есть лучший доступный ответ (с оговоркой прибора: свежая дата не доказывает, что мод работает).
+**Mechanization:** `none-cheap: страж штампов (tools/check-claim-before-evidence.mjs) этот вид не видит; механизм — второй источник в самом приборе check-mod-updates.py (чтение steamWorkshopFileIds), он записан в досье шагом дня переезда`.
+
+### EXP-0123 · 2026-09-25 · ❌→✅ · #windows #curl #python #subprocess #nexus #tools
+class: shell-lied
+**Context:** прибор готовности модов Конана зовёт `subprocess.run(["curl", ...])` для страниц Nexus; 25.09 он пометил «НЕ ПРОЧЁЛ» все восемь модов Nexus, хотя 18.09 читал их.
+**Tried / did:** тот же URL и та же строка браузера из bash — `200`; из Python — `403`. `shutil.which("curl")` из Python показывал Git curl.
+**Result:** ❌→✅ `CreateProcess` на Windows ищет голое имя в System32 РАНЬШЕ, чем в `PATH`: из Python приходил `C:\Windows\System32\curl.exe` (8.21.0), и ему Nexus отвечает 403; Git curl (8.4.0) получает страницу. Обёртка с явным путём дала 40 из 45 и «Не прочитано: 0». Почему 18.09 работало: curl в System32 датирован 2026-08-05, раньше рабочего прогона, — значит, скорее всего, поменялась сторона Nexus (точно не установлено).
+**Lesson:** **голое имя программы в `subprocess` на Windows — не то, что видишь в оболочке.** `which` и `shutil.which` читают `PATH`, а запуск идёт по порядку `CreateProcess`, где System32 первый. Проверка «из bash работает» ничего не говорит о том, что запустит Python. Внешний инструмент в приборе — по явному пути, и печатать, какой взят.   → link: `bugs/13_conan_checker_nexus_403_system32_curl.md` · [[EXP-0116]]
+**Repro:** `python -c "import subprocess;print(subprocess.run(['curl','-V'],capture_output=True).stdout.decode().splitlines()[0])"` — строка `(Windows)` значит System32; сравнить с `curl -V` из оболочки.
+**Trigger:** пишешь `subprocess.run(["<имя>", ...])` в приборе под Windows → явный путь или печать `-V` в шапке прогона.
+**Not for:** программ, которых в System32 нет (`python`, `git`, `node`) — у них порядок поиска не подменяет бинарник.
+**Mechanization:** `none-cheap: первый удар класса по этой грани; починка прибора (явный путь + печать в шапке) — критерий приёмки бага 13`.
+
 ### EXP-0122 · 2026-09-18 · ❌→✅ · #owner #questions #archaeology #kaif #feedback
 class: question-already-answered
 **Context:** closing the KAIF 2.7 update; the final chat reply listed three things "awaiting your word": two guards against my own repeated errors, sending the field report upstream, the prayer cadence (interview #001 Q2).
