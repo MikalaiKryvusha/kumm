@@ -53,7 +53,7 @@
 
 > 🎯 **Активная игра сейчас — Conan Exiles Enhanced 2.2.3** (пак `D:\work\ai_sandbox\ConanExiles`, игра
 > `D:\Games\Conan Exiles 2.2.3\Conan Exiles`, подробности — досье `games/ConanExiles/README.md`). Переезд сделан
-> 02.10; старую 2.1.1 в `D:\Games\Conan Exiles` владелец разрешил удалить «попозже». Palworld — в
+> 02.10; старая 2.1.1 (`D:\Games\Conan Exiles`) удалена по слову владельца «можешь удалять старый конан». Palworld — в
 > ежедневном пользовании владельца, правок не ждёт. **Oblivion Remastered запаркован до патча —
 > игры на диске нет**, не ходить туда и не предлагать по ней работу, пока владелец не скажет.
 
@@ -155,9 +155,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-1. **Конан на 2.2.3 — хвосты переезда.** Досье, раздел «✅ 2026-10-02»: удаление старой 2.1.1 (по слову владельца
-   «попозже», пофайлово, сперва сохранить её `Saved\`), графика на 4K — глазом владельца, Doubled Storage Size своим
-   модом (шаг 6а), PauseGame — вернуть, если автор перевыложит.
+1. **Конан на 2.2.3 — хвосты переезда.** Досье, раздел «✅ 2026-10-02»: графика на 4K — глазом владельца,
+   Doubled Storage Size своим модом (шаг 6а), PauseGame — вернуть, если автор перевыложит. Старая 2.1.1 удалена.
 2. **Движок, фаза 1 — автономный беклог выше.** Первый пункт — запуск-гард в `kumm.mjs`, без него юнит-тест не
    написать. Перед работой: `git status`, `node --check kumm.mjs`, пункт через `/plan-task`.
 3. **Баги — сначала `/check-backlog`.** Шесть файлов в `bugs/` без метки DONE, статусы — раздел «Open bugs»
