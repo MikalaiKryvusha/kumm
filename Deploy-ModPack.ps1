@@ -68,7 +68,8 @@ param(
     [switch]$DryRun,
     [string]$Export,
     [string]$ConfigFrom,
-    [switch]$Zip
+    [switch]$Zip,
+    [int]$ZipPartMB = 0
 )
 
 $ErrorActionPreference = 'Stop'
@@ -1068,7 +1069,7 @@ function Get-InstallConfigDir {
 }
 
 function Export-Bundle {
-    param([string]$Dest, [string]$FromGame, [switch]$MakeZip)
+    param([string]$Dest, [string]$FromGame, [switch]$MakeZip, [int]$PartMB = 0)
     $Dest = [System.IO.Path]::GetFullPath($Dest)
     if ((Test-Path $Dest) -and (Get-ChildItem $Dest -Force)) { throw "export folder must be empty or new: $Dest" }
     $packOut = Join-Path $Dest 'pack'
@@ -1157,7 +1158,8 @@ function Export-Bundle {
     Write-BundleInstaller -Dest $Dest
     Ok "pack\modpack.json ($($outMods.Count) mods), Deploy-ModPack.ps1, install.cmd, install.ps1, README.txt"
 
-    if ($MakeZip) {
+    if ($MakeZip -and $PartMB -gt 0) { Write-ZipParts -Dest $Dest -LimitMB $PartMB }
+    elseif ($MakeZip) {
         $zipPath = "$Dest.zip"
         if (Test-Path $zipPath) { throw "zip already exists: $zipPath" }
         Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -1166,6 +1168,48 @@ function Export-Bundle {
     }
     Say ''
     Say "Export complete: $($outMods.Count) mods, $files files. On the other machine: unpack, run install.cmd." Green
+}
+
+function Write-ZipParts {
+    # Сборка несколькими ОБЫЧНЫМИ zip (слово владельца 2026-10-02 «делим сборку на две части»; PlayGround
+    # принимает файл не больше 5 ГБ). Не тома одного архива (.001/.002 открывает только 7-Zip), а
+    # самостоятельные zip, каждый открывается Проводником; распакованные в одну папку, они дают целый бандл.
+    # Единица раскладки - папка мода в pack/src (мод не режется); всё остальное (установщик, манифест,
+    # гайд) - в первую часть. Жадно: крупные папки первыми, каждая - в самую лёгкую часть, где помещается.
+    param([string]$Dest, [int]$LimitMB)
+    Add-Type -AssemblyName System.IO.Compression
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $limit = [int64]$LimitMB * 1MB
+    $root = $Dest.TrimEnd('\')
+    $base = Split-Path $root -Leaf
+    $srcRoot = Join-Path $root 'pack\src'
+    $units = @(Get-ChildItem $srcRoot -Directory | ForEach-Object {
+        $fs = @(Get-ChildItem $_.FullName -Recurse -File)
+        [pscustomobject]@{ Name = $_.Name; Files = $fs; Size = [int64](($fs | Measure-Object Length -Sum).Sum) }
+    } | Sort-Object Size -Descending)
+    $core = @(Get-ChildItem $root -Recurse -File | Where-Object { -not $_.FullName.StartsWith($srcRoot + '\') })
+    $parts = @([pscustomobject]@{ Files = [System.Collections.ArrayList]@($core); Size = [int64](($core | Measure-Object Length -Sum).Sum) })
+    foreach ($u in $units) {
+        if ($u.Size -gt $limit) { throw "mod folder $($u.Name) alone is $([int]($u.Size / 1MB)) MB, over the $LimitMB MB part limit" }
+        $fit = @($parts | Where-Object { $_.Size + $u.Size -le $limit } | Sort-Object Size | Select-Object -First 1)
+        if (-not $fit) { $fit = @([pscustomobject]@{ Files = [System.Collections.ArrayList]@(); Size = [int64]0 }); $parts += $fit[0] }
+        [void]$fit[0].Files.AddRange($u.Files); $fit[0].Size += $u.Size
+    }
+    $n = 0
+    foreach ($p in $parts) {
+        $n++
+        $zipPath = "$root-part$n.zip"
+        if (Test-Path $zipPath) { throw "zip already exists: $zipPath" }
+        $zip = [System.IO.Compression.ZipFile]::Open($zipPath, 'Create')
+        try {
+            foreach ($f in $p.Files) {
+                $rel = $base + '/' + ($f.FullName.Substring($root.Length + 1) -replace '\\', '/')
+                [void][System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, $f.FullName, $rel, [System.IO.Compression.CompressionLevel]::Fastest)
+            }
+        }
+        finally { $zip.Dispose() }
+        Ok ("$zipPath  ({0:N0} MB, {1} files)" -f ((Get-Item $zipPath).Length / 1MB), $p.Files.Count)
+    }
 }
 
 function Write-BundleInstaller {
@@ -1180,12 +1224,20 @@ function Write-BundleInstaller {
         '$packDir = Join-Path $here ''pack''',
         '$m = Get-Content (Join-Path $packDir ''modpack.json'') -Raw -Encoding UTF8 | ConvertFrom-Json',
         '$exe = $m.gameExe -replace ''/'', ''\''',
+        '# A build shipped in several zip parts is whole only when every part is unpacked into this folder.',
+        '$missing = @($m.mods | Where-Object { $_.source.folder -and -not (Test-Path (Join-Path $packDir ($_.source.folder -replace ''/'', ''\''))) } | ForEach-Object { $_.name })',
+        'if ($missing.Count) {',
+        '    Write-Host ("Missing mod folders: " + ($missing -join ", ")) -ForegroundColor Red',
+        '    Write-Host "Unpack ALL parts of the build (*-part1.zip, *-part2.zip, ...) into the same folder, then run install.cmd again." -ForegroundColor Yellow',
+        '    exit 3',
+        '}',
         'function Test-Game([string]$p) { return ($p -and (Test-Path (Join-Path $p $exe))) }',
         'if (-not $GameDir) { foreach ($c in @((Split-Path $here -Parent), $here)) { if (Test-Game $c) { $GameDir = $c; break } } }',
         'while (-not (Test-Game $GameDir)) {',
         '    if ($GameDir) { Write-Host "Not a game folder (no $exe): $GameDir" -ForegroundColor Yellow }',
-        '    $GameDir = (Read-Host "Game folder (the one that contains $exe)").Trim().Trim(''"'')',
-        '    if (-not $GameDir) { exit 2 }',
+        '    $answer = Read-Host "Game folder (the one that contains $exe)"',
+        '    if (-not $answer) { exit 2 }',
+        '    $GameDir = $answer.Trim().Trim(''"'')',
         '}',
         'Write-Host "Installing $($m.packName) into $GameDir" -ForegroundColor Cyan',
         '& (Join-Path $here ''Deploy-ModPack.ps1'') -Deploy -PackDir $packDir -GameDir $GameDir',
@@ -1204,7 +1256,8 @@ function Write-BundleInstaller {
         'The PDF guide next to this file (if there is one) describes every mod and its keys.',
         '',
         'Install:',
-        '  1. Unpack this folder anywhere (or into the game folder itself).',
+        '  1. Unpack this folder anywhere (or into the game folder itself). If the build came in several',
+        '     parts (*-part1.zip, *-part2.zip), unpack ALL of them into the same place first.',
         '  2. Run install.cmd. It finds the game next to this folder or asks for its path,',
         '     copies the mods in and verifies the result. Exit code 0 = everything in place.',
         '',
@@ -1219,7 +1272,7 @@ function Write-BundleInstaller {
 
 # =============================================================== batch mode
 if ($Export) {
-    try { Export-Bundle -Dest $Export -FromGame $ConfigFrom -MakeZip:$Zip }
+    try { Export-Bundle -Dest $Export -FromGame $ConfigFrom -MakeZip:$Zip -PartMB $ZipPartMB }
     catch { Bad $_.Exception.Message; exit 1 }
     return
 }
