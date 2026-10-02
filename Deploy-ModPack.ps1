@@ -36,6 +36,16 @@
     .\Deploy-PalworldMods.ps1 -Verify
     .\Deploy-PalworldMods.ps1 -Remove -Targets 1.0.2
     .\Deploy-PalworldMods.ps1 -Deploy -Only UE4SS,DeclutterHUD
+    .\Deploy-ModPack.ps1 -PackDir <pack> -Export D:\out\MyBuild -ConfigFrom <game> -Zip
+
+.NOTES
+    -Export <folder> writes a self-contained bundle of the build: every enabled mod
+    already unpacked (no 7-Zip needed on the other machine), a manifest pointing at
+    those folders, this script, and install.cmd. On a fresh game install the owner
+    unpacks the bundle and runs install.cmd - it finds the game (or asks for it) and
+    runs -Deploy, which verifies itself. -ConfigFrom <game folder> also bundles that
+    install's game config (*.ini) as one more mod, for games that keep config inside
+    the install. -Zip packs the folder into <folder>.zip.
 #>
 [CmdletBinding()]
 param(
@@ -55,7 +65,10 @@ param(
     [switch]$WithEngineIni,
     [switch]$IncludeDisabled,
     [switch]$NoVerify,
-    [switch]$DryRun
+    [switch]$DryRun,
+    [string]$Export,
+    [string]$ConfigFrom,
+    [switch]$Zip
 )
 
 $ErrorActionPreference = 'Stop'
@@ -1014,8 +1027,185 @@ function Invoke-Action {
     return $problems
 }
 
+# ------------------------------------------------------------- export bundle
+# Сборка одним архивом на другую машину (слово владельца 2026-10-02: «упаковать в
+# зип, который запуском одного скрипта ставится в 2.2.3 сырую»). Источник каждого
+# мода берётся ТОЙ ЖЕ Resolve-ModSource, что и при раскатке, и кладётся в бандл
+# уже распакованной папкой: на чужой машине не нужен 7-Zip (Edit Appearance
+# приходит в .rar), а раскатка в бандле - этот же скрипт с этим же кодом, только
+# каждый мод смотрит на свою папку. Порядок модов и их install/verify не трогаем.
+# [TESTED: 2026-10-02 · пак Конана -> зип 6,6 ГБ -> install.cmd в сырую 2.2.3 (сверена по SHA-1 раздачи):
+#  50/50 модов, verify 71/0, мир с 43/43 паками и нашими Lua-модами ·
+#  testcases/reports/2026-10-02_bundle-export-raw-install.md. Не пройдено: install.cmd без аргумента]
+
+function Get-SafeName {
+    param([string]$Name)
+    $s = ($Name -replace '[^A-Za-z0-9._-]+', '_').Trim('_')
+    if (-not $s) { $s = 'mod' }
+    return $s
+}
+
+function Copy-Relative {
+    # Файл пака по относительному пути -> тот же путь в паке бандла.
+    param([string]$Rel, [string]$PackOut, [string]$What)
+    if (-not $Rel) { return }
+    if ([System.IO.Path]::IsPathRooted($Rel)) { Warn "$What is an absolute path, not bundled: $Rel"; return }
+    $from = Resolve-UnderRoot $Rel
+    if (-not (Test-Path $from)) { throw "$What not found: $from" }
+    $null = Copy-Tree -From $from -To (Join-Path $PackOut ($Rel -replace '/', '\'))
+}
+
+function Get-InstallConfigDir {
+    # Где игра держит свой конфиг - папка engineIni.target, если она ВНУТРИ
+    # установки (Conan: ConanSandbox/Saved/Config/Windows). Palworld держит его в
+    # %LOCALAPPDATA%, то есть вне установки, - туда бандл не пишет.
+    if (-not $pack.engineIni -or -not $pack.engineIni.target) { return $null }
+    $t = $pack.engineIni.target -replace '\\', '/'
+    if ([System.IO.Path]::IsPathRooted(([Environment]::ExpandEnvironmentVariables($t)))) { return $null }
+    $i = $t.LastIndexOf('/')
+    if ($i -lt 1) { return $null }
+    return $t.Substring(0, $i)
+}
+
+function Export-Bundle {
+    param([string]$Dest, [string]$FromGame, [switch]$MakeZip)
+    $Dest = [System.IO.Path]::GetFullPath($Dest)
+    if ((Test-Path $Dest) -and (Get-ChildItem $Dest -Force)) { throw "export folder must be empty or new: $Dest" }
+    $packOut = Join-Path $Dest 'pack'
+    $srcOut = Join-Path $packOut 'src'
+    New-Item -ItemType Directory -Path $srcOut -Force | Out-Null
+
+    Head "export  ->  $Dest"
+    $mods = @(Select-Mods)
+    $outMods = @()
+    $used = @{}
+    $files = 0
+    try {
+        foreach ($m in $mods) {
+            $src = Resolve-ModSource -Mod $m
+            $name = Get-SafeName $m.name
+            $k = 2; $base = $name
+            while ($used.ContainsKey($name)) { $name = "$base-$k"; $k++ }
+            $used[$name] = $true
+            $n = Copy-Tree -From $src.Path -To (Join-Path $srcOut $name)
+            $files += $n
+            # глубокая копия записи; источник - только своя папка в бандле
+            $copy = $m | ConvertTo-Json -Depth 30 | ConvertFrom-Json
+            $copy | Add-Member -NotePropertyName source -NotePropertyValue ([pscustomobject]@{ folder = "src/$name" }) -Force
+            if ($m.userConfig -and $m.userConfig.file) { Copy-Relative $m.userConfig.file $packOut "$($m.name): userConfig.file" }
+            $outMods += $copy
+            $from = if ($src.Archive) { ", from $($src.Archive)" } else { '' }
+            Ok "$($m.name)  ($n files$from)"
+        }
+    }
+    finally { Clear-Sources }
+
+    if ($FromGame) {
+        $cfgDir = Get-InstallConfigDir
+        if (-not $cfgDir) { throw "-ConfigFrom: this game keeps its config outside the install (engineIni.target), nothing to bundle" }
+        $live = Join-Path ($FromGame.TrimEnd('\')) ($cfgDir -replace '/', '\')
+        $inis = @(Get-ChildItem -Path $live -Filter '*.ini' -File -ErrorAction SilentlyContinue)
+        if ($inis.Count -eq 0) { throw "-ConfigFrom: no *.ini in $live" }
+        $cfgOut = Join-Path $srcOut '_game-config'
+        New-Item -ItemType Directory -Path $cfgOut -Force | Out-Null
+        $install = @(); $verify = @()
+        foreach ($f in $inis) {
+            Copy-Item $f.FullName (Join-Path $cfgOut $f.Name) -Force
+            $install += [pscustomobject]@{ from = $f.Name; to = "$cfgDir/$($f.Name)" }
+            $verify += "$cfgDir/$($f.Name)"
+        }
+        $outMods += [pscustomobject]@{
+            name = 'Game config'
+            kind = 'files'
+            version = "from $FromGame, $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+            source = [pscustomobject]@{ folder = 'src/_game-config' }
+            install = $install
+            verify = $verify
+        }
+        $files += $inis.Count
+        Ok "Game config  ($($inis.Count) files from $live)"
+    }
+
+    if ($pack.engineIni -and $pack.engineIni.file) { Copy-Relative $pack.engineIni.file $packOut 'engineIni.file' }
+
+    $outPack = $pack | ConvertTo-Json -Depth 30 | ConvertFrom-Json
+    $outPack.mods = $outMods
+    $outPack | Add-Member -NotePropertyName library -NotePropertyValue 'src' -Force
+    $outPack | Add-Member -NotePropertyName '$comment_bundle' -NotePropertyValue ("Bundle written by Deploy-ModPack.ps1 -Export on " +
+        (Get-Date -Format 'yyyy-MM-dd HH:mm') + " from $RootDir. Every mod points at its own unpacked folder under src/.") -Force
+    $json = $outPack | ConvertTo-Json -Depth 30
+    [System.IO.File]::WriteAllText((Join-Path $packOut 'modpack.json'), $json, (New-Object System.Text.UTF8Encoding($false)))
+
+    Copy-Item $PSCommandPath (Join-Path $Dest 'Deploy-ModPack.ps1') -Force
+    Write-BundleInstaller -Dest $Dest
+    Ok "pack\modpack.json ($($outMods.Count) mods), Deploy-ModPack.ps1, install.cmd, install.ps1, README.txt"
+
+    if ($MakeZip) {
+        $zipPath = "$Dest.zip"
+        if (Test-Path $zipPath) { throw "zip already exists: $zipPath" }
+        Add-Type -AssemblyName System.IO.Compression.FileSystem
+        [System.IO.Compression.ZipFile]::CreateFromDirectory($Dest, $zipPath, [System.IO.Compression.CompressionLevel]::Fastest, $true)
+        Ok ("$zipPath  ({0:N0} MB)" -f ((Get-Item $zipPath).Length / 1MB))
+    }
+    Say ''
+    Say "Export complete: $($outMods.Count) mods, $files files. On the other machine: unpack, run install.cmd." Green
+}
+
+function Write-BundleInstaller {
+    # ASCII only: Windows PowerShell 5.1 reads a BOM-less .ps1 as ANSI.
+    param([string]$Dest)
+    $ps = @(
+        '# install.ps1 - installs this mod build into a game folder (written by Deploy-ModPack.ps1 -Export).',
+        '# Usage: install.cmd [<game folder>]. Without an argument it looks next to this folder, then asks.',
+        'param([string]$GameDir)',
+        '$ErrorActionPreference = ''Stop''',
+        '$here = $PSScriptRoot',
+        '$packDir = Join-Path $here ''pack''',
+        '$m = Get-Content (Join-Path $packDir ''modpack.json'') -Raw -Encoding UTF8 | ConvertFrom-Json',
+        '$exe = $m.gameExe -replace ''/'', ''\''',
+        'function Test-Game([string]$p) { return ($p -and (Test-Path (Join-Path $p $exe))) }',
+        'if (-not $GameDir) { foreach ($c in @((Split-Path $here -Parent), $here)) { if (Test-Game $c) { $GameDir = $c; break } } }',
+        'while (-not (Test-Game $GameDir)) {',
+        '    if ($GameDir) { Write-Host "Not a game folder (no $exe): $GameDir" -ForegroundColor Yellow }',
+        '    $GameDir = (Read-Host "Game folder (the one that contains $exe)").Trim().Trim(''"'')',
+        '    if (-not $GameDir) { exit 2 }',
+        '}',
+        'Write-Host "Installing $($m.packName) into $GameDir" -ForegroundColor Cyan',
+        '& (Join-Path $here ''Deploy-ModPack.ps1'') -Deploy -PackDir $packDir -GameDir $GameDir',
+        'exit $LASTEXITCODE'
+    )
+    $cmd = @(
+        '@echo off',
+        'powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0install.ps1" %*',
+        'echo.',
+        'pause'
+    )
+    $readme = @(
+        "$($pack.packName)",
+        "Built for: $($pack.builtFor)",
+        '',
+        'Install:',
+        '  1. Unpack this folder anywhere (or into the game folder itself).',
+        '  2. Run install.cmd. It finds the game next to this folder or asks for its path,',
+        '     copies the mods in and verifies the result. Exit code 0 = everything in place.',
+        '',
+        'Uninstall: run Deploy-ModPack.ps1 -Remove -PackDir pack -GameDir <game folder>.',
+        'Mods that replace game files (kind "files") are deleted, not restored - keep a clean copy of the game.'
+    )
+    $ascii = New-Object System.Text.ASCIIEncoding
+    [System.IO.File]::WriteAllText((Join-Path $Dest 'install.ps1'), (($ps -join "`r`n") + "`r`n"), $ascii)
+    [System.IO.File]::WriteAllText((Join-Path $Dest 'install.cmd'), (($cmd -join "`r`n") + "`r`n"), $ascii)
+    [System.IO.File]::WriteAllText((Join-Path $Dest 'README.txt'), (($readme -join "`r`n") + "`r`n"), (New-Object System.Text.UTF8Encoding($true)))
+}
+
 # =============================================================== batch mode
-$anyAction = $Deploy -or $Verify -or $Remove -or $ListMods -or $ListTargets -or
+if ($Export) {
+    try { Export-Bundle -Dest $Export -FromGame $ConfigFrom -MakeZip:$Zip }
+    catch { Bad $_.Exception.Message; exit 1 }
+    return
+}
+
+$anyAction =$Deploy -or $Verify -or $Remove -or $ListMods -or $ListTargets -or
              $DryRun -or $GameDir -or $Targets -or $Only -or $WithEngineIni -or $IncludeDisabled
 $script:OnlyMods = $Only
 
