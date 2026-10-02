@@ -25,6 +25,12 @@
 
 ## What's done (the short tail — older entries live in PROJECT_HISTORY.md)
 
+> **02.10 — сборка Конана переехала на 2.2.3.** Владелец скачал 2.2.3 в отдельную папку; агент обновил моды
+> (5 с Nexus движком KUMM, 38 из Мастерской), поставил UE4SS 1152 с апстримовым конфигом под 5.8, пересобрал
+> `KrinikLevelUncapped` под 5.8 без кита и раскатал. Запуск: мир с сейвом, 43/43 пака, все пять наших модов живы.
+> Не переехали двое: Doubled Storage Size и PauseGame. Попутно: Nexus закрыт Cloudflare для любого curl (баг 13),
+> `kumm check` пропустил новый файл у одного мода (баг 14). Подробно — досье Конана, первый раздел.
+
 > **25.09 ночь — разведка перед переездом на Конан 2.2.2.** Хотфикс 2.2.2 вышел 24.09 (билд `25487630`),
 > про моды ни слова. Из 45 чужих модов **42 пересобраны**: Immersive Warriors и More Katanas пересобраны в
 > Мастерской Steam (скачаны, заголовки UE5 1018), отстали только их страницы Nexus — разведка 18.09 назвала
@@ -45,10 +51,9 @@
 
 ## Where we are now
 
-> 🎯 **Активная игра сейчас — Conan Exiles Enhanced 2.1.1** (пак `D:\work\ai_sandbox\ConanExiles`,
-> подробности — досье `games/ConanExiles/README.md`). 🚚 **Заморозка снята 25.09 — следующий заход по Конану
-> это переезд на 2.2.2**: владелец сам скачивает и ставит игру, агент начинает по его слову. Порядок дня
-> переезда — первый раздел досье; разведка — `researches/conan-2.2.0-gotovnost/README.md`. Palworld — в
+> 🎯 **Активная игра сейчас — Conan Exiles Enhanced 2.2.3** (пак `D:\work\ai_sandbox\ConanExiles`, игра
+> `D:\Games\Conan Exiles 2.2.3\Conan Exiles`, подробности — досье `games/ConanExiles/README.md`). Переезд сделан
+> 02.10; старую 2.1.1 в `D:\Games\Conan Exiles` владелец разрешил удалить «попозже». Palworld — в
 > ежедневном пользовании владельца, правок не ждёт. **Oblivion Remastered запаркован до патча —
 > игры на диске нет**, не ходить туда и не предлагать по ней работу, пока владелец не скажет.
 
@@ -67,11 +72,10 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 ### 🗡️ Конан — досье `games/ConanExiles/README.md`
 
-🚚 Заморозка снята 25.09.2026. Слово владельца в ночь на 25.09: «Завтра скачаю новую версию и соберём с ней
-сборку». Всё живое по Конану — порядок дня
-переезда, пак и его приборы, Dev Kit, открытые хвосты 16.09 (сейв на 21-м уровне, мерцание теней), справочник
-долгов и правил, оплаченных граблями, — в досье. Первый шаг дня переезда — починить прибор готовности
-(`bugs/13_*`), потом `cd D:\work\ai_sandbox\ConanExiles` и `python _config/check-mod-updates.py`.
+✅ Переезд на 2.2.3 сделан 02.10.2026 (`plans/09`). Всё живое по Конану — итог переезда и что после него открыто,
+пак и его приборы, Dev Kit, мерцание теней (на 2.2.3 осталось — слово владельца 02.10), справочник долгов и правил,
+оплаченных граблями, — в досье. Свежесть модов с Nexus — только `node kumm.mjs check --root D:\work\ai_sandbox\ConanExiles`
+(curl Nexus больше не пускает).
 
 ## 🤖 Autonomous backlog pool (no human / no special hardware needed)
 
@@ -151,9 +155,9 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-1. **Конан — переезд на 2.2.2, когда владелец скажет, что игра стоит.** Досье `games/ConanExiles/README.md`: раздел
-   «🚚 2026-09-25» (шаги 0, 3а–3в, 6а) плюс порядок из раздела «🧊 2026-09-18». Шаг 1 — копия папки игры целиком
-   ДО обновления — его делает или подтверждает владелец. Моды из Мастерской качать в ОТДЕЛЬНУЮ папку.
+1. **Конан на 2.2.3 — хвосты переезда.** Досье, раздел «✅ 2026-10-02»: удаление старой 2.1.1 (по слову владельца
+   «попозже», пофайлово, сперва сохранить её `Saved\`), графика на 4K — глазом владельца, Doubled Storage Size своим
+   модом (шаг 6а), PauseGame — вернуть, если автор перевыложит.
 2. **Движок, фаза 1 — автономный беклог выше.** Первый пункт — запуск-гард в `kumm.mjs`, без него юнит-тест не
    написать. Перед работой: `git status`, `node --check kumm.mjs`, пункт через `/plan-task`.
 3. **Баги — сначала `/check-backlog`.** Шесть файлов в `bugs/` без метки DONE, статусы — раздел «Open bugs»
@@ -172,10 +176,12 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 ## Open bugs
 
-Семь файлов без метки DONE (сверено 25.09 по `ls bugs`):
+Восемь файлов без метки DONE (сверено 02.10 по `ls bugs`):
 
-- 🔴 `bugs/13_conan_checker_nexus_403_system32_curl.md` — прибор готовности модов не читает Nexus: Python зовёт
-  curl из System32, ему Nexus отвечает 403. Лечение — явный путь Git curl; шаг 0 дня переезда.
+- 🔴 `bugs/14_pickcard_exact_name_pins_old_file.md` — `kumm check` держится за старый файл, если автор когда-то
+  вписал версию в имя файла (Bosses My New Besties, 02.10). Баг самого движка; план починки и кейс — в документе.
+- 🟢 `bugs/13_conan_checker_nexus_403_system32_curl.md` — по существу закрыт 02.10: Nexus теперь закрыт Cloudflare
+  для любого curl, Nexus читает `kumm check`; осталось поправить шапку прибора.
 - 🔴 `bugs/06_deploy_only_truncates_modlist.md` — `-Only` молча обрезает `modlist.txt` и выключает остальные
   моды. Баг самого движка (`Deploy-ModPack.ps1`), воспроизводится каждый раз.
 - 🟡 `bugs/07_conan_probe_kills_ue4ss_lua_layer.md` — симптом снят выключением мода, причина не найдена.
