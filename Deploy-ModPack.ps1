@@ -1198,7 +1198,7 @@ function Write-BundleInstaller {
         'pause'
     )
     $readme = @(
-        "$($pack.packName)",
+        "$($pack.packName)$(if ($pack.packVersion) { ' ' + $pack.packVersion })",
         "Built for: $($pack.builtFor)",
         '',
         'The PDF guide next to this file (if there is one) describes every mod and its keys.',
