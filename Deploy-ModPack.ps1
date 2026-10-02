@@ -1108,12 +1108,22 @@ function Export-Bundle {
         if ($inis.Count -eq 0) { throw "-ConfigFrom: no *.ini in $live" }
         $cfgOut = Join-Path $srcOut '_game-config'
         New-Item -ItemType Directory -Path $cfgOut -Force | Out-Null
-        $install = @(); $verify = @()
-        foreach ($f in $inis) {
-            Copy-Item $f.FullName (Join-Path $cfgOut $f.Name) -Force
-            $install += [pscustomobject]@{ from = $f.Name; to = "$cfgDir/$($f.Name)" }
-            $verify += "$cfgDir/$($f.Name)"
+        # Файлы лежат в бандле по тому же относительному пути, что и в игре: from = to.
+        # Кроме *.ini папки конфига - список exportConfig из манифеста (настройки модов,
+        # которые те хранят в своих сохранениях, например интерфейс Hosav).
+        $rels = @($inis | ForEach-Object { "$cfgDir/$($_.Name)" })
+        foreach ($r in @($pack.exportConfig)) {
+            if (-not $r) { continue }
+            if (Test-Path (Join-Path ($FromGame.TrimEnd('\')) ($r -replace '/', '\'))) { $rels += $r }
+            else { Warn "exportConfig: not in $FromGame - $r" }
         }
+        $install = @(); $verify = @()
+        foreach ($r in $rels) {
+            $null = Copy-Tree -From (Join-Path ($FromGame.TrimEnd('\')) ($r -replace '/', '\')) -To (Join-Path $cfgOut ($r -replace '/', '\'))
+            $install += [pscustomobject]@{ from = $r; to = $r }
+            $verify += $r
+        }
+        $inis = $rels
         $outMods += [pscustomobject]@{
             name = 'Game config'
             kind = 'files'
@@ -1127,6 +1137,13 @@ function Export-Bundle {
     }
 
     if ($pack.engineIni -and $pack.engineIni.file) { Copy-Relative $pack.engineIni.file $packOut 'engineIni.file' }
+    if ($pack.guide) {
+        # Гайд по сборке - в корень бандла, рядом с install.cmd: его открывают первым.
+        $g = Resolve-UnderRoot $pack.guide
+        if (-not (Test-Path $g)) { throw "guide not found: $g" }
+        Copy-Item $g (Join-Path $Dest (Split-Path $g -Leaf)) -Force
+        Ok "guide: $(Split-Path $g -Leaf)"
+    }
 
     $outPack = $pack | ConvertTo-Json -Depth 30 | ConvertFrom-Json
     $outPack.mods = $outMods
@@ -1183,6 +1200,8 @@ function Write-BundleInstaller {
     $readme = @(
         "$($pack.packName)",
         "Built for: $($pack.builtFor)",
+        '',
+        'The PDF guide next to this file (if there is one) describes every mod and its keys.',
         '',
         'Install:',
         '  1. Unpack this folder anywhere (or into the game folder itself).',
