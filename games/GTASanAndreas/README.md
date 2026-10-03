@@ -66,6 +66,9 @@ cuts.img — как было у VO); `modloader\RoSA Project Evolved` (108 фа�
 `_RoSA comparisons\MY_BUILD_*.png`. Готово к установке по слову владельца: `D:\Games\GTA San Andreas Mods\RoSA Ground
 Override` — 269 .txd RoSA отдельными файлами, приоритет 70 > Map 65 (инструкция `ПРОЧТИ.txt`, отбор в
 `_override_manifest.json`). RoSA не перерисовывает землю: та же картинка, резче.
+**Поставлено 2026-10-03 ≈09:55 по слову «ставь»**: папка в `modloader\RoSA Ground Override`, `rosa ground override = 70`;
+итог 268 .txd — `cs_scrapyard.txd` оставлен VO (ничья с `Missions` = 70, это фикс катсцены). Откат — `ОТКАТ.txt`.
+Запуском не проверено.
 
 Лежит в библиотеке модов владельца `D:\Games\GTA San Andreas Mods\`:
 - `(Lower Resolution) RoSA Evolved - July.7z` — 1 343 292 091 байт, SHA256 `366A0721…C59FDA62`; самая свежая
