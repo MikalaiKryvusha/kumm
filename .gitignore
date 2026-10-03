@@ -31,3 +31,6 @@ __pycache__/
 tools/scrub-local.json
 .kaif/voice-marker.json
 .kaif/contour-window/
+
+# Сборка заплаток GTA SA (build.cmd без аргумента кладёт сюда .asi/.obj) — бинарники в репозиторий не идут
+games/GTASanAndreas/*/out/
