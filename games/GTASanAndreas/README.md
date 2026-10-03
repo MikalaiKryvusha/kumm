@@ -48,7 +48,16 @@
 EffectLoader и не работает в SA-MP, поэтому в эту папку не ставится. HD-текстуры: RoSA Evolved (MixMods,
 4 ГБ, под modloader, адаптирован под SA-MP; Proper Fixes должен стоять выше по приоритету).
 
-### RoSA — скачан, ждёт установки (слово владельца 2026-10-03: «качай, будем потом ставить RoSA»)
+### RoSA — УСТАНОВЛЕН 2026-10-03 ≈09:30 +03:00 по слову владельца «примени, с бекапом»; запуском НЕ проверен
+
+Сделано по плану ниже: Proper Fixes VO → `D:\Games\GTA San Andreas Mods\_backup\2026-10-03_rosa\Proper Fixes (VO)`
+(124 файла, байты сверены), на его месте Proper Fixes для RoSA (123 файла = архиву, без PS2 Grass / Race maps /
+cuts.img — как было у VO); `modloader\RoSA Project Evolved` (108 файлов = архиву); `modloader.ini` +
+`rosa project evolved = 45`. Откат по шагам — `ОТКАТ.txt` в папке бэкапа. Proper Player Retex и «(For SAMP)» НЕ
+ставились. SA Optimized Map Proper Fixes для RoSA — подмножество `txdp.ide` RoSA (1368 общих, 0 расхождений).
+Картинки «до/после» с MixMods — `D:\Games\GTA San Andreas Mods\_RoSA comparisons` (настоящие сравнения — `COMPARE_*`).
+
+(История: скачан по слову владельца 2026-10-03 «качай, будем потом ставить RoSA».)
 
 Лежит в библиотеке модов владельца `D:\Games\GTA San Andreas Mods\`:
 - `(Lower Resolution) RoSA Evolved - July.7z` — 1 343 292 091 байт, SHA256 `366A0721…C59FDA62`; самая свежая
