@@ -49,6 +49,12 @@
 (4 ГБ подгрузки + население ×9); текст окна — `logs\gta_sa.exe_2026-10-03_11-45_alt-tab_crashinfo-dialog.txt`.
 Грабли: `[regex]::Replace(s, pat, rep, 1)` в PowerShell — это `IgnoreCase`, а не «один раз» (заменяет ВСЕ совпадения).
 
+**CarSpawnDistance СНЯТ 2026-10-03 ≈12:10** — `[OWNER]` «нет машин на улицах, что-то накрутили плохо»: пустые улицы
+появились ровно с первым запуском заплатки. Подменённое число — 6-й аргумент `CCarCtrl::GenerateCarCreationCoors2`
+(0x424210, в gta-reversed безымянный `arg6`), а не доказанная «дальняя граница появления». Файлы — в
+`D:\Games\GTA San Andreas Mods\_backup\2026-10-03_CarSpawnDistance_removed`; в живой игре исходные байты возвращены
+WriteProcessMemory (`d8 0d 70 89 85 00`). Исходник в `CarSpawnDistance/` оставлен как запись неудачи — НЕ ставить.
+
 Появление машин: `CCarCtrl::GenerateOneRandomCar` (0x430050) — `fld [0xB6F11C]` (множитель генерации камеры) ×
 `fmul [0x858970]` (160.0, общая константа), ближняя граница `push 38.0`. Заплатка перенаправляет операнд в 0x43040F на своё
 число; журнал `scripts\CarSpawnDistance.log`. [NOT-TESTED]
