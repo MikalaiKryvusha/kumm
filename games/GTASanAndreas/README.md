@@ -48,6 +48,33 @@
 EffectLoader и не работает в SA-MP, поэтому в эту папку не ставится. HD-текстуры: RoSA Evolved (MixMods,
 4 ГБ, под modloader, адаптирован под SA-MP; Proper Fixes должен стоять выше по приоритету).
 
+### RoSA — скачан, ждёт установки (слово владельца 2026-10-03: «качай, будем потом ставить RoSA»)
+
+Лежит в библиотеке модов владельца `D:\Games\GTA San Andreas Mods\`:
+- `(Lower Resolution) RoSA Evolved - July.7z` — 1 343 292 091 байт, SHA256 `366A0721…C59FDA62`; самая свежая
+  БЕСПЛАТНАЯ сборка (Patreon-пост 2026-07-15, readme «Evolved v1.4»). Полное разрешение и август/сентябрь —
+  только по подписке автора (Patreon/Boosty); во всех открытых постах март–июль только облегчённая версия.
+- `Proper Fixes - for RoSA Evolved.7z` — 333 356 169 байт, SHA256 `f3e41a48…047987ed`, 583 файла; MixMods,
+  страница обновлена 16/07/26, Google Drive `1Y8-4QC3Id48Os5GHsYx5MO6tUHCP6LdP`. Readme: «Version for use with
+  RoSA Evolved only». Обязателен в паре с RoSA. Оба архива прошли `7z t`.
+
+План установки (разбор — `researches/gtasa-graphics/README.md` §4b), только когда игра закрыта:
+1. Снимок: копия `modloader\modloader.ini`; папку `modloader\Map\modpacks\Proper Fixes` из VO ПЕРЕНЕСТИ
+   (не удалять) в `D:\Games\GTA San Andreas Mods\_backup\`.
+2. Поставить Proper Fixes для RoSA на её место (`Map\modpacks\`, приоритет Map 65 > RoSA — так требует автор:
+   «otherwise your game will crash»).
+3. Распаковать из архива RoSA папку `modloader\RoSA Project Evolved` в `modloader\`; «(For SAMP)» — отдельно,
+   если нужен SA-MP; Proper Player Retex (`player.img` 897 МБ) — по желанию.
+4. В `modloader.ini` → `[Profiles.Default.Priority]` строка `RoSA Project Evolved = 45`: тогда `weapon.dat` и
+   `generic\vehicle.txd` из VO (папки без приоритета = 50) выигрывают у RoSA, а Proper Fixes (65) остаётся выше.
+   `IgnoreFiles` для этого НЕ годится — он выключает файл с таким именем во всех модах.
+5. Проверка: `modloader.log` (RoSA и Proper Fixes загружены, без ошибок) → запуск → кадры с текстурами.
+   Краш на старте: чистить кэш `%localappdata%\modloader` (совет автора); ошибка `ImgLimitAdjuster` — у RoSA
+   свой `SimpleLimitAdjuster_IMGfiles.asi` в `RoSA Project Evolved - Scripts`.
+
+Чего ждать: из 4012 текстур RoSA видно ~1971; машины, оружие, 1328 текстур карты (PS2-фикс VO), интерфейс
+остаются от VO, потому что отдельные файлы modloader всегда ставит выше `.img`.
+
 ## Не починено
 
 - **2026-09-28 23:21, `0x0048A121`, чтение `0x46C`** — внутри CLEO-скрипта, опкод `0449` («в машине ли
