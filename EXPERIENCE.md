@@ -80,6 +80,17 @@
 
 ## Entries
 
+### EXP-0127 · 2026-10-04 · ❌→✅ · #svarogsdream #unity #bepinex #xunity #imgui #perf #diag
+class: plugin-loaded-but-not-running
+**Context:** своя сборка Svarog's Dream (Unity 2020.3 Mono) на BepInEx 5 рядом с русификатором XUnity (ReiPatcher): моды картинки, камеры, меню, интерфейса.
+**Tried / did:** пять промахов подряд, каждый закрыт наблюдением, не догадкой: (1) прелоадер упал на старом `MonoMod.Utils` из `Managed` русификатора; (2) плагины «loaded», Harmony-патчи работали, а `Update` не шёл ни разу; (3) файл ресайза XUnity без единого срабатывания; (4) трава исчезала при отдалении, хотя `detailObjectDistance` = 250; (5) фризы раз в 2–5 с.
+**Result:** ✅ (1) `doorstop_config.ini` → `dll_search_path_override = BepInEx\core`; (2) `BepInEx.cfg` → `HideManagerGameObject = true` (игра уничтожала `BepInEx_Manager`); (3) путь в `*resizer.txt` — от КОРНЯ сцены (`UIResizeAttachment.TryGetUIResize` бросает поиск на первом несовпадении), команда родителя наследуется детьми; (4) траву гасит не Unity, а шейдер Nature Shaders `_ScaleFade` = (100, 20) у материалов; (5) `Resources.FindObjectsOfTypeAll` по таймеру → только по событиям (загрузка сцены, смена числа террейнов, настройка).
+**Lesson:** **«loaded» в журнале — не доказательство работы.** Каждый мод с первого дня пишет пульс (`alive:` при первом реальном `Update`) и строку состояния с ФАКТИЧЕСКИ поставленными значениями — молчание тогда видно сразу; так и пойманы (2) и bloom 11 на паузе. Дорогие поиски по всей игре — никогда по таймеру. Чужой конвейер (XUnity, шейдер) — читать его исходник/материалы до второй попытки.   → link: `D:\work\ai_sandbox\SvarogsDream` · `src/Shared/KrinikDiag.cs` · `researches/svarogs-dream/README.md`
+**Repro:** `grep -E 'alive|status|event' "<игра>/BepInEx/LogOutput.log"` после выхода из игры.
+**Trigger:** новый плагин BepInEx / Unity-мод в чужой игре; «мод не работает», а журнал говорит «loaded».
+**Not for:** UE4SS/Lua-моды Палворлда и Конана — там другой загрузчик и свои грабли.
+**Mechanization:** протокол `KrinikDiag` (пульс, состояние раз в 30 с, события) в сборке; `HideManagerGameObject` и путь поиска Doorstop — в `_config/` сборки.
+
 ### EXP-0126 · 2026-10-03 · ❌→✅ · #gtasa #recon #catalogue #textures #modloader #mixsets
 class: catalogue-label-instead-of-decision
 **Context:** владелец просил паки HD-текстур для своей сборки GTA SA (Vanilla Overhaul); я проверил один (RoSA), а четыре других отдал списком с припиской «совместимость не проверял».
