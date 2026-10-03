@@ -36,7 +36,13 @@
 | 2026-10-03 | `NumDesiredLoadedVeh = 100` (было `-1` → `stream.ini` «vehicles 12»); ×3 дальности: машины `VehDespawnOnScr` 540, `VehDespawnOffScr` 255, `VehDrawDist` 480; люди `PedSpawnOnScr` 301.5, `PedSpawnOffScr` 187.5, `PedDespawnOnScr` 345, `PedDespawnOffScr` 223.5, `PedDrawDist` 330; `PedWeaponDrawDist = 12` (оружие в IDE 30/50/100) | то же | `MixSets.ini.2026-10-03_before-distances.bak` |
 | 2026-10-03 | Дальность объектов карты ×3 (Project2DFX `[IDETweaker]`): `AllNormalObjectsDrawDistance` 400→1200, `GenericObjectsDrawDistance` 200→600; растительность не трогали (LOD деревьев у Proper Fixes) | `modloader\Graphics\SALodLights.ini` | `SALodLights.ini.2026-10-03.bak` |
 
-Появление МАШИН в MixSets не настраивается (только удаление); где в коде (`CCarCtrl::GenerateOneRandomCar` 0x430050) — не найдено.
+| 2026-10-03 | Потолки ×10: `VehLimit` 45→255 (байт, максимум), `PedLimit` 25→250; пулы OLA `[SALIMITS]` `Peds`/`PedIntelligence` 140→400, `Vehicles` 110→400 | MixSets.ini; `Performance\III.VC.SA.LimitAdjuster.ini` | `MixSets.ini.2026-10-03_before-limits.bak`, `III.VC.SA.LimitAdjuster.ini.2026-10-03.bak` |
+| 2026-10-03 | Память подгрузки 2048→**4096** по слову «срочно давай 4 Гб, я запущу потестить» — ПРЕДУПРЕЖДЁН: 4 ГБ = весь потолок 32-битного процесса (exe с флагом LAA), ждём падение при заполнении | MixSets `StreamMemory`, OLA `MemoryAvailable`, Improved Streaming `StreamMemoryForced` | `*.2026-10-03_before-4gb.bak` у всех трёх |
+| 2026-10-03 | Дальность ПОЯВЛЕНИЯ машин 160→480: своя заплатка `scripts\CarSpawnDistance.asi` + `.ini` (`[Main] Distance=480.0`) | `CarSpawnDistance/` | убрать два файла |
+
+Появление машин: `CCarCtrl::GenerateOneRandomCar` (0x430050) — `fld [0xB6F11C]` (множитель генерации камеры) ×
+`fmul [0x858970]` (160.0, общая константа), ближняя граница `push 38.0`. Заплатка перенаправляет операнд в 0x43040F на своё
+число; журнал `scripts\CarSpawnDistance.log`. [NOT-TESTED]
 Полный каталог MixSets на русском — `mixsets-catalogue.md`.
 
 Почему именно эти ключи — по коду, не по описанию: MixSets пишет их в `0x457236` / `0x457250` (`ReadIni.cpp`);
