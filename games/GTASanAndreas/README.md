@@ -33,6 +33,11 @@
 | Дата | Что | Где | Откат |
 |---|---|---|---|
 | 2026-10-03 | Время жизни выпавшего из NPC оружия и денег ×100: `TimePickupShort = 2000000` (было `-1` = 20000 мс), `TimePickupMoney = 3000000` (было `-1` = 30000 мс) | `modloader\Gameplay\MixSets.ini`, секция `[Densities]` | `MixSets.ini.2026-10-03.bak` рядом |
+| 2026-10-03 | `NumDesiredLoadedVeh = 100` (было `-1` → `stream.ini` «vehicles 12»); ×3 дальности: машины `VehDespawnOnScr` 540, `VehDespawnOffScr` 255, `VehDrawDist` 480; люди `PedSpawnOnScr` 301.5, `PedSpawnOffScr` 187.5, `PedDespawnOnScr` 345, `PedDespawnOffScr` 223.5, `PedDrawDist` 330; `PedWeaponDrawDist = 12` (оружие в IDE 30/50/100) | то же | `MixSets.ini.2026-10-03_before-distances.bak` |
+| 2026-10-03 | Дальность объектов карты ×3 (Project2DFX `[IDETweaker]`): `AllNormalObjectsDrawDistance` 400→1200, `GenericObjectsDrawDistance` 200→600; растительность не трогали (LOD деревьев у Proper Fixes) | `modloader\Graphics\SALodLights.ini` | `SALodLights.ini.2026-10-03.bak` |
+
+Появление МАШИН в MixSets не настраивается (только удаление); где в коде (`CCarCtrl::GenerateOneRandomCar` 0x430050) — не найдено.
+Полный каталог MixSets на русском — `mixsets-catalogue.md`.
 
 Почему именно эти ключи — по коду, не по описанию: MixSets пишет их в `0x457236` / `0x457250` (`ReadIni.cpp`);
 там в `CPickups::GenerateNewOne` прибавка к `CTimer` для типа 4 (`PICKUP_ONCE_TIMEOUT`) и 8 (`PICKUP_MONEY`);
