@@ -90,6 +90,7 @@ class: plugin-loaded-but-not-running
 **Trigger:** новый плагин BepInEx / Unity-мод в чужой игре; «мод не работает», а журнал говорит «loaded».
 **Not for:** UE4SS/Lua-моды Палворлда и Конана — там другой загрузчик и свои грабли.
 **Mechanization:** протокол `KrinikDiag` (пульс, состояние раз в 30 с, события) в сборке; `HideManagerGameObject` и путь поиска Doorstop — в `_config/` сборки.
+mechanized: D:\work\ai_sandbox\SvarogsDream\src\Shared\KrinikDiag.cs (репозиторий svarogs-dream-modpack)
 
 ### EXP-0126 · 2026-10-03 · ❌→✅ · #gtasa #recon #catalogue #textures #modloader #mixsets
 class: catalogue-label-instead-of-decision
@@ -100,7 +101,7 @@ class: catalogue-label-instead-of-decision
 **Repro:** `python rosa_vs_vo.py <RoSA>` и `rosa_gaps.py` (скретчпад 2026-10-03, логика описана в §4b) · `grep -n -i pickup modloader/Gameplay/MixSets.ini`.
 **Trigger:** собираю список вариантов для владельца и хочу написать «не проверял» / «не смотрел» у любой строки.
 **Not for:** списков, где владелец сам просил только названия.
-**Mechanization:** none — правило в памяти уже было; держит его только проход по строкам до отправки.
+**Mechanization:** `none-cheap: правило в памяти уже было (catalogues-need-decisions-not-labels); текст ответа владельцу не ложится на диск, машине его не проверить — держит только проход по строкам до отправки`.
 
 ### EXP-0125 · 2026-10-02 · ❌→✅ · #conan #retoc #uassetapi #versions #tools #falseok #levelmod
 class: tool-silent-refusal
@@ -112,6 +113,7 @@ class: tool-silent-refusal
 **Trigger:** новая версия движка и утилита «её не поддерживает» → сперва круг на образце новой версии; утилита молчит с кодом 0 → контроль на старом образце и сверка заголовков.
 **Not for:** ассетов с изменённой сериализацией (блюпринты — у них круг НЕ сошёлся; для них путь — кит).
 **Mechanization:** `guard: build-level-mod.py — uasset_json падает с текстом, если UAssetGUI не записал JSON; set_ue5_version проверяет прежнее значение поля`.
+mechanized: D:\work\ai_sandbox\ConanExiles\_config\devkit\build-level-mod.py (uasset_json, set_ue5_version)
 
 ### EXP-0124 · 2026-09-25 · ❌→✅ · #conan #recon #mods #workshop #nexus #versions
 class: claim-before-evidence

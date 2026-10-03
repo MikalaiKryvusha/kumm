@@ -25,14 +25,13 @@
 
 ## What's done (the short tail — older entries live in PROJECT_HISTORY.md)
 
-> **04.10 ночь — новая игра Svarog's Dream (Unity 2020.3 Mono, GOG).** Разведка `researches/svarogs-dream/`: розово-фиолетовая
-> ночь — ColorGrading профиля камеры (Lift пурпурный, Gamma синяя), не свет. Своя сборка `D:\work\ai_sandbox\SvarogsDream`
-> (приватный `svarogs-dream-modpack`): BepInEx 5.4.23.5 (рядом с русификатором нужен `dll_search_path_override =
-> BepInEx\core`, иначе прелоадер падает на его MonoMod), Configuration Manager на F8 + кнопка в меню паузы
-> (`KrinikModMenu`), свои моды `KrinikColorRework` (картинка день/ночь) и `KrinikCameraRework` (СКМ, отдаление,
-> дальность) — имена владельца; протокол настроек `src/Shared/KrinikConfig.cs`. Владелец подтвердил: снятие пурпура,
-> поворот на СКМ, отдаление; остальное не проверено. Аудит перевода `translation/`: ~11 000 строк не переведено, полного
-> русификатора в сети нет; свой перевод (имя `KrinikRussianLocalosation`?) ждёт слова. GTA SA: дальность пуль ещё ×3.
+> **04.10 ночь — новая игра Svarog's Dream (Unity 2020.3 Mono, GOG), своя сборка.** Разведка `researches/svarogs-dream/`;
+> сборка `D:\work\ai_sandbox\SvarogsDream` (приватный `svarogs-dream-modpack`, последний коммит `30be6ac`): BepInEx 5.4.23.5
+> (+ `dll_search_path_override = BepInEx\core` и `HideManagerGameObject = true`), Configuration Manager 19 (F8 и кнопка
+> в меню паузы), пять своих модов — `KrinikColorRework` (картинка день/ночь, свет героя, мини-карта), `KrinikCameraRework`
+> (СКМ, отдаление, трава `_ScaleFade`), `KrinikUIRework` (подсказки, HUD), `KrinikModMenu`, протоколы `src/Shared/KrinikConfig.cs`
+> и `KrinikDiag.cs` (пульс и состояние в журнале BepInEx). Слова владельца после запусков: «сработало» (цветокор, трава
+> после HideManagerGameObject), поворот на СКМ и отдаление работают, «Настройки модов получилось выровнять». Уроки — `EXP-0127`. GTA SA: дальность пуль ещё ×3 (досье).
 
 > **03.10 утро — GTA SA: краш при загрузке сейва во время ареста из машины.** Баг самой игры: задача копа
 > «открыть дверь» пишет флаг в уже удалённого CJ (`0x645F40`, двойник `0x64AD63`). Своя заплатка
@@ -45,27 +44,14 @@
 > Не переехали двое: Doubled Storage Size и PauseGame. Попутно: Nexus закрыт Cloudflare для любого curl (баг 13),
 > `kumm check` пропустил новый файл у одного мода (баг 14). Подробно — досье Конана, первый раздел.
 
-> **25.09 ночь — разведка перед переездом на Конан 2.2.2.** Хотфикс 2.2.2 вышел 24.09 (билд `25487630`),
-> про моды ни слова. Из 45 чужих модов **42 пересобраны**: Immersive Warriors и More Katanas пересобраны в
-> Мастерской Steam (скачаны, заголовки UE5 1018), отстали только их страницы Nexus — разведка 18.09 назвала
-> IWE потерей зря, поправлено там же (`EXP-0124`). Настоящая потеря одна — Doubled Storage Size, план — собрать
-> своим модом в ките. Найден баг прибора готовности: Python зовёт curl из System32, Nexus отвечает 403
-> (`bugs/13_*`, `EXP-0123`). Всё для дня переезда — досье Конана, первый раздел.
-
-> **18.09 поздний вечер — отправка в KAIF без спроса, два стража, каденция молитвы.** Слово владельца:
-> «ОТПРАВКА В KAIF ВСЕГДА РАЗРЕШЕНА И ОБЯЗАТЕЛЬНА!!!!» — полевой отчёт 2.7 ушёл как #79, тикеты #78, #80–#82.
-> Два стража против моих повторяющихся ошибок: `tools/check-claim-before-evidence.mjs` в хуке коммита (время
-> впереди часов, отметка `[TESTED: дата` без отчёта) и `tools/hooks/no-backslash-heredoc.mjs` в хуке Bash;
-> первую версию опроверг судья, вторая проверяется `node tools/test-guards.mjs`. Каденция молитвы решена
-> владельцем «да, как в KAGO»: целиком раз за сессию, дальше строка с тремя принципами. Интервью 001 закрыто.
-> При закрытии STATUS подстрижен с 472 до ~200 строк: закрытое прошлое — дословно в `PROJECT_HISTORY.md` (запись 18.09
-> «стрижка STATUS»), живой справочник по Конану — в новое досье `games/ConanExiles/README.md`.
-
 ---
 
 ## Where we are now
 
-> 🎯 **Активная игра сейчас — Conan Exiles Enhanced 2.2.3** (пак `D:\work\ai_sandbox\ConanExiles`, игра
+> 🎯 **Последняя сессия (04.10) — Svarog's Dream**, своя сборка на BepInEx: `D:\work\ai_sandbox\SvarogsDream`, игра
+> `D:\Games\Svarog's Dream`; передача дел — пункт 1 «Where to continue».
+>
+> **Conan Exiles Enhanced 2.2.3** (пак `D:\work\ai_sandbox\ConanExiles`, игра
 > `D:\Games\Conan Exiles 2.2.3\Conan Exiles`, подробности — досье `games/ConanExiles/README.md`). Переезд сделан
 > 02.10; старая 2.1.1 (`D:\Games\Conan Exiles`) удалена по слову владельца «можешь удалять старый конан». Palworld — в
 > ежедневном пользовании владельца, правок не ждёт. **Oblivion Remastered запаркован до патча —
@@ -169,6 +155,18 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+0. **Svarog's Dream — продолжить с проверки последней сборки** (поставлена 02:43, в игре НЕ проверена). Цикл: правка в
+   `src/<Мод>` → `dotnet build src/<Мод> -c Release` → игра закрыта (`Get-Process Svarog*`) → копия dll в
+   `D:\Games\Svarog's Dream\BepInEx\plugins\<Мод>\` → владелец играет → один раз читать
+   `grep -E 'alive|status|event|Warning' "<игра>/BepInEx/LogOutput.log"`. **Сменил значение по умолчанию — правь и
+   `BepInEx/config/krinik.svarogsdream.*.cfg`**: старый файл его не подхватит (так светлая подложка осталась светлой).
+   Ждут глаза владельца: подсказки (тёмный фон 0.85, тёмный текст → светлый того же оттенка, заголовки ужимаются в
+   строку, «Направления»/«1259м», подсказка слота экипировки), HUD при масштабе ≠ 1 (угол экрана), шрифт страниц
+   настроек меню паузы 80 % (`_config/xunity/zz_krinik_resizer.txt`), зона нажатия кнопки «Настройки модов».
+   Решения владельца ждут: **(а)** преследование врагов у него на СКМ (`gameSettings` KeyCodes[38] = Mouse2) —
+   переназначить в «Управлении», камеру на 4/5 или развести модом; **(б)** свой перевод ~11 000 строк
+   (`translation/untranslated.txt`, DeepL русификатора отвечает «Too many requests») силами Claude — дорогой, только по
+   слову; имя мода — `KrinikRussianLocalosation` или `…Localization` (уточнить).
 1. **Конан на 2.2.3 — хвосты переезда.** Досье, раздел «✅ 2026-10-02»: графика на 4K — глазом владельца,
    Doubled Storage Size своим модом (шаг 6а), PauseGame — вернуть, если автор перевыложит. Старая 2.1.1 удалена.
 2. **Движок, фаза 1 — автономный беклог выше.** Первый пункт — запуск-гард в `kumm.mjs`, без него юнит-тест не
