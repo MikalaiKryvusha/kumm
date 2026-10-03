@@ -28,6 +28,13 @@
 Сборка: `games\GTASanAndreas\CopDoorLoadFix\build.cmd <папка>` (VS 2022, x86, без лишних DLL). Exe игры не
 правится. Проверка, что заплатка встала, — журнал рядом с .asi: обе строки `patched`.
 
+## Графика
+
+Разведка 2026-10-03 — `researches/gtasa-graphics/README.md`. Коротко: сборка — Vanilla Overhaul, её картинка
+держится на SkyGfx Extended, и на нём же стоит Proper Fixes. RenderHook требует снять SkyGfx, SkyGrad и
+EffectLoader и не работает в SA-MP, поэтому в эту папку не ставится. HD-текстуры: RoSA Evolved (MixMods,
+4 ГБ, под modloader, адаптирован под SA-MP; Proper Fixes должен стоять выше по приоритету).
+
 ## Не починено
 
 - **2026-09-28 23:21, `0x0048A121`, чтение `0x46C`** — внутри CLEO-скрипта, опкод `0449` («в машине ли
