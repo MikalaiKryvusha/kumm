@@ -28,6 +28,19 @@
 Сборка: `games\GTASanAndreas\CopDoorLoadFix\build.cmd <папка>` (VS 2022, x86, без лишних DLL). Exe игры не
 правится. Проверка, что заплатка встала, — журнал рядом с .asi: обе строки `patched`.
 
+## Настройки, изменённые по слову владельца
+
+| Дата | Что | Где | Откат |
+|---|---|---|---|
+| 2026-10-03 | Время жизни выпавшего из NPC оружия и денег ×100: `TimePickupShort = 2000000` (было `-1` = 20000 мс), `TimePickupMoney = 3000000` (было `-1` = 30000 мс) | `modloader\Gameplay\MixSets.ini`, секция `[Densities]` | `MixSets.ini.2026-10-03.bak` рядом |
+
+Почему именно эти ключи — по коду, не по описанию: MixSets пишет их в `0x457236` / `0x457250` (`ReadIni.cpp`);
+там в `CPickups::GenerateNewOne` прибавка к `CTimer` для типа 4 (`PICKUP_ONCE_TIMEOUT`) и 8 (`PICKUP_MONEY`);
+`CPed::CreateDeadPedWeaponPickups` даёт тип 4, `CreateDeadPedMoney` → `CreateSomeMoney` — тип 8 (gta-reversed).
+`TimePickupLong` (тип 5) к выпадению из NPC не относится. В SA-MP MixSets эти значения не пишет (`!inSAMP`).
+Применяется при запуске или в игре чит-командой `SETS` (перечитать ini). Проверка — чтение памяти процесса:
+`0x457236` и `0x457250` должны показать 2000000 и 3000000.
+
 ## Графика
 
 Разведка 2026-10-03 — `researches/gtasa-graphics/README.md`. Коротко: сборка — Vanilla Overhaul, её картинка
