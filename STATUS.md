@@ -31,14 +31,6 @@
 > клавиш, кнопки HUD с подписями. Окно предмета ручными сдвигами — тупик (`EXP-0128`) → вариант Б, своё окно на
 > движке раскладки. Образцы 12 игр в HDR (`EXP-0129`), канон мода — рулбук `SvarogsDream/docs/UI_RULEBOOK.md`.
 
-> **04.10 ночь — новая игра Svarog's Dream (Unity 2020.3 Mono, GOG), своя сборка.** Разведка `researches/svarogs-dream/`;
-> сборка `D:\work\ai_sandbox\SvarogsDream` (приватный `svarogs-dream-modpack`, последний коммит `30be6ac`): BepInEx 5.4.23.5
-> (+ `dll_search_path_override = BepInEx\core` и `HideManagerGameObject = true`), Configuration Manager 19 (F8 и кнопка
-> в меню паузы), пять своих модов — `KrinikColorRework` (картинка день/ночь, свет героя, мини-карта), `KrinikCameraRework`
-> (СКМ, отдаление, трава `_ScaleFade`), `KrinikUIRework` (подсказки, HUD), `KrinikModMenu`, протоколы `src/Shared/KrinikConfig.cs`
-> и `KrinikDiag.cs` (пульс и состояние в журнале BepInEx). Слова владельца после запусков: «сработало» (цветокор, трава
-> после HideManagerGameObject), поворот на СКМ и отдаление работают, «Настройки модов получилось выровнять». Уроки — `EXP-0127`. GTA SA: дальность пуль ещё ×3 (досье).
-
 ---
 
 ## Where we are now

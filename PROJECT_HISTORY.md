@@ -1,5 +1,21 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-04 день — стрижка STATUS при мягком закрытии, вторая (перенесено из STATUS 2026-10-04 12:13 +03:00)
+
+> Перенесено ДОСЛОВНО: блок «What's done» 04.10 ночь (сборка Svarog's Dream) перестал быть «сейчас» — его
+> продолжение, запись «04.10 день», осталась в STATUS.
+
+### Из What's done — дословно
+
+> **04.10 ночь — новая игра Svarog's Dream (Unity 2020.3 Mono, GOG), своя сборка.** Разведка `researches/svarogs-dream/`;
+> сборка `D:\work\ai_sandbox\SvarogsDream` (приватный `svarogs-dream-modpack`, последний коммит `30be6ac`): BepInEx 5.4.23.5
+> (+ `dll_search_path_override = BepInEx\core` и `HideManagerGameObject = true`), Configuration Manager 19 (F8 и кнопка
+> в меню паузы), пять своих модов — `KrinikColorRework` (картинка день/ночь, свет героя, мини-карта), `KrinikCameraRework`
+> (СКМ, отдаление, трава `_ScaleFade`), `KrinikUIRework` (подсказки, HUD), `KrinikModMenu`, протоколы `src/Shared/KrinikConfig.cs`
+> и `KrinikDiag.cs` (пульс и состояние в журнале BepInEx). Слова владельца после запусков: «сработало» (цветокор, трава
+> после HideManagerGameObject), поворот на СКМ и отдаление работают, «Настройки модов получилось выровнять». Уроки — `EXP-0127`. GTA SA: дальность пуль ещё ×3 (досье).
+
+
 ## 2026-10-04 день — стрижка STATUS при мягком закрытии (перенесено из STATUS 2026-10-04 11:08 +03:00)
 
 > Перенесено ДОСЛОВНО: блоки «What's done» от 03.10 (GTA SA) и 02.10 (Конан 2.2.3) перестали быть «сейчас»;
