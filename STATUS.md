@@ -25,6 +25,12 @@
 
 ## What's done (the short tail — older entries live in PROJECT_HISTORY.md)
 
+> **04.10 день — Svarog's Dream: агент сам водит игру, партия UI, рулбук.** Пульт `KrinikDevHarness` + ScriptEngine
+> (горячая перезагрузка), голос Silero eugene и хук `voice-reminder`. Проверено кадрами: окно сравнения (вкладка
+> «Надето», яркие «лучше/хуже» поверх перевода, расширение, склейка), письма тёмные, подсказки HUD по тексту, цифры
+> клавиш, кнопки HUD с подписями. Окно предмета ручными сдвигами — тупик (`EXP-0128`) → вариант Б, своё окно на
+> движке раскладки. Образцы 12 игр в HDR (`EXP-0129`), канон мода — рулбук `SvarogsDream/docs/UI_RULEBOOK.md`.
+
 > **04.10 ночь — новая игра Svarog's Dream (Unity 2020.3 Mono, GOG), своя сборка.** Разведка `researches/svarogs-dream/`;
 > сборка `D:\work\ai_sandbox\SvarogsDream` (приватный `svarogs-dream-modpack`, последний коммит `30be6ac`): BepInEx 5.4.23.5
 > (+ `dll_search_path_override = BepInEx\core` и `HideManagerGameObject = true`), Configuration Manager 19 (F8 и кнопка
@@ -32,17 +38,6 @@
 > (СКМ, отдаление, трава `_ScaleFade`), `KrinikUIRework` (подсказки, HUD), `KrinikModMenu`, протоколы `src/Shared/KrinikConfig.cs`
 > и `KrinikDiag.cs` (пульс и состояние в журнале BepInEx). Слова владельца после запусков: «сработало» (цветокор, трава
 > после HideManagerGameObject), поворот на СКМ и отдаление работают, «Настройки модов получилось выровнять». Уроки — `EXP-0127`. GTA SA: дальность пуль ещё ×3 (досье).
-
-> **03.10 утро — GTA SA: краш при загрузке сейва во время ареста из машины.** Баг самой игры: задача копа
-> «открыть дверь» пишет флаг в уже удалённого CJ (`0x645F40`, двойник `0x64AD63`). Своя заплатка
-> `scripts\CopDoorLoadFix.asi` встала на живой игре; сам сценарий ждёт владельца в игре. Досье
-> `games/GTASanAndreas/README.md`, отчёт `testcases/reports/2026-10-03_gtasa-copdoor-fix.md`.
-
-> **02.10 — сборка Конана переехала на 2.2.3.** Владелец скачал 2.2.3 в отдельную папку; агент обновил моды
-> (5 с Nexus движком KUMM, 38 из Мастерской), поставил UE4SS 1152 с апстримовым конфигом под 5.8, пересобрал
-> `KrinikLevelUncapped` под 5.8 без кита и раскатал. Запуск: мир с сейвом, 43/43 пака, все пять наших модов живы.
-> Не переехали двое: Doubled Storage Size и PauseGame. Попутно: Nexus закрыт Cloudflare для любого curl (баг 13),
-> `kumm check` пропустил новый файл у одного мода (баг 14). Подробно — досье Конана, первый раздел.
 
 ---
 
