@@ -156,16 +156,23 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > commands, what to verify first.
 
 0. **Svarog's Dream — ГЛОБАЛЬНАЯ МИССИЯ: переработка UI в лучшую, читаемую, понятную, красивую и удобную форму**
-   (слово владельца 04.10; план, пункты и статусы — `ideas/07_svarog_mods.md`; равняться на Diablo/WoW/Oblivion/Torchlight).
-   Агент проверяет сам в игре: пульт `src/KrinikDevHarness` (команды файлом `_harness/cmd.txt`), ScriptEngine для
-   горячей перезагрузки, сейвы владельца копировать до запуска (`D:\work\ai_sandbox\_backups`), закрывать игру `kill`. Цикл: правка в
-   `src/<Мод>` → `dotnet build src/<Мод> -c Release` → игра закрыта (`Get-Process Svarog*`) → копия dll в
-   `D:\Games\Svarog's Dream\BepInEx\plugins\<Мод>\` → владелец играет → один раз читать
-   `grep -E 'alive|status|event|Warning' "<игра>/BepInEx/LogOutput.log"`. **Сменил значение по умолчанию — правь и
-   `BepInEx/config/krinik.svarogsdream.*.cfg`**: старый файл его не подхватит (так светлая подложка осталась светлой).
-   Ждут глаза владельца: подсказки (тёмный фон 0.85, тёмный текст → светлый того же оттенка, заголовки ужимаются в
-   строку, «Направления»/«1259м», подсказка слота экипировки), HUD при масштабе ≠ 1 (угол экрана), шрифт страниц
-   настроек меню паузы 80 % (`_config/xunity/zz_krinik_resizer.txt`), зона нажатия кнопки «Настройки модов».
+   (слово владельца 04.10; план, пункты и статусы — `ideas/07_svarog_mods.md`).
+   **КАНОН МОДА — рулбук `SvarogsDream/docs/UI_RULEBOOK.md`** (`[OWNER]` «на него ты будешь ориентироваться при
+   разработке мода переработки интерфейса»; черновик агента, ждёт «да» владельца — правила с `[OWNER]` уже его слово).
+   **Следующий чат начинается с кода варианта Б** (`[OWNER]` «написание кода — начнём уже в новом чате»): своё окно
+   предмета на движке раскладки Unity (Layout Group / Content Size Fitter) по рулбуку — «вёрстка должна быть
+   динамичной, почти как HTML» (ручные сдвиги в `src/KrinikUIRework/Compare.cs` — тупик, `EXP-0128`). Первым — кадр на
+   сапогах (ячейка инвентаря #0) и кольцах (#46) владельцу. Образцы — `SvarogsDream/gallery/refs/index.html`.
+   **Как работаю с игрой сам** (разрешение владельца — память `svarog-agent-runs-game-itself`): `tools/run-game.sh`
+   (запуск → «Продолжить» → ожидание HUD) · пульт `tools/h.sh "<команда>"…` (shot · dump · find/findall · hover/click ·
+   waitfor · callon · cfg · kill) · `tools/deploy-hot.sh KrinikUIRework` (ScriptEngine, печатает RELOADED) · кадр →
+   `tools/shot2webp.py` · закрывать **`kill`** (выход из меню пишет сейв; копия сейвов — `D:\work\ai_sandbox\_backups`).
+   Пока игра открыта — **голосом** (`tools/voice_say.py`, Silero eugene, темп 0.90; хук `tools/hooks/voice-reminder.mjs`
+   напоминает) и окно игры вперёд. Снимки чужих игр — только `tools/shot-hdr.ps1` + `hdr2webp.py` (`EXP-0129`).
+   **Сменил значение по умолчанию — правь и `BepInEx/config/krinik.svarogsdream.*.cfg`** или ставь пультом `cfg`.
+   Сделано 04.10 и проверено кадром — `ideas/07`, история кадров — `SvarogsDream/gallery/game/`. Написано, но в игре не
+   проверено: пауза при открытом инвентаре (после правки `isClosed`), надписи над головами, плашки навыка и
+   подобранного, мини-карта днём (пункт 15 — не начат).
    Решения владельца ждут: **(а)** преследование врагов у него на СКМ (`gameSettings` KeyCodes[38] = Mouse2) —
    переназначить в «Управлении», камеру на 4/5 или развести модом; **(б)** свой перевод ~11 000 строк
    (`translation/untranslated.txt`, DeepL русификатора отвечает «Too many requests») силами Claude — дорогой, только по
