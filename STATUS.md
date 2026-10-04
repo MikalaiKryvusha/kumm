@@ -25,12 +25,11 @@
 
 ## What's done (the short tail — older entries live in PROJECT_HISTORY.md)
 
-> **04.10 день — Svarog's Dream: агент сам водит игру, партия UI, рулбук.** Пульт `KrinikDevHarness` + ScriptEngine
-> (горячая перезагрузка), голос Silero eugene и хук `voice-reminder`. Проверено кадрами: окно сравнения (вкладка
-> «Надето», яркие «лучше/хуже» поверх перевода, расширение, склейка), письма тёмные, подсказки HUD по тексту, цифры
-> клавиш, кнопки HUD с подписями. Окно предмета ручными сдвигами — тупик (`EXP-0128`) → вариант Б, своё окно на
-> движке раскладки. Образцы — 77 кадров из 25 игр (`gallery/refs`, снимки с экрана в HDR — `EXP-0129`), канон мода
-> — рулбук `SvarogsDream/docs/UI_RULEBOOK.md`.
+> **04.10 после обеда — Svarog's Dream: макет окна предмета утверждён.** Разбор 46 карточек 25 игр и код окна игры
+> (ILSpy) — `SvarogsDream/docs/REFS_ANALYSIS.md`; HTML-макет `SvarogsDream/design/item-window-mockups.html` (сапоги,
+> луки, кольца из данных игры) прошёл ~15 кругов по слову владельца — `[OWNER]` «Макет утверждён», решения Р1–Р31 —
+> `ideas/08`. Попутно: сокращения игры — `translation/ABBREVIATIONS.md`; очевидные строки перевода — в
+> `_config/xunity/zz_krinik.txt` (перекрывает русификатор — по коду XUnity). Урок — `EXP-0131`.
 
 ---
 
