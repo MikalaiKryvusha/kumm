@@ -1,7 +1,9 @@
 # Bug 15 — Svarog's Dream: against a low sun the distant ground, grass and foliage turn whitish ("frost")
 
 > **Created:** 2026-10-04 · **Parent:** камера 1.2.0 (низкий наклон, поворот) — `testcases/reports/2026-10-04_svarog-camera-draw-distance.md`
-> **Status:** 🔬 research — 9 hypotheses tested, cause not found; next: impostors, same-spot control
+> **Status:** 🔬 research — 11 hypotheses tested; 2026-10-05 ≈01:58: the white is the TERRAIN itself, and the leading
+> explanation (community + BRDF arithmetic) is the Fresnel of Unity's Standard shading at forward-scattering grazing light,
+> which smoothness 0 does not remove; fix needs a shader the build does not ship — fork to the owner (section 2026-10-05)
 > **Severity: S2** — about an hour of the owner's evening; the owner wants it fixed: `[OWNER]` «лучше белеснявость исправить» · 2026-10-04
 
 ## Symptom
@@ -57,6 +59,54 @@ but 8 may have hit only the near splat (lead 1: the far ground is the basemap ba
 regenerate the basemap after `layers 0` (`terrainData.SetBaseMapDirty()`), then leaf specular/translucency of the impostors
 (the far trees), each on the SAME spot from both sides; keep the sun's strength on water untouched (his word: «хорошо
 смотрится на воде»).
+
+## Session 2026-10-05 01:47–01:58 — controlled A/B at a frozen sun
+
+New harness tools: `layers <k>` now rebuilds the basemap (`SetBaseMapDirty`), `timescale 0` freezes game time (the sun
+moves ~10° per game hour and a game hour is 60 real seconds — WorldTime.cs:76-88), `terrainshader <name>|restore` swaps
+the terrain material. Time travel: `call WorldTime IncreaseTimeByOneHour true` + `call WorldTime SetInstantSungAngle`.
+
+| # | Hypothesis | Test (same frame, A/B/A) | Result |
+|---|---|---|---|
+| 8b | Terrain layer smoothness/metallic, near AND far (basemap rebuilt) | sun 29°→26°, `layers 0` / `layers 1` | **no change** — refuted for the far ground too. (A morning pair that "showed" a big change was taken 22 s apart while the sun climbed — contaminated, retracted in chat) |
+| 10 | Grass detail translucency (Nature Shaders) | sun 20°, `terrainset detailObjectDensity 0/1` | **refuted** — with no grass the bare terrain is beige-white; grass is darker than the ground |
+| 11 | No-specular terrain shader | `terrainshader Nature/Terrain/Diffuse` | **not in the build** (also `Nature/Terrain/Specular`, `Splatmap/Diffuse-Base`, `Specular-Base`); `Legacy Shaders/Diffuse` is in the build but breaks terrain rendering — frame unusable |
+
+Frames: `SvarogsDream/_harness/b15e_A/B/A2`, `b15g_A/B/A2`, `b15s_*` (local).
+
+**Leading explanation.** At a low sun in front of the camera, light and view are nearly opposite: the half-vector sits
+near the surface normal and L·H is small, so Schlick Fresnel → 1. For a fully rough Standard surface (GGX, a = 1) the
+specular term ≈ V·D·π·N·L·F ≈ 1.16 · 0.34 · ~0.8 ≈ 0.3 of the light, against a diffuse of ≈ 0.14 for albedo 0.4 — the
+white specular outweighs the colour of the ground. Smoothness 0 does not remove it. This matches every observation:
+only against the sun, only at a low sun, stronger far away, on ground and foliage alike.
+
+**What the Unity community writes** (searched 2026-10-05):
+- "Unity's Standard shading model has more Fresnel than most people want … terrain can get super bright on the horizon";
+  smoothness 0 does not remove it (a clamped minimum) — [Fresnel on standard shader too strong](https://forum.unity.com/threads/fresnel-on-standard-shader-too-strong.314252/),
+  [Standard shader is weirdly bright at glancing angles](https://forum.unity.com/threads/standard-shader-is-weirdly-bright-at-glancing-angles.312307/),
+  [Terrain too bright when viewed at an angle (BIRP)](https://discussions.unity.com/t/built-in-render-pipeline-terrain-too-bright-when-viewed-at-an-angle/920380),
+  [remove view-direction-dependent lighting from the standard shader](https://discussions.unity.com/t/solved-how-to-remove-viewdirection-dependent-lighting-specular-from-the-standard-shader/891046).
+- The usual fix: do not use the Standard terrain shader — `Default-Terrain-Diffuse` (no specular) or `-Specular` with a
+  black spec colour; or edit the BRDF — [Why does my Terrain look glossy and has sun reflection?](https://forum.unity.com/threads/why-does-my-terrain-look-glossy-and-has-sun-reflection.898445/),
+  [Standard Terrain Shader: Smoothness](https://discussions.unity.com/t/standard-terrain-shader-smoothness-solved/567278).
+- Grass in the DEFERRED path is lit by the Standard model with the terrain normal → "super shiny"; fixed by recompiling
+  the grass shader with `exclude_path:deferred` — [Shiny Grass on Terrain?](https://discussions.unity.com/t/shiny-grass-on-terrain/588391).
+
+**Fork for the owner (not decided):**
+1. Proper: build our own shader in the Unity 2020.3.49 editor (terrain without Fresnel; or a replacement of the deferred
+   lighting shader via `GraphicsSettings.SetCustomShader(BuiltinShaderType.DeferredShading, …)` if the game renders
+   deferred — check `Camera.actualRenderingPath` first) and load it from an AssetBundle. Needs the editor installed (GBs).
+2. Workaround in his own words («уменьшать лучей»): dim the sun and lift the ambient at dawn/dusk in KrinikColorRework
+   (it already drives sun/ambient by hour). The white goes, but the water glitter at dusk weakens too — taste call.
+
+Next step before either: `Camera.actualRenderingPath` (forward/deferred) — it decides which shader would be replaced.
+
+**Owner's decision:** `[OWNER]` «Правильный» · «качай, устанавливай юнити» · 2026-10-05 ≈02:00 — path 1. Done the same
+minute: Unity Hub installed silently (`C:\Program Files\Unity Hub`), the editor 2020.3.49f1 (changeset `18249dd5551b`,
+the game's own — `Player.log`) downloading to `E:\Unity\_installers`, target `E:\Unity\2020.3.49f1`. Blocker named:
+a Unity Personal licence is activated only by signing in to Unity Hub with the owner's Unity account (manual activation
+of Personal is no longer supported — [Unity manual](https://docs.unity3d.com/Manual/ManagingYourUnityLicense.html),
+[game-ci #235](https://github.com/game-ci/unity-test-runner/issues/235)); after that the editor runs in batch mode.
 
 ## Leads for the next session (research, not guessing)
 
