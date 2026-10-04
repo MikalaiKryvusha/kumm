@@ -46,6 +46,18 @@ must look at the SAME spot from both sides (walk the hero across it, or orbit by
 billboards with their own baked lighting). Whitish far trees may be impostors baked under a different light; test by
 disabling the impostor renderers or raising their switch distance.
 
+## Owner's direction — 2026-10-05
+
+`[OWNER]` «солнце в игре очень яркое. Это хорошо смотрится на воде. Но это же приводит к тому, что дальняя земля светится, и
+листья. Нужно отражение от земли и от листьев уменьшать лучей света, или bloom менять как-то - это по проблеме свечения земли
+и листвы, белеснявость» · 2026-10-05 ≈01:39.
+
+Against the table above: bloom 0 (6) and terrain metallic/smoothness 0 (8) were tried and the FAR ground did not change —
+but 8 may have hit only the near splat (lead 1: the far ground is the basemap baked at load). Next step in his direction:
+regenerate the basemap after `layers 0` (`terrainData.SetBaseMapDirty()`), then leaf specular/translucency of the impostors
+(the far trees), each on the SAME spot from both sides; keep the sun's strength on water untouched (his word: «хорошо
+смотрится на воде»).
+
 ## Leads for the next session (research, not guessing)
 
 1. **Far terrain is the BASEMAP** (`Hidden/TerrainEngine/Splatmap/Standard-BaseGen`): baked once at load with the
