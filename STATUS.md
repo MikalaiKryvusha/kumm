@@ -155,7 +155,10 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-0. **Svarog's Dream — продолжить с проверки последней сборки** (поставлена 02:43, в игре НЕ проверена). Цикл: правка в
+0. **Svarog's Dream — ГЛОБАЛЬНАЯ МИССИЯ: переработка UI в лучшую, читаемую, понятную, красивую и удобную форму**
+   (слово владельца 04.10; план, пункты и статусы — `ideas/07_svarog_mods.md`; равняться на Diablo/WoW/Oblivion/Torchlight).
+   Агент проверяет сам в игре: пульт `src/KrinikDevHarness` (команды файлом `_harness/cmd.txt`), ScriptEngine для
+   горячей перезагрузки, сейвы владельца копировать до запуска (`D:\work\ai_sandbox\_backups`), закрывать игру `kill`. Цикл: правка в
    `src/<Мод>` → `dotnet build src/<Мод> -c Release` → игра закрыта (`Get-Process Svarog*`) → копия dll в
    `D:\Games\Svarog's Dream\BepInEx\plugins\<Мод>\` → владелец играет → один раз читать
    `grep -E 'alive|status|event|Warning' "<игра>/BepInEx/LogOutput.log"`. **Сменил значение по умолчанию — правь и
