@@ -151,8 +151,11 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    Р1–Р30 дословно — `ideas/08_svarog_okno_predmeta.md`. **Дальше — по плану идеи 08:** правила в рулбук, затем код
    своего окна на движке раскладки Unity (Layout Group / Content Size Fitter) с переключателем вида разделов «линия» /
    «рамка» (`[OWNER]` «сделать в нашем моде переключатель»); ручные сдвиги `src/KrinikUIRework/Compare.cs` — тупик
-   (`EXP-0128`). Первым — кадр на сапогах (ячейка #0) и кольцах (#46) владельцу. Перевод: очевидные строки — в
-   `_config/xunity/zz_krinik.txt` (перекрывает русификатор), в игре не проверены; сокращения — `translation/ABBREVIATIONS.md`.
+   (`EXP-0128`). Первым — кадр на сапогах (ячейка #0) и кольцах (#46) владельцу. **Ещё раньше — пункт 16 идеи 07:** низ
+   HUD справа разъехался (круглые кнопки наехали, свечение съехало, «Пробел» сливается с «E»), кадр
+   `gallery/game/2026-10-04_hud-низ-разъехался/`; увеличить весь HUD — пункт 17, «но это позже». Перевод: сокращения и
+   очевидные строки — в `_config/xunity/zz_krinik.txt` (перекрывает русификатор), **проверено в игре 47/47** пультом
+   `settext`/`gettext` — отчёт `testcases/reports/2026-10-04_svarog-translation-abbreviations.md`.
    **Как работаю с игрой сам** (разрешение владельца — память `svarog-agent-runs-game-itself`): `tools/run-game.sh`
    (запуск → «Продолжить» → ожидание HUD) · пульт `tools/h.sh "<команда>"…` (shot · dump · find/findall · hover/click ·
    waitfor · callon · cfg · kill) · `tools/deploy-hot.sh KrinikUIRework` (ScriptEngine, печатает RELOADED) · кадр →
