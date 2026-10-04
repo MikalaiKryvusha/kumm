@@ -912,6 +912,21 @@ corrupted is the output a HUMAN reads, so the agent never sees its own violation
 from the owner. Keep argv of throwaway scripts ASCII-only; when the output must carry non-ASCII,
 print it from the body of a script FILE.
 
+**IMAGES ARE WEBP — JPEG ONLY WHERE WEBP CANNOT BE WRITTEN — PNG NEVER.** The owner's word, 2026-10-04 evening,
+verbatim: `[OWNER]` «запиши в канон этого проекта, что мы не работает в PNG!!! ОН ТЯЖЁЛЫЙ!!! Всегда в приоритете webP,
+если с ним что-то не получается, то допустим jpg» · «но никогда не PNG» · «и перееделай свои интсументы на лёгки webp» ·
+«и все, что уже есть, переконвертируй в webp 90%» · «где нужна прозрачность - с альфа каналом. Где не нужна - без». Said
+when a session piled 4K comparison frames into PNG (~15–20 MB each, 155 MB in one harness folder). The steps:
+
+1. **Every image the agent writes — a frame, a crop, a comparison, a sheet of variants, a mockup snapshot, a gallery
+   file — is saved as WebP at quality 90.** Alpha is kept ONLY when the picture has a pixel that is not opaque; an
+   opaque picture is saved without it. The converter decides by the pixels, not the agent by eye:
+   `python <SvarogsDream>/tools/to_webp.py <files…>` (deletes the source only after the WebP is written and reopened).
+2. **A tool that cannot write WebP itself** (Unity's `ScreenCapture`, a browser screenshot) writes JPEG, and the same
+   call path converts it to WebP at once — never a PNG stage.
+3. **Check:** `git ls-files "*.png"` prints nothing in this repository and in every build repository the project
+   works in; a PNG on disk under the work trees is a conversion still owed.
+
 **The truth↔mirror pairs registry.** The costliest field defects were not complex code but DRIFT
 between a source of truth and its mirror: a deploy manifest pinning an old engine version while
 prod ran a newer one, a comment contradicting the compose file it describes, a producer's contract

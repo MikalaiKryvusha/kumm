@@ -80,6 +80,17 @@
 
 ## Entries
 
+### EXP-0133 · 2026-10-04 · ❌→✅ · #svarogsdream #ui #mockup #parity #unity #tmp #linear #owner-eye
+class: claim-before-evidence
+**Context:** окно предмета Svarog's Dream кодом (Unity UGUI + TMP) по утверждённому HTML-макету; первые кадры в игре.
+**Tried / did:** сравнил кадр игры с макетом на глаз и сказал «почти как макет»; владелец: «в макетах … сильно ровнее и красивее», «разве ты не видишь, что плохо?», «неужели я вижу, что макет красивее сильно, а ты не видишь?».
+**Result:** ❌ «почти» было впечатлением. ✅ сличение ЦЕЛЫХ окон в одном разрешении (макет в 4K, `deviceScaleFactor: 3`) и мерка DOM макета вскрыли шесть причин сразу: синтетический жирный TMP прибавляет `boldSpacing` к каждой букве (браузер — нет); игра смешивает полупрозрачное в ЛИНЕЙНОМ пространстве (зебра 5.5 % белого: браузер #2f, игра #4b) — подложки считать заранее поверх цвета карточки; у `VerticalLayoutGroup` `childForceExpandHeight` по умолчанию true — группа объявляет себя гибкой и забирает пустоту; ряд плиток делится поровну только при `preferredWidth = 0` + `flexibleWidth = 1`; CSS `line-height` в TMP — полями и `lineSpacing` по метрикам шрифта; колонки макета — max-content каждой карточки (343.25 и 368), а не общая. Итог владельца: «стало красиво!».
+**Lesson:** **соответствие макету утверждается только сличением: оба кадра в одном разрешении, целиком, рядом, плюс числа из DOM макета; «почти как макет» без этого — заявление шире наблюдения.** HTML → Unity UI не переносится 1:1 по значениям CSS: цветовое пространство, синтетический жирный и умолчания групп раскладки — три ловушки, которые невидимы в коде и видны только на паре кадров.   → link: `testcases/reports/2026-10-04_svarog-item-window-parity.md` · `ideas/08` Р34–Р42 · `researches/unity-ugui-layout/` (пособие)
+**Repro:** `node tools/shoot_mockup.mjs _harness/mock.webp boots lines --measure` → `h.sh "hover <слот>" "shot game"` → `python tools/pair.py _harness/mock.webp _harness/game.webp _harness/pair.webp --view 0.35` (в SvarogsDream).
+**Trigger:** код по утверждённому макету показан в игре; хочу написать «как в макете» / «почти как макет».
+**Not for:** вкусовые варианты без макета (там вердикт владельца по листу вариантов, `EXP-0131`).
+mechanized: SvarogsDream/tools/shoot_mockup.mjs + SvarogsDream/tools/pair.py
+
 ### EXP-0132 · 2026-10-04 · ❌→✅ · #svarogsdream #fps #measurement #hotswitch #baseline
 class: etalon-from-dirty-tree
 **Context:** цена дальности рисовки в FPS (владелец: «fps сильно просел»); рычаги камеры переключались пультом `cfg` в запущенной игре.

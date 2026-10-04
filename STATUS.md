@@ -146,18 +146,15 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    ✅ 04.10 день: разбор 46 карточек 25 игр и требования — `SvarogsDream/docs/REFS_ANALYSIS.md`; макет окна предмета
    выбран владельцем (`[OWNER]` «оба варианта ШИКАРНЫ!!!!») — `SvarogsDream/design/item-window-mockups.html`, решения
    Р1–Р33 дословно — `ideas/08_svarog_okno_predmeta.md`.
-   **▶ ПЕРВЫМ В НОВОМ ЧАТЕ — доводка окна предмета** (`SvarogsDream/src/KrinikUIRework/ItemWindow.cs`, коммит `35439cf`).
-   Первая сборка снята в игре 21:03 — очень близко к макету (`SvarogsDream/gallery/game/2026-10-04_окно-предмета-код/boots_v1.webp`).
-   Собрано, но в игре НЕ проверено: `XUAIGNORE` у наших подписей и чисел (переводчик менял цифры на «ЗМКЗ»), стрелки ▲▼
-   и ромб свойств — картинками (в шрифте игры глифов нет), окно у видимого края инвентаря (медальон садился на панель),
-   обрезка кавычек и пробелов описания. Слово владельца в конце чата, не сделано: `[OWNER]` «и можно шрифты меньше. И,
-   например, найти какой-нибудь шрифт красивый, в котором много символов» · «"Деревенский ремесленник" словно мог бы в
-   одну строку поместиться, но у тебя две вышло» — план: настройка размера текста (×0.85), список шрифтов игры (UGUI
-   Linux Biolinum, Cambria, Palatino → `TMP_FontAsset.CreateFontAsset`), кадр на каждый кандидат владельцу. Проверка:
-   `run-game.sh` → `h.sh "click UI/Enablers/Inventory"` (не сразу после загрузки — пауза инвентаря замораживает
-   стартовое затемнение, экран чёрный; починить: не ставить паузу, пока затемнение идёт) → `hover "UI/Inventory/
-   InventoryCanvas/Equipment Canvas/Inventory Canvas/InventoryScreen/Slot Prefab(Clone)"` (#0 сапоги, `…#46` кольца).
-   Правила окна в рулбук — после. ✅ 04.10 вечер: окно «Карта · Квесты · …» — тёмная бумага, светлый текст (`b0bb16e`); низ HUD (п. 16), камера
+   **✅ 04.10 22:10 — окно предмета доведено до макета** (`SvarogsDream` `284d8ea`, `f364702`; решения Р34–Р42 — `ideas/08`;
+   отчёт `testcases/reports/2026-10-04_svarog-item-window-parity.md`), `[OWNER]` «ты проделал большую работу! стало
+   красиво!». Чёрный экран при раннем инвентаре снят. **▶ Дальше по слову владельца** (`ideas/07`, п. 22–24): обойти ВСЕ
+   экраны, меню и вкладки и принести план красоты; диалоги с жителями — под тёмную бумагу (владелец ведёт героя в город);
+   совет на экране загрузки — выше. Хвосты окна: шрифт с широким набором знаков (`[OWNER]` «найти какой-нибудь шрифт
+   красивый, в котором много символов»), не наблюдались колонки разной ширины и новая толщина жирного, правила в рулбук.
+   Сличение с макетом — только приборами: `tools/shoot_mockup.mjs` (макет в 4K, `--measure` из DOM) + `tools/pair.py`
+   (целые окна рядом). Слоты для наведения: #0 сапоги, #2 лук, #7 удочка, #46 кольца, #47 туника; путь `"UI/Inventory/
+   InventoryCanvas/Equipment Canvas/Inventory Canvas/InventoryScreen/Slot Prefab(Clone)#N"` — В КАВЫЧКАХ (пробелы). ✅ 04.10 вечер: окно «Карта · Квесты · …» — тёмная бумага, светлый текст (`b0bb16e`); низ HUD (п. 16), камера
    1.2.0 — дальность ×3, подгрузка 5×5, наклон от 15°, взгляд на метр над головой, трава вдвое ниже (п. 18–20, замер цены:
    трава 750 стоит 20 FPS из 76 — по умолчанию 500), палитра карты зелёная (п. 15) — отчёт
    `testcases/reports/2026-10-04_svarog-camera-draw-distance.md`. Открыт **баг 15** — белёсость против низкого солнца (9
@@ -168,10 +165,11 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    `settext`/`gettext` — отчёт `testcases/reports/2026-10-04_svarog-translation-abbreviations.md`.
    **Как работаю с игрой сам** (разрешение владельца — память `svarog-agent-runs-game-itself`): `tools/run-game.sh`
    (запуск → «Продолжить» → ожидание HUD) · пульт `tools/h.sh "<команда>"…` (shot · dump · find/findall · hover/click ·
-   waitfor · callon · cfg · kill) · `tools/deploy-hot.sh KrinikUIRework` (ScriptEngine, печатает RELOADED) · кадр →
-   `tools/shot2webp.py` · закрывать **`kill`** (выход из меню пишет сейв; копия сейвов — `D:\work\ai_sandbox\_backups`).
-   Пока игра открыта — **голосом** (`tools/voice_say.py`, Silero eugene, темп 0.90; хук `tools/hooks/voice-reminder.mjs`
-   напоминает) и окно игры вперёд. Снимки чужих игр — только `tools/shot-hdr.ps1` + `hdr2webp.py` (`EXP-0129`).
+   waitfor · callon · cfg · kill) · `tools/deploy-hot.sh KrinikUIRework` (ScriptEngine, печатает RELOADED) · кадр —
+   `shot` пишет JPEG, `h.sh` сам переводит в WebP 90 (PNG — никогда, канон `AGENT_GUIDE.md`) · закрывать **`kill`** (выход
+   из меню пишет сейв; копия сейвов — `D:\work\ai_sandbox\_backups`). Пока игра открыта — **голосом**
+   (`tools/voice_say.py`, Silero eugene, темп 0.90; файл фразы класть в `SvarogsDream/_harness/` — отметку для хука
+   `tools/hooks/voice-reminder.mjs` инструмент пишет рядом с файлом) и окно игры вперёд. Снимки чужих игр — только `tools/shot-hdr.ps1` + `hdr2webp.py` (`EXP-0129`).
    **Сменил значение по умолчанию — правь и `BepInEx/config/krinik.svarogsdream.*.cfg`** или ставь пультом `cfg`.
    Сделано 04.10 и проверено кадром — `ideas/07`, история кадров — `SvarogsDream/gallery/game/`. Написано, но в игре не
    проверено: надписи над головами, плашки навыка и подобранного; письма после правки флага кнопок (`b0bb16e`).
