@@ -2,7 +2,7 @@
 
 > **Created:** 2026-10-04 23:46 +03:00 · **Parent:** `plans/10_EPIC_svarog_menu_beauty.md` — anchor: «1 | **Читаемость за один
 > заход:** тёмные полосы списков вместо светлых; осветление цветных слов в тексте (ключевые слова «Помощи»); яркие числа в
-> подсказке навыка» · **Status:** 🔧 in work since 23:46 · **Outbound:** frames before → after to the owner
+> подсказке навыка» · **Status:** ✅ closed 2026-10-04 23:51 — A1–A5 pass (`testcases/reports/2026-10-04_svarog-epic10-phase1-readability.md`) · **Outbound:** frames before → after to the owner
 
 ## Goal vector (Achieve)
 
@@ -20,14 +20,14 @@ Text in the Help window, the Almanac lists and the skill tooltip reads at a glan
 
 ## Steps
 
-- [ ] 1. `Letters.cs` `Letter()`: grey "White bar" plates (saturation < 0.15) inside a dark window are darkened like buttons
+- [x] 1. `Letters.cs` `Letter()`: grey "White bar" plates (saturation < 0.15) inside a dark window are darkened like buttons
       (`ButtonDarkness`); coloured bars untouched. Anchor: «тёмные полосы списков вместо светлых».
-- [ ] 2. `Letters.cs` `Letter()`: every TMP text of a dark window gets `KrinikTmpLift` (tag colours lifted on vertices, as in
+- [x] 2. `Letters.cs` `Letter()`: every TMP text of a dark window gets `KrinikTmpLift` (tag colours lifted on vertices, as in
       dialogues). Anchor: «осветление цветных слов в тексте».
-- [ ] 3. `KrinikTmpLift`: dark GREY tags (saturation < MinS, e.g. `#6D6D6D`) lift to a light neutral grey instead of being
+- [x] 3. `KrinikTmpLift`: dark GREY tags (saturation < MinS, e.g. `#6D6D6D`) lift to a light neutral grey instead of being
       skipped — opt-in field, dialogues keep current behaviour. Anchor: «яркие числа в подсказке навыка».
-- [ ] 4. `Plugin.cs` tooltip styler `Style()`: TMP texts get `KrinikTmpLift` with the grey opt-in. Anchor: same.
-- [ ] 5. Build, hot reload, reopen windows, frames p1_* of A1–A5, measure, run report `testcases/reports/`, show owner.
+- [x] 4. `Plugin.cs` tooltip styler `Style()`: TMP texts get `KrinikTmpLift` with the grey opt-in. Anchor: same.
+- [x] 5. Build, hot reload, reopen windows, frames p1_* of A1–A5, measure, run report `testcases/reports/`, show owner.
 
 Verification is the table above, measured on new frames; control A5 by eye.
 
@@ -45,4 +45,15 @@ Verification is the table above, measured on new frames; control A5 by eye.
 
 ## Decisions made without the owner
 
-Filled at close.
+- `[AI]` Light list bars are DARKENED (text stays light), not left light with dark text — one dark-paper style per window;
+  the sheet offered both, the owner approved the sheet as a whole.
+- `[AI]` Saturation threshold 0.3 for "grey bar": between the selected Help row (≈0.20 — darkens too, stays bluish) and the
+  lilac «Существа» category (0.39 — keeps its colour until phase 3).
+- `[AI]` Lifted grey for tag colours = (0.78, 0.78, 0.75): readable (6.79) yet quieter than the new value, so «30 → 40» keeps
+  its "old → new" meaning.
+
+## ✅ STATUS: DONE (2026-10-04 23:51 +03:00)
+
+Hygiene: build without errors. Functional run: Help, Almanac, Quests and the skill tooltip in the owner's game — A1 7.03, A2
+6.39, A3 5.68, A4 6.79 / 8.02, A5 colours kept. Report `testcases/reports/2026-10-04_svarog-epic10-phase1-readability.md`;
+frames `SvarogsDream/gallery/game/2026-10-04_эпик10-фаза1-читаемость/`. The owner's word on the result — not yet.
