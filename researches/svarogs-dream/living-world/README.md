@@ -8,7 +8,7 @@
 |---|---|
 | `01_space_sims.md` | «Космические рейнджеры» изнутри (декомпиляция SR HD, слова Гусарова), серия X, Bannerlord, Starsector |
 | `02_theory.md` | теория и практика индустрии: ступени симуляции (Brom, Chenney, Sunshine-Hill «алиби», Warhorse/KCD, Watch Dogs Legion, Hitman), переходы и догонялка, бой (Ланчестер) и экономика (Ultima Online), грабли, пять правил |
-| `02b_rpg_worlds.md` | A-Life S.T.A.L.K.E.R. по исходникам X-Ray, Radiant AI, Кенши, Dwarf Fortress, Shadows of Doubt, проверка слов о Wayward Realms — **исследователь ещё не вернулся на момент записи; файла пока нет** |
+| `02b_rpg_worlds.md` | A-Life S.T.A.L.K.E.R. по исходникам OpenXRay (гистерезис 135/165 м, бой и торговля офлайн закомментированы, Anomaly вернула их скриптами), Radiant AI, Кенши (заморожен), Dwarf Fortress, Shadows of Doubt; **Wayward Realms — слова владельца подтверждены**: пиксель = ID, RGB = XYZ, миллион NPC на текстуре 1024 × 1024, Vulkan (не CUDA) |
 | `03_mods_unity.md` | как моды пришивали живой мир к готовым играм (Warfare, AlifePlus, Project A-Life, Rim War, Kenshi VSE…) и что из Unity 2020.3 доступно моду |
 | `04_unliminium.md` | что берём из соседнего проекта Unliminium: полезность, личность-веса, стек целей, бой по повадкам, стенд |
 | `05_architecture.md` | наша архитектура с кодом на C#: книга жизни, такт, переход онлайн ⇄ офлайн, голова путника, стычки, фракции, сохранение, проверка, риски |
