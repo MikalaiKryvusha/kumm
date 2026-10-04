@@ -25,18 +25,19 @@
 
 ## What's done (the short tail — older entries live in PROJECT_HISTORY.md)
 
-> **05.10 01:05–01:40 — Svarog's Dream, лаг:** упор игры — процессор (видеокарта 12–35 %). Главный груз — наши же значки
-> до горизонта (≈17 мс): теперь только в 100 м от героя; кости невидимых не двигаются; персонажи дальше 300 м не рисуются,
-> но живут. В одном состоянии мира 18.7 → 30.8 FPS, в лёгком — 68. «Лаг через минуту» — перескок центра подгрузки 5×5 на
-> границе участков (персонажей 87 → 395). Отчёт `testcases/reports/2026-10-05_svarog-perf-icons-characters.md`, сборка
-> `a3010ff`. Прежняя запись (эпик 10, 04.10 ночь) — пункт 0 ниже и `PROJECT_HISTORY.md`.
+> **05.10 01:05–02:20 — Svarog's Dream, лаг и белёсость:** упор игры — один главный поток процессора (69–81 % ядра, всего
+> ≈2 ядра из 16, видеокарта 12–35 %). Сделано: значки только в 100 м от героя (до горизонта стоили до 17 мс), кости
+> невидимых не двигаются, персонажи дальше 300 м спят — вариант А владельца (`researches/svarogs-dream/simulation.md` —
+> как устроены ИИ и живой мир игры). Тяжёлый состав мира: 18.7 → 59.6 FPS. «Лаг через минуту» — перескок центра
+> подгрузки 5×5 на границе участков. Баг 15: белеет сама земля, ведущая версия — френель стандартного шейдера; Unity
+> 2020.3.49f1 установлен под свой шейдер. Отчёт `testcases/reports/2026-10-05_svarog-perf-icons-characters.md`, сборка
+> `89a0629`. Владелец: «понял. закрываем чат. Спасибо».
 
 ---
 
 ## Where we are now
 
-> 🎯 **Последняя сессия (04.10) — Svarog's Dream**, своя сборка на BepInEx: `D:\work\ai_sandbox\SvarogsDream`, игра
-> `D:\Games\Svarog's Dream`; передача дел — пункт 1 «Where to continue».
+> 🎯 **Последняя сессия (05.10) — Svarog's Dream**: досье `games/SvarogsDream/README.md`; передача дел — пункт 0а.
 >
 > **Conan Exiles Enhanced 2.2.3** (пак `D:\work\ai_sandbox\ConanExiles`, игра
 > `D:\Games\Conan Exiles 2.2.3\Conan Exiles`, подробности — досье `games/ConanExiles/README.md`). Переезд сделан
@@ -56,13 +57,6 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 | Phase 2 — the second game | 🟢 **доказана на Конане** | движок принял Conan Exiles Enhanced **без единой правки**: слаг `conanexilesenhanced` из манифеста, `game_id` со страницы. Oblivion Remastered остаётся подготовленным (манифест на 168 модов), ждёт патча |
 | Phase 3 — compatibility | 🔲 todo | источник конфликтов найден: `UnrealPak -List` из Dev Kit читает любой пак с Oodle (`researches/conan-devkit/`); работа — фаза 3 эпика `plans/06` |
 | Phase 4 — optimization presets | 🔲 todo | |
-
-### 🗡️ Конан — досье `games/ConanExiles/README.md`
-
-✅ Переезд на 2.2.3 сделан 02.10.2026 (`plans/09`). Всё живое по Конану — итог переезда и что после него открыто,
-пак и его приборы, Dev Kit, мерцание теней (на 2.2.3 осталось — слово владельца 02.10), справочник долгов и правил,
-оплаченных граблями, — в досье. Свежесть модов с Nexus — только `node kumm.mjs check --root D:\work\ai_sandbox\ConanExiles`
-(curl Nexus больше не пускает).
 
 ## 🤖 Autonomous backlog pool (no human / no special hardware needed)
 
@@ -142,13 +136,22 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-0а. **Svarog's Dream — FPS, открыто: жизнь ≈400 персонажей внешнего кольца 5×5 стоит ≈15 мс** (тяжёлое место ≈31 FPS).
-   Владелец сказал рисовать их не нужно, жить — да (`[OWNER]` «Персонажей дальше 300 метров рисовать не нужно - анимации и
-   тела. Но чтобы движео продолжал симулировать их жизнь» · 2026-10-05 ≈01:27); на вопрос «усыплять / жить реже / оставить»
-   ответил: «а как в игре сделано управление ИИ и персонажами? … расскажи, будем думать» — разведка кода ИИ игры шла в этой
-   сессии, разбор — в `researches/svarogs-dream/`. Приборы: пульт `perf`, `prof`, `animcull`, `particles`, `farchars`;
-   правки сравнивать переключением в одном мире (EXP-0139). Баг 15 (белёсость): направление владельца записано в баге —
-   отражение земли и листвы, а не сила солнца («хорошо смотрится на воде»).
+0а. **▶ ПЕРВЫМ В НОВОМ ЧАТЕ — баг 15, свой шейдер земли** (`[OWNER]` «шейдер будем завтра компилировать. Сегодня только
+   установи юнити» · 2026-10-05 ≈02:10). Готово: Unity 2020.3.49f1 (сборка игры `18249dd5551b`) в `E:\Unity\2020.3.49f1`,
+   Unity Hub в `C:\Program Files\Unity Hub`. **Сначала спросить владельца, вошёл ли он в Unity Hub** (лицензия Personal —
+   только входом в Hub, ручной активации нет); проверка — есть ли `C:\ProgramData\Unity\Unity_lic.ulf`. Затем: пультом
+   `call` узнать `Camera.actualRenderingPath` (forward / deferred — решает, какой шейдер подменять: террейна или общей
+   модели освещения) → проект Unity в `SvarogsDream` (вне `src` модов), шейдер без френеля, сборка пакета ресурсов
+   пакетным режимом (`Unity.exe -batchmode -nographics -projectPath … -executeMethod … -quit -logFile …`) → загрузка модом
+   (KrinikColorRework) → пара кадров при застывшем солнце (`timescale 0`, `call WorldTime IncreaseTimeByOneHour true`,
+   `call WorldTime SetInstantSungAngle`, `TestFaceSun 15 0`). Всё по багу — `bugs/15` (раздел 2026-10-05, источники
+   сообщества); блеск слоёв и трава опровергнуты, блики на воде владелец хочет сохранить.
+   **FPS:** сделано (значки 100 м, кости, сон дальних 300 м — настройки в меню модов «Icons» и «Дальность»). Не проверено:
+   пробуждение дальних при подходе героя и исключения сна в деле (спутники, задания) — посмотреть при игре. Следующее после
+   шейдера — «бумажная жизнь» спящих, подход одобрен (`[OWNER]` «да, это верный подход» · 2026-10-05 ≈02:20) — `ideas/10`. Приборы: пульт `perf`,
+   `prof`, `animcull`, `particles`, `farchars`, `terrainshader`, `timescale`; потоки игры —
+   `powershell -File SvarogsDream/tools/threads.ps1 -Seconds 6`; правки сравнивать переключением в одном мире (EXP-0139).
+   Список «На завтра» эпика 10 — пункт 0, после шейдера.
 0. **Svarog's Dream — переработка UI** (глобальная миссия владельца; план, пункты и статусы — `ideas/07_svarog_mods.md`;
    канон мода — рулбук `SvarogsDream/docs/UI_RULEBOOK.md`, черновик агента, ждёт «да» владельца).
    **▶ ЭПИК 10 «красота меню»** — `plans/10_EPIC_svarog_menu_beauty.md` (одобрен: `[OWNER]` «да, суппер план!» · 2026-10-04
@@ -156,7 +159,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    бумаге, спокойная радуга (`[OWNER]` «оставь радугу, все же это задумка автора. можно пестрость снизить» · 2026-10-05),
    таблицы «Прогресс» и «Атрибуты» (`Tables.cs`), подсказка навыка (сплошная, без дыры, «Цена:» / «Откат:»); 🔧 фаза 6 —
    сделана страница бога в «Преданности». Отчёты — `testcases/reports/2026-10-0[45]_svarog-epic10-*`.
-   **▶ ПЕРВЫМ В НОВОМ ЧАТЕ** — список «На завтра» в эпике (`plans/10`, раздел в конце; `[OWNER]` «остальное - в планы,
+   **▶ ПОСЛЕ ШЕЙДЕРА (пункт 0а)** — список «На завтра» в эпике (`plans/10`, раздел в конце; `[OWNER]` «остальное - в планы,
    завтра будем делать» · 2026-10-05): остаток фазы 6 (подсказки «Выберите…», страница бога в «Альманахе», полоса под
    вкладками), фазы 7 (квесты) и 8 (карта), мелочи. Перед этим — две проверки глазом: пузырь у здания поверх крыши
    (`ideas/07` п. 27, правка `40c118f`) и значки над головами (зазор 1.2 м, `6fd2f02` — кадром с жителем не снято).
@@ -173,15 +176,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    широким набором знаков (`[OWNER]` «найти какой-нибудь шрифт красивый, в котором много символов»); не проверены в игре —
    ярлыки «Надето» / «У торговца», колонки разной ширины, толщина жирного; баг 15 (белёсость против солнца); п. 17 — весь
    HUD крупнее, «но это позже».
-   **Как работаю с игрой сам** (разрешение владельца — память `svarog-agent-runs-game-itself`): `tools/run-game.sh` ·
-   пульт `tools/h.sh "<команда>"…` (shot · dump · find/findall · hover/click · waitfor · cfg · kill; путь с пробелами — в
-   кавычках) · клик по миру — `tools/mouse.ps1 -X -Y -Button left|right|wheel` (правая — разговор, wheel `-Clicks ±N` — приближение камеры) · `tools/deploy-hot.sh
-   KrinikUIRework` (RELOADED) · кадр — `shot` пишет JPEG, `h.sh` сам переводит в WebP 90 (PNG — никогда, канон
-   `AGENT_GUIDE.md`) · сличение с макетом — только `tools/shoot_mockup.mjs` + `tools/pair.py` (целые окна, одно разрешение)
-   · закрывать `kill` (выход из меню пишет сейв; копия сейвов — `D:\work\ai_sandbox\_backups`) · пока игра открыта —
-   голосом (`tools/voice_say.py`, файл фразы — в `SvarogsDream/_harness/`) · сменил значение по умолчанию — правь и
-   `BepInEx/config/krinik.svarogsdream.*.cfg`. Слоты сумки: #0 сапоги, #2 лук, #7 удочка, #46 кольца, #47 туника.
-   Пособие по вёрстке Unity UI + TMP — `researches/unity-ugui-layout/` (греп по `TAG:`; ловушки — `12_pitfalls.md`).
+   **Как работаю с игрой сам** — досье `games/SvarogsDream/README.md` (пульт, запуск, мышь, кадры, голос, слоты сумки).
    Решения владельца ждут: **(а)** преследование врагов у него на СКМ (`gameSettings` KeyCodes[38] = Mouse2) —
    переназначить в «Управлении», камеру на 4/5 или развести модом; **(б)** свой перевод ~11 000 строк
    (`translation/untranslated.txt`, DeepL русификатора отвечает «Too many requests») силами Claude — дорогой, только по
@@ -212,8 +207,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 - 🔴 `bugs/18_svarog_minimap_tooltip_overlap.md` — подсказка мини-карты: «Направления» налезает на «1077м», курсив (тикет).
 - 🔧 `bugs/19_vibepollo_stale_golden_snapshot.md` — Vibepollo: снимок экрана переписан под текущий экран, ждёт проверки
   концом сессии стрима.
-- 🔬 `bugs/15_svarog_whitish_world_against_low_sun.md` — Svarog's Dream: против низкого солнца белеют дальняя земля,
-  трава и листва; 9 гипотез опровергнуто, следующая — импосторы деревьев (23 `Imposter Camera`) и контроль «то же место».
+- 🔬 `bugs/15_svarog_whitish_world_against_low_sun.md` — белеет сама земля против низкого солнца; ведущая версия — френель стандартного шейдера; свой шейдер — пункт 0а.
 - 🔴 `bugs/14_pickcard_exact_name_pins_old_file.md` — `kumm check` держится за старый файл, если автор когда-то
   вписал версию в имя файла (Bosses My New Besties, 02.10). Баг самого движка; план починки и кейс — в документе.
 - 🟢 `bugs/13_conan_checker_nexus_403_system32_curl.md` — по существу закрыт 02.10: Nexus теперь закрыт Cloudflare
