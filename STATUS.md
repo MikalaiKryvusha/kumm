@@ -142,11 +142,12 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 0. **Svarog's Dream — переработка UI** (глобальная миссия владельца; план, пункты и статусы — `ideas/07_svarog_mods.md`;
    канон мода — рулбук `SvarogsDream/docs/UI_RULEBOOK.md`, черновик агента, ждёт «да» владельца).
-   **▶ ЖДЁТ СЛОВА ВЛАДЕЛЬЦА** — обход вкладок меню сделан 2026-10-04 23:20–23:30 (`ideas/07`, п. 24): 15 кадров окон
-   «Карта · Квесты…» и персонажа, лист «что некрасиво → как исправить» — восемь сквозных бед с замерами и порядок работ —
-   показан страницей `SvarogsDream/gallery/game/2026-10-04_вкладки-меню/index.html`. Владелец выбирает, с чего начать;
-   `[AI]` рекомендация — пункт 1 «читаемость»: светлый текст на светлых полосах «Помощи»/«Альманаха» (наш `Letters.cs`
-   `Letter()` осветляет тёмный текст без взгляда на подложку — двойник бага 16) и тёмные цвета тегов TMP. Пути пульта:
+   **▶ ЭПИК 10 «красота меню»** — `plans/10_EPIC_svarog_menu_beauty.md` (одобрен: `[OWNER]` «да, суппер план!» · 2026-10-04
+   ≈23:40; порядок — «80% ценности за 20% усилий», остатки — тикетами). ✅ фаза 1 (читаемость: тёмные полосы списков, яркие
+   цвета тегов, числа подсказок) и ✅ фаза 2 (окно персонажа на тёмной бумаге) — отчёты в `testcases/reports/2026-10-04_svarog-epic10-*`.
+   **Дальше:** фаза 3 — один вид строки списка: лист 2–3 вариантов на одном кадре → выбор владельца; фаза 5, дешёвая часть —
+   метки «Цена:» / «Откат:» в `zz_krinik.txt` проверить после перезапуска игры. Тикеты: `bugs/18` (подсказка мини-карты),
+   `ideas/09` (иконки в мире на отдалении). Лист обхода — `SvarogsDream/gallery/game/2026-10-04_вкладки-меню/index.html`. Пути пульта:
    `click UI/Enablers/InfoPanel` · вкладки `UI/InfoPanel/InfoPanelHeader/<Map|Quests|Progress|Logs|Almanac|Help>Header` ·
    `click UI/Enablers/CharacterPanel` · `UI/CharacterPanel/CharacterPanelHeader/<Devotion|Attributes|Mastery>Header`.
    Замеры: `tools/contrast.py` (WCAG) и `tools/textrows.py` (высота строк). Реплика героя по требованию —
@@ -195,8 +196,9 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 ## Open bugs
 
-Девять файлов без метки DONE (сверено 04.10 23:38 по `ls bugs`; 16 и 17 закрыты в этот вечер):
+Десять файлов без метки DONE (сверено 04.10 23:38 по `ls bugs`, плюс 18; 16 и 17 закрыты в этот вечер):
 
+- 🔴 `bugs/18_svarog_minimap_tooltip_overlap.md` — подсказка мини-карты: «Направления» налезает на «1077м», курсив (тикет).
 - 🔬 `bugs/15_svarog_whitish_world_against_low_sun.md` — Svarog's Dream: против низкого солнца белеют дальняя земля,
   трава и листва; 9 гипотез опровергнуто, следующая — импосторы деревьев (23 `Imposter Camera`) и контроль «то же место».
 - 🔴 `bugs/14_pickcard_exact_name_pins_old_file.md` — `kumm check` держится за старый файл, если автор когда-то
