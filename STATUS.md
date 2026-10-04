@@ -147,13 +147,13 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    (слово владельца 04.10; план, пункты и статусы — `ideas/07_svarog_mods.md`).
    **КАНОН МОДА — рулбук `SvarogsDream/docs/UI_RULEBOOK.md`** (`[OWNER]` «на него ты будешь ориентироваться при
    разработке мода переработки интерфейса»; черновик агента, ждёт «да» владельца — правила с `[OWNER]` уже его слово).
-   **Первым делом в новом чате — подробный разбор лучших практик** по образцам (`[OWNER]` «В новом чате начнём с
-   детального описания и анализа лучших практик»): `SvarogsDream/gallery/refs/` — 77 кадров из 25 игр, 46 с карточками
-   предметов (`card__*`), в каждой папке README с первыми наблюдениями; итог разбора — в рулбук. **Затем код варианта Б**
-   (`[OWNER]` «написание кода — начнём уже в новом чате»): своё окно
-   предмета на движке раскладки Unity (Layout Group / Content Size Fitter) по рулбуку — «вёрстка должна быть
-   динамичной, почти как HTML» (ручные сдвиги в `src/KrinikUIRework/Compare.cs` — тупик, `EXP-0128`). Первым — кадр на
-   сапогах (ячейка инвентаря #0) и кольцах (#46) владельцу. Образцы — `SvarogsDream/gallery/refs/index.html`.
+   ✅ 04.10 день: разбор 46 карточек 25 игр и требования — `SvarogsDream/docs/REFS_ANALYSIS.md`; макет окна предмета
+   выбран владельцем (`[OWNER]` «оба варианта ШИКАРНЫ!!!!») — `SvarogsDream/design/item-window-mockups.html`, решения
+   Р1–Р30 дословно — `ideas/08_svarog_okno_predmeta.md`. **Дальше — по плану идеи 08:** правила в рулбук, затем код
+   своего окна на движке раскладки Unity (Layout Group / Content Size Fitter) с переключателем вида разделов «линия» /
+   «рамка» (`[OWNER]` «сделать в нашем моде переключатель»); ручные сдвиги `src/KrinikUIRework/Compare.cs` — тупик
+   (`EXP-0128`). Первым — кадр на сапогах (ячейка #0) и кольцах (#46) владельцу. Перевод: очевидные строки — в
+   `_config/xunity/zz_krinik.txt` (перекрывает русификатор), в игре не проверены; сокращения — `translation/ABBREVIATIONS.md`.
    **Как работаю с игрой сам** (разрешение владельца — память `svarog-agent-runs-game-itself`): `tools/run-game.sh`
    (запуск → «Продолжить» → ожидание HUD) · пульт `tools/h.sh "<команда>"…` (shot · dump · find/findall · hover/click ·
    waitfor · callon · cfg · kill) · `tools/deploy-hot.sh KrinikUIRework` (ScriptEngine, печатает RELOADED) · кадр →
