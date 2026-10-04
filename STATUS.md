@@ -148,7 +148,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    сообщества); блеск слоёв и трава опровергнуты, блики на воде владелец хочет сохранить.
    **FPS:** сделано (значки 100 м, кости, сон дальних 300 м — настройки в меню модов «Icons» и «Дальность»). Не проверено:
    пробуждение дальних при подходе героя и исключения сна в деле (спутники, задания) — посмотреть при игре. Следующее после
-   шейдера — эпик «мир живёт без героя» (`ideas/10`, видение владельца ≈02:28): `/plan-epic` по разведке `researches/svarogs-dream/living-world-recon.md`. Приборы: пульт `perf`,
+   шейдера — эпик «мир живёт без героя»: разведка и архитектура с кодом — `researches/svarogs-dream/living-world/` (README — пять выводов), мета-план `plans/12_EPIC_*`, **ждут ответа владельца** три вопроса `interviews/interview_005_living_world.md`. Приборы: пульт `perf`,
    `prof`, `animcull`, `particles`, `farchars`, `terrainshader`, `timescale`; потоки игры —
    `powershell -File SvarogsDream/tools/threads.ps1 -Seconds 6`; правки сравнивать переключением в одном мире (EXP-0139).
    Список «На завтра» эпика 10 — пункт 0, после шейдера.

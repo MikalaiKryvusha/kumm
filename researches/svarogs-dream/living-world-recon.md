@@ -4,7 +4,10 @@
 > 2026-10-05 ≈02:29)
 > **Parent:** `ideas/10_svarog_bumazhnaya_zhizn.md` (the owner's vision: the world lives fully without the hero) ·
 > `researches/svarogs-dream/simulation.md` (what Svarog's Dream itself does — nothing beyond its 3×3)
-> **Status:** web sweep done 2026-10-05 ≈02:30 (six searches, summaries — not full articles); input for `/plan-epic`
+> **Status:** ⛔ SUPERSEDED — a first skim (six searches, search-engine summaries only, no articles read), judged weak by the
+> owner (`[OWNER]` «какая-то разведка у тебя убогая и слабая получилась» · «даже примера архитектуры и кода нет» ·
+> 2026-10-05 ≈02:32). The real recon is the folder `living-world/` (five researchers reading primary sources, architecture
+> with C# code). Kept for history; one correction stands: Kenshi freezes off-screen.
 > **Outbound:** conclusions reach the owner through the epic meta-plan (Russian)
 
 ## 1. What the references actually do (found, with sources)
