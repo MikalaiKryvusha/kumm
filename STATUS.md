@@ -32,6 +32,11 @@
 > подгрузки 5×5 на границе участков. Баг 15: белеет сама земля, ведущая версия — френель стандартного шейдера; Unity
 > 2020.3.49f1 установлен под свой шейдер. Отчёт `testcases/reports/2026-10-05_svarog-perf-icons-characters.md`, сборка
 > `89a0629`. Затем (02:37–02:55, автономно) — разведка «мир живёт без героя»: `researches/svarogs-dream/living-world/`.
+>
+> **05.10 09:40–10:15 — белёсость земли починена:** свой шейдер земли собран в Unity 2020.3 пакетным режимом. Против солнца
+> белизны нет: вечер, ночь, утро, полдень, три ракурса; FPS тот же. Мод KrinikColorRework 2.1.0, `SvarogsDream` `3b731ca`,
+> отчёт `testcases/reports/2026-10-05_svarog-matte-terrain.md`. Интервью #005 отвечено, живой мир отложен владельцем.
+> Справка Unity CLI — `researches/unity-cli/`.
 
 ---
 
@@ -136,17 +141,15 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-0а. **▶ ПЕРВЫМ В НОВОМ ЧАТЕ — баг 15, свой шейдер земли** (`[OWNER]` «шейдер будем завтра компилировать. Сегодня только
-   установи юнити» · 2026-10-05 ≈02:10). Готово: Unity 2020.3.49f1 (сборка игры `18249dd5551b`) в `E:\Unity\2020.3.49f1`,
-   Unity Hub в `C:\Program Files\Unity Hub`. Лицензия есть: владелец вошёл, `unity license status` → «Unity Personal
-   (Assigned)» (2026-10-05 ≈09:43; Unity CLI — `%LOCALAPPDATA%\Unity\bin\unity.exe`, разбор — `researches/unity-cli/`:
-   плагин и MCP Unity требуют Unity 6+, нам — только пакетный режим). Затем: пультом
-   `call` узнать `Camera.actualRenderingPath` (forward / deferred — решает, какой шейдер подменять: террейна или общей
-   модели освещения) → проект Unity в `SvarogsDream` (вне `src` модов), шейдер без френеля, сборка пакета ресурсов
-   пакетным режимом (`Unity.exe -batchmode -nographics -projectPath … -executeMethod … -quit -logFile …`) → загрузка модом
-   (KrinikColorRework) → пара кадров при застывшем солнце (`timescale 0`, `call WorldTime IncreaseTimeByOneHour true`,
-   `call WorldTime SetInstantSungAngle`, `TestFaceSun 15 0`). Всё по багу — `bugs/15` (раздел 2026-10-05, источники
-   сообщества); блеск слоёв и трава опровергнуты, блики на воде владелец хочет сохранить.
+0а. **▶ ДАЛЬШЕ — обсуждение приоритетов с владельцем** (`[OWNER]` «После этого нужно будет посмотреть и обсудить в паузе,
+   что у нас дальше по приоритетам» · 2026-10-05 ≈10:02). **Баг 15 (белёсость) — починка в игре:** KrinikColorRework 2.1.0,
+   свой шейдер земли `Krinik/Terrain/Matte` (проект Unity `SvarogsDream/unity/KrinikShaders`, пакет собирается пакетным
+   режимом `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode -nographics -quit -projectPath … -executeMethod
+   KrinikBuild.Bundles`, ≈30 с). Прогон `testcases/reports/2026-10-05_svarog-matte-terrain.md` — pass в 4 временах суток ×
+   3 ракурсах, FPS тот же; страница сравнения открыта владельцу — `SvarogsDream/gallery/game/2026-10-05_матовая-земля/`.
+   Ждёт глаза владельца: значение 0.35 и ночь на четверть светлее игры; не наблюдалась подмена при ходьбе. Лицензия Unity
+   есть (Personal, вход владельца); Unity CLI — `%LOCALAPPDATA%\Unity\bin\unity.exe`, плагин и MCP Unity требуют Unity 6+
+   (`researches/unity-cli/`). Пульт: `render`, `bundle`, `global`, `terrainshader`.
    **FPS:** сделано (значки 100 м, кости, сон дальних 300 м — настройки в меню модов «Icons» и «Дальность»). Не проверено:
    пробуждение дальних при подходе героя и исключения сна в деле (спутники, задания) — посмотреть при игре. Эпик «мир живёт
    без героя» **отложен** (`[OWNER]` «живой мир в Сварог Делаем позже» · «Пока те идеи, с которых автор начинал» ·
@@ -209,7 +212,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 - 🔴 `bugs/18_svarog_minimap_tooltip_overlap.md` — подсказка мини-карты: «Направления» налезает на «1077м», курсив (тикет).
 - 🔧 `bugs/19_vibepollo_stale_golden_snapshot.md` — Vibepollo: снимок экрана переписан под текущий экран, ждёт проверки
   концом сессии стрима.
-- 🔬 `bugs/15_svarog_whitish_world_against_low_sun.md` — белеет сама земля против низкого солнца; ведущая версия — френель стандартного шейдера; свой шейдер — пункт 0а.
+- 🔧 `bugs/15_svarog_whitish_world_against_low_sun.md` — белёсость земли против солнца: причина (блик стандартного шейдера)
+  подтверждена, свой матовый шейдер в моде 2.1.0, прогон pass; ждёт глаза владельца — пункт 0а.
 - 🔴 `bugs/14_pickcard_exact_name_pins_old_file.md` — `kumm check` держится за старый файл, если автор когда-то
   вписал версию в имя файла (Bosses My New Besties, 02.10). Баг самого движка; план починки и кейс — в документе.
 - 🟢 `bugs/13_conan_checker_nexus_403_system32_curl.md` — по существу закрыт 02.10: Nexus теперь закрыт Cloudflare

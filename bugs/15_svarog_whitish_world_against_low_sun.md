@@ -1,9 +1,10 @@
 # Bug 15 — Svarog's Dream: against a low sun the distant ground, grass and foliage turn whitish ("frost")
 
 > **Created:** 2026-10-04 · **Parent:** камера 1.2.0 (низкий наклон, поворот) — `testcases/reports/2026-10-04_svarog-camera-draw-distance.md`
-> **Status:** 🔬 research — 11 hypotheses tested; 2026-10-05 ≈01:58: the white is the TERRAIN itself, and the leading
-> explanation (community + BRDF arithmetic) is the Fresnel of Unity's Standard shading at forward-scattering grazing light,
-> which smoothness 0 does not remove; fix needs a shader the build does not ship — fork to the owner (section 2026-10-05)
+> **Status:** 🔧 fix shipped 2026-10-05 10:10 — KrinikColorRework 2.1.0, matte terrain on, darkening 0.35 (`SvarogsDream`
+> `3b731ca`); run `testcases/reports/2026-10-05_svarog-matte-terrain.md` — pass in 4 times of day × 3 views, FPS unchanged.
+> Waits: the owner's eye on the comparison page (night ¼ lighter than the game; 0.35 is a taste call), streaming while
+> walking not observed. Cause confirmed 09:55 (A/B/C/A2)
 > **Severity: S2** — about an hour of the owner's evening; the owner wants it fixed: `[OWNER]` «лучше белеснявость исправить» · 2026-10-04
 
 ## Symptom
@@ -107,6 +108,68 @@ the game's own — `Player.log`) downloading to `E:\Unity\_installers`, target `
 a Unity Personal licence is activated only by signing in to Unity Hub with the owner's Unity account (manual activation
 of Personal is no longer supported — [Unity manual](https://docs.unity3d.com/Manual/ManagingYourUnityLicense.html),
 [game-ci #235](https://github.com/game-ci/unity-test-runner/issues/235)); after that the editor runs in batch mode.
+
+## Session 2026-10-05 09:46–09:56 — own shader, cause CONFIRMED
+
+Unity licence: active (owner signed in; `unity license status` → Unity Personal). The 2020.3.49f1 editor took it in batch
+mode (`Serial number assigned … UnityPers…`), `-createProject` 24 s.
+
+**How the game renders** (new harness command `render`, 09:52): main camera `DeferredShading` (actual too), HDR, linear;
+the deferred lighting shader is CUSTOM — `Hidden/CTI/Internal-DeferredShading` (CTI tree package), not Unity's own;
+terrain `Nature/Terrain/Standard`, 25 terrains, `drawInstanced True`, basemapDistance 1000; fog off. Direct3D 11.
+
+**Own shader:** project `SvarogsDream/unity/KrinikShaders` — `Krinik/Terrain/Matte` + `-AddPass` + `-Base`, copies of the
+2020.3 Standard terrain shaders (MIT source `builtin_shaders-2020.3.49f1`) on `StandardSpecular`: specular colour =
+0.04 · `_KrinikTerrainSpecular` (global, default 0), smoothness × `_KrinikTerrainSmoothness`, layer metallic ignored.
+Rationale: `UnityStandardBRDF.cginc:308` — `specularTerm *= any(specColor) ? 1.0 : 0.0` — a zero specular colour kills
+the specular lobe, Fresnel included. Bundle `krinik.shaders` (3 shaders, 547 724 B) built by
+`Unity.exe -batchmode -nographics -quit -projectPath … -executeMethod KrinikBuild.Bundles` in 28 s, no compile errors; fog
+and instancing variants kept by the build script. Loaded in game by the harness `bundle <path>`: 3 shaders `supported True`.
+
+**A/B at a frozen sun (elevation 30°, camera facing the sun, pitch 15), frames `SvarogsDream/_harness/b15p_*`, sheet
+`b15p_sheet.webp`:**
+
+| Frame | Terrain | Seen |
+|---|---|---|
+| A | game's `Nature/Terrain/Standard` | far ground, plateau and path pale beige-white |
+| B | `Krinik/Terrain/Matte`, specular 0 | **no white at all** — olive-green ground, red-brown path, dark far plateau |
+| C | same, specular 1 (= ordinary non-metal 0.04) | the white is back, as in A |
+| A2 | restored | identical to A — the control holds |
+
+C vs B isolates the cause: the specular lobe of the default dielectric 0.04 — Fresnel at grazing light — and nothing else.
+The custom CTI deferred shader honours a zero specular colour like Unity's own.
+
+**Open before it ships:**
+1. Top-down view (`b15n_A/B`, 09:54): with the matte shader the near ground is LIGHTER — the game's layers have metallic
+   0.5–0.92, and metallic darkens the diffuse (×0.96·(1−m)); the matte shader drops it. Taste call → owner, with a frame of
+   the normal game camera: true colour, or keep the game's darkening and only remove the glare.
+2. FPS on frame B read 50 against 72 — at that moment the owner had just started a Unity 6 editor (≈20 shader compilers
+   from 09:55:04), and B was the first frame after the swap; measure with `perf` before any conclusion.
+3. New terrains streamed in while walking (5×5 around the hero) must get the material too — the mod swaps on the
+   terrain-count change event, never on a timer (EXP-0127).
+
+## Session 2026-10-05 10:00–10:10 — shipped into the mod, tested across the day
+
+KrinikColorRework 2.1.0 (`MatteTerrain.cs`): loads `krinik.shaders` from its folder, every second swaps the material of each
+loaded terrain (no scene-wide search), settings «Земля без белёсого блика» (on), «Земля: блеск» (0), «Земля: темнее ↔
+светлее» (`_KrinikTerrainMetalDarken` — the game's metallic darkening of the diffuse, ×0.96·(1−m)). Shaders got the darkening
+control; bundle 551 057 B.
+
+Test set (owner: «и не тольок на закате протестируй» · «и не только против солнца» · ≈10:01): hour 20 sun 30°, hour 0 moon
+10°, hour 7 sun 45°, hour 12 sun 80° × facing the sun / sun behind / game camera 55° × game / darkening 1 / darkening 0.
+Ground luma (left 60 %, rows 20–85 %): darkening 1 is DARKER than the game in the game view (the metallic specular had added
+brightness), 0 is lighter; the match is k ≈ 0.36 (morning, evening), 0.22 (noon), 0.66 (night). Picked 0.35 and verified:
+game view evening 0.226 vs 0.223, noon 0.424 vs 0.438, night 0.105 vs 0.084; facing the low sun 0.278 vs 0.404 (glare gone).
+FPS: 75.1 / 75.7 matte vs 74.7 / 76.3 game. Comparison page: `SvarogsDream/gallery/game/2026-10-05_матовая-земля/index.html`.
+
+## Decisions made without the owner (this fix)
+
+- `[AI]` Matte shader as a copy of Unity's own terrain shader on StandardSpecular (community fix: no specular on terrain),
+  not a replacement of the CTI deferred lighting shader — touches the ground only, water glitter stays (his word «хорошо
+  смотрится на воде»).
+- `[AI]` Default darkening 0.35 — chosen by measurement to keep the game's brightness in the game view; shown to the owner
+  with both extremes; revisable by his word.
+- `[AI]` The bundle is a build artefact, not in git (`unity/*/Bundles/` ignored); the mod build fails without it.
 
 ## Leads for the next session (research, not guessing)
 
