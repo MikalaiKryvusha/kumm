@@ -209,7 +209,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 Одиннадцать файлов без метки DONE (сверено 04.10 23:38 по `ls bugs`, плюс 18 и 19; 16 и 17 закрыты в этот вечер):
 
-- ✅ `bugs/18_DONE_svarog_minimap_tooltip_overlap.md` — закрыт 05.10 10:31: подсказка компаса вниз, «суппер! Ты починил».
+- ✅ `bugs/18_DONE_svarog_minimap_tooltip_overlap.md` — закрыт 05.10 11:07: подсказка компаса вниз, «суппер! Ты починил».
 - 🔧 `bugs/19_vibepollo_stale_golden_snapshot.md` — Vibepollo: снимок экрана переписан под текущий экран, ждёт проверки
   концом сессии стрима.
 - 🔧 `bugs/15_svarog_whitish_world_against_low_sun.md` — белёсость земли против солнца: причина (блик стандартного шейдера)
