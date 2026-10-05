@@ -1,10 +1,10 @@
 # Bug 15 — Svarog's Dream: against a low sun the distant ground, grass and foliage turn whitish ("frost")
 
 > **Created:** 2026-10-04 · **Parent:** камера 1.2.0 (низкий наклон, поворот) — `testcases/reports/2026-10-04_svarog-camera-draw-distance.md`
-> **Status:** 🔧 fix shipped 2026-10-05 10:10 — KrinikColorRework 2.1.0, matte terrain on, darkening 0.35 (`SvarogsDream`
-> `3b731ca`); run `testcases/reports/2026-10-05_svarog-matte-terrain.md` — pass in 4 times of day × 3 views, FPS unchanged.
-> Waits: the owner's eye on the comparison page (night ¼ lighter than the game; 0.35 is a taste call), streaming while
-> walking not observed. Cause confirmed 09:55 (A/B/C/A2)
+> **Status:** 🔧 fix shipped 2026-10-05 10:10 — KrinikColorRework 2.1.0, matte terrain on; darkening 0.6 by the owner's
+> word ≈10:16 (`[OWNER]` «темнее нравится, но немножко темнее, а то ночью (1) ну слишком темно»); run
+> `testcases/reports/2026-10-05_svarog-matte-terrain.md` — pass in 4 times of day × 3 views, FPS unchanged. Not DONE yet:
+> terrain swap while walking (streaming) not observed — watch in normal play. Cause confirmed 09:55 (A/B/C/A2)
 > **Severity: S2** — about an hour of the owner's evening; the owner wants it fixed: `[OWNER]` «лучше белеснявость исправить» · 2026-10-04
 
 ## Symptom
@@ -168,7 +168,9 @@ FPS: 75.1 / 75.7 matte vs 74.7 / 76.3 game. Comparison page: `SvarogsDream/galle
   not a replacement of the CTI deferred lighting shader — touches the ground only, water glitter stays (his word «хорошо
   смотрится на воде»).
 - `[AI]` Default darkening 0.35 — chosen by measurement to keep the game's brightness in the game view; shown to the owner
-  with both extremes; revisable by his word.
+  with both extremes. **Superseded by the owner's word ≈10:16 → 0.6** (frames 10:18–10:20: game view evening 0.188 vs game
+  0.223, noon 0.362 vs 0.438, night 0.087 vs 0.084; facing the sun no white at any value). Accepted on the comparison
+  page: `[OWNER]` «да, 0.6 хорошо, оставляем, спасибо» · 2026-10-05 ≈10:22.
 - `[AI]` The bundle is a build artefact, not in git (`unity/*/Bundles/` ignored); the mod build fails without it.
 
 ## Leads for the next session (research, not guessing)
