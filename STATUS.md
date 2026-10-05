@@ -43,8 +43,8 @@
 ## Where we are now
 
 > 🎯 **05.10 вечер — Mafia II, сборка владельца** (Svarog's Dream на паузе словом владельца до конца Мафии): досье
-> `games/Mafia2/README.md`. Сборка стоит в игре с откатом; **Friends for Life не включается** — игра считает DLC
-> не купленным; путь обхода проверки — решение владельца (варианты в досье, раздел «Открыто»).
+> `games/Mafia2/README.md`. Сборка стоит в игре с откатом, шаг `update5` поставил владелец; игра запускается.
+> **Дальше:** спросить владельца, что он увидел в игре (досье, раздел «Дальше»).
 >
 > **Svarog's Dream** (запаркован): досье `games/SvarogsDream/README.md`; передача дел — пункт 0а.
 >
@@ -145,10 +145,14 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-⚠️ Force-closed 2026-10-05 11:08 +03:00: ceremonies skipped (judge pass, bonsai trim, README, showcase linters) — the first
-/end-chat-soft pays this debt.
-Standing falsehood: none (five stamps written ahead of or without the clock this session — report 10:14, code comment ≈10:25,
-idea 07 ≈10:22, bug 18 closure 10:31, this handover 11:09 — each corrected where it stood before the commit that carries it).
+⚠️ Force-closed 2026-10-05 20:19 +03:00: ceremonies skipped (judge pass, bonsai trim, README, showcase linters) — the first
+/end-chat-soft pays this debt (also carried from the 11:08 force-close).
+Standing falsehood: none («Friends for Life не включается» from 19:5x is superseded by the owner's update5 step and corrected
+in `games/Mafia2/README.md` and above in this file; the 19:51 run report keeps its own verdict as the record of that run).
+
+**Сессия 05.10 вечер (Mafia II) — первым делом новому чату:** `games/Mafia2/README.md` → раздел «Дальше»: спросить
+владельца, что он увидел в игре. Пак `D:\Games\Mafia II Mods` (`tools\install.py uninstall` — откат). На машину поставлены
+.NET 8 SDK (MafiaToolkit/`sdscli`) и `pefile` для Python. Svarog's Dream — после Мафии (пункт 0а ниже).
 
 0а. **▶ Эпик 10, список «На завтра»** (`[OWNER]` «Дальше по плану — эпик 10 - да, приступай, но в новом чате» · 2026-10-05
    ≈11:08): ✅ фаза 6 закрыта 11:30 (`SvarogsDream` `a59146e`, отчёт `testcases/reports/2026-10-05_svarog-epic10-phase6-pages.md`,
