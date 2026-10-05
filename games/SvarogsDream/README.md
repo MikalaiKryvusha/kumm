@@ -2,7 +2,7 @@
 
 > Своя сборка на BepInEx: `D:\work\ai_sandbox\SvarogsDream` (репозиторий `svarogs-dream-modpack`), игра
 > `D:\Games\Svarog's Dream`. Что сейчас в работе — `STATUS.md`, пункты 0а и 0. Как устроены ИИ и живой мир игры —
-> `researches/svarogs-dream/simulation.md`.
+> `researches/svarogs-dream/simulation.md`; прокачка выше 100 и формулы — `researches/svarogs-dream/progression-uncap.md`.
 
 ## Как агент работает с игрой сам
 
