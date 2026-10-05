@@ -42,7 +42,11 @@
 
 ## Where we are now
 
-> 🎯 **Последняя сессия (05.10) — Svarog's Dream**: досье `games/SvarogsDream/README.md`; передача дел — пункт 0а.
+> 🎯 **05.10 вечер — Mafia II, сборка владельца** (Svarog's Dream на паузе словом владельца до конца Мафии): досье
+> `games/Mafia2/README.md`. Сборка стоит в игре с откатом; **Friends for Life не включается** — игра считает DLC
+> не купленным; путь обхода проверки — решение владельца (варианты в досье, раздел «Открыто»).
+>
+> **Svarog's Dream** (запаркован): досье `games/SvarogsDream/README.md`; передача дел — пункт 0а.
 >
 > **Conan Exiles Enhanced 2.2.3** (пак `D:\work\ai_sandbox\ConanExiles`, игра
 > `D:\Games\Conan Exiles 2.2.3\Conan Exiles`, подробности — досье `games/ConanExiles/README.md`). Переезд сделан
