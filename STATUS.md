@@ -43,8 +43,10 @@
 ## Where we are now
 
 > 🎯 **05.10 вечер — Mafia II, сборка владельца** (Svarog's Dream на паузе словом владельца до конца Мафии): досье
-> `games/Mafia2/README.md`. Сборка стоит в игре с откатом, шаг `update5` поставил владелец; игра запускается.
-> **Дальше:** спросить владельца, что он увидел в игре (досье, раздел «Дальше»).
+> `games/Mafia2/README.md`. Сборка стоит в игре с откатом, шаг `update5` поставил владелец. 20:25–20:37 агент видел меню:
+> Friends for Life загружается («Готов к игре»), графика выставлена на максимум в 4K (отчёт
+> `testcases/reports/2026-10-05_mafia2-menu-check-and-graphics.md`). **Дальше:** глаз владельца в сюжете — прицел, радио,
+> Epilog, FPS (досье, раздел «Дальше»); сюжет агенту не начинать (`[OWNER]` «не нужно игру начинать» · ≈20:27).
 >
 > **Svarog's Dream** (запаркован): досье `games/SvarogsDream/README.md`; передача дел — пункт 0а.
 >
@@ -150,8 +152,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 Standing falsehood: none («Friends for Life не включается» from 19:5x is superseded by the owner's update5 step and corrected
 in `games/Mafia2/README.md` and above in this file; the 19:51 run report keeps its own verdict as the record of that run).
 
-**Сессия 05.10 вечер (Mafia II) — первым делом новому чату:** `games/Mafia2/README.md` → раздел «Дальше»: спросить
-владельца, что он увидел в игре. Пак `D:\Games\Mafia II Mods` (`tools\install.py uninstall` — откат). На машину поставлены
+**Сессия 05.10 вечер (Mafia II) — первым делом новому чату:** `games/Mafia2/README.md` → раздел «Дальше»: ждём слова
+владельца из сюжета; меню и графика проверены агентом 20:37. Игру водить `tools\di.ps1` (скан-коды). Пак `D:\Games\Mafia II Mods` (`tools\install.py uninstall` — откат). На машину поставлены
 .NET 8 SDK (MafiaToolkit/`sdscli`) и `pefile` для Python. Svarog's Dream — после Мафии (пункт 0а ниже).
 
 0а. **▶ Эпик 10, список «На завтра»** (`[OWNER]` «Дальше по плану — эпик 10 - да, приступай, но в новом чате» · 2026-10-05
