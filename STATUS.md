@@ -25,36 +25,24 @@
 
 ## What's done (the short tail — older entries live in PROJECT_HISTORY.md)
 
-> **05.10 01:05–02:20 — Svarog's Dream, лаг и белёсость:** упор игры — один главный поток процессора (69–81 % ядра, всего
-> ≈2 ядра из 16, видеокарта 12–35 %). Сделано: значки только в 100 м от героя (до горизонта стоили до 17 мс), кости
-> невидимых не двигаются, персонажи дальше 300 м спят — вариант А владельца (`researches/svarogs-dream/simulation.md` —
-> как устроены ИИ и живой мир игры). Тяжёлый состав мира: 18.7 → 59.6 FPS. «Лаг через минуту» — перескок центра
-> подгрузки 5×5 на границе участков. Баг 15: белеет сама земля, ведущая версия — френель стандартного шейдера; Unity
-> 2020.3.49f1 установлен под свой шейдер. Отчёт `testcases/reports/2026-10-05_svarog-perf-icons-characters.md`, сборка
-> `89a0629`. Затем (02:37–02:55, автономно) — разведка «мир живёт без героя»: `researches/svarogs-dream/living-world/`.
->
-> **05.10 09:40–10:15 — белёсость земли починена:** свой шейдер земли собран в Unity 2020.3 пакетным режимом. Против солнца
-> белизны нет: вечер, ночь, утро, полдень, три ракурса; FPS тот же. Мод KrinikColorRework 2.1.0, `SvarogsDream` `3b731ca`,
-> отчёт `testcases/reports/2026-10-05_svarog-matte-terrain.md`. Интервью #005 отвечено, живой мир отложен владельцем.
-> Справка Unity CLI — `researches/unity-cli/`.
+> **05.10 вечер — Mafia II, сборка владельца:** Friends for Life, Epilog, Uncut Radio, прицел-точка, 4GB patch стоят с
+> откатом; агент видел меню — Friends for Life «Готов к игре», графика на максимуме в 4K (досье `games/Mafia2/README.md`,
+> отчёт `testcases/reports/2026-10-05_mafia2-menu-check-and-graphics.md`). Сюжет ждёт глаз владельца.
+> Сварог 05.10 (FPS 18.7 → 59.6, матовая земля, бага 15) — `PROJECT_HISTORY.md`, запись 2026-10-05 20:58.
 
 ---
 
 ## Where we are now
 
-> 🎯 **05.10 вечер — Mafia II, сборка владельца** (Svarog's Dream на паузе словом владельца до конца Мафии): досье
-> `games/Mafia2/README.md`. Сборка стоит в игре с откатом, шаг `update5` поставил владелец. 20:25–20:37 агент видел меню:
-> Friends for Life загружается («Готов к игре»), графика выставлена на максимум в 4K (отчёт
-> `testcases/reports/2026-10-05_mafia2-menu-check-and-graphics.md`). **Дальше:** глаз владельца в сюжете — прицел, радио,
-> Epilog, FPS (досье, раздел «Дальше»); сюжет агенту не начинать (`[OWNER]` «не нужно игру начинать» · ≈20:27).
+> 🎯 **Svarog's Dream — снова главное** (`[OWNER]` «в новом чате продолжим со Сварог Дрим» · 2026-10-05 ≈20:55): досье
+> `games/SvarogsDream/README.md`; передача дел — пункт 0а ниже (эпик 10, фаза 7 «Квесты»).
 >
-> **Svarog's Dream** (запаркован): досье `games/SvarogsDream/README.md`; передача дел — пункт 0а.
+> **Mafia II** (на паузе): сборка стоит, меню и графика проверены агентом; прицел, радио, Epilog, FPS — глазом владельца в
+> сюжете (досье `games/Mafia2/README.md`, раздел «Дальше»); сюжет агенту не начинать (`[OWNER]` «не нужно игру начинать» ·
+> ≈20:27).
 >
-> **Conan Exiles Enhanced 2.2.3** (пак `D:\work\ai_sandbox\ConanExiles`, игра
-> `D:\Games\Conan Exiles 2.2.3\Conan Exiles`, подробности — досье `games/ConanExiles/README.md`). Переезд сделан
-> 02.10; старая 2.1.1 (`D:\Games\Conan Exiles`) удалена по слову владельца «можешь удалять старый конан». Palworld — в
-> ежедневном пользовании владельца, правок не ждёт. **Oblivion Remastered запаркован до патча —
-> игры на диске нет**, не ходить туда и не предлагать по ней работу, пока владелец не скажет.
+> **Конан 2.2.3** — досье `games/ConanExiles/README.md`. Palworld — в ежедневном пользовании, правок не ждёт.
+> **Oblivion Remastered запаркован до патча** — не ходить туда, пока владелец не скажет.
 
 The engine works and the owner uses it daily for Palworld. What it does NOT have is any way to check
 itself: there is no test of any kind, and both halves talk to the outside world (Nexus through a
@@ -147,14 +135,9 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-⚠️ Force-closed 2026-10-05 20:19 +03:00: ceremonies skipped (judge pass, bonsai trim, README, showcase linters) — the first
-/end-chat-soft pays this debt (also carried from the 11:08 force-close).
-Standing falsehood: none («Friends for Life не включается» from 19:5x is superseded by the owner's update5 step and corrected
-in `games/Mafia2/README.md` and above in this file; the 19:51 run report keeps its own verdict as the record of that run).
-
-**Сессия 05.10 вечер (Mafia II) — первым делом новому чату:** `games/Mafia2/README.md` → раздел «Дальше»: ждём слова
-владельца из сюжета; меню и графика проверены агентом 20:37. Игру водить `tools\di.ps1` (скан-коды). Пак `D:\Games\Mafia II Mods` (`tools\install.py uninstall` — откат). На машину поставлены
-.NET 8 SDK (MafiaToolkit/`sdscli`) и `pefile` для Python. Svarog's Dream — после Мафии (пункт 0а ниже).
+**Первым делом новому чату — Svarog's Dream, пункт 0а:** снять «Квесты» на нормальном экране (не на чёрном экране
+Sunshine 1280×720), проверить раскрытие описания стрелкой, дальше фаза 7 → 8 (карта). Мафия ждёт слова владельца;
+её приборы и откат — в досье `games/Mafia2/README.md`.
 
 0а. **▶ Эпик 10, список «На завтра»** (`[OWNER]` «Дальше по плану — эпик 10 - да, приступай, но в новом чате» · 2026-10-05
    ≈11:08): ✅ фаза 6 закрыта 11:30 (`SvarogsDream` `a59146e`, отчёт `testcases/reports/2026-10-05_svarog-epic10-phase6-pages.md`,
@@ -167,27 +150,11 @@ in `games/Mafia2/README.md` and above in this file; the 19:51 run report keeps i
    отдавала только чёрные кадры на экране Sunshine 1280×720 (отчёт `testcases/reports/2026-10-05_svarog-epic10-phase7-quests-start.md`).
    Следующий шаг — снять «Квесты» на нормальном экране, проверить раскрытие описания стрелкой. **Дальше — фаза 7 (квесты)**, затем 8 (карта), мелочи п. 4 и 6 списка. План — `plans/10_EPIC_svarog_menu_beauty.md`,
    раздел в конце. После эпика — перевод (ниже в этом пункте).
-   **По принятому плану** (`[OWNER]` «идём по твоему плану» · 2026-10-05 ≈10:19): ~~баг 18~~ ✅ (подсказка
-   мини-карты) → **эпик 10, список «На завтра»** (пункт 0 ниже) → **перевод** (`[OWNER]` «переводы, да, ждут нас, нужно
-   делать» · «русские строки в моде перевода нужно ИСПРАВЛЯТЬ … читать англ оригиналы и по-новому все русские строки красиво
-   по смыслу переводить» · ≈10:19–10:20 — недопереведённое И заново всё переведённое; `ideas/07`, раздел о переводе; начать с
-   плана). Преследование врагов владелец сам перенёс на боковую кнопку мыши (≈10:19) — вопрос закрыт. Пузырь у здания и
-   значки над головами проверены владельцем: «тут ок, пункт сделан, снимается» (≈10:19).
-   **Баг 15 (белёсость) — починен в игре:** KrinikColorRework 2.1.0, свой шейдер земли `Krinik/Terrain/Matte` (проект Unity
-   `SvarogsDream/unity/KrinikShaders`, пакет — `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode -nographics -quit
-   -projectPath … -executeMethod KrinikBuild.Bundles`, ≈30 с). «Земля: темнее ↔ светлее» = 0.6 по слову владельца
-   («темнее нравится, но немножко темнее, а то ночью (1) ну слишком темно» · ≈10:16): днём на 16–17 % темнее игры, ночью как
-   в игре. Прогон `testcases/reports/2026-10-05_svarog-matte-terrain.md` — pass, FPS тот же; сравнение —
-   `SvarogsDream/gallery/game/2026-10-05_матовая-земля/index.html`. Не наблюдалась подмена земли при ходьбе. Unity CLI —
-   `%LOCALAPPDATA%\Unity\bin\unity.exe` (лицензия Personal есть; плагин и MCP Unity — только Unity 6+, `researches/unity-cli/`).
-   Пульт: `render`, `bundle`, `global`, `terrainshader`.
-   **FPS:** сделано (значки 100 м, кости, сон дальних 300 м — настройки в меню модов «Icons» и «Дальность»). Не проверено:
-   пробуждение дальних при подходе героя и исключения сна в деле (спутники, задания) — посмотреть при игре. Эпик «мир живёт
-   без героя» **отложен** (`[OWNER]` «живой мир в Сварог Делаем позже» · «Пока те идеи, с которых автор начинал» ·
-   2026-10-05 ≈09:46); интервью #005 отвечено «1А 2А 3А+В», всё в `plans/12_EPIC_*`. Приборы: пульт `perf`,
-   `prof`, `animcull`, `particles`, `farchars`, `terrainshader`, `timescale`; потоки игры —
-   `powershell -File SvarogsDream/tools/threads.ps1 -Seconds 6`; правки сравнивать переключением в одном мире (EXP-0139).
-   Список «На завтра» эпика 10 — пункт 0, после шейдера.
+   После эпика — **перевод** заново по английскому (`ideas/07`, раздел о переводе; начать с плана). Живой мир отложен
+   владельцем (`plans/12_EPIC_*`). Баг 15 (матовая земля, 0.6) и FPS-работа — `PROJECT_HISTORY.md`, запись 2026-10-05 20:58;
+   до DONE бага 15 — увидеть подмену земли при ходьбе; FPS — проверить пробуждение дальних при подходе героя.
+   Шейдер пересобирается: `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode -nographics -quit -projectPath
+   SvarogsDream/unity/KrinikShaders -executeMethod KrinikBuild.Bundles` (≈30 с).
 0. **Svarog's Dream — переработка UI** (глобальная миссия владельца; план, пункты и статусы — `ideas/07_svarog_mods.md`;
    канон мода — рулбук `SvarogsDream/docs/UI_RULEBOOK.md`, черновик агента, ждёт «да» владельца).
    **▶ ЭПИК 10 «красота меню»** — `plans/10_EPIC_svarog_menu_beauty.md` (одобрен: `[OWNER]` «да, суппер план!» · 2026-10-04

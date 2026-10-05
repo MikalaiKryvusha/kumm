@@ -56,7 +56,7 @@
 > <!-- classes: question-already-answered, guard-not-proven-against-threat, shown-as-link,
 >      claim-before-evidence, owner-decision-not-applied, text-in-agents-world,
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
->      field-dropped-in-rebuild -->
+>      field-dropped-in-rebuild, tool-silent-refusal -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -79,6 +79,21 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0141 · 2026-10-05 · ❌→✅ · #mafia2 #input #directinput #harness #menus
+class: tool-silent-refusal
+**Context:** Mafia II (2010, 32 бит) — пройти меню «Настройки → Видео» и «Загружаемый контент» без начала сюжета.
+**Tried / did:** приборы Конана: `input.ps1 -Click` (абсолютный курсор + клик) и `-Key` (`keybd_event` без скан-кода).
+**Result:** ❌ курсор игры не двигается; клик срабатывает по ПОДСВЕЧЕННОМУ пункту (вместо «Настройки» открылся выбор
+ячейки «Истории»); Esc и Backspace без скан-кода игра не видит — прибор каждый раз печатает «pressed». ✅ SendInput с
+`KEYEVENTF_SCANCODE` (`D:\Games\Mafia II Mods\tools\di.ps1 -Scan 0xD0`) — меню идёт клавишами, каждое нажатие видно на кадре.
+**Lesson:** **«нажато» в выводе прибора ввода — не наблюдение: после первого нажатия в новой игре снять кадр и убедиться,
+что экран сменился.** Игра на DirectInput / сыром вводе требует скан-кодов и относительной мыши; клик в таком меню
+выбирает подсвеченное, а не то, что под курсором.
+**Repro:** `tools\di.ps1 -Scan 0x01` (Esc) против `input.ps1 -Key 0x1B` в меню Mafia II, кадр `tools\shot.py` после каждого.
+**Trigger:** первый заход агентом в меню новой игры.
+**Not for:** игры на Slate/UMG и прочие меню на оконных сообщениях — там `input.ps1` работает (Конан).
+mechanized: none — проверка «кадр после первого нажатия» — шаг досье игры, не гард
 
 ### EXP-0140 · 2026-10-05 · ❌→✅ · #research #recon #epic #sources #owner-eye #svarogsdream
 class: recon-by-snippets
