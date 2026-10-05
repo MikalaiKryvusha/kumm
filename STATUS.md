@@ -141,7 +141,16 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-0а. **▶ ДАЛЬШЕ — по принятому плану** (`[OWNER]` «идём по твоему плану» · 2026-10-05 ≈10:19): ~~баг 18~~ ✅ (подсказка
+⚠️ Force-closed 2026-10-05 11:08 +03:00: ceremonies skipped (judge pass, bonsai trim, README, showcase linters) — the first
+/end-chat-soft pays this debt.
+Standing falsehood: none (five stamps written ahead of or without the clock this session — report 10:14, code comment ≈10:25,
+idea 07 ≈10:22, bug 18 closure 10:31, this handover 11:09 — each corrected where it stood before the commit that carries it).
+
+0а. **▶ ПЕРВЫМ В НОВОМ ЧАТЕ — эпик 10, список «На завтра»** (`[OWNER]` «Дальше по плану — эпик 10 - да, приступай, но в
+   новом чате» · 2026-10-05 ≈11:08): остаток фазы 6 — подсказки «Выберите…», страница бога в «Альманахе», полоса под
+   вкладками; затем фазы 7 (квесты) и 8 (карта). План — `plans/10_EPIC_svarog_menu_beauty.md`, раздел в конце; подробности —
+   пункт 0 ниже. После эпика — перевод (ниже в этом пункте).
+   **По принятому плану** (`[OWNER]` «идём по твоему плану» · 2026-10-05 ≈10:19): ~~баг 18~~ ✅ (подсказка
    мини-карты) → **эпик 10, список «На завтра»** (пункт 0 ниже) → **перевод** (`[OWNER]` «переводы, да, ждут нас, нужно
    делать» · «русские строки в моде перевода нужно ИСПРАВЛЯТЬ … читать англ оригиналы и по-новому все русские строки красиво
    по смыслу переводить» · ≈10:19–10:20 — недопереведённое И заново всё переведённое; `ideas/07`, раздел о переводе; начать с
