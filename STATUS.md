@@ -138,8 +138,9 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 0а. **▶ ПЕРВЫМ В НОВОМ ЧАТЕ — баг 15, свой шейдер земли** (`[OWNER]` «шейдер будем завтра компилировать. Сегодня только
    установи юнити» · 2026-10-05 ≈02:10). Готово: Unity 2020.3.49f1 (сборка игры `18249dd5551b`) в `E:\Unity\2020.3.49f1`,
-   Unity Hub в `C:\Program Files\Unity Hub`. **Сначала спросить владельца, вошёл ли он в Unity Hub** (лицензия Personal —
-   только входом в Hub, ручной активации нет); проверка — есть ли `C:\ProgramData\Unity\Unity_lic.ulf`. Затем: пультом
+   Unity Hub в `C:\Program Files\Unity Hub`. Лицензия есть: владелец вошёл, `unity license status` → «Unity Personal
+   (Assigned)» (2026-10-05 ≈09:43; Unity CLI — `%LOCALAPPDATA%\Unity\bin\unity.exe`, разбор — `researches/unity-cli/`:
+   плагин и MCP Unity требуют Unity 6+, нам — только пакетный режим). Затем: пультом
    `call` узнать `Camera.actualRenderingPath` (forward / deferred — решает, какой шейдер подменять: террейна или общей
    модели освещения) → проект Unity в `SvarogsDream` (вне `src` модов), шейдер без френеля, сборка пакета ресурсов
    пакетным режимом (`Unity.exe -batchmode -nographics -projectPath … -executeMethod … -quit -logFile …`) → загрузка модом
@@ -147,8 +148,9 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    `call WorldTime SetInstantSungAngle`, `TestFaceSun 15 0`). Всё по багу — `bugs/15` (раздел 2026-10-05, источники
    сообщества); блеск слоёв и трава опровергнуты, блики на воде владелец хочет сохранить.
    **FPS:** сделано (значки 100 м, кости, сон дальних 300 м — настройки в меню модов «Icons» и «Дальность»). Не проверено:
-   пробуждение дальних при подходе героя и исключения сна в деле (спутники, задания) — посмотреть при игре. Следующее после
-   шейдера — эпик «мир живёт без героя»: разведка и архитектура с кодом — `researches/svarogs-dream/living-world/` (README — пять выводов), мета-план `plans/12_EPIC_*`, **ждут ответа владельца** три вопроса `interviews/interview_005_living_world.md`. Приборы: пульт `perf`,
+   пробуждение дальних при подходе героя и исключения сна в деле (спутники, задания) — посмотреть при игре. Эпик «мир живёт
+   без героя» **отложен** (`[OWNER]` «живой мир в Сварог Делаем позже» · «Пока те идеи, с которых автор начинал» ·
+   2026-10-05 ≈09:46); интервью #005 отвечено «1А 2А 3А+В», всё в `plans/12_EPIC_*`. Приборы: пульт `perf`,
    `prof`, `animcull`, `particles`, `farchars`, `terrainshader`, `timescale`; потоки игры —
    `powershell -File SvarogsDream/tools/threads.ps1 -Seconds 6`; правки сравнивать переключением в одном мире (EXP-0139).
    Список «На завтра» эпика 10 — пункт 0, после шейдера.

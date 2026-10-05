@@ -32,5 +32,9 @@ tools/scrub-local.json
 .kaif/voice-marker.json
 .kaif/contour-window/
 
+# Встроенное руководство агента Unity CLI (`unity skill show --path …`) — текст Unity, не наш; репозиторий
+# публичный. Лежит локально, пересобирается командой из researches/unity-cli/README.md
+researches/unity-cli/skill/
+
 # Сборка заплаток GTA SA (build.cmd без аргумента кладёт сюда .asi/.obj) — бинарники в репозиторий не идут
 games/GTASanAndreas/*/out/
