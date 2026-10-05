@@ -80,6 +80,22 @@
 
 ## Entries
 
+### EXP-0143 · 2026-10-06 · ❌→✅ · #svarogsdream #ui #unity #tmp #layout #translation #recon
+class: guide-on-shelf-unread
+**Context:** свой пузырь речи по тексту (`KrinikUIRework/BubbleBox.cs`): плашка — по размеру реплики.
+**Tried / did:** размер считал вручную `GetPreferredValues` по тексту игры, четыре захода: якоря, ширина, перенос, порядок.
+**Result:** ❌ первая фраза каждый раз одной строкой шире плашки — перевод (XUnity) подменял строку после подгонки. Владелец:
+«может пора тебе руководство по C# почитать? мы для этого его собирали». ✅ В пособии `researches/unity-ugui-layout/` готово:
+`pitfall.translator-after-layout` (ровно этот симптом) и рецепт `ugui.csf.fit-group-with-child-text` (группа + ContentSizeFitter,
+у текста LayoutElement.preferredWidth = min(ширина без переноса, предел)). Свой текст + рецепт — с первого прогона.
+**Lesson:** **перед кодом интерфейса Unity — `grep TAG:` по пособию `researches/unity-ugui-layout/` (и `12_pitfalls.md`) по
+словам задачи; ручной размер по тексту в моде с переводчиком — запрещённый путь, размер держит раскладка.** Повтор класса
+[[EXP-0142]]: оба урока — «перед кодом посмотри, как это делается по-родному».
+**Repro:** реплика жителя с переводом из словаря; размер плашки, посчитанный в момент показа, — строка на экране шире.
+**Trigger:** любая задача на вёрстку, текст, размер по содержимому в модах Unity этого проекта.
+**Not for:** окна, где перевода нет и текст задаёт сам мод.
+mechanized: none — пункт «прочитай пособие» стоит в досье `games/SvarogsDream/README.md`; в STATUS — строка «перед кодом UI»
+
 ### EXP-0142 · 2026-10-06 · ❌ · #svarogsdream #ui #unity #bepinex #architecture #flicker #owner-eye
 class: repaint-after-build
 **Context:** мод интерфейса Svarog's Dream (`KrinikUIRework`) переоформляет окна игры; вечер 2026-10-05/06 владелец ловил
