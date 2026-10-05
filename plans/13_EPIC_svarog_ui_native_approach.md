@@ -3,7 +3,7 @@
 > **Created:** 2026-10-06 (слово владельца в чате)
 > **Parent:** `plans/10_EPIC_svarog_menu_beauty.md` (фаза 7 вскрыла класс) · урок `EXPERIENCE.md` EXP-0142 · мод `SvarogsDream/src/KrinikUIRework`
 > **Status:** 🔧 открыт 2026-10-06 ≈00:52 · ✅ фаза 0 (эталон) 01:00 — `testcases/reports/2026-10-06_svarog-ui-native-phase0-baseline.md`
-> · ✅ фаза 1 («Квесты») 01:21 — `SvarogsDream` `0865ec0`, `testcases/reports/2026-10-06_svarog-ui-native-phase1-quests.md` · 🔲 фазы 2–6
+> · ✅ фаза 1 («Квесты») 01:21 — `SvarogsDream` `0865ec0`, `testcases/reports/2026-10-06_svarog-ui-native-phase1-quests.md` · ✅ фаза 2 01:28 — прибором: одна подмена (страница бога), закрыта, `testcases/reports/2026-10-06_svarog-ui-native-phase2-scan.md` · 🔲 фазы 3–6 (письма, записки, всплывающие окна — при их работе)
 > **Outbound:** единый вид вкладок — шрифт (А антиква / Б Arial) и радуга (А в полосу / Б мазки) → владельцу, вопрос задан в чате ≈00:35
 
 ## Слово владельца — дословно
