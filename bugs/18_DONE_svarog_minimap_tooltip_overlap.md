@@ -1,6 +1,6 @@
 # Bug 18 — Svarog's Dream: minimap tooltip — title over the distance, italic description
 
-**Status:** 🔧 overlap gone; NEW: open downward (ticket by the owner's order «заводи себе тикетами багами и импрувментами» · 2026-10-04 ≈23:43)
+**Status:** ✅ DONE 2026-10-05 10:31 (ticket by the owner's order «заводи себе тикетами багами и импрувментами» · 2026-10-04 ≈23:43)
 **Severity:** S3-class papercut kept as a ticket at the owner's word
 **Version/build:** `SvarogsDream` `KrinikUIRework` at `02a078e`
 **When/context:** 2026-10-04 23:34 +03:00, seen by the agent on a frame while fixing bug 16 (cursor rested on the minimap)
@@ -46,3 +46,8 @@ the cursor and covers the minimap; it must open below the cursor. Not DONE until
 **Fix 2026-10-05 10:29:** `KrinikUIRework` `PatchGlobeTipBelow` (`SvarogsDream` `2f12a6c`) — a globe stat in the upper half of
 the canvas puts the tooltip's top under its own bottom with a gap, right edge inside the canvas; the spheres at the bottom
 keep the game's placement. Run `testcases/reports/2026-10-05_svarog-bug18-compass-tooltip.md` — pass. Waits for the owner's eye.
+
+## ✅ STATUS: DONE (2026-10-05 10:31 +03:00)
+
+Owner on the frame: `[OWNER]` «суппер! Ты починил» · 2026-10-05 ≈10:31. Hygiene: build. Functional run:
+`testcases/reports/2026-10-05_svarog-bug18-compass-tooltip.md` — pass (compass tooltip below, twice; spheres unchanged).

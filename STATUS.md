@@ -141,7 +141,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-0а. **▶ ДАЛЬШЕ — по принятому плану** (`[OWNER]` «идём по твоему плану» · 2026-10-05 ≈10:19): **баг 18** (подсказка
+0а. **▶ ДАЛЬШЕ — по принятому плану** (`[OWNER]` «идём по твоему плану» · 2026-10-05 ≈10:19): ~~баг 18~~ ✅ (подсказка
    мини-карты) → **эпик 10, список «На завтра»** (пункт 0 ниже) → **перевод** (`[OWNER]` «переводы, да, ждут нас, нужно
    делать» · «русские строки в моде перевода нужно ИСПРАВЛЯТЬ … читать англ оригиналы и по-новому все русские строки красиво
    по смыслу переводить» · ≈10:19–10:20 — недопереведённое И заново всё переведённое; `ideas/07`, раздел о переводе; начать с
@@ -209,7 +209,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 Одиннадцать файлов без метки DONE (сверено 04.10 23:38 по `ls bugs`, плюс 18 и 19; 16 и 17 закрыты в этот вечер):
 
-- 🔧 `bugs/18_svarog_minimap_tooltip_overlap.md` — подсказка компаса теперь открывается вниз (05.10 10:29, `2f12a6c`), ждёт глаза владельца.
+- ✅ `bugs/18_DONE_svarog_minimap_tooltip_overlap.md` — закрыт 05.10 10:31: подсказка компаса вниз, «суппер! Ты починил».
 - 🔧 `bugs/19_vibepollo_stale_golden_snapshot.md` — Vibepollo: снимок экрана переписан под текущий экран, ждёт проверки
   концом сессии стрима.
 - 🔧 `bugs/15_svarog_whitish_world_against_low_sun.md` — белёсость земли против солнца: причина (блик стандартного шейдера)
