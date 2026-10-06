@@ -149,6 +149,9 @@ try {
   check('no stamp: phrases_add.py batch refused', run('--gate', bash('$PY tools/phrases_add.py "D:/Games/x" b.txt')), 2);
   check('no stamp: items_xunity.py --add refused', run('--gate', bash('$PY tools/items_xunity.py "D:/Games/x" --add b.tsv')), 2);
   check('control: items_xunity.py without --add (regeneration) passes', run('--gate', bash('$PY tools/items_xunity.py "D:/Games/x"')), 0);
+  check('no stamp: Write notes_ru.tsv refused', run('--gate', write('D:/work/ai_sandbox/SvarogsDream/translation/notes_ru.tsv')), 2);
+  check('no stamp: notes_xunity.py --add refused', run('--gate', bash('$PY tools/notes_xunity.py "D:/Games/x" --add b.tsv')), 2);
+  check('control: notes_xunity.py without --add (regeneration) passes', run('--gate', bash('$PY tools/notes_xunity.py "D:/Games/x"')), 0);
   check('control: a foreign file passes', run('--gate', write('D:/work/ai_sandbox/KUMM/STATUS.md')), 0);
   check('control: editing STYLE.md itself passes', run('--gate', write(STYLE)), 0);
   check('control: Read of another file leaves no stamp', (run('--mark', { tool_name: 'Read', tool_input: { file_path: tr } }), statSync(STAMP, { throwIfNoEntry: false }) ? 'stamp' : 'none'), 'none');

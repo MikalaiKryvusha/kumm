@@ -8,7 +8,8 @@
 //   --mark  (PostToolUse, matcher Read): агент прочёл файл методички инструментом Read → метка-файл --stamp обновляется.
 //   --gate  (PreToolUse, matcher Write|Edit|Bash): действие пишет перевод — Write/Edit файла перевода сборки
 //           (`translation/*_ru.tsv`, `translation/glossary*.tsv`, `translation/help_ru.py`, `_config/xunity/zz_*.txt`)
-//           или Bash вызывает инструмент партий (`phrases_add.py`, `items_xunity.py … --add`, `spells_ru_add.py`, `help_ru.py`).
+//           или Bash вызывает инструмент партий (`phrases_add.py`, `items_xunity.py … --add`, `notes_xunity.py … --add`,
+//           `spells_ru_add.py`, `help_ru.py`).
 //           Пускает, только если метка свежее последней правки методички и не старше --max минут (правило часа из канона
 //           KAIF: через час прочитанное уходит из рабочего контекста). Иначе — код 2 и указание прочесть.
 // Сама методичка (STYLE.md) правится без метки: правка правил — не перевод.
@@ -23,8 +24,12 @@
 //                 чужие файлы и команды → 0; Read методички ставит метку
 // GAP:            Read — не понимание: хук доказывает, что файл был открыт, а не что правило применено; правка перевода
 //                 мимо перечисленных путей и инструментов (новый генератор) хук не видит — добавлять в PATHS / TOOLS
+//                 (так было с notes_xunity.py до 2026-10-06 16:12 — случай части E краснел, пока его не внесли); черновик
+//                 перевода в чате или в scratchpad хук не видит вовсе — останавливается только запись в файлы сборки
 // ON-REAL-PATH:   2026-10-06 15:28 +03:00 — в живой сессии: Bash с «phrases_add.py» без чтения → остановлен (код 2, текст
-//                 агенту); Read STYLE.md → метка 15:28; тот же Bash → прошёл
+//                 агенту); Read STYLE.md → метка 15:28; тот же Bash → прошёл. 2026-10-06 ≈16:01 — новая сессия: тот же
+//                 замер остановлен по причине «методичка менялась после последнего чтения» (метка 15:41, правка 15:49);
+//                 после Read — прошёл; партия notes_xunity.py --add прошла при свежей метке
 import { readFileSync, statSync, writeFileSync } from 'node:fs';
 
 const args = process.argv.slice(2);
@@ -40,7 +45,7 @@ const PATHS = [
   /svarogsdream\/translation\/glossary[^/]*\.tsv$/,
   /svarogsdream\/_config\/xunity\/zz_[^/]*\.txt$/,
 ];
-const TOOLS = [/phrases_add\.py/, /items_xunity\.py[^\n]*--add/, /spells_ru_add\.py/, /help_ru\.py/];
+const TOOLS = [/phrases_add\.py/, /items_xunity\.py[^\n]*--add/, /notes_xunity\.py[^\n]*--add/, /spells_ru_add\.py/, /help_ru\.py/];
 const mtime = (p) => { try { return statSync(p).mtimeMs; } catch { return -1; } };
 
 try {
