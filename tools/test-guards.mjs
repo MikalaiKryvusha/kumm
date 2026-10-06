@@ -5,17 +5,18 @@
 //
 //   node tools/test-guards.mjs          # из корня репозитория; код 0 — все случаи как ожидалось, 1 — нет
 //
-// Четыре части:
+// Пять частей (E — хук методички перевода, 2026-10-06):
 //   A. tools/hooks/no-backslash-heredoc.mjs — события PreToolUse, собранные в JS (ни одна оболочка не трогает слэши);
 //   B. tools/check-claim-before-evidence.mjs в режиме файлов;
 //   C. он же в режиме --staged, в одноразовых git-репозиториях;
-//   D. tools/hooks/pre-commit целиком в одноразовом репозитории: коммит из переименования с выдуманным штампом.
+//   D. tools/hooks/pre-commit целиком в одноразовом репозитории: коммит из переименования с выдуманным штампом;
+//   E. tools/hooks/style-gate.mjs — запись перевода без прочитанной методички (метка во временном каталоге).
 // Временные каталоги создаются в системном temp и убираются ПЕРЕЧИСЛЕНИЕМ: сначала каждый файл, потом пустые
 // каталоги снизу вверх — рекурсивное удаление одной командой в этом проекте запрещено правилом владельца.
 // Это гигиена стражей (самопроверка прибора), а не функциональный прогон: функциональные прогоны — настоящий
 // коммит и настоящий вызов Bash — описаны в отчётах testcases/reports/.
 import { spawnSync, execFileSync } from 'node:child_process';
-import { mkdtempSync, writeFileSync, mkdirSync, readdirSync, statSync, unlinkSync, rmdirSync, copyFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, mkdirSync, readdirSync, statSync, unlinkSync, rmdirSync, copyFileSync, utimesSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -128,6 +129,37 @@ try {
   // A crash is a failed case, never a silent absence of cases (the first old-version run crashed here and printed
   // no summary line at all).
   check('part D ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
+}
+
+// ---------- E. the style-gate hook: translation is written only after the methodology was read (owner 2026-10-06)
+console.log('E. style-gate');
+try {
+  const E = newTmp();
+  const STYLE = join(E, 'SvarogsDream', 'translation', 'STYLE.md'), STAMP = join(E, 'style.stamp');
+  mkdirSync(join(E, 'SvarogsDream', 'translation'), { recursive: true });
+  writeFileSync(STYLE, 'rules' + NL);
+  const SG = resolve(ROOT, 'tools/hooks/style-gate.mjs');
+  const run = (mode, ev, max) => spawnSync(process.execPath, [SG, mode, '--style', STYLE, '--stamp', STAMP, ...(max ? ['--max', max] : [])],
+    { input: JSON.stringify(ev), encoding: 'utf8' }).status;
+  const tr = 'D:/work/ai_sandbox/SvarogsDream/translation/items_ru.tsv';
+  const write = (p) => ({ tool_name: 'Write', tool_input: { file_path: p } });
+  const bash = (c) => ({ tool_name: 'Bash', tool_input: { command: c } });
+  check('no stamp: Write items_ru.tsv refused', run('--gate', write(tr)), 2);
+  check('no stamp: Edit zz_krinik.txt (backslash path) refused', run('--gate', { tool_name: 'Edit', tool_input: { file_path: 'D:' + BS + 'work' + BS + 'SvarogsDream' + BS + '_config' + BS + 'xunity' + BS + 'zz_krinik.txt' } }), 2);
+  check('no stamp: phrases_add.py batch refused', run('--gate', bash('$PY tools/phrases_add.py "D:/Games/x" b.txt')), 2);
+  check('no stamp: items_xunity.py --add refused', run('--gate', bash('$PY tools/items_xunity.py "D:/Games/x" --add b.tsv')), 2);
+  check('control: items_xunity.py without --add (regeneration) passes', run('--gate', bash('$PY tools/items_xunity.py "D:/Games/x"')), 0);
+  check('control: a foreign file passes', run('--gate', write('D:/work/ai_sandbox/KUMM/STATUS.md')), 0);
+  check('control: editing STYLE.md itself passes', run('--gate', write(STYLE)), 0);
+  check('control: Read of another file leaves no stamp', (run('--mark', { tool_name: 'Read', tool_input: { file_path: tr } }), statSync(STAMP, { throwIfNoEntry: false }) ? 'stamp' : 'none'), 'none');
+  run('--mark', { tool_name: 'Read', tool_input: { file_path: STYLE.split('/').join(BS) } });
+  check('Read of STYLE.md sets the stamp', statSync(STAMP, { throwIfNoEntry: false }) ? 'stamp' : 'none', 'stamp');
+  check('fresh stamp: Write items_ru.tsv passes', run('--gate', write(tr)), 0);
+  check('stamp older than --max refused', run('--gate', write(tr), '-1'), 2);
+  const later = new Date(Date.now() + 5000); utimesSync(STYLE, later, later);
+  check('STYLE.md changed after reading: refused', run('--gate', write(tr)), 2);
+} catch (e) {
+  check('part E ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
 
 for (const d of tmps) { try { removeByEnumeration(d); } catch (e) { console.log(`note: temp left at ${d} (${e.code || e.message})`); } }

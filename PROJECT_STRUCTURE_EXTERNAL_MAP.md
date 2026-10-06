@@ -55,7 +55,8 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 | `tools/kaif-update-sweep.mjs` | After any `/kaif-update` pass: compares every deployed framework file with the NEW release bundle and names upstream lines that did not reach the disk. Exit 0 clean · 1 lines named · 2 could not read. Born from origin #72. | two `KAIF-CORE-BUNDLE.md` files (old, new) |
 | `tools/check-claim-before-evidence.mjs` | Second gate of `tools/hooks/pre-commit`: refuses a today-dated stamp ahead of the clock and a dated `[TESTED:` marker without an existing run report. | `testcases/reports/` |
 | `tools/hooks/no-backslash-heredoc.mjs` | Claude Code `PreToolUse` hook on Bash: refuses a heredoc body with a backslash (it is eaten on this machine). Wired in the local, git-ignored `.claude/settings.local.json`. | — |
-| `tools/test-guards.mjs` | Self-test of the two guards above: 36 cases, throwaway git repos in the OS temp, cleaned file by file. | the two guards, `tools/hooks/pre-commit` |
+| `tools/hooks/style-gate.mjs` | Claude Code hook pair: reading `SvarogsDream/translation/STYLE.md` is stamped (`--mark`), writing translation without a fresh reading is refused (`--gate`). Wired in the local `.claude/settings.local.json`. | `SvarogsDream/translation/STYLE.md` |
+| `tools/test-guards.mjs` | Self-test of the guards above: 48 cases, throwaway git repos in the OS temp, cleaned file by file. | the guards, `tools/hooks/pre-commit` |
 | `testcases/reports/` | One report per EXECUTED run, seven fields; judged by `node .kaif/tools/kaif-testrun-lint.mjs check`. | `.kaif/_testrun-report-template.md` |
 | `mods/`, `*.log`, `node_modules/` | Gitignored. The archive library never enters this repo. | — |
 
