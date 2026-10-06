@@ -43,5 +43,5 @@ quality side measured on 2026-10-06.
 2. **Our dictionary is the source of truth**: `zz_krinik.txt` grows from the audit, generators own their blocks, the audit runs
    after every translation change (stubs → 0, terms → 0 by the glossary). Already started.
 3. **Every fix is looked at in the game** (frame) — a translation fix is a layout change (ms0).
-4. **Title Case** — keep or switch to sentence case (Russian norm): the owner's decision; one regex pass either way.
+4. **Title Case** — keep or switch to sentence case (Russian norm). `[AI]` the choice is left to the owner; one regex pass either way.
 5. Later: route B from `README.md` § 3 (rewrite code literals with Mono.Cecil) for the 1 538 code strings.
