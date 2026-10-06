@@ -42,7 +42,9 @@ const opt = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[
 const DIR = opt('--dir');
 const STAMP = opt('--stamp');
 const RUNS = [/deploy-hot\.sh/, /run-game\.sh/];
-const CASE_ROW = /^\|\s*C\d+\s*\|.*$/gm;
+// Строки случаев — C1… и контрольные K1…: итог контрольного прогона — тоже итог (v2 считал только C — записанный K1 не открыл
+// следующий прогон, 2026-10-06 22:08).
+const CASE_ROW = /^\|\s*[CK]\d+\s*\|.*$/gm;
 // Статус — последняя непустая ячейка строки случая: «[NOT-TESTED]», «fail — …» ждут прогона; «pass — …», «blocked», «skipped» — нет.
 const statusOf = (row) => { const cells = row.split('|').map((c) => c.trim()).filter(Boolean); return cells[cells.length - 1] || ''; };
 const waiting = (row) => { const s = statusOf(row); return /\[NOT-TESTED\]/.test(s) || /^fail\b/i.test(s); };

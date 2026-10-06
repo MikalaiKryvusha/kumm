@@ -212,6 +212,11 @@ try {
   check('result recorded (fail waits for the rerun): passes', run(DEPLOY), 0);
   tc(['| C1 | open → seen | state | pass — shot a |', '| C2 | hover → gold | state | pass — shot c |', '| C3 | close → gone | state | [NOT-TESTED] |']);
   check('result recorded and a new case added: passes', run(DEPLOY), 0);
+  // Контрольный случай — тоже строка таблицы: записанный итог K1 открывает следующий прогон (22:08 v2 его не видел).
+  tc(['| C1 | open → seen | state | pass — shot a |', '| C2 | hover → gold | state | pass — shot c |', '| C3 | close → gone | state | fail — shot d |', '| K1 | flag off → absent | control | [NOT-TESTED] |']);
+  check('a control case written: passes', run(DEPLOY), 0);
+  tc(['| C1 | open → seen | state | pass — shot a |', '| C2 | hover → gold | state | pass — shot c |', '| C3 | close → gone | state | fail — shot d |', '| K1 | flag off → absent | control | pass — shot e |']);
+  check('only the control result recorded: passes', run(DEPLOY), 0);
 } catch (e) {
   check('part F ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
