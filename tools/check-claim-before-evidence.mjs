@@ -93,8 +93,13 @@ function judge(file, lines) {
   lines.forEach(({ no, text }, i) => {
     if (text.includes(OK_MARK)) return;
     for (const m of text.matchAll(STAMP)) {
-      if (`${m[1]}-${m[2]}-${m[3]}` !== TODAY) continue;
-      if (stampEpoch(m) > now) findings.push(`${file}:${no} — штамп «${m[0]}» впереди часов (сейчас ${NOW_HM})`);
+      // Со смещением («Z», «+03:00») «сегодня» — по МЕСТНОЙ дате этого момента, не по написанной: с 00:00 до 03:00 по Москве
+      // дата в UTC ещё вчерашняя, и будущий «…Z» проходил мимо (самопроверка future-z-fraction покраснела в ночь на 2026-10-07, до 00:45 по часам).
+      const ep = stampEpoch(m);
+      const de = new Date(ep);
+      const day = m[7] ? `${de.getFullYear()}-${pad(de.getMonth() + 1)}-${pad(de.getDate())}` : `${m[1]}-${m[2]}-${m[3]}`;
+      if (day !== TODAY) continue;
+      if (ep > now) findings.push(`${file}:${no} — штамп «${m[0]}» впереди часов (сейчас ${NOW_HM})`);
     }
     // Рыхлые формы (2026-10-06: «2026-10-06, между 17:26 и 17:31», «2026-10-06 ≈16:40», «≈16:40», «между 16:33 и 16:40» —
     // все вписаны раньше своих часов, и правило выше их не узнавало): время после СЕГОДНЯШНЕЙ даты на той же строке (до
