@@ -80,6 +80,20 @@
 
 ## Entries
 
+### EXP-0144 · 2026-10-06 · ❌→✅ · #svarogsdream #ui #unity #harmony #ordering #owner-eye
+class: twins-missed
+**Context:** плавное скрытие пузыря речи (`PatchYellFadeOut`) откладывает `YellHandler.CloseCanvas` игры на секунду угасания.
+**Tried / did:** прошлая сессия чинила пропавший значок над жителем веткой `OnDisable` — по догадке, без кода игры.
+**Result:** ❌ значок пропадал снова. ✅ код игры (`Fluent/YellHandler.cs:77`) ищет значок на каждой фразе `GetComponentInChildren`,
+который выключенных не видит; отложенное закрытие фразы 1 оставляло значок спрятанным к началу фразы 2 — возвращать было нечего.
+**Lesson:** **откладывая функцию игры, прочитай, кто идёт за ней следом и что он ищет: перенос по времени меняет порядок, а
+`GetComponentInChildren`/`Find` без `includeInactive` молча теряют спрятанное.** Перед новой фразой — выполнить отложенное
+сразу. Проверка «фича или баг»: включить объект пультом и посмотреть, снимает ли его сама игра.
+**Repro:** разговор с RockSeller → «Уйти» → `findall RandomConversationMark` через 12 с — `(off)` до `c98a907`.
+**Trigger:** патч Harmony, который задерживает или пропускает метод игры (Prefix → false).
+**Not for:** крючки Postfix, не меняющие порядок вызовов.
+mechanized: none — шаг «прочитать код игры по `acs/` до правки» стоит в досье
+
 ### EXP-0143 · 2026-10-06 · ❌→✅ · #svarogsdream #ui #unity #tmp #layout #translation #recon
 class: guide-on-shelf-unread
 **Context:** свой пузырь речи по тексту (`KrinikUIRework/BubbleBox.cs`): плашка — по размеру реплики.
