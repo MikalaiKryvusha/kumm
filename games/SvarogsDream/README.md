@@ -17,12 +17,19 @@ KrinikUIRework` (RELOADED) · кадр — `shot` пишет JPEG, `h.sh` сам
 голосом (`tools/voice_say.py`, файл фразы — в `SvarogsDream/_harness/`) · сменил значение по умолчанию — правь и
 `BepInEx/config/krinik.svarogsdream.*.cfg`. Слоты сумки: #0 сапоги, #2 лук, #7 удочка, #46 кольца, #47 туника.
 Пособие по вёрстке Unity UI + TMP — `researches/unity-ugui-layout/` (греп по `TAG:`; ловушки — `12_pitfalls.md`).
+`h.sh` без игры отвечает «game not running» (код 2). Разговор с жителем — методом игры, не мышью: `comps Interactable 8` (пути,
+расстояние, точка экрана) → `callon "<путь>" Interactable Interact True` (EXP-0155). Записка на экран её же байтами —
+`call CookingManager ShowPoetry "<текст с \r\n>" False False`, поле текста `UI/ActionBar/ActionBarMain/UIRecipe/Poetry/PoetryMessage`.
 
 ## Шрифт Manrope
 
 `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode -nographics -quit -projectPath SvarogsDream/unity/KrinikShaders
   -executeMethod KrinikFonts.Build` → скопировать `Bundles/krinik_manrope` и `Bundles/ttf/krinik_manrope_ttf` в папку игры; в новом
   клоне сначала `python tools/unpack_unitypackage.py "<PackageCache>/com.unity.textmeshpro@3.0.6/Package Resources/TMP Essential Resources.unitypackage" unity/KrinikShaders`.
+- **Шрифт мудрости Gabriela** (06.10) — тот же проект, `-executeMethod KrinikFonts.BuildWisdom` → `Bundles/wisdom/krinik_gabriela` в папку
+  игры; настройка `Fonts.Wisdom`. Граница — кто говорит: бумага мира (журнал «События», описание квеста, легенда альманаха, окно
+  записки, новости `WorldEvents`, совет загрузки) — Gabriela; интерфейс, подсказки обучения `GameTips`, карточки, диалоги — Manrope.
+  Правило — `IsPaper` в `KrinikUIRework/Fonts.cs`; метка `KrinikLetter` для этого не годится (стоит и на диалогах).
 
 ## Перевод — свой, по глоссарию
 

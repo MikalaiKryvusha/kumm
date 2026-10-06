@@ -32,8 +32,8 @@ accumulated — сейв владельца с журналом из 39 запи
 | 7 | 2026-10-06 18:09–18:10 +03:00 | `deploy-hot.sh KrinikUIRework` ×3; `ShowPoetry` указ и «#29»; `active …/WorldEvents/66-ChaosEvent 1`, `active …/GameTips/9-Combat 1` | записка и новость — Gabriela, подсказка обучения — Manrope |
 | 8 | 2026-10-06 18:11 и 18:12 +03:00 | перезапуск, `continue`, `shot gab_load2` / после пометки совета `shot gab_load3` | до правки совет Manrope, после — Gabriela |
 | 9 | 2026-10-06 18:13 +03:00 | журнал (стих), квест, альманах (Фракции), Помощь — `shot fin_*`; `h.sh "kill"`; `tasklist` → 0 | итоговый проход на последней сборке |
-| 11 | 2026-10-06 18:17–18:18 +03:00 | `run-game.sh`; `mouse.ps1 -X 1500 -Y 1700 -Button left` (герой не пошёл); `callon "…Humans/[25]Mercenary2" Interactable Interact True`; `click Dialogue/ChatCanvas/MainDialogue/KrinikLeave`; `callon "…Animals/Cinematic/Cow (2)" Interactable Interact True`; `kill`, `tasklist` → 0 | разговор наёмника открыт (машинный перевод — файл не наш); пузырь коровы «Му-у-у-у» — наш ключ |
 | 10 | 2026-10-06 17:59 +03:00 | `bash tools/h.sh "kill"` при закрытой игре | `game not running`, код 2, 0,5 с (до правки — 180 с ожидания) |
+| 11 | 2026-10-06 18:17–18:18 +03:00 | `run-game.sh`; `mouse.ps1 -X 1500 -Y 1700 -Button left` (герой не пошёл); `callon "…Humans/[25]Mercenary2" Interactable Interact True`; `click Dialogue/ChatCanvas/MainDialogue/KrinikLeave`; `callon "…Animals/Cinematic/Cow (2)" Interactable Interact True`; `kill`, `tasklist` → 0 | разговор наёмника открыт (машинный перевод — файл не наш); пузырь коровы «Му-у-у-у» — наш ключ |
 
 ## 4. Checks
 
@@ -72,7 +72,8 @@ Functional run: игра владельца, его сейв, окна откр�
 
 ## 6. Traces
 
-`SvarogsDream/gallery/game/2026-10-06_шрифт-мудрости/в-игре/` (12 кадров WebP, README); `SvarogsDream/_harness/ver_*.webp`,
+`SvarogsDream/gallery/game/2026-10-06_шрифт-мудрости/в-игре/` (15 кадров WebP и ключ листа размеров; README — в папке выше;
+галерея вне git по замыслу); `SvarogsDream/_harness/ver_*.webp`,
 `ver_logs.txt`, `ver_logs_body.txt`; журнал игры `BepInEx/LogOutput.log` (строка `letters: 176 paper windows`).
 
 ## 7. Verdict
