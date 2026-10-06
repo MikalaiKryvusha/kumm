@@ -17,6 +17,10 @@
   HouseOfFaithForge, UnderWorldForge, HouseOfCoinForge, AncientForge, Divine) — ковка играет роль редкости.
 - Случайно только **качество** 1–8 (`NPCEquipment`, `HumanModelSelector`: `Random.Range(1, 4)` броня, `(1, 5)` оружие,
   до 8 у сапог); качество масштабирует статы формулами `ItemStats.Get*(quality)` (урон +5 % за уровень и т. п.).
+- **Свойства зашиты в тип, не в экземпляр** (ответ владельцу ≈15:22): `new Item(ItemObject)` копирует ССЫЛКУ на общий
+  `itemStats` — у всех «Боевых Топоров» один объект статов; ячейка `InventorySlot` хранит только `item`, `amount`,
+  `quality`, `isTradedItem`. Под аффиксы нужно своё хранилище свойств экземпляра — рядом с ячейкой и в сохранении — и
+  подмена чтения статов (`ItemStats.Get*`) на сумму базы и аффиксов.
 - Имя предмета в подсказке — `item.data.Name` как есть (`GameUI.ItemToolTip`); аффиксы потребуют своего имени экземпляра —
   и своего перевода частей имени (префикс/суффикс по-русски с согласованием рода).
 - Таблица всех предметов — `SvarogsDream/translation/items_en.tsv` (`tools/items_extract.py`).
