@@ -33,9 +33,11 @@
 //                 a directory argument, a content line `++ `, a non-ASCII file name, a report on disk but not in the
 //                 commit, and the rename — the holes an independent judge found; plus a real commit of a probe file
 //                 in this repository refused by the first version (still covered: the rules only widened)
-// GAP:            штамп в прошлом, набранный наугад, не виден по построению; штамп без даты («в 18:35») и дата ДД.ММ
+// GAP:            штамп в прошлом, набранный наугад, не виден по построению; голое время без «≈»/«между» («в 18:35») и дата ДД.ММ
 //                 не видны; отметка без даты и числа в прозе («121 строка») не видны — это держит судья; правило 2
 //                 проверяет, что отчёт ЕСТЬ в коммите, а не что он про этот прогон
+// (2026-10-06 ≈17:30: + рыхлые формы — время после сегодняшней даты, «≈ЧЧ:ММ», «между ЧЧ:ММ и ЧЧ:ММ»; часть B, 6 случаев,
+//                 красные на прежней версии; пропускало «2026-10-06, между 17:26 и 17:31» из идеи 12) claim-ok: цитата промаха
 // ON-REAL-PATH:   tools/hooks/pre-commit этого репозитория, 2026-09-18 — коммит пробного файла остановлен первой
 //                 версией; вторая версия подключена в тот же хук, её отказ на настоящем пути показан в одноразовом
 //                 репозитории с этим же хуком (набор, часть D)
@@ -49,6 +51,9 @@ const CR = String.fromCharCode(13);
 const LF = String.fromCharCode(10);
 const STAMP = /(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(?:\s*(Z|[+-]\d{2}:?\d{2})(?![\d:]))?/g;
 const TESTED = /\[TESTED:\s*\d{4}-\d{2}-\d{2}/;
+const DATE = /\d{4}-\d{2}-\d{2}/g;
+const HM = /(?<![\d:])([01]?\d|2[0-3]):([0-5]\d)(?![\d:])/g;
+const LOOSE = /≈\s*\d{1,2}:\d{2}|между\s+\d{1,2}:\d{2}\s+и\s+\d{1,2}:\d{2}/g;
 const REPORT = /testcases\/reports\/[^\s\]`'"»)]+\.md/g;
 const OK_MARK = 'claim-ok';
 const FRAMEWORK = /^(\.kaif|\.claude|\.agents|\.grok|\.cline|\.roo)\//;
@@ -90,6 +95,28 @@ function judge(file, lines) {
     for (const m of text.matchAll(STAMP)) {
       if (`${m[1]}-${m[2]}-${m[3]}` !== TODAY) continue;
       if (stampEpoch(m) > now) findings.push(`${file}:${no} — штамп «${m[0]}» впереди часов (сейчас ${NOW_HM})`);
+    }
+    // Рыхлые формы (2026-10-06: «2026-10-06, между 17:26 и 17:31», «2026-10-06 ≈16:40», «≈16:40», «между 16:33 и 16:40» —
+    // все вписаны раньше своих часов, и правило выше их не узнавало): время после СЕГОДНЯШНЕЙ даты на той же строке (до
+    // следующей даты) и, на строке без даты, время после «≈» или внутри «между … и …».
+    const dates = [...text.matchAll(DATE)];
+    const late = (h, mi) => +h * 60 + +mi > d0.getHours() * 60 + d0.getMinutes();
+    dates.forEach((d, k) => {
+      if (d[0] !== TODAY) return;
+      const tail = text.slice(d.index + d[0].length, k + 1 < dates.length ? dates[k + 1].index : undefined);
+      if (/^[ T]\d{2}:\d{2}/.test(tail)) return;   // слитная форма — её судит правило выше
+      for (const t of tail.matchAll(HM)) if (late(t[1], t[2])) findings.push(`${file}:${no} — время «${t[0]}» после сегодняшней даты впереди часов (сейчас ${NOW_HM})`);
+    });
+    // Голое время — продолжение абзаца, дата которого стоит строкой выше: другой день в пяти строках выше — не сегодня.
+    let near = null;
+    for (let k = i - 1; k >= Math.max(0, i - MARKER_SPAN) && lines[k].no === no - (i - k) && near === null; k--) {
+      const ds = [...lines[k].text.matchAll(DATE)];
+      if (ds.length) near = ds[ds.length - 1][0];
+    }
+    if (!dates.length && (near === null || near === TODAY)) {
+      for (const t of text.matchAll(LOOSE)) {
+        for (const h of t[0].matchAll(HM)) if (late(h[1], h[2])) findings.push(`${file}:${no} — время «${t[0].trim()}» впереди часов (сейчас ${NOW_HM})`);
+      }
     }
     if (TESTED.test(text)) {
       let span = '';

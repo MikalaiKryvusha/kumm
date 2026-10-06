@@ -81,6 +81,17 @@ guardFile('marker-no-report.md', `// [TESTED: 2026-09-18 · ran it]${NL}`, 1);  
 guardFile('marker-missing-report.md', `// [TESTED: 2026-09-18 · see testcases/reports/2099-01-01_nope.md]${NL}`, 1);  // claim-ok: a test fixture that is broken on purpose
 guardFile('marker-no-space.md', `// [TESTED:2026-09-18 · ran it]${NL}`, 1);  // claim-ok: a test fixture that is broken on purpose
 guardFile('controls.md', `closed ${PAST}${NL}planned ${TOMORROW}${NL}prose: a [TESTED] marker${NL}call ${FUT} claim-ok: a planned call${NL}`, 0);
+// 2026-10-06: the agent wrote «2026-10-06, между 17:26 и 17:31», «2026-10-06 ≈16:40», «между 16:33 и 16:40» at 17:28 / 16:36 — claim-ok: quoting the misses
+// the guard knew only the glued form «YYYY-MM-DD HH:MM» and stayed green; these cases were red against that version
+const [TODAY_D, FUT_HM, PAST_HM] = [FUT.slice(0, 10), FUT.slice(11, 16), PAST.slice(11, 16)];
+guardFile('future-after-date-window.md', `said ${TODAY_D}, между ${PAST_HM} и ${FUT_HM}${NL}`, 1);
+guardFile('future-after-date-approx.md', `opened ${TODAY_D} ≈${FUT_HM}${NL}`, 1);
+guardFile('future-bare-approx.md', `opened ≈${FUT_HM}${NL}`, 1);
+guardFile('future-bare-window.md', `said между ${PAST_HM} и ${FUT_HM}${NL}`, 1);
+guardFile('controls-loose-times.md', `opened ≈${PAST_HM}${NL}said между ${PAST_HM} и ${PAST_HM}${NL}meeting at ${FUT_HM}${NL}${TOMORROW.slice(0, 10)} ≈${FUT_HM}${NL}`, 0);
+// a paragraph about another day: its date stands on the line above, the bare «≈HH:MM» continues it (STATUS.md, 2026-10-05 ≈20:27)
+guardFile('control-bare-time-other-day-above.md', `note 2000-01-01 morning,${NL}word · ≈${FUT_HM}${NL}`, 0);
+guardFile('bare-time-today-above.md', `note ${TODAY_D} evening,${NL}word · ≈${FUT_HM}${NL}`, 1);
 guardFile('marker-report-next-line.md', `// [TESTED: 2026-09-18 · see${NL}//  ${EXISTING_REPORT}]${NL}`, 0);  // claim-ok: a test fixture; its report path is a variable in this source
 check('a directory as the argument', spawnSync(process.execPath, [GUARD, B], { encoding: 'utf8' }).status, 2);
 check('a missing file', spawnSync(process.execPath, [GUARD, join(B, 'nope.md')], { encoding: 'utf8' }).status, 2);
