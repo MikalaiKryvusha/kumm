@@ -183,6 +183,26 @@ try {
   check('part E ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
 
+// ---------- F. the testcase-gate hook: a run in the game only after test cases are written (owner 2026-10-06 ≈21:25)
+console.log('F. testcase-gate');
+try {
+  const F = newTmp();
+  const TG = resolve(ROOT, 'tools/hooks/testcase-gate.mjs');
+  const run = (cmd, max) => spawnSync(process.execPath, [TG, '--gate', '--dir', F, ...(max ? ['--max', max] : [])],
+    { input: JSON.stringify({ tool_name: 'Bash', tool_input: { command: cmd } }), encoding: 'utf8' }).status;
+  check('no TC document: deploy-hot.sh refused', run('bash tools/deploy-hot.sh KrinikUIRework'), 2);
+  check('no TC document: run-game.sh refused', run('timeout 300 bash tools/run-game.sh'), 2);
+  check('control: a pult shot without a TC document passes', run('bash tools/h.sh "shot x"'), 0);
+  check('control: a foreign command passes', run('git status'), 0);
+  writeFileSync(join(F, 'TC_x.md'), '# Test cases' + NL + 'no table yet' + NL);
+  check('TC document without a case table: refused', run('bash tools/deploy-hot.sh KrinikUIRework'), 2);
+  writeFileSync(join(F, 'TC_x.md'), '# Test cases' + NL + '| # | Case | Technique | Status |' + NL + '| C1 | open → seen | state | [NOT-TESTED] |' + NL);
+  check('fresh TC document with cases: deploy-hot.sh passes', run('bash tools/deploy-hot.sh KrinikUIRework'), 0);
+  check('TC document older than --max: refused', run('bash tools/deploy-hot.sh KrinikUIRework', '-1'), 2);
+} catch (e) {
+  check('part F ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
+}
+
 for (const d of tmps) { try { removeByEnumeration(d); } catch (e) { console.log(`note: temp left at ${d} (${e.code || e.message})`); } }
 console.log(`-- ${total - bad} of ${total} as expected`);
 process.exit(bad ? 1 : 0);

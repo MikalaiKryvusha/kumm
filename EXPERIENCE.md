@@ -56,7 +56,7 @@
 > <!-- classes: question-already-answered, guard-not-proven-against-threat, shown-as-link,
 >      claim-before-evidence, owner-decision-not-applied, text-in-agents-world,
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
->      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed -->
+>      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -79,6 +79,19 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0156 · 2026-10-06 · ❌→✅ · #testing #process #kaif #svarogsdream #harness
+class: cases-after-run
+**Context:** вечер прогонов окна персонажа Svarog's Dream (≈30 сборок, кадры, отчёт) — 20:12–21:24.
+**Tried / did:** гонял игру и снимал кадры, отчёт `testcases/reports/…` написал после, таблицу случаев в нём — задним числом.
+**Result:** ❌ `[OWNER]` «Ты тест кейсы пишешь, как КАИФ обязывает?» · ≈21:25 — нет: документа `testcases/TC_*.md` до прогона не было,
+набора по техникам и названных дыр — тоже. ✅ документ `TC_svarog_character_window_cards.md`, контрольный случай K1 прогнан;
+хук `testcase-gate.mjs` не пускает прогон без свежего документа случаев (проверен в живой сессии).
+**Lesson:** **прогон в игре — по случаям, написанным до него; отчёт после прогона не заменяет тест-кейсы.**
+**Repro:** `echo run-game.sh` при документе TC старше 90 мин → хук останавливает команду.
+**Trigger:** любая сборка с выкладкой или запуск игры для проверки.
+**Not for:** кадр по ходу работы пультом в уже запущенной игре.
+mechanized: tools/hooks/testcase-gate.mjs
 
 ### EXP-0155 · 2026-10-06 · ❌→✅ · #svarogsdream #harness #dialogue #input
 class: proxy-path-blocked
