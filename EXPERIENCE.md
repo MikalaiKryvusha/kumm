@@ -56,7 +56,7 @@
 > <!-- classes: question-already-answered, guard-not-proven-against-threat, shown-as-link,
 >      claim-before-evidence, owner-decision-not-applied, text-in-agents-world,
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
->      field-dropped-in-rebuild, tool-silent-refusal -->
+>      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -79,6 +79,23 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0150 · 2026-10-06 · ❌→✅ · #svarogsdream #translation #census #recon
+class: census-from-observed
+**Context:** очередь перевода Сварога строилась по машинному словарю XUnity — по строкам, которые прежний переводчик успел
+увидеть в игре; онлайн-перевод выключен.
+**Tried / did:** вынул базу предметов игры (`ItemDatabaseObject`, UnityPy; 166 из 721 читаются только без проверки длины схемы) и
+сверил каждое имя и описание со словарём.
+**Result:** ❌ по словарю дыр не было видно: 335 из 721 имени и 95 описаний в нём не было вовсе — в игре они шли бы
+по-английски, а отчёт качества их не видел. ✅ таблица из базы → свой перевод 720/721 + 295/295, генератор печатает покрытие.
+**Lesson:** **охват перевода считается по ИСТОЧНИКУ игры (её базам данных), а не по словарю увиденного — словарь показывает,
+что криво, но молчит о том, чего нет.** Счёт сверять с самой базой (721 ссылка = 721 строка таблицы), иначе тихо теряется
+четверть (схема UnityPy короче данных → ValueError → «не предмет»).
+**Repro:** `<python> tools/items_extract.py "<игра>" translation/items_en.tsv` (печатает items 721) →
+`<python> tools/items_xunity.py "<игра>"` (печатает names N/721 · descriptions N/295).
+**Trigger:** любая база текста в игре с XUnity (предметы, умения, квесты, Альманах) — сначала вынуть базу, потом переводить.
+**Not for:** текст, который игра собирает на лету из кусков (там шаблон, EXP-0149).
+mechanized: SvarogsDream/tools/items_xunity.py (покрытие по базе при каждой выкладке)
 
 ### EXP-0149 · 2026-10-06 · ❌→✅ · #svarogsdream #translation #xunity #regex #recon
 class: template-not-instance
