@@ -137,9 +137,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > `[NOT-TESTED]` в TC и записанный итог прошлого прогона (хук `testcase-gate` v2.1); правка кода модов интерфейса — после чтения
 > `SvarogsDream/docs/UI_RULEBOOK.md` целиком (хук `ui-gate`; §0 «Философия прекрасного», §10а «Семь классов просьб» — искать самому).
 > Игру, в которой владелец, не закрывать (память `dont-kill-game-owner-is-in`).
-> **Ждёт владельца:** З — интервью `interviews/interview_006_svarog_relations_badge.md` («?» у «Отношений»: подсказка или значение);
-> Г — порядок в настройках главного меню (кадр `SvarogsDream/_harness/owner_settings.webp`, семь бед 21:33); баг 20 — щёлкнуть мышью по
-> жителю при открытом окне персонажа (пультом не проверить: щелчок до мира не доходит, п. 3); вкус — лист HUD рукописным
+> **Ждёт владельца:** Г — порядок в настройках главного меню (кадр `SvarogsDream/_harness/owner_settings.webp`, семь бед 21:33); вкус — лист HUD рукописным
 > (`SvarogsDream/gallery/game/2026-10-06_hud-рукописный/было-стало.webp`, вне git), тексты Единого Бога и Световида (`zz_krinik.txt`, блок
 > «Преданность»), окно настроек модов, подвал «Мастерства», бумага записки (лист `SvarogsDream/_harness/note_sheet.webp`).
 > Д. Дальше по эпику 14 — диалоги: выгрузка «Путь недеяния» 2 и 3 готова (scratchpad прошлого чата пропал — заново `dialogue_batch.py dump`).
@@ -166,7 +164,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 >    не доходила — причина не разобрана.
 > 4. **Эпитафия героя** — фаза 4 эпика 14, свой сбор модом (род по полу героя, таблица падежей ~90 убийц), принято владельцем;
 >    сейчас в журнале машинная («Управляемый духом для дней 4»).
-> 5. **Хвосты Сварога:** баг 20 (щелчок по жителю сквозь меню — мышью владельца); идея 12 (жители замечают героя) — теория,
+> 5. **Хвосты Сварога:** идея 12 (жители замечают героя) — теория,
 >    ждёт «да» владельца; ideas/07 «увидел агент сам» — открыты окно предмета (описание мастерской обрезано) и сравнение
 >    (колонки под рамкой) — не перепроверены. После серии горячих перезагрузок межстрочный подсказок был выше (648 против
 >    464 ≈ 1.2²; `[AI]` гипотеза — множитель копится, не проверена) — вкус подсказок судить после чистого перезапуска игры (C45).
@@ -177,7 +175,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    Шейдер пересобирается: `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode -nographics -quit -projectPath
    SvarogsDream/unity/KrinikShaders -executeMethod KrinikBuild.Bundles` (≈30 с).
 0. **Svarog's Dream — переработка UI** — план и статусы `ideas/07_svarog_mods.md`; рулбук `SvarogsDream/docs/UI_RULEBOOK.md`
-   ждёт «да» владельца; тикет `bugs/20`. Пути пульта: `click UI/Enablers/InfoPanel` · `UI/InfoPanel/InfoPanelHeader/<Map|Quests|
+   ждёт «да» владельца. Пути пульта: `click UI/Enablers/InfoPanel` · `UI/InfoPanel/InfoPanelHeader/<Map|Quests|
    Progress|Logs|Almanac|Help>Header` · `click UI/Enablers/CharacterPanel` · `UI/CharacterPanel/CharacterPanelHeader/<Devotion|
    Attributes|Mastery>Header`. Полный прежний текст пункта — летопись, запись 2026-10-06 14:29.
 1. **Конан на 2.2.3 — хвосты переезда.** Досье, раздел «✅ 2026-10-02»: графика на 4K — глазом владельца,
@@ -202,7 +200,6 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 Одиннадцать файлов без метки DONE (сверено 04.10 23:38 по `ls bugs`, плюс 18 и 19; 16 и 17 закрыты в этот вечер):
 
-- 🔧 `bugs/20_svarog_world_click_through_open_menu.md` — щелчок по жителю сквозь открытое меню: щит за окном (`2ae0d4e`), ждёт проверки мышью владельца.
 - 🔧 `bugs/15_svarog_whitish_world_against_low_sun.md` — белёсость земли против солнца: причина (блик стандартного шейдера)
   подтверждена, свой матовый шейдер в моде 2.1.0, прогон pass, 0.6 принято владельцем («да, 0.6 хорошо, оставляем» ·
   ≈10:22); до DONE — увидеть подмену земли при ходьбе.
