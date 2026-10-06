@@ -18,6 +18,12 @@ KrinikUIRework` (RELOADED) · кадр — `shot` пишет JPEG, `h.sh` сам
 `BepInEx/config/krinik.svarogsdream.*.cfg`. Слоты сумки: #0 сапоги, #2 лук, #7 удочка, #46 кольца, #47 туника.
 Пособие по вёрстке Unity UI + TMP — `researches/unity-ugui-layout/` (греп по `TAG:`; ловушки — `12_pitfalls.md`).
 
+## Шрифт Manrope
+
+`E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode -nographics -quit -projectPath SvarogsDream/unity/KrinikShaders
+  -executeMethod KrinikFonts.Build` → скопировать `Bundles/krinik_manrope` и `Bundles/ttf/krinik_manrope_ttf` в папку игры; в новом
+  клоне сначала `python tools/unpack_unitypackage.py "<PackageCache>/com.unity.textmeshpro@3.0.6/Package Resources/TMP Essential Resources.unitypackage" unity/KrinikShaders`.
+
 ## Замер кадра
 
 - Пульт: `perf [сек]` (FPS, счётчики отрисовки, живые значки, персонажи, аниматоры, частицы), `prof [сек] [N]`

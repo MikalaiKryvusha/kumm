@@ -1,5 +1,13 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-06 10:17 +03:00 — стрижка STATUS при мягком закрытии (перенесено из STATUS дословно)
+
+### «Open bugs» — закрытые
+
+- ✅ `bugs/18_DONE_svarog_minimap_tooltip_overlap.md` — закрыт 05.10 11:07: подсказка компаса вниз, «суппер! Ты починил».
+- ✅ `bugs/19_DONE_vibepollo_stale_golden_snapshot.md` — закрыт 06.10 08:06: владелец отключился при выключенном телевизоре,
+  помощник вернул 4K (`success=true`). Экран мерить только DPI-aware (EXP-0145).
+
 ## 2026-10-06 09:53 +03:00 — стрижка STATUS при мягком закрытии (перенесено из STATUS дословно)
 
 ### «What's done» — дословно
