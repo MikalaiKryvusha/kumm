@@ -188,17 +188,30 @@ console.log('F. testcase-gate');
 try {
   const F = newTmp();
   const TG = resolve(ROOT, 'tools/hooks/testcase-gate.mjs');
-  const run = (cmd, max) => spawnSync(process.execPath, [TG, '--gate', '--dir', F, ...(max ? ['--max', max] : [])],
+  // v2 (2026-10-06 ≈21:50, «ужесточай хук»): ждущий случай обязателен; между прогонами таблица случаев обязана измениться.
+  const STAMP = join(F, 'stamp.json');
+  const run = (cmd) => spawnSync(process.execPath, [TG, '--gate', '--dir', F, '--stamp', STAMP],
     { input: JSON.stringify({ tool_name: 'Bash', tool_input: { command: cmd } }), encoding: 'utf8' }).status;
-  check('no TC document: deploy-hot.sh refused', run('bash tools/deploy-hot.sh KrinikUIRework'), 2);
+  const DEPLOY = 'bash tools/deploy-hot.sh KrinikUIRework';
+  const HEAD = '# Test cases' + NL + '| # | Case | Technique | Status |' + NL;
+  const tc = (rows) => writeFileSync(join(F, 'TC_x.md'), HEAD + rows.join(NL) + NL);
+  check('no TC document: deploy-hot.sh refused', run(DEPLOY), 2);
   check('no TC document: run-game.sh refused', run('timeout 300 bash tools/run-game.sh'), 2);
   check('control: a pult shot without a TC document passes', run('bash tools/h.sh "shot x"'), 0);
   check('control: a foreign command passes', run('git status'), 0);
   writeFileSync(join(F, 'TC_x.md'), '# Test cases' + NL + 'no table yet' + NL);
-  check('TC document without a case table: refused', run('bash tools/deploy-hot.sh KrinikUIRework'), 2);
-  writeFileSync(join(F, 'TC_x.md'), '# Test cases' + NL + '| # | Case | Technique | Status |' + NL + '| C1 | open → seen | state | [NOT-TESTED] |' + NL);
-  check('fresh TC document with cases: deploy-hot.sh passes', run('bash tools/deploy-hot.sh KrinikUIRework'), 0);
-  check('TC document older than --max: refused', run('bash tools/deploy-hot.sh KrinikUIRework', '-1'), 2);
+  check('TC document without a case table: refused', run(DEPLOY), 2);
+  tc(['| C1 | open → seen | state | pass — shot a |']);
+  check('all cases already passed (nothing written for this change): refused', run(DEPLOY), 2);
+  tc(['| C1 | open → seen | state | pass — shot a |', '| C2 | hover → gold | state | [NOT-TESTED] |']);
+  check('a case waiting for its run: deploy-hot.sh passes', run(DEPLOY), 0);
+  check('second run with the case table unchanged: refused', run(DEPLOY), 2);
+  const later = new Date(Date.now() + 5000); utimesSync(join(F, 'TC_x.md'), later, later);
+  check('file touched, rows unchanged: refused', run(DEPLOY), 2);
+  tc(['| C1 | open → seen | state | pass — shot a |', '| C2 | hover → gold | state | fail — still grey, shot b |']);
+  check('result recorded (fail waits for the rerun): passes', run(DEPLOY), 0);
+  tc(['| C1 | open → seen | state | pass — shot a |', '| C2 | hover → gold | state | pass — shot c |', '| C3 | close → gone | state | [NOT-TESTED] |']);
+  check('result recorded and a new case added: passes', run(DEPLOY), 0);
 } catch (e) {
   check('part F ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }

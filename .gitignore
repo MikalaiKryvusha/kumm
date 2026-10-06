@@ -38,3 +38,4 @@ researches/unity-cli/skill/
 
 # Сборка заплаток GTA SA (build.cmd без аргумента кладёт сюда .asi/.obj) — бинарники в репозиторий не идут
 games/GTASanAndreas/*/out/
+testcases/.gate-stamp.json
