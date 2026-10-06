@@ -129,8 +129,9 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **Открыто по «Мастерству» (C-случаи — `testcases/TC_svarog_owner_batch_2026-10-06_evening.md`):** поп-ап «?» души — узкая подложка левее,
-> текст одной строкой вылезает на карточку дерева (`SvarogsDream/_harness/v_hover.webp`); описание класса (LongDescription) остаётся
+> **Открыто по «Мастерству» (C-случаи — `testcases/TC_svarog_owner_batch_2026-10-06_evening.md`):** шкала и деревья — левый конец
+> полосы на краю экрана, у всех 14 одинаково (C73–C74, слово владельца); «?» души — своей подсказкой KrinikTip, починен (C75,
+> `e30186f`; другие «?» подвала — по тому же пути); описание класса (LongDescription) остаётся
 > на экране, когда курсор ушёл с имени (наблюдение, `v_skill_s.webp`); C63 (пары карточки «Гнев Перуна» в одну строку) и C60
 > (имена богов по схеме подсветки) — в игре не проверены. Прогон «Мастерства» 00:35–00:45 без отчёта в `testcases/reports/` —
 > метки кода `[NOT-TESTED]`. `zz_glossary.txt` генерируется `glossary_fix.py`, а строку 599 («{{A}} −») я правил скриптом — сверить
