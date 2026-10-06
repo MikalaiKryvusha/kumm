@@ -137,7 +137,7 @@ try {
   const E = newTmp();
   const STYLE = join(E, 'SvarogsDream', 'translation', 'STYLE.md'), STAMP = join(E, 'style.stamp');
   mkdirSync(join(E, 'SvarogsDream', 'translation'), { recursive: true });
-  writeFileSync(STYLE, 'rules' + NL);
+  writeFileSync(STYLE, Array.from({ length: 30 }, (_, i) => 'rule ' + i).join(NL) + NL);   // 30 lines: an excerpt (limit 20) is shorter than the file
   const SG = resolve(ROOT, 'tools/hooks/style-gate.mjs');
   const run = (mode, ev, max) => spawnSync(process.execPath, [SG, mode, '--style', STYLE, '--stamp', STAMP, ...(max ? ['--max', max] : [])],
     { input: JSON.stringify(ev), encoding: 'utf8' }).status;
@@ -158,6 +158,10 @@ try {
   check('control: a foreign file passes', run('--gate', write('D:/work/ai_sandbox/KUMM/STATUS.md')), 0);
   check('control: editing STYLE.md itself passes', run('--gate', write(STYLE)), 0);
   check('control: Read of another file leaves no stamp', (run('--mark', { tool_name: 'Read', tool_input: { file_path: tr } }), statSync(STAMP, { throwIfNoEntry: false }) ? 'stamp' : 'none'), 'none');
+  run('--mark', { tool_name: 'Read', tool_input: { file_path: STYLE, offset: 1, limit: 20 } });
+  check('Read of a STYLE.md excerpt (limit shorter than the file) leaves no stamp', statSync(STAMP, { throwIfNoEntry: false }) ? 'stamp' : 'none', 'none');
+  run('--mark', { tool_name: 'Read', tool_input: { file_path: STYLE, offset: 5 } });
+  check('Read of STYLE.md from the middle (offset) leaves no stamp', statSync(STAMP, { throwIfNoEntry: false }) ? 'stamp' : 'none', 'none');
   run('--mark', { tool_name: 'Read', tool_input: { file_path: STYLE.split('/').join(BS) } });
   check('Read of STYLE.md sets the stamp', statSync(STAMP, { throwIfNoEntry: false }) ? 'stamp' : 'none', 'stamp');
   check('fresh stamp: Write items_ru.tsv passes', run('--gate', write(tr)), 0);
