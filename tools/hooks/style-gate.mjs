@@ -50,6 +50,15 @@ const PATHS = [
 const TOOLS = [/phrases_add\.py/, /items_xunity\.py[^\n]*--add/, /notes_xunity\.py[^\n]*--add/,
   /dialogue_xunity\.py[^\n]*--(add|adopt)/, /spells_ru_add\.py/, /help_ru\.py/];
 const mtime = (p) => { try { return statSync(p).mtimeMs; } catch { return -1; } };
+// Тот же хук держит и другой документ: --paths <regex> (по нормализованному пути) заменяет пути перевода, инструменты партий тогда не
+// судятся; --label и --reason — имя и слово владельца в отказе. Второе применение — руководство интерфейса Svarog: код мода
+// интерфейса правится только по прочитанной философии прекрасного (`[OWNER]` «это тоже в руководства запиши и в ХУК - когда делаешь
+// UI, руководствоваться этой философией прекрасного» · 2026-10-06 ≈22:35). Обобщено, а не скопировано: одна машина — одна копия.
+const PATHS_OPT = opt('--paths');
+const LABEL = opt('--label', 'style-gate');
+const REASON = opt('--reason', 'Правило владельца 2026-10-06: «чтение методички - обязательством в хук делаем».');
+const GATED = PATHS_OPT ? [new RegExp(PATHS_OPT)] : PATHS;
+const GATED_TOOLS = PATHS_OPT ? [] : TOOLS;
 
 try {
   if (!MODE || !STYLE || !STAMP) process.exit(0);
@@ -70,21 +79,21 @@ try {
   let writes = false;
   if (tool === 'Write' || tool === 'Edit') {
     const p = norm(input.file_path);
-    writes = p !== norm(STYLE) && PATHS.some((rx) => rx.test(p));
+    writes = p !== norm(STYLE) && GATED.some((rx) => rx.test(p));
   } else if (tool === 'Bash') {
-    writes = TOOLS.some((rx) => rx.test(String(input.command || '')));
+    writes = GATED_TOOLS.some((rx) => rx.test(String(input.command || '')));
   }
   if (!writes) process.exit(0);
 
   const read = mtime(STAMP), changed = mtime(STYLE);
   const ageMin = (Date.now() - read) / 60000;
   let why = '';
-  if (read < 0) why = 'методичка в этой работе ещё не прочитана';
-  else if (changed > read) why = 'методичка менялась после последнего чтения';
-  else if (ageMin > MAX_MIN) why = `методичка прочитана ${Math.round(ageMin)} мин назад — больше ${MAX_MIN}`;
+  if (read < 0) why = 'документ в этой работе ещё не прочитан';
+  else if (changed > read) why = 'документ менялся после последнего чтения';
+  else if (ageMin > MAX_MIN) why = `документ прочитан ${Math.round(ageMin)} мин назад — больше ${MAX_MIN}`;
   if (!why) process.exit(0);
-  process.stderr.write(`style-gate: перевод пишется по методичке, а ${why}. Прочти её инструментом Read целиком: ${STYLE} ` +
-    `— и повтори действие. (Правило владельца 2026-10-06: «чтение методички - обязательством в хук делаем».)\n`);
+  process.stderr.write(`${LABEL}: эта работа пишется по документу, а ${why}. Прочти его инструментом Read целиком: ${STYLE} ` +
+    `— и повтори действие. (${REASON})\n`);
   process.exit(2);
 } catch {
   process.exit(0);

@@ -179,6 +179,23 @@ try {
   check('stamp older than --max refused', run('--gate', write(tr), '-1'), 2);
   const later = new Date(Date.now() + 5000); utimesSync(STYLE, later, later);
   check('STYLE.md changed after reading: refused', run('--gate', write(tr)), 2);
+
+  // E2. Тот же хук — руководство интерфейса (--paths): код мода интерфейса правится по прочитанной философии прекрасного (≈22:35).
+  const RB = join(E, 'UI_RULEBOOK.md'), RS = join(E, 'ui.stamp');
+  writeFileSync(RB, 'philosophy' + NL);
+  const PATHS_UI = 'svarogsdream/src/krinik(uirework|modmenu)/[^/]*' + BS + '.cs$';
+  const ui = (mode, ev) => spawnSync(process.execPath, [SG, mode, '--style', RB, '--stamp', RS, '--paths', PATHS_UI, '--label', 'ui-gate'],
+    { input: JSON.stringify(ev), encoding: 'utf8' });
+  const cs = 'D:/work/ai_sandbox/SvarogsDream/src/KrinikUIRework/DevotionCards.cs';
+  const r1 = ui('--gate', write(cs));
+  check('ui: no reading: Edit of a UI mod file refused', r1.status, 2);
+  check('ui: the refusal names its label', /^ui-gate:/.test(r1.stderr) ? 'ui-gate' : r1.stderr.slice(0, 20), 'ui-gate');
+  check('ui: no reading: Write in KrinikModMenu refused', ui('--gate', write('D:/work/ai_sandbox/SvarogsDream/src/KrinikModMenu/Plugin.cs')).status, 2);
+  check('ui control: a translation file is not this gate', ui('--gate', write(tr)).status, 0);
+  check('ui control: a translation batch command is not this gate', ui('--gate', bash('$PY tools/phrases_add.py x b.txt')).status, 0);
+  check('ui control: another mod passes', ui('--gate', write('D:/work/ai_sandbox/SvarogsDream/src/KrinikCameraRework/Plugin.cs')).status, 0);
+  ui('--mark', { tool_name: 'Read', tool_input: { file_path: RB } });
+  check('ui: after reading the rulebook the Edit passes', ui('--gate', write(cs)).status, 0);
 } catch (e) {
   check('part E ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
