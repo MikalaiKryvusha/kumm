@@ -79,3 +79,23 @@ Achieve: после конца любой сессии стрима экран �
   рядом), даёт поведение, которое владелец уже выбрал настройкой `dd_always_restore_from_golden = true`.
 - `[AI]` HDR в снимке — «on», как в старом снимке и как помощник восстанавливает после сессии.
 - Сторож разрешения (`SvarogsDream/tools/ensure-4k.ps1`) удалён по слову владельца, в git он не попадал.
+
+## ✅ STATUS: DONE (2026-10-06 08:06 +03:00)
+
+Проверка по критерию, по просьбе владельца: `[OWNER]` «проверь, чтобы вайбполо корректно работал и возвращал 4К при отключении» ·
+«отключаюсь, телик выключен. проверяй» · 2026-10-06 ≈08:02–08:05.
+
+Hygiene: нет (правки кода не было; снимок переписан 2026-10-05).
+Functional run: настоящая сессия стрима владельца, его отключение при выключенном телевизоре; прочитаны журнал помощника и
+состояние экранов после отключения.
+
+- Журнал `%APPDATA%\Sunshine\logs\sunshine_display_helper-20261006-080424-702.log`: 08:05:22 `received Revert command` →
+  08:05:31 `recovery operation completed, success=true, has_snapshot=true` → `RecoveryValidation -> Waiting (status: Ok)`;
+  строк «golden snapshot remains pending» нет.
+- 08:05:45 `Win32_VideoController`: NVIDIA GeForce RTX 5070 Ti 3840×2160 @144, виртуальные адаптеры (SudoMaker, Sunshine) без
+  режима; 08:05:59 DPI-aware `Screen.AllScreens`: `\\.\DISPLAY1 3840x2160 primary=True`.
+- Ловушка проверки: процесс без `SetProcessDPIAware` при масштабе 300 % видит тот же 4K как 1280×720 — запись экранов
+  08:03–08:05 (`Screen.AllScreens` без DPI) поэтому «не видела» возврата. Проба — только DPI-aware (EXP-0145).
+
+REAL WORLD: accumulated — установка Vibepollo владельца с переписанным снимком; data and machine — его машина и телевизор;
+path — его отключение от стрима. Проверено на реальном мире.

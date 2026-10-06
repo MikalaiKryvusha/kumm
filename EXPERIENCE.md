@@ -80,6 +80,19 @@
 
 ## Entries
 
+### EXP-0145 · 2026-10-06 · ❌→✅ · #display #dpi #vibepollo #probe #windows
+class: shell-lied
+**Context:** проверка бага 19 — вернул ли Vibepollo телевизор 4K после отключения владельца.
+**Tried / did:** запись `[System.Windows.Forms.Screen]::AllScreens` каждые 5 с из PowerShell.
+**Result:** ❌ запись показывала `DISPLAY1 1280x720` и после успешного возврата. ✅ драйвер (`Win32_VideoController`) — 3840×2160
+@144; та же проба с `SetProcessDPIAware` — `3840x2160`. Масштаб рабочего стола 300 %: 3840 / 3 = 1280.
+**Lesson:** **размер экрана меряется DPI-aware процессом или по `Win32_VideoController`; без DPI-awareness при 300 % 4K выглядит
+как 1280×720 — и это не виртуальный экран.**
+**Repro:** без `SetProcessDPIAware` и с ним — `Screen.AllScreens` в одном сеансе: 1280x720 против 3840x2160.
+**Trigger:** любая проба разрешения экрана на этой машине.
+**Not for:** кадр игры — `shot` пульта пишет кадр в размере рендера игры, он от масштаба не зависит.
+mechanized: none — строка в досье окружения `AGENT_GUIDE.md` («Display at probe time»)
+
 ### EXP-0144 · 2026-10-06 · ❌→✅ · #svarogsdream #ui #unity #harmony #ordering #owner-eye
 class: twins-missed
 **Context:** плавное скрытие пузыря речи (`PatchYellFadeOut`) откладывает `YellHandler.CloseCanvas` игры на секунду угасания.

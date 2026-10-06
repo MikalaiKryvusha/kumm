@@ -168,9 +168,7 @@ RockSeller пропадал после разговора — наш баг (ф�
    канон мода — рулбук `SvarogsDream/docs/UI_RULEBOOK.md`, черновик агента, ждёт «да» владельца).
    Значки в мире — `Icons.cs` (`ideas/09`): один размер на кадр от приближения камеры, вблизи +30% (кадром не проверено),
    жители и станции — строго сверху, предметы и травы — вверх-влево; настройки — раздел «Icons» в меню модов.
-   Тикеты: `bugs/18` (подсказка мини-карты), `bugs/19` (Vibepollo: проверить на конце следующей сессии стрима — в
-   журнале помощника `%APPDATA%\Sunshine\logs\sunshine_display_helper-*.log` строка `success=true` без «golden snapshot
-   remains pending»). Лист обхода — `SvarogsDream/gallery/game/2026-10-04_вкладки-меню/index.html`. Пути пульта:
+   Тикеты: `bugs/20` (щелчок сквозь меню). Лист обхода — `SvarogsDream/gallery/game/2026-10-04_вкладки-меню/index.html`. Пути пульта:
    `click UI/Enablers/InfoPanel` · вкладки `UI/InfoPanel/InfoPanelHeader/<Map|Quests|Progress|Logs|Almanac|Help>Header` ·
    `click UI/Enablers/CharacterPanel` · `UI/CharacterPanel/CharacterPanelHeader/<Devotion|Attributes|Mastery>Header`.
    Замеры: `tools/contrast.py` (WCAG) и `tools/textrows.py` (высота строк). Реплика героя по требованию —
@@ -204,8 +202,9 @@ RockSeller пропадал после разговора — наш баг (ф�
 Одиннадцать файлов без метки DONE (сверено 04.10 23:38 по `ls bugs`, плюс 18 и 19; 16 и 17 закрыты в этот вечер):
 
 - ✅ `bugs/18_DONE_svarog_minimap_tooltip_overlap.md` — закрыт 05.10 11:07: подсказка компаса вниз, «суппер! Ты починил».
-- 🔧 `bugs/19_vibepollo_stale_golden_snapshot.md` — Vibepollo: снимок экрана переписан под текущий экран, ждёт проверки
-  концом сессии стрима.
+- ✅ `bugs/19_DONE_vibepollo_stale_golden_snapshot.md` — закрыт 06.10 08:06: владелец отключился при выключенном телевизоре,
+  помощник вернул 4K (`success=true`). Экран мерить только DPI-aware (EXP-0145).
+- 🔴 `bugs/20_svarog_world_click_through_open_menu.md` — щелчок по жителю сквозь открытое меню начинает разговор.
 - 🔧 `bugs/15_svarog_whitish_world_against_low_sun.md` — белёсость земли против солнца: причина (блик стандартного шейдера)
   подтверждена, свой матовый шейдер в моде 2.1.0, прогон pass, 0.6 принято владельцем («да, 0.6 хорошо, оставляем» ·
   ≈10:22); до DONE — увидеть подмену земли при ходьбе.
