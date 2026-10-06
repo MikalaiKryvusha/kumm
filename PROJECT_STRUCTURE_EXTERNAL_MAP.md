@@ -56,7 +56,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 | `tools/check-claim-before-evidence.mjs` | Second gate of `tools/hooks/pre-commit`: refuses a today-dated stamp ahead of the clock and a dated `[TESTED:` marker without an existing run report. | `testcases/reports/` |
 | `tools/hooks/no-backslash-heredoc.mjs` | Claude Code `PreToolUse` hook on Bash: refuses a heredoc body with a backslash (it is eaten on this machine). Wired in the local, git-ignored `.claude/settings.local.json`. | — |
 | `tools/hooks/style-gate.mjs` | Claude Code hook pair: reading `SvarogsDream/translation/STYLE.md` is stamped (`--mark`), writing translation without a fresh reading is refused (`--gate`). Wired in the local `.claude/settings.local.json`. | `SvarogsDream/translation/STYLE.md` |
-| `tools/test-guards.mjs` | Self-test of the guards above: 51 cases, throwaway git repos in the OS temp, cleaned file by file. | the guards, `tools/hooks/pre-commit` |
+| `tools/test-guards.mjs` | Self-test of the guards above: 54 cases, throwaway git repos in the OS temp, cleaned file by file. | the guards, `tools/hooks/pre-commit` |
 | `testcases/reports/` | One report per EXECUTED run, seven fields; judged by `node .kaif/tools/kaif-testrun-lint.mjs check`. | `.kaif/_testrun-report-template.md` |
 | `mods/`, `*.log`, `node_modules/` | Gitignored. The archive library never enters this repo. | — |
 

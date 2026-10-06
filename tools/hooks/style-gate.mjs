@@ -9,7 +9,7 @@
 //   --gate  (PreToolUse, matcher Write|Edit|Bash): действие пишет перевод — Write/Edit файла перевода сборки
 //           (`translation/*_ru.tsv`, `translation/glossary*.tsv`, `translation/help_ru.py`, `_config/xunity/zz_*.txt`)
 //           или Bash вызывает инструмент партий (`phrases_add.py`, `items_xunity.py … --add`, `notes_xunity.py … --add`,
-//           `spells_ru_add.py`, `help_ru.py`).
+//           `dialogue_xunity.py … --add | --adopt`, `spells_ru_add.py`, `help_ru.py`).
 //           Пускает, только если метка свежее последней правки методички и не старше --max минут (правило часа из канона
 //           KAIF: через час прочитанное уходит из рабочего контекста). Иначе — код 2 и указание прочесть.
 // Сама методичка (STYLE.md) правится без метки: правка правил — не перевод.
@@ -45,7 +45,8 @@ const PATHS = [
   /svarogsdream\/translation\/glossary[^/]*\.tsv$/,
   /svarogsdream\/_config\/xunity\/zz_[^/]*\.txt$/,
 ];
-const TOOLS = [/phrases_add\.py/, /items_xunity\.py[^\n]*--add/, /notes_xunity\.py[^\n]*--add/, /spells_ru_add\.py/, /help_ru\.py/];
+const TOOLS = [/phrases_add\.py/, /items_xunity\.py[^\n]*--add/, /notes_xunity\.py[^\n]*--add/,
+  /dialogue_xunity\.py[^\n]*--(add|adopt)/, /spells_ru_add\.py/, /help_ru\.py/];
 const mtime = (p) => { try { return statSync(p).mtimeMs; } catch { return -1; } };
 
 try {
