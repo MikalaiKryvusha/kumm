@@ -1633,3 +1633,29 @@ Delegate names of `BP_TimeManager` counted in each manager's UAssetGUI JSON (ref
 ## Game clock calibration (live, 2026-10-08 01:23, Oxbow)
 
 `BP_VillageManager:OnMinuteUpdate` (zond v2): call #1 at 01:23:35, #10 at 01:23:53 → **1 game minute = 2 real seconds; 1 game hour = 120 s; 1 game day = 48 min real** (at the save's default time speed). The earlier «silent minute hook» (v1, logged every 60th call, watched ~110 s) was a false alarm — corrected here. `OnTimeUpdate` = 10 Hz real-time timer. Mod's hourly world tick → every 60th `OnMinuteUpdate`.
+
+## How the game freezes far villagers — the optimization ladder (offline bytecode + live, 2026-10-08 01:38–01:41, Oxbow)
+
+**Lever found: one float per villager — `BP_BoostComponent.ActiveRadius` (default 12000 cm = 120 m).**
+
+- Every character carries `BP_BoostComponent` (`Content/Blueprints/Components/`). A looping timer (`RunOptimizationLogic` → `K2_SetTimer("DistanceCheckForDisplayNPC", 0.3–0.5 s)`) calls `CalculateDistanceForDisplay(Close, Medium, Far, Active radius × GetCurrentViewDistanceScale)` and writes `OptimizationStage` 0–4.
+- CDO radii: **Close 15 m · Medium 35 m · Far 60 m · Active 120 m**. Stage 4 = beyond `ActiveRadius` → multicast `DeactivateNPC`.
+- `BP_NPC` reacts with `ChangeDisabledOptimization(true)`: pauses `FallingTimerHandle` and `CheckUnderTheMapTimer`, `SetActorTickEnabled(false)`, `UnregisterNavigationInvoker`, and on the server `NavigationInvoker.SetActive(false)` + tick off. The `false` branch reverses it: unpause timers, actor tick interval `GetTickInterval_OutOfSight_Movement`, `AI_ResetNavInvoker`, nav-invoker tick interval.
+- `GetOptimalizationStage` is declared on `BP_BaseCharacter` (hero, NPCs, animals share it) and reads `BP_BoostComponent.OptimizationStage`; not native (absent from exe and PDB).
+- Tick intervals are randomized per NPC (Base 0.031–0.035 s, Close 0.042–0.046, Medium 0.064–0.068, Far 0.098–0.102 on PC; console old-gen gets shorter ranges) — the game already staggers its villagers so they don't all tick on one frame.
+- **View distance matters:** radii are multiplied by `GetCurrentViewDistanceScale` — the player's graphics «view distance» setting widens or narrows the living circle.
+
+Live (bridge v7 `stages`, hero at home on Oxbow):
+
+| Class | Stage | Count | Tick on | Distance to hero, m (avg [min…max]) |
+|---|---|---|---|---|
+| `BP_NPC_Multi_Village_C` | 4 | 97 | 0 | 801 [445…1468] |
+| `BP_NPC_C` | 0 | 6 | 6 | 525 [8…3097] |
+| `BP_NPC_C` | 1 | 12 | 12 | 25 [16…34] |
+| `BP_NPC_C` | 2 | 15 | 15 | 44 [9…57] |
+| `BP_NPC_C` | 3 | 44 | 44 | 55 [20…110] |
+| `BP_NPC_C` | 4 | 107 | 2 | 777 [130…1468] |
+
+Border between stage 3 and 4 is clean (110 m vs 130 m), matching `ActiveRadius` 120 m. Stages 1–3 overlap (9–110 m) — the stage lags the distance by one timer period and the radii are scaled by view distance. **Open:** the six stage-0 NPCs up to 3 km away (never optimized — likely `IsBoostEnabled` false: waggoners? quest NPCs?) and the two stage-4 NPCs with tick on.
+
+**For the epic:** waking far villagers is not a rewrite — raise `ActiveRadius` (all, or only for villagers the world server is «playing» right now) and the game's own AI resumes. The price is their tick (Far interval ≈0.1 s each) — measure before choosing between «wake them all» and «bridge moves records, actors wake near the hero». Writing the property is an ACTION (EXP-0059): its own test case and run.
