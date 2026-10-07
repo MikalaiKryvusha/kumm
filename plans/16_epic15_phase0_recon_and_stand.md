@@ -40,7 +40,7 @@ Every run leaves a report in `testcases/reports/` (`TESTING_FRAMEWORK.md`); case
 
 Each step quotes its anchor in the epic («…»).
 
-- [ ] **0.1 Bridge mod** — anchor: «**Пульт** | файловый мост команд (как ConsoleBridge Palworld, EXP-0020)». Port
+- [~] **0.1 Bridge mod** — written 2026-10-08: pack `_unpacked/KrinikBridge` v1 (read-only: `where`, `count`, `get`), manifest entry, stand `tools/test-bridge.lua` 11/11 green + mutant red (hygiene); NOT run in the game, not deployed — anchor: «**Пульт** | файловый мост команд (как ConsoleBridge Palworld, EXP-0020)». Port
   `D:\work\ai_sandbox\Palworld\_unpacked\ConsoleBridge\Scripts\main.lua` into the pack repo as `mods/KrinikBridge/`
   (game-thread timer `ExecuteInGameThreadWithDelay`, re-armed at the END of processing — EXP-0020); commands: `?time`,
   `census`, `find <class>`, `get <object> <prop>`, `call <object> <func>`. Read-only commands first (EXP-0059: recon asks
