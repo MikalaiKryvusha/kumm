@@ -44,8 +44,9 @@ Functional run: игра и сейв владельца, `wake-out.txt` и `out.
   чтение пути `AI_GetPaths`/`AI_GetPathsPoint`; у blackboard — `SetBlackboardValues_MultiState` (4 = «Go to Location»).
   Проверять отдельным кейсом.
 - **Рядом нашлось:** таблицы распорядка `DT_Multi_Village_*SeasonsBehavior` (по сезонам) и вызов
-  `AIMulti_ChangeBehavior(NewBehaviorDT)` — жителю можно сменить распорядок целиком. Для «Рейнджеров» эпика это готовый
-  рычаг профессии.
+  `AIMulti_ChangeBehavior(NewBehaviorDT)`. ~~Жителю можно сменить распорядок целиком; для «Рейнджеров» это готовый рычаг
+  профессии.~~ **Поправка 2026-10-08 02:18 (байткод `SetActivitiesBySeason`):** имя выбирает одну из трёх таблиц, а
+  строку игра ищет по собственному `ID` жителя — чужой распорядок так не дать; рычагом профессии это не является.
 
 ## 6. Traces
 

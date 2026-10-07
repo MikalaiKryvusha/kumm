@@ -39,8 +39,9 @@ Functional run: игра и сейв владельца, `wake-out.txt`. C1, C4 
   (`BP_RelationsComponent.WorkPlaceReference`, трассировки, отдельная ветка для пещер). Это вспомогательный путь задач
   распорядка, а не команда «иди туда»: дерево поведения дальше снова ставит состояние по распорядку.
 - **Остаётся прямой рычаг дерева:** blackboard контроллера — `MultiState` = 4 («Go to Location») и `TargetLocation`.
-  Если служба `BTService_SetMultiNPCAIState` перезаписывает состояние каждый такт, придётся менять распорядок
-  (`AIMulti_ChangeBehavior`) или держать состояние модом.
+  Если служба `BTService_SetMultiNPCAIState` перезаписывает состояние каждый такт, придётся менять распорядок (запись
+  занятия в копию `ActivitiesBySeason`; `AIMulti_ChangeBehavior` для этого не годится — поправка 02:18 в
+  `game-internals.md`) или держать состояние модом.
 
 ## 6. Traces
 
