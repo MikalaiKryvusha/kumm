@@ -139,7 +139,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > «Преданность»), окно настроек модов, подвал «Мастерства», бумага записки (лист `SvarogsDream/_harness/note_sheet.webp`).
 > 1. **Ждёт слова владельца (спросить первым):** (а) кегль Gabriela в журнале «События» — лист `SvarogsDream/gallery/game/
 >    2026-10-06_шрифт-мудрости/в-игре/размер_журнала_АБВ.webp` (А 60 · Б 66 · В 72, ключ рядом), правка — `Fonts.cs`/`Pages.cs`;
->    (б) имена: все принятые стоят в `translation/glossary.tsv` с цитатой владельца; ждущих нет. Новое имя из партии — сразу владельцу
+>    (б) имена: все принятые стоят в `translation/glossary.tsv` с цитатой владельца; ждут слова: Lagertha → Лагерта, Giran → Гиран
+>    (ложные ответы двойнику, `FaceStealerConversation`; показаны в чате 07.10 вечером). Новое имя из партии — сразу владельцу
 >    табличкой «английский | русский | где», после «да» — в глоссарий. Маска-клад: баг-репорт на форуме Steam
 >    (steamcommunity.com/app/2004640/discussions/0/581684470096116760/) — проверить ответ разработчика (lynxbird); починит сам —
 >    снять галочку `Fixes.MaskPayout` мода `KrinikFixes`; (в) термины машинных строк вне записок: категория журнала «Прокрутка»
@@ -148,8 +149,9 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 >    (д) вкус окна персонажа (кадры `SvarogsDream/gallery/game/2026-10-06_разметка-шрифта/после/`): раскладка «список —
 >    подробности» в «Атрибутах», подписи карточек `[AI]` «Боги», «Святыни», «Равновесие мира»; дальше тем же языком — большое окно
 >    «Карта · Квесты · …» и инвентарь. Не видено: курсор над компасом мышью, «Посвятить» при уровне ≥ 10.
-> 2. **Диалоги дальше** — эпик `plans/14_EPIC_svarog_dialogues_translation.md`, фаза 2: **6799/7731, файлов 266/353** (07.10 17:04);
->    осталось 932 строки в 87 файлах, сборные `{Words.…}` и подстановки — фаза 3. Партия, по шагам (`$PY` =
+> 2. **Диалоги дальше** — эпик `plans/14_EPIC_svarog_dialogues_translation.md`, фаза 2: **7567/8021, файлов 284/353** (07.10 20:27;
+>    перепись выросла с 7731 — баг 22, реплики с говорящим `Yell(Veles, "…")`); осталось 454 в 69 файлах: боги в Ирии
+>    `GodsIriyIntroduction` (78 новых), `PantehonOfOakLastConversation` (44), жена Йована в начале игры; сборные `{Words.…}` и подстановки — фаза 3. Партия, по шагам (`$PY` =
 >    `/d/work/ai_sandbox/_tools/unitypy-venv/Scripts/python.exe`, в нём `pymorphy3`):
 >    1. `STYLE.md` прочитать ЦЕЛИКОМ (хук `style-gate`, окно 60 мин и после каждой правки методички).
 >    2. Код файла: `ilspycmd -t <Класс> "<игра>/Svarog's Dream_Data/Managed/Assembly-CSharp.dll"` (`_tools/ilspycmd`) — что игра делает с
@@ -162,8 +164,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 >       `$PY -I tools/translation_quality.py "<игра>" translation/glossary.tsv translation/quality_report.md` и `grep zz_dialogue` — пусто
 >       (ложное — `quality_ok.tsv`). Тире — только где оно есть у автора; числа «2,000» → «2 000», «2.000» как есть.
 >    Очередь — путь игрока (`[OWNER]` «попереводим то, что близко в начале игры к игроку» · 2026-10-07 ≈10:55); дальше по `left.py`
->    (scratchpad, не в git — пересобрать: читает `dialogue_en.tsv`/`dialogue_ru.tsv`, считает непереведённые по файлу): `LastGuardianTalk`,
->    `OrcQuest`, `ThreePriests`, `TronShrine`, `VelesSlaveTalk`, `YagaFolkQuest`, `ZmeevodaQuestGiver` (по 21), затем по 20 и меньше.
+>    (scratchpad, не в git — пересобрать: читает `dialogue_en.tsv`/`dialogue_ru.tsv`, считает непереведённые по файлу): первыми
+>    новые реплики начала игры (`StartingQuestJovanWife`, `StartingQuestJovanMercenaries`, `ConversationSickBor`), затем Ирий и Пантеон.
 >    Демо-сцены Fluent (`Conversation0`…`16`, `Conversation5Test`, `ConversationNPC1/2`) игроку не встречаются — в самый конец.
 >    Что сделано 07.10 днём и почему так — летопись, запись 2026-10-07 17:04.
 > 3. **Реплики людей нашим переводом в игре глазом не видены** — случаи `testcases/TC_svarog_dialogue_translation_2026-10-07.md`

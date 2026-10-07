@@ -56,7 +56,8 @@
 > <!-- classes: question-already-answered, guard-not-proven-against-threat, shown-as-link,
 >      claim-before-evidence, owner-decision-not-applied, text-in-agents-world,
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
->      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run -->
+>      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run,
+     census-by-own-pattern -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -79,6 +80,20 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0168 · 2026-10-07 · ❌→✅ · #svarogsdream #translation #census #extract #guard
+class: census-by-own-pattern
+**Context:** перевод диалогов шёл по переписи «7731 реплика» из `dialogue_extract.py` (шаблон вызова `Write/Yell/Option(…, "…")`).
+**Tried / did:** сутки считал покрытие от этого знаменателя; на партии русалок увидел в коде `Yell(Rusalka1, "Lay in the sun…")`
+— строки в таблице нет.
+**Result:** ❌ шаблон знал только паузу перед литералом: говорящий первым аргументом (≈350 вызовов) и `cond ? "…" : "…"` выпали —
+290 реплик, боги в Ирии, жена Йована в начале игры. ✅ шаблон + сторож `unread_calls` в выемке (SvarogsDream `90c7844`, баг 22).
+**Lesson:** **перепись, которая ищет по шаблону, обязана считать и то, что шаблон не взял: каждый вызов-кандидат с литералом либо
+прочитан, либо назван — иначе знаменатель врёт молча.**
+**Repro:** `$PY -I tools/dialogue_extract.py "D:/Games/Svarog's Dream" <out>` → «unread calls 0», код 0.
+**Trigger:** новая выемка текста из кода регуляркой по вызовам; странный пропуск строки посреди переведённого диалога.
+**Not for:** выемки из сцен и ассетов (там перечисление объектов, а не шаблон по тексту).
+mechanized: SvarogsDream/tools/dialogue_extract.py — unread_calls (код 1)
 
 ### EXP-0167 · 2026-10-07 · ❌ · #stamps #clock #claim #hooks
 class: claim-before-evidence

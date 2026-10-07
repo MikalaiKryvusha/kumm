@@ -1,0 +1,57 @@
+# Bug 22 — Svarog's Dream: выемка реплик не видела вызовов с говорящим и с выбором литерала — 290 реплик вне переписи
+
+**Status:** ✅ DONE в коде выемки (SvarogsDream `90c7844`); перевод новых реплик — работа эпика 14, фаза 2
+**Severity:** S2 — неполная перепись: реплики (боги в Ирии, жена Йована в начале игры) никто бы не перевёл, знаменатель «N/7731»
+врал; данные и игра не задеты
+**Version/build:** SvarogsDream `33fe7ca` и раньше · **When/context:** 2026-10-07 ≈20:20, партия приглашения русалок (эпик 14, фаза 2)
+
+## Symptom
+
+Код `ConversationRusalkaInvitation`: `Yell("Come here.") * Yell(Rusalka1, "Lay in the sun with me..") * Yell("..swim with me.")` —
+средней строки нет в `translation/dialogue_en.tsv`, первая и третья есть. Ожидалось: все три.
+
+## Repro (deterministic)
+
+Копия `tools/dialogue_extract.py` с прежним шаблоном `CALL_START` (scratchpad `mutant.py` → `extract_mutant.py`) по игре:
+`lines 7847 static 7731 … unread calls 362`, код 1 — то же число постоянных реплик, что в переписи до починки.
+
+## Forensics
+
+Формы первого аргумента у вызовов с литералом по всей декомпиляции `Assembly-CSharp` (2026-10-07): `Write(0.1f, "…")` 2472 ·
+`Yell(<имя>, "…")` ≈350 (`OneGod` 33, `Perun` 30, `Veles` 28, `Dzabog` 25, `Morana` 21 …) · `Yell(a?.b, "…")` 2 ·
+`Write(OtherTextElement, 0.1f, "…")` 1. Шаблон знал только `[пауза,] "…"`. После первой правки сторож назвал ещё 13 вызовов —
+`cond ? "…" : "…"`: Мокошь и Перун о герое по полу (`GodsIriyIntroduction`), испытания `PathOfNonDoing3`.
+
+## Root cause
+
+`CALL_START = \b(Write|Option|Yell|Say|Text)\(\s*(?:[0-9.]+f\s*,\s*)?` — необязательна только пауза; говорящий-объект первым
+аргументом и тернарник не предусмотрены. Перепись фазы 1 (16:39 06.10) сверяла счёт сама с собой, ничего вне шаблона не считала.
+
+## Fix
+
+SvarogsDream `90c7844`: необязательный аргумент-говорящий `(?:[A-Za-z_][\w.?]*\s*,\s*)?`; литералы обеих веток тернарника — по
+строке; мёртвая копия шаблона `CALLS` убрана. Перепись 7765 → 8021 постоянных (+290 с interp/concat: 7847 → 8145), старых ключей
+ушло 0. Знаменатель перевода — 8021.
+
+Сторож — `unread_calls()` в самой выемке, паспорт `@guard dialogue-call-shape` там же: вызов реплики с литералом, который выемка не
+прочла, печатается, код выхода 1. Красный на мутанте (362), ноль на игре.
+
+`TWINS:` searched `Yell|Write\(|CALL|ilspy` в `SvarogsDream/tools/*.py` — found 0 других разборщиков вызовов Fluent:
+`translation_audit.py` берёт все литералы декомпиляции без шаблона вызова, `glossary_enums.py` и `worldevents_extract.py` —
+перечисления, `notes_extract.py`, `items_extract.py`, `spells_extract.py` — сцены и ассеты.
+
+## Decisions made without the owner
+
+- `[AI]` Тернарник даёт обе ветки отдельными строками (как развёртка `GetHimOrHer()`), а не одну «склейку».
+- `[AI]` Сторож живёт в самой выемке и роняет её кодом 1 — отдельного прибора не завёл (меньше сущностей).
+
+## ✅ STATUS: DONE (2026-10-07 20:27 +03:00)
+
+Hygiene: сторож красный на мутанте (unread 362, код 1). Functional run: выемка по `Assembly-CSharp` игры — static 8021, unread 0,
+старых ключей ушло 0; словарь после выкладки совпал с закоммиченным (переводы не задеты). Отчёт —
+`testcases/reports/2026-10-07_svarog-dialogue-census.md`.
+
+## Links
+
+Эпик `plans/14_EPIC_svarog_dialogues_translation.md` (критерий 1); отчёт прогона
+`testcases/reports/2026-10-07_svarog-dialogue-census.md`; опыт `EXPERIENCE.md` EXP-0168.
