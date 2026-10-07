@@ -81,6 +81,17 @@
 
 ## Entries
 
+### EXP-0174 · 2026-10-07 · ❌→✅ · #stamps #clock #claim #midnight #guard-gap
+class: claim-before-evidence
+**Context:** цитата владельца в разведку Medieval Dynasty у полуночи; время вписано по ощущению «≈00:00» без `date`.
+**Tried / did:** штамп «2026-10-08 ≈00:00»; `date` после записи показал 2026-10-07 23:59.
+**Result:** ❌ хук `stamp-gate` пропустил (завтрашняя дата для него — законный план) и коммит тоже; ✅ пойман сразу по `date`, исправлен на месте (`1aa7da1`).
+**Lesson:** **у полуночи дата — такое же число из часов, как минута: «≈00:00» значит «ещё не знаю, какой день».** `date` — до записи, не после.
+**Repro:** `date "+%Y-%m-%d %H:%M %:z"` прямо перед любой цитатой со штампом после 23:30.
+**Trigger:** штамп между 23:30 и 00:30.
+**Not for:** штампы, взятые из журнала или вывода команды.
+mechanized: none — дыра записана в GAP `tools/hooks/stamp-gate.mjs`; [[EXP-0160]]
+
 ### EXP-0173 · 2026-10-07 · ❌→✅ · #svarogsdream #translation #xunity #keys #extract
 class: escaping-layer
 **Context:** судьбы героев выбора из данных игры (`tools/data_texts_extract.py`) → свой словарь `zz_selection.txt`.
