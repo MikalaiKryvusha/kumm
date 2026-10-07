@@ -767,8 +767,11 @@ function Invoke-DeployTarget {
     # грузят моды списком паков (Conan Exiles Enhanced), этот ключ объявляют, и
     # файл с именем Pal* в их папке был бы мусором. Найдено фикстурой 08.09.2026:
     # раскатка в цель Конана честно создавала там Mods\PalModSettings.ini.
+    # 2026-10-08: признак «нет modsDir» тоже оказался ложным - у Medieval Dynasty modsDir нет,
+    # и раскатка положила Pal-файл в её папку. Palworld - это игра ПО УМОЛЧАНИЮ, то есть
+    # манифест без gameExe (у Конана и Medieval Dynasty gameExe задан); признак - он.
     $palModSettings = Join-Path $Target.Path 'Mods\PalModSettings.ini'
-    if (-not $script:pack.modsDir -and -not (Test-Path $palModSettings) -and -not $Plan) {
+    if (-not $script:pack.gameExe -and -not (Test-Path $palModSettings) -and -not $Plan) {
         New-Item -ItemType Directory -Path (Split-Path $palModSettings -Parent) -Force | Out-Null
         @('[PalModSettings]', 'bGlobalEnableMod=True', 'WorkshopRootDir=', 'ConfigVersion=1.0') |
             Set-Content -Path $palModSettings -Encoding ASCII
@@ -1020,7 +1023,7 @@ function Invoke-Action {
         if ($script:pack.modsDir) {
             Say "Deploy complete. Launch the game, then check the mod list in the main menu (Mods) and $($script:pack.modList)." Green
         }
-        else { Say 'Deploy complete. Launch the game, then check Pal\Binaries\Win64\ue4ss\UE4SS.log.' Green }
+        else { Say 'Deploy complete. Launch the game, then check ue4ss\UE4SS.log next to its *-Shipping.exe.' Green }
     }
     elseif ($Action -eq 'verify') { Say 'Verify clean.' Green }
     else { Say 'Remove complete.' Green }

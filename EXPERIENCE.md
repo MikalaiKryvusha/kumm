@@ -81,6 +81,17 @@
 
 ## Entries
 
+### EXP-0176 · 2026-10-08 · ❌→✅ · #engine #palworld-shaped #proxy #deploy #mediedynasty
+class: wrong-proxy
+**Context:** первая раскатка третьей игры (Medieval Dynasty) движком KUMM.
+**Tried / did:** `Deploy-ModPack.ps1 -Deploy` — движок положил в папку игры `Mods\PalModSettings.ini` и посоветовал смотреть `Pal\Binaries\…\UE4SS.log`.
+**Result:** ❌ признак «нет `modsDir` ⇒ Palworld» (исправление бага 03 после Конана) ложен для любой игры без `modsDir`; ✅ признак — манифест без `gameExe` (Palworld — игра по умолчанию); файл удалён, повторная раскатка папку `Mods` не создала.
+**Lesson:** **признак «чего нет» ловит не одну игру, а все, у кого этого нет; игру опознавать по тому, ЧТО ЕСТЬ (её `gameExe`), а не по отсутствию чужого ключа.** Каждая новая игра — фикстура для движка: баг 03 нашёл Конан, этот — Medieval Dynasty.
+**Repro:** раскатка пака без `modsDir` и с `gameExe` ≠ Palworld → `Test-Path <игра>\Mods\PalModSettings.ini` должно быть False.
+**Trigger:** движок принимает новую игру.
+**Not for:** —
+mechanized: none — ветка Palworld прогоном не перепроверена (контроль упал на неверном пути пака), только логикой
+
 ### EXP-0175 · 2026-10-08 · ❌→✅ · #recall #grep #truncation #notes #owner
 class: false-negative-search
 **Context:** владелец: «Wayward считает NPC на GPU, в девблоках было»; агент искал по своим конспектам трёх проектов.
