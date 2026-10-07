@@ -169,6 +169,9 @@ try {
   check('no stamp: dialogue_xunity.py --add refused', run('--gate', bash('$PY tools/dialogue_xunity.py "D:/Games/x" --add b.tsv')), 2);
   check('no stamp: dialogue_xunity.py --adopt refused', run('--gate', bash('$PY tools/dialogue_xunity.py "D:/Games/x" --adopt')), 2);
   check('control: dialogue_xunity.py without flags (regeneration) passes', run('--gate', bash('$PY tools/dialogue_xunity.py "D:/Games/x"')), 0);
+  // 2026-10-07: события мира — свой инструмент партий (KUMM plans/14, фаза 6); без строки в TOOLS партия шла бы мимо методички.
+  check('no stamp: worldevents_xunity.py --add refused', run('--gate', bash('$PY -I tools/worldevents_xunity.py "D:/Games/x" --add b.tsv')), 2);
+  check('control: worldevents_xunity.py without --add (regeneration) passes', run('--gate', bash('$PY -I tools/worldevents_xunity.py "D:/Games/x"')), 0);
   check('control: a foreign file passes', run('--gate', write('D:/work/ai_sandbox/KUMM/STATUS.md')), 0);
   check('control: editing STYLE.md itself passes', run('--gate', write(STYLE)), 0);
   check('control: Read of another file leaves no stamp', (run('--mark', { tool_name: 'Read', tool_input: { file_path: tr } }), statSync(STAMP, { throwIfNoEntry: false }) ? 'stamp' : 'none'), 'none');

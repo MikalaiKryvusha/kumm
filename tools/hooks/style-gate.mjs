@@ -50,7 +50,9 @@ const PATHS = [
 const TOOLS = [/phrases_add\.py/, /items_xunity\.py[^\n]*--add/, /notes_xunity\.py[^\n]*--add/,
   /dialogue_xunity\.py[^\n]*--(add|adopt)/, /spells_ru_add\.py/, /help_ru\.py/,
   // 2026-10-07: правка тире партиями по источникам — хук её не знал, партии записок шли при методичке, прочитанной 60+ мин назад
-  /dash_src\.py[^\n]*\bapply\b/];
+  /dash_src\.py[^\n]*\bapply\b/,
+  // 2026-10-07: события мира — свой инструмент партий (KUMM plans/14, фаза 6)
+  /worldevents_xunity\.py[^\n]*--add/];
 const mtime = (p) => { try { return statSync(p).mtimeMs; } catch { return -1; } };
 // Тот же хук держит и другой документ: --paths <regex> (по нормализованному пути) заменяет пути перевода, инструменты партий тогда не
 // судятся; --label и --reason — имя и слово владельца в отказе. Второе применение — руководство интерфейса Svarog: код мода

@@ -189,7 +189,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    ниже. Единственный открытый баг самого движка — 06 (`-Only` обрезает `modlist.txt`).
 4. **Следующее обновление KAIF** — после прохода `node tools/kaif-update-sweep.mjs <старый бандл> <новый бандл>`,
    пока исток не закрыл #72; навыки с нашими заполнениями сливает `node tools/kaif-update-merge-skills.mjs` (#73).
-5. **Стражи этого проекта:** тронул любой — `node tools/test-guards.mjs` (94 случая). Хуки (heredoc, методичка
+5. **Стражи этого проекта:** тронул любой — `node tools/test-guards.mjs` (98 случаев). Хуки (heredoc, методичка
    перевода `style-gate`, `testcase-gate` v2.2, `ui-gate`, `stamp-gate`) подключены в местных `.claude/settings.local.json`; в новом клоне запись берётся из `AGENT_GUIDE.md` → Tools.
    Слэш в аргументе `sed`/`echo` хук не видит (строка GAP в самом хуке): такие вставки сверять глазом сразу.
 6. **Palworld** — в ежедневном пользовании, правок не ждёт. Досье `games/Palworld/README.md`; три замороженных
