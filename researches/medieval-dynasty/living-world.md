@@ -325,8 +325,12 @@ expectimax, MCTS), `07_unliminium_ai_synthesis.md` (синтез), `plans/archiv
 [AI] Что найдено (2026-10-08, два веб-поиска и чтение страницы):
 - **Wayward Realms** (OnceLost Games: Ted Peterson, покойный Julian LeFay) — «духовный наследник Daggerfall»; в источниках —
   отказ от главного квеста и игра, реагирующая «как мастер настольной игры», и «hundreds or thousands of NPCs»
-  ([Wikipedia](https://en.wikipedia.org/wiki/The_Wayward_Realms)). **Связи с графовой базой в найденных источниках нет** —
-  откуда это знание у владельца, спросить (интервью #008).
+  ([Wikipedia](https://en.wikipedia.org/wiki/The_Wayward_Realms)). ~~Связи с графовой базой в найденных источниках нет —
+  откуда это знание у владельца, спросить~~ — **исправлено 2026-10-08 00:23: неверно, владелец прав.** Разработчики сами
+  говорят о графовой базе «built directly into Realm Engine … for handling quests» (девлог «Foundations For A Living
+  Breathing World», [YouTube](https://www.youtube.com/watch?v=nuNqB2450go); конспект `recon-wayward-realms.md` §2). И это
+  **уже лежало в KUMM** — `researches/svarogs-dream/living-world/02b_rpg_worlds.md` §1, идея `ideas/02` п. 4 (закрыт 09.09);
+  агент его пропустил: поиск по трём проектам обрезал вывод `head -20`, и строки кэша Game Of Dream вытеснили строки KUMM.
 - **Графовые базы для NPC — есть академическая работа:** Brierley, «Computational Media Design: Using Graph Data to Improve
   Non-Player Character Acting in Games» (Калгари, 2023): «This thesis uses graph databases to enhance non-player character
   (NPC) behavior in computer games … the Neo4jConnector, a custom toolkit enabling novel bi-directional communication
@@ -339,7 +343,11 @@ expectimax, MCTS), `07_unliminium_ai_synthesis.md` (синтез), `plans/archiv
 Следом владелец уточнил: `[OWNER]` «например, вейвард риаэлм считает перемещение нпц по миру в виде изображения на GPU» ·
 «а Дварф Фортрес симулирует весь мир» · 2026-10-08 ≈00:09.
 
-- **Wayward Realms и GPU:** агент подтверждения не нашёл — обновление Kickstarter «Production Progress» отдаёт 403 скрипту;
+- **Wayward Realms и GPU** — **исправлено 2026-10-08 00:23: подтверждено первоисточником**, тем же девлогом (17:46–22:32):
+  позиция пикселя — ID NPC, «red, green, and blue values correspond to X, Y, and Z coordinates», «a million NPCs» в «a 1K
+  texture, 1024 by 1024», обработка на GPU (Vulkan) — `recon-wayward-realms.md` §1 и уже в `02b_rpg_worlds.md` §1. Прежняя
+  строка этого пункта («агент подтверждения не нашёл») была неверна: первоисточник лежал в наших же конспектах. Что
+  находили веб-поиском 2026-10-08: обновление Kickstarter «Production Progress» отдаёт 403 скрипту;
   интервью wccftech о симуляции говорит только про «VGM» (виртуального мастера): «The VGM is also in charge of creating
   new quests for players, taking into account recent events, NPCs that the player has interacted with, and what factions the
   player is allied with» ([wccftech](https://wccftech.com/the-wayward-realms-kickstarter-qa-there-are-plenty-of-ways-to-advance-procedural-generation/)).

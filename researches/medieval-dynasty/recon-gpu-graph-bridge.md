@@ -88,7 +88,7 @@ source code are marked `[code]` with the file and tag.
   https://www.theburningmonk.com/2015/04/modelling-game-economy-with-neo4j/ ·
   https://archive.oredev.org/2016/2016/sessions/modelling-game-economy-with-neo4j.html
   → Direct relevance: their recipe graph is the same shape as our "chains come from the game's recipe graph" rule (epic 15).
-- **The Wayward Realms**: searched again — **no source links it to a graph database**; the only hit pairing the name with
+- **The Wayward Realms** — **CORRECTED 2026-10-08 00:23 (main session): wrong.** The devs state a graph database "built directly into Realm Engine … for handling quests" and GPU NPC movement (devlog https://www.youtube.com/watch?v=nuNqB2450go; see `recon-wayward-realms.md` and `../svarogs-dream/living-world/02b_rpg_worlds.md` §1). Original line: searched again — no source links it to a graph database; the only hit pairing the name with
   "graph" is Brierley's thesis, which does not mention it.
 
 ### 2.4 Would a plain in-memory graph do the same job?
@@ -298,7 +298,7 @@ needed at 20 000 subjects/hour; the LLM, if any, belongs to the world's *speech*
 ---
 
 ## What I could not find
-- Any source tying **The Wayward Realms** to graph databases or to GPU movement simulation (searched again 2026-10-08).
+- ~~Any source tying **The Wayward Realms** to graph databases or to GPU movement simulation~~ — CORRECTED 2026-10-08 00:23: found, see `recon-wayward-realms.md`.
 - Verbatim NVIDIA text on warp divergence, WDDM time-slicing of CUDA vs D3D, frame-time impact of CUDA/LLM beside a game.
 - Verbatim crowd-tech sources for Total War, Planet Coaster, Cities: Skylines, Unity DOTS scale numbers (GPU sub-research not returned).
 - Official X4 statement on its own threading (only X Rebirth's); Bannerlord campaign-map thread; CS2 official dev diary on
