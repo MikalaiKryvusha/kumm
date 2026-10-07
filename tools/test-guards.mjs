@@ -216,6 +216,12 @@ try {
   check('no TC document: run-game.sh refused', run('timeout 300 bash tools/run-game.sh'), 2);
   check('control: a pult shot without a TC document passes', run('bash tools/h.sh "shot x"'), 0);
   check('control: a foreign command passes', run('git status'), 0);
+  // v2.2 (2026-10-07 09:3x): чтение скрипта — не прогон. `sed -n 1,40p tools/run-game.sh` в 09:34 был засчитан прогоном, и настоящий
+  // запуск после него отбит («таблица не изменилась»); то же 2026-10-06 23:16 (строка GAP v2). Запуск — имя скрипта в позиции команды.
+  check('reading the script is not a run: sed passes', run('cd /d/x && sed -n 1,40p tools/run-game.sh; echo ----; sed -n 1,30p tools/h.sh'), 0);
+  check('reading the script is not a run: grep/cat pass', run('grep -n alive tools/deploy-hot.sh && cat tools/run-game.sh'), 0);
+  check('a run without bash: ./tools/run-game.sh refused', run('./tools/run-game.sh'), 2);
+  check('a run after cd and time: refused', run('cd /d/x && time bash tools/run-game.sh 2>&1 | tail -5'), 2);
   writeFileSync(join(F, 'TC_x.md'), '# Test cases' + NL + 'no table yet' + NL);
   check('TC document without a case table: refused', run(DEPLOY), 2);
   tc(['| C1 | open → seen | state | pass — shot a |']);
