@@ -26,6 +26,15 @@
 ## What's done (the short tail — older entries live in PROJECT_HISTORY.md)
 
 > **07.10, ночь 23:47–01:37** — замечания владельца в живой игре (C46–C82): «Сделано» — летопись, запись 2026-10-07 01:37 +03:00; открытое — блок «Where to continue».
+> **07.10, утро 09:31–11:18** — ideas/07 п. 30 (золото полностью, «Золото · Вес» без подложек — слово владельца), п. 32 («?» у 15 цифр
+> статов), п. 33 (срез), п. 34 (тире 670 → 0, правка ТОЛЬКО в источниках `translation/*_ru.tsv`/`help_ru.py`, прибор `tools/dash_src.py`),
+> п. 31 начат (100 ячеек, полоса со стрелками, колесо по ряду; не проверены стрелки, ползунок, перетаскивание, «Сортировать» — C20–C22);
+> перевод начала игры 2405 → 2618/7731 (предыстории, Янко, VelesQuest1, VelesUnderworld1–5). Имена Марко, Янко, Йован и «Неужто и это
+> из памяти твоей ушло?» приняты владельцем (глоссарий, STYLE). Хуки KUMM: `stamp-gate` (новый), `testcase-gate` v2.2, `style-gate` знает
+> `dash_src.py apply`. Отчёты — `testcases/reports/2026-10-07_svarog-inventory-*`. Новый чат — продолжать перевод (`[OWNER]` «продолжаем
+> переводы делать в новом чате» · ≈11:17), очередь — пункт 2 «Диалоги дальше».
+> ⚠️ Force-closed 2026-10-07 11:18 +03:00: ceremonies skipped (judge pass, bonsai trim, README, showcase linters) — the first /end-chat-soft pays this debt.
+> Standing falsehood: none (комментарий `SvarogsDream/src/KrinikUIRework/Hud.cs:258` «102 слота» исправлен на 50 в этом закрытии).
 ---
 
 ## Where we are now
