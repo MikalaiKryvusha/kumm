@@ -155,14 +155,16 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 >    (д) вкус окна персонажа (кадры `SvarogsDream/gallery/game/2026-10-06_разметка-шрифта/после/`): раскладка «список —
 >    подробности» в «Атрибутах», подписи карточек `[AI]` «Боги», «Святыни», «Равновесие мира»; дальше тем же языком — большое окно
 >    «Карта · Квесты · …» и инвентарь. Не видено: курсор над компасом мышью, «Посвятить» при уровне ≥ 10.
-> 2. **Диалоги дальше** — эпик `plans/14_EPIC_svarog_dialogues_translation.md`, фаза 2: **2405/7731, файлов 26/353**. Шаг: `python -I
+> 2. **Диалоги дальше** — эпик `plans/14_EPIC_svarog_dialogues_translation.md`, фаза 2: **2618/7731, файлов 41/353** (07.10: начало игры — предыстории, Янко в Боре, VelesQuest1, VelesUnderworld1–5). Шаг: `python -I
 >    tools/dialogue_batch.py dump <Файл> <out>` → черновик «номер⇥русский» (методичка `STYLE.md` читается ЦЕЛИКОМ — хук) →
 >    `$PY -I tools/dialogue_batch.py pack …` → `$PY -I tools/dialogue_xunity.py "D:/Games/Svarog's Dream" --add <партия>` → `bash
 >    tools/translation_deploy.sh`, где `$PY=/d/work/ai_sandbox/_tools/unitypy-venv/Scripts/python.exe` (там `pymorphy3`). Проверки:
 >    «ours 0» в строке `entries` выкладки (ложные срабатывания — в `translation/glossary_exceptions_dialogue.tsv` с причиной),
 >    `$PY -I tools/translation_quality.py "<игра>" translation/glossary.tsv translation/quality_report.md` и `grep zz_dialogue` по
 >    отчёту — пусто; перед выкладкой — проход черновика на род героя («ушёл/пришёл/готов/сам/один»; мои заплатки «ушёл… ушла» — брак).
->    Следующие крупные: `PathOfNonDoing2`/`3`, `ImpYariloSpearQuest`, `ImpYariloQuest`, `StribogPantheonQuest2`.
+>    Очередь — путь игрока (`[OWNER]` «попереводим то, что близко в начале игры к игроку» · 2026-10-07 ≈10:55; порядок — `QuestID.cs`):
+>    `VelesUnderworld6`–`10` и смерти, `HungryBandit`, `WestBandits`, `BanditCampQuestGiver`, `BearHuntQuestGiver`, `HunterBear`,
+>    `WerewolfHuntQuestGiver`, `RuinHunterQuest`, `DiogenesQuest`, лавки Бора; потом `PathOfNonDoing2`/`3`, `ImpYarilo*`.
 > 3. **Реплики людей нашим переводом в игре глазом не видены** (видена одна — пузырь коровы). Разговор открывать методом игры:
 >    `h.sh "comps Interactable 8"` → `h.sh "callon \"<путь>\" Interactable Interact True"` (EXP-0155); мышь в мир в этой сессии
 >    не доходила — причина не разобрана.
