@@ -79,6 +79,28 @@ KrinikUIRework` (RELOADED) · кадр — `shot` пишет JPEG, `h.sh` сам
   открытой карточки, затем `call KrinikUIRework.Plugin RefitSpellTips` (после горячей перезагрузки пульт находит старый тип —
   перезапустить игру).
 
+## Перевод диалогов партией
+
+(Перенесено дословно из `STATUS.md` 2026-10-07 23:2x при мягком закрытии; правится здесь.)
+
+Новая реплика игры → партией (`$PY` =
+   `/d/work/ai_sandbox/_tools/unitypy-venv/Scripts/python.exe`, в нём `pymorphy3`):
+   1. `STYLE.md` прочитать ЦЕЛИКОМ (хук `style-gate`, окно 60 мин и после каждой правки методички).
+   2. Код файла: `ilspycmd -t <Класс> "<игра>/Svarog's Dream_Data/Managed/Assembly-CSharp.dll"` (`_tools/ilspycmd`) — что игра делает с
+      выбором (флаг, талант, деньги, бой); такие варианты и загадки — дословно, загадка должна решаться по-русски (STYLE §2 п. 6).
+   3. `python -I tools/dialogue_batch.py dump <Файл> <out>` → черновик «номер⇥русский» → `$PY -I tools/dialogue_batch.py pack …` →
+      `$PY -I tools/dialogue_xunity.py "D:/Games/Svarog's Dream" --add <партия>`.
+   4. `python -I tools/dialogue_gender_sweep.py <коммит до партии>`: каждую строку «suspects» и «address» — глазами (кто говорит и к
+      кому; к герою без рода, но с «тобою/тебе»; пол говорящего не назван — его речь о себе без рода).
+   5. `bash tools/translation_deploy.sh` — «ours 0» (ложное — в `glossary_exceptions_dialogue.tsv` с причиной), потом
+      `$PY -I tools/translation_quality.py "<игра>" translation/glossary.tsv translation/quality_report.md` и `grep zz_dialogue` — пусто
+      (ложное — `quality_ok.tsv`). Тире — только где оно есть у автора; числа «2,000» → «2 000», «2.000» как есть.
+   Строка со вставкой — русский несёт те же «{…}» буква в букву; перевод — в контексте разговора, говорящий из кода (`Yell(<кто>, "…")`).
+
+**Тексты из данных игры, не из кода** (2026-10-07): черты и герои выбора — `tools/data_texts_extract.py` → `translation/talents_en.tsv`,
+`heroes_en.tsv`; перевод — `translation/selection_ru.tsv` → `tools/selection_xunity.py` (`--add <партия>`, в выкладке сам);
+ключ — текст как есть, «\r» и «\n» буквами (EXP-0173). Перепись строк кода вне всех словарей — `tools/text_census.py` (баг 28).
+
 ## Замер кадра
 
 - Пульт: `perf [сек]` (FPS, счётчики отрисовки, живые значки, персонажи, аниматоры, частицы), `prof [сек] [N]`
