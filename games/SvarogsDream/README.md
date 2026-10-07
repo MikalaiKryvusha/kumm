@@ -27,6 +27,9 @@ KrinikUIRework` (RELOADED) · кадр — `shot` пишет JPEG, `h.sh` сам
 
 ## Шрифт Manrope
 
+Матовый шейдер земли (мод KrinikColorRework 2.1.0, баг 15) — тот же проект Unity: `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode
+-nographics -quit -projectPath SvarogsDream/unity/KrinikShaders -executeMethod KrinikBuild.Bundles` (≈30 с; перенесено из STATUS 07.10).
+
 `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode -nographics -quit -projectPath SvarogsDream/unity/KrinikShaders
   -executeMethod KrinikFonts.Build` → скопировать `Bundles/krinik_manrope` и `Bundles/ttf/krinik_manrope_ttf` в папку игры; в новом
   клоне сначала `python tools/unpack_unitypackage.py "<PackageCache>/com.unity.textmeshpro@3.0.6/Package Resources/TMP Essential Resources.unitypackage" unity/KrinikShaders`.
