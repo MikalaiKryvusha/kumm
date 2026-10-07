@@ -1598,3 +1598,17 @@ Totals reconciled: Valley — 145 `BP_Building_*` actors including house variant
 From the 11 `BP_Marker_Village` exports of `Map_Gameplay.umap` (enum `E_Ownership` + label text): Green=Branica, SkyBlue=Baranica, Red=Borowo, Pink=Gostovia, Orange=Denica, Yellow=Jezerica, Purple=Hornica, NavyBlue=Rolnica, Burgundy=Lesnica. Blue (NewEnumerator6) and Brown (NewEnumerator16): two markers carry no serialized properties (default values are not written) — names open, confirm live. Pack data: `MedievalDynasty/data/villages_valley.csv` column `game_name`.
 
 Oxbow (`MP_Map/Map_Gameplay.umap`, 5 markers): Green=Klonica, SkyBlue=Ostoya, Red=Skauki; one instance marker without serialized properties (Blue, NewEnumerator6, by elimination — name open) plus the class default object `BP_Marker_Village_C` (in the Valley count too: 10 instances + 1 CDO, so the Valley list above has 9 named + 1 unnamed instance; Brown has no marker — confirm live).
+
+## Who listens to the clock (offline, 2026-10-08)
+
+Delegate names of `BP_TimeManager` counted in each manager's UAssetGUI JSON (references in bytecode/bindings):
+
+| Manager | References |
+|---|---|
+| BP_NPC_Manager | OnDaySkip 8 · OnSeasonChanged 31 · OnTimeOfDay_NPC_Changed 5 |
+| BP_VillageManager | OnSeasonChanged 23 · OnTimeUpdate 8 · OnTimeUpdate_Minutes 7 |
+| BP_EconomyManager | OnDaySkip 5 · OnSeasonChanged 5 · OnTimeUpdate_Days 5 |
+| BP_AnimalsManager | OnSeasonChanged 9 |
+| BP_EventManager, BP_KingdomManager, BP_POI_Manager | none |
+
+**Nobody listens to `OnTimeUpdate_Hours`.** Hook candidates for the mod's hourly tick (UE4SS cannot hook delegates; BP hooks fire after the function): `BP_VillageManager:OnMinuteUpdate` (every game minute — count to 60), `BP_NPC_Manager:OnTimeOfDayChanged` (time-of-day phases), `BP_EconomyManager:DayChanged` (daily), `OnSeasonChanged` (seasonal). Confirm live (plan 16 step 0.3).

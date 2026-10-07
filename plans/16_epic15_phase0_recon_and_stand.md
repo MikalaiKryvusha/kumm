@@ -48,7 +48,7 @@ Each step quotes its anchor in the epic («…»).
 - [ ] **0.2 Census of far villagers** — anchor: «если жители чужих деревень уже есть в памяти, мост … **ведёт
   существующих**». `census` counts NPC actors by owning village and distance to the hero; run at home and at a far village.
   Verify: criterion 2.
-- [ ] **0.3 How the game ticks** — anchor: «**Часы** | такт минута/час/день/сезон | делегаты `BP_TimeManager`». Delegates
+- [~] **0.3 How the game ticks** — offline half done 2026-10-08: nobody listens to `OnTimeUpdate_Hours`; hook `BP_VillageManager:OnMinuteUpdate` (count to 60) / `BP_NPC_Manager:OnTimeOfDayChanged` / `BP_EconomyManager:DayChanged` (`game-internals.md`); live half open — anchor: «**Часы** | такт минута/час/день/сезон | делегаты `BP_TimeManager`». Delegates
   cannot be hooked (UE4SS docs); find hourly BP functions (`UpdateWaggoners`, `UpdateVendors`, `OnTimeUpdate` callers) and
   hook them post-call; log game time per call. Verify: criterion 3 (tick half).
 - [ ] **0.4 Save/load hooks** — anchor: «**Хранилище** | файл книги рядом со слотом сохранения». Hook
