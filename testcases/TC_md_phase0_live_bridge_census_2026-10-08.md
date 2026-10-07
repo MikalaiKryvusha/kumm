@@ -16,12 +16,12 @@
 
 | # | Шаг | Ожидание | Статус | Наблюдение |
 |---|-----|----------|--------|------------|
-| C1 | Раскатка пака `Deploy-ModPack.ps1 -Deploy` | `KrinikBridge` в `ue4ss/Mods`, `-Verify` чист | [NOT-TESTED] | |
-| C2 | Запуск игры, `UE4SS.log` | строка «KrinikBridge … загружен», без ошибок Lua | [NOT-TESTED] | |
-| C3 | Контроль: `where` в меню | ответа нет, `in.txt` лежит (пешки нет) | [NOT-TESTED] | |
-| C4 | Загрузить сейв «Продолжить» | мир загружен, герой на экране (снимок) | [NOT-TESTED] | |
-| C5 | `where` | три числа — координаты героя | [NOT-TESTED] | |
-| C6 | `count BP_NPC_Manager_C`, `count BP_VillageManager_C` | по 1 | [NOT-TESTED] | |
-| C7 | перепись классов жителей: `count` по кандидатам классов NPC | числа > 0 у класса жителей | [NOT-TESTED] | |
-| C8 | `get BP_TimeManager_C TimeMultiplier` | число | [NOT-TESTED] | |
-| C9 | Закрыть игру своим прогоном | процесс ушёл; сейвы владельца не изменились (сверка с копией) | [NOT-TESTED] | |
+| C1 | Раскатка пака `Deploy-ModPack.ps1 -Deploy` | `KrinikBridge` в `ue4ss/Mods`, `-Verify` чист | pass | 00:45: 2/2 мода, 22 файла, `-Verify` 3/3; попутно найден и починен дефект движка — `Mods/PalModSettings.ini` в папке игры (EXP-0176) |
+| C2 | Запуск игры, `UE4SS.log` | строка «KrinikBridge … загружен», без ошибок Lua | pass | 00:46:58 «Mod 'KrinikBridge' has enabled.txt, starting mod» и строка загрузки моста; ошибок Lua нет |
+| C3 | Контроль: `where` в меню | ответа нет, `in.txt` лежит (пешки нет) | fail | `where` в меню ответил `0 0 0`: в главном меню у игры ЕСТЬ пешка — признак «мир загружен = есть пешка» неверен; брать `BP_PlayerCharacter_C` или имя карты |
+| C4 | Загрузить сейв «Продолжить» | мир загружен, герой на экране (снимок) | pass | пункта «Продолжить» нет: «Загрузить игру» → сейв владельца «Быстрое сохранение» (Оксбоу, 2.2.0.8) → «Соло» → «Начать игру»; `LoadMap MP_Map/Map_Persistent_Multi` за 5.36 с |
+| C5 | `where` | три числа — координаты героя | pass | 20340 50436 4451 |
+| C6 | `count BP_NPC_Manager_C`, `count BP_VillageManager_C` | по 1 | pass | по 1; `BP_PlayerCharacter_C` 1 |
+| C7 | перепись классов жителей: `count` по кандидатам классов NPC | числа > 0 у класса жителей | pass | `BP_NPC_C` 184 (из них `BP_NPC_Multi_Village_C` 97 — жители чужих деревень, `BP_NPC_Bard_C` 3), `BP_BaseCharacter_C` 185; `Population` деревни игрока 80. Герой дома — дальние жители в памяти (ответ шага 0.2). `BP_Building_House_C` 0 и `BP_POI_Bandits_C` 0 при 50 и 35 в файле уровня — открыто |
+| C8 | `get BP_TimeManager_C TimeMultiplier` | число | pass | 1.0 |
+| C9 | Закрыть игру своим прогоном | процесс ушёл; сейвы владельца не изменились (сверка с копией) | pass | `CloseMainWindow` → вышла за 5 с; 48 файлов сейвов (sha256) и `GameUserSettings.ini` (diff) совпали с копией |

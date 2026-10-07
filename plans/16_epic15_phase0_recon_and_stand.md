@@ -40,12 +40,12 @@ Every run leaves a report in `testcases/reports/` (`TESTING_FRAMEWORK.md`); case
 
 Each step quotes its anchor in the epic («…»).
 
-- [~] **0.1 Bridge mod** — written 2026-10-08: pack `_unpacked/KrinikBridge` v1 (read-only: `where`, `count`, `get`), manifest entry, stand `tools/test-bridge.lua` 11/11 green + mutant red (hygiene); NOT run in the game, not deployed — anchor: «**Пульт** | файловый мост команд (как ConsoleBridge Palworld, EXP-0020)». Port
+- [~] **0.1 Bridge mod** — RUN IN THE GAME 2026-10-08 00:46–00:54 (report `testcases/reports/2026-10-08_md-phase0-live-bridge-census.md`): loads, answers; control C3 failed — menu has a pawn, switch the «world loaded» test to `BP_PlayerCharacter_C`. Written 2026-10-08: pack `_unpacked/KrinikBridge` v1 (read-only: `where`, `count`, `get`), manifest entry, stand `tools/test-bridge.lua` 11/11 green + mutant red (hygiene); NOT run in the game, not deployed — anchor: «**Пульт** | файловый мост команд (как ConsoleBridge Palworld, EXP-0020)». Port
   `D:\work\ai_sandbox\Palworld\_unpacked\ConsoleBridge\Scripts\main.lua` into the pack repo as `mods/KrinikBridge/`
   (game-thread timer `ExecuteInGameThreadWithDelay`, re-armed at the END of processing — EXP-0020); commands: `?time`,
   `census`, `find <class>`, `get <object> <prop>`, `call <object> <func>`. Read-only commands first (EXP-0059: recon asks
   the game to DO nothing). Deploy via the pack manifest. Verify: criterion 1 (positive control).
-- [ ] **0.2 Census of far villagers** — anchor: «если жители чужих деревень уже есть в памяти, мост … **ведёт
+- [~] **0.2 Census of far villagers** — home half done 2026-10-08 on Oxbow (owner save): `BP_NPC_C` 184, of them `BP_NPC_Multi_Village_C` 97 (other villages) in memory with the hero at home, own population 80; far-village half (walk there) open — anchor: «если жители чужих деревень уже есть в памяти, мост … **ведёт
   существующих**». `census` counts NPC actors by owning village and distance to the hero; run at home and at a far village.
   Verify: criterion 2.
 - [~] **0.3 How the game ticks** — offline half done 2026-10-08: nobody listens to `OnTimeUpdate_Hours`; hook `BP_VillageManager:OnMinuteUpdate` (count to 60) / `BP_NPC_Manager:OnTimeOfDayChanged` / `BP_EconomyManager:DayChanged` (`game-internals.md`); live half open — anchor: «**Часы** | такт минута/час/день/сезон | делегаты `BP_TimeManager`». Delegates
