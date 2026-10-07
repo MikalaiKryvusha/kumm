@@ -5,7 +5,7 @@
 //
 //   node tools/test-guards.mjs          # из корня репозитория; код 0 — все случаи как ожидалось, 1 — нет
 //
-// Пять частей (E — хук методички перевода, 2026-10-06):
+// Части A–G (E — хук методички перевода, 2026-10-06; F — хук тест-кейсов; G — хук штампов, 2026-10-07):
 //   A. tools/hooks/no-backslash-heredoc.mjs — события PreToolUse, собранные в JS (ни одна оболочка не трогает слэши);
 //   B. tools/check-claim-before-evidence.mjs в режиме файлов;
 //   C. он же в режиме --staged, в одноразовых git-репозиториях;
@@ -242,6 +242,24 @@ try {
   check('only the control result recorded: passes', run(DEPLOY), 0);
 } catch (e) {
   check('part F ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
+}
+
+// ---------- G. the stamp-gate hook: a today-dated stamp ahead of the clock is refused BEFORE it lands in a file
+// (2026-10-07: «Created: 2026-10-07 09:45» при часах 09:34 и «09:51» при 09:49 — оба поймал сам агент после записи; страж коммита
+// видит только KUMM, а код и случаи SvarogsDream — нет; EXP-0137 → EXP-0160 → сегодня дважды: урок без механизма не держит)
+console.log('G. stamp-gate');
+try {
+  const SG = resolve(ROOT, 'tools/hooks/stamp-gate.mjs');
+  const sg = (tool, input) => spawnSync(process.execPath, [SG], { input: JSON.stringify({ tool_name: tool, tool_input: input }), encoding: 'utf8' }).status;
+  check('Write with a future stamp: refused', sg('Write', { file_path: 'x.md', content: '**Created:** ' + FUT + ' ' + offset }), 2);
+  check('Edit with a future «≈» stamp: refused', sg('Edit', { file_path: 'x.cs', old_string: 'a', new_string: '// v2.2 — ' + FUT.slice(0, 10) + ' ≈' + FUT.slice(11) + ' ' + offset }), 2);
+  check('Write with a past stamp: passes', sg('Write', { file_path: 'x.md', content: 'pass · ' + PAST }), 0);
+  check('Write with a stamp tomorrow (a plan): passes', sg('Write', { file_path: 'x.md', content: 'plan ' + TOMORROW }), 0);
+  check('future stamp with claim-ok on the line: passes', sg('Write', { file_path: 'x.md', content: 'meeting ' + FUT + ' claim-ok: назначенная встреча' }), 0);
+  check('control: Bash is not this hook', sg('Bash', { command: 'echo ' + FUT }), 0);
+  check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [SG], { input: '{not json', encoding: 'utf8' }).status, 0);
+} catch (e) {
+  check('part G ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
 
 for (const d of tmps) { try { removeByEnumeration(d); } catch (e) { console.log(`note: temp left at ${d} (${e.code || e.message})`); } }

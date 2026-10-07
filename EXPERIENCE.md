@@ -120,7 +120,8 @@ class: claim-before-evidence
 **Repro:** `grep -n "22:5[0-9]" <файл>` сразу после `date` = 22:48 — штамп впереди.
 **Trigger:** любой штамп HH:MM в документе, комментарии, тест-кейсе.
 **Not for:** время из вывода прибора (журнал пульта, `date`).
-mechanized: none — кандидат: тот же `check-claim-before-evidence.mjs` хуком PreToolUse на Write|Edit (текст новее часов → отказ)
+mechanized: tools/hooks/stamp-gate.mjs (PreToolUse на Write|Edit|MultiEdit: сегодняшний штамп позже часов — отказ до записи;
+2026-10-07 — после ещё двух промахов за утро: «09:45» при 09:34, «09:51» при 09:49)
 
 ### EXP-0159 · 2026-10-06 · ❌→✅ · #svarogsdream #ui #unity #fade #outline #popup
 class: hidden-layer-shows-through
