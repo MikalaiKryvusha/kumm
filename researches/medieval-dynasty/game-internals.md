@@ -1623,3 +1623,9 @@ Delegate names of `BP_TimeManager` counted in each manager's UAssetGUI JSON (ref
 - Then two screens wait for a key: `UI_IntroScreen` («Нажмите любую кнопку»; functions `AnyKey(Key)`, `Close()`, `Confirm(out InputHandled)`, `OnKeyDown` casts `GM_Medieval_Dynasty`) and `UI_EpicOnlineServicesLoading` (`ConnectionFailed()`, `ChangeToWarning`, `ConfirmAction()`, `DestroyWindow()`); `UI_OfflineErrorAcceptation` also exists. Fast-start mod draft: pack `_unpacked/KrinikFastStart` (NOT-TESTED).
 - Main menu has NO «Continue»: load = «Загрузить игру» → slot → «Соло / Кооператив» → «<map> (Соло) / Начать игру».
 - HDR: user `GameUserSettings.ini` `bUseHDRDisplayOutput=False` by default and the game config has no `r.AllowHDR`; with `r.AllowHDR=1` in user `Engine.ini [SystemSettings]` + the flag → log «HDR output is supported», «Setting HDR meta data … DisplayGamut 2»; survives game exit. Pack `tools/hdr.py`.
+
+## Live notes (2026-10-08 01:16–01:17, Oxbow, owner save)
+
+- `SvarogsDream/tools/shot-hdr.ps1` and `focus-game.ps1` tap **Alt** to win foreground; in Medieval Dynasty **LeftAlt = «Режим проверки» (inspector mode)** — every such screenshot toggles the labels overlay. Game state is unaffected; screenshots and the owner's screen are. Fix for MD tools: a focus trick without Alt.
+- `BP_VillageManager:OnTimeUpdate` fires **10 times per real second** (a real-time timer, not game minutes); `BP_NPC_Manager:OnTimeOfDayChanged` fired once at 01:17:14 (~70 s after load); `LoadSaveFileIntoSystem` of the village fired 2 s after hooks registered (after map load).
+- HDR in world: night village — median 3 nits, UI white text at the TV peak (798 nits): HDR UI may be harsh — owner's taste.
