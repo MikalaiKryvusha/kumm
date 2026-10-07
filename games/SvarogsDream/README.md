@@ -14,7 +14,7 @@
 
 **Как работаю с игрой сам** (разрешение владельца — память `svarog-agent-runs-game-itself`): `tools/run-game.sh` ·
 пульт `tools/h.sh "<команда>"…` (shot · dump · find/findall · hover/click · waitfor · cfg · kill; путь с пробелами — в
-кавычках) · клик по миру — `tools/mouse.ps1 -X -Y -Button left|right|wheel` (правая — разговор, wheel `-Clicks ±N` — приближение камеры) · ходьба героя — `tools/keys.ps1 -Key W -Ms 1500` (W/A/S/D, скан-кодом; окна игры клавишами не открываются — пультом) · `tools/deploy-hot.sh
+кавычках) · клик по миру — `tools/mouse.ps1 -X -Y -Button left|right|wheel` (правая — разговор, wheel `-Clicks ±N` — приближение камеры) · ходьба героя — `tools/keys.ps1 -Key W -Ms 1500` (W/A/S/D, скан-кодом; I по нему инвентарь не открыла — причина не найдена, окна — пультом) · `tools/deploy-hot.sh
 KrinikUIRework` (RELOADED) · кадр — `shot` пишет JPEG, `h.sh` сам переводит в WebP 90 (PNG — никогда, канон
 `AGENT_GUIDE.md`) · сличение с макетом — только `tools/shoot_mockup.mjs` + `tools/pair.py` (целые окна, одно разрешение)
 · закрывать `kill` (выход из меню пишет сейв; копия сейвов — `D:\work\ai_sandbox\_backups`) · пока игра открыта —
