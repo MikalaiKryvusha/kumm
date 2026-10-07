@@ -336,7 +336,20 @@ expectimax, MCTS), `07_unliminium_ai_synthesis.md` (синтез), `plans/archiv
 - **Видеокарта:** RTX 5070 Ti, 16 303 МиБ; без игры занято 3 868 МиБ (`nvidia-smi`, 2026-10-08 00:08). Сколько берёт
   Medieval Dynasty на настройках владельца — замер фазы 0; от него зависит, влезет ли мини-LLM рядом.
 
-[AI] Все три предложения сходятся в одну развилку, которой не было в мета-плане:
+Следом владелец уточнил: `[OWNER]` «например, вейвард риаэлм считает перемещение нпц по миру в виде изображения на GPU» ·
+«а Дварф Фортрес симулирует весь мир» · 2026-10-08 ≈00:09.
+
+- **Wayward Realms и GPU:** агент подтверждения не нашёл — обновление Kickstarter «Production Progress» отдаёт 403 скрипту;
+  интервью wccftech о симуляции говорит только про «VGM» (виртуального мастера): «The VGM is also in charge of creating
+  new quests for players, taking into account recent events, NPCs that the player has interacted with, and what factions the
+  player is allied with» ([wccftech](https://wccftech.com/the-wayward-realms-kickstarter-qa-there-are-plenty-of-ways-to-advance-procedural-generation/)).
+  Источник владельца — спросить. Сам приём от источника не зависит: перемещение и влияние агентов как текстуры на GPU
+  (поля потоков, карты влияния) — известная техника, её практику разведать в фазе 0.
+- **Dwarf Fortress симулирует весь мир** — подтверждено механизмом в разведке Game Of Dream 17 (вики, сверено там же):
+  «game worlds continue to develop and advance while time passes in-game, simulating off-screen various activities in the
+  world outside of the player's influence».
+
+[AI] Все предложения сходятся в одну развилку, которой не было в мета-плане:
 
 | Где считается мир | Что даёт | Чем платим |
 |---|---|---|
