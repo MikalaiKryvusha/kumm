@@ -1629,3 +1629,7 @@ Delegate names of `BP_TimeManager` counted in each manager's UAssetGUI JSON (ref
 - `SvarogsDream/tools/shot-hdr.ps1` and `focus-game.ps1` tap **Alt** to win foreground; in Medieval Dynasty **LeftAlt = «Режим проверки» (inspector mode)** — every such screenshot toggles the labels overlay. Game state is unaffected; screenshots and the owner's screen are. Fix for MD tools: a focus trick without Alt.
 - `BP_VillageManager:OnTimeUpdate` fires **10 times per real second** (a real-time timer, not game minutes); `BP_NPC_Manager:OnTimeOfDayChanged` fired once at 01:17:14 (~70 s after load); `LoadSaveFileIntoSystem` of the village fired 2 s after hooks registered (after map load).
 - HDR in world: night village — median 3 nits, UI white text at the TV peak (798 nits): HDR UI may be harsh — owner's taste.
+
+## Game clock calibration (live, 2026-10-08 01:23, Oxbow)
+
+`BP_VillageManager:OnMinuteUpdate` (zond v2): call #1 at 01:23:35, #10 at 01:23:53 → **1 game minute = 2 real seconds; 1 game hour = 120 s; 1 game day = 48 min real** (at the save's default time speed). The earlier «silent minute hook» (v1, logged every 60th call, watched ~110 s) was a false alarm — corrected here. `OnTimeUpdate` = 10 Hz real-time timer. Mod's hourly world tick → every 60th `OnMinuteUpdate`.
