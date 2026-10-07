@@ -2,7 +2,7 @@
 
 > **Created:** 2026-10-08 · **Parent:** эпик `plans/15_EPIC_medieval_dynasty_living_world.md`; конспекты этой папки:
 > `living-world.md`, `web-recon.md`, `game-internals.md`, `recon-erenshor.md`, `recon-wayward-realms.md`,
-> `recon-gpu-graph-bridge.md`, `recon-gpu-agents.md`, `recon-local-llm-npc-speech.md`; экономики — в пакете, `MedievalDynastydocsecon-supply-chain-economies.md`
+> `recon-gpu-graph-bridge.md`, `recon-gpu-agents.md`, `recon-local-llm-npc-speech.md`; экономики — в пакете, `MedievalDynasty/docs/recon-supply-chain-economies.md`
 > · **Status:** 🔬 черновик 2026-10-08 00:29 — все семь конспектов сведены 2026-10-08 00:34 ·
 > **Outbound:** обсуждение с владельцем вместе с мета-планом
 >
