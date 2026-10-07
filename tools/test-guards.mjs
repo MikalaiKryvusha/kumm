@@ -27,8 +27,13 @@ const BS = String.fromCharCode(92), NL = String.fromCharCode(10), CRLF = String.
 const pad = (n) => String(n).padStart(2, '0');
 const localStamp = (ms) => { const d = new Date(ms); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`; };
 const offset = (() => { const m = -new Date().getTimezoneOffset(); const s = m >= 0 ? '+' : '-'; const a = Math.abs(m); return `${s}${pad(Math.floor(a / 60))}:${pad(a % 60)}`; })();
-const FUT = localStamp(Date.now() + 10 * 60000);
-const PAST = localStamp(Date.now() - 10 * 60000);
+// Прошлое и будущее держатся внутри СЕГОДНЯШНИХ суток: «сейчас ± 10 минут» у полуночи уезжало во вчера / в завтра, и
+// controls-loose-times краснел ни за что (прогон 2026-10-08 00:00 — 97 из 98, в 00:01 и 01:31 — 98 из 98). Остаётся окно
+// в одну минуту (23:59 — будущее равно «сейчас»): GAP, а не ложь стража.
+const DAY_START = new Date(); DAY_START.setHours(0, 0, 0, 0);
+const DAY_LAST_MINUTE = DAY_START.getTime() + 86400000 - 60000;
+const FUT = localStamp(Math.min(Date.now() + 10 * 60000, DAY_LAST_MINUTE));
+const PAST = localStamp(Math.max(Date.now() - 10 * 60000, DAY_START.getTime()));
 const TOMORROW = localStamp(Date.now() + 26 * 3600000);
 const FUT_Z_FRAC = new Date(Date.now() + 10 * 60000).toISOString();   // 2026-…T…:…:….123Z
 const EXISTING_REPORT = 'testcases/reports/2026-09-18_kaif-update-sweep.md';
