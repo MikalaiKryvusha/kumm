@@ -1484,3 +1484,111 @@ row names:
 - Native C++ `ABaseEconomyManager` (`Managers/Economy/BaseEconomyManager.cpp`) exposes reflected UFUNCTIONs (PDB symbols `UFunction_ABaseEconomyManager_*`): `GetDurability`, `GetDurabilityAtIndex`, `ChangeDurabilityData`, `UpdateDurabilityData`, `SetDurabilityDataArray`, `ClearDurabilityData` — callable from UE4SS.
 - `BP_EconomyManager` (child BP) has `Add Used Durability` and `MockDurabilityData`; UI: `DT_ProducedToolsDurability`, `ST_ProducedDurability`, curve `C_DurabilityToolColors`.
 - Per-instance durability of a carried tool: presumably in the inventory slot struct (`Comp/Inventory/InventoryStructs.h` in PDB) — confirm live (plan 16 step 0.9).
+
+## Level contents of both maps — offline census of placed actors (2026-10-08)
+
+Method: `UAssetGUI tojson Map_Gameplay.umap VER_UE4_27` (Valley 892 MB JSON in 13 s; Oxbow `MP_Map/Map_Gameplay.umap`), then export names counted by class with the instance suffix stripped (`grep -o '"ObjectName": …' | sed | sort | uniq -c`). Plain-class counts only: classes with variant suffixes (`BP_Building_House_A`, `_D`, modular `BP_BuildModule_House_*`) are NOT in the building totals. **No NPC actors are placed in the level files** (besides 5 `NPCs_Purgatorium`): villagers are spawned at runtime by `BP_NPC_Manager` — whether far villagers stay in memory is a LIVE question (plan 16 step 0.2).
+
+### Map_Gameplay
+
+```
+    604 BP_SpawnPointWildAnimal
+    220 BP_StaticRoadSpline
+    108 BP_POI_Resources
+     92 BP_POI_Treasure
+     90 BP_POI_Accident
+     70 BP_POI_Animals
+     65 BP_POI_Misc
+     63 BP_POI_Encounter
+     34 BP_POI_Bandits
+     21 BP_POI_BanditsMedium
+     11 BP_Marker_Village
+     10 BP_Building_Woodshed
+     10 BP_Building_FoodStorage
+      7 BP_Building_ToolShed
+      7 BP_Building_Barn
+      6 BP_POI_BanditsHard
+      6 BP_Building_FarmShed
+      5 NPCs_Purgatorium
+      5 BP_Building_ResourceStorage
+      4 BP_Building_Well
+      4 BP_Building_Tavern
+      4 BP_Building_Sewing
+      4 BP_Building_Kitchen
+      4 BP_Building_HuntingLodge
+      4 BP_Building_House
+      3 BP_Building_Smithy
+      3 BP_Building_HerbalistsHut
+      3 BP_Building_HenHouse
+      3 BP_Building_GooseHouse
+      3 BP_Building_Fold
+      3 BP_Building_ExcavationShed
+      2 BP_RoadManager
+      2 BP_POI_Manager
+      2 BP_Building_Workshop
+      2 BP_Building_Windmill
+      2 BP_Building_Pigsty
+      2 BP_Building_HorseStable
+      2 BP_Building_FishingHut
+      2 BP_Building_DonkeyStable
+      2 BP_Building_Cowshed
+      2 BP_Building_Apiary
+      1 BP_POI_Spawner
+      1 BP_POI_Quest
+      1 BP_Building_BuildersHut
+plain BP_Building_* total: 104
+```
+
+### MP_Map_Gameplay
+
+```
+    604 BP_SpawnPointWildAnimal
+    198 BP_StaticRoadSpline
+    159 BP_POI_Treasure
+    101 BP_POI_Encounter
+     93 BP_POI_Resources
+     86 BP_POI_Misc
+     85 BP_POI_Quest
+     55 BP_POI_Accident
+     50 BP_Building_House
+     35 BP_POI_Bandits
+     23 BP_POI_BanditsMedium
+      7 BP_POI_BanditsHard
+      7 BP_POI_Animals
+      6 BP_Building_MarketStall
+      5 NPCs_Purgatorium
+      5 BP_Marker_Village
+      4 BP_Building_Workshop
+      4 BP_Building_Woodshed
+      4 BP_Building_Smithy
+      4 BP_Building_HerbalistsHut
+      3 BP_Building_Sewing
+      3 BP_Building_ResourceStorage
+      3 BP_Building_Kitchen
+      3 BP_Building_HuntingLodge
+      3 BP_Building_FoodStorage
+      3 BP_Building_Fold
+      3 BP_Building_FishingHut
+      3 BP_Building_FarmShed
+      3 BP_Building_BuildersHut
+      3 BP_Building_Barn
+      2 BP_RoadManager
+      2 BP_POI_Manager
+      2 BP_Building_Windmill
+      2 BP_Building_Well
+      2 BP_Building_Tavern
+      2 BP_Building_Pigsty
+      2 BP_Building_Mine
+      2 BP_Building_HorseStable
+      2 BP_Building_HenHouse
+      2 BP_Building_GooseHouse
+      2 BP_Building_ExcavationShed
+      2 BP_Building_DonkeyStable
+      2 BP_Building_Cowshed
+      2 BP_Building_Apiary
+      1 BP_POI_Spawner
+plain BP_Building_* total: 126
+```
+
+
+Totals reconciled: Valley — 145 `BP_Building_*` actors including house variants (`House_D` 21, `House_A` 20), 104 plain-class; Oxbow — 128 including `House_Sedowin` 2, 126 plain-class. Roads: 220 (Valley) and 198 (Oxbow) `BP_StaticRoadSpline` — spline points not yet extracted (plan 16 step 0.8, roads half).
