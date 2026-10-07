@@ -57,7 +57,7 @@
 >      claim-before-evidence, owner-decision-not-applied, text-in-agents-world,
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
 >      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run,
-     census-by-own-pattern -->
+     census-by-own-pattern, hook-after-event -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -80,6 +80,36 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0171 · 2026-10-07 · ❌→✅ · #svarogsdream #ui #unity #scriptengine #flicker #launch
+class: hook-after-event
+**Context:** главное меню при запуске игры на миг прямым шрифтом и крупно, потом письменным (`[OWNER]` · 2026-10-07 ≈21:53).
+**Tried / did:** в коде стоял крючок на `MainMenuOutOfGame.Start` и секундный таймер «на всякий случай»; причину угадывать не стал —
+запись экрана 60 к/с от запуска и строка журнала с `Time.frameCount` в загрузке мода, в крючке и в таймере.
+**Result:** ❌ журнал: мод загружен на кадре 1 (t 20,6 с), крючок на `Start` не сработал ни разу — меню прошло `Start` раньше мода;
+оформлял таймер на кадре 2, а кадр 1→2 длится 132 мс (на видео 6 и 3 кадра). ✅ оформление в конце `Awake` мода — в тот же кадр, до
+отрисовки: «styled by tick, frame 1», вспышки нет (SvarogsDream, баг KUMM 24).
+**Lesson:** **мод из `BepInEx/scripts` (ScriptEngine) грузится после первой сцены: крючок на `Start`/`Awake` объектов сцены при
+запуске мимо — то, что уже стоит на экране, оформлять в `Awake` самого мода; первые кадры игры длинные, «через кадр» — это видно.**
+**Repro:** `grep -n "loaded, frame\|menu: " "<игра>/BepInEx/LogOutput.log"` после запуска — кадр загрузки мода и кадр оформления.
+**Trigger:** крючок Harmony на `Start`/`Awake`/`OnEnable` объекта первой сцены в моде из scripts; «на мгновение мигает при запуске».
+**Not for:** окна, которые открываются позже загрузки мода (там крючок срабатывает).
+mechanized: none — правило в коде (`Plugin.Awake` → `TickMainMenu`); прибора «крючок не сработал» нет
+
+### EXP-0170 · 2026-10-07 · ❌→✅ · #svarogsdream #translation #census #extract #guard #twins
+class: census-by-own-pattern
+**Context:** реплики героя над головой по-английски (`[OWNER]` «Fell that? Somoone watcing…» · ≈21:51) — после бага 22 и его сторожа.
+**Tried / did:** сторож бага 22 считал непрочитанным только вызов `Write/Option/Yell/Say/Text` с литералом; реплики героя жили в
+`GetRandomShout(new string[n] {…})` и в `playerComment = "…"` → `Yell(playerComment)` — литерала в вызове нет, сторож молчал.
+**Result:** ❌ второй удар класса: 53 фразы вне переписи. ✅ выемка берёт оба вида, сторож — любой массив фраз аргументом; и прибор
+против класса целиком: `tools/text_census.py` — все литералы кода против всех словарей → 1106 строк вне словарей (баг 28).
+**Lesson:** **сторож шаблона ловит только формы вызова, которые знает; знаменатель перевода считается по ВСЕМ литералам кода против
+ВСЕХ словарей — тогда шаблон выемки не может спрятать строку.**
+**Repro:** `python -I tools/text_census.py "D:/Games/Svarog's Dream" translation/text_census.tsv` → «unknown N», список по файлам.
+**Trigger:** игрок видит английскую строку, которой «нет» в переписи; новая выемка текста по шаблону.
+**Not for:** строки, которые игра собирает подстановкой (`$"…{x}…"`) — их прибор не считает.
+mechanized: SvarogsDream/tools/text_census.py (перепись по литералам) + dialogue_extract.py (ANY_ARR — массивы фраз, код 1); GAP:
+присваивания полям, кроме `playerComment`, сторож выемки не видит — их ловит только перепись
 
 ### EXP-0169 · 2026-10-07 · ❌→✅ · #svarogsdream #ui #unity #tmp #fallback #worldspace #hotreload
 class: twins-missed
