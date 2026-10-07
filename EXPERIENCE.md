@@ -57,7 +57,7 @@
 >      claim-before-evidence, owner-decision-not-applied, text-in-agents-world,
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
 >      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run,
-     census-by-own-pattern, hook-after-event -->
+     census-by-own-pattern, hook-after-event, mod-breaks-game-flow -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -80,6 +80,31 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0173 · 2026-10-07 · ❌→✅ · #svarogsdream #translation #xunity #keys #extract
+class: escaping-layer
+**Context:** судьбы героев выбора из данных игры (`tools/data_texts_extract.py`) → свой словарь `zz_selection.txt`.
+**Tried / did:** выемка писала «\n» буквами, а «\r» выбрасывала.
+**Result:** ❌ у 25 текстов переносы «\r\n»: точный ключ не совпадал, XUnity находил строку запасным путём и склеивал строки
+пробелами (судьба Ясена одним абзацем, кадр hs7). ✅ «\r» буквами в ключе, ключи таблицы перевода пересобраны скриптом.
+**Lesson:** **ключ словаря — текст как есть, со всеми управляющими знаками буквами; «текст переведён, но склеен» — ключ не точный.**
+**Repro:** `grep -c 'r' translation/heroes_en.tsv` после выемки — строки с «\r» есть; `gettext` текста в игре — «\n» на месте.
+**Trigger:** новая выемка текста для XUnity из данных или кода; переведённый текст в игре без переносов.
+**Not for:** строки, которые игра собирает сама (`$"…"`).
+mechanized: none — правило в коде выемки (esc)
+
+### EXP-0172 · 2026-10-07 · ❌→✅ · #svarogsdream #ui #harmony #postfix #gameflow
+class: mod-breaks-game-flow
+**Context:** окно выбора героя — оформление карточки в постфиксе `CharacterSelectionUI.PopulateCharacters`.
+**Tried / did:** в постфиксе приведение `(RectTransform)` дочернего объекта, среди которых была метка мода — простой Transform.
+**Result:** ❌ исключение постфикса ушло в цикл игры: первая карточка заполнилась, две другие остались заглушками игры («Quisque
+vehicula…», белые портреты, уровень 150) — герой выбирался бы из заглушки. В журнале BepInEx ничего. ✅ try/catch на каждом
+входе мода в ход игры (постфиксы, Awake) с записью в журнал мода (SvarogsDream `de7af27`).
+**Lesson:** **постфикс Harmony — часть метода игры: его исключение обрывает её цикл; вход мода в ход игры — всегда в try/catch.**
+**Repro:** бросить исключение в постфиксе `PopulateCharacters` — вторая и третья карточки с заглушками (кадр hs4).
+**Trigger:** новый Harmony-постфикс на метод, который игра зовёт в цикле или от которого зависит состояние.
+**Not for:** —
+mechanized: none — правило в HeroSelect.cs; прибора «постфикс без try/catch» нет
 
 ### EXP-0171 · 2026-10-07 · ❌→✅ · #svarogsdream #ui #unity #scriptengine #flicker #launch
 class: hook-after-event
