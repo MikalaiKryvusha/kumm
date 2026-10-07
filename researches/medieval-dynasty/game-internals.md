@@ -1616,3 +1616,10 @@ Delegate names of `BP_TimeManager` counted in each manager's UAssetGUI JSON (ref
 ## Save slots (offline, 2026-10-08)
 
 `%LOCALAPPDATA%\Medieval_Dynasty\Saved\SaveGames`: every slot is a pair `<slot>.sav` + `<slot>_Label.sav` (metadata for the menu); slots of the Oxbow map end in `_Ox` (`<slot>_Ox.sav`, `<slot>_Ox_Label.sav`); autosaves rotate as `Autosave.sav`, `Autosave1.sav`, `Autosave2.sav` (+ `_Ox`). 50 files on the owner's machine (names not recorded here). Managers persist through their own `SaveDataFromSystemToFile` / `LoadSaveFileIntoSystem` (NPC, Village, Event, Animals, Time) and `SaveKingdomData`, `SaveSpawners` (POI), `SaveEconomyData`. **Mod book file → beside the slot as `<slot>_KrinikWorld.<ext>`** (same stem keeps Valley/Oxbow and autosave rotation apart); confirm which manager save fires first and with which slot name live (plan 16 step 0.4).
+
+## Start-up chain (2026-10-08, offline + one launch)
+
+- Startup movies: `Config/DefaultGame.ini` (pak) → AsyncLoadingScreen `StartupLoadingScreen` MoviePaths `Logo_UE, Logo_Toplitz, Logo_RenderCube, Loading_Short`, `MT_LoadingLoop`; files are loose `Content/Movies/*.bk2`. Renamed to `.bk2.off` (pack `tools/intro.py`): `Map_Init → Map_MainMenu` 10 s → 0.04 s, menu 5 s after process start; no log errors.
+- Then two screens wait for a key: `UI_IntroScreen` («Нажмите любую кнопку»; functions `AnyKey(Key)`, `Close()`, `Confirm(out InputHandled)`, `OnKeyDown` casts `GM_Medieval_Dynasty`) and `UI_EpicOnlineServicesLoading` (`ConnectionFailed()`, `ChangeToWarning`, `ConfirmAction()`, `DestroyWindow()`); `UI_OfflineErrorAcceptation` also exists. Fast-start mod draft: pack `_unpacked/KrinikFastStart` (NOT-TESTED).
+- Main menu has NO «Continue»: load = «Загрузить игру» → slot → «Соло / Кооператив» → «<map> (Соло) / Начать игру».
+- HDR: user `GameUserSettings.ini` `bUseHDRDisplayOutput=False` by default and the game config has no `r.AllowHDR`; with `r.AllowHDR=1` in user `Engine.ini [SystemSettings]` + the flag → log «HDR output is supported», «Setting HDR meta data … DisplayGamut 2»; survives game exit. Pack `tools/hdr.py`.
