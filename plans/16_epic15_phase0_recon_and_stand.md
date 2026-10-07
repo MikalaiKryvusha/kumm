@@ -60,7 +60,7 @@ Each step quotes its anchor in the epic («…»).
   logs (EXP-0059). Verify: criterion 4.
 - [ ] **0.6 Budgets** — anchor: «**Цена кадра** … база — фаза 0». PresentMon (elevated shell, `AGENT_GUIDE` dossier) 60 s
   in the owner's village, three configurations; `nvidia-smi` VRAM. Verify: criterion 5.
-- [ ] **0.7 Tick benchmark and bridge round trip** — anchor: «Окончательно — по замерам фазы 0». Synthetic 500-subject
+- [~] **0.7 Tick benchmark and bridge round trip** — offline lower bound 2026-10-08: pure Lua 5.4 tick 500 subjects 0.054 ms, 20 000 1.99 ms, ledger leak 0 (pack `tools/bench-tick.lua`; report `testcases/reports/2026-10-08_md-phase0-offline-bridge-stand-and-tick-bench.md`); in-UE4SS and world-server halves open — anchor: «Окончательно — по замерам фазы 0». Synthetic 500-subject
   hourly tick (eat from market, wear tools, one recipe) in Lua via the bridge, and in the world-server prototype (language
   per #008 Q6) on 1/16 threads; round trip = write request → read reply. Verify: criterion 6.
 - [~] **0.8 Map graph** — villages half done 2026-10-08 (enum gap fixed; pack `data/villages_valley.csv` 11 villages, `data/villages_oxbow.csv` 4); roads open — anchor: «**Карта** | граф деревень, лагерей, логов, дорог». Fix enum printing in
