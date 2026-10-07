@@ -163,6 +163,9 @@ try {
   check('no stamp: Write notes_ru.tsv refused', run('--gate', write('D:/work/ai_sandbox/SvarogsDream/translation/notes_ru.tsv')), 2);
   check('no stamp: notes_xunity.py --add refused', run('--gate', bash('$PY tools/notes_xunity.py "D:/Games/x" --add b.tsv')), 2);
   check('control: notes_xunity.py without --add (regeneration) passes', run('--gate', bash('$PY tools/notes_xunity.py "D:/Games/x"')), 0);
+  // 2026-10-07: dash_src.py apply пишет источники перевода — хук его не знал, партии записок шли при прочтении методички 60+ мин назад.
+  check('no stamp: dash_src.py apply refused', run('--gate', bash('$PY -I tools/dash_src.py apply translation/notes_ru.tsv b.txt')), 2);
+  check('control: dash_src.py list (read only) passes', run('--gate', bash('$PY -I tools/dash_src.py list translation/notes_ru.tsv')), 0);
   check('no stamp: dialogue_xunity.py --add refused', run('--gate', bash('$PY tools/dialogue_xunity.py "D:/Games/x" --add b.tsv')), 2);
   check('no stamp: dialogue_xunity.py --adopt refused', run('--gate', bash('$PY tools/dialogue_xunity.py "D:/Games/x" --adopt')), 2);
   check('control: dialogue_xunity.py without flags (regeneration) passes', run('--gate', bash('$PY tools/dialogue_xunity.py "D:/Games/x"')), 0);
