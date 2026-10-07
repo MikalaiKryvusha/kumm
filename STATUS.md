@@ -36,9 +36,14 @@
 > Medieval Dynasty! Сделаем мир ПОЛНЫМ И ЖИВЫМ!» · 2026-10-07 ≈23:35). Пак — приватный репозиторий
 > `D:\work\ai_sandbox\MedievalDynasty` (github `medieval-dynasty-modpack`), README пака — устройство игры и ключ pak; игра
 > 2.7.0.3 (UE 4.27) распакована в `D:\Games\Medieval Dynasty Mods\_vanilla`; UE4SS 1161 стоит и встаёт
-> (`testcases/reports/2026-10-07_medieval-dynasty-ue4ss-bootstrap.md`). Эпик — ступень 1, разведка
-> `researches/medieval-dynasty/living-world.md` (локальная часть готова, веб — в работе); дальше мета-план `plans/15_EPIC_*`
-> и интервью владельцу о развилках. Главная находка: экономика и население считаются только для деревни игрока.
+> (`testcases/reports/2026-10-07_medieval-dynasty-ue4ss-bootstrap.md`). **Эпик 15** — мета-план `plans/15_EPIC_medieval_dynasty_living_world.md`
+> (наверху «Коротко на одну страницу»; `[OWNER]` «с этого места завтра продолжим обсуждать получившийся метаплан» · 2026-10-08 ≈00:26),
+> соль — `researches/medieval-dynasty/essence.md`, конспекты рядом, интервью #008 (6 вопросов) ждёт ответов. Фаза 0 —
+> `plans/16_epic15_phase0_recon_and_stand.md`: мост `KrinikBridge` v2 работает в игре; перепись Оксбоу — 97 жителей чужих
+> деревень в памяти при герое дома (стриминга нет); `KrinikProbe` (хуки часов и сохранений) написан, не запускался.
+> **HDR:** игра выводила SDR (тускло на HDR-ТВ) — включён HDR-вывод (`MedievalDynasty/tools/hdr.py on`, p99 меню 266 → 798 нит);
+> вердикт владельца не получен; проверить, что игра при выходе не выкинула `[SystemSettings] r.AllowHDR=1` из `Engine.ini`.
+> Игру агент гоняет сам — карт-бланш владельца (память `md-agent-runs-game-itself`), сейвы — копия перед прогоном.
 >
 > **Svarog's Dream — на паузе** с 2026-10-07 (было главным по `[OWNER]` «в новом чате продолжим со Сварог Дрим» ·
 > 2026-10-05 ≈20:55): досье `games/SvarogsDream/README.md`; передача дел — блок «Первым делом» ниже.
