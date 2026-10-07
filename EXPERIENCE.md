@@ -81,6 +81,17 @@
 
 ## Entries
 
+### EXP-0175 · 2026-10-08 · ❌→✅ · #recall #grep #truncation #notes #owner
+class: false-negative-search
+**Context:** владелец: «Wayward считает NPC на GPU, в девблоках было»; агент искал по своим конспектам трёх проектов.
+**Tried / did:** `grep -rl wayward <три проекта> | head -20` — двадцать строк заняли json-файлы кэша Game Of Dream; файлы KUMM в выдачу не попали. Агент пошёл в веб и записал «связи не найдено».
+**Result:** ❌ ложь в двух документах; разведчик нашёл, что разбор девлога лежал в `researches/svarogs-dream/living-world/02b_rpg_worlds.md` с 09.09. ✅ исправлено на месте (`f4b8ccd`).
+**Lesson:** **«не нашёл у себя» верно только для поиска без обрезки: сначала свой проект отдельно, без `head`, потом соседние.** Обрезка выдачи — тоже фильтр, и он молча выбрасывает ответ.
+**Repro:** `grep -rl -i <слово> --include=*.md D:/work/ai_sandbox/KUMM | grep -v worktrees` — без `head`, кэш исключён.
+**Trigger:** владелец говорит «мы это уже искали» или тема знакомая — поиск по своим конспектам до веба.
+**Not for:** поиск по коду, где выдача сотнями строк заведомо.
+mechanized: none — память `write-every-finding-into-notes`
+
 ### EXP-0174 · 2026-10-07 · ❌→✅ · #stamps #clock #claim #midnight #guard-gap
 class: claim-before-evidence
 **Context:** цитата владельца в разведку Medieval Dynasty у полуночи; время вписано по ощущению «≈00:00» без `date`.
