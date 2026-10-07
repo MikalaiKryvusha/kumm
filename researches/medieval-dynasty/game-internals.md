@@ -1612,3 +1612,7 @@ Delegate names of `BP_TimeManager` counted in each manager's UAssetGUI JSON (ref
 | BP_EventManager, BP_KingdomManager, BP_POI_Manager | none |
 
 **Nobody listens to `OnTimeUpdate_Hours`.** Hook candidates for the mod's hourly tick (UE4SS cannot hook delegates; BP hooks fire after the function): `BP_VillageManager:OnMinuteUpdate` (every game minute — count to 60), `BP_NPC_Manager:OnTimeOfDayChanged` (time-of-day phases), `BP_EconomyManager:DayChanged` (daily), `OnSeasonChanged` (seasonal). Confirm live (plan 16 step 0.3).
+
+## Save slots (offline, 2026-10-08)
+
+`%LOCALAPPDATA%\Medieval_Dynasty\Saved\SaveGames`: every slot is a pair `<slot>.sav` + `<slot>_Label.sav` (metadata for the menu); slots of the Oxbow map end in `_Ox` (`<slot>_Ox.sav`, `<slot>_Ox_Label.sav`); autosaves rotate as `Autosave.sav`, `Autosave1.sav`, `Autosave2.sav` (+ `_Ox`). 50 files on the owner's machine (names not recorded here). Managers persist through their own `SaveDataFromSystemToFile` / `LoadSaveFileIntoSystem` (NPC, Village, Event, Animals, Time) and `SaveKingdomData`, `SaveSpawners` (POI), `SaveEconomyData`. **Mod book file → beside the slot as `<slot>_KrinikWorld.<ext>`** (same stem keeps Valley/Oxbow and autosave rotation apart); confirm which manager save fires first and with which slot name live (plan 16 step 0.4).

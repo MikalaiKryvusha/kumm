@@ -51,7 +51,7 @@ Each step quotes its anchor in the epic («…»).
 - [~] **0.3 How the game ticks** — offline half done 2026-10-08: nobody listens to `OnTimeUpdate_Hours`; hook `BP_VillageManager:OnMinuteUpdate` (count to 60) / `BP_NPC_Manager:OnTimeOfDayChanged` / `BP_EconomyManager:DayChanged` (`game-internals.md`); live half open — anchor: «**Часы** | такт минута/час/день/сезон | делегаты `BP_TimeManager`». Delegates
   cannot be hooked (UE4SS docs); find hourly BP functions (`UpdateWaggoners`, `UpdateVendors`, `OnTimeUpdate` callers) and
   hook them post-call; log game time per call. Verify: criterion 3 (tick half).
-- [ ] **0.4 Save/load hooks** — anchor: «**Хранилище** | файл книги рядом со слотом сохранения». Hook
+- [~] **0.4 Save/load hooks** — offline half done 2026-10-08: slot = `<slot>.sav` + `<slot>_Label.sav`, Oxbow `_Ox`, autosave rotation; book file `<slot>_KrinikWorld.*` (`game-internals.md`); live half open — anchor: «**Хранилище** | файл книги рядом со слотом сохранения». Hook
   `SaveDataFromSystemToFile` / `LoadSaveFileIntoSystem` of one manager; log slot name. **Owner's saves are copied before
   any run** (`%LOCALAPPDATA%\Medieval_Dynasty\Saved\SaveGames` → `D:\Games\Medieval Dynasty Mods\_save-backup\<stamp>\`).
   Verify: criterion 3 (save half).
