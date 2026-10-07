@@ -1592,3 +1592,9 @@ plain BP_Building_* total: 126
 
 
 Totals reconciled: Valley — 145 `BP_Building_*` actors including house variants (`House_D` 21, `House_A` 20), 104 plain-class; Oxbow — 128 including `House_Sedowin` 2, 126 plain-class. Roads: 220 (Valley) and 198 (Oxbow) `BP_StaticRoadSpline` — spline points not yet extracted (plan 16 step 0.8, roads half).
+
+## Village names of the Valley (offline, 2026-10-08)
+
+From the 11 `BP_Marker_Village` exports of `Map_Gameplay.umap` (enum `E_Ownership` + label text): Green=Branica, SkyBlue=Baranica, Red=Borowo, Pink=Gostovia, Orange=Denica, Yellow=Jezerica, Purple=Hornica, NavyBlue=Rolnica, Burgundy=Lesnica. Blue (NewEnumerator6) and Brown (NewEnumerator16): two markers carry no serialized properties (default values are not written) — names open, confirm live. Pack data: `MedievalDynasty/data/villages_valley.csv` column `game_name`.
+
+Oxbow (`MP_Map/Map_Gameplay.umap`, 5 markers): Green=Klonica, SkyBlue=Ostoya, Red=Skauki; one instance marker without serialized properties (Blue, NewEnumerator6, by elimination — name open) plus the class default object `BP_Marker_Village_C` (in the Valley count too: 10 instances + 1 CDO, so the Valley list above has 9 named + 1 unnamed instance; Brown has no marker — confirm live).
