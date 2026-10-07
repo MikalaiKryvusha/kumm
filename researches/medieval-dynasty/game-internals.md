@@ -1477,3 +1477,10 @@ row names:
 == Shoes: Settings.Category=None | Settings.SubCategory=None | Settings.UseFreshness=False | Settings.FreshnessPerSeason=+0 | Settings.ShopType=None | Stats.Weight=0.15000000596046448 | Stats.Food=+0 | Stats.Water=+0 | Stats.Health=+0 | Stats.Price=290.0 | Stats.HealthPerSecond=+0 | Stats.FoodMultiplier=1.0 | Stats.WaterMultiplier=1.0 | Stats.WeaponDamageType=None | ToolSettings.ToolType=None | ToolSettings.ToolType=None | OutfitSettings.HeatProtection=+0 | OutfitSettings.ColdProtection=0.14000000059604645 | OutfitSettings.WeightCapacity=+0
 == FurBoots: Settings.Name=WarmBoots | Settings.Category=None | Settings.SubCategory=None | Settings.UseFreshness=False | Settings.FreshnessPerSeason=+0 | Settings.ShopType=None | Stats.Weight=0.3499999940395355 | Stats.Food=+0 | Stats.Water=+0 | Stats.Health=+0 | Stats.Price=830.0 | Stats.HealthPerSecond=+0 | Stats.FoodMultiplier=1.0 | Stats.WaterMultiplier=1.0 | Stats.WeaponDamageType=None | ToolSettings.ToolType=None | ToolSettings.ToolType=None | OutfitSettings.HeatProtection=-0.07999999821186066 | OutfitSettings.ColdProtection=0.23000000417232513 | OutfitSettings.WeightCapacity=+0
 ```
+
+## Durability — where it lives (offline, 2026-10-08)
+
+- `DT_ListOfItems` has NO durability field (619 rows; fields Settings/Stats/ToolSettings/OutfitSettings/AmmoSettings/Physics/VendorSettings).
+- Native C++ `ABaseEconomyManager` (`Managers/Economy/BaseEconomyManager.cpp`) exposes reflected UFUNCTIONs (PDB symbols `UFunction_ABaseEconomyManager_*`): `GetDurability`, `GetDurabilityAtIndex`, `ChangeDurabilityData`, `UpdateDurabilityData`, `SetDurabilityDataArray`, `ClearDurabilityData` — callable from UE4SS.
+- `BP_EconomyManager` (child BP) has `Add Used Durability` and `MockDurabilityData`; UI: `DT_ProducedToolsDurability`, `ST_ProducedDurability`, curve `C_DurabilityToolColors`.
+- Per-instance durability of a carried tool: presumably in the inventory slot struct (`Comp/Inventory/InventoryStructs.h` in PDB) — confirm live (plan 16 step 0.9).

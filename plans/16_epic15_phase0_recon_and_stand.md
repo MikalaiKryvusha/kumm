@@ -63,11 +63,11 @@ Each step quotes its anchor in the epic («…»).
 - [ ] **0.7 Tick benchmark and bridge round trip** — anchor: «Окончательно — по замерам фазы 0». Synthetic 500-subject
   hourly tick (eat from market, wear tools, one recipe) in Lua via the bridge, and in the world-server prototype (language
   per #008 Q6) on 1/16 threads; round trip = write request → read reply. Verify: criterion 6.
-- [ ] **0.8 Map graph** — anchor: «**Карта** | граф деревень, лагерей, логов, дорог». Fix enum printing in
+- [~] **0.8 Map graph** — villages half done 2026-10-08 (enum gap fixed; pack `data/villages_valley.csv` 11 villages, `data/villages_oxbow.csv` 4); roads open — anchor: «**Карта** | граф деревень, лагерей, логов, дорог». Fix enum printing in
   `tools/dt-summary.py`; export `DT_VillagesOriginAndRange` / `DT_MultiVillagesOriginAndRange` origins; roads from the map
   (`ST_RoadList`, spline structures) — offline first (EXP-0057: disk before memory), live `find` only for what the disk
   does not give. Verify: criterion 7.
-- [ ] **0.9 Durability** — anchor: «**Износ и ремесло** | … прочность `Add Used Durability`». Offline search in item
+- [~] **0.9 Durability** — offline half done 2026-10-08 (no field in `DT_ListOfItems`; reflected `ABaseEconomyManager` UFUNCTIONs `GetDurability`… — `researches/medieval-dynasty/game-internals.md`); live half open — anchor: «**Износ и ремесло** | … прочность `Add Used Durability`». Offline search in item
   structures and `BP_EconomyManager`; live `get` on an equipped tool if needed. Verify: criterion 8.
 - [ ] **0.10 Phase report and judge** — anchor: «Каждая фаза закрывается отчётом прогона … и проверкой `/fable-judge`».
   Russian report for the owner; `FORK` line closed in the epic; phase 1 plan written only then.
