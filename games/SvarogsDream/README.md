@@ -3,6 +3,10 @@
 > Своя сборка на BepInEx: `D:\work\ai_sandbox\SvarogsDream` (репозиторий `svarogs-dream-modpack`), игра
 > `D:\Games\Svarog's Dream`. Что сейчас в работе — `STATUS.md`, пункты 0а и 0. Как устроены ИИ и живой мир игры —
 > `researches/svarogs-dream/simulation.md`; прокачка выше 100 и формулы — `researches/svarogs-dream/progression-uncap.md`.
+>
+> **Чужих модов нет — всё своё.** Мастерской Steam у игры нет (в категориях магазина app 2004640 нет «Steam Workshop», проверено
+> 2026-10-07); на Nexus нет ни страницы игры, ни модов (`[OWNER]` «на нексусе нету игры и модов, я проверил» · 2026-10-07). Есть только
+> трейнер XMODhub (читы). Разработчик — VI Game Forge, на форуме Steam отвечает lynxbird; ошибки автора чиним своим `KrinikFixes`.
 
 ## Как агент работает с игрой сам
 
