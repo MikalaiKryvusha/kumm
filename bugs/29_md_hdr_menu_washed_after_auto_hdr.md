@@ -55,3 +55,11 @@ Filled at closing.
 ## Links
 
 `testcases/reports/2026-10-08_md-hdr-intro-faststart-probe.md` (last night's HDR run) · `plans/16` step 0.6 · EXP-0176.
+
+## Owner's verdict after the fix candidate (2026-10-08 ≈10:05)
+
+`[OWNER]` «окей. Инвентарь всё еще пересвечен, но сам мир стал получе. Цветокора ползунки будем крутить позже, пока там
+пойдет.» — with Auto HDR off for the exe and the KrinikColor layer (exposure 1.25, gamma 1.12, contrast 0.95, film_toe 0.45):
+the world is acceptable, **the inventory (UI) is still overexposed**. UI is composited outside the camera post-process, so the
+color mod cannot reach it; UE 4.27 levers for UI in HDR: `r.HDR.UI.Level` (UI brightness in HDR), `r.HDR.UI.CompositeMode`.
+Open — next HDR item (sliders «later», by the owner's word).

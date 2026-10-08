@@ -50,6 +50,26 @@ Each step quotes its anchor in the epic («…»).
 - [x] **0.2 Census of far villagers** — DONE 2026-10-08 on Oxbow: far villagers (97) are in memory AND frozen — 0 of 97 moved in ≈40 game minutes while near NPCs walked (report `testcases/reports/2026-10-08_md-phase0-far-villagers-move.md`). HOW (01:42): `BP_BoostComponent` puts every NPC beyond `ActiveRadius` 120 m on stage 4 → `DeactivateNPC` → actor tick, timers and nav invoker off; live 97/97 on stage 4, tick off — one property is the wake lever (report `testcases/reports/2026-10-08_md-phase0-optimization-stages.md`, `game-internals.md`). WAKE PROVEN (01:46, mod `KrinikWake`): `ActiveRadius` 2000 m → 97/97 tick on, 80 of 97 walked within ≈23 s; control before write 0 of 97 (report `testcases/reports/2026-10-08_md-phase0-wake-far-villagers.md`); frame cost of 97 woken 2.5–4 ms (step 0.6). STEERING (02:04–02:08): quest path and the cheat-menu `AI_SetPath` do not lead a far villager (reports `…-lead-villager-questpath.md`, `…-lead-villager-setpath.md`); the behavior-tree service takes `TargetLocation` from the current schedule slot, so the wheel is the schedule (91 villagers × 4 seasons × ≈19 slots with absolute places) — next live test: put a far slot into a woken villager’s activity list. READ OK (02:16, bridge v9): woken villagers 5/5 have a current activity and stand 0–4 m from its place; frozen ones report none (report `…-read-current-activity.md`). Home half: `BP_NPC_C` 184, of them `BP_NPC_Multi_Village_C` 97 (other villages) in memory with the hero at home, own population 80; far-village half (walk there) open — anchor: «если жители чужих деревень уже есть в памяти, мост … **ведёт
   существующих**». `census` counts NPC actors by owning village and distance to the hero; run at home and at a far village.
   Verify: criterion 2.
+- [~] **0.2b Steer by schedule — operational sub-plan (2026-10-08, autonomous hour)** — RUN 10:08–10:14: WORKS, 5/5 led walked 455 → 237 m in 6 min, control 456 → 458; start delay ≈3 min (criterion «≥ 100 m in 120 s» failed) — next: find what triggers the re-pick (service tick / half-hour slot) (report `testcases/reports/2026-10-08_md-phase0-steer-by-schedule.md`). Anchor: «Руль жителя — следующий
+  живой шаг … записать разбуженному жителю занятие с дальним местом в его копию `ActivitiesBySeason` … и проверить, что
+  он пойдёт» (STATUS, Where to continue, item 2) and the epic's «Обоз — это занятие «работа на рынке деревни B» в
+  распорядке; живьём ещё не проверено».
+  - Goal (Achieve): a far villager walks to a place WE choose, using the game's own AI and pathfinding — the steering
+    wheel every caravan, trader and ranger of the epic will use.
+  - Mechanism (offline, `BP_NPC_Multi_Village` bytecode `AIMulti_CheckActivitiesTime`): the villager keeps
+    `ActivitiesBySeason` (season → `Activities_7_…` array of slots: `StartTime_14_…`, `EndTime_15_…`, `DailyMode_2_…`,
+    `TransformLocation_13_F837…`) and `CurrentActivityID`; an invalid index forces a re-pick, and the behavior-tree service
+    then copies the slot's place into `TargetLocation`.
+  - Steps: (1) `KrinikWake` v4 — `goto <Class> <N> sched`: 2N nearest woken, odd ones get every slot place of every season
+    = the hero's location and `CurrentActivityID = -1`, even ones are the control; read-back of the first written place is
+    logged; (2) stand `tools/test-wake.lua` gains the case and a mutant; (3) live run: hero at home, `goto
+    BP_NPC_Multi_Village_C 5 sched`, `track` at +30 s, +60 s, +120 s.
+  - Acceptance (scenario): Situation — Oxbow, owner's save, hero in his village, 10 nearest multi-villagers 300–500 m away.
+    Action — the agent steers 5 of them by schedule. Result — led villagers' distance to the hero drops by ≥ 100 m in
+    120 s, the control's does not. Check — `KrinikWake` `track` lines (led vs control) in `wake-out.txt`; cases
+    `testcases/TC_md_phase0_steer_schedule_2026-10-08.md`.
+  - Risk: TMap/TArray-of-struct writes from UE4SS Lua may not stick (EXP-0177 class) → read-back line decides; a
+    villager walking 500 m takes minutes (≈1.5 m/s) → the check is the drop, not the arrival.
 - [~] **0.3 How the game ticks** — LIVE 2026-10-08 01:16 (`KrinikProbe`, report `testcases/reports/2026-10-08_md-hdr-intro-faststart-probe.md`): `village.time` 10 Hz timer, `npc.timeofday` fired, `village.minute` silent in ~110 s — FALSE ALARM, corrected 01:24: v1 logged every 60th call and a game minute = 2 s; v2 sees #1, #10 (1 game hour = 120 s real). Offline half done 2026-10-08: nobody listens to `OnTimeUpdate_Hours`; hook `BP_VillageManager:OnMinuteUpdate` (count to 60) / `BP_NPC_Manager:OnTimeOfDayChanged` / `BP_EconomyManager:DayChanged` (`game-internals.md`); live half open — anchor: «**Часы** | такт минута/час/день/сезон | делегаты `BP_TimeManager`». Delegates
   cannot be hooked (UE4SS docs); find hourly BP functions (`UpdateWaggoners`, `UpdateVendors`, `OnTimeUpdate` callers) and
   hook them post-call; log game time per call. Verify: criterion 3 (tick half).
