@@ -81,6 +81,18 @@
 
 ## Entries
 
+### EXP-0182 · 2026-10-08 · ❌ · #testcases #guard-gap #mediedynasty #hooks
+class: claim-before-evidence
+**Context:** короткий прогон Medieval Dynasty (износ вещи, 14:15) сразу после двух прогонов с кейсами.
+**Tried / did:** ожидание сказал в чате, файл кейсов не записал, запустил `route-pilot-load.ps1`.
+**Result:** ❌ кейсы легли файлом ПОСЛЕ прогона (честно помечено в отчёте); хук `testcase-gate` молчал — он знает только
+`deploy-hot.sh` / `run-game.sh` сборки Svarog, маршрутов Medieval Dynasty не видит.
+**Lesson:** **короткий прогон — тоже прогон: файл кейсов до запуска; хук покрывает не все игры — его GAP теперь назван.**
+**Repro:** `grep -n "deploy-hot\|run-game\|route-" tools/hooks/testcase-gate.mjs` — `route-` не найдено.
+**Trigger:** любой запуск игры агентом.
+**Not for:** чтение журналов без запуска.
+mechanized: none — кандидат: добавить `route-pilot-load.ps1` / `route-restart-load.ps1` в шаблоны `testcase-gate`
+
 ### EXP-0181 · 2026-10-08 · ✅ · #research #recon #formulas #psyche #mediedynasty
 class: recon-by-snippets
 **Context:** псих-разведка для модуля «Воля»: формулы «Большая пятёрка → настроение PAD» из статьи ALMA (Gebhard, 2005).
