@@ -785,6 +785,13 @@ variables: 51
   InstantSkip:BoolProperty
 ```
 
+**`Time` read live (2026-10-08 13:47, bridge v11 `struct BP_TimeManager_C Time`):** six fields —
+`Hour_3_AEEFB5B84DEEE8C12F6A3182DE467E7D`, `Minute_6_A546695E4C53212CA1F43D855C9385A3`, `Second_14_6DDCDD6A48FE100153E0E0BC5290E621`,
+`Day_12_6478762240A19089B364A5901DC8BE7A`, `Season_10_5643FCE54418815148B2EE90E9C14694`, `Year_8_C97E49BB4A9CAC21AC2ECCB01DC6D696`.
+One game hour = 120 s real exactly (probe v3: hour changes 13:55:43 and 13:57:43); `BP_VillageManager:OnMinuteUpdate` fires once
+per game minute; open menus (inventory, diary) pause game time. The UI shows no numeric clock — only the sun on the compass.
+Autosave every `TimeToAutosave` = 300 s real. Report `testcases/reports/2026-10-08_md-phase0-clock-save-bridge.md`.
+
 ## BP_EconomyManager
 
 ```
