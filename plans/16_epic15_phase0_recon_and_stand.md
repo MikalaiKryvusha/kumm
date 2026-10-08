@@ -1,8 +1,10 @@
 # Plan 16 (epic 15, phase 0) — Medieval Dynasty living world: live recon and the stand
 
 > **Created:** 2026-10-08 · **Parent:** `plans/15_EPIC_medieval_dynasty_living_world.md`, phase 0 row («Разведка устройства и
-> стенд») · **Status:** 📐 drafted 2026-10-08 00:31; not started; waits for the owner's "yes" on the meta-plan (discussion
-> 2026-10-08) · **Outbound:** phase report + the `FORK` decision «где считается мир» → back into the epic
+> стенд») · **Status:** 📐 drafted 2026-10-08 00:31; in progress since the night of 2026-10-08 (steps below carry their own
+> marks — the earlier «not started» was stale); interview #008 answered — world server in **C#** (Q6), so step 0.7 measures
+> a C# prototype; step 0.11 added for item properties (Q5) · **Outbound:** phase report + the measured check of the path
+> «C# world server + file bridge» → back into the epic
 >
 > Executor steps in English (Languages canon); everything the owner reads about this phase — the report — in Russian.
 
@@ -69,6 +71,12 @@ Each step quotes its anchor in the epic («…»).
   does not give. Verify: criterion 7.
 - [~] **0.9 Durability** — offline half done 2026-10-08 (no field in `DT_ListOfItems`; reflected `ABaseEconomyManager` UFUNCTIONs `GetDurability`… — `researches/medieval-dynasty/game-internals.md`); live half open — anchor: «**Износ и ремесло** | … прочность `Add Used Durability`». Offline search in item
   structures and `BP_EconomyManager`; live `get` on an equipped tool if needed. Verify: criterion 8.
+- [ ] **0.11 Where an item instance can carry a property** (added 2026-10-08 after interview #008 Q5 «Б» — track В of the
+  epic) — anchor: «**где у экземпляра вещи можно хранить свойство** (для дорожки В)». Offline first: the inventory slot
+  struct (`Comp/Inventory/InventoryStructs.h` in the PDB, `ST_*` item structs in the pak), what of it reaches the save
+  file; then live `get` on a carried tool's slot (bridge, read-only). Also name where tool damage / work speed is computed
+  (what a «Sharp» property would have to change). Verify: a quoted field that survives save → load, or the verdict «no
+  room — properties live in our book by instance key».
 - [ ] **0.10 Phase report and judge** — anchor: «Каждая фаза закрывается отчётом прогона … и проверкой `/fable-judge`».
   Russian report for the owner; `FORK` line closed in the epic; phase 1 plan written only then.
 
