@@ -261,6 +261,12 @@ try {
   check('MD route under its future name: refused', run2('Bash', 'cd /d/x && powershell -File tools/route-vanilla-load.ps1'), 2);
   check('reading an MD route is not a run: passes', run2('Bash', 'sed -n 1,40p tools/route-pilot-load.ps1; head tools/route-restart-load.ps1'), 0);
   check('route-close.ps1 is not a run: passes', run2('PowerShell', 'powershell -File tools/route-close.ps1'), 0);
+  // v2.3.1 (судья 2026-10-08): формы запуска, которые v2.3 пропускал.
+  check('lowercase -file: refused', run2('Bash', 'powershell -noprofile -file D:/x/tools/route-pilot-load.ps1'), 2);
+  check('pwsh -f: refused', run2('Bash', 'pwsh -f D:/x/tools/route-pilot-load.ps1'), 2);
+  check('quoted path with spaces: refused', run2('PowerShell', 'powershell -File "D:/Games/Medieval Dynasty Mods/x/route-pilot-load.ps1"'), 2);
+  check('-ArgumentList form: refused', run2('PowerShell', "Start-Process powershell -ArgumentList '-File','D:/x/tools/route-pilot-load.ps1'"), 2);
+  check('cat of a route is still not a run: passes', run2('Bash', 'cat tools/route-pilot-load.ps1 | head -5'), 0);
   writeFileSync(join(F2, 'TC_md.md'), HEAD + '| C1 | capture 60 s | state | [NOT-TESTED] |' + NL);
   check('MD route with a waiting case: passes', run2('PowerShell', PILOT), 0);
   check('MD route again, table unchanged: refused', run2('Bash', PILOT), 2);
