@@ -1,6 +1,6 @@
 # Bug 31 — PresentMon 1.9 (FrameView SDK) exits in ≈1 s with code 1 and writes no CSV, even elevated
 
-**Status:** 🔴 OPEN — three attempts made, the next step is research (BUG_FIXING_FRAMEWORK: 3 attempts → `/bug-research`)
+**Status:** ✅ DONE 2026-10-08 14:55 — cause known since 2026-08-15 (EXP-0008): the FrameView SDK build is a service component, not a standalone tool; the Intel build `_tools/PresentMon-2.5.1-x64.exe` works (5904 frames, 14:53). The owner pointed to it («PresentMon мне кажется даже уже есть», «а KAGO»).
 **Severity:** S2 (a measurement run lost; criterion 5 of phase 0 stays partial)
 **Version/build:** `C:\Program Files\NVIDIA Corporation\FrameViewSDK\bin\PresentMon_x64.exe` FileVersion 1.9.12728.0 (came
 with the NVIDIA driver; the dossier recorded 1.8.12407 on 2026-08-15) · Windows 11 Pro 10.0.26200 · **When/context:**
@@ -55,3 +55,14 @@ thread vs render split could come from the engine's own `stat unit`.
 ## Links
 
 Plan 16 step 0.6 · `AGENT_GUIDE.md` environment dossier, row «FPS measurement» · EXP-0183.
+
+## ✅ STATUS: DONE (2026-10-08 14:55 +03:00)
+
+Root cause: not a new defect — the dossier pointed to the FrameView build, and the session did not grep `EXPERIENCE.md` for
+`#presentmon` before the work (EXP-0008 named this exact symptom on 2026-08-15). Fix: the dossier row now names the Intel
+build first and the FrameView path as a dead end. Hygiene: — · Functional run: Intel PresentMon 60 s in the game, CSV read
+(`testcases/reports/2026-10-08_md-phase0-budgets-presentmon.md`).
+
+## Decisions made without the owner (closing)
+
+- `[AI]` Closed as a known class instead of researching the FrameView build further — the working tool exists.
