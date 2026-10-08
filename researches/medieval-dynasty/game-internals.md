@@ -1712,3 +1712,17 @@ Border between stage 3 and 4 is clean (110 m vs 130 m), matching `ActiveRadius` 
   (≈1.45 m/s, 110 s); villagers 470–540 m away wobble ±60 m — they follow road loops. Caravans get road travel for free.
 - The world carries each run into the next: autosaves are written during agent runs and the restart route loads the newest.
   Reports: `testcases/reports/2026-10-08_md-phase0-steer-by-schedule.md` (with the addendum).
+
+## Load chain of the main menu — anchors for a focus-free pilot (offline, 2026-10-08 ≈10:37)
+
+- `UI_MainMenu_C`: `Continue` (+ `GetSaveFileNameForContinue`, 220 ops — the game's own «newest save»; the button is hidden in
+  this build — `CheckContinueVisibility`), `Load` (opens the load panel).
+- `UI_LoadMenu_C`: `SB_SaveSlots` (children = `UI_SaveGameSlot_C` rows, each with `UserSaveName`, `IsMultiSave`),
+  `SelectedSaveSlot` (int, row index), `ConfirmSelection` (reads row `SelectedSaveSlot`, then `SaveNameToLoad` =
+  `UserSaveName` (+ `_Label` for the label file) and `ParentPanel.UseFunction("HostGameFromSave")`), `LoadGameFromSlot`,
+  `LoadSaveClicked`; slot names the menu knows by constant: `Quicksave_Ox`, `Autosave_Ox`, `Autosave1_Ox`, `Autosave2_Ox`,
+  `SaveSlot1`… (`GetCustomSaveData`).
+- Then the Solo/Co-op panel and «Start game»; the final calls: `GameMode.SetMapToLoad_BPI(2)`, `GameInstance.SetSkipMainMenu(true)`,
+  `SetSkipIntro(true)`, `SetFromSave_BPI(true)`, `GameMode.LoadMap_BPI(false)`. `UI_LoadSaveAcceptation_C.Accept` — the
+  «load old save?» confirmation.
+- Plan of the pilot: `plans/17_md_anchor_pilot.md`.
