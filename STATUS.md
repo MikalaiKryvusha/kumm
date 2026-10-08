@@ -43,7 +43,8 @@
 > `researches/medieval-dynasty/essence.md`, устройство игры — `game-internals.md`, интервью #008 ждёт. **Фаза 0** —
 > `plans/16_epic15_phase0_recon_and_stand.md`: моды пака `KrinikBridge` v9 (только чтение), `KrinikWake` v3 (действие),
 > `KrinikProbe` v2, `KrinikFastStart` v4 (меню за ≈6 с, ролики убраны). Итоги ночи — в «Коротко» плана 15. HDR включён
-> (`tools/hdr.py on`, p99 меню 266 → 798 нит), вердикт владельца не получен.
+> (`tools/hdr.py on`), но **не починен**: меню серое и высветленное после уведомления Auto HDR — баг 29; поправка 2026-10-08
+> 09:35 — «798 нит» давал Auto HDR Windows, а не HDR игры (без Auto HDR пик 360).
 >
 > **Svarog's Dream — на паузе** с 2026-10-07 (было главным по `[OWNER]` «в новом чате продолжим со Сварог Дрим» ·
 > 2026-10-05 ≈20:55): досье `games/SvarogsDream/README.md`; передача дел — летопись, запись 2026-10-08 02:20 (указатель в «Where to continue»).
@@ -141,8 +142,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 > **Medieval Dynasty — первым делом (эпик 15, фаза 0; ночь 07→08.10, отчёты `testcases/reports/2026-10-08_md-*`):**
 > 1. **Спросить владельца:** «да» на мета-план `plans/15_EPIC_medieval_dynasty_living_world.md` (наверху «Коротко»), шесть
->    вопросов `interviews/interview_008_medieval_dynasty_living_world.md`, вердикт HDR (было тускло; включено `tools/hdr.py on`
->    в паке; белое меню 798 нит может резать глаз).
+>    вопросов `interviews/interview_008_medieval_dynasty_living_world.md`, вердикт HDR — заменён багом 29
+>    (поправка 2026-10-08 09:35: меню высветляется; «798 нит» был Auto HDR Windows).
 > 2. **Руль жителя — следующий живой шаг.** Найдено: дальних замораживает `BP_BoostComponent` (`ActiveRadius` 120 м), будит
 >    одно свойство (мод `KrinikWake`, 97/97, 2.5–4 мс на кадр за всех); прямые «иди туда» (`AIMulti_SetQuestPath`,
 >    `AI_SetPath`) не ведут — служба дерева берёт цель из ТЕКУЩЕГО ЗАНЯТИЯ распорядка; занятие читается мостом v9
