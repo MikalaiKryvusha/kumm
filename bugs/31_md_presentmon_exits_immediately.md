@@ -29,6 +29,10 @@ Every capture ends after ≈1 s with exit code 1, no CSV, nothing on stdout/stde
    `--session_name`, with and without `--stop_existing_session` — the same.
 4. A visible `cmd /k` window could not be read: the full-screen game covered it (frame 14:47).
 
+5. **Game closed, visible console (2026-10-08 14:49, frame `D:/Games/Medieval Dynasty Mods/_shots/2026-10-08_1450_presentmon_console.webp`):**
+   window «Администратор: C:\Windows\system32\cmd.exe» — PresentMon printed NOTHING and returned to the prompt; VS Code
+   title «KUMM [Administrator]» confirms the elevation. So the FrameView build exits silently — hypothesis 1 gains weight.
+
 ## Hypotheses (ranked, not tested)
 
 1. The FrameView SDK build of PresentMon is a component of NVIDIA FrameView and may refuse standalone capture (licence /
