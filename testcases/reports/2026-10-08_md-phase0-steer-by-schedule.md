@@ -18,6 +18,8 @@ Medieval Dynasty 2.7.0.3, UE4SS 1161; пак `MedievalDynasty`: `KrinikWake` v4 
 
 ## 3. Runs
 
+Окно прогонов: 2026-10-08 10:06 – 2026-10-08 10:15 +03:00 (время в таблице — того же дня).
+
 | # | Время | Команда | Что прочитано |
 |---|---|---|---|
 | 1 | 10:06 | `cd <scratch> && lua tools/test-wake.lua _unpacked/KrinikWake/Scripts/main.lua`; то же с `MUTANT=1` | ALL OK (16 проверок); мутант «без сброса `CurrentActivityID`» — 1 FAILED |

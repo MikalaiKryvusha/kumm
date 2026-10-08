@@ -1683,3 +1683,7 @@ Border between stage 3 and 4 is clean (110 m vs 130 m), matching `ActiveRadius` 
   UE4SS 1161 Lua: `TMap:ForEach(k, v)` and `TArray:ForEach(i, e)` with `:get()` give struct wrappers whose writes stick.
   **Open:** ≈3 min until the first step — the reset index did not trigger an immediate re-pick (service tick or the
   half-hour slot boundary). Report `testcases/reports/2026-10-08_md-phase0-steer-by-schedule.md`.
+  Start-delay suspects, offline 2026-10-08 ≈10:16: NOT the service — `BTService_SetMultiNPCAIState` has no own interval in
+  `BT_Multi_Village_NPC` (engine default), and `SetBehavior` skips the re-pick only while `bIsInDialogue` or `MultiState == 1`
+  (Talk with Player). Remaining: the running BT task of the old activity finishes first, or navigation far from the hero
+  (nav invokers) — next live run: per-villager distance every 10 s to tell staggered starts from a common one.
