@@ -19,9 +19,10 @@ UI_NetworkModeSelectingMenu_C ConfirmAction` · `sleep 1500` · `buttons UI_Sess
 
 ## Hypotheses (ranked, not verified)
 
-1. `b.ParentPanel` is an interface-typed property (the panels are reached through `BPI_UI_Focusable_Panel`); calling
-   `:GetClass()` on what UE4SS returns for a script interface blocks or loops inside the native side (a native fault is not a
-   Lua error, so `pcall` does not see it).
+1. ~~`b.ParentPanel` is an interface-typed property~~ — weakened by the asset (offline, same hour): `ParentPanel` of
+   `UI_SessionCodeNewGame` is an `ObjectProperty`, `ButtonFunction` a `StrProperty`. Remaining form of the hypothesis: a null
+   or not-yet-constructed `ParentPanel` (the row exists before its panel is wired) — `:GetClass()` on a null UObject is a
+   native fault, invisible to `pcall` (EXP-0113).
 2. `FindAllOf("UI_SessionCodeNewGame_C")` during the menu transition — less likely (the same call worked at 10:47:02 for
    `wait`).
 

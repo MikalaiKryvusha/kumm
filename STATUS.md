@@ -196,6 +196,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 Одиннадцать файлов без метки DONE (сверено 2026-10-07 23:21 по `ls bugs | grep -v DONE`):
 
+- 🔴 `bugs/30_md_pilot_buttons_step_stalls_game_thread.md` — шаг `buttons` пилота остановил поток Lua игры (2026-10-08 10:54), игра закрыта штатно.
+- 🔴 `bugs/29_md_hdr_menu_washed_after_auto_hdr.md` — HDR: Auto HDR выключен для exe, мир принят, инвентарь (UI) пересвечен.
 - 🔴 `bugs/28_svarog_code_strings_outside_all_dictionaries.md` — 1106 строк кода игры вне всех словарей (класс бага 27).
 - 🔧 `bugs/26_svarog_palisade_covers_speech_bubbles.md` — частокол над пузырями: порядок холста 30000 стоит, у частокола не видено.
 - 🔧 `bugs/15_svarog_whitish_world_against_low_sun.md` — белёсость земли против солнца: причина (блик стандартного шейдера)
