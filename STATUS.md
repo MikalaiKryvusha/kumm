@@ -165,7 +165,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 >    делал с симпле мморпг, найдешь в моем GH» · «чтобы ты БЫСТРО умел ходить по уже изученным ранее тобою путям» — маршруты по
 >    якорям: функции виджетов игры через UE4SS (`UI_MainMenu_C:Continue`, `UI_LoadMenu_C` `SelectedSaveSlot`/`ConfirmSelection`,
 >    `UI_LoadSaveAcceptation_C:Accept`), запасной глаз — OpenCV; образец — репозиторий владельца Simple MMORPG на GitHub.
->    План — `plans/17_md_anchor_pilot.md` (цепочка загрузки по коду меню — `game-internals.md`, «Load chain…»).
+>    План — `plans/17_md_anchor_pilot.md`: пилот `KrinikPilot` v1 живьём прошёл 8 шагов из 9 без клавиш (меню → сейв по имени →
+>    Соло → экран «Начать игру»); якорь «Начать игру» не найден — следующий шаг 17.3 (отчёт `…-anchor-pilot.md`).
 > 4б. **Цветокор — мод `KrinikColor` v2** (живой `color.txt` в папке мода в игре, снимок значений игры `game.txt`); HDR — баг 29.
 > 5. **Открыто в фазе 0:** дороги и перепись Долины (все сейвы владельца — Оксбоу), хук сохранения (0.4), игровой поток
 >    отдельно от рендера (0.6), шестеро NPC на ступени 0 до 3 км, мир-сервер (после ответа Q6 интервью).
