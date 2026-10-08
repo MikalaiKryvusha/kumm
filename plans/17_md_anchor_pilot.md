@@ -32,7 +32,7 @@ grab, OpenCV as a fallback) only confirms.
 
 ## Steps
 
-- [ ] **17.1 Recon the owner's Simple MMORPG automation** — find the repository on the owner's GitHub (`gh repo list
+- [x] **17.1 Recon the owner's Simple MMORPG automation** — DONE 2026-10-08 10:40: `researches/medieval-dynasty/recon-anchor-pilot.md` (picture anchors + wait/click with confidence lowering, «which of few screens», error states, human call; our primary anchor = UE4SS widget, OpenCV = fallback). — find the repository on the owner's GitHub (`gh repo list
   MikalaiKryvusha`), read how its «paths by anchors» were recorded and replayed; write the lessons to
   `researches/medieval-dynasty/recon-anchor-pilot.md` (anchor: «как я делал с симпле мморпг, найдешь в моем GH»).
 - [ ] **17.2 Pilot mod `KrinikPilot` v1 (action mod, UE4SS Lua)** — command file `pilot.txt`, one route per line; steps
