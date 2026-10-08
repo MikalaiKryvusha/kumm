@@ -122,3 +122,10 @@ Filled at closing.
   off for frozen villagers — offline: the nav settings of the map; live: the same test 400 m from the hero); (3) waypoints:
   a 400 m off-road trip as a chain of places ≤ 140 m apart, the next one written when the villager arrives. Acceptance —
   the villager reaches an off-road point 400 m away; Check — bridge distance to the point < 5 m.
+
+- [ ] **0.2d Does a rewritten schedule survive save → load?** (added 2026-10-08 12:47 from the owner's question about the
+  hero's settlement) — anchor: plan 15 «Цели жителей и жизнь деревни» → «Проверить до фазы 1». Steps: steer 1 villager by
+  schedule (`goto … 1 schedpt`), save the game in a NON-owner slot, reload it, read the villager's current activity place
+  with the bridge (`activity`). Expected: the place is the game's original one (the schedule is rebuilt from the tables on
+  load — offline reading of `SetActivitiesBySeason`). Also confirm the class split: steering refuses any class outside the
+  allow-list (stand case + a live attempt on the hero's own villager class).
