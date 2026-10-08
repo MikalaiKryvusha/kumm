@@ -418,8 +418,8 @@ Crusader Kings 3, Dwarf Fortress. Каждый слой гибрида взят 
 **Имя и дом модели — KARMA** (`[OWNER]` «Давай KARMA И заведём публичный репозиторий под неё KRINIK'S KARMA: Games Agents AI
 Psycho Model» · «название правильно отредактируй» · «по правилам англ языка» · чат, 2026-10-08 ≈13:15). Модель отдельная, под
 любую игру; Medieval Dynasty — первый потребитель. Публичный репозиторий https://github.com/MikalaiKryvusha/KARMA (создан
-2026-10-08 13:18), заголовок после правки по-английски — «Krinik's KARMA: A Psychological Model for Game AI Agents»; расшифровка
-— Krinik's Agent Relations · Mood · Appetites. Спецификация — `docs/MODEL.md` там (черновик 0.1); списки 5 черт и 6 нужд в ней —
+2026-10-08 13:18). Утверждено: `[OWNER]` «Утверждено «Krinik's KARMA: A Psychological Model for Game AI Agents» KARMA (Krinik Agent
+Relations & Mind Approximation)» · «меняй Gh» (чат, 2026-10-08). Спецификация — `docs/MODEL.md` там (черновик 0.1); списки 5 черт и 6 нужд в ней —
 предложение агента с пометкой `[AI]`, ждут слова владельца.
 
 **Где хранится:** граф в памяти сервера мира на C# — массивы узлов и списки рёбер по типам с индексами («все обиды Шайки_7»,
