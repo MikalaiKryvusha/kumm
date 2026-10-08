@@ -57,7 +57,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 | `tools/hooks/no-backslash-heredoc.mjs` | Claude Code `PreToolUse` hook on Bash: refuses a heredoc body with a backslash (it is eaten on this machine). Wired in the local, git-ignored `.claude/settings.local.json`. | — |
 | `tools/hooks/style-gate.mjs` | Claude Code hook pair: reading `SvarogsDream/translation/STYLE.md` is stamped (`--mark`), writing translation without a fresh reading is refused (`--gate`). Wired in the local `.claude/settings.local.json`. | `SvarogsDream/translation/STYLE.md` |
 | `tools/hooks/testcase-gate.mjs` | Claude Code hook: a functional run in the game (`deploy-hot.sh`, `run-game.sh`) only with a fresh `testcases/TC_*.md` holding a case table. Wired in the local `.claude/settings.local.json`. | `testcases/TC_*.md` |
-| `tools/test-guards.mjs` | Self-test of the guards above: 70 cases, throwaway git repos in the OS temp, cleaned file by file. | the guards, `tools/hooks/pre-commit` |
+| `tools/test-guards.mjs` | Self-test of the guards above: 116 cases, throwaway git repos in the OS temp, cleaned file by file. | the guards, `tools/hooks/pre-commit` |
 | `testcases/reports/` | One report per EXECUTED run, seven fields; judged by `node .kaif/tools/kaif-testrun-lint.mjs check`. | `.kaif/_testrun-report-template.md` |
 | `mods/`, `*.log`, `node_modules/` | Gitignored. The archive library never enters this repo. | — |
 

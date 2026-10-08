@@ -251,6 +251,19 @@ try {
   check('a control case written: passes', run(DEPLOY), 0);
   tc(['| C1 | open → seen | state | pass — shot a |', '| C2 | hover → gold | state | pass — shot c |', '| C3 | close → gone | state | fail — shot d |', '| K1 | flag off → absent | control | pass — shot e |']);
   check('only the control result recorded: passes', run(DEPLOY), 0);
+  // v2.3 (2026-10-08, EXP-0182): маршруты Medieval Dynasty — тоже прогон, из Bash и из PowerShell; чтение скрипта — нет.
+  const F2 = newTmp(), STAMP2 = join(F2, 'stamp.json');
+  const run2 = (tool, cmd) => spawnSync(process.execPath, [TG, '--gate', '--dir', F2, '--stamp', STAMP2],
+    { input: JSON.stringify({ tool_name: tool, tool_input: { command: cmd } }), encoding: 'utf8' }).status;
+  const PILOT = 'powershell -NoProfile -ExecutionPolicy Bypass -File D:/work/ai_sandbox/MedievalDynasty/tools/route-pilot-load.ps1 -Save Autosave2_Ox';
+  check('MD route from Bash, no TC document: refused', run2('Bash', PILOT), 2);
+  check('MD coordinate route from PowerShell, no TC document: refused', run2('PowerShell', "& 'D:/x/tools/route-restart-load.ps1' -NoRestart"), 2);
+  check('MD route under its future name: refused', run2('Bash', 'cd /d/x && powershell -File tools/route-vanilla-load.ps1'), 2);
+  check('reading an MD route is not a run: passes', run2('Bash', 'sed -n 1,40p tools/route-pilot-load.ps1; head tools/route-restart-load.ps1'), 0);
+  check('route-close.ps1 is not a run: passes', run2('PowerShell', 'powershell -File tools/route-close.ps1'), 0);
+  writeFileSync(join(F2, 'TC_md.md'), HEAD + '| C1 | capture 60 s | state | [NOT-TESTED] |' + NL);
+  check('MD route with a waiting case: passes', run2('PowerShell', PILOT), 0);
+  check('MD route again, table unchanged: refused', run2('Bash', PILOT), 2);
 } catch (e) {
   check('part F ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }

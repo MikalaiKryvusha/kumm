@@ -81,6 +81,21 @@
 
 ## Entries
 
+### EXP-0184 · 2026-10-08 · ❌→✅ · #mediedynasty #presentmon #measurement #loading #claim
+class: claim-before-evidence
+**Context:** база кадра «все моды» Medieval Dynasty, 14:53: захват 60 с через 15 с после «мир загружен» маршрута пилота.
+**Tried / did:** медиана 10,03 мс записана в отчёт, план, STATUS; ваниль и «только UE4SS» потом дали 10,9 — моды «ускоряли» кадр.
+**Result:** ❌ первые 29 % кадров базы — экран загрузки (GPU busy 1,8 мс, интервал 8,3 мс): «мир загружен» маршрут решает по
+ответу моста «герой есть», а экран загрузки висит ещё 13–45 с. ✅ чистый захват — 10,91 мс, три состава в пределах 0,05 мс;
+ложь исправлена в пяти местах.
+**Lesson:** **число, которое противоречит здравому смыслу (моды ускоряют кадр), — сначала проверка годности замера, потом вывод.
+Годность захвата кадров: доля кадров с GPU busy < 5 мс по времени — 0 % в мире, сплошной кусок в начале = экран загрузки;
+захват начинать по снимку экрана, не по признаку из памяти игры.**
+**Repro:** `light_frames.py` (scratchpad 2026-10-08; логика — доля `MsGPUBusy < 5` по 5-секундным срезам) на `_pm/pm-mods-on-60.csv`.
+**Trigger:** любой захват PresentMon после загрузки сейва.
+**Not for:** —
+mechanized: none — кандидат: проверка доли лёгких кадров в `pm_stats.py` пака
+
 ### EXP-0183 · 2026-10-08 · ❌→✅ · #windows #admin #locale #powershell #environment
 class: claim-before-evidence
 **Context:** замер кадра PresentMon в фазе 0 Medieval Dynasty стоял «заблокированным: нет прав администратора» с ночи.
@@ -105,7 +120,7 @@ class: claim-before-evidence
 **Repro:** `grep -n "deploy-hot\|run-game\|route-" tools/hooks/testcase-gate.mjs` — `route-` не найдено.
 **Trigger:** любой запуск игры агентом.
 **Not for:** чтение журналов без запуска.
-mechanized: none — кандидат: добавить `route-pilot-load.ps1` / `route-restart-load.ps1` в шаблоны `testcase-gate`
+mechanized: `tools/hooks/testcase-gate.mjs` v2.3 (2026-10-08) — `route-*-load.ps1` из Bash и PowerShell; ручной `Start-Process` exe не видит
 
 ### EXP-0181 · 2026-10-08 · ✅ · #research #recon #formulas #psyche #mediedynasty
 class: recon-by-snippets

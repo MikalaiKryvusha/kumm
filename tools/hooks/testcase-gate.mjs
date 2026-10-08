@@ -40,7 +40,10 @@
 //                 v2.1 (строки K) — 22:09, запуск после записанного итога K1 прошёл;
 //                 v2.2 (позиция команды) — 2026-10-07 ≈09:48 +03:00: два чтения подряд (`grep -c alive tools/run-game.sh`,
 //                 `sed -n 2,3p tools/run-game.sh`) прошли, отметка осталась от выкладки 09:46; `bash tools/deploy-hot.sh` и
-//                 `bash tools/run-game.sh` в тот же час останавливались и пускались по таблице, как прежде
+//                 `bash tools/run-game.sh` в тот же час останавливались и пускались по таблице, как прежде;
+//                 v2.3 (маршруты Medieval Dynasty) — 2026-10-08 15:14:58 +03:00: `powershell -File …/route-pilot-load.ps1` из Bash
+//                 пропущен при ждущем C8 с отметкой, повтор без правки таблицы отбит; запуск игры руками (`Start-Process` exe) хук
+//                 по-прежнему не видит — так прошли ваниль и «только UE4SS», кейсы к ним записаны до запуска
 import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -54,6 +57,10 @@ const STAMP = opt('--stamp');
 // засчитал чтение в 09:34 прогоном и отбил настоящий запуск (второй раз после 2026-10-06 23:16).
 const AT_CMD = String.raw`(?:^|[;&|(]\s*|\b(?:bash|sh|time|exec)\s+(?:-\S+\s+)*)(?:\S*\/)?`;
 const RUNS = [new RegExp(AT_CMD + String.raw`deploy-hot\.sh\b`, 'm'), new RegExp(AT_CMD + String.raw`run-game\.sh\b`, 'm')];
+// v2.3 (2026-10-08): маршруты Medieval Dynasty (`route-pilot-load.ps1`, `route-restart-load.ps1`, любой будущий `route-*-load.ps1`)
+// запускают игру так же, как run-game.sh, а хук их не видел: кейсы дважды легли файлом ПОСЛЕ прогона (EXP-0182). Позиция команды
+// у PowerShell — после `-File` или оператора вызова `&`; запуск идёт и из инструмента PowerShell, не только из Bash.
+RUNS.push(new RegExp(String.raw`(?:^|[;&|(]\s*|-File\s+)["']?(?:[^\s"']*[\/\\])?route-[\w-]*load\.ps1\b`, 'm'));
 // Строки случаев — C1… и контрольные K1…: итог контрольного прогона — тоже итог (v2 считал только C — записанный K1 не открыл
 // следующий прогон, 2026-10-06 22:08).
 const CASE_ROW = /^\|\s*[CK]\d+\s*\|.*$/gm;
@@ -72,7 +79,7 @@ function refuse(why) {
 try {
   if (!args.includes('--gate') || !DIR) process.exit(0);
   const event = JSON.parse(readFileSync(0, 'utf8') || '{}');
-  if (event.tool_name !== 'Bash') process.exit(0);
+  if (event.tool_name !== 'Bash' && event.tool_name !== 'PowerShell') process.exit(0);
   const cmd = String((event.tool_input || {}).command || '');
   if (!RUNS.some((rx) => rx.test(cmd))) process.exit(0);
 
