@@ -40,3 +40,9 @@ Filled at closing.
 
 `plans/17_md_anchor_pilot.md` (17.3) · `testcases/reports/2026-10-08_md-anchor-pilot.md` · EXP-0113 (native UE4SS faults
 are invisible to Lua `pcall`).
+
+## Fix written offline (2026-10-08 10:57)
+
+`KrinikPilot` `buttons`: a log line BEFORE each sub-step (count, function, parent), `ParentPanel` used only when
+`IsValid()`, otherwise «нет родителя»; `GetFullName` instead of `GetClass():GetFName()`. Stand `tools/test-pilot.lua` P5 with
+an orphan row (null parent) — ALL OK. **Not run in the game yet** — status stays OPEN until a live run passes.
