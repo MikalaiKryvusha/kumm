@@ -1701,3 +1701,14 @@ Border between stage 3 and 4 is clean (110 m vs 130 m), matching `ActiveRadius` 
 - For track В: «Tempered / Cracked» → the instance's `MaxHP`; a property tag («Sharp», …) → `NoteDetailsRowName` or our
   book keyed by instance. Open: whether written values survive save → load. `ST_CraftedItemData` (HP, ItemID, Ownership,
   UseOldHP) carries crafted items' data. Report `testcases/reports/2026-10-08_md-phase0-item-instance.md`.
+
+## Steering — furniture slots and road routing (live S6/S7 + bytecode, 2026-10-08 10:24–10:36)
+
+- `BTService_SetMultiNPCAIState.SetBehavior`: activity with `IsFurniture_20_940540F747F3724BFDBEA793EAB703D1` → `ResourceState = 1`
+  (`BTTask_MultiFindFurniture`, the place is NOT used); otherwise `NPC.AI_SetPath(true, 15000.0, place)` and
+  `ResourceState = 2`.
+- `BP_NPC:SetPath(CheckDistance, Distance, Destination)`: with the check on and the 2D distance ≥ `Distance` (150 m) it builds
+  a ROAD path (`GetPathToTarget` → `Paths`); closer — direct. Live: a villager 161 m away walked straight to the hero
+  (≈1.45 m/s, 110 s); villagers 470–540 m away wobble ±60 m — they follow road loops. Caravans get road travel for free.
+- The world carries each run into the next: autosaves are written during agent runs and the restart route loads the newest.
+  Reports: `testcases/reports/2026-10-08_md-phase0-steer-by-schedule.md` (with the addendum).

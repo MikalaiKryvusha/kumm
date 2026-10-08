@@ -141,18 +141,20 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > commands, what to verify first.
 
 > **Medieval Dynasty — первым делом (эпик 15, фаза 0; ночь 07→08.10, отчёты `testcases/reports/2026-10-08_md-*`):**
-> 1. **Спросить владельца:** «да» на мета-план `plans/15_EPIC_medieval_dynasty_living_world.md` (наверху «Коротко»), шесть
->    вопросов `interviews/interview_008_medieval_dynasty_living_world.md`, вердикт HDR — заменён багом 29
->    (поправка 2026-10-08 09:35: меню высветляется; «798 нит» был Auto HDR Windows).
-> 2. **Руль жителя — следующий живой шаг.** Найдено: дальних замораживает `BP_BoostComponent` (`ActiveRadius` 120 м), будит
->    одно свойство (мод `KrinikWake`, 97/97, 2.5–4 мс на кадр за всех); прямые «иди туда» (`AIMulti_SetQuestPath`,
->    `AI_SetPath`) не ведут — служба дерева берёт цель из ТЕКУЩЕГО ЗАНЯТИЯ распорядка; занятие читается мостом v9
->    (`activity`). Дальше: записать разбуженному жителю занятие с дальним местом в его копию `ActivitiesBySeason` (TMap
->    сезонов → массив `ST_Multi_Village_Activities`) и проверить, что он пойдёт. `AIMulti_ChangeBehavior` для этого НЕ годится
->    (поправка в `researches/medieval-dynasty/game-internals.md`). Раздел там же — «Steering a villager».
+> 1. **Мета-план ПРИНЯТ** (`[OWNER]` «метаплан принят», 2026-10-08 ≈09:37); интервью #008 и уточнения У1–У3 отвечены — всё в
+>    `plans/15`. HDR — баг 29: Auto HDR выключен для exe, мир «стал получше», **инвентарь (UI) ещё пересвечен** (`r.HDR.UI.Level`).
+> 2. **Руль жителя ДОКАЗАН — через распорядок** (автономный час 10:05–11:05, `KrinikWake` v6 `goto <Класс> <N> sched` +
+>    `trackall`): переписать места всех занятий в `ActivitiesBySeason`, `IsFurniture=false`, `CurrentActivityID=-1` — житель идёт
+>    сам (161 м — дошёл за 110 с; 455 → 237 м за 6 мин у пятерых). Дальше 150 м игра ведёт ПО ДОРОГАМ (`BP_NPC:SetPath` →
+>    `GetPathToTarget`), дистанция по прямой колеблется — **следующий шаг 0.2b:** критерий «прибытие / прогресс по пути»,
+>    долгий прогон на ОДНОЙ копии сейва (игра пишет автосейв во время прогона — EXP-0179). Отчёт
+>    `testcases/reports/2026-10-08_md-phase0-steer-by-schedule.md`; конспект — `game-internals.md`, «Steering…».
+> 2а. **Сделано в тот же час:** прототип сервера мира на C# — 0.009 мс на игровой час при 500 субъектах, 1 == 16 потоков бит в
+>    бит (`MedievalDynasty/server/WorldBench`, отчёт `…-world-server-bench.md`); носители свойства вещи — `MaxHP` и
+>    `NoteDetailsRowName` экземпляра (мост v10 `inv`, отчёт `…-item-instance.md`; запись + сохранение — открыто).
 > 3. **Шаг 0.5 (спавн):** рецепты — чит-меню разработчиков `UI_CheatMenu` (SpawnBandit, SpawnAnimal, Force spawn POI).
 > 4. **Как гонять игру:** пак `D:/work/ai_sandbox/MedievalDynasty`, раскатка `Deploy-ModPack.ps1 -Deploy -PackDir <пак>`, запуск
->    `Medieval_Dynasty.exe`, через 12 с клик 796,784 → F → F → клик 760,856 (сейв владельца, Оксбоу); команды — строки в
+>    `Medieval_Dynasty.exe` — одной командой `powershell -File tools/route-restart-load.ps1` пака (≈30 с до мира); команды — строки в
 >    `ue4ss/Mods/KrinikBridge/in.txt` (ответ `out.txt`) и `KrinikWake/wake.txt`; закрывать `CloseMainWindow`; после — сверка
 >    сейвов с `D:/Games/Medieval Dynasty Mods/_save-backup/2026-10-08_0045` (sha256, 48 .sav). Перед прогоном — TC в
 >    `testcases/`; стенды `tools/test-bridge.lua` (26) и `tools/test-wake.lua` (13) с мутантом. Out-параметры UE4SS — EXP-0177.
