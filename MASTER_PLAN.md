@@ -12,6 +12,21 @@
 
 One command assembles, updates and repairs a modded game build — for any game, on a free Nexus account.
 
+## Сейчас главное
+
+**Эпик 15 — живой мир Medieval Dynasty**, фаза 0 «разведка и стенд» (`plans/16`). Слово владельца: `[OWNER]` «и начинаем эпик
+по модинку моей любимой игры с ПУСТЫМ БЛЯТЬ МИРОМ - Medieval Dynasty! Сделаем мир ПОЛНЫМ И ЖИВЫМ!» · 2026-10-07 ≈23:35.
+Мета-план — `plans/15_EPIC_medieval_dynasty_living_world.md` (`[OWNER]` «метаплан принят» · 2026-10-08 ≈09:37); метрика —
+критерии приёмки фазы в `plans/16`. Правила живого мира, сказанные владельцем по ходу (жители ходят дорогой, напролом — по
+нужде; знания, слухи и вещи передаются только по доверию), живут в плане 15, здесь не повторяются.
+
+**Психика жителей — отдельная модель KARMA** (Krinik Agent Relations & Mind Approximation), публичный репозиторий
+https://github.com/MikalaiKryvusha/KARMA: `[OWNER]` «Давай KARMA И заведём публичный репозиторий под неё» · 2026-10-08. Модель
+одна, реализаций может быть несколько; Medieval Dynasty — первый потребитель, Unliminium и будущие игры — следующие.
+
+Движок (фазы ниже) продолжает жить: каждая новая игра эпиков ставится им без правки кода. Фаза 1 — автономный беклог, когда
+нет игровой работы. Svarog's Dream и Mafia II — на паузе (STATUS).
+
 ## Guiding principles
 
 - **The engine is stateless; the pack owns everything.** No database, no cache, no hidden config.
@@ -53,7 +68,9 @@ One command assembles, updates and repairs a modded game build — for any game,
 - **Steps:** a manifest for the second game (`nexusGame`, `gameExe`, `library`) · run the whole cycle
   against it · fix whatever turns out to be Palworld-shaped in the code · record what a new game costs
   in a research doc, so the third game is cheaper than the second.
-- **Status:** 🔲 todo — waits on the owner actually starting the game.
+- **Status:** 🟢 proven — on Conan Exiles Enhanced, with no engine change (slug from the manifest, `game_id` from the
+  page; STATUS); Medieval Dynasty became the third game the same way (EXP: the game is recognised by its `gameExe`).
+  Oblivion Remastered stays prepared (manifest of 168 mods) and parked until its patch.
 
 ### Phase 3 — compatibility, the part that hurts 🔲
 - **Goal of the phase:** the engine tells the owner *before* deploying which two mods will fight, and
@@ -93,6 +110,9 @@ hygiene). Decided and recorded are two moments — tell them apart when they dif
 | 2026-08-15 01:02 +03:00 (recorded) | KAIF 2.2 deployed, sphere `programming`, tracking mode `origin` | The project is worked on across context-losing agent sessions; the framework externalizes the memory and discipline that a chat cannot keep |
 | 2026-09-05 13:28 +03:00 (recorded) | KAIF updated 2.2 → 2.5 by the bootstrap route; the 2.3–2.5 rule changes accepted; the delivery metric PROPOSED, not yet the owner's | The project owner is the KAIF author — the framework's policy changes are his own origin decisions; the one per-project setting (the metric) is his call: interview #001 |
 | 2026-09-18 18:06 +03:00 (recorded; the live pass ran at 17:59) | KAIF updated 2.5 → 2.7 by the bootstrap route. The delivery-metric line is REMOVED from this plan and interview #001 Q1 closes as superseded | `[OWNER]` "remove the DELIVERY feature from KAIF — projects started writing it, but I do not use it and see no value in it" · 2026-09-12 — the origin owner's word exactly as the 2.7 update task prints it, in English (the project owner is the KAIF author; whether the original was said in Russian the task does not say). The metric PROPOSED by the agent on 2026-09-05 was never ratified, so nothing of the owner's is lost. `[AI]` The other rule changes of 2.6–2.7 are taken as the framework author's own origin decisions; all twenty are listed for him, in Russian, in `KAIF_FRAMEWORK.md` → «Все двадцать изменений правил этого интервала» |
+
+| 2026-10-07 ≈23:35 +03:00 (decided) · 2026-10-08 (recorded here) | Главное — эпик 15, живой мир Medieval Dynasty; Svarog's Dream на паузе | `[OWNER]` «и начинаем эпик по модинку моей любимой игры с ПУСТЫМ БЛЯТЬ МИРОМ - Medieval Dynasty! Сделаем мир ПОЛНЫМ И ЖИВЫМ!»; мета-план принят 2026-10-08 ≈09:37 |
+| 2026-10-08 ≈13:15 +03:00 (decided) · recorded 13:18 | Психика NPC — отдельная переиспользуемая модель KARMA в публичном репозитории; название и расшифровка утверждены владельцем | `[OWNER]` «Давай KARMA И заведём публичный репозиторий под неё» · «Утверждено «Krinik's KARMA: A Psychological Model for Game AI Agents» KARMA (Krinik Agent Relations & Mind Approximation)» |
 
 ---
 
