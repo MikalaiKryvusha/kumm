@@ -81,6 +81,20 @@
 
 ## Entries
 
+### EXP-0183 · 2026-10-08 · ❌→✅ · #windows #admin #locale #powershell #environment
+class: claim-before-evidence
+**Context:** замер кадра PresentMon в фазе 0 Medieval Dynasty стоял «заблокированным: нет прав администратора» с ночи.
+**Tried / did:** проверка `IsInRole('Administrator')` → False; вывод записан в план, два отчёта и досье.
+**Result:** ❌ ложь: оболочка агента повышена (`whoami /groups` — «Высокий обязательный уровень» S-1-16-12288). Строковое
+имя роли локализовано — на русской Windows группа «Администраторы», строка 'Administrator' не находит её никогда. ✅ исправлено
+на месте 2026-10-08 14:47 (досье, план 15, план 16, два отчёта); владельца зря позвали нажать UAC.
+**Lesson:** **права проверять перечислением `[Security.Principal.WindowsBuiltInRole]::Administrator` или уровнем целостности, а не
+строкой; а «нет прав» — подтверждать отказом самого инструмента, прежде чем звать владельца.**
+**Repro:** `([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)`; `whoami /groups | Select-String S-1-16-`
+**Trigger:** любая проверка прав в PowerShell на этой машине.
+**Not for:** —
+mechanized: none — проверка в `pm-server.ps1` уже через перечисление
+
 ### EXP-0182 · 2026-10-08 · ❌ · #testcases #guard-gap #mediedynasty #hooks
 class: claim-before-evidence
 **Context:** короткий прогон Medieval Dynasty (износ вещи, 14:15) сразу после двух прогонов с кейсами.
