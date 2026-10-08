@@ -273,6 +273,41 @@ try {
   check('part G ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
 
+// ---------- H. the no-permission-question hook (Stop): the turn does not end with «shall I do my own next step?»
+// (2026-10-08: «Запустить эту проверку сейчас?» — владелец: «продолжаешь задавать эти ненужные вопросы»; правило в памяти не держало)
+console.log('H. no-permission-question');
+try {
+  const NPQ = resolve(ROOT, 'tools/hooks/no-permission-question.mjs');
+  const dir = newTmp();
+  const run = (text, extra = {}) => {
+    const tp = join(dir, 't' + total + '.jsonl');
+    const lines = [
+      JSON.stringify({ type: 'user', message: { content: 'вопрос' } }),
+      JSON.stringify({ type: 'assistant', message: { content: [{ type: 'text', text }] } }),
+      JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', name: 'Bash' }] } }),
+    ];
+    writeFileSync(tp, lines.join(NL) + NL);
+    const r = spawnSync(process.execPath, [NPQ], { input: JSON.stringify({ hook_event_name: 'Stop', transcript_path: tp, stop_hook_active: false, ...extra }), encoding: 'utf8' });
+    return /"decision":"block"/.test(r.stdout || '') ? 'block' : 'pass';
+  };
+  check('«Запустить эту проверку сейчас?» (verbatim 2026-10-08): blocked', run('Проверка в три шага.' + NL + NL + 'Запустить эту проверку сейчас?'), 'block');
+  check('bold «**Сделать это сейчас?**»: blocked', run('Итог.' + NL + '**Сделать это сейчас?**'), 'block');
+  check('«Хотите, чтобы я перезапустил игру?»: blocked', run('Готово. Хотите, чтобы я перезапустил игру?'), 'block');
+  check('«Shall I run it now?»: blocked', run('Done. Shall I run it now?'), 'block');
+  check('«Продолжаю?»: blocked', run('Шаг 1 готов.' + NL + 'Продолжаю?'), 'block');
+  check('report ending with a full stop: passes', run('Руль работает. Отчёт в testcases/reports/.'), 'pass');
+  check('question in the middle, statement last: passes', run('Нужен ли свет? Нет.' + NL + 'Делаю шаг 2.'), 'pass');
+  check('a question about the owner\'s taste with the marker: passes', run('Какой вариант вам ближе — А или Б? <!-- owner-decision -->'), 'pass');
+  check('stop_hook_active (already continued): passes', run('Запустить эту проверку сейчас?', { stop_hook_active: true }), 'pass');
+  check('last_assistant_message field is honoured', (() => {
+    const r = spawnSync(process.execPath, [NPQ], { input: JSON.stringify({ hook_event_name: 'Stop', last_assistant_message: 'Запустить?', stop_hook_active: false }), encoding: 'utf8' });
+    return /"decision":"block"/.test(r.stdout || '') ? 'block' : 'pass';
+  })(), 'block');
+  check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [NPQ], { input: '{not json', encoding: 'utf8' }).status, 0);
+} catch (e) {
+  check('part H ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
+}
+
 for (const d of tmps) { try { removeByEnumeration(d); } catch (e) { console.log(`note: temp left at ${d} (${e.code || e.message})`); } }
 console.log(`-- ${total - bad} of ${total} as expected`);
 process.exit(bad ? 1 : 0);

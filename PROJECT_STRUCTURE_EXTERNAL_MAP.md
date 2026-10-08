@@ -28,7 +28,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── EXPERIENCE.md · PROJECT_HISTORY.md · KAIF_FRAMEWORK.md
 ├── plans/ ideas/ bugs/ researches/ interviews/ homeworks/ reports/   # KAIF knowledge dirs
 ├── testcases/reports/             # run reports, one per executed run: <YYYY-MM-DD>_<work>.md (KAIF 2.7)
-├── tools/                         # project-own tools: scrub-identity.mjs + check-claim-before-evidence.mjs (both run by hooks/pre-commit), hooks/no-backslash-heredoc.mjs (Claude Code hook), kaif-update-*.mjs
+├── tools/                         # project-own tools: scrub-identity.mjs + check-claim-before-evidence.mjs (both run by hooks/pre-commit), hooks/*.mjs (Claude Code hooks: no-backslash-heredoc, stamp-gate, style-gate, testcase-gate, voice-reminder, no-permission-question), kaif-update-*.mjs
 ├── games/                         # per-game dossiers
 ├── .kaif/                         # framework core: kaif.json, kaif-core.mjs, spheres/, tools/ (10 lints + contour/), hooks/
 ├── .claude/skills/ .agents/skills/ .grok/skills/ .cline/skills/ .roo/  # 37 skills × 5 agent systems

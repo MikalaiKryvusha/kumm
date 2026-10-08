@@ -1019,6 +1019,7 @@ for KAIF tickets too and contradicted the carve-out twenty lines above it — fo
 | `tools/hooks/testcase-gate.mjs` | a Claude Code `PreToolUse` hook on Bash: refuses a functional run in the game (`deploy-hot.sh`, `run-game.sh`) unless the newest `testcases/TC_*.md` holds a case waiting for its run (status `[NOT-TESTED]` or `fail`) AND its case rows CHANGED since the last allowed run (results recorded or cases added — a row fingerprint, not the file time) — test cases are written BEFORE the run and get a status AFTER it (`TESTING_FRAMEWORK.md`, activities 3–4; `[OWNER]` «Ты тест кейсы пишешь, как КАИФ обязывает?» · «давай хук на это сделаем - написание тестов» · 2026-10-06 ≈21:25; v2: «ужесточай хук» · «что-то кодишь - пишешь тесткейсы, чтобы проверить в игре разные кейсы» · ≈21:48). Wired in the LOCAL `.claude/settings.local.json` with `--gate --dir <KUMM>/testcases --stamp <KUMM>/testcases/.gate-stamp.json` (the stamp is session state, git-ignored) |
 | `tools/hooks/stamp-gate.mjs` | a Claude Code `PreToolUse` hook on Write\|Edit\|MultiEdit: refuses text carrying a TODAY-dated stamp (`ГГГГ-ММ-ДД ЧЧ:ММ`, with «≈»/«около»/«до») later than the clock — before it lands in any file, KUMM or the build repos (the commit gate sees only KUMM commits; class `claim-before-evidence`, EXP-0160). `claim-ok: <why>` on the line is the declared exception. Wired in the LOCAL `.claude/settings.local.json`; self-test `tools/test-guards.mjs` part G |
 | `tools/hooks/voice-reminder.mjs` | a Claude Code `PostToolUse` hook: while a game is open (its log written in the last 45 s) and the agent has not spoken aloud for 90 s, it injects «say aloud what you do» into the agent's context — the owner cannot see VS Code over a full-screen game (his word 2026-10-04: «почему ты опять молчишь? … может давай тебе хуки сделаем?»). Wired in the LOCAL `.claude/settings.local.json` with `--log <game log> --stamp <voice stamp>`; the stamp is touched by the voice tool of the game's build (`SvarogsDream/tools/voice_say.py`) |
+| `tools/hooks/no-permission-question.mjs` | a Claude Code `Stop` hook: refuses to end a turn whose last line is a permission question about the agent's OWN next step («Запустить эту проверку сейчас?», «Хотите, чтобы я…?», «Shall I…?») and tells the agent to do it (owner's word 2026-10-08, «Notes from the human» below). `<!-- owner-decision -->` in the reply is the declared exception; `stop_hook_active` prevents a loop. Wired in the LOCAL `.claude/settings.local.json` under `hooks.Stop`: `{"hooks": [{"type": "command", "command": "node", "args": ["${CLAUDE_PROJECT_DIR}/tools/hooks/no-permission-question.mjs"], "timeout": 10}]}`; self-test `tools/test-guards.mjs` part H |
 | `tools/hooks/no-backslash-heredoc.mjs` | a Claude Code `PreToolUse` hook on Bash: refuses a heredoc whose body carries a backslash, for every delimiter form it parses (`EXP-0120`; the forms it does not see and its false positives are named in its GAP field). Wired in the LOCAL `.claude/settings.local.json` (not in git) — in a new clone add under `hooks.PreToolUse` the entry `{"matcher": "Bash", "hooks": [{"type": "command", "command": "node", "args": ["${CLAUDE_PROJECT_DIR}/tools/hooks/no-backslash-heredoc.mjs"], "timeout": 10}]}` |
 
 ---
@@ -1368,6 +1369,17 @@ matching it matters more than any rule below.
 ---
 
 ## Notes from the human
+
+**Do the next step — never end a turn asking permission for your own work** (owner's word 2026-10-08 ≈11:10, verbatim:
+`[OWNER]` «Так. Давай изменим твои правила, и может хук напишем. Я тебе уже говорил про такое "Запустить эту проверку
+сейчас?" - а ты не послушал меня, и продолжаешь задавать эти ненужные вопросы»). The executable form:
+
+1. Before ending a turn, read your last line. If it is a question whose subject is YOUR next action («Запустить…?»,
+   «Сделать…?», «Продолжаю?», «Хотите, чтобы я…?», «Shall I…?») — delete it and DO that action now, then report.
+2. A question that is genuinely the owner's (vision, taste, his data, his money) goes to `interviews/`; in chat it carries
+   the marker `<!-- owner-decision -->`.
+3. The guard: `tools/hooks/no-permission-question.mjs` (Stop hook, Tools table) refuses to stop on such a last line; self-test
+   `node tools/test-guards.mjs`, part H.
 
 From this project's owner (recorded 2026-08-15, at the KAIF deployment):
 
