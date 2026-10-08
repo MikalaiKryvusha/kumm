@@ -1,6 +1,6 @@
 # Bug 30 — Medieval Dynasty: the pilot's `buttons` step stalls the game-thread Lua (bridge stops answering)
 
-**Status:** 🔴 OPEN · **Severity:** S2 (a run lost; the game had to be closed) · **Version/build:** Medieval Dynasty 2.7.0.3,
+**Status:** ✅ DONE · **Severity:** S2 (a run lost; the game had to be closed) · **Version/build:** Medieval Dynasty 2.7.0.3,
 UE4SS 1161, `KrinikPilot` v1 with the `buttons` step (written 2026-10-08 10:53, stand P5 green) · **When/context:**
 autonomous hour, plan 17 step 17.3 — looking for the «Start game» anchor
 
@@ -34,7 +34,8 @@ case for a parent that errors on `GetClass` (already partly — P5).
 
 ## Decisions made without the owner
 
-Filled at closing.
+- `[AI]` The stalled run was closed by `CloseMainWindow` (own run, owner not in it) — no kill needed.
+- `[AI]` The fix reads `ParentPanel` only when `IsValid()` and prints «нет родителя» instead of probing a null object; full name instead of class name (simpler, one call).
 
 ## Links
 
@@ -46,3 +47,14 @@ are invisible to Lua `pcall`).
 `KrinikPilot` `buttons`: a log line BEFORE each sub-step (count, function, parent), `ParentPanel` used only when
 `IsValid()`, otherwise «нет родителя»; `GetFullName` instead of `GetClass():GetFName()`. Stand `tools/test-pilot.lua` P5 with
 an orphan row (null parent) — ALL OK. **Not run in the game yet** — status stays OPEN until a live run passes.
+
+## ✅ STATUS: DONE (2026-10-08 10:58)
+
+Hygiene: stand `tools/test-pilot.lua` ALL OK; P5 with an orphan row (null `ParentPanel`) — the old code would print «?» there,
+the new one prints «нет родителя» (the check reddens on the old version).
+Functional run: the same 9-step route on the owner's game at 10:57:37 — every sub-step logged, step 9 answered «3 шт.: 1:
+CopyToClipboard -> нет родителя; 2: … ; 3: …», the bridge answered `where` right after (thread alive), the game closed
+normally. Cause confirmed: rows of `UI_SessionCodeNewGame_C` exist with a NULL `ParentPanel`; a method call on it stalled
+the game thread (native fault, invisible to `pcall` — EXP-0113). These rows are «copy session code», not «Start game».
+REAL WORLD: accumulated — owner's saves (only read, the route stops before loading); data and machine — his game and PC;
+path — the menu path he uses. Verified on the real world.
