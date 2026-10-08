@@ -114,3 +114,11 @@ Each step quotes its anchor in the epic («…»).
 ## Decisions made without the owner
 
 Filled at closing.
+
+- [ ] **0.2c Free pathfinding, not only roads** (owner's question in chat, recorded 2026-10-08 11:09: «мы сможем сделать, чтобы они могли
+  ходить не только по дорогам? Свободный поиск пути реализуем?») — anchor: 0.2b finding «beyond 150 m the game routes along
+  ROADS». Plan: (1) live: a woken villager gets a schedule place 100–140 m away OFF the road (below the 150 m threshold the
+  game calls a direct navmesh move) — does he walk there? (2) is there navmesh far from the hero (nav invokers are switched
+  off for frozen villagers — offline: the nav settings of the map; live: the same test 400 m from the hero); (3) waypoints:
+  a 400 m off-road trip as a chain of places ≤ 140 m apart, the next one written when the villager arrives. Acceptance —
+  the villager reaches an off-road point 400 m away; Check — bridge distance to the point < 5 m.
