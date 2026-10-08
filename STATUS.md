@@ -141,6 +141,18 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > commands, what to verify first.
 
 > **Medieval Dynasty — первым делом (эпик 15, фаза 0; ночь 07→08.10, отчёты `testcases/reports/2026-10-08_md-*`):**
+> 000. **НОВЫЙ ЧАТ — сравнение кадра с ванилью, критерий №5** (`[OWNER]` «давай в новом чате продолжим с Дальше: сравнение с
+>    ванилью (№5)», 2026-10-08). Фаза 0 стоит 5 из 8 закрыто + №7 по Оксбоу; база «все моды» уже снята 14:53 (кадр 10,03 мс, CPU
+>    9,54, GPU 10,14; CSV `D:/Games/Medieval Dynasty Mods/_pm/pm-mods-on-60.csv`). Сделать два захвата той же сцены (сейв
+>    `Autosave2_Ox`, деревня героя, 15 с после мира, 60 с): **только UE4SS** (Lua-моды пака выключены) и **ваниль** (без UE4SS —
+>    `dwmapi.dll` из `Binaries/Win64` временно убрать; вернуть раскаткой `Deploy-ModPack.ps1 -Deploy -PackDir <пак>`). Без UE4SS
+>    нет пилота по якорям — загрузка запасным маршрутом `tools/route-restart-load.ps1` (по координатам). Захват — ТОЛЬКО
+>    `D:/work/ai_sandbox/_tools/PresentMon-2.5.1-x64.exe --session_name kumm-pm` (сборка FrameView не работает — EXP-0008, баг
+>    31_DONE), разбор — `py -3.10 <пак>/tools/pm_stats.py <csv>` (медиана/p95/p99 кадра, CPU busy, GPU busy).
+>    **Кейсы — файлом ДО запуска** (`testcases/TC_md_phase0_budgets_vanilla_*.md`; дважды нарушено 08.10 — EXP-0182; хук
+>    `testcase-gate` маршрутов MD не видит). Потом — отчёт фазы 0 и `/fable-judge` (шаг 0.10), план фазы 1.
+>    Долги этой сессии: часы на экране (слово владельца, `plans/15` после таблицы фаз — макет до кода); KARMA — выбор 5 черт и 6
+>    нужд владельцем; бонсай-стрижка STATUS (бюджет превышен) и судья по закрытию чата не делались.
 > 00. **Псих-разведка СДЕЛАНА 2026-10-08 13:08** — `researches/medieval-dynasty/recon-psyche.md` (PAD, ALMA, RimWorld, The
 >    Sims, Crusader Kings 3, Dwarf Fortress, GAMYGDALA — первоисточники с цитатами; §9 — гибрид: характер 5 · настроение PAD 3 ·
 >    нужды 6 · стресс 1 · отношение по знакомым · память). Выжимка по-русски — `plans/15`, «Психика» → «Итог разведки». Мерка
