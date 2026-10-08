@@ -98,7 +98,7 @@ Each step quotes its anchor in the epic («…»).
   file; then live `get` on a carried tool's slot (bridge, read-only). Also name where tool damage / work speed is computed
   (what a «Sharp» property would have to change). Verify: a quoted field that survives save → load, or the verdict «no
   room — properties live in our book by instance key».
-- [ ] **0.10 Phase report and judge** — anchor: «Каждая фаза закрывается отчётом прогона … и проверкой `/fable-judge`».
+- [~] **0.10 Phase report and judge** — REPORT 2026-10-08 15:46 (`testcases/reports/2026-10-08_md-phase0-phase-report.md`); judge: first version REFUTED (criterion 2 shown as pass, stand counts, FORK «confirmed by numbers»), fixed; FORK closed in plan 15 (B, by the language choice, not refuted by the numbers). GATE NOT PASSED: criterion 2 far half (hero at a far village, counts per village) and the epic's «дамп одной деревни» are open — next step, before the phase 1 plan. — anchor: «Каждая фаза закрывается отчётом прогона … и проверкой `/fable-judge`».
   Russian report for the owner; `FORK` line closed in the epic; phase 1 plan written only then.
 
 ## Risks
