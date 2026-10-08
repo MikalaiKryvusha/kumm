@@ -35,11 +35,11 @@ grab, OpenCV as a fallback) only confirms.
 - [x] **17.1 Recon the owner's Simple MMORPG automation** — DONE 2026-10-08 10:40: `researches/medieval-dynasty/recon-anchor-pilot.md` (picture anchors + wait/click with confidence lowering, «which of few screens», error states, human call; our primary anchor = UE4SS widget, OpenCV = fallback). — find the repository on the owner's GitHub (`gh repo list
   MikalaiKryvusha`), read how its «paths by anchors» were recorded and replayed; write the lessons to
   `researches/medieval-dynasty/recon-anchor-pilot.md` (anchor: «как я делал с симпле мморпг, найдешь в моем GH»).
-- [ ] **17.2 Pilot mod `KrinikPilot` v1 (action mod, UE4SS Lua)** — command file `pilot.txt`, one route per line; steps
+- [x] **17.2 Pilot mod `KrinikPilot` v1 (action mod, UE4SS Lua)** — DONE 2026-10-08 10:48 (+ `confirmslot`, `usefn`; stand ALL OK, mutant red). — command file `pilot.txt`, one route per line; steps
   `wait <Class> [sec]`, `call <Class> <Function>`, `set <Class> <Prop> <int|string>`, `pickslot <UserSaveName>` (find the
   `UI_SaveGameSlot_C` row by name in `UI_LoadMenu_C.SB_SaveSlots`, set `SelectedSaveSlot`); each step logged with time and
   result; stand `tools/test-pilot.lua` with a mutant (anchor: «по якорям»).
-- [ ] **17.3 Route `load <name>`** — `UI_MainMenu_C:Load` → `pickslot` → `UI_LoadMenu_C:ConfirmSelection` → Solo/Co-op
+- [~] **17.3 Route `load <name>`** — 8 of 9 steps by anchors LIVE 10:44–10:48 (menu → slot by name → Solo → «Start game» screen); the «Start game» anchor is open (report `testcases/reports/2026-10-08_md-anchor-pilot.md`). — `UI_MainMenu_C:Load` → `pickslot` → `UI_LoadMenu_C:ConfirmSelection` → Solo/Co-op
   panel (its widget is found by recon inside this step) → «Start game» → wait for `BP_PlayerCharacter_C`. Test case file first
   (`testcases/TC_md_anchor_pilot_*.md`).
 - [ ] **17.4 Fixed save copy** — copy the owner's chosen save to `Krinik_Ox.sav` + `Krinik_Ox_Label.sav` (only if the menu
