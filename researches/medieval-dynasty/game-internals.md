@@ -1687,3 +1687,17 @@ Border between stage 3 and 4 is clean (110 m vs 130 m), matching `ActiveRadius` 
   `BT_Multi_Village_NPC` (engine default), and `SetBehavior` skips the re-pick only while `bIsInDialogue` or `MultiState == 1`
   (Talk with Player). Remaining: the running BT task of the old activity finishes first, or navigation far from the hero
   (nav invokers) — next live run: per-villager distance every 10 s to tell staggered starts from a common one.
+
+## Item instances — where a per-item property can live (live read 2026-10-08 10:21, bridge v10 `inv`)
+
+- `InventoryComponent_C.Inventory_New` is a TMap **item ID → `ST_InventoryItemsArray`** (`Items_3_D270B57A4C1BFF2E48F4959E383134C8`
+  = array of `ST_ItemInventorys`). Fields of an instance: `ID_8_…`, `Count_5_…`, `HP_26_6D4396FD41F514AABBF6B1AAFB9F4FF8`,
+  `MaxHP_29_41FA9E2B4D85424D26032DAB2E0BC76E`, `Condition_20_…`, `Freshness_32_…`, `Capacity_23_…`, `Ownership_35_…`,
+  `NoteDetailsRowName_39_F1C0B43B4BFE9E31ADCC88A3C9AB79E5`, `IsEquipped_14_…`, `IsAssignedToQuickSlot_12_…`,
+  `QuickSlotIndex_17_…`, `Index_7_…`.
+- Live (hero, Oxbow): stacks are one instance with `Count` (Meat 112, Coin 318 689); **`MaxHP` is per instance and differs**
+  (HoseJoined 500, TunicVest_B 1000, NobleBoots 200, `HP` 100 each — `HP` looks like percent); `NoteDetailsRowName` = None
+  everywhere; equipped items are not in this map (armor — `ArmorCharacter`).
+- For track В: «Tempered / Cracked» → the instance's `MaxHP`; a property tag («Sharp», …) → `NoteDetailsRowName` or our
+  book keyed by instance. Open: whether written values survive save → load. `ST_CraftedItemData` (HP, ItemID, Ownership,
+  UseOldHP) carries crafted items' data. Report `testcases/reports/2026-10-08_md-phase0-item-instance.md`.

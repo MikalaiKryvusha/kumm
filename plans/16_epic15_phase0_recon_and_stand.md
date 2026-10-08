@@ -91,7 +91,7 @@ Each step quotes its anchor in the epic («…»).
   does not give. Verify: criterion 7.
 - [~] **0.9 Durability** — offline half done 2026-10-08 (no field in `DT_ListOfItems`; reflected `ABaseEconomyManager` UFUNCTIONs `GetDurability`… — `researches/medieval-dynasty/game-internals.md`); live half open — anchor: «**Износ и ремесло** | … прочность `Add Used Durability`». Offline search in item
   structures and `BP_EconomyManager`; live `get` on an equipped tool if needed. Verify: criterion 8.
-- [ ] **0.11 Where an item instance can carry a property** (added 2026-10-08 after interview #008 Q5 «Б» — track В of the
+- [~] **0.11 Where an item instance can carry a property** — LIVE READ 2026-10-08 10:21 (bridge v10 `inv`): `Inventory_New` = item ID → array of `ST_ItemInventorys`; per-instance `MaxHP` differs (500 / 1000 / 200), `NoteDetailsRowName` free (None) — carriers found; write + save→load survival open (report `testcases/reports/2026-10-08_md-phase0-item-instance.md`). (added 2026-10-08 after interview #008 Q5 «Б» — track В of the
   epic) — anchor: «**где у экземпляра вещи можно хранить свойство** (для дорожки В)». Offline first: the inventory slot
   struct (`Comp/Inventory/InventoryStructs.h` in the PDB, `ST_*` item structs in the pak), what of it reaches the save
   file; then live `get` on a carried tool's slot (bridge, read-only). Also name where tool damage / work speed is computed
