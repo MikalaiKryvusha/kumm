@@ -154,7 +154,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 >    `NoteDetailsRowName` экземпляра (мост v10 `inv`, отчёт `…-item-instance.md`; запись + сохранение — открыто).
 > 3. **Шаг 0.5 (спавн):** рецепты — чит-меню разработчиков `UI_CheatMenu` (SpawnBandit, SpawnAnimal, Force spawn POI).
 > 4. **Как гонять игру:** пак `D:/work/ai_sandbox/MedievalDynasty`, раскатка `Deploy-ModPack.ps1 -Deploy -PackDir <пак>`, запуск
->    `Medieval_Dynasty.exe` — одной командой `powershell -File tools/route-restart-load.ps1` пака (≈30 с до мира); команды — строки в
+>    `Medieval_Dynasty.exe` — одной командой `powershell -File tools/route-restart-load.ps1` пака (снимок сейвов + мир ≈30 с + `feed` героя), закрывать ТОЛЬКО `tools/route-close.ps1` (вернёт сейвы 1:1; урок 2026-10-08 — герой через прогоны дошёл до воды 0); команды — строки в
 >    `ue4ss/Mods/KrinikBridge/in.txt` (ответ `out.txt`) и `KrinikWake/wake.txt`; закрывать `CloseMainWindow`; после — сверка
 >    сейвов с `D:/Games/Medieval Dynasty Mods/_save-backup/2026-10-08_0045` (sha256, 48 .sav). Перед прогоном — TC в
 >    `testcases/`; стенды `tools/test-bridge.lua` (26) и `tools/test-wake.lua` (13) с мутантом. Out-параметры UE4SS — EXP-0177.
