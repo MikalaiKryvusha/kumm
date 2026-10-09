@@ -105,3 +105,18 @@ own bundle pipeline already proven by `Krinik/Terrain/Matte`>.
   a grass tint/streak pattern in our terrain shader for the ring — needs `worldPos` in the terrain `Input` (fork of
   `TerrainSplatmapCommon.cginc`) and the same in the base-map shader for far terrain.
 - Visual references gathered: `SvarogsDream/gallery/refs/sky/` (Skyrim, Oblivion, real night, real sunsets, haze and clouds — 75 WebP).
+
+## Aurora and clouds by formula (web, 2026-10-10 ≈00:25–00:28)
+
+- **Aurora — nimitz «Auroras» (Shadertoy, CC BY-NC-SA 3.0)**, seen through Godot ports
+  ([Aurora Borealis](https://godotshaders.com/shader/aurora-borealis/), [Aurora sky shader](https://godotshaders.com/shader/aurora-sky-shader/),
+  [Volumetric Aurora](https://godotshaders.com/shader/volumetric-aurora-borealis-with-polar-reflection/)): march the view ray through ~50 stacked
+  height layers; per layer a triangle noise `triNoise2d` (folded curtains); layer colour by a sine of the layer index; colour AVERAGED
+  between layers (`avg = mix(avg, c, 0.5)`), contribution fading `exp2(-i·0.065)`; flow speed 0.06. Softness comes from the averaging and
+  the slow flow — our first ribbons had a hard bottom edge and fast rays (`[OWNER]` «быстрое, резкое … грубое»). Physics of colour, bottom →
+  top: blue/violet (N₂, ~80 km), green 557.7 nm (~110 km), faint red 630 nm (~220 km) ([webexhibits](https://www.webexhibits.org/causesofcolor/4D.html)).
+- **Clouds**: domain warping — `f(p) = fbm(p + fbm(p + fbm(p)))`, offsets only decorrelate ([iq — warp](https://iquilezles.org/articles/warp),
+  [GameDev shaderlab — domain warped noise](https://gamedev.net/shaderlab/23-domain-warped-noise/),
+  [procedural clouds](https://gamedev.net/shaderlab/25-procedural-clouds/)); coverage = threshold, softness = its width; two layers at
+  different speeds. Opacity by Beer–Lambert `1 − exp(−σ·thickness)` (σ large — heavy, opaque; small — translucent), darker with thickness;
+  silver lining = forward scattering toward the sun (standard technique, primary source not read).
