@@ -31,6 +31,18 @@ Acceptance: `python -I tools/text_census.py "<игра>" translation/text_census
 
 `[OWNER]` «28 — 1106 строк кода игры не переведены - допереводим» · 2026-10-09, до 08:36.
 
+## Quest outcomes in the journal — a composed key outside the census (2026-10-09)
+
+Seen live in the owner's journal: «Alternate Path: Threads intertwined to create a different path.» (frame
+`SvarogsDream/_harness/ev2.webp`, 09:47). The census does not see it: the string is DATA, not a code literal — `QuestManager`
+(decompiled line 375) writes `questName + ": " + questDoneDescription` into the log and the save. Extractor
+`SvarogsDream/tools/quests_extract.py` → `translation/quests_en.tsv`: 184 quests (id · name · done · log key), `29a8e67`; 40 of 184
+names already have a machine translation (quest window), the rest are English. Next: translate names (they are NAMES — table
+«английский | русский | где» to the owner first, STYLE) and done-descriptions → a generator `quests_xunity.py` writing the exact
+log keys «Имя: описание» into `zz_quests.txt` (the `templated()` path of worldevents). The code-built «<hero>'s equipment: Your
+items have been returned.» (QuestManager:46) needs an `r:` rule. Old journal entries are fixed by the same exact keys (the
+log text is translated on show), unlike world events, which the game stored already machine-translated.
+
 ## Root cause
 
 Класс `census-by-own-pattern` (EXP-0168, второй удар — баг 27): каждая выемка перечисляет текст по своему шаблону, и знаменатель
