@@ -81,6 +81,20 @@
 
 ## Entries
 
+### EXP-0193 · 2026-10-09 · ❌→✅ · #video #capture #hdr #ffmpeg #audio #wasapi #svarogsdream #demo
+class: tool-silent-refusal
+**Context:** демо неба Сварога видео с голосом агента и звуками игры; рабочий стол — поток 1280×720 в HDR; в ffmpeg нет WASAPI, «Stereo Mix» нет.
+**Tried / did:** звук — PyAudioWPatch (петля WASAPI) в `_tools/capture-venv`; блокирующий `read` в тишине повис навсегда (стоп-файл не увиден),
+а запись «сжималась» без пауз. Голос `voice_say.py` синтезирует ≈3.5 с — отставал бы от сцены.
+**Result:** ✅ видео `ddagrab output_fmt=rgbaf16` → `exposure` = log2(1/белый) → `zscale tin=linear t=iec61966-2-1` → nvenc в MKV (переживает
+`taskkill /F`); белый SDR = максимум float-кадра рабочего стола (здесь 3.0); звук — опрос `get_read_available` + досыпка нулей по часам;
+фразы заранее в WAV (`voice_say.py <txt> <wav>`); сведение — по вспышке молнии в кадре (видео отстаёт от часов на 0.4 с).
+**Lesson:** **запись звука петлёй WASAPI — только опросом с досыпкой тишины по часам; запись HDR-стола — float с делением на белый SDR, не
+8-бит; голос к сцене — заранее синтезированным.**
+**Repro:** `SvarogsDream/tools/rec_audio.py <wav> <stop>`; команда видео — `testcases/reports/2026-10-09_svarog-sky-demo.md`, раздел Runs.
+**Trigger:** нужна видеозапись экрана или звука системы на этой машине. **Not for:** кадры изнутри Unity (`shot`).
+mechanized: SvarogsDream/tools/rec_audio.py (опрос и досыпка тишины в коде)
+
 ### EXP-0192 · 2026-10-09 · ❌→✅ · #svarogsdream #unity #fog #water #luxwater #deferred #ppv2
 class: shader-owns-its-own-formula
 **Context:** «дымка у горизонта» неба Сварога — туман сцены цветом горизонта, чтобы плоская даль не резала небо полосой.
