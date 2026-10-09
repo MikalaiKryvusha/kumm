@@ -1,6 +1,7 @@
 # Bug 28 — Svarog's Dream: ≈1100 строк кода игры вне всех словарей — игрок видит их по-английски
 
-**Status:** 🔴 OPEN — перепись есть, разбора и перевода нет
+**Status:** 🟡 IN PROGRESS — разбор сделан, 527 строк переведено; остаток 65 строк, все куски склеек (нужны правила r:/sr:);
+34 новых имени ждут владельца (2026-10-09 15:04)
 **Severity:** S2 — английский текст в русской игре по многим окнам; данные не задеты
 **Version/build:** SvarogsDream `2a4ed60` + `tools/text_census.py` · **When/context:** 2026-10-07 ≈22:00, найдено при починке бага 27
 (перепись класса «реплики вне выемки»)
@@ -26,6 +27,8 @@ Acceptance: `python -I tools/text_census.py "<игра>" translation/text_census
   «Преданности»), `GodConversationManager` 50 (беседы с богом, длинные тексты с `\r\n`), `TrainerFaithRedOrder` 38, `CastSpell` 25
   (подсказки умений), `WorldMap` 22 («The old gods have revoked your access.»), учителя `Trainers*`/`ConversationTraining*` по 8–10.
 - Шум (не видит игрок): `RuntimeProfiler` 20, сообщения об ошибках `OptionsPresenter`, имена клавиш («Mouse ScrollWheel»).
+- После разбора и перевода (2026-10-09 15:04, вывод `text_census.py`): unknown 430 → из них куски склейки внутри ключа 84,
+  разобранный шум и переводы другой формы 281, **остаток 65 (уник. 63) в 9 файлах** — см. «Progress».
 
 ## Owner's word
 
@@ -42,6 +45,46 @@ names already have a machine translation (quest window), the rest are English. N
 log keys «Имя: описание» into `zz_quests.txt` (the `templated()` path of worldevents). The code-built «<hero>'s equipment: Your
 items have been returned.» (QuestManager:46) needs an `r:` rule. Old journal entries are fixed by the same exact keys (the
 log text is translated on show), unlike world events, which the game stored already machine-translated.
+
+## Progress — разбор и перевод строк кода (2026-10-09)
+
+`[OWNER]` «допереводим» · «перевод нужно продолжить делать» · 2026-10-09. Работа без запуска игры; словарь XUnity
+перечитывает при следующем старте. Числа ниже — из вывода `python -I tools/text_census.py`, время — из `date`.
+
+**Прибор.** `tools/text_census.py` теперь считает виды: ключ как есть или шаблоном чисел (XUnity TemplateAllNumberAway:
+«…level 15…» лежит ключом «…level {{A}}…»); кусок склейки (рядом «+» или «+=») внутри ключа или правила `r:`; разобранное
+`translation/text_census_ok.tsv` (файл кода · строка или «*» · почему). Печатает остаток и пишет `translation/code_en.tsv` —
+источник нового генератора `tools/code_xunity.py` (разбор записок `notes_xunity.py`) → `_config/xunity/zz_code.txt`, строкой
+в `translation_deploy.sh`. Новые имена — `SvarogsDream/translation/names_pending_owner.tsv` (english · предложение · где ·
+почему), в словаре с пометкой [AI].
+
+| Время | Шаг | Остаток (строк / уник.) | Коммит SvarogsDream |
+|---|---|---|---|
+| 14:41 | разбор: 1106 по старому счёту → unknown 1092 (14 закрыты шаблоном чисел), куски склейки 83, шум и иная форма 264 | 745 / 621 | 4335f31 |
+| 14:45 | партия 1: карта (WorldMap 21) и «Преданность» (UICharacterDevotionPanel 56) — 77 строк | 668 | 4335f31 |
+| 14:50 | партия 2: подсказки умений, отказы умений, надписи боя, Звериный Облик, баффы, мелкие окна — 103 строки | 539 | 23490c0 |
+| 14:53 | партия 3: Войны Фракций (FactionWarManager) — 106 строк | 357 | 1db0010 |
+| 14:56 | партия 4: беседа с Единым Богом (GodConversationManager) — 25 строк | 307 | adbc959 |
+| 15:04 | партии 5–6: учителя, суд Красного Ордена, «Прогресс», реплики квестов и богов, титры — 216 строк | 66 → 65 | f07316a, b1c03a6 |
+
+Итог 15:04: в `code_ru.tsv` 527 строк (42 с пометкой [AI] — новые имена), разобранного в `text_census_ok.tsv` 213 строк;
+`glossary_check.py --strict` — 0 нарушений в наших файлах; выкладка прошла целиком (на партиях 2–4 её останавливала строгая
+проверка на чужом незакоммиченном `zz_krinik_newgame.txt`, тогда `zz_code.txt` копировался в игру отдельно и сверялся `cmp`).
+
+Находки:
+- **Советы загрузки (61) были переведены давно**: игра показывает `$"Tip {num + 1}: {loadingTips[num]}"`, ключи
+  `Tip {{A}}: …` в `zz_krinik_tips.txt`; шесть советов с числом сходятся только шаблоном (`{{B}}`). Прибор считал их
+  непереведёнными — ложный счёт класса EXP-0168, второй прибор того же бага.
+- Метки окна предмета («Blunt Damage: x», «Bonus HP: ») показываются только с числом — ключи шаблоном уже есть.
+- Текст беседы с богом игра печатает по букве (`TypeText`, `Substring`): ключ ловит только полный текст, русский встанет
+  в конце печати — смотреть в игре.
+
+**Остаток 65 (уник. 63) — только куски склеек**, целым ключом не переводятся: эпитафии «Прогресса» (ProgressManager 31:
+`text += "\n Killed no one."`, имя героя + «'s death greatly upset…»), итоги Пути Недеяния (PathOfNonDoing3 12),
+`$"{text}{text3} has a bounty on you…"` (HeadHuntQuestioning 7: правило `r:` есть, но группы `$1$2` выходят английскими),
+окна ошибки загрузки с именем файла (LoadSaveGameManager 4, WorldStreamingPreloader 3), дописывания «+=» в DevotionSelection 3
+и UIBuffTooltip 1, `GetGenderGreetings() + ", …"` (TrainerFaithRedOrder 2), «New Virtue: » + имя (VirtuesManager 2).
+Следующий шаг — правила `r:` (и `sr:`, где группа сама требует перевода) по полному тексту склейки.
 
 ## Root cause
 
