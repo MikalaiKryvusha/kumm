@@ -1,0 +1,98 @@
+# Run report — Svarog's Dream: падающие звёзды v2, светила в мире, опыт 0 эпика 19 (DX11 против DX12)
+
+## 1. Work
+
+`KrinikColorRework`:
+- `Sky.cs` — падающие звёзды трёх типов (угол, длина, скорость, хвост, яркость), `TestMeteorKind`, `TestMeteorHold`; полоса неба
+  `BandTopY` по MinPitch камеры, а не по текущему наклону;
+- шейдер `Krinik/Sky/Gradient` — хвост сужается и гаснет к концу, голова, точка хорды на сфере.
+
+`tools/run-game.sh` — `GAME_ARGS`.
+
+Случаи:
+- `testcases/TC_svarog_sky_v3_2026-10-09.md`: C46, C50–C53;
+- `testcases/TC_svarog_main_thread_2026-10-10.md`: C1–C4.
+
+Основание — слово владельца в чате 2026-10-10 ≈01:39–02:18 (цитаты — в случаях и в коде).
+
+## 2. Contour
+
+Игра `D:\Games\Svarog's Dream`, экран 1280×720.
+
+**Сейвы.** Режим «Железного человека»: игра пишет сейв сама — при выходе, по таймеру и при смерти. Копии:
+- `_backups/svarog-saves-2026-10-10_0157-current`;
+- `…_0208-bor` — после быстрого перемещения в Бор по слову владельца «телепортируй куда-нибудь в город героя»;
+- `…_0211-owner` и `…_0216-owner` — выходы владельца.
+
+**Отложенные сейвы моих прогонов:**
+- `…_0202-test-death` — смерть героя, см. «Found» 1;
+- `…_0206-test-kill` — автосейв ночи с вампиром;
+- `…_0221-test-autosave`.
+
+После каждого — откат на копию владельца, сверка sha256 4/4.
+
+SvarogsDream `41c6938` → `c562d6f` → `596a441`.
+
+## 3. Runs
+
+Запуски игры: 2026-10-10 02:01, 02:04, 02:08, 02:13, 02:20, 02:24 (DX11), 02:26 (DX12: `GAME_ARGS=-force-d3d12 bash tools/run-game.sh`).
+
+Пульт:
+- `bash tools/h.sh "timescale 0"`;
+- `"callon Managers/StandardManagers/WorldTimeManager WorldTime IncreaseTimeByOneHour True"`;
+- `"call KrinikColorRework.Sky TestMeteorKind <0..2>"`, `"call KrinikColorRework.Sky TestMeteorHold <t|-1>"`;
+- `"call KrinikCameraRework.Plugin TestFaceSun <наклон> <угол>"`;
+- `"callon Camera CameraFollow SetMaxZoom"`;
+- `"perf 8"`;
+- `"call UnityEngine.SystemInfo get_renderingThreadingMode"`;
+- `'click "UI/InfoPanel/MapPanel/FillMap/Scroll Rect/MapPanel (Movable)/HelperMap/FastTravelMainMap/BorInn"'` и
+  `"click UI/InfoPanel/MapPanel/FastTravel/FastTravelBtn"`.
+
+Сборка пакета — `Unity.exe -batchmode … -executeMethod KrinikBuild.Bundles`.
+
+## 4. Checks
+
+**Hygiene.** `dotnet build` — 0 ошибок; пакет — 4 шейдера без ошибок.
+
+**Functional run** — кадры изнутри движка, разности кадров (numpy), строка `sky` в журнале.
+- C53 pass — луна стоит в мире.
+- C46 partial — болид и средняя видны; быстрая не поймана; вживую — глаз владельца.
+- C52 partial — белый туман ночью меняется от кадра к кадру; объект не найден.
+- C50, C51 — не прогнаны: владелец был в игре, потом спать.
+- Опыт 0 DX12:
+  - C1 pass — опора DX11;
+  - C2 pass — DX12 работает;
+  - C3 fail для DX12 — главный поток +1.1 мс;
+  - C4 pass — шейдеры те же.
+
+## 5. Found
+
+1. **Промот ночи в лесу убил героя владельца.** Промотал 13 ч `IncreaseTimeByOneHour` ради ночного неба — через ≈8 с вампир, игра
+   записала смерть. Откат на копию. Дальше ночь только на `timescale 0` или в деревне. Память агента:
+   `svarog-ironman-night-skip-kills-hero`.
+2. **«Железный человек» пишет сейв сам** — при выходе (подсказка в меню паузы: «игра сохраняется сама при выходе»), по таймеру и при
+   смерти. Наш `kill` (`Process.Kill`) сейв не пишет.
+3. **Новые звёзды были невидимы.** Хвост считался по хорде внутри сферы неба: прогиб ≈0.008 против толщины ≈0.0007. Старая короткая
+   толстая звезда это маскировала.
+4. **Видимое небо у пологой камеры — верхние ≈7 % кадра.** Звезда с середины пути от горизонта или ±52° по азимуту в кадр не попадала.
+5. **Светила стояли на полосе текущего кадра** и ехали за наклоном камеры. Теперь полоса — от MinPitch.
+6. **DX12 главный поток не разгружает.** Родные графические задания включаются (`NativeGraphicsJobs`), но команды собирает всё тот же
+   главный поток — как предупредила разведка.
+7. **Камера между моими кадрами плыла** — в игре был владелец (отдалял камеру, открыл меню паузы).
+
+## 6. Traces
+
+- `SvarogsDream/gallery/game/2026-10-09_небо/`: `v5-падающие-звёзды-болид-и-средняя.webp`, `v5-падающая-звезда-в-кадре.webp`,
+  `v5-луна-стоит-при-наклонах-10-15-20.webp`.
+- `SvarogsDream/gallery/game/2026-10-10_карта/эпик19-dx11-слева-dx12-справа.webp`.
+- `SvarogsDream/_harness/`: `b1–b5`, `k1–k6`, `m*`, `h1–h6`, `s0–s2`, `sn`, `mo10–mo20`, `e1`, `e2`, `e2sky`, `ft0`, `ft1` (`.webp`).
+- Журналы `BepInEx/LogOutput.log`, `Player.log`.
+- Разведка — `researches/svarogs-dream/main-thread-recon.md`.
+
+## 7. Verdict
+
+**partial.**
+- Светила в мире — pass.
+- Падающие звёзды видны и разные — частично: быстрая и разнообразие вживую не подтверждены.
+- Опыт DX12 — отрицательный, не включать.
+- Мерцание и туман ночью — открыты (C50, C52).
