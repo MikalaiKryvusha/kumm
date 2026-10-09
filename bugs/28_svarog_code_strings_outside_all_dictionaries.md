@@ -27,6 +27,10 @@ Acceptance: `python -I tools/text_census.py "<игра>" translation/text_census
   (подсказки умений), `WorldMap` 22 («The old gods have revoked your access.»), учителя `Trainers*`/`ConversationTraining*` по 8–10.
 - Шум (не видит игрок): `RuntimeProfiler` 20, сообщения об ошибках `OptionsPresenter`, имена клавиш («Mouse ScrollWheel»).
 
+## Owner's word
+
+`[OWNER]` «28 — 1106 строк кода игры не переведены - допереводим» · 2026-10-09, до 08:36.
+
 ## Root cause
 
 Класс `census-by-own-pattern` (EXP-0168, второй удар — баг 27): каждая выемка перечисляет текст по своему шаблону, и знаменатель

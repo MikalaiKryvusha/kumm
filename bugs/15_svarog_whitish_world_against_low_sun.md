@@ -162,6 +162,18 @@ brightness), 0 is lighter; the match is k ≈ 0.36 (morning, evening), 0.22 (noo
 game view evening 0.226 vs 0.223, noon 0.424 vs 0.438, night 0.105 vs 0.084; facing the low sun 0.278 vs 0.404 (glare gone).
 FPS: 75.1 / 75.7 matte vs 74.7 / 76.3 game. Comparison page: `SvarogsDream/gallery/game/2026-10-05_матовая-земля/index.html`.
 
+## Owner's verdict — 2026-10-09: ground accepted, foliage still slightly whitish
+
+`[OWNER]` «принят, но на листве чуть-чуть белесость осталось словно» · 2026-10-09, до 08:36 (груминг беклога,
+`plans/18_svarog_backlog_checklist.md`).
+
+The matte terrain shader is accepted; the bug stays open for the FOLIAGE. Hypotheses 2–4 (leaf translucency, Tree Creator
+gloss, CTI back-face smoothness) changed little; the confirmed mechanism for the ground (Fresnel of the 0.04 dielectric
+specular at grazing light) most likely applies to leaves too — all opaque geometry is lit by the custom deferred shader
+`Hidden/CTI/Internal-DeferredShading`. Water is transparent (forward) and is not lit by it.
+Next: same-spot A/B at a frozen low sun with the leaf specular zeroed (CTI / Tree Creator leaf materials, or our own leaf
+shader copy, as with the ground).
+
 ## Decisions made without the owner (this fix)
 
 - `[AI]` Matte shader as a copy of Unity's own terrain shader on StandardSpecular (community fix: no specular on terrain),
