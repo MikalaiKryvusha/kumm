@@ -25,6 +25,18 @@ KrinikUIRework` (RELOADED) · кадр — `shot` пишет JPEG, `h.sh` сам
 расстояние, точка экрана) → `callon "<путь>" Interactable Interact True` (EXP-0155). Записка на экран её же байтами —
 `call CookingManager ShowPoetry "<текст с \r\n>" False False`, поле текста `UI/ActionBar/ActionBarMain/UIRecipe/Poetry/PoetryMessage`.
 
+## Небо (KrinikColorRework, раздел «Небо», с 2026-10-09)
+
+Шейдер `Krinik/Sky/Gradient` (проект `unity/KrinikShaders`, пакет `krinik.shaders`; после правки шейдера — пересборка пакета и
+ПЕРЕЗАПУСК игры: пакет занят запущенной игрой) + `src/KrinikColorRework/Sky.cs`. Шесть настроений по часу и погоде игры, два заката
+(чередуются по дням), солнце, луна, звёзды, облака шумом, молнии с громом игры, дымка у горизонта (туман ExponentialSquared — вода
+Lux Water считает туман формулой EXP2, EXP-0192). Разведка и уроки — `researches/svarogs-dream/sky-recon.md`; случаи —
+`testcases/TC_svarog_sky_2026-10-09.md`. Пульт: `cfg krinik.svarogsdream.colorrework Sky ForceMood <Auto|Day|Dawn|Dusk|Night|Fog|Rain>`,
+`Sky Sunset <Alternate|Raspberry|Golden>`, `call KrinikColorRework.Sky TestLightning`, `call KrinikColorRework.Sky TestFlashHold 4`;
+ракурс неба — `call KrinikCameraRework.Plugin TestFaceSun 15 <угол от солнца>` (поле зрения ±25° — солнце на ±10°); ночь по часам —
+`callon Managers/StandardManagers/WorldTimeManager WorldTime IncreaseTimeByOneHour True`; дождь игры — `callon
+Managers/StandardManagers/WeatherManager WorldWeatherManager SetRainWithPrerain False`. После проверки вернуть `ForceMood = Auto`.
+
 ## Шрифт Manrope
 
 Матовый шейдер земли (мод KrinikColorRework 2.1.0, баг 15) — тот же проект Unity: `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode

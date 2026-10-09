@@ -81,6 +81,30 @@
 
 ## Entries
 
+### EXP-0192 · 2026-10-09 · ❌→✅ · #svarogsdream #unity #fog #water #luxwater #deferred #ppv2
+class: shader-owns-its-own-formula
+**Context:** «дымка у горизонта» неба Сварога — туман сцены цветом горизонта, чтобы плоская даль не резала небо полосой.
+**Tried / did:** `RenderSettings.fog` Linear 250–1100 м (камера deferred, туман кладёт PPv2 `PostProcessLayer.fog`).
+**Result:** ❌ даль растаяла, но ближняя вода у героя побелела. Вода — ассет Lux Water: считает туман САМА, формулой `FOG_EXP2`
+(`LuxWater_Setup.cginc`), по `RenderSettings.fogDensity` игры (0.01 → ≈22 % дымки уже в 50 м). ✅ ExponentialSquared 0.0012 — вода чистая.
+**Lesson:** **включая туман сцены в чужой игре, вид тумана подбирай под прозрачные шейдеры игры (вода, частицы), а не под свой
+замысел: они считают туман своей формулой и берут из RenderSettings то, что ты не ставил.** Сначала `mats <имя>` → имя шейдера → его
+документация о тумане.
+**Repro:** `cfg … Sky Haze true` при Linear, камера 55° у воды. **Trigger:** любой `RenderSettings.fog` в моде. **Not for:** игры
+без своих прозрачных шейдеров.
+mechanized: none
+
+### EXP-0191 · 2026-10-09 · ❌→✅ · #svarogsdream #unity #skybox #camera #harness
+class: wrong-model-of-the-frame
+**Context:** скайбокс для пологой камеры Сварога: облака рисовались (видно камерой снизу), а в кадре 15° — ни одного.
+**Tried / did:** облака только выше горизонта (`d.y > 0`), солнце и луна — на середине «видимой полосы».
+**Result:** ❌ видимая полоса неба лежит НИЖЕ настоящего горизонта (верх кадра d.y ≈ −0.015: камера высоко, небо видно там, где
+кончилась подгруженная земля). ✅ линия неба опущена (`_HorizonDrop` 0.12), диски — под верхом кадра (`DiscBelowTop`).
+**Lesson:** **прежде чем рисовать в небе, измерь, где в кадре реально небо: направление верха кадра (`ViewportPointToRay`) — одно
+число в журнале, и модель «полоса над горизонтом» проверена или убита.** Диагностика за минуту — камера вверх (`TestFaceSun -20`).
+**Repro:** `TestFaceSun 15 0` → журнал `bandTop`. **Trigger:** скайбокс/дальний фон в игре с пологой камерой. **Not for:** —
+mechanized: строка `bandTop=` в статусе мода неба
+
 ### EXP-0190 · 2026-10-09 · ❌→✅ · #svarogsdream #xunity #resolution #harmony #loadorder #registry
 class: stand-differs-from-owner-world
 **Context:** на удалённом столе (1080p, 720p) окна Сварога рвали тексты по слогам; на 4K — целые.

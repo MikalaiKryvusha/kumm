@@ -3,7 +3,8 @@
 > **Created:** 2026-10-09 (on the owner's request in chat, ≈18:30) · **Parent:** owner's word in chat — `[OWNER]` «запрос на
 > новый мод: скайбоксы … хоть примитивно, но чтобы не пустота была на фоне, а небо, дневное, расветное, закатное, ночное,
 > туманное, дождливое» · «можешь погуглить, как в нашем стеке быстро и просто небо сделать. Полноценно не нужно, наша камера
-> небольшую полосу над горизонтом позволяет увидеть» · **Status:** recon done 2026-10-09 18:34; live probe — next ·
+> небольшую полосу над горизонтом позволяет увидеть» · **Status:** recon done 2026-10-09 18:34; built and run in the game 18:38–19:27
+(SvarogsDream `4116988`…`357134b`, run report `testcases/reports/2026-10-09_svarog-sky.md`) ·
 > **Outbound:** —
 
 ## What the game is (observed)
@@ -58,3 +59,19 @@ own bundle pipeline already proven by `Krinik/Terrain/Matte`>.
 - (b) Our colour grade (`KrinikColorRework`) tonemaps the sky too — colours are picked in the game, not in a picker.
 - (c) Interiors/dungeons/Iriy may rely on the solid clear colour — the sky is applied only in the open world (same zones as
   `IsNoWeatherZone`).
+
+## What the live runs taught (2026-10-09 18:38–19:27)
+
+- **The void was the game's own skybox**: camera already `Skybox`, material `Skybox/6 Sided` — black in the 15° view.
+- **The visible strip lies BELOW the true horizon.** The camera is high; at pitch 15° the frame top is at d.y ≈ −0.015, and the sky
+  shows where the loaded land ends. A sky drawn "above the horizon" paints that strip with the below-horizon colour and no clouds.
+  Fix: the sky line is lowered by `_HorizonDrop` 0.12; sun and moon discs are placed by the mod just under the frame top
+  (`DiscBelowTop` 0.032), at the real sun azimuth (moon opposite).
+- **Water reflects the skybox** — every sky feature (clouds, sunset tint, moon) shows in lakes for free.
+- **Scene fog vs the game's water**: the water is the Lux Water asset; it computes fog itself with `FOG_EXP2` (its
+  `LuxWater_Setup.cginc`, doc "Lux Water 1.2.3", deferred fog section) using `RenderSettings.fogDensity` (game: 0.01). A Linear haze
+  left the water on EXP2 at 0.01 → near water whitened. Haze must be `ExponentialSquared`; density 0.0012 keeps the near world clear.
+  PPv2's deferred fog (`PostProcessLayer.fog`, on in the game, `excludeSkybox`) applies it to opaque geometry once `RenderSettings.fog`.
+- **Cost**: PresentMon 15 s each — sky off 20.89 ms median, sky on (clouds, haze) 19.41 ms; run-to-run spread exceeds the sky's cost.
+- **Lightning**: thunder via the game's own `CombatSoundsManager.PlayThunderUniqueSound(AudioSource, ThunderSounds, volume)` — volume
+  follows the game's effects slider. A flash shorter than ~0.3 s is not caught by the harness `shot` — `TestFlashHold` exists for that.
