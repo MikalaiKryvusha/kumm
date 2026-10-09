@@ -14,7 +14,7 @@ SvarogsDream `88e9604` + рабочее дерево; пакет `krinik.shaders
 
 ## 3. Runs
 
-Девять запусков игры: 2026-10-09 23:33, 23:40, 23:46, 23:48, 23:50, 23:58, 2026-10-10 00:01, 00:05, 00:07 (между ними — пересборка пакета:
+Одиннадцать запусков игры: 2026-10-09 23:33, 23:40, 23:46, 23:48, 23:50, 23:58, 2026-10-10 00:01, 00:05, 00:07, 00:14, 00:17 (между ними — пересборка пакета:
 `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode -nographics -quit -projectPath unity/KrinikShaders -executeMethod KrinikBuild.Bundles`).
 Запуск `bash tools/run-game.sh`; пульт `bash tools/h.sh "callon Managers/StandardManagers/WorldTimeManager WorldTime IncreaseTimeByOneHour True"`
 `"call KrinikCameraRework.Plugin TestFaceSun <наклон> <угол>"` `"call KrinikColorRework.Sky TestNight <сдвиг>"`
@@ -29,7 +29,7 @@ Hygiene: `dotnet build src/KrinikColorRework -c Release` — 0 ошибок; п�
 Functional run: игра на 4K, сейв владельца, часы игры и пульт; кадры изнутри движка прочитаны глазом листами, журнал `sky night …`,
 CSV PresentMon. C1 pass, C2 pass, C3 partial (видено только лето), C4 pass с четвёртого прогона, C5 pass, C6 pass, C7 pass, C8 partial
 (разведка и цена), C9 pass, C10 pass (трава вдали шейдером, пультом), C11 pass (из настроек), C12 skipped (видео: 4K-стол не тянется переводом HDR),
-C13 pass (ночной диск), C14 blocked (цена финальной сборки).
+C13 pass (ночной диск), C14 blocked (цена финальной сборки), C15 partial (звёзды без узоров — на 720p), C16 pass днём (птицы).
 
 ## 5. Found
 
