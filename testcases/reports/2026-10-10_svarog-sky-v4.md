@@ -1,0 +1,54 @@
+# Run report — Svarog's Dream: небо, четвёртая редакция — сияние лучами, облака с перспективой, луны и планеты, птицы, камера
+
+## 1. Work
+
+`KrinikColorRework` (`Sky.cs`: вторая луна, планеты, сила сияния по ночи и облачности, облачность и плотность по полудню, ясные летние
+дни, десять видов птиц и разные пути, `TestAurora`, `TestBirds <вид>`) + шейдер `Krinik/Sky/Gradient` (сияние — занавеси по азимуту,
+облака — плоскость с перспективой, Бер–Ламберт, свет по Schneider, звёзды без узоров, птицы-стаи) + `KrinikCameraRework` (поворот ЛКМ,
+самый пологий наклон 10°); случаи — `testcases/TC_svarog_sky_v3_2026-10-09.md`, C15–C26; основание — слово владельца в чате 2026-10-10
+≈00:13–00:57 (цитаты — в шапках случаев и в коде).
+
+## 2. Contour
+
+игра `D:\Games\Svarog's Dream`, экран 1280×720 (поток), сейв владельца 17:46 (копия `_backups/svarog-saves-2026-10-09_1746-owner`;
+дважды игра закрылась через меню с записью сейва — состояние прогонов отложено в `_backups/svarog-saves-2026-10-10_0025-test-exit`,
+`…_0034-test-exit`, сейв владельца возвращён, 7/7); SvarogsDream `76e1f70` → `df4ee1a` и рабочее дерево.
+
+## 3. Runs
+
+Тринадцать запусков игры: 2026-10-10 00:15, 00:17, 00:21, 00:24, 00:29, 00:31, 00:35, 00:41, 00:45, 00:49, 00:51, 00:54, 00:56. Запуск
+`bash tools/run-game.sh`; пульт `bash tools/h.sh "call KrinikColorRework.Sky TestNight <n>"` `"call KrinikColorRework.Sky TestAurora <0..1>"`
+`"call KrinikColorRework.Sky TestBirds <0..9>"` `"call KrinikCameraRework.Plugin TestFaceSun <наклон> <угол>"`
+`"callon Managers/StandardManagers/WorldTimeManager WorldTime IncreaseTimeByOneHour True"`
+`"callon Managers/StandardManagers/WeatherManager WorldWeatherManager SetRainWithPrerain False"` · `DisableRainSlowly False 0` ·
+`SetTemporarySnowForDuration 60` · `"perf 8"` · `"shot <имя>"`; мышь `powershell -File drag.ps1 -X 640 -Y 360 -DX 300` (scratchpad);
+пакет `Unity.exe -batchmode … -executeMethod KrinikBuild.Bundles`; закрытие `bash tools/h.sh "kill"`; сейвы
+`sha256sum -c _backups/svarog-saves-2026-10-09_1746-owner.sha256`.
+
+## 4. Checks
+
+Hygiene: `dotnet build` двух модов — 0 ошибок; пакет — 4 шейдера без ошибок импорта.
+Functional run: игра, сейв владельца, кадры изнутри движка листами, журнал `sky night` / `sky birds`, `perf 8`. C15 partial (звёзды без
+узоров — на 720p), C17 pass с четвёртой редакции сияния, C18 pass (вторая луна, планета), C19 pass, C20 pass с третьего прохода (облака
+с перспективой), C21 pass (мягкость, 0.15 — едва), C22 partial (виды птиц — на 720p мелко), C23 pass (поворот ЛКМ), C24 partial (пути
+птиц — не подтверждены глазом), C25 pass (10°), C26 pass (регресс всего неба).
+
+## 5. Found
+
+(1) сияние: ленты — «быстрое, резкое, грубое»; nimitz — мягко, но без лучей («нереалистично»); модель Lawlor «след × высота» у
+пологой камеры сливается в полосу — итог: занавесь по азимуту (вид с земли) с размытым низом, лучами 0.3–1 и медленным течением;
+(2) шов азимута у шума (atan2) — шум на окружности; (3) вторая луна на 45–110° от первой пряталась за скалы — рядом с первой;
+(4) облака на «куполе» сползали к горизонту — плоскость с перспективой; (5) звёзды решёткой — хеш без sin, случайная точка в клетке;
+(6) игра дважды закрылась через меню и записала сейв прогона — сейв владельца возвращён; (7) PresentMon перестал писать файлы —
+замер через `perf`; (8) ночью кадр тяжелее днём (20.8 против 16.8 мс) из-за самой игры, не неба.
+
+## 6. Traces
+
+`SvarogsDream/gallery/game/2026-10-09_небо/v4-прогон-всего-неба.webp`, `v4-сияние-лучами.webp`, `v4-облака-в-перспективе.webp`;
+`SvarogsDream/_harness/x_sheet`, `q_sheet`, `au3_sheet`, `la_sheet`, `lb_sheet`, `lc_sheet`, `cl_sheet`, `cd_sheet`, `pc_sheet`, `bk_sheet`,
+`bp_sheet`, `cam_sheet`, `mp_sheet`, `regress_sheet` (`.webp`); журнал `BepInEx/LogOutput.log`; разведка — `researches/svarogs-dream/sky-recon.md`.
+
+## 7. Verdict
+
+partial — сияние лучами, облака с перспективой и плотностью, вторая луна и планеты, синяя ночь, ясные дни, поворот ЛКМ и наклон 10°
+проверены в игре; виды и пути птиц на 720p глазом не подтверждены; закаты весны, осени и зимы не видены; вкус — за владельцем.

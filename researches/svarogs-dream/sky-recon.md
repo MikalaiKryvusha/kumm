@@ -120,3 +120,21 @@ own bundle pipeline already proven by `Krinik/Terrain/Matte`>.
   [procedural clouds](https://gamedev.net/shaderlab/25-procedural-clouds/)); coverage = threshold, softness = its width; two layers at
   different speeds. Opacity by Beer–Lambert `1 − exp(−σ·thickness)` (σ large — heavy, opaque; small — translucent), darker with thickness;
   silver lining = forward scattering toward the sun (standard technique, primary source not read).
+
+## How Skyrim does its aurora, and what modders changed (subagent web research, 2026-10-10 ≈00:55)
+
+- WTHR has an «Aurora» model slot; DATA bits 4 «Aurora — Always Visible», 5 «Follows Sun Position»
+  ([TES5Edit wbDefinitionsTES5.pas](https://github.com/TES5Edit/TES5Edit/blob/dev-4.1.6/Core/wbDefinitionsTES5.pas)). Models
+  `Sky\SkyrimAurora.nif`, `…GB.nif`, `…RY.nif` ([rainsong dumps](https://github.com/ceejbot/rainsong)); the Sky object fades the aurora
+  in/out with weather (`auroraIn/auroraOut`, [CommonLibSSE-NG Sky.h](https://github.com/CharmedBaryon/CommonLibSSE-NG/blob/main/include/RE/S/Sky.h)).
+- Textures `skyrimaurorastreak01/02.dds`, `skyrimauroraswirl01.dds`, `skyrimauroralut.dds` ([mod 59144](https://www.nexusmods.com/skyrim/mods/59144)) —
+  streaks + swirl + colour lookup; mesh «5 parts, each 3 layers», colour by vertex colours, black ends fade the additive ribbon
+  ([mod 47530](https://www.nexusmods.com/skyrimspecialedition/mods/47530)). Animation by UV controller — inferred, not confirmed.
+- Modders: bigger textures «doubling the dimensions and increasing the detail and variation» (Ethereal Auroras), mesh UVs and gradients
+  «to mist out certain parts and reduce that rigid look» (AURORA, mod 53971), 3 → 14 auroras (Draco, mod 32871). Beauty = painted streak
+  textures on curved ribbons, slow scroll, soft ends — not a formula.
+- Code to learn from: [RoyTheunissen/Aurora-Borealis-Unity](https://github.com/RoyTheunissen/Aurora-Borealis-Unity) (MIT) — footprint =
+  `abs(perlin1 − perlin2)` «difference clouds», vertical march, colour ramp by height, scroll ≈0.001–0.002; PhoenixTheSage/se-aurora (MIT)
+  height ramp `smoothstep(0,1,(h−0.02)/0.08)·exp(−3h)`; olawlor/AuroraRendererUnity (Unlicense, physical).
+- Applied (shader, 00:45): curtains by azimuth (the ground view of Lawlor's footprint × height), soft bottom, rays 0.3–1, three layers,
+  motion 5–10× slower than the first ribbons. Next if needed: a baked streak texture (Skyrim's way) instead of procedural rays.
