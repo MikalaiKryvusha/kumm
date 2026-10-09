@@ -97,10 +97,11 @@ own bundle pipeline already proven by `Krinik/Terrain/Matte`>.
   haze — the band needs dense fine «star dust» (hash cell ×720 inside the band).
 - **Aurora**: the curtain's base hides behind the treeline — green must be the tall part, violet only at the very top.
 - **Moon**: phase from a 16-day cycle, lit side by a hemisphere test; reflections in water come for free.
-- **Cost** (PresentMon 15 s, 4K, night with aurora + Milky Way, camera at it): sky off 19.95 ms, on 20.19 / 20.70 ms — within the 0.5 ms
-  spread of two identical runs.
+- **Cost** (PresentMon 15 s, 4K, night with aurora, camera at it — build BEFORE the star dust and the raised band): sky off 19.95 ms,
+  on 20.19 / 20.70 ms — within the 0.5 ms spread of two identical runs. The final build was not re-measured (PresentMon stopped writing
+  files 00:09–00:12).
 - **Far grass**: world = 300×300 terrains, 5×5 streamed (`StreamRadius 2`) → ground to ≈750 m; grass to 500 m (`GrassDistance`) →
-  bald ring 500–750 m, then a flat stub. Grass 750 m costs +1.4 ms (17.87 → 19.24 ms, 56 → 52 FPS, 4K day). A zero-cost alternative is
+  bald ring 500–750 m, then a flat stub. Grass 750 m: +1.4 ms (17.87 → 19.24 ms, 56 → 52 FPS, 4K day), one run each — same order as the run-to-run spread. A zero-cost alternative is
   a grass tint/streak pattern in our terrain shader for the ring — needs `worldPos` in the terrain `Input` (fork of
   `TerrainSplatmapCommon.cginc`) and the same in the base-map shader for far terrain.
 - Visual references gathered: `SvarogsDream/gallery/refs/sky/` (Skyrim, Oblivion, real night, real sunsets, haze and clouds — 75 WebP).
