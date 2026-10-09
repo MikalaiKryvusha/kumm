@@ -75,3 +75,32 @@ own bundle pipeline already proven by `Krinik/Terrain/Matte`>.
 - **Cost**: PresentMon 15 s each — sky off 20.89 ms median, sky on (clouds, haze) 19.41 ms; run-to-run spread exceeds the sky's cost.
 - **Lightning**: thunder via the game's own `CombatSoundsManager.PlayThunderUniqueSound(AudioSource, ThunderSounds, volume)` — volume
   follows the game's effects slider. A flash shorter than ~0.3 s is not caught by the harness `shot` — `TestFlashHold` exists for that.
+
+## Закаты по сезонам (web, 2026-10-09 ≈23:20)
+
+Источники: [Northern Woodlands](https://northernwoodlands.org/outside_story/article/ride-off-into-the-sunset),
+[UCAR — The Appearance of the Sky](https://scied.ucar.edu/learning-zone/atmosphere/appearance-sky),
+[EarthNova](https://earthnova.org/news/climate-science/sunsets-winter-simply-spectacular),
+[Optimist Daily](https://optimistdaily.com/2019/11/why-winter-sunsets-are-best-according-to-a-meteorologist).
+- Colour comes from scattering along the long low path; aerosols are hygroscopic — they swell in humid air and dim and desaturate
+  the light. Winter air (cold, dry, often arctic, few aerosols) gives purer, more vivid colour; summer humidity mutes it; autumn
+  harvest dust makes the sky hazier. The claim is only partly settled (sources disagree on how much aerosols help).
+- Applied (`Sky.cs`, `SunsetStyle.Season`): winter — clean raspberry; summer — soft gold in haze; autumn — dense amber (not red:
+  the owner's «красное небо - пхоло»); spring — no source, `[AI]` pastel between. Each evening drifts up to 40 % toward the
+  neighbouring season's palette by a per-day hash, so two evenings in a row differ.
+- Real photos by season (capture date from Commons): `SvarogsDream/gallery/refs/sky/real-sunset/` (README there).
+
+## Night variety and far grass (live runs 2026-10-09 23:33–23:53)
+
+- **Milky Way**: a tilted great circle crosses the horizon at two azimuths only and the flat camera almost never sees it (6 nights,
+  0 hits); a height wave over azimuth (0.24 ± 0.07 above the dropped sky line) is in frame in any direction. A glow alone reads as grey
+  haze — the band needs dense fine «star dust» (hash cell ×720 inside the band).
+- **Aurora**: the curtain's base hides behind the treeline — green must be the tall part, violet only at the very top.
+- **Moon**: phase from a 16-day cycle, lit side by a hemisphere test; reflections in water come for free.
+- **Cost** (PresentMon 15 s, 4K, night with aurora + Milky Way, camera at it): sky off 19.95 ms, on 20.19 / 20.70 ms — within the 0.5 ms
+  spread of two identical runs.
+- **Far grass**: world = 300×300 terrains, 5×5 streamed (`StreamRadius 2`) → ground to ≈750 m; grass to 500 m (`GrassDistance`) →
+  bald ring 500–750 m, then a flat stub. Grass 750 m costs +1.4 ms (17.87 → 19.24 ms, 56 → 52 FPS, 4K day). A zero-cost alternative is
+  a grass tint/streak pattern in our terrain shader for the ring — needs `worldPos` in the terrain `Input` (fork of
+  `TerrainSplatmapCommon.cginc`) and the same in the base-map shader for far terrain.
+- Visual references gathered: `SvarogsDream/gallery/refs/sky/` (Skyrim, Oblivion, real night, real sunsets, haze and clouds — 75 WebP).
