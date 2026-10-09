@@ -171,7 +171,18 @@ The matte terrain shader is accepted; the bug stays open for the FOLIAGE. Hypoth
 gloss, CTI back-face smoothness) changed little; the confirmed mechanism for the ground (Fresnel of the 0.04 dielectric
 specular at grazing light) most likely applies to leaves too — all opaque geometry is lit by the custom deferred shader
 `Hidden/CTI/Internal-DeferredShading`. Water is transparent (forward) and is not lit by it.
-Next: same-spot A/B at a frozen low sun with the leaf specular zeroed (CTI / Tree Creator leaf materials, or our own leaf
+**2026-10-09 08:52–08:53, same frame, sun 30°, pitch 15, time frozen** (`testcases/TC_svarog_grooming_run_2026-10-09.md`
+C7/C8): conifer needle edges whitish (frame `SvarogsDream/_harness/L1.webp`). The near conifers are `CTI/LOD Leaves 301` — no
+spec colour property; smoothness lives in the alpha of `_MainTex` / `_TranslucencyMap`. `_ViewDependency`,
+`_AmbientTranslucency`, `_BackFaceSmoothness` ×0 on all 4 such materials: top-of-frame mean 50.7/45.2/25.0 → 50.7/45.2/24.9,
+frame difference 3.1 (wind) — **refuted again, now on a matte ground**. What is left is the specular lobe written into the
+G-buffer by the leaf shader and lit by `Hidden/CTI/Internal-DeferredShading` (the ground's cause). Other foliage shaders in the
+frame: `Custom/Lordenfel/FoliageWind` (ash, bushes, ferns), `Tree Creator Leaves Optimized`, `NatureManufacture Tree_Leaves_Specular`.
+Next (FORK, price — the look of every tree; consulted — the community fixes already cited above: own shader without the grazing
+Fresnel, or a replacement deferred shader): own copy of the leaf shader with specular 0, as with the ground — needs the CTI
+leaf shader source (Asset Store, not public), or a deferred-shader replacement that drops the grazing Fresnel for all opaque
+geometry (water is forward and untouched). Owner's eye decides by frames.
+Earlier plan: same-spot A/B at a frozen low sun with the leaf specular zeroed (CTI / Tree Creator leaf materials, or our own leaf
 shader copy, as with the ground).
 
 ## Decisions made without the owner (this fix)

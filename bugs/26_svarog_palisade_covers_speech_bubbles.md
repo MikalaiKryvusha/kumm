@@ -42,6 +42,21 @@
 **До DONE:** у частокола Бора с живым героем — реплика жителя или героя (`call PlayerCommentsManager MakeComment Bor 1`) так, чтобы
 колья были между камерой и пузырём; кадр; при неудаче — `mats <имя материала частокола>` (очередь, шейдер).
 
+## Reproduced 2026-10-09 08:59 — the plate wins, the LETTERS lose
+
+Run `testcases/TC_svarog_grooming_run_2026-10-09.md` (owner's save restored after; hero made immortal by the new harness
+command `static WorldState isGodMode True` — Faith soldiers and a werewolf killed him twice at the gate). At the Bor gate a
+guard's bubble lay over the gate leaf: the white PLATE is drawn over the stakes (the 30000 sorting order + ZTest Always of the
+plate work), but the TEXT is cut out wherever stakes stand in front — «Будь н… заметишь что подозрительное.», «…й.» (frames
+`SvarogsDream/_harness/q2_c.webp`, `q3_c.webp`). So the defect is depth, not order: the glyphs are drawn by the TMP sub-object
+(`TMP UI SubObject [Manrope-Medium Material (Instance)]`), `Fit()` set ZTest Always on that sub-object's material ONCE, and the
+next mesh rebuild of TMP re-assigns the shared fallback material (ordinary depth test). Bug 23's fix had the same hole — it
+passed at the tavern because no rebuild followed.
+
+Fix (built, not yet deployed — the owner was recording a video in the running game): `KrinikBubbleFit.KeepTextOnTop()` in
+`LateUpdate` sets ZTest Always every frame on the materials TMP actually uses now (`fontSharedMaterial` and every sub-object's
+`sharedMaterial`) — on the shared material itself, which TMP re-assigns but does not recreate.
+
 ## Owner's word 2026-10-09
 
 `[OWNER]` «26 — частокол закрывает пузыри речи - провтестировать» · 2026-10-09, до 08:36 — тестирует агент сам.
