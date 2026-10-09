@@ -81,6 +81,15 @@
 
 ## Entries
 
+### EXP-0186 · 2026-10-09 · ❌ · #stamps #clock #claim #hooks #scripts
+class: claim-before-evidence
+**Context:** статусы тест-кейсов Сварога писались скриптом `node tcset.mjs <json>` из scratchpad — минуя Write/Edit.
+**Tried / did:** время в статусе — «по ощущению» (09:18, 09:39, 10:03 при часах 09:17, 09:38, 10:02).
+**Result:** ❌ хук `stamp-gate` ловит только Write/Edit — запись через `node` прошла дважды; поймано самим агентом по `date` позже.
+**Lesson:** **время в любую запись — из `date` той же команды; скрипт, который пишет статусы, берёт время сам (`new Date()`), а не из текста агента.**
+**Repro:** — **Trigger:** любой пакетный писатель статусов/отчётов вне Write/Edit. **Not for:** —
+mechanized: none — кандидат: писатель статусов подставляет время сам
+
 ### EXP-0185 · 2026-10-09 · ❌→✅ · #svarogsdream #ui #tmp #worldspace #ztest #shader #bubbles
 class: fix-by-property-unverified
 **Context:** баг 26 — пузыри речи в мире: плашка (UI/Default) поверх крыш и кольев, буквы TMP под ними, хотя у обоих
