@@ -81,6 +81,23 @@
 
 ## Entries
 
+### EXP-0185 · 2026-10-09 · ❌→✅ · #svarogsdream #ui #tmp #worldspace #ztest #shader #bubbles
+class: fix-by-property-unverified
+**Context:** баг 26 — пузыри речи в мире: плашка (UI/Default) поверх крыш и кольев, буквы TMP под ними, хотя у обоих
+`unity_GUIZTestMode = Always`.
+**Tried / did:** три правки свойством глубины (баг 23, порядок холста, каждый кадр на общем материале) — каждая «по коду»; затем
+журнал материала, TAA выкл., постобработка выкл., чтение собранных шейдеров UnityPy — всё опровергнуто.
+**Result:** ❌ свойство стояло (z8 в журнале), буквы всё равно резало; ✅ шейдер `TextMeshPro/Mobile/Distance Field Overlay` из
+сборки игры (ZTest Always зашит, очередь 4000) — буквы целы, контроль «выкл.» снова режет. Почему свойство не сработало — не
+установлено.
+**Lesson:** **«поверх всего» для текста TMP в мире — шейдером Overlay, а не свойством материала: проверь сначала, что состояние
+зашито в шейдер (UnityPy: `m_ParsedForm…m_State.zTest`), и переключай опыт настройкой — A/B в одном мире за минуту. Запись
+свойства без журнала «что на деле рисуется» — правка вслепую.**
+**Repro:** scratchpad `shader_ztest.py <Data>`; пульт `cfg krinik.svarogsdream.uirework Dialogue BubbleOverlayShader true|false`.
+**Trigger:** любой текст или значок в мировом холсте, который должен быть поверх геометрии.
+**Not for:** экранные холсты (Overlay-режим холста и так рисует поверх).
+mechanized: none — кандидат: перенести `shader_ztest.py` в `SvarogsDream/tools/`
+
 ### EXP-0184 · 2026-10-08 · ❌→✅ · #mediedynasty #presentmon #measurement #loading #claim
 class: claim-before-evidence
 **Context:** база кадра «все моды» Medieval Dynasty, 14:53: захват 60 с через 15 с после «мир загружен» маршрута пилота.
