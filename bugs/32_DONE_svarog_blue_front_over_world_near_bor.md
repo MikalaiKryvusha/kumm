@@ -56,3 +56,5 @@ More from the owner during the repro: «почему-то строения Бо�
 - Not proven: why Bor's buildings were missing at 20° while the old far clip (301) was beyond Bor (221). The owner's «only a circle on
   the ground texture» fits the clip cutting buildings measured from a camera 240 units behind the hero. After the fix Bor is there
   from the first frame (C48).
+- 02:39 **cost of the fix:** `prof 8 20` (Bor, day, 4K) — `CameraFollow.LateUpdate` with our postfix (rotation, lift, `FitFarClip` with
+  `TopRayGroundDistance`) — 0.095–0.099 ms/frame; the terrain rays are practically free.
