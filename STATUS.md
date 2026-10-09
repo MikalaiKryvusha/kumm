@@ -182,7 +182,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 - ✅ `bugs/30_DONE_md_pilot_buttons_step_stalls_game_thread.md` — шаг `buttons` останавливал поток Lua (нулевой `ParentPanel`); починено и проверено живьём в 10:57.
 - 🔴 `bugs/29_md_hdr_menu_washed_after_auto_hdr.md` — HDR: Auto HDR выключен для exe, мир принят, инвентарь (UI) пересвечен.
-- 🔴 `bugs/28_svarog_code_strings_outside_all_dictionaries.md` — 1106 строк кода игры вне всех словарей (класс бага 27).
+- 🔴 `bugs/28_svarog_code_strings_outside_all_dictionaries.md` — строки кода игры вне всех словарей (класс бага 27): 1106 → 65 (63 уник., только склейки — нужны правила r:/sr:); судья 19:45 —
+  с оговорками; C7 перевода богов в игре не прогнан.
 - 🔧 `bugs/26_svarog_palisade_covers_speech_bubbles.md` — частокол над пузырями: порядок холста 30000 стоит, у частокола не видено.
 - 🔧 `bugs/15_svarog_whitish_world_against_low_sun.md` — белёсость земли против солнца: причина (блик стандартного шейдера)
   подтверждена, свой матовый шейдер в моде 2.1.0, прогон pass, 0.6 принято владельцем («да, 0.6 хорошо, оставляем» ·
