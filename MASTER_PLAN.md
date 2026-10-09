@@ -14,7 +14,14 @@ One command assembles, updates and repairs a modded game build — for any game,
 
 ## Сейчас главное
 
-**Эпик 15 — живой мир Medieval Dynasty**, фаза 0 «разведка и стенд» (`plans/16`). Слово владельца: `[OWNER]` «и начинаем эпик
+**Svarog's Dream — с 2026-10-09 главное.** `[OWNER]` «забей на Medieval Dynasty. Ты разве не видишь, что мы работаем дальше над
+Сварогом, и я тебя по нему прошу делать и на нем сфокусироваться» · 2026-10-09 ≈13:25. Беклог — `plans/18_svarog_backlog_checklist.md`.
+Правило интерфейса Сварога: всё масштабируется на 16:9 при 720p, 1080p, 2K, 4K, в том числе при смене разрешения у запущенной игры
+(удалённый стол): `[OWNER]` «Всё, что мы делаем, долэно корретно масштабироваться и работать на классическом сообтношении 16:9 и
+классических разрешениях 1080p, 2K, 4K» · «ты не видишь, что ты сейчас не в 1080p, а в 720p ? Это то же соотношение 16:9, так что тоже
+все должно корректно масштабироваться» · 2026-10-09. Medieval Dynasty (эпик 15 ниже) — на паузе.
+
+**Эпик 15 — живой мир Medieval Dynasty** (на паузе с 2026-10-09), фаза 0 «разведка и стенд» (`plans/16`). Слово владельца: `[OWNER]` «и начинаем эпик
 по модинку моей любимой игры с ПУСТЫМ БЛЯТЬ МИРОМ - Medieval Dynasty! Сделаем мир ПОЛНЫМ И ЖИВЫМ!» · 2026-10-07 ≈23:35.
 Мета-план — `plans/15_EPIC_medieval_dynasty_living_world.md` (`[OWNER]` «метаплан принят» · 2026-10-08 ≈09:37); метрика —
 критерии приёмки фазы в `plans/16`. Правила живого мира, сказанные владельцем по ходу (жители ходят дорогой, напролом — по
@@ -114,6 +121,7 @@ hygiene). Decided and recorded are two moments — tell them apart when they dif
 | 2026-09-18 18:06 +03:00 (recorded; the live pass ran at 17:59) | KAIF updated 2.5 → 2.7 by the bootstrap route. The delivery-metric line is REMOVED from this plan and interview #001 Q1 closes as superseded | `[OWNER]` "remove the DELIVERY feature from KAIF — projects started writing it, but I do not use it and see no value in it" · 2026-09-12 — the origin owner's word exactly as the 2.7 update task prints it, in English (the project owner is the KAIF author; whether the original was said in Russian the task does not say). The metric PROPOSED by the agent on 2026-09-05 was never ratified, so nothing of the owner's is lost. `[AI]` The other rule changes of 2.6–2.7 are taken as the framework author's own origin decisions; all twenty are listed for him, in Russian, in `KAIF_FRAMEWORK.md` → «Все двадцать изменений правил этого интервала» |
 
 | 2026-10-07 ≈23:35 +03:00 (decided) · 2026-10-08 (recorded here) | Главное — эпик 15, живой мир Medieval Dynasty; Svarog's Dream на паузе | `[OWNER]` «и начинаем эпик по модинку моей любимой игры с ПУСТЫМ БЛЯТЬ МИРОМ - Medieval Dynasty! Сделаем мир ПОЛНЫМ И ЖИВЫМ!»; мета-план принят 2026-10-08 ≈09:37 |
+| 2026-10-09 ≈13:25 +03:00 (decided) · recorded 13:30 | Главное — Svarog's Dream; Medieval Dynasty на паузе; интерфейс Сварога — 16:9 на 720p, 1080p, 2K, 4K | `[OWNER]` «забей на Medieval Dynasty» · «мы работаем дальше над Сварогом» · «720p … тоже все должно корректно масштабироваться» |
 | 2026-10-08 ≈13:15 +03:00 (decided) · recorded 13:18 | Психика NPC — отдельная переиспользуемая модель KARMA в публичном репозитории; название и расшифровка утверждены владельцем | `[OWNER]` «Давай KARMA И заведём публичный репозиторий под неё» · «Утверждено «Krinik's KARMA: A Psychological Model for Game AI Agents» KARMA (Krinik Agent Relations & Mind Approximation)» |
 
 ---

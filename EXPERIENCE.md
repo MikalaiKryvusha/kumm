@@ -81,6 +81,22 @@
 
 ## Entries
 
+### EXP-0190 · 2026-10-09 · ❌→✅ · #svarogsdream #xunity #resolution #harmony #loadorder #registry
+class: stand-differs-from-owner-world
+**Context:** на удалённом столе (1080p, 720p) окна Сварога рвали тексты по слогам; на 4K — целые.
+**Tried / did:** декомпиляция XUnity (ilspycmd) → `TextTranslationInfo.ResizeUI`: перенос ставится, если `rect.width` (единицы холста)
+> `Screen.width / 4` (пиксели). Транспайлер Screen.width → 3840. Сначала в позднем моде (ScriptEngine) — главное меню успело
+перевестись до патча; перенёс в ранний `KrinikFixes` (plugins) с ожиданием загрузки сборки XUnity (`AssemblyLoad`).
+**Result:** ✅ на 720p окно новой игры и меню целые, журнал «1 call(s)». Побочно: `Screen.SetResolution` пульта Unity пишет в реестр
+(`HKCU\Software\VI Games\Svarog's Dream`, `Screenmanager Resolution Width/Height/Fullscreen mode`) — следующий запуск владельца стартует
+в том же окне.
+**Lesson:** **текст, который рвётся только на меньшем разрешении, ищи в стороннем коде, который сравнивает единицы холста с пикселями
+экрана; патч на перевод/шрифты — в раннем моде, иначе первый экран уже испорчен. После `SetResolution` у запущенной игры — вернуть
+реестр.**
+**Repro:** `ilspycmd` XUnity.AutoTranslator.Plugin.Core.dll → `TextTranslationInfo.cs` `ResizeUI`. **Trigger:** UI-баг «только на
+удалённом столе / меньшем экране». **Not for:** —
+mechanized: none — кандидат: команда пульта, возвращающая разрешение и реестр в конце прогона
+
 ### EXP-0189 · 2026-10-09 · ❌→✅ · #owner #reading #ui #svarogsdream
 class: confusion-delivered-as-verdict
 **Context:** `[OWNER]` «В модальном диалоге выхода из игры - курсивный шрифт, цвет при ховере курсора на кнопки» — короткий список
