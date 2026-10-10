@@ -57,7 +57,8 @@
 >      claim-before-evidence, owner-decision-not-applied, text-in-agents-world,
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
 >      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run,
-     census-by-own-pattern, hook-after-event, mod-breaks-game-flow, demo-voice-ahead-of-frame, wrong-model-of-the-cost -->
+     census-by-own-pattern, hook-after-event, mod-breaks-game-flow, demo-voice-ahead-of-frame, wrong-model-of-the-cost,
+     per-object-work-every-frame, our-own-cost-first -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -80,6 +81,26 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0204 · 2026-10-10 · ❌→✅ · #svarogsdream #unity #performance #ui #worldspace #mainthread #ourmods
+class: per-object-work-every-frame
+**Context:** глубокий профиль: самый дорогой скрипт кадра — наша служба значков в мире (`KrinikUIRework/Icons.cs`). `[OWNER]` «почему ты
+архетиктуру не прогуглил и не прорабоатл и изначально не предположил, что это дерьмо архитектура твоя будет тормозить?» · 2026-10-10.
+**Tried / did:** служба росла по репликам (размер, место, дальность), проверялась глазом на виде; каждый кадр у каждого видимого
+значка сбрасывала размер и место к родным, мерила и ставила заново — четыре записи в трансформ при стоящей камере. Урок EXP-0138
+(2026-10-05) про то же самое лечился только дальностью. Переписано по правилам Unity (`researches/svarogs-dream/unity-ui-world-icons-practices.md`):
+один проход за кадр вместо Update значков, расчёт без сброса, запись только при разнице > 0.5 точки, вне кадра и вдали — не трогать.
+**Result:** ❌→✅ камера стоит: сдвинутых элементов интерфейса 187 → 6 за кадр, главный поток 16.3–16.6 → 13.1–13.6 мс, 61 → 68–76
+FPS; цена скриптов службы 0.46 → 0.08 мс; вид тот же на 720p–4K (`testcases/reports/2026-10-10_svarog-icons-service.md`).
+**Lesson:** **покадровый код в Unity проектируется до первой строки по правилам движка и с прикидкой цены: сколько объектов × сколько
+записей в трансформ за кадр. Запись в трансформ холста — не «присвоение», а рассылка и пересборка; писать только изменившееся,
+сбрасывать-и-ставить — никогда.** Проверка — не глазом на виде, а счётчиком сдвигов при стоящей камере.
+**Repro:** `SvarogsDream/tools/rest-check.sh` при стоящей камере (часы стоят, `SetMaxZoom`) — `rest check: ui moved N`; старая
+сборка — `REST CHECK RED … 160`.
+**Trigger:** пишу Harmony-постфикс на Update/LateUpdate или любой код, что трогает объекты мира каждый кадр → перед кодом — правило
+движка и счёт записей; после выкладки — строка проверки покоя.
+**Not for:** окна интерфейса, открытые по действию игрока (их сдвиги — по событию, не каждый кадр).
+mechanized: SvarogsDream/tools/rest-check.sh (зовёт SvarogsDream/tools/deploy-hot.sh после каждой горячей перезагрузки; доказан: старая служба — RED 160, выход 3; новая — 6)
 
 ### EXP-0203 · 2026-10-10 · ❌ · #svarogsdream #unity #performance #animation #uro #mainthread
 class: wrong-model-of-the-cost
