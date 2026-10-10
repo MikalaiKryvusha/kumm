@@ -46,6 +46,9 @@ C5 (40 in 33, matches the census) — pass; C1 — camera 123.8 m, body "talk", 
 
 `TWINS: searched Physics.Raycast* with 100f after a mouse ray in Assembly-CSharp — found 40 sites in 33 methods: all patched;
 200 m rays (3) reach past 123.8 m; unlimited ones (10) unaffected.`
+`TWINS (camera distance, beyond rays): audio — the active AudioListener is the game's own at the hero (`Managers/SoundManagers/
+AudioListener`, 0.0 m from him, enabled), the camera's listener is disabled (harness `callon … get_enabled`, 2026-10-10 15:54) — the
+zoom-out does not quieten the world; LOD, shadows, grass, streaming and the far clip are already scaled by the camera mod itself.`
 
 ## Decisions made without the owner
 
