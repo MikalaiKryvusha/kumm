@@ -200,5 +200,7 @@ The 5 in `zz_krinik` («Blunt Armor: <color=#1E6A0F>{{A}}</color>», «Piercing 
 `zz_glossary.txt` for the same labels catch the value (it starts with `<` or `x`) — remove them at the next hand edit. The 3 tips
 were generated (`gametips_xunity.py` uses the same `templated()`) but the generator was missing from `translation_deploy.sh`, so its
 dictionary lagged; added to the deploy and regenerated 00:39–00:40 (SvarogsDream `af16a48`, `c830c82`) — +21 template lines, exact
-lines unchanged; not checked in the game by `settext`. Left: `zz_glossary` 1, `zz_spells` 1. The judge also noted: rule translations that hard-code a number the pattern now
+lines unchanged; not checked in the game by `settext`. Left: `zz_glossary` 1 («Attack Speed: {{A}}% <color=#1E6A0F>(+10%)</color>» —
+the «Attack Speed» stat rule catches it), `zz_spells` 1 («Scaling: … x2 ALC …» — the Scaling wrapper and piece rules catch it): both
+redundant, no visible damage. The judge also noted: rule translations that hard-code a number the pattern now
 matches as a letter («5 ульев», «2% в день», «за 6 секунд», «за каждые 100 очков») are right only while the game keeps those numbers.
