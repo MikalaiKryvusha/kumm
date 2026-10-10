@@ -61,7 +61,7 @@ log text is translated on show), unlike world events, which the game stored alre
 `translation/text_census_ok.tsv` (файл кода · строка или «*» · почему). Печатает остаток и пишет `translation/code_en.tsv` —
 источник нового генератора `tools/code_xunity.py` (разбор записок `notes_xunity.py`) → `_config/xunity/zz_code.txt`, строкой
 в `translation_deploy.sh`. Новые имена — `SvarogsDream/translation/names_pending_owner.tsv` (english · предложение · где ·
-почему), в словаре с пометкой [AI].
+почему), в словаре с пометкой `[AI]`.
 
 | Время | Шаг | Остаток (строк / уник.) | Коммит SvarogsDream |
 |---|---|---|---|
@@ -72,7 +72,7 @@ log text is translated on show), unlike world events, which the game stored alre
 | 14:56 | партия 4: беседа с Единым Богом (GodConversationManager) — 25 строк | 307 | adbc959 |
 | 15:04 | партии 5–6: учителя, суд Красного Ордена, «Прогресс», реплики квестов и богов, титры — 216 строк | 66 → 65 | f07316a, b1c03a6 |
 
-Итог 15:04: в `code_ru.tsv` 527 строк (42 с пометкой [AI] — новые имена), разобранного в `text_census_ok.tsv` 213 строк;
+Итог 15:04: в `code_ru.tsv` 527 строк (42 с пометкой `[AI]` — новые имена), разобранного в `text_census_ok.tsv` 213 строк;
 `glossary_check.py --strict` — 0 нарушений в наших файлах; выкладка прошла целиком (на партиях 2–4 её останавливала строгая
 проверка на чужом незакоммиченном `zz_krinik_newgame.txt`, тогда `zz_code.txt` копировался в игру отдельно и сверялся `cmp`).
 
