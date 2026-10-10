@@ -27,7 +27,7 @@
     `SetTemporarySnowForDuration 120` ×2, `Sky ForceMood Fog|Auto`, `Sky Sunset Raspberry|Golden`, `timescale 0`, `TestNight 0`,
     `TestAurora 1|-1`, `TestMeteorKind 0|1|2`, `SetMaxZoom`, карта.
   - `taskkill //IM ffmpeg.exe //F`, `kill`.
-- 09:58–10:08 — перепаковка `ffmpeg -i rec.mkv -c copy rec_ix.mkv`; монтаж `python -I cut.py demo-4k.mp4`,
+- 09:58–10:04 — перепаковка `ffmpeg -i rec.mkv -c copy rec_ix.mkv`; монтаж `python -I cut.py demo-4k.mp4`,
   `python -I cut2.py demo-4k-v1.mp4` (скрипты в scratchpad сессии `demo/`).
 
 ## 4. Checks
