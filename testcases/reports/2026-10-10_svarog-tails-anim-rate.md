@@ -17,14 +17,14 @@
 
 ## 3. Runs
 
-1. 11:26 — `bash tools/run-game.sh`; `TestMeteorKind 2`, `TestMeteorHold 0.5 | 0.95 | 1.05 | 1.2` с кадрами `ntA…ntD`.
-2. 11:26–11:29 — замеры: на каждый шаг `wait 3`, `tmoved 1 3`, `perf 6`, `wait 2`, `perf 6`:
+1. 2026-10-10 11:26 — `bash tools/run-game.sh`; `TestMeteorKind 2`, `TestMeteorHold 0.5 | 0.95 | 1.05 | 1.2` с кадрами `ntA…ntD`.
+2. 2026-10-10 11:26–11:29 — замеры: на каждый шаг `wait 3`, `tmoved 1 3`, `perf 6`, `wait 2`, `perf 6`:
    - основа;
    - `animrate 4 150`, `animrate 4 80`, `animrate 4 40`;
    - `animrate restore`;
    - `farchars 150`, `farchars restore`;
    - основа повторно.
-3. 11:29 — `kill`.
+3. 2026-10-10 11:29 — `kill`.
 
 ## 4. Checks
 

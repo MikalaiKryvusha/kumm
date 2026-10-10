@@ -17,17 +17,17 @@
 
 ## 3. Runs
 
-- 09:20–09:23 — запуск 1 (`bash tools/run-game.sh`), UI-мод не поднялся; горячая выкладка `bash tools/deploy-hot.sh KrinikUIRework` —
+- 2026-10-10 09:20–09:23 — запуск 1 (`bash tools/run-game.sh`), UI-мод не поднялся; горячая выкладка `bash tools/deploy-hot.sh KrinikUIRework` —
   NOT RELOADED; `bash tools/h.sh "kill"`.
-- 09:23–09:26 — запуск 2: `bash tools/h.sh "call UnityEngine.Screen SetResolution 3840 2160 ExclusiveFullScreen"`
+- 2026-10-10 09:23–09:26 — запуск 2: `bash tools/h.sh "call UnityEngine.Screen SetResolution 3840 2160 ExclusiveFullScreen"`
   `"callon Camera CameraFollow SetMaxZoom"` `"pmark 8 45"`; A/B `"cfg krinik.svarogsdream.uirework Icons Enabled false"`,
   `"animcull complete"`, `"particles pause"` — каждый с `"pmark 6 60"`.
-- 09:26–09:35 — запуск 3 (новый пульт): `"tmoved 1 30"`; `"farchars 40|100|150"` и
+- 2026-10-10 09:26–09:35 — запуск 3 (новый пульт): `"tmoved 1 30"`; `"farchars 40|100|150"` и
   `"cfg krinik.svarogsdream.camerarework DrawDistance ShadowDistanceFactor 1|2"` — каждый с `"tmoved 1 5"` `"pmark 6 60"`;
   `"perf 4"`; карта — `"click UI/Enablers/InfoPanel"` `"click UI/InfoPanel/InfoPanelHeader/MapHeader"` `"shot …"`, две горячие выкладки
   UI-мода (RELOADED), `SetResolution 1280 720 | 1920 1080 | 2560 1440 | 3840 2160 ExclusiveFullScreen` с кадрами, контроль
   `"cfg krinik.svarogsdream.uirework Pages MapLayout false|true"`; `"kill"` 09:35.
-- 09:36–09:37 — `reg add … Fullscreen mode … 1`, `bash tools/player-swap.sh status|release|dev|release`.
+- 2026-10-10 09:36–09:37 — `reg add … Fullscreen mode … 1`, `bash tools/player-swap.sh status|release|dev|release`.
 
 ## 4. Checks
 

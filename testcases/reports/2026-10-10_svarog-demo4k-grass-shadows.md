@@ -15,19 +15,19 @@
 
 ## 3. Runs
 
-- 09:39 — `bash tools/run-game.sh`; `SetResolution 3840 2160 ExclusiveFullScreen`.
-- 09:40–09:41 — пробная запись `ffmpeg -f lavfi -i "ddagrab=output_idx=0:framerate=30" -t 3 -c:v h264_nvenc …`; float-захват
+- 2026-10-10 09:39 — `bash tools/run-game.sh`; `SetResolution 3840 2160 ExclusiveFullScreen`.
+- 2026-10-10 09:40–09:41 — пробная запись `ffmpeg -f lavfi -i "ddagrab=output_idx=0:framerate=30" -t 3 -c:v h264_nvenc …`; float-захват
   (`output_fmt=rgbaf16`) — максимум 1.0; сверка с `shot`.
-- 09:41 — `IncreaseTimeByOneHour` ×6.
-- 09:42–09:48 — трава и тени: `cfg … DrawDistance GrassDistance 500|400|300`, `GrassFade 480|380|280`, `Terrain FarGrassFrom 480|380|280`,
+- 2026-10-10 09:41 — `IncreaseTimeByOneHour` ×6.
+- 2026-10-10 09:42–09:48 — трава и тени: `cfg … DrawDistance GrassDistance 500|400|300`, `GrassFade 480|380|280`, `Terrain FarGrassFrom 480|380|280`,
   `ShadowDistanceFactor 3|2`; кадры при `timescale 0` с одного ракурса (`TestFaceSun 12 90`); `perf 8` A-B-A с паузой.
-- 09:48–09:58 — запись: `ffmpeg … ddagrab … -c:v h264_nvenc -preset p5 -cq 20 rec.mkv`, звук `tools/rec_audio.py a.wav stop`;
+- 2026-10-10 09:48–09:58 — запись: `ffmpeg … ddagrab … -c:v h264_nvenc -preset p5 -cq 20 rec.mkv`, звук `tools/rec_audio.py a.wav stop`;
   15 отметок `mark.sh <id>` (голос `ffplay` из WAV `voice_say.py <txt> <wav>`).
   - Сцены пультом: `TestFaceSun`, `TestBirds 0`, `SetRainWithPrerain False`, `TestLightning` ×2, `DisableRainSlowly`,
     `SetTemporarySnowForDuration 120` ×2, `Sky ForceMood Fog|Auto`, `Sky Sunset Raspberry|Golden`, `timescale 0`, `TestNight 0`,
     `TestAurora 1|-1`, `TestMeteorKind 0|1|2`, `SetMaxZoom`, карта.
   - `taskkill //IM ffmpeg.exe //F`, `kill`.
-- 09:58–10:04 — перепаковка `ffmpeg -i rec.mkv -c copy rec_ix.mkv`; монтаж `python -I cut.py demo-4k.mp4`,
+- 2026-10-10 09:58–10:04 — перепаковка `ffmpeg -i rec.mkv -c copy rec_ix.mkv`; монтаж `python -I cut.py demo-4k.mp4`,
   `python -I cut2.py demo-4k-v1.mp4` (скрипты в scratchpad сессии `demo/`).
 
 ## 4. Checks

@@ -17,11 +17,11 @@
 
 ## 3. Runs
 
-- 11:00 — `bash tools/run-game.sh`; `fieldon … isTimeDisabled True`, `SetResolution 3840 2160 ExclusiveFullScreen`, `SetMaxZoom`,
+- 2026-10-10 11:00 — `bash tools/run-game.sh`; `fieldon … isTimeDisabled True`, `SetResolution 3840 2160 ExclusiveFullScreen`, `SetMaxZoom`,
   `TestFaceSun 10 180`, кадр `mt0`.
-- 11:01 — `TestMeteorKind 2`; `TestMeteorHold 0.5 | 0.95 | 1.3 | 1.8` с кадром на каждом (`mtA…mtD`).
-- 11:02 — запись `ffmpeg -f lavfi -i "ddagrab=output_idx=0:framerate=20" -t 14 …` и три вызова `TestMeteorKind 2`.
-- 11:03 — `TestMeteorHold -1`, часы снова идут, `kill`.
+- 2026-10-10 11:01 — `TestMeteorKind 2`; `TestMeteorHold 0.5 | 0.95 | 1.3 | 1.8` с кадром на каждом (`mtA…mtD`).
+- 2026-10-10 11:02 — запись `ffmpeg -f lavfi -i "ddagrab=output_idx=0:framerate=20" -t 14 …` и три вызова `TestMeteorKind 2`.
+- 2026-10-10 11:03 — `TestMeteorHold -1`, часы снова идут, `kill`.
 
 ## 4. Checks
 

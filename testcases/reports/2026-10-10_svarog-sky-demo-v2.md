@@ -17,14 +17,14 @@
 
 ## 3. Runs
 
-1. 10:22–10:35 — черновой прогон 720p:
+1. 2026-10-10 10:22–10:35 — черновой прогон 720p:
    - `bash tools/run-game.sh`;
    - `h.sh "fieldon Managers/StandardManagers/WorldTimeManager WorldTime isTimeDisabled True"`;
    - камера отвязана: `callon Camera CameraFollow set_enabled False`, `callon Camera Transform set_position …`, `set_eulerAngles -10,180,0`;
    - интерфейс скрыт: `active UI/ActionBar 0`, `active UI/Enablers 0`;
    - превью `TestAuroraPalette 0..4`, `TestMoonColor 0..4`, `TestNight 4|5|18`;
    - запись 21 сцены; монтаж `python -I cut3.py`.
-2. 10:38–10:48 — 4K:
+2. 2026-10-10 10:38–10:48 — 4K:
    - `SetResolution 3840 2160 ExclusiveFullScreen`; проверка: кадр 3840×2160, float-захват — максимум 1.0;
    - курсор в угол: `cursor 3839 2159`;
    - запись `ffmpeg -f lavfi -i "ddagrab=output_idx=0:framerate=30" -c:v h264_nvenc -cq 18 rec.mkv` — сцены 1–18;
