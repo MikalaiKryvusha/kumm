@@ -15,8 +15,11 @@
 // @guard stamp-gate
 // THREAT:         агент пишет в документ или комментарий сегодняшний штамп времени впереди часов, и он остаётся как факт
 // PROVED-AGAINST: tools/test-guards.mjs, часть G — до появления хука все семь случаев красные; с хуком Write и Edit со штампом через
-//                 10 минут → 2, прошлое, завтра, claim-ok, Bash, мусор → 0
-// GAP:            время без даты («в 18:35», «≈09:51» без даты рядом), дата ДД.ММ и UTC-штамп с «Z» не видны; штамп в прошлом, набранный
+//                 10 минут → 2, прошлое, завтра, claim-ok, Bash, мусор → 0. Правило документов испытаний (2026-10-10): Edit сегодняшнего
+//                 TC с «pass <через 10 мин>» — хук из HEAD до правки → 0, после → 2; прошлое время, игровые часы со стрелкой, тот же
+//                 итог вне testcases/ → 0
+// GAP:            время без даты («в 18:35», «≈09:51» без даты рядом) — вне сегодняшних документов `testcases/` (там с 2026-10-10
+//                 ловятся время после слова итога и конец диапазона «ЧЧ:ММ–ЧЧ:ММ»), дата ДД.ММ и UTC-штамп с «Z» не видны; штамп в прошлом, набранный
 //                 наугад, не отличим от честного — это держит судья; NotebookEdit и запись через Bash хук не видит; штамп ЗАВТРАШНЕЙ
 //                 даты у полуночи («2026-10-08 ≈00:00» при часах 2026-10-07 23:59 — случай 2026-10-07) проходит как «план» — держит судья
 // ON-REAL-PATH:   2026-10-07 09:50 +03:00 — в живой сессии Write пробного файла scratchpad со штампом на 20 минут вперёд остановлен
@@ -39,6 +42,16 @@ try {
   else if (event.tool_name === 'MultiEdit') text = (t.edits || []).map((e) => String(e.new_string || '')).join('\n');
   else process.exit(0);
 
+  // Сегодняшний документ испытаний (testcases/…<сегодня>…): там дата стоит в имени файла, а в строках — голое время итога
+  // («pass 10:58») и диапазоны прогона («09:58–10:08»). 2026-10-10 трижды за час такое время ушло вперёд часов (10:08 при 10:07,
+  // 10:58 при 10:53) — дату рядом хук не видел. Игровые часы («час стоял 03:05», «03:20 → 23:09») сюда не попадают: не после слова
+  // итога и не через тире.
+  const path = String(t.file_path || '').replace(/\\/g, '/');
+  const testDoc = path.includes('/testcases/') && path.includes(today);
+  const VERDICT = /(?:pass|fail|partial|blocked|skipped)[^|\d]{0,40}?(\d{2}):(\d{2})(?:[–-](\d{2}):(\d{2}))?/g;
+  const RANGE = /(?<![\d:])(\d{2}):(\d{2})[–-](\d{2}):(\d{2})(?![\d:])/g;
+  const late = (h, m) => Number(h) < 24 && Number(h) * 60 + Number(m) > nowMin;
+
   const ahead = [];
   for (const line of text.split(/\r?\n/)) {
     if (line.includes('claim-ok:')) continue;
@@ -46,6 +59,9 @@ try {
       const min = Number(m[1]) * 60 + Number(m[2]);
       if (min > nowMin) ahead.push(m[0]);
     }
+    if (!testDoc) continue;
+    for (const m of line.matchAll(VERDICT)) if (late(m[1], m[2]) || (m[3] && late(m[3], m[4]))) ahead.push(m[0]);
+    for (const m of line.matchAll(RANGE)) if (late(m[3], m[4])) ahead.push(m[0]);
   }
   if (!ahead.length) process.exit(0);
   process.stderr.write(`stamp-gate: штамп впереди часов — ${ahead.join(', ')}; сейчас ${today} ${pad(now.getHours())}:${pad(now.getMinutes())}. ` +

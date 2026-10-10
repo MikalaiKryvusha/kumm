@@ -296,6 +296,13 @@ try {
   check('Write with a past stamp: passes', sg('Write', { file_path: 'x.md', content: 'pass · ' + PAST }), 0);
   check('Write with a stamp tomorrow (a plan): passes', sg('Write', { file_path: 'x.md', content: 'plan ' + TOMORROW }), 0);
   check('future stamp with claim-ok on the line: passes', sg('Write', { file_path: 'x.md', content: 'meeting ' + FUT + ' claim-ok: назначенная встреча' }), 0);
+  // Голое время в сегодняшнем документе испытаний (2026-10-10: «pass 10:08» при 10:07, «10:38–10:58» при 10:53). claim-ok: цитата ошибочных штампов, не штамп
+  const tcToday = 'D:/w/KUMM/testcases/TC_x_' + FUT.slice(0, 10) + '.md';
+  check('today test doc: verdict time ahead of the clock: refused', sg('Edit', { file_path: tcToday, old_string: 'a', new_string: '| C1 | шаг | ждём | кадр | pass ' + FUT.slice(11, 16) + ': ролик готов |' }), 2);
+  check('today test doc: range ending ahead of the clock: refused', sg('Write', { file_path: tcToday, content: '- 00:00–' + FUT.slice(11, 16) + ' — монтаж' }), 2);
+  check('today test doc: verdict time in the past: passes', sg('Edit', { file_path: tcToday, old_string: 'a', new_string: '| C1 | шаг | ждём | кадр | pass ' + PAST.slice(11, 16) + ': готово |' }), 0);
+  check('today test doc: game clock with an arrow: passes', sg('Write', { file_path: tcToday, content: 'время мира 03:20 → 23:59, час стоял 23:59' }), 0);
+  check('control: same verdict outside testcases/: passes', sg('Edit', { file_path: 'D:/w/KUMM/STATUS.md', old_string: 'a', new_string: 'pass ' + FUT.slice(11, 16) }), 0);
   check('control: Bash is not this hook', sg('Bash', { command: 'echo ' + FUT }), 0);
   check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [SG], { input: '{not json', encoding: 'utf8' }).status, 0);
 } catch (e) {
