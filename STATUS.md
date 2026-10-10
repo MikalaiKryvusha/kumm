@@ -237,7 +237,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 - 🟡 `bugs/07_conan_probe_kills_ue4ss_lua_layer.md` — симптом снят выключением мода, причина не найдена.
 - 🔧 `bugs/08_conan_config_overrides_code.md` — починено, ждёт подтверждения владельцем.
 - 🔬 `bugs/04_conan_camera_microjitter.md`, `bugs/05_conan_loadasset_delayed_abort.md` — разведка, без починки.
-- ✅ `bugs/11_caption_plate_sized_per_frame.md` — закрыт по классу, метки DONE нет: оформить `/check-backlog`.
+- ✅ `bugs/11_DONE_caption_plate_sized_per_frame.md` — закрыт по классу 2026-09-10, метка DONE оформлена 2026-10-10.
 
 ## KAIF — отправка и тикеты
 
