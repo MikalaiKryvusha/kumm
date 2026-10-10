@@ -17,7 +17,11 @@
 кавычках) · клик по миру — `tools/mouse.ps1 -X -Y -Button left|right|wheel` (правая — разговор, wheel `-Clicks ±N` — приближение камеры) · ходьба героя — `tools/keys.ps1 -Key W -Ms 1500` (W/A/S/D, скан-кодом; клавиши окон — из настроек владельца: сумка на Tab, не на I по умолчанию) · `tools/deploy-hot.sh
 KrinikUIRework` (RELOADED) · кадр — `shot` пишет JPEG, `h.sh` сам переводит в WebP 90 (PNG — никогда, канон
 `AGENT_GUIDE.md`) · сличение с макетом — только `tools/shoot_mockup.mjs` + `tools/pair.py` (целые окна, одно разрешение)
-· закрывать `kill` (выход из меню пишет сейв; копия сейвов — `D:\work\ai_sandbox\_backups`) · пока игра открыта —
+· после прогона игру НЕ закрывать — владелец слушает её музыку (`[OWNER]` «держи игру открытой для музыки, когда нужно -
+перезапускай» · 2026-10-10; память `svarog-game-left-open-for-music`): `kill` — только для перезапуска, часы — на паузу (выход из меню
+пишет сейв; копия сейвов — `D:\work\ai_sandbox\_backups`) · наведение мыши — `cursorinfo` (ручка курсора системы, камера до героя), окно
+игры впереди — `tools/focus-game.ps1`; замеры кадра — `perf`, `farparts`, `farlist`, `particles pause|pauseoff|play`; сторож лучей мыши
+`tools/ray-reach-check.sh` — в конце `run-game.sh` · пока игра открыта —
 голосом (`tools/voice_say.py`, файл фразы — в `SvarogsDream/_harness/`) · сменил значение по умолчанию — правь и
 `BepInEx/config/krinik.svarogsdream.*.cfg`. Слоты сумки: #0 сапоги, #2 лук, #7 удочка, #46 кольца, #47 туника.
 Пособие по вёрстке Unity UI + TMP — `researches/unity-ugui-layout/` (греп по `TAG:`; ловушки — `12_pitfalls.md`).
