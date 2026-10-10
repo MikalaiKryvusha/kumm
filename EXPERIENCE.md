@@ -166,6 +166,10 @@ class: ceiling-from-wider-switch
 **Trigger:** пишу оптимизацию по замеру пульта-выключателя → сначала тот же замер с отбором правки.
 **Not for:** выключатели, чей отбор и есть правка (например, `farchars` для сна дальних).
 mechanized: none — первый случай класса; пульт `farlist` (SvarogsDream/src/KrinikDevHarness/Plugin.cs) показывает, кто в полосе и виден ли
+**Второй удар, 2026-10-10 23:04:** «94 аниматора «всегда» — 0.8 мс» снято пультом `animcull transforms`, который переключает ВСЕ такие
+аниматоры, с жителями; правка только предметов (KrinikFixes `Perf.PropAnimatorsCull`, 41 в Баре) дала 14.90 против 14.79 мс — ноль, и
+в разведку и в чат владельцу ушла цифра широкого выключателя (`testcases/reports/2026-10-10_svarog-perf-series.md`). Класс повторился
+за день: к пульту-выключателю нужен режим с отбором правки (у `animcull` — «только не жители») — долг.
 
 ### EXP-0205 · 2026-10-10 · ❌→✅ · #svarogsdream #unity #performance #navmesh #mainthread #measurement
 class: wrong-model-of-the-cost
