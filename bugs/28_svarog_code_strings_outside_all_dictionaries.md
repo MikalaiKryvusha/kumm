@@ -1,10 +1,10 @@
 # Bug 28 — Svarog's Dream: ≈1100 строк кода игры вне всех словарей — игрок видит их по-английски
 
-**Status:** 🟡 IN PROGRESS — разбор сделан, 527 строк переведено; ~~остаток 65 строк, все куски склеек~~ **поправка 2026-10-10 21:48:**
-остаток **192** — перепись не считала строки с подстановкой `$"…{x}…"`, владелец увидел «Travel requires 3 food, but you only have 0.»
-(окно карты); теперь считает: 65 кусков склеек (правила r:/sr:) + 127 строк с подстановкой (ключ `{{A}}` или правило r:; ≈42 из них —
-журнал разработчика «Failed to…», в шум с причиной). `testcases/reports/2026-10-10_svarog-clock-checks-menu.md`. 34 новых имени ждут
-владельца (2026-10-09 15:04)
+**Status:** 🟡 IN PROGRESS — 2026-10-11 00:13: остаток **79** (192 → 79), все — куски склеек (эпитафии «Прогресса» 46, Путь
+Недеяния 12, охотники 7, окна ошибок загрузки 7, «Преданность» 3, Красный Орден 2, «Новая Добродетель» 2); строки с подстановкой
+переведены (93 ключа + 25 баффов «+…»), 41 строка журнала отладки и 4 хвоста карточек разобраны; по пути найдены и починены пять
+близнецов в ключах и правилах XUnity — раздел «2026-10-11». `testcases/reports/2026-10-11_svarog-bug28-interp.md`. ~~остаток 192~~
+(2026-10-10 21:48 — перепись не считала строки с подстановкой). Новых имён ждут владельца 38 (34 от 2026-10-09 + 4 от 2026-10-11)
 **Severity:** S2 — английский текст в русской игре по многим окнам; данные не задеты
 **Version/build:** SvarogsDream `2a4ed60` + `tools/text_census.py` · **When/context:** 2026-10-07 ≈22:00, найдено при починке бага 27
 (перепись класса «реплики вне выемки»)
@@ -137,3 +137,40 @@ windows, «New Virtue:». Whole epitaph combinations that were seen once live in
 era of the online translator) — e.g. the hero Tina’s epitaph showed in Russian on 2026-10-10 02:02. The right fix is splitter rules
 (`sr:` by `\n`) plus `r:` per sentence with the name and gender; checking it in the game needs a hero death, and the owner plays in
 Iron Man mode (the save is written on death) — so only on a test save copy, with the owner awake. Not started at night.
+
+## 2026-10-11 — strings with interpolation, and five twins in XUnity keys and rules
+
+`[OWNER]` «в новом чате делаем 28» · 2026-10-10 ≈23:33. Run report `testcases/reports/2026-10-11_svarog-bug28-interp.md`, cases
+`testcases/TC_svarog_bug28_interp_2026-10-10.md`, SvarogsDream `2434f68`.
+
+**How XUnity actually looks a string up** (read in its decompiled code, kept as `SvarogsDream/tools/xunity_template.py`):
+every digit run (plus `*+,-./:` inside it) becomes its own letter `{{A}}`, `{{B}}`… in order, colour codes included
+(`#008914` → `#{{B}}`, `#88cf77` → `#{{A}}cf{{B}}`); exact key first, then the template; `r:` rules are matched against the
+TEMPLATE; a string that is not found whole is split by tags and every piece between tags is looked up on its own; a rule's
+translation that contains a quote is cut to the text between its first and last quote.
+
+**Batch.** `translation/code_interp_ru.tsv` — 93 keys written in that form (mastery tooltips, buff-tooltip pieces, map and
+ports, shrines, soul globe, arena, prison, debt, sellswords; one `r:` rule — the arena record holder's name); `code_buff_plus.tsv`
+— 24 buffs as «+text» (Russian taken from `code_ru.tsv`). Generator `code_xunity.py` checks every key is a fixed point of the
+XUnity template. Census: exact template, pieces between tags, a hole tried as the number 7; 41 debug-log strings (confirmed by
+the code line: `Debug.Log`/exception) and 4 card tails into `text_census_ok.tsv` with the reason.
+
+**Five twins found on the way, all fixed at the generator and seen working in the game (settext/gettext):**
+
+| # | Defect | Scope | Fix | Case |
+|---|---|---|---|---|
+| 1 | buff tooltip looks up «+text», keys had no «+» — buffs English | 25 buffs | `code_buff_plus.tsv` | C4 → R1 |
+| 2 | literal number in a rule pattern («2% daily», «5 days», «over 6 seconds») — rule dead | 11 dialogue, 73 spell rules, «Scaling … per 100» | `dialogue_xunity.rx_literal`, `spells_xunity.lit(xunity=True)` | C10 ×3 → R2, R3, R5 |
+| 3 | stat rules `([-+x0-9<].*)` — a bare number is `{` after templating | 54 rules | `glossary_fix.py`: `{` in the class | R4 |
+| 4 | repeated insertion as a back-reference — equal numbers get different letters | dialogue rules with a repeat | own group per occurrence | R6b |
+| 5 | rule translation with a quote (`<font="Manrope-Medium SDF">`) shown as «Manrope-Medium SDF» | 37 dialogue rules | translation wrapped in quotes | R6 fail → R6b, R9 |
+
+Twin 5 was LIVE for the owner: every dialogue option with a styled price whose rule had no number in the pattern (trainers'
+«Enhance … skills from level X to Y (N coins)») showed the font name instead of the option.
+
+TWINS: searched `^r:"[^"]*"=.*"` over `_config/xunity/zz_*.txt` — 37 sites, all in `zz_dialogue.txt` (fixed); literal digits in
+rule patterns over all `zz_*` — `zz_spells` 73, `zz_dialogue` 11 (fixed at both generators), `zz_glossary` 54 (digits only in the
+class — twin 3, fixed); hand rules in `zz_krinik*.txt` — 0. Not searched: rules in the machine dictionary (not ours).
+
+**Next.** The 79 glued pieces: `sr:` splitter rules plus `r:` per sentence (epitaphs need the hero's name and gender); the
+in-game check of epitaphs needs a hero death — only on a COPY of the save, with the owner present (Iron Man).

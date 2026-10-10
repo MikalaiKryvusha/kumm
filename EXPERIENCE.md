@@ -90,6 +90,25 @@
 
 ## Entries
 
+### EXP-0212 · 2026-10-11 · ❌→✅ · #svarogsdream #translation #xunity #regex #recon #twins
+class: model-of-foreign-engine-from-recall
+**Context:** баг 28, остаток строк кода с подстановкой (`$"…{x}…"`) — писать ключи XUnity. Три генератора словарей (реплики, умения,
+статы) писали правила `r:` по представлению «XUnity не обобщает число, слитое с буквой» и «правило ловит текст игры».
+**Tried / did:** прочёл сам XUnity (декомпиляция `XUnity.AutoTranslator.Plugin.Core.dll`: `TemplatizeByNumbers`, `TryGetTranslation`,
+`RichTextParser`, `RegexTranslation`) и перенёс правило в код (`SvarogsDream/tools/xunity_template.py`); ключи — неподвижной точкой шаблона;
+гипотезы о близнецах — в игре пультом `settext` → `gettext` на главном меню, без входа в мир.
+**Result:** ❌ пять дефектов, жившие неделю под зелёными самопроверками: бафф «+текст» без ключа; правило с литеральным числом в
+образце мертво (84 правила); стат-правило не ловит голое число; обратная ссылка на повтор вставки мертва; перевод правила с кавычкой
+обрезается до имени шрифта (37 правил, игрок видел «Manrope-Medium SDF»). ✅ все пять починены у генераторов, R1–R10 pass.
+**Lesson:** **чужой движок перевода моделируется по ЕГО коду, а не по памяти и не по машинному словарю: XUnity шаблонит каждую цифру
+(и цифры цвета) буквой по порядку, правило сверяет с ШАБЛОНОМ, строку с тегами ищет кусками, из перевода правила берёт текст между
+первой и последней кавычкой.** Самопроверка генератора должна сверять правило с тем, что видит движок (шаблон), — сверка с исходной
+строкой зелёная на мёртвом правиле. Пульт `settext`/`gettext` на любой надписи главного меню проверяет словарь за секунды, без сейва.
+**Repro:** `bash tools/h.sh "settext MainMenu/MainMenu_Canvas/MenuDefaultButtons_Canvas/VersionHolder/Version Great! You can borrow up to 700g with a 2% daily interest rate. The loan must be repaid in 5 days." "wait 1" "gettext …"` на словаре до `2434f68` — английский.
+**Trigger:** пишу ключ или правило XUnity (`r:`, `sr:`, шаблон `{{A}}`) или генератор словаря.
+**Not for:** точные ключи без чисел — им шаблон не важен.
+mechanized: SvarogsDream/tools/xunity_template.py (шаблон), code_xunity.py (неподвижная точка), dialogue_xunity.py (самопроверка на шаблоне, кавычки), spells_xunity.lit(xunity=True)
+
 ### EXP-0211 · 2026-10-10 · ❌→✅ · #svarogsdream #unity #performance #measurement #ai #simulation #owner-trust
 class: measurement-in-unrepresentative-state
 **Context:** «разбудить дальних жителей — сколько стоит?» — владелец решал по цифре, будить ли мир за 300 м.
