@@ -1,0 +1,55 @@
+# Run report — Svarog's Dream: «Цензура содержимого» под флажком в настройках главного меню — колонка флажков по самой длинной подписи
+
+## 1. Work
+
+- План 18, «Настройки главного меню — три шва» — первый из трёх: подпись под флажком (рулбук В3/В4).
+- Случаи — `testcases/TC_svarog_menu_settings_seams_2026-10-10.md` (K1, C1–C5).
+- Правка: `SvarogsDream/src/KrinikUIRework/MenuFonts.cs` — `FitSettingsToggles`: квадраты переключателей и значок «?» сдвигаются вправо на
+  одну величину — по самой длинной подписи плюс полстроки; от исходного места, запись только при изменении.
+
+## 2. Contour
+
+- Игра 7.2.0, release-плеер; главное меню (выход из мира в 15:59:45 записал сейв владельца); 1280×720 без рамки, затем 4K, 1080p, 2K
+  во весь экран и снова 720p без рамки. Мышь владельца стояла (проверено перед выходом в меню).
+- Мод интерфейса — горячая выкладка `tools/deploy-hot.sh KrinikUIRework`; рулбук прочитан целиком в 15:51 (хук ui-gate).
+
+## 3. Runs
+
+1. 2026-10-10 15:59 — `tools/keys.ps1 -Key ESC`; `bash tools/h.sh "click UI/MainMenu/MainMenu_Canvas/Buttons/MainMenu"`;
+   `tools/mouse.ps1 -X 657 -Y 420` («Да»), `tools/mouse.ps1 -X 96 -Y 422` («Настройки»); `bash tools/h.sh "shot set_before" "dump"`.
+2. 2026-10-10 16:01 — `bash tools/deploy-hot.sh KrinikUIRework`; `bash tools/h.sh "shot set_after" "dump"`; затем
+   `"call UnityEngine.Screen SetResolution 3840 2160 ExclusiveFullScreen"` `"shot set_4k"`, то же 1920×1080 и 2560×1440.
+3. 2026-10-10 16:02 — `"call UnityEngine.Screen SetResolution 1280 720 FullScreenWindow"`; мышь «Загрузить игру» → «Настройки»;
+   `"dump"`; счёт строк «settings toggles» в журнале за 6 с; `"continue"`, `"fieldon … isTimeDisabled True"`, `reg query`.
+
+## 4. Checks
+
+Hygiene: `dotnet build src/KrinikUIRework` — без ошибок; сторож покоя после выкладки — «ui moved 0 per frame».
+Functional run: настоящая мышь по главному меню, кадры изнутри движка на четырёх разрешениях и дерево интерфейса (`dump`: места
+квадратов, подписей, значка «?») прочитаны; журнал мода — сколько раз правка писала место.
+
+| Случай | Итог |
+|---|---|
+| K1 до правки | pass — «Цензура содержимо», квадраты на 510 |
+| C1 720p | pass — подпись целиком, квадраты 545 одной колонкой, «?» 589 |
+| C2 4K | pass |
+| C3 1080p, 2K | pass |
+| C4 повторное открытие | pass — те же места, записей 0 за 6 с |
+| C5 после | pass — мир, часы стоят, реестр 1280/720/1 |
+
+## 5. Found
+
+1. Правка пишет место только при смене разрешения и при открытии/закрытии панели настроек (21 запись за прогон: 3 объекта × 7 событий),
+   не каждый кадр и не каждую секунду.
+2. Два других шва тех же настроек остаются в плане 18: подписи не на одной левой линии (В5), строки списка «Качество графики» мельче
+   подписей и светлый квадратик у выбранной.
+
+## 6. Traces
+
+- Кадры `SvarogsDream/_harness/set_before.webp`, `set_after.webp`, `set_1080.webp`, `set_2k.webp`, `set_4k.webp`, `set_reopen.webp`,
+  `set_world.webp`; лист 2×2 — scratchpad `set_sheet.webp`.
+- Журнал мода — строки `settings toggles: … moved … world units right of home`.
+
+## 7. Verdict
+
+Pass: «Цензура содержимого» видна целиком на 720p, 1080p, 2K и 4K, флажки — одной колонкой, сдвиг не копится.
