@@ -81,6 +81,20 @@
 
 ## Entries
 
+### EXP-0199 · 2026-10-10 · ❌→✅ · #shell #bash #python #backtick #escaping #windows
+class: escaping-layer
+**Context:** правки текста и таблиц через `python -c "…"` в Git Bash.
+**Tried / did:** код в двойных кавычках с markdown внутри — обратные кавычки вокруг путей и ключей.
+**Result:** ❌ дважды за ночь: строка случая C49 потеряла два куска (bash выполнил `` `<…>` `` как команды), а путь отчёта в
+`python -c` bash запустил как скрипт — markdown-отчёт пошёл исполняться построчно (вреда нет: на шестой строке синтаксическая
+ошибка). ✅ механизм — второй рубеж хука `no-backslash-heredoc.mjs`: отказ на обратную кавычку в коде `python -c "…"` / `node -e "…"`.
+**Lesson:** **в двойных кавычках bash обратная кавычка — это команда, а не буква: код с markdown пишется файлом (Write), а не
+строкой `-c`.** Наш первый страж класса ловил слэш в heredoc и пропускал соседа.
+**Repro:** `python -c "print('<обратная кавычка>echo hi<обратная кавычка>')"` — хук отказывает. **Trigger:** любой `-c "`/`-e "`
+с текстом документа внутри.
+**Not for:** одинарные кавычки (там подстановки нет).
+mechanized: tools/hooks/no-backslash-heredoc.mjs (раздел @guard no-backtick-inline-code; test-guards part A)
+
 ### EXP-0198 · 2026-10-10 · ❌→✅ · #svarogsdream #unity #performance #mainthread #stutter #ourmods
 class: our-own-cost-first
 **Context:** эпик 19 «разгрузить главный поток» — владелец считал, что виновата игра («сделана сильно неоптимально»).

@@ -74,6 +74,16 @@ hookCase('control: no heredoc, slash in args', ev('echo a' + BS + 'b'), 0);
 hookCase('control: arithmetic shift, no slash anywhere', ev('echo $((1<<2))'), 0);
 hookCase('control: another tool', JSON.stringify({ tool_name: 'Write', tool_input: { content: 'a' + BS + 'b' } }), 0);
 hookCase('control: garbage on stdin (fail-open)', '{not json', 0);
+// 2026-10-10 (EXP-0199): обратная кавычка в коде python -c "…" / node -e "…" — bash подставляет её раньше интерпретатора.
+const BT = String.fromCharCode(96);
+hookCase('python -c "…", backtick inside', ev('python -c "x=\'' + BT + 'a' + BT + '\'; print(x)"'), 2);
+hookCase('node -e "…", backtick inside', ev('node -e "console.log(\'' + BT + 'x' + BT + '\')"'), 2);
+hookCase('python by path with -I, backtick inside', ev('/d/t/python.exe -I -c "s=\'(' + BT + 'r.md' + BT + ')\'"'), 2);
+hookCase('PYTHONIOENCODING=utf-8 python -c, backtick on line 2', ev('PYTHONIOENCODING=utf-8 python -c "' + NL + 'row=\'' + BT + 'cfg' + BT + '\'"'), 2);
+hookCase('control: python -c without a backtick', ev('python -c "print(1)"'), 0);
+hookCase('control: python -c in single quotes with a backtick', ev("python -c 'x=\"" + BT + "a" + BT + "\"'"), 0);
+hookCase('control: backtick in another command, python -c clean', ev('echo ' + BT + 'date' + BT + '; python -c "print(2)"'), 0);
+hookCase('control: escaped quote, no backtick inside', ev('python -c "print(' + BS + '"a' + BS + '")"'), 0);
 
 // ---------- B. the claim guard, file mode
 console.log('B. check-claim-before-evidence, files');

@@ -31,6 +31,17 @@
 //                 добавляется в местные настройки заново: файл настроек в git не уходит (AGENT_GUIDE → Tools)
 //
 // [TESTED: 2026-09-18 · прогоны 5–10, вывод прочитан; отчёт testcases/reports/2026-09-18_claim-and-heredoc-guards.md]
+//
+// @guard no-backtick-inline-code (тот же файл, второй рубеж класса escaping-layer, 2026-10-10)
+// THREAT:         агент пишет `python -c "…"` / `node -e "…"` с обратной кавычкой в коде — bash подставляет её как команду
+//                 раньше интерпретатора: кусок текста молча пропадает, а путь в кавычках выполняется как скрипт (EXP-0199)
+// PROVED-AGAINST: `node tools/test-guards.mjs`, part A — 4 формы с обратной кавычкой внутри отклонены, 4 контроля пропущены;
+//                 мутант «сканер всегда пуст» краснит ровно эти 4 формы (125 из 129), без мутанта — 129 из 129
+// GAP:            другие команды с кодом в двойных кавычках (`bash -c "…"`, `perl -e`, `sed "…"`, `git commit -m "…"`) не судит;
+//                 подстановку `$(…)` в коде не судит (её пишут нарочно); код, собранный переменной, не видит
+// ON-REAL-PATH:   живой вызов `python -c "print('<обратная кавычка>echo live-probe<обратная кавычка>')"` 2026-10-10 ≈03:19 —
+//                 отклонён этим хуком (файл зарегистрирован в местных настройках как Bash PreToolUse)
+// [TESTED: 2026-10-10 · test-guards 129/129, мутант 125/129, живой отказ · testcases/reports/2026-10-10_backtick-inline-code-guard.md]
 import { readFileSync } from 'node:fs';
 
 const BS = String.fromCharCode(92);
@@ -57,11 +68,38 @@ function heredocBodiesWithBackslash(command) {
   return hits;
 }
 
+// Второй рубеж того же класса (escaping-layer): обратная кавычка внутри кода в ДВОЙНЫХ кавычках у `python -c "…"` /
+// `node -e "…"` — bash выполняет её как подстановку команды раньше, чем код увидит интерпретатор. 2026-10-10 дважды за ночь:
+// строка тест-кейса C49 потеряла два куска (`<…>` ушли в bash как команды), а путь отчёта в `python -c` запустил сам
+// markdown-отчёт как скрипт (EXP-0199). Сканер: от `-c "`/`-e "` после python/py/node до парной незаэкранированной `"`.
+const INLINE = /(?:python[\w.]*|\bpy|node[\w.]*)(?:\s+-[A-Za-z]+)*\s+-[ce]\s+"/g;
+
+function inlineCodeWithBacktick(command) {
+  for (const m of command.matchAll(INLINE)) {
+    let i = m.index + m[0].length;
+    for (; i < command.length; i++) {
+      const ch = command[i];
+      if (ch === BS) { i++; continue; }
+      if (ch === '"') break;
+      if (ch === '`') return command.slice(m.index, Math.min(command.length, i + 40));
+    }
+  }
+  return null;
+}
+
 try {
   const raw = readFileSync(0, 'utf8').replace(/^﻿/, '');
   const event = JSON.parse(raw || '{}');
   if (event.tool_name !== 'Bash') process.exit(0);
   const command = (event.tool_input && event.tool_input.command) || '';
+  const tick = inlineCodeWithBacktick(command);
+  if (tick) {
+    process.stderr.write(
+      'KUMM guard (tools/hooks/no-backslash-heredoc.mjs): inline code in double quotes contains a backtick — bash runs it as ' +
+      'command substitution before the interpreter sees it (EXPERIENCE.md EXP-0199). Near: ' + tick.replace(/\s+/g, ' ') + '\n' +
+      'Do this instead: write the script with the Write tool and run the file.\n');
+    process.exit(2);
+  }
   const hits = heredocBodiesWithBackslash(command);
   if (!hits.length) process.exit(0);
   const first = hits[0].line.trim().slice(0, 120);
