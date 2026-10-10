@@ -25,6 +25,36 @@ KrinikUIRework` (RELOADED) · кадр — `shot` пишет JPEG, `h.sh` сам
 расстояние, точка экрана) → `callon "<путь>" Interactable Interact True` (EXP-0155). Записка на экран её же байтами —
 `call CookingManager ShowPoetry "<текст с \r\n>" False False`, поле текста `UI/ActionBar/ActionBarMain/UIRecipe/Poetry/PoetryMessage`.
 
+**Добавлено 2026-10-10 (ночь):**
+- **Режим владельца — «Железный человек».** Сейв пишется сам: при выходе, по таймеру, после быстрого перемещения и при смерти
+  героя. После КАЖДОГО прогона — сверка хеша с копией и откат, если записал прогон. Ночь в лесу промотом не включать — вампир убил
+  героя за ≈8 с (память `svarog-ironman-night-skip-kills-hero`). Ночь — на `timescale 0` или в деревне.
+- **Камера на объект:** `call KrinikCameraRework.Plugin TestFaceNamed <наклон> <имя объекта>` — ответ: расстояние, разница высот,
+  дальняя граница.
+- **Отдалить до предела:** `callon Camera CameraFollow SetMaxZoom`.
+- **Карта:** `click UI/Enablers/InfoPanel` → `click UI/InfoPanel/InfoPanelHeader/MapHeader`.
+  - Выбрать точку: `click "UI/InfoPanel/MapPanel/FillMap/Scroll Rect/MapPanel (Movable)/HelperMap/FastTravelMainMap/BorInn"`.
+  - Переместиться: `click UI/InfoPanel/MapPanel/FastTravel/FastTravelBtn`.
+- **«Преданность»:** `click UI/Enablers/CharacterPanel` → `click UI/CharacterPanel/CharacterPanelHeader/DevotionHeader` → боги
+  `click "UI/CharacterPanel/DevotionPanel/DevotionScreen/Gods/God (N)"` (N — пусто, 1…7).
+- **Выход в главное меню:**
+  - `click UI/Enablers/MainMenu` → `click UI/MainMenu/MainMenu_Canvas/Buttons/MainMenu`;
+  - → `click UI/MainMenu/MainMenu_Canvas/Dialog_Canvas/ExitGamePanel_MainMenu/Yes`.
+
+  `key Escape` пульт не знает.
+- **Небо для проверки:**
+  - `call KrinikColorRework.Sky TestMeteorKind <0..2>` (звезда летит по реальному времени);
+  - `TestMeteorHold <t|-1>` — звезда застывает в точке пути (снять −1 до следующей звезды);
+  - строка `sky` в журнале показывает `_Meteor`, `T`, `head`, `shape`.
+- **Замер кадра:**
+  - `perf 8` подряд без паузы заражает второе окно своим подсчётом (≈300 мс) — между окнами `wait 2`;
+  - `prof 8 20` — самые дорогие скрипты кадра;
+  - журнал UI-мода: «update parts» и «spike» — кадры > 50 мс.
+- **Ключи запуска:** `GAME_ARGS=-force-d3d12 bash tools/run-game.sh`. DX12 на 1 мс тяжелее DX11 — не включать. На DX11 режим потоков
+  отрисовки — `LegacyJobified`.
+- **Журнал прогона** живёт в `LocalLow/VI Games/Svarog's Dream/Player.log` и `Player-prev.log` — следующий запуск их перезапишет.
+  Улики копировать в `SvarogsDream/_harness/logs/`.
+
 ## Небо (KrinikColorRework, раздел «Небо», с 2026-10-09)
 
 Шейдер `Krinik/Sky/Gradient` (проект `unity/KrinikShaders`, пакет `krinik.shaders`; после правки шейдера — пересборка пакета и
