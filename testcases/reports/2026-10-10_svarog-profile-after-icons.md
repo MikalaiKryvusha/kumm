@@ -16,9 +16,9 @@
 
 ## 3. Runs
 
-1. 12:36–12:38 — `bash tools/run-game.sh`; `bash tools/h.sh "terrainset drawInstanced True|False|True"` с `"perf 6"` ×2 в каждом
+1. 2026-10-10 12:36–12:38 — `bash tools/run-game.sh`; `bash tools/h.sh "terrainset drawInstanced True|False|True"` с `"perf 6"` ×2 в каждом
    положении; `"fieldon … isTimeDisabled False"` `"kill"`; `sha256sum -c …/SHA256SUMS`; `reg query`.
-2. 12:39–12:41 — `bash tools/player-swap.sh dev`; `bash tools/run-game.sh`; `bash tools/h.sh "pcap 300 bor_after"`; ходьба
+2. 2026-10-10 12:39–12:41 — `bash tools/player-swap.sh dev`; `bash tools/run-game.sh`; `bash tools/h.sh "pcap 300 bor_after"`; ходьба
    `tools/keys.ps1 -Key S -Ms 4500` + `"pcap 200 bor_walk"`; `"kill"`; `bash tools/player-swap.sh release`; разбор
    `Unity.exe -batchmode -executeMethod KrinikProfDump.Dump -profFile _harness/bor_after.raw|bor_walk.raw`.
 
