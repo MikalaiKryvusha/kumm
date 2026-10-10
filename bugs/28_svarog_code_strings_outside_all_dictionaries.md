@@ -186,5 +186,10 @@ beside most of them still serves the numbers the game ships, so the visible dama
 `notes_xunity.templated()` → `xunity_template.templatize` (worldevents, notes, quests, code share it), then the hand files.
 Tried 2026-10-11 00:26 and ROLLED BACK (not deployed — the deploy refused): with the exact template the dead keys of the generated
 dictionaries went to 0, but the strict glossary check gave 14 findings on the new template lines and `zz_dialogue.txt` grew by 298
-lines — both need reading before a deploy. The judge also noted: rule translations that hard-code a number the pattern now
+lines — both need reading before a deploy. Read in a scratch copy at 00:33 (no deploy): diff without CR — `zz_dialogue` −2 +296,
+`zz_notes` −7 +27, `zz_worldevents` −47 +128, `zz_selection` −1 +1, `zz_code` +2, `zz_glossary` −1; all 14 glossary findings are
+FALSE — texts already reviewed (credits with Latin names, long notes and world events) whose exceptions are keyed by the exact key,
+so the new template line of the same text is not recognised. Tomorrow: let `glossary_lib` match an exception by the template of
+its key too, re-apply the patch (`scratchpad/patch_templated.py` logic: `number_spans` + `templatize` in `templated()`), deploy,
+check one world event and one note by `settext`. The judge also noted: rule translations that hard-code a number the pattern now
 matches as a letter («5 ульев», «2% в день», «за 6 секунд», «за каждые 100 очков») are right only while the game keeps those numbers.
