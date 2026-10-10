@@ -114,6 +114,9 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > Decisions the agent must not make alone (brand/UX/architecture), or actions only the human can do
 > (test on real hardware, external accounts). Filed in `interviews/` and `homeworks/`.
 
+- ❓ **Интервью #011 (Сварог, 2026-10-10)** — `interviews/interview_011_svarog_far_walkers_and_dropdown_mark.md`: В1 — двигать ли
+  видимых жителей в 40–80 м реже ради ≈1 мс (рекомендация — нет); В2 — знак выбранной строки в списке «Качество графики» (оставить
+  квадратик или подсветка). Ответ одной строкой «1А 2А».
 - 🅿️ **Стрельба из лука «по-обливионски» — в дальнем ящике по слову владельца 12.09.** Не поднимать, пока он
       не скажет. Разведка — `researches/conan-archery/README.md`, запись в досье Конана.
 - 🔴 **НЕ запускать `Clear-Quarantine.ps1 -Stamp 2026-08-17_2335 -Execute`**: в карантине единственный
