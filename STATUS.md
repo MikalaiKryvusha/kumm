@@ -217,7 +217,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 ## Open bugs
 
-Файлов без метки DONE — 12 (сверено 2026-10-08 10:58 по `ls bugs | grep -v DONE`):
+Файлов без метки DONE — 10 (сверено 2026-10-10 16:23 по `ls bugs | grep -v DONE`):
 
 - ✅ `bugs/30_DONE_md_pilot_buttons_step_stalls_game_thread.md` — шаг `buttons` останавливал поток Lua (нулевой `ParentPanel`); починено и проверено живьём в 10:57.
 - ✅ `bugs/33_DONE_svarog_mouse_rays_100m_at_zoom_out.md` — 40 лучей мыши игры на 100 м против камеры на 123.8 м: правка 1.3.1;
@@ -225,7 +225,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 - 🔴 `bugs/29_md_hdr_menu_washed_after_auto_hdr.md` — HDR: Auto HDR выключен для exe, мир принят, инвентарь (UI) пересвечен.
 - 🔴 `bugs/28_svarog_code_strings_outside_all_dictionaries.md` — строки кода игры вне всех словарей (класс бага 27): 1106 → 65 (63 уник., только склейки — нужны правила r:/sr:); судья 19:45 —
   с оговорками; C7 перевода богов в игре не прогнан.
-- 🔧 `bugs/26_svarog_palisade_covers_speech_bubbles.md` — частокол над пузырями: порядок холста 30000 стоит, у частокола не видено.
+- ✅ `bugs/26_DONE_svarog_palisade_covers_speech_bubbles.md` — частокол над пузырями: DONE 2026-10-09 09:17 (строка STATUS отставала до 2026-10-10).
 - 🔧 `bugs/15_svarog_whitish_world_against_low_sun.md` — белёсость земли против солнца: причина (блик стандартного шейдера)
   подтверждена, свой матовый шейдер в моде 2.1.0, прогон pass, 0.6 принято владельцем («да, 0.6 хорошо, оставляем» ·
   ≈10:22); до DONE — увидеть подмену земли при ходьбе.
