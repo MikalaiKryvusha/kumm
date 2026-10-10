@@ -58,7 +58,15 @@
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
 >      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run,
      census-by-own-pattern, hook-after-event, mod-breaks-game-flow, demo-voice-ahead-of-frame, wrong-model-of-the-cost,
-     per-object-work-every-frame, our-own-cost-first, ceiling-from-wider-switch -->
+     per-object-work-every-frame, our-own-cost-first, ceiling-from-wider-switch,
+     act-without-checking-target, artifact-for-eye-unchecked, catalogue-label-instead-of-decision,
+     confusion-delivered-as-verdict, distance-from-camera, false-negative-search, fix-by-property-unverified,
+     flat-world-assumption, guide-on-shelf-unread, hdr-washed-desktop-capture, hidden-layer-shows-through,
+     hover-state-not-cleared, key-form-after-game-rewrite, plugin-loaded-but-not-running, point-fix-layout-cascade,
+     popup-steals-pointer, probe-point-unchecked, procedural-pattern-on-sphere, proxy-path-blocked, recon-by-snippets,
+     repaint-after-build, rule-half-applied, rule-overapplied, shader-owns-its-own-formula, shared-state-two-owners,
+     stale-stand, stand-differs-from-owner-world, text-color-blind-to-background, translator-delay, wrong-api-assumption,
+     wrong-model-of-the-frame, wrong-proxy -->
 >
 > | Class slug | The failure it names |
 > |---|---|
