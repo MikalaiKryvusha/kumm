@@ -1,6 +1,8 @@
 # Bug 33 — Svarog's Dream: game mouse rays reach 100 m, our zoom-out puts the camera at 123.8 m — hover, clicks, spells, pet commands
 
 **Status:** ✅ DONE 2026-10-10 15:52 — fix deployed (KrinikCameraRework 1.3.1), hover and click verified on the owner's save (below)
+**Correction 2026-10-10 19:07:** verified only on a NEAR banker (≈125 m from the camera). ×1.5 = 150 m is short of what a tilted camera
+sees (160–290 m): far items and villagers stayed unclickable — found by the owner, fixed in 1.3.2 (`bugs/34_DONE_svarog_far_clicks_ray_150m_short_of_view.md`).
 **Severity:** S2 — our mod broke game input at its own zoom-out; found by the agent, not reported by the owner
 **Version/build:** SvarogsDream after `bcd55e7`; game release player, BepInEx · **When/context:** 2026-10-10, plan 18 item "hover over a
 villager's icon does not change the cursor" (C7 of `testcases/TC_svarog_icons_service_2026-10-10.md`, 12:23)
