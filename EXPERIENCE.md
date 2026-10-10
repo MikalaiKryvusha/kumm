@@ -648,7 +648,7 @@ class: census-by-own-pattern
 ВСЕХ словарей — тогда шаблон выемки не может спрятать строку.**
 **Repro:** `python -I tools/text_census.py "D:/Games/Svarog's Dream" translation/text_census.tsv` → «unknown N», список по файлам.
 **Trigger:** игрок видит английскую строку, которой «нет» в переписи; новая выемка текста по шаблону.
-**Not for:** строки, которые игра собирает подстановкой (`$"…{x}…"`) — их прибор не считает.
+**Not for:** ничего из литералов кода: с 2026-10-10 прибор считает и строки с подстановкой (`$"…{x}…"`, дырками), до того не считал — так прошла «Travel requires … food» окна карты (`testcases/reports/2026-10-10_svarog-clock-checks-menu.md`). Тексты из данных игры (ассеты) прибор не видит.
 mechanized: SvarogsDream/tools/text_census.py (перепись по литералам) + dialogue_extract.py (ANY_ARR — массивы фраз, код 1); GAP:
 присваивания полям, кроме `playerComment`, сторож выемки не видит — их ловит только перепись
 
