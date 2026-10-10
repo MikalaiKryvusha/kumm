@@ -57,7 +57,7 @@
 >      claim-before-evidence, owner-decision-not-applied, text-in-agents-world,
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
 >      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run,
-     census-by-own-pattern, hook-after-event, mod-breaks-game-flow, demo-voice-ahead-of-frame -->
+     census-by-own-pattern, hook-after-event, mod-breaks-game-flow, demo-voice-ahead-of-frame, wrong-model-of-the-cost -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -80,6 +80,19 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0203 · 2026-10-10 · ❌ · #svarogsdream #unity #performance #animation #uro #mainthread
+class: wrong-model-of-the-cost
+**Context:** эпик 19 — карта потока показала TransformChangedDispatch 7.3 мс и 1641 сдвинутую кость жителей за кадр; владелец предложил
+UE-приём URO (анимация дальних пешек рывками).
+**Tried / did:** пульт `animrate <N> <м>`: аниматор дальнего жителя включён 1 кадр из N со скоростью ×N. Замер A-B-A на release.
+**Result:** ❌ сдвинутых трансформов −36 % (2328 → 1557), а Main Thread тот же (24.5 мс); выключение тех же жителей целиком
+(`farchars 150`) — −2.2 мс.
+**Lesson:** **число сдвинутых костей — не цена: у дальних жителей платят за их существование (агенты навигации, физика, скрипты,
+рендереры), а не за позу. Прежде чем строить приём против «рассылки трансформов», выключить по одной части жителя и мерить.**
+**Repro:** `h.sh "animrate 4 40" "wait 3" "perf 6"` против `"farchars 150" "wait 3" "perf 6"` в одной сцене.
+**Trigger:** любая оптимизация «реже обновлять» для персонажей. **Not for:** близкие персонажи в кадре, где поза видна.
+mechanized: none — опыт; разбор по частям жителя — следующий шаг эпика 19
 
 ### EXP-0202 · 2026-10-10 · ❌→✅ · #stamps #clock #claim #hooks #testcases
 class: claim-before-evidence
