@@ -200,8 +200,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    Doubled Storage Size своим модом (шаг 6а), PauseGame — вернуть, если автор перевыложит. Старая 2.1.1 удалена.
 2. **Движок, фаза 1 — автономный беклог выше.** Первый пункт — запуск-гард в `kumm.mjs`, без него юнит-тест не
    написать. Перед работой: `git status`, `node --check kumm.mjs`, пункт через `/plan-task`.
-3. **Баги — сначала `/check-backlog`.** Одиннадцать файлов в `bugs/` без метки DONE, статусы — раздел «Open bugs»
-   ниже. Единственный открытый баг самого движка — 06 (`-Only` обрезает `modlist.txt`).
+3. **Баги — сначала `/check-backlog`.** Десять файлов в `bugs/` без метки DONE (2026-10-10 16:23), статусы — раздел «Open bugs»
+   ниже. Открытые баги самого движка — 06 (`-Only` обрезает `modlist.txt`) и 14 (`kumm check` держится за старый файл).
 4. **Следующее обновление KAIF** — после прохода `node tools/kaif-update-sweep.mjs <старый бандл> <новый бандл>`,
    пока исток не закрыл #72; навыки с нашими заполнениями сливает `node tools/kaif-update-merge-skills.mjs` (#73).
 5. **Стражи этого проекта:** тронул любой — `node tools/test-guards.mjs` (138 случаев). Хуки (heredoc, методичка
