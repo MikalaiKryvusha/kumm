@@ -58,7 +58,7 @@
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
 >      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run,
      census-by-own-pattern, hook-after-event, mod-breaks-game-flow, demo-voice-ahead-of-frame, wrong-model-of-the-cost,
-     per-object-work-every-frame, our-own-cost-first -->
+     per-object-work-every-frame, our-own-cost-first, ceiling-from-wider-switch -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -81,6 +81,23 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0206 · 2026-10-10 · ❌ · #svarogsdream #unity #performance #navmesh #mainthread #measurement #ceiling
+class: ceiling-from-wider-switch
+**Context:** эпик 19, навигация: пульт `farparts 40 nav` (агент не пишет позицию у ВСЕХ дальше 40 м) дал −0.9…−1.2 мс — по нему
+написана правка мода «агенты вне кадра пишут позицию раз в 4 кадра».
+**Tried / did:** три критерия «вне кадра» подряд — `Renderer.isVisible`, пирамида `Camera.main` + 10 м, дальность от героя в кадре;
+серии из шести чередований; поверх каждого — тот же пульт, чтобы увидеть, где осталась цена.
+**Result:** ❌ выигрыш 0 во всех трёх; вся цена — у 8–9 ВИДИМЫХ агентов в 40–80 м (камера под 50° видит ≈200 м вперёд). Правка
+откатана (`testcases/reports/2026-10-10_svarog-offscreen-agents.md`).
+**Lesson:** **потолок, снятый выключателем, — потолок правки, только если выключатель берёт ровно тот набор, который правка может
+тронуть без потери вида. Перед кодом: мерить потолок с тем же отбором, что у правки (в кадре / вне кадра), а не по радиусу.** И сцена
+после загрузки плывёт на 1–1.5 мс минутами: A-B мерить чередованием 6+ раз после 2–3 минут покоя.
+**Repro:** поверх включённой правки — `h.sh "farparts 40 nav" "wait 3" "perf 8" "farparts restore" "wait 3" "perf 8"`: остаток выигрыша
+пульта = то, что правка не взяла.
+**Trigger:** пишу оптимизацию по замеру пульта-выключателя → сначала тот же замер с отбором правки.
+**Not for:** выключатели, чей отбор и есть правка (например, `farchars` для сна дальних).
+mechanized: none — первый случай класса; пульт `farlist` (SvarogsDream/src/KrinikDevHarness/Plugin.cs) показывает, кто в полосе и виден ли
 
 ### EXP-0205 · 2026-10-10 · ❌→✅ · #svarogsdream #unity #performance #navmesh #mainthread #measurement
 class: wrong-model-of-the-cost
