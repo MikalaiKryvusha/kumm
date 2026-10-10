@@ -652,8 +652,8 @@ npm pack --dry-run                                                       # what 
 ```
 
 Gotchas: Node ≥22 is required (built-in `WebSocket`). `Deploy-ModPack.ps1` is written for Windows
-PowerShell 5.1 — do not "modernize" it with `??`, `?.`, or `&&`. The npm `files` list currently ships
-`kumm.mjs` only, so `npm i -g` delivers half the engine (recorded in the truth↔mirror table).
+PowerShell 5.1 — do not "modernize" it with `??`, `?.`, or `&&`. The npm `files` list ships both halves —
+`kumm.mjs` and `Deploy-ModPack.ps1` (the drift closed 2026-10-10; check: `npm pack --dry-run`, truth↔mirror table).
 
 ---
 

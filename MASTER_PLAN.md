@@ -66,8 +66,8 @@ https://github.com/MikalaiKryvusha/KARMA: `[OWNER]` «Давай KARMA И зав
   cannot ship silently.
 - **Steps:** round-trip check for `parseArchive` ↔ `libraryName` · cases for `sameFile`/`stamp` and
   `pickCard` (Steam vs Gamepass, Capped vs plain) · a fixture pack of zero-byte correctly-named
-  archives driving `check --json`, `-ListMods` and `-Deploy -DryRun` · close the packaging drift
-  (`npm i -g` currently ships `kumm.mjs` without `Deploy-ModPack.ps1`) · a real `help` command, since
+  archives driving `check --json`, `-ListMods` and `-Deploy -DryRun` · ~~close the packaging drift~~ (done
+  2026-10-10: `npm pack --dry-run` ships both halves) · a real `help` command, since
   the switch block, the header comment and the README table are three copies of one list.
 - **Status:** 🔲 todo — this is the phase the autonomous backlog is pointed at.
 

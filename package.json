@@ -22,6 +22,7 @@
   ],
   "files": [
     "kumm.mjs",
+    "Deploy-ModPack.ps1",
     "README.md",
     "LICENSE"
   ],

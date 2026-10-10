@@ -48,7 +48,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 |------|-----------|-------------------------|
 | `kumm.mjs` | Node CLI that talks to Nexus Mods through a debug-port Chrome (CDP). Commands: `launch`, `login`, `status`, `check`, `update`, `files`, `get`, `changelog`, `eval`, `close`. | `<pack>/modpack.json` (mods, `nexusGame`, `library`); Chrome binary; the CDP profile in `%LOCALAPPDATA%\nexus-cdp\profile` |
 | `Deploy-ModPack.ps1` | PowerShell deployer: resolves each mod's source (archive or `_unpacked/`), copies it into every target game folder, writes `Engine.ini` / `steam_emu.ini`, then verifies. Interactive menu with no switches. | `<pack>/modpack.json`, `<pack>/targets.json`, `<pack>/_config/`, `%LOCALAPPDATA%` for `Engine.ini` |
-| `package.json` | Declares the `kumm` bin and the `kaif:*` script handles. `files` ships only `kumm.mjs`, `README.md`, `LICENSE` — **`Deploy-ModPack.ps1` is NOT in the npm tarball** (see the drift note below). | `kumm.mjs` |
+| `package.json` | Declares the `kumm` bin and the `kaif:*` script handles. `files` ships `kumm.mjs`, `Deploy-ModPack.ps1`, `README.md`, `LICENSE` — both halves of the engine (drift closed 2026-10-10). | `kumm.mjs`, `Deploy-ModPack.ps1` |
 | `README.md` | The storefront, Russian, owner's voice. Exempt from `[AI]` provenance marks. | the two engine files |
 | `.kaif/` | KAIF core: `kaif.json` (marker: version, lang, sphere, mode, origin), `kaif-core.mjs` (backs `kaif:*`), `spheres/`, `tools/`, `hooks/`. | — |
 | `tools/scrub-identity.mjs` | The identity gate of a PUBLIC repo: checks every tracked file for what deanonymises the owner or his machine; `tools/hooks/pre-commit` runs it on every commit. | `tools/scrub-local.json` (gitignored vocabulary) |
@@ -89,7 +89,7 @@ a complete CLI reference) → the `.SYNOPSIS`/`.DESCRIPTION` block of `Deploy-Mo
 | Truth | Mirror(s) | Check |
 |---|---|---|
 | `kumm.mjs` command switch (lines 623+) | the header comment (lines 18–28) · the README command table · `AGENT_GUIDE.md` Tools | `node kumm.mjs help` vs. the three lists |
-| `package.json` `"files"` | what a user of `npm i -g kumm` actually gets | `npm pack --dry-run` — **known drift: `Deploy-ModPack.ps1` is absent, so the npm install ships half the engine** |
+| `package.json` `"files"` | what a user of `npm i -g kumm` actually gets | `npm pack --dry-run` — 5 files: `kumm.mjs`, `Deploy-ModPack.ps1`, `README.md`, `LICENSE`, `package.json` (drift closed 2026-10-10) |
 | archive naming scheme | `libraryName()` (writer) ↔ `parseArchive()` (reader) in `kumm.mjs` | round-trip one name through both |
 | `modpack.json` keys | `kumm.mjs` (`nexusGame`, `library`, `mods[]`) ↔ `Deploy-ModPack.ps1` (`gameExe`, `library`, `mods[]`, `steamEmu`, `packName`, `builtFor`) | grep both halves for each key |
 
