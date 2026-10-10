@@ -197,6 +197,8 @@ game T1 — world event on the number 37 (absent from the dictionary) in Russian
 `29dc660`. Dead template keys in generated dictionaries 57 → 0; left 10 in hand files (`zz_krinik` 5, `zz_krinik_gametips` 3,
 `zz_glossary` 1, `zz_spells` 1). A note with `\r\n` could not be sent through the harness (`settext` converts only `\n`).
 The 5 in `zz_krinik` («Blunt Armor: <color=#1E6A0F>{{A}}</color>», «Piercing Damage: x<color…») are redundant: the stat rules of
-`zz_glossary.txt` for the same labels catch the value (it starts with `<` or `x`) — remove them at the next hand edit; the 3 tips
-remain to be read. The judge also noted: rule translations that hard-code a number the pattern now
+`zz_glossary.txt` for the same labels catch the value (it starts with `<` or `x`) — remove them at the next hand edit. The 3 tips
+were generated (`gametips_xunity.py` uses the same `templated()`) but the generator was missing from `translation_deploy.sh`, so its
+dictionary lagged; added to the deploy and regenerated 00:39–00:40 (SvarogsDream `af16a48`, `c830c82`) — +21 template lines, exact
+lines unchanged; not checked in the game by `settext`. Left: `zz_glossary` 1, `zz_spells` 1. The judge also noted: rule translations that hard-code a number the pattern now
 matches as a letter («5 ульев», «2% в день», «за 6 секунд», «за каждые 100 очков») are right only while the game keeps those numbers.
