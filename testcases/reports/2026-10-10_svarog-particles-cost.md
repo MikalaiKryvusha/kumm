@@ -12,8 +12,8 @@
 
 ## 3. Runs
 
-1. 2026-10-10 16:12 — `bash tools/h.sh "call CameraFollow SetMaxZoom" "wait 4" "perf 8" "particles pause" "wait 2" "perf 8"
-   "particles play" "wait 2" "perf 8" "particles pause" "wait 2" "perf 8" "particles play" "wait 2" "perf 8"`.
+1. 2026-10-10 16:12 — `bash tools/h.sh "call CameraFollow SetMaxZoom" "wait 4" "perf 8" "particles pause" "wait 2" "perf 8"` и далее
+   в том же вызове `"particles play" "wait 2" "perf 8" "particles pause" "wait 2" "perf 8" "particles play" "wait 2" "perf 8"`.
 
 ## 4. Checks
 
