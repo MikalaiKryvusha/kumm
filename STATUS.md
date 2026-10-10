@@ -211,7 +211,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 - 🔴 `bugs/14_pickcard_exact_name_pins_old_file.md` — `kumm check` держится за старый файл, если автор когда-то
   вписал версию в имя файла (Bosses My New Besties, 02.10). Баг самого движка; план починки и кейс — в документе.
 - ✅ `bugs/13_DONE_conan_checker_nexus_403_system32_curl.md` — DONE 2026-10-10 16:24: шапка прибора отправляет за датами Nexus к
-  `kumm check` (коммит пака Конана `ab408e4` локально — пак опережает origin на 3, отправка по слову владельца).
+  `kumm check` (коммит пака Конана `ab408e4` локально — пак опережает origin на 3: два коммита прошлых сессий тоже не отправлены; агент не отправлял).
 - 🔴 `bugs/06_deploy_only_truncates_modlist.md` — `-Only` молча обрезает `modlist.txt` и выключает остальные
   моды. Баг самого движка (`Deploy-ModPack.ps1`), воспроизводится каждый раз.
 - 🟡 `bugs/07_conan_probe_kills_ue4ss_lua_layer.md` — симптом снят выключением мода, причина не найдена.
