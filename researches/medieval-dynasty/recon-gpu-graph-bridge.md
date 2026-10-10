@@ -36,20 +36,20 @@ source code are marked `[code]` with the file and tag.
   the GPU" is this family: a world grid where each cell holds a value (density, danger, scent of trade) and a stencil
   diffuses it every step. **Not verified in this pass with a quote** (see "What I could not find").
 
-### 1.2 Good at / bad at (engineering reading, marked [AI])
-- [AI] Good: the *same* small rule over *many* cells or agents — diffusion of influence, density, flow to a common goal,
+### 1.2 Good at / bad at (engineering reading, marked `[AI]`)
+- `[AI]` Good: the *same* small rule over *many* cells or agents — diffusion of influence, density, flow to a common goal,
   crowd steering. Cost is per cell, independent of how many agents follow the field.
-- [AI] Bad: branchy, heterogeneous per-agent decisions (a merchant choosing between 30 recipes, a lord weighing an alliance)
+- `[AI]` Bad: branchy, heterogeneous per-agent decisions (a merchant choosing between 30 recipes, a lord weighing an alliance)
   and *contested resources* (FLAME GPU 2 itself needed sub-models for this — quote above). GPU warps execute in lock-step;
   divergent branches serialize. **Verbatim NVIDIA source for divergence not obtained in this pass.**
-- [AI] Scale mismatch: our target is 5 000–20 000 subjects ticked **once per in-game hour**. A modern CPU core does millions
+- `[AI]` Scale mismatch: our target is 5 000–20 000 subjects ticked **once per in-game hour**. A modern CPU core does millions
   of simple updates per second; 20 000 × a few hundred operations per tick is well inside one core per hour of game time.
   The GPU wins at 10⁶–10⁹ agents per frame, which is not our problem.
 
 ### 1.3 Cost of CUDA beside the game on the same GPU
 - Observed: the card already holds 3.9 GB with no game; Medieval Dynasty's own VRAM use on the owner's settings is not
   measured yet (phase-0 measurement in `living-world.md` §5а).
-- [AI] A CUDA context and the game's D3D context time-slice the same SMs; under WDDM a compute burst can delay a frame.
+- `[AI]` A CUDA context and the game's D3D context time-slice the same SMs; under WDDM a compute burst can delay a frame.
   A small LLM (3–8 B, 4-bit) needs several GB of VRAM and bursts the GPU during generation. **No verbatim source for
   frame-time impact obtained in this pass** — this must be *measured* (PresentMon, EXP-0019 tooling) rather than assumed.
 
@@ -71,7 +71,7 @@ source code are marked `[code]` with the file and tag.
 ### 2.2 Latency (what numbers exist)
 - kuzudb-study, **100 K nodes / ~2.4 M edges**, M3 MacBook Pro: second-degree path query Neo4j 3.2203 s vs Kuzu 0.0086 s;
   query 1: 1.7267 s vs 0.1603 s. https://github.com/prrao87/kuzudb-study
-- [AI] Our world (≈20 000 subjects, maybe 100 000–300 000 edges: kinship, debts, routes, recipe inputs) is one to two orders
+- `[AI]` Our world (≈20 000 subjects, maybe 100 000–300 000 edges: kinship, debts, routes, recipe inputs) is one to two orders
   of magnitude smaller than that dataset. At this size any of them — and a plain hash-map adjacency list in RAM — answers a
   2–3-hop query in micro- to milliseconds. **No benchmark at exactly our size found; measure.**
 
@@ -92,13 +92,13 @@ source code are marked `[code]` with the file and tag.
   "graph" is Brierley's thesis, which does not mention it.
 
 ### 2.4 Would a plain in-memory graph do the same job?
-- [AI] Yes for runtime. What a graph DB adds is a *query language* (Cypher) and *persistence*; what the living world needs
+- `[AI]` Yes for runtime. What a graph DB adds is a *query language* (Cypher) and *persistence*; what the living world needs
   each hour is "for each subject, look at neighbours, decide, write". That is an adjacency list + arrays. NetworkX-style
   libraries ("a Python package for the creation, manipulation, and study of the structure, dynamics, and functions of
   complex networks" https://networkx.org/documentation/stable/index.html) or hand-rolled maps are enough.
-- [AI] A graph DB earns its place as the **designer's microscope** (Gamesys pattern: query the recipe/economy graph offline,
+- `[AI]` A graph DB earns its place as the **designer's microscope** (Gamesys pattern: query the recipe/economy graph offline,
   find knock-on effects) and as **save/long-term store** (Brierley pattern), not as the hot loop.
-- [AI] SQLite is already the safest "graph DB" for a single-user Windows tool: one file, recursive CTE for walks, no
+- `[AI]` SQLite is already the safest "graph DB" for a single-user Windows tool: one file, recursive CTE for walks, no
   server, no abandoned-vendor risk (Kuzu).
 
 ---
@@ -114,7 +114,7 @@ source code are marked `[code]` with the file and tag.
   table includes `luaopen_package`, `luaopen_io`, `luaopen_os`, `luaopen_debug` (linit.c). `LuaMod.cpp@v3.0.1:3284`
   `lua.open_all_libs();`.
 - `[code]` **`io.popen` exists on Windows**: `liolib.c` — `#elif defined(LUA_USE_WINDOWS)` → `#define l_popen(L,c,m) (_popen(c,m))`,
-  and `luaconf.h` defines `LUA_USE_WINDOWS` for `_WIN32`. [AI] `_popen` spawns a console child and blocks the calling thread
+  and `luaconf.h` defines `LUA_USE_WINDOWS` for `_WIN32`. `[AI]` `_popen` spawns a console child and blocks the calling thread
   on reads — usable to *launch* the world server, not as a per-tick channel on the game thread.
 - `[code]` **C modules (DLLs) are loadable via `require`**: `luaconf.h` sets `LUA_DL_DLL` under Windows, and UE4SS v3.0.1 appends
   to `package.cpath`: `;{mods}\{mod}\Scripts\?.dll` and `;{mods}\{mod}\?.dll` (`LuaMod.cpp@v3.0.1:825-831`). Changelog
@@ -131,7 +131,7 @@ source code are marked `[code]` with the file and tag.
   the mods." It also says "This mod uses a forked UE4SS release".
 - **Risk I found by inspection** `[code/observed]`: the x64 `socket/core.dll` from that release imports only
   `KERNEL32`, `WS2_32`, the CRT — **no `lua54.dll`** — and contains `lua_newstate`, i.e. it carries **its own statically
-  linked copy of Lua 5.4.7** and will operate on UE4SS's 5.4.4 state with a second copy of the Lua core. [AI] It works in
+  linked copy of Lua 5.4.7** and will operate on UE4SS's 5.4.4 state with a second copy of the Lua core. `[AI]` It works in
   the field for MotorTown, but it is a two-runtimes-one-state setup with a version mismatch; and it runs on `LoopAsync`,
   which UE4SS issue #168 calls crash-prone ("All async APIs will eventually crash because of this", quoted in
   `web-recon.md`). If we use a socket from Lua, poll it **non-blocking (`settimeout(0)`) from a game-thread timer**, never
@@ -142,7 +142,7 @@ source code are marked `[code]` with the file and tag.
   to GitHub with access to Unreal Engine source code" (docs). https://docs.ue4ss.com/dev/guides/creating-a-c++-mod.html
 - `[code]` `CppUserModBase.hpp@v3.0.1` offers `on_update()`, `on_unreal_init()` and `on_lua_start(…)` — the latter hands the
   C++ mod "the main Lua thread instance", the async instance and "a container of Lua instances that are used for game-thread
-  hooks like ExecuteInGameThread". → [AI] a C++ mod can own a named pipe / socket / shared-memory ring buffer on its own
+  hooks like ExecuteInGameThread". → `[AI]` a C++ mod can own a named pipe / socket / shared-memory ring buffer on its own
   thread and **register plain Lua functions** (`WorldBridge.poll()`, `WorldBridge.send(json)`) into our Lua mod — no
   foreign Lua copy, no LuaSocket.
 - `[code]` `UE4SSProgram.cpp@v3.0.1:865-936`: `on_update` is fired from the thread named `"UE4SS-UpdateThread"` in a loop
@@ -161,7 +161,7 @@ source code are marked `[code]` with the file and tag.
   because a neighbour mod documented Lua-state corruption from async loops; v2 runs on `ExecuteInGameThreadWithDelay` with
   the timer re-armed **at the end** of processing; positive control passed ("движок вернул наши неванильные 2.6/6.0").
   Source: `D:\work\ai_sandbox\Palworld\_unpacked\ConsoleBridge\Scripts\main.lua`. Latency = poll period (2–4 s observed).
-- [AI] For an hourly in-game tick (Medieval Dynasty's game hour is minutes of real time) a 1–2 s file poll is **already
+- `[AI]` For an hourly in-game tick (Medieval Dynasty's game hour is minutes of real time) a 1–2 s file poll is **already
   fast enough**; the bridge's latency is not the bottleneck.
 
 ### 3.6 Latency of each channel (orders of magnitude)
@@ -173,7 +173,7 @@ source code are marked `[code]` with the file and tag.
 | Shared memory | 4 702 557 msg/s at 100 B | same, Linux |
 | Windows-specific numbers | not verified | — |
 
-[AI] Every channel except the file poll is microseconds; the real cost is the **game-thread work** of applying the result
+`[AI]` Every channel except the file poll is microseconds; the real cost is the **game-thread work** of applying the result
 (spawning/teleporting actors, writing properties), which is identical in A and B.
 
 ---
@@ -189,7 +189,7 @@ source code are marked `[code]` with the file and tag.
   · issue #1345: "Lua runs concurrently from the async thread and the game thread". https://github.com/UE4SS-RE/RE-UE4SS/issues/1345
 - `ExecuteInGameThread` "executes code on the game thread using either the ProcessEvent hook or the EngineTick hook";
   `LoadAsset` "Must only be called from within the game thread." (both quoted in `web-recon.md`).
-- [AI] Consequence: **option A has exactly one usable thread for simulation — the game thread.** Lua coroutines are
+- `[AI]` Consequence: **option A has exactly one usable thread for simulation — the game thread.** Lua coroutines are
   cooperative (same thread), so the only A-side defence is *time-slicing*: process N subjects per frame within a budget
   (e.g. ≤1 ms), spreading the hourly tick across many frames. There is no way to use the other 15 hardware threads from
   UE4SS Lua safely.
@@ -220,7 +220,7 @@ More on UE4SS (sub-research, quotes as returned by the fetch tool):
 | Double Buffer | "Cause a series of sequential operations to appear instantaneous or simultaneous."; "We want to prevent the code that's accessing the state from seeing the work in progress." | https://gameprogrammingpatterns.com/double-buffer.html |
 | Counter-based RNG (Random123) | "Most pseudorandom number generators (PRNGs) scale poorly to massively parallel high-performance computation because they are designed as sequentially dependent state transformations… independent, keyed transformations of counters produce a large alternative class of PRNGs" | https://hgpu.org/?p=6092 (abstract, Salmon et al. SC11) |
 
-[AI] The design these converge on, for our scale: **double-buffered state** (read tick *t*, write tick *t+1*) so every
+`[AI]` The design these converge on, for our scale: **double-buffered state** (read tick *t*, write tick *t+1*) so every
 subject's update is independent; **partition by village/region** (flecs/Factorio: groups that do not interact run in
 parallel) for writes that cross subjects — market clearing per settlement in parallel, then a short sequential exchange
 step between settlements; **per-subject RNG keyed by (world seed, subject id, tick)** (Random123 idea) so a parallel run
@@ -261,7 +261,7 @@ replays bit-for-bit regardless of scheduling. And per the C# note: at 20 000 sub
 
 ---
 
-## 4. Synthesis [AI] — A: all in Lua vs B: world server + bridge
+## 4. Synthesis `[AI]` — A: all in Lua vs B: world server + bridge
 
 Assumptions: 5 000–20 000 subjects, ticked once per in-game hour; the game shows only the subjects near the player
 (A-Life two-tier pattern, `web-recon.md` recommendation 1).
@@ -331,7 +331,7 @@ needed at 20 000 subjects/hour; the LLM, if any, belongs to the world's *speech*
 
 ## Essence (Pareto)
 - **Two tiers: abstract records far away, real actors only near the player** · cost scales with what is *visible*, not with world size · A-Life pattern, `web-recon.md` rec. 1; Dwarf Fortress off-screen sim (`living-world.md`).
-- **Coarse tick (once per game hour) over plain arrays** · 20 000 × simple update/hour is trivial for one CPU core · [AI] arithmetic; Gamesys modelled a 5 000-item/800-recipe economy as one graph (theburningmonk).
+- **Coarse tick (once per game hour) over plain arrays** · 20 000 × simple update/hour is trivial for one CPU core · `[AI]` arithmetic; Gamesys modelled a 5 000-item/800-recipe economy as one graph (theburningmonk).
 - **Double-buffered state + per-subject keyed RNG** · independent updates parallelise and replay bit-for-bit · Nystrom "Double Buffer"; Random123 (Salmon et al.); Factorio determinism rule (FFF #421).
 - **Parallelise only non-interacting groups (villages/regions)** · no cache ping-pong, no locks · Factorio FFF #364 (belts 4 ms → 1.6 ms) vs FFF #215 (parallel slower).
 - **Low-attention far simulation** · fewer, coarser updates where nobody looks · X4 "Low Attention Mode" (PCGH), Egosoft OOS.
