@@ -57,7 +57,7 @@
 >      claim-before-evidence, owner-decision-not-applied, text-in-agents-world,
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
 >      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run,
-     census-by-own-pattern, hook-after-event, mod-breaks-game-flow -->
+     census-by-own-pattern, hook-after-event, mod-breaks-game-flow, demo-voice-ahead-of-frame -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -80,6 +80,35 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0201 · 2026-10-10 · ❌→✅ · #svarogsdream #video #demo #voice #claim #capture
+class: demo-voice-ahead-of-frame
+**Context:** демо в 4K с голосом, 15 сцен по 10 с; голос — готовые фразы, запускались на отметке сцены; время мира бежало ≈1 ч/мин.
+**Tried / did:** фразы написаны заранее («Птицы. Стая пересекает небо», «Дождь. Даль уходит в пелену», «Северное сияние», «Белой полосы
+нет»), превью — не у всех сцен.
+**Result:** ❌ лист кадров каждой секунды ролика: птиц, дождя, сияния, падающих звёзд в 5-секундных окнах нет, а «белая полоса» — есть.
+✅ v1 из 11 проверенных сцен, три переозвучены по кадру.
+**Lesson:** **фраза демо — утверждение о кадре: событие (птицы, дождь, вспышка) сначала ловится превью в том же ракурсе, и только потом
+ставится отметка с голосом; фраза «X нет» говорится после листа кадров, не до.** Дождь начинается через ≈20 с после `SetRainWithPrerain`,
+снег — со второго вызова после остановки дождя; небо видно только при отдалении до предела и наклоне ≤ 8° (отрицательный уводит камеру
+под землю).
+**Repro:** лист кадров `ffmpeg -ss <0.6..4.6> -i seg<N>.mp4 -frames:v 1` по каждой сцене с обещанием — до сборки ролика.
+**Trigger:** любое видео с голосом, где фраза называет событие в кадре. **Not for:** статичные сцены (окна интерфейса).
+mechanized: none — кандидат: монтаж отказывает без листа кадров сцены с пометкой «проверено»
+
+### EXP-0200 · 2026-10-10 · ❌ · #svarogsdream #unity #screenshot #capture #brightness #gallery
+class: stand-differs-from-owner-world
+**Context:** демо Сварога — сверка записи экрана (`ddagrab`, рабочий стол SDR, float-максимум 1.0) с кадром пульта `shot`
+(`ScreenCapture.CaptureScreenshotAsTexture`) в ту же секунду.
+**Tried / did:** попиксельно: интерфейс одинаков, мир в `shot` ≈ 0.6 × запись (240 → 144 по всем каналам, `hud_cmp.webp`).
+**Result:** ❌ галерейные кадры показывают мир темнее, чем экран владельца; причина не найдена (кандидаты — что-то после захвата Unity:
+пост-проход или настройки вывода).
+**Lesson:** **кадр изнутри движка — не то, что видит владелец: яркость и тон судить по записи экрана, `shot` — только для вёрстки и
+сравнения A/B между собой.**
+**Repro:** `h.sh "shot x"` и в ту же секунду `ffmpeg -f lavfi -i "ddagrab=output_idx=0:framerate=5,hwdownload,format=bgra" -frames:v 1`
+— сравнить медианы по уровням. **Trigger:** вывод о яркости, цвете, «темно/светло» по кадру пульта. **Not for:** HDR-рабочий стол
+(там свой путь, EXP-0193).
+mechanized: none
 
 ### EXP-0199 · 2026-10-10 · ❌→✅ · #shell #bash #python #backtick #escaping #windows
 class: escaping-layer
