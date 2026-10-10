@@ -112,8 +112,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
       переносимости за один заход (`bugs/03_DONE_*`, `EXP-0043`). **Осталось**: превратить разовый
       скрипт в постоянный прибор в репозитории — сейчас он жил в scratchpad и умер вместе с сессией.
       Это самый дешёвый оставшийся пункт Phase 1: строитель фикстуры уже написан один раз.
-- [ ] **Close the packaging drift** — `package.json` `"files"` ships `kumm.mjs` without
-      `Deploy-ModPack.ps1`, so `npm i -g` delivers half the engine. Verify with `npm pack --dry-run`.
+- [x] **Close the packaging drift** — 2026-10-10 16:10: `Deploy-ModPack.ps1` добавлен в `"files"`; `npm pack --dry-run` — 5 файлов,
+      обе половины движка (79.4 kB `Deploy-ModPack.ps1`). В npm не публиковалось — это выпуск, слово владельца.
 - [ ] **A real `help` command** — the switch block, the header comment (lines 18–28) and the README
       table are three hand-maintained copies of one list. One source, the rest generated or checked.
 - [x] **`kumm status` after `close`** — проверено 2026-10-10 16:09: `close` — «Chrome и так не запущен», `status` — «CDP на :9222 не
