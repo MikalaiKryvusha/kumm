@@ -19,7 +19,7 @@
 
 ## 3. Runs
 
-Запуски игры 2026-10-10 03:09 и 03:27 (`bash tools/run-game.sh`; второй — C4, контур «Перезарядки»). Горячие выкладки `bash tools/deploy-hot.sh KrinikUIRework` — три итерации
+Запуски игры 2026-10-10 03:09 и 03:26 (`bash tools/run-game.sh`; второй — C4, контур «Перезарядки»; по ротации журнала — ≈03:26). Горячие выкладки `bash tools/deploy-hot.sh KrinikUIRework` — три итерации
 правки.
 
 Пульт:
@@ -54,8 +54,9 @@ Functional run: игра запущена агентом с сейвом вла�
 
 - `SvarogsDream/gallery/game/2026-10-10_карта/`: `преданность-8-богов-до-4K.webp`, `преданность-8-богов-после-4K.webp`,
   `преданность-8-богов-после-720p.webp`.
-- `SvarogsDream/_harness/`: `dvb0–7` (до), `dva0–7`, `dvc0–7` (итерации), `dvd0–7` (после, 4K), `dve0–7` (720p).
-- Журнал — `SvarogsDream/_harness/logs/2026-10-10_0309_Player-devotion.log`.
+- `SvarogsDream/_harness/`: `dvb0–7` (до), `dva0–7`, `dvc0–7` (итерации), `dvd0–7` (после, 4K), `dve0–7` (720p), `dvf0`, `dvf2`,
+  `dvf5` (C4). Листы `_harness/dvc_sheet…dve_sheet.webp` — прошлая сессия (2026-10-06), не эти.
+- Журналы — `SvarogsDream/_harness/logs/2026-10-10_0309_Player-devotion.log`, C4 — `…/2026-10-10_0326_Player-devotion-c4.log`.
 
 ## 7. Verdict
 
