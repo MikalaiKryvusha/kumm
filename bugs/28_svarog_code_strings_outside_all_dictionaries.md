@@ -2,7 +2,9 @@
 
 **Status:** 🟡 IN PROGRESS — 2026-10-11 00:13: остаток **79** (192 → 79), все — куски склеек (эпитафии «Прогресса» 46, Путь
 Недеяния 12, охотники 7, окна ошибок загрузки 7, «Преданность» 3, Красный Орден 2, «Новая Добродетель» 2); строки с подстановкой
-переведены (93 ключа + 25 баффов «+…»), 41 строка журнала отладки и 4 хвоста карточек разобраны; по пути найдены и починены пять
+переведены (118 строк словаря: `code_interp_ru.tsv` — 93 ключа и 1 правило, `code_buff_plus.tsv` — 24; баффов «+…» всего 25, один из
+них в `code_interp_ru.tsv`; поправка 2026-10-11 по судье — было «93 ключа + 25 баффов»); в разобранные легли 53 строки: 41 журнала
+отладки, 4 хвоста карточек, 8 пределов переписи (6 «красных» баффов, 2 строки портов); по пути найдены и починены пять
 близнецов в ключах и правилах XUnity — раздел «2026-10-11». `testcases/reports/2026-10-11_svarog-bug28-interp.md`. ~~остаток 192~~
 (2026-10-10 21:48 — перепись не считала строки с подстановкой). Новых имён ждут владельца 38 (34 от 2026-10-09 + 4 от 2026-10-11)
 **Severity:** S2 — английский текст в русской игре по многим окнам; данные не задеты
@@ -149,9 +151,10 @@ every digit run (plus `*+,-./:` inside it) becomes its own letter `{{A}}`, `{{B}
 TEMPLATE; a string that is not found whole is split by tags and every piece between tags is looked up on its own; a rule's
 translation that contains a quote is cut to the text between its first and last quote.
 
-**Batch.** `translation/code_interp_ru.tsv` — 93 keys written in that form (mastery tooltips, buff-tooltip pieces, map and
-ports, shrines, soul globe, arena, prison, debt, sellswords; one `r:` rule — the arena record holder's name); `code_buff_plus.tsv`
-— 24 buffs as «+text» (Russian taken from `code_ru.tsv`). Generator `code_xunity.py` checks every key is a fixed point of the
+**Batch.** `translation/code_interp_ru.tsv` — 94 rows: 93 keys written in that form (mastery tooltips, buff-tooltip pieces incl.
+«+Bonus MS and Resistance.», map and ports, shrines, soul globe, arena, prison, debt, sellswords) plus one `r:` rule (the arena
+record holder's name); `code_buff_plus.tsv` — 24 buffs as «+text» (Russian taken from `code_ru.tsv`); 118 dictionary lines in all.
+(Corrected 2026-10-11 after the judge: the commit `2434f68` message and the first wording here counted the rule inside the 93.) Generator `code_xunity.py` checks every key is a fixed point of the
 XUnity template. Census: exact template, pieces between tags, a hole tried as the number 7; 41 debug-log strings (confirmed by
 the code line: `Debug.Log`/exception) and 4 card tails into `text_census_ok.tsv` with the reason.
 
@@ -181,3 +184,7 @@ script logic as in `code_xunity.interp_rows`): 67 of ≈850 — `zz_worldevents`
 XUnity sees «10-15» as ONE number; «(Pay 10g)» literal), `zz_glossary` 1, `zz_selection` 1 («2x»), `zz_spells` 1. An exact key
 beside most of them still serves the numbers the game ships, so the visible damage is limited to other numbers. Fix at the source:
 `notes_xunity.templated()` → `xunity_template.templatize` (worldevents, notes, quests, code share it), then the hand files.
+Tried 2026-10-11 00:26 and ROLLED BACK (not deployed — the deploy refused): with the exact template the dead keys of the generated
+dictionaries went to 0, but the strict glossary check gave 14 findings on the new template lines and `zz_dialogue.txt` grew by 298
+lines — both need reading before a deploy. The judge also noted: rule translations that hard-code a number the pattern now
+matches as a letter («5 ульев», «2% в день», «за 6 секунд», «за каждые 100 очков») are right only while the game keeps those numbers.
