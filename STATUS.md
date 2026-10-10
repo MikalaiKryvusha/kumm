@@ -200,7 +200,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    Doubled Storage Size своим модом (шаг 6а), PauseGame — вернуть, если автор перевыложит. Старая 2.1.1 удалена.
 2. **Движок, фаза 1 — автономный беклог выше.** Первый пункт — запуск-гард в `kumm.mjs`, без него юнит-тест не
    написать. Перед работой: `git status`, `node --check kumm.mjs`, пункт через `/plan-task`.
-3. **Баги — сначала `/check-backlog`.** Десять файлов в `bugs/` без метки DONE (2026-10-10 16:23), статусы — раздел «Open bugs»
+3. **Баги — сначала `/check-backlog`.** Девять файлов в `bugs/` без метки DONE (2026-10-10 16:24), статусы — раздел «Open bugs»
    ниже. Открытые баги самого движка — 06 (`-Only` обрезает `modlist.txt`) и 14 (`kumm check` держится за старый файл).
 4. **Следующее обновление KAIF** — после прохода `node tools/kaif-update-sweep.mjs <старый бандл> <новый бандл>`,
    пока исток не закрыл #72; навыки с нашими заполнениями сливает `node tools/kaif-update-merge-skills.mjs` (#73).
@@ -217,7 +217,7 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 ## Open bugs
 
-Файлов без метки DONE — 10 (сверено 2026-10-10 16:23 по `ls bugs | grep -v DONE`):
+Файлов без метки DONE — 9 (сверено 2026-10-10 16:24 по `ls bugs | grep -v DONE`):
 
 - ✅ `bugs/30_DONE_md_pilot_buttons_step_stalls_game_thread.md` — шаг `buttons` останавливал поток Lua (нулевой `ParentPanel`); починено и проверено живьём в 10:57.
 - ✅ `bugs/33_DONE_svarog_mouse_rays_100m_at_zoom_out.md` — 40 лучей мыши игры на 100 м против камеры на 123.8 м: правка 1.3.1;
@@ -231,8 +231,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
   ≈10:22); до DONE — увидеть подмену земли при ходьбе.
 - 🔴 `bugs/14_pickcard_exact_name_pins_old_file.md` — `kumm check` держится за старый файл, если автор когда-то
   вписал версию в имя файла (Bosses My New Besties, 02.10). Баг самого движка; план починки и кейс — в документе.
-- 🟢 `bugs/13_conan_checker_nexus_403_system32_curl.md` — по существу закрыт 02.10: Nexus теперь закрыт Cloudflare
-  для любого curl, Nexus читает `kumm check`; осталось поправить шапку прибора.
+- ✅ `bugs/13_DONE_conan_checker_nexus_403_system32_curl.md` — DONE 2026-10-10 16:24: шапка прибора отправляет за датами Nexus к
+  `kumm check` (коммит пака Конана `ab408e4` локально — пак опережает origin на 3, отправка по слову владельца).
 - 🔴 `bugs/06_deploy_only_truncates_modlist.md` — `-Only` молча обрезает `modlist.txt` и выключает остальные
   моды. Баг самого движка (`Deploy-ModPack.ps1`), воспроизводится каждый раз.
 - 🟡 `bugs/07_conan_probe_kills_ue4ss_lua_layer.md` — симптом снят выключением мода, причина не найдена.
