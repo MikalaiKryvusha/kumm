@@ -116,8 +116,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
       `Deploy-ModPack.ps1`, so `npm i -g` delivers half the engine. Verify with `npm pack --dry-run`.
 - [ ] **A real `help` command** — the switch block, the header comment (lines 18–28) and the README
       table are three hand-maintained copies of one list. One source, the rest generated or checked.
-- [ ] **`kumm status` after `close`** — confirm it reports cleanly rather than throwing; cheap, and it
-      is the command a session runs first.
+- [x] **`kumm status` after `close`** — проверено 2026-10-10 16:09: `close` — «Chrome и так не запущен», `status` — «CDP на :9222 не
+      отвечает», оба код 0 (`testcases/reports/2026-10-10_kumm-status-after-close.md`). Остаток: без `--game` `status` требует игру.
 - [ ] **Warn when a mod overrides `Engine.ini` at runtime** — обе болезни 21.08 были невидимы движку:
       деплой сверил каждый файл и всё равно отгрузил сборку, чью графику Lua-мод переписывает в мире.
       Дешёвый первый срез не требует запущенной игры: просканировать исходники модов на
