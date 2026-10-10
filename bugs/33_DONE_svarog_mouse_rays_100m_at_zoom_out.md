@@ -1,6 +1,6 @@
 # Bug 33 — Svarog's Dream: game mouse rays reach 100 m, our zoom-out puts the camera at 123.8 m — hover, clicks, spells, pet commands
 
-**Status:** 🔧 fix deployed (KrinikCameraRework 1.3.1), mouse cases pending — waits for a run while the owner is away from the screen
+**Status:** ✅ DONE 2026-10-10 15:52 — fix deployed (KrinikCameraRework 1.3.1), hover and click verified on the owner's save (below)
 **Severity:** S2 — our mod broke game input at its own zoom-out; found by the agent, not reported by the owner
 **Version/build:** SvarogsDream after `bcd55e7`; game release player, BepInEx · **When/context:** 2026-10-10, plan 18 item "hover over a
 villager's icon does not change the cursor" (C7 of `testcases/TC_svarog_icons_service_2026-10-10.md`, 12:23)
@@ -54,4 +54,17 @@ C5 (40 in 33, matches the census) — pass; C1 — camera 123.8 m, body "talk", 
 
 ## Links
 
-plan 18 (the hover item) · `KrinikUIRework/IconClick.cs` (`PatchClickRay`) · EXP-0206 (camera reach seen from the profile side)
+plan 18 (the hover item) · `KrinikUIRework/IconClick.cs` (`PatchClickRay`) · EXP-0207 (the lesson) · EXP-0208 (the stamp slip on the way)
+
+## ✅ STATUS: DONE (2026-10-10 15:52 +03:00)
+
+- Hygiene: builds of the camera mod, the harness and the UI mod — no errors; guard self-test `node tools/test-guards.mjs` 138/138
+  (two hook fixes found on the way); guard `ray-reach-check.sh` red on the wrong census, green on the real one.
+- Functional run: the owner's save, his 1280×720 borderless mode, camera at max zoom-out 122.4–123.8 m, the system cursor read by the
+  harness (`cursorinfo`): over the banker's icon — the same handle as over his body ("talk"); the control on 1.3.0 — the icon gives the
+  default cursor; a right click on the icon opened the banker's conversation, "Leave" closed it. The guard printed "40 rays in 33
+  methods — matches the census" at the end of the game launch.
+- REAL WORLD: accumulated — the owner's save after his play, his mod configs; data and machine — his machine, his display mode;
+  path — the mouse over an icon and a right click, as he plays. Not walked by hand: spell targeting and pet orders at zoom-out (the same
+  mechanism and the same census).
+- Standing falsehood: none — the plan 18 suspicion ("the cursor is reset every frame") is corrected in place in the plan.
