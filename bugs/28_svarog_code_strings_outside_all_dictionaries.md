@@ -174,3 +174,10 @@ class — twin 3, fixed); hand rules in `zz_krinik*.txt` — 0. Not searched: ru
 
 **Next.** The 79 glued pieces: `sr:` splitter rules plus `r:` per sentence (epitaphs need the hero's name and gender); the
 in-game check of epitaphs needs a hero death — only on a COPY of the save, with the owner present (Iron Man).
+
+**Next, measured 2026-10-11 00:24 — template keys XUnity can never produce** (key ≠ XUnity template of itself with letters = 7;
+script logic as in `code_xunity.interp_rows`): 67 of ≈850 — `zz_worldevents` 47/47 (colour digits left literal), `zz_notes` 7,
+`zz_krinik` 5 (hand: «Blunt Armor: <color=#1E6A0F>{{A}}</color>»), `zz_krinik_gametips` 3, `zz_dialogue` 2 («{{A}}-{{B}} meters» —
+XUnity sees «10-15» as ONE number; «(Pay 10g)» literal), `zz_glossary` 1, `zz_selection` 1 («2x»), `zz_spells` 1. An exact key
+beside most of them still serves the numbers the game ships, so the visible damage is limited to other numbers. Fix at the source:
+`notes_xunity.templated()` → `xunity_template.templatize` (worldevents, notes, quests, code share it), then the hand files.
