@@ -191,5 +191,9 @@ lines — both need reading before a deploy. Read in a scratch copy at 00:33 (no
 FALSE — texts already reviewed (credits with Latin names, long notes and world events) whose exceptions are keyed by the exact key,
 so the new template line of the same text is not recognised. Tomorrow: let `glossary_lib` match an exception by the template of
 its key too, re-apply the patch (`scratchpad/patch_templated.py` logic: `number_spans` + `templatize` in `templated()`), deploy,
-check one world event and one note by `settext`. The judge also noted: rule translations that hard-code a number the pattern now
+check one world event and one note by `settext`. **Done the same night, 00:33–00:36:** both changes applied (`templated()` on
+`templatize`/`number_spans`; `glossary_lib.load_exceptions` adds the template of each exception key), deploy green (`ours 0`), in the
+game T1 — world event on the number 37 (absent from the dictionary) in Russian with its colour tag intact, T2 control; SvarogsDream
+`29dc660`. Dead template keys in generated dictionaries 57 → 0; left 10 in hand files (`zz_krinik` 5, `zz_krinik_gametips` 3,
+`zz_glossary` 1, `zz_spells` 1). A note with `\r\n` could not be sent through the harness (`settext` converts only `\n`). The judge also noted: rule translations that hard-code a number the pattern now
 matches as a letter («5 ульев», «2% в день», «за 6 секунд», «за каждые 100 очков») are right only while the game keeps those numbers.

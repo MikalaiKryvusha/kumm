@@ -60,3 +60,13 @@ XUnity (`RegexTranslation`) берёт из перевода правила те
 | R6b | `I have no more than 500g, is it enough? (Pay 500g)` | по-русски, «500» дважды, цена тегом шрифта | pass 00:13:01 — `У меня есть только 500 золота, этого хватит? <font="Manrope-Medium SDF"><color=#66CCFF>(Заплатить 500 золота)</color></font>` |
 | R9 | живое и до починки правило с кавычкой (учитель): `Enhance blunt skills from level 10 to 11 (500 coins)` | по-русски, а не «Manrope-Medium SDF» | pass 00:13:02 — `Поднять Дробящую Атаку с уровня 10 до 11 <font="Manrope-Medium SDF"><color=#66CCFF>(500 монет)</color></font>` |
 | R10 | после: `kill`; сейв 7/7; реестр 1280/720/1 | как до прогона | pass 00:13:03 — `kill`, процессов 0, `cmp` 7/7, реестр 0x500/0x2d0/0x1 |
+
+## Четвёртый круг — шаблоны генератора записок и событий на точном правиле XUnity (2026-10-11)
+
+`notes_xunity.templated()` → `xunity_template.templatize`; исключения глоссария узнают и шаблон ключа (`glossary_lib.load_exceptions`).
+
+| № | Строка игры (settext) | Ожидается (gettext) | Статус |
+|---|---|---|---|
+| T1 | событие мира с числом, которого нет в словаре: `<color=#34742F>Bow prices have dropped by 37%</color> as skilled free folk flood the region with finely crafted bows. \nTheir arrival has sparked fierce competition, driving prices to new lows.` | по-русски, «37» на месте, тег цвета цел | pass 00:35:13 — `<color=#34742F>Цены на луки упали на 37%</color>: умелые мастера из вольного люда завалили край добротными луками. \nС их приходом поднялось жаркое соперничество, и цены упали как никогда.` |
+| T2 | контроль первого круга: `Travel requires 3 food, but you only have 0.` | как C5 | pass 00:35:14 |
+| T3 | после: `kill`; сейв 7/7; реестр 1280/720/1 | как до прогона | pass 00:35:15 — `kill`, сейв `cmp` 7/7; реестр стал 3840/2160 (старт на 4K-телевизоре) — возвращён `reg add`, `reg query` 0x500/0x2d0/0x1 |
