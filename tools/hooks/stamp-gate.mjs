@@ -20,11 +20,14 @@
 //                 итог вне testcases/ → 0
 // GAP:            время без даты («в 18:35», «≈09:51» без даты рядом) — вне сегодняшних документов `testcases/` (там с 2026-10-10
 //                 ловятся время после слова итога и конец диапазона «ЧЧ:ММ–ЧЧ:ММ»), дата ДД.ММ и UTC-штамп с «Z» не видны; штамп в прошлом, набранный
-//                 наугад, не отличим от честного — это держит судья; NotebookEdit и запись через Bash хук не видит; штамп ЗАВТРАШНЕЙ
+//                 наугад, не отличим от честного — это держит судья; NotebookEdit не видит; в Bash/PowerShell (с v2) — только штамп
+//                 буквами в тексте команды, время из переменной (`$(date -d +5min …)`) не видно; штамп ЗАВТРАШНЕЙ
 //                 даты у полуночи («2026-10-08 ≈00:00» при часах 2026-10-07 23:59 — случай 2026-10-07) проходит как «план» — держит судья
 // ON-REAL-PATH:   2026-10-07 09:50 +03:00 — в живой сессии Write пробного файла scratchpad со штампом на 20 минут вперёд остановлен
 //                 («сейчас 2026-10-07 09:50»), затем — эта же строка с цитатой пробного штампа (claim-ok: цитата пробы, не штамп)
-//                 тоже; подключён в местных .claude/settings.local.json, matcher Write|Edit|MultiEdit
+//                 тоже; подключён в местных .claude/settings.local.json, matcher Write|Edit|MultiEdit;
+//                 v2 — 2026-10-10 15:45 +03:00: matcher дополнен Bash|PowerShell; в живой сессии `echo "probe <сегодня> <через 14 минут>"`
+//                 из Bash остановлен до запуска («штамп впереди часов … сейчас … 15:45»)
 import { readFileSync } from 'node:fs';
 
 const pad = (n) => String(n).padStart(2, '0');
@@ -40,6 +43,9 @@ try {
   if (event.tool_name === 'Write') text = String(t.content || '');
   else if (event.tool_name === 'Edit') text = String(t.new_string || '');
   else if (event.tool_name === 'MultiEdit') text = (t.edits || []).map((e) => String(e.new_string || '')).join('\n');
+  // v2 (2026-10-10): запись через оболочку — `sed -i`, `printf >>`, heredoc, `Add-Content` — тот же штамп в файле; хук её не видел,
+  // и «PROVED-AGAINST: 2026-10-10 15:42» при часах 15:40 ушло `sed`ом в шапку сторожа SvarogsDream. Судится весь текст команды.
+  else if (event.tool_name === 'Bash' || event.tool_name === 'PowerShell') text = String(t.command || '');
   else process.exit(0);
 
   // Сегодняшний документ испытаний (testcases/…<сегодня>…): там дата стоит в имени файла, а в строках — голое время итога

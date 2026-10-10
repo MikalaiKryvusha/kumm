@@ -82,6 +82,35 @@
 
 ## Entries
 
+### EXP-0208 · 2026-10-10 · ❌→✅ · #stamps #clock #claim #hooks #bash
+class: claim-before-evidence
+**Context:** шапка сторожа `SvarogsDream/tools/ray-reach-check.sh`, строка PROVED-AGAINST — правка через `sed -i`.
+**Tried / did:** время вписано «как будет» — 15:42 при часах 15:40:49; поймано глазом через минуту по `date`.
+**Result:** ❌→✅ хук штампов видел только Write/Edit — запись оболочкой (`sed -i`, `printf >>`, heredoc) шла мимо. Хук v2 судит и
+текст команд Bash/PowerShell; доказано: самопроверка часть G — два новых случая красные на v1, 138/138 на v2; в живой сессии `echo`
+со штампом на 14 минут вперёд отбит до запуска.
+**Lesson:** **страж текста должен видеть все двери записи, а не любимую: у агента их три — Write/Edit, оболочка и коммит.**
+**Repro:** `node tools/test-guards.mjs` — часть G, «Bash command writing a future stamp».
+**Trigger:** вписываю время через `sed`/`printf`/heredoc → время только из `date` той же минуты.
+**Not for:** время в переменной оболочки (`$(date …)`) — его хук не видит (GAP).
+mechanized: tools/hooks/stamp-gate.mjs (v2 — Bash и PowerShell; matcher в .claude/settings.local.json)
+
+### EXP-0207 · 2026-10-10 · ❌→✅ · #svarogsdream #unity #camera #raycast #input #ourmods
+class: mod-breaks-game-flow
+**Context:** «наведение на значок жителя не меняет курсор» (план 18) — подозревали сброс курсора каждый кадр.
+**Tried / did:** код игры (декомпиляция ilspycmd) вместо догадки: `CursorIcons` бьёт `Physics.Raycast(…, 100f, …)`; камера на нашем
+отдалении ×1.5 — 123.8 м от героя (пульт `cursorinfo`). Перепись: 40 лучей мыши на 100 м в 33 методах — курсор, щелчки по предметам и
+жителям, наведение заклинаний, команды питомцам.
+**Result:** ❌→✅ наш мод камеры с 2026-10-04 тихо ломал ввод игры дальше 100 м; правка 1.3.1 — предел ×`MaxZoomFactor`, 40/33 совпало с
+переписью (`bugs/33_…`). Мышью не проверено — владелец был у экрана.
+**Lesson:** **мод, меняющий геометрию камеры (дальность, наклон, отдаление), обязан до выпуска переписать лучи и дальности игры, что
+считались под старую камеру (`Physics.Raycast(…, N)`, дистанции «рядом с камерой»), — их предел был рассчитан на ванильную камеру.**
+И подозрение из плана проверяется кодом игры до первой правки: разобранное за пять минут «сброс курсора каждый кадр» было неверным.
+**Repro:** `node SvarogsDream/tools/ray_census.mjs <декомпиляция Assembly-CSharp> <классы>`; `bash SvarogsDream/tools/ray-reach-check.sh`.
+**Trigger:** правка дальности/отдаления/наклона камеры в любом моде → перепись лучей и дистанций игры до выпуска.
+**Not for:** лучи без предела (`float.MaxValue`) и с запасом (200 м при камере 124 м).
+mechanized: SvarogsDream/tools/ray-reach-check.sh (зовётся в конце SvarogsDream/tools/run-game.sh; журнал мода против переписи 40/33)
+
 ### EXP-0206 · 2026-10-10 · ❌ · #svarogsdream #unity #performance #navmesh #mainthread #measurement #ceiling
 class: ceiling-from-wider-switch
 **Context:** эпик 19, навигация: пульт `farparts 40 nav` (агент не пишет позицию у ВСЕХ дальше 40 м) дал −0.9…−1.2 мс — по нему

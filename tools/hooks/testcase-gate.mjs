@@ -57,7 +57,9 @@ const STAMP = opt('--stamp');
 // v2.2 (2026-10-07): прогон — имя скрипта в ПОЗИЦИИ КОМАНДЫ: в начале, после `;` `&` `|` `(`, после `bash`/`sh`/`time`/`exec`
 // (с флагами). Аргумент чужой команды (`sed -n 1,40p tools/run-game.sh`, `cat`, `grep`) — чтение, не прогон: v2 искал имя где угодно,
 // засчитал чтение в 09:34 прогоном и отбил настоящий запуск (второй раз после 2026-10-06 23:16).
-const AT_CMD = String.raw`(?:^|[;&|(]\s*|\b(?:bash|sh|time|exec)\s+(?:-\S+\s+)*)(?:\S*\/)?`;
+// v2.4 (2026-10-10): команда — отдельное слово, не хвост имени: `\b` пускал «sh» из «ray-reach-check.sh tools/run-game.sh» (`git add`),
+// коммит отбит дважды за полчаса. Перед bash/sh/time/exec — не буква, не точка, не дефис, не слэш.
+const AT_CMD = String.raw`(?:^|[;&|(]\s*|(?<![\w./-])(?:bash|sh|time|exec)\s+(?:-\S+\s+)*)(?:\S*\/)?`;
 const RUNS = [new RegExp(AT_CMD + String.raw`deploy-hot\.sh\b`, 'm'), new RegExp(AT_CMD + String.raw`run-game\.sh\b`, 'm')];
 // v2.3 (2026-10-08): маршруты Medieval Dynasty (`route-pilot-load.ps1`, `route-restart-load.ps1`, любой будущий `route-*-load.ps1`)
 // запускают игру так же, как run-game.sh, а хук их не видел: кейсы дважды легли файлом ПОСЛЕ прогона (EXP-0182). Позиция команды

@@ -241,6 +241,9 @@ try {
   // запуск после него отбит («таблица не изменилась»); то же 2026-10-06 23:16 (строка GAP v2). Запуск — имя скрипта в позиции команды.
   check('reading the script is not a run: sed passes', run('cd /d/x && sed -n 1,40p tools/run-game.sh; echo ----; sed -n 1,30p tools/h.sh'), 0);
   check('reading the script is not a run: grep/cat pass', run('grep -n alive tools/deploy-hot.sh && cat tools/run-game.sh'), 0);
+  // v2.4 (2026-10-10 15:4x): «…check.sh tools/run-game.sh» в `git add` было прочитано как «sh tools/run-game.sh» — хвост имени файла
+  // .sh шёл за команду sh; коммит отбит дважды за полчаса. Команда bash/sh/time/exec — отдельное слово, не хвост имени.
+  check('a file name ending in .sh before the script is not a run: git add passes', run('git add tools/ray-reach-check.sh tools/run-game.sh && git status'), 0);
   check('a run without bash: ./tools/run-game.sh refused', run('./tools/run-game.sh'), 2);
   check('a run after cd and time: refused', run('cd /d/x && time bash tools/run-game.sh 2>&1 | tail -5'), 2);
   writeFileSync(join(F, 'TC_x.md'), '# Test cases' + NL + 'no table yet' + NL);
@@ -303,7 +306,12 @@ try {
   check('today test doc: verdict time in the past: passes', sg('Edit', { file_path: tcToday, old_string: 'a', new_string: '| C1 | шаг | ждём | кадр | pass ' + PAST.slice(11, 16) + ': готово |' }), 0);
   check('today test doc: game clock with an arrow: passes', sg('Write', { file_path: tcToday, content: 'время мира 03:20 → 23:59, час стоял 23:59' }), 0);
   check('control: same verdict outside testcases/: passes', sg('Edit', { file_path: 'D:/w/KUMM/STATUS.md', old_string: 'a', new_string: 'pass ' + FUT.slice(11, 16) }), 0);
-  check('control: Bash is not this hook', sg('Bash', { command: 'echo ' + FUT }), 0);
+  // v2 (2026-10-10 15:4x): запись через Bash (`sed -i`, `printf >>`, heredoc) хук не видел — штамп наперёд ушёл в шапку сторожа
+  // SvarogsDream (`sed -i 's|… 15:42 …|'` при часах 15:40). Прежний случай «Bash — не этот хук» закреплял ровно эту дыру.
+  check('Bash command writing a future stamp: refused', sg('Bash', { command: "sed -i 's|^# PROVED: .*|# PROVED: " + FUT + "|' x.sh" }), 2);
+  check('PowerShell command writing a future stamp: refused', sg('PowerShell', { command: "Add-Content x.md '" + FUT + "'" }), 2);
+  check('control: Bash without a stamp passes', sg('Bash', { command: 'git status && date' }), 0);
+  check('control: Bash with a past stamp passes', sg('Bash', { command: 'echo ' + PAST }), 0);
   check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [SG], { input: '{not json', encoding: 'utf8' }).status, 0);
 } catch (e) {
   check('part G ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
