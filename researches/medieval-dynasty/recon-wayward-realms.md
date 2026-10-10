@@ -39,7 +39,7 @@ Source: <https://www.youtube.com/watch?v=nuNqB2450go> (17:46–22:32)
 | Lives outside the engine | "we built this purely in Vulcan directly and it was more or less trivial to transfer over to the new engine because it's an external system that we can just easily hook into." (22:19) |
 | What was actually shown | "these are all from Unreal Engine, but here's an one of the first images of having this implemented … at the time we rendered a bunch of spheres moving around" (21:39) |
 
-[AI] Note on the numbers (my arithmetic, not their claim): 500,000 km² ≈ a 707 km square; with 8-bit colour a step would be
+`[AI]` Note on the numbers (my arithmetic, not their claim): 500,000 km² ≈ a 707 km square; with 8-bit colour a step would be
 ≈ 2.8 km, so the "254.999999" range means a floating-point texture, not an ordinary RGB picture. A 32-bit float has ~7
 significant digits, so "centimetre" over 707 km is at the edge of float32 — plausible only with per-region offsets or wider
 formats; they did not say which.
@@ -191,7 +191,7 @@ Engine" suggests home-grown.
   players will discover … Eyjar" (future tense); Steam store API: `"coming_soon": true`. **Nothing playable has shipped; every claim
   above is a developer claim with no independent verification.**
 
-## 5. Transferable patterns for a UE4 mod (Medieval Dynasty) — [AI] synthesis, not their words
+## 5. Transferable patterns for a UE4 mod (Medieval Dynasty) — `[AI]` synthesis, not their words
 
 1. **Agents as a flat table, ID = index, position = 3 floats.** That is all the "image" is. At Medieval Dynasty's scale (hundreds,
    at most low thousands of villagers/travellers) a plain CPU array in Lua/C++ or a sidecar process is enough; the GPU trick only pays
