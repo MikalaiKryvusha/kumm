@@ -73,13 +73,15 @@ Managers/StandardManagers/WeatherManager WorldWeatherManager SetRainWithPrerain 
 
 ## Шрифт Manrope
 
-Матовый шейдер земли, свой deferred-шейдер (блик листвы и домов) и дальние деревья-картинки в дымке (мод KrinikColorRework 2.3.0,
-баг 15; в пакете 6 шейдеров) — тот же проект Unity: `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode
+Матовый шейдер земли, свой deferred-шейдер (блик листвы и домов), дальние деревья-картинки в дымке и трава, которая не тает при
+отдалении (свои копии шейдеров травы Unity; мод KrinikColorRework 2.6.0, баги 15 и 35; в пакете 8 шейдеров) — тот же проект Unity: `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode
 -nographics -quit -projectPath SvarogsDream/unity/KrinikShaders -executeMethod KrinikBuild.Bundles` (≈30 с; перенесено из STATUS 07.10).
 
 `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode -nographics -quit -projectPath SvarogsDream/unity/KrinikShaders
   -executeMethod KrinikFonts.Build` → скопировать `Bundles/krinik_manrope` и `Bundles/ttf/krinik_manrope_ttf` в папку игры; в новом
   клоне сначала `python tools/unpack_unitypackage.py "<PackageCache>/com.unity.textmeshpro@3.0.6/Package Resources/TMP Essential Resources.unitypackage" unity/KrinikShaders`.
+  Только пакет TTF (Manrope + Rubik Black часов мира, 2026-10-11) — `-executeMethod KrinikFonts.BuildTtf`. Рядом в корне игры — звук
+  `krinik_skill_up.wav` и русские буквы боевых надписей `krinik_cfxr_cyr.png/.txt` (`tools/cfxr_cyrillic_atlas.py`, Rubik Black Italic).
 - **Шрифт мудрости Gabriela** (06.10) — тот же проект, `-executeMethod KrinikFonts.BuildWisdom` → `Bundles/wisdom/krinik_gabriela` в папку
   игры; настройка `Fonts.Wisdom`. Граница — кто говорит: бумага мира (журнал «События», описание квеста, легенда альманаха, окно
   записки, новости `WorldEvents`, совет загрузки) — Gabriela; интерфейс, подсказки обучения `GameTips`, карточки, диалоги — Manrope.
