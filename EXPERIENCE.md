@@ -90,6 +90,20 @@
 
 ## Entries
 
+### EXP-0215 · 2026-10-11 · ❌→✅ · #svarogsdream #night #timescale #lighting #instrument #capture #owner-eye
+class: instrument-not-the-thing
+**Context:** ночные кадры Сварога снимались так: `timescale 0` (безопасно для героя) + `IncreaseTimeByOneHour` × N + `SetInstantSungAngle`.
+Владелец на кадре Бора: «какая-то суппер светлая ночь»; пять ручек ночного света (луна, свечение, свет героя, отражения) не меняли ничего.
+**Tried / did:** декомпиляция `WorldTime.Update`: доля дня `currentDayNightRatio` идёт к нужной `MoveTowards(…, 0.1f * Time.deltaTime)`, свет
+`GetPercentageBetweenMinAndMax(2.1, 0.4, доля)`; при `timescale 0` доля стоит.
+**Result:** ✅ после `call WorldTime SetDayNightImageVisibility 0` + `call WorldTime SetDayNightSceneLighting` кадр 58.2 → 21.2, крыша 174 → 22.
+Все пять «ничего не меняющих» проб — следствие дневного света; агент назвал это «причина не найдена» — поправлено в отчёте.
+**Lesson:** **ночь по часам при остановленном времени ≠ ночь по свету: после прыжка часов выставить долю дня (`SetDayNightImageVisibility
+0|1`) и свет, и только потом снимать. Ручка, которая «ничего не меняет», — сначала вопрос «применяется ли она вообще», а не «в чём ещё причина».**
+**Repro:** Бор, `timescale 0`, 13 × `IncreaseTimeByOneHour true`, `shot` — яркость ≈58; затем две команды выше — ≈21.
+**Trigger:** любой ночной кадр Сварога при `timescale 0`; ручка света без эффекта. **Not for:** время идёт само (доля догоняет за ~10 с).
+mechanized: none — следующий шаг: команда пульта «night» (часы + доля + свет одной строкой)
+
 ### EXP-0214 · 2026-10-11 · ❌→✅ · #bepinex #xunity #imgui #translation #upstream #recon #pr
 class: maintainer-advice-untested
 **Context:** мейнтейнер ConfigurationManager (PR #125) отклонил перевод в коде: «плагинные переводы XUnity ограничиваются dll —
