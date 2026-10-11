@@ -20,3 +20,6 @@ none yet.
 
 ## Second symptom (`[OWNER]` «скриншот - крыша не покрыта вдали дымкой» · 2026-10-11)
 Frame `03 крыша вдали без дымки.webp` (same gallery folder): a far thatched hut at the foot of the mountain is crisp and golden while the trees and rocks around it sit in blue haze — the roof material ignores the fog/haze. Hypothesis: that object uses a shader without fog support, or our haze is applied only to terrain/trees (KrinikColorRework impostors), not to buildings. Check the hut material shader name and its fog keyword.
+
+## Target colour (`[OWNER]` «дымка вдали не в сеневу должна уходить, а в белезну и серость чуть-чуть» · 2026-10-11)
+The far haze should fade towards a whitish, slightly grey tone — not blue. Acceptance: on frames 01–03 the far forest, rocks and the hut go pale whitish-grey; the owner judges by eye.
