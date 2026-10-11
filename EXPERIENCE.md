@@ -99,7 +99,7 @@ class: verified-on-the-easy-case
 лица отдельными фразами; Коста v7 — строгий промпт «повтори народ, черты, взгляд оригинала» + «на вид ~35, гладкая кожа».
 **Lesson:** слово народа и прилагательное нрава лицо не держат, а уводят; держат названные ФОРМЫ (причёска, ширина лица) и явный возраст
 на вид. Много версий одного героя — показывать листом всех версий, не по одной.
-mechanized: `SvarogsDream/tools/hero_prompt.py` (`HERO_STRICT`, `look_age`, `skin=smooth|lines`), `tools/portrait_variants.py`.
+mechanized: `SvarogsDream/tools/hero_prompt.py` (`HERO_STRICT`, `HERO_PURE`, `look_age`, `skin=smooth|lines`), `SvarogsDream/tools/portrait_variants.py`.
 → link: researches/svarogs-dream/gemini-avatar-coloring.md
 
 ### EXP-0219 · 2026-10-11 · ❌→✅ · #cdp #chrome #gemini #tooling #wait-loop #owner-time
