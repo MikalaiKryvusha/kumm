@@ -34,5 +34,9 @@ at start and when the set of terrains changes; off — Unity's shader back). Set
 C5–C7 of the TC (2026-10-11 14:35–14:38): 50 materials swapped; zoom 100/160/240 — the grass holds, zoom 40 — as in the game
 (sheet `SvarogsDream/gallery/game/2026-10-11_трава-при-отдалении/`); FPS at zoom 160 off/on 74.0 / 74.2 / 73.8 — no cost; density
 0.15 / 0.25 / 0.4 differ little. Report `testcases/reports/2026-10-11_svarog-grass-zoom-vanish.md`.
+**The same fix removes the "bald far ground"** (2026-10-11 14:45–14:46, `testcases/TC_svarog_far_grass_map_2026-10-11.md` C10): at Bara
+with a low camera the plain behind the houses was beige and bald, with the fix it is grass up to the far line (far band mean
+120.5/116.5/93.2 → 109.8/108.5/77.9; FPS off 49.8/49.7, on 47.7/50.5). The owner's «лысая земля вдали» was this melt, not the 500 m
+grass edge — the far grass map (`FarGrassMap.cs`) gave no visible difference and is off by default.
 Not checked: mesh grass on `Hidden/TerrainEngine/Details/Vertexlit` (no such prototypes at Bara) and the Nature Shaders mesh grass —
 they did not melt in the frames, but other places were not walked.
