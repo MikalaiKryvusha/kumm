@@ -1,7 +1,7 @@
 # Bug 15 — Svarog's Dream: against a low sun the distant ground, grass and foliage turn whitish ("frost")
 
 > **Created:** 2026-10-04 · **Parent:** камера 1.2.0 (низкий наклон, поворот) — `testcases/reports/2026-10-04_svarog-camera-draw-distance.md`
-> **Status:** 🔧 fix shipped 2026-10-05 10:10 — KrinikColorRework 2.1.0, matte terrain on; darkening 0.6 by the owner's
+> **Status:** 🔧 ground: streaming observed 2026-10-11 11:36 (25/25 after teleports) — ground part closed; foliage: cause confirmed 11:44, strength — the owner's pick from the variants sheet. Earlier: fix shipped 2026-10-05 10:10 — KrinikColorRework 2.1.0, matte terrain on; darkening 0.6 by the owner's
 > word ≈10:16 (`[OWNER]` «темнее нравится, но немножко темнее, а то ночью (1) ну слишком темно»); run
 > `testcases/reports/2026-10-05_svarog-matte-terrain.md` — pass in 4 times of day × 3 views, FPS unchanged. Not DONE yet:
 > terrain swap while walking (streaming) not observed — watch in normal play. Cause confirmed 09:55 (A/B/C/A2)
@@ -184,6 +184,23 @@ leaf shader source (Asset Store, not public), or a deferred-shader replacement t
 geometry (water is forward and untouched). Owner's eye decides by frames.
 Earlier plan: same-spot A/B at a frozen low sun with the leaf specular zeroed (CTI / Tree Creator leaf materials, or our own leaf
 shader copy, as with the ground).
+
+## Session 2026-10-11 11:30–11:45 — streaming observed; foliage cause CONFIRMED
+
+**Terrain streaming — closed.** New harness commands `teleport <WorldMap field | x,y,z>` (TeleportPlayer + StreamAfterTeleport, without
+the game's Ironman save) and `render` → «terrains by shader». Two far teleports (2158 m, 1716 m): 25 of 25 active terrains on
+`Krinik/Terrain/Matte` within 10 s, the swap log grew 5 → 12 → 17 lines; control off/on — 25 game / 25 matte. Report
+`testcases/reports/2026-10-11_svarog-bug15-terrain-streaming.md`.
+
+**Foliage — cause confirmed, fix awaits the owner's strength pick.** The CTI deferred shader (source: free CTI Runtime Components,
+`CTI_Internal-DeferredShading.shader`, read from a public repo) marks CTI foliage with `gbuffer2.a` = 2/3 and lights it with a grey
+specular `gbuffer1.rrr` plus a translucency term (`gbuffer1.g/.b`). Our `Krinik/Internal-DeferredShading` reproduces it with two
+foliage-only multipliers. Same frame (Cabin in Woods, 18:32, time frozen, facing the sun): game 50.3 · ours 1/1 50.1 (= game) ·
+specular 0 → 44.9, crowns green, the autumn tree orange instead of pale · translucency 0 → no change. The white is the leaves'
+specular, as on the ground. Variants 0 / 0.25 / 0.5 — `SvarogsDream/gallery/game/2026-10-11_листва-блик/варианты.webp`. Report
+`testcases/reports/2026-10-11_svarog-bug15-foliage-deferred.md`. Not covered: non-CTI foliage (`Lordenfel/FoliageWind`, Tree Creator,
+NatureManufacture) carries no G-buffer mark and is untouched. Next: the owner picks the strength → KrinikColorRework sets the globals
+and `GraphicsSettings.SetCustomShader(DeferredShading, …)` with a setting, off = the game's shader.
 
 ## Decisions made without the owner (this fix)
 
