@@ -73,7 +73,8 @@ Managers/StandardManagers/WeatherManager WorldWeatherManager SetRainWithPrerain 
 
 ## Шрифт Manrope
 
-Матовый шейдер земли (мод KrinikColorRework 2.1.0, баг 15) — тот же проект Unity: `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode
+Матовый шейдер земли, свой deferred-шейдер (блик листвы и домов) и дальние деревья-картинки в дымке (мод KrinikColorRework 2.3.0,
+баг 15; в пакете 6 шейдеров) — тот же проект Unity: `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode
 -nographics -quit -projectPath SvarogsDream/unity/KrinikShaders -executeMethod KrinikBuild.Bundles` (≈30 с; перенесено из STATUS 07.10).
 
 `E:\Unity\2020.3.49f1\Editor\Unity.exe -batchmode -nographics -quit -projectPath SvarogsDream/unity/KrinikShaders
