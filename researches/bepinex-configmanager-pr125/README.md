@@ -1,7 +1,8 @@
 # Research — BepInEx.ConfigurationManager PR #125: the maintainer's answer and the path to a merge
 
 > **Created:** 2026-10-11 · **Parent:** `testcases/reports/2026-10-10_bepinex-configmanager-localization.md` (the PR run) ·
-> **Status:** recon 2026-10-11 10:35; XUnity fix proved in the game 11:09–11:13 (cases C6–C8); sent 11:17 — XUnity PR #876, PR #125 branch `ff3cbf8` + reply · AUTH: `[OWNER]` «да, хорошо» · «в XUnity заводи ПР на фикс, сошлись на наш ПР БиИн Екс» · 2026-10-11 ·
+> **Status:** ✅ MERGED — XUnity #876 2026-10-11 14:21, PR #125 14:43 (both by ManlyMarco; `gh pr view` 14:49); #126 open, no review yet ·
+> recon 2026-10-11 10:35; XUnity fix proved in the game 11:09–11:13 (cases C6–C8); sent 11:17 — XUnity PR #876, PR #125 branch `ff3cbf8` + reply · AUTH: `[OWNER]` «да, хорошо» · «в XUnity заводи ПР на фикс, сошлись на наш ПР БиИн Екс» · 2026-10-11 ·
 > **Outbound:** a reply on https://github.com/BepInEx/BepInEx.ConfigurationManager/pull/125 — the owner's decision
 
 ## What the maintainer said
