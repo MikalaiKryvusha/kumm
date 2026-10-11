@@ -90,6 +90,31 @@
 
 ## Entries
 
+### EXP-0220 · 2026-10-11 · ❌→✅ · #image-gen #prompt #portraits #owner-eye #likeness
+class: verified-on-the-easy-case
+**Context:** перерисовка портретов героев по замечаниям владельца (Андрей, Ясен, Коста — пробная тройка).
+**Tried / did:** народ одним словом (Central European → Czech → Polish → Finnish), нрав из биографии («hard-drinking brawler»), волосы одним
+словом («wild messy curly»), правило «старше 45 — морщины оригинала».
+**Result:** ❌ Коста v2–v6 «не похож» / «старит сильно», Ясен v2 «волосы вверху, ты не видишь?» → ✅ Ясен v3 — форма причёски и ширина
+лица отдельными фразами; Коста v7 — строгий промпт «повтори народ, черты, взгляд оригинала» + «на вид ~35, гладкая кожа».
+**Lesson:** слово народа и прилагательное нрава лицо не держат, а уводят; держат названные ФОРМЫ (причёска, ширина лица) и явный возраст
+на вид. Много версий одного героя — показывать листом всех версий, не по одной.
+mechanized: `SvarogsDream/tools/hero_prompt.py` (`HERO_STRICT`, `look_age`, `skin=smooth|lines`), `tools/portrait_variants.py`.
+→ link: researches/svarogs-dream/gemini-avatar-coloring.md
+
+### EXP-0219 · 2026-10-11 · ❌→✅ · #cdp #chrome #gemini #tooling #wait-loop #owner-time
+class: instrument-not-the-thing
+**Context:** очередь раскраски в Gemini; агент сам ждал каждый результат циклом `until [ -f лист ]` и называл время на глаз.
+**Tried / did:** ожидание в своём ходе; оценка «полторы минуты на картинку»; забор ответа холстом `toDataURL`.
+**Result:** ❌ «чего ждёшь????? Я уже вижу! Напиши автоматизацию»; «ты врёшь. Она за вот несколько секунд нарисовалась» (журнал: 27–35 с);
+«и автомат твой стал» — ответ пришёл с `lh3.googleusercontent.com`, холст грязный, `toDataURL` бросал, ошибка глоталась, забор крутил
+тайм-аут → ✅ `Network.loadNetworkResource` с куками браузера → data:-адрес → холст → WebP; опрос 300 мс; ошибка страницы печатается;
+очередь `redraw_queue.sh` сама открывает лист владельцу, агент не ждёт.
+**Lesson:** число о времени — только из журнала; молчаливо глотаемое исключение в цикле ожидания = вечный тайм-аут; ждать результат —
+работа скрипта, а не хода агента.
+mechanized: `SvarogsDream/tools/aistudio_cdp.mjs` grab, `SvarogsDream/tools/redraw_queue.sh`.
+→ link: SvarogsDream/tools/aistudio_cdp.mjs
+
 ### EXP-0218 · 2026-10-11 · ❌→✅ · #svarogsdream #ui #jump #layout #tick #owner-eye
 class: ui-applied-late
 **Context:** подвкладки настроек в игре «прыгают при переключении» (`[OWNER]` «как со многими другими вещами было - прыгало»).
