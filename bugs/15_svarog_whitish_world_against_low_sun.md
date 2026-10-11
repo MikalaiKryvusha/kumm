@@ -202,8 +202,22 @@ specular, as on the ground. Variants 0 / 0.25 / 0.5 — `SvarogsDream/gallery/ga
 NatureManufacture) carries no G-buffer mark and is untouched. Next: the owner picks the strength → KrinikColorRework sets the globals
 and `GraphicsSettings.SetCustomShader(DeferredShading, …)` with a setting, off = the game's shader.
 
+## Session 2026-10-11 11:50–12:04 — shipped: KrinikColorRework 2.2.0
+
+`[OWNER]` «блик листвы делаем 0.1» → «давай выключим по умолчанию блики лситвы, даже 0.1 бесит» · «и я помню что крышы блестели и
+частакол, вроде - проверь» · 2026-10-11. `FoliageGlare.cs` installs `Krinik/Internal-DeferredShading`; settings «Листва без белёсого
+блика» (on, glare 0) and «Дома и дерево без белёсого блика» (on): the shader also cuts the specular of NON-metals (strength < 0.2 — wood,
+thatch, stone), metal keeps its shine. Roofs/palisade confirmed: the dock deck and palisade boards against the sun were pale, matte now.
+FPS (world running, forest, 20 M triangles): game 51.65 · ours 0 — 51.35 · ours 0.1 — 51.35 (≤ 0.6 %, rounds spread 1.5 FPS) — no cost in
+the noise. Report `testcases/reports/2026-10-11_svarog-bug15-roofs-fps.md`. Not checked: metal armour up close, 4K, night.
+Before DONE: the owner's eye in his own play.
+
 ## Decisions made without the owner (this fix)
 
+- `[AI]` 2026-10-11: «Дома и дерево без белёсого блика» ON by default — the owner asked to CHECK roofs/palisade; the frames confirmed
+  the glare and the fix follows his ground/foliage decisions; revisable by his word.
+- `[AI]` 2026-10-11: the metal boundary — specular strength < 0.2 counts as non-metal (dielectrics ≈ 0.04, metals ≥ ~0.5); armour
+  up close not looked at.
 - `[AI]` Matte shader as a copy of Unity's own terrain shader on StandardSpecular (community fix: no specular on terrain),
   not a replacement of the CTI deferred lighting shader — touches the ground only, water glitter stays (his word «хорошо
   смотрится на воде»).
