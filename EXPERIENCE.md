@@ -90,6 +90,37 @@
 
 ## Entries
 
+### EXP-0218 · 2026-10-11 · ❌→✅ · #svarogsdream #ui #jump #layout #tick #owner-eye
+class: ui-applied-late
+**Context:** подвкладки настроек в игре «прыгают при переключении» (`[OWNER]` «как со многими другими вещами было - прыгало»).
+**Tried / did:** контрольный кадр в том же такте пульта сразу после `click` — на первом кадре раскладка игры, через 2 с наша.
+**Result:** ✅ раскладка `SettingsLayout` шла «раз в секунду»; отпечаток открытых страниц каждый кадр → раскладка в кадр смены, до отрисовки.
+**Lesson:** правка интерфейса «раз в секунду» = прыжок на виду у игрока; дешёвый отпечаток состояния каждый кадр + работа только при смене.
+Проверка — кадр в том же такте после действия, не «через wait». Близнецы — `MenuFonts.cs:82`, `Fonts.cs:261`, `Icons.cs:189`, `MapLayout.cs:381`.
+none-cheap: правка — шаблон «отпечаток каждый кадр» в `SettingsLayout.cs`; гарда на класс нет, близнецы — пункт 2 передачи в STATUS.
+→ link: testcases/reports/2026-10-11_svarog-settings-no-jump.md
+
+### EXP-0217 · 2026-10-11 · ❌→✅ · #cdp #chrome #background-tab #gemini #tooling
+class: instrument-not-the-thing
+**Context:** раскраска портретов через gemini.google.com в отладочном Chrome, окно не выводится вперёд (память browser-never-to-foreground).
+**Tried / did:** вставка картинки событием paste, ответ — ожидание по времени.
+**Result:** ❌ превью вложения не рисовалось («файл уже загружен»), ответ висел пустой страницей с «стоп» минутами → ✅
+`Emulation.setFocusEmulationEnabled` на каждую команду пульта: ответ пришёл за 3 с.
+**Lesson:** фоновая вкладка без фокуса не дорисовывает SPA; эмуляция фокуса на каждом подключении CDP, а не только при снимке.
+mechanized: `SvarogsDream/tools/aistudio_cdp.mjs` включает эмуляцию фокуса при каждом подключении; `attached` не даёт отправить без вложения.
+→ link: SvarogsDream/tools/aistudio_cdp.mjs
+
+### EXP-0216 · 2026-10-11 · ❌→✅ · #image-gen #prompt #portraits #owner-eye
+class: verified-on-the-easy-case
+**Context:** раскраска ч/б портретов героев «в игровом стиле, средневековье» (Nano Banana в приложении Gemini).
+**Tried / did:** v1–v12: длинный бриф — перегруз и выдуманные детали; «painted RPG» — старит лицо; «молодой, гладкая кожа» — мультяшно.
+**Result:** ✅ v13 (`[OWNER]` «во, вот это супер»): короткая база «Restore and colorize … as a painted RPG portrait of a <возраст из данных
+игры>-year-old medieval Slavic <роль>», цвет волос и глаз словами, ОТДЕЛЬНАЯ фраза о коже без морщин и мешков, кадр и фон — сохранить.
+**Lesson:** у модели раскраски старение — побочный эффект живописного стиля; возраст брать из данных, кожу описывать прямо; каждое
+добавленное прилагательное («weary») меняет лицо — пробовать по одному слову.
+mechanized: `SvarogsDream/tools/hero_prompt.py` собирает промпт по эталону v13 (возраст из данных, фраза о коже по возрасту).
+→ link: researches/svarogs-dream/gemini-avatar-coloring.md
+
 ### EXP-0215 · 2026-10-11 · ❌→✅ · #svarogsdream #night #timescale #lighting #instrument #capture #owner-eye
 class: instrument-not-the-thing
 **Context:** ночные кадры Сварога снимались так: `timescale 0` (безопасно для героя) + `IncreaseTimeByOneHour` × N + `SetInstantSungAngle`.
