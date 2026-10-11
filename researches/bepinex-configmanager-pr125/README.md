@@ -54,6 +54,34 @@ in #39/#81.
   Manrope — `SvarogsDream/src/KrinikModMenu`) ships as a separate module. Recon of the plugin's drawing code first; it waits until
   PR #125 is settled, so the maintainer reviews one thing at a time.
 
+## Run 2026-10-11 — what the game showed
+
+Report `testcases/reports/2026-10-11_bepinex-configmanager-xunity-scoped.md`, fork commit `092377c` (local, not pushed):
+
+- **The cached-content change works** — same game dictionary, original 19.0 clips «Закрыті»/«Чисто», the fork shows them whole.
+- **His path does not reach the window contents in today's XUnity.** The scoped file translated only the title. Cause, from XUnity's
+  `GUI_DoWindow_Hook` + the game's decompiled `GUILayout.DoWindow`: `GUILayout.Window` hands `GUI.Window` its own wrapper
+  `new LayoutedWindow(func, …).DoWindow` (UnityEngine.IMGUIModule); XUnity looks the plugin up by `func.Method`'s assembly → Unity's,
+  not ConfigurationManager's. The plugin's function sits in the wrapper's private `m_Func`: an XUnity-side fix is to unwrap it
+  before `HookIfConfigured`. A likely-same unanswered report: XUnity #534 (2024).
+
+## Draft reply to the maintainer (not sent — the owner's word first)
+
+> Thanks — you're right about the collisions, scoped files are the cleaner way. I reworked it and tested in a Unity 2020.3 Mono game
+> (BepInEx 5.4.23.5, XUnity.AutoTranslator with EnableIMGUI=True) and found two things:
+>
+> 1. The scoped file only translates the window title, not its contents. XUnity attributes a window to a plugin by `func.Method` in its
+>    `GUI.DoWindow` hook, but `GUILayout.Window` passes `GUI.Window` its own wrapper (`new LayoutedWindow(func, ...).DoWindow` from
+>    UnityEngine.IMGUIModule), so the contents get only the generic translations. The plugin's function is in the wrapper's `m_Func`
+>    field, so this looks fixable on the XUnity side; I can open an issue/PR there (it may be what XUnity#534 ran into).
+> 2. Clipping does not depend on scoping: XUnity replaces `GUIContent.text` when the control is drawn, after GUILayout has measured it,
+>    and a string argument is a temporary GUIContent reset to English on every call. Passing persistent GUIContent objects fixes it for
+>    any IMGUI translator (before/after screenshots below).
+>
+> So for this PR I'd propose: drop the built-in dictionary and the Language setting, keep the small GUIContent change, and add the
+> scoped translation file under `Translations/ru/Text/Plugins/ConfigurationManager/`. Where would you like translation files to live
+> in the repo and the release zip? I'll update the branch once you're OK with this.
+
 ## Risks
 
 - (a) Step 3 may not hold (e.g. some controls rebuild content per call) → then offer only the files and name clipping as a known

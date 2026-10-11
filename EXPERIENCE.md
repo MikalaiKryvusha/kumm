@@ -90,6 +90,22 @@
 
 ## Entries
 
+### EXP-0214 · 2026-10-11 · ❌→✅ · #bepinex #xunity #imgui #translation #upstream #recon #pr
+class: maintainer-advice-untested
+**Context:** мейнтейнер ConfigurationManager (PR #125) отклонил перевод в коде: «плагинные переводы XUnity ограничиваются dll —
+кладите файлы». Совет по документации XUnity звучал полным решением.
+**Tried / did:** файл `Translation/ru/Text/Plugins/ConfigurationManager/*.txt`, `EnableIMGUI=True`, наш обход окна выключен, окно по F8 —
+оригинал против форка с постоянными `GUIContent`; исходник XUnity `GUI_DoWindow_Hook` и декомпиляция `GUILayout.DoWindow` игры.
+**Result:** ✅ постоянный `GUIContent` снимает обрезку (тот же словарь: «Закрыті» → «Закрыть»). ❌ файл под dll перевёл только заголовок:
+`GUILayout.Window` подаёт в `GUI.Window` обёртку `LayoutedWindow.DoWindow` из сборки Unity, и XUnity не узнаёт плагин.
+**Lesson:** **совет мейнтейнера по чужой библиотеке — гипотеза, а не решение: до ответа ему прогнать его путь в игре на родном окне
+(без своих обходов) и читать кадр. Перевод IMGUI меняет `GUIContent.text` при рисовании — ширину меряет то, что передано в
+`GUILayout`: строка — всегда по английскому.**
+**Repro:** `tools/h.sh "shot …"` после F8 при `KrinikModMenu.dll.off`; журнал «Attempting to hook …OnGUI to enable plugin specific
+translations» при английском содержимом окна. **Trigger:** перевод чужого IMGUI-окна; ответ мейнтейнеру со ссылкой на документацию.
+**Not for:** окна на `GUI.Window` без `GUILayout` (там `func` — функция плагина).
+mechanized: none — разовая разведка; правка XUnity (развернуть `m_Func`) — решение владельца
+
 ### EXP-0213 · 2026-10-11 · ❌→✅ · #svarogsdream #screenshot #capture #brightness #hdr #ffmpeg #ddagrab #owner-eye
 class: instrument-not-the-thing
 **Context:** EXP-0200 решил, что кадр пульта `shot` темнее экрана владельца (мир ×0.6), и велел судить яркость по записи экрана
