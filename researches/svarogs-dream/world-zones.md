@@ -20,6 +20,24 @@ desert (`[OWNER]` «-10 нравится везде, кроме пустыни -
   So the transform is exact: map pixel = world / 300 × rect size, no fitting by eye. Map image: `ActualMap`, sprite
   `MapaFinalnaVerzijaReducedSize_Natural` (our natural-colour palette version), with `Fog` over it.
 - **Seasons exist:** `WorldDateTime.SeasonOfTheYear` (Spring, Summer, Fall, Winter); winter changes day length. No air temperature.
+- **The game already tags every world area — by its ambient sound (decompiled 2026-10-11 14:06, ilspycmd over `Assembly-CSharp.dll`).**
+  Each 300 × 300 area is a `TerrainId` (`Row`, `Column`, `worldAudioAmbient`); enum `WorldAmbients` = `Fields, Woods, Swamp, Ancient,
+  Underworld, Towns, Ocean, Desert, Snow, Pantheon, Heavens, Island, IslandAncient, IslandWoods, FirstWorld`. The area under the hero is
+  `WorldState.playerArea` (set by `WorldStreamingManager.GetCurrentTerrainId`, the closest terrain). → **a coarse zone map for free**:
+  dump all `TerrainId` (row, column, ambient) → the first pass of our zones; our own cells only refine it (edges, sub-area spots).
+- **Snow in the desert — the game guards it by that tag.** The hourly roll `WorldTime.TriggerTimeRelatedEvents`: after quest `Thunder` is
+  done and only if `playerArea.worldAudioAmbient` is neither `Desert` nor `Ocean` — in winter snow 10 % per hour (else rain 5 %), other
+  seasons rain 0.5 % per hour; 60 s each. Snow turns on buff `Cold` (spell power −40 %, `CastSpell.cs` ~966); no snow, no rain in
+  dungeons, the underworld, Iriy, Pantheon, Heavensgate, World's End, First World (`IsNoWeatherZone`). Potions and quests can force snow
+  anywhere (`ConsumeManager` 300 s, `PathOfNonDoing3`, the Morana fight). No temperature exists; cold is only "snow is falling".
+
+## Temperature as a system (the owner's wish, 2026-10-11)
+
+`[OWNER]` «в Palworld и Medieval Dynasti классно сделано, что меняется температура, возле костров и факелов теплее, в разных местах
+карты меняется температура, в разные поры года и времена дня» · «и в Римворлде так сделано» · 2026-10-11 14:06. Proposed shape (not
+started): air temperature at the hero = zone base (from the ambient tag + our cells) + season offset + time-of-day curve + heat sources
+nearby (fires, torches, forges — found by their objects or lights in the loaded areas). Readers: the colour grading first (warm/cold
+tint instead of a fixed −10), later a HUD readout, and gameplay hooks (the game's own `Cold` buff, breath) only by the owner's word.
 
 ## Plan (proposed, not started)
 
@@ -28,4 +46,8 @@ desert (`[OWNER]` «-10 нравится везде, кроме пустыни -
    town, water…). First pass — classify the map image by colour; corrections — an HTML page over the map where cells are painted by click.
 3. Shared runtime module `KrinikZones` (in `src/Shared`): `ZoneAt(worldPos)`, `Weight(zone, worldPos, radius)` for smooth blends.
 4. First consumer: colour mod — day temperature per zone (desert 0, elsewhere −10), blended by distance; later per season.
+   `[OWNER]` «кстати, если ты разметишь карту, то мы сможем и "карту температур ввести" - которая, кстати, будет от поры года
+   зависеть» · 2026-10-11 14:03. Shape: a **temperature map** = per zone a base value plus a per-season offset
+   (`WorldDateTime.SeasonOfTheYear`), sampled at the hero with the same distance blend; the grading reads it, not a fixed −10.
+   Other readers can use it later (breath, snow, NPC lines). Values are the owner's to taste, proposed as a sheet of variants.
 5. Later consumers (owner's examples): monster spawns by zone, colour grading by zone.
