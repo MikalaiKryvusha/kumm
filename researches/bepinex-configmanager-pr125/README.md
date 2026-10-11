@@ -89,3 +89,14 @@ Report `testcases/reports/2026-10-11_bepinex-configmanager-xunity-scoped.md`, fo
 - (b) Plugin-scoped translation needs `EnableIMGUI=True` in XUnity — it then also translates every other IMGUI mod globally;
   in Svarog's Dream that is a separate decision (our own menus are uGUI; check before turning it on).
 - (c) He may prefer the files in a separate translations repo — the reply asks rather than guesses.
+
+## Sent 2026-10-11 — three PRs
+
+| PR | What | Proof |
+|---|---|---|
+| https://github.com/BepInEx/BepInEx.ConfigurationManager/pull/125 | translation as a plugin-specific XUnity file + persistent `GUIContent` (branch `ff3cbf8`), reply to the maintainer | `testcases/reports/2026-10-11_bepinex-configmanager-xunity-scoped.md` |
+| https://github.com/bbepis/XUnity.AutoTranslator/pull/876 | plugin-specific translations and the IMGUI blacklist look behind `GUILayout.Window`'s `LayoutedWindow` (`m_Func`) | same report, cases C6–C7 |
+| https://github.com/BepInEx/BepInEx.ConfigurationManager/pull/126 | `WindowSkin` + named header styles: a theme ships as a separate plugin (ours — `KrinikModMenu`, build `fac657f`) | `testcases/reports/2026-10-11_bepinex-configmanager-window-skin.md` |
+
+Screenshots live on the fork branch `pr125-screenshots`. Next: wait for the maintainers; on a merge of #126 the Harmony path in
+`KrinikModMenu` becomes the fallback for old versions only; on a merge of #125 + a release of #876 — `ConfigWindowRu` can step aside.
