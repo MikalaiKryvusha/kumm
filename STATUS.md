@@ -158,9 +158,14 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > транспайлер ширины числа (`KrinikModMenu/Plugin.cs`, `NumberWidthTranspiler`).
 >
 > **Дальше:**
-> 1. **Портреты:** дорисовать 40–62 — `bash SvarogsDream/tools/color_heroes.sh 40 62` (Chrome :9223 открыт и вошёл; если нет —
->    поднять тем же профилем, `--remote-debugging-port=9223`); перерисовать тех, кого назовёт владелец (удалить их файл в
->    `art/heroes_avatars_color/` и запустить скрипт по номеру); затем `python tools/portraits_sheet.py <папка>` и JPEG в `krinik_portraits`.
+> 1. **Портреты (вечер 2026-10-11):** владелец назвал 22 героя на перерисовку, v1 НЕ удалять — новые ложатся рядом «<имя> v2.webp».
+>    Классы правил промпта К1–К8 — `researches/svarogs-dream/gemini-avatar-coloring.md` («Классы правил v2», итоги тройки); поправки
+>    героев — столбцы `skin`/`notes`/`look_age` в `art/heroes_color_prompts.tsv`; принятые версии — `art/heroes_avatars_color/_chosen.tsv`
+>    (Андрей v2, Ясен v3, Коста v7). Прогон — очередь `bash tools/redraw_queue.sh _harness/color/queue19.txt` (строка `<n> <версия>
+>    [ПЕРЕМ=…]`), лист «оригинал | v1 | новая» открывается владельцу сам; все версии героя — `python tools/portrait_variants.py`.
+>    Вкладка второго аккаунта — `GEMINI_TAB=/u/1/`. Остановить прогон — `TaskStop` и `kill` ТОЛЬКО его PID (никогда `taskkill /IM
+>    node.exe`: 2026-10-11 это уложило pm2 владельца с ndim-server-prod). Потом 40–62 (`color_heroes.sh 40 62`), затем
+>    `python tools/portraits_sheet.py <папка>` и JPEG в `krinik_portraits` по `_chosen.tsv`.
 >    Увидеть портрет в игре: дойти в прологе до Дуба Жизни на КОПИИ сейва (или найти экран, где игра показывает `characterImage`).
 > 2. **Близнецы прыжков** (`[OWNER]` «как со многими другими вещами было - прыгало»): «раз в секунду» над интерфейсом — `MenuFonts.cs:82`,
 >    `Fonts.cs:261`, `Icons.cs:189`, `MapLayout.cs:381/384`; проверить первым кадром, как в отчёте no-jump.
