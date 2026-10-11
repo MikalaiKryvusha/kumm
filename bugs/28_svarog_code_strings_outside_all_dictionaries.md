@@ -111,6 +111,17 @@ C2 — перевод реплик Перуна, Мораны, Велеса pass
 повторено агентом 19:45 окружением `_tools/unitypy-venv` (отчёт в scratchpad): `entries 17563 hits 5957 ok 5777 word 8 case 0 english
 0 exceptions 172 ours 0`, код выхода 0 — в наших файлах нарушений нет. Оговорки внесены выше (TWINS, проверка в игре) и в STATUS.
 
+## Combat words — a census gap and a renderer outside XUnity (2026-10-11)
+
+`[OWNER]` «сообщения в бою Miss и прочие - больше размер, и нужно локализовать» · 2026-10-11. Two separate holes found:
+- **Census gap.** `blocked`, `undying`, `indomitable`, `executed`, `Enraged`, `run!` (literals of `UIPopUpSpawner.ShowAnimatedTextOnPosition`,
+  `ShowBlockedPopUp`, `ShowUndyingPopUp`, `ShowText`) are in no dictionary and not in `code_en.tsv` — `text_census.py` does not see them.
+  Added by hand to `_config/xunity/zz_krinik.txt`; machine `miss/immune/resistant` overridden in `zz_krinik_terms.txt`. Not fixed: the census
+  rule itself (other literals of these methods may hide the same way).
+- **Renderer.** The default combat words are Cartoon FX particles (`CFXR_ParticleText_Runtime`), not Unity text: XUnity never sees them, and
+  their font is Latin-only. KrinikUIRework `CombatText.cs` adds Cyrillic capitals (own atlas, `tools/cfxr_cyrillic_atlas.py`) and translates
+  the word through XUnity `TryTranslate` before showing (`testcases/TC_svarog_combat_text_2026-10-11.md`, pass 15:36).
+
 ## Root cause
 
 Класс `census-by-own-pattern` (EXP-0168, второй удар — баг 27): каждая выемка перечисляет текст по своему шаблону, и знаменатель
