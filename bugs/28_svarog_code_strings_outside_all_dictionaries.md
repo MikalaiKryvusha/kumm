@@ -116,8 +116,11 @@ C2 — перевод реплик Перуна, Мораны, Велеса pass
 `[OWNER]` «сообщения в бою Miss и прочие - больше размер, и нужно локализовать» · 2026-10-11. Two separate holes found:
 - **Census gap.** `blocked`, `undying`, `indomitable`, `executed`, `Enraged`, `run!` (literals of `UIPopUpSpawner.ShowAnimatedTextOnPosition`,
   `ShowBlockedPopUp`, `ShowUndyingPopUp`, `ShowText`) are in no dictionary and not in `code_en.tsv` — `text_census.py` does not see them.
-  Added by hand to `_config/xunity/zz_krinik.txt`; machine `miss/immune/resistant` overridden in `zz_krinik_terms.txt`. Not fixed: the census
-  rule itself (other literals of these methods may hide the same way).
+  Added by hand to `_config/xunity/zz_krinik.txt`; machine `miss/immune/resistant` overridden in `zz_krinik_terms.txt`. **Census rule fixed
+  16:00:** the two-words rule (`PHRASE`) cut one-word literals; now a one-word literal on a line calling `ShowAnimatedTextOnPosition`,
+  `ShowTextOnPosition`, `ShowText`, `ShowPlayerAnimatedText` counts as visible (`POPUP` in `tools/text_census.py`). The rerun found **17 more**
+  (regenerate, scared, death, defensive, released, invulnerable, bash, stun, frost, ignite, overkill!, revenged, rooted, Rooted., Eaten,
+  Planted., rotating) — translated in `code_ru.tsv` (SvarogsDream `10f5101`), glossary check `ours 0`; not seen in the game yet.
 - **Renderer.** The default combat words are Cartoon FX particles (`CFXR_ParticleText_Runtime`), not Unity text: XUnity never sees them, and
   their font is Latin-only. KrinikUIRework `CombatText.cs` adds Cyrillic capitals (own atlas, `tools/cfxr_cyrillic_atlas.py`) and translates
   the word through XUnity `TryTranslate` before showing (`testcases/TC_svarog_combat_text_2026-10-11.md`, pass 15:36).
