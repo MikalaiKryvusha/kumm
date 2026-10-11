@@ -109,7 +109,17 @@ This is a square portrait for the hero selection screen of a role-playing game.
 | v6 | v5 + «the age» | still older, grey hair, wrinkles | — |
 | v7 | v5 + «exactly as young … same smooth skin and hair color» | younger than original, blond, doll skin, likeness drops | «слишком молодой получился и мультяшный, и изменилась расстановка» — wants between v6 and v7, framing kept |
 | v8 | «…painted RPG portrait of a medieval Slavic peasant, with natural muted colors. Keep the same face, age and hair, the same framing and composition as the original, and the plain background.» | muted, painted, middle age; eyes at 0.48 of height vs 0.47 in the original — framing kept; hair lighter than the original | «нет. старик получился. На оригинале это человек в расцвете сил. И читай их биографию, там же возраста написаны!» |
-| v9 | v8 with «a 32-year-old … in the prime of life» (age from game data) | framing and muted colors kept; still reads ~40 to the agent's eye (stubble, eye folds) | — |
+| v9 | v8 with «a 32-year-old … in the prime of life» (age from game data) | framing and muted colors kept; still reads ~40 to the agent's eye (stubble, eye folds) | «хорошо получилось, но глаза... редкие оранжевые глаза у славян» |
+| v11 | v9 + «builder … stern and weary, with light brown hair, grey-blue eyes» | eyes right; «weary» added wrinkles | «опять слишком старый получился. В оригинале у него нет мешков под глазами и морщин» |
+| v12 | v11 without «weary», «blond hair, grey-green eyes» (owner: «этот чувак блондин … с серыми или зелёными глазами») | eyes and hair right, still aged | — |
+| v13 | v12 + «His skin is smooth and firm, with no wrinkles and no bags under the eyes, exactly as in the original.» | ~30, no wrinkles, framing kept, painted not cartoon; light stubble of the original lost | — |
+
+Owner's rule for the per-hero prompt (2026-10-11): `[OWNER]` «если в их биографии глаза не написаны, но смотри на оригинал фото, и
+предполагай национальность, темперамент, и подходящий цвет волос» · «цвет подходящий глаз». So each prompt carries: age (game data),
+role, hair and eye colour read from the original, and the smooth-skin sentence (the painted style ages faces by default).
+
+Tool note: the background Gemini tab renders neither the paste preview nor the answer without focus — `aistudio_cdp.mjs` now
+emulates focus on every command; `grab <out> <secs>` waits for the finished image (v12 came in 3 s once focused).
 
 ## Hero data (age, gender, hair) — `SvarogsDream/art/heroes.tsv`
 
