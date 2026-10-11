@@ -107,7 +107,15 @@ This is a square portrait for the hero selection screen of a role-playing game.
 | v4 | v3 + «as a medieval Slavic villager, painted in the style of a classic fantasy RPG character portrait» | izba, scarf, banner «SLAVIC VILLAGER» | «опять по фото перегиб» |
 | v5 | v3 + «as a painted RPG portrait of a medieval Slavic peasant. Keep the face and the plain background.» | painted, wool, embroidered collar, plain bg | «вот сейчас неплохо получилось» · «только как-то он постарел» |
 | v6 | v5 + «the age» | still older, grey hair, wrinkles | — |
-| v7 | v5 + «exactly as young … same smooth skin and hair color» | younger than original, blond, doll skin, likeness drops | — |
+| v7 | v5 + «exactly as young … same smooth skin and hair color» | younger than original, blond, doll skin, likeness drops | «слишком молодой получился и мультяшный, и изменилась расстановка» — wants between v6 and v7, framing kept |
+| v8 | «…painted RPG portrait of a medieval Slavic peasant, with natural muted colors. Keep the same face, age and hair, the same framing and composition as the original, and the plain background.» | muted, painted, middle age; eyes at 0.48 of height vs 0.47 in the original — framing kept; hair lighter than the original | «нет. старик получился. На оригинале это человек в расцвете сил. И читай их биографию, там же возраста написаны!» |
+| v9 | v8 with «a 32-year-old … in the prime of life» (age from game data) | framing and muted colors kept; still reads ~40 to the agent's eye (stubble, eye folds) | — |
+
+## Hero data (age, gender, hair) — `SvarogsDream/art/heroes.tsv`
+
+`tools/heroes_extract.py` reads StoryCharacter from the game data: 63 heroes, fields `characterAge`, `isMaleGender`, `hairColor`
+(id 0–4, mapping to a colour NOT known yet), `hairType`, `characterStory`, stats. Ages range 14 (Vidomir) … 72 (Arsenije); Adam 32.
+Ages go into the prompt per hero.
 
 ## Open
 
