@@ -3,8 +3,10 @@
 > **Created:** 2026-10-11 · **Parent:** `testcases/reports/2026-10-10_bepinex-configmanager-localization.md` (the PR run) ·
 > **Status:** ✅ MERGED — XUnity #876 2026-10-11 14:21, PR #125 14:43, PR #126 15:33 (all by ManlyMarco); he asked «Let me know when you're
 > done working on this plugins and I'll make a release» — answered 16:10 (`[OWNER]` «можем его сильно поблагодарить и сказать, что я рад
-> дыл помочь, и закончил работу?» · issuecomment-6109366026). Left in our module, not upstreamed: number field `GUILayout.Width(50f)` in
-> `DrawRangeField` (transpiler), window scale/rect via reflection ·
+> дыл помочь, и закончил работу?» · issuecomment-6109366026). Then `[OWNER]` «Давай сделаем, и напишем, что это ввсё… и большое
+> спасибооо!» — **PR #127** 16:17 (slider value box fitted to its text, branch `range-field-width` `52a0af4`, tested at 4K —
+> `testcases/TC_bepinex_configmanager_range_width_2026-10-11.md`), comment issuecomment-6109432130 «that's really everything». Left in our
+> module: window scale/rect via reflection (our TV case). When #127 ships, our KrinikModMenu transpiler finds no 50f — drop it then ·
 > recon 2026-10-11 10:35; XUnity fix proved in the game 11:09–11:13 (cases C6–C8); sent 11:17 — XUnity PR #876, PR #125 branch `ff3cbf8` + reply · AUTH: `[OWNER]` «да, хорошо» · «в XUnity заводи ПР на фикс, сошлись на наш ПР БиИн Екс» · 2026-10-11 ·
 > **Outbound:** a reply on https://github.com/BepInEx/BepInEx.ConfigurationManager/pull/125 — the owner's decision
 
