@@ -1,7 +1,7 @@
 # Bug 36 — Svarog's Dream: camera rotation on the middle mouse button is gone
 
 **Status:** 🔴 OPEN
-**Severity:** S2 (the owner's camera control in his daily game)
+**Severity:** S2 — raised: dragging items in the open inventory rotates the camera (breaks inventory use)
 **Version/build:** mod set as deployed 2026-10-11 (KrinikCameraRework 1.5.1 from 10-10 00:50, KrinikUIRework with HeroPortraits, KrinikModMenu 10-11 11:15)
 **When/context:** 2026-10-11 ≈23:34, tossed by the owner mid-task while the agent's run (portraits check) had the game open: `[OWNER]` «по СКМ вращение камеры исчезло».
 
@@ -24,3 +24,6 @@ Reproduce first (owner's word on which button he used before), then bisect by pl
 
 ## Decisions made without the owner
 none yet.
+
+## Second symptom — same root likely (`[OWNER]` «в открытом инвентаре хватаю преддмет - это как ЛКМ зажатое крутит камеру!!!  БАГ!» · 2026-10-11)
+With the inventory open, dragging an item with the LEFT button rotates the camera. Together with symptom 1 this reads as: camera rotation moved from the middle button to the held left button, and it ignores open UI. Priority up: it breaks inventory use. First check: which button the game rotates with now (hold LMB / MMB / Mouse3 on empty ground), and whether any of our mods (KrinikCameraRework, KrinikUIRework, KrinikDevHarness hover/cursor) maps or forwards mouse buttons; then bisect by plugin.
