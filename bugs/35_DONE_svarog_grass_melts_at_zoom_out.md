@@ -1,6 +1,6 @@
 # Bug 35 — Svarog's Dream: grass around the hero melts away when the camera zooms out
 
-**Status:** 🔧 fixed 2026-10-11 14:36 (KrinikColorRework 2.4.0, verified by the agent at zoom 40/100/160/240); DONE after the owner's eye
+**Status:** ✅ DONE 2026-10-11 14:50 — `[OWNER]` «ВОООТ!!! ВОТ ЭТО КРАСОТА!!!!!! СпасибО!» on `даль-бары-игра-и-правка.webp` (fixed 14:36, KrinikColorRework 2.4.0)
 **Severity:** S2 — the owner's main view (zoomed-out camera) shows bald ground where the game has grass
 **Version/build:** game release player, BepInEx 5.4.23.5; SvarogsDream `krinik.shaders` 928 859 B · **When/context:** 2026-10-11, owner's
 report in chat

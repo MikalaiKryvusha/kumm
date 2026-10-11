@@ -5,7 +5,7 @@
 ## 1. Work
 
 `[OWNER]` «трава возле героя исчезает даже просто при отдалении камеры=(» · «неужели трава столько ФПС кушает, что ты ее так сильно
-ограничил?» · 2026-10-11. Случаи — `testcases/TC_svarog_grass_zoom_vanish_2026-10-11.md` (C1–C8); баг — `bugs/35_svarog_grass_melts_at_zoom_out.md`.
+ограничил?» · 2026-10-11. Случаи — `testcases/TC_svarog_grass_zoom_vanish_2026-10-11.md` (C1–C8); баг — `bugs/35_DONE_svarog_grass_melts_at_zoom_out.md`.
 
 ## 2. Contour
 
