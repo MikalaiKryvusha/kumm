@@ -51,3 +51,8 @@
 ## Decisions made without the owner
 
 - `[AI]` «Джана» — Jana, the mercenary (№ 19); «Пасечник» — Maciej, the beekeeper (№ 29).
+
+## ✅ STATUS: DONE (2026-10-12 19:36 +03:00)
+
+What was done: all 11 portraits of the round have a new version accepted by the owner (table above, his words quoted per row).
+How verified: the owner's word per hero in chat 2026-10-12 ≈14:15–14:52 (the goal vector's own closing condition); closed at `/check-backlog`.
