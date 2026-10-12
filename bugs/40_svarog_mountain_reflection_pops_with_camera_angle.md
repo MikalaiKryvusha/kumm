@@ -29,3 +29,14 @@ of choosing the reflector is wrong (pick per frame in `Camera.onPreCull`, or ref
 
 ## Links
 `ideas/13_svarog_otrazheniya_v_vode.md` · `bugs/39_svarog_frame_hitch_twice_per_second.md` · `researches/svarogs-dream/water-recon.md`
+
+## Measured 2026-10-12 22:49–22:54 (pond near Bor, camera orbit at pitch 22°)
+- Frames `SvarogsDream/_harness/r_three.webp` (columns: rule on · rule off · after fix): with «one reflector per material» the land
+  patches on the water differ from the rule-off frames — the shared texture held another plane's view. Hypothesis 1 confirmed.
+- Fix (`WaterReflection.cs`): group = material + plane height (0.1 m); the reflecting plane is chosen EVERY frame (was every 0.5 s).
+  After the fix the patches match the rule-off frames.
+- Cost, same place, `perf 8` median: reflection off 14.8 ms · old rule 14.9 ms (22:50) · after fix 19.2–20.0 ms · rule off 21.1 ms.
+  So before the fix this pond's reflection was mostly NOT rendered (cheap and wrong — the popping). A correct ground reflection here
+  costs ≈4.4 ms of the main thread, not the +0.5 ms accepted at 11:16 (measured at another pond). Fork for the owner: keep the correct
+  reflection (+4.4 ms near ponds), or turn the planar reflection off until the GPU path (SSPR, idea 13 — owner: «нужно без нагрузки на
+  процессор»).
