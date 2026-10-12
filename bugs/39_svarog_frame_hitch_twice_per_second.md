@@ -54,9 +54,9 @@ the first tick (hot reload into a live world). Twin `WaterProbe.Scan` (`ScanSeco
 After restart in the owner's save (21:39): `prof 10 8` — `WaterReflection.Update` no longer in the top 8 (scripts 2.99 ms/frame, was
 6.76); spikes 1–3 per minute (was 101–131), loading and two hot reloads excluded. Reflection still applied (`planes 4 → 5` in the log).
 
-TWINS: searched `FindObjectsOfTypeAll` inside periodic code of all mods (`grep -B3` for Update/Tick/Seconds) — found 1 other periodic
-site: `KrinikCameraRework/Plugin.cs` near `DrawDistanceRefreshSeconds = 1f` (line 56) — to check next; the rest run once (startup,
-window open). Test case: `testcases/TC_svarog_hero_card_2026-10-12.md`, C31–C32.
+TWINS: searched `FindObjectsOfTypeAll` inside periodic code of all mods (`grep -B3` for Update/Tick/Seconds) — one hit,
+`KrinikCameraRework/Plugin.cs` `ScanGrassMaterials` next to `DrawDistanceRefreshSeconds = 1f` — read: event-driven since 2026-10-04
+(scene load, terrain count, setting change), not periodic. Periodic twins: none; the rest run once (startup, window open). Test case: `testcases/TC_svarog_hero_card_2026-10-12.md`, C31–C32.
 
 ## Decisions made without the owner
 (filled at closing)
