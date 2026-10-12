@@ -134,7 +134,9 @@ console.log('D. tools/hooks/pre-commit');
 try {
   const r = repo();
   mkdirSync(join(r.d, 'tools', 'hooks'), { recursive: true });
-  for (const f of ['tools/hooks/pre-commit', 'tools/scrub-identity.mjs', 'tools/check-claim-before-evidence.mjs']) copyFileSync(join(ROOT, f), join(r.d, f));
+  // Всё, что зовёт хук коммита: check-perf-world.mjs добавлен в хук позже и в песочнице не находился — контрольный коммит падал
+  // «Cannot find module» (2026-10-13 00:02, 137 из 138).
+  for (const f of ['tools/hooks/pre-commit', 'tools/scrub-identity.mjs', 'tools/check-claim-before-evidence.mjs', 'tools/check-perf-world.mjs']) copyFileSync(join(ROOT, f), join(r.d, f));
   r.git('config', 'core.hooksPath', 'tools/hooks');
   // A file big enough that git sees `git mv` + a one-line edit as a RENAME (R0xx), not as delete + add: a tiny file
   // falls under the 50 % similarity and the old ACM filter would have caught it as an add — the test proved nothing.
