@@ -28,7 +28,11 @@
 ## Fix plan
 1. **Vanishing:** Harmony transpiler on `Traveler.Update` / `Traveler.Start` / `Traveler.Awake`: the constant 100 → our visible character
    range (`CharacterMeters`, 300) — like `PatchMouseRayReach`. Check: a traveler walks out of view without vanishing; no fast run inside 300 m.
-2. **Lake bottom:** the navmesh is baked over the terrain under the water plane. Recon first: NavMesh areas (`NavMesh.GetAreaFromName`), the
+2. **Lake bottom — the owner's direction:** `[OWNER]` «Бег по дну водоёма - может это разметкой карты на зоны пофиксится? сможем сделать в
+   разметке области с тегом Вода?» · 2026-10-12. `[AI]` Unity's built-in way: `NavMeshObstacle` with carving, placed at runtime over the
+   water polygons of the zone markup — agents path around it, no rebake. Water as the first layer of «зоны мира» (owner's list: зоны мира →
+   карта температур). Path of a traveler = `AIDailyRoutine` hourly points (24 × place + action) walked by `NavMeshAgent`.
+   Recon still to do: the navmesh is baked over the terrain under the water plane. Recon first: NavMesh areas (`NavMesh.GetAreaFromName`), the
    travelers' path points (`Points` children of each traveler), whether the water has a NavMeshObstacle / modifier. Options to weigh with
    the owner if no cheap fix: route points around the pond, or an area cost for the underwater region.
 
