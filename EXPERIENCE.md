@@ -90,6 +90,18 @@
 
 ## Entries
 
+### EXP-0224 · 2026-10-12 · ❌→✅ · #svarogsdream #xunity #tmp #fonts #ourmods
+class: third-party-hook-reverts-our-style
+**Context:** кнопка «Продолжить» экрана смерти — подпись TMP переводится в Gabriela (`MarkPaper`) и в «Продолжить» строчными.
+**Tried / did:** сначала шрифт, потом `label.text = …`.
+**Result:** ❌ в игре подпись Manrope (`callon … get_font`), хотя `_wisdomTmp` загружен и метка стоит: XUnity с
+`OverrideFontTextMeshPro=krinik_manrope` (`AutoTranslator/Config.ini`) ловит смену текста TMP и ставит свой шрифт. ✅ Текст — до шрифта.
+**Lesson:** **у TMP-текста сначала менять строку, потом шрифт: XUnity переставляет шрифт на каждой смене текста. Не тот шрифт в кадре —
+спросить пультом `get_font`, а не гадать по коду мода.**
+**Repro:** `h.sh "callon UI/DeathStory/Story/CloseDeathScreen/Text TMPro.TextMeshProUGUI get_font"`.
+**Trigger:** мод меняет `text` у TMP, помеченного рукописным. **Not for:** uGUI `Text` (там переопределение шрифта XUnity пустое).
+mechanized: none — порядок закреплён комментарием в `SvarogsDream/src/KrinikUIRework/BigButtons.cs`
+
 ### EXP-0223 · 2026-10-12 · ❌ · #svarogsdream #portraits #delete #owner-words #ambiguity
 class: irreversible-act-on-ambiguous-word
 **Context:** быстрый отсмотр портретов: владелец пишет по одной строке в секунды, путает героев («ТИСА ПОЛУЧИЛАСЬ!» → «Я перепутал!»).
