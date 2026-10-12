@@ -150,6 +150,7 @@ try {
   check('rename + future stamp: HEAD did not move', r.git('rev-parse', 'HEAD').trim() === head0 ? 'same' : 'moved', 'same');
   r.write('b.md', `${body}closed ${PAST}${NL}`); r.git('add', 'b.md');
   const ok = spawnSync('git', ['commit', '-q', '-m', 'rename with a past stamp'], { cwd: r.d, encoding: 'utf8' });
+  if (ok.status !== 0) console.log(`   hook said: ${(ok.stderr || '') + (ok.stdout || '')}`.trim());   // почему отказал — без этого FAIL немой
   check('control: the same rename with a past stamp commits', ok.status, 0);
 } catch (e) {
   // A crash is a failed case, never a silent absence of cases (the first old-version run crashed here and printed
