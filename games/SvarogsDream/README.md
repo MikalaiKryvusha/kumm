@@ -162,3 +162,7 @@ Managers/StandardManagers/WeatherManager WorldWeatherManager SetRainWithPrerain 
   (самые дорогие `Update` игры и модов), переключатели `animcull`, `particles`, `farchars`, `timescale`, `terrainshader`.
 - Потоки игры: `powershell -File tools/threads.ps1 -Seconds 6` (в репозитории сборки).
 - Правки без побочного состояния сравнивать переключением в одном мире; свет — при остановленном времени (EXP-0139).
+- **С модами и без (2026-10-12):** главный поток — сама игра, 21 мс на кадр без единого мода (потолок ≈47 FPS у пруда в 4K); наши моды —
+  +0.2 мс процессора и +2 мс видеокарты. `[OWNER]` «Значит, мод уважительны к процессоры» · 2026-10-12. Разбор, способ замера (PresentMon,
+  `DOORSTOP_DISABLE`, подвох сейва двойной сумки) — `researches/svarogs-dream/fps-with-and-without-mods-2026-10-12.md`; сводка CSV —
+  `tools/pm_summary.py` сборки.

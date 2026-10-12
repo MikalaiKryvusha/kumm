@@ -90,6 +90,19 @@
 
 ## Entries
 
+### EXP-0232 · 2026-10-12 · ✅ · #svarogsdream #performance #fps #presentmon #bepinex #save
+class: mod-cost-needs-clean-baseline
+**Context:** владелец: «почему fps такой низкий? давай померим с модами и без».
+**Tried / did:** три прогона PresentMon 30 с у одного места: все моды · наши моды в `BepInEx/_krinik_off` (пульт оставлен) · чистая игра
+через `DOORSTOP_DISABLE=TRUE` в окружении запуска (файлы игры не тронуты).
+**Result:** ✅ 45.2 · 46.5 · 48.3 FPS; процессор 21.3 · 21.3 · 21.1 мс — потолок ставит сама игра, наши моды +0.2 мс CPU и +2 мс GPU.
+❌ попутно: выход из игры без нашего мода сумки записал сейв на 4.6 КБ меньше (двойная сумка не знакома игре) — откат к копии с модами.
+**Lesson:** **цена модов — только против чистого прогона в том же месте (PresentMon снаружи, `DOORSTOP_DISABLE` вместо правки файлов); после
+прогона без модов сейв, который пишет игра, НЕ оставлять — вернуть копию, снятую с модами.**
+**Repro:** `powershell -Command "$env:DOORSTOP_DISABLE='TRUE'; Start-Process '<игра>.exe'"` + `PresentMon … --timed 30` + `python -I tools/pm_summary.py A.csv B.csv C.csv`.
+**Trigger:** вопрос «сколько стоят моды», «почему низкий FPS». **Not for:** цена одной правки — там переключатель в одном мире (`perf` вкл/выкл).
+mechanized: `SvarogsDream/tools/pm_summary.py`; разбор — `researches/svarogs-dream/fps-with-and-without-mods-2026-10-12.md`
+
 ### EXP-0231 · 2026-10-12 · ❌→✅ · #svarogsdream #unity #performance #hitch #profiling #water
 class: periodic-full-memory-scan
 **Context:** «словно мало кадров» в пульсе карточки; журнал мода — рывок ~100 мс ровно дважды в секунду с 11:16 весь день (баг 39).
