@@ -1,0 +1,312 @@
+AUTO	GameplayMenu/UI/DarkUI	Dark mode UI	Тёмный Интерфейс
+	EN: When enabled, inventory panels will switch to a dark color scheme.
+	AUTO: Когда эта функция включена, панели инвентаря переходят в темную цветовую схему.
+AUTO	GameplayMenu/UI/RemoveWeapon	Auto-hide action bar	Скрывать Панель Действий
+	EN: When enabled, the action (spell) bar will auto hide out of combat. You can enable/disable them by pressing caps-lock.
+	AUTO: Когда эта функция включена, панель действий (заклинаний) будет автоматически скрываться в бою. Вы можете включить/выключить их, нажав caps-lock.
+AUTO	GameplayMenu/UI/MiniMap	Show mini-map	Показать мини-карту
+	EN: When enabled, show mini-map in top right corner.
+	AUTO: При включении отображается мини-карточка в правом верхнем углу.
+AUTO	GameplayMenu/UI/SquareMiniMap	Square mini-map	Квадратная мини-карта
+	EN: When enabled, in place of circular mini-map there will be bigger square version of mini-map.
+	AUTO: Если включить эту функцию, то на месте круглой мини-карты появится ее квадратная версия.
+AUTO	GameplayMenu/UI/HideMiniMap	Auto-hide mini-map	Скрывать мини-карту
+	EN: When enabled, hide the mini-map during combat.
+	AUTO: Если включить эту функцию, мини-карта будет скрыта во время боя.
+AUTO	GameplayMenu/UI/SilverCursor	Silver Cursor	Серебряный курсор
+	EN: Change the cursor color.
+	AUTO: Измените цвет курсора.
+NONE	GameplayMenu/UI/Disablecomparison	Disable comparison tooltip	Отключить подсказку сравнения
+	EN: By default, when hovering over an item, it will display a comparison with the equipped one. You can disable that here.
+	AUTO: 
+NONE	GameplayMenu/UI/ItemPopUps	Item popups	Всплывающие окна с товарами
+	EN: When enabled, a small message will appear whenever an item is picked up.
+	AUTO: 
+NONE	GameplayMenu/UI/HealthBarPercentage	Show stats percentage	Показать процент статистики
+	EN: When enabled, the percentage of health and mana will be visible over the health and mana globes.
+	AUTO: 
+NONE	GameplayMenu/UI/DisableCursor	Disable game cursor	Отключить игровой курсор
+	EN: Disable the in-game cursor and replace it with the default PC cursor.
+	AUTO: 
+AUTO	GameplayMenu/UI/DisableUITooltips	Disable UI hints	Отключить подсказки интерфейса
+	EN: Disable small question mark hints in the UI, it won't disable hints in the main menu.
+	AUTO: Отключите подсказки с небольшими вопросительными знаками в пользовательском интерфейсе, подсказки в главном меню не отключатся.
+NONE	GameplayMenu/UI/BonusSlots	Bonus skill slots	Бонусные слоты навыков
+	EN: Enable 4 bonus spell slots left from health bar.
+	AUTO: 
+NONE	GameplayMenu/UI/SecondarySlots	Secondary skill slots	Слоты вторичных навыков
+	EN: Create a new set of slots that will be enabled every time  you switch a weapon (X by default).
+	AUTO: 
+AUTO	GameplayMenu/UI/QuickDialogue	Quick Dialogue	Быстрый диалог
+	EN: When enabled, dialogues will write text quickly instead of using realistic speech speed.
+	AUTO: Если эта функция включена, диалоги будут писать текст быстро, а не использовать реалистичную скорость речи.
+AUTO	GameplayMenu/Controlls/QuickCast Checkbox	Quick cast	Быстрая Магия
+	EN: When enabled, the ability will be automatically cast to the cursor location without requiring a mouse click.
+	AUTO: Если эта функция включена, способность будет автоматически перебрасываться в местоположение курсора, не требуя щелчка мыши.
+NONE	GameplayMenu/Controlls/TargetingHelp (1)	Ranged smart targeting	Умный выбор цели в дальнем бою
+	EN: Enables smoother ranged combat in case of misclicks.
+	AUTO: 
+AUTO	GameplayMenu/Controlls/AutoAttack	Auto-attack close enemies	Автоатака близких врагов
+	EN: When enabled, the character will automatically attack all aggressive enemies that are in range.
+	AUTO: Если включить эту функцию, персонаж будет автоматически атаковать всех агрессивных врагов, находящихся в радиусе действия.
+NONE	GameplayMenu/Controlls/SaveAnimals	Prevent attacking animals	Предотвратить нападение животных
+	EN: When enabled, the character will not attack neutral animals such as rabbits or boars unless they are aggressive. You can override this by holding Ctrl + right-click.
+	AUTO: 
+NO-TIP	GameplayMenu/Controlls/Rebinding	Key Rebinding	Назначить клавиши
+	EN: 
+	AUTO: 
+NONE	GameplayMenu/Controlls/InteractionKeyPresOnly	Interaction key-press only	Взаимодействие только клавишей
+	EN: By default, holding a movement key over containers, recipes, or traders opens them. To prevent misclicks, you can change this behavior to require a separate mouse click.
+	AUTO: 
+NONE	GameplayMenu/Difficulty/Difficulty	Challenging Difficulty	Вызывающая сложность
+	EN: Disable this if you want to lower the difficulty.  Please save and reload the game afterward since the already loaded enemies have their stats already set.
+	AUTO: 
+NONE	GameplayMenu/Difficulty/HardDifficulty	Hard Difficulty	Высокая сложность
+	EN: To further increase the difficulty, enabling  this will activate the challenging difficulty as well. You cannot change the difficulty in Game+.
+	AUTO: 
+NONE	GameplayMenu/Difficulty/Ironman	Opt-out of Ironman	Выйти из режима Железного Человека
+	EN: You can opt out of Ironman, but once you do, you cannot go back.
+	AUTO: 
+NONE	GameplayMenu/Difficulty/Image/LevelScaling	Level Scaling	Масштабирование уровня
+	EN: When enabled, NPCs will gain 6% bonus health per your level and 3% bonus damage. This applies on top of difficulty settings. The benefit is that enemies will grant more XP when slain.
+	AUTO: 
+NONE	GameplayMenu/Difficulty/Image/TimeScaling (1)	Time Scaling	Масштабирование времени
+	EN: Similar to level scaling, but this scales with the number of in-game days passed. You can have only one of these three options. When enabled, the slow day cycle option is disabled.
+	AUTO: 
+NONE	GameplayMenu/Difficulty/Image/UnwelcomingWorld	Unwelcoming World	Неприветливый Мир
+	EN: Enemies have 150% more HP and deal 50% more damage. All healing effects are reduced by 50%. You can pick only one of the three bonus difficulty debuffs.
+	AUTO: 
+AUTO	GameplayMenu/Other/BlurBodies	Blur naked bodies	Обнаженные тела
+	EN: All naked bodies in the game will be blurred.
+	AUTO: Все обнаженные тела в игре будут размыты.
+NONE	GameplayMenu/Other/CensorLanguage	Mask profane language	Маскируйте ненормативную лексику
+	EN: Profane words will be censored in all dialogues.
+	AUTO: 
+AUTO	GameplayMenu/Other/FoodAutoEat	Auto-eat food	Авто поедание пищи
+	EN: If the food bar reaches zero, the character will automatically eat the first food from the inventory.
+	AUTO: Если полоска еды достигнет нуля, персонаж автоматически съест первую еду из инвентаря.
+AUTO	GameplayMenu/Other/QuestAutoTrack	Auto-track quests	Авто отслеживание квестов
+	EN: If enabled, a new quest will be automatically tracked over the previous one when started.
+	AUTO: Если эта опция включена, то при запуске нового квеста он будет автоматически отслеживаться поверх предыдущего.
+AUTO	GameplayMenu/Other/AlchemyBag	Move ingredients to bag	Переложить ингредиенты в Сумку
+	EN: When enabled, all alchemy and food ingredients will automatically go to the first bag. If the bag is full, they will try to go to the second bag or inventory.
+	AUTO: Если включить эту функцию, все ингредиенты для алхимии и еды автоматически попадут в первую сумку. Если сумка переполнена, они попытаются попасть во вторую сумку или в инвентарь.
+AUTO	GameplayMenu/Other/ItemsBag	Move items to bag	Переместите предметы в сумку
+	EN: When enabled, all collected items will automatically go to the first bag. If the bag is full or not equipped, they will try to go to the second bag or inventory.
+	AUTO: Если эта функция включена, все собранные предметы автоматически попадают в первую сумку. Если сумка переполнена или в ней нет экипировки, они попытаются попасть во вторую сумку или в инвентарь.
+AUTO	GameplayMenu/Other/SlowerDayCycle	Slow day cycle	Медленная смена дня и ночи
+	EN: When enabled, one in-game hour will take twice as long in real life to pass.
+	AUTO: При включении этой функции один игровой час в реальной жизни будет проходить в два раза дольше.
+NONE	GameplayMenu/Other/DisableDamagePopups	Disable damage pop-ups	Не показывать всплывающий урон
+	EN: For immersion's sake, you can hide damage pop-ups.
+	AUTO: 
+NONE	GameplayMenu/Other/SimpleDamagePopups	Old-school damage pop-ups	Всплывающий урон по-старинке
+	EN: If you're not a fan of animated popups, you can switch to old-school simple textual damage numbers here.
+	AUTO: 
+AUTO	GameplayMenu/Other/HealthBar	Character health bar	Полоска здоровья персонажа
+	EN: Show extra health bar over over character head.
+	AUTO: Покажите дополнительную полоску здоровья над головой персонажа.
+AUTO	GameplayMenu/Other/CharacterAura	Character Aura GFX	Эффект Ауры Персонажа
+	EN: When enabled, a spinning circle appears below your character.
+	AUTO: Когда эта функция включена, под вашим персонажем появляется вращающийся круг.
+NONE	GameplayMenu/Other/CharacterComments	Character Comments	Комментарии персонажей
+	EN: When enabled, the character will occasionally make a comment about the weather or incoming danger.
+	AUTO: 
+NONE	GameplayMenu/Other/QuestAutoSave	Auto-Save on quest solved	Автосохранение в квесте решено
+	EN: If more than 20 minutes have passed since the last save and the player is not in combat, the game will be auto-saved at the end of the quest.
+	AUTO: 
+NO-TIP	VideoMenu/ScreenResolution	Screen Resolution	Разрешение экрана
+	EN: 
+	AUTO: 
+NO-TIP	VideoMenu/TargetFPS	Target Frame Rate	Целевая частота кадров
+	EN: 
+	AUTO: 
+NO-TIP	VideoMenu/FPSCheckbox	FPS Counter	Счетчик FPS
+	EN: 
+	AUTO: 
+AUTO	VideoMenu/FPSOptimizations	FPS Optimizations	Оптимизация FPS
+	EN: The game will lower FPS when it is paused and displaying static UI pages.  There is no clear benefit to disabling this.
+	AUTO: Игра будет снижать FPS, когда она поставлена ​​на паузу и отображает статические страницы пользовательского интерфейса. \nВ отключении этого нет явной выгоды.
+NO-TIP	VideoMenu/FullscreenCheckbox	Full Screen	Полный экран
+	EN: 
+	AUTO: 
+NO-TIP	VideoMenu/LowerCameraAngle	Camera - Lower Base Angle	Камера - нижний базовый угол
+	EN: 
+	AUTO: 
+NO-TIP	VideoMenu/IncreaseCameraViewAngle	Camera - Lower Field of View	Камера - нижнее поле зрения
+	EN: 
+	AUTO: 
+AUTO	VideoMenu/ScreenShake	Turn off screen shake	Отключите дрожание экрана
+	EN: The game will shake the camera when something impactful happens, and we are careful not to overdo it. At times, it will serve as a warning, as if a huge enemy is approaching you.  If you have issues with camera shake, you can disable it here.
+	AUTO: Игра трясет камеру, когда происходит что-то значительное, но мы стараемся не переборщить. Иногда это служит предупреждением, например, если к вам приближается огромный враг. \nЕсли у вас есть проблемы с дрожанием камеры, вы можете отключить его здесь.
+AUTO	VideoMenu/Colorblind	Colorblind mode	Режим дальтоника
+	EN: Set to address the most common form of color blindness, which is red-green. When enabled, important game elements such as health bars and stats on items will change their color from red to a different hue. This solution is not perfect and does not cover the entire spectrum of color blindness. If you have feedback on how to improve it, please contact the game's author and we will see what we can do.
+	AUTO: При включении этой функции важные игровые элементы, такие как полоски здоровья и статистика предметов, будут менять свой цвет с красного на другой оттенок. Это решение не идеально и не охватывает весь спектр дальтонизма. Если у вас есть отзывы о том, как его улучшить, пожалуйста, свяжитесь с автором игры, и мы посмотрим, что можно сделать.
+NO-TIP	VideoMenu/BrightnessSlider	Brightness	Яркость
+	EN: 
+	AUTO: 
+NO-TIP	GraphicMenu/GraphicPreset	Graphic Preset	Графическая предустановка
+	EN: 
+	AUTO: 
+NO-TIP	GraphicMenu/TextureQuality	Details Quality	Качество деталей
+	EN: 
+	AUTO: 
+NO-TIP	GraphicMenu/DetailsCount	Details Count	Подробный подсчет
+	EN: 
+	AUTO: 
+NO-TIP	GraphicMenu/AmbientOcclusion	Ambient Occlusion	Окружающая окклюзия
+	EN: 
+	AUTO: 
+NO-TIP	GraphicMenu/AntiAliasing	Anti Aliasing	Антиалиасинг
+	EN: 
+	AUTO: 
+NO-TIP	GraphicMenu/HDR	High Dynamic Range	Высокий динамический диапазон
+	EN: 
+	AUTO: 
+NO-TIP	GraphicMenu/Shadows	Shadows	Тени
+	EN: 
+	AUTO: 
+AUTO	GraphicMenu/vsync	VSync	VSync
+	EN: When VSync is enabled, FPS will be limited by the monitor refresh rate. For better performance, we recommend leaving it enabled.
+	AUTO: Когда VSync включен, FPS будет ограничен частотой обновления монитора. Для повышения производительности мы рекомендуем оставить эту функцию включенной.
+NONE	GraphicMenu/WorldPreloading	World Preloading	Предварительная загрузка мира
+	EN: Not recommended if you have less than 16GB of RAM.  By default, the game loads and removes content into your RAM as you play. In some cases, this can cause stuttering if the hard disk is your bottleneck. You can enable this option to load more content into RAM occasionally and to keep it there, providing smoother gameplay, but it will use a higher amount of RAM.
+	AUTO: 
+NO-TIP	Controls/Page1/Esc	Main Menu -	Главное меню
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page1/Inventory	Inventory -	Инвентарь
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page1/Stop	Stop Action -	Остановить действие
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page1/Attributes	Panel Attributes - 	Атрибуты
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page1/Map	Panel Map - 	Карта
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page1/Quests	Panel Quests -	Квесты
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page1/Almanac	Panel Almanac -	Альманах
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page1/Stats	Panel Stats -	Статистика
+	EN: 
+	AUTO: 
+NONE	Controls/Page1/SwapWeapons	Swap Weapons - 	Сменить оружие
+	EN: Press this button to swap between the primary and secondary weapons that are equipped in the equipment.
+	AUTO: 
+AUTO	Controls/Page1/AttackMove	Attack-Move - 	Атака в движении
+	EN: Press this button and left-click to make the character attack the closest enemy to the mouse cursor's position instead of moving.
+	AUTO: Нажмите эту кнопку и щелкните левой кнопкой мыши, чтобы персонаж атаковал ближайшего к позиции курсора мыши врага, а не двигался.
+NONE	Controls/Page1/FreeCamera	Look Around - 	Осмотреться
+	EN: Hold this button and right-click to scout an area within a range of 100m.
+	AUTO: 
+AUTO	Controls/Page1/Pet	Pet Animals - 	Погладить животное
+	EN: Hold this button over animal to pet it. You can pet wild animals as long as they are not attacking you.
+	AUTO: Удерживайте эту кнопку над животным, чтобы погладить его. Вы можете гладить диких животных, если они не нападают на вас.
+NO-TIP	Controls/Page1/Sprint	Sprint - 	Бег
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page1/GameLogs	Game Logs -	Журнал
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/Skill (1)	Spell Slot 1 -	
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/Skill (2)	Spell Slot 2 -	
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/Skill (3)	Spell Slot 3 -	
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/Skill (4)	Spell Slot 4 -	
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/Skill (5)	Spell Slot 5 -	
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/Skill (6)	Spell Slot 6 -	
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/Skill (7)	Spell Slot 7 -	
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/Skill (8)	Spell Slot 8 -	
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/Skill (9)	Food Slot -	Ячейка Еды:
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/Skill (10)	Potion Slot -	Ячейка Зелья:
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/MoveUp	Move Up -	Идти вверх
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/MoveDown	Move Down -	Идти вниз
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/MoveUp (2)	Move Left -	Идти влево
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/MoveUp (3)	Move Right -	Идти вправо
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2/MoveCommand	Move Command -	Идти к точке
+	EN: 
+	AUTO: 
+NONE	Controls/Page3/Skill (1)	Spell Slot 9 -	
+	EN: You can enable bonus spell slots in game settings.
+	AUTO: 
+NONE	Controls/Page3/Skill (2)	Spell Slot 10 -	
+	EN: You can enable bonus spell slots in game settings.
+	AUTO: 
+NO-TIP	Controls/Page3/Skill (3)	Spell Slot 11 -	
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page3/Skill (4)	Spell Slot 12 -	
+	EN: 
+	AUTO: 
+AUTO	Controls/Page3/Skill (5)	Chase Enemies -	Преследовать врагов
+	EN: Chase enemies even beyond weapon range.
+	AUTO: Преследуйте врагов даже за пределами досягаемости оружия.
+AUTO	Controls/Page4/LeftClickMain	Left click is main	Основная кнопка мыши: левая
+	EN: Enabling and disabling this will switch the functionality between left and right clicks.
+	AUTO: Включение и отключение этого параметра будет переключать функциональность между щелчками левой и правой кнопкой мыши.
+AUTO	Controls/Page4/SplitButtons	Split movement-interaction	Ходьба и действия раздельно
+	EN: When enabled, attack and other interactions will be assigned to the opposite mouse button from movement.
+	AUTO: Если эта функция включена, атака и другие взаимодействия будут назначены на кнопку мыши, противоположную от движения.
+AUTO	Controls/Page4/SetAWSD	Set WASD	Назначить WASD
+	EN: Clicking this button will map movement to WASD and relocate move actions from those buttons to other controls.
+	AUTO: Нажатие этой кнопки сопоставит движение с WASD и переместит действия перемещения с этих кнопок на другие элементы управления.
+NO-TIP	Controls/Page4/Reset	Reset to Default	Сбросить настройки
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page1	Page 1	
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page2	Page 2	
+	EN: 
+	AUTO: 
+NO-TIP	Controls/Page3	Page 3	
+	EN: 
+	AUTO: 
+NO-TIP	SoundMenu/VolumeSlider/GlobalSlider	Global	Глобальная
+	EN: 
+	AUTO: 
+NO-TIP	SoundMenu/VolumeSlider/Music	Music	Музыка
+	EN: 
+	AUTO: 
+NO-TIP	SoundMenu/VolumeSlider/Ambient	Ambient	Окружающий
+	EN: 
+	AUTO: 
+NO-TIP	SoundMenu/VolumeSlider/Effects	Effects	Эффекты
+	EN: 
+	AUTO: 
+AUTO	SoundMenu/CombatMusic	Play combat music during minor battles	Боевая музыка во время небольших сражений
+	EN: By default, major encounters have their own music themes, while small, brief encounters are silent. Enable this if you'd like to add some drums in background to those brief encounters as well.
+	AUTO: По умолчанию крупные встречи имеют свои собственные музыкальные темы, в то время как мелкие, короткие встречи остаются без звука. Включите это, если хотите добавить барабаны в качестве фона к этим коротким встречам.
