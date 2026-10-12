@@ -23,6 +23,7 @@ Open: second symptom (roof without haze) — not yet looked at; noticed: far tre
 - Roof: `thatched_roof_col6` is Standard in Fade mode (queue 3000) — transparent draws after the PPv2 fog and the game build has no Standard
   fog variants, so it never hazes. The game hides roofs by SetActive (`HouseVisibility`), not by alpha → `RoofFog.cs` turns such materials
   (name prefixes in `Foliage.RoofMaterials`) into Cutout (queue 2450, ZWrite on). Far: in the haze; near: thatch intact.
+  Accepted: `[OWNER]` «крыша суппер, получилась у тебя» · 2026-10-12.
 - Dead trees and saplings at 300–500 m are hazed ≈20–25 % — that is the EXP2 curve, not missing fog. New `Sky.HazeDensity`, default 1.2:
   `[OWNER]` «1 густота» · «можно 1.2» · 2026-10-12.
 - Open: ash canopy `MI_Ash_Tree_Canopy_01` (`Custom/Lordenfel/FoliageWind`) takes ≈8 % where neighbours take ≈40 % — same class as the roof.
