@@ -40,3 +40,11 @@ of choosing the reflector is wrong (pick per frame in `Camera.onPreCull`, or ref
   costs ≈4.4 ms of the main thread, not the +0.5 ms accepted at 11:16 (measured at another pond). Fork for the owner: keep the correct
   reflection (+4.4 ms near ponds), or turn the planar reflection off until the GPU path (SSPR, idea 13 — owner: «нужно без нагрузки на
   процессор»).
+
+## SSPR checked by day (2026-10-12 23:59)
+
+- The GPU path exists now (`WaterSSPR`, SvarogsDream `707cf84`). With `Water.ScreenReflection = true` the Lux camera renders sky only, and the
+  mountain comes from the screen pass (`farHigh`): by day after the row-order fix the mountain sits under the pond shore (C49, C51 pass;
+  frames in `SvarogsDream/НА ОТСМОТР НИКОЛАЕМ/8 Вода - отражение экраном/`). So fork A no longer means "water without mountains": it means
+  SSPR on (−3.1 ms CPU, +0.2 ms GPU at the Bor pond) instead of +4.4 ms. Known limit: a mountain whose top is above the screen edge is cut
+  by a straight line. Still the owner's call.
