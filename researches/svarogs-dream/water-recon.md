@@ -25,6 +25,19 @@ Owner: `[OWNER]` «Шейдер воды как - дыра в земле, сло
   10 PostProcessing · 11 Ragdoll · 12 Item · 13 Inventory · 14 CharacterModel · 15 Storage · 16 AdditionalLighting · 17 WoodPlatform ·
   18 Recipe.
 
+## Results (2026-10-12 11:07–11:16, owner's save, 1280×720, `perf 8`)
+
+| Variant | FPS | median | low1% | batches | look |
+|---|---|---|---|---|---|
+| author (sky only) | 52–60 | 15.6–16.4 ms | 10–11.6 | 5651 | water = sky |
+| planar, Default+Ground+WoodPlatform, Quarter | 41.4 | 23.1 ms | 10.7 | 9981 | mountains in the pond — **too expensive** (owner closed the game) |
+| planar, same, Half | 39.0 | 24.4 ms | 10.7 | 10320 | same |
+| reflection probe 128, every 4 s, planar off | 50.2 | 14.9 ms | 7.5 | — | water dark olive, sky gone — **worse** |
+| **planar, Ground only, terrain without grass and trees during the reflection pass, one camera, Quarter** | **54.2** | **16.3 ms** | **11.5** | 6148 | **mountains and shore in the pond, +0.5 ms** — default on |
+
+The bottleneck is the main thread (Gfx wait ≈ 0): the cost of a reflection is the number of draw calls of the second pass, not
+its pixels. Lesson — EXP-0222.
+
 ## Plan
 
 1. Our mod sets `reflectionMask` of every `LuxWater_PlanarReflection` to a configured layer set (start: Default + Ground + WoodPlatform —
