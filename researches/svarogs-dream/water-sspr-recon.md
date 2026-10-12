@@ -44,7 +44,7 @@ height, the same grouping as bug 40's fix).
 
 ## Price of error / risks
 
-- The water shader (Lux) must accept an external reflection texture with screen-UV sampling — to read in the Lux shader source before code.
+- The water shader (Lux): the planar script sets `_LuxWater_ReflectionTex` on the water material (`LuxWater_PlanarReflection.reflectionSampler`, decompile 2026-10-12) — a screen-layout texture from the mirrored camera; the SSPR result has the same layout, so step 2 is one `SetTexture` per material (planar component disabled). Still to confirm by eye: whether the Lux shader flips or distorts the UV.
 - Holes and edge stretching are visible artefacts — taste: frames to the owner before it becomes default.
 - Compute shaders must be compiled into our asset bundle for the game's graphics API (D3D11) — the bundle build already exists.
 
