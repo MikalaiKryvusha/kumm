@@ -137,6 +137,14 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > **Medieval Dynasty (на паузе) — чек-лист возврата (интервью #010, план фазы 1, KARMA К2, как гонять игру, моды пака, долг
 > закрытия 16:35) — летопись, запись 2026-10-09 19:41, раздел «Перенесено из STATUS дословно».**
 >
+> **Svarog's Dream — ДЕМО АВТОРАМ ИГРЫ (чат с 16:45; автономно 1.5 часа с 17:09 по слову владельца) — сейчас первое.** Ролик Ивану и
+> Валентине (авторы игры) о наших модах, ≈11 мин, игра на русском, голос английский (Kokoro, голос C), 4K 60 к/с H.265 15 Мбит/с, SDR.
+> План и решения владельца — `plans/21_svarog_demo_for_authors.md` (раздел «Дальше» — что осталось), сценарий — `plans/22_svarog_demo_script.md`,
+> летопись для текста — `researches/svarogs-dream/demo-chronicle-2026-10-04_12.md`. Сделано: первая половина (акты 0–3 и финал) —
+> `SvarogsDream/_harness/demo21/demo21_part1_v1.mp4` (4 мин 18 с), отчёт `testcases/reports/2026-10-12_svarog-demo21-shoot.md`. Приборы:
+> `DemoOrbit`/`DemoSky` (мод камеры), `rec_clip.sh`, `hdr.ps1`, `save-check.sh`, `demo21_narrate.py`, `demo21_cut.py`, `demo21_ui.sh`
+> (EXP-0227, EXP-0228). Работа «?» в настройках (ниже) ждёт после ролика.
+>
 > **Svarog's Dream — НОВЫЙ ЧАТ (передача 2026-10-12 16:34, чат с 14:57; закрыт срочно: `[OWNER]` «этот чат быстро закрывай»).**
 > ⚠️ Force-closed 2026-10-12 16:34: ceremonies skipped (judge pass, bonsai trim, README, showcase linters) — the first /end-chat-soft pays this debt (и долги закрытий 14:54 и 11:20 — тоже).
 > Standing falsehood: none (поправлено на месте: строка «главная колонка → вкладки сверху» и «два макета на кадрах `mt_*`» — пункт 3 ниже).

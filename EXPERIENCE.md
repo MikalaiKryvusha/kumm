@@ -90,6 +90,29 @@
 
 ## Entries
 
+### EXP-0228 · 2026-10-12 · ❌→✅ · #svarogsdream #demo #capture #hdr #ffmpeg #ddagrab
+class: instrument-not-the-thing
+**Context:** демо авторам игры в 4K 60 к/с; запись экрана с HDR-рабочего стола пересвечивает SDR-игру ×4.5 (EXP-0213).
+**Tried / did:** HDR телевизора выключен на время записи через DisplayConfig API (`SvarogsDream/tools/hdr.ps1 off|on|get`, тип 10
+SET_ADVANCED_COLOR_STATE), запись `ddagrab=output_idx=0:framerate=60` → `hevc_nvenc -cq 18` (`tools/rec_clip.sh`).
+**Result:** ✅ кадр записи против `shot` той же секунды — разница −0.3…−1.7 из 255 по трём участкам (C2 `TC_svarog_demo21_2026-10-12`).
+**Lesson:** **для записи SDR-игры с HDR-экрана — HDR Windows выключить скриптом до записи и включить после, сверить один кадр с `shot`; в
+F16 и делить ничего не нужно.**
+**Trigger:** запись демо или ролика с экрана этой машины. **Not for:** снимки изнутри движка (`shot`) — они верны всегда.
+mechanized: `SvarogsDream/tools/hdr.ps1`, `tools/rec_clip.sh`
+
+### EXP-0227 · 2026-10-12 · ❌→✅ · #svarogsdream #demo #camera #sky #icons #time
+class: scripted-shot-needs-own-camera
+**Context:** съёмка красоты мира скриптом: облёт, небо, закат, сияние.
+**Tried / did:** пологая камера у героя на 10° с полного отдаления; `Icons VisibleMeters 0`, чтобы спрятать значки; закат — промоткой часов.
+**Result:** ❌→✅ сияние на 10° — тонкая полоса над чёрной землёй → своя `DemoSky` (камера над героем, взгляд вверх) — сияние на ≈70 % кадра;
+`VisibleMeters 0` = «без предела» (значки до горизонта) → 1 м; закат ушёл в ночь, пока говорил голос (игровой час ≈ 1 мин, окно
+заката ≈ 1 мин) → промотка и запись подряд без пауз.
+**Lesson:** **небо — только `DemoSky`, облёт — `DemoOrbit`; значки прятать дальностью 1 м, не 0; закат и рассвет снимать сразу после
+промотки, без голоса и проверочных кадров между клипами.**
+**Trigger:** любая съёмка мира Сварога скриптом. **Not for:** кадры интерфейса.
+mechanized: `KrinikCameraRework.Plugin.DemoOrbit`, `DemoSky`
+
 ### EXP-0226 · 2026-10-12 · ❌ · #svarogsdream #status #owner-words #standing-falsehood
 class: stale-backlog-line-outlives-owner-cancel
 **Context:** в STATUS стоял пункт «главная колонка меню → вкладки сверху: два макета владельцу на выбор».
