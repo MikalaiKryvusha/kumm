@@ -48,6 +48,12 @@ height, the same grouping as bug 40's fix).
 - Holes and edge stretching are visible artefacts — taste: frames to the owner before it becomes default.
 - Compute shaders must be compiled into our asset bundle for the game's graphics API (D3D11) — the bundle build already exists.
 
+## Found in the build (2026-10-12 23:40–23:45)
+
+- **Row 0 is the bottom of the image, on D3D too.** Unity renders into render textures upside down on D3D so that UV (0,0) is the bottom everywhere. The depth texture, the frame copy (`Blit` of `CurrentActive`) and the Lux reflection texture are all stored bottom-up, so a compute shader reading them with `Load`/`[]` must not apply the `UNITY_UV_STARTS_AT_TOP` flip. The first build applied the flip, and its reflection sat about 110 rows of 540 above the place where Lux's own mirror puts it (`camrt` of one plane with `ScreenReflection` off and on, same camera: Lux's cliffs at rows ~110–210, ours at 0–170). After removing the flip, the reflected forest hangs under the horizon at rows ~120–260. Comparing against Lux's own reflection texture, with the mask on Ground and the same view, is the quick check of the layout.
+- **One copy of the frame, a pass per plane.** Every visible plane has its own Lux texture, and with one plane per frame the second pond in view showed sky only. Now up to 3 visible planes, nearest first, each get Clear → Hash (own `_WaterY`) → Resolve → `CopyTexture` into its own texture, sharing the hash buffer, the frame copy and the output texture. `camrt` 23:40 showed both `_WaterPlane` textures carrying the reflected forest.
+- **The mod lives in `plugins/KrinikColorRework/`.** A dll copied into the root of `plugins/` loads from there and does not find `krinik.shaders` next to itself (log: `sspr: KrinikSSPR not in the bundle`).
+
 ## Sources
 
 - [URP_ScreenSpacePlanarReflections (Steven Cannavan) — URP port, based on Remi Genin's Wildlands work](https://github.com/Steven-Cannavan/URP_ScreenSpacePlanarReflections)
