@@ -1,6 +1,6 @@
 # Bug 37 — Svarog's Dream: the distant haze turns blue
 
-**Status:** 🔴 OPEN
+**Status:** ✅ DONE 2026-10-12 10:47 — белёсая дымка, густота 1.2, крыши и листва в дымке; принято владельцем
 **Severity:** S3→ kept as a document because it is a taste item the owner named (UI_RULEBOOK "beauty is no seams")
 **When/context:** 2026-10-11 ≈23:35, tossed by the owner mid-task while playing: `[OWNER]` «дымка вдали в синеву даёт... не очень красиво».
 
@@ -41,3 +41,11 @@ Frame `03 крыша вдали без дымки.webp` (same gallery folder): a
 
 ## Target colour (`[OWNER]` «дымка вдали не в сеневу должна уходить, а в белезну и серость чуть-чуть» · 2026-10-11)
 The far haze should fade towards a whitish, slightly grey tone — not blue. Acceptance: on frames 01–03 the far forest, rocks and the hut go pale whitish-grey; the owner judges by eye.
+
+## ✅ STATUS: DONE (2026-10-12 10:47 +03:00)
+Accepted by the owner: `[OWNER]` «крыша суппер, получилась у тебя» · «Ясери и кустик - норм. Спасибо за шейдеры!» · 2026-10-12; density
+`[OWNER]` «можно 1.2».
+Hygiene: builds clean.
+Functional run: in game on the owner's save — haze colour at noon (0 / 0.5 / 0.8 / 1), density 1 / 1.5 / 2, roof far with and without the
+fix and near, ash canopy and berry bush with and without the fix (colour measured) — `testcases/reports/2026-10-12_svarog-clock-weight-and-haze.md`,
+`…_svarog-far-roof-haze.md`, `…_svarog-traveler-reach.md`.

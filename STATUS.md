@@ -172,8 +172,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 >    Увидеть портрет в игре: экран выбора — класс игры `CharacterSelectionUI`/`CharacterSelectionManager` (вызвать пультом `call`)
 >    или пролог до Дуба Жизни на КОПИИ сейва (TC C2b, C6).
 > 1а. **Баг 37** — сделано 2026-10-12: дымка белёсая (`Sky.HazeWhite` 0.8), густота 1.2 (слово владельца), соломенные крыши вдали в дымке
->    (`RoofFog.cs`, крыша принята: «крыша суппер»), листва `Custom/Lordenfel/FoliageWind` (ясени, ягоды) до дымки. Ждёт глаза владельца —
->    закрыть по его слову. Отчёты `testcases/reports/2026-10-12_svarog-far-roof-haze.md`, `…_svarog-traveler-reach.md`. Пульт `pick X Y` —
+>    (`RoofFog.cs`, «крыша суппер»), листва `Custom/Lordenfel/FoliageWind` (ясени, ягоды) до дымки («норм. Спасибо за шейдеры!»); баг закрыт —
+>    `bugs/37_DONE_…`. Отчёты `testcases/reports/2026-10-12_svarog-far-roof-haze.md`, `…_svarog-traveler-reach.md`. Пульт `pick X Y` —
 >    что нарисовано в точке, все материалы с очередью; курсор владельца — `cursorinfo`.
 >    **Баг 38** — путник из Бары: исчезание посреди кадра починено (`PatchTravelerReach`, 100 → 300 м); **осталось — бег по дну водоёма**
 >    (навигация под водой; разведка — в баге). **Идея 13** — вода «дыра в земле» (`[OWNER]` «и ещё я про воду заказызал» · 2026-10-12).
@@ -215,8 +215,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 
 ## Open bugs
 
-Файлов без метки DONE — 11 (2026-10-12 09:48: баг 36 закрыт, 38 — новый):
-- 🔧 `bugs/37_svarog_far_haze_too_blue.md` — дымка: белёсая, крыши и листва в дымке (2026-10-12); ждёт слова владельца.
+Файлов без метки DONE — 10 (2026-10-12 10:47: баги 36 и 37 закрыты, 38 — новый):
+
 - 🔴 `bugs/38_svarog_traveler_runs_lake_bottom_and_vanishes.md` — путник бежит по дну водоёма; исчезание починено 2026-10-12.
 - 🔴 `bugs/29_md_hdr_menu_washed_after_auto_hdr.md` — HDR: Auto HDR выключен для exe, мир принят, инвентарь (UI) пересвечен.
 - 🔴 `bugs/28_svarog_code_strings_outside_all_dictionaries.md` — строки кода игры вне всех словарей (класс бага 27): 1106 → 65 → 192 → **79**
