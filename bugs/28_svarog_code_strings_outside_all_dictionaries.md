@@ -125,6 +125,24 @@ C2 — перевод реплик Перуна, Мораны, Велеса pass
   their font is Latin-only. KrinikUIRework `CombatText.cs` adds Cyrillic capitals (own atlas, `tools/cfxr_cyrillic_atlas.py`) and translates
   the word through XUnity `TryTranslate` before showing (`testcases/TC_svarog_combat_text_2026-10-11.md`, pass 15:36).
 
+## Data texts — the second census (2026-10-13)
+
+`[OWNER]` «Промокший не переведено» · «значит есть ещё не переведённые строки» · «поищи, это статическая работа по анализу кода» ·
+2026-10-13. Название «Промокший» (`Wet=Промокший`, zz_krinik.txt) было переведено; не переведены строки эффекта баффа — они лежат в
+ДАННЫХ игры (BuffInfo: `buffName` · `positiveBuff` · `negativeBuff` · `neutralIfno` — опечатка автора), а `text_census.py` читает
+только литералы кода. Тот же класс `census-by-own-pattern`, третий удар.
+
+- Прибор: `SvarogsDream/tools/data_census.py` — все строковые поля всех MonoBehaviour данных (UnityPy + TypeTreeGenerator), поля с именем
+  «как текст» (name, title, desc, text, buff, ifno…), против ключей наших словарей и машинного. Итог `translation/data_census.tsv`:
+  **4774 текста, вне наших словарей 2480: нигде 1849, только машинный 631.** Крупно: `m_Text` 434 (подписи префабов), описания предметов
+  295 + 156, квесты (`questDoneDescription` 142, `questDescription` 127, `questName` 109, `questFirstStepDescription` 104),
+  `CustomEffect` 128, баффы 69 + 5.
+- Квесты: в `translation/quests_en.tsv` 183, в `quests_ru.tsv` 12 (`zz_quests.txt`: 9/184). Имена — после «да» владельца (методичка).
+- Сделано: баффы — `_config/xunity/zz_krinik_buffs.txt` (~90 строк, глоссарий зелёный, выложено 2026-10-13 ≈01:01). В игре не проверено
+  (TC C60). Остальное — следующими партиями: квесты (имена — листом владельцу), подписи префабов, описания предметов, CustomEffect.
+- Фильтр по имени поля — тоже свой шаблон: поле с текстом под другим именем перепись не увидит. Следующий шаг прибора — сверка по
+  живому дереву интерфейса в игре (тексты Text/TMP на экране против словарей), когда игра будет.
+
 ## Root cause
 
 Класс `census-by-own-pattern` (EXP-0168, второй удар — баг 27): каждая выемка перечисляет текст по своему шаблону, и знаменатель
