@@ -40,7 +40,7 @@ save 21:38:42, copy `_backups/svarog-saves-2026-10-12_2138-owner-quit`; restart 
 ## 5. Found
 
 - bug 39 root cause — `Resources.FindObjectsOfTypeAll` every 0.5 s in `WaterReflection.Update` (fixed, `781b05e`).
-- `fps 20` after restart — low1% 0.8 FPS within 20 s (one long frame, ~1 s+) — not investigated.
+- `fps 20` after restart — low1% 0.8 FPS: explained 21:53 — the 10.7 s freeze at t 109.7 is `prof` removing its wraps (also 19.5 s at t 435.4; wrapping itself 4.4 s and 8.6 s; hot reloads 5.3 s and 5.5 s) — the agent's instruments, not the mods in play. After them: 0–1 spikes per minute, max 66 ms; `perf 15` 21:52:35 — 46.5 FPS, low1% 30.7, median 21.6 ms, `world=running timescale=1`.
 - Two wrong statements of the agent during the run (card is guilty; scripts do not explain the spike) — retracted in chat and by voice.
 
 ## 6. Traces
