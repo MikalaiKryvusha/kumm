@@ -12,8 +12,15 @@ Far landscape fades into a blue tint; the owner finds it not pretty.
 - KrinikCameraRework — far distance 200–300 m, fog/haze defaults.
 - Compare a frame with the mod's haze off vs on at the same spot (taste class: produce 2–3 variants of haze colour on one frame and let the owner pick).
 
+## Fix, part 1 — colour (2026-10-12)
+Cause: the haze is scene fog coloured with the sky's HORIZON colour (`Sky.cs` `Haze`, `m.Horizon`) — blue by day. New setting
+`Sky.HazeWhite` (0 — horizon colour, 1 — neutral grey of the same luminance), default 0.8. The sky's horizon veil already lerps to
+`unity_FogColor`, so no seam. Run: noon, tilt 12°, 0 / 0.5 / 0.8 / 1 — blue goes away by steps, no horizon line
+(`testcases/reports/2026-10-12_svarog-clock-weight-and-haze.md`, sheet `gallery/game/2026-10-12_дымка-белёсая/`).
+Open: second symptom (roof without haze) — not yet looked at; noticed: far tree billboards are bright green over the haze.
+
 ## Decisions made without the owner
-none yet.
+- `[AI]` Default 0.8 (not 1): a trace of the sky's tone stays, per «серость чуть-чуть» — the owner judges by the sheet.
 
 ## Frame
 `SvarogsDream/gallery/game/2026-10-11_вода-и-дымка/01 пруд в деревне, полдень, 4K.webp` — the blue-white haze behind the far forest line.
