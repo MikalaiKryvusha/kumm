@@ -99,7 +99,7 @@ SET_ADVANCED_COLOR_STATE), запись `ddagrab=output_idx=0:framerate=60` → 
 **Lesson:** **для записи SDR-игры с HDR-экрана — HDR Windows выключить скриптом до записи и включить после, сверить один кадр с `shot`; в
 F16 и делить ничего не нужно.**
 **Trigger:** запись демо или ролика с экрана этой машины. **Not for:** снимки изнутри движка (`shot`) — они верны всегда.
-mechanized: `SvarogsDream/tools/hdr.ps1`, `tools/rec_clip.sh`
+mechanized: `SvarogsDream/tools/hdr.ps1`, `SvarogsDream/tools/rec_clip.sh`
 
 ### EXP-0227 · 2026-10-12 · ❌→✅ · #svarogsdream #demo #camera #sky #icons #time
 class: scripted-shot-needs-own-camera
