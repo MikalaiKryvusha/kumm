@@ -228,7 +228,9 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 >    `testcases/reports/2026-10-12_svarog-death-big-red-button.md`, листы `SvarogsDream/gallery/game/2026-10-12_экран-смерти/кнопка/`; ждёт глаза.
 >    **Дальше — «ОК» модальных окон тем же видом** (`[OWNER]` «и кнопки в модальных диалогах ОК просятся такими же выразительными»): окна по
 >    коду — `MainMenu.exitPopUp`/`exitMainMenuScreen`/`loadGamePopUp`, `MenuEnabler.quitDialogue`/`loadGameDialogue`,
->    `MainMenuOutOfGame.newGamePopUp`; кадр окна выхода снимать из обычного мира (в Подземном Мире меню по Esc не открывается).
+>    `MainMenuOutOfGame.newGamePopUp`; кадр окна выхода снимать из обычного мира (в Подземном Мире меню по Esc не открывается). В окне выхода
+>    «Да / Нет» — голый текст без кисти; макеты А («Да» красная, «Нет» как было) · Б («Нет» серой кистью) · В (обе красные) —
+>    `SvarogsDream/gallery/game/2026-10-12_ок-модальные/0_выход_было_А_Б_В.webp`, открыт владельцу, ждёт выбора.
 > 4. ~~Пузырь реплики под колонкой меню по Esc~~ — не баг: `[OWNER]` «Меню ESC поверх всего - и это правильно» · 2026-10-12.
 >    «Перезарядка» поверх портрета — сделано 2026-10-12 09:33: полоса отношений снова внизу (`testcases/reports/2026-10-12_svarog-devotion-bar-bottom.md`).
 >    «Перезарядка: N мин» поверх портрета бога — чинить (`[OWNER]` «чинить, да» · 2026-10-12), образец контура — `Popups.cs:59–71`.
