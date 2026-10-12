@@ -26,6 +26,12 @@ Release-плеер, 4K во весь экран на «Beyo TV» (HDR Windows в
 4. 17:58–18:04 — `run-game.sh`, `hdr.ps1 off`, `rec_clip.sh ui_tour 190` + `bash tools/demo21_ui.sh 6`; `rec_clip.sh ui_items 23 …`;
    `h.sh kill`, `save-check.sh --restore`, `reg-snap.sh restore`, `hdr.ps1 on` → «hdrEnabled=True».
 
+5. 18:04–18:10 — пересъём: `run-game.sh`, `hdr.ps1 off`; карточки предметов `hover` ячейки «…/KrinikBagScroll/Viewport/Content/Slot Prefab(Clone)»
+   и «#1» → `rec_clip.sh ui_items2 20 …`; небо вживую `rec_clip.sh a15_sky_void2 11 "wait 5" "cfg … Sky Enabled true"`; ночь промоткой
+   7 часов, `mouse.ps1 -Button wheel -Clicks 12`, F9 → `rec_clip.sh a7_hero_light 10 …`; настройки вернуты (`Icons VisibleMeters 100`,
+   `Sky Enabled true`), `h.sh kill`, `save-check.sh --restore` — 7/7, `reg-snap.sh restore`, `hdr.ps1 on` — «hdrEnabled=True».
+6. 18:12 — `demo21_cut.py` второй дубль с новыми сценами 7 и 15 → `demo21_part1_v2.mp4`.
+
 ## 4. Checks
 
 Hygiene: `dotnet build src/KrinikCameraRework -c Release --no-incremental` — Build succeeded; `bash -n tools/demo21_ui.sh` — ok.
@@ -46,7 +52,10 @@ Functional run: игра в 4K на сейве владельца, каждый 
 | C10 птицы | fail |
 | C11 матовая земля вживую | fail — взята пара галереи |
 | C12 обход окон | partial — 17 окон; нет карточки навыка, предметов, подсказка обрезана |
-| C13 карточки предметов | fail |
+| C13 карточки предметов | fail — пути ячеек устарели |
+| C14 сцена 15 вживую | pass |
+| C15 карточки предметов, новый путь | pass |
+| C16 сцена 7 — свет у героя | pass |
 
 ## 5. Found
 
