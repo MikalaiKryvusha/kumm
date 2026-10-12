@@ -90,6 +90,18 @@
 
 ## Entries
 
+### EXP-0233 · 2026-10-12 · ❌→✅ · #svarogsdream #unity #ui #linear-color #alpha #popup
+class: near-opaque-alpha-in-linear-space
+**Context:** родные подсказки игры — в виде наших окон (тёмная бумага `#181916`, альфа 0.97 — «как у окон карточки»).
+**Tried / did:** сквозь окно были видны белые строки страницы под ним; дамп показывал бумагу 0.97 и группу окна 1.0 — «всё верно».
+**Result:** ❌→✅ игра в линейном цвете (`QualitySettings.activeColorSpace` = Linear): 3 % белого под тёмной бумагой в линейных значениях
+дают на экране ≈0.20 вместо 0.09 — читаемые серые буквы. Бумага 1.0 — не просвечивает.
+**Lesson:** **в Unity с линейным цветом «почти непрозрачная» тёмная подложка (0.9–0.98) над светлым текстом просвечивает заметно: окно —
+альфа 1.0; полупрозрачность — только намеренная (фон карточки 50 %).**
+**Repro:** `h.sh "call UnityEngine.QualitySettings get_activeColorSpace"`; окно с бумагой 0.97 над белыми строками — кадр.
+**Trigger:** любая подложка окна/подсказки поверх текста. **Not for:** намеренно прозрачные фоны HUD.
+mechanized: none — `PlatePaperAlpha = 1f` (Plates.cs), CardTips.cs
+
 ### EXP-0232 · 2026-10-12 · ✅ · #svarogsdream #performance #fps #presentmon #bepinex #save
 class: mod-cost-needs-clean-baseline
 **Context:** владелец: «почему fps такой низкий? давай померим с модами и без».
