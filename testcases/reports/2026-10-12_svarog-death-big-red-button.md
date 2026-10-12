@@ -31,6 +31,10 @@ from the real world (копия сейва, откат 7/7).
 | 6 | 2026-10-12 15:34 +03:00 | `h.sh "click UI/DeathStory/Story/CloseDeathScreen" "wait 8" "shot bb_continue"` | C6 pass |
 | 7 | 2026-10-12 15:34 +03:00 | `h.sh "findall Exit"`; `ilspycmd -o <scratchpad> Assembly-CSharp.dll`; `h.sh "call MainMenu ShowExitPopUp True" "shot bb_exit"` | C7 partial |
 | 8 | 2026-10-12 15:35 +03:00 | `h.sh "kill"`; `cmp` 7 файлов; копия 3 файлов из точки сверки; `bash tools/reg-snap.sh restore` | C8 pass — 7/7 |
+| 9 | 2026-10-12 15:38 +03:00 | свежий `run-game.sh`; `h.sh "die" … "call KrinikUIRework.Epitaph DumpPreview …"`; `python long_cmd.py epitaph_preview.md` (settext + `RelayoutDeath`, 4K и 720p) | C3b pass |
+| 10 | 2026-10-12 15:39 +03:00 | `h.sh "cfg krinik.svarogsdream.uirework DeathScreen Enabled False" "call ProgressManager ShowDeathScreen" "shot bc_off" "dump …"`, затем `True` + `shot bc_on2` | C5b pass |
+| 11 | 2026-10-12 15:39 +03:00 | `click UI/Enablers/MainMenu` → `…/Buttons/ExitGame` на 720p и 4K | C7b blocked — меню в Подземном Мире не открылось |
+| 12 | 2026-10-12 15:40 +03:00 | `h.sh "kill"`; 3 файла из точки сверки; `cmp` 7/7; `reg-snap.sh restore` | C8b pass |
 
 ## 4. Checks
 
@@ -39,9 +43,10 @@ Functional run: экран смерти в игре владельца на ко
 разрешениях, шрифт подписи ответом пульта (`get_font`), дамп кнопки, переход по «Продолжить».
 
 - C0 pass · C1 fail → C1b pass · C2 pass · C4 pass (событием пульта, не мышью) · C6 pass · C8 pass.
-- C3 skipped — длинная эпитафия с выросшей кнопкой не прогнана.
-- C5 skipped — контроль выключателем после горячей подкладки нечестен (метка вида игры запомнила переделанную кнопку); только свежий запуск.
-- C7 partial — перечень окон-вопросов по коду игры; кадра окна нет.
+- C3 skipped в первом заходе → C3b pass на свежем запуске (самая длинная эпитафия, 4K и 720p).
+- C5 skipped в первом заходе (горячая подкладка) → C5b pass на свежем запуске: выключено — кнопка игры по дампу один в один.
+- C7 partial — перечень окон-вопросов по коду игры; C7b blocked — в Подземном Мире меню по Esc не открывается, кадра окна нет.
+- C8b pass — после второго прогона сейв 7/7, реестр.
 
 ## 5. Found
 
@@ -59,5 +64,5 @@ Functional run: экран смерти в игре владельца на ко
 
 ## 7. Verdict
 
-partial — кнопка экрана смерти сделана по варианту 1 и проверена в игре на четырёх разрешениях, с наведением и переходом; не прогнаны
-длинная эпитафия (C3) и контроль выключателем на свежем запуске (C5); «ОК» модальных окон — только разведка по коду (C7).
+partial — кнопка экрана смерти: pass (вариант 1, четыре разрешения, наведение, переход, самая длинная эпитафия, контроль выключателем на
+свежем запуске); наведение — событием пульта, не настоящей мышью. «ОК» модальных окон — только разведка по коду (C7), кадр окна выхода — blocked.
