@@ -90,6 +90,21 @@
 
 ## Entries
 
+### EXP-0231 · 2026-10-12 · ❌→✅ · #svarogsdream #unity #performance #hitch #profiling #water
+class: periodic-full-memory-scan
+**Context:** «словно мало кадров» в пульсе карточки; журнал мода — рывок ~100 мс ровно дважды в секунду с 11:16 весь день (баг 39).
+**Tried / did:** выключал по одному (карточка, отражение) — без толку; `prof` — прочёл среднее 3.86 мс/кадр как «скрипт не виноват»; GC,
+OBS, загрузка ЦП — мимо. Решили два шага: `targetFrameRate 30` (рывок по ЧАСАМ, не по кадрам) и поиск ритма по сохранённым журналам
+(первый прогон с ритмом = правка воды).
+**Result:** ✅ `Resources.FindObjectsOfTypeAll` раз в 0.5 с в `WaterReflection.Update`, ДО проверки выключателя → список через патч
+`OnEnable`; 101–131 рывка в минуту → 1–3.
+**Lesson:** **периодический рывок: (1) среднее `prof` × кадров в периоде = длина рывка — 3.86 мс × 20 = 77 мс, это ОН; (2) сменить частоту
+кадров — рывок по времени или по кадрам; (3) первый журнал с ритмом называет правку. `FindObjectsOfTypeAll` — только разово, никогда в
+такте: объекты, что появляются, ловить их `OnEnable`.**
+**Repro:** `h.sh "prof 10 20"`; `h.sh "call UnityEngine.Application set_targetFrameRate 30" "wait 12" "call UnityEngine.Application set_targetFrameRate 144"` + счёт `event: spike` по 10 с.
+**Trigger:** рывки с ровным ритмом; любой код с `FindObjectsOfTypeAll` в Update/таймере. **Not for:** разовые поиски при старте и открытии окна.
+mechanized: none — TWINS-проверка в `bugs/39_*`
+
 ### EXP-0230 · 2026-10-12 · ❌→✅ · #svarogsdream #xunity #tooltip #ui #linespacing
 class: wrong-model-of-the-frame
 **Context:** перекраска цветов в подсказке состояния (`UIBuffTooltip`) — второй записью `text` после мгновенного перевода.

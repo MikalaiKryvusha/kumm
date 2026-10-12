@@ -1,6 +1,6 @@
 # Bug 39 — Svarog's Dream: a ~100 ms frame hitch twice per second, through the whole session
 
-**Status:** 🔴 OPEN
+**Status:** 🔧 fixed 2026-10-12 21:39 (restart with the fix), measured in the owner's save — awaiting the owner's eye on the stream
 **Severity:** S2 — every animation in the owner's game looks torn ("словно мало кадров"); found while fixing the hero-card pulse
 **When/context:** 2026-10-12 21:24, found by the agent in the log of the owner's own session (game launched by the agent 20:38,
 the owner played on), while checking the hero-card pulse the owner called torn: `[OWNER]` «анимации пульсации рваниые получились,
@@ -33,9 +33,30 @@ rate is `2026-10-12_water_reflection.log` — 126 in 95 s (1.3/s), the run with 
    off vs on.
 3. Windows throttling of a background window — measure with the game focused vs behind another window.
 
-## Fix plan
-Measure the three switches one at a time (`perf 8` + spike count per 60 s), then profile the spike frame of the guilty one.
-Test case: `testcases/TC_svarog_hero_card_2026-10-12.md`, C31.
+## Measurements 2026-10-12 21:27–21:44 (owner: `[OWNER]` «Комп твой? Игра твоя - тестируй? Меряй!» · OBS stream running, «ты наш ОБС не убивай плиз»)
+1. Hero card off 60 s — 20 spikes per 10 s, unchanged (my first count "22 in 36 s" read an unflushed log — retracted in chat and by voice).
+2. `Water Reflections False` 40 s — 20 per 10 s, unchanged.
+3. `prof 10 20` — `KrinikColorRework.WaterReflection.Update` **3.855 ms/frame** on average, first line. I first read it as "no script
+   explains a 100 ms spike" — wrong: 3.86 ms × 20 frames = 77 ms once per 0.5 s. Retracted in chat and by voice.
+4. GC: `GC.CollectionCount(0)` 316 → 316 over 10 s — not GC. CPU: OBS 4 % of the machine — not contention.
+5. OBS off 21:11:45–21:20:52 (its log) — spikes 101–119 per minute, unchanged → not OBS.
+6. `targetFrameRate` 30 for 12 s — spikes every 13–14 frames instead of 20, still every 0.50 s → **time-driven**, not frame-driven.
+7. Saved logs: the 0.5 s rhythm first appears in `_harness/logs/2026-10-12_water_reflection.log` (11:16), absent at 10:54.
+
+## Root cause
+`WaterReflection.Update` (`SvarogsDream/src/KrinikColorRework/WaterReflection.cs`, commit `c239442`/`47eb465`, idea 13) ran
+`Resources.FindObjectsOfTypeAll<LuxWater_PlanarReflection>()` every `CheckSeconds = 0.5f` — a walk over every loaded object incl.
+assets (~800 MB managed heap) — **before** looking at the `Reflections` switch, so turning the reflection off did not stop it.
+
+## Fix
+Planes register themselves: Harmony postfix on `LuxWater_PlanarReflection.OnEnable` adds to `WaterReflection.Known`; one full walk only on
+the first tick (hot reload into a live world). Twin `WaterProbe.Scan` (`ScanSeconds = 2`, only when the probe is on) reads the same list.
+After restart in the owner's save (21:39): `prof 10 8` — `WaterReflection.Update` no longer in the top 8 (scripts 2.99 ms/frame, was
+6.76); spikes 1–3 per minute (was 101–131), loading and two hot reloads excluded. Reflection still applied (`planes 4 → 5` in the log).
+
+TWINS: searched `FindObjectsOfTypeAll` inside periodic code of all mods (`grep -B3` for Update/Tick/Seconds) — found 1 other periodic
+site: `KrinikCameraRework/Plugin.cs` near `DrawDistanceRefreshSeconds = 1f` (line 56) — to check next; the rest run once (startup,
+window open). Test case: `testcases/TC_svarog_hero_card_2026-10-12.md`, C31–C32.
 
 ## Decisions made without the owner
 (filled at closing)
