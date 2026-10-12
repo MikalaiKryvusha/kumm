@@ -12,9 +12,10 @@ Far trees (Unity tree billboards beyond `TreeMeshDistance = 300`) are crisp, not
 - Log: `billboard fog on: 24 materials, held 24` once after load (line 195) — no later event.
 - Pult `mats BillboardTree` 21:58: **38 materials, all `Hidden/TerrainEngine/BillboardTree`, ours (`Krinik/TerrainEngine/BillboardTree`) 0** —
   the 24 swapped materials are gone (destroyed), new ones are on the game shader.
-- `BillboardFog.Update` rescans only when the terrain SET changes (`TerrainKey`) or the setting flips. Unity rebuilds the billboard
-  materials when tree settings of a terrain change (the camera mod sets tree/billboard distances after load) — same terrains, new
-  materials, no rescan.
+- `BillboardFog.Update` rescans only when the terrain SET changes (`TerrainKey`) or the setting flips. The game/Unity rebuilt the
+  billboard materials with the same terrains — new materials, no rescan. What triggers the rebuild is NOT known: the first guess
+  («the camera mod sets tree distances») was refuted 22:02 — `TreeMeshDistance` 300→250→300 live left all 38 materials ours, no rebuild.
+  Seen: two rebuilds during load (22:01).
 
 ## Root cause
 The trigger of the rescan watched the wrong event: the set of terrains, not the materials themselves.
@@ -25,7 +26,7 @@ Every `CheckSeconds` (2 s) — check only OUR held materials (tens): one destroy
 (detail grass materials are created by Unity too) — same guard. Other material swappers (`RoofFog`, `FoliageFog`, `NightParticles`)
 change asset materials the game does not recreate — not twins (to confirm by the same `mats` count after a settings change).
 
-## Check (testcases/TC_svarog_hero_card_2026-10-12.md, C36)
+## Check (testcases/TC_svarog_hero_card_2026-10-12.md, C36) — the live-setting step below did not reproduce the rebuild (22:02)
 After restart: `mats BillboardTree` — ours > 0, game 0; then change `TreeMeshDistance` on the fly (`cfg … camerarework DrawDistance
 TreeMeshDistance 250`, back to 300) → log `billboard fog: materials recreated … rescan`, `mats` again — ours > 0, game 0; frame of a far
 forest — hazed.
