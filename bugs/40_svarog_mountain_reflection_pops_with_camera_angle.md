@@ -1,6 +1,8 @@
 # Bug 40 — Svarog's Dream: the mountains' reflection in the water disappears and reappears as the camera angle changes
 
-**Status:** 🔴 OPEN
+**Status:** 🔧 decided and built — owner 2026-10-13: «НЕТ, ЭТО НЕПРИЕМЛЕМО!!! Ну НЕЛЬЗЯ НАМ ГРУЗИТЬ ГЛАВНЫЙ ПОТОК» (on the +4.4 ms fork):
+screen reflection (SSPR) on by default (SvarogsDream `604d734`), the Lux camera renders sky only; «near» measured from the hero (`3d2e898`).
+Awaiting the in-game check (TC C56, C62) and the owner's eye.
 **Severity:** S2 — a visible seam in the owner's view (water reflection flickers in and out while he turns the camera)
 **When/context:** 2026-10-12 21:56, tossed by the owner mid-task (the agent was cataloguing HUD texts): `[OWNER]` «и огражение горы в воде
 пропадает-появляется при изменеиии угла камеры» · 2026-10-12. Live game since 21:39, build `781b05e` (WaterReflection: Ground layer, bare

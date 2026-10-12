@@ -23,6 +23,11 @@
 плюсом: `active UI/ActionBar/ActionBarMain/Action+Bar/Main+Slot+Groups 0`, с 2026-10-12 23:54 — кавычки команда пульта не понимает) · клик по миру — `tools/mouse.ps1 -X -Y -Button left|right|wheel` (правая — разговор, wheel `-Clicks ±N` — приближение камеры) · ходьба героя — `tools/keys.ps1 -Key W -Ms 1500` (W/A/S/D, скан-кодом; клавиши окон — из настроек владельца: сумка на Tab, не на I по умолчанию) · `tools/deploy-hot.sh
 KrinikUIRework` (RELOADED) · кадр — `shot` пишет JPEG, `h.sh` сам переводит в WebP 90 (PNG — никогда, канон
 `AGENT_GUIDE.md`) · сличение с макетом — только `tools/shoot_mockup.mjs` + `tools/pair.py` (целые окна, одно разрешение)
+· материал на лету — `matset <шейдер|материал> <свойство> <x [y z w]>` / `matreset`; камера ближе-дальше — `fieldon Camera CameraFollow
+targetZoom <40…240>`; часы мира — `callon Managers/StandardManagers/WorldTimeManager WorldTime IncreaseTimeByOneHour True` (часы игры идут
+час за минуту; копия сейва до) · ролики — `tools/water_clips.sh`, `tools/water_cycle.sh`, заставки `tools/reel_cards.py` (запись берёт весь
+экран ТВ — ничего не открывать на нём во время записи) · перепись непереведённого — код `tools/text_census.py`, данные игры
+`tools/data_census.py` (баффы, эффекты, квесты, подписи префабов)
 · после опытов игру ЗАКРЫВАТЬ (`[OWNER]` «уже закрывай игру после опытов, и голосом говори» · 2026-10-10 ≈19:05 — отменяет «держи
 игру открытой для музыки» того же дня; память `svarog-game-left-open-for-music`): `h.sh kill` (без записи сейва), сверка сейва с копией,
 откат при разнице; часы на время опыта — на паузу (выход из меню пишет сейв; копия сейвов — `D:\work\ai_sandbox\_backups`) · наведение мыши — `cursorinfo` (ручка курсора системы, камера до героя), окно
