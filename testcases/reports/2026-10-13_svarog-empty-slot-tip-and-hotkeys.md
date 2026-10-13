@@ -23,6 +23,8 @@
 | 3 | 2026-10-13 19:51 +03:00 | `bash tools/deploy-hot.sh KrinikUIRework` · наведение на пустую и полную · `h.sh "dump UI/ActionBar"` | кегль совпал; подписи белые ExtraBold |
 | 4 | 2026-10-13 19:52 +03:00 | `tools/mouse.ps1 -X 1560 -Y 2080 -Button right` (дважды) | окно выбора открыто, подсказка погасла; закрыто вторым щелчком |
 | 5 | 2026-10-13 19:54 +03:00 | ESC → «Графика» → `tools/mouse.ps1 -X 1014 -Y 813 -Button move` · `h.sh "shot e4c_7"` | подсказка «?» с переносом — рамка по тексту |
+| 6 | 2026-10-13 20:00 +03:00 | `bash tools/run-game.sh` · `tools/mouse.ps1 -X 1560 -Y 2080 -Button right` · `h.sh "shot e5b_1"` | окно выбора: бумага, кольцо, высота 325 → 105; серые плашки и полоса прокрутки остались |
+| 7 | 2026-10-13 20:01 +03:00 | `bash tools/deploy-hot.sh KrinikUIRework` · правый щелчок · `tools/mouse.ps1 -X 1530 -Y 1981 -Button move`, затем `-Button left` | E20 pass: плашек и полосы нет, строка светлеет, навык назначен, окно закрылось |
 
 ## 4. Checks
 
