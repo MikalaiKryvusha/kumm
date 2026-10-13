@@ -79,6 +79,7 @@ krinik_portraits/ · krinik_cfxr_cyr.png/.txt · krinik_skill_up.wav ← наш�
 | `python tools/to_webp.py <файлы>` | картинки в WebP |
 | `powershell -File tools/hdr.ps1 on\|off` | HDR телевизора |
 | `python -I tools/cfg_diff.py "<игра>/BepInEx/config"` | настройки модов, где значение ≠ умолчанию кода: смену умолчания BepInEx до файла владельца не доносит (`Sunset` 2026-10-13) |
+| `h.sh "call KrinikCameraRework.Plugin SunGlintSpot 3"` → `h.sh "teleport x,y,z"` → `h.sh "call KrinikCameraRework.Plugin TestFaceSun <высота> 0"` | кадр «солнце в воде»: герой на берегу, вода между ним и солнцем, камера на солнце (2026-10-13, E37) |
 | `bash tools/h.sh "shot <имя>"` против `tools/light_capture.sh` | цвет неба — только снимком `shot`: запись ffmpeg с HDR-экрана пересвечивает небо добела (2026-10-13, E25) |
 
 ## 5. Чужое на диске рядом
