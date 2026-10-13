@@ -90,6 +90,12 @@
 
 ## Entries
 
+### EXP-0243 · 2026-10-13 · ❌→✅ · #svarogsdream #translation #twins #xunity
+class: twins-missed
+**Lesson:** близнецов отвергнутого владельцем слова искать ОСНОВОЙ, а не формой: grep «жрец» не взял «жреческое облачение» — оно нашлось
+только при правке соседней строки по замечанию владельца; искать «жре», «стряп», «корчм». И имя квеста делит ключ XUnity с предметом/местом («Yarilo's Shield», «Horde Tunnels») —
+`quests_xunity.py` теперь пропускает одинаковый перевод и останавливается на разном. mechanized: `SvarogsDream/tools/quests_xunity.py` (спор ключей)
+
 ### EXP-0242 · 2026-10-13 · ❌ · #svarogsdream #translation #git #claim
 class: claim-before-evidence
 **Lesson:** выкладка и коммит в одной команде через `;` — коммит уходит при красной выкладке, а его сообщение заявляет «выход 0» (f326bed, поправлено
