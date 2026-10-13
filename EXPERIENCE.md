@@ -90,6 +90,11 @@
 
 ## Entries
 
+### EXP-0242 · 2026-10-13 · ❌ · #svarogsdream #translation #git #claim
+class: claim-before-evidence
+**Lesson:** выкладка и коммит в одной команде через `;` — коммит уходит при красной выкладке, а его сообщение заявляет «выход 0» (f326bed, поправлено
+в 3a664bf). Коммит — через `&&` после выкладки, сообщение пишется ПОСЛЕ прочитанного вывода. mechanized: none
+
 ### EXP-0241 · 2026-10-13 · ❌→✅ · #svarogsdream #ui #colors #effect-tags #lift
 class: twins-missed
 **Context:** покраска имени черты по знаку (`TalentSignColor`, `WorseColor` #FF7061) в подсказке окна персонажа.
