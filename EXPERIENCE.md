@@ -90,6 +90,36 @@
 
 ## Entries
 
+### EXP-0239 · 2026-10-13 · ❌ · #svarogsdream #harness #hotreload #verification
+class: stale-stand
+**Context:** горячая выкладка KrinikUIRework (deploy-hot) после правок подсказок баффа и веса шрифта.
+**Tried / did:** проверял правку на той же игре сразу после RELOADED.
+**Result:** ❌ на объектах оставались компоненты и метки ПРОШЛОЙ сборки: два `KrinikBuffTipLock` на одном тексте (старый красил жёлтый в серый), Gabriela-метки, ExtraBold — правка выглядела «не работающей» или «работающей» не по своей вине.
+**Lesson:** **вердикт по правке, которая вешает компоненты или метки на объекты игры, — только после перезапуска игры; горячая выкладка — для быстрых проб, не для pass.**
+**Repro:** `bash tools/h.sh "dump <путь текста> 1"` — два одноимённых компонента `<Krinik…>` на объекте = следы прошлой сборки.
+**Trigger:** pass/fail по C-кейсу после deploy-hot. **Not for:** правки без компонентов (константы, цвета, раскладка за один вызов).
+mechanized: none — кейсы C65/C66/C68/C69/C77 закрыты после перезапуска
+
+### EXP-0238 · 2026-10-13 · ❌→✅ · #svarogsdream #harness #input #ui
+class: proxy-path-blocked
+**Context:** «Альманах» → «Боги»: переключать богов пультом `click UI/…/OldGods/OldGod5`.
+**Tried / did:** пульт отвечал «click … at (x,y)», а страница оставалась «Сварог» на все 11 щелчков (замер прямоугольников одинаковый).
+**Result:** ❌→✅ у кнопок богов свой обработчик (OldGodEnum + Button), событие пульта до него не доходит; настоящая мышь (`tools/mouse.ps1 -Button left`) переключает.
+**Lesson:** **«click … at» пульта — не доказательство нажатия: после щелчка проверять, что состояние сменилось (имя на странице, `dump`); не сменилось — настоящей мышью.**
+**Repro:** `bash tools/h.sh "click UI/InfoPanel/AlmanacPanel/AlamancContent/OldGods/OldGod3" "dump …/Content 1"` — GodName тот же.
+**Trigger:** любой прогон со щелчками пульта по спискам и кнопкам. **Not for:** вкладки окон (MapHeader, LogsHeader) — их пульт нажимает.
+mechanized: none
+
+### EXP-0237 · 2026-10-13 · ❌→✅ · #svarogsdream #unity #ui #linear-color #alpha #owner-eye
+class: near-opaque-alpha-in-linear-space
+**Context:** тонировка экрана под сумкой и карточки героя по процентам владельца («50 %», «30 мало»).
+**Tried / did:** чёрный слой с альфой = проценту.
+**Result:** ❌→✅ игра в линейном цвете: слой 0.5 темнил мир на глаз лишь ×0.77 (90 → 69) — «30 мало» было правдой; альфа 1 − (1 − p)^2.2 дала ×0.47 при 50 %. Владелец: «ого, стало сильнее» — затем подобрал 30 / 10 уже честными процентами («хорошо»).
+**Lesson:** **процент затемнения/прозрачности, названный человеком, — это процент НА ГЛАЗ: в линейном цвете слой переводить формулой (Seen), иначе владелец подбирает числа вслепую.**
+**Repro:** `h.sh "call UnityEngine.QualitySettings get_activeColorSpace"`; средняя яркость мира до/после открытия сумки — ×(1 − p).
+**Trigger:** любой слой-тонировка, прозрачность по проценту владельца. **Not for:** множитель цвета вершин (CanvasRenderer.SetColor) — его Unity переводит сам.
+mechanized: `KrinikCardDim.Seen()` (SvarogsDream/src/KrinikUIRework/HeroCard.cs)
+
 ### EXP-0236 · 2026-10-13 · ❌→✅ · #svarogsdream #translation #census #xunity #unitypy
 class: census-by-own-pattern
 **Context:** владелец: «Промокший не переведено» · «значит есть ещё не переведённые строки». Ключ `Wet=Промокший` был, перепись кода молчала.
