@@ -90,6 +90,15 @@
 
 ## Entries
 
+### EXP-0254 · 2026-10-13 · ❌→✅ · #svarogsdream #unity #performance #mainthread #owner-game
+class: per-frame-scene-search
+**Lesson:** «одноразовая» заплатка (подписи «Золото/Вес» после горячей перезагрузки) искала окно статов `FindObjectOfType` в КАЖДОМ
+кадре, пока окно не создано — то есть до первого открытия сумки: 44–48 мс кадра, FPS 77 → 14 в игре владельца («ты видишь. что
+плохо?»). Нашлось за две минуты: `prof 3` (метод мода 45.75 мс) → секундомеры частей `LateUpdate` («late parts» в журнале) → `purse`.
+Правило: поиск по сцене (`FindObjectOfType`, `GameObject.Find`, `Resources.FindObjectsOfTypeAll`) в Update/LateUpdate — только с
+дросселем по времени и пределом попыток; после КАЖДОЙ выкладки — `perf 4` и сравнение FPS с прошлым (rest check меряет сдвиги
+интерфейса, не время). mechanized: строка «late parts» в журнале мода (секундомеры LateUpdate) — кандидат: порог в `deploy-hot.sh`
+
 ### EXP-0253 · 2026-10-13 · ❌ · #svarogsdream #unity #hotreload #memory #crash #owner-game
 class: hot-reload-leak
 **Lesson:** горячая перезагрузка мода (ScriptEngine) — это выгрузка старой копии и загрузка новой; всё нативное, что копия создала сама
