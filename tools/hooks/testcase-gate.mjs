@@ -70,7 +70,9 @@ RUNS.push(new RegExp(String.raw`(?:^|[;&|(]\s*|-f(?:ile)?(?:\s+|\s*["']\s*,\s*))
 // следующий прогон, 2026-10-06 22:08).
 // v2.4 (2026-10-09): подслучаи с буквой — C6b, C6c, K2a: v2.3 их не видел вовсе — новые строки «C6b … [NOT-TESTED]» не меняли
 // отпечаток, хук отказал прогону как «итоги не записаны», агент переименовал строки в C7, C8 (TC_svarog_two_help 2026-10-09 14:26).
-const CASE_ROW = /^\|\s*[CK]\d+[a-z]?\s*\|.*$/gm;
+// v2.5 (2026-10-13): любая заглавная буква, а не только C и K — случаи L1–L5 листа советов загрузки хук не видел вовсе: их итоги
+// не меняли отпечаток, и прогон отказывался «итоги не записаны» при записанных итогах.
+const CASE_ROW = /^\|\s*[A-Z]\d+[a-z]?\s*\|.*$/gm;
 // Статус — последняя непустая ячейка строки случая: «[NOT-TESTED]», «fail — …» ждут прогона; «pass — …», «blocked», «skipped» — нет.
 const statusOf = (row) => { const cells = row.split('|').map((c) => c.trim()).filter(Boolean); return cells[cells.length - 1] || ''; };
 const waiting = (row) => { const s = statusOf(row); return /\[NOT-TESTED\]/.test(s) || /^fail\b/i.test(s); };
