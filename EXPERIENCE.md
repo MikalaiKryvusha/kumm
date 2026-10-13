@@ -90,6 +90,15 @@
 
 ## Entries
 
+### EXP-0250 · 2026-10-13 · ❌→✅ · #svarogsdream #sky #config #bepinex #capture #hdr
+class: stale-config-default
+**Lesson:** «ядовито-розовое небо» прошлый чат свалил на модель солнца, потом на «камеру горизонтально на солнце» — оба вывода неверны.
+Сличение со сборкой до правок показало то же небо: в конфиге владельца жил `Sunset = Alternate` — первое умолчание, которое код
+сменил на `Season`, а BepInEx хранит записанное значение и новое умолчание не доносит. Второе: «белое небо» — пересвет записи ffmpeg
+с HDR-экрана; снимок изнутри игры (`shot`) был цветным. Странный вид → сначала сличить с прошлой сборкой и прочесть конфиг
+(`cfg_diff.py`), цвет судить снимком `shot`, а не записью экрана. mechanized: `SvarogsDream/tools/cfg_diff.py`; строка в
+`games/SvarogsDream/GAME_STRUCTURE_EXTERNAL_MAP.md`
+
 ### EXP-0249 · 2026-10-13 · ❌→✅ · #svarogsdream #ui #owner-words #tooltip #scale
 class: taste-remark-read-as-removal
 **Lesson:** «в пустых некрасиво» о подсказке пустой ячейки я прочёл как «не нужна» и снял её (E4 «pass»); владелец: «Ты её убрал
