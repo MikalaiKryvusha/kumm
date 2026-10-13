@@ -1381,6 +1381,15 @@ matching it matters more than any rule below.
 3. The guard: `tools/hooks/no-permission-question.mjs` (Stop hook, Tools table) refuses to stop on such a last line; self-test
    `node tools/test-guards.mjs`, part H.
 
+**Every game we mod has two maps, like KAIF's own pair** (owner's word 2026-10-13: `[OWNER]` «как внешняя и внутренняя карты
+KAIF, только подробный, по каждой игре, которую мы модифицируем» · «он нужен, чтобы не изучать игру каждый раз по-новому»). The steps:
+
+1. In the game's dossier `games/<Game>/` keep `GAME_STRUCTURE_EXTERNAL_MAP.md` (install tree, saves, registry, logs, our mods and
+   tools — where things live) and `GAME_ARCHITECTURE_INTERNAL_MAP.md` (classes by area, mechanics with numbers and `File:line`, where
+   our mods hook in). Model: `games/SvarogsDream/`.
+2. Before decompiling or probing the game, read both maps; whatever the probe finds goes into them in the same move.
+3. A game without the pair gets it the first time we work on it.
+
 From this project's owner (recorded 2026-08-15, at the KAIF deployment):
 
 - **Working language is Russian.** Chat, `GOAL.md`, `README.md`, `KAIF_FRAMEWORK.md` and the directory

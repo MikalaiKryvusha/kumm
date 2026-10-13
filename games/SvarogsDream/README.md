@@ -1,7 +1,9 @@
 # Svarog's Dream — досье
 
 > Своя сборка на BepInEx: `D:\work\ai_sandbox\SvarogsDream` (репозиторий `svarogs-dream-modpack`), игра
-> `D:\Games\Svarog's Dream`. Что сейчас в работе — `STATUS.md`, пункты 0а и 0. Как устроены ИИ и живой мир игры —
+> `D:\Games\Svarog's Dream`. **Две карты игры — первыми:** что где лежит — `GAME_STRUCTURE_EXTERNAL_MAP.md`, как игра устроена
+> внутри (классы, механики с числами, куда влезают наши моды) — `GAME_ARCHITECTURE_INTERNAL_MAP.md`; нашёл новое — дописать туда.
+> Что сейчас в работе — `STATUS.md`, пункты 0а и 0. Как устроены ИИ и живой мир игры —
 > `researches/svarogs-dream/simulation.md`; прокачка выше 100 и формулы — `researches/svarogs-dream/progression-uncap.md`.
 >
 > **Чужих модов нет — всё своё.** Мастерской Steam у игры нет (в категориях магазина app 2004640 нет «Steam Workshop», проверено
