@@ -54,7 +54,7 @@
 > measured (origin issue #69) — replace and grow it with your project's own classes.
 >
 > <!-- classes: question-already-answered, guard-not-proven-against-threat, shown-as-link,
->      claim-before-evidence, owner-decision-not-applied, text-in-agents-world,
+>      claim-before-evidence, owner-decision-not-applied, text-in-agents-world, parallel-curves-drift, postfix-overwrite,
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
 >      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run,
      census-by-own-pattern, hook-after-event, mod-breaks-game-flow, demo-voice-ahead-of-frame, wrong-model-of-the-cost,
@@ -96,7 +96,7 @@ class: parallel-curves-drift
 свет раньше диска, диск стоит в 5:30, звёзды при солнце) и вскрывало следующую. Лечит одна причина на всё: высота солнца по настоящей
 формуле (разведка `researches/svarogs-dream/sky-optics-dawn-dusk.md`), подогнанная под день игры, — от неё пороги (звёзды −12…−2°,
 прямой свет от 0°, переброс света в тёмном окне −6…0°), закат зеркалит рассвет сам. Сначала разведка предмета, потом код — не наоборот.
-mechanized: `SunModel.cs` (одно место); замер `tools/light_capture.sh` + `light_lum.py` (шаги яркости за 0,5 с)
+mechanized: `SvarogsDream/src/KrinikColorRework/SunModel.cs` (одно место); замер `SvarogsDream/tools/light_capture.sh` + `SvarogsDream/tools/light_lum.py` (шаги яркости за 0,5 с)
 
 ### EXP-0247 · 2026-10-13 · ❌→✅ · #svarogsdream #harmony #patch-order #light
 class: postfix-overwrite
