@@ -90,6 +90,28 @@
 
 ## Entries
 
+### EXP-0241 · 2026-10-13 · ❌→✅ · #svarogsdream #ui #colors #effect-tags #lift
+class: twins-missed
+**Context:** покраска имени черты по знаку (`TalentSignColor`, `WorseColor` #FF7061) в подсказке окна персонажа.
+**Tried / did:** поставил цвет в Postfix; цвет не держался — переставил покраску внутрь `Style` «после подъёма» по догадке.
+**Result:** ❌ дважды (1.00, 0.29, 0.29) = `#FF4A4A`: общий проход `Letters.Lift` по TMP окна переводит ЛЮБОЙ насыщенный красный в красный автора
+(рулбук §6а п. 5). Нашёл строкой журнала `talent tip: … was=…` и сверкой числа с палитрой. ✅ метка `KrinikSignColor`, проход её пропускает.
+**Lesson:** **цвет по смыслу ставится поверх окна, где работают «нормализаторы» цвета: число в `dump` сверять с палитрой (`AuthorRed`, `Readable`),
+и тексту, покрашенному смыслом, — метку, которую нормализаторы пропускают.** Догадку о виновнике проверять журналом, а не второй правкой.
+**Trigger:** покраска текста внутри окна персонажа, писем, «Помощи» (Letters), в подсказках со `Style`. **Not for:** наши собственные окна без подъёма.
+mechanized: `KrinikSignColor` (src/KrinikUIRework/EffectTags.cs) — пропуск в `Letters` по TMP
+
+### EXP-0240 · 2026-10-13 · ❌→✅ · #svarogsdream #xunity #translation #buffs #instant-translate
+class: census-by-own-pattern
+**Context:** строки состояний «+Take damage over time.», «-Taking damage over time.» шли по-английски, хотя ключи без знака в `zz_krinik_buffs.txt` есть.
+**Tried / did:** правило `sr:"^\+([A-Z][^\n]*)$"=+$1` в словаре.
+**Result:** ❌ не сработало: XUnity ищет подсказку состояния ЦЕЛИКОМ, с тегами `<color>` и `\n` (ключ «Истощения» в `zz_krinik_terms.txt` — весь текст),
+а по строкам режет наш `InstantText`, который `sr:` не читает. ✅ знак автора отделяет `InstantTranslate.ItLookup` (как пробелы по краям).
+**Lesson:** **прежде чем писать правило словаря, найти, КТО переводит этот текст и каким ключом: живой ключ соседней переведённой строки (grep её
+английского по `_config/xunity`) показывает форму ключа.**
+**Trigger:** строка в подсказке осталась английской при ключе в словаре. **Not for:** тексты, которые XUnity видит без тегов.
+mechanized: none — ветка знака в `ItLookup`; кейс C22 `testcases/TC_svarog_colour_tags_2026-10-13.md`
+
 ### EXP-0239 · 2026-10-13 · ❌ · #svarogsdream #harness #hotreload #verification
 class: stale-stand
 **Context:** горячая выкладка KrinikUIRework (deploy-hot) после правок подсказок баффа и веса шрифта.

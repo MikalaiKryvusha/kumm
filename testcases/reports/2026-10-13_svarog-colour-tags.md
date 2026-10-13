@@ -28,6 +28,8 @@
 | 1 | 2026-10-13 11:04 +03:00 | `bash tools/run-game.sh`; `bash tools/h.sh "give 274" … "hover …Slot+Prefab(Clone)#10" … "call BuffsManager ActivateBuffForTime Bleeding 90"` | 0 · окно предмета и карточка — по цвету; состояния со знаком — по-английски |
 | 2 | 2026-10-13 11:10 +03:00 | `bash tools/run-game.sh` (после `translation_deploy.sh` с `sr:`); 11:13 `bash tools/deploy-hot.sh KrinikUIRework` | 0 · `sr:` не сработал; после правки ItLookup (RELOADED) — по-русски и по цвету |
 | 3 | 2026-10-13 11:15 +03:00 | `bash tools/h.sh kill`; `bash tools/translation_deploy.sh`; `bash tools/run-game.sh`; наведения на 7 иконок | 0 · после перезапуска — всё по-русски и по цвету |
+| 4 | 2026-10-13 11:20 +03:00 | `bash tools/run-game.sh`; `bash tools/h.sh "click UI/Enablers/CharacterPanel" "hover …ListOfTalents/Talent(Clone)#1"`; `bash tools/deploy-hot.sh KrinikUIRework` ×3 | 0 · подсказка черты: плохие — #FF4A4A вместо #FF7061 (Letters.Lift), после правки меткой — по правилу |
+| 5 | 2026-10-13 11:27 +03:00 | `bash tools/h.sh kill`; `bash tools/run-game.sh`; те же наведения | 0 · после перезапуска — по правилу |
 
 ## 4. Checks
 
@@ -38,6 +40,7 @@ Functional run: игра запущена трижды на сейве влад�
 - C1–C5, C8, C9, C11, C12, C14–C16 — pass (цвета `#5CF266` / `#E8C66A` / `#FF7061` / нейтральный `#79b2ff` по `dump`).
 - C13, C17, C22 — pass после перезапуска (прогон 3); C21 (`sr:`) — fail, снят и заменён C22.
 - C18 (пульс контура 7 с) и C19 (пульс цифр 3 с) — pass по серии кадров; C20 (стрелка −20 %) — partial: стрелка не в дереве интерфейса.
+- C23 (подсказка черты) — pass после перезапуска (прогон 5): позитив #5CF266, плохая #FF7061, описание не тронуто.
 - C6 — blocked (нет предмета кузни CursedItems), C7, C10 — skipped (нет сапог с бонусом хода, нет перевеса).
 
 ## 5. Found
@@ -46,6 +49,8 @@ Functional run: игра запущена трижды на сейве влад�
   ключи словаря баффов без знака, XUnity ищет подсказку целиком, а мгновенный перевод мода знак не отделял. Починено в
   `InstantTranslate.ItLookup` (баг KUMM 28, класс census-by-own-pattern: данные есть, ключ другой формы).
 - Правило `sr:` в словаре для этих строк бесполезно (XUnity видит текст с тегами, загрузчик мода `sr:` не читает) — снято.
+- Общий подъём цветов окна персонажа (`Letters.Lift` по TMP) переводил наш коралловый «хуже» в красный автора #FF4A4A —
+  перекрывал покраску по знаку. Починено меткой `KrinikSignColor` (проход её пропускает).
 - «Проклятое Кольцо» (546) — кузня «Кольца Силы», не CursedItems: имя предмета не говорит о кузне.
 
 ## 6. Traces
