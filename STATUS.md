@@ -192,8 +192,9 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
    Слэш в аргументе `sed`/`echo` хук не видит (строка GAP в самом хуке): такие вставки сверять глазом сразу.
 ## Open bugs
 
-Файлов без метки DONE — 14 (2026-10-13 09:36: + 42):
+Файлов без метки DONE — 15 (2026-10-13 12:13: + 43):
 
+- 🔴 `bugs/43_svarog_floating_heal_numbers_wrong_glyphs.md` — «+10» сытости и «+5» маны над героем рисуются чужими знаками (CFXR-атлас?).
 - 🔴 `bugs/42_svarog_skill_tip_title_white_then_red.md` — заголовок поп-апа навыка ≈0.5 с белый, потом красный (переход с навыка на навык); причина не найдена.
 
 - 🔧 `bugs/39_svarog_frame_hitch_twice_per_second.md` — рывок раз в 0.5 с от мода воды; починено и измерено 21:39–21:44, ждёт глаза владельца.
