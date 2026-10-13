@@ -30,6 +30,8 @@
 | 3 | 2026-10-13 11:15 +03:00 | `bash tools/h.sh kill`; `bash tools/translation_deploy.sh`; `bash tools/run-game.sh`; наведения на 7 иконок | 0 · после перезапуска — всё по-русски и по цвету |
 | 4 | 2026-10-13 11:20 +03:00 | `bash tools/run-game.sh`; `bash tools/h.sh "click UI/Enablers/CharacterPanel" "hover …ListOfTalents/Talent(Clone)#1"`; `bash tools/deploy-hot.sh KrinikUIRework` ×3 | 0 · подсказка черты: плохие — #FF4A4A вместо #FF7061 (Letters.Lift), после правки меткой — по правилу |
 | 5 | 2026-10-13 11:27 +03:00 | `bash tools/h.sh kill`; `bash tools/run-game.sh`; те же наведения | 0 · после перезапуска — по правилу |
+| 6 | 2026-10-13 11:31 +03:00 | `bash tools/run-game.sh`; `bash tools/h.sh "click …DevotionHeader" "click …Gods/God+(N)"` | 0 · «Преданность»: 4 жёлтым, 6 зелёным, 5 белым; журнал спамил |
+| 7 | 2026-10-13 11:34 +03:00 | `bash tools/h.sh kill`; `bash tools/run-game.sh`; три бога | 0 · после перезапуска — то же, журнал по строке на смену |
 
 ## 4. Checks
 
@@ -41,6 +43,7 @@ Functional run: игра запущена трижды на сейве влад�
 - C13, C17, C22 — pass после перезапуска (прогон 3); C21 (`sr:`) — fail, снят и заменён C22.
 - C18 (пульс контура 7 с) и C19 (пульс цифр 3 с) — pass по серии кадров; C20 (стрелка −20 %) — partial: стрелка не в дереве интерфейса.
 - C23 (подсказка черты) — pass после перезапуска (прогон 5): позитив #5CF266, плохая #FF7061, описание не тронуто.
+- C24 («Преданность», число отношений) — partial: 4/6/5 по правилу после перезапуска; 1–2 (красный) у героя нет.
 - C6 — blocked (нет предмета кузни CursedItems), C7, C10 — skipped (нет сапог с бонусом хода, нет перевеса).
 
 ## 5. Found
