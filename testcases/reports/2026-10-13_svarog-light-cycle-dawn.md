@@ -24,6 +24,11 @@ REAL WORLD: накоплено — сейв владельца и его нас�
 | 2a | 2026-10-13 17:50 +03:00 | `bash tools/deploy-hot.sh KrinikUIRework`; `h.sh "cfg krinik.svarogsdream.uirework Hud HotkeySize 1.8" "shot e11_after"` | 0 · RELOADED, кадр |
 | 2b | 2026-10-13 17:54–17:56 +03:00 | `h.sh "cfg … Sky Haze false" … "cfg … Water Reflections false" … "callon Lighting Light set_enabled False"` с кадрами `v0–v5`, `u0–u1` | 0 · опыты над рыжей водой |
 | 3 | 2026-10-13 17:58 +03:00 | `bash tools/run-game.sh`; захват с 17:59:08, 90 с, `_harness/lightcap/dawn2`; `python -I tools/light_lum.py _harness/lightcap/dawn2 2.6328` | 0 · 180 кадров; игру закрыл владелец ≈18:00 |
+| 4 | 2026-10-13 18:11 +03:00 | `bash tools/run-game.sh`; `h.sh "call KrinikCameraRework.Plugin TestFaceSun 15 0"`; захват 75 с `_harness/lightcap/dawn3`; промот к 00:20, `h.sh "fieldon Camera CameraFollow targetZoom 60" "shot n_on"` | 0 · свет за диском `Sky.SunUp`: вода золотая в 4:28, диск из-за леса в 4:36 (E12 fail); фонарь без воды (E13) |
+| 5 | 2026-10-13 18:20 +03:00 | `bash tools/deploy-hot.sh KrinikUIRework`; `powershell -File tools/mouse.ps1 -X 520 -Y 694 -Button move|right`, `-X 443`, `-X 900 -Y 250 -Button left`; кадры `p1…p5` | 0 · E4, E5 pass |
+| 7 | 2026-10-13 18:38 +03:00 | `bash tools/run-game.sh`; промот 17 ч; `TestFaceSun 3 0`; захват 100 с `_harness/lightcap/dusk1`; `light_lum.py` | 0 · закат зеркалом рассвета по журналу; небо белое, потом розовое |
+| 8 | 2026-10-13 18:43 +03:00 | то же с цветами неба на таблице часов; захват 90 с `_harness/lightcap/dusk2` | 0 · то же белое и розовое — причина не в весах сумерек; шаги ≤ 0,71 % |
+| 6 | 2026-10-13 18:31 +03:00 | `bash tools/run-game.sh` с `SunModel.cs`; `TestFaceSun 15 180`; захват 80 с `_harness/lightcap/dawn4`; `light_lum.py` | 0 · шаги ≤ 0,62 %; переброс 4:40 при −3°, x0,00; неба в кадре нет; вода красная от сумеречного неба |
 
 ## 4. Checks
 
@@ -51,6 +56,15 @@ Functional run: игра владельца, его сейв, кадры экр�
 `SvarogsDream/_harness/v_sheet.webp`, `u_sheet.webp`, `w_sheet.webp`, `e11_zoom.webp`; журнал `D:\Games\Svarog's Dream\BepInEx\LogOutput.log`
 (перезаписан следующим запуском). Сейв после выхода владельца — `_backups/svarog-saves-2026-10-13_1801-owner-exit-after-dawn-test`.
 
+- Прогон 4: свет за диском неба обгонял видимый диск на 5–8 мин (край диска касается нашей линии неба, а горизонт закрыт лесом);
+  диск стоял на месте 5:00–5:32 (замечание владельца → E15). Переделано на одну высоту солнца (`SunModel.cs`, разведка
+  `researches/svarogs-dream/sky-optics-dawn-dusk.md`).
+- Прогон 6: `TestFaceSun 15 180` не повернул камеру к небу; вода с 4:24 ярко-красная — отражение сумеречного неба (прямой свет ×0).
+- Прогоны 7–8: при камере почти горизонтально на солнце небо на закате белое, затем ядовито-розовое — и с настроением по высоте солнца,
+  и с прежней таблицей часов; сличения с видом до 13.10 нет. Свет заката — зеркало рассвета, звёзды к ночи появляются.
+
 ## 7. Verdict
 
-partial — вспышка в 3:00 снята (E2 pass), но рассветный свет обгоняет солнце на небе (замечание владельца → E12), правка не прогнана.
+partial — вспышка в 3:00 снята (E2 pass), рассвет без ступенек на модели солнца (E18: ≤ 0,62 %, переброс в темноте), ячейки E4/E5 pass,
+фонарь E13 pass; не увидены диск, звёзды и луна на новой модели (камера), сумеречное небо в воде слишком красное, окно выбора навыка (E5b)
+не оформлено.
