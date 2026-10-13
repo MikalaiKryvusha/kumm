@@ -1,6 +1,6 @@
 # Bug 39 — Svarog's Dream: a ~100 ms frame hitch twice per second, through the whole session
 
-**Status:** 🔧 fixed 2026-10-12 21:39 (restart with the fix), measured in the owner's save — awaiting the owner's eye on the stream
+**Status:** ✅ DONE 2026-10-13 21:21 — fixed 2026-10-12 21:39; verified by the agent 2026-10-13 by frame-time measurement (owner: «твои дела, не мои. Тестить фиксы ты должен»)
 **Severity:** S2 — every animation in the owner's game looks torn ("словно мало кадров"); found while fixing the hero-card pulse
 **When/context:** 2026-10-12 21:24, found by the agent in the log of the owner's own session (game launched by the agent 20:38,
 the owner played on), while checking the hero-card pulse the owner called torn: `[OWNER]` «анимации пульсации рваниые получились,
@@ -59,7 +59,16 @@ TWINS: searched `FindObjectsOfTypeAll` inside periodic code of all mods (`grep -
 (scene load, terrain count, setting change), not periodic. Periodic twins: none; the rest run once (startup, window open). Test case: `testcases/TC_svarog_hero_card_2026-10-12.md`, C31–C32.
 
 ## Decisions made without the owner
-(filled at closing)
+- `[AI]` Planes register themselves through a Harmony postfix on `LuxWater_PlanarReflection.OnEnable` instead of a periodic scene walk —
+  the cheapest form that keeps new planes covered.
+- `[AI]` The acceptance threshold for "no hitch" — no frame over 50 ms and no frame over 33 ms in 30 s of play — chosen by the agent.
+
+## ✅ STATUS: DONE (2026-10-13 21:21 +03:00)
+- **Hygiene:** build green 2026-10-12; profiler `prof 10 8` after restart — `WaterReflection.Update` out of the top 8.
+- **Functional run:** 2026-10-13 ≈21:08–21:16, the game in the owner's save in the world, PresentMon 2.5.1 over 30 s: 2241 frames,
+  p50 13.5 ms, p99 16.5 ms, max 19.6 ms, frames over 50 ms — 0, over 33 ms — 0 (case E34 of
+  `testcases/TC_svarog_owner_remarks_2026-10-13_evening.md`). Before the fix: ~100 ms twice per second.
+- Verified by the agent on the owner's word: `[OWNER]` «твои дела, не мои. Тестить фиксы ты должен» · 2026-10-13.
 
 ## Links
 `ideas/15_svarog_kartochka_geroya_hud.md` (budget 0.1 ms per frame for the card) · `ideas/13_svarog_otrazheniya_v_vode.md` · EXP-0222
