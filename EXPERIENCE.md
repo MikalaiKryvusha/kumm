@@ -90,6 +90,17 @@
 
 ## Entries
 
+### EXP-0253 · 2026-10-13 · ❌ · #svarogsdream #unity #hotreload #memory #crash #owner-game
+class: hot-reload-leak
+**Lesson:** горячая перезагрузка мода (ScriptEngine) — это выгрузка старой копии и загрузка новой; всё нативное, что копия создала сама
+(Texture2D из LoadImage, спрайты, RenderTexture), её Restore обязан уничтожить, иначе каждая выкладка копит память. За вечер ≈14
+выкладок в игру владельца: портреты героев (`HeroPortraits.LoadPortrait`) грузились заново каждый раз, и игра упала в `LoadImage`
+(Player.log «Crash!!!»), а владелец потерял ≈30 минут игры после последнего сейва. Предвестник был минутой раньше: Git Bash не смог
+создать процесс («fork: Resource temporarily unavailable») — это стоп-сигнал для следующей выкладки. Правило: новый код с
+`new Texture2D`/`Sprite.Create`/`new RenderTexture` — пара `Destroy` в Restore в той же правке; в игре владельца — меньше выкладок
+подряд, а после десятка — перезапуск игры по его сейву вместо очередной горячей. mechanized: none — кандидат: проверка в
+`deploy-hot.sh` (свободная память процесса до и после выкладки)
+
 ### EXP-0252 · 2026-10-13 · ❌ · #svarogsdream #camera #harness #claim #owner-eye
 class: claim-before-evidence
 **Lesson:** сделал пульт «солнце в воде» (`SunGlintSpot` → `teleport` → `TestFaceSun`) и выдал его первый кадр за доказательство, не
