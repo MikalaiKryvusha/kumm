@@ -31,12 +31,14 @@
 // ON-REAL-PATH:   2026-10-06 15:28 +03:00 — в живой сессии: Bash с «phrases_add.py» без чтения → остановлен (код 2, текст
 //                 агенту); Read STYLE.md → метка 15:28; тот же Bash → прошёл. 2026-10-06 ≈16:01 — новая сессия: тот же
 //                 замер остановлен по причине «методичка менялась после последнего чтения» (метка 15:41, правка 15:49);
-//                 после Read — прошёл; партия notes_xunity.py --add прошла при свежей метке
+//                 после Read — прошёл; партия notes_xunity.py --add прошла при свежей метке.
+//                 russian-gate: 2026-10-13 — подключён в живой сессии и сразу остановил три записи с кириллицей (AGENT_GUIDE,
+//                 STYLE.md, память) — «документ ещё не прочитан»; Read RUSSIAN_RULES.md целиком → те же три записи прошли
 import { readFileSync, statSync, writeFileSync } from 'node:fs';
 
 const args = process.argv.slice(2);
 const opt = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : def; };
-const MODE = args.includes('--mark') ? 'mark' : args.includes('--gate') ? 'gate' : '';
+const MODE = args.includes('--mark') ? 'mark' : args.includes('--gate') ? 'gate' : args.includes('--remind') ? 'remind' : '';
 const STYLE = opt('--style');
 const STAMP = opt('--stamp');
 const MAX_MIN = Number(opt('--max', '60'));
@@ -65,6 +67,13 @@ const LABEL = opt('--label', 'style-gate');
 const REASON = opt('--reason', 'Правило владельца 2026-10-06: «чтение методички - обязательством в хук делаем».');
 const GATED = PATHS_OPT ? [new RegExp(PATHS_OPT)] : PATHS;
 const GATED_TOOLS = PATHS_OPT ? [] : TOOLS;
+// Третье применение — методичка русского языка (KUMM/researches/russian-writing/RUSSIAN_RULES.md): `[OWNER]` «и хук на то, чтобы
+// читать эту методичку каждый раз, когда что-то пишешь по-русски» · 2026-10-13. Путь «русского» файла не узнать, поэтому
+// --cyrillic судит по ТЕКСТУ: Write/Edit, чей новый текст несёт кириллицу (в любом файле), и Bash с кириллицей в команде.
+// --remind (UserPromptSubmit): ответ в чате файлом не пишется — на каждое сообщение владельца при несвежей метке хук печатает
+// в контекст агента указание прочесть методичку до ответа. [NOT-TESTED]
+const CYR = args.includes('--cyrillic');
+const HAS_CYR = /[А-Яа-яЁё]/;
 
 try {
   if (!MODE || !STYLE || !STAMP) process.exit(0);
@@ -82,22 +91,30 @@ try {
     process.exit(0);
   }
 
-  let writes = false;
-  if (tool === 'Write' || tool === 'Edit') {
-    const p = norm(input.file_path);
-    writes = p !== norm(STYLE) && GATED.some((rx) => rx.test(p));
-  } else if (tool === 'Bash') {
-    writes = GATED_TOOLS.some((rx) => rx.test(String(input.command || '')));
-  }
-  if (!writes) process.exit(0);
-
   const read = mtime(STAMP), changed = mtime(STYLE);
   const ageMin = (Date.now() - read) / 60000;
   let why = '';
   if (read < 0) why = 'документ в этой работе ещё не прочитан';
   else if (changed > read) why = 'документ менялся после последнего чтения';
   else if (ageMin > MAX_MIN) why = `документ прочитан ${Math.round(ageMin)} мин назад — больше ${MAX_MIN}`;
-  if (!why) process.exit(0);
+
+  if (MODE === 'remind') {
+    if (why) process.stdout.write(`${LABEL}: ответ владельцу пишется по-русски, а ${why}. До ответа прочти целиком инструментом ` +
+      `Read: ${STYLE} (${REASON})\n`);
+    process.exit(0);
+  }
+
+  let writes = false;
+  if (tool === 'Write' || tool === 'Edit' || tool === 'MultiEdit') {
+    const p = norm(input.file_path);
+    const text = String(input.content || '') + String(input.new_string || '') +
+      (Array.isArray(input.edits) ? input.edits.map((e) => e.new_string || '').join('') : '');
+    writes = p !== norm(STYLE) && (CYR ? HAS_CYR.test(text) : GATED.some((rx) => rx.test(p)));
+  } else if (tool === 'Bash' || tool === 'PowerShell') {
+    const cmd = String(input.command || '');
+    writes = CYR ? HAS_CYR.test(cmd) : tool === 'Bash' && GATED_TOOLS.some((rx) => rx.test(cmd));
+  }
+  if (!writes || !why) process.exit(0);
   process.stderr.write(`${LABEL}: эта работа пишется по документу, а ${why}. Прочти его инструментом Read целиком: ${STYLE} ` +
     `— и повтори действие. (${REASON})\n`);
   process.exit(2);

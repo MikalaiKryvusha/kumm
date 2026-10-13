@@ -220,6 +220,23 @@ try {
   check('ui control: another mod passes', ui('--gate', write('D:/work/ai_sandbox/SvarogsDream/src/KrinikCameraRework/Plugin.cs')).status, 0);
   ui('--mark', { tool_name: 'Read', tool_input: { file_path: RB } });
   check('ui: after reading the rulebook the Edit passes', ui('--gate', write(cs)).status, 0);
+
+  // E3. Тот же хук — методичка русского языка (--cyrillic, --remind): любой текст по-русски пишется по прочитанной методичке
+  // (`[OWNER]` «и хук на то, чтобы читать эту методичку каждый раз, когда что-то пишешь по-русски» · 2026-10-13).
+  const RU = join(E, 'RUSSIAN_RULES.md'), RUS = join(E, 'ru.stamp');
+  writeFileSync(RU, 'rules' + NL);
+  const ru = (mode, ev) => spawnSync(process.execPath, [SG, mode, '--cyrillic', '--style', RU, '--stamp', RUS, '--label', 'russian-gate'],
+    { input: JSON.stringify(ev), encoding: 'utf8' });
+  const CYR_TEXT = '\u041f\u0440\u0438\u0432\u0435\u0442';   // «Привет» — escapes keep this file's argv-free text ASCII
+  check('ru: no reading: Write with Cyrillic content refused', ru('--gate', { tool_name: 'Write', tool_input: { file_path: 'D:/a/b.md', content: CYR_TEXT } }).status, 2);
+  check('ru: no reading: Edit with Cyrillic new_string refused', ru('--gate', { tool_name: 'Edit', tool_input: { file_path: 'D:/a/b.cs', new_string: '// ' + CYR_TEXT } }).status, 2);
+  check('ru: no reading: Bash with Cyrillic refused', ru('--gate', bash('echo ' + CYR_TEXT)).status, 2);
+  check('ru control: Latin-only Write passes', ru('--gate', { tool_name: 'Write', tool_input: { file_path: 'D:/a/b.md', content: 'hello' } }).status, 0);
+  check('ru control: editing the rules file itself passes', ru('--gate', { tool_name: 'Write', tool_input: { file_path: RU, content: CYR_TEXT } }).status, 0);
+  check('ru: stale --remind prints the order', /^russian-gate:/.test(ru('--remind', { prompt: 'x' }).stdout) ? 'printed' : 'silent', 'printed');
+  ru('--mark', { tool_name: 'Read', tool_input: { file_path: RU } });
+  check('ru: after reading the Cyrillic Write passes', ru('--gate', { tool_name: 'Write', tool_input: { file_path: 'D:/a/b.md', content: CYR_TEXT } }).status, 0);
+  check('ru: fresh --remind is silent', ru('--remind', { prompt: 'x' }).stdout, '');
 } catch (e) {
   check('part E ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
