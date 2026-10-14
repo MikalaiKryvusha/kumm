@@ -141,7 +141,7 @@ Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
 >    открытый чеклист: база «до» → фундамент Shared → правки по 65 файлам → регресс и замер «после»). `[OWNER]` «нужно будет начать с того,
 >    что перепишем и отрефакторим все наши моды по этим гайдлайнам.. И протестируем, что ничего не сломали» · «и с этого начинаем в новом
 >    чате» · 2026-10-14. Перед правкой кода — разведка `researches/svarog-native-mod-architecture/` (хук `arch-gate` не пустит без неё).
->    **Ход (2026-10-14 вечер):** пачка 1 написана и собрана, в игру НЕ выложена — SvarogsDream `ac38323`…`18b84b4`: `Shared/GameRefs.cs`
+>    **Ход (2026-10-14 вечер):** пачка 1 написана и собрана, в игру НЕ выложена — SvarogsDream `ac38323`…`7a040ea`: `Shared/GameRefs.cs`
 >    (корень UI, `UiFind`, `UiNow`, `Injector`, `Registry<T>`), `KrinikUIRework/GameHooks.cs`, `KrinikColorRework/TerrainWatch.cs`, `Shared/DeadKeys.cs`,
 >    пузырь, наведение на значок, перепись материалов крыш и листвы; храповик `refactor_inventory.mjs --check` (порог `tools/refactor_baseline.json`,
 >    предупреждение в `deploy-hot.sh`); поисков в кадре 25 → 8, LINQ в кадре 44 → 32. Дальше — заход пачкой (`[OWNER]` «сразу пиши, а потом запускай и пачкой тестируй»):
