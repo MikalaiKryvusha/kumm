@@ -68,8 +68,17 @@ Scale — мс главного потока за кадр внутри кода
       все): 2026-10-14 — 87 вызовов, совпадает с `grep` без комментариев один в один; **23 — в коде каждого кадра** (`Update`, `LateUpdate`,
       `*Tick`): `BillboardFog`, `FoliageCoverage`, `GrassCoverage`, `NightParticles`, `RoofFog`, `WaterReflection` (переписи материалов —
       пункт выше), `Perf.Tick`, `EquipPlaceholdersTick`, `FontsTick` ×2, `HeroCard.LateUpdate` ×2, `HeroPortraitsTick` ×2, `LootLookTick` ×3,
-      `MiniMapArrowTick`, `MiniMapLightTick` ×2, `PurseKickTick`, `WorldClockTick`, `CompassTick`. Дальше — у каждого прочесть охрану (раз,
-      по событию, по таймеру) и замерить `modcost`; по таймеру без кэша — править.
+      `MiniMapArrowTick`, `MiniMapLightTick` ×2, `PurseKickTick`, `WorldClockTick`, `CompassTick`.
+      Охрана прочитана 2026-10-14 (код, без игры) — порядок правки, цену решает `modcost`:
+      1. **Каждый кадр, пока цель не найдена** — `EquipPlaceholdersTick` (`EquipPlaceholders.cs:28`), `LootLookTick` (`LootLook.cs:41`),
+         `CompassTick` (`WorldClock.cs:190`): `if (_x == null) GameObject.Find(путь)` без паузы между попытками; путь в закрытое окно
+         `GameObject.Find` не видит — тот же класс стоил 1,4–1,8 мс за вызов (`SettingsLayoutTick`). Путь — корень «UI» один раз и
+         `Transform.Find`, как в `SettingsLayout.cs`.
+      2. **Каждый кадр, пока открыт лут** — `LootLook.cs:54–55`: два `GameObject.Find` без кэша.
+      3. **Таймер по всей сцене** — `Perf.Tick` (`FindObjectsOfType<Animator>()` раз в `AnimScanSeconds`), `PurseKickTick` (выше).
+      4. Ограничены сами — `FontsTick` ×2 (раз в секунду, только пока HUD не найден), `HeroPortraitsTick` ×2 (раз в секунду, число попыток),
+         `HeroCard.LateUpdate` ×2 (раз на открытие сумки и один поиск до кэша), `MiniMapArrowTick` и `MiniMapLightTick` (пауза между
+         попытками), `WorldClockTick` (до кэша), шесть переписей материалов `ColorRework` — пункт выше.
 - [ ] **`KrinikLetter.LateUpdate`** (`KrinikUIRework/Letters.cs` 430–441): 2 с после показа окна — полный проход `Letter()` каждый кадр,
       дальше — дважды в секунду, пока окно открыто. Проход — `GetComponentsInChildren<Image>(true)` и `<TextMeshProUGUI>(true)` по всему
       окну вместе с выключенными, сотни элементов в сумке и карте. Путь: оформлять только новое — запомнить, что уже оформлено, и брать
