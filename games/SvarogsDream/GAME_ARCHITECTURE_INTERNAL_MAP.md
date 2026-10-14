@@ -101,6 +101,7 @@
 | Полубог Велеса — 50 % пережить смертельный удар с 1 здоровьем; Полубог Перуна — потолок роста атрибутов +200 | `CharacterStats.cs:2289`, `PlayerStats.cs:1364` |
 | Пожертвования в Баре: 1 000 / 10 000 / 30 000 — деревня строится; > 50 000 — событие бесплатной еды, раз в день, лучше после 100k/300k/500k | `NpcFlagsManager.cs:2504–2514`, `WorldEventsManager.cs:1261` |
 | Свободные Люди: статуя святыни за 10 000 — +10 милостей и +1 к выбранному богу | `TrainerFreeDevotionStructures.cs:20`, `DevotionManager.cs:250` |
+| Дом изнутри: триггер `HouseVisibility` вокруг дома — вход героя (`PlayerStats`) → `houseExteriors.SetActive(false)` (наружный вид целиком, с коллайдерами стен), `additionalDisablings` выкл, `disabledWhenHidden` вкл, `weatherManager.SetIndoors(true)`; таверна — `WorldState.isInTavern`; выход — обратно. Ходьбу держит навигационная сетка, физику (наш прыжок) — уже ничто (KUMM `bugs/49`) | `HouseVisibility.cs` (декомпиляция 2026-10-14) |
 | Не взято: вмешательство и бонусы последователя — `DevotionManager.followedGod` ставится только загрузкой сейва; пожертвования Бездне Велеса работают: `StaticInterface.cs:263` зовёт `VelesBezdanCounter` после броска в Бездну, каждые 10 000 золота — Божья Милость (`GodsFavorsManager.cs:591`, до 1000; поправлено 2026-10-13: здесь стояло «нет вызова» — неверно) | |
 
 ### 3.3. Выживание, время, бой
