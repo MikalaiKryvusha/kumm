@@ -3,7 +3,7 @@
 > **Created:** 2026-10-14 (owner's order, chat)
 > **Parent:** `researches/svarogs-dream/climbing-jump-recon.md`; KUMM ideas 16 (climbing) and 17 (jump)
 > **Status:** reference — 2026-10-14: 8 topic files by four research agents + pitfalls checklist; quote spot-check by an
-> independent verifier was running at closure (result → `STATUS.md` handover)
+> independent verifier against live pages: 24 of 24 confirmed, 0 refuted (`VERIFY_2026-10-14.md`)
 > **Outbound:** —
 
 A local, grep-first handbook for writing a physical jump, fall and climbing mode **in C# at runtime** inside a BepInEx
