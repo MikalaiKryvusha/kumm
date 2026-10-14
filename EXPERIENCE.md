@@ -90,6 +90,24 @@
 
 ## Entries
 
+### EXP-0262 · 2026-10-14 · ❌ · #svarogsdream #recording #camera #harness
+class: probe-point-unchecked
+**Lesson:** клип прыжка снимался трижды впустую: пробный ракурс `TestFaceSun`/`TestTilt` отпускается через секунды, и `rec`, посланный
+отдельной посылкой через 30 с, снял лес без героя; в 4K запись кадр за кадром отдала кодировщику 41 кадр из 312. Правило: ракурс,
+приближение и `rec` — в ОДНОЙ посылке пульта, лист кадров — до следующего клипа; снимать в 720p. **Repro:** `h.sh "call
+KrinikCameraRework.Plugin TestFaceSun 12 90" "fieldon Camera CameraFollow targetZoom 40" "wait 1.5" "active UI 0" "rec <файл> 2.6 120" …
+"recwait" "active UI 1"`. mechanized: none
+
+### EXP-0261 · 2026-10-14 · ❌→✅ · #svarogsdream #performance #mainthread #measurement
+class: per-frame-scene-search
+**Lesson:** бюджет «1 мс на все моды в любом кадре» не виден ни `perf` (кадр целиком), ни `prof` (Update игры вместе с нашими постфиксами),
+ни секундомерами частей (они копили среднее): пик раз в секунду (поиск закрытого меню, 1,4–1,8 мс) и разовые пики (окно 30–53 мс,
+трава после переноса 106 мс, пузырь реплики 11 мс) прятались в средних. Что сработало: пульт `modcost` — секундомер на каждом входе в
+наш код, сумма за кадр, худший кадр и список по худшему кадру метода; контроль `burn`; мерить только на чистом запуске (после горячей
+выкладки входов 609 вместо 422 — работают старые копии). Класс «поиск по сцене того, чего нет, по таймеру» — третий удар (10.10, 13.10,
+14.10). **Repro:** `h.sh "modcost 20 14 bg" "wait 6" "teleport innGradLocation" "modcostwait"`.
+mechanized: SvarogsDream/src/KrinikDevHarness/Plugin.cs (`modcost`) — план KUMM 24, приёмка каждой фичи
+
 ### EXP-0260 · 2026-10-14 · ❌ · #process #kiss #scope #svarogsdream #owner-word
 class: scope-wider-than-ask
 **Lesson:** владелец: «анимации прыжка запишешь видео» — к вопросу с двумя вариантами (клип с выстрелом · `Double_Jump_ALL`). Я снял пять клипов:
