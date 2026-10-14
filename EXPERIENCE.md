@@ -90,6 +90,17 @@
 
 ## Entries
 
+### EXP-0269 · 2026-10-14 · ❌→✅ · #translation #ui #upstream #pr #backtranslation #review
+class: context-hides-ambiguity
+**Lesson:** 23 перевода окна BepInEx.ConfigurationManager (PR #129): проверяющий в контексте посоветовал сократить кнопки-фильтры до
+одного слова, и я сократил везде. Второй обратный перевод БЕЗ контекста (бесплатный `translate.googleapis.com`, тот же, что у XUnity)
+показал пять двусмысленностей: лит. «Įprasti» — ещё и «привыкнуть», эст. «Täpsemad» — «точнее», вьет. «cài đặt» — и «установка», тур.
+«Ata…» — и «предок». Правило: ПОСЛЕ правок по ревью — повторный обратный перевод итоговых файлов; однословная подпись, которая
+вернулась не тем смыслом, получает полную форму. Правки вносить строкой `[язык, индекс, старое, новое]` скриптом, который отказывает,
+если старое не совпало (`researches/bepinex-configmanager-translations/fix.mjs`). **Repro:** `node backtranslate.mjs <репо> <out>` в той же
+папке. mechanized: none — шаг метода в README исследования
+<!-- class-ok: context-hides-ambiguity — первая запись класса -->
+
 ### EXP-0268 · 2026-10-14 · ❌→✅ · #svarogsdream #harness #recon #jump #physics
 class: name-taken-for-meaning
 **Lesson:** кейс F0 («слои коллайдеров») я записал на пульт `layers` по имени команды, не открыв её код; при подготовке прогона

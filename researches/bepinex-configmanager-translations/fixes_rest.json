@@ -1,0 +1,92 @@
+[
+ ["es", 1, "Ajustes normales", "Normales"],
+ ["es", 2, "Atajos de teclado", "Atajos"],
+ ["es", 3, "Ajustes avanzados", "Avanzados"],
+ ["es", 13, "Plugins sin opciones: $1", "Plugins sin ajustes: $1"],
+
+ ["fr", 1, "Paramètres normaux", "Standard"],
+ ["fr", 2, "Raccourcis clavier", "Raccourcis"],
+ ["fr", 3, "Paramètres avancés", "Avancés"],
+ ["fr", 7, "Rechercher :", "Rechercher :"],
+ ["fr", 9, "Tout déplier", "Tout développer"],
+ ["fr", 10, "Tout replier", "Tout réduire"],
+ ["fr", 11, "Astuce : cliquez sur le nom d'un plugin pour afficher ses paramètres. Cliquez sur un paramètre ou un groupe pour lire sa description.", "Astuce : cliquez sur le nom d'un plugin pour afficher ses paramètres. Cliquez sur un paramètre ou un groupe pour lire sa description."],
+ ["fr", 12, "Astuce : faites glisser cette fenêtre pour la déplacer. Elle reste ouverte pendant que vous jouez.", "Astuce : faites glisser cette fenêtre pour la déplacer. Elle reste ouverte pendant que vous jouez."],
+ ["fr", 13, "Plugins sans options : $1", "Plugins sans paramètres : $1"],
+ ["fr", 18, "Définir…", "Attribuer…"],
+
+ ["pt", 1, "Configurações normais", "Normais"],
+ ["pt", 2, "Atalhos de teclado", "Atalhos"],
+ ["pt", 3, "Configurações avançadas", "Avançadas"],
+ ["pt", 11, "Dica: clique no nome de um plugin para ver suas configurações. Clique em uma configuração ou grupo para ler a descrição.", "Dica: clique no nome de um plugin para ver as suas configurações. Clique numa configuração ou grupo para ler a descrição."],
+ ["pt", 12, "Dica: arraste esta janela para movê-la. Ela continua aberta enquanto você joga.", "Dica: arraste esta janela para movê-la. A janela continua aberta durante o jogo."],
+ ["pt", 13, "Plugins sem opções: $1", "Plugins sem configurações: $1"],
+ ["pt", 22, "Não foi possível exibir este campo, veja o log para mais detalhes.", "Não foi possível mostrar este campo; veja o log para mais detalhes."],
+
+ ["it", 1, "Impostazioni normali", "Normali"],
+ ["it", 2, "Scorciatoie da tastiera", "Scorciatoie"],
+ ["it", 3, "Impostazioni avanzate", "Avanzate"],
+ ["it", 13, "Plugin senza opzioni: $1", "Plugin senza impostazioni: $1"],
+ ["it", 18, "Imposta…", "Assegna…"],
+
+ ["ro", 0, "Setări pluginuri / moduri", "Setări pentru pluginuri / moduri"],
+ ["ro", 1, "Setări normale", "Normale"],
+ ["ro", 3, "Setări avansate", "Avansate"],
+ ["ro", 13, "Pluginuri fără opțiuni: $1", "Pluginuri fără setări: $1"],
+
+ ["nl", 1, "Normale instellingen", "Normaal"],
+ ["nl", 3, "Geavanceerde instellingen", "Geavanceerd"],
+ ["nl", 9, "Alles uitklappen", "Alles uitvouwen"],
+ ["nl", 10, "Alles inklappen", "Alles samenvouwen"],
+ ["nl", 13, "Plug-ins zonder opties: $1", "Plug-ins zonder instellingen: $1"],
+ ["nl", 18, "Instellen…", "Toewijzen…"],
+
+ ["de", 1, "Normale Einstellungen", "Normal"],
+ ["de", 3, "Erweiterte Einstellungen", "Erweitert"],
+ ["de", 4, "Debug-Infos", "Debug"],
+ ["de", 13, "Plugins ohne Optionen: $1", "Plugins ohne Einstellungen: $1"],
+
+ ["uk", 11, "Порада: клацніть назву мода, щоб відкрити його налаштування. Клацніть налаштування або групу, щоб прочитати опис.", "Порада: клацніть назву моду, щоб відкрити його налаштування. Клацніть налаштування або групу, щоб прочитати опис."],
+
+ ["pl", 1, "Ustawienia zwykłe", "Zwykłe"],
+ ["pl", 2, "Skróty klawiszowe", "Skróty"],
+ ["pl", 3, "Ustawienia zaawansowane", "Zaawansowane"],
+ ["pl", 13, "Pluginy bez opcji: $1", "Pluginy bez ustawień: $1"],
+
+ ["lt", 1, "Įprasti nustatymai", "Įprasti"],
+ ["lt", 2, "Spartieji klavišai", "Klavišai"],
+ ["lt", 3, "Išplėstiniai nustatymai", "Išplėstiniai"],
+
+ ["lv", 1, "Parastie iestatījumi", "Parastie"],
+ ["lv", 3, "Papildu iestatījumi", "Papildu"],
+
+ ["et", 3, "Täpsemad seaded", "Täpsemad"],
+ ["et", 12, "Vihje: seda akent saab hiirega lohistades liigutada. See jääb avatuks, kuni mängite.", "Vihje: seda akent saab hiirega lohistades liigutada. See jääb mängimise ajal avatuks."],
+
+ ["id", 1, "Pengaturan biasa", "Biasa"],
+ ["id", 2, "Pintasan keyboard", "Pintasan"],
+ ["id", 3, "Pengaturan lanjutan", "Lanjutan"],
+ ["id", 13, "Plugin tanpa opsi: $1", "Plugin tanpa pengaturan: $1"],
+
+ ["ms", 1, "Tetapan biasa", "Biasa"],
+ ["ms", 2, "Pintasan papan kekunci", "Pintasan"],
+ ["ms", 3, "Tetapan lanjutan", "Lanjutan"],
+ ["ms", 10, "Kuncupkan semua", "Runtuhkan semua"],
+ ["ms", 13, "Plugin tanpa pilihan: $1", "Plugin tanpa tetapan: $1"],
+
+ ["tl", 1, "Karaniwang setting", "Karaniwan"],
+ ["tl", 13, "Mga plugin na walang opsyon: $1", "Mga plugin na walang setting: $1"],
+
+ ["vi", 1, "Cài đặt thường", "Thường"],
+ ["vi", 3, "Cài đặt nâng cao", "Nâng cao"],
+ ["vi", 13, "Plugin không có tùy chọn: $1", "Plugin không có cài đặt: $1"],
+
+ ["tr", 1, "Normal ayarlar", "Normal"],
+ ["tr", 2, "Klavye kısayolları", "Kısayollar"],
+ ["tr", 3, "Gelişmiş ayarlar", "Gelişmiş"],
+ ["tr", 13, "Seçeneği olmayan eklentiler: $1", "Ayarı olmayan eklentiler: $1"],
+
+ ["sw", 13, "Plugin zisizo na chaguo: $1", "Plugin zisizo na mipangilio: $1"],
+ ["sw", 18, "Weka…", "Kabidhi…"],
+ ["sw", 19, "Bonyeza kitufe chochote kwenye kibodi ili kukiweka.", "Bonyeza kitufe chochote kwenye kibodi ili kukikabidhi."]
+]

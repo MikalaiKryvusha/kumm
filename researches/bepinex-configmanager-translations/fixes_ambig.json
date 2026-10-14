@@ -1,0 +1,11 @@
+[
+ ["lt", 1, "Įprasti", "Įprasti nustatymai"],
+ ["et", 3, "Täpsemad", "Täpsemad seaded"],
+ ["lv", 1, "Parastie", "Parastie iestatījumi"],
+ ["lv", 3, "Papildu", "Papildu iestatījumi"],
+ ["tl", 1, "Karaniwan", "Karaniwang setting"],
+ ["vi", 13, "Plugin không có cài đặt: $1", "Plugin không có tùy chọn: $1"],
+ ["tr", 18, "Ata…", "Tuş ata…"],
+ ["sw", 18, "Kabidhi…", "Weka kitufe…"],
+ ["sw", 19, "Bonyeza kitufe chochote kwenye kibodi ili kukikabidhi.", "Bonyeza kitufe chochote kwenye kibodi ili kukiweka."]
+]
