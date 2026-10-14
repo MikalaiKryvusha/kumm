@@ -42,7 +42,8 @@ writeFileSync(path.join(GAME, 'FixtureGame.exe'), '')
 // Маска «<имя> <id> *» не ловила «Camera Control 1.0.4 3659 …» (стенд 14:35 — дефект стенда, не движка).
 writeFileSync(path.join(DIR, 'modpack.json'), JSON.stringify({
   packName: 'KUMM fixture pack', builtFor: 'fixture', nexusGame: 'fixturegame', gameExe: 'FixtureGame.exe', library: 'mods',
-  mods: MODS.map(({ file, ...m }) => m),
+  // шаг install «всё из архива → Mods/<имя>»: без шагов (и без kind pak + modsDir) раскатка кладёт 0 файлов и говорит [ok] (проба 14:38)
+  mods: MODS.map(({ file, ...m }) => ({ ...m, install: [{ from: '.', to: `Mods/${m.name}` }] })),
 }, null, 2))
 writeFileSync(path.join(DIR, 'targets.json'), JSON.stringify({ targets: [{ name: 'fixture', path: GAME }] }, null, 2))
 

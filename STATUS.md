@@ -73,8 +73,9 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 - [~] **A fixture pack** — разовый стенд 08.09 нашёл четыре дефекта переносимости (`bugs/03_DONE_*`, `EXP-0043`). Постоянный
       прибор — `node tools/fixture-pack.mjs` (2026-10-14): пак во временной папке ОС, `-ListMods` и `-Deploy -DryRun` — 10 проверок;
       на копии скрипта с дефектом бага 03 красные ровно две названные. **Осталось**: `-Verify` и боевая раскатка в папку стенда.
-      Проба 14:38: `-Deploy` в папку стенда — `[ok] Camera Control (0 files)`, `-Verify` — `0 present, 0 missing`, «Verify clean»: зелёное
-      на пустом. Разобрать: записям стенда не хватает назначения (`kind` → папка) или раскатка не предупреждает о моде без единого файла.
+      Пробы 14:38 — две «зелени на пустом» в движке: (1) мод без шагов `install` (и не `pak` с `modsDir`) — `[ok] … (0 files)` без
+      предупреждения; (2) `-Verify` не проверяет файлы шагов `install`: после раскатки 2 файлов в `game/Mods/<имя>/` — «0 present, 0 missing,
+      Verify clean». Стенд теперь даёт модам шаг `install` (2 файла кладутся); проверок раскатки и `-Verify` в нём ещё нет.
 - [x] **A real `help` command** — 2026-10-14: `help` печатает только шапку (41 строка вместо 109 комментариев файла); шапка —
       источник, switch и таблицу README сверяет `node test-help-commands.mjs` (доказан двумя поломками).
 - [ ] **Warn when a mod overrides `Engine.ini` at runtime** — обе болезни 21.08 были невидимы движку:
