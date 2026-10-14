@@ -152,6 +152,11 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > 3. **Плашки повышения:** подписи оружия и Магии — pass (S2); фон-мазок не под текстом и стопка на мини-карте — долг (S1, долг 3д 13.10).
 > 4. **Полосы врагов вдали** (M1 blocked), **панель быстрых действий в сумке** (`ideas/18_…`), **долги 13.10** — летопись, запись 2026-10-14 11:55.
 >
+> ⚠️ Force-closed 2026-10-14 12:01 +03:00: ceremonies skipped (judge pass, bonsai trim, README, showcase
+> linters) — the first /end-chat-soft pays this debt.
+> Standing falsehood: none (за сессию исправлено на месте: кейс J6 «папка не открыта»; штампы «12:0x» впереди часов в STATUS и летописи).
+> Незакоммиченного нет; игра закрыта командой `kill`, сейв владельца — 10 из 10, реестр экрана возвращён.
+>
 > **Порядок прогона:** точка сейва — `_backups/svarog-saves-2026-10-14_0832-owner-before-camera-ground` (последний сейв владельца, вечер 13.10; на месте после
 > чата, 10 из 10 совпали). `bash tools/run-game.sh` → кейсы → `h.sh kill` → `SAVE_POINT=<полный путь> bash tools/save-check.sh --restore` →
 > `bash tools/reg-snap.sh restore`. Горячих выкладок подряд — не больше двух, после каждой `perf 4` (EXP-0253, EXP-0258); просадка после
