@@ -221,6 +221,21 @@ try {
   ui('--mark', { tool_name: 'Read', tool_input: { file_path: RB } });
   check('ui: after reading the rulebook the Edit passes', ui('--gate', write(cs)).status, 0);
 
+  // E4. Тот же хук — разведка «моды — продолжение игры» (arch-gate, 2026-10-14): код ЛЮБОГО мода Сварога правится по прочитанной разведке.
+  const AD = join(E, 'ARCH.md'), AS = join(E, 'arch.stamp');
+  writeFileSync(AD, 'native extension' + NL);
+  const PATHS_ARCH = 'svarogsdream/src/[^/]+/[^/]*' + BS + '.cs$';
+  const arch = (mode, ev) => spawnSync(process.execPath, [SG, mode, '--style', AD, '--stamp', AS, '--paths', PATHS_ARCH, '--label', 'arch-gate'],
+    { input: JSON.stringify(ev), encoding: 'utf8' });
+  const jump = 'D:/work/ai_sandbox/SvarogsDream/src/KrinikFixes/Jump.cs';
+  const a1 = arch('--gate', write(jump));
+  check('arch: no reading: Edit of mod code refused', a1.status, 2);
+  check('arch: the refusal names its label', /^arch-gate:/.test(a1.stderr) ? 'arch-gate' : a1.stderr.slice(0, 20), 'arch-gate');
+  check('arch: no reading: camera mod refused too', arch('--gate', write('D:/work/ai_sandbox/SvarogsDream/src/KrinikCameraRework/Plugin.cs')).status, 2);
+  check('arch control: a KUMM document is not this gate', arch('--gate', write('D:/work/ai_sandbox/KUMM/STATUS.md')).status, 0);
+  arch('--mark', { tool_name: 'Read', tool_input: { file_path: AD } });
+  check('arch: after reading the research the Edit passes', arch('--gate', write(jump)).status, 0);
+
   // E3. Тот же хук — методичка русского языка (--cyrillic, --remind): любой текст по-русски пишется по прочитанной методичке
   // (`[OWNER]` «и хук на то, чтобы читать эту методичку каждый раз, когда что-то пишешь по-русски» · 2026-10-13).
   const RU = join(E, 'RUSSIAN_RULES.md'), RUS = join(E, 'ru.stamp');
