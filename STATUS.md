@@ -46,15 +46,15 @@
 > **Конан 2.2.3** — досье `games/ConanExiles/README.md`. Palworld — в ежедневном пользовании, правок не ждёт.
 > **Oblivion Remastered запаркован до патча** — не ходить туда, пока владелец не скажет.
 
-The engine works and the owner uses it daily for Palworld. What it does NOT have is any way to check
-itself: there is no test of any kind, and both halves talk to the outside world (Nexus through a
-browser, game folders on disk), so a fresh session cannot currently prove a change is safe without the
-owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN.md`.
+The engine works and the owner uses it daily for Palworld. Since 2026-10-14 it checks its pure core: `node test-parse-archive.mjs`,
+`test-archive-roundtrip.mjs`, `test-pick-card.mjs`, `test-help-commands.mjs` (exit 0 = green), and the game half runs on a fake pack —
+`node tools/fixture-pack.mjs` (`-ListMods`, `-Deploy -DryRun`). Not covered yet: deploy and `-Verify` checks on the stand (bug 46), the live
+Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
 
 | Phase | Status | What's there |
 |-------|--------|--------------|
 | Phase 0 — the two halves | ✅ done | v0.1.0 in daily use |
-| Phase 1 — trustworthy unattended | 🔲 next | no tests exist yet; the deterministic core is the target |
+| Phase 1 — trustworthy unattended | 🟡 in progress | 2026-10-14: four regression tests of the pure core + launch guard + fixture stand (`-ListMods`, `-DryRun`); left — deploy/`-Verify` on the stand (bug 46), Engine.ini warning |
 | Phase 2 — the second game | 🟢 **доказана на Конане** | движок принял Conan Exiles Enhanced **без единой правки**: слаг `conanexilesenhanced` из манифеста, `game_id` со страницы. Oblivion Remastered остаётся подготовленным (манифест на 168 модов), ждёт патча |
 | Phase 3 — compatibility | 🔲 todo | источник конфликтов найден: `UnrealPak -List` из Dev Kit читает любой пак с Oodle (`researches/conan-devkit/`); работа — фаза 3 эпика `plans/06` |
 | Phase 4 — optimization presets | 🔲 todo | |
@@ -127,39 +127,43 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> Чаты до 2026-10-14 — летопись; последние — записи 2026-10-14 11:55 и 13:33 +03:00 (в 11:55 дословно перенесён прежний блок с долгами 13.10).
+> Чаты до 2026-10-14 — летопись; последние — записи 2026-10-14 13:33 и 14:41 +03:00 (в 14:41 дословно перенесён прежний блок 13:33).
 >
 > **ГЛАВНОЕ — бюджет процессора: все моды вместе не дороже 1 мс главного потока в любом кадре** (`[OWNER]` «…НИКОГДА ни при каких
-> условиях» · 2026-10-14; `MASTER_PLAN.md`). План — `plans/24_svarog_cpu_budget_1ms.md` (замеры, виновники по цене, путь). Замер — пульт
-> `h.sh "modcost <сек> 14 bg" … "modcostwait"`, только на ЧИСТОМ запуске; главный список — «by worst frame of the method». Сейчас: костёр
-> 0,95 мс (pass) · бег 1,13 · окна 87–97 · перенос героя 24–29. Порядок: (1) оформление окон `KrinikLetter` — 30–53 мс за проход; (2) одна
-> общая перепись материалов вместо шести (3–4 мс каждая); (3) высота травы — в шейдер (сейчас по участку за кадр, 22 мс); (4) пузырь
-> реплики 11–12 мс; (5) `IconHoverTick`, `MatteTerrain`, `PatchCharacterDraw`. Кейсы — `testcases/TC_svarog_cpu_budget_jump_clips_2026-10-14.md`.
-> 1. **ПЕРВЫМ — прыжок на пробел, MVP** (`ideas/17_…`; мод `KrinikFixes/Jump.cs`, SvarogsDream `8b6202a`): работает в игре — с места и на
->    бегу (владелец прыгал сам: `[OWNER]` «мне было интересно»), стык приземления без подскока (шаг 0,00 в журнале `jump #N: landed …`),
->    ячейка «Пробел» убрана; настоящий прыжок — герой сходит с сетки, парабола, `Warp`. **Не прогнаны** R3 (с вершины вниз: `slopes 45 3`,
->    вершина −640,1/145/−252,7 у лагеря, разбег к кромке и пробел ДО неё), R4 (из низины на склон; стена утёса — приземление в старт), R5
->    (ходьба мышью и клавишами после прыжка) — `testcases/TC_svarog_jump_prototype_2026-10-14.md`. Затем: высота и время от Ловкости —
->    ждёт ответа (предложено `[AI]`: высота = 1 + Ловкость/25), выстрел/заклинание/удар в полёте, превращение в зверя — умением в ячейку.
->    Видео — папка отсмотра «15 Прыжок на пробел - высота и время в воздухе». Часы для съёмки: сейв утром 07:11 — +4 ч, не больше.
-> 2. **Камера:** G14 отложен — влёт в героя при кувырке, кувырок вызван пультом (сначала — играет ли его игра сама); G13 и цена 0,038 мс/кадр.
-> 3. **Плашки повышения:** подписи оружия и Магии — pass (S2); фон-мазок не под текстом и стопка на мини-карте — долг (S1, долг 3д 13.10).
-> 4. **Полосы врагов вдали** (M1 blocked), **панель быстрых действий в сумке** (`ideas/18_…`), **долги 13.10** — летопись, запись 2026-10-14 11:55.
+> условиях» · 2026-10-14; `MASTER_PLAN.md`). План — `plans/24_svarog_cpu_budget_1ms.md`. Замер — пульт `h.sh "modcost <сек> 14 bg" …
+> "modcostwait"`, только на ЧИСТОМ запуске. Сейчас: костёр 0,95 мс (pass) · бег 1,13 · окна — худший кадр 69,6 (был 109,7), проход окна
+> персонажа 13–17 мс (был 35–73; строки журнала `letter <окно> ms: …`) · перенос героя 24–29. Порядок: (1) окна — проход только при
+> изменении окна (что держит повторный проход и чем его заменить — план 24, пункт `KrinikLetter`); (2) поиски по сцене каждый кадр, пока цель
+> не найдена: `EquipPlaceholdersTick`, `LootLookTick`, `CompassTick` — сначала `modcost`, правка — корень «UI» и `Transform.Find`
+> (перепись — `node SvarogsDream/tools/scene_search_census.mjs`); (3) одна перепись материалов вместо шести; (4) трава — в шейдер; (5) пузырь реплики.
+> 1. **ПЕРВЫМ — прыжок и лазание** (идеи 17, 16). Прыжок работает (SvarogsDream `51f338d`; R1–R7 pass, склон на сетке и мышь — не
+>    проверены; `testcases/TC_svarog_jump_prototype_2026-10-14.md`). Владелец: полёт — как физика, лазание — как в Conan Exiles и Palworld;
+>    прыжок на склон или камень — зацеп в позу лазания, выносливость убывает, пока висит (слова — идеи 16, 17). Шаги: (а) прочесть разведку
+>    `researches/svarogs-dream/climbing-jump-recon.md` (писал фоновый агент; нет файла — повторить разведку по вопросам идеи 16); (б) написать
+>    методическое пособие по прыжкам и лазанию — просьба владельца `[OWNER]` «ресерч документ, методическое пособие по прыжкам, разанью -
+>    напишешь?» · 2026-10-14; образец — `researches/unity-ugui-layout/` (метки `TAG:`, ловушки); (в) кейсы
+>    `testcases/TC_svarog_jump_physics_2026-10-14.md` — F0 первым (слои коллайдеров пультом `layers`), потом покадровый полёт.
+> 2. **Камера** (G14), **плашки повышения** (долг S1), **полосы врагов вдали**, **панель в сумке** — без изменений, летопись 14:41 (блок 13:33).
+> 3. **Движок KUMM** (пул ниже): стенд `node tools/fixture-pack.mjs` — дальше раскатка и `-Verify` с проверками; баг 46; Engine.ini.
 >
-> Закрыто мягко 2026-10-14 13:33 (долг быстрого закрытия 12:01 оплачен: судья, стрижка, README, линтеры). Незакоммиченного нет; игру
-> закрыл владелец, сейв возвращён к точке — 10 из 10, реестр экрана возвращён.
+> Закрыто мягко 2026-10-14 (автономный час 13:42–14:42). Игра закрыта в 14:13, сейв возвращён к точке — 10 из 10, реестр экрана — 3840×2160, режим 1.
 >
-> **Порядок прогона:** точка сейва — `_backups/svarog-saves-2026-10-14_0832-owner-before-camera-ground` (последний сейв владельца, вечер 13.10; на месте после
-> чата, 10 из 10 совпали). `bash tools/run-game.sh` → кейсы → `h.sh kill` → `SAVE_POINT=<полный путь> bash tools/save-check.sh --restore` →
-> `bash tools/reg-snap.sh restore`. Горячих выкладок подряд — не больше двух, после каждой `perf 4` (EXP-0253, EXP-0258); просадка после
-> выкладки — сначала замер на чистом запуске. Игра закрыта после опытов, реестр экрана возвращён (3840×2160, режим 1).
+> **Порядок прогона:** точка сейва — `_backups/svarog-saves-2026-10-14_0832-owner-before-camera-ground` (10 из 10). `bash tools/run-game.sh` → кейсы →
+> `h.sh kill` → `SAVE_POINT=<полный путь> bash tools/save-check.sh --restore` (сторож живой игры починен 2026-10-14) → `bash tools/reg-snap.sh restore`.
+> `KrinikFixes` живёт в `BepInEx/plugins` — горячая выкладка его не берёт (отказ по GUID): только сборка → копия в `plugins/KrinikFixes` →
+> чистый запуск. `KrinikUIRework` — в `scripts`, горячо, не больше двух выкладок подряд. Экран стал виртуальным 1280×720 (`\\.\DISPLAY15`,
+> 2026-10-14 14:12, владелец в это время писал в чат — похоже, стрим): такой экран — игру не запускать, запущенную — закрыть.
 >
-> **Ждёт владельца:** прыжок от Ловкости — формула (предложена в чате 13:0x); имя «особой кузни» (совет 10); выбор воды по ролику и видео-демо неба — «позже».
+> **Ждёт владельца:** высота прыжка от Ловкости (предложено `[AI]`: 1 + Ловкость/25; разведка проверит, от чего прыжок в Oblivion); имя
+> «особой кузни» (совет 10); выбор воды по ролику и видео-демо неба — «позже».
 
 1. **Конан, KAIF, Palworld, движок фаза 1, /check-backlog, стражи** — летопись, запись 2026-10-13 23:00 (перенесено дословно).
 ## Open bugs
 
-Файлов без метки DONE — 16 (2026-10-13 23:00: заведены 44 и 45):
+Файлов без метки DONE — 16 (пересчитано `ls bugs/*.md` 2026-10-14 при закрытии; заведён 46):
+
+- 🔴 `bugs/46_verify_silent_on_mods_without_checks.md` — движок: мод без строк `verify` `-Verify` проверяет молча «никак» (`Verify clean`), мод
+  без единого файла раскатывается как `[ok]`; найдено стендом `tools/fixture-pack.mjs`, план починки — в документе.
 
 - 🔴 `bugs/44_svarog_grass_loses_volume_top_down.md` — трава при камере сверху (≈90°) без объёма и зелени; разведка шейдера не начата.
 - 🔧 `bugs/45_svarog_hot_reload_leaks_portraits_game_crash.md` — горячие выкладки копили портреты, игра владельца упала 22:24; утечка
