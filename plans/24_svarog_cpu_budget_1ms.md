@@ -49,7 +49,17 @@ Scale — мс главного потока за кадр внутри кода
       Промежуточно (2026-10-14, B6): не больше одного участка за кадр — 106,7 → 22,2 мс; вид травы после переноса глазом не проверен.
 - [ ] **`KrinikUIRework.Plugin.Update`** — 51,6 мс в одном кадре при открытии окон: какая часть — строка «update parts … max ms» журнала
       (секундомеры частей с худшим кадром выложены 2026-10-14, `0a697e4`).
-- [ ] **`NightParticles.Update`** до 5,0 мс, **`PatchCharacterDraw.Postfix`** до 5,6 мс, **`MatteTerrain.Update`** 1,9 мс — после переноса.
+- [ ] **Перепись всех материалов в памяти — шесть копий одного приёма.** После смены участков каждый сам вызывает
+      `Resources.FindObjectsOfTypeAll<Material>()` и берёт `shader.name` строкой у каждого материала: `NightParticles.cs:48` (до 5,0 мс после
+      переноса), `KrinikCameraRework/Plugin.cs:255` (`ScanGrassMaterials`, 2 мс), `BillboardFog.cs:80`, `FoliageCoverage.cs:66`,
+      `GrassCoverage.cs:78`, `RoofFog.cs:61`. Путь — формой: одна общая перепись в `src/Shared` на смену участков, порциями с бюджетом
+      времени на кадр, подписчики фильтруют по шейдеру (сравнение `Shader` по ссылке, не имя строкой). Проверка вида: туман дальних
+      деревьев и крыш, трава и листва, частицы ночью — кадры до/после.
+- [ ] **`PatchCharacterDraw.Postfix`** до 5,6 мс и **`MatteTerrain.Update`** 1,9 мс — после переноса (`MatteTerrain`: замена
+      `materialTemplate` на каждом новом участке).
+- [ ] **Перепись поисков по сцене**: 92 вызова `FindObjectsOfTypeAll` / `FindObjectsOfType` / `FindObjectOfType` / `GameObject.Find` в модах
+      (без пульта), больше всего — `KrinikCameraRework/Plugin.cs` 14, `HeroCard.cs` 7, `Fonts.cs` 7, `SunMirror.cs` 5. Каждый — разовый при
+      событии или по таймеру; по таймеру — в список правки.
 - [ ] **`KrinikLetter.LateUpdate`** (`KrinikUIRework/Letters.cs` 430–441): 2 с после показа окна — полный проход `Letter()` каждый кадр,
       дальше — дважды в секунду, пока окно открыто. Проход — `GetComponentsInChildren<Image>(true)` и `<TextMeshProUGUI>(true)` по всему
       окну вместе с выключенными, сотни элементов в сумке и карте. Путь: оформлять только новое — запомнить, что уже оформлено, и брать
