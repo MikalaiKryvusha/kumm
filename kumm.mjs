@@ -44,7 +44,7 @@
 import { spawn } from 'node:child_process'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { readFile, writeFile, readdir, mkdir, stat } from 'node:fs/promises'
-import { existsSync } from 'node:fs'
+import { existsSync, realpathSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import os from 'node:os'
@@ -500,8 +500,8 @@ function parseArchive(fileName) {
 }
 
 // Наружу - только разбор имён: чистые функции без сети и диска, их и проверяют.
-// Импорт этого файла ЗАПУСКАЕТ CLI (диспетчер лежит на верхнем уровне), поэтому
-// импортировать его из test-раннера пока нельзя - сначала нужен запуск-гард.
+// Импорт этого файла CLI не запускает: диспетчер внизу стоит под IS_MAIN
+// (запуск-гард, 2026-10-14) - тест-раннер может импортировать.
 export { parseArchive, parseNexusName }
 
 async function library() {
@@ -674,89 +674,102 @@ async function update({ outDir = null, only = null } = {}) {
 //  CLI
 // --------------------------------------------------------------------------
 
-// Всё, что ходит на Nexus, работает в контексте конкретной игры.
-if (!['close', 'help', undefined].includes(cmd)) await gameSlug()
+// Диспетчер - только при запуске файла как программы: импорт (тест-раннер, другой модуль) не должен
+// запускать CLI. Раньше импорт падал в default и печатал шапку в чужой вывод - юнит-тест было не написать
+// (пункт беклога «запуск-гард»). Путь сверяется настоящий (realpath): глобальный npm зовёт файл через ярлык;
+// на Windows - без учёта регистра (буква диска).
+const samePath = (a, b) => process.platform === 'win32' ? a.toLowerCase() === b.toLowerCase() : a === b
+const IS_MAIN = (() => {
+  // argv[1] чужого раннера может не быть файлом - тогда это точно не запуск kumm
+  try { return !!process.argv[1] && samePath(realpathSync(path.resolve(process.argv[1])), realpathSync(fileURLToPath(import.meta.url))) }
+  catch { return false }
+})()
 
-switch (cmd) {
-  case 'launch': await launch(); break
+if (IS_MAIN) {
+  // Всё, что ходит на Nexus, работает в контексте конкретной игры.
+  if (!['close', 'help', undefined].includes(cmd)) await gameSlug()
 
-  case 'close': await close(); break
+  switch (cmd) {
+    case 'launch': await launch(); break
 
-  case 'login': {
-    await launch({ url: 'https://users.nexusmods.com/auth/sign_in' })
-    log('  Залогинься в открывшемся окне, потом: node _config/nexus.mjs status')
-    break
-  }
+    case 'close': await close(); break
 
-  case 'status': {
-    if (!(await cdpAlive())) { log(`  CDP на :${PORT} не отвечает`); break }
-    const cdp = await need()
-    const who = await whoami(cdp)
-    cdp.close()
-    log(who.loggedIn ? `  залогинен: ${who.user ?? '(имя не прочиталось)'}` : '  не залогинен')
-    break
-  }
-
-  case 'check': await check({ json: !!flags.json }); break
-
-  case 'update':
-    // Без --out решает update: скачанное едет в _incoming внутри библиотеки.
-    await update({ outDir: flags.out || null, only: args.length ? args : null })
-    break
-
-  case 'files': {
-    const id = args[0] || die('нужен modId')
-    const cdp = await need()
-    const r = await listFiles(cdp, id)
-    cdp.close()
-    if (!r.cards.length) { log('  карточки файлов не разобрались. Сырой текст:'); log(r.raw); break }
-    for (const c of r.cards) {
-      log(`  ${c.old ? 'old ' : 'MAIN'}  file_id=${c.fileId}  v${c.version ?? '?'}  ${c.uploaded ?? ''}  ${c.sizeKb ?? '?'}KB  ${c.name}`)
+    case 'login': {
+      await launch({ url: 'https://users.nexusmods.com/auth/sign_in' })
+      log('  Залогинься в открывшемся окне, потом: node _config/nexus.mjs status')
+      break
     }
-    break
-  }
 
-  case 'get': {
-    const [modId, fileIdArg] = args
-    if (!modId) die('нужно: get <modId> [fileId] [--out mods]')
-    const cdp = await need()
-    const { cards } = await listFiles(cdp, modId)
-    // Без явного fileId берём главный файл: свежайший из секции Main files.
-    const card = fileIdArg
-      ? cards.find(c => c.fileId === String(fileIdArg))
-      : cards.filter(c => !c.old).sort((a, b) => (b.uploaded || '').localeCompare(a.uploaded || ''))[0]
-    if (!card) { cdp.close(); die(`файл не найден у мода ${modId}`) }
-    log(`  качаю: ${card.name}  v${card.version}  (file_id=${card.fileId})`)
-    const outDir = flags.out || (await library()).modsDir
-    const r = await download(cdp, modId, card.fileId, outDir, { card })
-    cdp.close()
-    log(`  готово: ${r.file}  (${Math.round(r.bytes / 1024)} KB)`)
-    log(`  куда:   ${r.dir}`)
-    break
-  }
+    case 'status': {
+      if (!(await cdpAlive())) { log(`  CDP на :${PORT} не отвечает`); break }
+      const cdp = await need()
+      const who = await whoami(cdp)
+      cdp.close()
+      log(who.loggedIn ? `  залогинен: ${who.user ?? '(имя не прочиталось)'}` : '  не залогинен')
+      break
+    }
 
-  case 'eval': {
-    const [url, ...js] = args
-    if (!url || !js.length) die('нужно: eval <url> <js>')
-    const cdp = await need()
-    const out = await withPage(cdp, async page => {
-      await page.goto(url, Number(flags.settle || 3000))
-      return page.eval(js.join(' '))
-    })
-    cdp.close()
-    log(typeof out === 'string' ? out : JSON.stringify(out, null, 2))
-    break
-  }
+    case 'check': await check({ json: !!flags.json }); break
 
-  case 'changelog': {
-    const id = args[0] || die('нужен modId')
-    const cdp = await need()
-    log(await changelog(cdp, id) ?? '  changelog не найден')
-    cdp.close()
-    break
-  }
+    case 'update':
+      // Без --out решает update: скачанное едет в _incoming внутри библиотеки.
+      await update({ outDir: flags.out || null, only: args.length ? args : null })
+      break
 
-  default:
-    log(await readFile(fileURLToPath(import.meta.url), 'utf8')
-      .then(s => s.split('\n').filter(l => l.startsWith('//')).join('\n')))
+    case 'files': {
+      const id = args[0] || die('нужен modId')
+      const cdp = await need()
+      const r = await listFiles(cdp, id)
+      cdp.close()
+      if (!r.cards.length) { log('  карточки файлов не разобрались. Сырой текст:'); log(r.raw); break }
+      for (const c of r.cards) {
+        log(`  ${c.old ? 'old ' : 'MAIN'}  file_id=${c.fileId}  v${c.version ?? '?'}  ${c.uploaded ?? ''}  ${c.sizeKb ?? '?'}KB  ${c.name}`)
+      }
+      break
+    }
+
+    case 'get': {
+      const [modId, fileIdArg] = args
+      if (!modId) die('нужно: get <modId> [fileId] [--out mods]')
+      const cdp = await need()
+      const { cards } = await listFiles(cdp, modId)
+      // Без явного fileId берём главный файл: свежайший из секции Main files.
+      const card = fileIdArg
+        ? cards.find(c => c.fileId === String(fileIdArg))
+        : cards.filter(c => !c.old).sort((a, b) => (b.uploaded || '').localeCompare(a.uploaded || ''))[0]
+      if (!card) { cdp.close(); die(`файл не найден у мода ${modId}`) }
+      log(`  качаю: ${card.name}  v${card.version}  (file_id=${card.fileId})`)
+      const outDir = flags.out || (await library()).modsDir
+      const r = await download(cdp, modId, card.fileId, outDir, { card })
+      cdp.close()
+      log(`  готово: ${r.file}  (${Math.round(r.bytes / 1024)} KB)`)
+      log(`  куда:   ${r.dir}`)
+      break
+    }
+
+    case 'eval': {
+      const [url, ...js] = args
+      if (!url || !js.length) die('нужно: eval <url> <js>')
+      const cdp = await need()
+      const out = await withPage(cdp, async page => {
+        await page.goto(url, Number(flags.settle || 3000))
+        return page.eval(js.join(' '))
+      })
+      cdp.close()
+      log(typeof out === 'string' ? out : JSON.stringify(out, null, 2))
+      break
+    }
+
+    case 'changelog': {
+      const id = args[0] || die('нужен modId')
+      const cdp = await need()
+      log(await changelog(cdp, id) ?? '  changelog не найден')
+      cdp.close()
+      break
+    }
+
+    default:
+      log(await readFile(fileURLToPath(import.meta.url), 'utf8')
+        .then(s => s.split('\n').filter(l => l.startsWith('//')).join('\n')))
+  }
 }

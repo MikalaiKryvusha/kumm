@@ -65,21 +65,11 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
 > without the human and without resources only the human can provide. The loop skills
 > (`/autoloop`, `/dayloop`, `/nightloop`) grind this pool.
 
-- [ ] **Запуск-гард перед любыми тестами (блокер).** Импорт `kumm.mjs` ЗАПУСКАЕТ CLI: диспетчер команд
-      лежит на верхнем уровне, и под `node --test` он получит путь тест-файла вместо команды, свалится
-      в `default` и напечатает шапку в поток TAP. Пока гарда нет, юнит-тест написать нельзя — проверка
-      разбора имён 15.08 делалась разовым скриптом в скретчпаде. Гард: сравнить
-      `pathToFileURL(process.argv[1]).href` с `import.meta.url`. Правка механическая, но задевает
-      ~250 строк отступов — поэтому отдельным заходом и с `node --check` после.
-- [~] **Round-trip check for the archive naming scheme** — **ПОЛОВИНА СДЕЛАНА 08.09.2026.**
-      `test-parse-archive.mjs` проверяет РАЗБОР: 17 случаев, из них девять настоящих имён живой
-      библиотеки Palworld, четыре конановских с короткими id, вторая схема Nexus и отрицательный
-      контроль. Поводом был баг 03 (`\d{4}` в id мода). **Осталось**: круговой ход
-      `libraryName()` → `parseArchive()` — то есть проверить, что ЗАПИСЬ и ЧТЕНИЕ согласованы, а
-      не только чтение. Тест уже умеет вырезать функции из `kumm.mjs` в обход запуска CLI —
-      каркас для этого готов.
-- [ ] **Cases for `sameFile`/`stamp` and `pickCard`** — upload-date comparison rounded to the minute;
-      variant selection between Steam/Gamepass, Capped/plain, presets. Pure, autonomous.
+- [x] **Запуск-гард** — 2026-10-14: диспетчер `kumm.mjs` под `IS_MAIN` (realpath, на Windows без регистра); импорт печатает
+      только экспорты, `status`/`close`/неизвестная команда — побайтно как раньше, справка — одна строка комментария другая.
+- [x] **Round-trip check for the archive naming scheme** — разбор 08.09 (`test-parse-archive.mjs`), круговой ход 2026-10-14
+      (`test-archive-roundtrip.mjs`, 8 случаев): нашёл версию с пробелом («1.2 beta» — имя не читалось назад), запись версии — «_».
+- [x] **Cases for `sameFile`/`stamp` and `pickCard`** — 2026-10-14, `test-pick-card.mjs`, 17 случаев, доказан тремя мутациями.
 - [~] **A fixture pack** — **разово собрана и окупилась 08.09.2026**: поддельный пак + библиотека
       из архивов, названных по схеме движка, + папка игры с одним файлом-признаком. Прогнана в трёх
       режимах (`-Deploy -DryRun`, боевая раскатка, `-Verify`) и нашла **четыре** дефекта
