@@ -54,7 +54,11 @@ Scale — мс главного потока за кадр внутри кода
       переноса), `KrinikCameraRework/Plugin.cs:255` (`ScanGrassMaterials`, 2 мс), `BillboardFog.cs:80`, `FoliageCoverage.cs:66`,
       `GrassCoverage.cs:78`, `RoofFog.cs:61`. Путь — формой: одна общая перепись в `src/Shared` на смену участков, порциями с бюджетом
       времени на кадр, подписчики фильтруют по шейдеру (сравнение `Shader` по ссылке, не имя строкой). Проверка вида: туман дальних
-      деревьев и крыш, трава и листва, частицы ночью — кадры до/после.
+      деревьев и крыш, трава и листва, частицы ночью — кадры до/после. Замер 2026-10-14 (B7, B9): имя шейдера по ссылке
+      (`src/Shared/ShaderNames.cs`) срезало мало — `NightParticles` 5,0 → 1,7, остальные на 0,3–1 мс; основная цена — сам вызов
+      `FindObjectsOfTypeAll` (3–4 мс), поэтому общая перепись одна на всех.
+- [ ] **Пузырь реплики**: `PatchYellBubble.Postfix` 11–12 мс за один вызов и `KrinikBubbleFit.LateUpdate` до 11 мс (список «by worst
+      frame», B8) — разобрать секундомерами.
 - [ ] **`PatchCharacterDraw.Postfix`** до 5,6 мс и **`MatteTerrain.Update`** 1,9 мс — после переноса (`MatteTerrain`: замена
       `materialTemplate` на каждом новом участке).
 - [ ] **Перепись поисков по сцене**: 92 вызова `FindObjectsOfTypeAll` / `FindObjectsOfType` / `FindObjectOfType` / `GameObject.Find` в модах
