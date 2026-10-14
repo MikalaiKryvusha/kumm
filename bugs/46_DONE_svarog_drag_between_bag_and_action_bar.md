@@ -21,3 +21,15 @@ and back; control — the same with KrinikUIRework unloaded (or its HUD row off)
 
 ## Decisions made without the owner
 none yet
+
+## ✅ STATUS: DONE (2026-10-14) — not a defect, the game has no such feature
+
+Game code (full decompile, 2026-10-14): quick-action cells are `UISpellSlot : UISlotBase`; `UISlotBase.OnDrop` swaps only with another
+`UISlotBase` — bag cells are not of that kind, so bag ↔ bar dragging was never part of the game. Food and potions reach the bar through
+the equipment cells `SlotType.Food` and `Potion1–4` (`PlayerEquipment` → `SpellsActionManager.AssignFood` / potion assign). Weapons: two
+sets — `BackupMainWeapon` / `BackupSecondaryWeapon`, swapped by `ControllsManager.KeyCodes[10]` (X by default) → `SwapWeapons`.
+The owner's wish — bows on quick cells, eating from a quick cell — is a new feature: `ideas/18_svarog_predmety_v_bystryh_yacheykah.md`.
+
+## Decisions made without the owner
+
+- `[AI]` Read the report as a feature request, not a regression, on the evidence above; the owner asked «этот перенос может должен рабоать? или нет?».
