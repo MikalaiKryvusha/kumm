@@ -23,6 +23,14 @@
 | 3 | 2026-10-14 09:37 +03:00 | те же наведения, `shot q2_items`, `shot q2_stats` | 0 · обе целиком |
 | 4 | 2026-10-14 09:38 +03:00 | `bash tools/h.sh "callon …/Popup UnityEngine.UI.Image get_enabled" "click UI/Enablers/Inventory" ×2 …` | 0 · False, fill 0,715 |
 | 5 | 2026-10-14 09:38 +03:00 | `bash tools/h.sh "call UnityEngine.Screen SetResolution 1280 720 ExclusiveFullScreen" … "shot q3_items" "shot q3_stats" … "SetResolution 3840 2160 FullScreenWindow"` | 0 · обе целиком на 720p |
+| 6 | 2026-10-14 09:44 +03:00 | D1: `bash tools/deploy-hot.sh KrinikUIRework`, `bash tools/h.sh "click UI/Enablers/Inventory" "shot d1_open" "perf 4"`, `prof 3` | 0 · главный поток 25 мс — fail (как выяснилось в 8 — следы горячих выкладок) |
+| 7 | 2026-10-14 09:46 +03:00 | D1: правка «место полос — только при сдвиге ряда», та же выкладка и `perf 4` ×2 | 0 · 24–25 мс, проверка покоя красная |
+| 8 | 2026-10-14 09:48 +03:00 | D1: чистый запуск `bash tools/run-game.sh`, `bash tools/h.sh "perf 4" "click UI/Enablers/Inventory" "perf 4" "perf 4" "shot d1_open3" … "shot d1_closed3"` | 0 · 90–96 к/с; ряд 24,7 / 25,1, мир 5,3 / 11,1 |
+| 9 | 2026-10-14 09:53 +03:00 | M1: `bash tools/deploy-hot.sh KrinikUIRework`, `bash tools/h.sh "comps EnemyHealthBar 30"`, затем `"findall HealthBar"` | 0 · врагов нет, 197 полос выключены — blocked |
+| 10 | 2026-10-14 09:58 +03:00 | S1 контроль: `bash tools/h.sh "callon UI/ActionBar/ActionBarMain/Action+Bar/CharacterMessages UICharacterMessages ShowAlchemyLevelUpMessage 9" "shot s1_ctrl_c"` | 0 · «9» без слова |
+| 11 | 2026-10-14 10:00 +03:00 | S1: выкладка (одна строка, шрифт HUD), тот же вызов, `get_font`, `get_text` | 0 · шрифт Manrope-ExtraBold, текст «9» — fail |
+| 12 | 2026-10-14 10:02 +03:00 | S1: выкладка (имена по глоссарию), Alchemy 9 · Agility 22 · Strength 15, `get_text`, `shot s1_after2`, `perf 4` | 0 · «9 Алхимия», «22 Ловкость», «15 Сила»; 79,6 к/с |
+| 13 | 2026-10-14 10:08 +03:00 | Q4: `SetResolution 1920 1080` и `2560 1440 ExclusiveFullScreen`, наведения, `shot q4_*` | 0 · обе справки целиком |
 
 ## 4. Checks
 
@@ -32,6 +40,8 @@ Functional run: сумка в игре, обе справки открыты н�
 - Мир при замере: часы идут (`timescale` не трогал).
 - Q1 — pass (дефект виден до правки), Q2 — pass (4K), Q3 — pass (720p), P1 — pass по состоянию картинки и кадру; контрольного кадра полосы
   «до» нет (на паузе сумки она свёрнута).
+- Q4 — pass (1080p, 2K). D1 — pass на чистом запуске (прогоны 6–7 — fail от следов горячих выкладок, EXP-0258): панель при сумке не
+  темнеет, мир темнеет, шва нет. S1 — partial: текст целиком и шрифт HUD, фон-мазок автора не под текстом. M1 — blocked (нет врагов в бою).
 
 ## 5. Found
 
@@ -45,4 +55,5 @@ Functional run: сумка в игре, обе справки открыты н�
 
 ## 7. Verdict
 
-pass — обе справки целиком на 4K и 720p, синяя полоса не показывается; 1080p и 2K не сняты.
+partial — справки «?» целиком на 720p, 1080p, 2K, 4K (pass), синей полосы нет (pass), панель при сумке не темнеет (pass); плашки навыков —
+текст целиком, фон не подогнан (partial); полосы врагов вдали — не проверены, врагов не было (blocked).
