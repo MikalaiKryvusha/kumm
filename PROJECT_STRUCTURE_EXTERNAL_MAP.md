@@ -23,7 +23,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── package.json                   # npm bin "kumm"; node>=22; kaif:* handles
 ├── test-parse-archive.mjs · test-archive-roundtrip.mjs · test-pick-card.mjs   # regression of the pure core (reading archive names; write→read round trip; variant pick + upload-date compare) — run with node, exit 0 = green
 ├── test-help-commands.mjs         # the command list: kumm.mjs header (what `help` prints) = switch cases = README «Команды» table
-├── tools/fixture-pack.mjs         # fake pack in the OS temp + Deploy-ModPack.ps1 runs on it (slice: -ListMods); no network, no game
+├── tools/fixture-pack.mjs         # fake pack in the OS temp + Deploy-ModPack.ps1 runs on it (-ListMods, -Deploy -DryRun); no network, no game
 ├── README.md                      # the storefront (Russian) — owner's handwriting
 ├── GOAL.md · STATUS.md · MASTER_PLAN.md · AGENT_GUIDE.md · PHILOSOPHY.md   # KAIF canon
 ├── PROJECT_STRUCTURE_EXTERNAL_MAP.md · PROJECT_ARCHITECTURE_INTERNAL_MAP.md

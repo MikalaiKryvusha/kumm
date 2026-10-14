@@ -71,8 +71,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
       (`test-archive-roundtrip.mjs`, 8 случаев): нашёл версию с пробелом («1.2 beta» — имя не читалось назад), запись версии — «_».
 - [x] **Cases for `sameFile`/`stamp` and `pickCard`** — 2026-10-14, `test-pick-card.mjs`, 17 случаев, доказан тремя мутациями.
 - [~] **A fixture pack** — разовый стенд 08.09 нашёл четыре дефекта переносимости (`bugs/03_DONE_*`, `EXP-0043`). Постоянный
-      прибор — `node tools/fixture-pack.mjs` (2026-10-14): пак во временной папке ОС, режим `-ListMods` — 5 проверок прошли.
-      **Осталось**: `-Deploy -DryRun` и `-Verify` (нужны настоящие маленькие архивы через `Compress-Archive`) и красный прогон на сломанной версии.
+      прибор — `node tools/fixture-pack.mjs` (2026-10-14): пак во временной папке ОС, `-ListMods` и `-Deploy -DryRun` — 10 проверок;
+      на копии скрипта с дефектом бага 03 красные ровно две названные. **Осталось**: `-Verify` и боевая раскатка в папку стенда.
 - [x] **A real `help` command** — 2026-10-14: `help` печатает только шапку (41 строка вместо 109 комментариев файла); шапка —
       источник, switch и таблицу README сверяет `node test-help-commands.mjs` (доказан двумя поломками).
 - [ ] **Warn when a mod overrides `Engine.ini` at runtime** — обе болезни 21.08 были невидимы движку:
