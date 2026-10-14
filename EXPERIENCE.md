@@ -90,6 +90,15 @@
 
 ## Entries
 
+### EXP-0273 · 2026-10-14 · ❌→✅ · #svarogsdream #jump #navmesh #input #harness
+class: agent-velocity-is-not-intent
+**Lesson:** скорость `NavMeshAgent` — это где агент скользит, а не куда ведёт игрок: упёршись, она ноль, у препятствия смотрит вдоль
+его борта. Прыжок, взявший `agent.velocity`, уходил вверх или вбок (bugs/47, тележка владельца). Направление прыжка — из ввода игрока
+(WASD от камеры, как `PlayerController.HandleKeyboardMovement`) и скорость — `agent.speed` (её игра пишет и стоящему герою). Вторая
+ловушка того же вечера: после дальнего телепорта пульта игра секунды держит `agent.speed = 0` — прыжок «с места» был прибором, не
+игрой; ждать 5 с и читать `get_speed` пульта (`callon Player UnityEngine.AI.NavMeshAgent get_speed`). **Repro:** журнал `jump #33`
+(путь на север, касание на 5,8 м восточнее). mechanized: none — журнал прыжка пишет `(wasd|facing, N deg off agent velocity V)`
+
 ### EXP-0272 · 2026-10-14 · ❌→✅ · #publish #screenshots #pr #harness #overwrite
 class: artifact-overwritten-before-publish
 **Lesson:** кадры прогона пишутся под одним именем (`cmt_<lang>`), а вырезки для PR я делал после всех прогонов. Два последних запуска (en,

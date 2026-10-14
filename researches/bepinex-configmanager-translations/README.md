@@ -2,7 +2,7 @@
 
 > **Created:** 2026-10-14 · **Parent:** `researches/bepinex-configmanager-pr125/README.md` (our merged #125 put the `ru` file and the
 > contributing rule into the repo); trigger — PR #128 (Arabic, by vfggf95565, 2026-10-13) ·
-> **Status:** 📤 SENT — https://github.com/BepInEx/BepInEx.ConfigurationManager/pull/129 (23 languages, branch `translations-20`
+> **Status:** ✅ MERGED by ManlyMarco 2026-10-14 17:23Z (#127 merged the same evening) · was 📤 SENT — https://github.com/BepInEx/BepInEx.ConfigurationManager/pull/129 (23 languages, branch `translations-20`
 > `c222312`, opened 2026-10-14 18:26 +03:00 — GitHub createdAt 15:26:37Z); Hausa dropped; tested in the game 2026-10-14 18:33–19:20, all 23 pass, one
 > screenshot each in the PR (issuecomment-6173031223); layout fix `1234297`, shorter tl/sw/lv labels `0421d3c` ·
 > **Outbound:** a PR to https://github.com/BepInEx/BepInEx.ConfigurationManager — AUTH: `[OWNER]` «Давай сделаем 15 локализаций на самые
