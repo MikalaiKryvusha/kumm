@@ -411,7 +411,13 @@ const token = () => Array.from({ length: 9 }, () =>
 
 function libraryName(card, modId, ext) {
   const stamp = (card.uploaded || '').replace(/:\d\d(\.\d+)?Z$/, 'Z').replace(/:/g, '-')
-  return [card.name, modId, card.version ?? '0', stamp, token()].join(' ') + ext
+  // Версия - одним словом: Nexus допускает "1.2 beta", "1.0 (Steam)", а разбор
+  // (parseArchive здесь и его зеркало в Deploy-ModPack.ps1) ждёт версию ровно
+  // между modId и датой - имя с пробелом в версии не читалось назад, и движок
+  // не узнавал собственный скачанный файл (круговая проверка 2026-10-14,
+  // test-archive-roundtrip.mjs).
+  const version = String(card.version ?? '0').trim().replace(/\s+/g, '_') || '0'
+  return [card.name, modId, version, stamp, token()].join(' ') + ext
 }
 
 // Скачивание: ссылку берём через сайт (сессия и куки живут в Chrome), а сам
