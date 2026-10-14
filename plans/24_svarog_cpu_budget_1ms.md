@@ -61,9 +61,15 @@ Scale — мс главного потока за кадр внутри кода
       frame», B8) — разобрать секундомерами.
 - [ ] **`PatchCharacterDraw.Postfix`** до 5,6 мс и **`MatteTerrain.Update`** 1,9 мс — после переноса (`MatteTerrain`: замена
       `materialTemplate` на каждом новом участке).
-- [ ] **Перепись поисков по сцене**: 92 вызова `FindObjectsOfTypeAll` / `FindObjectsOfType` / `FindObjectOfType` / `GameObject.Find` в модах
-      (без пульта), больше всего — `KrinikCameraRework/Plugin.cs` 14, `HeroCard.cs` 7, `Fonts.cs` 7, `SunMirror.cs` 5. Каждый — разовый при
-      событии или по таймеру; по таймеру — в список правки.
+- [ ] **Перепись поисков по сцене**: 87 вызовов `FindObjectsOfTypeAll` / `FindObjectsOfType` / `FindObjectOfType` / `GameObject.Find` в модах
+      (без пульта и без строк комментариев; прежние «92» — грубый подсчёт, поправлено 2026-10-14 по переписи), больше всего —
+      `KrinikCameraRework/Plugin.cs` 14, `HeroCard.cs` 7, `Fonts.cs` 7, `SunMirror.cs` 5. Каждый — разовый при событии или по таймеру; по
+      таймеру — в список правки. Перепись кодом — `node SvarogsDream/tools/scene_search_census.mjs` (метод вызова — по скобкам; `--all` —
+      все): 2026-10-14 — 87 вызовов, совпадает с `grep` без комментариев один в один; **23 — в коде каждого кадра** (`Update`, `LateUpdate`,
+      `*Tick`): `BillboardFog`, `FoliageCoverage`, `GrassCoverage`, `NightParticles`, `RoofFog`, `WaterReflection` (переписи материалов —
+      пункт выше), `Perf.Tick`, `EquipPlaceholdersTick`, `FontsTick` ×2, `HeroCard.LateUpdate` ×2, `HeroPortraitsTick` ×2, `LootLookTick` ×3,
+      `MiniMapArrowTick`, `MiniMapLightTick` ×2, `PurseKickTick`, `WorldClockTick`, `CompassTick`. Дальше — у каждого прочесть охрану (раз,
+      по событию, по таймеру) и замерить `modcost`; по таймеру без кэша — править.
 - [ ] **`KrinikLetter.LateUpdate`** (`KrinikUIRework/Letters.cs` 430–441): 2 с после показа окна — полный проход `Letter()` каждый кадр,
       дальше — дважды в секунду, пока окно открыто. Проход — `GetComponentsInChildren<Image>(true)` и `<TextMeshProUGUI>(true)` по всему
       окну вместе с выключенными, сотни элементов в сумке и карте. Путь: оформлять только новое — запомнить, что уже оформлено, и брать
