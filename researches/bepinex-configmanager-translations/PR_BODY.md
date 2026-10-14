@@ -39,4 +39,4 @@ How they were checked: every line was back-translated to English with a machine 
 meaning in this window (e.g. "Clear" clears the search box, "Reset" restores the default), natural UI wording in that language and
 consistent terms within each file. Native speakers are very welcome to suggest better wording — each language is one small file.
 
-Testing: not run in a game yet. The files use the same mechanism and the same key set as `ru`, which I tested in #125 (Unity 2020.3 Mono, BepInEx 5.4.23.5, XUnity.AutoTranslator with EnableIMGUI=True). A script checked that every file has exactly the keys of `ru`, in the same order, and that the regex line keeps `$1`.
+Testing: every language was run in a game (Unity 2020.3 Mono, BepInEx 5.4.23.5, XUnity.AutoTranslator with EnableIMGUI=True and the fix from bbepis/XUnity.AutoTranslator#876), one screenshot each — see the comment below. Testing found that a translated Reset button was pushed out of the window (also with the existing `ru`); commit 1234297 fixes the layout and is a no-op for the English window.
