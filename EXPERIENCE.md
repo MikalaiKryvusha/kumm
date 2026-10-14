@@ -66,7 +66,7 @@
      popup-steals-pointer, probe-point-unchecked, procedural-pattern-on-sphere, proxy-path-blocked, recon-by-snippets,
      repaint-after-build, rule-half-applied, rule-overapplied, shader-owns-its-own-formula, shared-state-two-owners,
      stale-stand, stand-differs-from-owner-world, text-color-blind-to-background, translator-delay, wrong-api-assumption,
-     wrong-model-of-the-frame, wrong-proxy -->
+     wrong-model-of-the-frame, wrong-proxy, scope-wider-than-ask -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -89,6 +89,14 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0260 · 2026-10-14 · ❌ · #process #kiss #scope #svarogsdream #owner-word
+class: scope-wider-than-ask
+**Lesson:** владелец: «анимации прыжка запишешь видео» — к вопросу с двумя вариантами (клип с выстрелом · `Double_Jump_ALL`). Я снял пять клипов:
+добавил кувырок назад и два сальто, нашёл на кувырке ошибку камеры и сел её чинить. `[OWNER]` «а зачем ты делаешь кувырки, двойные прыжки? Я же
+просил проще. У нас же есть принцип KISS, Окамм. Есть какая-то критическая необходимость?» · 2026-10-14. Правило: показ к вопросу — ровно его
+варианты; новое, найденное по дороге, — строкой в отчёт, не в работу; ошибка, вызванная моим искусственным состоянием, — сначала «бывает ли в
+игре», потом правка. **Repro:** перед съёмкой или пробой — выписать варианты вопроса из интервью, снимать только их. mechanized: none
 
 ### EXP-0259 · 2026-10-14 · ❌ · #process #markers #tested #sed
 class: pattern-edit-hits-twins
