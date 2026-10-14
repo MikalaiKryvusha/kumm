@@ -34,6 +34,18 @@ ESP 0x0177F60C · Stack 0x0177F60C: 00000001 00C27F30 006F3F9E 00000000 0053C06F
 `D:\Games\GTA San Andreas\logs\gta_sa.exe_2026-10-14_21-44-14.log` (2674 байта). После «Quit» игра висела (Responding = False, процессор стоял) —
 процесс 34908 завершён агентом по номеру в 21:45.
 
+## Главный подозреваемый — наша правка 2026-10-03 (найдено 2026-10-14 ≈21:46)
+
+Ограничитель в сборке — не Fastman92, а Open Limit Adjuster: `D:\Games\GTA San Andreas\modloader\Performance\III.VC.SA.LimitAdjuster.ini`,
+раздел `[SALIMITS]`: `Vehicles = 400`. Решение 3 окна CrashInfo — ровно про это: «Vehicles … decrease the value in case above 200, leave
+between 110 and 200». Значение 400 поставили мы — досье `games/GTASanAndreas/README.md`, строка 2026-10-03: «Потолки ×10: `VehLimit` 45→255,
+`PedLimit` 25→250; пулы OLA `[SALIMITS]` `Peds`/`PedIntelligence` 140→400, `Vehicles` 110→400» (копия до правки —
+`III.VC.SA.LimitAdjuster.ini.2026-10-03.bak`, там `Vehicles = 110`). Догадка владельца «наш мод про машины» подтверждается: не мод, а наш
+потолок машин. В стеке падения — `cleo.asi` и `modloader.asi`.
+
+Починка (потом, по слову владельца): `Vehicles` 400 → 200 (верх рекомендованного), проверить, не связан ли с ним `VehLimit` 255 в MixSets;
+прогон на копии сейва — та же точка карты, 10 минут игры без падения.
+
 ## Hypotheses (ranked, не проверены)
 
 1. Переполнен пул генераторов припаркованных машин (500 по умолчанию): скрипт CLEO, плодящий машину на каждое сохранение, или сам сейв
