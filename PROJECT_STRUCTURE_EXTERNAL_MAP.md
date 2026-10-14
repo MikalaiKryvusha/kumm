@@ -21,6 +21,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── kumm.mjs                      # Nexus half: CLI, CDP client, version check, downloader (637 lines)
 ├── Deploy-ModPack.ps1            # game half: unpack, deploy into game folders, verify (1003 lines)
 ├── package.json                   # npm bin "kumm"; node>=22; kaif:* handles
+├── test-parse-archive.mjs · test-pick-card.mjs   # regression of the pure core (archive names; variant pick + upload-date compare) — run with node, exit 0 = green
 ├── README.md                      # the storefront (Russian) — owner's handwriting
 ├── GOAL.md · STATUS.md · MASTER_PLAN.md · AGENT_GUIDE.md · PHILOSOPHY.md   # KAIF canon
 ├── PROJECT_STRUCTURE_EXTERNAL_MAP.md · PROJECT_ARCHITECTURE_INTERNAL_MAP.md
