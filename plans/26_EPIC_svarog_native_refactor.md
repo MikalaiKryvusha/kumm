@@ -53,33 +53,33 @@ Shared) переписаны по правилам §5 разведки — до
       компонентов мода цвета; мод камеры (`ScanGrassMaterials`) — свой перебор, сборки разные; `Shared/DeadKeys.cs` — чистка мёртвых
       ключей без LINQ в семи местах)
 - [ ] Доступ к закрытым полям — делегаты `AccessTools.FieldRefAccess`, созданные один раз (вместо `GetValue`).
-- [ ] Прибор: `refactor_inventory.mjs` — в проверку сборки (предупреждение, если в кадре появился поиск или LINQ).
+- [x] Прибор: `refactor_inventory.mjs` — в проверку сборки (предупреждение, если в кадре появился поиск или LINQ).
 
 ## Фаза 2 — правки по файлам (вывод `node SvarogsDream/tools/refactor_inventory.mjs --md`, 2026-10-14)
 
 Сверху — тяжелее: поиски по сцене в кадре, много покадровых методов, принудительная перестройка. Каждая строка закрывается правкой по
 правилам §5 и строкой регресса в фазе 3.
 
-- [ ] `KrinikUIRework/LootLook.cs` — поиски по сцене в кадре 3 · покадровые: LootLookTick
-- [ ] `KrinikUIRework/WorldClock.cs` — поиски по сцене в кадре 2 · поиски вне кадра 1 · покадровые: WorldClockTick, CompassTick · ForceRebuild 1
-- [ ] `KrinikUIRework/HeroCard.cs` — поиски по сцене в кадре 2 · поиски вне кадра 5 · покадровые: LateUpdate, Update
-- [ ] `KrinikUIRework/Purse.cs` — поиски по сцене в кадре 2 · покадровые: PurseKickTick, LateUpdate
+- [~] `KrinikUIRework/LootLook.cs` — поиски по сцене в кадре 3 · покадровые: LootLookTick
+- [~] `KrinikUIRework/WorldClock.cs` — поиски по сцене в кадре 2 · поиски вне кадра 1 · покадровые: WorldClockTick, CompassTick · ForceRebuild 1
+- [~] `KrinikUIRework/HeroCard.cs` — поиски по сцене в кадре 2 · поиски вне кадра 5 · покадровые: LateUpdate, Update
+- [~] `KrinikUIRework/Purse.cs` — поиски по сцене в кадре 2 · покадровые: PurseKickTick, LateUpdate
 - [ ] `KrinikUIRework/Fonts.cs` — поиски по сцене в кадре 2 · поиски вне кадра 5 · покадровые: FontsTick · LINQ 1
-- [ ] `KrinikUIRework/HeroPortraits.cs` — поиски по сцене в кадре 2 · поиски вне кадра 1 · покадровые: HeroPortraitsTick · GetValue 4
-- [ ] `KrinikUIRework/MiniMapLight.cs` — поиски по сцене в кадре 2 · покадровые: MiniMapLightTick
-- [ ] `KrinikCameraRework/Plugin.cs` — поиски по сцене в кадре 1 · поиски вне кадра 12 · покадровые: Update, WakeTick · LINQ в кадре 8
-- [ ] `KrinikColorRework/BillboardFog.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 2
-- [ ] `KrinikUIRework/EquipPlaceholders.cs` — поиски по сцене в кадре 1 · покадровые: EquipPlaceholdersTick
-- [ ] `KrinikColorRework/FoliageCoverage.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 2
-- [ ] `KrinikColorRework/GrassCoverage.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 4
+- [~] `KrinikUIRework/HeroPortraits.cs` — поиски по сцене в кадре 2 · поиски вне кадра 1 · покадровые: HeroPortraitsTick · GetValue 4
+- [~] `KrinikUIRework/MiniMapLight.cs` — поиски по сцене в кадре 2 · покадровые: MiniMapLightTick
+- [~] `KrinikCameraRework/Plugin.cs` — поиски по сцене в кадре 1 · поиски вне кадра 12 · покадровые: Update, WakeTick · LINQ в кадре 8
+- [~] `KrinikColorRework/BillboardFog.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 2
+- [~] `KrinikUIRework/EquipPlaceholders.cs` — поиски по сцене в кадре 1 · покадровые: EquipPlaceholdersTick
+- [~] `KrinikColorRework/FoliageCoverage.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 2
+- [~] `KrinikColorRework/GrassCoverage.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 4
 - [ ] `KrinikColorRework/MapPalette.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 1
-- [ ] `KrinikUIRework/MiniMapArrow.cs` — поиски по сцене в кадре 1 · покадровые: MiniMapArrowTick
-- [ ] `KrinikColorRework/NightParticles.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 3
-- [ ] `KrinikColorRework/RoofFog.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 8
-- [ ] `KrinikColorRework/WaterReflection.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 4
+- [~] `KrinikUIRework/MiniMapArrow.cs` — поиски по сцене в кадре 1 · покадровые: MiniMapArrowTick
+- [~] `KrinikColorRework/NightParticles.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 3
+- [~] `KrinikColorRework/RoofFog.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 8
+- [~] `KrinikColorRework/WaterReflection.cs` — поиски по сцене в кадре 1 · покадровые: Update · LINQ в кадре 4
 - [ ] `KrinikUIRework/DeathScreen.cs` — поиски вне кадра 1 · покадровые: LateUpdate · ForceRebuild 2
 - [ ] `KrinikUIRework/SpellPicker.cs` — поиски вне кадра 1 · покадровые: Update · ForceRebuild 2
-- [ ] `KrinikUIRework/BubbleBox.cs` — поиски вне кадра 3 · покадровые: LateUpdate · ForceRebuild 1
+- [~] `KrinikUIRework/BubbleBox.cs` — поиски вне кадра 3 · покадровые: LateUpdate · ForceRebuild 1
 - [ ] `KrinikUIRework/HeroSelect.cs` — поиски вне кадра 2 · ForceRebuild 2
 - [ ] `KrinikUIRework/Icons.cs` — покадровые: IconStatsTick, IconTick
 - [ ] `KrinikUIRework/ItemWindow.cs` — поиски вне кадра 1 · покадровые: LateUpdate · ForceRebuild 1
@@ -92,10 +92,10 @@ Shared) переписаны по правилам §5 разведки — до
 - [ ] `KrinikUIRework/CharacterCards.cs` — покадровые: LateUpdate
 - [ ] `KrinikUIRework/DevotionCards.cs` — покадровые: LateUpdate · GetValue 1
 - [ ] `KrinikUIRework/Dialogue.cs` — поиски вне кадра 2 · покадровые: LateUpdate · GetValue 1
-- [ ] `KrinikColorRework/FarGrassMap.cs` — покадровые: Update · LINQ в кадре 6
+- [~] `KrinikColorRework/FarGrassMap.cs` — покадровые: Update · LINQ в кадре 6
 - [ ] `KrinikColorRework/FoliageGlare.cs` — покадровые: Update
 - [ ] `KrinikUIRework/HudRow.cs` — покадровые: LateUpdate
-- [ ] `KrinikUIRework/IconClick.cs` — покадровые: IconHoverTick · LINQ 2
+- [~] `KrinikUIRework/IconClick.cs` — покадровые: IconHoverTick · LINQ 2
 - [ ] `KrinikUIRework/InventoryHelp.cs` — покадровые: LateUpdate
 - [ ] `KrinikUIRework/Letters.cs` — поиски вне кадра 1 · покадровые: LateUpdate · LINQ 1
 - [ ] `KrinikUIRework/MapLayout.cs` — покадровые: LateUpdate · LINQ 12
