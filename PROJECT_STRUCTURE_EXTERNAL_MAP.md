@@ -22,6 +22,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── Deploy-ModPack.ps1            # game half: unpack, deploy into game folders, verify (1003 lines)
 ├── package.json                   # npm bin "kumm"; node>=22; kaif:* handles
 ├── test-parse-archive.mjs · test-archive-roundtrip.mjs · test-pick-card.mjs   # regression of the pure core (reading archive names; write→read round trip; variant pick + upload-date compare) — run with node, exit 0 = green
+├── test-help-commands.mjs         # the command list: kumm.mjs header (what `help` prints) = switch cases = README «Команды» table
 ├── README.md                      # the storefront (Russian) — owner's handwriting
 ├── GOAL.md · STATUS.md · MASTER_PLAN.md · AGENT_GUIDE.md · PHILOSOPHY.md   # KAIF canon
 ├── PROJECT_STRUCTURE_EXTERNAL_MAP.md · PROJECT_ARCHITECTURE_INTERNAL_MAP.md
@@ -89,7 +90,7 @@ a complete CLI reference) → the `.SYNOPSIS`/`.DESCRIPTION` block of `Deploy-Mo
 
 | Truth | Mirror(s) | Check |
 |---|---|---|
-| `kumm.mjs` command switch (lines 623+) | the header comment (lines 18–28) · the README command table · `AGENT_GUIDE.md` Tools | `node kumm.mjs help` vs. the three lists |
+| `kumm.mjs` header comment «Команды» (what `help` prints) | the command switch · the README command table · `AGENT_GUIDE.md` Tools | `node test-help-commands.mjs` (header = switch = README; `AGENT_GUIDE.md` Tools — by eye) |
 | `package.json` `"files"` | what a user of `npm i -g kumm` actually gets | `npm pack --dry-run` — 5 files: `kumm.mjs`, `Deploy-ModPack.ps1`, `README.md`, `LICENSE`, `package.json` (drift closed 2026-10-10) |
 | archive naming scheme | `libraryName()` (writer) ↔ `parseArchive()` (reader) in `kumm.mjs` | round-trip one name through both |
 | `modpack.json` keys | `kumm.mjs` (`nexusGame`, `library`, `mods[]`) ↔ `Deploy-ModPack.ps1` (`gameExe`, `library`, `mods[]`, `steamEmu`, `packName`, `builtFor`) | grep both halves for each key |

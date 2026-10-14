@@ -768,8 +768,13 @@ if (IS_MAIN) {
       break
     }
 
-    default:
-      log(await readFile(fileURLToPath(import.meta.url), 'utf8')
-        .then(s => s.split('\n').filter(l => l.startsWith('//')).join('\n')))
+    // Справка - шапка файла (комментарий до первой строки кода), один источник списка команд; README и
+    // switch сверяет с ней test-help-commands.mjs. Раньше печатались ВСЕ комментарии файла с первой
+    // колонки - 109 строк вперемешку со служебными («A real help command», беклог STATUS).
+    default: {
+      const lines = (await readFile(fileURLToPath(import.meta.url), 'utf8')).split(/\r?\n/).slice(1)
+      const end = lines.findIndex(l => !l.startsWith('//'))
+      log(lines.slice(0, end < 0 ? lines.length : end).join('\n'))
+    }
   }
 }

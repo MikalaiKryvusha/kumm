@@ -76,8 +76,8 @@ owner's eyes. That is the whole of the current focus — Phase 1 in `MASTER_PLAN
       переносимости за один заход (`bugs/03_DONE_*`, `EXP-0043`). **Осталось**: превратить разовый
       скрипт в постоянный прибор в репозитории — сейчас он жил в scratchpad и умер вместе с сессией.
       Это самый дешёвый оставшийся пункт Phase 1: строитель фикстуры уже написан один раз.
-- [ ] **A real `help` command** — the switch block, the header comment (lines 18–28) and the README
-      table are three hand-maintained copies of one list. One source, the rest generated or checked.
+- [x] **A real `help` command** — 2026-10-14: `help` печатает только шапку (41 строка вместо 109 комментариев файла); шапка —
+      источник, switch и таблицу README сверяет `node test-help-commands.mjs` (доказан двумя поломками).
 - [ ] **Warn when a mod overrides `Engine.ini` at runtime** — обе болезни 21.08 были невидимы движку:
       деплой сверил каждый файл и всё равно отгрузил сборку, чью графику Lua-мод переписывает в мире.
       Дешёвый первый срез не требует запущенной игры: просканировать исходники модов на
