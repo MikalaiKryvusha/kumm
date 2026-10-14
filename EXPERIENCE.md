@@ -66,7 +66,7 @@
      popup-steals-pointer, probe-point-unchecked, procedural-pattern-on-sphere, proxy-path-blocked, recon-by-snippets,
      repaint-after-build, rule-half-applied, rule-overapplied, shader-owns-its-own-formula, shared-state-two-owners,
      stale-stand, stand-differs-from-owner-world, text-color-blind-to-background, translator-delay, wrong-api-assumption,
-     wrong-model-of-the-frame, wrong-proxy, scope-wider-than-ask -->
+     wrong-model-of-the-frame, wrong-proxy, scope-wider-than-ask, eyeballed-number, visual-proxy-for-mechanic -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -89,6 +89,21 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0264 · 2026-10-14 · ❌→✅ · #svarogsdream #animation #jump #measurement
+class: eyeballed-number
+**Lesson:** стык прыжка (поза отрыва ↔ поза приземления) я выбрал на глаз по листу кадров (доли 0,16 и 0,57) — `[OWNER]` «при призимлении
+герой чуть-чуть вверх уходит, лаг анимации какой-то». Замер позы по доле клипа (пульт `clipcurve`: таз и стопа над моделью) показал шаг +0,52;
+пара 0,14/0,65 с равными позами дала шаг 0,00 в журнале каждого прыжка. Правило: точки стыка анимаций — по числу позы, не по картинке;
+мод пишет шаг стыка в журнал. **Repro:** `h.sh "clipcurve Anim_BowJumpShot_Fwd 50"`. mechanized: строка `jump #N: landed … (step S)` в журнале KrinikFixes
+
+### EXP-0263 · 2026-10-14 · ❌→✅ · #svarogsdream #jump #navmesh #test-where-the-defect-lives
+class: visual-proxy-for-mechanic
+**Lesson:** первый прыжок рисовал дугу одной моделью (`ModelSelector.localPosition`), а героя водит `NavMeshAgent` по сетке: на ровном
+выглядело верно, но с вершины вниз герой не сходил — кромка обрыва вне сетки (кейс T2, проверка по слову владельца «попрыгай с вершины
+вниз, из ямы вверх»). Настоящий прыжок: `agent.updatePosition = false` на полёт, парабола одной «тяжести», точка приземления — земля + 
+`NavMesh.SamplePosition`, в конце `Warp`. Правило: механику, меняющую положение героя, проверять там, где сетка кончается (обрыв, уступ, стена),
+а не на ровном. **Repro:** `h.sh "slopes 45 3"` → `teleport <вершина>` → разбег и пробел, журнал `jump #N: … from A to B`. mechanized: none
 
 ### EXP-0262 · 2026-10-14 · ❌ · #svarogsdream #recording #camera #harness
 class: probe-point-unchecked
