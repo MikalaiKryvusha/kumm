@@ -109,7 +109,7 @@
 ## 7. Аудит наших модов по этим правилам (2026-10-14 21:06)
 
 Счёт по исходникам `SvarogsDream/src` без пульта `KrinikDevHarness` (команды — `grep -r --include=*.cs -o '<приём>' .`; поиски по сцене в
-кадре — `node SvarogsDream/tools/scene_search_census.mjs`). Счёт по всему коду, не только по кадру: в кадре — меньше, точный разрез даёт перепись.
+кадре — `node SvarogsDream/tools/scene_search_census.mjs`). Счёт grep по всему коду (с папкой `Shared` и строками комментариев); точный разрез по файлам и по кадру — `node SvarogsDream/tools/refactor_inventory.mjs`: 87 поисков (25 в кадре), 57 покадровых методов, 13 ForceRebuild, 14 GetValue, 127 LINQ (44 в кадре); чеклист — `plans/26_EPIC_svarog_native_refactor.md`.
 
 | Приём | Сколько у нас | Что значит |
 |---|---|---|
