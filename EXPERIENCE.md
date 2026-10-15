@@ -90,6 +90,15 @@
 
 ## Entries
 
+### EXP-0278 · 2026-10-15 · ❌→✅ · #svarogsdream #harmony #bepinex #awake #resilience
+class: one-patch-kills-the-mod
+**Lesson:** в KrinikFixes `PatchAll` стоял в `Awake` ПЕРЕД `Jump.Bind`: в одном запуске из трёх Harmony упал на одном классе (`IL Compile Error`,
+NRE в MonoMod `DMDCecilGenerator` — только в `Player.log`, в `LogOutput.log` ни строки), исключение оборвало `Awake` — прыжка нет, ячейка
+«Пробел» снова на панели, владелец заметил раньше журнала («И ПЕРЕСТАЛ ГЕРОЙ ПРЫГАТЬ?»). Правило: в `Awake` мода — сначала настройки и
+свои подсистемы, потом патчи ПО ОДНОМУ классу (`CreateClassProcessor(t).Patch()` в try/catch с именем класса в журнал); при «мод молчит» —
+сначала `Player.log`: исключения Unity из `Awake` BepInEx в свой журнал не пишет. **Repro:** `grep -n "IL Compile Error" "<LocalLow>/Player.log"`.
+mechanized: none — правка в `KrinikFixes/Plugin.cs`; остальные моды Сварога (`PatchAll` в `Awake`) — тот же риск, не переделаны
+
 ### EXP-0277 · 2026-10-14 · ❌→✅ · #svarogsdream #camera #animation #sampling
 class: sampled-animated-bone-jitter
 **Lesson:** камера качалась с дыханием героя (`bugs/50`): высота точки взгляда мерилась раз в 2 с по кости головы, а кость ходит с вдохом —
