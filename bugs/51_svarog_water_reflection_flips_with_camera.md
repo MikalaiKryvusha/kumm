@@ -1,6 +1,7 @@
 # Bug 51 — Svarog: water reflection near the Bara piers appears and vanishes with the camera angle; a far pond flickers sky ↔ reflection; house walls are not reflected
 
-**Status:** 🔧 fixed in code and deployed 2026-10-15 21:12 (clean restart), awaiting the in-game check (TC W1–W3) and the owner's eye
+**Status:** 🔧 symptoms 1–2 — fix in code, deployed 2026-10-15 21:12 (clean restart), not proven: W1 blocked, W2 partial · symptom 3 —
+NOT fixed: W3 fail (walls not reflected even at `ScreenReflectionMaxDist` 250) · needs the owner's eye and a camera through the water
 **Severity:** S2 — a visible seam the owner shows on video
 **Version/build:** SvarogsDream after `7edaccf`, ColorRework built 2026-10-15 ≈21:10 (`84566627eab8`)
 **When/context:** 2026-10-15 ≈21:05, batch-3 run, the owner in the agent's game in Bara: `[OWNER]` «включи запись видео на 5 секунд … покажу
@@ -30,6 +31,15 @@ only the 3 planes nearest the camera; in Bara there are 6, three of them at 281 
   material shows.
 - `WaterSSPR.cs`: `MaxPlanes` 3 → 6.
 - `ScreenReflectionMaxDist` 80 → 250 live through the pult (21:08), config saved; the code default — after the owner's eye.
+
+## Verification (2026-10-15, TC W1–W3)
+
+- W1 blocked — 21:23–21:24, three `DemoOrbit` passes with screen recording: the camera circles the hero inside the inn, little water in
+  frame; the owner's angle (through the water, `_harness/water_bug/water_bug.mp4`) is not reproduced by the console.
+- W2 partial — 21:24 `water_fix3_sheet`: the far pond reflects piers and houses dark, no sky flicker in neighbouring frames; not the
+  angle of `water_bug2`.
+- W3 fail — 21:14 screenshot `owner_2113` (the owner's word): stilts reflect as orange streaks, no dark walls of piers or houses even at
+  250 m. Symptom 3 stays open.
 
 ## Decisions made without the owner
 - `[AI]` 250 m as «near» — from the zoomed-out camera of the video; the visual verdict is the owner's (taste class).

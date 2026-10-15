@@ -42,7 +42,8 @@
 
 ## Verification
 
-Кейсы B1–B5 — `testcases/TC_svarog_jump_physics_2026-10-14.md`. Functional run: NONE (сборка не выложена).
+Кейсы B1–B5 — `testcases/TC_svarog_jump_physics_2026-10-14.md`. Functional run: только дымовой — 2026-10-15 21:31 пробел → `jump #1` (высота 2,20), кейс J1 в
+`testcases/TC_svarog_batch3_smallbugs_2026-10-15.md`; кейсы B1–B5 по замечаниям не прогнаны.
 
 ## Decisions made without the owner
 

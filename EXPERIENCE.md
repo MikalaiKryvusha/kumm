@@ -66,7 +66,8 @@
      popup-steals-pointer, probe-point-unchecked, procedural-pattern-on-sphere, proxy-path-blocked, recon-by-snippets,
      repaint-after-build, rule-half-applied, rule-overapplied, shader-owns-its-own-formula, shared-state-two-owners,
      stale-stand, stand-differs-from-owner-world, text-color-blind-to-background, translator-delay, wrong-api-assumption,
-     wrong-model-of-the-frame, wrong-proxy, scope-wider-than-ask, eyeballed-number, visual-proxy-for-mechanic -->
+     wrong-model-of-the-frame, wrong-proxy, scope-wider-than-ask, eyeballed-number, visual-proxy-for-mechanic,
+     scripted-edit-anchor-unchecked -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -90,6 +91,16 @@
 
 ## Entries
 
+### EXP-0279 · 2026-10-16 · ❌→✅ · #testcases #scripted #node #verification #closure
+class: scripted-edit-anchor-unchecked
+**Lesson:** статусы кейсов я вписывал однострочными `node -e`: найти строку кейса по `indexOf` и склеить `slice`. Когда якорь не находился,
+скрипт писал молча: в кейсах пачки 3 пять итогов (D0, F1, G1, B1, P1) приклеились к заголовку через `undefined`, а строки кейсов остались
+`[NOT-TESTED]`. Так же 2026-10-07 испорчен заголовок кейсов инвентаря. `kaif-testrun-lint` ответил «0 findings»: он читает отчёты, а не файлы
+кейсов. Нашёл это судья при закрытии. Правило: скрипт правки бросает исключение, если якорь не найден ровно один раз (`split(a).length !== 2`),
+и после записи печатает, сколько в файле осталось `[NOT-TESTED]` и `undefined`. Тот же класс, что EXP-0047 (правка по индексу без проверки
+остатка). **Repro:** `grep -rln undefined testcases/` и `grep -c "NOT-TESTED" <файл кейсов>` перед записью итога прогона.
+mechanized: none — в линт файлов кейсов просится проверка «`undefined` в тексте · `[NOT-TESTED]` у кейса, которому отчёт дал вердикт»
+
 ### EXP-0278 · 2026-10-15 · ❌→✅ · #svarogsdream #harmony #bepinex #awake #resilience
 class: one-patch-kills-the-mod
 **Lesson:** в KrinikFixes `PatchAll` стоял в `Awake` ПЕРЕД `Jump.Bind`: в одном запуске из трёх Harmony упал на одном классе (`IL Compile Error`,
@@ -97,7 +108,8 @@ NRE в MonoMod `DMDCecilGenerator` — только в `Player.log`, в `LogOutp
 «Пробел» снова на панели, владелец заметил раньше журнала («И ПЕРЕСТАЛ ГЕРОЙ ПРЫГАТЬ?»). Правило: в `Awake` мода — сначала настройки и
 свои подсистемы, потом патчи ПО ОДНОМУ классу (`CreateClassProcessor(t).Patch()` в try/catch с именем класса в журнал); при «мод молчит» —
 сначала `Player.log`: исключения Unity из `Awake` BepInEx в свой журнал не пишет. **Repro:** `grep -n "IL Compile Error" "<LocalLow>/Player.log"`.
-mechanized: none — правка в `KrinikFixes/Plugin.cs`; остальные моды Сварога (`PatchAll` в `Awake`) — тот же риск, не переделаны
+mechanized: патчи по одному классу во всех пяти модах Сварога — `Shared/PatchEach.cs` (камера, цвет, меню модов, интерфейс) и свой цикл
+в `KrinikFixes/Plugin.cs` (SvarogsDream `2c03461`); кейс X1 2026-10-15 21:33 — 0 `patch … failed`, 0 `IL Compile Error`
 
 ### EXP-0277 · 2026-10-14 · ❌→✅ · #svarogsdream #camera #animation #sampling
 class: sampled-animated-bone-jitter

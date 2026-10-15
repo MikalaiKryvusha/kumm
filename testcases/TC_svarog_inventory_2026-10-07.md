@@ -1,4 +1,4 @@
-undefinedpass · 10:40 · `nb_card_s.webp`: «Цена 25 · Вес 0,2» на синих плашках, как прежде |undefinedpass · 10:40 · середина букв «Вес» 1723,5 px, «Сортировать» 1724,5 px (кадр 4K) |undefinedpass · 2026-10-07 10:40 · `_harness/nb_final.webp`, `nb_scale_sheet.webp`: «Золото 1614 🪙   Вес 105,6/144» без подложек, подпись цветом статов; при 0.7 мельче «Сортировать» — размер 0.9 |# Test cases — Svarog's Dream: окно инвентаря, утро 07.10 (ideas/07 п. 30–32)
+# Test cases — Svarog's Dream: окно инвентаря, утро 07.10 (ideas/07 п. 30–32)
 
 **Created:** 2026-10-07 09:34 +03:00 — до первой выкладки этой пачки · **Under test:** `KrinikUIRework` (`StatsLayout.cs` и
 соседи) · **Version/build:** SvarogsDream `09f4ec0` + правки этой пачки
