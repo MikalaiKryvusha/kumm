@@ -649,6 +649,13 @@ function Invoke-VerifyTarget {
                 if (Test-UserConfig -Mod $m) { $present++ } else { $missing++ }
             }
         }
+        # Включённый мод без строк verify, не пак под modlist.txt и без userConfig проверялся молча
+        # «никак», а итог говорил Verify clean (баг 46): сторожевые пути задаёт автор пака - не молчать. [NOT-TESTED]
+        $enabledMod = ($null -eq $m.enabled -or $m.enabled)
+        $byModList = ($m.kind -eq 'pak' -and $script:pack.modList)
+        if ($enabledMod -and -not $m.verify -and -not $byModList -and -not $m.userConfig) {
+            Warn "$($m.name): nothing to verify (no 'verify' paths in the manifest)"
+        }
         foreach ($v in $m.verify) {
             $p = Join-Path $Target.Path ($v -replace '/', '\')
             if (Test-Path $p) { Ok "$($m.name): $v"; $present++ }
@@ -747,6 +754,8 @@ function Invoke-DeployTarget {
             $installed++
             $files += $total
             if ($Plan) { Ok "$($m.name) $($m.version)" }
+            # Мод без шагов install (и не pak с modsDir) клал 0 файлов под зелёным [ok] (баг 46, стенд 2026-10-14). [NOT-TESTED]
+            elseif ($total -eq 0 -and -not $m.userConfig) { Warn "$($m.name) $($m.version)  (0 files - no install steps placed anything)" }
             else { Ok "$($m.name) $($m.version)  ($total files)" }
         }
         catch {
@@ -757,6 +766,20 @@ function Invoke-DeployTarget {
 
     # modlist.txt - порядок загрузки, собранный из порядка mods[]. Пишется ПОСЛЕ
     # всех модов, чтобы порядок был полным, и только если манифест его просит.
+    # При -Only в $PakOrder только выбранные моды: перезапись файла по нему выключала
+    # все остальные паки (баг 06, 09.09 - три мода раскатались и выключили семь).
+    # Поэтому подмножество СЛИВАЕТСЯ с прежним списком: прежние строки остаются на
+    # своих местах, новые паки - в конец; порядок целиком по манифесту - только у
+    # полной раскатки. [NOT-TESTED]
+    if ($script:pack.modList -and $script:PakOrder.Count -gt 0 -and $script:OnlyMods) {
+        $listPath = Join-Path $Target.Path ($script:pack.modList -replace '/', '\')
+        if (Test-Path $listPath) {
+            $kept = @(Get-Content $listPath | ForEach-Object { $_.Trim() } | Where-Object { $_ })
+            $added = @($script:PakOrder | Where-Object { $kept -notcontains $_ })
+            if ($added.Count) { Warn "modlist: -Only appends $($added.Count) new pak(s) at the end - a full deploy restores manifest order" }
+            $script:PakOrder = @($kept) + $added
+        }
+    }
     if ($script:pack.modList -and $script:PakOrder.Count -gt 0) {
         try { Write-ModList -Target $Target -Paks $script:PakOrder -Plan:$Plan }
         catch { Bad "modlist: $($_.Exception.Message)"; $failed += 'modlist.txt' }

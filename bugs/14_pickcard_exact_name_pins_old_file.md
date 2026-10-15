@@ -39,3 +39,10 @@ the round-trip test (`test-parse-archive.mjs` has the cutting harness): cards 14
 ## Decisions made without the owner
 
 none yet.
+
+## 🔧 Status 2026-10-15 20:52 +03:00 — fixed in code, live path pending
+
+`kumm.mjs` → `newestOfKind`: the name match picks the VARIANT; among cards of the same kind (name without a trailing version token) the
+newest upload wins. Cases in `test-pick-card.mjs` (cards 142/127/122 → 142; Capped stays apart) — red before, 19/19 after. Live
+`node kumm.mjs check --root D:/work/ai_sandbox/ConanExiles` through Chrome not run yet — that closes it.
+`[AI]` "Kind" = squashed name minus a trailing version token; a version in the MIDDLE of a name ("PWS 1.0.8 Capped") stays part of the kind.

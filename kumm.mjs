@@ -599,6 +599,19 @@ const sameFile = (archive, card) =>
 // У мода бывает несколько главных файлов - Steam/Gamepass, Capped/обычный,
 // разные пресеты. Берём тот, что ближе к уже лежащему в библиотеке; если в
 // библиотеке пусто - самый свежий.
+// Совпадение по имени выбирает ВАРИАНТ (Steam/Gamepass, Capped/обычный), а не
+// файл: автор может однажды вписать версию в имя и потом перестать - тогда
+// точное имя держалось бы за старый файл вечно (Bosses My New Besties, баг 14:
+// «BossesMyNewBesties 3.0» против свежих «BossesMyNewBesties» 3.0.2). Род файла -
+// имя без хвостовой версии; из того же рода берём самый свежий.
+// [TESTED: 2026-10-15 · test-pick-card.mjs 19/19, кейс бага 14 красный до правки · testcases/reports/2026-10-15_engine-small-bugs-06-14-46.md]
+function newestOfKind(pool, hit) {
+  const kind = c => squash(String(c.name ?? '').replace(/[\s_-]*v?\d+(?:[._]\d+)*\s*$/i, ''))
+  const k = kind(hit)
+  return pool.filter(c => kind(c) === k)
+    .sort((a, b) => (b.uploaded || '').localeCompare(a.uploaded || ''))[0] ?? hit
+}
+
 function pickCard(cards, archive, modId, prefer = null) {
   const main = cards.filter(c => !c.old)
   const pool = main.length ? main : cards
@@ -613,7 +626,7 @@ function pickCard(cards, archive, modId, prefer = null) {
     const noExt = path.basename(archive.file, path.extname(archive.file))
     const oldBase = squash(noExt.split(` ${modId} `)[0].split(`-${modId}-`)[0])
     const exact = pool.find(c => squash(c.name) === oldBase)
-    if (exact) return exact
+    if (exact) return newestOfKind(pool, exact)
     // Иначе - у кого длиннее общий префикс с прежним именем, а при равном
     // префиксе - чьё имя ближе по длине. Это и отсекает лишние довески:
     // "(Gamepass)" против "(Steam)", "1.0.8 Capped" против "1.0.8".
@@ -623,7 +636,7 @@ function pickCard(cards, archive, modId, prefer = null) {
       while (i < n.length && i < oldBase.length && n[i] === oldBase[i]) i++
       return { c, prefix: i, drift: Math.abs(n.length - oldBase.length) }
     }).sort((a, b) => b.prefix - a.prefix || a.drift - b.drift)
-    if (scored[0].prefix > 0) return scored[0].c
+    if (scored[0].prefix > 0) return newestOfKind(pool, scored[0].c)
   }
   return [...pool].sort((a, b) => (b.uploaded || '').localeCompare(a.uploaded || ''))[0]
 }

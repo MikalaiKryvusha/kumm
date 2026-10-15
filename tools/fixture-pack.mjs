@@ -10,7 +10,7 @@
 //         KUMM_DEPLOY=<другой Deploy-ModPack.ps1> — прогнать стенд по копии скрипта.
 // 2026-10-14 14:36: 10 проверок прошли; копия скрипта с дефектом бага 03 (id ровно из четырёх цифр) — красные ровно две названные
 // заранее: «-DryRun: код 0» и «More Katanas (id 41) найден по nexusId». [NOT-TESTED]
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync, writeFileSync, readFileSync, existsSync, unlinkSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -26,6 +26,8 @@ const MODS = [
   { name: 'Camera Control', kind: 'lua', version: '1.0.4', nexusId: 3659, file: 'Camera Control 1.0.4 3659 1.0.4 2026-07-16T17-00Z abcdefghi.zip' },
   { name: 'More Katanas', kind: 'pak', version: '1.0.1', nexusId: 41, file: 'More Katanas 41 1.0.1 2026-09-08T00-00Z abcdefghi.zip' },
   { name: 'Parked Mod', kind: 'pak', version: '2', nexusId: 7, enabled: false, file: 'Parked Mod 7 2 2026-09-01T10-00Z abcdefghi.zip' },
+  // баг 46: мод без шагов install кладёт 0 файлов — раскатка должна предупредить, а не сказать [ok]
+  { name: 'Empty Mod', kind: 'lua', version: '1', nexusId: 9, noInstall: true, file: 'Empty Mod 9 1 2026-09-02T10-00Z abcdefghi.zip' },
 ]
 
 mkdirSync(LIB, { recursive: true })
@@ -43,7 +45,9 @@ writeFileSync(path.join(GAME, 'FixtureGame.exe'), '')
 writeFileSync(path.join(DIR, 'modpack.json'), JSON.stringify({
   packName: 'KUMM fixture pack', builtFor: 'fixture', nexusGame: 'fixturegame', gameExe: 'FixtureGame.exe', library: 'mods',
   // шаг install «всё из архива → Mods/<имя>»: без шагов (и без kind pak + modsDir) раскатка кладёт 0 файлов и говорит [ok] (проба 14:38)
-  mods: MODS.map(({ file, ...m }) => ({ ...m, install: [{ from: '.', to: `Mods/${m.name}` }] })),
+  // Camera Control — со строкой verify (сторожевой путь), More Katanas — без неё: «nothing to verify» (баг 46)
+  mods: MODS.map(({ file, noInstall, ...m }) => ({ ...m, ...(noInstall ? {} : { install: [{ from: '.', to: `Mods/${m.name}` }] }),
+    ...(m.name === 'Camera Control' ? { verify: ['Mods/Camera Control/seed.txt'] } : {}) })),
 }, null, 2))
 writeFileSync(path.join(DIR, 'targets.json'), JSON.stringify({ targets: [{ name: 'fixture', path: GAME }] }, null, 2))
 
@@ -71,6 +75,49 @@ expect('-Deploy -DryRun: режим «ничего не пишется»', dry.o
 for (const m of MODS.filter(x => x.enabled !== false))
   expect(`-Deploy -DryRun: «${m.name}» найден по nexusId`, new RegExp(`\\[ok\\]\\s+${m.name}`).test(dry.out), dry.out)
 expect('-Deploy -DryRun: выключенный пропущен', /Parked Mod: skipped \(disabled/.test(dry.out), dry.out)
+
+// ---- боевая раскатка в папку стенда и -Verify (баг 46)
+const dep = ps(['-Deploy'])
+expect('-Deploy: Camera Control положил файл', existsSync(path.join(GAME, 'Mods', 'Camera Control', 'seed.txt')), dep.out)
+expect('-Deploy: мод с 0 файлов — предупреждение, не [ok]', /\[warn\]\s+Empty Mod 1\s+\(0 files/.test(dep.out), dep.out)
+const ver = ps(['-Verify'])
+expect('-Verify: сторожевой путь Camera Control найден', /\[ok\]\s+Camera Control: Mods\/Camera Control\/seed\.txt/.test(ver.out), ver.out)
+expect('-Verify: мод без verify — «nothing to verify»', /\[warn\]\s+More Katanas: nothing to verify/.test(ver.out), ver.out)
+unlinkSync(path.join(GAME, 'Mods', 'Camera Control', 'seed.txt'))
+const ver2 = ps(['-Verify'])
+expect('-Verify: удалён сторожевой файл — [FAIL] и код 1', ver2.code === 1 && /\[FAIL\]\s+Camera Control/.test(ver2.out), ver2.out)
+
+// ---- второй пак «как Конан»: моды-паки, порядок загрузки в modlist.txt (баг 06)
+const PDIR = path.join(DIR, 'pakpack'), PLIB = path.join(PDIR, 'mods'), PGAME = path.join(PDIR, 'game')
+mkdirSync(PLIB, { recursive: true }); mkdirSync(PGAME, { recursive: true })
+const PAKS = [
+  { name: 'Alpha Arms', kind: 'pak', version: '1', nexusId: 11, pak: 'AlphaArms.pak', file: 'Alpha Arms 11 1 2026-09-03T10-00Z abcdefghi.zip' },
+  { name: 'Beta Bows', kind: 'pak', version: '1', nexusId: 12, pak: 'BetaBows.pak', file: 'Beta Bows 12 1 2026-09-04T10-00Z abcdefghi.zip' },
+  { name: 'Gamma Gear', kind: 'pak', version: '1', nexusId: 13, pak: 'GammaGear.pak', file: 'Gamma Gear 13 1 2026-09-05T10-00Z abcdefghi.zip' },
+]
+for (const m of PAKS) {
+  const pakFile = path.join(PDIR, m.pak)
+  writeFileSync(pakFile, 'pak')
+  execFileSync('powershell', ['-NoProfile', '-Command', `Compress-Archive -LiteralPath ${q(pakFile)} -DestinationPath ${q(path.join(PLIB, m.file))}`])
+}
+writeFileSync(path.join(PGAME, 'FixtureGame.exe'), '')
+writeFileSync(path.join(PDIR, 'modpack.json'), JSON.stringify({
+  packName: 'KUMM fixture pak pack', builtFor: 'fixture', nexusGame: 'fixturegame', gameExe: 'FixtureGame.exe', library: 'mods',
+  modsDir: 'Game/Mods', modList: 'Game/Mods/modlist.txt', mods: PAKS.map(({ file, pak, ...m }) => m),
+}, null, 2))
+writeFileSync(path.join(PDIR, 'targets.json'), JSON.stringify({ targets: [{ name: 'fixture', path: PGAME }] }, null, 2))
+const pps = args => {
+  try { return { code: 0, out: execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', DEPLOY, '-PackDir', PDIR, ...args], { encoding: 'utf8' }) } }
+  catch (e) { return { code: e.status ?? 1, out: `${e.stdout ?? ''}${e.stderr ?? ''}` } }
+}
+const LIST = path.join(PGAME, 'Game', 'Mods', 'modlist.txt')
+const lines = () => existsSync(LIST) ? readFileSync(LIST, 'utf8').split(/\r?\n/).filter(Boolean).join(',') : '(нет файла)'
+const full = pps(['-Deploy'])
+expect('паки: полная раскатка — modlist по манифесту', full.code === 0 && lines() === 'AlphaArms.pak,BetaBows.pak,GammaGear.pak', `${full.out}\nmodlist: ${lines()}`)
+const one = pps(['-Deploy', '-Only', 'Beta Bows'])
+expect('паки: -Only одного мода не выключает остальные (баг 06)', lines() === 'AlphaArms.pak,BetaBows.pak,GammaGear.pak', `${one.out}\nmodlist: ${lines()}`)
+const pv = pps(['-Verify'])
+expect('паки: -Verify после -Only — код 0, ни одного «not in modlist»', pv.code === 0 && !/not in modlist/.test(pv.out), pv.out)
 
 console.log(bad ? `\nСТЕНД: ${bad} провал(ов)` : '\nстенд: все проверки прошли')
 process.exit(bad ? 1 : 0)

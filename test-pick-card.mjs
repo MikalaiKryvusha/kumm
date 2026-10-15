@@ -47,6 +47,7 @@ const { pickCard, sameFile, stamp } = new Function('path', `
   ${grabConst('squash')}
   ${grabConst('stamp')}
   ${grabConst('sameFile')}
+  ${grabFn('newestOfKind')}
   ${grabFn('pickCard')}
   return { pickCard, sameFile, stamp }
 `)(path)
@@ -91,6 +92,14 @@ check('старая версия в библиотеке → ближайшее 
 const nexusScheme = [card('DeclutterHUD Lite', '2026-07-21T23:00:00Z'), card('DeclutterHUD', '2026-07-21T23:07:00Z')]
 check('имя по схеме Nexus («-id-») → тот же файл',
   pickCard(nexusScheme, arch('DeclutterHUD-3671-1-1-0-1753132020.zip'), '3671')?.name, 'DeclutterHUD')
+
+// Баг 14: автор однажды вписал версию в имя файла и потом перестал — точное совпадение держалось за старый файл вечно
+// (Bosses My New Besties, Nexus 18, 2026-10-02: библиотека «BossesMyNewBesties 3.0», на Nexus уже 3.0.2 без версии в имени).
+const bosses = [card('BossesMyNewBesties', '2026-09-17T12:19:38Z'), card('BossesMyNewBesties', '2026-09-10T01:15:01Z'), card('BossesMyNewBesties 3.0', '2026-09-01T23:23:08Z')]
+check('версия ушла из имени файла → самый свежий того же рода (баг 14)',
+  pickCard(bosses, arch('BossesMyNewBesties 3.0 18 3.0.0 2026-09-01T23-23Z abcdefghi.zip'), '18')?.uploaded, '2026-09-17T12:19:38Z')
+check('новее только другой вариант (Capped) → свой, не Capped (баг 14 не трогает варианты)',
+  pickCard([card('PWS 1.0.8 Capped', '2026-09-01T00:00:00Z'), card('PWS 1.0.8', '2026-08-01T00:00:00Z')], arch('PWS 1.0.8 3725 8 2026-08-01T00-00Z abcdefghi.zip'), '3725')?.name, 'PWS 1.0.8')
 
 const three = [card('Alpha', '2026-07-01T00:00:00Z'), card('Beta', '2026-08-01T00:00:00Z'), card('Gamma', '2026-07-15T00:00:00Z')]
 check('пустая библиотека → самый свежий', pickCard(three, null, '1')?.name, 'Beta')

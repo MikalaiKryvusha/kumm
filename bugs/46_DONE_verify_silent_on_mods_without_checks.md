@@ -48,3 +48,17 @@
 ## Links
 
 `bugs/03_DONE_palworld_shaped_assumptions.md` (первый стенд), STATUS — пункт «A fixture pack».
+
+## ✅ STATUS: DONE (2026-10-15 20:52 +03:00)
+
+Fix: `Deploy-ModPack.ps1` — `Invoke-VerifyTarget` печатает `[warn] <мод>: nothing to verify` у включённого мода без `verify`, не пака под
+`modList` и без `userConfig`; `Invoke-DeployTarget` — `[warn] … (0 files …)` вместо `[ok]`. Стенд `tools/fixture-pack.mjs` получил
+боевую раскатку и `-Verify` (5 проверок); по прежней версии скрипта красный ровно на двух названных.
+Hygiene: стенд 20/20; контроль — прежняя версия красная на названных кейсах.
+Functional run: `-Verify` по трём пакам владельца — Palworld и Конан без изменений; пак Сварога показал 7 модов без проверок → в
+`SvarogsDream/modpack.json` дописаны сторожевые пути, `8 present, 0 missing`. Отчёт `testcases/reports/2026-10-15_engine-small-bugs-06-14-46.md`.
+
+## Decisions made without the owner (closing)
+
+- `[AI]` Предупреждение, а не провал: мод без `verify` — дыра в манифесте, а не в игре; код возврата не меняется.
+- `[AI]` Сторожевой путь `KrinikUIRework` — `BepInEx/scripts/…`, где он лежит (горячая выкладка), а не `plugins/…` из его `install`.
