@@ -30,3 +30,14 @@ none yet
 
 ## Links
 EXP-0224 (XUnity re-sets TMP font on text change) · TC C72
+
+## 2026-10-15 — cause by code, fix deployed, not observed in game yet
+
+Cause (by code, `[AI]`): the Mastery window is a «letter» window (`KrinikLetter`): for 2 s after a show it re-styles every frame, then every
+`Refresh = 0.5` s, and its `Lift` turns the author's red into the juicy `#FF4A4A` (rulebook §6a p. 5). The skill tooltip lives inside it.
+On a skill switch the tooltip's own `Style` paints the title first (lerp toward white by `TipTextBrightness`) — white/pink — and the window's
+next pass ≤ 0.5 s later repaints it red: «≈28 frames white, then red» matches the 0.5 s refresh. The polled `color` being red all the time
+(2026-10-13) is not explained yet — the poll may have run after the pass.
+Fix: SvarogsDream `1050849` — `Style` gives a TMP text inside a `KrinikLetter` the window's final colour at once (`Lift` is idempotent on a
+lifted colour). Deployed 21:12; TC K1/K2 (`testcases/TC_svarog_batch3_smallbugs_2026-10-15.md`) blocked — the mastery tooltip path is not
+addressable before the first hover; the probe `tmpwatch <path> <frames>` is in the pult for the next run.
