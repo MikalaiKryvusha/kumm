@@ -214,6 +214,8 @@ Shared) переписаны по правилам §5 разведки — до
       только при отличии — `Plugin.Update` 4,87 → 1,32 мс худшего кадра (кейсы K1–K2).
 - [x] Боевые надписи (SvarogsDream `fc31b6f`): буквы и переводчик — при загрузке сцены, не в первом бою — `PatchCombatTextRussian.Prefix`
       6,3–7,7 → 0,38 мс худшего кадра (кейс B3).
-- [ ] Дальше по замеру того же маршрута: `PatchCharacterDraw` 1,3–1,8 мс, `KrinikMobBarSize.LateUpdate` 1,0–1,1, `PatchCombatTextDamage`
-      1,3–1,5 (первый вызов), `PatchPlantIconSize` 1,0–1,2.
+- [x] Жители (SvarogsDream `240fd71`): кости, сон, прятанье и пробуждение — из бюджета кадра мода камеры — `PatchCharacterDraw.Postfix`
+      1,3–1,8 → 0,61 мс (P1); размер боевых надписей — один раз на спавнер (P2 — в бою не наблюдался).
+- [ ] Дальше по замеру того же маршрута: `KrinikMobBarSize.LateUpdate` 1,0–1,1 и `PatchMobBarSize.Postfix` 0,9 (появление моба: компонент,
+      шрифт), `PatchPlantIconSize` 1,0–1,2, `KrinikCameraRework.Plugin.Update` 1,3; `PatchCombatTextDamage` — проверить в бою.
 - Выкладка для чистого запуска — `SvarogsDream/tools/deploy-cold.sh <Мод>…` (пара `.dll` + `.pdb`, EXP-0288).
