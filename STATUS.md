@@ -122,7 +122,7 @@ Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
 >    край сетки, `PhantomWall`; владелец: «да, сработала», «работает»); ряд быстрых действий держит запасную панель игры после смены оружия
 >    (STATUS прежний п. 0(5) — виновник найден, `HudRow.cs`); карточка сейва в «Загрузить игру» — колонка и дата (`SaveCard.cs`); LINQ в
 >    покадровых методах мода цвета 26 → 0 (`Shared/CsvList.cs`); переписи материалов на смене участка — кусками по 0,25 мс за кадр у RoofFog,
->    NightParticles, FoliageCoverage, GrassCoverage (каждая 0,66–0,98 мс вместо 1,2–1,6); пульт: `active <путь>` читает, пробел в пути — `~`.
+>    NightParticles, FoliageCoverage, GrassCoverage (каждая 0,66–0,98 мс вместо 1,2–1,6 — без перебора памяти снимка, он в п. (1)); пульт: `active <путь>` читает, пробел в пути — `~`.
 >    **В игре сейчас** (2026-10-16 10:10): KrinikFixes `05da363`, KrinikColorRework `7776426` (в `plugins`), KrinikUIRework `42d7b46` (в
 >    `scripts`), KrinikDevHarness `88c1604`. Следующее:
 >    (1) **перебор памяти снимка** `TerrainWatch.Materials` → `FindObjectsOfTypeAll<Material>` — до 3,84 мс кадра у компонента, спросившего
