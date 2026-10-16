@@ -52,7 +52,7 @@ if pid is None:
 h = k32.OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, False, pid)
 code = read(h, 0x457000, 7)
 print('0x457000:', code.hex(' '))
-if code == bytes.fromhex('31dbb8fc889700'):
+if code == bytes.fromhex('33dbb8fc889700'):
     print('C4: original bytes - PickupOldestFirst NOT in place')
 elif code[0] == 0xE9:
     target = (0x457000 + 5 + struct.unpack('<i', code[1:5])[0]) & 0xFFFFFFFF

@@ -65,11 +65,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > without the human and without resources only the human can provide. The loop skills
 > (`/autoloop`, `/dayloop`, `/nightloop`) grind this pool.
 
-- Сделанные пункты пула (запуск-гард, круговой ход имён архивов, кейсы `pickCard`, команда `help`) — летопись, запись 2026-10-14 23:22.
-- [x] **A fixture pack** — `node tools/fixture-pack.mjs`: пак во временной папке ОС; `-ListMods`, `-Deploy -DryRun`, настоящая
-      раскатка `-Deploy` в папку стенда, `-Verify` (удалённый сторожевой файл даёт `[FAIL]` и код 1), паки после `-Only` — 20 проверок
-      (коммит `84e4ba4`, 2026-10-15; обе «зелени на пустом» закрыты — `bugs/46_DONE_verify_silent_on_mods_without_checks.md`).
-      Прогон 2026-10-16 при обновлении KAIF: все 20 прошли.
+- Сделанные пункты пула (запуск-гард, круговой ход имён архивов, кейсы `pickCard`, команда `help`, учебный пак на 20 проверок) — летопись,
+  записи 2026-10-14 23:22 и 2026-10-16 23:39.
 - [ ] **Warn when a mod overrides `Engine.ini` at runtime** — обе болезни 21.08 были невидимы движку:
       деплой сверил каждый файл и всё равно отгрузил сборку, чью графику Lua-мод переписывает в мире.
       Дешёвый первый срез не требует запущенной игры: просканировать исходники модов на
@@ -102,7 +99,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> Прошлые чаты — летопись; последняя запись — 2026-10-16 10:11 +03:00 (в ней дословно прежний пункт 0).
+> Прошлые чаты — летопись; последние записи — 2026-10-16 23:39 (KAIF 2.9, GTA SA баг 52) и 10:11 (в ней дословно прежний пункт 0).
 >
 > **ГЛАВНОЕ — бюджет процессора: все моды вместе не дороже 1 мс главного потока в любом кадре** (`[OWNER]` «…НИКОГДА ни при каких
 > условиях» · 2026-10-14; `MASTER_PLAN.md`). План — `plans/24_svarog_cpu_budget_1ms.md`. Замер — пульт `h.sh "modcost <сек> 14 bg" …
@@ -132,6 +129,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    (4) советы экрана загрузки — короче (`plans/18` раздел 0; таблицей «было | стало» владельцу).
 >    **Ловушки дня:** у владельца D — своя клавиша (прячет HUD), панели переключает смена оружия — `callon Player PlayerEquipment SwapWeapons`;
 >    `ShowLoadGame` игры лишь запускает корутину `ShowSaveFileAfter` (EXP-0281); не больше двух горячих выкладок `KrinikUIRework` подряд.
+> 0а. **GTA SA, баг 52 — при следующем запуске игры:** заплатка 1.0 не встала (ждала `31 DB`, в exe `33 DB`), таймеры 10 минут
+>    действуют. В `scripts\` лежит 1.1 → `python -I games/GTASanAndreas/tools/check_pickup_patch.py` (только чтение памяти): ждём `jmp` в
+>    `PickupOldestFirst.asi`, журнал `scripts\PickupOldestFirst.log` — `1.1 … patched`; итог — в C3–C4 `testcases/TC_gtasa_pickup_oldest_first_2026-10-16.md`,
+>    C6 — глаз владельца. Затем удалить `scripts\PickupOldestFirst.asi.v1-wrong-bytes.off`.
 > 0б. **GTA SA, баг 48** (`bugs/48_gta_sa_crash_parked_car_generator.md`) — падение «parked car generator» из-за нашего пула OLA 400; по слову
 >    владельца: `Vehicles` 200, люди пулы 300 / предел 200 / появление 150/100 / удаление 160/110 / видимость 150, машины видимость 160 /
 >    удаление 180/112,5 (досье `games/GTASanAndreas/README.md`, строки 2026-10-14). Ждёт проверки игрой владельца; упадёт снова — смотреть сейв.
@@ -155,8 +156,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    выйдет релиз — убрать наш транспайлер ширины числа в `KrinikModMenu` (`researches/bepinex-configmanager-pr125/`).
 > 3. **Движок KUMM** (пул ниже): стенд `node tools/fixture-pack.mjs` готов (20 проверок, с раскаткой и `-Verify`); дальше — Engine.ini.
 >
-> Закрыто мягко 2026-10-16 10:11 (чат с 08:49; летопись — запись 2026-10-16 10:11, в ней дословно прежние пункт 0 и абзац закрытия). Игра
-> закрыта; сейв Сварога — на точке `_backups/svarog-saves-2026-10-16_0855-before-batch4` (10 из 10); реестр возвращён (1280×720).
+> Закрыто мягко 2026-10-16 23:39 (чат с 22:28): игры в этом чате не запускались; прежний абзац закрытия — летопись, запись 23:39.
 >
 > **Порядок прогона:** живой сейв после вечера — состояние владельца (он играл после наших телепортов); перед своим прогоном — новая точка:
 > копия `LocalLow/VI Games/Svarog's Dream` в `_backups/svarog-saves-<дата>_<время>-…` + `SAVE_POINT=… save-check.sh` (10 из 10). `bash tools/run-game.sh` → кейсы →
@@ -172,7 +172,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 1. **Конан, KAIF, Palworld, движок фаза 1, /check-backlog, стражи** — летопись, запись 2026-10-13 23:00 (перенесено дословно).
 ## Open bugs
 
-Файлов без метки DONE — 20 (2026-10-15 21:36: + 51, − 46):
+Файлов без метки DONE — 21 (2026-10-16 23:39: + 52):
 
 - 🔧 `bugs/51_svarog_water_reflection_flips_with_camera.md` — вода у Бары: отражение пропадает с углом, дальний пруд мигает, стены изб не
   отражаются; правка выложена 2026-10-15 21:12, проверка W1–W3 не доказана (STATUS пункт 0).
@@ -181,9 +181,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 - 🔧 `bugs/49_svarog_jump_through_hidden_house_wall.md` — прыжок сквозь стены домов (у стен нет коллайдеров вовсе); правка `PhantomWall`
   выложена 2026-10-16, владелец: «работает»; до DONE — W3, W5.
 
-- 🔧 `bugs/52_gta_sa_gang_war_pickups_vanish.md` — в войне банд выпавшие вещи исчезали: пул пикапов 620 был полон (619 в сейве);
-  выпавшее живёт 10 минут, заплатка `scripts\PickupOldestFirst.asi` затирает самое старое; ждёт запуска игры владельцем — тогда
-  `python -I games/GTASanAndreas/tools/check_pickup_patch.py`, потом его глаз в войне банд.
+- 🔧 `bugs/52_gta_sa_gang_war_pickups_vanish.md` — вещи в войне банд исчезали (пул пикапов полон); таймеры действуют, заплатка 1.1 ждёт запуска — п. 0а.
 
 - 🔧 `bugs/48_gta_sa_crash_parked_car_generator.md` — GTA SA падала на пуле машин 400 (наша правка 03.10); пулы и дальности переставлены по
   слову владельца, в игре не проверено.

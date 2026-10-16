@@ -15,7 +15,8 @@
  *
  * Байты пишутся ТОЛЬКО если на месте ровно оригинал: другая версия exe или чужой хук → ничего не трогаем и говорим
  * об этом в журнале рядом с .asi (тот же приём, что CopDoorLoadFix).
- * [NOT-TESTED] — собрана; в игре не запускалась (кейсы: testcases/TC_gtasa_pickup_oldest_first_2026-10-16.md).
+ * 1.0 (2026-10-16 23:36) в игре не встала: ждала 31 DB вместо родных 33 DB — журнал «skipped: bytes differ». 1.1 — байты
+ * исправлены. [NOT-TESTED] — 1.1 в игре ещё не запускалась (кейсы: testcases/TC_gtasa_pickup_oldest_first_2026-10-16.md).
  */
 #include <windows.h>
 
@@ -32,8 +33,9 @@
 static DWORD g_reuse = 0x0045719Au; /* занять слот ebx: убрать старый объект, заполнить     */
 static DWORD g_fail  = 0x004571D9u; /* pop esi / or eax,-1 / pop ebx / ret — пикапа не будет */
 
-/* Оригинал игры в 0x457000: xor ebx,ebx / mov eax,0x9788FC — 7 байт. */
-static const BYTE ORIGINAL[7] = { 0x31, 0xDB, 0xB8, 0xFC, 0x88, 0x97, 0x00 };
+/* Оригинал игры в 0x457000: xor ebx,ebx (33 DB — не 31 DB, та же команда другой кодировкой: версия 1.0 первой
+ * сборки ждала 31 DB и молча не вставала, «skipped: bytes differ», 2026-10-16 23:39) / mov eax,0x9788FC — 7 байт. */
+static const BYTE ORIGINAL[7] = { 0x33, 0xDB, 0xB8, 0xFC, 0x88, 0x97, 0x00 };
 
 static char g_log[1024];
 static int  g_logLen;
@@ -139,7 +141,7 @@ BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
     (void)reserved;
     if (reason == DLL_PROCESS_ATTACH) {
         DisableThreadLibraryCalls(instance);
-        LogAppend("PickupOldestFirst 1.0 - full pickup pool reuses the pickup that expires first, not the newest\r\n");
+        LogAppend("PickupOldestFirst 1.1 - full pickup pool reuses the pickup that expires first, not the newest\r\n");
         PatchFallback();
         LogWrite(instance);
     }

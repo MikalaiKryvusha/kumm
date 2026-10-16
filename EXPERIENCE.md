@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0284 · 2026-10-16 · ❌→✅ · #gtasa #asi #patch #bytes #disassembly
+class: wrong-proxy
+**Context:** GTA SA bug 52; `PickupOldestFirst.asi` patches `0x457000` only if the original bytes are in place (the CopDoorLoadFix pattern).
+**Tried / did:** typed the expected bytes from the capstone listing's MNEMONICS (`xor ebx, ebx` → `31 DB`); the exe has `33 DB` — the same instruction, another encoding. Cases checked the stub, never the constant against the exe file.
+**Result:** ❌→✅ — the owner's launch at 23:39 logged `skipped: bytes differ`; the guard did its job (nothing written), the fix never ran; caught by the closing judge reading the log. 1.1 fixed; `dis_va.py` now prints instruction bytes; case C2b compares the exe bytes with `ORIGINAL`.
+**Lesson:** a byte-match guard is only as good as the bytes it expects — read them from the FILE (a hex dump or a disassembler that prints bytes), never retype them from a mnemonic; x86 has several encodings for one instruction.   → link: `bugs/52_gta_sa_gang_war_pickups_vanish.md` · `testcases/TC_gtasa_pickup_oldest_first_2026-10-16.md` C2b
+**Repro:** `python -I games/GTASanAndreas/tools/dis_va.py "<gta_sa.exe>" 457000 7 <capstone dir>` → the bytes column must equal the patch's `ORIGINAL`.
+**Trigger:** writing an `ORIGINAL[]`/expected-bytes constant for any code patch → dump the bytes from the exe and paste them.
+mechanized: games/GTASanAndreas/tools/dis_va.py (prints instruction bytes) + case C2b of the patch's test cases
+
 ### EXP-0283 · 2026-10-16 · ❌→✅ · #kaif #update #guard #sweep #judge #exemption
 class: guard-not-proven-against-threat
 **Context:** KAIF 2.7 → 2.9 update; `tools/kaif-update-sweep.mjs` flagged 4 continuation lines of multi-line template slots the project had filled.
