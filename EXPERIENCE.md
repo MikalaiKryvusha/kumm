@@ -91,6 +91,26 @@
 
 ## Entries
 
+### EXP-0286 · 2026-10-17 · ❌→✅ · #svarogsdream #camera #repro #harness #visual
+class: probe-point-unchecked
+**Context:** bugs 51 (water) and 44 (grass from above) — 2026-10-15 W1 was «blocked»: the pult only orbited the hero inside the inn, the owner's angle never came up; the fix was shipped unproven.
+**Tried / did:** a camera pult (`CamDirector.cs`): free orbit around ANY world point, compass yaw, pitch to 89.5, zoom, spin, plus `walk`; then a sweep — one frame per 6° and a contact sheet; first sweep pivot landed on the deck (camera inside roofs, `w1_sheet`) — re-aimed at the inn from over open water.
+**Result:** ❌→✅ — the sweep showed the bug at 105–141° in one sheet; the same orbit after the fix proved it on all 12 angles; grass — one spot, a shader global 0/1, before/after in one launch.
+**Lesson:** a visual bug is not «not reproduced» until the camera has been put where the owner looks: sweep the angle with frames and a sheet, read the sheet, THEN fix; the «after» frame comes from the same `Cam` line. For a shader fix, put it behind a global and switch it from one spot — the pair is free.   → link: `testcases/TC_svarog_camera_director_grass_water_2026-10-17.md` W1–W3, G1–G2
+**Repro:** `h.sh "call KrinikCameraRework.Plugin CamOrbit 172,92,-741 105 12 90" "call KrinikCameraRework.Plugin CamYaw 123" "shot w_123"` → then `python _harness/sheet.py <out> 4 0.17 <frames>`
+**Trigger:** a visual bug from the owner's video or words → before any code: a sweep with a sheet at the place of the bug; a sweep frame with the camera inside geometry → move the pivot, not the conclusion.
+mechanized: KrinikCameraRework/CamDirector.cs (Cam, CamOrbit, CamSpin) + SvarogsDream/_harness/sheet.py, pair_crop.py
+
+### EXP-0285 · 2026-10-17 · ❌→✅ · #svarogsdream #lux #water #reflection #findbyname
+class: shared-state-two-owners
+**Context:** bug 51 — the reflection on the Bara water appeared and vanished with the camera angle; the 2026-10-15 fix (one reflector per material + height) did not hold.
+**Tried / did:** a pult report (`WaterReport`: per plane — own texture, the texture now in the material).
+**Result:** ❌→✅ — three planes of different materials and heights held ONE texture: Lux finds its reflection camera by NAME (`GameObject.Find(name + "Reflection" + cam.name)`) and every water plane of the game is `_WaterPlane`; each re-rendered the shared texture for its own height, the last one won. Fix — the same Lux method with the instance id in the name; reflections on all angles.
+**Lesson:** a third-party component that «creates or finds» its helper by `GameObject.Find(name…)` shares that helper between every instance with the same name — read the creation path (decompile) and print WHO owns the shared resource before reasoning about order or grouping.   → link: `bugs/51_svarog_water_reflection_flips_with_camera.md`
+**Repro:** `h.sh "call KrinikColorRework.WaterReflection WaterReport"` — every non-quiet plane must show its own `ownTex`, distinct per material.
+**Trigger:** a «flips with the camera / the last one wins» symptom on several instances of one component → dump the instance → resource mapping first.
+mechanized: KrinikColorRework/WaterReflection.cs WaterReport (pult) + PatchLuxOwnCamera
+
 ### EXP-0284 · 2026-10-16 · ❌→✅ · #gtasa #asi #patch #bytes #disassembly
 class: wrong-proxy
 **Context:** GTA SA bug 52; `PickupOldestFirst.asi` patches `0x457000` only if the original bytes are in place (the CopDoorLoadFix pattern).
