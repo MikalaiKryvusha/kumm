@@ -59,7 +59,14 @@ turns.
 ## Verification 2026-10-17 (TC W1–W4, report `testcases/reports/2026-10-17_svarog-camera-director-grass-water.md`)
 Same orbit after the fix: reflections of the shore, stilts and walls on all 12 angles (`w5_sheet.webp`); pair at 123° (`w_pair_123.webp`): before —
 flat murky water, after — sky, tree, stilts and the wall in the water. Cost: `WaterReflection.Update` 0.051 ms, `WaterSSPR.Pre` 0.224 ms worst frame.
-Symptoms 1–2: fixed and seen by the agent; the owner's eye pending. Symptom 3 (house walls): not re-checked in this run.
+Symptoms 1–2: fixed and seen by the agent; the owner's eye pending.
+
+## Symptom 3 — 2026-10-17 (SvarogsDream `d85f733`, TC W5–W6)
+Seen after the camera fix (`w5_y171`): under the deck the water shows ORANGE streaks — SSPR copies the source colour from the screen, and the screen
+sees the sunlit TOP of planks and roofs, while a mirror would show their dark underside. Fix in `KrinikSSPR.compute` Resolve: a source whose
+world normal (deferred G-buffer 2) points up is darkened to `_UpShade` (setting `Water.ScreenReflectionUpShade` 0.25; 1 = old); walls unchanged.
+Pair `w6_pair_171`: streaks gone, stilts dark; `w6_pair_123`: no change, no new spots. Shown to the owner 02:13. Walls of the houses proper
+(log walls facing the camera) reflect as before — whether that now reads right is the owner's eye.
 
 ## Decisions made without the owner
 - `[AI]` 2026-10-17: planes of one material at different heights show the reflector's picture with a small offset — chosen over flicker.
