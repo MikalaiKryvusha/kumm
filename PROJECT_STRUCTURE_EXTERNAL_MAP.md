@@ -23,12 +23,13 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── package.json                   # npm bin "kumm"; node>=22; kaif:* handles
 ├── test-parse-archive.mjs · test-archive-roundtrip.mjs · test-pick-card.mjs   # regression of the pure core (reading archive names; write→read round trip; variant pick + upload-date compare) — run with node, exit 0 = green
 ├── test-help-commands.mjs         # the command list: kumm.mjs header (what `help` prints) = switch cases = README «Команды» table
-├── tools/fixture-pack.mjs         # fake pack in the OS temp + Deploy-ModPack.ps1 runs on it (-ListMods, -Deploy -DryRun); no network, no game
+├── tools/fixture-pack.mjs         # fake pack in the OS temp + Deploy-ModPack.ps1 runs on it (-ListMods, -Deploy -DryRun, a real -Deploy and -Verify, paks after -Only — 20 checks); no network, no game
 ├── README.md                      # the storefront (Russian) — owner's handwriting
 ├── GOAL.md · STATUS.md · MASTER_PLAN.md · AGENT_GUIDE.md · PHILOSOPHY.md   # KAIF canon
 ├── PROJECT_STRUCTURE_EXTERNAL_MAP.md · PROJECT_ARCHITECTURE_INTERNAL_MAP.md
 ├── REQUIREMENTS_FRAMEWORK.md · TESTING_FRAMEWORK.md · BUG_FIXING_FRAMEWORK.md
 ├── EXPERIENCE.md · PROJECT_HISTORY.md · KAIF_FRAMEWORK.md
+├── HOUSE_RULES.md                 # house rules (KAIF 2.8+, Russian): stands and test-harness commands, Tools table, environment dossier, push recipe
 ├── plans/ ideas/ bugs/ researches/ interviews/ homeworks/ reports/   # KAIF knowledge dirs
 ├── testcases/reports/             # run reports, one per executed run: <YYYY-MM-DD>_<work>.md (KAIF 2.7)
 ├── tools/                         # project-own tools: scrub-identity.mjs + check-claim-before-evidence.mjs (both run by hooks/pre-commit), hooks/*.mjs (Claude Code hooks: no-backslash-heredoc, stamp-gate, style-gate, testcase-gate, voice-reminder, no-permission-question), kaif-update-*.mjs
@@ -36,6 +37,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── .kaif/                         # framework core: kaif.json, kaif-core.mjs, spheres/, tools/ (10 lints + contour/), hooks/
 ├── .claude/skills/ .agents/skills/ .grok/skills/ .cline/skills/ .roo/  # 37 skills × 5 agent systems
 ├── CLAUDE.md · AGENTS.md · .clinerules/ · .roo/rules/                 # context pointers
+├── .claude/settings.json · .codex/hooks.json                          # KAIF refresh hooks (wired 2026-10-16); the project's own hooks live in the git-ignored .claude/settings.local.json
 └── mods/                          # gitignored — never in this repo
 
 <pack root>/                       # SEPARATE repo, e.g. D:\Games\Palworld Mods
@@ -91,7 +93,7 @@ a complete CLI reference) → the `.SYNOPSIS`/`.DESCRIPTION` block of `Deploy-Mo
 
 | Truth | Mirror(s) | Check |
 |---|---|---|
-| `kumm.mjs` header comment «Команды» (what `help` prints) | the command switch · the README command table · `AGENT_GUIDE.md` Tools | `node test-help-commands.mjs` (header = switch = README; `AGENT_GUIDE.md` Tools — by eye) |
+| `kumm.mjs` header comment «Команды» (what `help` prints) | the command switch · the README command table · `HOUSE_RULES.md` → Stands, environments and devices | `node test-help-commands.mjs` (header = switch = README; the `HOUSE_RULES.md` stands table — by eye) |
 | `package.json` `"files"` | what a user of `npm i -g kumm` actually gets | `npm pack --dry-run` — 5 files: `kumm.mjs`, `Deploy-ModPack.ps1`, `README.md`, `LICENSE`, `package.json` (drift closed 2026-10-10) |
 | archive naming scheme | `libraryName()` (writer) ↔ `parseArchive()` (reader) in `kumm.mjs` | round-trip one name through both |
 | `modpack.json` keys | `kumm.mjs` (`nexusGame`, `library`, `mods[]`) ↔ `Deploy-ModPack.ps1` (`gameExe`, `library`, `mods[]`, `steamEmu`, `packName`, `builtFor`) | grep both halves for each key |

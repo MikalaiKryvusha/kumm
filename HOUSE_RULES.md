@@ -1,0 +1,130 @@
+# Правила дома — KUMM
+
+> **Что это за файл.** Местный закон проекта (уровень 4 таксономии документов, `AGENT_GUIDE.md`): действует только в этом
+> проекте. `AGENT_GUIDE.md` отвечает, КАК агент работает (метод KAIF); этот файл — С ЧЕМ агент работает здесь: постоянные
+> правила владельца, системы, стенды, машина, маршруты и инструменты KUMM. Бюджета строк у файла нет; `/resume` читает файл
+> при входе в сессию. Скелет — `.kaif/_house-rules-template.md`; разделы, которые проекту не нужны, удалены. Английское имя
+> раздела в скобках — то, по которому на него ссылаются руководство и навыки.
+
+**Создан:** 2026-10-16 · **Владелец:** Mikalai Kryvusha · **Перенесено из руководства:** `AGENT_GUIDE.md` → «Test harness»
+(таблица команд), «Environment dossier» (таблица фактов), «Push / GitHub authentication» (рецепт), «Tools» (таблица) —
+2026-10-16, при обновлении KAIF 2.7 → 2.9 (так с версии 2.8 KAIF делит руководство и правила дома).
+
+## 1. Постоянные правила владельца (The owner's standing rules)
+
+Правила владельца, записанные до 2.8, стоят на своих местах в `AGENT_GUIDE.md`: «Notes from the human» (не спрашивать
+разрешения на свою работу · две карты на каждую игру · рабочий язык — русский · отправка в KAIF без спроса), «Git workflow»
+(обезличивание — кодом и хуком), «Document & text hygiene» (картинки — WebP, PNG никогда). Новое правило владельца
+записывается сюда: правило в повелительном наклонении, шаги, исключения и одна строка источника (`AGENT_GUIDE.md` →
+«The rulebook takes the rule, not the quote»).
+
+## 2. Внешние системы и доступ (External systems and access)
+
+| Система | Что агент там делает | Точка входа | Где лежит доступ |
+|---|---|---|---|
+| Nexus Mods | читает страницы модов, сверяет версии, скачивает файлы — на бесплатном аккаунте | Chrome на отладочном порту (CDP): `node kumm.mjs launch` · `login` · `status` | вход владельца в профиле Chrome `%LOCALAPPDATA%\nexus-cdp\profile`; пароля агент не видит |
+| GitHub — движок `kumm` | коммиты и пуш в `main` | `https://github.com/MikalaiKryvusha/kumm.git` | диспетчер учётных данных Windows (`credential.helper = manager`) и вход `gh` |
+| GitHub — исток KAIF | тикеты, запросы на улучшение, полевые отчёты | `node .kaif/kaif-core.mjs report <файл>` | тот же вход `gh` |
+
+## 3. Стенды, окружения и устройства (Stands, environments and devices)
+
+Принцип стенда — `AGENT_GUIDE.md` → «Test harness»: стенд строят от ядра к сети — сначала чистые функции, потом учебный пак,
+потом живой путь. Здесь — команды, по строке на каждую. Первым проверяют чистое ядро, без сети и диска: `parseArchive` ↔
+`libraryName` (запись и чтение имени сходятся), `sameFile`/`stamp` (сравнение дат загрузки), `pickCard` (выбор варианта),
+`parseArgv`, `globToRe` — в них живёт логика, которая ломается, и ни одной из них не нужен Chrome.
+
+| Стенд / устройство | Для чего | Как агент до него добирается | Известные ловушки |
+|---|---|---|---|
+| Чистое ядро `kumm.mjs` | регрессия: разбор имени архива, запись и чтение имени, выбор файла и сравнение дат, список команд в трёх местах | `node test-parse-archive.mjs` · `node test-archive-roundtrip.mjs` · `node test-pick-card.mjs` · `node test-help-commands.mjs` — код 0 значит зелёный | у `parseArgv` и `globToRe` теста пока нет |
+| Половина Nexus | синтаксис | `node --check kumm.mjs` | — |
+| Половина Nexus | список команд — зеркало блока `switch`; сверять с таблицей README | `node kumm.mjs help` | — |
+| Chrome на отладочном порту | жив ли порт, кто вошёл | `node kumm.mjs status` — печатает, не падает | нужен запущенный Chrome |
+| Пак (любой) | машиночитаемая таблица устаревших модов — эталонный вывод для учебного пака | `node kumm.mjs check --json --root <pack>` | — |
+| Живая страница Nexus | читает страницу мода и первым заметит, что Nexus сменил вёрстку | `node kumm.mjs files <modId> --game palworld` | живой путь — один мод и один раз (`AGENT_GUIDE.md` → «Test harness») |
+| Живая страница Nexus | разведка DOM, когда Nexus меняет вёрстку | `node kumm.mjs eval <url> <js>` | внутри JS на Windows — только одинарные кавычки |
+| Учебный пак во временной папке ОС | игровая половина без сети, без игры и без пака владельца: `-ListMods`, `-Deploy -DryRun`, настоящая раскатка `-Deploy` в папку стенда, `-Verify` (удалённый сторожевой файл даёт `[FAIL]` и код 1), паки после `-Only` — 20 проверок (с 2026-10-15; прогон 2026-10-16 — все 20 прошли) | `node tools/fixture-pack.mjs` | папка стенда остаётся во временной папке ОС до перезагрузки |
+| Пак владельца | манифест разбирается, моды перечисляются — запись на диск не идёт | `.\Deploy-ModPack.ps1 -ListMods -PackDir <pack>` | — |
+| Пак владельца | полный план раскатки; папки игры не трогаются | `.\Deploy-ModPack.ps1 -Deploy -DryRun -PackDir <pack>` | — |
+| Папки игры | объективная проверка после раскатки; код 1, если что-то не так | `.\Deploy-ModPack.ps1 -Verify -PackDir <pack>` | сторожевые пути задаёт список `verify` мода (`bugs/46_DONE_verify_silent_on_mods_without_checks.md`) |
+
+## 4. Досье окружения — факты машины (Environment dossier)
+
+Правило — `AGENT_GUIDE.md` → «Environment dossier»; таблицу пересобирает `/refresh-context` (его шаг досье). Опрос идёт по
+шести осям, и **в каждой оболочке отдельно**: разные оболочки — это разные миры.
+
+1. **ОС и железо** — версия ОС, ядра процессора, память.
+2. **Оболочки и кодировки** — какие оболочки есть, кодовая страница консоли, ANSI-кодировка, которую пишет перенаправление,
+   локаль каждой оболочки.
+3. **Инструменты** — среды выполнения, средства сборки, система контроля версий — у каждого его номер выпуска; и ЧЕМ в каждой оболочке оказываются
+   `tar` / `curl` / `find` (системный бинарник, GNU-утилита или псевдоним чего-то совсем другого — проверять ТИП команды, а не
+   только путь).
+4. **Политика VCS** — концы строк, хранилище учётных данных.
+5. **Менеджеры пакетов** — чем можно ставить.
+6. **Поведенческие причуды** — ССЫЛКИ на уроки, на которых уже обжигались (номера `EXPERIENCE.md`), не их копии.
+
+Одна строка на факт: **факт → значение → команда опроса**. Факт, который не проверяли, пишется `— не опрошено —`:
+недостающий факт честен, выдуманный — дефект (`PHILOSOPHY.md` → три двери).
+
+> **Досье окружения.** Снято: `2026-08-15` (строки «Экран», «Замер FPS» уточнены 2026-10-06 и 2026-10-08; сюда перенесено
+> из `AGENT_GUIDE.md` 2026-10-16 без нового опроса) · Пересборка: `/refresh-context` → шаг досье (повторить команды третьего
+> столбца, переписать значения и эту дату) · **Давность: факты старше четырёх недель — ГИПОТЕЗЫ; перед опорой на них —
+> опросить заново.**
+
+| Факт | Значение | Опрос |
+|---|---|---|
+| ОС | Windows 11 Pro, 10.0.26200.0 | `(Get-CimInstance Win32_OperatingSystem).Caption; [Environment]::OSVersion.Version` |
+| Процессор и память | **AMD Ryzen 7 5700G** · 8 ядер / 16 потоков · 3,8 ГГц · 31,9 ГБ | `Get-CimInstance Win32_Processor \| % {$_.Name,$_.NumberOfCores,$_.NumberOfLogicalProcessors}`; `(Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory/1GB` |
+| Видеокарта и драйвер | **NVIDIA GeForce RTX 5070 Ti**, 16 ГБ видеопамяти, драйвер 610.88 (WDDM 32.0.16.1088, 2026-07-22), предел мощности 300 Вт. **`Win32_VideoController.AdapterRAM` показывает 4 ГБ — это 32-битное поле, и оно ВРЁТ; верить `nvidia-smi`.** В системе есть второй адаптер (SudoMaker Virtual Display Adapter). | `nvidia-smi --query-gpu=name,driver_version,memory.total,power.limit --format=csv,noheader` |
+| Экран в момент опроса | **Опрашивать с учётом DPI.** Рабочий стол масштабирован на 300 %: процесс без `SetProcessDPIAware` видит 4K-телевизор как `\\.\DISPLAY1` 1280×720 (EXP-0145; 2026-10-06 08:05 — опрос без учёта DPI сказал 1280×720, а драйвер вёл 3840×2160 @144). Показание 2026-08-15 «1280×720 через виртуальный адаптер», возможно, тот же артефакт. Правда — разрешение `Win32_VideoController` по каждому адаптеру (адаптер без режима неактивен) или `Screen.AllScreens` с учётом DPI. | `Get-CimInstance Win32_VideoController \| % {$_.Name, $_.CurrentHorizontalResolution}`; с учётом DPI: в `SvarogsDream/tools` такого прибора пока нет — сначала вызвать `SetProcessDPIAware` |
+| Игровой экран | **3840×2160 @ 144 Гц** — телевизор («Beyo»), подключённый к 5070 Ti. Под этот потолок и ставят цель по частоте кадров: `FrameRateLimit=141` игры стоит верно, чуть ниже, а каждый сгенерированный кадр выше 144 стоит видеокарте работы, но на экран не попадает. | `Get-CimInstance Win32_VideoController \| ? CurrentHorizontalResolution \| % {$_.CurrentRefreshRate}` |
+| Замер FPS | **БРАТЬ `D:\work\ai_sandbox\_tools\PresentMon-2.5.1-x64.exe`** (Intel, подписан; тот же файл в KAGO `tools/bin`), своя `--session_name kumm-pm` (EXP-0008). **НЕ** `C:\Program Files\NVIDIA Corporation\FrameViewSDK\bin\PresentMon_x64.exe` (1.9.12728, приходит с драйвером): служебная сборка FrameView, как отдельный инструмент молча выходит с кодом 1 — оплачено дважды, 2026-08-15 и 2026-10-08 (bugs/31_DONE). **Нужна повышенная оболочка** — запись идёт через ETW. **Оболочка агента ПОВЫШЕНА** (уровень целостности High, `whoami /groups` S-1-16-12288; поправлено 2026-10-08 14:47 — строковая проверка `IsInRole('Administrator')` на русской Windows возвращает False, группа называется «Администраторы»; проверять через `[Security.Principal.WindowsBuiltInRole]::Administrator`). Проверено 2026-10-08 14:53: сборка Intel записала 5904 кадра за 60 с из оболочки агента (отчёт `testcases/reports/2026-10-08_md-phase0-budgets-presentmon.md`). Пишет времена кадров в CSV: `--process_name Palworld-Win64-Shipping.exe --output_file <csv> --timed <sec> --no_console_stats --stop_existing_session`; `--hotkey ALT+SHIFT+F11` пишет только отмеченный отрезок (F8–F11 заняты модами). Это замена разговорам о FPS «на глаз»: первой оговоркой `Pareto-audit.md` пака стояло «замеров нет». | `& '<path>' --help`; `[Security.Principal.WindowsPrincipal]::new([Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)` |
+| Апскейлеры в сборке | `nvngx_dlss` 3.1.30 · `nvngx_dlssg` 310.4 · `sl.*` 2.9 — все в `Pal\Plugins\DLSS` и `Pal\Plugins\StreamlineCore`, **не** в `Pal\Binaries\Win64`. Значит, у генерации кадров библиотеки есть; теории «FG наверняка сломана» нужны доказательства, а не допущения. | `Get-ChildItem <game> -Recurse -Include 'nvngx*.dll','sl.*.dll'` |
+| Оболочки | **Windows PowerShell 5.1** (издание Desktop — `pwsh` НЕ установлен) · **Git Bash 5.2.21** · `cmd` | `$PSVersionTable`; `Get-Command pwsh`; `bash --version` |
+| Кодировки консоли и ANSI | вывод консоли UTF-8; **системная ANSI-страница 1251** — `Set-Content`/`Add-Content` по умолчанию пишут 1251, поэтому для файла, который читает другой инструмент, явно давать `-Encoding utf8` | `[Console]::OutputEncoding.WebName`; `(Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage').ACP` |
+| Локаль оболочек | PowerShell `ru-RU` (строки CIM по-русски, десятичная запятая) · в Git Bash `LANG` не задан | `(Get-Culture).Name`; `locale` |
+| Среды выполнения и сборка | Node **v24.15.0** (проекту нужен ≥22) · npm 10.8.2 · git 2.43.0.windows.1 · gh 2.95.0. Сборочного инструментария нет — проекту он не нужен. | `node -v; npm -v; git --version; gh --version` |
+| `tar` / `curl` / `find` по оболочкам | **Две оболочки — два разных мира.** PowerShell: `tar` → `C:\Windows\system32\tar.exe` (bsdtar — путь `D:\…` принимает за удалённый хост), `curl` → **ПСЕВДОНИМ `Invoke-WebRequest`**, а не бинарник. Git Bash: `tar` → `/usr/bin/tar` GNU 1.35, `curl` → `/mingw64/bin/curl` 8.4.0 (настоящий), `find` → `/usr/bin/find` (GNU). | `Get-Command tar,curl \| % {"$($_.CommandType) $($_.Definition)"}`; `type -p tar curl find` |
+| Концы строк в VCS | `core.autocrlf = true` (CRLF в рабочем дереве, LF в репозитории) | `git config --get core.autocrlf` |
+| Менеджер пакетов | `winget` (системный) · `npm` (JS). У проекта **нет зависимостей времени выполнения** — для запуска ставить нечего. | `winget --version`; `npm -v` |
+| Причуды, на которых уже обжигались | `EXP-0002` — файлу, записанному в одной оболочке и читаемому программой из другой, нужен путь, понятный Windows · `EXP-0004` — инструмент PowerShell и есть PowerShell: bash-heredoc (`<<'EOF'`), `&&`, `$(...)` там — ошибки разбора; многострочный текст попадает в `git` через файл · `EXP-0005` — `Win32_VideoController.AdapterRAM` 32-битное и упирается в 4 ГБ, поэтому видеопамять берётся из `nvidia-smi` | grep по `EXPERIENCE.md` |
+
+## 5. Маршруты, рецепты и соглашения — оглавление собственной работы агента (Routes, recipes and conventions)
+
+Если задача касается чего-то из этого списка, агент сначала открывает запись и ссылается на неё (`AGENT_GUIDE.md` → шаг 2
+чек-листа).
+
+| Поверхность | Где лежит работа | Что покрывает |
+|---|---|---|
+| Коммит | `git add <файлы, названные по одному>`, затем `git commit -F <файл сообщения>`, затем `git push` — три отдельных вызова | так исполняется и старая подстановка `git add -A && git commit -m "<msg>" && git push`, которая стоит в `/release` (шаг 5), `/report-bug`, `/propose-idea` и трёх циклах: по шагам и без `-A` — новый файл владельца не должен уехать вместе с коммитом (`AGENT_GUIDE.md` → «Git workflow») |
+| Пуш и доступ к GitHub | `git push`; учётные данные — диспетчер Windows (`credential.helper = manager`), `gh` вошёл | отказ non-fast-forward → `git pull --rebase` → разрешить → повторить; учётные данные потеряны → `gh auth login`, затем `gh auth setup-git` |
+| Отправка в KAIF | `node .kaif/kaif-core.mjs report bugs/KAIF/NN_*.md` (сначала `--dry-run` — прочесть, что уйдёт) | команда подаёт тикет в исток и вписывает ссылку в строку `**Delivered upstream:**`; `node .kaif/kaif-core.mjs check` называет тикет, чья строка не доказывает отправку. Полевой отчёт обновления получает H1 вида `# Field report: KUMM — KAIF X → Y update (…)` и строку `**Delivered upstream:** NOT YET` и уходит той же командой. Тело — только файлом (`--body-file`), не аргументом командной строки |
+| Досье игр | `games/<Игра>/` — `GAME_STRUCTURE_EXTERNAL_MAP.md` и `GAME_ARCHITECTURE_INTERNAL_MAP.md`; образец — `games/SvarogsDream/` | где что лежит у игры и как она устроена; читать до декомпиляции и опросов (`AGENT_GUIDE.md` → «Notes from the human») |
+
+## 6. Инструменты проекта (Tools of this project)
+
+Каждый инструмент автоматизации проекта получает строку в тот же день, когда появился (`AGENT_GUIDE.md` → «Tools»).
+
+| Команда | Что делает | От чего защищает |
+|---|---|---|
+| `node --check kumm.mjs` | проверяет синтаксис половины Nexus | битый JS до запуска |
+| `python -I games/GTASanAndreas/tools/sa_pickups_in_save.py <GTASAsfN.b>` · `python -I games/GTASanAndreas/tools/dis_va.py <exe> <VA> <байт> <папка capstone>` | GTA SA: сколько из 620 слотов пикапов занято в сейве и каких типов · дизассемблер функции `gta_sa.exe` по адресу (capstone ставится в скретчпад) | вещи, исчезающие из-за полного пула (баг 52); догадки о коде игры без чтения кода |
+| `npm pack --dry-run` | показывает, что на самом деле получит `npm i -g` | расхождение списка `files` с двумя половинами движка |
+| `npm run kaif:version` | версия KAIF в проекте | — |
+| `npm run kaif:check` | проверка здоровья KAIF: набор документов, маркеры, размер STATUS | недостающий файл фреймворка, разросшийся STATUS |
+| `npm run kaif:update` | обновление KAIF из истока | — |
+| `node tools/kaif-update-sweep.mjs <старый бандл> <новый бандл>` | ПОСЛЕ каждого прохода обновления KAIF, до первой отметки и снова после ручного слияния: называет строки апстрима, которые не дошли до диска (задание показывает только то, что заметил классификатор, — исток #72). Должен кончаться кодом 0 | молча потерянная дельта модуля |
+| `node tools/kaif-update-sweep-mutant.mjs <новый бандл> . <папка>` | собирает в `<папка>` копию развёрнутых файлов фреймворка и удаляет из неё две настоящие строки 2.9 (не слоты); затем сверка с `--root <папка>` обязана назвать обе, код 1 — кейс К6 отчёта прибора | ослабленная сверка, которая пропускает настоящие потери |
+| `node .kaif/tools/kaif-canon-lint.mjs check` | линтер канона (канонические артефакты владельца пока не объявлены) | — |
+| `node .kaif/tools/kaif-provenance.mjs check` | целость меток происхождения `[AI]` | непарная метка или метка, снятая без слова владельца |
+| `node .kaif/tools/kaif-requirements-lint.mjs` | линтер критериев приёмки в планах, багах, идеях | размытые критерии приёмки |
+| `node .kaif/kaif-core.mjs report bugs/KAIF/NN_*.md` | подаёт и отправляет тикет KAIF в исток одним ходом (`--dry-run` — посмотреть заранее); строка `AUTH:` не нужна — это единственное исключение | тикет, застрявший с `NOT YET` |
+| `node tools/kaif-update-merge-skills.mjs <root> <tplRoot> [--write]` | ручная половина обновления KAIF для навыков, которые отличаются от шаблона только нашими подстановками (исток #73); сначала сверить его `FILES`/`FILLS`. С версии 2.8 ядро узнаёт такие подстановки само (в обновлении 2.7 → 2.9 навыки прошли механически) — инструмент нужен, только если навык снова придёт в задании | навык, вручную слитый с потерей подстановки |
+| `node tools/kaif-update-probe-matchfills.mjs .kaif/kaif-core.mjs` | проверка приёмки истока #73: на подстановке с `<pack>` команда печатала `null`, пока дефект не исправили; на ядре 2.9 (2026-10-16) выводит подстановку | возврат дефекта #73 |
+| `node tools/check-claim-before-evidence.mjs --staged` | сам запускается вторым шлюзом `tools/hooks/pre-commit`: отказывает штампу сегодняшней даты, который опережает часы, и маркеру `[TESTED: <date>` без существующего `testcases/reports/*.md` (класс `claim-before-evidence`, `EXP-0121`); `claim-ok: <why>` на строке — объявленное исключение | утверждение раньше наблюдения |
+| `node tools/test-guards.mjs` | самопроверка стражей из строк ниже: 151 кейс (хук heredoc, страж утверждений в режимах файла и индекса, весь pre-commit на переименовании, шлюз стиля, шлюз тест-кейсов, шлюз штампов); на первых версиях стражей она красная. Запускать после правки любого стража | молчаливо сломанный страж |
+| `tools/hooks/style-gate.mjs` | пара хуков Claude Code: `--mark` (PostToolUse на Read) отмечает чтение `SvarogsDream/translation/STYLE.md`; `--gate` (PreToolUse на Write\|Edit\|Bash) не даёт записать файл перевода сборки или запустить пакетный инструмент перевода, если методичку не прочли после её последней правки и в пределах 60 мин (`[OWNER]` «и чтение методички - обязательством в хук делаем» · 2026-10-06 ≈15:28). Подключён в ЛОКАЛЬНОМ `.claude/settings.local.json` с `--style <STYLE.md> --stamp SvarogsDream/_harness/style-read.stamp`. **Второе подключение — `ui-gate`:** тот же хук с `--style SvarogsDream/docs/UI_RULEBOOK.md --stamp SvarogsDream/_harness/ui-read.stamp --paths "svarogsdream/src/krinik(uirework|modmenu)/[^/]*\.cs$" --label ui-gate` не даёт править код UI-модов, пока свод правил (§0 «Философия прекрасного») не прочитан целиком в пределах 60 мин (`[OWNER]` «это тоже в руководства запиши и в ХУК - когда делаешь UI, руководствоваться этой философией прекрасного» · 2026-10-06 ≈22:35); самопроверка — `tools/test-guards.mjs`, часть E2. **Третье подключение — `russian-gate`:** `--cyrillic --style researches/russian-writing/RUSSIAN_RULES.md --stamp tools/hooks/.russian-read.stamp` отказывает ЛЮБОЙ записи Write/Edit/MultiEdit с кириллицей в новом тексте и любой команде Bash/PowerShell с кириллицей, пока правила русского языка не прочитаны целиком в пределах 60 мин; тот же файл с `--remind` на `UserPromptSubmit` вписывает в контекст агента «прочти правила, прежде чем отвечать», когда отметка устарела, — ответ в чате не файл (`[OWNER]` «и хук на то, чтобы читать эту методичку каждый раз, когда что-то пишешь по-русски» · 2026-10-13); самопроверка — часть E3. **Четвёртое подключение — `arch-gate`:** `--style researches/svarog-native-mod-architecture/README.md --stamp SvarogsDream/_harness/arch-read.stamp --paths "svarogsdream/src/[^/]+/[^/]*\.cs$" --label arch-gate` не даёт править ЛЮБОЙ код модов Сварога, пока исследование родной архитектуры модов (правила §5: доступ к игре через `WorldState.Instance.worldStateInjector`, реестры, события вместо опроса, ноль выделений памяти за кадр, переписывать медленный код игры) не прочитано целиком в пределах 60 мин (`[OWNER]` «и хук сделать, что по этому ресерчу нужно сверятся регулярно при проектировании архитектуры кода мода» · 2026-10-14); доказано 2026-10-14: красный (код 2) на `Jump.cs` без чтения, зелёный на других файлах и после Read | правка без прочитанной методички |
+| `tools/hooks/testcase-gate.mjs` | хук Claude Code `PreToolUse` на Bash и PowerShell: пускает функциональный прогон в игре (`deploy-hot.sh`, `run-game.sh`; с v2.3 2026-10-08 — и каждый маршрут Medieval Dynasty `route-*-load.ps1`, EXP-0182), только если в самом новом `testcases/TC_*.md` есть кейс, ждущий прогона (статус `[NOT-TESTED]` или `fail`), И строки кейсов ИЗМЕНИЛИСЬ с последнего разрешённого прогона (записаны результаты или добавлены кейсы — отпечаток строк, а не время файла): тест-кейсы пишутся ДО прогона и получают статус ПОСЛЕ него (`TESTING_FRAMEWORK.md`, действия 3–4; `[OWNER]` «Ты тест кейсы пишешь, как КАИФ обязывает?» · «давай хук на это сделаем - написание тестов» · 2026-10-06 ≈21:25; v2: «ужесточай хук» · «что-то кодишь - пишешь тесткейсы, чтобы проверить в игре разные кейсы» · ≈21:48). Подключён в ЛОКАЛЬНОМ `.claude/settings.local.json` с `--gate --dir <KUMM>/testcases --stamp <KUMM>/testcases/.gate-stamp.json` под ДВУМЯ сопоставителями `PreToolUse`, `Bash` и `PowerShell` (отметка — состояние сессии, git её не видит) | прогон в игре без тест-кейсов |
+| `tools/hooks/stamp-gate.mjs` | хук Claude Code `PreToolUse` на Write\|Edit\|MultiEdit\|Bash\|PowerShell (команды оболочки — с v2, 2026-10-10: файлы пишут и `sed -i`, `printf >>`, heredoc): отказывает тексту со штампом СЕГОДНЯШНЕЙ даты (`ГГГГ-ММ-ДД ЧЧ:ММ`, с «≈»/«около»/«до»), если этот штамп опережает часы, — до того как он попадёт в любой файл — KUMM или репозиториев сборок (шлюз коммита видит только коммиты KUMM; класс `claim-before-evidence`, EXP-0160). `claim-ok: <why>` на строке — объявленное исключение. Подключён в ЛОКАЛЬНОМ `.claude/settings.local.json`; самопроверка — `tools/test-guards.mjs`, часть G | штамп из будущего |
+| `tools/hooks/voice-reminder.mjs` | хук Claude Code `PostToolUse`: пока игра открыта (её журнал писался последние 45 с), а агент 90 с не говорил вслух, хук вписывает в контекст агента «скажи вслух, что делаешь» — поверх полноэкранной игры владелец не видит VS Code (его слово 2026-10-04: «почему ты опять молчишь? … может давай тебе хуки сделаем?»). Подключён в ЛОКАЛЬНОМ `.claude/settings.local.json` с `--log <журнал игры> --stamp <отметка голоса>`; отметку обновляет голосовой инструмент сборки игры (`SvarogsDream/tools/voice_say.py`) | молчание агента при открытой игре |
+| `tools/hooks/no-permission-question.mjs` | хук Claude Code `Stop`: не даёт закончить ход, если последняя строка — вопрос-разрешение о СОБСТВЕННОМ следующем шаге агента («Запустить эту проверку сейчас?», «Хотите, чтобы я…?», «Shall I…?»), и велит этот шаг сделать (слово владельца 2026-10-08, `AGENT_GUIDE.md` → «Notes from the human»). `<!-- owner-decision -->` в ответе — объявленное исключение; `stop_hook_active` не даёт зациклиться. Подключён в ЛОКАЛЬНОМ `.claude/settings.local.json` под `hooks.Stop`: `{"hooks": [{"type": "command", "command": "node", "args": ["${CLAUDE_PROJECT_DIR}/tools/hooks/no-permission-question.mjs"], "timeout": 10}]}`; самопроверка — `tools/test-guards.mjs`, часть H | вопрос владельцу о своей же работе |
+| `tools/hooks/no-backslash-heredoc.mjs` | хук Claude Code `PreToolUse` на Bash: отказывает heredoc, в теле которого есть обратный слэш, — для каждой формы разделителя, которую он разбирает (`EXP-0120`; формы, которых он не видит, и его ложные срабатывания названы в поле GAP). Подключён в ЛОКАЛЬНОМ `.claude/settings.local.json` (не в git) — в новом клоне добавить под `hooks.PreToolUse` запись `{"matcher": "Bash", "hooks": [{"type": "command", "command": "node", "args": ["${CLAUDE_PROJECT_DIR}/tools/hooks/no-backslash-heredoc.mjs"], "timeout": 10}]}` | слэш, съеденный оболочкой |

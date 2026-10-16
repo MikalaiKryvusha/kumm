@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0283 · 2026-10-16 · ❌→✅ · #kaif #update #guard #sweep #judge #exemption
+class: guard-not-proven-against-threat
+**Context:** KAIF 2.7 → 2.9 update; `tools/kaif-update-sweep.mjs` flagged 4 continuation lines of multi-line template slots the project had filled.
+**Tried / did:** widened the guard's skip ("any `<letter` in inline code opens a slot") and proved it only on cases that were red before (61 pre-merge lines) and on the live tree turning green.
+**Result:** ❌→✅ — the independent judge deleted two real 2.9 lines in a copy: the patched guard said 0 / exit 0 (the HEAD version named both); the rule hid 106 new lines and never closed in 4 files. Second version (a capitalised word with no backtick to the end of its line; `>`` or a blank line closes) named both lines, exit 1.
+**Lesson:** an EXEMPTION added to a guard changes its threat model: prove it on a threat-present case the new exemption could swallow — a real loss next to and inside the exempted shape — not only on the cases that were already red. A guard turning green on the live tree right after an exemption is the most suspicious green there is.   → link: `testcases/reports/2026-09-18_kaif-update-sweep.md` §8 · `reports/KAIF_UPDATES/KUMM_KAIF_2.9_UPDATE_REPORT.md` R1
+**Repro:** `node tools/kaif-update-sweep-mutant.mjs <2.9 bundle> . <dir>` → `node tools/kaif-update-sweep.mjs <2.7 bundle> <2.9 bundle> --root <dir>` → both deleted lines named, exit 1.
+**Trigger:** editing any guard so that it SKIPS something → build the mutant (a real loss the skip could hide) before the first green run.
+**Not for:** a change that only tightens a guard (adds findings).
+mechanized: none — the first strike of this class in the journal; K6 stays in the guard's run report as a standing case
+
 ### EXP-0282 · 2026-10-16 · ❌ · #svarogsdream #perf #measurement #hypothesis
 class: fix-kept-without-measured-gain
 **Lesson:** переписи материалов на смене участка стоили 1–1,6 мс каждая; гипотеза «каждый компонент сам перебирает память, потому что видит
@@ -787,7 +798,7 @@ class: maintainer-advice-untested
 **Repro:** `tools/h.sh "shot …"` после F8 при `KrinikModMenu.dll.off`; журнал «Attempting to hook …OnGUI to enable plugin specific
 translations» при английском содержимом окна. **Trigger:** перевод чужого IMGUI-окна; ответ мейнтейнеру со ссылкой на документацию.
 **Not for:** окна на `GUI.Window` без `GUILayout` (там `func` — функция плагина).
-mechanized: none — разовая разведка; правка XUnity (развернуть `m_Func`) — решение владельца
+mechanized: none — разовая разведка; правка XUnity (развернуть `m_Func`) — решение владельца <!-- attribution-ok: names who will decide the XUnity fix, no decision of the owner is claimed -->
 
 ### EXP-0213 · 2026-10-11 · ❌→✅ · #svarogsdream #screenshot #capture #brightness #hdr #ffmpeg #ddagrab #owner-eye
 class: instrument-not-the-thing
@@ -2071,7 +2082,7 @@ class: escaping-layer
 **Trigger:** a script body contains `\` → the Write tool; a backslash INSIDE generated code → `String.fromCharCode(92)`.
 **Not for:** pure-ASCII bodies without backslashes — a quoted heredoc carries them fine.
 mechanized: tools/hooks/no-backslash-heredoc.mjs
-<!-- A PreToolUse hook on Bash, wired in .claude/settings.local.json on 2026-09-18; a live call with a backslash in a heredoc body was refused by the harness in the same session. A new clone must add the hook entry to its local settings again (AGENT_GUIDE → Tools). -->
+<!-- A PreToolUse hook on Bash, wired in .claude/settings.local.json on 2026-09-18; a live call with a backslash in a heredoc body was refused by the harness in the same session. A new clone must add the hook entry to its local settings again (HOUSE_RULES.md → Tools of this project). -->
 
 ### EXP-0119 · 2026-09-18 · ❌→✅ · #shell #eol #grep #windows
 class: shell-lied
@@ -2089,7 +2100,7 @@ class: claim-before-evidence
 **Context:** the 2.7 task handed `/autoloop`, `/dayloop`, `/nightloop` to the hand again although 2.6 promised that files differing only by hand-filled slots are replaced mechanically ([[EXP-0035]] predicted they would keep coming).
 **Tried / did:** read `fills` in the new `.kaif/deploy-manifest.json` (→ `{}`), read `deriveFills`/`matchFills` in the core, then RAN the core's own `matchFills` lifted verbatim on a one-line module with and without `<pack>` in the value.
 **Result:** ✅ cause proven, not guessed: the capture is `[^\n<>]+?`, so a fill that contains a bracketed argument (`-PackDir <pack>`, `-m "<msg>"`) unmatches the WHOLE module and the plain neighbour slot is not learned either. Filed and delivered as origin #73 (`bugs/KAIF/04_*`).
-**Lesson:** a mechanism suspected in someone else's code is cheap to confirm by lifting the function and calling it — twenty lines, one minute, and the ticket carries an output instead of a theory.   → link: `bugs/KAIF/04_fills_with_angle_brackets_never_derived.md` · origin #73
+**Lesson:** a mechanism suspected in someone else's code is cheap to confirm by lifting the function and calling it — twenty lines, one minute, and the ticket carries an output instead of a theory.   → link: `bugs/KAIF/04_DONE_fills_with_angle_brackets_never_derived.md` · origin #73
 **Repro:** `node tools/kaif-update-probe-matchfills.mjs .kaif/kaif-core.mjs` → `null` for the value with `<pack>` while #73 is open; both slots learned once upstream fixes the capture.
 **Trigger:** writing "most likely cause" into a ticket about foreign code → lift the function and run it before the sentence is written.
 **Not for:** functions with heavy closure state — lifting costs more than reading; then quote the lines and say "read, not run".
@@ -2100,7 +2111,7 @@ class: field-dropped-in-rebuild
 **Context:** KAIF 2.5 → 2.7 by the bootstrap route; the pass exited 0, `check` was green, the live run matched the sandbox byte for byte — and two modules had silently lost their upstream delta.
 **Tried / did:** did NOT stop at the task list: extracted both release bundles and diffed EVERY deployed file against the 2.7 template. `/end-chat-soft` Step 1 (the `kaif-experience-lint` run, the `check --gate-budgets` door) and `/end-chat-force` Step 1 (the standing-falsehood line) were absent from disk AND from `KAIF_UPDATE_TASK.md`. Cause read in `mergeModules`: this tree had renamed those headings itself on 2026-09-09 (the local remediation of #57), so the old anchor was absent, the new one present, `oldE` came back `undefined` and no branch made a task item.
 **Result:** ✅ both modules merged by script; class filed and delivered as origin #72 (`bugs/KAIF/03_*`); the sweep became a repository guard proven red on the untouched sandbox (121 lines / 11 files, exit 1) and green on the live tree (0, exit 0).
-**Lesson:** the update task shows what the classifier NOTICED; what it lost is invisible from inside. After any KAIF pass the truth is "bundle vs disk", and a log line that says "arrives as new" is a claim to check, not a delivery. A local fix that pre-empts an upstream rename is exactly what triggers the loss.   → link: `bugs/KAIF/03_rename_anchor_absent_upstream_delta_lost.md` · origin #72 · `testcases/reports/2026-09-18_kaif-update-sweep.md`
+**Lesson:** the update task shows what the classifier NOTICED; what it lost is invisible from inside. After any KAIF pass the truth is "bundle vs disk", and a log line that says "arrives as new" is a claim to check, not a delivery. A local fix that pre-empts an upstream rename is exactly what triggers the loss.   → link: `bugs/KAIF/03_DONE_rename_anchor_absent_upstream_delta_lost.md` · origin #72 · `testcases/reports/2026-09-18_kaif-update-sweep.md`
 **Repro:** `gh release download v<old> --repo MikalaiKryvusha/KAIF --pattern KAIF-CORE-BUNDLE.md` (and `v<new>`, into two dirs) → `node tools/kaif-update-sweep.mjs <old bundle> <new bundle>` → must end with `недоехавших строк: 0`, exit 0.
 **Trigger:** `KAIF-BOOT: loader exit 0` or `update` finished → run the sweep BEFORE the first checkpoint, read its list as the hand's to-do, run it again after the merges.
 **Not for:** owner-seeded documents (STATUS, GOAL, MASTER_PLAN, the maps, directory READMEs) — the tool skips them by name, their templates are skeletons, not content.

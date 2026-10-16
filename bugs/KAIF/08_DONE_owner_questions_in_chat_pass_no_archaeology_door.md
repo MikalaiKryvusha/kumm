@@ -46,3 +46,14 @@ This project, 2026-09-18 — the owner's two messages quoted in the field report
 
 Recorded as a lesson with its trigger phrases (`EXP-0122`); no hook — this project already runs one agent-restricting
 hook (`tools/hooks/no-backslash-heredoc.mjs`) and a second one of a different kind is the origin's call to design.
+
+## Status — ✅ closed 2026-10-16 22:45 +03:00 (KAIF 2.7 → 2.9 update)
+
+Closed upstream: origin #82, CLOSED; answered in KAIF 2.8 (epic OW): `node .kaif/tools/contour/review.mjs --search
+"<the question>"` is the door for a question in ANY transport, chat included, and the guide says a pointed chat question
+passes the same search. Field check on the 2.7 → 2.9 pass: the search ran before the `wire-hooks` decision
+(12 hits in 5 files, none an owner decision about hooks).
+
+### Decisions made without the owner
+
+- none — the closure follows the origin's own closing of the issue and the field check above.

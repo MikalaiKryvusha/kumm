@@ -15,7 +15,7 @@
 - **The main thread is the game itself:** 21.1 ms per frame with no mods at all — the ceiling is ≈47 FPS at this place, whatever we do on
   the GPU. GPU busy 8.7–10.6 ms of 21 — it idles half the frame.
 - **Our mods cost ≈0.2 ms of CPU** (A vs B, inside the noise) **and ≈2 ms of GPU** (haze and grass shaders, water reflection of land, far
-  draw distance: 2.5 M triangles vs 1.5 M, batches 1196 vs 648 in `perf`). The owner's verdict: the mods respect the CPU.
+  draw distance: 2.5 M triangles vs 1.5 M, batches 1196 vs 648 in `perf`). The owner's verdict: the mods respect the CPU (`[OWNER]` «Значит, мод уважительны к процессоры» · 2026-10-12 — the header's Status line).
 - **Worst frames are worse with mods:** p99 27.9 vs 24.4 ms; low 1 % 16.5 vs 38.4 FPS. Not explained yet — C ran at night (torch light
   only, less on screen), A and B by day, so part of it is the scene. Next: same daylight for C, and the hitch log of A (`event: spike`).
 - **Where the main thread goes** — the profile of 2026-10-10 (development player, `main-thread-profile-2026-10-10.md`): waiting for small

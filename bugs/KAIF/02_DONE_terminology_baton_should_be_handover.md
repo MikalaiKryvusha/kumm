@@ -143,7 +143,7 @@ text itself (the seven files diffed against the extracted 2.7 bundle).
 
 The second half of this ticket — "an anchor lookup that finds nothing must ASK, not stay silent" — was
 NOT fully delivered by 2.7: the log line exists, the upstream delta of the two pre-renamed modules was
-still dropped. That is its own ticket now: `bugs/KAIF/03_rename_anchor_absent_upstream_delta_lost.md`
+still dropped. That is its own ticket now: `bugs/KAIF/03_DONE_rename_anchor_absent_upstream_delta_lost.md`
 (origin #72).
 
 ## Decisions made without the owner

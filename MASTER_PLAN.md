@@ -140,6 +140,7 @@ hygiene). Decided and recorded are two moments — tell them apart when they dif
 | 2026-10-09 ≈13:25 +03:00 (decided) · recorded 13:30 | Главное — Svarog's Dream; Medieval Dynasty на паузе; интерфейс Сварога — 16:9 на 720p, 1080p, 2K, 4K | `[OWNER]` «забей на Medieval Dynasty» · «мы работаем дальше над Сварогом» · «720p … тоже все должно корректно масштабироваться» |
 | 2026-10-14 ≈14:45 +03:00 (decided) · recorded 14:47 | Бюджет 1 мс главного потока — для кадров основного геймплея; лаг при открытии окон допустим | `[OWNER]` «При открытии - насрать. Лаг допустим.» · «Лаги не допустимы в игре, когда герой бегает а игрок играет, воюет, при геймплее основном» |
 | 2026-10-08 ≈13:15 +03:00 (decided) · recorded 13:18 | Психика NPC — отдельная переиспользуемая модель KARMA в публичном репозитории; название и расшифровка утверждены владельцем | `[OWNER]` «Давай KARMA И заведём публичный репозиторий под неё» · «Утверждено «Krinik's KARMA: A Psychological Model for Game AI Agents» KARMA (Krinik Agent Relations & Mind Approximation)» |
+| 2026-10-16 22:30 +03:00 (live pass) | KAIF updated 2.7 → 2.9 by the bootstrap route; project facts moved from `AGENT_GUIDE.md` to `HOUSE_RULES.md`; the KAIF refresh hooks wired | `[AI]` The 2.8–2.9 rule changes are accepted with the version (the 2.9 rule: no question to the owner unless a rule collides with his recorded decision — none found); all nine are listed for him, in Russian, in `KAIF_FRAMEWORK.md` → «Что изменилось в 2.8 и 2.9» |
 
 ---
 

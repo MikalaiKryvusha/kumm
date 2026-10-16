@@ -43,4 +43,4 @@ owner, verbatim: «Так. Давай изменим твои правила, и
 ## Local remediation
 
 Built and wired (local `.claude/settings.local.json`, `hooks.Stop`); rule in `AGENT_GUIDE.md` → «Notes from the human»
-and the Tools table. A future KAIF hook with the same contract replaces ours at the next update.
+and the Tools table (since 2026-10-16 in `HOUSE_RULES.md` → Tools of this project). A future KAIF hook with the same contract replaces ours at the next update.

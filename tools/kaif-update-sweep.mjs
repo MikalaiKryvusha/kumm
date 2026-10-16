@@ -21,11 +21,18 @@
 //                 среди них оба молча потерянных модуля (end-chat-force 5 строк, end-chat-soft шаг 1), которых НЕ было в задании
 // GAP:            видит только строки, ДОБАВЛЕННЫЕ между двумя шаблонами; чистое удаление апстримом не видит; строки с
 //                 плейсхолдерами и строку description (русские триггеры) пропускает намеренно — там расхождение законно,
-//                 поэтому непереведённый кусок с плейсхолдером (английский символ веры) он не назовёт
-// ON-REAL-PATH:   живое дерево KUMM после обновления и ручного слияния 2026-09-18 — 0 строк, код 0
+//                 поэтому непереведённый кусок с плейсхолдером (английский символ веры) он не назовёт; с 2026-10-16
+//                 многострочный слот-инструкция шаблона (`<Заглавное слово …` до `>``) пропускается целиком, как однострочное
+//                 заполнение, — не видна настоящая строка ВНУТРИ такого слота, между незакрытым открытием и пустой строкой
+//                 и текст на закрывающей строке слота ПОСЛЕ `>`` (в 2.9: «Grow this tooling» раздела «Test harness»)
+// ON-REAL-PATH:   живое дерево KUMM после обновления и ручного слияния 2026-09-18 — 0 строк, код 0; после обновления
+//                 2.7 → 2.9 2026-10-16 — 0 строк, код 0 (копия до слияния — 61 строка, код 1; мутант с двумя удалёнными
+//                 строками 2.9 — обе названы, код 1)
 //
 // [TESTED: 2026-09-18 · три прогона на настоящих деревьях, вывод прочитан: сломанное — 121 строка/код 1, живое — 0/код 0,
 //  нечитаемый вход — «НЕ ПРОЧЁЛ»/код 2 · отчёт testcases/reports/2026-09-18_kaif-update-sweep.md]
+// [TESTED: 2026-10-16 · прогон 2.7 → 2.9, вторая версия правки слотов: мутант 2 строки/код 1, копия до слияния 61/код 1, живое
+//  дерево 0/код 0, нечитаемый вход код 2 · отчёт testcases/reports/2026-09-18_kaif-update-sweep.md, §8]
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -41,6 +48,11 @@ const OWNER_SEEDED = new Set(['STATUS.md', 'GOAL.md', 'MASTER_PLAN.md', 'KAIF_FR
   'PROJECT_STRUCTURE_EXTERNAL_MAP.md', 'PROJECT_ARCHITECTURE_INTERNAL_MAP.md']);
 const KNOWLEDGE_README = /^(bugs|plans|ideas|researches|interviews|homeworks|reports)\/README\.md$/; // приезжают локализованными
 const PLACEHOLDER = /<[A-Z][A-Z_/' ]{3,}>/;
+// Слот-инструкция шаблона, НЕ закрытый на своей строке: `<Заглавное слово …` без обратного апострофа до конца строки
+// (`<Describe the tooling …`, `<High-signal guidance …`, `<Use your commit tool/flow …`). Строчное `<file…>`, `<role>` и
+// закрытое на той же строке `<YOUR AGENT/MODEL>` — не слот: первая версия правки (тот же вечер) открывала «слот» на любом
+// `<буква` в коде и пропускала из-за этого 106 настоящих строк 2.9 — судья доказал мутантом (отчёт прогона, кейс К6).
+const SLOT_OPEN = /`<[A-Z][A-Za-z-]* [^`]*$/;
 
 const die = (msg) => { console.error('НЕ ПРОЧЁЛ: ' + msg); process.exit(2); };
 if (!oldBundle || !newBundle) die('нужны два пути: <старый бандл> <новый бандл>');
@@ -80,9 +92,17 @@ for (const [path, body] of [...newFiles].sort(([a], [b]) => (a < b ? -1 : a > b 
   const have = new Set(readFileSync(disk, 'utf8').split(CR + LF).join(LF).split(LF).map(norm));
   const was = new Set((oldFiles.get(path) || []).map(norm));
   const lost = [];
+  let inSlot = false;
   body.forEach((l, n) => {
     const t = norm(l);
+    // Слот-инструкция шаблона (`<Describe …>`) бывает многострочным: проект заменяет его своим текстом целиком, и строки
+    // продолжения — такое же законное расхождение, как однострочное заполнение (обновление 2.7 → 2.9, 2026-10-16: четыре
+    // строки слотов «Test harness» и «Notes from the human» стояли «недоехавшими» над заполненными разделами).
+    let slotLine = inSlot;
+    if (inSlot) { if (t.includes('>`') || !t.trim()) inSlot = false; }   // закрытие — `>`` или, на всякий случай, пустая строка
+    else if (SLOT_OPEN.test(t)) { inSlot = true; slotLine = true; }
     if (!t.trim() || was.has(t) || have.has(t)) return;
+    if (slotLine) return;
     if (PLACEHOLDER.test(t) || t.startsWith('description:')) return;               // законное расхождение: заполнения и триггеры
     lost.push(`${String(n + 1).padStart(5)}: ${t.slice(0, 180)}`);
   });

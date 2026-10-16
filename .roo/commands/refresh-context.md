@@ -31,9 +31,11 @@ restores it quickly and forms a current backlog.
    rewrite `.kaif/refresh-marker.json` and quote in the chat one line from the re-read relevant to
    the current work.
 
-3. **Check the environment dossier** (`AGENT_GUIDE.md` → Environment dossier). Read the "Taken"
-   date in the section header: **older than four weeks, or values still `— not probed yet —`
-   (a fresh deployment) → re-run the probes in column 3 and rewrite the values and the date.**
+3. **Check the environment dossier** (the rule — `AGENT_GUIDE.md` → Environment dossier; the table —
+   `HOUSE_RULES.md` → "Environment dossier"; no file yet → `cp .kaif/_house-rules-template.md HOUSE_RULES.md`; a file
+   from before 2.8 without that section → copy the section from `.kaif/_house-rules-template.md`).
+   Read the "Taken" date in the section header: **older than four weeks, or values still `— not probed
+   yet —` (a fresh deployment) → re-run the probes in column 3 and rewrite the values and the date.**
    Probe in EVERY shell available separately — the difference between shells is the point. Fresh
    dossier → skip this step; it is not a per-refresh ritual, it is a staleness check. A fact you
    could not probe stays `— not probed yet —`: a missing fact is honest, an invented one is a
@@ -51,7 +53,8 @@ restores it quickly and forms a current backlog.
 5. **Pick one task** from the rebuilt backlog (priority: finish what's started > bugs > new ideas) that
    doesn't need a human decision. An unplanned item gets planned before code: `/plan-task` for an
    ordinary one, `/plan-epic` when the heaviness test says it's heavy. If you're in a loop — continue
-   the loop with it.
+   the loop with it. Called by the owner with a question or a task in the same message — they set the scope
+   (as `/resume` Step 2, decision #143): a question is answered and the picked task is OFFERED, not taken.
 
 ## Notes
 - This is a FAST skill (read + list), a couple of minutes. Don't rewrite docs without need.

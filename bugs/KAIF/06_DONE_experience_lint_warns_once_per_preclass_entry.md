@@ -48,3 +48,13 @@ yet — the risk is the next session skimming past the one red line.
 ## Local remediation
 
 None: the lint is framework code. The field report (#79, R3) carries the same observation.
+
+## Status — ✅ closed 2026-10-16 22:45 +03:00 (KAIF 2.7 → 2.9 update)
+
+Closed upstream: origin #80, CLOSED; fixed in KAIF 2.8. Field check on the 2.7 → 2.9 pass:
+`node .kaif/tools/kaif-experience-lint.mjs check` prints ONE line for the history — "no-class: 88 failure entries carry
+no `class:` and predate the first classed entry (EXP-0117, 2026-09-18) — outside the field rules; list them: --verbose".
+
+### Decisions made without the owner
+
+- none — the closure follows the origin's own closing of the issue and the field check above.

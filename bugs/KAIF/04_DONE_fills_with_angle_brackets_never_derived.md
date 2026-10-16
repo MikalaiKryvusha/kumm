@@ -88,3 +88,15 @@ None in the machinery. The hand merge is scripted: `tools/kaif-update-merge-skil
 + this project's fills" and refuses a leftover placeholder; idempotent (second run prints `=`). The probe that
 produced the Repro output is kept as `tools/kaif-update-probe-matchfills.mjs` — it prints both slots once the
 capture is fixed upstream, which makes it the acceptance check of this ticket.
+
+## Status — ✅ closed 2026-10-16 22:45 +03:00 (KAIF 2.7 → 2.9 update)
+
+Closed upstream: origin #73, CLOSED; fixed in KAIF 2.8. Field check on the 2.7 → 2.9 pass: the loader printed
+`hand-filled slots recognized (4): <BUILD_COMMAND>, <TEST_HARNESS>, <YOUR AGENT/MODEL>, <YOUR AGENT'S noreply EMAIL>`, and
+the three loop skills moved mechanically (`replaced … (fills kept)`) instead of coming back as hand items.
+`node tools/kaif-update-probe-matchfills.mjs .kaif/kaif-core.mjs` on the 2.9 core prints the fill with `<pack>`
+(`{"<BUILD_COMMAND>":"node --check kumm.mjs","<TEST_HARNESS>":"Deploy-ModPack.ps1 -Verify -PackDir <pack>"}`), not `null`.
+
+### Decisions made without the owner
+
+- none — the closure follows the origin's own closing of the issue and the field check above.

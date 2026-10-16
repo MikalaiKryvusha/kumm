@@ -14,10 +14,10 @@ Update `STATUS.md`, tersely:
 - **What was done in this chat** — the facts a stranger cannot recover from git alone.
 - **Where we are** — what works, what is mid-flight and in what state.
 - **What the next session does FIRST** — commands, paths, open questions with owners.
-- **The ceremonies debt line** — add verbatim:
+- **The ceremonies debt line** — in the owner's language (origin issue #97; the English form below):
   `⚠️ Force-closed <date+time>: ceremonies skipped (judge pass, bonsai trim, README, showcase
   linters) — the first /end-chat-soft pays this debt.`
-- **The standing falsehood line** — one phrase, verbatim: `Standing falsehood: none`, or
+- **The standing falsehood line** — one phrase, in the owner's language (the English form): `Standing falsehood: none`, or
   `Standing falsehood: <the statement> → still stands in <place>, <place>` (`AGENT_GUIDE.md` → "a
   falsehood is corrected where it stands"). Force mode may skip a ceremony; it never drops a lie left
   standing under the owner's name — a statement this session learned was false and corrected only in
@@ -31,8 +31,10 @@ move) instead of finishing it — naming survives, rushing corrupts.
 
 Commit through the project's staging gate and push:
 
-`<Use your commit tool/flow. If you have one (e.g. tools/commit.mjs that bumps build, adds, commits,
-pushes), run it. Otherwise: git add -A && git commit -m "..." && git push.>`
+This project has no commit tool: `git add <the files of this chat, named one by one>` (never `-A` — a new file of the
+owner must not ride along, AGENT_GUIDE.md → Git workflow), then `git commit -F <message file>` (the message in Russian,
+the co-author trailer in English), then `git push` — each its own tool call, never chained. The pre-commit hook runs the
+identity scrub and the claim-before-evidence gate by itself.
 
 If the build is known-broken, say so IN the commit message (`wip:` prefix) — an honest broken
 state beats a silently lost one. If a push is rejected (non-fast-forward) — `git pull --rebase`,

@@ -45,3 +45,13 @@ This project's update, 2026-09-18; the judge's claims table row 6 (VERIFIED WITH
 
 The wording in this project's `STATUS.md` and field report now says "counters equal, task file byte-identical,
 trees equal modulo line endings".
+
+## Status — ✅ closed 2026-10-16 22:45 +03:00 (KAIF 2.7 → 2.9 update)
+
+Closed upstream: origin #81, CLOSED; fixed in KAIF 2.8. Field check on the 2.7 → 2.9 pass: the delivered `/kaif-update`
+step 2 names `git -c core.autocrlf=false archive HEAD | tar -x -C <tmpdir>` and says the pass matches the sandbox "up to
+line endings on a core.autocrlf=true tree"; this pass's sandbox was exported that way.
+
+### Decisions made without the owner
+
+- none — the closure follows the origin's own closing of the issue and the field check above.

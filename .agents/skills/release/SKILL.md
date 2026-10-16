@@ -100,18 +100,19 @@ excuses next to a number, no hint of a backstage, no denial undermining a figure
 impersonal voice in a procedure, no internal label as a table row name, no estimate range wider
 than its source, no internal build command shown as proof, no instruction the human cannot execute
 (a flag the AGENT passes is not something the reader can "add"), and the two language halves must
-match in skeleton. `<If the project has a storefront linter, run it here; otherwise walk the ten
-rules by hand before handing the text over.>`
+match in skeleton. This project has no storefront linter: walk the ten rules by hand before handing
+the text over, and after the push open `README.md` on GitHub and read its first screen (rule 10).
 
 ## Step 3. Regenerate rendered docs
 
-`<Regenerate any rendered artifacts, e.g. README.pdf (node tools/readme-pdf.mjs). For this framework's
-own project, also regenerate the self-extracting core: node tools/build-framework.mjs.>`
+This project renders nothing (no README.pdf, no generated core): skip the step and say so in the release report.
 
 ## Step 4. Control build (before the release)
 
-`<Run the project build (BUILD_COMMAND). It must succeed. This catches errors BEFORE the version bump so
-you don't leave a half-released version.>`
+Run `node --check kumm.mjs`, the PowerShell parse and `npm pack --dry-run` (AGENT_GUIDE.md → «Build»), then the
+pure-core tests — `node test-parse-archive.mjs`, `node test-archive-roundtrip.mjs`, `node test-pick-card.mjs`,
+`node test-help-commands.mjs`. All must exit 0. This catches errors BEFORE the version bump so you don't leave a
+half-released version.
 
 ## Step 4.5. Judge pass — MANDATORY adversarial verification before publishing
 
@@ -129,12 +130,14 @@ Commit the README/docs updates so the `release: X.Y` commit is a clean version b
 
 ## Step 6. Publish (after the human's confirmation)
 
-`<Run your release flow. If you have a release tool (e.g. tools/release.mjs that bumps the version,
-builds, renames the artifact, commits "release: X.Y", tags vX.Y, pushes, and runs gh release create),
-run it. Otherwise, do it explicitly:>`
+This project has no release tool and no release yet (`gh release list -R MikalaiKryvusha/kumm` empty, no git tags —
+2026-10-16); the version lives in `package.json` → `version`. Do it explicitly:
 ```bash
-# bump version (in version.json or your manifest), then:
-git commit -am "release: X.Y" && git tag vX.Y && git push && git push --tags
+# bump version (in version.json or your manifest), then — ONE tool call per line, never chained (AGENT_GUIDE.md → Git workflow):
+git commit -am "release: X.Y"
+git tag vX.Y
+git push
+git push --tags
 gh release create vX.Y --title "<PROJECT> X.Y — <Codename>" --notes-file <NOTES.md> <ARTIFACT(S) if any>
 ```
 
@@ -191,7 +194,8 @@ gh release view vX.Y --web   # open the PUBLISHED page, not the notes file
 ```
 Read the first screen: paragraphs intact, breaks where you intended them, image in place, links
 clickable. The mechanical half of the gate runs before publishing: the notes body file must have
-**no two non-empty lines in a row** outside code blocks and tables.
+**no two non-empty lines in a row** outside code blocks, tables, HTML blocks and comments (a centred logo, an
+anchor before a heading and an HTML comment are structure, not wrapped prose).
 
 The rule is wider than releases and applies to any foreign medium — an issue, an email, a chat bot,
 a slide: learn its wrapping rule BEFORE writing, open the result AFTER shipping.

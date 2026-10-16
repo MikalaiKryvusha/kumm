@@ -37,7 +37,7 @@ desert (`[OWNER]` «-10 нравится везде, кроме пустыни -
 карты меняется температура, в разные поры года и времена дня» · «и в Римворлде так сделано» · 2026-10-11 14:06. Proposed shape (not
 started): air temperature at the hero = zone base (from the ambient tag + our cells) + season offset + time-of-day curve + heat sources
 nearby (fires, torches, forges — found by their objects or lights in the loaded areas). Readers: the colour grading first (warm/cold
-tint instead of a fixed −10), later a HUD readout, and gameplay hooks (the game's own `Cold` buff, breath) only by the owner's word.
+tint instead of a fixed −10), later a HUD readout, and gameplay hooks (the game's own `Cold` buff, breath) only by the owner's word. <!-- attribution-ok: names who will decide the gameplay hooks, no decision of the owner is claimed -->
 
 ## Plan (proposed, not started)
 

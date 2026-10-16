@@ -25,10 +25,20 @@
 export const PARSER = {
   // option letters in list form `- **A)** …` and table form `| **A** | … |`
   letters: 'A-ZА-Я',
+  // OW3 (2.8, #86): the words by which a document's STATUS BLOCK says its answers await application — the field's own proven matcher
+  awaitingApplication: 'awaiting application|ждут\\s+внесения|ждёт\\s+внесения|ждет\\s+внесения',
   // question heading prefixes: `### Q1.` (EN) · `### В1.` (RU)
   questionPrefixes: 'Q|В',
   // a heading that LOOKS like a question but is not in the form above (QL1, origin #56): `### Question 3` · `### Вопрос 3`
   questionWords: 'Question|Вопрос',
+  // 2.9, epic CP (origin issue #124): a BACKWARD or SIDEWAYS reference that sends the owner out of the question for its own content.
+  // Russian: the field project's pattern, its standing rule for six weeks (issue #124, verbatim), with a forward «см. ниже» left
+  // legal; English: its mirror. A forward reference ("options below") is legal by the owner's word in the ticket.
+  // The light judges of epic CP, F3 and N2: «выше» / "above" is a REFERENCE unless a comparison follows it — a number or «чем» / "than"
+  // («нагрузка выше 80%», «B выше, чем A», "above 80%" stay legal; «формула выше», «в таблице выше», "the list above", «как указано выше»
+  // refuse); «см. <…> ниже» (forward) and «см. также» / "see also" (a reference NEXT to the content) stay legal.
+  refBack: '(?<!\\p{L})(?:выше(?!\\p{L})(?!\\s*,?\\s*(?:чем(?!\\p{L})|[\\d~≈<>]|на\\s+\\d|в\\s+\\d))|вон\\s+т[оеа]\\p{L}*|в\\s+разделе|в\\s+шапке|см\\.\\s(?!(?:[\\p{L}\\d«»"\'-]+\\s+){0,3}?ниже)(?!также)|above(?!\\p{L})(?!\\s*(?:than(?!\\p{L})|[\\d~<>]|by\\s+\\d))|see\\s+(?:§|the\\s+section|section)|in\\s+the\\s+(?:section|header)|§\\s?\\d)',
+  originLabels: 'Origin|Источник|Родитель',
   // the answer field label: `**Answer:**` · `**Ответ:**` · `**Ответ владельца:**`
   answerLabels: 'Answer|Ответ(?:\\s+владельца)?',
   // a counter-question is NOT an answer (contract C4 rule 2)
@@ -41,8 +51,17 @@ export const PARSER = {
   recommendLabels: 'Рекомендация\\s+агента|Agent\'?s?\\s+recommendation',
   // status line of the document head (`> Status:` / `> **Статус:**`)
   statusLabels: 'Status|Статус',
+  // 2.9, epic CP (origin #109, #121 R3): an EXPLICIT closing word at the START of the status value (after an optional mark and bold) closes
+  // the document even when an explanation after it carries a negation («✅ ЗАКРЫТО — ВОПРОС СНЯТ АГЕНТОМ, А НЕ ОТВЕЧЕН ВЛАДЕЛЬЦЕМ»); the
+  // project's own closed words — «перенесено», «СНЯТО», WITHDRAWN — were read as a LIVE document and stood in the owner's queue
+  statusClosedWord: '^\\s*(?:[✅⛔➡🟢]\\uFE0F?\\s*)?\\*{0,2}\\s*(?:CLOSED|WITHDRAWN|MOVED|ЗАКРЫТ[ОАЫ]?|СНЯТ[ОАЫ]?|ПЕРЕНЕС[ЕЁ]Н[ОАЫ]?)(?!\\p{L})',
   statusClosed: '✅|🟢|STATUS:\\s*DONE|ANSWERS\\s+RECEIVED|ОТВЕЧЕНО',
   statusWaiting: '🟡|awaiting|ждёт\\s+ответ|ожидает\\s+ответ',
+  // (the light re-judge of epic CP, F5) on a line that opens with a closing word the document waits only for an UNNEGATED waiting marker
+  // («больше не ждёт ответа», "no longer awaiting" close) or a NOT-YET mark («Q2 — ещё не отвечен»); a bare «не отвечен» still closes —
+  // a question withdrawn by the agent is written that way.
+  statusWaitingNegation: '(?:(?<!\\p{L})не|\\bnot|\\bno\\s+longer|\\bno)',
+  statusPending: '(?<!\\p{L})(?:ещ[её]|пока)\\s+не(?!\\p{L})|\\bnot\\s+yet\\b|\\bno\\b[^.]{0,40}\\byet\\b',
   // negation outranks the tick (bugs/70): «пока НЕ отвечено», "no answers yet", "not answered"
   statusNegation: '(?<!\\p{L})не\\s*отвечен|неотвечен|(?<!\\p{L})пока\\s+не(?!\\p{L})|(?<!\\p{L})ещё\\s+не(?!\\p{L})|\\bno\\b[^.]{0,40}\\byet\\b|\\bnot\\b[^.]{0,40}\\banswer',
   // the declared free field of a question with no options (naming / taste questions)
@@ -109,7 +128,7 @@ const EN = {
     paragraph: 'Comment on this paragraph', mockup: 'What to change on the mockup',
     noRemarks: 'No remarks — just press Done: that is a recorded verdict too',
     artComment: 'What to fix (when rejecting — by meaning, or the agent will not know what to change)' },
-  btn: { save: 'Save decision', saveDoc: 'Save decisions for this document', read: 'OK, read', done: 'Done',
+  btn: { reloadRev: 'Open the new revision', save: 'Save decision', saveDoc: 'Save decisions for this document', read: 'OK, read', done: 'Done',
     copy: 'Copy', retry: 'Retry saving', approve: '<strong>Approve</strong> — send as is',
     reject: '<strong>Reject</strong> — do not send' },
   art: { goesOut: 'Goes out', missing: (file) => 'File <code>' + file + '</code> not found — nothing to approve. This is a defect, not your choice.',
@@ -122,7 +141,16 @@ const EN = {
     // LP (2.7, origin issue #66): with the window's own profile in the project the answer survives the server — no dialog, no choice
     serverGoneLocal: 'The contour server is unreachable — keep writing and press Save as usual: the answer is saved on this computer, in the project folder, and the agent will pick it up.',
     savedLocally: 'The server is unreachable — your answer is saved on this computer (in the project folder); the agent will pick it up. You can close the window.',
+    // CP (2.9, origin issue #125): a long message goes to the bar above the page (it keeps the Save column free); the pill under the
+    // button carries a short label only — a pill six lines tall covered the document's title
+    savedLocallyShort: 'Saved on this computer', pillOk: 'Details in the bar above', pillErr: 'Attention — see the bar above',
     closeYourself: 'The browser refused to close the window — please close it yourself',
+    // OW6 (2.8): answers are saved one at a time — the page stays; a save against another revision of the document is refused
+    left: (n) => 'Saved. Questions left: ' + n + ' — the page stays open; answer the rest now or later.',
+    stale: 'The document was CHANGED after this page opened — this answer was NOT saved. Your text is below; open the new revision: drafts of unchanged questions come back.',
+    rewritten: 'The document was rewritten after this page opened — saving here is off. Open the new revision:',
+    orphan: 'Draft of a previous revision — these questions changed or are gone; your text is kept here:',
+    duplicate: 'already recorded',
     copied: 'Copied to the clipboard', copyManually: 'Select and copy by hand',
     rescue: 'Saving failed — your text is below, it is not lost.', noticeHint: 'Without the mark the notice comes back.',
     selfcheck: (r, q) => 'PAGE SELF-CHECK FAILED: ' + r + ' radio group(s) for ' + q + ' question(s) — the form is broken, do not answer here; tell the agent.',
@@ -135,20 +163,33 @@ const EN = {
       (nWait ? ': questions without an answer ' + nWait : '') + '. The page is open.',
     proofread: (o, p, title) => o + ', ' + p + ' asks for proofreading: "' + title + '". The page is open.',
     mockup: (o, p, title) => o + ', ' + p + ' asks you to look at a mockup: "' + title + '". The page is open.',
+    from: (s) => 'this is ' + s, // OW4 (2.8, #98): «<owner>, this is <session>. …»
     parts: { docs: (n) => 'documents ' + n, questions: (n) => 'questions without an answer ' + n, notices: (n) => 'unread notices ' + n },
   },
+  // OW4 (2.8, #98): how the voice says a session's name — known words and numbers; an unknown word stays as written
+  spoken: { words: [], // pairs [written, spoken] — a dictionary, not a schema: the pack's array is taken whole
+    ones: ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'],
+    tens: ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'] },
   // the queue without a browser (`--queue --list`) — read by the agent, quoted by the rituals
   list: { waits: (d) => 'waiting ' + d + ' d', shown: (date, ago, t) => 'shown: ' + date + ' — ' + ago + ' d ago (' + t + ')',
     never: 'NEVER SHOWN — the owner does not know this question exists', empty: "The owner's queue is empty — no waiting documents.",
     gate: (n) => 'GATE (I42): never shown — ' + n + '. Printing the queue is not delivering the question; showing is the agent\'s action.',
     how: (cmd) => 'Raise it as a page: ' + cmd + ' --queue · asked it pointedly in chat — record the fact: ' + cmd + ' --mark-shown <doc> --transport chat',
-    dead: 'A dead document with nothing to show → close it by status and it leaves the queue.' },
+    dead: 'A dead document with nothing to show → close it by status and it leaves the queue.',
+    awaiting: (n) => 'OWNER DECISIONS AWAIT APPLICATION — ' + n + ': every question answered, the status not closed. Apply them FIRST, ahead of the plan (#86), then close the status.',
+    answered: (d) => 'answered ' + d + ' d ago',
+    foreign: (f) => 'the project keeps its own queue: ' + f + ' is not this contour\'s shape — read as no items here and never written; its waiting documents are raised by the project\'s own contour (see HOUSE_RULES.md), the interviews are still scanned',
+    foreignWrite: (f) => 'not written: ' + f + ' is the project\'s own queue (another shape) — this contour never overwrites it; raise the document with the project\'s own contour',
+    stale: (doc, d, lim, cmd) => 'stale in the queue (' + d + ' d > ' + lim + '): ' + doc + ' — not in the list above; close it by status or show it on purpose: ' + cmd + ' --queue --include-stale' },
   transport: { page: 'page', batch: 'batch', chat: 'chat' },
   // the FOURTH fact — implemented (2.7 QL2, origin issue #54: an already-implemented question was raised again and produced a false second decision)
   impl: {
     marked: (doc, q, where, file) => 'Implemented recorded (I44): ' + doc + ' ' + q + ' → ' + where + ' → ' + file,
     gate: (doc, ids) => 'implemented, but open: ' + doc + ' ' + ids.join(', ') + ' → close the status (or fill the answer); an implemented question is never raised again (I45)',
     badge: (where, date) => 'implemented → ' + where + ' (' + date + ')',
+    withdrawnBadge: (why, date) => 'withdrawn — ' + why + ' (' + date + ')',
+    withdrawn: (doc, q, why, file) => 'Withdrawn recorded: ' + doc + ' ' + q + ' — ' + why + ' → ' + file + ' (the question became moot; never an answer on the owner\'s behalf)',
+    answeredNotWithdrawn: (doc, q) => doc + ' ' + q + ' is ANSWERED by the owner — only an open question is withdrawn; nothing recorded',
     noSuch: (doc, q, ids) => 'no question ' + q + ' in ' + doc + ' — known: ' + (ids.join(', ') || '(none)'),
   },
   // `--check <doc>` — the form check WITHOUT a page (2.7 QL1, origin issue #56: the only check was the show, and the show is the call)
@@ -175,7 +216,7 @@ const RU = {
   months: ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
     'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
   wb: {
-    followUp: (atHuman) => 'Answer (дополнение, ' + atHuman + '):',
+    followUp: (atHuman) => 'Ответ (дополнение, ' + atHuman + '):', // CP (2.9, #127 p. 2): the label in the document's language
     ownerComment: (atHuman) => 'Комментарий владельца (' + atHuman + '):',
     proofread: (atHuman) => 'Замечания владельца по вычитке (' + atHuman + '):',
     recovered: 'забран с компьютера владельца', // LP (#66): комментарий провенанса называет, что ответ пришёл из локальной записи
@@ -201,7 +242,7 @@ const RU = {
     paragraph: 'Замечание к этому абзацу', mockup: 'Что поправить на макете',
     noRemarks: 'Замечаний нет — просто нажмите «Готово»: это тоже записанное решение',
     artComment: 'Что поправить (при отклонении — обязательно по смыслу, иначе агент не знает, что менять)' },
-  btn: { save: 'Записать решение', saveDoc: 'Записать решения по этому документу', read: 'ОК, прочитано', done: 'Готово',
+  btn: { reloadRev: 'Открыть новую редакцию', save: 'Записать решение', saveDoc: 'Записать решения по этому документу', read: 'ОК, прочитано', done: 'Готово',
     copy: 'Скопировать', retry: 'Повторить запись', approve: '<strong>Одобряю</strong> — отправить как есть',
     reject: '<strong>Отклоняю</strong> — не отправлять' },
   art: { goesOut: 'Уйдёт наружу', missing: (file) => 'Файл <code>' + file + '</code> не найден — одобрять нечего. Это дефект, а не ваш выбор.',
@@ -214,7 +255,16 @@ const RU = {
     // LP (2.7, #66): окно на своём профиле в папке проекта — ответ переживает сервер; ни диалога, ни выбора (слово владельца Q2 = D)
     serverGoneLocal: 'Сервер контура недоступен — пишите дальше и нажмите «Записать» как обычно: ответ сохранится на этом компьютере, в папке проекта, и агент его заберёт.',
     savedLocally: 'Сервер недоступен — ответ сохранён на этом компьютере (в папке проекта); агент его заберёт. Окно можно закрыть.',
+    // CP (2.9, тикет #125): длинное сообщение — в полосу над страницей (она оставляет колонку кнопки свободной); в пилюле под кнопкой —
+    // только короткая метка: пилюля в шесть строк закрывала заголовок документа
+    savedLocallyShort: 'Сохранено на этом компьютере', pillOk: 'Подробнее — в полосе сверху', pillErr: 'Внимание — см. полосу сверху',
     closeYourself: 'Браузер не дал закрыть окно — закройте его, пожалуйста, сами',
+    // OW6 (2.8): ответы записываются по одному — страница остаётся; запись по другой редакции документа отказывается
+    left: (n) => 'Записано. Осталось вопросов: ' + n + ' — страница остаётся открытой; на остальные можно ответить сейчас или позже.',
+    stale: 'Документ ИЗМЕНЁН после того, как страница открылась, — этот ответ НЕ записан. Ваш текст ниже; откройте новую редакцию: черновики неизменённых вопросов вернутся.',
+    rewritten: 'Документ переписан после того, как страница открылась, — запись здесь выключена. Откройте новую редакцию:',
+    orphan: 'Черновик прошлой редакции — эти вопросы изменились или исчезли; ваш текст сохранён здесь:',
+    duplicate: 'уже записано',
     copied: 'Скопировано в буфер', copyManually: 'Выделите и скопируйте вручную',
     rescue: 'Запись не прошла — ваш текст ниже, он не потерян.', noticeHint: 'Без пометки сообщение придёт снова.',
     selfcheck: (r, q) => 'САМОПРОВЕРКА СТРАНИЦЫ НЕ ПРОШЛА: радиогрупп ' + r + ' на ' + q + ' вопрос(ов) — форма сломана, здесь не отвечайте; скажите агенту.',
@@ -226,18 +276,36 @@ const RU = {
       (nWait ? ': вопросов без ответа ' + nWait : '') + '. Страница открыта.',
     proofread: (o, p, title) => o + ', ' + p + ' просит вычитку: «' + title + '». Страница открыта.',
     mockup: (o, p, title) => o + ', ' + p + ' просит отсмотреть макет: «' + title + '». Страница открыта.',
+    from: (s) => 'это ' + s, // OW4 (2.8, #98): «<владелец>, это <сессия>. …»
     parts: { docs: (n) => 'документов ' + n, questions: (n) => 'вопросов без ответа ' + n, notices: (n) => 'сообщений непрочитанных ' + n },
   },
+  // OW4 (2.8, #98): как голос произносит имя сессии — латиницу и цифры синтезатор читает плохо («dev2» → «дев два»)
+  spoken: { words: [['main', 'мейн'], ['dev', 'дев'], ['master', 'мастер'], ['test', 'тест'], ['tester', 'тестер'], ['qa', 'кью эй'], ['prod', 'прод'],
+    ['stage', 'стейдж'], ['staging', 'стейджинг'], ['review', 'ревью'], ['reviewer', 'ревьюер'], ['docs', 'докс'], ['doc', 'док'], ['feature', 'фича'],
+    ['fix', 'фикс'], ['hotfix', 'хотфикс'], ['ops', 'опс'], ['lead', 'лид'], ['manager', 'менеджер'], ['design', 'дизайн'], ['designer', 'дизайнер'],
+    ['ui', 'ю ай'], ['api', 'эй пи ай'], ['backend', 'бэкенд'], ['frontend', 'фронтенд'], ['bug', 'баг'], ['release', 'релиз'], ['team', 'тим'],
+    ['agent', 'агент'], ['writer', 'райтер'], ['analyst', 'аналитик']],
+    ones: ['ноль', 'один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять', 'десять', 'одиннадцать', 'двенадцать', 'тринадцать',
+      'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'],
+    tens: ['', '', 'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят', 'девяносто'] },
   list: { waits: (d) => 'ждёт ' + d + ' дн.', shown: (date, ago, t) => 'показан: ' + date + ' — ' + ago + ' дн. назад (' + t + ')',
     never: 'НИ РАЗУ НЕ ПОКАЗАН — владелец не знает, что этот вопрос существует', empty: 'Очередь владельца пуста — ждущих документов нет.',
     gate: (n) => 'ГЕЙТ (I42): ни разу не показанных — ' + n + '. Напечатать очередь ≠ донести вопрос; показ — действие агента.',
     how: (cmd) => 'Подними страницей: ' + cmd + ' --queue · задал точечно в чате — запиши факт: ' + cmd + ' --mark-shown <док> --transport чат',
-    dead: 'Документ мёртв и показывать нечего → закрой его статусом, и он уйдёт из очереди.' },
+    dead: 'Документ мёртв и показывать нечего → закрой его статусом, и он уйдёт из очереди.',
+    awaiting: (n) => 'РЕШЕНИЯ ВЛАДЕЛЬЦА ЖДУТ ВНЕСЕНИЯ — ' + n + ': все вопросы отвечены, статус не закрыт. Внеси их ПЕРВЫМИ, раньше плана (#86), затем закрой статус.',
+    answered: (d) => 'отвечено ' + d + ' дн. назад',
+    foreign: (f) => 'очередь у проекта своя: ' + f + ' — не той формы, что у этого контура; здесь читается как пустая и никогда не пишется; её документы поднимает свой контур проекта (см. HOUSE_RULES.md), интервью сканируются как прежде',
+    foreignWrite: (f) => 'не записано: ' + f + ' — своя очередь проекта (другой формы); этот контур её никогда не перезаписывает — подними документ своим контуром проекта',
+    stale: (doc, d, lim, cmd) => 'протух в очереди (' + d + ' дн. > ' + lim + '): ' + doc + ' — в списке выше его нет; закрой статусом или покажи намеренно: ' + cmd + ' --queue --include-stale' },
   transport: { page: 'страница', batch: 'пачка', chat: 'чат' },
   impl: {
     marked: (doc, q, where, file) => 'Факт «внесено» записан (I44): ' + doc + ' ' + q + ' → ' + where + ' → ' + file,
     gate: (doc, ids) => 'внесено, но открыто: ' + doc + ' ' + ids.join(', ') + ' → закрой статус (или впиши ответ); внесённый вопрос очередь второй раз не поднимет (I45)',
     badge: (where, date) => 'внесено → ' + where + ' (' + date + ')',
+    withdrawnBadge: (why, date) => 'снят — ' + why + ' (' + date + ')',
+    withdrawn: (doc, q, why, file) => 'Факт «снят» записан: ' + doc + ' ' + q + ' — ' + why + ' → ' + file + ' (вопрос стал беспредметным; это не ответ за владельца)',
+    answeredNotWithdrawn: (doc, q) => doc + ' ' + q + ' ОТВЕЧЕН владельцем — снять можно только открытый вопрос; ничего не записано',
     noSuch: (doc, q, ids) => 'в ' + doc + ' нет вопроса ' + q + ' — известны: ' + (ids.join(', ') || '(нет)'),
   },
   check: {

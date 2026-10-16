@@ -11,6 +11,9 @@
 //     `interview #NNN`, `interview_NNN`;
 //   · the number of a RECORDED decision (`решение №109`, `decision #12`, `MASTER_PLAN §7 №95`) — a
 //     number counts only with a registry word on the same line: a bare `№55` is an issue, a page, anything;
+//   · ON THE ATTRIBUTION'S OWN LINE: the address of the commit that holds the owner's words verbatim — "commit" / «коммит»
+//     next to a hash of 7+ hex digits with at least one digit (2.8, epic CK, origin issue #89: the rulebook takes the rule,
+//     the verbatim words stay at the source — `[OWNER] <date> · verbatim in commit <hash>`);
 //   · the declared exception on the line — `<!-- attribution-ok: <where the quote lives> -->`;
 // or the line is signed as the AGENT's own decision ([AI] / [AI-ed] / the localized `aiMarks` pair of
 // .kaif/kaif.json) — a signed agent decision is no attribution. A "Decisions made without the owner"
@@ -27,7 +30,8 @@
 //     never findings themselves), inline code spans, HTML comments, lines carrying ❌ (the canon's own
 //     counter-examples);
 //   · DEBT, not a turnstile: findings already recorded in the baseline (.kaif/attribution-lint.baseline.json,
-//     keys `file:sha16(line)`) are printed as debt and exit 0; only NEW findings exit 1; the baseline is
+//     keys `file:sha16(line)` → the COUNT of such lines, never their text — 2.9, epic PV) are printed as debt and exit 0; only NEW
+//     findings exit 1 (a copy beyond the recorded count is new); a write limited to paths rewrites only their entries; the baseline is
 //     written once on adoption (`--write-baseline`) and ONLY SHRINKS after that: a rewrite that would turn
 //     a NEW finding into debt is REFUSED (exit 1) unless `--adopt-new` is passed explicitly — the count of
 //     adopted lines is printed, never silent; a baselined line that changed or vanished is pruned;
@@ -62,10 +66,100 @@
 //  both languages named, clean fixture exit 0, baseline swallows the old debt and reddens on the new
 //  line only, a rewrite with a NEW finding present is refused unless --adopt-new, empty tree SKIPPED
 //  (exit 3); live run over the origin — see STATUS "Инструменты"]
+// 2.8, epic CK (origin issue #89) — a COMMIT address grounds an attribution ON ITS OWN LINE: selftest 34 cases (the CK4 judge's
+// forms: `commit: <hash>`, a commit URL → clean; `recommit`, an all-hex word, a hash on a neighbour line → findings); proven against the NAMED 2.7
+// edition (≈ 2026-09-24 21:57 +03:00): the field form «[OWNER] 2026-09-22 · verbatim in commit 6411a9ed» → 1 finding under the 2.7
+// module, 0 under this one; "verbatim in the commit above" (no hash) and a bare hash without the commit word stay findings.
+// [NOT-TESTED] as a functional run for the new axis — the field path is a deployment's /fix-vision writing a rule into house rules.
 import { readFileSync, writeFileSync, existsSync, readdirSync, statSync, mkdtempSync, mkdirSync, rmSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
+// OW8 (KAIF 2.8, origin issue #101): the command runs only when this file IS the program — imported by a project's own tool, the
+// module stays silent and never exits the importer (the same guard as the shipped contour's review.mjs).
+import { pathToFileURL as __kaifToUrl } from 'node:url';
+import { resolve as __kaifResolve } from 'node:path';
+import { spawnSync } from 'node:child_process';
+
+// ── KAIF-WALK:BEGIN — ONE safe tree walker (2.8, epic SC; origin #77 · Q-R1′). The set of files is the one git sees
+// (`ls-files --cached --others --exclude-standard`: tracked plus untracked, never ignored); without git, a walk that skips
+// .git, node_modules and nested copies. A nested repository (a `.claude/worktrees/*` copy) is not this project; a broken
+// link is SKIPPED WITH A NAME, never a crash; an unreadable directory is FAILED — a scan that could not see part of the tree
+// must never read as clean (the old `try { walk() } catch {}` printed "no lines found" after one broken link). This block
+// in the core is the source: every tool module that walks the tree carries a byte-identical copy (a deployed module cannot
+// import the core), and the build refuses a drifted copy (check-framework 5l; `node tools/sync-walker.mjs` rewrites them).
+// [TESTED: 2026-09-26 01:42:55 +03:00 · s29 W1 (git, 20 worktrees, two broken links) · W2 (no git) · W3 (the FAILED branch on the block
+//  with an injected file system); red on v2.7 (6); five mutants on their addressees; four field trees walked read-only;
+//  report testcases/reports/2026-09-26_sc1-one-safe-walker.md]
+// [TESTED: 2026-09-26 04:22 +03:00 · SC4 part A: the read side (readWalked) and a nested copy judged below the root — s29 W4a–W4f,
+//  red on the dist of 4b06b28; sc-mutants M13; report testcases/reports/2026-09-26_sc4-read-side-fixes.md]
+function kaifWalk(roots) {
+  const files = [], skipped = [], failed = [];
+  // A nested copy is judged BELOW the walked root (SC4 F9): a project that itself lives under `.claude/worktrees/<agent>/`, walked by
+  // an absolute root, lost every file to this test and read as "nothing to scan".
+  let base = '.';
+  const nested = (p) => /(^|\/)\.claude\/worktrees(\/|$)/.test(base === '.' ? p : p.slice(base.length + 1));
+  const take = (p) => {
+    if (nested(p)) return;
+    let st;
+    try { st = statSync(p); } catch (e) { skipped.push(`${p} (${e.code || 'unreadable'})`); return; }
+    if (st.isFile()) files.push(p);             // a link to a directory is not entered (git does not enter it either)
+  };
+  const walk = (dir) => {
+    let ents;
+    try { ents = readdirSync(dir, { withFileTypes: true }); } catch (e) { failed.push(`${dir} (${e.code || e.message})`); return; }
+    for (const d of ents) {
+      const p = dir === '.' ? d.name : `${dir}/${d.name}`;
+      if (d.name === '.git' || d.name === 'node_modules' || nested(p)) continue;
+      if (d.isDirectory()) walk(p); else take(p);
+    }
+  };
+  for (const r0 of roots) {
+    const r = walkRoot(r0);
+    base = r;
+    let st;
+    try { st = statSync(r); } catch (e) {           // an absent root is the caller's business; a root that IS a broken link is named
+      const cut = r.lastIndexOf('/');
+      try { if (readdirSync(cut < 0 ? '.' : r.slice(0, cut) || '/').includes(r.slice(cut + 1))) skipped.push(`${r} (${e.code || 'unreadable'})`); }
+      catch { /* its parent is gone too — absent */ }
+      continue;
+    }
+    if (!st.isDirectory()) { take(r); continue; }
+    const git = spawnSync('git', ['-C', r, 'ls-files', '-z', '--cached', '--others', '--exclude-standard'], { encoding: 'utf8', maxBuffer: 1 << 28 });
+    if (git.status !== 0) { walk(r); continue; }   // not a work tree, or no git on PATH
+    for (const rel of git.stdout.split('\0')) {
+      if (!rel || rel.endsWith('/')) continue;      // a nested repository is listed as a directory — not this project
+      take(r === '.' ? rel : `${r}/${rel}`);
+    }
+    // git names what it could not open: "No such file" is a broken link (skipped with a name); any other reason is part of the
+    // tree the scan did not see (failed)
+    for (const m of String(git.stderr || '').matchAll(/could not open directory '([^']+)': ([^\r\n]+)/g))
+      (/no such file/i.test(m[2]) ? skipped : failed).push(`${r === '.' ? '' : r + '/'}${m[1].replace(/\/$/, '')} (${m[2].trim()})`);
+  }
+  return { files: [...new Set(files)].sort(), skipped, failed };
+}
+// A root as the walk writes it (forward slashes, no leading ./, no trailing /) — a caller strips `walkRoot(dir) + '/'` from a
+// returned path to judge only the segments BELOW its root (a root inside a skipped directory is still walked when named).
+function walkRoot(r0) { return String(r0).replace(/\\/g, '/').replace(/^\.\/(?=.)/, '').replace(/(?<=.)\/$/, ''); }
+function walkRel(dir, p) { const r = walkRoot(dir); return r === '.' ? p : p.slice(r.length + 1); }
+// The walk's service lines, one wording for every scanner — `walk: ` opens each, so a reader of a scanner's hits tells them
+// from findings: a FAILED walk is never a clean result; a skipped path is counted and named.
+const WALK_NOTE = 'walk: ';
+function walkNotes(tree) {
+  const out = [];
+  if (tree.failed.length) out.push(`${WALK_NOTE}the tree walk FAILED at ${tree.failed.slice(0, 3).join(', ')}${tree.failed.length > 3 ? ` and ${tree.failed.length - 3} more` : ''} — the scan is INCOMPLETE, not clean`);
+  if (tree.skipped.length) out.push(`${WALK_NOTE}skipped ${tree.skipped.length} unreadable path(s) — a broken link, or a file git lists that the disk lacks: ${tree.skipped.slice(0, 3).join(', ')}${tree.skipped.length > 3 ? ', …' : ''}`);
+  return out;
+}
+// A walked file is READ through the walk too (SC4 F1): an unreadable file — a read deny, a lock another process holds — lands in
+// `failed` (part of the tree the scan did not see) and never throws past its scanner: an EPERM stack trace ended `update` after
+// the marker was written. Returns the text, or null for a file the caller skips; one failure is recorded once.
+function readWalked(tree, p) {
+  try { return readFileSync(p, 'utf8'); }
+  catch (e) { if (!tree.failed.some((f) => f.startsWith(`${p} (`))) tree.failed.push(`${p} (${e.code || e.message})`); return null; }
+}
+// ── KAIF-WALK:END
+const IS_MAIN = import.meta.url === __kaifToUrl(__kaifResolve(process.argv[1] || '')).href;
 
 const argv = process.argv.slice(2);
 const CMD = argv[0] || 'check';
@@ -126,6 +220,13 @@ const INTERVIEW_RE = /interviews\/|интервью\s*№\s*\d|interview\s*#\s*\
 // anywhere on the line would ground a bare "(issue №55)" through the attribution's own wording.
 const DECISION_ADDRESS_RE = /(?:решени[а-яё]*\s+(?:владельца\s+)?№\s*\d+|№\s*\d+\s*\(?\s*решени|decision\s*#\s*\d+|№\s*\d+\s*\(?\s*decision|§\s*7\s*№\s*\d+|MASTER_PLAN[^\n]{0,40}№\s*\d+|журнал[а-яё]*\s+решений[^\n]{0,20}№\s*\d+)/iu;
 const decisionAddress = (l) => DECISION_ADDRESS_RE.test(l);
+// A COMMIT address (2.8, epic CK; origin issue #89): the owner's standing rule enters the rulebook as a rule, and his verbatim words
+// stay at the source — most often the "commit the original verbatim first" commit. The commit word must sit NEXT to a hash of 7+ hex
+// digits ("verbatim in commit 6411a9ed", "коммит `2d897c5`"): a bare hash is anything, and "the commit above" names nothing.
+// Left: not a letter ("recommit" is not the word). Between word and hash: spaces, `:`, `#`, `/`, a backtick — "commit: 3c2da82",
+// ".../commit/3c2da82". The hash carries at least one DIGIT, so an all-hex English word ("defaced") is not a hash. It grounds only
+// the attribution's OWN line (see lintText): the provenance form is one line, and hashes stand everywhere in plans and reports.
+const COMMIT_ADDRESS_RE = /(?<!\p{L})(?:commits?|коммит[а-яё]*)[\s:#/`]*(?=[0-9a-f]*\d)[0-9a-f]{7,40}(?![0-9a-z])/iu;
 const OK_MARK_RE = /<!--\s*attribution-ok:/iu;
 // The agent's own signature on the line — a signed agent decision is not an attribution.
 const DEFAULT_AGENT_MARKS = ['[AI]', '[AI-ed]', '[ИИ]', '[ИИ-ред]'];
@@ -174,7 +275,7 @@ export function lintText(src, marks = DEFAULT_AGENT_MARKS) {
     if (OK_MARK_RE.test(raw)) continue;                 // the declared exception names where the quote lives
     if (marks.some((m) => raw.includes(m))) continue;   // signed as the agent's decision
     const lo = Math.max(0, i - WINDOW), hi = Math.min(lines.length - 1, i + WINDOW);
-    let grounded = false;
+    let grounded = COMMIT_ADDRESS_RE.test(raw);         // a commit address grounds its own line only
     for (let j = lo; j <= hi && !grounded; j++) if (grounds(lines[j])) grounded = true;
     if (grounded) continue;
     out.push({ line: i + 1, text: raw.trim() });
@@ -182,13 +283,17 @@ export function lintText(src, marks = DEFAULT_AGENT_MARKS) {
   return out;
 }
 
+// 2.8 (epic SC; origin #77 · Q-R1′): the files git sees (kaifWalk above) — a broken link is skipped with a name, never a stack
+// trace; a walk that could not see part of the tree is named, never a clean pass.
+const TREE = { skipped: [], failed: [] };
 function* walkMd(dir, root) {
   if (!existsSync(dir)) return;
-  for (const n of readdirSync(dir)) {
-    const p = join(dir, n);
-    if (SKIP_DIRS.has(n)) continue;
-    if (statSync(p).isDirectory()) { yield* walkMd(p, root); continue; }
-    if (/\.md$/i.test(n)) yield p;
+  const tree = kaifWalk([dir]);
+  TREE.skipped.push(...tree.skipped); TREE.failed.push(...tree.failed);
+  for (const p of tree.files) {
+    const segs = walkRel(dir, p).split('/');
+    if (segs.some((s) => SKIP_DIRS.has(s))) continue;
+    if (/\.md$/i.test(segs[segs.length - 1])) yield p;
   }
 }
 function scopeFiles(root, paths) {
@@ -201,7 +306,12 @@ function scopeFiles(root, paths) {
     }
   } else {
     for (const d of DEFAULT_DIRS) files.push(...walkMd(join(root, d), root));
-    for (const n of readdirSync(root)) if (/\.md$/i.test(n) && !TRANSIENTS.has(n) && statSync(join(root, n)).isFile()) files.push(join(root, n));
+    // PV1 (2.9; origin issue #111 — a root file git ignores, the owner's private voice portrait, was read from disk and its line went
+    // into the committed baseline): the root *.md come from the same git-seen walk as the directories — an ignored root file is not
+    // in the set; without git the walk lists the disk, as before
+    const top = kaifWalk([root]);
+    TREE.skipped.push(...top.skipped.filter((s) => !walkRel(root, s).includes('/'))); TREE.failed.push(...top.failed);
+    for (const p of top.files) { const r = walkRel(root, p); if (!r.includes('/') && /\.md$/i.test(r) && !TRANSIENTS.has(r)) files.push(p); }
   }
   return files.map((f) => f.replaceAll('\\', '/')).sort();
 }
@@ -214,31 +324,73 @@ function readBaseline(p) {
 
 /** The check over a root: { findings: [{file, line, text, key}], scanned } */
 export function runCheck(root, paths = []) {
+  TREE.skipped.length = 0; TREE.failed.length = 0;
   const marks = agentMarks(root);
   const files = scopeFiles(root, paths);
   const findings = [];
   for (const f of files) {
     const r = rel(root, f);
-    for (const x of lintText(readFileSync(f, 'utf8'), marks)) findings.push({ file: r, line: x.line, text: x.text, key: `${r}:${sha16(x.text)}` });
+    const text = readWalked(TREE, f);   // unreadable → the walk's FAILED line (SC4 F1)
+    if (text === null) continue;
+    for (const x of lintText(text, marks)) findings.push({ file: r, line: x.line, text: x.text, key: `${r}:${sha16(x.text)}` });
   }
-  return { findings, scanned: files.length };
+  return { findings, scanned: files.length, walk: walkNotes(TREE), walkFailed: TREE.failed.length > 0 };
 }
 
-function writeBaseline(findings) {
+// The baseline (2.9, epic PV): `entries` maps `file:sha16(line)` to the COUNT of findings with that key — a fingerprint and a number,
+// never the text (origin #121 R7: the text of a line went into a committed file, and nothing ever read it back). A baseline written
+// before 2.9 carries the text as the value: its keys stay debt for any number of copies (the old reading, so no recorded debt is lost
+// on the first closing after the update), and the next write drops the text.
+const LEGACY = Infinity;
+const LEGACY_VALUE = 'recorded before 2.9';   // what a pre-2.9 text value becomes when a path-limited write carries it over: no text, same reading
+const countOf = (v) => (typeof v === 'number' && Number.isFinite(v) && v > 0 ? v : LEGACY);
+const fileOfKey = (k) => k.slice(0, k.lastIndexOf(':'));
+const normPath = (p) => String(p).replace(/\\/g, '/').replace(/^\.\//, '').replace(/\/+$/, '');
+/** Is a baselined file inside the scope of this run (no paths = the whole default scope)? */
+export function inScope(file, paths = []) {
+  if (!paths.length) return true;
+  return paths.map(normPath).some((p) => p === '.' || file === p || file.startsWith(p + '/'));
+}
+/** The findings above what the baseline records, key by key: the (count+1)-th copy of a recorded line is NEW (origin #112 — a third
+ *  identical line used to be swallowed as debt, `new 0 · debt 3`). */
+export function freshFindings(findings, baseline) {
+  const known = (baseline && baseline.entries) || {};
+  const seen = {};
+  return findings.filter((f) => { seen[f.key] = (seen[f.key] || 0) + 1; return !(f.key in known) || seen[f.key] > countOf(known[f.key]); });
+}
+/** The baseline a write leaves (PV3; origin #112 — `check <path> --write-baseline` wrote the scope's findings as the WHOLE baseline and
+ *  erased the debt of every other file): entries of files outside the scope stay as they are; inside it, the counts of this run. */
+export function nextBaseline(findings, baseline, paths = []) {
   const entries = {};
-  for (const f of findings) entries[f.key] = `${f.file}:${f.line} ${f.text.slice(0, 100)}`;
+  // an entry outside the scope keeps its debt; a 2.8 text value keeps its reading (debt for any number of copies) but loses the text —
+  // the judge of epic PV: a deployment that only ever writes with a path kept the text of every other file forever
+  for (const [k, v] of Object.entries((baseline && baseline.entries) || {})) if (!inScope(fileOfKey(k), paths)) entries[k] = typeof v === 'number' ? v : LEGACY_VALUE;
+  for (const f of findings) entries[f.key] = (typeof entries[f.key] === 'number' ? entries[f.key] : 0) + 1;
+  const sorted = Object.fromEntries(Object.keys(entries).sort().map((k) => [k, entries[k]]));   // canonical order: the file is reviewed in diffs
+  const count = Object.values(sorted).reduce((n, v) => n + (typeof v === 'number' ? v : 1), 0);
+  return { written: new Date().toISOString(), count, entries: sorted };
+}
+/** Recorded entries of the scope that this run no longer finds (fully or in part) — the "rewrite it" hint counts only these. */
+export function prunableEntries(findings, baseline, paths = []) {
+  const now = {};
+  for (const f of findings) now[f.key] = (now[f.key] || 0) + 1;
+  return Object.entries((baseline && baseline.entries) || {})
+    .filter(([k, v]) => inScope(fileOfKey(k), paths) && (now[k] || 0) < (countOf(v) === LEGACY ? 1 : countOf(v))).length;
+}
+function writeBaseline(next) {
   const dir = dirname(BASELINE);
   if (dir && dir !== '.') mkdirSync(dir, { recursive: true });   // a bare file name has no directory to create
-  writeFileSync(BASELINE, JSON.stringify({ written: new Date().toISOString(), count: findings.length, entries }, null, 2) + '\n');
+  writeFileSync(BASELINE, JSON.stringify(next, null, 2) + '\n');
 }
 
 function cmdCheck() {
   const root = '.';
-  const { findings, scanned } = runCheck(root, PATHS);
+  const { findings, scanned, walk, walkFailed } = runCheck(root, PATHS);
+  for (const n of walk) console.error((n.includes('walk FAILED') ? '✖ ' : '⚠ ') + n);
+  if (walkFailed) { console.error('✖ attribution-lint: the tree walk failed — not scanned is not clean'); process.exit(1); }
   if (!scanned) { log(`⊘ SKIPPED — no markdown in scope (${PATHS.length ? PATHS.join(' ') : DEFAULT_DIRS.join(' ') + ' + root *.md'}): nothing was proven (exit 3).`); process.exit(EXIT_SKIPPED); }
   const baseline = readBaseline(BASELINE);
-  const known = new Set(Object.keys((baseline && baseline.entries) || {}));
-  const fresh = findings.filter((f) => !known.has(f.key));
+  const fresh = freshFindings(findings, baseline);
   if (FLAGS.has('--write-baseline')) {
     // Adoption writes the whole picture once. After that the baseline ONLY SHRINKS: a rewrite that would
     // launder a NEW finding into debt is refused — growth is an explicit, printed act (--adopt-new).
@@ -247,14 +399,16 @@ function cmdCheck() {
       console.error(`✖ baseline NOT rewritten: ${fresh.length} NEW finding(s) would become debt — ground them (quote · address · [AI]) or pass --adopt-new to record them on purpose`);
       process.exit(1);
     }
-    writeBaseline(findings);
-    const pruned = baseline ? [...known].filter((k) => !findings.some((f) => f.key === k)).length : 0;
-    log(`baseline written: ${BASELINE} — ${findings.length} finding(s) recorded as debt${baseline ? ` (${fresh.length} adopted as NEW on purpose, ${pruned} pruned)` : ''} (it only shrinks from here; a changed or vanished line is pruned on the next write)`);
+    const pruned = baseline ? prunableEntries(findings, baseline, PATHS) : 0;
+    const next = nextBaseline(findings, baseline, PATHS);
+    writeBaseline(next);
+    const kept = Object.keys(next.entries).filter((k) => !inScope(fileOfKey(k), PATHS)).length;
+    log(`baseline written: ${BASELINE} — ${findings.length} finding(s) recorded as debt${baseline ? ` (${fresh.length} adopted as NEW on purpose, ${pruned} pruned)` : ''}${kept ? `; ${kept} entr${kept === 1 ? 'y' : 'ies'} of files outside ${PATHS.join(' ')} kept as they were` : ''} (it only shrinks from here; a changed or vanished line is pruned on the next write; the file holds fingerprints and counts, never the text)`);
     return;
   }
   const debt = findings.length - fresh.length;
-  for (const f of fresh) console.error(`✖ ${f.file}:${f.line} — attribution to the owner without his words: «${f.text.slice(0, 120)}» (no verbatim quote, quote line, interview address or decision number within ±${WINDOW} lines; sign it [AI] if it is the agent's, quote him if it is his, or mark <!-- attribution-ok: … -->)`);
-  const prunable = baseline ? known.size - debt : 0;
+  for (const f of fresh) console.error(`✖ ${f.file}:${f.line} — attribution to the owner without his words: «${f.text.slice(0, 120)}» (no verbatim quote, quote line, interview address or decision number within ±${WINDOW} lines, and no commit address on the line itself; sign it [AI] if it is the agent's, for his standing rule write "[OWNER] <date> · verbatim in commit <hash>", quote him if it is his decision, or mark <!-- attribution-ok: … -->)`);
+  const prunable = baseline ? prunableEntries(findings, baseline, PATHS) : 0;
   const tail = baseline ? ` · debt ${debt} (baseline ${BASELINE}${prunable > 0 ? `, ${prunable} entr${prunable === 1 ? 'y' : 'ies'} no longer found — rewrite it` : ''})` : (findings.length ? ' · no baseline yet — adopt with --write-baseline' : '');
   if (fresh.length) { console.error(`✖ attribution-lint: ${fresh.length} NEW finding(s) in ${scanned} file(s)${tail}`); process.exit(1); }
   log(`✅ attribution-lint OK — ${scanned} file(s) scanned, new 0${tail}`);
@@ -292,6 +446,16 @@ function cmdSelftest() {
   expect('EN: signed [AI] by mandate → clean', `[AI] by mandate — "do as you see fit": wait for the receipt; the owner's decision is not claimed.\n`, 0);
   expect('EN: the owner\'s signature without his words → finding', `[OWNER] wait, no threshold · 2026-09-08 — not to be revisited.\n`, 1);
   expect('EN: the owner\'s signature with his words → clean', `[OWNER] "do as you see fit" · 2026-09-08.\n`, 0);
+  // 2.8, epic CK (origin issue #89): the rulebook takes the RULE, the verbatim words stay at the source — a commit address grounds it.
+  expect('EN: the owner\'s rule with the commit address of his verbatim words → clean (#89 field form)', `[OWNER] 2026-09-22 · verbatim in commit 6411a9ed\n`, 0);
+  expect('RU: правило владельца с адресом коммита → clean', `[ВЛАДЕЛЕЦ] 2026-09-22 · дословно — коммит \`2d897c5\`\n`, 0);
+  expect('EN: "verbatim in the commit" with no hash → finding', `[OWNER] 2026-09-22 · verbatim in the commit above.\n`, 1);
+  expect('EN: a bare hash without the commit word → finding', `[OWNER] 2026-09-22 · 6411a9ed\n`, 1);
+  // CK4 judge: the forms a real line uses, and the three loose matches of the first edition
+  expect('EN: "commit: <hash>" and a commit URL → clean', `[OWNER] 2026-09-22 · verbatim in commit: 3c2da82\n\n\n\n[OWNER] 2026-09-23 · https://github.com/o/r/commit/3c2da82\n`, 0);
+  expect('EN: "recommit 1234567" is not the commit word → finding', `[OWNER] 2026-09-22 · recommit 1234567\n`, 1);
+  expect('EN: an all-hex English word is not a hash ("commit defaced") → finding', `[OWNER] 2026-09-22 · commit defaced\n`, 1);
+  expect('EN: a commit hash on a NEIGHBOUR line grounds nothing', `The owner decided to drop the Android build.\nFixed in commit 80a18eb.\n`, 1);
   expect('invisible: ❌ counter-example → clean', `❌ the owner's decision with no quote — the bad form.\n`, 0);
   expect('invisible: inline code and a fenced block → clean', 'Use `the owner\'s decision` and `[OWNER]` as the pattern.\n\n```\nthe owner\'s decision P1: wait\n```\n', 0);
   expect('invisible: a `>` quote line is never a finding → clean', `> Решение владельца П1: ждать — цитата из старого документа.\n`, 0);
@@ -315,8 +479,51 @@ function cmdSelftest() {
     log(`${ok ? '✅' : '❌'} baseline: the old line is debt, only the new line is NEW — findings ${second.findings.length}, new ${fresh.length}`);
   } finally { rmSync(root, { recursive: true, force: true }); }
 
+  // 2.9, epic PV (criterion 19 of the origin's plan; origin #111 · #112 · #121 R7) — four cases, each red on the 2.8 module
+  const pv = (name, ok, got) => { n++; if (!ok) bad++; log(`${ok ? '✅' : '❌'} PV: ${name}${ok ? '' : ` — got ${got}`}`); };
+  const proot = mkdtempSync(join(tmpdir(), 'kaif-attribution-pv-'));
+  try {
+    // (1) a root file git ignores is not read (#111) — needs git; without it the walk lists the disk, and the case says so
+    const g = spawnSync('git', ['init', '-q'], { cwd: proot, encoding: 'utf8' });
+    writeFileSync(join(proot, '.gitignore'), 'NOTES.md\n');
+    writeFileSync(join(proot, 'NOTES.md'), '# Notes\n\nThe owner decided to keep the recipe of his grandmother here.\n');
+    writeFileSync(join(proot, 'STATUS.md'), '# S\n\nThe owner decided to wait.\n');
+    if (g.status === 0) {
+      const r = runCheck(proot);
+      pv('a root file git ignores is not read (#111)', r.findings.length === 1 && r.findings[0].file === 'STATUS.md', r.findings.map((f) => f.file).join(','));
+    } else log('⊘ PV: a root file git ignores — SKIPPED (no git here: the walk lists the disk)');
+    // (2) the baseline holds fingerprints and counts, never the text (#121 R7)
+    const b1 = nextBaseline(runCheck(proot).findings, null);
+    const raw = JSON.stringify(b1);
+    pv('the baseline holds no text of a finding (#121 R7)', !/decided|wait|recipe/.test(raw) && Object.values(b1.entries).every((v) => typeof v === 'number'), raw.slice(0, 160));
+    // (3) a write limited to a path keeps the debt of the other files (#112)
+    mkdirSync(join(proot, 'plans'), { recursive: true }); mkdirSync(join(proot, 'ideas'), { recursive: true });
+    writeFileSync(join(proot, 'plans', '01.md'), '# P\n\nThe owner decided to drop it.\n');
+    writeFileSync(join(proot, 'ideas', '02.md'), '# I\n\nThe owner decided to keep it.\n');
+    const whole = nextBaseline(runCheck(proot).findings, null);
+    const narrowed = nextBaseline(runCheck(proot, ['plans']).findings, whole, ['plans']);
+    pv('a write limited to plans/ keeps the debt of ideas/ (#112)', Object.keys(narrowed.entries).some((k) => k.startsWith('ideas/02.md:')) && Object.keys(narrowed.entries).some((k) => k.startsWith('plans/01.md:')), Object.keys(narrowed.entries).join(','));
+    // (4) a third identical line beside two recorded is NEW (#112)
+    const twice = '# P\n\nThe owner decided to drop it.\n\n\n\n\nThe owner decided to drop it.\n';
+    writeFileSync(join(proot, 'plans', '01.md'), twice);
+    const rec2 = nextBaseline(runCheck(proot).findings, null);
+    writeFileSync(join(proot, 'plans', '01.md'), twice + '\n\n\n\n\nThe owner decided to drop it.\n');
+    const third = runCheck(proot).findings;
+    const fresh3 = freshFindings(third, rec2);
+    pv('a third identical line beside two recorded is NEW (#112)', fresh3.length === 1 && fresh3[0].file === 'plans/01.md', `${fresh3.length} new of ${third.length}`);
+    // and the reading of a 2.8 baseline (text as the value) keeps every copy as debt — no recorded debt is lost on the first closing
+    const legacy = { entries: Object.fromEntries(third.map((f) => [f.key, `${f.file}:${f.line} ${f.text}`])) };
+    pv('a 2.8 baseline (text values) still reads as debt for every copy', freshFindings(third, legacy).length === 0, freshFindings(third, legacy).length);
+    // the judge of PV: a write limited to a path carries the OTHER files' 2.8 entries over without their text, and with their debt
+    const legacyIdeas = { entries: { 'ideas/02.md:0123456789abcdef': 'ideas/02.md:3 The owner decided to keep it.', ...legacy.entries } };
+    const carried = nextBaseline(runCheck(proot, ['plans']).findings, legacyIdeas, ['plans']);
+    pv('a path-limited write drops the 2.8 text of the entries it carries over', !/decided|keep it/.test(JSON.stringify(carried)) && 'ideas/02.md:0123456789abcdef' in carried.entries && freshFindings([{ key: 'ideas/02.md:0123456789abcdef' }, { key: 'ideas/02.md:0123456789abcdef' }], carried).length === 0, JSON.stringify(carried.entries).slice(0, 200));
+  } finally { rmSync(proot, { recursive: true, force: true }); }
+
   if (bad) { console.error(`✖ selftest FAILED — ${bad} of ${n} cases`); process.exit(1); }
   log(`✅ selftest OK — ${n} cases (RU + EN; both answers on every fixture; baseline proven)`);
 }
 
-({ check: cmdCheck, selftest: cmdSelftest }[CMD] || (() => { console.error(`✖ unknown command: ${CMD} (check [paths…] [--write-baseline [--adopt-new]] [--baseline <file>] | selftest)`); process.exit(1); }))();
+if (IS_MAIN) {
+  ({ check: cmdCheck, selftest: cmdSelftest }[CMD] || (() => { console.error(`✖ unknown command: ${CMD} (check [paths…] [--write-baseline [--adopt-new]] [--baseline <file>] | selftest)`); process.exit(1); }))();
+}

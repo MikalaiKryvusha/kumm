@@ -149,3 +149,16 @@ sandbox right after the pass with no hand merge (11 files named), line 2 this tr
 line 3 an unreadable bundle path ("could not read", never "clean"). In the broken run both silently lost
 modules are named although the update task never carried them. Run report:
 `testcases/reports/2026-09-18_kaif-update-sweep.md` (`kaif-testrun-lint check` → 0 findings).
+
+## Status — ✅ closed 2026-10-16 22:45 +03:00 (KAIF 2.7 → 2.9 update)
+
+Closed upstream: origin #72, CLOSED; the fix shipped in KAIF 2.8 (release notes, item 6 — "a section you renamed in advance
+to the heading the release declares receives the changes"; `update-verify` checks every section new in the release).
+Field check on the 2.7 → 2.9 pass: NOT re-exercised — no heading of this tree was pre-renamed this interval, so the
+trigger did not occur. What was observed: `tools/kaif-update-sweep.mjs` (the guard born from this ticket) found no
+undelivered upstream line outside the 11 modules the task carried for the hand merge (65 lines, all in AGENT_GUIDE.md),
+and 0 after the merge. The sweep stays in the ritual as the guard.
+
+### Decisions made without the owner
+
+- none — the closure follows the origin's own closing of the issue and the field check above.

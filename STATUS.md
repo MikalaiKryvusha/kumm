@@ -46,15 +46,15 @@
 > **Конан 2.2.3** — досье `games/ConanExiles/README.md`. Palworld — в ежедневном пользовании, правок не ждёт.
 > **Oblivion Remastered запаркован до патча** — не ходить туда, пока владелец не скажет.
 
-The engine works and the owner uses it daily for Palworld. Since 2026-10-14 it checks its pure core: `node test-parse-archive.mjs`,
-`test-archive-roundtrip.mjs`, `test-pick-card.mjs`, `test-help-commands.mjs` (exit 0 = green), and the game half runs on a fake pack —
-`node tools/fixture-pack.mjs` (`-ListMods`, `-Deploy -DryRun`). Not covered yet: deploy and `-Verify` checks on the stand (bug 46), the live
-Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
+The engine works and the owner uses it daily for Palworld. It checks its pure core (the first test since 2026-09-08, four since 2026-10-14):
+`node test-parse-archive.mjs`, `test-archive-roundtrip.mjs`, `test-pick-card.mjs`, `test-help-commands.mjs` (exit 0 = green), and the game
+half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deploy -DryRun`, a real `-Deploy` and `-Verify`, paks after `-Only`:
+20 checks since 2026-10-15, all 20 passed on 2026-10-16). Not covered yet: the live Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
 
 | Phase | Status | What's there |
 |-------|--------|--------------|
 | Phase 0 — the two halves | ✅ done | v0.1.0 in daily use |
-| Phase 1 — trustworthy unattended | 🟡 in progress | 2026-10-14: four regression tests of the pure core + launch guard + fixture stand (`-ListMods`, `-DryRun`); left — deploy/`-Verify` on the stand (bug 46), Engine.ini warning |
+| Phase 1 — trustworthy unattended | 🟡 in progress | 2026-10-14: four regression tests of the pure core + launch guard + fixture stand; 2026-10-15: the stand deploys and runs `-Verify` (20 checks, bug 46 DONE); left — Engine.ini warning |
 | Phase 2 — the second game | 🟢 **доказана на Конане** | движок принял Conan Exiles Enhanced **без единой правки**: слаг `conanexilesenhanced` из манифеста, `game_id` со страницы. Oblivion Remastered остаётся подготовленным (манифест на 168 модов), ждёт патча |
 | Phase 3 — compatibility | 🔲 todo | источник конфликтов найден: `UnrealPak -List` из Dev Kit читает любой пак с Oodle (`researches/conan-devkit/`); работа — фаза 3 эпика `plans/06` |
 | Phase 4 — optimization presets | 🔲 todo | |
@@ -66,13 +66,10 @@ Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
 > (`/autoloop`, `/dayloop`, `/nightloop`) grind this pool.
 
 - Сделанные пункты пула (запуск-гард, круговой ход имён архивов, кейсы `pickCard`, команда `help`) — летопись, запись 2026-10-14 23:22.
-- [~] **A fixture pack** — разовый стенд 08.09 нашёл четыре дефекта переносимости (`bugs/03_DONE_*`, `EXP-0043`). Постоянный
-      прибор — `node tools/fixture-pack.mjs` (2026-10-14): пак во временной папке ОС, `-ListMods` и `-Deploy -DryRun` — 10 проверок;
-      на копии скрипта с дефектом бага 03 красные ровно две названные. **Осталось**: `-Verify` и боевая раскатка в папку стенда.
-      Пробы 14:38 — две «зелени на пустом» в движке: (1) мод без шагов `install` (и не `pak` с `modsDir`) — `[ok] … (0 files)` без
-      предупреждения; (2) мод без строк `verify` `-Verify` проверяет молча «никак»: после раскатки 2 файлов — «0 present, 0 missing, Verify
-      clean» (сторожевые пути задаёт список `verify` мода — так задумано; дефект — молчание). Баг 46. Стенд даёт модам шаг `install`
-      (2 файла кладутся); проверок раскатки и `-Verify` в нём ещё нет.
+- [x] **A fixture pack** — `node tools/fixture-pack.mjs`: пак во временной папке ОС; `-ListMods`, `-Deploy -DryRun`, настоящая
+      раскатка `-Deploy` в папку стенда, `-Verify` (удалённый сторожевой файл даёт `[FAIL]` и код 1), паки после `-Only` — 20 проверок
+      (коммит `84e4ba4`, 2026-10-15; обе «зелени на пустом» закрыты — `bugs/46_DONE_verify_silent_on_mods_without_checks.md`).
+      Прогон 2026-10-16 при обновлении KAIF: все 20 прошли.
 - [ ] **Warn when a mod overrides `Engine.ini` at runtime** — обе болезни 21.08 были невидимы движку:
       деплой сверил каждый файл и всё равно отгрузил сборку, чью графику Lua-мод переписывает в мире.
       Дешёвый первый срез не требует запущенной игры: просканировать исходники модов на
@@ -156,7 +153,7 @@ Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
 > 2. **Камера** (G14), **плашки повышения** (долг S1), **полосы врагов вдали**, **панель в сумке** — без изменений, летопись 14:41 (блок 13:33).
 > 2а. **BepInEx.ConfigurationManager:** #129 (23 перевода + вёрстка кнопки сброса) и #127 (число у ползунка) **приняты** 2026-10-14. Когда
 >    выйдет релиз — убрать наш транспайлер ширины числа в `KrinikModMenu` (`researches/bepinex-configmanager-pr125/`).
-> 3. **Движок KUMM** (пул ниже): стенд `node tools/fixture-pack.mjs` — дальше раскатка и `-Verify` с проверками; баг 46; Engine.ini.
+> 3. **Движок KUMM** (пул ниже): стенд `node tools/fixture-pack.mjs` готов (20 проверок, с раскаткой и `-Verify`); дальше — Engine.ini.
 >
 > Закрыто мягко 2026-10-16 10:11 (чат с 08:49; летопись — запись 2026-10-16 10:11, в ней дословно прежние пункт 0 и абзац закрытия). Игра
 > закрыта; сейв Сварога — на точке `_backups/svarog-saves-2026-10-16_0855-before-batch4` (10 из 10); реестр возвращён (1280×720).
@@ -196,7 +193,8 @@ Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
   починена (`HeroPortraits.cs`), не проверено, что память не растёт.
 - 🔧 `bugs/42_svarog_skill_tip_title_white_then_red.md` — заголовок поп-апа навыка ≈0.5 с белый, потом красный; причина по коду, правка выложена 2026-10-15, в игре не проверена.
 
-- 🔧 `bugs/40_svarog_mountain_reflection_pops_with_camera_angle.md` — горы в воде пропадали при повороте камеры; владелец решил: главный
+- 🔧 `bugs/40_svarog_mountain_reflection_pops_with_camera_angle.md` — горы в воде пропадали при повороте камеры; владелец решил
+  (`[OWNER]` «НЕТ, ЭТО НЕПРИЕМЛЕМО!!! Ну НЕЛЬЗЯ НАМ ГРУЗИТЬ ГЛАВНЫЙ ПОТОК» · 2026-10-13 — в баге, строка 3): главный
   поток не грузить — отражение экраном (SSPR) включено по умолчанию, камера Lux снимает только небо; ждёт проверки в игре и его глаза.
 - 🔧 `bugs/41_svarog_far_trees_lose_haze_when_game_recreates_materials.md` — дымка на дальних деревьях слетала, когда игра пересоздаёт
   материалы; сторож своих материалов с одним пересканом, починено 22:02; что пересоздаёт — не найдено; ждёт глаза владельца за сеанс.
@@ -217,5 +215,7 @@ Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
 
 ## KAIF — отправка и тикеты
 
-Отправка в KAIF — без спроса владельца (`AGENT_GUIDE.md` → Push / GitHub authentication, его слово 18.09). Открытые
-тикеты в истоке (#72, #73, #78, #80–#82, полевой отчёт #79) — летопись, запись «2026-10-04 вечер».
+KAIF 2.9 с 2026-10-16 (с 2.7 одним шагом; отчёт `reports/KAIF_UPDATES/KUMM_KAIF_2.9_UPDATE_REPORT.md`): факты проекта — в
+`HOUSE_RULES.md`, хуки KAIF подключены в `.claude/settings.json` (клиент читает их при старте сессии). Отправка в KAIF — без спроса
+владельца (`AGENT_GUIDE.md` → Notes from the human, его слово 18.09). Тикеты #72, #73, #78–#82 закрыты истоком в 2.8 (`bugs/KAIF/03–08_DONE_*`);
+открыты #140 (`bugs/KAIF/09_*`, исток перенёс его в 2.10) и три тикета этого обновления — #150–#152 (`bugs/KAIF/10–12_*`).

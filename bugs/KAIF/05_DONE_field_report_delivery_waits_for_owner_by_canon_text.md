@@ -120,3 +120,14 @@ file — the divergence is declared here and in a comment on the line, so the ne
 field report given an H1 in the tracker's title form and a `**Delivered upstream:**` line. Its delivery with
 `kaif-core report` is the very next command after this ticket's, so that the report can cite this issue by
 number. No guard yet: the right one is upstream's (3).
+
+## Status — ✅ closed 2026-10-16 22:45 +03:00 (KAIF 2.7 → 2.9 update)
+
+Closed upstream: origin #78, CLOSED; fixed in KAIF 2.8 (epic CH). Field check on the 2.7 → 2.9 pass: the shipped
+`reports/README.md` now reads "A field report is a KAIF signal, delivered in the same move as it is written … No owner's
+approval is awaited", and the 2.9 task item `field-report` orders `node .kaif/kaif-core.mjs report`. The local
+divergence comment in `reports/README.md` is gone — the template says the same now.
+
+### Decisions made without the owner
+
+- none — the closure follows the origin's own closing of the issue and the field check above.

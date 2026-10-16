@@ -1,0 +1,40 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .kaif/hooks/session-start-refresh.mjs",
+            "statusMessage": "KAIF: canon re-read order",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "matcher": "clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .kaif/hooks/session-start-refresh.mjs",
+            "statusMessage": "KAIF: canon re-read order",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .kaif/hooks/prompt-refresh-timer.mjs",
+            "statusMessage": "KAIF: refresh timer",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
