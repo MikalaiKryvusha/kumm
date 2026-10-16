@@ -86,7 +86,11 @@ WriteProcessMemory (`d8 0d 70 89 85 00`). Исходник в `CarSpawnDistance/
   (+120000, `0x457243`), тип 8 — деньги (+30000, `0x457250`). MixSets пишет эти три адреса ключами `TimePickupShort`, `TimePickupLong`,
   `TimePickupMoney`.
 - Open Limit Adjuster предел пикапов не поднимает; fastman92 Limit Adjuster 7.6 умеет (`[IPL]` `Enable pickup limit patch`, `Pickups`),
-  но его поведение с сейвами не описано — баг 52, развилка.
+  но его поведение с сейвами не описано — по развилке бага 52 владелец выбрал свою заплатку (вариант А).
+- **`scripts\PickupOldestFirst.asi` — стоит с 2026-10-16 23:36** (выбор владельца «А»): при полном пуле затирается выпавшая вещь,
+  которая исчезла бы раньше всех, а не первая по порядку. Исходник и сборка — `PickupOldestFirst/` (`build.cmd <папка>`, VS 2022
+  x86). Ставится только поверх родных байтов `0x457000`; журнал `scripts\PickupOldestFirst.log` (`patched` / `skipped`). Снять —
+  удалить `.asi`. Проверка в запущенной игре: `python -I games/GTASanAndreas/tools/check_pickup_patch.py`.
 
 ## Графика
 

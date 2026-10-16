@@ -108,6 +108,7 @@
 |---|---|---|
 | `node --check kumm.mjs` | проверяет синтаксис половины Nexus | битый JS до запуска |
 | `python -I games/GTASanAndreas/tools/sa_pickups_in_save.py <GTASAsfN.b>` · `python -I games/GTASanAndreas/tools/dis_va.py <exe> <VA> <байт> <папка capstone>` | GTA SA: сколько из 620 слотов пикапов занято в сейве и каких типов · дизассемблер функции `gta_sa.exe` по адресу (capstone ставится в скретчпад) | вещи, исчезающие из-за полного пула (баг 52); догадки о коде игры без чтения кода |
+| `python -I games/GTASanAndreas/tools/check_pickup_patch.py` | GTA SA, запущенная игра, только чтение памяти: встала ли заплатка `PickupOldestFirst` по `0x457000` и чему равны таймеры выпавшего | заплатка или таймеры, молча не вставшие при запуске |
 | `npm pack --dry-run` | показывает, что на самом деле получит `npm i -g` | расхождение списка `files` с двумя половинами движка |
 | `npm run kaif:version` | версия KAIF в проекте | — |
 | `npm run kaif:check` | проверка здоровья KAIF: набор документов, маркеры, размер STATUS | недостающий файл фреймворка, разросшийся STATUS |

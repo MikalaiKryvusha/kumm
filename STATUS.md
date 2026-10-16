@@ -181,6 +181,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 - 🔧 `bugs/49_svarog_jump_through_hidden_house_wall.md` — прыжок сквозь стены домов (у стен нет коллайдеров вовсе); правка `PhantomWall`
   выложена 2026-10-16, владелец: «работает»; до DONE — W3, W5.
 
+- 🔧 `bugs/52_gta_sa_gang_war_pickups_vanish.md` — в войне банд выпавшие вещи исчезали: пул пикапов 620 был полон (619 в сейве);
+  выпавшее живёт 10 минут, заплатка `scripts\PickupOldestFirst.asi` затирает самое старое; ждёт запуска игры владельцем — тогда
+  `python -I games/GTASanAndreas/tools/check_pickup_patch.py`, потом его глаз в войне банд.
+
 - 🔧 `bugs/48_gta_sa_crash_parked_car_generator.md` — GTA SA падала на пуле машин 400 (наша правка 03.10); пулы и дальности переставлены по
   слову владельца, в игре не проверено.
 
