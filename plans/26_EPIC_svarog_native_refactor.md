@@ -198,3 +198,17 @@ Shared) переписаны по правилам §5 разведки — до
       мир устоялся): GrassCoverage 1,43 мс, RoofFog 1,41, FoliageCoverage 1,26, BillboardFog 1,07, NightParticles 0,81 — каждая выше или
       около 1 мс в одном кадре. Гипотеза «пять переборов памяти» опровергнута (объявление участков после успокоения — выигрыша нет, откатано):
       дорог сам цикл компонента по тысячам материалов. Шаг: курсор по снимку `TerrainWatch.Materials`, N материалов за кадр до 0,2 мс.
+      **Поправка 2026-10-17:** «перебор памяти снимка — до 3,8 мс» — неверно: замер `MaterialScanProbe` (TC
+      `testcases/TC_svarog_terrainwatch_scan_2026-10-17.md` M1–M2) — 0,4–1,0 мс на 3200–4000 материалах, и при подгрузке тоже; «из рендереров
+      участка» невозможно — картинки деревьев и трава участков `HideAndDontSave`, их видит только перебор всей памяти. 3,835 мс RoofFog в L11 —
+      настоящий замер, но не перебора; что ещё было в том кадре — не найдено.
+
+## Ход 2026-10-17 (отчёт `testcases/reports/2026-10-17_svarog-terrainwatch-framebudget.md`)
+
+- [x] **Один бюджет кадра на всю порционную работу мода цвета** (`Shared/FrameBudget.cs`, 0,3 мс; SvarogsDream `cefd82c`): снимок
+      `TerrainWatch.Fresh` списывает своё время, проходы RoofFog, NightParticles, FoliageCoverage, GrassCoverage, а теперь и BillboardFog
+      (был целиком) и MatteTerrain (участок за участком) — из того же бюджета. 400 м пешком через границы участков (пульт `walk`), худший кадр:
+      MatteTerrain 2,48 → 0,53 мс, BillboardFog 1,10 → 0,64, FoliageCoverage 0,88 → 0,56, GrassCoverage 0,80 → 0,51, NightParticles 0,88 →
+      0,77. Остаток — сам перебор памяти (0,5–1,0 мс) в кадре снимка у первого спросившего.
+- [ ] Дальше по замеру того же маршрута (вне мода цвета): мод камеры `Plugin.Update` 4,7–4,9 мс худший кадр на ходу, `PatchCharacterDraw`
+      1,6–1,8, боевой текст `PatchCombatTextRussian` 6,4–7,7 (бой по дороге), `KrinikMobBarSize.LateUpdate` 1,1.
