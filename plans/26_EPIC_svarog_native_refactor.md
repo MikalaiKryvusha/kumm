@@ -212,5 +212,8 @@ Shared) переписаны по правилам §5 разведки — до
       0,77. Остаток — сам перебор памяти (0,5–1,0 мс) в кадре снимка у первого спросившего.
 - [x] Мод камеры на ходу (SvarogsDream `927be3d`): проход по траве `ScanGrassMaterials` порциями из бюджета кадра, дальности участков пишутся
       только при отличии — `Plugin.Update` 4,87 → 1,32 мс худшего кадра (кейсы K1–K2).
-- [ ] Дальше по замеру того же маршрута: `PatchCharacterDraw` 1,3–1,8 мс, боевой текст `PatchCombatTextRussian` 6,3–7,7 (бой с волком по
-      дороге), `KrinikMobBarSize.LateUpdate` 1,0–1,1, `PatchCombatTextDamage` 1,5.
+- [x] Боевые надписи (SvarogsDream `fc31b6f`): буквы и переводчик — при загрузке сцены, не в первом бою — `PatchCombatTextRussian.Prefix`
+      6,3–7,7 → 0,38 мс худшего кадра (кейс B3).
+- [ ] Дальше по замеру того же маршрута: `PatchCharacterDraw` 1,3–1,8 мс, `KrinikMobBarSize.LateUpdate` 1,0–1,1, `PatchCombatTextDamage`
+      1,3–1,5 (первый вызов), `PatchPlantIconSize` 1,0–1,2.
+- Выкладка для чистого запуска — `SvarogsDream/tools/deploy-cold.sh <Мод>…` (пара `.dll` + `.pdb`, EXP-0288).

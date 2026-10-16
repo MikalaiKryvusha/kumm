@@ -91,6 +91,23 @@
 
 ## Entries
 
+### EXP-0288 · 2026-10-17 · ❌→✅ · #svarogsdream #deploy #scriptengine #pdb
+class: plugin-loaded-but-not-running
+**Lesson:** для чистого запуска я скопировал в `BepInEx/scripts` только новую `KrinikUIRework.dll`; рядом остался старый `.pdb`, движок скриптов
+отказал (`SymbolsNotMatchingException`), и мод интерфейса весь запуск не работал — замер шёл без него, а я сначала читал цифры как настоящие.
+Заметил по отсутствию методов мода в `modcost` и строк мода в журнале. Правило: выкладка — только `tools/deploy-cold.sh <Мод>…` (пара файлов,
+сверка md5); после запуска — строка «мод жив» в журнале (`bubble pool: +24` у интерфейса) до любого замера.
+**Repro:** `bash tools/deploy-cold.sh KrinikUIRework` → `grep -c SymbolsNotMatching "<игра>/BepInEx/LogOutput.log"` = 0.
+mechanized: SvarogsDream/tools/deploy-cold.sh
+
+### EXP-0287 · 2026-10-17 · ❌→✅ · #svarogsdream #perf #measurement #claim
+class: wrong-model-of-the-cost
+**Lesson:** «перебор памяти снимка — до 3,84 мс» жил в STATUS и двух планах сутки как факт: это была ПРИПИСКА к замеру RoofFog (3,835 мс), сам
+перебор никто не мерил. Пульт `MaterialScanProbe` за минуту: 0,4–1,0 мс на 3200–4000 материалах. Настоящая цена — сложение: пять проходов со
+своими бюджетами в одном кадре плюс перебор; лечится одним бюджетом кадра на мод (`Shared/FrameBudget`). Правило: цифру о цене части пишу,
+только если мерил ИМЕННО эту часть; приписка «это X» к чужому замеру — гипотеза, так и пишется. **Repro:** `h.sh "call
+KrinikColorRework.MaterialScanProbe Run"`. mechanized: none — тот же класс, что EXP-0282 (замер не той части): <!-- class-ok: wrong-model-of-the-cost — цена части видна только своим секундомером; общий страж для «приписки» не построить дёшево -->
+
 ### EXP-0286 · 2026-10-17 · ❌→✅ · #svarogsdream #camera #repro #harness #visual
 class: probe-point-unchecked
 **Context:** bugs 51 (water) and 44 (grass from above) — 2026-10-15 W1 was «blocked»: the pult only orbited the hero inside the inn, the owner's angle never came up; the fix was shipped unproven.
