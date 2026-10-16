@@ -210,5 +210,7 @@ Shared) переписаны по правилам §5 разведки — до
       (был целиком) и MatteTerrain (участок за участком) — из того же бюджета. 400 м пешком через границы участков (пульт `walk`), худший кадр:
       MatteTerrain 2,48 → 0,53 мс, BillboardFog 1,10 → 0,64, FoliageCoverage 0,88 → 0,56, GrassCoverage 0,80 → 0,51, NightParticles 0,88 →
       0,77. Остаток — сам перебор памяти (0,5–1,0 мс) в кадре снимка у первого спросившего.
-- [ ] Дальше по замеру того же маршрута (вне мода цвета): мод камеры `Plugin.Update` 4,7–4,9 мс худший кадр на ходу, `PatchCharacterDraw`
-      1,6–1,8, боевой текст `PatchCombatTextRussian` 6,4–7,7 (бой по дороге), `KrinikMobBarSize.LateUpdate` 1,1.
+- [x] Мод камеры на ходу (SvarogsDream `927be3d`): проход по траве `ScanGrassMaterials` порциями из бюджета кадра, дальности участков пишутся
+      только при отличии — `Plugin.Update` 4,87 → 1,32 мс худшего кадра (кейсы K1–K2).
+- [ ] Дальше по замеру того же маршрута: `PatchCharacterDraw` 1,3–1,8 мс, боевой текст `PatchCombatTextRussian` 6,3–7,7 (бой с волком по
+      дороге), `KrinikMobBarSize.LateUpdate` 1,0–1,1, `PatchCombatTextDamage` 1,5.
