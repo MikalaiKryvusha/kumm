@@ -21,10 +21,10 @@ REAL WORLD: накоплено — сейв владельца дня 11 и ег
 
 | # | Moment | Command | Exit / outcome |
 |---|---|---|---|
-| 1 | 2026-10-17 01:50 +03:00 | `bash tools/run-game.sh` → `h.sh "call KrinikCameraRework.Plugin Cam" … "CamOrbit -608.5,130.1,-215.5 0 89.5 30" "global _KrinikGrassTopDown 0" "shot g1_before" …` | 0 · C1–C7, G1–G4, W1 (облёт трактира `CamOrbit 172,92,-741 <угол> 12 90`) |
+| 1 | 2026-10-17 01:50 +03:00 | `bash tools/run-game.sh` → `h.sh "call KrinikCameraRework.Plugin Cam" … "call KrinikCameraRework.Plugin CamOrbit -608.5,130.1,-215.5 0 89.5 30" "global _KrinikGrassTopDown 0" "shot g1_before" …` | 0 · C1–C7, G1–G4, W1 (облёт трактира `CamOrbit 172,92,-741 <угол> 12 90`) |
 | 2 | 2026-10-17 01:59 +03:00 | `bash tools/run-game.sh` → `h.sh "teleport innBaraLocation" … "call KrinikColorRework.WaterReflection WaterReport" … "shot w4_y<угол>"` | 0 · W2: одна картинка у трёх плоскостей — причина |
 | 3 | 2026-10-17 02:03 +03:00 | `bash tools/run-game.sh` → тот же облёт `shot w5_y<угол>`; `modcost 10 14 bg` + `CamSpin 30 8` + `modcostwait` | 0 · W3, W4, C8 |
-| 4 | 2026-10-17 02:10 +03:00 | запуск игры тем же скриптом → `h.sh "CamOrbit 172,92,-741 171 12 90" "global _KrinikSSPRUpShade 1" "shot w6_before" "global _KrinikSSPRUpShade 0.25" "shot w6_after"` (и то же на 123°) | 0 · W5, W6 |
+| 4 | 2026-10-17 02:10 +03:00 | запуск игры тем же скриптом → `h.sh "call KrinikCameraRework.Plugin CamOrbit 172,92,-741 171 12 90" "global _KrinikSSPRUpShade 1" "shot w6_before" "global _KrinikSSPRUpShade 0.25" "shot w6_after"` (и то же на 123°) | 0 · W5, W6 |
 
 ## 4. Checks
 
