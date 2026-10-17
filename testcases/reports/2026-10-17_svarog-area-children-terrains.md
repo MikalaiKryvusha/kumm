@@ -23,6 +23,7 @@ accumulated — сейв владельца и его настройки мод�
 | 2 | 2026-10-17 08:40 +03:00 | дробление при `childCount > 0`; новый чистый запуск, `bash tools/measure-walk.sh > _harness/logs/2026-10-17_measure-walk-k5.txt` | 0 · K5 pass, пик `BareBefore` 9,70 |
 | 3 | 2026-10-17 08:45 +03:00 | `TerrainWatch.Active`; новый чистый запуск, `bash tools/measure-walk.sh > _harness/logs/2026-10-17_measure-walk-k6.txt` | 0 · K6 pass |
 | 4 | 2026-10-17 08:49 +03:00 | новый чистый запуск; `h.sh "static WorldState isGodMode True" "teleport -576,108,-596" "wait 25" "shot k2b"`, затем `h.sh kill` и откат сейва | 0 · K2b pass |
+| 5 | 2026-10-17 08:58 +03:00 | луч верхнего края без нового массива; новый чистый запуск, `bash tools/measure-walk.sh > _harness/logs/2026-10-17_measure-walk-k7.txt` | 0 · K7 partial |
 
 ## 4. Checks
 
@@ -35,6 +36,7 @@ Functional run: бег героя 400 м туда и обратно, три чи
 | K4 | pass (замер) | дробление 0,00–0,01 мс, цена — в `SetActive`; `Humans … children 1` не дробился (1,61 мс); со скриптами — волк 8,56, `SiegeSetup` до 12,67, частицы ~1,1 |
 | K5 | pass | `Humans` дробится: самый дорогой ребёнок востока 1,62 → 0,52 мс; разово `WaterReflection.BareBefore` 9,70 мс |
 | K2b | pass | три полосы, дорогие части (`fade 0,36`, `level 0,78`) — только у первой: цена цифры уровня разовая |
+| K7 | partial | худший кадр 1,72 / 2,28 мс (запад выше K6 в пределах разброса сессии), пик — дети участка; лучи мыши в порядке, исключений 0 |
 | K6 | pass | худший кадр бега 1,68 / 2,00 мс; `BareBefore` 0,01 мс; матовая земля на месте; исключений 0 |
 
 ## 5. Found
