@@ -1,6 +1,6 @@
 # Bug 42 — Svarog: skill tooltip title shows white for ~0.5 s, then red, when moving between skills
 
-**Status:** 🔴 OPEN
+**Status:** ✅ DONE 2026-10-17 03:52 — fix `1050849` verified in game (TC N1–N3)
 **Severity:** S3 (cosmetic flicker; owner-visible)
 **Version/build:** SvarogsDream `62a50d0` · **When/context:** 2026-10-13 morning in-game review; owner's word: `[OWNER]` «а заголовки навыков при ховере в поп-апе сразу розовые, и чеерез мгновение красными становялся» · 2026-10-13
 **Test case:** `testcases/TC_svarog_hero_card_2026-10-12.md` C72
@@ -26,7 +26,9 @@ Mastery screen, skill tree: hovering one skill, then moving straight to another,
 Not started. First: `dump` the Name text + sub-mesh materials frame by frame (pult `wait 0.05` series) during a switch; then force `ForceMeshUpdate()` after our styling in `PatchSpellTip`.
 
 ## Decisions made without the owner
-none yet
+- `[AI]` 2026-10-15: the tooltip's `Style` takes the letter window's final colour at once (fix `1050849`), instead of `ForceMeshUpdate()` of
+  the plan above — the cause by code was the second styler, not the mesh.
+- `[AI]` 2026-10-17: closed on one class («Охотник») and one switch observed frame by frame; other classes not run.
 
 ## Links
 EXP-0224 (XUnity re-sets TMP font on text change) · TC C72
@@ -41,3 +43,11 @@ next pass ≤ 0.5 s later repaints it red: «≈28 frames white, then red» matc
 Fix: SvarogsDream `1050849` — `Style` gives a TMP text inside a `KrinikLetter` the window's final colour at once (`Lift` is idempotent on a
 lifted colour). Deployed 21:12; TC K1/K2 (`testcases/TC_svarog_batch3_smallbugs_2026-10-15.md`) blocked — the mastery tooltip path is not
 addressable before the first hover; the probe `tmpwatch <path> <frames>` is in the pult for the next run.
+
+## ✅ STATUS: DONE (2026-10-17 03:52 +03:00)
+
+Hygiene: NONE (no code changed in the verifying run).
+Functional run: the owner's game, Mastery → class «Охотник», the real cursor from node (760,628) to node (2040,628); `tmpwatch` of
+`UI/CharacterPanel/MasteryPanel/MasterySkills/SpellTooltip/Name` read: after the text switch to «Укус Преследователя (улучшение)» the
+property and mesh colour are (1.00 0.29 0.29) in all 18 samples (≈0.13 s apart — the old ≈0.47 s white phase would show in 3–4); frame
+`n3_b` — the title is juicy red. Report `testcases/reports/2026-10-17_svarog-bug42-skill-tip.md`, TC `testcases/TC_svarog_bug42_skill_tip_2026-10-17.md`.
