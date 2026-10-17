@@ -144,6 +144,12 @@
   `EnableContentAfterTime` → `SpawnTerrainContent` (своя корутина). При `GameSettingsManager.isSmallAreaStreaming` следом — `EnableWorldAreaTerrain`.
 - `EnableWorldAreaTerrain` — ≤ 0,79 мс (тот же замер).
 - Выключение: ждёт `isContentJustEnabled` (5 с после включения, `AllowContentToBeDisabledAfterTime`), при исследовании карты (`isExploringMap`) не выключает.
+- **Один замок на всю загрузку — `isLoadingAny`** (декомпиляция 2026-10-17 07:21). `LoadTerrainData` (террейн, `await SpawnObjectUnderParent`)
+  и `SpawnTerrainContent` (статика участка — дома, растения; тоже асинхронно) держат его всё время загрузки, несколько кадров. Кто застал
+  замок занятым, перепроверяет через 0,05 с (`CallMethodAfterDelay`, `CallLoadMethodAfterDelay`, цикл в `EnableWorldAreaContentAfter`); очереди
+  нет — замок берёт тот, кто первым спросил при свободном. Сторож: занятый дольше 1,5 с замок `Update` снимает сам. Пока идёт
+  `StreamRepeatingAfterTeleport` (`_isStreamingAfterTeleport`, `IsTeleporting()`), замок не проверяется, а `EnableWorldAreaContentAfter` содержимое
+  не включает вовсе. После телепорта игра вызывает `StreamWorldMap(isRecalculate: true, isStreamingContent: true)` и `StreamWorldAroundPlayer`.
 - Наш мод камеры (`PatchStreaming`, квадрат шире игры) включает недостающие участки своего квадрата в одном кадре (17,93 мс на беге на запад).
   Очередь «по одному за кадр» 2026-10-17 откачена: после первого телепорта дом у героя появлялся через 3–8 с (KUMM план 26).
 
