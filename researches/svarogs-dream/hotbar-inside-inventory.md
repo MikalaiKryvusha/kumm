@@ -157,3 +157,49 @@ Diablo и Grim Dawn прочитаны через API той же вики (`<в
   [форум — дубли при переносе](https://discussions.unity.com/t/onenddrag-problematically-creating-duplicate-dragged-items/839859);
   [учебник generalistprogrammer](https://generalistprogrammer.com/tutorials/unity-drag-drop-system-complete-tutorial-ui-gameplay)
 - Harmony: [Postfix](https://harmony.pardeike.net/articles/patching-postfix.html)
+
+## Четыре игры владельца (третья разведка 2026-10-17)
+
+`[OWNER]` панель должна работать «как в Conan Exiles, Soulmask, Minecraft, Portal Knights». Вики Fandom роботу WebFetch отвечает
+ошибкой 402, вики wiki.gg закрыты страницей «Blocked», поэтому Fandom прочитан через `api.php` запросом curl. Форум Steam прячет текст
+за проверкой возраста; ветки прочитаны с куки возраста. «Не нашёл» в таблице — открытые источники об этом молчат.
+
+| Игра | Где лежит вещь панели | Ячеек | Клавиши | Что делает клавиша | Навыки класса | Перенос сумка ↔ панель | Панель при открытой сумке |
+|---|---|---|---|---|---|---|---|
+| Conan Exiles (страница Steam уже называется Conan Exiles Enhanced) | отдельное хранилище, а не ряд сумки: игрок жалуется, что топор надо «take … out of my inventory, then put it in my toolbelt»; ячейки оружия в снаряжении нет — «the hotbar / selection wheel is THE thing you use weapons or tools from»; сделанное оружие само встаёт на панель | 8: «Hotbar Slot 1 – 8», игроки просят 0 и −, разработчики ответа не дали | 1–8; на геймпаде — колесо выбора, у колеса те же ячейки | «Place items in toolbar then press that number to use them»: оружие и инструмент цифра берёт в руки, еду съедает, постройку ставит. Еду и питьё можно съесть и прямо из сумки, оружие — нет | нет | Shift + ЛКМ протяжкой — в любую ячейку, бросок спрашивает количество, «Moves 1 stack max»; двойной щелчок или Shift + щелчок — в другое хранилище; при открытой сумке вещь из рук не убрать | не нашёл (по памяти — ряд под сеткой сумки) |
+| Soulmask | отдельное хранилище: модельная документация называет три сумки героя — `BG` «item backpack», `ZBBG` «gear item backpack», `KJLBG` «shortcut item backpack»; у вещи есть флаг «allow placement in the shortcut, and automatically fill it in» | 10: «Shortcut Items 1»…«Shortcut Items 10» | 1–9 и 0, колесо мыши листает панель | цифра выбирает вещь в руки; съедает ли еду — источники молчат; в сумке E — «Use/Equip/Unequip» | **отдельные клавиши**: F — навык мастерства, G — навык класса, V — навык подражания, X — особый, Q — чутьё маски, C — подражание | в сумке Q — «Transfer Items», S — разделить стопку | не нашёл |
+| Minecraft | нижний ряд сумки (подробно — во второй разведке выше) | 9 | 1–9, колесо | цифра только выбирает; еду едят, удерживая ПКМ | навыков нет | мышь; навести + цифра меняет местами | ряд сумки виден в её окне |
+| Portal Knights | панель («action bar») — с её клавишами в бою применяют оружие, навыки и расходники | не нашёл | цифры (номера в источнике нет) и колесо | **по виду вещи**: «Items with a round border can be used instantly by pressing the corresponding key … These are mostly potions and spells»; квадратную рамку клавиша выбирает в руки — «mostly weapons and placable objects»; третьи вещи с панели не применяются вовсе | **на той же панели**: заклинания и кличи — вещи, их куют на станции (Anvil I–IV для кличей воина) и кладут на панель; таланты пассивны, меняются в меню | не нашёл | не нашёл |
+
+### Что из этого следует
+
+1. **Три игры из четырёх держат вещь панели в ней самой.** Conan и Soulmask — отдельным хранилищем рядом с сумкой (у Soulmask это видно
+   прямо в устройстве: своя сумка `KJLBG`). Minecraft — рядом сумки. Ни в одной из них ячейка панели не ссылается на вещь где-то ещё.
+2. **Клавиша знает вид вещи.** Conan по нажатию цифры берёт оружие в руки и съедает еду; Portal Knights явно делит вещи по рамке: круглая
+   (зелья, заклинания) применяется сразу, квадратная (оружие) берётся в руки. Это тот же вывод, что и во второй разведке (Don't Starve).
+3. **Навыки класса — развилка, и игры владельца расходятся.** Soulmask даёт навыкам свои буквы (F, G, V, X) вне ряда цифр. Portal Knights
+   делает навык вещью и кладёт его на ту же панель рядом с зельями. Conan навыков не имеет.
+4. **Ячеек 8–10.** Conan — 8, Minecraft — 9, Soulmask — 10; Portal Knights — число не найдено.
+
+### `[AI]` Для Сварога (предложение, не решение)
+
+1. Панель Сварога — своё хранилище, как у Conan и Soulmask: вещь лежит в ячейке панели, перенос из сумки — один ход «снять там, положить
+   здесь».
+2. Цифра действует по виду вещи, как в Conan и Portal Knights: оружие — в руки, еда — съесть, зелье — выпить.
+3. Навыки — по образцу Soulmask (свои клавиши вне 1–0), если владелец хочет панель целиком под вещи; по образцу Portal Knights — если
+   превращение в зверя должно лежать на панели «как скил» (интервью 015, В2). Решает владелец.
+4. Ячеек — десять на 1–0, как у Soulmask; восемь у Conan игроки сами называют теснотой.
+
+### Источники третьей разведки (открыты 2026-10-17)
+
+- Conan Exiles: [Controls](https://conanexiles.fandom.com/wiki/Controls) и [Explosive Jar](https://conanexiles.fandom.com/wiki/Explosive_Jar)
+  (через API вики); Steam — [«More hotbar slots PLEASE»](https://steamcommunity.com/app/440900/discussions/0/1696049513760893912/),
+  [оружие только с панели](https://steamcommunity.com/app/440900/discussions/0/3001047413722016296/),
+  [«press that number to use them»](https://steamcommunity.com/app/440900/discussions/0/1628538005527063684/);
+  [форум Funcom — «Number keys (1-8) are the hotbar slots»](https://forums.funcom.com/t/pc-controls-for-the-game/287218)
+- Soulmask: [Inventory and Items Blueprint Methods](https://soulmask.fandom.com/wiki/Inventory_and_Items_Blueprint_Methods),
+  [Creating new building items](https://soulmask.fandom.com/wiki/Creating_new_building_items) (документация моддинга, через API вики);
+  [клавиши — holy.gg](https://www.holy.gg/de/post/soulmask-controls-pc-mouse-keyboard-playstation-xbox-controller)
+- Portal Knights: [Getting started](https://portalknights.fandom.com/wiki/Getting_started), [Combat](https://portalknights.fandom.com/wiki/Combat),
+  [Spells](https://portalknights.fandom.com/wiki/Spells), [Talent](https://portalknights.fandom.com/wiki/Talent) (через API вики)
+- Minecraft — источники второй разведки выше.
