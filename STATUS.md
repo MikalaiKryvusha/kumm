@@ -109,7 +109,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    центр/`, коллаж «1 Все 62…», результаты — `SvarogsDream/_harness/recenter/*_after.jpg`). **Осталось:** Велин, Веселинка, Ядран, Якша (брак —
 >    `*_bad.jpg`), Славко (не начат), Небойша (перерисовка, просьба `tools/portrait_redraw_ask.txt`). Запуск: `CV_PY=<python с opencv-python-headless<5>
 >    bash SvarogsDream/tools/portrait_recenter_batch.sh "Velin, the occultist" …` (окружение с OpenCV — `python -m venv` + `pip install
->    "opencv-python-headless<5" pillow numpy`), коллаж — `$CV_PY SvarogsDream/tools/portraits_collage.py`. В игру портреты — только после «да»
+>    "opencv-python-headless<5" pillow numpy`), коллаж — `$CV_PY SvarogsDream/tools/portraits_recenter_collage.py`. В игру портреты — только после «да»
 >    владельца по коллажу. **Лимит ChatGPT:** аккаунты владельца бесплатные, кончаются за ~8–10 картинок; третий закрыт до 2026-10-18 14:58 — при
 >    упоре пакет зовёт владельца голосом, он входит в другой аккаунт. После TaskStop — проверить сирот (EXP-0298).
 >    **Не доделано:** выгрузка обоих вариантов, когда ChatGPT рисует два на выбор (`tools/gpt_image_grab_all.js`, `fetch` второго blob завис —
