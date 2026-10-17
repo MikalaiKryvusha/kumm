@@ -58,7 +58,7 @@
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
 >      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run,
      census-by-own-pattern, hook-after-event, mod-breaks-game-flow, demo-voice-ahead-of-frame, wrong-model-of-the-cost,
-     per-object-work-every-frame, our-own-cost-first, ceiling-from-wider-switch,
+     per-object-work-every-frame, our-own-cost-first, ceiling-from-wider-switch, measurement-route-too-narrow,
      act-without-checking-target, artifact-for-eye-unchecked, catalogue-label-instead-of-decision,
      confusion-delivered-as-verdict, distance-from-camera, false-negative-search, fix-by-property-unverified,
      flat-world-assumption, guide-on-shelf-unread, hdr-washed-desktop-capture, hidden-layer-shows-through,
@@ -90,6 +90,16 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0289 · 2026-10-17 · ❌→✅ · #svarogsdream #perf #measurement #route
+class: measurement-route-too-narrow
+**Lesson:** весь вечер бюджет «на бегу» мерил одним маршрутом — из Града 400 м на восток — и худший кадр был 1,1–2,5 мс. Первый же бег
+НАЗАД на запад дал 18,6 мс: мод камеры включал все участки своего квадрата подгрузки в одном кадре (17,93 мс), а на востоке им включать
+было нечего. Правило: сценарий геймплея меряется в обе стороны и после разворота — маршрут туда и обратно (`walk 90 400`, затем
+`modcost …` на `walk 270 400`); один маршрут — один срез, не «бег».
+**Repro:** `h.sh "teleport innGradLocation" "wait 45" "walk 90 400" "wait 41" "modcost 40 14 bg" "walk 270 400" "wait 41" "modcostwait"`
+(отчёт `testcases/reports/2026-10-17_svarog-review-fixes.md`, прогоны 7–10).
+mechanized: SvarogsDream/tools/measure-walk.sh
 
 ### EXP-0288 · 2026-10-17 · ❌→✅ · #svarogsdream #deploy #scriptengine #pdb
 class: plugin-loaded-but-not-running

@@ -144,7 +144,8 @@
   `EnableContentAfterTime` → `SpawnTerrainContent` (своя корутина). При `GameSettingsManager.isSmallAreaStreaming` следом — `EnableWorldAreaTerrain`.
 - `EnableWorldAreaTerrain` — ≤ 0,79 мс (тот же замер).
 - Выключение: ждёт `isContentJustEnabled` (5 с после включения, `AllowContentToBeDisabledAfterTime`), при исследовании карты (`isExploringMap`) не выключает.
-- Наш мод камеры (`PatchStreaming`, квадрат шире игры) с 2026-10-17 включает участки по одному за кадр, террейн и содержимое — в разных кадрах.
+- Наш мод камеры (`PatchStreaming`, квадрат шире игры) включает недостающие участки своего квадрата в одном кадре (17,93 мс на беге на запад).
+  Очередь «по одному за кадр» 2026-10-17 откачена: после первого телепорта дом у героя появлялся через 3–8 с (KUMM план 26).
 
 ## 4. Где в игру влезают наши моды (цели патчей и обращений, снято grep по `typeof(…)` в `src/`)
 
