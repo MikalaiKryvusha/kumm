@@ -136,6 +136,16 @@
 | Окно настроек всех модов — F8 или кнопка «Настройки модов» в меню паузы | ConfigurationManager 19.0 + `KrinikModMenu` |
 | F9 — сравнение с картинкой игры, F10 — час вперёд (инструменты, не механика для игрока — в советы не идут) | `KrinikColorRework/Plugin.cs:122–123` |
 
+### 3.5. Подгрузка участка — что стоит кадр (декомпиляция `WorldStreamingManager`, 2026-10-17)
+
+- `EnableWorldAreaContent(area, true)` → `StartCoroutine(EnableWorldAreaContentAfter)`: корутина до первой паузы идёт **в том же вызове** — если
+  `isLoadingAny` ложно, сразу `worldArea.areaContent.SetActive(true)`: всё дерево участка включается одним кадром (`OnEnable` всех объектов).
+  Замер (KUMM TC_svarog_review_fixes A8): 7,3–9,2 мс на бегу, 14,96 мс сразу после телепорта. Потом, если статики ещё нет, через 0,1 с —
+  `EnableContentAfterTime` → `SpawnTerrainContent` (своя корутина). При `GameSettingsManager.isSmallAreaStreaming` следом — `EnableWorldAreaTerrain`.
+- `EnableWorldAreaTerrain` — ≤ 0,79 мс (тот же замер).
+- Выключение: ждёт `isContentJustEnabled` (5 с после включения, `AllowContentToBeDisabledAfterTime`), при исследовании карты (`isExploringMap`) не выключает.
+- Наш мод камеры (`PatchStreaming`, квадрат шире игры) с 2026-10-17 включает участки по одному за кадр, террейн и содержимое — в разных кадрах.
+
 ## 4. Где в игру влезают наши моды (цели патчей и обращений, снято grep по `typeof(…)` в `src/`)
 
 | Мод | Классы игры |
