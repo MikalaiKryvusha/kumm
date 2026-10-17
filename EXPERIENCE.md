@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0291 · 2026-10-17 · ❌→✅ · #svarogsdream #perf #streaming #measurement #stopwatch
+class: wrong-model-of-the-cost
+**Lesson:** журнал очереди называл самым дорогим ребёнком участка `Humans` (1,61 мс), а `compsof` показал, что это пустой контейнер, — я решил,
+что дорого включение пустого контейнера. Секундомер «дробление / SetActive» в одной строке дал ответ за один прогон: `0 deferred … children 1`
+— контейнер с ОДНИМ ребёнком не дробился вовсе (условие `childCount > 1`). Правило: имя в журнале цены — не модель цены; на подозрительном
+месте ставить секундомер по частям с числом обработанного, а не строить объяснение. **Repro:** журнал `stream child slow: … split … (N deferred)
+setactive …, children M`. mechanized: строка `stream child slow` в моде камеры (SvarogsDream `949d2f8`)
+
 ### EXP-0290 · 2026-10-17 · ❌→✅ · #svarogsdream #harness #walk #measurement #control
 class: probe-point-unchecked
 **Lesson:** замер «бег на запад» дал 1,19 мс вместо прежних 17,9 — похоже на победу, но центр подгрузки в журнале не сдвинулся: герой
