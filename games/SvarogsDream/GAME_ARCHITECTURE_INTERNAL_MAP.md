@@ -153,6 +153,23 @@
 - Наш мод камеры (`PatchStreaming`, квадрат шире игры) включает недостающие участки своего квадрата в одном кадре (17,93 мс на беге на запад).
   Очередь «по одному за кадр» 2026-10-17 откачена: после первого телепорта дом у героя появлялся через 3–8 с (KUMM план 26).
 
+### 3.6. Выбор героя — кто выпадает, черты и характеристики (декомпиляция `CharacterSelectionManager`, `CharacterSelectionUI`, `StoryCharacter`, 2026-10-17)
+
+- **Герои — данные автора:** `CharacterSelectionManager.storyCharacters` — 62 героя (`art/heroes.tsv`, `tools/heroes_extract.py`). У каждого свои
+  характеристики и **ровно три черты, вписанные автором** (`playerTalent1..3`): все 62 тройки разные, разных черт — 78. Черты приходят с героем.
+- **Начало игры** — герои 0, 1, 2 (`GetFirstThreeCharacters`), без случая; их выбор ведёт в сцену вступления (`SetupOrcAttackScene`).
+- **После смерти** (`UnderworldManager` → `InitializeCharacterSelection(false)` → `PopulateCharactersAfterPlayerDeath`): `GetRandomThreeCharacters`.
+  Пул — герои с номера 3: сперва ни разу не показанные (`characterUsage.isShown`); меньше трёх — не сыгранные (`isUsed`); меньше трёх — все.
+  Три разных `Random.Range`, без прошлой тройки (`rerollCharacter1Id1..3` — переброс всегда даёт новые лица); если первые два одного пола — третий
+  другого. Показанный помечается `isShown`, сыгранный и погибший — `isUsed` (`deadCharacters`). Фанатик-последователь вместо выбора — герой 47.
+- **Характеристики** (`UpdateCharacterToMatchTheLevel` — копия героя, `MemberwiseClone`): `(int)(основа + основа × уровень души × 0.07)`; затем бой
+  в Аду (`AdFight`) ×1.4, с помощью ×2.3, не выше 100; День Смерти ×3; «усиленные герои» (`isImprovedCharacter`) ×1.5; **выше 95 → 90** (похоже на
+  опечатку автора); полубог Велеса — все 100. Уровень героя = уровень души игрока.
+- **Переброс** — 3 Божьих Милости (`RerollCharacters`); строка цены — `SetRerollsUI` после трёх `PopulateCharacters`.
+- **Выбор** (`FinishCharacterInitialization`): черты карточки (`selectableCharacter.storyCharacter` — копия) → `talentsManager.InitializePlayerTalents`;
+  характеристики — в `playerStats`. После загрузки сейва (`isItAfterSelection: false`) метод выходит до черт — черты живут в сейве, не в герое.
+- Открыть окно выбора пультом (без смерти): `callon Managers/DataManagers/CharacterSelectionManager CharacterSelectionManager InitializeCharacterSelection False`.
+
 ## 4. Где в игру влезают наши моды (цели патчей и обращений, снято grep по `typeof(…)` в `src/`)
 
 | Мод | Классы игры |
