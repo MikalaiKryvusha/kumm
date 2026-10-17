@@ -23,6 +23,8 @@ B3, B4a, B4b — кейсы бага 47 (`bugs/47_svarog_mvp_jumps_bugs.md`, `te
 | 3 | 2026-10-17 08:07 +03:00 | `h.sh "static WorldState isGodMode False"`, `jump_run.sh -556,132,-335 -592,130,-335`, `jump_run.sh -612,145,-322 -612.3,145,-348.5 0.7` | 0 · B4b pass, B4a blocked |
 | 4 | 2026-10-17 08:11 +03:00 | новый чистый запуск; `h.sh "teleport -612,145,-330" "wait 6" "call KrinikCameraRework.Plugin CamYaw 180"`, `keys.ps1 -Key W -Ms 3000` фоном, через 1,5 с `keys.ps1 -Key SPACE -Ms 80` | 0 · B2 pass (журнал) |
 | 5 | 2026-10-17 08:13 +03:00 | новый чистый запуск; `h.sh "teleport -576,108,-596" "wait 6" "call KrinikCameraRework.Plugin CamYaw 180" "findall Cart"`, W фоном, пробел через 1,1 с; `colliders 8 40` | 0 · B1 blocked — тележки там нет (кладбище), скелеты напали — игра закрыта сразу |
+| 6 | 2026-10-17 08:52 +03:00 | новый чистый запуск; `bash _harness/jump_run.sh -612,145,-318 -612.3,145,-348.5 1.5` | 0 · B4c fail (постановка: добежал и встал) |
+| 7 | 2026-10-17 08:53 +03:00 | новый чистый запуск; `bash _harness/jump_run.sh -612,145,-318 -612.3,145,-348.5 0.9` | 0 · B4d partial: разбег в утёс, касание на 2,7 м выше подножия |
 
 ## 4. Checks
 
@@ -37,6 +39,7 @@ Functional run: герой у трактира Града 40 с (реплики 
 | B4a | blocked | `run 0,0 m/s` — разбега в стену не было |
 | B1 | blocked | тележки по координате нет; прыжок `(wasd)` по оси без сдвига вбок (0,0 м) |
 | B2 | pass (журнал) | `run 11,5 m/s (wasd, … agent velocity 0,0)`, приземление на 5 м по W и на 1,5 м выше; героя за скалой на кадре не видно |
+| B4d | partial | `run 11,5 m/s (facing)`, `hit rock proxy SM_Cliff_Formation_03`, касание на 2,7 м выше подножия, `apex +2,81` — 14.10 F12 касался у подножия |
 | B4b | pass | `run 11,5 m/s (facing)`, `hit HQ_OakTreeGroup01`, касание через 3,7 м — как F4 |
 
 ## 5. Found
