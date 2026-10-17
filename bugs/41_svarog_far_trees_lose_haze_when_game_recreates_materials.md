@@ -31,6 +31,13 @@ After restart: `mats BillboardTree` — ours > 0, game 0; then change `TreeMeshD
 TreeMeshDistance 250`, back to 300) → log `billboard fog: materials recreated … rescan`, `mats` again — ours > 0, game 0; frame of a far
 forest — hazed.
 
+## 2026-10-17 — the watchdog seen working on the walk route
+
+Every run of the night (400 m on foot across chunk borders, logs `SvarogsDream/_harness/logs/2026-10-17_*.log`) the game recreated the
+billboard materials and the watchdog put the haze back within ~2 frames, e.g. `billboard fog: materials recreated by the game (held 20 of
+25) — rescan` → `billboard fog on: 5 materials, held 25`; since `3f7a30c` the rescan takes its time from the shared frame budget. What
+recreates them is still not found. Left: the owner's eye over a session.
+
 ## Decisions made without the owner
 (filled at closing)
 
