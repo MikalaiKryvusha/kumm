@@ -212,6 +212,11 @@ FPS (world running, forest, 20 M triangles): game 51.65 · ours 0 — 51.35 · o
 the noise. Report `testcases/reports/2026-10-11_svarog-bug15-roofs-fps.md`. Not checked: metal armour up close, 4K, night.
 Before DONE: the owner's eye in his own play.
 
+**2026-10-17 — terrain swap while WALKING observed.** The pult `walk 90 400` from Grad (400 m on foot across chunk borders, 9 runs): the colour
+mod's log writes `matte terrain on: 1 terrains, held 53 → 54 → 55` as each new chunk streams in — one chunk per frame from the shared frame
+budget (epic 26, SvarogsDream `3f7a30c`); frames `m5_view`, `g2_view` show the ground matte. The streaming criterion of the status line is met
+(report `testcases/reports/2026-10-17_svarog-terrainwatch-framebudget.md`, G2). Left: the owner's eye in his own play.
+
 ## Decisions made without the owner (this fix)
 
 - `[AI]` 2026-10-11: «Дома и дерево без белёсого блика» ON by default — the owner asked to CHECK roofs/palisade; the frames confirmed
