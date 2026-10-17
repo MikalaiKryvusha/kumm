@@ -91,6 +91,31 @@
 
 ## Entries
 
+### EXP-0307 · 2026-10-18 · ❌ · #svarogsdream #harness #cheat #owner-game #save
+class: cheat-left-on-in-owner-game
+**Lesson:** включил пультом бессмертие (`static WorldState isGodMode True`) на прогон панели и не выключил; владелец доиграл в моём запуске,
+поднял героиню с 11-го до 20-го уровня в схватке с ордой («сейчас какой-то чит работает?» · «почему тамара супер крутая?»), я снял бессмертие
+посреди боя — и следующая загрузка убила её за секунды. Правило: всякий чит пульта выключается тем же пакетом команд, что включил, а если
+игра переходит к владельцу (он играет в моём запуске) — до того, как он возьмёт мышь; снимать чит в бою — нельзя, сначала увести героя.
+**Repro:** отчёт `testcases/reports/2026-10-18_svarog-owner-night-items.md`, первый запуск 01:15.
+mechanized: none — предложение: пульт рисует на экране плашку «БЕССМЕРТИЕ (пульт)», пока `isGodMode` включён
+
+### EXP-0306 · 2026-10-18 · ❌→✅ · #svarogsdream #ui #hot-reload #leak #rest-check
+class: hot-reload-leftover-objects
+**Lesson:** «полоса внизу» — девять боковин затемнения сумки: каждая горячая выкладка создавала свои три, а выгрузка убирала только главный
+слой. Глаз владельца нашёл их раньше прибора покоя. Правило: объект, который мод создаёт сам, убирается в `OnDestroy` той же копии и, на
+всякий случай, по имени при создании новой; после второй выкладки подряд — дамп на дубли `Krinik*` с одинаковыми прямоугольниками.
+**Repro:** дамп `findall KrinikBagShadeSide` — `#0…#8`. mechanized: `HeroCard.cs` (OnDestroy + снос по имени), SvarogsDream `640c941`
+
+### EXP-0305 · 2026-10-18 · ❌→✅ · #svarogsdream #ui #author-bug #decompile #hotbar
+class: missing-feature-is-an-inverted-guard
+**Lesson:** «не хватает миниатюры» при переносе с панели — не наша недоделка: у игры `UISlotBase.OnBeginDrag` сбрасывает перенос, если
+`DragKeyModifierIsDown()`, а для `None` она отвечает true — условие набора перевёрнуто, и клон значка не создаётся ни у навыков, ни у
+ссылок. Бросок при этом работал (Unity шлёт OnDrop и без начатого переноса), что и прятало дефект. Когда вещь «не появляется», первым
+читать условия выхода метода игры и сверять поле пультом (`fieldon … m_DragKeyModifier`). И миниатюра, ставшая видимой, перехватила луч:
+у клона значка — `CanvasGroup.blocksRaycasts = false`. **Repro:** кейсы D1, D2 `TC_svarog_hotbar_occupied_cells_2026-10-18.md`.
+mechanized: `HotbarDrag.PatchDragGhost`, `PatchGhostRaycast` (SvarogsDream `df227c6`)
+
 ### EXP-0304 · 2026-10-17 · ❌→✅ · #svarogsdream #ui #hotbar #owner-model #recon
 class: built-from-the-game-model
 **Lesson:** идея 18 «квик экшены становятся частью сумки, как в майнкрафте» — я построил шаг 1 по устройству игры (у неё Q и E показывают
