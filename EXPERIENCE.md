@@ -91,6 +91,12 @@
 
 ## Entries
 
+### EXP-0309 · 2026-10-18 · ❌ · #tooling #claim-gate #false-positive #timezone
+class: claim-gate-reads-offset-as-time
+**Lesson:** шлюз `tools/check-claim-before-evidence.mjs` (и хук штампов) принял смещение пояса «+03:00» после сегодняшней даты за время 03:00
+«впереди часов» и отбил коммит тикета KAIF #160. Обход — `claim-ok: «+03:00» — смещение пояса` на строке; починка — не считать время, которому
+предшествует `+` или `−`. mechanized: none — починить шлюз (`tools/check-claim-before-evidence.mjs`, разбор времени после даты)
+
 ### EXP-0308 · 2026-10-18 · ❌ · #svarogsdream #interview #owner-question #recon #hud
 class: asked-before-checking-the-code
 **Lesson:** в интервью #023 спросил владельца, ставить ли «Пробел» в конец ряда панели, — а ячейки «Пробел» на панели нет давно: пробел —
