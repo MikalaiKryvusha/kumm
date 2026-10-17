@@ -91,6 +91,29 @@
 
 ## Entries
 
+### EXP-0295 · 2026-10-17 · ❌→✅ · #svarogsdream #translation #deploy #gate #output
+class: gate-output-hidden
+**Lesson:** выкладка перевода (`tools/translation_deploy.sh`) молча не скопировала новый словарь: строгая проверка терминов была красной
+(9 наших строк), а я смотрел вывод через `grep -iE "error|ошиб|FAIL"` — у проверки нет таких слов, она печатает таблицу. В игре остались
+старые описания, и кейс R7 провален кадром. Правило: вывод шлюза не фильтровать; после выкладки сверять время выложенного файла
+(`ls -la` в папке игры), а не код возврата обёртки. **Repro:** `testcases/TC_svarog_random_hero_traits_2026-10-17.md` R7 → R7b.
+mechanized: none — проверка времени файла пока руками
+
+### EXP-0294 · 2026-10-17 · ❌→✅ · #python #regex #tsv #translation
+class: text-through-cli
+**Lesson:** схлопывая «\n\n» буквами в `selection_ru.tsv`, я дал `re.sub` строку замены `"\\n"` (из `chr(92)+"n"`) — модуль `re` читает её
+как НАСТОЯЩИЙ перевод строки, и 115 строк таблицы разорвало (diff +405). Откат из git, повтор с заменой функцией (`lambda m: LIT`) — 6 строк,
+как и было найдено. Правило: литеральный обратный слэш в замене `re.sub` — только функцией; после машинной правки таблицы — `git diff --stat`
+до того, как идти дальше. **Repro:** `scratchpad bio_blank_lines.py`, первая версия. mechanized: none
+
+### EXP-0293 · 2026-10-17 · ❌→✅ · #svarogsdream #ui #xunity #linespacing #hotreload
+class: two-writers-one-field
+**Lesson:** межстрочный поп-апа черт был 0.768 / 0.6144 при задуманных 0.96: XUnity (`TextTranslationInfo.ResizeUI`, `ResizeUILineSpacingScale
+0.80`) умножает межстрочный на 0.8 всякий раз, когда видит значение, поставленное не им, а наш `Plugin.Style` запоминал «исходным» уже
+сжатое. Первая версия причины («виноваты горячие выкладки») опровергнута чистым запуском (0.768 у 9 черт). Правило: поле, которое пишут мод и
+русификатор, — исходное брать из данных игры (UnityPy) или нижней границей автора, не «что стоит сейчас»; замер — пультом `callon … get_lineSpacing`.
+**Repro:** `testcases/TC_svarog_hero_select_across_2026-10-17.md` H8 → H9. mechanized: none — `TipSpacingFloor` в `Plugin.Style`
+
 ### EXP-0292 · 2026-10-17 · ❌→✅ · #svarogsdream #jump #claim #setup #falsehood
 class: claim-before-evidence
 **Lesson:** прыжок B3c по W упёрся в склон владельца (`apex +0,27`), и за три минуты я записал в баг 47, STATUS и интервью 018 «п. 3 на склоне
