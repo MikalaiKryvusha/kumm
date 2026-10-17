@@ -30,6 +30,7 @@ REAL WORLD: накоплено — сейв владельца дня 11; дан
 | 8 | 2026-10-17 04:25 +03:00 | `bash tools/deploy-cold.sh KrinikCameraRework` (очередь участков), `run-game.sh`, `h.sh "teleport innGradLocation" "wait 45" "walk 90 400" "wait 41" "modcost 40 14 bg" "walk 270 400" "wait 41" "modcostwait"`, журнал, `h.sh kill`, сейв 7/7 | 0 · A7 |
 | 9 | 2026-10-17 04:30 +03:00 | `bash tools/deploy-cold.sh KrinikCameraRework` (террейн и содержимое в разных кадрах), `run-game.sh`, маршрут прогона 8, журнал `stream square`, `h.sh kill`, сейв 7/7 | 0 · A8 |
 | 10 | 2026-10-17 04:36 +03:00 | `bash tools/deploy-cold.sh KrinikCameraRework` (дети содержимого по бюджету), `run-game.sh`, маршрут прогона 8 + `shot a9_view`, журнал, `h.sh kill`, сейв 7/7 | 0 · A9 |
+| 11 | 2026-10-17 04:40 +03:00 | `bash tools/deploy-cold.sh KrinikCameraRework` (имя ребёнка в журнале), `run-game.sh`, `h.sh "teleport innGradLocation" "wait 45" "walk 90 400" "wait 41" "walk 270 400" "wait 41"`, журнал, `h.sh kill`, сейв 7/7 | 0 · A10 |
 | 6 | 2026-10-17 04:15 +03:00 | `bash tools/deploy-cold.sh KrinikCameraRework`, `bash tools/run-game.sh`, `h.sh "teleport innGradLocation" "wait 45" "modcost 40 14 bg" "walk 90 400" "wait 41" "modcostwait"`, журнал `grass scan`, `h.sh kill`, сверка сейва 7/7 | 0 · A5 |
 
 ## 4. Checks
@@ -48,6 +49,7 @@ Functional run: в игре владельца — кадры травы под 
 | A6 | pass | первый кадр полосы моба 1,02 мс: затухание 0,35, цифра уровня 0,67 |
 | A7 | partial | квадрат подгрузки — по участку за кадр (6 за 7 кадров); худший кадр на западе 18,6 → 9,84 мс; один участок игры сам стоит 9,35 мс |
 | A8 | pass | террейн ≤ 0,79 мс, содержимое участка 7,3–9,2 мс на бегу (14,96 после телепорта) — дорого содержимое; худший кадр 9,76 мс |
+| A10 | pass | самые дорогие дети: `Houses` 4,62, `PickablePlants` 3,94, `Monsters` 3,59 мс; после телепорта `SiegeSetup` 10,78 мс |
 | A9 | pass | дети содержимого по бюджету кадра: худший кадр на западе 5,47 мс, самый дорогой ребёнок на бегу 4,62 мс; исключений 0; мир у героя цел |
 
 ## 5. Found
