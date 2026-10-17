@@ -26,6 +26,7 @@ REAL WORLD: накоплено — сейв владельца дня 11; дан
 | 3 | 2026-10-17 04:07 +03:00 | `h.sh "call KrinikCameraRework.Plugin CamOrbit -608.5,130.1,-215.5 0 55 30" … "global _KrinikGrassTopDown 0|1" "shot a3_…"`, то же на 89,5°; `python _harness/a3_diff.py …` | 0 · A3 |
 | 4 | 2026-10-17 04:09 +03:00 | `h.sh "teleport innBaraLocation" … "CamOrbit 172,92,-741 123|171 12 90" "shot a2_…" "WaterReport" "cfg krinik.svarogsdream.colorrework Water ProbeReflections true" … "WaterReport" ×2 … false` | 0 · A1, A2 |
 | 5 | 2026-10-17 04:10 +03:00 | `h.sh "static KrinikUIRework.Plugin _combatCount"`, затем `h.sh kill`, `save-check.sh --restore`, `reg-snap.sh restore` | 0 · A4 |
+| 6 | 2026-10-17 04:15 +03:00 | `bash tools/deploy-cold.sh KrinikCameraRework`, `bash tools/run-game.sh`, `h.sh "teleport innGradLocation" "wait 45" "modcost 40 14 bg" "walk 90 400" "wait 41" "modcostwait"`, журнал `grass scan`, `h.sh kill`, сверка сейва 7/7 | 0 · A5 |
 
 ## 4. Checks
 
@@ -39,6 +40,7 @@ Functional run: в игре владельца — кадры травы под 
 | A2 | pass | 123° и 171°: стена, сваи, деревья в воде, новых пятен нет |
 | A3 | pass | 55°: 0↔1 18,12 при шуме ветра 17,06; 89,5°: 12,29 при шуме 6,18; сверху трава зелёная и объёмная |
 | A4 | partial | `_combatCount` 10 — прогрев видел непустой список; бой не наблюдался |
+| A5 | pass | мод камеры (`94ef9a9f`) не списывает перебор дважды: трава новых участков находится (`new 13`), худший кадр всех модов на бегу 1,835 мс |
 
 ## 5. Found
 
@@ -48,7 +50,10 @@ Functional run: в игре владельца — кадры травы под 
   прозрачность, JPEG не годится) — долг.
 - Замечания ревьюера 5 (затемнение «смотрящего вверх» в экранном отражении не учитывает угол — горы дальнего берега темнее) и 6 (плоскость
   того же материала на другой высоте видит отражение со сдвигом) — вопросы вида, записаны в `bugs/40`; 7 (перебор памяти учтён в бюджете
-  дважды — откладывает работу на кадр) — не чинился.
+  дважды — откладывает работу на кадр) — починен, A5.
+- На бегу (прогон 6) худший кадр всех модов дал `KrinikMobBarSize.LateUpdate` — 1,221 мс в одном кадре (средний по нему мал): новый пик,
+  в план 26.
+- Новый шаг h.sh (PNG → WebP) сравнивал с `cmd.txt`, который пульт удаляет, — `find: … cmd.txt: No such file`; отметка `.sent` вместо него.
 
 ## 6. Traces
 
@@ -58,4 +63,4 @@ Functional run: в игре владельца — кадры травы под 
 
 ## 7. Verdict
 
-partial — A1–A3 pass (вода в обоих режимах, трава сверху и под 55°), A4 partial: размер боевых надписей в бою не наблюдался.
+partial — A1–A3, A5 pass (вода в обоих режимах, трава сверху и под 55°, бюджет мода камеры), A4 partial: размер боевых надписей в бою не наблюдался.
