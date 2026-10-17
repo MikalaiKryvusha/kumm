@@ -124,7 +124,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    (3) баг 47: B1 — найти тележку владельца (`findall cart_base`), B3 — склон на запад от −594,4, B4a — разбег в утёс; B2 и B4b pass;
 >    (4) баг 45: третья горячая выкладка в отдельном заходе (первая +171 МБ, вторая +9); мелочи плана 25 — баг 15, «пылевая буря», советы экрана загрузки;
 >    имя сейва — интервью 017.
->    **В игре сейчас** (2026-10-17 09:00, чистые запуски `bash tools/deploy-cold.sh <Мод>`): KrinikCameraRework `da250f4` (очередь с замком и внуками),
+>    **В игре сейчас** (2026-10-17 09:00, чистые запуски `bash tools/deploy-cold.sh <Мод>`): KrinikCameraRework `3ddb3e4` (очередь с замком и внуками),
 >    KrinikColorRework `949d2f8`, KrinikUIRework `7139b99`, KrinikDevHarness `860dff1` (`walk` поднимает героя, `compsof`), KrinikModMenu `598c161`,
 >    KrinikFixes `05da363`. Ловушка: бессмертие пульта (`isGodMode`) ускоряет бег — для замеров движения не включать.
 >    **Ловушки ночи:** пульт камеры — только `call KrinikCameraRework.Plugin CamOrbit …`; UI-мод в `scripts` — только парой `.dll` + `.pdb`
