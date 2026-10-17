@@ -18,3 +18,5 @@
 | T3 | Наведение пультом на первый значок | подсказка: имя черты цветом знака, вид, описание по-русски; над рядом черт | кадр | pass 2026-10-17 16:35 — «Пьяница» зелёным, «Хорошая черта», описание по-русски, над полосой (`_harness/tr_t3.webp`) |
 | T4 | Контроль: `cfg … HeroCard Traits false` | ряда нет, журнал `hero traits: 0 shown` | журнал, кадр | skipped — контроль не прогнан |
 | T5 | Замер `modcost` не нужен: у ряда нет Update | `grep -n "void Update\|LateUpdate" HeroTraits.cs` пусто | код | pass 2026-10-17 — grep: 0 строк |
+
+| H1 | Разведка волос: `mats hair` пультом | шейдер материала волос и его свойства цвета (есть ли цвет-множитель) | mats.txt | pass 2026-10-17 16:38 — `DawnShader/HairShader`: цвет — `_RootColor` и `_TipColor`, не текстура (researches/svarogs-dream/hero-hair-recolor.md) |
