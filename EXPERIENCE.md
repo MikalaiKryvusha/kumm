@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0298 · 2026-10-17 · ❌→✅ · #windows #gitbash #background #taskstop #chatgpt #cdp
+class: orphan-background-process
+**Lesson:** остановка фоновой задачи (TaskStop) на Windows убивает обёртку, а цикл `bash script.sh` внутри живёт дальше. Два пакета
+портретов сидели в одной вкладке ChatGPT: «новый чат» одного обрывал ход другого — у Яна выгрузилось лицо Веселинки, у Йована пусто,
+ложные «лимит» и голосовой вызов владельцу. Каждый сбой я чинил по симптому (ожидание дорисовки, проверка вложения) — три попытки, пока
+не посмотрел процессы. Правило: после TaskStop — `Get-CimInstance Win32_Process | ? CommandLine -match '<скрипт>'` и убить СВОИ PID;
+пакет, который трогает общий ресурс (вкладку, игру), держит замок с PID. **Repro:** план 28, 2026-10-17 14:52–15:16.
+mechanized: замок `recenter.lock` в `SvarogsDream/tools/portrait_recenter_batch.sh` (второй пакет — код 10)
+
 ### EXP-0297 · 2026-10-17 · ❌→✅ · #svarogsdream #portraits #chatgpt #outpaint #opencv
 class: generator-recomposes
 **Lesson:** просил ChatGPT дорисовать серую рамку вокруг портрета «не меняя портрет» — он пересобирает весь кадр: лицо мельче и сдвинуто,
