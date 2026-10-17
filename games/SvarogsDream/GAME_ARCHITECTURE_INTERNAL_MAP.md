@@ -168,6 +168,11 @@
 - **Переброс** — 3 Божьих Милости (`RerollCharacters`); строка цены — `SetRerollsUI` после трёх `PopulateCharacters`.
 - **Выбор** (`FinishCharacterInitialization`): черты карточки (`selectableCharacter.storyCharacter` — копия) → `talentsManager.InitializePlayerTalents`;
   характеристики — в `playerStats`. После загрузки сейва (`isItAfterSelection: false`) метод выходит до черт — черты живут в сейве, не в герое.
+- **Сколько черт может быть у героя** (декомпиляция `TalentsManager`, `CharacterSelectionUI`, `StoryCharacter`, 2026-10-17): у игрока черты — словарь
+  `aquiredPlayerTalents` без предела (`AddPlayerTalent`; при 15 и больше игра пишет статистику Steam `stat68`), `InitializePlayerTalents` принимает
+  список любой длины. Ровно три — только у героя-карточки: поля `StoryCharacter.playerTalent1..3`, список при выборе собирается из них тремя `Add`,
+  карточка окна выбора рисует три слота `selectableCharacter.uiTalent1..3`. Другое число черт = свой список мода + подмена списка в
+  `InitializePlayerTalents` при выборе + слоты карточки (спрятать лишние, добавить четвёртый и пятый).
 - Открыть окно выбора пультом (без смерти): `callon Managers/DataManagers/CharacterSelectionManager CharacterSelectionManager InitializeCharacterSelection False`.
 
 ## 4. Где в игру влезают наши моды (цели патчей и обращений, снято grep по `typeof(…)` в `src/`)
