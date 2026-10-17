@@ -339,6 +339,20 @@ class and field from section 1. None repeats the 95 talents or the 50 of idea 19
 developed: …" (`TalentsManager.cs:305–371`). The talent lives in the save (plan 27: "talents live in the save"). Open questions:
 1. **New ids.** `PlayerTalentId` is a game enum. Our talents need ids outside its range. Check that the save writes an unknown int and
    reads it back, and that `availablePlayerTalents` (a `List<PlayerTalent>` with an icon `Sprite`) accepts our entries at start.
+   **Answered 2026-10-17 (decompilation, `sv_full` + `Assembly-CSharp-firstpass.dll`):**
+   - *Write/read — yes.* `SaveFile.cs:491` fills `playerTalentIds` from `TalentsManager.GetPlayerTalentIds()` (the keys of
+     `aquiredPlayerTalents`); the serializer is `Plugins.SaveGame.Serializers.SaveGameBinarySerializer` = plain `BinaryFormatter`, which
+     stores an enum as its int and reads any int back (no range check).
+   - *Load — breaks without our entry.* `LoadSaveGameManager.cs:318` → `InitializePlayerTalents` → `AddPlayerTalent` (`TalentsManager.cs:626`):
+     `availablePlayerTalents.Where(id).FirstOrDefault()` returns null for an unknown id and line 631 reads `playerTalent.playerTalentId` —
+     NullReferenceException. The load sequence has no try/catch there, so the steps after line 318 (almanac, progress, achievements) never
+     run. A save holding our id therefore needs our `PlayerTalent` registered in `availablePlayerTalents` BEFORE line 318, and it is broken
+     the day the mod is off. `HandleTalentStats` (`:758`) is a `switch` — an unknown id falls through harmlessly.
+   - *Design consequence `[AI]` (to confirm with the owner when new traits are picked):* keep our traits OUT of the game's list — our own
+     per-slot file written in the same moment as the game's save (postfix on the `SaveFile` build at `:491`), loaded after line 318; plus a
+     prefix on `InitializePlayerTalents` that drops ids it cannot resolve (insurance for a save that already holds one). The save stays
+     loadable with the mod removed. Pitfall: a new file next to `saveFile-0` — `tools/save-check.sh` compares 7 named files; teach it the
+     new name before the first run.
 2. **Counters.** Each idea below needs a counter. `ProgressManager.Record*` (31 methods: kills, crafts, fish, plants, hours slept,
    gold gambled, stolen items, corpses looted, weapons used, gods' favors…) is the natural place to patch; our counters go into our own
    save file.

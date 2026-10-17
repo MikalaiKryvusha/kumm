@@ -109,8 +109,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    придумывать новое (EXP-0299). Образец промпта — `SvarogsDream/НА ОТСМОТР НИКОЛАЕМ/19 Нарисовать в ChatGPT/Лист 13.txt`; лист 14 (неудачный) —
 >    там же. Нарезка — `python -I SvarogsDream/tools/icon_sheet_cut.py <лист> <папка> <имена…>` (ряды любые, ищет щели). Отладочный Chrome 9223:
 >    запуск — `HOUSE_RULES.md` §6, строка `gpt_edit.sh`; аккаунт «Krinik» Free сегодня нарисовал 9 картинок (лимит ~8–10).
->    (2) **Новые черты в мод** — ждут отбора владельца из `ideas/19` и `ideas/20`; до него — разведка: держит ли сейв свою черту вне
->    перечисления `PlayerTalentId` (`researches/svarog-hero-traits-recon`, открытый вопрос).
+>    (2) **Новые черты в мод** — ждут отбора владельца из `ideas/19` и `ideas/20`; разведка сделана 2026-10-17: сейв пишет и читает чужой номер
+>    черты, но загрузка падает без нашей записи в `availablePlayerTalents` — свои черты держать в своём файле рядом с сейвом
+>    (`researches/svarog-hero-traits-recon` §5, вопрос 1).
 >    (3) **Волосы 3D-героев в цвет портрета** — разведка готова (`researches/svarogs-dream/hero-hair-recolor.md`: `DawnShader/HairShader`,
 >    `_RootColor`/`_TipColor`, постфикс на `HumanModelSelector.SetCharacterHair`); делать — по слову владельца.
 >    (4) **План 29 «интерфейс по сетке»** — клетки инвентаря (`[OWNER]` «в инфентарях клеточки предметов абы как расставлены»), обход окон.

@@ -168,6 +168,10 @@
 - **Переброс** — 3 Божьих Милости (`RerollCharacters`); строка цены — `SetRerollsUI` после трёх `PopulateCharacters`.
 - **Выбор** (`FinishCharacterInitialization`): черты карточки (`selectableCharacter.storyCharacter` — копия) → `talentsManager.InitializePlayerTalents`;
   характеристики — в `playerStats`. После загрузки сейва (`isItAfterSelection: false`) метод выходит до черт — черты живут в сейве, не в герое.
+- **Черты в сейве** (декомпиляция 2026-10-17): `SaveFile.cs:491` пишет `playerTalentIds` (ключи `aquiredPlayerTalents`) через `BinaryFormatter`
+  (`SaveGameBinarySerializer`, `Assembly-CSharp-firstpass`) — номер вне `PlayerTalentId` пишется и читается. Загрузка (`LoadSaveGameManager.cs:318`
+  → `TalentsManager.AddPlayerTalent:626–631`) ищет черту в `availablePlayerTalents`; нет её там — NullReference, загрузка обрывается (try нет),
+  альманах и прогресс не встают. Свои черты — в своём файле рядом с сейвом, не в списке игры (`researches/svarog-hero-traits-recon` §5).
 - **Сколько черт может быть у героя** (декомпиляция `TalentsManager`, `CharacterSelectionUI`, `StoryCharacter`, 2026-10-17): у игрока черты — словарь
   `aquiredPlayerTalents` без предела (`AddPlayerTalent`; при 15 и больше игра пишет статистику Steam `stat68`), `InitializePlayerTalents` принимает
   список любой длины. Ровно три — только у героя-карточки: поля `StoryCharacter.playerTalent1..3`, список при выборе собирается из них тремя `Add`,
