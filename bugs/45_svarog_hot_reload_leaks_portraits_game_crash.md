@@ -30,6 +30,14 @@ TWINS: searched `new Texture2D|Sprite.Create|new RenderTexture` in `src/KrinikUI
 ## Verification (pending)
 Several hot reloads in a row; process memory before/after must not grow by the portrait set each time.
 
+2026-10-17 08:00–08:02 (case M1, `testcases/TC_svarog_rescan_icon_hotmem_2026-10-17.md`): private memory 19 408 → 19 579 MB after reload 1
+(+171) → 19 588 MB after reload 2 (+9); 62 portraits colored after each; 0 exceptions. Reload 2 adds almost nothing, so the per-reload
+portrait leak (up to 260 MB decoded) is not seen; reload 1's +171 MB is still unexplained (one-off cost vs leak) — a third reload in a
+separate session decides. TWINS: searched `new Texture2D|Sprite.Create|new RenderTexture|new Material(` in `src/KrinikUIRework` — 15
+files create small textures/sprites/materials once per load (BubbleBox, CombatText, HeroCard, HudRow, ItemWindow, MenuFonts, MiniMapArrow,
+MiniMapLight, SunMirror, DevotionCards, Dialogue, Popups, LoadingLayout); not destroyed on unload — each a few KB to a few hundred KB per
+reload, not the crash-sized class.
+
 ## Decisions made without the owner
 `[AI]` Relaunched the game myself right after the crash from his last save (memory: the agent runs the game itself).
 

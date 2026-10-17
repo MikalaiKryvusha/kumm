@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0290 · 2026-10-17 · ❌→✅ · #svarogsdream #harness #walk #measurement #control
+class: probe-point-unchecked
+**Lesson:** замер «бег на запад» дал 1,19 мс вместо прежних 17,9 — похоже на победу, но центр подгрузки в журнале не сдвинулся: герой
+не бежал. Игра сажает стоящего без ввода героя отдыхать через 120 с (`PlayerController.HandleResting`, скорость агента 0), встаёт он только от
+ввода, а `walk` пульта таймер не сбрасывал. Правило: замер на ходу засчитывается, только если журнал показал движение (смена `stream=r2 at`
+или `walk` до цели), — число без доказательства, что сценарий шёл, не число. Второе того же часа: контрольный кейс (правка выключена) дефект
+не повторил — и ночная сборка тоже; починку R1 правке не приписывать.
+**Repro:** `h.sh "fieldon Player PlayerController isPlayerResting"` → `True` у стоящего героя.
+mechanized: `walk` пульта сам сбрасывает `PlayerController.timerForRest` (SvarogsDream `3eac3ed`)
+
 ### EXP-0289 · 2026-10-17 · ❌→✅ · #svarogsdream #perf #measurement #route
 class: measurement-route-too-narrow
 **Lesson:** весь вечер бюджет «на бегу» мерил одним маршрутом — из Града 400 м на восток — и худший кадр был 1,1–2,5 мс. Первый же бег
