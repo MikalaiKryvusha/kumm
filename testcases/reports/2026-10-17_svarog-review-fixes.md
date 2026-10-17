@@ -26,6 +26,8 @@ REAL WORLD: накоплено — сейв владельца дня 11; дан
 | 3 | 2026-10-17 04:07 +03:00 | `h.sh "call KrinikCameraRework.Plugin CamOrbit -608.5,130.1,-215.5 0 55 30" … "global _KrinikGrassTopDown 0|1" "shot a3_…"`, то же на 89,5°; `python _harness/a3_diff.py …` | 0 · A3 |
 | 4 | 2026-10-17 04:09 +03:00 | `h.sh "teleport innBaraLocation" … "CamOrbit 172,92,-741 123|171 12 90" "shot a2_…" "WaterReport" "cfg krinik.svarogsdream.colorrework Water ProbeReflections true" … "WaterReport" ×2 … false` | 0 · A1, A2 |
 | 5 | 2026-10-17 04:10 +03:00 | `h.sh "static KrinikUIRework.Plugin _combatCount"`, затем `h.sh kill`, `save-check.sh --restore`, `reg-snap.sh restore` | 0 · A4 |
+| 7 | 2026-10-17 04:20 +03:00 | `bash tools/deploy-cold.sh KrinikUIRework` (секундомеры первого кадра полосы), `run-game.sh`, тот же бег на восток с `modcost`, затем `h.sh "modcost 40 14 bg" "walk 270 400" "wait 41" "modcostwait"` | 0 · A6; на западе кадр 18,6 мс — `PatchStreaming.EnableSquare` 17,93 мс (`_harness/logs/2026-10-17_0422_modcost-walk-west-enablesquare.txt`) |
+| 8 | 2026-10-17 04:25 +03:00 | `bash tools/deploy-cold.sh KrinikCameraRework` (очередь участков), `run-game.sh`, `h.sh "teleport innGradLocation" "wait 45" "walk 90 400" "wait 41" "modcost 40 14 bg" "walk 270 400" "wait 41" "modcostwait"`, журнал, `h.sh kill`, сейв 7/7 | 0 · A7 |
 | 6 | 2026-10-17 04:15 +03:00 | `bash tools/deploy-cold.sh KrinikCameraRework`, `bash tools/run-game.sh`, `h.sh "teleport innGradLocation" "wait 45" "modcost 40 14 bg" "walk 90 400" "wait 41" "modcostwait"`, журнал `grass scan`, `h.sh kill`, сверка сейва 7/7 | 0 · A5 |
 
 ## 4. Checks
@@ -41,6 +43,8 @@ Functional run: в игре владельца — кадры травы под 
 | A3 | pass | 55°: 0↔1 18,12 при шуме ветра 17,06; 89,5°: 12,29 при шуме 6,18; сверху трава зелёная и объёмная |
 | A4 | partial | `_combatCount` 10 — прогрев видел непустой список; бой не наблюдался |
 | A5 | pass | мод камеры (`94ef9a9f`) не списывает перебор дважды: трава новых участков находится (`new 13`), худший кадр всех модов на бегу 1,835 мс |
+| A6 | pass | первый кадр полосы моба 1,02 мс: затухание 0,35, цифра уровня 0,67 |
+| A7 | partial | квадрат подгрузки — по участку за кадр (6 за 7 кадров); худший кадр на западе 18,6 → 9,84 мс; один участок игры сам стоит 9,35 мс |
 
 ## 5. Found
 
@@ -53,6 +57,9 @@ Functional run: в игре владельца — кадры травы под 
   дважды — откладывает работу на кадр) — починен, A5.
 - На бегу (прогон 6) худший кадр всех модов дал `KrinikMobBarSize.LateUpdate` — 1,221 мс в одном кадре (средний по нему мал): новый пик,
   в план 26.
+- **Главная находка ночи:** мод камеры (`PatchStreaming.EnableSquare`, квадрат подгрузки шире игры, `DrawDistance.StreamRadius` 2) включал
+  недостающие участки все в одном кадре — на бегу из Града на запад 17,93 мс. После очереди — по участку за кадр, но один участок стоит до
+  9,35 мс сам (включение участка игрой: террейн и содержимое). Дальше — план 26: что именно дорого внутри включения участка.
 - Новый шаг h.sh (PNG → WebP) сравнивал с `cmd.txt`, который пульт удаляет, — `find: … cmd.txt: No such file`; отметка `.sent` вместо него.
 
 ## 6. Traces
@@ -63,4 +70,5 @@ Functional run: в игре владельца — кадры травы под 
 
 ## 7. Verdict
 
-partial — A1–A3, A5 pass (вода в обоих режимах, трава сверху и под 55°, бюджет мода камеры), A4 partial: размер боевых надписей в бою не наблюдался.
+partial — A1–A3, A5, A6 pass (вода в обоих режимах, трава сверху и под 55°, бюджет мода камеры, разбивка первого кадра полосы моба);
+A4 partial (бой не наблюдался); A7 partial — подгрузка квадрата растянута по кадрам, худший кадр 18,6 → 9,84 мс, бюджет 1 мс не достигнут.
