@@ -25,6 +25,16 @@
   есть разделы «Fog» и «Underwater Fog» ([документация Lux Water 1.2.3](https://docs.google.com/document/d/1NDtUpVBgd3UYEI8LRNI4teFF3qm38h-u3Az-ozaaOX0/mobilebasic),
   [Asset Store](https://assetstore.unity.com/packages/vfx/shaders/119244)).
 
+## Раздел «Fog» документации Lux Water (прочитан 2026-10-18)
+
+- «Since version 1.02 Lux Water uses custom fog in order to be able to mask it out on underwater surfaces» — туман вода считает сама, своим кодом;
+  режим (`FOG_LINEAR` / `FOG_EXP` / `FOG_EXP2`, по умолчанию EXP2) и туманы Azure, Enviro, Aura 2 выбираются ДЕФАЙНАМИ в
+  `LuxWater_Setup.cginc` при сборке шейдера, а не выключателем материала. Ключевых слов шейдера и выключателей у материала для тумана нет.
+- При отложенном рендере туман — эффект по экрану; пакет кладёт свои шейдеры тумана для PostProcessing v1 и v2 (папка `_FogShaders`) с маской воды.
+- Вывод: путь «включить выключатель у материала» отпадает. Вода игры либо собрана без тумана, либо её туман читает параметры, которые наша
+  дымка не задаёт (EXP2 от `unity_FogParams` при нашем другом режиме или цвете) — проверить в игре: `RenderSettings.fogMode`, `fogDensity`,
+  цвет — пультом `static UnityEngine.RenderSettings …` (свойства — через `call UnityEngine.RenderSettings get_fogMode`).
+
 ## Развилка (для решения после следующего шага)
 
 FORK: А — включить туман у материалов воды по разделу «Fog» Lux Water (если там ключевое слово тумана Unity — дымка ляжет нашим цветом сама) ·
