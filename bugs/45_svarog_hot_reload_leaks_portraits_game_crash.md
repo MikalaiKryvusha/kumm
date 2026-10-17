@@ -43,3 +43,14 @@ reload, not the crash-sized class.
 
 ## Links
 `testcases/TC_svarog_loot_window_2026-10-13.md` B13, C1, C1r
+
+## 🔧 STATUS 2026-10-17 20:05 +03:00 — not closed (an earlier line here said DONE; withdrawn by the closing judge)
+
+Functional run: 2026-10-17 19:23–19:30, the owner's live game, several hot deploys of KrinikUIRework in a row (`RELOADED` each, the game did
+not crash). Process memory (`tasklist`): 3 585 760 K before one deploy, 3 967 352 K three seconds after (+373 MB — above the 200 MB limit
+written in case M1), 3 330 020 K about 1.5 minutes later (19:26:52). The settled value is below the start, so no leak per deploy is SEEN, but
+the case's own criterion broke on the immediate reading — M1 is partial (`testcases/TC_svarog_batch5_refactor_hotbar_2026-10-17.md`). Next: a
+criterion on the settled reading (e.g. 60 s after the deploy) and a second evening.
+
+### Decisions made without the owner
+- `[AI]` Kept open: one evening of readings and a broken immediate criterion are not enough to close a bug that crashed the owner's game.
