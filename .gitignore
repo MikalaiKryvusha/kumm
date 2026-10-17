@@ -40,5 +40,6 @@ researches/unity-cli/skill/
 games/GTASanAndreas/*/out/
 testcases/.gate-stamp.json
 tools/hooks/.russian-read.stamp
+tools/hooks/.knowledge-hook.json
 .kaif/.contour-tmp/
 interviews/decisions/*.lock
