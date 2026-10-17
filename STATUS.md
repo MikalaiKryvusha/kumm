@@ -107,8 +107,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    п. 6 (файл ссылок один на все сейвы и героев), п. 8 (число под значком ссылки), п. 12–16; кейсы J4 (дорожная сумка), J5 (полная сумка), G1
 >    (щель — не воспроизведена). Кейсы — `testcases/TC_svarog_batch5_refactor_hotbar_2026-10-17.md`. (2) **Поп-апы к одной норме** —
 >    `plans/30_svarog_popups_one_style.md`: P2 (бафф, сфера здоровья — кадр), подписи кнопок HUD (Arial, без каймы), атрибут и рецепт. (3) **Свет над
->    героем** — KrinikColorRework `86ef1fa` уже в `plugins`; кейсы `testcases/TC_svarog_hero_light_fade_2026-10-17.md` C1–C6 не прогнаны (час —
->    `call WorldTime IncreaseTimeByOneHour`, доля — `static KrinikColorRework.HeroLightFade Level`). (4) **Интервью #020** (цвет полосы окон
+>    героем — ✅ принят владельцем 2026-10-18** (`[OWNER]` «всё окей, нравится»): вечер 20–21, утро 6–7 по его слову по ходу прогона, SvarogsDream
+>    `41b45fe`; отчёт `testcases/reports/2026-10-18_svarog-hero-light-fade.md`; час и доля — пульт `static KrinikColorRework.HeroLightFade Hour` /
+>    `Level`. Не прогнан R3 (факел, подземелье). (4) **Интервью #020** (цвет полосы окон
 >    ремёсел) — показано в чате 18:52, ответа нет.
 >
 > 000. **НАЧАТЬ С ЭТОГО — по слову владельца 2026-10-17 16:39:** `[OWNER]` «фиксируй находки, в новом чате будем делать». Что делать:
@@ -134,10 +135,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    `researches/svarog-loading-tips-smart-random/README.md`; код — `KrinikUIRework/TipsBag.cs` (собран, в игре — 2 выбора при загрузке; кейсы
 >    `testcases/TC_svarog_smart_tips_2026-10-17.md`: вызов пультом `call LoadingScreen ShowRandomTip` не находит экран — проверять настоящими загрузками).
 >    (7) **Долги владельца вечера 2026-10-17, по порядку:** (а) провал кадров после загрузки — `[OWNER]` «после загрузки очень низкий фпс был» ·
->    «12»; не воспроизведён, кейсы `testcases/TC_svarog_fps_after_load_2026-10-17.md` (PresentMon с запуска); (б) свет над героем — `[OWNER]`
->    «стемнело в 21, а свет над головой загорелся в 23 - плохо» · «нужно чтобы свет над головой начинал загораться медленно с 21 до 22» ·
->    «плавно» · «так же плавно гаснет - да» · «время уточню позже»: игра включает его выключателем `HelpingLightEnabler.Update` (час > 22 или < 6),
->    правка — префикс с плавной силой света; (в) HUD — ряд кнопок с «Меню» справа, подписи над кнопками, щель черт — собраны (`c90eb62` и следом),
+>    «12»; не воспроизведён, кейсы `testcases/TC_svarog_fps_after_load_2026-10-17.md` (PresentMon с запуска); (б) свет над героем — закрыт 2026-10-18, п. 0000 (3); (в) HUD — ряд кнопок с «Меню» справа, подписи над кнопками, щель черт — собраны (`c90eb62` и следом),
 >    в игре не смотрены; кейсы `testcases/TC_svarog_hud_row_traits_gap_2026-10-17.md`. Суд вечера — `reports/judge/2026-10-17_svarog-mods-evening.md`.
 >    **Машина общая с KAGO:** игра и нагрузка — только под замком `node D:/work/ai_sandbox/_tools/machine-lock.mjs` (`run-game.sh` берёт сам,
 >    `h.sh "kill"` снимает); замок — только на время работы (`HOUSE_RULES.md` §5, «Раздел машины с KAGO»).
