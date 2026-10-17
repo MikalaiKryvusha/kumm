@@ -2,7 +2,10 @@
 
 > **Created:** 2026-10-14 · брошено владельцем в чате (разбор бага 46)
 > **Parent:** `bugs/46_DONE_svarog_drag_between_bag_and_action_bar.md`
-> **Status:** ❓ записано дословно, ждёт разведки и «да» владельца
+> **Status:** 🔧 2026-10-17 — шаг 1 сделан и проверен в игре мышью: еда и зелья перетаскиваются между сумкой и их ячейками панели (Q, E),
+> чужая вещь над панелью остаётся в сумке (`SvarogsDream/src/KrinikUIRework/HotbarDrag.cs`, коммит `8009d92`; отчёт
+> `testcases/reports/2026-10-17_svarog-hotbar-drag-batch5.md`); вторая разведка в сети — `researches/svarogs-dream/hotbar-inside-inventory.md`;
+> луки и другие вещи на панели — ждут ответа на интервью #021
 > **Outbound:** —
 
 ## Слово владельца (дословно, 2026-10-14, чат)
