@@ -94,8 +94,9 @@
 ### EXP-0316 · 2026-10-18 · ❌ · #svarogsdream #game-map #decompile
 class: map-not-read-before-probe
 **Lesson:** ошибку автора с бронёй качества 8 я заново разбирал по декомпиляции и кузнице, а она уже стояла в карте игры с 2026-10-14
-(`games/SvarogsDream/GAME_ARCHITECTURE_INTERNAL_MAP.md`, раздел 3.1, вместе с выводом «улучшение 8→9 отнимает +100»). Перед grep по коду игры —
-`grep -n "<слово>" games/SvarogsDream/GAME_*_MAP.md`.
+(`games/SvarogsDream/GAME_ARCHITECTURE_INTERNAL_MAP.md`, раздел 3.1, вместе с выводом «улучшение 8→9 отнимает +100»), а сама правка — в моде
+(`KrinikFixes/AuthorBugs.cs`, правка 1, проверена 2026-10-14); я успел записать в беклог «правка — следующая сессия» и сам же поправил. Перед grep по коду игры —
+`grep -n "<слово>" games/SvarogsDream/GAME_*_MAP.md` и `grep -rn "<метод>" SvarogsDream/src`.
 **Repro:** беклог `plans/18`, строка о броне качества 8, 2026-10-18 06:37. mechanized: none — правило AGENT_GUIDE «Every game we mod has two maps», шаг 2
 
 ### EXP-0315 · 2026-10-18 · ❌→✅ · #kaif #testrun-lint #report
