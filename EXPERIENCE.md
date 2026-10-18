@@ -67,7 +67,7 @@
      repaint-after-build, rule-half-applied, rule-overapplied, shader-owns-its-own-formula, shared-state-two-owners,
      stale-stand, stand-differs-from-owner-world, text-color-blind-to-background, translator-delay, wrong-api-assumption,
      wrong-model-of-the-frame, wrong-proxy, scope-wider-than-ask, eyeballed-number, visual-proxy-for-mechanic,
-     scripted-edit-anchor-unchecked -->
+     scripted-edit-anchor-unchecked, cheat-left-on-in-owner-game, test-toggle-left-changed, repro-condition-not-established -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -90,6 +90,29 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0312 · 2026-10-18 · ❌ · #svarogsdream #bug54 #repro #hypothesis
+class: repro-condition-not-established
+**Lesson:** баг 54 («красная панель при первой смене наборов») я «не воспроизвёл в трёх вариантах» — а условие моей же гипотезы (тот же навык в
+обоих наборах) не выполнялось ни в одном: второй набор сейва был пуст; суд поймал это по кадрам. «Не воспроизвелось» говорится только после
+вариантов, в которых условие гипотезы БЫЛО создано и видно на кадре; иначе это «не проверено».
+**Repro:** кадры `_harness/demo21/clips/b54ctl_row.webp`, `b54v2_row.webp` — ячейки второго набора пусты. Пульт `slotspell <ячейка>` +
+`call SpellsActionManager AssignSpell <ячейка> <навык>` создают условие. mechanized: none — суждение
+**Trigger:** пишу «not reproduced» → назвать в кейсе, какое условие гипотезы создано и где оно видно.
+
+### EXP-0311 · 2026-10-18 · ❌→✅ · #svarogsdream #harness #config #test-cleanup
+class: test-toggle-left-changed
+**Lesson:** контроль B54-1 выключил настройку `Hud/StaleCooldownFix`, уборка прогона её не вернула — правка бага у владельца осталась
+выключенной до суда. Тест, который трогает настройки, оставляет мир не таким, каким взял, и глазом этого не видно.
+**Repro:** `run-game.sh` кладёт снимок `_harness/cfg_snap`, `h.sh "kill"` печатает `CFG CHANGED IN RUN: …` (доказано красным на подложенном
+снимке 2026-10-18 03:25). mechanized: `SvarogsDream/tools/cfg_run_diff.py` (зовёт `h.sh` на kill)
+
+### EXP-0310 · 2026-10-18 · ❌→✅ · #svarogsdream #harness #cheat #owner-game
+class: cheat-left-on-in-owner-game
+**Lesson:** второй случай класса EXP-0307: бессмертие пульта жило между пачками команд дважды за ночь (02:56–03:02, 03:13–03:22), хотя
+владелец решил «включаю и выключаю одним пакетом» (интервью #022, Q6). Текстом правило не удержалось — нужен отказ инструмента.
+**Repro:** `bash SvarogsDream/tools/h.sh "static WorldState isGodMode True" "wait 1"` → `REFUSED …`, код 3 (2026-10-18 03:25).
+mechanized: `SvarogsDream/tools/h.sh` — пачка с последней записью `isGodMode True` отказывается
 
 ### EXP-0309 · 2026-10-18 · ❌ · #tooling #claim-gate #false-positive #timezone
 class: claim-gate-reads-offset-as-time

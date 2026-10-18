@@ -1,6 +1,6 @@
 # Bug 54 — ячейки второго набора красные после первой смены оружия
 
-**Status:** 🔧 fix by code in place; not reproduced by the agent (2026-10-18 02:52–02:54, three variants on video — `testcases/reports/2026-10-18_svarog-night-batch1.md`, B54-1); the owner's path is asked in interview #024, Q1
+**Status:** 🔧 fix by code in place; NOT TESTED yet: the three variants on video 2026-10-18 02:52–02:54 never created the hypothesis condition (the second set of that save is empty — judge, item 2), so they prove nothing either way; next run puts the same skill into both sets (`slotspell`, `AssignSpell`); the owner's path is asked in interview #024, Q1
 **Severity:** S2 (видимый брак интерфейса; навык второго набора, похоже, не применить до следующей смены)
 **Version/build:** KrinikUIRework после SvarogsDream `8888d8b` + правка `PatchStaleCooldown` · **When/context:** 2026-10-18 ≈02:28, владелец в
 запуске агента пробовал новую кнопку смены наборов (план 31, пункт 2)
@@ -52,3 +52,15 @@ TWINS: searched `StartCooldown(` в декомпиляции и модах — 2
 ## Links
 
 План 31, пункт 2 (кнопка наборов) · `GAME_ARCHITECTURE_INTERNAL_MAP.md` — строка «Панель быстрых действий» (перезарядка).
+
+## Judge 2026-10-18 (scratchpad judge1) — gaps in the story
+
+- `UISlotCooldown.Start()` runs after `OnEnable` on the FIRST activation of a slot that was inactive since load and resets background, fill
+  and text — so on the very first show the red may be wiped while `m_IsOnCooldown` stays true, which silently blocks casting
+  (`SpellActivator.cs:446` checks `IsOnCooldown`). Our postfix runs inside `OnEnable` (before `Start`) and clears the flag, so it covers this too
+  — not observed yet.
+- The story explains only slots that hold the same skill as a used main-set slot, not "the whole panel" turning red. Unexplained.
+- The control toggle `Hud/StaleCooldownFix` was left `false` after the control run and turned back on at 03:18; a guard now names such leftovers
+  (`SvarogsDream/tools/cfg_run_diff.py`, called by `h.sh` on kill).
+- Next run (batch 3): `slotspell 0` → `call SpellsActionManager AssignSpell 12 <id>` (same skill in the second set) → cast in the main set → wait
+  out the cooldown → swap; once with the fix off, once on; video.
