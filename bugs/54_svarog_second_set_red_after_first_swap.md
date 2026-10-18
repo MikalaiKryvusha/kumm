@@ -4,7 +4,7 @@
 **Severity:** S2 (видимый брак интерфейса; навык второго набора, похоже, не применить до следующей смены)
 **Version/build:** KrinikUIRework после SvarogsDream `8888d8b` + правка `PatchStaleCooldown` · **When/context:** 2026-10-18 ≈02:28, владелец в
 запуске агента пробовал новую кнопку смены наборов (план 31, пункт 2)
-**Fixing:** this session
+**Fixing:** this session · **Closing:** `[OWNER]` «1 А» · 2026-10-18 ≈09:08 (interview #024, Q1: the owner does not remember the path) — the fix stays; DONE on 2026-10-25 if the owner reports no red over a week of play; red again → repeat his path on video
 
 ## Symptom
 

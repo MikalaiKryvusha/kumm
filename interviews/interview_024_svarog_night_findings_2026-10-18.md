@@ -3,7 +3,7 @@
 > Topic: вопросы, накопленные за ночную работу (по вашему ответу Q7 интервью #022 — «вопросы копятся в одном интервью»)
 > Source of the idea: ночная работа по плану 31; ваши слова в моём запуске 02:28–02:41 (цитаты — в плане 31, пункты 13–17)
 > Created: 2026-10-18 03:05 +03:00
-> Status: **🟡 Q1–Q4 answered 2026-10-18 ≈09:08, applying; Q5 awaiting the owner's answer; Q2 — open debt until the owner shows the place**
+> Status: **🟡 Q1–Q5 answered 2026-10-18 ≈09:08–09:09, applying; Q2 — open debt until the owner shows the place**
 
 ## Context / what I already found in the code
 
@@ -116,7 +116,7 @@
   - Result. Строки висят прямо над миром, бумаги нет; текст читается за счёт контура.
 - **C) your own answer**
 
-**Answer:**
+**Answer:** `[OWNER]` «5 покажи» → кадр 5 открыт в просмотрщике → «5 вроде норм» · 2026-10-18 ≈09:09 (= вариант A)
 
 ## Proposed implementation plan (after answers)
 
