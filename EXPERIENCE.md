@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0318 · 2026-10-18 · ❌→✅ · #svarogsdream #hdr #gpu #driver #tools
+class: display-mode-switch-under-running-game
+**Lesson:** HDR рабочего стола включается обратно только после закрытия игры. 2026-10-18 13:16:57 `hdr.ps1 on` сразу после клипа при открытой
+полноэкранной игре (D3D11, 4K@144) — через секунду рывки 142 и 105 мс и падение в драйвере NVIDIA: `nvwgf2umx.dll` 617.42, `0xc0000005`, сброса
+драйвера (TDR) нет; карта на заводских настройках (KAGO подтвердил — андервольт не причастен). Одно наблюдение, но обход дешёвый: правило прогона
+и раньше ставило `hdr.ps1 on` после `h.sh kill`, я нарушил порядок.
+**Repro:** заход 2 плана 31 п. 16в — `rec_clip.sh v1_strip 8 …` → `hdr.ps1 on` при открытой игре → `Crash_2026-10-18_101657144`. mechanized:
+`SvarogsDream/tools/hdr.ps1` — `on` при запущенной игре отказывает (код 2), `-Force` — обход.
+
 ### EXP-0317 · 2026-10-18 · ❌→✅ · #svarogsdream #translation #tools #marker
 class: comment-wrap-broke-script
 **Lesson:** длинная метка `[TESTED: …]` в комментарии Python перенеслась на новую строку без `#` (`SvarogsDream/tools/dialogue_xunity.py:349`, коммит
