@@ -77,6 +77,7 @@ krinik_portraits/ · krinik_cfxr_cyr.png/.txt · krinik_skill_up.wav ← наш�
 | `bash tools/save-check.sh --restore` · `bash tools/reg-snap.sh restore` | откат сейва и реестра после прогона |
 | `bash tools/colour_scene.sh old\|new` | сцена для листа «было → стало» цветов |
 | `python -I tools/data_census.py <игра> <out>` | перепись строк данных игры против словарей. `translation/untranslated.txt` — старая перепись (2026-10-04): строки оттуда давно могут быть в `_config/xunity/zz_*.txt` («Fast travel unlocked: …» — в `zz_code.txt`); вопрос «переведено ли» — grep по `zz_*.txt`, не по ней |
+| правила `r:` в `_config/xunity/zz_*.txt` | число в правиле — буквой шаблона `[{][{][A-Z][}][}]`: XUnity сверяет со строкой, где числа уже `{{A}}`; наш мгновенный перевод (`InstantTranslate.cs`) подставляет туда «любое число» (2026-10-18, баги 56–57). Точные ключи «Scaling» перечисляют сочетания атрибутов — нового сочетания в них нет |
 | `node tools/digit_center.mjs <кадр> <x> <y>` | где цифра перезарядки стоит в ячейке: центр красных цифр против центра чёрной коробки, точка — внутри коробки левее цифр; печатает dy и долю коробки (2026-10-18, интервью #024 Q3: до правки −4,6…−7,7 %) |
 | `python tools/to_webp.py <файлы>` | картинки в WebP |
 | `powershell -File tools/hdr.ps1 on\|off` | HDR телевизора |
