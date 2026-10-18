@@ -67,7 +67,7 @@
      repaint-after-build, rule-half-applied, rule-overapplied, shader-owns-its-own-formula, shared-state-two-owners,
      stale-stand, stand-differs-from-owner-world, text-color-blind-to-background, translator-delay, wrong-api-assumption,
      wrong-model-of-the-frame, wrong-proxy, scope-wider-than-ask, eyeballed-number, visual-proxy-for-mechanic,
-     scripted-edit-anchor-unchecked, cheat-left-on-in-owner-game, test-toggle-left-changed, repro-condition-not-established, environment-assumed-not-probed, known-trap-walked-again -->
+     scripted-edit-anchor-unchecked, cheat-left-on-in-owner-game, test-toggle-left-changed, repro-condition-not-established, environment-assumed-not-probed, known-trap-walked-again, tool-format-assumed -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -90,6 +90,12 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0315 · 2026-10-18 · ❌→✅ · #kaif #testrun-lint #report
+class: tool-format-assumed
+**Lesson:** при вердикте `pass` линтер отчётов ищет строку, которая начинается с `Functional run:` (или `Функциональный прогон:`), — с маркером
+списка «- Functional run:» он её не видит и краснеет `pass-without-functional-run`; при `partial` правило молчит, поэтому прошлые отчёты проходили.
+**Repro:** `testcases/reports/2026-10-18_svarog-night-batch7.md`, первая проверка 06:22. mechanized: `node .kaif/tools/kaif-testrun-lint.mjs check` (он и поймал)
 
 ### EXP-0314 · 2026-10-18 · ❌ · #svarogsdream #harness #night #screen-lock #video
 class: environment-assumed-not-probed
