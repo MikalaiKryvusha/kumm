@@ -43,7 +43,7 @@ Context of the same night (#159): «ты и не должен был [откры
 ## Field evidence
 
 - KUMM, 2026-10-18 night (#159): hours of work on one game subsystem, no line in its map; a question to the owner that the maps would have prevented.
-- The recon the owner ordered (item 12): `researches/agent-memory-hook-psychology/README.md` in KUMM — the brain writes memory on PREDICTION ERROR
+- The recon the owner ordered (item 12 of "The owner's words", line 33 — verbatim there): `researches/agent-memory-hook-psychology/README.md` in KUMM — the brain writes memory on PREDICTION ERROR
   (hippocampal novelty signal → dopamine → potentiation; Lisman & Grace 2005); a small error on a REACTIVATED memory updates it (reconsolidation),
   a large one forms a NEW memory; salience (emotion) strengthens the write; event boundaries consolidate the episode (Zacks); repetition of the same
   stimulus habituates. Neural networks: Titans (Google, 2025) write long-term memory in proportion to "surprise" (gradient of the memory's error),

@@ -96,7 +96,8 @@ class: comment-wrap-broke-script
 **Lesson:** длинная метка `[TESTED: …]` в комментарии Python перенеслась на новую строку без `#` (`SvarogsDream/tools/dialogue_xunity.py:349`, коммит
 `86aff0b` 2026-10-17) — `translation_deploy.sh` падал с `SyntaxError`, и выкладка перевода стояла сломанной до утра 18.10. После правки комментария
 в скрипте — `python -m py_compile <файл>` тем же ходом.
-**Repro:** выкладка 2026-10-18 07:06 (строки «Soul Level Up!»). mechanized: none — предложение: `py_compile` всех `tools/*.py` в начале `translation_deploy.sh`
+**Repro:** выкладка 2026-10-18 07:06 (строки «Soul Level Up!»). mechanized: `SvarogsDream/tools/translation_deploy.sh` — `py_compile` всех `tools/*.py` до первой записи (2026-10-18 07:15, отчёт
+`testcases/reports/2026-10-18_svarog-translation-deploy-precheck.md`)
 
 ### EXP-0316 · 2026-10-18 · ❌ · #svarogsdream #game-map #decompile
 class: map-not-read-before-probe
