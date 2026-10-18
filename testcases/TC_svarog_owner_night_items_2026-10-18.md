@@ -19,7 +19,7 @@
 | Q1 | пиво по ссылке на ячейке → перезарядка на ячейке с пивом, пустая Q без красной рамки | partition | blocked 2026-10-18 01:26 · запуск с копии 01:14 — снова экран гибели (бессмертие не успело до входа в мир), откачено; прогнать на другой точке сейва |
 
 | P8 | суд п. 8: ссылка на яблоко (в сумках 3) на Q → под значком «3»; съесть по ссылке → «2» | boundary | [NOT-TESTED] |
-| P6 | суд п. 6: журнал `hotbar items: hero 'Тамара', N links from krinik_hotbar_items_Тамара.txt`; при первом запуске после правки — `from krinik_hotbar_items.txt` (старый общий) | state transition | [NOT-TESTED] |
+| P6 | суд п. 6: журнал `hotbar items: hero 'Тамара', N links from krinik_hotbar_items_Тамара.txt`; при первом запуске после правки — `from krinik_hotbar_items.txt` (старый общий) | state transition | partial 2026-10-18 · половина «первый запуск после правки» — журналы пачек 5–7 (`_harness/log_batch6.log`): `hotbar items: hero 'Tamara', 4 links from krinik_hotbar_items.txt` — общий файл читается с именем героини; файл героини `krinik_hotbar_items_Tamara.txt` в эти запуски не возникал (сейвы откатывались к точке) — его половина не проверена |
 | P12 | суд п. 12: выбросить вещь со ссылкой → ссылка ушла (`item gone from hero`); выгрузить мод горячо посреди проверки и выбросить ещё одну → ссылка тоже ушла (очередь не залипла) | error guessing | [NOT-TESTED] |
 | P13 | суд п. 13: настройка `Hud/HotbarDrag` выключена → на Q и E вид игры, щелчок — родной путь, ссылки не рисуются | state transition | [NOT-TESTED] |
 | P16 | суд п. 16: подсказка еды на Q — без строки особого действия, зелья на E — с ней (как у игры) | partition | [NOT-TESTED] |
