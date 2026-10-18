@@ -73,7 +73,7 @@ krinik_portraits/ · krinik_cfxr_cyr.png/.txt · krinik_skill_up.wav ← наш�
 | `bash tools/h.sh "<команда пульта>"` | пульт внутри игры (KrinikDevHarness); пробел в пути объекта пишется «~» (`UI/ActionBar/ActionBarMain/Action~Bar/…`) — команда режется по пробелам; в строковых аргументах `callon` «~» остаётся «~» |
 | `bash tools/rec_clip.sh <имя> <секунд> "<команда пульта>"…` | клип экрана 4K со звуком и лист кадров; дымовой прогон нового интерфейса — с ним (`HOUSE_RULES.md` §1, слово владельца 2026-10-18); HDR до записи — `hdr.ps1 off` |
 | `bash tools/deploy-hot.sh` | горячая выкладка мода (вердикт — только после перезапуска, EXP-0239) |
-| `bash tools/translation_deploy.sh` | сборка всех `zz_*.txt` + строгая проверка глоссария + копия в игру |
+| `bash tools/translation_deploy.sh` | порядок: синтаксис всех `tools/*.py` (`py_compile`, с 2026-10-18) → сборщики пишут `zz_*.txt` в `_config/xunity/` репозитория → строгая проверка глоссария → советы загрузки в корень игры → проверка дублей ключей → копия `zz_*.txt` в игру. Сбой на середине оставляет игру с прежней целой выкладкой, наполовину пересобранным бывает только `_config` (EXP-0317) |
 | `bash tools/save-check.sh --restore` · `bash tools/reg-snap.sh restore` | откат сейва и реестра после прогона |
 | `bash tools/colour_scene.sh old\|new` | сцена для листа «было → стало» цветов |
 | `python -I tools/data_census.py <игра> <out>` | перепись строк данных игры против словарей |
