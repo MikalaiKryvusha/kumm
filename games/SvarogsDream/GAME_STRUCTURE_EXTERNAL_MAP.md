@@ -70,7 +70,8 @@ krinik_portraits/ · krinik_cfxr_cyr.png/.txt · krinik_skill_up.wav ← наш�
 | Команда | Что |
 |---|---|
 | `bash tools/run-game.sh` · `tools/h.sh kill` | запуск / закрытие своей игры |
-| `bash tools/h.sh "<команда пульта>"` | пульт внутри игры (KrinikDevHarness) |
+| `bash tools/h.sh "<команда пульта>"` | пульт внутри игры (KrinikDevHarness); пробел в пути объекта пишется «~» (`UI/ActionBar/ActionBarMain/Action~Bar/…`) — команда режется по пробелам; в строковых аргументах `callon` «~» остаётся «~» |
+| `bash tools/rec_clip.sh <имя> <секунд> "<команда пульта>"…` | клип экрана 4K со звуком и лист кадров; дымовой прогон нового интерфейса — с ним (`HOUSE_RULES.md` §1, слово владельца 2026-10-18); HDR до записи — `hdr.ps1 off` |
 | `bash tools/deploy-hot.sh` | горячая выкладка мода (вердикт — только после перезапуска, EXP-0239) |
 | `bash tools/translation_deploy.sh` | сборка всех `zz_*.txt` + строгая проверка глоссария + копия в игру |
 | `bash tools/save-check.sh --restore` · `bash tools/reg-snap.sh restore` | откат сейва и реестра после прогона |

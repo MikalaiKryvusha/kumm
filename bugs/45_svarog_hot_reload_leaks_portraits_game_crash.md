@@ -54,3 +54,14 @@ criterion on the settled reading (e.g. 60 s after the deploy) and a second eveni
 
 ### Decisions made without the owner
 - `[AI]` Kept open: one evening of readings and a broken immediate criterion are not enough to close a bug that crashed the owner's game.
+
+## Second symptom 2026-10-18 02:36 +03:00 — letters as boxes in the bag stats after hot deploys
+
+`[OWNER]` «это что за хуета» · 2026-10-18 (his frame: «□□орона», «□апас □доровья», «□анс □лока», «Дро□ящий», «□агия», «Каму□ляж», figures in the
+game's own old-style font). Context: three hot deploys of KrinikUIRework 02:30–02:34 while the bag was open in the owner's hands.
+Observed: after closing and reopening the bag (02:36) the same block reads whole in Manrope (frame `_harness/f1_def.webp`); turning the setting
+`Fonts/Manrope` off and on with the bag open changes nothing (frames `f1b`, `f2`, `f3`) — the player's path does not reproduce it.
+Hypothesis: the unloading copy restores the texts it re-fonted to the font recorded before (`_fontHome`), here the game's font without the Cyrillic
+glyphs; the new copy re-applies Manrope to the bag stats only on the next bag open. Class: hot-reload leftovers (EXP-0306). Fix candidate — the new
+copy re-applies fonts to open windows on its first frame; until then the house rule «no more than two hot deploys in a row» stands, and a clean
+start after them.
