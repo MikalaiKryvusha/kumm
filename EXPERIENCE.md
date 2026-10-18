@@ -67,7 +67,7 @@
      repaint-after-build, rule-half-applied, rule-overapplied, shader-owns-its-own-formula, shared-state-two-owners,
      stale-stand, stand-differs-from-owner-world, text-color-blind-to-background, translator-delay, wrong-api-assumption,
      wrong-model-of-the-frame, wrong-proxy, scope-wider-than-ask, eyeballed-number, visual-proxy-for-mechanic,
-     scripted-edit-anchor-unchecked, cheat-left-on-in-owner-game, test-toggle-left-changed, repro-condition-not-established -->
+     scripted-edit-anchor-unchecked, cheat-left-on-in-owner-game, test-toggle-left-changed, repro-condition-not-established, environment-assumed-not-probed, known-trap-walked-again -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -90,6 +90,23 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0314 · 2026-10-18 · ❌ · #svarogsdream #harness #night #screen-lock #video
+class: environment-assumed-not-probed
+**Lesson:** ночной смоук-тест (подсказка ячейки, рулбук К3 «настоящей мышью», правило видео) упёрся в заблокированный экран: `mouse.ps1`
+отработал без ошибки, а курсор остался в 0,0, `rec_clip.sh` записал 244 байта звука и ни кадра — ещё в пачке 4 «подсказка не открылась»
+(P16m) было тем же, а я списал на наведение. Перед кейсами с мышью и видео — одна проба: `tasklist //FI "IMAGENAME eq LogonUI.exe"`; есть
+процесс — наведение событием пульта `hover`, кадры `shot`, в отчёте «замена».
+**Repro:** прогон 2026-10-18 05:31–05:34: курсор до/после хода (0,0), `LogonUI.exe` в сеансе консоли. mechanized: none — предложение: проба
+`LogonUI.exe` в начале `rec_clip.sh` и `mouse.ps1` с отказом и строкой «экран заблокирован»
+
+### EXP-0313 · 2026-10-18 · ❌→✅ · #svarogsdream #harness #cheat #save
+class: known-trap-walked-again
+**Lesson:** STATUS прямо писал, что точка ночи убивает героиню без бессмертия с первого кадра (EXP-0307), а я запустил игру обычным
+`run-game.sh` — орда убила Тамару за ≈20 с, пока скрипт ждал кадр и сверял лучи; вторая попытка показала ещё одну ловушку: бессмертие,
+выставленное до «Продолжить», загрузка сбрасывает. Предупреждение в тексте не держит — держит ключ запуска.
+**Repro:** кадр `_harness/b5_start.webp` («Тамара убита Ордами Подземного Мира»), пачка `isGodMode False -> False` после телепорта.
+mechanized: `SvarogsDream/tools/run-game.sh` — `SAFE_SPOT="x,y,z"` (бессмертие после `waitfor`, телепорт, снято через 3 с); правило — `HOUSE_RULES.md` §5
 
 ### EXP-0312 · 2026-10-18 · ❌ · #svarogsdream #bug54 #repro #hypothesis
 class: repro-condition-not-established
