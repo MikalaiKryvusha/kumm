@@ -1,24 +1,32 @@
 # Run report — свет над героем: плавный вечер и утро (2026-10-18)
 
-**Work:** кейсы `testcases/TC_svarog_hero_light_fade_2026-10-17.md` C0–C6, K1 против слова владельца 17.10 («стемнело в 21, а свет над
+## Work
+
+кейсы `testcases/TC_svarog_hero_light_fade_2026-10-17.md` C0–C6, K1 против слова владельца 17.10 («стемнело в 21, а свет над
 головой загорелся в 23 - плохо» · «плавно» · «так же плавно гаснет - да») и двух его уточнений по ходу прогона: `[OWNER]` «свет над головой
 можно с 6 до 7 плавно тушить» · 2026-10-18 00:10 и `[OWNER]` «давай с 20 до 21 чтобы свет разгорался» · 2026-10-18 00:13.
 
-**Contour:** живая игра Svarog's Dream на машине владельца, 3840×2160, сейв владельца (точка `_backups/svarog-saves-2026-10-17_1936-owner-exit`,
+## Contour
+
+живая игра Svarog's Dream на машине владельца, 3840×2160, сейв владельца (точка `_backups/svarog-saves-2026-10-17_1936-owner-exit`,
 сверка до прогона 8 из 8); KrinikColorRework — сборка `9da10e62` (поле-прибор `HeroLightFade.Hour`), затем в той же игре часы правились
 настройкой `cfg` на лету; финальная сборка с умолчаниями 20–21 и 6–7 — `5eb955cb`, выложена после закрытия игры. Герой — Тамара на лесной
 тропе, бессмертие пульта включено на время промота ночи (промот в лесу однажды убил героя).
 
-**Runs:** один запуск 2026-10-18 00:04–00:18 +03:00.
+## Runs
+
+один запуск 2026-10-18 00:04–00:18 +03:00.
 - `LOCK_MINUTES=20 bash tools/run-game.sh` (00:04:48, мир 00:05:06)
 - `static KrinikColorRework.HeroLightFade Hour` · `… Level` · `callon Player/TargetsAndManagers/CameraTarget/NightLight Light get_intensity` — замер раз в 5–6 с
 - `callon Managers/StandardManagers/WorldTimeManager WorldTime IncreaseTimeByOneHour True` — промот (00:06:23 ×22, 00:08:31 ×5, 00:11:30 ×13, 00:13:40 ×5, 00:15:50 ×12)
 - `cfg krinik.svarogsdream.colorrework HeroLight MorningStart 6` / `MorningOff 7` (00:11:10), `EveningStart 20` / `EveningFull 21` (00:13:14), `Smooth false` → `true` (00:12:50–00:12:53)
 - `bash tools/h.sh "kill"` (00:18:26) → `SAVE_POINT=… bash tools/save-check.sh --restore` → `bash tools/reg-snap.sh restore`
 
-**Checks:**
-- Hygiene: `dotnet build src/KrinikColorRework -c Release` — 0 ошибок, 0 предупреждений; `deploy-cold.sh` — md5 сошлись.
-- Functional run: живая игра с сейвом владельца, время шло само (60 с на игровой час); прочитаны час и доля (прибор), сила света у объекта `NightLight`, часы HUD на кадрах.
+## Checks
+
+
+Hygiene: `dotnet build src/KrinikColorRework -c Release` — 0 ошибок, 0 предупреждений; `deploy-cold.sh` — md5 сошлись.
+Functional run: живая игра с сейвом владельца, время шло само (60 с на игровой час); прочитаны час и доля (прибор), сила света у объекта `NightLight`, часы HUD на кадрах.
 
 | # | Status | Observation |
 |---|---|---|
@@ -32,14 +40,20 @@
 | K1 | pass | `Smooth false` в 21:40 → объект выключен; +2 часа (23:40) → включён, сила 1,75 сразу; `Smooth true` → доля 1 |
 | новый вечер 20–21 | pass | 19,905 → 0; 20,008 → 0,0002; 20,531 → 0,547; 20,950 → 0,993; 21,054 → 1 |
 
-**Found:**
+## Found
+
+
 - В чате я назвал «прыжком часов» лишний час после 22 шагов промота. Это не сбой: 22 шага шли 65 с, а при 60 с на игровой час время само ушло на час. Поправка дана в том же чате.
 - Мой фильтр `grep -v "> "` выбрасывал строки ответа (в них есть «->»): одна пачка замеров показалась пустой, данные были в `_harness/out.txt`. Дефекта в продукте нет.
 - Дефектов в продукте нет.
 
-**Traces:** `SvarogsDream/_harness/light0.webp` (22:07), `light_2130.webp` (21:51), `light_2100.webp` (21:09), `light_e1955.webp` (20:07),
+## Traces
+
+`SvarogsDream/_harness/light0.webp` (22:07), `light_2130.webp` (21:51), `light_2100.webp` (21:09), `light_e1955.webp` (20:07),
 `light_e2030.webp` (20:44), `light_e2105.webp` (21:22), `light_0530.webp` (5:41); владельцу — `SvarogsDream/НА ОТСМОТР НИКОЛАЕМ/21 Свет над героем/`;
 журнал `D:/Games/Svarog's Dream/BepInEx/LogOutput.log` (строка `hero light: intensity 11 range 12`).
 
-**Verdict:** pass — все кейсы pass на живой игре; глаз владельца принял: `[OWNER]` «да, я смотрел на телефизор во время теста света - всё
+## Verdict
+
+pass — все кейсы pass на живой игре; глаз владельца принял: `[OWNER]` «да, я смотрел на телефизор во время теста света - всё
 окей, нравится» · 2026-10-18 ≈00:19. Вне прогона — R3: факел в руках и подземелье (условия игры не менялись, префикс берёт их как есть).

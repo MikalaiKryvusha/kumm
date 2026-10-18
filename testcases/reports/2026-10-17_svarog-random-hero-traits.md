@@ -9,12 +9,12 @@ Svarog's Dream (GOG), 3840×2160, BepInEx 5.4.23.5, XUnity. Прогон на м
 точка `_backups/svarog-saves-2026-10-17_1138-owner-hero-select` (7 из 7 после каждого запуска), окно выбора — пультом.
 
 ## Runs
-- 11:48 чистый запуск (мод 1-й версии); 11:50 20 перебросов пультом `callon UI/CharacterSelection GameUI.CharacterSelectionUI PopulateCharactersAfterPlayerDeath True`
-- 11:50 чистый запуск (выбор шагами владельца); 20 перебросов
-- 11:58 чистый запуск (списки несовместимых); 200 перебросов; 11:59 «Переброс» настоящей мышью `tools/mouse.ps1 -X 1229 -Y 77 -Button left`
-- 12:17 чистый запуск (журнал `chosen:`); «Выбор» мышью `-X 655 -Y 1895`
-- 12:28 чистый запуск (KrinikFixes 8–10, перевод не выложен); 12:34 `translation_deploy.sh`, 12:35 чистый запуск, наведение на 3 Таланта
-- 12:36 `h.sh kill`, `save-check.sh --restore` (7 из 7), `reg-snap.sh restore`
+- 2026-10-17 11:48 чистый запуск (мод 1-й версии); 11:50 20 перебросов пультом `callon UI/CharacterSelection GameUI.CharacterSelectionUI PopulateCharactersAfterPlayerDeath True`
+- 2026-10-17 11:50 чистый запуск (выбор шагами владельца); 20 перебросов
+- 2026-10-17 11:58 чистый запуск (списки несовместимых); 200 перебросов; 11:59 «Переброс» настоящей мышью `tools/mouse.ps1 -X 1229 -Y 77 -Button left`
+- 2026-10-17 12:17 чистый запуск (журнал `chosen:`); «Выбор» мышью `-X 655 -Y 1895`
+- 2026-10-17 12:28 чистый запуск (KrinikFixes 8–10, перевод не выложен); 12:34 `translation_deploy.sh`, 12:35 чистый запуск, наведение на 3 Таланта
+- 2026-10-17 12:36 `h.sh kill`, `save-check.sh --restore` (7 из 7), `reg-snap.sh restore`
 
 ## Checks
 Hygiene: `dotnet build` трёх модов — Build succeeded; `glossary_check.py --strict` — 0 наших (после правок); `selection_xunity.py` — talent-desc 95/95.

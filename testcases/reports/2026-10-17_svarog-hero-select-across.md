@@ -11,13 +11,13 @@ Svarog's Dream (GOG), 3840×2160, BepInEx 5.4.23.5, XUnity (`ResizeUILineSpacing
 окно выбора — пультом, выкладка 11:42 горячая.
 
 ## Runs
-- 11:25 `bash tools/deploy-hot.sh KrinikUIRework`, `h.sh "shot hs_across1" "dump"`
-- 11:28 `bash tools/deploy-hot.sh KrinikUIRework`, `h.sh "shot hs_across2" "dump"`
-- 11:29 `tools/mouse.ps1 -Button move` на «Выбор» и «Переброс», `-Button wheel -Clicks -20 / -5` над судьбой; `h.sh "fieldon UI/CharacterSelection/Character3/Content/Scroll~Rect UnityEngine.UI.ScrollRect m_MovementType"`
-- 11:30 `h.sh "cfg krinik.svarogsdream.uirework HeroSelect ButtonHover 0.1" "call KrinikUIRework.Plugin StyleHeroCardsOnScreen"`
-- 11:33–11:35 наведения на 6 черт, `h.sh "callon UI/CharacterSelection/TalentToolTip/Description UnityEngine.UI.Text get_lineSpacing"`
-- 11:38 `h.sh kill`, `deploy-cold.sh KrinikUIRework`, 11:39 `run-game.sh`, 11:40 `h.sh "callon Managers/DataManagers/CharacterSelectionManager CharacterSelectionManager InitializeCharacterSelection False"`, 9 наведений с замером
-- 11:42 `deploy-hot.sh KrinikUIRework`, 11:43 4 наведения с замером
+- 2026-10-17 11:25 `bash tools/deploy-hot.sh KrinikUIRework`, `h.sh "shot hs_across1" "dump"`
+- 2026-10-17 11:28 `bash tools/deploy-hot.sh KrinikUIRework`, `h.sh "shot hs_across2" "dump"`
+- 2026-10-17 11:29 `tools/mouse.ps1 -Button move` на «Выбор» и «Переброс», `-Button wheel -Clicks -20 / -5` над судьбой; `h.sh "fieldon UI/CharacterSelection/Character3/Content/Scroll~Rect UnityEngine.UI.ScrollRect m_MovementType"`
+- 2026-10-17 11:30 `h.sh "cfg krinik.svarogsdream.uirework HeroSelect ButtonHover 0.1" "call KrinikUIRework.Plugin StyleHeroCardsOnScreen"`
+- 2026-10-17 11:33–11:35 наведения на 6 черт, `h.sh "callon UI/CharacterSelection/TalentToolTip/Description UnityEngine.UI.Text get_lineSpacing"`
+- 2026-10-17 11:38 `h.sh kill`, `deploy-cold.sh KrinikUIRework`, 11:39 `run-game.sh`, 11:40 `h.sh "callon Managers/DataManagers/CharacterSelectionManager CharacterSelectionManager InitializeCharacterSelection False"`, 9 наведений с замером
+- 2026-10-17 11:42 `deploy-hot.sh KrinikUIRework`, 11:43 4 наведения с замером
 
 ## Checks
 Hygiene: `dotnet build src/KrinikUIRework -c Release` — Build succeeded (каждая сборка).

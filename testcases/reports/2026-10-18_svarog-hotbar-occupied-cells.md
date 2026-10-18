@@ -1,20 +1,28 @@
 # Run report — панель быстрых действий: броски на занятую ячейку (2026-10-18)
 
-**Work:** кейсы `testcases/TC_svarog_hotbar_occupied_cells_2026-10-18.md` Z1–Z5, ZK; основание — вопрос владельца `[OWNER]` «перекладывать
+## Work
+
+кейсы `testcases/TC_svarog_hotbar_occupied_cells_2026-10-18.md` Z1–Z5, ZK; основание — вопрос владельца `[OWNER]` «перекладывать
 предмет на панель быстрых действий в уже занятую ячейку пробовал?» · 2026-10-18.
 
-**Contour:** живая игра Svarog's Dream на машине владельца, 3840×2160; сейв владельца (точка `_backups/svarog-saves-2026-10-17_1936-owner-exit`):
+## Contour
+
+живая игра Svarog's Dream на машине владельца, 3840×2160; сейв владельца (точка `_backups/svarog-saves-2026-10-17_1936-owner-exit`):
 навык на ячейке «1», ссылка на лук (вещь 408) на «2», на E — зелье снаряжения. KrinikUIRework — сборка в игре на 2026-10-18 (SvarogsDream `82ee721`).
 
-**Runs:** один запуск 2026-10-18 00:25–00:27 +03:00.
+## Runs
+
+один запуск 2026-10-18 00:25–00:27 +03:00.
 - `LOCK_MINUTES=20 bash tools/run-game.sh` → `bash tools/h.sh "click UI/Enablers/Inventory"`
 - настоящая мышь: `powershell -File tools/mouse.ps1 -X 2769 -Y 1206 -Button drag-left -DX -1325 -DY 877 -Steps 30` (Z1) и такие же броски для Z2–Z5
 - после каждого броска — `cat …/krinik_hotbar_items.txt`, строки журнала `hotbar …`, кадр пульта `shot z1…z5`
 - `bash tools/h.sh "kill"` → `SAVE_POINT=… bash tools/save-check.sh` (до отката) → `--restore` → `bash tools/reg-snap.sh restore`
 
-**Checks:**
-- Hygiene: — (код не менялся).
-- Functional run: живая игра, настоящая мышь по ячейкам сумки и панели; прочитаны журнал, файл ссылок и кадры `z1_crop.webp`, `z24_crop.webp`.
+## Checks
+
+
+Hygiene: — (код не менялся).
+Functional run: живая игра, настоящая мышь по ячейкам сумки и панели; прочитаны журнал, файл ссылок и кадры `z1_crop.webp`, `z24_crop.webp`.
 
 | # | Status | Observation |
 |---|---|---|
@@ -25,33 +33,47 @@
 | Z5 | pass | еда на Q со ссылкой: замена (вариант с едой — второго зелья нет) |
 | ZK | pass | в сейве изменился только наш файл ссылок; данные игры не тронуты |
 
-**Found:**
+## Found
+
+
 - Дефектов нет: поведение совпадает с кодом. Открыт вопрос вкуса к владельцу: заменять ли навык вещью (сейчас отказ) и заменять ли ссылку молча (сейчас да).
 
-**Traces:** `SvarogsDream/_harness/z0.webp` … `z5.webp`, `z1_crop.webp`, `z24_crop.webp`; журнал `D:/Games/Svarog's Dream/BepInEx/LogOutput.log`, строки `hotbar bind / drop / move`.
+## Traces
 
-**Verdict:** pass — все кейсы на живой игре; как должно быть на занятой ячейке, решает владелец.
+`SvarogsDream/_harness/z0.webp` … `z5.webp`, `z1_crop.webp`, `z24_crop.webp`; журнал `D:/Games/Svarog's Dream/BepInEx/LogOutput.log`, строки `hotbar bind / drop / move`.
+
+## Verdict
+
+pass — все кейсы на живой игре; как должно быть на занятой ячейке, решает владелец.
 
 ## Второй запуск — слово владельца и его находки (2026-10-18 00:34–00:50 +03:00)
 
-**Work:** те же кейсы, раздел 3а: Z8, Z6, Z7, Z2a, M1, Z4a, R1, R2, D1, D2. Основание — `[OWNER]` «А (мой совет). Вещь встаёт на ячейку, навык
+## Work
+
+те же кейсы, раздел 3а: Z8, Z6, Z7, Z2a, M1, Z4a, R1, R2, D1, D2. Основание — `[OWNER]` «А (мой совет). Вещь встаёт на ячейку, навык
 уходит с панели» · «и перенос предмета из ячейки квик экшена в другую - переносит его, не копирует, переносит» · «из рюкзака - может создавать
 дубли» · «когда из квик экшенов несешь - не хватает миниатюры» · «это еще что такое» (кадр ячейки с красной рамкой) · 2026-10-18.
 
-**Contour:** та же игра и сейв; KrinikUIRework — три сборки: холодная `889f52db` (А, перенос, суд п. 13–15), горячие — с исправлением миниатюры
+## Contour
+
+та же игра и сейв; KrinikUIRework — три сборки: холодная `889f52db` (А, перенос, суд п. 13–15), горячие — с исправлением миниатюры
 (ошибка автора `UISlotBase.DragKeyModifierIsDown`), номером перезарядки по роду вещи и миниатюрой без луча. С 00:3x владелец играл в этом же
 запуске сам (журнал: `408-PracticeBow cell 3 -> 5`, `unbind: cell 2 (dragged off)`, переносы пива) — игра его, закрывать её не мне.
 
-**Runs:**
+## Runs
+
+
 - `bash tools/deploy-cold.sh KrinikUIRework` → `LOCK_MINUTES=20 bash tools/run-game.sh` (00:34)
 - `powershell -File tools/mouse.ps1 … -Button drag-left …` — Z8, Z6, Z7, Z2a; `-Button right` по «1» — меню ячейки (M1)
 - новый режим прибора: `mouse.ps1 … -Button drag-left -Hold` → `h.sh "shot zd…" "find (Clone)"` → `-Button move` → `-Button up-left` (D1, D2)
 - `fieldon …/Slot~(2) ActionBarUI.UISlotBase m_DragKeyModifier` → `None`; `callon …/Cooldown ActionBarUI.UISlotCooldown GetRemainingTime`
 - `bash tools/deploy-hot.sh KrinikUIRework` ×2 (00:47, 00:49); `h.sh "give 280" "give 280"`; щелчок `-Button left` по «4» (R1, R2); `bash tools/rest-check.sh` (00:50)
 
-**Checks:**
-- Hygiene: `dotnet build src/KrinikUIRework -c Release` — 0 ошибок на каждой сборке.
-- Functional run: живая игра, настоящая мышь; прочитаны журнал `hotbar …`, файл ссылок, поля ячеек и перезарядки пультом, кадры `za_crop`, `zm1_crop`, `zd3_crop`, `zd4_crop`, `zr1_crop`.
+## Checks
+
+
+Hygiene: `dotnet build src/KrinikUIRework -c Release` — 0 ошибок на каждой сборке.
+Functional run: живая игра, настоящая мышь; прочитаны журнал `hotbar …`, файл ссылок, поля ячеек и перезарядки пультом, кадры `za_crop`, `zm1_crop`, `zd3_crop`, `zd4_crop`, `zr1_crop`.
 
 | # | Status | Observation |
 |---|---|---|
@@ -67,7 +89,9 @@
 | R2 | pass | лук на «6» не остывает |
 | покой | pass | `rest-check.sh`: 113 за кадр сразу после выкладки, через минуту — 10 (предел 40), как 2026-10-17 |
 
-**Found:**
+## Found
+
+
 - Ошибка автора игры: миниатюры при переносе с панели не было ни у навыков, ни у ссылок — починено (`HotbarDrag.PatchDragGhost`).
 - Наш дефект: миниатюра перехватывала бросок — починено той же выкладкой.
 - Наш дефект (с исправления суда п. 3): перезарядка ссылки по номеру ячейки переходила к следующей вещи на ячейке и терялась при переносе — починено.
