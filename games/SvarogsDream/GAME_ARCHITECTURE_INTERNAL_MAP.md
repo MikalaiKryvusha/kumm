@@ -191,7 +191,7 @@
 
 | Мод | Классы игры |
 |---|---|
-| KrinikUIRework | `LoadingScreen`, `ItemToolTip`, `SpellToolTip`, `UITalentTooltip`, `UIBuffTooltip`, `UIGlobeTooltip`, `MasteryTooltip`, `UIMastery`, `UIAlmanac`, `QuestsListUI`, `QuestHeaderUI`, `ProgressManager`, `GameLogsManager`, `UIHelpManager`, `UISkillUp`, `UIPopUpSpawner`, `PlayerActionBar`, `StaticEquipmentInterface`, `InventoryObject`, `CursorIcons`, `CharacterIcon`, `PlayerController`, `OptionsPresenter`, `ExitGameMessages`, `YellHandler`, `CFXR_ParticleText_Runtime` |
+| KrinikUIRework | `LoadingScreen`, `ItemToolTip`, `SpellToolTip`, `UITalentTooltip`, `UIBuffTooltip`, `UIBuffs` (`PopulateBuffs` — выученные пассивки оружия без оружия в руках, `PassiveBuffs.cs`: прозрачность `IdleAlpha` 0,45 и серый `IdleTint` 0,62 перемножаются, ≈28 % яркости — на тёмной полосе значок почти не виден, кадр 2026-10-18; вид — интервью #024, Q4), `UIGlobeTooltip`, `MasteryTooltip`, `UIMastery`, `UIAlmanac`, `QuestsListUI`, `QuestHeaderUI`, `ProgressManager`, `GameLogsManager`, `UIHelpManager`, `UISkillUp`, `UIPopUpSpawner`, `PlayerActionBar`, `StaticEquipmentInterface`, `InventoryObject`, `CursorIcons`, `CharacterIcon`, `PlayerController`, `OptionsPresenter`, `ExitGameMessages`, `YellHandler`, `CFXR_ParticleText_Runtime` |
 | KrinikColorRework | `PostProcessingManager`, `WorldTime`, `WorldWeatherManager`, `HelpingLightEnabler`, `LuxWater_PlanarReflection` (firstpass) |
 | KrinikCameraRework | `CameraFollow`, `CharacterStats`, `WorldStreamingManager`, `Traveler`, `TerrainQuarter` |
 | KrinikFixes | `TreasureHuntMask` (патч Harmony); границы воды Lux — своим классом `LuxWaterBounds` |
