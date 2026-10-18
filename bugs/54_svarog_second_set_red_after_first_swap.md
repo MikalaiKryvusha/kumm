@@ -1,6 +1,6 @@
 # Bug 54 — ячейки второго набора красные после первой смены оружия
 
-**Status:** 🔧 fix by code in place; NOT TESTED yet: the three variants on video 2026-10-18 02:52–02:54 never created the hypothesis condition (the second set of that save is empty — judge, item 2), so they prove nothing either way; next run puts the same skill into both sets (`slotspell`, `AssignSpell`); the owner's path is asked in interview #024, Q1
+**Status:** 🔧 reproduced and the fix verified on video 2026-10-18 03:32–03:34 (`testcases/TC_svarog_night_batch3_2026-10-18.md`, B0–B4): same skill in both sets, cast in one set, cooldown ends, swap → the twin stays dark-red with `IsOnCooldown` True and the skill cannot be cast (fix off); with the fix — clean, flag false, the skill casts; a running cooldown is kept. Open only for the owner's word: «вся панель» (all slots) is not yet explained — interview #024, Q1. (Earlier three variants 02:52–02:54 had an empty second set and proved nothing — judge, item 2.); the owner's path is asked in interview #024, Q1
 **Severity:** S2 (видимый брак интерфейса; навык второго набора, похоже, не применить до следующей смены)
 **Version/build:** KrinikUIRework после SvarogsDream `8888d8b` + правка `PatchStaleCooldown` · **When/context:** 2026-10-18 ≈02:28, владелец в
 запуске агента пробовал новую кнопку смены наборов (план 31, пункт 2)
