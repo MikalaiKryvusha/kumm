@@ -41,7 +41,7 @@ with real state; path — ряд, кнопки, стопка, как у игро
 
 | Case | Status | What was read |
 |---|---|---|
-| A2 безопасный старт | pass | ответы пульта `False -> True`, `True -> False`; журнал `4 links` |
+| A2 безопасный старт | partial (здоровье 392 из 1027, а ожидалось полное; поправка по суду) | ответы пульта `False -> True`, `True -> False`; журнал `4 links` |
 | CD1, CD2 цифра перезарядки | fail → правка (двигался пустой `m_TargetText`) | `cd_sheet.webp`, дампы |
 | CD3 контроль | blocked → закрыт D4 | — |
 | D4 цифра по центру, контроль | pass | `d4_sheet.webp`, `d4off_bottom.webp` |
