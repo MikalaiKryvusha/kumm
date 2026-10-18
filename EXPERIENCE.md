@@ -67,7 +67,7 @@
      repaint-after-build, rule-half-applied, rule-overapplied, shader-owns-its-own-formula, shared-state-two-owners,
      stale-stand, stand-differs-from-owner-world, text-color-blind-to-background, translator-delay, wrong-api-assumption,
      wrong-model-of-the-frame, wrong-proxy, scope-wider-than-ask, eyeballed-number, visual-proxy-for-mechanic,
-     scripted-edit-anchor-unchecked, cheat-left-on-in-owner-game, test-toggle-left-changed, repro-condition-not-established, environment-assumed-not-probed, known-trap-walked-again, tool-format-assumed, map-not-read-before-probe -->
+     scripted-edit-anchor-unchecked, cheat-left-on-in-owner-game, test-toggle-left-changed, repro-condition-not-established, environment-assumed-not-probed, known-trap-walked-again, tool-format-assumed, map-not-read-before-probe, comment-wrap-broke-script -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -90,6 +90,13 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0317 · 2026-10-18 · ❌→✅ · #svarogsdream #translation #tools #marker
+class: comment-wrap-broke-script
+**Lesson:** длинная метка `[TESTED: …]` в комментарии Python перенеслась на новую строку без `#` (`SvarogsDream/tools/dialogue_xunity.py:349`, коммит
+`86aff0b` 2026-10-17) — `translation_deploy.sh` падал с `SyntaxError`, и выкладка перевода стояла сломанной до утра 18.10. После правки комментария
+в скрипте — `python -m py_compile <файл>` тем же ходом.
+**Repro:** выкладка 2026-10-18 07:06 (строки «Soul Level Up!»). mechanized: none — предложение: `py_compile` всех `tools/*.py` в начале `translation_deploy.sh`
 
 ### EXP-0316 · 2026-10-18 · ❌ · #svarogsdream #game-map #decompile
 class: map-not-read-before-probe
