@@ -76,7 +76,8 @@ krinik_portraits/ · krinik_cfxr_cyr.png/.txt · krinik_skill_up.wav ← наш�
 | `bash tools/translation_deploy.sh` | порядок: синтаксис всех `tools/*.py` (`py_compile`, с 2026-10-18) → сборщики пишут `zz_*.txt` в `_config/xunity/` репозитория → строгая проверка глоссария → советы загрузки в корень игры → проверка дублей ключей → копия `zz_*.txt` в игру. Сбой на середине оставляет игру с прежней целой выкладкой, наполовину пересобранным бывает только `_config` (EXP-0317) |
 | `bash tools/save-check.sh --restore` · `bash tools/reg-snap.sh restore` | откат сейва и реестра после прогона |
 | `bash tools/colour_scene.sh old\|new` | сцена для листа «было → стало» цветов |
-| `python -I tools/data_census.py <игра> <out>` | перепись строк данных игры против словарей |
+| `python -I tools/data_census.py <игра> <out>` | перепись строк данных игры против словарей. `translation/untranslated.txt` — старая перепись (2026-10-04): строки оттуда давно могут быть в `_config/xunity/zz_*.txt` («Fast travel unlocked: …» — в `zz_code.txt`); вопрос «переведено ли» — grep по `zz_*.txt`, не по ней |
+| `node tools/digit_center.mjs <кадр> <x> <y>` | где цифра перезарядки стоит в ячейке: центр красных цифр против центра чёрной коробки, точка — внутри коробки левее цифр; печатает dy и долю коробки (2026-10-18, интервью #024 Q3: до правки −4,6…−7,7 %) |
 | `python tools/to_webp.py <файлы>` | картинки в WebP |
 | `powershell -File tools/hdr.ps1 on\|off` | HDR телевизора |
 | `python -I tools/cfg_diff.py "<игра>/BepInEx/config"` | настройки модов, где значение ≠ умолчанию кода: смену умолчания BepInEx до файла владельца не доносит (`Sunset` 2026-10-13) |
