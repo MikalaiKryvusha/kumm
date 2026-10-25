@@ -91,6 +91,40 @@ for dp, dn, fn in os.walk(root):
             rows.append({'file': rel, 'namespace': ns, 'key': key, 'source': src})
             bytecode_rows += 1
 
+# ---- третья форма: ЧИТАЕМЫЙ ключ, заданный автором мода ------------------------------------
+# Оплачено 2026-10-25 (рыбалка Exiles Fishing 4.7.0): ключи вида DT_Fishing_ItemTable_388003_Name, не 32 hex,
+# и KEY_RE их не видел — из таблицы предметов вышло 12 строк вместо сотен. Форма та же:
+# [int32 nsLen][ns\0][int32 keyLen][key\0][int32 srcLen][src\0], только ключ — идентификатор.
+# Ложных срабатываний не пускают три условия сразу: ключ из [A-Za-z0-9_.:-], перед ним цельная FString
+# пространства имён (пустая — длина 0 или 1), после него цельная непустая FString исходника. [NOT-TESTED]
+NAMEKEY_RE = re.compile(rb'([\x03-\x78])\x00\x00\x00([A-Za-z0-9_.:\-]{2,119})\x00')
+name_rows = 0
+for dp, dn, fn in os.walk(root):
+    for f in fn:
+        if not f.endswith('.uexp'):
+            continue
+        p = os.path.join(dp, f)
+        d = open(p, 'rb').read()
+        rel = os.path.relpath(p, root).replace(os.sep, '/')
+        for m in NAMEKEY_RE.finditer(d):
+            key = m.group(2).decode('ascii')
+            if m.group(1)[0] != len(key) + 1 or re.fullmatch(r'[0-9A-F]{32}', key):
+                continue
+            start = m.start()
+            if d[start - 5:start] == b'\x01\x00\x00\x00\x00' or d[start - 4:start] == b'\x00\x00\x00\x00':
+                ns = ''
+            else:
+                continue
+            src, end = read_fstring(d, m.end())
+            if not src:
+                continue
+            if (key, src) in seen:
+                continue
+            seen.add((key, src))
+            rows.append({'file': rel, 'namespace': ns, 'key': key, 'source': src})
+            name_rows += 1
+print('readable keys (shape C):', name_rows)
+
 with open(out_csv, 'w', encoding='utf-8', newline='') as fh:
     w = csv.DictWriter(fh, fieldnames=['file', 'namespace', 'key', 'source'])
     w.writeheader()
