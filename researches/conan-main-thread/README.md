@@ -214,6 +214,13 @@ Funcom ставит (`LogConfig: Set CVar`): `s.AsyncLoadingThreadEnabled 1`, `s
 https://dev.epicgames.com/documentation/unreal-engine/asynchronous-level-loading-in-unreal-engine · https://issues.unrealengine.com/issue/UE-166872 ·
 https://forums.unrealengine.com/t/deadlock-between-gamethread-and-fasyncloadingthread-inupropertybag-getorcreatefromdescs/2745473
 
+**Пачка q1 (2026-10-26 01:58–02:17, один запуск, `ConanExiles/_config/bench-batches/q1-runtime.txt`):** шум A-облётов — 39–52 рывка
+(шире, чем ±4 по двум облётам 01:05/01:08). `s.AsyncLoadingTimeLimit 2` + `s.PriorityAsyncLoadingExtraTime 5` (с 5 и 15) — 39 рывков,
+в шуме; `r.Streaming.PoolSize 8000` (с 1200) — 43, в шуме, видеокарта +0,4 мс; **`p.ClothPhysics 0` — 28 рывков** (на 11 меньше лучшего
+A) — кандидат ветки «спавн», повтор A-B-A — пачка `q3b-cloth-repeat.txt`. Идея владельца «грузить дальше по дистанции, но больше кадров
+выделять» на ручке бюджета подгрузки эффекта не дала; дальность плиток World Composition Конана ручкой не задаётся (в реестре нет) —
+следующий кандидат той же идеи — `s.AsyncPostLoadEnabled` (q2).
+
 Следующая ветка по плану раздела 3 — «спавн»: кандидаты 3 (`p.Chaos.EnableAsyncInitBody`) и 4 (`p.ClothPhysics 0`), каждый A-B-A чистыми облётами.
 
 ## Источники
