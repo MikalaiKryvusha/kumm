@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0327 · 2026-10-25 · ❌→✅ · #windows #logon #console-flash #kago #diagnosis
+class: claim-wider-than-observation
+**Lesson:** «окна мелькают при входе» разбирается двумя журналами: «Windows PowerShell», событие 400 (`HostApplication=` — полная строка
+каждого запуска PowerShell), и Security 4688 (аудит создания процессов включён: `ProcessId` родителя → цепочка до задачи). Но запуск ≠
+видимое окно: дочерний консольный процесс наследует консоль родителя, и под `run-hidden.js` (скрытая консоль `node`) PowerShell без
+`windowsHide` не виден — у такого `node` ровно один `conhost`. Свой `conhost` у процесса тоже не доказывает окно (`CREATE_NO_WINDOW` его
+создаёт). Я сначала назвал KAGO источником окон — поправил до правки кода. Видимость меряется только живым сэмплером `EnumWindows` во время входа.
+Попутно найдено: `safe-mode.mjs disarm()` не убирает расписку → откат 13.09 повторялся при каждом входе (KAGO bugs/154).
+**Repro:** 2026-10-25 18:39 вход после перезагрузки; 4 PowerShell от KAGO `boot-apply`, 21 `OAWrapper` NVIDIA app, `cscript` HDSentinel.
+mechanized: no
+
 ### EXP-0326 · 2026-10-25 · ❌→✅ · #windows #chrome #edge #extensions #cleanup
 class: browser-extension-removal-without-ui
 **Lesson:** снять расширение из чужого профиля без щелчков: `chrome.exe --uninstall-extension=<id>` в нынешнем Chrome НЕ работает
