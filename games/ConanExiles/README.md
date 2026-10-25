@@ -17,6 +17,12 @@
 Дальше по слову владельца: русификация The Damage Meter и Exiles Fishing (у автора русского нет — свой пак), шрифт Gabriela,
 кандидаты от мерцания пальм — `docs/03-cvars-конана.md` пака; UE4SS 1181.
 
+**Обновление 2026-10-25 11:37:** в игре 57 паков — к 43 добавлены 13 модов Мастерской по выбору владельца (блок над Hosav: районы
+карты PNutt, Ironlight, Night Terrors, PvE Plus Ambush, Ragnar's New Factions, Riding Thralls, Rideable Pets, Waystones, Female New
+Faces) и Era of Trials (под LegitReligious); все 57 смонтированы, меню живое (`testcases/reports/2026-10-25_conan-3.0.1-new-mods-smoke.md`).
+UE4SS 1181 стоит, шрифт Gabriela снят владельцем. Русский — один `Game.locres` на все моды, 7 049 записей (конвейер —
+`_config/localization/README.md` пака; Rideable Pets везёт свой русский). Разборы модов и совместимости — `docs/12`–`docs/15` пака.
+
 #### Разведка дня (как было до раскатки)
 
 Слово владельца 2026-10-25: «Есть новая версия Конан Экзайлс Энхансед: D:\Games\Conan Exiles 3.0.1\ … собрать сборку Krinik'a на этой
