@@ -36,6 +36,27 @@
 3. Прогнать SCSKiller для Конана, затем снова холодный эталон. Успех — рывков первого облёта заметно меньше, ближе к прогретым 16–18.
 4. Откат — очистка кэша шейдеров драйвера (способ — из README инструмента).
 
+## Пробуем на Конане (2026-10-25 → 26, по слову владельца «давай попробуем»)
+
+- Скачан `SCSKiller-1.3.2-Portable.zip` с Releases официального репозитория `BlueHeisenberg/SCSKiller` (GPL-3.0; форки DAOWAce,
+  Felipe-Rodr, Predat1000 — не брать); SHA-256 `e95a778d…6ab5` совпал с примечаниями к выпуску. Распакован в
+  `D:\work\ai_sandbox\_tools\SCSKiller-1.3.2\app`; настройки и данные — `%LOCALAPPDATA%\SCSKiller`.
+- Командная строка без окна: `app\current\cli\scskiller.exe` — `scan`, `add <exe> <папка>`, `status <игра>`, `compile <игра>`,
+  `cache clear <игра>` (откат). У команд нет `--help`: `scan --help` просто выполняет поиск.
+- Конан добавлен вручную (`add …\ConanSandbox-Win64-Shipping.exe "D:\Games\Conan Exiles 3.0.1"`, id `manual:397886492cfc049b`):
+  опознан как **Unreal 5.8, D3D12**, «Ready: not tested on this engine version yet», античит **BattlEye** (записыватель в папку игры
+  не ставится). В паках найдено 99 179 шейдеров, план — 111 285 состояний конвейера, оценка «2,5 ГБ, 4 мин».
+- Сборка (`compile`, под замком машины) началась 23:58; в 00:29 ещё шла — кэш шейдеров Windows (`%LOCALAPPDATA%\D3DSCache`) вырос с
+  2,5 до 3,5 ГБ; оценка времени на нашей машине не сбылась. Итог и холодный облёт эталона — ниже, когда будут.
+
+## Рядом найдено в самой игре (реестр переменных `_config/cvars-registered.txt` пака)
+
+- Встроенного CSV-профайлера UE5 в сборке нет (из `csv.*` — одна `csv.RecordActorCountThreshold`) — «кто ест главный поток» мерить
+  иначе: Windows Performance Recorder (`wpr`, загрузка процессора по потокам и модулям) и облёты «Lua-моды вкл/выкл».
+- Ручки предсборки UE5 есть: `r.PSOPrecache.ProxyCreationStrategy` (не рисовать объект, пока его шейдер не собран: вместо рывка —
+  позднее появление), `r.PSOPrecache.DumpStats` (сколько шейдеров не успели собрать), `r.PSOPrecache.Mode`,
+  `r.PSOPrecache.D3D12.DriverCacheAware` и др. — кандидаты для замера эталоном «до/после».
+
 ## Источники
 
 - https://www.club386.com/banish-shader-compilation-stutters-games-sc/
