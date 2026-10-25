@@ -77,7 +77,10 @@
       **Прочитано 2026-10-25 20:32** (пульт `props` и поля структуры, отчёт `testcases/reports/2026-10-25_conan-3.0.1-fps-perf-run2.md`):
       Night Terrors — `AmbushesEnabled=true`, `AmbushChance=80`, `AmbushStartHour=21`, `AmbushEndHour=5`, `VaporizeTimeInSeconds=300`
       (структура `NightTerrorsServerSettings` на `BP_NightTerrors_ModController_C`); у PvE Plus Ambush в живых объектах настроек нет —
-      они в базе мира (`MAC_AmbushSaveToDatabase`), читать из `Game_0.db`. Дальше: выбрать «реже и
+      они в базе мира (`MAC_AmbushSaveToDatabase`), читать из `Game_0.db`. **20:36:** в `Game_0.db` (только чтение) у Ambush есть лишь
+      три актёра в `actor_position` (`MDC_AmbushWidget`, `NAS_MC_ModController`, `BP_WeightedTableMerge_MC`) — настроек нет: пока
+      администратор их не менял, мод держит значения по умолчанию в коде. Следующий запуск: пультом найти живые объекты с путём
+      `/Game/Mods/PvEPlusAmbush/` (только имена классов) и прочитать нужный `props`. Дальше: выбрать «реже и
       случайнее», выставлять при входе в мир своим Lua-модом — так сборка везёт настройку из коробки, без админ-консоли.
 - [ ] 23. Caverns of Set (3722525736), Shemite City State (3755371705), Ymir's Respite (3730427175) — три района карты автора PNutt —
       слово владельца 2026-10-25 ≈10:25: «выглядит интересно, и вроде не должно быть конфликтным, можно поставить, нужна
@@ -283,6 +286,11 @@ DISM; скрипт `C:\REVISIONS\РЕВИЗИЯ_C_2026-10-25\03_move_claude_to_F
    Lua-мод; (3) **`KrinikConanHarness`** — пульт агента («аля MCP-CLI-API … дебаг, логи, отладка, управление»): дорастить `KrinikAgentRemote`
    (уже есть `exec`, `dump`, `funcs`, `call` с параметром) до образца пульта Сварога + клиент, ждущий ответа; (4) масштаб DLSS 0,58 вместо
    0,667 на 2.2.3 — показать владельцу; (5) перевод Simple Minimap.
+4б. **Рывки в движении** (вопрос владельца 2026-10-25 вечером о dll-оптимизаторе как у Обливиона; разведка
+   `researches/conan-performance-mods-2026-10/README.md`): готового для Конана нет; из репозитория LTSharpe переносятся UE5-ручки,
+   которые в 3.0.1 есть, — `r.Nanite.Streaming.NumInitialRootPages=3072`, `r.pso.PrecompileThreadPoolSize`, `r.GPUScene.ParallelUpdate`,
+   `r.RHICmd.ParallelTranslate.Enable` (сначала прочитать значения в игре). Порядок: маршрут бегом/верхом через въезд в город с PresentMon
+   (рывки ≥ 50 мс) → ключи по одному → тот же маршрут; кино владельца выключено (HOUSE_RULES §1).
 5. **Таблица LegitReligious** (шаг 28) — три копии извлечены (`ConanExiles/_config/devkit/_vanilla/`), построчный разбор и слияние, пак-заплатка
    на новом ките. **Bosses против LBPR** — общая копия `BP_ThrallSystemComponent` с обеими правками, тоже на ките.
 6. Владельцу: скрипты уборки `C:\REVISIONS\РЕВИЗИЯ_C_2026-10-25\01_cleanup_now.ps1` → перезагрузка → `02_after_reboot.ps1` (около 52 ГБ; TEMP → `F:\Temp`);
