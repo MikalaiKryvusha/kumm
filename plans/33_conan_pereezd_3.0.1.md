@@ -110,6 +110,11 @@
       рабочий список (3199–4426), перевод у помощника. **Severe Weather против Immersive Warriors** (вопрос владельца «как
       совместить») — сверено офлайн: мод пишет четыре множителя расхода `BP_HungerSystem`, они есть в копии Immersive Warriors, та
       добавляет только анимации (`docs/15`); в игре — замер расхода. **Bosses My New Besties** — `[OWNER]` «окей. проверишь»: кейс B1.
+      **Офлайн 2026-10-25 12:02** (карты имён двух копий `Systems/Thrall/BP_ThrallSystemComponent`, `retoc unpack`): у Bosses 5 своих
+      имён — проверка тегов `Npc.Boss.Miniboss` / `Npc.Boss.WorldBoss` (`GetActorGameplayTags`, `HasTag`); у LBPR 16 своих — правила
+      размещения рабов (`ThrallSC_ThrallPlaceAnywhereAdmin/Everyone`, `PlacementOnLandClaim`, `InsideCollisionCavesDungeons`, `GetLBPRConfig`).
+      В игре остаётся копия LBPR — проверки боссов в ней НЕТ. Лечение: (а) порядок — Bosses ниже LBPR, теряются правила размещения рабов
+      LBPR; (б) в новом ките — одна копия компонента с обеими правками (своим паком ниже обоих). Кейс B1 покажет, что именно ломается.
 - [ ] 28. **LegitReligious везёт старую `Items/ItemStatModificationTable`** — без 51 строки 3.0.1, а хеш его копии не равен ни
       2.2.3 (`41af364c…`), ни 3.0.1 (`a0ad587e…`): в ней его правки, подмена ванильной таблицей их сотрёт. Лечение — слить: таблица
       3.0.1 плюс строки, которые LegitReligious изменил против 2.2.3, своим паком ниже него (конвейер `build-level-mod.py`: retoc
