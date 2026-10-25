@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0334 · 2026-10-26 · ❌ · #conan #bench #measurement #game-state #confound
+class: measured-inside-a-hidden-game-mode
+**Lesson:** два «прогретых» замера эталона (25.10 23:37 и 23:40) первые ≈ 110 с шли внутри служебного режима игры: после прошлого облёта
+герой проваливался под землю, `UndermeshDetectionSubsystem` телепортировал его, и игра держала «Delaying playing state» до 110-й секунды
+следующего облёта — пачку рывков в этот момент я сначала приписал моду Caverns of Set (совпали по времени его `LoadErrors`), и вывод
+«прогретый облёт чище холодного» оказался смешан с этим режимом. Перед тем как верить замеру, сверить журнал игры за время облёта на
+служебные события (`Undermesh`, `Delaying/Finishing delayed playing state`, `ClientState`, смена региона); совпадение по времени — гипотеза,
+а не причина, пока не проверены соседние события.
+**Repro:** журнал `ConanSandbox-backup-2026.10.25-20.44.13.log`: `Undermesh teleport` 20:37:00 и 20:40:30; «Finishing delayed playing state» 20:39:22 и 20:42:53.
+mechanized: посадка героя в `KrinikConanBench` (`land_frame`); проверка журнала на эти события в отчёте `bench-flight.sh` — не механизировано
+
 ### EXP-0333 · 2026-10-26 · ❌→✅ · #conan #ue4ss #pult #race #remote
 class: done-signal-before-work
 **Lesson:** пульт KrinikAgentRemote удаляет `cmd.txt` ДО того, как выполнит команду и напишет `dump.txt`/`result.txt`; прибор, ждавший
