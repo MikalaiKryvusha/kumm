@@ -44,6 +44,40 @@ Other facts from the guide: black portraits → resolution ≤ 1280×1024 or Cri
   MSI Afterburner (crashed at logon 2026-10-25). Close/disable LS hotkey for the run.
 - dgVoodoo2 latest: v2.87.5 (2026-09-15), `dgVoodoo2_87_5.zip` from github.com/dege-diosg/dgVoodoo2/releases.
 
+## Existing mods — search 2026-10-25 19:2x (web search; Nexus/PCGamingWiki/WSGF answered 403 to direct fetch → snippets)
+
+Owner's push: `[OWNER]` «а что, никаких модов для ds2 нет для 4K ? · на нексусе, на гитхабе · может уже всё сделано».
+
+| Mod | Claim | Open questions |
+|---|---|---|
+| **Dungeon Siege 2 Remastered**, Nexus dungeonsiegeii #183, v0.5.1 (~2026-10-09) | menus and UI scaled for any resolution up to 4K/8K/ultrawide; optional AI-upscaled UI and textures; OpenSpy MP; crash fixes; installed by a Python script into a copy, patches the exe (0.5.0) | BW 2.30? MikleWorks Russian? conflicts with the cursor-fix exe (`enshrouded.exe`)? mechanism? |
+| Resolution Fix, Cristi80, #132 | resolution list 800×600–1280×1024 → 640×480–1920×1080; "Plus" test file (2025-11-15) → up to 3840×2160; author: UI shrinks above 1080p | why 1080p is missing from our in-game list |
+| Text Size Increased, KillerGremal, #24 v4.0 (Alpha) | larger text 1080p/1440p/4K; long text may cut | BW? Cyrillic? |
+| Enhanced Fonts for DS2 BW, SiegeFactory, #164 v1.0 (2026-03-09) | one `SiegeFactoryEnhancedFonts.ds2res` into `Resources`; recommends dgVoodoo2 + #132 | Cyrillic glyphs may be lost (inference) |
+| Enhanced UI HD Upscaled, #119 | ESRGAN `guiUpscale.ds2res`/`uiUpscale.ds2res` for 1080p, BW 2.3, includes #132; abandoned; no fonts/icons/portraits | — |
+
+**#183 page read 2026-10-25 19:2x through the KUMM debug Chrome (`kumm.mjs eval`, logged out):** «menu and UI scaling for any
+resolution, up to 4K, 8K and ultrawide» — HUD, inventory, tooltips, overhead names, loading screens, portraits, dialogue, options;
+«Scaled cursor … fixes for cursor drift and relative mouse input»; Windowed/Fullscreen/Borderless selector; FOV by aspect; large
+address aware. Install: extract ZIP to its own folder, run `Install-DungeonSiege2Remastered.py` (Python ≥3.10 with Tkinter), pick the
+game folder; it patches `DungeonSiege2.exe` (`remaster.patch` / `remaster-gog.patch`), keeps `DungeonSiege2-Original.exe`, backs up
+replaced files. **Requirement: «unmodified v2.3 DungeonSiege2.exe»** (Steam or GOG). UI pack `DS2HDUI.ds2res` + `DS2HD-Minimap.ds2res`
+(1.1 GB, optional); game textures 14 × `DS2HD-*.ds2res` (7 GB download, optional). Known limitation named: Japanese language. Broken World
+and Russian — not mentioned on the page. Owner's verdict on resolutions that drove it: `[OWNER]` «запустилось в 1080, но ui мелкий» (720p —
+size right but blocky; 1080p — sharp but small) → only real UI scaling solves it.
+
+**#183 files read 2026-10-25 19:3x (main file 896, 0.5.1, downloaded by `kumm get` to `D:\Games\_downloads\DS2-Remastered`):**
+`Install-DungeonSiege2Remastered.py` EDITIONS — Steam original SHA256 `0176da88…68ae`, GOG `c17e1cc9…b4e2`, both **8 212 480 bytes**;
+README «CD, Broken World, modified and other executable revisions are not supported by this patch. The installer verifies the entire
+EXE before changing anything»; CHANGELOG «Remastered saves are separate from … Broken World saves; a new Remastered party is required».
+The owner's `DungeonSiege2.exe` is another exe revision (23 408 640 bytes, the CD-edition size class) → refused, and BW is out of scope anyway. Verdict: #183 = base DS2 only, new party,
+Steam/GOG exe; not for the owner's BW + Krinik. Fork to the owner (2026-10-25): A — BW on dgVoodoo + #132/#164; B — Remastered from
+scratch; C — the old window + LS.
+
+Other: no ini key for UI scale or cursor speed found (known keys: `fullscreen`, `width`, `height`, `bpp`, `maxfps`, `x`, `y`, `nointro`,
+`noloadintro`, `nospacecheck`, `min_spec_warning` — Steam thread 2014 citing MS KB 903677). DXVK 2.7.1 fixed a DS2 menu bug, no 4K
+reports. Fast mouse: no game key; the cursor moves in game pixels (inference) — lower the game's stretch factor or the OS/mouse speed.
+
 ## Experiment log
 
 - **2026-10-25 19:06 — 1280×720 + dgVoodoo forced 3840×2160@144 (copy folder).** BW main menu fullscreen 4K, no black screen, no

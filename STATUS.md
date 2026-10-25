@@ -120,6 +120,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    видеокарта «GeForce FX 5700 Ultra», разрешение = родное), игра в 720p–1080p, dgVoodoo растягивает → интерфейс крупный; DXVK там не
 >    описан. Пробовать на КОПИИ папки, рабочая сборка (`enshrouded.exe` в окне 1366×768 + Lossless Scaling, `_PORTABLE\README.txt`,
 >    `ВОССТАНОВИТЬ.bat`) не трогается; победителя — в `restore.ps1`. Кадры владельцу на отсмотр.
+>    **Ход 2026-10-25 19:0x–19:3x:** копия `D:\Games\Dungeon Siege II (dgVoodoo)` + dgVoodoo2 2.87.5 — весь экран 4K работает, 3D в 4K,
+>    интерфейс растягивается от разрешения игры (720p — крупно, ступенчато; 1080p — чётко, мелко: `[OWNER]` «запустилось в 1080, но ui
+>    мелкий»). Remastered (Nexus #183) не подходит: только exe v2.3 8 212 480 байт и без Broken World. Развилка А/Б/В — у владельца в чате;
+>    разбор — `researches/dungeon-siege-2-modern-display/README.md`. **Долг:** после игры владельца в копии вернуть ini
+>    `…\My Games\Dungeon Siege 2 Broken World\DungeonSiege2BrokenWorld.ini` из `D:\Games\Dungeon Siege II (dgVoodoo)\_ini-backup\` (хэш `9F28AF1F…D513`) — копия
+>    переписывает его, а рабочая сборка читает тот же файл.
 > 2. Затем Конан — ниже.
 >
 > PARKED-ПОРЯДОК 2026-10-25: **Конан 3.0.1** по слову владельца того дня («собрать сборку Krinik'a на этой версии …
