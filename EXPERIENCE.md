@@ -91,6 +91,24 @@
 
 ## Entries
 
+### EXP-0325 · 2026-10-25 · ❌→✅ · #presentmon #etw #measurement #conan
+class: stale-session-poisons-next-run
+**Lesson:** PresentMon, зависший на замере (окно игры в фоне, `--timed` без `--terminate_after_timed`), после `Stop-Process` оставляет
+живую ETW-сессию (`kumm-pm`); следующие запуски под другими именами пишут пустые или нулевые CSV и ругаются «100664 ETW events were lost».
+Лечение: `logman query -ets` → `logman stop <имя> -ets`; запуск всегда с `--process_id <pid> --timed N --terminate_after_timed` и своим
+`--session_name`. Вторая ловушка того же замера: игра в фоне держала `FrameRateLimit=60` из файла — цифры были потолком, не ценой.
+**Repro:** 2026-10-25 16:46–16:54, замер тумана Severe Weather (`testcases/reports/2026-10-25_conan-3.0.1-severe-weather-fog-dlss.md`).
+mechanized: no — шаг в строке PresentMon досье (`HOUSE_RULES.md` §4)
+
+### EXP-0324 · 2026-10-25 · ❌→✅ · #conan #config #migration #dlss #deploy
+class: half-deployed-config
+**Lesson:** при переезде на новую версию игры раскатали только `Engine.ini`, а `Game.ini`/`GameUserSettings.ini` пака — нет: 3.0.1 полдня
+жила на автоподборе (TSR, 60 к/с, 1280×720 в файле), и все замеры шли на чужой графике. Раскатка своих файлов вскрыла строку, которую
+новая версия не переносит (`r.NGX.DLSS.Preset=13` — вылет, баг 63). Переезд = все конфиги пака + запуск до мира в тот же ход; разницу
+пака и игры смотреть `diff` до раскатки (новые ключи версии, `Language`, старый `Input.ini` UE 5.6 не везти в 5.8).
+**Repro:** `python -I -X utf8 ConanExiles/_config/deploy-config.py --dry-run Engine.ini Game.ini GameUserSettings.ini`
+mechanized: tools/hooks/test-after-code.mjs (раскатка и `.ini` — долг `game` до запуска игры)
+
 ### EXP-0323 · 2026-10-25 · ✅ · #ue5 #iostore #retoc #conan #devkit #vanilla-assets
 class: tool-gap-closed-by-spec
 **Lesson:** без кита ванильный ассет UE5 достаётся из паков игры по идентификатору пакета. retoc 0.1.5 читает контейнеры игры
