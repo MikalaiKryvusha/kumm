@@ -32,7 +32,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── HOUSE_RULES.md                 # house rules (KAIF 2.8+, Russian): stands and test-harness commands, Tools table, environment dossier, push recipe
 ├── plans/ ideas/ bugs/ researches/ interviews/ homeworks/ reports/   # KAIF knowledge dirs
 ├── testcases/reports/             # run reports, one per executed run: <YYYY-MM-DD>_<work>.md (KAIF 2.7)
-├── tools/                         # project-own tools: scrub-identity.mjs + check-claim-before-evidence.mjs (both run by hooks/pre-commit), hooks/*.mjs (Claude Code hooks: no-backslash-heredoc, stamp-gate, style-gate, testcase-gate, voice-reminder, no-permission-question, knowledge-hook — the memory hook), kaif-update-*.mjs
+├── tools/                         # project-own tools: scrub-identity.mjs + check-claim-before-evidence.mjs (both run by hooks/pre-commit), hooks/*.mjs (Claude Code hooks: no-backslash-heredoc, stamp-gate, style-gate, testcase-gate, voice-reminder, no-permission-question, knowledge-hook — the memory hook, test-after-code — the testing hook from Unliminium: a code edit is a debt until a run of its kind), kaif-update-*.mjs
 ├── games/                         # per-game dossiers
 ├── .kaif/                         # framework core: kaif.json, kaif-core.mjs, spheres/, tools/ (10 lints + contour/), hooks/
 ├── .claude/skills/ .agents/skills/ .grok/skills/ .cline/skills/ .roo/  # 37 skills × 5 agent systems
