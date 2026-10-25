@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0328 · 2026-10-25 · ❌→✅ · #windows #config #decompile #lossless-scaling #nvidia #drs
+class: guessed-config-schema
+**Lesson:** у чужой .NET-программы имя поля в файле настроек читается из её кода, а не угадывается: четыре догадки (`Filter`,
+`Filters`, `ExecutableFiles`, `ExeOrProcessName`) Lossless Scaling молча выбросил при сохранении, а `ilspycmd -p` за минуту показал
+`Path` (`UI\Profile.cs`) и правило сверки (`MainWindow.cs:475`, шаблон с `*` и `;`). Тем же ходом — формат `.nip` Profile Inspector и его
+ловушка: импорт СБРАСЫВАЕТ профиль и ставит только перечисленное (для Base Profile — класть все 36 настроек), список exe ЗАМЕНЯЕТ.
+Проверка — чтение базы драйвера «до/после» (`drs.py diff`), ожидать ровно N отличий.
+**Repro:** 2026-10-25 19:33–19:57, профиль LS «Dungeon Siege 2», профиль драйвера DS2 и Base Profile (RTX HDR off).
+mechanized: HOUSE_RULES.md → «Автоматизация Windows и чужих программ» (команды ilspycmd, nvidiaProfileInspector -silentImport)
+
 ### EXP-0327 · 2026-10-25 · ❌→✅ · #windows #logon #console-flash #kago #diagnosis
 class: claim-wider-than-observation
 **Lesson:** «окна мелькают при входе» разбирается двумя журналами: «Windows PowerShell», событие 400 (`HostApplication=` — полная строка
