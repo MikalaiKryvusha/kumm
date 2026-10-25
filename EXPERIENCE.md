@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0333 · 2026-10-26 · ❌→✅ · #conan #ue4ss #pult #race #remote
+class: done-signal-before-work
+**Lesson:** пульт KrinikAgentRemote удаляет `cmd.txt` ДО того, как выполнит команду и напишет `dump.txt`/`result.txt`; прибор, ждавший
+исчезновения `cmd.txt`, читал ответ ПРОШЛОГО запуска игры — взял номер меню, которого ещё нет, и жал «Продолжить» в пустоту (пульт: «НЕ
+исполнено: call …», `done.txt`: `fail call`); игра висела в меню при каждом запуске на переднем плане (там меню создаётся позже), в фоне
+везло. Готовность ответа — новая строка в `done.txt`, а не исчезновение команды; и жать только то, что видно в живом дампе.
+**Repro:** 2026-10-26 00:39 (и 25.10 23:07, 23:30) — `launch-bg.ps1 -HoldSec 0` + `enter-world-remote.sh` старой версии.
+mechanized: `ConanExiles/_config/enter-world-remote.sh` (`remote()` ждёт строку `done.txt`; кнопка — только `Visible|SelfHitTestInvisible`); terrain-probe.sh — ждёт смену времени `result.txt`
+
 ### EXP-0332 · 2026-10-25 · ❌→✅ · #conan #bench #camera #flight #taste #ue4ss
 class: cinematic-route-guessed-not-scouted
 **Lesson:** облёт-бенч для глаза владельца: (1) летит КАМЕРА-актёр (`CameraActor` + `SetViewTargetWithBlend`, `K2_TeleportTo`), а не герой —
