@@ -199,6 +199,21 @@ ConanModPackStatus → облёт → вернуть. Сравнивать ме�
 оценка — до ~4 мс кадра. Гипотеза, не замер: разбивки по потокам у `-a profile` нет. Проверка — A-B-A без Lua-модов (2Г) и с выключенными
 перехватами в `UE4SS-settings.ini`, если моды без них живут.
 
+**Асинхронная подгрузка (версия владельца 2026-10-26 ≈01:49: «может некорректно стриминг и ассинхронная подругзка сделаы в игре»).**
+Funcom ставит (`LogConfig: Set CVar`): `s.AsyncLoadingThreadEnabled 1`, `s.EventDrivenLoaderEnabled 1`, `s.UseBackgroundLevelStreaming 1`,
+`s.PriorityAsyncLoadingExtraTime 15.0` (при срочной загрузке — +15 мс в кадре), `s.LevelStreamingActorsUpdateTimeLimit 3`,
+`s.PriorityLevelStreamingActorsUpdateExtraTime 5.0`, `s.LevelStreamingComponentsRegistrationGranularity 10`, `s.UnregisterComponentsTimeLimit 1.0`.
+Не ставит `s.AsyncPostLoadEnabled` (есть в реестре; поле `bAsyncPostLoadEnabled` в `FAsyncLoadingThreadSettings` Epic — что делает,
+в документации не сказано), `s.AsyncLoadingTimeLimit`, `s.AsyncLoadingUseFullTimeLimit`, `s.AsyncCreatePackagesFromQueueMaxTimeLimitMs`.
+По Epic: PostLoad по умолчанию — на игровом потоке, потому что игровой код в нём не обязан быть потокобезопасным; объект разрешает его
+в потоке загрузки через `IsPostLoadThreadSafe()`. Наши 6–8 мс `Event_DeferredPostLoadExportBundle` — это та самая доводка на игровом
+потоке. Кандидаты A-B-A (каждый — ini до запуска, чистыми облётами): `s.AsyncPostLoadEnabled 1` (риск — гонки и зависания, известны
+баги Epic UE-166872 и взаимоблокировка 5.7 с PropertyBag), `s.AsyncLoadingTimeLimit` меньше (доводка размажется на больше кадров —
+меньше пик, дольше появление объектов), `s.PriorityAsyncLoadingExtraTime` 15 → 5.
+Источники: https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/CoreUObject/FAsyncLoadingThreadSettings ·
+https://dev.epicgames.com/documentation/unreal-engine/asynchronous-level-loading-in-unreal-engine · https://issues.unrealengine.com/issue/UE-166872 ·
+https://forums.unrealengine.com/t/deadlock-between-gamethread-and-fasyncloadingthread-inupropertybag-getorcreatefromdescs/2745473
+
 Следующая ветка по плану раздела 3 — «спавн»: кандидаты 3 (`p.Chaos.EnableAsyncInitBody`) и 4 (`p.ClothPhysics 0`), каждый A-B-A чистыми облётами.
 
 ## Источники
