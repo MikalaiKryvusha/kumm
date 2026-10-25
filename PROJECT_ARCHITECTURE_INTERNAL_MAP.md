@@ -21,7 +21,7 @@
 | Abstraction | What it *is* (essence) | Responsibility |
 |-------------|------------------------|----------------|
 | **Pack** | A game build with mods, as a folder: manifest + config + archive library. Somebody's private collection; the engine only visits it. | Owns ALL state. `--root` / `-PackDir` name it. |
-| **Manifest** (`modpack.json`) | The pack's declaration: `nexusGame`, `gameExe`, `library`, `mods[]`, optional `engineIni`, `steamEmu`, `packName`, `builtFor`. | Single source of truth for both halves. |
+| **Manifest** (`modpack.json`) | The pack's declaration: `nexusGame`, `gameExe`, `library`, `mods[]`, optional `engineIni`, `steamEmu`, `packName`, `builtFor`, and for `-Export` `guide`, `extras` (files/folders copied to the bundle root, e.g. wallpapers), `exportConfig`. | Single source of truth for both halves. |
 | **Library** | The folder of downloaded archives (`library` key; may be an absolute path outside the pack) plus `_unpacked/` and `OLD/`. | Holds *what is installed*, encoded in the file names. |
 | **Archive** | One Nexus file on disk. Its NAME is a record: `<name> <ver> <modId> <ver> <ISO-date> <token>.<ext>`. | Carries mod identity + upload date without any database. |
 | **Card** | One file row on a Nexus mod page, read from `dt[data-id][data-name][data-version][data-date]`. | The remote counterpart of an Archive. |

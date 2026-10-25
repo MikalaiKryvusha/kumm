@@ -96,7 +96,7 @@ a complete CLI reference) → the `.SYNOPSIS`/`.DESCRIPTION` block of `Deploy-Mo
 | `kumm.mjs` header comment «Команды» (what `help` prints) | the command switch · the README command table · `HOUSE_RULES.md` → Stands, environments and devices | `node test-help-commands.mjs` (header = switch = README; the `HOUSE_RULES.md` stands table — by eye) |
 | `package.json` `"files"` | what a user of `npm i -g kumm` actually gets | `npm pack --dry-run` — 5 files: `kumm.mjs`, `Deploy-ModPack.ps1`, `README.md`, `LICENSE`, `package.json` (drift closed 2026-10-10) |
 | archive naming scheme | `libraryName()` (writer) ↔ `parseArchive()` (reader) in `kumm.mjs` | round-trip one name through both |
-| `modpack.json` keys | `kumm.mjs` (`nexusGame`, `library`, `mods[]`) ↔ `Deploy-ModPack.ps1` (`gameExe`, `library`, `mods[]`, `steamEmu`, `packName`, `builtFor`) | grep both halves for each key |
+| `modpack.json` keys | `kumm.mjs` (`nexusGame`, `library`, `mods[]`) ↔ `Deploy-ModPack.ps1` (`gameExe`, `library`, `mods[]`, `steamEmu`, `packName`, `builtFor`, `guide`, `extras`, `exportConfig`) | grep both halves for each key |
 
 ---
 

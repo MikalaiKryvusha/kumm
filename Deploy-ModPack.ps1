@@ -1171,6 +1171,16 @@ function Export-Bundle {
         Copy-Item $g (Join-Path $Dest (Split-Path $g -Leaf)) -Force
         Ok "guide: $(Split-Path $g -Leaf)"
     }
+    # Дополнительные материалы сборки (обои, арты) - в корень бандла под своим именем, файл или папка целиком.
+    # Слово владельца 2026-10-25: обои из обложки «положить в сборку как доп материалы». Отдельный ключ, а не
+    # второй guide: материалов может быть несколько, и их место - рядом с гайдом, а не внутри pack/. [NOT-TESTED]
+    foreach ($x in @($pack.extras)) {
+        if (-not $x) { continue }
+        $p = Resolve-UnderRoot $x
+        if (-not (Test-Path $p)) { throw "extras not found: $p" }
+        Copy-Item $p (Join-Path $Dest (Split-Path $p -Leaf)) -Recurse -Force
+        Ok "extras: $(Split-Path $p -Leaf)"
+    }
 
     $outPack = $pack | ConvertTo-Json -Depth 30 | ConvertFrom-Json
     $outPack.mods = $outMods
