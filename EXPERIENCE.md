@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0323 · 2026-10-25 · ✅ · #ue5 #iostore #retoc #conan #devkit #vanilla-assets
+class: tool-gap-closed-by-spec
+**Lesson:** без кита ванильный ассет UE5 достаётся из паков игры по идентификатору пакета. retoc 0.1.5 читает контейнеры игры
+5.8, но без путей (у паков игры нет индекса каталогов, `to-legacy` падает на заголовке): видны только идентификаторы чанков.
+`FPackageId` = CityHash64 от пути пакета в нижнем регистре в UTF-16LE (в оглавлении — байты в обратном порядке); формулу сверил на
+парах путь↔id из оглавления МОДА, где retoc показывает оба. Дальше `retoc list <utoc> | grep <id>00000001` и `retoc get`.
+**Repro:** `MSYS_NO_PATHCONV=1 python -I -X utf8 ConanExiles/_config/devkit/package-id.py /Game/Items/ItemStatModificationTable`
+→ `le=1c1c03902cf25439` → `pakchunk0`. `MSYS_NO_PATHCONV=1` обязателен: Git Bash превращает `/Game/...` в путь Windows.
+mechanized: D:\work\ai_sandbox\ConanExiles\_config\devkit\package-id.py
+
 ### EXP-0322 · 2026-10-25 · ❌→✅ · #localization #locres #conan #guards #shell #exit-code
 class: check-that-cannot-fail
 **Lesson:** два урока одного часа. (1) Один `.locres` на все моды переводится по английскому тексту — новая таблица с тем же словом в
