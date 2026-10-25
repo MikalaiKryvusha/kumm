@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0332 · 2026-10-25 · ❌→✅ · #conan #bench #camera #flight #taste #ue4ss
+class: cinematic-route-guessed-not-scouted
+**Lesson:** облёт-бенч для глаза владельца: (1) летит КАМЕРА-актёр (`CameraActor` + `SetViewTargetWithBlend`, `K2_TeleportTo`), а не герой —
+герой в режиме Flying застревал в реке и скалах по 45 с (OblvBench LTSharpe делает так же); (2) красиво — это просторы с высоты и низкий
+проход только в выверенных местах; «у самой земли» камера смотрит в борта каньонов («ну зачем лететь в стену и в скалы!!!»); (3) высоты
+точек — по ЗАМЕРУ (лучи вниз: `gnd` в журнале каждую секунду, промер русла сеткой лучей), не на глаз — высоты «на глаз» оказались под землёй;
+(4) маршрут строится циклом «разведка → лист кадров по секундам → правка точек», и каждый прогон смотрит владелец — 30 с зависания на старте
+обязательны и в разведке; (5) за каждым «выкрутасом» у препятствия (петля у водопада) — пальмы без столкновений, лучи их не видят.
+**Repro:** 2026-10-25 20:53–22:12, 11 облётов, кейсы BN* в `testcases/TC_conan_3.0.1_ru_fps_perf_2026-10-25.md`.
+mechanized: `ConanExiles/_unpacked/KrinikConanBench` (камера-актёр, `gnd` в `EV fly=prog`, 30 с зависания по умолчанию)
+
 ### EXP-0331 · 2026-10-25 · ❌→✅ · #conan #localization #filter #crlf #silent-loss
 class: junk-filter-eats-real-text
 **Lesson:** фильтр «двоичного мусора» по классу символов `[\x00-\x09\x0b-\x1f…]` считал `\r` мусором, и каждая строка мода с переводом
@@ -109,7 +120,13 @@ class: generic-property-read-crashes-native
 0x0000000000000010`, стек целиком в UE4SS; `pcall` нативное падение не ловит. Тип свойства проверять ДО чтения
 (`p:GetClass():GetFName()` ∈ числа, флаги, строки, имена). Игра упала у владельца на экране (окно CrashReportClient) — прогон потерян.
 **Repro:** 2026-10-25 20:25, пульт `lua … FindFirstOf(cn):GetClass():ForEachProperty(… o[nm] …)` на `NAS_MC_ModController_C` и соседях.
-mechanized: `ConanExiles/_unpacked/KrinikAgentRemote` — команда `props <Класс>` (читает только простые типы) [NOT-TESTED]
+**Второй раз, 2026-10-25 21:14** (`reading 0x18`): поиск арок — `FindAllOf("StaticMeshComponent")` и у каждого из 8 тысяч
+`c.StaticMesh:GetFName()`; у какого-то компонента модель пустая, вызов метода у пустого объекта уронил игру. Заслон `props` защищал только
+свою команду, а сырой `lua` — нет. **Правило шире:** в массовом переборе объектов игры у каждого объектного свойства — `IsValid()` до
+любого вызова его метода; перебор компонентов (десятки тысяч) не делать вовсе — имена актёров (`FindAllOf("StaticMeshActor")`,
+`GetFName`) прошли без падения.
+mechanized: `ConanExiles/_unpacked/KrinikAgentRemote` — команда `props <Класс>` (только простые типы; в игре 20:31 — 6 вызовов, игра
+жива) · для сырого `lua` — не механизировано: правило выше
 
 ### EXP-0329 · 2026-10-25 · ❌→✅ · #conan #tools #hardcoded-path #migration #twins
 class: hardcoded-install-path-outlives-install
