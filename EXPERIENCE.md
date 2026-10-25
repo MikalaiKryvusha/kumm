@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0326 · 2026-10-25 · ❌→✅ · #windows #chrome #edge #extensions #cleanup
+class: browser-extension-removal-without-ui
+**Lesson:** снять расширение из чужого профиля без щелчков: `chrome.exe --uninstall-extension=<id>` в нынешнем Chrome НЕ работает
+(запуск прошёл, расширение осталось); удаление папки в `Extensions` при живой записи в Secure Preferences — браузер пометит «повреждено».
+Работает политика `HKLM\SOFTWARE\Policies\<Google\Chrome|Microsoft\Edge>\ExtensionSettings` = `{"<id>":{"installation_mode":"removed"}}` и
+один запуск браузера: Chrome удалил и запись, и файлы; Edge только выключил — папку убрать при закрытом Edge, запрет оставить. Проверка —
+чтение `Preferences`/`Secure Preferences` → `extensions.settings` (скрипт `browser_ext.py` в черновике сессии). Ещё: `HDSentinel.ini`
+`Sensors=Y0ICOND…` — НЕ значки трея по дискам (правка ни на что не повлияла); значки трея задаются в окне программы.
+**Repro:** 2026-10-25 18:2x, три помощника AliExpress в Chrome «Пользователь 2», Fnet в Edge.
+mechanized: no
+
 ### EXP-0325 · 2026-10-25 · ❌→✅ · #presentmon #etw #measurement #conan
 class: stale-session-poisons-next-run
 **Lesson:** PresentMon, зависший на замере (окно игры в фоне, `--timed` без `--terminate_after_timed`), после `Stop-Process` оставляет
