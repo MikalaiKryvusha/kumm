@@ -91,6 +91,25 @@
 
 ## Entries
 
+### EXP-0330 · 2026-10-25 · ❌ · #conan #ue4ss #lua #pult #crash #reflection
+class: generic-property-read-crashes-native
+**Lesson:** в UE4SS нельзя читать «все свойства подряд» (`ForEachProperty` + `o[имя]`): у объектов засад PvE Plus Ambush / Night Terrors
+одно из свойств (делегат, слабый указатель, интерфейс) с пустым значением уронило игру — `EXCEPTION_ACCESS_VIOLATION reading
+0x0000000000000010`, стек целиком в UE4SS; `pcall` нативное падение не ловит. Тип свойства проверять ДО чтения
+(`p:GetClass():GetFName()` ∈ числа, флаги, строки, имена). Игра упала у владельца на экране (окно CrashReportClient) — прогон потерян.
+**Repro:** 2026-10-25 20:25, пульт `lua … FindFirstOf(cn):GetClass():ForEachProperty(… o[nm] …)` на `NAS_MC_ModController_C` и соседях.
+mechanized: `ConanExiles/_unpacked/KrinikAgentRemote` — команда `props <Класс>` (читает только простые типы) [NOT-TESTED]
+
+### EXP-0329 · 2026-10-25 · ❌→✅ · #conan #tools #hardcoded-path #migration #twins
+class: hardcoded-install-path-outlives-install
+**Lesson:** после переезда на 3.0.1 и удаления 2.2.3 21 прибор `ConanExiles/_config` смотрел в зашитый путь 2.2.3:
+`who-overwrites-table.py` ответил «журнала игры нет», `close-game.ps1` ждал чужой `UE4SS.dll`. Первый случай (шаг 19 плана 33,
+`deploy-localization.py`) починили одним файлом — класс остался и стрелял дальше. Путь игры — в одном месте (`targets.json`),
+приборы читают его через `_config/game_target.py` / `game-target.ps1`; `close-game.ps1` берёт путь у самого процесса.
+**Repro:** `grep -rn "Conan Exiles 2.2.3" ConanExiles/_config --include=*.py --include=*.ps1` — остался только `verify-install.py`
+(сверка хешей дистрибутива 2.2.3, отдельная задача).
+mechanized: `ConanExiles/_config/game_target.py`, `ConanExiles/_config/game-target.ps1`
+
 ### EXP-0328 · 2026-10-25 · ❌→✅ · #windows #config #decompile #lossless-scaling #nvidia #drs
 class: guessed-config-schema
 **Lesson:** у чужой .NET-программы имя поля в файле настроек читается из её кода, а не угадывается: четыре догадки (`Filter`,
