@@ -23,7 +23,8 @@
 
 - **Camera by middle mouse in the window spins insanely fast** (`[OWNER]` «по скм безумно быстрое вращение камеры» · 2026-10-25, window
   1366×768 + LS). The PCGamingWiki «Dungeon Siege 2 mouse cursor fix» (Genesis, 2.30.0.0 — the exe we run) fixes cursor and camera spin
-  **in fullscreen** on Win10 1703+, not windowed. Open: was it like this before 2026-10-25 (asked); suspect LS `AdjustCursorSpeed=true`.
+  **in fullscreen** on Win10 1703+, not windowed. Closed by the owner: `[OWNER]` «похер, забудь» · 2026-10-25 — not pursued (suspect, if it
+  ever returns: LS `AdjustCursorSpeed=true`).
 
 ## NVIDIA filters (Alt+F3)
 
@@ -32,8 +33,8 @@
 - Driver profile «Dungeon Siege 2» had only `dungeonsiege2.exe`. 2026-10-25 ≈19:43: added `dungeonsiege2_retail.exe` and three Ansel settings =
   1 — `0x1035DB89` NVIDIA Predefined Ansel Usage, `0x1085DA8A` Ansel flags for enabled applications, `0x1075D972` Enable Ansel; read back
   by `_tools/nvidia-drs-reader` (db1). Import file `_tools/nvidia-drs-backup/2026-10-25_ds2-ansel.nip`, backup before it —
-  `_tools/nvidia-drs-backup/2026-10-25_before-ds2-ansel/`. Effective from the next game launch; whether NVIDIA app still blocks DS2 by its own
-  list — not yet tested. Next if blocked: ReallyFreeStyle (patches the overlay) or ReShade (DX9).
+  `_tools/nvidia-drs-backup/2026-10-25_before-ds2-ansel/`. Result 19:46: NVIDIA app shows «Запущена игра Dungeon Siege 2», RTX HDR active,
+  but «Доступные фильтры (0)» — its own list keeps DS2 closed. Owner: filters «забудь, без» · 2026-10-25 — ReShade / ReallyFreeStyle not pursued.
 
 ## Config
 
