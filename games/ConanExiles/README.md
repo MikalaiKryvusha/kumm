@@ -17,6 +17,10 @@
 Дальше по слову владельца: русификация The Damage Meter и Exiles Fishing (у автора русского нет — свой пак), шрифт Gabriela,
 кандидаты от мерцания пальм — `docs/03-cvars-конана.md` пака; UE4SS 1181.
 
+**Обновление 2026-10-25 11:59:** 63 пака — ещё шесть модов удобства по решению владельца (Double Storage Space, Pickup+, Faster
+Elevator, Thrall Inventory x2, Arrow Quick Swap, TDI_LegendaryRepair); все 63 смонтированы, меню живое (тот же отчёт, второй прогон).
+Их перевод — в таблице, в `Game.locres` попадёт с новым китом.
+
 **Обновление 2026-10-25 11:37:** в игре 57 паков — к 43 добавлены 13 модов Мастерской по выбору владельца (блок над Hosav: районы
 карты PNutt, Ironlight, Night Terrors, PvE Plus Ambush, Ragnar's New Factions, Riding Thralls, Rideable Pets, Waystones, Female New
 Faces) и Era of Trials (под LegitReligious); все 57 смонтированы, меню живое (`testcases/reports/2026-10-25_conan-3.0.1-new-mods-smoke.md`).
