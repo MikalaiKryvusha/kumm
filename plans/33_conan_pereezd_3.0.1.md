@@ -233,14 +233,20 @@ DISM; скрипт `C:\РЕВИЗИЯ_C_2026-10-25\03_move_claude_to_F.ps1` (п�
 0. **После перезапуска:** `Get-Item $env:USERPROFILE\.claude` — ссылка на `F:\Claude\.claude`; `$env:TEMP` — `F:\Temp`; журнал
    `C:\РЕВИЗИЯ_C_2026-10-25\03_move_claude_to_F.log`. Тогда удалить `%USERPROFILE%\.claude.old-*` по файлу (правило — без `-Recurse -Force`).
    После перезагрузки — шаги `02_after_reboot.ps1` (старый дамп C, старый Temp C). Дальше задачи (3) D и (4) Severe Weather, потом пункт 1.
-1. **Кит встал** → `cp -r ConanExiles/_config/localization/kit-saved-loc/. F:/CEUE5Devkit/UE4/Saved/Loc/` → сшивка
+1. ✅ **Сделано 2026-10-25 16:28 на новом ките:** цели возвращены, таблица 4 500 строк (4 «без перевода» — размеры рыбы, у них `key:`),
+   компиляция `KrinikRU` 97 с, код 0; `locres-regress.py`: прежних 7 049, новых 7 147, пропало 0, изменилось 0; раскатан,
+   `deploy-localization.py --check` — «всё на месте». В игре глазами не проверено (кейсы T1–T6 пункта 2). Как было:
+   `cp -r ConanExiles/_config/localization/kit-saved-loc/. F:/CEUE5Devkit/UE4/Saved/Loc/` → сшивка
    `hosav-ru-entries.py` и компиляция `KrinikRU` (README локализации пака, шаги 4–5, под замком машины) → `locres-regress.py` против
    раскатанного (код 0) → `Game/ru/Game.locres` → `deploy-localization.py` и `--check`. Ожидается ≈7 100 записей: добавятся Double Storage
    Space, Pickup+, Arrow Quick Swap, TDI_LegendaryRepair (номера 4427–4497).
 2. **Заход в мир** с тестовым героем по `testcases/TC_conan_3.0.1_new_mods_2026-10-25.md`: переводы T1–T6, кнопка Hosav H1, таблицы G1
    (`who-overwrites-table.py`), Ymir's x3_y5 Y1, Shemite S1, Bosses B1, LegitReligious L1, настройки засад E1 (дамп пультом), лица F1.
 3. **Засады «редко и случайно»** (шаг 22) — по значениям E1 свой Lua-мод, выставляет настройки Ambush и Night Terrors при входе в мир.
-4. **Severe Weather** (шаг 26) — кадры с одного места: `r.Fog=0` · `r.Fog=1` без мода · мод с туманом, плюс замер кадров.
+4. **Severe Weather** (шаг 26) — **раскатан 2026-10-25 16:25** по слову владельца того дня («ставим, попродуем сразу с настройками тумана,
+   как у него задано. затем я потестирую и ты потестируешь производительность - может отключим туман»): `_workshop/3721071602` (steamcmd),
+   в манифесте под Emberlight, `Engine.ini` пака `r.Fog=1` (проба, откат — `r.Fog=0`), в игре `VolumetricFog=1`; 64 пака, verify 87/0.
+   Дальше: владелец играет и смотрит; замер кадров PresentMon с одного места — мод с туманом против `r.Fog=0`, под замком машины.
 5. **Таблица LegitReligious** (шаг 28) — три копии извлечены (`ConanExiles/_config/devkit/_vanilla/`), построчный разбор и слияние, пак-заплатка
    на новом ките. **Bosses против LBPR** — общая копия `BP_ThrallSystemComponent` с обеими правками, тоже на ките.
 6. Владельцу: скрипты уборки `C:\РЕВИЗИЯ_C_2026-10-25\01_cleanup_now.ps1` → перезагрузка → `02_after_reboot.ps1` (около 52 ГБ; TEMP → `F:\Temp`);
