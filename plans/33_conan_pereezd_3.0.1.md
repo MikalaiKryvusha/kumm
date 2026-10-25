@@ -73,7 +73,11 @@
       (`MAC_AmbushSaveToDatabase`), таймер игрока — `NAS_AC_PlayerController` (`RollAmbushChance`, `RandomOffset`). Night
       Terrors — `NightTerrorsServerSettings` (`AmbushChance`, `AmbushesEnabled`, `AmbushStartHour`), проверка
       `BP_NightTerrors_RandomAmbushChance` (случайное число ≤ шанса, `TimeSinceLastTrigger`), окно — `dc nightterrors admin`.
-      Значения по умолчанию в байткоде — читать в игре пультом UE4SS (объекты настроек обоих модов). Дальше: выбрать «реже и
+      Значения по умолчанию в байткоде — читать в игре пультом UE4SS (объекты настроек обоих модов).
+      **Прочитано 2026-10-25 20:32** (пульт `props` и поля структуры, отчёт `testcases/reports/2026-10-25_conan-3.0.1-fps-perf-run2.md`):
+      Night Terrors — `AmbushesEnabled=true`, `AmbushChance=80`, `AmbushStartHour=21`, `AmbushEndHour=5`, `VaporizeTimeInSeconds=300`
+      (структура `NightTerrorsServerSettings` на `BP_NightTerrors_ModController_C`); у PvE Plus Ambush в живых объектах настроек нет —
+      они в базе мира (`MAC_AmbushSaveToDatabase`), читать из `Game_0.db`. Дальше: выбрать «реже и
       случайнее», выставлять при входе в мир своим Lua-модом — так сборка везёт настройку из коробки, без админ-консоли.
 - [ ] 23. Caverns of Set (3722525736), Shemite City State (3755371705), Ymir's Respite (3730427175) — три района карты автора PNutt —
       слово владельца 2026-10-25 ≈10:25: «выглядит интересно, и вроде не должно быть конфликтным, можно поставить, нужна
@@ -217,10 +221,23 @@
       настройки, салон, оружие, LegitReligious, Emberlight, Ancient Civilization): 3 866 строк в рабочем списке, номера 4498–8363, куски
       `scratchpad/tr/chunk1–5.tsv`. Волна 2 — Highmane's Arsenal (5 579), EAA (5 015), Beyond Decor (3 173). **Помощников — не больше двух
       одновременно** (`HOUSE_RULES.md` §1): куски 1–2 у помощников с 20:08, 3–5 — очередью.
+      **20:34:** волна 1 переведена и дописана в `dm-fish-ru.tsv` (3 866 строк, «—» 125; Ancient Civilization сведён к одному образцу
+      «Древний X»). Сшивка показала дефект прибора: фильтр мусора `extend-worklist.py` отбрасывал каждую строку с переводом строки `\r\n` —
+      так из перевода молча выпали 137 строк, в том числе у «переведённых» Era of Trials (53) и LBPR (52); починено, строки 8364–8500 —
+      кусок 6. Волна 2 — строки 8501–23223 (14 723: Beyond Decor 3 182, Highmane 5 788, EAA 5 753), 12 кусков в
+      `scratchpad/w2/`, очередью по два. Счётчик кадров: Regular 18 по слову владельца «вес … меньше на 100, размер меньше на 20%» (веса 600
+      у шрифтов игры нет). Чистый замер 20:32 — 90,1 к/с, 1 % низких 76,8 (4K, DLSS), предел в видеокарте.
 - [ ] 17. Пара карт игры `games/ConanExiles/GAME_STRUCTURE_EXTERNAL_MAP.md` и `GAME_ARCHITECTURE_INTERNAL_MAP.md` (канон «две карты на
       каждую игру», `AGENT_GUIDE.md` → Notes from the human) — у Конана их до сих пор нет, знания разбросаны по досье и `docs/` пака.
       Первым делом туда: раскладка установки 3.0.1 (корень без подпапки), `Saved/Config/Windows/Game.ini` → `Language`, главное меню
       `W_MainMenu_MainMenu_C` и его элементы (`Image_SideBar_1`, `Border_1`), пульт агента и снимок окна в фоне.
+      **Добавлено 2026-10-25 вечером (наблюдено пультом в мире):** корень HUD Hosav `W_NewHealthUI_C` — `CanvasPanel` (на него ставит число
+      `KrinikFpsCounter`); тексты HUD — шрифт `/Engine/EngineFonts/Roboto` (начертания только Regular, Bold, Italic, Bold Italic, Light) и
+      `/Game/Fonts/Kelson_Sans_Regular`; у шрифтов игры (KelsonSans, NotoSans, OpenSans, CrimsonPro, Cardo, Alte Haas Grotesk) веса 600 нет;
+      `TextBlock`, созданный модом, по умолчанию `Visible` — ловит мышь; загрузка мира после `LoadMap` ещё ≈3 мин догружает ассеты
+      («Осталось: 3 136…», затем %), HUD появляется в её конце; объекты засад — `NAS_MC_ModController_C`, `NAS_AC_PlayerController_C`,
+      `BP_AC_PlayerAmbushComponent_C`, `MAC_AmbushSaveToDatabase_C`, `BP_NightTerrors_ModController_C`, `BP_NightTerrors_AmbushEnabler_C`;
+      перебор всех свойств через UE4SS роняет игру (EXP-0330) — только `props`.
 
 ## Следующая сессия — по порядку (передача 2026-10-25 12:07, дополнена 16:18)
 

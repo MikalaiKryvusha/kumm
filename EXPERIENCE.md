@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0331 · 2026-10-25 · ❌→✅ · #conan #localization #filter #crlf #silent-loss
+class: junk-filter-eats-real-text
+**Lesson:** фильтр «двоичного мусора» по классу символов `[\x00-\x09\x0b-\x1f…]` считал `\r` мусором, и каждая строка мода с переводом
+строки Windows (`\r\n` — дневники, лор, подсказки настроек) молча не попадала в рабочий список перевода. Опись говорила «переведено
+целиком» (Era of Trials, LBPR), а 137 строк оставались английскими. Поймал сшиватель — счётчиком «UNTRANSLATED» с `\r\n` в выводе, а не
+прибор описи: опись и список считали одной меркой и ошибались одинаково. Нормализовать перевод строки ДО любого фильтра; проверять итог
+сквозным счётом на выходе (сшиватель), а не тем же фильтром.
+**Repro:** `python -I -X utf8 _config/devkit/hosav-ru-entries.py … > stitch.log; grep UNTRANSLATED stitch.log | grep -c '\\r\\n'` (пак ConanExiles) — до
+починки 49 у волны 1.
+mechanized: `ConanExiles/_config/devkit/extend-worklist.py` (`junk` и чтение источника нормализуют `\r\n`)
+
 ### EXP-0330 · 2026-10-25 · ❌ · #conan #ue4ss #lua #pult #crash #reflection
 class: generic-property-read-crashes-native
 **Lesson:** в UE4SS нельзя читать «все свойства подряд» (`ForEachProperty` + `o[имя]`): у объектов засад PvE Plus Ambush / Night Terrors
