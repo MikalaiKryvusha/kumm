@@ -214,6 +214,25 @@
       Первым делом туда: раскладка установки 3.0.1 (корень без подпапки), `Saved/Config/Windows/Game.ini` → `Language`, главное меню
       `W_MainMenu_MainMenu_C` и его элементы (`Image_SideBar_1`, `Border_1`), пульт агента и снимок окна в фоне.
 
+## Следующая сессия — по порядку (передача 2026-10-25 12:07)
+
+Состояние: в игре 3.0.1 стоят **63 пака**, все монтируются (`testcases/reports/2026-10-25_conan-3.0.1-new-mods-smoke.md`, второй прогон);
+русский `Game.locres` раскатан на 7 049 записей (без четырёх модов удобства). Владелец ставит **новый кит** в `F:\CEDevKit` (старый удалён
+≈11:39) и напишет в новой сессии.
+
+1. **Кит встал** → `cp -r ConanExiles/_config/localization/kit-saved-loc/. F:/CEDevKit/CEUE5Devkit/UE4/Saved/Loc/` → сшивка
+   `hosav-ru-entries.py` и компиляция `KrinikRU` (README локализации пака, шаги 4–5, под замком машины) → `locres-regress.py` против
+   раскатанного (код 0) → `Game/ru/Game.locres` → `deploy-localization.py` и `--check`. Ожидается ≈7 100 записей: добавятся Double Storage
+   Space, Pickup+, Arrow Quick Swap, TDI_LegendaryRepair (номера 4427–4497).
+2. **Заход в мир** с тестовым героем по `testcases/TC_conan_3.0.1_new_mods_2026-10-25.md`: переводы T1–T6, кнопка Hosav H1, таблицы G1
+   (`who-overwrites-table.py`), Ymir's x3_y5 Y1, Shemite S1, Bosses B1, LegitReligious L1, настройки засад E1 (дамп пультом), лица F1.
+3. **Засады «редко и случайно»** (шаг 22) — по значениям E1 свой Lua-мод, выставляет настройки Ambush и Night Terrors при входе в мир.
+4. **Severe Weather** (шаг 26) — кадры с одного места: `r.Fog=0` · `r.Fog=1` без мода · мод с туманом, плюс замер кадров.
+5. **Таблица LegitReligious** (шаг 28) — три копии извлечены (`ConanExiles/_config/devkit/_vanilla/`), построчный разбор и слияние, пак-заплатка
+   на новом ките. **Bosses против LBPR** — общая копия `BP_ThrallSystemComponent` с обеими правками, тоже на ките.
+6. Владельцу: скрипты уборки `C:\РЕВИЗИЯ_C_2026-10-25\01_cleanup_now.ps1` → перезагрузка → `02_after_reboot.ps1` (около 52 ГБ; TEMP → `F:\Temp`);
+   🟡-моды удобства из `ConanExiles/docs/16` не решены.
+
 ## Риски
 
 - (a) 3.0 мог поменять таблицы прогрессии — тогда `KrinikLevelUncapped` (целиком заменяет три таблицы) сломает уровни. Видно по HUD.
