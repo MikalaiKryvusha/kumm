@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0321 · 2026-10-25 · ❌→✅ · #conan #mods #conflicts #migration #iostore #unrealpak
+class: claim-wider-than-observation
+**Lesson:** совет «брать мод в сборку» по одному описанию — полдела; владелец: «мне приходится тебя просить изучать конфликтность
+и что меняет для нас в сборке». Пересечения считает код, а не чтение: `UnrealPak <utoc> -List` по каждому паку (внутренний
+`-Windows.utoc` достаётся `repak get` без тяжёлого `ucas`) → пути вне своей папки = перезапись файлов игры; хеши тех же путей в
+`pakchunk*` двух версий игры → что откатывает патч. Вливание в таблицы на лету из пака видно не до конца: ноль находок там значит
+«не видно», а не «чисто» — первая версия прибора выдала ложный ноль у Diverse Barkeeps. И ловушка: `UnrealPak -Extract` с
+ОТНОСИТЕЛЬНЫМ путём пишет в свою папку `Engine\Binaries\Win64` (помощник выгрузил туда 331 файл) — путь вывода только абсолютный.
+**Repro:** `python -I -X utf8 ConanExiles/_config/mod-overrides.py <out.tsv> <папка паков>`; сверка версий — `docs/02` §2.1 п. 3.
+mechanized: D:\work\ai_sandbox\ConanExiles\_config\mod-overrides.py
+
 ### EXP-0320 · 2026-10-25 · ❌→✅ · #conan #engineini #generator #drift #tools
 class: generator-lags-hand-edited-output
 **Lesson:** генератор файла и сам файл — пара «истина ↔ зеркало», и она расходится молча: `_config/build-engine-ini.py` собирал
