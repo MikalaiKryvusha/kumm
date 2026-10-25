@@ -15,9 +15,9 @@ settings objects. Not covered on purpose: full gameplay of each mod (the owner's
 
 | # | Case | Steps | Expected | Status | Observation |
 |---|---|---|---|---|---|
-| D1 | Deploy self-check | `Deploy-ModPack.ps1 -Deploy -PackDir <pack>`; then `_config/deploy-localization.py` | `verify … 0 missing`; locres hash = pack | — | |
-| M1 | No pak rejected | launch → menu; grep game log | no `too old`, no `Failed to mount`, no `ValidateMod_` error | — | |
-| M2 | All paks mounted | same log; ConanModPackStatus line | `Mounting mod pak` count = 56 = lines of `modlist.txt`; `СБОРКА: моды 56/56` | — | |
+| D1 | Deploy self-check | `Deploy-ModPack.ps1 -Deploy -PackDir <pack>`; then `_config/deploy-localization.py` | `verify … 0 missing`; locres hash = pack | pass | 2026-10-25 11:32: 63/63 entries, 174 files, verify 80 present 0 missing; locres `2d0a7526…` «совпадает» (7 049 entries) |
+| M1 | No pak rejected | launch → menu; grep game log | no `too old`, no `Failed to mount`, no `ValidateMod_` error | pass | launch 11:34:10; game log 11:34:56 — none of the four strings |
+| M2 | All paks mounted | same log; ConanModPackStatus line | `Mounting mod pak` count = lines of `modlist.txt` (57 with Era of Trials); `СБОРКА: моды 57/57` | pass | 57 × `Mounting mod pak` = 57 lines; `СБОРКА: моды 57/57` 11:34:49 (42/57 at 11:34:45 — mounting still in progress); menu frame m01 — Russian, «Версия #379 176», frame and offline modal hidden |
 | W1 | World entry with the test hero | Continue → world | `LoadMap(ConanSandbox)`, HUD frame, process alive 60 s | — | |
 | T1 | Damage Meter in Russian | hold F1 / open its window | «Счётчик урона», no English labels of the table | — | |
 | T2 | Exiles Fishing in Russian | inventory / its panel | fishing item names and panel labels Russian | — | |
@@ -33,4 +33,4 @@ settings objects. Not covered on purpose: full gameplay of each mod (the owner's
 | L1 | LegitReligious old `ItemStatModificationTable` | compare a vanilla 3.0 item stat modifier row present only in 3.0.1 | modifier present or lost | — | |
 | E1 | Encounter settings objects | remote dump of Ambush `ConfigSetting…` and Night Terrors `NightTerrorsServerSettings` | default values read (MinTimeBetween, MaxExtraTime, AmbushChance …) | — | |
 | F1 | Female New Faces vs Heritage | character creation of a NEW slot (no world entry) | new faces present in the editor | — | |
-| X1 | Clean exit | `_config\close-game.ps1` | process gone | — | |
+| X1 | Clean exit | `_config\close-game.ps1` | process gone | pass | 11:35 — «closed cleanly in 3,6 s (UE4SS.dll free)» |
