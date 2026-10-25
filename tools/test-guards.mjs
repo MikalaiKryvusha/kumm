@@ -387,6 +387,18 @@ try {
   check('part H ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
 
+// ---------- I. the test-after-code hook (PostToolUse + Stop): written code is a debt until a run of its kind
+// (2026-10-25: перенесён из Unliminium словом владельца «возьми оттуда хук в KUMM про цикл код - тесты - правки»)
+console.log('I. test-after-code');
+try {
+  const TAC = resolve(ROOT, 'tools/hooks/test-after-code.mjs');
+  const st = spawnSync(process.execPath, [TAC, '--selftest'], { encoding: 'utf8' });
+  check('its own selftest (14 steps) is green', st.status === 0 && /selftest OK/.test(st.stdout || '') ? 'green' : 'red: ' + (st.stdout || '').slice(0, 120), 'green');
+  check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [TAC], { input: '{not json', encoding: 'utf8' }).status, 0);
+} catch (e) {
+  check('part I ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
+}
+
 for (const d of tmps) { try { removeByEnumeration(d); } catch (e) { console.log(`note: temp left at ${d} (${e.code || e.message})`); } }
 console.log(`-- ${total - bad} of ${total} as expected`);
 process.exit(bad ? 1 : 0);
