@@ -192,6 +192,13 @@ ConanModPackStatus → облёт → вернуть. Сравнивать ме�
 | 2Б. `s.WarnIfTimeLimitExceeded 1` | 105 предупреждений за сеанс: `Event_DeferredPostLoadExportBundle` 82, `CreateAsyncPackagesFromQueue` 19 — 6–8 мс за кадр |
 | 2А. WPR | `wpr -start CPU -filemode` → облёт → `wpr -stop <etl>` (6 ГБ за 3 мин, 71 508 событий потеряно; запись ест кадры — облёт не для сравнения). Разбор без окон: `xperf -tle -i <etl> -a profile -detail` — **без `-tle` xperf при потерянных событиях молча отдаёт пустой вывод**; по модулям, не по потокам |
 
+**WPR по модулям** (`_bench/wpr/profile-detail.txt`, процесс игры = 46,4 % всего процессора из 16 потоков): exe 26,26 % (57 % игры) ·
+драйвер NVIDIA `nvwgf2umx.dll` 6,98 % (15 %) · `ntoskrnl.exe` 6,57 % (14 %) · `ntdll.dll` 1,74 % · **`UE4SS.dll` 1,59 % (3,4 %)** ·
+`vcruntime140.dll` 0,96 % · `D3D12Core.dll` 0,88 % · `Dreamworld.dll` 0,01 % — код Funcom живёт в exe, не в этой dll. `UE4SS.dll` —
+четверть одного ядра; его перехваты (`HookProcessInternal`, `HookAActorTick`) и Lua-моды работают на игровом потоке, поэтому верхняя
+оценка — до ~4 мс кадра. Гипотеза, не замер: разбивки по потокам у `-a profile` нет. Проверка — A-B-A без Lua-модов (2Г) и с выключенными
+перехватами в `UE4SS-settings.ini`, если моды без них живут.
+
 Следующая ветка по плану раздела 3 — «спавн»: кандидаты 3 (`p.Chaos.EnableAsyncInitBody`) и 4 (`p.ClothPhysics 0`), каждый A-B-A чистыми облётами.
 
 ## Источники
