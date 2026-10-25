@@ -83,6 +83,11 @@
       панель «Server Tuning», она открылась сама в первой партии). Перевод у автора есть, но в его Discord (манифест,
       `$comment_language`) — нужен аккаунт владельца; иначе — свой пак локализации.
 
+- [ ] 17. Пара карт игры `games/ConanExiles/GAME_STRUCTURE_EXTERNAL_MAP.md` и `GAME_ARCHITECTURE_INTERNAL_MAP.md` (канон «две карты на
+      каждую игру», `AGENT_GUIDE.md` → Notes from the human) — у Конана их до сих пор нет, знания разбросаны по досье и `docs/` пака.
+      Первым делом туда: раскладка установки 3.0.1 (корень без подпапки), `Saved/Config/Windows/Game.ini` → `Language`, главное меню
+      `W_MainMenu_MainMenu_C` и его элементы (`Image_SideBar_1`, `Border_1`), пульт агента и снимок окна в фоне.
+
 ## Риски
 
 - (a) 3.0 мог поменять таблицы прогрессии — тогда `KrinikLevelUncapped` (целиком заменяет три таблицы) сломает уровни. Видно по HUD.

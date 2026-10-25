@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0320 · 2026-10-25 · ❌→✅ · #conan #engineini #generator #drift #tools
+class: generator-lags-hand-edited-output
+**Lesson:** генератор файла и сам файл — пара «истина ↔ зеркало», и она расходится молча: `_config/build-engine-ini.py` собирал
+`Engine.ini` Конана, а файл потом правили руками, и прогон генератора 25.10 выдал бы файл на 208 строк короче — наша настройка
+пропала бы с зелёным «контроль Paths= СОШЛОСЬ». Поймано по `git diff --stat` ДО раскатки. Чтобы сменить кусок файла под новую
+версию игры, менять только этот кусок (`_config/swap-core-paths.py`), а генератор либо догнать, либо пометить «не запускать».
+**Repro:** `git diff --stat -- <файл>` сразу после прогона любого генератора; число удалённых строк больше, чем менял, — стоп.
+mechanized: warning in the header of `ConanExiles/_config/build-engine-ini.py`
+
 ### EXP-0319 · 2026-10-18 · ❌ · #svarogsdream #ui #testing #process
 class: tested-own-change-not-player-path
 **Lesson:** проверка UI шла от моей правки (полоса состояний — 20 кейсов, 5 заходов), а не от игрока: владелец за 5 минут игры нашёл 9 изъянов в
