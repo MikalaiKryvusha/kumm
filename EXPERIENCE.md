@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0322 · 2026-10-25 · ❌→✅ · #localization #locres #conan #guards #shell #exit-code
+class: check-that-cannot-fail
+**Lesson:** два урока одного часа. (1) Один `.locres` на все моды переводится по английскому тексту — новая таблица с тем же словом в
+другом смысле молча перебивает старый перевод (шапка Hosav «Лёгкая» → «Легкий» после перевода 13 модов; утром так же «Средний» →
+«Средняя»). Ловит только сверка нового файла с раскатанным — прибор `locres-regress.py`, лечит строка `key:`. (2) «Красный прогон»
+прибора был прочитан через трубу `| head` — `$?` вернул код `head`, ноль, и проверка выглядела сломанной; честный красный — без трубы,
+вывод в файл, код самого процесса. Хук `test-after-code` заставил прогнать ещё раз и вскрыл это.
+**Repro:** `python -I -X utf8 _config/devkit/locres-regress.py <раскатанный.locres> <новый.locres>` (пак ConanExiles); код процесса — без трубы.
+mechanized: D:\work\ai_sandbox\ConanExiles\_config\devkit\locres-regress.py
+
 ### EXP-0321 · 2026-10-25 · ❌→✅ · #conan #mods #conflicts #migration #iostore #unrealpak
 class: claim-wider-than-observation
 **Lesson:** совет «брать мод в сборку» по одному описанию — полдела; владелец: «мне приходится тебя просить изучать конфликтность
