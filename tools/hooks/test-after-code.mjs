@@ -29,8 +29,12 @@
 //                 повторный Stop без правок → тишина; правка .md → не долг; файл вне ai_sandbox → не долг; мутант без записи долга → красный
 // GAP:            хук видит, что прогон БЫЛ, не что он проверял написанное и что результат прочитан — это судья и отчёт прогона; код,
 //                 записанный мимо Write/Edit (heredoc в Bash), хуку не виден; имя файла в команде — признак запуска, не доказательство
+//                 + 2026-10-25 16:4x: данные сборки (modpack.json, .ini, .locres, .pak вне KUMM) и раскатка в игру (Deploy-ModPack -Deploy
+//                 без -DryRun, deploy-localization.py, deploy-hot/cold.sh, translation_deploy.sh) — долг game; прежняя версия на этих
+//                 случаях красная в 5 точках; самопроверка стражей tools/test-guards.mjs долг игры не гасит (была красной в 1 точке)
 // ON-REAL-PATH:   2026-10-25 11:11 — wired mid-session in .claude/settings.local.json; the full order reached the context after the next
-//                 Edit of this very file, and its own --selftest run cleared the debt («прогон засчитан … непроверенного кода нет»)
+//                 Edit of this very file, and its own --selftest run cleared the debt («прогон засчитан … непроверенного кода нет»);
+//                 2026-10-25 16:4x — живая раскатка `deploy-localization.py` записала `deploy:deploy-localization.py [game]` и полный приказ
 // [TESTED: 2026-10-25 · --selftest 14 steps green, the mutant without the debt write red on 6 points; live order and clear in this session —
 //  testcases/reports/2026-10-25_test-after-code-hook.md]
 import { readFileSync, writeFileSync, mkdtempSync, rmSync, mkdirSync } from 'node:fs';
@@ -50,13 +54,32 @@ export function kindOf(rel) {
   const ext = extname(p).toLowerCase();
   if (p === 'KUMM/kumm.mjs' || p === 'KUMM/Deploy-ModPack.ps1') return 'engine';
   if (ext === '.lua' || (ext === '.cs' && !p.startsWith('KUMM/'))) return 'game';
+  // Данные сборки меняют игру не меньше кода: манифест, конфиги движка, перевод, паки (2026-10-25: Severe Weather, r.Fog=1 и перевод
+  // на 7 147 записей ушли в игру, а хук молчал — `[OWNER]` «в мире не видел - почему хук тебя не дернул»)
+  if (!p.startsWith('KUMM/') && (/(^|\/)modpack\.json$/.test(p) || ['.ini', '.locres', '.pak'].includes(ext))) return 'game';
   if (['.mjs', '.js', '.py', '.ps1', '.sh'].includes(ext)) return 'tool';
   return null;
 }
 
-const GAME_RUN = /run-game\.sh|\bh\.sh\b|launch-bg\.ps1|capture-window\.ps1|measure-walk\.sh|tools\/test-[\w-]+\.mjs/;
+// tools/test-guards.mjs — самопроверка стражей KUMM, а не прогон игры (2026-10-25 она погасила долг раскатки)
+const GAME_RUN = /run-game\.sh|\bh\.sh\b|launch-bg\.ps1|capture-window\.ps1|measure-walk\.sh|tools\/test-(?!guards\.mjs)[\w-]+\.mjs/;
 const ENGINE_RUN = /test-[\w-]+\.mjs|fixture-pack\.mjs|kumm\.mjs\s+(?!--check)\S|Deploy-ModPack\.ps1/;
 const HYGIENE = /--check\b|--help\b|py_compile|-m\s+compileall|PSParser/;
+// Раскатка в игру — тоже долг вида game: что ушло в игру, проверяется в игре. Пробный прогон (-DryRun, -ListMods, -Verify) — нет.
+const DEPLOYS = [
+  ['Deploy-ModPack.ps1', /Deploy-ModPack\.ps1\b(?=.*\s-Deploy\b)(?!.*\s-DryRun\b)/],
+  ['deploy-localization.py', /deploy-localization\.py\b/],
+  ['deploy-hot.sh', /deploy-hot\.sh\b/],
+  ['deploy-cold.sh', /deploy-cold\.sh\b/],
+  ['translation_deploy.sh', /translation_deploy\.sh\b/],
+];
+
+/** Debt keys a command creates by deploying into a game. */
+export function deploysOf(command) {
+  const cmd = (command || '').replaceAll('\\', '/');
+  if (HYGIENE.test(cmd)) return [];
+  return DEPLOYS.filter(([, re]) => re.test(cmd)).map(([name]) => `deploy:${name}`);
+}
 
 /** The debt entries a command clears (their keys), from the debt as it stands. */
 export function cleared(command, debt) {
@@ -116,9 +139,18 @@ export function handle(event, root = ROOT, sandbox = SANDBOX, now = new Date().t
     return { hookSpecificOutput: { hookEventName: 'PostToolUse', additionalContext: text } };
   }
   if (/^(Bash|PowerShell)$/.test(tool)) {
-    const done = cleared((event.tool_input || {}).command || '', s.debt);
-    if (!done.length) return null;
+    const command = (event.tool_input || {}).command || '';
+    const done = cleared(command, s.debt);
     for (const k of done) delete s.debt[k];
+    const deployed = deploysOf(command);
+    if (deployed.length) {
+      const first = Object.keys(s.debt).length === 0;
+      for (const k of deployed) s.debt[k] = { kind: 'game', at: now };
+      save(root, s);
+      const text = first ? FULL(list(s.debt)) : SHORT(Object.keys(s.debt).length, list(s.debt));
+      return { hookSpecificOutput: { hookEventName: 'PostToolUse', additionalContext: text } };
+    }
+    if (!done.length) return null;
     save(root, s);
     const left = Object.keys(s.debt).length;
     return { hookSpecificOutput: { hookEventName: 'PostToolUse', additionalContext:
@@ -181,6 +213,27 @@ if (argv[0] === '--selftest') {
     edit('SvarogsDream/src/KrinikUIRework/TipsBag.cs');
     bash('bash SvarogsDream/tools/h.sh "call X"');
     if (Object.keys(load(dir).debt).length) fails.push('the Svarog console did not clear game code');
+    // 2026-10-25: build data and the deploy itself change the game as much as code does (Severe Weather + r.Fog=1 + 7 147-entry
+    // locres went into the game and nothing asked for a world run — the owner: «в мире не видел - почему хук тебя не дернул»)
+    edit('ConanExiles/modpack.json');
+    edit('ConanExiles/_config/Engine.ini');
+    edit('ConanExiles/_config/localization/Game/ru/Game.locres');
+    for (const k of ['ConanExiles/modpack.json', 'ConanExiles/_config/Engine.ini', 'ConanExiles/_config/localization/Game/ru/Game.locres'])
+      if (load(dir).debt[k]?.kind !== 'game') fails.push(`${k} is not game debt`);
+    bash('powershell -File _config/launch-bg.ps1');
+    if (Object.keys(load(dir).debt).length) fails.push('a game run did not clear build data');
+    if (edit('KUMM/.kaif/kaif.json') !== null || edit('KUMM/package.json') !== null) fails.push('KUMM json became game debt');
+    bash('& D:/work/ai_sandbox/KUMM/Deploy-ModPack.ps1 -Deploy -DryRun -PackDir D:/work/ai_sandbox/ConanExiles');
+    bash('python -I -X utf8 deploy-localization.py --check');
+    if (Object.keys(load(dir).debt).length) fails.push('a dry run or --check became deploy debt');
+    const dep = ctx(bash('& D:/work/ai_sandbox/KUMM/Deploy-ModPack.ps1 -Deploy -WithEngineIni -PackDir D:/work/ai_sandbox/ConanExiles'));
+    if (load(dir).debt['deploy:Deploy-ModPack.ps1']?.kind !== 'game' || !dep.includes('ПРОТЕСТИРУЙ')) fails.push(`a real deploy is not game debt (${dep.slice(0, 40)})`);
+    bash('python -I -X utf8 deploy-localization.py');
+    if (!load(dir).debt['deploy:deploy-localization.py']) fails.push('deploy-localization.py is not game debt');
+    bash('node D:/work/ai_sandbox/KUMM/tools/test-guards.mjs');
+    if (!load(dir).debt['deploy:deploy-localization.py']) fails.push('the guards self-test cleared game debt (it is not a game run)');
+    bash('powershell -File _config/capture-window.ps1 -Out x.jpg');
+    if (Object.keys(load(dir).debt).length) fails.push('a game run did not clear deploy debt');
   } finally { rmSync(dir, { recursive: true, force: true }); }
   console.log(fails.length ? `❌ selftest FAILED — ${fails.join(' · ')}` : '✅ selftest OK — code edit → full then short order; --check/py_compile do not clear; game/engine/tool runs clear their own kind; Stop blocks with debt, not twice without new edits; .md and files outside ai_sandbox are not debt');
   process.exit(fails.length ? 1 : 0);
