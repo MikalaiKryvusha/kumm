@@ -139,7 +139,12 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 Цепочка класса героя 3.0.1: `BasePlayerChar_C` ← `BaseSurvivalChar_C` ← `BaseBPCombat_C` ← `BaseBPChar_C` ← `/Script/ConanSandbox.ConanCharacter`.
 `StopSecondaryAttack`, `ServerStopSecondaryAttack`, `StopTriggerSecondaryByPrimary`, `StartTriggerSecondaryByPrimary` — в `BaseBPCombat_C`
 (RegisterHook встаёт по этому пути); `ClientStopSecondaryAttack`, `ClientStopTriggerSecondaryByPrimary` — в `BasePlayerChar_C`.
-Разовые наблюдатели «[aim-probe]» поставлены пультом 22:59 (живут до перезапуска).
+Разовые наблюдатели «[aim-probe]» поставлены пультом 22:59 (живут до перезапуска). Управление луком: ПКМ — прицел, ЛКМ — выстрел
+(`InpActEvt_PrimaryActionV2_…_9/_10` срабатывают на выстреле; выстрел #4 23:02 ушёл с отпущенной ПКМ).
+«Камера отъезжает после выстрела» (владелец 23:0x) — это ОБЗОР, не штанга: замер 23:05–23:07, пять выстрелов с зажатой ПКМ — штанга 170
+неизменна, обзор 53,8° до 100 мс → 88–105° на 200 мс → 107,5° на 300–650 мс → снова 54° к 1300 мс. Обзором правит компонент героя
+`BP_PlayerFovController` (`/Game/Systems/Combat/`): `SetFieldOfViewTarget`, `FieldOfViewReset`, `FieldOfViewChange`, `SetCameraFov`; поля
+`FieldOfViewTarget` (107,5 вне прицела), `FieldOfViewChangeDuration` 0,1, `FieldOfViewLingerDuration` 0,1, `RevertOnExpire`.
 Ширина ленты следа — `ParticleModuleSize_0.StartSize.Table.Values` шаблона (запечено 0,10,0; один модуль на четыре ленты; правится в памяти).
 Поломка стрелы при ударе (владелец: «иногда стрелы не втыкаются и исчезают»): `BP_BaseProjectile` — `CanBreakOnImpact`,
 `PercentageChanceToBreakOnImpact` (шаблон `BP_Visual_BowProjectileBase`: false / 0.65; у КАЖДОЙ летящей стрелы — true / 0.65, замер 22:39:
