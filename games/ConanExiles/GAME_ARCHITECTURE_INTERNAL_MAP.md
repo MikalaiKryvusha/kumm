@@ -126,6 +126,12 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 `C_CrosshairAccuracyAlpha` (материал `M_UI_Reticle_Accuracy`); шире полоски — больше случайное отклонение стрелы (`AccuracyOffset` в
 `GetProjectileDirection`). `KrinikArrowAim` 0.1.0 ставит направление ровно по взгляду камеры — разброс снят вместе с подъёмом, полоски
 больше ничего не значат (решение — владельцу).
+Разброс в ванили — `BasePlayerChar::CalculateProjectileSpread` (байткод кита, `uaj func`, 2026-10-26): наибольшее отклонение `MaxDeviation`
+складывается из штрафа за движение (скорость героя `GetVelocity` / скорость бега — своя у ездового `RunSpeed` из таблицы, иначе
+450 / 750), стата точности героя (`GetIntStat`, при низком — `LowAttributeDeviationPenalty`; верхняя граница стата 20), стата
+ездового верхом (`IsRiding` → `AccuracyStatMount`), бонуса `ProjectileDeviationBonus` (перки, вещи), с полом `AccuracyMinDeviation` 0,01;
+константы функции 0,75 · 0,6 · 0,733 · 0,408 · 10 · 450 · 750. Само отклонение в `GetProjectileDirection` — случайное, по колоколу
+`FC_AccuracyBellCurve` в пределах `MaxDeviation`.
 Прицел после выстрела (план 36 п. 34) — кандидаты в `BasePlayerChar` (кит 2.2): `WasSecondaryKeyDown`, `WasQueueSecondaryKeyDown`,
 `SecondaryActionHold`, `TriggerSecondaryByPrimary`, `StopSecondaryAttack`; у лука `BP_bow_2h` — `UnDrawBow`, `bIsDrawn`; байткод не читан.
 Поломка стрелы при ударе (владелец: «иногда стрелы не втыкаются и исчезают»): `BP_BaseProjectile` — `CanBreakOnImpact`,
