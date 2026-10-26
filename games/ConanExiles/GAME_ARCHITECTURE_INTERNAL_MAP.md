@@ -140,6 +140,10 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 `StopSecondaryAttack`, `ServerStopSecondaryAttack`, `StopTriggerSecondaryByPrimary`, `StartTriggerSecondaryByPrimary` — в `BaseBPCombat_C`
 (RegisterHook встаёт по этому пути); `ClientStopSecondaryAttack`, `ClientStopTriggerSecondaryByPrimary` — в `BasePlayerChar_C`.
 Разовые наблюдатели «[aim-probe]» поставлены пультом 22:59 (живут до перезапуска).
+**Выстрел пультом (2026-10-26 23:53):** `p:InpActEvt_PrimaryActionV2_K2Node_InputActionEvent_9({KeyName=FName('LeftMouseButton')})` у
+`BasePlayerChar_C` с луком в руках выпускает стрелу (журнал `KrinikArrowAim` #10) — стрельба проверяется без владельца. ПКМ:
+`InpActEvt_SpecialActionV2_K2Node_InputActionEvent_7/_8` (вызов пультом работает), но `IsInputKeyDown(RightMouseButton)` видит только
+физическую кнопку — «зажатую ПКМ» пультом не изобразить.
 Выход в главное меню пультом: `exec disconnect` в одиночной игре ничего не делает (2026-10-26 23:17, герой остался в мире) — сценарий
 «меню → снова в мир» пока только руками владельца. После такого перезахода объекты героя меняются: моды, державшие старые ссылки, читают
 поля как `TrivialObject` (баг 65). Управление луком: ПКМ — прицел, ЛКМ — выстрел
