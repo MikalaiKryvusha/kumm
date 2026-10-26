@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0340 · 2026-10-26 · ❌→✅ · #conan #datatable #merge #compat #mods #observation
+class: log-wording-taken-as-semantics
+**Lesson:** журнал Конана «MergeDataTables … overwriting» не значит «строка заменена целиком»: живая таблица (пульт, `DataTable:ForEachRow`)
+показала слияние по полям — массивы дописываются, пустые поля не затирают, разные поля двух модов применяются оба. Из 143 «строк двух модов»
+`docs/17` пункты 2 (бронники T4, 47 строк) и 3 (боссы, 24) оказались не потерями. Конфликт таблиц считать по ПОЛЯМ и подтверждать живой
+строкой, а не по словам журнала и не по файлам модов (файлы TDI выглядели как поломка всех бронников T4).
+**Repro:** `bash ConanExiles/_config/pult.sh "lua … StaticFindObject('/Game/Systems/SpawnTable/ProfessionTemplateDataTable.ProfessionTemplateDataTable'):ForEachRow(…)"`.
+mechanized: — (карта игры, раздел «Слияние таблиц модов»)
+
 ### EXP-0339 · 2026-10-26 · ❌→✅ · #conan #localization #locres #bytecode #ftext #inventory #mods
 class: wrong-diagnosis-from-missing-inventory
 **Lesson:** «текст в байткоде — значит не FText, `.locres` не достанет» — ложный вывод: подсказки Era of Trials, Мундусы EAA, меню Hosav лежат в
