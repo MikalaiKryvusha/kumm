@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0339 · 2026-10-26 · ❌→✅ · #conan #localization #locres #bytecode #ftext #inventory #mods
+class: wrong-diagnosis-from-missing-inventory
+**Lesson:** «текст в байткоде — значит не FText, `.locres` не достанет» — ложный вывод: подсказки Era of Trials, Мундусы EAA, меню Hosav лежат в
+байткоде как FText С КЛЮЧОМ (`29 01 1F <исходник>\0 1F <ключ 32 hex>\0 1F <пространство>\0`), и `.locres` переводит их по ключу. Английскими они
+остались, потому что опись `all-mods-ftext.csv` пропускала многострочные исходники. Прежде чем звать текст «литералом», искать его ключ сканом
+по всем модам (72 ключа вне описи, 59 видимых игроку). Правка ассета нужна только для FText без ключа, `StrProperty` и `EX_StringConst`.
+**Repro:** `python -I -X utf8 ConanExiles/_config/compat/missing-bytecode-ftext.py <распаковка модов>` → CSV в формате описи → `extend-worklist.py`.
+Попутно: UAssetAPI 1.1.0 разбирает часть функций 5.8 (`CheckIfInventoryOpen`), но не граф событий и не `Is_VisibleInInventory` (`uaj func` → RawExport).
+mechanized: `_config/compat/missing-bytecode-ftext.py` (скан), `uaj setstr` строка `prop:<Имя>` (числа и флаги по умолчанию в поставке)
+
 ### EXP-0338 · 2026-10-26 · ❌→✅ · #conan #ue5 #iostore #retoc #uassetapi #mods #native-patch #blueprint
 class: tool-roundtrip-not-proven
 **Lesson:** нативная правка ассета чужого мода на UE 5.8 (Конан 3.0.1) проходит только по цепочке с контролем каждого звена: (1) retoc
