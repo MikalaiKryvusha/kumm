@@ -102,7 +102,11 @@ trumank/retoc#72 (`_tools/retoc-5.8`); (2) круг JSON в UAssetAPI 1.1.0 па
 MD5 игра «skip extracting … correct hash» и молча держит старый контейнер; (5) собирать из ОРИГИНАЛА (`_patch-originals`), не из раскатанного.
 **Repro:** `python -I -X utf8 ConanExiles/_config/devkit/patch-mod-asset.py build JaarFishing W_EFT_Panel <work> <map.tsv>`; кнопка с пустой
 таблицей → падение при входе в мир 2026-10-26 10:57.
-mechanized: `patch-mod-asset.py` (оригиналы, XXH128, один кусок); для блюпринтов — не механизировано (нужна сборка куска без retoc to-zen)
+**Решение (11:25, в игре без падений):** кусок собирается БЕЗ retoc to-zen — данные zen-куска после `header_size` == `.uexp` байт в байт, поэтому
+новый кусок = исходный заголовок с новыми смещениями/размерами экспортов (таблица [32]..[36], 72 байта) + пропатченный `.uexp`. Второй виновник —
+UAssetAPI 1.1.0 переписывал `ClassExport` 5.8 иначе (тоже «Bad export index»): классы, функции, структуры (`StructExport`) переносятся сырыми байтами.
+Страж в приборе: запись без правок обязана совпасть байт в байт, иначе сборка останавливается.
+mechanized: `patch-mod-asset.py` (оригиналы, XXH128, склейка куска, страж «копия = исходник»), `_tools/src/uaj` (RawExport для StructExport)
 
 ### EXP-0337 · 2026-10-26 · ❌→✅ · #conan #camera #interaction #trace #twins #mods
 class: camera-mod-breaks-camera-relative-distances
