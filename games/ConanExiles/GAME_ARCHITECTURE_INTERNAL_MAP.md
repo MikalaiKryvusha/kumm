@@ -102,6 +102,9 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 (`BP_HungerSystem_C`): `EnableThirst(false,false)`, `EnableHunger(false,false)`, `AddDrink(nil,100.0)`, `AddFood(nil,100.0)` (сеттеры `SetDrinkCurrent`
 ждут два аргумента — не годятся). `AdjustStaminaRegenMod(1000)` выносливость НЕ удержал; работает повтор `AdjustStaminaCurrent(1000.0)` раз в 250 мс.
 Бессмертие нового героя после смерти — поле `bCanBeDamaged=false`. Повтор пульта: `LoopInGameThreadWithDelay` с флагом `_G.krinik_cheat2_on`.
+Родная камера (шаблон кита `ThirdPersonSpringArm_GEN_VARIABLE`): штанга 200 (колёсико 130–250), `SocketOffset` (20, 52, −38) — над правым
+плечом и ниже точки штанги; цель `TPCameraSocketOffsetTarget` по умолчанию (0,0,0). При натяжении лука игра камеру НЕ двигает — только обзор
+107 → 54–58 (замер 2026-10-26).
 Направление стрелы (байткод кита 2.2, `BasePlayerChar::GetProjectileDirection`, 2026-10-26): сведения в точку прицела НЕТ — ветка «луч из
 камеры на 10000 см → цель → баллистика к точке попадания» выключена константой `if not (False)` (инструкция 178). Работает ветка 232–239:
 вылет из гнезда лука `SocketLocation`, направление = взгляд камеры (`CamRot`) + разброс `AccuracyOffset` + подъём `(0,0, 0.0675 × CrosshairOffsetMod)`
