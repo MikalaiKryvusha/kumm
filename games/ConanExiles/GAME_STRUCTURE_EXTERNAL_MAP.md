@@ -12,7 +12,8 @@
 | Lua-моды UE4SS | `ConanSandbox\Binaries\Win64\ue4ss\Mods\<Мод>\` (`enabled.txt`); исходники — `ConanExiles/_unpacked/<Мод>` |
 | Журнал игры | `ConanSandbox\Saved\Logs\ConanSandbox.log` (время журнала = местное − 3 ч) |
 | Журнал UE4SS | `ConanSandbox\Binaries\Win64\ue4ss\UE4SS.log` |
-| Падения | `ConanSandbox\Saved\Crashes\UECC-*\` (`CrashContext.runtime-xml`, `ConanSandbox.log`) |
+| Падения | `ConanSandbox\Saved\Crashes\UECC-*\` (`CrashContext.runtime-xml` — стек и текст, `ConanSandbox.log` бывает, `CrashReportClient.ini`, `UEMinidump.dmp` ≈1,8 МБ или 0 байт); окно отчёта — `Engine\Binaries\Win64\CrashReportClient.exe`, закрывает `_config/close-crash-reporter.ps1` (по PID, только запущенные после отметки `launch-bg.ps1`) |
+| Опознаватели в журналах (2026-10-26) | `CrashContext.runtime-xml`: `MachineId`, `LoginId`, `EpicAccountId`, пути `BaseDir`/`RootDir`/`Modules`; `ConanSandbox.log`: `LogInit: Computer:`, `LogInit: User:`, `MachineId=`, IPv4 серверов в сетевых строках. Имя пользователя Windows автора сборки — начало имён наших модов (`Krinik…`): подстановка по всему тексту портит журнал. Обезличивает `_config/player-report/collect-report.ps1` («Собрать отчёт.cmd» в архиве) |
 | Сохранения модов | `ConanSandbox\Saved\SaveGames\*.sav` (Damage Meter, Simple Minimap, Proximity Party …) |
 | Перевод | `ConanSandbox\Content\Localization\Game\ru\Game.locres` (раскатка `_config/deploy-localization.py`) |
 | Кит разработчика 2.2 | `F:\CEUE5Devkit` (`UnrealPak`, `UnrealEditor-Cmd`, исходные ассеты игры 2.2 в `UE4\Content`) |
