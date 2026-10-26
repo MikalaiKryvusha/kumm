@@ -19,6 +19,8 @@
 | Кит разработчика 2.2 | `F:\CEUE5Devkit` (`UnrealPak`, `UnrealEditor-Cmd`, исходные ассеты игры 2.2 в `UE4\Content`) |
 | Пульт агента | `ue4ss\Mods\KrinikAgentRemote\cmd.txt` → `done.txt`; из оболочки — `bash ConanExiles/_config/pult.sh "<команда>"` |
 | Канал мода камеры | `ue4ss\Mods\ConanCameraControl\agent-cmd.txt` (`ключ = значение`) |
+| Клавиши мода камеры (нумпад) | 8/2 вперёд/назад · 4/6 вбок · 9/3 выше/ниже · 7/1 наклон · +/− дистанция · 5 — вбок в 0 · Ctrl+5 — наклон в 0 · / — записать посадку · 0 — применить · Ctrl+/ — сброс до заводской (с 2026-10-26 23:4x) · Ctrl+0 — найти камеру заново; посадка сама пишется в `Mods\ConanCameraControl\config.lua` |
+| Привязки клавиш игры | `ConanSandbox\Saved\Config\Windows\Input.ini`; эталон — `ConanExiles/_config/Input.ini` (`deploy-config.py Input.ini`). Игра ПЕРЕПИСЫВАЕТ файл из памяти при выходе — править только при закрытой игре; 2026-10-26 23:30 файл вышел со стандартными привязками (чат на нумпаде * и −, Enter; уворот — боковая кнопка мыши), причина отката не найдена (план 36 п. 41) |
 
 ## Приборы совместимости (`ConanExiles/_config/compat/`, 2026-10-26)
 
