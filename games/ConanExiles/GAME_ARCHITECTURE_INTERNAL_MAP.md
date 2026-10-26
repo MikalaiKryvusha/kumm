@@ -148,6 +148,9 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 неизменна, обзор 53,8° до 100 мс → 88–105° на 200 мс → 107,5° на 300–650 мс → снова 54° к 1300 мс. Обзором правит компонент героя
 `BP_PlayerFovController` (`/Game/Systems/Combat/`): `SetFieldOfViewTarget`, `FieldOfViewReset`, `FieldOfViewChange`, `SetCameraFov`; поля
 `FieldOfViewTarget` (107,5 вне прицела), `FieldOfViewChangeDuration` 0,1, `FieldOfViewLingerDuration` 0,1, `RevertOnExpire`.
+`SetFieldOfViewTarget(0)` — обычный обзор, `(1)` — прицельный (53,76°); на выстреле игра зовёт 0 и через ≈0,7 с снова 1. Перехват UE4SS
+этой BP-функции срабатывает ПОСЛЕ её тела (цель уже новая), второй обработчик RegisterHook («после») не вызывается, подмена аргумента
+не действует; работает запись поля `FieldOfViewTarget` прямо в обработчике (2026-10-26 23:37, кейс AIM9).
 Ширина ленты следа — `ParticleModuleSize_0.StartSize.Table.Values` шаблона (запечено 0,10,0; один модуль на четыре ленты; правится в памяти).
 Лента расплывалась к хвосту («разрастается по толщине чем дальше летит стрела»): частицы рождаются в шаре R 3 см
 (`ParticleModuleLocationPrimitiveSphere_0.StartRadius`) и сносятся 20 см/с (`ParticleModuleVelocity_0.StartVelocity` 0,−20,0);
