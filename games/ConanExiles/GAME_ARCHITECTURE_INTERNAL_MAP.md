@@ -146,6 +146,9 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 `BP_PlayerFovController` (`/Game/Systems/Combat/`): `SetFieldOfViewTarget`, `FieldOfViewReset`, `FieldOfViewChange`, `SetCameraFov`; поля
 `FieldOfViewTarget` (107,5 вне прицела), `FieldOfViewChangeDuration` 0,1, `FieldOfViewLingerDuration` 0,1, `RevertOnExpire`.
 Ширина ленты следа — `ParticleModuleSize_0.StartSize.Table.Values` шаблона (запечено 0,10,0; один модуль на четыре ленты; правится в памяти).
+Лента расплывалась к хвосту («разрастается по толщине чем дальше летит стрела»): частицы рождаются в шаре R 3 см
+(`ParticleModuleLocationPrimitiveSphere_0.StartRadius`) и сносятся 20 см/с (`ParticleModuleVelocity_0.StartVelocity` 0,−20,0);
+`ParticleModuleSizeMultiplyLife_0` — сужение 1→0 за жизнь, не рост. `KrinikArrowAim` обнуляет радиус и снос.
 Поломка стрелы при ударе (владелец: «иногда стрелы не втыкаются и исчезают»): `BP_BaseProjectile` — `CanBreakOnImpact`,
 `PercentageChanceToBreakOnImpact` (шаблон `BP_Visual_BowProjectileBase`: false / 0.65; у КАЖДОЙ летящей стрелы — true / 0.65, замер 22:39:
 две из трёх исчезают; `KrinikArrowAim` ставит false на выстреле); целая стрела при
