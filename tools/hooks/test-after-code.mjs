@@ -38,7 +38,8 @@
 //                 .kaif/test-debt.json → waivers
 // ON-REAL-PATH:   2026-10-25 11:11 — wired mid-session in .claude/settings.local.json; the full order reached the context after the next
 //                 Edit of this very file, and its own --selftest run cleared the debt («прогон засчитан … непроверенного кода нет»);
-//                 2026-10-25 16:4x — живая раскатка `deploy-localization.py` записала `deploy:deploy-localization.py [game]` и полный приказ
+//                 2026-10-25 16:4x — живая раскатка `deploy-localization.py` записала `deploy:deploy-localization.py [game]` и полный приказ;
+//                 2026-10-26 13:11 — `cp` пака JaarFishing в ConanSandbox/Mods записал `deploy:copy JaarFishing.pak`, запуск launch-bg.ps1 погасил
 // [TESTED: 2026-10-25 · --selftest 14 steps green, the mutant without the debt write red on 6 points; live order and clear in this session —
 //  testcases/reports/2026-10-25_test-after-code-hook.md]
 import { readFileSync, writeFileSync, mkdtempSync, rmSync, mkdirSync } from 'node:fs';
