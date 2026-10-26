@@ -91,6 +91,11 @@
 
 ## Entries
 
+### EXP-0350 · 2026-10-27 · ❌→✅ · #hooks #russian-gate #read
+**Lesson:** `style-gate --mark` stamps only a Read of the WHOLE file with no `offset`/`limit` — a Read with `offset 2, limit 128` covering every line
+did not refresh `.russian-read.stamp` (00:22, the gate refused the next write); an identical repeat Read is deduplicated by the tool and stamps nothing
+either. Re-read the rules with a bare Read.   → link: HOUSE_RULES.md §6, style-gate row
+
 ### EXP-0349 · 2026-10-27 · ❌ · #conan #ue4ss #hooks #stuck #simplicity
 **Context:** keeping the aim FOV after a bow shot while RMB is held (`BP_PlayerFovController`), owner live-testing.
 **Tried / did:** six patches in a row over ~2 h — arg substitution in a pre-hook, a nested `SetFieldOfViewTarget(1)` from the post-hook (crash
