@@ -27,3 +27,17 @@
 | `missing-names-from-kit.py`, `missing-names-from-headers.py`, `missing-by-mod.py` | имена недостающих пакетов из журнала (по киту 2.2 и по заголовкам модов) и разбивка по модам |
 | `untranslated-literals.py` | английские фразы в файлах модов вне FText — то, что `.locres` не переведёт |
 | `KrinikAgentRemote/Scripts/ui_check.lua` | английский текст в видимых полях открытого экрана |
+| `missing-bytecode-ftext.py` | FText с ключом в байткоде, которых нет в описи `all-mods-ftext.csv` (для `.locres`) |
+
+## Правка чужих модов (`ConanExiles/_config/devkit/`, KRINIK MODIFIED, 2026-10-26)
+
+| Прибор | Что делает |
+|---|---|
+| `patch-mod-asset.py extract / build` | ассет мода из оригинала (`D:\Games\Conan Exiles Mods\_patch-originals\<Мод>.pak`) → правка → склейка куска → новый пак в `<work>/out`; таблицы правок — `_config/localization/asset-strings/<Мод>__<Ассет>.tsv` |
+| строки таблицы | `английский\tрусский` — текст свойств; `prop:<Имя>` или `prop:<Экспорт>/<путь>` — число или флаг; `lit:<английский>\t"<русский>"` — строка в байткоде |
+| `kismet.py check / lits` | разбор байткода UE 5.8 с самопроверкой размера; литералы функций |
+| `_tools/src/uaj` | UAssetAPI из консоли: `copy`, `exports`, `strings`, `setstr`, `func`, `tojson` |
+| `_tools/retoc-5.8`, `_tools/repak` | контейнеры IoStore 5.8 и внешний пак V11 |
+
+Правленые паки лежат в библиотеке `mods/_krinik-modified/<id>/`, в `modpack.json` у мода — поле `krinikModified` с командой пересборки:
+Exiles Fishing (перевод панели), The Damage Meter (угол свёрнутого окна), Hosav's Custom UI (метрики сервера выключены).
