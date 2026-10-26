@@ -102,6 +102,17 @@
       сами числа «как редко» — предложить владельцу парой вариантов. Кандидаты-ассеты (оглавления контейнеров, 2026-10-26): Night Terrors —
       `NightTerrorsAdminSettings`, `BP_DC_NightTerrors_Settings`; PvE Plus Ambush — `W_Ambush_AdminOptions`, `W_AmbushWidget_AdminAndUser`
       (значения по умолчанию могут жить в контроллере мода — искать поля времени через `walk.py` по выгрузке `patch-mod-asset.py extract`).
+      **Разведка 2026-10-26 18:28:** окно Night Terrors в игре — шанс засады 80 %, часы 21–5, исчезновение 300 с. Поля — пользовательская
+      структура `NightTerrorsAdminSettings` (`AmbushChance_`, `AmbushStartHour_`, `AmbushEndHour_`, `VaporizeTimeInSeconds_`), читает её
+      `BP_NightTerrors_ModController` (`GetNightTerrorsServerSettings`), шанс бросает `BP_NightTerrors_RandomAmbushChance`. В выгрузке UAssetGUI у
+      структуры скалярных умолчаний нет — они в сырых байтах `DefaultStructInstance`; путь: разобрать хвост экспорта структуры (числа 80.0 / 21 / 5 /
+      300.0 рядом) и править на месте, как `dbl:`/`flt:`. Числа «как редко» — владельцу двумя вариантами.
+      Байты (18:29): в `NightTerrorsAdminSettings.uexp` (476 байт) каждое умолчание — одно float-вхождение: 80.0 @373, 21.0 @402, 5.0 @431,
+      300.0 @460 (шаг 29 байт — теговые FloatProperty). Правка: строка вида `rawf:<старое>\t<новое>` (заменить единственное вхождение float в
+      `.uexp`, иначе остановка) — прибора ещё нет.
+      PvE Plus Ambush (18:30): умолчания в CDO `Default__MDC_AmbushWidget_C` — `ConfigSettingMinTimeBetween` 3600 с, `ConfigSettingMaxExtraTime`
+      1200 с, `AmbushChance` 0.5, `ConfigSettingMaxWaveNum` 5, `AdditionalWaveSpawnChance` 65, `DelayBetweenWaves` 30 — правятся обычной `prop:`.
+      Числа — вопрос владельцу: `interviews/interview_025_conan_ambush_frequency.md` (Q1, варианты «редко» / «умеренно» / «как у авторов»).
 - [x] Г5. Номер версии сборки — **1.0.0** (`[OWNER]` «Версия сборки 1.0.0» · 2026-10-26 ≈16:50); `packVersion` в манифесте уже 1.0.0.
 - [ ] Г10. Архив — zip-томами не больше 700 МБ каждый, пока локально (`[OWNER]` «пока ее разбиваем локально на архивы не более 700мб веса
       каждый, зип, чтобы побить на несколько малых архивов» · 2026-10-26 ≈16:50). Готово: тома ≤ 700 МБ, распаковка томов в чистую папку
