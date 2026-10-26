@@ -118,6 +118,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    строки `lit:`, T4); «vanilla» = «ваниль» с мягким знаком (41 строка, прибор `_config/devkit/owner-terms-check.py`); `docs/17` п. 2–4 — не
 >    потери (слияние таблиц по полям, EXP-0340); Hosav настройки не перечитывает (замер). Правленые паки (KRINIK MODIFIED): рыбалка, Damage
 >    Meter, Hosav — `mods/_krinik-modified/<id>/`, команды пересборки — `krinikModified` в `modpack.json`. Игра закрыта, замок машины снят.
+>    **Сессия 26.10 с 14:06 (запись 15:11)** (`[OWNER]` «Работай над этим автономно не менее полутора часа» — сборка, тесты, переводы, PDF-путеводитель):
+>    путеводитель игрока `ConanExiles/docs/guide/Krinik-Conan-3.0.1-guide.pdf` (9 стр., исходник `guide-3.0.1.html`, поле `guide` манифеста);
+>    перевод едет в архив игрока (запись `Krinik Russian Translation`); KRINIK MODIFIED: Simple Modlist (панель меню паузы не накрывает меню,
+>    шрифт 15, ширина 680), Player Ignores Follower Collision (окно настроек по-русски; `uaj` теперь видит ряды таблиц), Hosav (колонки HUD,
+>    «1 HP»); `KrinikHudOutline` 0.2.0 — Roboto Bold ×1.1 (выбор владельца «hudA хорошо»), подпись F1 у свёрнутого счётчика урона; счётчик
+>    кадров 16. Прогон: 64/64 паков, 20 мин без падений, журнал без новых классов, рыбалка «Применить на сервере» работает (T5). Кейсы —
+>    `testcases/TC_conan_build_stability_compat_perf_2026-10-26.md` (L1, L2, S1, H1–H5, Q1, T5, U1, U2b–U2d, U4b). Открыто новое: план 35 Г2–Г8
+>    (Medium из скачанного Roboto, координаты миникарты, кадр панели ячеек без модов, настройки игры и Hosav для выгрузки, номер версии).
 >    **ОСТАЛОСЬ ПО СБОРКЕ 3.0.1 — план 35 (`plans/35_conan_build_turnkey_quality.md`), по порядку:**
 >    А2 перевод на кадре (подсказки школ магии Era of Trials — вкладка «Параметры»; меню славы, профессии EAA) · А5 меню паузы + Simple Modlist
 >    (кадр, шрифт 12 → 15 строкой `prop:ModListBox/WidgetStyle/TextStyle/Font/Size`, место панели без наложения на колонку меню) · Б1 кнопки EAA

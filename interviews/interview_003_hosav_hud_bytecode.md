@@ -49,7 +49,7 @@
 | 256 | DEAD | МЁРТВ | над полосой здоровья соклановца · W_UI_ClanMate_HealthAndStamina ×1 |
 | 257 | Follower party disbanded | Отряд спутников распущен | PlayerPartyComponent_UIH ×1 |
 | 258 | Gamepad Input detected, disabling Minimap to prevent input issues. | Обнаружен геймпад — мини-карта отключена, чтобы не мешать управлению. | ModController_UI_Hosav ×1 |
-| 259 | Health reduced by {hp} / {percenthp}% | Здоровье снижено на {hp} / {percenthp}% | подсказка о потерянном здоровье · Old,W_SmoothHP,W_SmoothHP_Horse ×5 |
+| 259 | Health reduced by {hp} / {percenthp}% | Здоровье снижено на {hp} HP / {percenthp}% | подсказка о потерянном здоровье · Old,W_SmoothHP,W_SmoothHP_Horse ×5 · «HP» — `[OWNER]` «верно ли я понимаю, что 1 - показывает в HP? было бы хорошо писать 1 HP» · 2026-10-26 ≈14:52 |
 | 260 | HealthCustomColor is {bool} | — | отладочная строка автора · W_ExampleWidget_User ×1 |
 | 261 | Invite Player To Party | Пригласить игрока в отряд | радиальное меню · ModController_UI_Hosav ×1 |
 | 262 | k | — | суффикс тысяч у чисел (202,79k). Перевести — «тыс», но станет длиннее · BPFL_Hosav_UI ×2 |

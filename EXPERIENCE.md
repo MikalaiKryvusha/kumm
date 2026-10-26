@@ -91,6 +91,23 @@
 
 ## Entries
 
+### EXP-0344 · 2026-10-26 · ❌→✅ · #conan #localization #datatable #inventory #ui #mods
+class: twins-missed
+**Lesson:** опись текстов модов видит только то, что видит её прибор: `uaj strings` обходил свойства экспорта и не заходил в РЯДЫ таблицы данных
+(`DataTableExport.Table`), поэтому окно настроек Player Ignores Follower Collision (18 подписей и описаний строками `StrProperty` в рядах
+`PIFC_US_DT_Settings`) числилось «нечего переводить» и в игре было целиком английским. «0 строк у мода с окном» — не итог, а сигнал проверить
+прибор на этом моде; окно найдено только обходом окон глазами.
+**Repro:** `uaj strings <PIFC_US_DT_Settings.uasset> VER_UE5_8` — до правки 0 строк, после `WalkExport` — 36 (18 видимых); кадр окна `dc PIFCSettings`.
+mechanized: `_tools/src/uaj/Program.cs` → `WalkExport` (ряды таблиц в `strings` и `setstr`); полный обход всех таблиц всех модов — не сделан (bugs/64 п. 20)
+
+### EXP-0343 · 2026-10-26 · ❌ · #conan #ui #minimap #native-patch #observation
+class: wrong-model
+**Lesson:** отступ слота в ассете виджета — не место виджета на экране, если мод ставит его сам во время игры: у Simple Minimap отступ
+180 → 215 собран, игра пак взяла, карта не сдвинулась. Прежде чем править отступ, прочесть ЖИВОЙ слот пультом (`Slot:GetPosition()`,
+`GetAlignment()`, `GetAnchors()`) и сравнить с ассетом — расходятся, значит, место считает код мода.
+**Repro:** пульт `lua local m=FindFirstOf('SM_UI_Minimap_C'); local p=m.MinimapScale.Slot:GetPosition() …` → (1684, 150) при ассете (1730, 180).
+mechanized: no — шаг «живой слот против ассета» записан в карту игры (`games/ConanExiles/GAME_ARCHITECTURE_INTERNAL_MAP.md`, «Модули интерфейса»)
+
 ### EXP-0342 · 2026-10-26 · ✅ · #conan #ue5 #kismet #bytecode #native-patch #localization
 class: self-checking-parser
 **Lesson:** строку в байткоде блюпринта UE 5.8 можно удлинить, если разбор байткода проверяет сам себя: перед байткодом функции лежат два
