@@ -2375,6 +2375,13 @@ export function main(args = process.argv.slice(2), root = process.cwd()) {
   if (args.includes('--mark-shown')) { // I40: the question was asked pointedly in chat — the agent's hand records the fact
     const doc = opt('--mark-shown');
     if (!doc) usage();
+    // KUMM local fix (bugs/KAIF/18): the value used to be taken unchecked — `--mark-shown --transport chat` recorded «--transport» as a
+    // document and printed «Shown recorded»; a positional doc before the flag recorded the next word. Refuse a flag-looking value or a
+    // path that is not a file, before anything is written.
+    if (doc.startsWith('--') || !existsSync(resolve(root, doc)) || !lstatSync(resolve(root, doc)).isFile()) {
+      console.error('✖ --mark-shown needs an existing document path right after it, got: ' + doc + ' — nothing recorded');
+      process.exit(2);
+    }
     const transport = opt('--transport') || T(cfg).transport.chat;
     recordShown(root, [doc], transport);
     console.log('Shown recorded (I40): ' + doc + ' · ' + transport + ' → ' + cfg.decisionsDir + '/' + SHOWN_FILE);
