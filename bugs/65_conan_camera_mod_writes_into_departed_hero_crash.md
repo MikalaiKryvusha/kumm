@@ -40,6 +40,15 @@ version: the broken state needs a menu exit, which the pult cannot do (`disconne
 menu exit; `ON-REAL-PATH: NOT YET`. Twin sweep owed: every Lua mod of the build that caches a game object across a world reload
 (`KrinikHudOutline`, `KrinikFpsCounter`, `KrinikPauseGameInMenu`, `ConanModPackStatus`, `KrinikArrowAim` — `last_shot_pc`).
 
+## Verification on the owner's path (2026-10-26 23:23)
+Owner: «перезашёл» (ESC → main menu → «Продолжить»). `UE4SS.log`: 23:23:16 (main menu loaded, `/Game/Maps/Startup`) — «зум
+ThirdPersonCameraMinArmLength: поле читается как TrivialObject … — не живой герой, запись пропущена» and «сторож: цель камеры не
+читается (герой сменился?) — запись остановлена, ищу камеру заново» — two stops in total; 23:23:22 world loaded; 23:23:23 the mod
+re-adopted the new hero's arm (numeric fields: Min 130, Max 2125, step 54); 23:23:48 «ЗУМ: штанга=455.0 | цель=455.0». «было
+TrivialObject» writes — 0. Game alive. `ON-REAL-PATH:` the owner's menu exit / re-entry 23:23 — the guard went off exactly on the broken
+state (proved red on the real threat). Hygiene: none. Functional run: the owner's re-entry, log read. Status stays 🔧 until a
+10-minute play with shots after a re-entry; twin sweep still owed.
+
 ## Decisions made without the owner
 - `[AI]` Turned the FOV hold off instead of searching for a safe variant first — a crash outranks a camera nuisance.
 
