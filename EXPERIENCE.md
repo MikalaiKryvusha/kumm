@@ -91,6 +91,20 @@
 
 ## Entries
 
+### EXP-0348 · 2026-10-26 · ❌→✅ · #conan #pult #ue4ss #lua #reload
+**Context:** live-tuning `KrinikArrowAim` in the owner's running game by the pult (`lua dofile(<Mods>/KrinikArrowAim/Scripts/main.lua)`).
+**Tried / did:** after the 23:15 relaunch UE4SS loaded the mod itself from `Mods/` (enabled.txt), and I kept reloading it by the pult.
+**Result:** ❌ — the pult's Lua state is a SEPARATE state: its `_G` latch against a second `NotifyOnNewObject` subscription did not see the
+mod's own state, so every arrow went through TWO handlers — model ×3 twice = ×9 («стрела стала размером с ракету»), lift removed twice.
+Owner: «у тебя словно с перезаходами где-то что-то наложилось» · «и переммножилось!». ✅ — `_G.__krinik_arrow_aim_fn = nil` in the pult state
+→ «вот, стало вновь номального размера».
+**Lesson:** live-loading a mod by the pult is legal ONLY while UE4SS has not loaded that mod itself; once the mod sits in `Mods/` with
+`enabled.txt`, changes reach the game by a relaunch (or UE4SS hot reload), never by a pult `dofile`. Per-shot transforms must be idempotent
+(set absolute values, not multiply) — a doubled handler is then harmless.   → link: bugs/65 (same evening)
+**Repro:** mod in `Mods/` + one pult `dofile` of it → each event handled twice (two «перенесена» lines per arrow, one per state).
+**Trigger:** about to `dofile` a mod by the pult → check `UE4SS.log` for «Mod '<name>' has enabled.txt, starting mod» since the last launch.
+**Not for:** mods not present in `Mods/` (pure pult prototypes).
+
 ### EXP-0347 · 2026-10-26 · ❌→✅ · #deploy #powershell #only #shell
 class: shell-lied
 **Lesson:** `powershell -File Deploy-ModPack.ps1 -Only "Hosav's Custom UI","KrinikPauseGameInMenu"` из Git Bash отдаёт скрипту ОДНУ строку, а не
