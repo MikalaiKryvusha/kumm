@@ -94,6 +94,10 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 `SocketOffset.X` — иначе луч короче на этот сдвиг и не достаёт низкие цели (трупы).
 Первое лицо включается, когда колёсико ведёт штангу ниже `ThirdPersonCameraMinArmLength`; при 30 (наш `zoom_min`) переход не срабатывает, при
 130 срабатывает (2026-10-26 20:59). `SwitchToFirstPersonCamera` сама переставляет `InteractionDistance`.
+Читы прогона пультом (2026-10-26): время суток — `FindFirstOf('BP_TimeOfDayManager_C'):SetTimeOfDay(12.0)` (часы 0–24; консольной
+`SetTimeOfDay 1200` в 3.0.1 НЕТ — «Command not recognized»); бессмертие — `exec God`; выносливость — `AdjustStaminaRegenMod(1000.0)` и поля героя
+`SprintStaminacost`, `SwimStaminacost`, `StaminaJumpCost`, `JumpStaminaCostModifier` = 0, `SetClimbingStaminaCostModifier(0.0)`; выдача — `exec MakeMeAdmin`,
+затем `exec SpawnItem <id> <n>` (железная стрела 53612). Всё сбрасывается перезапуском.
 Направление стрелы (байткод кита 2.2, `BasePlayerChar::GetProjectileDirection`, 2026-10-26): сведения в точку прицела НЕТ — ветка «луч из
 камеры на 10000 см → цель → баллистика к точке попадания» выключена константой `if not (False)` (инструкция 178). Работает ветка 232–239:
 вылет из гнезда лука `SocketLocation`, направление = взгляд камеры (`CamRot`) + разброс `AccuracyOffset` + подъём `(0,0, 0.0675 × CrosshairOffsetMod)`
