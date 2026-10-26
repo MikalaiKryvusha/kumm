@@ -124,8 +124,10 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 Полоски слева и справа от точки прицела (кит 2.2, `/Game/UI/Widgets/HUD/Reticles/WBP_Crosshair`, режим `Ranged`) — указатель разброса:
 виджет зовёт `CalculateProjectileSpread` → `MaxDeviation`, сдвигает полоски по кривой `C_CrosshairAccuracyPositioning` и гасит по
 `C_CrosshairAccuracyAlpha` (материал `M_UI_Reticle_Accuracy`); шире полоски — больше случайное отклонение стрелы (`AccuracyOffset` в
-`GetProjectileDirection`). `KrinikArrowAim` 0.1.0 ставит направление ровно по взгляду камеры — разброс снят вместе с подъёмом, полоски
-больше ничего не значат (решение — владельцу).
+`GetProjectileDirection`). `KrinikArrowAim` с 22:55 снимает только подъём, разброс игры оставляет (вариант Б владельца); полоски скрыты
+обнулённой кривой `C_CrosshairAccuracyAlpha` (владелец: «полоски мешают, путают»). Подъём = 0.0675 × `CrosshairOffsetMod` (аргумент
+функции), по замеру `CrosshairOffsetMod` ≈ 1 − 0,72 × заряд (заряд 0,60: до 2,11°, снято 2,19°). Выстрел без натяжки (заряд 0):
+гравитация компонента 1,2, разброс до ±4–5° (22:55: остаток −3,8…+4,4° вверх, до +5,5° вправо), полный заряд — 0,12 и доли градуса.
 Разброс в ванили — `BasePlayerChar::CalculateProjectileSpread` (байткод кита, `uaj func`, 2026-10-26): наибольшее отклонение `MaxDeviation`
 складывается из штрафа за движение (скорость героя `GetVelocity` / скорость бега — своя у ездового `RunSpeed` из таблицы, иначе
 450 / 750), стата точности героя (`GetIntStat`, при низком — `LowAttributeDeviationPenalty`; верхняя граница стата 20), стата
