@@ -69,6 +69,15 @@ Exiles Fishing (`JaarFishing`, 2026-10-26): у мода своя таблица 
 пультом: `exec dc PIFCSettings` и т. п.; консоль игры 3.0.1 — `~` (на русской раскладке Ё) и F10 (живые `InputSettings.ConsoleKeys`:
 Tilde, ё, F10).
 
+Вкладки хаба (снято 2026-10-26): Q/E = `W_Carousel_C:NextCarouselWindow()` / `PrevCarouselWindow()` (пультом, без клавиш). Вкладку «Снаряжение»
+выдаёт модуль `XCS_Panel` (боковая панель «Моды Xevyr»): открыт с хабом на «Снаряжении», закрывается при уходе на другую вкладку. Нижняя панель
+хаба — ванильный `ButtonBar` (`ButtonContainerRight`: «Закрыть»; на «Талантах» слева — «Показать контент из DLC»). Кнопки модов в ней:
+Hosav `W_UI_SettingsButton` — отдельный виджет поверх экрана, у автора опрос `Delay 3.0` + `IsModuleActive(CharacterInventory)` (в сборке заглушён,
+видимость — `KrinikPauseGameInMenu` по `XCS_Panel`); Exiles Fishing `W_EFT_AdminButton` — вставлен в `ButtonContainerRight` функцией
+`BPC_EFT_Tuning.Graft` по таймерам 0.3/0.5 с. Окна настроек модов — модули `DT_UIModuleTable` (`DN_UI_Settings`, `SM_UI_Settings`, `PrP_Settings`,
+`LLH_Settings`, `AMR_Settings`, `NightTerrorsSettings`, `EAA_*`, `ModControlPanel`, `HosavUIsettings`, …); часть через голый `ActivateModule` не
+открывается, `PRMainMenu` (PackRat Helper) так ронял игру. Карточки классов EAA — картинки: текст нарисован в текстурах.
+
 Простой (снято 2026-10-26 14:13): после ≈4 мин без ввода игра скрывает HUD (`W_NewHealthUI_C` видимость 2) и камера облетает героя; кадр
 окна в простое выходит без HUD и без открытой панели — снимать сразу после открытия.
 
