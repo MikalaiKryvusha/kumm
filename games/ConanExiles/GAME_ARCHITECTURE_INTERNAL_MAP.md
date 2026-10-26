@@ -119,9 +119,13 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 Заряд меняет падение, не скорость (замер 22:32–22:34, подъём снят модом): скорость всегда ≈5000 см/с; родной подъём у полного натяжения
 1,1–1,2° (`0.0675 × CrosshairOffsetMod`), у неполного 3,7–3,8°; заряженная без подъёма −6 см на 19 м (владелец: «словно заряженная летит
 точно в точку прицеливания с любой дистанции»), незаряженная −55 на 18 м, −101 на 23 м — у заряженной гравитация слабее (поля снаряда
-`PowerChargeMod`, `PowerChargeGravityModMax`, `ProjectileGravityScale` компонента — числа в журнале `KrinikArrowAim`).
+`PowerChargeMod`, `PowerChargeGravityModMax`, `ProjectileGravityScale` компонента; замер 22:39: заряд 1,00 → гравитация 0,120, заряд
+0,64 → 0,510, `PowerChargeGravityModMax` 0,9). Владелец: «игра сама ослабляет гравитацию для заряженного выстрела - это, в принципе, хорошо».
+Прицел после выстрела (план 36 п. 34) — кандидаты в `BasePlayerChar` (кит 2.2): `WasSecondaryKeyDown`, `WasQueueSecondaryKeyDown`,
+`SecondaryActionHold`, `TriggerSecondaryByPrimary`, `StopSecondaryAttack`; у лука `BP_bow_2h` — `UnDrawBow`, `bIsDrawn`; байткод не читан.
 Поломка стрелы при ударе (владелец: «иногда стрелы не втыкаются и исчезают»): `BP_BaseProjectile` — `CanBreakOnImpact`,
-`PercentageChanceToBreakOnImpact` (шаблон `BP_Visual_BowProjectileBase`: false / 0.65 — значит, включает их выстрел); целая стрела при
+`PercentageChanceToBreakOnImpact` (шаблон `BP_Visual_BowProjectileBase`: false / 0.65; у КАЖДОЙ летящей стрелы — true / 0.65, замер 22:39:
+две из трёх исчезают; `KrinikArrowAim` ставит false на выстреле); целая стрела при
 ударе заменяется воткнутой копией для подбора, сломанная исчезает; попадание туда, куда воткнуться нельзя, — тоже поломка (комментарий в
 ассете). След заряженной стрелы — `TracerParticleSystem` (`P_arrow_trail_powershot`: лента + кольца `M_particle_powershot_circles`).
 Ветка сведения в 3.0.1 (2026-10-26): ассет `/Game/Characters/BasePlayerChar` (только в паке игры, ни один мод сборки его не перекрывает) —
