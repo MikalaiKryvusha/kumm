@@ -8,7 +8,10 @@
 > **Outbound:** выборы вкуса (место окон, высота полосок) — владельцу кадрами «до/после»
 
 > **Критерий 1, ход 2026-10-26 19:25:** долгий прогон `_config/long-run.sh` — игра 59 мин без падений, 17 облётов + 17 хабов (кейс S1e); боя
-> в прогоне не было; к разбору — EQS засад Night Terrors ×9 и `SpawnTable … could not find` ×4 в журнале игры.
+> в прогоне не было; к разбору — EQS засад Night Terrors ×9 и `SpawnTable … could not find` ×4 в журнале игры. Разбор 19:36: EQS —
+> `EQS_FindNearbyAmbushPoint failed` у `BP_NightTerrors_AmbushLogic` — герой в облёте над рельефом, точки засады рядом нет (в обычной игре не
+> проверено); SpawnTable — `RNF_NPC_WadaiFlesheaters_Smelter1–4`: `RNF_Distribution` ставит четырёх плавильщиков Ragnar's New Factions, чьих
+> таблиц нет в паке RNF — несостыковка версий двух модов, эти NPC не появляются (в `ConanExiles/docs/17` и сверить версии RNF / RNF_Distribution).
 
 ## Цель (Achieve)
 Владелец играет сборку и не находит ни одного дефекта интерфейса, перевода или взаимодействия, который агент мог найти сам.
