@@ -136,6 +136,11 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 `FC_AccuracyBellCurve` в пределах `MaxDeviation`.
 Прицел после выстрела (план 36 п. 34) — кандидаты в `BasePlayerChar` (кит 2.2): `WasSecondaryKeyDown`, `WasQueueSecondaryKeyDown`,
 `SecondaryActionHold`, `TriggerSecondaryByPrimary`, `StopSecondaryAttack`; у лука `BP_bow_2h` — `UnDrawBow`, `bIsDrawn`; байткод не читан.
+Цепочка класса героя 3.0.1: `BasePlayerChar_C` ← `BaseSurvivalChar_C` ← `BaseBPCombat_C` ← `BaseBPChar_C` ← `/Script/ConanSandbox.ConanCharacter`.
+`StopSecondaryAttack`, `ServerStopSecondaryAttack`, `StopTriggerSecondaryByPrimary`, `StartTriggerSecondaryByPrimary` — в `BaseBPCombat_C`
+(RegisterHook встаёт по этому пути); `ClientStopSecondaryAttack`, `ClientStopTriggerSecondaryByPrimary` — в `BasePlayerChar_C`.
+Разовые наблюдатели «[aim-probe]» поставлены пультом 22:59 (живут до перезапуска).
+Ширина ленты следа — `ParticleModuleSize_0.StartSize.Table.Values` шаблона (запечено 0,10,0; один модуль на четыре ленты; правится в памяти).
 Поломка стрелы при ударе (владелец: «иногда стрелы не втыкаются и исчезают»): `BP_BaseProjectile` — `CanBreakOnImpact`,
 `PercentageChanceToBreakOnImpact` (шаблон `BP_Visual_BowProjectileBase`: false / 0.65; у КАЖДОЙ летящей стрелы — true / 0.65, замер 22:39:
 две из трёх исчезают; `KrinikArrowAim` ставит false на выстреле); целая стрела при
