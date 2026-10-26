@@ -91,6 +91,36 @@
 
 ## Entries
 
+### EXP-0338 · 2026-10-26 · ❌→✅ · #conan #ue5 #iostore #retoc #uassetapi #mods #native-patch #blueprint
+class: tool-roundtrip-not-proven
+**Lesson:** нативная правка ассета чужого мода на UE 5.8 (Конан 3.0.1) проходит только по цепочке с контролем каждого звена: (1) retoc
+0.1.5 не читает заголовки контейнеров 5.8 («Failed to parse ContainerHeader», ссылки → /Engine/UnknownPackage) — нужна сборка с правкой
+trumank/retoc#72 (`_tools/retoc-5.8`); (2) круг JSON в UAssetAPI 1.1.0 падает на `PropertyFlags` > Int64 — строки менять кодом (`uaj setstr`,
+`SkipParsingBytecode`), контроль «загрузить-записать» байт в байт; (3) `retoc to-zen` ЛОМАЕТ часть блюпринтов 5.8 даже без правок
+(`W_EFT_AdminButton`: «Bad export index 1006632959/15» → падение игры; `BPC_EFT_Tuning` → панель пустая), а `W_EFT_Panel` прошёл — значит,
+каждый блюпринт проверяется в игре до сборки пачки; (4) манифест мода 3.0 хранит XXH128 (`<xxh128>`), и загрузчик сверяет по нему — с одним
+MD5 игра «skip extracting … correct hash» и молча держит старый контейнер; (5) собирать из ОРИГИНАЛА (`_patch-originals`), не из раскатанного.
+**Repro:** `python -I -X utf8 ConanExiles/_config/devkit/patch-mod-asset.py build JaarFishing W_EFT_Panel <work> <map.tsv>`; кнопка с пустой
+таблицей → падение при входе в мир 2026-10-26 10:57.
+mechanized: `patch-mod-asset.py` (оригиналы, XXH128, один кусок); для блюпринтов — не механизировано (нужна сборка куска без retoc to-zen)
+
+### EXP-0337 · 2026-10-26 · ❌→✅ · #conan #camera #interaction #trace #twins #mods
+class: camera-mod-breaks-camera-relative-distances
+**Lesson:** все дистанции взаимодействия Конана меряются от КАМЕРЫ (`GetLineTraceStartAndEndFromCamera`), рассчитаны на родную камеру в
+200 см: мод, который отодвигает камеру, обязан удлинять их на столько же. Их несколько: «взять» (`InteractionDistance` + третье-лицо-надбавка),
+и ОТДЕЛЬНЫЙ поиск растительности-ресурса (`PickupInteractionDistance` 25, родная `PickupGatheringOneInstance`) — ветки брались, камни нет.
+Три промаха наугад (наклон, перенос `TraceOrigin` на камеру — сломал всё) остановило чтение функций контроллера пультом и прямой вызов луча.
+**Repro:** бага 64 п. 11; таблица двойников — там же.
+mechanized: `ConanCameraControl` → `update_interact_reach` (надбавка и поиск камней на смене отдаления)
+
+### EXP-0336 · 2026-10-26 · ❌ · #conan #migration #hud #legacy-tweak #ue4ss
+class: legacy-tweak-outlives-game-version
+**Lesson:** правка раскладки, подобранная глазом на старой версии игры (сдвиг панели быстрых ячеек +150 в `ConanModPackStatus`, 2.1, 10.09),
+после переезда на 3.0 уводила панель за край экрана раз в 2 с — владелец видел «панель появляется на секунду и исчезает» и винил чужой мод.
+Нашлось делением: без паков — сломано, без наших Lua-модов — цело. После переезда версии каждую нашу поправку раскладки проверять заново.
+**Repro:** `ConanExiles/_unpacked/ConanModPackStatus/config.lua` → `hud_pin` (снято 2026-10-26).
+mechanized: не механизировано — правило в комментарии `hud_pin`
+
 ### EXP-0335 · 2026-10-26 · ❌ · #conan #bench #measurement #noise #single-run
 class: single-run-verdict
 **Lesson:** облёт-эталон Конана шумит сильнее, чем показали два первых чистых облёта (38 и 46 рывков, «±4»): пять A за ночь — 36, 38,
