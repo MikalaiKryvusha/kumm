@@ -154,7 +154,10 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 `FieldOfViewTarget` (107,5 вне прицела), `FieldOfViewChangeDuration` 0,1, `FieldOfViewLingerDuration` 0,1, `RevertOnExpire`.
 `SetFieldOfViewTarget(0)` — обычный обзор, `(1)` — прицельный (53,76°); на выстреле игра зовёт 0 и через ≈0,7 с снова 1. Перехват UE4SS
 этой BP-функции срабатывает ПОСЛЕ её тела (цель уже новая), второй обработчик RegisterHook («после») не вызывается, подмена аргумента
-не действует; работает запись поля `FieldOfViewTarget` прямо в обработчике (2026-10-26 23:37, кейс AIM9).
+не действует. Запись поля `FieldOfViewTarget` в обработчике держит прицел только пока у контроллера идёт переход (23:37, AIM9); после
+отпускания ПКМ поле менялось, а реальный угол камеры оставался 53,8° — ни `SetFieldOfViewTarget(0)`, ни `FieldOfViewChange(0.1,0)`, ни
+`SetCameraFov(107.5)` его не вернули (контроллер неактивен, 2026-10-26 23:56). Удержание через перехваты снято (`KrinikArrowAim` 0.2.0);
+следующий путь — данные `FieldOfViewSubstateTrigger` у героя (EXP-0349).
 Ширина ленты следа — `ParticleModuleSize_0.StartSize.Table.Values` шаблона (запечено 0,10,0; один модуль на четыре ленты; правится в памяти).
 Лента расплывалась к хвосту («разрастается по толщине чем дальше летит стрела»): частицы рождаются в шаре R 3 см
 (`ParticleModuleLocationPrimitiveSphere_0.StartRadius`) и сносятся 20 см/с (`ParticleModuleVelocity_0.StartVelocity` 0,−20,0);
