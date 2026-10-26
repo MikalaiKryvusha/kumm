@@ -83,7 +83,9 @@
       «Maximum Extra Time Between Ambushes» в секундах (страница мода, `_catalog/mods/3721274811.txt:59-66`; меняются в ModControlPanel);
       Night Terrors — глобальные настройки засад `dc nightterrors admin` (`_catalog/mods/3723538551.txt:28`). Дальше: найти в паках их
       значения по умолчанию (`uaj strings` / walk по ассету настроек) и поставить поставочные числа правкой `prop:` (HOUSE_RULES §1 шаг 0);
-      сами числа «как редко» — предложить владельцу парой вариантов.
+      сами числа «как редко» — предложить владельцу парой вариантов. Кандидаты-ассеты (оглавления контейнеров, 2026-10-26): Night Terrors —
+      `NightTerrorsAdminSettings`, `BP_DC_NightTerrors_Settings`; PvE Plus Ambush — `W_Ambush_AdminOptions`, `W_AmbushWidget_AdminAndUser`
+      (значения по умолчанию могут жить в контроллере мода — искать поля времени через `walk.py` по выгрузке `patch-mod-asset.py extract`).
 - [ ] Г5. Номер версии сборки: `packVersion` 1.0.0 — номер публикации 2.2.3 (слово владельца 02.10). Номер для 3.0.1 — за владельцем.
 
 Сделано раньше: п. 11 (камни), п. 14 (панель быстрых ячеек), Exiles Fishing по-русски, 53 строки байткода в `.locres`, угол DPS и метрики
