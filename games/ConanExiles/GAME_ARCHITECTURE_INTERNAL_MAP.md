@@ -121,6 +121,11 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 точно в точку прицеливания с любой дистанции»), незаряженная −55 на 18 м, −101 на 23 м — у заряженной гравитация слабее (поля снаряда
 `PowerChargeMod`, `PowerChargeGravityModMax`, `ProjectileGravityScale` компонента; замер 22:39: заряд 1,00 → гравитация 0,120, заряд
 0,64 → 0,510, `PowerChargeGravityModMax` 0,9). Владелец: «игра сама ослабляет гравитацию для заряженного выстрела - это, в принципе, хорошо».
+Полоски слева и справа от точки прицела (кит 2.2, `/Game/UI/Widgets/HUD/Reticles/WBP_Crosshair`, режим `Ranged`) — указатель разброса:
+виджет зовёт `CalculateProjectileSpread` → `MaxDeviation`, сдвигает полоски по кривой `C_CrosshairAccuracyPositioning` и гасит по
+`C_CrosshairAccuracyAlpha` (материал `M_UI_Reticle_Accuracy`); шире полоски — больше случайное отклонение стрелы (`AccuracyOffset` в
+`GetProjectileDirection`). `KrinikArrowAim` 0.1.0 ставит направление ровно по взгляду камеры — разброс снят вместе с подъёмом, полоски
+больше ничего не значат (решение — владельцу).
 Прицел после выстрела (план 36 п. 34) — кандидаты в `BasePlayerChar` (кит 2.2): `WasSecondaryKeyDown`, `WasQueueSecondaryKeyDown`,
 `SecondaryActionHold`, `TriggerSecondaryByPrimary`, `StopSecondaryAttack`; у лука `BP_bow_2h` — `UnDrawBow`, `bIsDrawn`; байткод не читан.
 Поломка стрелы при ударе (владелец: «иногда стрелы не втыкаются и исчезают»): `BP_BaseProjectile` — `CanBreakOnImpact`,
