@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0346 · 2026-10-26 · ❌ · #conan #pult #reflection #crash #ue4ss
+class: known-trap-walked-again
+**Lesson:** разведка пультом «прочитать КАЖДОЕ свойство виджета» (`ForEachProperty` + `w[n]` в цикле по классу и родителям) — та же
+грабля, что опрос нативного `IsModuleActive` 16.09: чтение свойства, за которым нативный указатель пуст или недействителен, роняет процесс,
+и `pcall` этого не ловит. Читать только названные поля, по одному, а обход — именами без значений (`ForEachProperty` → только имя и класс).
+**Repro:** 2026-10-26 17:32:3x команда `lua … ForEachProperty … pcall(function() local x=w[n]; v=x:GetClass()… end)` по
+`W_CraftingManagerGUI_C`; ответа нет, 17:32:46 `EXCEPTION_ACCESS_VIOLATION reading address 0x10` (последний исполненный ответ — 17:32:29).
+Связь не доказана (журнал камеры шёл до 17:32:45), но команда была в работе.
+mechanized: no
+
 ### EXP-0345 · 2026-10-26 · ❌→✅ · #hooks #deploy #edits #guard #conan
 class: twins-missed
 **Lesson:** пачка правок, отправленная одним ходом вместе с раскаткой, может пройти ЧАСТИЧНО: страж русского языка отбил три правки
