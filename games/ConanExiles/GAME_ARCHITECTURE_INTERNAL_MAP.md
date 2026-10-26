@@ -111,6 +111,10 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 (≈3,9°), нормализовано. Подъём подобран под родную камеру над правым плечом; при нашей камере (строго за спиной, выше) стрела уходит вбок на
 поперечный разрыв камера↔лук и вверх на неподходящий подъём (жалоба владельца 2026-10-26 «выше и правее»). Захват цели (`TargetLockLocation`)
 — своя баллистика к точке захвата.
+Ветка сведения в 3.0.1 (2026-10-26): ассет `/Game/Characters/BasePlayerChar` (только в паке игры, ни один мод сборки его не перекрывает) —
+`GetProjectileDirection` байткод с `.uexp`+457496 (legacy-вид от `retoc to-legacy --version UE5_7 -f BasePlayerChar`); `JumpIfNot` +5013 (.uexp 462509),
+его условие `False` 0x28 на .uexp 462514 — единственный 0x28 в функции; `True` = 0x27, размер тот же. Доставка — свой контейнер с одним пакетом;
+путь legacy→zen для блюпринта ломает импорты (build-level-mod.py, 13.09) — нужен перенос zen-куска и записи заголовка без пересборки.
 Первое лицо в бою (лук в руках) — родная настройка геймплея `Game.ini` → `[Settings.Gameplay] AllowFirstPersonCamera` (в коде
 `AllowFirstPersonCameraInCombat`): при False игра выставляет `BlockFirstPersonByCombat`, и `UpdateFirstPersonCameraCombatBlockingStatus` уводит
 камеру в третье лицо, запомнив прежний вид (`WasInThirdPersonOnBlockFirstPerson`). В эталоне пака с 2026-10-26 — True. Режим камеры — `CurrentCameraMode`.
