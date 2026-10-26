@@ -53,7 +53,7 @@ from the live controller / hero / build system (pult, reflection only):
 | stones, fibre (foliage instances) | `PickupInteractionDistance` 25, sphere 200 — native `PickupGatheringOneInstance` | yes (owner: «ветки берет, камни - нет»; 1450 by hand → «сейчас коррекно») | compensated by the camera mod |
 | lenient check after the hit | `dw.BaseLenientInteractionDistance` 500 — hit point ↔ HERO (`InteractionLenientDistanceCheck`) | no | fine |
 | world widgets | `WidgetInteraction` on `CameraThirdPerson`, `InteractionDistance` 2180 at arm 1680 | game recomputes it (arm + 500) | fine |
-| building placement | `BuildSystemComponent::m_BuildRange` 2000, `m_DestructRange` 5000 | to test — owner asked 09:45 | open |
+| building placement | `BuildSystemComponent::m_BuildRange` 2000, `m_DestructRange` 5000 | to test | open |
 | thrall commands | `CommandRange` 3000, radius 50 | probably (trace from camera) — test | open |
 | target lock, engagement, cries for help | `TargetLockRange` 2500 etc. | hero-relative | fine |
 
