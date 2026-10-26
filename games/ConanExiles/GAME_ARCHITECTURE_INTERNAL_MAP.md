@@ -84,6 +84,13 @@ Simple Minimap ставит карту во время игры: центр сл
 `W_EnemyHealthbar_InHUD` / `W_NewEnemyHealth` — рамка цели в HUD, не полоска над головой моба; настройки — `SaveUISettings_UIH`, слот
 `HosavUISave_New` (файл появляется после сохранения настроек игроком).
 
+Слоты `W_SmoothHP` (`CanvasPanelSlot_N` → элемент; правка — `prop:CanvasPanelSlot_N/LayoutData/Offsets/Left|Top|Right|Bottom`, таблица
+`ConanExiles/_config/localization/asset-strings/UIMod_Hosav__W_SmoothHP.tsv`). Сборка 2026-10-26 — две колонки, ряды 77 · 102 · 127:
+урон `_12` значок / `_13` текст · броня `_8` / `_10` · вес `_20` / `_21` (колонка −240 / −220); температура `_9` / `_11` · еда `_22`, шкала
+`_35` / `_23` · вода `_24`, шкала `_33` / `_25` (колонка −10 / 10). Верхний ряд 5: опыт `_16` значок (сжат до 0×0) / `_17` текст (−240), порча
+`_14` / `_15` (−10 / 10). Полосы: здоровье `_36`, выносливость `_1`, фон `_27` (T −11, высота 160). Строка опыта — шаблон
+`{xpCurrent}{suffix1} / {xpMax}{suffix2} ({xpNeeded}{suffix3})`, перевод «Опыт: …» (интервью #003, строка 299).
+
 Перевод модов: цель `Content/Localization/Game` в чистой игре пуста (ванильный перевод в паках) — там только наши `Game.locmeta` и
 `ru/Game.locres`, их ставит запись манифеста `Krinik Russian Translation`.
 
