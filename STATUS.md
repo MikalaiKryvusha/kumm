@@ -102,6 +102,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **PARKED: Г13 «Собрать отчёт.cmd» (план 35)** — запаркован 2026-10-26 20:14 по слову владельца «Задача сессии: написать все долги по идеям и
+> багам». Сделана разведка, кода нет. Опознаватели: в `CrashContext.runtime-xml` — `MachineId`, `LoginId`, `EpicAccountId`, `BaseDir`/`RootDir`/`Modules`
+> (пути); в `ConanSandbox.log` — строки `LogInit: Computer:`, `LogInit: User:`, `MachineId=`; адреса серверов (IPv4) в журнале есть. **Имя пользователя
+> Windows — начало имён наших модов (`Krinik…`)**: заменять его подстановкой по всему тексту НЕЛЬЗЯ — только названные строки и пути профиля.
+> Файл кладётся в корень архива через `extras` манифеста `D:\work\ai_sandbox\ConanExiles\modpack.json`. Возобновить: скрипт → проверка на падении
+> `UECC-Windows-D5516A09…_0000` (18:03) → поиск опознавателей в zip = 0 → раздел README.
+>
 > **ПОРЯДОК НОВОГО ЧАТА** (`[OWNER]` «работай автономно 2 часа затем передача дел в новый чат» · 2026-10-26 ≈17:40). Ход 26.10 до 15:52 и
 > прежний пункт 0 — летопись, запись 2026-10-26 19:38. Правила: `HOUSE_RULES.md` §1 — кино «выключено» действует до обратного слова; объём работы —
 > в часах; правки чужих модов — нативно (KRINIK MODIFIED, `modpack.json` → `krinikModified`, таблицы `ConanExiles/_config/localization/asset-strings/`;
