@@ -32,6 +32,10 @@
 //                 + 2026-10-25 16:4x: данные сборки (modpack.json, .ini, .locres, .pak вне KUMM) и раскатка в игру (Deploy-ModPack -Deploy
 //                 без -DryRun, deploy-localization.py, deploy-hot/cold.sh, translation_deploy.sh) — долг game; прежняя версия на этих
 //                 случаях красная в 5 точках; самопроверка стражей tools/test-guards.mjs долг игры не гасит (была красной в 1 точке)
+//                 + 2026-10-26: `cp` в папку игры (ConanSandbox/Mods и др.) — долг раскатки; долг раскатки гасит только ЗАПУСК игры после
+//                 неё (снимок окна и пульт открытого сеанса — нет), кроме горячей выкладки Сварога; мутанты «без проверки запуска» и «без
+//                 разбора цели копии» красные (по 1 и 2 точкам). Дыра --waive (агент сам себе пишет отказ) — остаётся, отказы видны в
+//                 .kaif/test-debt.json → waivers
 // ON-REAL-PATH:   2026-10-25 11:11 — wired mid-session in .claude/settings.local.json; the full order reached the context after the next
 //                 Edit of this very file, and its own --selftest run cleared the debt («прогон засчитан … непроверенного кода нет»);
 //                 2026-10-25 16:4x — живая раскатка `deploy-localization.py` записала `deploy:deploy-localization.py [game]` и полный приказ
@@ -74,11 +78,29 @@ const DEPLOYS = [
   ['translation_deploy.sh', /translation_deploy\.sh\b/],
 ];
 
+// Копирование файла в папку игры — тоже раскатка (2026-10-26: паки DamageNumber и UIMod_Hosav легли в ConanSandbox/Mods обычным `cp`,
+// долга не было — `[OWNER]` «игре я это ещё не видел - почему хук тебя не дернул»). Цель копии — последнее слово команды копирования.
+const COPY_VERB = /(^|[\s;&|(])(cp|copy|Copy-Item|xcopy|robocopy|mv|Move-Item)\s/i;
+const GAME_DIR = /\/(ConanSandbox\/(Mods|Content|Binaries)|BepInEx\/(plugins|config)|Pal\/(Content|Binaries)|Content\/Paks)(\/|"|'|$)/i;
+// Раскатку, которую игра читает только при запуске, гасит только ЗАПУСК после неё: снимок окна или пульт открытого сеанса смотрят на
+// старые файлы (2026-10-26: снимок сеанса 11:24 погасил долг перевода, раскатанного в ≈12:03). Горячая выкладка Сварога — исключение:
+// её игра подхватывает на ходу, и её гасит любой прогон игры.
+const LAUNCH = /run-game\.sh|launch-bg\.ps1|enter-world[\w-]*\.ps1|run-camera-test\.ps1/;
+const HOT = new Set(['deploy:deploy-hot.sh']);
+
 /** Debt keys a command creates by deploying into a game. */
 export function deploysOf(command) {
   const cmd = (command || '').replaceAll('\\', '/');
   if (HYGIENE.test(cmd)) return [];
-  return DEPLOYS.filter(([, re]) => re.test(cmd)).map(([name]) => `deploy:${name}`);
+  const out = DEPLOYS.filter(([, re]) => re.test(cmd)).map(([name]) => `deploy:${name}`);
+  for (const seg of cmd.split(/;|&&|\|\||\n/)) {
+    const m = seg.match(COPY_VERB);
+    if (!m) continue;
+    const words = seg.slice(m.index + m[0].length).trim().match(/"[^"]*"|'[^']*'|\S+/g) || [];
+    const dest = (words.filter((w) => !w.startsWith('-')).pop() || '').replace(/^["']|["']$/g, '');
+    if (GAME_DIR.test(dest + '/')) out.push(`deploy:copy ${basename(dest) || dest}`);
+  }
+  return out;
 }
 
 /** The debt entries a command clears (their keys), from the debt as it stands. */
@@ -87,7 +109,8 @@ export function cleared(command, debt) {
   if (HYGIENE.test(cmd)) return [];
   const out = [];
   for (const [rel, d] of Object.entries(debt)) {
-    if (d.kind === 'game' && GAME_RUN.test(cmd)) out.push(rel);
+    if (d.kind === 'game' && rel.startsWith('deploy:') && !HOT.has(rel)) { if (LAUNCH.test(cmd)) out.push(rel); }
+    else if (d.kind === 'game' && GAME_RUN.test(cmd)) out.push(rel);
     else if (d.kind === 'engine' && ENGINE_RUN.test(cmd)) out.push(rel);
     else if (d.kind === 'tool' && cmd.includes(basename(rel))) out.push(rel);
   }
@@ -232,8 +255,23 @@ if (argv[0] === '--selftest') {
     if (!load(dir).debt['deploy:deploy-localization.py']) fails.push('deploy-localization.py is not game debt');
     bash('node D:/work/ai_sandbox/KUMM/tools/test-guards.mjs');
     if (!load(dir).debt['deploy:deploy-localization.py']) fails.push('the guards self-test cleared game debt (it is not a game run)');
+    // 2026-10-26: a snapshot of a session started BEFORE the deploy cleared it — only a launch after the deploy clears now
     bash('powershell -File _config/capture-window.ps1 -Out x.jpg');
-    if (Object.keys(load(dir).debt).length) fails.push('a game run did not clear deploy debt');
+    bash('bash _config/pult.sh "lua return 1"');
+    if (!load(dir).debt['deploy:deploy-localization.py']) fails.push('a snapshot / pult of the open session cleared deploy debt');
+    bash('powershell -File _config/launch-bg.ps1');
+    if (Object.keys(load(dir).debt).length) fails.push('a launch after the deploy did not clear deploy debt');
+    // 2026-10-26: `cp` of a pak into the game's Mods folder was no deploy at all
+    const cp = ctx(bash('cp "D:/Games/Conan Exiles Mods/mods/_krinik-modified/3748867573/UIMod_Hosav.pak" "D:/Games/Conan Exiles 3.0.1/ConanSandbox/Mods/UIMod_Hosav.pak" && md5sum x'));
+    if (!load(dir).debt['deploy:copy UIMod_Hosav.pak'] || !cp.includes('ПРОТЕСТИРУЙ')) fails.push(`cp into the game Mods folder is not deploy debt (${cp.slice(0, 40)})`);
+    bash('cp "D:/Games/Conan Exiles 3.0.1/ConanSandbox/Mods/UIMod_Hosav.pak" /d/Temp/scratch/x.pak');
+    bash('cp "D:/Games/Conan Exiles Mods/mods/_workshop/1/A.pak" "D:/Games/Conan Exiles Mods/_patch-originals/A.pak"');
+    if (Object.keys(load(dir).debt).length !== 1) fails.push(`a copy OUT of the game or into the library became deploy debt (${Object.keys(load(dir).debt)})`);
+    bash('powershell -File _config/launch-bg.ps1');
+    edit('SvarogsDream/src/X.cs');
+    bash('bash SvarogsDream/tools/deploy-hot.sh');
+    bash('bash SvarogsDream/tools/h.sh "call X"');
+    if (Object.keys(load(dir).debt).length) fails.push('the Svarog hot deploy is no longer cleared by its console');
   } finally { rmSync(dir, { recursive: true, force: true }); }
   console.log(fails.length ? `❌ selftest FAILED — ${fails.join(' · ')}` : '✅ selftest OK — code edit → full then short order; --check/py_compile do not clear; game/engine/tool runs clear their own kind; Stop blocks with debt, not twice without new edits; .md and files outside ai_sandbox are not debt');
   process.exit(fails.length ? 1 : 0);

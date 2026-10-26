@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0341 · 2026-10-26 · ❌→✅ · #hooks #testing #deploy #game #guard
+class: guard-cleared-by-unrelated-observation
+**Lesson:** долг «проверь в игре» гасился снимком окна СТАРОГО сеанса (игра запущена в 11:24, перевод раскатан в ≈12:03 — игра его ещё не
+читала), а копия пака в `ConanSandbox/Mods` обычным `cp` долга не заводила вовсе. Владелец второй день подряд: «почему хук тебя не дернул».
+Раскатку, которую игра читает при запуске, проверяет только запуск после неё; раскатка — по цели действия (папка игры), а не по имени скрипта.
+mechanized: `tools/hooks/test-after-code.mjs` (`COPY_VERB`/`GAME_DIR`, `LAUNCH`), самопроверка + 2 мутанта красные
+
 ### EXP-0340 · 2026-10-26 · ❌→✅ · #conan #datatable #merge #compat #mods #observation
 class: log-wording-taken-as-semantics
 **Lesson:** журнал Конана «MergeDataTables … overwriting» не значит «строка заменена целиком»: живая таблица (пульт, `DataTable:ForEachRow`)
