@@ -128,6 +128,11 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 две из трёх исчезают; `KrinikArrowAim` ставит false на выстреле); целая стрела при
 ударе заменяется воткнутой копией для подбора, сломанная исчезает; попадание туда, куда воткнуться нельзя, — тоже поломка (комментарий в
 ассете). След заряженной стрелы — `TracerParticleSystem` (`P_arrow_trail_powershot`: лента + кольца `M_particle_powershot_circles`).
+Лента следа — марево (материал `M_particle_weapon_speed_trail_arrow_linger`, `distort` 0.6), не свет: внешний параметр `glow` (8 вместо 1)
+делает её «толстой, дымной» (владелец, 22:42); параметры шаблона — `opacity`, `glow`, `trailstart_*`, `ringsize` (только кольца). Эффекты
+лука при заряде: `P_bow_powercharge` (натяжка), `P_bow_powercharge_charged` (золотой свет «заряжено»), `P_bow_powercharge_release`
+(выпуск) — параметров яркости нет. Lua-мод в живую игру без перезапуска — пультом `lua dofile([[<Mods>/<Мод>/Scripts/main.lua]])`
+(подписку NotifyOnNewObject держать одну через глобальную ссылку на обработчик — так сделан `KrinikArrowAim`).
 Ветка сведения в 3.0.1 (2026-10-26): ассет `/Game/Characters/BasePlayerChar` (только в паке игры, ни один мод сборки его не перекрывает) —
 `GetProjectileDirection` байткод с `.uexp`+457496 (legacy-вид от `retoc to-legacy --version UE5_7 -f BasePlayerChar`); `JumpIfNot` +5013 (.uexp 462509),
 его условие `False` 0x28 на .uexp 462514 — единственный 0x28 в функции; `True` = 0x27, размер тот же. Доставка — свой контейнер с одним пакетом;
