@@ -139,7 +139,10 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 Цепочка класса героя 3.0.1: `BasePlayerChar_C` ← `BaseSurvivalChar_C` ← `BaseBPCombat_C` ← `BaseBPChar_C` ← `/Script/ConanSandbox.ConanCharacter`.
 `StopSecondaryAttack`, `ServerStopSecondaryAttack`, `StopTriggerSecondaryByPrimary`, `StartTriggerSecondaryByPrimary` — в `BaseBPCombat_C`
 (RegisterHook встаёт по этому пути); `ClientStopSecondaryAttack`, `ClientStopTriggerSecondaryByPrimary` — в `BasePlayerChar_C`.
-Разовые наблюдатели «[aim-probe]» поставлены пультом 22:59 (живут до перезапуска). Управление луком: ПКМ — прицел, ЛКМ — выстрел
+Разовые наблюдатели «[aim-probe]» поставлены пультом 22:59 (живут до перезапуска).
+Выход в главное меню пультом: `exec disconnect` в одиночной игре ничего не делает (2026-10-26 23:17, герой остался в мире) — сценарий
+«меню → снова в мир» пока только руками владельца. После такого перезахода объекты героя меняются: моды, державшие старые ссылки, читают
+поля как `TrivialObject` (баг 65). Управление луком: ПКМ — прицел, ЛКМ — выстрел
 (`InpActEvt_PrimaryActionV2_…_9/_10` срабатывают на выстреле; выстрел #4 23:02 ушёл с отпущенной ПКМ).
 «Камера отъезжает после выстрела» (владелец 23:0x) — это ОБЗОР, не штанга: замер 23:05–23:07, пять выстрелов с зажатой ПКМ — штанга 170
 неизменна, обзор 53,8° до 100 мс → 88–105° на 200 мс → 107,5° на 300–650 мс → снова 54° к 1300 мс. Обзором правит компонент героя
