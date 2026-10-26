@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0347 · 2026-10-26 · ❌→✅ · #deploy #powershell #only #shell
+class: shell-lied
+**Lesson:** `powershell -File Deploy-ModPack.ps1 -Only "Hosav's Custom UI","KrinikPauseGameInMenu"` из Git Bash отдаёт скрипту ОДНУ строку, а не
+массив: «[FAIL] No mods selected». Массив параметру `-File` не передать — раскатывать по одному моду за вызов (цикл в bash) или `-Command`.
+**Repro:** 2026-10-26 17:4x, раскатка пары модов — отказ; два вызова по одному — оба `[ok] 1/1`.
+mechanized: no
+
 ### EXP-0346 · 2026-10-26 · ❌ · #conan #pult #reflection #crash #ue4ss
 class: known-trap-walked-again
 **Lesson:** разведка пультом «прочитать КАЖДОЕ свойство виджета» (`ForEachProperty` + `w[n]` в цикле по классу и родителям) — та же
