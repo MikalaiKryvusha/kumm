@@ -91,6 +91,18 @@
 
 ## Entries
 
+### EXP-0349 · 2026-10-27 · ❌ · #conan #ue4ss #hooks #stuck #simplicity
+**Context:** keeping the aim FOV after a bow shot while RMB is held (`BP_PlayerFovController`), owner live-testing.
+**Tried / did:** six patches in a row over ~2 h — arg substitution in a pre-hook, a nested `SetFieldOfViewTarget(1)` from the post-hook (crash
+suspect, bug 65), field write after the call, spawn-time install, an RMB-release hook, a 100 ms settle — each one fixing the previous one's symptom.
+**Result:** ❌ — camera stuck zoomed (target 107.5, real FOV 53.8); my «release» test passed on a camera that was not zoomed (a check that
+could not fail). Owner: «неужели так много нужно городить кода для такой простой логики?» · «Уже два часа ебёмся, там у нас уже спагетти код».
+**Lesson:** the 3-attempts rule is literal: after the third hook patch STOP and read how the game decides the behaviour (here — the
+substate → FOV data table) before writing a fourth. A UE4SS hook on a BP function fires AFTER its body; writing a field the game reads only
+during a transition is not control. Every live test needs its control state first (camera actually zoomed).   → link: plans/36 item 34, bugs/65
+**Trigger:** a third live patch to the same behaviour in one session → stop, open the game's data/bytecode, write the recon line first.
+**Not for:** one-shot data edits that are verified by reading back the value the game actually uses.
+
 ### EXP-0348 · 2026-10-26 · ❌→✅ · #conan #pult #ue4ss #lua #reload
 **Context:** live-tuning `KrinikArrowAim` in the owner's running game by the pult (`lua dofile(<Mods>/KrinikArrowAim/Scripts/main.lua)`).
 **Tried / did:** after the 23:15 relaunch UE4SS loaded the mod itself from `Mods/` (enabled.txt), and I kept reloading it by the pult.
