@@ -130,7 +130,8 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 ассете). След заряженной стрелы — `TracerParticleSystem` (`P_arrow_trail_powershot`: лента + кольца `M_particle_powershot_circles`).
 Лента следа — марево (материал `M_particle_weapon_speed_trail_arrow_linger`, `distort` 0.6), не свет: внешний параметр `glow` (8 вместо 1)
 делает её «толстой, дымной» (владелец, 22:42); масштаб компонента следа игра сама ставит по заряду (полный заряд — 0,50 к первому тику;
-`KrinikArrowAim` ×0,5 → 0,25, замер 22:43:57); параметры шаблона — `opacity`, `glow`, `trailstart_*`, `ringsize` (только кольца). Эффекты
+`KrinikArrowAim` ×0,5 → 0,25, замер 22:43:57); 22:46 — в полёте у следа 0,250 при любом заряде (0,00–1,00), а масштаб, поставленный
+на первом тике, игра перекрывает позже; шаблон компонента `TracerParticleSystem_GEN_VARIABLE` — 1,000 (не тронут); параметры шаблона — `opacity`, `glow`, `trailstart_*`, `ringsize` (только кольца). Эффекты
 лука при заряде: `P_bow_powercharge` (натяжка), `P_bow_powercharge_charged` (золотой свет «заряжено»), `P_bow_powercharge_release`
 (выпуск) — параметров яркости нет. Lua-мод в живую игру без перезапуска — пультом `lua dofile([[<Mods>/<Мод>/Scripts/main.lua]])`
 (подписку NotifyOnNewObject держать одну через глобальную ссылку на обработчик — так сделан `KrinikArrowAim`).
