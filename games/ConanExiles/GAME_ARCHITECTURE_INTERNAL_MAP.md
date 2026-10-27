@@ -211,7 +211,12 @@ CharacterMesh0 (SkeletalMeshComponentBudgeted), прицеплена к Characte
 `BP_PowerCharge` (натяжка: `SetPowerCharge` / `EndPowerCharge`), `BP_SetChargeHold` (`ChargeHoldEnterFromNotify` — заряд полный, удержание;
 на этом отрезке горит `P_bow_powercharge_charged` — событие для звука заряда), `BP_FieldOfViewChangeForDuration` (`BeginFieldOfViewChange`,
 `FieldOfViewMod` типа `E_FieldOfViewModifiers`, `Duration` — вероятная причина отъезда камеры на выстреле, п. 34: правка данных монтажа),
-`BP_ProjectileAttack`, `BP_AttackRotationSet`, `BP_QueueWindow`, `BP_CancelDodgeWindow`, `AnimNotify_PlaySound`. Обзор через прицел —
+`BP_ProjectileAttack`, `BP_AttackRotationSet`, `BP_QueueWindow`, `BP_CancelDodgeWindow`, `AnimNotify_PlaySound`. Данные уведомлений в монтаже
+3.0.1 (`retoc-5.8 to-legacy` + `uaj tojson … VER_UE5_8`, 20:19): `BP_FieldOfViewChangeForDuration_C_0` — `EaseIn` 1,5, `EaseOut` 0,1 (остальное по
+умолчанию класса) — сужение обзора за натяжку и возврат за 0,1 с на выстреле: это и есть «камера отъезжает при выстреле» (замер 26.10:
+53,8° до 100 мс → 88–105° на 200 мс → 107,5° к 300 мс); остальные уведомления монтажа — без своих полей.
+**От первого лица прицел обзор не меняет** (пульт 20:17: ПКМ зажата, обзор 107,5°, камера в точке `FirstPersonCameraArm` и `b_headcam`) —
+всё, что в моде привязано к `SetFieldOfViewTarget`, от первого лица не срабатывает; признак стойки там — ПКМ или уведомления монтажа. Обзор через прицел —
 `AO_combat_2h_bow_aim_fullbody` / `…_aim_head` (сдвиги прицеливания вверх/вниз 90°).
 Стрела на тетиве (пульт, 2026-10-27 20:12): прицеплена к сокету героя `Socket_Bow_Arrow` (сторона лука), не к руке; в натяжке при ходьбе
 её ось отклонена от линии «правая рука → лук» на 24,7°, до руки 35 см — древко проходит сквозь рукоять (п. 44). Сокеты героя: `Socket_Bow`,

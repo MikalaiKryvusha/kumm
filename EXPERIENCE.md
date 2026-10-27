@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0353 · 2026-10-27 · ❌ · #conan #camera #pult #live #owner-game
+**Context:** the owner was playing; I fixed his camera live by the pult — a FOV guard, then an FP-offset guard, on top of the mod's own
+keep-aim hook loaded at launch.
+**Result:** ❌ — three layers on one camera: «туда сюда камера пляше» · «от первого лица какое-то отдаление безумное» · «ПКМ ломается в какой-то
+момент» · «полный пиздец происходит, я даже не знаю, как эти баги тебе описывать». All live patches stopped 20:19.
+**Lesson:** one owner of a game subsystem at a time. Live pult patches in the owner's session only to unstick (one call), never as a second
+controller beside a mod hook; the fix goes into the mod, tested in MY run, then handed over. And find the data that causes the behaviour
+first (here the montage notify `EaseOut` 0,1) — it was one `uaj tojson` away the whole time.
+**Trigger:** about to start a second running guard on a subsystem a mod already hooks → stop, read the data.
+
 ### EXP-0352 · 2026-10-27 · ❌→✅ · #conan #ue4ss #trace #collision #mobs
 **Context:** the arrow probe (`KrinikArrowAim` 0.3.0) had to put its point on a mob; I swapped the Visibility trace for
 `LineTraceSingleByProfile` with the arrow's own profile, reasoning «the probe should see what the arrow hits».
