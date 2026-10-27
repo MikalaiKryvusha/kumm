@@ -127,6 +127,8 @@ during a transition is not control. Every live test needs its control state firs
 **Repeat 2026-10-27 19:4x:** a 7th variant (the game's own `SetFieldOfViewTarget(1)` on the next tick, no field writes) passed the pult test and
 failed in the owner's hands the same way — RMB released before the native re-aim leaves nobody to send `(0)`, and `(0)` outside a transition is
 ignored. A pult cannot model RMB release, so a pult pass on this class proves nothing; the bytecode of `BP_PlayerFovController` comes first.
+Minutes later the component's own `FieldOfViewReset()` — never tried in 2 days — freed the stuck view (90,9° → 105,8°): before reaching for
+bytecode, call every public function of the stuck component once by the pult; the exit is often already there.
 
 ### EXP-0348 · 2026-10-26 · ❌→✅ · #conan #pult #ue4ss #lua #reload
 **Context:** live-tuning `KrinikArrowAim` in the owner's running game by the pult (`lua dofile(<Mods>/KrinikArrowAim/Scripts/main.lua)`).
