@@ -133,6 +133,17 @@ Also present: a commandlet `UCookModCommandlet` (`-run=CookMod`, log category
 are `NOT YET` known (no readable source; strings show `-ModDevKit`, `TargetPlatforms`,
 `ModWithDLCFile`).
 
+**3.2.1 Field run 2026-10-27 (new kit `F:\CEUE5Devkit`, mod `KrinikBowFixes`).** `RunUAT BuildMod -NoCompile … -ScriptDir=…` fails:
+«Failed to find command BuildMod» — the automation module ships only as a built DLL (`uatbin/Development/ModDevKit.Automation.dll`,
+built at Funcom from `C:\b\exiles\…\ModDevKit.Automation.csproj`, the `.csproj` is not shipped), so UAT has no script module record.
+The pipeline is therefore driven step by step from `BuildMod.cs` by `ConanExiles/_config/devkit/kit-buildmod.py` (cook commandlet,
+two UnrealPak calls per platform, wrapper by repak V11 — live mods of 3.0.1 are V11 outside and inside). Editing for a mod works
+headless in MOD MODE: `UnrealEditor-Cmd … -run=PythonScript -ModDevKit` with the mod's `active.txt` — a modified base asset is saved
+by the kit itself into `Mods/<Mod>/Content/<path>` (override), a new asset `/Game/Mods/<Mod>/X` into `Mods/<Mod>/Local/` (proven:
+`kit-bowfixes-edit.py`, 120 s). Python of the kit has `unreal.AnimationLibrary` notify editing (`remove_animation_notify_events_by_name`,
+`add_animation_notify_state_event`, `add_animation_notify_event`, tracks). `CookInfo.ini`: `[/CookInfo]` + `FilesToCook=Mods/<Mod>/Local/X.uasset`
+/ `FilesToCook=Mods/<Mod>/Content/<path>.uasset` (relative, forward slashes — `FileToPackage` strips `Local/` and `Mods/<Mod>/Content/`).
+
 ### 3.3 The kit's UnrealPak reads EVERY mod pak — Oodle included — read-only, in milliseconds
 
 Proven 2026-09-12 on `ChestLabels.pak` (271 KB) from the live game, output to the scratchpad only:

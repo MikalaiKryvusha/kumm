@@ -40,4 +40,9 @@ release). Not covered on purpose: mounted archery, crossbow (separate pass), con
 | F5 | FP walking, shot | `keydown W, rdown, wait 1500, lclick, wait 1000, rup, keyup W` | E2 | [NOT-TESTED] | |
 | X1 | Switch FP → TP while RMB held | FP, `rdown, wait 800`, wheel out to TP, `wait 800, rup` | no FP offset left in TP; TP view sane after release | [NOT-TESTED] | |
 | X2 | Switch TP → FP while RMB held | TP, `rdown, wait 800`, wheel in to FP, `wait 800, rup` | offset (0,0,0) after release; FOV normal | [NOT-TESTED] | |
+| M0 | `KrinikBowFixes` builds and mounts (kit mod: bow montage override + `S_ChargeFull`) | `kit-buildmod.py KrinikBowFixes …`; deploy into `Mods/` + `modlist.txt`; launch | cook finds both packages; wrapper V11; game log: pak mounted, no `ValidateMod`/`ModCompat` refusal, no new error class | [NOT-TESTED] | |
+| M1 | With the mod: TP shot while held — no zoom-out (the owner's main ask) | as T3 | FOV ≤ 60° on every held sample after the shot; release → ≥ 100° within 0,6 s | [NOT-TESTED] | |
+| M2 | With the mod: the joints again — T1, T4, T6, T7, T8, T9, T10, T11 | as listed | E1 and E3 on each; release never sticks | [NOT-TESTED] | |
+| M3 | With the mod: FP — F1–F5 | as listed | E2; FOV held through the shot | [NOT-TESTED] | |
+| M4 | Full-charge sound (owner's file, peak at 50 ms) | hold RMB ≥ 2 s; record system audio around the moment the hold loop starts | one sound at the start of the hold loop; every further 4 s while still held — reported to the owner as a choice | [NOT-TESTED] | |
 | X3 | Control: test file `test_rmb.txt` absent in every case | `ls` the mod folder before the pass | absent | pass | 20:24 `test_rmb.txt` absent |
