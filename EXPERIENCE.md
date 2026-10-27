@@ -124,6 +124,9 @@ substate → FOV data table) before writing a fourth. A UE4SS hook on a BP funct
 during a transition is not control. Every live test needs its control state first (camera actually zoomed).   → link: plans/36 item 34, bugs/65
 **Trigger:** a third live patch to the same behaviour in one session → stop, open the game's data/bytecode, write the recon line first.
 **Not for:** one-shot data edits that are verified by reading back the value the game actually uses.
+**Repeat 2026-10-27 19:4x:** a 7th variant (the game's own `SetFieldOfViewTarget(1)` on the next tick, no field writes) passed the pult test and
+failed in the owner's hands the same way — RMB released before the native re-aim leaves nobody to send `(0)`, and `(0)` outside a transition is
+ignored. A pult cannot model RMB release, so a pult pass on this class proves nothing; the bytecode of `BP_PlayerFovController` comes first.
 
 ### EXP-0348 · 2026-10-26 · ❌→✅ · #conan #pult #ue4ss #lua #reload
 **Context:** live-tuning `KrinikArrowAim` in the owner's running game by the pult (`lua dofile(<Mods>/KrinikArrowAim/Scripts/main.lua)`).
