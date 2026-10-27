@@ -205,6 +205,18 @@ CharacterMesh0 (SkeletalMeshComponentBudgeted), прицеплена к Characte
 (после нашего `(1)` ПКМ отпущена раньше родного возврата ≈0,7 с; `(0)` вне перехода не принимается) снимает родной
 `BP_PlayerFovController:FieldOfViewReset()` — пульт 2026-10-27 19:55: 90,9° → 105,8°; мод зовёт его на отпускании ПКМ. Пульт: события ПКМ
 `InpActEvt_SpecialActionV2_…_7` переключают стойку со скрытым состоянием, `_8` не действует — настоящее отпускание пультом не изобразить.
+**Монтаж натяжки лука** (кит `F:\CEUE5Devkit`, 2026-10-27 20:1x): `Characters/humans/animations/combat/2h_bow/AM_combat_2h_bow_combo_heavy_c0` —
+участки `…_heavy_charge`, `…_heavy_loop`, `…_heavy_fire`, `…_heavy_settle`; слоты `AttackMontageTorso1st` / `AttackMontageTorso3rd` (у первого
+лица свой слот торса); уведомления-состояния (`AnimNotifyState`, `Received_NotifyBegin` / `Received_NotifyEnd`) из `/Game/Systems/Combat/`:
+`BP_PowerCharge` (натяжка: `SetPowerCharge` / `EndPowerCharge`), `BP_SetChargeHold` (`ChargeHoldEnterFromNotify` — заряд полный, удержание;
+на этом отрезке горит `P_bow_powercharge_charged` — событие для звука заряда), `BP_FieldOfViewChangeForDuration` (`BeginFieldOfViewChange`,
+`FieldOfViewMod` типа `E_FieldOfViewModifiers`, `Duration` — вероятная причина отъезда камеры на выстреле, п. 34: правка данных монтажа),
+`BP_ProjectileAttack`, `BP_AttackRotationSet`, `BP_QueueWindow`, `BP_CancelDodgeWindow`, `AnimNotify_PlaySound`. Обзор через прицел —
+`AO_combat_2h_bow_aim_fullbody` / `…_aim_head` (сдвиги прицеливания вверх/вниз 90°).
+Стрела на тетиве (пульт, 2026-10-27 20:12): прицеплена к сокету героя `Socket_Bow_Arrow` (сторона лука), не к руке; в натяжке при ходьбе
+её ось отклонена от линии «правая рука → лук» на 24,7°, до руки 35 см — древко проходит сквозь рукоять (п. 44). Сокеты героя: `Socket_Bow`,
+`Socket_Bow_Arrow`, `Socket_xbow_bolt`, `b_R_hand`, `b_L_hand`, `b_headcam`. Камера от первого лица — в точке `FirstPersonCameraArm`
+(`bUsePawnControlRotation` true; `SocketOffset` сдвигает её в осях взгляда).
 Пульт: чтение `RootComponent` у удаляемой стрелы уронило игру в UE4SS (19:11:54, чтение 0x18) — у актёров снарядов поля читать только после
 `IsValid` и не в момент их уборки.
 Первое лицо в бою (лук в руках) — родная настройка геймплея `Game.ini` → `[Settings.Gameplay] AllowFirstPersonCamera` (в коде
