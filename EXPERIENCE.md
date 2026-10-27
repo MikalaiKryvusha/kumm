@@ -91,6 +91,23 @@
 
 ## Entries
 
+### EXP-0352 · 2026-10-27 · ❌→✅ · #conan #ue4ss #trace #collision #mobs
+**Context:** the arrow probe (`KrinikArrowAim` 0.3.0) had to put its point on a mob; I swapped the Visibility trace for
+`LineTraceSingleByProfile` with the arrow's own profile, reasoning «the probe should see what the arrow hits».
+**Result:** ❌ — the profile is «Custom» (per-channel responses, no named profile) and the trace went THROUGH a baby kappa into the ground. One
+pult sweep over all channels and object types on that mob answered in a minute: Visibility → the body mesh, channel 5 → the capsule only.
+**Lesson:** a question «which trace sees X» is answered by sweeping channels 0–8 and object types on the live X, never by reasoning about
+profiles. «Custom» from `GetCollisionProfileName` means there is no profile to trace by.   → link: games/ConanExiles/GAME_ARCHITECTURE_INTERNAL_MAP.md «Каналы столкновений на мобе»
+
+### EXP-0351 · 2026-10-27 · ❌ · #conan #pult #crash #ue4ss #instrument
+**Context:** measuring where arrows stuck by the pult, three instrument rewrites in a row (parallel rays missed palm trunks as the camera orbits,
+pooled arrows read km away, then a read of `RootComponent` on stuck arrows).
+**Result:** ❌ — the last read crashed the game inside UE4SS (null read 0x18, 19:11:54) on an arrow being destroyed. Meanwhile the mod's own
+log («#N встала против точки») already held every number the test needed.
+**Lesson:** before writing a pult instrument, check whether the mod under test already logs the measurement; actors the game is destroying
+(projectiles after impact) are read only inside a guarded `IsValid` and never by property chains — UE4SS dereferences null in C++.
+**Trigger:** a second rewrite of the same pult instrument in one run → stop and read the mod's log.
+
 ### EXP-0350 · 2026-10-27 · ❌→✅ · #hooks #russian-gate #read
 **Lesson:** `style-gate --mark` stamps only a Read of the WHOLE file with no `offset`/`limit` — a Read with `offset 2, limit 128` covering every line
 did not refresh `.russian-read.stamp` (00:22, the gate refused the next write); an identical repeat Read is deduplicated by the tool and stamps nothing
