@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0354 · 2026-10-27 · ❌→✅ · #conan #devkit #mod #modinfo #modlist
+**Context:** first mod built by the kit (`KrinikBowFixes`, montage override + sound) and deployed by hand.
+**Result:** ❌→✅ — three traps in a row: `modinfo.json` copied from the kit's empty `KrinikPatch` had `devkitRevisionNumber` 0 → «Mod is too
+old and needs to be updated for this game version», the game stuck on the error dialog in the menu (and `close-game.ps1` could not close it);
+I wrote `*KrinikBowFixes.pak` into `modlist.txt` by guess (the file has no `*`); `sed -i` turned the CRLF file into LF. Fixed: revision 1002
+(as live `ArrowQuickSwap`), plain name, CRLF restored by a byte rewrite; mounted 21:00.
+**Lesson:** a new kit mod takes `devkitRevisionNumber` from a mod that mounts in the current game version; `modlist.txt` is edited by
+reading its lines first and keeping its line endings. A real-input run happened while the owner played in the same game — the rows mixed
+his input («я играл, прости»): before a real-input pass, say it by voice and confirm the game is mine.
+**Trigger:** deploying a hand-built pak into `Mods/`.
+
 ### EXP-0353 · 2026-10-27 · ❌ · #conan #camera #pult #live #owner-game
 **Context:** the owner was playing; I fixed his camera live by the pult — a FOV guard, then an FP-offset guard, on top of the mod's own
 keep-aim hook loaded at launch.
@@ -139,6 +150,8 @@ failed in the owner's hands the same way — RMB released before the native re-a
 ignored. A pult cannot model RMB release, so a pult pass on this class proves nothing; the bytecode of `BP_PlayerFovController` comes first.
 Minutes later the component's own `FieldOfViewReset()` — never tried in 2 days — freed the stuck view (90,9° → 105,8°): before reaching for
 bytecode, call every public function of the stuck component once by the pult; the exit is often already there.
+**Correction 2026-10-27 20:2x:** `FieldOfViewReset` reverts to the PREVIOUS target, it is not «back to normal» — called on a normal 103,1°
+view it gave the aim 53,8°. The real cause and fix of the shot zoom-out were in data (montage notify end, `KrinikBowFixes`, EXP-0354).
 
 ### EXP-0348 · 2026-10-26 · ❌→✅ · #conan #pult #ue4ss #lua #reload
 **Context:** live-tuning `KrinikArrowAim` in the owner's running game by the pult (`lua dofile(<Mods>/KrinikArrowAim/Scripts/main.lua)`).
