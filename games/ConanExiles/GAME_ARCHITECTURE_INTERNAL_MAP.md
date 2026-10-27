@@ -97,7 +97,9 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 Читы прогона пультом (2026-10-26): время суток — `FindFirstOf('BP_TimeOfDayManager_C'):SetTimeOfDay(12.0)` (часы 0–24; консольной
 `SetTimeOfDay 1200` в 3.0.1 НЕТ — «Command not recognized»); бессмертие — `exec God`; выносливость — `AdjustStaminaRegenMod(1000.0)` и поля героя
 `SprintStaminacost`, `SwimStaminacost`, `StaminaJumpCost`, `JumpStaminaCostModifier` = 0, `SetClimbingStaminaCostModifier(0.0)`; выдача — `exec MakeMeAdmin`,
-затем `exec SpawnItem <id> <n>` (железная стрела 53612, «Мощный охотничий лук» 51405). Всё сбрасывается перезапуском.
+затем `exec SpawnItem <id> <n>` (железная стрела 53612, «Мощный охотничий лук» 51405; без `MakeMeAdmin` пульт отвечает «ok», а предмета нет —
+2026-10-27). Всё сбрасывается перезапуском. Убрать врагов рядом: `GameplayStatics:ApplyDamage(…, 100000)` у Конана НЕ убивает (нежить Night Terrors
+осталась жива, 2026-10-27 19:53) — работает только `K2_DestroyActor()` (без добычи); неуязвимость существа — `bCanBeDamaged=false`.
 `God` НЕ спасает от жажды и голода (2026-10-26: смерть `CauseOfDeath: Thirst` при включённом God). Выживание — `p:GetHungerSystem()`
 (`BP_HungerSystem_C`): `EnableThirst(false,false)`, `EnableHunger(false,false)`, `AddDrink(nil,100.0)`, `AddFood(nil,100.0)` (сеттеры `SetDrinkCurrent`
 ждут два аргумента — не годятся). `AdjustStaminaRegenMod(1000)` выносливость НЕ удержал; работает повтор `AdjustStaminaCurrent(1000.0)` раз в 250 мс.
