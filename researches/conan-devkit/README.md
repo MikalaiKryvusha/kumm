@@ -18,7 +18,7 @@ still missing it says `NOT YET`.
 
 | Fact | Value | Probe |
 |---|---|---|
-| Location | `F:\CEDevKit\CEUE5Devkit` — **169 GB** on F: (152 GB free after it) | `du -sh /f/CEDevKit` |
+| Location | `F:\CEUE5Devkit` since the new kit of 2026-10-25 (checked 2026-10-27: `UE4/Content/Systems/Combat/BP_PlayerFovController.uasset` there; the old `F:\CEDevKit\CEUE5Devkit` is gone) — was **169 GB** on F: | `ls /f/CEUE5Devkit` |
 | Downloaded | 2026-09-10 12:39–18:10 (folder mtimes); **not from the Epic launcher** — the launcher's manifests know only Tribes of Midgard's kit and ESO | `ls /c/ProgramData/Epic/EpicGamesLauncher/Data/Manifests` |
 | Ever launched? | **No.** `UE4/Saved` is empty, `UE4/Intermediate` 20 KB, no DDC anywhere, no shader cache | `ls UE4/Saved` |
 | Launcher | `RunDevKit.bat` = `UnrealEditor.exe UE4\ConanSandbox.uproject -ModDevKit` | `cat RunDevKit.bat` |
