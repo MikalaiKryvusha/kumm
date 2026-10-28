@@ -5,7 +5,10 @@ kaif-fp: skills/resume + AGENT_GUIDE Document taxonomy :: resume-entry-cost :: v
 **Autocapture:** KAIF 2.9 · project KUMM · sphere programming · language ru · tracking origin · agent system claude-code (Claude Opus 5.5, 1 M window) · OS Windows 11 Pro 10.0.26200 · Node v24.15.0
 **Dedup attestation:** `grep -ril "resume" bugs/KAIF/` → 11, 14, 18 (hook smoke probe, memory hook, mark-shown — none about the ritual's cost);
 `gh issue list -R MikalaiKryvusha/KAIF --state all --search "resume in:title"`, `--search "resume tokens"`, `--search "resume cost"`,
-`--search "context budget"` → empty (gh itself answers: `--limit 5` lists #174–#178). No match found.
+`--search "context budget"` → empty (gh itself answers: `--limit 5` lists #174–#178). **Correction (same evening, after filing):** the
+search missed the predecessor **#99** (closed 2026-09-26) — «the re-read core is budgeted in LINES, never in tokens … `/resume` reads ≈230k
+tokens»; it was closed with its cheap half, the reference line `ℹ entry cost` of `kaif-core check`. This ticket is the follow-up to #99,
+not a duplicate: the line exists, and the entry still costs ≈ 140 k.
 
 ## Gap
 
@@ -13,7 +16,11 @@ kaif-fp: skills/resume + AGENT_GUIDE Document taxonomy :: resume-entry-cost :: v
 and AGENT_GUIDE → Context router: «`/resume` is the session's ENTRY point — the one full pass here is exactly what makes the lazy slices safe
 afterwards. Never "optimize" one with the other.» The size budget that should keep the pass affordable counts LINES
 (`node .kaif/kaif-core.mjs check` → `DOC_BUDGETS`), and lines hide the cost: `AGENT_GUIDE.md` is 1 226 lines but 100 532 bytes —
-the Read tool itself refused it whole: «36621 tokens, cap 25000». Nothing measures the ritual in the unit the model actually pays.
+the Read tool itself refused it whole: «36621 tokens, cap 25000». The token measure that exists since #99 is reference only and
+undercounts: `node .kaif/kaif-core.mjs check` → «ℹ entry cost: /resume reads 9 re-read core document(s) + HOUSE_RULES.md ~ 112k tokens —
+11 % of a 1M-token model window (reference, never a stop …)», while the observed entry below is ≈ 140 k — the line does not count what
+Step 1 also lists (`PROJECT_ARCHITECTURE_INTERNAL_MAP.md`, `KAIF_FRAMEWORK.md`, `EXPERIENCE.md` grep) nor the skill itself, and nothing
+acts on it. (The first version of this ticket said «Nothing measures the ritual in the unit the model actually pays» — false, corrected here.)
 
 ## Field evidence
 
@@ -54,9 +61,9 @@ Bytes per document (≈ tokens at the observed ratio 100 532 B → 36 621 tok, i
 
 ## Proposed change (smallest that closes the gap)
 
-1. **Measure in tokens, not lines.** `kaif-core check` prints the `/resume` entry cost (bytes of the entry set ÷ a per-language ratio, or a
-   real count from the transcript `usage`, as above) with a budget — e.g. ≤ 40 k tokens on top of the session base — and warns by
-   document when it is crossed. Lines stay as a secondary signal.
+1. **Give the existing `ℹ entry cost` line (#99) a budget and the full Step-1 set.** Count every document `/resume` Step 1 lists, not
+   only the nine; add a budget — e.g. ≤ 40 k tokens on top of the session base — and warn by document when it is crossed. Lines stay
+   as a secondary signal.
 2. **An ENTRY SLICE per key document, marked in the document itself** — `<!-- KAIF:ENTRY:BEGIN -->` … `<!-- KAIF:ENTRY:END -->` (the same
    marker family as `KAIF:CREED`). `/resume` Step 1 reads every document's entry slice — still the FULL SET of documents, so no hole by
    document — and the router fetches the remainder by task type, exactly as it already does for frameworks. Candidate slices:
