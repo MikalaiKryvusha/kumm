@@ -25,9 +25,7 @@
 
 ## What's done (the short tail — older entries live in PROJECT_HISTORY.md)
 
-> 07–08.10 and Medieval Dynasty up to the pause; Svarog 09.10 day and the sky up to 10.10 02:03 — chronicle, entry 2026-10-10 03:38; session 10.10
-> from 14:37 — entry 2026-10-10 16:31. Svarog: evening 10.10 (18:46–21:48) and the epic-19 flow map — chronicle, entry 2026-10-11 00:46; the chat
-> from 2026-10-10 23:42 — same place.
+> 07–08.10, Medieval Dynasty up to the pause, Svarog 09.10–10.10 — chronicle, entries 2026-10-10 03:38, 2026-10-10 16:31, 2026-10-11 00:46.
 > **2026-10-28 23:2x–23:4x (this chat):** the context-budget hook (`.claude/hooks/context-budget.mjs`, `CLAUDE.md`); KAIF #179 (`/resume` costs
 > ≈ 140 k tokens); `HOUSE_RULES.md` compacted (rules as statements; stands/routes/tools → `HOUSE_RULES_REFERENCE.md`; quotes and the verbose
 > dossier → chronicle, entry 2026-10-28 23:36); the documentation switched to English (`AGENT_GUIDE.md` → "Notes from the human").
@@ -118,39 +116,25 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   L6 control (Lua off). Cases — `testcases/TC_conan_loot_panel_hidden_and_hold_prompt_2026-10-28.md`.
 > - ✅ spread bars (`[OWNER]` «опять полоски разброса появились!!!!!!» · 00:2x): they show with the bow in hand right after the world loads; now hidden
 >   when `WBP_Crosshair_C` is created (SB4 pass 00:44).
-> - ✅ bug 67 palm shadows: `DynamicSky.SolarUpdateAngleDelta` 0.003 → 2.0 in the pack `Engine.ini` (the owner both ways: «тени в порядке» /
->   «да, вернулось»); before DONE — his play without the flicker and without a noticed sun step (else 1.0 / 0.5).
+> - 🔴 bug 67 palm shadows — cause found (`DynamicSky.SolarUpdateAngleDelta`: 2.0 calm / 0.003 flicker, the owner's eye both ways), but 2.0 was
+>   REVERTED (pack 6a12183): 0.003 is there for a smooth sun — `[OWNER]` «мы же специально делали так, чтобы солнце плавно по небу двигалось...».
+>   Trade-off is his (asked in chat 00:5x). Next: 0.1 / 0.25 / 0.5 under palms (60 fps clip, sand without surf, his eye), and levers that do not touch
+>   the sun (recon R3 DLSS preset, R4 LOD bias). EXP-0369.
 > - Cases still without a run (need the game, not the owner): `TC_conan_corpse_prompt_left_of_quickloot_2026-10-28.md` F4 (chest), F5 (1080p), S3/H2/H3
 >   rows; `TC_conan_bow_fp_smooth_zoom_2026-10-28.md` H2, H3 (FP draw cancelled / RMB mid-draw, real input); SB3 (ten mixed draws) of the loot file.
 > - 🔴 item 36 corpse prompt on two lines: our `Game.locres` CAN override the vanilla key (`vanilla-override.py`, `vanilla-overrides-ru.tsv`), but
 >   the widget lays out «text · E · text» in one row — a break hangs «или нажмите» left of the icon (T1 fail); reverted; needs a layout variant.
-> - (superseded, see ✅ below) bug 67 palm leaf shadows flicker — re-recon `researches/conan-shadow-flicker/2026-10-29_recon.md`: the pack's
->   `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ≈ 50×/s, each turn invalidates VSM pages; first run — A-B-A live:
->   `r.Shadow.Virtual.Enable=0`, then `DynamicSky.SolarUpdateAngleDelta=2.0`; the owner's eye decides.
 > - 🔴 item 33(c) «k» one decimal: Hosav `BPFL_Hosav_UI.TextOverflowPrevention_Numbers` — in-place edit gives truncation only; rounding needs a
 >   bytecode insertion (bug 64 row 33).
 > - Plan 37 jump shooting — recon step 1 done (`ActionTry` refuses on `IsFalling`), (a)–(c) open; ≈ 1–2 h recon + 2–3 h fix.
 >
-> **FIRST IN A NEW CHAT (closure 2026-10-28 23:09; the chat 23:14–… did the hook/docs work above and then continues here):** the owner's word queue
-> below, items (0a), (0b), (1) — in order. Before any run — the stand per `HOUSE_RULES.md` §1 rule 11 (clear everyone around, the target by exact
-> class, input idle via `wait-input-idle.ps1`). The Conan pack after every commit — `git push local main`. The `test-after-code` hook names open
-> cases at stop — run them or call the owner. Evening reports: `testcases/reports/2026-10-28_conan-quickloot-width-archery-rollout.md`,
-> `…_conan-clean-stage-ding-arrows-hud-loot-bars.md`.
->
-> **The owner's word QUEUE (in order):** (0) ✅ spread lines (`[OWNER]` «линии разброса у прицела вернулись - в моде арчери криника - убрать
-> их» · 22:59) — now hidden on every aim entry, B2 pass 23:01 (the return itself did not reproduce in 3 aims — the log will name it with the line
-> «вернулись»); `-Only` puts a new pak at its manifest place (stand, bug 06); (0a) loot window: after «Забрать все» the corpse plate stays (F3 fail —
-> the empty window is `Hidden`, not `Collapsed`; bug 64 item 35, the word «почему-то подсказка не закрывается»); (0b) `[OWNER]` «у окна квик лута нужно
-> местами поменять текста "Забрать всё" и "Удерж."» (item 34); (1) bug 64 item 33: (a) «XP» and the colon stuck together — a variant edits the accepted
-> translation template (interview #003, 299–300) → show the variants in a frame (a thin space before the colon, etc.); (c) «k» with one decimal, math
-> rounding — the format is built by `Get_NumberXP` / `Get_ExperienceOutOfNeeded` (double arguments in FText), the edit is not a single number;
-> (2) the fishing button (plan 35, B7); (3) accessories — crooked UI (bug 64 item 27); (4) hub — elements popping in (B4, item 26); (5) item 42 —
-> large and on the rhino/elephant; (6) minimap; (7) Krinik mods at the top of the pause-menu list; (8) version 3.0.1 on the Krinik mods; (9) arrow
-> physics; (10) README-PDF — mod items (plan 35, G11 item 6). The hook also names older open cases: F3–F5, C1 of the loot window, T2…X1 of the RMB matrix 27.10.
-> **Cases without a run — the first work of a new chat, before the queue** (the `test-after-code` hook stopped the closure 2026-10-28 23:10 on 15 cases):
-> `testcases/TC_conan_bow_camera_rmb_matrix_2026-10-27.md` — T2, T3, T5, T8, T10, T11, F5, X1 and others (many may be stale after the bow edits of
-> 27–28.10: run on a clean stand or close with the status «superseded by <case>» with an observation); loot window — F4 (chest), F5 (1080p), C1
-> (control on the original pak). The owner is not needed for them — a stand (`HOUSE_RULES.md` §1) and real input after idle are.
+> **NEXT CHAT — queue (the old 23:09 handover with items 0, 0a, 0b moved verbatim to the chronicle, entry 2026-10-29 00:5x):** first the cases
+> without a run — `TC_conan_corpse_prompt_left_of_quickloot_2026-10-28.md` F4 (a chest: find a `LootContainer` first), F5 (1080p), S3/H2/H3 rows;
+> `TC_conan_bow_fp_smooth_zoom_2026-10-28.md` H2, H3 (real input, FP); then: (1) item 36 corpse prompt on two lines — a layout variant (the widget is
+> «text · E · text» in one row; `vanilla-override.py` ready); (2) item 33 (a) «XP:» colon variants by a frame, (c) «k» rounding (bytecode insertion,
+> ≈ 2–3 h, or truncation by two constants); (3) plan 37 jump shooting (a)–(c); (4) the fishing button (plan 35, B7); (5) accessories UI (item 27); (6) hub
+> elements popping in (B4, item 26); (7) item 42 on the rhino/elephant; (8) minimap; (9) Krinik mods at the top of the list; (10) version 3.0.1 of the
+> Krinik mods; (11) arrow physics (below); (12) README-PDF mod items (plan 35, G11 item 6). Before any run — the stand (`HOUSE_RULES.md` §1 rule 11).
 >
 > **Arrow physics (not started):** `[OWNER]` «в новом чате полностью делаем физику в конане, как была в обливионе» (2026-10-28) — Oblivion arrow flight:
 > constant gravity `ProjectileGravityScale` 0.55 (Remastered vanilla), speed = 5000 × (min + (1 − min) × charge) cm/s, where `min` is NOT Oblivion's 0.25:

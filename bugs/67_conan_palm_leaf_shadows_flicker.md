@@ -29,7 +29,10 @@ Root cause (re-recon `researches/conan-shadow-flicker/2026-10-29_recon.md`): our
 the game log applies it after the quality group's 0.015. Run report `testcases/reports/2026-10-29_conan-loot-strip-hold-prompt-bars-shadows.md`.
 Open: whether the sun's step every few seconds is noticed in play — then 1.0 or 0.5.
 
-**Status:** 🟢 fixed, waits for the owner's play (a day of play without the flicker and without a noticed sun step) before DONE.
+**Status:** 🔴 REOPENED 2026-10-29 00:5x — 2.0 reverted (pack 6a12183): 0.003 was set on purpose for a smoothly moving sun (the comment above the
+line in `Engine.ini`), and the owner: «мы же специально делали так, чтобы солнце плавно по небу двигалось...» · «ты блять взял и откатил это?».
+The trade-off is the owner's: smooth sun (0.003, flicker) vs calm shadows (2.0, the light steps every few seconds). Next: 0.1 / 0.25 / 0.5 under palms
+(video + his eye) and the recon levers that do not touch the sun (R3 DLSS preset, R4 LOD bias −1.5).
 
 ## Decisions made without the owner
 

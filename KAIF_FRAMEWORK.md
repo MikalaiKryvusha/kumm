@@ -55,7 +55,8 @@ losing it. It is not code; it is *a process captured in files the agent reads*.
 The `ru` language pack is incomplete by design: the 8 owner documents and the skill triggers are localized, while
 skill bodies and the agent's internal documents ship in English (`AGENT_GUIDE.md`, both map frameworks,
 `STATUS.md`, `EXPERIENCE.md`, `MASTER_PLAN.md` and others). That is intentional — models read English more
-reliably. Since 2026-10-28 the owner's decision extends this to all documentation; only the chat stays in Russian.
+reliably. Since 2026-10-28 the owner's decision extends this to all documentation; only the chat stays in Russian:
+`[OWNER]` «ИИ агент продолжает общаться с владельцем на РУССКОМ в чате, но а своих документах рабочих ИИ агент пишет докуметацию проекта и KAIF на английском языке» · 2026-10-28.
 
 ## What changed in 2.8 and 2.9 for this project (update of 2026-10-16)
 

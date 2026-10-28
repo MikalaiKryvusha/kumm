@@ -1,5 +1,32 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-29 00:54 — STATUS: the 2026-10-28 23:09 handover (FIRST IN A NEW CHAT, the owner's word QUEUE, cases without a run) — items 0, 0a, 0b closed in the chat of 2026-10-28 23:14 – 2026-10-29 00:54 (moved verbatim at closing)
+
+> **FIRST IN A NEW CHAT (closure 2026-10-28 23:09; the chat 23:14–… did the hook/docs work above and then continues here):** the owner's word queue
+> below, items (0a), (0b), (1) — in order. Before any run — the stand per `HOUSE_RULES.md` §1 rule 11 (clear everyone around, the target by exact
+> class, input idle via `wait-input-idle.ps1`). The Conan pack after every commit — `git push local main`. The `test-after-code` hook names open
+> cases at stop — run them or call the owner. Evening reports: `testcases/reports/2026-10-28_conan-quickloot-width-archery-rollout.md`,
+> `…_conan-clean-stage-ding-arrows-hud-loot-bars.md`.
+>
+> **The owner's word QUEUE (in order):** (0) ✅ spread lines (`[OWNER]` «линии разброса у прицела вернулись - в моде арчери криника - убрать
+> их» · 22:59) — now hidden on every aim entry, B2 pass 23:01 (the return itself did not reproduce in 3 aims — the log will name it with the line
+> «вернулись»); `-Only` puts a new pak at its manifest place (stand, bug 06); (0a) loot window: after «Забрать все» the corpse plate stays (F3 fail —
+> the empty window is `Hidden`, not `Collapsed`; bug 64 item 35, the word «почему-то подсказка не закрывается»); (0b) `[OWNER]` «у окна квик лута нужно
+> местами поменять текста "Забрать всё" и "Удерж."» (item 34); (1) bug 64 item 33: (a) «XP» and the colon stuck together — a variant edits the accepted
+> translation template (interview #003, 299–300) → show the variants in a frame (a thin space before the colon, etc.); (c) «k» with one decimal, math
+> rounding — the format is built by `Get_NumberXP` / `Get_ExperienceOutOfNeeded` (double arguments in FText), the edit is not a single number;
+> (2) the fishing button (plan 35, B7); (3) accessories — crooked UI (bug 64 item 27); (4) hub — elements popping in (B4, item 26); (5) item 42 —
+> large and on the rhino/elephant; (6) minimap; (7) Krinik mods at the top of the pause-menu list; (8) version 3.0.1 on the Krinik mods; (9) arrow
+> physics; (10) README-PDF — mod items (plan 35, G11 item 6). The hook also names older open cases: F3–F5, C1 of the loot window, T2…X1 of the RMB matrix 27.10.
+> **Cases without a run — the first work of a new chat, before the queue** (the `test-after-code` hook stopped the closure 2026-10-28 23:10 on 15 cases):
+> `testcases/TC_conan_bow_camera_rmb_matrix_2026-10-27.md` — T2, T3, T5, T8, T10, T11, F5, X1 and others (many may be stale after the bow edits of
+> 27–28.10: run on a clean stand or close with the status «superseded by <case>» with an observation); loot window — F4 (chest), F5 (1080p), C1
+> (control on the original pak). The owner is not needed for them — a stand (`HOUSE_RULES.md` §1) and real input after idle are.
+>
+> - (superseded, see ✅ below) bug 67 palm leaf shadows flicker — re-recon `researches/conan-shadow-flicker/2026-10-29_recon.md`: the pack's
+>   `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ≈ 50×/s, each turn invalidates VSM pages; first run — A-B-A live:
+>   `r.Shadow.Virtual.Enable=0`, then `DynamicSky.SolarUpdateAngleDelta=2.0`; the owner's eye decides.
+
 ## 2026-10-28 23:36 +03:00 — HOUSE_RULES.md §1: правила владельца с цитатами и историей (перенесено дословно при сжатии правил дома; в файле — правила утверждениями)
 
 ### Постоянные правила владельца (The owner's standing rules)

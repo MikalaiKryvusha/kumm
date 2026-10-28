@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0369 · 2026-10-29 · ❌ · #conan #config #owner-taste #known-trap
+class: changed-a-deliberate-setting-without-its-why
+**Lesson:** I wrote `DynamicSky.SolarUpdateAngleDelta` 0.003 → 2.0 into the pack because the owner said the shadows were calm — the comment
+right above the line said why 0.003 was there (a smooth sun), and the owner: «мы же специально делали так, чтобы солнце плавно по небу двигалось...»
+· «ты блять взял и откатил это?». Before changing a value that carries a reason in its comment, read the reason and put the trade-off to the owner
+as a choice; an A/B verdict on ONE property (shadows) is not consent to lose another (smooth sun).
+mechanized: no
+
 ### EXP-0368 · 2026-10-28 · ❌→✅ · #conan #ui #widgets #theory
 **Lesson:** «the Hidden panel keeps layout space, so Collapsed fixes the strip» was a plausible theory and the next case was going to be a kit
 graph edit on it. One pult probe refuted it in a minute: `SetVisibility(Collapsed)` shrank the overlay but the strip did not move — the module
