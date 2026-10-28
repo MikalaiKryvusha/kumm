@@ -117,9 +117,9 @@ Crosshair (`/Game/UI/Widgets/HUD/Reticles/WBP_Crosshair.WBP_Crosshair_C`): the s
 is in hand, before any draw — zeroing the curve keys hides them at once.
 Hosav numbers: `BlueprintLibrary/BPFL_Hosav_UI.TextOverflowPrevention_Numbers` (Hosav's, not the game's): ≥ 100 000 → `Divide_IntInt(x, 10)` → `/100.0`
 + «k»; ≥ 1 000 000 → `/10000` → `/100.0` + «M»; truncation, two decimals.
-Sun and shadows (0.003 is ON PURPOSE — a smooth sun, the owner 2026-10-29): `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ~50×/s; live `2.0` (light turns in steps
+Sun and shadows (0.003 was set for a smooth sun; now 2.0 by the owner's choice): `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ~50×/s; live `2.0` (light turns in steps
 seconds apart) — the owner under palms 2026-10-29 00:46: «ну сейчас словно тени в порядке»; back at 0.003: «да, вернулось». The pack carries 2.0
-(bug 67; 2.0 was written and REVERTED — smooth sun wins until his choice); the game log shows the quality group 0.015 first, then ours.
+(bug 67; 2.0 written, reverted once for the smooth sun, then 2.0 by the owner's final choice 2026-10-29 01:10 — no cvar keeps 0.003 smooth without the redraw); the game log shows the quality group 0.015 first, then ours.
 Stand rule (2026-10-28 23:52 crash): never keep a killed creature in `_G` — the dead actor is destroyed and the next call on it is an access
 violation in UE4SS; read its location BEFORE `KillCharacter`.
 Для замера модуль можно открыть пультом: `ActivateModule(FName('ContainerInfo'), true, false)` + `SetObject(<труп>, 0)` у `WBP_ContainerInfo_C`; игра
