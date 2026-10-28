@@ -8,6 +8,22 @@
 >
 > Читать целиком не нужно: **главный вывод в первом разделе**, остальное — доказательства и адреса.
 
+## Физика стрелы оригинального Обливиона — веб-разведка 2026-10-28 (владелец: «есть возможность найти в интернете параметры физики, которая была прописана для стрелы в оригинальном Обливион?» · «и попытаться их перещетать на наш Unreal Engine 5 для конана?» · «пока обсуждаем»)
+
+- **Скорость** (UESP CS wiki, `fArrowSpeedMult`, по умолчанию **1500** единиц/с): `скорость = Speed стрелы × fArrowSpeedMult × (fArrowWeakSpeed + (1 − fArrowWeakSpeed) × DrawMult)`,
+  `DrawMult = min(1, fArrowBowTimerBase + fArrowBowTimerMult × время натяжки)`; от лука скорость не зависит — только от стрелы. Значения `fArrowWeakSpeed`,
+  `fArrowBowTimerBase`, `fArrowBowTimerMult` страница не даёт — брать из `Oblivion.esm` (записи GMST).
+- **Гравитация** — данные слабые: `fArrowGravityMult` 0,002 и `fArrowGravityBase` 0,3 — с обсуждения UESP без источника; замер участника (2011): вертикальная
+  скорость стрелы доходит до −515 единиц/с за 3,065 с (его же вывод ускорения через t² арифметически неверен: v = a·t → ≈ −168 ед/с²). Моды: `fArrowGravityMin`
+  0,05, `fArrowOptimalDistance` 1000 (ваниль). Цифры «скорость 3600, гравитация 0,35 в формах снаряда» с форума — по всей видимости Skyrim/Fallout: форм снаряда в
+  Обливионе нет.
+- **Перевод в UE5:** единица Обливиона = 1/64 ярда ≈ 1,43 см (UE — 1 см): 1500 ед/с ≈ 21 м/с на полной натяжке; ускорение ≈ −168 ед/с² ≈ −2,4 м/с² (≈ 0,25 g) —
+  в `ProjectileMovementComponent` Конана это `InitialSpeed`/`MaxSpeed` в см/с и `ProjectileGravityScale` = ускорение / 980. Точные значения — GMST из `Oblivion.esm`
+  (на дисках машины 2026-10-28 не найден: поиск до глубины 6 на C–F) и замер нынешней стрелы Конана пультом (скорость и масштаб гравитации ещё не сняты).
+- Источники: [fArrowSpeedMult](https://cs.uesp.net/wiki/FArrowSpeedMult) · [Talk:FArrowGravityMult](https://cs.uesp.net/wiki/Talk:FArrowGravityMult) ·
+  [Oblivion talk:Marksman](https://en.uesp.net/wiki/Oblivion_talk:Marksman) · моды с изменёнными fArrow*: [52151](https://www.nexusmods.com/oblivion/mods/52151),
+  [23484](https://www.nexusmods.com/oblivion/mods/23484).
+
 ## Главный вывод: это НЕ «реализовать», а «настроить»
 
 Обе половины задачи в игре **уже есть**. Ни одна из них не требуется к написанию с нуля.
