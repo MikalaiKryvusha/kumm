@@ -8,6 +8,7 @@
 | Что | Где |
 |---|---|
 | Игра | `D:\Games\Conan Exiles 3.0.1` (без подпапки `Conan Exiles`; путь — одно место: `ConanExiles/targets.json`, приборы читают через `_config/game_target.py`) |
+| Запуск | `ConanSandbox\Binaries\Win64\ConanSandbox-Win64-Shipping.exe` без ключей, рабочая папка — его же (так запускает `_config/launch-bg.ps1`); ярлык владельца «Conan Exiles» на рабочем столе — та же цель (2026-10-28, по его просьбе) |
 | Паки модов | `ConanSandbox\Mods\*.pak` + `modlist.txt`; игра распаковывает их в `ConanSandbox\Saved\ExtractedMods\<Мод>-Windows.{pak,utoc,ucas}` |
 | Lua-моды UE4SS | `ConanSandbox\Binaries\Win64\ue4ss\Mods\<Мод>\` (`enabled.txt`); исходники — `ConanExiles/_unpacked/<Мод>` |
 | Журнал игры | `ConanSandbox\Saved\Logs\ConanSandbox.log` (время журнала = местное − 3 ч) |
