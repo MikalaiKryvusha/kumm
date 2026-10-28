@@ -21,6 +21,16 @@ Shadows of palm leaves shimmer/flicker while the leaves sway (wind WPO), at 4K o
 - Never run: the discriminating run with `r.Shadow.Virtual.Enable=0` (VSM vs the temporal upscaler).
 - New 5.8 candidates — pack `docs/03-cvars-конана.md`, «Мерцание теней листвы пальм — новые кандидаты 5.8».
 
+## Fix (2026-10-29 00:4x)
+
+Root cause (re-recon `researches/conan-shadow-flicker/2026-10-29_recon.md`): our own `Engine.ini` set `DynamicSky.SolarUpdateAngleDelta = 0.003`
+(the game: 0.015) — the sun light turned ~50 times a second, each turn invalidating the VSM pages. Live A-B-A in one session under palms:
+`2.0` → `[OWNER]` «ну сейчас словно тени в порядке»; back to `0.003` → «да, вернулось». The pack's `Engine.ini` now carries `2.0` (commit 24a500e);
+the game log applies it after the quality group's 0.015. Run report `testcases/reports/2026-10-29_conan-loot-strip-hold-prompt-bars-shadows.md`.
+Open: whether the sun's step every few seconds is noticed in play — then 1.0 or 0.5.
+
+**Status:** 🟢 fixed, waits for the owner's play (a day of play without the flicker and without a noticed sun step) before DONE.
+
 ## Decisions made without the owner
 
-(filled at closing)
+- `[AI]` 2.0 written, not a middle value: it is the value the owner looked at; 1.0 / 0.5 are the named fallbacks if the step is visible.

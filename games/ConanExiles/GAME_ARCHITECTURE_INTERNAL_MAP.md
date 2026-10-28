@@ -118,7 +118,8 @@ is in hand, before any draw — zeroing the curve keys hides them at once.
 Hosav numbers: `BlueprintLibrary/BPFL_Hosav_UI.TextOverflowPrevention_Numbers` (Hosav's, not the game's): ≥ 100 000 → `Divide_IntInt(x, 10)` → `/100.0`
 + «k»; ≥ 1 000 000 → `/10000` → `/100.0` + «M»; truncation, two decimals.
 Sun and shadows: the pack's `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ~50×/s; live `2.0` (light turns in steps
-seconds apart) — the owner under palms 2026-10-29 00:46: «ну сейчас словно тени в порядке» (bug 67; the control look at 0.003 pending).
+seconds apart) — the owner under palms 2026-10-29 00:46: «ну сейчас словно тени в порядке»; back at 0.003: «да, вернулось». The pack carries 2.0
+(bug 67); the game log shows the quality group's 0.015 first, then ours.
 Stand rule (2026-10-28 23:52 crash): never keep a killed creature in `_G` — the dead actor is destroyed and the next call on it is an access
 violation in UE4SS; read its location BEFORE `KillCharacter`.
 Для замера модуль можно открыть пультом: `ActivateModule(FName('ContainerInfo'), true, false)` + `SetObject(<труп>, 0)` у `WBP_ContainerInfo_C`; игра
