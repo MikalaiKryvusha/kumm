@@ -33,6 +33,28 @@ close the module after the case (`ActivateModule('ContainerInfo', false, false)`
 | B4 | Take all still works | `SlotTakeAll()`; weight/inventory count | items moved to the hero | pass (caveat) | 00:08 pult `SlotTakeAll()`: the panel empties and hides (Visibility 2); the weight readout stayed 124/145 — crocodile loot is lighter than one unit, so the weight is no evidence; the take-all path is native and untouched by the edit |
 | B5 | Other hold prompts untouched | any other hotkey icon with a hold action outside the loot window (e.g. the hub) — or the class default by the pult | `HoldPromptVisibility` default (0) elsewhere | pass | 00:08 the other five icons of the panel (`W_HotkeyIcon`, `_0`, `_1`, `_2`, `_C_1`) read 0 (default); only `_3`/`_4` read 1 (NEVER) |
 
+**Lua-half cases — `KrinikUIFixes` 1.1.0 (pak strip back to Center; `ue4ss/Mods/KrinikUIFixes` sets Left while the window shows):**
+
+| # | Case | Steps | Expected | Status | Observation |
+|---|---|---|---|---|---|
+| L1 | Hooks set | launch, enter the world, open the module once; read UE4SS.log | «hook SetObject set», «… HandleInventoryChanged set», «… HandleLootContainerInventoryChanged set»; no «failed», no «error» | pass (2nd build) | 1st build 00:18: the three blueprint hooks set, but a DEFERRED registration missed the first `SetObject` and `HandleInventoryChanged` never fired on a corpse (counters on nine candidates around a real Q hold, 00:2x: only native `QuickLootPanel:SlotItemAddedOrRemoved` fired). 2nd build 00:21: «hook …QuickLootPanel:SlotItemAddedOrRemoved set» at load, «hook …WBP_ContainerInfo_C:SetObject set» at the first widget, no errors |
+| L2 | Corpse WITH loot | stand: crocodile corpse, module opened (`SetObject`), frame | strip left of the window, ≥ 8 px gap at 4K (E1 of the old cases) | pass | 00:24 2nd build, crocodile corpse with loot: strip ends ≈ 1055, window from 1105 (1920 frame) — gap ≈ 100 px at 4K; row «Q Забрать все (удерживайте)» (`l2c_strip.webp`) |
+| L3 | Corpse WITHOUT loot | kappa-baby corpse (empty), module opened, frame | strip centred on the screen (± 10 px of 1920 at 1080 scale) — not at the left edge | pass | 00:23 2nd build, the FIRST widget of the run on a crocodile corpse without loot: strip centred (text «Разделать труп» centre ≈ 955 of 1920), log «events 1» (`l2b_strip.webp`) |
+| L4 | After «Забрать все» | on L2's corpse `SlotTakeAll()`, frame after 0.5 s | the window hides and the strip returns to the centre | [NOT-TESTED] | |
+| L5 | Cost | a minute with ≥ 3 events; read the summary line | worst handler ≤ 0.5 ms; no line without events | [NOT-TESTED] | |
+| L6 | Control: Lua half off | remove `enabled.txt`, relaunch, L2 | the strip stays centred and runs under the window (the vanilla overlap) — proves the Lua half does the move | [NOT-TESTED] | |
+
+**Spread bars returned (owner 2026-10-29 00:2x: «опять полоски разброса появились!!!!!!» · «ну чтор за пиздец с этими полосками!», in the
+agent's run with the game in front — he was playing in it):** the log of that run has no «полоски прицела скрыты» line — `KrinikConanArchery`
+hid the bars only on the aim-view entry (`on_fov_target`), never on a draw without it. Fix: `hide_bars()` also at the start of every draw
+(`on_charge_begin`).
+
+| # | Case | Steps | Expected | Status | Observation |
+|---|---|---|---|---|---|
+| SB1 | Draw by the heavy attack (middle button), no aim view, first draw of the run | fresh launch; real `mdown`, hold 1.5 s, frame mid-draw | no spread bars at the crosshair; log «полоски прицела скрыты в начале натяжки: true» | [NOT-TESTED] | |
+| SB2 | RMB aim after SB1 | real `rdown` 1.5 s, frame | no bars | [NOT-TESTED] | |
+| SB3 | Ten draws over 3 min (mixed RMB / MMB) | real input, frames on draws 5 and 10; log | no bars on any frame; «вернулись» lines, if any, name the reload | [NOT-TESTED] | |
+
 **Item 35 — what the run showed (00:05–00:07):** `Overlay_Main` of `WBP_ContainerInfo` spans the whole screen width, so the strip's `Left`
 alignment pins it to the SCREEN's left edge (+ padding 120) in every state: with loot it happens to stand left of the window; on a corpse
 WITHOUT loot (window Hidden from the start, or after take-all) it stands at the left edge (frame `b1_small.webp` of the kappa corpse, strip at
