@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0366 · 2026-10-28 · ❌ · #autonomy #deadline #closing #known-trap
+class: known-trap-walked-again
+**Lesson:** «работай автономно 1 час, затем закрывай чат» — I started `/end-chat-soft` 15 min BEFORE the named time, calling the game runs
+«risky»; the owner: «Время - это ДО КОТОРОГО РАБОТАТЬ, и ПОСЛЕ которого доделывать то, что делаешь до логического среза, и тогда уже начинать
+закрытие чата». The canon says the same (AGENT_GUIDE → «WORKING UNTIL A NAMED TIME»). Before invoking a closing skill under a named time, probe
+the clock (`date`) and compare: earlier than the named time → take the next pool item instead.
+mechanized: no
+
 ### EXP-0365 · 2026-10-28 · ❌→✅ · #conan #testing #stage #audio #owner-taste
 **Context:** S3 «ding only for the hero» was measured where the hero stood in an enemy camp; three enemies hit him during the recording.
 **Result:** ❌ a 3,2 kHz peak (ncc 0,24) was called «the ding» — it was a sword clash; on a clean stage the draw had not even happened (the
