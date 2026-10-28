@@ -91,6 +91,27 @@
 
 ## Entries
 
+### EXP-0365 · 2026-10-28 · ❌→✅ · #conan #testing #stage #audio #owner-taste
+**Context:** S3 «ding only for the hero» was measured where the hero stood in an enemy camp; three enemies hit him during the recording.
+**Result:** ❌ a 3,2 kHz peak (ncc 0,24) was called «the ding» — it was a sword clash; on a clean stage the draw had not even happened (the
+owner's typing reached the game and opened the Journey hub). ✅ clean stage (every `Character` within 60 m destroyed, god, input idle ≥ 10 s,
+hub closed by frame) — the ding at ncc 0,77, and a real defect showed up: it repeated every 3,9 s of a held draw.
+**Lesson:** a measurement taken among noise is void, whatever number it prints; build the stage first (the owner's rule, HOUSE_RULES §1), and
+check that the action itself happened (log line, mid-action frame) before reading its effect.
+mechanized: `tools/hooks/test-after-code.mjs` stops the turn on `blocked`/`[NOT-TESTED]` cases; the stage — by hand (HOUSE_RULES §1)
+
+### EXP-0364 · 2026-10-28 · ❌ · #conan #pult #stage #actors
+**Lesson:** creatures beyond ≈150 m from the hero sleep (`bHidden`, no tick, no collision); moving a sleeping one to the hero does not wake it
+(arrows pass through, setters ignored, the game later pools it at 0,0,0) — move the HERO to the creature. And `FindAllOf(<class>)` returns
+subclasses: filter targets by the exact class name, or a dialogue NPC dies (two did, 2026-10-28). → game map, stage paragraph.
+mechanized: no
+
+### EXP-0363 · 2026-10-28 · ❌ · #conan #real-input #owner-machine
+**Lesson:** real input (`mouse-seq.ps1`) brings the game window forward; if the owner types at that moment his letters go into the game
+(J opened the Journey hub, RMB dropped after 0,9 s). Wait for input idle (`GetLastInputInfo` ≥ 10 s) right before the sequence and confirm
+by a frame that no menu is open. → `ConanExiles/_config/wait-input-idle.ps1 -Min 10 -MaxWait 180`.
+mechanized: no
+
 ### EXP-0362 · 2026-10-28 · ❌→✅ · #conan #umg #widget #layout #measure
 **Context:** build 3 of `KrinikUIFixes` widened the quick-loot grid so the window would keep one width and sit on the quest panel's edge;
 the padding was derived from one frame difference (+55 px → «+13 units per side», i.e. 4,2 px per unit).
