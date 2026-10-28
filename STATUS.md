@@ -120,6 +120,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   when `WBP_Crosshair_C` is created (SB4 pass 00:44).
 > - ⏳ bug 67: live `DynamicSky.SolarUpdateAngleDelta 2.0` → `[OWNER]` «ну сейчас словно тени в порядке» (00:46); control look at 0.003 set 00:46:27, his
 >   word pending; then the winner into the pack `Engine.ini` (line 303) with A/B notes in the recon.
+> - ⏳ WAITS FOR THE OWNER (called 2026-10-29 00:5x by `review.mjs --call`): his look under palms at 0.003 — the game is held for it, so the cases
+>   below wait for the game to be free.
 > - Cases still without a run (need the game, not the owner): `TC_conan_corpse_prompt_left_of_quickloot_2026-10-28.md` F4 (chest), F5 (1080p), S3/H2/H3
 >   rows; `TC_conan_bow_fp_smooth_zoom_2026-10-28.md` H2, H3 (FP draw cancelled / RMB mid-draw, real input); SB3 (ten mixed draws) of the loot file.
 > - 🔴 item 36 corpse prompt on two lines: our `Game.locres` CAN override the vanilla key (`vanilla-override.py`, `vanilla-overrides-ru.tsv`), but
