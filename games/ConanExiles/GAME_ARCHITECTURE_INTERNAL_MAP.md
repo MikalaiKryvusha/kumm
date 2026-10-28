@@ -122,6 +122,14 @@ WBP_ContainerInfo` (pakchunk1110; моды сборки его не переоп
 `God` НЕ спасает от жажды и голода (2026-10-26: смерть `CauseOfDeath: Thirst` при включённом God). Выживание — `p:GetHungerSystem()`
 (`BP_HungerSystem_C`): `EnableThirst(false,false)`, `EnableHunger(false,false)`, `AddDrink(nil,100.0)`, `AddFood(nil,100.0)` (сеттеры `SetDrinkCurrent`
 ждут два аргумента — не годятся). `AdjustStaminaRegenMod(1000)` выносливость НЕ удержал; работает повтор `AdjustStaminaCurrent(1000.0)` раз в 250 мс.
+Стенд прогона пультом (2026-10-28, правило дома о тестовом окружении): убрать всех рядом — `K2_DestroyActor` у каждого `Character` в радиусе
+60 м (лагерь NPC вокруг героя — враги стоят вплотную и бьют); существа дальше ≈150 м от героя СПЯТ (`bHidden`, тик и столкновения выключены):
+перенос спящего к герою его не будит (сеттеры столкновений не действуют, стрелы проходят насквозь), а игра потом прячет его в пул (0,0,0) —
+переносить ГЕРОЯ к существу (`p:K2_SetActorLocation(точка, false, {}, true)`), через ≈5 с оно бодрствует; держать на месте —
+`CustomTimeDilation = 0.0001`, без урона — `bCanBeDamaged=false`; NPC-людей смирными — `DetachFromControllerPendingDestroy()` (стоит, монтажи
+играет); монтаж на NPC — `PlayAnimMontage(M, 1.0, FName('None'))`. Прицел пультом — `SetControlRotation` на точку существа: `K2_GetActorLocation`
+крокодила у земли, для тела +70 см. Набранные буквы владельца в окне игры открывают хаб (J — «Путешествие») — перед настоящим вводом ждать
+простоя ввода ≥ 10 с (`GetLastInputInfo`) и кадром проверить, что меню закрыто.
 Бессмертие нового героя после смерти — поле `bCanBeDamaged=false`. Повтор пульта: `LoopInGameThreadWithDelay` с флагом `_G.krinik_cheat2_on`.
 Родная камера (шаблон кита `ThirdPersonSpringArm_GEN_VARIABLE`): штанга 200 (колёсико 130–250), `SocketOffset` (20, 52, −38) — над правым
 плечом и ниже точки штанги; цель `TPCameraSocketOffsetTarget` по умолчанию (0,0,0). При натяжении лука игра камеру НЕ двигает — только обзор
