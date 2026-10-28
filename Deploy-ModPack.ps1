@@ -730,10 +730,36 @@ function Invoke-RemoveTarget {
     return $n
 }
 
+function Find-ManifestSlot {
+    # Место нового пака при -Only по манифесту: перед первым паком из уже стоящих в списке, чей мод ниже по mods[].
+    # Имена паков знаем без распаковки только у модов-папок (source.folder) - их и смотрим; не нашли - -1 (в конец).
+    # Живая раскатка 2026-10-28: KrinikConanArchery встал ПОСЛЕ KrinikLevelUncapped, а тот обязан быть последним (баг 06, хвост). [NOT-TESTED]
+    param([string]$Pak, $List)
+    $owner = $script:PakMod[$Pak]
+    if (-not $owner) { return -1 }
+    $mods = @($pack.mods)
+    $i = -1
+    for ($k = 0; $k -lt $mods.Count; $k++) { if ($mods[$k].name -eq $owner) { $i = $k; break } }
+    if ($i -lt 0) { return -1 }
+    for ($j = $i + 1; $j -lt $mods.Count; $j++) {
+        $m = $mods[$j]
+        if ($m.kind -ne 'pak' -or -not $m.source.folder) { continue }
+        if ($null -ne $m.enabled -and -not $m.enabled) { continue }
+        try { $src = Resolve-ModSource -Mod $m } catch { continue }
+        foreach ($f in (Get-PakFiles -Path $src.Path)) {
+            if ($f.Extension -ne '.pak') { continue }
+            $at = $List.IndexOf($f.Name)
+            if ($at -ge 0) { return $at }
+        }
+    }
+    return -1
+}
+
 function Invoke-DeployTarget {
     param($Target, $Mods, [switch]$Plan)
     $failed = @(); $files = 0; $installed = 0
     $script:PakOrder = @()
+    $script:PakMod = @{}
     foreach ($m in $Mods) {
         try {
             $src = Resolve-ModSource -Mod $m
@@ -742,6 +768,7 @@ function Invoke-DeployTarget {
                 $r = Install-PakMod -Mod $m -Source $src -Target $Target -Plan:$Plan
                 $total += $r.Files
                 $script:PakOrder += $r.Paks
+                foreach ($pk in $r.Paks) { $script:PakMod[$pk] = $m.name }
             }
             foreach ($step in $m.install) {
                 $from = if ($step.from -eq '.') { $src.Path } else { Join-Path $src.Path ($step.from -replace '/', '\') }
@@ -769,15 +796,24 @@ function Invoke-DeployTarget {
     # При -Only в $PakOrder только выбранные моды: перезапись файла по нему выключала
     # все остальные паки (баг 06, 09.09 - три мода раскатались и выключили семь).
     # Поэтому подмножество СЛИВАЕТСЯ с прежним списком: прежние строки остаются на
-    # своих местах, новые паки - в конец; порядок целиком по манифесту - только у
+    # своих местах, новые паки - на своё место по манифесту (Find-ManifestSlot), а
+    # если его не узнать - в конец; порядок целиком по манифесту - только у
     # полной раскатки. [NOT-TESTED]
     if ($script:pack.modList -and $script:PakOrder.Count -gt 0 -and $script:OnlyMods) {
         $listPath = Join-Path $Target.Path ($script:pack.modList -replace '/', '\')
         if (Test-Path $listPath) {
             $kept = @(Get-Content $listPath | ForEach-Object { $_.Trim() } | Where-Object { $_ })
             $added = @($script:PakOrder | Where-Object { $kept -notcontains $_ })
-            if ($added.Count) { Warn "modlist: -Only appends $($added.Count) new pak(s) at the end - a full deploy restores manifest order" }
-            $script:PakOrder = @($kept) + $added
+            $merged = New-Object System.Collections.ArrayList
+            foreach ($k in $kept) { [void]$merged.Add($k) }
+            $tail = @()
+            foreach ($p in $added) {
+                $at = Find-ManifestSlot -Pak $p -List $merged
+                if ($at -ge 0) { [void]$merged.Insert($at, $p); Ok "modlist: $p placed by manifest order (before $($merged[$at + 1]))" }
+                else { $tail += $p }
+            }
+            if ($tail.Count) { Warn "modlist: -Only appends $($tail.Count) new pak(s) at the end - a full deploy restores manifest order" }
+            $script:PakOrder = @($merged) + $tail
         }
     }
     if ($script:pack.modList -and $script:PakOrder.Count -gt 0) {

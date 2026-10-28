@@ -94,9 +94,12 @@ mkdirSync(PLIB, { recursive: true }); mkdirSync(PGAME, { recursive: true })
 const PAKS = [
   { name: 'Alpha Arms', kind: 'pak', version: '1', nexusId: 11, pak: 'AlphaArms.pak', file: 'Alpha Arms 11 1 2026-09-03T10-00Z abcdefghi.zip' },
   { name: 'Beta Bows', kind: 'pak', version: '1', nexusId: 12, pak: 'BetaBows.pak', file: 'Beta Bows 12 1 2026-09-04T10-00Z abcdefghi.zip' },
-  { name: 'Gamma Gear', kind: 'pak', version: '1', nexusId: 13, pak: 'GammaGear.pak', file: 'Gamma Gear 13 1 2026-09-05T10-00Z abcdefghi.zip' },
+  // Gamma — мод-папка (source.folder), как наши моды кита: по нему -Only находит место нового пака (хвост бага 06, 2026-10-28)
+  { name: 'Gamma Gear', kind: 'pak', version: '1', source: { folder: 'gamma' }, pak: 'GammaGear.pak' },
 ]
-for (const m of PAKS) {
+mkdirSync(path.join(PDIR, 'gamma'), { recursive: true })
+writeFileSync(path.join(PDIR, 'gamma', 'GammaGear.pak'), 'pak')
+for (const m of PAKS.filter(m => m.file)) {
   const pakFile = path.join(PDIR, m.pak)
   writeFileSync(pakFile, 'pak')
   execFileSync('powershell', ['-NoProfile', '-Command', `Compress-Archive -LiteralPath ${q(pakFile)} -DestinationPath ${q(path.join(PLIB, m.file))}`])
@@ -119,6 +122,10 @@ const one = pps(['-Deploy', '-Only', 'Beta Bows'])
 expect('паки: -Only одного мода не выключает остальные (баг 06)', lines() === 'AlphaArms.pak,BetaBows.pak,GammaGear.pak', `${one.out}\nmodlist: ${lines()}`)
 const pv = pps(['-Verify'])
 expect('паки: -Verify после -Only — код 0, ни одного «not in modlist»', pv.code === 0 && !/not in modlist/.test(pv.out), pv.out)
+// Новый пак при -Only — на своё место по манифесту, а не в конец (живая раскатка 2026-10-28: пак встал после того, кто обязан быть последним)
+writeFileSync(LIST, 'AlphaArms.pak\r\nGammaGear.pak\r\n')
+const ins = pps(['-Deploy', '-Only', 'Beta Bows'])
+expect('паки: -Only нового пака — место по манифесту (перед модом-папкой ниже)', lines() === 'AlphaArms.pak,BetaBows.pak,GammaGear.pak', `${ins.out}\nmodlist: ${lines()}`)
 
 console.log(bad ? `\nСТЕНД: ${bad} провал(ов)` : '\nстенд: все проверки прошли')
 process.exit(bad ? 1 : 0)
