@@ -42,7 +42,9 @@ Builds: `KrinikConanArchery` main.lua — one ding per draw (22:38), bars on eve
 - sleeping creatures (beyond ≈150 m) cannot be woken by moving them — the hero goes to them (game map);
 - the owner's typing reaches the game window during real input — the Journey hub opened; wait for input idle;
 - F3: after «Забрать все» the empty quick-loot panel is Hidden, not Collapsed — the corpse strip stays (bug 64 item 35);
-- one killed target was a `BP_HumanoidDialogueNPC_C` («Поборник Внешней тьмы») — the stage takes only `HumanoidNPCCharacter_C` from now on.
+- two killed targets were `BP_HumanoidDialogueNPC_C` («Поборник Внешней тьмы» at 22:56; another at ≈23:05 during the item-34 recon, which
+  returned nothing — `LootActionTooltip` not reachable by the pult): `FindAllOf('HumanoidNPCCharacter_C')` returns subclasses; the stage now
+  filters by the exact class name (game map).
 
 ## 6. Traces
 

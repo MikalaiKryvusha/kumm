@@ -128,7 +128,9 @@ WBP_ContainerInfo` (pakchunk1110; моды сборки его не переоп
 переносить ГЕРОЯ к существу (`p:K2_SetActorLocation(точка, false, {}, true)`), через ≈5 с оно бодрствует; держать на месте —
 `CustomTimeDilation = 0.0001`, без урона — `bCanBeDamaged=false`; NPC-людей смирными — `DetachFromControllerPendingDestroy()` (стоит, монтажи
 играет); монтаж на NPC — `PlayAnimMontage(M, 1.0, FName('None'))`. Прицел пультом — `SetControlRotation` на точку существа: `K2_GetActorLocation`
-крокодила у земли, для тела +70 см. Набранные буквы владельца в окне игры открывают хаб (J — «Путешествие») — перед настоящим вводом ждать
+крокодила у земли, для тела +70 см. Цель для убийства на стенде — только по ТОЧНОМУ имени класса (`x:GetClass():GetFName():ToString() == 'HumanoidNPCCharacter_C'`):
+`FindAllOf('HumanoidNPCCharacter_C')` отдаёт и подклассы, среди них `BP_HumanoidDialogueNPC_C` — NPC с диалогом (2026-10-28 22:56 и ≈23:05
+убиты два таких, «Поборник Внешней тьмы» и ещё один, — ошибка стенда). Набранные буквы владельца в окне игры открывают хаб (J — «Путешествие») — перед настоящим вводом ждать
 простоя ввода ≥ 10 с (`GetLastInputInfo`) и кадром проверить, что меню закрыто.
 Бессмертие нового героя после смерти — поле `bCanBeDamaged=false`. Повтор пульта: `LoopInGameThreadWithDelay` с флагом `_G.krinik_cheat2_on`.
 Родная камера (шаблон кита `ThirdPersonSpringArm_GEN_VARIABLE`): штанга 200 (колёсико 130–250), `SocketOffset` (20, 52, −38) — над правым
