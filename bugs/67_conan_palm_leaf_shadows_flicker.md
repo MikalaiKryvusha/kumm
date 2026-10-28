@@ -14,6 +14,8 @@ stays 0.003 (or any value whose steps are not seen), and the leaf shadows do not
 cvar that keeps VSM pages from invalidating on a small light rotation; verify each by a 60 fps clip under palms and the owner's eye.
 The bar is other games: `[OWNER]` «как в других ИГРАХ!!!!» · «и плавно, и не мерцает!» — first recon step: how shipped UE5 games with a moving sun and
 VSM (and their community fixes) keep both — Epic's guidance on time-of-day with VSM, the settings those games ship.
+`[OWNER]` «эти ебучие тени не должны перерисовываться и пересчитываться так часто!» — the target design: the visible sun moves smoothly, the
+shadow-casting light (and the VSM cache) updates rarely. Recon of that question — `researches/conan-shadow-flicker/2026-10-29_light-rotation-cache.md`.
 
 ## Goal vector and acceptance
 
