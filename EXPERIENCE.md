@@ -91,6 +91,12 @@
 
 ## Entries
 
+### EXP-0361 · 2026-10-28 · ❌ · #conan #devkit #cook #memory
+**Lesson:** the kit cook (`kit-buildmod.py`, `UnrealEditor-Cmd -run=Cook`) can die with «Cook stalled probably because of memory settings being too
+restrictive and triggering garbage collection» while the game runs beside it (2026-10-28 21:5x, KrinikConanArchery; three earlier cooks that evening
+passed with the game open). Retry once; if it stalls again, close the game first. A kit edit already saved does not need re-running — only the build.
+mechanized: no
+
 ### EXP-0360 · 2026-10-28 · ❌→✅ · #conan #ue4ss #lua #threads #crash #known-trap
 class: known-trap-walked-again
 **Lesson:** a lesson written only into ONE mod's comment does not reach the next mod: the camera mod knew since 08.09 that `ExecuteWithDelay` →

@@ -103,6 +103,19 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **ПЕРВЫМ В НОВОМ ЧАТЕ (закрытие 2026-10-28 21:59) — раскатать и проверить три готовые правки:** (1) окно быстрого лута постоянной ширины, правый
+> край по кромке панели квеста — `KrinikUIFixes` сборка 3 (`W_QuickLootPanel`: отступы сетки 10 → 23; пак уже в `_unpacked/KrinikUIFixes`, в игру ещё
+> НЕ раскатан), кейсы Q1, Q2; (2) мод лука ОДНИМ модом — `KrinikConanArchery` = пак кита + Lua в `_unpacked/KrinikConanArchery/{*.pak, ue4ss/}`, одна запись
+> манифеста (`[OWNER]` «Нельзя всё, что по стрельбе из лука - в один мод собрать?»); в ките мод переименован, активный — он; сборка пака шла в 21:5x
+> (первая упала на куке по памяти, EXP-0361; лог `D:/Temp/claude/kit-archery-build2.log`, вывод `D:/Temp/claude/kit-archery-out`) — нет пака →
+> `python -I -X utf8 _config/devkit/kit-buildmod.py KrinikConanArchery <вывод>` при закрытой игре; раскатка: убрать из игры `Mods/KrinikBowFixes.pak` и
+> его строку `modlist.txt`, затем `Deploy-ModPack.ps1 -Deploy -Only KrinikConanArchery` и `-Only KrinikUIFixes` (по одному, EXP-0347); (3) «дзинь»
+> полного заряда только герою (`[OWNER]` «Можно врагам не дзинкать, а только для героя игрока?») — уведомление звука в монтаже немое, играет
+> `KrinikConanArchery` по второму `BP_SetChargeHold`; кейс S3. Все кейсы — `testcases/TC_conan_corpse_prompt_left_of_quickloot_2026-10-28.md`.
+> Решение владельца по опыту (21:26): в окне персонажа писать как в HUD, с процентом — «105 367 / 105,59k (221, 93%)»; строка — родной шаблон
+> `Level_ExpandedDetails`, значения даёт код → Lua по открытию окна (баг 64 п. 28). Стрельба в прыжке — `plans/37_conan_jump_shooting.md`
+> (`[OWNER]` «трельба в прыжке - одна из важнейших фисек Обливион»; запрет — `BaseBPCombat::ActionTry`, `InSubstate(8)` → `IsFalling`).
+>
 > **ВЕЧЕР 2026-10-28 19:44–20:50 (пак `854a9e8`, отчёт `testcases/reports/2026-10-28_conan-crash-fp-dip-tp-twitch-corpse-hud.md`):** сделано и
 > проверено в игре — плашка трупа левее окна быстрого лута (новый кит-мод `KrinikUIFixes`, окно лута на родном месте — баг 64 п. 32); падение при
 > быстрой стрельбе (баг 66: 8 Lua-модов на отложенных действиях игрового потока, страж `_config/check-lua-game-thread.py`); рывок обзора на новом
