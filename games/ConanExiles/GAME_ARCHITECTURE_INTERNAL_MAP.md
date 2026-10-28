@@ -107,6 +107,18 @@ Native class chain of the panel: `W_QuickLootPanel_C` → `QuickLootPanel` (`Slo
 `RootWidget` → `UserWidget`. Hotkey icons (`UI/Framework/W_HotkeyIcon`, native `HotkeyIcon`): HBox binding-name text · `TextBlockHoldPrompt`
 «(удерживайте)» · primary/secondary icon; the hold prompt is switched natively by the action's long-press flag and per instance by
 `HoldPromptVisibility` (default 3; 1 hides it); also `ShowOnlyText`, `BindingLabel`, `NoPresentationVisibility`.
+Loot change event (2026-10-29 00:2x, counters on nine candidates around a REAL Q hold): only the native `QuickLootPanel:SlotItemAddedOrRemoved`
+fires (UE4SS hooks it); the blueprint `HandleInventoryChanged` / `HandleLootContainerInventoryChanged` of `WBP_ContainerInfo` stay silent on a corpse.
+`Overlay_Main` of `WBP_ContainerInfo` spans the whole screen: a slot alignment there is relative to the SCREEN edges.
+Corpse prompt text: vanilla target `Exiles_UI`, key `DA4E821B4EE35B69F5E9128CF11CB58F` «Разделайте труп и получите ресурсы или нажмите {0}, чтобы
+забрать предметы»; the widget lays it out as one row «text · key icon · text» (a `\n` inside breaks only the first piece). Our `Game` target
+overrides a vanilla key when the entry carries the vanilla hashes (`_config/devkit/vanilla-override.py`, proven 2026-10-29 00:34).
+Crosshair (`/Game/UI/Widgets/HUD/Reticles/WBP_Crosshair.WBP_Crosshair_C`): the spread bars (curve `C_CrosshairAccuracyAlpha`) show as soon as a bow
+is in hand, before any draw — zeroing the curve keys hides them at once.
+Hosav numbers: `BlueprintLibrary/BPFL_Hosav_UI.TextOverflowPrevention_Numbers` (Hosav's, not the game's): ≥ 100 000 → `Divide_IntInt(x, 10)` → `/100.0`
++ «k»; ≥ 1 000 000 → `/10000` → `/100.0` + «M»; truncation, two decimals.
+Sun and shadows: the pack's `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ~50×/s; live `2.0` (light turns in steps
+seconds apart) — the owner under palms 2026-10-29 00:46: «ну сейчас словно тени в порядке» (bug 67; the control look at 0.003 pending).
 Stand rule (2026-10-28 23:52 crash): never keep a killed creature in `_G` — the dead actor is destroyed and the next call on it is an access
 violation in UE4SS; read its location BEFORE `KillCharacter`.
 Для замера модуль можно открыть пультом: `ActivateModule(FName('ContainerInfo'), true, false)` + `SetObject(<труп>, 0)` у `WBP_ContainerInfo_C`; игра
