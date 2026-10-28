@@ -41,7 +41,7 @@ the previous chat of the same model (`claude-opus-5-5`, transcript `38323b75-…
 | C3 — ≥ 85 % urgent close | «СРОЧНО ЗАКРЫВАЙ ЧАТ», `/end-chat-force` | run 2 | pass |
 | C4 — ≥ 85 % repeats on PreToolUse | line on every call | run 3 | pass |
 | C5 — broken input | silent, exit 0 | run 6 | pass |
-| C6 — invoked by Claude Code in a session that crosses 70 % | line in agent context | — | blocked (needs a session past 70 %) |
+| C6 — invoked by Claude Code in a session that crosses 70 % | line in agent context | 2026-10-29 00:52, this session, PreToolUse on an Edit: «context-budget · контекст ≈ 701 тыс. токенов = 70.1 % окна 1000 тыс. Новую большую работу не начинай…» arrived as hook context (the hook was wired mid-session; Claude Code picked it up without a restart) | pass |
 
 ## 5. Found
 
@@ -53,4 +53,5 @@ The command outputs above (chat of 2026-10-28 23:26); state files `D:\Temp\conte
 
 ## 7. Verdict
 
-partial — the script is verified on real data; its invocation by Claude Code is not yet observed (C6 blocked until a session crosses 70 %).
+pass — the script is verified on real data (2026-10-28), and its invocation by Claude Code on the real path was observed at 70.1 % (C6,
+2026-10-29 00:52).
