@@ -98,6 +98,8 @@ no feedback, it adds a few discrete reflections, never a decaying tail. ✅ conv
 −60 dB over RT60, one-pole low-pass) — tails to 1,2–1,5 s, visible on a common time axis.
 **Lesson:** a reverb TAIL is convolution (or a feedback network), not taps; and a sound variant is checked by a waveform sheet on ONE common time
 axis before the owner hears it — per-file scaling hid the defect at first.   → link: `ConanExiles/_config/sound-synth.py` (`hall_reverb`)
+In-game check of such a quiet pure tone (case S2): cross-correlation gave only ncc 0,57 under the game's draw sounds — the decisive proof was the
+spectrum: the tone's own frequency (3203 Hz) as the top peak, band/median 613 at the moment against 30–62 elsewhere, and the old sound at ncc 0,04.
 
 ### EXP-0358 · 2026-10-28 · ✅ · #conan #localization #locres #crc #official-names
 **Context:** 48 place names in Era of Trials' desecration table had to show the game's OFFICIAL Russian, not ours.
