@@ -16,7 +16,7 @@ quick-loot window of one width on the quest panel's edge, full-charge ding only 
 
 ## 3. Runs
 
-- 22:01–22:02 `python -I -X utf8 _config/check-lua-game-thread.py` (0); `.\Deploy-ModPack.ps1 -Deploy -Only KrinikConanArchery -PackDir <pack>`
+- 2026-10-28 22:01 `python -I -X utf8 _config/check-lua-game-thread.py` (0); `.\Deploy-ModPack.ps1 -Deploy -Only KrinikConanArchery -PackDir <pack>`
   and `-Only KrinikUIFixes` — `verify 97 present, 0 missing`.
 - 22:02:50 `launch-bg.ps1`, `enter-world-remote.sh` (world in 26 s); 22:04–22:05 `exec God`, `KillCharacter` on two attackers, Q1/Q2 frames
   `q1_open`, `q1_wheel`; 22:07 row widths by the pult; 22:08 S3 attempt by the pult; 22:09 `close-game.ps1` (clean, 6,2 s).
