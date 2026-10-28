@@ -1,13 +1,13 @@
-# `interviews/` — решения уровня владельца
+# `interviews/` — owner-level decisions
 
-Интервью, которые агент проводит у человека, чтобы закрыть решения, **не подлежащие** самостоятельному
-выбору агента: UI/UX, серьёзные технические развилки, бренд/видение/приоритеты. Закрытые вопросы A/B/C/D с
-рекомендацией первой, отвечает человек **прямо в документе**. По одному `interview_NNN_<тема>.md`.
+Interviews the agent holds with the human to close decisions that are **not** the agent's to make
+on its own: UI/UX, serious technical forks, brand/vision/priorities. Closed A/B/C/D questions with
+the recommendation first; the human answers **right in the document**. One `interview_NNN_<topic>.md` each.
 
-**Для владельца:** если агент завёл интервью — оно ждёт **вас**. Заполняйте поля «**Ответ:**» прямо в
-документе (выберите A/B/C или впишите свой в D). Здесь фиксируются и сохраняются ваши судьбоносные решения.
+**For the owner:** if the agent opened an interview, it is waiting for **you**. Fill in the "**Answer:**" fields right in
+the document (pick A/B/C or write your own in D). Your fateful decisions are recorded and kept here.
 
-**Для ИИ-агента:** заводи интервью только для настоящих развилок уровня владельца (навык `/interview`).
-Варианты — **A/B/C/D**: **A** всегда дистиллирован через `PHILOSOPHY.md` (проще/эффективнее) и помечен
-**«(Рекомендовано)»**; **D** всегда — «свой вариант владельца». Сначала сделай подготовку, держи 1–5 вопросов,
-затем пауза — пусть владелец ответит. Всё, что дёшево откатить, — решай сам.
+**For the AI agent:** open an interview only for real owner-level forks (the `/interview` skill).
+Options are **A/B/C/D**: **A** is always distilled through `PHILOSOPHY.md` (simpler/more effective) and marked
+**"(Recommended)"**; **D** is always "the owner's own option". Do the preparation first, keep it to 1–5 questions,
+then pause — let the owner answer. Anything cheap to roll back, decide yourself.

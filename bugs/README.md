@@ -1,22 +1,22 @@
-# `bugs/` — дефекты, трудности, поломки
+# `bugs/` — defects, difficulties, breakages
 
-По одному документу на дефект: симптом, детерминированное воспроизведение, форензика, корневая
-причина/гипотезы, история починки, статус. Собственный долговечный беклог багов агента — ничего не теряется,
-любой баг можно поднять с нуля будущей сессией. По одному `NN_<имя>.md` на баг.
+One document per defect: symptom, deterministic reproduction, forensics, root
+cause/hypotheses, fix history, status. The agent's own durable bug backlog — nothing gets lost,
+any bug can be picked up from scratch by a future session. One `NN_<name>.md` per bug.
 
-**Для владельца:** можете завести баг простыми словами (что не так, как воспроизвести) — агент
-структурирует. Просматривайте директорию, чтобы видеть известные дефекты и их статус.
+**For the owner:** you can file a bug in plain words (what is wrong, how to reproduce it) — the agent
+will structure it. Browse the directory to see the known defects and their status.
 
-**Для ИИ-агента:** наткнулся на дефект в работе/тестах — заводи документ по канону (навык `/report-bug`;
-метод — `BUG_FIXING_FRAMEWORK.md`), даже мелкий. Документ бага несёт наблюдаемый критерий приёмки
-фикса — что будет ВИДНО работающим после фикса (`REQUIREMENTS_FRAMEWORK.md`). Пока открыт — без тега `DONE`. Починен **и проверен** —
-`git mv NN_x.md NN_DONE_x.md` и добавь раздел `## ✅ STATUS: DONE (дата и время)`. После 3 неудачных слепых попыток
-фикса — стоп и переход к исследованию (`/bug-research`).
+**For the AI agent:** hit a defect during work/tests — file a document by the canon (the `/report-bug` skill;
+method — `BUG_FIXING_FRAMEWORK.md`), however small. A bug document carries an observable acceptance criterion
+for the fix — what will be SEEN working after the fix (`REQUIREMENTS_FRAMEWORK.md`). While open — no `DONE` tag. Fixed **and verified** —
+`git mv NN_x.md NN_DONE_x.md` and add a `## ✅ STATUS: DONE (дата и время)` section. After 3 failed blind fix
+attempts — stop and switch to research (`/bug-research`).
 
-**Поддиректория `bugs/KAIF/`** — дефекты и запросы на улучшение о **самом фреймворке
-KAIF**, а не об этом проекте. Когда сбой восходит к дыре в KAIF (правило ввело в заблуждение,
-не хватило гвардрейла, сломалась машинерия) — заведи документ там по тому же канону багов,
-**строго на английском** (эти документы адресованы разработчику KAIF). Перед заведением —
-дедупликация: сначала поищи в `bugs/KAIF/`; развёртывания с привязкой к origin ищут ещё и в
-issue-трекере origin и отправляют подтверждённые сигналы наверх, отвязанные — держат всё
-локально.
+**The `bugs/KAIF/` subdirectory** — defects and improvement requests about **the KAIF framework
+itself**, not about this project. When a failure traces back to a hole in KAIF (a rule misled,
+a guardrail was missing, the machinery broke) — file a document there by the same bug canon,
+**strictly in English** (these documents address the KAIF developer). Before filing —
+deduplicate: search `bugs/KAIF/` first; origin-tracked deployments also search the
+origin issue tracker and send confirmed signals upstream, detached ones keep everything
+local.

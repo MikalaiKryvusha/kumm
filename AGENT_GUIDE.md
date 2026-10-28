@@ -657,7 +657,7 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
 ```
 
 Substitute your own agent/model identity if you are not that model. There is no commit/version tool —
-commit with plain `git`. Commit messages are written in Russian in this project's history; keep the
+commit with plain `git`. Commit messages are written in English since 2026-10-28 (Russian before — history stays); keep the
 `feat:`/`fix:`/`docs:` prefix and the trailer in English.
 
 ## Document & text hygiene (field-paid rules)

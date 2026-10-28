@@ -1,23 +1,23 @@
-# `homeworks/` — задания от агента человеку
+# `homeworks/` — tasks from the agent to the human
 
-Задания, которые агент просит выполнить **человека**, — то, что не может сделать сам в силу цифровой,
-бестелесной природы: протестировать на реальном железе, действовать в физическом мире, воспользоваться
-аккаунтом/доступом, который есть только у человека, что-то купить, понаблюдать офлайн. Каждый документ
-описывает задачу конкретными шагами для человека и собирает его наблюдения и результаты обратно. По одному
-`NN_<имя>.md`.
+Tasks the agent asks the **human** to do — what it cannot do itself because of its digital,
+bodiless nature: test on real hardware, act in the physical world, use an account/access
+only the human has, buy something, observe offline. Each document describes the task in concrete
+steps for the human and collects the human's observations and results back. One
+`NN_<name>.md` each.
 
-**Для владельца:** если агент завёл homework — ему нужна ваша помощь в физическом/офлайн-мире. Выполните
-шаги и впишите наблюдения обратно в документ — агент прочитает и продолжит.
+**For the owner:** if the agent opened a homework, it needs your help in the physical/offline world. Do the
+steps and write your observations back into the document — the agent will read them and continue.
 
-**Для ИИ-агента:** заблокирован на том, что может сделать только человек-с-телом, — не застревай: заведи
-homework с ясными минимальными пронумерованными шагами и местом для результатов человека, затем продолжай
-другую работу. Сразу после H1 — линтуемая шапка-мета: **Создан:** · **Родитель:** · **Статус:** ·
-**Вовне:** (`AGENT_GUIDE.md` → Document header meta). Получив ответ человека, учти результаты и
-пометь файл `DONE` (`git mv NN_x.md NN_DONE_x.md`).
+**For the AI agent:** blocked on something only a human with a body can do — don't get stuck: open a
+homework with clear, minimal, numbered steps and a place for the human's results, then continue
+other work. Right after the H1 comes the lintable header meta: **Created:** · **Parent:** · **Status:** ·
+**Outbound:** (`AGENT_GUIDE.md` → Document header meta). Once the human answers, take the results into account and
+tag the file `DONE` (`git mv NN_x.md NN_DONE_x.md`).
 
-**Homework класса «вкус»** (критерий приёмки — прилагательное восприятия; `AGENT_GUIDE.md` →
-"The taste class"): агент отдаёт человеку АРТЕФАКТ для восприятия — никогда не ссылку и не чужой
-бенчмарк; все кандидаты на ОДНОМ и том же материале, слепые метки, расшифровка рядом. Два постоянных
-поля в каждом таком документе: **«Что уже можно смотреть/слушать прямо сейчас»** (пути к артефактам)
-и **«Вынесенные вердикты»** (решения владельца, записанные дословно — вердикт является каноном и
-никогда не спрашивается дважды).
+**A "taste" homework** (the acceptance criterion is a perception adjective; `AGENT_GUIDE.md` →
+"The taste class"): the agent hands the human an ARTIFACT to perceive — never a link and never someone else's
+benchmark; all candidates on the SAME material, blind labels, the key alongside. Two permanent
+fields in every such document: **"What you can already watch/listen to right now"** (paths to the artifacts)
+and **"Verdicts given"** (the owner's decisions, recorded verbatim — a verdict is canon and
+is never asked twice).

@@ -12,55 +12,55 @@
 
 One command assembles, updates and repairs a modded game build — for any game, on a free Nexus account.
 
-## Сейчас главное
+## What matters now
 
-**Сборка Конана 3.0.1 — с 2026-10-26 главное, прочие игры не в приоритете.** `[OWNER]` «все игры пока не в приоритере, мы работаем дат
+**The Conan 3.0.1 build — the main focus since 2026-10-26; other games are not a priority.** `[OWNER]` «все игры пока не в приоритере, мы работаем дат
 сборкой конана» · «она 1_ должна работать стабильно 2_ моды не должны конфликтовать, должны быть рабочими 3_ не должно быть явных просадок
-производительности из-за модов» · 2026-10-26. Критерии приёмки: (1) долгий прогон без падений и без новых ошибок в журнале; (2) ни одной
-строки таблиц, где мод молча теряет свою правку без решения владельца, и у каждого мода проверена его игровая функция; (3) сборка против
-игры без паков — разница в пределах шума облёта по парам A-B-A-B, наши Lua-моды — не больше 1 мс в худшем кадре (правило Сварога ниже).
-Сборка — наш продукт под ключ, чужие моды в ней правим напрямую: `[OWNER]` «это наш труд, кастомная сборка, починенная, адаптированная» · «продукт
+производительности из-за модов» · 2026-10-26. Acceptance criteria: (1) a long run with no crashes and no new errors in the log; (2) not one
+table row where a mod silently loses its change without the owner's decision, and every mod's in-game function checked; (3) the build vs.
+the game without paks — the difference stays within fly-through noise over A-B-A-B pairs, our Lua mods no more than 1 ms in the worst frame (Svarog's rule below).
+The build is our turnkey product, and we edit other authors' mods in it directly: `[OWNER]` «это наш труд, кастомная сборка, починенная, адаптированная» · «продукт
 под ключ» · «поэтому правим всё, что хотим» · «качественно и грамматно» · «как разведка Сворога учит - там мы сразу делали много неправильных
-подходов, а потом научились ПРАВИЛЬНО» · 2026-10-26. Как — `HOUSE_RULES.md` §1 «Интерфейс чужих модов чинится нативно» и
+подходов, а потом научились ПРАВИЛЬНО» · 2026-10-26. How — `HOUSE_RULES.md` §1 "Other authors' mod interfaces are fixed natively" and
 `researches/svarog-native-mod-architecture/`.
 
-**Svarog's Dream — главное с 2026-10-09 до 2026-10-26.** `[OWNER]` «забей на Medieval Dynasty. Ты разве не видишь, что мы работаем дальше над
-Сварогом, и я тебя по нему прошу делать и на нем сфокусироваться» · 2026-10-09 ≈13:25. Беклог — `plans/18_svarog_backlog_checklist.md`.
-Правило интерфейса Сварога: всё масштабируется на 16:9 при 720p, 1080p, 2K, 4K, в том числе при смене разрешения у запущенной игры
-(удалённый стол): `[OWNER]` «Всё, что мы делаем, долэно корретно масштабироваться и работать на классическом сообтношении 16:9 и
+**Svarog's Dream — the main focus from 2026-10-09 to 2026-10-26.** `[OWNER]` «забей на Medieval Dynasty. Ты разве не видишь, что мы работаем дальше над
+Сварогом, и я тебя по нему прошу делать и на нем сфокусироваться» · 2026-10-09 ≈13:25. Backlog — `plans/18_svarog_backlog_checklist.md`.
+Svarog's interface rule: everything scales at 16:9 on 720p, 1080p, 2K, 4K, including a resolution change in a running game
+(remote desktop): `[OWNER]` «Всё, что мы делаем, долэно корретно масштабироваться и работать на классическом сообтношении 16:9 и
 классических разрешениях 1080p, 2K, 4K» · «ты не видишь, что ты сейчас не в 1080p, а в 720p ? Это то же соотношение 16:9, так что тоже
-все должно корректно масштабироваться» · 2026-10-09. Medieval Dynasty (эпик 15 ниже) — на паузе.
-Правило вычислений модов Сварога: всё, что понятно, как считать на видеокарте, считается на ней, а не на процессоре — там, где выигрыш
-реально оправдан: `[OWNER]` «всё, что можно и понятно как СЧИТАТь на GPU - нужно на нём считать, а не на CPU. Только где выигрыш реально
+все должно корректно масштабироваться» · 2026-10-09. Medieval Dynasty (epic 15 below) is paused.
+Svarog's mod-compute rule: whatever we clearly know how to compute on the GPU is computed there, not on the CPU — where the gain is
+really justified: `[OWNER]` «всё, что можно и понятно как СЧИТАТь на GPU - нужно на нём считать, а не на CPU. Только где выигрыш реально
 оправдан. на шейдерах, CUDA. У нас суппер можная GPU, многопоточная» · «и она отдыхает» · «а CPU грузится в одном потоке - и мы не можем
-грузить главный поток дальше» · 2026-10-12 (замер того вечера: главный поток 21.5 мс на кадр, видеокарта занята на 24 %). Приёмка новой
-работы мода — `perf` вкл/выкл: главный поток не дороже, цена ушла на видеокарту.
-**Бюджет процессора — 1 мс на все моды вместе, в любом кадре:** `[OWNER]` «2 мс - это неприемлимо. Маши моды все вместе не должны кушать
+грузить главный поток дальше» · 2026-10-12 (that evening's measurement: main thread 21.5 ms per frame, GPU 24 % busy). Acceptance of new
+mod work — `perf` on/off: the main thread costs no more, the cost moved to the GPU.
+**CPU budget — 1 ms for all mods together, in any frame:** `[OWNER]` «2 мс - это неприемлимо. Маши моды все вместе не должны кушать
 больше 1 мс процессорного времени НИКОГДА ни при каких условиях. Что можно - делаем на GPU, CUDA, но не на процессоре. Или очень
-уважительными к процессору алгоритмами.» · 2026-10-14 ≈10:54. **Где действует** — уточнение владельца: `[OWNER]` «При открытии - насрать.
-Лаг допустим.» · «Лаги не допустимы в игре, когда герой бегает а игрок играет, воюет, при геймплее основном» · 2026-10-14 ≈14:45. Предел —
-для худшего кадра основного геймплея (бег, бой, ходьба по миру, подгрузка участков на ходу, реплики жителей), пики включая; открытие окон
-в него не входит. (Прежнее `[AI]`-прочтение «создание окна входит в ту же 1 мс» этим отменено.)
-**Моды — продолжение игры, а не костыли:** `[OWNER]` «нужно наши моды писать как продолжение игры, расширяющее её нативный код, а не как
+уважительными к процессору алгоритмами.» · 2026-10-14 ≈10:54. **Where it applies** — the owner's clarification: `[OWNER]` «При открытии - насрать.
+Лаг допустим.» · «Лаги не допустимы в игре, когда герой бегает а игрок играет, воюет, при геймплее основном» · 2026-10-14 ≈14:45. The limit is
+for the worst frame of core gameplay (running, combat, walking the world, streaming areas in on the move, villagers' lines), spikes included; opening
+windows is outside it. (The earlier `[AI]` reading "window creation counts toward the same 1 ms" is revoked by this.)
+**Mods extend the game, they are not crutches:** `[OWNER]` «нужно наши моды писать как продолжение игры, расширяющее её нативный код, а не как
 костыли. Можно свои новые структуры данных заводить. улучшать и переписывать старые - все во благо оптимизации и эффективности
-алгоритмов!!!!» · 2026-10-14 ≈21:00 (на перечень плана 24: пузырь реплики 11–12 мс, поиски по сцене каждый кадр, полный проход окна писем
-каждый кадр). Мод узнаёт о событиях игры в её точках жизни (создание, показ, смена участка), держит свои реестры и структуры данных и
-переписывает медленные места игры, а не ищет и не пересчитывает всё заново каждый кадр. Разведка — `researches/svarog-native-mod-architecture/`.
+алгоритмов!!!!» · 2026-10-14 ≈21:00 (on plan 24's list: speech bubble 11–12 ms, scene searches every frame, a full pass over the letters window
+every frame). A mod learns about game events at the game's lifecycle points (creation, show, area change), keeps its own registries and data
+structures, and rewrites the game's slow spots instead of searching and recomputing everything every frame. Reconnaissance — `researches/svarog-native-mod-architecture/`.
 
-**Эпик 15 — живой мир Medieval Dynasty** (на паузе с 2026-10-09), фаза 0 «разведка и стенд» (`plans/16`). Слово владельца: `[OWNER]` «и начинаем эпик
+**Epic 15 — the living world of Medieval Dynasty** (paused since 2026-10-09), phase 0 "reconnaissance and bench" (`plans/16`). The owner's word: `[OWNER]` «и начинаем эпик
 по модинку моей любимой игры с ПУСТЫМ БЛЯТЬ МИРОМ - Medieval Dynasty! Сделаем мир ПОЛНЫМ И ЖИВЫМ!» · 2026-10-07 ≈23:35.
-Мета-план — `plans/15_EPIC_medieval_dynasty_living_world.md` (`[OWNER]` «метаплан принят» · 2026-10-08 ≈09:37); метрика —
-критерии приёмки фазы в `plans/16`. Правила живого мира, сказанные владельцем по ходу (жители ходят дорогой, напролом — по
-нужде; знания, слухи и вещи передаются только по доверию), живут в плане 15, здесь не повторяются.
+Meta-plan — `plans/15_EPIC_medieval_dynasty_living_world.md` (`[OWNER]` «метаплан принят» · 2026-10-08 ≈09:37); the metric is the
+phase acceptance criteria in `plans/16`. Living-world rules the owner stated along the way (villagers walk the road and cut across only
+when they must; knowledge, rumours and items pass only along trust) live in plan 15 and are not repeated here.
 
-**Психика жителей — отдельная модель KARMA** (Krinik Agent Relations & Mind Approximation), публичный репозиторий
-https://github.com/MikalaiKryvusha/KARMA: `[OWNER]` «Давай KARMA И заведём публичный репозиторий под неё» · 2026-10-08. Модель
-одна, реализаций может быть несколько; Medieval Dynasty — первый потребитель, Unliminium и будущие игры — следующие. В эпике
-это параллельная дорожка К (выбор черт и нужд → проверочные сценарии → эталон на C# → «Воля» фазы 3); пеший ход — фазы 2–3,
-слухи и вещи по доверию — фаза 4 (`plans/15`, таблица фаз).
+**Villagers' minds — a separate model, KARMA** (Krinik Agent Relations & Mind Approximation), public repository
+https://github.com/MikalaiKryvusha/KARMA: `[OWNER]` «Давай KARMA И заведём публичный репозиторий под неё» · 2026-10-08. One
+model, possibly several implementations; Medieval Dynasty is the first consumer, Unliminium and future games come next. In the epic
+it is the parallel track K (choice of traits and needs → test scenarios → C# reference → phase 3's "Will"); walking on foot is phases 2–3,
+rumours and items along trust are phase 4 (`plans/15`, phase table).
 
-Движок (фазы ниже) продолжает жить: каждая новая игра эпиков ставится им без правки кода. Фаза 1 — автономный беклог, когда
-нет игровой работы. Svarog's Dream и Mafia II — на паузе (STATUS).
+The engine (phases below) lives on: every new game of the epics is installed by it with no code change. Phase 1 is the autonomous
+backlog for when there is no game work. Svarog's Dream and Mafia II are paused (STATUS).
 
 ## Guiding principles
 
@@ -144,13 +144,13 @@ hygiene). Decided and recorded are two moments — tell them apart when they dif
 | 2026-08-15 01:02 +03:00 (recorded) | Canonical name is **KUMM**; `kumm` stays the npm id and the CLI command | Identity is the owner's call, not the machinery's guess from `package.json` (owner's answer at the KAIF deployment) |
 | 2026-08-15 01:02 +03:00 (recorded) | KAIF 2.2 deployed, sphere `programming`, tracking mode `origin` | The project is worked on across context-losing agent sessions; the framework externalizes the memory and discipline that a chat cannot keep |
 | 2026-09-05 13:28 +03:00 (recorded) | KAIF updated 2.2 → 2.5 by the bootstrap route; the 2.3–2.5 rule changes accepted; the delivery metric PROPOSED, not yet the owner's | The project owner is the KAIF author — the framework's policy changes are his own origin decisions; the one per-project setting (the metric) is his call: interview #001 |
-| 2026-09-18 18:06 +03:00 (recorded; the live pass ran at 17:59) | KAIF updated 2.5 → 2.7 by the bootstrap route. The delivery-metric line is REMOVED from this plan and interview #001 Q1 closes as superseded | `[OWNER]` "remove the DELIVERY feature from KAIF — projects started writing it, but I do not use it and see no value in it" · 2026-09-12 — the origin owner's word exactly as the 2.7 update task prints it, in English (the project owner is the KAIF author; whether the original was said in Russian the task does not say). The metric PROPOSED by the agent on 2026-09-05 was never ratified, so nothing of the owner's is lost. `[AI]` The other rule changes of 2.6–2.7 are taken as the framework author's own origin decisions; all twenty are listed for him, in Russian, in `KAIF_FRAMEWORK.md` → «Все двадцать изменений правил этого интервала» |
+| 2026-09-18 18:06 +03:00 (recorded; the live pass ran at 17:59) | KAIF updated 2.5 → 2.7 by the bootstrap route. The delivery-metric line is REMOVED from this plan and interview #001 Q1 closes as superseded | `[OWNER]` "remove the DELIVERY feature from KAIF — projects started writing it, but I do not use it and see no value in it" · 2026-09-12 — the origin owner's word exactly as the 2.7 update task prints it, in English (the project owner is the KAIF author; whether the original was said in Russian the task does not say). The metric PROPOSED by the agent on 2026-09-05 was never ratified, so nothing of the owner's is lost. `[AI]` The other rule changes of 2.6–2.7 are taken as the framework author's own origin decisions; all twenty are listed for him in `KAIF_FRAMEWORK.md` → "All twenty rule changes of this interval" |
 
-| 2026-10-07 ≈23:35 +03:00 (decided) · 2026-10-08 (recorded here) | Главное — эпик 15, живой мир Medieval Dynasty; Svarog's Dream на паузе | `[OWNER]` «и начинаем эпик по модинку моей любимой игры с ПУСТЫМ БЛЯТЬ МИРОМ - Medieval Dynasty! Сделаем мир ПОЛНЫМ И ЖИВЫМ!»; мета-план принят 2026-10-08 ≈09:37 |
-| 2026-10-09 ≈13:25 +03:00 (decided) · recorded 13:30 | Главное — Svarog's Dream; Medieval Dynasty на паузе; интерфейс Сварога — 16:9 на 720p, 1080p, 2K, 4K | `[OWNER]` «забей на Medieval Dynasty» · «мы работаем дальше над Сварогом» · «720p … тоже все должно корректно масштабироваться» |
-| 2026-10-14 ≈14:45 +03:00 (decided) · recorded 14:47 | Бюджет 1 мс главного потока — для кадров основного геймплея; лаг при открытии окон допустим | `[OWNER]` «При открытии - насрать. Лаг допустим.» · «Лаги не допустимы в игре, когда герой бегает а игрок играет, воюет, при геймплее основном» |
-| 2026-10-08 ≈13:15 +03:00 (decided) · recorded 13:18 | Психика NPC — отдельная переиспользуемая модель KARMA в публичном репозитории; название и расшифровка утверждены владельцем | `[OWNER]` «Давай KARMA И заведём публичный репозиторий под неё» · «Утверждено «Krinik's KARMA: A Psychological Model for Game AI Agents» KARMA (Krinik Agent Relations & Mind Approximation)» |
-| 2026-10-16 22:30 +03:00 (live pass) | KAIF updated 2.7 → 2.9 by the bootstrap route; project facts moved from `AGENT_GUIDE.md` to `HOUSE_RULES.md`; the KAIF refresh hooks wired | `[AI]` The 2.8–2.9 rule changes are accepted with the version (the 2.9 rule: no question to the owner unless a rule collides with his recorded decision — none found); all nine are listed for him, in Russian, in `KAIF_FRAMEWORK.md` → «Что изменилось в 2.8 и 2.9» |
+| 2026-10-07 ≈23:35 +03:00 (decided) · 2026-10-08 (recorded here) | Main focus — epic 15, the living world of Medieval Dynasty; Svarog's Dream paused | `[OWNER]` «и начинаем эпик по модинку моей любимой игры с ПУСТЫМ БЛЯТЬ МИРОМ - Medieval Dynasty! Сделаем мир ПОЛНЫМ И ЖИВЫМ!»; meta-plan accepted 2026-10-08 ≈09:37 |
+| 2026-10-09 ≈13:25 +03:00 (decided) · recorded 13:30 | Main focus — Svarog's Dream; Medieval Dynasty paused; Svarog's interface — 16:9 on 720p, 1080p, 2K, 4K | `[OWNER]` «забей на Medieval Dynasty» · «мы работаем дальше над Сварогом» · «720p … тоже все должно корректно масштабироваться» |
+| 2026-10-14 ≈14:45 +03:00 (decided) · recorded 14:47 | The 1 ms main-thread budget applies to core-gameplay frames; lag when opening windows is acceptable | `[OWNER]` «При открытии - насрать. Лаг допустим.» · «Лаги не допустимы в игре, когда герой бегает а игрок играет, воюет, при геймплее основном» |
+| 2026-10-08 ≈13:15 +03:00 (decided) · recorded 13:18 | NPC minds — a separate reusable model, KARMA, in a public repository; the name and its expansion approved by the owner | `[OWNER]` «Давай KARMA И заведём публичный репозиторий под неё» · «Утверждено «Krinik's KARMA: A Psychological Model for Game AI Agents» KARMA (Krinik Agent Relations & Mind Approximation)» |
+| 2026-10-16 22:30 +03:00 (live pass) | KAIF updated 2.7 → 2.9 by the bootstrap route; project facts moved from `AGENT_GUIDE.md` to `HOUSE_RULES.md`; the KAIF refresh hooks wired | `[AI]` The 2.8–2.9 rule changes are accepted with the version (the 2.9 rule: no question to the owner unless a rule collides with his recorded decision — none found); all nine are listed for him in `KAIF_FRAMEWORK.md` → "What changed in 2.8 and 2.9" |
 
 ---
 
