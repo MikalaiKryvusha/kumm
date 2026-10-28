@@ -111,6 +111,22 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **CHAT 2026-10-28 23:14 → 2026-10-29 00:4x — where it stands (read first):**
+> - ✅ (0b) item 34 — «Q Забрать все (удерживайте)» (`HoldPromptVisibility = NEVER` on the take-all icons, kit), B1–B5 pass.
+> - ✅ (0a) item 35 — `KrinikUIFixes` 1.1.0 = pak (strip vanilla Center) + Lua (strip Left only while the loot window shows; hooks
+>   `WBP_ContainerInfo_C:SetObject` + native `QuickLootPanel:SlotItemAddedOrRemoved`); L1–L4 pass (L4 by a real Q hold). Left: L5 cost line,
+>   L6 control (Lua off). Cases — `testcases/TC_conan_loot_panel_hidden_and_hold_prompt_2026-10-28.md`.
+> - 🔴 spread bars (`[OWNER]` «опять полоски разброса появились!!!!!!» · 00:2x): `KrinikConanArchery` now also hides them on draw begin (deployed),
+>   but the sighting is NOT reproduced (MMB, RMB, first LMB draw — no bars; `on_charge_begin` did not fire on either draw) — ask the owner where.
+> - 🔴 item 36 corpse prompt on two lines: our `Game.locres` CAN override the vanilla key (`vanilla-override.py`, `vanilla-overrides-ru.tsv`), but
+>   the widget lays out «text · E · text» in one row — a break hangs «или нажмите» left of the icon (T1 fail); reverted; needs a layout variant.
+> - 🔴 bug 67 palm leaf shadows flicker — re-recon `researches/conan-shadow-flicker/2026-10-29_recon.md`: the pack's
+>   `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ≈ 50×/s, each turn invalidates VSM pages; first run — A-B-A live:
+>   `r.Shadow.Virtual.Enable=0`, then `DynamicSky.SolarUpdateAngleDelta=2.0`; the owner's eye decides.
+> - 🔴 item 33(c) «k» one decimal: Hosav `BPFL_Hosav_UI.TextOverflowPrevention_Numbers` — in-place edit gives truncation only; rounding needs a
+>   bytecode insertion (bug 64 row 33).
+> - Plan 37 jump shooting — recon step 1 done (`ActionTry` refuses on `IsFalling`), (a)–(c) open; ≈ 1–2 h recon + 2–3 h fix.
+>
 > **FIRST IN A NEW CHAT (closure 2026-10-28 23:09; the chat 23:14–… did the hook/docs work above and then continues here):** the owner's word queue
 > below, items (0a), (0b), (1) — in order. Before any run — the stand per `HOUSE_RULES.md` §1 rule 11 (clear everyone around, the target by exact
 > class, input idle via `wait-input-idle.ps1`). The Conan pack after every commit — `git push local main`. The `test-after-code` hook names open

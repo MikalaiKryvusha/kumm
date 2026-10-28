@@ -51,9 +51,23 @@ hid the bars only on the aim-view entry (`on_fov_target`), never on a draw witho
 
 | # | Case | Steps | Expected | Status | Observation |
 |---|---|---|---|---|---|
-| SB1 | Draw by the heavy attack (middle button), no aim view, first draw of the run | fresh launch; real `mdown`, hold 1.5 s, frame mid-draw | no spread bars at the crosshair; log «полоски прицела скрыты в начале натяжки: true» | [NOT-TESTED] | |
-| SB2 | RMB aim after SB1 | real `rdown` 1.5 s, frame | no bars | [NOT-TESTED] | |
-| SB3 | Ten draws over 3 min (mixed RMB / MMB) | real input, frames on draws 5 and 10; log | no bars on any frame; «вернулись» lines, if any, name the reload | [NOT-TESTED] | |
+| SB1 | Draw by the heavy attack (middle button), no aim view, first draw of the run | fresh launch; real `mdown`, hold 1.5 s, frame mid-draw | no spread bars at the crosshair; log «полоски прицела скрыты в начале натяжки: true» | not reproduced | 00:35 real `mdown` 2.5 s: no crosshair at all on the mid-draw frame (`sb1_small.webp`), no charge-begin line (the heavy attack does not run `BP_PowerCharge`). 00:37 fresh launch, FIRST draw by real `ldown` 2.2 s: crosshair dot only, no bars (`sb1b_center.webp`), still no charge-begin line — `on_charge_begin` did not fire on either draw; bars hidden by the first arrow (00:37:37 «шаблоны … полоски прицела скрыты») |
+| SB2 | RMB aim after SB1 | real `rdown` 1.5 s, frame | no bars | pass | 00:36 real `rdown` 2.2 s, frame at 1.4 s: crosshair dot, no bars (`sb2_center.webp`) |
+| SB3 | Ten draws over 3 min (mixed RMB / MMB) | real input, frames on draws 5 and 10; log | no bars on any frame; «вернулись» lines, if any, name the reload | [NOT-TESTED] | the owner's sighting is not reproduced in 3 variants (MMB, RMB, first LMB draw) — asked him where he saw them |
+
+T1 result (00:34): the override WINS over the vanilla target (our Game target is read later), but the widget lays the prompt out as one row
+«text before the key · E icon · text after»: the break left «или нажмите» as a second line of the FIRST piece, right-aligned, left of the icon
+(`t1_strip.webp`) — **T1 fail (layout)**; T2/T3 moot. The two-line prompt needs a different layout — variants to the owner.
+
+**Corpse prompt on two lines (owner 2026-10-29 00:2x: «было бы хорошо текст переносить на две строки в виджете подсказке о трупе со слова
+"или" - на второй строке писать»):** the string is vanilla (target `Exiles_UI`, key `DA4E821B4EE35B69F5E9128CF11CB58F`); our `Game.locres` gets
+the same key with «…ресурсы\nили нажмите {0}…» by `_config/devkit/vanilla-override.py` (+1 entry, regress 0 lost / 0 changed).
+
+| # | Case | Steps | Expected | Status | Observation |
+|---|---|---|---|---|---|
+| T1 | The override wins over the vanilla target | deploy «Krinik Russian Translation» (`-Only`), launch, corpse with loot, frame | two lines: «Разделайте труп и получите ресурсы» / «или нажмите [E], чтобы забрать предметы»; the E icon in place | [NOT-TESTED] | |
+| T2 | Strip vs window | same frame | the narrower strip still left of the window with a gap; nothing clipped | [NOT-TESTED] | |
+| T3 | Corpse without loot | kappa corpse (empty) | «Разделать труп» unchanged (another key), strip centred | [NOT-TESTED] | |
 
 **Item 35 — what the run showed (00:05–00:07):** `Overlay_Main` of `WBP_ContainerInfo` spans the whole screen width, so the strip's `Left`
 alignment pins it to the SCREEN's left edge (+ padding 120) in every state: with loot it happens to stand left of the window; on a corpse
