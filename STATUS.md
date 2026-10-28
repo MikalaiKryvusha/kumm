@@ -116,7 +116,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   L6 control (Lua off). Cases — `testcases/TC_conan_loot_panel_hidden_and_hold_prompt_2026-10-28.md`.
 > - ✅ spread bars (`[OWNER]` «опять полоски разброса появились!!!!!!» · 00:2x): they show with the bow in hand right after the world loads; now hidden
 >   when `WBP_Crosshair_C` is created (SB4 pass 00:44).
-> - ✅ bug 67 palm shadows: 2.0 in the pack BY THE OWNER'S CHOICE (2026-10-29 01:10, «ставим 2.0 и закрываем чат»; pack 1c70cb9) — cause found (`DynamicSky.SolarUpdateAngleDelta`: 2.0 calm / 0.003 flicker, the owner's eye both ways), but 2.0 was
+> - ✅ bug 67 palm shadows: 2.0 in the pack BY THE OWNER'S CHOICE (2026-10-29 01:10, «ставим 2.0 и закрываем чат»; pack 1c70cb9) — NEXT: the kit route (bug 67 → «Next path — the kit»: sky blueprint, smooth sun + rare shadow light) — cause found (`DynamicSky.SolarUpdateAngleDelta`: 2.0 calm / 0.003 flicker, the owner's eye both ways), but 2.0 was
 >   REVERTED (pack 6a12183): 0.003 is there for a smooth sun — `[OWNER]` «мы же специально делали так, чтобы солнце плавно по небу двигалось...».
 >   His answer: `[OWNER]` «ПЛАВНОЕ СОЛНЦЕ И НЕ МЕРЦАЮЩИЕ ТЕНИ!!!!!!!!» — FIRST in the next chat: keep 0.003, find levers that do not touch the sun
 >   (bug 67 → «The owner's requirement»), each by a 60 fps clip under palms and his eye. EXP-0369. First run (recon

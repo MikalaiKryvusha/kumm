@@ -48,3 +48,10 @@ The trade-off is the owner's: smooth sun (0.003, flicker) vs calm shadows (2.0, 
 ## Decisions made without the owner
 
 - `[AI]` 2.0 written, not a middle value: it is the value the owner looked at; 1.0 / 0.5 are the named fallbacks if the step is visible.
+
+## Next path — the kit (the owner, 2026-10-29 01:1x)
+
+`[OWNER]` «в этой сборке - а разме не мы эту сборку собираем?» · «и целвый кит на 170 гигов есть!» — the search above covered engine cvars only. Next:
+edit the sky blueprint in the kit (Ultra Dynamic Sky / `DynamicSky`): keep the visible sun moving smoothly, update the shadow-casting directional light
+rarely (and, if possible, ease between its steps instead of jumping) — the same kit route as `KrinikUIFixes` / `KrinikConanArchery`. First step:
+read the sky blueprint (which asset drives `DynamicSky.SolarUpdateAngleDelta`, where the light rotation is set).
