@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0368 · 2026-10-28 · ❌→✅ · #conan #ui #widgets #theory
+**Lesson:** «the Hidden panel keeps layout space, so Collapsed fixes the strip» was a plausible theory and the next case was going to be a kit
+graph edit on it. One pult probe refuted it in a minute: `SetVisibility(Collapsed)` shrank the overlay but the strip did not move — the module
+system places `WBP_ContainerInfo` from its size at activation (no UMG parent). Before building a fix on a layout theory, flip the variable
+live by the pult and look at a frame.
+mechanized: no
+
+### EXP-0367 · 2026-10-28 · ❌ · #conan #pult #crash #ue4ss #stage
+**Lesson:** a killed creature kept in `_G` and touched 5 s later (`K2_GetActorLocation`) crashed the game — UE4SS access violation at
+0xffffffffffffffff (the actor is destroyed after death). Read what you need (location) BEFORE `KillCharacter`; never call a stored actor
+reference after its death without `IsValid()`. → game map, stage paragraph.
+mechanized: no
+
 ### EXP-0366 · 2026-10-28 · ❌ · #autonomy #deadline #closing #known-trap
 class: known-trap-walked-again
 **Lesson:** «работай автономно 1 час, затем закрывай чат» — I started `/end-chat-soft` 15 min BEFORE the named time, calling the game runs

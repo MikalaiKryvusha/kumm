@@ -100,6 +100,15 @@ WBP_ContainerInfo` (pakchunk1110; моды сборки его не переоп
 `Corpse_C` — владелец `DismemberedBodySkeletalMesh_C` (`GetOwner()`).
 Атака в воздухе (2026-10-28, план 37): `BaseBPCombat::ActionTry` отказывает при `InSubstate(8)` с причиной `IsFalling` — поэтому лук не
 стреляет в прыжке; `IsFalling` ещё в `DodgeTry` и ubergraph `BasePlayerChar` (поиск — `uaj grepfn <ассет> <версия> <строка>`).
+Screen placement of the module (2026-10-28 23:50, pult): `WBP_ContainerInfo_C` has NO UMG parent (outer = the game instance) — the module
+system places it itself from its desired size AT ACTIVATION; a later visibility change of `W_QuickLootPanel` (native `SlotTakeAll` writes
+Hidden = 2 on the same instance; class default is Hidden too) does not re-place it, even when set Collapsed (overlay shrinks to 1141×144, strip stays).
+Native class chain of the panel: `W_QuickLootPanel_C` → `QuickLootPanel` (`SlotTakeAll`, `SlotTakeOne`, `SetActor`, `UpdateTooltip`, `m_Actor`) →
+`RootWidget` → `UserWidget`. Hotkey icons (`UI/Framework/W_HotkeyIcon`, native `HotkeyIcon`): HBox binding-name text · `TextBlockHoldPrompt`
+«(удерживайте)» · primary/secondary icon; the hold prompt is switched natively by the action's long-press flag and per instance by
+`HoldPromptVisibility` (default 3; 1 hides it); also `ShowOnlyText`, `BindingLabel`, `NoPresentationVisibility`.
+Stand rule (2026-10-28 23:52 crash): never keep a killed creature in `_G` — the dead actor is destroyed and the next call on it is an access
+violation in UE4SS; read its location BEFORE `KillCharacter`.
 Для замера модуль можно открыть пультом: `ActivateModule(FName('ContainerInfo'), true, false)` + `SetObject(<труп>, 0)` у `WBP_ContainerInfo_C`; игра
 его сама не закроет — после замера `ActivateModule(FName('ContainerInfo'), false, false)` (2026-10-28: плашка висела на экране владельца:
 «а почему плашка обыска трупа открыта? я не смотрю на труп»).
