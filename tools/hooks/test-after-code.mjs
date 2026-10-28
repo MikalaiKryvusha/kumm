@@ -40,9 +40,12 @@
 //                 Edit of this very file, and its own --selftest run cleared the debt («прогон засчитан … непроверенного кода нет»);
 //                 2026-10-25 16:4x — живая раскатка `deploy-localization.py` записала `deploy:deploy-localization.py [game]` и полный приказ;
 //                 2026-10-26 13:11 — `cp` пака JaarFishing в ConanSandbox/Mods записал `deploy:copy JaarFishing.pak`, запуск launch-bg.ps1 погасил
+//                 2026-10-28 22:3x — живое событие Stop на дереве KUMM: блок с 15 кейсами без прогона (матрица ПКМ 27.10, F3–F5, C1)
 // [TESTED: 2026-10-25 · --selftest 14 steps green, the mutant without the debt write red on 6 points; live order and clear in this session —
 //  testcases/reports/2026-10-25_test-after-code-hook.md]
-import { readFileSync, writeFileSync, mkdtempSync, rmSync, mkdirSync } from 'node:fs';
+// 2026-10-28: открытые кейсы — --selftest зелёный (свежий файл: S3 blocked и F3 [NOT-TESTED] найдены, старый файл и pass/fail — нет; Stop
+// блок, повтор без правок — тишина, после прогона — тишина); мутант «openCases пуст» красный в 2 точках.
+import { readFileSync, writeFileSync, mkdtempSync, rmSync, mkdirSync, readdirSync, statSync, utimesSync } from 'node:fs';
 import { join, resolve, relative, isAbsolute, extname, dirname, basename } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
@@ -121,6 +124,36 @@ export function cleared(command, debt) {
 const FULL = (files) => `test-after-code · ТЫ НАПИСАЛ КОД — ПРОТЕСТИРУЙ ЕГО (слово владельца: «Агент не просит разрешения у владельца!» · цикл «код - тесты - правки - код - тесты - правки»). Непроверено: ${files}. Шаги, сам, без вопроса владельцу: 1) TESTING_FRAMEWORK.md — «What the word "test" means» и «The testing activities»; 2) что код должен делать и какой результат ОЖИДАЕШЬ — кейсы в testcases/TC_*.md; 3) прогон на живом продукте по пути пользователя (мод — игра под замком машины, журнал и кадр читать; движок — тесты ядра и стенд fixture-pack; скрипт — запуск самого файла на настоящих данных); 4) сравни ОЖИДАЕМОЕ с ФАКТИЧЕСКИМ; 5) косяк — почини и прогони снова. Синтаксис, --check и линтер — гигиена, не тест. Можно писать всю пачку кода и тестировать пачкой — но до остановки. Проверить нельзя — \`node tools/hooks/test-after-code.mjs --waive "<почему>"\`.`;
 const SHORT = (n, files) => `test-after-code · непроверенного кода: ${n} (${files}) — протестируй прогоном, прежде чем остановиться или сказать «готово».`;
 
+// Открытые кейсы (2026-10-28): долг game гасит любой запуск игры, и остановка смотрела только на него — кейс S3 «дзинь только герою»
+// остался `blocked`, а хук молчал (`[OWNER]` «почему тебя не дёрнул хук?» · 2026-10-28 22:2x). Теперь остановка читает и таблицы кейсов:
+// строка со статусом `[NOT-TESTED]` или `blocked` в TC_*.md, тронутом за последние CASE_WINDOW_H часов, — тот же долг. [NOT-TESTED]
+const CASE_WINDOW_H = 6;
+const OPEN_STATUS = /^\s*(\[NOT-TESTED\]|blocked\b)/i;
+
+/** Cases still waiting for a run: `<file>:<case id>` from the status column of every table in recently touched TC files. */
+export function openCases(root, now) {
+  const dir = join(root, 'testcases');
+  const since = Date.parse(now) - CASE_WINDOW_H * 3600e3;
+  let names = [];
+  try { names = readdirSync(dir).filter((n) => /^TC_.*\.md$/.test(n)); } catch { return []; }
+  const out = [];
+  for (const n of names) {
+    const p = join(dir, n);
+    if (statSync(p).mtimeMs < since) continue;
+    let col = -1;
+    for (const line of readFileSync(p, 'utf8').split(/\r?\n/)) {
+      if (!line.startsWith('|')) { col = -1; continue; }
+      const cells = line.split('|').slice(1, -1).map((c) => c.trim());
+      if (col < 0) { col = cells.findIndex((c) => /^status$/i.test(c)); continue; }
+      if (/^:?-{3,}/.test(cells[0] || '')) continue;
+      if (OPEN_STATUS.test(cells[col] || '')) out.push(`${n.replace(/\.md$/, '')}:${cells[0]}`);
+    }
+  }
+  return out;
+}
+
+const CASES = (ids) => `test-after-code · КЕЙСЫ БЕЗ ПРОГОНА: ${ids.slice(0, 8).join(', ')}${ids.length > 8 ? ` и ещё ${ids.length - 8}` : ''}. Прогони их сейчас по пути пользователя и запиши статус с наблюдением. Нужен владелец (его руки, его экран) — позови: \`node .kaif/tools/contour/review.mjs --call "<что нужно>"\` и впиши кейс в STATUS «ждёт владельца»; «blocked» без зова — не исход.`;
+
 function list(debt) {
   const keys = Object.keys(debt);
   return keys.slice(0, 6).join(', ') + (keys.length > 6 ? ` и ещё ${keys.length - 6}` : '');
@@ -142,12 +175,13 @@ export function handle(event, root = ROOT, sandbox = SANDBOX, now = new Date().t
   const name = event.hook_event_name || '';
   if (name === 'Stop') {
     const keys = Object.keys(s.debt);
-    if (!keys.length) { s.lastStopDebt = ''; save(root, s); return null; }
-    const sig = keys.sort().join('|') + '@' + Math.max(...Object.values(s.debt).map((d) => Date.parse(d.at)));
+    const cases = openCases(root, now);
+    if (!keys.length && !cases.length) { s.lastStopDebt = ''; save(root, s); return null; }
+    const sig = keys.sort().join('|') + '@' + (keys.length ? Math.max(...Object.values(s.debt).map((d) => Date.parse(d.at))) : 0) + '#' + cases.join('|');
     if (event.stop_hook_active && s.lastStopDebt === sig) return null;   // asked already, nothing new written — no endless loop
     s.lastStopDebt = sig;
     save(root, s);
-    return { decision: 'block', reason: FULL(list(s.debt)) };
+    return { decision: 'block', reason: [keys.length ? FULL(list(s.debt)) : '', cases.length ? CASES(cases) : ''].filter(Boolean).join(' ') };
   }
   if (/^(Write|Edit|MultiEdit)$/.test(tool)) {
     const path = (event.tool_input || {}).file_path;
@@ -273,6 +307,23 @@ if (argv[0] === '--selftest') {
     bash('bash SvarogsDream/tools/deploy-hot.sh');
     bash('bash SvarogsDream/tools/h.sh "call X"');
     if (Object.keys(load(dir).debt).length) fails.push('the Svarog hot deploy is no longer cleared by its console');
+    // 2026-10-28: a case left `blocked` / `[NOT-TESTED]` in a fresh TC file is debt too (S3 «дзинь» — the hook stayed silent)
+    mkdirSync(join(dir, 'testcases'), { recursive: true });
+    const tc = join(dir, 'testcases', 'TC_x.md');
+    const old = join(dir, 'testcases', 'TC_old.md');
+    const nowD = new Date('2026-06-15T12:00:00.000Z');
+    writeFileSync(old, '| # | Case | Status |\n|---|---|---|\n| Z9 | old | [NOT-TESTED] |\n');
+    utimesSync(old, new Date(nowD - 24 * 3600e3), new Date(nowD - 24 * 3600e3));
+    writeFileSync(tc, '| # | Case | Steps | Status | Observation |\n|---|---|---|---|---|\n| Q1 | a | b | pass | seen |\n| S3 | ding | rmb | blocked | owner at the machine |\n| F3 | empty | look | [NOT-TESTED] | |\n| Q2 | c | d | fail (build 3) → build 4 | x |\n');
+    utimesSync(tc, nowD, nowD);
+    const oc = openCases(dir, '2026-06-15T12:00:00.000Z').join(',');
+    if (oc !== 'TC_x:S3,TC_x:F3') fails.push(`open cases read wrong (${oc}; want TC_x:S3,TC_x:F3, an old file and pass/fail rows ignored)`);
+    const st = ev({ hook_event_name: 'Stop', stop_hook_active: false });
+    if (st?.decision !== 'block' || !st.reason.includes('TC_x:S3')) fails.push('Stop with a blocked case not blocked');
+    if (ev({ hook_event_name: 'Stop', stop_hook_active: true }) !== null) fails.push('repeated Stop on the same open cases blocked again (loop)');
+    writeFileSync(tc, '| # | Case | Status |\n|---|---|---|\n| S3 | ding | pass |\n| F3 | empty | pass |\n');
+    utimesSync(tc, nowD, nowD);
+    if (ev({ hook_event_name: 'Stop', stop_hook_active: false }) !== null) fails.push('Stop with every case run still blocked');
   } finally { rmSync(dir, { recursive: true, force: true }); }
   console.log(fails.length ? `❌ selftest FAILED — ${fails.join(' · ')}` : '✅ selftest OK — code edit → full then short order; --check/py_compile do not clear; game/engine/tool runs clear their own kind; Stop blocks with debt, not twice without new edits; .md and files outside ai_sandbox are not debt');
   process.exit(fails.length ? 1 : 0);
