@@ -160,6 +160,18 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 отпускания ПКМ поле менялось, а реальный угол камеры оставался 53,8° — ни `SetFieldOfViewTarget(0)`, ни `FieldOfViewChange(0.1,0)`, ни
 `SetCameraFov(107.5)` его не вернули (контроллер неактивен, 2026-10-26 23:56). Удержание через перехваты снято (`KrinikArrowAim` 0.2.0);
 следующий путь — данные `FieldOfViewSubstateTrigger` у героя (EXP-0349).
+**Как контроллер считает обзор** (байткод 3.0.1, `kismet-trace.py` по выгрузке `retoc-5.8 to-legacy` пака игры, 2026-10-28): `SetFieldOfViewTarget(Mod)`
+пишет `FieldOfView = Mod` и `FieldOfViewTarget` = `GetFieldOfViewDefault()` (это `UserSettingsLibrary.GetFOV` — обзор из настроек игрока, 107,5) ×1
+при Mod 0 · ×0,5 при Mod 1 (прицел) · ×0,95 при Mod 2. `FieldOfViewChange(Duration, Target)` при новом Mod ставит `FieldOfViewChangeDuration` =
+`FieldOfViewChangeCurrent` = Duration, задержку `Linger` = Duration, `RevertOnExpire` = false и зовёт `SetFieldOfViewTarget`. Тик, пока
+`ChangeCurrent > 0`: обзор камеры = Lerp(`GetFieldOfViewTarget()`, текущий обзор камеры, Current/Duration) через `BPI_FieldOfView.SetCameraFov`
+владельца, затем Current −= dt. Поле `FieldOfViewTarget` тик читает каждый кадр перехода — запись поля в начале перехода меняет итоговый угол,
+вне перехода не действует. Множитель один на оба вида; свой обзор от первого лица — запись поля в перехвате (`KrinikArrowAim`, `fp_aim_fov_scale`).
+`FieldOfViewChange(d, 0)` при цели уже 0 — пустой вызов (так «не помог» 26.10, EXP-0349); при цели 1 — переход к обычному обзору за d.
+После выстрела монтаж натяжки доигрывает сам, отпускание ПКМ его не прерывает: конец уведомления обзора раньше конца монтажа (родные 6,08,
+пробные 6,346) роняет зум при зажатой ПКМ (кейс N1 2026-10-28), поэтому `KrinikBowFixes` тянет уведомление до 7,05, а выход из прицела по
+отпусканию ПКМ после выстрела делает `KrinikArrowAim`. UE4SS `ExecuteWithDelay(16)` срабатывает раз в кадр игры (≈29 мс при 4K) — время
+переходов в модах считать по `os.clock`, не по числу шагов.
 Ширина ленты следа — `ParticleModuleSize_0.StartSize.Table.Values` шаблона (запечено 0,10,0; один модуль на четыре ленты; правится в памяти).
 Лента расплывалась к хвосту («разрастается по толщине чем дальше летит стрела»): частицы рождаются в шаре R 3 см
 (`ParticleModuleLocationPrimitiveSphere_0.StartRadius`) и сносятся 20 см/с (`ParticleModuleVelocity_0.StartVelocity` 0,−20,0);

@@ -91,6 +91,39 @@
 
 ## Entries
 
+### EXP-0358 · 2026-10-28 · ✅ · #conan #localization #locres #crc #official-names
+**Context:** 48 place names in Era of Trials' desecration table had to show the game's OFFICIAL Russian, not ours.
+**Result:** ✅ — `.locres` stores no source text, only `str_crc32(source)`; hashing each English name and looking it up across the
+ru-`.locres` files of `pakchunk0` (Exiles_UI, Exiles_Items, …; `repak get`) gave 47 of 48. Our own `Game.locres` alone gave 1 of 48 — the
+place names live in the game's other localization targets.
+**Lesson:** an official translation of a game term is found by the CRC of its English source in ALL the game's ru-`.locres`, not only in the
+target we build. `ConanExiles/_config/localization/eot-desecration-ru.tsv` (header has the recipe).
+
+### EXP-0357 · 2026-10-28 · ❌→✅ · #conan #ue4ss #lua #timing #camera
+**Context:** a 500 ms smooth shift of the FP camera arm by `ExecuteWithDelay(16)` steps, progress = step / steps.
+**Result:** ❌ the shift took ≈900 ms in, ≈800 out — UE4SS fires a delayed callback once a game frame (≈29 ms at 4K), not every 16 ms.
+✅ progress by `os.clock()` (wall time on Windows) — ≈450 / 400 ms, measured.
+**Lesson:** time-based effects in UE4SS mods take progress from a clock, never from a step count. And a mod that detects a state by the
+geometry it ITSELF changes must allow for its own change: the FP test «camera ≤ 10 cm from the arm» failed once our 18 cm offset was on —
+the second aim after a shot counted as third person (case P2).
+
+### EXP-0356 · 2026-10-28 · ❌→✅ · #conan #montage #notify #camera #bow
+**Context:** yesterday's handover said «end the bow FOV notify at ≈6,35 s (QueueWindow) to cure the 0,9 s release lag».
+**Result:** ❌ with the notify ending at 6,346 the zoom-out on the shot came back (107° for ≈450 ms while RMB held): after the shot the draw
+montage plays on by itself, RMB does not interrupt it, so ANY end before the montage end drops the zoom while held. ✅ notify to the end
+(7,05) + the release exit in `KrinikArrowAim` (one native `FieldOfViewChange(0.1, 0)` when the controller's mod is still 1): release lag
+114–204 ms in every TP/FP case.
+**Lesson:** a timing fix written into a handover is a hypothesis — measure it before building on it; and when one data point must serve two
+input states (held / released), keep the data for the held one and add a single event-driven call for the other.
+
+### EXP-0355 · 2026-10-28 · ✅ · #sound #ffmpeg #loudness #owner-taste
+**Context:** 15 free «ding» files for the full-draw sound — owner: normalize, cut silence, ≤ 4 s after the ding, fade.
+**Result:** ✅ `ConanExiles/_config/sound-prep.py`: integrated LUFS fails on short clips (7 dB spread — pings hit the peak ceiling); max
+momentary loudness (−16) + a −1 dB limiter gives ≤ 2 dB; leading silence by −35 dB (a −48 dB hiss floor kept 0,4 s otherwise); strikes split
+by a 12 dB rise in 200 ms. Taste («softer strike, smoother fade») — five variants A–E on one page, the owner picked C in minutes.
+**Lesson:** short sound effects are matched by max momentary loudness, not integrated; a taste ask about a sound gets a page of variants of
+the same sound, never a single «improved» file.
+
 ### EXP-0354 · 2026-10-27 · ❌→✅ · #conan #devkit #mod #modinfo #modlist
 **Context:** first mod built by the kit (`KrinikBowFixes`, montage override + sound) and deployed by hand.
 **Result:** ❌→✅ — three traps in a row: `modinfo.json` copied from the kit's empty `KrinikPatch` had `devkitRevisionNumber` 0 → «Mod is too

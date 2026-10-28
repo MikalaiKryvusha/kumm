@@ -102,6 +102,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **2026-10-28 16:4x — в работе (чат после /resume):** (а) звук полного заряда — владелец выбрал №15 (`koiroylers-cheerful-ping`), просил мягче удар
+> и плавнее хвост; из вариантов A–E (`ConanExiles/_config/sounds/charge-full-15-soft/`) взят C (`[OWNER]` «С можно брать» · 2026-10-28) →
+> `_config/sounds/charge_full.wav`, `SRC_WAV` кита переставлен, правка кита и сборка идут; (б) `KrinikBowFixes`: уведомление обзора 0…6,346 с (правка кита запущена), `KrinikArrowAim`: от первого лица
+> зум ×0,8 (≈86°) и плавный сдвиг 500 мс — выложено в игру, кейсы `testcases/TC_conan_bow_fp_smooth_zoom_2026-10-28.md` [NOT-TESTED]; идея 21 отложена.
+>
 > **С ЭТОГО НАЧАТЬ НОВЫЙ ЧАТ — камера лука по ПКМ** (`[OWNER]` «после того, как прогонишь - закрывать чат начинай, в другом чате будем продолжать
 > с этого места» · 2026-10-27 ≈20:45; порядок владельца 20:1x: «баг с камерой по ПКМ» → «смещение камеры при прикладке в первом лице» → «звук полного
 > натяжения»). Летопись этого чата — запись 2026-10-27 21:08. Матрица кейсов — `testcases/TC_conan_bow_camera_rmb_matrix_2026-10-27.md`.
