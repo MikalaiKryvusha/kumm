@@ -37,7 +37,8 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── .kaif/                         # framework core: kaif.json, kaif-core.mjs, spheres/, tools/ (10 lints + contour/), hooks/
 ├── .claude/skills/ .agents/skills/ .grok/skills/ .cline/skills/ .roo/  # 37 skills × 5 agent systems
 ├── CLAUDE.md · AGENTS.md · .clinerules/ · .roo/rules/                 # context pointers
-├── .claude/settings.json · .codex/hooks.json                          # KAIF refresh hooks (wired 2026-10-16); the project's own hooks live in the git-ignored .claude/settings.local.json
+├── .claude/settings.json · .codex/hooks.json                          # KAIF refresh hooks (wired 2026-10-16) + context-budget (2026-10-28); the project's other own hooks live in the git-ignored .claude/settings.local.json
+├── .claude/hooks/context-budget.mjs  # context-window watcher: 70 % warn · 75 % /end-chat-soft · 85 % /end-chat-force (self-check: --check)
 └── mods/                          # gitignored — never in this repo
 
 <pack root>/                       # SEPARATE repo, e.g. D:\Games\Palworld Mods
