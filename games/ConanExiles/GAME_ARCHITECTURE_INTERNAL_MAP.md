@@ -88,6 +88,11 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 WBP_ContainerInfo` (pakchunk1110; моды сборки его не переопределяют): `Overlay_Main` → `OverlaySlot_5` (плашка `Border_Underlay` → `Content`: имя,
 «Труп», `ActionTutorial` «нажмите E…»; отступы слева и справа 20) и `OverlaySlot_3` (`W_QuickLootPanel`, отступ слева 500 — место окна жёстко от левого
 края плашки). Модуль ставит на экран модульная система, `W_OnScreenInfoContainer` только включает его по имени (`ContainerInfo` и др.).
+Окно быстрого лута `W_QuickLootPanel`: сетка `InventoryGridView` (слот `VerticalBox_1.VerticalBoxSlot_2`, отступы 10) и внизу
+`WidgetSwitcherTooltips` — ряд навигации (индекс 0, при открытии) и ряд действий с предметом (индекс 1, после выбора колесом); переключатель
+меряется по активному ряду, и окно меняло ширину при прокрутке (2026-10-28) — `KrinikUIFixes` даёт сетке отступы 23, ширину задаёт сетка.
+Атака в воздухе (2026-10-28, план 37): `BaseBPCombat::ActionTry` отказывает при `InSubstate(8)` с причиной `IsFalling` — поэтому лук не
+стреляет в прыжке; `IsFalling` ещё в `DodgeTry` и ubergraph `BasePlayerChar` (поиск — `uaj grepfn <ассет> <версия> <строка>`).
 Для замера модуль можно открыть пультом: `ActivateModule(FName('ContainerInfo'), true, false)` + `SetObject(<труп>, 0)` у `WBP_ContainerInfo_C`; игра
 его сама не закроет — после замера `ActivateModule(FName('ContainerInfo'), false, false)` (2026-10-28: плашка висела на экране владельца:
 «а почему плашка обыска трупа открыта? я не смотрю на труп»).
