@@ -59,9 +59,28 @@ PNG никогда). Подсказку хука context-budget — исполн
 - **Отправка в KAIF** — `node .kaif/kaif-core.mjs report bugs/KAIF/NN_*.md` (сначала `--dry-run`), без спроса.
 - **Оболочки** — Windows PowerShell 5.1 (нет `&&`, `??`, `?.`) и Git Bash. `Set-Content` — только с `-Encoding utf8` (ANSI 1251).
 
-## 3. Где остальное
+## 3. Досье окружения — факты машины (Environment dossier)
 
-Машина (ОС, железо, экран, оболочки, PresentMon) — `ENVIRONMENT_DOSSIER.md`. Стенды, маршруты, инструменты — `HOUSE_RULES_REFERENCE.md`:
+Снято 2026-08-15, уточнялось до 2026-10-25; факты старше четырёх недель — гипотезы: перед опорой опросить заново (`/refresh-context`, шаг досье).
+
+| Факт | Значение | Опрос |
+|---|---|---|
+| ОС | Windows 11 Pro 10.0.26200 | `(Get-CimInstance Win32_OperatingSystem).Caption` |
+| Процессор, память | AMD Ryzen 7 5700G, 8/16, 31,9 ГБ | `Get-CimInstance Win32_Processor` |
+| Видеокарта | RTX 5070 Ti (Gigabyte), 16 ГБ, драйвер 621.01, предел 300 Вт; `AdapterRAM` врёт (4 ГБ) — верить `nvidia-smi` | `nvidia-smi --query-gpu=name,driver_version,memory.total,power.limit --format=csv,noheader` |
+| Экран | телевизор 3840×2160 @ 144 Гц; рабочий стол 300 % DPI — опрос без `SetProcessDPIAware` видит 1280×720 | `Get-CimInstance Win32_VideoController \| % {$_.CurrentHorizontalResolution, $_.CurrentRefreshRate}` |
+| Замер FPS | только `D:\work\ai_sandbox\_tools\PresentMon-2.5.1-x64.exe`, своя `--session_name`; зависшая сессия — `logman stop <имя> -ets`; оболочка агента повышена | `& '<path>' --help` |
+| Автоблокировка | выключена | `(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System').InactivityTimeoutSecs` |
+| `TEMP` | `D:\Temp`; дом Claude `%USERPROFILE%\.claude` → `F:\Claude\.claude` | `[Environment]::GetEnvironmentVariable('TEMP','User')` |
+| Оболочки | Windows PowerShell 5.1 (`pwsh` нет) · Git Bash 5.2.21 · `cmd` | `$PSVersionTable`; `bash --version` |
+| Кодировки | консоль UTF-8; ANSI 1251 — `Set-Content`/`Add-Content` только с `-Encoding utf8`; PowerShell `ru-RU` | `[Console]::OutputEncoding.WebName` |
+| Инструменты | Node v24.15.0 · npm 10.8.2 · git 2.43.0 · gh 2.95.0 · `winget` | `node -v; git --version; gh --version` |
+| `tar` / `curl` | PowerShell: `tar` — bsdtar (`D:\…` — удалённый хост), `curl` — псевдоним `Invoke-WebRequest`; Git Bash: GNU `tar`, настоящий `curl` | `Get-Command tar,curl`; `type -p tar curl` |
+| Концы строк | `core.autocrlf = true` | `git config --get core.autocrlf` |
+
+## 4. Где остальное
+
+Стенды, маршруты, инструменты — `HOUSE_RULES_REFERENCE.md`:
 
 | Раздел | Что там |
 |---|---|

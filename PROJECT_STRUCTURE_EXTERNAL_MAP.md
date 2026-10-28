@@ -29,9 +29,8 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── PROJECT_STRUCTURE_EXTERNAL_MAP.md · PROJECT_ARCHITECTURE_INTERNAL_MAP.md
 ├── REQUIREMENTS_FRAMEWORK.md · TESTING_FRAMEWORK.md · BUG_FIXING_FRAMEWORK.md
 ├── EXPERIENCE.md · PROJECT_HISTORY.md · KAIF_FRAMEWORK.md
-├── HOUSE_RULES.md                 # house rules (KAIF 2.8+, Russian): the owner's rules as statements + the most critical routes — read at entry
+├── HOUSE_RULES.md                 # house rules (KAIF 2.8+): the owner's rules as statements, the most critical routes, the environment dossier — read at entry
 ├── HOUSE_RULES_REFERENCE.md       # reference, on demand: external systems, stands, routes and recipes, Tools table (§2, §3, §5, §6)
-├── ENVIRONMENT_DOSSIER.md         # the machine's facts (OS, hardware, screen, shells, encodings) — on demand; moved out of HOUSE_RULES 2026-10-28
 ├── plans/ ideas/ bugs/ researches/ interviews/ homeworks/ reports/   # KAIF knowledge dirs
 ├── testcases/reports/             # run reports, one per executed run: <YYYY-MM-DD>_<work>.md (KAIF 2.7)
 ├── tools/                         # project-own tools: scrub-identity.mjs + check-claim-before-evidence.mjs (both run by hooks/pre-commit), hooks/*.mjs (Claude Code hooks: no-backslash-heredoc, stamp-gate, style-gate, testcase-gate, voice-reminder, no-permission-question, knowledge-hook — the memory hook, test-after-code — the testing hook from Unliminium: a code edit is a debt until a run of its kind), kaif-update-*.mjs
