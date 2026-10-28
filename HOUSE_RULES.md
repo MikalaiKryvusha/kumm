@@ -1,90 +1,97 @@
-# Правила дома — KUMM
+# House rules — KUMM
 
-> Местные правила проекта (уровень 4 таксономии, `AGENT_GUIDE.md`). Правило — утверждение: агент ему верит и исполняет. История правил
-> и дословные слова владельца — в `PROJECT_HISTORY.md`. Справочник (стенды, досье машины, маршруты, инструменты) — в
-> `HOUSE_RULES_REFERENCE.md`: открывать поиском, когда задача касается этого места.
+> The project's local rules (tier 4 of the document taxonomy, `AGENT_GUIDE.md`). A rule is a statement: the agent trusts it and follows it.
+> The history of the rules and the owner's verbatim words live in `PROJECT_HISTORY.md`. Stands, routes and tools — `HOUSE_RULES_REFERENCE.md`:
+> open it by search when a task touches that place.
 
-## 1. Правила (The owner's standing rules)
+## 1. Rules (The owner's standing rules)
 
-1. **Знания записываются в момент понимания, тем же ходом.** Новое — новой строкой, изменённое — правкой на месте, устаревшее — удалить.
-   Куда: видение — `GOAL.md`; путь — `MASTER_PLAN.md`; задача — её план в `plans/`; правило — этот файл; стенд, маршрут, инструмент —
-   `HOUSE_RULES_REFERENCE.md`; движок — карты проекта; игра — `games/<Игра>/GAME_*_MAP.md`; разведка — `researches/`. Перед вопросом
-   владельцу о подсистеме — прочитать её строку карты; строки нет — сначала написать её.
-2. **Правило записывается утверждением, и записываются только действительно важные и критичные инструкции.** Что делать — по шагам. Без обоснований, без истории, без цитат: история правила и слова
-   владельца — в `PROJECT_HISTORY.md`.
-3. **Дымовой прогон нового — с видео; интерфейс — обязательно.** Клип — `bash SvarogsDream/tools/rec_clip.sh <имя> <секунд> "<команда
-   пульта>"…` (HDR рабочего стола до записи выключить — `powershell -File SvarogsDream/tools/hdr.ps1 off`). Клип смотреть до вердикта:
-   лист кадров рядом с клипом, переходы — `ffmpeg -ss <с> -t <с> -vf fps=10,scale=960:-1,tile=…`; что видно — строкой в кейс. Кейс
-   интерфейса без просмотренного клипа не получает `pass`.
-4. **Помощников (Agent, workflow) одновременно — не больше двух.** Большую работу резать на куски и отдавать очередью.
-5. **Замер кадров — только после слова владельца «кино выключено».** Спросить один раз за сеанс голосом (`SvarogsDream/tools/voice_say.py`,
-   фраза файлом в `SvarogsDream/_harness/say.txt`) и ждать ответа; его слово действует до обратного. Замер — отдельный шаг в конце
-   пачки. В отчёте — строка «кино владельца: выключено, его слово <время>»; замер без неё — черновой.
-6. **Моды любой игры уважительны к процессору.** Работа на игровом потоке — по событию игры, не опросом по таймеру; поиск по сцене
-   (`FindAllOf`, `FindFirstOf`, обход виджетов) — не чаще события и никогда в покадровом цикле. Мод меряет себя: `os.clock` вокруг
-   обработчиков, сумма и худший вызов — в журнал раз в минуту. Приёмка правки — облёт A-B-A: медиана `MsCPUBusy` и рывки не хуже, чем
-   без мода. Бюджет — `MASTER_PLAN.md`.
-7. **Чужие моды чинятся нативно.** Есть у мода своя настройка — в поставке меняется её значение по умолчанию. Нет — правка прямо в его
-   паке (`retoc to-legacy` → UAssetGUI JSON → правка → `retoc to-zen`, приёмы `ConanExiles/_config/devkit/build-level-mod.py`), скриптом
-   рядом с паком, чтобы накатить заново после обновления мода; строки в байткоде — так же. Правленый мод помечается **KRINIK MODIFIED** в
-   поставке (витрина, список модов, запись `modpack.json`). Lua-правка интерфейса — только если ассет не поддаётся: один раз, без
-   опроса, с замером A-B.
-8. **Окно отчёта о падении убирается сразу.** Игра в моём прогоне упала → `Get-Process CrashReportClient | Select Id, StartTime,
-   MainWindowTitle` → `Stop-Process -Id <PID>` (по PID, не по имени; повисшую игру — тоже по PID). В отчёте прогона — «окно отчёта о
+1. **The agent talks to the owner in Russian in chat and writes all project and KAIF documentation in English.** The owner's verbatim
+   quotes stay Russian; interviews (the owner answers inside them) stay Russian.
+2. **Knowledge is written down the moment it is understood, in the same move.** New — a new line; changed — an edit in place; outdated —
+   deleted. Where: vision — `GOAL.md`; path — `MASTER_PLAN.md`; a task — its plan in `plans/`; a rule — this file; a stand, route or tool —
+   `HOUSE_RULES_REFERENCE.md`; the engine — the project maps; a game — `games/<Game>/GAME_*_MAP.md`; recon — `researches/`. Before asking the
+   owner about a subsystem, read its map line; no line — write it first.
+3. **A rule is written as a statement, and only genuinely important and critical instructions are written.** What to do — in steps. No
+   rationale, no history, no quotes: a rule's history and the owner's words go to `PROJECT_HISTORY.md`.
+4. **A smoke run of anything new is recorded on video; UI — always.** Clip — `bash SvarogsDream/tools/rec_clip.sh <name> <seconds>
+   "<remote command>"…` (turn desktop HDR off before recording — `powershell -File SvarogsDream/tools/hdr.ps1 off`). Watch the clip before
+   the verdict: the frame sheet next to the clip; transitions — `ffmpeg -ss <s> -t <s> -vf fps=10,scale=960:-1,tile=…`; what is seen — one
+   line in the case. A UI case without a watched clip does not get `pass`.
+5. **At most two helpers (Agent, workflow) at a time.** Cut big work into pieces and queue them.
+6. **Frame-time measurements only after the owner's word "the movie is off".** Ask once per working session, by voice
+   (`SvarogsDream/tools/voice_say.py`, the phrase in the file `SvarogsDream/_harness/say.txt`), and wait for the answer; his word holds until
+   he says otherwise. The measurement is a separate step at the end of a batch. The report carries the line «кино владельца: выключено, его
+   слово <время>»; a measurement without it is a draft.
+7. **Mods of any game respect the CPU.** Work on the game thread — on a game event, never by timer polling; scene searches (`FindAllOf`,
+   `FindFirstOf`, widget walks) — no more often than an event and never in a per-frame loop. A mod measures itself: `os.clock` around its
+   handlers, the sum and the worst call to its log once a minute. Accepting an edit — an A-B-A flight: median `MsCPUBusy` and stutters no
+   worse than without the mod. The budget — `MASTER_PLAN.md`.
+8. **Other authors' mods are fixed natively.** The mod has its own setting — change its default value in our shipment. Otherwise — edit its
+   pak directly (`retoc to-legacy` → UAssetGUI JSON → edit → `retoc to-zen`, techniques in `ConanExiles/_config/devkit/build-level-mod.py`),
+   by a script next to the pak, so it can be re-applied after a mod update; strings in bytecode — the same way. An edited mod is marked
+   **KRINIK MODIFIED** in the shipment (storefront, mod list, its `modpack.json` entry). A Lua UI fix — only when the asset will not yield:
+   once, no polling, with an A-B measurement.
+9. **A crash-report window is removed at once.** The game crashed in my run → `Get-Process CrashReportClient | Select Id, StartTime,
+   MainWindowTitle` → `Stop-Process -Id <PID>` (by PID, never by name; a hung game — also by PID). The run report carries «окно отчёта о
    падении закрыто, PID …».
-9. **Объём работы — в часах** («≈ 1 ч», «2–3 ч»). Слово «чат» единицей объёма не бывает.
-10. **Тестовый стенд агент готовит сам, без помех.**
-    1. До первого кейса — шаг «стенд» в файле кейсов: место, существо, его поведение, оружие, время суток, погода — и как это ставится пультом.
-    2. Место — без врагов, спутников и стройки рядом (телепорт пультом).
-    3. Герой — под кейс: бессмертие включать и выключать, стрелы и снаряжение насыпать пультом, луки менять, выносливость — пультом.
-    4. Существо — спавнить нужного класса на нужном расстоянии; обездвижить, сделать мирным или убить — как требует кейс. Цель без
-       существа — стена или скала перед героем.
-    5. Действие кейса — самому.
-    6. Помеха (враг бьёт героя, звук боя, камера уехала) — убрать и повторить; кейс на помехе не засчитывается.
-    7. Приём стенда — строкой в карту игры.
-11. **Нужный CLI-инструмент агент ставит сам** (`winget`, `pip install --user`, `npm i -g`, `cargo install`), проверяет версией и записывает
-    строкой в справочник.
-12. **Пока игра открыта — шаги сопровождаются голосом.**
+10. **Work is estimated in hours** («≈ 1 ч», «2–3 ч»). A "chat" is never a unit of effort.
+11. **The agent prepares its own test stand, free of interference.**
+    1. Before the first case — a "stand" step in the case file: place, creature, its behaviour, weapon, time of day, weather — and how each
+       is set up by the remote.
+    2. The place — no enemies, companions or construction nearby (teleport by the remote).
+    3. The hero — fitted to the case: god mode on and off, arrows and gear spawned by the remote, bows swapped, stamina by the remote.
+    4. A creature — spawned, of the right class at the right distance; frozen, made peaceful or killed as the case needs. A target without
+       a creature — a wall or a rock in front of the hero.
+    5. The case's action — done by the agent itself.
+    6. Interference (an enemy hits the hero, combat noise, the camera drifted) — remove it and repeat; a case run under interference does
+       not count.
+    7. How the stand was set up — one line in the game map.
+12. **The agent installs a CLI tool it needs by itself** (`winget`, `pip install --user`, `npm i -g`, `cargo install`), checks it by its
+    version and writes one line into the reference.
+13. **While the game is open, steps are narrated by voice.**
 
-Правила владельца в `AGENT_GUIDE.md`: «Notes from the human» (не спрашивать разрешения на свою работу · две карты на каждую игру · рабочий
-язык — русский · отправка в KAIF без спроса), «Git workflow» (обезличивание — кодом и хуком), «Document & text hygiene» (картинки — WebP,
-PNG никогда). Подсказку хука context-budget — исполнять (`CLAUDE.md`).
+The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · two maps for every game · KAIF
+feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images — WebP, never PNG). The
+context-budget hook's hint is obeyed (`CLAUDE.md`).
 
-## 2. Самое частое из справочника
+## 2. Most critical routes
 
-- **Коммит** — три вызова: `git add <файлы по одному>` · `git commit -F <файл сообщения>` · `git push`; без `-A`.
-- **Пак Конана** — после каждого коммита `git push local main` (голое зеркало на F); удалённый `origin` пака не трогать.
-- **Машина общая с KAGO.** Игра и нагрузка — только под замком: `node D:/work/ai_sandbox/_tools/machine-lock.mjs take --who kumm --what
-  <зачем> --minutes <n>` → работа → `release --who kumm` (код 3 — занят: работать офлайн). Кто запустил игру — закрывает её сразу после прогона.
-- **Отправка в KAIF** — `node .kaif/kaif-core.mjs report bugs/KAIF/NN_*.md` (сначала `--dry-run`), без спроса.
-- **Оболочки** — Windows PowerShell 5.1 (нет `&&`, `??`, `?.`) и Git Bash. `Set-Content` — только с `-Encoding utf8` (ANSI 1251).
+- **Commit** — three calls: `git add <files one by one>` · `git commit -F <message file>` · `git push`; never `-A`.
+- **Conan pack** — after every commit `git push local main` (the bare mirror on F); never touch the pack's `origin` remote.
+- **The machine is shared with KAGO.** Game and load — only under the lock: `node D:/work/ai_sandbox/_tools/machine-lock.mjs take --who
+  kumm --what <why> --minutes <n>` → work → `release --who kumm` (exit 3 — taken: work offline). Whoever launched the game closes it right
+  after the run.
+- **KAIF feedback** — `node .kaif/kaif-core.mjs report bugs/KAIF/NN_*.md` (`--dry-run` first), without asking.
+- **Shells** — Windows PowerShell 5.1 (no `&&`, `??`, `?.`) and Git Bash. `Set-Content` — only with `-Encoding utf8` (ANSI 1251).
 
-## 3. Досье окружения — факты машины (Environment dossier)
+## 3. Environment dossier — the machine's facts (Environment dossier)
 
-Снято 2026-08-15, уточнялось до 2026-10-25; факты старше четырёх недель — гипотезы: перед опорой опросить заново (`/refresh-context`, шаг досье).
+Taken 2026-08-15, refined up to 2026-10-25; facts older than four weeks are hypotheses — re-probe before relying on them (`/refresh-context`,
+the dossier step).
 
-| Факт | Значение | Опрос |
+| Fact | Value | Probe |
 |---|---|---|
-| ОС | Windows 11 Pro 10.0.26200 | `(Get-CimInstance Win32_OperatingSystem).Caption` |
-| Процессор, память | AMD Ryzen 7 5700G, 8/16, 31,9 ГБ | `Get-CimInstance Win32_Processor` |
-| Видеокарта | RTX 5070 Ti (Gigabyte), 16 ГБ, драйвер 621.01, предел 300 Вт; `AdapterRAM` врёт (4 ГБ) — верить `nvidia-smi` | `nvidia-smi --query-gpu=name,driver_version,memory.total,power.limit --format=csv,noheader` |
-| Экран | телевизор 3840×2160 @ 144 Гц; рабочий стол 300 % DPI — опрос без `SetProcessDPIAware` видит 1280×720 | `Get-CimInstance Win32_VideoController \| % {$_.CurrentHorizontalResolution, $_.CurrentRefreshRate}` |
-| Замер FPS | только `D:\work\ai_sandbox\_tools\PresentMon-2.5.1-x64.exe`, своя `--session_name`; зависшая сессия — `logman stop <имя> -ets`; оболочка агента повышена | `& '<path>' --help` |
-| Автоблокировка | выключена | `(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System').InactivityTimeoutSecs` |
-| `TEMP` | `D:\Temp`; дом Claude `%USERPROFILE%\.claude` → `F:\Claude\.claude` | `[Environment]::GetEnvironmentVariable('TEMP','User')` |
-| Оболочки | Windows PowerShell 5.1 (`pwsh` нет) · Git Bash 5.2.21 · `cmd` | `$PSVersionTable`; `bash --version` |
-| Кодировки | консоль UTF-8; ANSI 1251 — `Set-Content`/`Add-Content` только с `-Encoding utf8`; PowerShell `ru-RU` | `[Console]::OutputEncoding.WebName` |
-| Инструменты | Node v24.15.0 · npm 10.8.2 · git 2.43.0 · gh 2.95.0 · `winget` | `node -v; git --version; gh --version` |
-| `tar` / `curl` | PowerShell: `tar` — bsdtar (`D:\…` — удалённый хост), `curl` — псевдоним `Invoke-WebRequest`; Git Bash: GNU `tar`, настоящий `curl` | `Get-Command tar,curl`; `type -p tar curl` |
-| Концы строк | `core.autocrlf = true` | `git config --get core.autocrlf` |
+| OS | Windows 11 Pro 10.0.26200 | `(Get-CimInstance Win32_OperatingSystem).Caption` |
+| CPU, memory | AMD Ryzen 7 5700G, 8/16, 31.9 GB | `Get-CimInstance Win32_Processor` |
+| GPU | RTX 5070 Ti (Gigabyte), 16 GB, driver 621.01, power limit 300 W; `AdapterRAM` lies (4 GB) — trust `nvidia-smi` | `nvidia-smi --query-gpu=name,driver_version,memory.total,power.limit --format=csv,noheader` |
+| Screen | TV 3840×2160 @ 144 Hz; desktop at 300 % DPI — a probe without `SetProcessDPIAware` sees 1280×720 | `Get-CimInstance Win32_VideoController \| % {$_.CurrentHorizontalResolution, $_.CurrentRefreshRate}` |
+| Frame-time capture | only `D:\work\ai_sandbox\_tools\PresentMon-2.5.1-x64.exe`, its own `--session_name`; a hung session — `logman stop <name> -ets`; the agent's shell is elevated | `& '<path>' --help` |
+| Auto-lock | off | `(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System').InactivityTimeoutSecs` |
+| `TEMP` | `D:\Temp`; Claude home `%USERPROFILE%\.claude` → `F:\Claude\.claude` | `[Environment]::GetEnvironmentVariable('TEMP','User')` |
+| Shells | Windows PowerShell 5.1 (no `pwsh`) · Git Bash 5.2.21 · `cmd` | `$PSVersionTable`; `bash --version` |
+| Encodings | console UTF-8; ANSI 1251 — `Set-Content`/`Add-Content` only with `-Encoding utf8`; PowerShell `ru-RU` | `[Console]::OutputEncoding.WebName` |
+| Tools | Node v24.15.0 · npm 10.8.2 · git 2.43.0 · gh 2.95.0 · `winget` | `node -v; git --version; gh --version` |
+| `tar` / `curl` | PowerShell: `tar` is bsdtar (`D:\…` = a remote host), `curl` is an alias of `Invoke-WebRequest`; Git Bash: GNU `tar`, real `curl` | `Get-Command tar,curl`; `type -p tar curl` |
+| Line endings | `core.autocrlf = true` | `git config --get core.autocrlf` |
 
-## 4. Где остальное
+## 4. Where the rest is
 
-Стенды, маршруты, инструменты — `HOUSE_RULES_REFERENCE.md`:
+Stands, routes, tools — `HOUSE_RULES_REFERENCE.md`:
 
-| Раздел | Что там |
+| Section | What is there |
 |---|---|
-| §2 Внешние системы и доступ | Nexus через отладочный Chrome, GitHub `kumm`, исток KAIF |
-| §3 Стенды, окружения и устройства | проверки движка: тесты ядра, `fixture-pack.mjs`, `-ListMods`, `-Deploy -DryRun`, `-Verify` |
-| §5 Маршруты и рецепты | коммит, пуш паков и GitHub, KAIF, замок KAGO, ревизии дисков, Dungeon Siege II, автоматизация Windows (Windows-MCP, ilspycmd, профили NVIDIA), досье игр, прогон Сварога |
-| §6 Инструменты проекта | движок и KAIF; хуки Claude Code; Конан — пульт `KrinikAgentRemote`, бенч-облёт, интерфейс модов в фоне, байткод (`kismet-trace`, `patch-mod-asset`, `uaj`), приборы 26.10, звуки, `wait-input-idle`, `check-lua-game-thread`; Сварог — `gpt_edit`, `portrait_recenter`; GTA SA |
+| §2 External systems and access | Nexus through the debug-port Chrome, GitHub `kumm`, the KAIF origin |
+| §3 Stands, environments and devices | engine checks: core tests, `fixture-pack.mjs`, `-ListMods`, `-Deploy -DryRun`, `-Verify` |
+| §5 Routes and recipes | commit, pushing packs and GitHub, KAIF, the KAGO lock, disk revisions, Dungeon Siege II, Windows automation (Windows-MCP, ilspycmd, NVIDIA profiles), game dossiers, the Svarog run |
+| §6 Tools of this project | engine and KAIF; Claude Code hooks; Conan — the `KrinikAgentRemote` remote, the flight bench, mod UI in the background, bytecode (`kismet-trace`, `patch-mod-asset`, `uaj`), the 26.10 instruments, sounds, `wait-input-idle`, `check-lua-game-thread`; Svarog — `gpt_edit`, `portrait_recenter`; GTA SA |

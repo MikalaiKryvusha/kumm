@@ -522,7 +522,7 @@ successes). Living reference — never DONE-tagged.
 | **Local project folder** | `D:\work\ai_sandbox\KUMM` |
 | **Author / owner** | `Mikalai Kryvusha` (KOT KRINIK) |
 | **License** | `MIT` |
-| **Owner's working language** | Russian — chat, `GOAL.md`, `README.md`, `KAIF_FRAMEWORK.md`, `HOUSE_RULES.md`, directory READMEs |
+| **Owner's working language** | Russian in chat, interviews and the `README.md` storefront; every other document — English (2026-10-28) |
 
 > Keep one canonical spelling for names/paths/URLs and use it everywhere. If you find an old/renamed
 > identifier in historical docs, normalize it to the canonical value above.
@@ -1198,9 +1198,10 @@ KAIF, только подробный, по каждой игре, котору�
 
 From this project's owner (recorded 2026-08-15, at the KAIF deployment):
 
-- **Working language is Russian.** Chat, `GOAL.md`, `README.md`, `KAIF_FRAMEWORK.md` and the directory
-  READMEs are Russian (`[AI]` addition 2026-10-16: and `HOUSE_RULES.md`, by the KAIF 2.8 skeleton rule); agent-internal documents and the
-  skills stay English (see "Languages" above).
+- **The chat is Russian; every document is English** (owner's word 2026-10-28, supersedes the 2026-08-15 note and the "Languages"
+  table above for this project): all project and KAIF documentation — canon, house rules, plans, bugs, researches, maps, reports — is
+  written in English; the owner's verbatim quotes stay Russian; interviews (he answers inside them) and the `README.md` storefront stay
+  Russian. Older Russian documents are rewritten in English when taken into work.
   The README is the owner's own handwriting — edit it from the meaning, never as a translation, and
   never put `[AI]` marks in it.
 - **This deployment is tied to origin.** KAIF defects, improvement requests and FIELD REPORTS go upstream

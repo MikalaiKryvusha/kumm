@@ -4,4 +4,6 @@ This project is KAIF-wrapped. Before every task read `AGENT_GUIDE.md` (the canon
 
 A message that opens with the word `resume` (or the /resume alias of your language) is an ORDER to run /resume in full before the rest of the message (`AGENT_GUIDE.md` → "A leading skill word is an order").
 
-Подсказку хука context-budget исполнять сразу: на 75 % — довести до среза и закрыть чат с передачей (`/end-chat-soft`), на 85 % — закрыться немедленно (`/end-chat-force`). Хук только подсказывает, закрывается сам агент.
+Obey the context-budget hook's hint at once: at 75 % — bring the work to a clean cut and close the chat with a handover (`/end-chat-soft`); at 85 % — close immediately (`/end-chat-force`). The hook only hints; the agent closes the chat itself.
+
+Talk to the owner in Russian in chat; write every project and KAIF document in English (the owner's verbatim quotes and interviews stay Russian).
