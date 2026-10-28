@@ -12,6 +12,8 @@
 stays 0.003 (or any value whose steps are not seen), and the leaf shadows do not flicker. Search order: levers that do not touch the sun
 (recon R3 DLSS model/mode — now Balanced, preset F; R4 `ResolutionLodBiasDirectional` −1.0 → −1.5/−2.0; R7 `UseReceiverMaskDirectional`), then any
 cvar that keeps VSM pages from invalidating on a small light rotation; verify each by a 60 fps clip under palms and the owner's eye.
+The bar is other games: `[OWNER]` «как в других ИГРАХ!!!!» · «и плавно, и не мерцает!» — first recon step: how shipped UE5 games with a moving sun and
+VSM (and their community fixes) keep both — Epic's guidance on time-of-day with VSM, the settings those games ship.
 
 ## Goal vector and acceptance
 
