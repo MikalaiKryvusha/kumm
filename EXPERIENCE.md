@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0359 · 2026-10-28 · ❌→✅ · #sound #ffmpeg #reverb #owner-taste
+**Context:** the owner asked for «a longer echo» on a synthesized ding; I lengthened the `aecho` taps (up to 350 ms) and the file.
+**Result:** ❌ the log-scale waveform sheet showed the audible tail ending at ≈0,9 s in the «long» and the normal variants alike — `aecho` has
+no feedback, it adds a few discrete reflections, never a decaying tail. ✅ convolution with a synthesized hall response (noise × exp decay to
+−60 dB over RT60, one-pole low-pass) — tails to 1,2–1,5 s, visible on a common time axis.
+**Lesson:** a reverb TAIL is convolution (or a feedback network), not taps; and a sound variant is checked by a waveform sheet on ONE common time
+axis before the owner hears it — per-file scaling hid the defect at first.   → link: `ConanExiles/_config/sound-synth.py` (`hall_reverb`)
+
 ### EXP-0358 · 2026-10-28 · ✅ · #conan #localization #locres #crc #official-names
 **Context:** 48 place names in Era of Trials' desecration table had to show the game's OFFICIAL Russian, not ours.
 **Result:** ✅ — `.locres` stores no source text, only `str_crc32(source)`; hashing each English name and looking it up across the
