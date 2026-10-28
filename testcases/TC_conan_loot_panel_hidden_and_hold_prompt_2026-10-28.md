@@ -66,9 +66,9 @@ the same key with «…ресурсы\nили нажмите {0}…» by `_confi
 
 | # | Case | Steps | Expected | Status | Observation |
 |---|---|---|---|---|---|
-| T1 | The override wins over the vanilla target | deploy «Krinik Russian Translation» (`-Only`), launch, corpse with loot, frame | two lines: «Разделайте труп и получите ресурсы» / «или нажмите [E], чтобы забрать предметы»; the E icon in place | [NOT-TESTED] | |
-| T2 | Strip vs window | same frame | the narrower strip still left of the window with a gap; nothing clipped | [NOT-TESTED] | |
-| T3 | Corpse without loot | kappa corpse (empty) | «Разделать труп» unchanged (another key), strip centred | [NOT-TESTED] | |
+| T1 | The override wins over the vanilla target | deploy «Krinik Russian Translation» (`-Only`), launch, corpse with loot, frame | two lines: «Разделайте труп и получите ресурсы» / «или нажмите [E], чтобы забрать предметы»; the E icon in place | fail (layout) | 00:34: the override wins (our Game target over vanilla Exiles_UI), but the row «text · E · text» keeps «или нажмите» as a 2nd line of the first piece, left of the icon (`t1_strip.webp`); reverted 00:38 (Game.locres md5 273467aa back) |
+| T2 | Strip vs window | same frame | the narrower strip still left of the window with a gap; nothing clipped | skipped | moot after T1 fail — the override is reverted; re-run with the next layout variant |
+| T3 | Corpse without loot | kappa corpse (empty) | «Разделать труп» unchanged (another key), strip centred | pass (part) | the override touches only key DA4E…; «Разделать труп» (another key) and the centred strip seen on the empty corpses 00:23 (`l2b_strip.webp`) — the override itself reverted |
 
 **Item 35 — what the run showed (00:05–00:07):** `Overlay_Main` of `WBP_ContainerInfo` spans the whole screen width, so the strip's `Left`
 alignment pins it to the SCREEN's left edge (+ padding 120) in every state: with loot it happens to stand left of the window; on a corpse
