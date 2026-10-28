@@ -106,9 +106,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **ПЕРВЫМ В НОВОМ ЧАТЕ (закрытие 2026-10-28 21:59) — раскатать и проверить три готовые правки:** (1) окно быстрого лута постоянной ширины, правый
 > край по кромке панели квеста — `KrinikUIFixes` сборка 3 (`W_QuickLootPanel`: отступы сетки 10 → 23; пак уже в `_unpacked/KrinikUIFixes`, в игру ещё
 > НЕ раскатан), кейсы Q1, Q2; (2) мод лука ОДНИМ модом — `KrinikConanArchery` = пак кита + Lua в `_unpacked/KrinikConanArchery/{*.pak, ue4ss/}`, одна запись
-> манифеста (`[OWNER]` «Нельзя всё, что по стрельбе из лука - в один мод собрать?»); в ките мод переименован, активный — он; сборка пака шла в 21:5x
-> (первая упала на куке по памяти, EXP-0361; лог `D:/Temp/claude/kit-archery-build2.log`, вывод `D:/Temp/claude/kit-archery-out`) — нет пака →
-> `python -I -X utf8 _config/devkit/kit-buildmod.py KrinikConanArchery <вывод>` при закрытой игре; раскатка: убрать из игры `Mods/KrinikBowFixes.pak` и
+> манифеста (`[OWNER]` «Нельзя всё, что по стрельбе из лука - в один мод собрать?»); в ките мод переименован, активный — он; пак собран 22:01 (вторая попытка; первая упала на куке по памяти, EXP-0361) и лежит в
+> `_unpacked/KrinikConanArchery/KrinikConanArchery.pak`; раскатка: убрать из игры `Mods/KrinikBowFixes.pak` и
 > его строку `modlist.txt`, затем `Deploy-ModPack.ps1 -Deploy -Only KrinikConanArchery` и `-Only KrinikUIFixes` (по одному, EXP-0347); (3) «дзинь»
 > полного заряда только герою (`[OWNER]` «Можно врагам не дзинкать, а только для героя игрока?») — уведомление звука в монтаже немое, играет
 > `KrinikConanArchery` по второму `BP_SetChargeHold`; кейс S3. Все кейсы — `testcases/TC_conan_corpse_prompt_left_of_quickloot_2026-10-28.md`.
