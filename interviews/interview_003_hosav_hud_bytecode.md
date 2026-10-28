@@ -89,8 +89,8 @@
 | 296 | {percent}% ( {time} )  | — | только подстановки и числа — переводить нечего · W_SmoothHP ×3 |
 | 297 | {percent}% ( {time} )   | — | только подстановки и числа — переводить нечего · W_SmoothHP ×1 |
 | 298 | {xpCurrent} / {xpNeeded} | — | только подстановки и числа — переводить нечего · Old,W_SmoothHP_Horse ×3 |
-| 299 | {xpCurrent}{suffix1} / {xpMax}{suffix2} ({xpNeeded}{suffix3}) | Опыт: {xpCurrent}{suffix1} / {xpMax}{suffix2} ({xpNeeded}{suffix3}) | строка опыта HUD · W_SmoothHP ×1 · «Опыт:» вместо значка XP — `[OWNER]` «и убрать яблочко XP, а написать текстом Опыт:» · 2026-10-26 ≈15:33 |
-| 300 | {xpCurrent}{suffix1} / {xpNeeded}{suffix2} | Опыт: {xpCurrent}{suffix1} / {xpNeeded}{suffix2} | короткий вид строки опыта · W_SmoothHP ×1 · то же слово владельца |
+| 299 | {xpCurrent}{suffix1} / {xpMax}{suffix2} ({xpNeeded}{suffix3}) | XP: {xpCurrent}{suffix1} / {xpMax}{suffix2} ({xpNeeded}{suffix3}) | строка опыта HUD · W_SmoothHP ×1 · текстом вместо значка XP — `[OWNER]` «и убрать яблочко XP, а написать текстом Опыт:» · 2026-10-26 ≈15:33; слово заменено: `[OWNER]` «в моде худа замени "Опыт" на "XP"» · 2026-10-28 ≈20:33 |
+| 300 | {xpCurrent}{suffix1} / {xpNeeded}{suffix2} | XP: {xpCurrent}{suffix1} / {xpNeeded}{suffix2} | короткий вид строки опыта · W_SmoothHP ×1 · те же слова владельца (2026-10-26, 2026-10-28) |
 
 ## Три вопроса, где решает владелец
 

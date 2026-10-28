@@ -84,6 +84,10 @@ Hosav `W_UI_SettingsButton` — отдельный виджет поверх э�
 `IsActorInInteractableRange(InActor)` щедрая (истина с 9,8 м и для камеры); свежевание — `HarvestableComponent_v2_C`. Подсветку даёт сферический
 луч `UpdateHighlightTarget` от камеры (`TraceSphereRadius` 20, длина `InteractionDistance` 330 + `InteractionDistanceThirdPersonBonus`).
 Мод CorpseStripper (`CorpseStripper_MC_C`) тоже работает с трупами.
+Плашка над трупом и окно быстрого лута (2026-10-28, баг 64 п. 32) — ОДИН родной виджет, модуль `ContainerInfo` = `UI/Widgets/HUD/Interact/
+WBP_ContainerInfo` (pakchunk1110; моды сборки его не переопределяют): `Overlay_Main` → `OverlaySlot_5` (плашка `Border_Underlay` → `Content`: имя,
+«Труп», `ActionTutorial` «нажмите E…»; отступы слева и справа 20) и `OverlaySlot_3` (`W_QuickLootPanel`, отступ слева 500 — место окна жёстко от левого
+края плашки). Модуль ставит на экран модульная система, `W_OnScreenInfoContainer` только включает его по имени (`ContainerInfo` и др.).
 Подсветка цели (байткод кита 2.2, `FunCombat_PlayerController::UpdateHighlightTarget`, читается `uaj func <ассет кита> VER_UE5_6 <функция>` +
 скретч-разборщик): в третьем лице игра САМА ставит `InteractionDistanceThirdPersonBonus` = длине штанги `ThirdPersonSpringArm`; сферический луч
 `InteractionDistance + бонус`; каждое попадание проходит `CheckLineOfSight(actor, ImpactPoint + вперёд_камеры·10, компонент, экземпляр)`: цель =
@@ -310,6 +314,13 @@ Simple Minimap ставит карту во время игры: центр сл
 | штанга `SocketOffset` | — | X −100, Z 65; наклон камеры 4° |
 
 Подробности зума и его ловушек — `ConanExiles/docs/07-зум-камеры.md`.
+
+Лук и камера (замеры 2026-10-28, `_config/fov-sampler.lua`): от первого лица камера на штанге `FirstPersonCameraArm` у головы, и поза
+выстрела опускает её вместе с головой на 10–11 см (покой 73,9 см над героем, поза 63,0–63,6); `KrinikArrowAim` возвращает высоту сдвигом
+штанги (`fp_hip_offset` Z 11). Обзор лука ведёт `BP_PlayerFovController`: цель 0/1 (`SetFieldOfViewTarget`), уведомление монтажа
+`BP_FieldOfViewChangeForDuration`; при новом натяжении с зажатой ПКМ монтаж перезапускается, и между концом старого уведомления (цель 0) и
+началом нового (цель 1) проходит кадр — без удержания обзор успевает отъехать 75° → 80,8°.
+Lua-моды UE4SS ждут только отложенными действиями игрового потока (`ExecuteInGameThreadWithDelay`): рабочий поток задержек роняет игру (баг 66).
 
 ## Где наши моды встают в игру
 

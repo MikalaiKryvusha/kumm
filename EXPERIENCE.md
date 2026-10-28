@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0360 · 2026-10-28 · ❌→✅ · #conan #ue4ss #lua #threads #crash #known-trap
+class: known-trap-walked-again
+**Lesson:** a lesson written only into ONE mod's comment does not reach the next mod: the camera mod knew since 08.09 that `ExecuteWithDelay` →
+`ExecuteInGameThread` crashes UE4SS (#1180, EXP-0062), yet `KrinikArrowAim` of this week hopped that way on every draw and shot, and rapid fire
+crashed the owner's game (`Ref was not function`, then an all-UE4SS stack). Our Lua mods use only game-thread delayed actions
+(`ExecuteInGameThreadWithDelay`, `LoopInGameThreadWithDelay`); the rule is a guard now, run before every deploy of Lua mods.
+**Repro:** 2026-10-28 20:06:44–55, nine rapid LMB shots in FP → crash; bugs/66.
+mechanized: `ConanExiles/_config/check-lua-game-thread.py` (red 31 before the fix, 0 after)
+
 ### EXP-0359 · 2026-10-28 · ❌→✅ · #sound #ffmpeg #reverb #owner-taste
 **Context:** the owner asked for «a longer echo» on a synthesized ding; I lengthened the `aecho` taps (up to 350 ms) and the file.
 **Result:** ❌ the log-scale waveform sheet showed the audible tail ending at ≈0,9 s in the «long» and the normal variants alike — `aecho` has
