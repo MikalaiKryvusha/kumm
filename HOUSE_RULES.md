@@ -108,7 +108,7 @@
 
 | Система | Что агент там делает | Точка входа | Где лежит доступ |
 |---|---|---|---|
-| Nexus Mods | читает страницы модов, сверяет версии, скачивает файлы — на бесплатном аккаунте | Chrome на отладочном порту (CDP): `node kumm.mjs launch` · `login` · `status` | вход владельца в профиле Chrome `%LOCALAPPDATA%\nexus-cdp\profile`; пароля агент не видит |
+| Nexus Mods | читает страницы модов, сверяет версии, скачивает файлы — на бесплатном аккаунте; страницы, которые простой загрузчик не отдаёт (403), читает `node kumm.mjs eval <url> <js> --game <слаг>` | Chrome на отладочном порту (CDP): `node kumm.mjs launch` · `login` · `status` · `close`. `launch` открывает окно на весь экран — пока владелец за машиной, поднимать тот же профиль свёрнутым: `chrome.exe --remote-debugging-port=9222 --user-data-dir=%LOCALAPPDATA%\nexus-cdp\profile --start-minimized about:blank` (2026-10-28) | вход владельца в профиле Chrome `%LOCALAPPDATA%\nexus-cdp\profile`; пароля агент не видит |
 | GitHub — движок `kumm` | коммиты и пуш в `main` | `https://github.com/MikalaiKryvusha/kumm.git` | диспетчер учётных данных Windows (`credential.helper = manager`) и вход `gh` |
 | GitHub — исток KAIF | тикеты, запросы на улучшение, полевые отчёты | `node .kaif/kaif-core.mjs report <файл>` | тот же вход `gh` |
 

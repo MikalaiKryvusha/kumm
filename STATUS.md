@@ -85,8 +85,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Decisions the agent must not make alone (brand/UX/architecture), or actions only the human can do
 > (test on real hardware, external accounts). Filed in `interviews/` and `homeworks/`.
 
-- 🅿️ **Стрельба из лука «по-обливионски» — в дальнем ящике по слову владельца 12.09.** Не поднимать, пока он
-      не скажет. Разведка — `researches/conan-archery/README.md`, запись в досье Конана.
+- 🎯 **Стрельба из лука «по-обливионски» — поднята владельцем 2026-10-28** (обсуждение, не работа: `[OWNER]` «пока обсуждаем»): скорость стрелы — конановская,
+      падение — как в Обливионе. Ванильные `ArrowGravityScale` 0,55 и `ArrowInitialSpeedMultiplier` 5000 (Remastered) найдены; ждёт его выбора — что делает
+      натяжка (сила выстрела, как в Remastered, или прямее полёт, как в Конане). Разведка — `researches/conan-archery/README.md`.
 - 🧹 Уборка дисков 2026-10-25 — «решать вам» отчётов `C:\REVISIONS\…_ИТОГ.md`, `D:\REVISIONS\…_ИТОГ.md` на владельце (летопись, 2026-10-25 22:15).
 - 🔴 **НЕ запускать `Clear-Quarantine.ps1 -Stamp 2026-08-17_2335 -Execute`**: в карантине единственный
       экземпляр сохранения Elden Ring и личное видео `ref.mp4`.
