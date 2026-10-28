@@ -90,7 +90,14 @@ WBP_ContainerInfo` (pakchunk1110; моды сборки его не переоп
 края плашки). Модуль ставит на экран модульная система, `W_OnScreenInfoContainer` только включает его по имени (`ContainerInfo` и др.).
 Окно быстрого лута `W_QuickLootPanel`: сетка `InventoryGridView` (слот `VerticalBox_1.VerticalBoxSlot_2`, отступы 10) и внизу
 `WidgetSwitcherTooltips` — ряд навигации (индекс 0, при открытии) и ряд действий с предметом (индекс 1, после выбора колесом); переключатель
-меряется по активному ряду, и окно меняло ширину при прокрутке (2026-10-28) — `KrinikUIFixes` даёт сетке отступы 23, ширину задаёт сетка.
+меряется по активному ряду, и окно меняло ширину при прокрутке (2026-10-28). Замер 22:05 (пульт, ширина по содержимому, единицы UMG): ряд
+навигации `NavTooltip` 539,7, ряд действий `LootActionTooltip` 650,4 (значок 30 · отступ 10 · подпись · отступ 20 …; у «Забрать все»
+`LootButtonLabel_1` отступ справа 0 — на экране «Забрать всеEsc»), слот переключателя — отступы 35/10/35/10. Масштаб интерфейса при 4K —
+2,09 px на единицу (`WidgetLayoutLibrary:GetViewportScale`). Окно стоит по центру ≈ x 2966 (4K), кромка панели квеста — 3717–3722.
+`KrinikUIFixes` сборки 4: сетка 35, ряд подсказок 20, зазор перед Esc 20 — ширину задаёт сетка, правый край на кромке квеста.
+Убить NPC пультом для трупа: `KillCharacter(HitLocation, killerNameInput, killer, OverridingCauseOfDeath, StateChangeDelay, DamageCauser)` —
+`x:KillCharacter(0, FText(''), <герой>, {}, 0.0, <герой>)` (`BaseBPCombat_C`); модуль лута на трупе — `SetObject(<Corpse_C>, 0)`, где
+`Corpse_C` — владелец `DismemberedBodySkeletalMesh_C` (`GetOwner()`).
 Атака в воздухе (2026-10-28, план 37): `BaseBPCombat::ActionTry` отказывает при `InSubstate(8)` с причиной `IsFalling` — поэтому лук не
 стреляет в прыжке; `IsFalling` ещё в `DodgeTry` и ubergraph `BasePlayerChar` (поиск — `uaj grepfn <ассет> <версия> <строка>`).
 Для замера модуль можно открыть пультом: `ActivateModule(FName('ContainerInfo'), true, false)` + `SetObject(<труп>, 0)` у `WBP_ContainerInfo_C`; игра

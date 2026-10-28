@@ -103,6 +103,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **СДЕЛАНО 2026-10-28 22:00–22:18 (отчёт `testcases/reports/2026-10-28_conan-quickloot-width-archery-rollout.md`):** в игре `KrinikConanArchery`
+> (пак 22:01, `KrinikBowFixes` убран) и `KrinikUIFixes` сборки 4 — окно быстрого лута одной ширины, правый край на кромке квеста (Q1b, Q2b pass;
+> сборка 3 ошиблась масштабом, EXP-0362), «Забрать все» и Esc с зазором. Active.txt кита — у `KrinikUIFixes`. Баг 06 — DONE.
+> **Осталось из передачи дел:** S3 («дзинь» только герою) — blocked: тянет лук только настоящая ПКМ (`mouse-seq.ps1`, окно вперёд), а владелец
+> был за машиной; прогнать, когда простой ввода ≥ 2 мин, или по отзыву владельца после его стрельбы.
+>
 > **ПЕРВЫМ В НОВОМ ЧАТЕ (закрытие 2026-10-28 21:59) — раскатать и проверить три готовые правки:** (1) окно быстрого лута постоянной ширины, правый
 > край по кромке панели квеста — `KrinikUIFixes` сборка 3 (`W_QuickLootPanel`: отступы сетки 10 → 23; пак уже в `_unpacked/KrinikUIFixes`, в игру ещё
 > НЕ раскатан), кейсы Q1, Q2; (2) мод лука ОДНИМ модом — `KrinikConanArchery` = пак кита + Lua в `_unpacked/KrinikConanArchery/{*.pak, ue4ss/}`, одна запись
@@ -255,8 +261,6 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
   ≈10:22); до DONE — увидеть подмену земли при ходьбе.
 - 🔧 `bugs/14_pickcard_exact_name_pins_old_file.md` (починено 2026-10-15, ждёт живого `kumm check`) — `kumm check` держится за старый файл, если автор когда-то
   вписал версию в имя файла (Bosses My New Besties, 02.10). Баг самого движка; план починки и кейс — в документе.
-- 🔧 `bugs/06_deploy_only_truncates_modlist.md` (починено 2026-10-15 на стенде, ждёт живой раскатки `-Only`) — `-Only` молча обрезает `modlist.txt` и выключает остальные
-  моды. Баг самого движка (`Deploy-ModPack.ps1`), воспроизводится каждый раз.
 - 🟡 `bugs/07_conan_probe_kills_ue4ss_lua_layer.md` — симптом снят выключением мода, причина не найдена.
 - 🔧 `bugs/08_conan_config_overrides_code.md` — починено, ждёт подтверждения владельцем.
 - 🔬 `bugs/04_conan_camera_microjitter.md`, `bugs/05_conan_loadasset_delayed_abort.md` — разведка, без починки.

@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0362 · 2026-10-28 · ❌→✅ · #conan #umg #widget #layout #measure
+**Context:** build 3 of `KrinikUIFixes` widened the quick-loot grid so the window would keep one width and sit on the quest panel's edge;
+the padding was derived from one frame difference (+55 px → «+13 units per side», i.e. 4,2 px per unit).
+**Result:** ❌ the window still changed width (open 2236–3697, after the wheel 2205–3727 at 4K): the real scale is 2,09 px per unit, and the
+widest row was never measured. ✅ read live by the pult: `GetViewportScale` (2,09) and every row's `GetDesiredSize` with its slot paddings —
+the action row 650,4 + 2 × 35 decided the width; the padding follows from those numbers.
+**Lesson:** a UMG size fix starts from the live layout numbers (viewport scale, desired width of every competing child, slot paddings) read
+by the pult — never from a pixel difference divided by a guessed scale. `games/ConanExiles/GAME_ARCHITECTURE_INTERNAL_MAP.md` (quick loot).
+mechanized: no
+
 ### EXP-0361 · 2026-10-28 · ❌ · #conan #devkit #cook #memory
 **Lesson:** the kit cook (`kit-buildmod.py`, `UnrealEditor-Cmd -run=Cook`) can die with «Cook stalled probably because of memory settings being too
 restrictive and triggering garbage collection» while the game runs beside it (2026-10-28 21:5x, KrinikConanArchery; three earlier cooks that evening
