@@ -53,7 +53,7 @@
 The engine works and the owner uses it daily for Palworld. It checks its pure core (the first test since 2026-09-08, four since 2026-10-14):
 `node test-parse-archive.mjs`, `test-archive-roundtrip.mjs`, `test-pick-card.mjs`, `test-help-commands.mjs` (exit 0 = green), and the game
 half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deploy -DryRun`, a real `-Deploy` and `-Verify`, paks after `-Only`:
-20 checks since 2026-10-15, all 20 passed on 2026-10-16). Not covered yet: the live Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
+21 checks since 2026-10-28 — a new pak's place under `-Only`; all 21 passed on 2026-10-28). Not covered yet: the live Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
 
 | Phase | Status | What's there |
 |-------|--------|--------------|
