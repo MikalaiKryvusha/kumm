@@ -6,6 +6,13 @@
 2026-09-16 on 2.1.1 («я стою под пальмами, и тени от их листьев мерцают»).
 **Fixing:** this session — a new recon (`researches/conan-shadow-flicker/2026-10-29_recon.md`), then A/B runs by its plan, the owner's eye decides.
 
+## The owner's requirement (2026-10-29, after the 2.0 revert)
+
+`[OWNER]` «МОЙ ВЫБОР: ПЛАВНОЕ СОЛНЦЕ И НЕ МЕРЦАЮЩИЕ ТЕНИ!!!!!!!!» — both, neither bought with the other: `DynamicSky.SolarUpdateAngleDelta`
+stays 0.003 (or any value whose steps are not seen), and the leaf shadows do not flicker. Search order: levers that do not touch the sun
+(recon R3 DLSS model/mode — now Balanced, preset F; R4 `ResolutionLodBiasDirectional` −1.0 → −1.5/−2.0; R7 `UseReceiverMaskDirectional`), then any
+cvar that keeps VSM pages from invalidating on a small light rotation; verify each by a 60 fps clip under palms and the owner's eye.
+
 ## Goal vector and acceptance
 
 Avoid: leaf shadows on sand under palms visibly jitter frame to frame. Done when the owner, standing under palms at 4K, says the shadows do

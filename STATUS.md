@@ -118,8 +118,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   when `WBP_Crosshair_C` is created (SB4 pass 00:44).
 > - 🔴 bug 67 palm shadows — cause found (`DynamicSky.SolarUpdateAngleDelta`: 2.0 calm / 0.003 flicker, the owner's eye both ways), but 2.0 was
 >   REVERTED (pack 6a12183): 0.003 is there for a smooth sun — `[OWNER]` «мы же специально делали так, чтобы солнце плавно по небу двигалось...».
->   Trade-off is his (asked in chat 00:5x). Next: 0.1 / 0.25 / 0.5 under palms (60 fps clip, sand without surf, his eye), and levers that do not touch
->   the sun (recon R3 DLSS preset, R4 LOD bias). EXP-0369.
+>   His answer: `[OWNER]` «ПЛАВНОЕ СОЛНЦЕ И НЕ МЕРЦАЮЩИЕ ТЕНИ!!!!!!!!» — FIRST in the next chat: keep 0.003, find levers that do not touch the sun
+>   (bug 67 → «The owner's requirement»), each by a 60 fps clip under palms and his eye. EXP-0369.
 > - Cases still without a run (need the game, not the owner): `TC_conan_corpse_prompt_left_of_quickloot_2026-10-28.md` F4 (chest), F5 (1080p), S3/H2/H3
 >   rows; `TC_conan_bow_fp_smooth_zoom_2026-10-28.md` H2, H3 (FP draw cancelled / RMB mid-draw, real input); SB3 (ten mixed draws) of the loot file.
 > - 🔴 item 36 corpse prompt on two lines: our `Game.locres` CAN override the vanilla key (`vanilla-override.py`, `vanilla-overrides-ru.tsv`), but
