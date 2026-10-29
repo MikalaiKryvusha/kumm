@@ -125,6 +125,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > multicast (no Lua binding); BP handlers DO hook. Idea under test: both buttons into the bar's `ButtonContainerLeft` in a row (a second
 > `W_UI_SettingsButton` instance gives the fishing look + a hookable click → open the fishing panel through the EFT button, which stays collapsed).
 > 22:08 my remote move of Hosav's button CRASHED the game — the owner had just closed the hub and was playing (EXP-0372; crash window closed by PID).
+> 22:14–22:2x (the owner: «комп твой, я пока не буду играть · работай автономно · Игру в форграунд выводи при тестах»), remote experiment
+> `ConanExiles/_config/fishbtn-experiment.lua`: ✅ the ROW works — Hosav's `WBP_ButtonBase` and a second Hosav widget's button moved into the
+> bar's `ButtonContainerLeft`, slot padding 15 (as `CloseButton`), label by `SetLabel(FText(...))`, the EFT plate collapsed — frame `fish7_bar.webp`: two
+> framed buttons in a row on the line of «Закрыть»; the moved ORIGINAL Hosav button clicks fine (its BP handler fires → `HosavUIsettings`). ❌ the CLONE's
+> click never reaches the BP handler (3 attempts: before/after `AddToViewport` of the clone; the button lights up on hover) — its component delegate binding
+> is not live. Also: the original Hosav button must be re-inserted on every «Снаряжение» (the bar is rebuilt per tab); pick the EFT button whose parent is
+> valid; `FindFirstOf('W_UI_SettingsButton_C')` may return the clone. NEXT (re-understand before a 4th try): the fishing look without a clone click —
+> (a) a vanilla `WBP_ButtonBase` as the CONTENT of the EFT `Btn_Open` (transparent style; the click stays the mod's own), hover glow to check;
+> (b) the EFT button moved next to Hosav as is, restyled by properties (brush, font) — the owner's eye decides between (a) and (b) if both work.
 > No game runs; the machine lock released.
 > Then the «Хар-ки» perk rows (bug 64 item 46): rows hold ≈ 2 lines, «Берсерк» needs 4, «Кровожадный берсерк» 5 — a fixed-height overlap, not a jump
 > (frame `stats.jpg` 21:37; row layout in the game map).
