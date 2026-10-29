@@ -398,3 +398,11 @@ Lua-моды UE4SS ждут только отложенными действия
   8 = 100, 11 = 1; **14–40 all 0 — Agility (19, the 2.x id) included.** Either the hero's attributes are really 0 after the 3.0 attribute reset
   (`ConanCharacter.ShowAttributeResetNotification`, `IsAttributeVersionUpToDate` = true) or 3.0.1 keeps attributes elsewhere. **Resolved 15:46:** the character
   window «Хар-ки» shows all six 0 and «Доступные очки 52» — the ids are right (19 = Agility), the points are unspent.
+- **Mods that inject into the hub (2026-10-29).** Era of Trials: `EoT_AC_InterfaceInjectorComponent` subscribes to `SignalActivated` of the modules
+  `CharacterInventory` and `CharacterStatsWindow`, casts the window root to `W_Carousel_C`, waits `Delay` 0.1–0.2 s and `Create` + `AddChild`s
+  `EoT_W_CharInfoMagicDisplay` (six magic-school icons right of the paperdoll; on Construct a looping 0.5 s `Update` timer). A tab round trip
+  re-creates the paperdoll: `XCS_Panel` false/true are the only module events, a NEW magic display follows +150 ms; the icons showed 0.2–2.2 s late.
+  Arrow Quick Swap: `AQS_Actor_Component.UpdateDisplayUI` adds `UI_AmmoDisplay` to the viewport on substate 16 (aiming), removes it on exit;
+  the wheel path is `HideDisplay` → `RevealDisplay` (animation `Reveal` on `CanvasPanel_32.RenderOpacity`), auto-hide after `MinDisplayTime`.
+  Trace recipe: a remote `lua` `RegisterHook("/Script/ConanSandbox.GUIModuleController:ActivateModule", …)` + `NotifyOnNewObject(<widget BP>)` printing
+  `os.clock()` — every call, not only state changes (the pause mod logs changes only).
