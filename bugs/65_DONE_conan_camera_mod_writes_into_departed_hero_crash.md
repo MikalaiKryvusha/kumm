@@ -1,6 +1,6 @@
 # Bug 65 — Conan crash in UE4SS after leaving to the main menu and re-entering the world: the camera mod writes into the departed hero
 
-**Status:** 🔧 fix pending verification
+**Status:** ✅ DONE 2026-10-29 11:35
 **Severity:** S1 — the owner's game crashed mid-session (EXCEPTION_ACCESS_VIOLATION), his trust in the build
 **Version/build:** Conan Exiles Enhanced 3.0.1, build pack `ConanExiles` · `ConanCameraControl` (commit `070d959`), `KrinikArrowAim` 0.1.0
 **When/context:** 2026-10-26 23:13:25, owner's session; minutes after `dc SW_config disable_custom_GI` → owner left to the main menu → the agent re-entered the world by the pult (`enter-world-remote.sh`)
@@ -54,3 +54,17 @@ state (proved red on the real threat). Hygiene: none. Functional run: the owner'
 
 ## Links
 `plans/36_conan_build_debts_plans.md` item 34 · `testcases/TC_conan_build_stability_compat_perf_2026-10-26.md`
+
+## ✅ STATUS: DONE (2026-10-29 11:35 +03:00)
+
+Hygiene: none new.
+Functional run: two re-entries by the agent (Esc by real input → `W_IngameMenu_C:CloseAndReturnToMainMenu` → `enter-world-remote.sh`), ≈ 9.5 min of
+play after them with real input (FP/TP by the wheel, bow draws and shots): the game alive, crash folders 15 → 15; the guard logged «поле читается как
+TrivialObject … не живой герой, запись пропущена» while in the menu — the departed hero was skipped. TWINS: the UE4SS log after the re-entries holds
+no error lines of `KrinikHudOutline`, `KrinikFpsCounter`, `KrinikPauseGameInMenu`, `ConanModPackStatus`, `KrinikConanArchery`.
+Cases `testcases/TC_conan_relogin_no_crash_2026-10-29.md`.
+REAL WORLD: accumulated — the owner's save and game folder; data and machine — his machine; path — the in-game menu and «Продолжить», verified on the real world.
+
+## Decisions made without the owner (closing)
+
+- `[AI]` 10 min of play counted as the sum after two re-entries (3.3 + 6.2 min), not one continuous session.
