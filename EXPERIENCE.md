@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0370 · 2026-10-29 · ❌ · #conan #backlog #stale #owner-debt #known-trap
+class: debt-list-from-a-table-the-fix-never-updated
+**Lesson:** asked for «all Conan debts», I copied open rows of bug 64 and plan 36 — the owner: «Там у тебя много уже неактуальных пунктов».
+The hunger/thirst arrows (bug 64 item 30, «open») had been removed the evening before (pack `854a9e8`, thumbs 0×0); I spent ≈ 25 min of a live run
+finding a widget that no longer draws. Before listing or taking a debt, reconcile its row with the pack's `git log --since=<row date>` and the
+asset-strings tables; a fix that lands updates its bug row in the same commit.
+mechanized: no
+
 ### EXP-0369 · 2026-10-29 · ❌ · #conan #config #owner-taste #known-trap
 class: changed-a-deliberate-setting-without-its-why
 **Lesson:** I wrote `DynamicSky.SolarUpdateAngleDelta` 0.003 → 2.0 into the pack because the owner said the shadows were calm — the comment

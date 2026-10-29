@@ -16,7 +16,7 @@ debt of the build is asked first** (`[AI]` reading of the last sentence, told to
 |---|---|---|---|
 | W1 | Crash after re-login — 10 min of play + twin sweep, then DONE | bug 65 | open |
 | W2 | Crash on rapid fire (Lua on a worker thread) — verify the fix | bug 66 | open |
-| W3 | **Hunger / thirst «decreasing» arrows under the icons — REMOVE them entirely** (`[OWNER]` «УБРАТЬ ВООБЩЕ ЭТИ СТРЕЛКИ») | bug 64 item 30 | open |
+| W3 | **Hunger / thirst «decreasing» arrows under the icons — REMOVE them entirely** (`[OWNER]` «УБРАТЬ ВООБЩЕ ЭТИ СТРЕЛКИ») | bug 64 item 30 | **done 2026-10-28 20:48** (pack `854a9e8`); confirmed 2026-10-29 10:3x by frames — no arrows at 0 % and 100 % |
 | W4 | Minimap coordinates inside the circle with a backing; the whole minimap further right and up | bug 64 item 31 | open |
 | W5 | XP line: (a) «XP:» colon spacing by a frame; (c) «k» with one decimal, mathematical rounding | bug 64 item 33 | open |
 | W6 | Corpse prompt on two lines — a layout variant | item 36 | open |
