@@ -438,6 +438,15 @@ Lua-моды UE4SS ждут только отложенными действия
   (`SetInputActionName`, `SetIconSize`, `SetGamepadKey`) do not fire `RegisterHook`. A property set in a `NotifyOnNewObject` callback (the SizeBox's birth)
   SURVIVES the archetype copy (34 of 34) — the birth is a usable event for per-instance layout fixes; `KrinikUIFixes` Lua 1.2.0 caps `MaxDesiredWidth` 42.67
   on `SizeBoxPrimaryIcon` inside `WBP_ButtonBase` this way.
+- **Hub bottom row: Hosav and fishing buttons (2026-10-29, `KrinikPauseGameInMenu` 0.10.0).** Hosav's `W_UI_SettingsButton` is its own viewport layer
+  (`CanvasPanel_0` → `Overlay_0` → `Border_0` 20/20/20/13 → a vanilla `WBP_ButtonBase`, `ContentPadding` 5; click → BP `BndEvt…SignalClicked` →
+  `ActivateModule('HosavUIsettings')`); on screen its button spans 21…321.5 units — the layer is ×1.094 larger than the button's desired 274.8. Moved
+  (`RemoveFromParent` + `AddChildToHorizontalBox`) into the bar it STOPS clicking (handler never called); a second instance of the widget made by
+  `WidgetBlueprintLibrary:Create` never fires its handler either. Exiles Fishing's `W_EFT_AdminButton` (`Pad` border 15 + its slot 15 → `Size_Btn_Open` 214 →
+  UMG `Btn_Open`, style paddings 8/2 → text) clicks via `CustomEvent` → `ActivateModule('ExilesFishingTuning')`; it takes a vanilla `WBP_ButtonBase` as
+  HitTestInvisible content (`SetContent`) and keeps its own click — but then the hover glow is lost. The bar: `WBP_ButtonBar` → `ButtonContainerLeft` (starts
+  at x 0) / `ButtonContainerRight`. Remote facts: inside a module activation callback `IsModuleActive(<that module>)` is still false; `GetCachedGeometry`
+  through `SlateBlueprintLibrary` returns zeros; `GUIModuleController` has no `DeactivateModule` (close by a real Esc).
 - **«Хар-ки» perk rows (read from the 3.0.1 assets 2026-10-29).** `UI/Inventory/Attributes/W_AtrributeInfoEntry` (sic): `Overlay_120` →
   `VerticalBox_173` with `PrimaryPerkView` (slot padding Bottom −2) over `BranchedPerkView` (Top −2), both `W_AttributeInfoEntry_PerkView`; the
   link icon `PerkIconLink` sits in the same overlay with padding Left 40, Top 82, Bottom 82 — the row is drawn for one-line descriptions. The perk
