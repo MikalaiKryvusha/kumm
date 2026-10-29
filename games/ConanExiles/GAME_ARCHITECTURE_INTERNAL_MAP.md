@@ -436,3 +436,6 @@ Lua-моды UE4SS ждут только отложенными действия
   `Temp_object_Variable` = the hub window → find the paperdoll → `Create` + `AddChild`). Calling 61 from Lua crashes the game (EXP-0371); since
   KRINIK MODIFIED the delay is 0.0015. Click → module `acs_WardrobeGUI` («Гардероб — Экипировка»). Build with `PATCH_VIEW_EXCLUDE=HighmanesArsenal`.
   `KrinikPauseGameInMenu` 0.9.1 also runs its pause poll on the `XCS_Panel` open event — the hub's time is 0.03 from its first frame.
+- **Stand: the hub pause must be armed first (2026-10-29 18:33).** `KrinikPauseGameInMenu` arms only after it sees the hero in the world with the
+  full-screen UI CLOSED (log «взведено: герой в мире…»). A hub opened by the remote ≈1 s after `enter-world-remote.sh` stays at time 1.0 for the whole
+  run — every timing case is then wrong. Stand step: after entering the world wait for «взведено» in `UE4SS.log`, then open the hub.
