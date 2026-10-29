@@ -115,11 +115,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **First in the next chat (the owner's items, in his order):**
 > 1. ✅ 2026-10-30 00:11 — Esc on the fishing panel / Hosav's settings closes only that window, the hub stays (pack `3f674d3`, `KrinikPauseGameInMenu` 0.11.0;
 >    cases E1–E10, report `testcases/reports/2026-10-30_conan-hub-esc-mod-windows.md`; how — game map «Esc and windows over the hub»). The owner's eye pending.
-> 2. The gold hover outline on «Настройка рыбалки» (case R6 of `testcases/TC_conan_hub_fishing_button_next_to_hosav_2026-10-29.md`): the vanilla look is HitTestInvisible
->    inside the mod's own `Btn_Open`; `UserWidget:OnMouseEnter/Leave` hooks never fire; a clone of Hosav's widget never fires its click; Hosav's button moved into the
->    bar stops clicking (game map → «Hub bottom row»). Find a hookable hover event or a hover-capable widget that keeps the click.
-> 3. The fish-card word «исходно» = the author's «table » (`_config/localization/asset-strings/JaarFishing__W_EFT_FishCard.tsv`): check whether the table weights
->    equal vanilla — then «ваниль» (the owner's term rule), else «по умолчанию».
+> 2. ✅ 2026-10-30 00:33 — «Настройка рыбалки» lights up gold on hover (`KrinikPauseGameInMenu` 0.12.0; cases H1–H5, report
+>    `testcases/reports/2026-10-30_conan-fishing-hover-vanil.md`; how — game map «Vanilla button hover»). The owner's eye pending.
+> 3. ✅ 2026-10-30 00:33 — the fish card says «ваниль 80» instead of «исходно» (the «table» weight is the mod's Vanilla preset weight), label and field widths 92/66
+>    so nothing is cut (case V1). The owner's eye pending.
 > 4. Plan 36 item 14a — the retoc compression fix is BUILT, not installed: new exe + DLL in scratchpad `agentA/bin` of session a486276a, source edits uncommitted in
 >    `D:/work/ai_sandbox/_tools/src/retoc` (`iostore_writer.rs`, `lib.rs`, `retoc_cli/src/main.rs`); `retoc-5.8/retoc.exe` is a HARD LINK to `target/release/retoc.exe`
 >    (do not copy over it — rename first). Then rebuild every `_krinik-modified` pak by its manifest recipe, smallest first (Simple_Minimap), each checked by a launch.

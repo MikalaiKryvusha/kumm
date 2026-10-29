@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0374 · 2026-10-30 · ❌→✅ · #conan #ue4ss #umg #remote #crash #atomic #hover
+class: stand-not-checked
+**Lesson:** a remote UI experiment sent as ONE call (create an `Overlay` by `StaticConstructObject`, reparent two widgets, copy a brush struct, set a style)
+crashed the game (`EXCEPTION_ACCESS_VIOLATION reading 0x70`, UE4SS stack) — and nothing told which step. Redone one step per call with a read-back after each
+(reparent → check parent; add to the look's existing `Overlay_16` → check child count), it worked first time and built nothing new. Remote UI surgery: one
+structural step per call, read back, frame — and prefer an existing container over a widget created from Lua. Also: the remote takes one command per LINE —
+multi-line Lua must be joined into one line first (a multi-line file ran as N unknown commands).
+mechanized: no
+
 ### EXP-0373 · 2026-10-30 · ❌→✅ · #conan #ue4ss #umg #modules #esc #mods #twin
 class: twin-not-searched
 **Lesson:** two misses on one fix (Esc of mod windows over the hub). (1) Hosav ships its module row TWICE — `DT_UIModuleTable_HosavNew` and the live

@@ -457,6 +457,16 @@ Lua-моды UE4SS ждут только отложенными действия
   `ActivateModule('HosavUIsettings', True, False)`; `ActivateModule(<open module>, True)` is harmless (hub and its buttons stay). Mod windows are `WindowRoot`
   (`RootWidget`) subclasses: `TryCloseWindow()` closes one cleanly, the hub under it stays, `IsModuleActive` drops a moment later. The game builds a NEW window
   instance per open and the closed one lingers until GC — find the open one by `FindAllOf(<class>)` + `IsOpen()`, never `FindFirstOf`.
+- **Vanilla button hover (2026-10-30, `KrinikPauseGameInMenu` 0.12.0).** `WBP_ButtonBase` has no inner Slate button: `Overlay_16` → `ImgBackground` (Visible,
+  material `MID_M_UI_DetailedStoneButton_Base`), `ImgFrame` (material `MID_M_UI_StoneButton_Frame`), `ImgIcon`, `ContentContainer`; the native `FLXButtonBase`
+  lights it on mouse-over by the materials' scalar `PercentHover` 0 → 1 (no BP events, no hookable UFunction), and as a hit-testable widget it handles the click
+  itself. To keep another widget's click AND the vanilla hover: put that widget (here the mod's transparent `Btn_Open`) as the LAST child of the look's
+  `Overlay_16` and the look `SelfHitTestInvisible` — Slate sends mouse-enter along the whole cursor path, so the look-parent glows, the child takes the click.
+  A widget detached from its tree is no longer found by `GetWidgetFromName` — take it by the BP variable (`e.Btn_Open`). An `Overlay` built from Lua
+  (`StaticConstructObject`) together with a brush-struct copy in one remote call crashed the game (2026-10-30 00:22).
+- **Exiles Fishing fish card (`W_EFT_FishCard`).** `RowBox`: `IconSize` · `NameCol` (Fill: `Txt_FishName`, `Txt_FishInfo`) · `BaseSize` (`Txt_Base` «table N», size 13,
+  no clipping — overflow runs under the field) · `EditSize` (`Edit_Weight`). Widths since 2026-10-30: `BaseSize` 92, `EditSize` 76 → 66 (KRINIK MODIFIED); the
+  name column then holds «Пустынная луна-рыба» / «Обыкновенная форель» whole. «table» = the weight of the mod's «Vanilla» preset → «ваниль».
 - **«Хар-ки» perk rows (read from the 3.0.1 assets 2026-10-29).** `UI/Inventory/Attributes/W_AtrributeInfoEntry` (sic): `Overlay_120` →
   `VerticalBox_173` with `PrimaryPerkView` (slot padding Bottom −2) over `BranchedPerkView` (Top −2), both `W_AttributeInfoEntry_PerkView`; the
   link icon `PerkIconLink` sits in the same overlay with padding Left 40, Top 82, Bottom 82 — the row is drawn for one-line descriptions. The perk
