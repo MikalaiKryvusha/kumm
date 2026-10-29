@@ -1,6 +1,6 @@
 # Bug 68 — a freeze of ≈ 115 ms every 2.12 s: ConanModPackStatus polls the whole session on the main thread
 
-**Status:** 🔧 fix pending verification · **Severity:** S1 (the owner's play; his rule «моды уважительно к главному потоку» broken by our own mod)
+**Status:** ✅ DONE 2026-10-29 10:4x (see the status section) · **Severity:** S1 (the owner's play; his rule «моды уважительно к главному потоку» broken by our own mod)
 **Version/build:** Conan Exiles Enhanced 3.0.1, the 3.0.1 build of the pack · **When/context:** 2026-10-29 10:3x, the owner playing in the agent's run
 
 ## Symptom
@@ -40,7 +40,17 @@ Fixing: this session.
 
 ## Decisions made without the owner
 
-(at closing)
+- `[AI]` The tick keeps its first minute (pak count, offline modal, menu) — loading time, outside the gameplay budget; its worst tick, 141 ms, is
+  logged, not removed.
+- `[AI]` The HUD scale reacts to the creation of every `W_SmoothHP_C` object (templates too) — 1–3 ms each, only at creation; not narrowed further.
+- `[AI]` The other mods' polls (TWINS) are not touched — the owner's order of 2026-10-29: other debts are asked first.
+
+## ✅ STATUS: DONE (2026-10-29 10:4x +03:00)
+
+Hygiene: `luac -p`, `check-lua-game-thread.py` 0.
+Functional run: the owner's save, 3.0.1 build, 4K — PresentMon 30 s: 14 spikes of 107–124 ms → 0, max 20.9 ms; the HUD scale ×1.25 on the frame;
+the startup menu hidden by the event. Exit-to-menu path not walked. Report `testcases/reports/2026-10-29_conan-modpackstatus-freeze.md`.
+REAL WORLD: accumulated — the owner's save and live game folder; data and machine — his machine; path — the game launched as he launches it, verified on the real world.
 
 ## Links
 
