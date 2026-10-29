@@ -107,6 +107,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-10-29 21:07 — THE CONAN BUILD again; Svarog to the far shelf** (`[OWNER]` «продолжаем делать сборку КОНАНА» · «сварог откладываем в давнюю
+> полку» · 2026-10-29 ≈21:05). Resume from the "NOW 18:4x" block below: class A of the hub, step 1 of `researches/conan-ui-text-relayout/README.md`.
+>
+> **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied
+> (`SvarogsDream/_backups/svarog-saves-2026-10-29_2103-before-debt024`), configs snapped (`_harness/cfg_snap`, 21:04), the 13:43 build `f44c36e` hot-deployed
+> into the game WITHOUT a run (test debt waived with this reason), cases written — `testcases/TC_svarog_debt024_tails_2026-10-29.md`. Return order: interview #024
+> tails (S10c/R1 tooltip gap, CD1 skill-slot digit, `InstantTranslate` of bugs 56/57 — the run report `testcases/reports/2026-10-18_svarog-day-buff-strip-passes1-5.md`
+> is partial), then the bug wave 55–62 by plan 32.
+>
 > **NOW 2026-10-29 18:4x — the hub of the Conan build (bug 64 item 17; plan 36 W8):** the Hosav and fishing buttons by event (pack `fae3d52`, the owner's
 > eye «это ок»; screen videos deleted and paused by his word «удали записи видео, пока пауза» — check by frames or his eye).
 > **18:37 — class B (late mod elements) fixed, cases I1–I7 pass** (`[OWNER]` «автономно работай» · 18:1x): EAA, EoT, Accessory System KRINIK MODIFIED,
@@ -191,8 +200,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    51420); DLSS scale 0.58 — show the owner.
 >
 > The Conan 3.0.1 build — 64 paks + 8 Lua mods, everything mounts (plan 33; the former "PARKED ORDER" — chronicle, 2026-10-25 22:15).
-> **Svarog waits behind Conan — the far drawer: do not raise at entry** (in return order): interview #024 answers (Q3 digit lower, Q4 strip order and
-> bright passives — built 2026-10-18 09:14, never run in game; the review queue lists it first — skip it while Conan runs); 00000 — the owner's bug wave 2026-10-18 (plan 32, bugs 55–62, the ⇅ button; chronicle 2026-10-26 19:38);
+> **Svarog — return order** (the far shelf since 2026-10-29 21:07, see PARKED above): interview #024 answers (Q3 digit lower, Q4 strip order and
+> bright passives — built 2026-10-18 09:14, run in game 13:00–13:35 the same day, partial; correction 2026-10-29: "never run in game" stood here wrongly); 00000 — the owner's bug wave 2026-10-18 (plan 32, bugs 55–62, the ⇅ button; chronicle 2026-10-26 19:38);
 > 0000–000 — the items of 17.10 (J4, J5, G1, pop-ups, hair, storages, tips, frames, HUD C3/C4/K1; chronicle 2026-10-25 12:07); 00 — plan 27
 > (`plans/27_svarog_random_hero_traits.md`: fixes 8–10 of `AuthorBugs.cs` in combat, case R8; the "New hero" window, "Veles' Protection", Staggered, attribute > 95 → 90).
 > Svarog — CPU budget, run order, the MVP jump decision: chronicle, entry 2026-10-27 21:08 (moved verbatim).
