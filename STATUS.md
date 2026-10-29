@@ -109,7 +109,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **CHAT 2026-10-28 23:14 → 2026-10-29 00:4x — where it stands (read first):**
+> **2026-10-29 10:2x — THE OWNER'S WORK ORDER (read first): `plans/36_…` → "The owner's work order 2026-10-29", items W1–W15.** Only those
+> items are worked; any other debt of the build is asked first. Hunger/thirst arrows — remove entirely.
+>
+> **CHAT 2026-10-28 23:14 → 2026-10-29 00:4x — where it stands:**
 > - ✅ (0b) item 34 — «Q Забрать все (удерживайте)» (`HoldPromptVisibility = NEVER` on the take-all icons, kit), B1–B5 pass.
 > - ✅ (0a) item 35 — `KrinikUIFixes` 1.1.0 = pak (strip vanilla Center) + Lua (strip Left only while the loot window shows; hooks
 >   `WBP_ContainerInfo_C:SetObject` + native `QuickLootPanel:SlotItemAddedOrRemoved`); L1–L4 pass (L4 by a real Q hold). Left: L5 cost line,
@@ -211,8 +214,7 @@ Files without the DONE tag — 29 (2026-10-18 13:45):
 - 🔧 `bugs/14_pickcard_exact_name_pins_old_file.md` (fixed 2026-10-15, waits for a live `kumm check`) — `kumm check` holds on to an old file if the author once
   put the version into the file name (Bosses My New Besties, 02.10). A bug of the engine itself; the fix plan and the case are in the document.
 - 🟡 `bugs/07_conan_probe_kills_ue4ss_lua_layer.md` — the symptom removed by turning the mod off, the cause not found.
-- 🔧 `bugs/08_conan_config_overrides_code.md` — fixed, waits for the owner's confirmation.
-- 🔬 `bugs/04_conan_camera_microjitter.md`, `bugs/05_conan_loadasset_delayed_abort.md` — recon, no fix.
+- ✅ Camera jitter at rest, the menu abort, the config file overriding the camera code — DONE 2026-10-29 by the owner's word («давно исправлено»).
 
 ## KAIF — feedback and tickets
 

@@ -317,3 +317,13 @@ BasePlayerChar_C.CurrentCameraMode = 1 · ThirdPersonDefaultCamMode = 1
 «На прыжке ставить инерцию огромную, а после прыжка возвращать малую» — рабочая подпорка:
 глушить притяжение в момент чужого сброса и отпускать, когда цель вернулась. Не требует
 распознавать прыжок. Брать, если лечение по таблице режимов не выйдет.
+
+## ✅ STATUS: DONE (2026-10-29 10:22 +03:00)
+
+Closed by the owner's word: `[OWNER]` «давно исправлено» · 2026-10-29 (camera jitter while standing, and the zoom jumps on mode change described above).
+
+## Decisions made without the owner
+
+None added at closing; the earlier ones stand in the section above.
+
+Hygiene: none · Functional run: none by the agent — closed on the owner's observation in play.

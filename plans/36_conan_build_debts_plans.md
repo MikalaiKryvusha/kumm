@@ -6,6 +6,30 @@
 > **Status:** открыт 2026-10-26 · выполняется по порядку раздела «Очередь»
 > **Outbound:** вопросы вкуса — владельцу кадрами; числа засад — интервью #025
 
+## The owner's work order 2026-10-29 ≈10:2x (supersedes the "Queue" order below)
+
+`[OWNER]` «Делаем: …» (the list below, his words in brackets) · «это я бегло посмотрел. Там у тебя много уже неактуальных пунктов.» ·
+«Будешь меня спрашивать, делать какой-то пункт, или нет» · 2026-10-29. Rule from it: **only the items of this list are worked; any other
+debt of the build is asked first** (`[AI]` reading of the last sentence, told to the owner in the chat the same minute).
+
+| # | Item (meaning) | Old address | State |
+|---|---|---|---|
+| W1 | Crash after re-login — 10 min of play + twin sweep, then DONE | bug 65 | open |
+| W2 | Crash on rapid fire (Lua on a worker thread) — verify the fix | bug 66 | open |
+| W3 | **Hunger / thirst «decreasing» arrows under the icons — REMOVE them entirely** (`[OWNER]` «УБРАТЬ ВООБЩЕ ЭТИ СТРЕЛКИ») | bug 64 item 30 | open |
+| W4 | Minimap coordinates inside the circle with a backing; the whole minimap further right and up | bug 64 item 31 | open |
+| W5 | XP line: (a) «XP:» colon spacing by a frame; (c) «k» with one decimal, mathematical rounding | bug 64 item 33 | open |
+| W6 | Corpse prompt on two lines — a layout variant | item 36 | open |
+| W7 | Mod UI: Russian wider than mod buttons; EAA hint in the game's style | Б1 / item 13, Б5 / item 18 | open |
+| W8 | Hub without jerks and late elements | Б4, items 15, 17, 26 | open |
+| W9 | Fishing button next to Hosav, in its style | Б7 | open |
+| W10 | The rest of the mod-UI bug's open items | bug 64 | open |
+| W11 | Krinik mods at the top of the mod list; their versions 3.0.1 | — | open |
+| W12 | Night: the game's own light instead of Severe Weather (does the choice survive a restart) | item 40 | open |
+| W13 | Arrows into a rhino and an elephant; a close frame from the far side | item 42 | open |
+| W14 | Shooting while jumping, (a)–(c) | plan 37 | open |
+| W15 | Arrow physics as in Oblivion | STATUS "Arrow physics" | open |
+
 ## Цель (Achieve)
 Каждый открытый долг сборки имеет план с проверкой в игре и закрывается по нему; к выпуску 1.0.0 не остаётся долга без решения.
 Готово, когда у каждой строки «Очереди» стоит статус `сделано` (с кадром или прогоном) или `ждёт владельца` (с адресом вопроса).
@@ -48,7 +72,7 @@
 | 23 | Замеры q2, q3, q4 (В1) | 2 | открыт |
 | 24 | План 34 / В2: наши Lua-моды на события | — | ждёт владельца (выбор пути по цифрам) |
 | 25 | Баги 63, 08: подтверждение владельцем | — | ждёт владельца |
-| 26 | Баги 04, 05, 07: старые, с версии 2.x — проверить на 3.0.1 | 1,5 | 2026-10-29 10:18, by the logs: menu abort (05) — `AbortHandler` in none of the 11 game logs; probe killing Lua (07) — the probe is not in the build, `Event loop start` in the 00:49 UE4SS log; both proposed to close, 07 keeps its UE4SS-start check after deploy (≈ 0,5 h). Camera jitter at rest (04) — not checked on 3.0.1, needs a clip standing vs sprint |
+| 26 | Баги 04, 05, 07: старые, с версии 2.x — проверить на 3.0.1 | 1,5 | **04, 05 (and 08) DONE 2026-10-29 10:22 by the owner's word «давно исправлено»;** 2026-10-29 10:18, by the logs: menu abort (05) — `AbortHandler` in none of the 11 game logs; probe killing Lua (07) — the probe is not in the build, `Event loop start` in the 00:49 UE4SS log; both proposed to close, 07 keeps its UE4SS-start check after deploy (≈ 0,5 h). Camera jitter at rest (04) — not checked on 3.0.1, needs a clip standing vs sprint |
 | 27 | Идеи 03, 04, 05: что уже стоит в сборке — закрыть или дописать | 1 | открыт |
 | 28 | Г10: архив на чистой игре, тома ≤ 700 МБ | 1–2 | открыт |
 | 29 | Г11: README-PDF | 3–4 | после 1–28 |

@@ -130,8 +130,18 @@ UE4SS уронили игру через несколько минут норм�
 сделала сама, и не просит её сделать ничего.** Если ответа не видно без действия — это не
 разведка, а опыт, и объявлять его безопасным нельзя.
 
-Связанное: `EXP-0059` · `ConanExiles/docs/06-интерфейс-модов.md` · `bugs/04_conan_camera_microjitter.md`
+Связанное: `EXP-0059` · `ConanExiles/docs/06-интерфейс-модов.md` · `bugs/04_DONE_conan_camera_microjitter.md`
 
 ## 2026-10-29 10:18 +03:00 — check on Conan 3.0.1
 
 None of the 11 game logs in `Saved/Logs` (the current one and 10 backups) holds `AbortHandler`; the menu abort has not recurred. Proposed to close.
+
+## ✅ STATUS: DONE (2026-10-29 10:22 +03:00)
+
+Closed by the owner's word: `[OWNER]` «уверне, что исправлено» · 2026-10-29; the 3.0.1 logs agree (the section above).
+
+## Decisions made without the owner
+
+None added at closing.
+
+Hygiene: none · Functional run: 11 game logs of 3.0.1 read, no `AbortHandler`.

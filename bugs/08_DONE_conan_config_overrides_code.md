@@ -99,5 +99,15 @@ ON-REAL-PATH:   seen 2026-10-29 00:49 on Conan 3.0.1 — the live `ue4ss/UE4SS.l
 ## Ссылки
 
 - `plans/04_conan_ochered_zakazov.md` — пункты 2 и 3
-- `bugs/04_conan_camera_microjitter.md` — история дрожи камеры
+- `bugs/04_DONE_conan_camera_microjitter.md` — история дрожи камеры
 - `EXPERIENCE.md` — `EXP-0054` (файл теряет ключ), `EXP-0058` (неполное неотличимо от полного)
+
+## ✅ STATUS: DONE (2026-10-29 10:22 +03:00)
+
+Closed by the owner's word: `[OWNER]` «давно исправлено» · 2026-10-29. The guard was seen on the real path the same morning (ON-REAL-PATH above).
+
+## Decisions made without the owner
+
+Recorded in the section above (the guard prints, does not fix; `prefer_per_frame` and `zoom_interp_speed` not forced to the code). None added at closing.
+
+Hygiene: none · Functional run: the live 3.0.1 `UE4SS.log` of 2026-10-29 00:49 read (nine «код X -> файл Y» lines).

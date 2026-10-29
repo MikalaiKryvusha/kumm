@@ -83,8 +83,8 @@
 ## Ссылки
 
 - `plans/04_conan_ochered_zakazov.md` — пункт 2
-- `bugs/04_conan_camera_microjitter.md` — история дрожи камеры
-- `bugs/08_conan_config_overrides_code.md` — почему вечерние лекарства не доезжали
+- `bugs/04_DONE_conan_camera_microjitter.md` — история дрожи камеры
+- `bugs/08_DONE_conan_config_overrides_code.md` — почему вечерние лекарства не доезжали
 - `EXPERIENCE.md` — `EXP-0070` (файл перебивает код), `EXP-0071` (хук встал ≠ работает),
   `EXP-0072` (тишина как признак), `EXP-0073` (чинил не тот слой)
 
