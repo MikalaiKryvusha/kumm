@@ -17,7 +17,7 @@ debt of the build is asked first** (`[AI]` reading of the last sentence, told to
 | W1 | Crash after re-login — 10 min of play + twin sweep, then DONE | bug 65 | **done 2026-10-29 11:35** — two re-entries by the agent, ≈ 9.5 min of play, no crash; bug 65 DONE |
 | W2 | Crash on rapid fire (Lua on a worker thread) — verify the fix | bug 66 | **done 2026-10-29 11:23** — FP hold-draws ×12 (the crash path), TP and mixed series: alive, no crash; bug 66 DONE |
 | W3 | **Hunger / thirst «decreasing» arrows under the icons — REMOVE them entirely** (`[OWNER]` «УБРАТЬ ВООБЩЕ ЭТИ СТРЕЛКИ») | bug 64 item 30 | **done 2026-10-28 20:48** (pack `854a9e8`); confirmed 2026-10-29 10:3x by frames — no arrows at 0 % and 100 % |
-| W4 | Minimap coordinates inside the circle with a backing; the whole minimap further right and up | bug 64 item 31 | open |
+| W4 | Minimap coordinates inside the circle with a backing; the whole minimap further right and up | bug 64 item 31 | open — recon 2026-10-29 11:3x: `SM_UI_Minimap` (83 exports) has `ClockHolder` → `ClockBorder` (the clock's dark plate) but no plate for `Coordinates`; a backing needs a NEW widget in the tree (re-parenting is not a property edit) — the kit or a rebuilt asset, not `patch-mod-asset` props. Moving the map up alone would cut the coordinates again (item 19) |
 | W5 | XP line: (a) «XP:» colon spacing by a frame; (c) «k» with one decimal, mathematical rounding | bug 64 item 33 | open |
 | W6 | Corpse prompt on two lines — a layout variant | item 36 | open |
 | W7 | Mod UI: Russian wider than mod buttons; EAA hint in the game's style | Б1 / item 13, Б5 / item 18 | open |

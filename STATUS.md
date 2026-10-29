@@ -111,6 +111,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 > **2026-10-29 10:2x — THE OWNER'S WORK ORDER (read first): `plans/36_…` → "The owner's work order 2026-10-29", items W1–W15.** Only those
 > items are worked; any other debt of the build is asked first. Hunger/thirst arrows — remove entirely.
+> **Done 10:2x–11:37 (chat 47b827b0):** W1 re-entry crash (bug 65 DONE), W2 rapid-fire crash (bug 66 DONE), W3 arrows (already done 28.10),
+> W12 night light (KRINIK MODIFIED Severe Weather pak); new by the owner's word — bug 68 freeze every 2 s (ConanModPackStatus, DONE), bug 69 FP
+> neck (DONE). Recon written, not fixed: W10a quick-loot jump (not reproduced, 3 variants — bug 64 item 45), W13 Kappa arrows (bone attach
+> refuted), W4 minimap (needs a new widget — not a prop edit). **Next in the order:** W5 XP «k» rounding, W6 corpse prompt layout, W7–W9,
+> W11 (ask: which list — the in-game mod list?), W13 stand on a walking Kappa, W14 jump shooting, W15 arrow physics. Asked of the owner:
+> plan 34 (our other Lua mods' polls — twins in bug 68). The agent can now exit to the menu itself (game map → «меню → снова в мир»).
 >
 > **CHAT 2026-10-28 23:14 → 2026-10-29 00:4x — where it stands:**
 > - ✅ (0b) item 34 — «Q Забрать все (удерживайте)» (`HoldPromptVisibility = NEVER` on the take-all icons, kit), B1–B5 pass.
