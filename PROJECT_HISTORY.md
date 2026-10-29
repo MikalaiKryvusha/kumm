@@ -1,5 +1,26 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-29 18:43 +03:00 — STATUS: the day's work-order block (10:2x, done list up to 11:37) and the 17:5x hub line (moved verbatim at closing)
+
+> **2026-10-28 23:2x–23:4x (this chat):** the context-budget hook (`.claude/hooks/context-budget.mjs`, `CLAUDE.md`); KAIF #179 (`/resume` costs
+> ≈ 140 k tokens); `HOUSE_RULES.md` compacted (rules as statements; stands/routes/tools → `HOUSE_RULES_REFERENCE.md`; quotes and the verbose
+> dossier → chronicle, entry 2026-10-28 23:36); the documentation switched to English (`AGENT_GUIDE.md` → "Notes from the human").
+
+> **NOW 2026-10-29 17:5x — the hub of the Conan build (bug 64 item 17):** fishing and Hosav buttons fixed (pack `fae3d52`, the owner's eye «это ок»;
+> all screen videos deleted by his word «удали записи видео, пока пауза» — check by frames or his eye). Next: three late elements on «Снаряжение» from his
+> frame — EoT magic icons, the «Аксессуары» button, the sword emblem with the green gem; then the vanilla buttons' width dance.
+
+> **2026-10-29 10:2x — THE OWNER'S WORK ORDER (read first): `plans/36_…` → "The owner's work order 2026-10-29", items W1–W15.** Only those
+> items are worked; any other debt of the build is asked first. Hunger/thirst arrows — remove entirely.
+> **Done 10:2x–11:37 (chat 47b827b0):** W1 re-entry crash (bug 65 DONE), W2 rapid-fire crash (bug 66 DONE), W3 arrows (already done 28.10),
+> W12 night light (KRINIK MODIFIED Severe Weather pak); new by the owner's word — bug 68 freeze every 2 s (ConanModPackStatus, DONE), bug 69 FP
+> neck (DONE). Recon written, not fixed: W10a quick-loot jump (not reproduced, 3 variants — bug 64 item 45), W13 Kappa arrows (bone attach
+> refuted), W4 minimap (needs a new widget — not a prop edit). **Next in the order:** W5 XP «k» rounding, W6 corpse prompt layout, W7–W9,
+> W11 (the in-game mod list in the menu — the owner's answer; change Simple Modlist's display order, NOT the load order), W13 stand on a walking Kappa, W14 jump shooting, W15 arrow physics,
+> W16 — our mods' timer polls → events, carefully, each retested (the owner's yes 11:5x; plan 34 Status — `KrinikHudOutline` DONE 11:57; next
+> `KrinikPauseGameInMenu`, `ConanCameraControl`, `KrinikOblivionLocomotion`). Hosav blink — 0.25 (×4 slower, the owner's word 11:5x; his eye
+> pending). Night look (W12) — his eye pending. The agent can now exit to the menu itself (game map → «меню → снова в мир»).
+
 ## 2026-10-29 11:59 +03:00 — STATUS: closed items of the 2026-10-28 23:14 chat and its NEXT-CHAT queue (superseded by the owner's work order of 2026-10-29, plan 36 W1–W16; moved verbatim at closing)
 
 > - ✅ (0b) item 34 — «Q Забрать все (удерживайте)» (`HoldPromptVisibility = NEVER` on the take-all icons, kit), B1–B5 pass.

@@ -420,7 +420,7 @@ Lua-моды UE4SS ждут только отложенными действия
   switch → `CraftingGUI_C`, `WBP_ButtonBar_C` + ~10 `WBP_ButtonBase_C` (+0 ms) → `XCS_Panel` true (+37) → `CharacterInventory.SignalActivated` (+47) →
   `W_PaperdollPanel_C`, `W_UICharacterDisplay_C` (`/Game/UI/Inventory/CharacterDisplay/W_UICharacterDisplay`, +100) → `W_HotkeyIcon_C` (+170).
   EAA `AC_EAA_Inventorybutton` (on the hero): signal → `Delay 1.0` → resume `ExecuteUbergraph(286)`: `GetAllWidgetsOfClass(UICharacterDisplay)` →
-  `Create(BP_EAA_InventoryButton)` (`Button_Axe` = the sword emblem, `Button_74` = «Аксессуары») → `AddChild` to the display's grandparent.
+  `Create(BP_EAA_InventoryButton)` (`Button_Axe` = the sword emblem, its gem = the indicator; «Аксессуары» is the Accessory System's `W_acs_InventoryButton`, below) → `AddChild` to the display's grandparent.
   EoT `EoT_AC_InterfaceInjectorComponent` (on the hero): «Character Inventory Activated» → `Delay 0.1` (1st 0.1 in the ubergraph) → resume 15 (paperdoll
   icons); «Character Stats Window Activated» → `Delay 0.1` (2nd) → resume 1060; «GUI Carousel Activated» → 0.1 (3rd) → 2380. Since KRINIK MODIFIED
   2026-10-29 the EAA delay and the EoT 1st delay are 1e9, and `KrinikPauseGameInMenu` 0.9.0 calls those resume points on the display's birth.

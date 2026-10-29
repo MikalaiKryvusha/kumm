@@ -26,9 +26,8 @@
 ## What's done (the short tail — older entries live in PROJECT_HISTORY.md)
 
 > 07–08.10, Medieval Dynasty up to the pause, Svarog 09.10–10.10 — chronicle, entries 2026-10-10 03:38, 2026-10-10 16:31, 2026-10-11 00:46.
-> **2026-10-28 23:2x–23:4x (this chat):** the context-budget hook (`.claude/hooks/context-budget.mjs`, `CLAUDE.md`); KAIF #179 (`/resume` costs
-> ≈ 140 k tokens); `HOUSE_RULES.md` compacted (rules as statements; stands/routes/tools → `HOUSE_RULES_REFERENCE.md`; quotes and the verbose
-> dossier → chronicle, entry 2026-10-28 23:36); the documentation switched to English (`AGENT_GUIDE.md` → "Notes from the human").
+> 2026-10-28 23:2x (context-budget hook, HOUSE_RULES compacted, documents in English) and 2026-10-29 — chronicle, entry 2026-10-29 18:43;
+> the hub work of 2026-10-29 — "Where to continue" → NOW.
 ---
 
 ## Where we are now
@@ -108,9 +107,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW 2026-10-29 17:5x — the hub of the Conan build (bug 64 item 17):** fishing and Hosav buttons fixed (pack `fae3d52`, the owner's eye «это ок»;
-> all screen videos deleted by his word «удали записи видео, пока пауза» — check by frames or his eye). Next: three late elements on «Снаряжение» from his
-> frame — EoT magic icons, the «Аксессуары» button, the sword emblem with the green gem; then the vanilla buttons' width dance.
+> **NOW 2026-10-29 18:4x — the hub of the Conan build (bug 64 item 17; plan 36 W8):** the Hosav and fishing buttons by event (pack `fae3d52`, the owner's
+> eye «это ок»; screen videos deleted and paused by his word «удали записи видео, пока пауза» — check by frames or his eye).
 > **18:37 — class B (late mod elements) fixed, cases I1–I7 pass** (`[OWNER]` «автономно работай» · 18:1x): EAA, EoT, Accessory System KRINIK MODIFIED,
 > `KrinikPauseGameInMenu` 0.9.1, `patch-mod-asset.py` `flt:<fn>@<n>` + `PATCH_VIEW_EXCLUDE`; run report `testcases/reports/2026-10-29_conan-hub-late-mod-elements.md`.
 > **Next — class A (text laid out once, then jumps):** the item tooltip auto-wrap (`W_ItemIconTooltipView`), the bottom-bar width dance (hotkey glyphs
@@ -121,16 +119,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > later (`[OWNER]` «сворог - отмена!» · ≈15:27) and «МЫ ДЕЛАЕМ КОНАН» — the work stays on the Conan build, autonomous, by the order below sorted
 > quick → heavy. Svarog's debts are not raised at entry (`[OWNER]` «убери напоминание по долгам сварога в дальний ящик!» · ≈15:28).
 >
-> **2026-10-29 10:2x — THE OWNER'S WORK ORDER (read first): `plans/36_…` → "The owner's work order 2026-10-29", items W1–W15.** Only those
-> items are worked; any other debt of the build is asked first. Hunger/thirst arrows — remove entirely.
-> **Done 10:2x–11:37 (chat 47b827b0):** W1 re-entry crash (bug 65 DONE), W2 rapid-fire crash (bug 66 DONE), W3 arrows (already done 28.10),
-> W12 night light (KRINIK MODIFIED Severe Weather pak); new by the owner's word — bug 68 freeze every 2 s (ConanModPackStatus, DONE), bug 69 FP
-> neck (DONE). Recon written, not fixed: W10a quick-loot jump (not reproduced, 3 variants — bug 64 item 45), W13 Kappa arrows (bone attach
-> refuted), W4 minimap (needs a new widget — not a prop edit). **Next in the order:** W5 XP «k» rounding, W6 corpse prompt layout, W7–W9,
-> W11 (the in-game mod list in the menu — the owner's answer; change Simple Modlist's display order, NOT the load order), W13 stand on a walking Kappa, W14 jump shooting, W15 arrow physics,
-> W16 — our mods' timer polls → events, carefully, each retested (the owner's yes 11:5x; plan 34 Status — `KrinikHudOutline` DONE 11:57; next
-> `KrinikPauseGameInMenu`, `ConanCameraControl`, `KrinikOblivionLocomotion`). Hosav blink — 0.25 (×4 slower, the owner's word 11:5x; his eye
-> pending). Night look (W12) — his eye pending. The agent can now exit to the menu itself (game map → «меню → снова в мир»).
+> **2026-10-29 10:2x — THE OWNER'S WORK ORDER (read first): `plans/36_…` → "The owner's work order 2026-10-29", W1–W16 — the table holds each item's
+> state.** Only those items are worked; any other debt of the build is asked first. The day's done list — chronicle, entry 2026-10-29 18:43.
 >
 > **CHAT 2026-10-28 23:14 → 2026-10-29 00:4x — where it stands:**
 > - ✅ bug 67 palm shadows: 2.0 in the pack BY THE OWNER'S CHOICE (2026-10-29 01:10, «ставим 2.0 и закрываем чат»; pack 1c70cb9) — NEXT: the kit route (bug 67 → «Next path — the kit»: sky blueprint, smooth sun + rare shadow light) — cause found (`DynamicSky.SolarUpdateAngleDelta`: 2.0 calm / 0.003 flicker, the owner's eye both ways), but 2.0 was
