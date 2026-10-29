@@ -1,6 +1,6 @@
 # Bug 66 — Conan 3.0.1: the game crashes inside UE4SS on rapid bow fire (our Lua mods hop from the worker thread into the game thread)
 
-**Status:** 🔧 fix pending verification · **Severity:** S1 (crash in the owner's hands — his trust that our mods are stable) ·
+**Status:** ✅ DONE 2026-10-29 11:23 · **Severity:** S1 (crash in the owner's hands — his trust that our mods are stable) ·
 **Version/build:** Conan Exiles 3.0.1, UE4SS v3.0.1 Beta #0 (SHA 83330635), 8 enabled Lua mods · **When/context:** 2026-10-28 20:06:55, the agent's
 run; the owner was shooting the bow in first person (LMB without RMB) and pasted the crash report · **Fixing:** this session
 
@@ -43,3 +43,15 @@ Cases G1–G2, L1, C1–C2 in `testcases/TC_conan_bow_crash_fp_dip_tp_twitch_202
 
 ## Links
 EXP-0062 · bug 65 (crash after re-entry, camera mod) · bug 64
+
+## ✅ STATUS: DONE (2026-10-29 11:23 +03:00)
+
+Hygiene: `check-lua-game-thread.py` — 0 worker-thread calls (also for `ConanModPackStatus` after its rewrite, bug 68).
+Functional run: the owner's save, real input: FP by the real wheel, 12 LMB hold-draws (9 «натяжка без ПКМ» — the crash path of 2026-10-28 20:06),
+TP 20 LMB clicks, 10 mixed RMB+LMB — the game alive 30 s after each series, «Ref was not function» 0, crash folders 15 → 15.
+Cases `testcases/TC_conan_rapid_fire_no_crash_2026-10-29.md`.
+REAL WORLD: accumulated — the owner's save and game folder; data and machine — his machine; path — real mouse input, verified on the real world.
+
+## Decisions made without the owner (closing)
+
+- `[AI]` The probes left in `ue4ss/Mods` without `enabled.txt` (ConanAttributeProbe, HosavRU, KrinikMenuProbe) stay — they do not load.
