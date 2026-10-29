@@ -113,8 +113,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > «и модов иконки сразу отображаются» (class B accepted) · «книзу кнопки прыгают» · «я вижу, что ты в првильном направлении».
 > 🔧 **bottom bar** — cause measured (cases B0–B2 of `testcases/TC_conan_hub_bottom_bar_width_jump_2026-10-29.md`): the key glyph's ScaleBox in `W_HotkeyIcon` is
 > 128 wide on a new button's first frame and 42.7 after (+85 units = the jump). Only the width-free context jumps (bar: height 32, width override off, ScaleToFitY, brush 128×96; Q/E 48×48 and journey 24×24 have both overrides).
-> `HotkeyIcon` is NATIVE (no BP functions) — NEXT: a Lua post-hook in `KrinikUIFixes` on `HotkeyIcon:SetInputActionName` / `SetIconSize` setting
-> `WidthOverride` = height × brush aspect (first: is the brush set at that call?), A-B cost, B3 on three tab pairs + the owner's eye (research, bottom-bar paragraph).
+> `HotkeyIcon` is NATIVE; hooks on its setters never fire. PROVEN by a remote experiment: `MaxDesiredWidth` 42.67 on `SizeBoxPrimaryIcon` removes the jump
+> (5 of 5 switches) — but on the class template it would shrink the tutorial prompts' glyphs (height 38, 50.7), removed. SHIPPED scoped (pack `70a0bbe`,
+> deployed, copy equal): `KrinikUIFixes` Lua 1.2.0 — `NotifyOnNewObject('/Script/UMG.SizeBox')`, cap only when the 4th outer is a `WBP_ButtonBase_C`.
+> NEXT: a relaunch (the 21:32 game holds my remote experiment `CAPPROBE` — not a clean stand), then B3 on 3+ tab switches, the mod's cost line in
+> `UE4SS.log`, a tutorial prompt glyph unchanged (50.7), the owner's eye.
 > Then the «Хар-ки» perk rows (bug 64 item 46): rows hold ≈ 2 lines, «Берсерк» needs 4, «Кровожадный берсерк» 5 — a fixed-height overlap, not a jump
 > (frame `stats.jpg` 21:37; row layout in the game map).
 > Tools of this session: `hover-watch.ps1` (real hover / `-PultCmd`), `tooltip-bbox.py`, `bar-probe.lua`; recipe: a kit asset is cooked only if listed in
