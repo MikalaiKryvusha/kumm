@@ -115,8 +115,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > W12 night light (KRINIK MODIFIED Severe Weather pak); new by the owner's word — bug 68 freeze every 2 s (ConanModPackStatus, DONE), bug 69 FP
 > neck (DONE). Recon written, not fixed: W10a quick-loot jump (not reproduced, 3 variants — bug 64 item 45), W13 Kappa arrows (bone attach
 > refuted), W4 minimap (needs a new widget — not a prop edit). **Next in the order:** W5 XP «k» rounding, W6 corpse prompt layout, W7–W9,
-> W11 (ask: which list — the in-game mod list?), W13 stand on a walking Kappa, W14 jump shooting, W15 arrow physics. Asked of the owner:
-> plan 34 (our other Lua mods' polls — twins in bug 68). The agent can now exit to the menu itself (game map → «меню → снова в мир»).
+> W11 (the in-game mod list in the menu — the owner's answer; change Simple Modlist's display order, NOT the load order), W13 stand on a walking Kappa, W14 jump shooting, W15 arrow physics,
+> W16 — our mods' timer polls → events, carefully, each retested (the owner's yes 11:5x; plan 34 Status). The agent can now exit to the menu itself (game map → «меню → снова в мир»).
 >
 > **CHAT 2026-10-28 23:14 → 2026-10-29 00:4x — where it stands:**
 > - ✅ (0b) item 34 — «Q Забрать все (удерживайте)» (`HoldPromptVisibility = NEVER` on the take-all icons, kit), B1–B5 pass.
