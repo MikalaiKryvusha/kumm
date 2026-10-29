@@ -111,6 +111,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **NOW 2026-10-29 17:5x — the hub of the Conan build (bug 64 item 17):** fishing and Hosav buttons fixed (pack `fae3d52`, the owner's eye «это ок»;
 > all screen videos deleted by his word «удали записи видео, пока пауза» — check by frames or his eye). Next: three late elements on «Снаряжение» from his
 > frame — EoT magic icons, the «Аксессуары» button, the sword emblem with the green gem; then the vanilla buttons' width dance.
+> **18:37 — class B (late mod elements) fixed, cases I1–I7 pass** (`[OWNER]` «автономно работай» · 18:1x): EAA, EoT, Accessory System KRINIK MODIFIED,
+> `KrinikPauseGameInMenu` 0.9.1, `patch-mod-asset.py` `flt:<fn>@<n>` + `PATCH_VIEW_EXCLUDE`; run report `testcases/reports/2026-10-29_conan-hub-late-mod-elements.md`.
+> **Next — class A (text laid out once, then jumps):** the item tooltip auto-wrap (`W_ItemIconTooltipView`), the bottom-bar width dance (hotkey glyphs
+> born 170 ms after the buttons — to verify by frames), the «Хар-ки» perk descriptions overlap (bug 64 item 46); a sweep, not one widget.
 >
 > **2026-10-29 15:2x — ORDER OF WORK: quick and simple first, heavy after** (`[OWNER]` «сразу делаем много мелочей, что быстро делается и быстро
 > тестируется, что просто» · «потом более тяжелые и длительные задачи» · «в таком порядке» · 2026-10-29 ≈15:25). A switch to Svarog was cancelled a minute

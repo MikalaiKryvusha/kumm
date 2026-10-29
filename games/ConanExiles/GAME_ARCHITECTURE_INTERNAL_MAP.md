@@ -415,3 +415,24 @@ Lua-моды UE4SS ждут только отложенными действия
   `Create` + `AddChild` into `CraftingGUI_C.ButtonBar.ButtonContainerRight` of the visible hub, only when `bAdminLocal`). The button click is the
   widget's `CustomEvent` → module `ExilesFishingTuning`. KRINIK MODIFIED since 2026-10-29: both 0.3 s timers → 1e9, `Graft` called by
   `KrinikPauseGameInMenu` 0.8.0 on `XCS_Panel` true.
+- **Late hub elements and the pause (2026-10-29 17:55–18:10).** `KrinikPauseGameInMenu` runs the hub at `GlobalTimeDilation` 0.03, and every blueprint
+  `Delay` counts GAME time: a mod's `Delay 1.0` lasts ≈33 s in the hub. On a tab return the hub re-creates its widgets in this order (probe): carousel
+  switch → `CraftingGUI_C`, `WBP_ButtonBar_C` + ~10 `WBP_ButtonBase_C` (+0 ms) → `XCS_Panel` true (+37) → `CharacterInventory.SignalActivated` (+47) →
+  `W_PaperdollPanel_C`, `W_UICharacterDisplay_C` (`/Game/UI/Inventory/CharacterDisplay/W_UICharacterDisplay`, +100) → `W_HotkeyIcon_C` (+170).
+  EAA `AC_EAA_Inventorybutton` (on the hero): signal → `Delay 1.0` → resume `ExecuteUbergraph(286)`: `GetAllWidgetsOfClass(UICharacterDisplay)` →
+  `Create(BP_EAA_InventoryButton)` (`Button_Axe` = the sword emblem, `Button_74` = «Аксессуары») → `AddChild` to the display's grandparent.
+  EoT `EoT_AC_InterfaceInjectorComponent` (on the hero): «Character Inventory Activated» → `Delay 0.1` (1st 0.1 in the ubergraph) → resume 15 (paperdoll
+  icons); «Character Stats Window Activated» → `Delay 0.1` (2nd) → resume 1060; «GUI Carousel Activated» → 0.1 (3rd) → 2380. Since KRINIK MODIFIED
+  2026-10-29 the EAA delay and the EoT 1st delay are 1e9, and `KrinikPauseGameInMenu` 0.9.0 calls those resume points on the display's birth.
+  Components are reached through the hero: `FindFirstOf('PlayerController'):K2_GetPawn():GetComponentByClass(StaticFindObject('<class path>'))`
+  (the remote refuses `FindAllOf` on `…Component` classes — EXP-0330).
+- **Item tooltip.** `UI/Inventory/W_ItemIconTooltipView` → `Text_Content`: `AutoWrapText` True, `WrapTextAt` 800 — auto-wrap takes its width from the
+  previous frame, so the first frame is one line and the next wraps (the owner's «Грубая повязка», 2026-10-29). `WBP_ButtonBase.TxtLabel` has no
+  auto-wrap (default text «Text Block»); `WBP_ButtonMinor.TxtLabel` `WrapTextAt` 106 inside `SizeBox` `WidthOverride` 148.
+- **Accessory System (`/Game/ModsShared/AccessorySystem`, 2026-10-29).** Shipped inside BOTH Enhanced Armory and Arsenal and Highmane's Arsenal, in
+  different versions (the `AC_acs_AccessorySystem_Persistent` chunk 50 451 vs 50 347 bytes); the game loads the EAA copy (a patch of the Highmane's
+  copy changed nothing). «Аксессуары» under the boots = `W_acs_InventoryButton` (`LabelView`), created by `AC_acs_AccessorySystem_Persistent` (on
+  the hero): `InventoryActivated` → `GUIModule_Activate` async → `OnActivate_9DB3…` → `Delay 0.2` → resume 61 (cast of the persistent
+  `Temp_object_Variable` = the hub window → find the paperdoll → `Create` + `AddChild`). Calling 61 from Lua crashes the game (EXP-0371); since
+  KRINIK MODIFIED the delay is 0.0015. Click → module `acs_WardrobeGUI` («Гардероб — Экипировка»). Build with `PATCH_VIEW_EXCLUDE=HighmanesArsenal`.
+  `KrinikPauseGameInMenu` 0.9.1 also runs its pause poll on the `XCS_Panel` open event — the hub's time is 0.03 from its first frame.

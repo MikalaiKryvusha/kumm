@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0371 · 2026-10-29 · ❌→✅ · #conan #ue4ss #blueprint #latent #crash #pause #mods
+class: wrong-model-of-the-frame
+**Lesson:** a blueprint `Delay` counts GAME time — our hub pause (`GlobalTimeDilation` 0.03) stretched other mods' UI delays 33× (EAA 1.0 s → ≈33 s,
+ACS 0.2 s → 6.66 s, measured by the remote; 0.2 / 0.03 = 6.67 is the fingerprint). Replacing such a `Delay` by calling the blueprint's resume point
+from Lua (`ExecuteUbergraph_<BP>(<linkage>)`, the `0x5b` value of its `LatentActionInfo`) is safe ONLY when the resumed code re-queries the world
+(EAA 286: `GetAllWidgetsOfClass`; EoT 15: `module:GetWindowRoot()` on a long-lived module). The Accessory System's resume 61 starts with a cast of its
+persistent local `Temp_object_Variable` — the hub window, re-created on every tab — and the outside call crashed the game (`EXCEPTION_ACCESS_VIOLATION
+reading 0xffffffffffffffff`, stack in UE4SS, 18:19:20). Read the first statements of a resume point before calling it; a persistent local holding a
+UI object = do not call, shorten the `Delay` instead.
+**Repro:** 2026-10-29 18:19 remote `c:ExecuteUbergraph_AC_acs_AccessorySystem_Persistent(61)` on `W_UICharacterDisplay_C` birth → crash; the same
+pattern for EAA (286) and EoT (15) ran 8 times clean (18:06–18:17).
+mechanized: no
+
 ### EXP-0370 · 2026-10-29 · ❌ · #conan #backlog #stale #owner-debt #known-trap
 class: debt-list-from-a-table-the-fix-never-updated
 **Lesson:** asked for «all Conan debts», I copied open rows of bug 64 and plan 36 — the owner: «Там у тебя много уже неактуальных пунктов».
