@@ -48,7 +48,7 @@
 | 23 | Замеры q2, q3, q4 (В1) | 2 | открыт |
 | 24 | План 34 / В2: наши Lua-моды на события | — | ждёт владельца (выбор пути по цифрам) |
 | 25 | Баги 63, 08: подтверждение владельцем | — | ждёт владельца |
-| 26 | Баги 04, 05, 07: старые, с версии 2.x — проверить на 3.0.1 | 1,5 | открыт |
+| 26 | Баги 04, 05, 07: старые, с версии 2.x — проверить на 3.0.1 | 1,5 | 2026-10-29 10:18, by the logs: menu abort (05) — `AbortHandler` in none of the 11 game logs; probe killing Lua (07) — the probe is not in the build, `Event loop start` in the 00:49 UE4SS log; both proposed to close, 07 keeps its UE4SS-start check after deploy (≈ 0,5 h). Camera jitter at rest (04) — not checked on 3.0.1, needs a clip standing vs sprint |
 | 27 | Идеи 03, 04, 05: что уже стоит в сборке — закрыть или дописать | 1 | открыт |
 | 28 | Г10: архив на чистой игре, тома ≤ 700 МБ | 1–2 | открыт |
 | 29 | Г11: README-PDF | 3–4 | после 1–28 |

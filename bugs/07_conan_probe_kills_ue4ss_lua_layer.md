@@ -116,3 +116,7 @@ Fatal Error: [FName::StaticAlignment] StaticAlignment_Private is not valid
 - `ConanExiles/docs/04-камера.md` — признаки завёдшегося UE4SS, риски билда.
 - `EXP-0070` — урок этой сессии.
 - Журналы падения сохранены: `UE4SS_16-35_fail.log`, `ConanSandbox_16-35.log` (скретчпад сессии).
+
+## 2026-10-29 10:18 +03:00 — check on Conan 3.0.1
+
+`ConanProjectileProbe` is not in `ue4ss/Mods`; the 00:49 `UE4SS.log` has `Event loop start` (UE4SS started; the camera mod printed its config lines at 00:49:36). The cause inside the probe stays unknown; open is only the guard — check `Event loop start` after a Lua-mod deploy (≈ 0.5 h). Proposed to close after the guard.

@@ -131,3 +131,7 @@ UE4SS уронили игру через несколько минут норм�
 разведка, а опыт, и объявлять его безопасным нельзя.
 
 Связанное: `EXP-0059` · `ConanExiles/docs/06-интерфейс-модов.md` · `bugs/04_conan_camera_microjitter.md`
+
+## 2026-10-29 10:18 +03:00 — check on Conan 3.0.1
+
+None of the 11 game logs in `Saved/Logs` (the current one and 10 backups) holds `AbortHandler`; the menu abort has not recurred. Proposed to close.
