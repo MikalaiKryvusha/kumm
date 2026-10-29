@@ -1,7 +1,7 @@
 # TC — the hub bottom bar keeps its button widths when a tab opens (bug 64 item 17, class A)
 
 > **Created:** 2026-10-29 · **Parent:** bug 64 item 17 class A; recon `researches/conan-ui-text-relayout/README.md` (the bottom bar row, plan step 4)
-> **Status:** run 2026-10-29 21:4x–22:0x — B0 pass, B1 reproduced, B2 cause found, B3 pass with the shipped fix; waits for the owner's eye
+> **Status:** run 2026-10-29 21:4x–22:0x — B0 pass, B1 reproduced, B2 cause found, B3 pass with the shipped fix; the owner's eye 22:0x: `[OWNER]` «да, суппер с кнопками.»
 > **Outbound:** —
 
 **Basis.** `[OWNER]` «книзу кнопки прыгают» · 2026-10-29 21:38 (after the tooltip fix); earlier «почти на всех страницах его что-то да пляшет · особенно
