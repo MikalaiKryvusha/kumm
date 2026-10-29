@@ -116,8 +116,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `HotkeyIcon` is NATIVE; hooks on its setters never fire. PROVEN by a remote experiment: `MaxDesiredWidth` 42.67 on `SizeBoxPrimaryIcon` removes the jump
 > (5 of 5 switches) — but on the class template it would shrink the tutorial prompts' glyphs (height 38, 50.7), removed. SHIPPED scoped (pack `70a0bbe`,
 > deployed, copy equal): `KrinikUIFixes` Lua 1.2.0 — `NotifyOnNewObject('/Script/UMG.SizeBox')`, cap only when the 4th outer is a `WBP_ButtonBase_C`.
-> NEXT: a relaunch (the 21:32 game holds my remote experiment `CAPPROBE` — not a clean stand), then B3 on 3+ tab switches, the mod's cost line in
-> `UE4SS.log`, a tutorial prompt glyph unchanged (50.7), the owner's eye.
+> 22:0x after a relaunch («гоу»): B3 pass — four tab switches, buttons never move, 15 of 15 button glyphs capped, cost below the clock's resolution.
+> NEXT: the owner's eye on the bottom bar; then the «Хар-ки» perk rows. The game of 22:00 runs (my launch).
 > Then the «Хар-ки» perk rows (bug 64 item 46): rows hold ≈ 2 lines, «Берсерк» needs 4, «Кровожадный берсерк» 5 — a fixed-height overlap, not a jump
 > (frame `stats.jpg` 21:37; row layout in the game map).
 > Tools of this session: `hover-watch.ps1` (real hover / `-PultCmd`), `tooltip-bbox.py`, `bar-probe.lua`; recipe: a kit asset is cooked only if listed in
