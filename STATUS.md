@@ -134,7 +134,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > valid; `FindFirstOf('W_UI_SettingsButton_C')` may return the clone. NEXT (re-understand before a 4th try): the fishing look without a clone click —
 > (a) a vanilla `WBP_ButtonBase` as the CONTENT of the EFT `Btn_Open` (transparent style; the click stays the mod's own), hover glow to check;
 > (b) the EFT button moved next to Hosav as is, restyled by properties (brush, font) — the owner's eye decides between (a) and (b) if both work.
-> No game runs; the machine lock released.
+> 22:2x path (a) WORKS (`ConanExiles/_config/fishbtn-experiment2.lua`): a fresh `WBP_ButtonBase` (label, HitTestInvisible) as the content of the EFT `Btn_Open`
+> (`SetContent`, background alpha 0, `Size_Btn_Open` width override off, `Pad` 0), the EFT button moved into the left container after Hosav's — a real click
+> opened `ExilesFishingTuning`. Left: the look sits lower than Hosav's (the UMG Button's own paddings), hover glow unknown. NEXT: port into
+> `KrinikPauseGameInMenu` (after Graft and Hosav show, idempotent, guards), then cases R1–R6. The game of 22:13 runs (my launch, lock until 23:43).
 > Then the «Хар-ки» perk rows (bug 64 item 46): rows hold ≈ 2 lines, «Берсерк» needs 4, «Кровожадный берсерк» 5 — a fixed-height overlap, not a jump
 > (frame `stats.jpg` 21:37; row layout in the game map).
 > Tools of this session: `hover-watch.ps1` (real hover / `-PultCmd`), `tooltip-bbox.py`, `bar-probe.lua`; recipe: a kit asset is cooked only if listed in
