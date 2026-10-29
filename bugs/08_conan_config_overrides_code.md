@@ -72,7 +72,9 @@ PROVED-AGAINST: живой запуск 09.09.2026 с config.lua, где zoom_in
 GAP:            не покрывает случай, когда расходятся ключи владельца (offset_*, arm_length) —
                 они исключены намеренно; и не покрывает второй мод (ConanModPackStatus), у
                 которого своя пара defaults/config с тем же устройством
-ON-REAL-PATH:   NOT YET — ждёт первого запуска после раскатки 09.09.2026 23:2x
+ON-REAL-PATH:   seen 2026-10-29 00:49 on Conan 3.0.1 — the live `ue4ss/UE4SS.log` lines 1381–1389 list nine keys
+                «ключ: код X -> файл Y» (zoom_interp_speed 0.0001 -> 9.0, disable_collision_test true -> false, …);
+                read by the agent 2026-10-29 10:18
 ```
 
 ## Что этот баг закрывает в очереди заказов

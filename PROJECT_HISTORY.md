@@ -1,5 +1,12 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-29 10:19 +03:00 — HOUSE_RULES.md §1 rule 14: meaning, not numbers
+
+The agent's /resume answer listed the Conan debts as «08 — ждёт твоего подтверждения» and «04, 05, 07 — старые, ещё с 2.x». The owner,
+verbatim: `[OWNER]` «08 - не понимаю, поясни» · «04, 05, 07 — старые, ещё с 2. - не понимаю, поясни. Я тысячу раз говорил, что я не мыслю
+номерами, я мыслю смыслами» · 2026-10-29. Before this, the rule lived only for interviews (`AGENT_GUIDE.md` → «the voice of the conversation is
+the customer's language») and not for chat reports; now it is rule 14 of `HOUSE_RULES.md` §1.
+
 ## 2026-10-29 00:54 — STATUS: the 2026-10-28 23:09 handover (FIRST IN A NEW CHAT, the owner's word QUEUE, cases without a run) — items 0, 0a, 0b closed in the chat of 2026-10-28 23:14 – 2026-10-29 00:54 (moved verbatim at closing)
 
 > **FIRST IN A NEW CHAT (closure 2026-10-28 23:09; the chat 23:14–… did the hook/docs work above and then continues here):** the owner's word queue
