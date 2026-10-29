@@ -119,9 +119,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    `testcases/reports/2026-10-30_conan-fishing-hover-vanil.md`; how — game map «Vanilla button hover»). The owner's eye pending.
 > 3. ✅ 2026-10-30 00:33 — the fish card says «ваниль 80» instead of «исходно» (the «table» weight is the mod's Vanilla preset weight), label and field widths 92/66
 >    so nothing is cut (case V1). The owner's eye pending.
-> 4. Plan 36 item 14a — the retoc compression fix is BUILT, not installed: new exe + DLL in scratchpad `agentA/bin` of session a486276a, source edits uncommitted in
->    `D:/work/ai_sandbox/_tools/src/retoc` (`iostore_writer.rs`, `lib.rs`, `retoc_cli/src/main.rs`); `retoc-5.8/retoc.exe` is a HARD LINK to `target/release/retoc.exe`
->    (do not copy over it — rename first). Then rebuild every `_krinik-modified` pak by its manifest recipe, smallest first (Simple_Minimap), each checked by a launch.
+> 4. Plan 36 item 14a — retoc with Oodle compression INSTALLED 2026-10-30 00:37: rebuilt from `_tools/src/retoc` (the scratchpad exe was older than the
+>    sources), `_tools/retoc-5.8/retoc.exe` replaced, the old one kept as `retoc-2026-10-26-nocompress.exe` (correction 2026-10-30: «retoc-5.8/retoc.exe is a hard
+>    link» stood here wrongly — the file has one link). Rebuild of the 12 `_krinik-modified` paks — `_config/devkit/rebuild-krinik-paks.py` by the manifest field
+>    `krinikBuild` (guard: every container chunk byte-identical to the installed pak); pilot Simple Minimap 11.1 → 4.5 MB (original 4.6), 199 chunks identical.
+>    2026-10-30 00:47 the first install broke Player Ignores Follower Collision («Incompatible Mods Detected»: retoc compressed the container header, UE
+>    reads it raw) — the owner saw it first, I had skipped the smoke by eye (EXP-0375). Fixed: retoc local commits 8e2eedf + 9391c3a (header never compressed),
+>    a header guard in the rebuild tool (red on the broken pak). ✅ 2026-10-30 01:06 — all 12 at or below the original size, 12 of 12 mounted, world and mods ok
+>    (cases C0–C7, report `testcases/reports/2026-10-30_conan-compressed-krinik-paks.md`).
+>    ⚠️ 2026-10-30 ≈01:0x DISK D: FILLED TO 33 MB by my rebuild work dirs (three full runs × 12 mods, each unpacking old + new + view copies); 19 GB freed by
+>    deleting 260 listed big files; ≈86 GB of small files remain in scratchpad `075c1f98…/scratchpad/rebuild/` — bulk delete was refused by the permission
+>    classifier: the owner's call (`find <dir> -type f -delete` + empty dirs). The `view/` folders there hold HARD LINKS to the game's containers — deleting the
+>    links is safe, never write into them. The rebuild tool must clean its own work dir after a verified mod (open, ≈0.5 h).
 > Tools of the evening: `ConanExiles/_config/hover-watch.ps1` (real hover / `-PultCmd`), `tooltip-bbox.py`, `bar-probe.lua`, `fishbtn-experiment*.lua`; the kit cooks
 > only assets listed in `F:/CEUE5Devkit/UE4/Content/Mods/<mod>/Local/CookInfo.ini` `FilesToCook`; `pult.sh` must be called from its folder.
 >

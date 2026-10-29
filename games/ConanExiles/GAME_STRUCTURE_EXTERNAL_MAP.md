@@ -44,5 +44,10 @@
 | `_tools/src/uaj` | UAssetAPI из консоли: `copy`, `exports`, `strings`, `setstr`, `func`, `tojson` |
 | `_tools/retoc-5.8`, `_tools/repak` | контейнеры IoStore 5.8 и внешний пак V11 |
 
+Rebuild of all edited paks (2026-10-30): `python -I -X utf8 _config/devkit/rebuild-krinik-paks.py [--only <Мод>] [--install]` — reads the machine field
+`krinikBuild` (`{"args": [<Мод>, <Ассет>, <таблица>, …], "env": {…}}`) of each mod in `modpack.json`, builds into `REBUILD_WORK`, and installs only when every
+container chunk is byte-identical to the installed pak (proved red against the untouched original: 3 of 199 chunks differ). `retoc-5.8/retoc.exe` compresses
+with Oodle since 2026-10-30 (local commit 8e2eedf of `_tools/src/retoc`; the uncompressed one — `retoc-2026-10-26-nocompress.exe`).
+
 Правленые паки лежат в библиотеке `mods/_krinik-modified/<id>/`, в `modpack.json` у мода — поле `krinikModified` с командой пересборки:
 Exiles Fishing (перевод панели), The Damage Meter (угол свёрнутого окна), Hosav's Custom UI (метрики сервера выключены).

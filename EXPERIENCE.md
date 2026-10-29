@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0375 · 2026-10-30 · ❌→✅ · #conan #retoc #iostore #compression #smoke #owner-saw-first
+class: stand-not-checked
+**Lesson:** two misses on the compressed-pak rebuild. (1) retoc compressed the IoStore CONTAINER HEADER chunk (type 06) too; UE writes it uncompressed
+and reads it raw at mount → «Failed to mount IoStore container … Failed reading 1104 bytes at offset 552848» and the «Incompatible Mods Detected» dialog
+(Player Ignores Follower Collision). The chunk-identity guard was green — retoc's own reader decompresses anything. Fixed in retoc (`finalize` writes the
+header uncompressed) and guarded in `rebuild-krinik-paks.py` (the raw header bytes must appear verbatim in `-Windows.ucas`; red on the broken pak).
+(2) After the rebuild I launched straight into the automated world entry — the script hung on the dialog and the owner saw it first. After ANY pak/mod
+rebuild: launch → frame of the window → look → only then automation (memory `smoke-by-eye-before-automation`).
+mechanized: partly — the header guard in rebuild-krinik-paks.py; the smoke-by-eye step is a rule
+
 ### EXP-0374 · 2026-10-30 · ❌→✅ · #conan #ue4ss #umg #remote #crash #atomic #hover
 class: stand-not-checked
 **Lesson:** a remote UI experiment sent as ONE call (create an `Overlay` by `StaticConstructObject`, reparent two widgets, copy a brush struct, set a style)
