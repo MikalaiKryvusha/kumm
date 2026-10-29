@@ -116,15 +116,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > neck (DONE). Recon written, not fixed: W10a quick-loot jump (not reproduced, 3 variants — bug 64 item 45), W13 Kappa arrows (bone attach
 > refuted), W4 minimap (needs a new widget — not a prop edit). **Next in the order:** W5 XP «k» rounding, W6 corpse prompt layout, W7–W9,
 > W11 (the in-game mod list in the menu — the owner's answer; change Simple Modlist's display order, NOT the load order), W13 stand on a walking Kappa, W14 jump shooting, W15 arrow physics,
-> W16 — our mods' timer polls → events, carefully, each retested (the owner's yes 11:5x; plan 34 Status). The agent can now exit to the menu itself (game map → «меню → снова в мир»).
+> W16 — our mods' timer polls → events, carefully, each retested (the owner's yes 11:5x; plan 34 Status — `KrinikHudOutline` DONE 11:57; next
+> `KrinikPauseGameInMenu`, `ConanCameraControl`, `KrinikOblivionLocomotion`). Hosav blink — 0.25 (×4 slower, the owner's word 11:5x; his eye
+> pending). Night look (W12) — his eye pending. The agent can now exit to the menu itself (game map → «меню → снова в мир»).
 >
 > **CHAT 2026-10-28 23:14 → 2026-10-29 00:4x — where it stands:**
-> - ✅ (0b) item 34 — «Q Забрать все (удерживайте)» (`HoldPromptVisibility = NEVER` on the take-all icons, kit), B1–B5 pass.
-> - ✅ (0a) item 35 — `KrinikUIFixes` 1.1.0 = pak (strip vanilla Center) + Lua (strip Left only while the loot window shows; hooks
->   `WBP_ContainerInfo_C:SetObject` + native `QuickLootPanel:SlotItemAddedOrRemoved`); L1–L4 pass (L4 by a real Q hold). Left: L5 cost line,
->   L6 control (Lua off). Cases — `testcases/TC_conan_loot_panel_hidden_and_hold_prompt_2026-10-28.md`.
-> - ✅ spread bars (`[OWNER]` «опять полоски разброса появились!!!!!!» · 00:2x): they show with the bow in hand right after the world loads; now hidden
->   when `WBP_Crosshair_C` is created (SB4 pass 00:44).
 > - ✅ bug 67 palm shadows: 2.0 in the pack BY THE OWNER'S CHOICE (2026-10-29 01:10, «ставим 2.0 и закрываем чат»; pack 1c70cb9) — NEXT: the kit route (bug 67 → «Next path — the kit»: sky blueprint, smooth sun + rare shadow light) — cause found (`DynamicSky.SolarUpdateAngleDelta`: 2.0 calm / 0.003 flicker, the owner's eye both ways), but 2.0 was
 >   REVERTED (pack 6a12183): 0.003 is there for a smooth sun — `[OWNER]` «мы же специально делали так, чтобы солнце плавно по небу двигалось...».
 >   His answer: `[OWNER]` «ПЛАВНОЕ СОЛНЦЕ И НЕ МЕРЦАЮЩИЕ ТЕНИ!!!!!!!!» — FIRST in the next chat: keep 0.003, find levers that do not touch the sun
@@ -137,14 +133,6 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - 🔴 item 33(c) «k» one decimal: Hosav `BPFL_Hosav_UI.TextOverflowPrevention_Numbers` — in-place edit gives truncation only; rounding needs a
 >   bytecode insertion (bug 64 row 33).
 > - Plan 37 jump shooting — recon step 1 done (`ActionTry` refuses on `IsFalling`), (a)–(c) open; ≈ 1–2 h recon + 2–3 h fix.
->
-> **NEXT CHAT — queue (the old 23:09 handover with items 0, 0a, 0b moved verbatim to the chronicle, entry 2026-10-29 00:5x):** first the cases
-> without a run — `TC_conan_corpse_prompt_left_of_quickloot_2026-10-28.md` F4 (a chest: find a `LootContainer` first), F5 (1080p), S3/H2/H3 rows;
-> `TC_conan_bow_fp_smooth_zoom_2026-10-28.md` H2, H3 (real input, FP); then: (1) item 36 corpse prompt on two lines — a layout variant (the widget is
-> «text · E · text» in one row; `vanilla-override.py` ready); (2) item 33 (a) «XP:» colon variants by a frame, (c) «k» rounding (bytecode insertion,
-> ≈ 2–3 h, or truncation by two constants); (3) plan 37 jump shooting (a)–(c); (4) the fishing button (plan 35, B7); (5) accessories UI (item 27); (6) hub
-> elements popping in (B4, item 26); (7) item 42 on the rhino/elephant; (8) minimap; (9) Krinik mods at the top of the list; (10) version 3.0.1 of the
-> Krinik mods; (11) arrow physics (below); (12) README-PDF mod items (plan 35, G11 item 6). Before any run — the stand (`HOUSE_RULES.md` §1 rule 11).
 >
 > **Arrow physics (not started):** `[OWNER]` «в новом чате полностью делаем физику в конане, как была в обливионе» (2026-10-28) — Oblivion arrow flight:
 > constant gravity `ProjectileGravityScale` 0.55 (Remastered vanilla), speed = 5000 × (min + (1 − min) × charge) cm/s, where `min` is NOT Oblivion's 0.25:

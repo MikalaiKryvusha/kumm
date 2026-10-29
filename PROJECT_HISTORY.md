@@ -1,5 +1,23 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-29 11:59 +03:00 — STATUS: closed items of the 2026-10-28 23:14 chat and its NEXT-CHAT queue (superseded by the owner's work order of 2026-10-29, plan 36 W1–W16; moved verbatim at closing)
+
+> - ✅ (0b) item 34 — «Q Забрать все (удерживайте)» (`HoldPromptVisibility = NEVER` on the take-all icons, kit), B1–B5 pass.
+> - ✅ (0a) item 35 — `KrinikUIFixes` 1.1.0 = pak (strip vanilla Center) + Lua (strip Left only while the loot window shows; hooks
+>   `WBP_ContainerInfo_C:SetObject` + native `QuickLootPanel:SlotItemAddedOrRemoved`); L1–L4 pass (L4 by a real Q hold). Left: L5 cost line,
+>   L6 control (Lua off). Cases — `testcases/TC_conan_loot_panel_hidden_and_hold_prompt_2026-10-28.md`.
+> - ✅ spread bars (`[OWNER]` «опять полоски разброса появились!!!!!!» · 00:2x): they show with the bow in hand right after the world loads; now hidden
+>   when `WBP_Crosshair_C` is created (SB4 pass 00:44).
+
+> **NEXT CHAT — queue (the old 23:09 handover with items 0, 0a, 0b moved verbatim to the chronicle, entry 2026-10-29 00:5x):** first the cases
+> without a run — `TC_conan_corpse_prompt_left_of_quickloot_2026-10-28.md` F4 (a chest: find a `LootContainer` first), F5 (1080p), S3/H2/H3 rows;
+> `TC_conan_bow_fp_smooth_zoom_2026-10-28.md` H2, H3 (real input, FP); then: (1) item 36 corpse prompt on two lines — a layout variant (the widget is
+> «text · E · text» in one row; `vanilla-override.py` ready); (2) item 33 (a) «XP:» colon variants by a frame, (c) «k» rounding (bytecode insertion,
+> ≈ 2–3 h, or truncation by two constants); (3) plan 37 jump shooting (a)–(c); (4) the fishing button (plan 35, B7); (5) accessories UI (item 27); (6) hub
+> elements popping in (B4, item 26); (7) item 42 on the rhino/elephant; (8) minimap; (9) Krinik mods at the top of the list; (10) version 3.0.1 of the
+> Krinik mods; (11) arrow physics (below); (12) README-PDF mod items (plan 35, G11 item 6). Before any run — the stand (`HOUSE_RULES.md` §1 rule 11).
+>
+
 ## 2026-10-29 10:23 +03:00 — AGENT_GUIDE "The owner's word mid-turn": no echo of his words
 
 The agent opened its mid-turn answers with the owner's words in quotes, as step 2 demanded. The owner, verbatim: `[OWNER]` «"Уверен, что
