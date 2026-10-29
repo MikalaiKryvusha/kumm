@@ -166,7 +166,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    with the game closed: left Ctrl — crouch, heavy attack — middle mouse button, the chats on numpad * and − removed, dodge — side mouse button
 >    (the owner). Waits for the owner: where to move the camera mod's Ctrl combos (Ctrl+5, Ctrl+/ reset to factory) — Alt+numpad or numpad . and *.
 > 6. **Evening tails:** bug 65 (crash after re-login — the fix confirmed by a re-login 2026-10-26 23:23; before DONE — 10 min of play + a twin sweep);
->    night — Severe Weather light off via `dc SW_config disable_custom_GI`, whether it survives a restart — check (item 40); smooth zoom step
+>    night — done 2026-10-29 (W12: the shipped default off; the console `dc` never reached the mod); smooth zoom step
 >    checked (ZS1); bug 64 item 27 accessories, 28 XP captions, 29 arrow-choice flicker (Arrow Quick Swap?), 30 hunger/thirst arrows (below the icons; the
 >    owner 00:1x «указатели так и не поднял ты» — first after the bow), 31 minimap coordinates — inside the circle with a backing, the whole minimap further right
 >    and higher, 32 with the quick loot open, shift the corpse prompt further left (the tutorial prompt overlap — «бог с ним»); item 39 the charge ding — done
