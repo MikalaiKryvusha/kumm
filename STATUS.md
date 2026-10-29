@@ -117,7 +117,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (5 of 5 switches) — but on the class template it would shrink the tutorial prompts' glyphs (height 38, 50.7), removed. SHIPPED scoped (pack `70a0bbe`,
 > deployed, copy equal): `KrinikUIFixes` Lua 1.2.0 — `NotifyOnNewObject('/Script/UMG.SizeBox')`, cap only when the 4th outer is a `WBP_ButtonBase_C`.
 > 22:0x after a relaunch («гоу»): B3 pass — four tab switches, buttons never move, 15 of 15 button glyphs capped, cost below the clock's resolution.
-> ✅ the owner's eye: «да, суппер с кнопками.» NOW: the «Хар-ки» perk rows. The game of 22:00 runs (my launch).
+> ✅ the owner's eye: «да, суппер с кнопками.»
+> **NOW (22:0x) — the fishing button** (`[OWNER]` «кнопку рыбалки делаем» · 2026-10-29 22:0x; the ask of 26.10 — plan 35 Б7 / plan 36 item 7: «Настройка
+> рыбалки» in the style of Hosav's «Настройки интерфейса», next to it, on the bar line). Recon: Hosav's `W_UI_SettingsButton` = a vanilla `WBP_ButtonBase`
+> in its own viewport canvas (click → BP `BndEvt…SignalClicked` → `ActivateModule('HosavUIsettings')`, a hard FName); the fishing `W_EFT_AdminButton` =
+> a plain `Button` + `TextBlock` (SizeBox 214) put into the bar's `ButtonContainerRight` by `BPC_EFT_Tuning.Graft`. `FLXButtonBase.SignalClicked` is a native
+> multicast (no Lua binding); BP handlers DO hook. Idea under test: both buttons into the bar's `ButtonContainerLeft` in a row (a second
+> `W_UI_SettingsButton` instance gives the fishing look + a hookable click → open the fishing panel through the EFT button, which stays collapsed).
+> 22:08 my remote move of Hosav's button CRASHED the game — the owner had just closed the hub and was playing (EXP-0372; crash window closed by PID).
+> Then the «Хар-ки» perk rows. No game runs; the machine lock released.
 > Then the «Хар-ки» perk rows (bug 64 item 46): rows hold ≈ 2 lines, «Берсерк» needs 4, «Кровожадный берсерк» 5 — a fixed-height overlap, not a jump
 > (frame `stats.jpg` 21:37; row layout in the game map).
 > Tools of this session: `hover-watch.ps1` (real hover / `-PultCmd`), `tooltip-bbox.py`, `bar-probe.lua`; recipe: a kit asset is cooked only if listed in

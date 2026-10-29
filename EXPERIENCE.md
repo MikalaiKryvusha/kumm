@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0372 · 2026-10-29 · ❌ · #conan #ue4ss #umg #remote #crash #owner-machine
+class: stand-not-checked
+**Lesson:** a remote command that MOVES a widget (`RemoveFromParent` + `AddChildToHorizontalBox` of Hosav's `WBP_ButtonBase` into the hub bar) crashed
+the game (22:08:33, `EXCEPTION_ACCESS_VIOLATION reading 0x20`, UE4SS stack): the owner had closed the hub 2 s earlier and was playing, so the bar and the
+fishing button the command walked from were being torn down. Before any remote UI surgery: (1) input idle ≥ 10 s (`wait-input-idle.ps1`) — the owner may
+be playing the agent's open game; (2) in the SAME Lua call check the target window is open (`IsModuleActive`) and every object `IsValid` before touching
+it; (3) reads first, a structural edit only after. Crash window closed by PID 30788, crash folder `UECC-Windows-BC34510743195A5E3CCD6D8059490B51_0000`.
+mechanized: no
+
 ### EXP-0371 · 2026-10-29 · ❌→✅ · #conan #ue4ss #blueprint #latent #crash #pause #mods
 class: wrong-model-of-the-frame
 **Lesson:** a blueprint `Delay` counts GAME time — our hub pause (`GlobalTimeDilation` 0.03) stretched other mods' UI delays 33× (EAA 1.0 s → ≈33 s,
