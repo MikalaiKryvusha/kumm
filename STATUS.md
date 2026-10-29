@@ -140,7 +140,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 22:4x SHIPPED `KrinikPauseGameInMenu` 0.10.0 (pack `9095d51`, deployed): Hosav stays in its own layer (moved into the bar it STOPPED clicking — 2 real clicks,
 > handler never called); the fishing button goes into the bar's left container after it, padding 336.5/19/15/11, render scale ×1.094 (Hosav's layer is that much
 > larger), the vanilla look with Hosav's ContentPadding 5 and the UMG Button paddings zeroed. Cases R1–R5 pass, R6 FAIL — no gold hover glow on the fishing button.
-> NEXT: the owner's eye; the hover glow (idea: play the look's own hover visuals from a hookable event — none found yet). Owner's question 22:3x: the fish-card word
+> The owner's eye 22:4x: `[OWNER]` «да, не хватает обводки.» · «и когда ESC нажимаешь, то закрывается хаб, а не мод рыбалки» · «нужно сразу мод рыбалки
+> закрывать» (Hosav's settings window behaves the same: Esc closed the hub too, 22:39). NEXT, two owner items: (1) the hover outline on the fishing button —
+> tried: `UserWidget:OnMouseEnter/OnMouseLeave` hooks registered but never fire on hover (not ProcessEvent-routed without a BP implementation); open ideas —
+> play the look's `AnimHovered` from another hookable event, or a hover-capable widget that still routes the click; (2) Esc on an open mod window
+> (`ExilesFishingTuning`, `HosavUIsettings`) must close only that window, not the hub — recon the `DT_UIModuleTable` row fields of these modules vs a vanilla
+> popup that closes alone on Esc; a module closes by `ActivateModule(FName(name), false, false)`. Owner's question 22:3x: the fish-card word
 > «исходно» is the author's «table » (the mod's own table weight), not «vanilla» — word to pick after checking whether those weights equal the vanilla ones.
 > Three helper agents run (the owner: «поднимай три субагента … они программируют, ты тестируешь»): retoc compression (plan 36 14a), RNF smelters, perk rows.
 > The game of 22:37 runs (my launch).
