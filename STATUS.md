@@ -108,6 +108,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-10-29 17:5x — the hub of the Conan build (bug 64 item 17):** fishing and Hosav buttons fixed (pack `fae3d52`, the owner's eye «это ок»;
+> all screen videos deleted by his word «удали записи видео, пока пауза» — check by frames or his eye). Next: three late elements on «Снаряжение» from his
+> frame — EoT magic icons, the «Аксессуары» button, the sword emblem with the green gem; then the vanilla buttons' width dance.
+>
 > **2026-10-29 15:2x — ORDER OF WORK: quick and simple first, heavy after** (`[OWNER]` «сразу делаем много мелочей, что быстро делается и быстро
 > тестируется, что просто» · «потом более тяжелые и длительные задачи» · «в таком порядке» · 2026-10-29 ≈15:25). A switch to Svarog was cancelled a minute
 > later (`[OWNER]` «сворог - отмена!» · ≈15:27) and «МЫ ДЕЛАЕМ КОНАН» — the work stays on the Conan build, autonomous, by the order below sorted

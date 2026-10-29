@@ -406,3 +406,12 @@ Lua-моды UE4SS ждут только отложенными действия
   the wheel path is `HideDisplay` → `RevealDisplay` (animation `Reveal` on `CanvasPanel_32.RenderOpacity`), auto-hide after `MinDisplayTime`.
   Trace recipe: a remote `lua` `RegisterHook("/Script/ConanSandbox.GUIModuleController:ActivateModule", …)` + `NotifyOnNewObject(<widget BP>)` printing
   `os.clock()` — every call, not only state changes (the pause mod logs changes only).
+- **Hub tab switching (2026-10-29 16:56, remote probes).** The tabs are changed by the NATIVE parent class of `W_Carousel_C`:
+  `/Script/ConanSandbox.CarouselWindow` — `NextCarouselWindow` (E), `PrevCarouselWindow` (Q), `SetCarouselIndex`; the blueprint has no own Next/Prev
+  (a hook by the blueprint path fails «no UFunction»). Module events lag the switch: `NextCarouselWindow` 17.535 → `XCS_Panel` false 17.681
+  (146 ms); `PrevCarouselWindow` → `XCS_Panel` true 42 ms (log timestamps; `os.clock()` is process CPU time, not wall time — do not measure gaps with it).
+  Exiles Fishing: `BPC_EFT_Tuning` sets a LOOPING 0.3 s timer `CheckInventory` (in BeginPlay and again in `TryLocal`), which polls
+  `IsModuleActive(CharacterInventory)` and on the rising edge calls `Graft`; `Graft` is idempotent (removes every `W_EFT_AdminButton_C`, then
+  `Create` + `AddChild` into `CraftingGUI_C.ButtonBar.ButtonContainerRight` of the visible hub, only when `bAdminLocal`). The button click is the
+  widget's `CustomEvent` → module `ExilesFishingTuning`. KRINIK MODIFIED since 2026-10-29: both 0.3 s timers → 1e9, `Graft` called by
+  `KrinikPauseGameInMenu` 0.8.0 on `XCS_Panel` true.
