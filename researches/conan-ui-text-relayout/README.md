@@ -3,7 +3,9 @@
 > **Created:** 2026-10-29 · on the owner's word: `[OWNER]` «поп-апы при ховеве тоже мерцают. Открываются в одну строку, а затем становятся в две» ·
 > «этот какой-то один блять общий класс проблем!» · «прыгающее это все» · 2026-10-29 18:0x
 > **Parent:** bug 64 item 17 (class A), item 46
-> **Status:** recon done 2026-10-29 18:41 (inventory below); the fix not started
+> **Status:** recon done 2026-10-29 18:41 (inventory below); step 1 done 2026-10-29 21:2x — the tooltip cause PROVEN (vanilla 405 px one-line box with
+> two-line text → 274×165 next frame, 3 of 3; `AutoWrapText` False by the remote → 405×107 from the first frame, 3 of 3; cases T1–T3 of
+> `testcases/TC_conan_item_tooltip_first_frame_wrap_2026-10-29.md`); step 2 (the kit edit in `KrinikUIFixes`) in progress
 > **Outbound:** —
 
 ## The class

@@ -426,8 +426,13 @@ Lua-моды UE4SS ждут только отложенными действия
   2026-10-29 the EAA delay and the EoT 1st delay are 1e9, and `KrinikPauseGameInMenu` 0.9.0 calls those resume points on the display's birth.
   Components are reached through the hero: `FindFirstOf('PlayerController'):K2_GetPawn():GetComponentByClass(StaticFindObject('<class path>'))`
   (the remote refuses `FindAllOf` on `…Component` classes — EXP-0330).
-- **Item tooltip.** `UI/Inventory/W_ItemIconTooltipView` → `Text_Content`: `AutoWrapText` True, `WrapTextAt` 800 — auto-wrap takes its width from the
-  previous frame, so the first frame is one line and the next wraps (the owner's «Грубая повязка», 2026-10-29). `WBP_ButtonBase.TxtLabel` has no
+- **Item tooltip.** `UI/Inventory/W_ItemIconTooltipView` (`Border_Background` → `Border_Frame` padding 20/12 → `Text_Content`, a `GeneralText`):
+  `AutoWrapText` True, `WrapTextAt` 800, nothing sets a width — the tooltip is sized by its content, and auto-wrap wraps at the width the PREVIOUS
+  frame allotted (frame minus padding), so the text collapses to one word per line. Measured 2026-10-29 21:2x by `hover-watch.ps1` + `tooltip-bbox.py`
+  (4K): «Грубая повязка» — first frame the frame box 405 px wide for one line with the text already in two lines below it, next frame 274×165 (two lines),
+  3 of 3 hovers. `AutoWrapText` False (remote, on the class template `…W_ItemIconTooltipView_C:WidgetTree.Text_Content` — the game builds a NEW
+  tooltip widget per hover, so the template is enough): 405×107, one line from the first frame, 3 of 3. In full screen the hover tooltip is drawn
+  INSIDE the game window, not as a window of its own; the hover needs the real cursor (`hover-watch.ps1`). `WBP_ButtonBase.TxtLabel` has no
   auto-wrap (default text «Text Block»); `WBP_ButtonMinor.TxtLabel` `WrapTextAt` 106 inside `SizeBox` `WidthOverride` 148.
 - **Accessory System (`/Game/ModsShared/AccessorySystem`, 2026-10-29).** Shipped inside BOTH Enhanced Armory and Arsenal and Highmane's Arsenal, in
   different versions (the `AC_acs_AccessorySystem_Persistent` chunk 50 451 vs 50 347 bytes); the game loads the EAA copy (a patch of the Highmane's
