@@ -21,7 +21,7 @@ debt of the build is asked first** (`[AI]` reading of the last sentence, told to
 | W5 | XP line: (a) «XP:» colon spacing by a frame; (c) «k» with one decimal, mathematical rounding | bug 64 item 33 | (a) **done 2026-10-29 15:36** — thin space U+2009 before the colon (`Game.locres` by `_config/devkit/locres-set-tr.py`, source interview #003 rows 299–300); 4K frame «XP : 119,43k …» (case X1); (c) open |
 | W6 | Corpse prompt on two lines — a layout variant | item 36 | open |
 | W7 | Mod UI: Russian wider than mod buttons; EAA hint in the game's style | Б1 / item 13, Б5 / item 18 | open |
-| W8 | Hub without jerks and late elements | Б4, items 15, 17, 26 | open |
+| W8 | Hub without jerks and late elements | Б4, items 15, 17, 26 | partly done 2026-10-29: the Hosav and fishing buttons by event (pack `fae3d52`, the owner's eye «это ок»); the late EAA emblem, gem, «Аксессуары», EoT icons — first frame of the tab (pack `9ff4e30`, cases I1–I7, item 26 closed). Open: class A — text laid out once then jumps (tooltip auto-wrap, bottom-bar width dance, «Хар-ки» perk overlap item 46) — recon `researches/conan-ui-text-relayout/README.md` |
 | W9 | Fishing button next to Hosav, in its style | Б7 | open |
 | W10 | The rest of the mod-UI bug's open items | bug 64 | open |
 | W10a | Quick-loot window jumps when the wheel shows «Esc Отмена» (owner 2026-10-29 10:4x) | bug 64 item 45 | open |
