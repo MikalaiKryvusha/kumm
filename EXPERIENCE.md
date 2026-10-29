@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0373 · 2026-10-30 · ❌→✅ · #conan #ue4ss #umg #modules #esc #mods #twin
+class: twin-not-searched
+**Lesson:** two misses on one fix (Esc of mod windows over the hub). (1) Hosav ships its module row TWICE — `DT_UIModuleTable_HosavNew` and the live
+`UIModuleTable_UIH`; the first pak edited the twin and nothing changed. Before editing a module row, grep EVERY module table of the mod (all `*UIModule*`
+assets) for the row name the BP actually passes to `ActivateModule`. (2) `FindFirstOf(<window class>)` returned a closed window: the game builds a new widget
+per open and the old one lingers — the second open ignored Esc. For a window that is opened repeatedly: `FindAllOf` + `IsOpen()`. Also: a Modal window is
+closed by its own Escape-shortcut button, not by the controller — a mod window without one swallows Esc.
+mechanized: no
+
 ### EXP-0372 · 2026-10-29 · ❌ · #conan #ue4ss #umg #remote #crash #owner-machine
 class: stand-not-checked
 **Lesson:** a remote command that MOVES a widget (`RemoveFromParent` + `AddChildToHorizontalBox` of Hosav's `WBP_ButtonBase` into the hub bar) crashed

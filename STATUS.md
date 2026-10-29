@@ -113,9 +113,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the fishing button next to Hosav (`KrinikPauseGameInMenu` 0.10.0 — the row is right, «да, не хватает обводки»). Shipped, his eye pending: the «Хар-ки» perk spacing
 > (`KrinikUIFixes` pak, `PerkDescription` padding 10/10, cases P1–P5) — the game of 22:52 is open on that tab for him; RNF dangling spawn rows deleted (+3 twins, cases N1–N2).
 > **First in the next chat (the owner's items, in his order):**
-> 1. Esc on an open mod window (`ExilesFishingTuning`, `HosavUIsettings`) closes the whole hub — must close only that window (`[OWNER]` «нужно сразу мод рыбалки
->    закрывать»). The row struct `UIModuleTableRow` has `CloseOnESC`, `Category`, `FullscreenGUIAction`, `ZOrder`, `HiddenByPopups`…; compare the two mod rows with a
->    vanilla popup that closes alone; a stopped helper left extractions in scratchpad `agentD/` of session a486276a (`esc_callers.txt`, `leg-*`) — re-derive, do not trust.
+> 1. ✅ 2026-10-30 00:11 — Esc on the fishing panel / Hosav's settings closes only that window, the hub stays (pack `3f674d3`, `KrinikPauseGameInMenu` 0.11.0;
+>    cases E1–E10, report `testcases/reports/2026-10-30_conan-hub-esc-mod-windows.md`; how — game map «Esc and windows over the hub»). The owner's eye pending.
 > 2. The gold hover outline on «Настройка рыбалки» (case R6 of `testcases/TC_conan_hub_fishing_button_next_to_hosav_2026-10-29.md`): the vanilla look is HitTestInvisible
 >    inside the mod's own `Btn_Open`; `UserWidget:OnMouseEnter/Leave` hooks never fire; a clone of Hosav's widget never fires its click; Hosav's button moved into the
 >    bar stops clicking (game map → «Hub bottom row»). Find a hookable hover event or a hover-capable widget that keeps the click.

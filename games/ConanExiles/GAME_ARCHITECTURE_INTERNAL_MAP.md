@@ -447,6 +447,16 @@ Lua-моды UE4SS ждут только отложенными действия
   HitTestInvisible content (`SetContent`) and keeps its own click — but then the hover glow is lost. The bar: `WBP_ButtonBar` → `ButtonContainerLeft` (starts
   at x 0) / `ButtonContainerRight`. Remote facts: inside a module activation callback `IsModuleActive(<that module>)` is still false; `GetCachedGeometry`
   through `SlateBlueprintLibrary` returns zeros; `GUIModuleController` has no `DeactivateModule` (close by a real Esc).
+- **Esc and windows over the hub (2026-10-30, KRINIK MODIFIED + `KrinikPauseGameInMenu` 0.11.0).** Module rows (`UIModuleTableRow`): vanilla popups over a hub
+  tab (`PerkSelection`, `ThrallBonuses`, `InventorySettingsPopup`) are `Category Modal`, `FullscreenGUIAction None`, `CloseOnESC true` — and Esc is taken by their
+  OWN cancel button: a `WBP_ButtonBase` (native `FLXButtonBase`) with `KeyShortcutName` «Escape» (the input action `Escape` = Esc / gamepad B). The controller does
+  not close a Modal on Esc by itself: a Modal mod window without such a button swallows Esc (the fishing panel stayed open, the hub too). A `Fullscreen` module
+  opened from the hub replaces it — Esc then closes everything; `FullscreenGUIAction Close` closes the hub when the window opens. Hosav's settings window
+  (`W_ExampleWidget_User_C`) has its live row `HosavUIsettings` in `UIModuleTable_UIH` (a twin `HosavUISettings` sits in `DT_UIModuleTable_HosavNew`); the value
+  `EGUIModuleCategory::Popup` is not used by any vanilla row. Hosav's button BP calls `ActivateModule('CharacterInventory', False, False)` then
+  `ActivateModule('HosavUIsettings', True, False)`; `ActivateModule(<open module>, True)` is harmless (hub and its buttons stay). Mod windows are `WindowRoot`
+  (`RootWidget`) subclasses: `TryCloseWindow()` closes one cleanly, the hub under it stays, `IsModuleActive` drops a moment later. The game builds a NEW window
+  instance per open and the closed one lingers until GC — find the open one by `FindAllOf(<class>)` + `IsOpen()`, never `FindFirstOf`.
 - **«Хар-ки» perk rows (read from the 3.0.1 assets 2026-10-29).** `UI/Inventory/Attributes/W_AtrributeInfoEntry` (sic): `Overlay_120` →
   `VerticalBox_173` with `PrimaryPerkView` (slot padding Bottom −2) over `BranchedPerkView` (Top −2), both `W_AttributeInfoEntry_PerkView`; the
   link icon `PerkIconLink` sits in the same overlay with padding Left 40, Top 82, Bottom 82 — the row is drawn for one-line descriptions. The perk
