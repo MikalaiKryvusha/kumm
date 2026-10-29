@@ -452,7 +452,12 @@ Lua-моды UE4SS ждут только отложенными действия
   link icon `PerkIconLink` sits in the same overlay with padding Left 40, Top 82, Bottom 82 — the row is drawn for one-line descriptions. The perk
   view: `Overlay_0` → `HorizontalBoxMainContent` → `PerkDescription` (`GeneralText`, size 13, `AutoWrapText` True, slot padding Top 2 Bottom 5) +
   `W_AttributePerkPip`; `ButtonBase` over it (padding 8). The parent `W_AttributeInfo.Description` wraps at a fixed `WrapTextAt` 430 (no auto-wrap).
-  Why «Берсерк» / «Кровожадный берсерк» overlap is NOT measured yet (bug 64 item 46) — a live frame and the rows' desired sizes by the remote first. `WBP_ButtonBase.TxtLabel` has no
+  Cause of the «Берсерк» / «Кровожадный берсерк» overlap (bug 64 item 46; helper recon 2026-10-29 from the assets and bytecode): rows DO grow with the text —
+  a row is max(120, text + 7) tall (`SetupFromPerkPip` gives the pip brushes 120/80/40; the description slot is Fill, VAlign Center, padding Top 2 Bottom 5) —
+  but `W_AttributeInfo.ConstructInfoWidgets` gives every entry the padding (0, −4, 0, −4) and the pair rows overlap by 4 (the −2/−2): the gap between two
+  descriptions is −1 unit between entries and 3 inside a pair. English (1–2 lines) hides in the 120 minimum; Russian 4–5 lines touch. Container: `W_Attributes`
+  `SizeBox_0` 585×1000, clipped; text column 465 units. The link icon (`PerkIconLink`, VAlign Fill, Top/Bottom 82, under the pips) stays hidden up to ≈ 6.9 lines
+  per description. Fix (kit, `KrinikUIFixes`): `PerkDescription` slot padding 10/10. `WBP_ButtonBase.TxtLabel` has no
   auto-wrap (default text «Text Block»); `WBP_ButtonMinor.TxtLabel` `WrapTextAt` 106 inside `SizeBox` `WidthOverride` 148.
 - **Accessory System (`/Game/ModsShared/AccessorySystem`, 2026-10-29).** Shipped inside BOTH Enhanced Armory and Arsenal and Highmane's Arsenal, in
   different versions (the `AC_acs_AccessorySystem_Persistent` chunk 50 451 vs 50 347 bytes); the game loads the EAA copy (a patch of the Highmane's
