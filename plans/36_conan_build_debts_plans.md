@@ -26,7 +26,7 @@ debt of the build is asked first** (`[AI]` reading of the last sentence, told to
 | W10 | The rest of the mod-UI bug's open items | bug 64 | open |
 | W11 | Krinik mods at the top of the mod list; their versions 3.0.1 | — | open |
 | W12 | Night: the game's own light instead of Severe Weather (does the choice survive a restart) | item 40 | open |
-| W13 | Arrows into a rhino and an elephant; a close frame from the far side | item 42 | open |
+| W13 | Arrows into a rhino and an elephant; a close frame from the far side. **2026-10-29 10:4x the owner's frame: a Kappa with an arrow hanging in the air beside its body** (`[OWNER]` «вот видно стрелы торчащие из моба в воздухе» · «это моб ККаппа») | item 42 | open |
 | W14 | Shooting while jumping, (a)–(c) | plan 37 | open |
 | W15 | Arrow physics as in Oblivion | STATUS "Arrow physics" | open |
 
