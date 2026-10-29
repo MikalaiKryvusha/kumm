@@ -98,7 +98,6 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
       copy of an Elden Ring save and the personal video `ref.mp4`.
 - 🗂️ **Old questions to the owner** (cleanup 17.08 — malware, RTSS, iTunes, quarantine; Palworld `LoadingRange` 25600 — what to restore;
       Oblivion — mod-list rows and reshades; the "not a Steam install" line and the anonymisation rule) — chronicle, entry 2026-10-12 19:22.
-- 🗂️ Interview #024 (Svarog night findings) — answered, its decisions wait to be applied when Svarog returns (`review.mjs --queue` lists it first).
 - 🧰 Anything needing a real Nexus login, a real game install, or the owner's own mod pack is his to
       run — the agent can build the fixture path but cannot verify the live path alone.
 
@@ -109,6 +108,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **2026-10-29 15:2x — ORDER OF WORK: quick and simple first, heavy after** (`[OWNER]` «сразу делаем много мелочей, что быстро делается и быстро
+> тестируется, что просто» · «потом более тяжелые и длительные задачи» · «в таком порядке» · 2026-10-29 ≈15:25). A switch to Svarog was cancelled a minute
+> later (`[OWNER]` «сворог - отмена!» · ≈15:27) and «МЫ ДЕЛАЕМ КОНАН» — the work stays on the Conan build, autonomous, by the order below sorted
+> quick → heavy. Svarog's debts are not raised at entry (`[OWNER]` «убери напоминание по долгам сварога в дальний ящик!» · ≈15:28).
+>
 > **2026-10-29 10:2x — THE OWNER'S WORK ORDER (read first): `plans/36_…` → "The owner's work order 2026-10-29", items W1–W15.** Only those
 > items are worked; any other debt of the build is asked first. Hunger/thirst arrows — remove entirely.
 > **Done 10:2x–11:37 (chat 47b827b0):** W1 re-entry crash (bug 65 DONE), W2 rapid-fire crash (bug 66 DONE), W3 arrows (already done 28.10),
@@ -189,7 +193,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    51420); DLSS scale 0.58 — show the owner.
 >
 > The Conan 3.0.1 build — 64 paks + 8 Lua mods, everything mounts (plan 33; the former "PARKED ORDER" — chronicle, 2026-10-25 22:15).
-> **Svarog waits behind Conan** (in return order): 00000 — the owner's bug wave 2026-10-18 (plan 32, bugs 55–62, the ⇅ button; chronicle 2026-10-26 19:38);
+> **Svarog waits behind Conan — the far drawer: do not raise at entry** (in return order): interview #024 answers (Q3 digit lower, Q4 strip order and
+> bright passives — built 2026-10-18 09:14, never run in game; the review queue lists it first — skip it while Conan runs); 00000 — the owner's bug wave 2026-10-18 (plan 32, bugs 55–62, the ⇅ button; chronicle 2026-10-26 19:38);
 > 0000–000 — the items of 17.10 (J4, J5, G1, pop-ups, hair, storages, tips, frames, HUD C3/C4/K1; chronicle 2026-10-25 12:07); 00 — plan 27
 > (`plans/27_svarog_random_hero_traits.md`: fixes 8–10 of `AuthorBugs.cs` in combat, case R8; the "New hero" window, "Veles' Protection", Staggered, attribute > 95 → 90).
 > Svarog — CPU budget, run order, the MVP jump decision: chronicle, entry 2026-10-27 21:08 (moved verbatim).
