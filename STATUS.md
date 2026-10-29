@@ -107,65 +107,31 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW 2026-10-29 21:07 — THE CONAN BUILD again; Svarog to the far shelf** (`[OWNER]` «продолжаем делать сборку КОНАНА» · «сварог откладываем в давнюю
-> полку» · 2026-10-29 ≈21:05). Class A of the hub (`researches/conan-ui-text-relayout/README.md`):
-> ✅ **item tooltip** — `KrinikUIFixes` 1.2.0 (auto-wrap off), cases T0–T4 pass, the owner's eye 21:38 «поп-апы описания предметов не дёргаются»; the same minute
-> «и модов иконки сразу отображаются» (class B accepted) · «книзу кнопки прыгают» · «я вижу, что ты в првильном направлении».
-> 🔧 **bottom bar** — cause measured (cases B0–B2 of `testcases/TC_conan_hub_bottom_bar_width_jump_2026-10-29.md`): the key glyph's ScaleBox in `W_HotkeyIcon` is
-> 128 wide on a new button's first frame and 42.7 after (+85 units = the jump). Only the width-free context jumps (bar: height 32, width override off, ScaleToFitY, brush 128×96; Q/E 48×48 and journey 24×24 have both overrides).
-> `HotkeyIcon` is NATIVE; hooks on its setters never fire. PROVEN by a remote experiment: `MaxDesiredWidth` 42.67 on `SizeBoxPrimaryIcon` removes the jump
-> (5 of 5 switches) — but on the class template it would shrink the tutorial prompts' glyphs (height 38, 50.7), removed. SHIPPED scoped (pack `70a0bbe`,
-> deployed, copy equal): `KrinikUIFixes` Lua 1.2.0 — `NotifyOnNewObject('/Script/UMG.SizeBox')`, cap only when the 4th outer is a `WBP_ButtonBase_C`.
-> 22:0x after a relaunch («гоу»): B3 pass — four tab switches, buttons never move, 15 of 15 button glyphs capped, cost below the clock's resolution.
-> ✅ the owner's eye: «да, суппер с кнопками.»
-> **NOW (22:0x) — the fishing button** (`[OWNER]` «кнопку рыбалки делаем» · 2026-10-29 22:0x; the ask of 26.10 — plan 35 Б7 / plan 36 item 7: «Настройка
-> рыбалки» in the style of Hosav's «Настройки интерфейса», next to it, on the bar line). Recon: Hosav's `W_UI_SettingsButton` = a vanilla `WBP_ButtonBase`
-> in its own viewport canvas (click → BP `BndEvt…SignalClicked` → `ActivateModule('HosavUIsettings')`, a hard FName); the fishing `W_EFT_AdminButton` =
-> a plain `Button` + `TextBlock` (SizeBox 214) put into the bar's `ButtonContainerRight` by `BPC_EFT_Tuning.Graft`. `FLXButtonBase.SignalClicked` is a native
-> multicast (no Lua binding); BP handlers DO hook. Idea under test: both buttons into the bar's `ButtonContainerLeft` in a row (a second
-> `W_UI_SettingsButton` instance gives the fishing look + a hookable click → open the fishing panel through the EFT button, which stays collapsed).
-> 22:08 my remote move of Hosav's button CRASHED the game — the owner had just closed the hub and was playing (EXP-0372; crash window closed by PID).
-> 22:14–22:2x (the owner: «комп твой, я пока не буду играть · работай автономно · Игру в форграунд выводи при тестах»), remote experiment
-> `ConanExiles/_config/fishbtn-experiment.lua`: ✅ the ROW works — Hosav's `WBP_ButtonBase` and a second Hosav widget's button moved into the
-> bar's `ButtonContainerLeft`, slot padding 15 (as `CloseButton`), label by `SetLabel(FText(...))`, the EFT plate collapsed — frame `fish7_bar.webp`: two
-> framed buttons in a row on the line of «Закрыть»; the moved ORIGINAL Hosav button clicks fine (its BP handler fires → `HosavUIsettings`). ❌ the CLONE's
-> click never reaches the BP handler (3 attempts: before/after `AddToViewport` of the clone; the button lights up on hover) — its component delegate binding
-> is not live. Also: the original Hosav button must be re-inserted on every «Снаряжение» (the bar is rebuilt per tab); pick the EFT button whose parent is
-> valid; `FindFirstOf('W_UI_SettingsButton_C')` may return the clone. NEXT (re-understand before a 4th try): the fishing look without a clone click —
-> (a) a vanilla `WBP_ButtonBase` as the CONTENT of the EFT `Btn_Open` (transparent style; the click stays the mod's own), hover glow to check;
-> (b) the EFT button moved next to Hosav as is, restyled by properties (brush, font) — the owner's eye decides between (a) and (b) if both work.
-> 22:2x path (a) WORKS (`ConanExiles/_config/fishbtn-experiment2.lua`): a fresh `WBP_ButtonBase` (label, HitTestInvisible) as the content of the EFT `Btn_Open`
-> (`SetContent`, background alpha 0, `Size_Btn_Open` width override off, `Pad` 0), the EFT button moved into the left container after Hosav's — a real click
-> opened `ExilesFishingTuning`.
-> 22:4x SHIPPED `KrinikPauseGameInMenu` 0.10.0 (pack `9095d51`, deployed): Hosav stays in its own layer (moved into the bar it STOPPED clicking — 2 real clicks,
-> handler never called); the fishing button goes into the bar's left container after it, padding 336.5/19/15/11, render scale ×1.094 (Hosav's layer is that much
-> larger), the vanilla look with Hosav's ContentPadding 5 and the UMG Button paddings zeroed. Cases R1–R5 pass, R6 FAIL — no gold hover glow on the fishing button.
-> The owner's eye 22:4x: `[OWNER]` «да, не хватает обводки.» · «и когда ESC нажимаешь, то закрывается хаб, а не мод рыбалки» · «нужно сразу мод рыбалки
-> закрывать» (Hosav's settings window behaves the same: Esc closed the hub too, 22:39). NEXT, two owner items: (1) the hover outline on the fishing button —
-> tried: `UserWidget:OnMouseEnter/OnMouseLeave` hooks registered but never fire on hover (not ProcessEvent-routed without a BP implementation); open ideas —
-> play the look's `AnimHovered` from another hookable event, or a hover-capable widget that still routes the click; (2) Esc on an open mod window
-> (`ExilesFishingTuning`, `HosavUIsettings`) must close only that window, not the hub — recon the `DT_UIModuleTable` row fields of these modules vs a vanilla
-> popup that closes alone on Esc; a module closes by `ActivateModule(FName(name), false, false)`. Owner's question 22:3x: the fish-card word
-> «исходно» is the author's «table » (the mod's own table weight), not «vanilla» — word to pick after checking whether those weights equal the vanilla ones.
-> Three helper agents run (the owner: «поднимай три субагента … они программируют, ты тестируешь»): retoc compression (plan 36 14a), RNF smelters, perk rows.
-> The game of 22:37 runs (my launch).
-> Then the «Хар-ки» perk rows (bug 64 item 46): rows hold ≈ 2 lines, «Берсерк» needs 4, «Кровожадный берсерк» 5 — a fixed-height overlap, not a jump
-> (frame `stats.jpg` 21:37; row layout in the game map).
-> Tools of this session: `hover-watch.ps1` (real hover / `-PultCmd`), `tooltip-bbox.py`, `bar-probe.lua`; recipe: a kit asset is cooked only if listed in
-> `Mods/<mod>/Local/CookInfo.ini` `FilesToCook`.
+> **HANDOVER 2026-10-29 22:58 — the Conan build, class A of the hub and the owner's evening items** (`[OWNER]` «продолжаем делать сборку КОНАНА» · «сварог
+> откладываем в давнюю полку» · 2026-10-29 ≈21:05; the full evening log — chronicle, entry 2026-10-29 22:58). Shipped and accepted by his eye: the item hover tooltip
+> (`KrinikUIFixes` 1.2.0 pak, auto-wrap off — «поп-апы описания предметов не дёргаются»), the bottom-bar key glyphs (`KrinikUIFixes` Lua 1.2.0 — «да, суппер с кнопками.»),
+> the fishing button next to Hosav (`KrinikPauseGameInMenu` 0.10.0 — the row is right, «да, не хватает обводки»). Shipped, his eye pending: the «Хар-ки» perk spacing
+> (`KrinikUIFixes` pak, `PerkDescription` padding 10/10, cases P1–P5) — the game of 22:52 is open on that tab for him; RNF dangling spawn rows deleted (+3 twins, cases N1–N2).
+> **First in the next chat (the owner's items, in his order):**
+> 1. Esc on an open mod window (`ExilesFishingTuning`, `HosavUIsettings`) closes the whole hub — must close only that window (`[OWNER]` «нужно сразу мод рыбалки
+>    закрывать»). The row struct `UIModuleTableRow` has `CloseOnESC`, `Category`, `FullscreenGUIAction`, `ZOrder`, `HiddenByPopups`…; compare the two mod rows with a
+>    vanilla popup that closes alone; a stopped helper left extractions in scratchpad `agentD/` of session a486276a (`esc_callers.txt`, `leg-*`) — re-derive, do not trust.
+> 2. The gold hover outline on «Настройка рыбалки» (case R6 of `testcases/TC_conan_hub_fishing_button_next_to_hosav_2026-10-29.md`): the vanilla look is HitTestInvisible
+>    inside the mod's own `Btn_Open`; `UserWidget:OnMouseEnter/Leave` hooks never fire; a clone of Hosav's widget never fires its click; Hosav's button moved into the
+>    bar stops clicking (game map → «Hub bottom row»). Find a hookable hover event or a hover-capable widget that keeps the click.
+> 3. The fish-card word «исходно» = the author's «table » (`_config/localization/asset-strings/JaarFishing__W_EFT_FishCard.tsv`): check whether the table weights
+>    equal vanilla — then «ваниль» (the owner's term rule), else «по умолчанию».
+> 4. Plan 36 item 14a — the retoc compression fix is BUILT, not installed: new exe + DLL in scratchpad `agentA/bin` of session a486276a, source edits uncommitted in
+>    `D:/work/ai_sandbox/_tools/src/retoc` (`iostore_writer.rs`, `lib.rs`, `retoc_cli/src/main.rs`); `retoc-5.8/retoc.exe` is a HARD LINK to `target/release/retoc.exe`
+>    (do not copy over it — rename first). Then rebuild every `_krinik-modified` pak by its manifest recipe, smallest first (Simple_Minimap), each checked by a launch.
+> Tools of the evening: `ConanExiles/_config/hover-watch.ps1` (real hover / `-PultCmd`), `tooltip-bbox.py`, `bar-probe.lua`, `fishbtn-experiment*.lua`; the kit cooks
+> only assets listed in `F:/CEUE5Devkit/UE4/Content/Mods/<mod>/Local/CookInfo.ini` `FilesToCook`; `pult.sh` must be called from its folder.
 >
 > **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied
 > (`SvarogsDream/_backups/svarog-saves-2026-10-29_2103-before-debt024`), configs snapped (`_harness/cfg_snap`, 21:04), the 13:43 build `f44c36e` hot-deployed
 > into the game WITHOUT a run (test debt waived with this reason), cases written — `testcases/TC_svarog_debt024_tails_2026-10-29.md`. Return order: interview #024
 > tails (S10c/R1 tooltip gap, CD1 skill-slot digit, `InstantTranslate` of bugs 56/57 — the run report `testcases/reports/2026-10-18_svarog-day-buff-strip-passes1-5.md`
 > is partial), then the bug wave 55–62 by plan 32.
->
-> **NOW 2026-10-29 18:4x — the hub of the Conan build (bug 64 item 17; plan 36 W8):** the Hosav and fishing buttons by event (pack `fae3d52`, the owner's
-> eye «это ок»; screen videos deleted and paused by his word «удали записи видео, пока пауза» — check by frames or his eye).
-> **18:37 — class B (late mod elements) fixed, cases I1–I7 pass** (`[OWNER]` «автономно работай» · 18:1x): EAA, EoT, Accessory System KRINIK MODIFIED,
-> `KrinikPauseGameInMenu` 0.9.1, `patch-mod-asset.py` `flt:<fn>@<n>` + `PATCH_VIEW_EXCLUDE`; run report `testcases/reports/2026-10-29_conan-hub-late-mod-elements.md`.
-> **Next — class A (text laid out once, then jumps):** the item tooltip auto-wrap (`W_ItemIconTooltipView`), the bottom-bar width dance (hotkey glyphs
-> born 170 ms after the buttons — to verify by frames), the «Хар-ки» perk descriptions overlap (bug 64 item 46); a sweep, not one widget.
 >
 > **2026-10-29 15:2x — ORDER OF WORK: quick and simple first, heavy after** (`[OWNER]` «сразу делаем много мелочей, что быстро делается и быстро
 > тестируется, что просто» · «потом более тяжелые и длительные задачи» · «в таком порядке» · 2026-10-29 ≈15:25). A switch to Svarog was cancelled a minute
@@ -175,45 +141,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **2026-10-29 10:2x — THE OWNER'S WORK ORDER (read first): `plans/36_…` → "The owner's work order 2026-10-29", W1–W16 — the table holds each item's
 > state.** Only those items are worked; any other debt of the build is asked first. The day's done list — chronicle, entry 2026-10-29 18:43.
 >
-> **CHAT 2026-10-28 23:14 → 2026-10-29 00:4x — where it stands:**
-> - ✅ bug 67 palm shadows: 2.0 in the pack BY THE OWNER'S CHOICE (2026-10-29 01:10, «ставим 2.0 и закрываем чат»; pack 1c70cb9) — NEXT: the kit route (bug 67 → «Next path — the kit»: sky blueprint, smooth sun + rare shadow light) — cause found (`DynamicSky.SolarUpdateAngleDelta`: 2.0 calm / 0.003 flicker, the owner's eye both ways), but 2.0 was
->   REVERTED (pack 6a12183): 0.003 is there for a smooth sun — `[OWNER]` «мы же специально делали так, чтобы солнце плавно по небу двигалось...».
->   His answer: `[OWNER]` «ПЛАВНОЕ СОЛНЦЕ И НЕ МЕРЦАЮЩИЕ ТЕНИ!!!!!!!!» — FIRST in the next chat: keep 0.003, find levers that do not touch the sun
->   (bug 67 → «The owner's requirement»), each by a 60 fps clip under palms and his eye. EXP-0369. First run (recon
->   `researches/conan-shadow-flicker/2026-10-29_light-rotation-cache.md`): B1 ray-traced sun shadows live (`r.RayTracing.Enable 1`, `r.RayTracing.Shadows 1`), delta 0.003.
-> - Cases still without a run (need the game, not the owner): `TC_conan_corpse_prompt_left_of_quickloot_2026-10-28.md` F4 (chest), F5 (1080p), S3/H2/H3
->   rows; `TC_conan_bow_fp_smooth_zoom_2026-10-28.md` H2, H3 (FP draw cancelled / RMB mid-draw, real input); SB3 (ten mixed draws) of the loot file.
-> - 🔴 item 36 corpse prompt on two lines: our `Game.locres` CAN override the vanilla key (`vanilla-override.py`, `vanilla-overrides-ru.tsv`), but
->   the widget lays out «text · E · text» in one row — a break hangs «или нажмите» left of the icon (T1 fail); reverted; needs a layout variant.
-> - 🔴 item 33(c) «k» one decimal: Hosav `BPFL_Hosav_UI.TextOverflowPrevention_Numbers` — in-place edit gives truncation only; rounding needs a
->   bytecode insertion (bug 64 row 33).
-> - Plan 37 jump shooting — recon step 1 done (`ActionTry` refuses on `IsFalling`), (a)–(c) open; ≈ 1–2 h recon + 2–3 h fix.
->
-> **Arrow physics (not started):** `[OWNER]` «в новом чате полностью делаем физику в конане, как была в обливионе» (2026-10-28) — Oblivion arrow flight:
-> constant gravity `ProjectileGravityScale` 0.55 (Remastered vanilla), speed = 5000 × (min + (1 − min) × charge) cm/s, where `min` is NOT Oblivion's 0.25:
-> `[OWNER]` «для мгновенных выстрелов в конане нужно будет какой-то винимум поставить. не такой мелкий, как в обливионе» — a setting, candidates 0.4 / 0.5 / 0.6
-> (drop over 10 m −0.67 / −0.43 / −0.30 m) for his eye; the curves `FC_BowProjectileGravCurve_*` and the charge-weakened gravity — remove; first check
-> whether damage depends on speed. Everything with sources and the drop table — `researches/conan-archery/README.md`, section «Физика стрелы
-> оригинального Обливиона». Cases — a new `testcases/TC_*.md` before code; acceptance — drop at 10/20/30 m per the table and the owner's eye.
->
-> **Tails of earlier handovers (closure 2026-10-28 17:47, items 2–5; item 1 and the 19:44 and 21:59 blocks — chronicle, entry 2026-10-28 23:09):**
-> 2. **Plan 36 item 14a — edited paks bloat** (IMM_WAR 359 → 735 MB, EoT 255 → 604): `retoc pack-raw` writes `.ucas` uncompressed; the place to fix —
->    `_tools/src/retoc/retoc/src/iostore_writer.rs:68` (Oodle already in `compression.rs:33`); then rebuild every `_krinik-modified` by its manifest
->    recipe and check each by a launch. Hits the archive volumes ≤ 700 MB (plan 35, G10).
-> 3. **The texts added 28.10 have not been seen in game by anyone** (IMM_WAR messages, the Ironlight journal, EoT skills and places, fish names) — mounted,
->    the world loads; the first chance to see — a frame and a case.
-> 4. **Run instruments:** `_config/mouse-seq.ps1` (real SendInput input, the game window in front), `fov-sampler.lua` (remote, `lua dofile`), `rmb-case.sh
->    <label> <ms> "<steps>"`; the view — `SwitchToFirstPersonCamera()`/`SwitchToThirdPersonCamera()` by the remote; bow in hand — `InpActEvt_Shortcut0_…_25`.
->    Never read arrays of montage structs by the remote (crash 20:29). Postponed by the owner: the arrow through the grip while walking (item 44, «чинить попозже»).
-> 5. **Keys:** the live `Saved/Config/Windows/Input.ini` is the only source in 3.0.1 (the pack's `_config/Input.ini` is old, not shipped). Done
->    with the game closed: left Ctrl — crouch, heavy attack — middle mouse button, the chats on numpad * and − removed, dodge — side mouse button
->    (the owner). Waits for the owner: where to move the camera mod's Ctrl combos (Ctrl+5, Ctrl+/ reset to factory) — Alt+numpad or numpad . and *.
-> 6. **Evening tails:** bug 65 (crash after re-login — the fix confirmed by a re-login 2026-10-26 23:23; before DONE — 10 min of play + a twin sweep);
->    night — done 2026-10-29 (W12: the shipped default off; the console `dc` never reached the mod); smooth zoom step
->    checked (ZS1); bug 64 item 27 accessories, 28 XP captions, 29 arrow-choice flicker (Arrow Quick Swap?), 30 hunger/thirst arrows (below the icons; the
->    owner 00:1x «указатели так и не поднял ты» — first after the bow), 31 minimap coordinates — inside the circle with a backing, the whole minimap further right
->    and higher, 32 with the quick loot open, shift the corpse prompt further left (the tutorial prompt overlap — «бог с ним»); item 39 the charge ding — done
->    28.10 (sound C, item 1 above), item 38 golden light. The hero's hunger and thirst are 0 % — the remote cheats were dropped by a restart.
+> **Open tails of the 2026-10-28 chats** (palm shadows by the kit route — bug 67; cases without a run; corpse prompt on two lines — item 36; «k» rounding —
+> item 33(c); jump shooting — plan 37; arrow physics «как в обливионе»; edited paks bloat — plan 36 14a; unseen 28.10 texts; run instruments; keys; evening
+> tails) — moved verbatim to the chronicle, entry 2026-10-29 22:58 (second part); the owner's work order (plan 36, W1–W16) decides which are worked.
 >
 > **Conan build debts — plan 36 (`plans/36_conan_build_debts_plans.md`, since 2026-10-26 20:14):** 35 items with hours, done
 > in a row (`[OWNER]` «пот по ним пиши планы» · «и по планам делаем»). Each item's status — in the plan's "Queue" table.
