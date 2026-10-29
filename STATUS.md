@@ -112,9 +112,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > ✅ **item tooltip** — `KrinikUIFixes` 1.2.0 (auto-wrap off), cases T0–T4 pass, the owner's eye 21:38 «поп-апы описания предметов не дёргаются»; the same minute
 > «и модов иконки сразу отображаются» (class B accepted) · «книзу кнопки прыгают» · «я вижу, что ты в првильном направлении».
 > 🔧 **bottom bar** — cause measured (cases B0–B2 of `testcases/TC_conan_hub_bottom_bar_width_jump_2026-10-29.md`): the key glyph's ScaleBox in `W_HotkeyIcon` is
-> 128 wide on a new button's first frame and 42.7 after (+85 units = the jump). NEXT: the fix — a FORK: one `W_HotkeyIcon` serves contexts with different settled
-> sizes (bar 42.7/32, Q/E 48, journey 24), so a global fixed scale is wrong; read in `W_HotkeyIcon`'s bytecode how the texture is set (`SetBrushFromTexture`
-> match-size? the inactive `WidthOverride` 32), then a first-frame size that keeps each context's look; B3 on three tab pairs + the owner's eye.
+> 128 wide on a new button's first frame and 42.7 after (+85 units = the jump). Only the width-free context jumps (bar: height 32, width override off, ScaleToFitY, brush 128×96; Q/E 48×48 and journey 24×24 have both overrides).
+> `HotkeyIcon` is NATIVE (no BP functions) — NEXT: a Lua post-hook in `KrinikUIFixes` on `HotkeyIcon:SetInputActionName` / `SetIconSize` setting
+> `WidthOverride` = height × brush aspect (first: is the brush set at that call?), A-B cost, B3 on three tab pairs + the owner's eye (research, bottom-bar paragraph).
 > Then the «Хар-ки» perk rows (bug 64 item 46): rows hold ≈ 2 lines, «Берсерк» needs 4, «Кровожадный берсерк» 5 — a fixed-height overlap, not a jump
 > (frame `stats.jpg` 21:37; row layout in the game map).
 > Tools of this session: `hover-watch.ps1` (real hover / `-PultCmd`), `tooltip-bbox.py`, `bar-probe.lua`; recipe: a kit asset is cooked only if listed in
