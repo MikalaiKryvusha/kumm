@@ -125,11 +125,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > multicast (no Lua binding); BP handlers DO hook. Idea under test: both buttons into the bar's `ButtonContainerLeft` in a row (a second
 > `W_UI_SettingsButton` instance gives the fishing look + a hookable click → open the fishing panel through the EFT button, which stays collapsed).
 > 22:08 my remote move of Hosav's button CRASHED the game — the owner had just closed the hub and was playing (EXP-0372; crash window closed by PID).
-> Then the «Хар-ки» perk rows. No game runs; the machine lock released.
+> No game runs; the machine lock released.
 > Then the «Хар-ки» perk rows (bug 64 item 46): rows hold ≈ 2 lines, «Берсерк» needs 4, «Кровожадный берсерк» 5 — a fixed-height overlap, not a jump
 > (frame `stats.jpg` 21:37; row layout in the game map).
 > Tools of this session: `hover-watch.ps1` (real hover / `-PultCmd`), `tooltip-bbox.py`, `bar-probe.lua`; recipe: a kit asset is cooked only if listed in
-> `Mods/<mod>/Local/CookInfo.ini` `FilesToCook`. The game of 21:32 runs (my launch; the owner watched it — his game now: close only by his word); `t.MaxFPS 60` was set by the remote.
+> `Mods/<mod>/Local/CookInfo.ini` `FilesToCook`.
 >
 > **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied
 > (`SvarogsDream/_backups/svarog-saves-2026-10-29_2103-before-debt024`), configs snapped (`_harness/cfg_snap`, 21:04), the 13:43 build `f44c36e` hot-deployed
