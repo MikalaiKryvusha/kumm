@@ -1,5 +1,11 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-29 10:23 +03:00 — AGENT_GUIDE "The owner's word mid-turn": no echo of his words
+
+The agent opened its mid-turn answers with the owner's words in quotes, as step 2 demanded. The owner, verbatim: `[OWNER]` «"Уверен, что
+исправлено" про падение в главном меню · убери , где в KAif тебе сказано повторять то, что я написал. Не нужно повторять мои слова» ·
+2026-10-29. Step 2 rewritten; KAIF ticket #180 (`bugs/KAIF/20_*`).
+
 ## 2026-10-29 10:19 +03:00 — HOUSE_RULES.md §1 rule 14: meaning, not numbers
 
 The agent's /resume answer listed the Conan debts as «08 — ждёт твоего подтверждения» and «04, 05, 07 — старые, ещё с 2.x». The owner,
