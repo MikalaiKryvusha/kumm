@@ -107,32 +107,21 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **HANDOVER 2026-10-29 22:58 — the Conan build, class A of the hub and the owner's evening items** (`[OWNER]` «продолжаем делать сборку КОНАНА» · «сварог
-> откладываем в давнюю полку» · 2026-10-29 ≈21:05; the full evening log — chronicle, entry 2026-10-29 22:58). Shipped and accepted by his eye: the item hover tooltip
-> (`KrinikUIFixes` 1.2.0 pak, auto-wrap off — «поп-апы описания предметов не дёргаются»), the bottom-bar key glyphs (`KrinikUIFixes` Lua 1.2.0 — «да, суппер с кнопками.»),
-> the fishing button next to Hosav (`KrinikPauseGameInMenu` 0.10.0 — the row is right, «да, не хватает обводки»). Shipped, his eye pending: the «Хар-ки» perk spacing
-> (`KrinikUIFixes` pak, `PerkDescription` padding 10/10, cases P1–P5) — the game of 22:52 is open on that tab for him; RNF dangling spawn rows deleted (+3 twins, cases N1–N2).
-> **First in the next chat (the owner's items, in his order):**
-> 1. ✅ 2026-10-30 00:11 — Esc on the fishing panel / Hosav's settings closes only that window, the hub stays (pack `3f674d3`, `KrinikPauseGameInMenu` 0.11.0;
->    cases E1–E10, report `testcases/reports/2026-10-30_conan-hub-esc-mod-windows.md`; how — game map «Esc and windows over the hub»). The owner's eye pending.
-> 2. ✅ 2026-10-30 00:33 — «Настройка рыбалки» lights up gold on hover (`KrinikPauseGameInMenu` 0.12.0; cases H1–H5, report
->    `testcases/reports/2026-10-30_conan-fishing-hover-vanil.md`; how — game map «Vanilla button hover»). The owner's eye pending.
-> 3. ✅ 2026-10-30 00:33 — the fish card says «ваниль 80» instead of «исходно» (the «table» weight is the mod's Vanilla preset weight), label and field widths 92/66
->    so nothing is cut (case V1). The owner's eye pending.
-> 4. Plan 36 item 14a — retoc with Oodle compression INSTALLED 2026-10-30 00:37: rebuilt from `_tools/src/retoc` (the scratchpad exe was older than the
->    sources), `_tools/retoc-5.8/retoc.exe` replaced, the old one kept as `retoc-2026-10-26-nocompress.exe` (correction 2026-10-30: «retoc-5.8/retoc.exe is a hard
->    link» stood here wrongly — the file has one link). Rebuild of the 12 `_krinik-modified` paks — `_config/devkit/rebuild-krinik-paks.py` by the manifest field
->    `krinikBuild` (guard: every container chunk byte-identical to the installed pak); pilot Simple Minimap 11.1 → 4.5 MB (original 4.6), 199 chunks identical.
->    2026-10-30 00:47 the first install broke Player Ignores Follower Collision («Incompatible Mods Detected»: retoc compressed the container header, UE
->    reads it raw) — the owner saw it first, I had skipped the smoke by eye (EXP-0375). Fixed: retoc local commits 8e2eedf + 9391c3a (header never compressed),
->    a header guard in the rebuild tool (red on the broken pak). ✅ 2026-10-30 01:06 — all 12 at or below the original size, 12 of 12 mounted, world and mods ok
->    (cases C0–C7, report `testcases/reports/2026-10-30_conan-compressed-krinik-paks.md`).
->    ⚠️ 2026-10-30 ≈01:0x DISK D: FILLED TO 33 MB by my rebuild work dirs (three full runs × 12 mods, each unpacking old + new + view copies); 19 GB freed by
->    deleting 260 listed big files; ≈86 GB of small files remain in scratchpad `075c1f98…/scratchpad/rebuild/` — bulk delete was refused by the permission
->    classifier: the owner's call (`find <dir> -type f -delete` + empty dirs). The `view/` folders there hold HARD LINKS to the game's containers — deleting the
->    links is safe, never write into them. The rebuild tool must clean its own work dir after a verified mod (open, ≈0.5 h).
-> Tools of the evening: `ConanExiles/_config/hover-watch.ps1` (real hover / `-PultCmd`), `tooltip-bbox.py`, `bar-probe.lua`, `fishbtn-experiment*.lua`; the kit cooks
-> only assets listed in `F:/CEUE5Devkit/UE4/Content/Mods/<mod>/Local/CookInfo.ini` `FilesToCook`; `pult.sh` must be called from its folder.
+> **HANDOVER 2026-10-30 01:08 — the Conan build: the owner's four evening items are DONE, his eye pending** (`[OWNER]` «продолжаем делать сборку Конана. Работай
+> автономно. в Фореграунд игру открывай для тестов» · 2026-10-29 ≈23:43; the previous handover 22:58 — chronicle, entry 2026-10-30 01:08). Done in this chat:
+> Esc on the fishing panel / Hosav's settings closes only that window (cases E1–E10); «Настройка рыбалки» lights up gold on hover (H1–H5); the fish card
+> «ваниль 80» instead of «исходно» (V1); all 12 KRINIK MODIFIED paks rebuilt with Oodle compression, back to the original sizes, 12 of 12 mounted (C0–C7;
+> retoc local commits 8e2eedf + 9391c3a, `ConanExiles/_config/devkit/rebuild-krinik-paks.py` by the manifest field `krinikBuild`). Pack `2941d60`, KUMM `4110530`.
+> **Show the owner first:** the four items above — his eye has not seen them (Esc in both windows, the gold frame, «ваниль 100» stands close to its field).
+> **The owner's call:** ≈86 GB of my small work files remain in scratchpad `D:/Temp/claude/d--work-ai-sandbox-KUMM/075c1f98-be83-4d40-9e6b-102dcaa07ddf/scratchpad/rebuild/`
+>    (and `rebuild2/`) — disk D: was filled to 33 MB, 15 GB free now; bulk delete was refused by the permission classifier; `view/` there = HARD LINKS to game
+>    containers (deleting links is safe, never write into them).
+> **Next, by the owner's order quick → heavy (plan 36, «The owner's work order 2026-10-29»):** (1) `rebuild-krinik-paks.py` cleans its own work dir after each
+>    verified mod (≈0.5 h — the disk incident); (2) W10a quick-loot window jump on «Esc Отмена»; W6 corpse prompt on two lines; W4 minimap coordinates backing;
+>    W7 Russian wider than mod buttons; W10 the rest of the mod-UI bug; (3) heavy: W16 `KrinikPauseGameInMenu` timer poll → events, W14 jump shooting, W15 arrow physics.
+>    Small: after `TryCloseWindow` the pause mod's `last_state` stays «open», so a re-open is not logged (log only).
+> **Run rules learned tonight:** after ANY pak rebuild — launch → frame of the main menu by eye → only then `enter-world-remote.sh` (memory
+>    `smoke-by-eye-before-automation`, EXP-0375); remote UI surgery one step per call, the remote reads one command per LINE (EXP-0374); tests in front (memory).
 >
 > **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied
 > (`SvarogsDream/_backups/svarog-saves-2026-10-29_2103-before-debt024`), configs snapped (`_harness/cfg_snap`, 21:04), the 13:43 build `f44c36e` hot-deployed

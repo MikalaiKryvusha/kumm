@@ -14,7 +14,7 @@ Acceptance of item 14a: the edited pak is no bigger than the original + 5 %, the
 | # | Case | Steps | Expected | Status |
 |---|---|---|---|---|
 | C0 | Smoke by eye | launch, frame after 50 s | main menu, no error dialog | pass 01:05 — `smoke1.jpg`: main menu. FAIL 00:47 (first install): «Incompatible Mods Detected», Player Ignores Follower Collision — compressed container header; the agent had skipped this case |
-| C1 | Sizes | the summaries of the install runs | every new pak ≤ original + 5 % | pass — all 12 at or below the original (IMM_WAR 332.5 / 342.2 MB, EoT 225.8 / 243.5, EAA 125.4 / 125.7, Fishing 209.2 / 211.2, Hosav 25.4 / 25.2 = +0.8 %) |
+| C1 | Sizes | the summaries of the install runs | every new pak ≤ original + 5 % | pass — all 12 within +1 % of the original (IMM_WAR 332.5 / 342.2 MB, EoT 225.8 / 243.5, EAA 125.4 / 125.7, Fishing 209.2 / 211.2, Hosav 25.4 / 25.2 = +0.8 %) |
 | C2 | Extract and mount | `ConanSandbox.log` | each of the 12 «Mounted container … <Mod>-Windows.utoc», no «Failed to mount» | pass 01:05 — 12 of 12 mounted, «Failed to mount» 0 |
 | C3 | World | `enter-world-remote.sh` | the world loads, no crash | pass 01:06 — loaded in 22 s |
 | C4 | HUD mods | frame in the world | Simple Minimap with coordinates, Hosav's top HUD, Arrow Quick Swap | pass — `c4_world` |

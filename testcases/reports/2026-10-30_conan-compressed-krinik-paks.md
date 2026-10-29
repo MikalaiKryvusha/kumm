@@ -44,4 +44,4 @@ Scratchpad of session 075c1f98: `smoke1.jpg`, `cmount.jpg`, `rebuild-install*.lo
 
 ## 7. Verdict
 
-pass — all 12 paks at or below the original size, mounted, the world and the edited mods work; the disk cleanup left to the owner.
+pass — all 12 paks within +1 % of the original size (Hosav +0.8 %, the rest below), mounted, the world and the edited mods work; the disk cleanup left to the owner.
