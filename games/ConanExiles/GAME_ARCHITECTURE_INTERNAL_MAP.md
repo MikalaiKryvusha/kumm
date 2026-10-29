@@ -392,3 +392,9 @@ Lua-моды UE4SS ждут только отложенными действия
 - **Widget creation events.** `NotifyOnNewObject` works for widget BP classes: `/Game/Mods/UIMod_Hosav/W_SmoothHP.W_SmoothHP_C` (fires per object, templates too, 1–3 ms of work each), `/Game/UI/Widgets/MainMenu/W_MainMenu_MainMenu.W_MainMenu_MainMenu_C`. Costs on the game thread (remote, 2026-10-29): `FindFirstOf(<class>)` 3 ms, `FindAllOf(<class>)` 2 ms, `FindAllOf('UserWidget')` 1928 objects 5 ms + `GetFullName` loop 21 ms, a full read of `ConanSandbox.log` (2 MB) 30 ms.
 - **Stuck arrows.** The game attaches the stuck copy `BP_DummyProjectile_C` to the hit bone itself (socket = `HitResultFromProjectile.BoneName`, e.g. Kappa `rig_bone_L_leg_J01`); the copies are removed within ≈ 20 s. Aimed at the Kappa's capsule centre, the arrows hit the left-leg body.
 - **Quick-loot rows.** `W_QuickLootPanel` → `WidgetSwitcherTooltips` takes the widest child: action row `LootActionTooltip` 650, navigation row `NavTooltip` («F Забрать · Q … · Esc Отмена») 519, grid 645 — the window width does not change between the rows.
+- **Hero spawn event and int stats (2026-10-29, remote on the owner's level-50 hero).** `NotifyOnNewObject("/Game/Characters/BasePlayerChar.BasePlayerChar_C")`
+  fires on world entry and on re-entry (a new object each time, e.g. `…60400` → `…31996`); at that moment `GetIntStat(19, 0)` already answers. One
+  `BasePlayerChar_C` in single player. `GetIntStat(id, 0)`: 0 = 199 (max HP), 1 = 195 (HP), 2 = 4, 3 = 354, 4 = 50 (level), 5 = 99, 6 = 99, 7 = 100,
+  8 = 100, 11 = 1; **14–40 all 0 — Agility (19, the 2.x id) included.** Either the hero's attributes are really 0 after the 3.0 attribute reset
+  (`ConanCharacter.ShowAttributeResetNotification`, `IsAttributeVersionUpToDate` = true) or 3.0.1 keeps attributes elsewhere — unresolved; the
+  character window decides (KUMM plans/36, W16).
