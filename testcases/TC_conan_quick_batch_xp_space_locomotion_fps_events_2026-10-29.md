@@ -3,7 +3,7 @@
 > **Created:** 2026-10-29 · **Parent:** plan 36 W5 (a) (`[OWNER]` «XP и двоеточие слиплись» · 2026-10-28), plan 34 W16 (`[OWNER]` «да, но аккуратно. чтобы
 > не сломать... нужно будет ретестировать после рефакторинга их» · 2026-10-29); order `[OWNER]` «сразу делаем много мелочей, что быстро делается и быстро тестируется» · 2026-10-29
 > **Status:** run 2026-10-29 15:34–15:39 — all 9 pass (report `testcases/reports/2026-10-29_conan-quick-batch-xp-locomotion-fps.md`); finding: the hero's
-> Agility (and every int stat 14–40) reads 0 in 3.0.1
+> Agility (and every int stat 14–40) reads 0 in 3.0.1 — resolved 15:46, the points are unspent (not a defect)
 > **Outbound:** —
 
 **Basis.**
@@ -35,4 +35,4 @@ Not covered: death and respawn (the re-entry gives a new hero object by the same
 ids 0–8: 199, 195, 4, 354, 50, 99, 99, 100, 100). The 3.0.1 move test (`TC_conan_3.0.1_pereezd_2026-10-25.md`, R1) recorded the same «Проворство 0»
 and passed it. Either the hero's attributes are really 0 (a 3.0 attribute reset — `ConanCharacter.ShowAttributeResetNotification` exists;
 `IsAttributeVersionUpToDate` = true) or 3.0.1 keeps attributes elsewhere — then the Agility law of `KrinikOblivionLocomotion` does nothing in the build.
-Next: read the attribute values in the character window and compare (KUMM plans/36, W16 row).
+**Resolved 2026-10-29 15:46 — not a defect:** the character window «Хар-ки» shows all six attributes 0 and «Доступные очки 52» (frame `a1.jpg`, `TC_conan_map_hint_and_agility_window_2026-10-29.md` A1/A2): the hero's points are unspent after the 3.0 attribute reset; the remote read is right and the Agility law works on whatever the hero spends.

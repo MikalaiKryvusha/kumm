@@ -396,5 +396,5 @@ Lua-моды UE4SS ждут только отложенными действия
   fires on world entry and on re-entry (a new object each time, e.g. `…60400` → `…31996`); at that moment `GetIntStat(19, 0)` already answers. One
   `BasePlayerChar_C` in single player. `GetIntStat(id, 0)`: 0 = 199 (max HP), 1 = 195 (HP), 2 = 4, 3 = 354, 4 = 50 (level), 5 = 99, 6 = 99, 7 = 100,
   8 = 100, 11 = 1; **14–40 all 0 — Agility (19, the 2.x id) included.** Either the hero's attributes are really 0 after the 3.0 attribute reset
-  (`ConanCharacter.ShowAttributeResetNotification`, `IsAttributeVersionUpToDate` = true) or 3.0.1 keeps attributes elsewhere — unresolved; the
-  character window decides (KUMM plans/36, W16).
+  (`ConanCharacter.ShowAttributeResetNotification`, `IsAttributeVersionUpToDate` = true) or 3.0.1 keeps attributes elsewhere. **Resolved 15:46:** the character
+  window «Хар-ки» shows all six 0 and «Доступные очки 52» — the ids are right (19 = Agility), the points are unspent.

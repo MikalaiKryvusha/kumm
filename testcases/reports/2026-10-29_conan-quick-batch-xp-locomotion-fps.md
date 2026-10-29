@@ -37,7 +37,7 @@ Functional run: the game on the owner's save, entered and re-entered by the agen
 ## 5. Found
 
 - The hero's Agility reads 0 (every int stat 14–40 is 0) on the owner's level-50 hero — the Agility law of `KrinikOblivionLocomotion` may be dead in 3.0.1
-  (pre-existing: the 25.10 move test passed the same 0). Open — KUMM plans/36, W16 row.
+  (pre-existing: the 25.10 move test passed the same 0). **Resolved 2026-10-29 15:46 — not a defect:** the character window «Хар-ки» shows all six attributes 0 and «Доступные очки 52» (frame `a1.jpg`, `TC_conan_map_hint_and_agility_window_2026-10-29.md` A1/A2): the hero's points are unspent after the 3.0 attribute reset; the remote read is right and the Agility law works on whatever the hero spends.
 
 ## 6. Traces
 
