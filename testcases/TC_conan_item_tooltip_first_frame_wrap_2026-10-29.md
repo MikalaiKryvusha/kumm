@@ -1,7 +1,7 @@
 # TC — the item hover tooltip keeps one layout from its first frame (bug 64 item 17, class A)
 
 > **Created:** 2026-10-29 · **Parent:** bug 64 item 17 class A; recon `researches/conan-ui-text-relayout/README.md` (step 1 — proof on the tooltip)
-> **Status:** run 2026-10-29 21:12–21:2x — T0–T3 pass/reproduced; T4 waits for the kit build
+> **Status:** run 2026-10-29 21:12–21:3x — T0–T4 pass (T1 reproduced 3 of 3 before the fix)
 > **Outbound:** —
 
 **Basis.** `[OWNER]` «поп-апы при ховеве тоже мерцают. Открываются в одну строку, а затем становятся в две» · «прыгающее это все» · 2026-10-29 18:0x.
@@ -22,4 +22,4 @@ name only; a name with a one-line description; a long description).
 | T1 | Vanilla repro | hover «Грубая повязка» (or the nearest item with a two-line description), three times | the logged width/height at first appearance differ from the settled ones on ≥ 1 of 3 hovers (the bug as the owner sees it) — or «not reproduced» with the three variants written | reproduced 3 of 3 (21:2x): first frame 405×127 (one-line box, text already two lines hanging below it — frame pair `hw_t1b_pair.webp`), next frame 274×165 (two lines) |
 | T2 | Control — auto-wrap off | remote: `AutoWrapText` False on the template and live tooltips; repeat T1 | first logged rectangle = settled rectangle on 3 of 3 hovers; the grab is readable (no text past the frame) | pass 3 of 3: 405×107 from the first frame to the last, «Грубая повязка» in one line inside the frame (live tooltips 0 — a new widget per hover) |
 | T3 | Three partitions with the control | T2 on a short-name item, a one-line-description item, a long-description item | first = settled for each; the long description wraps (height of ≥ 2 lines), width ≤ 800 units + padding | pass by frame pairs (first / last): «Камень», «[EAA] Опыт класса», «Рецепт: Грубая рубаха» — same box, one line; the counter's later growth was the living world inside the ROI. NOT covered: a text longer than 800 units — the hover tooltip shows the name only, none found that long |
-| T4 | The fix shipped | the kit/pak edit of `Text_Content` (route chosen after T1–T3), no remote; T1 again | first = settled on 3 of 3; same look as T2 | not run |
+| T4 | The fix shipped | the kit/pak edit of `Text_Content` (route chosen after T1–T3), no remote; T1 again | first = settled on 3 of 3; same look as T2 | pass 21:3x: KrinikUIFixes 1.2.0 deployed (verify 99/0), template read by the remote AutoWrapText=false WrapTextAt 800 (nothing set by the remote); 404×107 / 403×107 / 404×107 from the first frame to the last, 3 of 3; frame pair `t4_pair.webp` — «Грубая повязка» in one line inside the frame; the owner's eye 21:38: `[OWNER]` «поп-апы описания предметов не дёргаются» |

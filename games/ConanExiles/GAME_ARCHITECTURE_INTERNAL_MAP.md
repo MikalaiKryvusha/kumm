@@ -432,7 +432,14 @@ Lua-моды UE4SS ждут только отложенными действия
   (4K): «Грубая повязка» — first frame the frame box 405 px wide for one line with the text already in two lines below it, next frame 274×165 (two lines),
   3 of 3 hovers. `AutoWrapText` False (remote, on the class template `…W_ItemIconTooltipView_C:WidgetTree.Text_Content` — the game builds a NEW
   tooltip widget per hover, so the template is enough): 405×107, one line from the first frame, 3 of 3. In full screen the hover tooltip is drawn
-  INSIDE the game window, not as a window of its own; the hover needs the real cursor (`hover-watch.ps1`). `WBP_ButtonBase.TxtLabel` has no
+  INSIDE the game window, not as a window of its own; the hover needs the real cursor (`hover-watch.ps1`).
+- **Hotkey glyph (`UI/Framework/W_HotkeyIcon`, 2026-10-29).** `HorizontalBox_1`: `TextBlockBindingName` (size 10, Collapsed in play) · `TextBlockHoldPrompt` · `SizeBoxPrimaryIcon` → `ScaleBoxPrimaryIcon` → `ImagePrimary` · the same for Secondary (Collapsed for one-key actions) · `AnimFadeIn`. The glyph texture is 128 px; the ScaleBox scales it by the previous frame's geometry, so a NEW icon is 128 units wide on its first frame and 42.7 (Esc, Space) or 32 (F) after — every new button with a key (the hub bottom bar is rebuilt on every tab) jumps by ≈ 85 units. The bar: `WBP_ButtonBar` (`ButtonContainerLeft`, `ButtonContainerRight`, `CloseButton`) → `WBP_ButtonBase` (`ContentContainer`: `HotkeyIcon` · `ImgIcon` · `TxtLabel`, padding 20/10). From the remote `GeneralText:GetText()` is not reachable («TrivialObject»).
+- **«Хар-ки» perk rows (read from the 3.0.1 assets 2026-10-29).** `UI/Inventory/Attributes/W_AtrributeInfoEntry` (sic): `Overlay_120` →
+  `VerticalBox_173` with `PrimaryPerkView` (slot padding Bottom −2) over `BranchedPerkView` (Top −2), both `W_AttributeInfoEntry_PerkView`; the
+  link icon `PerkIconLink` sits in the same overlay with padding Left 40, Top 82, Bottom 82 — the row is drawn for one-line descriptions. The perk
+  view: `Overlay_0` → `HorizontalBoxMainContent` → `PerkDescription` (`GeneralText`, size 13, `AutoWrapText` True, slot padding Top 2 Bottom 5) +
+  `W_AttributePerkPip`; `ButtonBase` over it (padding 8). The parent `W_AttributeInfo.Description` wraps at a fixed `WrapTextAt` 430 (no auto-wrap).
+  Why «Берсерк» / «Кровожадный берсерк» overlap is NOT measured yet (bug 64 item 46) — a live frame and the rows' desired sizes by the remote first. `WBP_ButtonBase.TxtLabel` has no
   auto-wrap (default text «Text Block»); `WBP_ButtonMinor.TxtLabel` `WrapTextAt` 106 inside `SizeBox` `WidthOverride` 148.
 - **Accessory System (`/Game/ModsShared/AccessorySystem`, 2026-10-29).** Shipped inside BOTH Enhanced Armory and Arsenal and Highmane's Arsenal, in
   different versions (the `AC_acs_AccessorySystem_Persistent` chunk 50 451 vs 50 347 bytes); the game loads the EAA copy (a patch of the Highmane's
