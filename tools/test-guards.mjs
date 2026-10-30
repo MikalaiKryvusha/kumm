@@ -479,6 +479,16 @@ try {
   check('a question mid-autonomy keeps the mode on', stop(60), 'block-work');
   prompt('стоп');
   check('«стоп» switches the mode off', stop(60), 'pass');
+  // 2026-10-30 ≈16:00: the owner's «гоу автономно, делаем дальше сборку» was not caught (the pattern knew only «работай автономно / сам»,
+  // «автопилот»), the mode stayed off, the agent ended its turn: `[OWNER]` «а чего ты стал? … или я не говорил работать автономно?»
+  prompt('гоу автономно, делаем дальше сборку');
+  check('«гоу автономно» (the owner\'s own words) → the mode is on', stop(60), 'block-work');
+  prompt('стоп');
+  prompt('давай автономно дальше');
+  check('«давай автономно» → the mode is on', stop(60), 'block-work');
+  prompt('стоп');
+  prompt('не работай автономно, жди меня');
+  check('«не работай автономно» does not switch the mode on', stop(60), 'pass');
   check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [AG, '--state', st], { input: '{not json', encoding: 'utf8' }).status, 0);
 } catch (e) {
   check('part K ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');

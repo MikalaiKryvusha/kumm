@@ -66,6 +66,8 @@ relies entirely on this document to get to work.
 > message, never instead of the loop.** The loop ends only by his word or by the context-budget closure (75 % → `/end-chat-soft`, whose farewell
 > the farewell hook files). The mechanical half — `tools/hooks/autonomy-guard.mjs` (Stop + UserPromptSubmit) refuses a voluntary stop while the
 > order stands. `[OWNER]` 2026-10-30 · verbatim in the hook header; the miss it closes — EXP-0379.
+> **Any «…автономно» is the order** («гоу автономно», «давай автономно»), and **an interrupt (Esc) or a task given mid-loop («чини») does not end it**:
+> do the task, then go back into the loop in the same turn — only «стоп» or the closure ends it (EXP-0388, the guard's pattern widened the same day).
 
 > ⏰ **WORKING UNTIL A NAMED TIME — the deadline is the START of the soft closure, not a finish
 > line.** When the human names an end time for autonomous work ("work until 11", "work for an

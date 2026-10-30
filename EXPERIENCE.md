@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0388 · 2026-10-30 · ❌ · #autonomy #hooks #loop #owner-saw-first
+class: guard-pattern-too-narrow
+**Lesson:** the owner said «гоу автономно, делаем дальше сборку»; the autonomy guard knew only «работай автономно / сам», «автопилот», stayed off, and
+after his interrupts and his «ну так чини» I fixed the stand, reported and ENDED the turn — «а чего ты стал? … или я не говорил работать автономно?».
+Two holes: the pattern (now any «автономн…», a negation excluded) and my reading of an interrupt / a mid-loop task as the loop's end.
+**Trigger:** the owner's order was autonomy → after any task he gives mid-loop, return to the loop in the same turn; only «стоп» or the closure ends it.
+mechanized: yes — `tools/hooks/autonomy-guard.mjs` ON/NOT_ON, `tools/test-guards.mjs` part K (3 cases red on the old pattern, green now)
+
 ### EXP-0387 · 2026-10-30 · ❌ · #conan #ue4ss #remote #crash #stand #save #owner-saw-first
 class: kept-poking-after-failure
 **Lesson:** after a second crash of my own remote experiments I relaunched and went on — world entry no longer worked (the restored save was rewritten

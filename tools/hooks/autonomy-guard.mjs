@@ -14,13 +14,17 @@
 //   node autonomy-guard.mjs                 # событие на stdin; на любом неожиданном — молча 0
 //   node autonomy-guard.mjs --state <файл>  # где маркер (проверки tools/test-guards.mjs, часть K)
 //
-// [NOT-TESTED]
+// [TESTED: 2026-10-30 · testcases/reports/2026-10-30_autonomy-guard-wider-order.md · part K 13 cases incl. the owner's «гоу автономно» (red on the old pattern, green now); the live marker .kaif/autonomy.json flips on his words]
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { lastUsage, contextOf, WINDOW, PCT_CLOSE } from '../../.claude/hooks/context-budget.mjs';
 import { readTurn } from './farewell-capture.mjs';
 
-const ON = /(работай|работать)\s+(автономно|сам)|автопилот|работай\s+сам[,.!]?\s/i;
+// Any «автономно / автономный…» is the order, whatever word stands before it («гоу автономно», «давай автономно», «работай автономно»):
+// 2026-10-30 ≈16:00 «гоу автономно, делаем дальше сборку» slipped past the old «работай автономно» pattern and the agent stopped
+// (`[OWNER]` «а чего ты стал? … или я не говорил работать автономно?»). A negation right before it («не работай автономно») is not the order.
+const ON = /автономн|автопилот|(работай|работать)\s+сам/i;
+const NOT_ON = /(^|[\s,.!?])не\s+(работай\s+|работать\s+)?(автономн|сам)/i;
 const OFF = /^\s*(стоп|stop|пауза|хватит|остановись)(?=$|[\s,.!?])/i;   // \b в JS не видит границу кириллицы
 const PAUSE_MARK = /<!--\s*autonomy-pause:\s*\S/;
 
@@ -43,7 +47,7 @@ function main() {
   if (ev.hook_event_name === 'UserPromptSubmit') {
     const p = String(ev.prompt || '');
     if (OFF.test(p)) writeFileSync(state, JSON.stringify({ on: false, at: new Date().toISOString(), by: p.slice(0, 80) }));
-    else if (ON.test(p)) writeFileSync(state, JSON.stringify({ on: true, at: new Date().toISOString(), by: p.slice(0, 80) }));
+    else if (ON.test(p) && !NOT_ON.test(p)) writeFileSync(state, JSON.stringify({ on: true, at: new Date().toISOString(), by: p.slice(0, 80) }));
     return;
   }
   if (ev.hook_event_name !== 'Stop' || !st.on) return;
