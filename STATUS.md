@@ -117,7 +117,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (6 criteria, phases 0–5), research `researches/conan-mod-settings-hub/` (README; `vanilla-settings-widgets.md`; `web-sweep.md` — merged into README §3 at the closing;
 > its rules: data registration, one ini per mod, change by event, the mod works without the hub). **Phase 0 spike** (`plans/38_epic38_phase0_widget_spike.md`, report
 > `testcases/reports/2026-10-30_conan-settings-hub-spike.md`): the game's own rows (`WBP_Setting_Checkbox`, `WBP_Setting_Dropdown`, `W_EditableLabeledSlider`,
-> `WBP_Settings_Subheader`) are created from Lua and take values; a REAL click does not reach a created checkbox (3 placements). Next: S5 the slider drag;
+> `WBP_Settings_Subheader`) are created from Lua and take values; a REAL DRAG reaches a created slider (S5 pass 15:13 — UMG slider), a REAL click does not reach a created FLX checkbox (3 placements). Next:
 > then rows inside a module window (our WindowRoot widget in the KrinikConanUI kit + a module row); set the subheader's `Label` before adding.
 > Then the quick list below. `mouse-seq.ps1` has `move:<fx>/<fy>` now.
 >

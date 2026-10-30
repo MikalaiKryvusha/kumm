@@ -1,7 +1,7 @@
 # TC — plan 38 phase 0: a window from the game's own settings widgets, driven from Lua (spike)
 
 > **Created:** 2026-10-30 · **Parent:** `plans/38_epic38_phase0_widget_spike.md` (criteria 1–4)
-> **Status:** cases written 15:0x; run 15:02–15:08 — creation and setting PASS, real clicks into created vanilla rows FAIL in 3 placements (report testcases/reports/2026-10-30_conan-settings-hub-spike.md)
+> **Status:** cases written 15:0x; run 15:02–15:08 — creation and setting PASS; a real DRAG reaches a created slider (S5 pass, 15:13); real CLICKS do not reach a created FLX checkbox (S6 fail ×3) (report testcases/reports/2026-10-30_conan-settings-hub-spike.md)
 > **Outbound:** the look side by side with the game's «Настройки» — the owner's eye
 
 **Goal (Achieve).** Prove or refute that Lua can create `WBP_Settings_Subheader`, `WBP_Setting_Checkbox`, `W_EditableLabeledSlider`, `WBP_Setting_Dropdown`,
@@ -17,7 +17,7 @@ the API (S1), creation (S2–S4), event path by a real click (S5, S6), control �
 | S2 | Create a header | `WidgetBlueprintLibrary:Create(…WBP_Settings_Subheader_C…)`, `Label` set, `AddToViewport` | «Проба настроек» on screen in the game's heading style | partial — created and shown by WidgetBlueprintLibrary:Create + AddToViewport; the label shows «EXAMPLE TEXT»: PreConstruct copies the Label variable — set Label BEFORE adding (next run) |
 | S3 | Create a slider row | the same for `W_EditableLabeledSlider_C`, label and range set | a slider row on screen | pass — created, MinValue/MaxValue/StepValue/SetValue(300, false) took, «300,00» on screen; the slider row has NO label of its own (a label is the row container's) |
 | S4 | Create a checkbox and a dropdown row | the same | both rows on screen | pass — checkbox created and toggled on by SetIsToggledOn(true,false,false) (tick on screen); dropdown: three options added, GetOptionCount 3; SelectedOptionByID(10,false) left -1 |
-| S5 | Slider change reaches Lua | `RegisterHook` on its `BndEvt__S_Value…OnFloatValueChangedEvent`; a real drag | a log line with the new value | blocked — no real drag done this run (context budget); the hook on BndEvt…OnFloatValueChangedEvent registered |
+| S5 | Slider change reaches Lua | `RegisterHook` on its `BndEvt__S_Value…OnFloatValueChangedEvent`; a real drag | a log line with the new value | pass (run 15:13–15:16) — a REAL drag (mouse-seq ldown, move 0.775→0.66, lup) on a slider created from Lua over the hub: the BP OnFloatValueChangedEvent and SetValueFromSlider both fired (1.0 → 0.0, the slider's 0..1), GetValue 0.0. The UMG slider takes the mouse where the FLX checkbox (S6) does not |
 | S6 | Checkbox change reaches Lua | the hook found by S1; a real click | a log line with the new state | fail ×3 — a REAL click (mouse-seq move+lclick, cursor read 2192×603 = on the checkbox by frame) did not toggle it and no hook fired, in three placements: viewport Z 50, viewport Z 10000, child of the hub's root Overlay (W_Carousel_C). Control: the same real click on the hub tab «Таланты» switched the tab |
 | S7 | Control | a real click on empty screen | no log line | pass by the S6 control — the input path works for the game's own widgets |
 | S8 | Esc | a real Esc with the rows over the hub | the rows go, the hub stays | skipped — next run |

@@ -65,6 +65,8 @@ menus · a mod works without the hub · bad values healed, not crashed on · mod
 menus that fail to register, crashes from touching the game's menu, fights over buttons. Gap noted by the sweep: no hub pairs the native look with
 mods that never integrated — for us a row that opens the mod's own window (`ActivateModule`).
 
+A reference the owner gave 2026-10-30 ≈15:14 — BepInEx ConfigurationManager (https://github.com/BepInEx/BepInEx.ConfigurationManager): `[OWNER]` «там с UI не очень хорошо. мне приходилось улучшать» · «но сама идея настроек модов из одного места» · «не призываю копировать … просто тебе для понимания, как в других местах это удобно решают». Taken: the one-place idea and settings declared as data by each mod; not taken: its look.
+
 ## 4. Implications for this epic (local half; the industry half is added after the sweep)
 
 1. **The look comes for free from the game's own settings widgets** — a section header (`WBP_Settings_Subheader`), a checkbox row, a dropdown row, a

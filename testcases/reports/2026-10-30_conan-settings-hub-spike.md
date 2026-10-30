@@ -28,4 +28,4 @@ not hit-testable until its parent screen initialises it; (3) the slider (a UMG `
 **Traces.** `UE4SS.log` (no `[SPIKE]` hook line); frames `spike1.webp`, `spike4.webp` in the session scratchpad; the recon doc
 `researches/conan-mod-settings-hub/vanilla-settings-widgets.md`.
 
-**Verdict.** partial — creation and setting work; the input path into created rows is NOT proven (fails in 3 placements); phase 0 stays open.
+**Verdict.** partial — creation and setting work; a real drag reaches a created slider (S5, rerun 15:13–15:16: both hooks fired 1.0 → 0.0); real clicks do not reach a created FLX checkbox (3 placements); phase 0 stays open.

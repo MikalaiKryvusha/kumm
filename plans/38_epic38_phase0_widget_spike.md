@@ -2,7 +2,7 @@
 
 > **Created:** 2026-10-30 · **Parent:** `plans/38_EPIC_conan_mod_settings_hub.md` → phase 0 («Lua builds a window from the game's own widgets … their change
 > events reach Lua; the window opens over the hub, Esc closes it»)
-> **Status:** written 2026-10-30 15:0x; steps 1–2 done 15:08 (API read, rows created and set); step 3 FAILED ×3 for the checkbox (real clicks do not reach a created row — viewport Z 50/10000, the hub Overlay); next: S5 the slider drag, then a row inside a module window (our WindowRoot in the KrinikConanUI kit + a module row) — report testcases/reports/2026-10-30_conan-settings-hub-spike.md
+> **Status:** written 2026-10-30 15:0x; steps 1–2 done 15:08 (API read, rows created and set); step 3 FAILED ×3 for the checkbox (real clicks do not reach a created row — viewport Z 50/10000, the hub Overlay); S5 the slider drag PASSED 15:13 (UMG input works; the FLX button does not); next: the checkbox inside a module window or a UMG CheckBox of our own (our WindowRoot in the KrinikConanUI kit + a module row) — report testcases/reports/2026-10-30_conan-settings-hub-spike.md
 > **Outbound:** —
 
 ## Goal vector (Achieve)
