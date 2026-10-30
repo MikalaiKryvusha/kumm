@@ -161,6 +161,10 @@ X = Claws, Icefield, Jungle, UnnamedCity, Volcano, WineCellar — loose `Content
 different one per start. The mod kit has NO `/Game/Movies`: a kit override of this widget loses both arrays → `Image_BinkPlayer` keeps its bare white
 brush. Check any overridden vanilla asset with `_config/devkit/kit-missing-refs.py`. «MainMenuMoviePlayer.OpenSource called with null MediaSource»
 in the log is printed on a good start too — noise.
+The game's logo texture `/Game/UI/Textures/Logos/T_UI_ConanExiles_Enhanced_Logo` (game pak, read 2026-10-31 by `retoc to-legacy` + `uaj tojson`):
+1024×512, `PF_B8G8R8A8` uncompressed, `TC_EditorIcon`, `NeverStream` true — and a FULL mip chain (`.uexp` 2 796 746 bytes = 1024×512×4 × 4/3):
+drawn at 768 px on 4K, the sampler blends mip 1 → the owner's «мутное». Our logo was imported without mips and reads sharp. A replacement goes
+by the kit override at the same path, `TMGS_NO_MIPMAPS` (plan 36 W26; the owner's upscale).
 Menu logos (kit probe 2026-10-30 22:4x, `_config/devkit/kit-probe-tree.json`; no pack mod overrides either widget). Main menu
 `/Game/UI/Widgets/MainMenu/W_MainMenu_MainMenu`: `Image_Logo` in `Overlay_Main`, Left/Top, padding L 72 T 120, brush 384×192 of
 `/Game/UI/Textures/Logos/T_UI_ConanExiles_Enhanced_Logo` (1024×512, alpha); the nav column `Overlay_0` starts at T 340; the game version is
