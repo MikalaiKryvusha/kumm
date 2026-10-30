@@ -127,6 +127,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **17:01 the pack is on GitHub:** `git push origin main` → `cd6711a..4951730` (the private repo `conan-exiles-modpack`, visibility PRIVATE checked first) —
 >   `[OWNER]` «Да, в приватный реп» · 2026-10-30 17:01. From now on push the pack to BOTH: `git push local main` and `git push origin main`. The same line in
 >   `HOUSE_RULES.md` §2 was refused to me by the auto-mode classifier («Self-Modification») — the owner edits the rule or allows it; until then this line holds.
+> - **The crash README is accepted** (`[OWNER]` «ок, годится» · 2026-10-30 17:03); it now points to the guide section. **Next, his order:** «Можно в PDF красиво
+>   оформить, в наш Юзер Мануал разделом отдельным, и на него сослаться» — the guide already has the section (`docs/guide/guide-3.0.1.html`, «Если игра упала —
+>   как прислать отчёт»); make it a separate, well-laid-out page (plan 35 Г11 item 5: LARGE on page 2), rebuild the PDF (recipe HOUSE_RULES_REFERENCE §6), look at it.
 > - **The save question is closed:** `[AI] by mandate — «возвращать ли героя к копии 12:05, - на твое усмотрение. Я пока не играю на прохождение, пока сборка
 >   не готова»` (2026-10-30 17:02): NOT restored to 12:05; the current save (intact, = the 16:52 copy) stays the test stand.
 > - F storage (17:00, the owner: «на F аж сделали хранилище из-за того, что LFS не работал» · «может можем запушить это всё в ГитХаб»): `F:\ai_sandbox\conan_backup\conan-exiles-modpack.git`
