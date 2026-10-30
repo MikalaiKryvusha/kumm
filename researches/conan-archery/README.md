@@ -142,3 +142,11 @@
 1. `homeworks/02_conan_strely_nablyudenie.md` — наблюдение владельца, он взял его на себя.
 2. Безоконное чтение дефолтов чертежей китом (`researches/conan-devkit/smoke-dump-xp.py` как образец).
 3. Офлайновая сверка версий кит↔игра (фаза 1 эпика `plans/06`) — гейт для постоянного мода.
+
+## 2026-10-30 — how the gravity is really computed (bytecode 3.0.1)
+
+Every tick `BP_BaseProjectile` sets `ProjectileGravityScale = GravityCurve(time) × (1 − PowerChargeGravityModMax × PowerChargeMod)`, but only
+while the arrow has a valid `ProjectileGravityCurve`; the bow curves are constants (15m 1.2 · 30m 1.0 · 45m 0.8). Removing the curve from the
+arrow at launch (UE4SS, one write per arrow) leaves a written gravity in place — Remastered ballistics (KrinikConanArchery 0.6.0) needed no cook
+and no override of the popular `BP_BaseProjectile`. Details — `games/ConanExiles/GAME_ARCHITECTURE_INTERNAL_MAP.md`; run —
+`testcases/reports/2026-10-30_conan-arrow-gravity-0.6.0.md`.

@@ -174,6 +174,14 @@ violation in UE4SS; read its location BEFORE `KillCharacter`.
 точно в точку прицеливания с любой дистанции»), незаряженная −55 на 18 м, −101 на 23 м — у заряженной гравитация слабее (поля снаряда
 `PowerChargeMod`, `PowerChargeGravityModMax`, `ProjectileGravityScale` компонента; замер 22:39: заряд 1,00 → гравитация 0,120, заряд
 0,64 → 0,510, `PowerChargeGravityModMax` 0,9). Владелец: «игра сама ослабляет гравитацию для заряженного выстрела - это, в принципе, хорошо».
+Gravity per tick (3.0.1 bytecode, `ExecuteUbergraph_BP_BaseProjectile`, `kismet-trace.py` 2026-10-30): in the tick branch, IF
+`IsValid(ProjectileGravityCurve)` → `ProjectileMovement.ProjectileGravityScale = Curve.GetFloatValue(GetGameTimeSinceCreation) × (1.0 −
+PowerChargeGravityModMax × PowerChargeMod)` (the 1.0 is a Double at `.uexp`+27347); then, IF `IsValid(ProjectileSpeedCurve)`, `Velocity ×=
+SpeedCurve(time)`. Both curves are set by the weapon through the interface events `SetProjectileGravityCurve` / `SetProjectileSpeedCurve`
+when the arrow is born (≈1 s before launch). The bow curves are single-key constants: `FC_BowProjectileGravCurve_15m` 1.2 · `_30m` 1.0 · `_45m`
+0.8 · `FC_CrossbowProjectileGravCurve_45m` 0.8 (`/Game/Systems/Combat/Projectile/`) — the bow's range class. Setting the arrow's
+`ProjectileGravityCurve = nil` at launch (UE4SS Lua accepts it) skips the block: a gravity written once then holds (KrinikConanArchery 0.6.0,
+run 2026-10-30 10:43–10:45, 0.55 at +0.3/+0.6 s on 4 of 4 shots).
 Полоски слева и справа от точки прицела (кит 2.2, `/Game/UI/Widgets/HUD/Reticles/WBP_Crosshair`, режим `Ranged`) — указатель разброса:
 виджет зовёт `CalculateProjectileSpread` → `MaxDeviation`, сдвигает полоски по кривой `C_CrosshairAccuracyPositioning` и гасит по
 `C_CrosshairAccuracyAlpha` (материал `M_UI_Reticle_Accuracy`); шире полоски — больше случайное отклонение стрелы (`AccuracyOffset` в
