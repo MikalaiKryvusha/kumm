@@ -153,7 +153,17 @@ violation in UE4SS; read its location BEFORE `KillCharacter`.
 осталась жива, 2026-10-27 19:53) — работает только `K2_DestroyActor()` (без добычи); неуязвимость существа — `bCanBeDamaged=false`.
 `God` НЕ спасает от жажды и голода (2026-10-26: смерть `CauseOfDeath: Thirst` при включённом God). Выживание — `p:GetHungerSystem()`
 (`BP_HungerSystem_C`): `EnableThirst(false,false)`, `EnableHunger(false,false)`, `AddDrink(nil,100.0)`, `AddFood(nil,100.0)` (сеттеры `SetDrinkCurrent`
-ждут два аргумента — не годятся). `AdjustStaminaRegenMod(1000)` выносливость НЕ удержал; работает повтор `AdjustStaminaCurrent(1000.0)` раз в 250 мс.
+ждут два аргумента — не годятся). Correction 2026-10-30 12:06: `AddFood(nil,100.0)` / `AddDrink(nil,100.0)` left `FoodCurrent` and `DrinkCurrent`
+at 0.0 (read back); a direct write `h.FoodCurrent = 100.0; h.DrinkCurrent = 100.0` holds (re-read at +3 s: 100.0) — use the write and read it back.
+Ground blood (2026-10-30, `researches/conan-blood-decals/`): a WEAPON hit lays `M_blood_ground_decal` from the attacker's `BP_CollisionComponent.DoHandleHitFeedback`
+(`SpawnDecalAtLocation` life 3.0 → `SetFadeOut(0, 3, true)`); arrows on a creature lay none; the material draws the full stain only while
+`DecalLifetimeOpacity` is ≈0.45–0.9 (a ghost at 1, nothing below). Our `KrinikLingeringBlood`, in a post-hook of `DecalComponent:SetFadeOut`:
+`SetFadeOut(297, 3)` + `SetFadeIn(-500, 1000)` (value 0.5 → 0.8 over 300 s). `SetLifeSpan` of a decal is not callable from Lua.
+UE4SS hook on a STATIC UFunction (`GameplayStatics:*`): the first callback parameter is the default object, the real parameters follow; the
+return value is not passed; editing a parameter in the pre-hook does not reach the call.
+Stand for creature hits (2026-10-30): the creature keeps its controller and normal time (detached or `CustomTimeDilation` 0.0001 — it never
+attacks); it hits the god hero; then `K2_DestroyActor` it. The game's idle camera (no real input ≈30 s) hides the HUD and orbits the hero —
+`SetControlRotation` is ignored until a real key (a Shift tap by `mouse-seq.ps1`). At night Night Terrors (`BP_NightTerrors_*`) come to the hero. `AdjustStaminaRegenMod(1000)` выносливость НЕ удержал; работает повтор `AdjustStaminaCurrent(1000.0)` раз в 250 мс.
 Стенд прогона пультом (2026-10-28, правило дома о тестовом окружении): убрать всех рядом — `K2_DestroyActor` у каждого `Character` в радиусе
 60 м (лагерь NPC вокруг героя — враги стоят вплотную и бьют); существа дальше ≈150 м от героя СПЯТ (`bHidden`, тик и столкновения выключены):
 перенос спящего к герою его не будит (сеттеры столкновений не действуют, стрелы проходят насквозь), а игра потом прячет его в пул (0,0,0) —

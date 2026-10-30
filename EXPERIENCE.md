@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0382 · 2026-10-30 · ❌→✅ · #conan #ue4ss #hook #blood #stand
+class: wrong-api-assumption
+**Lesson:** a UE4SS hook on a STATIC UFunction (`GameplayStatics:SpawnDecalAtLocation`) gets the default object as its FIRST parameter; the first
+run read `ctx` as the material and the whole «arrows make 14 stains» story was built on that shift (the stains came from the boss hitting the
+mortal hero). Also: a pre-hook `param:set()` never reaches the call, and the return value is not passed — act on the object in a post-hook of a
+MEMBER function it receives (`DecalComponent:SetFadeOut` gives the decal as `self`). Before trusting a hook, print one call's parameters by
+class name, and prove a param-edit by the effect, not by «ok=true». And a C++ method is not a UFunction: `DecalComponent:SetLifeSpan` from Lua
+is «attempt to call a TrivialObject value» — I wrote «SetLifeSpan holds the stain» from a frame made by a different call and shipped it into
+the mod; the first in-game run failed. A frame proves the call that MADE it — name that call before writing the mechanism down.
+**Repro:** `bash pult.sh 'lua RegisterHook("/Script/Engine.GameplayStatics:SpawnDecalAtLocation", function(a,b,c) print(a:get():GetFName():ToString().." "..b:get():GetFName():ToString().."\n") end)'` → the first name is `Default__GameplayStatics`.
+**Trigger:** writing a `RegisterHook` on any `/Script/*Library` or `GameplayStatics` function → print the first two parameters' names once.
+mechanized: no — a line in the Conan game map (UE4SS static-hook parameters)
+
 ### EXP-0381 · 2026-10-30 · ❌→✅ · #conan #stand #god #save #hunger
 class: tool-path-unproven
 **Lesson:** every Conan 3.0.1 «god mode» run of the day used the console `exec God` — the remote answered «ok» and NOTHING changed

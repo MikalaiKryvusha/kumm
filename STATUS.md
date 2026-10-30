@@ -110,6 +110,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **UPDATE 2026-10-30 12:46 (chat 759898d5, /dayloop by «Работай автономно» 12:0x):** W28 blood 5 min DONE in game — new Lua mod
+> `KrinikLingeringBlood` 0.1.0 (pack `ccfba10`; report `testcases/reports/2026-10-30_conan-lingering-blood.md`); the owner's eye — folder
+> «24 Конан — кровь на земле 5 минут». W5(c) «k» rounding — recon: integer division only, rounding needs an ADD (plan 36 W5 row) — moved to the
+> heavy end. Stand lessons (game map): arrows lay no ground blood; a detached / time-frozen creature never attacks; the idle camera ignores the
+> remote until a real wheel step; `os.clock` steps 1 ms. Save restored to the 12:05 copy after every launch. Next: W29 bark flicker, W24 epic.
 > **UPDATE 2026-10-30 11:33 (chat 77faa752, autonomous by «работай автономно» 10:37):** W15 arrow gravity DONE (KrinikConanArchery 0.6.0 drops
 > the arrow's gravity curve), W14 shooting while jumping DONE (0.7.0), W27 HUD temperature colours DONE (KrinikHudOutline) — all in game with
 > run reports; the owner's eye: minimum speed share, the jump-shot look + stamina, the three colours. Drive-bys filed: W28 blood 5 min (recon:
