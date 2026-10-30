@@ -138,9 +138,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **The owner asks (17:04): «можно удалить с F временное хранилище? ГитХаб LFS работает?»** — not yet: GitHub LFS upload NOT verified (only the API answers);
 >   Unliminium's 909 MB of LFS live only on F as far as this clone shows. Order before any delete: in the Unliminium repo add/fetch its GitHub remote, check the
 >   account's LFS quota, `git lfs push --all <github>`, then `git lfs ls-files` vs the server (`git lfs fsck`/a fresh clone) — only then the F copy may go, by his word.
-> - **The crash README is accepted** (`[OWNER]` «ок, годится» · 2026-10-30 17:03); it now points to the guide section. **Next, his order:** «Можно в PDF красиво
->   оформить, в наш Юзер Мануал разделом отдельным, и на него сослаться» — the guide already has the section (`docs/guide/guide-3.0.1.html`, «Если игра упала —
->   как прислать отчёт»); make it a separate, well-laid-out page (plan 35 Г11 item 5: LARGE on page 2), rebuild the PDF (recipe HOUSE_RULES_REFERENCE §6), look at it.
+> - **The crash README is accepted** (`[OWNER]` «ок, годится» · 2026-10-30 17:03); it points to the guide section. **DONE 2026-10-30 18:26 +03:00 (pack `aaff8b2`):** the section is
+>   the guide's own LARGE sheet 2 (cover points to it; install fits sheet 1; uninstall moved to «Что знать заранее»), PDF 10 pages, sheets 1–2 looked at; the look
+>   waits for the owner in `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\10 руководство — лист отчёта о падении`. Chrome-PDF trap: an element wider than the page
+>   makes Chrome SCALE the whole document down — a layout that "fits" only then is a false fit.
+> - **Session 18:15 — the owner works over Vibepollo:** «по возможности работай с игрой в фоне, мнге будет более важно читать ход работы твоей в ВС код и слушать
+>   ход твоей работы твоим голосом» (2026-10-30 18:23) — launch only by `launch-bg.ps1`, narrate in chat AND by voice. **Conan volume 1 % in the Windows mixer**
+>   (`[OWNER]` «в микшере виннды поставь конану громкость 1%» · 18:21): the game was not running → not applied yet; at the first launch run
+>   `powershell -File _config/set-app-volume.ps1 -Process ConanSandbox -Percent 1` (pack `aaff8b2`; exit 4 = no audio session yet, retry after the menu sounds).
 > - **The save question is closed:** `[AI] by mandate — «возвращать ли героя к копии 12:05, - на твое усмотрение. Я пока не играю на прохождение, пока сборка
 >   не готова»` (2026-10-30 17:02): NOT restored to 12:05; the current save (intact, = the 16:52 copy) stays the test stand.
 > - F storage (17:00, the owner: «на F аж сделали хранилище из-за того, что LFS не работал» · «может можем запушить это всё в ГитХаб»): `F:\ai_sandbox\conan_backup\conan-exiles-modpack.git`
