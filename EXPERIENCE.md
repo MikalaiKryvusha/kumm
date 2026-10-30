@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0399 · 2026-10-31 · ❌→✅ · #conan #ue4ss #umg #click #kit
+class: widget-event-hook-silent
+**Lesson:** `RegisterHook("/Script/UMG.UserWidget:OnMouseButtonDown" | ":OnMouseMove")` registered without an error and NEVER fired on Conan 3.0.1
+(real clicks on our image, `IsHovered()` = true by the remote) — the menu's mouse events do not reach Lua that way. What works: `RegisterKeyBind(Key.LEFT_MOUSE_BUTTON)`
++ `ExecuteInGameThread` + the button's `IsHovered()` (remote probe 01:17: on the plate true, off it false). LMB is also the attack — keep the menus from
+`NotifyOnNewObject`, never search the scene on the click. A UMG `Button` draws its own hover; in kit Python a `SlateBrush.image_size` wants
+`DeprecateSlateVector2D`, not `Vector2D` — leave it unset, the button stretches the brush. And a kit chain «edit → build» must STOP when the edit
+reports `ok: false`: the first chain built a pak from the previous save.
+**Trigger:** a clickable widget of ours in Conan; any kit edit followed by a build in one script.
+mechanized: the chain's `sys.exit(9)` on `ok: false` (scratch command, 01:25) — no tool yet
+
 ### EXP-0398 · 2026-10-31 · ❌→✅ · #kit #edit #background-run
 class: refused-edit-then-run
 **Lesson:** an Edit refused with «File has not been read yet» and a background kit run started in the same message ran the OLD script — the import

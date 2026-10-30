@@ -7,8 +7,9 @@
 > **Status:** living notes · the both-logos movie seen on screen 2026-10-31 00:35 (dots spinner); the wheel spinner built 00:43, deployed, on screen — the owner's next start
 > **Outbound:** —
 
-**What it does.** A 150-second movie (3840×2160, 30 fps, H.264, ≈ 7.8 MB): black, the game's logo and ours side by side, under them a thin wheel whose
-soft light goes round once in 6 s; fade in 0.6 s. The engine cuts it when loading ends — so it stays on screen for the whole load.
+**What it does.** A 150-second movie (3840×2160, 30 fps, H.264): black, the game's logo and ours side by side, under them a thin grey wheel along which a
+gold run (the Conan logo's gold) goes round once in 6 s — a sharp front, the tail fading back into grey (`[OWNER]` 2026-10-31 01:12); fade in 0.6 s.
+The engine cuts it when loading ends — so it stays on screen for the whole load.
 
 ## How it works (recon — `researches/conan-intro-movie/README.md`)
 

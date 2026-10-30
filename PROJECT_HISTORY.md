@@ -1,5 +1,21 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-31 01:38 +03:00 — STATUS: W6 centred / the corpse backing (accepted) and the 00:1x–00:4x bug 71 entry (moved verbatim at the closing of chat 6a70552d)
+
+> - **W6 CENTRED — DONE in game 21:29** (details moved verbatim to the chronicle, entry 2026-10-31 00:12 +03:00).
+>   **Not yet seen:** the strip the GAME creates on a real look at a corpse (the frame is of a strip created by code — same class and Lua, but a
+>   second instance); a chest proper (a campfire strip — our line collapsed — seen 22:33).
+>   **The backing covers the line ends — DONE in game 22:32, ACCEPTED by the owner 22:38** («вот, теперь у тебя плашка получилась!»; his ask 21:40–21:45; review folder `12 подложка над трупом
+>   закрывает строки`, report `testcases/reports/2026-10-30_conan-corpse-strip-backing.md`): brush side margins 0.40 + the Border's OWN padding 140
+>   (the slot field never reached the game — EXP-0395); line ends on 88–98 % of the centre darkness; a campfire strip shows no corpse line; gap to
+>   the loot window ≈ 178 units. Stand: `_config/strip-open.sh <tag> [class]` (opens by code). Still not seen: the strip the GAME creates on a real
+>   look; a chest proper (none in the oasis save).
+> - **2026-10-31 00:1x–00:4x (the owner's debt of the 00:10 demo) — DONE, pack `49161e8`:** bug 71 white main menu — the kit has no `/Game/Movies`, our
+>   override saved the backdrop arrays empty; kit placeholders fix it (seen 00:35, `bugs/71_DONE_…`, guard `_config/devkit/kit-missing-refs.py` — run it on
+>   any new vanilla override); the main-menu logo smaller and further right; the intro = both logos + a slow wheel for the whole load (150 s movie cut by
+>   the load, `bWaitForMoviesToComplete=False` in the pack's `_config/Game.ini`; report `testcases/reports/2026-10-31_conan-main-menu-white-bg.md`).
+>   **The owner's eye pending:** the wheel spinner and the logo size at his next start. Open: the control case I4, ≈ 3 s black between intro and menu.
+
 ## 2026-10-31 00:12 +03:00 — STATUS: the W6 centred entry's head (moved verbatim at the closing of chat 0d831a73)
 
 > - **W6 CENTRED — DONE in game 21:29 (pack ca75268), the owner's eye pending** (mock-up «да, верно» 19:56; frame `5 ГОТОВО` in review folder 11): our
