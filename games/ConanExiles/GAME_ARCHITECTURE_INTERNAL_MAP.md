@@ -152,6 +152,12 @@ Second stand (2026-10-30, the owner's «саму плашку кодом отк�
 `AddToViewport(50)` → `SetObject`; removed by the next call). A code-opened strip on a corpse also shows the quick-loot window. Non-corpse strip in the
 oasis save: a campfire `BP_PL_Crafting_CampFire_C` (≈ 1064 m; `MAXD_M=2000`) — no chest within reach there; placeables are found by `FindAllOf('PlaceableBase')`.
 The strip's dark backing: `Border_Underlay` — see `mods/KrinikConanUI.md` (brush, its texture's fade, the Border's own padding).
+
+Menu logos (kit probe 2026-10-30 22:4x, `_config/devkit/kit-probe-tree.json`; no pack mod overrides either widget). Main menu
+`/Game/UI/Widgets/MainMenu/W_MainMenu_MainMenu`: `Image_Logo` in `Overlay_Main`, Left/Top, padding L 72 T 120, brush 384×192 of
+`/Game/UI/Textures/Logos/T_UI_ConanExiles_Enhanced_Logo` (1024×512, alpha); the nav column `Overlay_0` starts at T 340; the game version is
+`Text_VersionValue` in `VerticalBox_0` (right column). Esc menu `/Game/UI/HUD/W_IngameMenu`: `Image_Logo` in `Overlay_1`, Right/Top, padding
+R 72 T 88, brush 512×256; key art `Image_KeyArtOver/Under` Right/Bottom; version `Text_VersionNumber` in `VBox_Meta` (bottom left).
 Подсветка цели (байткод кита 2.2, `FunCombat_PlayerController::UpdateHighlightTarget`, читается `uaj func <ассет кита> VER_UE5_6 <функция>` +
 скретч-разборщик): в третьем лице игра САМА ставит `InteractionDistanceThirdPersonBonus` = длине штанги `ThirdPersonSpringArm`; сферический луч
 `InteractionDistance + бонус`; каждое попадание проходит `CheckLineOfSight(actor, ImpactPoint + вперёд_камеры·10, компонент, экземпляр)`: цель =

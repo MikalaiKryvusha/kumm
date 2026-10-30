@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0396 · 2026-10-30 · ❌→✅ · #gitbash #kit #paths
+class: shell-mangles-argument
+**Lesson:** an env value `KIT_TEXTURES='/Game/UI/…'` reached the kit's Python as `C:/Program Files/Git/Game/UI/…` — Git Bash (MSYS) converts a
+leading-slash argument or env value to a Windows path for native exes; the probe said «NOT FOUND». Prefix the call with `MSYS_NO_PATHCONV=1`.
+**Trigger:** any `/Game/…` asset path passed from Git Bash to a native exe (UnrealEditor, UnrealPak) by argument or env.
+mechanized: no
+
 ### EXP-0395 · 2026-10-30 · ❌→✅ · #conan #kit #umg #ui #frames
 class: edit-not-reaching-runtime
 **Lesson:** the corpse strip's backing did not widen for two builds (padding 70, then 140): the kit set the Content SLOT padding by
