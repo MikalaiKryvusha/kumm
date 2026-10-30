@@ -67,7 +67,7 @@ older rules and hooks not changed in the window; what could not be verified.
    ≥ 85 % «СРОЧНО ЗАКРЫВАЙ ЧАТ… /end-chat-force» on every call. On PreToolUse it speaks only on entering a new 5 % step (state file
    `<tmp>/context-budget-<session>.json`); on UserPromptSubmit always while ≥ 70 %. Never blocks; any error → silent exit 0. It only hints:
    `CLAUDE.md` orders the agent to close the chat itself. Exports `lastUsage`, `contextOf`, `WINDOW`, `PCT_CLOSE` (reused by autonomy-guard).
-3. **Why it appeared.** The owner asked for a hook that closes chats before auto-compaction (2026-10-28 evening, same evening as #179 on the
+3. **Why it appeared.** `[OWNER]` «разверни у нас такой хук… и самостоятельно закрывать чаты, когда окно заканчивается» · 2026-10-28 (`.claude/hooks/context-budget.mjs:11-12`) — evening, same evening as #179 on the
    `/resume` cost). The window size 1 M was set by observation: the previous chat of the same model reached 689 183 tokens
    (`testcases/reports/2026-10-28_context-budget-hook.md` §2). No EXP entry introduced it.
 4. **Owner's words.** «разверни у нас такой хук… и самостоятельно закрывать чаты, когда окно заканчивается» — 2026-10-28, no time recorded —

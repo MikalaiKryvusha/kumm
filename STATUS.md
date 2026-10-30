@@ -110,40 +110,35 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **UPDATE 2026-10-30 14:34 (chat b46b10e8):** W32 `KrinikConanGameplay` DONE (pack `2daa084`, G1–G6 pass). **Mod notes are a lock now** (the owner
-> ≈14:25: «КАИФ ДОЛЖЕН ТЕБЯ ОБЯЗЫВАТЬ ДОКУМЕНТИРОВАТЬ ТВОИ ЗНАНИЯ!!!»): one file per mod `games/ConanExiles/mods/<Mod>.md` — the knowledge-hook refuses
-> extracting/tracing/editing/deploying a mod until its notes are read in the session (own tool call); first notes — `UIMod_Hosav.md`; KAIF #186.
-> **15:10 — EPIC «Настройки модов» FIRST** (`[OWNER]` ≈15:00 «с начало это, затем по твоему плану выше»): `plans/38_EPIC_conan_mod_settings_hub.md`
-> (6 criteria, phases 0–5), research `researches/conan-mod-settings-hub/` (README; `vanilla-settings-widgets.md`; `web-sweep.md` — merged into README §3 at the closing;
-> its rules: data registration, one ini per mod, change by event, the mod works without the hub). **Phase 0 spike** (`plans/38_epic38_phase0_widget_spike.md`, report
-> `testcases/reports/2026-10-30_conan-settings-hub-spike.md`): the game's own rows (`WBP_Setting_Checkbox`, `WBP_Setting_Dropdown`, `W_EditableLabeledSlider`,
-> `WBP_Settings_Subheader`) are created from Lua and take values; a REAL DRAG reaches a created slider (S5 pass 15:13 — UMG slider), a REAL click does not reach a created FLX checkbox (3 placements). Next:
-> then rows inside a module window (our WindowRoot widget in the KrinikConanUI kit + a module row); set the subheader's `Label` before adding.
-> Then the quick list below. `mouse-seq.ps1` has `move:<fx>/<fy>` now.
-> **16:4x (chat 5db69748, dayloop):** done — guide exclusive cards (pack `ab9c98b`/`029ba6b`); W11 versions 3.0.1 (`183a172`, tool `set-pak-version.py`);
-> W18a fishing captions on one line with bars (KrinikConanUI 0.14.0, looks → `НА ОТСМОТР НИКОЛАЕМ/9`); engine `-Verify` warns on runtime cvar overrides
-> (`536e3ca`); `save-restore.sh` (the save is SQLite WAL — never a bare `cp`); hooks: autonomy-guard catches any «…автономно», knowledge-hook skips vanilla
-> assets, clock-now adopted. **Live remote probes stopped** after three crashes of my own probes (EXP-0386/0387): the spike S11 (a row created with the
-> window as owner — `Create(window, class, nil)` lands in its WidgetTree; adding it crashed) and W6 (a safe corpse stand now: `bash _config/corpse-stand.sh 50` at the oasis save — run 16:5x pass; the 16:20 crash was MY unfiltered loop, EXP-0387) wait
-> for research, not more pokes. W6 route found: line 2 by the translation key + line 1 as a separate strip text (game map). W11 top-of-list: routes in
-> `games/ConanExiles/mods/SimpleModlist.md`. **clock-now has a known defect** (kaif-48, 16:40): a placeholder only MOVED by an edit (in Edit's old_string or
-> the replaced Write file) gets filled — fixed at the origin, take the new copy after their commit; until then never move a placeholder text.
-> The game is launched by TWO paths — `launch-fg.ps1` (in front) / `launch-bg.ps1` (background), the owner picks (HOUSE_RULES §1 rule 16; his last word
-> 16:18: «работай в фоне»); the game process is `ConanSandbox-Win64-Shipping`.
->
-> **14:57:** W36 HUD blink DONE in game (pack `4fae579`, H1–H10): Hosav's speed 0.30 + section `KrinikConanUI:HudBlink` (partial-curve PingPong — the
-> 14:34 plan «threshold patch + RenderOpacity» was replaced, correction). W34 Harness DONE: dev-only entry `"export": false`. Owner's dayloop order ≈14:37
-> («Гоу, работай автономно» · «делаем сборку Конана»). Engine.ini CPU recon runs in a helper → `researches/conan-engine-ini-cpu/README.md`.
-> **Next (quick first):** ~~the guide's exclusive-mods section~~ (DONE 16:1x); W6 corpse prompt on two lines (needs a safe corpse stand); W10a quick-loot jump; ~~W18a captions~~ (DONE 16:46);
-> W4 minimap coordinates; W11 mod list (versions DONE, top-of-list open); then W13/W30 arrows, W29 shouts, G3/G4. Notes for every mod the work touches (the lock demands it).
->
-> **Still open from the 13:07 handover (the rest — chronicle, entry 2026-10-30 15:1x):** the owner's save — after the 12:05 copy it differs; the
-> restore waits for his «верни»; every run of chat b46b10e8 restored its own copy. KrinikConanGraphics G3/G4 (the cap evicting the oldest stain not
-> run in game; cost per stain = 1000 calls / 1000) — cases in `testcases/TC_conan_blood_decal_lifespan_2026-10-30.md`. W30 arrow blood, W13 arrows
-> in the air, W29 shouts, W26 logo, W18 UTF-16 twin sweep, W18a captions, W10a quick-loot jump, W17 residual. Run rules: after ANY pak edit — a menu
-> frame by eye before automation; measure a window, never estimate it. Outward: watch https://github.com/Arora-Sir/Super-Artemis/issues/3.
-> Work trees kept: `_paksview-3.0.1` (66 GB, arrow gravity trace) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB, string sweep) — rule 15.
-> `.claude/settings.local.json`: the agent's edit went through on 2026-10-30 14:3x (the knowledge-hook PreToolUse wiring).
+> **HANDOVER 2026-10-30 16:55 +03:00 (chat 5db69748 closed at 75 % of the window; the 14:34–16:4x updates moved verbatim to the chronicle):**
+> - **Done this chat:** the guide's exclusive cards + PDF (pack `ab9c98b`, `029ba6b`); W11 versions 3.0.1 (pack `183a172`, `_config/devkit/set-pak-version.py`);
+>   W18a fishing captions on one line with bars (pack `550b351`, KrinikConanUI 0.14.0) — the look waits in `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\9 рыбалка — подписи сложности`;
+>   engine `-Verify` warns when a mod re-sets an Engine.ini cvar (`536e3ca`, fixture 27/27); `save-restore.sh` (pack `d6741a1`) — the save is SQLite WAL, restore ONLY
+>   by it; `corpse-stand.sh` (pack `4951730`, `bash _config/corpse-stand.sh 50` at the oasis save — kills the boss at 43 m); two launch paths `launch-fg.ps1` /
+>   `launch-bg.ps1` (HOUSE_RULES §1 rule 16 — the owner picks; his last word 16:18 «работай в фоне»); hooks: autonomy-guard catches any «…автономно»,
+>   knowledge-hook does not lock vanilla assets, clock-now adopted (**known defect** — a MOVED placeholder gets filled; the origin fixed it 16:30, take the new
+>   copy from `D:\work\ai_sandbox\KAIF\framework\hooks\clock-now.mjs` after their commit, kaif-48); the KAIF inventory `reports/KAIF_FIELD/2026-10-30_kumm-local-rules-and-hooks.md` sent to kaif-48.
+> - **FIRST next chat — GitHub access is back (the owner ≈16:57: «и нам восстановили доступ к GitHub!!!» · «может даже LFS заработает, но я не уверен»):**
+>   checked 16:58 read-only: `git ls-remote origin main` works (GitHub `conan-exiles-modpack` at `cd6711a` of 2026-10-27 — **103 commits behind** local
+>   `4951730`); `git lfs locks --remote origin` answers rc 0 (the LFS API takes our credentials); the pack tracks NO LFS files yet. Not done: an LFS upload and
+>   pushing the pack to its GitHub origin — the owner's call (HOUSE_RULES §2: the pack pushes to the F mirror `git push local main`; origin is not touched).
+>   16:59 `git push --dry-run origin main` passes (fast-forward `cd6711a..4951730`; 267 blobs, 48 MB, largest 10 MB — under GitHub limits); the push waits
+>   for his «да». Unliminium (`D:\work\UnliminiumTheDigitalGame`, 804 LFS files) has only the F `backup` remote in this clone — its GitHub LFS is checked there.
+> - Judge caveat (16:59): the engine's runtime-cvar warning skips the pack ini only in `engineIni.file` mode — in `appendFile` mode a pack ini inside a mod
+>   folder would warn on itself (no fixture yet).
+> - **Epic «Настройки модов», phase 0 (open):** real clicks reach vanilla FLX buttons inside a vanilla window («Отмена» closed `W_InventorySettings_C`), but a
+>   checkbox created by `Create(pc, class, pc)` stays dead even inside it; 48 of 49 live FLX buttons live in a window's `WidgetTree` (H4: the OUTER matters).
+>   `Create(window, class, nil)` builds inside `<window>.WidgetTree`; adding it + `SetText` in ONE call crashed (15:38) — next: the same, ONE action per call,
+>   stand check after each (`testcases/TC_conan_settings_hub_spike_2026-10-30.md` S11–S14, `researches/conan-mod-settings-hub/vanilla-settings-widgets.md`).
+> - **Quick list next:** W6 corpse prompt on two lines (route: line 2 by the translation key «или нажмите {0}, чтобы забрать предметы» + line 1 as a separate
+>   strip text — game map line ≈123; stand `corpse-stand.sh 50`); W10a quick-loot jump; W25 level-up hint through the loot window; W11 top-of-list
+>   (`games/ConanExiles/mods/SimpleModlist.md`: two routes); W4 minimap; then W13/W30 arrows, W29 shouts, G3/G4 (`TC_conan_blood_decal_lifespan_2026-10-30.md`).
+> - **Rules learned the hard way today:** filter `FindAllOf(<base class>)` by full name before ANY method call (three crashes, EXP-0386/0387); after a crash —
+>   crash window by PID, `save-restore.sh`, world entry check, only then the next probe; flip a `[NOT-TESTED]` by its neighbour line, never by the bare
+>   pattern (EXP-0389); a mod's notes `games/ConanExiles/mods/<Mod>.md` before working on it (new today: SimpleModlist, KrinikConanArchery, KrinikConanGameplay, JaarFishing).
+> - **Waiting for the owner:** the fishing captions' look (folder 9); the HUD blink dim start 0.25; the crash-report README; his save — the 12:05 copy question
+>   («верни») still open; every run today restored its own copy (last: `_save-backup/2026-10-30_1652-before-corpse-stand`).
+> - Work trees kept: `_paksview-3.0.1` (66 GB) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB) — rule 15. Outward: watch https://github.com/Arora-Sir/Super-Artemis/issues/3.
 >
 > **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied
 > (`SvarogsDream/_backups/svarog-saves-2026-10-29_2103-before-debt024`), configs snapped (`_harness/cfg_snap`, 21:04), the 13:43 build `f44c36e` hot-deployed
