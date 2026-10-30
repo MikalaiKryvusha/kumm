@@ -110,6 +110,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **UPDATE 2026-10-30 14:34 (chat b46b10e8):** W32 `KrinikConanGameplay` DONE (pack `2daa084`, G1–G6 pass). **Mod notes are a lock now** (the owner
+> ≈14:25: «КАИФ ДОЛЖЕН ТЕБЯ ОБЯЗЫВАТЬ ДОКУМЕНТИРОВАТЬ ТВОИ ЗНАНИЯ!!!»): one file per mod `games/ConanExiles/mods/<Mod>.md` — the knowledge-hook refuses
+> extracting/tracing/editing/deploying a mod until its notes are read in the session (own tool call); first notes — `UIMod_Hosav.md`; KAIF #186.
+> **Next: W36 the HUD blink** (owner ≈14:23) — recon in `UIMod_Hosav.md`: trace `Progress_Drink` and the weight path, then PlaybackSpeed 0.25 → 0.30,
+> threshold `EqualEqual 0.0` → `LessEqual 0.1` (weight 90 %), dim → full by `RenderOpacity` from the `KrinikConanUI` HUD section. Then notes for the
+> other mods the build edits (write each from the maps when its work starts — the lock demands it).
+>
 > **UPDATE 2026-10-30 14:15 (chat b46b10e8):** done — W33 translation entry renamed (pack `d55a59e`); W35 the player README «Если игра упала — как
 > прислать отчёт» + guide section, reports go to the author's e-mail or PlayGround profile (the owner 14:04–14:05; the section goes LARGE on page 2 of
 > the manual — plan 35 Г11 item 5), texts wait for his read-through; W31 `KrinikConanUI` (pak + four Lua sections) live run U1–U8 pass (pack
