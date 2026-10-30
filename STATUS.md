@@ -150,6 +150,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **W6 corpse prompt on two lines — in game 18:51, pad fix pending its frame:** see plan 36 W6. The owner launched the game HIMSELF at 18:55 (parent
 >   `explorer.exe`, PID 22920) — not touched; the pad-8 pak was deployed 18:59 while his game ran (his session shows the pad-2 icon). Next: when his game
 >   closes — `launch-bg.ps1`, P1b + S1 by frames (`corpse-stand.sh 50`, kill the crocodile that walks in, hero 70 cm from the corpse, `corpse-loot-geom.sh`).
+> - **Queued for the same moment (not run — the kit loads the CPU under his game):** `kit-conanui-edit.py` now writes «Забрать все (удерж.)» (the kit pak
+>   still wrote «(удерживайте)» over the translation — seen on today's frames; the owner's word 08:32) → kit run + `kit-buildmod.py` + deploy; and
+>   `kit-probe-quickloot.py` (the W_QuickLootPanel tree, for the W10a size jump) — run it in the same kit pass.
 > - **The save question is closed:** `[AI] by mandate — «возвращать ли героя к копии 12:05, - на твое усмотрение. Я пока не играю на прохождение, пока сборка
 >   не готова»` (2026-10-30 17:02): NOT restored to 12:05; the current save (intact, = the 16:52 copy) stays the test stand.
 > - F storage (17:00, the owner: «на F аж сделали хранилище из-за того, что LFS не работал» · «может можем запушить это всё в ГитХаб»): `F:\ai_sandbox\conan_backup\conan-exiles-modpack.git`
