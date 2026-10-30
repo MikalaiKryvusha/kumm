@@ -114,7 +114,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > report `testcases/reports/2026-10-30_conan-fishing-tooltip-translation.md`; on the way my addprop pak CRASHED the game at load — the owner saw the
 > hang; guarded, EXP-0377). **The owner's three BIG debts, his order of 08:3x:** W14 shooting while jumping (plan 37), W15 Oblivion Remastered arrow
 > ballistics with a raised minimum speed (decided 08:33), W24 one «Настройки модов» button + one hub of mod settings windows in the game's style.
-> **W15 in progress:** KrinikConanArchery 0.5.0 coded and deployed (pack `d4e3907`), the in-game check BLOCKED — real input fired no arrow; first rule out the F1 cursor mode and an unloaded bow (stand of 2026-10-29: god mode, arrows by the remote), then cases B1–B5.
+> **W15 in progress:** KrinikConanArchery 0.5.0 (pack): speed by the draw WORKS in game; gravity is rewritten by the arrow blueprint every tick — next: recon of the blueprint’s gravity (charge → curves `FC_BowProjectileGravCurve_*`), edit natively in our pak (run 09:38–09:43; the first launches fired with the bow slung — EXP-0378).
 > Small left: W18 twin sweep (full unpack ≈12 GB — disk D: has ≈12 GB free, check first), W18a captions, W10a quick-loot jump, H1 «(удерж.)» by eye.
 >
 > **HANDOVER 2026-10-30 01:08 — the Conan build: the owner's four evening items are DONE, his eye pending** (`[OWNER]` «продолжаем делать сборку Конана. Работай

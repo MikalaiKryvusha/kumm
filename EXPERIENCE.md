@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0378 · 2026-10-30 · ❌→✅ · #conan #stand #bow #owner-saw-first
+class: stand-not-checked
+**Lesson:** four launches «fired» with the bow slung on the back — no arrow, and I hunted causes in input, cursor modes and the remote, then misread a
+crop as «bow in hand». The owner: «ты как дурак себя ведёшь - пытаешься стрелять не посмотрев, что у тебя в руках!». The stand step comes first and is
+checked BY EYE: weapon in hand (Conan shows a held bow horizontally in front; a slung one runs along the back), ammo count on the quick bar, then the
+action — and after the action, the count must drop. Key 1 TOGGLES the hotbar weapon (it put the bow away in the first launch, the save kept it).
+mechanized: no — a stand line in the case file (`TC_conan_arrow_ballistics_remastered_2026-10-30.md`)
+
 ### EXP-0377 · 2026-10-30 · ❌→✅ · #conan #uasset #zen #crash #owner-saw-first
 class: tool-path-unproven
 **Lesson:** a NEW property name cannot be spliced into a zen chunk. `uaj addprop` added `WrapTextAt` to `W_EFT_Tooltip` (JaarFishing); the name
