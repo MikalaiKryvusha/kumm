@@ -121,13 +121,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (the slot field never reached the game — EXP-0395); line ends on 88–98 % of the centre darkness; a campfire strip shows no corpse line; gap to
 >   the loot window ≈ 178 units. Stand: `_config/strip-open.sh <tag> [class]` (opens by code). Still not seen: the strip the GAME creates on a real
 >   look; a chest proper (none in the oasis save).
-> - **FIRST next chat (the owner's debt, 2026-10-31 00:10 demo):** (1) **bug 71 — the main menu background is all white** («все белое»): control
->   builds — without our `W_MainMenu_MainMenu` override, then without `Movies/.mp4` (`bugs/71_conan_main_menu_background_white.md`); (2) then the main
->   menu: our logo smaller and further right (`[OWNER]` «потом в меню главном наш логотим сделй меньше и правее» · 00:11; kit `kit-conanui-edit.py`
->   MENUS, `OUR_LOGO_H_SHARE` / `LOGO_GAP_SHARE` for the main menu). (3) The intro reworked: `[OWNER]` «показываем оба лого - оригинальный и нашей
->   сборки и показываем на все время загрузки игры, а внизу под ними в центре крутим спинер прогресса медленно» · 00:12 — recon first: the game's
->   `bWaitForMoviesToComplete=True` makes a long movie BLOCK the load; a looped movie stopped when loading ends (`PlaybackType` / `bAutoCompleteWhenLoadingCompletes`)
->   lives in the pak's defaultconfig — find a way (`researches/conan-intro-movie/`). Then the W30 arrow test below.
+> - **2026-10-31 00:1x–00:4x (the owner's debt of the 00:10 demo) — DONE, pack `49161e8`:** bug 71 white main menu — the kit has no `/Game/Movies`, our
+>   override saved the backdrop arrays empty; kit placeholders fix it (seen 00:35, `bugs/71_DONE_…`, guard `_config/devkit/kit-missing-refs.py` — run it on
+>   any new vanilla override); the main-menu logo smaller and further right; the intro = both logos + a slow wheel for the whole load (150 s movie cut by
+>   the load, `bWaitForMoviesToComplete=False` in the pack's `_config/Game.ini`; report `testcases/reports/2026-10-31_conan-main-menu-white-bg.md`).
+>   **The owner's eye pending:** the wheel spinner and the logo size at his next start. Open: the control case I4, ≈ 3 s black between intro and menu.
+> - **NEXT: W37 «Оставить отзыв» button** under our logo in the main menu (plan 36 W37: one click → the player's logs and crash reports zipped by
+>   `collect-report.ps1` + a mail to the author's address already in the pack): `[OWNER]` «только как-то в стиле логотипов ее сделать красиво» · 00:41 —
+>   the taste class: mock-ups on the real menu frame first. Then the W30 arrow test below.
 > - **22:55 «работай автономно» → `/dayloop`. W26 the build's logo:** wallpapers ACCEPTED 22:55 (the owner's A3-smaller, `_extras/Wallpapers/*.jpg`, the clean
 >   originals in `_extras/Wallpapers-source/`, `_config/branding/make-wallpapers.py`); the logo + versions in the main menu (right) and the Esc menu (left)
 >   seen in game 23:29 (review folder 14, the owner's eye pending); the logo intro at start built 23:38 (`KrinikIntro`, `Content/Movies/.mp4` — on screen not

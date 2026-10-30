@@ -155,6 +155,12 @@ The strip's dark backing: `Border_Underlay` — see `mods/KrinikConanUI.md` (bru
 
 Quitting the game by the remote (2026-10-31 00:10): `StaticFindObject('/Script/Engine.Default__KismetSystemLibrary'):QuitGame(pc, pc, 0, false)` — the game
 exits cleanly in ≈ 10 s; `pc:ConsoleCommand('quit', false)` fails in the remote.
+Main menu backdrop (2026-10-31, KUMM bug 71): `W_MainMenu_MainMenu` holds `BackgroundMovies` (6 × `BinkMediaPlayer` `/Game/Movies/TitleScreen_<X>`,
+X = Claws, Icefield, Jungle, UnnamedCity, Volcano, WineCellar — loose `Content/Movies/TitleScreen_<X>.bk2`, ≈ 65 MB each) and `BackgroundMovieTextures`
+(`/Game/Movies/MediaTextures/TitleScreen_<X>_Tex`, `BinkMediaTexture`) and puts one onto `Image_BinkPlayer` (`Overlay_Content`, Fill) at run time — a
+different one per start. The mod kit has NO `/Game/Movies`: a kit override of this widget loses both arrays → `Image_BinkPlayer` keeps its bare white
+brush. Check any overridden vanilla asset with `_config/devkit/kit-missing-refs.py`. «MainMenuMoviePlayer.OpenSource called with null MediaSource»
+in the log is printed on a good start too — noise.
 Menu logos (kit probe 2026-10-30 22:4x, `_config/devkit/kit-probe-tree.json`; no pack mod overrides either widget). Main menu
 `/Game/UI/Widgets/MainMenu/W_MainMenu_MainMenu`: `Image_Logo` in `Overlay_Main`, Left/Top, padding L 72 T 120, brush 384×192 of
 `/Game/UI/Textures/Logos/T_UI_ConanExiles_Enhanced_Logo` (1024×512, alpha); the nav column `Overlay_0` starts at T 340; the game version is

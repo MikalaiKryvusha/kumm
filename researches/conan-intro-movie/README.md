@@ -24,6 +24,25 @@
    the owner is not on the remote desktop) → `KrinikIntro.bk2`.
 3. Shipping: a `files` mod in the pack (the movie) + the ini lines by the deploy, like `Engine.ini`.
 
+## The owner's rework of 2026-10-31 00:12 — both logos for the whole load, a slow spinner under them
+
+`[OWNER]` «показываем оба лого - оригинальный и нашей сборки и показываем на все время загрузки игры, а внизу под ними в центре крутим спинер
+прогресса медленно» · 2026-10-31 00:12.
+
+Recon 2026-10-31 00:29 +03:00 (web; no engine source in the kit):
+- `FLoadingScreenAttributes` (Epic API docs, https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/MoviePlayer/FLoadingScreenAttributes):
+  `bAutoCompleteWhenLoadingCompletes` closes the loading screen once loading is done; `PlaybackType` (normal / looped / loading loop);
+  `bWaitForManualStop`; `MinimumLoadingScreenDisplayTime`.
+- The startup movie is set up from the ini by `FDefaultGameMoviePlayer::SetupLoadingScreenFromIni` — `[AI]` from recall, NOT yet observed: it reads
+  `bWaitForMoviesToComplete` and sets `bAutoCompleteWhenLoadingCompletes = !bWaitForMoviesToComplete`, PlaybackType stays normal. The game ships `True` —
+  so a movie longer than the load BLOCKS the menu until it ends.
+- A forum report (UE-33576, 2016, https://forums.unrealengine.com/t/startup-movies-and-loading-screens-are-interrupted-if-a-streaming-level-is-set-to-initially-loaded/364520):
+  initially-loaded streaming levels cut startup movies short and make `bAutoCompleteWhenLoadingCompletes` moot — check on 3.0.1.
+
+Route to try (cheap → dear): (1) one long movie (both logos + a slowly turning spinner baked into the frames, ≈ 2 min) and `bWaitForMoviesToComplete=False`
+in the user `Game.ini` — observe: does the menu come at the normal time (the movie cut by the load) or after 2 min (the setting not read from the user ini);
+(2) if the user ini is not read for it — the setting must come from the pak's `DefaultGame.ini` (a pakchunk patch: a heavier route, ask first).
+
 ## FORK
 
 `FORK: options mp4 by ffmpeg | bk2 by the GUI encoder · price of error a black frame or nothing at start (reversible: one ini line) · consulted Epic's Bink
