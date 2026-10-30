@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0395 · 2026-10-30 · ❌→✅ · #conan #kit #umg #ui #frames
+class: edit-not-reaching-runtime
+**Lesson:** the corpse strip's backing did not widen for two builds (padding 70, then 140): the kit set the Content SLOT padding by
+`set_editor_property`, but `UBorder` keeps its own `Padding` and the game applies that one — the frame of slot 140 equalled padding 12 to the pixel.
+A live `BorderSlot:SetPadding` (the setter) widened it at once, which split «my value is wrong» from «my value never arrives». Second cause, found
+by measuring the texture: a Box brush without side margins stretches a soft gradient over any width — the fade grows with the strip.
+**Trigger:** a kit edit «did nothing» in game → set the same value LIVE through the setter by the remote and frame it; if live works, the edit
+is not reaching runtime (a twin property, a bypassed setter, a missing CookInfo line) — find the twin before trying bigger numbers.
+mechanized: no (the kit script now sets both paddings; `_config/strip-open.sh` opens the strip by code for the frame)
+
 ### EXP-0394 · 2026-10-30 · ❌→✅ · #conan #stand #ui #by-code
 class: stand-by-emulation
 **Lesson:** an hour went into steering the camera at a corpse so the game would create the corpse strip; the owner: «ты много мучаешься над созданием

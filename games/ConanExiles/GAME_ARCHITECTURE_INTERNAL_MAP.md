@@ -148,6 +148,10 @@ violation in UE4SS; read its location BEFORE `KillCharacter`.
 Для замера модуль можно открыть пультом: `ActivateModule(FName('ContainerInfo'), true, false)` + `SetObject(<труп>, 0)` у `WBP_ContainerInfo_C`; игра
 его сама не закроет — после замера `ActivateModule(FName('ContainerInfo'), false, false)` (2026-10-28: плашка висела на экране владельца:
 «а почему плашка обыска трупа открыта? я не смотрю на труп»).
+Second stand (2026-10-30, the owner's «саму плашку кодом открывай»): our OWN instance — `_config/strip-open.sh <tag> [class]` (`Create(pc, cls, pc)` →
+`AddToViewport(50)` → `SetObject`; removed by the next call). A code-opened strip on a corpse also shows the quick-loot window. Non-corpse strip in the
+oasis save: a campfire `BP_PL_Crafting_CampFire_C` (≈ 1064 m; `MAXD_M=2000`) — no chest within reach there; placeables are found by `FindAllOf('PlaceableBase')`.
+The strip's dark backing: `Border_Underlay` — see `mods/KrinikConanUI.md` (brush, its texture's fade, the Border's own padding).
 Подсветка цели (байткод кита 2.2, `FunCombat_PlayerController::UpdateHighlightTarget`, читается `uaj func <ассет кита> VER_UE5_6 <функция>` +
 скретч-разборщик): в третьем лице игра САМА ставит `InteractionDistanceThirdPersonBonus` = длине штанги `ThirdPersonSpringArm`; сферический луч
 `InteractionDistance + бонус`; каждое попадание проходит `CheckLineOfSight(actor, ImpactPoint + вперёд_камеры·10, компонент, экземпляр)`: цель =

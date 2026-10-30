@@ -20,11 +20,23 @@
 
 | Widget | Edit | Why |
 |---|---|---|
-| `WBP_ContainerInfo` | `OverlaySlot_5` (corpse strip) padding L/R 120 (vanilla 20), Center; `OverlaySlot_3` (quick-loot window) Center, L 500 | the strip and the loot window in one overlay; the Lua section moves the strip Left while the window shows (bugs/64 items 32, 34, 35) |
+| `WBP_ContainerInfo` | `OverlaySlot_5` (corpse strip) padding L/R 120 (vanilla 20), Center; `OverlaySlot_3` (quick-loot window) Center, L 500; `Border_Underlay` brush side margins 0.40 + padding L/R 140 (both the Border's own and the slot's; vanilla 0 / 12), see below | the strip and the loot window in one overlay; the Lua section moves the strip Left while the window shows (bugs/64 items 32, 34, 35) |
 | `W_QuickLootPanel` | grid padding 35, tips 20, «Забрать все» gap 20; take-all icons `HoldPromptVisibility` NEVER; labels «Забрать все (удерж.)» (2026-10-30, the owner 08:32) | one width on the quest edge; the tooltip rows sit in `WidgetSwitcherTooltips` (state 0 «Перейти · Q…» / state 1 «F Забрать · Q… · Esc Отмена», tree: `_config/devkit/kit-probe-quickloot.json`) — a switcher measures only the shown state, so a row wider than the grid resized the window (W10a); with «(удерж.)» both fit |
 | `W_ItemIconTooltipView` | `Text_Content.AutoWrapText` false | the hover tooltip keeps one layout (bugs/64 item 17) |
 | `W_AttributeInfoEntry_PerkView` | `PerkDescription` padding top/bottom 10 | perk descriptions ran into each other (bugs/64 item 46) |
 | `W_ActionTutorial` (2026-10-30) | `Icon` and `PostText` slots VAlign Bottom, `Icon` padding bottom 1 (vanilla: all Center, `PreText` justify Right kept) | the corpse prompt on two lines (plan 36 W6) with the vanilla-override row «…ресурсы\nили нажмите {0}…»: line 2 «или нажмите [E], чтобы забрать предметы»; shared by EVERY action prompt — pad 1 keeps one-line prompts within 1 px at 4K (plate-edge measure: 1.92 px per unit; control C1 2026-10-30 19:41) |
+
+**The corpse strip's dark backing (probe `_config/devkit/kit-probe-underlay.py`, 2026-10-30 22:0x).** `Border_Underlay` (UBorder, brush colour alpha 0.8)
+draws `MI_UI_InteractionBlossomFade` (parent `MI_UI_LevelUpBlossomFade`; `ProgressPercent` 1, `TransitionColor` (0.375, 0, 0, 0.5)) with the texture
+`T_UI_InteractionUnderlay` 687×185: a SOFT horizontal gradient — alpha half of its peak only between 16 % and 81 % of the width, ≥ 90 % only between 40 % and
+60 %; the scratched white lines are texture rows 3–5 and 179–181. Vanilla brush: `DrawAs=Box`, `ImageSize=(356,168)`, `Margin=(0, 0.3, 0, 0.3)` — no
+side margins, so the whole gradient stretches over the strip's width and the line ends always sit in the fade, whatever the content padding
+(padding 70 put them on ≈ 37 % darkness). Python does not show `ImageSize` X/Y — read the brush through `export_text()`.
+**Our edit (2026-10-30 22:2x, KUMM report `2026-10-30_conan-corpse-strip-backing.md`):** brush side margins 0.40 — the fade keeps ≈ 142 units per side,
+the dark middle follows the text; padding L/R 140 — the line ends on 88–98 % of the centre darkness. **Trap:** `UBorder` applies its OWN `Padding`
+(vanilla 12/12/12/8), not the Content slot's field — a kit edit sets BOTH (`set_editor_property` bypasses the setter that keeps them in step).
+Live tweak for a look: `<Content VerticalBox>.Slot:SetPadding({Left=…,Top=12.0,Right=…,Bottom=8.0})` by the remote. Stand: `_config/strip-open.sh <tag> [class]`
+opens the strip by code (`MAXD_M=2000 … BP_PL_Crafting_CampFire_C` — a non-corpse strip in the oasis save, no chest within reach there).
 
 **Kit trap (2026-10-30):** the kit cooks only the assets listed in `Local/CookInfo.ini` (`FilesToCook=` lines, copy in `kit/CookInfo.ini`). A newly
 edited vanilla widget without its line is saved into the mod's Content and silently left out of the pak — check the built pak by
