@@ -160,7 +160,7 @@ from `ConanSandbox-Win64-Shipping.exe` 2026-10-30 (a UE help string sits right b
 6. **G3** `s.UseUnifiedTimeBudgetForStreaming 1`, after q2, with `s.WarnIfTimeLimitExceeded 1` on in both A and B.
 7. **Split GT from RT first** (WPA thread view, main-thread §2A). Only if RT is the limit: **R4**, **R3**, **R2**, one at a time.
 8. **U1** `r.Shadow.Virtual.UseHZB 1`, to win back GPU room before any GPU-heavier change.
-9. **R8** distance price as a number for the owner's decision (not a cut).
+9. **R8** distance price as a number for the owner's decision (not a cut). <!-- attribution-ok: names a decision still open for the owner, no decision of his is claimed -->
 10. `tick.AllowConcurrentTickQueue` / `tick.AllowAsyncTickDispatch` (main-thread §1 row 8, `[risky]`: tick order changes).
 
 Protocol: the one in `researches/conan-main-thread/README.md` §3 (warm flights only, A-B-A-B, the owner's word «кино выключено», machine

@@ -1,7 +1,7 @@
 # Research — one «Настройки модов» button and one hub of mod settings in the game's style (epic W24, Conan 3.0.1)
 
 > **Created:** 2026-10-30 · **Parent:** plan 36 W24 (folds W19–W23), the owner's order 2026-10-30 ≈15:00 «с начало это» (the epic first)
-> **Status:** rung 1 — local recon and requirements written 15:0x; the industry sweep — `web-sweep.md` (a helper, merged below when done)
+> **Status:** rung 1 — local recon and requirements written 15:0x; the industry sweep — `web-sweep.md` merged in §3 (15:1x)
 > **Outbound:** forks to the owner → interview; the meta-plan `plans/38_EPIC_conan_mod_settings_hub.md`
 
 ## 1. Requirements — the owner's words (verbatim, plan 36 rows W19–W24)
@@ -53,10 +53,17 @@ did NOT fire its click handler (2026-10-29); an Overlay built from Lua plus a br
 children by the BP variable, not `GetWidgetFromName` after detaching; `FindFirstOf` may return a TEMPLATE (EXP-0385). Native pak edits for other authors'
 windows (house rule 8) — `patch-mod-asset.py` (`prop:`, `lit:`, `addprop:` rows), kit for new layout names (EXP-0338).
 
-## 3. Industry sweep — `web-sweep.md`
+## 3. Industry sweep — `web-sweep.md` (done 2026-10-30 15:1x, ~60 sources)
 
-(Merged when the helper returns: how SkyUI MCM, Fallout 4 MCM, BG3 MCM, Cyberpunk Native Settings, Stardew GMCM, Minecraft Mod Menu register settings,
-persist them, fall back for non-integrated mods, and what the communities report as pain.)
+Conan has NO shared mod settings hub (each mod brings its own entry; Hosav warns other UI mods can crash its settings). Every hub lineage moved
+from code registration to DATA (MCM Helper / Fallout 4 `config.json`, BG3 `MCM_blueprint.json`, Satisfactory SML schema, Palworld schemas). The
+closest analogues are Unreal ones: Palworld Native Mod Options and Mod Options Framework reuse the game's own option rows, one ini per mod (atomic
+write), change signalled by event (polling banned), apply modes event / restart_mod / game_restart, the mod works without the hub. The ten rules
+the industry converged on: registration is data · the hub owns the list, frame and storage · values outside the save by default · one small widget
+set drawn in the game's style · when a change applies is declared · an escape hatch for mods that never integrated · only the hub touches the game's
+menus · a mod works without the hub · bad values healed, not crashed on · mod list + pages, labels as translation keys. Pain: settings stuck in saves,
+menus that fail to register, crashes from touching the game's menu, fights over buttons. Gap noted by the sweep: no hub pairs the native look with
+mods that never integrated — for us a row that opens the mod's own window (`ActivateModule`).
 
 ## 4. Implications for this epic (local half; the industry half is added after the sweep)
 

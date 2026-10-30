@@ -19,7 +19,7 @@ Result: the agent re-derives the same internals each session, "as if seeing it f
 
 ## Field evidence
 
-KUMM, 2026-10-30, the Conan build. The owner asked for a change in how the HUD mod (Hosav's Custom UI) blinks hunger/thirst/weight. The agent
+KUMM, 2026-10-30, the Conan build. The owner asked for a change in how the HUD mod (Hosav's Custom UI) blinks hunger/thirst/weight. The agent <!-- attribution-ok: the owner's verbatim words stand two lines below in this section -->
 extracted the widget, listed its exports and traced its bytecode from scratch — while five facts about that very widget (its slots, its settings
 object, its button, its number formatting) already stood in the game's internal map, scattered by topic, unread. The mod had been edited for a
 week (translation, layout, the «k» digit). The owner, verbatim: «странно, что ты над модами этими уже неделю работаешь и у тебя НЕ ЗАПИСАНЫ ПО НИМ

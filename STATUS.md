@@ -114,8 +114,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > ≈14:25: «КАИФ ДОЛЖЕН ТЕБЯ ОБЯЗЫВАТЬ ДОКУМЕНТИРОВАТЬ ТВОИ ЗНАНИЯ!!!»): one file per mod `games/ConanExiles/mods/<Mod>.md` — the knowledge-hook refuses
 > extracting/tracing/editing/deploying a mod until its notes are read in the session (own tool call); first notes — `UIMod_Hosav.md`; KAIF #186.
 > **15:10 — EPIC «Настройки модов» FIRST** (`[OWNER]` ≈15:00 «с начало это, затем по твоему плану выше»): `plans/38_EPIC_conan_mod_settings_hub.md`
-> (6 criteria, phases 0–5), research `researches/conan-mod-settings-hub/` (README; `vanilla-settings-widgets.md`; `web-sweep.md` — a helper was still
-> writing it at 15:10: merge its findings into README §3–4 when it lands). **Phase 0 spike** (`plans/38_epic38_phase0_widget_spike.md`, report
+> (6 criteria, phases 0–5), research `researches/conan-mod-settings-hub/` (README; `vanilla-settings-widgets.md`; `web-sweep.md` — merged into README §3 at the closing;
+> its rules: data registration, one ini per mod, change by event, the mod works without the hub). **Phase 0 spike** (`plans/38_epic38_phase0_widget_spike.md`, report
 > `testcases/reports/2026-10-30_conan-settings-hub-spike.md`): the game's own rows (`WBP_Setting_Checkbox`, `WBP_Setting_Dropdown`, `W_EditableLabeledSlider`,
 > `WBP_Settings_Subheader`) are created from Lua and take values; a REAL click does not reach a created checkbox (3 placements). Next: S5 the slider drag;
 > then rows inside a module window (our WindowRoot widget in the KrinikConanUI kit + a module row); set the subheader's `Label` before adding.
@@ -127,45 +127,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **Next (quick first):** the guide's exclusive-mods section for the five-mod set; W6 corpse prompt on two lines; W10a quick-loot jump; W18a captions;
 > W4 minimap coordinates; W11 mod list; then W13/W30 arrows, W29 shouts, G3/G4. Notes for every mod the work touches (the lock demands it).
 >
-> **UPDATE 2026-10-30 14:15 (chat b46b10e8):** done — W33 translation entry renamed (pack `d55a59e`); W35 the player README «Если игра упала — как
-> прислать отчёт» + guide section, reports go to the author's e-mail or PlayGround profile (the owner 14:04–14:05; the section goes LARGE on page 2 of
-> the manual — plan 35 Г11 item 5), texts wait for his read-through; W31 `KrinikConanUI` (pak + four Lua sections) live run U1–U8 pass (pack
-> `cdc5e46`); engine: `-Only` drops a modlist line whose pak is gone. **Next: W32 `KrinikConanGameplay`** (Locomotion + LevelUncapped, same pattern:
-> kit mod + Lua sections; LevelUncapped's tables must stay LAST in the load order), then W34 the Harness dev-only entry, the guide's exclusive-mods
-> section rewritten for the five-mod set. The save was restored to my 14:10 copy after the run; the owner's 13:07 «верни» question still open.
-> The old kit mod folders (`Content/Mods/KrinikUIFixes`, `Saved/Mods/KrinikUIFixes`, 42 files) removed file by file 14:16 — the rebuild is `kit-conanui-edit.py`.
->
-> **HANDOVER 2026-10-30 13:07 (chat 759898d5 closed by the owner: «этот чат можешь закрывать, продолжить делать сборку в новом чате»).**
-> **13:08 fact: the game was closed (save written 13:07, no new crash), my machine lock released; `Game_0.db` DIFFERS from the 12:05 copy — NOT
-> restored (the owner may have played); the restore waits for his word.** Was: **the game may still be open from my 12:55 run** (god ON by `_config/god-on.sh`; the owner stopped my in-game
-> step at 12:59 and looked at it — his game now). Ask nothing, check: `tasklist | grep -i ConanSandbox`; if it runs, it is his — leave it; when it is
-> closed, compare `Saved/Game_0.db` with `Conan Exiles Mods/_save-backup/2026-10-30_1205-before-blood-run/Game_0.db` and tell him whether his hero
-> state differs (my runs gave XP and wounds; every earlier launch was restored). Release my machine lock if still held:
-> `node D:/work/ai_sandbox/_tools/machine-lock.mjs release --who kumm`.
-> Then, in order (plan 36 rows): (1) **W34/W31–W33 — the owner's Krinik mod set** (five shipped mods + `KrinikConanHarness` NOT shipped, his word):
-> W31 `KrinikUIFixes` → `KrinikConanUI` with FpsCounter, HudOutline, PauseGameInMenu as Lua sections (a kit rebuild — the name is inside the pak);
-> W32 `KrinikConanGameplay` = Locomotion + LevelUncapped (keep LevelUncapped LAST in the load order); W33 the translation entry name; the Harness
-> as a dev-only manifest entry `-Export` leaves out. (2) **W35 player report** — the script is fixed and tested; write the Russian README
-> «Если игра упала — как прислать отчёт» + a guide section, show the owner. (3) **KrinikConanGraphics G3/G4** — the cap evicting the oldest stain
-> is NOT run in game; the cost per stain must be measured as 1000 calls / 1000 (`os.clock` steps 1 ms) — the owner: «моды должны быть УВАЖИТЕЛЬНЫМИ
-> К ГЛАВНОМУ ПОТОКУ»; cases G3, G4 in `testcases/TC_conan_blood_decal_lifespan_2026-10-30.md`. (4) W30 arrow blood (`TakeProjectileDamage`
-> parameters first), W13 the owner's frame (arrows stay in the air when the creature moves — read the stuck copy's attach parent). Then W29, W24.
-> The 12:46 and 13:02 updates of chat 759898d5 (W28 done, the stand lessons, the Krinik mod set) — chronicle, entry 2026-10-30 13:0x (second).
-> **The owner's remaining BIG debt (his order 2026-10-30 08:3x; W15 and W14 — done, moved to the chronicle):**
-> 3. **W24 one «Настройки модов» button + one hub of mod settings windows in the game's style** (W19–W23 fold into it: Hosav, Damage Meter, group,
->    minimap, Lore & Loot windows; Xevyr and Krinik tabs; vignette sliders) — heavy, `/plan-epic` first.
-> **Then:** W26 the logo — main menu right of the game's logo, pause menu under it, an intro at start (`_config/branding/krinik-modpack-logo.webp`);
-> W18 twin sweep of the restored UTF-16 scan over all mods (full unpack ≈12 GB — check disk D: first); W18a difficulty captions; W10a quick-loot
-> jump («(удерж.)» shortens the row; H1 not seen by eye); W17 residual — a one-frame background lag on long fishing tips (the owner's eye).
-> **Run rules learned today:** after ANY pak edit — menu frame by eye before automation; a splice `addprop` only with a name already in the name map
-> (uaj REFUSED otherwise); the fishing window classes reload per open — a template fix must run per open; measure the window, never estimate it.
-> **Outward, 2026-10-30:** feature request filed by the owner’s order — https://github.com/Arora-Sir/Super-Artemis/issues/3 (complete Russian localization +
-> strings and text-dependent layout parameters in resource files; base 1248 strings vs `values-ru` 646, 82 literal texts in 57 layouts; we offered the
-> Russian translation and device tests) — watch for the maintainer’s answer.
-> **Disk D: cleaned 2026-10-30 10:0x–10:35 by the owner's word** (8 GB free → 288 GB): old session scratchpads (notes kept in
-> `D:/REVISIONS/claude-scratchpads-text-2026-10-30.7z`), `_paksview-2.2.3`, Cyberpunk 2077. Kept for the next tasks: `_paksview-3.0.1` (66 GB, arrow
-> gravity trace) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB, the string sweep). Rule — `HOUSE_RULES.md` §1 rule 15; the sweep hook
-> `tools/hooks/scratch-sweep.mjs` is wired since 2026-10-30 11:59 by the owner (`SessionStart`, matcher `startup`, in `.claude/settings.local.json`; the agent's own settings edit is refused by the auto-mode classifier — hand the owner a script). First real sweep — the next chat's start: read its line.
+> **Still open from the 13:07 handover (the rest — chronicle, entry 2026-10-30 15:1x):** the owner's save — after the 12:05 copy it differs; the
+> restore waits for his «верни»; every run of chat b46b10e8 restored its own copy. KrinikConanGraphics G3/G4 (the cap evicting the oldest stain not
+> run in game; cost per stain = 1000 calls / 1000) — cases in `testcases/TC_conan_blood_decal_lifespan_2026-10-30.md`. W30 arrow blood, W13 arrows
+> in the air, W29 shouts, W26 logo, W18 UTF-16 twin sweep, W18a captions, W10a quick-loot jump, W17 residual. Run rules: after ANY pak edit — a menu
+> frame by eye before automation; measure a window, never estimate it. Outward: watch https://github.com/Arora-Sir/Super-Artemis/issues/3.
+> Work trees kept: `_paksview-3.0.1` (66 GB, arrow gravity trace) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB, string sweep) — rule 15.
+> `.claude/settings.local.json`: the agent's edit went through on 2026-10-30 14:3x (the knowledge-hook PreToolUse wiring).
 >
 > **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied
 > (`SvarogsDream/_backups/svarog-saves-2026-10-29_2103-before-debt024`), configs snapped (`_harness/cfg_snap`, 21:04), the 13:43 build `f44c36e` hot-deployed
