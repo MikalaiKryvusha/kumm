@@ -113,6 +113,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **UPDATE 2026-10-30 14:34 (chat b46b10e8):** W32 `KrinikConanGameplay` DONE (pack `2daa084`, G1–G6 pass). **Mod notes are a lock now** (the owner
 > ≈14:25: «КАИФ ДОЛЖЕН ТЕБЯ ОБЯЗЫВАТЬ ДОКУМЕНТИРОВАТЬ ТВОИ ЗНАНИЯ!!!»): one file per mod `games/ConanExiles/mods/<Mod>.md` — the knowledge-hook refuses
 > extracting/tracing/editing/deploying a mod until its notes are read in the session (own tool call); first notes — `UIMod_Hosav.md`; KAIF #186.
+> **15:10 — EPIC «Настройки модов» FIRST** (`[OWNER]` ≈15:00 «с начало это, затем по твоему плану выше»): `plans/38_EPIC_conan_mod_settings_hub.md`
+> (6 criteria, phases 0–5), research `researches/conan-mod-settings-hub/` (README; `vanilla-settings-widgets.md`; `web-sweep.md` — a helper was still
+> writing it at 15:10: merge its findings into README §3–4 when it lands). **Phase 0 spike** (`plans/38_epic38_phase0_widget_spike.md`, report
+> `testcases/reports/2026-10-30_conan-settings-hub-spike.md`): the game's own rows (`WBP_Setting_Checkbox`, `WBP_Setting_Dropdown`, `W_EditableLabeledSlider`,
+> `WBP_Settings_Subheader`) are created from Lua and take values; a REAL click does not reach a created checkbox (3 placements). Next: S5 the slider drag;
+> then rows inside a module window (our WindowRoot widget in the KrinikConanUI kit + a module row); set the subheader's `Label` before adding.
+> Then the quick list below. `mouse-seq.ps1` has `move:<fx>/<fy>` now.
+>
 > **14:57:** W36 HUD blink DONE in game (pack `4fae579`, H1–H10): Hosav's speed 0.30 + section `KrinikConanUI:HudBlink` (partial-curve PingPong — the
 > 14:34 plan «threshold patch + RenderOpacity» was replaced, correction). W34 Harness DONE: dev-only entry `"export": false`. Owner's dayloop order ≈14:37
 > («Гоу, работай автономно» · «делаем сборку Конана»). Engine.ini CPU recon runs in a helper → `researches/conan-engine-ini-cpu/README.md`.
