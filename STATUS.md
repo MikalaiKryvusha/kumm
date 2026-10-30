@@ -127,6 +127,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **17:01 the pack is on GitHub:** `git push origin main` → `cd6711a..4951730` (the private repo `conan-exiles-modpack`, visibility PRIVATE checked first) —
 >   `[OWNER]` «Да, в приватный реп» · 2026-10-30 17:01. From now on push the pack to BOTH: `git push local main` and `git push origin main`. The same line in
 >   `HOUSE_RULES.md` §2 was refused to me by the auto-mode classifier («Self-Modification») — the owner edits the rule or allows it; until then this line holds.
+> - **W18a accepted** — the fishing captions on one line with bars (`[OWNER]` «ок, принято» · 2026-10-30 17:05).
+> - **Unliminium → GitHub (the owner 17:04: «НЕТ, ТЫ СДЕЛАЕШЬ!!!»):** GitHub `main` (661 commits) holds 18 commits «Code of <sha>» — code-only snapshots of LOCAL
+>   commits (both checked as ancestors of local `main`) made while LFS did not work; local `main` is ahead 431 with the real history and 1505 LFS file versions
+>   (909 MB on F). 17:05: `git push origin main:refs/heads/full-history-lfs` started — a NEW branch, `main` untouched (replacing GitHub `main` = a force-push, the
+>   owner's word only). Plan free; the LFS quota is not readable by API (endpoint moved, HTTP 410) — the push itself tells.
 > - **The owner asks (17:04): «можно удалить с F временное хранилище? ГитХаб LFS работает?»** — not yet: GitHub LFS upload NOT verified (only the API answers);
 >   Unliminium's 909 MB of LFS live only on F as far as this clone shows. Order before any delete: in the Unliminium repo add/fetch its GitHub remote, check the
 >   account's LFS quota, `git lfs push --all <github>`, then `git lfs ls-files` vs the server (`git lfs fsck`/a fresh clone) — only then the F copy may go, by his word.
