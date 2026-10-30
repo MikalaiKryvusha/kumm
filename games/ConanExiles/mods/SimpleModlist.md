@@ -40,6 +40,12 @@ platform files, `repak pack --version V11 --mount-point ../../../ConanSandbox/Mo
 To put Krinik on top without touching the load order: in `AppendModlist`, PREPEND the entry when the name starts with «Krinik» — a bytecode
 insertion (a branch + `Concat(entry, modlistText)`), not an in-place number patch.
 
+**The concat in detail (memory offsets of `AppendModlist`):** 517 A = `Concat("  -  v", LocalVersion)` · 562 entry = `Concat(LocalModName,
+Select(versionEmpty ? "" : A))` · 652 C = `Concat(modlistText, "\n")` · 729/763 `Temp_bool = Len(modlistText) == 0` · 782 D = `Concat(Select(Temp_bool ?
+"" : C), entry)` · 872 `modlistText = D`. A cheap PREPEND (the whole list reversed — last loaded, i.e. ours, on top) = swap the two operands of C
+(17 + 3 disk bytes) and of D (Select 85 + Local 17 disk bytes): the total length stays, but the `0x69` Select (EX_SwitchValue) carries absolute
+offsets that move by +9 in memory — they must be fixed too. Krinik-only on top (others in load order) needs a real branch. Both — not done.
+
 ## Open
 
 - W11: the display order — the list text is built in `AppendModlist` from `SML_BP_ModController.ModInfo`; our paks are LAST in `modlist.txt` on purpose
