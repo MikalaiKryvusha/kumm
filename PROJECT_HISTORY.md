@@ -1,5 +1,34 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-30 09:53 +03:00 — STATUS: the NOW block of the morning chat and the 01:08 handover (moved verbatim at the closing)
+
+> **NOW 2026-10-30 09:15 — autonomous («работай автономно» after «я закончил, комп твой»).** His eye on the 01:08 items: «всё окей, нравится»
+> (homeworks/03). Done this morning: farewell hook + `/resume` Step 0 (KUMM `76a02f9`, `0badf8c`, KAIF #181); VS Code Effort row — user setting
+> `opus[1m]` → `opus` (`researches/claude-code-vscode-effort/`); token methodology (`researches/token-economy/`, desktop copy); the rebuild tool
+> cleans its work dirs (pack `f909466`); **fishing tooltips W17 mostly done, W18 profile-slot hover Russian, «(удерж.)» deployed** (pack `be6488f`,
+> report `testcases/reports/2026-10-30_conan-fishing-tooltip-translation.md`; on the way my addprop pak CRASHED the game at load — the owner saw the
+> hang; guarded, EXP-0377). **The owner's three BIG debts, his order of 08:3x:** W14 shooting while jumping (plan 37), W15 Oblivion Remastered arrow
+> ballistics with a raised minimum speed (decided 08:33), W24 one «Настройки модов» button + one hub of mod settings windows in the game's style.
+> **W15 in progress:** KrinikConanArchery 0.5.0 (pack): speed by the draw WORKS in game; gravity is rewritten by the arrow blueprint every tick — next: recon of the blueprint’s gravity (charge → curves `FC_BowProjectileGravCurve_*`), edit natively in our pak (run 09:38–09:43; the first launches fired with the bow slung — EXP-0378). Next step offline: `kismet-trace.py` on `Content/Items/Weapons/BP_BaseProjectile` (pakchunk1050) — fields `ProjectileGravityCurve`, `GravityMod`, function `SetProjectileGravity` (`researches/conan-archery/README.md` → «Доказательства»).
+> Small left: W18 twin sweep (full unpack ≈12 GB — disk D: has ≈12 GB free, check first), W18a captions, W10a quick-loot jump, H1 «(удерж.)» by eye.
+>
+> **HANDOVER 2026-10-30 01:08 — the Conan build: the owner's four evening items are DONE, his eye pending** (`[OWNER]` «продолжаем делать сборку Конана. Работай
+> автономно. в Фореграунд игру открывай для тестов» · 2026-10-29 ≈23:43; the previous handover 22:58 — chronicle, entry 2026-10-30 01:08). Done in this chat:
+> Esc on the fishing panel / Hosav's settings closes only that window (cases E1–E10); «Настройка рыбалки» lights up gold on hover (H1–H5); the fish card
+> «ваниль 80» instead of «исходно» (V1); all 12 KRINIK MODIFIED paks rebuilt with Oodle compression, back to the original sizes, 12 of 12 mounted (C0–C7;
+> retoc local commits 8e2eedf + 9391c3a, `ConanExiles/_config/devkit/rebuild-krinik-paks.py` by the manifest field `krinikBuild`). Pack `2941d60`, KUMM `4110530`.
+> **Show the owner first:** the four items above — his eye has not seen them (Esc in both windows, the gold frame, «ваниль 100» stands close to its field).
+> **The owner's call:** ≈86 GB of my small work files remain in scratchpad `D:/Temp/claude/d--work-ai-sandbox-KUMM/075c1f98-be83-4d40-9e6b-102dcaa07ddf/scratchpad/rebuild/`
+>    (and `rebuild2/`) — disk D: was filled to 33 MB, 15 GB free now; bulk delete was refused by the permission classifier; `view/` there = HARD LINKS to game
+>    containers (deleting links is safe, never write into them).
+> **Next, by the owner's order quick → heavy (plan 36, «The owner's work order 2026-10-29»):** (1) `rebuild-krinik-paks.py` cleans its own work dir after each
+>    verified mod (≈0.5 h — the disk incident); (2) W10a quick-loot window jump on «Esc Отмена»; W6 corpse prompt on two lines; W4 minimap coordinates backing;
+>    W7 Russian wider than mod buttons; W10 the rest of the mod-UI bug; (3) heavy: W16 `KrinikPauseGameInMenu` timer poll → events, W14 jump shooting, W15 arrow physics.
+>    Small: after `TryCloseWindow` the pause mod's `last_state` stays «open», so a re-open is not logged (log only).
+> **Run rules learned tonight:** after ANY pak rebuild — launch → frame of the main menu by eye → only then `enter-world-remote.sh` (memory
+>    `smoke-by-eye-before-automation`, EXP-0375); remote UI surgery one step per call, the remote reads one command per LINE (EXP-0374); tests in front (memory).
+
+
 ## 2026-10-30 01:08 +03:00 — STATUS: the handover of 2026-10-29 22:58 with this chat's done marks on its four items (moved verbatim at closing)
 
 > **HANDOVER 2026-10-29 22:58 — the Conan build, class A of the hub and the owner's evening items** (`[OWNER]` «продолжаем делать сборку КОНАНА» · «сварог
