@@ -2,7 +2,7 @@
 
 > **Created:** 2026-10-30 · **Parent:** plan 36 W15; `[OWNER]` «баллистика стрел Oblivion Remastered с повышенным минимумом минимальной скорости
 > скорости» · 2026-10-30 08:33; numbers — `researches/conan-archery/README.md`
-> **Status:** 2026-10-30 09:18–09:24 — BLOCKED: three real-input attempts fired no arrow (LMB, LMB×2, slot 6 + LMB, RMB held 2.3 s); RMB reaches the game (the mod logged the crosshair creation) and Tab opens the hub, but no draw notification and no shot. Suspects: the F1 cursor mode of Simple Minimap («F1» in the HUD corner) eating clicks, or the bow not loaded. Next: rule both out (F1 toggle, the stand recipe of 2026-10-29 — god mode, arrows by the remote), then B1–B5.
+> **Status:** 2026-10-30 09:18–09:24 — BLOCKED: three real-input attempts fired no arrow (LMB, LMB×2, slot 6 + LMB, RMB held 2.3 s); RMB reaches the game (the mod logged the crosshair creation) and Tab opens the hub, but no draw notification and no shot. Suspects: the F1 cursor mode of Simple Minimap («F1» in the HUD corner) eating clicks, or the bow not loaded. 09:26 — the F1 hypothesis REFUTED (F1 pressed, then LMB and RMB+LMB: still no shot). Next: research the stand, not retries — compare with the 2026-10-29 run that fired 240 shots (`TC_conan_rapid_fire_no_crash_2026-10-29.md`: beach, god mode, first person by the real wheel), read the hero state by the remote (equipped weapon, ammo), then B1–B5.
 > **Outbound:** the minimum speed share (0.4 / 0.5 / 0.6) — the owner's eye
 
 **Goal (Achieve).** The draw sets the arrow's SPEED at a constant gravity 0.55 (Remastered `ArrowGravityScale`); an instant shot flies at
