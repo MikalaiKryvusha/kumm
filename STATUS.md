@@ -123,7 +123,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   the camera at a body is unreliable (bug 70 — the old FIND took `DismemberedBodySkeletalMesh_C` pieces). The 20:4x «line breaks the strip» was false (EXP-0393).
 >   **Not yet seen:** the strip the GAME creates on a real look at a corpse (the frame is of a strip created by code — same class and Lua, but a
 >   second instance); a chest proper (a campfire strip — our line collapsed — seen 22:33).
->   **The backing covers the line ends — DONE in game 22:32, the owner's eye pending** (his ask 21:40–21:45; review folder `12 подложка над трупом
+>   **The backing covers the line ends — DONE in game 22:32, ACCEPTED by the owner 22:38** («вот, теперь у тебя плашка получилась!»; his ask 21:40–21:45; review folder `12 подложка над трупом
 >   закрывает строки`, report `testcases/reports/2026-10-30_conan-corpse-strip-backing.md`): brush side margins 0.40 + the Border's OWN padding 140
 >   (the slot field never reached the game — EXP-0395); line ends on 88–98 % of the centre darkness; a campfire strip shows no corpse line; gap to
 >   the loot window ≈ 178 units. Stand: `_config/strip-open.sh <tag> [class]` (opens by code). Still not seen: the strip the GAME creates on a real
