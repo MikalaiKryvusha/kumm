@@ -127,7 +127,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **14:57:** W36 HUD blink DONE in game (pack `4fae579`, H1–H10): Hosav's speed 0.30 + section `KrinikConanUI:HudBlink` (partial-curve PingPong — the
 > 14:34 plan «threshold patch + RenderOpacity» was replaced, correction). W34 Harness DONE: dev-only entry `"export": false`. Owner's dayloop order ≈14:37
 > («Гоу, работай автономно» · «делаем сборку Конана»). Engine.ini CPU recon runs in a helper → `researches/conan-engine-ini-cpu/README.md`.
-> **Next (quick first):** the guide's exclusive-mods section for the five-mod set; W6 corpse prompt on two lines; W10a quick-loot jump; W18a captions;
+> **Next (quick first):** ~~the guide's exclusive-mods section~~ (DONE 16:1x, pack `ab9c98b` + correction `029ba6b`: Archery/Graphics/Translation cards, PDF rebuilt); W6 corpse prompt on two lines; W10a quick-loot jump; W18a captions;
 > W4 minimap coordinates; W11 mod list; then W13/W30 arrows, W29 shouts, G3/G4. Notes for every mod the work touches (the lock demands it).
 >
 > **Still open from the 13:07 handover (the rest — chronicle, entry 2026-10-30 15:1x):** the owner's save — after the 12:05 copy it differs; the
