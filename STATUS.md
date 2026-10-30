@@ -147,13 +147,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (`[OWNER]` «в микшере виннды поставь конану громкость 1%» · 18:21): the game was not running → not applied yet; at the first launch run
 >   `powershell -File _config/set-app-volume.ps1 -Process ConanSandbox -Percent 1` (pack `aaff8b2`; exit 4 = no audio session yet, retry after the menu sounds).
 >   **APPLIED 18:32** (mixer shows 1 %; the next launch kept 1 % by itself).
-> - **PARKED 20:5x — W6 CENTRED (the owner: «центрируй» · «строчки центрируй» 19:48–19:50, the mock-up «да, верно» 19:56 — review folder 11, `4 МАКЕТ`):**
->   two centred lines = our line above the prompt row (kit `kit-conanui-edit.py` `LINE1_ENABLED`, a TextBlock dressed from `FS_Text_Heading_6`) +
->   `krinik_ui_fixes.lua` 1.3.0 (shows it when the row starts «или нажмите») + the override row «или нажмите {0}, …». Seen working once (19:58, wrong face then).
->   **Now OFF on my FALSE inference** (EXP-0393): after 19:58 the stand stopped showing the strip on EVERY build, the vanilla-reset one too — the stand is
->   the defect, not the line. Deployed now: vanilla-based strip + «(удерж.)» + icon pad 1 + vanilla corpse text (one line) — NOT re-verified in game.
->   Next: `bugs/70_conan_stand_corpse_strip_not_shown.md` (research done 21:1x, H1: the stand aims at the nearest body PIECE, not the fresh corpse), then
->   `LINE1_ENABLED = True` + the override row ON, build, frame. Kit traps — in the script header of the line block (GUID map).
+> - **W6 CENTRED — DONE in game 21:29 (pack ca75268), the owner's eye pending** (mock-up «да, верно» 19:56; frame `5 ГОТОВО` in review folder 11): our
+>   line T_CorpseText1 above the row (kit `LINE1_ENABLED`, FS_Text_Heading_6 font, colour 233/213/193) + `krinik_ui_fixes.lua` 1.3.0 + the override row
+>   «или нажмите {0}, …» — two centred lines, one size, one colour. **The stand:** open the strip BY CODE (`[OWNER]` «саму плашку кодом открывай» · 21:14):
+>   `LoadAsset(WBP_ContainerInfo_C)` → `WidgetBlueprintLibrary:Create(pc, cls, pc)` → `AddToViewport(50)` → `SetObject(<nearest Corpse_C>, 0)`; aiming
+>   the camera at a body is unreliable (bug 70 — the old FIND took `DismemberedBodySkeletalMesh_C` pieces). The 20:4x «line breaks the strip» was false (EXP-0393).
+>   Next: W11 «only Krinik mods on top» (interview 027 → A).
 > - **19:08 «автономно» → `/dayloop`.** **W6 corpse prompt on two lines and W10a quick-loot size — DONE in game 19:28–19:42, waiting for the owner's eye**
 >   (review folder `НА ОТСМОТР НИКОЛАЕМ\11 подсказка над трупом и окно лута`, report `testcases/reports/2026-10-30_conan-corpse-prompt-two-lines-quickloot-size.md`):
 >   icon pad 1 (pad 8 was a detector error, EXP-0392), «Забрать все (удерж.)», the loot window keeps one size (by remote; his wheel check pending). The owner's own

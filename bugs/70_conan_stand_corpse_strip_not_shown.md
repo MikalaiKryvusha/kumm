@@ -1,6 +1,6 @@
 # Bug 70 — the agent's corpse stand stopped showing the corpse strip (WBP_ContainerInfo) after 2026-10-30 19:58
 
-**Status:** 🔬 research-only (the owner: «пора на разведку» · 2026-10-30 21:12) · **Severity:** S2 (a run hour lost; blocks W6 centred)
+**Status:** ✅ worked around 2026-10-30 21:2x — the strip is opened BY CODE (the owner «саму плашку кодом открывай»), see STATUS; aiming stays unreliable · **Severity:** S2 (a run hour lost; blocks W6 centred)
 **Version/build:** Conan 3.0.1 + the build; KrinikConanUI kit pak of 2026-10-30 (several) · **When/context:** W6 centred corpse prompt (the owner's mock-up
 «да, верно» 19:56), dayloop.
 **Fixing:** next session, before W6 centred goes back ON.

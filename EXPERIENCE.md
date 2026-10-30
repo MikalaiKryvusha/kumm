@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0394 · 2026-10-30 · ❌→✅ · #conan #stand #ui #by-code
+class: stand-by-emulation
+**Lesson:** an hour went into steering the camera at a corpse so the game would create the corpse strip; the owner: «ты много мучаешься над созданием
+тестовых условий» · «саму плашку кодом открывай». Creating the widget directly — `WidgetBlueprintLibrary:Create(pc, cls, pc)`, `AddToViewport`,
+`SetObject(<Corpse_C>, 0)` — put the strip on screen at the first call, on any build.
+**Trigger:** a UI case needs a widget the game shows only after a player action → create and feed the widget by code first; emulate the action only when the action itself is under test.
+mechanized: no (candidate: a `strip-open.sh` in the pack)
+
 ### EXP-0393 · 2026-10-30 · ❌ · #conan #stand #false-inference #rollback
 class: single-run-verdict
 **Lesson:** the corpse strip stopped appearing on the stand after one build; a probe («LoadAsset, then the class is still not found») looked like proof
