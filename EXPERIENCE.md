@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0383 · 2026-10-30 · ❌ · #closure #farewell #hooks #owner-saw-first
+class: guessed-instead-of-measured
+**Lesson:** after the farewell of `/end-chat-soft` the knowledge Stop hook blocked the stop; I re-sent the WHOLE farewell, assuming the farewell file
+takes the turn's last message — the owner: «почему и зачем ты прощальное сообщение дважды повторил в чате?». `farewell-capture.mjs` writes ONCE
+per closure, from the first closing message (fixed 2026-10-30, KAIF #181); the file already held the first farewell (13:10:16). A Stop-hook question
+after the farewell gets its one-line answer and nothing else.
+**Repro:** `head -3 FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md; cat FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md.state` — the closureId and time
+show the farewell is already captured.
+**Trigger:** a Stop hook fires after the farewell → answer the hook in one line; never repeat the farewell.
+mechanized: no
+
 ### EXP-0382 · 2026-10-30 · ❌→✅ · #conan #ue4ss #hook #blood #stand
 class: wrong-api-assumption
 **Lesson:** a UE4SS hook on a STATIC UFunction (`GameplayStatics:SpawnDecalAtLocation`) gets the default object as its FIRST parameter; the first
