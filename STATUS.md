@@ -116,7 +116,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   engine `-Verify` warns when a mod re-sets an Engine.ini cvar (`536e3ca`, fixture 27/27); `save-restore.sh` (pack `d6741a1`) — the save is SQLite WAL, restore ONLY
 >   by it; `corpse-stand.sh` (pack `4951730`, `bash _config/corpse-stand.sh 50` at the oasis save — kills the boss at 43 m); two launch paths `launch-fg.ps1` /
 >   `launch-bg.ps1` (HOUSE_RULES §1 rule 16 — the owner picks; his last word 16:18 «работай в фоне»); hooks: autonomy-guard catches any «…автономно»,
->   knowledge-hook does not lock vanilla assets, clock-now adopted (**known defect** — a MOVED placeholder gets filled; the origin fixed it 16:30, take the new
+>   knowledge-hook does not lock vanilla assets, clock-now adopted (the moved-placeholder defect FIXED: the origin copy 253ebc0 taken 17:3x, selftest ok, live probe: a moved placeholder stays literal; was the new
 >   copy from `D:\work\ai_sandbox\KAIF\framework\hooks\clock-now.mjs` after their commit, kaif-48); the KAIF inventory `reports/KAIF_FIELD/2026-10-30_kumm-local-rules-and-hooks.md` sent to kaif-48.
 > - **FIRST next chat — GitHub access is back (the owner ≈16:57: «и нам восстановили доступ к GitHub!!!» · «может даже LFS заработает, но я не уверен»):**
 >   checked 16:58 read-only: `git ls-remote origin main` works (GitHub `conan-exiles-modpack` at `cd6711a` of 2026-10-27 — **103 commits behind** local
