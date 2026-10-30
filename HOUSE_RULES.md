@@ -75,7 +75,9 @@ context-budget hook's hint is obeyed (`CLAUDE.md`).
 ## 2. Most critical routes
 
 - **Commit** — three calls: `git add <files one by one>` · `git commit -F <message file>` · `git push`; never `-A`.
-- **Conan pack** — after every commit `git push local main` (the bare mirror on F); never touch the pack's `origin` remote.
+- **Conan pack** — after every commit `git push origin main` (the private GitHub repo `conan-exiles-modpack`). The F mirror is retired: GitHub LFS works again,
+  every F ref is on GitHub (`[OWNER]` «Да, в приватный реп» · «После этого удалить временное хранилище на F.» · «РАЗРЕШАЮ ИСПРАВИТЬ ПРАВИЛО» · 2026-10-30 17:01–17:12).
+  The pack has no LFS: a file over 50 MB is a stop and a question first.
 - **The machine is shared with KAGO.** Game and load — only under the lock: `node D:/work/ai_sandbox/_tools/machine-lock.mjs take --who
   kumm --what <why> --minutes <n>` → work → `release --who kumm` (exit 3 — taken: work offline). Whoever launched the game closes it right
   after the run.
