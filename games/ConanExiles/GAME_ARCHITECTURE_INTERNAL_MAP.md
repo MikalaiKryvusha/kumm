@@ -133,7 +133,7 @@ every result, class defaults included — the EXP-0386 class, not the `{}` (EXP-
 near the hero at the owner's oasis save (line ≈110) — a ready corpse source.
 Changing the shared row's layout changes every action prompt of the game. The two-line corpse prompt (W6, done 2026-10-30 18:5x): the slots of
 `W_ActionTutorial` are `PreText` justify RIGHT · VAlign Center, `Icon` and `PostText` VAlign Center (kit probe); our kit pak puts `Icon` and
-`PostText` at the BOTTOM (icon bottom padding 8 keeps one-line prompts unchanged) and the override row breaks the string before «или» — line 2 then
+`PostText` at the BOTTOM (icon bottom padding 1 keeps one-line prompts within 1 px; measure the key plate by its edges — `_config/plate-measure.py`) and the override row breaks the string before «или» — line 2 then
 reads «или нажмите [E], чтобы забрать предметы», line 1 stands above it right-aligned (frame P1). The icon ≈20 units, a text line taller; the
 viewport scale at 4K is 2.09. The remote cannot read widget sizes now (`GetDesiredSize` and `GetCachedGeometry` are not callable from Lua, 2026-10-30) — measure by frames. Our `Game` target
 overrides a vanilla key when the entry carries the vanilla hashes (`_config/devkit/vanilla-override.py`, proven 2026-10-29 00:34).

@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0392 · 2026-10-30 · ❌→✅ · #conan #measurement #frames #detector #ui
+class: instrument-not-proved
+**Lesson:** a colour-threshold detector of the WHOLE key icon («beige-ish pixels in these columns») caught grass and blood around it and reported the icon
+«12.5 px low»; I rebuilt the pak with pad 8 on that number and set the icon 14.5 px too HIGH in every action prompt of the game. The plate-edge measure (the
+jump of mean R in 8 columns inside the plate, `_config/plate-measure.py`) gave 4.0 / 7.0 / 18.5 px on the same frames — linear in the pad, 1.92 px per unit.
+**Trigger:** a pixel measurement that drives a rebuild → first run the detector on the BASELINE frame and on a second background; its numbers must agree with a by-eye read of the crop.
+mechanized: `_config/plate-measure.py` (pack) — the measurer; the habit — no
+
 ### EXP-0391 · 2026-10-30 · ❌ · #conan #deploy #owner-game #process-check
 class: state-assumed
 **Lesson:** I closed my game at 18:54, the owner launched his own at 18:55 (parent `explorer.exe`), and at 18:59 I ran `Deploy-ModPack.ps1 -Deploy -Only KrinikConanUI`
