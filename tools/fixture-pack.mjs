@@ -11,7 +11,7 @@
 //         KUMM_DEPLOY=<другой Deploy-ModPack.ps1> — прогнать стенд по копии скрипта.
 // 2026-10-14 14:36: 10 проверок прошли; копия скрипта с дефектом бага 03 (id ровно из четырёх цифр) — красные ровно две названные
 // заранее: «-DryRun: код 0» и «More Katanas (id 41) найден по nexusId». [NOT-TESTED]
-import { mkdirSync, writeFileSync, readFileSync, existsSync, unlinkSync } from 'node:fs'
+import { mkdirSync, writeFileSync, readFileSync, existsSync, unlinkSync, readdirSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -133,6 +133,15 @@ const ren = pps(['-Deploy', '-Only', 'Beta Bows'])
 expect('паки: -Only после переименования — мёртвая строка старого пака убрана, новый на месте', lines() === 'AlphaArms.pak,BetaBows.pak,GammaGear.pak' && /dropped OldBows\.pak/.test(ren.out), `${ren.out}\nmodlist: ${lines()}`)
 const rv = pps(['-Verify'])
 expect('паки: -Verify после переименования — код 0, ни одного «missing pak»', rv.code === 0 && !/missing pak/.test(rv.out), rv.out)
+// Запись "export": false — только для машины сборщика: -Export её не везёт (приборы KrinikConanHarness, 2026-10-30: «в поставку сборки не включаем»)
+const mp = JSON.parse(readFileSync(path.join(PDIR, 'modpack.json'), 'utf8'))
+mp.mods.find(m => m.name === 'Beta Bows').export = false
+writeFileSync(path.join(PDIR, 'modpack.json'), JSON.stringify(mp, null, 2))
+const EXP = path.join(PDIR, '..', 'export-out')
+const ex = pps(['-Export', EXP])
+const srcDirs = existsSync(path.join(EXP, 'pack', 'src')) ? readdirSync(path.join(EXP, 'pack', 'src')).join(',') : '(нет src)'
+expect('экспорт: запись "export": false не попала в архив, есть строка «dev-only»', !/Beta/i.test(srcDirs) && /dev-only, not exported: Beta Bows/.test(ex.out), `${ex.out}\nsrc: ${srcDirs}`)
+expect('экспорт: соседняя запись на месте (контроль)', /Alpha/i.test(srcDirs), `src: ${srcDirs}`)
 
 console.log(bad ? `\nСТЕНД: ${bad} провал(ов)` : '\nстенд: все проверки прошли')
 process.exit(bad ? 1 : 0)

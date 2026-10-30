@@ -14,7 +14,7 @@
 главного меню погашена ConanModPackStatus; `Engine.ini` под 3.0.1 раскатан. Кит модов в 3.0 тот же (`devkitRevisionNumber` 1002) —
 сентябрьские паки 2.2.x игра принимает. **Game in tests — in front** (`[OWNER]` «в Фореграунд игру открывай для тестов» · 2026-10-29 ≈23:43, supersedes
 «в фоне» of 25.10): launch `_config/launch-bg.ps1`, real input (Esc, cursor, clicks) allowed, frame `_config/capture-window.ps1`, state — the remote
-`_unpacked/KrinikAgentRemote` (deployed into the game by hand, not in the manifest).
+`_unpacked/KrinikConanHarness/KrinikAgentRemote` (the dev-only manifest entry `KrinikConanHarness`, `"export": false` — deployed here, never exported; 2026-10-30).
 Дальше по слову владельца: русификация The Damage Meter и Exiles Fishing (у автора русского нет — свой пак), шрифт Gabriela,
 кандидаты от мерцания пальм — `docs/03-cvars-конана.md` пака; UE4SS 1181.
 

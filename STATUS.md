@@ -113,9 +113,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **UPDATE 2026-10-30 14:34 (chat b46b10e8):** W32 `KrinikConanGameplay` DONE (pack `2daa084`, G1–G6 pass). **Mod notes are a lock now** (the owner
 > ≈14:25: «КАИФ ДОЛЖЕН ТЕБЯ ОБЯЗЫВАТЬ ДОКУМЕНТИРОВАТЬ ТВОИ ЗНАНИЯ!!!»): one file per mod `games/ConanExiles/mods/<Mod>.md` — the knowledge-hook refuses
 > extracting/tracing/editing/deploying a mod until its notes are read in the session (own tool call); first notes — `UIMod_Hosav.md`; KAIF #186.
-> **Next: W36 the HUD blink** (owner ≈14:23) — recon in `UIMod_Hosav.md`: trace `Progress_Drink` and the weight path, then PlaybackSpeed 0.25 → 0.30,
-> threshold `EqualEqual 0.0` → `LessEqual 0.1` (weight 90 %), dim → full by `RenderOpacity` from the `KrinikConanUI` HUD section. Then notes for the
-> other mods the build edits (write each from the maps when its work starts — the lock demands it).
+> **14:57:** W36 HUD blink DONE in game (pack `4fae579`, H1–H10): Hosav's speed 0.30 + section `KrinikConanUI:HudBlink` (partial-curve PingPong — the
+> 14:34 plan «threshold patch + RenderOpacity» was replaced, correction). W34 Harness DONE: dev-only entry `"export": false`. Owner's dayloop order ≈14:37
+> («Гоу, работай автономно» · «делаем сборку Конана»). Engine.ini CPU recon runs in a helper → `researches/conan-engine-ini-cpu/README.md`.
+> **Next (quick first):** the guide's exclusive-mods section for the five-mod set; W6 corpse prompt on two lines; W10a quick-loot jump; W18a captions;
+> W4 minimap coordinates; W11 mod list; then W13/W30 arrows, W29 shouts, G3/G4. Notes for every mod the work touches (the lock demands it).
 >
 > **UPDATE 2026-10-30 14:15 (chat b46b10e8):** done — W33 translation entry renamed (pack `d55a59e`); W35 the player README «Если игра упала — как
 > прислать отчёт» + guide section, reports go to the author's e-mail or PlayGround profile (the owner 14:04–14:05; the section goes LARGE on page 2 of

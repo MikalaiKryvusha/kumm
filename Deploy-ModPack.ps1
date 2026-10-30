@@ -1146,7 +1146,11 @@ function Export-Bundle {
     New-Item -ItemType Directory -Path $srcOut -Force | Out-Null
 
     Head "export  ->  $Dest"
-    $mods = @(Select-Mods)
+    # Запись "export": false - мод только для машины сборщика (приборы агента KrinikConanHarness: пульт исполняет любой Lua из текстового
+    # файла в папке игры - открытая дверь на машине игрока; слово владельца 30.10: «в поставку сборки не включаем»). Раскатка его ставит,
+    # выгрузка для игроков - нет. [NOT-TESTED]
+    $mods = @(Select-Mods | Where-Object {
+        if ($_.PSObject.Properties['export'] -and $_.export -eq $false) { Say "  dev-only, not exported: $($_.name)" DarkGray; $false } else { $true } })
     $outMods = @()
     $used = @{}
     $files = 0
