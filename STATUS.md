@@ -123,6 +123,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   the camera at a body is unreliable (bug 70 — the old FIND took `DismemberedBodySkeletalMesh_C` pieces). The 20:4x «line breaks the strip» was false (EXP-0393).
 >   **Not yet seen:** the strip the GAME creates on a real look at a corpse (the frame is of a strip created by code — same class and Lua, but a
 >   second instance); a chest / other container (our line must stay collapsed there). Next chat — both by code-open on a `Corpse_C` and on a chest.
+>   **FIRST next chat — the owner 21:40–21:45: the dark backing must cover the line ends** («темную подложку нужно расширить, чтобы края строк
+>   покрывало» · «сейчас они висят в воздухе - и плохо читаемы» · «нужно пересчитать как у подложки размеры задаются от текста»). Tried 21:4x:
+>   the Content slot padding L/R 12 → 70 (`STRIP_SIDE_PAD` in `kit-conanui-edit.py`, pak deployed) — the frame (`w6/wide.jpg`) still shows the
+>   line ends in the backing's fade. Next: read `Border_Underlay`'s brush (draw-as, margin, image size; a kit probe like `kit-probe-generaltext.py`)
+>   and how the strip's width is set (Overlay slot, SizeBox, the image's fade share); measure the backing's dark extent on frames before/after.
 >   Then W11 «only Krinik mods on top» (interview 027 → A).
 > - **19:08 «автономно» → `/dayloop`.** **W6 corpse prompt on two lines and W10a quick-loot size — DONE in game 19:28–19:42, waiting for the owner's eye**
 >   (review folder `НА ОТСМОТР НИКОЛАЕМ\11 подсказка над трупом и окно лута`, report `testcases/reports/2026-10-30_conan-corpse-prompt-two-lines-quickloot-size.md`):
