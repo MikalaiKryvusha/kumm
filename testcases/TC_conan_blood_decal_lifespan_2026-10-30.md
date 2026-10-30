@@ -37,3 +37,16 @@ night — time 12:00 and remove them; after the hits the creature is REMOVED (`K
 | L4 | Stain leaves at the hold time | frames at +310 and +330 s | no stain | pass — +305 and +330 s: sand only |
 | L5 | Control (vanilla) | the 12:16 run with the ineffective pre-hook = vanilla life | stain gone by +4 s (`burst2`, 12:16:02 → 12:16:06) | pass by the 12:16 run — visible at +0.6 s, gone at +4.6 s |
 | L6 | Cost | the minute summary in `UE4SS.log` | own time per stain ≪ 1 ms, worst < 0.2 ms | partial — the summary «4 stains, 1.000 ms, worst 1.000 ms» is the 1 ms step of `os.clock` on Windows, not a measurement: upper bound ≈0.25 ms per stain; one hook call per stain |
+
+**KrinikConanGraphics 0.1.0 (the blood mod renamed, Engine.ini moved in; the cap now evicts the OLDEST stain — `[OWNER]` «Нужно старые убирать,
+а новые чтобы жили 5 минут» · 2026-10-30 ≈12:5x) + the XP «k» one decimal truncated (plan 36 W5c) + W30 recon.** Stand as above; for G3 a test
+copy with `hold_cap = 3` is deployed, the real file after.
+
+| # | Case | Steps | Expected | Status |
+|---|---|---|---|---|
+| G1 | Mod loads by its new name | world entry; `UE4SS.log` | «[KrinikConanGraphics] загружен», no `KrinikLingeringBlood` line | |
+| G2 | Hold unchanged | one hit; top-down frame at +20 s | the stain is there | |
+| G3 | Cap evicts the oldest | `hold_cap` 3; five hits | log: «лежит всего» never above 3; the oldest stains fade (frames), the newest stay | |
+| G4 | Cost per stain | the remote runs the handler's body (material name, `SetFadeOut`, `SetFadeIn`, `GetFullName`) 1000 times on a live stain, `os.clock` around the loop | total / 1000 ≪ 1 ms (the 1 ms budget is for ALL mods in the worst frame) | |
+| K1 | XP «k» one decimal, truncated | HUD frame of the XP line | «XP : 126,7k / 130,3k» form — one decimal | |
+| W30a | Arrow hit parameters | hook `BP_CollisionComponent:TakeProjectileDamage`, one arrow into a creature | the parameter list printed (hit result / location) | |

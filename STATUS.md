@@ -115,6 +115,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > «24 Конан — кровь на земле 5 минут». W5(c) «k» rounding — recon: integer division only, rounding needs an ADD (plan 36 W5 row) — moved to the
 > heavy end. Stand lessons (game map): arrows lay no ground blood; a detached / time-frozen creature never attacks; the idle camera ignores the
 > remote until a real wheel step; `os.clock` steps 1 ms. Save restored to the 12:05 copy after every launch. Next: W29 bark flicker, W24 epic.
+> **13:02 — the owner's Krinik mod set (plan 36 W34, «вот, сейчас нравится»):** `KrinikConanGraphics` (DONE, pack `aa68252`: blood + the
+> optimized Engine.ini; the cap evicts the oldest — not yet run in game) · `KrinikConanUI` (W31: UIFixes + FpsCounter + HudOutline + PauseGameInMenu) ·
+> `KrinikConanGameplay` (W32: Locomotion + LevelUncapped) · `KrinikConanArchery` · `KrinikConanRussianTranslation` (W33) + `KrinikConanHarness`
+> (the agent's tools; shipping — waits for his word, `[AI]` advice: dev-only). W5c «k» truncated DONE (126,7k on the HUD). W30 arrow blood, W13 —
+> the owner's frame: stuck arrows stay in the air when the creature moves. **13:02: the game is open in my run (god on), the owner stopped my
+> in-game step — do not touch or close it without his word; then restore the save from `_save-backup/2026-10-30_1205-before-blood-run`.**
 > **UPDATE 2026-10-30 11:33 (chat 77faa752, autonomous by «работай автономно» 10:37):** W15 arrow gravity DONE (KrinikConanArchery 0.6.0 drops
 > the arrow's gravity curve), W14 shooting while jumping DONE (0.7.0), W27 HUD temperature colours DONE (KrinikHudOutline) — all in game with
 > run reports; the owner's eye: minimum speed share, the jump-shot look + stamina, the three colours. Drive-bys filed: W28 blood 5 min (recon:

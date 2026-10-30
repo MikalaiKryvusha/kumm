@@ -22,6 +22,7 @@
 | Re-entry by the agent (2026-10-29) | `_config/esc-when-idle.ps1` (real Esc after the owner's input idle; `W_IngameMenu_C` does not exist before it) → `pult.sh "call W_IngameMenu_C_<N> CloseAndReturnToMainMenu"` → `_config/enter-world-remote.sh` (the second entry loads in ≈ 2–5 s) |
 | Канал мода камеры | `ue4ss\Mods\ConanCameraControl\agent-cmd.txt` (`ключ = значение`) |
 | Клавиши мода камеры (нумпад) | 8/2 вперёд/назад · 4/6 вбок · 9/3 выше/ниже · 7/1 наклон · +/− дистанция · 5 — вбок в 0 · Ctrl+5 — наклон в 0 · / — записать посадку · 0 — применить · Ctrl+/ — сброс до заводской (с 2026-10-26 23:4x) · Ctrl+0 — найти камеру заново; посадка сама пишется в `Mods\ConanCameraControl\config.lua` |
+| Оптимизированный Engine.ini сборки | с 2026-10-30 — файл мода графики `ConanExiles/_unpacked/KrinikConanGraphics/Engine.ini` (поле `engineIni.file` манифеста, `_config/deploy-config.py`, `_config/check-conflicts.py`); до того `_config/Engine.ini` |
 | Привязки клавиш игры | `ConanSandbox\Saved\Config\Windows\Input.ini` (CRLF, понимает `Key=None`) — ЕДИНСТВЕННЫЙ живой источник в 3.0.1: `_config/Input.ini` пака — старый, от UE 5.6, `deploy-config.py` его сознательно не возит (2026-10-25). В живом файле — раскладка игры и правки владельца (уворот — боковая кнопка мыши, его слово 23:4x). Править при закрытой игре, с копией в `_config/backup/`. 2026-10-26 23:47: чат гильдии (нумпад −) и чат поблизости (нумпад *) → `None`. Правая кнопка — прицел `SpecialActionV2`; левый Ctrl — тяжёлая атака `SecondaryActionV2` (с луком — выстрел) |
 
 ## Приборы совместимости (`ConanExiles/_config/compat/`, 2026-10-26)
@@ -39,7 +40,7 @@
 | Прибор | Что делает |
 |---|---|
 | `patch-mod-asset.py extract / build` | ассет мода из оригинала (`D:\Games\Conan Exiles Mods\_patch-originals\<Мод>.pak`) → правка → склейка куска → новый пак в `<work>/out`; таблицы правок — `_config/localization/asset-strings/<Мод>__<Ассет>.tsv` |
-| строки таблицы | `английский\tрусский` — текст свойств; `prop:<Имя>` или `prop:<Экспорт>/<путь>` — число или флаг; `lit:<английский>\t"<русский>"` — строка в байткоде; `dbl:`/`flt:<функция>[@n]` — число в байткоде; `bool:<функция>@<n>\t<было>\t<стало>` — n-й True/False функции (порядок `kismet-trace.py`); ряды таблиц данных — `delrow:<ряд>`, `fname:<ряд>/<свойство>`, `enum:<ряд>/<свойство>\t<Тип::было>\t<Тип::стало>` (2026-10-30) |
+| строки таблицы | `английский\tрусский` — текст свойств; `prop:<Имя>` или `prop:<Экспорт>/<путь>` — число или флаг; `lit:<английский>\t"<русский>"` — строка в байткоде; `dbl:`/`flt:`/`int:<функция>[@n]` — число в байткоде (`int:` — целое, с 2026-10-30); `bool:<функция>@<n>\t<было>\t<стало>` — n-й True/False функции (порядок `kismet-trace.py`); ряды таблиц данных — `delrow:<ряд>`, `fname:<ряд>/<свойство>`, `enum:<ряд>/<свойство>\t<Тип::было>\t<Тип::стало>` (2026-10-30) |
 | `kismet.py check / lits` | разбор байткода UE 5.8 с самопроверкой размера; литералы функций |
 | `_tools/src/uaj` | UAssetAPI из консоли: `copy`, `exports`, `strings`, `setstr`, `func`, `tojson` |
 | `_tools/retoc-5.8`, `_tools/repak` | контейнеры IoStore 5.8 и внешний пак V11 |
