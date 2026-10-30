@@ -100,6 +100,16 @@ WBP_ContainerInfo` (pakchunk1110; моды сборки его не переоп
 `Corpse_C` — владелец `DismemberedBodySkeletalMesh_C` (`GetOwner()`).
 Атака в воздухе (2026-10-28, план 37): `BaseBPCombat::ActionTry` отказывает при `InSubstate(8)` с причиной `IsFalling` — поэтому лук не
 стреляет в прыжке; `IsFalling` ещё в `DodgeTry` и ubergraph `BasePlayerChar` (поиск — `uaj grepfn <ассет> <версия> <строка>`).
+3.0.1 (bytecode 2026-10-30): the falling check is `InSubstate(8)` at `.uexp`+66573 of `BaseBPCombat::ActionTry`; `HandleOnMovementModeChanged`
+fires at take-off (mode 3, twice) and at landing. A jump during an attack: `BasePlayerChar::CanJumpInternal = Super() AND NOT InSubstate(13) AND
+NOT IsAttacking()` (a bow draw is an attack), `StartJump` itself refuses on substates 18 and 14 (exhausted) and on `CanJump`. UE4SS: hooks on
+blueprint functions run AFTER the body (a fix inside `ActionTry` comes too late); `CanJumpInternal` is called from C++ — a hook on it never fires.
+Working route (KrinikConanArchery 0.7.0): at take-off `ExitSubstate(8)` for the player with the bow in hand; after a refused `StartJump` while
+attacking with the bow — `LaunchCharacter(0, 0, JumpZVelocity 420)`. Out params from Lua: `local o = {}; c:InSubstate(s, o); o.Success`. Bow in
+hand = an attached `BP_bow_2h_C` on `Socket_Bow` (on the back — `sheath_bow`).
+Stand note (2026-10-30): at the owner's oasis save a hostile boss `HumanoidNPCCharacter_20percentbigger_boss_C` spawns near the hero with a random
+name («Цирия Безголовая [Боец]», «Арнос из Киммерии [Боец]» — a skull by the health bar = hostile, NOT a thrall); kill it by the remote
+(`KillCharacter`) before any shooting case.
 Screen placement of the module (2026-10-28 23:50, pult): `WBP_ContainerInfo_C` has NO UMG parent (outer = the game instance) — the module
 system places it itself from its desired size AT ACTIVATION; a later visibility change of `W_QuickLootPanel` (native `SlotTakeAll` writes
 Hidden = 2 on the same instance; class default is Hidden too) does not re-place it, even when set Collapsed (overlay shrinks to 1141×144, strip stays).
