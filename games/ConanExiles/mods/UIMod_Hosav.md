@@ -41,8 +41,28 @@ side panel, a settings window. KRINIK MODIFIED in the build: the pak is rebuilt 
   `BasePlayerChar_C`); `EqualEqual_DoubleDouble(v, 0.0)` → if not playing: `PlayAnimation(NoFood, StartAt 0, NumLoops 0 = forever, Forward,
   PlaybackSpeed 0.25)`, flag on; when `v > 0` and the flag is on: `PlayAnimation(NoFood, 0, 1, Reverse, 0.25)`, flag off. The two `0.25` floats —
   `@uexp+154246` and `@uexp+154742` of the legacy asset extracted 2026-10-30.
-- So vanilla Hosav blinks only at exactly 0 %. Not traced yet: `Progress_Drink` (expected the same shape), the weight path (where
-  `OverEncumbered_Weight` is played — `Get_WeightText` / `WeightVisible`), which widget each colour track binds.
+- So vanilla Hosav blinks only at exactly 0 %.
+- `Progress_Drink` — the same shape over `BP_HungerSystem.DrinkCurrent / DrinkMax` (field `DrinkAmount`), `NoWater`, flag `InNoWaterAnimation`;
+  its `0.25` floats at `@uexp+152127` and `@uexp+152623`.
+- Weight — in `Get_WeightText` (the weight text binding): `GetFloatStat(12, 0)` of the player (current weight) `GreaterEqual_DoubleDouble`
+  `BP_EncumbranceSystem.GetEncumbranceMax()` → `PlayAnimation(OverEncumbered_Weight, 0, 0, Forward, 0.25)` + flag `InEncumberanceAnimation`; below
+  max with the flag → one Reverse pass; `0.25` at `@uexp+112421` and `@uexp+112520`. `WeightVisible` only reads `WeightIndicator`.
+- What blinks (the class's `AnimationBindings`, `_INST` exports): `NoFood` → `Border_EatImage`, `NoWater` → `Border_WaterImage` (both the border's
+  `ContentColorAndOpacity`; the possessable name «Border_Weight» inside the animations is the author's copy-paste, the binding decides),
+  `OverEncumbered_Weight` → `Image_Weight_Blinking` (`ColorAndOpacity`).
+- The curves (ticks; keys at 0 · 30231 · 59925 — ≈0 · 0.5 · 1.0 s if the tick rate is 60000, to confirm live by `GetEndTime`): food/water —
+  white (1,1,1,1) → RED (1,0,0,1) → white; weight — red (1,0,0) with alpha 0 → 1 (30062) → 0 (60197).
+- The asset imports `LessEqual_DoubleDouble`, `Less_DoubleDouble`, `Greater_DoubleDouble`, `Multiply_DoubleDouble` — a threshold could be patched
+  for food/water, but the weight compares weight ≥ max (no constant to change), so the early zone is driven from Lua (W36).
+
+- Live (2026-10-30 14:47–14:50): the curve end is 0.999 s (food/water) and 1.003 s (weight) — the tick rate is 60000/s; below max weight the
+  weight animation reports «playing» at its end with alpha 0 (Hosav's idle state, invisible).
+- **Blink speed history** (rows `flt:Progress_Food|Progress_Drink|Get_WeightText 1.0 <speed>` in `UIMod_Hosav__W_SmoothHP.tsv`): author 1.0 →
+  0.5 (2026-10-28, the owner: twice slower) → 0.25 (four times) → **0.30 (2026-10-30, «на 20% быстрее»)**; measured live 0.30 /s.
+- A widget instance: take `W_SmoothHP` from the live HUD (`hud.W_SmoothHP` of `W_NewHealthUI_C`), never `FindFirstOf('W_SmoothHP_C')` — that returns
+  the class TEMPLATE `…W_NewHealthUI_C:WidgetTree.W_SmoothHP` (EXP-0385).
+- Rebuild after a recipe edit: `rebuild-krinik-paks.py --only UIMod_Hosav` builds, but its identity guard refuses an INTENDED change («1 of 228 chunks
+  differ — НЕ СТАВЛЮ»); then copy `D:\Temp\kumm-rebuild-krinik\UIMod_Hosav-<n>\out\UIMod_Hosav.pak` into the library folder and `<game>\ConanSandbox\Mods`.
 
 ## Our edits in the build
 
@@ -53,5 +73,4 @@ side panel, a settings window. KRINIK MODIFIED in the build: the pak is rebuilt 
 
 ## Open
 
-- W36 (plan 36): blink 20 % faster (PlaybackSpeed 0.25 → 0.30), from 10 % food/water and from 90 % of max weight; dim → full brightness by the
-  blinking icon's `RenderOpacity` from the `KrinikConanUI` HUD section (the colour track does not touch it).
+- W36 done 2026-10-30 (speed 0.30 here, the early dim zone in KrinikConanUI:HudBlink); the look of the dim start — the owner's eye.

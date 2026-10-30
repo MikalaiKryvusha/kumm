@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0385 · 2026-10-30 · ❌→✅ · #conan #ue4ss #umg #widget #lua
+class: wrong-api-assumption
+**Lesson:** `FindFirstOf('W_SmoothHP_C')` returned the class TEMPLATE `…W_NewHealthUI_C:WidgetTree.W_SmoothHP`, not the live widget — a child widget
+that lives in another widget's tree has its archetype as an object of the same class, and FindFirstOf may pick it. The section ran on the template:
+no error, no blink (water at 2 %). Take the child from the live parent the creation event hands you (`hud.W_SmoothHP`) and log `GetFullName()` once —
+a live one contains `/Engine/Transient…`, a template contains `_C:WidgetTree`.
+**Trigger:** reaching a widget by FindFirstOf / FindAllOf → print `GetFullName()` once; `_C:WidgetTree` in it = template.
+mechanized: no — a line in `games/ConanExiles/mods/UIMod_Hosav.md` and `KrinikConanUI.md`
+
 ### EXP-0384 · 2026-10-30 · ❌→✅ · #conan #mods #knowledge #notes #hooks #owner-saw-first
 class: rediscovered-known
 **Lesson:** asked to change how the Hosav HUD blinks, I extracted and traced its widget from scratch — five facts about that widget already stood in
