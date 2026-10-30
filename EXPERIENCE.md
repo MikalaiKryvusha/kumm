@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0376 · 2026-10-30 · ❌→✅ · #conan #localization #scanner #bytecode #owner-saw-first
+class: check-silently-narrowed
+**Lesson:** a scan pass switched OFF for speed silently drops a whole class. `missing-bytecode-ftext.py` lost its UTF-16 pass on 2026-10-26 (the lazy
+regex over 12 GB did not finish in 15 min) with a comment and no warning — every mod text containing a non-ASCII character (•, «», —) fell out of the
+inventory, and four days later the owner met an English hover in the fishing panel («Profile slot: … A dot (•) marks …»). Fix: parse from each `29 01 34`
+marker instead of a regex over the file (0.3 s on the panel). A speed cut of a scanner keeps the class with a cheaper method, or prints «pass X skipped»
+on every run — never a silent narrowing.
+mechanized: partly — the pass is back; the twin sweep over all mods is pending (plan 36 W18)
+
 ### EXP-0375 · 2026-10-30 · ❌→✅ · #conan #retoc #iostore #compression #smoke #owner-saw-first
 class: stand-not-checked
 **Lesson:** two misses on the compressed-pak rebuild. (1) retoc compressed the IoStore CONTAINER HEADER chunk (type 06) too; UE writes it uncompressed
