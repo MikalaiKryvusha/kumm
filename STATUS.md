@@ -132,6 +132,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   commits (both checked as ancestors of local `main`) made while LFS did not work; local `main` is ahead 431 with the real history and 1505 LFS file versions
 >   (909 MB on F). 17:05: `git push origin main:refs/heads/full-history-lfs` started — a NEW branch, `main` untouched (replacing GitHub `main` = a force-push, the
 >   owner's word only). Plan free; the LFS quota is not readable by API (endpoint moved, HTTP 410) — the push itself tells.
+>   **DONE 17:09: GitHub LFS WORKS** — the push uploaded 968 objects (738 MB), rc 0, no quota error; branch `full-history-lfs` = local `main` `a9af4d9`; a second
+>   `git lfs push --all origin` reported 1505/1505 (949 MB) — every LFS object of the history is on the server (`[OWNER]` «суппер!» · 17:10). Open, the owner's
+>   word: make `full-history-lfs` the GitHub `main` (a force-push over the 18 «Code of» snapshots) and then retire the F storage.
 > - **The owner asks (17:04): «можно удалить с F временное хранилище? ГитХаб LFS работает?»** — not yet: GitHub LFS upload NOT verified (only the API answers);
 >   Unliminium's 909 MB of LFS live only on F as far as this clone shows. Order before any delete: in the Unliminium repo add/fetch its GitHub remote, check the
 >   account's LFS quota, `git lfs push --all <github>`, then `git lfs ls-files` vs the server (`git lfs fsck`/a fresh clone) — only then the F copy may go, by his word.
