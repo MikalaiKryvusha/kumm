@@ -66,7 +66,7 @@
     2. The two paths differ ONLY in whether the owner sees the game on his screen. Every instrument and every kind of work — remote calls, frames,
        world entry, tests — works on both; an instrument that needs focus (real mouse, real keys) gets a background twin, never a silent switch of the path.
     3. Before a launch — no game of ours already running (the scripts refuse with exit 2 and the PID).
-    (`[OWNER]` 2026-10-30 15:3x · verbatim in the header of `ConanExiles/_config/launch-fg.ps1`.)
+    (`[OWNER]` 2026-10-30 ≈15:3x · verbatim in `PROJECT_HISTORY.md`, entry «the owner's words behind HOUSE_RULES §1 rule 16».)
 
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · two maps for every game · KAIF
 feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images — WebP, never PNG). The

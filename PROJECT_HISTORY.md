@@ -1,5 +1,12 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-30 ≈15:3x +03:00 — the owner's words behind HOUSE_RULES §1 rule 16 (two launch paths), verbatim (recorded 2026-10-30 16:35 +03:00, chat 5db69748)
+
+> After the agent launched the game through the background script for a test: `[OWNER]` «я же просил игру открывать в фореграунде!!!» · «блять» ·
+> «сделай два пути» · «работа с игрой в фореграунде» · «и работа с игрой в фоне» · «иногда я так хочу, иногда иначе» · «ты должен уметь и так и так» ·
+> «уметь». Later the same hour: «твои инструменты и ты должны работать уместь с игрой и в фоне. и в фореграунде!!» · «разница только в том, я вижу на
+> экране игру, или не вижу!». At 16:18: «работай в фоне» · «автономно». The rule: `HOUSE_RULES.md` §1 rule 16; the scripts `launch-fg.ps1` / `launch-bg.ps1`.
+
 ## 2026-10-30 15:1x +03:00 — STATUS: the 14:15 update and the 13:07 handover (moved verbatim at the closing of chat b46b10e8)
 
 > **UPDATE 2026-10-30 14:15 (chat b46b10e8):** done — W33 translation entry renamed (pack `d55a59e`); W35 the player README «Если игра упала — как
