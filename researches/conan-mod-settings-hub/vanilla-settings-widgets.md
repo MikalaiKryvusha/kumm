@@ -20,5 +20,12 @@ All text uses the game's styles (`FS_Text_Body_3`, `FS_Text_Heading_4`) — rows
 - `SettingsDropdownWidgetBase` — F: `AddOption`, `RemoveOption`, `RemoveOptionByID`, `ClearOptions`, `SetSelectedOption`, `SelectedOptionByID`, `GetSelectedOption`, `GetSelectedOptionID`, `GetOptionCount`, `GetOptionAtIndex`, `FindOptionIndex`, `ClearSelection`, `HandleSelectionChanged` (the hook point); P: `OnSelectionChanged`, `Dropdown`.
 - `EditableLabeledSlider` — F: `SetValue`, `GetValue`, `SetValueFromSlider`, `SetValueFromText`, `UpdateTextValue`, `UpdateSliderStepSize`, `GetValueFromSliderValue`, `GetSliderValueFromValue`, `HandleResetButtonClicked`; P: `SignalSliderRealValueChanged`, `SignalSliderRealValueChangedWithInstance`, `MinValue`, `MaxValue`, `StepValue`, `SliderStepType`, `MinFractionalDigits`, `MaxFractionalDigits`, `DisplayValueScale`, `Value`, `OnSliderReset`, `ButtonReset`.
 
+- `FLXButtonBase` (live 2026-10-30 15:24) — F: `SetIsToggledOn`, `InstantSetIsToggledOn`, `InstantSetIsEnabled`, `SetToggleBehaviour`, `SetInputAction`,
+  `SetKeyShortcutName`, `SetLabel`, `SetIcon*`, `Get/SetUserDataAs*`; P: `SignalClicked/Pressed/Released/Toggled/MouseEnter/MouseLeave`, `StyleAsset(Class)`,
+  `ToggleBehaviour`, `IsToggledOn`, `KeyShortcutName`, `Anim*`, `ImageBackground/Frame/Icon`. The button itself is `SelfHitTestInvisible` (4); the click lands on its
+  Visible `ImgBackground` and bubbles to it. A created checkbox's `ButtonCheckbox` and the live hub `CloseButton` carry the same flags (enabled, not focusable,
+  own StyleAsset instance) — the dead click is not a flag on the button (spike run 2, S10). Open: whether a module window (`WindowRoot`) ancestor is what
+  makes an FLX button live (S11).
+
 Next (superseded by the line above for the API): `pult.sh "funcs SettingsWidgetBase"` / `SettingsCheckboxWidgetBase` / `SettingsDropdownWidgetBase` / `EditableLabeledSlider` for their setters,
 getters and delegates; how `W_Settings_Gameplay` feeds one row (its assets are unpacked in the session scratchpad by the same command).

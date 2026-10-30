@@ -120,6 +120,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `WBP_Settings_Subheader`) are created from Lua and take values; a REAL DRAG reaches a created slider (S5 pass 15:13 — UMG slider), a REAL click does not reach a created FLX checkbox (3 placements). Next:
 > then rows inside a module window (our WindowRoot widget in the KrinikConanUI kit + a module row); set the subheader's `Label` before adding.
 > Then the quick list below. `mouse-seq.ps1` has `move:<fx>/<fy>` now.
+> **15:3x (chat 5db69748):** spike run 2 — S10 done (FLX flags not the cause), S11–S14 next (`testcases/TC_conan_settings_hub_spike_2026-10-30.md`).
+> The game is launched by TWO paths — `launch-fg.ps1` (in front) / `launch-bg.ps1` (background), the owner picks (HOUSE_RULES §1 rule 16; his last word:
+> in front); the game process is `ConanSandbox-Win64-Shipping`.
 >
 > **14:57:** W36 HUD blink DONE in game (pack `4fae579`, H1–H10): Hosav's speed 0.30 + section `KrinikConanUI:HudBlink` (partial-curve PingPong — the
 > 14:34 plan «threshold patch + RenderOpacity» was replaced, correction). W34 Harness DONE: dev-only entry `"export": false`. Owner's dayloop order ≈14:37
