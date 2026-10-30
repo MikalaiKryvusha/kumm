@@ -28,7 +28,9 @@ FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md, полностью стирая то
    `/end-chat-force` (Skill tool_use or the owner's slash command since the last real prompt), take the turn's last message
    (`last_assistant_message`, else the transcript text after the last tool call) and REPLACE `FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md` at
    the project root with it whole (temp file + rename). A turn without closure leaves the file alone, so a "thanks" after the farewell does
-   not overwrite it. The file is session state → its `.gitignore` line ships in the ignore-first set (the hook writes after the closing
+   not overwrite it. **A second stop of the same turn (`stop_hook_active`) leaves it alone too** — other Stop hooks (a knowledge prompt, a
+   STATUS guard) block the first stop and the agent's one-line answer to them would replace the farewell (correction of the same morning,
+   posted as a comment on #181). The file is session state → its `.gitignore` line ships in the ignore-first set (the hook writes after the closing
    commit, a tracked file would stay dirty forever).
 2. **`/resume` Step 0:** on the chat's FIRST `/resume` (not an hourly refresh, not a second `/resume`), read the file before the canon; check
    its mtime against the newest commit (older → the hook missed the last closure: say so, trust `STATUS.md`); carry its "show first / do

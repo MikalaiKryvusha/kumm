@@ -9,8 +9,10 @@
 // /end-chat-force: инструментом Skill или словом владельца «/end-chat-…» в начале хода). Ход — всё, что в журнале
 // (transcript_path, JSONL) после последней настоящей реплики владельца. Текст берётся из поля last_assistant_message,
 // без него — из журнала: текст ассистента после последнего вызова инструмента в ходе. Ход без закрытия файл не трогает:
-// «спасибо» после прощания прощание не затирает. Другой Stop-хук не дал остановиться, агент дописал — файл перепишется
-// новым последним текстом (stop_hook_active не пропускаем намеренно).
+// «спасибо» после прощания прощание не затирает. Повторная остановка того же хода (stop_hook_active — другой Stop-хук не дал
+// остановиться: knowledge-hook «есть ли новое знание?», страж STATUS) файл НЕ переписывает: агент отвечает на хук строкой
+// «новых знаний нет», и она затёрла бы прощание. Вопрос владельца 2026-10-30 ≈08:3x: «оно не будет конфликтовать с сообщением о
+// записе знаний чата?» — будет, этот же ход в чате показал: knowledge-hook и страж STATUS остановили финал.
 //
 //   node farewell-capture.mjs                 # событие Stop на stdin; на любом неожиданном — молча 0: хук не ломает сессию
 //   node farewell-capture.mjs --out <файл>    # куда писать (проверки tools/test-guards.mjs, часть J)
@@ -67,7 +69,7 @@ function main() {
   const args = process.argv.slice(2);
   const outArg = args.indexOf('--out');
   const event = JSON.parse(readFileSync(0, 'utf8') || '{}');
-  if (!event.transcript_path) return;
+  if (!event.transcript_path || event.stop_hook_active) return;
   const turn = readTurn(readFileSync(event.transcript_path, 'utf8').split('\n'));
   if (!turn.closed) return;
   const text = (typeof event.last_assistant_message === 'string' && event.last_assistant_message.trim())
