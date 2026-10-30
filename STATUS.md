@@ -134,8 +134,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **Outward, 2026-10-30:** feature request filed by the owner’s order — https://github.com/Arora-Sir/Super-Artemis/issues/3 (complete Russian localization +
 > strings and text-dependent layout parameters in resource files; base 1248 strings vs `values-ru` 646, 82 literal texts in 57 layouts; we offered the
 > Russian translation and device tests) — watch for the maintainer’s answer.
-> **The owner's call:** ≈86 GB of old work files in `D:/Temp/claude/d--work-ai-sandbox-KUMM/075c1f98-be83-4d40-9e6b-102dcaa07ddf/scratchpad/rebuild/`
-> (and `rebuild2/`) — `view/` there = hard links (deleting links is safe).
+> **Disk D: cleaned 2026-10-30 10:0x–10:35 by the owner's word** (8 GB free → 288 GB): old session scratchpads (notes kept in
+> `D:/REVISIONS/claude-scratchpads-text-2026-10-30.7z`), `_paksview-2.2.3`, Cyberpunk 2077. Kept for the next tasks: `_paksview-3.0.1` (66 GB, arrow
+> gravity trace) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB, the string sweep). Rule — `HOUSE_RULES.md` §1 rule 15; the sweep hook
+> `tools/hooks/scratch-sweep.mjs` is NOT wired yet — the owner wires it (`SessionStart`, matcher `startup`; the agent's own settings edit was refused).
 >
 > **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied
 > (`SvarogsDream/_backups/svarog-saves-2026-10-29_2103-before-debt024`), configs snapped (`_harness/cfg_snap`, 21:04), the 13:43 build `f44c36e` hot-deployed
@@ -215,4 +217,4 @@ open: #140 (`bugs/KAIF/09_*`, the origin moved it to 2.10) and three tickets of 
 #179 (`bugs/KAIF/19_*`, 2026-10-28): `/resume` costs ≈ 140 k tokens (measured 2026-10-29 10:08 by the transcript `usage`: 64 k → 181 k = 117 k,
 `EXPERIENCE.md` grepped by tag, not read whole) — proposed: read each document's "entry slice" at entry; rules as statements
 without rationale (the owner's word, in the ticket's comments); until the origin decides, the ritual reads everything. Since 2026-10-28 the hook
-`.claude/hooks/context-budget.mjs` runs: at 75 % of the window — `/end-chat-soft`, at 85 % — `/end-chat-force` (`CLAUDE.md`).
+`.claude/hooks/context-budget.mjs` runs (2026-10-30: #181 farewell hook, #182 autonomy guard, #183 the agent cleans up after itself — `bugs/KAIF/21–23`): at 75 % of the window — `/end-chat-soft`, at 85 % — `/end-chat-force` (`CLAUDE.md`).

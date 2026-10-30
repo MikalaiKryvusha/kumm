@@ -16,7 +16,7 @@
 // Это гигиена стражей (самопроверка прибора), а не функциональный прогон: функциональные прогоны — настоящий
 // коммит и настоящий вызов Bash — описаны в отчётах testcases/reports/.
 import { spawnSync, execFileSync } from 'node:child_process';
-import { mkdtempSync, writeFileSync, mkdirSync, readdirSync, statSync, unlinkSync, rmdirSync, copyFileSync, utimesSync, readFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, mkdirSync, readdirSync, statSync, unlinkSync, rmdirSync, copyFileSync, utimesSync, readFileSync, existsSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -481,6 +481,39 @@ try {
   check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [AG, '--state', st], { input: '{not json', encoding: 'utf8' }).status, 0);
 } catch (e) {
   check('part K ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
+}
+
+// ---------- L. the scratch-sweep hook (SessionStart): scratchpads of past sessions idle > 24 h are removed, the current one never
+// (2026-10-30: 168 ГБ черновиков закрытых сессий и 8 ГБ свободных на D: — владелец: «как-то нужно, чтобы ИИ агенты сами за собой прибирались»)
+console.log('L. scratch-sweep');
+try {
+  const SW = resolve(ROOT, 'tools/hooks/scratch-sweep.mjs');
+  const root = join(tmpdir(), 'claude', 'kumm-test-scratch-sweep-' + process.pid);
+  mkdirSync(root, { recursive: true });
+  const old = Date.now() / 1000 - 3 * 86400;
+  const mk = (id, age) => {
+    const d = join(root, id, 'scratchpad', 'deep'); mkdirSync(d, { recursive: true });
+    const f = join(d, 'work.bin'); writeFileSync(f, 'x'.repeat(1000));
+    if (age === 'old') for (const p of [f, d, join(root, id, 'scratchpad'), join(root, id)]) utimesSync(p, old, old);
+  };
+  mk('old-session', 'old'); mk('fresh-session', 'fresh'); mk('current-session', 'old');
+  const run = (...args) => spawnSync(process.execPath, [SW, '--root', root, '--session', 'current-session', ...args], { encoding: 'utf8' });
+  const dry = run('--dry-run');
+  check('dry run names the old session and deletes nothing', /ушло бы[^\n]*— 1 \(1 файлов/.test(dry.stdout) && existsSync(join(root, 'old-session')), true);
+  const r = run();
+  check('the old session is removed', existsSync(join(root, 'old-session')), false);
+  check('the fresh session stays', existsSync(join(root, 'fresh-session', 'scratchpad', 'deep', 'work.bin')), true);
+  check('the current session stays even when idle', existsSync(join(root, 'current-session', 'scratchpad', 'deep', 'work.bin')), true);
+  check('the report reaches the agent', /убрано[^\n]*— 1 /.test(r.stdout), true);
+  const outside = newTmp(); mkdirSync(join(outside, 'x'), { recursive: true }); utimesSync(join(outside, 'x'), old, old);
+  const ref = spawnSync(process.execPath, [SW, '--root', outside, '--session', 's'], { encoding: 'utf8' });
+  check('a root outside <TEMP>/claude is refused', /отказ/.test(ref.stdout) && existsSync(join(outside, 'x')), true);
+  check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [SW], { input: '{not json', encoding: 'utf8' }).status, 0);
+  // the fixture root lives under <TEMP>/claude, outside the suite's temp — removed here, file by file
+  const wipe = (d) => { for (const e of readdirSync(d, { withFileTypes: true })) { const p = join(d, e.name); if (e.isDirectory()) wipe(p); else unlinkSync(p); } rmdirSync(d); };
+  wipe(root);
+} catch (e) {
+  check('part L ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
 
 for (const d of tmps) { try { removeByEnumeration(d); } catch (e) { console.log(`note: temp left at ${d} (${e.code || e.message})`); } }

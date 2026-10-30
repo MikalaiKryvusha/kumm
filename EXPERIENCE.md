@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0380 · 2026-10-30 · ❌→✅ · #disk #cleanup #hardlinks #owner-saw-first
+class: guessed-instead-of-measured
+**Lesson:** I promised «≈95 GB back» for a scratchpad `du` measured at 85 GB — deleting it freed 28 GB: most of it was hard links whose other
+names live elsewhere. Before quoting what a deletion returns, measure the hard-linked share (`find <dir> -type f -printf '%n %s\n'`, sum where
+`%n > 1`) and say «real ≈ X GB». And leftovers are the agent's to remove when the work closes, not «the owner's call» in a handover — the owner
+found the disk full himself («как-то нужно, чтобы ИИ агенты сами за собой прибирались»).
+mechanized: yes — `tools/hooks/scratch-sweep.mjs` (SessionStart sweep of idle scratchpads, test-guards part L) + HOUSE_RULES §1 rule 15; KAIF #183
+
 ### EXP-0379 · 2026-10-30 · ❌→✅ · #autonomy #context-budget #closure #owner-saw-first
 class: guessed-instead-of-measured
 **Lesson:** under «работай автономно» (no end time) I ended turns «at a natural cut» with a report, judging the context «large» by feel — it was
