@@ -124,7 +124,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > W18a fishing captions on one line with bars (KrinikConanUI 0.14.0, looks → `НА ОТСМОТР НИКОЛАЕМ/9`); engine `-Verify` warns on runtime cvar overrides
 > (`536e3ca`); `save-restore.sh` (the save is SQLite WAL — never a bare `cp`); hooks: autonomy-guard catches any «…автономно», knowledge-hook skips vanilla
 > assets, clock-now adopted. **Live remote probes stopped** after three crashes of my own probes (EXP-0386/0387): the spike S11 (a row created with the
-> window as owner — `Create(window, class, nil)` lands in its WidgetTree; adding it crashed) and W6 (the corpse stand: `KillCharacter` with `{}` crashed) wait
+> window as owner — `Create(window, class, nil)` lands in its WidgetTree; adding it crashed) and W6 (the corpse stand: `KillCharacter` on an NPC 150 m away crashed — cause unknown, the same call killed nearby NPCs on 10-28) wait
 > for research, not more pokes. W6 route found: line 2 by the translation key + line 1 as a separate strip text (game map). W11 top-of-list: routes in
 > `games/ConanExiles/mods/SimpleModlist.md`. **clock-now has a known defect** (kaif-48, 16:40): a placeholder only MOVED by an edit (in Edit's old_string or
 > the replaced Write file) gets filled — fixed at the origin, take the new copy after their commit; until then never move a placeholder text.

@@ -127,7 +127,8 @@ The row is `ActionTutorial` = the shared `/Game/UI/HUD/Notifications/W_ActionTut
 → VerticalBox `Content`, texts `T_Name`, `T_Type`, `T_State`, `T_Decayed`, `Text_Owner`; BP functions `SetCorpseText`, `UpdateInfo_CorpseBase`, `SetState`).
 Killing an NPC for a corpse stand: `KillCharacter` lives on the character's combat component `/Game/Characters/BaseBPCombat.BaseBPCombat_C`
 (params HitLocation byte · killerNameInput Text · killer Object · OverridingCauseOfDeath STRUCT · StateChangeDelay float · DamageCauser Object);
-`{}` for the struct from the remote crashed the game (2026-10-30 16:20, EXP-0387) — do not call it that way.
+`x:KillCharacter(0, FText(''), hero, {}, 0.0, hero)` killed NPCs on 2026-10-28 (case R1); the same with `FText('Krinik')` on an NPC 150 m away crashed
+the game on 2026-10-30 16:20 (EXP-0387) — cause unknown (distance / loaded state or the name); kill only a creature near the hero, the 10-28 way.
 Changing the shared row's layout changes every action prompt of the game; the two-line corpse prompt = line 2 by the translation key («или нажмите
 {0}, чтобы забрать предметы») + line 1 as a separate text of the strip (W6). Our `Game` target
 overrides a vanilla key when the entry carries the vanilla hashes (`_config/devkit/vanilla-override.py`, proven 2026-10-29 00:34).
