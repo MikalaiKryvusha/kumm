@@ -110,25 +110,21 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **UPDATE 2026-10-30 12:46 (chat 759898d5, /dayloop by «Работай автономно» 12:0x):** W28 blood 5 min DONE in game — new Lua mod
-> `KrinikLingeringBlood` 0.1.0 (pack `ccfba10`; report `testcases/reports/2026-10-30_conan-lingering-blood.md`); the owner's eye — folder
-> «24 Конан — кровь на земле 5 минут». W5(c) «k» rounding — recon: integer division only, rounding needs an ADD (plan 36 W5 row) — moved to the
-> heavy end. Stand lessons (game map): arrows lay no ground blood; a detached / time-frozen creature never attacks; the idle camera ignores the
-> remote until a real wheel step; `os.clock` steps 1 ms. Save restored to the 12:05 copy after every launch. Next: W29 bark flicker, W24 epic.
-> **13:02 — the owner's Krinik mod set (plan 36 W34, «вот, сейчас нравится»):** `KrinikConanGraphics` (DONE, pack `aa68252`: blood + the
-> optimized Engine.ini; the cap evicts the oldest — not yet run in game) · `KrinikConanUI` (W31: UIFixes + FpsCounter + HudOutline + PauseGameInMenu) ·
-> `KrinikConanGameplay` (W32: Locomotion + LevelUncapped) · `KrinikConanArchery` · `KrinikConanRussianTranslation` (W33) + `KrinikConanHarness`
-> (the agent's tools; shipping — waits for his word, `[AI]` advice: dev-only). W5c «k» truncated DONE (126,7k on the HUD). W30 arrow blood, W13 —
-> the owner's frame: stuck arrows stay in the air when the creature moves. **13:02: the game is open in my run (god on), the owner stopped my
-> in-game step — do not touch or close it without his word; then restore the save from `_save-backup/2026-10-30_1205-before-blood-run`.**
-> **UPDATE 2026-10-30 11:33 (chat 77faa752, autonomous by «работай автономно» 10:37):** W15 arrow gravity DONE (KrinikConanArchery 0.6.0 drops
-> the arrow's gravity curve), W14 shooting while jumping DONE (0.7.0), W27 HUD temperature colours DONE (KrinikHudOutline) — all in game with
-> run reports; the owner's eye: minimum speed share, the jump-shot look + stamina, the three colours. Drive-bys filed: W28 blood 5 min (recon:
-> the ground blood = `SpawnDecalAtLocation M_blood_ground_decal` on a hit; next — its LifeSpan and `SetLifeSpan` on the returned decal;
-> `researches/conan-blood-decals/`), W29 enemy bark flicker (needs a 60 fps clip of a bark), W24 shape — Krinik and Xevyr settings = one
-> scrolling list with sections each. **Stand lessons (EXP-0381):** `exec God` does nothing in 3.0.1 — god by `bash _config/god-on.sh`; copy
-> `Saved/Game_0.db` before a run; the owner's oasis save has food and water at 0 % (starvation kills) and a hostile boss — kill it first. The
-> hero died once at 11:26 — restored from `Game_0_backup_1.db` (11:25), gear verified. **The hero leveled 52 → 53 during the runs (XP from the oasis bosses killed by the remote) — tell the owner; a stand rule: kill with the remote no more than the case needs.** Next: W24 (heavy — `/plan-epic`), W28, W29.
+> **HANDOVER 2026-10-30 13:07 (chat 759898d5 closed by the owner: «этот чат можешь закрывать, продолжить делать сборку в новом чате»).**
+> First, before anything in game: **the game may still be open from my 12:55 run** (god ON by `_config/god-on.sh`; the owner stopped my in-game
+> step at 12:59 and looked at it — his game now). Ask nothing, check: `tasklist | grep -i ConanSandbox`; if it runs, it is his — leave it; when it is
+> closed, compare `Saved/Game_0.db` with `Conan Exiles Mods/_save-backup/2026-10-30_1205-before-blood-run/Game_0.db` and tell him whether his hero
+> state differs (my runs gave XP and wounds; every earlier launch was restored). Release my machine lock if still held:
+> `node D:/work/ai_sandbox/_tools/machine-lock.mjs release --who kumm`.
+> Then, in order (plan 36 rows): (1) **W34/W31–W33 — the owner's Krinik mod set** (five shipped mods + `KrinikConanHarness` NOT shipped, his word):
+> W31 `KrinikUIFixes` → `KrinikConanUI` with FpsCounter, HudOutline, PauseGameInMenu as Lua sections (a kit rebuild — the name is inside the pak);
+> W32 `KrinikConanGameplay` = Locomotion + LevelUncapped (keep LevelUncapped LAST in the load order); W33 the translation entry name; the Harness
+> as a dev-only manifest entry `-Export` leaves out. (2) **W35 player report** — the script is fixed and tested; write the Russian README
+> «Если игра упала — как прислать отчёт» + a guide section, show the owner. (3) **KrinikConanGraphics G3/G4** — the cap evicting the oldest stain
+> is NOT run in game; the cost per stain must be measured as 1000 calls / 1000 (`os.clock` steps 1 ms) — the owner: «моды должны быть УВАЖИТЕЛЬНЫМИ
+> К ГЛАВНОМУ ПОТОКУ»; cases G3, G4 in `testcases/TC_conan_blood_decal_lifespan_2026-10-30.md`. (4) W30 arrow blood (`TakeProjectileDamage`
+> parameters first), W13 the owner's frame (arrows stay in the air when the creature moves — read the stuck copy's attach parent). Then W29, W24.
+> The 12:46 and 13:02 updates of chat 759898d5 (W28 done, the stand lessons, the Krinik mod set) — chronicle, entry 2026-10-30 13:0x (second).
 > **The owner's remaining BIG debt (his order 2026-10-30 08:3x; W15 and W14 — done, moved to the chronicle):**
 > 3. **W24 one «Настройки модов» button + one hub of mod settings windows in the game's style** (W19–W23 fold into it: Hosav, Damage Meter, group,
 >    minimap, Lore & Loot windows; Xevyr and Krinik tabs; vignette sliders) — heavy, `/plan-epic` first.
