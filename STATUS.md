@@ -117,7 +117,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (`researches/token-economy/`, desktop copy); the rebuild tool cleans its work dirs (pack `f909466`); the owner accepted the 01:08 items
 > («всё окей, нравится», homeworks/03); fishing tooltips: no one-line → two-line jump (KrinikPauseGameInMenu 0.13.0), the profile-slot hover in
 > Russian, «(удерж.)» in Game.locres (pack `be6488f`); the addprop crash guarded (EXP-0377); the build logo taken into the pack (`85c5c9b`).
-> **First in the next chat — the owner's three BIG debts (his order 2026-10-30 08:3x):**
+> **UPDATE 2026-10-30 11:33 (chat 77faa752, autonomous by «работай автономно» 10:37):** W15 arrow gravity DONE (KrinikConanArchery 0.6.0 drops
+> the arrow's gravity curve), W14 shooting while jumping DONE (0.7.0), W27 HUD temperature colours DONE (KrinikHudOutline) — all in game with
+> run reports; the owner's eye: minimum speed share, the jump-shot look + stamina, the three colours. Drive-bys filed: W28 blood 5 min (recon:
+> the ground blood = `SpawnDecalAtLocation M_blood_ground_decal` on a hit; next — its LifeSpan and `SetLifeSpan` on the returned decal;
+> `researches/conan-blood-decals/`), W29 enemy bark flicker (needs a 60 fps clip of a bark), W24 shape — Krinik and Xevyr settings = one
+> scrolling list with sections each. **Stand lessons (EXP-0381):** `exec God` does nothing in 3.0.1 — god by `bash _config/god-on.sh`; copy
+> `Saved/Game_0.db` before a run; the owner's oasis save has food and water at 0 % (starvation kills) and a hostile boss — kill it first. The
+> hero died once at 11:26 — restored from `Game_0_backup_1.db` (11:25), gear verified. Next: W24 (heavy — `/plan-epic`), W28, W29.
+> **Earlier first-in-chat list (W15, W14 now done; W24 remains) — the owner's three BIG debts (his order 2026-10-30 08:3x):**
 > 1. **W15 arrow ballistics as in Oblivion Remastered** — KrinikConanArchery 0.5.0 (pack `f6ab0fb`): speed by the draw WORKS in game (2500 / 5001
 >    cm/s); gravity is rewritten by the arrow blueprint every tick (back to 1.20 / 0.12). Next, offline: `kismet-trace.py` on
 >    `Content/Items/Weapons/BP_BaseProjectile` (pakchunk1050) — `ProjectileGravityCurve`, `GravityMod`, `SetProjectileGravity`
