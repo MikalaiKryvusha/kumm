@@ -46,7 +46,14 @@ Select(versionEmpty ? "" : A))` · 652 C = `Concat(modlistText, "\n")` · 729/76
 (17 + 3 disk bytes) and of D (Select 85 + Local 17 disk bytes): the total length stays, but the `0x69` Select (EX_SwitchValue) carries absolute
 offsets that move by +9 in memory — they must be fixed too. Krinik-only on top (others in load order) needs a real branch. Both — not done.
 
+## Krinik on top — DONE 2026-10-30 23:44 (KrinikConanUI `krinik_pause_in_menu.lua` 0.15.0)
+
+The shown text lives in `SML_UI_ModList_C.ModListBox` (MultiLineEditableTextBox), set once; `modlistText` is not bound to it (a live edit of the
+variable changed nothing on screen, 23:4x). On `ActivateModule(SML_ModList | IngameMenu, true)` + 100 ms our section moves the lines starting
+«Krinik» to the top of `ModListBox` — once per opening, idempotent, 3 ms; the load order (`modlist.txt`) is untouched. Cases
+`testcases/TC_conan_modlist_krinik_on_top_2026-10-30.md`. The bytecode route above stays unneeded.
+
 ## Open
 
-- W11: the display order — the list text is built in `AppendModlist` from `SML_BP_ModController.ModInfo`; our paks are LAST in `modlist.txt` on purpose
+- (closed 23:44 — see above) W11: the display order — the list text is built in `AppendModlist` from `SML_BP_ModController.ModInfo`; our paks are LAST in `modlist.txt` on purpose
   (load order: later overrides earlier) — reorder the DISPLAY, never the load order. Versions: where the list reads a mod's version (the pak's mod info).
