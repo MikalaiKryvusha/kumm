@@ -17,6 +17,8 @@ path spawns them — the spawner sits in combat/hit blueprints under other names
 - `SpawnDecalAtLocation` — footprints `M_footprint_generic_shoe`, LifeSpan **5 s**; `SpawnDecalAttached` — arrow impacts `M_decal_rock_impact_01_D` on the landscape, LifeSpan **30 s** (the last parameter; the material is the FIRST callback parameter of `SpawnDecalAttached`).
 - No blood through `SpawnEmitterAtLocation` / `SpawnEmitterAttached` (filter «blood»/«gore») — but the arrows did not hit the boss in that run (he walked off; frame), so blood was NOT produced: inconclusive. Next run: a frozen target (the remote) hit point-blank, the same hooks plus Niagara `/Script/Niagara.NiagaraFunctionLibrary:SpawnSystemAtLocation` / `SpawnSystemAttached`; the owner says «спрайты» — the ground blood may be particles, not decals.
 
+**11:25 run (frozen target, 3 shots point-blank):** `SpawnDecalAtLocation` placed `M_blood_ground_decal` 14 times and `SpawnEmitterAtLocation` spawned `P_blood_directional_hit_1` 14 times — THE ground blood is this decal. Its LifeSpan and whether `SetLifeSpan(300)` on the returned decal component holds are NOT read yet: at 11:35 the target (`DisableMovement` only) walked back into melee and the arrows missed. Next run: freeze by `CustomTimeDilation = 0` AND `DisableMovement`, or shoot the corpse-free boss from 3.5 m right after the teleport; the hook is ready in the chat transcript (params ctx, mat, size, loc, rot, life, ret).
+
 ## Next
 
 1. Find who places the ground stain and with what life: grep the vanilla unpack for `M_blood_ground_decal` / `M_blood_growing_stain`

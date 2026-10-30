@@ -124,7 +124,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `researches/conan-blood-decals/`), W29 enemy bark flicker (needs a 60 fps clip of a bark), W24 shape — Krinik and Xevyr settings = one
 > scrolling list with sections each. **Stand lessons (EXP-0381):** `exec God` does nothing in 3.0.1 — god by `bash _config/god-on.sh`; copy
 > `Saved/Game_0.db` before a run; the owner's oasis save has food and water at 0 % (starvation kills) and a hostile boss — kill it first. The
-> hero died once at 11:26 — restored from `Game_0_backup_1.db` (11:25), gear verified. Next: W24 (heavy — `/plan-epic`), W28, W29.
+> hero died once at 11:26 — restored from `Game_0_backup_1.db` (11:25), gear verified. **The hero leveled 52 → 53 during the runs (XP from the oasis bosses killed by the remote) — tell the owner; a stand rule: kill with the remote no more than the case needs.** Next: W24 (heavy — `/plan-epic`), W28, W29.
 > **Earlier first-in-chat list (W15, W14 now done; W24 remains) — the owner's three BIG debts (his order 2026-10-30 08:3x):**
 > 1. **W15 arrow ballistics as in Oblivion Remastered** — KrinikConanArchery 0.5.0 (pack `f6ab0fb`): speed by the draw WORKS in game (2500 / 5001
 >    cm/s); gravity is rewritten by the arrow blueprint every tick (back to 1.20 / 0.12). Next, offline: `kismet-trace.py` on
