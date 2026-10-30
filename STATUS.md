@@ -127,7 +127,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   закрывает строки`, report `testcases/reports/2026-10-30_conan-corpse-strip-backing.md`): brush side margins 0.40 + the Border's OWN padding 140
 >   (the slot field never reached the game — EXP-0395); line ends on 88–98 % of the centre darkness; a campfire strip shows no corpse line; gap to
 >   the loot window ≈ 178 units. Stand: `_config/strip-open.sh <tag> [class]` (opens by code). Still not seen: the strip the GAME creates on a real
->   look; a chest proper (none in the oasis save). Next: W11 «only Krinik mods on top» (interview 027 → A).
+>   look; a chest proper (none in the oasis save).
+> - **22:55 «работай автономно» → `/dayloop`. W26 the build's logo:** wallpapers ACCEPTED 22:55 (the owner's A3-smaller, `_extras/Wallpapers/*.jpg`, the clean
+>   originals in `_extras/Wallpapers-source/`, `_config/branding/make-wallpapers.py`); the logo + versions in the main menu (right) and the Esc menu (left)
+>   seen in game 23:29 (review folder 14, the owner's eye pending); the logo intro at start built 23:38 (`KrinikIntro`, `Content/Movies/.mp4` — on screen not
+>   seen by a background frame: the owner's eye at the next start). Next in the loop: W11 «only Krinik mods on top» (interview 027 → A).
 > - **19:08 «автономно» → `/dayloop`.** **W6 corpse prompt on two lines and W10a quick-loot size — DONE in game 19:28–19:42, waiting for the owner's eye**
 >   (review folder `НА ОТСМОТР НИКОЛАЕМ\11 подсказка над трупом и окно лута`, report `testcases/reports/2026-10-30_conan-corpse-prompt-two-lines-quickloot-size.md`):
 >   icon pad 1 (pad 8 was a detector error, EXP-0392), «Забрать все (удерж.)», the loot window keeps one size (by remote; his wheel check pending). The owner's own
