@@ -125,6 +125,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (the slot field never reached the game — EXP-0395); line ends on 88–98 % of the centre darkness; a campfire strip shows no corpse line; gap to
 >   the loot window ≈ 178 units. Stand: `_config/strip-open.sh <tag> [class]` (opens by code). Still not seen: the strip the GAME creates on a real
 >   look; a chest proper (none in the oasis save).
+> - **FIRST next chat (the owner's debt, 2026-10-31 00:10 demo):** (1) **bug 71 — the main menu background is all white** («все белое»): control
+>   builds — without our `W_MainMenu_MainMenu` override, then without `Movies/.mp4` (`bugs/71_conan_main_menu_background_white.md`); (2) then the main
+>   menu: our logo smaller and further right (`[OWNER]` «потом в меню главном наш логотим сделй меньше и правее» · 00:11; kit `kit-conanui-edit.py`
+>   MENUS, `OUR_LOGO_H_SHARE` / `LOGO_GAP_SHARE` for the main menu). Then the W30 arrow test below.
 > - **22:55 «работай автономно» → `/dayloop`. W26 the build's logo:** wallpapers ACCEPTED 22:55 (the owner's A3-smaller, `_extras/Wallpapers/*.jpg`, the clean
 >   originals in `_extras/Wallpapers-source/`, `_config/branding/make-wallpapers.py`); the logo + versions in the main menu (right) and the Esc menu (left)
 >   seen in game 23:29 (review folder 14, the owner's eye pending); the logo intro at start built 23:38 (`KrinikIntro`, `Content/Movies/.mp4` — on screen not

@@ -25,7 +25,8 @@ frames scaled to 3840). Live save backed up before each run (`_save-backup/2026-
 2. A widget added from Python logs «did not get a GUID» on the FIRST compile and the commandlet exits 1; the GUID is assigned and saved — the
    second run is clean (now in the script's comment).
 3. Our logo texture carries a soft shadow outside its solid box (alpha ≥ 64: 39,35 – 1010,359 of 1024×388) — layout by the alpha box put «1.0.0» lower.
-4. A background frame does not catch the main menu's video — the menu shows white behind the logos.
+4. ~~A background frame does not catch the main menu's video — the menu shows white behind the logos.~~ **FALSE (correction 2026-10-31 00:11):** the
+   menu IS white in the game — the owner saw it at the foreground demo («все белое»); the white was a defect, not a capture limit. Bug 71.
 5. The Esc menu opened 2 s after world entry showed the HUD minimap over it (23:21); 3 s later — clean (stand timing).
 
 **Traces.** Review folder `НА ОТСМОТР НИКОЛАЕМ\14 логотип сборки в меню игры` (four WebP + «что смотреть.md»); `_config/devkit/kit-conanui-edit.json`,

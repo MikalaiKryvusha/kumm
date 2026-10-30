@@ -153,6 +153,8 @@ Second stand (2026-10-30, the owner's «саму плашку кодом отк�
 oasis save: a campfire `BP_PL_Crafting_CampFire_C` (≈ 1064 m; `MAXD_M=2000`) — no chest within reach there; placeables are found by `FindAllOf('PlaceableBase')`.
 The strip's dark backing: `Border_Underlay` — see `mods/KrinikConanUI.md` (brush, its texture's fade, the Border's own padding).
 
+Quitting the game by the remote (2026-10-31 00:10): `StaticFindObject('/Script/Engine.Default__KismetSystemLibrary'):QuitGame(pc, pc, 0, false)` — the game
+exits cleanly in ≈ 10 s; `pc:ConsoleCommand('quit', false)` fails in the remote.
 Menu logos (kit probe 2026-10-30 22:4x, `_config/devkit/kit-probe-tree.json`; no pack mod overrides either widget). Main menu
 `/Game/UI/Widgets/MainMenu/W_MainMenu_MainMenu`: `Image_Logo` in `Overlay_Main`, Left/Top, padding L 72 T 120, brush 384×192 of
 `/Game/UI/Textures/Logos/T_UI_ConanExiles_Enhanced_Logo` (1024×512, alpha); the nav column `Overlay_0` starts at T 340; the game version is
