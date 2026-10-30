@@ -979,6 +979,60 @@ function Test-EngineIni {
     return $allGood
 }
 
+function Get-PackCvars {
+    # Cvar-ы, которые задаёт Engine.ini сборки: ключ в нижнем регистре -> имя и значение. Источник - engineIni.file или engineIni.appendFile.
+    if (-not $pack.engineIni) { return @{} }
+    $src = if ($pack.engineIni.file) { $pack.engineIni.file } else { $pack.engineIni.appendFile }
+    $h = @{}
+    if (-not $src) { return $h }
+    $f = Resolve-UnderRoot $src
+    if (-not (Test-Path $f)) { return $h }
+    foreach ($line in [IO.File]::ReadAllLines($f)) {
+        if ($line -match '^\s*([A-Za-z][A-Za-z0-9_]*\.[A-Za-z0-9_.]+)\s*=\s*(\S*)') {
+            $h[$matches[1].ToLowerInvariant()] = [pscustomobject]@{ Key = $matches[1]; Value = $matches[2] }
+        }
+    }
+    return $h
+}
+
+function Find-RuntimeCvarOverrides {
+    # Мод, который на ходу задаёт тот же cvar, что и Engine.ini сборки, молча отменяет решение сборки: так было 21.08 с Palworld
+    # (r.ViewDistanceScale в четырёх местах) - раскатка проверила каждый файл и всё равно отдала сборку, чью графику Lua-мод
+    # переписывает в мире (KUMM STATUS, автономный пул). Первый срез без игры: исходные папки модов (source.folder), файлы .lua/.ini/.txt,
+    # присвоения «имя.cvar значение» и «имя.cvar=значение»; совпадение только с ключами Engine.ini сборки, поэтому поля таблиц Lua
+    # («cfg.speed = 3») ложных тревог не дают. Строки-комментарии (--, ;, #) пропускаются; сам файл Engine.ini сборки - тоже.
+    # Предупреждает, но не валит проверку: значение мода бывает задумано (решает владелец).
+    # [TESTED: 2026-10-30 · fixture pack (warn with file:line; silent on a foreign cvar, a comment, the pack ini) and the real Conan pack -Verify · testcases/reports/2026-10-30_engine-ini-runtime-cvar-warning.md]
+    $cvars = Get-PackCvars
+    Head 'Engine.ini cvars that mods set again at runtime'
+    if ($cvars.Count -eq 0) { Say '  the pack Engine.ini sets no cvars (or is not described) - nothing to compare' DarkGray; return }
+    $iniSrc = ''
+    if ($pack.engineIni.file) { $iniSrc = [IO.Path]::GetFullPath((Resolve-UnderRoot $pack.engineIni.file)) }
+    $hits = 0
+    foreach ($m in @($pack.mods | Where-Object { $_.enabled -ne $false })) {
+        if (-not $m.source -or -not $m.source.folder) { continue }
+        $root = Resolve-UnderRoot $m.source.folder
+        if (-not (Test-Path $root)) { continue }
+        $rootFull = [IO.Path]::GetFullPath($root).TrimEnd('\') + '\'
+        foreach ($f in @(Get-ChildItem -Path $root -Recurse -File -Include *.lua, *.ini, *.txt -ErrorAction SilentlyContinue)) {
+            if ($iniSrc -and ($f.FullName -eq $iniSrc)) { continue }
+            $n = 0
+            foreach ($line in [IO.File]::ReadAllLines($f.FullName)) {
+                $n++
+                if ($line -match '^\s*(--|;|#)') { continue }
+                foreach ($mm in [regex]::Matches($line, '(?<![A-Za-z0-9_.])([A-Za-z][A-Za-z0-9_]*\.[A-Za-z0-9_.]+)(?:\s*=\s*|\s+)(-?[0-9][0-9.]*)')) {
+                    $k = $mm.Groups[1].Value.ToLowerInvariant()
+                    if (-not $cvars.ContainsKey($k)) { continue }
+                    $rel = $f.FullName.Substring($rootFull.Length)
+                    Warn "$($m.name) sets $($cvars[$k].Key)=$($mm.Groups[2].Value) at runtime ($($rel):$n); the pack's Engine.ini sets $($cvars[$k].Value)"
+                    $hits++
+                }
+            }
+        }
+    }
+    if ($hits -eq 0) { Ok "no mod source sets again any of the $($cvars.Count) cvars of the pack's Engine.ini" }
+}
+
 # --------------------------------------------------------------- action loop
 function Invoke-Action {
     <# Runs one action over a list of targets and prints a summary.
@@ -1058,6 +1112,7 @@ function Invoke-Action {
 
         if ($Action -eq 'verify') {
             if (-not (Test-EngineIni -TargetList $live)) { $problems = $true }
+            Find-RuntimeCvarOverrides
         }
         elseif ($Action -eq 'deploy') {
             if ($AlsoEngineIni) {

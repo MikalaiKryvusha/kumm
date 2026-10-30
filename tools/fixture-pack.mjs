@@ -143,5 +143,21 @@ const srcDirs = existsSync(path.join(EXP, 'pack', 'src')) ? readdirSync(path.joi
 expect('экспорт: запись "export": false не попала в архив, есть строка «dev-only»', !/Beta/i.test(srcDirs) && /dev-only, not exported: Beta Bows/.test(ex.out), `${ex.out}\nsrc: ${srcDirs}`)
 expect('экспорт: соседняя запись на месте (контроль)', /Alpha/i.test(srcDirs), `src: ${srcDirs}`)
 
+// Мод на ходу переписывает cvar, который задаёт Engine.ini сборки (пункт автономного пула STATUS, 2026-10-30): -Verify предупреждает с файлом и
+// строкой; cvar, которого в Engine.ini нет, и сам файл Engine.ini сборки внутри папки мода — молчат. Последним: Engine.ini у цели не раскатан,
+// и -Verify здесь законно даёт код 1 — проверяются только строки.
+mkdirSync(path.join(PDIR, 'gamma', 'ue4ss', 'Scripts'), { recursive: true })
+writeFileSync(path.join(PDIR, 'gamma', 'ue4ss', 'Scripts', 'main.lua'),
+  '-- r.ViewDistanceScale 9 в комментарии не считается\nlocal x = 1\nExecuteConsoleCommand("r.ViewDistanceScale 3")\nExecuteConsoleCommand("r.NotInPack 1")\n')
+writeFileSync(path.join(PDIR, 'gamma', 'Engine.ini'), '[SystemSettings]\r\nr.ViewDistanceScale=2\r\nr.Fog=0\r\n')
+const mp2 = JSON.parse(readFileSync(path.join(PDIR, 'modpack.json'), 'utf8'))
+mp2.engineIni = { file: 'gamma/Engine.ini', target: 'Game/Engine.ini', section: '[SystemSettings]' }
+writeFileSync(path.join(PDIR, 'modpack.json'), JSON.stringify(mp2, null, 2))
+const cv = pps(['-Verify'])
+expect('Engine.ini: мод задаёт на ходу cvar сборки — предупреждение с файлом и строкой',
+  /\[warn\]\s+Gamma Gear sets r\.ViewDistanceScale=3 at runtime \(ue4ss[\\/]Scripts[\\/]main\.lua:3\); the pack's Engine\.ini sets 2/.test(cv.out), cv.out)
+expect('Engine.ini: cvar не из Engine.ini, комментарий и сам Engine.ini сборки — без предупреждений',
+  !/r\.NotInPack/.test(cv.out) && !/main\.lua:1\)/.test(cv.out) && !/Engine\.ini:\d/.test(cv.out), cv.out)
+
 console.log(bad ? `\nСТЕНД: ${bad} провал(ов)` : '\nстенд: все проверки прошли')
 process.exit(bad ? 1 : 0)
