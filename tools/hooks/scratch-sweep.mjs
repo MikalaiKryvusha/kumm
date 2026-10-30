@@ -19,8 +19,8 @@
 // GAP:            сессию, поставленную на /pause дольше суток, хук тоже уберёт — поэтому правило: нужное — в репозиторий; жёсткие ссылки
 //                 удаляются как имена, место возвращается, только если других имён у файла нет
 // ON-REAL-PATH:   NOT YET — 2026-10-30 10:35 a SessionStart event on the real root with --dry-run named 24 idle (empty) session dirs and
-//                 kept 23 fresh ones, this session among them; wiring in .claude/settings.local.json waits for the owner (the auto-mode
-//                 classifier refused the agent's own settings edit)
+//                 kept 23 fresh ones, this session among them; wired by the owner 2026-10-30 11:59 (SessionStart/startup, .claude/settings.local.json);
+//                 the first real sweep — the next chat's start
 // [NOT-TESTED]
 import { readFileSync, readdirSync, statSync, lstatSync, unlinkSync, rmdirSync, existsSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';

@@ -132,7 +132,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **Disk D: cleaned 2026-10-30 10:0x–10:35 by the owner's word** (8 GB free → 288 GB): old session scratchpads (notes kept in
 > `D:/REVISIONS/claude-scratchpads-text-2026-10-30.7z`), `_paksview-2.2.3`, Cyberpunk 2077. Kept for the next tasks: `_paksview-3.0.1` (66 GB, arrow
 > gravity trace) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB, the string sweep). Rule — `HOUSE_RULES.md` §1 rule 15; the sweep hook
-> `tools/hooks/scratch-sweep.mjs` is NOT wired yet — the owner wires it (`SessionStart`, matcher `startup`; the agent's own settings edit was refused).
+> `tools/hooks/scratch-sweep.mjs` is wired since 2026-10-30 11:59 by the owner (`SessionStart`, matcher `startup`, in `.claude/settings.local.json`; the agent's own settings edit is refused by the auto-mode classifier — hand the owner a script). First real sweep — the next chat's start: read its line.
 >
 > **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied
 > (`SvarogsDream/_backups/svarog-saves-2026-10-29_2103-before-debt024`), configs snapped (`_harness/cfg_snap`, 21:04), the 13:43 build `f44c36e` hot-deployed
