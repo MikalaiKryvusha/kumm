@@ -799,10 +799,17 @@ function Invoke-DeployTarget {
     # своих местах, новые паки - на своё место по манифесту (Find-ManifestSlot), а
     # если его не узнать - в конец; порядок целиком по манифесту - только у
     # полной раскатки. [NOT-TESTED]
+    # Прежняя строка, чьего пака уже нет рядом со списком, не сохраняется: переименованный мод
+    # (KrinikUIFixes -> KrinikConanUI, 30.10) оставлял мёртвую строку, и -Verify падал на
+    # «modlist names a missing pak», хотя раскатка прошла. Такой пак игра всё равно не грузит.
+    # [TESTED: 2026-10-30 · fixture-pack 23/23, red on the old engine; live -Only KrinikConanUI dropped the line, -Verify clean · testcases/reports/2026-10-30_conan-krinik-conan-ui-merge.md]
     if ($script:pack.modList -and $script:PakOrder.Count -gt 0 -and $script:OnlyMods) {
         $listPath = Join-Path $Target.Path ($script:pack.modList -replace '/', '\')
         if (Test-Path $listPath) {
-            $kept = @(Get-Content $listPath | ForEach-Object { $_.Trim() } | Where-Object { $_ })
+            $listDir = Split-Path $listPath -Parent
+            $kept = @(Get-Content $listPath | ForEach-Object { $_.Trim() } | Where-Object { $_ } | Where-Object {
+                if (($script:PakOrder -contains $_) -or (Test-Path (Join-Path $listDir $_))) { $true }
+                else { Warn "modlist: dropped $_ - no such pak next to the list"; $false } })
             $added = @($script:PakOrder | Where-Object { $kept -notcontains $_ })
             $merged = New-Object System.Collections.ArrayList
             foreach ($k in $kept) { [void]$merged.Add($k) }

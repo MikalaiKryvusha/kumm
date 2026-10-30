@@ -110,6 +110,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **UPDATE 2026-10-30 14:15 (chat b46b10e8):** done — W33 translation entry renamed (pack `d55a59e`); W35 the player README «Если игра упала — как
+> прислать отчёт» + guide section, reports go to the author's e-mail or PlayGround profile (the owner 14:04–14:05; the section goes LARGE on page 2 of
+> the manual — plan 35 Г11 item 5), texts wait for his read-through; W31 `KrinikConanUI` (pak + four Lua sections) live run U1–U8 pass (pack
+> `cdc5e46`); engine: `-Only` drops a modlist line whose pak is gone. **Next: W32 `KrinikConanGameplay`** (Locomotion + LevelUncapped, same pattern:
+> kit mod + Lua sections; LevelUncapped's tables must stay LAST in the load order), then W34 the Harness dev-only entry, the guide's exclusive-mods
+> section rewritten for the five-mod set. The save was restored to my 14:10 copy after the run; the owner's 13:07 «верни» question still open.
+> The old kit mod folders (`Content/Mods/KrinikUIFixes`, `Saved/Mods/KrinikUIFixes`, 42 files) removed file by file 14:16 — the rebuild is `kit-conanui-edit.py`.
+>
 > **HANDOVER 2026-10-30 13:07 (chat 759898d5 closed by the owner: «этот чат можешь закрывать, продолжить делать сборку в новом чате»).**
 > **13:08 fact: the game was closed (save written 13:07, no new crash), my machine lock released; `Game_0.db` DIFFERS from the 12:05 copy — NOT
 > restored (the owner may have played); the restore waits for his word.** Was: **the game may still be open from my 12:55 run** (god ON by `_config/god-on.sh`; the owner stopped my in-game

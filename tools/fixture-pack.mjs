@@ -126,6 +126,13 @@ expect('паки: -Verify после -Only — код 0, ни одного «not
 writeFileSync(LIST, 'AlphaArms.pak\r\nGammaGear.pak\r\n')
 const ins = pps(['-Deploy', '-Only', 'Beta Bows'])
 expect('паки: -Only нового пака — место по манифесту (перед модом-папкой ниже)', lines() === 'AlphaArms.pak,BetaBows.pak,GammaGear.pak', `${ins.out}\nmodlist: ${lines()}`)
+// Переименованный мод при -Only: строка старого пака, которого уже нет рядом со списком, уходит (живая раскатка 2026-10-30:
+// KrinikUIFixes.pak -> KrinikConanUI.pak, мёртвая строка осталась, и -Verify упал на «modlist names a missing pak»)
+writeFileSync(LIST, 'AlphaArms.pak\r\nOldBows.pak\r\nGammaGear.pak\r\n')
+const ren = pps(['-Deploy', '-Only', 'Beta Bows'])
+expect('паки: -Only после переименования — мёртвая строка старого пака убрана, новый на месте', lines() === 'AlphaArms.pak,BetaBows.pak,GammaGear.pak' && /dropped OldBows\.pak/.test(ren.out), `${ren.out}\nmodlist: ${lines()}`)
+const rv = pps(['-Verify'])
+expect('паки: -Verify после переименования — код 0, ни одного «missing pak»', rv.code === 0 && !/missing pak/.test(rv.out), rv.out)
 
 console.log(bad ? `\nСТЕНД: ${bad} провал(ов)` : '\nстенд: все проверки прошли')
 process.exit(bad ? 1 : 0)

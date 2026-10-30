@@ -408,8 +408,7 @@ Lua-моды UE4SS ждут только отложенными действия
 | Мод | Точка | Как |
 |---|---|---|
 | `ConanCameraControl` | штанга камеры героя, контроллер (дистанции взятия) | Lua UE4SS; сторож зума 30 мс (план 34 — переписать на события) |
-| `KrinikPauseGameInMenu` | `GUIModuleController:ActivateModule` | перехват + опрос 250 мс |
-| `KrinikHudOutline` | `TextBlock` в `W_NewHealthUI_C` (HUD Hosav) | обводка шрифта на новом HUD |
+| `KrinikConanUI` (since 2026-10-30; was KrinikUIFixes + KrinikFpsCounter + KrinikHudOutline + KrinikPauseGameInMenu) | kit pak: overrides of `WBP_ContainerInfo`, `W_QuickLootPanel`, `W_ItemIconTooltipView`, `W_AttributeInfoEntry_PerkView`; Lua: `GUIModuleController:ActivateModule` (pause), `TextBlock` of `W_NewHealthUI_C` (outline, FPS), `WBP_ContainerInfo_C` hooks, `WBP_ButtonBase` glyph boxes | one Lua mod of sections: `Scripts/main.lua` does `pcall(require, "<section>")` for four files in `Scripts/` (UE4SS puts the mod's own `Scripts/` on `package.path`, as `ConsoleCommandsMod` does; section files carry the `krinik_` prefix so a name cannot meet another mod's module); log prefix `[KrinikConanUI:<section>]` |
 | `KrinikLevelUncapped` | таблицы уровней игры | пак-подмена ассетов, без кода |
 | `KrinikAgentRemote` (прибор) | `cmd.txt` → игровой поток | страж `no-component-sweep`: перебор компонентов отказывает (EXP-0330) |
 
