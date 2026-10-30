@@ -132,7 +132,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   originals in `_extras/Wallpapers-source/`, `_config/branding/make-wallpapers.py`); the logo + versions in the main menu (right) and the Esc menu (left)
 >   seen in game 23:29 (review folder 14, the owner's eye pending); the logo intro at start built 23:38 (`KrinikIntro`, `Content/Movies/.mp4` — on screen not
 >   seen by a background frame: the owner's eye at the next start). **W11 Krinik on top of the Esc mod list — DONE in game 23:44** (review folder 15,
->   `krinik_pause_in_menu.lua` 0.15.0, the owner's eye at a real Esc pending). Next in the loop (quick list below): W4 minimap, then W13/W30 arrows, W29 shouts.
+>   `krinik_pause_in_menu.lua` 0.15.0, the owner's eye at a real Esc pending). **W30 arrow blood — code in place (pack 1e5c144), test pending:** the lazy
+>   hook installs (A1 pass); FIRST next: the direct call `TakeProjectileDamage` on the hero's component — the remote lookup via `GetOwner()` failed silently,
+>   try `GetComponentByClass` (cases `TC_conan_arrow_blood_2026-10-30.md`, notes `mods/KrinikConanGraphics.md`). Then W4 minimap, W13 arrows, W29 shouts.
 > - **19:08 «автономно» → `/dayloop`.** **W6 corpse prompt on two lines and W10a quick-loot size — DONE in game 19:28–19:42, waiting for the owner's eye**
 >   (review folder `НА ОТСМОТР НИКОЛАЕМ\11 подсказка над трупом и окно лута`, report `testcases/reports/2026-10-30_conan-corpse-prompt-two-lines-quickloot-size.md`):
 >   icon pad 1 (pad 8 was a detector error, EXP-0392), «Забрать все (удерж.)», the loot window keeps one size (by remote; his wheel check pending). The owner's own

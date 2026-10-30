@@ -18,7 +18,15 @@ deployed by `Deploy-ModPack.ps1` through the manifest's `engineIni` field.
 - Can't: `SetLifeSpan` from Lua (TrivialObject); changing LifeSpan in a pre-hook of `SpawnDecalAtLocation` (UE4SS does not pass it on).
 - Tested: report `testcases/reports/2026-10-30_conan-lingering-blood.md`. Open: the slider (W24); the cost below `os.clock`'s 1 ms step.
 
-## Section 2 — arrow hits leave blood (W30, open)
+## Section 2 — arrow hits leave blood (W30, code in place 2026-10-30 23:53, the direct-call test pending)
+
+Built: a post-hook of `BP_CollisionComponent_C:TakeProjectileDamage` set LAZILY on the first `BP_CollisionComponent_C` (at mod start the BP class
+is not loaded: «no UFunction with the specified name was found»); on a Character target, not blocked — `SpawnDecalAtLocation(/Game/Effects/blood/
+M_blood_ground_decal, (64, 67…95, 67…95), feet = actor Z − capsule half height, Pitch −90, random Yaw, 3 s)` + `SetFadeOut(0, 3)` so section 1 extends it.
+The native stain (hook 23:50): size (32, 67…95, 67…95), Pitch −90, random Yaw, life 3 s. Cases `testcases/TC_conan_arrow_blood_2026-10-30.md`
+(A1 pass; A2 blocked — the remote's component lookup fails silently).
+
+### Before the code (recon)
 
 The owner: «Стрелы её не кладут - странно. Можем сделать, чтобы стрела, попадающая во врага - тоже кровь на землю давала?» (2026-10-30 ≈12:5x).
 Route (plan 36 W30): on the target's projectile hit (`BP_CollisionComponent.TakeProjectileDamage`) spawn `M_blood_ground_decal` the way
