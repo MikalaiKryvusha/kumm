@@ -121,8 +121,9 @@ WAL mode; after a crash `Game_0.db-wal` stays, and copying only `Game_0.db` back
 **Trigger:** a crash in my run → stand check first; a second crash → no more live probes this hour.
 **Third crash, 16:20:21, the same day:** a W6 stand step called `BaseBPCombat_C:KillCharacter(0, FText('Krinik'), player, {}, 0.0, player)` on an NPC
 150 m away — the game crashed (ACCESS_VIOLATION 0x18); `save-restore.sh` removed the crash's `-wal/-shm` and restored the 16:17 copy intact.
-Correction 16:5x: the cause is NOT known — the same call with `{}` and `FText('')` killed NPCs on 2026-10-28 (case R1, `TC_conan_corpse_prompt_left_of_quickloot`);
-today's differences: the NPC 150 m away (perhaps not fully loaded), a non-empty killer name. Live remote probes stop until a cheaper stand exists.
+Correction 16:5x: not the `{}` — the same call with `{}` killed NPCs on 2026-10-28 (case R1). The likely cause is the EXP-0386 class again: the call
+looped `FindAllOf('BaseBPCombat_C')` — a CHARACTER ancestor class, not a component — and called `GetOwner()` on every result, class defaults included.
+The 10-28 way: call `KillCharacter` on the live NPC found by a full-name filter.
 mechanized: no
 
 ### EXP-0386 · 2026-10-30 · ❌ · #conan #ue4ss #umg #remote #crash #widget
