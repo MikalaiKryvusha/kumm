@@ -91,6 +91,20 @@
 
 ## Entries
 
+### EXP-0391 · 2026-10-30 · ❌ · #conan #deploy #owner-game #process-check
+class: state-assumed
+**Lesson:** I closed my game at 18:54, the owner launched his own at 18:55 (parent `explorer.exe`), and at 18:59 I ran `Deploy-ModPack.ps1 -Deploy -Only KrinikConanUI`
+into the Mods folder of his RUNNING game — the deploy has no running-game check (the launch scripts do, exit 2); it reported ok. Only `launch-bg.ps1` refusing told me.
+**Trigger:** before any `-Deploy` or file write into the game folder → `Get-Process ConanSandbox-Win64-Shipping`; present and not my PID → stop, it is the owner's game.
+mechanized: no (candidate: the same exit-2 check inside `Deploy-ModPack.ps1` for `gameExe`)
+
+### EXP-0390 · 2026-10-30 · ❌→✅ · #pdf #chrome #layout #false-fit
+class: claim-wider-than-observation
+**Lesson:** a Chrome headless `--print-to-pdf` page whose element is wider than the page is SCALED DOWN as a whole — the guide's install section «fit» on sheet 1
+only while a contact card overflowed sideways; fixing the card un-scaled the document and pushed two lines to sheet 2. Fit is judged only after no element overflows.
+**Trigger:** a print layout that suddenly fits or breaks after an unrelated width change → look for horizontal overflow first.
+mechanized: no
+
 ### EXP-0389 · 2026-10-30 · ❌→✅ · #testing #markers #sed #fraud-class
 class: claim-wider-than-observation
 **Lesson:** flipping my section's `-- [NOT-TESTED]` with `sed -i 's|^-- \[NOT-TESTED\]$|-- [TESTED: …]|'` flipped ALL six markers of
