@@ -127,6 +127,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **17:01 the pack is on GitHub:** `git push origin main` → `cd6711a..4951730` (the private repo `conan-exiles-modpack`, visibility PRIVATE checked first) —
 >   `[OWNER]` «Да, в приватный реп» · 2026-10-30 17:01. From now on push the pack to BOTH: `git push local main` and `git push origin main`. The same line in
 >   `HOUSE_RULES.md` §2 was refused to me by the auto-mode classifier («Self-Modification») — the owner edits the rule or allows it; until then this line holds.
+> - **The owner asks (17:04): «можно удалить с F временное хранилище? ГитХаб LFS работает?»** — not yet: GitHub LFS upload NOT verified (only the API answers);
+>   Unliminium's 909 MB of LFS live only on F as far as this clone shows. Order before any delete: in the Unliminium repo add/fetch its GitHub remote, check the
+>   account's LFS quota, `git lfs push --all <github>`, then `git lfs ls-files` vs the server (`git lfs fsck`/a fresh clone) — only then the F copy may go, by his word.
 > - **The crash README is accepted** (`[OWNER]` «ок, годится» · 2026-10-30 17:03); it now points to the guide section. **Next, his order:** «Можно в PDF красиво
 >   оформить, в наш Юзер Мануал разделом отдельным, и на него сослаться» — the guide already has the section (`docs/guide/guide-3.0.1.html`, «Если игра упала —
 >   как прислать отчёт»); make it a separate, well-laid-out page (plan 35 Г11 item 5: LARGE on page 2), rebuild the PDF (recipe HOUSE_RULES_REFERENCE §6), look at it.
