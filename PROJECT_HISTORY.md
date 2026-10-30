@@ -1,5 +1,13 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-31 00:12 +03:00 — STATUS: the W6 centred entry's head (moved verbatim at the closing of chat 0d831a73)
+
+> - **W6 CENTRED — DONE in game 21:29 (pack ca75268), the owner's eye pending** (mock-up «да, верно» 19:56; frame `5 ГОТОВО` in review folder 11): our
+>   line T_CorpseText1 above the row (kit `LINE1_ENABLED`, FS_Text_Heading_6 font, colour 233/213/193) + `krinik_ui_fixes.lua` 1.3.0 + the override row
+>   «или нажмите {0}, …» — two centred lines, one size, one colour. **The stand:** open the strip BY CODE (`[OWNER]` «саму плашку кодом открывай» · 21:14):
+>   `LoadAsset(WBP_ContainerInfo_C)` → `WidgetBlueprintLibrary:Create(pc, cls, pc)` → `AddToViewport(50)` → `SetObject(<nearest Corpse_C>, 0)`; aiming
+>   the camera at a body is unreliable (bug 70 — the old FIND took `DismemberedBodySkeletalMesh_C` pieces). The 20:4x «line breaks the strip» was false (EXP-0393).
+
 ## 2026-10-30 23:56 +03:00 — STATUS: the 18:15 session, the 19:08 dayloop, the judge caveat, the quick list and the day's rules (moved verbatim at the closing of chat 0d831a73)
 
 > - **Session 18:15 — the owner works over Vibepollo:** «по возможности работай с игрой в фоне, мнге будет более важно читать ход работы твоей в ВС код и слушать

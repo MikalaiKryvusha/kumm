@@ -113,11 +113,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **The 16:55 handover (GitHub/LFS, Unliminium, W18a, the crash sheet, the save question, the F storage) — moved verbatim to the chronicle, entry 2026-10-30 21:3x.**
 > - **Moved verbatim to the chronicle, entry 2026-10-30 23:56 +03:00:** the 18:15 session (volume 1 % applied), the 19:08 dayloop (W6 two lines, W10a),
 >   the 16:59 judge caveat, the quick list and the day's hard rules. Still the owner's: the W10a wheel check (the loot window keeps one size).
-> - **W6 CENTRED — DONE in game 21:29 (pack ca75268), the owner's eye pending** (mock-up «да, верно» 19:56; frame `5 ГОТОВО` in review folder 11): our
->   line T_CorpseText1 above the row (kit `LINE1_ENABLED`, FS_Text_Heading_6 font, colour 233/213/193) + `krinik_ui_fixes.lua` 1.3.0 + the override row
->   «или нажмите {0}, …» — two centred lines, one size, one colour. **The stand:** open the strip BY CODE (`[OWNER]` «саму плашку кодом открывай» · 21:14):
->   `LoadAsset(WBP_ContainerInfo_C)` → `WidgetBlueprintLibrary:Create(pc, cls, pc)` → `AddToViewport(50)` → `SetObject(<nearest Corpse_C>, 0)`; aiming
->   the camera at a body is unreliable (bug 70 — the old FIND took `DismemberedBodySkeletalMesh_C` pieces). The 20:4x «line breaks the strip» was false (EXP-0393).
+> - **W6 CENTRED — DONE in game 21:29** (details moved verbatim to the chronicle, entry 2026-10-31 00:12 +03:00).
 >   **Not yet seen:** the strip the GAME creates on a real look at a corpse (the frame is of a strip created by code — same class and Lua, but a
 >   second instance); a chest proper (a campfire strip — our line collapsed — seen 22:33).
 >   **The backing covers the line ends — DONE in game 22:32, ACCEPTED by the owner 22:38** («вот, теперь у тебя плашка получилась!»; his ask 21:40–21:45; review folder `12 подложка над трупом
@@ -128,7 +124,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **FIRST next chat (the owner's debt, 2026-10-31 00:10 demo):** (1) **bug 71 — the main menu background is all white** («все белое»): control
 >   builds — without our `W_MainMenu_MainMenu` override, then without `Movies/.mp4` (`bugs/71_conan_main_menu_background_white.md`); (2) then the main
 >   menu: our logo smaller and further right (`[OWNER]` «потом в меню главном наш логотим сделй меньше и правее» · 00:11; kit `kit-conanui-edit.py`
->   MENUS, `OUR_LOGO_H_SHARE` / `LOGO_GAP_SHARE` for the main menu). Then the W30 arrow test below.
+>   MENUS, `OUR_LOGO_H_SHARE` / `LOGO_GAP_SHARE` for the main menu). (3) The intro reworked: `[OWNER]` «показываем оба лого - оригинальный и нашей
+>   сборки и показываем на все время загрузки игры, а внизу под ними в центре крутим спинер прогресса медленно» · 00:12 — recon first: the game's
+>   `bWaitForMoviesToComplete=True` makes a long movie BLOCK the load; a looped movie stopped when loading ends (`PlaybackType` / `bAutoCompleteWhenLoadingCompletes`)
+>   lives in the pak's defaultconfig — find a way (`researches/conan-intro-movie/`). Then the W30 arrow test below.
 > - **22:55 «работай автономно» → `/dayloop`. W26 the build's logo:** wallpapers ACCEPTED 22:55 (the owner's A3-smaller, `_extras/Wallpapers/*.jpg`, the clean
 >   originals in `_extras/Wallpapers-source/`, `_config/branding/make-wallpapers.py`); the logo + versions in the main menu (right) and the Esc menu (left)
 >   seen in game 23:29 (review folder 14, the owner's eye pending); the logo intro at start built 23:38 (`KrinikIntro`, `Content/Movies/.mp4` — on screen not
