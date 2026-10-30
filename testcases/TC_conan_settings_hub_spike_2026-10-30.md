@@ -1,0 +1,24 @@
+# TC — plan 38 phase 0: a window from the game's own settings widgets, driven from Lua (spike)
+
+> **Created:** 2026-10-30 · **Parent:** `plans/38_epic38_phase0_widget_spike.md` (criteria 1–4)
+> **Status:** cases written 15:0x; run 15:02–15:08 — creation and setting PASS, real clicks into created vanilla rows FAIL in 3 placements (report testcases/reports/2026-10-30_conan-settings-hub-spike.md)
+> **Outbound:** the look side by side with the game's «Настройки» — the owner's eye
+
+**Goal (Achieve).** Prove or refute that Lua can create `WBP_Settings_Subheader`, `WBP_Setting_Checkbox`, `W_EditableLabeledSlider`, `WBP_Setting_Dropdown`,
+receive their changes, show them over the hub and close them on Esc.
+
+**Stand.** The owner's save copied; world entry by the remote; the hub opened by `ActivateModule('CharacterInventory')`; the game in front for real
+clicks (`mouse-seq.ps1`, `wait-input-idle.ps1` first); one remote call per widget step (the 2026-10-30 00:22 crash lesson). Techniques: probe of
+the API (S1), creation (S2–S4), event path by a real click (S5, S6), control — a click outside the widget logs nothing (S7), Esc (S8), look (S9).
+
+| # | Case | Steps | Expected | Status |
+|---|---|---|---|---|
+| S1 | Native API | `funcs SettingsWidgetBase`, `…CheckboxWidgetBase`, `…DropdownWidgetBase`, `EditableLabeledSlider` | setters/getters/delegates named in the recon doc | pass — the native API read live (ForEachFunction/ForEachProperty), written in researches/conan-mod-settings-hub/vanilla-settings-widgets.md; signatures: SetValue(v, broadcast), SetIsToggledOn(on, ?, ?), AddOption(FText, id), SelectedOptionByID(id, ?) |
+| S2 | Create a header | `WidgetBlueprintLibrary:Create(…WBP_Settings_Subheader_C…)`, `Label` set, `AddToViewport` | «Проба настроек» on screen in the game's heading style | partial — created and shown by WidgetBlueprintLibrary:Create + AddToViewport; the label shows «EXAMPLE TEXT»: PreConstruct copies the Label variable — set Label BEFORE adding (next run) |
+| S3 | Create a slider row | the same for `W_EditableLabeledSlider_C`, label and range set | a slider row on screen | pass — created, MinValue/MaxValue/StepValue/SetValue(300, false) took, «300,00» on screen; the slider row has NO label of its own (a label is the row container's) |
+| S4 | Create a checkbox and a dropdown row | the same | both rows on screen | pass — checkbox created and toggled on by SetIsToggledOn(true,false,false) (tick on screen); dropdown: three options added, GetOptionCount 3; SelectedOptionByID(10,false) left -1 |
+| S5 | Slider change reaches Lua | `RegisterHook` on its `BndEvt__S_Value…OnFloatValueChangedEvent`; a real drag | a log line with the new value | blocked — no real drag done this run (context budget); the hook on BndEvt…OnFloatValueChangedEvent registered |
+| S6 | Checkbox change reaches Lua | the hook found by S1; a real click | a log line with the new state | fail ×3 — a REAL click (mouse-seq move+lclick, cursor read 2192×603 = on the checkbox by frame) did not toggle it and no hook fired, in three placements: viewport Z 50, viewport Z 10000, child of the hub's root Overlay (W_Carousel_C). Control: the same real click on the hub tab «Таланты» switched the tab |
+| S7 | Control | a real click on empty screen | no log line | pass by the S6 control — the input path works for the game's own widgets |
+| S8 | Esc | a real Esc with the rows over the hub | the rows go, the hub stays | skipped — next run |
+| S9 | Look | a crop of ours next to a crop of the game's «Настройки» screen | the same fonts, frames, colours | skipped — next run (frames spike1/spike4 show the game's fonts and frames on our rows) |
