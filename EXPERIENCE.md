@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0377 · 2026-10-30 · ❌→✅ · #conan #uasset #zen #crash #owner-saw-first
+class: tool-path-unproven
+**Lesson:** a NEW property name cannot be spliced into a zen chunk. `uaj addprop` added `WrapTextAt` to `W_EFT_Tooltip` (JaarFishing); the name
+was not in the package name map, the chunk was glued under the OLD zen header, and the game died at mod load («ObjectSerializationError …
+W_EFT_Tooltip») — the owner saw the hang. `addprop` had been `[NOT-TESTED]` and worked once only because `RenderOpacity` already existed in that
+asset. Now uaj refuses an absent name (`REFUSED`) and `patch-mod-asset.py` stops the build on it. Before shipping any splice-edit of a mod pak:
+check the names it needs are in the name map; a new name means the to-zen route — or a Lua fix when the asset will not yield. Also: a widget
+class of a mod window can be reloaded on every window open — a one-time template fix silently stops holding.
+mechanized: yes — uaj REFUSED + patcher stop (guard-test: exit 1, no pak; control rebuild byte-identical)
+
 ### EXP-0376 · 2026-10-30 · ❌→✅ · #conan #localization #scanner #bytecode #owner-saw-first
 class: check-silently-narrowed
 **Lesson:** a scan pass switched OFF for speed silently drops a whole class. `missing-bytecode-ftext.py` lost its UTF-16 pass on 2026-10-26 (the lazy

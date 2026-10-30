@@ -107,13 +107,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW 2026-10-30 08:2x — the owner plays; the fishing fixes wait for the game to close.** His eye on the 01:08 items: «всё окей, нравится»
-> (homeworks/03). Done this morning: farewell hook + `/resume` Step 0 (KUMM `76a02f9`, KAIF #181); VS Code Effort row — user setting `opus[1m]`
-> → `opus` (`researches/claude-code-vscode-effort/`); token methodology (`researches/token-economy/`, copy on the desktop); the rebuild tool
-> cleans its work dirs (pack `f909466`). **Next, the moment the game is closed:** plan 36 W17 (fishing hover flicker — `W_EFT_Tooltip` recipe row,
-> prepared in pack `3fd2ccd`) and W18 (untranslated profile-slot hover — stitch → kit compile → `locres-regress.py` → deploy, README steps 4–7 of
-> `ConanExiles/_config/localization/`), then the twin sweep of the restored UTF-16 scan over all mods. New owner items W18a, W19–W24 (mod settings
-> windows in the game's style, Xevyr / Krinik buttons with tabs) — heavy, planned after.
+> **NOW 2026-10-30 09:15 — autonomous («работай автономно» after «я закончил, комп твой»).** His eye on the 01:08 items: «всё окей, нравится»
+> (homeworks/03). Done this morning: farewell hook + `/resume` Step 0 (KUMM `76a02f9`, `0badf8c`, KAIF #181); VS Code Effort row — user setting
+> `opus[1m]` → `opus` (`researches/claude-code-vscode-effort/`); token methodology (`researches/token-economy/`, desktop copy); the rebuild tool
+> cleans its work dirs (pack `f909466`); **fishing tooltips W17 mostly done, W18 profile-slot hover Russian, «(удерж.)» deployed** (pack `be6488f`,
+> report `testcases/reports/2026-10-30_conan-fishing-tooltip-translation.md`; on the way my addprop pak CRASHED the game at load — the owner saw the
+> hang; guarded, EXP-0377). **The owner's three BIG debts, his order of 08:3x:** W14 shooting while jumping (plan 37), W15 Oblivion Remastered arrow
+> ballistics with a raised minimum speed (decided 08:33), W24 one «Настройки модов» button + one hub of mod settings windows in the game's style.
+> Small left: W18 twin sweep (full unpack ≈12 GB — disk D: has ≈12 GB free, check first), W18a captions, W10a quick-loot jump, H1 «(удерж.)» by eye.
 >
 > **HANDOVER 2026-10-30 01:08 — the Conan build: the owner's four evening items are DONE, his eye pending** (`[OWNER]` «продолжаем делать сборку Конана. Работай
 > автономно. в Фореграунд игру открывай для тестов» · 2026-10-29 ≈23:43; the previous handover 22:58 — chronicle, entry 2026-10-30 01:08). Done in this chat:
