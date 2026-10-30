@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0387 · 2026-10-30 · ❌ · #conan #ue4ss #remote #crash #stand #save #owner-saw-first
+class: kept-poking-after-failure
+**Lesson:** after a second crash of my own remote experiments I relaunched and went on — world entry no longer worked (the restored save was rewritten
+by the game at its next start, 663 552 → 659 456 bytes, 15:40:05) and the owner had to stop me: «что нахуй с твоими тестами??? … почему сломалось то,
+что два часа назад ты делал?????». A crash is not a step of the experiment, it changes the stand. After ANY crash: close the game, restore the save,
+check the stand works (world entry, one frame) BEFORE the next probe; two crashes in a row — stop probing live, go to research
+(`/bug-research`) and atomic steps, one action per remote call (a call that crashed held two actions — the cause is now unknown).
+The broken entry's cause, found 15:50 from the game log («No save game profiles found») and `pragma integrity_check` («malformed»): the save is SQLite in
+WAL mode; after a crash `Game_0.db-wal` stays, and copying only `Game_0.db` back lets the next start replay the stale log onto it. Restore by
+`ConanExiles/_config/save-restore.sh` (removes `-wal/-shm`, checks before and after).
+**Trigger:** a crash in my run → stand check first; a second crash → no more live probes this hour.
+mechanized: no
+
 ### EXP-0386 · 2026-10-30 · ❌ · #conan #ue4ss #umg #remote #crash #widget
 class: wrong-api-assumption
 **Lesson:** `FindAllOf('WindowRoot')` + `w:IsOpen()` / `w.WidgetTree.RootWidget` over EVERY result crashed the game inside UE4SS.dll (ACCESS_VIOLATION

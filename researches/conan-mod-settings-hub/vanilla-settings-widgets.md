@@ -24,8 +24,10 @@ All text uses the game's styles (`FS_Text_Body_3`, `FS_Text_Heading_4`) — rows
   `SetKeyShortcutName`, `SetLabel`, `SetIcon*`, `Get/SetUserDataAs*`; P: `SignalClicked/Pressed/Released/Toggled/MouseEnter/MouseLeave`, `StyleAsset(Class)`,
   `ToggleBehaviour`, `IsToggledOn`, `KeyShortcutName`, `Anim*`, `ImageBackground/Frame/Icon`. The button itself is `SelfHitTestInvisible` (4); the click lands on its
   Visible `ImgBackground` and bubbles to it. A created checkbox's `ButtonCheckbox` and the live hub `CloseButton` carry the same flags (enabled, not focusable,
-  own StyleAsset instance) — the dead click is not a flag on the button (spike run 2, S10). Open: whether a module window (`WindowRoot`) ancestor is what
-  makes an FLX button live (S11).
+  own StyleAsset instance) — the dead click is not a flag on the button (spike run 2, S10). Run 3 (15:3x): a SLOT parent is not enough — a created
+  checkbox put inside the live vanilla popup `W_InventorySettings_C` stays dead while the popup's own FLX «Отмена» clicks. The OUTER differs: 48 of 49 live
+  FLX buttons live in some window's `WidgetTree`; ours (`Create(pc, class, pc)`) live under the GameInstance. `WidgetBlueprintLibrary:Create(<window>, class,
+  nil)` creates INSIDE `<window>.WidgetTree` (UE5 owning-widget path) — whether such a row clicks is untested: adding it crashed the game (S11).
 
 Next (superseded by the line above for the API): `pult.sh "funcs SettingsWidgetBase"` / `SettingsCheckboxWidgetBase` / `SettingsDropdownWidgetBase` / `EditableLabeledSlider` for their setters,
 getters and delegates; how `W_Settings_Gameplay` feeds one row (its assets are unpacked in the session scratchpad by the same command).
