@@ -16,7 +16,7 @@
 // Это гигиена стражей (самопроверка прибора), а не функциональный прогон: функциональные прогоны — настоящий
 // коммит и настоящий вызов Bash — описаны в отчётах testcases/reports/.
 import { spawnSync, execFileSync } from 'node:child_process';
-import { mkdtempSync, writeFileSync, mkdirSync, readdirSync, statSync, unlinkSync, rmdirSync, copyFileSync, utimesSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, mkdirSync, readdirSync, statSync, unlinkSync, rmdirSync, copyFileSync, utimesSync, readFileSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -397,6 +397,49 @@ try {
   check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [TAC], { input: '{not json', encoding: 'utf8' }).status, 0);
 } catch (e) {
   check('part I ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
+}
+
+// ---------- J. the farewell-capture hook (Stop): the closing turn's last message replaces FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md
+// (2026-10-30: владелец каждый раз копировал прощание руками в новый чат — «а так оно будет автоматически в файл собираться»)
+console.log('J. farewell-capture');
+try {
+  const FC = resolve(ROOT, 'tools/hooks/farewell-capture.mjs');
+  const dir = newTmp();
+  const out = join(dir, 'FAREWELL.md');
+  const U = (content, extra = {}) => JSON.stringify({ type: 'user', message: { content }, ...extra });
+  const A = (...content) => JSON.stringify({ type: 'assistant', message: { content } });
+  const skill = (name) => ({ type: 'tool_use', name: 'Skill', input: { skill: name } });
+  const result = U([{ type: 'tool_result', content: 'ok' }]);
+  const run = (lines, extra = {}) => {
+    const tp = join(dir, 't' + total + '.jsonl');
+    writeFileSync(tp, lines.join(NL) + NL);
+    spawnSync(process.execPath, [FC, '--out', out], { input: JSON.stringify({ hook_event_name: 'Stop', transcript_path: tp, ...extra }), encoding: 'utf8' });
+    try { return readFileSync(out, 'utf8'); } catch { return '(none)'; }
+  };
+  writeFileSync(out, 'OLD' + NL);
+  check('a turn without closure leaves the file alone', run([U('сделай X'), A({ type: 'text', text: 'Сделал X.' })]), 'OLD' + NL);
+  check('/end-chat-soft by the Skill tool: the last text replaces the file whole', run([
+    U('закрывай чат'), A({ type: 'text', text: 'Закрываю.' }, skill('end-chat-soft')), result, A({ type: 'text', text: 'Чат закрыт. Итог: …' }),
+  ]), 'Чат закрыт. Итог: …' + NL);
+  check('/end-chat-force typed by the owner as a command', run([
+    U('<command-name>/end-chat-force</command-name>'), A({ type: 'text', text: 'Срочно закрыто.' }),
+  ]), 'Срочно закрыто.' + NL);
+  check('text before the last tool call is not part of the farewell', run([
+    U('закрывай'), A(skill('end-chat-soft')), result, A({ type: 'text', text: 'черновик' }, { type: 'tool_use', name: 'Bash', input: {} }), result,
+    A({ type: 'text', text: 'Первая часть.' }), A({ type: 'text', text: 'Вторая часть.' }),
+  ]), 'Первая часть.' + NL + NL + 'Вторая часть.' + NL);
+  check('last_assistant_message field wins over the transcript', run([U('закрывай'), A(skill('end-chat-soft')), result, A({ type: 'text', text: 'из журнала' })],
+    { last_assistant_message: 'из поля' }), 'из поля' + NL);
+  check('«спасибо» after the farewell does not overwrite it', run([
+    U('закрывай'), A(skill('end-chat-soft')), result, A({ type: 'text', text: 'Прощание.' }), U('спасибо'), A({ type: 'text', text: 'Пожалуйста.' }),
+  ]), 'из поля' + NL);
+  check('the skill body (isMeta) is not an owner prompt: closure still seen', run([
+    U('закрывай'), A(skill('end-chat-force')), result, U('Base directory for this skill: …', { isMeta: true }), A({ type: 'text', text: 'Закрыто по навыку.' }),
+  ]), 'Закрыто по навыку.' + NL);
+  check('control: another skill (resume) is not a closure', run([U('resume'), A(skill('resume')), result, A({ type: 'text', text: 'Начинаю.' })]), 'Закрыто по навыку.' + NL);
+  check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [FC, '--out', out], { input: '{not json', encoding: 'utf8' }).status, 0);
+} catch (e) {
+  check('part J ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
 
 for (const d of tmps) { try { removeByEnumeration(d); } catch (e) { console.log(`note: temp left at ${d} (${e.code || e.message})`); } }

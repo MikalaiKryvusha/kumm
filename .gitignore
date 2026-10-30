@@ -44,3 +44,8 @@ tools/hooks/.russian-read.stamp
 tools/hooks/.knowledge-hook.json
 .kaif/.contour-tmp/
 interviews/decisions/*.lock
+
+# Прощальное сообщение закрытого чата (tools/hooks/farewell-capture.mjs): состояние сессии для следующего /resume,
+# не история проекта; хук пишет его ПОСЛЕ коммита закрытия, и в git оно висело бы вечной правкой
+/FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md
+/FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md.tmp

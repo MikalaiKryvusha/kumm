@@ -12,6 +12,21 @@ A new session starts with empty context. This skill rebuilds the picture fast an
 > is read only after the Step-2 announcement (`AGENT_GUIDE.md` → "A leading skill word is an
 > order"; the mechanical half is the `prompt-resume-word.mjs` hook of the refresh-hooks module).
 
+## Step 0. The first `/resume` of a chat — read the previous chat's farewell
+
+**When this is the first `/resume` of this chat** (you have not read the file in this chat yet — an hourly context refresh or a
+second `/resume` later in the same chat skips this step), read `FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md` at the project root
+FIRST, in full, before the canon. It is your own closing message from the previous chat — the summary of everything that
+chat did, the owner's items waiting for his eye, the open debts, the next steps — written by you to yourself and to the owner.
+
+1. **Read it:** `FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md` (a missing file → say "no farewell file" in the announcement and go on).
+2. **Check it is fresh:** its modification time against the newest closing commit (`git log -1 --format=%ci`) — a file older than
+   that commit belongs to an earlier chat (the hook missed the last closure): say so in the announcement and trust `STATUS.md`.
+3. **Use it:** the farewell names what the previous chat promised to show and to do first — carry those items into Step 2.
+
+`[OWNER] 2026-10-30 · the verbatim lives in the header of tools/hooks/farewell-capture.mjs`. The file is written by the Stop hook `tools/hooks/farewell-capture.mjs`:
+the last message of the turn that ran `/end-chat-soft` or `/end-chat-force` replaces the file whole.
+
 ## Step 1. Read ALL the canon documents of the KAIF framework (in parallel)
 
 **Read every canon document — the full set, not a slice.** A session that skips one resumes with a
