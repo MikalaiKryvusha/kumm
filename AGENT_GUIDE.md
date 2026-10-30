@@ -62,6 +62,10 @@ relies entirely on this document to get to work.
 > `/guarded-loop` when the owner asked for a protected run) and grind the
 > backlog, committing progress and self-restarting after each task. Stop only on the skill's stop
 > conditions. Do not enter a loop if the human just gave a specific interactive task.
+> **In KUMM the owner's «работай автономно» / «работай сам» / «автопилот» IS the order to enter `/dayloop` at once — after the tasks of the same
+> message, never instead of the loop.** The loop ends only by his word or by the context-budget closure (75 % → `/end-chat-soft`, whose farewell
+> the farewell hook files). The mechanical half — `tools/hooks/autonomy-guard.mjs` (Stop + UserPromptSubmit) refuses a voluntary stop while the
+> order stands. `[OWNER]` 2026-10-30 · verbatim in the hook header; the miss it closes — EXP-0379.
 
 > ⏰ **WORKING UNTIL A NAMED TIME — the deadline is the START of the soft closure, not a finish
 > line.** When the human names an end time for autonomous work ("work until 11", "work for an

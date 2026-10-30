@@ -83,5 +83,9 @@ function main() {
   renameSync(tmp, out);
 }
 
-try { main(); } catch { /* fail-open: хук никогда не мешает остановке */ }
-process.exit(0);
+// Прямой запуск — хук; импорт (autonomy-guard берёт readTurn) — только функции, без чтения stdin и выхода.
+const isDirectRun = process.argv[1] && import.meta.url.endsWith(process.argv[1].split(/[\\/]/).pop());
+if (isDirectRun) {
+  try { main(); } catch { /* fail-open: хук никогда не мешает остановке */ }
+  process.exit(0);
+}

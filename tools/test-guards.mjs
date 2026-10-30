@@ -445,6 +445,44 @@ try {
   check('part J ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
 
+// ---------- K. the autonomy-guard hook (UserPromptSubmit + Stop): «работай автономно» holds until 75 % of the window or a closure
+// (2026-10-30: агент сам кончил ход при 68 % окна, не вошёл в /dayloop, и чат так и не закрылся — владелец: «Почему так не сработало?»)
+console.log('K. autonomy-guard');
+try {
+  const AG = resolve(ROOT, 'tools/hooks/autonomy-guard.mjs');
+  const dir = newTmp();
+  const st = join(dir, 'autonomy.json');
+  const tp = (pct, lines = []) => {
+    const f = join(dir, 'k' + total + '.jsonl');
+    const tok = Math.round(10000 * pct);   // CONTEXT_BUDGET_WINDOW 1 000 000 below
+    writeFileSync(f, [JSON.stringify({ type: 'user', message: { content: 'дальше' } }), ...lines,
+      JSON.stringify({ type: 'assistant', message: { content: [{ type: 'text', text: 'Отчёт.' }], usage: { input_tokens: 1, cache_read_input_tokens: tok, cache_creation_input_tokens: 0 } } })].join(NL) + NL);
+    return f;
+  };
+  const env = { ...process.env, CONTEXT_BUDGET_WINDOW: '1000000' };
+  const prompt = (p) => spawnSync(process.execPath, [AG, '--state', st], { input: JSON.stringify({ hook_event_name: 'UserPromptSubmit', prompt: p }), encoding: 'utf8', env });
+  const stop = (pct, extra = {}, lines) => {
+    const r = spawnSync(process.execPath, [AG, '--state', st], { input: JSON.stringify({ hook_event_name: 'Stop', transcript_path: tp(pct, lines), ...extra }), encoding: 'utf8', env });
+    const m = /"reason":"([^"]{0,200})/.exec(r.stdout || '');
+    return m ? (m[1].includes('закрывай') ? 'block-close' : 'block-work') : 'pass';
+  };
+  check('no marker: the stop passes', stop(50), 'pass');
+  prompt('работай автономно');
+  check('«работай автономно» → a stop at 68 % is blocked: work on', stop(68), 'block-work');
+  check('at 76 % the stop is blocked: close the chat', stop(76), 'block-close');
+  check('a declared autonomy-pause passes', stop(68, { last_assistant_message: 'Всё ждёт владельца. <!-- autonomy-pause: нужен его вход в Steam -->' }), 'pass');
+  check('a turn that ran /end-chat-soft passes', stop(80, {}, [JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', name: 'Skill', input: { skill: 'end-chat-soft' } }] } })]), 'pass');
+  check('…and the closure switched the mode off', stop(68), 'pass');
+  prompt('работай сам, я занят');
+  prompt('а почему так вышло?');
+  check('a question mid-autonomy keeps the mode on', stop(60), 'block-work');
+  prompt('стоп');
+  check('«стоп» switches the mode off', stop(60), 'pass');
+  check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [AG, '--state', st], { input: '{not json', encoding: 'utf8' }).status, 0);
+} catch (e) {
+  check('part K ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
+}
+
 for (const d of tmps) { try { removeByEnumeration(d); } catch (e) { console.log(`note: temp left at ${d} (${e.code || e.message})`); } }
 console.log(`-- ${total - bad} of ${total} as expected`);
 process.exit(bad ? 1 : 0);

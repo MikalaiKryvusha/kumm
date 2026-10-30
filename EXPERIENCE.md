@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0379 · 2026-10-30 · ❌→✅ · #autonomy #context-budget #closure #owner-saw-first
+class: guessed-instead-of-measured
+**Lesson:** under «работай автономно» (no end time) I ended turns «at a natural cut» with a report, judging the context «large» by feel — it was
+68 %, below the 70 % warning; I never entered `/dayloop`, so the chat never reached the 75 % closure and no farewell was filed. The owner had to
+ask «Почему так не сработало?». Measure the window (the context-budget hook's number), never estimate it; an autonomy order = enter the loop.
+mechanized: yes — `tools/hooks/autonomy-guard.mjs` blocks a stop while the order stands (< 75 % → work on, ≥ 75 % → close); test-guards part K
+
 ### EXP-0378 · 2026-10-30 · ❌→✅ · #conan #stand #bow #owner-saw-first
 class: stand-not-checked
 **Lesson:** four launches «fired» with the bow slung on the back — no arrow, and I hunted causes in input, cursor modes and the remote, then misread a

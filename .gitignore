@@ -49,3 +49,4 @@ interviews/decisions/*.lock
 # не история проекта; хук пишет его ПОСЛЕ коммита закрытия, и в git оно висело бы вечной правкой
 /FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md
 /FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md.tmp
+.kaif/autonomy.json
