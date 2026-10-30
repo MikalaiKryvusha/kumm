@@ -37,6 +37,11 @@ Live check of the pak: the remote reads `…WBP_ContainerInfo_C:WidgetTree.Overl
 | `krinik_pause_in_menu` | the world slows while a menu is open: inventory/hub 0.03 (×33 slower), Esc menu ≈0.0001; Esc closes mod windows; fishing tooltips laid out once | `GUIModuleController:ActivateModule`, `CarouselWindow:Next/Prev/SetCarouselIndex`, `IsFullscreenGUIActive` poll 250 ms, Esc key bind | live 2026-10-30: inventory open 0.0300, closed 1.0 |
 | `krinik_hud_blink` (W36, 2026-10-30) | food/water blink from 10 % (dim) to 0 % (full), weight from 90 % of max to 100 % | `NotifyOnNewObject(W_NewHealthUI_C)` → `FindFirstOf(W_SmoothHP_C)` once; poll 250 ms; `PlayAnimationTimeRange(NoFood/NoWater/OverEncumbered_Weight, 0, half × L, 0, PingPong, 0.30 × L, true)` | L = 0.25 … 1.0 in 10 steps; Hosav's own blink at the limit (see `UIMod_Hosav.md`) |
 
+## Version
+
+2026-10-30: `modinfo.json` version **3.0.1** (kit source, `kit/modinfo.json`, the built pak by `_config/devkit/set-pak-version.py`) — `[OWNER]` «все моды
+Krinik... получают версию 3.0.1» · 2026-10-28 (chronicle). The pause-menu mod list (Simple Modlist) reads it — see `SimpleModlist.md`.
+
 ## Tests and runs
 
 - `testcases/TC_conan_krinik_conan_ui_merge_2026-10-30.md` (U1–U8 pass), report `testcases/reports/2026-10-30_conan-krinik-conan-ui-merge.md`.
