@@ -146,6 +146,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   ход твоей работы твоим голосом» (2026-10-30 18:23) — launch only by `launch-bg.ps1`, narrate in chat AND by voice. **Conan volume 1 % in the Windows mixer**
 >   (`[OWNER]` «в микшере виннды поставь конану громкость 1%» · 18:21): the game was not running → not applied yet; at the first launch run
 >   `powershell -File _config/set-app-volume.ps1 -Process ConanSandbox -Percent 1` (pack `aaff8b2`; exit 4 = no audio session yet, retry after the menu sounds).
+>   **APPLIED 18:32** (mixer shows 1 %; the next launch kept 1 % by itself).
+> - **W6 corpse prompt on two lines — in game 18:51, pad fix pending its frame:** see plan 36 W6. The owner launched the game HIMSELF at 18:55 (parent
+>   `explorer.exe`, PID 22920) — not touched; the pad-8 pak was deployed 18:59 while his game ran (his session shows the pad-2 icon). Next: when his game
+>   closes — `launch-bg.ps1`, P1b + S1 by frames (`corpse-stand.sh 50`, kill the crocodile that walks in, hero 70 cm from the corpse, `corpse-loot-geom.sh`).
 > - **The save question is closed:** `[AI] by mandate — «возвращать ли героя к копии 12:05, - на твое усмотрение. Я пока не играю на прохождение, пока сборка
 >   не готова»` (2026-10-30 17:02): NOT restored to 12:05; the current save (intact, = the 16:52 copy) stays the test stand.
 > - F storage (17:00, the owner: «на F аж сделали хранилище из-за того, что LFS не работал» · «может можем запушить это всё в ГитХаб»): `F:\ai_sandbox\conan_backup\conan-exiles-modpack.git`

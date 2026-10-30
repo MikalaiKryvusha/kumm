@@ -131,8 +131,11 @@ killer Object · OverridingCauseOfDeath STRUCT · StateChangeDelay float · Dama
 `npc:KillCharacter(0, FText(''), hero, {}, 0.0, hero)` (case R1). The 2026-10-30 16:20 crash came from MY loop `FindAllOf('BaseBPCombat_C')` + `GetOwner()` on
 every result, class defaults included — the EXP-0386 class, not the `{}` (EXP-0387). A hostile boss `HumanoidNPCCharacter_20percentbigger_boss_C` spawns
 near the hero at the owner's oasis save (line ≈110) — a ready corpse source.
-Changing the shared row's layout changes every action prompt of the game; the two-line corpse prompt = line 2 by the translation key («или нажмите
-{0}, чтобы забрать предметы») + line 1 as a separate text of the strip (W6). Our `Game` target
+Changing the shared row's layout changes every action prompt of the game. The two-line corpse prompt (W6, done 2026-10-30 18:5x): the slots of
+`W_ActionTutorial` are `PreText` justify RIGHT · VAlign Center, `Icon` and `PostText` VAlign Center (kit probe); our kit pak puts `Icon` and
+`PostText` at the BOTTOM (icon bottom padding 8 keeps one-line prompts unchanged) and the override row breaks the string before «или» — line 2 then
+reads «или нажмите [E], чтобы забрать предметы», line 1 stands above it right-aligned (frame P1). The icon ≈20 units, a text line taller; the
+viewport scale at 4K is 2.09. The remote cannot read widget sizes now (`GetDesiredSize` and `GetCachedGeometry` are not callable from Lua, 2026-10-30) — measure by frames. Our `Game` target
 overrides a vanilla key when the entry carries the vanilla hashes (`_config/devkit/vanilla-override.py`, proven 2026-10-29 00:34).
 Crosshair (`/Game/UI/Widgets/HUD/Reticles/WBP_Crosshair.WBP_Crosshair_C`): the spread bars (curve `C_CrosshairAccuracyAlpha`) show as soon as a bow
 is in hand, before any draw — zeroing the curve keys hides them at once.
