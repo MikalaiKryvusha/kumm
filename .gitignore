@@ -1,5 +1,7 @@
 node_modules/
 mods/
+# Mod notes of a game build are knowledge, not the archive library: games/<Game>/mods/<Mod>.md (2026-10-30, KAIF #186)
+!games/*/mods/
 *.log
 .vscode/
 .kaif/install/

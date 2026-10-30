@@ -10,8 +10,11 @@
    quotes stay Russian; interviews (the owner answers inside them) stay Russian.
 2. **Knowledge is written down the moment it is understood, in the same move.** New — a new line; changed — an edit in place; outdated —
    deleted. Where: vision — `GOAL.md`; path — `MASTER_PLAN.md`; a task — its plan in `plans/`; a rule — this file; a stand, route or tool —
-   `HOUSE_RULES_REFERENCE.md`; the engine — the project maps; a game — `games/<Game>/GAME_*_MAP.md`; recon — `researches/`. Before asking the
-   owner about a subsystem, read its map line; no line — write it first.
+   `HOUSE_RULES_REFERENCE.md`; the engine — the project maps; a game — `games/<Game>/GAME_*_MAP.md`; a mod of a build — its ONE notes file
+   `games/<Game>/mods/<Mod>.md` (what it does · assets and functions with numbers · our edits · how to look inside · open), the maps keep a pointer;
+   recon — `researches/`. Before asking the owner about a subsystem, read its map line; no line — write it first.
+   Work on a mod starts by reading its notes, once per session, in its own tool call; the knowledge-hook refuses the work until then
+   (`[OWNER]` 2026-10-30 ≈14:25 · verbatim in the hook header and KAIF #186).
 3. **A rule is written as a statement, and only genuinely important and critical instructions are written.** What to do — in steps. No
    rationale, no history, no quotes: a rule's history and the owner's words go to `PROJECT_HISTORY.md`.
 4. **A smoke run of anything new is recorded on video; UI — always.** Clip — `bash SvarogsDream/tools/rec_clip.sh <name> <seconds>

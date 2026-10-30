@@ -125,8 +125,7 @@ Corpse prompt text: vanilla target `Exiles_UI`, key `DA4E821B4EE35B69F5E9128CF11
 overrides a vanilla key when the entry carries the vanilla hashes (`_config/devkit/vanilla-override.py`, proven 2026-10-29 00:34).
 Crosshair (`/Game/UI/Widgets/HUD/Reticles/WBP_Crosshair.WBP_Crosshair_C`): the spread bars (curve `C_CrosshairAccuracyAlpha`) show as soon as a bow
 is in hand, before any draw — zeroing the curve keys hides them at once.
-Hosav numbers: `BlueprintLibrary/BPFL_Hosav_UI.TextOverflowPrevention_Numbers` (Hosav's, not the game's): ≥ 100 000 → `Divide_IntInt(x, 10)` → `/100.0`
-+ «k»; ≥ 1 000 000 → `/10000` → `/100.0` + «M»; truncation, two decimals.
+Hosav numbers («k», «M») — `games/ConanExiles/mods/UIMod_Hosav.md`.
 Sun and shadows (0.003 was set for a smooth sun; now 2.0 by the owner's choice): `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ~50×/s; live `2.0` (light turns in steps
 seconds apart) — the owner under palms 2026-10-29 00:46: «ну сейчас словно тени в порядке»; back at 0.003: «да, вернулось». The pack carries 2.0
 (bug 67; 2.0 written, reverted once for the smooth sun, then 2.0 by the owner's final choice 2026-10-29 01:10 — no cvar keeps 0.003 smooth without the redraw); the game log shows the quality group 0.015 first, then ours.
@@ -351,16 +350,9 @@ Simple Minimap ставит карту во время игры: центр сл
 в 4K при 0.50 цифры целы, но до края ≈ 8 пикселей.
 
 Панель быстрых ячеек — ванильный `WBP_MainHotbar_C` прямо в окне игры (слота нет, масштаб 1, сдвига нет; 2026-10-26); ни один мод сборки её
-ассетов не везёт. Hosav: верхний HUD — `W_SmoothHP` (рядом авторская копия `SUPERUI_Backup_ForFuckups/W_SmoothHP`), виджеты врага
-`W_EnemyHealthbar_InHUD` / `W_NewEnemyHealth` — рамка цели в HUD, не полоска над головой моба; настройки — `SaveUISettings_UIH`, слот
-`HosavUISave_New` (файл появляется после сохранения настроек игроком).
-
-Слоты `W_SmoothHP` (`CanvasPanelSlot_N` → элемент; правка — `prop:CanvasPanelSlot_N/LayoutData/Offsets/Left|Top|Right|Bottom`, таблица
-`ConanExiles/_config/localization/asset-strings/UIMod_Hosav__W_SmoothHP.tsv`). Сборка 2026-10-26 — две колонки, ряды 77 · 102 · 127:
-урон `_12` значок / `_13` текст · броня `_8` / `_10` · температура `_9` / `_11` (колонка −240 / −220); еда `_22`, шкала `_35` / `_23` · вода
-`_24`, шкала `_33` / `_25` · вес `_20` / `_21` (колонка −10 / 10) — порядок по слову владельца ≈15:45. Верхний ряд 5: опыт `_16` значок (сжат до 0×0) / `_17` текст (−240), порча
-`_14` / `_15` (−10 / 10). Полосы: здоровье `_36`, выносливость `_1`, фон `_27` (T −11, высота 160). Строка опыта — шаблон
-`{xpCurrent}{suffix1} / {xpMax}{suffix2} ({xpNeeded}{suffix3})`, перевод «Опыт: …» (интервью #003, строка 299).
+ассетов не везёт. Hosav (`W_SmoothHP` и его слоты, `W_NewHealthUI`, настройки, кнопка, окно, мерцание еды/воды/веса, числа «k») — **конспект мода
+`games/ConanExiles/mods/UIMod_Hosav.md`**. Строка опыта — шаблон `{xpCurrent}{suffix1} / {xpMax}{suffix2} ({xpNeeded}{suffix3})`, перевод «Опыт: …»
+(интервью #003, строка 299).
 
 Перевод модов: цель `Content/Localization/Game` в чистой игре пуста (ванильный перевод в паках) — там только наши `Game.locmeta` и
 `ru/Game.locres`, их ставит запись манифеста `Krinik Russian Translation`.

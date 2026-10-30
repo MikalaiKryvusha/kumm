@@ -27,12 +27,16 @@
 //                 поиск в сети → «реальность»; чтение карты → «воспоминание»; прочий вывод → «сравнение»; любое событие внутри 10 минут → тишина;
 //                 M12 (2026-10-30) — остановка в закрытом чате → тишина, без закрытия → рефлексия; версия до правки на том же случае останавливала
 //                 ход (красный); живой журнал чата 759898d5: закрыт → тишина, он же до строки закрытия → «block»
+// PROVED-AGAINST (замок конспекта, 2026-10-30): M13–M18 — без конспекта и без прочтения отказ, после прочтения пропуск, после разбора предписание,
+//                 остановка с неписаным конспектом — блок; в версии до правки ветки PreToolUse нет вовсе (moment() → null) — M13 там красный по построению
 // GAP:            хук видит МОМЕНТ, не СМЫСЛ: записал ли агент знание и то ли записал — судья и владелец; новизна, пришедшая в рассуждении агента без
 //                 события (догадка в голове), хуку не видна; «неожиданный исход» ловит и слова «ошибка» в найденном тексте (ложная тревога —
 //                 2026-10-18, поиск по коду самого хука), её гасит окно 10 минут
-// ON-REAL-PATH:   2026-10-18 02:04–02:06 +03:00 — живая сессия KUMM: «сравнение» после проверки настроек, «слово владельца», «воспоминание» после
+// ON-REAL-PATH:   2026-10-30 ≈14:4x — живая сессия KUMM: extract UIMod_Hosav до прочтения конспекта — отказ; после Read отдельным вызовом — пропуск и
+//                 предписание; Read в одном сообщении с командой ещё не в журнале — отказ (записано в конспекте мода).
+//                 2026-10-18 02:04–02:06 +03:00 — живая сессия KUMM: «сравнение» после проверки настроек, «слово владельца», «воспоминание» после
 //                 Read методички, «неожиданный исход» (ложная тревога) — все четыре дошли в контекст агента
-import { readFileSync, writeFileSync, mkdtempSync, rmSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdtempSync, rmSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
@@ -123,7 +127,91 @@ function habituated(kind, file, now) {
 const CLOSED_CHAT = /"skill"\s*:\s*"(?:[\w-]+:)?end-chat-(?:soft|force)"|<command-name>\/?end-chat-(?:soft|force)<\/command-name>/;
 export const chatClosed = (transcriptText) => CLOSED_CHAT.test(String(transcriptText || ''));
 
-export function respond(ev, stampFile, now = Math.floor(Date.now() / 1000), transcriptText = '') {
+// ЗАМОК КОНСПЕКТА МОДА — из напоминания в обязательство. Слово владельца 2026-10-30 ≈14:25–14:33: `[OWNER]` «странно, что ты над модами этими уже
+// неделю работаешь и у тебя НЕ ЗАПИСАНЫ ПО НИМ КОНСПЕКТЫ!!!» · «и ты их каждый раз по-новой словно разбираешь, как первый раз видишь!» · «КАИФ ДОЛЖЕН ТЕБЯ
+// ОБЯЗЫВАТЬ ДОКУМЕНТИРОВАТЬ ТВОИ ЗНАНИЯ!!!» · «Правь хук записи знаний о проектах!» · «не всегда повторное нужно обязательно все перечитывать, а умно!
+// Думаешь "Ага, нужно поработать с этим модом. Иду читать мой по нему конспект!"». Случай: виджет HUD Hosav разобран с нуля, хотя пять фактов о нём
+// лежали в карте игры, разбросанные по темам. Устройство:
+//   1. PreToolUse — работа с модом (разбор его ассетов, правка его исходников, раскатка -Only <Мод>) запрещена, пока конспект
+//      games/<Игра>/mods/<Мод>.md не существует или не прочитан в ЭТОЙ сессии (один раз — умно, не каждый раз);
+//   2. PostToolUse после разбора — предписание дописать найденное в этот конспект, без окна привыкания;
+//   3. Stop — ход не кончается, если мод разбирали, а конспект после последнего разбора не правили.
+// Имя мода — имя его папки в игре (`UIMod_Hosav`, `KrinikConanUI`); конспекты Конана — KUMM/games/ConanExiles/mods/.
+// [TESTED: 2026-10-30 · --selftest M13–M18; живой отказ и пропуск на extract UIMod_Hosav · testcases/reports/2026-10-30_knowledge-hook-mod-notes-lock.md]
+const NOTES_DIR = 'games/ConanExiles/mods';
+const STUDY = [   // команды разбора: имя мода — первая группа
+  /patch-mod-asset\.py\s+extract\s+["']?([A-Za-z0-9_]+)/,
+  /(?:kismet-trace\.py|uaj(?:\.exe)?\s+(?:exports|func|dump))\s[^\n]*?[\\/]Mods[\\/]([A-Za-z0-9_]+)[\\/]/,
+  /retoc[^\n]*to-legacy[^\n]*--filter\s+["']?([A-Za-z0-9_]+)/,
+];
+const WORK = [    // иная работа с модом: раскатка одного мода, правка его исходника
+  /Deploy-ModPack\.ps1[^\n]*-Only\s+["']?([A-Za-z0-9_]+)/,
+];
+const SRC_EDIT = /ConanExiles[\\/]_unpacked[\\/]([A-Za-z0-9_]+)[\\/]/;
+const notesRel = (mod) => `${NOTES_DIR}/${mod}.md`;
+const norm = (p) => String(p || '').replace(/\\/g, '/').toLowerCase();
+
+export function modOf(tool, input) {
+  if (tool === 'Bash' || tool === 'PowerShell') {
+    const c = String(input.command || '');
+    for (const re of STUDY) { const m = c.match(re); if (m) return { mod: m[1], study: true }; }
+    for (const re of WORK) { const m = c.match(re); if (m) return { mod: m[1], study: false }; }
+  }
+  if (tool === 'Edit' || tool === 'Write') {
+    const m = String(input.file_path || '').match(SRC_EDIT);
+    if (m) return { mod: m[1], study: false };
+  }
+  return null;
+}
+
+// По журналу сессии: прочитан ли конспект; правился ли он после последнего разбора мода.
+function toolUses(transcriptText) {
+  const out = [];
+  for (const line of String(transcriptText || '').split('\n')) {
+    if (!line.includes('"tool_use"')) continue;
+    let j; try { j = JSON.parse(line); } catch { continue; }
+    for (const c of (j.message && j.message.content) || []) if (c && c.type === 'tool_use') out.push({ name: c.name, input: c.input || {} });
+  }
+  return out;
+}
+export const notesRead = (uses, mod) => uses.some((u) => u.name === 'Read' && norm(u.input.file_path).endsWith(norm(notesRel(mod))));
+export function studiedNotWritten(uses) {
+  const last = {};   // мод → индекс последнего разбора
+  uses.forEach((u, i) => { const r = modOf(u.name, u.input); if (r && r.study) last[r.mod] = i; });
+  return Object.keys(last).filter((mod) => !uses.some((u, i) => i > last[mod] && (u.name === 'Edit' || u.name === 'Write') &&
+    norm(u.input.file_path).endsWith(norm(notesRel(mod)))));
+}
+
+export function notesGate(ev, transcriptText, exists) {
+  const name = ev.hook_event_name, tool = String(ev.tool_name || ''), input = ev.tool_input || {};
+  if (name === 'PreToolUse') {
+    const r = modOf(tool, input); if (!r) return null;
+    const rel = notesRel(r.mod);
+    if (!exists(rel)) return { hookSpecificOutput: { hookEventName: 'PreToolUse', permissionDecision: 'deny', permissionDecisionReason:
+      `knowledge-hook · работа с модом ${r.mod}, а конспекта ${rel} нет. Сначала заведи его (что делает · ассеты и функции с номерами · наши правки · ` +
+      `как смотреть внутрь · открытое) из того, что уже записано (карты игры, researches/, планы), и прочитай — потом работа.` } };
+    if (!notesRead(toolUses(transcriptText), r.mod)) return { hookSpecificOutput: { hookEventName: 'PreToolUse', permissionDecision: 'deny',
+      permissionDecisionReason: `knowledge-hook · работа с модом ${r.mod}: сначала прочитай свой конспект ${rel} (один раз за сессию) — там уже ` +
+      `записано, как он устроен; не разбирай заново известное.` } };
+    return null;
+  }
+  if (name === 'PostToolUse') {
+    const r = modOf(tool, input); if (!r || !r.study) return null;
+    return { hookSpecificOutput: { hookEventName: 'PostToolUse', additionalContext: `knowledge-hook · ты разобрал ${r.mod}. Найденное — тем же ходом ` +
+      `в ${notesRel(r.mod)} (ассет, функция, числа, где на диске, что это значит); остановка без этой записи не пройдёт.` } };
+  }
+  if (name === 'Stop' && !ev.stop_hook_active) {
+    const owed = studiedNotWritten(toolUses(transcriptText));
+    if (owed.length) return { decision: 'block', reason: `knowledge-hook · разобраны ${owed.join(', ')}, а их конспекты после разбора не правились: ` +
+      `${owed.map(notesRel).join(', ')}. Запиши найденное — потом остановка.` };
+  }
+  return null;
+}
+
+export function respond(ev, stampFile, now = Math.floor(Date.now() / 1000), transcriptText = '', exists = () => true) {
+  const gate = notesGate(ev, transcriptText, exists);
+  if (gate) return gate;
+  if (ev.hook_event_name === 'PreToolUse') return null;
   if (ev.hook_event_name === 'Stop' && chatClosed(transcriptText)) return null;
   const kind = moment(ev);
   if (!kind || habituated(kind, stampFile, now)) return null;
@@ -167,6 +255,33 @@ function selftest() {
   const c3 = respond({ hook_event_name: 'UserPromptSubmit', prompt: 'починишь это поведение?' }, stamp, 400000, closedTr);
   const okM12 = !c1 && c2 && c2.decision === 'block' && c3; if (!okM12) fail++;
   console.log(`${okM12 ? 'ok  ' : 'FAIL'} M12 закрытый чат: остановка — ${c1 ? 'рефлексия' : 'тишина'} · без закрытия — ${c2 ? 'рефлексия' : 'тишина'} · слово владельца — ${c3 ? 'отмечено' : 'тишина'}`);
+  // M13–M18 — замок конспекта мода (2026-10-30). Журнал — строки tool_use, как пишет Claude Code.
+  const use = (name, input) => JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', name, input }] } });
+  const extract = { command: 'python -I -X utf8 patch-mod-asset.py extract UIMod_Hosav W_SmoothHP D:/x/w' };
+  const readNotes = use('Read', { file_path: 'D:\\work\\ai_sandbox\\KUMM\\games\\ConanExiles\\mods\\UIMod_Hosav.md' });
+  const pre = (input, tr, ex = () => true, tool = 'Bash') => respond({ hook_event_name: 'PreToolUse', tool_name: tool, tool_input: input }, stamp, 500000, tr, ex);
+  const deny = (r) => !!(r && r.hookSpecificOutput && r.hookSpecificOutput.permissionDecision === 'deny');
+  const g1 = pre(extract, '', () => false), g2 = pre(extract, ''), g3 = pre(extract, readNotes);
+  const okG = deny(g1) && /нет/.test(g1.hookSpecificOutput.permissionDecisionReason) && deny(g2) && /прочитай/.test(g2.hookSpecificOutput.permissionDecisionReason) && !g3;
+  if (!okG) fail++; console.log(`${okG ? 'ok  ' : 'FAIL'} M13 разбор мода: нет конспекта — отказ · не прочитан — отказ · прочитан — пропуск`);
+  const g4 = pre({ file_path: 'D:\\work\\ai_sandbox\\ConanExiles\\_unpacked\\KrinikConanUI\\ue4ss\\Scripts\\main.lua' }, '', () => true, 'Edit');
+  const g5 = pre({ command: 'powershell -File Deploy-ModPack.ps1 -PackDir x -Deploy -Only KrinikConanGameplay' }, '');
+  const g6 = pre({ command: 'git status' }, ''), g7 = pre({ file_path: 'D:\\work\\ai_sandbox\\KUMM\\STATUS.md' }, '', () => true, 'Edit');
+  const okW = deny(g4) && /KrinikConanUI/.test(g4.hookSpecificOutput.permissionDecisionReason) && deny(g5) && !g6 && !g7;
+  if (!okW) fail++; console.log(`${okW ? 'ok  ' : 'FAIL'} M14 правка исходника и раскатка -Only мода — отказ без конспекта; прочие команды и файлы — пропуск`);
+  const g8 = pre({ command: 'python -I -X utf8 kismet-trace.py D:/s/legacy/ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uasset e.tsv j.json Progress_Food' }, readNotes);
+  const g9 = pre({ command: 'python -I -X utf8 kismet-trace.py D:/s/legacy/ConanSandbox/Content/Mods/UIMod_Hosav/W_SmoothHP.uasset e.tsv j.json Progress_Food' }, '');
+  const okT = !g8 && deny(g9); if (!okT) fail++; console.log(`${okT ? 'ok  ' : 'FAIL'} M15 kismet-trace по пути мода — имя мода из пути`);
+  const post = respond({ hook_event_name: 'PostToolUse', tool_name: 'Bash', tool_input: extract, tool_response: 'ok' }, stamp, 500001);
+  const okP = post && /UIMod_Hosav\.md/.test(post.hookSpecificOutput.additionalContext); if (!okP) fail++;
+  console.log(`${okP ? 'ok  ' : 'FAIL'} M16 после разбора — предписание дописать конспект, без окна привыкания`);
+  const studied = [readNotes, use('Bash', extract)].join('\n') + '\n';
+  const wrote = studied + use('Edit', { file_path: 'D:/work/ai_sandbox/KUMM/games/ConanExiles/mods/UIMod_Hosav.md' }) + '\n';
+  const s1 = respond({ hook_event_name: 'Stop' }, stamp, 600000, studied), s2 = respond({ hook_event_name: 'Stop' }, stamp, 700000, wrote);
+  const okSt = s1 && s1.decision === 'block' && /UIMod_Hosav/.test(s1.reason) && !(s2 && /UIMod_Hosav/.test(s2.reason || ''));
+  if (!okSt) fail++; console.log(`${okSt ? 'ok  ' : 'FAIL'} M17 остановка: разобран и не записан — блок с именем мода · записан — без этого блока`);
+  const s3 = respond({ hook_event_name: 'Stop', stop_hook_active: true }, stamp, 800000, studied);
+  const okSa = !s3; if (!okSa) fail++; console.log(`${okSa ? 'ok  ' : 'FAIL'} M18 повторная остановка после ответа (stop_hook_active) — пропуск, без петли`);
   try { rmSync(stamp); rmSync(dir, { recursive: true, force: true }); } catch { /* временная папка ОС */ }
   console.log(fail ? `selftest: ${fail} FAIL` : 'selftest: all ok');
   process.exitCode = fail ? 1 : 0;
@@ -178,8 +293,10 @@ function main() {
     let ev = {};
     try { ev = JSON.parse(readFileSync(0, 'utf8') || '{}'); } catch { return; }
     let transcript = '';
-    if (ev.hook_event_name === 'Stop' && ev.transcript_path) { try { transcript = readFileSync(ev.transcript_path, 'utf8'); } catch { /* */ } }
-    const out = respond(ev, join(HERE, '.knowledge-hook.json'), undefined, transcript);
+    const needsLog = ev.hook_event_name === 'Stop' || (ev.hook_event_name === 'PreToolUse' && modOf(String(ev.tool_name || ''), ev.tool_input || {}));
+    if (needsLog && ev.transcript_path) { try { transcript = readFileSync(ev.transcript_path, 'utf8'); } catch { /* */ } }
+    const root = join(HERE, '..', '..');
+    const out = respond(ev, join(HERE, '.knowledge-hook.json'), undefined, transcript, (rel) => existsSync(join(root, rel)));
     if (out) process.stdout.write(JSON.stringify(out));
   } catch { /* хук не ломает сессию */ }
 }

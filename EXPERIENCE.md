@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0384 · 2026-10-30 · ❌→✅ · #conan #mods #knowledge #notes #hooks #owner-saw-first
+class: rediscovered-known
+**Lesson:** asked to change how the Hosav HUD blinks, I extracted and traced its widget from scratch — five facts about that widget already stood in
+the game map, scattered by topic, and I never read them; a week of edits to the mod had left no notes ON THE MOD. Knowledge filed by topic is not
+findable by the thing you are about to touch. Rule: one notes file per mod (`games/<Game>/mods/<Mod>.md`), read once per session before working on
+the mod (in its own tool call — a Read in the same message as the command is not in the session log yet), what is learned goes there in the same move.
+**Trigger:** about to extract, trace, edit or deploy a mod → read its notes; no notes → write them from the maps first.
+mechanized: yes — `tools/hooks/knowledge-hook.mjs` `notesGate` (PreToolUse deny · PostToolUse prompt · Stop block), selftest M13–M18; KAIF #186
+
 ### EXP-0383 · 2026-10-30 · ❌ · #closure #farewell #hooks #owner-saw-first
 class: guessed-instead-of-measured
 **Lesson:** after the farewell of `/end-chat-soft` the knowledge Stop hook blocked the stop; I re-sent the WHOLE farewell, assuming the farewell file
