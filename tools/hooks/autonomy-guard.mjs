@@ -14,7 +14,7 @@
 //   node autonomy-guard.mjs                 # событие на stdin; на любом неожиданном — молча 0
 //   node autonomy-guard.mjs --state <файл>  # где маркер (проверки tools/test-guards.mjs, часть K)
 //
-// [TESTED: 2026-10-30 · testcases/reports/2026-10-30_autonomy-guard-wider-order.md · part K 13 cases incl. the owner's «гоу автономно» (red on the old pattern, green now); the live marker .kaif/autonomy.json flips on his words]
+// [TESTED: 2026-10-30 · testcases/reports/2026-10-30_autonomy-guard-wider-order.md (verdict partial) · arming: part K 13 cases incl. the owner's «гоу автономно», red on the old pattern; the live marker flips on his words · a live Stop refused by the guard: NOT yet observed]
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { lastUsage, contextOf, WINDOW, PCT_CLOSE } from '../../.claude/hooks/context-budget.mjs';

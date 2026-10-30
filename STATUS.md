@@ -120,15 +120,22 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `WBP_Settings_Subheader`) are created from Lua and take values; a REAL DRAG reaches a created slider (S5 pass 15:13 — UMG slider), a REAL click does not reach a created FLX checkbox (3 placements). Next:
 > then rows inside a module window (our WindowRoot widget in the KrinikConanUI kit + a module row); set the subheader's `Label` before adding.
 > Then the quick list below. `mouse-seq.ps1` has `move:<fx>/<fy>` now.
-> **15:3x (chat 5db69748):** spike run 2 — S10 done (FLX flags not the cause), S11–S14 next (`testcases/TC_conan_settings_hub_spike_2026-10-30.md`).
-> The game is launched by TWO paths — `launch-fg.ps1` (in front) / `launch-bg.ps1` (background), the owner picks (HOUSE_RULES §1 rule 16; his last word:
-> in front); the game process is `ConanSandbox-Win64-Shipping`.
+> **16:4x (chat 5db69748, dayloop):** done — guide exclusive cards (pack `ab9c98b`/`029ba6b`); W11 versions 3.0.1 (`183a172`, tool `set-pak-version.py`);
+> W18a fishing captions on one line with bars (KrinikConanUI 0.14.0, looks → `НА ОТСМОТР НИКОЛАЕМ/9`); engine `-Verify` warns on runtime cvar overrides
+> (`536e3ca`); `save-restore.sh` (the save is SQLite WAL — never a bare `cp`); hooks: autonomy-guard catches any «…автономно», knowledge-hook skips vanilla
+> assets, clock-now adopted. **Live remote probes stopped** after three crashes of my own probes (EXP-0386/0387): the spike S11 (a row created with the
+> window as owner — `Create(window, class, nil)` lands in its WidgetTree; adding it crashed) and W6 (the corpse stand: `KillCharacter` with `{}` crashed) wait
+> for research, not more pokes. W6 route found: line 2 by the translation key + line 1 as a separate strip text (game map). W11 top-of-list: routes in
+> `games/ConanExiles/mods/SimpleModlist.md`. **clock-now has a known defect** (kaif-48, 16:40): a placeholder only MOVED by an edit (in Edit's old_string or
+> the replaced Write file) gets filled — fixed at the origin, take the new copy after their commit; until then never move a placeholder text.
+> The game is launched by TWO paths — `launch-fg.ps1` (in front) / `launch-bg.ps1` (background), the owner picks (HOUSE_RULES §1 rule 16; his last word
+> 16:18: «работай в фоне»); the game process is `ConanSandbox-Win64-Shipping`.
 >
 > **14:57:** W36 HUD blink DONE in game (pack `4fae579`, H1–H10): Hosav's speed 0.30 + section `KrinikConanUI:HudBlink` (partial-curve PingPong — the
 > 14:34 plan «threshold patch + RenderOpacity» was replaced, correction). W34 Harness DONE: dev-only entry `"export": false`. Owner's dayloop order ≈14:37
 > («Гоу, работай автономно» · «делаем сборку Конана»). Engine.ini CPU recon runs in a helper → `researches/conan-engine-ini-cpu/README.md`.
-> **Next (quick first):** ~~the guide's exclusive-mods section~~ (DONE 16:1x, pack `ab9c98b` + correction `029ba6b`: Archery/Graphics/Translation cards, PDF rebuilt); W6 corpse prompt on two lines; W10a quick-loot jump; W18a captions;
-> W4 minimap coordinates; W11 mod list; then W13/W30 arrows, W29 shouts, G3/G4. Notes for every mod the work touches (the lock demands it).
+> **Next (quick first):** ~~the guide's exclusive-mods section~~ (DONE 16:1x); W6 corpse prompt on two lines (needs a safe corpse stand); W10a quick-loot jump; ~~W18a captions~~ (DONE 16:46);
+> W4 minimap coordinates; W11 mod list (versions DONE, top-of-list open); then W13/W30 arrows, W29 shouts, G3/G4. Notes for every mod the work touches (the lock demands it).
 >
 > **Still open from the 13:07 handover (the rest — chronicle, entry 2026-10-30 15:1x):** the owner's save — after the 12:05 copy it differs; the
 > restore waits for his «верни»; every run of chat b46b10e8 restored its own copy. KrinikConanGraphics G3/G4 (the cap evicting the oldest stain not

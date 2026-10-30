@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0389 · 2026-10-30 · ❌→✅ · #testing #markers #sed #fraud-class
+class: claim-wider-than-observation
+**Lesson:** flipping my section's `-- [NOT-TESTED]` with `sed -i 's|^-- \[NOT-TESTED\]$|-- [TESTED: …]|'` flipped ALL six markers of
+`krinik_pause_in_menu.lua` — five other sections got a false [TESTED]; caught only by reading `git diff --cached` (6 deletions where I had added).
+A marker is flipped by its unique neighbour (the line above, a line number checked first), never by the bare marker pattern; `git diff --cached`
+before every commit is the guard that caught it.
+**Trigger:** about to `sed` a `[NOT-TESTED]` → `grep -c` the pattern first; more than 1 → anchor on the neighbouring line.
+mechanized: no
+
 ### EXP-0388 · 2026-10-30 · ❌ · #autonomy #hooks #loop #owner-saw-first
 class: guard-pattern-too-narrow
 **Lesson:** the owner said «гоу автономно, делаем дальше сборку»; the autonomy guard knew only «работай автономно / сам», «автопилот», stayed off, and
