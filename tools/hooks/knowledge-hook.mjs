@@ -137,7 +137,7 @@ export const chatClosed = (transcriptText) => CLOSED_CHAT.test(String(transcript
 //   2. PostToolUse после разбора — предписание дописать найденное в этот конспект, без окна привыкания;
 //   3. Stop — ход не кончается, если мод разбирали, а конспект после последнего разбора не правили.
 // Имя мода — имя его папки в игре (`UIMod_Hosav`, `KrinikConanUI`); конспекты Конана — KUMM/games/ConanExiles/mods/.
-// [TESTED: 2026-10-30 · --selftest M13–M18; живой отказ и пропуск на extract UIMod_Hosav · testcases/reports/2026-10-30_knowledge-hook-mod-notes-lock.md]
+// [TESTED: 2026-10-30 · --selftest M13–M19 (M19 16:1x: a vanilla asset by retoc is not locked; live: retoc --filter WBP_ContainerInfo passed); живой отказ и пропуск на extract UIMod_Hosav · testcases/reports/2026-10-30_knowledge-hook-mod-notes-lock.md]
 const NOTES_DIR = 'games/ConanExiles/mods';
 const STUDY = [   // команды разбора: имя мода — первая группа
   /patch-mod-asset\.py\s+extract\s+["']?([A-Za-z0-9_]+)/,
@@ -150,11 +150,20 @@ const WORK = [    // иная работа с модом: раскатка од�
 const SRC_EDIT = /ConanExiles[\\/]_unpacked[\\/]([A-Za-z0-9_]+)[\\/]/;
 const notesRel = (mod) => `${NOTES_DIR}/${mod}.md`;
 const norm = (p) => String(p || '').replace(/\\/g, '/').toLowerCase();
+// `retoc --filter <имя>` распаковывает ЛЮБОЙ ассет: и мода, и самой игры (WBP_ContainerInfo — ванильный виджет; знание о нём — в карте игры).
+// Модом имя считается, только если на него есть конспект или оно стоит в манифесте сборки (2026-10-30 16:1x, M19).
+const PACK_MANIFEST = 'D:/work/ai_sandbox/ConanExiles/modpack.json';
+let packNames = null;
+const packMods = () => {
+  if (!packNames) { try { packNames = new Set(JSON.parse(readFileSync(PACK_MANIFEST, 'utf8')).mods.map((x) => x.name)); } catch { packNames = new Set(); } }
+  return packNames;
+};
+const RETOC = STUDY[2];
 
-export function modOf(tool, input) {
+export function modOf(tool, input, isMod = (name) => packMods().has(name)) {
   if (tool === 'Bash' || tool === 'PowerShell') {
     const c = String(input.command || '');
-    for (const re of STUDY) { const m = c.match(re); if (m) return { mod: m[1], study: true }; }
+    for (const re of STUDY) { const m = c.match(re); if (m) return re === RETOC && !isMod(m[1]) ? null : { mod: m[1], study: true }; }
     for (const re of WORK) { const m = c.match(re); if (m) return { mod: m[1], study: false }; }
   }
   if (tool === 'Edit' || tool === 'Write') {
@@ -175,17 +184,18 @@ function toolUses(transcriptText) {
   return out;
 }
 export const notesRead = (uses, mod) => uses.some((u) => u.name === 'Read' && norm(u.input.file_path).endsWith(norm(notesRel(mod))));
-export function studiedNotWritten(uses) {
+export function studiedNotWritten(uses, isMod) {
   const last = {};   // мод → индекс последнего разбора
-  uses.forEach((u, i) => { const r = modOf(u.name, u.input); if (r && r.study) last[r.mod] = i; });
+  uses.forEach((u, i) => { const r = modOf(u.name, u.input, isMod); if (r && r.study) last[r.mod] = i; });
   return Object.keys(last).filter((mod) => !uses.some((u, i) => i > last[mod] && (u.name === 'Edit' || u.name === 'Write') &&
     norm(u.input.file_path).endsWith(norm(notesRel(mod)))));
 }
 
 export function notesGate(ev, transcriptText, exists) {
   const name = ev.hook_event_name, tool = String(ev.tool_name || ''), input = ev.tool_input || {};
+  const isMod = (m) => exists(notesRel(m)) || packMods().has(m);
   if (name === 'PreToolUse') {
-    const r = modOf(tool, input); if (!r) return null;
+    const r = modOf(tool, input, isMod); if (!r) return null;
     const rel = notesRel(r.mod);
     if (!exists(rel)) return { hookSpecificOutput: { hookEventName: 'PreToolUse', permissionDecision: 'deny', permissionDecisionReason:
       `knowledge-hook · работа с модом ${r.mod}, а конспекта ${rel} нет. Сначала заведи его (что делает · ассеты и функции с номерами · наши правки · ` +
@@ -196,12 +206,12 @@ export function notesGate(ev, transcriptText, exists) {
     return null;
   }
   if (name === 'PostToolUse') {
-    const r = modOf(tool, input); if (!r || !r.study) return null;
+    const r = modOf(tool, input, isMod); if (!r || !r.study) return null;
     return { hookSpecificOutput: { hookEventName: 'PostToolUse', additionalContext: `knowledge-hook · ты разобрал ${r.mod}. Найденное — тем же ходом ` +
       `в ${notesRel(r.mod)} (ассет, функция, числа, где на диске, что это значит); остановка без этой записи не пройдёт.` } };
   }
   if (name === 'Stop' && !ev.stop_hook_active) {
-    const owed = studiedNotWritten(toolUses(transcriptText));
+    const owed = studiedNotWritten(toolUses(transcriptText), isMod);
     if (owed.length) return { decision: 'block', reason: `knowledge-hook · разобраны ${owed.join(', ')}, а их конспекты после разбора не правились: ` +
       `${owed.map(notesRel).join(', ')}. Запиши найденное — потом остановка.` };
   }
@@ -282,6 +292,12 @@ function selftest() {
   if (!okSt) fail++; console.log(`${okSt ? 'ok  ' : 'FAIL'} M17 остановка: разобран и не записан — блок с именем мода · записан — без этого блока`);
   const s3 = respond({ hook_event_name: 'Stop', stop_hook_active: true }, stamp, 800000, studied);
   const okSa = !s3; if (!okSa) fail++; console.log(`${okSa ? 'ok  ' : 'FAIL'} M18 повторная остановка после ответа (stop_hook_active) — пропуск, без петли`);
+  // M19 (2026-10-30 16:1x): `retoc --filter WBP_ContainerInfo` — ванильный виджет игры, не мод; замок требовал конспект мода «WBP_ContainerInfo».
+  const rv = (name) => ({ command: `R=/d/t/retoc.exe; $R to-legacy --version UE5_7 --no-shaders --filter ${name} /d/w/_paksview-3.0.1 /d/s/ci` });
+  const g10 = pre(rv('WBP_ContainerInfo'), '', () => false), g11 = pre(rv('KrinikConanUI'), '', () => false), g12 = pre(rv('UIMod_Hosav'), '', (p) => /UIMod_Hosav/.test(p));
+  const s4 = respond({ hook_event_name: 'Stop' }, stamp, 900000, use('Bash', rv('WBP_ContainerInfo')) + '\n', () => false);
+  const okV = !g10 && deny(g11) && deny(g12) && !(s4 && /WBP_ContainerInfo/.test(s4.reason || ''));
+  if (!okV) fail++; console.log(`${okV ? 'ok  ' : 'FAIL'} M19 retoc ванильного ассета — без замка и без блока остановки · мод из манифеста и мод с конспектом — замок`);
   try { rmSync(stamp); rmSync(dir, { recursive: true, force: true }); } catch { /* временная папка ОС */ }
   console.log(fail ? `selftest: ${fail} FAIL` : 'selftest: all ok');
   process.exitCode = fail ? 1 : 0;

@@ -121,7 +121,15 @@ Loot change event (2026-10-29 00:2x, counters on nine candidates around a REAL Q
 fires (UE4SS hooks it); the blueprint `HandleInventoryChanged` / `HandleLootContainerInventoryChanged` of `WBP_ContainerInfo` stay silent on a corpse.
 `Overlay_Main` of `WBP_ContainerInfo` spans the whole screen: a slot alignment there is relative to the SCREEN edges.
 Corpse prompt text: vanilla target `Exiles_UI`, key `DA4E821B4EE35B69F5E9128CF11CB58F` «Разделайте труп и получите ресурсы или нажмите {0}, чтобы
-забрать предметы»; the widget lays it out as one row «text · key icon · text» (a `\n` inside breaks only the first piece). Our `Game` target
+забрать предметы»; the widget lays it out as one row «text · key icon · text» (a `\n` inside breaks only the first piece).
+The row is `ActionTutorial` = the shared `/Game/UI/HUD/Notifications/W_ActionTutorial` (exports read 2026-10-30 16:2x: `HorizontalBox_0` → `PreText` ·
+`Icon` · `PostText`, no BP functions — the game cuts the localized string at `{0}` natively), inside the strip `WBP_ContainerInfo` (`Border_Underlay`
+→ VerticalBox `Content`, texts `T_Name`, `T_Type`, `T_State`, `T_Decayed`, `Text_Owner`; BP functions `SetCorpseText`, `UpdateInfo_CorpseBase`, `SetState`).
+Killing an NPC for a corpse stand: `KillCharacter` lives on the character's combat component `/Game/Characters/BaseBPCombat.BaseBPCombat_C`
+(params HitLocation byte · killerNameInput Text · killer Object · OverridingCauseOfDeath STRUCT · StateChangeDelay float · DamageCauser Object);
+`{}` for the struct from the remote crashed the game (2026-10-30 16:20, EXP-0387) — do not call it that way.
+Changing the shared row's layout changes every action prompt of the game; the two-line corpse prompt = line 2 by the translation key («или нажмите
+{0}, чтобы забрать предметы») + line 1 as a separate text of the strip (W6). Our `Game` target
 overrides a vanilla key when the entry carries the vanilla hashes (`_config/devkit/vanilla-override.py`, proven 2026-10-29 00:34).
 Crosshair (`/Game/UI/Widgets/HUD/Reticles/WBP_Crosshair.WBP_Crosshair_C`): the spread bars (curve `C_CrosshairAccuracyAlpha`) show as soon as a bow
 is in hand, before any draw — zeroing the curve keys hides them at once.
