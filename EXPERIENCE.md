@@ -91,6 +91,22 @@
 
 ## Entries
 
+### EXP-0398 · 2026-10-31 · ❌→✅ · #kit #edit #background-run
+class: refused-edit-then-run
+**Lesson:** an Edit refused with «File has not been read yet» and a background kit run started in the same message ran the OLD script — the import
+would have written the button texture OVER our logo (`DEST_NAME` was still the constant). Stopping the shell task left `UnrealEditor-Cmd` alive; it
+had to be killed by its PID. Before a run that writes, confirm the edit landed (`grep` the new line) — a refused Edit says nothing loud.
+**Trigger:** an Edit and a run of the edited file in one message; any refused Edit before a write-run.
+mechanized: no
+
+### EXP-0397 · 2026-10-31 · ❌→✅ · #conan #kit #umg #mainmenu #missing-refs
+class: kit-lacks-referenced-asset
+**Lesson:** a kit override of a vanilla widget silently loses every hard reference to an asset the kit does not ship — the main menu's six backdrop
+movies (`/Game/Movies`) became empty arrays and the backdrop drew white (bug 71). The log's «null MediaSource» was noise (on good runs too); two control
+runs (no paks · all but our pak) found it in minutes. Fix: placeholders of the same class at the same paths, outside CookInfo.
+**Trigger:** any new kit override of a vanilla asset; any «looks broken only with our pak» symptom.
+mechanized: `_config/devkit/kit-missing-refs.py` (red 12 on the vanilla main menu, green after)
+
 ### EXP-0396 · 2026-10-30 · ❌→✅ · #gitbash #kit #paths
 class: shell-mangles-argument
 **Lesson:** an env value `KIT_TEXTURES='/Game/UI/…'` reached the kit's Python as `C:/Program Files/Git/Game/UI/…` — Git Bash (MSYS) converts a
