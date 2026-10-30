@@ -110,13 +110,6 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **HANDOVER 2026-10-30 09:53 — the Conan build: fishing fixes in game, the owner's three BIG debts named, autonomy guard and farewell hook live**
-> (`[OWNER]` «я закончил, комп твой» · «работай автономно» · 2026-10-30 08:34; the chat closed at 72 % of the window by the context-budget rule).
-> Done in this chat: the farewell hook + `/resume` Step 0 (KAIF #181), the autonomy guard (KAIF #182, EXP-0379); VS Code Effort row — user
-> setting `opus[1m]` → `opus` (`researches/claude-code-vscode-effort/`; the panel not seen by eye yet); token methodology
-> (`researches/token-economy/`, desktop copy); the rebuild tool cleans its work dirs (pack `f909466`); the owner accepted the 01:08 items
-> («всё окей, нравится», homeworks/03); fishing tooltips: no one-line → two-line jump (KrinikPauseGameInMenu 0.13.0), the profile-slot hover in
-> Russian, «(удерж.)» in Game.locres (pack `be6488f`); the addprop crash guarded (EXP-0377); the build logo taken into the pack (`85c5c9b`).
 > **UPDATE 2026-10-30 11:33 (chat 77faa752, autonomous by «работай автономно» 10:37):** W15 arrow gravity DONE (KrinikConanArchery 0.6.0 drops
 > the arrow's gravity curve), W14 shooting while jumping DONE (0.7.0), W27 HUD temperature colours DONE (KrinikHudOutline) — all in game with
 > run reports; the owner's eye: minimum speed share, the jump-shot look + stamina, the three colours. Drive-bys filed: W28 blood 5 min (recon:
@@ -125,13 +118,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > scrolling list with sections each. **Stand lessons (EXP-0381):** `exec God` does nothing in 3.0.1 — god by `bash _config/god-on.sh`; copy
 > `Saved/Game_0.db` before a run; the owner's oasis save has food and water at 0 % (starvation kills) and a hostile boss — kill it first. The
 > hero died once at 11:26 — restored from `Game_0_backup_1.db` (11:25), gear verified. **The hero leveled 52 → 53 during the runs (XP from the oasis bosses killed by the remote) — tell the owner; a stand rule: kill with the remote no more than the case needs.** Next: W24 (heavy — `/plan-epic`), W28, W29.
-> **Earlier first-in-chat list (W15, W14 now done; W24 remains) — the owner's three BIG debts (his order 2026-10-30 08:3x):**
-> 1. **W15 arrow ballistics as in Oblivion Remastered** — KrinikConanArchery 0.5.0 (pack `f6ab0fb`): speed by the draw WORKS in game (2500 / 5001
->    cm/s); gravity is rewritten by the arrow blueprint every tick (back to 1.20 / 0.12). Next, offline: `kismet-trace.py` on
->    `Content/Items/Weapons/BP_BaseProjectile` (pakchunk1050) — `ProjectileGravityCurve`, `GravityMod`, `SetProjectileGravity`
->    (`researches/conan-archery/README.md` → «Доказательства»), then a native edit in our pak; cases `testcases/TC_conan_arrow_ballistics_remastered_2026-10-30.md`.
->    STAND (EXP-0378): look at the hero BEFORE firing — a held bow is horizontal in front; key 1 toggles it; the save keeps the state.
-> 2. **W14 shooting while jumping** — plan 37 (recon: what forbids an attack while `IsFalling`).
+> **The owner's remaining BIG debt (his order 2026-10-30 08:3x; W15 and W14 — done, moved to the chronicle):**
 > 3. **W24 one «Настройки модов» button + one hub of mod settings windows in the game's style** (W19–W23 fold into it: Hosav, Damage Meter, group,
 >    minimap, Lore & Loot windows; Xevyr and Krinik tabs; vignette sliders) — heavy, `/plan-epic` first.
 > **Then:** W26 the logo — main menu right of the game's logo, pause menu under it, an intro at start (`_config/branding/krinik-modpack-logo.webp`);

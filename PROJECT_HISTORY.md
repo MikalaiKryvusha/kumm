@@ -1,5 +1,22 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-30 11:4x +03:00 — STATUS: the 09:53 handover and the done big debts W15, W14 (moved verbatim at the closing of chat 77faa752)
+
+> **HANDOVER 2026-10-30 09:53 — the Conan build: fishing fixes in game, the owner's three BIG debts named, autonomy guard and farewell hook live**
+> (`[OWNER]` «я закончил, комп твой» · «работай автономно» · 2026-10-30 08:34; the chat closed at 72 % of the window by the context-budget rule).
+> Done in this chat: the farewell hook + `/resume` Step 0 (KAIF #181), the autonomy guard (KAIF #182, EXP-0379); VS Code Effort row — user
+> setting `opus[1m]` → `opus` (`researches/claude-code-vscode-effort/`; the panel not seen by eye yet); token methodology
+> (`researches/token-economy/`, desktop copy); the rebuild tool cleans its work dirs (pack `f909466`); the owner accepted the 01:08 items
+> («всё окей, нравится», homeworks/03); fishing tooltips: no one-line → two-line jump (KrinikPauseGameInMenu 0.13.0), the profile-slot hover in
+> Russian, «(удерж.)» in Game.locres (pack `be6488f`); the addprop crash guarded (EXP-0377); the build logo taken into the pack (`85c5c9b`).
+>
+> 1. **W15 arrow ballistics as in Oblivion Remastered** — KrinikConanArchery 0.5.0 (pack `f6ab0fb`): speed by the draw WORKS in game (2500 / 5001
+>    cm/s); gravity is rewritten by the arrow blueprint every tick (back to 1.20 / 0.12). Next, offline: `kismet-trace.py` on
+>    `Content/Items/Weapons/BP_BaseProjectile` (pakchunk1050) — `ProjectileGravityCurve`, `GravityMod`, `SetProjectileGravity`
+>    (`researches/conan-archery/README.md` → «Доказательства»), then a native edit in our pak; cases `testcases/TC_conan_arrow_ballistics_remastered_2026-10-30.md`.
+>    STAND (EXP-0378): look at the hero BEFORE firing — a held bow is horizontal in front; key 1 toggles it; the save keeps the state.
+> 2. **W14 shooting while jumping** — plan 37 (recon: what forbids an attack while `IsFalling`).
+
 ## 2026-10-30 09:53 +03:00 — STATUS: the NOW block of the morning chat and the 01:08 handover (moved verbatim at the closing)
 
 > **NOW 2026-10-30 09:15 — autonomous («работай автономно» after «я закончил, комп твой»).** His eye on the 01:08 items: «всё окей, нравится»
