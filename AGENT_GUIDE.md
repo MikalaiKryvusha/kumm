@@ -845,6 +845,8 @@ of a MOMENT carries both, in the owner's local time:
   moment as full local ISO 8601 (`2026-08-08T07:13:00+03:00`) — one convention, two renderings.
 - **Two moments, told apart:** *decided* — when the owner's word was said; *recorded* — when it was
   written down or committed. They differ, and the difference is often the interesting part.
+- **In KUMM the clock writes it:** in a Write/Edit put the placeholder ⟦NOW⟧ (⟦NOW-ISO⟧ · ⟦DATE⟧ · ⟦TIME⟧) — the hook `.kaif/hooks/clock-now.mjs`
+  fills it from the machine's clock before the write (`HOUSE_RULES_REFERENCE.md` §6); in a shell write probe `date` in the same call.
 - **The moment is PROBED, never felt:** `date '+%Y-%m-%d %H:%M %z'` (`+0300` → write `+03:00`; PowerShell: `Get-Date -Format 'yyyy-MM-dd HH:mm zzz'`) in the SAME
   tool call as the write — a session's sense of time comes from the volume of work, not from the clock (origin issue #96: stamps 1–5
   minutes ahead; "missed 12:00" said at 11:50); a decision about a named hour reads the probe too. Not captured → an honest
