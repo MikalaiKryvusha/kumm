@@ -100,7 +100,7 @@ after the farewell gets its one-line answer and nothing else.
 **Repro:** `head -3 FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md; cat FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md.state` — the closureId and time
 show the farewell is already captured.
 **Trigger:** a Stop hook fires after the farewell → answer the hook in one line; never repeat the farewell.
-mechanized: no
+mechanized: yes — `tools/hooks/knowledge-hook.mjs` is silent on Stop once the chat has a closure (`/end-chat-soft|force` in the transcript); selftest M12
 
 ### EXP-0382 · 2026-10-30 · ❌→✅ · #conan #ue4ss #hook #blood #stand
 class: wrong-api-assumption

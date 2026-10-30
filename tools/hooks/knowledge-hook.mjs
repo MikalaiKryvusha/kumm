@@ -24,7 +24,9 @@
 // @guard knowledge-hook
 // THREAT:         агент работает часами, понимает новое о проекте и не записывает его в md-знания — сам и следующая сессия проект не знают
 // PROVED-AGAINST: --selftest — слово владельца → предписание, с нажимом → «нажим»; ошибка в ответе инструмента → «неожиданный исход»; дамп пульта и
-//                 поиск в сети → «реальность»; чтение карты → «воспоминание»; прочий вывод → «сравнение»; любое событие внутри 10 минут → тишина
+//                 поиск в сети → «реальность»; чтение карты → «воспоминание»; прочий вывод → «сравнение»; любое событие внутри 10 минут → тишина;
+//                 M12 (2026-10-30) — остановка в закрытом чате → тишина, без закрытия → рефлексия; версия до правки на том же случае останавливала
+//                 ход (красный); живой журнал чата 759898d5: закрыт → тишина, он же до строки закрытия → «block»
 // GAP:            хук видит МОМЕНТ, не СМЫСЛ: записал ли агент знание и то ли записал — судья и владелец; новизна, пришедшая в рассуждении агента без
 //                 события (догадка в голове), хуку не видна; «неожиданный исход» ловит и слова «ошибка» в найденном тексте (ложная тревога —
 //                 2026-10-18, поиск по коду самого хука), её гасит окно 10 минут
@@ -114,7 +116,15 @@ function habituated(kind, file, now) {
   return false;
 }
 
-export function respond(ev, stampFile, now = Math.floor(Date.now() / 1000)) {
+// Чат уже закрыт (`/end-chat-soft` или `/end-chat-force` в журнале): обряд закрытия прошёл шаг знаний (EXPERIENCE, STATUS, проверка авторства),
+// и остановка больше не требует рефлексии. Слово владельца после закрытия хук по-прежнему отмечает (UserPromptSubmit). Оплачено 2026-10-30
+// 13:10–13:52: после прощания хук остановки требовал «нет — скажи одной строкой», агент повторил прощание целиком, владелец: «почему и зачем ты
+// прощальное сообщение дважды повторил в чате?» · «починишь это поведение?» (KUMM EXP-0383).
+const CLOSED_CHAT = /"skill"\s*:\s*"(?:[\w-]+:)?end-chat-(?:soft|force)"|<command-name>\/?end-chat-(?:soft|force)<\/command-name>/;
+export const chatClosed = (transcriptText) => CLOSED_CHAT.test(String(transcriptText || ''));
+
+export function respond(ev, stampFile, now = Math.floor(Date.now() / 1000), transcriptText = '') {
+  if (ev.hook_event_name === 'Stop' && chatClosed(transcriptText)) return null;
   const kind = moment(ev);
   if (!kind || habituated(kind, stampFile, now)) return null;
   // Остановка: Claude Code не даёт закончить ход и отдаёт причину агенту; stop_hook_active (агент уже ответил) — пропуск, без петли.
@@ -149,6 +159,14 @@ function selftest() {
   const okC = cl && cl.hookSpecificOutput.additionalContext === MOMENTS.closing; if (!okC) fail++; console.log(`${okC ? 'ok  ' : 'FAIL'} M10 приказ закрываться — рефлексия и внутри окна`);
   const r1 = respond({ hook_event_name: 'Stop' }, stamp, 100000), r2 = respond({ hook_event_name: 'Stop', stop_hook_active: true }, stamp, 100001), r3 = respond({ hook_event_name: 'Stop' }, stamp, 100002);
   const okR = r1 && r1.decision === 'block' && !r2 && !r3; if (!okR) fail++; console.log(`${okR ? 'ok  ' : 'FAIL'} M11 остановка: рефлексия · после ответа — пропуск · снова в окне — пропуск`);
+  // M12 — закрытый чат: остановка молчит; тот же журнал без закрытия — рефлексия (контроль); слово владельца после закрытия — отмечается.
+  const closedTr = '{"type":"assistant","message":{"content":[{"type":"tool_use","name":"Skill","input":{"skill":"end-chat-soft"}}]}}\n';
+  const openTr = '{"type":"assistant","message":{"content":[{"type":"tool_use","name":"Skill","input":{"skill":"dayloop"}}]}}\n';
+  const c1 = respond({ hook_event_name: 'Stop' }, stamp, 200000, closedTr);
+  const c2 = respond({ hook_event_name: 'Stop' }, stamp, 300000, openTr);
+  const c3 = respond({ hook_event_name: 'UserPromptSubmit', prompt: 'починишь это поведение?' }, stamp, 400000, closedTr);
+  const okM12 = !c1 && c2 && c2.decision === 'block' && c3; if (!okM12) fail++;
+  console.log(`${okM12 ? 'ok  ' : 'FAIL'} M12 закрытый чат: остановка — ${c1 ? 'рефлексия' : 'тишина'} · без закрытия — ${c2 ? 'рефлексия' : 'тишина'} · слово владельца — ${c3 ? 'отмечено' : 'тишина'}`);
   try { rmSync(stamp); rmSync(dir, { recursive: true, force: true }); } catch { /* временная папка ОС */ }
   console.log(fail ? `selftest: ${fail} FAIL` : 'selftest: all ok');
   process.exitCode = fail ? 1 : 0;
@@ -159,7 +177,9 @@ function main() {
     if (process.argv[2] === '--selftest') return selftest();
     let ev = {};
     try { ev = JSON.parse(readFileSync(0, 'utf8') || '{}'); } catch { return; }
-    const out = respond(ev, join(HERE, '.knowledge-hook.json'));
+    let transcript = '';
+    if (ev.hook_event_name === 'Stop' && ev.transcript_path) { try { transcript = readFileSync(ev.transcript_path, 'utf8'); } catch { /* */ } }
+    const out = respond(ev, join(HERE, '.knowledge-hook.json'), undefined, transcript);
     if (out) process.stdout.write(JSON.stringify(out));
   } catch { /* хук не ломает сессию */ }
 }
