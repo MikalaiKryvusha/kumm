@@ -111,7 +111,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > commands, what to verify first.
 
 > **HANDOVER 2026-10-30 13:07 (chat 759898d5 closed by the owner: «этот чат можешь закрывать, продолжить делать сборку в новом чате»).**
-> First, before anything in game: **the game may still be open from my 12:55 run** (god ON by `_config/god-on.sh`; the owner stopped my in-game
+> **13:08 fact: the game was closed (save written 13:07, no new crash), my machine lock released; `Game_0.db` DIFFERS from the 12:05 copy — NOT
+> restored (the owner may have played); the restore waits for his word.** Was: **the game may still be open from my 12:55 run** (god ON by `_config/god-on.sh`; the owner stopped my in-game
 > step at 12:59 and looked at it — his game now). Ask nothing, check: `tasklist | grep -i ConanSandbox`; if it runs, it is his — leave it; when it is
 > closed, compare `Saved/Game_0.db` with `Conan Exiles Mods/_save-backup/2026-10-30_1205-before-blood-run/Game_0.db` and tell him whether his hero
 > state differs (my runs gave XP and wounds; every earlier launch was restored). Release my machine lock if still held:
