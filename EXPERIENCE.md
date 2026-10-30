@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0386 · 2026-10-30 · ❌ · #conan #ue4ss #umg #remote #crash #widget
+class: wrong-api-assumption
+**Lesson:** `FindAllOf('WindowRoot')` + `w:IsOpen()` / `w.WidgetTree.RootWidget` over EVERY result crashed the game inside UE4SS.dll (ACCESS_VIOLATION
+reading 0x10, 15:25:25) — the list holds class defaults and widget-tree templates whose tree is null, and `pcall` does not catch a native access
+violation. First I blamed the vanilla popup I had opened a second earlier; the log showed the game alive after it. Filter before touching: keep only
+objects whose `GetFullName()` has `/Engine/Transient` and has neither `Default__` nor `_C:WidgetTree`, or search a concrete class.
+**Trigger:** a remote loop over `FindAllOf(<base widget class>)` → filter by full name first; a crash right after two calls → read which call the log
+marks «исполнено» last before blaming the earlier one.
+mechanized: no
+
 ### EXP-0385 · 2026-10-30 · ❌→✅ · #conan #ue4ss #umg #widget #lua
 class: wrong-api-assumption
 **Lesson:** `FindFirstOf('W_SmoothHP_C')` returned the class TEMPLATE `…W_NewHealthUI_C:WidgetTree.W_SmoothHP`, not the live widget — a child widget

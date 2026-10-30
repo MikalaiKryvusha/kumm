@@ -10,7 +10,7 @@
 //   engine — KUMM/kumm.mjs, KUMM/Deploy-ModPack.ps1: гасит тест ядра (`node test-*.mjs`), стенд `tools/fixture-pack.mjs` или запуск
 //            самого файла;
 //   game   — код модов игры: `.lua` (UE4SS), `.cs` (BepInEx и пр.) в репозиториях сборок: гасит живая игра — `run-game.sh`, пульт
-//            `h.sh`, `launch-bg.ps1`, `capture-window.ps1`, `measure-walk.sh`, `tools/test-*.mjs`;
+//            `h.sh`, `launch-bg.ps1` · `launch-fg.ps1` (the two paths, 2026-10-30), `capture-window.ps1`, `measure-walk.sh`, `tools/test-*.mjs`;
 //   tool   — прочие скрипты (`.mjs .js .py .ps1 .sh`): гасит запуск самого файла (имя файла в команде).
 // `--check`, `--help`, `py_compile` — гигиена, не прогон: долг не гасят (TESTING_FRAMEWORK.md → «What the word "test" means»).
 // Состояние — `.kaif/test-debt.json` (вне git). Stop с долгом — блок; повторная остановка без новых правок — пропуск (от вечного круга).
@@ -70,7 +70,7 @@ export function kindOf(rel) {
 }
 
 // tools/test-guards.mjs — самопроверка стражей KUMM, а не прогон игры (2026-10-25 она погасила долг раскатки)
-const GAME_RUN = /run-game\.sh|\bh\.sh\b|launch-bg\.ps1|capture-window\.ps1|measure-walk\.sh|tools\/test-(?!guards\.mjs)[\w-]+\.mjs/;
+const GAME_RUN = /run-game\.sh|\bh\.sh\b|launch-[bf]g\.ps1|capture-window\.ps1|measure-walk\.sh|tools\/test-(?!guards\.mjs)[\w-]+\.mjs/;
 const ENGINE_RUN = /test-[\w-]+\.mjs|fixture-pack\.mjs|kumm\.mjs\s+(?!--check)\S|Deploy-ModPack\.ps1/;
 const HYGIENE = /--check\b|--help\b|py_compile|-m\s+compileall|PSParser/;
 // Раскатка в игру — тоже долг вида game: что ушло в игру, проверяется в игре. Пробный прогон (-DryRun, -ListMods, -Verify) — нет.
@@ -89,7 +89,7 @@ const GAME_DIR = /\/(ConanSandbox\/(Mods|Content|Binaries)|BepInEx\/(plugins|con
 // Раскатку, которую игра читает только при запуске, гасит только ЗАПУСК после неё: снимок окна или пульт открытого сеанса смотрят на
 // старые файлы (2026-10-26: снимок сеанса 11:24 погасил долг перевода, раскатанного в ≈12:03). Горячая выкладка Сварога — исключение:
 // её игра подхватывает на ходу, и её гасит любой прогон игры.
-const LAUNCH = /run-game\.sh|launch-bg\.ps1|enter-world[\w-]*\.ps1|run-camera-test\.ps1/;
+const LAUNCH = /run-game\.sh|launch-[bf]g\.ps1|enter-world[\w-]*\.ps1|run-camera-test\.ps1/;
 const HOT = new Set(['deploy:deploy-hot.sh']);
 
 /** Debt keys a command creates by deploying into a game. */

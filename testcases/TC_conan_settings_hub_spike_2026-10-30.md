@@ -22,3 +22,22 @@ the API (S1), creation (S2–S4), event path by a real click (S5, S6), control �
 | S7 | Control | a real click on empty screen | no log line | pass by the S6 control — the input path works for the game's own widgets |
 | S8 | Esc | a real Esc with the rows over the hub | the rows go, the hub stays | skipped — next run |
 | S9 | Look | a crop of ours next to a crop of the game's «Настройки» screen | the same fonts, frames, colours | skipped — next run (frames spike1/spike4 show the game's fonts and frames on our rows) |
+
+## Run 2 (chat 5db69748, 2026-10-30 15:3x) — why a real click does not reach a created FLX checkbox
+
+**Basis.** S6 failed ×3; the game map (hub bottom row, 2026-10-29) holds the same class twice: Hosav's `WBP_ButtonBase` (native `FLXButtonBase`) moved into
+the hub bar or created a second time by `WidgetBlueprintLibrary:Create` never fires its handler, while UMG widgets (the fishing `Btn_Open`, the slider of
+S5) take the mouse. Hypotheses: (H1) an FLX button takes the click only inside a live module window (`WindowRoot`); (H2) a flag on the FLX button
+(enabled / interactable / input mode) is off on a created instance; (H3) UMG is the only route — then the row's look stays vanilla and the input is a UMG
+widget under our control. Techniques: state transitions (outside / inside a module window), a control (the vanilla popup's own button clicks), error guessing (H2 flags).
+
+**Stand.** As run 1: the owner's save copied before and restored after; world entry by the remote; god on; the hub open; the game in front for real
+clicks (`wait-input-idle.ps1` first); one remote call per widget step.
+
+| # | Case | Steps | Expected | Status |
+|---|---|---|---|---|
+| S10 | FLX flags (H2) | `ForEachFunction/ForEachProperty` of `/Script/ConanSandbox.FLXButtonBase`; read on the created checkbox's `ButtonCheckbox` every bool/enum property and `GetIsEnabled`, `GetVisibility` | the list written; a flag that differs from a live vanilla button (a hub bar button) named | pass (15:24) — H2 NOT confirmed: FLXButtonBase F: SetIsToggledOn, InstantSetIsEnabled, SetToggleBehaviour, SetInputAction, SetKeyShortcutName… P: SignalClicked/Pressed/Released/Toggled/MouseEnter/Leave, StyleAsset(Class), ToggleBehaviour, KeyShortcutName, Anim*; created `ButtonCheckbox` vs the live hub `CloseButton`: the same Visibility 4 (SelfHitTestInvisible — the click lands on its Visible `ImgBackground` and bubbles), bIsEnabled true, bIsFocusable false, a StyleAsset instance each; differ only by design (ToggleBehaviour 1 vs 0, KeyShortcutName None vs Escape). Row tree: SizeBox → Overlay → ImageBackground (Visible) + HorizontalBox → name text, ButtonCheckbox — nothing lies over the button |
+| S11 | Inside a module window (H1) — attempt 1 crashed the game 15:25:25 by MY probe (FindAllOf(WindowRoot) + IsOpen over templates, EXP-0386), not by the popup; crash window closed, PID 21336; save restored | open the vanilla popup `InventorySettingsPopup` over the hub; create a `WBP_Setting_Checkbox`; add it into a panel of the popup's live tree; a real click on it | `HandleCheckboxToggled` hook prints; `GetIsToggledOn` flips | |
+| S12 | Control for S11 | a real click on the popup's own checkbox or button | its own handler reacts (state read by the remote or a frame) | |
+| S13 | UMG checkbox (H3) | `StaticConstructObject` a UMG `CheckBox` into the viewport over the hub; a real click | `IsChecked()` flips false → true | |
+| S14 | Dropdown by real clicks | the created `WBP_Setting_Dropdown` (3 options) over the hub; a real click opens the list, a real click picks «20 %» | `HandleSelectionChanged` hook prints; `GetSelectedOptionID` = 20 | |

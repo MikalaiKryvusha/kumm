@@ -61,6 +61,12 @@
     chat needs goes into a repository (STATUS, `plans/`, `researches/`, the pack), never into a scratchpad — scratchpads of sessions idle
     for 24 h are swept at session start by `tools/hooks/scratch-sweep.mjs`. A work tree outside the scratchpad (`_paksview-*`, `_text-extract-*`)
     is named in STATUS with its size and the task that needs it; when the task closes, the tree goes.
+16. **A game is worked with in two ways — in front and in the background; the owner picks one at the moment, the agent masters both.**
+    1. Launch by the path the owner named last: Conan — `launch-fg.ps1` (in front) or `launch-bg.ps1` (background), `HOUSE_RULES_REFERENCE.md` §6.
+    2. Every kind of work — remote calls, frames, tests — is carried on either path; a test that needs real input in the background path gets a
+       background-capable instrument, never a silent switch of the path.
+    3. Before a launch — no game of ours already running (the scripts refuse with exit 2 and the PID).
+    (`[OWNER]` 2026-10-30 15:3x · verbatim in the header of `ConanExiles/_config/launch-fg.ps1`.)
 
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · two maps for every game · KAIF
 feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images — WebP, never PNG). The
