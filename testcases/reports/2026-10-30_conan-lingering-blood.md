@@ -21,7 +21,7 @@ and restored after each launch; god by `_config/god-on.sh`, food/water by a dire
 - Functional run: hits on the god hero in the game, the mod's lines in `UE4SS.log` and the frames read by eye.
 - B1 pass (life 3.0, the attacker's `DoHandleHitFeedback`) · B2 fail as designed (`SetLifeSpan` not callable; pre-hook edit lost) · B3 pass
   (vanilla gone by +4.6 s) · B4 skipped · B5 pass · L1 pass · L2 pass · L3 pass (stain at +10/+60/+120/+180/+285 s) · L4 pass (none at
-  +305/+330 s) · L5 pass (= B3) · L6 partial (`os.clock` has 1 ms steps on Windows: «4 stains, 1.000 ms» bounds the cost at ≈0.25 ms per stain).
+  +305/+330 s) · L5 pass (= B3) · L6 partial (`os.clock` has 1 ms steps on Windows: «4 stains, 1.000 ms» is NOT a bound (correction 13:08: a 0.9 ms call can read 0 with 1 ms steps) — the cost is unmeasured; a 1000-call loop is case G4).
 
 **Found.**
 - Build 1: `DecalComponent:SetLifeSpan` is a C++ method, not callable from Lua («attempt to call a TrivialObject value») — fixed by the fade

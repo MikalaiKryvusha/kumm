@@ -36,7 +36,7 @@ night — time 12:00 and remove them; after the hits the creature is REMOVED (`K
 | L3 | Stain holds | creature removed; top-down frames of the same spot at +10, +60, +120, +180, +240, +290 s | the full red stain at every frame | pass — +10, +60, +120, +180, +285 s; the first build (`SetLifeSpan`) failed here: «attempt to call a TrivialObject value», no stain at +10 s (12:32) |
 | L4 | Stain leaves at the hold time | frames at +310 and +330 s | no stain | pass — +305 and +330 s: sand only |
 | L5 | Control (vanilla) | the 12:16 run with the ineffective pre-hook = vanilla life | stain gone by +4 s (`burst2`, 12:16:02 → 12:16:06) | pass by the 12:16 run — visible at +0.6 s, gone at +4.6 s |
-| L6 | Cost | the minute summary in `UE4SS.log` | own time per stain ≪ 1 ms, worst < 0.2 ms | partial — the summary «4 stains, 1.000 ms, worst 1.000 ms» is the 1 ms step of `os.clock` on Windows, not a measurement: upper bound ≈0.25 ms per stain; one hook call per stain |
+| L6 | Cost | the minute summary in `UE4SS.log` | own time per stain ≪ 1 ms, worst < 0.2 ms | partial — the summary «4 stains, 1.000 ms, worst 1.000 ms» is the 1 ms step of `os.clock` on Windows, not a measurement: not a bound either (correction 13:08) — unmeasured, case G4; one hook call per stain |
 
 **KrinikConanGraphics 0.1.0 (the blood mod renamed, Engine.ini moved in; the cap now evicts the OLDEST stain — `[OWNER]` «Нужно старые убирать,
 а новые чтобы жили 5 минут» · 2026-10-30 ≈12:5x) + the XP «k» one decimal truncated (plan 36 W5c) + W30 recon.** Stand as above; for G3 a test
