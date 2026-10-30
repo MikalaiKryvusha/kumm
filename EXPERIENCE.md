@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0393 · 2026-10-30 · ❌ · #conan #stand #false-inference #rollback
+class: single-run-verdict
+**Lesson:** the corpse strip stopped appearing on the stand after one build; a probe («LoadAsset, then the class is still not found») looked like proof
+that my new widget broke the asset, and I rolled the owner-approved centred prompt back and reset the kit asset. The reset vanilla-based build failed
+the stand the same way and gave the same probe answer — the probe means nothing and the stand was the defect.
+**Trigger:** «my change broke X» → run the CONTROL (the known-good build) on the same stand BEFORE any rollback; a probe counts only if it gives a
+different answer on the good build.
+mechanized: no
+
 ### EXP-0392 · 2026-10-30 · ❌→✅ · #conan #measurement #frames #detector #ui
 class: instrument-not-proved
 **Lesson:** a colour-threshold detector of the WHOLE key icon («beige-ish pixels in these columns») caught grass and blood around it and reported the icon
