@@ -8,7 +8,7 @@
 `.uexp`+66573); `StartJump` refuses only on substates 18 and 14 and the engine's `CanJump`. Approach B: for the PLAYER only, leave substate 8
 when he jumps — `ExitSubstate(8)` on his combat component — so `ActionTry` lets the shot through in the air.
 
-**Stand.** The owner's save in the oasis; the bow in hand (checked by eye on a frame before the first shot); god mode on; the companion moved
+**Stand.** The owner's save in the oasis; the bow in hand (checked by eye on a frame before the first shot); god mode on (intended by `exec God`, which does nothing in 3.0.1 — the hero was mortal; EXP-0381); the companion moved
 away from the line of fire; arrows in the quick bar; the game in front; real input by `mouse-seq.ps1` (Space = `kdown:0x20`/`kup:0x20`).
 Observation: the arrow counter in the mod log (`#N из лука`) and the hero's height at launch (log line; the remote reads `K2_GetActorLocation`).
 

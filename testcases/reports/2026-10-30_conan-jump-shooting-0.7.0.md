@@ -4,7 +4,7 @@
 `testcases/TC_conan_jump_shooting_2026-10-30.md` (J1–J4 the remote experiment, M1–M5 the mod path); the owner's words of 2026-10-28 in plan 37.
 
 **Contour.** Conan Exiles 3.0.1, the build's paks + Lua mods; the owner's save in the oasis; the bow in hand (socket checked: `Socket_Bow`); god
-mode on; a hostile boss NPC that spawns at the oasis (`HumanoidNPCCharacter_20percentbigger_boss_C`, random names «Цирия Безголовая»,
+mode on (intended by `exec God`, which does nothing in 3.0.1 — the hero was mortal; EXP-0381); a hostile boss NPC that spawns at the oasis (`HumanoidNPCCharacter_20percentbigger_boss_C`, random names «Цирия Безголовая»,
 «Арнос из Киммерии») killed by the remote before the cases; the game in front; machine lock taken per launch and released after.
 
 **Runs.**

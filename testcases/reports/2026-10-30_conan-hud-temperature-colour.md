@@ -4,7 +4,7 @@
 `testcases/TC_conan_hud_temperature_colour_2026-10-30.md` (T1–T7); the owner's word 2026-10-30 10:58.
 
 **Contour.** Conan Exiles 3.0.1 with the build; KrinikHudOutline `Scripts/main.lua` deployed by copy (two launches: without and with the
-1-unit hysteresis); the owner's save in the oasis; god mode on; time of day set by the remote
+1-unit hysteresis); the owner's save in the oasis; god mode on (intended by `exec God`, which does nothing in 3.0.1 — the hero was mortal; EXP-0381); time of day set by the remote
 (`FindFirstOf('BP_TimeOfDayManager_C'):SetTimeOfDay(h)` — the console `SetTimeOfDay` does not exist in 3.0.1); machine lock per launch.
 
 **Runs.**

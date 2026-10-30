@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0381 · 2026-10-30 · ❌→✅ · #conan #stand #god #save #hunger
+class: tool-path-unproven
+**Lesson:** every Conan 3.0.1 «god mode» run of the day used the console `exec God` — the remote answered «ok» and NOTHING changed
+(`bCanBeDamaged` stayed true); the hero was mortal all along. At 11:26 he died (the owner's save had food and water at 0 % since before my
+runs — starvation drains health even under a working god flag — plus the oasis boss), dropped everything, respawned naked. Recovered: game
+closed, the death state kept as evidence, `Game_0_backup_1.db` (written at that launch's world entry, 11:25) put back as `Game_0.db` (a clean
+close leaves no -wal/-shm), gear verified on a frame. I first told the owner «exec God switched it off» — wrong, corrected.
+Rules: (1) god by state, never blind — `bash _config/god-on.sh` (direct `CheatManager:God()`, reads `bCanBeDamaged`, exit 0 only when right);
+(2) copy `Saved/Game_0.db` before every run; (3) read the HUD survival line (food/water/heat) on the stand frame — a 0 % stat kills through god.
+mechanized: partly — `ConanExiles/_config/god-on.sh`; save copy and survival check are stand steps (game map)
+
 ### EXP-0380 · 2026-10-30 · ❌→✅ · #disk #cleanup #hardlinks #owner-saw-first
 class: guessed-instead-of-measured
 **Lesson:** I promised «≈95 GB back» for a scratchpad `du` measured at 85 GB — deleting it freed 28 GB: most of it was hard links whose other

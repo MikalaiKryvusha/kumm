@@ -146,7 +146,7 @@ violation in UE4SS; read its location BEFORE `KillCharacter`.
 Первое лицо включается, когда колёсико ведёт штангу ниже `ThirdPersonCameraMinArmLength`; при 30 (наш `zoom_min`) переход не срабатывает, при
 130 срабатывает (2026-10-26 20:59). `SwitchToFirstPersonCamera` сама переставляет `InteractionDistance`.
 Читы прогона пультом (2026-10-26): время суток — `FindFirstOf('BP_TimeOfDayManager_C'):SetTimeOfDay(12.0)` (часы 0–24; консольной
-`SetTimeOfDay 1200` в 3.0.1 НЕТ — «Command not recognized»); бессмертие — `exec God`; выносливость — `AdjustStaminaRegenMod(1000.0)` и поля героя
+`SetTimeOfDay 1200` в 3.0.1 НЕТ — «Command not recognized»); бессмертие — НЕ `exec God` (в 3.0.1 консольная команда ничего не включает, замер 2026-10-30 11:31), а `bash _config/god-on.sh [off]` (прямой `CheatManager:God()` по состоянию `bCanBeDamaged`); голод и жажда на 0 % убивают и при бессмертии — перед прогоном смотреть строку еды/воды на кадре стенда и копировать `Saved/Game_0.db` (EXP-0381). Correction for the record: every run report and case before 2026-10-30 11:31 that says «god mode» / `exec God` ran with a MORTAL hero; выносливость — `AdjustStaminaRegenMod(1000.0)` и поля героя
 `SprintStaminacost`, `SwimStaminacost`, `StaminaJumpCost`, `JumpStaminaCostModifier` = 0, `SetClimbingStaminaCostModifier(0.0)`; выдача — `exec MakeMeAdmin`,
 затем `exec SpawnItem <id> <n>` (железная стрела 53612, «Мощный охотничий лук» 51405; без `MakeMeAdmin` пульт отвечает «ok», а предмета нет —
 2026-10-27). Всё сбрасывается перезапуском. Убрать врагов рядом: `GameplayStatics:ApplyDamage(…, 100000)` у Конана НЕ убивает (нежить Night Terrors

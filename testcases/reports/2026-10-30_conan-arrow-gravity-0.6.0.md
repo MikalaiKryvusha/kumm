@@ -5,7 +5,7 @@ at launch; basis — `testcases/TC_conan_arrow_ballistics_remastered_2026-10-30.
 (plan 36 W15, 2026-10-30 08:33).
 
 **Contour.** Conan Exiles 3.0.1 (`D:\Games\Conan Exiles 3.0.1`), UE4SS, the build's 64 paks + Lua mods; mod `main.lua` deployed by copy at 10:41;
-the owner's save in the oasis; the bow in slot 1 held in front (checked by eye, frame s1); god mode on for the run; the companion moved 15 m
+the owner's save in the oasis; the bow in slot 1 held in front (checked by eye, frame s1); god mode on for the run (intended by `exec God`, which does nothing in 3.0.1 — the hero was mortal; EXP-0381); a hostile boss (taken for a companion at the time) moved 15 m
 behind the hero before the pillar shots (interference removed); the game in the foreground; machine lock taken 10:41:48, released after.
 
 **Runs.**
@@ -23,7 +23,7 @@ behind the hero before the pillar shots (interference removed); the game in the 
   ≈1.5 m at pitch +3° → effective gravity ≈0.45 for both draws (vanilla: 1.2 vs 0.12).
 - B9 pass by the 0.5.0 run 09:38–09:44 (same code without the curve drop): gravity back to 1.20 / 0.12 at +0.3 s.
 
-**Found.** none (the mod); a stand note — the owner's companion follows the hero into the line of fire; move her before shooting.
+**Found.** none (the mod); a stand note — the oasis boss (hostile, not a thrall) walks into the line of fire; kill it by the remote first.
 
 **Traces.** `D:\Games\Conan Exiles 3.0.1\ConanSandbox\Binaries\Win64\ue4ss\UE4SS.log` lines `[KrinikConanArchery] #1…#4` (10:43:29–10:44:56);
 frames `D:\Temp\claude\d--work-ai-sandbox-KUMM\77faa752-1410-4183-9ee5-b174918b40dc\scratchpad\w15\s1–s4.jpg` (scratch, not kept); bytecode trace of
