@@ -2,7 +2,7 @@
 
 > **Created:** 2026-10-30 · on the owner's word: `[OWNER]` «спрайты крови на земле которые - нужно чтобы держались на земле до 5 минут до исчезночения» ·
 > «чтобы земля, залитая кровью - долго была в крови» · «время настраивается ползунком в модах Krinik» · 2026-10-30 ≈10:59–11:00
-> **Parent:** plan 36 W28 · **Status:** recon started 2026-10-30 11:2x — the blood assets found, the spawner and its lifetime not yet · **Outbound:** —
+> **Parent:** plan 36 W28 · **Status:** recon 2026-10-30 — blood assets found; live hooks: footprints 5 s, arrow impacts 30 s; the blood spawner not caught yet (no hit landed) · **Outbound:** —
 
 ## Found (vanilla 3.0.1, `retoc to-legacy --filter lood` over `_paksview-3.0.1`)
 
@@ -11,6 +11,11 @@
 `M_blood_string`, `MF_FLX_BloodColor`; particle systems `P_blood_1h_sword_fatality`, `P_blood_2h_axe_fatality`, `P_blood_ceiling_drip`,
 `P_blood_decapitation`, `P_blood_katana`, `P_blood_limb_spray`, `P_blood_mid_split`, `P_skull_fragmenting`. No blueprint with «blood» in its
 path spawns them — the spawner sits in combat/hit blueprints under other names.
+
+## Live, 2026-10-30 11:22–11:24 (UE4SS hooks on `/Script/Engine.GameplayStatics`)
+
+- `SpawnDecalAtLocation` — footprints `M_footprint_generic_shoe`, LifeSpan **5 s**; `SpawnDecalAttached` — arrow impacts `M_decal_rock_impact_01_D` on the landscape, LifeSpan **30 s** (the last parameter; the material is the FIRST callback parameter of `SpawnDecalAttached`).
+- No blood through `SpawnEmitterAtLocation` / `SpawnEmitterAttached` (filter «blood»/«gore») — but the arrows did not hit the boss in that run (he walked off; frame), so blood was NOT produced: inconclusive. Next run: a frozen target (the remote) hit point-blank, the same hooks plus Niagara `/Script/Niagara.NiagaraFunctionLibrary:SpawnSystemAtLocation` / `SpawnSystemAttached`; the owner says «спрайты» — the ground blood may be particles, not decals.
 
 ## Next
 
