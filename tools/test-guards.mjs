@@ -408,7 +408,8 @@ try {
   const out = join(dir, 'FAREWELL.md');
   const U = (content, extra = {}) => JSON.stringify({ type: 'user', message: { content }, ...extra });
   const A = (...content) => JSON.stringify({ type: 'assistant', message: { content } });
-  const skill = (name) => ({ type: 'tool_use', name: 'Skill', input: { skill: name } });
+  let skillN = 0;
+  const skill = (name, id) => ({ type: 'tool_use', id: id || 'tu-' + (++skillN), name: 'Skill', input: { skill: name } });
   const result = U([{ type: 'tool_result', content: 'ok' }]);
   const run = (lines, extra = {}) => {
     const tp = join(dir, 't' + total + '.jsonl');
@@ -436,10 +437,10 @@ try {
   check('the skill body (isMeta) is not an owner prompt: closure still seen', run([
     U('закрывай'), A(skill('end-chat-force')), result, U('Base directory for this skill: …', { isMeta: true }), A({ type: 'text', text: 'Закрыто по навыку.' }),
   ]), 'Закрыто по навыку.' + NL);
-  check('a second stop of the closing turn (stop_hook_active, the knowledge-hook answer) keeps the farewell', run([
-    U('закрывай'), A(skill('end-chat-soft')), result, A({ type: 'text', text: 'Прощание целиком.' }), A({ type: 'text', text: 'Новых знаний нет.' }),
-  ], { stop_hook_active: true }), 'Закрыто по навыку.' + NL);
-  check('control: another skill (resume) is not a closure', run([U('resume'), A(skill('resume')), result, A({ type: 'text', text: 'Начинаю.' })]), 'Закрыто по навыку.' + NL);
+  const closing = [U('закрывай'), A(skill('end-chat-soft', 'tu-same')), result, A({ type: 'text', text: 'Прощание целиком.' })];
+  check('the FIRST stop after a closure writes the farewell even with stop_hook_active (an earlier hook blocked in that turn)', run(closing, { stop_hook_active: true }), 'Прощание целиком.' + NL);
+  check('a second stop of the same closure (the knowledge-hook answer) keeps the farewell', run([...closing, A({ type: 'text', text: 'Новых знаний нет.' })], { stop_hook_active: true }), 'Прощание целиком.' + NL);
+  check('control: another skill (resume) is not a closure', run([U('resume'), A(skill('resume')), result, A({ type: 'text', text: 'Начинаю.' })]), 'Прощание целиком.' + NL);
   check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [FC, '--out', out], { input: '{not json', encoding: 'utf8' }).status, 0);
 } catch (e) {
   check('part J ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');

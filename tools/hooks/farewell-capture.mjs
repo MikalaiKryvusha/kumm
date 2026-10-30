@@ -45,33 +45,40 @@ export function readTurn(lines) {
   let start = 0;
   for (let i = recs.length - 1; i >= 0; i--) if (isOwnerPrompt(recs[i])) { start = i; break; }
   const turn = recs.slice(start);
-  let closed = false, tail = [];
+  let closed = false, closureId = '', tail = [];
   for (const rec of turn) {
     const bs = blocks(contentOf(rec));
     if (rec.type === 'user') {
       const text = bs.filter((b) => b.type === 'text').map((b) => b.text).join('\n');
-      if (!rec.isMeta && CLOSURE_COMMAND.test(text)) closed = true;
+      if (!rec.isMeta && CLOSURE_COMMAND.test(text)) { closed = true; closureId = String(rec.uuid || 'command'); }
       if (bs.some((b) => b.type === 'tool_result')) tail = [];
       continue;
     }
     if (rec.type !== 'assistant') continue;
     for (const b of bs) {
       if (b.type === 'tool_use') {
-        if (b.name === 'Skill' && b.input && CLOSURE_SKILL.test(String(b.input.skill || '').trim())) closed = true;
+        if (b.name === 'Skill' && b.input && CLOSURE_SKILL.test(String(b.input.skill || '').trim())) { closed = true; closureId = String(b.id || rec.uuid || 'skill'); }
         tail = [];
       } else if (b.type === 'text' && b.text && b.text.trim()) tail.push(b.text);
     }
   }
-  return { closed, text: tail.join('\n\n').trim() };
+  return { closed, closureId, text: tail.join('\n\n').trim() };
 }
 
 function main() {
   const args = process.argv.slice(2);
   const outArg = args.indexOf('--out');
   const event = JSON.parse(readFileSync(0, 'utf8') || '{}');
-  if (!event.transcript_path || event.stop_hook_active) return;
+  // stop_hook_active НЕ причина молчать: он стоит и на ПЕРВОЙ остановке после закрытия, если раньше в том же ходе другой Stop-хук не
+  // пустил остановку (2026-10-30 11:4x: закрытие после отказов стража автономности — прощание не записалось, владелец: «опять расходится
+  // твое сообщение с тем, что в FAREWELL_MESSAGE…»). Защита от «новых знаний нет» — номер закрытия: одно закрытие пишет файл один раз.
+  if (!event.transcript_path) return;
   const turn = readTurn(readFileSync(event.transcript_path, 'utf8').split('\n'));
   if (!turn.closed) return;
+  const stateFile = (outArg >= 0 && args[outArg + 1] ? args[outArg + 1] : join(process.env.CLAUDE_PROJECT_DIR || event.cwd || process.cwd(), FAREWELL_FILE)) + '.state';
+  let seen = '';
+  try { seen = JSON.parse(readFileSync(stateFile, 'utf8')).closureId || ''; } catch { /* нет записи */ }
+  if (turn.closureId && seen === turn.closureId) return;   // вторая остановка того же закрытия
   const text = (typeof event.last_assistant_message === 'string' && event.last_assistant_message.trim())
     ? event.last_assistant_message.trim() : turn.text;
   if (!text) return;
@@ -81,6 +88,7 @@ function main() {
   const tmp = out + '.tmp';
   writeFileSync(tmp, text + '\n', 'utf8');
   renameSync(tmp, out);
+  writeFileSync(stateFile, JSON.stringify({ closureId: turn.closureId, at: new Date().toISOString() }));
 }
 
 // Прямой запуск — хук; импорт (autonomy-guard берёт readTurn) — только функции, без чтения stdin и выхода.
