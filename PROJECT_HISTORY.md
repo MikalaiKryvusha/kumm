@@ -1,5 +1,46 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-30 21:3x +03:00 — STATUS: the 16:55 handover and its closed items (moved verbatim at the closing of chat 34cf4362)
+
+> **HANDOVER 2026-10-30 16:55 +03:00 (chat 5db69748 closed at 75 % of the window; the 14:34–16:4x updates moved verbatim to the chronicle):**
+> - **Done this chat:** the guide's exclusive cards + PDF (pack `ab9c98b`, `029ba6b`); W11 versions 3.0.1 (pack `183a172`, `_config/devkit/set-pak-version.py`);
+>   W18a fishing captions on one line with bars (pack `550b351`, KrinikConanUI 0.14.0) — the look waits in `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\9 рыбалка — подписи сложности`;
+>   engine `-Verify` warns when a mod re-sets an Engine.ini cvar (`536e3ca`, fixture 27/27); `save-restore.sh` (pack `d6741a1`) — the save is SQLite WAL, restore ONLY
+>   by it; `corpse-stand.sh` (pack `4951730`, `bash _config/corpse-stand.sh 50` at the oasis save — kills the boss at 43 m); two launch paths `launch-fg.ps1` /
+>   `launch-bg.ps1` (HOUSE_RULES §1 rule 16 — the owner picks; his last word 16:18 «работай в фоне»); hooks: autonomy-guard catches any «…автономно»,
+>   knowledge-hook does not lock vanilla assets, clock-now adopted (the moved-placeholder defect FIXED: the origin copy 253ebc0 taken 17:3x, selftest ok, live probe: a moved placeholder stays literal; was the new
+>   copy from `D:\work\ai_sandbox\KAIF\framework\hooks\clock-now.mjs` after their commit, kaif-48); the KAIF inventory `reports/KAIF_FIELD/2026-10-30_kumm-local-rules-and-hooks.md` sent to kaif-48.
+> - **FIRST next chat — GitHub access is back (the owner ≈16:57: «и нам восстановили доступ к GitHub!!!» · «может даже LFS заработает, но я не уверен»):**
+>   checked 16:58 read-only: `git ls-remote origin main` works (GitHub `conan-exiles-modpack` at `cd6711a` of 2026-10-27 — **103 commits behind** local
+>   `4951730`); `git lfs locks --remote origin` answers rc 0 (the LFS API takes our credentials); the pack tracks NO LFS files yet. Not done: an LFS upload and
+>   pushing the pack to its GitHub origin — the owner's call (then; since 17:12 the pack pushes to GitHub only, HOUSE_RULES §2).
+>   16:59 `git push --dry-run origin main` passes (fast-forward `cd6711a..4951730`; 267 blobs, 48 MB, largest 10 MB — under GitHub limits); the push waits
+>   for his «да». Unliminium (`D:\work\UnliminiumTheDigitalGame`, 804 LFS files) has only the F `backup` remote in this clone — its GitHub LFS is checked there.
+> - **17:01 the pack is on GitHub:** `git push origin main` → `cd6711a..4951730` (the private repo `conan-exiles-modpack`, visibility PRIVATE checked first) —
+>   `[OWNER]` «Да, в приватный реп» · 2026-10-30 17:01. From 17:12 the pack pushes to GitHub only (`git push origin main`); the F mirrors are DELETED (every ref checked on GitHub first) and HOUSE_RULES §2 is fixed by the owner's «РАЗРЕШАЮ ИСПРАВИТЬ ПРАВИЛО»; earlier the same line in
+>   `HOUSE_RULES.md` §2 was refused to me by the auto-mode classifier («Self-Modification») — the owner edits the rule or allows it; until then this line holds.
+> - **W18a accepted** — the fishing captions on one line with bars (`[OWNER]` «ок, принято» · 2026-10-30 17:05).
+> - **Unliminium → GitHub (the owner 17:04: «НЕТ, ТЫ СДЕЛАЕШЬ!!!»):** GitHub `main` (661 commits) holds 18 commits «Code of <sha>» — code-only snapshots of LOCAL
+>   commits (both checked as ancestors of local `main`) made while LFS did not work; local `main` is ahead 431 with the real history and 1505 LFS file versions
+>   (909 MB on F). 17:05: `git push origin main:refs/heads/full-history-lfs` started — a NEW branch, `main` untouched (replacing GitHub `main` = a force-push, the
+>   owner's word only). Plan free; the LFS quota is not readable by API (endpoint moved, HTTP 410) — the push itself tells.
+>   **DONE 17:09: GitHub LFS WORKS** — the push uploaded 968 objects (738 MB), rc 0, no quota error; branch `full-history-lfs` = local `main` `a9af4d9`; a second
+>   `git lfs push --all origin` reported 1505/1505 (949 MB) — every LFS object of the history is on the server (`[OWNER]` «суппер!» · 17:10). DONE 17:12, the owner's
+>   «да»: the old GitHub `main` saved as branch `code-snapshots-backup` (`0299c88`), then `main` ← `a9af4d9` by `--force-with-lease`; all 18 «Code of» snapshots were copies of local commits (checked). F storage deleted 17:1x (6164 files by list, every ref on GitHub first).
+> - **The owner asks (17:04): «можно удалить с F временное хранилище? ГитХаб LFS работает?»** — not yet: GitHub LFS upload NOT verified (only the API answers);
+>   Unliminium's 909 MB of LFS live only on F as far as this clone shows. Order before any delete: in the Unliminium repo add/fetch its GitHub remote, check the
+>   account's LFS quota, `git lfs push --all <github>`, then `git lfs ls-files` vs the server (`git lfs fsck`/a fresh clone) — only then the F copy may go, by his word.
+> - **The crash README is accepted** (`[OWNER]` «ок, годится» · 2026-10-30 17:03); it points to the guide section. **DONE 2026-10-30 18:26 +03:00 (pack `aaff8b2`):** the section is
+>   the guide's own LARGE sheet 2 (cover points to it; install fits sheet 1; uninstall moved to «Что знать заранее»), PDF 10 pages, sheets 1–2 looked at; the look
+>   waits for the owner in `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\10 руководство — лист отчёта о падении`. Chrome-PDF trap: an element wider than the page
+>   makes Chrome SCALE the whole document down — a layout that "fits" only then is a false fit.
+> - **The save question is closed:** `[AI] by mandate — «возвращать ли героя к копии 12:05, - на твое усмотрение. Я пока не играю на прохождение, пока сборка
+>   не готова»` (2026-10-30 17:02): NOT restored to 12:05; the current save (intact, = the 16:52 copy) stays the test stand.
+> - F storage (17:00, the owner: «на F аж сделали хранилище из-за того, что LFS не работал» · «может можем запушить это всё в ГитХаб»): `F:\ai_sandbox\conan_backup\conan-exiles-modpack.git`
+>   103 MB, no LFS, last 16:54 (push to GitHub ready, see above); `F:\ai_sandbox\unliminium_backup\UnliminiumTheDigitalGame.git` 1103 MB, **909 MB of it LFS**, last
+>   2026-10-24. Hypothesis to check FIRST (not verified): GitHub's free LFS quota (1 GB storage, 1 GB bandwidth a month) — `gh api /user` plan + the repo's LFS
+>   usage in its settings before any LFS push; Conan can go to GitHub at once (no LFS), Unliminium only after the quota is known.
+
 ## 2026-10-30 16:55 +03:00 — STATUS: the 14:34 / 16:4x / 14:57 updates and the 13:07 tail (moved verbatim at the closing of chat 5db69748)
 
 > **UPDATE 2026-10-30 14:34 (chat b46b10e8):** W32 `KrinikConanGameplay` DONE (pack `2daa084`, G1–G6 pass). **Mod notes are a lock now** (the owner
