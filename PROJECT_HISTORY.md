@@ -1,5 +1,26 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-30 23:56 +03:00 — STATUS: the 18:15 session, the 19:08 dayloop, the judge caveat, the quick list and the day's rules (moved verbatim at the closing of chat 0d831a73)
+
+> - **Session 18:15 — the owner works over Vibepollo:** «по возможности работай с игрой в фоне, мнге будет более важно читать ход работы твоей в ВС код и слушать
+>   ход твоей работы твоим голосом» (2026-10-30 18:23) — launch only by `launch-bg.ps1`, narrate in chat AND by voice. **Conan volume 1 % in the Windows mixer**
+>   (`[OWNER]` «в микшере виннды поставь конану громкость 1%» · 18:21): the game was not running → not applied yet; at the first launch run
+>   `powershell -File _config/set-app-volume.ps1 -Process ConanSandbox -Percent 1` (pack `aaff8b2`; exit 4 = no audio session yet, retry after the menu sounds).
+>   **APPLIED 18:32** (mixer shows 1 %; the next launch kept 1 % by itself).
+> - **19:08 «автономно» → `/dayloop`.** **W6 corpse prompt on two lines and W10a quick-loot size — DONE in game 19:28–19:42, waiting for the owner's eye**
+>   (review folder `НА ОТСМОТР НИКОЛАЕМ\11 подсказка над трупом и окно лута`, report `testcases/reports/2026-10-30_conan-corpse-prompt-two-lines-quickloot-size.md`):
+>   icon pad 1 (pad 8 was a detector error, EXP-0392), «Забрать все (удерж.)», the loot window keeps one size (by remote; his wheel check pending). The owner's own
+>   game 18:55–19:0x was not touched (EXP-0391). Stand in one call: `_config/corpse-prompt-shot.sh <tag> [dir]` (the oasis save `_save-backup/2026-10-30_1831-…` works
+>   best; the 19:15 save stands in an exiles' camp — live NPCs). The live save = the 19:15 copy (his play), restored.
+> - Judge caveat (16:59): the engine's runtime-cvar warning skips the pack ini only in `engineIni.file` mode — in `appendFile` mode a pack ini inside a mod
+>   folder would warn on itself (no fixture yet).
+> - **Quick list next:** W6 corpse prompt on two lines (route: line 2 by the translation key «или нажмите {0}, чтобы забрать предметы» + line 1 as a separate
+>   strip text — game map line ≈123; stand `corpse-stand.sh 50`); W10a quick-loot jump; W25 level-up hint through the loot window; W11 top-of-list
+>   (`games/ConanExiles/mods/SimpleModlist.md`: two routes); W4 minimap; then W13/W30 arrows, W29 shouts, G3/G4 (`TC_conan_blood_decal_lifespan_2026-10-30.md`).
+> - **Rules learned the hard way today:** filter `FindAllOf(<base class>)` by full name before ANY method call (three crashes, EXP-0386/0387); after a crash —
+>   crash window by PID, `save-restore.sh`, world entry check, only then the next probe; flip a `[NOT-TESTED]` by its neighbour line, never by the bare
+>   pattern (EXP-0389); a mod's notes `games/ConanExiles/mods/<Mod>.md` before working on it (new today: SimpleModlist, KrinikConanArchery, KrinikConanGameplay, JaarFishing).
+
 ## 2026-10-30 21:3x +03:00 — STATUS: the 16:55 handover and its closed items (moved verbatim at the closing of chat 34cf4362)
 
 > **HANDOVER 2026-10-30 16:55 +03:00 (chat 5db69748 closed at 75 % of the window; the 14:34–16:4x updates moved verbatim to the chronicle):**
