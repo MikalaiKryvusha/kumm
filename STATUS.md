@@ -140,7 +140,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **Waits for the owner's hands (called in chat 2026-10-31 16:2x):** `TC_conan_build_stability_compat_perf_2026-10-26` R2 — a stone picked up in third
 >   person at the default and the far zoom; AIM15 — the arrow seen leaving the bow and landing under the crosshair; DM0 — F1 expands the Damage Meter: does it cover Hosav's HUD text (called 16:2x;
 >   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
->   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own. **Agent's game cases still unrun there (≈ 2–3 h,
+>   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own.
+>   The owner asked the agent to press the keys itself (16:24 «может ты сам нажмешь?» · «эмулируешь нажатие клавы» · «и скриншот снимешь»): 16:25 `launch-fg.ps1`
+>   (in front: True) → `mouse-seq.ps1 "kdown:1 … rdown wait:1600 lclick …" -KeepFront` + `capture-burst.ps1` 24 frames — the hero never drew the bow (input did not
+>   reach the game; «Обновляется каталог обликов» on screen, the owner on remote desktop). Next: find why (focus / SendInput in the RDP session / the game still
+>   loading) before the bow, F1 and stone cases by emulated input. **Agent's game cases still unrun there (≈ 2–3 h,
 >   one launch for several):** C1 Caverns of Set chest loot, C2 Highmane crossbow, C3 mod fire particles, T1 new strings, W1 NPC mods in flight, DM0 expanded
 >   Damage Meter vs Hosav HUD, B7a hub bottom bar geometry, AIM4 / AIM8 arrow-aim controls; U6 — Edit Appearance and Waystones (module names first).
 > - **FIRST next chat:** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
