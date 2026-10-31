@@ -85,8 +85,9 @@
     against bug 64 / plan 36 first. (`[OWNER]` 2026-10-31 17:49 «ОНО УЖЕ НАХУЙ ВСЕ ПОЧИНЕНО ТОБОЮ ЖЕ БЛЯТЬ В ПРОШЛЫХ СЕССИЯХ!!» · «КАКОГО ХУЯ ТЫ НЕ
     АКТУАЛИЗИРУЕШЬ СВОИ ЗНАНИЯ БЛЯТЬ» · «ПО ТОМУ ЧТО ТЫ ЖЕ ЧИНИШЬ».)
 21. **In every Russian text of the build the slider control is «шкала»** («Текущая шкала», «на шкале», «своими шкалами») — never «ползунок» or «слайдер»;
-    the owner's verbatim quotes keep their own word. (`[OWNER]` 2026-10-31 19:08 «шкала» · «везде так пишем».) Applied the same day: `Game.locres` 4 entries
-    (`locres-set-tr.py`), `ru_table.lua`, `dm-fish-ru.md`, the settings-hub mockups.
+    the owner's verbatim quotes keep their own word. (`[OWNER]` 2026-10-31 19:08 «шкала» · «везде так пишем».) Applied: `Game.locres` 4 entries
+    (`locres-set-tr.py`), `ru_table.lua`, the settings-hub mockups; the SOURCE `dm-fish-ru.tsv` (and the table `dm-fish-ru.md` built from it) only on
+    2026-10-31 23:2x — until then a full locres rebuild brought «ползунок» back (pack `ee13fcb`).
 22. **The author's links (`author_links.txt`) are a SECTION OF LINKS — never «contacts», never a list under «feedback» or «куда писать».** In the README, the
     guide and the launcher they stand under their own heading («Ссылки» / «Links», «Автор сборки и ссылки») with no sentence that calls them addresses for
     reports; one source file feeds all three places (`build-docs.py`, `_config/public_release/mods-table.mjs`). (`[OWNER]` 2026-10-31 21:33 «ЭТО НЕ КОНТАКТЫ,

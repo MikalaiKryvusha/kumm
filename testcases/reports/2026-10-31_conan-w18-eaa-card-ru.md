@@ -26,7 +26,7 @@ Functional run: the live game's localization table read for all 6 keys — each 
 
 ## 5. Found
 
-1. A full localization rebuild would revert 6 entries fixed straight in `Game.locres` — their sources were not edited (debt in the localization README).
+1. A full localization rebuild would revert 6 entries fixed straight in `Game.locres` — 4 «шкала» rows not carried into `dm-fish-ru.tsv`, 2 vanilla strings left to the unlisted step `vanilla-override.py`. FIXED 23:2x (pack `ee13fcb`): the full rebuild equals the deployed file.
 
 ## 6. Traces
 

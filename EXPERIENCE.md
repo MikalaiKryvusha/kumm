@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0418 · 2026-10-31 · ❌→✅ · #conan #localization #locres #source-of-truth
+class: twins-missed
+**Lesson:** a translation fix applied to the BUILT `Game.locres` (`locres-set-tr.py`, «шкала» 19:08) without its source row in `dm-fish-ru.tsv` is undone
+by the next full rebuild — found only because a later rebuild was regress-checked (23:17: 4 rows back to «ползунок»). Edit the `.tsv` row in the same
+move as any direct `.locres` fix, and prove it by a full rebuild + `vanilla-override.py` + `locres-regress.py` → «пропало 0, изменилось 0».
+**Repro:** the localization README steps 1–6а, then `python -I -X utf8 _config/devkit/locres-regress.py _config/localization/Game/ru/Game.locres <full rebuild>`.
+**Trigger:** `locres-set-tr.py` on `Game.locres`.
+none-cheap: the full-rebuild regress (≈ 3 min) is the check; `locres-set-tr.py` could refuse without a matching `.tsv` edit
+
 ### EXP-0417 · 2026-10-31 · ❌→✅ · #conan #stand #save #owner-world
 class: stand-differs-from-owner-world
 **Lesson:** the stand's save copy covers `Saved/Game_0.db` only — the mods keep their own UI state in `Saved/SaveGames/*.sav`: a remote `Restore()` of the
