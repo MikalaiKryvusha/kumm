@@ -37,6 +37,9 @@ Exiles Enhanced 3.0.1», no repeated lines (17:21).
 не забудь от текущего лаунчера, углы у каймы не нужны». So: variant 2 (art on the whole window, darkening at the edges) — logos and the title at the top; a button column
 at the bottom right: the game-path line, then «Играть», «Установить сборку», «Отзыв», «Удалить сборку»; the author links at the bottom left with no «Автор сборки»
 heading; the current gold rod frame (no corner rivets) and the current metal plaque buttons and caption buttons. Mockup — variant 11 of `mockups.html`.
+18:26: `[OWNER]` «гнопку играть - вниз, золотой» · «койму ... не из гладкого металла, а из грубого, как в логотипе конана» · «тоньще койма» — «Играть» is the LAST
+button of the column, gold face, the game-path line right above it; the frame 7 px (was 11) of rough cast metal — texture `mockups/make_frame.py` → `frame_h.jpg` / `frame_v.jpg`
+(the Rod profile with grain, scratches along the rod, pits, wear patches).
 Open: the state-driven main button (asked 18:1x, no answer yet).
 
 ## Goal vector (Achieve)
