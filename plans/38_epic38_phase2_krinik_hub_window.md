@@ -57,6 +57,10 @@ left-right), ONLY the selected mod's rows on the right, each row with an «i» t
 > (HALF_HEIGHT radius on a text box of uneven width) → a fixed square box or a game icon; row gaps — `ROW_GAP` 6 + the game rows' own 60-unit height;
 > the font — `TextSettingName`'s font copied with its bold typeface → the regular typeface of the game's settings rows; the plate — a dark solid Border →
 > the game's tooltip widget or the fishing panel frame. Each fix — frames beside mockup 5 in a review folder; taste is his (house rule: look, then show).
+> **Step zero (`[OWNER]` 21:43–21:44 «неужели ты сам этой некрасоты не видишь» · «не видишь, как красиво макет получился, и как криво рально в игре у тебя
+> получилось» · «и как конспекты по UI хорошему в свароге говорят о проблемах и хорошем стиле»):** read `SvarogsDream/docs/UI_RULEBOOK.md` in full (§0
+> philosophy, §2 eight principles, §3 text, §4 window layout, §10 how every window is checked before the owner, §10а the seven classes of the owner's asks,
+> §11 what not to do), then walk the hub frame beside `variant_05_final.webp` at the same scale against it and write the seam list (EXP-0413) — only then fix.
 - [x] 4. **Kit window by mockup 5** — rewrite `kit-krinik-modsettings.py` (widgets reused by name, never removed — the GUID trap; run twice): head row
       (title TextBlock + `B_KrinikCloseNoSave`), body (left `SC_KrinikMods` with one name button per mod, clipped name boxes; right — mod name + note,
       `WS_KrinikPages` with one page per mod: per row an HB of our label + «i» button + the game row with an empty label as the control), the «i» plate
