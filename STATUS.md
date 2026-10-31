@@ -119,6 +119,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   variant 1 upright, variant 2 slanted; made by ChatGPT from the game's own icon — `SvarogsDream/tools/gpt_edit.sh`, grab fixed `ab287fa`; sources and the two
 >   prompts in the pack `_config/branding/icon/`). After the pick: rounded alpha corners from the original,
 >   a multi-size `.ico` (256/64/48/32/16) into the launcher exe (`-win32icon`) and the archive.
+> - **21:24 — the public repo: READY TO CREATE after the README check** (idea 23 holds the decisions and the audit summary). The private pack
+>   `_config/public_release/`: `audit_2026-10-31.md` (private — it quotes the traces), `README.draft.md` (from `README.template.md` by `mods-table.mjs`),
+>   `LICENSE` (MIT, own work only), `make_public_tree.py` → a staging tree from HEAD (515 files, 18 dev records dropped) with a scan that printed **0**
+>   (pack `6cff449`). Next, in order: (1) the independent §7B voice check of the README (helper running at the close) → (2) show the README to the owner
+>   (his text) → (3) `python -I -X utf8 _config/public_release/make_public_tree.py <fresh dir>` (exit 0) → `git init`, one commit, `gh repo create
+>   MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --public`, push → (4) the 1.0.0 archive as a release of that repo (idea 23 update check).
+>   Open in the README: 41 of 64 mod authors TODO; the archive link TODO until (4).
 > - **21:15 — the public repo NAMED** by the owner: title «Krinik's Conan Exiles Enhanced ModPack», slug `Kriniks_Conan_Exiles_Enhanced_ModPack` (idea 23); a NEW
 >   repo with fresh history, created after the tree audit (helper) and the bilingual README by the portrait (helper draft in the scratchpad `readme\`).
 > - **Archery page — code in pack `3d183e2`; load read + save seen, the in-world re-read NOT observed (report A1):** the aim never started after the hub
