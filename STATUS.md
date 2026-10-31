@@ -127,9 +127,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   the Esc-menu click seen 12:00; open: 4K / 300 %. Plan 36 items 4, 5 re-proved (already done earlier — EXP-0408). The owner's launcher words — idea 22.
 >   **G12 DONE 11:55** (pack `7faaa2b`): the hero's craft keeps its real speed while a menu slows the world (`CraftTimeMultiplier` = the dilation, read at an
 >   item start). **Idea 05 DONE**; idea 03's Athleticism law and idea 04's level past 60 seen live (reports `2026-10-31_conan-agility-law-live.md`,
->   `…level-uncap-live.md`). Item 28 (archive volumes) in progress 12:1x: export 73 mods ok, 19 volumes ≤ 700 MiB ok, unpack + hash compare running
->   (scratch `g10/`, ≈ 39 GB — remove after; cases `TC_conan_build_archive_volumes_2026-10-31.md`).
-> - **Next:** (1) item 28 — finish V3/V4, then the install on a copy of the game without mods. (2) W20 mod settings windows — mock-ups first (taste).
+>   `…level-uncap-live.md`). Item 28 (archive volumes) in progress 12:1x: export 73 mods ok, 19 volumes ≤ 700 MiB ok, unpack + hash compare: 223 = 223, hashes equal (report `2026-10-31_conan-build-archive-volumes.md`)
+>   (scratch `g10/` removed 12:14; cases `TC_conan_build_archive_volumes_2026-10-31.md`).
+> - **Next:** (1) item 28 — the install on a copy of the game without mods. (2) W20 mod settings windows — mock-ups first (taste).
 >   (3) The release gate at 720p / 1080p / 2K / 4K (rule 17). (4) Item 21 — a vanilla frame of the quick bar needs a clean-game stand (also for q4).
 > - **Owner's call, not taken:** the pack `.git/hooks/pre-commit` running `check-lua-game-thread.py` was refused by the permission classifier (07:5x) —
 >   the guard still runs only by the rule «before every Lua rollout» (EXP-0400).
