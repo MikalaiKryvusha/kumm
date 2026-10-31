@@ -67,7 +67,7 @@
      repaint-after-build, rule-half-applied, rule-overapplied, shader-owns-its-own-formula, shared-state-two-owners,
      stale-stand, stand-differs-from-owner-world, text-color-blind-to-background, translator-delay, wrong-api-assumption,
      wrong-model-of-the-frame, wrong-proxy, scope-wider-than-ask, eyeballed-number, visual-proxy-for-mechanic,
-     scripted-edit-anchor-unchecked, cheat-left-on-in-owner-game, test-toggle-left-changed, repro-condition-not-established, environment-assumed-not-probed, known-trap-walked-again, tool-format-assumed, map-not-read-before-probe, comment-wrap-broke-script -->
+     scripted-edit-anchor-unchecked, cheat-left-on-in-owner-game, test-toggle-left-changed, repro-condition-not-established, environment-assumed-not-probed, guard-not-run, experiment-left-live, bp-post-hook-silent, unguarded-remote-read, known-trap-walked-again, tool-format-assumed, map-not-read-before-probe, comment-wrap-broke-script -->
 >
 > | Class slug | The failure it names |
 > |---|---|
@@ -128,7 +128,7 @@ class: guard-not-run
 `KrinikMenuProbe`) — although HOUSE_RULES says "run it before every Lua mod rollout". Fixed all three (`ExecuteInGameThreadWithDelay`, cases F8/P1).
 The gate has to sit on a path the agent cannot skip (the pack's pre-commit, or `Deploy-ModPack.ps1` post-deploy for Lua mods).
 **Trigger:** any Lua rollout of a Conan mod.
-mechanization pending: a pack `.git/hooks/pre-commit` running the guard was refused by the permission classifier 2026-10-31 07:5x — the owner's call
+none-cheap: the gate needs a pack `.git/hooks/pre-commit`, refused by the permission classifier 2026-10-31 07:5x — the owner's call (STATUS «Owner's call, not taken»)
 
 ### EXP-0399 · 2026-10-31 · ❌→✅ · #conan #ue4ss #umg #click #kit
 class: widget-event-hook-silent

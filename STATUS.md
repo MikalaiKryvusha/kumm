@@ -114,26 +114,24 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **Moved verbatim to the chronicle, entry 2026-10-30 23:56 +03:00:** the 18:15 session (volume 1 % applied), the 19:08 dayloop (W6 two lines, W10a),
 >   the 16:59 judge caveat, the quick list and the day's hard rules. Still the owner's: the W10a wheel check (the loot window keeps one size).
 > - **W6 centred, the corpse backing (ACCEPTED 22:38) and bug 71 (DONE 00:4x) — moved verbatim to the chronicle, entry 2026-10-31 01:38 +03:00.** Still not seen: the corpse strip the GAME creates on a real look; a chest proper; the control case I4 (intro, partial); ≈ 3 s black between the intro and the menu.
-> - **2026-10-31 00:4x–01:3x sprint (`[OWNER]` «работай автономно по сборке» · «а в конце спринта - закрывай чат, завтра продолжим» · 01:11), pack `80e7b9a`:**
->   W37 the «ОТЗЫВ» plate (the owner's pick after five mock-up rounds, review folders 16–20: the Б1 plate, 40 units, under «1.0.0») — a kit Button in the
->   main AND Esc menus; click = `krinik_feedback` (LMB key bind + `IsHovered`; UserWidget mouse hooks never fire — EXP-0399) → `collect-report.ps1 -Feedback`
->   (zip on the desktop, game minimized, Explorer, an address box on top, then `mailto:`). Main menu seen working 01:31–01:35 (report
->   `testcases/reports/2026-10-31_conan-feedback-button-and-logo.md`). The game's logo now from the owner's upscale with a crisp ® (no mips — the vanilla
->   mip chain blurred it). The intro wheel: grey with a gold run (the owner 01:12) — built and deployed, on screen not yet seen.
-> - **2026-10-31 07:40– `/dayloop` («после рабочего стола беремся за конана в автономном режиме»):** W37 «ОТЗЫВ» seen working in BOTH menus (Esc menu
->   07:53, report `testcases/reports/2026-10-31_conan-feedback-esc-menu.md`); the click 63 → 3–4 ms (`io.popen`); the address box `MB_TOPMOST`; three live
->   `ExecuteWithDelay` fixed (EXP-0400) and `KrinikMenuProbe` no longer collapses the game's notification window (EXP-0401); world entry under a minimized
->   window crashes — the remote's path guarded. The plate 10 lower (`[OWNER]` «10 пикселей» · 07:47) — kit rebuilt, run 3 (cases L1–L3, G1). Bug 64 item 8
->   reopened at 1080p. New: plan 35 release gate «1080p + 2K + 4K by eye» (the owner 07:51); idea 22 — a GUI install wizard (the owner 07:55–07:56).
-> - **Next:** (1) W37 in the settings hub of our mods (`[OWNER]` «и в хабе настроек по нашим модам - тоже» · 01:04) — once the hub exists (epic «Настройки
->   модов»). (2) The owner's eye: the gold wheel at a start, the crisp game logo. (3) The W30 arrow test below.
-> - **22:55 «работай автономно» → `/dayloop`. W26 the build's logo:** wallpapers ACCEPTED 22:55 (the owner's A3-smaller, `_extras/Wallpapers/*.jpg`, the clean
->   originals in `_extras/Wallpapers-source/`, `_config/branding/make-wallpapers.py`); the logo + versions in the main menu (right) and the Esc menu (left)
->   seen in game 23:29 (review folder 14, the owner's eye pending); the logo intro at start built 23:38 (`KrinikIntro`, `Content/Movies/.mp4` — on screen not
->   seen by a background frame: the owner's eye at the next start). **W11 Krinik on top of the Esc mod list — DONE in game 23:44** (review folder 15,
->   `krinik_pause_in_menu.lua` 0.15.0, the owner's eye at a real Esc pending). **W30 arrow blood — WORKS by a direct call 2026-10-31 08:24 (pack 47f17fd):** the
->   post-hook never ran, the section moved into the pre-hook (EXP-0402); a stain under the boss, blocked hit none (A2c, A3; review folder 22). A real bow shot —
->   the owner's first check. Then W4 minimap, W13 arrows, W29 shouts.
+> - **The 00:4x–01:3x sprint (W37 main menu) and the 22:55 dayloop (W26 logo, W11, W30) — moved verbatim to the chronicle, entry 2026-10-31 08:46 +03:00.**
+>   Still the owner's eye: the gold intro wheel and the crisp game logo at a start; the wallpapers' review folder 14; Krinik on top at a real Esc (folder 15).
+> - **2026-10-31 07:40–08:46 `/dayloop` (chat 4f90b546; `[OWNER]` «после рабочего стола беремся за конана в автономном режиме» · «работаем дальше над
+>   сборкой» · 08:22), packs `6a70aa5`, `47f17fd`, `c4847b1`:** W37 «ОТЗЫВ» DONE in both menus (report `testcases/reports/2026-10-31_conan-feedback-esc-menu.md`:
+>   click 63 → 3–6 ms by `io.popen`; the address box `MB_TOPMOST`; the plate 10 lower — `[OWNER]` «отступ на 10 ниже хорошо, нравится» · 08:22); three live
+>   `ExecuteWithDelay` fixed (EXP-0400); `KrinikMenuProbe` had hidden the game's notification window since 10-25 — removed (EXP-0401); world entry under a
+>   minimized window crashes — `enter-world-remote.sh` restores the window first. W30 arrow blood WORKS by a direct call (pre-hook, EXP-0402, review folder 22).
+>   Bug 64 item 8 (Simple Modlist over the Esc menu at 1080p) fixed again — list 540 (folder 23). W29 shouts measured at 60 fps: game subtitles
+>   (`W_SubtitleEntryView_C`) pop in and out in ONE frame, ≈ 1.95 s, no fade, no backing (folder 24). New: plan 35 release gate «1080p + 2K + 4K by eye»
+>   (the owner 07:51); idea 22 — a GUI install wizard «сам находит, сам устанавливает» (the owner 07:55–07:56). Side: KAST had hidden the owner's desktop
+>   icons — restored (`FFlags` of the desktop bag, KAST EXP-0009); ImageGlass is the system image viewer now (the owner set the default himself, 08:21).
+> - **FIRST next chat:** (1) **W29** — the owner's pick from review folder 24: А fade ≈ 0.15 s · Б a dark backing · В both; then a kit override of
+>   `W_SubtitleEntryView` (cases `TC_conan_shout_flicker_2026-10-31.md`). (2) **W13 stuck arrows** — stand 4 recipe in plan 36 W13 (a live boss frozen 6 m
+>   ahead, `mouse-seq.ps1 -Seq "lclick,wait:1500,…"`); read ONE actor per remote call and copy X/Y/Z into numbers at once (vector reads in one call came
+>   back 201 cm for all, then 0 0 0); never stack unproven names in one call (EXP-0403 — that crashed the game). (3) W4 minimap backing (kit, a new widget).
+>   (4) W37 in the settings hub — once the hub exists. (5) The release gate at 2K / 4K.
+> - **Owner's call, not taken:** the pack `.git/hooks/pre-commit` running `check-lua-game-thread.py` was refused by the permission classifier (07:5x) —
+>   the guard still runs only by the rule «before every Lua rollout» (EXP-0400).
 > - **Epic «Настройки модов», phase 0 (open):** real clicks reach vanilla FLX buttons inside a vanilla window («Отмена» closed `W_InventorySettings_C`), but a
 >   checkbox created by `Create(pc, class, pc)` stays dead even inside it; 48 of 49 live FLX buttons live in a window's `WidgetTree` (H4: the OUTER matters).
 >   `Create(window, class, nil)` builds inside `<window>.WidgetTree`; adding it + `SetText` in ONE call crashed (15:38) — next: the same, ONE action per call,

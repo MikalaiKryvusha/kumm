@@ -1,5 +1,21 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-31 08:46 +03:00 — STATUS: the 00:4x–01:3x sprint (W37 main menu) and the 22:55 dayloop (W26, W11, W30) entries (moved verbatim at the closing of chat 4f90b546)
+
+> - **2026-10-31 00:4x–01:3x sprint (`[OWNER]` «работай автономно по сборке» · «а в конце спринта - закрывай чат, завтра продолжим» · 01:11), pack `80e7b9a`:**
+>   W37 the «ОТЗЫВ» plate (the owner's pick after five mock-up rounds, review folders 16–20: the Б1 plate, 40 units, under «1.0.0») — a kit Button in the
+>   main AND Esc menus; click = `krinik_feedback` (LMB key bind + `IsHovered`; UserWidget mouse hooks never fire — EXP-0399) → `collect-report.ps1 -Feedback`
+>   (zip on the desktop, game minimized, Explorer, an address box on top, then `mailto:`). Main menu seen working 01:31–01:35 (report
+>   `testcases/reports/2026-10-31_conan-feedback-button-and-logo.md`). The game's logo now from the owner's upscale with a crisp ® (no mips — the vanilla
+>   mip chain blurred it). The intro wheel: grey with a gold run (the owner 01:12) — built and deployed, on screen not yet seen.
+> - **22:55 «работай автономно» → `/dayloop`. W26 the build's logo:** wallpapers ACCEPTED 22:55 (the owner's A3-smaller, `_extras/Wallpapers/*.jpg`, the clean
+>   originals in `_extras/Wallpapers-source/`, `_config/branding/make-wallpapers.py`); the logo + versions in the main menu (right) and the Esc menu (left)
+>   seen in game 23:29 (review folder 14, the owner's eye pending); the logo intro at start built 23:38 (`KrinikIntro`, `Content/Movies/.mp4` — on screen not
+>   seen by a background frame: the owner's eye at the next start). **W11 Krinik on top of the Esc mod list — DONE in game 23:44** (review folder 15,
+>   `krinik_pause_in_menu.lua` 0.15.0, the owner's eye at a real Esc pending). **W30 arrow blood — WORKS by a direct call 2026-10-31 08:24 (pack 47f17fd):** the
+>   post-hook never ran, the section moved into the pre-hook (EXP-0402); a stain under the boss, blocked hit none (A2c, A3; review folder 22). A real bow shot —
+>   the owner's first check. Then W4 minimap, W13 arrows, W29 shouts.
+
 ## 2026-10-31 01:38 +03:00 — STATUS: W6 centred / the corpse backing (accepted) and the 00:1x–00:4x bug 71 entry (moved verbatim at the closing of chat 6a70552d)
 
 > - **W6 CENTRED — DONE in game 21:29** (details moved verbatim to the chronicle, entry 2026-10-31 00:12 +03:00).
