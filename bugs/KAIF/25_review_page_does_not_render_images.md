@@ -17,7 +17,7 @@ The page renders `![alt](relative/path)` as an image (resolved against the docum
 
 ## Local remediation
 
-Until the origin fixes it: show the pictures by opening them with the system viewer next to the page, and say so in the question text.
+Fixed locally 2026-10-31 20:0x (the owner: «переоткрывай починенную»): `.kaif/tools/contour/core.mjs` inline() renders `![alt](src)` as `<img>`; `review.mjs` `embedImages()` replaces a local image path by a data URI (resolved against the document folder) in the RENDERED copy only, at the five reads (buildPage, notice, proofread, gateForOpen, checkDoc). Seen: interview 028 page built with 4 embedded webp images (4.3 MB), reopened. Reconcile at the next /kaif-update.
 
 ## Guard
 
