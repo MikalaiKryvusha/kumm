@@ -41,6 +41,12 @@
 > tree) + `DT_KrinikUIModule` (row `KrinikModSettings`, copied from the fishing row) + `MC_KrinikConanUI` in the KrinikConanUI kit. Next steps, in order:
 > (1) cheap probe — Lua `MergeDataTables` of a test table at startup (no editor graph needed if it works); (2) else one hand session in the kit editor for the
 > controller's one-node graph; (3) the first live test — a row of the game's checkbox INSIDE our window takes a real click (the risk the Lua spike could not pass).
+> **PHASE 0 RISK RETIRED 2026-10-31 19:37** (`testcases/reports/2026-10-31_conan-hub-kit-window.md`): (1) the cheap probe WON — Lua calls `MergeDataTables` on
+> the native `ModController` class default object at the main menu, rows 117 → 118, our row survives the mods' merges (256 in the world); NO ModController
+> blueprint, NO hand session in the editor; (3) a REAL mouse click on the game's `WBP_Setting_Checkbox` inside our kit window `W_KrinikModSettings` (parent
+> `WindowRoot`) fires its own `HandleCheckboxToggled`, `GetIsToggledOn` flips both ways, twice across two launches; Esc closes only our window (pause
+> section's Esc map). Skeleton in the `KrinikConanUI` pak (`kit-krinik-modsettings.py`, section `krinik_mod_settings`). Open for phase 1/2: the «Закрыть»
+> click (a bare FLX button has no handler), the hub's real look and rows, the store.
 
 ## Goal vector (Achieve)
 
@@ -81,7 +87,7 @@ sections built from the game's own settings widgets, values that persist.
 
 | Phase | What | Why this order | Gate to close |
 |---|---|---|---|
-| 0 — spike (R&D) | Lua builds a window from the game's own widgets: `WBP_Settings_Subheader`, `WBP_Setting_Checkbox`, a slider (`W_EditableLabeledSlider` / `WBP_ResetableEditableLabeledSlider`), `WBP_Setting_Dropdown` inside a `ScrollBox`; their change events reach Lua; the window opens over the hub, Esc closes it | the whole epic rests on this; a created mod widget once never fired its handler (2026-10-29) — retire that risk first | a prototype window with three working rows, frames by eye, cases in `testcases/`; if the widgets will not fire — the fallback decided (a kit widget pak, the KrinikConanUI route) |
+| 0 — spike (R&D) — **gate passed 2026-10-31 by the fallback route** (kit window + Lua merge; report `2026-10-31_conan-hub-kit-window.md`) | Lua builds a window from the game's own widgets: `WBP_Settings_Subheader`, `WBP_Setting_Checkbox`, a slider (`W_EditableLabeledSlider` / `WBP_ResetableEditableLabeledSlider`), `WBP_Setting_Dropdown` inside a `ScrollBox`; their change events reach Lua; the window opens over the hub, Esc closes it | the whole epic rests on this; a created mod widget once never fired its handler (2026-10-29) — retire that risk first | a prototype window with three working rows, frames by eye, cases in `testcases/`; if the widgets will not fire — the fallback decided (a kit widget pak, the KrinikConanUI route) |
 | 1 — the entry | one «Настройки модов» button in the hub bar (the proven re-skin: vanilla `WBP_ButtonBase` look, our click on top) + the upward list; Hosav's and the fishing buttons leave the bar, their windows open from the list | the player-facing shell; it reuses phase 0's widgets | criteria 1, 2, 5 pass; frames |
 | 2 — «Моды Krinik» | the author hub of 19:02 (mockup 5): left — our mods that have settings, full names, a marquee for a name that does not fit; right — only the selected mod's rows, each with an «i» popup (19:03); the head — the title alone; a settings store for our Lua mods (one file the sections read at start and on change); first rows: blood time (W28), the FPS counter on/off (lost in the merge), the HUD blink thresholds, the vignette sliders (W23 — recon of the vignette first) | our own mods — no foreign save formats; proves the store and the rows | criteria 3, 4 for our mods |
 | 3 — «Моды Xevyr» | the same author hub (mockup 7) for Xevyr's mods (Damage Meter, Группа поблизости, Простая миникарта, Подсветка знаний и добычи): rows bound to each mod's SaveGame settings fields + the mod's apply call; a «Открыть окно мода» row where a setting is not mapped | foreign formats — each mod's save object read first (notes per mod, the lock) | criteria 3, 4, 5 for the four mods; the «Моды Xevyr» side panel retired |

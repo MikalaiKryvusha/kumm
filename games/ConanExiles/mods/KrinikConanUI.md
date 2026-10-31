@@ -12,7 +12,8 @@
 - Source: `ConanExiles/_unpacked/KrinikConanUI/` — `KrinikConanUI.pak` (built, git-ignored), `kit/` (copies of `modinfo.json`, `Local/CookInfo.ini`),
   `ue4ss/Scripts/main.lua` (loader) + one file per section.
 - Kit: `F:\CEUE5Devkit\UE4\Content\Mods\KrinikConanUI` (`active.txt` — one active mod per kit). Rebuild: `UnrealEditor-Cmd … -run=PythonScript
-  -Script=_config/devkit/kit-conanui-edit.py -EnablePlugins=PythonScriptPlugin -ModDevKit` (≈2.5 min) → `python -I -X utf8 _config/devkit/kit-buildmod.py
+  -Script=_config/devkit/kit-conanui-edit.py -EnablePlugins=PythonScriptPlugin -ModDevKit` (≈2.5 min; the hub window and table — the same with
+  `kit-krinik-modsettings.py -NullRHI`, ≈1.5 min, twice) → `python -I -X utf8 _config/devkit/kit-buildmod.py
   KrinikConanUI <out>` (≈2.5 min) → copy into `_unpacked/KrinikConanUI`. Deploy: `Deploy-ModPack.ps1 -PackDir ConanExiles -Deploy -Only KrinikConanUI`.
 - Load order: before `KrinikConanGameplay` (that one stays last).
 
@@ -41,6 +42,30 @@ the dark middle follows the text; padding L/R 140 — the line ends on 88–98 %
 Live tweak for a look: `<Content VerticalBox>.Slot:SetPadding({Left=…,Top=12.0,Right=…,Bottom=8.0})` by the remote. Stand: `_config/strip-open.sh <tag> [class]`
 opens the strip by code (`MAXD_M=2000 … BP_PL_Crafting_CampFire_C` — a non-corpse strip in the oasis save, no chest within reach there).
 
+## Kit pak — our own assets: the «Моды Krinik'а» settings hub (plan 38, skeleton 2026-10-31)
+
+Built by `_config/devkit/kit-krinik-modsettings.py` (headless, `-NullRHI`; run it TWICE before a build — GUID trap; report `kit-krinik-modsettings.json`),
+both listed in `Local/CookInfo.ini` (cook to `/Game/Mods/KrinikConanUI/<X>`):
+
+| Asset | What | Numbers |
+|---|---|---|
+| `Local/W_KrinikModSettings` | Widget Blueprint, parent the native `WindowRoot` (as the Damage Meter, Hosav and fishing settings windows). Tree: `CanvasPanel_0` → `SB_KrinikWindow` (centred) → `OV_KrinikFrame` (`Img_KrinikBackground` `T_UI_GeneralWindow_Background`, `Img_KrinikBorder` `T_UI_GeneralWindow_Border` Box) → `VB_KrinikContent`: `Hdr_KrinikTitle` (`WBP_Settings_Subheader`, Label «Моды Krinik'а · Настройки»), `Chk_KrinikFps` (`WBP_Setting_Checkbox`), `Sp_KrinikFill`, `B_KrinikClose` (`WBP_ButtonBase`, label «Закрыть», `KeyShortcutName` Escape — the glyph only, no click handler) | 900 × 420 units, content padding 48 / 29; skeleton look |
+| `Local/DT_KrinikUIModule` | module table, row struct `UIModuleTableRow`, ONE row `KrinikModSettings` = the fishing settings row (`Category Modal`, `FullscreenGUIAction None`, `CloseOnESC`, `CloseOnEndPlay`, `ShowInPlayingState`, `bHiddenDuringVanityMode`) with `WidgetClass` → `W_KrinikModSettings_C` | `ZOrder` 101 (over the fishing panel's 100) |
+
+**How it reaches the game.** No ModController blueprint: the Lua section `krinik_mod_settings` calls `MergeDataTables(DT_UIModuleTable, DT_KrinikUIModule)` on the
+native `ModController` class default object (`/Script/DreamworldMods.Default__ModController`) once, 500 ms after the main menu's birth — log `merge (main
+menu): call ok; rows 117 -> 118` (11 ms). The mods' own controllers merge later, at world load (3 896 lines), and our row survives them: 256 rows in the world.
+**Opening:** `FindFirstOf('GUIModuleController'):ActivateModule(FName('KrinikModSettings'), true, false)` (the remote today; phase 1 — the «Настройки модов»
+drop-down). **Esc:** the row's `CloseOnESC` does NOT close a mod Modal window — the pause section's Esc map (`MOD_WINDOWS`) carries our module and closes it by
+`TryCloseWindow`, the hub stays. **Proven 2026-10-31** (KUMM `testcases/reports/2026-10-31_conan-hub-kit-window.md`): a REAL mouse click on `Chk_KrinikFps`
+fires the row's own `HandleCheckboxToggled` and flips `GetIsToggledOn` both ways — kit-placed game rows inside our window are live.
+
+**Kit Python traps (2026-10-31).** (1) A new Widget Blueprint has NO root: Python reaches neither `WidgetTree.RootWidget` nor the factory's root class; set
+`DefaultRootWidget = unreal.CanvasPanel` on `unreal.get_default_object(unreal.load_class(None, '/Script/UMGEditor.UMGEditorProjectSettings'))` before
+`create_asset` (session only; the class is not wrapped as `unreal.UMGEditorProjectSettings`). (2) A settings row's `SettingName` is instance-only («cannot be edited
+on templates») and `DisplayLabel` protected — the label is written by Lua into the live row's `TextSettingName` at activation. (3) UE4SS `LoadAsset` needs the
+full object path `Pkg.Obj`; the package path returns nil.
+
 **Kit trap (2026-10-30):** the kit cooks only the assets listed in `Local/CookInfo.ini` (`FilesToCook=` lines, copy in `kit/CookInfo.ini`). A newly
 edited vanilla widget without its line is saved into the mod's Content and silently left out of the pak — check the built pak by
 `python -I -X utf8 _config/mod-overrides.py <out.tsv> <pak>` (one `override` row per widget).
@@ -61,6 +86,10 @@ Live check of the pak: the remote reads `…WBP_ContainerInfo_C:WidgetTree.Overl
 
 | `krinik_shout_fade` (W29, 2026-10-31) | enemy shouts (game subtitles) appear in place, fade in 0.2 s and out 0.2 s through a MIRROR line: the game line is born with `RenderOpacity` 0 and stays invisible; our own `SizeBox_KrinikShoutMirror` (built once per renderer by `StaticConstructObject` in its WidgetTree, added to `Overlay_0` with the container slot copied, width 1000) holds our own `W_SubtitleEntryView_C` (`WidgetBlueprintLibrary:Create`) that gets the line text (`FText(TextView:GetText():ToString())` — `GeneralText` still resolves the gender pattern) | `NotifyOnNewObject(SubtitleEntryView)`; `RegisterHook(W_SubtitleEntryView_C:SetTextActive)` set on the first born line; a 50 ms watch of the game line only while it lives (no removal event); opacity steps 15 ms only while fading | FADE_S 0.20, WATCH_MS 50; seen ≈ 10 frames in and out at one place (cases S6, S10; review folder 25) |
 
+| `krinik_mod_settings` (plan 38, 2026-10-31) | the «Моды Krinik'а» settings hub skeleton: merges `DT_KrinikUIModule` into `DT_UIModuleTable` once; writes the row labels («Счётчик кадров в углу экрана») into our window's live rows when our module opens; logs toggles of settings checkboxes inside our window | `NotifyOnNewObject(W_MainMenu_MainMenu_C)` + 500 ms → `ModController` CDO `MergeDataTables`; post-hook `GUIModuleController:ActivateModule` (our row only) + 100 ms → `FindAllOf(W_KrinikModSettings_C)`; pre/post hooks `SettingsCheckboxWidgetBase:HandleCheckboxToggled` (our window only) | merge 11 ms once per start; no timer, no poll. The checkbox drives nothing yet — the FPS counter switch is phase 2 |
+
+The pause section's Esc map (`krinik_pause_in_menu`, `MOD_WINDOWS`) carries `KrinikModSettings` → `W_KrinikModSettings_C` since 2026-10-31 (case K8b).
+
 **Mirror pair:** `ue4ss/feedback/collect_report.ps1` is a COPY of the pack's `_config/player-report/collect_report.ps1` (the Lua mod needs it inside the game
 folder). Check: `cmp _config/player-report/collect_report.ps1 _unpacked/KrinikConanUI/ue4ss/feedback/collect_report.ps1` — edit the source, copy again.
 
@@ -73,11 +102,13 @@ reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/re
 ## Tests and runs
 
 - `testcases/TC_conan_krinik_conan_ui_merge_2026-10-30.md` (U1–U8 pass), report `testcases/reports/2026-10-30_conan-krinik-conan-ui-merge.md`.
+- The settings hub skeleton: `testcases/TC_conan_hub_kit_window_2026-10-31.md` (K1–K9, K2b, K8b pass), report `testcases/reports/2026-10-31_conan-hub-kit-window.md`.
 - Older cases of the parts: `TC_conan_corpse_prompt_left_of_quickloot_2026-10-28.md`, `TC_conan_loot_panel_hidden_and_hold_prompt_2026-10-28.md`.
 
 ## Open
 
-- The FPS counter cannot be switched off alone since the merge (it had its own `enabled.txt`).
+- The FPS counter cannot be switched off alone since the merge (it had its own `enabled.txt`) — its row in the hub exists (skeleton), the store and the switch are plan 38 phase 2.
+- The hub's «Закрыть» button does nothing on a click (a bare `WBP_ButtonBase`; the vanilla popups bind theirs natively) — Esc works through the pause section.
 - The HUD blink section: tested 2026-10-30 (H1–H10, `testcases/reports/2026-10-30_conan-hud-blink-early.md`); the dim start 0.25 waits for the owner's eye;
   its cost per poll is unmeasured (os.clock 1 ms step). Trap paid there: `FindFirstOf(<widget class>)` returns the TEMPLATE in another widget's tree —
   take the live child from the event's HUD (`hud.W_SmoothHP`).

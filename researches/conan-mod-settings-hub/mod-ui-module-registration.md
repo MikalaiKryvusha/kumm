@@ -121,6 +121,13 @@ The same in all four: `ToggleActionName None`, `BlocksToggleActions False`, `Tog
    vanilla rows' own handlers (`SettingsCheckboxWidgetBase:HandleCheckboxToggled`, the slider's `BndEvt__S_Value…OnFloatValueChanged` — the hook points
    of `vanilla-settings-widgets.md`); Esc — the existing `TryCloseWindow` path (0.11.0) or the bar.
 
+**Verified 2026-10-31 19:2x–19:37** (`testcases/reports/2026-10-31_conan-hub-kit-window.md`) [seen]: step 3 is NOT needed — Lua's `MergeDataTables` on the
+native `ModController` class default object (`/Script/DreamworldMods.Default__ModController`) merges our table at the main menu (117 → 118 rows; the mods'
+controllers merge only at world load, 256 rows after); steps 1, 2, 4 done by `ConanExiles/_config/devkit/kit-krinik-modsettings.py` (the root panel comes
+from `UMGEditorProjectSettings.DefaultRootWidget`; the row's `SettingName` cannot be set on a template — Lua writes the label); step 5's acceptance is
+`ActivateModule` returning our window; the decisive risk below is retired — a real click on the kit-placed `WBP_Setting_Checkbox` fires
+`HandleCheckboxToggled` and flips the state. The row's `CloseOnESC` does not close a mod Modal window (the pause section's Esc map does).
+
 ## 6. Risks
 
 - The one BP graph (ModController override) cannot be scripted headless [inferred]; a kit GUI session is needed once — the machine lock applies.
