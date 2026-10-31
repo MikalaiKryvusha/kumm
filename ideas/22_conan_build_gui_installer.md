@@ -60,7 +60,8 @@ desktop shows through); short link labels from `author_links.txt` (`"Long"|"Shor
 long one). Not observed: real clicks on the buttons, a move to a monitor with another scale. Shown: review folder `32_launcher_built`.
 19:57 `[OWNER]` «из лаунчера для убираем» — done (pack, seen on the 384-dpi snapshot 19:57). 19:57 `[OWNER]` «а кнопка Установить сборку скрывается, когда
 сборка установлена» — TO DO: installed (the game folder holds `uninstall_krinik_build.cmd`) → «Установить сборку» HIDDEN and the column closes up; not installed →
-it shows (interview 028 Q2 — the owner's answer by this word). So: the link line reads «PlayGround: …» (the guide
+it shows (interview 028 Q2 — the owner's answer by this word).
+19:58 `[OWNER]` «иконка сборки - такая же, как буква К, как у конана С» — TO DO: the build icon = the letter K drawn like the C of the Conan Exiles game icon (same metal, same plate), for the launcher exe and the archive. So: the link line reads «PlayGround: …» (the guide
 keeps its long label — the launcher needs its own short one); the frame 5 px, a FLAT forged strip (thin edge bevel, wide flat bronze — not a round rod), copper-gold, rough
 by fine traces only (grain, light scratches, pits, rare nicks) and NO shading blotches; the darkening under the texts stays; «для Conan Exiles Enhanced 3.0.1» centred
 under the title.
