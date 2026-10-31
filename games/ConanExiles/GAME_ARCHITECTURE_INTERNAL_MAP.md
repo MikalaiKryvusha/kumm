@@ -594,3 +594,10 @@ Temperature (2026-10-30, live + Hosav bytecode): the hero's temperature is `BPEn
 - **The game HUD can stand hidden as a whole** (2026-10-31 09:2x, after `launch-fg.ps1` → world entry → god → teleport): `W_NewHealthUI_C`,
   `WBP_MainHotbar_C`, `W_SubtitleRenderer_C` at visibility 2; `FunCombat_PlayerController_C:ToggleHUD(<1 param>)` with true/false changed nothing;
   `SetVisibility(4)` by the remote restores each. Cause unknown (input action `HideGui` exists on the controller).
+
+- **The cheat manager on a stand (2026-10-31, `BP_ConanCheatManager_C` = `FindFirstOf('PlayerController').CheatManager`, after `exec MakeMeAdmin`):** works when CALLED
+  directly — `God()` (`_config/god-on.sh`), `SetLevel(65)` (badge 65, the uncapped XP step), `Summon('<full class path>')` (spawns ≈ 0.7 m before the hero;
+  only an ALREADY-LOADED class — else «Failed to find class» in the game log; the figure needs ≈ 10 s to load its look — the owner 11:33; a plain
+  `HumanoidNPCCharacter_C` comes without a look). Does NOT work: `SetStat('Athleticism', 20)` (attributes move only by the points of the «Хар-ки»
+  window), and the console `exec SetStat …` / `exec God` (reach nothing). Green Kappa: `/Game/Characters/NPCs/Primates/Blueprints/BP_NPC_Wildlife_Kappa_Green.BP_NPC_Wildlife_Kappa_Green_C`.
+  The archery stand — `_config/arrow-stand.sh`.
