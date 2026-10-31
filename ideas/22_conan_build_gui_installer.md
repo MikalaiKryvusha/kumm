@@ -53,7 +53,11 @@ path line is the bare path; 8 frame metals shown (folder `29_launcher_8_metals`,
 18:47 `[OWNER]` «2 хорош, и твой 1. Давай с ними побалуемся, и попрробуем тоньше варианты» — algorithms 2 (logo metal) and 1 (scratches and caverns) are the
 picks; 8 variants of them × thickness 5/4/3 px shown (`mockups/frame_play.py`, folder `31_launcher_frame_1_and_2_thinner`).
 **APPROVED 18:53** `[OWNER]` «7. утвержденооооооо» — the frame is play variant 7: the mix «logo metal + scratches and caverns», 3 px (`mockups/play/frame_*_7.webp`,
-mockup `mockups.html?v=11&play=7`). The launcher look is mockup 11 with this frame. So: the link line reads «PlayGround: …» (the guide
+mockup `mockups.html?v=11&play=7`). The launcher look is mockup 11 with this frame.
+**BUILT 19:20** (pack `3c72afd`): `KrinikConanLauncher.cs` by mockup 11 + frame 7 — per-pixel difference to the approved frame 2.6/255 on the picture, element
+edges within ≈1 logical px (frames at 384 dpi by the snapshot hook); Oswald and Inter embedded; the window region cut at the frame's chips (239 rects — the
+desktop shows through); short link labels from `author_links.txt` (`"Long"|"Short"[label](url)`, parsed in `_config/release/author_links.py`; the guide keeps the
+long one). Not observed: real clicks on the buttons, a move to a monitor with another scale. Shown: review folder `32_launcher_built`. So: the link line reads «PlayGround: …» (the guide
 keeps its long label — the launcher needs its own short one); the frame 5 px, a FLAT forged strip (thin edge bevel, wide flat bronze — not a round rod), copper-gold, rough
 by fine traces only (grain, light scratches, pits, rare nicks) and NO shading blotches; the darkening under the texts stays; «для Conan Exiles Enhanced 3.0.1» centred
 under the title.

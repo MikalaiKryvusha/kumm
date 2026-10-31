@@ -117,7 +117,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   entry button with a vertical scrolling list — the owner's words in plan 38's header). Route — a KIT window (recon `researches/conan-mod-settings-hub/
 >   mod-ui-module-registration.md`). **In flight 19:12:** a helper builds the kit window skeleton (`W_KrinikModSettings` + `DT_KrinikUIModule` + the merge) and
 >   tests a real click on a game checkbox inside it — read its run report `testcases/reports/2026-10-31_conan-hub-kit-window.md` when it lands.
->   Also in flight: the launcher rebuild by mockup 11 + frame 7 (pack `_config/launcher/`, uncommitted until that helper commits).
+>   The launcher is BUILT by mockup 11 + frame 7 (pack `3c72afd`, idea 22 «BUILT 19:20»; review folder `32_launcher_built` opened 19:2x) — open: real clicks
+>   on its buttons and a move to a monitor with another scale (unobserved).
 >   The list under «Настройки модов» (the owner 19:14–19:16): «Моды Krinik'а» · «Моды Xevyr'а» · «Рыбалка» (its own window) · «Прочее» (always last; single-mod
 >   authors) — inventory `researches/conan-mod-settings-hub/author-hub-inventory.md` (its live module-table scan is open). The slider is «шкала» everywhere
 >   (HOUSE_RULES rule 21; `Game.locres` patched, pack `c394b3a` — not yet seen in game).
