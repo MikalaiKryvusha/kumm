@@ -21,7 +21,7 @@ choice 2026-09-09 (manifest `$comment`). Opens with the pause menu module `Ingam
 
 | Asset | Edit | Why |
 |---|---|---|
-| `SML_UI_ModList` | list height 800 → 620; font 12 → 15; panel width 420 → 680 | the panel covered the bottom rows of the 3.0 Esc menu («Играть без подключения», «Организатор совместной игры», «Версия»); the owner: «текст списка модов нужно крупнее для читаемости»; long names fit (case U2d pass, 2026-10-26 14:36) |
+| `SML_UI_ModList` | list height 800 → 620 → **540** (2026-10-31: at 1080p the «ID модов» box lay on «Играть без подключения»); font 12 → 15; panel width 420 → 680 | the panel covered the bottom rows of the 3.0 Esc menu («Играть без подключения», «Организатор совместной игры», «Версия»); the owner: «текст списка модов нужно крупнее для читаемости»; long names fit (case U2d pass, 2026-10-26 14:36) |
 | translation | strings via `SimpleModlist__SML_UI_ModList.tsv` | «Список модов», «ID модов» Russian |
 
 ## How to look inside
