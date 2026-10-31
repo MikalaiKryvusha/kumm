@@ -121,7 +121,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   a multi-size `.ico` (256/64/48/32/16) into the launcher exe (`-win32icon`) and the archive.
 > - **21:15 — the public repo NAMED** by the owner: title «Krinik's Conan Exiles Enhanced ModPack», slug `Kriniks_Conan_Exiles_Enhanced_ModPack` (idea 23); a NEW
 >   repo with fresh history, created after the tree audit (helper) and the bilingual README by the portrait (helper draft in the scratchpad `readme\`).
-> - **Archery page — code WRITTEN 21:15 (was PARKED 21:09)**, pack uncommitted, game test in progress: the reader went into `KrinikConanArchery/ue4ss/Scripts/main.lua` after `log` (line 147) by the
+> - **Archery page — code in pack `3d183e2`; load read + save seen, the in-world re-read NOT observed (report A1):** the aim never started after the hub
+>   was opened and closed by the remote — hypothesis (horses first): the remote's `ActivateModule(CharacterInventory, false)` leaves the game in UI input;
+>   the arrow-push runs of 10-31 aimed with a bare `rdown` in a world never touched by the hub. Next try: a fresh launch, save by the hub, relaunch, aim.
+>   The reader went into `KrinikConanArchery/ue4ss/Scripts/main.lua` after `log` (line 147) by the
 >   `KrinikConanGraphics` pattern (`read_store` + `settings_check`), keys `arc_ballistics` → `CFG.ballistics` (read per arrow, l. 337), `arc_nobreak` →
 >   `CFG.no_break` (l. 277), `arc_fov` → `CFG.aim_fov_deg` (aim event, l. 742); then `LIVE.arc = true`. Switched to: the pack repo goes public with a
 >   bilingual README (idea 23, the owner 21:09) — audit first.
