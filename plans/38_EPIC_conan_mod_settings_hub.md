@@ -30,6 +30,9 @@
 > own; all such mods go into one hub «Прочее» (same look: the mods on the left, the selected mod's options on the right). By the inventory
 > `researches/conan-mod-settings-hub/author-hub-inventory.md` the list is: «Моды Krinik'а» · «Моды Xevyr'а» · «Прочее» (8 mods: Hosav's Custom UI, Exiles Fishing —
 > opens its own window, Night Terrors, Enhanced Armory and Arsenal, PvE Plus Ambush, Emberlight, Pickup+, ModControlPanel), until the live scan says otherwise.
+> 19:16 `[OWNER]` «у рыбвалки не наш хаб, а уже есть отдельный, сделанный его автором и нами поправлен» · «поэтому оно не в прочее попадает - а отдельной кнопкой,
+> которая его окно и открывает, а не наш хаб» — the list has FOUR entries: «Моды Krinik'а» · «Моды Xevyr'а» · «Прочее» (7 mods) · «Рыбалка» (opens the fishing
+> mod's own window).
 > **ROUTE (19:11, `[AI]` from recon `researches/conan-mod-settings-hub/mod-ui-module-registration.md`):** the hub is a KIT window, not a Lua-built one — every mod
 > settings window of the build (Hosav, Damage Meter, fishing) is a `WindowRoot` Widget Blueprint registered by the mod's own `ModController` BP whose
 > `ModDataTableOperations` calls `MergeDataTables(DT_UIModuleTable, <mod table>)`. Ours: `W_KrinikModSettings` (the game's settings rows inside OUR window's

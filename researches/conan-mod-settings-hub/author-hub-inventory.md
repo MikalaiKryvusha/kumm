@@ -26,8 +26,9 @@ planned in plan 38 phase 2. Author names: the ones the project already uses; the
 | author of ModControlPanel — `TO FILL` | ModControlPanel — itself a settings panel of other mods | [module] | — |
 
 **Single-mod authors → one hub «Прочее»** (`[OWNER]` 2026-10-31 19:14 «если у автора один мод - ему отдельную кнопку не делаем, а объединяем их в Прочее»).
-So the entries are «Моды Krinik'а», «Моды Xevyr'а» and «Прочее» (Hosav's Custom UI, Exiles Fishing, Night Terrors, Enhanced Armory and Arsenal, PvE Plus Ambush,
-Emberlight, Pickup+, ModControlPanel). An author whose second configurable mod turns up in the live scan moves out of «Прочее» into a hub of his own.
+Fishing is NOT in «Прочее»: its own window (the author's, fixed by us) is opened by a separate entry «Рыбалка» (`[OWNER]` 19:16). So the entries are
+«Моды Krinik'а», «Моды Xevyr'а», «Прочее» (Hosav's Custom UI, Night Terrors, Enhanced Armory and Arsenal, PvE Plus Ambush, Emberlight, Pickup+, ModControlPanel)
+and «Рыбалка». An author whose second configurable mod turns up in the live scan moves out of «Прочее» into a hub of his own.
 
 ## Open — the live check
 
