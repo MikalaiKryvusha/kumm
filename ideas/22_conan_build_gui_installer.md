@@ -27,6 +27,11 @@ and e-mail (both stand in the pack's `_config/player-report/collect-report.ps1`,
 `Собрать отчёт.cmd` beside it), «Автор сборки» from `author_links.txt` (same parser as the README), the version from `packVersion`; per-monitor DPI aware.
 Its LOOK is a working draft in the guide's colours — the mock-ups below still decide it; not yet in the manifest's `extras` (the delivery waits for the look).
 
+**The owner's look orders 2026-10-31 17:42** (on a frame of the skeleton): `[OWNER]` «я сказал в лаунчере на фоне наш волпейпер» · «без виндовского бордера и
+кнопок» · «кастомная кнопка закрытия и сворачивания в стиле металла конана» · «бордер кастомный в стиле металла конана». The launcher is named
+`KrinikConanLauncher` (17:34) and installs the build itself («Установить сборку», 17:37). Title as the guide: «Сборка модов Krinik Mod Pack 1.0.0 / для Conan
+Exiles Enhanced 3.0.1», no repeated lines (17:21).
+
 ## Goal vector (Achieve)
 
 A player who unpacks the archive starts ONE file and sees a Windows window in the build's look instead of a console: the background from our intro
