@@ -227,7 +227,11 @@
          `KrinikConanLauncher` (pack `526129c`) · 17:35 «Если игра упала» — «Не если упала. А руководство по отзывам и обратной связи» (chapter 2 and the
          archive file `feedback_howto.txt`, pack `d573a7f`). Design recon done — `researches/document-design-manuals/README.md`; open for the owner: GOST 2.105
          numbers headings WITHOUT a dot («1 Установка», «6.1 …») while the guide has «1.» — his call. 17:35 the contents → «на витрину, под виджетом
-         заголовка» (the title sheet, right under the title block; removed from sheet 3). **Next:** the mods rename (code, deploy, notes), then the guide
+         заголовка» (the title sheet, right under the title block; removed from sheet 3). 17:37 the installation chapter → through the launcher: `[OWNER]`
+         «У нас же лаунчет будет, который ставит сборку в автоматическом режиме. Какого хуя не он тут описан?» (the launcher got «Установить сборку», pack
+         `2c549d2`). 17:38 on «Сохранений в архиве нет.»: «Чего еще нет в сборке? Порно? Анегдотов? ТУпых оптавданий Клода?» · «Хотя вижу, что тупых
+         оправданий клода ДОХУЯ» · «я СКАЗАЛ ПЕРЕПИСАТЬ НАХУЙ СНУЛЯ!!!» · «по моей стилометрии» — no lines about what the build does NOT have, no excuses;
+         the guide rewritten from scratch by a helper with the whole portrait (17:39). **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
