@@ -8,7 +8,10 @@
 > притендует на владение тем, на что у него нет прав владения, мы лись собрали сборку под лицензией МИТ для ознокомления для всего человечества» · «Ридми
 > красивый, по стилометрии на основе примера того, как он написан у других публичныхх реп криника на двух языках» (2026-10-31 21:09). Before the visibility flip:
 > an audit of every tracked file AND the history for the owner's identity and the game's origin (memory rule; `steam_emu.ini` is in the manifest) — findings to
-> the owner first · **Outbound:** the audit's findings to the owner before the flip
+> the owner first. **Changed 21:10:** `[OWNER]` «можем приватную репу удалить, сделано новую публичную Krinik ModPack for Conan Exilex Enchanced» — a NEW public
+> repository with a fresh history (the old history's traces stop mattering; the audit covers the tree that goes there). `[AI]` recommended keeping the private
+> repo as the working one (deleting it is irreversible and loses the history) and asked the slug (`Krinik_ModPack_Conan_Exiles_Enhanced` proposed, rule 18)
+> · **Outbound:** the slug and the keep-or-delete of the private repo — asked in chat 21:10
 
 ## Goal vector (Achieve)
 
