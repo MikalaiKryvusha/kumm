@@ -240,8 +240,9 @@
          **«Игроку ПОЕБАТЬ!!! что там нахуй идет и как»** — the filter for the whole guide: the player reads WHAT he gets; how it works inside is never written,
          except what he must do with his hands. 17:47 «файлов игры не перезаписывает» — «ДА НУ НАХУЙ??? СЕРЬЕЗНО?» · «а что еще не делает?» (no «what it does
          not do»); guard `ConanExiles/_config/release/guide_lint.py` (pack `e8f7e48`, red on the 17:38 guide: 5 hits). 17:49 on the chapter «Известные
-         проблемы»: «Ты ебанутый, вот скажи мне??» — open defects are never published in the guide; they are FIXED before 1.0.0 (Hosav settings button,
-         enemy health bars, Era of Trials English tooltips, late elements on Q/E — bug 64; the antivirus note on dwmapi.dll — drop). **Next:** the mods rename (code, deploy, notes), then the guide
+         проблемы»: «Ты ебанутый, вот скажи мне??» · «откуда ты это гавно взял?» · «ОНО УЖЕ НАХУЙ ВСЕ ПОЧИНЕНО ТОБОЮ ЖЕ БЛЯТЬ В ПРОШЛЫХ СЕССИЯХ!!» — the list
+         was copied unchecked from the stale 2026-10-26 guide; those items are fixed (correction 17:49: an earlier line here called them open). The chapter
+         goes; nothing old is copied into the guide without checking it against bug 64 / plan 36 first. **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
