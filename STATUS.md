@@ -111,6 +111,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > commands, what to verify first.
 
 > **Older handover pointers (2026-10-30 16:55 … 2026-10-31 12:21) — collected in the chronicle, entry 2026-10-31 16:53 +03:00 (second part).**
+> - **FIRST next chat (19:58):** (1) the launcher — «Установить сборку» HIDDEN when the build is installed (the game folder holds `uninstall_krinik_build.cmd`), the
+>   column closes up (`[OWNER]` 19:57, idea 22; pack `9713b7d` already has «для» removed); build `python -X utf8 _config/release/build-docs.py --no-pdf`, check by
+>   `KRINIK_LAUNCHER_SNAPSHOT=<png>;384` in both states. (2) Interview 028 (`interviews/interview_028_conan_launcher_and_versions.md`) — Q2 answered by that word;
+>   Q1 font, Q3 idea 23, Q4 README wait; its pictures are in `interviews/assets/028/` — the review page does not render images (KAIF #187), open them in ImageGlass.
+>   (3) Epic 38 phases 1–2 (hub window by mockup 5, the entry button and list, the settings store) — `/dayloop` by «работай автономно» 19:19.
 > - **Closed entries of the chat 9c35b034 (README undo paragraph, the 18:54 NOW line, the 15:36 session, the 10 launcher mockups round, the 18:01/18:02 closure lines, phase 0 open) — moved verbatim to the chronicle, entry «moved from STATUS at the soft closure of the chat 9c35b034».**
 > - **The mod-settings hub look APPROVED 19:09** (mockup 5 of `ConanExiles/_config/settings_hub/mockups/mockups.html`, «Моды Krinik'а», per-author hubs, the
 >   entry button with a vertical scrolling list — the owner's words in plan 38's header). Route — a KIT window (recon `researches/conan-mod-settings-hub/
