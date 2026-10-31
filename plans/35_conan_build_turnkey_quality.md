@@ -238,7 +238,10 @@
          «читаемость» only about text and interface; every word fits what it names (RUSSIAN_RULES §5). 17:45 on «крафт героя при этом идёт с обычной
          скоростью»: «ну нахуя ты такое пишель.. блять» — a fix of our own side effect is never written; any «X при этом работает как обычно» is an excuse. 17:45 «это был один из багов» · «непредусмотренное поведение» · «мы его пофиксили» ·
          **«Игроку ПОЕБАТЬ!!! что там нахуй идет и как»** — the filter for the whole guide: the player reads WHAT he gets; how it works inside is never written,
-         except what he must do with his hands. **Next:** the mods rename (code, deploy, notes), then the guide
+         except what he must do with his hands. 17:47 «файлов игры не перезаписывает» — «ДА НУ НАХУЙ??? СЕРЬЕЗНО?» · «а что еще не делает?» (no «what it does
+         not do»); guard `ConanExiles/_config/release/guide_lint.py` (pack `e8f7e48`, red on the 17:38 guide: 5 hits). 17:49 on the chapter «Известные
+         проблемы»: «Ты ебанутый, вот скажи мне??» — open defects are never published in the guide; they are FIXED before 1.0.0 (Hosav settings button,
+         enemy health bars, Era of Trials English tooltips, late elements on Q/E — bug 64; the antivirus note on dwmapi.dll — drop). **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
