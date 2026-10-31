@@ -15,6 +15,9 @@
 > 19:03 `[OWNER]` «возле каждой опции (i) кнопка, тап или ховет по которой открывает поп-ап с пояснением подробным опции, так сделано во многих мобильных проектах
 > Криника» — every option row carries an «i»; hover or click opens a popup with the option's detailed explanation. Mockups 5–7 of `settings_hub/mockups/mockups.html`
 > (review folder `34_mods_settings_hub_by_author`, shown 19:04).
+> 19:06 `[OWNER]` «Кнопки сохранить и закрыть - внизу справа» · «закрыть без сохранения - вверху справа» · «Название пода не капсом» — bottom right «Сохранить»
+> and «Сохранить и закрыть» (`[AI]` read as two buttons; one «Сохранить и закрыть» if he says so), top right «Закрыть без сохранения», bottom left «Сбросить к
+> исходным»; the mod name over the rows in normal case. So values are NOT applied live: changes wait for «Сохранить» (criterion 4 reads «saved by the button»).
 
 ## Goal vector (Achieve)
 
