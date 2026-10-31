@@ -33,3 +33,8 @@ game closed. Machine lock `kumm` 11:10:28–11:20.
 - **Verdict:** partial — W1, W3, W4 pass at 1080p; the waiting window at 4K / 300 % not seen.
 
 REAL WORLD: accumulated — the owner's own build, his oasis save (restored after), his desktop with his windows open; data and machine — his PC, his game install; path — the real «ОТЗЫВ» plate clicked by the real mouse in the main menu. Verified on the real world at 1080p; the Esc-menu click and 4K / 300 % not seen in this run.
+
+**Addendum 2026-10-31 12:01 — the Esc-menu click (the owner's own path):** 11:59:34 `launch-bg.ps1` → world → `ActivateModule(FName('IngameMenu'), true, false)` →
+12:00:18 `mouse-seq.ps1 -Seq "move:0.5425/0.352,wait:700,lclick,wait:200"`: log «click in W_IngameMenu_C»; +3 s — game `IsIconic` true, the collector window
+`IsIconic` false, title «Отзыв о сборке Krinik Mod Pack»; zip at 12:00:36 (18 s); the agent's address box closed by PID 38220, the zip removed.
+W1 pass in the Esc menu too. Still not seen: 4K / 300 %.
