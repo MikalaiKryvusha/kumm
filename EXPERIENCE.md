@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0405 · 2026-10-31 · ❌→✅ · #conan #stand #remote #archery
+class: stale-stand
+**Lesson:** a combat stand built by «the nearest humanoid» picks the hero's own companions (0.8 m and 6.2 m after a teleport, 10:3x) and freezes them;
+`SetControlRotation` turns the camera only ≈ half the requested yaw (the camera mod smooths it), so a shot aimed by arithmetic misses into the ground;
+`god-on.sh` right after world entry fails (no pawn yet). Exclude companions by name (or by distance after the teleport), aim by frames of the screen
+centre (crosshair vs chest, ≈ 0.056° per px at 1080p, then ×2 for the camera), wait ≈ 8 s before god mode; re-find the target by NAME each call.
+**Repro:** the W13 stand recipe in plan 36 / STATUS «FIRST next chat» (2).
+**Trigger:** any stand that shoots or freezes a creature by the remote.
+none-cheap: a stand script (`arrow-stand.sh`) is the guard to write next time
+
 ### EXP-0404 · 2026-10-31 · ❌→✅ · #powershell #markdown #escaping
 class: escaping-layer
 **Lesson:** a PowerShell DOUBLE-quoted string treats the backtick as its escape: a markdown code span "`after.webp`" became BEL + "fter.webp"
