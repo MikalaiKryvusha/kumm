@@ -80,6 +80,10 @@
     `uninstall_krinik_build.cmd`, `_kumm_backup`. The text INSIDE a file stays Russian where the player reads it. Older names are renamed when touched;
     existing hyphenated names of tools and mods (`Deploy-ModPack.ps1`, `ConanCameraControl`) wait for the owner's word.
     (`[OWNER]` 2026-10-31 16:09 «никаких пробелов и кириллицы в названиях файлов и папок!!!» · «только английский язык и нижние подчеркивания».)
+20. **A fix updates every place that describes the fixed thing — in the same commit.** The user guide (`ConanExiles/docs/guide/guide-3.0.1.html`), bug 64's
+    item, plan 36's W row, the mod's notes: a fix that leaves a stale line anywhere is not done. Nothing is copied from an older document without checking it
+    against bug 64 / plan 36 first. (`[OWNER]` 2026-10-31 17:49 «ОНО УЖЕ НАХУЙ ВСЕ ПОЧИНЕНО ТОБОЮ ЖЕ БЛЯТЬ В ПРОШЛЫХ СЕССИЯХ!!» · «КАКОГО ХУЯ ТЫ НЕ
+    АКТУАЛИЗИРУЕШЬ СВОИ ЗНАНИЯ БЛЯТЬ» · «ПО ТОМУ ЧТО ТЫ ЖЕ ЧИНИШЬ».)
 19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
     mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +
