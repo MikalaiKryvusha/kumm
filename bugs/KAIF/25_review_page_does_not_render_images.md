@@ -17,7 +17,7 @@ The page renders `![alt](relative/path)` as an image (resolved against the docum
 
 ## Local remediation
 
-A local fix of 20:0x (images embedded as data URIs into the md before rendering, also in gateForOpen/checkDoc) BROKE the page: the page's stale-document guard compared the embedded text with the file and refused to record answers («Документ переписан после того, как страница открылась»), the owner saw it twice; REVERTED 20:04 (files back to 0ec3a15). Lesson for the origin fix: embed images at HTML render time only, never in the text the page hashes. Until then: questions in the chat as text, pictures opened in ImageGlass.
+A local fix of 20:0x (images embedded as data URIs into the md before rendering, also in gateForOpen/checkDoc) BROKE the page: the page's stale-document guard compared the embedded text with the file and refused to record answers («Документ переписан после того, как страница открылась»), the owner saw it twice; REVERTED 20:04 (files back to 0ec3a15). FIXED 20:07: core.mjs inline() renders the image line as <img>; review.mjs embedPageImages() embeds the files into the FINISHED HTML of buildPage only — docHash untouched; seen on the reopened page (4 images, no stale banner). Lesson for the origin fix: embed images at HTML render time only, never in the text the page hashes. Until then: questions in the chat as text, pictures opened in ImageGlass.
 
 ## Guard
 

@@ -627,6 +627,8 @@ function inline(s) {
     // a single star INSIDE bold is text ("kaif-*" in a bold phase list — origin #123, interview 018 of the origin): only a pair closes
     .replace(/\*\*((?:[^*]|\*(?!\*))+?)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[^*\p{L}\d])\*([^*]+)\*(?!\*)/gu, '$1<em>$2</em>')
+    // KUMM local fix (KAIF #187, 2026-10-31): an image line is an image; review.mjs embeds its file into the finished HTML (never into the hashed text)
+    .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;height:auto;display:block;margin:10px 0">')
     .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 }
 // 2.9, epic CP (origin #123): the owner's own answer shown on the page keeps its own markup (bold, code) — escaped first, then inline

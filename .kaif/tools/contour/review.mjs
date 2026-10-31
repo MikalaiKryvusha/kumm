@@ -41,7 +41,7 @@ import { tmpdir, platform } from 'node:os';
 import { createServer, request as httpRequest } from 'node:http';
 import { randomBytes } from 'node:crypto';
 import { spawn, spawnSync } from 'node:child_process';
-import { join, resolve, basename, relative, extname } from 'node:path';
+import { join, resolve, basename, relative, extname, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
   loadContourConfig, normalize, bodyHash, provenance, inQuietHours, parseMetaBlock, parseQuestions,
@@ -126,6 +126,17 @@ const KIND_NOTICE = 'notice';
 const FACES = ['interview', 'proofread', 'mockup'];
 const IMAGE_MIME = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif',
   '.webp': 'image/webp', '.svg': 'image/svg+xml' };
+// KUMM local fix (KAIF #187, 2026-10-31 — the owner: «интервью - это веб страница»): an <img> of the FINISHED page HTML with a local path gets its file
+// embedded as a data URI (path from the document's folder). Only the HTML changes — docHash and the text the page checks stay the file's own
+// (the first try at 20:0x embedded into the text and tripped the stale-document guard).
+function embedPageImages(html, docAbs) {
+  return html.replace(/<img src="([^"]+)"/g, (m, p) => {
+    if (/^(data:|https?:)/.test(p)) return m;
+    const abs = resolve(dirname(docAbs), p), mime = IMAGE_MIME[extname(abs).toLowerCase()];
+    if (!mime || !existsSync(abs)) return m;
+    return '<img src="data:' + mime + ';base64,' + readFileSync(abs).toString('base64') + '"';
+  });
+}
 const IS_WIN = platform() === 'win32', IS_MAC = platform() === 'darwin';
 const CLI_NAME = 'node .kaif/tools/contour/review.mjs'; // how the rituals call it
 // LP (2.7): every flag the CLI knows. An unknown flag REFUSES before any page, sound or call (the core's bug-33 rule):
@@ -575,7 +586,7 @@ export function buildPage(root, docPath) {
     main: mainHtml,
     questions, artifacts, face: 'interview', rev: docHash,
   });
-  return { html, questions, artifacts, docHash, kind, title, rel, face: 'interview' };
+  return { html: embedPageImages(html, resolve(root, docPath)), questions, artifacts, docHash, kind, title, rel, face: 'interview' };
 }
 
 // I37: the NOTICE page — the whole document, an optional comment, the EXPLICIT "read" mark.
