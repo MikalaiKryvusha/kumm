@@ -203,7 +203,9 @@
          «крупными буквами, как заголовок» · «а дальше главы 1, 2, 3, 4, 5» · 16:38 «внутри глав параграфы 1.1, 1.2, 1.3 и так далее» — done by CSS counters
          (chapter 1 = the storefront «Возможности сборки»; `h2.ch` chapters, `h3` items). 17:19–17:20 `[OWNER]` «На титульном листе это НЕ ПАРАГРАФЫ!!!» ·
          «Вот это все не параграфы, а подзаголовки пунктов!!!» — the storefront items on the title sheet carry NO numbers (`.features h3::before { content: none }`,
-         pack after `9b686b5`); numbering starts in the chapters (6.1, 6.2 …). **Next:** the mods rename (code, deploy, notes), then the guide
+         pack after `9b686b5`); numbering starts in the chapters (6.1, 6.2 …). 17:21 on the kicker line «CONAN EXILES ENHANCED 3.0.1 · СБОРКА МОДОВ · ВЕРСИЯ 1.0.0» above the
+         title: `[OWNER]` «вот это нахуя если сантиметром ниже то же самое написано заголовком?» · «нахуя ты повторяешься????» — removed; the rule: nothing
+         in the guide is said twice (a line that repeats a heading, a number or a fact standing nearby goes). Design recon — `researches/document-design-manuals/`. **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
