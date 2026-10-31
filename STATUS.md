@@ -111,6 +111,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > commands, what to verify first.
 
 > **Older handover pointers (2026-10-30 16:55 … 2026-10-31 12:21) — collected in the chronicle, entry 2026-10-31 16:53 +03:00 (second part).**
+> - **PARKED 2026-10-31 18:54 — the KUMM README undo paragraph** (journal `_kumm_backup\journal.txt`, `-Restore -GameDir`, manifest `uninstall` key; facts at
+>   `Deploy-ModPack.ps1` lines 108–233, 987–1013, 1585) — not started; write by the portrait when taken back.
+> - **NOW (18:54, `/dayloop` by «работай автономно» 18:53): the mod settings window — epic 38** (`[OWNER]` «нас ждет большой долг - окно настройки модов» · 18:54;
+>   «рыболку можно не троггггггать, оно красивое» · 18:54 — the fishing window stays as is, it is the look's model). Plan `plans/38_EPIC_conan_mod_settings_hub.md`,
+>   phase 0 `plans/38_epic38_phase0_widget_spike.md`. In flight in parallel: a helper rebuilds `KrinikConanLauncher.cs` by the approved mockup 11 + frame 7 (pack).
 > - **Session 2026-10-31 15:36– (resume):** one build script for the delivery documents — `ConanExiles/build_docs_and_launcher.cmd` (author links from
 >   `author_links.txt` → the guide's «Автор сборки» + PDF + `KrinikConanLauncher.exe`, plan 35 G11 item 7, pack `2336de3`); Krinik mods carry the build version
 >   **1.0.0** (seen in the pause-menu list 15:51, pack `35c96d8`); **bug 72 DONE** — the install keeps an undo journal + copies (`<game>\_kumm_backup`),
