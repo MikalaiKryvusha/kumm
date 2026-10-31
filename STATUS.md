@@ -131,10 +131,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   idea 22 installer — DPI-aware, Svarog text sizes, a copper-gold metal frame like the Conan logos. Then «работай автономно» → `/dayloop`.
 > - **09:44–09:50 `/dayloop`:** W4 minimap coordinates inside the ring on a clock-style plate — section `krinik_minimap_coords` (pack `1e2ab51`, cases
 >   `TC_conan_minimap_coords_backing_2026-10-31.md` C1–C4; notes `games/ConanExiles/mods/Simple_Minimap.md` new); «правее и выше» still open.
-> - **FIRST next chat:** (1) the owner's eye on review folders 25 (shout fade) and the minimap coordinates — the owner already picked 09:54 (plain dark plate, font 15, higher; pack `6b3c041`). W4 fully done 10:03 (corner by render shift, rounded tight plate, font 12; pack `9d975f8`). (2) **W13 stuck arrows** — stand 4 recipe in plan 36 W13 (a live boss frozen 6 m
->   ahead, `mouse-seq.ps1 -Seq "lclick,wait:1500,…"`); read ONE actor per remote call and copy X/Y/Z into numbers at once (vector reads in one call came
->   back 201 cm for all, then 0 0 0); never stack unproven names in one call (EXP-0403 — that crashed the game). (3) W4 minimap backing (kit, a new widget).
->   (4) W37 in the settings hub — once the hub exists. (5) The release gate at 2K / 4K.
+> - **W4 minimap DONE and ACCEPTED 10:09** (`[OWNER]` «вот теперь хорошо»): coordinates inside the ring on a plain dark rounded plate, font 13, inset 46;
+>   the map tighter into the corner by a render-only shift (pack `5e8229b`, cases C1–C9).
+> - **FIRST next chat:** (1) the owner's eye on review folder 25 (shout fade). (2) **W13 stuck arrows** — stand 5 (10:05) aborted: a `_G` actor handle
+>   read 0 0 0; re-find the creature by NAME each call, copy X/Y/Z into numbers at once, one actor per call, never stack unproven names (EXP-0403).
+>   (3) W37 in the settings hub — once the hub exists. (4) The release gate at 720p / 1080p / 2K / 4K (rule 17).
 > - **Owner's call, not taken:** the pack `.git/hooks/pre-commit` running `check-lua-game-thread.py` was refused by the permission classifier (07:5x) —
 >   the guard still runs only by the rule «before every Lua rollout» (EXP-0400).
 > - **Epic «Настройки модов», phase 0 (open):** real clicks reach vanilla FLX buttons inside a vanilla window («Отмена» closed `W_InventorySettings_C`), but a
