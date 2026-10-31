@@ -172,6 +172,16 @@
             ставить в PDF, решает владелец.
          5. Черновик пунктов — таблица «мод → пункты → откуда взято (страница, код, кадр)» в `ConanExiles/docs/`; PDF собирается из неё.
             Начат 2026-10-28: `ConanExiles/docs/19-пункты-модов-для-README.md` — KrinikConanArchery, KrinikUIFixes; ждёт вычитки владельцем.
+      7. **One build script; author links from a file** — DONE [2026-10-31 15:46 +03:00] (pack commit below; cases `testcases/TC_conan_readme_launcher_build_2026-10-31.md`).
+         `[OWNER]` 2026-10-31 15:36: «нужно сделать, чтобы скрипт сборки ридми клал в него ссылки из author_links.txt» · «я туда буду докидывать свои ссылки» ·
+         «Формат такой "Текст до двоеточия"[OpenAI](https://openai.com)» · «Должно получаться так: Текст до двоеточия; OpenAI» · «где OpenAI - становится
+         кликабельной ссылкой https://openai.com» · «пусть этот парсер в ридми в секцию ссылок автора закидывает ссылки, и в лаунчер» · 15:39 «скрипты сделать,
+         или один, который Ридпи собирает и рендерит в пдф, и собирает лаунчер exe» · «иногда буду пересобирать я сам скриптом» · 15:40 (Visual Studio) «может
+         ею можно».
+         How: the owner edits `ConanExiles/author_links.txt`; double-click `ConanExiles/Собрать ридми и лаунчер.cmd` (= `python _config/release/build-docs.py`,
+         flags `--no-pdf`, `--no-launcher`) → the «Автор сборки» section of `docs/guide/guide-3.0.1.html` (between `AUTHOR_LINKS` markers, last page of the PDF),
+         the PDF at the manifest's `guide` path, `_config/launcher/bin/KrinikLauncher.exe` (VS 2022 Roslyn csc, .NET Framework 4.x, version = `packVersion`).
+         A malformed line stops the build with its line number. `[AI]` The separator is «; » exactly as in the owner's example (one constant, `SEPARATOR`).
 - [x] Г13. **Сделано 2026-10-26 20:24 (план 36 п. 5):** `_config/player-report/Собрать отчёт.cmd` + `collect-report.ps1` в `extras` манифеста;
       на настоящих журналах и 5 падениях (18:03 в их числе) zip 1,4 МБ, 19 файлов; независимая проверка — из 3 значений MachineId / LoginId /
       EpicAccountId найдено 0, имени компьютера, пути профиля, `User:` — 0, `KrinikLevelUncapped` 12 → 12; мутант без обезличивания — отказ, код 4,

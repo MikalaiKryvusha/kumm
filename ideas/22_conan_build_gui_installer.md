@@ -22,6 +22,11 @@
 write to Krinik and which folder (the report zip) to attach; a section «Автор сборки» with the author's PlayGround page
 and e-mail (both stand in the pack's `_config/player-report/collect-report.ps1`, `$AUTHOR_MAIL` and the closing lines — KUMM is public, the addresses stay there). Same look and DPI rules as the installer above.
 
+**Launcher skeleton built [2026-10-31 15:46 +03:00]** (plan 35 G11 item 7): `ConanExiles/_config/launcher/KrinikLauncher.cs` → `bin/KrinikLauncher.exe` by
+`_config/release/build-docs.py` — «Играть» (finds `ConanSandbox.exe` in its folder or up to 3 levels above), «Отзыв» (the instruction + «Собрать отчёт» running
+`Собрать отчёт.cmd` beside it), «Автор сборки» from `author_links.txt` (same parser as the README), the version from `packVersion`; per-monitor DPI aware.
+Its LOOK is a working draft in the guide's colours — the mock-ups below still decide it; not yet in the manifest's `extras` (the delivery waits for the look).
+
 ## Goal vector (Achieve)
 
 A player who unpacks the archive starts ONE file and sees a Windows window in the build's look instead of a console: the background from our intro
