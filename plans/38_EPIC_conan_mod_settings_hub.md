@@ -4,6 +4,9 @@
 > **Status:** meta-plan written 2026-10-30 15:1x; rung 1 research `researches/conan-mod-settings-hub/` (README local + `web-sweep.md`); phase 0 next —
 > its operational plan `plans/38_epic38_phase0_widget_spike.md`
 > **Outbound:** the look — a mock-up for the owner's eye (phase 0/1 frames); no open fork: Hosav's window is restyled by his word (W19), the archaeology search 15:1x found it
+> **2026-10-31 18:54–18:55:** `[OWNER]` «нас ждет большой долг - окно настройки модов» · «рыболку можно не троггггггать, оно красивое» · «давай примерный макет, как ты
+> видишь окно настройки модов Криника, 4 варианта макета» — 4 mockups of the «Моды Krinik» window in the fishing look (pack `_config/settings_hub/mockups/mockups.html`,
+> pack `d48210b`; review folder `33_krinik_mods_settings_window_4_mockups`): 1 one scroll · 2 index + scroll · 3 two columns · 4 folding sections — waits for his pick.
 
 ## Goal vector (Achieve)
 
