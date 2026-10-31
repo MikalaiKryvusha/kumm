@@ -91,6 +91,35 @@
 
 ## Entries
 
+### EXP-0402 · 2026-10-31 · ❌→✅ · #conan #ue4ss #hook #blueprint
+class: bp-post-hook-silent
+**Lesson:** on Conan 3.0.1 a UE4SS `RegisterHook(<BP function>, pre, post)` on `BP_CollisionComponent_C:TakeProjectileDamage` registered fine and
+its PRE callback fired, the POST never (a remote probe hook, 2026-10-31 08:06) — the arrow-blood section sat in the post-hook and did nothing for a
+day while «перехват встал» stood in the log. Put the work into the PRE callback when the parameters are enough; prove a new hook by a probe that
+prints in BOTH callbacks before trusting either. Calling a BP function from Lua: struct parameters take `{}` (a number there is refused with
+«Parameter must be of type 'StructProperty'»).
+**Trigger:** any RegisterHook on a /Game/… Blueprint function.
+none-cheap: one probe line per new hook is the check
+
+### EXP-0401 · 2026-10-31 · ❌ · #conan #probe #harness #experiment
+class: experiment-left-live
+**Lesson:** an experiment step written INTO a "read-only" probe outlives its question. `KrinikMenuProbe` (2026-10-25, plan 33) got «опыт 2» — collapse the
+game's `WBP_QueuedNotificationWindow_C` to see whether the menu frame goes; the hypothesis was refuted the same morning, the frame was removed another
+way, and the collapse kept running 25 s after EVERY start for six days on the owner's own game (the window lives under the game instance, so in the
+world too), while the mod notes said «reads only». Found only because a guard named the file for another reason. When an experiment is refuted, its
+code goes in the same move; a probe that writes is not a probe.
+**Trigger:** any `SetVisibility` / `Set…` / write inside a mod or file called probe, zond, test; closing a hypothesis.
+none-cheap: the class needs a reader of intent; `grep -n "SetVisibility\|:Set" <harness probes>` at the close of a plan item is the manual check
+
+### EXP-0400 · 2026-10-31 · ❌→✅ · #conan #ue4ss #guard #rollout #process
+class: guard-not-run
+**Lesson:** a guard that exists but is invoked by a RULE is not run. `check-lua-game-thread.py` (2026-10-28) named three live
+`ExecuteWithDelay` calls on 2026-10-31 07:4x — one from the previous night's rollout (`krinik_feedback`), two older (`krinik_pause_in_menu`,
+`KrinikMenuProbe`) — although HOUSE_RULES says "run it before every Lua mod rollout". Fixed all three (`ExecuteInGameThreadWithDelay`, cases F8/P1).
+The gate has to sit on a path the agent cannot skip (the pack's pre-commit, or `Deploy-ModPack.ps1` post-deploy for Lua mods).
+**Trigger:** any Lua rollout of a Conan mod.
+mechanization pending: a pack `.git/hooks/pre-commit` running the guard was refused by the permission classifier 2026-10-31 07:5x — the owner's call
+
 ### EXP-0399 · 2026-10-31 · ❌→✅ · #conan #ue4ss #umg #click #kit
 class: widget-event-hook-silent
 **Lesson:** `RegisterHook("/Script/UMG.UserWidget:OnMouseButtonDown" | ":OnMouseMove")` registered without an error and NEVER fired on Conan 3.0.1

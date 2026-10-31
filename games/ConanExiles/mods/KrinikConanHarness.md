@@ -13,7 +13,7 @@ loose folders in `_unpacked/`, deployed by hand). Why not shipped: the remote ru
 |---|---|---|---|
 | `KrinikAgentRemote` | the remote: one command line in `ue4ss/Mods/KrinikAgentRemote/cmd.txt` → reply in `done.txt` (`lua` → `result.txt`, `dump` → `dump.txt`) | `Scripts/main.lua` (284 lines), `Scripts/ui_check.lua` | command table, world entry without the mouse, cheats — `HOUSE_RULES_REFERENCE.md` §6 row «Conan remote» (one copy, not repeated here); call it by `bash _config/pult.sh` from `ConanExiles/_config` |
 | `KrinikConanBench` | the fly-through bench: a CameraActor along a route, PresentMon outside | `Scripts/main.lua` (511), `Scripts/routes.lua` (147) | NO `enabled.txt` in the source — switched on in the game folder when a bench run needs it; log `bench.log`, position `bench-pos.txt` in its game folder; driver scripts `_config/bench-flight.sh`, `bench-scout.sh`; docs `ConanExiles/docs/18-бенч-облёт.md` |
-| `KrinikMenuProbe` | a read-only probe of live UserWidgets in the main menu (25 s after start → `menu-report.txt`) | `Scripts/main.lua` (63) | made 2026-10-25 for one question (plan 33); reads only |
+| `KrinikMenuProbe` | a read-only probe of live UserWidgets in the main menu (25 s after start → `menu-report.txt`) | `Scripts/main.lua` (49) | made 2026-10-25 for one question (plan 33). Reads only since 2026-10-31 — until then it ALSO collapsed the game's `WBP_QueuedNotificationWindow_C` 25 s after every start (experiment 2 of 10-25, refuted the same day, never removed; this line said «reads only» meanwhile) |
 
 ## Deploy and export
 

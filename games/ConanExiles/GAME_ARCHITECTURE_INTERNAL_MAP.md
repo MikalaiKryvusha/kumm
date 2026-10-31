@@ -557,3 +557,14 @@ Lua-моды UE4SS ждут только отложенными действия
   run — every timing case is then wrong. Stand step: after entering the world wait for «взведено» in `UE4SS.log`, then open the hub.
 
 Temperature (2026-10-30, live + Hosav bytecode): the hero's temperature is `BPEnergyReceiver` (`/Game/Systems/BPEnergyReceiver`, a component of the hero) energy of type 1 — `GetEnergy(1)`; its `EnergyReceived` fires ≈1 Hz (no delegates on the class). The game's steps (Hosav `W_SmoothHP::Get_TempImage` thresholds): ≥55 heatstroke, ≥40 extremely warm, ≥30 very warm, ≥20 warm, −20…20 soothing (heart), ≤−20 cold, ≤−30 very cold, ≤−40 extremely cold, ≤−55 frostbite. The HUD °C is NOT the energy (energy 21.1 ↔ «32 °C», −20.5 ↔ «−8 °C»). Text fields: `TextBlock_TempText` in `W_SmoothHP` and `W_SmoothHP_Cernter` (children of Hosav's `W_NewHealthUI_C`), `TextBlock_Temp` in `W_TestHudOverlay_C`; no colour binding — `SetColorAndOpacity` holds. Desert oasis: noon → +20 in ~1 min, night → −20 in seconds.
+
+## Facts of 2026-10-31 (minimized window, the notification window)
+
+- **World entry under a MINIMIZED game window crashes the game** (seen once, 2026-10-31 07:49:03): the remote pressed «Продолжить» while the
+  window was minimized (`ShowWindow` 6 by the feedback collector) → at «Starting Login» `LogRHI: Error: Check 'DestX + …' failed … Subresource …
+  dimensions [8, 8, 1], copying from [0, 0, 0] to [1920, 1080, 1]` → D3D12 `E_INVALIDARG` fatal in a background worker. Control the same session: not
+  minimized → enters fine; minimized 10 s IN the world → lives. A player cannot press a button of a minimized window, so this is the agent's path only:
+  `_config/enter-world-remote.sh` restores a minimized window (SW_SHOWNOACTIVATE) before the press.
+- **`WBP_QueuedNotificationWindow_C` lives under the GAME INSTANCE**, one instance from the main menu on (`…GameInstance…WBP_QueuedNotificationWindow_C_<N>`),
+  visibility 4 (SelfHitTestInvisible) — whatever collapses it in the menu keeps it collapsed in the world. `KrinikMenuProbe` did so 25 s after every
+  start from 2026-10-25 to 2026-10-31 (a refuted experiment left in; removed).

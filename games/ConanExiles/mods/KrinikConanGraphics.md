@@ -18,9 +18,14 @@ deployed by `Deploy-ModPack.ps1` through the manifest's `engineIni` field.
 - Can't: `SetLifeSpan` from Lua (TrivialObject); changing LifeSpan in a pre-hook of `SpawnDecalAtLocation` (UE4SS does not pass it on).
 - Tested: report `testcases/reports/2026-10-30_conan-lingering-blood.md`. Open: the slider (W24); the cost below `os.clock`'s 1 ms step.
 
-## Section 2 — arrow hits leave blood (W30, code in place 2026-10-30 23:53, the direct-call test pending)
+## Section 2 — arrow hits leave blood (W30, seen working by a direct call 2026-10-31 08:24; a real bow shot — the owner's first shot)
 
-Built: a post-hook of `BP_CollisionComponent_C:TakeProjectileDamage` set LAZILY on the first `BP_CollisionComponent_C` (at mod start the BP class
+**2026-10-31:** the POST-hook of this Blueprint function never ran (a remote probe hook printed «pre», never «post», 08:06) — the section works in the
+PRE-hook now (target and `bLocked` are known before the call). Stand: the target's OWN component by `GetComponentByClass(StaticFindObject(
+'/Game/Systems/Combat/BP_CollisionComponent.BP_CollisionComponent_C'))` (the hero's via `GetOwner()` failed silently on 10-30); call
+`comp:TakeProjectileDamage({}, {}, target, nil, nil, 0, {}, false)` — `Combo` is a struct, `0` there is refused. Cases A2c, A3 pass.
+
+Built (first, 2026-10-30): a post-hook of `BP_CollisionComponent_C:TakeProjectileDamage` set LAZILY on the first `BP_CollisionComponent_C` (at mod start the BP class
 is not loaded: «no UFunction with the specified name was found»); on a Character target, not blocked — `SpawnDecalAtLocation(/Game/Effects/blood/
 M_blood_ground_decal, (64, 67…95, 67…95), feet = actor Z − capsule half height, Pitch −90, random Yaw, 3 s)` + `SetFadeOut(0, 3)` so section 1 extends it.
 The native stain (hook 23:50): size (32, 67…95, 67…95), Pitch −90, random Yaw, life 3 s. Cases `testcases/TC_conan_arrow_blood_2026-10-30.md`

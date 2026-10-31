@@ -120,17 +120,20 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (zip on the desktop, game minimized, Explorer, an address box on top, then `mailto:`). Main menu seen working 01:31–01:35 (report
 >   `testcases/reports/2026-10-31_conan-feedback-button-and-logo.md`). The game's logo now from the owner's upscale with a crisp ® (no mips — the vanilla
 >   mip chain blurred it). The intro wheel: grey with a gold run (the owner 01:12) — built and deployed, on screen not yet seen.
-> - **FIRST next chat:** (1) W37 in the Esc menu — F5/F6 (enter the world, real Esc, the plate on the left under our logo, a real click), F4 the debounce,
->   F7 the gameplay-LMB cost (cases `TC_conan_feedback_button_2026-10-31.md`); the menu click blocks the game 63 ms (`os.execute`). (2) W37 in the settings
->   hub of our mods (`[OWNER]` «и в хабе настроек по нашим модам - тоже» · 01:04) — once the hub exists (epic «Настройки модов»). (3) The owner's eye:
->   the gold wheel at a start, the crisp game logo. (4) Then the W30 arrow test below.
+> - **2026-10-31 07:40– `/dayloop` («после рабочего стола беремся за конана в автономном режиме»):** W37 «ОТЗЫВ» seen working in BOTH menus (Esc menu
+>   07:53, report `testcases/reports/2026-10-31_conan-feedback-esc-menu.md`); the click 63 → 3–4 ms (`io.popen`); the address box `MB_TOPMOST`; three live
+>   `ExecuteWithDelay` fixed (EXP-0400) and `KrinikMenuProbe` no longer collapses the game's notification window (EXP-0401); world entry under a minimized
+>   window crashes — the remote's path guarded. The plate 10 lower (`[OWNER]` «10 пикселей» · 07:47) — kit rebuilt, run 3 (cases L1–L3, G1). Bug 64 item 8
+>   reopened at 1080p. New: plan 35 release gate «1080p + 2K + 4K by eye» (the owner 07:51); idea 22 — a GUI install wizard (the owner 07:55–07:56).
+> - **Next:** (1) W37 in the settings hub of our mods (`[OWNER]` «и в хабе настроек по нашим модам - тоже» · 01:04) — once the hub exists (epic «Настройки
+>   модов»). (2) The owner's eye: the gold wheel at a start, the crisp game logo. (3) The W30 arrow test below.
 > - **22:55 «работай автономно» → `/dayloop`. W26 the build's logo:** wallpapers ACCEPTED 22:55 (the owner's A3-smaller, `_extras/Wallpapers/*.jpg`, the clean
 >   originals in `_extras/Wallpapers-source/`, `_config/branding/make-wallpapers.py`); the logo + versions in the main menu (right) and the Esc menu (left)
 >   seen in game 23:29 (review folder 14, the owner's eye pending); the logo intro at start built 23:38 (`KrinikIntro`, `Content/Movies/.mp4` — on screen not
 >   seen by a background frame: the owner's eye at the next start). **W11 Krinik on top of the Esc mod list — DONE in game 23:44** (review folder 15,
->   `krinik_pause_in_menu.lua` 0.15.0, the owner's eye at a real Esc pending). **W30 arrow blood — code in place (pack 1e5c144), test pending:** the lazy
->   hook installs (A1 pass); FIRST next: the direct call `TakeProjectileDamage` on the hero's component — the remote lookup via `GetOwner()` failed silently,
->   try `GetComponentByClass` (cases `TC_conan_arrow_blood_2026-10-30.md`, notes `mods/KrinikConanGraphics.md`). Then W4 minimap, W13 arrows, W29 shouts.
+>   `krinik_pause_in_menu.lua` 0.15.0, the owner's eye at a real Esc pending). **W30 arrow blood — WORKS by a direct call 2026-10-31 08:24 (pack 47f17fd):** the
+>   post-hook never ran, the section moved into the pre-hook (EXP-0402); a stain under the boss, blocked hit none (A2c, A3; review folder 22). A real bow shot —
+>   the owner's first check. Then W4 minimap, W13 arrows, W29 shouts.
 > - **Epic «Настройки модов», phase 0 (open):** real clicks reach vanilla FLX buttons inside a vanilla window («Отмена» closed `W_InventorySettings_C`), but a
 >   checkbox created by `Create(pc, class, pc)` stays dead even inside it; 48 of 49 live FLX buttons live in a window's `WidgetTree` (H4: the OUTER matters).
 >   `Create(window, class, nil)` builds inside `<window>.WidgetTree`; adding it + `SetText` in ONE call crashed (15:38) — next: the same, ONE action per call,
@@ -196,8 +199,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 Files without the DONE tag — 29 (2026-10-18 13:45):
 
-- 🔴 `bugs/64_conan_mod_ui_wave_overlaps_untranslated.md` — the UI of the Conan 3.0.1 build's mods, 26 items: open 4, 5, 6, 12, 13 (partly),
-  15–18, 21 (Damage Meter slider), 23 (EAA class cards — text in textures), 26 (late emblem in the hub); closed by a frame 2, 3, 7, 7b, 8–11,
+- 🔴 `bugs/64_conan_mod_ui_wave_overlaps_untranslated.md` — the UI of the Conan 3.0.1 build's mods, 26 items: open 4, 5, 6, 8 (reopened 2026-10-31 at 1080p), 12, 13 (partly),
+  15–18, 21 (Damage Meter slider), 23 (EAA class cards — text in textures), 26 (late emblem in the hub); closed by a frame 2, 3, 7, 7b, 9–11,
   14, 16, 19, 20, 22, 24, 25 — work order in plan 35.
 - 🔴 The owner's bugs 55–62 (2026-10-18 13:35–13:43, a wave in 5 minutes of play) — `bugs/55_…` – `bugs/62_…`; order and plan 32 — item 00000 above.
 
