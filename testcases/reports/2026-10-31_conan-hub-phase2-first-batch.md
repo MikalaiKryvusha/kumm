@@ -60,6 +60,12 @@ clicked, «Сбросить к исходным», «Сохранить», «С�
   the next stain `лежит 300 с (своё значение, номер настроек 1793470039)`. The shared number `ModRef:SetSharedVariable("KrinikSettingsVersion", n)` carries a
   number between mods — the step-3 open question closed.
 
+- A1 partial (2026-10-31 21:12–21:17, a seventh launch with KrinikConanArchery redeployed) — at load `настройки окна: баллистика true, стрелы не ломаются
+  true, обзор 75° (загрузка)`; a real click on «KrinikConanArchery» → `page arc`; FOV set to 60 by the remote; «Сохранить и закрыть» by a real click →
+  `["arc_fov"] = 60`, version bumped. NOT observed: the re-read at an aim or an arrow — three `mouse-seq` attempts (`kdown 1` first; a middle-click opener;
+  the inventory toggled by a real `I` twice) never put the hero into the aim: no FOV event, no shot, the Kappa at 100 % (frames `a2_aim`, `a4_aim`). The stand's
+  real input in the world after the hub — the next session's recon (the 2026-10-31 archery stands aimed with `mouse-seq` successfully: compare their opener).
+
 ## 5. Found
 
 1. Fixed: the store lost a saved `false` (`x and false or nil`) — desk test.
