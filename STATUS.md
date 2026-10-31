@@ -119,7 +119,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **The 07:40–08:46 dayloop, the 09:03–09:50 W29 / W4 work and the owner's 09:31–09:33 rules — moved verbatim to the chronicle, entry 2026-10-31 10:4x +03:00.** W29 shout fade waits for the owner's eye (review folder 25); rule 17 and idea 22 — in their files.
 > - **W4 minimap DONE and ACCEPTED 10:09** (`[OWNER]` «вот теперь хорошо»): coordinates inside the ring on a plain dark rounded plate, font 13, inset 46;
 >   the map tighter into the corner by a render-only shift (pack `5e8229b`, cases C1–C9).
-> - **Session 2026-10-31 10:47–12:1x (dayloop from 11:20 by the owner's «работай автономно»):** review folder 25 opened for the owner 10:5x (no verdict yet).
+> - **Session 2026-10-31 10:47–12:21, closed soft at 70 % of the window (dayloop from 11:20 by the owner's «работай автономно»):** review folder 25 opened for the owner 10:5x (no verdict yet).
 >   **W13 FIXED 11:40** (pack `4ffe145`): the arrow copy is born ≈ 1.8 m short of the hit; tip pushed 15 cm short of the game's impact point (21–39 cm deeper than
 >   the skin), never past the hit bone — Kappa head and human chest by side frames; arrows leaving the corpse are vanilla (`OnDestroyed` binding, bytecode).
 >   Stand tool `_config/arrow-stand.sh` (summon by class path, place, freeze; 10 s after a summon — the owner's tip). Open: a walking body, rhino, elephant.
@@ -128,9 +128,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   **G12 DONE 11:55** (pack `7faaa2b`): the hero's craft keeps its real speed while a menu slows the world (`CraftTimeMultiplier` = the dilation, read at an
 >   item start). **Idea 05 DONE**; idea 03's Athleticism law and idea 04's level past 60 seen live (reports `2026-10-31_conan-agility-law-live.md`,
 >   `…level-uncap-live.md`). Item 28 (archive volumes) in progress 12:1x: export 73 mods ok, 19 volumes ≤ 700 MiB ok, unpack + hash compare: 223 = 223, hashes equal (report `2026-10-31_conan-build-archive-volumes.md`)
->   (scratch `g10/` removed 12:14; cases `TC_conan_build_archive_volumes_2026-10-31.md`).
-> - **Next:** (1) item 28 — the install on a copy of the game without mods. (2) W20 mod settings windows — mock-ups first (taste).
->   (3) The release gate at 720p / 1080p / 2K / 4K (rule 17). (4) Item 21 — a vanilla frame of the quick bar needs a clean-game stand (also for q4).
+>   (scratch `g10/` removed 12:14; cases `TC_conan_build_archive_volumes_2026-10-31.md`). Cases U2 pass (Esc mod list), U3 — ModControlPanel opens by
+>   `ActivateModule`, Russian except the English «All» filter (bug 64 item 47). Cheat-manager facts for stands — game map, last block.
+> - **FIRST next chat:** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
+>   plan 36 item 23). (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
+>   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
+>   (5) The release gate at 720p / 1080p / 2K / 4K (rule 17). (6) Item 21 — a vanilla quick-bar frame needs a clean-game stand (also for q4).
 > - **Owner's call, not taken:** the pack `.git/hooks/pre-commit` running `check-lua-game-thread.py` was refused by the permission classifier (07:5x) —
 >   the guard still runs only by the rule «before every Lua rollout» (EXP-0400).
 > - **Epic «Настройки модов», phase 0 (open):** real clicks reach vanilla FLX buttons inside a vanilla window («Отмена» closed `W_InventorySettings_C`), but a
@@ -154,10 +157,6 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >
 > **2026-10-29 10:2x — THE OWNER'S WORK ORDER (read first): `plans/36_…` → "The owner's work order 2026-10-29", W1–W16 — the table holds each item's
 > state.** Only those items are worked; any other debt of the build is asked first. The day's done list — chronicle, entry 2026-10-29 18:43.
->
-> **Open tails of the 2026-10-28 chats** (palm shadows by the kit route — bug 67; cases without a run; corpse prompt on two lines — item 36; «k» rounding —
-> item 33(c); jump shooting — plan 37; arrow physics «как в обливионе»; edited paks bloat — plan 36 14a; unseen 28.10 texts; run instruments; keys; evening
-> tails) — moved verbatim to the chronicle, entry 2026-10-29 22:58 (second part); the owner's work order (plan 36, W1–W16) decides which are worked.
 >
 > **Conan build debts — plan 36 (`plans/36_conan_build_debts_plans.md`, since 2026-10-26 20:14):** 35 items with hours, done
 > in a row (`[OWNER]` «пот по ним пиши планы» · «и по планам делаем»). Each item's status — in the plan's "Queue" table.

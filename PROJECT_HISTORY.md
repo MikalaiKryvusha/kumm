@@ -1,5 +1,11 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-31 12:2x +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat d52c3a36
+
+> **Open tails of the 2026-10-28 chats** (palm shadows by the kit route — bug 67; cases without a run; corpse prompt on two lines — item 36; «k» rounding —
+> item 33(c); jump shooting — plan 37; arrow physics «как в обливионе»; edited paks bloat — plan 36 14a; unseen 28.10 texts; run instruments; keys; evening
+> tails) — moved verbatim to the chronicle, entry 2026-10-29 22:58 (second part); the owner's work order (plan 36, W1–W16) decides which are worked.
+
 ## 2026-10-31 10:4x +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat after 4f90b546
 
 > - **2026-10-31 07:40–08:46 `/dayloop` (chat 4f90b546; `[OWNER]` «после рабочего стола беремся за конана в автономном режиме» · «работаем дальше над

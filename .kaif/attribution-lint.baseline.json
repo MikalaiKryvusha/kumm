@@ -1,6 +1,6 @@
 {
-  "written": "2026-10-16T19:42:40.208Z",
-  "count": 12,
+  "written": "2026-10-31T09:22:38.458Z",
+  "count": 11,
   "entries": {
     "PROJECT_HISTORY.md:4846cce9e8b77b1f": 1,
     "PROJECT_HISTORY.md:4fb1b02eafad9b00": 1,
@@ -11,7 +11,6 @@
     "PROJECT_HISTORY.md:dab97bc2d547e95c": 1,
     "ideas/01_cpu_ue5_optimisation.md:50d5a2eb6b65e6aa": 1,
     "ideas/04_conan_uroven_bez_potolka.md:35592e52e88afe6f": 1,
-    "ideas/05_conan_pauza_v_inventare.md:7f3366605fdb998a": 1,
     "plans/01_cpu_gt_panorama.md:87dfd4337117c975": 1,
     "researches/conan-devkit/README.md:d45671ca3ab25ceb": 1
   }
