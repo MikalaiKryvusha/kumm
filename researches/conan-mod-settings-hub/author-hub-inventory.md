@@ -25,8 +25,9 @@ planned in plan 38 phase 2. Author names: the ones the project already uses; the
 | author of Pickup+ — `TO FILL` | Pickup+ | [module] (STATUS) | — |
 | author of ModControlPanel — `TO FILL` | ModControlPanel — itself a settings panel of other mods | [module] | — |
 
-A single-mod author is still a hub by the owner's rule («по всем авторам»); whether a one-mod hub shows its list column — a question for the hub's
-implementation, not decided here.
+**Single-mod authors → one hub «Прочее»** (`[OWNER]` 2026-10-31 19:14 «если у автора один мод - ему отдельную кнопку не делаем, а объединяем их в Прочее»).
+So the entries are «Моды Krinik'а», «Моды Xevyr'а» and «Прочее» (Hosav's Custom UI, Exiles Fishing, Night Terrors, Enhanced Armory and Arsenal, PvE Plus Ambush,
+Emberlight, Pickup+, ModControlPanel). An author whose second configurable mod turns up in the live scan moves out of «Прочее» into a hub of his own.
 
 ## Open — the live check
 

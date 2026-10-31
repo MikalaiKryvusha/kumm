@@ -26,6 +26,10 @@
 > «author → mods with settings» over `modpack.json` comes first — a countable list, one row per mod). The name form: `[OWNER]` «Моды Krinik'а» · «ты не видишь, как я
 > пишу чтоли?» (19:10) — «Моды <Author>'а» (an apostrophe and the Russian genitive ending: «Моды Krinik'а», «Моды Xevyr'а») in the list and in the hub title.
 > Wording rule 19:08 — the slider is «шкала» in every Russian text (HOUSE_RULES rule 21).
+> 19:14 `[OWNER]` «если у автора один мод - ему отдельную кнопку не делаем, а объединяем их в Прочее» — an author with ONE configurable mod gets no entry of his
+> own; all such mods go into one hub «Прочее» (same look: the mods on the left, the selected mod's options on the right). By the inventory
+> `researches/conan-mod-settings-hub/author-hub-inventory.md` the list is: «Моды Krinik'а» · «Моды Xevyr'а» · «Прочее» (8 mods: Hosav's Custom UI, Exiles Fishing —
+> opens its own window, Night Terrors, Enhanced Armory and Arsenal, PvE Plus Ambush, Emberlight, Pickup+, ModControlPanel), until the live scan says otherwise.
 > **ROUTE (19:11, `[AI]` from recon `researches/conan-mod-settings-hub/mod-ui-module-registration.md`):** the hub is a KIT window, not a Lua-built one — every mod
 > settings window of the build (Hosav, Damage Meter, fishing) is a `WindowRoot` Widget Blueprint registered by the mod's own `ModController` BP whose
 > `ModDataTableOperations` calls `MergeDataTables(DT_UIModuleTable, <mod table>)`. Ours: `W_KrinikModSettings` (the game's settings rows inside OUR window's
