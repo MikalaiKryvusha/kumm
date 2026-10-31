@@ -33,6 +33,8 @@
 > 19:16 `[OWNER]` «у рыбвалки не наш хаб, а уже есть отдельный, сделанный его автором и нами поправлен» · «поэтому оно не в прочее попадает - а отдельной кнопкой,
 > которая его окно и открывает, а не наш хаб» — the list has FOUR entries: «Моды Krinik'а» · «Моды Xevyr'а» · «Прочее» (7 mods) · «Рыбалка» (opens the fishing
 > mod's own window).
+> 19:16 `[OWNER]` «рыбалка над прочим, прочее всегда внизу» — the ORDER of the list: author hubs first, then «Рыбалка», and «Прочее» is ALWAYS the last entry:
+> «Моды Krinik'а» · «Моды Xevyr'а» · «Рыбалка» · «Прочее».
 > **ROUTE (19:11, `[AI]` from recon `researches/conan-mod-settings-hub/mod-ui-module-registration.md`):** the hub is a KIT window, not a Lua-built one — every mod
 > settings window of the build (Hosav, Damage Meter, fishing) is a `WindowRoot` Widget Blueprint registered by the mod's own `ModController` BP whose
 > `ModDataTableOperations` calls `MergeDataTables(DT_UIModuleTable, <mod table>)`. Ours: `W_KrinikModSettings` (the game's settings rows inside OUR window's
