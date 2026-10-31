@@ -6,7 +6,15 @@
 > **Outbound:** the look — a mock-up for the owner's eye (phase 0/1 frames); no open fork: Hosav's window is restyled by his word (W19), the archaeology search 15:1x found it
 > **2026-10-31 18:54–18:55:** `[OWNER]` «нас ждет большой долг - окно настройки модов» · «рыболку можно не троггггггать, оно красивое» · «давай примерный макет, как ты
 > видишь окно настройки модов Криника, 4 варианта макета» — 4 mockups of the «Моды Krinik» window in the fishing look (pack `_config/settings_hub/mockups/mockups.html`,
-> pack `d48210b`; review folder `33_krinik_mods_settings_window_4_mockups`): 1 one scroll · 2 index + scroll · 3 two columns · 4 folding sections — waits for his pick.
+> pack `d48210b`; review folder `33_krinik_mods_settings_window_4_mockups`): 1 one scroll · 2 index + scroll · 3 two columns · 4 folding sections.
+> **PICKED 19:02** `[OWNER]` «2 нравится, только справа нужно отображать только те опции, которые относятся к выбранному моду» · «вверху только заголовок, подзаголовок не
+> нужен» · «названия модов отображаться полно - сле не помещается - как в радио бекущей строкой влево вправо двигать в левом колонк-списке» · «по каждому автору модов
+> его моды, имеющие насройки - собирать в такое окно-хаб». So: ONE hub window PER MOD AUTHOR (Krinik, Xevyr, …); left — the author's mods that have settings, full names,
+> a name that does not fit slides left-right like a car-radio display; right — ONLY the selected mod's options; the head — the title alone. This supersedes the
+> «one scroll with a section per mod» wording of 2026-10-30 ≈11:00 for the right side.
+> 19:03 `[OWNER]` «возле каждой опции (i) кнопка, тап или ховет по которой открывает поп-ап с пояснением подробным опции, так сделано во многих мобильных проектах
+> Криника» — every option row carries an «i»; hover or click opens a popup with the option's detailed explanation. Mockups 5–7 of `settings_hub/mockups/mockups.html`
+> (review folder `34_mods_settings_hub_by_author`, shown 19:04).
 
 ## Goal vector (Achieve)
 
