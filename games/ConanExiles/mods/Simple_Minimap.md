@@ -26,6 +26,10 @@
 
 ## Open
 
-- «и всю миникарту правее и выше» (item 31, the owner's second word) — the `LoadSettings` constants are the knob.
+- «и всю миникарту правее и выше» (item 31, the owner's second word). **Tried 2026-10-31 09:51 and reverted:** the author's `LoadSettings` 0.5 (our
+  row removed, pak rebuilt without `SM_UI_Minimap`) did NOT put the map into the corner — on the same 1080p frame the ring came out SMALLER (≈ 275 px
+  across instead of ≈ 295) and its top ≈ 15 px LOWER; live `MinimapScale.Slot:GetPosition()` read (1595.4, 150.0). So this constant feeds the size, not
+  only the place (the 26.10 note «× 0.5 of its size» was read as place only). Next: `kismet-trace.py` of `LoadSettings` before any new value; the pak
+  was restored byte-identical.
 - Marker tutorial: bullet lines late, «NEW:» English, black slides (item 4).
 - If the player toggles `bShowCoordinates` in the mod settings while playing, the plate does not follow until the minimap is re-created.
