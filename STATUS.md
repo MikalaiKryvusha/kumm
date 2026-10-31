@@ -119,12 +119,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **The 07:40–08:46 dayloop, the 09:03–09:50 W29 / W4 work and the owner's 09:31–09:33 rules — moved verbatim to the chronicle, entry 2026-10-31 10:4x +03:00.** W29 shout fade waits for the owner's eye (review folder 25); rule 17 and idea 22 — in their files.
 > - **W4 minimap DONE and ACCEPTED 10:09** (`[OWNER]` «вот теперь хорошо»): coordinates inside the ring on a plain dark rounded plate, font 13, inset 46;
 >   the map tighter into the corner by a render-only shift (pack `5e8229b`, cases C1–C9).
-> - **FIRST next chat:** (1) the owner's eye on review folder 25 (shout fade). (2) **W13 stuck arrows — cause found 10:3x:** the game puts the copy at the hit ImpactPoint
->   (physics-body surface) and attaches it to the hit bone; the Kappa's body is thicker than its skin. Arrow meshes are ≈ 76 cm along Z from the nock end.
->   Next: push = clamp(bone depth − arrow length + tip_in, 15, 60) in KrinikConanArchery (now: 15 cm, depth logged, pack `e536ce9`), shipped after a stand
->   with a LIVING target and a frame of the arrows; exclude the hero's companions from the «nearest humanoid» (they came up at 0.8 and 6.2 m); `god-on.sh`
->   ≈ 8 s after world entry; aim by frames (the camera turns ≈ half the requested yaw). Notes `games/ConanExiles/mods/KrinikConanArchery.md`, plan 36 W13.
->   (3) W37 in the settings hub — once the hub exists. (4) The release gate at 720p / 1080p / 2K / 4K (rule 17).
+> - **Session 2026-10-31 10:47–11:46 (dayloop from 11:20 by the owner's «работай автономно»):** review folder 25 opened for the owner 10:5x (no verdict yet).
+>   **W13 FIXED 11:40** (pack `4ffe145`): the arrow copy is born ≈ 1.8 m short of the hit; tip pushed 15 cm short of the game's impact point (21–39 cm deeper than
+>   the skin), never past the hit bone — Kappa head and human chest by side frames; arrows leaving the corpse are vanilla (`OnDestroyed` binding, bytecode).
+>   Stand tool `_config/arrow-stand.sh` (summon by class path, place, freeze; 10 s after a summon — the owner's tip). Open: a walking body, rhino, elephant.
+>   **«ОТЗЫВ» (W37) 11:15** (pack `9fd6016`): the game minimizes AT the click, a centred DPI-aware waiting window, one collector at a time — the owner's 11:06 word;
+>   open: the Esc-menu click and 4K / 300 %. Plan 36 item 4 (crash-reporter closer) DONE by twin processes. The owner's launcher words — idea 22.
+> - **Next:** (1) G12 inventory craft speed-up — one real craft of «Бечевка» with the hub open (plan 36 §3). (2) W37 in the settings hub — once the hub exists.
+>   (3) The release gate at 720p / 1080p / 2K / 4K (rule 17).
 > - **Owner's call, not taken:** the pack `.git/hooks/pre-commit` running `check-lua-game-thread.py` was refused by the permission classifier (07:5x) —
 >   the guard still runs only by the rule «before every Lua rollout» (EXP-0400).
 > - **Epic «Настройки модов», phase 0 (open):** real clicks reach vanilla FLX buttons inside a vanilla window («Отмена» closed `W_InventorySettings_C`), but a
