@@ -113,7 +113,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **Older handover pointers (2026-10-30 16:55 … 2026-10-31 12:21) — collected in the chronicle, entry 2026-10-31 16:53 +03:00 (second part).**
 > - **The KUMM README undo paragraph — DONE 19:0x** by the portrait into `README.md` (after the `"export": false` paragraph; facts from `Deploy-ModPack.ps1`
 >   108–233, 987–1013); voice-lint SKIPPED=3 (the portrait's §8 has no pattern table); a clean-instance §7B pass found 11 hits, all applied. The owner's proofread is open.
-> - **4 mockups of the «Моды Krinik» settings window shown 18:5x** (folder `33_krinik_mods_settings_window_4_mockups`; plan 38 header) — wait for the pick.
+> - **The mod-settings hub look APPROVED 19:09** (mockup 5 of `ConanExiles/_config/settings_hub/mockups/mockups.html`, «Моды Krinik'а», per-author hubs, the
+>   entry button with a vertical scrolling list — the owner's words in plan 38's header). Route — a KIT window (recon `researches/conan-mod-settings-hub/
+>   mod-ui-module-registration.md`). **In flight 19:12:** a helper builds the kit window skeleton (`W_KrinikModSettings` + `DT_KrinikUIModule` + the merge) and
+>   tests a real click on a game checkbox inside it — read its run report `testcases/reports/2026-10-31_conan-hub-kit-window.md` when it lands.
+>   Also in flight: the launcher rebuild by mockup 11 + frame 7 (pack `_config/launcher/`, uncommitted until that helper commits).
+>   Next after the click passes: the «author → mods with settings» inventory over `modpack.json` (the owner 19:10: a hub for every such author).
 > - **NOW (18:54, `/dayloop` by «работай автономно» 18:53): the mod settings window — epic 38** (`[OWNER]` «нас ждет большой долг - окно настройки модов» · 18:54;
 >   «рыболку можно не троггггггать, оно красивое» · 18:54 — the fishing window stays as is, it is the look's model). Plan `plans/38_EPIC_conan_mod_settings_hub.md`,
 >   phase 0 `plans/38_epic38_phase0_widget_spike.md`. In flight in parallel: a helper rebuilds `KrinikConanLauncher.cs` by the approved mockup 11 + frame 7 (pack).
