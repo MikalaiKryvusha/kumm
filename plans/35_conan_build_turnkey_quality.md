@@ -209,7 +209,13 @@
          «64 · 7 · 10 000 уровней прокачки героя»: `[OWNER]` «каким богом тут маленький факт об одном моде к метаинформации о сборке?» — the build's figures
          carry only facts about the BUILD; one mod's property belongs to that mod's section (pack `430413a`). 17:23 on «Если игра упала: как прислать отчёт автору сборки — на
          втором листе» on the title sheet: `[OWNER]` «каким боком ЭТО в самом начале, где хвастаемся?» — the storefront carries only what the build gives; the
-         crash-report sheet stays sheet 2, reached by the contents (pack `9c22f4b`). **Next:** the mods rename (code, deploy, notes), then the guide
+         crash-report sheet stays sheet 2, reached by the contents (pack `9c22f4b`).
+         **A CLASS of error, 17:25** — on «Записанная посадка камеры возвращается одной клавишей»: `[OWNER]` «неправильное описание, и это ошибка класса» · «СЛОВНО
+         ОНО САМО … ПО КАКОЙ-ТО … КНОПКУ КУДА-то … возвращается» · «ты хотел сказать, что реализована возможность сохранения положения камеры героя, сброс камеры до
+         значения по умолчанию и возврат к сохраненному пресету игрока, верно?» · «видишь, как я красиво пишу?» · «это класс ошибки». The class: a feature
+         described as a thing acting by itself (an agentless passive with a vague «одной клавишей / куда-то») instead of NAMING the implemented capability and
+         its actions. The form: «Реализованы <capability 1>, <capability 2> и <capability 3>» — what was built, for whom, which actions. Fixed for the camera
+         (pack `d719395`); **next chat: sweep the WHOLE guide for this class** (every «…ется / …ются» sentence about a feature). **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
