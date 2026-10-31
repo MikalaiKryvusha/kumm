@@ -20,7 +20,7 @@
 | `TraceOrigin` | стрелка на герое, `CollisionCylinder` + (0, 0, 82) | перенос её на камеру ломает взаимодействие от третьего лица полностью (опыт 2026-10-26) |
 
 Все дистанции «от камеры» рассчитаны на родную камеру в 200 см (`ThirdPersonCameraDefaultTargetArmLength`; диапазон 130–250). Мод камеры, который
-отодвигает камеру дальше, обязан удлинять их на столько же: `ConanCameraControl` → `update_interact_reach` (надбавка и поиск камней,
+отодвигает камеру дальше, обязан удлинять их на столько же: `KrinikConanCamera` → `update_interact_reach` (надбавка и поиск камней,
 запас `interact_reach_extra_cm` — 2,5 м перед героем по слову владельца).
 
 ## Тексты модов: где живут и чем переводятся (снято 2026-10-26)
@@ -414,7 +414,7 @@ Simple Minimap ставит карту во время игры: центр сл
 
 ## Камера (снято 08.09–26.10)
 
-| Поле `BasePlayerChar_C` | Родное | У нас (`ConanCameraControl`) |
+| Поле `BasePlayerChar_C` | Родное | У нас (`KrinikConanCamera`) |
 |---|---|---|
 | `ThirdPersonCameraMinArmLength` / `Max` | 130 / 250 | 60 / 2000 |
 | `ThirdPersonCameraDefaultTargetArmLength` | 200 | `zoom_default` |
@@ -440,14 +440,14 @@ Lua-моды UE4SS ждут только отложенными действия
 
 | Мод | Точка | Как |
 |---|---|---|
-| `ConanCameraControl` | штанга камеры героя, контроллер (дистанции взятия) | Lua UE4SS; сторож зума 30 мс (план 34 — переписать на события) |
+| `KrinikConanCamera` | штанга камеры героя, контроллер (дистанции взятия) | Lua UE4SS; сторож зума 30 мс (план 34 — переписать на события) |
 | `KrinikConanUI` (since 2026-10-30; was KrinikUIFixes + KrinikFpsCounter + KrinikHudOutline + KrinikPauseGameInMenu) | kit pak: overrides of `WBP_ContainerInfo`, `W_QuickLootPanel`, `W_ItemIconTooltipView`, `W_AttributeInfoEntry_PerkView`; Lua: `GUIModuleController:ActivateModule` (pause), `TextBlock` of `W_NewHealthUI_C` (outline, FPS), `WBP_ContainerInfo_C` hooks, `WBP_ButtonBase` glyph boxes | one Lua mod of sections: `Scripts/main.lua` does `pcall(require, "<section>")` for four files in `Scripts/` (UE4SS puts the mod's own `Scripts/` on `package.path`, as `ConsoleCommandsMod` does; section files carry the `krinik_` prefix so a name cannot meet another mod's module); log prefix `[KrinikConanUI:<section>]` |
 | `KrinikLevelUncapped` | таблицы уровней игры | пак-подмена ассетов, без кода |
 | `KrinikAgentRemote` (прибор) | `cmd.txt` → игровой поток | страж `no-component-sweep`: перебор компонентов отказывает (EXP-0330) |
 
 ## Facts of 2026-10-29 (camera, Severe Weather, widget events, stuck arrows)
 
-- **First-person camera and the neck.** The FP camera sits on bone `b_headcam` (child of `b_head`, `b_neck_2`, `b_neck_1`; hero mesh 174 bones). Looking straight up it is inside the neck. `Mesh:HideBoneByName('b_neck_1', 0)` hides the neck and head in rendering only; the `b_headcam` socket does not move (equal to 0.01 cm). `ConanCameraControl` does it on `BasePlayerChar_C:SwitchToFirstPersonCamera` / `SwitchToThirdPersonCamera` (the real wheel calls them). In this mod `NotifyOnNewObject("/Script/ConanSandbox.BasePlayerChar")` does not fire; hooks on the hero class go in from `try_install_zoom_hook`.
+- **First-person camera and the neck.** The FP camera sits on bone `b_headcam` (child of `b_head`, `b_neck_2`, `b_neck_1`; hero mesh 174 bones). Looking straight up it is inside the neck. `Mesh:HideBoneByName('b_neck_1', 0)` hides the neck and head in rendering only; the `b_headcam` socket does not move (equal to 0.01 cm). `KrinikConanCamera` does it on `BasePlayerChar_C:SwitchToFirstPersonCamera` / `SwitchToThirdPersonCamera` (the real wheel calls them). In this mod `NotifyOnNewObject("/Script/ConanSandbox.BasePlayerChar")` does not fire; hooks on the hero class go in from `try_install_zoom_hook`.
 - **Severe Weather night light.** `dc SW_config disable_custom_GI` → `SW_DataCmd_Actor` (string switch) → `SW_ModController` event «SW_config light»(False); the variable `light enabled` (default True). **Corrected 2026-10-29 11:42:** the console `dc SW_config …` does not reach the mod at all (the variable does not change, also as admin) — the 2026-10-26 «disable_custom_GI подан пультом» changed nothing. The event «SW_config light»(Visuals) sets `light enabled` and marks the controller's `PersistenceComponent` dirty (meant for the world save); call it by the remote: `local c=FindFirstOf('SW_ModController_C'); c['SW_config light'](c, false)`. A loop (Delay 1 s) applies the mod light to `Ultra_Dynamic_Sky_BP_C` only while `light enabled`. Night brightness at 23:11, same pose: mod light 21, vanilla 41. The pack ships `light enabled = False` (KRINIK MODIFIED).
 - **Clicks on our own widgets (2026-10-31, plan 36 W37).** `RegisterHook` on `/Script/UMG.UserWidget:OnMouseButtonDown` / `:OnMouseMove` registers
   without an error and never fires (real clicks on an image in the main menu; neither menu overrides those events). What works:
