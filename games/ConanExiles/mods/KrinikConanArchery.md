@@ -29,8 +29,10 @@ No overlaps: the 2h_bow montage is in the game's pak only among the build's 101 
 
 ## Version
 
-2026-10-30: the version the pause-menu mod list shows = `modinfo.json` `versionMajor/Minor/Build` of the wrapper — set to **3.0.1** (`[OWNER]` «все моды
-Krinik... получают версию 3.0.1» · 2026-10-28, chronicle) in the kit source, `kit/modinfo.json` and the built pak (`_config/devkit/set-pak-version.py`).
+The version the pause-menu mod list shows = `modinfo.json` `versionMajor/Minor/Build` of the wrapper. **Since 2026-10-31 15:5x it is the BUILD version 1.0.0**
+(`[OWNER]` «в сбоке моды Krinik ставим по версии сборки 1.0.0» · 2026-10-31 15:39 — supersedes 3.0.1 of 2026-10-28) in the kit source, `kit/modinfo.json`,
+the built pak (`_config/devkit/set-pak-version.py <pak> <packVersion>`) and the manifest; `build-level-mod.py` reads `packVersion` itself. Seen in game
+15:51 (report `testcases/reports/2026-10-31_conan-krinik-versions-1.0.0.md`). A new build version → the same three steps for the kit paks.
 
 ## Stuck arrow copies (plan 36 W13, facts of 2026-10-31)
 
@@ -74,4 +76,4 @@ Krinik... получают версию 3.0.1» · 2026-10-28, chronicle) in the
 
 ## Open
 
-- seen 2026-10-30 16:28: the pause-menu list shows «v3.0.1» (report `testcases/reports/2026-10-30_conan-krinik-versions-3.0.1.md`).
+- seen 2026-10-31 15:51: the pause-menu list shows «v1.0.0»; the Krinik mods still stand at the bottom of the list (W11 «top» half open).
