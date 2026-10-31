@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0408 · 2026-10-31 · ❌ · #process #backlog #plan36
+class: census-from-observed
+**Lesson:** in the dayloop I took plan 36 items 4 and 5 by their unticked «- [ ]» checkboxes in the section text and re-proved both (twin processes, a fresh
+zip), while the plan's own QUEUE TABLE already said «сделано 2026-10-27» and «сделано 20:24». Before taking a plan item, read its row in the queue table and
+the W-table — the checkboxes below lag behind; tick them the moment the table says done.
+**Repro:** `plans/36_conan_build_debts_plans.md` — the «Очередь» table vs the «### 4» / «### 5» checkboxes before 2026-10-31 11:45.
+**Trigger:** picking the next item of a plan that keeps both a status table and per-section checkboxes.
+none-cheap: a lint of «table says done, checkbox open» would need the plan's free-form status words parsed
+
 ### EXP-0407 · 2026-10-31 · ❌→✅ · #windows #powershell #winforms #conan
 class: wrong-api-assumption
 **Lesson:** a process started by `start "" /min` gets «minimized» for its FIRST shown window — a WinForms waiting window of the feedback collector came up
