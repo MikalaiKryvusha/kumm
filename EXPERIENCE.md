@@ -91,6 +91,23 @@
 
 ## Entries
 
+### EXP-0412 · 2026-10-31 · ❌→✅ · #conan #stand #mouse-seq #real-input
+class: wrong-api-assumption
+**Lesson:** the FIRST click of every `mouse-seq.ps1` sequence is eaten by the game's window activation: the UE4SS LMB key bind logs it, the widget under
+the cursor never gets it — a checkbox that «did not toggle» four times in a row toggled at once after a dummy click on empty space opened the sequence
+(plan 38 hub, 20:52–20:56; the one sequence where it worked began on an already active game). Start every real-input sequence with a harmless click.
+**Trigger:** a real click by `mouse-seq.ps1` on a game widget that «does nothing».
+mechanized: none — the case file of the hub batch states the dummy click (TC_conan_hub_phase2_2026-10-31.md, stand)
+
+### EXP-0411 · 2026-10-31 · ❌→✅ · #lua #conan #idiom
+class: shell-mangles-argument
+**Lesson:** Lua's `a and b or c` is NOT a ternary when b can be `false`: it returns c. It bit twice in one session — the settings store turned a saved
+`false` into nil (`v ~= DEFAULT and v or nil`, caught by the desk test), and the hub's save sent a check row into slider arithmetic (`is_check and
+(v == d) or math.abs(v - d)`, caught in game) — after I had told the owner the remaining uses were safe (corrected in chat). Write if/else whenever the
+middle value may be false or nil; grep `and .* or` in a touched file and read each middle operand.
+**Trigger:** writing a conditional expression in Lua whose result can be a boolean.
+mechanized: `lua _config/tests/test_krinik_settings.lua` (pack ConanExiles) reddens on the store's face
+
 ### EXP-0410 · 2026-10-31 · ❌→✅ · #mockup #taste #owner-eye #texture #launcher
 class: variants-of-the-wrong-axis
 **Lesson:** «дай варианты металла, 8 штук» was answered with 8 COLOURS of one texture algorithm; the owner: «ты в вариантах металла играл только с цветом, а я

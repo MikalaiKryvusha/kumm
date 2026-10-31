@@ -119,6 +119,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   variant 1 upright, variant 2 slanted; made by ChatGPT from the game's own icon — `SvarogsDream/tools/gpt_edit.sh`, grab fixed `ab287fa`; sources and the two
 >   prompts in the pack `_config/branding/icon/`). After the pick: rounded alpha corners from the original,
 >   a multi-size `.ico` (256/64/48/32/16) into the launcher exe (`-win32icon`) and the archive.
+> - **21:01 — the «Моды Krinik'а» hub window by mockup 5 BUILT and walked in game (first batch, partial)** — plan `plans/38_epic38_phase2_krinik_hub_window.md`,
+>   pack `75ef09f`, report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`: one store `Saved/KrinikSettings.lua` (`krinik_settings.lua`), the
+>   KrinikConanUI page live (FPS switch both ways seen, blink thresholds, menu slow-down, craft), save / reset / save-and-close / close-without-save, a restart.
+>   Next: the camera, archery, pack manager and graphics pages (their mods read the store — step 6), P3/P4/P6/P11 re-runs, a frame sheet beside mockup 5 for
+>   the owner. Real input: start every `mouse-seq` with a dummy click (EXP-0412). Launcher: no «Удалить сборку» before install (20:43, pack `1ece886`);
+>   both icons ship, variant 1 default (20:43, idea 22 — the `.ico` work is open).
 > - **FIRST next chat (19:58):** (0) the build ICON (launcher exe, the archive) — the letter K in the same metal as the C of the Conan Exiles icon (`[OWNER]` 19:58 «иконка сборки - такая же, как буква К, как у конана С»; idea 22). (1) ~~the launcher — «Установить сборку» hidden when installed~~ — done above. (2) Interview 028 (`interviews/interview_028_conan_launcher_and_versions.md`) — Q2 answered by that word;
 >   Q1 font, Q3 idea 23, Q4 README wait; its pictures are in `interviews/assets/028/`. Do NOT open the review page — it renders no images (KAIF #187) and its server died with an interrupted launch (`[OWNER]` 20:00 «страница интервью твоего сломана, и сервер ты стопнул - я нахуй закрыл ее»): put the questions in the chat as text and open the pictures in ImageGlass.
 >   (3) Epic 38 phases 1–2 (hub window by mockup 5, the entry button and list, the settings store) — `/dayloop` by «работай автономно» 19:19.

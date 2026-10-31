@@ -46,7 +46,11 @@ left-right), ONLY the selected mod's rows on the right, each row with an «i» t
       the other mods check a shared version number at a moment they already run (no new timer); the camera merges its keys and calls its own `apply()`
       (it rewrites its `config.lua` itself — the hub never writes that file). Open: does a shared variable carry a number — a one-line probe in game.
       Exit: the store's path and format, one reader per mod, the apply route per row.
-- [ ] 4. **Kit window by mockup 5** — rewrite `kit-krinik-modsettings.py` (widgets reused by name, never removed — the GUID trap; run twice): head row
+> **First game batch 21:01 (pack `75ef09f`, report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`, partial):** steps 3 (store), 4 (kit),
+> 5 (section) built and walked with a real mouse on the KrinikConanUI page — fill, «i», reset, save, save-and-close, the FPS switch both ways, a restart; six
+> defects found and fixed in the run. Next: P3/P4 re-observation, P6 byte check, P11; the camera, archery, pack manager and graphics readers (step 6); the
+> sheet beside mockup 5 at 1080p and 4K for the owner; the Simple Minimap drawn over our window once (ZOrder 99 vs ours 101 — unexplained).
+- [x] 4. **Kit window by mockup 5** — rewrite `kit-krinik-modsettings.py` (widgets reused by name, never removed — the GUID trap; run twice): head row
       (title TextBlock + `B_KrinikCloseNoSave`), body (left `SC_KrinikMods` with one name button per mod, clipped name boxes; right — mod name + note,
       `WS_KrinikPages` with one page per mod: per row an HB of our label + «i» button + the game row with an empty label as the control), the «i» plate
       (hidden Border over the canvas), the footer (`B_KrinikReset`, `B_KrinikSave`, `B_KrinikSaveClose`). Sizes from mockup 5 (window ≈ 69 % × 83 %

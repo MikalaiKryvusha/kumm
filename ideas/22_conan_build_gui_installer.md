@@ -61,13 +61,17 @@ long one). Not observed: real clicks on the buttons, a move to a monitor with an
 19:57 `[OWNER]` «из лаунчера для убираем» — done (pack, seen on the 384-dpi snapshot 19:57). 19:57 `[OWNER]` «а кнопка Установить сборку скрывается, когда
 сборка установлена» — DONE 20:18 together with interview 028 Q2 (`[OWNER]` 20:11 «кнопки играть нет, пока сборка не уставнолена, на ее месте золотая
 Установить сборку»; pack `77f4ed7`): installed (the game folder holds `uninstall_krinik_build.cmd`) → column «Отзыв», «Удалить сборку», gold «Играть»;
-not installed → no «Играть», gold «Установить сборку» (22 px), «Удалить сборку» greyed; the launcher re-reads the state when the installer window closes.
+not installed → no «Играть», gold «Установить сборку» (22 px), NO «Удалить сборку» (`[OWNER]` 20:43 «удалить сборку кнопка не нужна, пока сборка не
+установлена»; pack `1ece886`); the launcher re-reads the state when the installer window closes.
 Run report `testcases/reports/2026-10-31_conan-launcher-main-button-by-state.md`; review folder `36_launcher_main_button_by_state`.
 19:58 `[OWNER]` «иконка сборки - такая же, как буква К, как у конана С» — TO DO: the build icon = the letter K drawn like the C of the Conan Exiles game icon (same metal, same plate), for the launcher exe and the archive. So: the link line reads «PlayGround: …» (the guide
 keeps its long label — the launcher needs its own short one); the frame 5 px, a FLAT forged strip (thin edge bevel, wide flat bronze — not a round rod), copper-gold, rough
 by fine traces only (grain, light scratches, pits, rare nicks) and NO shading blotches; the darkening under the texts stays; «для Conan Exiles Enhanced 3.0.1» centred
 under the title.
-The state-driven main button — answered 20:11 and built (above). Open: the build icon (19:58).
+The state-driven main button — answered 20:11 and built (above).
+**The build icon — DECIDED 20:43** `[OWNER]` «иконки поставляем обе, первая по дефолту» (variants in review folder `37_build_icon_letter_K`, sources pack
+`_config/branding/icon/`): variant 1 (upright K) is the launcher exe's icon; variant 2 ships beside it as an `.ico` in the archive. TO DO: rounded alpha
+corners from the Conan original, multi-size `.ico` (256/64/48/32/16) for both, `-win32icon` in `build-docs.py`, both files into the export.
 
 ## Goal vector (Achieve)
 

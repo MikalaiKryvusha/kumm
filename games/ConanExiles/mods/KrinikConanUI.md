@@ -103,6 +103,11 @@ marquee only while the window is open. Kit tree by `kit-krinik-modsettings.py` (
 `Txt_KrinikLbl_<id>`, `Brd_KrinikInfo_<id>`, `Txt_KrinikHint_<id>`, `SB_KrinikCtl_<id>` → `Sl_Krinik_<id>` / `Chk_Krinik_<id>` (FPS — the phase-0
 `Chk_KrinikFps`)), `HB_KrinikFoot` (`B_KrinikReset`, `B_KrinikSave`, `B_KrinikSaveClose`), `Brd_KrinikTip` (canvas, collapsed). Kit trap paid: a
 brush's `image_size` is a `DeprecateSlateVector2D` — Python's `Vector2D` does not convert; thin rules are Images inside a SizeBox.
+**Seen in game 21:01** (report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`, pack `75ef09f`): the window by mockup 5 opens over the inventory,
+fill 4 ms; native setters take ALL their parameters — `SetIsToggledOn(NewIsToggledOn, ShouldBroadcast, IsInstantTransition)`, `SetValue(RealValue,
+IsInitializing)`; a game settings row keeps its own label box `SizeBoxSettingName` (350 wide) that squeezes the control — collapsed at fill; whole-number
+sliders get `MinFractionalDigits = MaxFractionalDigits = 0`; the slider box is set to 340 at fill (420 cut the longest row). FLX buttons read
+`IsHovered() = true` only while the game has focus. Open: the Simple Minimap (`SM_Minimap`, ZOrder 99) was once drawn over our window (ZOrder 101).
 
 **Mirror pair:** `ue4ss/feedback/collect_report.ps1` is a COPY of the pack's `_config/player-report/collect_report.ps1` (the Lua mod needs it inside the game
 folder). Check: `cmp _config/player-report/collect_report.ps1 _unpacked/KrinikConanUI/ue4ss/feedback/collect_report.ps1` — edit the source, copy again.
