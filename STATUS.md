@@ -112,7 +112,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 > **Older handover pointers (2026-10-30 16:55 … 2026-10-31 12:21) — collected in the chronicle, entry 2026-10-31 16:53 +03:00 (second part).**
 > - **Session 2026-10-31 15:36– (resume):** one build script for the delivery documents — `ConanExiles/build_docs_and_launcher.cmd` (author links from
->   `author_links.txt` → the guide's «Автор сборки» + PDF + `KrinikLauncher.exe`, plan 35 G11 item 7, pack `2336de3`); Krinik mods carry the build version
+>   `author_links.txt` → the guide's «Автор сборки» + PDF + `KrinikConanLauncher.exe`, plan 35 G11 item 7, pack `2336de3`); Krinik mods carry the build version
 >   **1.0.0** (seen in the pause-menu list 15:51, pack `35c96d8`); **bug 72 DONE** — the install keeps an undo journal + copies (`<game>\_kumm_backup`),
 >   `uninstall_krinik_build.cmd` and the launcher's «Удалить сборку» return the pre-build state (KUMM `528b63e`, fixture 34/34; the live Conan folder run U10 PASSED 16:07 —
 >   0 differences of 1728 entries). So a clean game copy is NOT needed: tests run on the live game, uninstall, check, reinstall (the owner 15:51: «зачем тебе чистая версия»).
