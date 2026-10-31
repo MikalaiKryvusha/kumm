@@ -66,6 +66,12 @@ clicked, «Сбросить к исходным», «Сохранить», «С�
   the inventory toggled by a real `I` twice) never put the hero into the aim: no FOV event, no shot, the Kappa at 100 % (frames `a2_aim`, `a4_aim`). The stand's
   real input in the world after the hub — the next session's recon (the 2026-10-31 archery stands aimed with `mouse-seq` successfully: compare their opener).
 
+- P6 / P11 re-run (2026-10-31 21:35–21:38, an eighth launch): P6 pass — an unsaved change of the food slider, a real click on «Закрыть без сохранения» →
+  `closed (без сохранения)`, `cmp` of the store with its copy: byte-equal. P11 pass — «Мир замедляется в меню» saved at 5 → the pause section:
+  `меню открыто: замедление времени 0.2 → лежит 0.2000`, `GetGlobalTimeDilation` 0.2. Stand trap: the section arms only after it has SEEN the
+  fullscreen UI closed once in the world (its guard against the loading screen) — a hub opened by the remote right after the world load leaves the
+  time at 1.0; close and reopen the hub first. While our Modal window is open the section gives the time back (its modal grace), by design.
+
 ## 5. Found
 
 1. Fixed: the store lost a saved `false` (`x and false or nil`) — desk test.
