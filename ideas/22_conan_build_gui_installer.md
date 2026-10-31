@@ -32,6 +32,13 @@ Its LOOK is a working draft in the guide's colours — the mock-ups below still 
 `KrinikConanLauncher` (17:34) and installs the build itself («Установить сборку», 17:37). Title as the guide: «Сборка модов Krinik Mod Pack 1.0.0 / для Conan
 Exiles Enhanced 3.0.1», no repeated lines (17:21).
 
+**The owner's layout pick 2026-10-31 18:22** — of the 10 mockups (recon `researches/conan-launcher-design/README.md`, pack `_config/launcher/mockups/mockups.html`):
+`[OWNER]` «2, путь к игре над кнопкой, название вверх, ссылки вниз слева, кнопки в колонке справа, автор сборки - убрать заголовок» · «золотууууууую кайму и кнопки
+не забудь от текущего лаунчера, углы у каймы не нужны». So: variant 2 (art on the whole window, darkening at the edges) — logos and the title at the top; a button column
+at the bottom right: the game-path line, then «Играть», «Установить сборку», «Отзыв», «Удалить сборку»; the author links at the bottom left with no «Автор сборки»
+heading; the current gold rod frame (no corner rivets) and the current metal plaque buttons and caption buttons. Mockup — variant 11 of `mockups.html`.
+Open: the state-driven main button (asked 18:1x, no answer yet).
+
 ## Goal vector (Achieve)
 
 A player who unpacks the archive starts ONE file and sees a Windows window in the build's look instead of a console: the background from our intro
