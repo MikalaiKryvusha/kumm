@@ -13,6 +13,7 @@ Conan Exiles 3.0.1, the full build (pack `342c676`); background launch; the owne
 
 - 2026-10-31 22:51 — `launch-bg.ps1`, `enter-world-remote.sh`, `god-on.sh`; DM0: `capture-window.ps1` before; `mouse-seq.ps1 -Seq "kdown:0x70,wait:120,kup:0x70,…"`,
   then `"kdown:0x87,…,kdown:0x70,wait:120,kup:0x70,…"`, then the same with `wait:1500`; a frame after each; the remote listed `DN_*` widgets.
+- 2026-10-31 22:56 — a second launch: the remote listed `DN_UI_DmgWidget_C` functions and called `Restore()`; a 4K frame.
 - 2026-10-31 22:54 — C1: `retoc.exe list --path Mines_of_Set-Windows.utoc` (the build's paks view); the remote `LoadAsset('/Game/Mods/Mines_of_Set/Blueprints/BP_PL_CoS_Loot_Chest.BP_PL_CoS_Loot_Chest_C')`,
   the CDO's inherited properties (`ForEachProperty` up the super chain), `LootTable` of the chest CDO and of the parent CDO.
 
@@ -23,7 +24,7 @@ Functional run: real F1 key presses in the live world with frames read; the remo
 
 | Case | Status |
 |---|---|
-| DM0 | blocked — F1 expands nothing in three variants; the meter's expand path is unknown |
+| DM0 | blocked at 22:53 (F1 expands nothing in three variants) → PASS 22:57 on a second launch: `DN_UI_DmgWidget_C:Restore()` (its function list read by `ForEachFunction`) expanded the meter; ≈ 35 px under the HUD text at 4K (frame `dm_restore`); F1 only moves the window |
 | C1 | partial — the mod's container has no `Caverns_of_Set_Loot_Chest_Table`; the chest CDO's `LootTable` is nil, as the vanilla parent's — not decisive |
 
 ## 5. Found
@@ -36,4 +37,4 @@ Session scratchpad `seams/`: `dm_before.webp`, `dm_after.webp`, `dm_after2.webp`
 
 ## 7. Verdict
 
-blocked (DM0) · partial (C1) — the next steps are written in the case rows.
+pass (DM0, after the restore function) · partial (C1) — the next step is written in the C1 row.

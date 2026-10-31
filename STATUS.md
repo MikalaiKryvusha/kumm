@@ -143,8 +143,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
 >   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own.
 >   The emulated-input attempt of 16:25 (the hero never drew the bow) — verbatim in the chronicle, entry 2026-10-31 16:53 +03:00.
->   **22:5x (report `testcases/reports/2026-10-31_conan-dm0-c1-probes.md`):** DM0 BLOCKED — a real F1 expands nothing (tap, after F24, 1.5 s hold); read the
->   meter's own restore function next. C1 PARTIAL — the mod's container has no `Caverns_of_Set_Loot_Chest_Table`; the chest CDO's `LootTable` is nil like the
+>   **22:5x (report `testcases/reports/2026-10-31_conan-dm0-c1-probes.md`):** DM0 PASS 22:57 — `DN_UI_DmgWidget_C:Restore()` expands the meter, ≈ 35 px under the HUD text (F1 only MOVES the window); the
+>   F1 tries are in the case row. C1 PARTIAL — the mod's container has no `Caverns_of_Set_Loot_Chest_Table`; the chest CDO's `LootTable` is nil like the
 >   vanilla parent's, so only a placed chest instance in the caverns decides (coordinates needed). R2 and AIM15 not taken yet.
 > - **Earlier FIRST list (still valid):** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
 >   plan 36 item 23). (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
