@@ -1,5 +1,43 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-31 16:53 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat 0af53b17
+
+> - **W4 minimap DONE and ACCEPTED 10:09** (`[OWNER]` «вот теперь хорошо»): coordinates inside the ring on a plain dark rounded plate, font 13, inset 46;
+>   the map tighter into the corner by a render-only shift (pack `5e8229b`, cases C1–C9).
+> - **Session 2026-10-31 10:47–12:21, closed soft at 70 % of the window (dayloop from 11:20 by the owner's «работай автономно»):** review folder 25 opened for the owner 10:5x (no verdict yet).
+>   **W13 FIXED 11:40** (pack `4ffe145`): the arrow copy is born ≈ 1.8 m short of the hit; tip pushed 15 cm short of the game's impact point (21–39 cm deeper than
+>   the skin), never past the hit bone — Kappa head and human chest by side frames; arrows leaving the corpse are vanilla (`OnDestroyed` binding, bytecode).
+>   Stand tool `_config/arrow-stand.sh` (summon by class path, place, freeze; 10 s after a summon — the owner's tip). Open: a walking body, rhino, elephant.
+>   **«ОТЗЫВ» (W37) 11:15** (pack `9fd6016`): the game minimizes AT the click, a centred DPI-aware waiting window, one collector at a time — the owner's 11:06 word;
+>   the Esc-menu click seen 12:00; open: 4K / 300 %. Plan 36 items 4, 5 re-proved (already done earlier — EXP-0408). The owner's launcher words — idea 22.
+>   **G12 DONE 11:55** (pack `7faaa2b`): the hero's craft keeps its real speed while a menu slows the world (`CraftTimeMultiplier` = the dilation, read at an
+>   item start). **Idea 05 DONE**; idea 03's Athleticism law and idea 04's level past 60 seen live (reports `2026-10-31_conan-agility-law-live.md`,
+>   `…level-uncap-live.md`). Item 28 (archive volumes) in progress 12:1x: export 73 mods ok, 19 volumes ≤ 700 MiB ok, unpack + hash compare: 223 = 223, hashes equal (report `2026-10-31_conan-build-archive-volumes.md`)
+>   (scratch `g10/` removed 12:14; cases `TC_conan_build_archive_volumes_2026-10-31.md`). Cases U2 pass (Esc mod list), U3 — ModControlPanel opens by
+>   `ActivateModule`, Russian except the English «All» filter (bug 64 item 47). Cheat-manager facts for stands — game map, last block.
+
+
+(second part — the older pointers, verbatim)
+
+> **The 16:55 handover (GitHub/LFS, Unliminium, W18a, the crash sheet, the save question, the F storage) — moved verbatim to the chronicle, entry 2026-10-30 21:3x.**
+> - **Moved verbatim to the chronicle, entry 2026-10-30 23:56 +03:00:** the 18:15 session (volume 1 % applied), the 19:08 dayloop (W6 two lines, W10a),
+>   the 16:59 judge caveat, the quick list and the day's hard rules. Still the owner's: the W10a wheel check (the loot window keeps one size).
+> - **W6 centred, the corpse backing (ACCEPTED 22:38) and bug 71 (DONE 00:4x) — moved verbatim to the chronicle, entry 2026-10-31 01:38 +03:00.** Still not seen: the corpse strip the GAME creates on a real look; a chest proper; the control case I4 (intro, partial); ≈ 3 s black between the intro and the menu.
+> - **The 00:4x–01:3x sprint (W37 main menu) and the 22:55 dayloop (W26 logo, W11, W30) — moved verbatim to the chronicle, entry 2026-10-31 08:46 +03:00.**
+>   Still the owner's eye: the gold intro wheel and the crisp game logo at a start; the wallpapers' review folder 14; Krinik on top at a real Esc (folder 15).
+> - **The 07:40–08:46 dayloop, the 09:03–09:50 W29 / W4 work and the owner's 09:31–09:33 rules — moved verbatim to the chronicle, entry 2026-10-31 10:4x +03:00.** W29 shout fade waits for the owner's eye (review folder 25); rule 17 and idea 22 — in their files.
+> - **W4 minimap (ACCEPTED 10:09) and the session 2026-10-31 10:47–12:21 (W13 arrows, «ОТЗЫВ» minimize-first, G12 craft, archive volumes) — moved verbatim to the chronicle, entry 2026-10-31 16:53 +03:00.**
+
+> - **Owner's call, not taken:** the pack `.git/hooks/pre-commit` running `check-lua-game-thread.py` was refused by the permission classifier (07:5x) —
+>   the guard still runs only by the rule «before every Lua rollout» (EXP-0400).
+
+>   The owner asked the agent to press the keys itself (16:24 «может ты сам нажмешь?» · «эмулируешь нажатие клавы» · «и скриншот снимешь»): 16:25 `launch-fg.ps1`
+>   (in front: True) → `mouse-seq.ps1 "kdown:1 … rdown wait:1600 lclick …" -KeepFront` + `capture-burst.ps1` 24 frames — the hero never drew the bow (input did not
+>   reach the game; «Обновляется каталог обликов» on screen, the owner on remote desktop). Next: find why (focus / SendInput in the RDP session / the game still
+>   loading) before the bow, F1 and stone cases by emulated input. **Agent's game cases still unrun there (≈ 2–3 h,
+>   one launch for several):** C1 Caverns of Set chest loot, C2 Highmane crossbow, C3 mod fire particles, T1 new strings, W1 NPC mods in flight, DM0 expanded
+>   Damage Meter vs Hosav HUD, B7a hub bottom bar geometry, AIM4 / AIM8 arrow-aim controls; U6 — Edit Appearance and Waystones (module names first).
+
 ## 2026-10-31 12:2x +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat d52c3a36
 
 > **Open tails of the 2026-10-28 chats** (palm shadows by the kit route — bug 67; cases without a run; corpse prompt on two lines — item 36; «k» rounding —

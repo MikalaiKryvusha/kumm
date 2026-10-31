@@ -110,26 +110,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **The 16:55 handover (GitHub/LFS, Unliminium, W18a, the crash sheet, the save question, the F storage) — moved verbatim to the chronicle, entry 2026-10-30 21:3x.**
-> - **Moved verbatim to the chronicle, entry 2026-10-30 23:56 +03:00:** the 18:15 session (volume 1 % applied), the 19:08 dayloop (W6 two lines, W10a),
->   the 16:59 judge caveat, the quick list and the day's hard rules. Still the owner's: the W10a wheel check (the loot window keeps one size).
-> - **W6 centred, the corpse backing (ACCEPTED 22:38) and bug 71 (DONE 00:4x) — moved verbatim to the chronicle, entry 2026-10-31 01:38 +03:00.** Still not seen: the corpse strip the GAME creates on a real look; a chest proper; the control case I4 (intro, partial); ≈ 3 s black between the intro and the menu.
-> - **The 00:4x–01:3x sprint (W37 main menu) and the 22:55 dayloop (W26 logo, W11, W30) — moved verbatim to the chronicle, entry 2026-10-31 08:46 +03:00.**
->   Still the owner's eye: the gold intro wheel and the crisp game logo at a start; the wallpapers' review folder 14; Krinik on top at a real Esc (folder 15).
-> - **The 07:40–08:46 dayloop, the 09:03–09:50 W29 / W4 work and the owner's 09:31–09:33 rules — moved verbatim to the chronicle, entry 2026-10-31 10:4x +03:00.** W29 shout fade waits for the owner's eye (review folder 25); rule 17 and idea 22 — in their files.
-> - **W4 minimap DONE and ACCEPTED 10:09** (`[OWNER]` «вот теперь хорошо»): coordinates inside the ring on a plain dark rounded plate, font 13, inset 46;
->   the map tighter into the corner by a render-only shift (pack `5e8229b`, cases C1–C9).
-> - **Session 2026-10-31 10:47–12:21, closed soft at 70 % of the window (dayloop from 11:20 by the owner's «работай автономно»):** review folder 25 opened for the owner 10:5x (no verdict yet).
->   **W13 FIXED 11:40** (pack `4ffe145`): the arrow copy is born ≈ 1.8 m short of the hit; tip pushed 15 cm short of the game's impact point (21–39 cm deeper than
->   the skin), never past the hit bone — Kappa head and human chest by side frames; arrows leaving the corpse are vanilla (`OnDestroyed` binding, bytecode).
->   Stand tool `_config/arrow-stand.sh` (summon by class path, place, freeze; 10 s after a summon — the owner's tip). Open: a walking body, rhino, elephant.
->   **«ОТЗЫВ» (W37) 11:15** (pack `9fd6016`): the game minimizes AT the click, a centred DPI-aware waiting window, one collector at a time — the owner's 11:06 word;
->   the Esc-menu click seen 12:00; open: 4K / 300 %. Plan 36 items 4, 5 re-proved (already done earlier — EXP-0408). The owner's launcher words — idea 22.
->   **G12 DONE 11:55** (pack `7faaa2b`): the hero's craft keeps its real speed while a menu slows the world (`CraftTimeMultiplier` = the dilation, read at an
->   item start). **Idea 05 DONE**; idea 03's Athleticism law and idea 04's level past 60 seen live (reports `2026-10-31_conan-agility-law-live.md`,
->   `…level-uncap-live.md`). Item 28 (archive volumes) in progress 12:1x: export 73 mods ok, 19 volumes ≤ 700 MiB ok, unpack + hash compare: 223 = 223, hashes equal (report `2026-10-31_conan-build-archive-volumes.md`)
->   (scratch `g10/` removed 12:14; cases `TC_conan_build_archive_volumes_2026-10-31.md`). Cases U2 pass (Esc mod list), U3 — ModControlPanel opens by
->   `ActivateModule`, Russian except the English «All» filter (bug 64 item 47). Cheat-manager facts for stands — game map, last block.
+> **Older handover pointers (2026-10-30 16:55 … 2026-10-31 12:21) — collected in the chronicle, entry 2026-10-31 16:53 +03:00 (second part).**
 > - **Session 2026-10-31 15:36– (resume):** one build script for the delivery documents — `ConanExiles/build_docs_and_launcher.cmd` (author links from
 >   `author_links.txt` → the guide's «Автор сборки» + PDF + `KrinikLauncher.exe`, plan 35 G11 item 7, pack `2336de3`); Krinik mods carry the build version
 >   **1.0.0** (seen in the pause-menu list 15:51, pack `35c96d8`); **bug 72 DONE** — the install keeps an undo journal + copies (`<game>\_kumm_backup`),
@@ -140,24 +121,23 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   **16:31–16:4x:** the guide rewritten and checked (pack `048fb4b`), the owner's answers applied in part (two-line title, «Руководство пользователя», numbered
 >   chapters 1., 1.1 — `0539d33`); our mods renamed `KrinikConanCamera` / `KrinikConanModPackStatus` (pack `96c1c5b`, HOUSE_RULES rule 19; the owner's live
 >   `config.lua` of both carried over, seen in game 16:41); delivery names English + underscores (rule 18: `collect_report.cmd`, `uninstall_krinik_build.cmd`,
->   `_kumm_backup`, `build_docs_and_launcher.cmd`). In progress: a helper applies the rest (our mods at the top of the one list, «вы» steps) — check its frames,
->   commit, open the PDF for the owner. Open: the camera's Nexus draft still says ConanCameraControl (publication name — the owner's).
+>   `_kumm_backup`, `build_docs_and_launcher.cmd`). Done 16:4x–16:5x: the guide carries the owner's answers (our mods at the top of the one composition list, «вы» steps, 7 of ours);
+>   `KrinikIntro` + `KrinikConanModPackStatus` merged into **`KrinikConanModPackManager`** (`[OWNER]` 16:48 «вот это все организационные вопросы» ·
+>   «Я предлагаю их объединять в KrinikConanModPackManager»; pack `9b686b5`, seen in game 16:51: «СБОРКА: моды 66/66», the intro found); the PDF opened
+>   for the owner 16:5x (no verdict yet). The shipped Krinik set is 7 (HOUSE_RULES rule 19). Open: the camera's Nexus draft still says ConanCameraControl (publication name — the owner's).
 > - **Waits for the owner's hands (called in chat 2026-10-31 16:2x):** `TC_conan_build_stability_compat_perf_2026-10-26` R2 — a stone picked up in third
 >   person at the default and the far zoom; AIM15 — the arrow seen leaving the bow and landing under the crosshair; DM0 — F1 expands the Damage Meter: does it cover Hosav's HUD text (called 16:2x;
 >   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
 >   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own.
->   The owner asked the agent to press the keys itself (16:24 «может ты сам нажмешь?» · «эмулируешь нажатие клавы» · «и скриншот снимешь»): 16:25 `launch-fg.ps1`
->   (in front: True) → `mouse-seq.ps1 "kdown:1 … rdown wait:1600 lclick …" -KeepFront` + `capture-burst.ps1` 24 frames — the hero never drew the bow (input did not
->   reach the game; «Обновляется каталог обликов» on screen, the owner on remote desktop). Next: find why (focus / SendInput in the RDP session / the game still
->   loading) before the bow, F1 and stone cases by emulated input. **Agent's game cases still unrun there (≈ 2–3 h,
->   one launch for several):** C1 Caverns of Set chest loot, C2 Highmane crossbow, C3 mod fire particles, T1 new strings, W1 NPC mods in flight, DM0 expanded
->   Damage Meter vs Hosav HUD, B7a hub bottom bar geometry, AIM4 / AIM8 arrow-aim controls; U6 — Edit Appearance and Waystones (module names first).
-> - **FIRST next chat:** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
+>   The emulated-input attempt of 16:25 (the hero never drew the bow) — verbatim in the chronicle, entry 2026-10-31 16:53 +03:00.
+> - **FIRST next chat (from the 16:5x closure; the owner's «работайте автономно» 16:49 stands → `/dayloop`):** (a) the owner's verdict on the user guide PDF
+>   (opened 16:5x; his remarks go to plan 35 G11 item 8, edits by a helper WITH the portrait, then an independent check); (b) the KUMM `README.md` lacks the
+>   undo journal / `-Restore` / the `uninstall` manifest key — the owner's storefront text, write it by the portrait; (c) the emulated input that did not reach
+>   the game (16:25) — fix, then the bow / F1 / stone cases; (d) the mod settings windows (W19–W22, W24) — mock-ups first.
+> - **Earlier FIRST list (still valid):** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
 >   plan 36 item 23). (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
 >   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
 >   (5) The release gate at 720p / 1080p / 2K / 4K (rule 17). (6) Item 21 — a vanilla quick-bar frame needs a clean-game stand (also for q4).
-> - **Owner's call, not taken:** the pack `.git/hooks/pre-commit` running `check-lua-game-thread.py` was refused by the permission classifier (07:5x) —
->   the guard still runs only by the rule «before every Lua rollout» (EXP-0400).
 > - **Epic «Настройки модов», phase 0 (open):** real clicks reach vanilla FLX buttons inside a vanilla window («Отмена» closed `W_InventorySettings_C`), but a
 >   checkbox created by `Create(pc, class, pc)` stays dead even inside it; 48 of 49 live FLX buttons live in a window's `WidgetTree` (H4: the OUTER matters).
 >   `Create(window, class, nil)` builds inside `<window>.WidgetTree`; adding it + `SetText` in ONE call crashed (15:38) — next: the same, ONE action per call,

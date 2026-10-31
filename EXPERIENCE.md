@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0409 · 2026-10-31 · ❌→✅ · #kumm #deploy #powershell #undo
+class: shell-mangles-argument
+**Lesson:** PowerShell variable names are case-insensitive: a new parameter `$Target` (the game target object) in `Write-EngineIniFile`
+was silently overwritten by the function's own local `$target = $Destination` (a path string) — `$Target.Path` became null, «You cannot call a
+method on a null-valued expression». A new parameter in a PS function is named so it cannot collide with any local of that function
+(`-GameTarget`). Found by the fixture block «откат» going red (3 checks), fixed, 34/34; the live Conan folder deploy → uninstall gave 0 differences.
+**Trigger:** adding a parameter to an existing `Deploy-ModPack.ps1` function.
+mechanized: `node tools/fixture-pack.mjs` block «откат» (the Engine.ini check reddens on the clash)
+
 ### EXP-0408 · 2026-10-31 · ❌ · #process #backlog #plan36
 class: census-from-observed
 **Lesson:** in the dayloop I took plan 36 items 4 and 5 by their unticked «- [ ]» checkboxes in the section text and re-proved both (twin processes, a fresh
