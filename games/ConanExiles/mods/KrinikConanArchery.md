@@ -47,6 +47,12 @@ Krinik... получают версию 3.0.1» · 2026-10-28, chronicle) in the
   (`Double 10.0`). So a creature whose physics bodies are thicker than its skin (the Kappa's shell) gets arrows standing off its skin — and they
   ride the bone, so they hang «in the air» beside it as it moves. A fix lives in the copy's placement: push it along its flight direction from the
   impact point toward the bone (or onto the mesh surface) before the attach.
+- **Arrow meshes (Dev Kit probe `_config/devkit/kit-probe-arrow-mesh.py`, 2026-10-31 10:39):** every bow arrow `SM_*_arrow` under
+  `/Game/Items/Weapons/Bow/` is ≈ 76–85 cm long along local **Z from 0** (`SM_basic_wood_arrow` Z −0.3…76.1, `SM_iron_arrow` −0.4…76.3,
+  `SM_demon_bow_arrow` −0.1…84.7), ≈ 7 cm thick — the mesh origin is at ONE END of the arrow. The first depth-push try (10:34) measured the hit
+  bone ≥ 60 cm ahead of the copy origin on a humanoid — the origin is the nock end, the tip ≈ 76 cm ahead. The push that hides the tip by `tip_in`:
+  `clamp(depth − arrow_length + tip_in, into_body_cm, into_body_max_cm)` (arrow_length from the copy's `StaticMeshToShow` bounds or 76). Live now:
+  the push capped to the old 15 cm, the depth logged (pack `e536ce9`); the formula waits for a stand with a LIVING target and a look at the arrows.
 - Open: on a 1080p crop of the frozen boss no arrow was visible on the arm while 3 copies lived — where the copy draws relative to the bone (its
   relative location) is the next read; the owner's symptom (arrows hanging in the air beside a Kappa) — plan 36 W13.
 
