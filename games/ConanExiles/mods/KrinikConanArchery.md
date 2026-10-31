@@ -51,16 +51,24 @@ Krinik... получают версию 3.0.1» · 2026-10-28, chronicle) in the
   `/Game/Items/Weapons/Bow/` is ≈ 76–85 cm long along local **Z from 0** (`SM_basic_wood_arrow` Z −0.3…76.1, `SM_iron_arrow` −0.4…76.3,
   `SM_demon_bow_arrow` −0.1…84.7), ≈ 7 cm thick — the mesh origin is at ONE END of the arrow. The first depth-push try (10:34) measured the hit
   bone ≥ 60 cm ahead of the copy origin on a humanoid — the origin is the nock end, the tip ≈ 76 cm ahead. The push that hides the tip by `tip_in`:
-  `clamp(depth − arrow_length + tip_in, into_body_cm, into_body_max_cm)` (arrow_length from the copy's `StaticMeshToShow` bounds or 76). Live now:
+  (superseded below) (arrow_length from the copy's `StaticMeshToShow` bounds or 76). Live now:
   the push capped to the old 15 cm, the depth logged (pack `e536ce9`); the formula waits for a stand with a LIVING target and a look at the arrows.
 - **The copy is born ≈ 1.8 m SHORT of the hit (stand 2026-10-31 10:57–11:04, a summoned green Kappa, `_config/arrow-stand.sh`):** the hit's `ImpactPoint`
   stands 180–187 cm ahead of the copy origin along the flight in every hit, the mesh's local Z runs along the flight (factor 1.00 / 0.96), the tip at +76 cm —
   so the drawn arrow hung ≈ 1.1 m before the body (side frame: horizontal, in the air before the snout; the 60 cm push did not reach). Most likely the copy
-  takes the projectile's place BEFORE its last flight step. **Live since pack `46e2069`:** push = clamp(impact − tip + `tip_in_cm` 10, 15, 200) — the tip goes
-  to the impact point and 10 cm in; the bone depth only logged (toward the bone the head arrow would sink whole). Side frame after: the shaft enters the snout,
-  the tip hidden (the owner 11:09: «мне показалось, что стрелы в капу начали нормально втыкаться»). Cases P4–P7 `TC_conan_arrows_follow_mob_body_2026-10-31_push.md`.
-- Open (the owner 11:09): `[OWNER]` «я ее убил, и все стрелы пропали» · «что в регдоле трупа пропадают стрелы» — do the stuck copies vanish when the body goes
-  ragdoll, and is it vanilla? Control: the same kill with `into_body = false`. A humanoid (P7) not run yet.
+  takes the projectile's place BEFORE its last flight step. **Live (pack after `46e2069`, 11:40):** push = clamp(min(impact − tip + `tip_in_cm`, bone − tip),
+  15, 200), `tip_in_cm` **−15**: the game's impact point lies DEEPER than the visible skin — by side frames (arrow 76 cm = the scale) the skin stands 21 cm
+  (human thigh), 27 cm (chest), 39 cm (Kappa snout) before it; with +10 the arrow went THROUGH a human thigh and chest. With −15 and the bone cap: the shaft in
+  the Kappa's head and a human chest, the tip hidden, nothing through and nothing in the air (the owner 11:09: «мне показалось, что стрелы в капу начали
+  нормально втыкаться»). Report `testcases/reports/2026-10-31_conan-arrow-push-tip-to-impact.md`.
+- **Arrows leave the corpse — the GAME does it (the owner 11:09: `[OWNER]` «я ее убил, и все стрелы пропали» · «что в регдоле трупа пропадают стрелы»).**
+  Bytecode of `BP_DummyProjectile` (`retoc-5.8 to-legacy --filter BP_DummyProjectile` → `uaj exports` → `UAssetGUI tojson VER_UE5_8` → `kismet-trace.py …
+  ExecuteUbergraph_BP_DummyProjectile`, 2026-10-31 11:3x): after `K2_AttachToComponent(HitComponent, HitBoneName, …)` the copy binds its event
+  `DestroyDummyIfAttachedObjectIsDestroyed` to `HitComponent:GetOwner().OnDestroyed` → `K2_DestroyActor` of the copy; it also `SetLifeSpan(ProjectileDummyLifetime)`.
+  The dead creature's actor is destroyed, so its arrows go with it. Stand P8/P9 (11:25–11:28): push off — 0 copies 2 s after the kill; push on — the 2 copies
+  survive detached at 0 0 0 (why ours survive is not known; they still carry the lifespan). Keeping arrows on the corpse would be a new feature (re-attach to
+  the corpse's mesh at the same bone) — not started.
+- A humanoid (P7) not run yet.
 - Open: on a 1080p crop of the frozen boss no arrow was visible on the arm while 3 copies lived — where the copy draws relative to the bone (its
   relative location) is the next read; the owner's symptom (arrows hanging in the air beside a Kappa) — plan 36 W13.
 
