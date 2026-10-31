@@ -137,6 +137,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   U10 — open). So a clean game copy is NOT needed: tests run on the live game, uninstall, check, reinstall (the owner 15:51: «зачем тебе чистая версия»).
 >   **The README is being rewritten from scratch by the owner's voice portrait** (plan 35 G11 item 8 — his words there): a helper reads the whole
 >   `krinik_voice/AUTHOR_STYLOMETRY.md`, a second checks; KUMM `.kaif/kaif.json` → `voicePortrait`. Next after it: the mod settings windows (W19–W22, W24).
+> - **Waits for the owner's hands (called in chat 2026-10-31 16:2x):** `TC_conan_build_stability_compat_perf_2026-10-26` R2 — a stone picked up in third
+>   person at the default and the far zoom; AIM15 — the arrow seen leaving the bow and landing under the crosshair. **Agent's game cases still unrun there (≈ 2–3 h,
+>   one launch for several):** C1 Caverns of Set chest loot, C2 Highmane crossbow, C3 mod fire particles, T1 new strings, W1 NPC mods in flight, DM0 expanded
+>   Damage Meter vs Hosav HUD, B7a hub bottom bar geometry, AIM4 / AIM8 arrow-aim controls; U6 — Edit Appearance and Waystones (module names first).
 > - **FIRST next chat:** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
 >   plan 36 item 23). (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
 >   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
