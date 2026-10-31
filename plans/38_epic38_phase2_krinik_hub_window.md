@@ -51,6 +51,12 @@ left-right), ONLY the selected mod's rows on the right, each row with an «i» t
 > 5 (section) built and walked with a real mouse on the KrinikConanUI page — fill, «i», reset, save, save-and-close, the FPS switch both ways, a restart; six
 > defects found and fixed in the run. Next: P3/P4 re-observation, P6 byte check, P11; the camera, archery, pack manager and graphics readers (step 6); the
 > sheet beside mockup 5 at 1080p and 4K for the owner; the Simple Minimap drawn over our window once (ZOrder 99 vs ours 101 — unexplained).
+> **THE OWNER'S REMARKS on the look in game, 2026-10-31 21:41–21:42 — job one of the next chat** (verbatim): «хаб настроек модов какой-то огромный» ·
+> «кривые кнопки инфо» · «большие расстояния между опциями» · «странный жирный шрифт» · «некрасивый поп-ап при ховере». Routes `[AI]`: the window size —
+> `SB_KrinikWindow` width/height overrides set by Lua at fill (no kit rebuild), variants on one game frame for his eye; «i» — the kit's rounded-box outline
+> (HALF_HEIGHT radius on a text box of uneven width) → a fixed square box or a game icon; row gaps — `ROW_GAP` 6 + the game rows' own 60-unit height;
+> the font — `TextSettingName`'s font copied with its bold typeface → the regular typeface of the game's settings rows; the plate — a dark solid Border →
+> the game's tooltip widget or the fishing panel frame. Each fix — frames beside mockup 5 in a review folder; taste is his (house rule: look, then show).
 - [x] 4. **Kit window by mockup 5** — rewrite `kit-krinik-modsettings.py` (widgets reused by name, never removed — the GUID trap; run twice): head row
       (title TextBlock + `B_KrinikCloseNoSave`), body (left `SC_KrinikMods` with one name button per mod, clipped name boxes; right — mod name + note,
       `WS_KrinikPages` with one page per mod: per row an HB of our label + «i» button + the game row with an empty label as the control), the «i» plate

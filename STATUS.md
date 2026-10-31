@@ -135,6 +135,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   `KrinikConanGraphics` pattern (`read_store` + `settings_check`), keys `arc_ballistics` → `CFG.ballistics` (read per arrow, l. 337), `arc_nobreak` →
 >   `CFG.no_break` (l. 277), `arc_fov` → `CFG.aim_fov_deg` (aim event, l. 742); then `LIVE.arc = true`. Switched to: the pack repo goes public with a
 >   bilingual README (idea 23, the owner 21:09) — audit first.
+> - **FIRST next chat: the owner's five remarks on the hub window's look (21:41–21:42)** — «огромный», «кривые кнопки инфо», «большие расстояния между
+>   опциями», «странный жирный шрифт», «некрасивый поп-ап при ховере»; routes in `plans/38_epic38_phase2_krinik_hub_window.md` (top of Steps). Then: the
+>   public repo (README in review folder `38_public_readme` — his read), the camera and pack-manager pages, the archery aim stand.
 > - **21:01 — the «Моды Krinik'а» hub window by mockup 5 BUILT and walked in game (first batch, partial)** — plan `plans/38_epic38_phase2_krinik_hub_window.md`,
 >   pack `75ef09f`, report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`: one store `Saved/KrinikSettings.lua` (`krinik_settings.lua`), the
 >   KrinikConanUI page live (FPS switch both ways seen, blink thresholds, menu slow-down, craft), save / reset / save-and-close / close-without-save, a restart.
