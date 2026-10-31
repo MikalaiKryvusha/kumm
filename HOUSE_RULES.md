@@ -76,6 +76,10 @@
     (`[OWNER]` 2026-10-09 for Svarog · 2026-10-31 09:31 for the build's installer · 09:32 for every mod of the build that brings or changes UI:
     «все наши моды в сборке, которые приносят или меняют UI, должны уважительно масштабироваться с разрешением игры в стандартном ряду 16 к 9» ·
     verbatim in `MASTER_PLAN.md`, `ideas/22_conan_build_gui_installer.md`, plan 35 release gate.)
+18. **File and folder names we create — English letters, digits and underscores only: no spaces, no Cyrillic, no hyphens.** `collect_report.cmd`,
+    `uninstall_krinik_build.cmd`, `_kumm_backup`. The text INSIDE a file stays Russian where the player reads it. Older names are renamed when touched;
+    existing hyphenated names of tools and mods (`Deploy-ModPack.ps1`, `ConanCameraControl`) wait for the owner's word.
+    (`[OWNER]` 2026-10-31 16:09 «никаких пробелов и кириллицы в названиях файлов и папок!!!» · «только английский язык и нижние подчеркивания».)
 
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · two maps for every game · KAIF
 feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images — WebP, never PNG). The

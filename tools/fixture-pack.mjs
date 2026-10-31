@@ -203,18 +203,18 @@ const snap = root => {
   walk(root); return out.join('\n')
 }
 const before = snap(UGAME)
-const JR = path.join(UGAME, '_kumm-backup', 'journal.txt'), UN = path.join(UGAME, 'Uninstall.cmd')
+const JR = path.join(UGAME, '_kumm_backup', 'journal.txt'), UN = path.join(UGAME, 'Uninstall.cmd')
 const u1 = ups(['-Deploy', '-WithEngineIni', '-NoVerify'])
 expect('откат: раскатка — журнал и деинсталлятор на месте', u1.code === 0 && existsSync(JR) && existsSync(UN), u1.out)
 expect('откат: деинсталлятор из шаблона — кириллица цела, {BACKUP} подставлен',
-  existsSync(UN) && readFileSync(UN, 'utf8').includes('Удаление сборки') && readFileSync(UN, 'utf8').includes('%~dp0_kumm-backup\\Deploy-ModPack.ps1'), existsSync(UN) ? readFileSync(UN, 'utf8') : '(нет файла)')
+  existsSync(UN) && readFileSync(UN, 'utf8').includes('Удаление сборки') && readFileSync(UN, 'utf8').includes('%~dp0_kumm_backup\\Deploy-ModPack.ps1'), existsSync(UN) ? readFileSync(UN, 'utf8') : '(нет файла)')
 expect('откат: раскатка заменила родной ролик и Engine.ini (условие проверки)',
   readFileSync(path.join(UGAME, 'Game', 'Movies', 'Intro.bk2'), 'utf8') === 'stub' && readFileSync(path.join(UGAME, 'Game', 'Config', 'Engine.ini'), 'utf8').includes('r.Pack'), u1.out)
 const u2 = ups(['-Deploy', '-WithEngineIni', '-NoVerify'])
 const jr = existsSync(JR) ? readFileSync(JR, 'utf8') : ''
 expect('откат: повторная раскатка не затирает копию оригинала (одна строка на путь, копия — ваниль)',
   u2.code === 0 && (jr.match(/replaced\tGame\\Movies\\Intro\.bk2/g) || []).length === 1 &&
-  readFileSync(path.join(UGAME, '_kumm-backup', 'files', 'Game', 'Movies', 'Intro.bk2'), 'utf8') === 'vanilla movie', `${u2.out}\n${jr}`)
+  readFileSync(path.join(UGAME, '_kumm_backup', 'files', 'Game', 'Movies', 'Intro.bk2'), 'utf8') === 'vanilla movie', `${u2.out}\n${jr}`)
 let cmdOut = ''
 try { cmdOut = execFileSync('cmd', ['/c', UN], { input: '\r\n\r\n', encoding: 'utf8' }) } catch (e) { cmdOut = `${e.stdout ?? ''}${e.stderr ?? ''} code ${e.status}` }
 const after = snap(UGAME)

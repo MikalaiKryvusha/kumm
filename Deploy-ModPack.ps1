@@ -111,8 +111,8 @@ function Resolve-UnderRoot {
 # только пути шагов install и не знал паков Конана - вернуть ваниль было нечем (владелец: «получается,
 # наша установка разрушительная?» · «инсталятор должен устанавливать унисталер сборки с возможностью
 # отката на ваниль», 2026-10-31 15:50-15:53; KUMM bugs/72).
-# Перед КАЖДОЙ записью под папкой игры Save-Original пишет строку журнала <game>\_kumm-backup\journal.txt:
-#   replaced<TAB><rel>  - файл был, его копия лежит в _kumm-backup\files\<rel>;
+# Перед КАЖДОЙ записью под папкой игры Save-Original пишет строку журнала <game>\_kumm_backup\journal.txt:
+#   replaced<TAB><rel>  - файл был, его копия лежит в _kumm_backup\files\<rel>;
 #   created<TAB><rel>   - файла не было, откат его удалит;
 #   dir<TAB><rel>       - папки не было, откат удалит её, если она опустела.
 # Первая запись пути побеждает: повторные раскатки (обновления) не затирают копию оригинала.
@@ -120,7 +120,7 @@ function Resolve-UnderRoot {
 # деинсталлятор работает и после того, как игрок удалил распакованный архив.
 # Файлы ВНЕ папки игры (Engine.ini Палворлда в %LOCALAPPDATA%, userConfig) журнал не ведёт - у них свой .bak.
 # [NOT-TESTED]
-$script:BackupDirName = '_kumm-backup'
+$script:BackupDirName = '_kumm_backup'
 $script:Journals = @{}
 
 function Get-JournalPath { param([string]$Root) return (Join-Path (Join-Path $Root $script:BackupDirName) 'journal.txt') }
@@ -1582,7 +1582,7 @@ function Write-BundleInstaller {
         '  2. Run install.cmd. It finds the game next to this folder or asks for its path,',
         '     copies the mods in and verifies the result. Exit code 0 = everything in place.',
         '',
-        'Uninstall: the install keeps a copy of every game file it replaces in <game folder>\_kumm-backup',
+        'Uninstall: the install keeps a copy of every game file it replaces in <game folder>\_kumm_backup',
         '(journal.txt lists them). Run the uninstaller it left in the game folder, or',
         'Deploy-ModPack.ps1 -Restore -GameDir <game folder> - the folder returns to its state before the install.'
     )
