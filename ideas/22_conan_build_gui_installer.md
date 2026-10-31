@@ -70,8 +70,9 @@ by fine traces only (grain, light scratches, pits, rare nicks) and NO shading bl
 under the title.
 The state-driven main button — answered 20:11 and built (above).
 **The build icon — DECIDED 20:43** `[OWNER]` «иконки поставляем обе, первая по дефолту» (variants in review folder `37_build_icon_letter_K`, sources pack
-`_config/branding/icon/`): variant 1 (upright K) is the launcher exe's icon; variant 2 ships beside it as an `.ico` in the archive. TO DO: rounded alpha
-corners from the Conan original, multi-size `.ico` (256/64/48/32/16) for both, `-win32icon` in `build-docs.py`, both files into the export.
+`_config/branding/icon/`): variant 1 (upright K) is the launcher exe's icon; variant 2 ships beside it as an `.ico` in the archive. DONE 21:03 (pack `6ace541`):
+`_config/branding/icon/make_icons.py` → `krinik_build_icon_1.ico` / `_2.ico` (16–256, the Conan original's rounded alpha corners), `-win32icon` in
+`build-docs.py` (seen: the exe's extracted icon is K 1 with rounded corners), both `.ico` in the manifest `extras`; the full archive export — plan 36 item 28.
 
 ## Goal vector (Achieve)
 
