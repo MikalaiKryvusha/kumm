@@ -62,3 +62,10 @@ None yet — the idea waits for approval.
   pattern table); the independent §7B pass by a clean helper is still owed before the owner sees it.
 - **Open for the owner:** a promise to remove a rights holder's material on request (not written — his policy); whether the public tree carries the strings
   extracted from other authors' mods (our translations sit on them); 41 of 64 mod authors still TODO in the table; a `LICENSE` file (MIT) to add.
+- **Answered 2026-10-31 21:2x (chat question form):** the translations of other authors' mods (strings extracted from their mods, Hosav overlays) GO into the
+  public repo, with the rights note — `[OWNER]` «Да, с отказом»; NO promise to remove material on request — `[OWNER]` «Нет».
+- **The public tree — plan for the next step `[AI]`:** a staging copy of the tracked tree WITHOUT the internal dev records that carry the origin (the audit's
+  list: `docs/03`, `docs/04`, `docs/05`, `docs/13-era-of-trials`, `docs/dw-cvars/debug-db.md`, `docs/guide/playground-post.md`, `_config/verify-*`,
+  `_config/test-verify-baseline.py`, `_config/read-fileset-index.py`, the tracked `__pycache__` pyc, the root jpg, `_config/nexus/logo.py`'s font path),
+  with `modpack.json` comment lines and the camera mod's `NEXUS_PAGE.md` / `main.lua:28` reworded, the README from the checked draft, an MIT `LICENSE`;
+  a scan of the staging tree for the audit's patterns must print zero before `gh repo create MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --public`.
