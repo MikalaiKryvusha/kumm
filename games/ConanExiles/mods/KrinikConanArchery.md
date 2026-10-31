@@ -32,6 +32,15 @@ No overlaps: the 2h_bow montage is in the game's pak only among the build's 101 
 2026-10-30: the version the pause-menu mod list shows = `modinfo.json` `versionMajor/Minor/Build` of the wrapper — set to **3.0.1** (`[OWNER]` «все моды
 Krinik... получают версию 3.0.1» · 2026-10-28, chronicle) in the kit source, `kit/modinfo.json` and the built pak (`_config/devkit/set-pak-version.py`).
 
+## Stuck arrow copies (plan 36 W13, facts of 2026-10-31)
+
+- A shot leaves a `BP_DummyProjectile_C` copy (`/Game/Items/Weapons/BP_DummyProjectile.BP_DummyProjectile_C`, root `StaticMeshComponent`); the game removes
+  copies a few seconds later. Our Lua logs each copy: «копия стрелы #N: удар в <component>, кость удара <bone>, прицеплена к <parent>, сокет <socket>».
+- A HIT on a humanoid boss: the copy's root is attached to the creature's `CharacterMesh0`, socket = the hit bone (`b_L_lowerarm` ×3), still attached
+  at +2 s (birth watch `NotifyOnNewObject` + reads at +0.3 s / +2 s on the game thread). A MISS into the ground: no attach parent, socket None.
+- Open: on a 1080p crop of the frozen boss no arrow was visible on the arm while 3 copies lived — where the copy draws relative to the bone (its
+  relative location) is the next read; the owner's symptom (arrows hanging in the air beside a Kappa) — plan 36 W13.
+
 ## Open
 
 - seen 2026-10-30 16:28: the pause-menu list shows «v3.0.1» (report `testcases/reports/2026-10-30_conan-krinik-versions-3.0.1.md`).
