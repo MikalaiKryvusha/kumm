@@ -115,8 +115,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   108–233, 987–1013); voice-lint SKIPPED=3 (the portrait's §8 has no pattern table); a clean-instance §7B pass found 11 hits, all applied. The owner's proofread is open.
 > - **The mod-settings hub look APPROVED 19:09** (mockup 5 of `ConanExiles/_config/settings_hub/mockups/mockups.html`, «Моды Krinik'а», per-author hubs, the
 >   entry button with a vertical scrolling list — the owner's words in plan 38's header). Route — a KIT window (recon `researches/conan-mod-settings-hub/
->   mod-ui-module-registration.md`). **In flight 19:12:** a helper builds the kit window skeleton (`W_KrinikModSettings` + `DT_KrinikUIModule` + the merge) and
->   tests a real click on a game checkbox inside it — read its run report `testcases/reports/2026-10-31_conan-hub-kit-window.md` when it lands.
+>   mod-ui-module-registration.md`). **PHASE 0 PASSED 19:32–19:37** (pack `98a66f1`, KUMM `775925c`, report `testcases/reports/2026-10-31_conan-hub-kit-window.md`):
+>   the kit window `W_KrinikModSettings` (WindowRoot) with a game `WBP_Setting_Checkbox` row takes a REAL click both ways; its module table merges at runtime from
+>   Lua (`MergeDataTables` on `Default__ModController`, rows 117 → 118 at the main menu, survives the world load) — no ModController blueprint, no hand step;
+>   Esc closes it via the pause section's map. Open: the «Закрыть» button has no handler; the row label wraps; the row drives nothing yet. Shown: review folder
+>   `35_hub_window_first_live_click`. **Next — phase 1/2:** the window by mockup 5 (`settings_hub/mockups`), the entry button + the list, the settings store.
 >   The launcher is BUILT by mockup 11 + frame 7 (pack `3c72afd`, idea 22 «BUILT 19:20»; review folder `32_launcher_built` opened 19:2x) — open: real clicks
 >   on its buttons and a move to a monitor with another scale (unobserved).
 >   The list under «Настройки модов» (the owner 19:14–19:16): «Моды Krinik'а» · «Моды Xevyr'а» · «Рыбалка» (its own window) · «Прочее» (always last; single-mod
