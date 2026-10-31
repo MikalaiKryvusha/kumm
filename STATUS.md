@@ -128,7 +128,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   `testcases/reports/2026-10-31_conan-hub-look.md`, review folder `39_hub_look` with `what_to_look_at.md`): height by the tallest live page, Noto Sans
 >   regular (the labels had been the ENGINE's Roboto Bold; the game's serifs have no Cyrillic), rows twice denser, round «i», a dark opaque plate with a
 >   gold rim at the cursor, the vanity camera no longer hides the window. Next: the public repo (README in review folder `38_public_readme` — his read),
->   the pack-manager page (`mpm_hud_scale`), the archery aim stand.
+>   the archery aim stand (the Archery page's in-world re-read is the last unobserved reader).
+> - **2026-10-31 22:4x — the HUD-size row of the hub is live** (KrinikConanModPackManager reads `mpm_hud_scale`; report
+>   `testcases/reports/2026-10-31_conan-hub-mpm-page.md`, pass). The window now has five live pages: camera, UI, archery, pack manager, graphics.
 > - **2026-10-31 22:3x — the camera page of the hub is live** (report `testcases/reports/2026-10-31_conan-hub-camera-page.md`, partial — C8's unmoved branch):
 >   the camera keeps its own `config.lua`, publishes `KrinikCameraValues`, takes `KrinikCameraSet` when a game window closes. The owner's live camera
 >   `config.lua` (height 80) was put back byte-equal after the run.

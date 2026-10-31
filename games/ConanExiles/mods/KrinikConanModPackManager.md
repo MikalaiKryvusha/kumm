@@ -29,6 +29,13 @@
 
 `config.lua` in the GAME folder (12.9 KB) is the owner's; any redeploy that recreates the folder carries it over (done at both renames 2026-10-31, byte-equal).
 
+## The «Моды Krinik'а» window (plan 38 step 6, since 2026-10-31 22:4x)
+
+The row «Размер HUD вверху экрана» (`mpm_hud_scale`, ×, shown in %, 100–150, default 125) lives in the window's store `Saved/KrinikSettings.lua`;
+`config.lua` stays the mod's own default (`hud_scale` 1.25), never written by the mod. At load `read_settings_store` sets `cfg.hud_scale` from the store
+or from `config.lua` (log «масштаб HUD x1.25 (config.lua, загрузка)»); after «Сохранить» a pre-hook of `GUIModuleController:ActivateModule` sees
+`KrinikSettingsVersion` move on a window CLOSE and calls `apply_hud_scale` at once (no timer). Cases `testcases/TC_conan_hub_mpm_page_2026-10-31.md` M1–M5 pass.
+
 ## Checks
 
 - 2026-10-31 16:41 (as KrinikConanModPackStatus): «СБОРКА: моды 66/66 (эталон 66 модов)». The merged mod — see the run of 16:5x in STATUS.
