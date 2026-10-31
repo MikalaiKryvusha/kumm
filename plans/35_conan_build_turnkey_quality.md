@@ -182,6 +182,14 @@
          flags `--no-pdf`, `--no-launcher`) → the «Автор сборки» section of `docs/guide/guide-3.0.1.html` (between `AUTHOR_LINKS` markers, last page of the PDF),
          the PDF at the manifest's `guide` path, `_config/launcher/bin/KrinikLauncher.exe` (VS 2022 Roslyn csc, .NET Framework 4.x, version = `packVersion`).
          A malformed line stops the build with its line number. `[AI]` The separator is «; » exactly as in the owner's example (one constant, `SEPARATOR`).
+      8. **The README rewritten FROM SCRATCH by the owner's voice portrait** — in progress since 16:04. The owner read the 3.0.1 guide on 2026-10-31 16:02–16:05:
+         `[OWNER]` «Всё по-русски» — «это не мой голос» · «не по моей стилометрии» · «я бы написал Полная русификация» · on «Камни и ветки поднимаются при
+         любом отдалении камеры»: «тысячу раз тебе говорил, не писать локальные какие-то факты. Мы делали огромную фичу по управлению положением камеры, был
+         баг, - мелочь, мы его пофиксили и ТЫ … ПИШЕШЬ ОБ ЭТОМ НА ВИТРИНЕ!!! ГДЕ ПРИНЯТО ХВАСТАТЬСЯ ФУНКЦИОНАЛОМ» · «ИДИ ЧИТАЙ СТИЛОМЕТРИЧЕСКОЕ ЯДРО НИКОЛАЯ
+         ПОЛНОСТЬЮ» · «И ПЕРЕПИСАТЬ … РИДМИ СНУЛЯ» · on «как в старых «Свитках»»: «не место такому жаргону у нас!» → «Как в классической серии игр The Elder
+         Scrolls» · «мы пишем ридми строгим техническим академическим языком».
+         How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
+         and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
 - [x] Г13. **Сделано 2026-10-26 20:24 (план 36 п. 5):** `_config/player-report/Собрать отчёт.cmd` + `collect-report.ps1` в `extras` манифеста;
       на настоящих журналах и 5 падениях (18:03 в их числе) zip 1,4 МБ, 19 файлов; независимая проверка — из 3 значений MachineId / LoginId /
       EpicAccountId найдено 0, имени компьютера, пути профиля, `User:` — 0, `KrinikLevelUncapped` 12 → 12; мутант без обезличивания — отказ, код 4,
