@@ -68,6 +68,15 @@
     3. Before a launch — no game of ours already running (the scripts refuse with exit 2 and the PID).
     (`[OWNER]` 2026-10-30 ≈15:3x · verbatim in `PROJECT_HISTORY.md`, entry «the owner's words behind HOUSE_RULES §1 rule 16».)
 
+17. **Everything we put on a screen — mod UI, installer, launcher, any window — works on every main 16:9 resolution: 720p, 1080p, 2K, 4K.**
+    1. Readable at each: text never smaller than the game's or Windows' own text at that size.
+    2. A Windows window respects the Windows display scale (per-monitor DPI aware; the owner's TV runs 300 %) and is never bitmap-stretched.
+    3. Images come from sources large enough for 4K at that scale, or vector — never pixelated.
+    4. Accepted by frames at all four resolutions, looked at by eye.
+    (`[OWNER]` 2026-10-09 for Svarog · 2026-10-31 09:31 for the build's installer · 09:32 for every mod of the build that brings or changes UI:
+    «все наши моды в сборке, которые приносят или меняют UI, должны уважительно масштабироваться с разрешением игры в стандартном ряду 16 к 9» ·
+    verbatim in `MASTER_PLAN.md`, `ideas/22_conan_build_gui_installer.md`, plan 35 release gate.)
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · two maps for every game · KAIF
 feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images — WebP, never PNG). The
 context-budget hook's hint is obeyed (`CLAUDE.md`).

@@ -27,11 +27,27 @@ line. Later the same window grows into a launcher that updates itself and the bu
   Result. A window (not a console) with the intro background and both logos; the game folder is found or chosen in a folder dialog; «Установить»
   installs; the window shows progress and «Готово» or the reason of a failure in Russian.
   Check. The run report frames at 1080p, 2K and 4K (plan 35 release gate), plus `-Verify` of the deployed folder: 0 missing.
+- **Readable at 1080p, 2K and 4K, DPI-aware, never pixelated, never tiny** (tossed by the owner mid-task 2026-10-31 09:31 +03:00, verbatim: `[OWNER]` «установщик сборки
+  должен быть хорошо виден и на 1080 и на 2К и на 4К, и должен уважать выставленный в виндовс уровень масштаба интерфейсов, не превращаться в
+  шакальные пиксели, и не быть слишком маленьким»). The installer SHALL declare per-monitor DPI awareness (PerMonitorV2) so Windows does not
+  bitmap-stretch it; WHEN the Windows scale is 100 % / 150 % / 200 % / 300 %, the window SHALL size its layout, fonts and images by that scale (the
+  owner's TV runs 300 %); images SHALL come from sources at least as large as the 4K × 300 % render (or vector), never upscaled small bitmaps.
+  Check: frames of the window at 1080p 100 %, 2K 150 %, 4K 300 % — text height ≥ the Windows default UI text at that scale, no blurred edges on
+  a 1:1 crop (owner's eye in a review folder). The same window also at **720p** — the owner, 09:31: `[OWNER]` «уважительное отношение ко всем
+  разрешениям основным ряда соотношений 16 к 9 мы еще в свароге обсуждали» (the Svarog rule of 2026-10-09: 16:9 at 720p, 1080p, 2K, 4K — `MASTER_PLAN.md`;
+  now `HOUSE_RULES.md` §1 rule 17 for everything we put on a screen). Numbers taken from the Svarog rulebook (`SvarogsDream/docs/UI_RULEBOOK.md`,
+  read 2026-10-31 09:3x at the owner's «можешь поднять и почитать»): T1 — main text ≥ 36 px letter height on 4K (sofa target 52 px), i.e. ≥ 18 px at
+  1080p, scaled with the resolution; T2 — contrast ≥ 4.5 : 1 (large text ≥ 3 : 1); principle 4 — the layout is dynamic, nothing set "in pixels" by hand;
+  В9 — the same look at 1280×720, 1920×1080, 2560×1440, 3840×2160, frames as a 2×2 sheet. Meter: `python SvarogsDream/tools/textrows.py` (letter
+  height), `SvarogsDream/tools/contrast.py` (WCAG).
 - The installer does exactly what `install.ps1` does today — no second install logic (one source; the window is a face over it).
 - No dependency the player must install first (Windows PowerShell 5.1 / .NET Framework WinForms or WPF are on every Windows 10/11).
 
 ## Open (to settle with mock-ups, not in code)
 
+- **Decided by the owner:** the window has a copper-gold metal frame, like the Conan logos — `[OWNER]` 2026-10-31 09:33 «у окна инсталятора должна быть медно
+  золотая обводка под металла, как в логотиапх конана». Source of the look: the game's logo `T_UI_ConanExiles_Enhanced_Logo` (our 3× master
+  `conan-exiles-enhanced-logo-3x.webp`) — sample its metal gradient for the frame, drawn at the DPI scale (rule 17), never a stretched bitmap edge.
 - Window look: size, where the logos stand, the button style (the «ОТЗЫВ» plate family?), fonts (Cardo / Forum / Cormorant SC — already in
   `_config/branding/fonts`).
 - Later, the launcher: where updates come from (the build's release host), how it updates itself, what it shows (news, version, «Играть»). A separate

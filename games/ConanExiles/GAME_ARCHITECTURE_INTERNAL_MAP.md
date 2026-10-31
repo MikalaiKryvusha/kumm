@@ -572,3 +572,14 @@ Temperature (2026-10-30, live + Hosav bytecode): the hero's temperature is `BPEn
   «Умри!» are set into `…BP_ConanGameInstance_C_<N>.W_SubtitleEntryView_C_<N>.WidgetTree_<N>.textView` (a `GeneralText`), one new entry widget per
   line, under the game instance. Their Russian text is not in the deployed `ru/Game.locres` as UTF-16 («побери» absent) — the source of those lines is
   still to find. Plan 36 W29 (the «fly in» flicker) starts from this widget: its appear animation, recorded at 60 fps.
+- **Subtitle lifecycle (2026-10-31 09:1x–09:2x, remote + Dev Kit probes `_config/devkit/kit-probe-subtitle.py`).** `W_SubtitleRenderer_C` (native
+  `/Script/ConanSandbox.SubtitleRenderer`; tree `Overlay_0 → SizeBoxEntryListContainer` (OverlaySlot bottom-centre, padding L/R 50, bottom 140) `→
+  EntryListView` (VerticalBox); BP function `UpdateEntryListPosition` sets that slot from `EntryListPadding/…Alignment`; native props `EntryViewClass`,
+  `m_ActiveEntry`, `m_PendingEntryList`; native functions only `SlotKillAllSubtitles`, `GetIsSubtitleVisible`, `Initialize/DeinitializeBindings`). Per
+  line the native code creates a NEW `W_SubtitleEntryView_C` (native `SubtitleEntryView`, root = one `GeneralText` `TextView`, Noto Sans `FS_Text_Body`),
+  calls its BP event `SetText` in the same tick, `SetTextActive(true)` 8–197 ms later; visibility stays 4; the line is removed from the list with no
+  event (`UserWidget:Destruct` hook silent) after the voice length (0.93–1.75 s seen; 0.09 s when replaced). The engine's subtitle manager is not a
+  UObject — no duration readable from Lua. The text arrives as an ICU pattern («Не на того {Gender}|gender(напал,напала)!»), `GeneralText` formats it.
+- **The game HUD can stand hidden as a whole** (2026-10-31 09:2x, after `launch-fg.ps1` → world entry → god → teleport): `W_NewHealthUI_C`,
+  `WBP_MainHotbar_C`, `W_SubtitleRenderer_C` at visibility 2; `FunCombat_PlayerController_C:ToggleHUD(<1 param>)` with true/false changed nothing;
+  `SetVisibility(4)` by the remote restores each. Cause unknown (input action `HideGui` exists on the controller).

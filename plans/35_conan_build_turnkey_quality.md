@@ -214,4 +214,8 @@ Hosav по умолчанию, `docs/17` п. 2–4 (не потери — сли
 Before the archive ships: every screen and window our build changes (main menu with both logos and «ОТЗЫВ», the Esc menu, the intro, the hub, the
 Hosav HUD, the corpse strip and the loot window, fishing, the mod windows of `bugs/64`) is looked at by eye at 1920×1080, 2560×1440 and 3840×2160,
 full screen; each frame — WebP in a review folder per resolution; a clipped, overlapping or blurry element at any of the three is a bug before release.
+**Widened 2026-10-31 09:32 to four resolutions and every UI mod:** `[OWNER]` «все наши моды в сборке, которые приносят или меняют UI, должны уважительно
+масштабироваться с разрешением игры в стандартном ряду 16 к 9» (and 09:31 «…мы еще в свароге обсуждали» — the Svarog row 720p, 1080p, 2K, 4K). So
+the gate adds 1280×720, covers EVERY mod of the build that brings or changes UI (not only ours), and measures by the Svarog rulebook: main text
+≥ 36 px letter height on 4K (≥ 18 px at 1080p, ≥ 12 px at 720p), contrast ≥ 4.5 : 1, nothing clipped, overlapping or blurry (`HOUSE_RULES.md` §1 rule 17).
 Status: [NOT-TESTED] — not started.
