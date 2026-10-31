@@ -224,3 +224,5 @@ md5 `08dffe89b9a772f3d6059faf559b7a17` в трёх местах. Копии до
 
 **Открыто:** «более 30 уровней за час» мерилось на якоре 175. Станет ли 2,857× достаточно —
 покажет следующий час игры; мерить тем же способом (уровень в начале и в конце часа).
+
+**Seen live 2026-10-31 12:08** (plan 36 item 27): `SetLevel(65)` → the badge reads 65 past the vanilla 60, the next step 4 031 = 500 × √65; report `testcases/reports/2026-10-31_conan-level-uncap-live.md`. The pace in a real hour of play — still the point above.
