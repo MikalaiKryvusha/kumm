@@ -234,7 +234,8 @@
          the guide rewritten from scratch by a helper with the whole portrait (17:39). 17:42 on «Предметы поднимаются при любом отдалении камеры (благодарность
          Taurin78…)» in a mod's description: «ЭТО НЕ ОПИСАНИЕ ТОГО, ЧТО ДАЕТ МОД!!!! Это идет в отдельный ЧТО НОВОГО, в раздел ИСПРАВЛЕНИЕ ДЕФЕКТОВ!!!» —
          a chapter «Что нового» → «Исправление дефектов»; a mod's description = only what the mod gives. 17:43 «Названия не переносятся на две строки» (e.g.
-         «The Elder Scrolls IV: / Oblivion») — names are non-breaking. **Next:** the mods rename (code, deploy, notes), then the guide
+         «The Elder Scrolls IV: / Oblivion») — names are non-breaking. 17:43 on «читаемости выстрела»: «какой нахуй читаемости??? ТЫ дурак что ил?» —
+         «читаемость» only about text and interface; every word fits what it names (RUSSIAN_RULES §5). **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
