@@ -116,21 +116,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **W6 centred, the corpse backing (ACCEPTED 22:38) and bug 71 (DONE 00:4x) — moved verbatim to the chronicle, entry 2026-10-31 01:38 +03:00.** Still not seen: the corpse strip the GAME creates on a real look; a chest proper; the control case I4 (intro, partial); ≈ 3 s black between the intro and the menu.
 > - **The 00:4x–01:3x sprint (W37 main menu) and the 22:55 dayloop (W26 logo, W11, W30) — moved verbatim to the chronicle, entry 2026-10-31 08:46 +03:00.**
 >   Still the owner's eye: the gold intro wheel and the crisp game logo at a start; the wallpapers' review folder 14; Krinik on top at a real Esc (folder 15).
-> - **2026-10-31 07:40–08:46 `/dayloop` (chat 4f90b546; `[OWNER]` «после рабочего стола беремся за конана в автономном режиме» · «работаем дальше над
->   сборкой» · 08:22), packs `6a70aa5`, `47f17fd`, `c4847b1`:** W37 «ОТЗЫВ» DONE in both menus (report `testcases/reports/2026-10-31_conan-feedback-esc-menu.md`:
->   click 63 → 3–6 ms by `io.popen`; the address box `MB_TOPMOST`; the plate 10 lower — `[OWNER]` «отступ на 10 ниже хорошо, нравится» · 08:22); three live
->   `ExecuteWithDelay` fixed (EXP-0400); `KrinikMenuProbe` had hidden the game's notification window since 10-25 — removed (EXP-0401); world entry under a
->   minimized window crashes — `enter-world-remote.sh` restores the window first. W30 arrow blood WORKS by a direct call (pre-hook, EXP-0402, review folder 22).
->   Bug 64 item 8 (Simple Modlist over the Esc menu at 1080p) fixed again — list 540 (folder 23). W29 shouts measured at 60 fps: game subtitles
->   (`W_SubtitleEntryView_C`) are drawn one frame ≈ 50 px low, then jump into place — the owner's «мерцание» (08:56); ≈ 1.95 s, no fade, no backing (folder 24). New: plan 35 release gate «1080p + 2K + 4K by eye»
->   (the owner 07:51); idea 22 — a GUI install wizard «сам находит, сам устанавливает» (the owner 07:55–07:56). Side: KAST had hidden the owner's desktop
->   icons — restored (`FFlags` of the desktop bag, KAST EXP-0009); ImageGlass is the system image viewer now (the owner set the default himself, 08:21).
-> - **2026-10-31 09:03–09:3x (chat after 4f90b546):** W29 in place + fade-in 0.2 s DONE (section `krinik_shout_fade`, pack `02f4b82`, report
->   `testcases/reports/2026-10-31_conan-shout-fade-in.md`); fade-out DONE 09:40 by a mirror line (v2; review folder 25 «крики врагов — плавное появление и скрытие» waits for the owner's eye). The owner 09:31–09:33: HOUSE_RULES §1
->   rule 17 (every UI on 16:9 at 720p / 1080p / 2K / 4K, Windows DPI respected), plan 35 release gate widened to four resolutions and every UI mod,
->   idea 22 installer — DPI-aware, Svarog text sizes, a copper-gold metal frame like the Conan logos. Then «работай автономно» → `/dayloop`.
-> - **09:44–09:50 `/dayloop`:** W4 minimap coordinates inside the ring on a clock-style plate — section `krinik_minimap_coords` (pack `1e2ab51`, cases
->   `TC_conan_minimap_coords_backing_2026-10-31.md` C1–C4; notes `games/ConanExiles/mods/Simple_Minimap.md` new); «правее и выше» still open.
+> - **The 07:40–08:46 dayloop, the 09:03–09:50 W29 / W4 work and the owner's 09:31–09:33 rules — moved verbatim to the chronicle, entry 2026-10-31 10:4x +03:00.** W29 shout fade waits for the owner's eye (review folder 25); rule 17 and idea 22 — in their files.
 > - **W4 minimap DONE and ACCEPTED 10:09** (`[OWNER]` «вот теперь хорошо»): coordinates inside the ring on a plain dark rounded plate, font 13, inset 46;
 >   the map tighter into the corner by a render-only shift (pack `5e8229b`, cases C1–C9).
 > - **FIRST next chat:** (1) the owner's eye on review folder 25 (shout fade). (2) **W13 stuck arrows — cause found 10:3x:** the game puts the copy at the hit ImpactPoint
