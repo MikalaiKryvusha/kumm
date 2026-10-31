@@ -138,7 +138,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   **The README is being rewritten from scratch by the owner's voice portrait** (plan 35 G11 item 8 — his words there): a helper reads the whole
 >   `krinik_voice/AUTHOR_STYLOMETRY.md`, a second checks; KUMM `.kaif/kaif.json` → `voicePortrait`. Next after it: the mod settings windows (W19–W22, W24).
 > - **Waits for the owner's hands (called in chat 2026-10-31 16:2x):** `TC_conan_build_stability_compat_perf_2026-10-26` R2 — a stone picked up in third
->   person at the default and the far zoom; AIM15 — the arrow seen leaving the bow and landing under the crosshair. **Agent's game cases still unrun there (≈ 2–3 h,
+>   person at the default and the far zoom; AIM15 — the arrow seen leaving the bow and landing under the crosshair; DM0 — F1 expands the Damage Meter: does it cover Hosav's HUD text (called 16:2x;
+>   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
+>   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own. **Agent's game cases still unrun there (≈ 2–3 h,
 >   one launch for several):** C1 Caverns of Set chest loot, C2 Highmane crossbow, C3 mod fire particles, T1 new strings, W1 NPC mods in flight, DM0 expanded
 >   Damage Meter vs Hosav HUD, B7a hub bottom bar geometry, AIM4 / AIM8 arrow-aim controls; U6 — Edit Appearance and Waystones (module names first).
 > - **FIRST next chat:** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
