@@ -137,6 +137,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   U10 — open). So a clean game copy is NOT needed: tests run on the live game, uninstall, check, reinstall (the owner 15:51: «зачем тебе чистая версия»).
 >   **The README is being rewritten from scratch by the owner's voice portrait** (plan 35 G11 item 8 — his words there): a helper reads the whole
 >   `krinik_voice/AUTHOR_STYLOMETRY.md`, a second checks; KUMM `.kaif/kaif.json` → `voicePortrait`. Next after it: the mod settings windows (W19–W22, W24).
+>   **16:31–16:4x:** the guide rewritten and checked (pack `048fb4b`), the owner's answers applied in part (two-line title, «Руководство пользователя», numbered
+>   chapters 1., 1.1 — `0539d33`); our mods renamed `KrinikConanCamera` / `KrinikConanModPackStatus` (pack `96c1c5b`, HOUSE_RULES rule 19; the owner's live
+>   `config.lua` of both carried over, seen in game 16:41); delivery names English + underscores (rule 18: `collect_report.cmd`, `uninstall_krinik_build.cmd`,
+>   `_kumm_backup`, `build_docs_and_launcher.cmd`). In progress: a helper applies the rest (our mods at the top of the one list, «вы» steps) — check its frames,
+>   commit, open the PDF for the owner. Open: the camera's Nexus draft still says ConanCameraControl (publication name — the owner's).
 > - **Waits for the owner's hands (called in chat 2026-10-31 16:2x):** `TC_conan_build_stability_compat_perf_2026-10-26` R2 — a stone picked up in third
 >   person at the default and the far zoom; AIM15 — the arrow seen leaving the bow and landing under the crosshair; DM0 — F1 expands the Damage Meter: does it cover Hosav's HUD text (called 16:2x;
 >   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
