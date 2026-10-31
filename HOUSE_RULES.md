@@ -87,6 +87,10 @@
 21. **In every Russian text of the build the slider control is «шкала»** («Текущая шкала», «на шкале», «своими шкалами») — never «ползунок» or «слайдер»;
     the owner's verbatim quotes keep their own word. (`[OWNER]` 2026-10-31 19:08 «шкала» · «везде так пишем».) Applied the same day: `Game.locres` 4 entries
     (`locres-set-tr.py`), `ru_table.lua`, `dm-fish-ru.md`, the settings-hub mockups.
+22. **The author's links (`author_links.txt`) are a SECTION OF LINKS — never «contacts», never a list under «feedback» or «куда писать».** In the README, the
+    guide and the launcher they stand under their own heading («Ссылки» / «Links», «Автор сборки и ссылки») with no sentence that calls them addresses for
+    reports; one source file feeds all three places (`build-docs.py`, `_config/public_release/mods-table.mjs`). (`[OWNER]` 2026-10-31 21:33 «ЭТО НЕ КОНТАКТЫ,
+    ПОВТОРЯЮ НАХУЙ ТЕБЕ ЕЩЕ РАЗ!» · «это просто раздел с ссылками»; earlier 11:20 «сделаешь раздел со ссылками автора».)
 19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
     mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +
