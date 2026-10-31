@@ -130,6 +130,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   `…level-uncap-live.md`). Item 28 (archive volumes) in progress 12:1x: export 73 mods ok, 19 volumes ≤ 700 MiB ok, unpack + hash compare: 223 = 223, hashes equal (report `2026-10-31_conan-build-archive-volumes.md`)
 >   (scratch `g10/` removed 12:14; cases `TC_conan_build_archive_volumes_2026-10-31.md`). Cases U2 pass (Esc mod list), U3 — ModControlPanel opens by
 >   `ActivateModule`, Russian except the English «All» filter (bug 64 item 47). Cheat-manager facts for stands — game map, last block.
+> - **Session 2026-10-31 15:36– (resume):** one build script for the delivery documents — `ConanExiles/Собрать ридми и лаунчер.cmd` (author links from
+>   `author_links.txt` → the guide's «Автор сборки» + PDF + `KrinikLauncher.exe`, plan 35 G11 item 7, pack `2336de3`); Krinik mods carry the build version
+>   **1.0.0** (seen in the pause-menu list 15:51, pack `35c96d8`); **bug 72 DONE** — the install keeps an undo journal + copies (`<game>\_kumm-backup`),
+>   «Удалить сборку Krinik.cmd» and the launcher's «Удалить сборку» return the pre-build state (KUMM `528b63e`, fixture 34/34; the live Conan folder run —
+>   U10 — open). So a clean game copy is NOT needed: tests run on the live game, uninstall, check, reinstall (the owner 15:51: «зачем тебе чистая версия»).
+>   **The README is being rewritten from scratch by the owner's voice portrait** (plan 35 G11 item 8 — his words there): a helper reads the whole
+>   `krinik_voice/AUTHOR_STYLOMETRY.md`, a second checks; KUMM `.kaif/kaif.json` → `voicePortrait`. Next after it: the mod settings windows (W19–W22, W24).
 > - **FIRST next chat:** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
 >   plan 36 item 23). (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
 >   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
