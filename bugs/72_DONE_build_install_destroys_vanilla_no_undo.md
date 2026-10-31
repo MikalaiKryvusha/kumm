@@ -1,6 +1,6 @@
 # Bug 72 — the build's install overwrote game files without copies; uninstall could not return the vanilla game
 
-**Status:** ✅ DONE [2026-10-31 16:03 +03:00] (engine; the live-game run is the open tail below) · **Severity:** S1 (the owner's game data and trust) · **Version/build:** KUMM `Deploy-ModPack.ps1` before 2026-10-31
+**Status:** ✅ DONE [2026-10-31 16:03 +03:00] (engine + the live Conan folder) · **Severity:** S1 (the owner's game data and trust) · **Version/build:** KUMM `Deploy-ModPack.ps1` before 2026-10-31
 **When/context:** 2026-10-31 15:50–15:53, the owner, on «нужна будет чистая версия?»: `[OWNER]` «получается, наша установка разрушительная?» ·
 «просто не понимаю, зачем тебе чистая версия. Такое тебе может быть нужно только, если наша сборка устанавливается разрушительно» · «без возможности
 отката без проблем на ваниль. Так?» · «возможно наш лаучер должен инсталировать сборку так на чистую верси., чтобы делать бекапы того, что нужно
@@ -34,8 +34,8 @@ vanilla movie and Engine.ini (precondition); a second deploy keeps ONE record pe
 control: `-Restore` with no journal → exit 1; `-Remove` with a journal → the same tree.
 - THREAT: a build install that cannot be undone on the player's machine.
 - PROVED-AGAINST: before the Engine.ini fix the run went red (3 checks: the `$target`/`$Target` case clash nulled the parameter); the old engine has no journal at all.
-- GAP: the live Conan folder (83 GB, real paks, the owner's settings) not yet run through deploy → uninstall.
-- ON-REAL-PATH: NOT YET.
+- GAP: a FIRST install on a vanilla folder is proven on the stand only (the live folder already carried the build: 210 replaced, 0 created).
+- ON-REAL-PATH: 2026-10-31 16:07 — the owner's Conan folder: deploy → «Удалить сборку Krinik.cmd» → 0 differences of 1728 entries.
 
 ## TWINS
 searched `Copy-Item … -Force` and `WriteAllText`/`Set-Content` into `$Target.Path` in `Deploy-ModPack.ps1` — 7 write sites, all journaled above; Export writes

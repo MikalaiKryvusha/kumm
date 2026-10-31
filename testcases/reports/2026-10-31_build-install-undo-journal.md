@@ -23,4 +23,8 @@
 
 **Traces.** The fixture folders `D:\Temp\kumm-fixture-*` (OS temp); frame `shotC/launcher-1.jpg` in the session scratchpad (deleted after the commit).
 
-**Verdict.** partial — the engine path is proven on the stand by the player's path; the live Conan folder (U10) waits.
+- 16:07 U10 `live-undo.ps1` (scratchpad): snapshot of the owner's Conan 3.0.1 folder (path · size · write time, logs excluded; game closed, machine lock)
+  → `Deploy-ModPack.ps1 -PackDir ConanExiles -Deploy -WithEngineIni` (exit 0, 38 s, journal 210 `replaced`) → `cmd /c` «Удалить сборку Krinik.cmd» with
+  Enter (exit 0, 18 s) → snapshot: 1728 = 1728 entries, 0 differences; no `_kumm-backup`, no `.cmd` left.
+
+**Verdict.** pass — the stand by the player's path and the live Conan folder: the install is undone to the exact pre-install state.

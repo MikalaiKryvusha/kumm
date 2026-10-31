@@ -1,7 +1,7 @@
 # TC — the build install is undone to the pre-build state (undo journal, uninstaller, launcher button)
 
 > **Created:** 2026-10-31 · **Parent:** bug 72 (the owner's words verbatim there)
-> **Status:** U1–U9 run 2026-10-31 15:5x–16:0x — report `testcases/reports/2026-10-31_build-install-undo-journal.md`; U10 (the live Conan folder) open
+> **Status:** U1–U9 run 2026-10-31 15:5x–16:0x — report `testcases/reports/2026-10-31_build-install-undo-journal.md`; U10 pass 16:07 on the live Conan folder
 > **Outbound:** —
 
 **Dimensions.** File state before the build: replaced (a vanilla movie, Engine.ini, modlist with the player's own pak) · created (a pak, a file in an existing EMPTY
@@ -18,4 +18,4 @@ vanilla folder, a file in new nested folders); repeat deploy; entry points: the 
 | U7 | deploy, then `-Remove` | the same tree as before, the uninstaller deleted | pass |
 | U8 | the 27 older fixture checks | still pass | pass |
 | U9 | the launcher rebuilt with «Удалить сборку» | compiles; button off when the game or the `.cmd` is absent | pass (compile + the `bin/` run without a game) |
-| U10 | the live Conan folder: full deploy → «Удалить сборку Krinik.cmd» → `-Verify` / tree compare | the folder returns to its state before the deploy | open |
+| U10 | the live Conan folder: full deploy → «Удалить сборку Krinik.cmd» → `-Verify` / tree compare | the folder returns to its state before the deploy | pass — 16:07: 1728 entries before; full deploy (exit 0, 38 s) journaled 210 replaced; «Удалить сборку Krinik.cmd» (exit 0, 18 s); 1728 after, 0 differences in path · size · write time; no `_kumm-backup`, no `.cmd` left |
