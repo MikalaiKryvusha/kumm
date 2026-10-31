@@ -115,6 +115,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **20:18 — the launcher's main button by the build state DONE** (interview 028 Q2 + the 19:57 word; pack `77f4ed7`, report
 >   `testcases/reports/2026-10-31_conan-launcher-main-button-by-state.md`, review folder `36_launcher_main_button_by_state`; snapshot a state without a game:
 >   `KRINIK_LAUNCHER_STATE=fresh|installed`). Interview 028 closed. Asked in chat 20:12, waits: the public repo's name and the archive's place (idea 23).
+> - **20:29 — the build icon: two K variants SHOWN, wait for the owner's pick** (review folder `37_build_icon_letter_K`: sheet vs the Conan C at 256/64/32,
+>   variant 1 upright, variant 2 slanted; made by ChatGPT from the game's own icon — `SvarogsDream/tools/gpt_edit.sh`, grab fixed `ab287fa`; sources and the two
+>   prompts in the pack `_config/branding/icon/`). After the pick: rounded alpha corners from the original,
+>   a multi-size `.ico` (256/64/48/32/16) into the launcher exe (`-win32icon`) and the archive.
 > - **FIRST next chat (19:58):** (0) the build ICON (launcher exe, the archive) — the letter K in the same metal as the C of the Conan Exiles icon (`[OWNER]` 19:58 «иконка сборки - такая же, как буква К, как у конана С»; idea 22). (1) ~~the launcher — «Установить сборку» hidden when installed~~ — done above. (2) Interview 028 (`interviews/interview_028_conan_launcher_and_versions.md`) — Q2 answered by that word;
 >   Q1 font, Q3 idea 23, Q4 README wait; its pictures are in `interviews/assets/028/`. Do NOT open the review page — it renders no images (KAIF #187) and its server died with an interrupted launch (`[OWNER]` 20:00 «страница интервью твоего сломана, и сервер ты стопнул - я нахуй закрыл ее»): put the questions in the chat as text and open the pictures in ImageGlass.
 >   (3) Epic 38 phases 1–2 (hub window by mockup 5, the entry button and list, the settings store) — `/dayloop` by «работай автономно» 19:19.
