@@ -1,5 +1,46 @@
 # KUMM — Project History (the chronicle)
 
+
+
+
+## 2026-10-31 21:45 +03:00 (third part) — moved from STATUS «Where to continue» at the soft closure of the chat aabd6f1c
+
+> - **21:15 — the public repo NAMED** by the owner: title «Krinik's Conan Exiles Enhanced ModPack», slug `Kriniks_Conan_Exiles_Enhanced_ModPack` (idea 23); a NEW
+>   repo with fresh history, created after the tree audit (helper) and the bilingual README by the portrait (helper draft in the scratchpad `readme\`).
+
+## 2026-10-31 21:45 +03:00 (second part) — moved from STATUS «Where to continue» at the soft closure of the chat aabd6f1c
+
+> - **The mod-settings hub look APPROVED 19:09** (mockup 5 of `ConanExiles/_config/settings_hub/mockups/mockups.html`, «Моды Krinik'а», per-author hubs, the
+>   entry button with a vertical scrolling list — the owner's words in plan 38's header). Route — a KIT window (recon `researches/conan-mod-settings-hub/
+>   mod-ui-module-registration.md`). **PHASE 0 PASSED 19:32–19:37** (pack `98a66f1`, KUMM `775925c`, report `testcases/reports/2026-10-31_conan-hub-kit-window.md`):
+>   the kit window `W_KrinikModSettings` (WindowRoot) with a game `WBP_Setting_Checkbox` row takes a REAL click both ways; its module table merges at runtime from
+>   Lua (`MergeDataTables` on `Default__ModController`, rows 117 → 118 at the main menu, survives the world load) — no ModController blueprint, no hand step;
+>   Esc closes it via the pause section's map. Open: the «Закрыть» button has no handler; the row label wraps; the row drives nothing yet. Shown: review folder
+>   `35_hub_window_first_live_click`. **Next — phase 1/2:** the window by mockup 5 (`settings_hub/mockups`), the entry button + the list, the settings store.
+>   The launcher is BUILT by mockup 11 + frame 7 (pack `3c72afd`, idea 22 «BUILT 19:20»; review folder `32_launcher_built` opened 19:2x) — open: real clicks
+>   on its buttons and a move to a monitor with another scale (unobserved).
+>   The list under «Настройки модов» (the owner 19:14–19:16): «Моды Krinik'а» · «Моды Xevyr'а» · «Рыбалка» (its own window) · «Прочее» (always last; single-mod
+>   authors) — inventory `researches/conan-mod-settings-hub/author-hub-inventory.md` (its live module-table scan is open). The slider is «шкала» everywhere
+>   (HOUSE_RULES rule 21; `Game.locres` patched, pack `c394b3a` — not yet seen in game).
+>   Idea 23 (versions on a public GitHub feed + the launcher's update check; later self-update of the launcher and the build) — awaits the owner's approval,
+>   the public repo's name and the download place.
+
+## 2026-10-31 21:44 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat aabd6f1c
+
+> - **Interview 028 ANSWERED 20:11:** Q1 A — the title stays Oswald; Q2 — NOT installed: NO «Играть» at all, the gold «Установить сборку» in its place; installed: «Установить сборку» hidden, gold «Играть» (the owner: «кнопки играть нет, пока сборка не установлена, на ее месте золотая Установить сборку»); Q3 A — do idea 23 now (ask the public repo name and the download place); Q4 «позже почитаю». The page could not UN-select a radio (owner: «снять А вариант не могу») — add to KAIF #187 family.
+> - **20:18 — the launcher's main button by the build state DONE** (interview 028 Q2 + the 19:57 word; pack `77f4ed7`, report
+>   `testcases/reports/2026-10-31_conan-launcher-main-button-by-state.md`, review folder `36_launcher_main_button_by_state`; snapshot a state without a game:
+>   `KRINIK_LAUNCHER_STATE=fresh|installed`). Interview 028 closed. Asked in chat 20:12, waits: the public repo's name and the archive's place (idea 23).
+> - **20:29 — the build icon: two K variants SHOWN, wait for the owner's pick** (review folder `37_build_icon_letter_K`: sheet vs the Conan C at 256/64/32,
+>   variant 1 upright, variant 2 slanted; made by ChatGPT from the game's own icon — `SvarogsDream/tools/gpt_edit.sh`, grab fixed `ab287fa`; sources and the two
+>   prompts in the pack `_config/branding/icon/`). After the pick: rounded alpha corners from the original,
+>   a multi-size `.ico` (256/64/48/32/16) into the launcher exe (`-win32icon`) and the archive.
+> - **FIRST next chat (19:58):** (0) the build ICON (launcher exe, the archive) — the letter K in the same metal as the C of the Conan Exiles icon (`[OWNER]` 19:58 «иконка сборки - такая же, как буква К, как у конана С»; idea 22). (1) ~~the launcher — «Установить сборку» hidden when installed~~ — done above. (2) Interview 028 (`interviews/interview_028_conan_launcher_and_versions.md`) — Q2 answered by that word;
+>   Q1 font, Q3 idea 23, Q4 README wait; its pictures are in `interviews/assets/028/`. Do NOT open the review page — it renders no images (KAIF #187) and its server died with an interrupted launch (`[OWNER]` 20:00 «страница интервью твоего сломана, и сервер ты стопнул - я нахуй закрыл ее»): put the questions in the chat as text and open the pictures in ImageGlass.
+>   (3) Epic 38 phases 1–2 (hub window by mockup 5, the entry button and list, the settings store) — `/dayloop` by «работай автономно» 19:19.
+> - **Closed entries of the chat 9c35b034 (README undo paragraph, the 18:54 NOW line, the 15:36 session, the 10 launcher mockups round, the 18:01/18:02 closure lines, phase 0 open) — moved verbatim to the chronicle, entry «moved from STATUS at the soft closure of the chat 9c35b034».**
+> - **The 16:5x closure's FIRST list — moved verbatim to the chronicle (entry of the chat 9c35b034); still open from it: the owner's verdict on the guide PDF, the emulated input that did not reach the game (16:25).**
+
 ## 2026-10-31 19:42 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat 9c35b034
 
 > - **The KUMM README undo paragraph — DONE 19:0x** by the portrait into `README.md` (after the `"export": false` paragraph; facts from `Deploy-ModPack.ps1`
