@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0403 · 2026-10-31 · ❌ · #conan #ue4ss #remote #crash
+class: unguarded-remote-read
+**Lesson:** a remote `lua` call with SEVERAL unproven names can take the whole game down, and `pcall` does not save it: 2026-10-31 08:42 a pcall-wrapped
+read of the arrow copies' attach parent returned a Lua error; the next call stacked three unknowns (`a:GetAttachParentActor()`, `t.bIsDead` on a boss,
+`K2_GetActorLocation` on each copy) and killed the game — `EXCEPTION_ACCESS_VIOLATION reading address 0x18`, a UE4SS.dll-only stack. An access
+violation in native code is not a Lua error, so `pcall` never sees it. Use only names proven on this build (`funcs <class>` of the remote, the game
+map), one unknown per call, so a crash names its culprit; after a Lua error on a name, do not retry it in a bigger call.
+**Trigger:** any `pult.sh "lua …"` touching a name not proven on this build.
+none-cheap: discipline of the call — no code can catch a native access violation from Lua
+
 ### EXP-0402 · 2026-10-31 · ❌→✅ · #conan #ue4ss #hook #blueprint
 class: bp-post-hook-silent
 **Lesson:** on Conan 3.0.1 a UE4SS `RegisterHook(<BP function>, pre, post)` on `BP_CollisionComponent_C:TakeProjectileDamage` registered fine and
