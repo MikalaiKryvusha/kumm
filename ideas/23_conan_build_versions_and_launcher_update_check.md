@@ -7,7 +7,7 @@
 > и отказ об ответственности, все моды в сборке принежат их законным правоооообладателяммм, а игра конан - ффффокскон и законным правообладатеелям, Криник не
 > притендует на владение тем, на что у него нет прав владения, мы лись собрали сборку под лицензией МИТ для ознокомления для всего человечества» · «Ридми
 > красивый, по стилометрии на основе примера того, как он написан у других публичныхх реп криника на двух языках» (2026-10-31 21:09). Before the visibility flip:
-> an audit of every tracked file AND the history for the owner's identity and the game's origin (memory rule; `steam_emu.ini` is in the manifest) — findings to
+> an audit of every tracked file AND the history for the owner's identity and the game's origin (memory rule; correction 21:20: the pack manifest has NO `steamEmu` key, now or in history — my 21:09 line said otherwise) — findings to
 > the owner first. **Changed 21:10:** `[OWNER]` «можем приватную репу удалить, сделано новую публичную Krinik ModPack for Conan Exilex Enchanced» — a NEW public
 > repository with a fresh history (the old history's traces stop mattering; the audit covers the tree that goes there). `[AI]` recommended keeping the private
 > repo as the working one (deleting it is irreversible and loses the history) and asked the slug (`Krinik_ModPack_Conan_Exiles_Enhanced` proposed, rule 18)
@@ -50,3 +50,15 @@ release a version in one step that also updates what the launchers see.
 ## Decisions made without the owner
 
 None yet — the idea waits for approval.
+
+## Public repo — audit and README draft (2026-10-31 21:2x)
+
+- **Audit of the private pack repo** (helper, read-only; the report lives in the PRIVATE pack `_config/public_release/audit_2026-10-31.md` — it quotes the traces,
+  so it never enters this public repo): NOT SAFE to open as is — the game's origin is named in about 15 tracked files, in deleted files and in commit
+  messages; a home path in two files; no SteamID, host, keys or blobs over 50 MB. The owner's 21:10 route (a NEW public repo) is the clean one: one squashed
+  commit of a cleaned tree, the private repo kept as the working one.
+- **README draft** (helper, by the portrait's writing sections; the KAIF README as the model; Russian first): pack `_config/public_release/README.draft.md`,
+  generated from `README.template.md` by `mods-table.mjs` (every shipped mod exactly once). The portrait's machine check is SKIPPED (the portrait's §8 has no
+  pattern table); the independent §7B pass by a clean helper is still owed before the owner sees it.
+- **Open for the owner:** a promise to remove a rights holder's material on request (not written — his policy); whether the public tree carries the strings
+  extracted from other authors' mods (our translations sit on them); 41 of 64 mod authors still TODO in the table; a `LICENSE` file (MIT) to add.
