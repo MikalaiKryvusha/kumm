@@ -29,7 +29,12 @@
 - «и всю миникарту правее и выше» (item 31, the owner's second word). **Tried 2026-10-31 09:51 and reverted:** the author's `LoadSettings` 0.5 (our
   row removed, pak rebuilt without `SM_UI_Minimap`) did NOT put the map into the corner — on the same 1080p frame the ring came out SMALLER (≈ 275 px
   across instead of ≈ 295) and its top ≈ 15 px LOWER; live `MinimapScale.Slot:GetPosition()` read (1595.4, 150.0). So this constant feeds the size, not
-  only the place (the 26.10 note «× 0.5 of its size» was read as place only). Next: `kismet-trace.py` of `LoadSettings` before any new value; the pak
-  was restored byte-identical.
+  only the place (the 26.10 note «× 0.5 of its size» was read as place only). The pak was restored byte-identical.
+  **`LoadSettings` traced the same day** (`patch-mod-asset.py extract Simple_Minimap SM_UI_Minimap <work>` → `uaj exports <legacy uasset> VER_UE5_6`
+  (the version argument is required — without it uaj throws IndexOutOfRange) → `kismet-trace.py … LoadSettings`): `UIscale` from the save →
+  `MinimapScale:SetUserSpecifiedScale`; `half = CanvasSlot(MinimapScale):GetSize() × UIScale × K` (K = the `Double 0.5 @uexp+40467`, our row 0.52);
+  position = `MakeVector2D(ViewportSize.X / ViewportScale − half.X, half.Y)` (alignment 0.5 → the ring touches the right and top edges at K 0.5), then the
+  drag offset `SaveGame.w_Position` when it is not (0, 0). By this formula K only moves the map, it cannot shrink it — so the 09:51 «smaller and lower»
+  frame contradicts it and is suspect (not the same moment / zoom; needs a clean A-B pair from one place). K < 0.52 moves the map right and up.
 - Marker tutorial: bullet lines late, «NEW:» English, black slides (item 4).
 - If the player toggles `bShowCoordinates` in the mod settings while playing, the plate does not follow until the minimap is re-created.
