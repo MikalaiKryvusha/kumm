@@ -22,7 +22,7 @@
 | `SM_UI_MapHelper` pak | `AddMarkerSection.HorizontalBoxSlot_5/Padding/Left` 30 → 355 | the SMM hint lay over the 3.0 vanilla «Сброс маркеров» (bugs/64 item 5) |
 | positioning bytecode | `dbl:LoadSettings` 0.5 → 0.52 | the coordinate line was cut by the screen top at 4K (item 19; the mod places the map at run time, `w_Position` drag offset in `SM_BP_SaveGame`) |
 | strings | «Ясно», «Настройки миникарты», «Донат», tutorial rows | Russian fit (items 3, 25) |
-| KrinikConanUI Lua `krinik_minimap_coords` (2026-10-31) | at each minimap creation (+600 ms): `Coordinates` moved into our `Border_KrinikCoords` (brush of `ClockBorder`) → `Border_KrinikCoordsInner` (brush of `clockInner`, padding 8/1) in `MinimapOverlay`, slot centre/top, top inset 60, font = the clock's (15); hidden coordinates keep the plate hidden | the owner 2026-10-27: «в миникарте коардинаты нужно будет переместить внутрь круга, сделать им подложку» (item 31); a new widget cannot be added by a pak property edit |
+| KrinikConanUI Lua `krinik_minimap_coords` (2026-10-31) | at each minimap creation (+600 ms): `Coordinates` moved into our `Border_KrinikCoords` (plain black, alpha 0.55, padding 10/2) in `MinimapOverlay`, slot centre/top, top inset 40, font 15; hidden coordinates keep the plate hidden. The look is the owner's pick 09:54 (`[OWNER]` «простая демная подложка, шрифт коардинат больше, плашку выше»; the clock-style plate of 09:48 was the rejected B) | the owner 2026-10-27: «в миникарте коардинаты нужно будет переместить внутрь круга, сделать им подложку» (item 31); a new widget cannot be added by a pak property edit |
 
 ## Open
 

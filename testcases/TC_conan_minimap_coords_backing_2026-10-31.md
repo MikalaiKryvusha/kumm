@@ -14,3 +14,4 @@ enemy near; frame by `capture-window.ps1`, crop of the minimap corner.
 | C3 | nothing else moved | the clock, ±, settings, the map picture at the same pixels as before | pass | before/after crops side by side: clock, ±, gear and ring at the same places |
 | C4 | cost | one rebuild per minimap creation, ≤ 1 ms, no loop | pass | one log line per creation, 1.000 ms (os.clock step 1 ms); no loop in the code |
 | C5 | 4K | the plate and text inside the ring, text ≥ 36 px letter height (rule 17) | skipped | the run was 1080p; left to the plan 35 four-resolution release gate |
+| C6 | the owner's pick 09:54: «простая демная подложка, шрифт коардинат больше, плашку выше» | a plain dark translucent plate, font 15, the plate higher inside the ring | pass | 09:55 deploy + fresh start: log «на тёмной подложке», frame `varA.webp` — black 0.55 plate, font 15, top inset 40 (was 60), inside the ring; review folder 26 file 4 |
