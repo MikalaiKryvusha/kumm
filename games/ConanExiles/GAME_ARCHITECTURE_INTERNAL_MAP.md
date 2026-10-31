@@ -62,6 +62,11 @@ Exiles Fishing (`JaarFishing`, 2026-10-26): у мода своя таблица 
 
 ## Модули интерфейса (снято 2026-10-26)
 
+Reading the rows live (2026-10-31 16:20): `StaticFindObject('/Game/UI/Data/DataTables/DT_UIModuleTable.DT_UIModuleTable'):ForEachRow(function(name,row) … end)` —
+255 rows (`GetRowNames` is not exposed to UE4SS Lua — fails). Map / minimap / meter modules: `FullscreenMap`, `PlayerMarkerDialog`, `SM_Minimap`, `SM_UI_Settings`,
+`SM_Tutorial`, `SM_MarkerTutorial`, `SM_UI_CustomMarkerMenu`, `SM_UI_AddMapMarker`, `SM_DEBUG`, `WSEMap` (Waystones map), `DN_UI_DmgWidget` (opens but does NOT
+expand the collapsed meter), `DN_UI_Settings`, `DN_UI_ColorPicker`, `DN_UI_FNContainer`, `DN_UI_FakeEmpty`; no row for Edit Appearance.
+
 255 строк живой таблицы `/Game/UI/Data/DataTables/DT_UIModuleTable` — имена модулей (игра + моды: `CharacterInventory` — хаб, `IngameMenu`,
 `HosavHUD_EnemyHealthbar` — полосы здоровья врагов Hosav, `SML_ModList`, `DN_UI_DmgWidget`, `ExilesFishingTuning`, `EAA_*` …). Открыть модуль
 прямым вызовом: `FindFirstOf('GUIModuleController'):ActivateModule(FName('CharacterInventory'), true, false)`; `false` вторым
