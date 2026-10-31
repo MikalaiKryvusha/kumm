@@ -198,7 +198,10 @@
          миникарты для лучшей читаемости» · «стрельба в прыжке — вот это скоуп сборки такой, который можно юзерам расхваливать».
          **Rewritten and checked 16:31** (pack `048fb4b`, 11 sheets). **The owner's answers 16:3x:** our mods — at the top of the one list of all mods, no separate
          «Моды Krinik» section; our mods are named `Krinik…` (`KrinikConanCamera`, `KrinikConanModPackStatus` — HOUSE_RULES rule 19); instruction steps on «вы»
-         («Откройте…») in the guide and the howto; the storefront subtitle keeps «исправления». **Next:** the mods rename (code, deploy, notes), then the guide
+         («Откройте…») in the guide and the howto; the storefront subtitle keeps «исправления». 16:36 the title in two lines, the owner's words: «Сборка модов Krinik Mod Pack 1.0.0» /
+         «для Conan Exiles Enhanced 3.0.1» (pack `1b681f3`). 16:37 «Путеводитель игрока: — это не путеводитель а Руководство пользователя» ·
+         «крупными буквами, как заголовок» · «а дальше главы 1, 2, 3, 4, 5» · 16:38 «внутри глав параграфы 1.1, 1.2, 1.3 и так далее» — done by CSS counters
+         (chapter 1 = the storefront «Возможности сборки», items 1.1…; `h2.ch` chapters, `h3` items). **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
