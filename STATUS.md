@@ -130,7 +130,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
 >   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own.
 >   The emulated-input attempt of 16:25 (the hero never drew the bow) — verbatim in the chronicle, entry 2026-10-31 16:53 +03:00.
-> - **FIRST next chat (from the 16:5x closure; the owner's «работайте автономно» 16:49 stands → `/dayloop`):** (a) the owner's verdict on the user guide PDF
+> - **FIRST next chat (from the 16:5x closure; the owner's «работайте автономно» 16:49 stands → `/dayloop`):** (a0) the design recon `researches/document-design-manuals/README.md` (a helper started 17:21 — read its checklist, apply it to the guide;
+>   the owner's 17:19–17:23 storefront rules are in plan 35 G11 item 8); (a) the owner's verdict on the user guide PDF
 >   (opened 16:5x; his remarks go to plan 35 G11 item 8, edits by a helper WITH the portrait, then an independent check); (b) the KUMM `README.md` lacks the
 >   undo journal / `-Restore` / the `uninstall` manifest key — the owner's storefront text, write it by the portrait; (c) the emulated input that did not reach
 >   the game (16:25) — fix, then the bow / F1 / stone cases; (d) the mod settings windows (W19–W22, W24) — mock-ups first.
