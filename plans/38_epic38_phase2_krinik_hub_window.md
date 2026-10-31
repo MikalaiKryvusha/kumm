@@ -30,15 +30,22 @@ left-right), ONLY the selected mod's rows on the right, each row with an «i» t
 
 ## Steps
 
-- [ ] 1. **Inventory** of our mods' settings — `researches/conan-mod-settings-hub/krinik-settings-inventory.md` (a helper, 20:2x): one row per setting,
-      where it is read, how it would apply live. Exit: the row list of the window and the store's key list.
+- [x] 1. **Inventory** of our mods' settings — DONE 20:30: `researches/conan-mod-settings-hub/krinik-settings-inventory.md` (17 file-backed rows — Camera 16,
+      ModPackManager 1; 30 code constants as candidates; the vignette has no code). **The window's rows** `[AI]` (live-applicable only; restart-only rows
+      wait): Camera A1, A2, A4, A5, A6, A7, A9, A10 · UI C1 (FPS counter — a flag added), C3, C4, C10, C12 · Graphics C13 · Archery C15, C16, C19 ·
+      ModPackManager A17. A mod enters the left list only when its apply works in game; the vignette rows come with the vignette code (plan 36 W23).
 - [x] 2. **The slider row** — DONE 20:26 by the existing recon (`researches/conan-mod-settings-hub/vanilla-settings-widgets.md`) and one kit probe
       (`KIT_WIDGETS=W_Settings_Audio kit-probe-tree.py`, 94 s): the game's sound screen uses `W_EditableLabeledSlider_C` (`/Game/UI/Framework/
       W_EditableLabeledSlider`, native `EditableLabeledSlider`: `SetValue`, `GetValue`, `MinValue`, `MaxValue`, `StepValue`, `DisplayValueScale`;
       a change fires the BP event `BndEvt__S_Value_…OnFloatValueChangedEvent…` and the native `SetValueFromSlider`) in a plain `ScrollBox`. The FLX
       button: `label` and `key_shortcut_name` set in the kit; `TryCloseWindow` closes the window; no click event Lua can hook → the LMB bind route.
-- [ ] 3. **The store** — FORK line before the choice (one file read at start by every mod vs. per-mod files; live apply across UE4SS mods). Exit: the
-      store file's path, format, the reader function each mod copies or requires, the apply path per row.
+- [ ] 3. **The store.** `FORK: options <one file Saved/KrinikSettings.lua for all mods | per-mod files> · price of error <a format change later =
+      every mod's reader edited; a mod folder file is wiped by a redeploy> · consulted <the inventory §D–E: Camera and ModPackManager already read a
+      config.lua once at load and fall back to code values; UE4SS ModRef:SetSharedVariable in our build (UEHelpers.lua:18,23)>` → `[AI]` ONE file
+      outside the mod folders, written only by the hub on «Сохранить», read by each mod at load; live apply: the UI sections directly (same Lua state),
+      the other mods check a shared version number at a moment they already run (no new timer); the camera merges its keys and calls its own `apply()`
+      (it rewrites its `config.lua` itself — the hub never writes that file). Open: does a shared variable carry a number — a one-line probe in game.
+      Exit: the store's path and format, one reader per mod, the apply route per row.
 - [ ] 4. **Kit window by mockup 5** — rewrite `kit-krinik-modsettings.py` (widgets reused by name, never removed — the GUID trap; run twice): head row
       (title TextBlock + `B_KrinikCloseNoSave`), body (left `SC_KrinikMods` with one name button per mod, clipped name boxes; right — mod name + note,
       `WS_KrinikPages` with one page per mod: per row an HB of our label + «i» button + the game row with an empty label as the control), the «i» plate
