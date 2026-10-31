@@ -2,7 +2,7 @@
 
 > **Created:** 2026-10-31 · by the owner's question 19:18 `[OWNER]` «можем нашей сборке ввести контроль версий, чтобы в будущем привязать ее к нашему репозиторию
 > ГитХаб, и чтобы лаунчер мог проверять самостоятельно, есть ли более свежая версия?» · **Parent:** idea 22 (the launcher «grows into a launcher that updates
-> itself and the build») · **Status:** ❓ awaiting the owner's approval and two answers (below) · **Outbound:** the two questions to the owner
+> itself and the build») · **Status:** ✅ APPROVED 2026-10-31 20:11 (interview 028 Q3 = A); the repo name and the download place still unanswered · **Outbound:** the two questions to the owner
 
 ## Goal vector (Achieve)
 

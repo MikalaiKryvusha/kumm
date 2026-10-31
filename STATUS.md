@@ -111,6 +111,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > commands, what to verify first.
 
 > **Older handover pointers (2026-10-30 16:55 … 2026-10-31 12:21) — collected in the chronicle, entry 2026-10-31 16:53 +03:00 (second part).**
+> - **Interview 028 ANSWERED 20:11:** Q1 A — the title stays Oswald; Q2 — NOT installed: NO «Играть» at all, the gold «Установить сборку» in its place; installed: «Установить сборку» hidden, gold «Играть» (the owner: «кнопки играть нет, пока сборка не установлена, на ее месте золотая Установить сборку»); Q3 A — do idea 23 now (ask the public repo name and the download place); Q4 «позже почитаю». The page could not UN-select a radio (owner: «снять А вариант не могу») — add to KAIF #187 family.
 > - **FIRST next chat (19:58):** (0) the build ICON (launcher exe, the archive) — the letter K in the same metal as the C of the Conan Exiles icon (`[OWNER]` 19:58 «иконка сборки - такая же, как буква К, как у конана С»; idea 22). (1) the launcher — «Установить сборку» HIDDEN when the build is installed (the game folder holds `uninstall_krinik_build.cmd`), the
 >   column closes up (`[OWNER]` 19:57, idea 22; pack `9713b7d` already has «для» removed); build `python -X utf8 _config/release/build-docs.py --no-pdf`, check by
 >   `KRINIK_LAUNCHER_SNAPSHOT=<png>;384` in both states. (2) Interview 028 (`interviews/interview_028_conan_launcher_and_versions.md`) — Q2 answered by that word;

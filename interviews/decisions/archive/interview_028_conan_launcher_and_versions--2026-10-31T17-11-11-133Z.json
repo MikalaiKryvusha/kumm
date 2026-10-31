@@ -1,0 +1,32 @@
+{
+  "kind": "interview",
+  "document": "interviews/interview_028_conan_launcher_and_versions.md",
+  "by": "Mikalai Kryvusha (KOT KRINIK)",
+  "at": "2026-10-31T17:11:11.133Z",
+  "atHuman": "31 октября 2026, 20:11 (+03:00)",
+  "comment": "",
+  "answers": {
+    "Q1": {
+      "choice": "A",
+      "text": "",
+      "comment": ""
+    },
+    "Q2": {
+      "choice": "A",
+      "text": "снять А вариант не могу, потому что твой ебучий контур интервью сломан!!!\nшрифты как в А, кнопки играть нет, пока сборка не уставнолена, на ее месте золотая Установить сборку",
+      "comment": ""
+    },
+    "Q3": {
+      "choice": "A",
+      "text": "",
+      "comment": ""
+    },
+    "Q4": {
+      "choice": "",
+      "text": "позже почитаю",
+      "comment": ""
+    }
+  },
+  "rev": "9039f32dad22a1e8ff7ffe41c7ccf7beabec5e7d44a68e36281c33faa9682d77",
+  "revAfter": "561dae69ed3c2bd4b40bf6a2c7b0f4dfb43a1279fdcd69013bd21a331ec19fdb"
+}
