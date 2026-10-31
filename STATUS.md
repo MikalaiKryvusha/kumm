@@ -126,10 +126,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (the owner 07:51); idea 22 — a GUI install wizard «сам находит, сам устанавливает» (the owner 07:55–07:56). Side: KAST had hidden the owner's desktop
 >   icons — restored (`FFlags` of the desktop bag, KAST EXP-0009); ImageGlass is the system image viewer now (the owner set the default himself, 08:21).
 > - **2026-10-31 09:03–09:3x (chat after 4f90b546):** W29 in place + fade-in 0.2 s DONE (section `krinik_shout_fade`, pack `02f4b82`, report
->   `testcases/reports/2026-10-31_conan-shout-fade-in.md`); fade-out OPEN — needs our own mirror line (plan 36 W29). The owner 09:31–09:33: HOUSE_RULES §1
+>   `testcases/reports/2026-10-31_conan-shout-fade-in.md`); fade-out DONE 09:40 by a mirror line (v2; review folder 25 «крики врагов — плавное появление и скрытие» waits for the owner's eye). The owner 09:31–09:33: HOUSE_RULES §1
 >   rule 17 (every UI on 16:9 at 720p / 1080p / 2K / 4K, Windows DPI respected), plan 35 release gate widened to four resolutions and every UI mod,
 >   idea 22 installer — DPI-aware, Svarog text sizes, a copper-gold metal frame like the Conan logos. Then «работай автономно» → `/dayloop`.
-> - **FIRST next chat:** (1) **W29 fade-out** — the mirror line (cases S6 of `TC_conan_shout_flicker_2026-10-31.md`). (2) **W13 stuck arrows** — stand 4 recipe in plan 36 W13 (a live boss frozen 6 m
+> - **FIRST next chat:** (1) the owner's eye on review folder 25 (shout fade). (2) **W13 stuck arrows** — stand 4 recipe in plan 36 W13 (a live boss frozen 6 m
 >   ahead, `mouse-seq.ps1 -Seq "lclick,wait:1500,…"`); read ONE actor per remote call and copy X/Y/Z into numbers at once (vector reads in one call came
 >   back 201 cm for all, then 0 0 0); never stack unproven names in one call (EXP-0403 — that crashed the game). (3) W4 minimap backing (kit, a new widget).
 >   (4) W37 in the settings hub — once the hub exists. (5) The release gate at 2K / 4K.
