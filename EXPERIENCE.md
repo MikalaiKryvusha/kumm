@@ -117,7 +117,7 @@ class: stale-stand
 (world time back to 1.0). Before blaming a mod for a dead input, replay the LAST sequence that worked, unchanged, and read the world time.
 **Repro:** `powershell -File _config/mouse-seq.ps1 -Seq "rdown,wait:1500,lclick,wait:400,rup,wait:500"` → the archery log «прицел: обзор …°».
 **Trigger:** a real-input stand that «does nothing» after a change of the opener.
-none-cheap: the working sequence is quoted in the archery report `2026-10-31_conan-hub-archery-aim.md`
+mechanized: `_config/aim-shot.sh` (the proven sequence + a log verdict; code 0 on a shot, 1 with the inventory open — 2026-10-31 23:28)
 
 ### EXP-0415 · 2026-10-31 · ❌→✅ · #conan #ui #kit #font #colour #hub
 class: wrong-model-of-the-frame
