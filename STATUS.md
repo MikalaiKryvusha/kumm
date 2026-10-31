@@ -134,7 +134,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   pack `75ef09f`, report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`: one store `Saved/KrinikSettings.lua` (`krinik_settings.lua`), the
 >   KrinikConanUI page live (FPS switch both ways seen, blink thresholds, menu slow-down, craft), save / reset / save-and-close / close-without-save, a restart.
 >   The Graphics page live too (blood time across Lua states by the shared `KrinikSettingsVersion`, pack `6ef5a08`).
->   Next: the camera, archery and pack manager pages (their mods read the store — step 6, the pattern of `KrinikConanGraphics` main.lua), all P cases pass by 21:4x (P3/P4 «i» hover and pin, P6, P11; the pause arms only after the hub was seen closed once — reopen it on the stand), a frame sheet beside mockup 5 for
+>   The camera, archery and pack manager pages — DONE 22:2x–22:4x (entries above); all P cases pass by 21:4x (P3/P4 «i» hover and pin, P6, P11; the pause arms only after the hub was seen closed once — reopen it on the stand), a frame sheet beside mockup 5 for
 >   the owner. Real input: start every `mouse-seq` with a dummy click (EXP-0412). Launcher: no «Удалить сборку» before install (20:43, pack `1ece886`);
 >   both icons ship, variant 1 default (20:43) — DONE, pack `6ace541` (idea 22).
 > - **THE AGENT'S since 21:11 (`[OWNER]` «эээээто все ты можешь проверить» about these four — not his hands; was «Waits for the owner's hands», 16:2x):**
@@ -143,6 +143,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
 >   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own.
 >   The emulated-input attempt of 16:25 (the hero never drew the bow) — verbatim in the chronicle, entry 2026-10-31 16:53 +03:00.
+>   **22:5x (report `testcases/reports/2026-10-31_conan-dm0-c1-probes.md`):** DM0 BLOCKED — a real F1 expands nothing (tap, after F24, 1.5 s hold); read the
+>   meter's own restore function next. C1 PARTIAL — the mod's container has no `Caverns_of_Set_Loot_Chest_Table`; the chest CDO's `LootTable` is nil like the
+>   vanilla parent's, so only a placed chest instance in the caverns decides (coordinates needed). R2 and AIM15 not taken yet.
 > - **Earlier FIRST list (still valid):** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
 >   plan 36 item 23). (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
 >   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
