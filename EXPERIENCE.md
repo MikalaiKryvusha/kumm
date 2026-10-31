@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0413 · 2026-10-31 · ❌ · #ui #taste #owner-eye #conan #hub
+class: verified-on-the-easy-case
+**Lesson:** the hub window was judged by STRUCTURE (head, list, rows, footer in place) and by FUNCTION (clicks route, values save) — five look defects
+went to the owner unseen: the window half the screen, uneven oval «i», 75-unit row gaps, a bold font instead of the mockup's light serif, a flat pale plate.
+`[OWNER]` «неужели ты сам этой некрасоты не видишь» (21:43). A UI frame is judged BESIDE its approved mockup at the same scale, with the question «where does
+the player's eye stumble» and a written list of seams (Svarog UI_RULEBOOK §10а classes) BEFORE any functional test is called done.
+**Trigger:** the first in-game frame of any window built from a mockup.
+mechanized: none — the next chat's first step in plans/38_epic38_phase2_krinik_hub_window.md
+
 ### EXP-0412 · 2026-10-31 · ❌→✅ · #conan #stand #mouse-seq #real-input
 class: wrong-api-assumption
 **Lesson:** the FIRST click of every `mouse-seq.ps1` sequence is eaten by the game's window activation: the UE4SS LMB key bind logs it, the widget under
