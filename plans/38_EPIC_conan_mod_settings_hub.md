@@ -26,6 +26,12 @@
 > «author → mods with settings» over `modpack.json` comes first — a countable list, one row per mod). The name form: `[OWNER]` «Моды Krinik'а» · «ты не видишь, как я
 > пишу чтоли?» (19:10) — «Моды <Author>'а» (an apostrophe and the Russian genitive ending: «Моды Krinik'а», «Моды Xevyr'а») in the list and in the hub title.
 > Wording rule 19:08 — the slider is «шкала» in every Russian text (HOUSE_RULES rule 21).
+> **ROUTE (19:11, `[AI]` from recon `researches/conan-mod-settings-hub/mod-ui-module-registration.md`):** the hub is a KIT window, not a Lua-built one — every mod
+> settings window of the build (Hosav, Damage Meter, fishing) is a `WindowRoot` Widget Blueprint registered by the mod's own `ModController` BP whose
+> `ModDataTableOperations` calls `MergeDataTables(DT_UIModuleTable, <mod table>)`. Ours: `W_KrinikModSettings` (the game's settings rows inside OUR window's
+> tree) + `DT_KrinikUIModule` (row `KrinikModSettings`, copied from the fishing row) + `MC_KrinikConanUI` in the KrinikConanUI kit. Next steps, in order:
+> (1) cheap probe — Lua `MergeDataTables` of a test table at startup (no editor graph needed if it works); (2) else one hand session in the kit editor for the
+> controller's one-node graph; (3) the first live test — a row of the game's checkbox INSIDE our window takes a real click (the risk the Lua spike could not pass).
 
 ## Goal vector (Achieve)
 
