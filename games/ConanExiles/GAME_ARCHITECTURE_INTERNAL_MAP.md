@@ -568,3 +568,7 @@ Temperature (2026-10-30, live + Hosav bytecode): the hero's temperature is `BPEn
 - **`WBP_QueuedNotificationWindow_C` lives under the GAME INSTANCE**, one instance from the main menu on (`…GameInstance…WBP_QueuedNotificationWindow_C_<N>`),
   visibility 4 (SelfHitTestInvisible) — whatever collapses it in the menu keeps it collapsed in the world. `KrinikMenuProbe` did so 25 s after every
   start from 2026-10-25 to 2026-10-31 (a refuted experiment left in; removed).
+- **Enemy combat shouts are SUBTITLES** (2026-10-31 08:33–08:34, a remote hook on `/Script/UMG.TextBlock:SetText` near a fighting boss): «Чтоб тебя!»,
+  «Умри!» are set into `…BP_ConanGameInstance_C_<N>.W_SubtitleEntryView_C_<N>.WidgetTree_<N>.textView` (a `GeneralText`), one new entry widget per
+  line, under the game instance. Their Russian text is not in the deployed `ru/Game.locres` as UTF-16 («побери» absent) — the source of those lines is
+  still to find. Plan 36 W29 (the «fly in» flicker) starts from this widget: its appear animation, recorded at 60 fps.
