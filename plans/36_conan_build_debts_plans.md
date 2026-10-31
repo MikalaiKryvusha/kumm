@@ -173,7 +173,7 @@ in front: the owner's screen)` |
 - [ ] Пересобрать пак, KRINIK MODIFIED, поле `krinikModified` в `modpack.json`.
 Готово: запуск — в журнале ноль строк `could not find` про `Smelter`, пак смонтирован, лагерь Wadai на месте (кадр).
 
-### 3. Г12: быстрый крафт при открытом хабе
+### 3. Г12: быстрый крафт при открытом хабе — ✅ DONE 2026-10-31 11:55 (`CRAFT_SPEEDUP = true`, report `2026-10-31_conan-craft-speed-in-inventory.md`; README of the build must say it plainly — the owner: «это будетнемного читетство»)
 Код готов: `KrinikPauseGameInMenu` 0.7.0, `CRAFT_SPEEDUP = false`, ручка `CraftingQueue.CraftTimeMultiplier`.
 - [ ] Положить в инвентарь героя материалы «Бечевки» пультом (`exec` выдачи предмета), открыть хаб, нажать «Сделать» (R) настоящим вводом в
       фоне (`PostMessage` клавиши окну игры) — пульт крафт не ставит (кейс P1).
