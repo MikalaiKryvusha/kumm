@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0404 · 2026-10-31 · ❌→✅ · #powershell #markdown #escaping
+class: escaping-layer
+**Lesson:** a PowerShell DOUBLE-quoted string treats the backtick as its escape: a markdown code span "`after.webp`" became BEL + "fter.webp"
+(`` `a ``), and "`krinik_…`" silently lost its backticks — in a test-case file and a plan row (2026-10-31 09:4x). Text with backticks goes through
+the Edit tool, or a SINGLE-quoted PowerShell string, never "…" ; after any shell edit of a markdown file grep it for control characters.
+**Repro:** `grep -c $'[\a\b\f\v]' <file>` prints 0 on a clean file.
+**Trigger:** any `.Replace("…`…")` / `-replace "…"` in PowerShell on a document.
+none-cheap: the Edit tool is the guard; the control-character grep is the check
+
 ### EXP-0403 · 2026-10-31 · ❌ · #conan #ue4ss #remote #crash
 class: unguarded-remote-read
 **Lesson:** a remote `lua` call with SEVERAL unproven names can take the whole game down, and `pcall` does not save it: 2026-10-31 08:42 a pcall-wrapped
