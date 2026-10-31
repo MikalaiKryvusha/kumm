@@ -63,8 +63,8 @@ relies entirely on this document to get to work.
 > backlog, committing progress and self-restarting after each task. Stop only on the skill's stop
 > conditions. Do not enter a loop if the human just gave a specific interactive task.
 > **In KUMM the owner's «работай автономно» / «работай сам» / «автопилот» IS the order to enter `/dayloop` at once — after the tasks of the same
-> message, never instead of the loop.** The loop ends only by his word or by the context-budget closure (75 % → `/end-chat-soft`, whose farewell
-> the farewell hook files). The mechanical half — `tools/hooks/autonomy-guard.mjs` (Stop + UserPromptSubmit) refuses a voluntary stop while the
+> message, never instead of the loop.** The loop ends only by his word or by the context-budget closure (85 % → `/end-chat-soft` / `-force`, whose farewell
+> the farewell hook files; 70 % and 75 % are warnings only — `[OWNER]` 2026-10-31 21:26, verbatim in `CLAUDE.md`). The mechanical half — `tools/hooks/autonomy-guard.mjs` (Stop + UserPromptSubmit) refuses a voluntary stop while the
 > order stands. `[OWNER]` 2026-10-30 · verbatim in the hook header; the miss it closes — EXP-0379.
 > **Any «…автономно» is the order** («гоу автономно», «давай автономно»), and **an interrupt (Esc) or a task given mid-loop («чини») does not end it**:
 > do the task, then go back into the loop in the same turn — only «стоп» or the closure ends it (EXP-0388, the guard's pattern widened the same day).

@@ -470,7 +470,9 @@ try {
   check('no marker: the stop passes', stop(50), 'pass');
   prompt('работай автономно');
   check('«работай автономно» → a stop at 68 % is blocked: work on', stop(68), 'block-work');
-  check('at 76 % the stop is blocked: close the chat', stop(76), 'block-close');
+  // 2026-10-31 21:26 the owner: «на 70 и 75 я просил лишь предупреждать, а не закрываться» — 76 % is still work; the closure moved to 85 %
+  check('at 76 % the stop is blocked: work on (75 % only warns)', stop(76), 'block-work');
+  check('at 86 % the stop is blocked: close the chat', stop(86), 'block-close');
   check('a declared autonomy-pause passes', stop(68, { last_assistant_message: 'Всё ждёт владельца. <!-- autonomy-pause: нужен его вход в Steam -->' }), 'pass');
   check('a turn that ran /end-chat-soft passes', stop(80, {}, [JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', name: 'Skill', input: { skill: 'end-chat-soft' } }] } })]), 'pass');
   check('…and the closure switched the mode off', stop(68), 'pass');

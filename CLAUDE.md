@@ -4,6 +4,6 @@ This project is KAIF-wrapped. Before every task read `AGENT_GUIDE.md` (the canon
 
 A message that opens with the word `resume` (or the /resume alias of your language) is an ORDER to run /resume in full before the rest of the message (`AGENT_GUIDE.md` → "A leading skill word is an order").
 
-Obey the context-budget hook's hint at once: at 75 % — bring the work to a clean cut and close the chat with a handover (`/end-chat-soft`); at 85 % — close immediately (`/end-chat-force`). The hook only hints; the agent closes the chat itself.
+The context-budget hook warns at 70 % and 75 % — warnings only: keep working at the normal pace and keep `STATUS.md` fresh after each cut. At 85 % close the chat with a handover (`/end-chat-soft` if a cut is near, otherwise `/end-chat-force`). (`[OWNER]` 2026-10-31 21:26 «на 70 и 75 я просил лишь предупреждать, а не закрываться» · «ты слишком рано закрываешься».)
 
 Talk to the owner in Russian in chat; write every project and KAIF document in English (the owner's verbatim quotes and interviews stay Russian).
