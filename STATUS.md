@@ -119,7 +119,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   variant 1 upright, variant 2 slanted; made by ChatGPT from the game's own icon — `SvarogsDream/tools/gpt_edit.sh`, grab fixed `ab287fa`; sources and the two
 >   prompts in the pack `_config/branding/icon/`). After the pick: rounded alpha corners from the original,
 >   a multi-size `.ico` (256/64/48/32/16) into the launcher exe (`-win32icon`) and the archive.
-> - **PARKED 21:09 — the hub's Archery page:** nothing edited yet; the reader goes into `KrinikConanArchery/ue4ss/Scripts/main.lua` after `log` (line 147) by the
+> - **21:15 — the public repo NAMED** by the owner: title «Krinik's Conan Exiles Enhanced ModPack», slug `Kriniks_Conan_Exiles_Enhanced_ModPack` (idea 23); a NEW
+>   repo with fresh history, created after the tree audit (helper) and the bilingual README by the portrait (helper draft in the scratchpad `readme\`).
+> - **Archery page — code WRITTEN 21:15 (was PARKED 21:09)**, pack uncommitted, game test in progress: the reader went into `KrinikConanArchery/ue4ss/Scripts/main.lua` after `log` (line 147) by the
 >   `KrinikConanGraphics` pattern (`read_store` + `settings_check`), keys `arc_ballistics` → `CFG.ballistics` (read per arrow, l. 337), `arc_nobreak` →
 >   `CFG.no_break` (l. 277), `arc_fov` → `CFG.aim_fov_deg` (aim event, l. 742); then `LIVE.arc = true`. Switched to: the pack repo goes public with a
 >   bilingual README (idea 23, the owner 21:09) — audit first.

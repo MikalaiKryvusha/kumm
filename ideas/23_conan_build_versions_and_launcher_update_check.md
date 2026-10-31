@@ -11,7 +11,8 @@
 > the owner first. **Changed 21:10:** `[OWNER]` «можем приватную репу удалить, сделано новую публичную Krinik ModPack for Conan Exilex Enchanced» — a NEW public
 > repository with a fresh history (the old history's traces stop mattering; the audit covers the tree that goes there). `[AI]` recommended keeping the private
 > repo as the working one (deleting it is irreversible and loses the history) and asked the slug (`Krinik_ModPack_Conan_Exiles_Enhanced` proposed, rule 18)
-> · **Outbound:** the slug and the keep-or-delete of the private repo — asked in chat 21:10
+> · **NAMED 21:15:** `[OWNER]` «Krinik's Conan Exiles Enhanced ModPack» и адрес Kriniks_Conan_Exiles_Enhanced_ModPack · **Outbound:** keep-or-delete of the
+> private repo (`[AI]` keep — not answered)
 
 ## Goal vector (Achieve)
 
