@@ -131,7 +131,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   idea 22 installer — DPI-aware, Svarog text sizes, a copper-gold metal frame like the Conan logos. Then «работай автономно» → `/dayloop`.
 > - **09:44–09:50 `/dayloop`:** W4 minimap coordinates inside the ring on a clock-style plate — section `krinik_minimap_coords` (pack `1e2ab51`, cases
 >   `TC_conan_minimap_coords_backing_2026-10-31.md` C1–C4; notes `games/ConanExiles/mods/Simple_Minimap.md` new); «правее и выше» still open.
-> - **FIRST next chat:** (1) the owner's eye on review folders 25 (shout fade) and the minimap coordinates — the owner already picked 09:54 (plain dark plate, font 15, higher; pack `6b3c041`). W4 «правее и выше» — formula traced (`Simple_Minimap.md`), needs a clean A-B pair. (2) **W13 stuck arrows** — stand 4 recipe in plan 36 W13 (a live boss frozen 6 m
+> - **FIRST next chat:** (1) the owner's eye on review folders 25 (shout fade) and the minimap coordinates — the owner already picked 09:54 (plain dark plate, font 15, higher; pack `6b3c041`). W4 fully done 10:03 (corner by render shift, rounded tight plate, font 12; pack `9d975f8`). (2) **W13 stuck arrows** — stand 4 recipe in plan 36 W13 (a live boss frozen 6 m
 >   ahead, `mouse-seq.ps1 -Seq "lclick,wait:1500,…"`); read ONE actor per remote call and copy X/Y/Z into numbers at once (vector reads in one call came
 >   back 201 cm for all, then 0 0 0); never stack unproven names in one call (EXP-0403 — that crashed the game). (3) W4 minimap backing (kit, a new widget).
 >   (4) W37 in the settings hub — once the hub exists. (5) The release gate at 2K / 4K.

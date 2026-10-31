@@ -22,7 +22,7 @@
 | `SM_UI_MapHelper` pak | `AddMarkerSection.HorizontalBoxSlot_5/Padding/Left` 30 → 355 | the SMM hint lay over the 3.0 vanilla «Сброс маркеров» (bugs/64 item 5) |
 | positioning bytecode | `dbl:LoadSettings` 0.5 → 0.52 | the coordinate line was cut by the screen top at 4K (item 19; the mod places the map at run time, `w_Position` drag offset in `SM_BP_SaveGame`) |
 | strings | «Ясно», «Настройки миникарты», «Донат», tutorial rows | Russian fit (items 3, 25) |
-| KrinikConanUI Lua `krinik_minimap_coords` (2026-10-31) | at each minimap creation (+600 ms): `Coordinates` moved into our `Border_KrinikCoords` (plain black, alpha 0.55, padding 10/2) in `MinimapOverlay`, slot centre/top, top inset 40, font 15; hidden coordinates keep the plate hidden. The look is the owner's pick 09:54 (`[OWNER]` «простая демная подложка, шрифт коардинат больше, плашку выше»; the clock-style plate of 09:48 was the rejected B) | the owner 2026-10-27: «в миникарте коардинаты нужно будет переместить внутрь круга, сделать им подложку» (item 31); a new widget cannot be added by a pak property edit |
+| KrinikConanUI Lua `krinik_minimap_coords` (2026-10-31) | at each minimap creation (+600 ms): `Coordinates` moved into our `Border_KrinikCoords` (plain black 0.55, RoundedBox r 6, padding 4/0) in `MinimapOverlay`, slot centre/top, top inset 52, font 12; `MinimapScale` RenderTranslation (+22, −20) — tighter into the corner (the owner 09:58–10:01, cases C7–C8); hidden coordinates keep the plate hidden. The look is the owner's pick 09:54 (`[OWNER]` «простая демная подложка, шрифт коардинат больше, плашку выше»; the clock-style plate of 09:48 was the rejected B) | the owner 2026-10-27: «в миникарте коардинаты нужно будет переместить внутрь круга, сделать им подложку» (item 31); a new widget cannot be added by a pak property edit |
 
 ## Open
 
@@ -34,7 +34,10 @@
   (the version argument is required — without it uaj throws IndexOutOfRange) → `kismet-trace.py … LoadSettings`): `UIscale` from the save →
   `MinimapScale:SetUserSpecifiedScale`; `half = CanvasSlot(MinimapScale):GetSize() × UIScale × K` (K = the `Double 0.5 @uexp+40467`, our row 0.52);
   position = `MakeVector2D(ViewportSize.X / ViewportScale − half.X, half.Y)` (alignment 0.5 → the ring touches the right and top edges at K 0.5), then the
-  drag offset `SaveGame.w_Position` when it is not (0, 0). By this formula K only moves the map, it cannot shrink it — so the 09:51 «smaller and lower»
-  frame contradicts it and is suspect (not the same moment / zoom; needs a clean A-B pair from one place). K < 0.52 moves the map right and up.
+  drag offset `SaveGame.w_Position` when it is not (0, 0). Live 09:58 (one launch, A-B by the remote): K 0.52 → slot (1589.4, 156.0), size 353, UIScale
+  0.85 → half 150 units drawn, the ring's right edge 6 units from the screen edge; `SetPosition(1595.4, 150.0)` (= K 0.5) left the ring's right edge at
+  the same pixel (x ≈ 1900 of 1920) and drew the ring SMALLER and lower — the map is clamped by the screen edge, it does not slide past it. So the
+  09:51 «smaller and lower» frame was right (a line written here at 09:53 called it suspect — corrected 09:59), and the map is already in the corner:
+  «правее и выше» cannot be had from K; frames `cmp_k` → review folder 26 file 5.
 - Marker tutorial: bullet lines late, «NEW:» English, black slides (item 4).
 - If the player toggles `bShowCoordinates` in the mod settings while playing, the plate does not follow until the minimap is re-created.
