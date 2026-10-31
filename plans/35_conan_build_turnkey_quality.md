@@ -205,7 +205,9 @@
          «Вот это все не параграфы, а подзаголовки пунктов!!!» — the storefront items on the title sheet carry NO numbers (`.features h3::before { content: none }`,
          pack after `9b686b5`); numbering starts in the chapters (6.1, 6.2 …). 17:21 on the kicker line «CONAN EXILES ENHANCED 3.0.1 · СБОРКА МОДОВ · ВЕРСИЯ 1.0.0» above the
          title: `[OWNER]` «вот это нахуя если сантиметром ниже то же самое написано заголовком?» · «нахуя ты повторяешься????» — removed; the rule: nothing
-         in the guide is said twice (a line that repeats a heading, a number or a fact standing nearby goes). Design recon — `researches/document-design-manuals/`. **Next:** the mods rename (code, deploy, notes), then the guide
+         in the guide is said twice (a line that repeats a heading, a number or a fact standing nearby goes). Design recon — `researches/document-design-manuals/`. 17:22 on the figures block
+         «64 · 7 · 10 000 уровней прокачки героя»: `[OWNER]` «каким богом тут маленький факт об одном моде к метаинформации о сборке?» — the build's figures
+         carry only facts about the BUILD; one mod's property belongs to that mod's section (pack `430413a`). **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
