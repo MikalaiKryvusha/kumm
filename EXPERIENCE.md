@@ -98,7 +98,7 @@ by the next full rebuild — found only because a later rebuild was regress-chec
 move as any direct `.locres` fix, and prove it by a full rebuild + `vanilla-override.py` + `locres-regress.py` → «пропало 0, изменилось 0».
 **Repro:** the localization README steps 1–6а, then `python -I -X utf8 _config/devkit/locres-regress.py _config/localization/Game/ru/Game.locres <full rebuild>`.
 **Trigger:** `locres-set-tr.py` on `Game.locres`.
-none-cheap: the full-rebuild regress (≈ 3 min) is the check; `locres-set-tr.py` could refuse without a matching `.tsv` edit
+mechanized: `_config/devkit/locres-set-tr.py` stops with code 3 while the old text still stands in `dm-fish-ru.tsv`, `vanilla-overrides-ru.tsv` or the Hosav interviews (proven both ways 2026-10-31 23:2x)
 
 ### EXP-0417 · 2026-10-31 · ❌→✅ · #conan #stand #save #owner-world
 class: stand-differs-from-owner-world
