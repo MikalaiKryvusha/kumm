@@ -69,8 +69,8 @@ Krinik... получают версию 3.0.1» · 2026-10-28, chronicle) in the
   survive detached at 0 0 0 (why ours survive is not known; they still carry the lifespan). Keeping arrows on the corpse would be a new feature (re-attach to
   the corpse's mesh at the same bone) — not started.
 - A humanoid (P7) not run yet.
-- Open: on a 1080p crop of the frozen boss no arrow was visible on the arm while 3 copies lived — where the copy draws relative to the bone (its
-  relative location) is the next read; the owner's symptom (arrows hanging in the air beside a Kappa) — plan 36 W13.
+- Answered 2026-10-31: «no arrow visible on the frozen boss's arm while 3 copies lived» — the copies were born ≈ 1.8 m short of the hit, so they hung in the
+  air before the body, out of that crop (the bullet «The copy is born ≈ 1.8 m SHORT» above).
 
 ## Open
 
