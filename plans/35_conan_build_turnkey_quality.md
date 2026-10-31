@@ -201,7 +201,9 @@
          («Откройте…») in the guide and the howto; the storefront subtitle keeps «исправления». 16:36 the title in two lines, the owner's words: «Сборка модов Krinik Mod Pack 1.0.0» /
          «для Conan Exiles Enhanced 3.0.1» (pack `1b681f3`). 16:37 «Путеводитель игрока: — это не путеводитель а Руководство пользователя» ·
          «крупными буквами, как заголовок» · «а дальше главы 1, 2, 3, 4, 5» · 16:38 «внутри глав параграфы 1.1, 1.2, 1.3 и так далее» — done by CSS counters
-         (chapter 1 = the storefront «Возможности сборки», items 1.1…; `h2.ch` chapters, `h3` items). **Next:** the mods rename (code, deploy, notes), then the guide
+         (chapter 1 = the storefront «Возможности сборки»; `h2.ch` chapters, `h3` items). 17:19–17:20 `[OWNER]` «На титульном листе это НЕ ПАРАГРАФЫ!!!» ·
+         «Вот это все не параграфы, а подзаголовки пунктов!!!» — the storefront items on the title sheet carry NO numbers (`.features h3::before { content: none }`,
+         pack after `9b686b5`); numbering starts in the chapters (6.1, 6.2 …). **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
