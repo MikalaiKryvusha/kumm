@@ -2,7 +2,13 @@
 
 > **Created:** 2026-10-31 · by the owner's question 19:18 `[OWNER]` «можем нашей сборке ввести контроль версий, чтобы в будущем привязать ее к нашему репозиторию
 > ГитХаб, и чтобы лаунчер мог проверять самостоятельно, есть ли более свежая версия?» · **Parent:** idea 22 (the launcher «grows into a launcher that updates
-> itself and the build») · **Status:** ✅ APPROVED 2026-10-31 20:11 (interview 028 Q3 = A); the repo name and the download place still unanswered · **Outbound:** the two questions to the owner
+> itself and the build») · **Status:** ✅ APPROVED 2026-10-31 20:11 (interview 028 Q3 = A); **the repo answered 21:09** — the existing pack repo `MikalaiKryvusha/conan-exiles-modpack`
+> made public, with a README: `[OWNER]` «у нас уже есть репа сборки, можем просто сделать её публичной и написать ридми и в ридми обязательно написать дисклеймер
+> и отказ об ответственности, все моды в сборке принежат их законным правоооообладателяммм, а игра конан - ффффокскон и законным правообладатеелям, Криник не
+> притендует на владение тем, на что у него нет прав владения, мы лись собрали сборку под лицензией МИТ для ознокомления для всего человечества» · «Ридми
+> красивый, по стилометрии на основе примера того, как он написан у других публичныхх реп криника на двух языках» (2026-10-31 21:09). Before the visibility flip:
+> an audit of every tracked file AND the history for the owner's identity and the game's origin (memory rule; `steam_emu.ini` is in the manifest) — findings to
+> the owner first · **Outbound:** the audit's findings to the owner before the flip
 
 ## Goal vector (Achieve)
 

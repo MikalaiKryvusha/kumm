@@ -119,6 +119,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   variant 1 upright, variant 2 slanted; made by ChatGPT from the game's own icon — `SvarogsDream/tools/gpt_edit.sh`, grab fixed `ab287fa`; sources and the two
 >   prompts in the pack `_config/branding/icon/`). After the pick: rounded alpha corners from the original,
 >   a multi-size `.ico` (256/64/48/32/16) into the launcher exe (`-win32icon`) and the archive.
+> - **PARKED 21:09 — the hub's Archery page:** nothing edited yet; the reader goes into `KrinikConanArchery/ue4ss/Scripts/main.lua` after `log` (line 147) by the
+>   `KrinikConanGraphics` pattern (`read_store` + `settings_check`), keys `arc_ballistics` → `CFG.ballistics` (read per arrow, l. 337), `arc_nobreak` →
+>   `CFG.no_break` (l. 277), `arc_fov` → `CFG.aim_fov_deg` (aim event, l. 742); then `LIVE.arc = true`. Switched to: the pack repo goes public with a
+>   bilingual README (idea 23, the owner 21:09) — audit first.
 > - **21:01 — the «Моды Krinik'а» hub window by mockup 5 BUILT and walked in game (first batch, partial)** — plan `plans/38_epic38_phase2_krinik_hub_window.md`,
 >   pack `75ef09f`, report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`: one store `Saved/KrinikSettings.lua` (`krinik_settings.lua`), the
 >   KrinikConanUI page live (FPS switch both ways seen, blink thresholds, menu slow-down, craft), save / reset / save-and-close / close-without-save, a restart.
