@@ -18,6 +18,11 @@
 > 19:06 `[OWNER]` «Кнопки сохранить и закрыть - внизу справа» · «закрыть без сохранения - вверху справа» · «Название пода не капсом» — bottom right «Сохранить»
 > and «Сохранить и закрыть» (`[AI]` read as two buttons; one «Сохранить и закрыть» if he says so), top right «Закрыть без сохранения», bottom left «Сбросить к
 > исходным»; the mod name over the rows in normal case. So values are NOT applied live: changes wait for «Сохранить» (criterion 4 reads «saved by the button»).
+> **APPROVED 19:09** `[OWNER]` «макет одобрен» · «делаем» — mockup 5 (+ the 19:06 buttons) is the hub look. 19:09 the entry: `[OWNER]` «а попасть в конкретный хаб
+> модов - в окне персонажа внизу кнопка Настройки модов - клик по ней открывает вертикальный скролящсок-дроп-даун» — the hero window's bottom bar gets ONE button
+> «Настройки модов»; a click opens a VERTICAL SCROLLING drop-down list of the author hubs (phase 1 = criteria 1–2, the list scrolls when it is long).
+> 19:10 `[OWNER]` «кликаешь по Моды Krinik'а - открывается его окно-хаб» — an entry of the list opens that author's hub window.
+> Wording rule 19:08 — the slider is «шкала» in every Russian text (HOUSE_RULES rule 21).
 
 ## Goal vector (Achieve)
 
