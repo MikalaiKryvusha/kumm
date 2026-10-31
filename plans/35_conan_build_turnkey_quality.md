@@ -223,7 +223,10 @@
          прокачивать героя, наслаждаться его постоянной прогрессией, которая влияет на способности героя, которые реально видны в действии, герой быстрее бегает,
          выше и дальше прыгает, лучше стреляет из лука и так далее». Each storefront block: first what the player gets and feels, then briefly how it is built. 17:34 for the «Интерфейс» block: `[OWNER]` «тут не хочешь
          написать про то, что была проделана колоссальная работа по исправлению дефектов в различных элементах графического пользовательского интерфейса с целью
-         повышения его удобства, читаемости, устранения дефектов и приведения его к одному стилю игры Конан?» **Next:** the mods rename (code, deploy, notes), then the guide
+         повышения его удобства, читаемости, устранения дефектов и приведения его к одному стилю игры Конан?» · 17:34 the launcher is
+         `KrinikConanLauncher` (pack `526129c`) · 17:35 «Если игра упала» — «Не если упала. А руководство по отзывам и обратной связи» (chapter 2 and the
+         archive file `feedback_howto.txt`, pack `d573a7f`). Design recon done — `researches/document-design-manuals/README.md`; open for the owner: GOST 2.105
+         numbers headings WITHOUT a dot («1 Установка», «6.1 …») while the guide has «1.» — his call. **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
