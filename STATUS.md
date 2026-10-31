@@ -111,8 +111,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > commands, what to verify first.
 
 > **Older handover pointers (2026-10-30 16:55 … 2026-10-31 12:21) — collected in the chronicle, entry 2026-10-31 16:53 +03:00 (second part).**
-> - **PARKED 2026-10-31 18:54 — the KUMM README undo paragraph** (journal `_kumm_backup\journal.txt`, `-Restore -GameDir`, manifest `uninstall` key; facts at
->   `Deploy-ModPack.ps1` lines 108–233, 987–1013, 1585) — not started; write by the portrait when taken back.
+> - **The KUMM README undo paragraph — DONE 19:0x** by the portrait into `README.md` (after the `"export": false` paragraph; facts from `Deploy-ModPack.ps1`
+>   108–233, 987–1013); voice-lint SKIPPED=3 (the portrait's §8 has no pattern table); a clean-instance §7B pass found 11 hits, all applied. The owner's proofread is open.
+> - **4 mockups of the «Моды Krinik» settings window shown 18:5x** (folder `33_krinik_mods_settings_window_4_mockups`; plan 38 header) — wait for the pick.
 > - **NOW (18:54, `/dayloop` by «работай автономно» 18:53): the mod settings window — epic 38** (`[OWNER]` «нас ждет большой долг - окно настройки модов» · 18:54;
 >   «рыболку можно не троггггггать, оно красивое» · 18:54 — the fishing window stays as is, it is the look's model). Plan `plans/38_EPIC_conan_mod_settings_hub.md`,
 >   phase 0 `plans/38_epic38_phase0_widget_spike.md`. In flight in parallel: a helper rebuilds `KrinikConanLauncher.cs` by the approved mockup 11 + frame 7 (pack).
