@@ -22,6 +22,9 @@
 > модов - в окне персонажа внизу кнопка Настройки модов - клик по ней открывает вертикальный скролящсок-дроп-даун» — the hero window's bottom bar gets ONE button
 > «Настройки модов»; a click opens a VERTICAL SCROLLING drop-down list of the author hubs (phase 1 = criteria 1–2, the list scrolls when it is long).
 > 19:10 `[OWNER]` «кликаешь по Моды Krinik'а - открывается его окно-хаб» — an entry of the list opens that author's hub window.
+> 19:10 `[OWNER]` «и так по всем авторам, чьи моды есть в сборке и имеют настройки» — a hub for EVERY author of the build whose mods have settings (an inventory
+> «author → mods with settings» over `modpack.json` comes first — a countable list, one row per mod). The name form: `[OWNER]` «Моды Krinik'а» · «ты не видишь, как я
+> пишу чтоли?» (19:10) — «Моды <Author>'а» (an apostrophe and the Russian genitive ending: «Моды Krinik'а», «Моды Xevyr'а») in the list and in the hub title.
 > Wording rule 19:08 — the slider is «шкала» in every Russian text (HOUSE_RULES rule 21).
 
 ## Goal vector (Achieve)
