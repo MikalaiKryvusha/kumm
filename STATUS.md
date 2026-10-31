@@ -117,22 +117,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (pack `6cff449`). Next, in order: (1) the independent §7B voice check of the README (helper running at the close) → (2) show the README to the owner
 >   (his text) → (3) `python -I -X utf8 _config/public_release/make_public_tree.py <fresh dir>` (exit 0) → `git init`, one commit, `gh repo create
 >   MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --public`, push → (4) the 1.0.0 archive as a release of that repo (idea 23 update check).
-> - **Archery page — code in pack `3d183e2`; load read + save seen, the in-world re-read NOT observed (report A1):** the aim never started after the hub
->   was opened and closed by the remote — hypothesis (horses first): the remote's `ActivateModule(CharacterInventory, false)` leaves the game in UI input;
->   the arrow-push runs of 10-31 aimed with a bare `rdown` in a world never touched by the hub. Next try: a fresh launch, save by the hub, relaunch, aim.
->   The reader went into `KrinikConanArchery/ue4ss/Scripts/main.lua` after `log` (line 147) by the
->   `KrinikConanGraphics` pattern (`read_store` + `settings_check`), keys `arc_ballistics` → `CFG.ballistics` (read per arrow, l. 337), `arc_nobreak` →
->   `CFG.no_break` (l. 277), `arc_fov` → `CFG.aim_fov_deg` (aim event, l. 742); then `LIVE.arc = true`. Switched to: the pack repo goes public with a
->   bilingual README (idea 23, the owner 21:09) — audit first.
+> - **2026-10-31 22:45 — the Archery page's in-world re-read SEEN** (report `testcases/reports/2026-10-31_conan-hub-archery-aim.md`): FOV 60 saved in the
+>   hub, the inventory closed by the remote (world time back to 1.0), then the morning's bare sequence `rdown,wait:1500,lclick,wait:400,rup` — the log
+>   «настройки окна: … обзор 60° (номер настроек …)», «прицел: обзор 60.0°», the arrow flew. The evening's failure was the stand's opener (`kdown 1`, a
+>   middle click, a real `I`), not the mod. Every reader of the hub is now observed in game (plan 38 step 6 done).
 > - **2026-10-31 22:2x — the owner's five remarks on the hub window's look: FIXED, waits for his eye** (pack `5f497ce`, report
 >   `testcases/reports/2026-10-31_conan-hub-look.md`, review folder `39_hub_look` with `what_to_look_at.md`): height by the tallest live page, Noto Sans
 >   regular (the labels had been the ENGINE's Roboto Bold; the game's serifs have no Cyrillic), rows twice denser, round «i», a dark opaque plate with a
->   gold rim at the cursor, the vanity camera no longer hides the window. Next: the public repo (README in review folder `38_public_readme` — his read),
->   the archery aim stand (the Archery page's in-world re-read is the last unobserved reader).
+>   gold rim at the cursor, the vanity camera no longer hides the window. Next: the public repo (README in review folder `38_public_readme` — his read).
 > - **2026-10-31 22:4x — the HUD-size row of the hub is live** (KrinikConanModPackManager reads `mpm_hud_scale`; report
 >   `testcases/reports/2026-10-31_conan-hub-mpm-page.md`, pass). The window now has five live pages: camera, UI, archery, pack manager, graphics.
-> - **2026-10-31 22:3x — the camera page of the hub is live** (report `testcases/reports/2026-10-31_conan-hub-camera-page.md`, partial — C8's unmoved branch):
->   the camera keeps its own `config.lua`, publishes `KrinikCameraValues`, takes `KrinikCameraSet` when a game window closes. The owner's live camera
+> - **2026-10-31 22:3x — the camera page of the hub is live** (report `testcases/reports/2026-10-31_conan-hub-camera-page.md`, pass, C1–C10):
+>   the camera keeps its own `config.lua`, publishes `KrinikCameraValues`, takes `KrinikCameraSet` when a game window closes and only when a camera row changed. The owner's live camera
 >   `config.lua` (height 80) was put back byte-equal after the run.
 > - **21:01 — the «Моды Krinik'а» hub window by mockup 5 BUILT and walked in game (first batch, partial)** — plan `plans/38_epic38_phase2_krinik_hub_window.md`,
 >   pack `75ef09f`, report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`: one store `Saved/KrinikSettings.lua` (`krinik_settings.lua`), the

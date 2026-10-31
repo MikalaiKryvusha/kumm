@@ -75,11 +75,11 @@ left-right), ONLY the selected mod's rows on the right, each row with an «i» t
       the hovered button (close-without-save, save, save-and-close, reset, a mod name, an «i»); while the window is open ONLY: a 50 ms watch for the «i»
       hover and the marquee of a long name; labels and «i» texts from one table; pending values kept until «Сохранить»; Save writes the store and calls
       each mod's apply. Exit: `check-lua-game-thread.py` 0; the section's log names every routed click.
-- [ ] 6. **The mods read the store** (only those whose rows exist): at start and on the apply call. Exit: each mod's log line with the value it took.
-      Progress: Graphics (`gfx_blood`, 21:08) and Archery (`arc_*`, code, the in-world re-read not observed) read the store; the CAMERA does not —
+- [x] 6. **The mods read the store** (only those whose rows exist): at start and on the apply call. Exit: each mod's log line with the value it took.
+      Progress: Graphics (`gfx_blood`, 21:08) and Archery (`arc_*`; the re-read at an aim seen 2026-10-31 22:45, report `2026-10-31_conan-hub-archery-aim.md`) read the store; the CAMERA does not —
       it keeps its own `config.lua` and trades values with the window through shared variables (`KrinikCameraValues` / `KrinikCameraSet`, 2026-10-31
       22:3x, cases `TC_conan_hub_camera_page_2026-10-31.md` C1–C7 pass); ModPackManager reads `mpm_hud_scale` (22:4x, `TC_conan_hub_mpm_page_2026-10-31.md`
-      M1–M5 pass). Left: Archery's in-world re-read (the aim stand).
+      M1–M5 pass). DONE 2026-10-31 22:4x — every reader observed in game.
 - [ ] 7. **Test batch in the game** (machine lock, save copy, background launch, real mouse by `mouse-seq.ps1`): cases of criteria 1–7 written first into
       `testcases/TC_conan_hub_phase2_<date>.md`; frames at 1080p and 4K; video of the clicks (house rule 4). Exit: every case with a status.
 - [ ] 8. **Show and record**: review folder with the frames beside mockup 5; the mod notes, bug 64 / plan 36 rows, the guide section (house rule 20).

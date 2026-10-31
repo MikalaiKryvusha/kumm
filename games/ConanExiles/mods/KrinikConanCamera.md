@@ -31,7 +31,9 @@ and changed by the window (`HUB_KEYS` in `main.lua`): `offset_z` → `cam_height
 - The window's «Сохранить» sets `KrinikCameraSet` (all eight rows, rounded to the row's step) and bumps `KrinikSettingsVersion`; the camera takes it in a
   pre-hook of `GUIModuleController:ActivateModule` when a window CLOSES (no timer): cfg, `apply(moved)` (the distance only when the window changed
   it — the wheel's distance is kept otherwise), `write_config`. Log line «ОКНО «Моды Krinik'а»: принято 8 настроек …».
-- Cases `testcases/TC_conan_hub_camera_page_2026-10-31.md` (C1–C7 pass 2026-10-31 22:29–22:34; the unmoved-distance branch not yet observed).
+- The window hands the set over only when a camera row differs from `KrinikCameraValues` («camera page unchanged — nothing handed over» otherwise):
+  a save on another page never rewrites the camera's file.
+- Cases `testcases/TC_conan_hub_camera_page_2026-10-31.md` (C1–C10 pass 2026-10-31 22:29–22:47).
 
 ## Checks
 

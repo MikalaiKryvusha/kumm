@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0416 · 2026-10-31 · ❌→✅ · #conan #stand #mouse-seq #archery #hub
+class: stale-stand
+**Lesson:** an aim «that never starts after the hub» was the stand, not the mod: the evening's sequences opened with `kdown 1`, a middle click or a real
+`I`; the morning's bare `rdown,wait:1500,lclick,wait:400,rup` aims at once — also right after the hub was saved and the inventory closed by the remote
+(world time back to 1.0). Before blaming a mod for a dead input, replay the LAST sequence that worked, unchanged, and read the world time.
+**Repro:** `powershell -File _config/mouse-seq.ps1 -Seq "rdown,wait:1500,lclick,wait:400,rup,wait:500"` → the archery log «прицел: обзор …°».
+**Trigger:** a real-input stand that «does nothing» after a change of the opener.
+none-cheap: the working sequence is quoted in the archery report `2026-10-31_conan-hub-archery-aim.md`
+
 ### EXP-0415 · 2026-10-31 · ❌→✅ · #conan #ui #kit #font #colour #hub
 class: wrong-model-of-the-frame
 **Lesson:** three causes of the hub's «bold, pale, see-through» look were invisible in the kit script and plain on a live probe: (1) a font copied from a

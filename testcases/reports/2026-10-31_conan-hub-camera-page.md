@@ -34,12 +34,15 @@ the store file and the hero's spring arm READ after each step; a world frame.
 | C5 reopen shows the new value | pass |
 | C6 control: no save, no move | pass |
 | C7 the owner's file back | pass — `cmp` equal |
-| C8 the wheel's distance kept when the distance is not changed | fix in; the unmoved branch not observed on the fixed build |
+| C8 the wheel's distance kept when the distance is not changed | pass (C10, 22:47: length 230 kept) |
+| C9 a save on another page leaves the camera alone | pass after a fix (22:45 every save rewrote the camera's file; now handed over only when a camera row differs) |
 
 ## 5. Found
 
 1. The game slider hands back float noise (`120.00000762939`) — the window now rounds every slider value to its row's step (all pages).
 2. `apply(true)` on every save would reset the wheel's distance — the camera now moves the distance only when the window changed it.
+3. Every save (any page) handed the whole camera page over, and the camera rewrote the owner's `config.lua` (header and number format; values equal) —
+   the window now hands it over only when a camera row differs from the camera's published values (C9). The owner's file was put back byte-equal.
 
 ## 6. Traces
 
@@ -47,4 +50,4 @@ Session scratchpad `seams/`: `c2.webp` (the camera page), `c3_world_100_400.webp
 
 ## 7. Verdict
 
-partial — C1–C7 pass on the live game; C8's unmoved branch is not observed.
+pass — C1–C7 pass on the live game (22:28–22:34); C8–C10 pass on a ninth launch (22:47): a save on another page leaves the camera and its file alone, a height-only save keeps the wheel's distance.

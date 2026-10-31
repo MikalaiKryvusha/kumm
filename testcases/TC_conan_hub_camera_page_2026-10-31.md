@@ -1,7 +1,7 @@
 # TC — plan 38 step 6: the camera page of «Моды Krinik'а» (KrinikConanCamera reads and takes the window's values)
 
 > **Created:** 2026-10-31 · **Parent:** `plans/38_epic38_phase2_krinik_hub_window.md` step 6; STATUS «the camera and pack-manager pages»
-> **Status:** written 2026-10-31 22:28 +03:00; run 22:28–22:34 (C1–C7 pass, C4 after a fix; C8 partly observed)
+> **Status:** written 2026-10-31 22:28 +03:00; run 22:28–22:34 (C1–C7 pass, C4 after a fix); 22:47 C8–C10 pass
 > **Outbound:** —
 
 **Goal (Achieve).** The camera page shows the camera's CURRENT eight values (numpad tuning included), and «Сохранить» moves the camera and
@@ -23,4 +23,6 @@ window closing — an event, no timer).
 | C5 | Reopen shows the new value | the window reopened, the camera page | «Высота камеры» 120 | pass 22:31 — the slider read 120 at reopening |
 | C6 | Control: no save, no move | a slider changed, «Закрыть без сохранения», inventory closed | the camera log silent (no «принято»), `config.lua` unchanged | pass 22:31 — `closed (без сохранения)`, still one «принято» line in the log, `config.lua` md5 unchanged |
 | C7 | The owner's file back | the game closed, the copy restored | `cmp` of the live `config.lua` with the copy — equal | pass 22:34 — equal (copy `_save-backup/2026-10-31_2228-camera-config-before-hub-page`); the save restored, integrity ok |
-| C8 | A save that does not touch the distance keeps the wheel | found at C3 (22:30): `apply(true)` would reset the wheel's distance to `arm_length` | the camera moves the distance only when the window changed it | fix 22:32 (`apply(moved)`); the moved branch seen (arm 400); the unmoved branch NOT observed on the fixed build (on the first build the arm stayed 230 by the zoom keeper) |
+| C9 | A save on another page leaves the camera alone | found 22:45: every save handed the whole camera page over and the camera rewrote the owner's `config.lua` (header and number format, values equal) → fix: hand over only when a camera row differs from the camera's published values. Steps: change a UI-page slider by the remote, real «Сохранить и закрыть», inventory closed | the section log `camera page unchanged`; no camera «принято»; `config.lua` byte-equal to the owner's copy | pass 22:47 — `camera page unchanged — nothing handed over`, 0 «принято» lines, `cmp` equal |
+| C10 | Only the height changed — the wheel's distance kept (C8's unmoved branch) | read the arm length; the height slider to 90 by the remote, real «Сохранить и закрыть», inventory closed | the camera «принято»; `SocketOffset Z 90`; `TargetArmLength` the same as before the save | pass 22:47 — before `Z 80.0 length 230.0`, after `Z 90.0 length 230.0` |
+| C8 | A save that does not touch the distance keeps the wheel | found at C3 (22:30): `apply(true)` would reset the wheel's distance to `arm_length` | the camera moves the distance only when the window changed it | fix 22:32 (`apply(moved)`); the moved branch seen (arm 400); the unmoved branch seen at C10 (length 230 kept) |
