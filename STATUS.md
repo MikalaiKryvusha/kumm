@@ -148,7 +148,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (HOUSE_RULES rule 21; `Game.locres` patched, pack `c394b3a` — not yet seen in game).
 >   Idea 23 (versions on a public GitHub feed + the launcher's update check; later self-update of the launcher and the build) — awaits the owner's approval,
 >   the public repo's name and the download place.
-> - **Waits for the owner's hands (called in chat 2026-10-31 16:2x):** `TC_conan_build_stability_compat_perf_2026-10-26` R2 — a stone picked up in third
+> - **THE AGENT'S since 21:11 (`[OWNER]` «эээээто все ты можешь проверить» about these four — not his hands; was «Waits for the owner's hands», 16:2x):**
+>   real input by `mouse-seq.ps1` (a dummy click first, EXP-0412), the arrow stand `arrow-stand.sh`, the remote for the caverns chest. `TC_conan_build_stability_compat_perf_2026-10-26` R2 — a stone picked up in third
 >   person at the default and the far zoom; AIM15 — the arrow seen leaving the bow and landing under the crosshair; DM0 — F1 expands the Damage Meter: does it cover Hosav's HUD text (called 16:2x;
 >   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
 >   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own.
