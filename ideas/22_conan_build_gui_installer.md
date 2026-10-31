@@ -47,7 +47,10 @@ the frame is a raw crooked forged strip: width wanders, ragged inner and chipped
 (`make_frame.py` → `frame_h.webp` / `frame_v.webp` with alpha; the real launcher will need a shaped (layered) window for the chips at the outer edge); «для» tiny and faint,
 «Conan Exiles Enhanced 3.0.1» larger and bright gold. 18:36–18:40: `[OWNER]` «дай варианты металла, 8 штук» · «ровняй без учета для, для светлее но меньше» ·
 «игра: - убрать, просто путь» · «только линии металла открой на листе, 8 горизонтальных» — the game name alone is centred, «для» hangs to its left (lighter, 8 px); the
-path line is the bare path; 8 frame metals shown (folder `29_launcher_8_metals`, sheet `metals_lines.webp`) — waits for his number. So: the link line reads «PlayGround: …» (the guide
+path line is the bare path; 8 frame metals shown (folder `29_launcher_8_metals`, sheet `metals_lines.webp`). 18:41–18:42 `[OWNER]` «ты в вариантах металла
+играл только с цветом, а я просил АЛГОРИТМ построения текстуры» · «цвет 1» · «меня интересует посмотреть на разные алгоритмы построения грубой текстуры сырого
+грубого варварского металла» — colour 1 (copper-gold) is chosen; 8 surface ALGORITHMS shown (`mockups/frame_algos.py`, folder `30_launcher_8_metal_algorithms`) —
+waits for his number or mix. So: the link line reads «PlayGround: …» (the guide
 keeps its long label — the launcher needs its own short one); the frame 5 px, a FLAT forged strip (thin edge bevel, wide flat bronze — not a round rod), copper-gold, rough
 by fine traces only (grain, light scratches, pits, rare nicks) and NO shading blotches; the darkening under the texts stays; «для Conan Exiles Enhanced 3.0.1» centred
 under the title.

@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0410 · 2026-10-31 · ❌→✅ · #mockup #taste #owner-eye #texture #launcher
+class: variants-of-the-wrong-axis
+**Lesson:** «дай варианты металла, 8 штук» was answered with 8 COLOURS of one texture algorithm; the owner: «ты в вариантах металла играл только с цветом, а я
+просил АЛГОРИТМ построения текстуры». Variants of a MATERIAL vary its construction (how the surface is built: noise and strokes, a lit height map, Voronoi facets,
+casting pores, file hatching, corrosion through holes, chisel cuts, patches of a reference image), with colour and shape held fixed — one axis per sheet. Before
+making N variants, name the axis in one line («варьирую: алгоритм поверхности; держу: цвет, форму») and check it against the owner's noun.
+**Trigger:** the owner asks for N variants of a look, a material, a texture.
+mechanized: none — `ConanExiles/_config/launcher/mockups/frame_algos.py` is the worked example (8 algorithms, one colour, one SEED for the shape)
+
 ### EXP-0409 · 2026-10-31 · ❌→✅ · #kumm #deploy #powershell #undo
 class: shell-mangles-argument
 **Lesson:** PowerShell variable names are case-insensitive: a new parameter `$Target` (the game target object) in `Write-EngineIniFile`
