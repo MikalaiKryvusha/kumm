@@ -33,6 +33,13 @@
 >   checkbox created by `Create(pc, class, pc)` stays dead even inside it; 48 of 49 live FLX buttons live in a window's `WidgetTree` (H4: the OUTER matters).
 >   `Create(window, class, nil)` builds inside `<window>.WidgetTree`; adding it + `SetText` in ONE call crashed (15:38) — next: the same, ONE action per call,
 >   stand check after each (`testcases/TC_conan_settings_hub_spike_2026-10-30.md` S11–S14, `researches/conan-mod-settings-hub/vanilla-settings-widgets.md`).
+> - **FIRST next chat (from the 16:5x closure; the owner's «работайте автономно» 16:49 stands → `/dayloop`):** (a00, 17:5x) two helpers were running at the force closure — the guide rewrite FROM SCRATCH by the portrait (all owner rules: plan 35 G11 item 8, its 17:2x–17:49
+>   lines; must pass `python -I _config/release/guide_lint.py docs/guide/guide-3.0.1.html`) and the launcher redesign (wallpaper, borderless, Conan-metal frame and
+>   buttons — idea 22): check their output in the pack working tree (uncommitted), frames, commit, wire guide_lint into build-docs.py, show the owner; (a0) sweep the WHOLE guide for the 17:25 error class (a feature described as acting by itself — plan 35 G11 item 8), then the design recon `researches/document-design-manuals/README.md` (a helper started 17:21 — read its checklist, apply it to the guide;
+>   the owner's 17:19–17:23 storefront rules are in plan 35 G11 item 8); (a) the owner's verdict on the user guide PDF
+>   (opened 16:5x; his remarks go to plan 35 G11 item 8, edits by a helper WITH the portrait, then an independent check); (b) the KUMM `README.md` lacks the
+>   undo journal / `-Restore` / the `uninstall` manifest key — the owner's storefront text, write it by the portrait; (c) the emulated input that did not reach
+>   the game (16:25) — fix, then the bow / F1 / stone cases; (d) the mod settings windows (W19–W22, W24) — mock-ups first.
 
 ## 2026-10-31 16:53 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat 0af53b17
 

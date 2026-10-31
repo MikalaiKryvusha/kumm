@@ -136,13 +136,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
 >   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own.
 >   The emulated-input attempt of 16:25 (the hero never drew the bow) — verbatim in the chronicle, entry 2026-10-31 16:53 +03:00.
-> - **FIRST next chat (from the 16:5x closure; the owner's «работайте автономно» 16:49 stands → `/dayloop`):** (a00, 17:5x) two helpers were running at the force closure — the guide rewrite FROM SCRATCH by the portrait (all owner rules: plan 35 G11 item 8, its 17:2x–17:49
->   lines; must pass `python -I _config/release/guide_lint.py docs/guide/guide-3.0.1.html`) and the launcher redesign (wallpaper, borderless, Conan-metal frame and
->   buttons — idea 22): check their output in the pack working tree (uncommitted), frames, commit, wire guide_lint into build-docs.py, show the owner; (a0) sweep the WHOLE guide for the 17:25 error class (a feature described as acting by itself — plan 35 G11 item 8), then the design recon `researches/document-design-manuals/README.md` (a helper started 17:21 — read its checklist, apply it to the guide;
->   the owner's 17:19–17:23 storefront rules are in plan 35 G11 item 8); (a) the owner's verdict on the user guide PDF
->   (opened 16:5x; his remarks go to plan 35 G11 item 8, edits by a helper WITH the portrait, then an independent check); (b) the KUMM `README.md` lacks the
->   undo journal / `-Restore` / the `uninstall` manifest key — the owner's storefront text, write it by the portrait; (c) the emulated input that did not reach
->   the game (16:25) — fix, then the bow / F1 / stone cases; (d) the mod settings windows (W19–W22, W24) — mock-ups first.
+> - **The 16:5x closure's FIRST list — moved verbatim to the chronicle (entry of the chat 9c35b034); still open from it: the owner's verdict on the guide PDF, the emulated input that did not reach the game (16:25).**
 > - **Earlier FIRST list (still valid):** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
 >   plan 36 item 23). (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
 >   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
