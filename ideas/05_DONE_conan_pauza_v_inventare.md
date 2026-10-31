@@ -119,3 +119,17 @@ ESC-меню открыто: замедление времени 0.0001 → ле
 
 **Не проверено:** смерть и возрождение при открытом меню; работает ли очередь крафта на паузе;
 переживает ли опознание ESC удаление Simple Modlist (см. границу выше).
+
+## ✅ STATUS: DONE (2026-10-31 12:06 +03:00)
+
+The pause lives in the build as the section `krinik_pause_in_menu` of `KrinikConanUI` (the merge of 2026-10-30, plan 36 W31): the world slows to 0.03
+while the inventory or the hub is open and to 0.0001 in the Esc menu (accepted by the owner 16.09: «норм», «пойдёт»). The open point «does the craft queue
+work on the pause» is closed 2026-10-31: the hero's craft keeps its real speed while the world is slowed (`CRAFT_SPEEDUP = true`, the owner's choice of
+2026-10-26 «я за то, чтобы в инвентаре ускорить»; report `testcases/reports/2026-10-31_conan-craft-speed-in-inventory.md`). Not seen: death and respawn
+with a menu open; the Esc recognition without Simple Modlist.
+
+Hygiene: none in this closing step. Functional run: the craft run of 2026-10-31 11:54 (inventory open → multiplier 0.03, a bandage in ≈ 2.5–3 s, world slowed).
+
+### Decisions made without the owner (closing)
+
+- `[AI]` The craft multiplier equals the world's slow-down in every menu (Esc too), so the real craft time stays the same wherever the player opens a menu.

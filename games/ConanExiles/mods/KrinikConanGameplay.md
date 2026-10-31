@@ -21,7 +21,7 @@ the pak (formerly KrinikLevelUncapped, a fork of MrSerji's Level 1000 — the ow
 | Half | Change | Numbers |
 |---|---|---|
 | pak | `/Game/Systems/Progression/DT_ExperienceSystemLevel`, `DT_AttributeSystem`, `DT_FeatsPerLevel` on the VANILLA paths, no controller BP | 10 000 levels; XP per level 500 × L^0.5 (anchor 175 → 500 by the owner 16.09; total 333 358 180, generator `_config/xp-table.py`); one attribute point every level; knowledge points by the vanilla formula with cap 16 (48 every 10th level), 191 316 at level 10 000 |
-| Lua | +3 cm/s to run, sprint and jump per Agility point (the owner 13.09: as in Oblivion); the hero taken by the spawn event, no scene search every second (29.10) | — |
+| Lua | +3 cm/s to run, sprint and jump per Agility point (the owner 13.09: as in Oblivion); the hero taken by the spawn event, no scene search every second (29.10); **seen live 2026-10-31 12:05** with points spent in «Хар-ки»: Athleticism 2/3/4 → MaxWalkSpeed 296.4/298.4/300.3, JumpZ 432 at 4; `SetStat` does not move an attribute in 3.0.1 (report `2026-10-31_conan-agility-law-live.md`) | — |
 
 Another mod that injects rows into these tables by its own controller (EAA writes row 7 of `DT_AttributeSystem`) still injects on top.
 
