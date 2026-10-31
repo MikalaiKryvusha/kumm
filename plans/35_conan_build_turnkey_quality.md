@@ -215,7 +215,9 @@
          значения по умолчанию и возврат к сохраненному пресету игрока, верно?» · «видишь, как я красиво пишу?» · «это класс ошибки». The class: a feature
          described as a thing acting by itself (an agentless passive with a vague «одной клавишей / куда-то») instead of NAMING the implemented capability and
          its actions. The form: «Реализованы <capability 1>, <capability 2> и <capability 3>» — what was built, for whom, which actions. Fixed for the camera
-         (pack `d719395`); **next chat: sweep the WHOLE guide for this class** (every «…ется / …ются» sentence about a feature). **Next:** the mods rename (code, deploy, notes), then the guide
+         (pack `d719395`); **next chat: sweep the WHOLE guide for this class** (every «…ется / …ются» sentence about a feature).
+         17:26 on the separate blocks «Стрельба из лука» / «Стрельба в прыжке»: `[OWNER]` «каким хуем это не в одном блоке?» — one theme, one block: jump shooting is
+         a capability INSIDE the archery block (the separate block was the agent's misreading of «можно юзерам расхваливать»). **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
