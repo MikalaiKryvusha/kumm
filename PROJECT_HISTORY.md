@@ -3,6 +3,25 @@
 
 
 
+## 2026-10-31 23:06 +03:00 — moved from STATUS «Where to continue» (dayloop of the chat a3dcf82b, the bonsai trim)
+
+> - **2026-10-31 22:45 — the Archery page's in-world re-read SEEN** (report `testcases/reports/2026-10-31_conan-hub-archery-aim.md`): FOV 60 saved in the
+>   hub, the inventory closed by the remote (world time back to 1.0), then the morning's bare sequence `rdown,wait:1500,lclick,wait:400,rup` — the log
+>   «настройки окна: … обзор 60° (номер настроек …)», «прицел: обзор 60.0°», the arrow flew. The evening's failure was the stand's opener (`kdown 1`, a
+>   middle click, a real `I`), not the mod. Every reader of the hub is now observed in game (plan 38 step 6 done).
+> - **2026-10-31 22:4x — the HUD-size row of the hub is live** (KrinikConanModPackManager reads `mpm_hud_scale`; report
+>   `testcases/reports/2026-10-31_conan-hub-mpm-page.md`, pass). The window now has five live pages: camera, UI, archery, pack manager, graphics.
+> - **2026-10-31 22:3x — the camera page of the hub is live** (report `testcases/reports/2026-10-31_conan-hub-camera-page.md`, pass, C1–C10):
+>   the camera keeps its own `config.lua`, publishes `KrinikCameraValues`, takes `KrinikCameraSet` when a game window closes and only when a camera row changed. The owner's live camera
+>   `config.lua` (height 80) was put back byte-equal after the run.
+> - **21:01 — the «Моды Krinik'а» hub window by mockup 5 BUILT and walked in game (first batch, partial)** — plan `plans/38_epic38_phase2_krinik_hub_window.md`,
+>   pack `75ef09f`, report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`: one store `Saved/KrinikSettings.lua` (`krinik_settings.lua`), the
+>   KrinikConanUI page live (FPS switch both ways seen, blink thresholds, menu slow-down, craft), save / reset / save-and-close / close-without-save, a restart.
+>   The Graphics page live too (blood time across Lua states by the shared `KrinikSettingsVersion`, pack `6ef5a08`).
+>   The camera, archery and pack manager pages — DONE 22:2x–22:4x (entries above); all P cases pass by 21:4x (P3/P4 «i» hover and pin, P6, P11; the pause arms only after the hub was seen closed once — reopen it on the stand), a frame sheet beside mockup 5 for
+>   the owner. Real input: start every `mouse-seq` with a dummy click (EXP-0412). Launcher: no «Удалить сборку» before install (20:43, pack `1ece886`);
+>   both icons ship, variant 1 default (20:43) — DONE, pack `6ace541` (idea 22).
+
 ## 2026-10-31 21:45 +03:00 (third part) — moved from STATUS «Where to continue» at the soft closure of the chat aabd6f1c
 
 > - **21:15 — the public repo NAMED** by the owner: title «Krinik's Conan Exiles Enhanced ModPack», slug `Kriniks_Conan_Exiles_Enhanced_ModPack` (idea 23); a NEW

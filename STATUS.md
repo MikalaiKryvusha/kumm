@@ -117,26 +117,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (pack `6cff449`). Next, in order: (1) the independent §7B voice check of the README (helper running at the close) → (2) show the README to the owner
 >   (his text) → (3) `python -I -X utf8 _config/public_release/make_public_tree.py <fresh dir>` (exit 0) → `git init`, one commit, `gh repo create
 >   MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --public`, push → (4) the 1.0.0 archive as a release of that repo (idea 23 update check).
-> - **2026-10-31 22:45 — the Archery page's in-world re-read SEEN** (report `testcases/reports/2026-10-31_conan-hub-archery-aim.md`): FOV 60 saved in the
->   hub, the inventory closed by the remote (world time back to 1.0), then the morning's bare sequence `rdown,wait:1500,lclick,wait:400,rup` — the log
->   «настройки окна: … обзор 60° (номер настроек …)», «прицел: обзор 60.0°», the arrow flew. The evening's failure was the stand's opener (`kdown 1`, a
->   middle click, a real `I`), not the mod. Every reader of the hub is now observed in game (plan 38 step 6 done).
+> - **2026-10-31 22:5x — the hub's five pages are live and every reader is observed in game** (plan 38 step 6 done; camera, UI, archery, pack manager, graphics — reports `testcases/reports/2026-10-31_conan-hub-*.md`; the closed entries moved verbatim to the chronicle, entry 2026-10-31 23:06 +03:00).
 > - **2026-10-31 22:2x — the owner's five remarks on the hub window's look: FIXED, waits for his eye** (pack `5f497ce`, report
 >   `testcases/reports/2026-10-31_conan-hub-look.md`, review folder `39_hub_look` with `what_to_look_at.md`): height by the tallest live page, Noto Sans
 >   regular (the labels had been the ENGINE's Roboto Bold; the game's serifs have no Cyrillic), rows twice denser, round «i», a dark opaque plate with a
 >   gold rim at the cursor, the vanity camera no longer hides the window. Next: the public repo (README in review folder `38_public_readme` — his read).
-> - **2026-10-31 22:4x — the HUD-size row of the hub is live** (KrinikConanModPackManager reads `mpm_hud_scale`; report
->   `testcases/reports/2026-10-31_conan-hub-mpm-page.md`, pass). The window now has five live pages: camera, UI, archery, pack manager, graphics.
-> - **2026-10-31 22:3x — the camera page of the hub is live** (report `testcases/reports/2026-10-31_conan-hub-camera-page.md`, pass, C1–C10):
->   the camera keeps its own `config.lua`, publishes `KrinikCameraValues`, takes `KrinikCameraSet` when a game window closes and only when a camera row changed. The owner's live camera
->   `config.lua` (height 80) was put back byte-equal after the run.
-> - **21:01 — the «Моды Krinik'а» hub window by mockup 5 BUILT and walked in game (first batch, partial)** — plan `plans/38_epic38_phase2_krinik_hub_window.md`,
->   pack `75ef09f`, report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`: one store `Saved/KrinikSettings.lua` (`krinik_settings.lua`), the
->   KrinikConanUI page live (FPS switch both ways seen, blink thresholds, menu slow-down, craft), save / reset / save-and-close / close-without-save, a restart.
->   The Graphics page live too (blood time across Lua states by the shared `KrinikSettingsVersion`, pack `6ef5a08`).
->   The camera, archery and pack manager pages — DONE 22:2x–22:4x (entries above); all P cases pass by 21:4x (P3/P4 «i» hover and pin, P6, P11; the pause arms only after the hub was seen closed once — reopen it on the stand), a frame sheet beside mockup 5 for
->   the owner. Real input: start every `mouse-seq` with a dummy click (EXP-0412). Launcher: no «Удалить сборку» before install (20:43, pack `1ece886`);
->   both icons ship, variant 1 default (20:43) — DONE, pack `6ace541` (idea 22).
 > - **THE AGENT'S since 21:11 (`[OWNER]` «эээээто все ты можешь проверить» about these four — not his hands; was «Waits for the owner's hands», 16:2x):**
 >   real input by `mouse-seq.ps1` (a dummy click first, EXP-0412), the arrow stand `arrow-stand.sh`, the remote for the caverns chest. `TC_conan_build_stability_compat_perf_2026-10-26` R2 — a stone picked up in third
 >   person at the default and the far zoom; AIM15 — the arrow seen leaving the bow and landing under the crosshair; DM0 — F1 expands the Damage Meter: does it cover Hosav's HUD text (called 16:2x;
