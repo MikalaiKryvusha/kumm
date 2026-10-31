@@ -28,7 +28,9 @@ release a version in one step that also updates what the launchers see.
    wherever the owner publishes). `build-docs.py` gains `--release` that prints the release body.
 3. The launcher: at start, async, timeout 3 s, `GET https://api.github.com/repos/<owner>/<repo>/releases/latest`, compare `tag_name` with `BuildInfo.PackVersion`
    (SemVer), show the line; silent on any failure.
-4. Later: self-update (download + run the installer) — on the same feed.
+4. Later: self-update (download + run the installer) — on the same feed. `[OWNER]` 2026-10-31 19:19 «в будущем через сам лаунчер добавим возможность обновлять
+   и сам лаунчер и саму сборку» — the future scope: the launcher updates ITSELF and the BUILD (the mods), both from this feed; the install's undo journal
+   (`_kumm_backup`) makes a build update reversible.
 
 ## Questions to the owner
 
