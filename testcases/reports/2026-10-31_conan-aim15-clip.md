@@ -36,4 +36,4 @@ Session scratchpad `seams/`: `aim15.mkv` (5 s, 60 fps, 38 MB), `a15_grid.webp`, 
 
 ## 7. Verdict
 
-partial — the stand must face a near rock; the bow area must be read in 1:1 crops.
+partial — a second clip at 23:03 (a frozen Kappa 10 m ahead, the hit logged) did not let the agent see the arrow at the bow; both clips went to the owner's review folder `40_arrow_clip`.
