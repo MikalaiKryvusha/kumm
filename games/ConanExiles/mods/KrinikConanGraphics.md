@@ -16,7 +16,11 @@ deployed by `Deploy-ModPack.ps1` through the manifest's `engineIni` field.
 - Ours: a post-hook of `/Script/Engine.DecalComponent:SetFadeOut` on the blood material → `SetFadeOut(hold_s − fade_s, fade_s)` + `SetFadeIn(−start × ramp, ramp)`
   (hold 300 s, start 0.5, rise 0.3); cap 200 stains, the oldest fades in 0.5 s. One event per stain, no polling.
 - Can't: `SetLifeSpan` from Lua (TrivialObject); changing LifeSpan in a pre-hook of `SpawnDecalAtLocation` (UE4SS does not pass it on).
-- Tested: report `testcases/reports/2026-10-30_conan-lingering-blood.md`. Open: the slider (W24); the cost below `os.clock`'s 1 ms step.
+- Tested: report `testcases/reports/2026-10-30_conan-lingering-blood.md`. Open: the cost below `os.clock`'s 1 ms step.
+- **The slider — DONE 21:08** (plan 38 phase 2, the «Моды Krinik'а» page «KrinikConanGraphics»): `CFG.hold_s` comes from the shared store
+  `<game>\ConanSandbox\Saved\KrinikSettings.lua` key `gfx_blood` (seconds; absent — 300) at load, and again when the shared number `KrinikSettingsVersion`
+  (`ModRef:GetSharedVariable`, set by the hub on «Сохранить») differs from the one seen — checked at every stain, no timer; floor `fade_s + 1`. Seen: 60 s
+  after a save, 300 s after a reset (report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`, G1).
 
 ## Section 2 — arrow hits leave blood (W30, seen working by a direct call 2026-10-31 08:24; a real bow shot — the owner's first shot)
 

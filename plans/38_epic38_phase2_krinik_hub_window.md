@@ -44,8 +44,9 @@ left-right), ONLY the selected mod's rows on the right, each row with an «i» t
       config.lua once at load and fall back to code values; UE4SS ModRef:SetSharedVariable in our build (UEHelpers.lua:18,23)>` → `[AI]` ONE file
       outside the mod folders, written only by the hub on «Сохранить», read by each mod at load; live apply: the UI sections directly (same Lua state),
       the other mods check a shared version number at a moment they already run (no new timer); the camera merges its keys and calls its own `apply()`
-      (it rewrites its `config.lua` itself — the hub never writes that file). Open: does a shared variable carry a number — a one-line probe in game.
-      Exit: the store's path and format, one reader per mod, the apply route per row.
+      (it rewrites its `config.lua` itself — the hub never writes that file). **DONE 21:08:** the shared number carries a number — the hub's
+      `ModRef:SetSharedVariable("KrinikSettingsVersion", n)` on save, KrinikConanGraphics re-read at its next stain (pack `6ef5a08`, report G1). The reader
+      pattern for the other mods: `read_store()` at load + `settings_check()` at a moment the mod already runs (see `KrinikConanGraphics/…/main.lua`).
 > **First game batch 21:01 (pack `75ef09f`, report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`, partial):** steps 3 (store), 4 (kit),
 > 5 (section) built and walked with a real mouse on the KrinikConanUI page — fill, «i», reset, save, save-and-close, the FPS switch both ways, a restart; six
 > defects found and fixed in the run. Next: P3/P4 re-observation, P6 byte check, P11; the camera, archery, pack manager and graphics readers (step 6); the

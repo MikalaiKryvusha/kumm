@@ -122,7 +122,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **21:01 — the «Моды Krinik'а» hub window by mockup 5 BUILT and walked in game (first batch, partial)** — plan `plans/38_epic38_phase2_krinik_hub_window.md`,
 >   pack `75ef09f`, report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`: one store `Saved/KrinikSettings.lua` (`krinik_settings.lua`), the
 >   KrinikConanUI page live (FPS switch both ways seen, blink thresholds, menu slow-down, craft), save / reset / save-and-close / close-without-save, a restart.
->   Next: the camera, archery, pack manager and graphics pages (their mods read the store — step 6), P3/P4/P6/P11 re-runs, a frame sheet beside mockup 5 for
+>   The Graphics page live too (blood time across Lua states by the shared `KrinikSettingsVersion`, pack `6ef5a08`).
+>   Next: the camera, archery and pack manager pages (their mods read the store — step 6, the pattern of `KrinikConanGraphics` main.lua), P3/P4/P6/P11 re-runs, a frame sheet beside mockup 5 for
 >   the owner. Real input: start every `mouse-seq` with a dummy click (EXP-0412). Launcher: no «Удалить сборку» before install (20:43, pack `1ece886`);
 >   both icons ship, variant 1 default (20:43) — DONE, pack `6ace541` (idea 22).
 > - **FIRST next chat (19:58):** (0) the build ICON (launcher exe, the archive) — the letter K in the same metal as the C of the Conan Exiles icon (`[OWNER]` 19:58 «иконка сборки - такая же, как буква К, как у конана С»; idea 22). (1) ~~the launcher — «Установить сборку» hidden when installed~~ — done above. (2) Interview 028 (`interviews/interview_028_conan_launcher_and_versions.md`) — Q2 answered by that word;

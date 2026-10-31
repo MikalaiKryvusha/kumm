@@ -53,6 +53,13 @@ clicked, «Сбросить к исходным», «Сохранить», «С�
 - P12 pass — `watch stopped (window closed)` at every close; no hub lines while playing.
 - P13 pass — four clean closes by PID («crash reporter: none»), the save restored, integrity ok; the test store file removed from the owner's game.
 
+- G1 pass (2026-10-31 21:05–21:08, a sixth launch with KrinikConanGraphics redeployed) — the Graphics page across Lua states: at load
+  `кровь лежит 300 с (своё значение, загрузка)`; a real click on «KrinikConanGraphics» in the list → `page gfx`; the slider set to 60 by the remote; a real
+  click on «Сохранить» → `store written … version 1793470038`; a stain spawned by the remote (`SpawnDecalAtLocation` + `SetFadeOut(0, 3)`, the game's way) →
+  `кровь лежит 60 с (окно «Моды Krinik'а», номер настроек 1793470038)`, `пятно …: лежит 60 с`. Control: «Сбросить к исходным» + «Сохранить» → the file empty,
+  the next stain `лежит 300 с (своё значение, номер настроек 1793470039)`. The shared number `ModRef:SetSharedVariable("KrinikSettingsVersion", n)` carries a
+  number between mods — the step-3 open question closed.
+
 ## 5. Found
 
 1. Fixed: the store lost a saved `false` (`x and false or nil`) — desk test.
