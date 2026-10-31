@@ -130,11 +130,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   `…level-uncap-live.md`). Item 28 (archive volumes) in progress 12:1x: export 73 mods ok, 19 volumes ≤ 700 MiB ok, unpack + hash compare: 223 = 223, hashes equal (report `2026-10-31_conan-build-archive-volumes.md`)
 >   (scratch `g10/` removed 12:14; cases `TC_conan_build_archive_volumes_2026-10-31.md`). Cases U2 pass (Esc mod list), U3 — ModControlPanel opens by
 >   `ActivateModule`, Russian except the English «All» filter (bug 64 item 47). Cheat-manager facts for stands — game map, last block.
-> - **Session 2026-10-31 15:36– (resume):** one build script for the delivery documents — `ConanExiles/Собрать ридми и лаунчер.cmd` (author links from
+> - **Session 2026-10-31 15:36– (resume):** one build script for the delivery documents — `ConanExiles/build_docs_and_launcher.cmd` (author links from
 >   `author_links.txt` → the guide's «Автор сборки» + PDF + `KrinikLauncher.exe`, plan 35 G11 item 7, pack `2336de3`); Krinik mods carry the build version
->   **1.0.0** (seen in the pause-menu list 15:51, pack `35c96d8`); **bug 72 DONE** — the install keeps an undo journal + copies (`<game>\_kumm-backup`),
->   «Удалить сборку Krinik.cmd» and the launcher's «Удалить сборку» return the pre-build state (KUMM `528b63e`, fixture 34/34; the live Conan folder run —
->   U10 — open). So a clean game copy is NOT needed: tests run on the live game, uninstall, check, reinstall (the owner 15:51: «зачем тебе чистая версия»).
+>   **1.0.0** (seen in the pause-menu list 15:51, pack `35c96d8`); **bug 72 DONE** — the install keeps an undo journal + copies (`<game>\_kumm_backup`),
+>   `uninstall_krinik_build.cmd` and the launcher's «Удалить сборку» return the pre-build state (KUMM `528b63e`, fixture 34/34; the live Conan folder run U10 PASSED 16:07 —
+>   0 differences of 1728 entries). So a clean game copy is NOT needed: tests run on the live game, uninstall, check, reinstall (the owner 15:51: «зачем тебе чистая версия»).
 >   **The README is being rewritten from scratch by the owner's voice portrait** (plan 35 G11 item 8 — his words there): a helper reads the whole
 >   `krinik_voice/AUTHOR_STYLOMETRY.md`, a second checks; KUMM `.kaif/kaif.json` → `voicePortrait`. Next after it: the mod settings windows (W19–W22, W24).
 >   **16:31–16:4x:** the guide rewritten and checked (pack `048fb4b`), the owner's answers applied in part (two-line title, «Руководство пользователя», numbered
