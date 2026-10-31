@@ -11,7 +11,7 @@
 ### ✅ 2026-10-25 — сборка живёт на 3.0.1 (план 33, отчёт `testcases/reports/2026-10-25_conan-3.0.1-pereezd.md`)
 
 43 из 43 паков, UE4SS 1152 на 5.8, все наши моды; новая партия входит в мир; язык русский (`Game.ini` → `Language=ru`); пустая рамка
-главного меню погашена KrinikConanModPackStatus; `Engine.ini` под 3.0.1 раскатан. Кит модов в 3.0 тот же (`devkitRevisionNumber` 1002) —
+главного меню погашена KrinikConanModPackManager; `Engine.ini` под 3.0.1 раскатан. Кит модов в 3.0 тот же (`devkitRevisionNumber` 1002) —
 сентябрьские паки 2.2.x игра принимает. **Game in tests — in front** (`[OWNER]` «в Фореграунд игру открывай для тестов» · 2026-10-29 ≈23:43, supersedes
 «в фоне» of 25.10): launch `_config/launch-bg.ps1`, real input (Esc, cursor, clicks) allowed, frame `_config/capture-window.ps1`, state — the remote
 `_unpacked/KrinikConanHarness/KrinikAgentRemote` (the dev-only manifest entry `KrinikConanHarness`, `"export": false` — deployed here, never exported; 2026-10-30).

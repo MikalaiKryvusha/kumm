@@ -83,7 +83,8 @@
 19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
     mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +
-    KrinikConanModPackStatus».)
+    KrinikConanModPackStatus»; 16:48 «KrinikIntro · KrinikConanModPackStatus — вот это все организационные вопросы» · «Я предлагаю их объединять в
+    KrinikConanModPackManager» — the shipped set is 7: Camera, Archery, Gameplay, UI, Graphics, RussianTranslation, ModPackManager.)
 
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · two maps for every game · KAIF
 feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images — WebP, never PNG). The
