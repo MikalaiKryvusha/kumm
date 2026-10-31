@@ -57,7 +57,7 @@
 >      claim-before-evidence, owner-decision-not-applied, text-in-agents-world, parallel-curves-drift, postfix-overwrite,
 >      etalon-from-dirty-tree, shell-lied, escaping-layer, twins-missed,
 >      field-dropped-in-rebuild, tool-silent-refusal, template-not-instance, census-from-observed, cases-after-run,
-     census-by-own-pattern, hook-after-event, mod-breaks-game-flow, demo-voice-ahead-of-frame, wrong-model-of-the-cost,
+     census-by-own-pattern, verified-on-the-easy-case, hook-after-event, mod-breaks-game-flow, demo-voice-ahead-of-frame, wrong-model-of-the-cost,
      per-object-work-every-frame, our-own-cost-first, ceiling-from-wider-switch, measurement-route-too-narrow,
      act-without-checking-target, artifact-for-eye-unchecked, catalogue-label-instead-of-decision,
      confusion-delivered-as-verdict, distance-from-camera, false-negative-search, fix-by-property-unverified,
@@ -90,6 +90,24 @@
 > Skill: `/experience` (capture a lesson · recall relevant lessons).
 
 ## Entries
+
+### EXP-0407 · 2026-10-31 · ❌→✅ · #windows #powershell #winforms #conan
+class: wrong-api-assumption
+**Lesson:** a process started by `start "" /min` gets «minimized» for its FIRST shown window — a WinForms waiting window of the feedback collector came up
+iconic and never appeared on screen (`IsIconic` true, 11:12); also `Form.Padding` moves only docked controls and `CenterScreen` places the window before an
+AutoSize resize. Restore the window after `Show()` (`WindowState Normal` + `ShowWindow(SW_RESTORE)`), size it from the label, centre it on the work area.
+**Repro:** `cmd /c start "" /min powershell -File collect-report.ps1 -Feedback` → `IsIconic(MainWindowHandle)`.
+**Trigger:** any window shown by a script the game or a launcher starts hidden or minimized.
+mechanized: `ConanExiles/_config/player-report/collect-report.ps1` restores its window after `Show()` (pack `9fd6016`)
+
+### EXP-0406 · 2026-10-31 · ❌→✅ · #conan #archery #stand
+class: verified-on-the-easy-case
+**Lesson:** the first stuck-arrow fix (tip to the game's impact point + 10 cm) looked right on the Kappa's big head and went THROUGH a human thigh and chest:
+the game's `ImpactPoint` lies 21–39 cm deeper than the visible skin (side frames, the 76 cm arrow as the scale). A change that moves every creature's arrows is
+judged on at least two body types (a thick creature AND a human limb) before the commit, not on the owner's one example.
+**Repro:** `testcases/TC_conan_arrows_follow_mob_body_2026-10-31_push.md` P5 vs P7.
+**Trigger:** any fix whose code path serves every creature or every item, tested on one.
+mechanized: `ConanExiles/_config/arrow-stand.sh` (`CLASS` / `NAME` / `CLASS_PATH` — the same stand for any creature class; a summoned figure needs 10 s to load)
 
 ### EXP-0405 · 2026-10-31 · ❌→✅ · #conan #stand #remote #archery
 class: stale-stand
