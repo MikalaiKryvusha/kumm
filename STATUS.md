@@ -133,8 +133,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   `TC_conan_minimap_coords_backing_2026-10-31.md` C1–C4; notes `games/ConanExiles/mods/Simple_Minimap.md` new); «правее и выше» still open.
 > - **W4 minimap DONE and ACCEPTED 10:09** (`[OWNER]` «вот теперь хорошо»): coordinates inside the ring on a plain dark rounded plate, font 13, inset 46;
 >   the map tighter into the corner by a render-only shift (pack `5e8229b`, cases C1–C9).
-> - **FIRST next chat:** (1) the owner's eye on review folder 25 (shout fade). (2) **W13 stuck arrows** — stand 5 (10:05) aborted: a `_G` actor handle
->   read 0 0 0; re-find the creature by NAME each call, copy X/Y/Z into numbers at once, one actor per call, never stack unproven names (EXP-0403).
+> - **FIRST next chat:** (1) the owner's eye on review folder 25 (shout fade). (2) **W13 stuck arrows — cause found 10:3x:** the game puts the copy at the hit ImpactPoint
+>   (physics-body surface) and attaches it to the hit bone; the Kappa's body is thicker than its skin. Arrow meshes are ≈ 76 cm along Z from the nock end.
+>   Next: push = clamp(bone depth − arrow length + tip_in, 15, 60) in KrinikConanArchery (now: 15 cm, depth logged, pack `e536ce9`), shipped after a stand
+>   with a LIVING target and a frame of the arrows; exclude the hero's companions from the «nearest humanoid» (they came up at 0.8 and 6.2 m); `god-on.sh`
+>   ≈ 8 s after world entry; aim by frames (the camera turns ≈ half the requested yaw). Notes `games/ConanExiles/mods/KrinikConanArchery.md`, plan 36 W13.
 >   (3) W37 in the settings hub — once the hub exists. (4) The release gate at 720p / 1080p / 2K / 4K (rule 17).
 > - **Owner's call, not taken:** the pack `.git/hooks/pre-commit` running `check-lua-game-thread.py` was refused by the permission classifier (07:5x) —
 >   the guard still runs only by the rule «before every Lua rollout» (EXP-0400).
