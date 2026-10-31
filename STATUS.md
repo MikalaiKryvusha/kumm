@@ -128,7 +128,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   `testcases/reports/2026-10-31_conan-hub-look.md`, review folder `39_hub_look` with `what_to_look_at.md`): height by the tallest live page, Noto Sans
 >   regular (the labels had been the ENGINE's Roboto Bold; the game's serifs have no Cyrillic), rows twice denser, round «i», a dark opaque plate with a
 >   gold rim at the cursor, the vanity camera no longer hides the window. Next: the public repo (README in review folder `38_public_readme` — his read),
->   the camera and pack-manager pages, the archery aim stand.
+>   the pack-manager page (`mpm_hud_scale`), the archery aim stand.
+> - **2026-10-31 22:3x — the camera page of the hub is live** (report `testcases/reports/2026-10-31_conan-hub-camera-page.md`, partial — C8's unmoved branch):
+>   the camera keeps its own `config.lua`, publishes `KrinikCameraValues`, takes `KrinikCameraSet` when a game window closes. The owner's live camera
+>   `config.lua` (height 80) was put back byte-equal after the run.
 > - **21:01 — the «Моды Krinik'а» hub window by mockup 5 BUILT and walked in game (first batch, partial)** — plan `plans/38_epic38_phase2_krinik_hub_window.md`,
 >   pack `75ef09f`, report `testcases/reports/2026-10-31_conan-hub-phase2-first-batch.md`: one store `Saved/KrinikSettings.lua` (`krinik_settings.lua`), the
 >   KrinikConanUI page live (FPS switch both ways seen, blink thresholds, menu slow-down, craft), save / reset / save-and-close / close-without-save, a restart.

@@ -96,7 +96,7 @@ its key), read once at load, written only by the hub's «Сохранить»; `
 `lua _config/tests/test_krinik_settings.lua` from the pack root. Keys read by the sections: `ui_fps` (bool, `krinik_fps_counter` — the counter's switch,
 Collapsed and not recounted when off; also at every HUD birth), `ui_blink_food` / `ui_blink_weight` (shares, `krinik_hud_blink`, read every poll),
 `ui_menu_slow` (× slower, dilation = 1 / value, `krinik_pause_in_menu`, every poll), `ui_craft` (bool, the craft multiplier = 1.0 when off). The hub
-section rewritten for mockup 5: ONE table `PAGES` (labels, «i», hints, ranges — the kit places widgets only), `LIVE = { ui = true }` (a mod's page shows
+section rewritten for mockup 5: ONE table `PAGES` (labels, «i», hints, ranges — the kit places widgets only), `LIVE` (a mod's page shows
 only when its values apply), a LMB key bind that returns on one boolean while the window is closed, a 50 ms chain for the «i» hover and the name
 marquee only while the window is open. Kit tree by `kit-krinik-modsettings.py` (phase 2 block): `HB_KrinikHead`, `HB_KrinikBody` (`SC_KrinikMods` →
 `Brd_KrinikMod_<page>` → `SC_KrinikModName_<page>` → `Txt_KrinikModName_<page>`; `WS_KrinikPages` → `VB_KrinikPage_<page>` → `HB_KrinikRow_<id>`:
