@@ -38,6 +38,15 @@ Krinik... получают версию 3.0.1» · 2026-10-28, chronicle) in the
   copies a few seconds later. Our Lua logs each copy: «копия стрелы #N: удар в <component>, кость удара <bone>, прицеплена к <parent>, сокет <socket>».
 - A HIT on a humanoid boss: the copy's root is attached to the creature's `CharacterMesh0`, socket = the hit bone (`b_L_lowerarm` ×3), still attached
   at +2 s (birth watch `NotifyOnNewObject` + reads at +0.3 s / +2 s on the game thread). A MISS into the ground: no attach parent, socket None.
+- **Where the game puts the copy (bytecode, 2026-10-31 10:3x: `retoc-5.8 to-legacy --version UE5_7 --no-shaders --filter BP_BaseProjectile
+  <_paksview-3.0.1> <work>` → `uaj exports … VER_UE5_6` → `UAssetGUI tojson … VER_UE5_8` → `kismet-trace.py … SpawnDummyProjectile`):**
+  `BP_BaseProjectile.SpawnDummyProjectile` spawns `BP_DummyProjectile` (deferred) at `GetAdjustedProjectileImpactPosition` = the hit's
+  `ImpactPoint` (the collision surface — capsule or physics body, NOT the visible skin), rotation = mesh rotation ∘ `ProjectileOnGroundRotationOffset`,
+  and hands it `HitResultFromProjectile`, `StaticMeshToShow`, `ProjectileDummyLifetime`, `IsLootable`, `ProjectileItemTemplateID`,
+  `ProjectileVelocityOnImpact`; the copy attaches itself to the hit bone. `AdjustImpactLocation` only moves the flying projectile 10 cm forward
+  (`Double 10.0`). So a creature whose physics bodies are thicker than its skin (the Kappa's shell) gets arrows standing off its skin — and they
+  ride the bone, so they hang «in the air» beside it as it moves. A fix lives in the copy's placement: push it along its flight direction from the
+  impact point toward the bone (or onto the mesh surface) before the attach.
 - Open: on a 1080p crop of the frozen boss no arrow was visible on the arm while 3 copies lived — where the copy draws relative to the bone (its
   relative location) is the next read; the owner's symptom (arrows hanging in the air beside a Kappa) — plan 36 W13.
 
