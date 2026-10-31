@@ -18,8 +18,8 @@
 
 <!-- archaeology: search "шрифт|назван|лаунче|georg" → 104 hits · read: ideas/22 (решения 17:42–18:53), plan 35 G11, the hits in interviews/ · prior: unrelated — the hits are Svarog windows and the guide; the launcher title font was never asked -->
 
-![Название шрифтом Oswald — как сейчас](assets/028/title_oswald.webp)
-![Название шрифтом Georgia — как кнопки](assets/028/title_georgia.webp)
+Картинка «Название шрифтом Oswald — как сейчас» — открыта рядом в ImageGlass (title_oswald.webp).
+Картинка «Название шрифтом Georgia — как кнопки» — открыта рядом в ImageGlass (title_georgia.webp).
 
 - **A) Как сейчас — узкий Oswald (верхняя картинка)**
   - Situation. Лаунчер открыт.
@@ -40,8 +40,8 @@
 
 <!-- archaeology: search "главн|кнопк|состоян|установи|играт" → 225 hits · read: ideas/22, researches/conan-launcher-design, the hits in interviews/ · prior: unrelated — the hits are other windows' buttons; the launcher's state-driven button was never asked -->
 
-![Сборка установлена: золотая «Играть»](assets/028/state_installed.webp)
-![Сборка не установлена: золотая «Установить сборку»](assets/028/state_fresh.webp)
+Картинка «Сборка установлена: золотая «Играть»» — открыта рядом в ImageGlass (state_installed.webp).
+Картинка «Сборка не установлена: золотая «Установить сборку»» — открыта рядом в ImageGlass (state_fresh.webp).
 
 - **A) (рекомендую) Да: до установки золотая «Установить сборку», после — «Играть»**
   - Situation. Игрок распаковал архив, сборка в игру ещё не поставлена.
