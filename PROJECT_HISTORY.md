@@ -1,5 +1,39 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-10-31 19:42 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat 9c35b034
+
+> - **The KUMM README undo paragraph — DONE 19:0x** by the portrait into `README.md` (after the `"export": false` paragraph; facts from `Deploy-ModPack.ps1`
+>   108–233, 987–1013); voice-lint SKIPPED=3 (the portrait's §8 has no pattern table); a clean-instance §7B pass found 11 hits, all applied. The owner's proofread is open.
+> - **NOW (18:54, `/dayloop` by «работай автономно» 18:53): the mod settings window — epic 38** (`[OWNER]` «нас ждет большой долг - окно настройки модов» · 18:54;
+>   «рыболку можно не троггггггать, оно красивое» · 18:54 — the fishing window stays as is, it is the look's model). Plan `plans/38_EPIC_conan_mod_settings_hub.md`,
+>   phase 0 `plans/38_epic38_phase0_widget_spike.md`. In flight in parallel: a helper rebuilds `KrinikConanLauncher.cs` by the approved mockup 11 + frame 7 (pack).
+> - **Session 2026-10-31 15:36– (resume):** one build script for the delivery documents — `ConanExiles/build_docs_and_launcher.cmd` (author links from
+>   `author_links.txt` → the guide's «Автор сборки» + PDF + `KrinikConanLauncher.exe`, plan 35 G11 item 7, pack `2336de3`); Krinik mods carry the build version
+>   **1.0.0** (seen in the pause-menu list 15:51, pack `35c96d8`); **bug 72 DONE** — the install keeps an undo journal + copies (`<game>\_kumm_backup`),
+>   `uninstall_krinik_build.cmd` and the launcher's «Удалить сборку» return the pre-build state (KUMM `528b63e`, fixture 34/34; the live Conan folder run U10 PASSED 16:07 —
+>   0 differences of 1728 entries). So a clean game copy is NOT needed: tests run on the live game, uninstall, check, reinstall (the owner 15:51: «зачем тебе чистая версия»).
+>   **The README is being rewritten from scratch by the owner's voice portrait** (plan 35 G11 item 8 — his words there): a helper reads the whole
+>   `krinik_voice/AUTHOR_STYLOMETRY.md`, a second checks; KUMM `.kaif/kaif.json` → `voicePortrait`. Next after it: the mod settings windows (W19–W22, W24).
+>   **16:31–16:4x:** the guide rewritten and checked (pack `048fb4b`), the owner's answers applied in part (two-line title, «Руководство пользователя», numbered
+>   chapters 1., 1.1 — `0539d33`); our mods renamed `KrinikConanCamera` / `KrinikConanModPackStatus` (pack `96c1c5b`, HOUSE_RULES rule 19; the owner's live
+>   `config.lua` of both carried over, seen in game 16:41); delivery names English + underscores (rule 18: `collect_report.cmd`, `uninstall_krinik_build.cmd`,
+>   `_kumm_backup`, `build_docs_and_launcher.cmd`). Done 16:4x–16:5x: the guide carries the owner's answers (our mods at the top of the one composition list, «вы» steps, 7 of ours);
+>   `KrinikIntro` + `KrinikConanModPackStatus` merged into **`KrinikConanModPackManager`** (`[OWNER]` 16:48 «вот это все организационные вопросы» ·
+>   «Я предлагаю их объединять в KrinikConanModPackManager»; pack `9b686b5`, seen in game 16:51: «СБОРКА: моды 66/66», the intro found); the PDF opened
+>   for the owner 16:5x (no verdict yet). The shipped Krinik set is 7 (HOUSE_RULES rule 19). Open: the camera's Nexus draft still says ConanCameraControl (publication name — the owner's).
+> - **2026-10-31 18:17 +03:00 — 10 launcher mockups shown** (the owner 18:06 «лаунчер некрасивый, иди в интернет в разведку и 10 макетов с вариантами давай разными»): recon
+>   `researches/conan-launcher-design/README.md`, mockups pack `_config/launcher/mockups/mockups.html` (`node shoot.mjs <dir>` → 3840×2160 WebP; pack `723494b`), review folder
+>   `Conan Exiles Mods/НА ОТСМОТР НИКОЛАЕМ/27_launcher_10_variants/` opened. **PICKED 18:22–18:26:** variant 2 rearranged + gold Play last + a thin rough
+>   frame — mockup 11 of `mockups.html` (pack `acc7d44`), the owner's words in `ideas/22_conan_build_gui_installer.md`; shown in folder `28_launcher_variant_2_rearranged`.
+>   Open: title font (Oswald vs the buttons' Georgia) and the state-driven main button. Next — rebuild `KrinikConanLauncher.cs` by mockup 11 (frame from
+>   `make_frame.py` textures), frames at 720p/1080p/2K/4K (rule 17).
+> - **18:02 FORCE CLOSURE (done since: the layout is pack `cdc299f`): the launcher-layout helper was still running (the owner 18:02: «лаунчер некрасивый, кнопки расположить слева в вертикальную колонку» · «описания, если нужны - справа») — its result is UNCOMMITTED in the pack working tree (`_config/launcher/`): check the frame (`scratchpad/launcher-v2/`), commit, show. The owner: «в новом чате продолжим делать».**
+> - **18:01: the guide FACT-CHECKED (pack `1f82ce6`, 11 sheets, guide_lint clean; owner questions: 1.0.0 date, Num 8/2 wording, Oblivion vs Remastered, «лучше стреляет из лука» vs the code, W29/EAA emblem) and the launcher look (pack `8f757e6`, frames at 100 % only) — show, then 2K/4K × 300 % frames. Older: 17:5x the guide rewrite (pack `2f9f2b8`) was a DRAFT — facts partly from the stale 10-26 guide; a fact-verification helper started 17:51 (sources: mod notes, plan 36 W, bug 64, modpack.json; the owner: «ему можно брать факты из старого текста, но ЭТО НЕ ФАКТЫ НИХУЯ БОЛЬШЕ»). Accept its result, frames of every sheet, commit, show the owner.**
+> - **Epic «Настройки модов», phase 0 (open):** real clicks reach vanilla FLX buttons inside a vanilla window («Отмена» closed `W_InventorySettings_C`), but a
+>   checkbox created by `Create(pc, class, pc)` stays dead even inside it; 48 of 49 live FLX buttons live in a window's `WidgetTree` (H4: the OUTER matters).
+>   `Create(window, class, nil)` builds inside `<window>.WidgetTree`; adding it + `SetText` in ONE call crashed (15:38) — next: the same, ONE action per call,
+>   stand check after each (`testcases/TC_conan_settings_hub_spike_2026-10-30.md` S11–S14, `researches/conan-mod-settings-hub/vanilla-settings-widgets.md`).
+
 ## 2026-10-31 16:53 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat 0af53b17
 
 > - **W4 minimap DONE and ACCEPTED 10:09** (`[OWNER]` «вот теперь хорошо»): coordinates inside the ring on a plain dark rounded plate, font 13, inset 46;

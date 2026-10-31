@@ -111,8 +111,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > commands, what to verify first.
 
 > **Older handover pointers (2026-10-30 16:55 … 2026-10-31 12:21) — collected in the chronicle, entry 2026-10-31 16:53 +03:00 (second part).**
-> - **The KUMM README undo paragraph — DONE 19:0x** by the portrait into `README.md` (after the `"export": false` paragraph; facts from `Deploy-ModPack.ps1`
->   108–233, 987–1013); voice-lint SKIPPED=3 (the portrait's §8 has no pattern table); a clean-instance §7B pass found 11 hits, all applied. The owner's proofread is open.
+> - **Closed entries of the chat 9c35b034 (README undo paragraph, the 18:54 NOW line, the 15:36 session, the 10 launcher mockups round, the 18:01/18:02 closure lines, phase 0 open) — moved verbatim to the chronicle, entry «moved from STATUS at the soft closure of the chat 9c35b034».**
 > - **The mod-settings hub look APPROVED 19:09** (mockup 5 of `ConanExiles/_config/settings_hub/mockups/mockups.html`, «Моды Krinik'а», per-author hubs, the
 >   entry button with a vertical scrolling list — the owner's words in plan 38's header). Route — a KIT window (recon `researches/conan-mod-settings-hub/
 >   mod-ui-module-registration.md`). **PHASE 0 PASSED 19:32–19:37** (pack `98a66f1`, KUMM `775925c`, report `testcases/reports/2026-10-31_conan-hub-kit-window.md`):
@@ -127,36 +126,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (HOUSE_RULES rule 21; `Game.locres` patched, pack `c394b3a` — not yet seen in game).
 >   Idea 23 (versions on a public GitHub feed + the launcher's update check; later self-update of the launcher and the build) — awaits the owner's approval,
 >   the public repo's name and the download place.
-> - **NOW (18:54, `/dayloop` by «работай автономно» 18:53): the mod settings window — epic 38** (`[OWNER]` «нас ждет большой долг - окно настройки модов» · 18:54;
->   «рыболку можно не троггггггать, оно красивое» · 18:54 — the fishing window stays as is, it is the look's model). Plan `plans/38_EPIC_conan_mod_settings_hub.md`,
->   phase 0 `plans/38_epic38_phase0_widget_spike.md`. In flight in parallel: a helper rebuilds `KrinikConanLauncher.cs` by the approved mockup 11 + frame 7 (pack).
-> - **Session 2026-10-31 15:36– (resume):** one build script for the delivery documents — `ConanExiles/build_docs_and_launcher.cmd` (author links from
->   `author_links.txt` → the guide's «Автор сборки» + PDF + `KrinikConanLauncher.exe`, plan 35 G11 item 7, pack `2336de3`); Krinik mods carry the build version
->   **1.0.0** (seen in the pause-menu list 15:51, pack `35c96d8`); **bug 72 DONE** — the install keeps an undo journal + copies (`<game>\_kumm_backup`),
->   `uninstall_krinik_build.cmd` and the launcher's «Удалить сборку» return the pre-build state (KUMM `528b63e`, fixture 34/34; the live Conan folder run U10 PASSED 16:07 —
->   0 differences of 1728 entries). So a clean game copy is NOT needed: tests run on the live game, uninstall, check, reinstall (the owner 15:51: «зачем тебе чистая версия»).
->   **The README is being rewritten from scratch by the owner's voice portrait** (plan 35 G11 item 8 — his words there): a helper reads the whole
->   `krinik_voice/AUTHOR_STYLOMETRY.md`, a second checks; KUMM `.kaif/kaif.json` → `voicePortrait`. Next after it: the mod settings windows (W19–W22, W24).
->   **16:31–16:4x:** the guide rewritten and checked (pack `048fb4b`), the owner's answers applied in part (two-line title, «Руководство пользователя», numbered
->   chapters 1., 1.1 — `0539d33`); our mods renamed `KrinikConanCamera` / `KrinikConanModPackStatus` (pack `96c1c5b`, HOUSE_RULES rule 19; the owner's live
->   `config.lua` of both carried over, seen in game 16:41); delivery names English + underscores (rule 18: `collect_report.cmd`, `uninstall_krinik_build.cmd`,
->   `_kumm_backup`, `build_docs_and_launcher.cmd`). Done 16:4x–16:5x: the guide carries the owner's answers (our mods at the top of the one composition list, «вы» steps, 7 of ours);
->   `KrinikIntro` + `KrinikConanModPackStatus` merged into **`KrinikConanModPackManager`** (`[OWNER]` 16:48 «вот это все организационные вопросы» ·
->   «Я предлагаю их объединять в KrinikConanModPackManager»; pack `9b686b5`, seen in game 16:51: «СБОРКА: моды 66/66», the intro found); the PDF opened
->   for the owner 16:5x (no verdict yet). The shipped Krinik set is 7 (HOUSE_RULES rule 19). Open: the camera's Nexus draft still says ConanCameraControl (publication name — the owner's).
 > - **Waits for the owner's hands (called in chat 2026-10-31 16:2x):** `TC_conan_build_stability_compat_perf_2026-10-26` R2 — a stone picked up in third
 >   person at the default and the far zoom; AIM15 — the arrow seen leaving the bow and landing under the crosshair; DM0 — F1 expands the Damage Meter: does it cover Hosav's HUD text (called 16:2x;
 >   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
 >   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own.
 >   The emulated-input attempt of 16:25 (the hero never drew the bow) — verbatim in the chronicle, entry 2026-10-31 16:53 +03:00.
-> - **2026-10-31 18:17 +03:00 — 10 launcher mockups shown** (the owner 18:06 «лаунчер некрасивый, иди в интернет в разведку и 10 макетов с вариантами давай разными»): recon
->   `researches/conan-launcher-design/README.md`, mockups pack `_config/launcher/mockups/mockups.html` (`node shoot.mjs <dir>` → 3840×2160 WebP; pack `723494b`), review folder
->   `Conan Exiles Mods/НА ОТСМОТР НИКОЛАЕМ/27_launcher_10_variants/` opened. **PICKED 18:22–18:26:** variant 2 rearranged + gold Play last + a thin rough
->   frame — mockup 11 of `mockups.html` (pack `acc7d44`), the owner's words in `ideas/22_conan_build_gui_installer.md`; shown in folder `28_launcher_variant_2_rearranged`.
->   Open: title font (Oswald vs the buttons' Georgia) and the state-driven main button. Next — rebuild `KrinikConanLauncher.cs` by mockup 11 (frame from
->   `make_frame.py` textures), frames at 720p/1080p/2K/4K (rule 17).
-> - **18:02 FORCE CLOSURE (done since: the layout is pack `cdc299f`): the launcher-layout helper was still running (the owner 18:02: «лаунчер некрасивый, кнопки расположить слева в вертикальную колонку» · «описания, если нужны - справа») — its result is UNCOMMITTED in the pack working tree (`_config/launcher/`): check the frame (`scratchpad/launcher-v2/`), commit, show. The owner: «в новом чате продолжим делать».**
-> - **18:01: the guide FACT-CHECKED (pack `1f82ce6`, 11 sheets, guide_lint clean; owner questions: 1.0.0 date, Num 8/2 wording, Oblivion vs Remastered, «лучше стреляет из лука» vs the code, W29/EAA emblem) and the launcher look (pack `8f757e6`, frames at 100 % only) — show, then 2K/4K × 300 % frames. Older: 17:5x the guide rewrite (pack `2f9f2b8`) was a DRAFT — facts partly from the stale 10-26 guide; a fact-verification helper started 17:51 (sources: mod notes, plan 36 W, bug 64, modpack.json; the owner: «ему можно брать факты из старого текста, но ЭТО НЕ ФАКТЫ НИХУЯ БОЛЬШЕ»). Accept its result, frames of every sheet, commit, show the owner.**
 > - **FIRST next chat (from the 16:5x closure; the owner's «работайте автономно» 16:49 stands → `/dayloop`):** (a00, 17:5x) two helpers were running at the force closure — the guide rewrite FROM SCRATCH by the portrait (all owner rules: plan 35 G11 item 8, its 17:2x–17:49
 >   lines; must pass `python -I _config/release/guide_lint.py docs/guide/guide-3.0.1.html`) and the launcher redesign (wallpaper, borderless, Conan-metal frame and
 >   buttons — idea 22): check their output in the pack working tree (uncommitted), frames, commit, wire guide_lint into build-docs.py, show the owner; (a0) sweep the WHOLE guide for the 17:25 error class (a feature described as acting by itself — plan 35 G11 item 8), then the design recon `researches/document-design-manuals/README.md` (a helper started 17:21 — read its checklist, apply it to the guide;
@@ -168,10 +142,6 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   plan 36 item 23). (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
 >   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
 >   (5) The release gate at 720p / 1080p / 2K / 4K (rule 17). (6) Item 21 — a vanilla quick-bar frame needs a clean-game stand (also for q4).
-> - **Epic «Настройки модов», phase 0 (open):** real clicks reach vanilla FLX buttons inside a vanilla window («Отмена» closed `W_InventorySettings_C`), but a
->   checkbox created by `Create(pc, class, pc)` stays dead even inside it; 48 of 49 live FLX buttons live in a window's `WidgetTree` (H4: the OUTER matters).
->   `Create(window, class, nil)` builds inside `<window>.WidgetTree`; adding it + `SetText` in ONE call crashed (15:38) — next: the same, ONE action per call,
->   stand check after each (`testcases/TC_conan_settings_hub_spike_2026-10-30.md` S11–S14, `researches/conan-mod-settings-hub/vanilla-settings-widgets.md`).
 > - **Waiting for the owner:** the fishing captions' look (folder 9); the HUD blink dim start 0.25; the crash-report README; his save — the 12:05 copy question
 >   («верни») still open; every run of 2026-10-31 restored the copy `_save-backup/2026-10-31_1004-before-w13-arrows` (byte-equal to the live save at 10:48).
 > - Work trees kept: `_paksview-3.0.1` (66 GB) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB) — rule 15. Outward: watch https://github.com/Arora-Sir/Super-Artemis/issues/3.
