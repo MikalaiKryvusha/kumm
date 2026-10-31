@@ -122,7 +122,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   `ExecuteWithDelay` fixed (EXP-0400); `KrinikMenuProbe` had hidden the game's notification window since 10-25 — removed (EXP-0401); world entry under a
 >   minimized window crashes — `enter-world-remote.sh` restores the window first. W30 arrow blood WORKS by a direct call (pre-hook, EXP-0402, review folder 22).
 >   Bug 64 item 8 (Simple Modlist over the Esc menu at 1080p) fixed again — list 540 (folder 23). W29 shouts measured at 60 fps: game subtitles
->   (`W_SubtitleEntryView_C`) pop in and out in ONE frame, ≈ 1.95 s, no fade, no backing (folder 24). New: plan 35 release gate «1080p + 2K + 4K by eye»
+>   (`W_SubtitleEntryView_C`) are drawn one frame ≈ 50 px low, then jump into place — the owner's «мерцание» (08:56); ≈ 1.95 s, no fade, no backing (folder 24). New: plan 35 release gate «1080p + 2K + 4K by eye»
 >   (the owner 07:51); idea 22 — a GUI install wizard «сам находит, сам устанавливает» (the owner 07:55–07:56). Side: KAST had hidden the owner's desktop
 >   icons — restored (`FFlags` of the desktop bag, KAST EXP-0009); ImageGlass is the system image viewer now (the owner set the default himself, 08:21).
 > - **FIRST next chat:** (1) **W29** — the owner's pick from review folder 24: А fade ≈ 0.15 s · Б a dark backing · В both; then a kit override of
