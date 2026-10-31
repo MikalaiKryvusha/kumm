@@ -580,6 +580,17 @@ Temperature (2026-10-30, live + Hosav bytecode): the hero's temperature is `BPEn
   calls its BP event `SetText` in the same tick, `SetTextActive(true)` 8–197 ms later; visibility stays 4; the line is removed from the list with no
   event (`UserWidget:Destruct` hook silent) after the voice length (0.93–1.75 s seen; 0.09 s when replaced). The engine's subtitle manager is not a
   UObject — no duration readable from Lua. The text arrives as an ICU pattern («Не на того {Gender}|gender(напал,напала)!»), `GeneralText` formats it.
+- **Building UI into a live widget from Lua (proven 2026-10-31, KrinikConanUI sections `krinik_shout_fade`, `krinik_minimap_coords`).** A panel widget:
+  `StaticConstructObject(StaticFindObject('/Script/UMG.SizeBox' | '/Script/UMG.Border'), <owner>.WidgetTree, FName('<name>'))`, then
+  `<overlay>:AddChildToOverlay(w)` → the slot (`SetHorizontalAlignment` 2 centre, `SetVerticalAlignment` 1 top / 3 bottom, `SetPadding{…}`). A user
+  widget of a game class: `StaticFindObject('/Script/UMG.Default__WidgetBlueprintLibrary'):Create(pc, <class>, pc)`, put by `SizeBox:SetContent` /
+  `Border:SetContent`. A Border's own brush: `b.Background` copy, `DrawAs = 4` (RoundedBox) + `OutlineSettings.CornerRadii {X,Y,Z,W}` +
+  `RoundingType 0` → `SetBrush`, colour by `SetBrushColor` after it. Moving a widget: `RemoveFromParent()` then `SetContent` into ours. A root panel
+  that is not a BP variable (`Overlay_0`, `MinimapOverlay`) is reached as `<known child>:GetParent()`.
+- **A Canvas slot pushed past the screen edge is drawn SHRUNK, not moved** (Simple Minimap, 2026-10-31 09:51/09:58: `SetPosition` 6 units toward the
+  corner kept the ring's edge on the same pixel and made it smaller). To move a widget into a corner use `SetRenderTranslation{X,Y}` — render only, size kept.
+- **An actor handle kept in `_G` across remote calls can read a zero vector** (2026-10-31 10:05: a frozen boss, `IsValid` true, `K2_GetActorLocation`
+  0 0 0 on the next call). Keep its NAME and re-find it each call (`corpse-stand.sh` pattern); copy X/Y/Z into numbers at once.
 - **The game HUD can stand hidden as a whole** (2026-10-31 09:2x, after `launch-fg.ps1` → world entry → god → teleport): `W_NewHealthUI_C`,
   `WBP_MainHotbar_C`, `W_SubtitleRenderer_C` at visibility 2; `FunCombat_PlayerController_C:ToggleHUD(<1 param>)` with true/false changed nothing;
   `SetVisibility(4)` by the remote restores each. Cause unknown (input action `HideGui` exists on the controller).
