@@ -110,6 +110,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **HANDOVER of the chat a3dcf82b (2026-10-31 21:48–23:3x, dayloop «работай автономно над сборкой Конана»):** done — the hub look by the owner's
+> five remarks (review folder `39_hub_look`, his eye pending), the camera / pack-manager / archery pages live (plan 38 step 6 DONE), DM0 pass,
+> W18 EAA card + Beyond Decor in Russian, «шкала» carried into the locres source, tools `aim-shot.sh`, `locres-add-keys.py`, the locres-set-tr guard.
+> FIRST next: (1) the owner's eye on folders `39_hub_look` and `40_arrow_clip` (AIM15); (2) the public repo after his README read (`38_public_readme`);
+> (3) C1 — read the placed chests of `Mines_of_Set/Caverns_of_Set_Level` from the level file; (4) R2 — a natural stone pickup stand; (5) plan 38 step 7–8
+> (phase 1 — the inventory button «Настройки модов», W24: today the hub opens only by the remote). Before any remote call on a mod's own function —
+> copy `Saved/SaveGames/` (EXP-0417).
 > **Older handover pointers (2026-10-30 16:55 … 2026-10-31 12:21) — collected in the chronicle, entry 2026-10-31 16:53 +03:00 (second part).**
 > - **21:24 — the public repo: READY TO CREATE after the README check** (idea 23 holds the decisions and the audit summary). The private pack
 >   `_config/public_release/`: `audit_2026-10-31.md` (private — it quotes the traces), `README.draft.md` (from `README.template.md` by `mods-table.mjs`),
