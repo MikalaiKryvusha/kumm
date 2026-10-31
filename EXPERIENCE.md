@@ -91,6 +91,27 @@
 
 ## Entries
 
+### EXP-0415 · 2026-10-31 · ❌→✅ · #conan #ui #kit #font #colour #hub
+class: wrong-model-of-the-frame
+**Lesson:** three causes of the hub's «bold, pale, see-through» look were invisible in the kit script and plain on a live probe: (1) a font copied from a
+game row in the kit (`TextSettingName`) is the ENGINE's Roboto Bold — the game styles its rows at run time; (2) UMG colours are LINEAR — `0.06` renders as
+sRGB ≈ 69, `0.55` ≈ 194, so «dark» and «grey» came out grey-brown and near white; (3) the game's serifs (Cardo, Crimson Pro) carry no Cyrillic — Russian
+falls back to a sans beside serif Latin. Read the live `Font.FontObject` / `TypefaceFontName` of a text and pick colours by sRGB → linear before writing a kit.
+**Repro:** `bash _config/pult.sh "lua return dofile('<probe_fonts.lua>')"` on the open window (the probe reads `t.Font.FontObject:GetFullName()` and
+`CompositeFont.DefaultTypeface.Fonts`); colour: linear = (sRGB/255)^2.2.
+**Trigger:** writing a font or a colour into a kit widget script.
+mechanized: none — the constants block of `_config/devkit/kit-krinik-modsettings.py` names the linear rule and the font choice
+
+### EXP-0414 · 2026-10-31 · ❌→✅ · #conan #ui #stand #vanity
+class: repro-condition-not-established
+**Lesson:** a mod window that «closed by itself» 2–3 min into a background run was hidden by the game's idle vanity camera (`bHiddenDuringVanityMode` true
+in its module row); a background stand gets NO input, so vanity always comes. `FindFirstOf('GUIModuleController'):EnableVanityCameraMode(false)` ends it;
+a window opened while hidden is not filled by its section — reopen it. A player's window row takes `bHiddenDuringVanityMode` false as the vanilla
+`InventorySettingsPopup`.
+**Repro:** `bash _config/pult.sh "lua local s=''; for _, x in ipairs(FindAllOf('W_KrinikModSettings_C') or {}) do s=s..x:GetVisibility() end; return s"` → 2 = Hidden.
+**Trigger:** a mod window or HUD element vanishes in a background run with no log line.
+none-cheap: a stand step (call `EnableVanityCameraMode(false)` before each frame) is the check
+
 ### EXP-0413 · 2026-10-31 · ❌ · #ui #taste #owner-eye #conan #hub
 class: verified-on-the-easy-case
 **Lesson:** the hub window was judged by STRUCTURE (head, list, rows, footer in place) and by FUNCTION (clicks route, values save) — five look defects

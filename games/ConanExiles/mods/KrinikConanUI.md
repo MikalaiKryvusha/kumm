@@ -49,8 +49,8 @@ both listed in `Local/CookInfo.ini` (cook to `/Game/Mods/KrinikConanUI/<X>`):
 
 | Asset | What | Numbers |
 |---|---|---|
-| `Local/W_KrinikModSettings` | Widget Blueprint, parent the native `WindowRoot` (as the Damage Meter, Hosav and fishing settings windows). Tree: `CanvasPanel_0` → `SB_KrinikWindow` (centred) → `OV_KrinikFrame` (`Img_KrinikBackground` `T_UI_GeneralWindow_Background`, `Img_KrinikBorder` `T_UI_GeneralWindow_Border` Box) → `VB_KrinikContent`: `Hdr_KrinikTitle` (`WBP_Settings_Subheader`, Label «Моды Krinik'а · Настройки»), `Chk_KrinikFps` (`WBP_Setting_Checkbox`), `Sp_KrinikFill`, `B_KrinikClose` (`WBP_ButtonBase`, label «Закрыть», `KeyShortcutName` Escape — the glyph only, no click handler) | 900 × 420 units, content padding 48 / 29; skeleton look |
-| `Local/DT_KrinikUIModule` | module table, row struct `UIModuleTableRow`, ONE row `KrinikModSettings` = the fishing settings row (`Category Modal`, `FullscreenGUIAction None`, `CloseOnESC`, `CloseOnEndPlay`, `ShowInPlayingState`, `bHiddenDuringVanityMode`) with `WidgetClass` → `W_KrinikModSettings_C` | `ZOrder` 101 (over the fishing panel's 100) |
+| `Local/W_KrinikModSettings` | Widget Blueprint, parent the native `WindowRoot` (as the Damage Meter, Hosav and fishing settings windows). Tree: `CanvasPanel_0` → `SB_KrinikWindow` (centred) → `OV_KrinikFrame` (`Img_KrinikBackground` `T_UI_GeneralWindow_Background`, `Img_KrinikBorder` `T_UI_GeneralWindow_Border` Box) → `VB_KrinikContent`: `Hdr_KrinikTitle` (`WBP_Settings_Subheader`, Label «Моды Krinik'а · Настройки»), `Chk_KrinikFps` (`WBP_Setting_Checkbox`), `Sp_KrinikFill`, `B_KrinikClose` (`WBP_ButtonBase`, label «Закрыть», `KeyShortcutName` Escape — the glyph only, no click handler) | skeleton 900 × 420 (phase 0); since the look pass of 2026-10-31 22:0x — width 1240, height by the tallest live page, Noto Sans (see «The look pass» below) |
+| `Local/DT_KrinikUIModule` | module table, row struct `UIModuleTableRow`, ONE row `KrinikModSettings` = the fishing settings row (`Category Modal`, `FullscreenGUIAction None`, `CloseOnESC`, `CloseOnEndPlay`, `ShowInPlayingState`; `bHiddenDuringVanityMode` FALSE since 2026-10-31 22:0x, as the vanilla inventory settings popup) with `WidgetClass` → `W_KrinikModSettings_C` | `ZOrder` 101 (over the fishing panel's 100) |
 
 **How it reaches the game.** No ModController blueprint: the Lua section `krinik_mod_settings` calls `MergeDataTables(DT_UIModuleTable, DT_KrinikUIModule)` on the
 native `ModController` class default object (`/Script/DreamworldMods.Default__ModController`) once, 500 ms after the main menu's birth — log `merge (main
@@ -108,6 +108,26 @@ fill 4 ms; native setters take ALL their parameters — `SetIsToggledOn(NewIsTog
 IsInitializing)`; a game settings row keeps its own label box `SizeBoxSettingName` (350 wide) that squeezes the control — collapsed at fill; whole-number
 sliders get `MinFractionalDigits = MaxFractionalDigits = 0`; the slider box is set to 340 at fill (420 cut the longest row). FLX buttons read
 `IsHovered() = true` only while the game has focus. Open: the Simple Minimap (`SM_Minimap`, ZOrder 99) was once drawn over our window (ZOrder 101).
+
+**The look pass (2026-10-31 22:0x, the owner's five remarks 21:41 — «огромный», «кривые кнопки инфо», «большие расстояния», «странный жирный шрифт»,
+«некрасивый поп-ап»; seams and cases `testcases/TC_conan_hub_look_2026-10-31.md`).** Found by live probes on the open window:
+- **Font.** The kit's `WBP_Setting_Checkbox.TextSettingName` carries the ENGINE's `/Engine/EngineFonts/Roboto` face `Bold` (the game styles its own rows at
+  run time) — every text copied from it was Roboto Bold. The heading `WBP_Settings_Subheader` is `Cardo-SC-Bold` (small capitals: «Krinik» drew as
+  «Kʀɪɴɪᴋ»). The game's serifs `Cardo-*` and `CrimsonPro-*` have NO Cyrillic: Russian letters fall back to a sans beside serif Latin (frames t1/t2).
+  The game's own Russian text is a sans; ours now: `/Game/Fonts/NotoSans` (faces `Normal`, `Italic`, `Bold`, `BoldItalic`) — labels 19, hints 15, title
+  26 Bold in capitals. Other fonts loaded in the world: `KelsonSans` (`Normal`, `Light`, `Bold`), `Alte_Haas_Grotesk_*`, `OpenSans` (a mod's).
+- **Colours are LINEAR in UMG:** `LinearColor 0.06` renders as sRGB ≈ 69 (the «dark» plate was grey-brown), `0.55` ≈ 194 (the «grey» hints near white).
+  Text `(0.69, 0.67, 0.62)` ≈ `#d9d6cf`, grey `(0.25, 0.24, 0.22)` ≈ `#8a8680`, plate `(0.012, 0.011, 0.009)` opaque with an old-gold rim `(0.55, 0.40, 0.16)`.
+- **Vanity camera hides the window.** With `bHiddenDuringVanityMode` true (copied from the fishing row) the window went `Hidden` ≈ 2–3 min after the last input
+  (21:58:24, together with Hosav's «Настройки интерфейса» button); `FindFirstOf('GUIModuleController'):EnableVanityCameraMode(false)` brought it back. The
+  vanilla `InventorySettingsPopup` row has it false — ours too since this pass. A window opened while hidden is NOT filled by the section («module
+  opened, but no visible …») — close and reopen it.
+- **UE4SS hands Lua an empty `FGeometry`** (`GetCachedGeometry` / `GetTickSpaceGeometry` / `GetPaintSpaceGeometry` → size 0×0): a widget's screen place
+  cannot be read. The «i» plate is placed at the cursor instead: `WidgetLayoutLibrary:GetMousePositionOnViewport(win)` returns canvas units (at 4K the
+  viewport scale is 2.094, the canvas 1834 × 1031). `ForceLayoutPrepass()` + `GetDesiredSize()` DO work from Lua.
+- **Sizes.** Width 1240 (the widest row — «Сколько лежит кровь на земле» + hint, 487 units of text — with the list 290), list 290 with a 258 name box (= the section's `NAME_BOX`; every name but «KrinikConanModPackManager» whole), slider control 290 × 48, row gap 1; the
+  height is set at fill to the tallest LIVE page (a page switch never resizes the window). The «i» is a square text box (`MinDesiredWidth` 26.3 = the line
+  height of Noto Sans 14) inside a `HALF_HEIGHT_RADIUS` rounded box — a circle.
 
 **Mirror pair:** `ue4ss/feedback/collect_report.ps1` is a COPY of the pack's `_config/player-report/collect_report.ps1` (the Lua mod needs it inside the game
 folder). Check: `cmp _config/player-report/collect_report.ps1 _unpacked/KrinikConanUI/ue4ss/feedback/collect_report.ps1` — edit the source, copy again.

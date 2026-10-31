@@ -1,7 +1,7 @@
 # Plan 38 · phase 2 — the «Моды Krinik'а» hub window by mockup 5, live rows and a settings store
 
 > **Created:** 2026-10-31 · **Parent:** `plans/38_EPIC_conan_mod_settings_hub.md` phase 2 row; phase 0 closed 2026-10-31 19:37 (kit window, a live checkbox)
-> **Status:** written 20:22; step 1 (inventory) running; the dayloop takes it by «работай автономно» (2026-10-31 19:19, again 20:12)
+> **Status:** written 20:22; step 1 (inventory) running; the dayloop takes it by «работай автономно» (2026-10-31 19:19, again 20:12); the owner's look remarks of 21:41 fixed 22:2x (pack `5f497ce`, report `2026-10-31_conan-hub-look.md`) — his eye pending
 > **Outbound:** the look — frames to the owner's eye against mockup 5 (review folder); taste stays his
 
 ## Goal vector (Achieve)
@@ -61,6 +61,11 @@ left-right), ONLY the selected mod's rows on the right, each row with an «i» t
 > получилось» · «и как конспекты по UI хорошему в свароге говорят о проблемах и хорошем стиле»):** read `SvarogsDream/docs/UI_RULEBOOK.md` in full (§0
 > philosophy, §2 eight principles, §3 text, §4 window layout, §10 how every window is checked before the owner, §10а the seven classes of the owner's asks,
 > §11 what not to do), then walk the hub frame beside `variant_05_final.webp` at the same scale against it and write the seam list (EXP-0413) — only then fix.
+> **Step zero DONE 2026-10-31 21:52** — the rulebook read in full, the seam list S1–S8 in `testcases/TC_conan_hub_look_2026-10-31.md` (the 4K frame beside
+> mockup 5 at 1600×900). Live probes 21:55–22:03 found the causes (EXP-0414, EXP-0415): the labels were the ENGINE's Roboto Bold, the colours linear
+> (0.06 → sRGB 69), the game's serifs carry no Cyrillic, the window hidden by the idle vanity camera, Lua sees no widget geometry. The fixes went into
+> the kit script (width 1240, list 290, height by content, Noto Sans, linear colours, square «i», a dark plate with a gold rim, `bHiddenDuringVanityMode` false)
+> and the section (capitals title, height = the tallest live page, the plate at the cursor, the 290 slider box, the HUD-size hint «в процентах»).
 - [x] 4. **Kit window by mockup 5** — rewrite `kit-krinik-modsettings.py` (widgets reused by name, never removed — the GUID trap; run twice): head row
       (title TextBlock + `B_KrinikCloseNoSave`), body (left `SC_KrinikMods` with one name button per mod, clipped name boxes; right — mod name + note,
       `WS_KrinikPages` with one page per mod: per row an HB of our label + «i» button + the game row with an empty label as the control), the «i» plate
