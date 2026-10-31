@@ -40,6 +40,11 @@ heading; the current gold rod frame (no corner rivets) and the current metal pla
 18:26: `[OWNER]` «гнопку играть - вниз, золотой» · «койму ... не из гладкого металла, а из грубого, как в логотипе конана» · «тоньще койма» — «Играть» is the LAST
 button of the column, gold face, the game-path line right above it; the frame 7 px (was 11) of rough cast metal — texture `mockups/make_frame.py` → `frame_h.jpg` / `frame_v.jpg`
 (the Rod profile with grain, scratches along the rod, pits, wear patches).
+18:30–18:32: `[OWNER]` «просто плейграунд, без длинного текста» · «контур тоньшн и плоский кованный метал, а не круглый» · «для конан эксайлс - это центрировать» ·
+«некрасивая кайма» · «тени какието» · «затемнение под текстом ок верни» · «тени на койме были» · «метал грубее». So: the link line reads «PlayGround: …» (the guide
+keeps its long label — the launcher needs its own short one); the frame 5 px, a FLAT forged strip (thin edge bevel, wide flat bronze — not a round rod), copper-gold, rough
+by fine traces only (grain, light scratches, pits, rare nicks) and NO shading blotches; the darkening under the texts stays; «для Conan Exiles Enhanced 3.0.1» centred
+under the title.
 Open: the state-driven main button (asked 18:1x, no answer yet).
 
 ## Goal vector (Achieve)
