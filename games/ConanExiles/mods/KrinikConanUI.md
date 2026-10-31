@@ -90,6 +90,20 @@ Live check of the pak: the remote reads `…WBP_ContainerInfo_C:WidgetTree.Overl
 
 The pause section's Esc map (`krinik_pause_in_menu`, `MOD_WINDOWS`) carries `KrinikModSettings` → `W_KrinikModSettings_C` since 2026-10-31 (case K8b).
 
+**The settings store (plan 38 phase 2, 20:37, `[NOT-TESTED]` in game).** `ue4ss/Scripts/krinik_settings.lua` — a module, not a section (required by the
+sections): file `<game>\ConanSandbox\Saved\KrinikSettings.lua` (`return { ["key"] = value, … }`, sorted; only what the player changed — a default deletes
+its key), read once at load, written only by the hub's «Сохранить»; `S.get(key, default)`, `S.on_change(fn(changed))`. Desk test (no game):
+`lua _config/tests/test_krinik_settings.lua` from the pack root. Keys read by the sections: `ui_fps` (bool, `krinik_fps_counter` — the counter's switch,
+Collapsed and not recounted when off; also at every HUD birth), `ui_blink_food` / `ui_blink_weight` (shares, `krinik_hud_blink`, read every poll),
+`ui_menu_slow` (× slower, dilation = 1 / value, `krinik_pause_in_menu`, every poll), `ui_craft` (bool, the craft multiplier = 1.0 when off). The hub
+section rewritten for mockup 5: ONE table `PAGES` (labels, «i», hints, ranges — the kit places widgets only), `LIVE = { ui = true }` (a mod's page shows
+only when its values apply), a LMB key bind that returns on one boolean while the window is closed, a 50 ms chain for the «i» hover and the name
+marquee only while the window is open. Kit tree by `kit-krinik-modsettings.py` (phase 2 block): `HB_KrinikHead`, `HB_KrinikBody` (`SC_KrinikMods` →
+`Brd_KrinikMod_<page>` → `SC_KrinikModName_<page>` → `Txt_KrinikModName_<page>`; `WS_KrinikPages` → `VB_KrinikPage_<page>` → `HB_KrinikRow_<id>`:
+`Txt_KrinikLbl_<id>`, `Brd_KrinikInfo_<id>`, `Txt_KrinikHint_<id>`, `SB_KrinikCtl_<id>` → `Sl_Krinik_<id>` / `Chk_Krinik_<id>` (FPS — the phase-0
+`Chk_KrinikFps`)), `HB_KrinikFoot` (`B_KrinikReset`, `B_KrinikSave`, `B_KrinikSaveClose`), `Brd_KrinikTip` (canvas, collapsed). Kit trap paid: a
+brush's `image_size` is a `DeprecateSlateVector2D` — Python's `Vector2D` does not convert; thin rules are Images inside a SizeBox.
+
 **Mirror pair:** `ue4ss/feedback/collect_report.ps1` is a COPY of the pack's `_config/player-report/collect_report.ps1` (the Lua mod needs it inside the game
 folder). Check: `cmp _config/player-report/collect_report.ps1 _unpacked/KrinikConanUI/ue4ss/feedback/collect_report.ps1` — edit the source, copy again.
 
