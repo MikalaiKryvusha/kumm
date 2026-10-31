@@ -118,7 +118,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   mod-ui-module-registration.md`). **In flight 19:12:** a helper builds the kit window skeleton (`W_KrinikModSettings` + `DT_KrinikUIModule` + the merge) and
 >   tests a real click on a game checkbox inside it — read its run report `testcases/reports/2026-10-31_conan-hub-kit-window.md` when it lands.
 >   Also in flight: the launcher rebuild by mockup 11 + frame 7 (pack `_config/launcher/`, uncommitted until that helper commits).
->   Next after the click passes: the «author → mods with settings» inventory over `modpack.json` (the owner 19:10: a hub for every such author).
+>   The list under «Настройки модов» (the owner 19:14–19:16): «Моды Krinik'а» · «Моды Xevyr'а» · «Рыбалка» (its own window) · «Прочее» (always last; single-mod
+>   authors) — inventory `researches/conan-mod-settings-hub/author-hub-inventory.md` (its live module-table scan is open). The slider is «шкала» everywhere
+>   (HOUSE_RULES rule 21; `Game.locres` patched, pack `c394b3a` — not yet seen in game).
+>   Idea 23 (versions on a public GitHub feed + the launcher's update check; later self-update of the launcher and the build) — awaits the owner's approval,
+>   the public repo's name and the download place.
 > - **NOW (18:54, `/dayloop` by «работай автономно» 18:53): the mod settings window — epic 38** (`[OWNER]` «нас ждет большой долг - окно настройки модов» · 18:54;
 >   «рыболку можно не троггггггать, оно красивое» · 18:54 — the fishing window stays as is, it is the look's model). Plan `plans/38_EPIC_conan_mod_settings_hub.md`,
 >   phase 0 `plans/38_epic38_phase0_widget_spike.md`. In flight in parallel: a helper rebuilds `KrinikConanLauncher.cs` by the approved mockup 11 + frame 7 (pack).
