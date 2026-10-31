@@ -29,7 +29,7 @@ Functional run: real F1 key presses in the live world with frames read; the remo
 
 ## 5. Found
 
-none proven — C1's defect stays a hypothesis until a placed chest instance is read.
+none proven — C1's defect stays a hypothesis until a placed chest instance is read. A stand slip: `Restore()` was saved by the meter into `Saved/SaveGames/DamageMeter.sav` — the owner's meter came up expanded at the next launch; undone by `Minimize()` at 23:08 and seen collapsed after a restart at 23:10 (EXP-0417).
 
 ## 6. Traces
 

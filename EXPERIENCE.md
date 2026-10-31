@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0417 · 2026-10-31 · ❌→✅ · #conan #stand #save #owner-world
+class: stand-differs-from-owner-world
+**Lesson:** the stand's save copy covers `Saved/Game_0.db` only — the mods keep their own UI state in `Saved/SaveGames/*.sav`: a remote `Restore()` of the
+Damage Meter (22:57) was written to `DamageMeter.sav` and the owner's meter came up EXPANDED in the next launch; fixed by `Minimize()` (23:08, the file
+rewritten) and seen collapsed after a restart (23:10). Any remote call that changes a mod's window or setting is undone by the same mod's call before
+closing, and `SaveGames/` is copied with the save before such a run.
+**Repro:** `ls -la --time-style=+%H:%M:%S "<game>/ConanSandbox/Saved/SaveGames/"` before and after the run — a fresh mtime is a changed owner state.
+**Trigger:** a remote call on a mod's own function (Restore, Minimize, Toggle, Save…).
+none-cheap: the check is the mtime listing above; `save-restore.sh` could grow a SaveGames copy
+
 ### EXP-0416 · 2026-10-31 · ❌→✅ · #conan #stand #mouse-seq #archery #hub
 class: stale-stand
 **Lesson:** an aim «that never starts after the hub» was the stand, not the mod: the evening's sequences opened with `kdown 1`, a middle click or a real
