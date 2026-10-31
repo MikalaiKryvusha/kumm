@@ -194,7 +194,12 @@
          повторного входа и при частой стрельбе» in a progress report: «это не скоуп сборки» — fixes of OUR OWN crashes and our mods' bugs are never listed
          as what the build gives, neither in the README nor in progress reports · 16:28 on «лишние стрелки голода и жажды убраны»: «это не скоуп
          сборки. Это частный случай переработки мода худ для лучшей читаемости» — particular tweaks are folded into the feature one level up («HUD Hosav
-         reworked for readability»), never listed one by one.
+         reworked for readability»), never listed one by one. · 16:29 «координаты внутри кольца миникарты … для игроков в ридми это будет переработка мода
+         миникарты для лучшей читаемости» · «стрельба в прыжке — вот это скоуп сборки такой, который можно юзерам расхваливать».
+         **Rewritten and checked 16:31** (pack `048fb4b`, 11 sheets). **The owner's answers 16:3x:** our mods — at the top of the one list of all mods, no separate
+         «Моды Krinik» section; our mods are named `Krinik…` (`KrinikConanCamera`, `KrinikConanModPackStatus` — HOUSE_RULES rule 19); instruction steps on «вы»
+         («Откройте…») in the guide and the howto; the storefront subtitle keeps «исправления». **Next:** the mods rename (code, deploy, notes), then the guide
+         edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
 - [x] Г13. **Сделано 2026-10-26 20:24 (план 36 п. 5):** `_config/player-report/Собрать отчёт.cmd` + `collect-report.ps1` в `extras` манифеста;
