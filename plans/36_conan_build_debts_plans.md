@@ -186,7 +186,7 @@ in front: the owner's screen)` |
 Готово: подложный процесс-двойник (копия `notepad.exe` под именем `CrashReportClient.exe` в черновике) запущен после старта —
 прибор его закрыл; процесс, запущенный ДО старта, не тронут.
 
-### 5. Г13: «Собрать отчёт.cmd»
+### 5. Г13: «Собрать отчёт.cmd» — ✅ DONE 2026-10-31 11:57 (report `2026-10-31_conan-player-report-identifiers.md`: 0 identifiers, `Krinik…` names intact; the three files in `extras`)
 Разведка — строка `PARKED:` в `STATUS.md` и план 35 Г13. Имя пользователя Windows — начало имён наших модов: подстановка по всему тексту
 запрещена, заменяются только строки `LogInit: Computer:`, `LogInit: User:`, `MachineId=`, поля `MachineId`, `LoginId`, `EpicAccountId`,
 пути профиля.
