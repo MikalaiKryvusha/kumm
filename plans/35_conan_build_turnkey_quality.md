@@ -236,7 +236,9 @@
          a chapter «Что нового» → «Исправление дефектов»; a mod's description = only what the mod gives. 17:43 «Названия не переносятся на две строки» (e.g.
          «The Elder Scrolls IV: / Oblivion») — names are non-breaking. 17:43 on «читаемости выстрела»: «какой нахуй читаемости??? ТЫ дурак что ил?» —
          «читаемость» only about text and interface; every word fits what it names (RUSSIAN_RULES §5). 17:45 on «крафт героя при этом идёт с обычной
-         скоростью»: «ну нахуя ты такое пишель.. блять» — a fix of our own side effect is never written; any «X при этом работает как обычно» is an excuse. **Next:** the mods rename (code, deploy, notes), then the guide
+         скоростью»: «ну нахуя ты такое пишель.. блять» — a fix of our own side effect is never written; any «X при этом работает как обычно» is an excuse. 17:45 «это был один из багов» · «непредусмотренное поведение» · «мы его пофиксили» ·
+         **«Игроку ПОЕБАТЬ!!! что там нахуй идет и как»** — the filter for the whole guide: the player reads WHAT he gets; how it works inside is never written,
+         except what he must do with his hands. **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
