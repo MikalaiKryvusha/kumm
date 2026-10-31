@@ -53,6 +53,14 @@ Krinik... получают версию 3.0.1» · 2026-10-28, chronicle) in the
   bone ≥ 60 cm ahead of the copy origin on a humanoid — the origin is the nock end, the tip ≈ 76 cm ahead. The push that hides the tip by `tip_in`:
   `clamp(depth − arrow_length + tip_in, into_body_cm, into_body_max_cm)` (arrow_length from the copy's `StaticMeshToShow` bounds or 76). Live now:
   the push capped to the old 15 cm, the depth logged (pack `e536ce9`); the formula waits for a stand with a LIVING target and a look at the arrows.
+- **The copy is born ≈ 1.8 m SHORT of the hit (stand 2026-10-31 10:57–11:04, a summoned green Kappa, `_config/arrow-stand.sh`):** the hit's `ImpactPoint`
+  stands 180–187 cm ahead of the copy origin along the flight in every hit, the mesh's local Z runs along the flight (factor 1.00 / 0.96), the tip at +76 cm —
+  so the drawn arrow hung ≈ 1.1 m before the body (side frame: horizontal, in the air before the snout; the 60 cm push did not reach). Most likely the copy
+  takes the projectile's place BEFORE its last flight step. **Live since pack `46e2069`:** push = clamp(impact − tip + `tip_in_cm` 10, 15, 200) — the tip goes
+  to the impact point and 10 cm in; the bone depth only logged (toward the bone the head arrow would sink whole). Side frame after: the shaft enters the snout,
+  the tip hidden (the owner 11:09: «мне показалось, что стрелы в капу начали нормально втыкаться»). Cases P4–P7 `TC_conan_arrows_follow_mob_body_2026-10-31_push.md`.
+- Open (the owner 11:09): `[OWNER]` «я ее убил, и все стрелы пропали» · «что в регдоле трупа пропадают стрелы» — do the stuck copies vanish when the body goes
+  ragdoll, and is it vanilla? Control: the same kill with `into_body = false`. A humanoid (P7) not run yet.
 - Open: on a 1080p crop of the frozen boss no arrow was visible on the arm while 3 copies lived — where the copy draws relative to the bone (its
   relative location) is the next read; the owner's symptom (arrows hanging in the air beside a Kappa) — plan 36 W13.
 

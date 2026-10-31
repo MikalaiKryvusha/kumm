@@ -14,6 +14,14 @@
 
 **Scope now (the owner, 07:56):** a simple wizard only — it finds the game itself and installs the build itself. The launcher is the later step.
 
+`[OWNER]` 2026-10-31 11:11 (tossed mid-task, during the «ОТЗЫВ» fix): «пусть в поставке игры будет наш exe лаунчер на будущее, и пусть ОТЗЫВ в нем
+открывает красиво сообщение инструкцию для игрока, как и куда писать КРинику отзыв, и какую папку приложить» · 11:20 «сделаешь раздел со ссылками
+автора в плейграунд и емейл мой».
+
+**The launcher, as of 11:11–11:20:** an `.exe` in the build's delivery; its «ОТЗЫВ» opens a well-designed instruction for the player — how and where to
+write to Krinik and which folder (the report zip) to attach; a section «Автор сборки» with the author's PlayGround page
+and e-mail (both stand in the pack's `_config/player-report/collect-report.ps1`, `$AUTHOR_MAIL` and the closing lines — KUMM is public, the addresses stay there). Same look and DPI rules as the installer above.
+
 ## Goal vector (Achieve)
 
 A player who unpacks the archive starts ONE file and sees a Windows window in the build's look instead of a console: the background from our intro
