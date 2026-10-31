@@ -17,7 +17,7 @@ The page renders `![alt](relative/path)` as an image (resolved against the docum
 
 ## Local remediation
 
-Fixed locally 2026-10-31 20:0x (the owner: «переоткрывай починенную»): `.kaif/tools/contour/core.mjs` inline() renders `![alt](src)` as `<img>`; `review.mjs` `embedImages()` replaces a local image path by a data URI (resolved against the document folder) in the RENDERED copy only, at the five reads (buildPage, notice, proofread, gateForOpen, checkDoc). Seen: interview 028 page built with 4 embedded webp images (4.3 MB), reopened. Reconcile at the next /kaif-update.
+A local fix of 20:0x (images embedded as data URIs into the md before rendering, also in gateForOpen/checkDoc) BROKE the page: the page's stale-document guard compared the embedded text with the file and refused to record answers («Документ переписан после того, как страница открылась»), the owner saw it twice; REVERTED 20:04 (files back to 0ec3a15). Lesson for the origin fix: embed images at HTML render time only, never in the text the page hashes. Until then: questions in the chat as text, pictures opened in ImageGlass.
 
 ## Guard
 

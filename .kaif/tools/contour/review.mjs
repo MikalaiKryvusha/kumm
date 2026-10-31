@@ -41,7 +41,7 @@ import { tmpdir, platform } from 'node:os';
 import { createServer, request as httpRequest } from 'node:http';
 import { randomBytes } from 'node:crypto';
 import { spawn, spawnSync } from 'node:child_process';
-import { join, resolve, basename, relative, extname, dirname } from 'node:path';
+import { join, resolve, basename, relative, extname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
   loadContourConfig, normalize, bodyHash, provenance, inQuietHours, parseMetaBlock, parseQuestions,
@@ -126,17 +126,6 @@ const KIND_NOTICE = 'notice';
 const FACES = ['interview', 'proofread', 'mockup'];
 const IMAGE_MIME = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif',
   '.webp': 'image/webp', '.svg': 'image/svg+xml' };
-// KUMM local fix (KAIF #187, 2026-10-31 — the owner: «страница интервью твоего сломана»): an image line `![alt](path)` of a document is embedded as a data URI
-// (path resolved against the document's folder) BEFORE rendering, so the page shows the picture with --no-serve too; a missing file or another type stays a link.
-// Only the rendered copy changes — the document on disk keeps its path.
-function embedImages(md, docAbs) {
-  return md.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (m, alt, p) => {
-    if (/^(data:|https?:)/.test(p)) return m;
-    const abs = resolve(dirname(docAbs), p), mime = IMAGE_MIME[extname(abs).toLowerCase()];
-    if (!mime || !existsSync(abs)) return m;
-    return '![' + alt + '](data:' + mime + ';base64,' + readFileSync(abs).toString('base64') + ')';
-  });
-}
 const IS_WIN = platform() === 'win32', IS_MAC = platform() === 'darwin';
 const CLI_NAME = 'node .kaif/tools/contour/review.mjs'; // how the rituals call it
 // LP (2.7): every flag the CLI knows. An unknown flag REFUSES before any page, sound or call (the core's bug-33 rule):
@@ -503,7 +492,7 @@ const QSECTION_RE = new RegExp('^#{1,3}\\s+(?:' + PARSER.questionsSectionHeading
 
 export function buildPage(root, docPath) {
   const cfg = cfgOf(root), t = T(cfg);
-  const md = embedImages(readFileSync(resolve(root, docPath), 'utf8'), resolve(root, docPath));
+  const md = readFileSync(resolve(root, docPath), 'utf8');
   const meta = parseMetaBlock(md);
   const rel = relDoc(root, docPath);
   const kind = docKind(root, rel, meta);
@@ -592,7 +581,7 @@ export function buildPage(root, docPath) {
 // I37: the NOTICE page — the whole document, an optional comment, the EXPLICIT "read" mark.
 export function buildNoticePage(root, docPath) {
   const cfg = cfgOf(root), t = T(cfg);
-  const md = embedImages(readFileSync(resolve(root, docPath), 'utf8'), resolve(root, docPath));
+  const md = readFileSync(resolve(root, docPath), 'utf8');
   const rel = relDoc(root, docPath);
   const title = docTitle(md, docPath);
   const html = pageShell(cfg, {
@@ -608,7 +597,7 @@ export function buildNoticePage(root, docPath) {
 // document with a comment field under it and one Done button. Record: kind "proofread", comments { p<N> }.
 export function buildProofreadPage(root, docPath) {
   const cfg = cfgOf(root), t = T(cfg);
-  const md = embedImages(readFileSync(resolve(root, docPath), 'utf8'), resolve(root, docPath));
+  const md = readFileSync(resolve(root, docPath), 'utf8');
   const rel = relDoc(root, docPath);
   const title = docTitle(md, docPath);
   const paras = splitParagraphs(md);
@@ -1659,7 +1648,7 @@ export function recoverFromWindow(root, { log = console.log } = {}) {
 // ── Pre-flight + self-check as one gate (spec §2), used by the CLI before any page opens ───────
 /** Returns null when the document may open, else the lines to print before exit 3. */
 export function gateForOpen(root, docPath) {
-  const md = embedImages(readFileSync(resolve(root, docPath), 'utf8'), resolve(root, docPath));
+  const md = readFileSync(resolve(root, docPath), 'utf8');
   const problems = preflight(md);
   if (problems.length) return ['PRE-FLIGHT REFUSED TO OPEN (spec §2, exit 3):', ...problems.map((p) => '  ' + p)];
   const meta = parseMetaBlock(md);
@@ -1680,7 +1669,7 @@ export function gateForOpen(root, docPath) {
 export function checkDoc(root, docPath, log = console.log) {
   const cfg = cfgOf(root), t = T(cfg);
   const rel = relDoc(root, docPath);
-  const md = embedImages(readFileSync(resolve(root, docPath), 'utf8'), resolve(root, docPath));
+  const md = readFileSync(resolve(root, docPath), 'utf8');
   const cf = checkForm(md);
   log(t.check.summary(rel, cf.blocks, cf.recognised));
   if (cf.unrecognised.length) { log(t.check.unrecognised(cf.unrecognised.length)); for (const u of cf.unrecognised) log(t.check.line(u.line, u.text)); }
