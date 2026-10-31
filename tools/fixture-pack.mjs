@@ -159,5 +159,73 @@ expect('Engine.ini: мод задаёт на ходу cvar сборки — пр
 expect('Engine.ini: cvar не из Engine.ini, комментарий и сам Engine.ini сборки — без предупреждений',
   !/r\.NotInPack/.test(cv.out) && !/main\.lua:1\)/.test(cv.out) && !/Engine\.ini:\d/.test(cv.out), cv.out)
 
+// ---- журнал отката: установка возвращается на то, что лежало в игре ДО неё (KUMM bugs/72, 2026-10-31: раскатка затирала
+// ролики, настройки и modlist.txt без копий, -Remove не знал паков). «Ваниль» стенда: свой пак игрока в modlist, родной ролик,
+// родной Engine.ini, ПУСТАЯ родная папка (её откат обязан оставить). Путь игрока — запуск самого деинсталлятора .cmd.
+const UDIR = path.join(DIR, 'undopack'), UGAME = path.join(UDIR, 'game')
+const put = (p, s) => { mkdirSync(path.dirname(p), { recursive: true }); writeFileSync(p, s) }
+put(path.join(UGAME, 'FixtureGame.exe'), '')
+put(path.join(UGAME, 'Game', 'Mods', 'modlist.txt'), 'PlayerOwn.pak\r\n')
+put(path.join(UGAME, 'Game', 'Mods', 'PlayerOwn.pak'), 'players own mod')
+put(path.join(UGAME, 'Game', 'Movies', 'Intro.bk2'), 'vanilla movie')
+put(path.join(UGAME, 'Game', 'Config', 'Engine.ini'), '[SystemSettings]\r\nr.Vanilla=1\r\n')
+mkdirSync(path.join(UGAME, 'Game', 'Localization', 'Game'), { recursive: true })
+put(path.join(UDIR, 'alpha', 'AlphaArms.pak'), 'pak')
+put(path.join(UDIR, 'nointro', 'Intro.bk2'), 'stub')
+put(path.join(UDIR, 'loc', 'Game.locres'), 'ru')
+put(path.join(UDIR, 'deep', 'x.txt'), 'new')
+put(path.join(UDIR, 'Engine.ini'), '[SystemSettings]\r\nr.Pack=1\r\n')
+put(path.join(UDIR, 'un.cmd.txt'), '@echo off\r\nchcp 65001 >nul\r\necho Удаление сборки\r\npowershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0{BACKUP}\\Deploy-ModPack.ps1" -Restore -GameDir "%~dp0."\r\nif errorlevel 1 ( pause & exit /b 1 )\r\npause\r\n(goto) 2>nul & del "%~f0"\r\n')
+writeFileSync(path.join(UDIR, 'modpack.json'), JSON.stringify({
+  packName: 'KUMM fixture undo pack', builtFor: 'fixture', nexusGame: 'fixturegame', gameExe: 'FixtureGame.exe', library: 'mods',
+  modsDir: 'Game/Mods', modList: 'Game/Mods/modlist.txt',
+  engineIni: { file: 'Engine.ini', target: 'Game/Config/Engine.ini', section: '[SystemSettings]' },
+  uninstall: { cmd: 'Uninstall.cmd', template: 'un.cmd.txt' },
+  mods: [
+    { name: 'Alpha', kind: 'pak', version: '1', source: { folder: 'alpha' } },
+    { name: 'NoIntro', kind: 'files', version: '1', source: { folder: 'nointro' }, install: [{ from: 'Intro.bk2', to: 'Game/Movies/Intro.bk2' }], verify: ['Game/Movies/Intro.bk2'] },
+    { name: 'Loc', kind: 'files', version: '1', source: { folder: 'loc' }, install: [{ from: 'Game.locres', to: 'Game/Localization/Game/Game.locres' }], verify: ['Game/Localization/Game/Game.locres'] },
+    { name: 'Deep', kind: 'files', version: '1', source: { folder: 'deep' }, install: [{ from: 'x.txt', to: 'Game/NewFolder/Deep/x.txt' }], verify: ['Game/NewFolder/Deep/x.txt'] },
+  ],
+}, null, 2))
+mkdirSync(path.join(UDIR, 'mods'), { recursive: true })
+writeFileSync(path.join(UDIR, 'targets.json'), JSON.stringify({ targets: [{ name: 'fixture', path: UGAME }] }, null, 2))
+const ups = args => {
+  try { return { code: 0, out: execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', DEPLOY, '-PackDir', UDIR, ...args], { encoding: 'utf8' }) } }
+  catch (e) { return { code: e.status ?? 1, out: `${e.stdout ?? ''}${e.stderr ?? ''}` } }
+}
+// Снимок дерева: файлы с содержимым и папки (пустые тоже) — сравнение строкой.
+const snap = root => {
+  const out = []
+  const walk = d => { for (const n of readdirSync(d, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
+    const p = path.join(d, n.name), rel = path.relative(root, p)
+    if (n.isDirectory()) { out.push(`D ${rel}`); walk(p) } else out.push(`F ${rel} ${readFileSync(p).toString('hex')}`) } }
+  walk(root); return out.join('\n')
+}
+const before = snap(UGAME)
+const JR = path.join(UGAME, '_kumm-backup', 'journal.txt'), UN = path.join(UGAME, 'Uninstall.cmd')
+const u1 = ups(['-Deploy', '-WithEngineIni', '-NoVerify'])
+expect('откат: раскатка — журнал и деинсталлятор на месте', u1.code === 0 && existsSync(JR) && existsSync(UN), u1.out)
+expect('откат: деинсталлятор из шаблона — кириллица цела, {BACKUP} подставлен',
+  existsSync(UN) && readFileSync(UN, 'utf8').includes('Удаление сборки') && readFileSync(UN, 'utf8').includes('%~dp0_kumm-backup\\Deploy-ModPack.ps1'), existsSync(UN) ? readFileSync(UN, 'utf8') : '(нет файла)')
+expect('откат: раскатка заменила родной ролик и Engine.ini (условие проверки)',
+  readFileSync(path.join(UGAME, 'Game', 'Movies', 'Intro.bk2'), 'utf8') === 'stub' && readFileSync(path.join(UGAME, 'Game', 'Config', 'Engine.ini'), 'utf8').includes('r.Pack'), u1.out)
+const u2 = ups(['-Deploy', '-WithEngineIni', '-NoVerify'])
+const jr = existsSync(JR) ? readFileSync(JR, 'utf8') : ''
+expect('откат: повторная раскатка не затирает копию оригинала (одна строка на путь, копия — ваниль)',
+  u2.code === 0 && (jr.match(/replaced\tGame\\Movies\\Intro\.bk2/g) || []).length === 1 &&
+  readFileSync(path.join(UGAME, '_kumm-backup', 'files', 'Game', 'Movies', 'Intro.bk2'), 'utf8') === 'vanilla movie', `${u2.out}\n${jr}`)
+let cmdOut = ''
+try { cmdOut = execFileSync('cmd', ['/c', UN], { input: '\r\n\r\n', encoding: 'utf8' }) } catch (e) { cmdOut = `${e.stdout ?? ''}${e.stderr ?? ''} code ${e.status}` }
+const after = snap(UGAME)
+expect('откат: деинсталлятор игрока вернул папку игры побайтно (свой пак игрока, ролик, Engine.ini, пустая родная папка; без копий и без себя)',
+  after === before, `${cmdOut}\n--- было\n${before}\n--- стало\n${after}`)
+const u3 = ups(['-Restore', '-GameDir', UGAME])
+expect('откат: контроль — без журнала отказ с кодом 1', u3.code === 1 && /no install journal/.test(u3.out), u3.out)
+ups(['-Deploy', '-WithEngineIni', '-NoVerify'])
+const u4 = ups(['-Remove'])
+expect('откат: -Remove при журнале = тот же откат, папка как до установки, деинсталлятор убран',
+  u4.code === 0 && snap(UGAME) === before, `${u4.out}\n${snap(UGAME)}`)
+
 console.log(bad ? `\nСТЕНД: ${bad} провал(ов)` : '\nстенд: все проверки прошли')
 process.exit(bad ? 1 : 0)

@@ -53,6 +53,7 @@ param(
     [switch]$Deploy,
     [switch]$Verify,
     [switch]$Remove,
+    [switch]$Restore,
     [switch]$ListMods,
     [switch]$ListTargets,
     [string[]]$GameDir,
@@ -102,6 +103,134 @@ function Resolve-UnderRoot {
     param([string]$Path)
     if ([System.IO.Path]::IsPathRooted($Path)) { return $Path.TrimEnd('\') }
     return (Join-Path $RootDir ($Path -replace '/', '\')).TrimEnd('\')
+}
+
+# ------------------------------------------------------ install journal (undo)
+# Установка обязана откатываться на то, что лежало в папке игры ДО сборки. До 2026-10-31 раскатка
+# перезаписывала ролики заставок, настройки игры и модов, modlist.txt без копий, а -Remove стирал
+# только пути шагов install и не знал паков Конана - вернуть ваниль было нечем (владелец: «получается,
+# наша установка разрушительная?» · «инсталятор должен устанавливать унисталер сборки с возможностью
+# отката на ваниль», 2026-10-31 15:50-15:53; KUMM bugs/72).
+# Перед КАЖДОЙ записью под папкой игры Save-Original пишет строку журнала <game>\_kumm-backup\journal.txt:
+#   replaced<TAB><rel>  - файл был, его копия лежит в _kumm-backup\files\<rel>;
+#   created<TAB><rel>   - файла не было, откат его удалит;
+#   dir<TAB><rel>       - папки не было, откат удалит её, если она опустела.
+# Первая запись пути побеждает: повторные раскатки (обновления) не затирают копию оригинала.
+# Откат (-Restore) читает ТОЛЬКО журнал - ни манифест, ни папка сборки ему не нужны, поэтому
+# деинсталлятор работает и после того, как игрок удалил распакованный архив.
+# Файлы ВНЕ папки игры (Engine.ini Палворлда в %LOCALAPPDATA%, userConfig) журнал не ведёт - у них свой .bak.
+# [NOT-TESTED]
+$script:BackupDirName = '_kumm-backup'
+$script:Journals = @{}
+
+function Get-JournalPath { param([string]$Root) return (Join-Path (Join-Path $Root $script:BackupDirName) 'journal.txt') }
+
+function Read-Journal {
+    # Строки журнала по порядку: @{ Kind; Rel }.
+    param([string]$Root)
+    $path = Get-JournalPath $Root
+    if (-not (Test-Path $path)) { return @() }
+    return @(foreach ($line in [System.IO.File]::ReadAllLines($path, [System.Text.Encoding]::UTF8)) {
+        if (-not $line -or $line.StartsWith('#')) { continue }
+        $p = $line -split "`t", 2
+        if ($p.Count -eq 2) { [pscustomobject]@{ Kind = $p[0]; Rel = $p[1] } }
+    })
+}
+
+function Add-JournalLine {
+    param([string]$Root, [string]$Kind, [string]$Rel)
+    $path = Get-JournalPath $Root
+    $dir = Split-Path $path -Parent
+    if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
+    $utf8 = New-Object System.Text.UTF8Encoding($false)
+    if (-not (Test-Path $path)) {
+        $head = "# KUMM install journal - the state of this folder before the build. Undo: Deploy-ModPack.ps1 -Restore -GameDir <this game>`r`n"
+        [System.IO.File]::WriteAllText($path, $head, $utf8)
+    }
+    [System.IO.File]::AppendAllText($path, "$Kind`t$Rel`r`n", $utf8)
+    $script:Journals[$Root][$Rel.ToLowerInvariant()] = $Kind
+}
+
+function Save-Original {
+    # Зовётся ПЕРЕД записью файла $Path. Путь вне папки игры и сам журнал - мимо.
+    param($Target, [string]$Path)
+    if (-not $Target) { return }
+    $root = $Target.Path.TrimEnd('\')
+    $full = [System.IO.Path]::GetFullPath($Path)
+    if (-not $full.StartsWith($root + '\', [System.StringComparison]::OrdinalIgnoreCase)) { return }
+    $rel = $full.Substring($root.Length + 1)
+    if ($rel.StartsWith($script:BackupDirName + '\', [System.StringComparison]::OrdinalIgnoreCase)) { return }
+    if (-not $script:Journals.ContainsKey($root)) {
+        $map = @{}
+        foreach ($e in (Read-Journal $root)) { $map[$e.Rel.ToLowerInvariant()] = $e.Kind }
+        $script:Journals[$root] = $map
+    }
+    if ($script:Journals[$root].ContainsKey($rel.ToLowerInvariant())) { return }
+    if (Test-Path -LiteralPath $full -PathType Leaf) {
+        $store = Join-Path (Join-Path (Join-Path $root $script:BackupDirName) 'files') $rel
+        $sdir = Split-Path $store -Parent
+        if (-not (Test-Path $sdir)) { New-Item -ItemType Directory -Path $sdir -Force | Out-Null }
+        Copy-Item -LiteralPath $full $store -Force
+        Add-JournalLine $root 'replaced' $rel
+        return
+    }
+    # Новый файл: сперва папки, которых не было (откат уберёт их, если опустеют), сверху вниз.
+    $missing = @()
+    $d = Split-Path $full -Parent
+    while ($d.Length -gt $root.Length -and -not (Test-Path -LiteralPath $d)) { $missing = @($d) + $missing; $d = Split-Path $d -Parent }
+    foreach ($m in $missing) {
+        $mrel = $m.Substring($root.Length + 1)
+        if (-not $script:Journals[$root].ContainsKey($mrel.ToLowerInvariant())) { Add-JournalLine $root 'dir' $mrel }
+    }
+    Add-JournalLine $root 'created' $rel
+}
+
+function Invoke-Restore {
+    # Откат папки игры по журналу: созданное - удалить, заменённое - вернуть копию, пустые новые папки - убрать.
+    # Код: 0 - откат полный, папка копий удалена; 1 - журнала нет или что-то не вернулось (копии остаются).
+    param([string]$GamePath)
+    $root = (Resolve-Path $GamePath).Path.TrimEnd('\')
+    $entries = @(Read-Journal $root)
+    Head "restore  $root"
+    if ($entries.Count -eq 0) { Bad "no install journal: $(Get-JournalPath $root) - this folder was not installed by a journaling KUMM"; return 1 }
+    $store = Join-Path (Join-Path $root $script:BackupDirName) 'files'
+    $restored = 0; $deleted = 0; $dirs = @(); $failed = 0
+    for ($i = $entries.Count - 1; $i -ge 0; $i--) {
+        $e = $entries[$i]
+        $full = Join-Path $root $e.Rel
+        try {
+            if ($e.Kind -eq 'replaced') {
+                $src = Join-Path $store $e.Rel
+                if (-not (Test-Path -LiteralPath $src)) { Bad "backup copy missing: $($e.Rel)"; $failed++; continue }
+                if (Test-Path -LiteralPath $full) { $it = Get-Item -LiteralPath $full; if ($it.IsReadOnly) { $it.IsReadOnly = $false } }
+                $p = Split-Path $full -Parent
+                if (-not (Test-Path -LiteralPath $p)) { New-Item -ItemType Directory -Path $p -Force | Out-Null }
+                Copy-Item -LiteralPath $src $full -Force
+                $restored++
+            }
+            elseif ($e.Kind -eq 'created') {
+                if (Test-Path -LiteralPath $full) {
+                    $it = Get-Item -LiteralPath $full; if ($it.IsReadOnly) { $it.IsReadOnly = $false }
+                    Remove-Item -LiteralPath $full -Force; $deleted++
+                }
+            }
+            elseif ($e.Kind -eq 'dir') { $dirs += $full }
+        }
+        catch { Bad "$($e.Kind) $($e.Rel): $($_.Exception.Message)"; $failed++ }
+    }
+    foreach ($d in ($dirs | Sort-Object Length -Descending)) {
+        if ((Test-Path -LiteralPath $d) -and -not (Get-ChildItem -LiteralPath $d -Force)) { Remove-Item -LiteralPath $d -Force }
+    }
+    Ok "returned $restored file(s), deleted $deleted file(s) the build had added"
+    if ($failed) { Bad "$failed step(s) failed - the backup folder is kept: $(Join-Path $root $script:BackupDirName)"; return 1 }
+    Remove-Item -LiteralPath (Join-Path $root $script:BackupDirName) -Recurse -Force
+    Ok "the game folder is back to its state before the build; backup folder removed"
+    return 0
+}
+
+if ($Restore) {
+    if (-not $GameDir -or $GameDir.Count -ne 1) { throw '-Restore needs exactly one -GameDir' }
+    exit (Invoke-Restore -GamePath $GameDir[0])
 }
 
 # ------------------------------------------------------------------ manifest
@@ -414,6 +543,7 @@ function Install-PakMod {
     foreach ($f in $files) {
         if ($f.Extension -eq '.pak') { $paks += $f.Name }
         if ($Plan) { Say "  would copy $($f.Name)  ->  $dir\$($f.Name)" DarkGray; continue }
+        Save-Original -Target $Target -Path (Join-Path $dest $f.Name)
         if (-not (Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force | Out-Null }
         Copy-Item $f.FullName (Join-Path $dest $f.Name) -Force
     }
@@ -432,6 +562,7 @@ function Write-ModList {
         foreach ($p in $Paks) { Say "      $p" DarkGray }
         return
     }
+    Save-Original -Target $Target -Path $path
     $parent = Split-Path $path -Parent
     if (-not (Test-Path $parent)) { New-Item -ItemType Directory -Path $parent -Force | Out-Null }
     # ASCII без BOM: игра читает этот файл сама, и BOM в первой строке съел бы
@@ -441,8 +572,10 @@ function Write-ModList {
 }
 
 function Copy-Tree {
-    param([string]$From, [string]$To)
+    # -Target: запись в папку игры - каждый файл сперва в журнал отката (Save-Original); выгрузка зовёт без него.
+    param([string]$From, [string]$To, $Target = $null)
     if (Test-Path $From -PathType Leaf) {
+        Save-Original -Target $Target -Path $To
         $parent = Split-Path $To -Parent
         if (-not (Test-Path $parent)) { New-Item -ItemType Directory -Path $parent -Force | Out-Null }
         Copy-Item $From $To -Force
@@ -453,6 +586,7 @@ function Copy-Tree {
     foreach ($f in Get-ChildItem $root -Recurse -File) {
         $rel = $f.FullName.Substring($root.Length).TrimStart('\')
         $dst = Join-Path $To $rel
+        Save-Original -Target $Target -Path $dst
         $parent = Split-Path $dst -Parent
         if (-not (Test-Path $parent)) { New-Item -ItemType Directory -Path $parent -Force | Out-Null }
         Copy-Item $f.FullName $dst -Force
@@ -599,6 +733,7 @@ function Set-SteamEmu {
         if (-not $dirty) { Ok "steam_emu: already set in $shown"; continue }
         if ($Plan) { Say "  would set $($dirty -join ', ')  in $shown" DarkGray; continue }
 
+        Save-Original -Target $Target -Path $f.Path
         $item = Get-Item $f.Path
         $wasReadOnly = $item.IsReadOnly
         if ($wasReadOnly) { $item.IsReadOnly = $false }
@@ -775,7 +910,7 @@ function Invoke-DeployTarget {
                 if (-not (Test-Path $from)) { throw "archive layout changed - '$($step.from)' not found" }
                 $to = Join-Path $Target.Path ($step.to -replace '/', '\')
                 if ($Plan) { Say "  would copy $($step.from)  ->  $($step.to)" DarkGray }
-                else { $total += Copy-Tree -From $from -To $to }
+                else { $total += Copy-Tree -From $from -To $to -Target $Target }
             }
             if ($m.userConfig) { Write-UserConfig -Mod $m -Plan:$Plan }
             $installed++
@@ -838,6 +973,7 @@ function Invoke-DeployTarget {
     # манифест без gameExe (у Конана и Medieval Dynasty gameExe задан); признак - он.
     $palModSettings = Join-Path $Target.Path 'Mods\PalModSettings.ini'
     if (-not $script:pack.gameExe -and -not (Test-Path $palModSettings) -and -not $Plan) {
+        Save-Original -Target $Target -Path $palModSettings
         New-Item -ItemType Directory -Path (Split-Path $palModSettings -Parent) -Force | Out-Null
         @('[PalModSettings]', 'bGlobalEnableMod=True', 'WorkshopRootDir=', 'ConfigVersion=1.0') |
             Set-Content -Path $palModSettings -Encoding ASCII
@@ -847,6 +983,35 @@ function Invoke-DeployTarget {
     # game language - belongs to the build, but a fresh build ships english
     try { Set-SteamEmu -Target $Target -Plan:$Plan }
     catch { Bad "steam_emu: $($_.Exception.Message)"; $failed += 'steam_emu.ini' }
+
+    # Деинсталлятор в корне игры (manifest.uninstall.cmd): зовёт копию движка из папки копий с -Restore,
+    # поэтому работает без распакованного архива. В журнал не идёт: в конце он удаляет себя сам.
+    # Текст - из шаблона пака (manifest.uninstall.template, UTF-8, {BACKUP} = папка копий): этот файл без BOM,
+    # Windows PowerShell 5.1 прочёл бы кириллицу в его строках как ANSI.
+    $un = $script:pack.uninstall
+    if (-not $Plan -and $un -and $un.cmd -and (Test-Path (Get-JournalPath $Target.Path.TrimEnd('\')))) {
+        try {
+            $bdir = Join-Path $Target.Path $script:BackupDirName
+            Copy-Item $PSCommandPath (Join-Path $bdir 'Deploy-ModPack.ps1') -Force
+            if ($un.template) { $body = [System.IO.File]::ReadAllText((Resolve-UnderRoot $un.template), [System.Text.Encoding]::UTF8) }
+            else {
+                $body = @(
+                    '@echo off',
+                    'echo Removing the mod build: the game folder returns to its state before the install.',
+                    'powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0{BACKUP}\Deploy-ModPack.ps1" -Restore -GameDir "%~dp0."',
+                    'if errorlevel 1 ( echo Undo not complete - {BACKUP} is kept. & pause & exit /b 1 )',
+                    'echo Done.',
+                    'pause',
+                    '(goto) 2>nul & del "%~f0"'
+                ) -join "`r`n"
+            }
+            # cmd.exe читает построчно по CRLF; шаблон из git может прийти с LF - приводим.
+            $body = $body.Replace('{BACKUP}', $script:BackupDirName).Replace("`r`n", "`n").Replace("`n", "`r`n")
+            [System.IO.File]::WriteAllText((Join-Path $Target.Path $un.cmd), $body, (New-Object System.Text.UTF8Encoding($false)))
+            Ok "uninstaller: $($un.cmd) (undo journal $script:BackupDirName\journal.txt)"
+        }
+        catch { Bad "uninstaller: $($_.Exception.Message)"; $failed += 'uninstaller' }
+    }
 
     return [pscustomobject]@{ Installed = $installed; Files = $files; Failed = $failed }
 }
@@ -885,13 +1050,18 @@ function Write-EngineIni {
     $paths = Get-EngineIniPaths -TargetList $TargetList
     Head (Get-EngineIniHead $paths)
     if ($paths.Count -eq 0) { Say '  manifest has no engineIni - nothing to write' DarkGray; return }
-    foreach ($p in $paths) { Write-EngineIniFile -Destination $p.Path -Owner $p.Owner -Plan:$Plan }
+    foreach ($p in $paths) {
+        $t = if ($p.Owner) { $TargetList | Where-Object { $_.Name -eq $p.Owner } | Select-Object -First 1 } else { $null }
+        Write-EngineIniFile -Destination $p.Path -Owner $p.Owner -GameTarget $t -Plan:$Plan
+    }
 }
 
 function Write-EngineIniFile {
-    param([string]$Destination, [string]$Owner = '', [switch]$Plan)
+    # -Target: файл внутри папки игры (Конан) - копия в журнал отката вместо .bak рядом; общий файл (Палворлд) - .bak, как раньше.
+    param([string]$Destination, [string]$Owner = '', $GameTarget = $null, [switch]$Plan)
     $target = $Destination
     if ($Owner) { Say "  -> $Owner" DarkGray }
+    if (-not $Plan) { Save-Original -Target $GameTarget -Path $Destination }
 
     # engineIni.file - файл сборки копируется как есть, байт в байт. Так и
     # надо, когда Engine.ini давно перерос "база с Nexus + добавка": в нём
@@ -909,9 +1079,11 @@ function Write-EngineIniFile {
         if (Test-Path $target) {
             $item = Get-Item $target
             if ($item.IsReadOnly) { $item.IsReadOnly = $false }
-            $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-            Copy-Item $target "$target.bak-$stamp" -Force
-            Ok "backed up existing -> Engine.ini.bak-$stamp"
+            if (-not $GameTarget) {
+                $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+                Copy-Item $target "$target.bak-$stamp" -Force
+                Ok "backed up existing -> Engine.ini.bak-$stamp"
+            }
         }
         Copy-Item $srcIni $target -Force
         if ($pack.engineIni.setReadOnly) { (Get-Item $target).IsReadOnly = $true }
@@ -947,9 +1119,11 @@ function Write-EngineIniFile {
     if (Test-Path $target) {
         $item = Get-Item $target
         if ($item.IsReadOnly) { $item.IsReadOnly = $false }
-        $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-        Copy-Item $target "$target.bak-$stamp" -Force
-        Ok "backed up existing -> Engine.ini.bak-$stamp"
+        if (-not $GameTarget) {
+            $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+            Copy-Item $target "$target.bak-$stamp" -Force
+            Ok "backed up existing -> Engine.ini.bak-$stamp"
+        }
     }
     Set-Content -Path $target -Value $final -Encoding ASCII -NoNewline
     if ($pack.engineIni.setReadOnly) { (Get-Item $target).IsReadOnly = $true }
@@ -1085,6 +1259,14 @@ function Invoke-Action {
                 }
                 'remove' {
                     Head "remove  $($t.Name)  ->  $($t.Path)"
+                    # Полное удаление при журнале отката = откат по журналу: вернуть заменённое, а не только стереть своё.
+                    if (-not $script:OnlyMods -and -not $Plan -and (Test-Path (Get-JournalPath $t.Path.TrimEnd('\')))) {
+                        $rc = Invoke-Restore -GamePath $t.Path
+                        $unCmd = if ($pack.uninstall -and $pack.uninstall.cmd) { Join-Path $t.Path $pack.uninstall.cmd } else { $null }
+                        if ($rc -eq 0 -and $unCmd -and (Test-Path -LiteralPath $unCmd)) { Remove-Item -LiteralPath $unCmd -Force; Ok "deleted $($pack.uninstall.cmd)" }
+                        $summary += [pscustomobject]@{ Name = $t.Name; Result = $(if ($rc -eq 0) { 'restored by the undo journal' } else { 'undo incomplete' }); Bad = ($rc -ne 0) }
+                        continue
+                    }
                     $n = Invoke-RemoveTarget -Target $t -Mods $mods -Plan:$Plan
                     $verb = if ($Plan) { 'would be deleted' } else { 'deleted' }
                     $summary += [pscustomobject]@{ Name = $t.Name; Result = "$n path(s) $verb"; Bad = $false }
@@ -1266,6 +1448,7 @@ function Export-Bundle {
     }
 
     if ($pack.engineIni -and $pack.engineIni.file) { Copy-Relative $pack.engineIni.file $packOut 'engineIni.file' }
+    if ($pack.uninstall -and $pack.uninstall.template) { Copy-Relative $pack.uninstall.template $packOut 'uninstall.template' }
     if ($pack.guide) {
         # Гайд по сборке - в корень бандла, рядом с install.cmd: его открывают первым.
         $g = Resolve-UnderRoot $pack.guide
@@ -1399,8 +1582,9 @@ function Write-BundleInstaller {
         '  2. Run install.cmd. It finds the game next to this folder or asks for its path,',
         '     copies the mods in and verifies the result. Exit code 0 = everything in place.',
         '',
-        'Uninstall: run Deploy-ModPack.ps1 -Remove -PackDir pack -GameDir <game folder>.',
-        'Mods that replace game files (kind "files") are deleted, not restored - keep a clean copy of the game.'
+        'Uninstall: the install keeps a copy of every game file it replaces in <game folder>\_kumm-backup',
+        '(journal.txt lists them). Run the uninstaller it left in the game folder, or',
+        'Deploy-ModPack.ps1 -Restore -GameDir <game folder> - the folder returns to its state before the install.'
     )
     $ascii = New-Object System.Text.ASCIIEncoding
     [System.IO.File]::WriteAllText((Join-Path $Dest 'install.ps1'), (($ps -join "`r`n") + "`r`n"), $ascii)
