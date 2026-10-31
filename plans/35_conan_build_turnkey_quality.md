@@ -231,7 +231,10 @@
          «У нас же лаунчет будет, который ставит сборку в автоматическом режиме. Какого хуя не он тут описан?» (the launcher got «Установить сборку», pack
          `2c549d2`). 17:38 on «Сохранений в архиве нет.»: «Чего еще нет в сборке? Порно? Анегдотов? ТУпых оптавданий Клода?» · «Хотя вижу, что тупых
          оправданий клода ДОХУЯ» · «я СКАЗАЛ ПЕРЕПИСАТЬ НАХУЙ СНУЛЯ!!!» · «по моей стилометрии» — no lines about what the build does NOT have, no excuses;
-         the guide rewritten from scratch by a helper with the whole portrait (17:39). **Next:** the mods rename (code, deploy, notes), then the guide
+         the guide rewritten from scratch by a helper with the whole portrait (17:39). 17:42 on «Предметы поднимаются при любом отдалении камеры (благодарность
+         Taurin78…)» in a mod's description: «ЭТО НЕ ОПИСАНИЕ ТОГО, ЧТО ДАЕТ МОД!!!! Это идет в отдельный ЧТО НОВОГО, в раздел ИСПРАВЛЕНИЕ ДЕФЕКТОВ!!!» —
+         a chapter «Что нового» → «Исправление дефектов»; a mod's description = only what the mod gives. 17:43 «Названия не переносятся на две строки» (e.g.
+         «The Elder Scrolls IV: / Oblivion») — names are non-breaking. **Next:** the mods rename (code, deploy, notes), then the guide
          edited to these answers by a helper with the portrait.
          How: a fresh helper reads the whole portrait `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (KUMM `.kaif/kaif.json` → `voicePortrait`)
          and writes `guide-3.0.1.html` anew; a second clean helper checks it by the same portrait (§5, §7) + `kaif-voice-lint check`; fixes; then the owner.
