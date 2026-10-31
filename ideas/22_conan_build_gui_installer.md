@@ -51,7 +51,9 @@ path line is the bare path; 8 frame metals shown (folder `29_launcher_8_metals`,
 играл только с цветом, а я просил АЛГОРИТМ построения текстуры» · «цвет 1» · «меня интересует посмотреть на разные алгоритмы построения грубой текстуры сырого
 грубого варварского металла» — colour 1 (copper-gold) is chosen; 8 surface ALGORITHMS shown (`mockups/frame_algos.py`, folder `30_launcher_8_metal_algorithms`).
 18:47 `[OWNER]` «2 хорош, и твой 1. Давай с ними побалуемся, и попрробуем тоньше варианты» — algorithms 2 (logo metal) and 1 (scratches and caverns) are the
-picks; 8 variants of them × thickness 5/4/3 px shown (`mockups/frame_play.py`, folder `31_launcher_frame_1_and_2_thinner`) — waits for his number. So: the link line reads «PlayGround: …» (the guide
+picks; 8 variants of them × thickness 5/4/3 px shown (`mockups/frame_play.py`, folder `31_launcher_frame_1_and_2_thinner`).
+**APPROVED 18:53** `[OWNER]` «7. утвержденооооооо» — the frame is play variant 7: the mix «logo metal + scratches and caverns», 3 px (`mockups/play/frame_*_7.webp`,
+mockup `mockups.html?v=11&play=7`). The launcher look is mockup 11 with this frame. So: the link line reads «PlayGround: …» (the guide
 keeps its long label — the launcher needs its own short one); the frame 5 px, a FLAT forged strip (thin edge bevel, wide flat bronze — not a round rod), copper-gold, rough
 by fine traces only (grain, light scratches, pits, rare nicks) and NO shading blotches; the darkening under the texts stays; «для Conan Exiles Enhanced 3.0.1» centred
 under the title.
