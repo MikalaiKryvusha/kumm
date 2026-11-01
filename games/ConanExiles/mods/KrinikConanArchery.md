@@ -134,7 +134,13 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
   to the corpse bone; the arrows stay in the ragdoll for the corpse's life (600 s). The KILLING arrow's copy is born after the corpse: a copy born within
   `CORPSE_LATE_S` 2 s of the last corpse re-runs the pass (4 of 4 kept, 23:25). Cases A6–A8, A10 pass. **E on a shaft — NOT PROVEN either way:** two tries failed
   (A9: E at 4.7 m opened the corpse's loot; with `IsLootable` set true, E aimed at the copy's point did nothing) — the copy in a creature reads `IsLootable` false;
-  why E takes ground arrows and not these is a guess, not a fact (corrected 23:40, `[OWNER]` «Из земли можно, а из трупа нельзя?»). Interview #030. (c) below stays the fallback (it needs the owner's word on «arrows into the corpse's loot», plan 40.4 Outbound). Former pick: `[AI]` (c) first:
+  why E takes ground arrows and not these is a guess, not a fact (corrected 23:40, `[OWNER]` «Из земли можно, а из трупа нельзя?»). Interview #030.
+  **Loot (2026-11-02 00:02 +03:00, pack `0663f2f`, `[OWNER]` 2026-11-01 23:41 «тогда делаем, что воткнытые в трум стрелы идут в инвентарь трупа»):** the re-attach keeps the
+  copy's offset from its bone (`KEEP_RELATIVE` + the creature-side `RelativeLocation/Rotation`) — before it, a shaft could hang 1.8 m from the body (the owner's frame
+  23:46); one arrow per kept copy into the corpse's `ItemInventoryReplicateToAll` by `AddItemTemplate(id, −1, None, 1, true, 1, 0)` (seen 4 shafts / 4 arrows);
+  `corpse_arrows` tracks corpse → item → copies; a sync destroys the shafts beyond `GetNumberOfItemsByTemplate` on the quick-loot event and after E / Q / LMB
+  (the full loot window and the harvest of a beast fire no loot event). The shafts-go part is deployed, not yet seen (A13 partial). Stand trap: the live save has
+  companions that kill a frozen Kappa first — stand away from them. (c) below stays the fallback (it needs the owner's word on «arrows into the corpse's loot», plan 40.4 Outbound). Former pick: `[AI]` (c) first:
   the copies are read at corpse birth (they are still attached then — run 2), the visuals live on the corpse actor (die with it), the items go into the corpse's
   loot so «их можно собрать» is the corpse's own E. Taking them from the loot hides the visuals (the loot-change event on a corpse is the native
   `QuickLootPanel:SlotItemAddedOrRemoved` — the blueprint `HandleLootContainerInventoryChanged` stays silent on a corpse, game map «Loot change event»). Next: a read-only remote recon of the corpse's inventory (component class, its add-item UFunction), then the section.
