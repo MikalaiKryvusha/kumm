@@ -1,6 +1,6 @@
 # Bug 73 — Conan build: arrows shot into the ground hang in the air before the hit point and vanish fast
 
-**Status:** 🔧 «in the air» fixed and seen 2026-11-01 15:26 (cause: our ×3 arrow mesh); «vanish fast» fixed 2026-11-01 17:41 (5 min, hub row 1–30 — the owner 16:18); the ×3 visual arrow joined at the tip — built and seen 2026-11-01 17:50 (cases V1–V3), its look waits for the owner (review folder 50) · **Severity:** S2 · **Version/build:** Conan Exiles 3.0.1 build 1.0.0 (pre-release), KrinikConanArchery 1.0.0
+**Status:** ✅ DONE 2026-11-01 21:14 +03:00 — «in the air» fixed and seen 2026-11-01 15:26 (cause: our ×3 arrow mesh); «vanish fast» fixed 2026-11-01 17:41 (5 min, hub row 1–30 — the owner 16:18); the ×3 visual arrow joined at the tip — built 17:50, seen by the owner in his own play 21:0x; hidden at impact 21:10, confirmed by the owner 21:13 · **Severity:** S2 · **Version/build:** Conan Exiles 3.0.1 build 1.0.0 (pre-release), KrinikConanArchery 1.0.0
 **When/context:** 2026-11-01 15:06, seen by the owner on his screen while the agent shot six arrows into the sand (plan 40.2, row «Стрелы не ломаются»)
 **Fixing:** this session — the control case first (HOUSE_RULES rule 24)
 
@@ -64,6 +64,14 @@ at the tip (16:23); corpses keep their arrows — plan 40 phase 4.
 - `[AI]` the arrow mesh back to native size (1.0) until his word — the ×3 was his «до x3»; the choice put to him in chat 15:2x (answered 16:17 — the route above).
 - `[AI]` the life is set for the HERO's arrows only (the code that dresses the hero's shot); NPC archers' arrows keep the game's life.
 - `[AI]` the row's words: «Сколько стрела торчит в цели» · «в минутах» · «Сколько воткнутая стрела героя остаётся в земле, в стене или в противнике, прежде чем исчезнуть.»
+- `[AI]` the hide at impact rides the game's `StopProjectileInternal` (fires on a hit and on a break) — not the copy's birth, which a breaking arrow never reaches.
+
+## ✅ STATUS: DONE (2026-11-01 21:14 +03:00)
+
+`[OWNER]` 21:07 «нашу x3 мгновенно нужно скрывать, когда происходит слолкновение, и показывать только настоящую x1» → a hook on `BP_BaseProjectile_C:StopProjectileInternal`
+hides our big mesh (pack `fd30f7d`). Hygiene: `lua loadfile`, `check-lua-game-thread.py` 0. Functional run: the owner's own shots 21:11–21:13 — `[OWNER]` «да,
+суппер работает!» · «и земля, и камни, и враги»; reports `testcases/reports/2026-11-01_conan-arrow-x3-visual.md`, `…_conan-arrow-stuck-life.md`,
+`…_conan-arrow-x3-hidden-at-impact.md`. Arrows kept in corpses are NOT this bug — plan 40 phase 4.
 
 ## Links
 
