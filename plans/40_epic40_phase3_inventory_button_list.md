@@ -114,7 +114,23 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
       (Damage Meter and Simple Minimap cursor keys); a key the game swallows is refused (both authors' tooltips warn it locks the player out). The «предложение»
       badges of those rows become «будет сделано». The look of the window as a whole — not yet answered. Owner's remark the same minute: the row «Клавиша мыши» is
       a KEYBOARD key that shows the mouse cursor — our mistranslation of «Mouse Hotkey» (`dm-fish-ru.tsv` 73; Simple Minimap «Клавиша курсора мыши»,
-      `ru_table.lua`) → one name in both mods and in the hub rows, the owner's word 20:38: `[OWNER]` «Клавиша вызова курсора».
+      `ru_table.lua`) → one name in both mods and in the hub rows, the owner's word 20:38: `[OWNER]` «Клавиша вызова курсора» (done in both mods 20:45).
+      **Operational steps of I6** (`[AI]`, written 2026-11-01 21:2x from the hub code: the kit builds every row by id — `kit-krinik-modsettings.py` `PAGES`
+      (`slider` / `check` only), the Lua `krinik_mod_settings.lua` `PAGES` holds labels, ranges and reads / writes OUR store `Saved/KrinikSettings.lua`):
+      - [ ] I6.1 Hub mode: `PAGES` entries get `hub` («krinik» · «xevyr» · «other»); `krinik_mods_button.lua` sets the hub before `ActivateModule(KrinikModSettings)`;
+            the left list hides other hubs' pages (their `Brd_KrinikMod_<key>` collapsed), the title «Моды Xevyr'а · Настройки». Kit: page keys `dm`, `llh`,
+            `prp`, `sm`, `amr` added to the kit `PAGES` (rows by id), run twice, rebuild.
+      - [ ] I6.2 Row kinds in the kit beyond slider / check: `drop` (our own list box — the Damage Meter corner, the Simple Minimap time display), `color` (a
+            swatch box that opens OUR palette plate: the build's swatches + the mod's current colour; one palette for every colour row), `key` (a box that
+            shows the key name; a click waits for the next key press and refuses keys the game swallows — Esc, the game's bound actions read from
+            `Input.ini`). Each kind first as a mockup row in `mockups.html` (rule 23), then kit, then Lua.
+      - [ ] I6.3 Binding per mod in Lua (an adapter per page: `read()` from the mod's SaveGame object / controller fields, `write(values)` into the same object +
+            the mod's own save and apply path — recon «Hard to bind» item 3): Damage Meter first (13 rows; the window's `SaveSettings` path pushes into
+            `dmgWidget`, `dmgComponent`, the controller), then Lore & Loot (5, `LLH_AC_PlayerComp_C.UpdateSettings`), Proximity Party (4), Simple Minimap (10,
+            `EnableSettings`), Al-Merayah (13, the server RPC `ServerSaveSettings`). A value that cannot be applied without the author's window → «нет механики»
+            on the mockup, row left out (rule 23).
+      - [ ] I6.4 Cases per page (read the default, change by the real mouse, «Сохранить», reopen the mod's OWN window — the same value; the effect in the world),
+            frames at the four resolutions; the sub-lists of step 2 go when every Xevyr mod has its page.
 - [x] I4. The pause section's Esc map `MOD_WINDOWS` (`krinik_pause_in_menu.lua`) gains the new module rows; «one window at a time» — opening an entry calls
       `TryCloseWindow()` on any open mod window first.
 - [x] I5. Hygiene: `loadfile`, `check-lua-game-thread.py` 0, `check-lua-templates.py` 0.
