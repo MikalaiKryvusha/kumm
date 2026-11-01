@@ -46,4 +46,4 @@ Frames in the session scratchpad (`pick/p2.jpg`, `p3c.jpg`, `p4c.jpg`, `p2cc.jpg
 
 ## 7. Verdict
 
-partial — the prompt works and tells the truth; the cost is 0.33 ms a second on average, the worst sample is not yet proven under 1 ms.
+partial — the prompt works and tells the truth; 21:50, 100 repeats in the live game: the check 0.12 ms, the near refresh 0.18 ms, each on its own frame once a second; the A-B flight of rule 7 is still owed.

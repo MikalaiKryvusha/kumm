@@ -138,7 +138,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > CONFIRMED by the owner 21:13 «да, суппер работает!» · «и земля, и камни, и враги».
 > **21:48 — the «E Взять» prompt over every foliage pickup (plan 42, the owner 21:14–21:34) is BUILT** (KrinikConanUI `krinik_pickup_prompt.lua`, pack `740e473`):
 > once a second, the game's own pickup geometry (a 2 m sphere at a 90 cm line from the camera — the game takes even off-aim), 55 kinds; works in game (report
-> `testcases/reports/2026-11-01_conan-pickup-prompt.md`); cost 0.33 ms a check, the worst sample 3 ms with a 1 ms clock — **the A-B flight is owed**; an enemy's
+> `testcases/reports/2026-11-01_conan-pickup-prompt.md`); cost measured 21:50 (100 repeats): the check 0.12 ms, the near refresh 0.18 ms, each on its own frame once a second — the A-B flight (rule 7) still owed; an enemy's
 > health bar stands where the prompt stands. Water «E Попить» — step 2 of plan 42. My channel sweep of native traces crashed the owner's game 21:30 (EXP-0433).
 > NEXT: the owner's eye on the prompt in play; the A-B flight; then plan 40.3 I6 (Xevyr pages, steps written); then plan 40 phase 4 (arrows in the corpse).
 > **Moved verbatim to the chronicle, entry 2026-11-01 17:54 +03:00:** the done owner-debt block of 15:49 and the 15:38 dayloop paragraph.
