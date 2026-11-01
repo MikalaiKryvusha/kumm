@@ -110,11 +110,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **2026-11-01 14:24 +03:00 — epic 40 phase 1 (vignettes) done in mechanics, partial in acceptance** (report `testcases/reports/2026-11-01_conan-vignettes.md`): section
-> `krinik_vignette.lua` (strength = the game effect's RenderOpacity; hunger / thirst 0, low health 0.25 shipped — the owner 14:34 after review folder 48), three hub rows without a grey hint (the owner 14:08),
-> the hub «i» circles square again in every row (kit fix, EXP-0425). Review folder 48 answered 14:34 («ставь 25%»; the owner tunes it later in play) — folder can go.
-> Open in phase 1: thirst and health shkalas by the mouse (V5, V6), the rule-4 clip. New owner rule for phase 2 (plan 40.2 criterion 4a): every shkala's min / max
-> are values a player could want; grey hints only when the «i» does not already say it. Pack and KUMM committed; game closed, lock released. **Phase 2 started 14:38:** 16 of 19 rows seen working (run 2 at a frozen Kappa 14:48–14:54), 2 partial, the hub close fixed (camera / pack manager took a save only at the next inventory close) — `testcases/TC_conan_hub_rows_audit_2026-11-01.md`; next — the partial rows, H20-H22, ranges and hints (plan 40.2 status).
+> **Moved verbatim to the chronicle, entry 2026-11-01 18:18 +03:00:** the 14:24 vignettes / hub-audit paragraph (plan 40 phases 1–2).
 > **OWNER DECISIONS 2026-11-01 16:17–16:18 (bug 73), also job number one:** (1) the ×3 arrow in flight is WANTED back — `[OWNER]` «Да» to «Вернуть ли стреле
 > трёхкратный размер в полёте» (16:17): find the route that grows only the VISIBLE arrow, not `ProjectileMesh` whose bounds place the stuck copy (a pre-hook of
 > `SpawnDummyProjectile` restoring the size did not help — bug 73 A4); control case first (rule 24). (2) `[OWNER]` 16:18 «срок жизни стрел везде, и в земле, и в
@@ -132,13 +128,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `testcases/reports/2026-11-01_conan-arrow-stuck-life.md`).** **2026-11-01 17:51 +03:00 — the ×3 visual arrow joined at the tip flies (cases V1–V3, copy still at 62 cm); review folder 50 «strela x3 v polete» waits for the owner's eye.**
 > NEXT, in order: (2) «Моды Xevyr'а» and «Прочее» as our hub windows with real rows (the owner's 13:40 decision) — recon DONE
 > (`researches/conan-mod-settings-hub/xevyr-settings-recon.md`), the Damage Meter page mockup in review folder 51 waits for his eye; plan 40.3 I6; (3) plan 40 phase 4 (arrows in the corpse). Game closed, lock released.
+> **CHAT 5edabf9c CLOSED 2026-11-01 18:2x (soft). Also done after 17:51:** the Damage Meter opacity preview after a colour pick (author bug 0.55 vs 0.65, pack `af98be6`); our Al-Merayah «Bailey» label mistranslation fixed (pack `109e9f2`). FIRST in the next chat: the owner's eye on review folders 50 (x3 arrow) and 51 (Xevyr hub mockup) — his verdict on 51 opens the code of plan 40.3 I6 (pages bound to the mods' own values; read the recon's «Hard to bind» section first); without it — plan 40 phase 4 (`/bug-research` first; route (c) now has the AddComponentByClass fact). Stand recipe — game map, the archery stand line.
 > **Moved verbatim to the chronicle, entry 2026-11-01 17:54 +03:00:** the done owner-debt block of 15:49 and the 15:38 dayloop paragraph.
 > **Moved verbatim to the chronicle, entry 2026-11-01 15:52:** the closures of 13:27–13:43, the eea8bf94 handover items 1 (vignettes — done) and 1a (hub audit — plan 40.2), the 08:49 acceptances, the 09:5x–10:3x done list, the 13:20 vignette order (done), the 2026-10-29 15:2x work order.
 > 2. The HUD temperature by the game's debuff stage — frame the comfort (white) and the cold (blue) cases (only heat was framed, review folder 47).
 > 3. The inventory button «Настройки модов» (plan 38 phase 1) — write its operational plan first (the Xevyr / «Прочее» entries have no hub yet).
 > 4. Arrows in the corpse — not done; routes in `games/ConanExiles/mods/KrinikConanArchery.md` → Open. Frame measurements (fps perf TC) — also covers the
 >    blink section's 3–6 ms minute spikes. Archive and documents LAST (the owner's order).
-> Review folders waiting for the owner's eye: 44 (shout hold), 45 (blink pink → red), 46 («Все», corners), 47 (temperature red). The live save is the
+> Review folders waiting for the owner's eye: 44 (shout hold), 45 (blink pink → red), 46 («Все», corners), 47 (temperature red), 50 (x3 arrow in flight), 51 (Xevyr hub mockup). The live save is the
 > 2026-10-31 16:56 copy (armour, bow) — hunger / thirst at 0 % kill even with god: refill them in every run.
 > **Closed handover blocks (chat ecee2807, the 08:42 hub remarks, the 09:33 caverns park, the older FIRST list) — moved verbatim to the chronicle, entry 2026-11-01 11:14 +03:00; before them (chat a3dcf82b, 04:4x–05:3x) — entry 2026-11-01 05:51.**
 > **Frame measurements are free now** (the «кино» condition erased 08:46): the unrun cases of `testcases/TC_conan_3.0.1_ru_fps_perf_2026-10-25.md` (PF1, BN1–BN4, BN7–BN9 and 7 more — the bench flights, `_config/bench-flight.sh` / `bench-batch.sh`, A-B-A-B pairs) and plan 36 item 23 (q2–q4) — the agent runs them itself, ≈ 2–3 h; a heavy block for a fresh chat.

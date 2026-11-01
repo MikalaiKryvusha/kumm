@@ -3,6 +3,14 @@
 
 
 
+## 2026-11-01 18:18 +03:00 — moved from STATUS «Where to continue» at the soft closure of chat 5edabf9c (verbatim)
+
+> **2026-11-01 14:24 +03:00 — epic 40 phase 1 (vignettes) done in mechanics, partial in acceptance** (report `testcases/reports/2026-11-01_conan-vignettes.md`): section
+> `krinik_vignette.lua` (strength = the game effect's RenderOpacity; hunger / thirst 0, low health 0.25 shipped — the owner 14:34 after review folder 48), three hub rows without a grey hint (the owner 14:08),
+> the hub «i» circles square again in every row (kit fix, EXP-0425). Review folder 48 answered 14:34 («ставь 25%»; the owner tunes it later in play) — folder can go.
+> Open in phase 1: thirst and health shkalas by the mouse (V5, V6), the rule-4 clip. New owner rule for phase 2 (plan 40.2 criterion 4a): every shkala's min / max
+> are values a player could want; grey hints only when the «i» does not already say it. Pack and KUMM committed; game closed, lock released. **Phase 2 started 14:38:** 16 of 19 rows seen working (run 2 at a frozen Kappa 14:48–14:54), 2 partial, the hub close fixed (camera / pack manager took a save only at the next inventory close) — `testcases/TC_conan_hub_rows_audit_2026-11-01.md`; next — the partial rows, H20-H22, ranges and hints (plan 40.2 status).
+
 ## 2026-11-01 17:54 +03:00 — moved from STATUS «Where to continue» during the dayloop of chat 5edabf9c (verbatim)
 
 > **(done, kept for the record) OWNER DEBT:** `[OWNER]` 2026-11-01 15:49 «соответственно, она там одна должна
