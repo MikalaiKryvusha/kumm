@@ -98,7 +98,7 @@ the CLASS TEMPLATES `…W_SmoothHP_C:WidgetTree.TextBlock_TempText` (no «Defaul
 stayed white («37 °C белая», the owner 10:10). A child widget's live instance sits in a numbered tree: keep only `GetFullName():find("WidgetTree_%d+%.")`.
 **Repro:** `bash _config/pult.sh "lua … for _,tb in ipairs(FindAllOf('TextBlock')) … tb:GetFullName() …"` — templates read `…_C:WidgetTree.<Name>`, live ones `…WidgetTree_<n>.<Name>`.
 **Trigger:** any `FindAllOf` / `FindFirstOf` of a widget class or a widget CHILD (TextBlock, Image, a nested `W_*_C`) in a Lua section.
-mechanized: none — a lint over the sections (a FindAllOf of a widget child filtered only by «Default__») is owed; the second strike makes it due
+mechanized: ConanExiles/_config/devkit/check-lua-templates.py — a FindAllOf/FindFirstOf of a UMG child class without the WidgetTree_%d filter within 8 lines (or a «templates-ok: <why>» marker); red on krinik_hud_outline.lua of pack 2c2ddd6, green on the sections 2026-11-01 11:1x
 
 ### EXP-0420 · 2026-11-01 · ❌→✅ · #conan #ui #kit #font #devkit
 class: probe-too-narrow
