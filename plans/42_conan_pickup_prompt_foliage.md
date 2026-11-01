@@ -70,6 +70,10 @@ leaves, the prompt shall go. Maintain: our mods' 1 ms CPU budget in gameplay fra
   `SM_rock_small01`, `SM_rock_small03`, `GFL_Sarcobatus_Desert01`; `SphereOverlapComponents` (all 32 object types) found no foliage either. The pickup
   instances give no physics overlap at all — the game finds them by instance search, not by physics. No sensor (kit or not) can report them. Stand removed,
   overlap events back to false on all 281.
+- **Cost of the only route (21:31):** `GetInstancesOverlappingSphere` over ALL 281 pickup components = **2.5 ms per check** (≈ 9 µs a component) — too much;
+  within 3 m of the hero only 1 component held a pickup. Design `[AI]`: keep a short list of the pickup components whose bounds lie near the hero
+  (`GetLocalBounds`; `c.Bounds` is not readable from Lua — the call failed 21:30), rebuilt only when the hero has moved > 20 m or an area streamed in; one check
+  = the crosshair point against that list (expected 0.05–0.2 ms), 5 checks a second — the owner's word on the rule-7 exception still needed.
 - **Routes left:** ~~(1) a sensor that moves ITSELF~~ (closed by E2); the only one — (2) below. Former text: (1) a sensor that moves ITSELF each time the camera moves (a kit actor with its own component and overlap event — needs a stand proof);
   (2) the native `GetInstancesOverlappingSphere` on the nearby pickup components at the crosshair point, on a rhythm (variant A of 21:1x — the owner's
   decision on the rule-7 exception is still open).
