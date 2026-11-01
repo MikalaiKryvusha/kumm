@@ -39,6 +39,18 @@ Pak `DamageNumber.pak`, original in `D:\Games\Conan Exiles Mods\_patch-originals
    _config/localization/asset-strings/DamageNumber__DN_SG_SaveSettings.tsv _config/localization/asset-strings/DamageNumber__DN_UI_SettingsWindow.tsv
    DN_UI_SettingsWindow` → `<work>/out/DamageNumber.pak` into `_krinik-modified/3719585133`.
 
+## The collapsed button's look (2026-11-01 15:2x, `[OWNER]` «в свернутом состоянии dps мод нужно сделать прозрачным, оставить полоску, и дать белый контур, и
+прозрачность процентов 80» · «чтобы не так сильно был заметен, как сейчас» · «а был ненавязчивый минусик в углу» · «словно часть мода худа»)
+
+- Tree after our F1 section (`krinik_hud_outline.lua` `f1_label`): `RestoreWindow` (Border, transparent) → `KrinikF1Box` (HorizontalBox) → `KrinikF1Plate` (Border, the
+  mod's dark brush, `DrawAs` 3 = Image, BrushColor white) → `RestoreBtn` (the white minus) + `KrinikF1Label` «F1».
+- Live by the remote: the plate's brush `DrawAs = 4` (RoundedBox) with `TintColor` alpha 0 and `OutlineSettings` (Width, white Color, CornerRadii) draws ONLY a rim.
+  **The rim ignores the widget's `RenderOpacity`** (frames 15:30: the minus dimmed, the rim stayed bright) — dim it by the outline colour's own alpha.
+- Review folder 49 (variants 50 / 35 / 20 % of the whole button); the owner 15:31: «минус у тебя прозрачным стал. а контур слишком резкий».
+- **Shipped 2026-11-01 15:38** (variant 5, `[OWNER]` 15:34–15:35 «вот второй слека вкрасиво» · «20% который»): minus and «F1» solid; the plate RoundedBox, fill black
+  alpha 0.20, rim white alpha 0.25 width 1, radius 3; the OUTER `RestoreWindow` brush `DrawAs = 0` (its `Background` comes back by REFERENCE — an edit of the plate
+  brush gave it a rim too). Seen after Restore → Minimize. Constants `DPS_*` in `krinik_hud_outline.lua`.
+
 ## Checked
 
 - DM0 2026-10-31 22:57 (4K): the expanded meter's top stands ≈ 35 px under the last line of Hosav's HUD text — nothing covered.
