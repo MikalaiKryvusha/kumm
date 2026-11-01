@@ -73,6 +73,22 @@ export function decide(input, usage, state = {}) {
   return { text: message(tokens, pct), step };
 }
 
+// Ворота закрытия: вызов /end-chat-force или /end-chat-soft при окне < PCT_FORCE отклоняется, если в аргументах навыка нет слова владельца
+// («owner: «…»» — его дословная просьба закрыть). 2026-11-01 23:43: я закрыл чат на 68 % «по ощущению предела»; `[OWNER]` «ты опять слишком рано чат
+// закрыл, 28% еще свободно окна мне показывает твой харнес» · «И ХУК ИСПРАВЬ». Возвращает объект ответа хука (deny) или null.
+export function closeGate(input, usage) {
+  if (input.hook_event_name !== 'PreToolUse' || input.tool_name !== 'Skill') return null;
+  const ti = input.tool_input || {};
+  if (!/^end-chat-(force|soft)$/.test(String(ti.skill || ''))) return null;
+  if (/owner:\s*«[^»]+»/.test(String(ti.args || ''))) return null;
+  if (!usage) return null;                                    // нечем мерить — не мешаем
+  const pct = (contextOf(usage) / WINDOW) * 100;
+  if (pct >= PCT_FORCE) return null;
+  return { hookSpecificOutput: { hookEventName: 'PreToolUse', permissionDecision: 'deny',
+    permissionDecisionReason: `context-budget: окно ${pct.toFixed(1)} % < ${PCT_FORCE} % — закрывать чат рано, работай дальше. `
+      + `Закрытие — только на ${PCT_FORCE} % по числу этого хука или по слову владельца: args «owner: «<его дословная просьба закрыть>»».` } };
+}
+
 const stateFile = (sid) => join(tmpdir(), `context-budget-${String(sid || 'none').replace(/[^\w-]/g, '')}.json`);
 
 function selfCheck() {
@@ -109,6 +125,15 @@ function selfCheck() {
     ['UserPromptSubmit: говорит всегда', decide(U, lastUsage(close), { step: 75 }) !== null],
     ['нет usage — молчит', decide(U, null) === null],
     ['мутант без cache_read краснеет', contextOf(lastUsage(close), true) / WINDOW * 100 < PCT_WARN],
+    // 2026-11-01 23:43 — слово владельца: «ты опять слишком рано чат закрыл, 28% еще свободно окна» · «И ХУК ИСПРАВЬ» (я вызвал /end-chat-force на 68 %)
+    ['закрытие на 72 % без слова владельца запрещено', typeof closeGate === 'function'
+      && closeGate({ hook_event_name: 'PreToolUse', tool_name: 'Skill', tool_input: { skill: 'end-chat-force' } }, lastUsage(warn)) !== null],
+    ['закрытие на 86 % разрешено', typeof closeGate === 'function'
+      && closeGate({ hook_event_name: 'PreToolUse', tool_name: 'Skill', tool_input: { skill: 'end-chat-soft' } }, lastUsage(force)) === null],
+    ['закрытие по слову владельца разрешено', typeof closeGate === 'function'
+      && closeGate({ hook_event_name: 'PreToolUse', tool_name: 'Skill', tool_input: { skill: 'end-chat-force', args: 'owner: «закрывай чат»' } }, lastUsage(warn)) === null],
+    ['другой навык не трогается', typeof closeGate === 'function'
+      && closeGate({ hook_event_name: 'PreToolUse', tool_name: 'Skill', tool_input: { skill: 'dayloop' } }, lastUsage(warn)) === null],
   ];
   rmSync(dir, { recursive: true, force: true });
   let bad = 0;
@@ -124,7 +149,10 @@ if (isDirectRun) {
     const input = JSON.parse(readFileSync(0, 'utf8'));
     const sf = stateFile(input.session_id);
     let state = {}; try { state = JSON.parse(readFileSync(sf, 'utf8')); } catch { /* первый вызов */ }
-    const d = decide(input, lastUsage(input.transcript_path), state);
+    const usage = lastUsage(input.transcript_path);
+    const gate = closeGate(input, usage);
+    if (gate) { process.stdout.write(JSON.stringify(gate)); process.exit(0); }
+    const d = decide(input, usage, state);
     if (d) {
       writeFileSync(sf, JSON.stringify({ step: Math.max(state.step || 0, d.step) }));
       process.stdout.write(JSON.stringify({ hookSpecificOutput: { hookEventName: input.hook_event_name, additionalContext: d.text } }));
