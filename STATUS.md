@@ -111,8 +111,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > commands, what to verify first.
 
 > **2026-11-01 14:24 +03:00 — epic 40 phase 1 (vignettes) done in mechanics, partial in acceptance** (report `testcases/reports/2026-11-01_conan-vignettes.md`): section
-> `krinik_vignette.lua` (strength = the game effect's RenderOpacity; hunger / thirst 0, low health 0.10 shipped), three hub rows without a grey hint (the owner 14:08),
-> the hub «i» circles square again in every row (kit fix, EXP-0425). Waiting for the owner: review folder **48** (low-health strength 0 / 5 / 10 / 15 / 25 %).
+> `krinik_vignette.lua` (strength = the game effect's RenderOpacity; hunger / thirst 0, low health 0.25 shipped — the owner 14:34 after review folder 48), three hub rows without a grey hint (the owner 14:08),
+> the hub «i» circles square again in every row (kit fix, EXP-0425). Review folder 48 answered 14:34 («ставь 25%»; the owner tunes it later in play) — folder can go.
 > Open in phase 1: thirst and health shkalas by the mouse (V5, V6), the rule-4 clip. New owner rule for phase 2 (plan 40.2 criterion 4a): every shkala's min / max
 > are values a player could want; grey hints only when the «i» does not already say it. Pack and KUMM committed; game closed, lock released. Next: phase 2.
 > **Закрыто по слову владельца 2026-11-01 13:43 («закрывай чат, в новом делаем»).** Виньетки: прерванная съёмка с игрой впереди (голод 0 %%, сила 1 и 0) — кадры `vigF_*.jpg` в скретчпаде этого чата не проверены; новый чат повторяет её по researches/conan-vignettes/README.md. Чистая копия игры для теста установки — `D:/Instals/` (план 40 фаза 7). Игра закрыта, замок снят.
