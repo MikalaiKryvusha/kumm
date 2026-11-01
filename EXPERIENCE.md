@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0423 · 2026-11-01 · ❌→✅ · #conan #ue4ss #remote #foliage #stand
+class: wrong-api-assumption
+**Lesson:** an array returned by a UFunction to UE4SS Lua (`K2_GetComponentsByClass`) holds WRAPPED elements: `arr[i]:get()` gives the object. Four probes
+in the morning read `c.StaticMesh` and `c:GetInstanceCount()` on the wrapper, got nothing, and the game map recorded «the mesh is not readable» — a false
+fact that sent the stone stand to the owner for a «stone spot». With `:get()` the meshes, counts and instance transforms read at once and the stand took
+five minutes. When a property of an object from an array reads empty, unwrap first, before concluding «not readable».
+**Trigger:** any `for … in ipairs(<UFunction returning TArray>)` in a remote call or a section.
+none-cheap: one word in the call; the game map's stand line carries it
+
 ### EXP-0422 · 2026-11-01 · ❌→✅ · #conan #ue4ss #umg #animation #hud #measure
 class: wrong-api-assumption
 **Lesson:** `UserWidget:PlayAnimationTimeRange(anim, 0, End, loops, PingPong, speed, true)` called from UE4SS Lua on Conan 3.0.1 IGNORES `End`: the food

@@ -134,6 +134,9 @@ the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/Con
 > **ORDER (`[OWNER]` 2026-11-01 11:11–11:12 «да не нужно архив собирать!! Сборка же еще не готова!!» · «релизный архив соберем и все документы обновим,
 > когда сборку сделаем и протестируем на всех разрешениях 16 к 9»):** the release archive and the document refresh go LAST — after the build is finished and
 > tested at 720p / 1080p / 2K / 4K. The 11:10 archive run was stopped and its 16 GB removed; `make_volumes.sh` waits for that moment.
+> DONE 12:4x — the stone pickup in third person (R2): real E picks a real stone at the default and at the far zoom (arm 2125) — weight +0.06 and the stone
+> hidden each time (report `testcases/reports/2026-11-01_conan-stone-pickup-r2.md`; the stand recipe — the game map, «Stones by the remote»). Seen: no «E»
+> prompt on the frame before the press — not part of R2, left for the owner's eye.
 > DONE 12:3x — «All» → «Все» (ModControlPanel, KRINIK MODIFIED now — the category string changed everywhere at once) and the Damage Meter corners «Вверху слева» …
 > (field 120 → 150): bug 64 items 47, 49, report `testcases/reports/2026-11-01_conan-dropdowns-all-topleft-ru.md`, review folder 46. The Damage Meter notes are
 > now `DamageNumber.md` (the knowledge-hook finds notes by their title too). NEXT in the day loop: the stone pickup (R2), the arrows in corpses, the armour, then
