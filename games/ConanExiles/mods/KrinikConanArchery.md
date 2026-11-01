@@ -132,8 +132,9 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
   probe R2. **WORKS — seen 2026-11-01 23:18 and 23:25 (pack `15a7c82`):** `on_corpse_born` calls `owner.OnDestroyed:Remove(dummy, "DestroyDummyIfAttachedObjectIsDestroyed")`
   for each copy while the creature still lives (the wrapper is `MulticastSparseDelegateProperty` with `Add` / `Remove` / `Clear` in UE4SS 3.0.1), then the re-attach
   to the corpse bone; the arrows stay in the ragdoll for the corpse's life (600 s). The KILLING arrow's copy is born after the corpse: a copy born within
-  `CORPSE_LATE_S` 2 s of the last corpse re-runs the pass (4 of 4 kept, 23:25). Cases A6–A8, A10 pass. **Not native:** E on a shaft takes nothing — a copy in a
-  creature is born with `IsLootable` false, and setting it later does not help (A9); E on the corpse opens its loot → interview #030 (arrows into the corpse's loot). (c) below stays the fallback (it needs the owner's word on «arrows into the corpse's loot», plan 40.4 Outbound). Former pick: `[AI]` (c) first:
+  `CORPSE_LATE_S` 2 s of the last corpse re-runs the pass (4 of 4 kept, 23:25). Cases A6–A8, A10 pass. **E on a shaft — NOT PROVEN either way:** two tries failed
+  (A9: E at 4.7 m opened the corpse's loot; with `IsLootable` set true, E aimed at the copy's point did nothing) — the copy in a creature reads `IsLootable` false;
+  why E takes ground arrows and not these is a guess, not a fact (corrected 23:40, `[OWNER]` «Из земли можно, а из трупа нельзя?»). Interview #030. (c) below stays the fallback (it needs the owner's word on «arrows into the corpse's loot», plan 40.4 Outbound). Former pick: `[AI]` (c) first:
   the copies are read at corpse birth (they are still attached then — run 2), the visuals live on the corpse actor (die with it), the items go into the corpse's
   loot so «их можно собрать» is the corpse's own E. Taking them from the loot hides the visuals (the loot-change event on a corpse is the native
   `QuickLootPanel:SlotItemAddedOrRemoved` — the blueprint `HandleLootContainerInventoryChanged` stays silent on a corpse, game map «Loot change event»). Next: a read-only remote recon of the corpse's inventory (component class, its add-item UFunction), then the section.

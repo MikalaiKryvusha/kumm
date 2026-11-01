@@ -2,7 +2,7 @@
 
 > **Created:** 2026-11-01 · **Parent:** `plans/40_EPIC_conan_1.0.0_unfinished_six.md` phase 4 (criterion 4); plan 39 B3; notes `games/ConanExiles/mods/KrinikConanArchery.md` → Open
 > **Status:** 🟡 criteria 1 (Kappa — arrows stay) and the killing arrow PASS 2026-11-01 23:18 / 23:25 by route (a), the UE4SS delegate `Remove` (R1 desk 23:0x, R2 live
-> 23:17; pack `15a7c82`; TC A6–A8, A10); criterion 3 (E takes one shaft) FAILS natively (A9) — the outbound question is interview #030; criterion 2 (humanoid) and 4
+> 23:17; pack `15a7c82`; TC A6–A8, A10); criterion 3 (E takes one shaft) — two tries failed, NOT concluded (A9; corrected 23:40) — interview #030 under discussion; criterion 2 (humanoid) and 4
 > (the rest go with the corpse — by the copies' life = the corpse's) not run. Earlier: three blind attempts (report `testcases/reports/2026-11-01_conan-arrows-corpse-recon.md`)
 > **Outbound:** if only route (c) survives and E cannot take a single arrow off the body — one question to the owner (`interviews/`): «стрелы — в добычу трупа» vs. drop
 
