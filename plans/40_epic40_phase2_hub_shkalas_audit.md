@@ -1,7 +1,7 @@
 # Plan 40.2 — every row of «Моды Krinik'а» moved, saved and its effect seen in the game
 
 > **Created:** 2026-11-01 · **Parent:** `plans/40_EPIC_conan_1.0.0_unfinished_six.md` phase 2 (criterion 2); plan 39 A1; STATUS handover item 1a
-> **Status:** written 2026-11-01 by a helper agent; not started; runs after phase 1 (the three vignette rows are audited there, the 19 below here)
+> **Status:** written 2026-11-01 by a helper agent; recon done 14:4x; run 1 of 2026-11-01 14:38-14:46 (cases `testcases/TC_conan_hub_rows_audit_2026-11-01.md`): 13 rows pass, 4 partial (sharp zoom timing, arrow speeds, arrow breaking, blood), 1 not run (shout), H20-H22 not run; the defect «Сохранить и закрыть» did not reach the camera / pack manager found and fixed. Next: the partial rows by their stands (a bow shot at a frozen Kappa, a melee hit), H20-H22, rule 4a (ranges and hints)
 > **Outbound:** a row with no effect that cannot be fixed within the phase → the owner decides «fix or remove for 1.0.0» (one line, his word recorded)
 
 Basis, verbatim: `[OWNER]` 2026-11-01 13:23 «ты сделал шкалы настройки - якобы давая игрокам возможность это настраивать, но это ЕБАНАЯ показуха, потому что

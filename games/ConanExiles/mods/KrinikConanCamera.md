@@ -31,6 +31,10 @@ and changed by the window (`HUB_KEYS` in `main.lua`): `offset_z` → `cam_height
 - The window's «Сохранить» sets `KrinikCameraSet` (all eight rows, rounded to the row's step) and bumps `KrinikSettingsVersion`; the camera takes it in a
   pre-hook of `GUIModuleController:ActivateModule` when a window CLOSES (no timer): cfg, `apply(moved)` (the distance only when the window changed
   it — the wheel's distance is kept otherwise), `write_config`. Log line «ОКНО «Моды Krinik'а»: принято 8 настроек …».
+- **The close must go through the UFunction (2026-11-01 14:4x):** the hub's own `TryCloseWindow` closes the module natively and this pre-hook never fired —
+  the set waited for the inventory's close. The hub now calls `ActivateModule(FName("KrinikModSettings"), false, false)` from Lua after the close; seen: height
+  100 taken at «Сохранить и закрыть» (`testcases/TC_conan_hub_rows_audit_2026-11-01.md` H1–H8; reads: the hero's `ThirdPersonSpringArm`, `CameraThirdPerson`,
+  hero fields `ThirdPersonCameraMin/MaxArmLength`, `TP_SpringArmInterpSpeed`).
 - The window hands the set over only when a camera row differs from `KrinikCameraValues` («camera page unchanged — nothing handed over» otherwise):
   a save on another page never rewrites the camera's file.
 - Cases `testcases/TC_conan_hub_camera_page_2026-10-31.md` (C1–C10 pass 2026-10-31 22:29–22:47).
