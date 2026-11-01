@@ -132,7 +132,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > FIRST next: (0) the two hub remarks above; (1) the owner's answer to #029 (then the C1 fix: the chest's loot table in the mod pak);
 > (2) bug 64 items 47 «All» (ModControlPanel `MDC_MCP`) and 49 «Top Left» (Damage Meter settings) — the same `lit:` route as item 48 (trace the asset's
 > event graph first: a translated option must not break a string comparison or a saved string); (3) plan 38 phase 1 — the inventory button «Настройки
-> модов» + the upward list (heavy, ≈ 3–4 h); (4) R2 — a stone spot from the owner or a position scan. Before any remote call on a mod's own function —
+> модов» + the upward list (heavy, ≈ 3–4 h); (4) R2 — SPAWN a stone in front of the hero by the remote (HOUSE_RULES rule 11.5a, the owner 08:45), then E at the default and the far zoom. Before any remote call on a mod's own function —
 > copy `Saved/SaveGames/` (EXP-0417); the owner has NO `Saved/KrinikSettings.lua` — delete the one a save case writes.
 > **Older handover blocks (chat a3dcf82b and the 2026-11-01 04:4x–05:3x lines) — moved verbatim to the chronicle, entry 2026-11-01 05:51 +03:00.**
 > - **Earlier FIRST list (still valid):** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,

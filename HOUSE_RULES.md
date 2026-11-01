@@ -47,6 +47,9 @@
     4. A creature — spawned, of the right class at the right distance; frozen, made peaceful or killed as the case needs. A target without
        a creature — a wall or a rock in front of the hero.
     5. The case's action — done by the agent itself.
+    5a. An object the case needs (a stone or a stick to pick up, a chest, a resource node) — SPAWNED by the remote in front of the hero, never searched
+        for in the world and never asked of the owner. (`[OWNER]` 2026-11-01 08:45 «СОЗДАВАЙ СЕБЕ САМ ТЕСТОВЫЕ УСЛОВИЯ!!! ЗАСПАВНИ КАМЕНЬ!!» — after four
+        probes spent searching foliage for a stone, case R2.)
     6. Interference (an enemy hits the hero, combat noise, the camera drifted) — remove it and repeat; a case run under interference does
        not count.
     7. How the stand was set up — one line in the game map.
