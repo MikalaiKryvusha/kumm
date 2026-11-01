@@ -74,6 +74,13 @@ leaves, the prompt shall go. Maintain: our mods' 1 ms CPU budget in gameplay fra
   within 3 m of the hero only 1 component held a pickup. Design `[AI]`: keep a short list of the pickup components whose bounds lie near the hero
   (`GetLocalBounds`; `c.Bounds` is not readable from Lua — the call failed 21:30), rebuilt only when the hero has moved > 20 m or an area streamed in; one check
   = the crosshair point against that list (expected 0.05–0.2 ms), 5 checks a second — the owner's word on the rule-7 exception still needed.
+- **The owner's route, 21:30 `[OWNER]` «а может просто лучом перед героем раз в 1 секунду проверять?» · «есть камень, растение, палка, или нет»** — the polling
+  exception for this prompt is HIS proposal: one check a second. A physics trace is NOT used: a sweep of `LineTraceSingle` over channels 0…31 crashed the
+  owner's game 21:30 (EXP-0433). The check copies the game's own pickup search geometry (the owner 21:31 «может ты уже знаешь, что это за луч, раз чинил наш
+  мод?»): start / end by the controller's own `GetLineTraceStartAndEndFromCamera(Distance)` with `Distance` = `PickupInteractionDistance` (25 + the camera
+  mod's arm compensation — bug 64 row «stones, fibre»), thickness `PickupTraceSphereRadius` 200 → `GetInstancesOverlappingSphere(point, 200, true)` at points
+  along that segment on the near pickup components; a hit → the prompt, with the mesh kind (rock / branch / fibre plant) for the «Поднять камень» variant.
+  Look — mockups in review folder 53 (`podskazka_podnyat_maket`): «E Поднять» and «E Поднять камень», under the crosshair.
 - **Routes left:** ~~(1) a sensor that moves ITSELF~~ (closed by E2); the only one — (2) below. Former text: (1) a sensor that moves ITSELF each time the camera moves (a kit actor with its own component and overlap event — needs a stand proof);
   (2) the native `GetInstancesOverlappingSphere` on the nearby pickup components at the crosshair point, on a rhythm (variant A of 21:1x — the owner's
   decision on the rule-7 exception is still open).
