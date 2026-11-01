@@ -128,3 +128,16 @@ world runs at normal time).
 |---|---|---|---|---|---|
 | V5 | `StopProjectileInternal` hook in `add_visual_arrow` | one shot into the ground / the Kappa, read the remote right after impact | the log «гашение крупной стрелы при ударе: подписано»; the flying actor's own ×3 mesh `IsVisible` false within the impact frame; the stuck ×1 copy visible | partial | 21:10:37 log «гашение крупной стрелы при ударе: подписано» at the first shot; the remote read of the big mesh after impact found none (my query did not tell our component apart) — the look decided by V6 |
 | V6 | as V5 | the owner plays: shots into the ground, rocks, enemies | the ×3 arrow seen in flight; after impact only the ×1 copy (no big arrow beside it) | pass | the owner's own run 21:11–21:13: `[OWNER]` «да, суппер работает!» · «и земля, и камни, и враги» (the agent's 60 fps recording 21:10 caught the owner's desktop and was deleted unwatched) |
+
+### The pickup prompt «E Взять» (plan 42; the owner 2026-11-01 21:14–21:34)
+
+Stand: the game in the background, the oasis save, god on; the crosshair turned onto pickup foliage by `SetControlRotation`; frames by `capture-window.ps1`; the prompt's
+own log lines; the hub log.
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| P1 | section `krinik_pickup_prompt` deployed | enter the world | log «плашка «E Взять» в прицеле», «компонентов подбираемой растительности: N» (N > 200 at the oasis), no error | pass | 21:38:53, 21:43:28, 21:46: both lines, 281 components, no error |
+| P2 | the crosshair on a stone / branch / fibre within the game's pickup line | wait 1.5 s | the plate «E Взять» under the crosshair (frame) | pass | 21:39 frame: «E Взять» under the crosshair 1.5 m from a stone (backing 0.55 hardly seen on sand → 0.85) |
+| P3 | the crosshair on open sand / sky | wait 1.5 s | no plate | redefined | 21:40: the plate stayed with the crosshair in the SKY beside the stone — and E there DID take the stone (weight 97.64 → 97.70): the game's search is a 2 m sphere at the camera, not the aim; the prompt tells the truth. Control «no plate» = no pickup within reach — 21:47 frame: no plate |
+| P4 | as P2 | press E (the owner, or a real key) | the item taken; within ≈ 1 s the plate goes if nothing else is in reach | pass | 21:40: a real E (`mouse-seq.ps1`) took the stone; the plate stayed — fibre and branches still in reach |
+| P5 | a minute of play | read the section's summary line | the worst check ≤ 1 ms; per-minute own time logged | partial | 21:39 all in one frame: 204 ms / 60, worst 6 ms (FindFirstOf every second + a 30 m near sphere) → cached controller and hero, a 6 m sphere, the near refresh on its own half-second frame: 21:47 20 ms / 60 = 0.33 ms a check, worst 3 ms (os.clock step 1 ms — not concluded); the A-B flight is owed |
