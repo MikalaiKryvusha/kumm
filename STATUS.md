@@ -92,9 +92,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Decisions the agent must not make alone (brand/UX/architecture), or actions only the human can do
 > (test on real hardware, external accounts). Filed in `interviews/` and `homeworks/`.
 
-- ❓ **Interview #030 — how the arrows left in a corpse are taken — UNDER DISCUSSION, no decision.** 23:37 the owner ASKED «п это сложно сделать? Обливион так
-      умел»; I took the question for an answer — `[OWNER]` 23:38 «Я ТЕБЯ ПРОСТО СПРОСИЛ!!!!» · «А НЕ ПРИКАЗАЛ!» · «ОБСУЖДАЕМ!». Nothing is built for it
-      (`interviews/interview_030_conan_arrows_in_corpse_pickup.md`).
+- 🔴 **OWNER'S DEBT — interview #030 answered 2026-11-01 23:41 — A:** `[OWNER]` «тогда делаем, что воткнытые в трум стрелы идут в инвентарь трупа». To apply, in
+      order: (1) a read-only remote recon of the corpse's inventory — its component class and the add-item UFunction (`scratchpad` probe `corpse_probe.lua` lists
+      the corpse's components; `pult.sh "funcs <component>"`); (2) KrinikConanArchery `on_corpse_born` / `rebirth`: one arrow item (`ProjectileItemTemplateID` of
+      the copy) into the corpse's loot per copy kept; (3) when the arrows leave the loot (`QuickLootPanel:SlotItemAddedOrRemoved`), the shafts go; cases in
+      `TC_conan_arrows_stay_in_corpse_2026-11-01.md`. Not built yet.
 - 🎯 **Oblivion-style archery — raised by the owner 2026-10-28** (a discussion, not work: `[OWNER]` «пока обсуждаем»): arrow speed — Conan's,
       the drop — Oblivion's. Vanilla `ArrowGravityScale` 0.55 and `ArrowInitialSpeedMultiplier` 5000 (Remastered) found; waits for his choice of what
       the draw does (shot power, as in Remastered, or a flatter flight, as in Conan). Recon — `researches/conan-archery/README.md`.
