@@ -26,3 +26,10 @@ The animations drive the CHILDREN (`Image` / `Effect`) — the effect widget's o
 ## Crash 2026-11-01 13:31:43 (game down, crash report closed by PID 23472; `Saved/Crashes/UECC-Windows-DCA8667F4C3EF7E2474D3899F66D8B14_0000`)
 
 Sequence: food set to 4 % by the remote (executed), then ONE remote call that walked every `W_FullScreenBuffEffect_C` and read `w.Image.Brush.ResourceObject`, `w.Buff:GetClass()`, `GetRenderOpacity()`, `GetVisibility()` — never logged as executed: the game died inside it. A native access violation is not a Lua error (pcall does not catch it, EXP-0401). Next: one unknown per call — first only `GetFName` + `GetRenderOpacity` of each effect widget; the brush and `Buff` later, one by one, after the crash dump is read.
+
+## Probe 2026-11-01 13:33–13:35 (one unknown per call — no crash)
+
+- Food 4 %: ONE live `W_FullScreenBuffEffect_C` (`…2147459071`, RenderOpacity 1.00) — most likely the container's `ActiveDamageEffect`; no hunger effect yet.
+- Food 0 %: TWO more effect widgets are born (`…2147456923`, `…2147455601`) — the hunger vignette starts at 0 % (starving), not earlier.
+- RenderOpacity 0.1 on the two new widgets vs 1.0: on window frames (`capture-window.ps1`, 3 s after food 0) NO vignette is visible in either frame — inconclusive: the effect may fade in slowly (`Anim_FadeSlow`) or the background window capture may not show it.
+Next: hold food 0 for ≈ 10 s (refill right after — hunger at 0 kills even with god), frame with the game in FRONT (screen capture) at op 1 / 0.1 / 0; then the low-health effect (health 15 %) the same way; then identify each widget by its `Image` brush in a call of its own.
