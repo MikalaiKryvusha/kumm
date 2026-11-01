@@ -36,7 +36,7 @@
 //                 предписание; Read в одном сообщении с командой ещё не в журнале — отказ (записано в конспекте мода).
 //                 2026-10-18 02:04–02:06 +03:00 — живая сессия KUMM: «сравнение» после проверки настроек, «слово владельца», «воспоминание» после
 //                 Read методички, «неожиданный исход» (ложная тревога) — все четыре дошли в контекст агента
-import { readFileSync, writeFileSync, mkdtempSync, rmSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdtempSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
@@ -148,11 +148,24 @@ const WORK = [    // иная работа с модом: раскатка од�
   // имя манифеста бывает с пробелами в кавычках («Simple Minimap»): прежний разбор брал первое слово «Simple» и требовал Simple.md (2026-11-01)
   /Deploy-ModPack\.ps1[^\n]*-Only\s+(?:"([^"]+)"|'([^']+)'|([A-Za-z0-9_]+))/,
 ];
-// Имя мода → имя конспекта: пробелы → «_» (Simple_Minimap.md) или без пробелов (TheDamageMeter.md) — какой файл есть; иначе первый вид.
-const noteName = (name, exists = (n) => existsSync(join(HERE, '..', '..', notesRel(n)))) => {
+// Имя мода → имя конспекта: пробелы → «_» (Simple_Minimap.md) или без пробелов — какой файл есть; иначе конспект, в чьей первой строке
+// стоит это имя («# Mod notes — The Damage Meter …» в DamageNumber.md: разбор ассетов зовёт мод именем пака, раскатка — именем манифеста;
+// 2026-11-01 конспект под одним именем требовал второй под другим); иначе первый вид.
+const noteName = (name, exists = (n) => existsSync(join(HERE, '..', '..', notesRel(n))), titled = notesByTitle) => {
   const cands = [name.replace(/\s+/g, '_'), name.replace(/\s+/g, '')];
-  return cands.find((n) => exists(n)) || cands[0];
+  return cands.find((n) => exists(n)) || titled(name) || cands[0];
 };
+function notesByTitle(name) {
+  try {
+    const dir = join(HERE, '..', '..', NOTES_DIR);
+    for (const f of readdirSync(dir)) {
+      if (!f.endsWith('.md')) continue;
+      const first = readFileSync(join(dir, f), 'utf8').split('\n', 1)[0];
+      if (first.includes(`— ${name} `) || first.endsWith(`— ${name}`)) return f.slice(0, -3);
+    }
+  } catch { /* нет папки — нет конспекта */ }
+  return null;
+}
 const SRC_EDIT = /ConanExiles[\\/]_unpacked[\\/]([A-Za-z0-9_]+)[\\/]/;
 const notesRel = (mod) => `${NOTES_DIR}/${mod}.md`;
 const norm = (p) => String(p || '').replace(/\\/g, '/').toLowerCase();

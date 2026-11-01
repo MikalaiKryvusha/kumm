@@ -31,7 +31,11 @@ Pak `DamageNumber.pak`, original in `D:\Games\Conan Exiles Mods\_patch-originals
 1. The collapsed meter goes to the TOP-left corner: `DN_SG_SaveSettings.RestoreAnchor` 2 → 0 (`[OWNER]` «нужно сворачивать не в левый нижний угол, а в левый
    верний» · 2026-10-26). A player with saved settings changes it himself: the mod's settings → Minimize to corner.
 2. Settings window (bug 64 item 21, 2026-10-26 18:19): «Непрозрачность» and «Масштаб» at size 10 instead of 13, «Сохранить» / «Отмена» at 10 instead of 12.
-3. Rebuild after a mod update: `python -I -X utf8 _config/devkit/patch-mod-asset.py build DamageNumber DN_SG_SaveSettings <work>
+3. The «Сворачивать в угол» list in Russian (bug 64 item 49, 2026-11-01): `lit:` «Top Left» → «Вверху слева», «Top Right» → «Вверху справа», «Bottom Left» →
+   «Внизу слева», «Bottom Right» → «Внизу справа» in `DN_UI_SettingsWindow` — `PopulateControls` (AddOption ×4, SetSelectedOption) and the switch-on-string
+   `GetAnchorIndex(AnchorName)`; the save keeps the NUMBER `RestoreAnchor`, so the change is safe; the field `SizeBox_6` 120 → 150 (run 1 cut «Вверху слев»).
+   Live 12:37: the live window's `GetAnchorIndex(GetOptionAtIndex(i))` = 0…3 (report `2026-11-01_conan-dropdowns-all-topleft-ru.md`).
+4. Rebuild after a mod update: `python -I -X utf8 _config/devkit/patch-mod-asset.py build DamageNumber DN_SG_SaveSettings <work>
    _config/localization/asset-strings/DamageNumber__DN_SG_SaveSettings.tsv _config/localization/asset-strings/DamageNumber__DN_UI_SettingsWindow.tsv
    DN_UI_SettingsWindow` → `<work>/out/DamageNumber.pak` into `_krinik-modified/3719585133`.
 
