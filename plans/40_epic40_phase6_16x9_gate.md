@@ -43,21 +43,21 @@ installer and uninstaller consoles, the feedback waiting window) checked at the 
 
 ## Steps
 
-- [ ] 1. **Inventory** (≈ 1 h, offline): build the element list of criterion 1 into `testcases/TC_conan_16x9_gate_<YYYY-MM-DD>.md` (one row per element: how it
+- [ ] 1. **Inventory** (offline): build the element list of criterion 1 into `testcases/TC_conan_16x9_gate_<YYYY-MM-DD>.md` (one row per element: how it
       is shown by code, which texts to check); read the KRINIK MODIFIED entries' `$comment` to keep only UI edits; the launcher TC
       `testcases/TC_conan_launcher_guide_button_2026-11-01.md` for its snapshot DPI set.
 - [ ] 2. **Cases** in the same file: element × {720p, 1080p, 2K, 4K} cells `[NOT-TESTED]`, plus the four launcher DPI cells and the console windows.
-- [ ] 3. **Run, one resolution at a time** (≈ 2 h): lock (`--what "epic40 p6 16x9" --minutes 120`), `launch-bg.ps1` (background is fine — the frames come from
+- [ ] 3. **Run, one resolution at a time**: lock (`--what "epic40 p6 16x9" --minutes 120`), `launch-bg.ps1` (background is fine — the frames come from
       `PrintWindow`; tooltip cells need the game in front by `hover-watch.ps1`), world entry; `r.SetRes` to R; walk the element list by code; frames into
       `<scratch>/gate/<R>/<element>.webp`; per R a sheet (`burst-sheet.py` or a Pillow tile) for the agent's eye; status per cell the same move.
-- [ ] 4. **Windows side** (≈ 0.5 h): launcher snapshots at 96 / 144 / 192 / 288 dpi; `install.cmd` and the uninstaller console on the fixture stand
+- [ ] 4. **Windows side**: launcher snapshots at 96 / 144 / 192 / 288 dpi; `install.cmd` and the uninstaller console on the fixture stand
       (`node tools/fixture-pack.mjs` builds one) at the owner's 300 % — a screenshot of the console; the feedback waiting window at 300 %.
-- [ ] 5. **Fix pass** (≈ 1–3 h, unknown until the run): each fail fixed in its source (kit script + rebuild twice + `kit-buildmod.py`, a section, a mod's pak
+- [ ] 5. **Fix pass** (unknown until the run): each fail fixed in its source (kit script + rebuild twice + `kit-buildmod.py`, a section, a mod's pak
       edit script), re-framed at that R and at 4K the same day.
 - [ ] 6. **Owner's eye:** `НА ОТСМОТР НИКОЛАЕМ/<N> 16 на 9 все окна/` — one sheet per resolution + «что смотреть»; opened by `Invoke-Item` (folder).
 - [ ] 7. Restore 4K (`r.SetRes 3840x2160f`), `close-game.ps1`, lock released; report `testcases/reports/<YYYY-MM-DD>_conan-16x9-gate.md` with the matrix.
 
-### Packaging into the build (≈ 0.5 h, only for fixes)
+### Packaging into the build (only for fixes)
 
 - [ ] P1. Sources: the touched kit scripts and rebuilt paks under `ConanExiles/_unpacked/<Mod>/`, sections under `ue4ss/Scripts/`, launcher sources under
       `_config/launcher/` (rebuilt by `build_docs_and_launcher.cmd`).
@@ -72,7 +72,3 @@ installer and uninstaller consoles, the feedback waiting window) checked at the 
 - (a) DPI 300 % makes the game write 1280 back — the owner's 4K restored and read back at the end.
 - (b) Foreign mods' windows we did not edit are out of scope; a defect seen in them goes to epic 41 / bug 64, not fixed here.
 - (c) Taste remarks after the sheets may reopen phase 1–3 work — the owner decides the order.
-
-## Effort
-
-≈ 5–8 h: inventory and cases 1 h · four-resolution run 2 h · Windows side 0.5 h · fixes 1–3 h · packaging 0.5 h; plus the owner's look.

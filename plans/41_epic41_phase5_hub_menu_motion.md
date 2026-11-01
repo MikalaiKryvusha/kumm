@@ -60,10 +60,6 @@ want to be: a 60 fps clip of our build next to the same clip of a game without o
 - (b) Epic 40 phase 3 rebuilds the bottom bar — if it lands after this phase, the bottom-bar clip is re-run.
 - (b) The owner's eye sees motion at 144 Hz that a 57 fps clip may miss — his clicks remain the last check (memory «мерцание UI — видео 60 к/с»).
 
-## Effort
-
-4–7 h (baseline route 1–1.5 h, clips and sheets 1–1.5 h, causes and fixes 1.5–3 h, records 0.5–1 h).
-
 ## Decisions made without the owner
 
 (filled at the phase's close)

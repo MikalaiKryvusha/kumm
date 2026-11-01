@@ -60,10 +60,6 @@ with this MCP, the owner decides whether MCP leaves the build (and LBPR keeps it
   concluding «no widgets».
 - (b) Patching two authors' paks — every edit is a re-appliable TSV next to the pak (rule 8).
 
-## Effort
-
-2–4 h (recon 1–2 h, fix and test 1–1.5 h, records 0.5 h); + the owner's time if the fork goes to him.
-
 ## Decisions made without the owner
 
 (filled at the phase's close)

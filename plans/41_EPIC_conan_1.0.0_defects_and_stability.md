@@ -70,17 +70,16 @@ same build. Epic 40 phase 7 (archive) closes both epics.
 Each phase's operational plan: `plans/41_epic41_phase<N>_<slug>.md` — written together with this meta-plan at the owner's word 13:28 («пишем эпик планы и
 операционные планы»), corrected when its phase starts if a previous phase changed the facts.
 
-| Phase | Operational plan | Effort |
-|---|---|---|
-| 1 | `plans/41_epic41_phase1_bug64_truth_pass.md` | 2–3 h |
-| 2 | `plans/41_epic41_phase2_mod_windows_by_player_path.md` | 3–5 h |
-| 3 | `plans/41_epic41_phase3_modcontrolpanel_no_widgets.md` | 2–4 h |
-| 4 | `plans/41_epic41_phase4_mod_window_text_layout.md` | 6–9 h |
-| 5 | `plans/41_epic41_phase5_hub_menu_motion.md` | 4–7 h |
-| 6 | `plans/41_epic41_phase6_enemy_bars_eaa_cards.md` | 4–8 h |
-| 7 | `plans/41_epic41_phase7_day_night_light_jump.md` | 3–5 h |
-| 8 | `plans/41_epic41_phase8_stability_long_run.md` | 6–9 h |
-| | **Total** | **30–50 h** |
+| Phase | Operational plan |
+|---|---|
+| 1 | `plans/41_epic41_phase1_bug64_truth_pass.md` |
+| 2 | `plans/41_epic41_phase2_mod_windows_by_player_path.md` |
+| 3 | `plans/41_epic41_phase3_modcontrolpanel_no_widgets.md` |
+| 4 | `plans/41_epic41_phase4_mod_window_text_layout.md` |
+| 5 | `plans/41_epic41_phase5_hub_menu_motion.md` |
+| 6 | `plans/41_epic41_phase6_enemy_bars_eaa_cards.md` |
+| 7 | `plans/41_epic41_phase7_day_night_light_jump.md` |
+| 8 | `plans/41_epic41_phase8_stability_long_run.md` |
 
 ## Common to every phase
 

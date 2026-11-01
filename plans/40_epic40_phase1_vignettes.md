@@ -56,7 +56,7 @@ no vignette is shown (HOUSE_RULES rule 7).
 
 ## Steps
 
-### Recon (≈ 2 h)
+### Recon
 
 - [ ] R1. **What draws the hunger / thirst vignette.** Kit probe, read-only: `KIT_WIDGETS='W_FullScreenEffectContainer;W_FullScreenBuffEffect'
       "<UnrealEditor-Cmd>" … -run=PythonScript -Script=_config/devkit/kit-probe-tree.py -ModDevKit -NullRHI` → `kit-probe-tree.json`: the tree, the
@@ -79,7 +79,7 @@ no vignette is shown (HOUSE_RULES rule 7).
 - [ ] R6. Write the findings into `games/ConanExiles/mods/KrinikConanUI.md` (new subsection «Vignettes») and the game map line; plan 36 W23 row → «recon done,
       route <X>» — same commit (rule 2).
 
-### Implementation (≈ 1.5 h)
+### Implementation
 
 - [ ] I1. **Section** `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_vignette.lua`: on the R5 event, per vignette instance: strength k =
       `settings.get("ui_vig_<hunger|thirst|health>", default)`; k = 0 → `SetVisibility(1)` (Collapsed); else the R1 property × k (opacity or material scalar
@@ -98,7 +98,7 @@ no vignette is shown (HOUSE_RULES rule 7).
 - [ ] I6. **Measuring tool** `ConanExiles/_config/edge-band.py <frame> [--control <frame>]`: mean of (R − (G+B)/2) over a band of 6 % of the frame's height
       along all four edges, minus the same over the centre third; prints one number. Desk test: a synthetic frame with a known red band.
 
-### Test in the live game (≈ 1.5 h)
+### Test in the live game
 
 - [ ] T1. Cases V1–V10 (criteria 1–8 + the window frame + a restart) written FIRST into `testcases/TC_conan_vignettes_<YYYY-MM-DD>.md` (date = the day they
       are written; the testcase-gate refuses a run otherwise), with the stand block above.
@@ -113,7 +113,7 @@ no vignette is shown (HOUSE_RULES rule 7).
       «что смотреть» note), opened by `Invoke-Item`; the pick sets `N_T6` and the shipped default.
 - [ ] T7. Run report `testcases/reports/<YYYY-MM-DD>_conan-vignettes.md` (TESTING_FRAMEWORK «An executed run produces its report»).
 
-### Packaging into the build (≈ 0.5 h)
+### Packaging into the build
 
 - [ ] P1. Source: `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_vignette.lua`, `main.lua`, `krinik_mod_settings.lua`, the rebuilt
       `KrinikConanUI.pak` (git-ignored, rebuilt by I4), `_config/devkit/kit-krinik-modsettings.py`, `_config/edge-band.py`.
@@ -132,7 +132,3 @@ no vignette is shown (HOUSE_RULES rule 7).
 - (b) Vanilla starts the vignette below 5 % → criterion 1–3 Situation moves (R3), owner told.
 - (b) A new row makes the page taller than `MIN_HEIGHT` 845 → re-check the window at 720p (phase 6 also frames it).
 - (c) The idle vanity camera hides the HUD mid-series — series under 2 min, or `EnableVanityCameraMode(false)` by the remote.
-
-## Effort
-
-≈ 5–6 h: recon 2 h · implementation and kit 1.5 h · live test 1.5 h · packaging and documents 0.5 h. Plus the owner's pick (T6) — his time.

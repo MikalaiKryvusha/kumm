@@ -61,10 +61,6 @@ No FIX and no PACKAGING in this phase: a defect found is a «before» frame for 
 - (b) A bare `ActivateModule` of a window without its mod's entry can crash (PackRat 2026-10-26 18:03) — only the modules `walk-mod-windows.sh` already opened safely.
 - (b) Row 13's candidate list may be stale (strings shortened since 2026-10-26) — this phase only counts; phase 4 walks.
 
-## Effort
-
-2–3 h (recon 0.5 h, one game session 1–1.5 h, report and row edits 0.5–1 h).
-
 ## Decisions made without the owner
 
 (filled at the phase's close)

@@ -78,11 +78,6 @@ hub, mod windows and combat — 0 new crash folders, no new error class, no Lua 
   verdict (that is epic 40 phase 5, in front).
 - (b) The memory threshold and the stutter ratio are `[AI]` values with no earlier baseline — the first run records them; the owner can tighten.
 
-## Effort
-
-6–9 h (recon and tool edit 1.5–2 h, cases ≈ 1 h of machine time + 0.5 h records, the long run 2 h of machine time + 0.5 h setup, analysis and records
-1–1.5 h; a crash adds its fix and a rerun of 2 h).
-
 ## Decisions made without the owner
 
 - `[AI]` 2026-11-01 13:30 — 120 min in three blocks; memory growth ≤ 10 %/h after 15 min; a block's stutters ≤ 2× block A's.

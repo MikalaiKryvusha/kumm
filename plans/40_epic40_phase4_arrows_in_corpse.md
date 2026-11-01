@@ -48,7 +48,7 @@ it; a Lua-spawned copy without its own hit leaves at once. Where we want to be: 
 
 ## Steps
 
-### Research (`/bug-research`, ≈ 2–3 h, no code)
+### Research (`/bug-research`, no code)
 
 - [ ] R1. `/bug-research` on «BP_DummyProjectile dies on the hit actor's OnDestroyed»: web (UE4SS docs and issues: unbinding / clearing a multicast delegate
       from Lua; `RegisterHook` on a BP event — can a pre-hook skip the original; `BeginDeferredActorSpawnFromClass` / `FinishSpawningActor` from UE4SS Lua),
@@ -70,7 +70,7 @@ it; a Lua-spawned copy without its own hit leaves at once. Where we want to be: 
       count (recon: the hero's inventory component `funcs`, e.g. a count-by-template call; record the working one in the game map).
 - [ ] R7. Verdict in the research README: the chosen route, the evidence, the routes refuted; the notes' Open bullet rewritten (rule 2).
 
-### Implementation (≈ 2–4 h, by the chosen route)
+### Implementation (by the chosen route)
 
 - [ ] I1. `ConanExiles/_unpacked/KrinikConanArchery/ue4ss/Scripts/main.lua`, section «стрелы в трупе»: at the corpse's birth (`NotifyOnNewObject` on the NATIVE
       `/Script/ConanSandbox.CorpseBase` — the BP class is not loaded at mod start) + `ExecuteInGameThreadWithDelay` until the creature's copies are known; per
@@ -81,7 +81,7 @@ it; a Lua-spawned copy without its own hit leaves at once. Where we want to be: 
       new row without a word).
 - [ ] I4. Hygiene: `loadfile`, `check-lua-game-thread.py` 0, `check-lua-templates.py` 0.
 
-### Test in the live game (≈ 1.5 h)
+### Test in the live game
 
 - [ ] T1. Update `testcases/TC_conan_arrows_stay_in_corpse_2026-11-01.md`: A2–A5 re-armed to `[NOT-TESTED]` for the new route, + A6 (E picks one), A7 (rest go
       with the corpse), A8 (cost), A9 (no orphan at 0 0 0), A10 (a miss into the ground still lootable — regression). The testcase-gate needs changed lines.
@@ -91,7 +91,7 @@ it; a Lua-spawned copy without its own hit leaves at once. Where we want to be: 
 - [ ] T3. `close-game.ps1`, lock released; crash-report window by PID if any (rule 9); report
       `testcases/reports/<YYYY-MM-DD>_conan-arrows-in-corpse.md`; review folder `НА ОТСМОТР НИКОЛАЕМ/<N> стрелы в трупе/`.
 
-### Packaging into the build (≈ 0.5 h)
+### Packaging into the build
 
 - [ ] P1. Sources: `ConanExiles/_unpacked/KrinikConanArchery/ue4ss/Scripts/main.lua`; for route (a′) the rebuilt `KrinikConanArchery.pak` and its patch script.
 - [ ] P2. `modpack.json` entry `KrinikConanArchery`: version line «0.8.0 — arrows stay in the corpse» in `version`; `verify` unchanged unless a file is added.
@@ -106,7 +106,3 @@ it; a Lua-spawned copy without its own hit leaves at once. Where we want to be: 
 - (b) Overriding `BP_DummyProjectile` in our pak touches every projectile copy of the game (all bows, throwing weapons) — regression A10 and a thrown-weapon case.
 - (b) Ragdoll bones move after the kill — attach to the bone, never to a world position.
 - (c) Corpse despawn time is long (600 s seen as the corpse's life) — criterion 4 uses the remote destroy, one natural despawn observed if time allows.
-
-## Effort
-
-≈ 6–9 h: research 2–3 h · implementation 2–4 h · live test 1.5 h · packaging 0.5 h.

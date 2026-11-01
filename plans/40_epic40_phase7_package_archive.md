@@ -57,21 +57,21 @@ guide and README refreshed from the phase reports, not the work log.
 
 - [ ] 0. **Gate:** phases 1–6 reports exist and their acceptance tables are all `seen` (`ls testcases/reports/*vignettes* *hub-rows-audit* *mods-menu-button*
       *arrows-in-corpse* *frame-cost* *16x9-gate*`); `git status` clean in the pack and pushed (`git log origin/main..main` empty).
-- [ ] 1. **Recon (≈ 0.5 h):** `install.cmd` and the uninstaller as exported (`Deploy-ModPack.ps1` lines ≈ 44–45, 987–1012; manifest `uninstall.cmd`, `shortcut`);
+- [ ] 1. **Recon:** `install.cmd` and the uninstaller as exported (`Deploy-ModPack.ps1` lines ≈ 44–45, 987–1012; manifest `uninstall.cmd`, `shortcut`);
       the README's unpacking text; `guide_lint.py` usage; the Desktop path (`[Environment]::GetFolderPath('Desktop')` — may be OneDrive).
 - [ ] 2. **Cases** into `testcases/TC_conan_release_1.0.0_archive_install_<YYYY-MM-DD>.md` (Z1–Z7 = criteria 1–7; spot checks Z5a–Z5f), stand block.
-- [ ] 3. **Volumes (≈ 1 h, machine time):** game closed; `bash _config/release/make_volumes.sh D:/Temp/krinik_release_<YYYYMMDD>` in the BACKGROUND (memory:
+- [ ] 3. **Volumes (machine time):** game closed; `bash _config/release/make_volumes.sh D:/Temp/krinik_release_<YYYYMMDD>` in the BACKGROUND (memory:
       long runs in background); its log read once at the end; remove the `[NOT-TESTED]` mark in the script header with the report path (rule 20).
-- [ ] 4. **Clean game (≈ 0.3 h):** run the current install's `uninstall_krinik_build.cmd`; `clean.txt`; criterion 2.
-- [ ] 5. **Install (≈ 0.5 h):** unpack part 001 by `"/c/Program Files/7-Zip/7z.exe" x -o<D:/Temp/krinik_player_<YYYYMMDD>> <volumes>/…zip.001`; run `install.cmd`
+- [ ] 4. **Clean game:** run the current install's `uninstall_krinik_build.cmd`; `clean.txt`; criterion 2.
+- [ ] 5. **Install:** unpack part 001 by `"/c/Program Files/7-Zip/7z.exe" x -o<D:/Temp/krinik_player_<YYYYMMDD>> <volumes>/…zip.001`; run `install.cmd`
       (no argument — the 2026-10-02 report says that path was «Не пройдено»); `-Verify`; the shortcut; a frame of the desktop shortcut icon.
-- [ ] 6. **World entry and spot checks (≈ 1 h):** `-Deploy -Only KrinikConanHarness`; `launch-bg.ps1` (or fg by the owner's word); `enter-world-remote.sh`;
+- [ ] 6. **World entry and spot checks:** `-Deploy -Only KrinikConanHarness`; `launch-bg.ps1` (or fg by the owner's word); `enter-world-remote.sh`;
       Z5a–Z5f; `close-game.ps1`; the harness removed (file by file — recursive delete is denied; or the engine's restore) and `-Verify` 0 again.
-- [ ] 7. **Uninstall (≈ 0.3 h):** `uninstall_krinik_build.cmd`; `after.txt`; diff; shortcut gone; then re-install the build for the owner by
+- [ ] 7. **Uninstall:** `uninstall_krinik_build.cmd`; `after.txt`; diff; shortcut gone; then re-install the build for the owner by
       `Deploy-ModPack.ps1 -Deploy -PackDir D:/work/ai_sandbox/ConanExiles` + `-Verify` (his working state back; his camera `config.lua` carried over).
 - [ ] 8. Report `testcases/reports/<YYYY-MM-DD>_conan-release-1.0.0-archive-install.md`; work trees removed file by file (rule 15) except the volumes (kept until
       the owner's word on publishing).
-- [ ] 9. **Documents (≈ 1.5 h):** the guide's feature list re-checked line by line against the phase reports and plan 39's table (a line without a `seen`
+- [ ] 9. **Documents:** the guide's feature list re-checked line by line against the phase reports and plan 39's table (a line without a `seen`
       report is removed or rewritten); `build_docs_and_launcher.cmd` (guide → PDF → launcher); the public README by the `_config/public_release/` route
       (`mods-table.mjs` → `README.draft.md` → `make_public_tree.py <fresh dir>` exit 0 — NOT pushed); plan 39 A2, A3, B6 → seen; plan 35 item 6.
 - [ ] 10. **Release** — only on the owner's word: the volumes uploaded / the public repo commit + tag by `/release`. Not part of this phase's gate.
@@ -90,7 +90,3 @@ Each: `git add <files one by one>` · `git commit -F <msg>` · `git push`.
 - (b) The uninstaller leaves a file or removes a game file → a defect of the engine; the game is repaired from Steam's file check only by the owner's word.
 - (b) The owner's working install is torn down for this phase — step 7 restores it the same session; his camera `config.lua` copied out first.
 - (c) Disk: export + volumes + check ≈ 3 × bundle (the stopped run held 16 GB) — 213 GB free is enough; the work dir removed after the owner's word.
-
-## Effort
-
-≈ 5–6 h: gate and recon 0.5 h · volumes 1 h (machine) · clean + install + entry + spot checks 2 h · uninstall and restore 0.5 h · documents 1.5 h.

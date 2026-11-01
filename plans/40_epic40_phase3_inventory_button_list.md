@@ -56,7 +56,7 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
 
 ## Steps
 
-### Recon (≈ 2 h)
+### Recon
 
 - [ ] R1. Read `games/ConanExiles/mods/UIMod_Hosav.md`, `JaarFishing.md` (the fishing mod's notes — confirm it is Exiles Fishing: `grep -n "EFT\|Exiles" games/ConanExiles/mods/JaarFishing.md`),
       `ModControlPanel.md`, `Simple_Minimap.md`, `DamageNumber.md`; the game map block «Hub bottom row: Hosav and fishing buttons» (≈ line 513).
@@ -78,7 +78,7 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
       `Settings|Config|Tuning|Panel|Options` → the mod of each widget path; resolve «Horti», PvE Plus Ambush's module, Emberlight's and Pickup+'s; update
       `researches/conan-mod-settings-hub/author-hub-inventory.md`.
 
-### Implementation (≈ 3–4 h)
+### Implementation
 
 - [ ] I1. Kit (`_config/devkit/kit-krinik-modsettings.py` or a new block in it): `W_KrinikModsButton`, `W_KrinikModsMenu`, a second hub mode — either a new
       Widget Blueprint per hub or `W_KrinikModSettings` reused with a `mode` the section fills (decide in R3/R5); new assets listed in `Local/CookInfo.ini`
@@ -92,7 +92,7 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
       `TryCloseWindow()` on any open mod window first.
 - [ ] I5. Hygiene: `loadfile`, `check-lua-game-thread.py` 0, `check-lua-templates.py` 0.
 
-### Test in the live game (≈ 2 h)
+### Test in the live game
 
 - [ ] T1. Cases B1–B12 (criteria 1–7, each entry, Esc, one-window, cost, each «Прочее» / Xevyr row) into `testcases/TC_conan_mods_menu_button_<YYYY-MM-DD>.md`
       first, stand block included.
@@ -101,7 +101,7 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
 - [ ] T3. `close-game.ps1`, lock released; run report `testcases/reports/<YYYY-MM-DD>_conan-mods-menu-button.md`; a review folder
       `НА ОТСМОТР НИКОЛАЕМ/<N> кнопка настройки модов/` for the owner's eye (taste).
 
-### Packaging into the build (≈ 0.5 h)
+### Packaging into the build
 
 - [ ] P1. Sources: `_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_mods_menu.lua`, `main.lua`, `krinik_pause_in_menu.lua`, the rebuilt `KrinikConanUI.pak`, the kit
       script, `kit/CookInfo.ini`; for a pak-edit route of Hosav / fishing — the edit script next to the mod's pak and the entry marked **KRINIK MODIFIED**.
@@ -119,7 +119,3 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
 - (b) Mods whose windows do not open by code (AMR, Emberlight, Pickup+, Horti — plan 39 C) — those rows stay out of the list until their window opens, and the
   report names each one left out (rule 23).
 - (c) The kit GUID trap on new widgets — run twice, never delete a widget.
-
-## Effort
-
-≈ 6–9 h: recon 2 h · kit and section 3–4 h · live test 2 h · packaging 0.5 h; plus the owner's interview answer (his time).

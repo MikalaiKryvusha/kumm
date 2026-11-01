@@ -65,10 +65,6 @@ our KrinikConanGraphics), or nothing; a cause in our build fixed and re-run.
 - (b) Auto-exposure adapts over seconds — a «jump» on a 2-s series may be a smooth 1-s change; the 60 fps clip decides.
 - (b) The clip takes the owner's screen for minutes — split into ≤ 60-s clips around the expected switch hours, the rest by background frames.
 
-## Effort
-
-3–5 h (tools and recon 1–1.5 h, two passes ≈ 1.5 h of machine time, analysis and records 1–1.5 h; a fix +1 h if one is ours).
-
 ## Decisions made without the owner
 
 (filled at the phase's close)

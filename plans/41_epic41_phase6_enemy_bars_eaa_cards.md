@@ -59,10 +59,6 @@ EAA class menu shows English class names and descriptions painted into the card 
 - (a) No texture round-trip tool for 5.8 — route B is the fallback; the owner chooses.
 - (b) A big creature's head is far above its capsule — check all three body types, not one.
 
-## Effort
-
-4–8 h (row 12: 1.5–2.5 h; row 23 recon and fork 1–2 h, the fix 1.5–3 h by route; records 0.5 h).
-
 ## Decisions made without the owner
 
 (filled at the phase's close)

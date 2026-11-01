@@ -67,10 +67,6 @@ build reads whole, nothing overlaps, the tooltip looks like the game's — each 
 - (b) The black slides may be the author's (no image shipped) — then the row closes as «author's, not ours» with the A-B frame, or the slide area is collapsed.
 - (b) Each window touched here is reframed by epic 40 phase 6 (16:9 gate) — land this phase before it.
 
-## Effort
-
-6–9 h (recon 2–3 h, fixes 2–3 h, session and frames 1.5–2 h, records 0.5–1 h).
-
 ## Decisions made without the owner
 
 (filled at the phase's close)

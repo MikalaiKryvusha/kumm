@@ -60,10 +60,6 @@ each window opened by the player's path, framed, its text Russian and inside its
   direct `SpawnActor` of the station blueprint by the remote.
 - (b) A Workshop page may be unreachable or silent — then the controller's bytecode (step 3) is the only source.
 
-## Effort
-
-3–5 h (recon and notes 1.5–2 h, session 1–1.5 h, a possible entry fix 1–1.5 h).
-
 ## Decisions made without the owner
 
 (filled at the phase's close)

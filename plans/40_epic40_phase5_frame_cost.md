@@ -47,7 +47,7 @@ named, the total ≤ 1 ms, and the minute spikes either gone or explained by a m
 
 ## Steps
 
-### Recon (≈ 0.5 h, offline)
+### Recon (offline)
 
 - [ ] R1. Our Lua mods and their folders: `grep -n '"to": "ConanSandbox/Binaries/Win64/ue4ss/Mods/Krinik' D:/work/ai_sandbox/ConanExiles/modpack.json` —
       the list for state B (today with `ue4ss` halves: Archery, Gameplay, Graphics, ModPackManager, UI; locate KrinikConanCamera's Lua folder the same way).
@@ -56,7 +56,7 @@ named, the total ≤ 1 ms, and the minute spikes either gone or explained by a m
 - [ ] R3. Read the TC's unrun cases (PF1, BN1–BN4, BN7–BN9, BN11–BN16, MT5) and plan 36 item 23; mark which this phase runs (BN1, BN4, BN7, PF1) and which stay
       (route beauty BN12–BN15 — not needed for a cost number).
 
-### Implementation (≈ 0.5–1.5 h)
+### Implementation
 
 - [ ] I1. Missing minute summaries added (R2) — same shape `n / sum / worst` per handler bucket, own error counter.
 - [ ] I2. **Blink spike probe** (`krinik_hud_blink.lua`): hypotheses, each a one-switch probe — (h1) the spike is the summary minute itself (its string
@@ -64,7 +64,7 @@ named, the total ≤ 1 ms, and the minute spikes either gone or explained by a m
       minute with `collectgarbage("step")` at the summary; (h3) wall-clock while backgrounded → the front run answers it. Fix the one that moves the spike.
 - [ ] I3. Hygiene: `loadfile`, `check-lua-game-thread.py` 0, `check-lua-templates.py` 0.
 
-### Test in the live game (≈ 2–3 h, game in front)
+### Test in the live game (game in front)
 
 - [ ] T1. Cases into `testcases/TC_conan_epic40_frame_cost_<YYYY-MM-DD>.md` first: F1 warm-up, F2 A1, F3 B1, F4 A2, F5 B2 (criterion 1); F6 gameplay segment
       (criterion 2); F7 blink 5 min (criterion 3) before and after I2; F8 restore of `enabled.txt` and `-Verify`. Refer to the 10-25 TC's BN/PF ids the run
@@ -77,7 +77,7 @@ named, the total ≤ 1 ms, and the minute spikes either gone or explained by a m
 - [ ] T5. Report `testcases/reports/<YYYY-MM-DD>_conan-epic40-frame-cost.md`: the flight table, the section table, the blink verdict, the GPU mode, the owner's
       slot word; a fail → a fix and a re-run the same day (rule 7: an edit is accepted by an A-B-A flight).
 
-### Packaging into the build (≈ 0.5 h, only for code changes I1–I2)
+### Packaging into the build (only for code changes I1–I2)
 
 - [ ] P1. Sources: the touched `ConanExiles/_unpacked/<Mod>/ue4ss/Scripts/*.lua`.
 - [ ] P2. `modpack.json`: touched entries' `version` text; `Deploy-ModPack.ps1 -PackDir D:/work/ai_sandbox/ConanExiles -Deploy -Only <Mod>` per touched mod,
@@ -89,10 +89,6 @@ named, the total ≤ 1 ms, and the minute spikes either gone or explained by a m
 
 - (a) Bench noise (±4 hitches, ≈ ±0.2 ms CPU) larger than our cost → the criterion holds by the upper bound; four more flights if the difference is within noise.
 - (a) The flight is camera-only, not combat — criterion 2's gameplay segment covers the combat handlers.
-- (b) The owner's screen is taken for ≈ 1.5 h — one slot agreed by voice beforehand; a run with the owner typing is void (BN4v lesson).
+- (b) The owner's screen is taken for the whole series — one slot agreed by voice beforehand; a run with the owner typing is void (BN4v lesson).
 - (b) Disabling a pak-paired Lua mod changes the world (e.g. `KrinikConanGameplay` tables are the pak; only its Lua goes off) — note per mod what state B removes.
 - (c) The blink spike is UE4SS-internal (not ours) → named with evidence, the owner told; not «fixed» by a guess.
-
-## Effort
-
-≈ 3.5–5.5 h: recon 0.5 h · summaries and the blink probe 0.5–1.5 h · flights and segments 2–3 h · packaging 0.5 h.

@@ -69,24 +69,24 @@ first step of that case (written into the mod's notes).
 
 ## Steps
 
-- [ ] 1. **Recon of the eight «recon» cells** (≈ 1 h, offline first): read `KrinikConanCamera.md`, `KrinikConanModPackManager.md`, `KrinikConanGraphics.md`,
+- [ ] 1. **Recon of the eight «recon» cells** (offline first): read `KrinikConanCamera.md`, `KrinikConanModPackManager.md`, `KrinikConanGraphics.md`,
       the archery `main.lua` (`grep -n "arc_\|ballist\|nobreak\|break" _unpacked/KrinikConanArchery/ue4ss/Scripts/main.lua`), `craft-measure.sh` header,
       `tp_ground.sh` header; write each found read command into the table above (this plan, an edit with a reason) and into the mod's notes.
 - [ ] 2. **Cases** written first: `testcases/TC_conan_hub_rows_audit_<YYYY-MM-DD>.md` — H1–H19 (the table), H20 persistence, H21 close-without-saving,
       H22 reset; the stand block; status `[NOT-TESTED]`.
-- [ ] 3. **Run 1 — camera page** (rows 1–8, ≈ 1 h): lock (`machine-lock.mjs take --who kumm --what "epic40 p2 audit" --minutes 60`), `launch-bg.ps1`
+- [ ] 3. **Run 1 — camera page** (rows 1–8): lock (`machine-lock.mjs take --who kumm --what "epic40 p2 audit" --minutes 60`), `launch-bg.ps1`
       (or `launch-fg.ps1` by the owner's last word), `enter-world-remote.sh`, the hub by `ActivateModule('KrinikModSettings')` over an open inventory; per row:
       Check before → real-mouse move and save → Check after → frame pair; the camera's `config.lua` copied out before the run and back after (camera notes:
       the owner's tuned file lives in the game folder).
-- [ ] 4. **Run 2 — UI, archery, pack manager, graphics pages** (rows 9–19, ≈ 1.5 h), same pattern; a 20–30 s clip per page of the hub clicks (rule 4).
-- [ ] 5. **Run 3 — H20–H22** (restart, close without saving, reset; ≈ 0.5 h). `close-game.ps1`; lock released.
-- [ ] 6. **Fix pass** for every `fail` (≈ 0–2 h, unknown until runs 1–3): the fix in the mod's reader, a re-run of that case the same day
+- [ ] 4. **Run 2 — UI, archery, pack manager, graphics pages** (rows 9–19), same pattern; a 20–30 s clip per page of the hub clicks (rule 4).
+- [ ] 5. **Run 3 — H20–H22** (restart, close without saving, reset). `close-game.ps1`; lock released.
+- [ ] 6. **Fix pass** for every `fail` (unknown until runs 1–3): the fix in the mod's reader, a re-run of that case the same day
       (memory «Найденный баг — чинить сразу»); a row not fixable in the phase → the owner's word «fix or remove»; removal = PAGES row, kit tuple, a kit
       rebuild (twice + `kit-buildmod.py`), the guide line, the mockup row.
 - [ ] 7. Run report `testcases/reports/<YYYY-MM-DD>_conan-hub-rows-audit.md` — the 19-row table «row · how the player sees it · seen (yes/no) · frame/number»
       (plan 39's closing rule).
 
-### Packaging (≈ 0.5 h, only if step 6 changed code)
+### Packaging (only if step 6 changed code)
 
 - [ ] P1. Sources: `ConanExiles/_unpacked/<Mod>/ue4ss/Scripts/*.lua` of the fixed mods; the kit script and the rebuilt pak if a row was removed.
 - [ ] P2. `modpack.json`: the touched entries' `version` text and `verify` lists if a file was added; deploy each touched mod
@@ -101,7 +101,3 @@ first step of that case (written into the mod's notes).
 - (a) Rows 11 and 19 need stands not built yet (load to 70 %, a melee hit) — the recon may cost more than the case.
 - (b) More dead rows than the evening allows — the owner's word per row (epic risk).
 - (c) The owner's tuned camera `config.lua` overwritten by the run — copy out first, back after, `cmp` it.
-
-## Effort
-
-≈ 4–6 h: recon 1 h · camera run 1 h · other pages 1.5 h · persistence / reset 0.5 h · fixes 0–2 h · packaging 0.5 h.
