@@ -22,3 +22,7 @@ The animations drive the CHILDREN (`Image` / `Effect`) — the effect widget's o
 `W_FullScreenBuffEffect_C` set by our section on its birth (`NotifyOnNewObject`) by its kind (hunger/thirst → the `T_…HungerThirst` brush; low health →
 `ActiveDamageEffect`), 0 = off. Check: a frame at hunger 5 % with RenderOpacity 1 vs 0.1 vs 0; the same for health at 15 %. Which buff a widget shows — read
 `Buff`'s class or the `Image` brush's resource name.
+
+## Crash 2026-11-01 13:31:43 (game down, crash report closed by PID 23472; `Saved/Crashes/UECC-Windows-DCA8667F4C3EF7E2474D3899F66D8B14_0000`)
+
+Sequence: food set to 4 % by the remote (executed), then ONE remote call that walked every `W_FullScreenBuffEffect_C` and read `w.Image.Brush.ResourceObject`, `w.Buff:GetClass()`, `GetRenderOpacity()`, `GetVisibility()` — never logged as executed: the game died inside it. A native access violation is not a Lua error (pcall does not catch it, EXP-0401). Next: one unknown per call — first only `GetFName` + `GetRenderOpacity` of each effect widget; the brush and `Buff` later, one by one, after the crash dump is read.
