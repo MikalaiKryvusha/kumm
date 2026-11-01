@@ -155,6 +155,9 @@ sRGB → linear (`u()` and `lin()` in `kit-krinik-modsettings.py`):
   frame (`[OWNER]` «(i) - 5» · 09:13; review folder `42_hub_knopka_i_i_vysota`). Live font swap by the remote: `TextBlock:SetFont({FontObject=…,
   TypefaceFontName=FName('Bold'), Size=…, OutlineSettings={OutlineSize=0,…}})` works; a Border's brush is hidden by `br=b.Background; br.DrawAs=0; b:SetBrush(br)`
   (SetBrushColor alpha 0 left the rim).
+- **The «i» column (09:33 → 09:42):** a row is «(i) label hint … control» — `Brd_KrinikInfo_<id>` is the row's FIRST child (padding right u(8)), the hint
+  carries its own left padding u(6). The kit's Python has no `ShiftChild`: a row in the old order is emptied by `clear_children()` and re-filled in script
+  order before the save (no orphan → no GUID trap). Seen on all five pages (case C1).
 
 **Mirror pair:** `ue4ss/feedback/collect_report.ps1` is a COPY of the pack's `_config/player-report/collect_report.ps1` (the Lua mod needs it inside the game
 folder). Check: `cmp _config/player-report/collect_report.ps1 _unpacked/KrinikConanUI/ue4ss/feedback/collect_report.ps1` — edit the source, copy again.

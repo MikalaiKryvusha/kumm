@@ -33,6 +33,13 @@
 | I1 | the rebuilt pak, the window open on the camera page | look at every row's «i» | Noto Sans Bold upright «i», no outline, in the thin circle — like row 5 of the variants sheet; all rows alike | pass | 09:27 frame (4K), crop of the eight camera rows: all eight the bold upright sans «i» of variant 5 |
 | I2 | the window open | hover and click an «i» | the explanation plate opens as before | skipped | needs a real mouse with the game in front (the owner's screen); only the letter's font changed — the hover target `Brd_KrinikInfo_<id>` is untouched |
 
+## The «i» column (`[OWNER]` 2026-11-01 09:33 «давай (i) перенесем в одну колонку слева от настроек … (i) Название опции, доп описание»)
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| C1 | the rebuilt pak; the window open | look at every page (5 mods) | every row «(i) label hint … control»; the «i» of all rows in one vertical column at the left edge; labels start in one column | pass | 09:41–09:42, five 4K frames (pages switched by the remote): every row «(i) label hint … control», the «i» in one column, labels aligned; the kit's first run re-ordered 18 rows, the second 0 |
+| C2 | the window open | hover an «i» | the plate opens at the cursor as before | skipped | needs a real mouse on the owner's screen; the hover target `Brd_KrinikInfo_<id>` is the same widget, only its place in the row changed |
+
 ## Finding
 
 The dark backdrop of review folder 41 (frames 05:18–05:20) is the game's NIGHT (minimap clock 05:20) behind a window opened by the remote in the world, not
