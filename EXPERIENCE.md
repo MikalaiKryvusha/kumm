@@ -99,6 +99,8 @@ fact that sent the stone stand to the owner for a «stone spot». With `:get()` 
 five minutes. When a property of an object from an array reads empty, unwrap first, before concluding «not readable».
 **Trigger:** any `for … in ipairs(<UFunction returning TArray>)` in a remote call or a section.
 none-cheap: one word in the call; the game map's stand line carries it
+<!-- class-ok: wrong-api-assumption — UE4SS runtime behaviours (an ignored UFunction argument in EXP-0422, wrapped array elements here) show only on a live call; no static lint sees them — the guard is the probe line written in each entry and the stand recipe in the game map -->
+
 
 ### EXP-0422 · 2026-11-01 · ❌→✅ · #conan #ue4ss #umg #animation #hud #measure
 class: wrong-api-assumption

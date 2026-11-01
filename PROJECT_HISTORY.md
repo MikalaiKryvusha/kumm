@@ -3,6 +3,42 @@
 
 
 
+## 2026-11-01 13:22 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat eea8bf94
+
+> **DONE 11:5x** — `[OWNER]` 08:49 «нужно видео, показывающее все интенсивности»: the clip of every food / water blink step (EIGHT live steps L = 0.3 … 1.0 — the dim
+> start 0.25 rounds up to step 3 of 10; then 0 % = the game's own blink), ≈ 20 fps from the background window, labelled; review folder 45, report
+> `testcases/reports/2026-11-01_conan-hud-blink-all-steps-video.md`. **The owner 11:54 «мерчание голода и жажды неправильное» · «на 10% должно быть в
+> едва заметный нежный розовый, и чем ближе к 0%, тем насыщеннее красный» — FIXED 12:0x–12:1x:** every step had blinked full red (`PlayAnimationTimeRange`
+> ignores its end from Lua, EXP-0422); now our own colour pulse, peak 0.15 → 1.0 (measured redness 44 → 127), weight the same way; review folder 45 holds the
+> new clip. The weight path and the cost (GC spikes 3–4 ms → one reused colour table) — in the same report.
+> DONE 13:2x — the owner 13:13 «температура в худ белая на высоких значениях» (seen on my own frames all day and not flagged — my miss): the HUD temperature now
+> follows the game's heat/cold debuff stage (stage 1 = 70 % red, 4 = full); 32 °C red beside the game's overheat icon (review folder 47); comfort / cold not framed in this run.
+> 13:1x — arrows in the corpse: NOT DONE (the game's own event destroys every copy when the creature is removed — bytecode; routes in the archery notes, Open);
+> on the way our own leak closed (orphan copies at 0 0 0) — report `testcases/reports/2026-11-01_conan-arrows-corpse-recon.md`. The armour «lost»: the hero most
+> likely DIED (hunger / thirst at 0 % kill even with god — today's runs set them to 0); the 2026-10-31 16:56 save restored, armour and bow back.
+> DONE 12:4x — the stone pickup in third person (R2): real E picks a real stone at the default and at the far zoom (arm 2125) — weight +0.06 and the stone
+> hidden each time (report `testcases/reports/2026-11-01_conan-stone-pickup-r2.md`; the stand recipe — the game map, «Stones by the remote»). Seen: no «E»
+> prompt on the frame before the press — not part of R2, left for the owner's eye.
+> DONE 12:3x — «All» → «Все» (ModControlPanel, KRINIK MODIFIED now — the category string changed everywhere at once) and the Damage Meter corners «Вверху слева» …
+> (field 120 → 150): bug 64 items 47, 49, report `testcases/reports/2026-11-01_conan-dropdowns-all-topleft-ru.md`, review folder 46. The Damage Meter notes are
+> now `DamageNumber.md` (the knowledge-hook finds notes by their title too). NEXT in the day loop: the stone pickup (R2), the arrows in corpses, the armour, then
+> the inventory button «Настройки модов» (heavy: plan 38 phase 1 needs its operational plan — the Xevyr / «Прочее» entries have no hub yet).
+> DONE 11:4x — the hub row «Сколько держится фраза врага» (`ui_shout_hold`, 1–10 s, default 1 = the game's timing; a minimum, a longer voice keeps its line):
+> live H1–H7 pass (report `testcases/reports/2026-11-01_conan-shout-hold-slider.md`), review folder 44 asks the owner for the default. Seen on the way: the save's
+> hero is naked («Лёгкая / 0») — the armour item below.
+> DONE 11:2x — the desktop shortcut «Krinik Conan» (`[OWNER]` 11:11 «по установке - сборка на рабочем столе создает ярлык Krinik Conan»): `manifest.shortcut` in the
+> pack, the `{SHORTCUT}` removal line in `_config/uninstall/uninstall.cmd`; the stand found and the fix closed `install.ps1` never creating it (`$null` exit code);
+> fixture 37/37 (report `testcases/reports/2026-11-01_bundle-desktop-shortcut.md`, partial). LEFT for the release install from the volumes: see the shortcut on
+> the real desktop and its removal; the guide's install chapter names the shortcut — in the final document refresh.
+> Seen and not yet checked: the hero lost his armour after a launch closed on a stuck loading screen (10:51 «Лёгкая / 0»). NEXT: the build items below; the archive and the release LAST; then the
+> inventory button, the shout row, the blink video, «All»/«Top Left», the stone, the measurements, the arrows in corpses.
+> **2026-11-01 09:0x–09:3x (chat c30666a8) — DONE:** the three hub remarks — no dimming of ours (the night of folder 41), height = mockup 5 (845), «i» = variant
+> 5 by the owner's pick (report `testcases/reports/2026-11-01_conan-hub-height-info-dimming.md`, review folder 42, pack `2c2ddd6`); the guide: the features block
+> without repeats (two helpers, by the portrait), chapter 2 «Отзывы и обратная связь», chapters «Правообладатели…» and «Лицензия», the false «первая
+> публикация на PlayGround» corrected in the guide and both README halves (an early beta is already there; the public GitHub README stays stale until the
+> 1.0.0 push); the launcher's «Руководство» button (pack `ec1a591`, `ff438a5`). NEXT in order: the caverns chests (option 2) → the archive → the release;
+> then the inventory button «Настройки модов», the shout-time row, the blink video, «All»/«Top Left», the stone, the measurements, the arrows in corpses.
+
 ## 2026-11-01 11:14 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat c30666a8
 
 > **HANDOVER of the chat ecee2807 (2026-11-01 04:40–05:5x, resume + «работай над сборкой автономно» → dayloop):** done —
