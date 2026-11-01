@@ -19,6 +19,10 @@ switches the sky and the lights at once. That is the first candidate for «ре�
     by eye the frames show drifting clouds, no jump of the sky's look;
   - 22:11 one frame +29 — a creature attacked the hero (fire burst, HP bar 868/868): interference, not light;
   - no lights on the beach — the «lights switch on» part is NOT tested by run 1.
+  - the whole run (150 frames, 17:47 → 05:45 game time, 11:03–11:10): at night many ONE-frame spikes — 23:29 the whole frame bright (17 598 bright
+    pixels), 01:02 the sky band 33 → 80 → 32 (a lightning-like flash — Severe Weather Enhanced storms are a candidate), 00:15 a near-black frame; the
+    ground spikes coincide with the creature fighting the god-mode hero all night. No interference-free step of light or sky was found; run 2 must clear
+    the enemies first (rule 11.6) and look at a flash frame by eye before naming a cause.
 
 ## Next (run 2)
 
