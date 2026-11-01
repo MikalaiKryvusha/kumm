@@ -21,6 +21,7 @@
 | Кит разработчика 2.2 | `F:\CEUE5Devkit` (`UnrealPak`, `UnrealEditor-Cmd`, исходные ассеты игры 2.2 в `UE4\Content`) |
 | Пульт агента | `ue4ss\Mods\KrinikAgentRemote\cmd.txt` → `done.txt`; из оболочки — `bash ConanExiles/_config/pult.sh "<команда>"` |
 | Re-entry by the agent (2026-10-29) | `_config/esc-when-idle.ps1` (real Esc after the owner's input idle; `W_IngameMenu_C` does not exist before it) → `pult.sh "call W_IngameMenu_C_<N> CloseAndReturnToMainMenu"` → `_config/enter-world-remote.sh` (the second entry loads in ≈ 2–5 s) |
+| Owner's review folder (Conan) | `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\<N>_<topic>\` + `chto_smotret.txt`; the next number follows the last one THERE (51 on 2026-11-01). Svarog's review folder `SvarogsDream/НА ОТСМОТР НИКОЛАЕМ/` is a different game's — Conan folders 50–51 landed there by mistake and the owner could not find them (moved 2026-11-01 20:35) |
 | Канал мода камеры | `ue4ss\Mods\KrinikConanCamera\agent-cmd.txt` (`ключ = значение`) |
 | Клавиши мода камеры (нумпад) | 8/2 вперёд/назад · 4/6 вбок · 9/3 выше/ниже · 7/1 наклон · +/− дистанция · 5 — вбок в 0 · Ctrl+5 — наклон в 0 · / — записать посадку · 0 — применить · Ctrl+/ — сброс до заводской (с 2026-10-26 23:4x) · Ctrl+0 — найти камеру заново; посадка сама пишется в `Mods\KrinikConanCamera\config.lua` |
 | Оптимизированный Engine.ini сборки | с 2026-10-30 — файл мода графики `ConanExiles/_unpacked/KrinikConanGraphics/Engine.ini` (поле `engineIni.file` манифеста, `_config/deploy-config.py`, `_config/check-conflicts.py`); до того `_config/Engine.ini` |
