@@ -118,6 +118,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **OWNER DEBT, JOB NUMBER ONE for the next chat (BUG_FIXING_FRAMEWORK «owner's debt first»):** `[OWNER]` 2026-11-01 15:49 «соответственно, она там одна должна
 > остаться» · «настройки рыбалки и настройки интерфейса оттуда уходят» — the inventory bar keeps ONLY «Настройки модов»; Hosav's «Настройки интерфейса» and
 > «Настройка рыбалки» leave the bar and become entries of its drop-down list (with «Моды Krinik'а», «Моды Xevyr'а», «Прочее»; «Прочее» last, fishing above it).
+> And `[OWNER]` 15:49 «красная справа вертикальная по модам ксавьера - тоже уходит» — the red vertical «Моды Xevyr» side tab on the right of the inventory
+> (module `XCS_Panel`, game map «Вкладки хаба») leaves too; its place is the list entry «Моды Xevyr'а».
 > Do the list and the removal in ONE step — removing them first would cut the player off their windows. Route: plan 40.3 R3, R4, I1–I4; the button —
 > `krinik_mods_button.lua` (step 1 done 15:48); the bar code that shows the two buttons — `krinik_pause_in_menu.lua` `hosav_settings_button`, `fishing_button`.
 > **2026-11-01 15:38 — dayloop running (the owner 14:56 «Работай автономно»).** Done since 14:56: plan 40.2 H19–H22 pass (16 of 19 rows seen; H14 shout and
