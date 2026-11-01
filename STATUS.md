@@ -136,7 +136,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/ConanExiles/mods/KrinikConanArchery.md` → Open, the cause already known). `[AI]` affixes (idea 24) stay in the NEXT version by the owner's own word of 08:58 «3 делаем в новой версии сборки»; confirmed 09:01 «афиксы в новой версии». Affixes (random item properties) — the next build version, `ideas/24_conan_loot_affixes_next_version.md`.
 > **DONE 09:5x–10:3x — the caverns chests, option 2 both halves** (packs `c590f36`, `e44de4b`; notes `CavernsOfSet.md`); **the HUD temperature** red ≥ 30 /
 > blue ≤ −30 and the white-at-37 bug (templates coloured; `eef2f86`, TC `TC_conan_hud_temperature_thresholds_2026-11-01.md`, T3 blue frame not caught);
-> the hub «i» column (`37d7c95`), «Скорость зума · больше — резче». NEXT: the archive on a clean game (plan 35 item 6) → the 1.0.0 release; then the
+> the hub «i» column (`37d7c95`), «Скорость зума · больше — резче»; **11:0x the temperature fades smoothly** white → red / blue (`d1e01b9`, R1 seen,
+> the cold mirror not framed); `_config/tp_ground.sh` puts the hero on the surface. IN WORK 11:03: the owner's «смена дня и ночи — свет резко включается,
+> небо резко меняет вид… нужно изучить» (10:42) — a dusk frame series on the beach, one SetTimeOfDay(17.6), analysed by `dusk_analyze.py` (scratchpad).
+> Seen and not yet checked: the hero lost his armour after a launch closed on a stuck loading screen (10:51 «Лёгкая / 0»). NEXT: the archive on a clean game (plan 35 item 6) → the 1.0.0 release; then the
 > inventory button, the shout row, the blink video, «All»/«Top Left», the stone, the measurements, the arrows in corpses.
 > (was) PARKED 09:33 — the caverns chests (option 2): the table the 16 chests import is one object (both `LootTableFromSpawnTable.DataTable` and `LootTable`
 > of `BP_PL_CoS_Loot_Chest` → the missing package `/Game/Mods/Mines_of_Set/Tables/Caverns_of_Set_Loot_Chest_Table`); row struct `/Script/ConanSandbox.LootTableRow`
