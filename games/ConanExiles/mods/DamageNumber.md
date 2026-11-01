@@ -37,7 +37,13 @@ Pak `DamageNumber.pak`, original in `D:\Games\Conan Exiles Mods\_patch-originals
    Live 12:37: the live window's `GetAnchorIndex(GetOptionAtIndex(i))` = 0…3 (report `2026-11-01_conan-dropdowns-all-topleft-ru.md`).
 4. The settings window over the inventory (2026-11-01, plan 40.3): `DN_DT_UIModule` row `DN_UI_Settings` Category Popup → Modal, CloseOnESC false → true
    (`_config/krinik_patches/DamageNumber__DN_DT_UIModule.tsv`) — Esc closed the inventory under the window; it opens from «Настройки модов» → «Моды Xevyr'а».
-5. Rebuild after a mod update: the manifest recipe `krinikBuild` (four assets, the last pair `DN_DT_UIModule`) — `python -I -X utf8
+5. The opacity preview after a colour pick (author bug, found by the recon `researches/conan-mod-settings-hub/xevyr-settings-recon.md`, 2026-11-01 18:12 +03:00): the event
+   graph's `ThemeColorChanged` / `ThemeColorCancelled` call `dmgWidget:ApplyTheme(colour, 0.30 + v·0.55)` while the slider saves `w_Opacity = 0.30 + v·0.65`
+   (and `InitializeControls` reads it back with 0.65) — row `dbl:ExecuteUbergraph_DN_UI_SettingsWindow\t0.550000011920929\t0.6499999761581421` (float-widened
+   doubles, 2 places) in `DamageNumber__DN_UI_SettingsWindow.tsv`. Seen: the remote set the slider to 1 and called `ThemeColorChanged` with a post-hook on
+   `DN_UI_DmgWidget_C:ApplyTheme` — opacity 0.95 (0.85 before). The call rewrites `DamageMeter.sav` (18:09) but keeps the saved theme colour and values (read
+   back and compared with the recon dump).
+6. Rebuild after a mod update: the manifest recipe `krinikBuild` (four assets, the last pair `DN_DT_UIModule`) — `python -I -X utf8
    _config/devkit/patch-mod-asset.py build DamageNumber DN_SG_SaveSettings <work> <tables and assets as in krinikBuild>` → `<work>/out/DamageNumber.pak` into
    `_krinik-modified/3719585133`.
 
