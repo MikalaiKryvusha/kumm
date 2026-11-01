@@ -40,7 +40,17 @@ leaves, the prompt shall go. Maintain: our mods' 1 ms CPU budget in gameplay fra
   decision, asked in chat 21:1x: A — the test 5 times a second (one trace of 0.085 ms in every ≈ 12th frame at 60 fps, ≈ 0.4 ms per second) · B — per frame
   (0.085 ms in every frame) · C — not done.
 
+- **The event route (the owner 21:18 «от луча нет колбека?» · «чтобы только когда он срабатывает - тогда и показывать?»)** — `[AI]` main route, unproven: an invisible
+  sensor sphere on the camera along the aim; the ENGINE reports begin / end overlap natively; Lua only reacts to the two events (no polling, rule 7 kept). Facts
+  21:18: 45 foliage components near the oasis, 15 of them pickups (`SM_rock_small01…04`, `GFL_DeadTreeBranch03/04` …) — `bGenerateOverlapEvents` false,
+  collision QueryOnly (1). So: (a) our mod turns overlap events on for the pickup foliage components at world load and on each newly streamed one
+  (`NotifyOnNewObject` of `FoliageInstancedStaticMeshComponent`); (b) Lua cannot bind an engine delegate itself — the sensor is a tiny kit actor whose own
+  overlap event relays to a function Lua hooks (a call through ProcessEvent). The timer variant A of 21:1x stays the fallback.
+
 ## Next steps
+
+- [ ] E1. Stand proof: turn overlap events on for one rock component by the remote, put a sensor in front of the hero, read whether begin / end overlap
+      arrive (the kit actor or an engine trigger class) — before any kit work.
 
 - [ ] R1. Repeat the call count of `UpdateHighlightTarget` with the game in front; if it runs per frame or on a timer, the prompt can ride it (our check only
       when the game itself asks «what is under the crosshair»).
