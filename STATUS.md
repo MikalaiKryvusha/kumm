@@ -124,7 +124,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > рыбался открывается - ты сделал какое-то затенение - не нужно» — the window opens OVER the character UI (the inventory), as the fishing window does, with
 > NO dimming behind it (the frames of 05:18–05:20 were taken with the window opened by the remote in the world — find where the dark backdrop comes from:
 > the module row of `DT_KrinikUIModule` vs the fishing row, `Category` / `FullscreenGUIAction`, or the game's modal backdrop); (b) `[OWNER]` «по высоте
-> увеличить размер окна, в новом чате будем делать» — a taller window (today the height = the tallest live page, set by `krinik_mod_settings.lua` fill).
+> увеличить размер окна, в новом чате будем делать» — a taller window (today the height = the tallest live page, set by `krinik_mod_settings.lua` fill);
+> (c) 08:43 `[OWNER]` «и кнопка (i) все еще некрасивая» — today a PT Serif «i» thickened by a 1-unit outline inside a thin grey circle (`Brd_KrinikInfo_<id>`,
+> `Txt_KrinikInfo_<id>`, kit `rimmed(..., radius="half")`); the mockup's is an ITALIC bold Georgia «i» 8.5 px in a 12 px circle. Taste class: show
+> 3–4 «i» variants side by side on one frame of the window (e.g. a drawn icon texture; the game's own info glyph if it has one; Noto Sans Italic «i»;
+> no outline) and let the owner pick — do not choose alone.
 > FIRST next: (0) the two hub remarks above; (1) the owner's answer to #029 (then the C1 fix: the chest's loot table in the mod pak);
 > (2) bug 64 items 47 «All» (ModControlPanel `MDC_MCP`) and 49 «Top Left» (Damage Meter settings) — the same `lit:` route as item 48 (trace the asset's
 > event graph first: a translated option must not break a string comparison or a saved string); (3) plan 38 phase 1 — the inventory button «Настройки
