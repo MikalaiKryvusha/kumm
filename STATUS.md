@@ -110,6 +110,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **2026-11-01 13:27 — THE WORK IS NOW EPIC 40** (plans/40_EPIC_conan_1.0.0_unfinished_six.md, the owner: «пишем на всё ЭПИК план, а затем по фазам эпиков - операционные планы»). Next chat: write the phase 1 operational plan (vignettes) and execute it; the handover items below are its phases 1–3.
 > **HANDOVER of chat eea8bf94 (2026-11-01 11:16–13:25), FIRST for the next chat, in order:**
 > 1. **The screen-edge vignettes (owner 13:20, for 1.0.0):** recon which widget draws the hunger / thirst / low-health vignette (candidates `UI/HUD/W_FullScreenEffectContainer`,
 >    `W_FullScreenBuffEffect`, texture `T_BuffFullScreenEffect_HungerThirst`; the low-health one not located), then three shkalas on the KrinikConanUI hub page
