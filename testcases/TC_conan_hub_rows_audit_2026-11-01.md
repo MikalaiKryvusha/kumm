@@ -108,3 +108,12 @@ Stand: the game in the BACKGROUND (the owner 20:38 «работай с игро�
 | K1 | `Game.locres` after `locres-fixes-2026-11-01b.tsv` deployed | open The Damage Meter settings window by the remote | the key row reads «Клавиша вызова курсора», fits its line | pass | 20:41 frame: the label fits above the F1 box; the F1 box overlapped by «Частота обновления полос (только вид)» → K3 |
 | K2 | as K1 | open the Simple Minimap settings window by the remote | the key row reads «Клавиша вызова курсора», fits its line | pass | 20:42 frame: «Клавиша вызова курсора» with F1 beside it |
 | K3 | `dm-fish-ru.tsv` rows 58–59 + `locres-fixes-2026-11-01c.tsv` deployed, the game relaunched | open The Damage Meter settings window | «Частота обновления полос» stays in its column, the F1 box clear | pass | 20:45 frame at 4K: clear (report `testcases/reports/2026-11-01_conan-cursor-key-name.md`) |
+
+### The menu logo tone and the minimap place (the owner 2026-11-01 20:46-20:51 and 20:46-20:48)
+
+Stand: the game in the background; the main menu and the oasis save, frames by `capture-window.ps1` at 4K; positions found by template matching of the source textures.
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| L1 | `T_KrinikModpackLogo` from `make-pack-logo.py <out> 1.3` (dark fill matched to the game logo), KrinikConanUI pak rebuilt | the main menu, measure the dark fill (source luminance < 70) of both logos in one frame | KRINIK dark-fill percentiles within 2 of CONAN; gold unchanged | pass | 21:02 frame: CONAN 5 / 11 / 19 / 31, KRINIK 6 / 12 / 19 / 30 (before 11 / 17 / 25 / 38); review folder 52 |
+| M1 | `krinik_minimap_coords.lua` `BOTTOM_INSET` 60 → 52, `CORNER_SHIFT` (16, −16.3) → (10, −10.3) | enter the world, frame the minimap | the ring further from the top and right edges (≈ 6 px more at 1080p), the coordinate plate lower, not touching the clock plate | pass | 21:03 frame at 4K: top gap 33 → 48 px, right 33 → 44 px; the coordinate plate ≈ 12 px above the clock plate |
