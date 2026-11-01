@@ -134,6 +134,8 @@ the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/Con
 > **ORDER (`[OWNER]` 2026-11-01 11:11–11:12 «да не нужно архив собирать!! Сборка же еще не готова!!» · «релизный архив соберем и все документы обновим,
 > когда сборку сделаем и протестируем на всех разрешениях 16 к 9»):** the release archive and the document refresh go LAST — after the build is finished and
 > tested at 720p / 1080p / 2K / 4K. The 11:10 archive run was stopped and its 16 GB removed; `make_volumes.sh` waits for that moment.
+> DONE 13:2x — the owner 13:13 «температура в худ белая на высоких значениях» (seen on my own frames all day and not flagged — my miss): the HUD temperature now
+> follows the game's heat/cold debuff stage (stage 1 = 70 % red, 4 = full); 32 °C red beside the game's overheat icon (review folder 47); comfort / cold not framed in this run.
 > 13:1x — arrows in the corpse: NOT DONE (the game's own event destroys every copy when the creature is removed — bytecode; routes in the archery notes, Open);
 > on the way our own leak closed (orphan copies at 0 0 0) — report `testcases/reports/2026-11-01_conan-arrows-corpse-recon.md`. The armour «lost»: the hero most
 > likely DIED (hunger / thirst at 0 % kill even with god — today's runs set them to 0); the 2026-10-31 16:56 save restored, armour and bow back.
