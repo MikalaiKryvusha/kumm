@@ -2,7 +2,8 @@
 
 > **Created:** 2026-11-01 · **Parent:** `plans/40_EPIC_conan_1.0.0_unfinished_six.md` phase 3 (criterion 3); plan 38 phase 1 (criteria 1, 2, 5); plan 39 B2; plan 36 W24
 > **Status:** written 2026-11-01 by a helper agent; R2 done 15:43 (the route proven live); STEP 1 DONE 15:48 — section `krinik_mods_button.lua`, the button in the bar
-> opens «Моды Krinik'а» (cases `testcases/TC_conan_mods_menu_button_2026-11-01.md` B1, B2 pass); NEXT: the list of four (R3, I1–I4), Hosav and fishing buttons out (R4), B3–B4; starts after phase 2 (the hub must be honest before the door to it is built)
+> opens «Моды Krinik'а» (cases `testcases/TC_conan_mods_menu_button_2026-11-01.md` B1, B2 pass); NEXT: the list (R3, I1–I4) and Hosav / fishing buttons out (R4) in ONE step — `[OWNER]` 2026-11-01 15:49 «соответственно, она там одна должна остаться» ·
+> «настройки рыбалки и настройки интерфейса оттуда уходят»; B3–B4; starts after phase 2 (the hub must be honest before the door to it is built)
 > **Outbound:** interview `interviews/interview_030_conan_xevyr_and_other_hubs.md` (step R5) — the shape of «Моды Xevyr'а» and «Прочее»
 > **DECIDED 2026-11-01 13:40 — replaces interview 030:** `[OWNER]` «Окна «Моды Xevyr'а» - пооткрываешь его моды, посмотришь, какие он опции дает - вот они и должны быть не в его кривых косых окнах, а в нашем красивом» · «и «Прочее» - аналогично, но по "ручкам" настроек модов других авторов». So: both are hub windows in OUR look (as «Моды Krinik'а») with REAL rows — every option each mod's own window offers, bound to the mod's own settings (its SaveGame fields + its apply path); not rows that only open the mod's window. Recon per mod first: open its window, list its options, find where each value lives (mod notes in games/ConanExiles/mods/).
 

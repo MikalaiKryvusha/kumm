@@ -115,6 +115,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the hub «i» circles square again in every row (kit fix, EXP-0425). Review folder 48 answered 14:34 («ставь 25%»; the owner tunes it later in play) — folder can go.
 > Open in phase 1: thirst and health shkalas by the mouse (V5, V6), the rule-4 clip. New owner rule for phase 2 (plan 40.2 criterion 4a): every shkala's min / max
 > are values a player could want; grey hints only when the «i» does not already say it. Pack and KUMM committed; game closed, lock released. **Phase 2 started 14:38:** 16 of 19 rows seen working (run 2 at a frozen Kappa 14:48–14:54), 2 partial, the hub close fixed (camera / pack manager took a save only at the next inventory close) — `testcases/TC_conan_hub_rows_audit_2026-11-01.md`; next — the partial rows, H20-H22, ranges and hints (plan 40.2 status).
+> **OWNER DEBT, JOB NUMBER ONE for the next chat (BUG_FIXING_FRAMEWORK «owner's debt first»):** `[OWNER]` 2026-11-01 15:49 «соответственно, она там одна должна
+> остаться» · «настройки рыбалки и настройки интерфейса оттуда уходят» — the inventory bar keeps ONLY «Настройки модов»; Hosav's «Настройки интерфейса» and
+> «Настройка рыбалки» leave the bar and become entries of its drop-down list (with «Моды Krinik'а», «Моды Xevyr'а», «Прочее»; «Прочее» last, fishing above it).
+> Do the list and the removal in ONE step — removing them first would cut the player off their windows. Route: plan 40.3 R3, R4, I1–I4; the button —
+> `krinik_mods_button.lua` (step 1 done 15:48); the bar code that shows the two buttons — `krinik_pause_in_menu.lua` `hosav_settings_button`, `fishing_button`.
 > **2026-11-01 15:38 — dayloop running (the owner 14:56 «Работай автономно»).** Done since 14:56: plan 40.2 H19–H22 pass (16 of 19 rows seen; H14 shout and
 > H16 arrow-breaking partial); bug 73 arrows in the air — cause our ×3 arrow mesh, fixed by native size (`mesh_scale` 1, the push removed; the owner asked whether
 > the ×3 flight look matters — no answer yet); house rule 24 (no crutches, control case first); hub ranges / hints pass; minimap coordinates at the bottom by the clock
