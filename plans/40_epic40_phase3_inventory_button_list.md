@@ -1,7 +1,7 @@
 # Plan 40.3 — one «Настройки модов» button in the inventory bar and its list of four entries
 
 > **Created:** 2026-11-01 · **Parent:** `plans/40_EPIC_conan_1.0.0_unfinished_six.md` phase 3 (criterion 3); plan 38 phase 1 (criteria 1, 2, 5); plan 39 B2; plan 36 W24
-> **Status:** written 2026-11-01 by a helper agent; not started; starts after phase 2 (the hub must be honest before the door to it is built)
+> **Status:** written 2026-11-01 by a helper agent; R2 done 15:43 (the route proven live); R1, R3–R6 next; starts after phase 2 (the hub must be honest before the door to it is built)
 > **Outbound:** interview `interviews/interview_030_conan_xevyr_and_other_hubs.md` (step R5) — the shape of «Моды Xevyr'а» and «Прочее»
 > **DECIDED 2026-11-01 13:40 — replaces interview 030:** `[OWNER]` «Окна «Моды Xevyr'а» - пооткрываешь его моды, посмотришь, какие он опции дает - вот они и должны быть не в его кривых косых окнах, а в нашем красивом» · «и «Прочее» - аналогично, но по "ручкам" настроек модов других авторов». So: both are hub windows in OUR look (as «Моды Krinik'а») with REAL rows — every option each mod's own window offers, bound to the mod's own settings (its SaveGame fields + its apply path); not rows that only open the mod's window. Recon per mod first: open its window, list its options, find where each value lives (mod notes in games/ConanExiles/mods/).
 
@@ -61,11 +61,15 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
 
 - [ ] R1. Read `games/ConanExiles/mods/UIMod_Hosav.md`, `JaarFishing.md` (the fishing mod's notes — confirm it is Exiles Fishing: `grep -n "EFT\|Exiles" games/ConanExiles/mods/JaarFishing.md`),
       `ModControlPanel.md`, `Simple_Minimap.md`, `DamageNumber.md`; the game map block «Hub bottom row: Hosav and fishing buttons» (≈ line 513).
-- [ ] R2. **Our button's route.** Facts: a moved Hosav button stops clicking; a `WidgetBlueprintLibrary:Create` copy never fires its handler; FLX buttons have no
+- [x] R2. **Our button's route.** DONE 2026-11-01 15:4x (probe below the step). Facts: a moved Hosav button stops clicking; a `WidgetBlueprintLibrary:Create` copy never fires its handler; FLX buttons have no
       Lua-hookable click; the hub's own buttons work by `RegisterKeyBind(LEFT_MOUSE_BUTTON)` + `IsHovered()` (feedback plate, hub). Candidate `[AI]`: a kit
       widget `W_KrinikModsButton` (a `WBP_ButtonBase` in the vanilla look, label «Настройки модов») added by Lua into `ButtonContainerLeft` at the inventory's
       `ActivateModule` post-hook, click by the LMB bind + `IsHovered`. Probe live first by the remote: `Create` a vanilla `WBP_ButtonBase_C`, `AddChild` into
       the bar, read `IsHovered()` under the real cursor — record yes/no.
+      **Result 2026-11-01 15:43 (live, game in front, inventory by a real Tab):** `WidgetBlueprintLibrary:Create(pc, WBP_ButtonBase_C, pc)` + 
+      `CraftingGUI_C.ButtonBar.ButtonContainerLeft:AddChild` → an empty vanilla button right of «Настройка рыбалки» (the fishing button lives in the LEFT
+      container in our build); the real cursor on it → `IsHovered()` true, away → false. YES — the route «Create + AddChild + LMB bind + IsHovered» holds.
+      The inventory opens only after the world settles: a Tab pressed right after world entry did nothing (no `CraftingGUI_C` instance).
 - [ ] R3. **The list widget.** Kit `W_KrinikModsMenu` (a `ScrollBox` of four flat buttons in the hub's look — the hub's `Brd_KrinikBtn_*` style) placed above the
       button, or a module row `KrinikModsMenu` in `DT_KrinikUIModule` (`Category Modal`). Decide by one probe: does a second row in our module table merge and
       open (`MergeDataTables` already proven for one row).
