@@ -38,7 +38,7 @@ V1 pass · V2 pass · V3 partial (the native mesh hidden is seen in the frames, 
 ## 6. Traces
 
 The UE4SS log lines `[KrinikConanArchery] крупная стрела …` 17:48:51 and `копия стрелы #1..#2` 17:48:52, 17:50:06; review folder
-`SvarogsDream/НА ОТСМОТР НИКОЛАЕМ/50_strela_x3_v_polete/` (frames 115–118 WebP, the release slowed ×8).
+`Conan Exiles Mods/НА ОТСМОТР НИКОЛАЕМ/50_strela_x3_v_polete/` (frames 115–118 WebP, the release slowed ×8; first put into Svarog's review folder by mistake, moved 2026-11-01 20:35 +03:00 — the owner could not find it).
 
 ## 7. Verdict
 
