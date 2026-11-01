@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0427 · 2026-11-01 · ❌→✅ · #conan #ue4ss #hook #hub #lua
+class: wrong-api-assumption
+**Lesson:** a UE4SS `RegisterHook` on a UFunction fires only when the function is called through ProcessEvent (Blueprint or Lua); the game's own C++ path
+skips it. The hub closed by `TryCloseWindow` (native) — the camera's and the pack manager's pre-hooks on `GUIModuleController:ActivateModule(…, false)` stayed
+silent, and «Сохранить и закрыть» applied only at the next inventory close. Cases of 10-31 passed by luck: the window was opened over the inventory. When other
+mods (other Lua states) must learn of an event of ours, fire it ourselves through the UFunction from Lua (`gmc:ActivateModule(FName(row), false, false)`).
+**Repro:** open the hub in the world (no inventory), move a camera row, «Сохранить и закрыть» — no «ОКНО … принято» line until Tab.
+**Trigger:** a cross-mod signal hung on a game function; any test of a window opened by the remote instead of the player's door.
+none-cheap: the case reads the effect right after the click, never after another action
+
 ### EXP-0426 · 2026-11-01 · ❌→✅ · #conan #hub #russian #text #ui
 class: pair-edited-on-one-side
 **Lesson:** a row's label, its grey hint and its «i» text are ONE statement: at 10:05 the label «Плавность зума» got the hint «больше — резче» (right for

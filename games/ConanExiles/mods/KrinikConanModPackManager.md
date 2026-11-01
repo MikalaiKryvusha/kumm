@@ -35,6 +35,8 @@ The row «Размер HUD вверху экрана» (`mpm_hud_scale`, ×, sho
 `config.lua` stays the mod's own default (`hud_scale` 1.25), never written by the mod. At load `read_settings_store` sets `cfg.hud_scale` from the store
 or from `config.lua` (log «масштаб HUD x1.25 (config.lua, загрузка)»); after «Сохранить» a pre-hook of `GUIModuleController:ActivateModule` sees
 `KrinikSettingsVersion` move on a window CLOSE and calls `apply_hud_scale` at once (no timer). Cases `testcases/TC_conan_hub_mpm_page_2026-10-31.md` M1–M5 pass.
+Since 2026-11-01 14:4x the hub fires that close through the UFunction itself (its native `TryCloseWindow` did not reach the hook — EXP-0427); seen: ×1.50 at the
+click of «Сохранить и закрыть» (`testcases/TC_conan_hub_rows_audit_2026-11-01.md` H18).
 
 ## Checks
 
