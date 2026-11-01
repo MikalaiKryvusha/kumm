@@ -25,7 +25,7 @@ Before (14:39): height 80 (the owner's tuned value), side 0, distance 230 (the w
 | H4 | Наклон взгляда | −2 → 10 | `CameraThirdPerson.RelativeRotation.Pitch` | 10 | pass | 10.00 |
 | H5 | Ближе всего к герою | 130 → 300 | hero `ThirdPersonCameraMinArmLength` (the game's own wheel limit) | 300 | pass | 300.0 |
 | H6 | Дальше всего от героя | 2125 → 975 | hero `ThirdPersonCameraMaxArmLength` | 975 | pass | 975.0 |
-| H7 | Резкий зум | off → on | the camera log; the arm 50 ms after one wheel click | the jump | partial | log «резкий true» — taken; the jump of one click not timed |
+| H7 | Резкий зум | off → on | the real camera-to-hero distance every 30 ms after one wheel click (`K2_GetComponentLocation` of `CameraThirdPerson` vs the hero) | the jump faster when on | pass | 14:54 off: 264 → 280 in ten steps (≈ 300 ms glide); on (real-mouse click + save, log «резкий true»): 280 → 299 in three steps (≈ 90 ms) |
 | H8 | Скорость зума | 9 → 20 | hero `TP_SpringArmInterpSpeed` | 20 | pass | 20.0 |
 | H9 | Счётчик кадров | on → off | a frame of the top-right corner | empty | pass | the corner empty (`fps_corner.webp`); «83» stood there before |
 | H10 | Мигание еды и воды | 10 % → 30 % | food 25 %: `Border_EatImage` content colour G | < 1, pulsing | pass | G 0.77, 0.57; log «food: пик 0.3» |
@@ -33,14 +33,16 @@ Before (14:39): height 80 (the owner's tuned value), side 0, distance 230 (the w
 | H12 | Мир замедляется в меню | 33 → 1, then 3 | the inventory by a real Tab: the pause log | 1 — no slowdown; 3 — 0.3333 | pass | 1: «ОТКРЫТ», no «замедление» line; 3: «замедление времени 0.3333» |
 | H13 | Крафт в меню без замедления | on → off | the world at 0.3333: the hero `CraftingQueue.CraftTimeMultiplier` | 1.0 (craft slows with the world; on sets the dilation) | pass | 1.0000 |
 | H14 | Сколько держится фраза врага | 1 → 5 s | log «фраза снята через X с» | X ≥ 5 | not run | needs a shouting enemy; seen earlier today (report `testcases/reports/2026-11-01_conan-shout-hold-slider.md`); the store got 5 |
-| H15 | Полёт стрелы как в Oblivion | on → off | the archery log at the next aim; arrow speed at two draws | equal speeds when off | partial | log «настройки окна: баллистика false …»; speeds not measured |
-| H16 | Стрелы не ломаются | on → off | a fired arrow's `CanBreakOnImpact` | true | partial | the same log line «стрелы не ломаются false»; no arrow fired |
+| H15 | Полёт стрелы как в Oblivion | on → off | the archery log per shot at draws 0 and 0.76 (`aim-shot.sh 300` / `1500`) at a frozen Kappa 8 m ahead | the speed depends on the draw when on, not when off | pass | 14:50 on: 2500 and 4389 cm/s; off (real-mouse untick + save): 5000 and 5000 cm/s |
+| H16 | Стрелы не ломаются | on → off | a flying arrow's `CanBreakOnImpact` (a 50 ms probe during the shot); copies left after hits | true when off | partial | 14:52 off: the flying `BP_Visual_BowProjectileBase_C` carries `CanBreakOnImpact = true`, chance 0.65 — the row works on the field; but 8 of 8 arrows stuck in the Kappa with it off (the game breaks an arrow where it cannot stick, per the asset note in the game map) — the visible difference is on ground and rock, not on creatures; not shot there |
 | H17 | Обзор при прицеливании | 75 → 50 | RMB held 2 s by `mouse-seq.ps1`: `PlayerCameraManager:GetFOVAngle()` | 50 | pass | 50.0 |
 | H18 | Размер HUD вверху экрана | 125 % → 150 % | log; live `W_SmoothHP` `RenderTransform.Scale` | 1.5 | pass | «масштаб HUD x1.50 (окно «Моды Krinik'а» …)» at the click (after the fix); 1.50 × 1.50 |
-| H19 | Сколько лежит кровь на земле | 300 → 30 s | log «кровь лежит 30 с» at the next stain | 30 | partial | the store got 30; no melee hit made (G1 of 2026-10-31 saw 60 s work) |
+| H19 | Сколько лежит кровь на земле | 300 → 30 s | log at the next stain | 30 | partial | 14:50 the first arrow stain logged «кровь лежит 30 с (окно «Моды Krinik'а» …)»; the stain itself not seen on frames (the Kappa fell onto the hit spot, the camera moved) |
 | H20 | persistence | one row per page saved | restart | the values and effects hold | not run | (the vignette store held across a restart today — V8 of `TC_conan_vignettes_2026-11-01.md`) |
 | H21 | close without saving | one row moved per page | «Закрыть без сохранения» | `KrinikSettings.lua` unchanged (`cmp`) | not run | |
 | H22 | reset | three rows moved and saved | «Сбросить к исходным», «Сохранить» | the defaults' effects | not run | |
+
+Stand of 14:48–14:54 (rows H7, H15, H16, H19): a green Kappa summoned, placed 8 m ahead and frozen by `_config/arrow-stand.sh summon / place 8 / freeze`; the bow in quick slot 1; shots by `_config/aim-shot.sh`.
 
 ## Defect found and fixed in the run — «Сохранить и закрыть» did not reach the camera and the pack manager
 
