@@ -110,51 +110,22 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **HANDOVER of the chat a3dcf82b (2026-10-31 21:48–23:3x, dayloop «работай автономно над сборкой Конана»):** done — the hub look by the owner's
-> five remarks (review folder `39_hub_look`, his eye pending), the camera / pack-manager / archery pages live (plan 38 step 6 DONE), DM0 pass,
-> W18 EAA card + Beyond Decor in Russian, «шкала» carried into the locres source, tools `aim-shot.sh`, `locres-add-keys.py`, the locres-set-tr guard.
-> **2026-11-01 04:4x — the owner's answers (chat):** (a) hub look — `[OWNER]` «из этого кадра явно видно, что макет красивый, а реализация в игре - нет»:
-> the in-game window must reach the mockup → work item; (b) AIM15 DROPPED — `[OWNER]` «стрельбу из лука переделали, стрелу вернули спавниться в лук, а не
-> перехватываем больше, и проблемы резкого ее появления в прицеле органическим образом больше нет» (KrinikConanArchery 0.3.0+, notes updated); (c) DM0 —
-> `[OWNER]` «F1 нужен для того, чтобы курсор отображался» · «им можно кликнуть по кнопке разворачивания ДПС»: holding F1 shows the cursor, a click on the meter's
-> expand button expands it (corrected 2026-11-01: «F1 only MOVES the window» below was false); (d) `[OWNER]` «создавай публичный репозиторий. Понаходи имена
-> автором модов, имена или никнеймы» — the README read is done.
-> **2026-11-01 04:5x — THE PUBLIC REPO IS LIVE:** https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack (one commit `5a606f8`, scan 0, all 64
-> authors from Steam / Nexus; idea 23 → «Public repo — CREATED»). Its next step — the 1.0.0 archive as a release after plan 35 item 6.
-> **2026-11-01 05:20 — THE HUB WINDOW BY MOCKUP 5: DONE, waits for the owner's eye** (review folder `41_hub_kak_maket`, replaces `39_hub_look`): kit
-> `kit-krinik-modsettings.py` + Lua `krinik_mod_settings.lua` rewritten to mockup 5's CSS — the game's PT Serif, flat panel, own slider / value / checkbox /
-> flat buttons (`games/ConanExiles/mods/KrinikConanUI.md` → «The fidelity pass»); all cases pass (`testcases/reports/2026-11-01_conan-hub-mockup-fidelity.md`);
-> the owner's save restored, his `KrinikSettings.lua` absent as before.
-> **2026-11-01 05:3x — C1 DEFECT CONFIRMED:** the 16 Caverns of Set chests spawn no loot (level file + live read; notes `games/ConanExiles/mods/CavernsOfSet.md`);
-> the fix waits for the owner's loot choice — interview #029 (recommended: the relic-hunter table of the chests beside them).
-> FIRST next (2026-11-01): plan 38 phase 1 — the inventory button «Настройки модов» + the upward list (heavy, start with a fresh context); R2 stone stand — 4 probes 2026-11-01 05:3x–05:42 could not locate a world stone by the remote (foliage meshes
-> unreadable; TC row R2, game map «Stones by the remote») — needs a stone spot or a position scan without the mesh filter;
-> C1 fix after #029.
-> FIRST next (2026-10-31, superseded by the line above for 1–2): (1) the owner's eye on folders `39_hub_look` and `40_arrow_clip` (AIM15); (2) the public repo after his README read (`38_public_readme`);
-> (3) C1 — read the placed chests of `Mines_of_Set/Caverns_of_Set_Level` from the level file; (4) R2 — a natural stone pickup stand; (5) plan 38 step 7–8
-> (phase 1 — the inventory button «Настройки модов», W24: today the hub opens only by the remote). Before any remote call on a mod's own function —
-> copy `Saved/SaveGames/` (EXP-0417).
-> **Older handover pointers (2026-10-30 16:55 … 2026-10-31 12:21) — collected in the chronicle, entry 2026-10-31 16:53 +03:00 (second part).**
-> - **21:24 — the public repo: READY TO CREATE after the README check** (idea 23 holds the decisions and the audit summary). The private pack
->   `_config/public_release/`: `audit_2026-10-31.md` (private — it quotes the traces), `README.draft.md` (from `README.template.md` by `mods-table.mjs`),
->   `LICENSE` (MIT, own work only), `make_public_tree.py` → a staging tree from HEAD (515 files, 18 dev records dropped) with a scan that printed **0**
->   (pack `6cff449`). Next, in order: (1) the independent §7B voice check of the README (helper running at the close) → (2) show the README to the owner
->   (his text) → (3) `python -I -X utf8 _config/public_release/make_public_tree.py <fresh dir>` (exit 0) → `git init`, one commit, `gh repo create
->   MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --public`, push → (4) the 1.0.0 archive as a release of that repo (idea 23 update check).
-> - **2026-10-31 22:5x — the hub's five pages are live and every reader is observed in game** (plan 38 step 6 done; camera, UI, archery, pack manager, graphics — reports `testcases/reports/2026-10-31_conan-hub-*.md`; the closed entries moved verbatim to the chronicle, entry 2026-10-31 23:06 +03:00).
-> - **2026-10-31 22:2x — the owner's five remarks on the hub window's look: FIXED, waits for his eye** (pack `5f497ce`, report
->   `testcases/reports/2026-10-31_conan-hub-look.md`, review folder `39_hub_look` with `what_to_look_at.md`): height by the tallest live page, Noto Sans
->   regular (the labels had been the ENGINE's Roboto Bold; the game's serifs have no Cyrillic), rows twice denser, round «i», a dark opaque plate with a
->   gold rim at the cursor, the vanity camera no longer hides the window. Next: the public repo (README in review folder `38_public_readme` — his read).
-> - **THE AGENT'S since 21:11 (`[OWNER]` «эээээто все ты можешь проверить» about these four — not his hands; was «Waits for the owner's hands», 16:2x):**
->   real input by `mouse-seq.ps1` (a dummy click first, EXP-0412), the arrow stand `arrow-stand.sh`, the remote for the caverns chest. `TC_conan_build_stability_compat_perf_2026-10-26` R2 — a stone picked up in third
->   person at the default and the far zoom; AIM15 — the arrow seen leaving the bow and landing under the crosshair; DM0 — F1 expands the Damage Meter: does it cover Hosav's HUD text (called 16:2x;
->   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
->   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own.
->   The emulated-input attempt of 16:25 (the hero never drew the bow) — verbatim in the chronicle, entry 2026-10-31 16:53 +03:00.
->   **22:5x (report `testcases/reports/2026-10-31_conan-dm0-c1-probes.md`):** DM0 PASS 22:57 — `DN_UI_DmgWidget_C:Restore()` expands the meter, ≈ 35 px under the HUD text (correction 2026-11-01: «F1 only MOVES the window» was false — holding F1 shows
->   the cursor, and a click on the meter's expand button expands it; the 22:5x tries pressed F1 without clicking). C1 PARTIAL — the mod's container has no `Caverns_of_Set_Loot_Chest_Table`; the chest CDO's `LootTable` is nil like the
->   vanilla parent's, so only a placed chest instance in the caverns decides (coordinates needed). AIM15 PARTIAL 23:0x (report `2026-10-31_conan-aim15-clip.md`): a 60 fps clip of a real shot into a frozen Kappa 10 m ahead (hit logged) — the case is DROPPED 2026-11-01 by the owner's word (the arrow is born at the bow since 0.3.0; folder `40_arrow_clip` removed). R2 2026-10-31 23:08 — stones dropped from the inventory become a loot bag under the hero, not a world stone: the stand needs a natural stone pickup (TC row R2). W18 23:17 — the EAA class-artefact card and the Beyond Decor menu line in Russian (6 keys added to Game.locres, report `2026-10-31_conan-w18-eaa-card-ru.md`); 23:2x the owner's «шкала» carried into the source `dm-fish-ru.tsv` — a full locres rebuild now equals the deployed file (lost 0, changed 0; pack `ee13fcb`).
+> **HANDOVER of the chat ecee2807 (2026-11-01 04:40–05:5x, resume + «работай над сборкой автономно» → dayloop):** done —
+> (1) corrections by the owner's word: F1 = the cursor, a click expands the Damage Meter (new notes `games/ConanExiles/mods/TheDamageMeter.md`); AIM15
+> dropped (the arrow is born at the bow since Archery 0.3.0); EXP-0419. (2) THE PUBLIC REPO IS LIVE: https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack
+> (all 64 mod authors from Steam / Nexus — pack `_config/public_release/fetch-authors.mjs` + `fill-authors.mjs`; idea 23 → «Public repo — CREATED»).
+> (3) THE HUB WINDOW BY MOCKUP 5 — all cases pass (`testcases/reports/2026-11-01_conan-hub-mockup-fidelity.md`), review folder `41_hub_kak_maket` waits
+> for the owner's eye (the game's PT Serif; EXP-0420: the kit cannot import a font). (4) C1 CONFIRMED: the 16 Caverns of Set chests spawn no loot
+> (`games/ConanExiles/mods/CavernsOfSet.md`) — the fix waits for interview #029 (shown in chat). (5) `kismet.py` patches literals in the EVENT GRAPH
+> (entry points shifted, self-checked; regression 3/3 byte-equal) → bug 64 item 48 FIXED: the minimap «Показ времени» in Russian (report
+> `2026-11-01_conan-minimap-time-dropdown-ru.md`). (6) knowledge-hook reads a quoted `-Only "<Mod Name>"`. (7) R2: 4 probes could not find a world stone
+> by the remote (foliage meshes unreadable — game map «Stones by the remote»).
+> FIRST next: (1) the owner's eye on `41_hub_kak_maket` and his answer to #029 (then the C1 fix: the chest's loot table in the mod pak);
+> (2) bug 64 items 47 «All» (ModControlPanel `MDC_MCP`) and 49 «Top Left» (Damage Meter settings) — the same `lit:` route as item 48 (trace the asset's
+> event graph first: a translated option must not break a string comparison or a saved string); (3) plan 38 phase 1 — the inventory button «Настройки
+> модов» + the upward list (heavy, ≈ 3–4 h); (4) R2 — a stone spot from the owner or a position scan. Before any remote call on a mod's own function —
+> copy `Saved/SaveGames/` (EXP-0417); the owner has NO `Saved/KrinikSettings.lua` — delete the one a save case writes.
+> **Older handover blocks (chat a3dcf82b and the 2026-11-01 04:4x–05:3x lines) — moved verbatim to the chronicle, entry 2026-11-01 05:51 +03:00.**
 > - **Earlier FIRST list (still valid):** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
 >   plan 36 item 23). (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
 >   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
