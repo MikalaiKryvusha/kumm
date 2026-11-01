@@ -91,6 +91,18 @@
 
 ## Entries
 
+### EXP-0422 · 2026-11-01 · ❌→✅ · #conan #ue4ss #umg #animation #hud #measure
+class: wrong-api-assumption
+**Lesson:** `UserWidget:PlayAnimationTimeRange(anim, 0, End, loops, PingPong, speed, true)` called from UE4SS Lua on Conan 3.0.1 IGNORES `End`: the food
+blink «dim at 10 %» played the whole curve to full red at every share for two days (the owner: «мерчание голода и жажды неправильное»). Proven by a remote
+probe that wrote the border colour to a file every 100 ms: End 0.15 s, speed 0.09 → G fell to 0.10 by 4.5 s, with loops 0 and 1000 alike. And a log line
+«яркость 0.3» proved only the CALL — the clip of all steps and a pixel measure (redness 106–120 at every step) showed the effect. For a colour that must scale,
+drive it yourself (a short tween only while needed, one reused colour table — new table literals 30×/s gave 3–4 ms GC spikes) and STOP the native
+animation of that widget while you drive it (Hosav's weight animation idles «playing» at its last key and rewrites alpha 0 every frame).
+**Repro:** `pult.sh "lua … sm:PlayAnimationTimeRange(sm.NoFood, 0.0, 0.15, 0, 2, 0.09, true) for i=1,45 do ExecuteInGameThreadWithDelay(i*100, function() …io.open(<file>,'a')… c.G end) end"` — G goes 1.00 → 0.10.
+**Trigger:** any effect whose acceptance is a LOOK (a colour, a fade, a blink depth) — measure the pixels or the property over time, never the log of the call.
+none-cheap: the probe is two remote lines; the measure script lives in the run report
+
 ### EXP-0421 · 2026-11-01 · ❌→✅ · #conan #ue4ss #umg #widget #lua #hud
 class: wrong-api-assumption
 **Lesson:** the second strike of EXP-0385's trap: the HUD temperature colour searched `FindAllOf("TextBlock")` by field name and dropped only «Default__» —
