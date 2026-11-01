@@ -56,3 +56,7 @@ needs `global.utoc` for script objects) → `UAssetGUI tojson <umap> <json> VER_
   «added mod specific loot chest to grey lotus data table drops, added back in mod loot chests and base game loot chests»; 2.5 (Jul 23) «added back in loot
   chests in the outpost and inside the caverns area». 2.6 (Sep 16) says nothing about chests — the table most likely fell out in that port.
 - Comments (16 k characters) and discussions: no report of empty chests. The author's Discord (from the description) was not read.
+
+## Decision (2026-11-01 08:58)
+
+`[OWNER]` 2026-11-01 08:58 «делаем сейчас 2, а 3 делаем в новой версии сборки. систему афиксов я ОЧЕНЬ ОЧЕНЬ ОЧЕНЬ ХОЧУ, но сейчас делать если возьмемся - это нахуй еще на неделю затянет работу над 1.0.0 - а выпустить релиз хочется уже сегодня вечером, а сейчас 9 утра сегодня». «2» = our own RANDOM recipe for the caverns chests in the game's format (tag-query rows: high tier, Stygia — Set's culture, several rolls, a rare extra) at the path the chest expects, PLUS the mod's own items given level tags so they drop in the world's chests of their tier (first read which tags they already carry). «3» — random item properties (affixes) — goes to the NEXT build version, not 1.0.0.
