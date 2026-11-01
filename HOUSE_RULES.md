@@ -38,7 +38,9 @@
 9. **A crash-report window is removed at once.** The game crashed in my run → `Get-Process CrashReportClient | Select Id, StartTime,
    MainWindowTitle` → `Stop-Process -Id <PID>` (by PID, never by name; a hung game — also by PID). The run report carries «окно отчёта о
    падении закрыто, PID …».
-10. **Work is estimated in hours** («≈ 1 ч», «2–3 ч»). A "chat" is never a unit of effort.
+10. **No effort estimates in epics and plans — neither hours nor chats.** Plans carry steps, gates and acceptance, never a duration. (`[OWNER]` 2026-11-01 13:36
+    «убрать из эпиков и планов часы оценок. Я знаю, что вы оцениваете неверно, и на самом деле быстрее все делаете. Убрать часы, чтобы они вас не обманывали» —
+    supersedes «work is estimated in hours» of 2026-10-2x.)
 11. **The agent prepares its own test stand, free of interference.**
     1. Before the first case — a "stand" step in the case file: place, creature, its behaviour, weapon, time of day, weather — and how each
        is set up by the remote.
