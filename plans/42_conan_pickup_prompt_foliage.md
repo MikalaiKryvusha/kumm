@@ -81,6 +81,16 @@ leaves, the prompt shall go. Maintain: our mods' 1 ms CPU budget in gameplay fra
   mod's arm compensation — bug 64 row «stones, fibre»), thickness `PickupTraceSphereRadius` 200 → `GetInstancesOverlappingSphere(point, 200, true)` at points
   along that segment on the near pickup components; a hit → the prompt, with the mesh kind (rock / branch / fibre plant) for the «Поднять камень» variant.
   Look — mockups in review folder 53 (`podskazka_podnyat_maket`): «E Поднять» and «E Поднять камень», under the crosshair.
+- **The owner's picks 21:32–21:34:** `[OWNER]` «почти, только фон у E едва заметный» (the key box fill made faint — mockup redone) · «сделай» · «без камень, просто
+  Взять» — the text is **«E Взять»** for every kind. «поищи, какие ещё есть такие предметы в игре, которые можно поднимать, но для них нет специальной плашки» ·
+  «для трупов - есть» · «может какие-то червики» · «или вода Попить - кстати да, тоже».
+- **Every pickup kind with no prompt (21:34, the loaded areas around the oasis: 281 `PickupFoliageComponent_C`, 55 meshes):** rocks `SM_rock_small01…04`
+  (≈ 64 k), `SM_black_rubble_01`, `SM_crystal_small_01…06`; branches `GFL_DeadTreeBranch01…05`; fibre `GFL_Sarcobatus_Desert01…04`, `_Jungle01`,
+  `GFL_WesternSwordFern01`, `GFL_BroomBaccharis01`; berries / flowers / herbs `GFL_DesertBerryBush01`, `GFL_ElberberryBush01_Flowers/_Fruit`, `GFL_DogRose01`,
+  `GFL_HopsBush01`, `GFL_Nettle01/02`, `GFL_LotusFlower01`, `GFL_AloeVeraPlant01…03`; algae `GFL_BlueAlgae01/02`, `GFL_RedAlgae01…03`, `GFL_GlowAlgae01`,
+  `SM_SeaweedA…E`; fungi `Fungus02/09/13/16/17`; others `SM_grub` (the owner's «червики»), `SM_SnakeEggs_single`, `SM_Vulture_feather`,
+  `SM_cobweb_resource_01`. ONE check (any instance of a `PickupFoliageComponent_C` near the game's pickup line) covers them all → «E Взять».
+  **Water «E Попить»** — not foliage (a water surface; drinking goes through `UpdateHighlightTarget` at the press) — step 2 of this plan, its own check.
 - **Routes left:** ~~(1) a sensor that moves ITSELF~~ (closed by E2); the only one — (2) below. Former text: (1) a sensor that moves ITSELF each time the camera moves (a kit actor with its own component and overlap event — needs a stand proof);
   (2) the native `GetInstancesOverlappingSphere` on the nearby pickup components at the crosshair point, on a rhythm (variant A of 21:1x — the owner's
   decision on the rule-7 exception is still open).
