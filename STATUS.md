@@ -127,7 +127,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the owner's save restored, his `KrinikSettings.lua` absent as before.
 > **2026-11-01 05:3x — C1 DEFECT CONFIRMED:** the 16 Caverns of Set chests spawn no loot (level file + live read; notes `games/ConanExiles/mods/CavernsOfSet.md`);
 > the fix waits for the owner's loot choice — interview #029 (recommended: the relic-hunter table of the chests beside them).
-> FIRST next (2026-11-01): plan 38 phase 1 — the inventory button «Настройки модов» + the upward list (heavy, start with a fresh context); R2 stone stand;
+> FIRST next (2026-11-01): plan 38 phase 1 — the inventory button «Настройки модов» + the upward list (heavy, start with a fresh context); R2 stone stand — 4 probes 2026-11-01 05:3x–05:42 could not locate a world stone by the remote (foliage meshes
+> unreadable; TC row R2, game map «Stones by the remote») — needs a stone spot or a position scan without the mesh filter;
 > C1 fix after #029.
 > FIRST next (2026-10-31, superseded by the line above for 1–2): (1) the owner's eye on folders `39_hub_look` and `40_arrow_clip` (AIM15); (2) the public repo after his README read (`38_public_readme`);
 > (3) C1 — read the placed chests of `Mines_of_Set/Caverns_of_Set_Level` from the level file; (4) R2 — a natural stone pickup stand; (5) plan 38 step 7–8
