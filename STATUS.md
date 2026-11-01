@@ -134,6 +134,9 @@ the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/Con
 > **ORDER (`[OWNER]` 2026-11-01 11:11–11:12 «да не нужно архив собирать!! Сборка же еще не готова!!» · «релизный архив соберем и все документы обновим,
 > когда сборку сделаем и протестируем на всех разрешениях 16 к 9»):** the release archive and the document refresh go LAST — after the build is finished and
 > tested at 720p / 1080p / 2K / 4K. The 11:10 archive run was stopped and its 16 GB removed; `make_volumes.sh` waits for that moment.
+> **NEW 13:20 (the owner, for 1.0.0):** `[OWNER]` «по умолчанию в поставлке сборки виньетки голота и жажды ВЫКЛ, виньетка нижкого здоровья тусклая, типа 10%
+> или на каком значении она едва заметна» — plan 36 W23 (the three vignette shkalas, far left = off) gets its shipped defaults: hunger OFF, thirst OFF, low health
+> barely visible (≈ 10 %). Recon first (no code of ours touches vignettes); candidates — see the asset list in plan 36 W23.
 > DONE 13:2x — the owner 13:13 «температура в худ белая на высоких значениях» (seen on my own frames all day and not flagged — my miss): the HUD temperature now
 > follows the game's heat/cold debuff stage (stage 1 = 70 % red, 4 = full); 32 °C red beside the game's overheat icon (review folder 47); comfort / cold not framed in this run.
 > 13:1x — arrows in the corpse: NOT DONE (the game's own event destroys every copy when the creature is removed — bytecode; routes in the archery notes, Open);
