@@ -1,6 +1,6 @@
 # Bug 73 — Conan build: arrows shot into the ground hang in the air before the hit point and vanish fast
 
-**Status:** 🔧 «in the air» fixed and seen 2026-11-01 15:26 (cause: our ×3 arrow mesh); «vanish fast» fixed 2026-11-01 17:41 (5 min, hub row 1–30 — the owner 16:18); open: the ×3 visual arrow joined at the tip (the owner 16:23) · **Severity:** S2 · **Version/build:** Conan Exiles 3.0.1 build 1.0.0 (pre-release), KrinikConanArchery 1.0.0
+**Status:** 🔧 «in the air» fixed and seen 2026-11-01 15:26 (cause: our ×3 arrow mesh); «vanish fast» fixed 2026-11-01 17:41 (5 min, hub row 1–30 — the owner 16:18); the ×3 visual arrow joined at the tip — built and seen 2026-11-01 17:50 (cases V1–V3), its look waits for the owner (review folder 50) · **Severity:** S2 · **Version/build:** Conan Exiles 3.0.1 build 1.0.0 (pre-release), KrinikConanArchery 1.0.0
 **When/context:** 2026-11-01 15:06, seen by the owner on his screen while the agent shot six arrows into the sand (plan 40.2, row «Стрелы не ломаются»)
 **Fixing:** this session — the control case first (HOUSE_RULES rule 24)
 

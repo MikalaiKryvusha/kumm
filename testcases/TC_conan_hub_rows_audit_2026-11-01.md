@@ -86,3 +86,14 @@ still present past the game's 15 s.
 Stand notes (17:37–17:40): the first key of every `mouse-seq.ps1` sequence is eaten by the window's activation (EXP-0412) — a harmless F13 (`kdown:0x7C`)
 opens each sequence now; the save's bow in quick slot 1 broke during the stands (dim icon, key 1 did nothing) — a new «Мощный охотничий лук» by `exec MakeMeAdmin`
 + `exec SpawnItem 51405 1` landed in slot 3; the frozen Kappa walks again after an inventory visit — `arrow-stand.sh place 8` + `freeze` before every shot.
+
+### Bug 73, the owner's scheme 16:23 — the physical arrow ×1, a visual ×3, joined at the tip
+
+Stand: as the L cases (a frozen Kappa 8 m ahead, the bow in hand, every `mouse-seq.ps1` sequence opened by F13). Dimensions: placement of the copy (must not
+change), the look in flight (×3, the tips together), errors and crashes, the trail.
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| V1 | `visual_scale` 3 | a shot at the Kappa's head | the copy 62 cm from the hit (as with ×1); no «крупная стрела: ошибка» in the log | pass | 17:50:06 copy #2 «rig_bone_kappa-head, от точки удара 62 см»; 17:48:52 a ground shot 62 cm; no error after the fix (the first build failed at `GetBoundingBox().Max` — nil from Lua; 17:46 the copy stood at 62 cm even then) |
+| V2 | as V1 | a 60 fps video of the shot (ddagrab, desktop HDR off for the recording) | the flying arrow drawn ≈ 3× longer, its tip leading; the trail as before | pass | 17:50 frames 116–117: a long arrow, the big head at the aim point, the shaft back through the Kappa's head; frame 118 — the flight over (8 m ≈ 3 frames). The first video (17:48) was spoiled: the companion «Нурус Тихорез» killed the Kappa — frozen for the repeat (rule 11.6). The look → review folder 50 |
+| V3 | as V1 | the section's log at the first visual arrow | mesh, scale, Z offset = maxZ × (1 − 3) | partial | 17:48:51 «крупная стрела: сетка SM_iron_arrow ×3.0, конец по Z 76.3 см, сдвиг -152.7 см»; ProjectileMesh hidden — seen in the frames (no second, small arrow), not read by the remote |

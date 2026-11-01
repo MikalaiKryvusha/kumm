@@ -89,6 +89,13 @@ the flying arrow does nothing, the remote reads a TrivialObject). `dress_arrow` 
 `arc_stuck_min` (1–30 min, default 5) on the KrinikConanArchery page. Seen: 299.9 s by default, 59.9 s at 1 (report `testcases/reports/2026-11-01_conan-arrow-stuck-life.md`).
 Corpses: the game destroys the copies with the creature — plan 40 phase 4.
 
+**The ×3 arrow in flight (2026-11-01 17:5x, `[OWNER]` 16:23 «физическая оригинальная стрела x1 … визуальная модель лететь должна x3 … связаны в наконечнике»).**
+`dress_arrow` → `add_visual_arrow`: `actor:AddComponentByClass(StaticMeshComponent, true, identity, false)` (works from Lua, no crash), the same static mesh and
+materials, collision off, `K2_AttachToComponent(ProjectileMesh, None, Snap, Snap, KeepRelative)`, scale `CFG.visual_scale` 3, relative Z = maxZ × (1 − 3)
+(maxZ from `StaticMesh:GetBounds()` Origin.Z + BoxExtent.Z — `GetBoundingBox()` comes to Lua without Min/Max; 76.3 for `SM_iron_arrow` → −152.7 cm), then
+`ProjectileMesh:SetVisibility(false, false)`. The native mesh stays ×1, so the copy stands 62 cm from the hit as before. Seen: frames 116–117 of a 60 fps video
+(the big head at the aim point); review folder 50 for the owner's eye.
+
 ## Open
 
 - seen 2026-10-31 15:51: the pause-menu list shows «v1.0.0»; the Krinik mods still stand at the bottom of the list (W11 «top» half open).
