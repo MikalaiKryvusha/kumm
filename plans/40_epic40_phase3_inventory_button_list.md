@@ -3,6 +3,7 @@
 > **Created:** 2026-11-01 · **Parent:** `plans/40_EPIC_conan_1.0.0_unfinished_six.md` phase 3 (criterion 3); plan 38 phase 1 (criteria 1, 2, 5); plan 39 B2; plan 36 W24
 > **Status:** written 2026-11-01 by a helper agent; not started; starts after phase 2 (the hub must be honest before the door to it is built)
 > **Outbound:** interview `interviews/interview_030_conan_xevyr_and_other_hubs.md` (step R5) — the shape of «Моды Xevyr'а» and «Прочее»
+> **DECIDED 2026-11-01 13:40 — replaces interview 030:** `[OWNER]` «Окна «Моды Xevyr'а» - пооткрываешь его моды, посмотришь, какие он опции дает - вот они и должны быть не в его кривых косых окнах, а в нашем красивом» · «и «Прочее» - аналогично, но по "ручкам" настроек модов других авторов». So: both are hub windows in OUR look (as «Моды Krinik'а») with REAL rows — every option each mod's own window offers, bound to the mod's own settings (its SaveGame fields + its apply path); not rows that only open the mod's window. Recon per mod first: open its window, list its options, find where each value lives (mod notes in games/ConanExiles/mods/).
 
 Basis, verbatim: `[OWNER]` 2026-10-31 19:09 «а попасть в конкретный хаб модов - в окне персонажа внизу кнопка Настройки модов - клик по ней открывает вертикальный
 скролящсок-дроп-даун» · 19:10 «кликаешь по Моды Krinik'а - открывается его окно-хаб» · 19:14 «если у автора один мод - ему отдельную кнопку не делаем, а
