@@ -57,6 +57,16 @@ leaves, the prompt shall go. Maintain: our mods' 1 ms CPU budget in gameplay fra
   `/Engine/BasicShapes/Sphere` (loads in the shipped game) that grows ×2 on any overlap (a 200 ms diagnostic loop, 3 min, stand only). Seen so far: no
   overlap reported over the ground — expected, the landscape generates no overlap events; a one-shot `KismetSystemLibrary:SphereOverlapComponents` (60 cm) at
   the ball DOES return `LandscapeHeightfieldCollisionComponent_35` — queries work. The stone itself — waits for the owner to put the ball on one.
+- **E1 result, 21:23–21:26 (the owner held the ball on a stone):** the foliage lives in **16 `InstancedFoliageActor`s** (694 components, 281 pickup ones) — a
+  `FindFirstOf` reaches only one of them; iterate `FindAllOf`. Pickup components: collision QueryOnly, object type **22**, responses Overlap to 1 (WorldDynamic),
+  15, 16, 20, 22; Block to 9–14, 29. The stones near the ball were found by the component's own native **`GetInstancesOverlappingSphere(centre, 150, true)`**
+  (no physics): `SM_rock_small01`, `SM_rock_small03`, `GFL_Sarcobatus_Desert01` (fibre). The sensor `SphereComponent` added at run time and attached to the
+  camera reported NO overlaps with anything (radius 25 and 70, boxes and landscape included), though a one-shot `SphereOverlapComponents` query at the same
+  point works — a component attached under the camera does not refresh its overlaps when the parent moves. Stand removed, overlap events set back to false on
+  all 281 components.
+- **Routes left:** (1) a sensor that moves ITSELF each time the camera moves (a kit actor with its own component and overlap event — needs a stand proof);
+  (2) the native `GetInstancesOverlappingSphere` on the nearby pickup components at the crosshair point, on a rhythm (variant A of 21:1x — the owner's
+  decision on the rule-7 exception is still open).
 
 ## Next steps
 
