@@ -165,7 +165,7 @@ Stand: the live game, the inventory open; the hub opened as Xevyr's by the remot
 
 | ID | Situation | Action | Expected | Status | Observed |
 |---|---|---|---|---|---|
-| D1 | the kit rebuilt with the dm rows, deployed | open the hub as Xevyr's | the title «МОДЫ XEVYR'А · НАСТРОЙКИ», one page «The Damage Meter» with 8 rows, values = the author's slot (or its defaults) | — | — |
-| D2 | D1 | move «Пауза до новой стычки» to 10 by the real mouse, «Сохранить» | the log «saved through the author's window»; the author's own window then shows 10 s | — | — |
-| D3 | D2 | a 60 fps clip of the save | the author's window does not flash over ours, or the flash is measured | — | — |
+| D1 | the kit rebuilt with the dm rows, deployed | open the hub as Xevyr's | the title «МОДЫ XEVYR'А · НАСТРОЙКИ», one page «The Damage Meter» with 8 rows, values = the author's slot (or its defaults) | pass | 2026-11-02 00:25 (opened by the shared variable `KrinikHubRequest` from the remote): title, one page, 8 rows; values 100 %, 85 %, off, off, on, on, 0,2, 7 = the mod's defaults. Seam seen: the mod's name stands mid-height in the left list, not at the top |
+| D2 | D1 | move «Пауза до новой стычки» to 10 by the real mouse, «Сохранить» | the log «saved through the author's window»; the author's own window then shows 10 s | pass | 00:25 a real click on the track + «Сохранить»: the log line; the mod's slot `segmentTimer` 10.00 (00:27 again → 5, slot 5) |
+| D3 | D2 | a 60 fps clip of the save | the author's window does not flash over ours, or the flash is measured | partial | 00:25 the author's window STAYED OPEN behind ours (its lines showed through the panel) → fixed: its module closed after its SaveSettings; 00:27 module inactive, frame clean. A one-frame flash during the save — not measured (no 60 fps clip) |
 | D4 | D1 | open the Krinik hub, «Сохранить» | the author's window does NOT open (the dm save runs only from its own hub) | — | — |
