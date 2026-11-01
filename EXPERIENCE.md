@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0420 · 2026-11-01 · ❌→✅ · #conan #ui #kit #font #devkit
+class: probe-too-narrow
+**Lesson:** «the game has no serif with Cyrillic» (EXP-0415) came from a probe of fonts LOADED in the world; the cooked game holds
+`/Game/UI/Fonts/PT_Serif/PTSerif-Regular_Font` (pakchunk1110) — found only after two crashed attempts to import our own TTF: the kit's font factory asserts
+`CurrentApplication.IsValid()` in `UnrealEditor-Cmd` (no SlateApplication, with or without `-NullRHI`). Before importing an asset class into the kit, list
+what the game already cooks: `retoc list --path <pakchunk*.utoc>` over the game's Paks, grep the class's folder (`UI/Fonts/`).
+**Trigger:** «the game has no X» before a kit import; any kit import of a font.
+mechanized: none
+
 ### EXP-0419 · 2026-11-01 · ❌→✅ · #conan #knowledge #mod-notes #owner-review #archery #damage-meter
 class: knowledge-not-written
 **Lesson:** two questions went to the owner's eye that the project's own knowledge already answered or would have answered: (1) «is the arrow visible at the

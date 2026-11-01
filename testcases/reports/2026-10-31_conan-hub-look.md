@@ -58,3 +58,8 @@ resolutions, `what_to_look_at.md`).
 ## 7. Verdict
 
 pass — every seam of the list fixed and seen in the built pak in the live game; the look itself (taste) waits for the owner's eye.
+
+## Note 2026-11-01
+
+The review folder `39_hub_look` was answered by the owner (chat 2026-11-01 04:40: the mockup beautiful, the game not) and removed; the fidelity pass and its
+folder `41_hub_kak_maket` — `testcases/reports/2026-11-01_conan-hub-mockup-fidelity.md`.

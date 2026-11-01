@@ -129,6 +129,21 @@ sliders get `MinFractionalDigits = MaxFractionalDigits = 0`; the slider box is s
   height is set at fill to the tallest LIVE page (a page switch never resizes the window). The «i» is a square text box (`MinDesiredWidth` 26.3 = the line
   height of Noto Sans 14) inside a `HALF_HEIGHT_RADIUS` rounded box — a circle.
 
+**The fidelity pass (2026-11-01, `[OWNER]` «из этого кадра явно видно, что макет красивый, а реализация в игре - нет» · 04:40; cases
+`testcases/TC_conan_hub_mockup_fidelity_2026-11-01.md` P1–P11, F1–F10).** Every number of the kit is mockup 5's CSS ×2 × (1240 / 1315), every colour its
+sRGB → linear (`u()` and `lin()` in `kit-krinik-modsettings.py`):
+- **Font — the GAME's PT Serif** `/Game/UI/Fonts/PT_Serif/PTSerif-Regular_Font` (cooked in `pakchunk1110` of 3.0.1, `retoc list`): a serif WITH Cyrillic, as the
+  mockup's Cambria. The 10-31 probe listed only fonts loaded in the world and missed it. Regular only — «bold» = the same face + a 1-unit outline in the
+  text colour. **Trap:** importing a TTF in the kit is impossible — the font factory asserts `CurrentApplication.IsValid()` (no SlateApplication in
+  `UnrealEditor-Cmd`, with or without `-NullRHI`).
+- **Panel** — a flat brush `#1e1f21` at .94 and a 2-unit rim `rgba(200,196,186,.38)` (`ROUNDED_BOX`, `FIXED_RADIUS` 0), not the game's window texture.
+- **Own controls** (the game's rows stay in the tree COLLAPSED — GUID trap): `Sld_Krinik_<id>` (a UMG `Slider`, style: track 2 units `#6d6a64`, thumb
+  `#e8e4da`, `MouseUsesStep`) + `Txt_KrinikVal_<id>` (plain text with the unit, the watch rewrites it on a change); a checkbox `Brd_KrinikChk_<id>` +
+  `Img_KrinikChkOn_<id>` — its state lives in the Lua table `checks`, a click on the box toggles it; flat buttons `Brd_KrinikBtn_<Close|Reset|Save|SaveClose>`
+  (+ `Txt_KrinikBtn_*`), ×1.6 brush under the cursor; the title in three parts `Txt_KrinikTitle` / `…Dot` / `…Sub`; the selected mod — the dark box, the
+  light bar `Img_KrinikModBar_<key>`, the name `#f2eee5`; the plate — light rim, square, the title in capitals (`KismetTextLibrary:TextToUpper`).
+- `[TESTED: 2026-11-01 · P1–P11, F1–F10 in the live game, real mouse · testcases/reports/2026-11-01_conan-hub-mockup-fidelity.md]`; review folder `41_hub_kak_maket`.
+
 **Mirror pair:** `ue4ss/feedback/collect_report.ps1` is a COPY of the pack's `_config/player-report/collect_report.ps1` (the Lua mod needs it inside the game
 folder). Check: `cmp _config/player-report/collect_report.ps1 _unpacked/KrinikConanUI/ue4ss/feedback/collect_report.ps1` — edit the source, copy again.
 
