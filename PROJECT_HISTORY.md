@@ -3,6 +3,22 @@
 
 
 
+## 2026-11-01 23:00 +03:00 — moved from STATUS «Where to continue» during the dayloop of chat 70dda2b5 (verbatim; the bonsai trim — STATUS 221 lines)
+
+> 2. The HUD temperature by the game's debuff stage — frame the comfort (white) and the cold (blue) cases (only heat was framed, review folder 47).
+> 3. The inventory button «Настройки модов» (plan 38 phase 1) — write its operational plan first (the Xevyr / «Прочее» entries have no hub yet).
+> 4. Arrows in the corpse — not done; routes in `games/ConanExiles/mods/KrinikConanArchery.md` → Open. Frame measurements (fps perf TC) — also covers the
+>    blink section's 3–6 ms minute spikes. Archive and documents LAST (the owner's order).
+> Review folders waiting for the owner's eye: 44 (shout hold), 45 (blink pink → red), 46 («Все», corners), 47 (temperature red), 50 (x3 arrow in flight), 51 (Xevyr hub mockup). The live save is the
+> 2026-10-31 16:56 copy (armour, bow) — hunger / thirst at 0 % kill even with god: refill them in every run.
+
+Pointer lines replaced by one in STATUS: «Moved verbatim to the chronicle, entry 2026-11-01 18:18 +03:00: the 14:24 vignettes / hub-audit paragraph (plan 40 phases 1–2).» ·
+«… 21:56 +03:00: the owner decisions of 16:17–16:23 (bug 73 — now DONE), the 17:20–17:51 done block, the 5edabf9c closing paragraph.» · «… 17:54 +03:00: the done
+owner-debt block of 15:49 and the 15:38 dayloop paragraph.» · «… 15:52: the closures of 13:27–13:43, the eea8bf94 handover items 1 (vignettes — done) and 1a (hub
+audit — plan 40.2), the 08:49 acceptances, the 09:5x–10:3x done list, the 13:20 vignette order (done), the 2026-10-29 15:2x work order.» · «Closed handover blocks
+(chat ecee2807, the 08:42 hub remarks, the 09:33 caverns park, the older FIRST list) — moved verbatim to the chronicle, entry 2026-11-01 11:14 +03:00; before them
+(chat a3dcf82b, 04:4x–05:3x) — entry 2026-11-01 05:51.»
+
 ## 2026-11-01 21:58 +03:00 — the done list of chat c5fe291c, moved from STATUS «Where to continue» at its soft closure (verbatim)
 
 > **2026-11-01 21:13 +03:00 — chat c5fe291c, dayloop («работай автономно» 20:38, the game in the BACKGROUND by the owner's word «работай с игрой в фоне»; then «комп твой» 21:09).**

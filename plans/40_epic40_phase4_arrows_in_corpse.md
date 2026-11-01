@@ -50,7 +50,9 @@ it; a Lua-spawned copy without its own hit leaves at once. Where we want to be: 
 
 ### Research (`/bug-research`, no code)
 
-- [ ] R1. `/bug-research` on «BP_DummyProjectile dies on the hit actor's OnDestroyed»: web (UE4SS docs and issues: unbinding / clearing a multicast delegate
+- [x] R1. DONE 2026-11-01 23:0x (desk part) — `researches/conan-arrows-in-corpse/README.md`: UE4SS documents `Remove(target, funcName)` / `Clear()` on multicast
+      and sparse delegates; the build runs UE4SS 3.0.1 Beta (SHA 83330635) whose DLL has the Lua delegate types — `Remove` proven only by R2 live; `SpawnActor`
+      gives no window before `BeginPlay`, the `GameplayStatics` begin / finish pair is callable directly (route b). Former text: `/bug-research` on «BP_DummyProjectile dies on the hit actor's OnDestroyed»: web (UE4SS docs and issues: unbinding / clearing a multicast delegate
       from Lua; `RegisterHook` on a BP event — can a pre-hook skip the original; `BeginDeferredActorSpawnFromClass` / `FinishSpawningActor` from UE4SS Lua),
       local (the UE4SS version in the build: `ConanSandbox/Binaries/Win64/ue4ss/` docs / changelog). Raw notes → `researches/conan-arrows-in-corpse/README.md`.
 - [ ] R2. **Route (a) — unbind.** Probe by the remote on a live Kappa with one arrow: read `creature.OnDestroyed` from Lua (type, any `Clear`/`Remove` method);

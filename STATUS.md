@@ -110,8 +110,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **Moved verbatim to the chronicle, entry 2026-11-01 18:18 +03:00:** the 14:24 vignettes / hub-audit paragraph (plan 40 phases 1–2).
-> **Moved verbatim to the chronicle, entry 2026-11-01 21:56 +03:00:** the owner decisions of 16:17–16:23 (bug 73 — now DONE), the 17:20–17:51 done block, the 5edabf9c closing paragraph.
+> **Older handover blocks of 2026-11-01 — moved verbatim to the chronicle, entries 05:51 · 11:14 · 15:52 · 17:54 · 18:18 · 21:56 · 21:58 · 23:00.** Still open from them:
+> the HUD temperature comfort (white) and cold (blue) frames (folder 47); review folders 44–47 and 50 for the owner's eye; refill hunger / thirst in every run.
 > **Chat c5fe291c (20:33–21:58) — its done list moved verbatim to the chronicle, entry 2026-11-01 21:58 +03:00:** review folders moved to the Conan dir; Xevyr variant A;
 > «Клавиша вызова курсора»; logo tone; minimap (accepted); ×3 arrow hidden at impact (confirmed); bug 73 DONE; «E Взять» prompt (plan 42) — the probe as the camera
 > mod sees it, fade 0.2 s, the backing only under the word at 0.35 (pack `ac31b3a`; 0.35 also set live in the running game; the layout needs a restart).
@@ -128,15 +128,6 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    counted at 21:55 (the list said to the owner in chat).
 > Review folders waiting for the owner: 51 (Xevyr page look — variant A chosen, the look itself not answered), 52 (logo tone), 53 (prompt mockup — taken).
 > Never in the owner's running game: a sweep of native calls over enum values (EXP-0433); a desktop recording while the game is not in front (EXP-0431).
-> **Moved verbatim to the chronicle, entry 2026-11-01 17:54 +03:00:** the done owner-debt block of 15:49 and the 15:38 dayloop paragraph.
-> **Moved verbatim to the chronicle, entry 2026-11-01 15:52:** the closures of 13:27–13:43, the eea8bf94 handover items 1 (vignettes — done) and 1a (hub audit — plan 40.2), the 08:49 acceptances, the 09:5x–10:3x done list, the 13:20 vignette order (done), the 2026-10-29 15:2x work order.
-> 2. The HUD temperature by the game's debuff stage — frame the comfort (white) and the cold (blue) cases (only heat was framed, review folder 47).
-> 3. The inventory button «Настройки модов» (plan 38 phase 1) — write its operational plan first (the Xevyr / «Прочее» entries have no hub yet).
-> 4. Arrows in the corpse — not done; routes in `games/ConanExiles/mods/KrinikConanArchery.md` → Open. Frame measurements (fps perf TC) — also covers the
->    blink section's 3–6 ms minute spikes. Archive and documents LAST (the owner's order).
-> Review folders waiting for the owner's eye: 44 (shout hold), 45 (blink pink → red), 46 («Все», corners), 47 (temperature red), 50 (x3 arrow in flight), 51 (Xevyr hub mockup). The live save is the
-> 2026-10-31 16:56 copy (armour, bow) — hunger / thirst at 0 % kill even with god: refill them in every run.
-> **Closed handover blocks (chat ecee2807, the 08:42 hub remarks, the 09:33 caverns park, the older FIRST list) — moved verbatim to the chronicle, entry 2026-11-01 11:14 +03:00; before them (chat a3dcf82b, 04:4x–05:3x) — entry 2026-11-01 05:51.**
 > **Frame measurements are free now** (the «кино» condition erased 08:46): the unrun cases of `testcases/TC_conan_3.0.1_ru_fps_perf_2026-10-25.md` (PF1, BN1–BN4, BN7–BN9 and 7 more — the bench flights, `_config/bench-flight.sh` / `bench-batch.sh`, A-B-A-B pairs) and plan 36 item 23 (q2–q4) — the agent runs them itself, ≈ 2–3 h; a heavy block for a fresh chat.
 > **2026-11-01 08:58 — RELEASE 1.0.0 TONIGHT (2026-11-01 evening)** — `[OWNER]` 2026-11-01 08:58 «делаем сейчас 2, а 3 делаем в новой версии сборки. систему афиксов я ОЧЕНЬ ОЧЕНЬ ОЧЕНЬ ХОЧУ, но сейчас делать если возьмемся - это нахуй еще на неделю затянет работу над 1.0.0 - а выпустить релиз хочется уже сегодня вечером, а сейчас 9 утра сегодня». Order for the next chat: the release blockers first — the hub remarks (0), the caverns chests by option 2 (interview #029 answered; notes `games/ConanExiles/mods/CavernsOfSet.md` → Decision), plan 35 item 6 (archive on a clean game, volumes ≤ 700 MB), the README-PDF, the 1.0.0 release on the public repo. **ALSO BEFORE THE RELEASE, IN 1.0.0** (`[OWNER]` 2026-11-01 09:01 «ДО ВЫПУСКА, ЭТО ВСЕ ИДЕТ В ВЕРСИЮ 1.0.0» — about this list): the inventory button «Настройки модов» (plan 38 phase 1); the hub row «how long an enemy shout stays on screen»; the video of every food / water blink intensity; the English «All» and «Top Left» in two mods' dropdowns (bug 64 items 47, 49 — the `lit:` route of item 48); the third-person stone pickup — SPAWN the stone and test (R2); the frame measurements (fps perf TC, plan 36 item 23); **09:11 added:** arrows stay stuck in
 the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/ConanExiles/mods/KrinikConanArchery.md` → Open, the cause already known). `[AI]` affixes (idea 24) stay in the NEXT version by the owner's own word of 08:58 «3 делаем в новой версии сборки»; confirmed 09:01 «афиксы в новой версии». Affixes (random item properties) — the next build version, `ideas/24_conan_loot_affixes_next_version.md`.

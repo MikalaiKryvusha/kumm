@@ -126,7 +126,10 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
   bytecode (event 3484 → no destroy) · price of error: (a) no Lua tool for a multicast delegate of another object, clearing all of OnDestroyed breaks the game's own
   listeners; (b) a hit struct with a weak Component set from Lua — unproven, the 13:0x Lua copy died at once; (d) a vanilla asset in our pak, every copy whose
   actor dies would float till its life ends; (c) only proven calls (AddComponentByClass + K2_AttachToComponent at a bone — the ×3 arrow, 17:5x) + one unknown:
-  adding items to the corpse's loot · consulted: the 13:13 run report (runs 1–9), the bytecode of BP_DummyProjectile, the ×3 visual arrow`. `[AI]` (c) first:
+  adding items to the corpse's loot · consulted: the 13:13 run report (runs 1–9), the bytecode of BP_DummyProjectile, the ×3 visual arrow, UE4SS docs (`researches/conan-arrows-in-corpse/README.md`)`.
+  **CORRECTED 23:0x:** (a) first after all — UE4SS documents `Remove(target, funcName)` on multicast and SPARSE delegates (`OnDestroyed` is sparse), and only (a)/(b)
+  keep a native copy the player takes with E (plan 40.4 criterion 3); the build's UE4SS 3.0.1 has the Lua delegate types, `Remove` itself is proven only by the live
+  probe R2. (c) below stays the fallback (it needs the owner's word on «arrows into the corpse's loot», plan 40.4 Outbound). Former pick: `[AI]` (c) first:
   the copies are read at corpse birth (they are still attached then — run 2), the visuals live on the corpse actor (die with it), the items go into the corpse's
   loot so «их можно собрать» is the corpse's own E. Taking them from the loot hides the visuals (the loot-change event on a corpse is the native
   `QuickLootPanel:SlotItemAddedOrRemoved` — the blueprint `HandleLootContainerInventoryChanged` stays silent on a corpse, game map «Loot change event»). Next: a read-only remote recon of the corpse's inventory (component class, its add-item UFunction), then the section.
