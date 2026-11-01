@@ -37,6 +37,12 @@ needs `global.utoc` for script objects) → `UAssetGUI tojson <umap> <json> VER_
 - Content options for the owner: rows copied from `DT_LC_RelicHunter` / `DT_LC_Exiles`, or the mod's OWN items (`Caverns_of_Set_Item_Table` is in the pak) mixed
   with relic rows — the closest to what the author likely meant; an older (pre-Enhanced) version of the mod may still hold his original table.
 - Tell the author (PNutt) on the Workshop page — an outward message, only by the owner's word.
+- **What the author meant — the sources (2026-11-01 08:4x):** the Workshop description (Steam `GetPublishedFileDetails`) says nothing about chests; it names a
+  «higher mid-game to end-game dungeon» and feats / craftables «spread out within the mod area for players to find and learn» (the level's 21
+  `feat_teacher` interactables). The mod's own `Caverns_of_Set_Item_Table` (47 rows): Set's Divine Touch / Restraints / Sedation Arrow / Fang
+  (77991101–104), Grey One armour set (51420–51424), 12 Grey Ancients weapons and a shield (77991106–117), Sacred Eldarium (77991105), Altar of Tranquility,
+  Blessed Forge and Smelting Furnace of Set, Grey One Banner (80718), dragon trophies and heads, Set's Healing Tincture (77991133), Set's Sacred Shemagh
+  (77991140), plus `XX_*` creature attack rows. The chest table itself is lost, so its exact contents are NOT known from any source.
 
 ## Open
 
