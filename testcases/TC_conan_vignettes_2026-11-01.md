@@ -28,6 +28,18 @@
 | P4 | food 100, health ≈ 15 % | find the health setter; frames | the low-health vignette; which widget | pass | `p:AdjustHealth(<int>)` (`ConanCharacter`), read back `IsFullHealth()`; the widget draws `MID_HealthScreenEffectMat`, scalar `Intensity` 0 / 0.3 / 0.7 at 100 / 60 / 15 % health — red blood splatter |
 | P5 | the vignettes seen | read each effect widget's `Image` brush resource, one call each | hunger/thirst → `…_HungerThirst`; health — another | pass | as expected; a permanent fourth widget draws `T_BuffFullScreenEffect` (left untouched). Crash 13:52:26 on another call — a reflection walk of the class; never touch `Buff` or reflect this class |
 
+## Side fix — the menu slowdown polled the whole scene (`[OWNER]` 2026-11-01 14:25 «не перебирают сотни объектов в каждом кадре?» · «или сотри объектов раз в 1...2 секунды?»)
+
+`krinik_pause_in_menu.lua` `poll()` (every 250 ms) called `FindFirstOf("GUIModuleController")` and `FindAllOf("BasePlayerChar_C")` on every poll; now both are
+cached and searched again only when dead, at most once per 2 s.
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| C1 | in the world, hero alive, no menu | wait ≥ 2 min | log «минута: поисков по сцене 0 из 240 опросов» (at most 2 — the first finds) | pass | 14:29:41 — 7 (the minute of the world load), 14:30:43 — 0 of 240 |
+| Z1 | the hub, page KrinikConanCamera | frame of the zoom row | «Скорость зума · больше — быстрее» (the owner 14:30: «Плавность резче, а скорость - быстрее !!») | pass | 14:32 frame `zoom_row.webp`: «Скорость зума · больше — быстрее · 9» |
+| C2 | in the world | open the inventory by a REAL Tab, close it | «полноэкранный интерфейс: ОТКРЫТ» → dilation 0.03; «закрыт» → 1.0 — as before | pass | 14:29: «ОТКРЫТ» · «меню открыто: замедление времени 0.03 → лежит 0.0300»; Tab again → «закрыт» · «1.0 → лежит 1.0000». (Our hub window alone is not a full-screen GUI for the game — no slowdown there, as before) |
+| C3 | the main menu (no hero) | wait 1 min | searches ≤ 30 per minute (once per 2 s), the menu NOT slowed | pass | 14:28:16 «минута: поисков по сцене 28 из 240 опросов» (was 480: two walks per poll); world entry by the remote went through in 24 s |
+
 ## Acceptance (plan criteria 1–8)
 
 | ID | Situation | Action | Expected | Status | Observed |

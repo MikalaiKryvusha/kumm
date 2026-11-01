@@ -105,6 +105,11 @@ text goes into the box — no orphan). Check: the remote `Brd_KrinikInfo_<id>:Ge
 **Hints:** a row gets the grey hint only when it adds something the «i» text does not say; the vignette rows have none (`[OWNER]` 14:08 «Иногда не нужно
 серое пояснение» · «или очень кратко» · «и в описаниии по (i) будет объяяснено»).
 
+**The pause section's poll no longer searches the scene (2026-11-01 14:2x, `[OWNER]` «не перебирают сотни объектов в каждом кадре?» · «или сотри объектов раз
+в 1...2 секунды?»).** Until then `poll()` (every 250 ms) ran `FindFirstOf("GUIModuleController")` and `FindAllOf("BasePlayerChar_C")` — two walks of the whole
+object array 4 times a second, 480 a minute. Now both objects are held and searched again only when dead (death, world load), at most once per 2 s; a minute
+line «минута: поисков по сцене N из 240 опросов» proves it (main menu 28; in the world — see TC C1). The inventory slowdown unchanged (C2: 0.03 → 1.0).
+
 The pause section's Esc map (`krinik_pause_in_menu`, `MOD_WINDOWS`) carries `KrinikModSettings` → `W_KrinikModSettings_C` since 2026-10-31 (case K8b).
 
 **The settings store (plan 38 phase 2, 20:37, `[NOT-TESTED]` in game).** `ue4ss/Scripts/krinik_settings.lua` — a module, not a section (required by the

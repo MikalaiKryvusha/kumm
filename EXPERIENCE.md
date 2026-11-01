@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0426 · 2026-11-01 · ❌→✅ · #conan #hub #russian #text #ui
+class: pair-edited-on-one-side
+**Lesson:** a row's label, its grey hint and its «i» text are ONE statement: at 10:05 the label «Плавность зума» got the hint «больше — резче» (right for
+smoothness), later the label became «Скорость зума» and the hint stayed — the owner 14:30: «Раньше была Плавность. Плавность резче, а скорость - быстрее !!» ·
+«ты что русский язык не понимаешь что ли?». Changing the noun of a label → re-read its hint and «i» in the same edit; the camera README carried the same stale
+pair («инерция зума: больше — резче»).
+**Trigger:** any edit of a hub row label or hint (`PAGES` in `krinik_mod_settings.lua`), any mod README table of settings.
+none-cheap: the hub frame read by eye after the edit is the check
+
 ### EXP-0425 · 2026-11-01 · ❌→✅ · #conan #kit #umg #hub #widget
 class: kit-script-drift
 **Lesson:** a kit script that reuses widgets by name keeps whatever an OLDER version of the script built in the old rows — when a structural piece (the square
