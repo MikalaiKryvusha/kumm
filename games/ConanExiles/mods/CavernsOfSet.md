@@ -48,3 +48,11 @@ needs `global.utoc` for script objects) → `UAssetGUI tojson <umap> <json> VER_
 
 - The fix needs the owner's choice of WHAT the chests hold (the author's own table is lost): a vanilla table of the same level (the T4 chests beside them) or a
   table of our own at the expected path (kit).
+
+## The author's side (checked 2026-11-01 08:5x, Steam API + the Workshop pages)
+
+- No newer version: the Workshop item was last updated 2026-09-16 («Ver 2.6», the port to the UE 5.8 dev kit); its file size 1 659 155 549 equals our copy.
+- The changelog shows the author fought this before: an early-summer update «revised custom mod chest loot so they hopefully spawn items correctly»; another
+  «added mod specific loot chest to grey lotus data table drops, added back in mod loot chests and base game loot chests»; 2.5 (Jul 23) «added back in loot
+  chests in the outpost and inside the caverns area». 2.6 (Sep 16) says nothing about chests — the table most likely fell out in that port.
+- Comments (16 k characters) and discussions: no report of empty chests. The author's Discord (from the description) was not read.
