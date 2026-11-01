@@ -139,7 +139,7 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
   copy's offset from its bone (`KEEP_RELATIVE` + the creature-side `RelativeLocation/Rotation`) — before it, a shaft could hang 1.8 m from the body (the owner's frame
   23:46); one arrow per kept copy into the corpse's `ItemInventoryReplicateToAll` by `AddItemTemplate(id, −1, None, 1, true, 1, 0)` (seen 4 shafts / 4 arrows);
   `corpse_arrows` tracks corpse → item → copies; a sync destroys the shafts beyond `GetNumberOfItemsByTemplate` on the quick-loot event and after E / Q / LMB
-  (the full loot window and the harvest of a beast fire no loot event). The shafts-go part is deployed, not yet seen (A13 partial). Stand trap: the live save has
+  (the full loot window and the harvest of a beast fire no loot event). The shafts-go part SEEN 2026-11-02 00:10 (A13 pass: shafts 1 → 0 after a real E + Q). Stand trap: the live save has
   companions that kill a frozen Kappa first — stand away from them. (c) below stays the fallback (it needs the owner's word on «arrows into the corpse's loot», plan 40.4 Outbound). Former pick: `[AI]` (c) first:
   the copies are read at corpse birth (they are still attached then — run 2), the visuals live on the corpse actor (die with it), the items go into the corpse's
   loot so «их можно собрать» is the corpse's own E. Taking them from the loot hides the visuals (the loot-change event on a corpse is the native
