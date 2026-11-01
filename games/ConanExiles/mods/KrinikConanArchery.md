@@ -129,9 +129,11 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
   adding items to the corpse's loot · consulted: the 13:13 run report (runs 1–9), the bytecode of BP_DummyProjectile, the ×3 visual arrow, UE4SS docs (`researches/conan-arrows-in-corpse/README.md`)`.
   **CORRECTED 23:0x:** (a) first after all — UE4SS documents `Remove(target, funcName)` on multicast and SPARSE delegates (`OnDestroyed` is sparse), and only (a)/(b)
   keep a native copy the player takes with E (plan 40.4 criterion 3); the build's UE4SS 3.0.1 has the Lua delegate types, `Remove` itself is proven only by the live
-  probe R2. **Code in (23:0x, not deployed, `[NOT-TESTED]`):** `on_corpse_born` calls `owner.OnDestroyed:Remove(dummy, "DestroyDummyIfAttachedObjectIsDestroyed")`
-  under `pcall` for each copy while the creature still lives; the log «отвязано от уборки существа N из M»; then the existing re-attach to the corpse bone; cases A6–A8
-  of `TC_conan_arrows_stay_in_corpse_2026-11-01.md`. (c) below stays the fallback (it needs the owner's word on «arrows into the corpse's loot», plan 40.4 Outbound). Former pick: `[AI]` (c) first:
+  probe R2. **WORKS — seen 2026-11-01 23:18 and 23:25 (pack `15a7c82`):** `on_corpse_born` calls `owner.OnDestroyed:Remove(dummy, "DestroyDummyIfAttachedObjectIsDestroyed")`
+  for each copy while the creature still lives (the wrapper is `MulticastSparseDelegateProperty` with `Add` / `Remove` / `Clear` in UE4SS 3.0.1), then the re-attach
+  to the corpse bone; the arrows stay in the ragdoll for the corpse's life (600 s). The KILLING arrow's copy is born after the corpse: a copy born within
+  `CORPSE_LATE_S` 2 s of the last corpse re-runs the pass (4 of 4 kept, 23:25). Cases A6–A8, A10 pass. **Not native:** E on a shaft takes nothing — a copy in a
+  creature is born with `IsLootable` false, and setting it later does not help (A9); E on the corpse opens its loot → interview #030 (arrows into the corpse's loot). (c) below stays the fallback (it needs the owner's word on «arrows into the corpse's loot», plan 40.4 Outbound). Former pick: `[AI]` (c) first:
   the copies are read at corpse birth (they are still attached then — run 2), the visuals live on the corpse actor (die with it), the items go into the corpse's
   loot so «их можно собрать» is the corpse's own E. Taking them from the loot hides the visuals (the loot-change event on a corpse is the native
   `QuickLootPanel:SlotItemAddedOrRemoved` — the blueprint `HandleLootContainerInventoryChanged` stays silent on a corpse, game map «Loot change event»). Next: a read-only remote recon of the corpse's inventory (component class, its add-item UFunction), then the section.

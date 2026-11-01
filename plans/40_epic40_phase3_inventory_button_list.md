@@ -117,7 +117,9 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
       `ru_table.lua`) → one name in both mods and in the hub rows, the owner's word 20:38: `[OWNER]` «Клавиша вызова курсора» (done in both mods 20:45).
       **Operational steps of I6** (`[AI]`, written 2026-11-01 21:2x from the hub code: the kit builds every row by id — `kit-krinik-modsettings.py` `PAGES`
       (`slider` / `check` only), the Lua `krinik_mod_settings.lua` `PAGES` holds labels, ranges and reads / writes OUR store `Saved/KrinikSettings.lua`):
-      - [ ] I6.1 Hub mode: `PAGES` entries get `hub` («krinik» · «xevyr» · «other»); `krinik_mods_button.lua` sets the hub before `ActivateModule(KrinikModSettings)`;
+      - [ ] I6.1 PARTLY 2026-11-01 23:0x (code, not run): Lua — `HUBS`, `in_hub(p)`, `_G.__krinik_hub` set by the list (`krinik_mods_button.lua` TOP `hub`), the title by hub,
+            cases H1–H3; the Damage Meter page `dm` (8 slider / check rows, `hub = "xevyr"`, hidden until LIVE.dm) in the Lua PAGES and the kit PAGES (kit not rebuilt).
+            Left: the kit rebuild (twice), the other Xevyr pages, the list's Xevyr entry → the hub when every page exists. Former text: Hub mode: `PAGES` entries get `hub` («krinik» · «xevyr» · «other»); `krinik_mods_button.lua` sets the hub before `ActivateModule(KrinikModSettings)`;
             the left list hides other hubs' pages (their `Brd_KrinikMod_<key>` collapsed), the title «Моды Xevyr'а · Настройки». Kit: page keys `dm`, `llh`,
             `prp`, `sm`, `amr` added to the kit `PAGES` (rows by id), run twice, rebuild.
       - [ ] I6.2 Row kinds in the kit beyond slider / check: `drop` (our own list box — the Damage Meter corner, the Simple Minimap time display), `color` (a

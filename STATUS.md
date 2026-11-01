@@ -92,6 +92,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Decisions the agent must not make alone (brand/UX/architecture), or actions only the human can do
 > (test on real hardware, external accounts). Filed in `interviews/` and `homeworks/`.
 
+- ❓ **Interview #030 (2026-11-01 23:2x) — how the arrows left in a corpse are taken:** A (recommended) into the corpse's loot · B only visible · C vanish as in vanilla
+      (`interviews/interview_030_conan_arrows_in_corpse_pickup.md`; the arrows already stay in the corpse — pack `15a7c82`).
 - 🎯 **Oblivion-style archery — raised by the owner 2026-10-28** (a discussion, not work: `[OWNER]` «пока обсуждаем»): arrow speed — Conan's,
       the drop — Oblivion's. Vanilla `ArrowGravityScale` 0.55 and `ArrowInitialSpeedMultiplier` 5000 (Remastered) found; waits for his choice of what
       the draw does (shot power, as in Remastered, or a flatter flight, as in Conan). Recon — `researches/conan-archery/README.md`.
@@ -122,7 +124,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (draft `testcases/reports/2026-11-01_conan-pickup-prompt-evening.md`, uncommitted). **Dayloop from 22:55 (`[OWNER]` «работай автономно»):** hub mode Lua part (I6.1 — `_G.__krinik_hub`,
 > cases H1–H3, not deployed yet); mockups 8 (own colour picker) and 9 (own key capture) in `settings_hub/mockups/mockups.html`, not shot yet; the Damage Meter
 > adapter design in plan 40.3 I6.3; corpse arrows R1 done (`researches/conan-arrows-in-corpse/` — UE4SS delegate `Remove`; next the live probe R2,
-> `scratchpad/r2_probe.lua`); the test-after-code hook fixed (heredoc bodies, KUMM `47a0be2`). NEXT after B2: deploy KrinikConanUI (gap 6 + hub mode), one launch for P12, H1–H3, R2.
+> `scratchpad/r2_probe.lua`); the test-after-code hook fixed (heredoc bodies, KUMM `47a0be2`). **23:1x–23:26 done:** P9 A-B pass (on 15.14 ms vs off 15.17 ms, within noise), P12 gap 6 pass, hub mode H1–H3 pass,
+> **arrows stay in the corpse** (route a, UE4SS delegate `Remove`; the killing arrow too; pack `15a7c82`, TC A6–A8, A10); E cannot take one shaft (A9) → ❓ interview #030
+> «стрелы — в добычу трупа?» waits for the owner. Next: the kit rebuild for the Damage Meter page (I6.1 kit), shoot mockups 8–9 for the owner (I6.2), the corpse arrows on a humanoid (40.4 criterion 2).
 > **CHAT c5fe291c CLOSED 2026-11-01 21:57 +03:00 (soft; `[OWNER]` 21:55 «и в новом чате продолжим делать сборку»). FIRST in the next chat, in order:**
 > 1. Restart the game when the owner is out of it (the backing-only-under-the-word layout of `ac31b3a` loads at start), then his verdict on «E Взять» (stones at his feet with the camera above; fade; backing 0.35); then the prompt's A-B flight (rule 7) and the
 >    enemy health bar sitting where the prompt sits (`plans/42_conan_pickup_prompt_foliage.md` → Next steps; report `testcases/reports/2026-11-01_conan-pickup-prompt.md`).

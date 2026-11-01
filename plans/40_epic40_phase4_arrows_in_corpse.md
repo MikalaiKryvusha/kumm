@@ -1,8 +1,9 @@
 # Plan 40.4 — arrows stuck in an enemy stay in its ragdoll corpse and can be picked up
 
 > **Created:** 2026-11-01 · **Parent:** `plans/40_EPIC_conan_1.0.0_unfinished_six.md` phase 4 (criterion 4); plan 39 B3; notes `games/ConanExiles/mods/KrinikConanArchery.md` → Open
-> **Status:** written 2026-11-01 by a helper agent; not started. Three blind attempts are spent (report `testcases/reports/2026-11-01_conan-arrows-corpse-recon.md`) —
-> this phase opens with `/bug-research`, no code before its verdict
+> **Status:** 🟡 criteria 1 (Kappa — arrows stay) and the killing arrow PASS 2026-11-01 23:18 / 23:25 by route (a), the UE4SS delegate `Remove` (R1 desk 23:0x, R2 live
+> 23:17; pack `15a7c82`; TC A6–A8, A10); criterion 3 (E takes one shaft) FAILS natively (A9) — the outbound question is interview #030; criterion 2 (humanoid) and 4
+> (the rest go with the corpse — by the copies' life = the corpse's) not run. Earlier: three blind attempts (report `testcases/reports/2026-11-01_conan-arrows-corpse-recon.md`)
 > **Outbound:** if only route (c) survives and E cannot take a single arrow off the body — one question to the owner (`interviews/`): «стрелы — в добычу трупа» vs. drop
 
 Basis, verbatim: `[OWNER]` 2026-11-01 09:11 «KrinikConanArchery · в этот мод идет еще одна фича · После смерти - регдол труп врага не должен уничтожать воткнутые в
@@ -55,7 +56,7 @@ it; a Lua-spawned copy without its own hit leaves at once. Where we want to be: 
       gives no window before `BeginPlay`, the `GameplayStatics` begin / finish pair is callable directly (route b). Former text: `/bug-research` on «BP_DummyProjectile dies on the hit actor's OnDestroyed»: web (UE4SS docs and issues: unbinding / clearing a multicast delegate
       from Lua; `RegisterHook` on a BP event — can a pre-hook skip the original; `BeginDeferredActorSpawnFromClass` / `FinishSpawningActor` from UE4SS Lua),
       local (the UE4SS version in the build: `ConanSandbox/Binaries/Win64/ue4ss/` docs / changelog). Raw notes → `researches/conan-arrows-in-corpse/README.md`.
-- [ ] R2. **Route (a) — unbind.** Probe by the remote on a live Kappa with one arrow: read `creature.OnDestroyed` from Lua (type, any `Clear`/`Remove` method);
+- [x] R2. DONE 2026-11-01 23:17–23:25 — the wrapper `MulticastSparseDelegateProperty` has `Remove`; with it the copies survive the creature (TC A6–A8, A10). Former text: **Route (a) — unbind.** Probe by the remote on a live Kappa with one arrow: read `creature.OnDestroyed` from Lua (type, any `Clear`/`Remove` method);
       if a method exists — clear only the copy's binding (or all — then check what else the game binds there: `kismet-trace.py` on the creature's BP for
       `OnDestroyed` binders), kill, count copies at +10 s.
 - [ ] R3. **Route (a′) — the asset.** `BP_DummyProjectile` is a GAME asset: our `KrinikConanArchery` kit pak could override it (as `KrinikConanUI` overrides
