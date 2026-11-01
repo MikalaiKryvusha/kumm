@@ -129,6 +129,9 @@ the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/Con
 > **ORDER (`[OWNER]` 2026-11-01 11:11–11:12 «да не нужно архив собирать!! Сборка же еще не готова!!» · «релизный архив соберем и все документы обновим,
 > когда сборку сделаем и протестируем на всех разрешениях 16 к 9»):** the release archive and the document refresh go LAST — after the build is finished and
 > tested at 720p / 1080p / 2K / 4K. The 11:10 archive run was stopped and its 16 GB removed; `make_volumes.sh` waits for that moment.
+> DONE 11:4x — the hub row «Сколько держится фраза врага» (`ui_shout_hold`, 1–10 s, default 1 = the game's timing; a minimum, a longer voice keeps its line):
+> live H1–H7 pass (report `testcases/reports/2026-11-01_conan-shout-hold-slider.md`), review folder 44 asks the owner for the default. Seen on the way: the save's
+> hero is naked («Лёгкая / 0») — the armour item below.
 > DONE 11:2x — the desktop shortcut «Krinik Conan» (`[OWNER]` 11:11 «по установке - сборка на рабочем столе создает ярлык Krinik Conan»): `manifest.shortcut` in the
 > pack, the `{SHORTCUT}` removal line in `_config/uninstall/uninstall.cmd`; the stand found and the fix closed `install.ps1` never creating it (`$null` exit code);
 > fixture 37/37 (report `testcases/reports/2026-11-01_bundle-desktop-shortcut.md`, partial). LEFT for the release install from the volumes: see the shortcut on
