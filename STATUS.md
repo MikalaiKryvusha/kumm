@@ -120,6 +120,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `SpawnDummyProjectile` restoring the size did not help — bug 73 A4); control case first (rule 24). (2) `[OWNER]` 16:18 «срок жизни стрел везде, и в земле, и в
 > трупах, и в стенах нужжжжжжжжжен 5 минут - с возможностью настроить в модах стрельбы из лука - в минутах, от 1, до 30» — a stuck arrow lives 5 min
 > everywhere (the game gives 15 s, `ProjectileDummyLifetime`); a hub row on the KrinikConanArchery page, minutes 1–30, default 5; corpses — with phase 4.
+> The owner's scheme 16:23: `[OWNER]` «значит лететь в воздухе должна физическая оригинальная стрела x1 размера, а визуальная модель лететь должна x3.
+> Физическая стрела и визуальная модель сввввввввввввввввязаны в наккооооооооооооооооонечникееееееее» — the flying `ProjectileMesh` stays ×1 (the game's
+> hit and copy placement); a SEPARATE visual mesh ×3 rides on it, the two joined at the TIP (the big arrow extends back from the shared point); the native
+> mesh hidden in render only.
 > **OWNER DEBT, JOB NUMBER ONE for the next chat (BUG_FIXING_FRAMEWORK «owner's debt first»):** `[OWNER]` 2026-11-01 15:49 «соответственно, она там одна должна
 > остаться» · «настройки рыбалки и настройки интерфейса оттуда уходят» — the inventory bar keeps ONLY «Настройки модов»; Hosav's «Настройки интерфейса» and
 > «Настройка рыбалки» leave the bar and become entries of its drop-down list (with «Моды Krinik'а», «Моды Xevyr'а», «Прочее»; «Прочее» last, fishing above it).

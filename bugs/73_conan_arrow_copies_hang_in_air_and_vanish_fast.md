@@ -49,6 +49,9 @@ Log: «#N из лука … щуп — LandscapeHeightfieldCollisionComponent_17
 - `[OWNER]` 16:18 «срок жизни стрел везде, и в земле, и в трупах, и в стенах нужжжжжжжжжен 5 минут - с возможностью настроить в модах стрельбы из лука - в
   минутах, от 1, до 30» — the copy's life 5 min by default, a hub row 1–30 min on the archery page.
 
+- `[OWNER]` 16:23 «значит лететь в воздухе должна физическая оригинальная стрела x1 размера, а визуальная модель лететь должна x3. Физическая стрела и
+  визуальная модель сввввввввввввввввязаны в наккооооооооооооооооонечникееееееее» — the route: physical ×1 + a separate visual ×3, joined at the tip.
+
 ## Decisions made without the owner
 
 - `[AI]` the arrow mesh back to native size (1.0) until his word — the ×3 was his «до x3»; the choice put to him in chat 15:2x.
