@@ -3,6 +3,7 @@
 > **Created:** 2026-11-01 · **Parent:** `plans/40_EPIC_conan_1.0.0_unfinished_six.md` phase 7 (criterion 7); plan 39 B6, A2, A3; plan 35 item 6; STATUS «Earlier FIRST list» item 2
 > **Status:** written 2026-11-01 by a helper agent; not started; LAST by the owner's order — after phases 1–6 close
 > **Outbound:** the public 1.0.0 release (a push to the public repo) only by the owner's word after this phase's report — an outward action
+> **2026-11-01 13:41 — the clean game copy for the install test:** `[OWNER]` «и для тестов устанвоки на чистую версию. я скачал тебе чистую версию, в Д инсталс» — the owner's clean copy (an installer) in `D:/Instals/`; install it to a separate folder, never over the working game; the machine is the agent's, the game may run in front (house rule 16a).
 
 Basis, verbatim: `[OWNER]` 2026-11-01 11:11–11:12 «да не нужно архив собирать!! Сборка же еще не готова!!» · «релизный архив соберем и все документы обновим,
 когда сборку сделаем и протестируем на всех разрешениях 16 к 9»; 2026-10-26 «пока ее разбиваем локально на архивы не более 700мб веса каждый, зип, чтобы побить
