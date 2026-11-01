@@ -43,6 +43,10 @@ Pak `DamageNumber.pak`, original in `D:\Games\Conan Exiles Mods\_patch-originals
    doubles, 2 places) in `DamageNumber__DN_UI_SettingsWindow.tsv`. Seen: the remote set the slider to 1 and called `ThemeColorChanged` with a post-hook on
    `DN_UI_DmgWidget_C:ApplyTheme` — opacity 0.95 (0.85 before). The call rewrites `DamageMeter.sav` (18:09) but keeps the saved theme colour and values (read
    back and compared with the recon dump).
+7. Our translation, 2026-11-01 20:4x (report `testcases/reports/2026-11-01_conan-cursor-key-name.md`): «Mouse Hotkey» = «Клавиша вызова курсора» (`[OWNER]` 20:38;
+   it is a KEYBOARD key that calls the cursor, «Клавиша мыши» was wrong); «Bar refresh rate (visual only)» = «Частота обновления полос» with «только их вид» in the
+   tooltip — the label is right-aligned to its slider, and the longer one ran left over the F1 key box (the box stands UNDER its label by the author's layout:
+   `key_MouseKey` in `SizeBox_11` in the VerticalBox `HotkeySetting`). `dm-fish-ru.tsv` rows 58, 59, 73; `locres-fixes-2026-11-01b/c.tsv`.
 6. Rebuild after a mod update: the manifest recipe `krinikBuild` (four assets, the last pair `DN_DT_UIModule`) — `python -I -X utf8
    _config/devkit/patch-mod-asset.py build DamageNumber DN_SG_SaveSettings <work> <tables and assets as in krinikBuild>` → `<work>/out/DamageNumber.pak` into
    `_krinik-modified/3719585133`.

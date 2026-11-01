@@ -16,7 +16,9 @@ Renamed from «Krinik Russian Translation» 2026-10-30 (W33). ≈54 451 entries 
   EXP-0090); a loose file over `Exiles_UI` loses to the pak; `+LocalizationPaths` in Engine.ini did nothing (README «три двери»).
 - Our Russian over VANILLA strings (target `Exiles_UI`): `_config/localization/vanilla-overrides-ru.tsv`, applied by `_config/devkit/vanilla-override.py
   <Game.locres> <vanilla Exiles_UI.locres> <table>` after every full rebuild (the rebuild drops them); the vanilla Russian `Exiles_UI.locres` copy used
-  2026-10-30 lies in `D:\Temp\claude\vanilla-ru\`. Letter fixes without a rebuild — `devkit/locres-set-tr.py` + `locres-fixes-*.tsv`.
+  2026-10-30 lies in `D:\Temp\claude\vanilla-ru\`. Letter fixes without a rebuild — `devkit/locres-set-tr.py` + `locres-fixes-*.tsv` (one file per batch:
+  an applied row stops the next run with code 2; since 2026-11-01 the two letters `\n` in a row are a line break, so multi-line tooltips can be replaced;
+  54 457 entries after `-2026-11-01c`).
 - Deploy: `Deploy-ModPack.ps1 -PackDir ConanExiles -Deploy -Only KrinikConanRussianTranslation` (one name per `-Only` when called through `-File`).
 
 ## Our edits of vanilla strings (vanilla-overrides-ru.tsv)

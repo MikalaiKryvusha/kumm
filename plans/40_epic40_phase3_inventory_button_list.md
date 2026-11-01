@@ -108,7 +108,13 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
       cannot be applied without the author's window is listed as «нет механики» on the mockup (rule 23) and left out. Kit: the new pages and rows by
       `kit-krinik-modsettings.py` (ids only), run twice. The sub-lists of step 2 go when every mod of the hub has its page. Mockup to the owner first (taste).
       MOCKUP SHOWN 2026-11-01 18:2x: window 7 of `ConanExiles/_config/settings_hub/mockups/mockups.html` — the Damage Meter page with every row of the recon,
-      rule-23 badges («будет сделано» · «предложение» for colours and the key) — review folder 51 «hub xevyr maket»; waits for the owner's eye before code.
+      rule-23 badges («будет сделано» · «предложение» for colours and the key) — review folder 51 «hub xevyr maket» (`D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\`).
+      **OWNER'S DECISION 2026-11-01 20:37 +03:00 — variant A:** `[OWNER]` «А (советую). Сделать в нашем окне свой выбор цвета и свой захват клавиши» — our window gets its OWN colour
+      control (used on three Xevyr pages: Damage Meter theme / player bar / 9 followers, Simple Minimap, Lore & Loot Highlight) and its OWN key-capture control
+      (Damage Meter and Simple Minimap cursor keys); a key the game swallows is refused (both authors' tooltips warn it locks the player out). The «предложение»
+      badges of those rows become «будет сделано». The look of the window as a whole — not yet answered. Owner's remark the same minute: the row «Клавиша мыши» is
+      a KEYBOARD key that shows the mouse cursor — our mistranslation of «Mouse Hotkey» (`dm-fish-ru.tsv` 73; Simple Minimap «Клавиша курсора мыши»,
+      `ru_table.lua`) → one name in both mods and in the hub rows, the owner's word 20:38: `[OWNER]` «Клавиша вызова курсора».
 - [x] I4. The pause section's Esc map `MOD_WINDOWS` (`krinik_pause_in_menu.lua`) gains the new module rows; «one window at a time» — opening an entry calls
       `TryCloseWindow()` on any open mod window first.
 - [x] I5. Hygiene: `loadfile`, `check-lua-game-thread.py` 0, `check-lua-templates.py` 0.

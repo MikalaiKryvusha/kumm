@@ -96,4 +96,15 @@ change), the look in flight (×3, the tips together), errors and crashes, the tr
 |---|---|---|---|---|---|
 | V1 | `visual_scale` 3 | a shot at the Kappa's head | the copy 62 cm from the hit (as with ×1); no «крупная стрела: ошибка» in the log | pass | 17:50:06 copy #2 «rig_bone_kappa-head, от точки удара 62 см»; 17:48:52 a ground shot 62 cm; no error after the fix (the first build failed at `GetBoundingBox().Max` — nil from Lua; 17:46 the copy stood at 62 cm even then) |
 | V2 | as V1 | a 60 fps video of the shot (ddagrab, desktop HDR off for the recording) | the flying arrow drawn ≈ 3× longer, its tip leading; the trail as before | pass | 17:50 frames 116–117: a long arrow, the big head at the aim point, the shaft back through the Kappa's head; frame 118 — the flight over (8 m ≈ 3 frames). The first video (17:48) was spoiled: the companion «Нурус Тихорез» killed the Kappa — frozen for the repeat (rule 11.6). The look → review folder 50 |
+| V4 | `visual_scale` 3; the companion moved 8 m BEHIND the hero and frozen (it stood in the V2 frame); a frozen Kappa 30 m ahead; the aiming camera behind the hero | a 60 fps video of one shot, the flight whole in the clip, cut around the flight and slowed ×4 | the ×3 arrow seen flying away from the hero across ≥ 10 frames, the tip leading, from the bow to the Kappa; nothing in front of the camera | — | the owner 2026-11-01 20:37 +03:00 on the V2 video: «здесь не видно вылета» — 35 frames, the companion's face in front, the shot not in the clip |
 | V3 | as V1 | the section's log at the first visual arrow | mesh, scale, Z offset = maxZ × (1 − 3) | partial | 17:48:51 «крупная стрела: сетка SM_iron_arrow ×3.0, конец по Z 76.3 см, сдвиг -152.7 см»; ProjectileMesh hidden — seen in the frames (no second, small arrow), not read by the remote |
+
+### The cursor key's name (the owner 2026-11-01 20:37-20:38: «это же не клавиша мыши, а клавиша клавиатуры» · «Клавиша вызова курсора»)
+
+Stand: the game in the BACKGROUND (the owner 20:38 «работай с игрой в фоне»), the world entered by the remote, frames by `capture-window.ps1` / `capture-burst.ps1`.
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| K1 | `Game.locres` after `locres-fixes-2026-11-01b.tsv` deployed | open The Damage Meter settings window by the remote | the key row reads «Клавиша вызова курсора», fits its line | pass | 20:41 frame: the label fits above the F1 box; the F1 box overlapped by «Частота обновления полос (только вид)» → K3 |
+| K2 | as K1 | open the Simple Minimap settings window by the remote | the key row reads «Клавиша вызова курсора», fits its line | pass | 20:42 frame: «Клавиша вызова курсора» with F1 beside it |
+| K3 | `dm-fish-ru.tsv` rows 58–59 + `locres-fixes-2026-11-01c.tsv` deployed, the game relaunched | open The Damage Meter settings window | «Частота обновления полос» stays in its column, the F1 box clear | pass | 20:45 frame at 4K: clear (report `testcases/reports/2026-11-01_conan-cursor-key-name.md`) |

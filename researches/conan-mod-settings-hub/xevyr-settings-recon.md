@@ -51,7 +51,7 @@ controller), temps `tempSegmentTimer`, `tempRefreshTimer`, `oldUIScale`, `oldOpa
 | Цвета полос отслеживаемых | 9 colour buttons in `FollowerColorGrid` | `Follower1_Selector` … `Follower9_Selector` | `FollowerColors` (array of 9 LinearColor, gathered by `GetColorPickers`) | `dmgWidget.FollowerColors` + `ReinitializeColors` | 9 colours, alpha 0.70 (list in scratch `dn_*`) [seen CDO] |
 | Частота обновления полос (только вид) | slider, snap 19; `refreshTimer = 0.05 + v·0.95` (0.05–1.0 s, step 0.05) + read-only text «0,2 с» | `refreshSlider` + `refreshText` (disabled) | `refreshTimer` (double) | `dmgWidget.refreshTimer` | 0.2 [seen CDO] |
 | Пауза до новой стычки | slider, snap 10; `segmentTimer = 5 + v·10` (5–15 s, step 1) + read-only text «7 с» | `segmentSlider` + `segmentText` (disabled) | `segmentTimer` (double) | `dmgComponent.segmentTimer` | 7.0 [seen CDO] |
-| Клавиша мыши | key selector (`InputKeySelector`) | `key_MouseKey` | `MouseKey` (InputChord, `.Key`) | mod controller `MouseKey` (`GetModController`), `dmgWidget.SetHotkeyLabel` | F1 [seen CDO] |
+| Клавиша мыши (since 2026-11-01 20:4x «Клавиша вызова курсора», the owner's name) | key selector (`InputKeySelector`) | `key_MouseKey` | `MouseKey` (InputChord, `.Key`) | mod controller `MouseKey` (`GetModController`), `dmgWidget.SetHotkeyLabel` | F1 [seen CDO] |
 
 Buttons: `Btn_Defaults` (the ↻ beside the logo, tooltip «Вернуть настройки по умолчанию») → `ResetSettings`; «Донат» `Button_0`, «Discord»
 `Button_1` (open a site); «Сохранить» `SaveButton` → `SaveSettings` → `Close`; «Отмена» `CancelButton` → `CancelSettings` → `Close` [seen].
@@ -101,7 +101,7 @@ colours) [seen]. Title «Настройки миникарты». Console comman
 | Показывать членов клана | checkbox | `showGuild` | `guildTracking` | `MinimapWidget.guildTracking`; disabled + unchecked when the server's global tracking is off | true [seen CDO] |
 | Везде (admin only) | checkbox, tooltip «Включает и выключает отслеживание членов клана по всему серверу» | `guildCheckGlobal` + label `guildGlobalTxt` | `SM_BP_ModController_C.globalGuildTracking` via `SetGlobalGuildTracking` — **server-wide**, only if `PlayerRef.IsAdmin` | on «Сохранить» | true [seen MC]; Hidden live (not admin) [seen] |
 | Сместить панель путешествия вниз | checkbox | `chkJourney` | `bMoveJourney` | `MinimapWidget.mJourney` + `UpdateJourneyPosition` | true [seen CDO] |
-| Клавиша курсора мыши | key selector | `keySel_MouseHotkey` | `mouseHotkey` (InputChord) | mod controller `mouseHotkey` | F1 [seen CDO] |
+| Клавиша курсора мыши (since 2026-11-01 20:4x «Клавиша вызова курсора») | key selector | `keySel_MouseHotkey` | `mouseHotkey` (InputChord) | mod controller `mouseHotkey` | F1 [seen CDO] |
 
 Buttons: «Донат» `Button_0`, «Discord» `Button_1`, «?» `HelpButton` (opens module `SM_Tutorial`, cancels the edits), «Сохранить» `SaveButton` →
 `SaveSettings` → `EnableSettings` → `Close`, «Отмена» `CancelButton` → `CancelSettings` (restores colour, scale, marker range, position) →
