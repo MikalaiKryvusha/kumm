@@ -110,25 +110,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **HANDOVER of the chat ecee2807 (2026-11-01 04:40–05:5x, resume + «работай над сборкой автономно» → dayloop):** done —
-> (1) corrections by the owner's word: F1 = the cursor, a click expands the Damage Meter (new notes `games/ConanExiles/mods/TheDamageMeter.md`); AIM15
-> dropped (the arrow is born at the bow since Archery 0.3.0); EXP-0419. (2) THE PUBLIC REPO IS LIVE: https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack
-> (all 64 mod authors from Steam / Nexus — pack `_config/public_release/fetch-authors.mjs` + `fill-authors.mjs`; idea 23 → «Public repo — CREATED»).
-> (3) THE HUB WINDOW BY MOCKUP 5 — all cases pass (`testcases/reports/2026-11-01_conan-hub-mockup-fidelity.md`), review folder `41_hub_kak_maket` SEEN by the owner
-> 2026-11-01 08:42, three remarks below (the game's PT Serif; EXP-0420: the kit cannot import a font). (4) C1 CONFIRMED: the 16 Caverns of Set chests spawn no loot
-> (`games/ConanExiles/mods/CavernsOfSet.md`) — the fix waits for interview #029 (shown in chat). (5) `kismet.py` patches literals in the EVENT GRAPH
-> (entry points shifted, self-checked; regression 3/3 byte-equal) → bug 64 item 48 FIXED: the minimap «Показ времени» in Russian (report
-> `2026-11-01_conan-minimap-time-dropdown-ru.md`). (6) knowledge-hook reads a quoted `-Only "<Mod Name>"`. (7) R2: 4 probes could not find a world stone
-> by the remote (foliage meshes unreadable — game map «Stones by the remote»).
-> **2026-11-01 08:42 — the owner's two remarks on the hub (folder 41), FOR THE NEW CHAT:** (a) `[OWNER]` «нужно открывать поверх UI первоснажа, как и
-> рыбался открывается - ты сделал какое-то затенение - не нужно» — the window opens OVER the character UI (the inventory), as the fishing window does, with
-> NO dimming behind it (the frames of 05:18–05:20 were taken with the window opened by the remote in the world — find where the dark backdrop comes from:
-> the module row of `DT_KrinikUIModule` vs the fishing row, `Category` / `FullscreenGUIAction`, or the game's modal backdrop); (b) `[OWNER]` «по высоте
-> увеличить размер окна, в новом чате будем делать» — a taller window (today the height = the tallest live page, set by `krinik_mod_settings.lua` fill);
-> (c) 08:43 `[OWNER]` «и кнопка (i) все еще некрасивая» — today a PT Serif «i» thickened by a 1-unit outline inside a thin grey circle (`Brd_KrinikInfo_<id>`,
-> `Txt_KrinikInfo_<id>`, kit `rimmed(..., radius="half")`); the mockup's is an ITALIC bold Georgia «i» 8.5 px in a 12 px circle. Taste class: show
-> 3–4 «i» variants side by side on one frame of the window (e.g. a drawn icon texture; the game's own info glyph if it has one; Noto Sans Italic «i»;
-> no outline) and let the owner pick — do not choose alone.
+> **Closed handover blocks (chat ecee2807, the 08:42 hub remarks, the 09:33 caverns park, the older FIRST list) — moved verbatim to the chronicle, entry 2026-11-01 11:14 +03:00; before them (chat a3dcf82b, 04:4x–05:3x) — entry 2026-11-01 05:51.**
 > **2026-11-01 08:49 — accepted by the owner:** the fishing difficulty captions «Легко | Спокойно | Строже | Ваниль» (`[OWNER]` «сложность рыбалки - ОК») and the enemy shouts' fade (`[OWNER]` «Крики врагов - ОК»); review folder 9 removed (25 — remove after its clip is closed). NEW for the new chat: `[OWNER]` «я бы в мод UI криника вынес настройку времени задержки отображения фраз на экране» — a row on the KrinikConanUI page of the hub: how long a shout (subtitle) stays on screen (section `krinik_shout_fade`; find where the game sets the line's lifetime first).
 > **2026-11-01 08:49 — NEW for the new chat:** `[OWNER]` «нужно видео, показывающее все интенсивности» — the food / water blink (`krinik_hud_blink`): one 60 fps clip that walks every intensity step (L = 0.25 … 1.0, ten steps) on the live HUD, food and water set by the remote, each step labelled.
 > **Frame measurements are free now** (the «кино» condition erased 08:46): the unrun cases of `testcases/TC_conan_3.0.1_ru_fps_perf_2026-10-25.md` (PF1, BN1–BN4, BN7–BN9 and 7 more — the bench flights, `_config/bench-flight.sh` / `bench-batch.sh`, A-B-A-B pairs) and plan 36 item 23 (q2–q4) — the agent runs them itself, ≈ 2–3 h; a heavy block for a fresh chat.
@@ -154,22 +136,12 @@ the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/Con
 > powershell line removing `<Desktop>\{SHORTCUT}.lnk`; test with `tools/fixture-pack.mjs` (export → install.ps1 → shortcut exists → -Restore → gone).
 > Seen and not yet checked: the hero lost his armour after a launch closed on a stuck loading screen (10:51 «Лёгкая / 0»). NEXT: the build items below; the archive and the release LAST; then the
 > inventory button, the shout row, the blink video, «All»/«Top Left», the stone, the measurements, the arrows in corpses.
-> (was) PARKED 09:33 — the caverns chests (option 2): the table the 16 chests import is one object (both `LootTableFromSpawnTable.DataTable` and `LootTable`
-> of `BP_PL_CoS_Loot_Chest` → the missing package `/Game/Mods/Mines_of_Set/Tables/Caverns_of_Set_Loot_Chest_Table`); row struct `/Script/ConanSandbox.LootTableRow`
-> (fields UseTable, Table, ItemID, Min, Max, PercentChance, Min/MaxDurability, RequiredEventTag, RequiredTags (tag query), NumRolls, Int/FloatStatModifier);
-> route `[AI]`: a copy of the legacy `DT_LC_RelicHunter` renamed to that path with our rows, added as a 4th asset to `build-level-mod.py` (KrinikConanGameplay
-> pak, no kit). Resume: write the recipe rows, extend the builder, live-read a chest. Switched for the owner's word 09:33 (the «i» column).
 > **2026-11-01 09:0x–09:3x (chat c30666a8) — DONE:** the three hub remarks — no dimming of ours (the night of folder 41), height = mockup 5 (845), «i» = variant
 > 5 by the owner's pick (report `testcases/reports/2026-11-01_conan-hub-height-info-dimming.md`, review folder 42, pack `2c2ddd6`); the guide: the features block
 > without repeats (two helpers, by the portrait), chapter 2 «Отзывы и обратная связь», chapters «Правообладатели…» and «Лицензия», the false «первая
 > публикация на PlayGround» corrected in the guide and both README halves (an early beta is already there; the public GitHub README stays stale until the
 > 1.0.0 push); the launcher's «Руководство» button (pack `ec1a591`, `ff438a5`). NEXT in order: the caverns chests (option 2) → the archive → the release;
 > then the inventory button «Настройки модов», the shout-time row, the blink video, «All»/«Top Left», the stone, the measurements, the arrows in corpses.
-> FIRST next (older list): (0) DONE above; (1) the owner's answer to #029 (then the C1 fix: the chest's loot table in the mod pak);
-> (2) bug 64 items 47 «All» (ModControlPanel `MDC_MCP`) and 49 «Top Left» (Damage Meter settings) — the same `lit:` route as item 48 (trace the asset's
-> event graph first: a translated option must not break a string comparison or a saved string); (3) plan 38 phase 1 — the inventory button «Настройки
-> модов» + the upward list (heavy, ≈ 3–4 h); (4) R2 — SPAWN a stone in front of the hero by the remote (HOUSE_RULES rule 11.5a, the owner 08:45), then E at the default and the far zoom. Saves: anything goes during development (HOUSE_RULES rule 6).
-> **Older handover blocks (chat a3dcf82b and the 2026-11-01 04:4x–05:3x lines) — moved verbatim to the chronicle, entry 2026-11-01 05:51 +03:00.**
 > - **Earlier FIRST list (still valid):** (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
 >   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
 >   (5) The release gate at 720p / 1080p / 2K / 4K (rule 17). (6) Item 21 — a vanilla quick-bar frame needs a clean-game stand (also for q4).

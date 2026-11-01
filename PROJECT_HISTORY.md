@@ -3,6 +3,37 @@
 
 
 
+## 2026-11-01 11:14 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat c30666a8
+
+> **HANDOVER of the chat ecee2807 (2026-11-01 04:40–05:5x, resume + «работай над сборкой автономно» → dayloop):** done —
+> (1) corrections by the owner's word: F1 = the cursor, a click expands the Damage Meter (new notes `games/ConanExiles/mods/TheDamageMeter.md`); AIM15
+> dropped (the arrow is born at the bow since Archery 0.3.0); EXP-0419. (2) THE PUBLIC REPO IS LIVE: https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack
+> (all 64 mod authors from Steam / Nexus — pack `_config/public_release/fetch-authors.mjs` + `fill-authors.mjs`; idea 23 → «Public repo — CREATED»).
+> (3) THE HUB WINDOW BY MOCKUP 5 — all cases pass (`testcases/reports/2026-11-01_conan-hub-mockup-fidelity.md`), review folder `41_hub_kak_maket` SEEN by the owner
+> 2026-11-01 08:42, three remarks below (the game's PT Serif; EXP-0420: the kit cannot import a font). (4) C1 CONFIRMED: the 16 Caverns of Set chests spawn no loot
+> (`games/ConanExiles/mods/CavernsOfSet.md`) — the fix waits for interview #029 (shown in chat). (5) `kismet.py` patches literals in the EVENT GRAPH
+> (entry points shifted, self-checked; regression 3/3 byte-equal) → bug 64 item 48 FIXED: the minimap «Показ времени» in Russian (report
+> `2026-11-01_conan-minimap-time-dropdown-ru.md`). (6) knowledge-hook reads a quoted `-Only "<Mod Name>"`. (7) R2: 4 probes could not find a world stone
+> by the remote (foliage meshes unreadable — game map «Stones by the remote»).
+> **2026-11-01 08:42 — the owner's two remarks on the hub (folder 41), FOR THE NEW CHAT:** (a) `[OWNER]` «нужно открывать поверх UI первоснажа, как и
+> рыбался открывается - ты сделал какое-то затенение - не нужно» — the window opens OVER the character UI (the inventory), as the fishing window does, with
+> NO dimming behind it (the frames of 05:18–05:20 were taken with the window opened by the remote in the world — find where the dark backdrop comes from:
+> the module row of `DT_KrinikUIModule` vs the fishing row, `Category` / `FullscreenGUIAction`, or the game's modal backdrop); (b) `[OWNER]` «по высоте
+> увеличить размер окна, в новом чате будем делать» — a taller window (today the height = the tallest live page, set by `krinik_mod_settings.lua` fill);
+> (c) 08:43 `[OWNER]` «и кнопка (i) все еще некрасивая» — today a PT Serif «i» thickened by a 1-unit outline inside a thin grey circle (`Brd_KrinikInfo_<id>`,
+> `Txt_KrinikInfo_<id>`, kit `rimmed(..., radius="half")`); the mockup's is an ITALIC bold Georgia «i» 8.5 px in a 12 px circle. Taste class: show
+> 3–4 «i» variants side by side on one frame of the window (e.g. a drawn icon texture; the game's own info glyph if it has one; Noto Sans Italic «i»;
+> no outline) and let the owner pick — do not choose alone.
+> (was) PARKED 09:33 — the caverns chests (option 2): the table the 16 chests import is one object (both `LootTableFromSpawnTable.DataTable` and `LootTable`
+> of `BP_PL_CoS_Loot_Chest` → the missing package `/Game/Mods/Mines_of_Set/Tables/Caverns_of_Set_Loot_Chest_Table`); row struct `/Script/ConanSandbox.LootTableRow`
+> (fields UseTable, Table, ItemID, Min, Max, PercentChance, Min/MaxDurability, RequiredEventTag, RequiredTags (tag query), NumRolls, Int/FloatStatModifier);
+> route `[AI]`: a copy of the legacy `DT_LC_RelicHunter` renamed to that path with our rows, added as a 4th asset to `build-level-mod.py` (KrinikConanGameplay
+> pak, no kit). Resume: write the recipe rows, extend the builder, live-read a chest. Switched for the owner's word 09:33 (the «i» column).
+> FIRST next (older list): (0) DONE above; (1) the owner's answer to #029 (then the C1 fix: the chest's loot table in the mod pak);
+> (2) bug 64 items 47 «All» (ModControlPanel `MDC_MCP`) and 49 «Top Left» (Damage Meter settings) — the same `lit:` route as item 48 (trace the asset's
+> event graph first: a translated option must not break a string comparison or a saved string); (3) plan 38 phase 1 — the inventory button «Настройки
+> модов» + the upward list (heavy, ≈ 3–4 h); (4) R2 — SPAWN a stone in front of the hero by the remote (HOUSE_RULES rule 11.5a, the owner 08:45), then E at the default and the far zoom. Saves: anything goes during development (HOUSE_RULES rule 6).
+
 ## 2026-11-01 05:51 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat ecee2807
 
 > **HANDOVER of the chat a3dcf82b (2026-10-31 21:48–23:3x, dayloop «работай автономно над сборкой Конана»):** done — the hub look by the owner's
