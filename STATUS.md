@@ -128,8 +128,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > «Настройки модов»; its list «Моды Krinik'а · Моды Xevyr'а · Рыбалка · Прочее» works by the real mouse; Xevyr and «Прочее» are INTERIM sub-lists of the
 > mods' own windows (5 + 5); Esc keeps the inventory in all 12 windows (8 mod paks KRINIK MODIFIED: module rows Modal + CloseOnESC, new `rbool:` row kind of
 > `patch-mod-asset.py`); Hosav's button collapsed, fishing not grafted, Xevyr's side tab collapsed in its window's `Construct` (60 fps video clean). Seam left:
-> the PIFC window stands right of centre. NEXT, in order: (1) bug 73 — the owner's 16:17–16:23 decisions (stuck arrows live 5 min everywhere, hub row 1–30 min;
-> the ×3 visual arrow joined to the ×1 physical one at the tip); (2) «Моды Xevyr'а» and «Прочее» as our hub windows with real rows (the owner's 13:40 decision;
+> the PIFC window stands right of centre. **2026-11-01 17:43 +03:00 — stuck arrows live 5 min (hub row «Сколько стрела торчит в цели», 1–30 min), seen 299.9 / 59.9 s (report
+> `testcases/reports/2026-11-01_conan-arrow-stuck-life.md`).** NEXT, in order: (1) bug 73 — the ×3 visual arrow joined to the ×1 physical one at the tip (the owner 16:23); (2) «Моды Xevyr'а» and «Прочее» as our hub windows with real rows (the owner's 13:40 decision;
 > recon per mod first); (3) plan 40 phase 4 (arrows in the corpse). Game closed, lock released.
 > **(done, kept for the record) OWNER DEBT:** `[OWNER]` 2026-11-01 15:49 «соответственно, она там одна должна
 > остаться» · «настройки рыбалки и настройки интерфейса оттуда уходят» — the inventory bar keeps ONLY «Настройки модов»; Hosav's «Настройки интерфейса» and

@@ -66,3 +66,23 @@ restored from the copy, `cmp` equal.
 | A5 | the fix: `mesh_scale` 1.0, the push «в тушку» removed | 3 shots into the sand, 2 into a frozen Kappa's head | 62 cm, nothing in the air | pass | 15:26–15:27: sand 62 / 62 / 62, frame `sand_after.webp` — three arrows stuck under the crosshair; Kappa head 62 / 62 |
 | A6 | «стрелы быстро исчезают» | the copy's life span | — | game's own | 15 s with and without our mod (`GetLifeSpan()` 14.9 at birth, control A1) — the game's `ProjectileDummyLifetime`; a longer life is a new decision, asked |
 
+
+### Bug 73, the owner's decision 16:18 — a stuck arrow lives 5 min, a hub row 1–30 min
+
+Basis: `[OWNER]` 2026-11-01 16:18 «срок жизни стрел везде, и в земле, и в трупах, и в стенах нужжжжжжжжжен 5 минут - с возможностью настроить в модах стрельбы
+из лука - в минутах, от 1, до 30» (corpses — with plan 40 phase 4). Stand: the live save's oasis spot, god on, food and water frozen by the remote, the bow in quick
+slot 1 (key 1), shots into the sand by `_config/aim-shot.sh`; the copy's life read by the archery log line «копия стрелы #N … срок X с» (`GetLifeSpan()` 100 ms
+after birth) and by the remote; the hub by the real mouse. Dimensions: the default (5), the low end (1), the store reload (save in the hub → next shot), the copy
+still present past the game's 15 s.
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| L1 | the hub open on «KrinikConanArchery» | frame of the page | a row «Сколько стрела торчит в цели», value 5, hint «в минутах», «i» in its circle | pass | 17:33 frame (1080p): the fourth row of the page as expected |
+| L2 | the store without the key (default) | a shot (a frozen green Kappa 8 m ahead instead of the sand — the camera looked at the horizon, the first arrow flew into the water) | the copy's life ≈ 300 s | pass | 17:36:32 «копия стрелы #1: удар в CharacterMesh0, кость rig_bone_kappa-head, от точки удара 62 см, срок 299.9 с». The first build set `ProjectileDummyLifetime` on the flying arrow — no such field there (the remote read a TrivialObject), the copy kept 14.9 s (17:33); the arrow's own fields are `DummyProjectileOnGroundLifetime` 30 and `DummyProjectileAttachedToCharacterLifetime` 15 — both set since |
+| L3 | as L2 | the copy read again past 15 s | the copy alive (the game's own life was 15 s) | pass | 17:36:51: 1 copy, life left 279.7 s (20 s after birth) |
+| L4 | the row moved to 1 by the real mouse, «Сохранить и закрыть» | a shot | the copy's life ≈ 60 s; the archery log «стрела торчит 1 мин» | pass | store `["arc_stuck_min"] = 1`; 17:40:50 «… стрела торчит 1 мин (номер настроек …)», copy #2 «срок 59.9 с» |
+| L5 | the row back to 5, saved | a shot | ≈ 300 s again | pass | 17:41:33 «стрела торчит 5 мин», copy #3 «срок 299.9 с»; the key left the store (the default writes no key) — the owner's store as before the run |
+
+Stand notes (17:37–17:40): the first key of every `mouse-seq.ps1` sequence is eaten by the window's activation (EXP-0412) — a harmless F13 (`kdown:0x7C`)
+opens each sequence now; the save's bow in quick slot 1 broke during the stands (dim icon, key 1 did nothing) — a new «Мощный охотничий лук» by `exec MakeMeAdmin`
++ `exec SpawnItem 51405 1` landed in slot 3; the frozen Kappa walks again after an inventory visit — `arrow-stand.sh place 8` + `freeze` before every shot.

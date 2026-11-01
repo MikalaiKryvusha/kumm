@@ -1,6 +1,6 @@
 # Bug 73 — Conan build: arrows shot into the ground hang in the air before the hit point and vanish fast
 
-**Status:** 🔧 «in the air» fixed and seen 2026-11-01 15:26 (cause: our ×3 arrow mesh); «vanish fast» is the game's own 15 s — a longer life asked of the owner · **Severity:** S2 · **Version/build:** Conan Exiles 3.0.1 build 1.0.0 (pre-release), KrinikConanArchery 1.0.0
+**Status:** 🔧 «in the air» fixed and seen 2026-11-01 15:26 (cause: our ×3 arrow mesh); «vanish fast» fixed 2026-11-01 17:41 (5 min, hub row 1–30 — the owner 16:18); open: the ×3 visual arrow joined at the tip (the owner 16:23) · **Severity:** S2 · **Version/build:** Conan Exiles 3.0.1 build 1.0.0 (pre-release), KrinikConanArchery 1.0.0
 **When/context:** 2026-11-01 15:06, seen by the owner on his screen while the agent shot six arrows into the sand (plan 40.2, row «Стрелы не ломаются»)
 **Fixing:** this session — the control case first (HOUSE_RULES rule 24)
 
@@ -52,10 +52,18 @@ Log: «#N из лука … щуп — LandscapeHeightfieldCollisionComponent_17
 - `[OWNER]` 16:23 «значит лететь в воздухе должна физическая оригинальная стрела x1 размера, а визуальная модель лететь должна x3. Физическая стрела и
   визуальная модель сввввввввввввввввязаны в наккооооооооооооооооонечникееееееее» — the route: physical ×1 + a separate visual ×3, joined at the tip.
 
+## The life applied (2026-11-01 17:42 +03:00)
+
+The hero's arrow gets `DummyProjectileOnGroundLifetime` and `DummyProjectileAttachedToCharacterLifetime` = the hub row `arc_stuck_min` × 60 at the shot (the copy's
+own `ProjectileDummyLifetime` is filled by the game from them); the row «Сколько стрела торчит в цели», 1–30 min, default 5. Seen: 299.9 s by default, alive past
+15 s, 59.9 s at 1 min, back to 299.9 s (report `testcases/reports/2026-11-01_conan-arrow-stuck-life.md`, cases L1–L5). Open in this bug: the ×3 visual arrow joined
+at the tip (16:23); corpses keep their arrows — plan 40 phase 4.
+
 ## Decisions made without the owner
 
-- `[AI]` the arrow mesh back to native size (1.0) until his word — the ×3 was his «до x3»; the choice put to him in chat 15:2x.
-- `[AI]` the copy's 15 s life left as the game's — a longer life is his decision (asked).
+- `[AI]` the arrow mesh back to native size (1.0) until his word — the ×3 was his «до x3»; the choice put to him in chat 15:2x (answered 16:17 — the route above).
+- `[AI]` the life is set for the HERO's arrows only (the code that dresses the hero's shot); NPC archers' arrows keep the game's life.
+- `[AI]` the row's words: «Сколько стрела торчит в цели» · «в минутах» · «Сколько воткнутая стрела героя остаётся в земле, в стене или в противнике, прежде чем исчезнуть.»
 
 ## Links
 

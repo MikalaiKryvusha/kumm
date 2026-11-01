@@ -80,8 +80,14 @@ the built pak (`_config/devkit/set-pak-version.py <pak> <packVersion>`) and the 
 The copy «≈ 1.8 m short of the hit» (the bullets above) was OURS: `dress_arrow` grew the flying `ProjectileMesh` ×3 (`mesh_scale` 3.0), and the game's
 `BP_BaseProjectile.GetAdjustedProjectileImpactPosition` backs the copy off the hit along the flight by that mesh's bounds (`GetComponentBounds(ProjectileMesh)`,
 bytecode by `kismet-trace.py`). Control with our Lua off: 62 cm from the hit — the tip in. Fix: `mesh_scale` 1.0 and the push «в тушку» removed (HOUSE_RULES rule 24);
-a pre-hook of `SpawnDummyProjectile` restoring the size does NOT help (the bounds are read earlier). The copy lives 15 s on the ground — the game's own life.
-The push history in the bullets above is superseded by this paragraph.
+a pre-hook of `SpawnDummyProjectile` restoring the size does NOT help (the bounds are read earlier). The push history in the bullets above is superseded by this paragraph.
+
+**The copy's life (2026-11-01 17:3x, `[OWNER]` 16:18 «срок жизни стрел везде … нужжжжжжжжжен 5 минут - с возможностью настроить … в минутах, от 1, до 30»).**
+The flying arrow (`BP_BaseProjectile_C`; the bow's `BP_Visual_BowProjectileBase_C`) carries `DummyProjectileOnGroundLifetime` (30 s) and
+`DummyProjectileAttachedToCharacterLifetime` (15 s); the game hands one of them to the copy's `ProjectileDummyLifetime` (the copy alone has that field — setting it on
+the flying arrow does nothing, the remote reads a TrivialObject). `dress_arrow` sets both to `CFG.stuck_life_min × 60` at the hero's shot; the hub row
+`arc_stuck_min` (1–30 min, default 5) on the KrinikConanArchery page. Seen: 299.9 s by default, 59.9 s at 1 (report `testcases/reports/2026-11-01_conan-arrow-stuck-life.md`).
+Corpses: the game destroys the copies with the creature — plan 40 phase 4.
 
 ## Open
 
