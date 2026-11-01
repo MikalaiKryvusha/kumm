@@ -102,6 +102,9 @@ delta>)`, read back `IsFullHealth()`.
 round only inside the square `SB_KrinikInfo_<id>` (22.6 × 22.6) between the border and the text. Rows built after that box left the kit script (shout hold,
 the vignettes) had the text straight in the border — a lemon. The kit now sets the box for every row by `info.set_content(box)` (replaces the text, then the
 text goes into the box — no orphan). Check: the remote `Brd_KrinikInfo_<id>:GetContent()` is a SizeBox and its desired size 22.6 × 22.6.
+**Ranges (2026-11-01 15:0x, plan 40.2 4a):** `cam_zoom_min` starts at 130 (below it the wheel cannot reach first person — game map: 30 fails, 130 works);
+the other ends were checked and kept. **Hints after the same pass:** only units («в сантиметрах», «в градусах», «в секундах»), «во сколько раз» and
+«больше — быстрее» remain; «вправо или влево», «колесо мыши» ×2, «с какого запаса», «с какой нагрузки», «в процентах» dropped (the «i» or the value says it).
 **Hints:** a row gets the grey hint only when it adds something the «i» text does not say; the vignette rows have none (`[OWNER]` 14:08 «Иногда не нужно
 серое пояснение» · «или очень кратко» · «и в описаниии по (i) будет объяяснено»).
 

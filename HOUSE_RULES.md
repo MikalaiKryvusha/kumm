@@ -103,6 +103,13 @@
     «работает» (code exists and was seen in game) · «нет механики — будет сделано» · «нет механики — предложение». Building a window from an accepted mockup, the
     report lists every mockup element NOT carried into the game and why — nothing is dropped silently. (`[OWNER]` 2026-11-01 13:25 «то есть, ты мне макеты
     показываешь такие, которые не сделаны?» — the vignette rows of the 10-31 mockups had no mechanics and were silently left out of the game window; plan 39 D5.)
+24. **A fix removes the CAUSE — no compensating patches.** Before writing a fix of a game behaviour:
+    1. Run the control case: the same action with our mod's part switched off (Lua `enabled.txt` moved out, or the pak removed) — find who makes the defect.
+    2. Ours → fix the place in our code that makes it. The game's → fix it in the game's own data or function natively (rule 8), at the source.
+    3. A correction applied AFTER the game did its work (move, re-set, re-colour by a timer), tuned by numbers per surface or per creature, is a crutch:
+       it is not shipped; an existing one is listed and replaced by the cause fix.
+    (`[OWNER]` 2026-11-01 15:07–15:08 «странно, что мы что-то куда-то досылаем» · «почему выглядит как костыль?» · «лучше бы чинить качественно, а не костылями» ·
+    «не люблю костыли» · «это временные решения, которые потом еще что-то ломают» · «нужно сразу чинить качественно и правильно».)
 19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
     mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +

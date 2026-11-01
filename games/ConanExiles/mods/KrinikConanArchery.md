@@ -75,6 +75,14 @@ the built pak (`_config/devkit/set-pak-version.py <pak> <packVersion>`) and the 
 - Answered 2026-10-31: «no arrow visible on the frozen boss's arm while 3 copies lived» — the copies were born ≈ 1.8 m short of the hit, so they hung in the
   air before the body, out of that crop (the bullet «The copy is born ≈ 1.8 m SHORT» above).
 
+## Stuck copies — the cause found (2026-11-01 15:0x–15:2x, KUMM bugs/73)
+
+The copy «≈ 1.8 m short of the hit» (the bullets above) was OURS: `dress_arrow` grew the flying `ProjectileMesh` ×3 (`mesh_scale` 3.0), and the game's
+`BP_BaseProjectile.GetAdjustedProjectileImpactPosition` backs the copy off the hit along the flight by that mesh's bounds (`GetComponentBounds(ProjectileMesh)`,
+bytecode by `kismet-trace.py`). Control with our Lua off: 62 cm from the hit — the tip in. Fix: `mesh_scale` 1.0 and the push «в тушку» removed (HOUSE_RULES rule 24);
+a pre-hook of `SpawnDummyProjectile` restoring the size does NOT help (the bounds are read earlier). The copy lives 15 s on the ground — the game's own life.
+The push history in the bullets above is superseded by this paragraph.
+
 ## Open
 
 - seen 2026-10-31 15:51: the pause-menu list shows «v1.0.0»; the Krinik mods still stand at the bottom of the list (W11 «top» half open).
