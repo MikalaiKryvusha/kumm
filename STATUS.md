@@ -132,20 +132,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `testcases/reports/2026-11-01_conan-arrow-stuck-life.md`).** **2026-11-01 17:51 +03:00 — the ×3 visual arrow joined at the tip flies (cases V1–V3, copy still at 62 cm); review folder 50 «strela x3 v polete» waits for the owner's eye.**
 > NEXT, in order: (2) «Моды Xevyr'а» and «Прочее» as our hub windows with real rows (the owner's 13:40 decision;
 > recon per mod first); (3) plan 40 phase 4 (arrows in the corpse). Game closed, lock released.
-> **(done, kept for the record) OWNER DEBT:** `[OWNER]` 2026-11-01 15:49 «соответственно, она там одна должна
-> остаться» · «настройки рыбалки и настройки интерфейса оттуда уходят» — the inventory bar keeps ONLY «Настройки модов»; Hosav's «Настройки интерфейса» and
-> «Настройка рыбалки» leave the bar and become entries of its drop-down list (with «Моды Krinik'а», «Моды Xevyr'а», «Прочее»; «Прочее» last, fishing above it).
-> And `[OWNER]` 15:49 «красная справа вертикальная по модам ксавьера - тоже уходит» — the red vertical «Моды Xevyr» side tab on the right of the inventory
-> (module `XCS_Panel`, game map «Вкладки хаба») leaves too; its place is the list entry «Моды Xevyr'а».
-> Do the list and the removal in ONE step — removing them first would cut the player off their windows. Route: plan 40.3 R3, R4, I1–I4; the button —
-> `krinik_mods_button.lua` (step 1 done 15:48); the bar code that shows the two buttons — `krinik_pause_in_menu.lua` `hosav_settings_button`, `fishing_button`.
-> **2026-11-01 15:38 — dayloop running (the owner 14:56 «Работай автономно»).** Done since 14:56: plan 40.2 H19–H22 pass (16 of 19 rows seen; H14 shout and
-> H16 arrow-breaking partial); bug 73 arrows in the air — cause our ×3 arrow mesh, fixed by native size (`mesh_scale` 1, the push removed; the owner asked whether
-> the ×3 flight look matters — no answer yet); house rule 24 (no crutches, control case first); hub ranges / hints pass; minimap coordinates at the bottom by the clock
-> (the owner 15:18); the collapsed damage meter — solid minus, 20 % fill, soft rim (review 49, variant 5). Waiting for the owner: the ×3 arrow in flight (bug 73),
-> a longer life of a stuck arrow than the game's 15 s (bug 73). Plan 40 phase 3 STEP 1 DONE 15:48: «Настройки модов» in the inventory bar opens «Моды Krinik'а» (the owner asked 15:43 «когда кнопки для настройки модов
-> переделывать будешь?»). NEXT CHAT FIRST: phase 3 step 2 — the list «Моды Krinik'а · Моды Xevyr'а · Рыбалка · Прочее» on that button, Hosav and fishing buttons out
-> of the bar (plan 40.3 R3, R4, I1–I4), then phase 4 (arrows in the corpse). V5/V6 of the vignettes pass 15:40.
+> **Moved verbatim to the chronicle, entry 2026-11-01 17:54 +03:00:** the done owner-debt block of 15:49 and the 15:38 dayloop paragraph.
 > **Moved verbatim to the chronicle, entry 2026-11-01 15:52:** the closures of 13:27–13:43, the eea8bf94 handover items 1 (vignettes — done) and 1a (hub audit — plan 40.2), the 08:49 acceptances, the 09:5x–10:3x done list, the 13:20 vignette order (done), the 2026-10-29 15:2x work order.
 > 2. The HUD temperature by the game's debuff stage — frame the comfort (white) and the cold (blue) cases (only heat was framed, review folder 47).
 > 3. The inventory button «Настройки модов» (plan 38 phase 1) — write its operational plan first (the Xevyr / «Прочее» entries have no hub yet).

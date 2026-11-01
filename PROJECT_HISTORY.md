@@ -3,6 +3,23 @@
 
 
 
+## 2026-11-01 17:54 +03:00 — moved from STATUS «Where to continue» during the dayloop of chat 5edabf9c (verbatim)
+
+> **(done, kept for the record) OWNER DEBT:** `[OWNER]` 2026-11-01 15:49 «соответственно, она там одна должна
+> остаться» · «настройки рыбалки и настройки интерфейса оттуда уходят» — the inventory bar keeps ONLY «Настройки модов»; Hosav's «Настройки интерфейса» and
+> «Настройка рыбалки» leave the bar and become entries of its drop-down list (with «Моды Krinik'а», «Моды Xevyr'а», «Прочее»; «Прочее» last, fishing above it).
+> And `[OWNER]` 15:49 «красная справа вертикальная по модам ксавьера - тоже уходит» — the red vertical «Моды Xevyr» side tab on the right of the inventory
+> (module `XCS_Panel`, game map «Вкладки хаба») leaves too; its place is the list entry «Моды Xevyr'а».
+> Do the list and the removal in ONE step — removing them first would cut the player off their windows. Route: plan 40.3 R3, R4, I1–I4; the button —
+> `krinik_mods_button.lua` (step 1 done 15:48); the bar code that shows the two buttons — `krinik_pause_in_menu.lua` `hosav_settings_button`, `fishing_button`.
+> **2026-11-01 15:38 — dayloop running (the owner 14:56 «Работай автономно»).** Done since 14:56: plan 40.2 H19–H22 pass (16 of 19 rows seen; H14 shout and
+> H16 arrow-breaking partial); bug 73 arrows in the air — cause our ×3 arrow mesh, fixed by native size (`mesh_scale` 1, the push removed; the owner asked whether
+> the ×3 flight look matters — no answer yet); house rule 24 (no crutches, control case first); hub ranges / hints pass; minimap coordinates at the bottom by the clock
+> (the owner 15:18); the collapsed damage meter — solid minus, 20 % fill, soft rim (review 49, variant 5). Waiting for the owner: the ×3 arrow in flight (bug 73),
+> a longer life of a stuck arrow than the game's 15 s (bug 73). Plan 40 phase 3 STEP 1 DONE 15:48: «Настройки модов» in the inventory bar opens «Моды Krinik'а» (the owner asked 15:43 «когда кнопки для настройки модов
+> переделывать будешь?»). NEXT CHAT FIRST: phase 3 step 2 — the list «Моды Krinik'а · Моды Xevyr'а · Рыбалка · Прочее» on that button, Hosav and fishing buttons out
+> of the bar (plan 40.3 R3, R4, I1–I4), then phase 4 (arrows in the corpse). V5/V6 of the vignettes pass 15:40.
+
 ## 2026-11-01 15:52 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat a8cd8fdc (verbatim)
 
 > **Закрыто по слову владельца 2026-11-01 13:43 («закрывай чат, в новом делаем»).** Виньетки: прерванная съёмка с игрой впереди (голод 0 %%, сила 1 и 0) — кадры `vigF_*.jpg` в скретчпаде этого чата не проверены; новый чат повторяет её по researches/conan-vignettes/README.md. Чистая копия игры для теста установки — `D:/Instals/` (план 40 фаза 7). Игра закрыта, замок снят.
