@@ -27,6 +27,17 @@ needs `global.utoc` for script objects) → `UAssetGUI tojson <umap> <json> VER_
   `_8` (-156362, 30024, 3722) · `_9` (-125416, 86215, -11780) · `_10` (-122381, 82233, -11780) · `_11` (-126670, 48511, -12827) · `_12` (-126138, 47030, -12827) ·
   `_13` (-120266, 18372, -12299) · `_14` (-135600, 33539, -12593) · `_15` (-129815, 40185, -10337).
 
+## Fix route (2026-11-01 08:4x, `[AI]` — not started, waits for the owner's loot choice, interview #029)
+
+- `/Engine/UnknownPackage` is how `retoc to-legacy` prints an import whose package is NOT in the containers it was given; the cooked chest refers to the table by its
+  package id (`128043E70D476916` = `/Game/Mods/Mines_of_Set/Tables/Caverns_of_Set_Loot_Chest_Table`, docs/17). So the cheapest fix needs no edit of the author's
+  pak: ship a DataTable at EXACTLY that path from our kit (the kit already saves assets outside its own folder — `KIT_TEX_DIR`, the game logo override) with the
+  row struct of the vanilla loot tables; the chest and the mod's merge (`ToBeAddedDataTable is null` in the log) should then find it. Check first in the kit:
+  the chest BP's import of the table (struct name), then a live read of `LootTableFromSpawnTable` after the ship.
+- Content options for the owner: rows copied from `DT_LC_RelicHunter` / `DT_LC_Exiles`, or the mod's OWN items (`Caverns_of_Set_Item_Table` is in the pak) mixed
+  with relic rows — the closest to what the author likely meant; an older (pre-Enhanced) version of the mod may still hold his original table.
+- Tell the author (PNutt) on the Workshop page — an outward message, only by the owner's word.
+
 ## Open
 
 - The fix needs the owner's choice of WHAT the chests hold (the author's own table is lost): a vanilla table of the same level (the T4 chests beside them) or a
