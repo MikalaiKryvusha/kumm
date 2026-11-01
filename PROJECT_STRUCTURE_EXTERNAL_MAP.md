@@ -23,7 +23,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── package.json                   # npm bin "kumm"; node>=22; kaif:* handles
 ├── test-parse-archive.mjs · test-archive-roundtrip.mjs · test-pick-card.mjs   # regression of the pure core (reading archive names; write→read round trip; variant pick + upload-date compare) — run with node, exit 0 = green
 ├── test-help-commands.mjs         # the command list: kumm.mjs header (what `help` prints) = switch cases = README «Команды» table
-├── tools/fixture-pack.mjs         # fake pack in the OS temp + Deploy-ModPack.ps1 runs on it (-ListMods, -Deploy -DryRun, a real -Deploy and -Verify, paks after -Only, a new pak's place by the manifest, a mod re-setting an Engine.ini cvar at runtime — 27 checks); no network, no game
+├── tools/fixture-pack.mjs         # fake pack in the OS temp + Deploy-ModPack.ps1 runs on it (-ListMods, -Deploy -DryRun, a real -Deploy and -Verify, paks after -Only, a new pak's place by the manifest, a mod re-setting an Engine.ini cvar at runtime, the undo journal and the player's uninstaller, the desktop shortcut from `manifest.shortcut` — 37 checks); no network, no game
 ├── README.md                      # the storefront (Russian) — owner's handwriting
 ├── GOAL.md · STATUS.md · MASTER_PLAN.md · AGENT_GUIDE.md · PHILOSOPHY.md   # KAIF canon
 ├── PROJECT_STRUCTURE_EXTERNAL_MAP.md · PROJECT_ARCHITECTURE_INTERNAL_MAP.md
@@ -98,7 +98,7 @@ a complete CLI reference) → the `.SYNOPSIS`/`.DESCRIPTION` block of `Deploy-Mo
 | `kumm.mjs` header comment «Команды» (what `help` prints) | the command switch · the README command table · `HOUSE_RULES.md` → Stands, environments and devices | `node test-help-commands.mjs` (header = switch = README; the `HOUSE_RULES.md` stands table — by eye) |
 | `package.json` `"files"` | what a user of `npm i -g kumm` actually gets | `npm pack --dry-run` — 5 files: `kumm.mjs`, `Deploy-ModPack.ps1`, `README.md`, `LICENSE`, `package.json` (drift closed 2026-10-10) |
 | archive naming scheme | `libraryName()` (writer) ↔ `parseArchive()` (reader) in `kumm.mjs` | round-trip one name through both |
-| `modpack.json` keys | `kumm.mjs` (`nexusGame`, `library`, `mods[]`) ↔ `Deploy-ModPack.ps1` (`gameExe`, `library`, `mods[]`, `steamEmu`, `packName`, `builtFor`, `guide`, `extras`, `exportConfig`, per-mod `export` (false = dev-only, not exported; 2026-10-30)) | grep both halves for each key |
+| `modpack.json` keys | `kumm.mjs` (`nexusGame`, `library`, `mods[]`) ↔ `Deploy-ModPack.ps1` (`gameExe`, `library`, `mods[]`, `steamEmu`, `packName`, `builtFor`, `guide`, `extras`, `exportConfig`, `shortcut`, `uninstall`, per-mod `export` (false = dev-only, not exported; 2026-10-30)) | grep both halves for each key |
 
 ---
 

@@ -58,7 +58,7 @@
 The engine works and the owner uses it daily for Palworld. It checks its pure core (the first test since 2026-09-08, four since 2026-10-14):
 `node test-parse-archive.mjs`, `test-archive-roundtrip.mjs`, `test-pick-card.mjs`, `test-help-commands.mjs` (exit 0 = green), and the game
 half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deploy -DryRun`, a real `-Deploy` and `-Verify`, paks after `-Only`:
-27 checks since 2026-10-30 — a mod re-setting an Engine.ini cvar at runtime; all 27 passed on 2026-10-30). Not covered yet: the live Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
+37 checks since 2026-11-01 — the undo journal, the player's uninstaller, the desktop shortcut; all 37 passed on 2026-11-01). Not covered yet: the live Nexus path (Chrome) — Phase 1 in `MASTER_PLAN.md`.
 
 | Phase | Status | What's there |
 |-------|--------|--------------|
@@ -129,11 +129,10 @@ the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/Con
 > **ORDER (`[OWNER]` 2026-11-01 11:11–11:12 «да не нужно архив собирать!! Сборка же еще не готова!!» · «релизный архив соберем и все документы обновим,
 > когда сборку сделаем и протестируем на всех разрешениях 16 к 9»):** the release archive and the document refresh go LAST — after the build is finished and
 > tested at 720p / 1080p / 2K / 4K. The 11:10 archive run was stopped and its 16 GB removed; `make_volumes.sh` waits for that moment.
-> NEW 11:11: `[OWNER]` «по установке - сборка на рабочем столе создает ярлык Krinik Conan» — the install creates a desktop shortcut «Krinik Conan» (to the
-> launcher, the build icon); the uninstall removes it. STARTED 11:13 (engine only, `[NOT-TESTED]`): `install.ps1` written by `-Export` creates the shortcut from
-> `manifest.shortcut {name, target, icon}`; the uninstaller template gets `{SHORTCUT}` = that name. LEFT: add `"shortcut": {"name": "Krinik Conan", "target":
-> "KrinikConanLauncher.exe", "icon": "krinik_build_icon_1.ico"}` to `ConanExiles/modpack.json`; add to `_config/uninstall/uninstall.cmd` before «Готово» a
-> powershell line removing `<Desktop>\{SHORTCUT}.lnk`; test with `tools/fixture-pack.mjs` (export → install.ps1 → shortcut exists → -Restore → gone).
+> DONE 11:2x — the desktop shortcut «Krinik Conan» (`[OWNER]` 11:11 «по установке - сборка на рабочем столе создает ярлык Krinik Conan»): `manifest.shortcut` in the
+> pack, the `{SHORTCUT}` removal line in `_config/uninstall/uninstall.cmd`; the stand found and the fix closed `install.ps1` never creating it (`$null` exit code);
+> fixture 37/37 (report `testcases/reports/2026-11-01_bundle-desktop-shortcut.md`, partial). LEFT for the release install from the volumes: see the shortcut on
+> the real desktop and its removal; the guide's install chapter names the shortcut — in the final document refresh.
 > Seen and not yet checked: the hero lost his armour after a launch closed on a stuck loading screen (10:51 «Лёгкая / 0»). NEXT: the build items below; the archive and the release LAST; then the
 > inventory button, the shout row, the blink video, «All»/«Top Left», the stone, the measurements, the arrows in corpses.
 > **2026-11-01 09:0x–09:3x (chat c30666a8) — DONE:** the three hub remarks — no dimming of ours (the night of folder 41), height = mockup 5 (845), «i» = variant

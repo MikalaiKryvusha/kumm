@@ -1006,7 +1006,8 @@ function Invoke-DeployTarget {
                 ) -join "`r`n"
             }
             # cmd.exe читает построчно по CRLF; шаблон из git может прийти с LF - приводим.
-            # {SHORTCUT} = manifest.shortcut.name - the desktop shortcut install.ps1 creates; the uninstaller removes it (2026-11-01). [NOT-TESTED]
+            # {SHORTCUT} = manifest.shortcut.name - the desktop shortcut install.ps1 creates; the uninstaller removes it (2026-11-01).
+            # [TESTED: 2026-11-01 · fixture stand: export → install.ps1 → shortcut read back → Uninstall.cmd → gone · testcases/reports/2026-11-01_bundle-desktop-shortcut.md]
             $shortcutName = if ($pack.shortcut -and $pack.shortcut.name) { [string]$pack.shortcut.name } else { '' }
             $body = $body.Replace('{BACKUP}', $script:BackupDirName).Replace('{SHORTCUT}', $shortcutName).Replace("`r`n", "`n").Replace("`n", "`r`n")
             [System.IO.File]::WriteAllText((Join-Path $Target.Path $un.cmd), $body, (New-Object System.Text.UTF8Encoding($false)))
@@ -1564,7 +1565,8 @@ function Write-BundleInstaller {
         '}',
         'Write-Host "Installing $($m.packName) into $GameDir" -ForegroundColor Cyan',
         '& (Join-Path $here ''Deploy-ModPack.ps1'') -Deploy -PackDir $packDir -GameDir $GameDir',
-        '$rc = $LASTEXITCODE',
+        '# A script that ends without exit leaves $LASTEXITCODE empty; [int] makes that 0 (the fixture stand caught "$null -eq 0", 2026-11-01).',
+        '$rc = [int]$LASTEXITCODE',
         '# manifest.shortcut {name, target, icon}: a desktop shortcut to the build''s own program (Krinik build 2026-11-01, the owner: "Krinik Conan").',
         'if ($rc -eq 0 -and $m.shortcut -and $m.shortcut.name -and $m.shortcut.target) {',
         '    $lnk = Join-Path ([Environment]::GetFolderPath(''Desktop'')) ($m.shortcut.name + ''.lnk'')',

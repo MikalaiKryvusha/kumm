@@ -175,7 +175,7 @@ put(path.join(UDIR, 'nointro', 'Intro.bk2'), 'stub')
 put(path.join(UDIR, 'loc', 'Game.locres'), 'ru')
 put(path.join(UDIR, 'deep', 'x.txt'), 'new')
 put(path.join(UDIR, 'Engine.ini'), '[SystemSettings]\r\nr.Pack=1\r\n')
-put(path.join(UDIR, 'un.cmd.txt'), '@echo off\r\nchcp 65001 >nul\r\necho Удаление сборки\r\npowershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0{BACKUP}\\Deploy-ModPack.ps1" -Restore -GameDir "%~dp0."\r\nif errorlevel 1 ( pause & exit /b 1 )\r\npause\r\n(goto) 2>nul & del "%~f0"\r\n')
+put(path.join(UDIR, 'un.cmd.txt'), '@echo off\r\nchcp 65001 >nul\r\necho Удаление сборки\r\npowershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0{BACKUP}\\Deploy-ModPack.ps1" -Restore -GameDir "%~dp0."\r\nif errorlevel 1 ( pause & exit /b 1 )\r\nif not "{SHORTCUT}"=="" powershell -NoProfile -Command "Remove-Item -LiteralPath (Join-Path ([Environment]::GetFolderPath(\'Desktop\')) \'{SHORTCUT}.lnk\') -ErrorAction SilentlyContinue"\r\npause\r\n(goto) 2>nul & del "%~f0"\r\n')
 writeFileSync(path.join(UDIR, 'modpack.json'), JSON.stringify({
   packName: 'KUMM fixture undo pack', builtFor: 'fixture', nexusGame: 'fixturegame', gameExe: 'FixtureGame.exe', library: 'mods',
   modsDir: 'Game/Mods', modList: 'Game/Mods/modlist.txt',
@@ -226,6 +226,37 @@ ups(['-Deploy', '-WithEngineIni', '-NoVerify'])
 const u4 = ups(['-Remove'])
 expect('откат: -Remove при журнале = тот же откат, папка как до установки, деинсталлятор убран',
   u4.code === 0 && snap(UGAME) === before, `${u4.out}\n${snap(UGAME)}`)
+
+// ---- ярлык на рабочем столе (manifest.shortcut; слово владельца 2026-11-01 11:11 «сборка на рабочем столе создает ярлык Krinik Conan»): install.ps1
+// из -Export создаёт его после удачной раскатки — на программу сборки, со значком сборки; деинсталлятор игрока его убирает. Путь игрока: выгрузка →
+// install.ps1 → uninstall .cmd. Имя уникальное: ярлык стенда живёт секунды на НАСТОЯЩЕМ рабочем столе и не путается с ярлыками владельца.
+// Контроль «без shortcut — без ярлыка и без ошибки» — прогоны выше: их деинсталлятор шёл с пустым {SHORTCUT}.
+// Своя чистая папка игры: в «ванили» выше лежит пак игрока вне modlist, и -Verify установки законно даёт код 1 — ярлык тогда не создаётся.
+const SC = `KUMM fixture ${Date.now()}`
+const SGAME = path.join(UDIR, 'game_clean'), SUN = path.join(SGAME, 'Uninstall.cmd')
+put(path.join(SGAME, 'FixtureGame.exe'), '')
+const sBefore = snap(SGAME)
+put(path.join(UDIR, 'Launcher.exe'), 'stub')
+put(path.join(UDIR, 'build.ico'), 'ico')
+const mp3 = JSON.parse(readFileSync(path.join(UDIR, 'modpack.json'), 'utf8'))
+Object.assign(mp3, { shortcut: { name: SC, target: 'Launcher.exe', icon: 'build.ico' }, extras: ['Launcher.exe', 'build.ico'] })
+writeFileSync(path.join(UDIR, 'modpack.json'), JSON.stringify(mp3, null, 2))
+const UEXP = path.join(DIR, 'undo-export')
+const ue = ups(['-Export', UEXP])
+const posh = cmd => execFileSync('powershell', ['-NoProfile', '-Command', cmd], { encoding: 'utf8' }).trim()
+const LNK = path.join(posh("[Environment]::GetFolderPath('Desktop')"), `${SC}.lnk`)
+let inst
+try { inst = { code: 0, out: execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', path.join(UEXP, 'install.ps1'), '-GameDir', SGAME], { encoding: 'utf8' }) } }
+catch (e) { inst = { code: e.status ?? 1, out: `${e.stdout ?? ''}${e.stderr ?? ''}` } }
+const lnkInfo = existsSync(LNK) ? posh(`$s = (New-Object -ComObject WScript.Shell).CreateShortcut(${q(LNK)}); $s.TargetPath + '|' + $s.IconLocation`) : '(нет ярлыка)'
+expect('ярлык: установка из выгрузки создала ярлык на рабочем столе — на программу сборки, со значком сборки',
+  ue.code === 0 && inst.code === 0 && lnkInfo.toLowerCase() === `${path.join(UEXP, 'Launcher.exe')}|${path.join(UEXP, 'build.ico')},0`.toLowerCase(),
+  `${ue.out}\n${inst.out}\n${lnkInfo}`)
+expect('ярлык: в деинсталляторе подставлено имя ярлыка', existsSync(SUN) && readFileSync(SUN, 'utf8').includes(`'${SC}.lnk'`), existsSync(SUN) ? readFileSync(SUN, 'utf8') : '(нет файла)')
+let un2 = ''
+try { un2 = execFileSync('cmd', ['/c', SUN], { input: '\r\n\r\n', encoding: 'utf8' }) } catch (e) { un2 = `${e.stdout ?? ''}${e.stderr ?? ''} code ${e.status}` }
+expect('ярлык: деинсталлятор игрока убрал ярлык, папка игры как до установки', !existsSync(LNK) && snap(SGAME) === sBefore, `${un2}\n${snap(SGAME)}`)
+if (existsSync(LNK)) unlinkSync(LNK)   // стенд не оставляет владельцу свой ярлык ни при каком исходе
 
 console.log(bad ? `\nСТЕНД: ${bad} провал(ов)` : '\nстенд: все проверки прошли')
 process.exit(bad ? 1 : 0)
