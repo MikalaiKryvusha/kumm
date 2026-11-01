@@ -73,6 +73,8 @@
     3. Before a launch — no game of ours already running (the scripts refuse with exit 2 and the PID).
     (`[OWNER]` 2026-10-30 ≈15:3x · verbatim in `PROJECT_HISTORY.md`, entry «the owner's words behind HOUSE_RULES §1 rule 16».)
 
+16a. **The machine is the agent's for the Conan build — the game may be in FRONT at any time** (screen capture, real input, measurements): no slot to agree, no question. (`[OWNER]` 2026-11-01 13:40 «в любое время можешь игру на передний план выводить. Ты еще не понял, что последних нескольок дней комп ПОЛНСТЬЮ ТВОЙ!!!! ТАк как мне нужна сборка, а ты телишься блять!»)
+
 17. **Everything we put on a screen — mod UI, installer, launcher, any window — works on every main 16:9 resolution: 720p, 1080p, 2K, 4K.**
     1. Readable at each: text never smaller than the game's or Windows' own text at that size.
     2. A Windows window respects the Windows display scale (per-monitor DPI aware; the owner's TV runs 300 %) and is never bitmap-stretched.
