@@ -43,5 +43,8 @@
 2. A log line that a call happened was read as the effect happening (the blink: «яркость 0.3» logged, full red on screen — EXP-0422).
 3. The agent saw the white temperature on its own frames all day and did not stop on it.
 4. «Release tonight» stood in STATUS as a plan while sections A–C were open.
+5. The hub mockups of 2026-10-31 (review folders 33, 34; ConanExiles/_config/settings_hub/mockups/mockups.html) showed the rows «Виньетка: голод», «Виньетка: жажда»,
+   «Виньетка: мало здоровья» with no mechanics behind them; the in-game window built from mockup 5 silently left them out, and the owner was never told — he
+   saw them and reasonably took them as made (the owner 13:24 «я же видел?»). A mockup row with no code behind it is marked «нет механики» on the mockup itself.
 
 **Rule from now on:** the next chat builds ONE table — feature · how the player sees it · seen in game (yes/no) · report — and «ready» is said only when it is all «yes».
