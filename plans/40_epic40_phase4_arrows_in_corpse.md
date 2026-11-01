@@ -66,6 +66,10 @@ it; a Lua-spawned copy without its own hit leaves at once. Where we want to be: 
 - [ ] R5. **Route (c) — visual + loot.** A `StaticMeshActor` (mesh = the copy's `StaticMeshToShow`) attached to the corpse bone at the copy's relative transform;
       pickup = the arrow item added to the corpse's loot inventory (recon the corpse inventory add call) — E on the corpse then loots it; E on one shaft is NOT
       native here → the outbound question.
+      **Fact for this route (2026-11-01 17:48, bug 73 V1–V3):** a visual mesh needs no actor spawn — `actor:AddComponentByClass(StaticMeshComponent, true,
+      <identity transform>, false)` works from Lua without a crash, then `SetStaticMesh`, `SetCollisionEnabled(0)`, `K2_AttachToComponent(<mesh>, FName(<bone>),
+      2, 2, 0, false)` (`krinik … add_visual_arrow` in the archery `main.lua`). For the corpse: the component on the CORPSE actor, attached to its mesh at the
+      copy's bone, the copy's relative transform kept.
 - [ ] R6. **Pickup facts:** what the game does today on E at a lootable copy on the ground (a miss): the interaction class / prompt, the inventory read of the arrow
       count (recon: the hero's inventory component `funcs`, e.g. a count-by-template call; record the working one in the game map).
 - [ ] R7. Verdict in the research README: the chosen route, the evidence, the routes refuted; the notes' Open bullet rewritten (rule 2).

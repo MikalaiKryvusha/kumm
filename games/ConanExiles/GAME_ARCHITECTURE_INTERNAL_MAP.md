@@ -610,7 +610,12 @@ Temperature (2026-10-30, live + Hosav bytecode): the hero's temperature is `BPEn
   only an ALREADY-LOADED class — else «Failed to find class» in the game log; the figure needs ≈ 10 s to load its look — the owner 11:33; a plain
   `HumanoidNPCCharacter_C` comes without a look). Does NOT work: `SetStat('Athleticism', 20)` (attributes move only by the points of the «Хар-ки»
   window), and the console `exec SetStat …` / `exec God` (reach nothing). Green Kappa: `/Game/Characters/NPCs/Primates/Blueprints/BP_NPC_Wildlife_Kappa_Green.BP_NPC_Wildlife_Kappa_Green_C`.
-  The archery stand — `_config/arrow-stand.sh`.
+  The archery stand — `_config/arrow-stand.sh`. Set-up that worked 2026-11-01 17:4x–17:50 (cases L1–L5, V1–V3): `arrow-stand.sh summon` (green Kappa) →
+  `place 8` → `freeze` BEFORE EVERY shot (an inventory visit lets it walk again); the hero's companion frozen too — `CLASS=HumanoidNPCCharacter_C
+  arrow-stand.sh freeze` (he killed the target mid-recording); every `mouse-seq.ps1` sequence opens with a harmless F13 `kdown:0x7C` (the first input is
+  eaten by the window's activation, EXP-0412 — otherwise the quick-slot key toggles the bow out of sync); a shot = `rdown,wait:1000,lclick,wait:400,rup`;
+  the save's bow in slot 1 broke in the stands — a new «Мощный охотничий лук» by `exec MakeMeAdmin` + `exec SpawnItem 51405 1` lands in quick slot 3. A flight
+  of 8 m lasts ≈ 3 frames at 60 fps: record with `ddagrab` and the desktop HDR off (`SvarogsDream/tools/hdr.ps1 off`, `on` after).
 
 ## Loot generation (read 2026-11-01 08:5x from `/Game/Systems/Loot/New/Culture/RelicHunters/DT_LC_RelicHunter`, 22 rows)
 
