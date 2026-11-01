@@ -25,8 +25,7 @@
 6. **Saves during development are the agent's to use freely.** The owner does not play the Conan build for progress: load, overwrite, break and
    delete the game save and the mods' saves (`Saved/Game_0.db`, `Saved/SaveGames/*.sav`, `Saved/KrinikSettings.lua`) as a test needs — no copy before a run,
    no restore after it, no question to the owner. A save that broke world entry is a stand to repair (`_config/save-restore.sh` from any copy).
-   (`[OWNER]` 2026-11-01 08:47 «обсолютно поебать. Я не играю на прохождение, мы делаем сборку» · «на время разработки можно делать что угодно с ними»;
-   the former rule 6, frame measurements only after «кино выключено», is erased by his word 08:46 «это была разовая история».)
+   (`[OWNER]` 2026-11-01 08:47 «обсолютно поебать. Я не играю на прохождение, мы делаем сборку» · «на время разработки можно делать что угодно с ними».)
 7. **Mods of any game respect the CPU.** Work on the game thread — on a game event, never by timer polling; scene searches (`FindAllOf`,
    `FindFirstOf`, widget walks) — no more often than an event and never in a per-frame loop. A mod measures itself: `os.clock` around its
    handlers, the sum and the worst call to its log once a minute. Accepting an edit — an A-B-A flight: median `MsCPUBusy` and stutters no

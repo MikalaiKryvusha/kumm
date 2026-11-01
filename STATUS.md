@@ -130,6 +130,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 3–4 «i» variants side by side on one frame of the window (e.g. a drawn icon texture; the game's own info glyph if it has one; Noto Sans Italic «i»;
 > no outline) and let the owner pick — do not choose alone.
 > **2026-11-01 08:49 — accepted by the owner:** the fishing difficulty captions «Легко | Спокойно | Строже | Ваниль» (`[OWNER]` «сложность рыбалки - ОК») and the enemy shouts' fade (`[OWNER]` «Крики врагов - ОК»); review folder 9 removed (25 — remove after its clip is closed). NEW for the new chat: `[OWNER]` «я бы в мод UI криника вынес настройку времени задержки отображения фраз на экране» — a row on the KrinikConanUI page of the hub: how long a shout (subtitle) stays on screen (section `krinik_shout_fade`; find where the game sets the line's lifetime first).
+> **2026-11-01 08:49 — NEW for the new chat:** `[OWNER]` «нужно видео, показывающее все интенсивности» — the food / water blink (`krinik_hud_blink`): one 60 fps clip that walks every intensity step (L = 0.25 … 1.0, ten steps) on the live HUD, food and water set by the remote, each step labelled.
 > FIRST next: (0) the two hub remarks above; (1) the owner's answer to #029 (then the C1 fix: the chest's loot table in the mod pak);
 > (2) bug 64 items 47 «All» (ModControlPanel `MDC_MCP`) and 49 «Top Left» (Damage Meter settings) — the same `lit:` route as item 48 (trace the asset's
 > event graph first: a translated option must not break a string comparison or a saved string); (3) plan 38 phase 1 — the inventory button «Настройки
@@ -138,7 +139,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **Earlier FIRST list (still valid):** (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
 >   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
 >   (5) The release gate at 720p / 1080p / 2K / 4K (rule 17). (6) Item 21 — a vanilla quick-bar frame needs a clean-game stand (also for q4).
-> - **Waiting for the owner:** the HUD blink dim start 0.25; the crash-report README.
+> - **Waiting for the owner:** the crash-report README.
 > - Work trees kept: `_paksview-3.0.1` (66 GB) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB) — rule 15. Outward: watch https://github.com/Arora-Sir/Super-Artemis/issues/3.
 >
 > **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied
