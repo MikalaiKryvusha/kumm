@@ -117,3 +117,14 @@ Stand: the game in the background; the main menu and the oasis save, frames by `
 |---|---|---|---|---|---|
 | L1 | `T_KrinikModpackLogo` from `make-pack-logo.py <out> 1.3` (dark fill matched to the game logo), KrinikConanUI pak rebuilt | the main menu, measure the dark fill (source luminance < 70) of both logos in one frame | KRINIK dark-fill percentiles within 2 of CONAN; gold unchanged | pass | 21:02 frame: CONAN 5 / 11 / 19 / 31, KRINIK 6 / 12 / 19 / 30 (before 11 / 17 / 25 / 38); review folder 52 |
 | M1 | `krinik_minimap_coords.lua` `BOTTOM_INSET` 60 → 52, `CORNER_SHIFT` (16, −16.3) → (10, −10.3) | enter the world, frame the minimap | the ring further from the top and right edges (≈ 6 px more at 1080p), the coordinate plate lower, not touching the clock plate | pass | 21:03 frame at 4K: top gap 33 → 48 px, right 33 → 44 px; the coordinate plate ≈ 12 px above the clock plate |
+
+### The ×3 arrow hidden at impact (the owner 2026-11-01 21:07 «нашу x3 мгновенно нужно скрывать, когда происходит слолкновение, и показывать только настоящую x1»)
+
+Stand: the game in the background; a frozen green Kappa 28 m ahead in the water, nobody before the camera; the shot by the remote `LaunchProjectile()` (the
+background twin of the real-mouse shot, found 21:05); for the video only the flying arrow actor slowed (`CustomTimeDilation` 0.1 on that one actor — the
+world runs at normal time).
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| V5 | `StopProjectileInternal` hook in `add_visual_arrow` | one shot into the ground / the Kappa, read the remote right after impact | the log «гашение крупной стрелы при ударе: подписано»; the flying actor's own ×3 mesh `IsVisible` false within the impact frame; the stuck ×1 copy visible | partial | 21:10:37 log «гашение крупной стрелы при ударе: подписано» at the first shot; the remote read of the big mesh after impact found none (my query did not tell our component apart) — the look decided by V6 |
+| V6 | as V5 | the owner plays: shots into the ground, rocks, enemies | the ×3 arrow seen in flight; after impact only the ×1 copy (no big arrow beside it) | pass | the owner's own run 21:11–21:13: `[OWNER]` «да, суппер работает!» · «и земля, и камни, и враги» (the agent's 60 fps recording 21:10 caught the owner's desktop and was deleted unwatched) |
