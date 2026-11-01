@@ -57,9 +57,21 @@ needs `global.utoc` for script objects) → `UAssetGUI tojson <umap> <json> VER_
   Live recipes: hero `FindFirstOf('PlayerController').Pawn`; a container's items — the `ItemInventory` whose full name holds the chest's name, `GetItemCount()`,
   `GetItemList()` → `l[i]:get():GetItemName():ToString()`.
 
+## Option 2, second half — DONE 2026-11-01 10:0x (pack `e44de4b`)
+
+- Loot tags live in the item rows' `GameplayTags` (vanilla `Items/ItemTable`, 5 821 rows: 875 carry `Loot.*`; an item of `ItemTier` N carries `Loot.T(N-1)`;
+  `Systems/Inventory/Tags/DT_ItemTagHolderDefinition` only points at the master table). The mod's items had none: weapons `Item.Weapon`, the Grey One armour
+  51420–51424 = vanilla rows with vanilla tags.
+- 15 items tagged by `patch-mod-asset.py` `tag:` rows (`ConanExiles/_config/krinik_patches/Mines_of_Set__Caverns_of_Set_Item_Table.tsv`): tier 5 (Grey Ancients
+  weapons 77991106–108, 110–113, 115, the shield 77991116, Set's tools 77991101–102, the Shemagh 77991140) → `Loot.General` + `Loot.T4`; tier 4 (Set's Fang 77991104)
+  → `Loot.T3`; tier 3 (Sacred Eldarium 77991105, Set's Healing Tincture 77991133) → `Loot.T2`. Pak in `mods/_krinik-modified/3722525736` (a copy), the original
+  hard-linked as `_patch-originals/Mines_of_Set.pak`.
+- Seen live: the merged item table carries the tags; 12 caverns chests → 80 items with Grey Ancients weapons in nearly every chest. **Balance note:** the vanilla
+  `Loot.General + Loot.T4` pool is small (7 war paints, 2 placeables), so the Set weapons now dominate it — any chest asking that pool gets them often.
+
 ## Open
 
-- Option 2's second half: the mod's own items (`Caverns_of_Set_Item_Table`) given level tags so they drop in the world's chests of their tier — not done yet.
+- The owner's look at the balance (Set weapons in nearly every caverns chest) — fewer T4 rolls in `caverns_loot.py` row 1 if it is too generous.
 
 ## The author's side (checked 2026-11-01 08:5x, Steam API + the Workshop pages)
 

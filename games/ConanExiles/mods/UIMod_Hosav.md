@@ -64,6 +64,14 @@ side panel, a settings window. KRINIK MODIFIED in the build: the pak is rebuilt 
 - Rebuild after a recipe edit: `rebuild-krinik-paks.py --only UIMod_Hosav` builds, but its identity guard refuses an INTENDED change («1 of 228 chunks
   differ — НЕ СТАВЛЮ»); then copy `D:\Temp\kumm-rebuild-krinik\UIMod_Hosav-<n>\out\UIMod_Hosav.pak` into the library folder and `<game>\ConanSandbox\Mods`.
 
+## Temperature icon stages (`W_SmoothHP::Get_TempImage`, 2026-11-01)
+
+- `kismet-trace.py` on the legacy asset (NOT the author's `SUPERUI_Backup_ForFuckups/W_SmoothHP` — a `find` picks it first): the hero's
+  `BPEnergyReceiver:GetEnergy` against doubles — comfort `≥ −20 AND ≤ 20` (`@uexp+101297`, `+101392`); heat `≥ 55 · ≥ 40 · ≥ 30 · ≥ 20`
+  (`+101797`, `+102088`, `+102379`, `+102670`); cold `≤ −55 · ≤ −40 · ≤ −30 · ≤ −20` (`+102961`, `+103252`, `+103543`, `+103834`).
+- The text shows other degrees than the energy: energy 21.1 → «32 °C», 33.0 → «39 °C» (≈ 19.6 + 0.59 × energy).
+- Our colour of the temperature text (`KrinikConanUI:HudOutline`): red at ≥ 30, blue at ≤ −30, white between (the owner 2026-11-01 10:10).
+
 ## Our edits in the build
 
 - Asset strings and layout — `_config/localization/asset-strings/UIMod_Hosav__*.tsv` (SaveUISettings_UIH, W_SmoothHP, W_UI_SettingsButton,
