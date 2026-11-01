@@ -91,6 +91,32 @@
 
 ## Entries
 
+### EXP-0433 · 2026-11-01 · ❌ · #conan #ue4ss #remote #crash #trace
+class: unproven-native-call-in-a-loop
+**Context:** finding which trace channel hits a foliage stone (plan 42), the owner in the running game.
+**Tried / did:** one remote call looping `KismetSystemLibrary:LineTraceSingle` over channels 0…31 and reading `hit.Component:get()` inside `pcall`.
+**Result:** ❌ the game died (EXCEPTION_ACCESS_VIOLATION reading 0x18, stack in UE4SS) in the OWNER's session; `pcall` does not catch a native fault.
+**Lesson:** a native call with an unproven argument (an enum index beyond the game's defined trace types, an unset out-struct field) is tried ONCE, on a
+value read from the game first (the component's own responses list the channels: here Block 9–14, 29), never swept over a range — and never in the
+owner's session: in his game only calls already proven this session. Same class as EXP-0403 (an unproven property read crashed UE4SS).
+**Repro:** read the target's responses first — `c:GetCollisionResponseToChannel(ch)` (safe, proven 21:2x) — then ONE `LineTraceSingle` on one listed channel.
+**Trigger:** writing a remote `lua` with a `for` over enum values passed into a native function → stop, take one value from the game's own data.
+**Not for:** loops over game-returned arrays (components, instances) with proven methods.
+
+### EXP-0432 · 2026-11-01 · ❌→✅ · #conan #owner-review #knowledge
+class: knowledge-not-written
+**Lesson:** the Conan review folders 50–51 went into Svarog's review dir (my memory named only Svarog's path) — the owner could not find them. Each game has
+its own review dir; Conan's is `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\` (game map row). And a review artifact the owner already saw in his own play
+(the ×3 arrow) is not re-shot for him.
+**Repro:** `ls "/d/Games/Conan Exiles Mods/НА ОТСМОТР НИКОЛАЕМ/" | sort -n | tail -3` before writing a new folder — the previous number must be there.
+
+### EXP-0431 · 2026-11-01 · ❌ · #conan #video #privacy
+class: capture-outside-the-game
+**Lesson:** a desktop recording (`ddagrab`) taken while `mouse-seq.ps1` brings the game to the front only for its sequence caught the owner's own desktop
+before and after — deleted unwatched. Record the screen only while the game holds it for the whole clip (the foreground path), else frame the game window
+(`capture-burst.ps1`).
+**Repro:** start `ddagrab` only after the game is in front and stop it before `mouse-seq.ps1` hands the foreground back.
+
 ### EXP-0430 · 2026-11-01 · ❌→✅ · #conan #ui #video #flicker #measure
 class: wrong-proxy
 **Lesson:** `ffmpeg -f gdigrab` of the full-screen game gives 2–3 s of picture and then black frames — useless for a flicker check. The project's working
