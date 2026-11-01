@@ -145,8 +145,14 @@ const STUDY = [   // команды разбора: имя мода — перв
   /retoc[^\n]*to-legacy[^\n]*--filter\s+["']?([A-Za-z0-9_]+)/,
 ];
 const WORK = [    // иная работа с модом: раскатка одного мода, правка его исходника
-  /Deploy-ModPack\.ps1[^\n]*-Only\s+["']?([A-Za-z0-9_]+)/,
+  // имя манифеста бывает с пробелами в кавычках («Simple Minimap»): прежний разбор брал первое слово «Simple» и требовал Simple.md (2026-11-01)
+  /Deploy-ModPack\.ps1[^\n]*-Only\s+(?:"([^"]+)"|'([^']+)'|([A-Za-z0-9_]+))/,
 ];
+// Имя мода → имя конспекта: пробелы → «_» (Simple_Minimap.md) или без пробелов (TheDamageMeter.md) — какой файл есть; иначе первый вид.
+const noteName = (name, exists = (n) => existsSync(join(HERE, '..', '..', notesRel(n)))) => {
+  const cands = [name.replace(/\s+/g, '_'), name.replace(/\s+/g, '')];
+  return cands.find((n) => exists(n)) || cands[0];
+};
 const SRC_EDIT = /ConanExiles[\\/]_unpacked[\\/]([A-Za-z0-9_]+)[\\/]/;
 const notesRel = (mod) => `${NOTES_DIR}/${mod}.md`;
 const norm = (p) => String(p || '').replace(/\\/g, '/').toLowerCase();
@@ -164,7 +170,7 @@ export function modOf(tool, input, isMod = (name) => packMods().has(name)) {
   if (tool === 'Bash' || tool === 'PowerShell') {
     const c = String(input.command || '');
     for (const re of STUDY) { const m = c.match(re); if (m) return re === RETOC && !isMod(m[1]) ? null : { mod: m[1], study: true }; }
-    for (const re of WORK) { const m = c.match(re); if (m) return { mod: m[1], study: false }; }
+    for (const re of WORK) { const m = c.match(re); if (m) return { mod: noteName(m[1] || m[2] || m[3]), study: false }; }
   }
   if (tool === 'Edit' || tool === 'Write') {
     const m = String(input.file_path || '').match(SRC_EDIT);
