@@ -16,6 +16,6 @@ not run (the 2026-10-31 stand P8 is the control: 0 copies 2 s after the kill).
 |---|---|---|---|---|---|
 | A1 | The hook stands | first shot | log «стрелы в трупе: перехват уборки копии стоит» | pass | «родился Corpse_C, прицепленных к существам копий 3» (native CorpseBase) |
 | A2 | Arrows move to the corpse | 3 hits, kill | log «стрела в трупе: … прицеплена true» ×3; 3 copies attached to the corpse's mesh 2 s later | fail | re-attached (attach true) and destroyed by the game's event 1–2 s later — report 2026-11-01_conan-arrows-corpse-recon.md |
-| A3 | Seen on the ragdoll | frame of the corpse | the shafts stand in the body at the hit places | blocked | no copy survives |
-| A4 | Picked up | E on a corpse arrow | the arrow count / weight grows; that copy gone | blocked | — |
+| A3 | Seen on the ragdoll | frame of the corpse | the shafts stand in the body at the hit places | fail | observed: 0 copies 10 s after the kill (run 7, 13:09) — no shaft on the ragdoll |
+| A4 | Picked up | E on a corpse arrow | the arrow count / weight grows; that copy gone | fail | observed: nothing to pick up — 0 copies after the kill (run 7) |
 | A5 | Humanoid | the same on a humanoid | as A2–A3 | not run | — |
