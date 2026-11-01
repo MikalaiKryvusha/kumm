@@ -128,6 +128,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > own key capture; refusal «Эта клавиша уже занята» by `[OWNER]` 23:34) — review folder 57. **IN FLIGHT 23:3x:** the kit rebuilt with the Damage Meter page rows
 > (`scratchpad/kitout/KrinikConanUI.pak`, 10 000 867 B, not yet copied into `_unpacked`), the Damage Meter adapter in `krinik_mod_settings.lua` (read the slot,
 > write through the author's window, `[NOT-TESTED]`) — cases D1–D4 of `TC_conan_hub_rows_audit_2026-11-01.md`. Review folders for the owner: 54, 55 (taken: 6), 56, 57.
+> **CHAT 70dda2b5 FORCE-CLOSED 2026-11-01 23:41 +03:00 (the context window at its limit). FIRST in the next chat, in order:**
+> 1. **The owner's debt — interview #030 answered 23:41:** arrows stuck in a corpse go into its loot (steps in «Awaiting human review» above). The arrows already
+>    stay in the corpse (pack `15a7c82`); nothing of the loot part is built.
+> 2. Plan 40.3 D1–D4 — the Damage Meter page: the kit is rebuilt with its rows and deployed (pack, `_unpacked/KrinikConanUI/KrinikConanUI.pak` 10 000 867 B,
+>    UNCOMMITTED — the pak is git-ignored, nothing to commit), the adapter is in `krinik_mod_settings.lua` (`[NOT-TESTED]`). The Xevyr hub cannot be opened by the
+>    remote (`_G.__krinik_hub` lives in KrinikConanUI's own Lua state — EXP-0438): switch the list's «Моды Xevyr'а» entry to `hub = "xevyr"` for a test, or a shared variable.
+> 3. The owner's eye waits on review folders 54 (prompt in game), 56 (arrows in a corpse + the enemy bar beside «E Взять»), 57 (mockups 8–9).
+> ⚠️ Закрыто принудительно 2026-11-01 23:41 +03:00: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft.
+> Ложных утверждений на месте не осталось: «калька» в уроке и «вытянуть стрелу нельзя» в кейсе A9, интервью, конспекте и плане исправлены там, где стояли.
 > **CHAT c5fe291c CLOSED 2026-11-01 21:57 +03:00 (soft; `[OWNER]` 21:55 «и в новом чате продолжим делать сборку»). FIRST in the next chat, in order:**
 > 1. Restart the game when the owner is out of it (the backing-only-under-the-word layout of `ac31b3a` loads at start), then his verdict on «E Взять» (stones at his feet with the camera above; fade; backing 0.35); then the prompt's A-B flight (rule 7) and the
 >    enemy health bar sitting where the prompt sits (`plans/42_conan_pickup_prompt_foliage.md` → Next steps; report `testcases/reports/2026-11-01_conan-pickup-prompt.md`).
