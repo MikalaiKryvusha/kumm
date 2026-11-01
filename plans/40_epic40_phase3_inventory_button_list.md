@@ -129,6 +129,15 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
             `dmgWidget`, `dmgComponent`, the controller), then Lore & Loot (5, `LLH_AC_PlayerComp_C.UpdateSettings`), Proximity Party (4), Simple Minimap (10,
             `EnableSettings`), Al-Merayah (13, the server RPC `ServerSaveSettings`). A value that cannot be applied without the author's window → «нет механики»
             on the mockup, row left out (rule 23).
+            **Damage Meter adapter — design (2026-11-01 23:1x, desk, recon §1):** `FORK: options (1) drive the author's own window — ActivateModule(DN_UI_Settings),
+            set its controls (UIScaleSlider (v−0.5)·2, SLD_Opacity (v−0.30)/0.65, DDL_Anchor index, the four checkboxes, refreshSlider (v−0.05)/0.95,
+            segmentSlider (v−5)/10, the colour buttons' values, key_MouseKey), call its SaveSettings (it saves the slot and pushes into dmgWidget /
+            dmgComponent / the controller, then closes) | (2) re-implement SaveSettings in Lua (the SaveGame fields + SaveGameToSlot + ≈ 10 pushes) · price
+            of error: (1) the author's window may flash for a frame over ours; (2) drifts from the author's code on his update, a missed push = a value saved
+            but not applied · consulted: recon §1 bytecode of SaveSettings / InitializeControls, «Hard to bind» item 3`. `[AI]` (1) first — the author's own
+            path applies everything; its flash is measured on a 60 fps clip (EXP-0430) before the row ships; (2) only if the flash cannot be hidden
+            (`SetRenderOpacity(0)` on the author's window before the save). Read: `GameplayStatics:LoadGameFromSlot("DamageMeter", 0)` → the SaveGame
+            fields (the CDO defaults when the slot is absent).
       - [ ] I6.4 Cases per page (read the default, change by the real mouse, «Сохранить», reopen the mod's OWN window — the same value; the effect in the world),
             frames at the four resolutions; the sub-lists of step 2 go when every Xevyr mod has its page.
 - [x] I4. The pause section's Esc map `MOD_WINDOWS` (`krinik_pause_in_menu.lua`) gains the new module rows; «one window at a time» — opening an entry calls

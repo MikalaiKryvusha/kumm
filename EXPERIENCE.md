@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0436 · 2026-11-01 · ❌→✅ · #lua #conan #shadow #guard
+class: name-shadowed-by-later-local
+**Lesson:** a new top-level `local function shown(p)` in krinik_mod_settings.lua sat above an older `local shown = {}` — every function below saw the
+table; `loadfile` was green and the window fill would have died on «attempt to call a table value». Found by reading the file around the edit, before a
+run. Before adding a top-level name to a section, grep it in the file; the sweep found a twin (`VIS_COLLAPSED` twice in krinik_pause_in_menu.lua, same value).
+mechanized: `ConanExiles/_config/check-lua-shadow.py <folders>` (red on the restored broken copy, 0 on our six Lua mods)
+
 ### EXP-0435 · 2026-11-01 · ❌→✅ · #hook #guard #heredoc
 class: data-read-as-command
 **Lesson:** a guard that matches tool names in a shell command must not read the heredoc body: appending cases to a TC file whose stand text named

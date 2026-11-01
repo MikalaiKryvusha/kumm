@@ -118,7 +118,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **NOW (chat 70dda2b5, from 22:13):** «E Взять» layout `ac31b3a` seen in game (P6, P7 pass, real-E path P8 pass; review folder 54); the component list growth fixed
 > (P11, pack `8ac0810`); the owner 22:41 «кнопку E ближе поставь к Взять» — variants 24 / 12 / 6 in review folder 55, his pick 22:48 «вариант 3» = 6 — in the source
 > (`KEY_GAP`), deployed and framed after the A-B (case P12); the bench start hold 20 → 40 s (`[OWNER]` 22:38, pack `8ac0810`; A1 with 20 s: CPU 16.61 ms, 69 stutters — with 40 s: 14.89 ms, 25); the A-B-A-B
-> of the prompt (P9) re-run with 40 s by the owner's 22:42 «замеры нужно переповторить» — B1, A2, B2 running in the background (`scratchpad/ab_rest.sh`), then the run report.
+> of the prompt (P9) re-run with 40 s by the owner's 22:42 «замеры нужно переповторить» — B1, A2, B2 running in the background (`scratchpad/ab_rest.sh`), then the run report
+> (draft `testcases/reports/2026-11-01_conan-pickup-prompt-evening.md`, uncommitted). **Dayloop from 22:55 (`[OWNER]` «работай автономно»):** hub mode Lua part (I6.1 — `_G.__krinik_hub`,
+> cases H1–H3, not deployed yet); mockups 8 (own colour picker) and 9 (own key capture) in `settings_hub/mockups/mockups.html`, not shot yet; the Damage Meter
+> adapter design in plan 40.3 I6.3; corpse arrows R1 done (`researches/conan-arrows-in-corpse/` — UE4SS delegate `Remove`; next the live probe R2,
+> `scratchpad/r2_probe.lua`); the test-after-code hook fixed (heredoc bodies, KUMM `47a0be2`). NEXT after B2: deploy KrinikConanUI (gap 6 + hub mode), one launch for P12, H1–H3, R2.
 > **CHAT c5fe291c CLOSED 2026-11-01 21:57 +03:00 (soft; `[OWNER]` 21:55 «и в новом чате продолжим делать сборку»). FIRST in the next chat, in order:**
 > 1. Restart the game when the owner is out of it (the backing-only-under-the-word layout of `ac31b3a` loads at start), then his verdict on «E Взять» (stones at his feet with the camera above; fade; backing 0.35); then the prompt's A-B flight (rule 7) and the
 >    enemy health bar sitting where the prompt sits (`plans/42_conan_pickup_prompt_foliage.md` → Next steps; report `testcases/reports/2026-11-01_conan-pickup-prompt.md`).

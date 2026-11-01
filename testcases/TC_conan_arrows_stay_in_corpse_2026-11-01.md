@@ -19,3 +19,11 @@ not run (the 2026-10-31 stand P8 is the control: 0 copies 2 s after the kill).
 | A3 | Seen on the ragdoll | frame of the corpse | the shafts stand in the body at the hit places | fail | observed: 0 copies 10 s after the kill (run 7, 13:09) — no shaft on the ragdoll |
 | A4 | Picked up | E on a corpse arrow | the arrow count / weight grows; that copy gone | fail | observed: nothing to pick up — 0 copies after the kill (run 7) |
 | A5 | Humanoid | the same on a humanoid | as A2–A3 | not run | — |
+
+### Route (a) — unbind the copy from the creature's OnDestroyed (plan 40.4 R2; `researches/conan-arrows-in-corpse/README.md`)
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| A6 | a green Kappa frozen 8 m ahead, 1–2 real arrows in it (`aim-shot.sh`), the section with the unbind deployed | the remote reads the type and methods of the creature's `OnDestroyed` wrapper (`scratchpad/r2_probe.lua`, mode read) | a delegate wrapper with a `Remove` method listed (or the read says what it is) | — | — |
+| A7 | as A6 | kill the Kappa (`KillCharacter`) | the log «отвязано от уборки существа N из N»; 10 s later the copies alive, attached to the corpse mesh at their bones (`r2_probe.lua` count) | — | — |
+| A8 | as A7 | a frame from the side at +10 s | the shafts stand in the ragdoll | — | — |
