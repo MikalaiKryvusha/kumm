@@ -114,8 +114,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (1) corrections by the owner's word: F1 = the cursor, a click expands the Damage Meter (new notes `games/ConanExiles/mods/TheDamageMeter.md`); AIM15
 > dropped (the arrow is born at the bow since Archery 0.3.0); EXP-0419. (2) THE PUBLIC REPO IS LIVE: https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack
 > (all 64 mod authors from Steam / Nexus — pack `_config/public_release/fetch-authors.mjs` + `fill-authors.mjs`; idea 23 → «Public repo — CREATED»).
-> (3) THE HUB WINDOW BY MOCKUP 5 — all cases pass (`testcases/reports/2026-11-01_conan-hub-mockup-fidelity.md`), review folder `41_hub_kak_maket` waits
-> for the owner's eye (the game's PT Serif; EXP-0420: the kit cannot import a font). (4) C1 CONFIRMED: the 16 Caverns of Set chests spawn no loot
+> (3) THE HUB WINDOW BY MOCKUP 5 — all cases pass (`testcases/reports/2026-11-01_conan-hub-mockup-fidelity.md`), review folder `41_hub_kak_maket` SEEN by the owner
+> 2026-11-01 08:42, three remarks below (the game's PT Serif; EXP-0420: the kit cannot import a font). (4) C1 CONFIRMED: the 16 Caverns of Set chests spawn no loot
 > (`games/ConanExiles/mods/CavernsOfSet.md`) — the fix waits for interview #029 (shown in chat). (5) `kismet.py` patches literals in the EVENT GRAPH
 > (entry points shifted, self-checked; regression 3/3 byte-equal) → bug 64 item 48 FIXED: the minimap «Показ времени» in Russian (report
 > `2026-11-01_conan-minimap-time-dropdown-ru.md`). (6) knowledge-hook reads a quoted `-Only "<Mod Name>"`. (7) R2: 4 probes could not find a world stone
