@@ -64,7 +64,13 @@ leaves, the prompt shall go. Maintain: our mods' 1 ms CPU budget in gameplay fra
   camera reported NO overlaps with anything (radius 25 and 70, boxes and landscape included), though a one-shot `SphereOverlapComponents` query at the same
   point works — a component attached under the camera does not refresh its overlaps when the parent moves. Stand removed, overlap events set back to false on
   all 281 components.
-- **Routes left:** (1) a sensor that moves ITSELF each time the camera moves (a kit actor with its own component and overlap event — needs a stand proof);
+- **E2, the owner's «Датчик-объект из кита — попробуем?» 21:26 — the event route CLOSED (21:27–21:30):** a standalone engine `TriggerSphere` actor spawned
+  at the stones (radius 150, overlap events on, collision QueryOnly, Overlap to ALL channels incl. 22; the pickup components with overlap events on,
+  `bMultiBodyOverlap` already true) and moved by `K2_SetActorLocation` — **0 overlaps**, while `GetInstancesOverlappingSphere` at the same point listed
+  `SM_rock_small01`, `SM_rock_small03`, `GFL_Sarcobatus_Desert01`; `SphereOverlapComponents` (all 32 object types) found no foliage either. The pickup
+  instances give no physics overlap at all — the game finds them by instance search, not by physics. No sensor (kit or not) can report them. Stand removed,
+  overlap events back to false on all 281.
+- **Routes left:** ~~(1) a sensor that moves ITSELF~~ (closed by E2); the only one — (2) below. Former text: (1) a sensor that moves ITSELF each time the camera moves (a kit actor with its own component and overlap event — needs a stand proof);
   (2) the native `GetInstancesOverlappingSphere` on the nearby pickup components at the crosshair point, on a rhythm (variant A of 21:1x — the owner's
   decision on the rule-7 exception is still open).
 
