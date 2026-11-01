@@ -125,7 +125,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `kit-krinik-modsettings.py` + Lua `krinik_mod_settings.lua` rewritten to mockup 5's CSS — the game's PT Serif, flat panel, own slider / value / checkbox /
 > flat buttons (`games/ConanExiles/mods/KrinikConanUI.md` → «The fidelity pass»); all cases pass (`testcases/reports/2026-11-01_conan-hub-mockup-fidelity.md`);
 > the owner's save restored, his `KrinikSettings.lua` absent as before.
-> FIRST next (2026-11-01): the list below from (3) — C1 caverns chest, R2 stone stand, plan 38 step 7–8 (the inventory button «Настройки модов»).
+> **2026-11-01 05:3x — C1 DEFECT CONFIRMED:** the 16 Caverns of Set chests spawn no loot (level file + live read; notes `games/ConanExiles/mods/CavernsOfSet.md`);
+> the fix waits for the owner's loot choice — interview #029 (recommended: the relic-hunter table of the chests beside them).
+> FIRST next (2026-11-01): plan 38 phase 1 — the inventory button «Настройки модов» + the upward list (heavy, start with a fresh context); R2 stone stand;
+> C1 fix after #029.
 > FIRST next (2026-10-31, superseded by the line above for 1–2): (1) the owner's eye on folders `39_hub_look` and `40_arrow_clip` (AIM15); (2) the public repo after his README read (`38_public_readme`);
 > (3) C1 — read the placed chests of `Mines_of_Set/Caverns_of_Set_Level` from the level file; (4) R2 — a natural stone pickup stand; (5) plan 38 step 7–8
 > (phase 1 — the inventory button «Настройки модов», W24: today the hub opens only by the remote). Before any remote call on a mod's own function —

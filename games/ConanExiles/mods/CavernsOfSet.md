@@ -1,0 +1,33 @@
+# Mod notes — Caverns of Set (Workshop 3722525736, PNutt)
+
+> **Created:** 2026-11-01 · **Parent:** case C1 of `testcases/TC_conan_build_stability_compat_perf_2026-10-26.md`; pack `docs/17-совместимость-3.0.1-по-журналу.md`
+> **Status:** living notes — the ONE place for this mod's internals
+> **Outbound:** — (the loot choice → the owner, see «Open»)
+
+**What it is.** A cave level of the Mines of Set under the Exiled Lands with its own chests, teachers and journal. Pak `Mines_of_Set.pak` (1.66 GB wrapper; inner
+`Mines_of_Set-Windows.utoc` also in `_paksview-3.0.1`), level `/Game/Mods/Mines_of_Set/Caverns_of_Set_Level`.
+
+## How to look inside
+
+`retoc-5.8 to-legacy --version UE5_7 --no-shaders --filter Caverns_of_Set_Level D:/work/ai_sandbox/_paksview-3.0.1 <work>` (the FOLDER, not the utoc: the converter
+needs `global.utoc` for script objects) → `UAssetGUI tojson <umap> <json> VER_UE5_8` (70 MB) → exports by `ClassIndex` (2026-11-01).
+
+## The chests (level file, 2026-11-01 05:2x)
+
+- 60 loot spawners in the level; 16 chests are the MOD's `BP_PL_CoS_Loot_Chest_C`, the rest vanilla (`BP_PL_LootChest_Coins` 10, `…_Legendaries` 7,
+  `…_Relic_T4` 7, `…_Blackhand_T5` 3, `…_Dogs_T3` 3, `…_Dogs_T4`, `…_Exiles_T3/T4`, `…_Generic_T4`).
+- **No placed chest overrides its loot table**: the level's name table holds no `LootTable`, and every chest's `BP_AC_LootSpawner` instance sets only
+  `UCSSerializationIndex`, `bNetAddressable`, `CreationMethod`. So the 16 mod chests take the class default — `Default__BP_PL_CoS_Loot_Chest_C.LootTable` and the
+  spawner's `LootTableFromSpawnTable` → `/Engine/UnknownPackage` (docs/17): the table they wait for, `/Game/Mods/Mines_of_Set/Tables/Caverns_of_Set_Loot_Chest_Table`,
+  is in neither the author's pak nor the game. **CONFIRMED LIVE 2026-11-01 05:2x:** all 16 mod chests are in the world (always loaded); chest `_7` at (-154486, 6216, 4768) — the file's
+  position is the world's — reads `BP_AC_LootSpawner.LootTableFromSpawnTable` = nil / row None and `LootTable` = nil, while the vanilla chests of the same level
+  read `DT_LC_Exiles` (Exiles T4) and `DT_LC_RelicHunter` (Relic T4): **the 16 mod chests spawn no loot.**
+- Positions (world units, `RootComponent.RelativeLocation`): `_0` (-131073, 55022, -15454) · `_1` (-142784, 41510, -13842) · `_2` (-144182, 41063, -13842) ·
+  `_3` (-143853, 41721, -12790) · `_4` (-133645, 61810, -15444) · `_5` (-111565, 84263, -3764) · `_6` (-116426, 18006, -3366) · `_7` (-154486, 6216, 4768) ·
+  `_8` (-156362, 30024, 3722) · `_9` (-125416, 86215, -11780) · `_10` (-122381, 82233, -11780) · `_11` (-126670, 48511, -12827) · `_12` (-126138, 47030, -12827) ·
+  `_13` (-120266, 18372, -12299) · `_14` (-135600, 33539, -12593) · `_15` (-129815, 40185, -10337).
+
+## Open
+
+- The fix needs the owner's choice of WHAT the chests hold (the author's own table is lost): a vanilla table of the same level (the T4 chests beside them) or a
+  table of our own at the expected path (kit).
