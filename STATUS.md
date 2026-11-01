@@ -144,7 +144,15 @@ the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/Con
 > → `-Export` → 7z zip volumes 700m → unpack → SHA-256 compare), `[NOT-TESTED]` until its first run; then the install from the volumes on the real game after
 > `uninstall_krinik_build.cmd` (the player's path), `-Verify`, world entry; then the 1.0.0 release (the public repo README still says «первый выпуск» until
 > that push). After any Lua section edit run `ConanExiles/_config/devkit/check-lua-templates.py` (EXP-0421).
-> Seen and not yet checked: the hero lost his armour after a launch closed on a stuck loading screen (10:51 «Лёгкая / 0»). NEXT: the archive (above) → the 1.0.0 release; then the
+> **ORDER (`[OWNER]` 2026-11-01 11:11–11:12 «да не нужно архив собирать!! Сборка же еще не готова!!» · «релизный архив соберем и все документы обновим,
+> когда сборку сделаем и протестируем на всех разрешениях 16 к 9»):** the release archive and the document refresh go LAST — after the build is finished and
+> tested at 720p / 1080p / 2K / 4K. The 11:10 archive run was stopped and its 16 GB removed; `make_volumes.sh` waits for that moment.
+> NEW 11:11: `[OWNER]` «по установке - сборка на рабочем столе создает ярлык Krinik Conan» — the install creates a desktop shortcut «Krinik Conan» (to the
+> launcher, the build icon); the uninstall removes it. STARTED 11:13 (engine only, `[NOT-TESTED]`): `install.ps1` written by `-Export` creates the shortcut from
+> `manifest.shortcut {name, target, icon}`; the uninstaller template gets `{SHORTCUT}` = that name. LEFT: add `"shortcut": {"name": "Krinik Conan", "target":
+> "KrinikConanLauncher.exe", "icon": "krinik_build_icon_1.ico"}` to `ConanExiles/modpack.json`; add to `_config/uninstall/uninstall.cmd` before «Готово» a
+> powershell line removing `<Desktop>\{SHORTCUT}.lnk`; test with `tools/fixture-pack.mjs` (export → install.ps1 → shortcut exists → -Restore → gone).
+> Seen and not yet checked: the hero lost his armour after a launch closed on a stuck loading screen (10:51 «Лёгкая / 0»). NEXT: the build items below; the archive and the release LAST; then the
 > inventory button, the shout row, the blink video, «All»/«Top Left», the stone, the measurements, the arrows in corpses.
 > (was) PARKED 09:33 — the caverns chests (option 2): the table the 16 chests import is one object (both `LootTableFromSpawnTable.DataTable` and `LootTable`
 > of `BP_PL_CoS_Loot_Chest` → the missing package `/Game/Mods/Mines_of_Set/Tables/Caverns_of_Set_Loot_Chest_Table`); row struct `/Script/ConanSandbox.LootTableRow`

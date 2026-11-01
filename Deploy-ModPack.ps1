@@ -1006,7 +1006,9 @@ function Invoke-DeployTarget {
                 ) -join "`r`n"
             }
             # cmd.exe читает построчно по CRLF; шаблон из git может прийти с LF - приводим.
-            $body = $body.Replace('{BACKUP}', $script:BackupDirName).Replace("`r`n", "`n").Replace("`n", "`r`n")
+            # {SHORTCUT} = manifest.shortcut.name - the desktop shortcut install.ps1 creates; the uninstaller removes it (2026-11-01). [NOT-TESTED]
+            $shortcutName = if ($pack.shortcut -and $pack.shortcut.name) { [string]$pack.shortcut.name } else { '' }
+            $body = $body.Replace('{BACKUP}', $script:BackupDirName).Replace('{SHORTCUT}', $shortcutName).Replace("`r`n", "`n").Replace("`n", "`r`n")
             [System.IO.File]::WriteAllText((Join-Path $Target.Path $un.cmd), $body, (New-Object System.Text.UTF8Encoding($false)))
             Ok "uninstaller: $($un.cmd) (undo journal $script:BackupDirName\journal.txt)"
         }
@@ -1562,7 +1564,18 @@ function Write-BundleInstaller {
         '}',
         'Write-Host "Installing $($m.packName) into $GameDir" -ForegroundColor Cyan',
         '& (Join-Path $here ''Deploy-ModPack.ps1'') -Deploy -PackDir $packDir -GameDir $GameDir',
-        'exit $LASTEXITCODE'
+        '$rc = $LASTEXITCODE',
+        '# manifest.shortcut {name, target, icon}: a desktop shortcut to the build''s own program (Krinik build 2026-11-01, the owner: "Krinik Conan").',
+        'if ($rc -eq 0 -and $m.shortcut -and $m.shortcut.name -and $m.shortcut.target) {',
+        '    $lnk = Join-Path ([Environment]::GetFolderPath(''Desktop'')) ($m.shortcut.name + ''.lnk'')',
+        '    $s = (New-Object -ComObject WScript.Shell).CreateShortcut($lnk)',
+        '    $s.TargetPath = Join-Path $here $m.shortcut.target',
+        '    $s.WorkingDirectory = $here',
+        '    if ($m.shortcut.icon) { $s.IconLocation = (Join-Path $here $m.shortcut.icon) + '',0'' }',
+        '    $s.Save()',
+        '    Write-Host "Desktop shortcut: $lnk" -ForegroundColor Green',
+        '}',
+        'exit $rc'
     )
     $cmd = @(
         '@echo off',
