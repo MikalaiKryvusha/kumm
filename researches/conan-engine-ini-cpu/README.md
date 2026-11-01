@@ -163,7 +163,7 @@ from `ConanSandbox-Win64-Shipping.exe` 2026-10-30 (a UE help string sits right b
 9. **R8** distance price as a number for the owner's decision (not a cut). <!-- attribution-ok: names a decision still open for the owner, no decision of his is claimed -->
 10. `tick.AllowConcurrentTickQueue` / `tick.AllowAsyncTickDispatch` (main-thread §1 row 8, `[risky]`: tick order changes).
 
-Protocol: the one in `researches/conan-main-thread/README.md` §3 (warm flights only, A-B-A-B, the owner's word «кино выключено», machine
+Protocol: the one in `researches/conan-main-thread/README.md` §3 (warm flights only, A-B-A-B, machine
 lock). Each value must be confirmed by the log line `Set CVar [[…]]`, or by `exec <name>` with no value, before the flight counts.
 
 ## 4. Conan-specific community findings

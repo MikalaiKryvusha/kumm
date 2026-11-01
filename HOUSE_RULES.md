@@ -22,10 +22,11 @@
    the verdict: the frame sheet next to the clip; transitions — `ffmpeg -ss <s> -t <s> -vf fps=10,scale=960:-1,tile=…`; what is seen — one
    line in the case. A UI case without a watched clip does not get `pass`.
 5. **At most two helpers (Agent, workflow) at a time.** Cut big work into pieces and queue them.
-6. **Frame-time measurements only after the owner's word "the movie is off".** Ask once per working session, by voice
-   (`SvarogsDream/tools/voice_say.py`, the phrase in the file `SvarogsDream/_harness/say.txt`), and wait for the answer; his word holds until
-   he says otherwise. The measurement is a separate step at the end of a batch. The report carries the line «кино владельца: выключено, его
-   слово <время>»; a measurement without it is a draft.
+6. **Saves during development are the agent's to use freely.** The owner does not play the Conan build for progress: load, overwrite, break and
+   delete the game save and the mods' saves (`Saved/Game_0.db`, `Saved/SaveGames/*.sav`, `Saved/KrinikSettings.lua`) as a test needs — no copy before a run,
+   no restore after it, no question to the owner. A save that broke world entry is a stand to repair (`_config/save-restore.sh` from any copy).
+   (`[OWNER]` 2026-11-01 08:47 «обсолютно поебать. Я не играю на прохождение, мы делаем сборку» · «на время разработки можно делать что угодно с ними»;
+   the former rule 6, frame measurements only after «кино выключено», is erased by his word 08:46 «это была разовая история».)
 7. **Mods of any game respect the CPU.** Work on the game thread — on a game event, never by timer polling; scene searches (`FindAllOf`,
    `FindFirstOf`, widget walks) — no more often than an event and never in a per-frame loop. A mod measures itself: `os.clock` around its
    handlers, the sum and the worst call to its log once a minute. Accepting an edit — an A-B-A flight: median `MsCPUBusy` and stutters no

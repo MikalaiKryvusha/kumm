@@ -128,6 +128,7 @@ rewritten) and seen collapsed after a restart (23:10). Any remote call that chan
 closing, and `SaveGames/` is copied with the save before such a run.
 **Repro:** `ls -la --time-style=+%H:%M:%S "<game>/ConanSandbox/Saved/SaveGames/"` before and after the run — a fresh mtime is a changed owner state.
 **Trigger:** a remote call on a mod's own function (Restore, Minimize, Toggle, Save…).
+superseded 2026-11-01: `HOUSE_RULES.md` rule 6 — saves are the agent's to use freely during development (the owner 08:47); no copy before a remote call
 none-cheap: the check is the mtime listing above; `save-restore.sh` could grow a SaveGames copy
 
 ### EXP-0416 · 2026-10-31 · ❌→✅ · #conan #stand #mouse-seq #archery #hub

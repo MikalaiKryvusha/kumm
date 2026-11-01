@@ -129,18 +129,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `Txt_KrinikInfo_<id>`, kit `rimmed(..., radius="half")`); the mockup's is an ITALIC bold Georgia «i» 8.5 px in a 12 px circle. Taste class: show
 > 3–4 «i» variants side by side on one frame of the window (e.g. a drawn icon texture; the game's own info glyph if it has one; Noto Sans Italic «i»;
 > no outline) and let the owner pick — do not choose alone.
+> **2026-11-01 08:49 — accepted by the owner:** the fishing difficulty captions «Легко | Спокойно | Строже | Ваниль» (`[OWNER]` «сложность рыбалки - ОК») and the enemy shouts' fade (`[OWNER]` «Крики врагов - ОК»); review folder 9 removed (25 — remove after its clip is closed). NEW for the new chat: `[OWNER]` «я бы в мод UI криника вынес настройку времени задержки отображения фраз на экране» — a row on the KrinikConanUI page of the hub: how long a shout (subtitle) stays on screen (section `krinik_shout_fade`; find where the game sets the line's lifetime first).
 > FIRST next: (0) the two hub remarks above; (1) the owner's answer to #029 (then the C1 fix: the chest's loot table in the mod pak);
 > (2) bug 64 items 47 «All» (ModControlPanel `MDC_MCP`) and 49 «Top Left» (Damage Meter settings) — the same `lit:` route as item 48 (trace the asset's
 > event graph first: a translated option must not break a string comparison or a saved string); (3) plan 38 phase 1 — the inventory button «Настройки
-> модов» + the upward list (heavy, ≈ 3–4 h); (4) R2 — SPAWN a stone in front of the hero by the remote (HOUSE_RULES rule 11.5a, the owner 08:45), then E at the default and the far zoom. Before any remote call on a mod's own function —
-> copy `Saved/SaveGames/` (EXP-0417); the owner has NO `Saved/KrinikSettings.lua` — delete the one a save case writes.
+> модов» + the upward list (heavy, ≈ 3–4 h); (4) R2 — SPAWN a stone in front of the hero by the remote (HOUSE_RULES rule 11.5a, the owner 08:45), then E at the default and the far zoom. Saves: anything goes during development (HOUSE_RULES rule 6).
 > **Older handover blocks (chat a3dcf82b and the 2026-11-01 04:4x–05:3x lines) — moved verbatim to the chronicle, entry 2026-11-01 05:51 +03:00.**
-> - **Earlier FIRST list (still valid):** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
->   plan 36 item 23). (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
+> - **Earlier FIRST list (still valid):** (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
 >   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
 >   (5) The release gate at 720p / 1080p / 2K / 4K (rule 17). (6) Item 21 — a vanilla quick-bar frame needs a clean-game stand (also for q4).
-> - **Waiting for the owner:** the fishing captions' look (folder 9); the HUD blink dim start 0.25; the crash-report README; his save — the 12:05 copy question
->   («верни») still open; every run of 2026-10-31 restored the copy `_save-backup/2026-10-31_1004-before-w13-arrows` (byte-equal to the live save at 10:48).
+> - **Waiting for the owner:** the HUD blink dim start 0.25; the crash-report README.
 > - Work trees kept: `_paksview-3.0.1` (66 GB) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB) — rule 15. Outward: watch https://github.com/Arora-Sir/Super-Artemis/issues/3.
 >
 > **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied
@@ -160,7 +158,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **Conan build debts — plan 36 (`plans/36_conan_build_debts_plans.md`, since 2026-10-26 20:14):** 35 items with hours, done
 > in a row (`[OWNER]` «пот по ним пиши планы» · «и по планам делаем»). Each item's status — in the plan's "Queue" table.
 >
-> Conan session rules (the movie, hours, other mods natively, the settings reference after exit) — `HOUSE_RULES.md` §1; the former "New chat order" 17:40 — chronicle, entry 2026-10-27 00:13.
+> Conan session rules (hours, other mods natively, the settings reference after exit) — `HOUSE_RULES.md` §1; the former "New chat order" 17:40 — chronicle, entry 2026-10-27 00:13.
 > 0. **The Conan 3.0.1 build towards release 1.0.0 — plan 35 (`plans/35_conan_build_turnkey_quality.md`).** The owner's decisions of 26.10 evening (plan 35: G5,
 >    G7, G10–G12, B3, B4, B7): version 1.0.0; archive — volumes ≤ 700 MB (8 paks over 700 MB → multi-volume 7-Zip zip `-tzip -mx0 -v700m`, G10); README
 >    for PlayGround — a PDF on «выцветшей старинной бумаге», pages 1–2 for the storefront, thanks to Taurin78 in the fixes (G11); crafting in the inventory
