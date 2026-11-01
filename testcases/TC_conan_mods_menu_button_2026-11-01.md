@@ -11,5 +11,5 @@ The game in front, world entry by the remote, the inventory by a real Tab (after
 |---|---|---|---|---|---|
 | B1 | the inventory open on «Снаряжение» | frame of the bottom bar | «Настройки модов» in the vanilla look, beside «Настройки интерфейса» and «Настройка рыбалки» | pass | 15:47 frame `b1d.webp`: the button in the row, gap 20; label by the button's own `SetLabel` (`TxtLabel:SetText` is overridden — 15:46) |
 | B2 | as B1 | a real click on «Настройки модов» | the «Моды Krinik'а» window opens over the inventory | pass | 15:48 frame `b2.webp`: the hub over the inventory, the button visible below; log «window … opened: filled ok in 9.00 ms» |
-| B3 | the inventory closed and opened again | frame | one button, not two | not run | |
-| B4 | the inventory closed, the world | a real LMB anywhere | nothing opens | not run | |
+| B3 | the inventory closed and opened again (three times, real Tab) | the remote counts visible `WBP_ButtonBase_C` in the left bar | one button, not two | pass | 15:51: 1 |
+| B4 | the inventory closed, the world | a real LMB at the button's screen place | nothing opens | pass | 15:51: hub openings in the log by that click — 0 |
