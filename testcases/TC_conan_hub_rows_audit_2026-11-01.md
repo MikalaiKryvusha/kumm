@@ -148,3 +148,13 @@ own log lines; the hub log.
 | P11 | defect found 22:30 in flight A1: the section's component list grew 281 → 1976 while 281 were loaded (unloaded ones never left the list; the near cycle stretched from 14 to ≈ 100 s) → fix: an invalid component leaves the list in the near refresh | the reference flight `krinik-show` (streams the whole route in and out), then the hero back at the oasis | the summary line's «из N» within 2 × the loaded count read by the remote (16 foliage actors, `PickupFoliageComponent_C`) | pass | 22:40, after a warm-up and a measured flight with the fix: list 634, loaded 590 (before the fix, after one flight: 1976 vs 281) |
 | P12 | the owner's pick 22:48 «вариант 3» (review folder 55): `KEY_GAP` 6 in the source, deployed after the A-B | a restart, a stone in reach, a 4K frame | E's rim 6 units from the backing's text edge — the frame matches `03_zazor_6.webp` of folder 55 | — | — |
 | P10 | an enemy near the hero with its health bar shown, a pickup in reach | a frame | the plate and the enemy's health bar do not cover each other | — | — |
+
+### Hub mode — one window, the hub named by the list (plan 40.3 I6.1, Lua part; `krinik_mod_settings.lua` + `krinik_mods_button.lua`)
+
+Stand: the live game, the inventory open by a real Tab, the list «Настройки модов» by a real click (`mouse-seq.ps1`); frames by `capture-window.ps1`; the hub log.
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| H1 | the list open | click «Моды Krinik'а» | the window titled «МОДЫ KRINIK'А · НАСТРОЙКИ», the same live pages as before the change (camera, UI, archery, pack manager, graphics), log «page …» of the first | — | — |
+| H2 | the inventory open, no list click | the remote `ActivateModule(KrinikModSettings)` | Krinik's hub (the default when no hub is named) — same as H1 | — | — |
+| H3 | H1 then H2 | — | the second opening does not keep a hub from the first (`_G.__krinik_hub` cleared at fill) | — | — |

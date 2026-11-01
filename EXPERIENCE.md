@@ -91,6 +91,12 @@
 
 ## Entries
 
+### EXP-0435 · 2026-11-01 · ❌→✅ · #hook #guard #heredoc
+class: data-read-as-command
+**Lesson:** a guard that matches tool names in a shell command must not read the heredoc body: appending cases to a TC file whose stand text named
+`capture-window.ps1` cleared the game debt of three Lua files with no game run. Strip heredoc bodies before matching.
+mechanized: `tools/hooks/test-after-code.mjs` `withoutHeredocBodies`, selftest case «a heredoc body naming a run tool cleared debt» (red before the fix)
+
 ### EXP-0434 · 2026-11-01 · ❌→✅ · #conan #ue4ss #lua #registry #streaming
 class: registry-without-removal
 **Lesson:** a Lua list filled on a birth event (`NotifyOnNewObject`) and never pruned grows with every world area streamed in: the pickup prompt's

@@ -107,9 +107,23 @@ export function deploysOf(command) {
   return out;
 }
 
+// Тело heredoc — данные, а не команда: 2026-11-01 23:03 кейсы, дописанные в TC через `cat >> … <<'EOF'`, назвали в тексте стенда capture-window.ps1 —
+// и долг игры погас без запуска игры. Разбор команды берёт строку с `<<МЕТКА` и всё после закрывающей МЕТКИ, тело выбрасывает.
+function withoutHeredocBodies(cmd) {
+  const lines = cmd.split('\n'), out = [];
+  for (let i = 0; i < lines.length; i++) {
+    out.push(lines[i]);
+    const m = lines[i].match(/<<-?\s*['"]?(\w+)['"]?/);
+    if (!m) continue;
+    while (i + 1 < lines.length && lines[i + 1].trim() !== m[1]) i++;
+    i++;   // the closing tag line
+  }
+  return out.join('\n');
+}
+
 /** The debt entries a command clears (their keys), from the debt as it stands. */
 export function cleared(command, debt) {
-  const cmd = (command || '').replaceAll('\\', '/');
+  const cmd = withoutHeredocBodies((command || '').replaceAll('\\', '/'));
   if (HYGIENE.test(cmd)) return [];
   const out = [];
   for (const [rel, d] of Object.entries(debt)) {
@@ -253,6 +267,8 @@ if (argv[0] === '--selftest') {
     if (!b.includes('непроверенного кода: 2')) fails.push(`second edit: no short order (${b})`);
     if (bash('python -m py_compile ConanExiles/_config/devkit/build-ru-table.py') !== null) fails.push('py_compile cleared debt');
     if (bash('node --check tools/hooks/x.mjs') !== null) fails.push('--check cleared debt');
+    // 2026-11-01 23:03: appending cases to a TC file by a heredoc whose TEXT named capture-window.ps1 cleared game debt — a word in a heredoc body is data
+    if (bash("cat >> testcases/TC_x.md <<'EOF'\nStand: frames by `capture-window.ps1`, the game by `launch-bg.ps1`\nEOF") !== null) fails.push('a heredoc body naming a run tool cleared debt');
     const stop = ev({ hook_event_name: 'Stop', stop_hook_active: false });
     if (stop?.decision !== 'block' || !stop.reason.includes('main.lua')) fails.push('Stop with debt not blocked');
     if (ev({ hook_event_name: 'Stop', stop_hook_active: true }) !== null) fails.push('repeated Stop without new edits blocked again (loop)');
