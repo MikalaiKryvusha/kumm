@@ -99,8 +99,14 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
 - [x] I2. Section `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_mods_menu.lua`: post-hook `GUIModuleController:ActivateModule` (inventory) → add the
       button once per bar instance, hide Hosav / fishing (R4 route); LMB bind returns on one boolean unless the inventory is open; clicks → open the list /
       `ActivateModule(<entry module>)` and close the list; minute summary with its own error counter.
-- [ ] I3. «Моды Xevyr'а» / «Прочее» rows in a `HUBS` table (one place for entry name, module names, labels) — rows open the mod's own window; labels and «i» per
-      RUSSIAN_RULES; the order of plan 38 (Krinik · Xevyr · Рыбалка · Прочее).
+- [x] I3. INTERIM DONE 2026-11-01 (step 2): «Моды Xevyr'а» / «Прочее» are sub-lists (`TOP`, `SUB` in `krinik_mods_button.lua`) opening the mods' own windows.
+- [ ] I6. **STEP 3 — our hub windows with real rows** (the owner's 13:40 decision). `[AI]` design draft, to check against the recon
+      `researches/conan-mod-settings-hub/xevyr-settings-recon.md` before code: ONE window class `W_KrinikModSettings` and ONE module, a `hub` value set by the
+      list before `ActivateModule` («krinik» · «xevyr» · «other»); `PAGES` gains a `hub` field per page, the left list and the title («Моды Xevyr'а · Настройки»)
+      show only that hub's pages; a page of another author's mod binds each row to the mod's own value: read at fill from its SaveGame object (or the
+      window's variables), write at «Сохранить» through the mod's own save/apply function — never our store; a row whose value lives only server-side or
+      cannot be applied without the author's window is listed as «нет механики» on the mockup (rule 23) and left out. Kit: the new pages and rows by
+      `kit-krinik-modsettings.py` (ids only), run twice. The sub-lists of step 2 go when every mod of the hub has its page. Mockup to the owner first (taste).
 - [x] I4. The pause section's Esc map `MOD_WINDOWS` (`krinik_pause_in_menu.lua`) gains the new module rows; «one window at a time» — opening an entry calls
       `TryCloseWindow()` on any open mod window first.
 - [x] I5. Hygiene: `loadfile`, `check-lua-game-thread.py` 0, `check-lua-templates.py` 0.
