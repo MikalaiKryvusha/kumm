@@ -44,10 +44,22 @@ needs `global.utoc` for script objects) → `UAssetGUI tojson <umap> <json> VER_
   Blessed Forge and Smelting Furnace of Set, Grey One Banner (80718), dragon trophies and heads, Set's Healing Tincture (77991133), Set's Sacred Shemagh
   (77991140), plus `XX_*` creature attack rows. The chest table itself is lost, so its exact contents are NOT known from any source.
 
+## The fix — DONE 2026-11-01 09:5x (KRINIK MODIFIED; report `testcases/reports/2026-11-01_conan-caverns-chest-loot.md`)
+
+- The table the chests import is ONE object: both `BP_AC_LootSpawner_GEN_VARIABLE.LootTableFromSpawnTable.DataTable` and `Default__BP_PL_CoS_Loot_Chest_C.LootTable`
+  point at import −18 of the chest BP (package `/Engine/UnknownPackage` in a legacy dump = the missing package). Row struct of loot tables:
+  `/Script/ConanSandbox.LootTableRow`.
+- Shipped in the **KrinikConanGameplay** pak (`build-level-mod.py` step 3b, recipe `ConanExiles/_config/caverns_loot.py`): a copy of the vanilla `DT_LC_RelicHunter`
+  renamed to `/Game/Mods/Mines_of_Set/Tables/Caverns_of_Set_Loot_Chest_Table`, 12 rows `[AI]` (T4 general ×3 rolls 100 %, T3 general, Stygian placeables, T4 weapon
+  / armour repair kits and tools, coins, a relic treasure, Set's Healing Tincture 20 %, Sacred Eldarium 5 %, golem parts T4 3 %, an emote teacher 2 %). The author's
+  pak is untouched — a mod update keeps working while the path stays.
+- Seen live: all 16 chests read the table; a chest fills when the player comes near (`_7`: 6 items of rows 1–5); `SpawnLoot` takes 11 parameters — not needed.
+  Live recipes: hero `FindFirstOf('PlayerController').Pawn`; a container's items — the `ItemInventory` whose full name holds the chest's name, `GetItemCount()`,
+  `GetItemList()` → `l[i]:get():GetItemName():ToString()`.
+
 ## Open
 
-- The fix needs the owner's choice of WHAT the chests hold (the author's own table is lost): a vanilla table of the same level (the T4 chests beside them) or a
-  table of our own at the expected path (kit).
+- Option 2's second half: the mod's own items (`Caverns_of_Set_Item_Table`) given level tags so they drop in the world's chests of their tier — not done yet.
 
 ## The author's side (checked 2026-11-01 08:5x, Steam API + the Workshop pages)
 
