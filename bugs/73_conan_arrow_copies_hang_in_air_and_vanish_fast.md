@@ -43,6 +43,12 @@ Log: «#N из лука … щуп — LandscapeHeightfieldCollisionComponent_17
 - Fix: `mesh_scale` 1.0; the push «в тушку» (`sink_into_body`, numbers per creature) removed — the game places every copy itself. Seen: sand and a Kappa's head at 62 cm.
 - Vanish: the copy lives 15 s with or without our mod (`ProjectileDummyLifetime`) — the game's behaviour.
 
+## The owner's answers 2026-11-01 16:17–16:18
+
+- `[OWNER]` «Да» (16:17) to «Вернуть ли стреле трёхкратный размер в полёте» — the big arrow in flight returns, by a route that does not grow `ProjectileMesh`.
+- `[OWNER]` 16:18 «срок жизни стрел везде, и в земле, и в трупах, и в стенах нужжжжжжжжжен 5 минут - с возможностью настроить в модах стрельбы из лука - в
+  минутах, от 1, до 30» — the copy's life 5 min by default, a hub row 1–30 min on the archery page.
+
 ## Decisions made without the owner
 
 - `[AI]` the arrow mesh back to native size (1.0) until his word — the ×3 was his «до x3»; the choice put to him in chat 15:2x.

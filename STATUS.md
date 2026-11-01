@@ -115,6 +115,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the hub «i» circles square again in every row (kit fix, EXP-0425). Review folder 48 answered 14:34 («ставь 25%»; the owner tunes it later in play) — folder can go.
 > Open in phase 1: thirst and health shkalas by the mouse (V5, V6), the rule-4 clip. New owner rule for phase 2 (plan 40.2 criterion 4a): every shkala's min / max
 > are values a player could want; grey hints only when the «i» does not already say it. Pack and KUMM committed; game closed, lock released. **Phase 2 started 14:38:** 16 of 19 rows seen working (run 2 at a frozen Kappa 14:48–14:54), 2 partial, the hub close fixed (camera / pack manager took a save only at the next inventory close) — `testcases/TC_conan_hub_rows_audit_2026-11-01.md`; next — the partial rows, H20-H22, ranges and hints (plan 40.2 status).
+> **OWNER DECISIONS 2026-11-01 16:17–16:18 (bug 73), also job number one:** (1) the ×3 arrow in flight is WANTED back — `[OWNER]` «Да» to «Вернуть ли стреле
+> трёхкратный размер в полёте» (16:17): find the route that grows only the VISIBLE arrow, not `ProjectileMesh` whose bounds place the stuck copy (a pre-hook of
+> `SpawnDummyProjectile` restoring the size did not help — bug 73 A4); control case first (rule 24). (2) `[OWNER]` 16:18 «срок жизни стрел везде, и в земле, и в
+> трупах, и в стенах нужжжжжжжжжен 5 минут - с возможностью настроить в модах стрельбы из лука - в минутах, от 1, до 30» — a stuck arrow lives 5 min
+> everywhere (the game gives 15 s, `ProjectileDummyLifetime`); a hub row on the KrinikConanArchery page, minutes 1–30, default 5; corpses — with phase 4.
 > **OWNER DEBT, JOB NUMBER ONE for the next chat (BUG_FIXING_FRAMEWORK «owner's debt first»):** `[OWNER]` 2026-11-01 15:49 «соответственно, она там одна должна
 > остаться» · «настройки рыбалки и настройки интерфейса оттуда уходят» — the inventory bar keeps ONLY «Настройки модов»; Hosav's «Настройки интерфейса» and
 > «Настройка рыбалки» leave the bar and become entries of its drop-down list (with «Моды Krinik'а», «Моды Xevyr'а», «Прочее»; «Прочее» last, fishing above it).
