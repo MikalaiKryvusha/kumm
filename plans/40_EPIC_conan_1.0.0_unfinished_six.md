@@ -34,7 +34,7 @@ version by his word. No «done» / «ready» is said before the phase's acceptan
 | 4 | Arrows in the corpse — research first (`/bug-research`): unbinding `OnDestroyed` vs. a copy with its own hit vs. a visual arrow + loot items | three blind attempts are spent (report 2026-11-01_conan-arrows-corpse-recon) | criterion 4 |
 | 5 | Frame cost | must measure the FINAL Lua set (after 1–4) | criterion 5 |
 | 6 | 16:9 gate | must frame the FINAL UI (after 1–3) | criterion 6 |
-| 7 | Package and archive; then the documents (guide, README) refreshed from the phase reports, not from the work log | the owner's order: archive and documents LAST | criterion 7 |
+| 7 | Package and archive; then the documents (guide, README) refreshed from the phase reports, not from the work log | the owner's order: archive and documents LAST | criterion 7 | <!-- attribution-ok: `[OWNER]` 2026-11-01 11:11–11:12 «релизный архив соберем и все документы обновим, когда сборку сделаем и протестируем на всех разрешениях 16 к 9» — verbatim in STATUS.md «ORDER» -->
 
 Each phase's operational plan: `plans/40_epic40_phase<N>_<slug>.md` — steps with checkboxes, the stand (HOUSE_RULES rule 11), the case file in `testcases/`, the
 run report, the packaging step (the mod's source in the pack, `modpack.json` entry, `-Deploy -Only` + `-Verify`), and the mod notes updated in the same commit.

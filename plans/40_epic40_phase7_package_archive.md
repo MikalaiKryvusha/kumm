@@ -75,7 +75,7 @@ guide and README refreshed from the phase reports, not the work log.
 - [ ] 9. **Documents:** the guide's feature list re-checked line by line against the phase reports and plan 39's table (a line without a `seen`
       report is removed or rewritten); `build_docs_and_launcher.cmd` (guide → PDF → launcher); the public README by the `_config/public_release/` route
       (`mods-table.mjs` → `README.draft.md` → `make_public_tree.py <fresh dir>` exit 0 — NOT pushed); plan 39 A2, A3, B6 → seen; plan 35 item 6.
-- [ ] 10. **Release** — only on the owner's word: the volumes uploaded / the public repo commit + tag by `/release`. Not part of this phase's gate.
+- [ ] 10. **Release** — only on the owner's word: the volumes uploaded / the public repo commit + tag by `/release`. Not part of this phase's gate. <!-- attribution-ok: the AUTH gate of AGENT_GUIDE.md «Git workflow» (a release waits for his quoted words), not a decision of his -->
 
 ### Packaging into the build
 
@@ -88,6 +88,6 @@ Each: `git add <files one by one>` · `git commit -F <msg>` · `git push`.
 - (a) A pak over 700 MB cannot be split per file → the script makes one multi-volume zip (by design, header); the README must say «open part 001» — checked in Z3.
 - (a) `install.cmd` without an argument never passed (2026-10-02) — if it fails, the fix is in the engine (`Deploy-ModPack.ps1` install script), a fixture-stand
   re-run (`node tools/fixture-pack.mjs`, 21 checks), then the volumes REBUILT.
-- (b) The uninstaller leaves a file or removes a game file → a defect of the engine; the game is repaired from Steam's file check only by the owner's word.
+- (b) The uninstaller leaves a file or removes a game file → a defect of the engine; the game is repaired from Steam's file check only by the owner's word. <!-- attribution-ok: the AUTH gate of AGENT_GUIDE.md (an outward / destructive act waits for his words), not a decision of his -->
 - (b) The owner's working install is torn down for this phase — step 7 restores it the same session; his camera `config.lua` copied out first.
 - (c) Disk: export + volumes + check ≈ 3 × bundle (the stopped run held 16 GB) — 213 GB free is enough; the work dir removed after the owner's word.

@@ -3,6 +3,40 @@
 
 
 
+## 2026-11-01 15:52 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat a8cd8fdc (verbatim)
+
+> **Закрыто по слову владельца 2026-11-01 13:43 («закрывай чат, в новом делаем»).** Виньетки: прерванная съёмка с игрой впереди (голод 0 %%, сила 1 и 0) — кадры `vigF_*.jpg` в скретчпаде этого чата не проверены; новый чат повторяет её по researches/conan-vignettes/README.md. Чистая копия игры для теста установки — `D:/Instals/` (план 40 фаза 7). Игра закрыта, замок снят.
+> ⚠️ Принудительное закрытие 2026-11-01 13:29: обряды пропущены (проверка судьёй, обрезка STATUS после 13:22, README, линтеры витрины) — платит первое /end-chat-soft. Стоящая ложь: нет. Игра закрыта, замок машины снят.
+> **2026-11-01 13:28 — two helper agents launched at the chat close** (the owner: «поднимай двух агентов помощников»): (1) operational plans of epic 40 phases 1–7 → plans/40_epic40_phase<N>_*.md; (2) epic 41 «defects and stability» (bug 64 open items, the mod windows AMR/Emberlight/Pickup+/Horti, ModControlPanel «Нет доступных виджетов», day/night light jump, stability long run) → plans/41_EPIC_*.md + plans/41_epic41_phase<N>_*.md. DONE 13:37: epic 40 phase plans (commit 42023ed) and epic 41 meta + 8 phase plans (in commit 63d1655); all hour estimates removed (0fa992f, house rule 10). Xevyr / Прочее windows DECIDED by the owner 13:40 (our hub look, real rows bound to each mod's own options — plan 40 phase 3 header); the game may be in front ANY time (house rule 16a, the owner 13:40) — no slot needed. The owner 13:28: «заебала твоя безответственная ВОЗЬНЯ!» · «с ложью, втирательством того, чего нет» · «и отсутствие твоей ответственности и проактивности!» — plan 39 section D and house rule 23 are the answer; nothing is called done unless seen in game.
+> **2026-11-01 13:27 — THE WORK IS NOW EPIC 40** (plans/40_EPIC_conan_1.0.0_unfinished_six.md, the owner: «пишем на всё ЭПИК план, а затем по фазам эпиков - операционные планы»). Next chat: write the phase 1 operational plan (vignettes) and execute it; the handover items below are its phases 1–3.
+> **HANDOVER of chat eea8bf94 (2026-11-01 11:16–13:25), FIRST for the next chat, in order:**
+> 1. **The screen-edge vignettes (owner 13:20, for 1.0.0):** recon which widget draws the hunger / thirst / low-health vignette (candidates `UI/HUD/W_FullScreenEffectContainer`,
+>    `W_FullScreenBuffEffect`, texture `T_BuffFullScreenEffect_HungerThirst`; the low-health one not located), then three shkalas on the KrinikConanUI hub page
+>    (far left = off) with the SHIPPED defaults: hunger OFF, thirst OFF, low health barely visible (≈ 10 %) — plan 36 W23. The owner thought these shkalas already existed; they do not.
+> 1a. **Audit EVERY hub shkala end to end** (`[OWNER]` 13:23 «ты сделал шкалы настройки - якобы давая игрокам возможность это настраивать, но это ЕБАНАЯ
+>    показуха, потому что за этим нет кода и механики» · «ты получается лжец»): for each row of `PAGES` in `krinik_mod_settings.lua` (cam ×8, ui ×6, arc ×3, mpm ×1,
+>    gfx ×1) — move the shkala in the live game, save, and OBSERVE the effect in the world (a frame or a log number), one case per row; a row with no observed effect is
+>    a defect fixed before 1.0.0 or removed from the window. No «ready to release» before this table is green. The vignette rows do not exist yet (item 1).
+> **2026-11-01 08:49 — accepted by the owner:** the fishing difficulty captions «Легко | Спокойно | Строже | Ваниль» (`[OWNER]` «сложность рыбалки - ОК») and the enemy shouts' fade (`[OWNER]` «Крики врагов - ОК»); review folder 9 removed (25 — remove after its clip is closed). NEW for the new chat: `[OWNER]` «я бы в мод UI криника вынес настройку времени задержки отображения фраз на экране» — a row on the KrinikConanUI page of the hub: how long a shout (subtitle) stays on screen (section `krinik_shout_fade`; find where the game sets the line's lifetime first).
+> **DONE 09:5x–10:3x — the caverns chests, option 2 both halves** (packs `c590f36`, `e44de4b`; notes `CavernsOfSet.md`); **the HUD temperature** red ≥ 30 /
+> blue ≤ −30 and the white-at-37 bug (templates coloured; `eef2f86`, TC `TC_conan_hud_temperature_thresholds_2026-11-01.md`, T3 blue frame not caught);
+> the hub «i» column (`37d7c95`), «Скорость зума · больше — резче»; **11:0x the temperature fades smoothly** white → red / blue (`d1e01b9`, R1 seen,
+> the cold mirror not framed); `_config/tp_ground.sh` puts the hero on the surface. **Day/night study** (the owner 10:42 «свет резко
+> включается, небо резко меняет вид… нужно изучить»): run 1 on the beach — no sky jump by eye, an ambush burst at 22:11, lights NOT tested (none there);
+> run 2 — a lit camp, enemies cleared, a 60 fps clip around the switch hour (`researches/conan-day-night/README.md`); first candidate for what he saw:
+> the agent's own `SetTimeOfDay` jumps 10:21–10:33. **The archive:** `ConanExiles/_config/release/make_volumes.sh <empty work dir on D:>` (etalon config
+> → `-Export` → 7z zip volumes 700m → unpack → SHA-256 compare), `[NOT-TESTED]` until its first run; then the install from the volumes on the real game after
+> `uninstall_krinik_build.cmd` (the player's path), `-Verify`, world entry; then the 1.0.0 release (the public repo README still says «первый выпуск» until
+> that push). After any Lua section edit run `ConanExiles/_config/devkit/check-lua-templates.py` (EXP-0421).
+> **NEW 13:20 (the owner, for 1.0.0):** `[OWNER]` «по умолчанию в поставлке сборки виньетки голота и жажды ВЫКЛ, виньетка нижкого здоровья тусклая, типа 10%
+> или на каком значении она едва заметна» — plan 36 W23 (the three vignette shkalas, far left = off) gets its shipped defaults: hunger OFF, thirst OFF, low health
+> barely visible (≈ 10 %). Recon first (no code of ours touches vignettes); candidates — see the asset list in plan 36 W23.
+> **2026-10-29 15:2x — ORDER OF WORK: quick and simple first, heavy after** (`[OWNER]` «сразу делаем много мелочей, что быстро делается и быстро
+> тестируется, что просто» · «потом более тяжелые и длительные задачи» · «в таком порядке» · 2026-10-29 ≈15:25). A switch to Svarog was cancelled a minute
+> later (`[OWNER]` «сворог - отмена!» · ≈15:27) and «МЫ ДЕЛАЕМ КОНАН» — the work stays on the Conan build, autonomous, by the order below sorted
+> quick → heavy. Svarog's debts are not raised at entry (`[OWNER]` «убери напоминание по долгам сварога в дальний ящик!» · ≈15:28).
+>
+
 ## 2026-11-01 13:22 +03:00 — moved from STATUS «Where to continue» at the soft closure of the chat eea8bf94
 
 > **DONE 11:5x** — `[OWNER]` 08:49 «нужно видео, показывающее все интенсивности»: the clip of every food / water blink step (EIGHT live steps L = 0.3 … 1.0 — the dim
