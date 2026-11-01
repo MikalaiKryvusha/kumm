@@ -114,6 +114,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 1. **The screen-edge vignettes (owner 13:20, for 1.0.0):** recon which widget draws the hunger / thirst / low-health vignette (candidates `UI/HUD/W_FullScreenEffectContainer`,
 >    `W_FullScreenBuffEffect`, texture `T_BuffFullScreenEffect_HungerThirst`; the low-health one not located), then three shkalas on the KrinikConanUI hub page
 >    (far left = off) with the SHIPPED defaults: hunger OFF, thirst OFF, low health barely visible (≈ 10 %) — plan 36 W23. The owner thought these shkalas already existed; they do not.
+> 1a. **Audit EVERY hub shkala end to end** (`[OWNER]` 13:23 «ты сделал шкалы настройки - якобы давая игрокам возможность это настраивать, но это ЕБАНАЯ
+>    показуха, потому что за этим нет кода и механики» · «ты получается лжец»): for each row of `PAGES` in `krinik_mod_settings.lua` (cam ×8, ui ×6, arc ×3, mpm ×1,
+>    gfx ×1) — move the shkala in the live game, save, and OBSERVE the effect in the world (a frame or a log number), one case per row; a row with no observed effect is
+>    a defect fixed before 1.0.0 or removed from the window. No «ready to release» before this table is green. The vignette rows do not exist yet (item 1).
 > 2. The HUD temperature by the game's debuff stage — frame the comfort (white) and the cold (blue) cases (only heat was framed, review folder 47).
 > 3. The inventory button «Настройки модов» (plan 38 phase 1) — write its operational plan first (the Xevyr / «Прочее» entries have no hub yet).
 > 4. Arrows in the corpse — not done; routes in `games/ConanExiles/mods/KrinikConanArchery.md` → Open. Frame measurements (fps perf TC) — also covers the
