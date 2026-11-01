@@ -47,6 +47,10 @@ leaves, the prompt shall go. Maintain: our mods' 1 ms CPU budget in gameplay fra
   (`NotifyOnNewObject` of `FoliageInstancedStaticMeshComponent`); (b) Lua cannot bind an engine delegate itself — the sensor is a tiny kit actor whose own
   overlap event relays to a function Lua hooks (a call through ProcessEvent). The timer variant A of 21:1x stays the fallback.
 
+- **The game searches only at the press** (the owner's question 21:19 «она это проверяет в момент нажатия?!», his E on a stone 21:20): `UpdateHighlightTarget`
+  1 call on the press; nothing while he looked at the stone (only `CleanUpHighlightedObject` per frame). The R1 idea «ride the game's per-frame search» is
+  closed — there is none; the event route (the sensor) stays the main one.
+
 ## Next steps
 
 - [ ] E1. Stand proof: turn overlap events on for one rock component by the remote, put a sensor in front of the hero, read whether begin / end overlap
