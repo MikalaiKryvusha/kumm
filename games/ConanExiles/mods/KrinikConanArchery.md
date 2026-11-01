@@ -19,6 +19,7 @@ name — «мод KrinikConanAim переименовываем в KrinikConanAr
 | Half | Change |
 |---|---|
 | pak | the native draw montage `AM_combat_2h_bow_combo_heavy_c0`: the aim notify runs to the montage end (the camera no longer jumps back on a shot with RMB held); a mute sound notify keeps `S_ChargeFull` loaded |
+| Lua 0.3.0 | **the arrow is born where the GAME spawns it — at the bow — and is NOT intercepted or hidden**: only its velocity is turned onto the line «bow → the camera probe's hit point» (`[OWNER]` scheme 2026-10-27 18:4x, verbatim in the `main.lua` header). The 0.1–0.2 path moved the arrow onto the camera line and hid it for the first 3 m («стерла появляется на 3 метрах - не красиво»); that path is gone, so the arrow «popping up in the crosshair» cannot happen by construction — the owner, 2026-11-01: `[OWNER]` «стрелу вернули спавниться в лук, а не перехватываем больше, и проблемы резкого ее появления в прицеле органическим образом больше нет». Do not file or test «the arrow appears late» without first reading this row |
 | Lua | the hero's arrow flies to the camera's aim point; the arrow look; leaving the aim on RMB release; the camera above the arrow in first person; aim kept on a new draw; the full-charge sound only for the player's hero |
 | Lua 0.5.0 | Oblivion Remastered ballistics: gravity 0.55, speed by the draw, minimum 0.5 |
 | Lua 0.6.0 | the per-tick gravity recompute removed — the arrow's curve `FC_BowProjectileGravCurve_*` is dropped |

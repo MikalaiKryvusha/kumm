@@ -113,7 +113,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **HANDOVER of the chat a3dcf82b (2026-10-31 21:48–23:3x, dayloop «работай автономно над сборкой Конана»):** done — the hub look by the owner's
 > five remarks (review folder `39_hub_look`, his eye pending), the camera / pack-manager / archery pages live (plan 38 step 6 DONE), DM0 pass,
 > W18 EAA card + Beyond Decor in Russian, «шкала» carried into the locres source, tools `aim-shot.sh`, `locres-add-keys.py`, the locres-set-tr guard.
-> FIRST next: (1) the owner's eye on folders `39_hub_look` and `40_arrow_clip` (AIM15); (2) the public repo after his README read (`38_public_readme`);
+> **2026-11-01 04:4x — the owner's answers (chat):** (a) hub look — `[OWNER]` «из этого кадра явно видно, что макет красивый, а реализация в игре - нет»:
+> the in-game window must reach the mockup → work item; (b) AIM15 DROPPED — `[OWNER]` «стрельбу из лука переделали, стрелу вернули спавниться в лук, а не
+> перехватываем больше, и проблемы резкого ее появления в прицеле органическим образом больше нет» (KrinikConanArchery 0.3.0+, notes updated); (c) DM0 —
+> `[OWNER]` «F1 нужен для того, чтобы курсор отображался» · «им можно кликнуть по кнопке разворачивания ДПС»: holding F1 shows the cursor, a click on the meter's
+> expand button expands it (corrected 2026-11-01: «F1 only MOVES the window» below was false); (d) `[OWNER]` «создавай публичный репозиторий. Понаходи имена
+> автором модов, имена или никнеймы» — the README read is done.
+> FIRST next (2026-11-01): (1) the public repo with mod authors' names; (2) the hub window to the mockup's look; then the list below from (3).
+> FIRST next (2026-10-31, superseded by the line above for 1–2): (1) the owner's eye on folders `39_hub_look` and `40_arrow_clip` (AIM15); (2) the public repo after his README read (`38_public_readme`);
 > (3) C1 — read the placed chests of `Mines_of_Set/Caverns_of_Set_Level` from the level file; (4) R2 — a natural stone pickup stand; (5) plan 38 step 7–8
 > (phase 1 — the inventory button «Настройки модов», W24: today the hub opens only by the remote). Before any remote call on a mod's own function —
 > copy `Saved/SaveGames/` (EXP-0417).
@@ -135,9 +142,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   the module call leaves the meter collapsed). C1 — the Caverns of Set chest's `LootTable` points at `/Engine/UnknownPackage` by the file (docs/17): read the
 >   CDO by the pult near the caverns, expect an empty chest → a defect to fix with a table of our own.
 >   The emulated-input attempt of 16:25 (the hero never drew the bow) — verbatim in the chronicle, entry 2026-10-31 16:53 +03:00.
->   **22:5x (report `testcases/reports/2026-10-31_conan-dm0-c1-probes.md`):** DM0 PASS 22:57 — `DN_UI_DmgWidget_C:Restore()` expands the meter, ≈ 35 px under the HUD text (F1 only MOVES the window); the
->   F1 tries are in the case row. C1 PARTIAL — the mod's container has no `Caverns_of_Set_Loot_Chest_Table`; the chest CDO's `LootTable` is nil like the
->   vanilla parent's, so only a placed chest instance in the caverns decides (coordinates needed). AIM15 PARTIAL 23:0x (report `2026-10-31_conan-aim15-clip.md`): a 60 fps clip of a real shot into a frozen Kappa 10 m ahead (hit logged) is in review folder `40_arrow_clip` — his eye. R2 23:08 — stones dropped from the inventory become a loot bag under the hero, not a world stone: the stand needs a natural stone pickup (TC row R2). W18 23:17 — the EAA class-artefact card and the Beyond Decor menu line in Russian (6 keys added to Game.locres, report `2026-10-31_conan-w18-eaa-card-ru.md`); 23:2x the owner's «шкала» carried into the source `dm-fish-ru.tsv` — a full locres rebuild now equals the deployed file (lost 0, changed 0; pack `ee13fcb`).
+>   **22:5x (report `testcases/reports/2026-10-31_conan-dm0-c1-probes.md`):** DM0 PASS 22:57 — `DN_UI_DmgWidget_C:Restore()` expands the meter, ≈ 35 px under the HUD text (correction 2026-11-01: «F1 only MOVES the window» was false — holding F1 shows
+>   the cursor, and a click on the meter's expand button expands it; the 22:5x tries pressed F1 without clicking). C1 PARTIAL — the mod's container has no `Caverns_of_Set_Loot_Chest_Table`; the chest CDO's `LootTable` is nil like the
+>   vanilla parent's, so only a placed chest instance in the caverns decides (coordinates needed). AIM15 PARTIAL 23:0x (report `2026-10-31_conan-aim15-clip.md`): a 60 fps clip of a real shot into a frozen Kappa 10 m ahead (hit logged) — the case is DROPPED 2026-11-01 by the owner's word (the arrow is born at the bow since 0.3.0; folder `40_arrow_clip` removed). R2 2026-10-31 23:08 — stones dropped from the inventory become a loot bag under the hero, not a world stone: the stand needs a natural stone pickup (TC row R2). W18 23:17 — the EAA class-artefact card and the Beyond Decor menu line in Russian (6 keys added to Game.locres, report `2026-10-31_conan-w18-eaa-card-ru.md`); 23:2x the owner's «шкала» carried into the source `dm-fish-ru.tsv` — a full locres rebuild now equals the deployed file (lost 0, changed 0; pack `ee13fcb`).
 > - **Earlier FIRST list (still valid):** (1) the owner's answers: folder 25 (shout fade), the 12:14 voice question «кино выключено?» (needed for the q2–q4 frame measurements,
 >   plan 36 item 23). (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
 >   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).

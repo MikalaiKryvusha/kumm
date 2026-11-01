@@ -37,3 +37,10 @@ Session scratchpad `seams/`: `aim15.mkv` (5 s, 60 fps, 38 MB), `a15_grid.webp`, 
 ## 7. Verdict
 
 partial — a second clip at 23:03 (a frozen Kappa 10 m ahead, the hit logged) did not let the agent see the arrow at the bow; both clips went to the owner's review folder `40_arrow_clip`.
+
+## Correction 2026-11-01
+
+The case itself is dropped by the owner's word (chat 2026-11-01 04:40): `[OWNER]` «стрельбу из лука переделали, стрелу вернули спавниться в лук, а не
+перехватываем больше, и проблемы резкого ее появления в прицеле органическим образом больше нет». Since KrinikConanArchery 0.3.0 the arrow is born at the
+bow by the game and only its velocity is aimed (`main.lua` header, items 1–2), so this run checked a mechanism that no longer exists. The review folder
+`40_arrow_clip` is removed.

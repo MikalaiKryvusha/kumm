@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0419 · 2026-11-01 · ❌→✅ · #conan #knowledge #mod-notes #owner-review #archery #damage-meter
+class: knowledge-not-written
+**Lesson:** two questions went to the owner's eye that the project's own knowledge already answered or would have answered: (1) «is the arrow visible at the
+bow?» — the archery rework 0.3.0 (arrow born at the bow, not intercepted) lived only in the `main.lua` header, not in the mod notes, so the case AIM15 kept
+asking about a removed mechanism; (2) «F1 only moves the Damage Meter» — the meter had NO notes file, so its control (hold F1 = cursor, click the expand
+button) was guessed from three key presses with no click. Before a case or a review question about a mod's behaviour: read its notes AND its code header for
+whether the mechanism still exists; a mod without notes gets them before the first probe (HOUSE_RULES §1 rule 2); a control is tested by the player's whole
+path (key + click), never by the key alone.
+**Trigger:** writing a case row or a `what_to_look_at.md` about a mod's behaviour; a probe that concludes «key X does not do Y».
+mechanized: none — the knowledge-hook locks work only on mods that HAVE a notes file
+
 ### EXP-0418 · 2026-10-31 · ❌→✅ · #conan #localization #locres #source-of-truth
 class: twins-missed
 **Lesson:** a translation fix applied to the BUILT `Game.locres` (`locres-set-tr.py`, «шкала» 19:08) without its source row in `dm-fish-ru.tsv` is undone

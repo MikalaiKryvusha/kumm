@@ -38,3 +38,10 @@ Session scratchpad `seams/`: `dm_before.webp`, `dm_after.webp`, `dm_after2.webp`
 ## 7. Verdict
 
 pass (DM0, after the restore function) · partial (C1) — the next step is written in the C1 row.
+
+## Correction 2026-11-01
+
+«F1 only moves the window» (sections 4 and 7) is false. The owner, chat 2026-11-01 04:40: `[OWNER]` «F1 нужен для того, чтобы курсор отображался» ·
+«При удержании F1, поверх игры появляется курсор мыши, и им можно кликнуть по кнопке разворачивания ДПС». Holding F1 shows the cursor; the meter expands on a
+click on its expand button. The three 22:52 tries pressed F1 and clicked nothing, so they proved nothing about F1. The DM0 verdict (no HUD text covered)
+stands — it was read on the expanded meter, whichever way it was expanded.
