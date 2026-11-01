@@ -83,4 +83,13 @@ the built pak (`_config/devkit/set-pak-version.py <pak> <packVersion>`) and the 
   corpse at the same bone, visible, and the player picks it up (the copy's `IsLootable` / `ProjectileItemTemplateID`). The cause is known (the bullet «Arrows
   leave the corpse» above): the copy's `DestroyDummyIfAttachedObjectIsDestroyed` fires on the creature actor's `OnDestroyed`; the corpse is a separate
   `Corpse_C` actor (game map, «Трупы»). Route to recon first: at the creature's death, re-attach each of its copies to the corpse's mesh at the same bone
-  (and drop the old binding / lifespan), by an event, no polling (HOUSE_RULES rule 7). Not started.
+  (and drop the old binding / lifespan), by an event, no polling (HOUSE_RULES rule 7). **Recon 2026-11-01 12:5x–13:1x — NOT DONE** (report
+  `testcases/reports/2026-11-01_conan-arrows-corpse-recon.md`): at corpse birth (`NotifyOnNewObject('/Script/ConanSandbox.CorpseBase')` — the blueprint
+  `Corpse_C` class is not loaded at mod start, a subscription to it never fires) the copies are still attached; the creature is destroyed 1–2 s later and its
+  `OnDestroyed` runs the copy's `DestroyDummyIfAttachedObjectIsDestroyed` = ubergraph 3484 = `K2_DestroyActor` FIRST, no condition — a copy re-attached to
+  the corpse dies anyway; a copy spawned from Lua without its own hit leaves at once (0 0 0). Next routes: (a) unbind the copy from the creature's
+  `OnDestroyed` (no Lua tool found yet); (b) spawn a copy WITH a hit on the corpse mesh (set `HitResultFromProjectile` incl. its weak `Component`); (c) a
+  visual arrow (static mesh actor on the corpse bone) + the arrow items into the corpse's loot. Corpse facts: the actor's location is 37 m off the body —
+  match by the same bone of the corpse mesh; `GetTransform()` from Lua reads zeros. **Our leak closed on the way:** with the «в тушку» push the copies of a
+  killed creature were not cleaned by the game and hung at 0 0 0 with no life span; the section now re-attaches them to the corpse and the game's event
+  removes them (0 copies 10 s after the kill).

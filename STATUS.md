@@ -134,6 +134,9 @@ the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/Con
 > **ORDER (`[OWNER]` 2026-11-01 11:11–11:12 «да не нужно архив собирать!! Сборка же еще не готова!!» · «релизный архив соберем и все документы обновим,
 > когда сборку сделаем и протестируем на всех разрешениях 16 к 9»):** the release archive and the document refresh go LAST — after the build is finished and
 > tested at 720p / 1080p / 2K / 4K. The 11:10 archive run was stopped and its 16 GB removed; `make_volumes.sh` waits for that moment.
+> 13:1x — arrows in the corpse: NOT DONE (the game's own event destroys every copy when the creature is removed — bytecode; routes in the archery notes, Open);
+> on the way our own leak closed (orphan copies at 0 0 0) — report `testcases/reports/2026-11-01_conan-arrows-corpse-recon.md`. The armour «lost»: the hero most
+> likely DIED (hunger / thirst at 0 % kill even with god — today's runs set them to 0); the 2026-10-31 16:56 save restored, armour and bow back.
 > DONE 12:4x — the stone pickup in third person (R2): real E picks a real stone at the default and at the far zoom (arm 2125) — weight +0.06 and the stone
 > hidden each time (report `testcases/reports/2026-11-01_conan-stone-pickup-r2.md`; the stand recipe — the game map, «Stones by the remote»). Seen: no «E»
 > prompt on the frame before the press — not part of R2, left for the owner's eye.
