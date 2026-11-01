@@ -120,7 +120,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (entry points shifted, self-checked; regression 3/3 byte-equal) → bug 64 item 48 FIXED: the minimap «Показ времени» in Russian (report
 > `2026-11-01_conan-minimap-time-dropdown-ru.md`). (6) knowledge-hook reads a quoted `-Only "<Mod Name>"`. (7) R2: 4 probes could not find a world stone
 > by the remote (foliage meshes unreadable — game map «Stones by the remote»).
-> FIRST next: (1) the owner's eye on `41_hub_kak_maket` and his answer to #029 (then the C1 fix: the chest's loot table in the mod pak);
+> **2026-11-01 08:42 — the owner's two remarks on the hub (folder 41), FOR THE NEW CHAT:** (a) `[OWNER]` «нужно открывать поверх UI первоснажа, как и
+> рыбался открывается - ты сделал какое-то затенение - не нужно» — the window opens OVER the character UI (the inventory), as the fishing window does, with
+> NO dimming behind it (the frames of 05:18–05:20 were taken with the window opened by the remote in the world — find where the dark backdrop comes from:
+> the module row of `DT_KrinikUIModule` vs the fishing row, `Category` / `FullscreenGUIAction`, or the game's modal backdrop); (b) `[OWNER]` «по высоте
+> увеличить размер окна, в новом чате будем делать» — a taller window (today the height = the tallest live page, set by `krinik_mod_settings.lua` fill).
+> FIRST next: (0) the two hub remarks above; (1) the owner's answer to #029 (then the C1 fix: the chest's loot table in the mod pak);
 > (2) bug 64 items 47 «All» (ModControlPanel `MDC_MCP`) and 49 «Top Left» (Damage Meter settings) — the same `lit:` route as item 48 (trace the asset's
 > event graph first: a translated option must not break a string comparison or a saved string); (3) plan 38 phase 1 — the inventory button «Настройки
 > модов» + the upward list (heavy, ≈ 3–4 h); (4) R2 — a stone spot from the owner or a position scan. Before any remote call on a mod's own function —
