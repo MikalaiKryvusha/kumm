@@ -45,8 +45,8 @@ first step of that case (written into the mod's notes).
 |---|---|---|---|---|
 | 1 | `cam_height` | 75 → 150 | camera higher above the hero | the hero's `USpringArmComponent.SocketOffset.Z` (camera notes: the mod writes `SocketOffset`, `TargetArmLength`); frame pair, the hero lower in frame |
 | 2 | `cam_side` | 0 → 60 | over-the-shoulder view | `SocketOffset.Y` = 60; frame pair |
-| 3 | `cam_dist` | 315 → 500 | the distance the numpad «+»/«−» sets | recon: which camera key applies `cam_dist` (`KrinikConanCamera.md`; numpad table — memory «Нумпад Конана занят камерой»); then `TargetArmLength` = 500 after that key by `mouse-seq.ps1 -Seq "kdown:0x6B,kup:0x6B"` (VK of the key found) |
-| 4 | `cam_pitch` | −2 → 10 | camera tilted | recon the field the mod writes (camera notes); read it; frame pair |
+| 3 | `cam_dist` | 315 → 500 | the distance the numpad «+»/«−» sets | [recon 2026-11-01] no key needed: on the window CLOSE the camera applies `arm_length` when the window changed it (notes «The «Моды Krinik'а» window»); read the SpringArm `TargetArmLength` = 500 after «Сохранить и закрыть»; log «ОКНО «Моды Krinik'а»: принято 8 настроек» |
+| 4 | `cam_pitch` | −2 → 10 | camera tilted | [recon] `apply_camera_pitch` (`Scripts/main.lua:594`) sets the CAMERA component's `K2_SetRelativeRotation({Pitch = camera_pitch})` — read that component's `RelativeRotation.Pitch` = 10; frame pair |
 | 5 | `cam_zoom_min` | 130 → 300 | the wheel stops nearer at 300 | `mouse-seq.ps1 -Seq "wheel:1,wait:100,…"` ×30 → `TargetArmLength` = 300 |
 | 6 | `cam_zoom_max` | 2125 → 1000 | the wheel stops farther at 1000 | `wheel:-1` ×40 → `TargetArmLength` = 1000 |
 | 7 | `cam_sharp` | off → on | the wheel jumps without a glide | `TargetArmLength` read 50 ms after one wheel click equals the target (off: between) |
@@ -55,13 +55,13 @@ first step of that case (written into the mod's notes).
 | 10 | `ui_blink_food` | 10 % → 30 % | the food icon pulses from 30 % | food 25 % (`h.FoodCurrent=25.0`, read back): at default — no pulse, after — pulse; `Border_EatImage` content colour G < 1 in 3 of 5 reads 100 ms apart |
 | 11 | `ui_blink_weight` | 90 % → 60 % | the weight icon pulses from 60 % | recon how to load the hero to 70 % of max carry (`exec MakeMeAdmin` + `exec SpawnItem <heavy id> <n>`; the id from the item table); `Image_Weight_Blinking` alpha > 0 |
 | 12 | `ui_menu_slow` | 33 → 2 | the world in the inventory twice slower, not 33× | inventory open by `ActivateModule('CharacterInventory', …)`; `GameplayStatics:GetGlobalTimeDilation(world)` = 0.5 (default 0.0303) |
-| 13 | `ui_craft` | on → off | hero craft in the inventory slowed with the world | `bash _config/craft-measure.sh …` (recon its arguments) → craft time ×(1/dilation) when off; `CraftingQueue.CraftTimeMultiplier` read |
+| 13 | `ui_craft` | on → off | hero craft in the inventory slowed with the world | [recon] `bash _config/craft-measure.sh <multiplier> [<recipe> <result> <hub 1|0>]` (default «Бечевка» 14174 from 3 fibres 12001; needs `exec MakeMeAdmin` + `SpawnItem 12001 3`) → craft time ×(1/dilation) when off; `CraftingQueue.CraftTimeMultiplier` read |
 | 14 | `ui_shout_hold` | 1 → 5 s | an enemy shout stays ≥ 5 s | seen 2026-11-01 (report `2026-11-01_conan-shout-hold-slider.md`); re-run once: the log «фраза снята через X с» X ≥ 5 on a summoned humanoid's shout |
-| 15 | `arc_ballistics` | on → off | arrow speed no longer depends on the draw | `aim-shot.sh 300` and `aim-shot.sh 1200`: the archery log's per-shot speed differs when on, equal when off (recon the log line in `KrinikConanArchery/ue4ss/Scripts/main.lua`) |
-| 16 | `arc_nobreak` | on → off | arrows can break on a hit | recon what the row sets (`main.lua`); 10 hits on a frozen Kappa: the count of surviving `BP_DummyProjectile_C` copies on → 10, off → fewer |
+| 15 | `arc_ballistics` | on → off | arrow speed no longer depends on the draw | `aim-shot.sh 300` and `aim-shot.sh 1200`: the archery log's per-shot speed differs when on, equal when off ([recon] `CFG.ballistics` gates the draw-speed block at `main.lua:376`; the save logs «настройки окна: баллистика false …» at `:175`) |
+| 16 | `arc_nobreak` | on → off | arrows can break on a hit | [recon] `CFG.no_break` sets the flying arrow's `CanBreakOnImpact = false` (`main.lua:316`): read `CanBreakOnImpact` of a fired `BP_*Projectile` (on → false, off → the game's true); 10 hits on a frozen Kappa — surviving copies on → 10, off → fewer |
 | 17 | `arc_fov` | 75 → 50 | narrower view while aiming | RMB held by `mouse-seq.ps1 -Seq "rdown,wait:1500"`; `PlayerCameraManager:GetFOVAngle()` = 50; `rup` |
-| 18 | `mpm_hud_scale` | 125 % → 150 % | the top HUD block larger | the Hosav HUD root's `RenderScale` (recon the widget the mod scales — `KrinikConanModPackManager.md` `apply_hud_scale`) = 1.5; frame pair |
-| 19 | `gfx_blood` | 300 → 30 s | ground blood gone after 30 s | a melee hit on a frozen Kappa (recon a sword in a quick slot + `mouse-seq.ps1 -Seq "lclick"`); the graphics log's `SetFadeOut(<n>, 3)` with n = 27; frames at +20 s (stain) and +40 s (none) |
+| 18 | `mpm_hud_scale` | 125 % → 150 % | the top HUD block larger | the Hosav HUD root's `RenderScale` ([recon] `apply_hud_scale` scales the live `W_SmoothHP_C` (`hud_scale_class`, `main.lua:807`), log «масштаб HUD x1.50 (окно «Моды Krinik'а», …)») — its `RenderTransform.Scale` = 1.5; frame pair |
+| 19 | `gfx_blood` | 300 → 30 s | ground blood gone after 30 s | a melee hit on a frozen Kappa (recon a sword in a quick slot + `mouse-seq.ps1 -Seq "lclick"`); the graphics log «кровь лежит 30 с (окно «Моды Krinik'а», …)» at the next stain ([recon] `main.lua:80`; per-stain line only with `debug_log`); frames at +20 s (stain) and +40 s (none) |
 
 ## The stand (HOUSE_RULES rule 11)
 
@@ -75,7 +75,7 @@ first step of that case (written into the mod's notes).
 
 ## Steps
 
-- [ ] 1. **Recon of the eight «recon» cells** (offline first): read `KrinikConanCamera.md`, `KrinikConanModPackManager.md`, `KrinikConanGraphics.md`,
+- [x] 1. **Recon of the eight «recon» cells** — done 2026-11-01 14:4x, the cells marked [recon] (offline first): read `KrinikConanCamera.md`, `KrinikConanModPackManager.md`, `KrinikConanGraphics.md`,
       the archery `main.lua` (`grep -n "arc_\|ballist\|nobreak\|break" _unpacked/KrinikConanArchery/ue4ss/Scripts/main.lua`), `craft-measure.sh` header,
       `tp_ground.sh` header; write each found read command into the table above (this plan, an edit with a reason) and into the mod's notes.
 - [ ] 2. **Cases** written first: `testcases/TC_conan_hub_rows_audit_<YYYY-MM-DD>.md` — H1–H19 (the table), H20 persistence, H21 close-without-saving,
