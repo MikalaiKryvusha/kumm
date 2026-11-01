@@ -1,7 +1,7 @@
 # Plan 40.1 — screen-edge vignettes (hunger, thirst, low health): three shkalas in «Моды Krinik'а», far left = off, shipped defaults
 
 > **Created:** 2026-11-01 · **Parent:** `plans/40_EPIC_conan_1.0.0_unfinished_six.md` phase 1 (criterion 1); plan 39 B1; plan 36 W23
-> **Status:** written 2026-11-01 by a helper agent at the chat close; nothing of it started — step R1 is next
+> **Status:** written 2026-11-01 by a helper agent; recon R1–R6 and implementation I1–I6 done 2026-11-01 13:46–14:20, the live run partial (report `testcases/reports/2026-11-01_conan-vignettes.md`): open — T6 the owner pick of the low-health default (review folder 48), V5/V6 (thirst and health shkalas by the mouse), the rule-4 clip, the window at 720p / 2K / 4K (phase 6)
 > **Outbound:** the «barely visible» health value is the owner's taste — a review folder with three candidate strengths (step T6)
 
 Basis, verbatim: `[OWNER]` 2026-10-30 ≈08:25 «мерцающая виньетка вокруг контура хкрана при голобе, жажде или нижком здоровье - должна интенсивность

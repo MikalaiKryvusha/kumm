@@ -88,6 +88,23 @@ Live check of the pak: the remote reads `…WBP_ContainerInfo_C:WidgetTree.Overl
 
 | `krinik_mod_settings` (plan 38, 2026-10-31) | the «Моды Krinik'а» settings hub skeleton: merges `DT_KrinikUIModule` into `DT_UIModuleTable` once; writes the row labels («Счётчик кадров в углу экрана») into our window's live rows when our module opens; logs toggles of settings checkboxes inside our window | `NotifyOnNewObject(W_MainMenu_MainMenu_C)` + 500 ms → `ModController` CDO `MergeDataTables`; post-hook `GUIModuleController:ActivateModule` (our row only) + 100 ms → `FindAllOf(W_KrinikModSettings_C)`; pre/post hooks `SettingsCheckboxWidgetBase:HandleCheckboxToggled` (our window only) | merge 11 ms once per start; no timer, no poll. The checkbox drives nothing yet — the FPS counter switch is phase 2 |
 
+| `krinik_vignette` (plan 40 phase 1, 2026-11-01) | the strength of the GAME's screen-edge vignettes: hunger, thirst, low health — store keys `ui_vig_hunger`, `ui_vig_thirst`, `ui_vig_health` (0…1, 0 = off; shipped 0 / 0 / 0.10 by `[OWNER]` 13:20) | `NotifyOnNewObject(W_NewHealthUI_C)` + 600 ms → once `NotifyOnNewObject(/Game/UI/HUD/W_FullScreenBuffEffect.W_FullScreenBuffEffect_C)` and the effects already alive; an effect's birth + 200 ms (the brush is set after construction); `settings.on_change` | strength = the effect widget's own `SetRenderOpacity(k)` (the game never writes it); kind by `Image.Brush.ResourceObject`: `MID_HealthScreenEffectMat` → health, `T_BuffFullScreenEffect_HungerThirst` → hunger or thirst by the hero's food / drink at birth (both 0 → the larger strength); others (heat, smoke) untouched; live effects in a table by FULL NAME (a weak-keyed table lost the UE4SS wrappers — «применено к 0», 14:06). Cost: calls only at a birth and a save, below the 1 ms clock. Report `testcases/reports/2026-11-01_conan-vignettes.md` |
+
+**Vignettes — how the game draws them (recon `researches/conan-vignettes/README.md`).** The container `W_FullScreenEffectContainer_C` holds
+`W_FullScreenBuffEffect_C` widgets owned by the GAME INSTANCE (`…BP_ConanGameInstance_C_<n>.W_FullScreenBuffEffect_C_<n>` — not in a widget tree, so the
+`WidgetTree_<n>.` filter of EXP-0421 drops them; drop only `…:WidgetTree.` templates). Low health: one widget alive from the HUD's birth, a dynamic material
+`HealthScreenEffectMat` with the scalar `Intensity` (0 / 0.3 / 0.7 at 100 / 60 / 15 % health) — red blood splatter, already visible at 61 %. Hunger and thirst: ONE
+texture, a new widget per «умирает от голода / жажды», a dark green-grey band (measure luma, not redness); the old ones lose their parent when the stat is
+refilled. **Never** read `Buff` or walk this class's reflection from Lua (two native crashes, 13:31 and 13:52). Health setter for a stand: `p:AdjustHealth(<int
+delta>)`, read back `IsFullHealth()`.
+
+**The «i» circle (2026-11-01 14:1x, `[OWNER]` «(i) искажены в строках, где много теста»).** The «i» text (Noto Sans Bold 14) is 22.6 × 27.3; the circle is
+round only inside the square `SB_KrinikInfo_<id>` (22.6 × 22.6) between the border and the text. Rows built after that box left the kit script (shout hold,
+the vignettes) had the text straight in the border — a lemon. The kit now sets the box for every row by `info.set_content(box)` (replaces the text, then the
+text goes into the box — no orphan). Check: the remote `Brd_KrinikInfo_<id>:GetContent()` is a SizeBox and its desired size 22.6 × 22.6.
+**Hints:** a row gets the grey hint only when it adds something the «i» text does not say; the vignette rows have none (`[OWNER]` 14:08 «Иногда не нужно
+серое пояснение» · «или очень кратко» · «и в описаниии по (i) будет объяяснено»).
+
 The pause section's Esc map (`krinik_pause_in_menu`, `MOD_WINDOWS`) carries `KrinikModSettings` → `W_KrinikModSettings_C` since 2026-10-31 (case K8b).
 
 **The settings store (plan 38 phase 2, 20:37, `[NOT-TESTED]` in game).** `ue4ss/Scripts/krinik_settings.lua` — a module, not a section (required by the

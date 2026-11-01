@@ -33,3 +33,25 @@ Sequence: food set to 4 % by the remote (executed), then ONE remote call that wa
 - Food 0 %: TWO more effect widgets are born (`…2147456923`, `…2147455601`) — the hunger vignette starts at 0 % (starving), not earlier.
 - RenderOpacity 0.1 on the two new widgets vs 1.0: on window frames (`capture-window.ps1`, 3 s after food 0) NO vignette is visible in either frame — inconclusive: the effect may fade in slowly (`Anim_FadeSlow`) or the background window capture may not show it.
 Next: hold food 0 for ≈ 10 s (refill right after — hunger at 0 kills even with god), frame with the game in FRONT (screen capture) at op 1 / 0.1 / 0; then the low-health effect (health 15 %) the same way; then identify each widget by its `Image` brush in a call of its own.
+
+## Probe 2026-11-01 13:47–13:52 (game in FRONT, `capture.ps1` screen frames, `_config/edge-band.py`) — the route is found
+
+- **Which widget is which** — `w.Image.Brush.ResourceObject` read alone is SAFE (no crash): the low-health widget (`…2147459071`, the container's
+  `ActiveDamageEffect`, alive from the HUD's birth) draws `MID_HealthScreenEffectMat_<n>` — a dynamic instance of `/Game/UI/Textures/GUIs/HUD/HealthScreenEffectMat`
+  with ONE scalar `Intensity`: 0.0 at full health, 0.3 at 60 % (119/199), 0.7 at 15 % (30/199) — the game writes it on the health change. A second permanent widget
+  draws `T_BuffFullScreenEffect` (generic). The hunger widget is born when food hits 0 and draws `T_BuffFullScreenEffect_HungerThirst` — the SAME texture for
+  thirst, so the brush cannot tell hunger from thirst.
+- **The low-health vignette is red blood splatter at the edges and is already visible at 61 % health** (frame `p1_ctrl.jpg` at 121/199 — the «red blotches» first
+  taken for heat; at 199/199 they are gone).
+- **Strength = the effect widget's own `SetRenderOpacity(k)`** — the game does not rewrite it: at health 15 % the edge-band excess over the op-0 frame of the same
+  view is 10.28 at op 1.0, 1.46 at op 0.1, 0 at op 0 (sheet `sheet_op.webp`: full frame → barely visible → none). Hunger: the image is constant (root op 1,
+  `Image` op 1, `ColorAndOpacity.A` 0.8 — a 250 ms trace over 10 s, no pulse in these fields); the vignette is a DARK green-grey band at the edges, not red: edge
+  luma 103.8 at op 1 vs 114.4 at op 0 (same view) — the redness measure does not see it; measure luma for hunger / thirst.
+- Old hunger widgets stay findable by `FindAllOf` after the food is refilled (3 after three starvings) — setting opacity on them is harmless.
+- The vanity (idle) camera swings overhead during a series; `EnableVanityCameraMode(false)` did not stop it at once — frame pairs are taken on ONE view within seconds.
+
+## Crash 2026-11-01 13:52:26 (crash report closed by PID 14096; the owner saw it: «креш»)
+
+ONE remote call that walked the BP class `W_FullScreenBuffEffect_C` with `ForEachProperty` (plus `GetPropertyClass` in a pcall) and `ForEachFunction` — a native
+access violation. Together with 13:31:43 (`w.Buff:GetClass()` among other reads): **never touch `Buff` or walk this class's reflection from Lua.** Hunger vs thirst is
+decided without `Buff`: at the widget's birth read `GetHungerSystem()` — food 0 → hunger, drink 0 → thirst, both → the larger of the two strengths.

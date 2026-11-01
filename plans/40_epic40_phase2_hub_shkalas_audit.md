@@ -27,6 +27,12 @@ nothing is fixed (and re-observed) or removed from the window, the guide and the
    Check: `cmp` of `KrinikSettings.lua` before/after = equal; the five Check commands print the old values.
 4. **Reset.** Situation: a page with three rows moved and saved. Action: «Сбросить к исходным», «Сохранить». Result: the defaults' effects.
    Check: the rows' Check commands print the default values.
+4a. **Sensible ends and short hints** (`[OWNER]` 2026-11-01 14:18–14:20 «у мерегрузки мин значение шкалы стоит поставить 50%» · «у голода и жажды - тоже
+   50% но с другой стороны» · «есть нейкие разумные величины, которые стоит устанавливать в шкалах как мин и макс значения» · «никто не захочет, чтобы
+   перегрузка мерцала с 10%, например»; 14:08 «Иногда не нужно серое пояснение» · «или очень кратко» · «и в описаниии по (i) будет объяяснено»). For every
+   slider row: its min and max are values a player could actually want (the weight blink 50–95 %, the food / water blink 5–50 % already are) — a range end
+   nobody would pick is narrowed; the grey hint is dropped or cut to two-three words when the «i» text already says it.
+   Check: the run report's table carries «min · max · why a player wants each end» and the hint per row.
 5. **Nothing dead remains.** Check: the run report's table has 19 rows, each `pass`, or `removed` with the commit that removed the row from PAGES, the kit
    tuple (`kit-krinik-modsettings.py` line ≈116), the guide and the mockup.
 

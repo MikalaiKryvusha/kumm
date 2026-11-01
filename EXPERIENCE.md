@@ -91,6 +91,27 @@
 
 ## Entries
 
+### EXP-0425 · 2026-11-01 · ❌→✅ · #conan #kit #umg #hub #widget
+class: kit-script-drift
+**Lesson:** a kit script that reuses widgets by name keeps whatever an OLDER version of the script built in the old rows — when a structural piece (the square
+`SB_KrinikInfo_<id>` around the hub's «i») left the script, the old rows kept it and only the rows added later were built without it: the circle became a lemon
+in exactly those rows (the owner saw it first: «(i) искажены в строках, где много теста»). The difference was invisible in the script and in the kit report —
+found by the remote: `Brd:GetContent()` class and `GetDesiredSize()` per row (SizeBox 22.6 × 22.6 vs TextBlock 22.6 × 27.3).
+**Repro:** `pult.sh "lua … win:GetWidgetFromName(FName('Brd_KrinikInfo_'..id)):GetContent():GetClass() …"` for an old and a new row.
+**Trigger:** any kit script that builds rows by name with reuse; adding rows to a window built by older runs; a widget that looks different in some rows only.
+mechanized: none — the check is the remote line above, one per new row (written in KrinikConanUI.md)
+
+### EXP-0424 · 2026-11-01 · ❌→✅ · #conan #ue4ss #lua #widget #gc
+class: wrong-api-assumption
+**Lesson:** a weak-keyed Lua table (`__mode = "k"`) keyed by UE4SS UObject wrappers is EMPTY a moment later: the wrapper is a fresh userdata per access and
+nothing holds it, so the GC takes it while the UObject lives on — the vignette section's «Сохранить» applied to 0 live effects. Key a registry of live game
+objects by `GetFullName()` and keep the wrapper as a value; drop entries whose `IsValid()` is false when you walk it. Also: live HUD effects
+(`W_FullScreenBuffEffect_C`) are owned by the GAME INSTANCE, not a widget tree — the `WidgetTree_<n>.` filter of EXP-0421 drops them; filter out only
+`…:WidgetTree.` templates.
+**Repro:** the section log «сохранено: … — применено к 0» after one effect was taken at birth (2026-11-01 14:06).
+**Trigger:** any Lua registry of UObjects across events; `FindAllOf` of a widget class that is not built inside another widget.
+none-cheap: one line in the section; the log's «применено к N» is the check
+
 ### EXP-0423 · 2026-11-01 · ❌→✅ · #conan #ue4ss #remote #foliage #stand
 class: wrong-api-assumption
 **Lesson:** an array returned by a UFunction to UE4SS Lua (`K2_GetComponentsByClass`) holds WRAPPED elements: `arr[i]:get()` gives the object. Four probes
