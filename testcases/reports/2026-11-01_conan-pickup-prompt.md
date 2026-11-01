@@ -34,7 +34,7 @@ P1 pass · P2 pass · P3 redefined (see Found 1) · P4 pass · P5 partial (the w
 
 ## 5. Found
 
-1. The game's foliage pickup is a 2 m sphere around a 90 cm line from the CAMERA — E took a stone with the crosshair in the sky. The prompt copies that
+1. The game's foliage pickup is a 2 m sphere along a 90 cm probe starting at «camera + view × arm» (at the hero; CORRECTED 21:53 — this line first said «from the CAMERA») — E took a stone with the crosshair in the sky. The prompt copies that
    geometry, so it shows wherever E takes, including off-aim; the owner should know this is the game's own leniency.
 2. My first cost was 6 ms worst: `FindFirstOf` every second and a 30 m sphere returning thousands of indices — fixed (cache, 6 m, split frames).
 3. An enemy's health bar stands where the prompt stands (frame 21:47) — a layout overlap to look at.

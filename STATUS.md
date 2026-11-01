@@ -137,7 +137,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > minimap 6 units further from the corner and its coordinates lower — ACCEPTED 21:04–21:05. The ×3 arrow is hidden at impact (`StopProjectileInternal` hook) —
 > CONFIRMED by the owner 21:13 «да, суппер работает!» · «и земля, и камни, и враги».
 > **21:48 — the «E Взять» prompt over every foliage pickup (plan 42, the owner 21:14–21:34) is BUILT** (KrinikConanUI `krinik_pickup_prompt.lua`, pack `740e473`):
-> once a second, the game's own pickup geometry (a 2 m sphere at a 90 cm line from the camera — the game takes even off-aim), 55 kinds; works in game (report
+> once a second, the game's own pickup geometry (CORRECTED 21:53: the probe starts at «camera + view × arm» — at the hero —, reach 90, sphere 2 m; the first «from the camera itself» copy missed stones at the feet with the camera above), 55 kinds; works in game (report
 > `testcases/reports/2026-11-01_conan-pickup-prompt.md`); cost measured 21:50 (100 repeats): the check 0.12 ms, the near refresh 0.18 ms, each on its own frame once a second — the A-B flight (rule 7) still owed; an enemy's
 > health bar stands where the prompt stands. Water «E Попить» — step 2 of plan 42. My channel sweep of native traces crashed the owner's game 21:30 (EXP-0433).
 > NEXT: the owner's eye on the prompt in play; the A-B flight; then plan 40.3 I6 (Xevyr pages, steps written); then plan 40 phase 4 (arrows in the corpse).
