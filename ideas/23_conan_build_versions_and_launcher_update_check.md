@@ -69,3 +69,20 @@ None yet — the idea waits for approval.
   `_config/test-verify-baseline.py`, `_config/read-fileset-index.py`, the tracked `__pycache__` pyc, the root jpg, `_config/nexus/logo.py`'s font path),
   with `modpack.json` comment lines and the camera mod's `NEXUS_PAGE.md` / `main.lua:28` reworded, the README from the checked draft, an MIT `LICENSE`;
   a scan of the staging tree for the audit's patterns must print zero before `gh repo create MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --public`.
+
+## Public repo — CREATED 2026-11-01 04:5x
+
+- **The owner's word (chat 2026-11-01 04:40):** `[OWNER]` «три: создавай публичный репозиторий. Понаходи имена автором водов, имена или никнеймы.» — the README
+  read is done (the review folder `38_public_readme`).
+- **Authors — all 64 from the primary sources** (pack `9088686`): Steam `ISteamRemoteStorage/GetPublishedFileDetails` (one POST for 61 Workshop ids, no key) →
+  `creator` SteamID → the public profile name `steamcommunity.com/profiles/<id>/?xml=1` (41 distinct creators, 1 s apart); Nexus — the public GraphQL v2
+  `legacyModsByDomain` (type `CompositeDomainWithIdInput`, domain `conanexilesenhanced`) for the 6 Nexus mods. 41 TODO filled; the 23 already named matched.
+  `[AI]` decorative emoji dropped from one Steam name (La Sombra MesSiinaa); `$` in «Ca$hfire» escaped for GitHub math (`mods-table.mjs`).
+- **The 8 TODO lines of the template closed:** authors (filled); the removal promise (the owner 2026-10-31: «Нет»); `LICENSE` (put by `make_public_tree.py`);
+  the 1.0.0 archive link — `[AI]` removed until the archive exists (it comes with the release, step 4 below).
+- **Tree and scan:** `python -I -X utf8 _config/public_release/make_public_tree.py <scratch>/public_tree` → 517 files kept, 19 dropped, scan 0; an extra pass
+  for profile paths, the host name, SteamIDs — 0 (the one e-mail is the font author's in `OFL-Forum.txt`). One commit, `gh repo create --public --push`:
+  **https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack** (`5a606f8`, PUBLIC, description read back intact). The first screen of the
+  README on GitHub looked at by a headless screenshot: the logo, the badges, sections 1–2, the table with authors render.
+- **Next:** (4) the 1.0.0 archive as a release of this repo after plan 35 item 6 (archive on a clean game, volumes ≤ 700 MB), then the README's archive link;
+  a pack update reaches the public repo by `make_public_tree.py` into a fresh dir + a commit on top (never a push of the private history).

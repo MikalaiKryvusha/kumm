@@ -119,7 +119,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `[OWNER]` «F1 нужен для того, чтобы курсор отображался» · «им можно кликнуть по кнопке разворачивания ДПС»: holding F1 shows the cursor, a click on the meter's
 > expand button expands it (corrected 2026-11-01: «F1 only MOVES the window» below was false); (d) `[OWNER]` «создавай публичный репозиторий. Понаходи имена
 > автором модов, имена или никнеймы» — the README read is done.
-> FIRST next (2026-11-01): (1) the public repo with mod authors' names; (2) the hub window to the mockup's look; then the list below from (3).
+> **2026-11-01 04:5x — THE PUBLIC REPO IS LIVE:** https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack (one commit `5a606f8`, scan 0, all 64
+> authors from Steam / Nexus; idea 23 → «Public repo — CREATED»). Its next step — the 1.0.0 archive as a release after plan 35 item 6.
+> FIRST next (2026-11-01): (1) the hub window to the mockup's look; then the list below from (3).
 > FIRST next (2026-10-31, superseded by the line above for 1–2): (1) the owner's eye on folders `39_hub_look` and `40_arrow_clip` (AIM15); (2) the public repo after his README read (`38_public_readme`);
 > (3) C1 — read the placed chests of `Mines_of_Set/Caverns_of_Set_Level` from the level file; (4) R2 — a natural stone pickup stand; (5) plan 38 step 7–8
 > (phase 1 — the inventory button «Настройки модов», W24: today the hub opens only by the remote). Before any remote call on a mod's own function —
