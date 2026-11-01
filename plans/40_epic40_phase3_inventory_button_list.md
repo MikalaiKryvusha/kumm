@@ -107,6 +107,8 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
       window's variables), write at «Сохранить» through the mod's own save/apply function — never our store; a row whose value lives only server-side or
       cannot be applied without the author's window is listed as «нет механики» on the mockup (rule 23) and left out. Kit: the new pages and rows by
       `kit-krinik-modsettings.py` (ids only), run twice. The sub-lists of step 2 go when every mod of the hub has its page. Mockup to the owner first (taste).
+      MOCKUP SHOWN 2026-11-01 18:2x: window 7 of `ConanExiles/_config/settings_hub/mockups/mockups.html` — the Damage Meter page with every row of the recon,
+      rule-23 badges («будет сделано» · «предложение» for colours and the key) — review folder 51 «hub xevyr maket»; waits for the owner's eye before code.
 - [x] I4. The pause section's Esc map `MOD_WINDOWS` (`krinik_pause_in_menu.lua`) gains the new module rows; «one window at a time» — opening an entry calls
       `TryCloseWindow()` on any open mod window first.
 - [x] I5. Hygiene: `loadfile`, `check-lua-game-thread.py` 0, `check-lua-templates.py` 0.

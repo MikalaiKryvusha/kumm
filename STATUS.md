@@ -130,8 +130,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `patch-mod-asset.py`); Hosav's button collapsed, fishing not grafted, Xevyr's side tab collapsed in its window's `Construct` (60 fps video clean). Seam left:
 > the PIFC window stands right of centre. **2026-11-01 17:43 +03:00 — stuck arrows live 5 min (hub row «Сколько стрела торчит в цели», 1–30 min), seen 299.9 / 59.9 s (report
 > `testcases/reports/2026-11-01_conan-arrow-stuck-life.md`).** **2026-11-01 17:51 +03:00 — the ×3 visual arrow joined at the tip flies (cases V1–V3, copy still at 62 cm); review folder 50 «strela x3 v polete» waits for the owner's eye.**
-> NEXT, in order: (2) «Моды Xevyr'а» and «Прочее» as our hub windows with real rows (the owner's 13:40 decision;
-> recon per mod first); (3) plan 40 phase 4 (arrows in the corpse). Game closed, lock released.
+> NEXT, in order: (2) «Моды Xevyr'а» and «Прочее» as our hub windows with real rows (the owner's 13:40 decision) — recon DONE
+> (`researches/conan-mod-settings-hub/xevyr-settings-recon.md`), the Damage Meter page mockup in review folder 51 waits for his eye; plan 40.3 I6; (3) plan 40 phase 4 (arrows in the corpse). Game closed, lock released.
 > **Moved verbatim to the chronicle, entry 2026-11-01 17:54 +03:00:** the done owner-debt block of 15:49 and the 15:38 dayloop paragraph.
 > **Moved verbatim to the chronicle, entry 2026-11-01 15:52:** the closures of 13:27–13:43, the eea8bf94 handover items 1 (vignettes — done) and 1a (hub audit — plan 40.2), the 08:49 acceptances, the 09:5x–10:3x done list, the 13:20 vignette order (done), the 2026-10-29 15:2x work order.
 > 2. The HUD temperature by the game's debuff stage — frame the comfort (white) and the cold (blue) cases (only heat was framed, review folder 47).
