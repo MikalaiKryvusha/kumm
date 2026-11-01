@@ -135,8 +135,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > badges updated). «Клавиша вызова курсора» in The Damage Meter and Simple Minimap + the refresh-rate label no longer runs over the F1 box (report
 > `2026-11-01_conan-cursor-key-name.md`). The KRINIK MOD PACK logo's dark fill toned to the game logo by measurement (`make-pack-logo.py`, review folder 52). The
 > minimap 6 units further from the corner and its coordinates lower — ACCEPTED 21:04–21:05. The ×3 arrow is hidden at impact (`StopProjectileInternal` hook) —
-> CONFIRMED by the owner 21:13 «да, суппер работает!» · «и земля, и камни, и враги». NEXT: plan 40.3 I6 (the Xevyr pages with real rows, our own colour
-> and key controls); then plan 40 phase 4 (arrows in the corpse).
+> CONFIRMED by the owner 21:13 «да, суппер работает!» · «и земля, и камни, и враги».
+> **21:48 — the «E Взять» prompt over every foliage pickup (plan 42, the owner 21:14–21:34) is BUILT** (KrinikConanUI `krinik_pickup_prompt.lua`, pack `740e473`):
+> once a second, the game's own pickup geometry (a 2 m sphere at a 90 cm line from the camera — the game takes even off-aim), 55 kinds; works in game (report
+> `testcases/reports/2026-11-01_conan-pickup-prompt.md`); cost 0.33 ms a check, the worst sample 3 ms with a 1 ms clock — **the A-B flight is owed**; an enemy's
+> health bar stands where the prompt stands. Water «E Попить» — step 2 of plan 42. My channel sweep of native traces crashed the owner's game 21:30 (EXP-0433).
+> NEXT: the owner's eye on the prompt in play; the A-B flight; then plan 40.3 I6 (Xevyr pages, steps written); then plan 40 phase 4 (arrows in the corpse).
 > **Moved verbatim to the chronicle, entry 2026-11-01 17:54 +03:00:** the done owner-debt block of 15:49 and the 15:38 dayloop paragraph.
 > **Moved verbatim to the chronicle, entry 2026-11-01 15:52:** the closures of 13:27–13:43, the eea8bf94 handover items 1 (vignettes — done) and 1a (hub audit — plan 40.2), the 08:49 acceptances, the 09:5x–10:3x done list, the 13:20 vignette order (done), the 2026-10-29 15:2x work order.
 > 2. The HUD temperature by the game's debuff stage — frame the comfort (white) and the cold (blue) cases (only heat was framed, review folder 47).
