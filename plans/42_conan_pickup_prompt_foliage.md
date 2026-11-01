@@ -51,6 +51,13 @@ leaves, the prompt shall go. Maintain: our mods' 1 ms CPU budget in gameplay fra
   1 call on the press; nothing while he looked at the stone (only `CleanUpHighlightedObject` per frame). The R1 idea «ride the game's per-frame search» is
   closed — there is none; the event route (the sensor) stays the main one.
 
+- **E1 stand, 21:21–21:23 (the owner walks, the agent reads):** pickup foliage components are the ones named `…PickupFoliage…` (27 near the oasis) —
+  `SetGenerateOverlapEvents(true)` on them by the remote; a sensor `SphereComponent` (radius 25, collision QueryOnly, object WorldDynamic, Overlap to all)
+  added to the hero by `AddComponentByClass`, attached to the camera `AdjustableCamera` at X 500 (≈ 2 m before the hero in third person), with a visible
+  `/Engine/BasicShapes/Sphere` (loads in the shipped game) that grows ×2 on any overlap (a 200 ms diagnostic loop, 3 min, stand only). Seen so far: no
+  overlap reported over the ground — expected, the landscape generates no overlap events; a one-shot `KismetSystemLibrary:SphereOverlapComponents` (60 cm) at
+  the ball DOES return `LandscapeHeightfieldCollisionComponent_35` — queries work. The stone itself — waits for the owner to put the ball on one.
+
 ## Next steps
 
 - [ ] E1. Stand proof: turn overlap events on for one rock component by the remote, put a sensor in front of the hero, read whether begin / end overlap
