@@ -95,6 +95,10 @@
     guide and the launcher they stand under their own heading («Ссылки» / «Links», «Автор сборки и ссылки») with no sentence that calls them addresses for
     reports; one source file feeds all three places (`build-docs.py`, `_config/public_release/mods-table.mjs`). (`[OWNER]` 2026-10-31 21:33 «ЭТО НЕ КОНТАКТЫ,
     ПОВТОРЯЮ НАХУЙ ТЕБЕ ЕЩЕ РАЗ!» · «это просто раздел с ссылками»; earlier 11:20 «сделаешь раздел со ссылками автора».)
+23. **A mockup never passes a wish for a working thing.** Every row, button and option on a mockup the owner sees carries its status on the mockup itself:
+    «работает» (code exists and was seen in game) · «нет механики — будет сделано» · «нет механики — предложение». Building a window from an accepted mockup, the
+    report lists every mockup element NOT carried into the game and why — nothing is dropped silently. (`[OWNER]` 2026-11-01 13:25 «то есть, ты мне макеты
+    показываешь такие, которые не сделаны?» — the vignette rows of the 10-31 mockups had no mechanics and were silently left out of the game window; plan 39 D5.)
 19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
     mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +
