@@ -33,6 +33,13 @@ leaves, the prompt shall go. Maintain: our mods' 1 ms CPU budget in gameplay fra
 - A post-hook on `FunCombat_PlayerController_C:UpdateHighlightTarget` counted 0 calls in 3 s with the game in the BACKGROUND — not concluded: repeat with the game
   in front (the call may run only for the focused window or on input).
 
+- With the game in FRONT (21:17, `mouse-seq.ps1` holding it 3 s) — again 0 calls: the game calls `UpdateHighlightTarget` from its own bytecode, and a UE4SS hook
+  fires only on calls that go through ProcessEvent. No game event says «a pickup is under the crosshair».
+- Our own test costs (21:18, 200 calls from Lua): `KismetSystemLibrary:SphereTraceSingle` from the camera, 5 m, radius 20, Visibility — **0.085 ms per call**
+  (hits 200/200). The pickup test needs a rhythm of its own → it collides with HOUSE_RULES §1 rule 7 («on a game event, never by timer polling») — the owner's
+  decision, asked in chat 21:1x: A — the test 5 times a second (one trace of 0.085 ms in every ≈ 12th frame at 60 fps, ≈ 0.4 ms per second) · B — per frame
+  (0.085 ms in every frame) · C — not done.
+
 ## Next steps
 
 - [ ] R1. Repeat the call count of `UpdateHighlightTarget` with the game in front; if it runs per frame or on a timer, the prompt can ride it (our check only
