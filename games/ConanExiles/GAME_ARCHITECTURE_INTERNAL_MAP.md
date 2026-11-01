@@ -13,6 +13,7 @@
 | Луч прицела | `FunCombat_PlayerController_C::GetLineTraceStartAndEndFromCamera(Distance)` | начало = камера, направление = центр экрана (прицел), длина = `Distance` |
 | Подсветка цели и выбор | `FunCombat_PlayerController_C::UpdateHighlightTarget` | `InteractionDistance` 330 + `InteractionDistanceThirdPersonBonus` 55 (от третьего лица), сфера `TraceSphereRadius` 20 |
 | Камни, волокно — экземпляры растительности | родная `PickupGatheringOneInstance(TraceLength, TraceRadius)` из `UpdateHighlightTarget` | `PickupInteractionDistance` 25, `PickupTraceSphereRadius` 200 — тоже от камеры |
+| Stones by the remote (2026-11-01) | `StaticFindObject('/Script/Foliage.FoliageInstancedStaticMeshComponent')` → `ipairs(InstancedFoliageActor:K2_GetComponentsByClass(cls))` | 15 actors, 692 components in the oasis; `FindAllOf` by this class name or by `HierarchicalInstancedStaticMeshComponent` ends the call; the component's mesh is not readable by UE4SS (`StaticMesh` empty, no `GetStaticMesh`) — a stone cannot be found by its mesh |
 | Проверка после попадания | `InteractionLenientDistanceCheck(ImpactLocation)` | расстояние точка ↔ ГЕРОЙ < `dw.BaseLenientInteractionDistance` 500 |
 | Окна в мире | `BasePlayerChar_C::WidgetInteraction` на `CameraThirdPerson` | дистанция = штанга + 500, игра пересчитывает сама |
 | Постройка | `BasePlayerChar_C::BP_BuildSystem_v2` (`BuildSystemComponent`) | `m_BuildRange` 2000, `m_DestructRange` 5000, `PlacementGhostRadius` 600 — от камеры или от героя, не проверено |
