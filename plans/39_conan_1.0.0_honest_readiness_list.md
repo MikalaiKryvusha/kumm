@@ -22,7 +22,7 @@
 | # | What |
 |---|---|
 | B1 | Screen-edge vignettes: three shkalas (far left = off), defaults hunger/thirst OFF, low health barely visible — no recon, no code |
-| B2 | The inventory button «Настройки модов» + its list (plan 38 phase 1) — no plan, no code; «Моды Xevyr'а» and «Прочее» hubs do not exist |
+| B2 | The inventory button «Настройки модов» + its list (plan 38 phase 1) — no plan, no code; «Моды Xevyr'а» and «Прочее» hubs do not exist. **2026-11-01 17:2x: button and list DONE (plan 40.3 step 2); Xevyr and «Прочее» are interim sub-lists of the mods' own windows — the hubs with real rows remain** |
 | B3 | Arrows stay in the corpse — failed (the game destroys every copy; routes in the archery notes) |
 | B4 | Frame measurements: no proof that our mods keep the 1 ms worst-frame budget; the blink section shows 3–6 ms minute spikes (cause unknown) |
 | B5 | The 16:9 gate: every UI of the build at 720p / 1080p / 2K / 4K — not run as a whole |

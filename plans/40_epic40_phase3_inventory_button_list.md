@@ -4,6 +4,12 @@
 > **Status:** written 2026-11-01 by a helper agent; R2 done 15:43 (the route proven live); STEP 1 DONE 15:48 — section `krinik_mods_button.lua`, the button in the bar
 > opens «Моды Krinik'а» (cases `testcases/TC_conan_mods_menu_button_2026-11-01.md` B1, B2 pass); NEXT: the list (R3, I1–I4) and Hosav / fishing buttons out (R4) in ONE step — `[OWNER]` 2026-11-01 15:49 «соответственно, она там одна должна остаться» ·
 > «настройки рыбалки и настройки интерфейса оттуда уходят» · «красная справа вертикальная по модам ксавьера - тоже уходит» (the `XCS_Panel` side tab); B3–B4; starts after phase 2 (the hub must be honest before the door to it is built)
+> **STEP 2 DONE 2026-11-01 17:19 +03:00** (report `testcases/reports/2026-11-01_conan-mods-menu-list.md`, cases B5–B13 pass, B14 skipped): the bar keeps only «Настройки модов»
+> (Hosav collapsed, fishing not grafted, Xevyr's side tab collapsed in its window's `Construct`); the list «Моды Krinik'а · Моды Xevyr'а · Рыбалка · Прочее»
+> (Lua-built from vanilla buttons, Noto Sans, the button's width); Xevyr and «Прочее» are INTERIM sub-lists that open the mods' own windows (5 + 5); Esc keeps
+> the inventory in all 12 windows after a native module-row edit of 8 paks (Modal + CloseOnESC). NEXT (the owner's 13:40 decision): «Моды Xevyr'а» and «Прочее»
+> as our hub windows with real rows — recon per mod (its window's options and where each value lives), then the kit pages; until then the sub-lists stay.
+> Left out of the list (rule 23): ModControlPanel (empty window), Pickup+ (window drawn in pieces), Edit Appearance (not a settings window).
 > **Outbound:** interview `interviews/interview_030_conan_xevyr_and_other_hubs.md` (step R5) — the shape of «Моды Xevyr'а» and «Прочее»
 > **DECIDED 2026-11-01 13:40 — replaces interview 030:** `[OWNER]` «Окна «Моды Xevyr'а» - пооткрываешь его моды, посмотришь, какие он опции дает - вот они и должны быть не в его кривых косых окнах, а в нашем красивом» · «и «Прочее» - аналогично, но по "ручкам" настроек модов других авторов». So: both are hub windows in OUR look (as «Моды Krinik'а») with REAL rows — every option each mod's own window offers, bound to the mod's own settings (its SaveGame fields + its apply path); not rows that only open the mod's window. Recon per mod first: open its window, list its options, find where each value lives (mod notes in games/ConanExiles/mods/).
 
@@ -61,7 +67,7 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
 
 ### Recon
 
-- [ ] R1. Read `games/ConanExiles/mods/UIMod_Hosav.md`, `JaarFishing.md` (the fishing mod's notes — confirm it is Exiles Fishing: `grep -n "EFT\|Exiles" games/ConanExiles/mods/JaarFishing.md`),
+- [x] R1. Read `games/ConanExiles/mods/UIMod_Hosav.md`, `JaarFishing.md` (the fishing mod's notes — confirm it is Exiles Fishing: `grep -n "EFT\|Exiles" games/ConanExiles/mods/JaarFishing.md`),
       `ModControlPanel.md`, `Simple_Minimap.md`, `DamageNumber.md`; the game map block «Hub bottom row: Hosav and fishing buttons» (≈ line 513).
 - [x] R2. **Our button's route.** DONE 2026-11-01 15:4x (probe below the step). Facts: a moved Hosav button stops clicking; a `WidgetBlueprintLibrary:Create` copy never fires its handler; FLX buttons have no
       Lua-hookable click; the hub's own buttons work by `RegisterKeyBind(LEFT_MOUSE_BUTTON)` + `IsHovered()` (feedback plate, hub). Candidate `[AI]`: a kit
@@ -72,16 +78,16 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
       `CraftingGUI_C.ButtonBar.ButtonContainerLeft:AddChild` → an empty vanilla button right of «Настройка рыбалки» (the fishing button lives in the LEFT
       container in our build); the real cursor on it → `IsHovered()` true, away → false. YES — the route «Create + AddChild + LMB bind + IsHovered» holds.
       The inventory opens only after the world settles: a Tab pressed right after world entry did nothing (no `CraftingGUI_C` instance).
-- [ ] R3. **The list widget.** Kit `W_KrinikModsMenu` (a `ScrollBox` of four flat buttons in the hub's look — the hub's `Brd_KrinikBtn_*` style) placed above the
+- [x] R3. **The list widget.** DONE 2026-11-01 — a Lua-built VerticalBox of vanilla buttons in the bar Overlay (no kit asset).** Kit `W_KrinikModsMenu` (a `ScrollBox` of four flat buttons in the hub's look — the hub's `Brd_KrinikBtn_*` style) placed above the
       button, or a module row `KrinikModsMenu` in `DT_KrinikUIModule` (`Category Modal`). Decide by one probe: does a second row in our module table merge and
       open (`MergeDataTables` already proven for one row).
-- [ ] R4. **Hiding the two buttons natively** (rule 8): Hosav's button — its visibility is ours today (`krinik_pause_in_menu`, `XCS_Panel`); fishing's — the
+- [x] R4. **Hiding the two buttons natively** — DONE 2026-11-01: fishing natively (Graft not called), Hosav and the Xevyr tab by Lua once per event (assets shared or re-shown — notes KrinikConanUI.md) (rule 8): Hosav's button — its visibility is ours today (`krinik_pause_in_menu`, `XCS_Panel`); fishing's — the
       game inserts it in `ButtonContainerRight` only for admins. Route by notes: a pak edit of each mod's insertion (KRINIK MODIFIED, `patch-mod-asset.py`
       `bool:` row) or, if the asset will not yield, a Lua `SetVisibility(1)` once at the inventory's `ActivateModule` (event, no poll) with an A-B note.
 - [ ] R5. **Interview** `interviews/interview_030_conan_xevyr_and_other_hubs.md` (Russian, the owner answers inside): the epic's default `[AI]` — «Моды Xevyr'а» and
       «Прочее» are the same hub window (mockup 5 look) whose rows are «Открыть окно мода» buttons, one per mod; alternatives — map the mods' own settings fields
       (plan 38 phase 3, heavy). Work continues with the default while he has not answered (memory: questions pile up in interviews, work goes on).
-- [ ] R6. **The live module list** for those two hubs (author-hub-inventory «Open» §1): `pult.sh "lua …"` over `DT_UIModuleTable` row names matching
+- [x] R6. **The live module list** — DONE 2026-11-01 (live `ForEachRow` scan; 12 windows usable, 3 left out — plan header) for those two hubs (author-hub-inventory «Open» §1): `pult.sh "lua …"` over `DT_UIModuleTable` row names matching
       `Settings|Config|Tuning|Panel|Options` → the mod of each widget path; resolve «Horti», PvE Plus Ambush's module, Emberlight's and Pickup+'s; update
       `researches/conan-mod-settings-hub/author-hub-inventory.md`.
 
@@ -90,29 +96,29 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
 - [ ] I1. Kit (`_config/devkit/kit-krinik-modsettings.py` or a new block in it): `W_KrinikModsButton`, `W_KrinikModsMenu`, a second hub mode — either a new
       Widget Blueprint per hub or `W_KrinikModSettings` reused with a `mode` the section fills (decide in R3/R5); new assets listed in `Local/CookInfo.ini`
       (`FilesToCook=`, copy in `_unpacked/KrinikConanUI/kit/CookInfo.ini`); run TWICE; `kit-buildmod.py KrinikConanUI <out>`; `mod-overrides.py` lists them.
-- [ ] I2. Section `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_mods_menu.lua`: post-hook `GUIModuleController:ActivateModule` (inventory) → add the
+- [x] I2. Section `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_mods_menu.lua`: post-hook `GUIModuleController:ActivateModule` (inventory) → add the
       button once per bar instance, hide Hosav / fishing (R4 route); LMB bind returns on one boolean unless the inventory is open; clicks → open the list /
       `ActivateModule(<entry module>)` and close the list; minute summary with its own error counter.
 - [ ] I3. «Моды Xevyr'а» / «Прочее» rows in a `HUBS` table (one place for entry name, module names, labels) — rows open the mod's own window; labels and «i» per
       RUSSIAN_RULES; the order of plan 38 (Krinik · Xevyr · Рыбалка · Прочее).
-- [ ] I4. The pause section's Esc map `MOD_WINDOWS` (`krinik_pause_in_menu.lua`) gains the new module rows; «one window at a time» — opening an entry calls
+- [x] I4. The pause section's Esc map `MOD_WINDOWS` (`krinik_pause_in_menu.lua`) gains the new module rows; «one window at a time» — opening an entry calls
       `TryCloseWindow()` on any open mod window first.
-- [ ] I5. Hygiene: `loadfile`, `check-lua-game-thread.py` 0, `check-lua-templates.py` 0.
+- [x] I5. Hygiene: `loadfile`, `check-lua-game-thread.py` 0, `check-lua-templates.py` 0.
 
 ### Test in the live game
 
-- [ ] T1. Cases B1–B12 (criteria 1–7, each entry, Esc, one-window, cost, each «Прочее» / Xevyr row) into `testcases/TC_conan_mods_menu_button_<YYYY-MM-DD>.md`
+- [x] T1. Cases B1–B12 (criteria 1–7, each entry, Esc, one-window, cost, each «Прочее» / Xevyr row) into `testcases/TC_conan_mods_menu_button_<YYYY-MM-DD>.md`
       first, stand block included.
-- [ ] T2. Lock (`--what "epic40 p3 mods menu" --minutes 90`), deploy (P2), launch by the owner's last path, world entry; cases by the real mouse; frames at 1080p
+- [x] T2. Lock (`--what "epic40 p3 mods menu" --minutes 90`), deploy (P2), launch by the owner's last path, world entry; cases by the real mouse; frames at 1080p
       and 4K; a clip of button → list → each entry → Esc (rule 4), watched before the verdict.
-- [ ] T3. `close-game.ps1`, lock released; run report `testcases/reports/<YYYY-MM-DD>_conan-mods-menu-button.md`; a review folder
+- [x] T3. `close-game.ps1`, lock released; run report `testcases/reports/<YYYY-MM-DD>_conan-mods-menu-button.md`; a review folder
       `НА ОТСМОТР НИКОЛАЕМ/<N> кнопка настройки модов/` for the owner's eye (taste).
 
 ### Packaging into the build
 
-- [ ] P1. Sources: `_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_mods_menu.lua`, `main.lua`, `krinik_pause_in_menu.lua`, the rebuilt `KrinikConanUI.pak`, the kit
+- [x] P1. Sources: `_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_mods_menu.lua`, `main.lua`, `krinik_pause_in_menu.lua`, the rebuilt `KrinikConanUI.pak`, the kit
       script, `kit/CookInfo.ini`; for a pak-edit route of Hosav / fishing — the edit script next to the mod's pak and the entry marked **KRINIK MODIFIED**.
-- [ ] P2. `modpack.json`: `KrinikConanUI` `verify` += `krinik_mods_menu.lua`; the Hosav / fishing entries' `$comment` and KRINIK MODIFIED mark if edited.
+- [x] P2. `modpack.json`: `KrinikConanUI` `verify` += `krinik_mods_menu.lua`; the Hosav / fishing entries' `$comment` and KRINIK MODIFIED mark if edited.
       `Deploy-ModPack.ps1 -PackDir D:/work/ai_sandbox/ConanExiles -Deploy -Only KrinikConanUI` (and `-Only <Hosav entry>`, `-Only <fishing entry>` if edited),
       then `-Verify` → exit 0.
 - [ ] P3. Same commit (rule 20): `KrinikConanUI.md` (assets, section), `UIMod_Hosav.md`, `JaarFishing.md`, the game map's hub-bar block, plan 38 phase 1 row,

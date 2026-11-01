@@ -35,9 +35,11 @@ Pak `DamageNumber.pak`, original in `D:\Games\Conan Exiles Mods\_patch-originals
    «Внизу слева», «Bottom Right» → «Внизу справа» in `DN_UI_SettingsWindow` — `PopulateControls` (AddOption ×4, SetSelectedOption) and the switch-on-string
    `GetAnchorIndex(AnchorName)`; the save keeps the NUMBER `RestoreAnchor`, so the change is safe; the field `SizeBox_6` 120 → 150 (run 1 cut «Вверху слев»).
    Live 12:37: the live window's `GetAnchorIndex(GetOptionAtIndex(i))` = 0…3 (report `2026-11-01_conan-dropdowns-all-topleft-ru.md`).
-4. Rebuild after a mod update: `python -I -X utf8 _config/devkit/patch-mod-asset.py build DamageNumber DN_SG_SaveSettings <work>
-   _config/localization/asset-strings/DamageNumber__DN_SG_SaveSettings.tsv _config/localization/asset-strings/DamageNumber__DN_UI_SettingsWindow.tsv
-   DN_UI_SettingsWindow` → `<work>/out/DamageNumber.pak` into `_krinik-modified/3719585133`.
+4. The settings window over the inventory (2026-11-01, plan 40.3): `DN_DT_UIModule` row `DN_UI_Settings` Category Popup → Modal, CloseOnESC false → true
+   (`_config/krinik_patches/DamageNumber__DN_DT_UIModule.tsv`) — Esc closed the inventory under the window; it opens from «Настройки модов» → «Моды Xevyr'а».
+5. Rebuild after a mod update: the manifest recipe `krinikBuild` (four assets, the last pair `DN_DT_UIModule`) — `python -I -X utf8
+   _config/devkit/patch-mod-asset.py build DamageNumber DN_SG_SaveSettings <work> <tables and assets as in krinikBuild>` → `<work>/out/DamageNumber.pak` into
+   `_krinik-modified/3719585133`.
 
 ## The collapsed button's look (2026-11-01 15:2x, `[OWNER]` «в свернутом состоянии dps мод нужно сделать прозрачным, оставить полоску, и дать белый контур, и
 прозрачность процентов 80» · «чтобы не так сильно был заметен, как сейчас» · «а был ненавязчивый минусик в углу» · «словно часть мода худа»)

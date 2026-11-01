@@ -76,11 +76,15 @@ expand the collapsed meter — the player expands it by holding F1 and clicking 
 Tilde, ё, F10).
 
 Вкладки хаба (снято 2026-10-26): Q/E = `W_Carousel_C:NextCarouselWindow()` / `PrevCarouselWindow()` (пультом, без клавиш). Вкладку «Снаряжение»
-выдаёт модуль `XCS_Panel` (боковая панель «Моды Xevyr»): открыт с хабом на «Снаряжении», закрывается при уходе на другую вкладку. Нижняя панель
-хаба — ванильный `ButtonBar` (`ButtonContainerRight`: «Закрыть»; на «Талантах» слева — «Показать контент из DLC»). Кнопки модов в ней:
-Hosav `W_UI_SettingsButton` — отдельный виджет поверх экрана, у автора опрос `Delay 3.0` + `IsModuleActive(CharacterInventory)` (в сборке заглушён,
-видимость — `KrinikPauseGameInMenu` по `XCS_Panel`); Exiles Fishing `W_EFT_AdminButton` — вставлен в `ButtonContainerRight` функцией
-`BPC_EFT_Tuning.Graft` по таймерам 0.3/0.5 с. Окна настроек модов — модули `DT_UIModuleTable` (`DN_UI_Settings`, `SM_UI_Settings`, `PrP_Settings`,
+выдаёт модуль `XCS_Panel` (боковая панель «Моды Xevyr»): открыт с хабом на «Снаряжении», закрывается при уходе на другую вкладку. Окно модуля —
+`XCS_W_Container_C` (`WindowRoot`, класс `/Game/ModsShared/Xevyr_Shared/CommonSettings/XCS_W_Container`): создаётся заново при каждом входе на «Снаряжение»,
+после события модуля; внутри `MenuContainer` — красный язычок и выезжающий список четырёх модов Xevyr (кнопки `XCS_W_BasicButton_C`, поле `Payload` — имя
+модуля окна). Нижняя панель хаба — ванильный `ButtonBar` в `Overlay_0` окна `CraftingGUI_C` (`ButtonContainerRight`: «Закрыть»; на «Талантах» слева —
+«Показать контент из DLC»). С 2026-11-01 в ней одна кнопка модов — «Настройки модов» со списком (`KrinikConanUI`, раздел `krinik_mods_button`); боковая
+вкладка Xevyr свёрнута (перехват `Construct` её окна), кнопка Hosav `W_UI_SettingsButton` свёрнута, кнопка Exiles Fishing не вставляется (её `Graft` не
+зовётся). Раньше: Hosav — отдельный виджет поверх экрана с опросом `Delay 3.0` (в сборке заглушён); Exiles Fishing `W_EFT_AdminButton` — в
+`ButtonContainerRight` функцией `BPC_EFT_Tuning.Graft` по таймерам 0.3/0.5 с. Esc в окне мода поверх инвентаря оставляет инвентарь, только когда строка
+модуля — категория Modal И `CloseOnESC` true (2026-11-01; правка строки на лету действует только на ещё не созданный модуль). Окна настроек модов — модули `DT_UIModuleTable` (`DN_UI_Settings`, `SM_UI_Settings`, `PrP_Settings`,
 `LLH_Settings`, `AMR_Settings`, `NightTerrorsSettings`, `EAA_*`, `ModControlPanel`, `HosavUIsettings`, …); часть через голый `ActivateModule` не
 открывается, `PRMainMenu` (PackRat Helper) так ронял игру. Карточки классов EAA — картинки: текст нарисован в текстурах. Окна, которые
 открываются, делают это не каждый раз: `EAA_Famemenu`, `EAA_Armorsettings`, `DN_UI_Settings` после пары «открыть → закрыть» в одном сеансе

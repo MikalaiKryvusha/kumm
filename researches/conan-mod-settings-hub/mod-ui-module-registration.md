@@ -60,6 +60,12 @@ The same in all four: `ToggleActionName None`, `BlocksToggleActions False`, `Tog
 `DisableShortcutWhenPlayerInputBlocked False`, `TieToBasePlayerCharInput False`. HUD rows differ by `Category HUD` + `AutoshownInStates [Playing]`
 (`DN_UI_DmgWidget`). The soft class is loaded only on activation — that is why the fishing panel's classes appear after `ActivateModule` (game map). [inferred]
 
+**Esc over the inventory (2026-11-01, plan 40.3 B11) [seen].** A mod window opened over the inventory closes alone on Esc only when its row is Category
+`Modal` AND `CloseOnESC` True; otherwise Esc closes the inventory under it too. Live row edits on modules not yet created in the session: `Modal` alone
+(Proximity Party) — fail; `CloseOnESC` alone with `Popup` (EAA) — fail; both (Simple Minimap, Lore & Loot, Night Terrors) — pass; `FullscreenGUIAction`
+does not matter (Lore & Loot kept `Close`). An edit on a module already created in the session changes nothing. The build ships both fields for its twelve
+list windows (eight paks edited natively, `ConanExiles/_config/krinik_patches/*UIModule*.tsv`).
+
 ## 3. The window class and its minimal structure
 
 - All three mod settings windows derive DIRECTLY from native `WindowRoot` (`/Script/ConanSandbox.WindowRoot`; the class export's super):

@@ -91,6 +91,37 @@
 
 ## Entries
 
+### EXP-0430 · 2026-11-01 · ❌→✅ · #conan #ui #video #flicker #measure
+class: wrong-proxy
+**Lesson:** `ffmpeg -f gdigrab` of the full-screen game gives 2–3 s of picture and then black frames — useless for a flicker check. The project's working
+recorder is `ddagrab` (GPU desktop duplication, as in `bench-flight.sh --video`): 4K 60 fps HEVC, crop offline. And a pixel counter needs its control
+frame FIRST: a "red" threshold missed the tab on a frame where it stood, a looser one counted the red cliffs — a frame grid read by eye decided.
+**Repro:** `ffmpeg -f lavfi -i "ddagrab=output_idx=0:framerate=60" -t 12 -c:v hevc_nvenc -preset p5 -rc vbr -cq 22 out.mkv` → `crop` → `select=between(n,a,b),tile`.
+**Trigger:** any «does it flicker / flash for a frame» check in a game run.
+none-cheap: the recording command above is the check; a flicker verdict is read by eye from the frame grid
+
+### EXP-0429 · 2026-11-01 · ❌→✅ · #conan #ue4ss #umg #widget #hook
+class: hook-after-event
+**Lesson:** to hide part of another mod's window that the game re-creates and re-shows (Xevyr's `XCS_W_Container`, a `WindowRoot`): (1) collapsing the
+ROOT fails — the window's Open sets it visible again; collapse a CHILD (`MenuContainer`); (2) a search on the module event finds the old instance or none
+(the new one is born ≈ 150 ms after the event); (3) `NotifyOnNewObject` + `ExecuteInGameThread` is still late by frames (60 fps video: the tab for ≥ 2
+frames); (4) a post-hook on the widget's own BP `Construct` (`RegisterHook("<class path>:Construct")`, registered at the first birth) acts in the same frame.
+Also: a font set on a fresh `WBP_ButtonBase` right after `Create` is reset when the button is built into the tree — set it on show; and `SetFont` with a
+freshly built table carrying the old `FontMaterial` crashed UE4SS — edit the `Font` struct's fields and pass it back.
+**Repro:** `pult.sh "funcs <XCS_W_Container_C_N>"` lists `XCS_W_Container_C::Construct`; KrinikConanUI `krinik_mods_button.lua` `hide_xevyr_panel`.
+**Trigger:** hiding or restyling a widget another mod (or the game) creates per open.
+none-cheap: the order of the four tries is the lesson; the code that applies it lives in krinik_mods_button.lua
+
+### EXP-0428 · 2026-11-01 · ❌→✅ · #conan #ui #module #esc
+class: wrong-model-of-the-frame
+**Lesson:** a mod window opened over the inventory survives Esc alone only when its `UIModuleTableRow` is Category Modal AND `CloseOnESC` true — either
+one alone fails (Proximity Party Modal-only, EAA Popup+CloseOnESC). Focus and `FullscreenGUIAction` do not matter. A live edit of `DT_UIModuleTable` rows
+acts only on modules not yet created in the session — test a row edit on a window never opened since launch, or conclude nothing.
+**Repro:** `pult.sh "lua … dt:ForEachRow(function(n,row) if tostring(n)=='<Row>' then row.Category=3 row.CloseOnESC=true end end)"` before the first open,
+then a real Esc and `IsModuleActive('CharacterInventory')`.
+**Trigger:** any mod window we open from our UI over the inventory or the hub.
+mechanized: `patch-mod-asset.py` rows `enum:<Row>/Category` + `rbool:<Row>/CloseOnESC` (tables `ConanExiles/_config/krinik_patches/*UIModule*.tsv`)
+
 ### EXP-0427 · 2026-11-01 · ❌→✅ · #conan #ue4ss #hook #hub #lua
 class: wrong-api-assumption
 **Lesson:** a UE4SS `RegisterHook` on a UFunction fires only when the function is called through ProcessEvent (Blueprint or Lua); the game's own C++ path

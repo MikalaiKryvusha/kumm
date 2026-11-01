@@ -23,7 +23,7 @@ PT) are table paks. The admin panel (`BPC_EFT_Tuning`, `W_EFT_FishCard`) does NO
 |---|---|---|
 | `W_EFT_Panel`, `BPC_EFT_Tuning`, `W_EFT_FishCard`, `DT_FishRanges` | Russian: panel texts, difficulty / step / place names, 51 fish names; literal strings in bytecode (`lit:` rows, `kismet.py`) | translation (2026-10-26) |
 | `W_EFT_AdminButton` | caption «Настройка рыбалки» | the owner's word 2026-10-26 |
-| `BPC_EFT_Tuning` | both 0.3 s timers `CheckInventory` → 1e9; `Graft` called by `KrinikConanUI:PauseGameInMenu` on `XCS_Panel` true | no polling (2026-10-29) |
+| `BPC_EFT_Tuning` | both 0.3 s timers `CheckInventory` → 1e9; `Graft` is NOT called since 2026-11-01 — the «Настройка рыбалки» button is gone from the inventory bar; the panel opens from «Настройки модов» → «Рыбалка» (`KrinikConanUI` section `krinik_mods_button`; `[OWNER]` 15:49 «настройки рыбалки … оттуда уходят») | no polling (2026-10-29) |
 | tooltip `W_EFT_Tooltip` | not edited (a splice `addprop` of `WrapTextAt` crashed the game, EXP-0377); the wrap is fixed by our Lua 1 s after the open | flicker (W17) |
 
 Difficulty names (W_EFT_Panel table rows 42–45): Easy «Легко» · Relaxed «Спокойно» · Seasoned «Строже» · Vanilla «Ваниль» — the captions under the
