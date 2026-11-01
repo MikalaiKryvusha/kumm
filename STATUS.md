@@ -111,36 +111,19 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > commands, what to verify first.
 
 > **Moved verbatim to the chronicle, entry 2026-11-01 18:18 +03:00:** the 14:24 vignettes / hub-audit paragraph (plan 40 phases 1–2).
-> **OWNER DECISIONS 2026-11-01 16:17–16:18 (bug 73), also job number one:** (1) the ×3 arrow in flight is WANTED back — `[OWNER]` «Да» to «Вернуть ли стреле
-> трёхкратный размер в полёте» (16:17): find the route that grows only the VISIBLE arrow, not `ProjectileMesh` whose bounds place the stuck copy (a pre-hook of
-> `SpawnDummyProjectile` restoring the size did not help — bug 73 A4); control case first (rule 24). (2) `[OWNER]` 16:18 «срок жизни стрел везде, и в земле, и в
-> трупах, и в стенах нужжжжжжжжжен 5 минут - с возможностью настроить в модах стрельбы из лука - в минутах, от 1, до 30» — a stuck arrow lives 5 min
-> everywhere (the game gives 15 s, `ProjectileDummyLifetime`); a hub row on the KrinikConanArchery page, minutes 1–30, default 5; corpses — with phase 4.
-> The owner's scheme 16:23: `[OWNER]` «значит лететь в воздухе должна физическая оригинальная стрела x1 размера, а визуальная модель лететь должна x3.
-> Физическая стрела и визуальная модель сввввввввввввввввязаны в наккооооооооооооооооонечникееееееее» — the flying `ProjectileMesh` stays ×1 (the game's
-> hit and copy placement); a SEPARATE visual mesh ×3 rides on it, the two joined at the TIP (the big arrow extends back from the shared point); the native
-> mesh hidden in render only.
-> **2026-11-01 17:20 +03:00 — THE OWNER'S DEBT BELOW IS DONE (plan 40.3 step 2, report `testcases/reports/2026-11-01_conan-mods-menu-list.md`):** the inventory bar keeps only
-> «Настройки модов»; its list «Моды Krinik'а · Моды Xevyr'а · Рыбалка · Прочее» works by the real mouse; Xevyr and «Прочее» are INTERIM sub-lists of the
-> mods' own windows (5 + 5); Esc keeps the inventory in all 12 windows (8 mod paks KRINIK MODIFIED: module rows Modal + CloseOnESC, new `rbool:` row kind of
-> `patch-mod-asset.py`); Hosav's button collapsed, fishing not grafted, Xevyr's side tab collapsed in its window's `Construct` (60 fps video clean). Seam left:
-> the PIFC window stands right of centre. **2026-11-01 17:43 +03:00 — stuck arrows live 5 min (hub row «Сколько стрела торчит в цели», 1–30 min), seen 299.9 / 59.9 s (report
-> `testcases/reports/2026-11-01_conan-arrow-stuck-life.md`).** **2026-11-01 17:51 +03:00 — the ×3 visual arrow joined at the tip flies (cases V1–V3, copy still at 62 cm); review folder 50 «strela x3 v polete» waits for the owner's eye.**
-> NEXT, in order: (2) «Моды Xevyr'а» and «Прочее» as our hub windows with real rows (the owner's 13:40 decision) — recon DONE
-> (`researches/conan-mod-settings-hub/xevyr-settings-recon.md`), the Damage Meter page mockup in review folder 51 waits for his eye; plan 40.3 I6; (3) plan 40 phase 4 (arrows in the corpse). Game closed, lock released.
-> **CHAT 5edabf9c CLOSED 2026-11-01 18:2x (soft). Also done after 17:51:** the Damage Meter opacity preview after a colour pick (author bug 0.55 vs 0.65, pack `af98be6`); our Al-Merayah «Bailey» label mistranslation fixed (pack `109e9f2`). FIRST in the next chat: the owner's eye on review folders 50 (x3 arrow) and 51 (Xevyr hub mockup) — his verdict on 51 opens the code of plan 40.3 I6 (pages bound to the mods' own values; read the recon's «Hard to bind» section first); without it — plan 40 phase 4 (`/bug-research` first; route (c) now has the AddComponentByClass fact). Stand recipe — game map, the archery stand line.
-> **2026-11-01 21:13 +03:00 — chat c5fe291c, dayloop («работай автономно» 20:38, the game in the BACKGROUND by the owner's word «работай с игрой в фоне»; then «комп твой» 21:09).**
-> Done: review folders 50–51 had landed in Svarog's review dir — moved to `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\` (the Conan one; game map row); folder 50 is
-> closed (the owner saw the flight himself). The owner chose **variant A** for the Xevyr hub (our own colour control and key capture — plan 40.3 I6, the mockup
-> badges updated). «Клавиша вызова курсора» in The Damage Meter and Simple Minimap + the refresh-rate label no longer runs over the F1 box (report
-> `2026-11-01_conan-cursor-key-name.md`). The KRINIK MOD PACK logo's dark fill toned to the game logo by measurement (`make-pack-logo.py`, review folder 52). The
-> minimap 6 units further from the corner and its coordinates lower — ACCEPTED 21:04–21:05. The ×3 arrow is hidden at impact (`StopProjectileInternal` hook) —
-> CONFIRMED by the owner 21:13 «да, суппер работает!» · «и земля, и камни, и враги».
-> **21:48 — the «E Взять» prompt over every foliage pickup (plan 42, the owner 21:14–21:34) is BUILT** (KrinikConanUI `krinik_pickup_prompt.lua`, pack `740e473`):
-> once a second, the game's own pickup geometry (CORRECTED 21:53: the probe starts at «camera + view × arm» — at the hero —, reach 90, sphere 2 m; the first «from the camera itself» copy missed stones at the feet with the camera above), 55 kinds; works in game (report
-> `testcases/reports/2026-11-01_conan-pickup-prompt.md`); cost measured 21:50 (100 repeats): the check 0.12 ms, the near refresh 0.18 ms, each on its own frame once a second — the A-B flight (rule 7) still owed; an enemy's
-> health bar stands where the prompt stands. Water «E Попить» — step 2 of plan 42. My channel sweep of native traces crashed the owner's game 21:30 (EXP-0433).
-> NEXT: the owner's eye on the prompt in play; the A-B flight; then plan 40.3 I6 (Xevyr pages, steps written); then plan 40 phase 4 (arrows in the corpse).
+> **Moved verbatim to the chronicle, entry 2026-11-01 21:56 +03:00:** the owner decisions of 16:17–16:23 (bug 73 — now DONE), the 17:20–17:51 done block, the 5edabf9c closing paragraph.
+> **Chat c5fe291c (20:33–21:58) — its done list moved verbatim to the chronicle, entry 2026-11-01 21:58 +03:00:** review folders moved to the Conan dir; Xevyr variant A;
+> «Клавиша вызова курсора»; logo tone; minimap (accepted); ×3 arrow hidden at impact (confirmed); bug 73 DONE; «E Взять» prompt (plan 42) — the probe as the camera
+> mod sees it, fade 0.2 s, the backing only under the word at 0.35 (pack `ac31b3a`; 0.35 also set live in the running game; the layout needs a restart).
+> **CHAT c5fe291c CLOSED 2026-11-01 21:57 +03:00 (soft; `[OWNER]` 21:55 «и в новом чате продолжим делать сборку»). FIRST in the next chat, in order:**
+> 1. Restart the game when the owner is out of it (the backing-only-under-the-word layout of `ac31b3a` loads at start), then his verdict on «E Взять» (stones at his feet with the camera above; fade; backing 0.35); then the prompt's A-B flight (rule 7) and the
+>    enemy health bar sitting where the prompt sits (`plans/42_conan_pickup_prompt_foliage.md` → Next steps; report `testcases/reports/2026-11-01_conan-pickup-prompt.md`).
+> 2. Plan 40.3 I6 — the Xevyr pages with real rows, own colour and key controls (variant A, `[OWNER]` 20:37); the steps I6.1–I6.4 are written in
+>    `plans/40_epic40_phase3_inventory_button_list.md`; read `researches/conan-mod-settings-hub/xevyr-settings-recon.md` «Hard to bind» first.
+> 3. Plan 40 phase 4 — arrows stay in the corpse (`/bug-research` first). Then epic 40 phases 5–7 and epic 41 (8 phases, none started) — 16 blocks to 1.0.0
+>    counted at 21:55 (the list said to the owner in chat).
+> Review folders waiting for the owner: 51 (Xevyr page look — variant A chosen, the look itself not answered), 52 (logo tone), 53 (prompt mockup — taken).
+> Never in the owner's running game: a sweep of native calls over enum values (EXP-0433); a desktop recording while the game is not in front (EXP-0431).
 > **Moved verbatim to the chronicle, entry 2026-11-01 17:54 +03:00:** the done owner-debt block of 15:49 and the 15:38 dayloop paragraph.
 > **Moved verbatim to the chronicle, entry 2026-11-01 15:52:** the closures of 13:27–13:43, the eea8bf94 handover items 1 (vignettes — done) and 1a (hub audit — plan 40.2), the 08:49 acceptances, the 09:5x–10:3x done list, the 13:20 vignette order (done), the 2026-10-29 15:2x work order.
 > 2. The HUD temperature by the game's debuff stage — frame the comfort (white) and the cold (blue) cases (only heat was framed, review folder 47).

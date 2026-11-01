@@ -102,6 +102,7 @@ owner's session: in his game only calls already proven this session. Same class 
 **Repro:** read the target's responses first — `c:GetCollisionResponseToChannel(ch)` (safe, proven 21:2x) — then ONE `LineTraceSingle` on one listed channel.
 **Trigger:** writing a remote `lua` with a `for` over enum values passed into a native function → stop, take one value from the game's own data.
 **Not for:** loops over game-returned arrays (components, instances) with proven methods.
+none-cheap: one rule at one decision point (a remote lua with a for over enum values); a guard would have to parse every remote call — the price of a miss is one restart of the game
 
 ### EXP-0432 · 2026-11-01 · ❌→✅ · #conan #owner-review #knowledge
 class: knowledge-not-written
@@ -109,6 +110,7 @@ class: knowledge-not-written
 its own review dir; Conan's is `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\` (game map row). And a review artifact the owner already saw in his own play
 (the ×3 arrow) is not re-shot for him.
 **Repro:** `ls "/d/Games/Conan Exiles Mods/НА ОТСМОТР НИКОЛАЕМ/" | sort -n | tail -3` before writing a new folder — the previous number must be there.
+none-cheap: the path now stands in the game map and the memory index; a guard would need to know which game a review belongs to
 
 ### EXP-0431 · 2026-11-01 · ❌ · #conan #video #privacy
 class: capture-outside-the-game
@@ -116,6 +118,7 @@ class: capture-outside-the-game
 before and after — deleted unwatched. Record the screen only while the game holds it for the whole clip (the foreground path), else frame the game window
 (`capture-burst.ps1`).
 **Repro:** start `ddagrab` only after the game is in front and stop it before `mouse-seq.ps1` hands the foreground back.
+none-cheap: recordings are rare and taken by hand; the rule sits in the entry and in STATUS
 
 ### EXP-0430 · 2026-11-01 · ❌→✅ · #conan #ui #video #flicker #measure
 class: wrong-proxy

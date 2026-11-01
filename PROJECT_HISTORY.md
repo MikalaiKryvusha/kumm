@@ -3,6 +3,43 @@
 
 
 
+## 2026-11-01 21:58 +03:00 — the done list of chat c5fe291c, moved from STATUS «Where to continue» at its soft closure (verbatim)
+
+> **2026-11-01 21:13 +03:00 — chat c5fe291c, dayloop («работай автономно» 20:38, the game in the BACKGROUND by the owner's word «работай с игрой в фоне»; then «комп твой» 21:09).**
+> Done: review folders 50–51 had landed in Svarog's review dir — moved to `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\` (the Conan one; game map row); folder 50 is
+> closed (the owner saw the flight himself). The owner chose **variant A** for the Xevyr hub (our own colour control and key capture — plan 40.3 I6, the mockup
+> badges updated). «Клавиша вызова курсора» in The Damage Meter and Simple Minimap + the refresh-rate label no longer runs over the F1 box (report
+> `2026-11-01_conan-cursor-key-name.md`). The KRINIK MOD PACK logo's dark fill toned to the game logo by measurement (`make-pack-logo.py`, review folder 52). The
+> minimap 6 units further from the corner and its coordinates lower — ACCEPTED 21:04–21:05. The ×3 arrow is hidden at impact (`StopProjectileInternal` hook) —
+> CONFIRMED by the owner 21:13 «да, суппер работает!» · «и земля, и камни, и враги».
+> **21:48 — the «E Взять» prompt over every foliage pickup (plan 42, the owner 21:14–21:34) is BUILT** (KrinikConanUI `krinik_pickup_prompt.lua`, pack `740e473`):
+> once a second, the game's own pickup geometry (CORRECTED 21:53: the probe starts at «camera + view × arm» — at the hero —, reach 90, sphere 2 m; the first «from the camera itself» copy missed stones at the feet with the camera above), 55 kinds; works in game (report
+> `testcases/reports/2026-11-01_conan-pickup-prompt.md`); cost measured 21:50 (100 repeats): the check 0.12 ms, the near refresh 0.18 ms, each on its own frame once a second — the A-B flight (rule 7) still owed; an enemy's
+> health bar stands where the prompt stands. Water «E Попить» — step 2 of plan 42. My channel sweep of native traces crashed the owner's game 21:30 (EXP-0433).
+> 21:5x — the prompt rebuilt to the game's probe as our camera mod sees it (pack `ff03db6`), backing 0.6, fade in / out 0.2 s (`[OWNER]` 21:53–21:54); deployed
+> 21:55 and the game left IN FRONT for the owner to play («перезапусти, я поиграю») — the frame of the new version NOT seen by the agent.
+
+## 2026-11-01 21:56 +03:00 — moved from STATUS «Where to continue» at the soft closure of chat c5fe291c (verbatim)
+
+> **OWNER DECISIONS 2026-11-01 16:17–16:18 (bug 73), also job number one:** (1) the ×3 arrow in flight is WANTED back — `[OWNER]` «Да» to «Вернуть ли стреле
+> трёхкратный размер в полёте» (16:17): find the route that grows only the VISIBLE arrow, not `ProjectileMesh` whose bounds place the stuck copy (a pre-hook of
+> `SpawnDummyProjectile` restoring the size did not help — bug 73 A4); control case first (rule 24). (2) `[OWNER]` 16:18 «срок жизни стрел везде, и в земле, и в
+> трупах, и в стенах нужжжжжжжжжен 5 минут - с возможностью настроить в модах стрельбы из лука - в минутах, от 1, до 30» — a stuck arrow lives 5 min
+> everywhere (the game gives 15 s, `ProjectileDummyLifetime`); a hub row on the KrinikConanArchery page, minutes 1–30, default 5; corpses — with phase 4.
+> The owner's scheme 16:23: `[OWNER]` «значит лететь в воздухе должна физическая оригинальная стрела x1 размера, а визуальная модель лететь должна x3.
+> Физическая стрела и визуальная модель сввввввввввввввввязаны в наккооооооооооооооооонечникееееееее» — the flying `ProjectileMesh` stays ×1 (the game's
+> hit and copy placement); a SEPARATE visual mesh ×3 rides on it, the two joined at the TIP (the big arrow extends back from the shared point); the native
+> mesh hidden in render only.
+> **2026-11-01 17:20 +03:00 — THE OWNER'S DEBT BELOW IS DONE (plan 40.3 step 2, report `testcases/reports/2026-11-01_conan-mods-menu-list.md`):** the inventory bar keeps only
+> «Настройки модов»; its list «Моды Krinik'а · Моды Xevyr'а · Рыбалка · Прочее» works by the real mouse; Xevyr and «Прочее» are INTERIM sub-lists of the
+> mods' own windows (5 + 5); Esc keeps the inventory in all 12 windows (8 mod paks KRINIK MODIFIED: module rows Modal + CloseOnESC, new `rbool:` row kind of
+> `patch-mod-asset.py`); Hosav's button collapsed, fishing not grafted, Xevyr's side tab collapsed in its window's `Construct` (60 fps video clean). Seam left:
+> the PIFC window stands right of centre. **2026-11-01 17:43 +03:00 — stuck arrows live 5 min (hub row «Сколько стрела торчит в цели», 1–30 min), seen 299.9 / 59.9 s (report
+> `testcases/reports/2026-11-01_conan-arrow-stuck-life.md`).** **2026-11-01 17:51 +03:00 — the ×3 visual arrow joined at the tip flies (cases V1–V3, copy still at 62 cm); review folder 50 «strela x3 v polete» waits for the owner's eye.**
+> NEXT, in order: (2) «Моды Xevyr'а» and «Прочее» as our hub windows with real rows (the owner's 13:40 decision) — recon DONE
+> (`researches/conan-mod-settings-hub/xevyr-settings-recon.md`), the Damage Meter page mockup in review folder 51 waits for his eye; plan 40.3 I6; (3) plan 40 phase 4 (arrows in the corpse). Game closed, lock released.
+> **CHAT 5edabf9c CLOSED 2026-11-01 18:2x (soft). Also done after 17:51:** the Damage Meter opacity preview after a colour pick (author bug 0.55 vs 0.65, pack `af98be6`); our Al-Merayah «Bailey» label mistranslation fixed (pack `109e9f2`). FIRST in the next chat: the owner's eye on review folders 50 (x3 arrow) and 51 (Xevyr hub mockup) — his verdict on 51 opens the code of plan 40.3 I6 (pages bound to the mods' own values; read the recon's «Hard to bind» section first); without it — plan 40 phase 4 (`/bug-research` first; route (c) now has the AddComponentByClass fact). Stand recipe — game map, the archery stand line.
+
 ## 2026-11-01 18:18 +03:00 — moved from STATUS «Where to continue» at the soft closure of chat 5edabf9c (verbatim)
 
 > **2026-11-01 14:24 +03:00 — epic 40 phase 1 (vignettes) done in mechanics, partial in acceptance** (report `testcases/reports/2026-11-01_conan-vignettes.md`): section
