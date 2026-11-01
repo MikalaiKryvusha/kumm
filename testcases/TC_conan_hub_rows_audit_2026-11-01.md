@@ -158,3 +158,14 @@ Stand: the live game, the inventory open by a real Tab, the list «Настро�
 | H1 | the list open | click «Моды Krinik'а» | the window titled «МОДЫ KRINIK'А · НАСТРОЙКИ», the same live pages as before the change (camera, UI, archery, pack manager, graphics), log «page …» of the first | pass | 23:15 real Tab, real clicks on «Настройки модов» and «Моды Krinik'а»: frame — «МОДЫ KRINIK'А · НАСТРОЙКИ», the five pages, no Damage Meter page; log «page cam», filled in 9 ms (and «slider not found» ×4 for the dm rows not in the kit — fixed: pages not live are not filled; 23:26 after a restart — 0 such lines, filled in 7 ms) |
 | H2 | the inventory open, no list click | the remote `ActivateModule(KrinikModSettings)` | Krinik's hub (the default when no hub is named) — same as H1 | pass | 23:15:38 after a real Esc: the remote opening reads the title «МОДЫ KRINIK'А · НАСТРОЙКИ», page cam |
 | H3 | H1 then H2 | — | the second opening does not keep a hub from the first (`_G.__krinik_hub` cleared at fill) | pass | H2 ran right after H1 with the default hub; the variable is cleared at fill (code) — a Xevyr-then-remote order waits for the Xevyr pages |
+
+### The Damage Meter page in the Xevyr hub (plan 40.3 I6.1 kit + I6.3 adapter)
+
+Stand: the live game, the inventory open; the hub opened as Xevyr's by the remote (`_G.__krinik_hub` is the list's variable — the list's Xevyr entry is still a sub-list), real mouse in the window; the author's own window `DN_UI_SettingsWindow_C` opened by its module to read the result.
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| D1 | the kit rebuilt with the dm rows, deployed | open the hub as Xevyr's | the title «МОДЫ XEVYR'А · НАСТРОЙКИ», one page «The Damage Meter» with 8 rows, values = the author's slot (or its defaults) | — | — |
+| D2 | D1 | move «Пауза до новой стычки» to 10 by the real mouse, «Сохранить» | the log «saved through the author's window»; the author's own window then shows 10 s | — | — |
+| D3 | D2 | a 60 fps clip of the save | the author's window does not flash over ours, or the flash is measured | — | — |
+| D4 | D1 | open the Krinik hub, «Сохранить» | the author's window does NOT open (the dm save runs only from its own hub) | — | — |

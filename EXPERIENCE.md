@@ -91,6 +91,24 @@
 
 ## Entries
 
+### EXP-0438 · 2026-11-01 · ❌ · #owner #question #interview
+class: question-taken-for-order
+**Lesson:** «п это сложно сделать? Обливион так умел» was a QUESTION; I wrote it into interview #030 as answer A and started the work — `[OWNER]` 23:38
+«Я ТЕБЯ ПРОСТО СПРОСИЛ!!!!» · «А НЕ ПРИКАЗАЛ!» · «ОБСУЖДАЕМ!». A message ending in «?» answers nothing: reply to the question, record no decision,
+start nothing until a word of choice («делай А», «да», «вариант 1»).
+none-cheap: one decision point — reading the owner's last line for a question mark before writing a status
+Also (23:38, plan 40.3 D1): `_G.__krinik_hub` set by the remote does not reach KrinikConanUI — each UE4SS mod has its own Lua state; open the Xevyr hub by
+the list (real click) or a shared variable (`ModRef:SetSharedVariable`).
+
+### EXP-0437 · 2026-11-01 · ❌→✅ · #ui #russian #owner-eye #mockup
+class: explained-instead-of-said
+**Lesson:** a refusal line in a UI says the phrase every game says, short — «Эта клавиша уже занята». Mockup 9 had «Tab открывает инвентарь — эту
+клавишу игра забирает себе. Выберите другую.» — not a calque (there was no English source): my own retelling of the two authors' tooltip warning («a key the
+game swallows locks the player out») put into the refusal line. The owner: «таб игра забирает себе - ты где нибудь таке описание видел хоть раз?» ·
+«эта клавиша уже занята» · «всё!»; and when I called it a calque in chat: «калька?? ОТКУДА?» (23:34–23:35). Before writing a UI message: what do the game's
+own menus and well-known games write here? — and name my own mistake by what it is, not by a convenient category.
+none-cheap: the owner's eye on the mockup is the check; RUSSIAN_RULES §7 (nothing extra) already says it
+
 ### EXP-0436 · 2026-11-01 · ❌→✅ · #lua #conan #shadow #guard
 class: name-shadowed-by-later-local
 **Lesson:** a new top-level `local function shown(p)` in krinik_mod_settings.lua sat above an older `local shown = {}` — every function below saw the
