@@ -121,3 +121,13 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
   match by the same bone of the corpse mesh; `GetTransform()` from Lua reads zeros. **Our leak closed on the way:** with the «в тушку» push the copies of a
   killed creature were not cleaned by the game and hung at 0 0 0 with no life span; the section now re-attaches them to the corpse and the game's event
   removes them (0 copies 10 s after the kill).
+  **Route pick (2026-11-01 22:5x, desk research of the 13:13 report):** `FORK: options (a) unbind the copy from the creature's OnDestroyed | (b) a Lua-spawned copy
+  with its own hit on the corpse mesh | (c) our visual arrows on the corpse at the same bones + the arrow items into the corpse's loot | (d) patch BP_DummyProjectile's
+  bytecode (event 3484 → no destroy) · price of error: (a) no Lua tool for a multicast delegate of another object, clearing all of OnDestroyed breaks the game's own
+  listeners; (b) a hit struct with a weak Component set from Lua — unproven, the 13:0x Lua copy died at once; (d) a vanilla asset in our pak, every copy whose
+  actor dies would float till its life ends; (c) only proven calls (AddComponentByClass + K2_AttachToComponent at a bone — the ×3 arrow, 17:5x) + one unknown:
+  adding items to the corpse's loot · consulted: the 13:13 run report (runs 1–9), the bytecode of BP_DummyProjectile, the ×3 visual arrow`. `[AI]` (c) first:
+  the copies are read at corpse birth (they are still attached then — run 2), the visuals live on the corpse actor (die with it), the items go into the corpse's
+  loot so «их можно собрать» is the corpse's own E. Taking them from the loot hides the visuals (the loot-change event on a corpse is the native
+  `QuickLootPanel:SlotItemAddedOrRemoved` — the blueprint `HandleLootContainerInventoryChanged` stays silent on a corpse, game map «Loot change event»). Next: a read-only remote recon of the corpse's inventory (component class, its add-item UFunction), then the section.
+  The look of «arrows in a corpse» and «collected through the corpse's loot» go to the owner's eye on a frame.

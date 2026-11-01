@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0434 · 2026-11-01 · ❌→✅ · #conan #ue4ss #lua #registry #streaming
+class: registry-without-removal
+**Lesson:** a Lua list filled on a birth event (`NotifyOnNewObject`) and never pruned grows with every world area streamed in: the pickup prompt's
+foliage list went 281 → 1976 in one reference flight while 281 were loaded, and its round-robin refresh (20 a second) stretched from 14 s to ≈ 100 s —
+a delay nobody sees at the stand where the list was born. A registry fed by births drops the dead where it walks them (swap with the last, shrink).
+Run the reference flight once with any new registry and read its size in the section's own summary line against the loaded count.
+**Repro:** the summary line «близких компонентов K из N» after `bench-flight.sh krinik-show` vs the remote count over the 16 `InstancedFoliageActor`s.
+**Trigger:** any section that keeps a table of game objects added by `NotifyOnNewObject`.
+none-cheap: the summary line's N is the check; one flight
+<!-- class-ok: registry-without-removal — the growth shows only after streaming; the flight is the check -->
+
 ### EXP-0433 · 2026-11-01 · ❌ · #conan #ue4ss #remote #crash #trace
 class: unproven-native-call-in-a-loop
 **Context:** finding which trace channel hits a foliage stone (plan 42), the owner in the running game.

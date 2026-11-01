@@ -115,6 +115,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **Chat c5fe291c (20:33–21:58) — its done list moved verbatim to the chronicle, entry 2026-11-01 21:58 +03:00:** review folders moved to the Conan dir; Xevyr variant A;
 > «Клавиша вызова курсора»; logo tone; minimap (accepted); ×3 arrow hidden at impact (confirmed); bug 73 DONE; «E Взять» prompt (plan 42) — the probe as the camera
 > mod sees it, fade 0.2 s, the backing only under the word at 0.35 (pack `ac31b3a`; 0.35 also set live in the running game; the layout needs a restart).
+> **NOW (chat 70dda2b5, from 22:13):** «E Взять» layout `ac31b3a` seen in game (P6, P7 pass, real-E path P8 pass; review folder 54); the component list growth fixed
+> (P11, pack `8ac0810`); the owner 22:41 «кнопку E ближе поставь к Взять» — variants 24 / 12 / 6 in review folder 55, his pick 22:48 «вариант 3» = 6 — in the source
+> (`KEY_GAP`), deployed and framed after the A-B (case P12); the bench start hold 20 → 40 s (`[OWNER]` 22:38, pack `8ac0810`; A1 with 20 s: CPU 16.61 ms, 69 stutters — with 40 s: 14.89 ms, 25); the A-B-A-B
+> of the prompt (P9) re-run with 40 s by the owner's 22:42 «замеры нужно переповторить» — B1, A2, B2 running in the background (`scratchpad/ab_rest.sh`), then the run report.
 > **CHAT c5fe291c CLOSED 2026-11-01 21:57 +03:00 (soft; `[OWNER]` 21:55 «и в новом чате продолжим делать сборку»). FIRST in the next chat, in order:**
 > 1. Restart the game when the owner is out of it (the backing-only-under-the-word layout of `ac31b3a` loads at start), then his verdict on «E Взять» (stones at his feet with the camera above; fade; backing 0.35); then the prompt's A-B flight (rule 7) and the
 >    enemy health bar sitting where the prompt sits (`plans/42_conan_pickup_prompt_foliage.md` → Next steps; report `testcases/reports/2026-11-01_conan-pickup-prompt.md`).

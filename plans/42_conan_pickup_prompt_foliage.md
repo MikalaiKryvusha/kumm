@@ -4,7 +4,8 @@
 > 21:15 «меня бесит, что я навожу на камень - и ничего не появляется о том, что я могу его поднять» · 21:16 «како-то ненавязчивый виджет, с полупрозначным фейд фоном,
 > небольшой текст, легкий» · «не такой большой, как виджет трупов»
 > **Parent:** the Conan 3.0.1 build 1.0.0 (`MASTER_PLAN.md` → What matters now)
-> **Status:** 🔬 recon 2026-11-01 21:1x — the game's own pickup search is not reachable from Lua (below); route not chosen yet
+> **Status:** 🟡 built 2026-11-01 21:3x–21:57 (pack `ac31b3a`, section `krinik_pickup_prompt`); 22:19 the layout «backing only under the word» seen in game (P6, P7 pass,
+> review folder 54 to the owner); 22:3x the component-list growth fixed (P11); open — the owner's verdict on the look, the A-B flight (P9), the enemy health bar (P10)
 > **Outbound:** the look (a mockup frame) to the owner before the code is shipped (the taste class)
 
 ## Goal vector
@@ -97,7 +98,11 @@ leaves, the prompt shall go. Maintain: our mods' 1 ms CPU budget in gameplay fra
 
 ## Next steps
 
-- [ ] E1. Stand proof: turn overlap events on for one rock component by the remote, put a sensor in front of the hero, read whether begin / end overlap
+> The E1 / R1–R3 items below are the recon queue of 21:1x, closed by the recon above (the sensor route closed by E2, R1 closed — the game searches only
+> at the press, R2 — `GetInstancesOverlappingSphere`, R3 — review folder 53). What is open now: the owner's verdict on the look (folder 54); P9 the A-B flight;
+> P10 the enemy health bar where the plate stands; water «E Попить» (step 2 of this plan).
+
+- [x] E1. Stand proof: turn overlap events on for one rock component by the remote, put a sensor in front of the hero, read whether begin / end overlap
       arrive (the kit actor or an engine trigger class) — before any kit work.
 
 - [ ] R1. Repeat the call count of `UpdateHighlightTarget` with the game in front; if it runs per frame or on a timer, the prompt can ride it (our check only
