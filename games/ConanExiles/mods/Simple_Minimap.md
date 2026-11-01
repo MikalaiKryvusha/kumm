@@ -39,5 +39,14 @@
   the same pixel (x ≈ 1900 of 1920) and drew the ring SMALLER and lower — the map is clamped by the screen edge, it does not slide past it. So the
   09:51 «smaller and lower» frame was right (a line written here at 09:53 called it suspect — corrected 09:59), and the map is already in the corner:
   «правее и выше» cannot be had from K; frames `cmp_k` → review folder 26 file 5.
+- **The «Показ времени» dropdown reads English «Server» / «Game» / «Client» (bugs/64 item 48) — traced 2026-11-01 05:5x, NOT fixed.** `SM_UI_Settings`:
+  `InitCombobox` → `timeSelector:ClearOptions` + `AddOption` ×3 with string literals; the choice is read in `ExecuteUbergraph_SM_UI_Settings` by a
+  switch-on-string (`NotEqual_StriStri` of `SelectedItem` with the same literals) that writes the INT `timeDisplay` 0 / 1 / 2 — the string is never
+  saved, so translating every literal together would be safe. Blocked by the tool: `patch-mod-asset.py build … lit:Server\tСервер` stops with
+  «ExecuteUbergraph_SM_UI_Settings: литерал в графе событий — правка не поддержана» (kismet.py cannot lengthen a literal inside the event graph — the
+  events' entry offsets would shift), and `prop:timeSelector/SelectedOption` is not found. Next: either teach `kismet.py` the ubergraph (shift the
+  `ExecuteUbergraph(EntryPoint)` constants of every event stub) or a Lua display fix (rule 8, once per window open). Recipe of the trace:
+  `patch-mod-asset.py extract Simple_Minimap SM_UI_Settings <work>` → `uaj exports <legacy uasset> VER_UE5_6 > exports.tsv` → `kismet-trace.py <uasset>
+  exports.tsv <json> ExecuteUbergraph_SM_UI_Settings` (string constants print as `0x1f` without their text).
 - Marker tutorial: bullet lines late, «NEW:» English, black slides (item 4).
 - If the player toggles `bShowCoordinates` in the mod settings while playing, the plate does not follow until the minimap is re-created.
