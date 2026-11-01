@@ -137,9 +137,14 @@ the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/Con
 > **DONE 09:5x–10:3x — the caverns chests, option 2 both halves** (packs `c590f36`, `e44de4b`; notes `CavernsOfSet.md`); **the HUD temperature** red ≥ 30 /
 > blue ≤ −30 and the white-at-37 bug (templates coloured; `eef2f86`, TC `TC_conan_hud_temperature_thresholds_2026-11-01.md`, T3 blue frame not caught);
 > the hub «i» column (`37d7c95`), «Скорость зума · больше — резче»; **11:0x the temperature fades smoothly** white → red / blue (`d1e01b9`, R1 seen,
-> the cold mirror not framed); `_config/tp_ground.sh` puts the hero on the surface. IN WORK 11:03: the owner's «смена дня и ночи — свет резко включается,
-> небо резко меняет вид… нужно изучить» (10:42) — a dusk frame series on the beach, one SetTimeOfDay(17.6), analysed by `dusk_analyze.py` (scratchpad).
-> Seen and not yet checked: the hero lost his armour after a launch closed on a stuck loading screen (10:51 «Лёгкая / 0»). NEXT: the archive on a clean game (plan 35 item 6) → the 1.0.0 release; then the
+> the cold mirror not framed); `_config/tp_ground.sh` puts the hero on the surface. **Day/night study** (the owner 10:42 «свет резко
+> включается, небо резко меняет вид… нужно изучить»): run 1 on the beach — no sky jump by eye, an ambush burst at 22:11, lights NOT tested (none there);
+> run 2 — a lit camp, enemies cleared, a 60 fps clip around the switch hour (`researches/conan-day-night/README.md`); first candidate for what he saw:
+> the agent's own `SetTimeOfDay` jumps 10:21–10:33. **The archive:** `ConanExiles/_config/release/make_volumes.sh <empty work dir on D:>` (etalon config
+> → `-Export` → 7z zip volumes 700m → unpack → SHA-256 compare), `[NOT-TESTED]` until its first run; then the install from the volumes on the real game after
+> `uninstall_krinik_build.cmd` (the player's path), `-Verify`, world entry; then the 1.0.0 release (the public repo README still says «первый выпуск» until
+> that push). After any Lua section edit run `ConanExiles/_config/devkit/check-lua-templates.py` (EXP-0421).
+> Seen and not yet checked: the hero lost his armour after a launch closed on a stuck loading screen (10:51 «Лёгкая / 0»). NEXT: the archive (above) → the 1.0.0 release; then the
 > inventory button, the shout row, the blink video, «All»/«Top Left», the stone, the measurements, the arrows in corpses.
 > (was) PARKED 09:33 — the caverns chests (option 2): the table the 16 chests import is one object (both `LootTableFromSpawnTable.DataTable` and `LootTable`
 > of `BP_PL_CoS_Loot_Chest` → the missing package `/Game/Mods/Mines_of_Set/Tables/Caverns_of_Set_Loot_Chest_Table`); row struct `/Script/ConanSandbox.LootTableRow`
