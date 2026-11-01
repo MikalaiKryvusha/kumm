@@ -292,3 +292,17 @@ full screen; each frame — WebP in a review folder per resolution; a clipped, o
 the gate adds 1280×720, covers EVERY mod of the build that brings or changes UI (not only ours), and measures by the Svarog rulebook: main text
 ≥ 36 px letter height on 4K (≥ 18 px at 1080p, ≥ 12 px at 720p), contrast ≥ 4.5 : 1, nothing clipped, overlapping or blurry (`HOUSE_RULES.md` §1 rule 17).
 Status: [NOT-TESTED] — not started.
+
+## 1.0.0 scope — the owner's word 2026-11-01 (release tonight)
+
+`[OWNER]` 08:58 «выпустить релиз хочется уже сегодня вечером» · 09:01 «ДО ВЫПУСКА, ЭТО ВСЕ ИДЕТ В ВЕРСИЮ 1.0.0». Before the release, in this order:
+- [ ] the hub window: open over the character UI without dimming; taller; the «i» button — 3–4 variants for the owner;
+- [ ] the Caverns of Set chests — option 2 (a random recipe + the mod's items in the tag pools), interview #029;
+- [ ] the inventory button «Настройки модов» (plan 38 phase 1);
+- [ ] the hub row «how long an enemy shout stays on screen» (`krinik_shout_fade`);
+- [ ] the video of every food / water blink intensity;
+- [ ] bug 64 items 47 «All» and 49 «Top Left» (the `lit:` route of item 48);
+- [ ] R2 — spawn a stone, pick it up in third person at the default and the far zoom;
+- [ ] the frame measurements (the fps perf TC, plan 36 item 23);
+- [ ] the archive on a clean game, volumes ≤ 700 MB (item 6); the README-PDF; the 1.0.0 release on the public repo.
+Next version: affixes (idea 24).
