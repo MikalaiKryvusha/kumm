@@ -78,3 +78,9 @@ the built pak (`_config/devkit/set-pak-version.py <pak> <packVersion>`) and the 
 ## Open
 
 - seen 2026-10-31 15:51: the pause-menu list shows «v1.0.0»; the Krinik mods still stand at the bottom of the list (W11 «top» half open).
+- **NEW FEATURE, 1.0.0 (`[OWNER]` 2026-11-01 09:11 «KrinikConanArchery · в этот мод идет еще одна фича · После смерти - регдол труп врага не должен уничтожать
+  воткнутые в него стрелы - все стрелы сохраняются, торчат из трупа, их можно собрать.»):** every arrow copy stuck in a creature stays stuck in its ragdoll
+  corpse at the same bone, visible, and the player picks it up (the copy's `IsLootable` / `ProjectileItemTemplateID`). The cause is known (the bullet «Arrows
+  leave the corpse» above): the copy's `DestroyDummyIfAttachedObjectIsDestroyed` fires on the creature actor's `OnDestroyed`; the corpse is a separate
+  `Corpse_C` actor (game map, «Трупы»). Route to recon first: at the creature's death, re-attach each of its copies to the corpse's mesh at the same bone
+  (and drop the old binding / lifespan), by an event, no polling (HOUSE_RULES rule 7). Not started.

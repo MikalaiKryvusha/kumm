@@ -144,6 +144,18 @@ sRGB → linear (`u()` and `lin()` in `kit-krinik-modsettings.py`):
   light bar `Img_KrinikModBar_<key>`, the name `#f2eee5`; the plate — light rim, square, the title in capitals (`KismetTextLibrary:TextToUpper`).
 - `[TESTED: 2026-11-01 · P1–P11, F1–F10 in the live game, real mouse · testcases/reports/2026-11-01_conan-hub-mockup-fidelity.md]`; review folder `41_hub_kak_maket`.
 
+**The owner's three remarks of 2026-11-01 08:42–08:43, closed 09:2x (cases `testcases/TC_conan_hub_no_dimming_2026-11-01.md`, report
+`testcases/reports/2026-11-01_conan-hub-height-info-dimming.md`):**
+- **«Dimming» — none of ours.** Over the inventory the window shows the inventory around it exactly as the fishing window does (frames D1/D2); in the world the
+  brightness outside the window is the same before and after opening (149/147, 98/96, 114/113). The dark of folder 41 was the game's night behind a window
+  opened by the remote in the world. The player's door — a button in the inventory — is plan 38 phase 1.
+- **Taller:** `MIN_HEIGHT` = mockup 5's panel (448 of 540 css px) × the kit scale = 845 units; the height = max(the tallest live page, 845) — the window stands
+  between the inventory's tab row and its button bar.
+- **The «i»:** the game's Noto Sans `Bold`, upright, no outline (kit `text(…, sans_bold=True)`), in the same thin circle — variant 5 of eight shown live on one
+  frame (`[OWNER]` «(i) - 5» · 09:13; review folder `42_hub_knopka_i_i_vysota`). Live font swap by the remote: `TextBlock:SetFont({FontObject=…,
+  TypefaceFontName=FName('Bold'), Size=…, OutlineSettings={OutlineSize=0,…}})` works; a Border's brush is hidden by `br=b.Background; br.DrawAs=0; b:SetBrush(br)`
+  (SetBrushColor alpha 0 left the rim).
+
 **Mirror pair:** `ue4ss/feedback/collect_report.ps1` is a COPY of the pack's `_config/player-report/collect_report.ps1` (the Lua mod needs it inside the game
 folder). Check: `cmp _config/player-report/collect_report.ps1 _unpacked/KrinikConanUI/ue4ss/feedback/collect_report.ps1` — edit the source, copy again.
 
