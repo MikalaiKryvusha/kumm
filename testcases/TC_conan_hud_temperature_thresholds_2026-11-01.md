@@ -21,5 +21,14 @@
 | T5 | the HUD rebuilt (a new HUD after world entry) | look 5 s after | the colour of the current zone (the reported bug: white at 37) | pass | the cause: the field search took the two class TEMPLATES («полей 2») and coloured them; now «полей 3 (новые)» — the live fields, red on the frame |
 | T6 | cost | the log | no per-frame work: the colour set only inside `EnergyReceived` (≈ 1 /s) | pass | the colour set only on a zone change or new fields (6 log lines in 12 min) |
 
+## The smooth ramp (`[OWNER]` 2026-11-01 10:47 «синий, красный - с плавными переводами от белого к полностью насыщенному … и белый - для диапазона
+нормальных температур»)
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| R1 | the hero cooling from 70 (volcano) on the beach | frames at energy 33.9 · 29.1 · 27.9 · 25.7 · 24.0 · 18.4 | full red ≥ 30; white → red smoothly between 20 and 30; white in the norm | pass | 10:58–11:00, sheet `43_temperatura_plavno/1_ostyvanie_ot_zhary.webp`: 38 °C red, 36 → 33 °C fading pink, 30 °C (heart) white — by eye; the pixel mean is spoiled by the palms behind the text |
+| R2 | the cold mirror −20 → −30 | the same | white → blue smoothly | not run | the cold stand is still to be found (below) |
+| R3 | the stand | `tp_ground.sh X Y` | the hero on the surface, never through it | pass | beach `GROUND −20167`, volcano `GROUND 45640`; frames show the hero standing |
+
 Cold stand (for the next run): energy ≤ −30 was reached only in flight over (-280000, -180000) at night; on the ground at (-300000, -260000) 02:00 the
 energy held −30.2 at most. A colder point is still to be found (game map).

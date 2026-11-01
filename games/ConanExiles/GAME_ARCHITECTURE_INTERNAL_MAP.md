@@ -616,3 +616,13 @@ drawn at random from every item carrying those tags; `PercentChance` (100, 75 �
 `MaxDurability`, `IntStatModifier` / `FloatStatModifier` (random stat changes on the dropped item), `RequiredEventTag`. A chest's spawner points at a table with
 row `None` (`DT_LC_Exiles`, `DT_LC_RelicHunter`). So any item that carries the right tags enters the pools by itself — a mod's items can join the world's loot
 by tags, without a table of their own.
+
+## Test stands by place (2026-11-01)
+
+- **Put the hero on the ground:** `bash _config/tp_ground.sh X Y [hover_s]` — flying hover, a line trace down, the hero 120 above the hit; no hit → exit 3,
+  the hero stays hovering. Never `K2_SetActorLocation` onto an unknown Z (falls through unstreamed terrain). A teleport INTO the Caverns of Set loads their
+  level (a loading screen); moving the hero again during that load leaves the screen stuck at 99 % — wait for the load or relaunch.
+- **Points:** the save's beach (-78471, 245900) ground −20167, day energy ≈ 21–22 («тепло»); the volcano (-60000, -220000) ground 45640, energy 70 within
+  seconds; the caverns (-154300, 6216) energy ≈ 33; the north-west (-300000, -260000) at night −26 … −30 (no ground point below −30 found yet).
+- The game day lasts 55.2 min (`ConanTimeOfDayManager:GetDayLength`), ≈ 2.3 min per game hour; `GetTimeOfDay` / `SetTimeOfDay` on `BP_TimeOfDayManager_C`.
+- The idle vanity camera hides the HUD: `FindFirstOf('GUIModuleController'):EnableVanityCameraMode(false)` before a HUD frame.
