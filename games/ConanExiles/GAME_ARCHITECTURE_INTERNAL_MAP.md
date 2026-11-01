@@ -607,3 +607,12 @@ Temperature (2026-10-30, live + Hosav bytecode): the hero's temperature is `BPEn
   `HumanoidNPCCharacter_C` comes without a look). Does NOT work: `SetStat('Athleticism', 20)` (attributes move only by the points of the «Хар-ки»
   window), and the console `exec SetStat …` / `exec God` (reach nothing). Green Kappa: `/Game/Characters/NPCs/Primates/Blueprints/BP_NPC_Wildlife_Kappa_Green.BP_NPC_Wildlife_Kappa_Green_C`.
   The archery stand — `_config/arrow-stand.sh`.
+
+## Loot generation (read 2026-11-01 08:5x from `/Game/Systems/Loot/New/Culture/RelicHunters/DT_LC_RelicHunter`, 22 rows)
+
+A loot table is a RECIPE of random rolls, not a list of items. Each row: `ItemID` (0 = no fixed item) or `UseTable` + `Table` (a nested table / row);
+`RequiredTags` — a gameplay-tag query over the item catalogue (e.g. `ALL(Loot.General, Loot.T3)`, `ALL(Culture.Stygia, Item.Placeable …)`), so the item is
+drawn at random from every item carrying those tags; `PercentChance` (100, 75 …), `Min` / `Max` amount, `NumRolls` (row 2: three rolls), `MinDurability` /
+`MaxDurability`, `IntStatModifier` / `FloatStatModifier` (random stat changes on the dropped item), `RequiredEventTag`. A chest's spawner points at a table with
+row `None` (`DT_LC_Exiles`, `DT_LC_RelicHunter`). So any item that carries the right tags enters the pools by itself — a mod's items can join the world's loot
+by tags, without a table of their own.
