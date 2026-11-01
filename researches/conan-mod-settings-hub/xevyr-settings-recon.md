@@ -169,7 +169,7 @@ The controller has a plain `SaveSettings` with the same 13 parameters (flags `0x
 5. **Server rows.** AMR entirely (server RPC; the class is named «AdminSettings» — who may open it on a dedicated server is not read [open]) and SM
    «Везде» (only for `IsAdmin`; hidden live in single player — the hero is not admin there) [seen].
 6. **PrP has no cancel** — its only button saves; and constructing the window rewrites `ProximityParty.sav` [seen mtime].
-7. **AMR tooltip vs label** — «Время возрождения: внешний двор» says «во внутреннем дворе цитадели», «…: стены» says «внутри внешних стен»: one of
+7. **AMR tooltip vs label** — RESOLVED 2026-11-01 18:17: the tooltips match the author English; OUR label for «Bailey» was the mistranslation (now «the Keep courtyard», pack `locres-fixes-2026-11-01.tsv`, seen in the window) — — «Время возрождения: внешний двор» says «во внутреннем дворе цитадели», «…: стены» says «внутри внешних стен»: one of
    the two texts is likely mistranslated (bailey = внешний двор) — worth a look before we reuse the tooltips [inferred]. The Battlement/Bailey
    argument wiring is taken from the parameter names; the tracer prints same-named locals alike, so the bytecode order alone does not prove it
    [inferred].
