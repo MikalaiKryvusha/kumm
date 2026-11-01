@@ -129,6 +129,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > NEXT, in order: (2) «Моды Xevyr'а» and «Прочее» as our hub windows with real rows (the owner's 13:40 decision) — recon DONE
 > (`researches/conan-mod-settings-hub/xevyr-settings-recon.md`), the Damage Meter page mockup in review folder 51 waits for his eye; plan 40.3 I6; (3) plan 40 phase 4 (arrows in the corpse). Game closed, lock released.
 > **CHAT 5edabf9c CLOSED 2026-11-01 18:2x (soft). Also done after 17:51:** the Damage Meter opacity preview after a colour pick (author bug 0.55 vs 0.65, pack `af98be6`); our Al-Merayah «Bailey» label mistranslation fixed (pack `109e9f2`). FIRST in the next chat: the owner's eye on review folders 50 (x3 arrow) and 51 (Xevyr hub mockup) — his verdict on 51 opens the code of plan 40.3 I6 (pages bound to the mods' own values; read the recon's «Hard to bind» section first); without it — plan 40 phase 4 (`/bug-research` first; route (c) now has the AddComponentByClass fact). Stand recipe — game map, the archery stand line.
+> **2026-11-01 21:13 +03:00 — chat c5fe291c, dayloop («работай автономно» 20:38, the game in the BACKGROUND by the owner's word «работай с игрой в фоне»; then «комп твой» 21:09).**
+> Done: review folders 50–51 had landed in Svarog's review dir — moved to `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\` (the Conan one; game map row); folder 50 is
+> closed (the owner saw the flight himself). The owner chose **variant A** for the Xevyr hub (our own colour control and key capture — plan 40.3 I6, the mockup
+> badges updated). «Клавиша вызова курсора» in The Damage Meter and Simple Minimap + the refresh-rate label no longer runs over the F1 box (report
+> `2026-11-01_conan-cursor-key-name.md`). The KRINIK MOD PACK logo's dark fill toned to the game logo by measurement (`make-pack-logo.py`, review folder 52). The
+> minimap 6 units further from the corner and its coordinates lower — ACCEPTED 21:04–21:05. The ×3 arrow is hidden at impact (`StopProjectileInternal` hook) —
+> WAITS for the owner's check in the running game (asked 21:11). NEXT: his verdict on the arrow; then plan 40.3 I6 (the Xevyr pages with real rows, our own colour
+> and key controls); then plan 40 phase 4 (arrows in the corpse).
 > **Moved verbatim to the chronicle, entry 2026-11-01 17:54 +03:00:** the done owner-debt block of 15:49 and the 15:38 dayloop paragraph.
 > **Moved verbatim to the chronicle, entry 2026-11-01 15:52:** the closures of 13:27–13:43, the eea8bf94 handover items 1 (vignettes — done) and 1a (hub audit — plan 40.2), the 08:49 acceptances, the 09:5x–10:3x done list, the 13:20 vignette order (done), the 2026-10-29 15:2x work order.
 > 2. The HUD temperature by the game's debuff stage — frame the comfort (white) and the cold (blue) cases (only heat was framed, review folder 47).
