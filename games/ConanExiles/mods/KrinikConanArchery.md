@@ -94,7 +94,14 @@ Corpses: the game destroys the copies with the creature — plan 40 phase 4.
 materials, collision off, `K2_AttachToComponent(ProjectileMesh, None, Snap, Snap, KeepRelative)`, scale `CFG.visual_scale` 3, relative Z = maxZ × (1 − 3)
 (maxZ from `StaticMesh:GetBounds()` Origin.Z + BoxExtent.Z — `GetBoundingBox()` comes to Lua without Min/Max; 76.3 for `SM_iron_arrow` → −152.7 cm), then
 `ProjectileMesh:SetVisibility(false, false)`. The native mesh stays ×1, so the copy stands 62 cm from the hit as before. Seen: frames 116–117 of a 60 fps video
-(the big head at the aim point); review folder 50 for the owner's eye.
+(the big head at the aim point); review folder 50 for the owner's eye — superseded: the owner played and saw it himself 21:0x (`[OWNER]` «зачем снимать видео выпуска,
+если ты значешь, что я только что поиграл и видел его?»).
+**Hidden at impact (2026-11-01 21:0x, `[OWNER]` 21:07 «когда стрела попадает в землю - наша x3 отображается долго вместе с настоящей x1» · «нашу x3 мгновенно нужно
+скрывать, когда происходит слолкновение»).** After the impact the game keeps the flying actor alive for the trail fade, and our mesh is its own component — it stayed
+beside the stuck ×1 copy. Fix: a hook on `BP_BaseProjectile_C:StopProjectileInternal` (registered at the first visual arrow, the class is loaded then) hides the
+actor's own big mesh; registry «actor address → mesh», cap 64. Seen: the log «гашение крупной стрелы при ударе: подписано» at the first shot 21:10; the look —
+the owner's check in the running game (asked 21:11). The background twin of a real shot: the remote `FindFirstOf('BasePlayerChar_C'):LaunchProjectile()` fires the
+equipped bow from the hero with no input (21:05, seen in the archery log as a normal shot).
 
 ## Open
 
