@@ -19,6 +19,15 @@ The owner's spot (the oasis save, a nest next to sand and grass, a creature camp
   `NPCTerritorySpawner_C`, a `Corpse_C` — no egg actor of its own.
 - The prompt knows only `PickupFoliageComponent_C` instances of 55 meshes (`KrinikConanUI.md` → `krinik_pickup_prompt`).
 
+- **Recon 2026-11-02 14:00–14:03 (remote, read-only probes `egg_probe.lua` / `nest_probe.lua` in the session scratchpad):** the owner's frame is
+  «Снимок экрана 2026-11-02 085957.png» (his Pictures\Screenshots): two large cream eggs in a palm-leaf nest on sand by grass, the camera above. Over every
+  loaded `StaticMeshComponent` / `InstancedStaticMeshComponent` / `HierarchicalInstancedStaticMeshComponent` / `FoliageInstancedStaticMeshComponent` the only
+  mesh named «egg» is `SM_SnakeEggs_single` (a `PickupFoliageComponent_C` — our prompt already covers that class, so snake eggs are not the case); «nest» —
+  `SM_KappaNest` and `SM_Nest_ostrich` (static mesh actors); no actor class named egg or nest. The ostrich nest (teleport 14:02, −61703 268654 −15708) is a
+  rock nest with no eggs — not the owner's. **Not found yet:** what the owner's eggs are. Next: the owner's spot (his coordinates, or the oasis nest he
+  played at 08:59) → the probe there, also by mesh names without «egg» (the nest mesh itself with eggs) and the E target the game picks (trace the
+  interaction under the crosshair at that nest).
+
 ## Hypotheses (ranked)
 
 1. The eggs are foliage instances of a component class or mesh outside the 55 (a nest-egg foliage type) — check the components near the hero for an egg mesh.
