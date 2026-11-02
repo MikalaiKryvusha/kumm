@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0440 · 2026-11-02 · ❌→✅ · #anonymity #public-repo #game-source
+class: game-source-in-a-path
+**Lesson:** a folder name of the owner's download (the release / repacker name of the clean game copy) went into HOUSE_RULES, STATUS and a case file of the PUBLIC
+KUMM repo; the auto-mode classifier refused the push twice («Out-of-Place Publication»), nothing left the machine. A path is content: name such a folder by its
+parent only («the only Conan game folder in `D:\Instals\`»). Fixed: the three files rewritten, the two local commits folded before the push, the names added to
+`tools/scrub-local.json` (the pre-commit hook now blocks them).
+mechanized: `tools/scrub-local.json` terms (pre-commit `scrub-identity.mjs`)
+
 ### EXP-0439 · 2026-11-02 · ❌→✅ · #conan #lua #ui #log #hub
 class: edit-blamed-without-the-log
 **Lesson:** the previous chat saw the hub EMPTY after an alignment edit, reverted it and closed «cause not read». The log said why in one line: the remote
