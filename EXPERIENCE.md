@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0444 · 2026-11-02 · ❌ · #conan #stand #video #owner-saw-first #known-trap
+class: known-trap-walked-again
+**Lesson:** two known approaches forgotten in one hour. (1) The stand: clips for the owner were recorded with a humanoid fighter beating the hero (only
+crocodiles were removed) — `[OWNER]` 11:20 «героя ебашат, а ты видео пишешь блять»; HOUSE_RULES rule 11 already said it. (2) «ВЫКЛ»: the owner's word of
+10-30 on the vignettes («Крайнее левое положение … ВЫКЛ») was carried as behaviour, not as the label — the new shock-wave row showed «0 %» again —
+`[OWNER]` 11:22 «не 0%, а ВЫКЛ» · «уже же делали такое» · «как ты заебал забывать свои подходы!». Both are now in code: the clip tool refuses an unquiet stand,
+and a row flag prints «ВЫКЛ» at zero.
+**Repro:** `bash _config/slow-shot.sh <out.mp4>` (exit 3 «REFUSED: the stand is not quiet»); a hub row with `off_at_zero = true`.
+**Trigger:** recording anything for the owner → `slow-shot.sh` / `quiet-stand.lua` first and a look at the frame; a slider whose left end disables → `off_at_zero`.
+mechanized: `ConanExiles/_config/slow-shot.sh` + `quiet-stand.lua`; `off_at_zero` in `krinik_mod_settings.lua`
+
 ### EXP-0443 · 2026-11-02 · ❌ · #conan #ue4ss #remote #crash #probe
 class: unguarded-remote-read
 **Lesson:** a recon probe left armed in the remote — `NotifyOnNewObject` on `ParticleSystemComponent` / `NiagaraComponent` keeping the new object in a closure for

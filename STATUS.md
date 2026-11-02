@@ -133,6 +133,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `_config/fn-params.lua`); «E Взять» 5 checks a second while shown (P3); the places of «E Взять» (−14 % / +6 %) and the corpse strip (−22 %) as hub rows;
 > Hosav's kill XP line to the centre of the upper half (`W_Kill_xp` padding −258, pak in the game). **The owner's 10:54 decision:** strip 30 % smaller, backing
 > 60 %, both hub rows. The shock wave = `P_bow_powercharge_release` — the hub row «Ударная волна полного заряда» (default 0) scales its colour tables.
+> **11:27 — the shock wave settled** (pack `c817b4e`): `[OWNER]` 11:17 «золотая вспышка - НЕ ПРИ ВЫСТРЕЛЕ!!! А ПРИ ПОЛНОМ НАТЯЖЕНИИ» · «ВТОРУЮ ,КРУГЛЫЙ КОЛЬЦО
+> СПЛЕШ!» — the row scales the right system (`P_bow_powercharge_release`). Review folder 60 — two clips 120 fps ×5 (100 % / ВЫКЛ), opened for the owner; his eye
+> decides W1/W2. Sliders say «ВЫКЛ» at zero (`[OWNER]` 11:22 «не 0%, а ВЫКЛ» · «уже же делали такое») — seen. New tools `_config/slow-shot.sh` (refuses an
+> unquiet stand) and `quiet-stand.lua` (EXP-0444). Game closed, lock released.
 > **11:15 — the batch is DONE and seen** (pack `521a7ca`, KUMM `8b5039f`): K1b, S3, S4, SC1, SC2 pass (strip 0.70 / 0.60 / −22 %, the size and backing rows,
 > the XP line centred, the rows scroll). **Waits for the owner (asked 11:10 in chat):** which bow flash is «the shock wave» — the GOLDEN flash at full draw
 > (`P_bow_powercharge_charged`) or the flash at the LMB release (`P_bow_powercharge_release`, the one the row scales now). A bow shot = RMB held + LMB click
