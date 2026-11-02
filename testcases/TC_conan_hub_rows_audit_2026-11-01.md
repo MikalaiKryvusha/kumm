@@ -214,3 +214,16 @@ Basis: the owner's 07:20–07:23 decisions on mockups 8–9 (plan 40 I6.2): the 
 | C7 | C1, Simple Minimap | a click on the key box, press F2, «Сохранить» | the box shows «F2», no caption under it; slot `mouseHotkey` F2 | pass | F2 is bound by the game (refused — right); F6: the box shows «F6», no caption; slot `mouseHotkey` F6 after «Сохранить» |
 | C8 | C7 | a click on the key box, press a key the game binds (Tab) | the box keeps the old key; the plate «Эта клавиша уже занята» at the box, fades in, ≈ 5 s, fades out; no row moves | partial | LeftAlt (sent by mouse-seq's bring-to-front) and Tab refused: the box kept its key, the plate «Эта клавиша уже занята» under the box, rows in place; visible at 0.1, 1, 3, 5.5 s, gone at 6.5 s. The fade itself not measured (needs a 60 fps clip). The game binds 90 keys (InputSettings): free F1, F3–F12, I, U, 9, 0 |
 | C9 | C3–C7 | put the colours and keys back (reset or picks), «Сохранить» | the mods hold their former values | pass | «Сбросить к исходным» on three pages + «Сохранить»: DM theme, bars, key, SM key, LLH colours back to the mods' defaults; DM pause back to the mod's default 7 |
+
+### The last Xevyr rows: Simple Minimap's colour and the two option lists (plan 40.3 I6.2 tail, 2026-11-02)
+
+Basis: recon trace of Simple Minimap's SaveSettings (literalColor ← the window's `color`; `timeDisplay` from its selector) and the Damage Meter's `GetAnchorIndex`; the owner's popup rule (07:20). Stand: as C1.
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| D5 | the kit rebuilt | the Simple Minimap and Damage Meter pages | «Цвет миникарты» first on its page with the mod's colour; «Показ времени» «Сервер»; «Сворачивать в угол» «Вверху слева»; rows in the author's order | — | — |
+| D6 | D5 | a click on «Сворачивать в угол» | the option list opens over the window at the box (four corners, the chosen one rimmed), no row moves | — | — |
+| D7 | D6 | pick «Внизу справа», «Сохранить» | slot `RestoreAnchor` 3 | — | — |
+| D8 | D5 | «Показ времени» → «Игра», «Сохранить» | slot `TimetoShow` 2 | — | — |
+| D9 | D5 | «Цвет миникарты» → «синий», «Сохранить» | slot `literalColor` RGB = the palette's blue, alpha 0.69 kept | — | — |
+| D10 | D7–D9 | «Сбросить к исходным» on both pages, «Сохранить» | the slots hold the defaults again (0, 0, the red) | — | — |

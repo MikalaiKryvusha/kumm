@@ -110,6 +110,13 @@
        it is not shipped; an existing one is listed and replaced by the cause fix.
     (`[OWNER]` 2026-11-01 15:07–15:08 «странно, что мы что-то куда-то досылаем» · «почему выглядит как костыль?» · «лучше бы чинить качественно, а не костылями» ·
     «не люблю костыли» · «это временные решения, которые потом еще что-то ломают» · «нужно сразу чинить качественно и правильно».)
+25. **The build's install, uninstall and the launcher's buttons are tested on a COPY of the owner's clean game** — the original
+    the only Conan game folder in `D:\Instals\` (its name stays out of this public repository) (59 GB) is never touched; the copy is `D:\Games\Conan_Exiles_3_0_1_clean_test` (robocopy);
+    never on the working game `D:\Games\Conan Exiles 3.0.1`. (`[OWNER]` 2026-11-02 08:37 «ты тестировал установку и удаления сборки на чистой версии? я же тебе
+    нашёл чистую версию - её копируй, и на копии нужно тестировать» · «D installs»; first word 2026-11-01 13:41, plan 40.7.)
+26. **The launcher: «Играть» starts the game and closes the launcher; «Удалить сборку» keeps the launcher open** (it swaps back to «Установить сборку» when
+    the uninstaller's window closes). (`[OWNER]` 2026-11-02 08:35 «когда игра запущена через лаунчер по ИГРАТЬ - лаунчер нужно закрывать, чтобы не ел ресурсы
+    ПК» · 08:36 «в отличие от «Удалить» - удалить не должна закрывать лаунчер».)
 19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
     mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +

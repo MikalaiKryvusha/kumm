@@ -151,6 +151,16 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
             **DONE 2026-11-02 08:29 +03:00 — steps 1–3 and step 4 except the SM colour group** (`[TESTED: 2026-11-02 · C1–C9, C8 partial — the fade not measured ·
             testcases/reports/2026-11-02_conan-hub-colour-key-rows.md]`; review folder 58): kit kinds `color` / `color9` / `key`, the palette plate and the busy plate;
             DM theme, player bar, nine bars, cursor key; LLH two colours; SM cursor key. Found on the way: the game binds 90 keys incl. F2 (free: F1, F3–F12, I, U, 9, 0).
+            **OWNER'S DECISIONS 2026-11-02 08:45 +03:00 on the live window (he clicked it himself 08:43):** (1) `[OWNER]` 08:44 «дроп-даун меняет место выпада в зависимости от положения
+            курсора - пхоло. Дроп-даун - такой элемент, который всегда вниз или вверх в одном месте открывается от своего родителя» — every chooser plate (option
+            list, palette) opens AT ITS FIELD: under it, over it when there is no room — Lua `field_rect` / `place_at_field` (the field's place added up from the layout;
+            written 08:45, `[NOT-TESTED]`). (2) `[OWNER]` 08:45 «вместо квадратиков фиксированных цветов, нужно дать прямоугольник палитры» (his frame: the 16-swatch
+            plate) — the palette becomes a COLOUR RECTANGLE: any colour by a click. Steps: a gradient texture (hue across × brightness / saturation down) made by a
+            script and imported into the kit like the logo (`import-logo-texture.py`, `KIT_TEX_DIR`), an Image in `Brd_KrinikPal` instead of the 16 cells (cells
+            collapsed — GUID trap), a thin brightness strip beside it; the click point → HSV → linear colour (the plate's place is ours, so the rectangle's is known);
+            «было / станет», «Отмена», «Принять» stay; the swatch name → the nearest word or «свой цвет». The 16 short names stay for the row's caption.
+            The owner's references 08:51 (two frames, «Вот»): a square and a wide hue picker — hue across, pale at the top, the pure hue mid-height, black at the
+            bottom — the same layout as `make-palette-texture.py` (ours adds a grey column at the right for greys and black). Texture imported 08:50 (1024 × 512).
             **Still before the list's entry can switch to the hub:** the SM colour group (its window keeps `color` + H/S/V/A, not a colour button — recon first) and the
             two dropdowns (DM «Сворачивать в угол», SM «Показ времени» — kind `drop`, a popup list by the same rule: over the window, no row moves). `[AI]`
       - [ ] I6.3 Binding per mod in Lua (an adapter per page: `read()` from the mod's SaveGame object / controller fields, `write(values)` into the same object +

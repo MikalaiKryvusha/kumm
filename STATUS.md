@@ -150,7 +150,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Damage Meter 8), each reading and writing the author's own values — X1–X8 pass (report `2026-11-02_conan-hub-xevyr-four-pages.md`; kit pak 10 583 661 B in
 > `_unpacked/KrinikConanUI/`, git-ignored). **I6.2 DONE 08:29:** colour rows with the palette popup and the key capture with the busy-key popup work in game
 > (C1–C9, report `2026-11-02_conan-hub-colour-key-rows.md`; kit pak 10 896 745 B; review folder 58 — NOT opened: the owner is away, it waits for his return).
-> NEXT: the SM colour group (recon its window first) and the dropdown kind (DM corner, SM time display) → then the list's «Моды Xevyr'а» entry → the hub.
+> **08:44 IN FLIGHT:** the SM colour row and the option lists (DM corner, SM time) built and deployed (pack `ca5377c`, kit pak 10 979 745 B) — D5 seen (rows in
+> place; the «▾» drew as «?» → «›» turned 90° in Lua), D6 seen (the list over the window, the chosen one rimmed); D7–D10 not run — **the owner took the
+> running game at 08:43 (his own clicks in the log): do not drive it**. Colour names shortened (`[OWNER]` frame 08:42 «темно-коричне» cut) — needs a restart.
+> **Owner's 08:44–08:45 decisions (plan 40 I6.2, recorded verbatim there):** a chooser opens AT ITS FIELD, never at the cursor (Lua `place_at_field` written,
+> `[NOT-TESTED]`); the palette → a COLOUR RECTANGLE (any colour by a click) instead of 16 swatches — NOT built (steps in plan 40). KUMM commit `48571ce` NOT
+> pushed: the auto-mode classifier refused that push («Out-of-Place Publication») — push it with the next commit.
+> **The owner's launcher words 08:35–08:37 → HOUSE_RULES 25–26:** «Играть» closes the launcher, «Удалить» keeps it open (code done, launcher rebuilt,
+> `[NOT-TESTED]`); install / uninstall are tested on a COPY of the only Conan game folder in `D:\Instals\` (its name stays out of this public repository) — copied to
+> `D:\Games\Conan_Exiles_3_0_1_clean_test` (597 files, 58.3 GB); cases K1–K7 `testcases/TC_conan_clean_copy_install_launcher_2026-11-02.md`. Then the list's
+> «Моды Xevyr'а» entry → the hub.
 > 3. The owner's eye waits on review folders 54 (prompt in game), 56 (arrows in a corpse + the enemy bar beside «E Взять»), 57 (mockups 8–9).
 >    **Shown 2026-11-02 07:19 +03:00** (Explorer, all three); their notes corrected first: 56 — the answered loot question removed; 54 — «игра открыта» removed, the gap note added (frames predate variant 3). Verdicts not given yet.
 > ⚠️ Закрытие 23:41 было преждевременным, чат продолжается; церемонии закрытия (проход судьи, обрезка STATUS, README, линтеры витрины) — при настоящем закрытии.
