@@ -132,6 +132,10 @@ Native class chain of the panel: `W_QuickLootPanel_C` → `QuickLootPanel` (`Slo
 `HoldPromptVisibility` (default 3; 1 hides it); also `ShowOnlyText`, `BindingLabel`, `NoPresentationVisibility`.
 Loot change event (2026-10-29 00:2x, counters on nine candidates around a REAL Q hold): only the native `QuickLootPanel:SlotItemAddedOrRemoved`
 fires (UE4SS hooks it); the blueprint `HandleInventoryChanged` / `HandleLootContainerInventoryChanged` of `WBP_ContainerInfo` stay silent on a corpse.
+Quick-loot input (bug 75 stand, 2026-11-02): the window opens on a corpse under the crosshair after a Shift tap in our stand; the CELL is chosen by the WHEEL
+(`QuickLootCycleSelectionNext = MouseScrollDown`, `…Prev = MouseScrollUp`), F takes the chosen stack, Shift is «Перейти» (to the inventory). Corpse skeleton
+bones are `b_root`, `b_pelvis`, `b_spine_1…` (170 bones on a humanoid); the mesh root lies at the feet, `GetSocketLocation(FName("pelvis"))` returns the root.
+Items into a corpse's loot: `Corpse_C.ItemInventoryReplicateToAll:AddItemTemplate(id, −1, None, n, true, 1, 0)` (`_config/corpse-fill.lua`).
 `Overlay_Main` of `WBP_ContainerInfo` spans the whole screen: a slot alignment there is relative to the SCREEN edges.
 Corpse prompt text: vanilla target `Exiles_UI`, key `DA4E821B4EE35B69F5E9128CF11CB58F` «Разделайте труп и получите ресурсы или нажмите {0}, чтобы
 забрать предметы»; the widget lays it out as one row «text · key icon · text» (a `\n` inside breaks only the first piece).
