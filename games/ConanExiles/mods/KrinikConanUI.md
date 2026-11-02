@@ -238,6 +238,14 @@ reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/re
 
 ## Open
 
+- **The owner's word 2026-11-02 08:57 — positions of «E Взять» and the corpse strip:** `[OWNER]` «можно виджеты E Взять и плашки трупов - дать настройку их
+  положения на экране через наши настройки модов? По высоте и по горизонтали?» · «и по умолчанию сделать их в левой части экрана, чтобы в виде от третьего лица
+  они не поверх героя были, а левее героя». NOT DONE. Way: hub rows on the KrinikConanUI page — «E Взять: по горизонтали / по высоте», «Плашка трупа: по горизонтали
+  / по высоте» (sliders in screen shares; store keys `ui_pickup_x/y`, `ui_strip_x/y`); `krinik_pickup_prompt` places its plate in the crosshair canvas by them
+  (today 62 units under the crosshair); the strip — the kit's `WBP_ContainerInfo` slot (`OverlaySlot_5`) by default left of centre, the Lua offset from the rows
+  (the strip already moves Left while the quick-loot window shows — `krinik_ui_fixes`); defaults — left of the hero in third person, the exact share by a frame.
+  Together with the 08:54 strip size / transparency word above.
+
 - **The owner's words 2026-11-02 08:55 on the on-screen XP gain:** `[OWNER]` «появляющийся опыт на экране поднять выше? сейчас он перекрывает героя» · «можно
   появляющийся опыт настраивать время его обображения нашим окном настройки модов?» — the second is a QUESTION (answered in chat: yes, likely — like the
   `ui_shout_hold` row), nothing built (EXP-0438). First: recon which widget draws the XP popup (vanilla HUD or Hosav's `UIMod_Hosav`) — a remote `dump` while
