@@ -137,9 +137,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - ✅ 19 volumes (12.74 GiB, hashes equal) in the PlayGround folder; install from them on the clean copy — `-Verify` clean, uninstall back to the 597-file set
 >   (report `testcases/reports/2026-11-02_conan-release-0.9.0.md`, V1–V6 S1–S2 Z1–Z3 pass); the public repo at 0.9.0 (`def3b3f`); pack `feb7e77`. The owner's
 >   game config and desktop shortcut restored after the runs.
-> - ⏳ OPEN: the GitHub release v0.9.0 with the volumes — `gh release create` refused by the permission classifier (the owner's word or his command; notes
->   `github_release_notes.md` in the PlayGround folder); the PlayGround page (the owner); `D:/Temp/krinik_release_20261102` + `…b` (65 GB) to remove —
->   the recursive delete refused. Machine lock released.
+> - ✅ 19:38 the GitHub release v0.9.0 CREATED by the owner's word («Разрешаю»): https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.0
+>   with the guide PDF; the 19 volumes were uploading in the background when the chat closed (assets 1 at 19:40) — **FIRST next chat:**
+>   `gh release view v0.9.0 --repo MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --json assets --jq '.assets[].name'` and upload the missing
+>   `Krinik_Mod_Pack_0_9_0.zip.0NN` from `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_PlayGround\` by `gh release upload v0.9.0 --repo … <file>` one by one.
+> - ✅ the volume work dirs (65 GB) and the bundle in the clean copy removed by the owner's word (the clean copy = its 597-file list again). Pack `c357adb`
+>   (`_config/branding/logos-on-shot.py` with the owner's accepted values). Machine lock released.
+> - The PlayGround page — the owner's: advised to EDIT the existing page (his «Сборка обновлена» line), title with «для 3.0.1 [0.9.0]», files and text from the folder.
+> ⚠️ Закрыто принудительно 2026-11-02 19:4x +03:00 по слову владельца («закрывай чат, мне нужно будет ВПН вырубить»): церемонии (проход судьи, обрезка STATUS,
+> README, линтеры витрины) пропущены — долг платит первый /end-chat-soft. Ложных утверждений на месте не осталось.
 > - ❌ I crashed the owner's game 19:11 by a blind inventory sweep (EXP-0448) — relaunched, his save and camera intact.
 > **NOW 2026-11-02 13:25 +03:00 (chat 03118042) — the build is whole again** (66 paks, 9 Lua mods; the store holds `arc_wave = 1`; the oasis save lost its 2 iron arrows):
 > - ✅ **The arrow-choice list on a draw** (`[OWNER]` 12:49–12:56): shows only with ≥ 2 arrow kinds, never with one or with the hub row «Выбор стрел при натяжении»

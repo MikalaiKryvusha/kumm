@@ -44,7 +44,8 @@ material for a new PlayGround page. Fit criteria:
 - [ ] 10. The GitHub release v0.9.0 with the 19 volumes — `gh release create` refused by the permission classifier («Create Public Surface»): the owner's word
       or his own command (`gh release create v0.9.0 --repo MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack …`, notes in the PlayGround folder).
 - [ ] 11. The PlayGround page — the owner (his account); everything in `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_PlayGround\`.
-- [ ] 12. Remove `D:/Temp/krinik_release_20261102` (39 GB, run 1) and `…b` (export + check, 26 GB) — the recursive delete was refused; the owner's way or file by file.
+- [x] 12. Remove `D:/Temp/krinik_release_20261102` (39 GB, run 1) and `…b` (export + check, 26 GB) — done 19:39 by the owner's «РАЗРЕШАЮ»; the clean copy's bundle too.
+- Item 10 update 19:38: the release CREATED by the owner's «Разрешаю» (tag v0.9.0, the guide PDF attached); the 19 volumes uploading at the chat's close — finish by STATUS.
 
 ## Decisions made without the owner
 
