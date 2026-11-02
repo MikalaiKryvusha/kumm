@@ -133,7 +133,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `_config/fn-params.lua`); «E Взять» 5 checks a second while shown (P3); the places of «E Взять» (−14 % / +6 %) and the corpse strip (−22 %) as hub rows;
 > Hosav's kill XP line to the centre of the upper half (`W_Kill_xp` padding −258, pak in the game). **The owner's 10:54 decision:** strip 30 % smaller, backing
 > 60 %, both hub rows. The shock wave = `P_bow_powercharge_release` — the hub row «Ударная волна полного заряда» (default 0) scales its colour tables.
-> **IN FLIGHT 10:57:** the kit rebuild (`scratchpad/kit_all.sh`: strip 0.70 / 0.6, the rows `ui_strip_scale/back`, `arc_wave`) → deploy KrinikConanUI +
+> **11:15 — the batch is DONE and seen** (pack `521a7ca`, KUMM `8b5039f`): K1b, S3, S4, SC1, SC2 pass (strip 0.70 / 0.60 / −22 %, the size and backing rows,
+> the XP line centred, the rows scroll). **Waits for the owner (asked 11:10 in chat):** which bow flash is «the shock wave» — the GOLDEN flash at full draw
+> (`P_bow_powercharge_charged`) or the flash at the LMB release (`P_bow_powercharge_release`, the one the row scales now). A bow shot = RMB held + LMB click
+> (`[OWNER]` 11:07). Bug 75 — stand attempts spoiled (a probe crash EXP-0443, crocodiles), next steps in the bug doc. Game closed, lock released.
+> **IN FLIGHT 10:57 (done 11:06):** the kit rebuild (`scratchpad/kit_all.sh`: strip 0.70 / 0.6, the rows `ui_strip_scale/back`, `arc_wave`) → deploy KrinikConanUI +
 > KrinikConanArchery → cases S3, S4, K1b, SC1, SC2, W1, W2 (W — a 60 fps clip of a real full-charge shot; desktop HDR off for it, back on after). **10:57
 > `[OWNER]` the settings rows scroll** («это скролящийся список. КОгда много пунктов - появляется скрол бар») — the window keeps 845, the page scrolls (Lua done). Then: the pack commit; bug 75 (quick-loot rim jump), bug 74
 > (nest eggs), the climbing jump (09:07), K1–K7 on the clean copy. Review folder 59 answered (strip). Seam: «E Взять» shows up to ≈ 14 s late after the hero comes back to stones.

@@ -33,6 +33,14 @@ None yet. Candidates: the game rebuilds the grid on `SlotItemAddedOrRemoved` and
 1. Cases B1 (the jump on a 60 fps clip, our build), B2 (control: `krinik_ui_fixes` and the archery section off — HOUSE_RULES rule 24), B3 (after the fix).
 2. Ours → fix our handler; vanilla → find the focus call in `W_QuickLootPanel` (kit) and keep the selection natively.
 
+## Stand attempts (2026-11-02 11:12–11:15)
+
+- `corpse-stand.sh 200` + the new `_config/corpse-face.lua` (the hero 150 cm from the corpse body, facing it — the body found as the corpse's first
+  `SkeletalMeshComponent`, `Corpse_C` has no `Mesh` field). Two tries spoiled: (1) the game crashed at the kill — my own particle birth-watch probe was armed
+  (EXP-0443; the control kill without it lived); (2) a live crocodile attacked the hero and no corpse was in view (the body read 21 m from where the hero
+  was put — the face stand is `[NOT-TESTED]`). Next: a stand away from the oasis crocodiles (kill or freeze them first — `KillCharacter` on
+  `BP_NPC_Wildlife_Crocodile_C`, read the nearest by name), check the corpse body place on a frame, then the 60 fps clip of an F take.
+
 ## Decisions made without the owner
 
 — (open)

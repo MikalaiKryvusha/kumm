@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0443 · 2026-11-02 · ❌ · #conan #ue4ss #remote #crash #probe
+class: unguarded-remote-read
+**Lesson:** a recon probe left armed in the remote — `NotifyOnNewObject` on `ParticleSystemComponent` / `NiagaraComponent` keeping the new object in a closure for
+an `ExecuteInGameThreadWithDelay(100)` read — crashed the game in UE4SS (ACCESS_VIOLATION 0x18) half a second after a remote kill (a burst of blood particles,
+11:12:12). The control after a restart — the same kill with no probe — lived, as three kills before the probe was armed. A birth watch on a high-rate class is
+disarmed right after its read, and it never keeps the raw object across frames: copy what is needed (name, template path) inside the callback itself.
+**Repro:** after a probe run: `pult.sh "lua _G.__fx2_on=false; return 'off'"` (or restart the game) before any stand that spawns effects.
+**Trigger:** writing `NotifyOnNewObject` in a probe → read in the callback, no delayed access, and an off switch called at the end of the probe.
+none-cheap: probes live in the scratchpad; the rule is the decision point above
+
 ### EXP-0442 · 2026-11-02 · ❌→✅ · #conan #ui #umg #popup #colour
 class: hidden-layer-shows-through
 **Lesson:** a popup plate at alpha 0.98 (the mockup's `.pop`) over a saturated DARK red swatch drew a pure BLACK block (0, 0, 0) inside the option list — not a
