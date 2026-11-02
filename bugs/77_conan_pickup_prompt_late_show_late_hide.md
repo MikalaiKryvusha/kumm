@@ -21,6 +21,8 @@ it stays on after the view leaves the pickup.
   `NEAR_CM` 600 can wait up to ≈ 14 s to enter the near set. The same arithmetic was seen 2026-11-02 morning («E Взять» up to ≈ 14 s late, STATUS).
   The late HIDE is not explained yet (the shown check runs 5 / s).
 
+**14:20, the owner:** `[OWNER]` «фейд плохой, контур E не действует на фейд!» — the fade does not reach the E key rim (`Brd_KrinikPickupKey`, its brush outline): the word and the backing fade, the rim stays. Likely the fade drives the plate's `RenderOpacity` of children that do not include the rim's own brush, or the rim is a sibling outside the faded box — check the tree (`KrinikConanUI.md` → `krinik_pickup_prompt`: `HB_KrinikPickup` = E in its own rim + «Взять») and fade ONE parent.
+
 ## Fix plan
 
 1. Cause: the near set depends on a slow round robin. Rebuild it by the hero's MOVE, not by the clock: when the hero has moved ≥ 3 m since the last full pass
