@@ -105,6 +105,11 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
 
 ## Open
 
+- **The owner's word 2026-11-02 09:02 — the shock-wave sprite of a 100 % charged shot:** `[OWNER]` «при заряженном на 100% выстреле в момент выпуска стрелы вокруг
+  лука появляется спрайт ударной волны - его нужно сделать отключаемым через мод Archery Криника, по умолчанию - выключен» · «настраивается через шкалу
+  прозрачности». NOT DONE. Way: find the effect (the bow's full-charge release — a Niagara / particle or a widget sprite; recon on the release by the remote),
+  a hub row on the KrinikConanArchery page «Ударная волна при полном заряде» — a slider of its opacity 0–100 %, default 0 (off); applied natively (the effect's
+  own parameter or its spawn skipped at 0), no per-frame work.
 - seen 2026-10-31 15:51: the pause-menu list shows «v1.0.0»; the Krinik mods still stand at the bottom of the list (W11 «top» half open).
 - **NEW FEATURE, 1.0.0 (`[OWNER]` 2026-11-01 09:11 «KrinikConanArchery · в этот мод идет еще одна фича · После смерти - регдол труп врага не должен уничтожать
   воткнутые в него стрелы - все стрелы сохраняются, торчат из трупа, их можно собрать.»):** every arrow copy stuck in a creature stays stuck in its ragdoll
