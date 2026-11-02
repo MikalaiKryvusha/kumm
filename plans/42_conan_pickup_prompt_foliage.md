@@ -29,8 +29,10 @@ leaves, the prompt shall go. Maintain: our mods' 1 ms CPU budget in gameplay fra
 - Sticks, fibre and stones are FOLIAGE INSTANCES, not actors — the game's highlight / prompt system (`ClientSetHighlightedObject`, `W_ActionTutorial`) never sees
   them, which is why no prompt exists (game map: `UpdateHighlightTarget` → native `PickupGatheringOneInstance(TraceLength, TraceRadius)`, `PickupInteractionDistance`
   25, `PickupTraceSphereRadius` 200, from the camera).
-- `PickupGatheringOneInstance` is NOT a UFunction: absent from the controller's and the character's class chains (`ConanPlayerController`, `ConanCharacter`) and
-  from every component of the hero (171; only `BP_Gathering_C` has `GetRandomPickupAmount`, `GetPickupLoot`) — its result cannot be read from Lua.
+- ~~`PickupGatheringOneInstance` is NOT a UFunction … its result cannot be read from Lua.~~ **CORRECTED 2026-11-02 (bug 77):** it IS a UFunction — a static of
+  `/Script/ConanSandbox.EnvironmentFunctionLibrary` (the call in `UpdateHighlightTarget` is an `EX_CallMath`); this recon searched only the controller's and the
+  character's class chains and the hero's components. Called from Lua since 2026-11-02 — `krinik_pickup_prompt` asks it once a second
+  (`games/ConanExiles/mods/KrinikConanUI.md`).
 - A post-hook on `FunCombat_PlayerController_C:UpdateHighlightTarget` counted 0 calls in 3 s with the game in the BACKGROUND — not concluded: repeat with the game
   in front (the call may run only for the focused window or on input).
 

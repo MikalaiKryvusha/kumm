@@ -19,6 +19,10 @@ Renamed from «Krinik Russian Translation» 2026-10-30 (W33). ≈54 451 entries 
   2026-10-30 lies in `D:\Temp\claude\vanilla-ru\`. Letter fixes without a rebuild — `devkit/locres-set-tr.py` + `locres-fixes-*.tsv` (one file per batch:
   an applied row stops the next run with code 2; since 2026-11-01 the two letters `\n` in a row are a line break, so multi-line tooltips can be replaced;
   54 457 entries after `-2026-11-01c`).
+- **Service strings stay untranslated (2026-11-02, bug 78):** the build translates mod texts BY SOURCE TEXT, so a mod's internal literal compared in its code
+  gets translated too — Arrow Quick Swap's «None» (key `D71D7D204737C8044CCD97BC0B6B9301`, compared with a key's display name) became «Нет» by row 3464 (an EoT
+  enum) and the mod never bound the wheel. Pinned by a `key:` row in `dm-fish-ru.tsv` (translation = source). `locres-set-tr.py` takes `key:<KEY>[,…]\t<text>`
+  rows too (one entry by key, its source guard wants the same row in `dm-fish-ru.tsv`): `locres-fixes-2026-11-02.tsv`, 54 457 entries, 1 changed.
 - Deploy: `Deploy-ModPack.ps1 -PackDir ConanExiles -Deploy -Only KrinikConanRussianTranslation` (one name per `-Only` when called through `-File`).
 
 ## Our edits of vanilla strings (vanilla-overrides-ru.tsv)

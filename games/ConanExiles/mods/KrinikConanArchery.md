@@ -141,6 +141,9 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
 - **The arrow-choice list on a draw (2026-11-02 13:0x, pack after `c817b4e`):** section `on_aqs_display` — a post-hook of Arrow Quick Swap's
   `UpdateDisplayUI` (`ArrowQuickSwap.md`); store key `arc_ammo_list` → `CFG.ammo_list` (default true). `[TESTED: 2026-11-02 · L1–L4 · testcases/reports/2026-11-02_conan-arrow-choice-and-bow-stance.md]`.
   Trap: the hook registration at mod load fails («no UFunction» — the mod's class is not ready); the component's birth (`NotifyOnNewObject`) registers it.
+  **Since 2026-11-02 15:0x (bug 78):** `one_row_per_kind` first — AQS lists one entry per STACK (`ArrowQuickSwap.md`); the section keeps the first stack of each
+  kind and rebuilds the window (`ClearVBoxAmmoWidgets`, `CreateAmmoWidgets`) — so «up» cycles and «≥ 2 kinds» counts kinds; log «стопок N, видов K».
+  `[TESTED: 2026-11-02 · W5, W6 · testcases/reports/2026-11-02_conan-wheel-in-bow-aim.md]`.
 - **The string frozen drawn after a draw at low stamina (bug 76) — FIXED 2026-11-02 13:5x (B1–B3 pass):** section `settle_if_stuck` — a post-hook of `BasePlayerChar_C:OnSubstateChanged_Attacking` (Entered false) + 100 ms: bow montage off and the bow string still `A_combat_bow_string_heavy_charge` → the game's `AB_human_male_C:AnimNotify_bow_secondary_settle()`. The bow string is the bow's own `AnimSingleNodeInstance` (charge 1.833 s, loop 4 s, fire 0.967 s, settle 0.667 s). No setting (`[OWNER]` 13:49).
 - **The aim zoom kept through a stamina break (case S5, ours) — FIXED 2026-11-02 13:2x (S6, S7 pass; `shots_at_aim`: the re-draw hold needs a shot since the aim entry):** with RMB held, the draw broken by stamina ends the montage's FOV notify, and
   `hold_aim_on_redraw` in `on_fov_target` takes it for a re-draw — the zoom stays while the hero no longer draws. The hold must require a draw actually

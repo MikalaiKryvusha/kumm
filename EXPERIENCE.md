@@ -91,6 +91,29 @@
 
 ## Entries
 
+### EXP-0447 · 2026-11-02 · ❌→✅ · #conan #translation #locres #mods #sentinel
+class: translation-hits-a-service-literal
+**Lesson:** the build translates mod texts BY SOURCE TEXT, and a mod's own logic may compare against a localizable literal: Arrow Quick Swap checks
+`Key_GetDisplayName(first key of CycleArrow_*) == "None"` to bind the wheel, our shared row «None» → «Нет» (an EoT enum label) translated that literal too, and
+in the Russian build the mod never bound its arrows to the wheel — no error anywhere, the feature just dead. When a mod feature «does nothing» in the build,
+read its bytecode for `EqualEqual_TextText` / text constants and look the literal's key up in `Game.locres` before blaming the mod or input.
+**Repro:** `kismet-trace.py … ExecuteUbergraph_AQS_Actor_Component` → `Name CycleArrow_DOWN`, `MakeLiteralText`, `EqualEqual_TextText`; the text const bytes
+(`0x29` + `0x1f` strings) give source «None», key `D71D7D20…`; `grep` that key in `_config/localization/kit-saved-loc/KrinikRU/ru/KrinikRU.archive`.
+**Trigger:** a translated mod's feature silently inert in the Russian build, fine by its author's description.
+none-cheap: a guard would scan every mod's bytecode for text compared in `EqualEqual_TextText` against the translation table — one asset in 66 paks so far; the
+key row in `dm-fish-ru.tsv` pins this one (KUMM bug 78)
+
+### EXP-0446 · 2026-11-02 · ❌→✅ · #conan #ue4ss #bytecode #native #recon
+class: searched-the-wrong-class
+**Lesson:** plan 42 wrote «`PickupGatheringOneInstance` is NOT a UFunction — its result cannot be read from Lua» after searching only the controller, the
+character and the hero's components; the bytecode said `EX_CallMath` — a STATIC of a function library (`EnvironmentFunctionLibrary`), callable from Lua on its
+CDO. For «the game's own function X» resolve X's import chain in the caller's bytecode (`uaj tojson` → Imports → OuterIndex) before concluding it is
+unreachable; `CallMath` = a library static, `FinalCall`/`VirtualCall` with a context = a method of that object.
+**Repro:** `uaj func … FunCombat_PlayerController.uasset VER_UE5_6 UpdateHighlightTarget` → the call's `StackNode` −400 → `uaj tojson` Imports[399] →
+`PickupGatheringOneInstance` ← `EnvironmentFunctionLibrary` ← `/Script/ConanSandbox`; `fn-params.lua` lists its 10 parameters.
+**Trigger:** about to write «not a UFunction / not callable from Lua» about a function seen in a blueprint's bytecode.
+none-cheap: one rule at the decision point; the import chain is one script call (`scratchpad` `calls.py` pattern, KUMM bug 77)
+
 ### EXP-0445 · 2026-11-02 · ❌→✅ · #conan #owner-report #angle #state-not-picture #animation
 class: compared-from-the-wrong-angle
 **Lesson:** I declared the owner's «bow stays drawn» a vanilla stance after control runs by halves — comparing poses from BEHIND, where the string's shape

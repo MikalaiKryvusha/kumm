@@ -39,6 +39,13 @@ and changed by the window (`HUB_KEYS` in `main.lua`): `offset_z` → `cam_height
   a save on another page never rewrites the camera's file.
 - Cases `testcases/TC_conan_hub_camera_page_2026-10-31.md` (C1–C10 pass 2026-10-31 22:29–22:47).
 
+## The wheel in the bow aim (2026-11-02, bug 78)
+
+The wheel zooms by the GAME (`BasePlayerChar` `CameraZoomIn/Out` on `ZoomIn = MouseScrollUp`, `ZoomOut = MouseScrollDown`, step `CameraZoomAmount`, which this
+mod holds by distance). Section «КОЛЕСО В ПРИЦЕЛЕ ЛУКА»: a post-hook of Arrow Quick Swap's `UpdateDisplayUI` (birth of `AQS_Actor_Component_C` registers it)
+reads `AllowShowingUI` (= substate 16); while true the watcher's `want_step` is 0 (also written at once at the aim entry); log «прицел лука: вход / выход».
+Without AQS no hook — the wheel zooms in the aim as in the game. `[TESTED: 2026-11-02 · W2, W3 · testcases/reports/2026-11-02_conan-wheel-in-bow-aim.md]`.
+
 ## Checks
 
 - In game 2026-10-31 16:41: `[KrinikConanCamera]` 81 log lines, «config.lua прочитан», «ВЫБРАН компонент: SpringArmComponent …». Cases of the camera work —

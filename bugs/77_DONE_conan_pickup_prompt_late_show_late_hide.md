@@ -1,6 +1,6 @@
 # Bug 77 — «E Взять» shows up seconds late and stays seconds too long
 
-**Status:** 🔴 OPEN · **Severity:** S2 (a visible lag of a core prompt) · **Version/build:** pack ConanExiles `40db56d`, KrinikConanUI 1.0.0 (`krinik_pickup_prompt`) ·
+**Status:** ✅ DONE · **Severity:** S2 (a visible lag of a core prompt) · **Version/build:** pack ConanExiles `40db56d`, KrinikConanUI 1.0.0 (`krinik_pickup_prompt`) ·
 **When/context:** 2026-11-02 14:18–14:19 +03:00, the owner's play after the chat's closure
 **Fixing:** FIRST in the next chat
 
@@ -36,6 +36,35 @@ it stays on after the view leaves the pickup.
    pickup is taken keeps it.
 3. Cases (new TC): walk up to a stick from 15 m — the plate within ≤ 0.5 s of the stick entering 6 m; look away — the plate gone ≤ 0.4 s; the cost line per minute.
 
+## The fix (2026-11-02, pack `008faf4`)
+
+- **The game's own probe, found:** `UpdateHighlightTarget` (bytecode, `uaj func … FunCombat_PlayerController.uasset VER_UE5_6`) calls the STATIC
+  `/Script/ConanSandbox.EnvironmentFunctionLibrary:PickupGatheringOneInstance(WorldContextObject, Actor, Controller, Eye, ViewDir, TraceLength, TraceRadius,
+  out OutFoliage, out OutInstance) → bool` (an `EX_CallMath`; plan 42 had searched only the controller / character chains and wrote «not a UFunction»).
+  Its arguments in the game: `Eye` = the active camera (`AdjustableCamera` in first person, else `CameraThirdPerson`) + its forward ×
+  `InteractionDistanceThirdPersonBonus` (0 in first person, else `ThirdPersonSpringArm.TargetArmLength` — the game writes the field only at an E press, so the
+  section takes the arm length itself), `ViewDir` = the camera forward, `PickupInteractionDistance`, `PickupTraceSphereRadius`; true → the game makes that
+  instance E's target (`ServerSetHighlightedObject`). The function only searches.
+- `krinik_pickup_prompt` calls it once a second, 5 / s while the plate shows; the component list, its births and the round robin are gone.
+- The E rim: a RoundedBox outline ignores the parent's render opacity (frame at opacity 0 — the white square stayed); `set_rim` drives its alpha with the fade.
+- The place: the slot aligned by its right edge and middle (1.0, 0.5) at the crosshair; defaults x −1 %, y 0 % (hub rows `ui_pickup_x/y`, the same in
+  `krinik_mod_settings.lua`).
+
+## ✅ STATUS: DONE (2026-11-02 15:11 +03:00)
+
+Hygiene: `luac -p`, `check-lua-game-thread.py` 0, `check-lua-shadow.py` 0.
+Functional run: the live game, cases N0–N8 of `testcases/TC_conan_pickup_native_probe_2026-11-02.md` pass — the plate 0.3–1.2 s after the view lands, gone
+0.3–0.4 s after it leaves, 0.9 s in a place 150 m away (was up to ≈ 14 s), a real E takes the probe's target, the rim fades, the place by a 4K frame; cost
+0.089 ms a check. Report `testcases/reports/2026-11-02_conan-pickup-native-probe.md`.
+REAL WORLD: accumulated — the owner's game folder and his oasis save, his camera `config.lua` (kept byte-equal through the deploys); data and machine — his
+machine, his save; path — the hero looking at stones and pressing E, as he plays. Verified on the real world, except his own eye on the new place.
+
 ## Decisions made without the owner
 
-(at closing)
+- `[AI]` The exact x default −1 % (the plate's right edge ≈ 60 px left of the dot at 4K): «левее точки, не касаясь» was his; the number is mine, set by one
+  4K frame — his eye decides, the hub row moves it.
+- `[AI]` The plate is anchored by its right edge (so x 0 = touching the dot) instead of its middle — the row's meaning changed; no saved value existed
+  (`KrinikSettings.lua` held only `arc_wave`).
+- `[AI]` Third / first person per the game's branch; first person not run (one camera case left, TC coverage note).
+- `[AI]` `InteractionDistanceThirdPersonBonus` taken from the arm length instead of the controller field (0 until the first E press) — the same number the
+  game writes at the press.

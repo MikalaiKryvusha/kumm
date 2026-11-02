@@ -25,6 +25,19 @@ arrow kind by the mouse wheel / gamepad while the bow is in hand, with a list wi
   `UIPopup = false`, `GetAmmoUI()`, `AmmoUI:AddToViewport(0)`; if false: locally controlled and `AmmoUI` valid → `AmmoUI:RemoveFromParent()`. No reveal on aim:
   the list appears only by `RevealDisplay` (wheel, auto-change popup).
 
+- **How the wheel reaches the arrows (bytecode 2026-11-02 14:5x, `ExecuteUbergraph_AQS_Actor_Component`, `CycleAmmoSelection`, `GetCurrentAmmoInventory` by
+  `kismet-trace.py`; KUMM bug 78):** the axis event `InpAxisKeyEvt_MouseWheelAxis` is EMPTY (its ubergraph entry 1895 pops the flow at once). Arrows cycle only by the
+  actions `CycleArrow_UP` / `CycleArrow_DOWN` → `TryCycleAmmo(±1)` → `CycleAmmoSelection`. `CheckCustomBindings` (called with the Settings module bind) adds
+  `CycleArrow_DOWN = MouseScrollDown`, `CycleArrow_UP = MouseScrollUp` and `Gamepad_DPad_Up` through `GetInputSettings():AddActionMapping(…, true)` ONLY when
+  `Key_GetDisplayName(GetFirstKeyForActionMapping(pc, <action>)) == "None"` — and «None» is a LOCALIZABLE text literal (key `D71D7D204737C8044CCD97BC0B6B9301`,
+  `.uexp` offsets 9223 / 9985). A translation of that key breaks the binding: the build's Russian had «Нет» there (fixed 2026-11-02, see Our edits).
+- **Per-stack list (the author's bug):** `GetCurrentAmmoInventory` walks the hotbar and backpack and `Array_Add`s EVERY bow-projectile stack to `CurrentAmmo`
+  (`AmmoCount` map is per template — the counts are right); `CycleAmmoSelection` builds `AmmoIDArray` of template ids by `Array_Add`, finds the active id's FIRST
+  index, `NewIndex = (i + dir + len) % len`, `SetAmmo` on the bow, `ActiveAmmo = GetIntStat(40)`. Two stacks of one kind → «up» lands on the same kind forever.
+  The window `UI_AmmoDisplay_C` (`/Game/Mods/ArrowQuickSwap/UserInterface/UI_AmmoDisplay`): `CreateAmmoWidgets` (no parameters) makes 3 rows per `CurrentAmmo`
+  entry — a wrap ring (6 stacks → 18 rows). The asset imports `Array_Add`, `Array_Find`, `Map_Add`, `Map_Find` — no `Array_AddUnique`, so no same-size patch.
+- `EAA_MC_C` (another mod's actor) has input enabled and consumes `MouseWheelAxis` — AQS's axis event sees 0; harmless, the axis path is empty anyway.
+
 ## Our edits
 
 - 2026-10-29 (bug 64 item 29): the window flashed for a moment on every draw — it is born opaque and the hide animation came a frame later. `addprop:
@@ -35,6 +48,11 @@ arrow kind by the mouse wheel / gamepad while the bow is in hand, with a list wi
   `arc_ammo_list` is on and `CurrentAmmo` has ≥ 2 kinds, else 0 (the `Reveal` animation drives only `CanvasPanel_32`, so a 0 on the root hides the wheel's
   reveal too); when shown, the component's own `RevealDisplay` (auto-hide by `MinDisplayTime`). Row in the hub — kit `kit-krinik-modsettings.py` PAGES `arc`
   and the Lua `krinik_mod_settings.lua`, default on.
+
+- 2026-11-02 (KUMM bug 78, `[TESTED: 2026-11-02 · W0–W6 · testcases/reports/2026-11-02_conan-wheel-in-bow-aim.md]`): (1) the translation keeps the service
+  «None» untranslated (`dm-fish-ru.tsv` key row + `Game.locres`) — AQS binds the wheel itself again; (2) KrinikConanCamera holds the game's zoom step at 0 while
+  `AllowShowingUI` — the wheel in the aim no longer moves the camera; (3) KrinikConanArchery `one_row_per_kind` after `GetCurrentAmmoInventory` — one entry per
+  kind and the window rebuilt by its own functions.
 
 ## How to look inside
 
