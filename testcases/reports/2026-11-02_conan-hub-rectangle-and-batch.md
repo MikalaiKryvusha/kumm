@@ -26,6 +26,8 @@ his; path — the inventory → «Настройки модов» window opened 
 | 6 | 10:36–10:48 | deploy, `launch-fg.ps1`, `enter-world-remote.sh`; `killxp_pad.lua` (padding 80 / 0 / −258 live); `strip-open.sh` corpse and campfire; `stone-stand.lua`; `hide_timing.lua`; hub rows by real clicks; D7b–D10 | K1, S1, S2, P1–P3, N1, O1, D7b–D10 |
 | 7 | 10:47–10:53 | `fx_watch.lua` + `mouse-seq.ps1 -Seq "rdown,…,ldown,wait:2600,lup,…"`; `fx_table.lua`, `fx_scale.lua`, `fx_spawn.lua` | the shock wave found, its table writable; its look not seen |
 | 8 | 10:53 | `close-game.ps1` | closed cleanly, no crash window |
+| 9 | 10:54–11:00 | `kit_all.sh` again (strip 0.70 / 0.6 — `[OWNER]` 10:54; rows `ui_strip_scale/back`, `arc_wave`); deploy KrinikConanUI and KrinikConanArchery | pak 13 257 335 B |
+| 10 | 11:01–11:06 | `launch-fg.ps1`, `enter-world-remote.sh`; `PlayKill_Animation`; `strip-open.sh` campfire; hub rows by real clicks; window forced to 600 + wheel; `hdr.ps1 off`, `clip_shot.sh` (ffmpeg ddagrab 60 fps + a full draw; the first three clips held LMB and released RMB — NO shot, corrected 11:10 by the owner's word; then RMB held + LMB click), `hdr.ps1 on` | K1b, S3, S4, SC1, SC2 pass; W1, W2 partial |
 
 ## 4. Checks
 
@@ -50,7 +52,11 @@ the plate and the XP line read by the remote and on frames.
 | P2 hub row moves the plate | pass | slot −18.3 / 61.9 = −1 % / 6 % right after «Сохранить» |
 | P3 5 checks a second | pass | summaries 12.4 s apart while shown; hidden 322 ms after leaving |
 | K1 XP line | fail → fixed | −516 pinned it to the top; live T 80 / 0 / −258 → centre 623 / 539 / 270 of 1080 → −258 |
-| S3, S4, K1b, W1, W2 | not run | the next start (kit with 0.70 / 0.6, the Lua rows, Hosav −258, the shock-wave row) |
+| K1b XP line | pass | «Каппа» / «+85 XP» centred at ≈ 269 of 1080 |
+| S3 strip 0.70 / 0.60 / −22 % | pass | read back from the live strip; the hub shows the rows |
+| S4 hub size / backing rows | pass | 100 % / 0 → scale 1.00 / alpha 0.00; reset → 0.70 / 0.60 |
+| SC1, SC2 scrolling rows | pass | window 845; forced 600 → bar + wheel scroll; seam: the bar against the values |
+| W1, W2 shock-wave row | blocked | log and colour table follow the row (0 % / 100 %); a full draw spawns `P_bow_powercharge_charged` (a golden flash, not touched by the row), the LMB release spawns `P_bow_powercharge_release` (scaled) — which one is «the shock wave» is asked of the owner |
 
 ## 5. Found
 
@@ -69,5 +75,5 @@ the plate and the XP line read by the remote and on frames.
 
 ## 7. Verdict
 
-partial — the hub's choosers, the rectangle, the Xevyr rows D5–D10 and the found fixes pass in the live game; the owner's strip size / backing choice, the
-final places, Hosav's −258 and the shock-wave row wait for the next start (S3, S4, K1b, W1, W2).
+partial — everything passes in the live game except the look of the shock wave at 0 % vs 100 % (W1, W2): the mechanism follows the row by log and table,
+the flash was not caught on a clip; it goes to the owner's eye.

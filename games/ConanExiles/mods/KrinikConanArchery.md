@@ -121,6 +121,10 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
   both colour tables from the originals (additive — dimmer is more transparent), k 0 = black = invisible; applied at load and on a hub save — zero per-frame
   and zero per-shot work. **Not seen yet:** the look at k 1 vs 0 — a remote spawn (`SpawnEmitterAttached` on `b_R_prop`, even with the lifetime stretched to
   3 s) showed nothing on the sand either way; the check is a 60 fps clip of a REAL full-charge shot (EXP-0430).
+  **How the hero shoots a charged arrow (`[OWNER]` 2026-11-02 11:07 «нужно при зажатой ПКМ ещё ЛКМ нажимать» · «а ты просто ПКМ отпускаешь»):** RMB held draws
+  and charges, an LMB CLICK while RMB is held releases; holding LMB and letting RMB go shoots nothing. Input: `mouse-seq.ps1 -Seq "rdown,wait:2800,lclick,wait:700,rup"`.
+  The order of effects (remote, 11:10): full draw → `P_bow_powercharge_charged` (a golden flash at the hand), the LMB release → `P_bow_powercharge_release` +
+  the tracer `P_arrow_trail_powershot`. `tune_wave` scales only `_release`; which flash the owner calls «the shock wave» — asked 11:10.
 - seen 2026-10-31 15:51: the pause-menu list shows «v1.0.0»; the Krinik mods still stand at the bottom of the list (W11 «top» half open).
 - **NEW FEATURE, 1.0.0 (`[OWNER]` 2026-11-01 09:11 «KrinikConanArchery · в этот мод идет еще одна фича · После смерти - регдол труп врага не должен уничтожать
   воткнутые в него стрелы - все стрелы сохраняются, торчат из трупа, их можно собрать.»):** every arrow copy stuck in a creature stays stuck in its ragdoll
