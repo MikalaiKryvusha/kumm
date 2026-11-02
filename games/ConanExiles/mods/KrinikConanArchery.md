@@ -34,6 +34,9 @@ The version the pause-menu mod list shows = `modinfo.json` `versionMajor/Minor/B
 (`[OWNER]` «в сбоке моды Krinik ставим по версии сборки 1.0.0» · 2026-10-31 15:39 — supersedes 3.0.1 of 2026-10-28) in the kit source, `kit/modinfo.json`,
 the built pak (`_config/devkit/set-pak-version.py <pak> <packVersion>`) and the manifest; `build-level-mod.py` reads `packVersion` itself. Seen in game
 15:51 (report `testcases/reports/2026-10-31_conan-krinik-versions-1.0.0.md`). A new build version → the same three steps for the kit paks.
+**Since 2026-11-02 18:53 the build version is 0.9.0** (`[OWNER]` 18:40 «Все моды Krinik опускаем до версии 0.9.0», plan 43): `kit/modinfo.json` and the kit copy 0.9.0; the
+pak's wrapper got the new `modinfo.json` + `manifest.json` MD5 by unpack → replace → repak V11 (the six platform files byte-equal, `repak hash-list` diff) — the
+same job as `_config/devkit/set-pak-version.py`, no kit cook needed.
 
 ## Stuck arrow copies (plan 36 W13, facts of 2026-10-31)
 

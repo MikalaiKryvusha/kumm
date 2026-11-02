@@ -30,6 +30,8 @@ Another mod that injects rows into these tables by its own controller (EAA write
 
 `modinfo.json` version = the BUILD version **1.0.0** since 2026-10-31 15:5x, in the built pak (`set-pak-version.py`) and in `build-level-mod.py` (reads
 `packVersion`) — `[OWNER]` «в сбоке моды Krinik ставим по версии сборки 1.0.0» · 2026-10-31 15:39, superseding 3.0.1 of 2026-10-28.
+**Since 2026-11-02 18:50 the build version is 0.9.0** (`[OWNER]` 18:40 «Все моды Krinik опускаем до версии 0.9.0», plan 43): `packVersion` 0.9.0, the pak rebuilt by
+`build-level-mod.py` (step 6: 3 × 10 000 rows equal to the generators, the Caverns chest table in place), its `modinfo.json` read back 0 / 9 / 0.
 
 ## Open
 

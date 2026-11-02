@@ -654,3 +654,22 @@ by tags, without a table of their own.
   seconds; the caverns (-154300, 6216) energy ≈ 33; the north-west (-300000, -260000) at night −26 … −30 (no ground point below −30 found yet).
 - The game day lasts 55.2 min (`ConanTimeOfDayManager:GetDayLength`), ≈ 2.3 min per game hour; `GetTimeOfDay` / `SetTimeOfDay` on `BP_TimeOfDayManager_C`.
 - The idle vanity camera hides the HUD: `FindFirstOf('GUIModuleController'):EnableVanityCameraMode(false)` before a HUD frame.
+- **Every named place of the map with its coordinates (2026-11-02 19:0x):** the DataTable `/Game/Systems/Map/MapMarkers_ConanSandbox` (424 rows; row fields
+  `Name` — Russian FText, `Location` — a vector in cm), read by `t:ForEachRow(function(name,row) … end)` from the remote; the English names come from
+  `Conan Exiles Mods/_text-extract-3.0.1/glossary-3.0.1.tsv` (en → ru). The game's 55 «Vista» places (the community's list of scenic spots —
+  guides4gamers / wand pages name them, without coordinates) are rows of that table: Oasis Overlook «Вид на оазис» (−253832, 16193, 1233), Canopy Outlook
+  (220425, 43688), Godsight Spire (−135060, 74567), Skyfall Ridge (−177478, −141986), Riversend (−193946, −32220), Shattered Springs (−193314, 21149), Eyelet
+  Lake (−179518, −170940), The Crowngrove (−256864, −10091), Oasis of Nekhet (−256741, 39991), Imi's Cradle (32653, 21022), Priestking's Retreat
+  (−28442, 27185) and more — the scripts `markers.lua` / `vistas.py` of that session, the method above is enough to redo them.
+- **The release screenshot stand (2026-11-02 19:15, `[OWNER]` «КАДР ОХУЕННЫЙ!!!!»):** the edge of the Oasis Overlook plateau (+9 m) at (−253750, 18150) — south of it the
+  plateau drops to the green Nekhet oasis floor (−45 m) with palms and water, the ruined temple on the left, dunes and rock pillars beyond; the hero faces
+  south (yaw ≈ 92), the owner's own camera (`config.lua`) and wheel distance 745; noon by `SetTimeOfDay(11.0)`. Height grids by `_config/terrain-probe.sh`
+  (rays only hit streamed terrain — run them with the hero within ≈ 1 km, far points return «?»). Scouting from above: the hero flying (`SetMovementMode(5)`)
+  300–500 m over a point, one frame each.
+- **Quick-bar kit without a crash:** `ShortcutBarInventory:RemoveItem(<occupied slot>, FName('None'), nil)` then `exec MakeMeAdmin` + `exec SpawnItem <id> <n>` —
+  the item lands in the first free quick slot; one slot per step. **A crash paid:** a loop of `BackpackInventory:RemoveItem(i, …)` over indices 120…0 together
+  with `ShortcutBarInventory:AddItemTemplate(id, slot, nil, n, true, 1, 0)` killed the game (EXCEPTION_ACCESS_VIOLATION in UE4SS, 2026-11-02 19:11, while the
+  owner stood in the world) — never call inventory functions on slots that may be empty, never in the owner's running game. Item ids: ItemTable rows
+  (`/Game/Items/ItemTable`, `row.Name:ToString()` Russian): Лук из кости дракона 54003, Лук из звездного металла 51586, Лук Бездны 43001, Меч Крома 50506,
+  Огромный меч Великого Волка 50543, Обсидиановая стрела 51503, Взрывная стрела 53617, Змеиная стрела 53651. Food and water — the fields
+  `GetHungerSystem().FoodCurrent / DrinkCurrent = 100.0`.

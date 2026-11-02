@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0448 · 2026-11-02 · ❌ · #conan #remote #inventory #crash #owner-game
+class: blind-native-calls-in-the-owners-game
+**Context:** the release screenshot stand; the owner had just placed the hero and his camera himself, in the game running in front.
+**Tried / did:** one remote script: `BackpackInventory:RemoveItem(i, …)` for i = 120…0 (most slots empty), then `ShortcutBarInventory:AddItemTemplate(id, slot, nil,
+n, true, 1, 0)` × 8 — none of these calls proven before on such slots.
+**Result:** ❌ — EXCEPTION_ACCESS_VIOLATION in UE4SS, the game died under the owner's hands (`[OWNER]` «БЛЯТЬ, КЛОД!!!» · «Я только стал нормально!» · «И камеру
+поставил!»). His save and camera `config.lua` survived; relaunch, same place. The safe way then: one occupied quick slot `RemoveItem` + `exec SpawnItem` per step,
+the process checked after each.
+**Lesson:** in a game the owner is IN, only calls already proven on the same kind of target, one per step, the game's life read after each; a sweep over
+indices or a new native signature goes to an agent's own run first (the sibling of EXP-0433: no sweeps in the owner's running game).
+**Trigger:** a remote Lua with a loop over slots / indices / objects while the owner's game is open.
+none-cheap: a guard would parse remote Lua for loops around native calls — the remote runs free code by design; the check is this entry + the game map line.
+
 ### EXP-0447 · 2026-11-02 · ❌→✅ · #conan #translation #locres #mods #sentinel
 class: translation-hits-a-service-literal
 **Lesson:** the build translates mod texts BY SOURCE TEXT, and a mod's own logic may compare against a localizable literal: Arrow Quick Swap checks

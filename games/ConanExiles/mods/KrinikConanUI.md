@@ -230,6 +230,9 @@ folder). Check: `cmp _config/player-report/collect_report.ps1 _unpacked/KrinikCo
 `modinfo.json` version = the BUILD version **1.0.0** since 2026-10-31 15:5x (kit source, `kit/modinfo.json`, the built pak by `_config/devkit/set-pak-version.py`) —
 `[OWNER]` «в сбоке моды Krinik ставим по версии сборки 1.0.0» · 2026-10-31 15:39, superseding 3.0.1 of 2026-10-28. The pause-menu mod list (Simple Modlist)
 reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/reports/2026-10-31_conan-krinik-versions-1.0.0.md`).
+**Since 2026-11-02 18:5x the build version is 0.9.0** (`[OWNER]` 18:40 «Все моды Krinik опускаем до версии 0.9.0», plan 43): `kit/modinfo.json` 0.9.0 (and the kit's copy),
+`kit-conanui-edit.py` `PACK_VERSION` «0.9.0» → the line under our logo in both menus; the pak rebuilt (kit edit + `kit-buildmod.py`); seen «0.9.0» on the
+main-menu frame 18:56 (TC `TC_conan_release_0.9.0_2026-11-02.md` V3).
 
 ## Tests and runs
 

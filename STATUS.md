@@ -127,6 +127,20 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-02 19:36 +03:00 — RELEASE 0.9.0 BUILT AND TESTED (plan `plans/43_conan_release_0.9.0.md`, cases `testcases/TC_conan_release_0.9.0_2026-11-02.md`):**
+> `[OWNER]` 18:40 «выпустим версию 0.9.0» · «Все моды Krinik опускаем до версии 0.9.0» · «Выпускаем сборку в том виде, в котором есть» (verbatim — the plan).
+> - ✅ pack `d329e2e` pushed: packVersion and every Krinik mod 0.9.0, three paks rebuilt (UI by the kit, Gameplay by `build-level-mod.py`, Archery by a modinfo
+>   repack), the menu logo line «0.9.0» seen at 4K, the launcher draws «3.0.1» / «0.9.0» under the logos (Cambria Bold, as the menu), the guide chapter 9
+>   «Известные проблемы и планы на 1.0.0», the cover (wallpapers) and the public README template at 0.9.0; deployed into the working game, `-Verify` 108/0.
+> - ✅ the PlayGround material folder `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_PlayGround\` (frames, cover, guide title page, PDF, `playground_post.txt`);
+>   the hero frame over the Nekhet oasis ACCEPTED (`[OWNER]` 19:20 «кадр принят»); a NEW PlayGround page recommended (the old one is the 2.2.3 build), the owner uploads.
+> - ✅ 19 volumes (12.74 GiB, hashes equal) in the PlayGround folder; install from them on the clean copy — `-Verify` clean, uninstall back to the 597-file set
+>   (report `testcases/reports/2026-11-02_conan-release-0.9.0.md`, V1–V6 S1–S2 Z1–Z3 pass); the public repo at 0.9.0 (`def3b3f`); pack `feb7e77`. The owner's
+>   game config and desktop shortcut restored after the runs.
+> - ⏳ OPEN: the GitHub release v0.9.0 with the volumes — `gh release create` refused by the permission classifier (the owner's word or his command; notes
+>   `github_release_notes.md` in the PlayGround folder); the PlayGround page (the owner); `D:/Temp/krinik_release_20261102` + `…b` (65 GB) to remove —
+>   the recursive delete refused. Machine lock released.
+> - ❌ I crashed the owner's game 19:11 by a blind inventory sweep (EXP-0448) — relaunched, his save and camera intact.
 > **NOW 2026-11-02 13:25 +03:00 (chat 03118042) — the build is whole again** (66 paks, 9 Lua mods; the store holds `arc_wave = 1`; the oasis save lost its 2 iron arrows):
 > - ✅ **The arrow-choice list on a draw** (`[OWNER]` 12:49–12:56): shows only with ≥ 2 arrow kinds, never with one or with the hub row «Выбор стрел при натяжении»
 >   off — L1–L4 pass, packs `6a7cca5`, `c415cbe` (guide), report `testcases/reports/2026-11-02_conan-arrow-choice-and-bow-stance.md`.
@@ -136,6 +150,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - ✅ **Ours, fixed 13:2x:** the aim zoom no longer stays through a stamina break (the re-draw hold needs a shot since the aim entry; S6, S7 pass).
 > - ❓ **The shock wave:** the row «Ударная волна полного заряда» drives `P_bow_powercharge_release`, which draws nothing on screen; the owner's «sprite by the bow»
 >   was not reproduced in vanilla nor in the build (W4, W5 — `[OWNER]` 12:48 «нету спрайта» · «попробовал и 100% и ВЫКЛ - нету его»). The row's fate — interview #031 (`interviews/interview_031_conan_shock_wave_row.md`, ❓ waits; recommended: remove the row until the sprite is found).
+> **ORDER 2026-11-02 15:46 — until the owner's evening play, no build code:** `[OWNER]` «давай дальше такие работы, которые не ппишут код сборки, а тестирование,
+> изучение, поиск причин, запись знание». Work = test runs, recon, cause hunts, notes; a found defect is filed with its fix plan, the code waits for his word.
 > **NOW 2026-11-02 15:1x +03:00 (chat aa2bfa46) — packs `008faf4`, `a848a58` pushed; machine lock released, my game closed, the owner's camera `config.lua` byte-equal:**
 > - ✅ **Bug 77 DONE** — «E Взять» asks the GAME's own pickup probe (`EnvironmentFunctionLibrary:PickupGatheringOneInstance`, a static — plan 42's «not a UFunction»
 >   corrected) once a second, 5 / s while shown, no near list: 0.3–1.2 s to show, 0.3–0.4 s to hide, 0.9 s 150 m away; the E rim fades with the plate; the plate on
