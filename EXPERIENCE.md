@@ -94,7 +94,7 @@
 ### EXP-0445 · 2026-11-02 · ✅ · #conan #control-case #vanilla #owner-report #stand
 class: control-before-fix
 **Lesson:** two owner reports of the day turned out to be the game itself once the control was run by halves: «the bow stays drawn when stamina runs out»
-(bug 76) is the vanilla combat-ready stance after ANY draw (≈ 10–11 s), and the «shock-wave sprite» was absent in vanilla and in the build alike. The
+(bug 76) is the vanilla combat-ready stance after ANY draw (≈ 10–11 s), and the «shock-wave sprite» was absent in vanilla and in the build alike. The **CORRECTION 2026-11-02 13:39 — UNPROVEN: the poses were compared from BEHIND the hero, where the string's shape is hidden; the owner's screenshot (front) shows a TRIANGULAR string (`[OWNER]` 13:38 «ТАК А ТИТЕВУ ТЫ ВИДЕЛ ИЗ СКРИНА … ОНА ТРЕУГОЛЬНАЯ!!!»). Re-check from the front pending.**
 halving order that answered in ≈ 10 minutes: our Lua out → our pak out → every pak and Lua out but the remote (6 s world load) → the same action as a PLAIN
 case (full stamina) to see whether the symptom needs the trigger at all. Without our mods the game shows the modal «Играть без подключения» — close it
 before any input, or the case runs into a dialog.

@@ -156,7 +156,7 @@ on `b_R_prop` (its emitter E0 is disabled in the game's own asset; E1 white 0.15
 `P_arrow_trail_powershot` (E0–E3 ribbon trail, E4 the rings `M_particle_powershot_circles` — rings round the arrow, then a dome over it). In the aim view of our
 camera the hand and the bow's lower part sit under the quick bar at the screen's bottom edge. Detail and the open question (the owner's «sprite by the bow») —
 `games/ConanExiles/mods/KrinikConanArchery.md` → Open.
-Bow combat-ready stance (vanilla, no paks, 2026-11-02 13:20–13:21): after ANY draw (a plain one or one broken by stamina) the hero holds the bow horizontal
+Bow combat-ready stance (vanilla, no paks, 2026-11-02 13:20–13:21): after ANY draw (a plain one or one broken by stamina) the hero holds the bow horizontal **CORRECTION 2026-11-02 13:39 — UNPROVEN: the poses were compared from BEHIND the hero, where the string's shape is hidden; the owner's screenshot (front) shows a TRIANGULAR string (`[OWNER]` 13:38 «ТАК А ТИТЕВУ ТЫ ВИДЕЛ ИЗ СКРИНА … ОНА ТРЕУГОЛЬНАЯ!!!»). Re-check from the front pending.**
 before him with the string at his right hand for ≈ 10–11 s after RMB up, then lowers it (left hand, slanted, string straight) — it looks like a drawn string
 (bug 76). A stamina break mid-draw: `AdjustStaminaCurrent(-200)` (HUD −60/99); the draw cost per hold — `ReceiveChargeHoldStaminaCostModifier`. Without our
 mods the game shows the modal «Играть без подключения» after world entry (a click on «Подтвердить» closes it). Hero inventory edits by the remote:

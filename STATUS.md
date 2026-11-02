@@ -130,7 +130,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **NOW 2026-11-02 13:25 +03:00 (chat 03118042) — the build is whole again** (66 paks, 9 Lua mods; the store holds `arc_wave = 1`; the oasis save lost its 2 iron arrows):
 > - ✅ **The arrow-choice list on a draw** (`[OWNER]` 12:49–12:56): shows only with ≥ 2 arrow kinds, never with one or with the hub row «Выбор стрел при натяжении»
 >   off — L1–L4 pass, packs `6a7cca5`, `c415cbe` (guide), report `testcases/reports/2026-11-02_conan-arrow-choice-and-bow-stance.md`.
-> - ❓ **Waits for the owner — the bow pose after a stamina break (bug 76):** it is the GAME's own combat-ready stance after any draw (≈ 10–11 s, then the bow
+> - ❓ **Waits for the owner — the bow pose after a stamina break (bug 76):** it is the GAME's own combat-ready stance after any draw (≈ 10–11 s, then the bow **CORRECTION 2026-11-02 13:39 — UNPROVEN: the poses were compared from BEHIND the hero, where the string's shape is hidden; the owner's screenshot (front) shows a TRIANGULAR string (`[OWNER]` 13:38 «ТАК А ТИТЕВУ ТЫ ВИДЕЛ ИЗ СКРИНА … ОНА ТРЕУГОЛЬНАЯ!!!»). Re-check from the front pending.**
 >   is lowered) — seen in vanilla (S4). His choice asked in chat: keep it · lower the bow at once on a stamina break · shorten the stance after any shot.
 > - ✅ **Ours, fixed 13:2x:** the aim zoom no longer stays through a stamina break (the re-draw hold needs a shot since the aim entry; S6, S7 pass).
 > - ❓ **The shock wave:** the row «Ударная волна полного заряда» drives `P_bow_powercharge_release`, which draws nothing on screen; the owner's «sprite by the bow»

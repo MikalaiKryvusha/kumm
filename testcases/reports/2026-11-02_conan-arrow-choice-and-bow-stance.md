@@ -32,7 +32,7 @@ hub row `arc_ammo_list` (Lua `krinik_mod_settings.lua` + kit `kit-krinik-modsett
 - L3 pass — row off: meter 0 / 503, opacity 0.0 after the wheel's reveal.
 - L4 pass — the row «Выбор стрел при натяжении» with its «i», checked by default.
 - S1 reproduced — the owner's pose after a stamina break; S2, S3 — the same without our Lua and our pak; S4 — the same in vanilla after a PLAIN draw; the
-  stance lasts ≈ 10–11 s, then the hero lowers the bow: the pose is the game's own combat-ready stance.
+  stance lasts ≈ 10–11 s, then the hero lowers the bow: the pose is the game's own combat-ready stance. **CORRECTION 2026-11-02 13:39 — UNPROVEN: the poses were compared from BEHIND the hero, where the string's shape is hidden; the owner's screenshot (front) shows a TRIANGULAR string (`[OWNER]` 13:38 «ТАК А ТИТЕВУ ТЫ ВИДЕЛ ИЗ СКРИНА … ОНА ТРЕУГОЛЬНАЯ!!!»). Re-check from the front pending.**
 - S5 fail (ours) — the aim zoom kept through the stamina break by `hold_aim_on_redraw`.
 
 **Found.**

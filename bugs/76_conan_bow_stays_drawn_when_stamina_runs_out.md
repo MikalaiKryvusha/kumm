@@ -26,14 +26,14 @@ break made by `AdjustStaminaCurrent(-200)` mid-draw — HUD stamina −60/99):
 - KrinikConanArchery Lua out — the same pose; its pak out too — the same; NO paks and only the remote Lua — the same, AND the same pose after a plain
   1.2 s draw with full stamina;
 - vanilla timing (30 s at 10 fps): the stance holds ≈ 10–11 s after RMB up, then the hero lowers the bow himself (left hand, slanted, string straight).
-**So the pose is the game's own combat-ready stance after any draw, not a stamina defect.** Found on the way — OURS: with RMB held through the break,
+**So the pose is the game's own combat-ready stance after any draw, not a stamina defect.** Found on the way — OURS: with RMB held through the break, **CORRECTION 2026-11-02 13:39 — UNPROVEN: the poses were compared from BEHIND the hero, where the string's shape is hidden; the owner's screenshot (front) shows a TRIANGULAR string (`[OWNER]` 13:38 «ТАК А ТИТЕВУ ТЫ ВИДЕЛ ИЗ СКРИНА … ОНА ТРЕУГОЛЬНАЯ!!!»). Re-check from the front pending.**
 `hold_aim_on_redraw` (KrinikConanArchery `on_fov_target`) reads the montage's FOV reset as a re-draw and keeps the aim zoom while the hero no longer draws
 (log «прицел: новое натяжение с ПКМ — обзор держим 75.0°», case S5). Candidates: our pak's montage edit (the aim notify runs to the montage end — an interrupted draw may never reach the end), our Lua «aim kept on a
 new draw» / `watch_release` keeping the aim while RMB is held, or vanilla.
 
 ## Root cause / Hypotheses
 
-Vanilla: the bow's combat-ready stance (≈ 10–11 s after any draw). Hypotheses (1) our montage edit and (2) our Lua — refuted by S2/S3. The owner decides
+Vanilla: the bow's combat-ready stance (≈ 10–11 s after any draw). Hypotheses (1) our montage edit and (2) our Lua — refuted by S2/S3. The owner decides **CORRECTION 2026-11-02 13:39 — UNPROVEN: the poses were compared from BEHIND the hero, where the string's shape is hidden; the owner's screenshot (front) shows a TRIANGULAR string (`[OWNER]` 13:38 «ТАК А ТИТЕВУ ТЫ ВИДЕЛ ИЗ СКРИНА … ОНА ТРЕУГОЛЬНАЯ!!!»). Re-check from the front pending.**
 what he wants (asked 2026-11-02 13:2x in chat): keep the game's stance · lower the bow at once when stamina breaks a draw · shorten the stance after any shot.
 Independent of his answer: the aim zoom kept through the break (S5, ours) — FIXED 2026-11-02 13:2x: the re-draw hold needs a shot since the aim entry (S6, S7 pass).
 
