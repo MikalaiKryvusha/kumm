@@ -128,6 +128,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > commands, what to verify first.
 
 > **CHAT f73138c5 CLOSED 2026-11-02 11:3x +03:00 (soft, `[OWNER]` «закрывай»). FIRST in the next chat, in order:**
+> 0. **The shock wave is NOT seen at 100 %** (`[OWNER]` 2026-11-02 12:26 «ты сам смотрел? разве не видишь?» · «что волны не было» · «выстрел на 6-й секунде
+>    выполнен, волны нет» — clip `01_volna_100.mp4`, folder 60; I showed it without watching it). NOT the tracer rings `M_particle_powershot_circles`: those are off
+>    by the owner's old word (`[OWNER]` 12:27 «кольца полностью выключить я просил, давно») — keep them off. Facts: a full-charge LMB release spawns
+>    `P_bow_powercharge_release` on the hero's `b_R_prop` (remote 11:10); its colour table read ORIGINAL (0.5, 1, 0.5) at 11:19, yet no wave on the clip, and
+>    `tune_wave` logged nothing in that session. Next: find why the release system draws nothing (does it render in a game with our Archery Lua off? —
+>    control case, HOUSE_RULES rule 24; then which of our edits hides it), and watch the WHOLE clip frame by frame before showing it.
 > 1. The owner's verdict on review folder 60 (`D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\60_udarnaya_volna_zamedlenie`, two clips 120 fps ×5: the
 >    shock wave at 100 % and ВЫКЛ) → cases W1/W2 of `TC_conan_hub_rows_audit_2026-11-01.md`. If the ring stays at ВЫКЛ — `tune_wave` (KrinikConanArchery
 >    `main.lua`) scales the wrong tables: look at `P_arrow_trail_powershot`'s rings (`M_particle_powershot_circles`, `tune_templates`) next.
