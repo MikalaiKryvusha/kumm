@@ -30,7 +30,9 @@
    `FindFirstOf`, widget walks) — no more often than an event and never in a per-frame loop. A mod measures itself: `os.clock` around its
    handlers, the sum and the worst call to its log once a minute. Accepting an edit — an A-B-A flight: median `MsCPUBusy` and stutters no
    worse than without the mod. The budget — `MASTER_PLAN.md`.
-8. **Other authors' mods are fixed natively.** The mod has its own setting — change its default value in our shipment. Otherwise — edit its
+8. **Other authors' mods are fixed natively.** The mod has its own setting — change its default value in our shipment; before any other way, look for that
+   setting first (the owner's remarks on a mod's widget — the XP line of Hosav, the damage meter — start with the mod's own options) (`[OWNER]` 2026-11-02 09:01
+   «если есть уже настройки по тем вещам, о которых я говорю - тогда через них настраиваем, и это становится значениями по-умолчанию в поставке сборки»). Otherwise — edit its
    pak directly (`retoc to-legacy` → UAssetGUI JSON → edit → `retoc to-zen`, techniques in `ConanExiles/_config/devkit/build-level-mod.py`),
    by a script next to the pak, so it can be re-applied after a mod update; strings in bytecode — the same way. An edited mod is marked
    **KRINIK MODIFIED** in the shipment (storefront, mod list, its `modpack.json` entry). A Lua UI fix — only when the asset will not yield:
