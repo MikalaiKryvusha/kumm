@@ -250,6 +250,8 @@ reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/re
   появляющийся опыт настраивать время его обображения нашим окном настройки модов?» — the second is a QUESTION (answered in chat: yes, likely — like the
   `ui_shout_hold` row), nothing built (EXP-0438). First: recon which widget draws the XP popup (vanilla HUD or Hosav's `UIMod_Hosav`) — a remote `dump` while
   XP is gained; then a raise by the widget's slot (native, rule 8) and, if the owner says so, a hub row «сколько держится опыт на экране».
+  **08:58 the widget named by his frame:** the kill line «Каппа / +85 XP» (grey text over the killed creature, mid-screen right above the hero's head) —
+  `[OWNER]` «вот виджет опыта, его бы сельно вверх, в центр верхей половины экрана»: the target is the CENTRE OF THE UPPER HALF of the screen.
 
 - **The owner's word 2026-11-02 08:54 on the corpse strip** (`WBP_ContainerInfo`, his frame: «Труп · Разделать труп · Труп» over a dark band): `[OWNER]` «можно
   эти плашки 1) сделать меньше на 25% 2) фон сдлеать более прозрачным?» — NOT DONE. Way: the kit (`kit-conanui-edit.py`, the strip block): the strip
