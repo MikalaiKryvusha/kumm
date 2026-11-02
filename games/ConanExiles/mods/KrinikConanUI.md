@@ -238,6 +238,11 @@ reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/re
 
 ## Open
 
+- **The owner's words 2026-11-02 08:55 on the on-screen XP gain:** `[OWNER]` «появляющийся опыт на экране поднять выше? сейчас он перекрывает героя» · «можно
+  появляющийся опыт настраивать время его обображения нашим окном настройки модов?» — the second is a QUESTION (answered in chat: yes, likely — like the
+  `ui_shout_hold` row), nothing built (EXP-0438). First: recon which widget draws the XP popup (vanilla HUD or Hosav's `UIMod_Hosav`) — a remote `dump` while
+  XP is gained; then a raise by the widget's slot (native, rule 8) and, if the owner says so, a hub row «сколько держится опыт на экране».
+
 - **The owner's word 2026-11-02 08:54 on the corpse strip** (`WBP_ContainerInfo`, his frame: «Труп · Разделать труп · Труп» over a dark band): `[OWNER]` «можно
   эти плашки 1) сделать меньше на 25% 2) фон сдлеать более прозрачным?» — NOT DONE. Way: the kit (`kit-conanui-edit.py`, the strip block): the strip
   `OverlaySlot_5` content scaled to 0.75 (its render scale or the text sizes and paddings × 0.75 — the padding L/R 120 and the brush margins 0.40 scale with
