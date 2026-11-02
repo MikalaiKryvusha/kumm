@@ -155,7 +155,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > running game at 08:43 (his own clicks in the log): do not drive it**. Colour names shortened (`[OWNER]` frame 08:42 «темно-коричне» cut) — needs a restart.
 > **Owner's 08:44–08:45 decisions (plan 40 I6.2, recorded verbatim there):** a chooser opens AT ITS FIELD, never at the cursor (Lua `place_at_field` written,
 > `[NOT-TESTED]`); the palette → a COLOUR RECTANGLE (any colour by a click) instead of 16 swatches — NOT built (steps in plan 40). KUMM commit `48571ce` NOT
-> pushed: the auto-mode classifier refused that push («Out-of-Place Publication») — push it with the next commit.
+> pushed: the auto-mode classifier refused that push («Out-of-Place Publication») — push it with the next commit. **Resolved 08:53:** the refusal was
+> right — the clean copy's release name was in three public files; scrubbed, the commits folded, pushed `3d4b427` (EXP-0440, `scrub-local.json` terms).
+> **Colour rectangle:** texture imported (1024 × 512), kit rebuilt with it 08:5x — NOT deployed / NOT seen (the owner is in the running game; a deploy needs
+> it closed). **OWNER'S NEW WORD 08:54 — the corpse strip 25 % smaller, its backing more transparent** (notes `KrinikConanUI.md` → Open, the way written) —
+> NOT DONE. Order for the next run: deploy the rectangle pak → D5–D10 + the rectangle → the corpse strip → K1–K7 on the clean copy.
 > **The owner's launcher words 08:35–08:37 → HOUSE_RULES 25–26:** «Играть» closes the launcher, «Удалить» keeps it open (code done, launcher rebuilt,
 > `[NOT-TESTED]`); install / uninstall are tested on a COPY of the only Conan game folder in `D:\Instals\` (its name stays out of this public repository) — copied to
 > `D:\Games\Conan_Exiles_3_0_1_clean_test` (597 files, 58.3 GB); cases K1–K7 `testcases/TC_conan_clean_copy_install_launcher_2026-11-02.md`. Then the list's

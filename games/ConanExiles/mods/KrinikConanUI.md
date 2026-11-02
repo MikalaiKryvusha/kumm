@@ -238,6 +238,12 @@ reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/re
 
 ## Open
 
+- **The owner's word 2026-11-02 08:54 on the corpse strip** (`WBP_ContainerInfo`, his frame: «Труп · Разделать труп · Труп» over a dark band): `[OWNER]` «можно
+  эти плашки 1) сделать меньше на 25% 2) фон сдлеать более прозрачным?» — NOT DONE. Way: the kit (`kit-conanui-edit.py`, the strip block): the strip
+  `OverlaySlot_5` content scaled to 0.75 (its render scale or the text sizes and paddings × 0.75 — the padding L/R 120 and the brush margins 0.40 scale with
+  it), `Border_Underlay` brush colour alpha 0.8 → a lower value (show variants to the owner: 0.6 / 0.45 / 0.3 on one frame); then the kit build, a frame at
+  the corpse (stand `_config/strip-open.sh`) before / after.
+
 - The FPS counter cannot be switched off alone since the merge (it had its own `enabled.txt`) — its row in the hub exists (skeleton), the store and the switch are plan 38 phase 2.
 - The hub's «Закрыть» button does nothing on a click (a bare `WBP_ButtonBase`; the vanilla popups bind theirs natively) — Esc works through the pause section.
 - The HUD blink section: tested 2026-10-30 (H1–H10, `testcases/reports/2026-10-30_conan-hud-blink-early.md`); the dim start 0.25 waits for the owner's eye;
