@@ -38,11 +38,11 @@ hub row `arc_ammo_list` (Lua `krinik_mod_settings.lua` + kit `kit-krinik-modsett
 **Found.**
 - The shock-wave row scales an effect that never shows on screen (`P_bow_powercharge_release`); the sprite the owner remembers was not reproduced (W5).
 - Bug 76 is vanilla behaviour (the stance), the owner's choice of what to do is asked.
-- New defect, ours: the aim zoom held through a stamina break (S5) — not fixed yet.
+- New defect, ours: the aim zoom held through a stamina break (S5) — fixed 13:2x (`shots_at_aim`), S6 and S7 pass (13:27).
 
 **Traces.** Scratchpad `D:\Temp\claude\d--work-ai-sandbox-KUMM\03118042-689e-4a54-8ba0-f295ff725b9d\scratchpad\w\` — `w3_ctrl.mkv`, `w3b_norings.mkv`,
 `l1.mkv`, `l2.mkv`, `l3.mkv`, `s1b.mkv`, `s2.mkv`, `s3.mkv`, `s4.mkv`, `van_stance.mkv`, frame sheets and `idle_vs_after.webp`, `van_pair.webp`; review folder 61
 (`D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\61_volna_eto_kolca`); `UE4SS.log` lines «выбор стрел …» 13:06–13:12.
 
 **Verdict.** partial — the arrow-choice list passes L1–L4; the shock wave and the bow stance are answered by observation (vanilla) and wait for the owner's
-word; S5 (ours) is open.
+word; S5 (ours) fixed — S6, S7 pass.

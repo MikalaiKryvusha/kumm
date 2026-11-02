@@ -132,7 +132,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   off — L1–L4 pass, packs `6a7cca5`, `c415cbe` (guide), report `testcases/reports/2026-11-02_conan-arrow-choice-and-bow-stance.md`.
 > - ❓ **Waits for the owner — the bow pose after a stamina break (bug 76):** it is the GAME's own combat-ready stance after any draw (≈ 10–11 s, then the bow
 >   is lowered) — seen in vanilla (S4). His choice asked in chat: keep it · lower the bow at once on a stamina break · shorten the stance after any shot.
-> - 🔴 **Ours, to fix:** the aim zoom kept through a stamina break with RMB held (`hold_aim_on_redraw`, case S5).
+> - ✅ **Ours, fixed 13:2x:** the aim zoom no longer stays through a stamina break (the re-draw hold needs a shot since the aim entry; S6, S7 pass).
 > - ❓ **The shock wave:** the row «Ударная волна полного заряда» drives `P_bow_powercharge_release`, which draws nothing on screen; the owner's «sprite by the bow»
 >   was not reproduced in vanilla nor in the build (W4, W5 — `[OWNER]` 12:48 «нету спрайта» · «попробовал и 100% и ВЫКЛ - нету его»). The row's fate — his word.
 > - Owner's voice for calls: Russian, «Николай», NOT Irina and NOT eugene — the right voice was set up in another project (`[OWNER]` 12:46 «голос мы настраивали

@@ -35,7 +35,7 @@ new draw» / `watch_release` keeping the aim while RMB is held, or vanilla.
 
 Vanilla: the bow's combat-ready stance (≈ 10–11 s after any draw). Hypotheses (1) our montage edit and (2) our Lua — refuted by S2/S3. The owner decides
 what he wants (asked 2026-11-02 13:2x in chat): keep the game's stance · lower the bow at once when stamina breaks a draw · shorten the stance after any shot.
-Independent of his answer: the aim zoom kept through the break (S5) is our defect to fix — the re-draw hold must require a draw actually under way.
+Independent of his answer: the aim zoom kept through the break (S5, ours) — FIXED 2026-11-02 13:2x: the re-draw hold needs a shot since the aim entry (S6, S7 pass).
 
 ## Fix plan
 
