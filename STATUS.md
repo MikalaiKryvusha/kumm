@@ -155,6 +155,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > небольшой скоростью вектора отпрыгивания - то есть, чуть-чуть отталкивается от поверхности, по которой ползёт, в направлении вектора нормали, и немножко - вверх».
 > Way: KrinikConanGameplay (read its notes first); recon the climbing state and the jump input in it (the game's climb component, the wall normal), then a jump =
 > leave climbing + a small launch along the normal plus a little up; a hub row for the push strength if it fits.
+> **BUG 09:10 (the owner's, not filed as a doc yet — file `bugs/75_…` first):** `[OWNER]` «при заборе предмета выделенного в окне квик лута по F на мгновение
+> контур выбора перемещается в последнюю нижнюю правую клетку - некрасиво, он прыгает туда сюда» · «это баг, нужно будет испрравить». The quick-loot window
+> (`W_QuickLootPanel`, our kit edit + `krinik_ui_fixes` hooks on `SlotItemAddedOrRemoved`): a 60 fps clip of an F take first (EXP-0430), then the control case
+> without our section (HOUSE_RULES 24) — find who moves the selection.
 > **NOW (chat of 2026-11-02 from 07:17, dayloop by `[OWNER]` 07:21 «работай над сборкой Конана автономно»):** the left-list seam FIXED (L0–L2); the
 > owner's 07:20–07:23 decisions on mockups 8–9 applied (palette and busy-key refusal as popups over the window, «Принять», no accepted-key caption — folder 57
 > re-shot, plan 40 I6.2). **Plan 40 I6.3 DONE 07:56:** the Xevyr hub has all five pages (Al-Merayah 13 rows, Lore & Loot 3, Proximity Party 4, Simple Minimap 6,
