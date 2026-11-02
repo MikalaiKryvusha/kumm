@@ -221,8 +221,8 @@ Basis: recon trace of Simple Minimap's SaveSettings (literalColor ← the window
 
 | ID | Situation | Action | Expected | Status | Observed |
 |---|---|---|---|---|---|
-| D5 | the kit rebuilt | the Simple Minimap and Damage Meter pages | «Цвет миникарты» first on its page with the mod's colour; «Показ времени» «Сервер»; «Сворачивать в угол» «Вверху слева»; rows in the author's order | — | — |
-| D6 | D5 | a click on «Сворачивать в угол» | the option list opens over the window at the box (four corners, the chosen one rimmed), no row moves | — | — |
+| D5 | the kit rebuilt | the Simple Minimap and Damage Meter pages | «Цвет миникарты» first on its page with the mod's colour; «Показ времени» «Сервер»; «Сворачивать в угол» «Вверху слева»; rows in the author's order | partial | 08:42 frame: all as expected; seam — the list arrow «▾» drew as «?» (not in PT Serif) → «›» turned 90° in Lua, not yet seen; the owner's frame 08:42 — a colour name cut («темно-коричне») → short names, not yet seen |
+| D6 | D5 | a click on «Сворачивать в угол» | the option list opens over the window at the box (four corners, the chosen one rimmed), no row moves | partial | 08:42 frame: the list over the window, four corners, the chosen one rimmed, rows in place; the owner 08:44: it opened at the CURSOR — must open at its field → `place_at_field`, not yet seen |
 | D7 | D6 | pick «Внизу справа», «Сохранить» | slot `RestoreAnchor` 3 | — | — |
 | D8 | D5 | «Показ времени» → «Игра», «Сохранить» | slot `TimetoShow` 2 | — | — |
 | D9 | D5 | «Цвет миникарты» → «синий», «Сохранить» | slot `literalColor` RGB = the palette's blue, alpha 0.69 kept | — | — |
