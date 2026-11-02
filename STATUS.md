@@ -132,7 +132,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   off — L1–L4 pass, packs `6a7cca5`, `c415cbe` (guide), report `testcases/reports/2026-11-02_conan-arrow-choice-and-bow-stance.md`.
 > - ✅ **The string frozen drawn after a draw at low stamina (bug 76) — FIXED 13:5x:** the bow's string animation stayed on the last frame of the charge
 >   (a triangle to the chest, `[OWNER]` 13:38 «ОНА ТРЕУГОЛЬНАЯ!!!»); KrinikConanArchery calls the game's own string settle at the end of the attack — B1–B3
->   pass. My 13:2x «vanilla stance» claim was drawn from behind and is corrected in every place it stood. The owner's own play — pending.
+>   pass. My 13:2x «vanilla stance» claim was drawn from behind and is corrected in every place it stood. The owner confirmed 13:55 «пофиксилось, я протестил» — bug 76 DONE.
 > - ✅ **Ours, fixed 13:2x:** the aim zoom no longer stays through a stamina break (the re-draw hold needs a shot since the aim entry; S6, S7 pass).
 > - ❓ **The shock wave:** the row «Ударная волна полного заряда» drives `P_bow_powercharge_release`, which draws nothing on screen; the owner's «sprite by the bow»
 >   was not reproduced in vanilla nor in the build (W4, W5 — `[OWNER]` 12:48 «нету спрайта» · «попробовал и 100% и ВЫКЛ - нету его»). The row's fate — his word.

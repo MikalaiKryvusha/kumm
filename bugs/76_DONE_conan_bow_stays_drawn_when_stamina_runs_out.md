@@ -1,6 +1,6 @@
 # Bug 76 — the bow stays in the hero's hands with the string drawn when stamina runs out mid-draw
 
-**Status:** 🔧 FIXED 2026-11-02 13:5x, verified B1–B3 in the build (the owner's own play pending) · **Severity:** S2 (a visible stuck pose in core gameplay) · **Version/build:** pack ConanExiles `c817b4e`, KrinikConanArchery 1.0.0
+**Status:** ✅ DONE 2026-11-02 13:55 — fixed 13:5x, B1–B3 pass, the owner confirmed in his own play · **Severity:** S2 (a visible stuck pose in core gameplay) · **Version/build:** pack ConanExiles `c817b4e`, KrinikConanArchery 1.0.0
 (Lua 0.7.0: aim kept on a new draw, leaving the aim on RMB release, the native draw montage edited in the kit pak) · **When/context:** 2026-11-02 12:50 +03:00,
 the owner's play in the full build (tossed mid-task, during the shock-wave hunt)
 **Fixing:** this session, right after the arrow-choice flicker recording
@@ -63,7 +63,15 @@ Hygiene: Lua syntax. Functional run: B1–B3 in the live build by real RMB/LMB w
 
 ## Decisions made without the owner
 
-— (filled at closing)
+- `[AI]` The event: the end of the attack (`OnSubstateChanged_Attacking`, Entered false) + 100 ms, not the exhaustion events — it covers any cut draw, and the
+  check (bow montage off, string still on the charge animation) keeps a shot and a long hold untouched (B2, B3).
+- `[AI]` The remedy: the game's own `AnimNotify_bow_secondary_settle`, not a hand-picked animation — the same path a normal release takes.
+- `[AI]` The fix logs its first `log_shots` calls only (the mod's usual cap).
+
+## ✅ STATUS: DONE (2026-11-02 13:55 +03:00)
+
+Hygiene: Lua syntax (`luac -p`). Functional run: B1–B3 by the agent 13:52–13:53 (real RMB/LMB, string state by the remote, a frame); the owner's own play
+13:54–13:55 — `[OWNER]` «пофиксилось, я протестил»; the mod's log shows the fix firing at 13:54:39, 13:54:41, 13:54:46, 13:55:09 (his draws at low stamina).
 
 ## Links
 
