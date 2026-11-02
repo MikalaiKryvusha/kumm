@@ -25,7 +25,9 @@ it stays on after the view leaves the pickup.
 
 ## Fix plan
 
-1. Cause: the near set depends on a slow round robin. Rebuild it by the hero's MOVE, not by the clock: when the hero has moved ≥ 3 m since the last full pass
+**The owner's direction 14:20 (supersedes the near-set idea below):** `[OWNER]` «ДА НЕ СПИСКО БЛИЗКИХ УЖНО ПРОВЕРЯТЬ!» — no near list at all: check WHAT THE CROSSHAIR LOOKS AT. A line trace from the camera through the crosshair (the game's pickup reach, our camera's boom accounted for) returns the hit component and its instance index (`HitResult.Component`, `Item`); a `PickupFoliageComponent_C` hit with a live instance → the plate; anything else → no plate. One trace per check, no list, no round robin. If the visibility channel misses foliage instances, trace the channel the game's own pickup uses (read it from the hero's interaction code first).
+
+1. (superseded) Cause: the near set depends on a slow round robin. Rebuild it by the hero's MOVE, not by the clock: when the hero has moved ≥ 3 m since the last full pass
    (or on the first check after a teleport), re-check ALL components at once (measure: 281 × `GetInstancesOverlappingSphere` — was 0.18 ms per 20 → ≈ 2.5 ms
    once per 3 m of walking, inside the 1 ms rule only if spread: then a full pass split over the next 3 checks), and keep the slice for the idle hero.
 2. The late hide: log the moment the probe stops hitting and the moment the plate fades; check the fade (0.2 s) and whether a hit on the SAME instance after the
