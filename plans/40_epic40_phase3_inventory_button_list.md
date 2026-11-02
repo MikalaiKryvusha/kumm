@@ -129,7 +129,9 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
             **OWNER'S DECISIONS 2026-11-02 07:20–07:21 +03:00 on mockups 8–9 (review folder 57):** `[OWNER]` «не нужно дыигать другие опции, выбор цвета открывать
             поп=апом поверх окна, не жвигая другие пункты» — the palette is a POPUP layered over the window at the swatch (below the row, or above it when the
             panel has no room below); no row of the page moves, opens or collapses for it. `[OWNER]` «притнята F2, сохраниться - эту строоку убрать» — an accepted
-            key shows only in its box, no caption line under it (the refusal line «Эта клавиша уже занята» stays). `[OWNER]` 07:22 «кнопка не Выбрать. а Принять» — the palette's buttons are «Отмена» · «Принять». Mockups re-shot 2026-11-02 07:22 +03:00, folder 57 refreshed;
+            key shows only in its box, no caption line under it (the refusal line «Эта клавиша уже занята» stays). `[OWNER]` 07:22 «кнопка не Выбрать. а Принять» — the palette's buttons are «Отмена» · «Принять». `[OWNER]` 07:23 «эта клававиша уже занаята - не строчкорй показывать, которая двигает другие - а поп-апом, который
+            показывается на 5 секунд и скрывается» · «фейдом открывается и фейдом скрывается» — the refusal is a POPUP at the key box over the window: fade in, 5 s, fade out
+            (fade 0.2 s like the build's other fades — `[AI]`); no row moves. Mockups re-shot 2026-11-02 07:22 +03:00, folder 57 refreshed;
             the look as a whole waits for his word.
       - [ ] I6.3 Binding per mod in Lua (an adapter per page: `read()` from the mod's SaveGame object / controller fields, `write(values)` into the same object +
             the mod's own save and apply path — recon «Hard to bind» item 3): Damage Meter first (13 rows; the window's `SaveSettings` path pushes into
