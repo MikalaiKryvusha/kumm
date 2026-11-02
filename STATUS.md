@@ -147,6 +147,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 2. Plan 40.3 D1–D4 — the Damage Meter page: the kit is rebuilt with its rows and deployed (pack, `_unpacked/KrinikConanUI/KrinikConanUI.pak` 10 000 867 B,
 >    UNCOMMITTED — the pak is git-ignored, nothing to commit), the adapter is in `krinik_mod_settings.lua` (`[NOT-TESTED]`). The Xevyr hub cannot be opened by the
 >    remote (`_G.__krinik_hub` lives in KrinikConanUI's own Lua state — EXP-0438): switch the list's «Моды Xevyr'а» entry to `hub = "xevyr"` for a test, or a shared variable.
+> **NOW (chat of 2026-11-02 from 07:17, dayloop by `[OWNER]` 07:21 «работай над сборкой Конана автономно»):** the left-list seam FIXED (L0–L2); the
+> owner's 07:20–07:23 decisions on mockups 8–9 applied (palette and busy-key refusal as popups over the window, «Принять», no accepted-key caption — folder 57
+> re-shot, plan 40 I6.2). **Plan 40 I6.3 DONE 07:56:** the Xevyr hub has all five pages (Al-Merayah 13 rows, Lore & Loot 3, Proximity Party 4, Simple Minimap 6,
+> Damage Meter 8), each reading and writing the author's own values — X1–X8 pass (report `2026-11-02_conan-hub-xevyr-four-pages.md`; kit pak 10 583 661 B in
+> `_unpacked/KrinikConanUI/`, git-ignored). NEXT: I6.2 — the colour popup and the key capture (operational steps written in plan 40), then the list's
+> «Моды Xevyr'а» entry → the hub (it stays a sub-list until the colour and key rows exist).
 > 3. The owner's eye waits on review folders 54 (prompt in game), 56 (arrows in a corpse + the enemy bar beside «E Взять»), 57 (mockups 8–9).
 >    **Shown 2026-11-02 07:19 +03:00** (Explorer, all three); their notes corrected first: 56 — the answered loot question removed; 54 — «игра открыта» removed, the gap note added (frames predate variant 3). Verdicts not given yet.
 > ⚠️ Закрытие 23:41 было преждевременным, чат продолжается; церемонии закрытия (проход судьи, обрезка STATUS, README, линтеры витрины) — при настоящем закрытии.

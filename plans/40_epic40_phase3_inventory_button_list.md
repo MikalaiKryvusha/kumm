@@ -133,6 +133,21 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
             показывается на 5 секунд и скрывается» · «фейдом открывается и фейдом скрывается» — the refusal is a POPUP at the key box over the window: fade in, 5 s, fade out
             (fade 0.2 s like the build's other fades — `[AI]`); no row moves. Mockups re-shot 2026-11-02 07:22 +03:00, folder 57 refreshed;
             the look as a whole waits for his word.
+            **Operational steps of I6.2 (`[AI]`, 2026-11-02 07:47 +03:00, from the kit's row code and the owner's 07:20–07:23 decisions):**
+            1. Kit kind `color`: the row's own box `Brd_KrinikSw_<id>` (rim as `.sw`) → `Img_KrinikSwC_<id>_<n>` (1 swatch; the followers row — 3 of the 9 shown) +
+               `Txt_KrinikSwName_<id>`; ONE palette plate on the root canvas `Brd_KrinikPal` (collapsed, over everything, as `Brd_KrinikTip`): title
+               `Txt_KrinikPalTitle`, 16 `Brd_KrinikPalC_<n>` (flat colour + a light rim on the chosen one), «было» `Img_KrinikPalOld` / «станет» `Img_KrinikPalNew`,
+               flat buttons `Brd_KrinikBtn_PalCancel` «Отмена» · `Brd_KrinikBtn_PalOk` «Принять».
+            2. Lua: a click on a swatch box opens the plate AT THE CURSOR (UE4SS gives Lua no widget geometry — the «i» plate is placed the same way): right edge at the
+               cursor + the box's half width, below the row, above it when no room; rows never move. A swatch click sets «станет»; «Принять» writes the row's
+               value (RGB of the swatch, the field's own alpha kept — `[AI]`: the authors store alpha 0.40–0.70 as the meter's look), «Отмена» / Esc / a click
+               outside closes it unchanged. The 16 colours — the mockup's set (approximate, the owner sees them on the next frame).
+            3. Kit kind `key`: a UMG `InputKeySelector` styled as `.key` (our text, our box) — the engine itself waits for the next key («Нажмите клавишу…» as its
+               `KeySelectionText`); Lua reads `SelectedKey` in the window's watch, and a key the game binds (Esc + the actions of `Input.ini` / the input
+               settings) is put back and answered by the refusal plate `Brd_KrinikKeyBusy` «Эта клавиша уже занята» at the cursor: fade in 0.2 s, 5 s, fade out
+               0.2 s; no row moves.
+            4. Adapters: DM theme / player bar / 9 followers, SM colour group (one colour row — the swatch replaces Тон / Насыщенность / Яркость / hex), LLH two
+               colours, DM and SM cursor keys — written through the same `AUTHORS` ways. Then the list's «Моды Xevyr'а» entry → `hub = "xevyr"`.
       - [ ] I6.3 Binding per mod in Lua (an adapter per page: `read()` from the mod's SaveGame object / controller fields, `write(values)` into the same object +
             the mod's own save and apply path — recon «Hard to bind» item 3): Damage Meter first (13 rows; the window's `SaveSettings` path pushes into
             `dmgWidget`, `dmgComponent`, the controller), then Lore & Loot (5, `LLH_AC_PlayerComp_C.UpdateSettings`), Proximity Party (4), Simple Minimap (10,
@@ -147,6 +162,13 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
             path applies everything; its flash is measured on a 60 fps clip (EXP-0430) before the row ships; (2) only if the flash cannot be hidden
             (`SetRenderOpacity(0)` on the author's window before the save). Read: `GameplayStatics:LoadGameFromSlot("DamageMeter", 0)` → the SaveGame
             fields (the CDO defaults when the slot is absent).
+            **BUILT 2026-11-02 07:44 +03:00, SEEN 07:56 (`[TESTED: 2026-11-02 · X1–X8 pass, testcases/reports/2026-11-02_conan-hub-xevyr-four-pages.md]`):** pages `amr` (13 rows), `llh` (3 — the two colours
+            wait for I6.2), `prp` (4), `sm` (6 — the time dropdown, the colour group and the key wait for I6.2) in the Lua PAGES and the kit PAGES, alphabetical
+            before `dm`; one adapter table `AUTHORS` — way «window» (dm, prp, sm: the author's window, its save functions; sm also gets its window fields
+            `UIScale` / `clampRange`, which its save reads instead of the sliders) and way «call» (llh: `UpdateSettings` + its slot; amr: `ServerSaveSettings`);
+            a page is written only when a row differs from what was read at the opening, the author windows one after another. The kit re-orders the list and
+            the page switcher to PAGES (`keep_order`); Lua shows a page by its widget, not its index. **The list's «Моды Xevyr'а» entry stays a sub-list until
+            I6.2** — switching it now would take the colour and key rows (reachable only in the authors' windows) away from the player. `[AI]`
       - [ ] I6.4 Cases per page (read the default, change by the real mouse, «Сохранить», reopen the mod's OWN window — the same value; the effect in the world),
             frames at the four resolutions; the sub-lists of step 2 go when every Xevyr mod has its page.
 - [x] I4. The pause section's Esc map `MOD_WINDOWS` (`krinik_pause_in_menu.lua`) gains the new module rows; «one window at a time» — opening an entry calls

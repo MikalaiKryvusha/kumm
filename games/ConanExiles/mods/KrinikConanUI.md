@@ -102,6 +102,13 @@ live are not filled. The Damage Meter page `dm` (`own = "DamageMeter"`): read �
 the AUTHOR'S window: `ActivateModule(DN_UI_Settings)`, its controls by the author's maths (`DM_FIELDS`), its `SaveSettings`, then `ActivateModule(…, false)`
 (it stayed open behind ours otherwise); only from its own hub. Seen: D1 (values = the mod's), D2 (a real Save → slot `segmentTimer` 10). Open: the other four
 Xevyr pages; the list's Xevyr entry still a sub-list; the save's one-frame flash unmeasured.
+**The Xevyr pages (2026-11-02, plan 40.3 I6.3, `[TESTED: 2026-11-02 · X1–X8 pass, testcases/reports/2026-11-02_conan-hub-xevyr-four-pages.md]`):** `amr`, `llh`, `prp`, `sm`, `dm` — alphabetical, the same order in the
+kit PAGES and the Lua PAGES; one adapter table `AUTHORS` (key = a page's `author`): way «window» (dm, prp, sm — the author's window, its save functions, its
+module closed after; sm also gets its window fields `UIScale` / `clampRange`) and way «call» (llh — `UpdateSettings` + its slot; amr — `ServerSaveSettings`);
+`author_vals` = what was read at the opening — a page is written only when a row differs; the author windows open one after another (`write_authors`).
+The kit re-orders the list and the switcher to PAGES (`keep_order`, effective on the second pass — the first creates the new widgets after the reused ones);
+Lua shows a page by its widget (`show_page`, `SetActiveWidget`), never by the PAGES index. Per-mod notes: `ProximityParty.md`, `LLHighlight.md`,
+`AlMerayah_Reborn.md`, `Simple_Minimap.md`, `DamageNumber.md`.
 **A hub hides another hub's pages by collapsing the WHOLE list row `HB_KrinikModItem_<key>`** (fixed 2026-11-02 07:3x, cases L0–L2, report
 `2026-11-02_conan-hub-left-list-seam.md`): collapsing only `Brd_KrinikMod_<key>` left the row with its bar box — the hidden bar Image keeps 32 units — so the
 Xevyr hub's one name stood under five empty rows, mid-height. **Trap:** a window opened by the remote during the world load is never filled (log «module opened,

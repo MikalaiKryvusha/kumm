@@ -153,6 +153,10 @@ spawnBatteringRam, maxGoldPerPile)` — flags `0xC2000C0` = Net + NetReliable + 
 The controller has a plain `SaveSettings` with the same 13 parameters (flags `0xC020000`, no Net) — the RPC's server side most likely calls it
 [inferred]. No `.sav`: the values live on the controller actor, which has a `PersistenceComponent` → the world database [inferred].
 
+**Used by (2026-11-02):** the Xevyr hub's adapters `AUTHORS` in `KrinikConanUI` `krinik_mod_settings.lua` — way «window» for DM, PrP, SM (the author's window and
+its save), way «call» for LLH (`UpdateSettings` + the slot) and AMR (`ServerSaveSettings`); per-mod notes `games/ConanExiles/mods/{DamageNumber, ProximityParty,
+Simple_Minimap, LLHighlight, AlMerayah_Reborn}.md`; plan 40.3 I6.3.
+
 ## Hard to bind from our own window
 
 1. **Colour rows** (DM: theme, player bar, 9 followers; SM: swatches + H/S/V/A + hex; LLH: two). The game's settings rows have no colour control;
