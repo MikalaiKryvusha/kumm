@@ -91,17 +91,17 @@
 
 ## Entries
 
-### EXP-0445 · 2026-11-02 · ✅ · #conan #control-case #vanilla #owner-report #stand
-class: control-before-fix
-**Lesson:** two owner reports of the day turned out to be the game itself once the control was run by halves: «the bow stays drawn when stamina runs out»
-(bug 76) is the vanilla combat-ready stance after ANY draw (≈ 10–11 s), and the «shock-wave sprite» was absent in vanilla and in the build alike. The **CORRECTION 2026-11-02 13:39 — UNPROVEN: the poses were compared from BEHIND the hero, where the string's shape is hidden; the owner's screenshot (front) shows a TRIANGULAR string (`[OWNER]` 13:38 «ТАК А ТИТЕВУ ТЫ ВИДЕЛ ИЗ СКРИНА … ОНА ТРЕУГОЛЬНАЯ!!!»). Re-check from the front pending.**
-halving order that answered in ≈ 10 minutes: our Lua out → our pak out → every pak and Lua out but the remote (6 s world load) → the same action as a PLAIN
-case (full stamina) to see whether the symptom needs the trigger at all. Without our mods the game shows the modal «Играть без подключения» — close it
-before any input, or the case runs into a dialog.
-**Repro:** `mv <Mods>/<Mod>/enabled.txt <…>.off` for every Lua mod but KrinikAgentRemote, `modlist.txt` renamed, `launch-fg.ps1` + `enter-world-remote.sh`,
-the action, then the same action without its trigger.
-**Trigger:** an owner's «bug» about a game behaviour (pose, animation, effect) → the vanilla control BEFORE any code reading or fix plan.
-**Not for:** defects in our own UI (there the control is our section switched off).
+### EXP-0445 · 2026-11-02 · ❌→✅ · #conan #owner-report #angle #state-not-picture #animation
+class: compared-from-the-wrong-angle
+**Lesson:** I declared the owner's «bow stays drawn» a vanilla stance after control runs by halves — comparing poses from BEHIND, where the string's shape
+is hidden; his frame was from the FRONT: the string in a triangle to the chest with both hands on the grip (`[OWNER]` 13:38 «ОНА ТРЕУГОЛЬНАЯ!!!»). The
+picture was the wrong instrument: the bow's string is its OWN skeletal animation, and one remote read named the defect at once — `A_combat_bow_string_heavy_charge`
+frozen at 1.833/1.833 after a draw cut by exhaustion, vs `A_bow_3rd_secondary_special_settle` after a normal release. Read the STATE of the thing the owner
+points at (its animation asset and position, its flags) before any pose comparison; when comparing pictures, use HIS frame's angle, side by side with his frame.
+Without our mods the game shows the modal «Играть без подключения» — close it before any input.
+**Repro:** `scratchpad bow_string.lua` pattern — the attached `BP_bow_2h_C` → `SkeletalMeshComponent` → `GetAnimInstance().CurrentAsset`, `GetPosition()`, `IsPlaying()`.
+**Trigger:** an owner's report about a pose / animation / effect → read the object's animation state by the remote first; a «same as vanilla» verdict needs his angle.
+**Not for:** UI widgets (their state is opacity / visibility, read those).
 
 ### EXP-0444 · 2026-11-02 · ❌ · #conan #stand #video #owner-saw-first #known-trap
 class: known-trap-walked-again

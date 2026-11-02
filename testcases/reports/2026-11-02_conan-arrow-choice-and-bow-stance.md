@@ -32,7 +32,7 @@ hub row `arc_ammo_list` (Lua `krinik_mod_settings.lua` + kit `kit-krinik-modsett
 - L3 pass — row off: meter 0 / 503, opacity 0.0 after the wheel's reveal.
 - L4 pass — the row «Выбор стрел при натяжении» with its «i», checked by default.
 - S1 reproduced — the owner's pose after a stamina break; S2, S3 — the same without our Lua and our pak; S4 — the same in vanilla after a PLAIN draw; the
-  stance lasts ≈ 10–11 s, then the hero lowers the bow: the pose is the game's own combat-ready stance. **CORRECTION 2026-11-02 13:39 — UNPROVEN: the poses were compared from BEHIND the hero, where the string's shape is hidden; the owner's screenshot (front) shows a TRIANGULAR string (`[OWNER]` 13:38 «ТАК А ТИТЕВУ ТЫ ВИДЕЛ ИЗ СКРИНА … ОНА ТРЕУГОЛЬНАЯ!!!»). Re-check from the front pending.**
+  stance lasts ≈ 10–11 s, then the hero lowers the bow: the pose is the game's own combat-ready stance. **CORRECTED 2026-11-02 13:5x: the conclusion above was drawn from BEHIND and is WRONG for the owner's case — his front frame shows the string frozen at the drawn point (a triangle to the chest, hands on the grip): the bow's string animation `A_combat_bow_string_heavy_charge` stuck on its last frame after a draw cut by exhaustion; fixed in KrinikConanArchery (bug 76, B1–B3 pass). Vanilla from the front — not checked.**
 - S5 fail (ours) — the aim zoom kept through the stamina break by `hold_aim_on_redraw`.
 
 **Found.**
@@ -46,3 +46,9 @@ hub row `arc_ammo_list` (Lua `krinik_mod_settings.lua` + kit `kit-krinik-modsett
 
 **Verdict.** partial — the arrow-choice list passes L1–L4; the shock wave and the bow stance are answered by observation (vanilla) and wait for the owner's
 word; S5 (ours) fixed — S6, S7 pass.
+
+**Addendum 13:39–13:53 — bug 76 re-opened and fixed.** The owner's front frame (13:38) refuted the «vanilla stance» verdict drawn from behind. Runs: a
+remote bow-state log (`bow_log.lua`, `bow_hooks.lua`) during the owner's own repros 13:45–13:48; `bow_string.lua` reads; the game's settle handler called by
+the remote 13:47 (the string straightened, `settle_pair.webp`); the fix deployed, the game restarted 13:50 by the owner's word; B1 13:52 (stamina ≈ 5,
+RMB 1.5 s: log «отпущена родным settle», string `…special_settle`, frame `b1.webp`), B2 and B3 13:53 (a shot and a 3 s hold — our section silent).
+Functional run: real RMB/LMB with the game in front, the string state read by the remote, a frame. Verdict for bug 76: pass (the owner's own play pending).
