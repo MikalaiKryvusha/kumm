@@ -13,6 +13,11 @@ the owner's play in the full build (tossed mid-task, during the shock-wave hunt)
 The hero draws the bow (RMB held); stamina reaches zero; the draw stops, yet the bow stays in the drawn pose — the string stretched to the chest.
 Expected: when stamina ends the draw, the hero lowers the bow with a relaxed string (the vanilla behaviour, to be confirmed by the control case).
 
+**The owner's frame — the reference** («Снимок экрана 2026-11-02 124938.png» in his Pictures\Screenshots, 1101×752, opened for him 13:39): the hero faces
+the camera, BOTH hands on the bow's grip low before the belly, and the string runs from both bow tips UP to the chest strap ring — a deep triangle with no
+hand on the string. The defect is the string left at the drawn point, not the stance. Every comparison is made from THIS angle (front), side by side with
+this frame — a frame from behind hides the string's shape (the 13:2x «vanilla stance» conclusion was drawn from behind and is unproven).
+
 ## Repro
 
 Stand: quiet place (`quiet-stand.lua`), the bow in hand, stamina set low by the remote. RMB held until stamina is 0; a frame of the hero (third person) and
