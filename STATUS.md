@@ -150,6 +150,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > owner's 08:54–09:04 words in `games/ConanExiles/mods/KrinikConanUI.md` → Open (corpse strip size / transparency / position, «E Взять» position and 5 checks a
 > second while shown, the XP line `W_Kill_xp` to the centre of the upper half) and `KrinikConanArchery.md` → Open (shock-wave opacity, default off); (3) bug 74
 > (nest eggs); (4) K1–K7 on the clean copy (launcher). Review folders 54, 56, 57, 58 wait for the owner.
+> ⚠️ Закрыто принудительно 2026-11-02 09:14 +03:00 по слову владельца «и закрывай чатик»: церемонии (проход судьи, обрезка STATUS, README, линтеры витрины) пропущены — долг платит
+> первый /end-chat-soft. Ложное утверждение: «пауза 5 у счётчика — значение владельца» → исправлено в кейсе X2. Последнее: строка анонимности сборщика отчёта
+> переписана (пак `4aca565`).
 > **NEW REQUEST 09:07 (a mod, after the closure — not started):** `[OWNER]` «запрос на мод в механике лазания по отвесным поверхностям - кнопка Прыжок должна
 > выполнять прыжок героя прямо из состояния ползания по отвестной поверхности - герой отпрыгивает в сторону нормали от поверхности, по которой карадкается, но с
 > небольшой скоростью вектора отпрыгивания - то есть, чуть-чуть отталкивается от поверхности, по которой ползёт, в направлении вектора нормали, и немножко - вверх».
