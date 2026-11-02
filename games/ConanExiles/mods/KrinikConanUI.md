@@ -252,6 +252,10 @@ reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/re
   XP is gained; then a raise by the widget's slot (native, rule 8) and, if the owner says so, a hub row «сколько держится опыт на экране».
   **08:58 the widget named by his frame:** the kill line «Каппа / +85 XP» (grey text over the killed creature, mid-screen right above the hero's head) —
   `[OWNER]` «вот виджет опыта, его бы сельно вверх, в центр верхей половины экрана»: the target is the CENTRE OF THE UPPER HALF of the screen.
+  **Recon 08:59 (remote, read-only):** the widget is `W_Kill_xp_C`, owned by the game instance, NO parent and NO slot — added to the viewport directly (its place is
+  set by `SetPositionInViewport` / alignment, most likely each kill at the creature's projected point). Next: which pak brings it (vanilla or a mod — grep the
+  paks view / `retoc list`), its functions (`pult.sh "funcs W_Kill_xp_C"`), then a native fix of the place (rule 8) — or, if it is projected each kill, a hook
+  on its show that sets the centre of the upper half.
 
 - **The owner's word 2026-11-02 08:54 on the corpse strip** (`WBP_ContainerInfo`, his frame: «Труп · Разделать труп · Труп» over a dark band): `[OWNER]` «можно
   эти плашки 1) сделать меньше на 25% 2) фон сдлеать более прозрачным?» — NOT DONE. Way: the kit (`kit-conanui-edit.py`, the strip block): the strip
