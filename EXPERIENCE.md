@@ -102,6 +102,7 @@ Without our mods the game shows the modal «Играть без подключе
 **Repro:** `scratchpad bow_string.lua` pattern — the attached `BP_bow_2h_C` → `SkeletalMeshComponent` → `GetAnimInstance().CurrentAsset`, `GetPosition()`, `IsPlaying()`.
 **Trigger:** an owner's report about a pose / animation / effect → read the object's animation state by the remote first; a «same as vanilla» verdict needs his angle.
 **Not for:** UI widgets (their state is opacity / visibility, read those).
+none-cheap: the miss is a choice of evidence (angle, picture vs state) at the moment of comparing — no repository guard sees it; the decision point is the Trigger line and the memory owner-eye-beats-my-measurement
 
 ### EXP-0444 · 2026-11-02 · ❌ · #conan #stand #video #owner-saw-first #known-trap
 class: known-trap-walked-again
