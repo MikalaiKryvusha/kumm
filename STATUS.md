@@ -127,6 +127,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **PARKED 2026-11-02 12:41 +03:00 — ALL MODS OFF in `D:\Games\Conan Exiles 3.0.1` for the owner's own shooting** (`[OWNER]` 12:40 «выключи все моды, дай я постреляю, и позову
+> тебя на запись»): `ConanSandbox/Mods/modlist.txt` → `modlist.txt.off`, `ConanSandbox/Binaries/Win64/dwmapi.dll` (UE4SS) → `dwmapi.dll.off`; the store
+> `Saved/KrinikSettings.lua` holds `arc_wave = 1`. Restore both names after his recording. The wave he means — `[OWNER]` 12:39 «спрайт, который возле лука
+> появляется при выстреле» — NOT the arrow's rings/dome (12:38 «нет, не то»); facts so far — `games/ConanExiles/mods/KrinikConanArchery.md` → Open.
 > **CHAT f73138c5 CLOSED 2026-11-02 11:3x +03:00 (soft, `[OWNER]` «закрывай»). FIRST in the next chat, in order:**
 > 0. **The shock wave is NOT seen at 100 %** (`[OWNER]` 2026-11-02 12:26 «ты сам смотрел? разве не видишь?» · «что волны не было» · «выстрел на 6-й секунде
 >    выполнен, волны нет» — clip `01_volna_100.mp4`, folder 60; I showed it without watching it). NOT the tracer rings `M_particle_powershot_circles`: those are off

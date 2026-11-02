@@ -151,6 +151,11 @@ viewport scale at 4K is 2.09. The remote cannot read widget sizes now (`GetDesir
 overrides a vanilla key when the entry carries the vanilla hashes (`_config/devkit/vanilla-override.py`, proven 2026-10-29 00:34).
 Crosshair (`/Game/UI/Widgets/HUD/Reticles/WBP_Crosshair.WBP_Crosshair_C`): the spread bars (curve `C_CrosshairAccuracyAlpha`) show as soon as a bow
 is in hand, before any draw — zeroing the curve keys hides them at once.
+Bow shot effects (vanilla, control runs 2026-11-02 12:32–12:37): full draw → `P_bow_powercharge_charged` at the hand; the release → `P_bow_powercharge_release`
+on `b_R_prop` (its emitter E0 is disabled in the game's own asset; E1 white 0.15 s showed no pixel when spawned before the camera) and the arrow's tracer
+`P_arrow_trail_powershot` (E0–E3 ribbon trail, E4 the rings `M_particle_powershot_circles` — rings round the arrow, then a dome over it). In the aim view of our
+camera the hand and the bow's lower part sit under the quick bar at the screen's bottom edge. Detail and the open question (the owner's «sprite by the bow») —
+`games/ConanExiles/mods/KrinikConanArchery.md` → Open.
 Hosav numbers («k», «M») — `games/ConanExiles/mods/UIMod_Hosav.md`.
 Sun and shadows (0.003 was set for a smooth sun; now 2.0 by the owner's choice): `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ~50×/s; live `2.0` (light turns in steps
 seconds apart) — the owner under palms 2026-10-29 00:46: «ну сейчас словно тени в порядке»; back at 0.003: «да, вернулось». The pack carries 2.0

@@ -125,6 +125,18 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
   and charges, an LMB CLICK while RMB is held releases; holding LMB and letting RMB go shoots nothing. Input: `mouse-seq.ps1 -Seq "rdown,wait:2800,lclick,wait:700,rup"`.
   The order of effects (remote, 11:10): full draw → `P_bow_powercharge_charged` (a golden flash at the hand), the LMB release → `P_bow_powercharge_release` +
   the tracer `P_arrow_trail_powershot`. `tune_wave` scales only `_release`; which flash the owner calls «the shock wave» — asked 11:10.
+  **The row scaled an invisible effect — control runs 2026-11-02 12:32–12:37 (Archery Lua OUT, quiet stand, 120 fps full-screen capture of a real shot):**
+  (1) vanilla: right after the release, rings go around the flying arrow and a big translucent dome opens over it (frames ≈ 4.24–4.37 s of the capture);
+  (2) the same shot with ONLY the tracer's emitter E4 (`P_arrow_trail_powershot`, material `M_particle_powershot_circles`) disabled by the remote — no rings and
+  no dome, the arrow alone; (3) `P_bow_powercharge_release` draws nothing on screen: its emitter E0 is disabled IN THE GAME'S ASSET (`bEnabled` false with our
+  Lua out), E1 (white, 0.15 s, size 200) spawned 4 m and 8 m before the camera changed not one pixel (frame difference). So the only visible release
+  effect is tracer E4 — the same «волны звукового барьера» of 2026-10-26 (plan 36 item 35) that `tune_templates` disables («кольца выкл») — and `tune_wave`
+  scaled a system that shows nothing: hence «no wave at 100 %». Tracer emitters: E0–E3 the ribbon trail (`M_particle_weapon_speed_trail_arrow_linger`),
+  E4 the rings (modules Lifetime_1, Size_1, ColorOverLife_1, SpawnPerUnit_0, ParameterDynamic_1, SizeScale_1, SizeMultiplyLife_1). In the aim view of our camera the
+  hand (`b_R_prop`) sits under the quick bar at the screen's bottom edge. Asked the owner 12:3x with frames (review folder 61) whether the dome is his «wave» — **NO**:
+  `[OWNER]` 12:38 «нет, не то» · 12:39 «а я тебя прошу спрайт, который возле лука появляется при выстреле». In the aim view the bow's lower part and the hand are
+  under the quick bar and the screen edge (release frame 4.133 s of the control capture: nothing above the bar), so the sprite was never in our frames. Next:
+  the owner shoots in a game with every mod off and calls for the recording (12:40).
 - seen 2026-10-31 15:51: the pause-menu list shows «v1.0.0»; the Krinik mods still stand at the bottom of the list (W11 «top» half open).
 - **NEW FEATURE, 1.0.0 (`[OWNER]` 2026-11-01 09:11 «KrinikConanArchery · в этот мод идет еще одна фича · После смерти - регдол труп врага не должен уничтожать
   воткнутые в него стрелы - все стрелы сохраняются, торчат из трупа, их можно собрать.»):** every arrow copy stuck in a creature stays stuck in its ragdoll
