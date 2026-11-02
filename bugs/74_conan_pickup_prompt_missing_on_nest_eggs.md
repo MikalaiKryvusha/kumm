@@ -13,6 +13,11 @@ Two eggs in a nest can be taken by E, but the light «E Взять» plate never
 
 The owner's spot (the oasis save, a nest next to sand and grass, a creature camp around); stand by the nest, look at an egg.
 
+**A nest found 2026-11-02 15:18 (the bug-75 stand, frame `scratchpad b75_open.webp`):** a palm-leaf nest with three large white eggs, minimap coordinates
+≈ −41290, 255086 (the corpse body of that stand at −41593 255090 −19990), top-left of the view from the east. Not yet checked: whether these eggs are E-takeable
+and what the game's own probe (`PickupGatheringOneInstance`, since bug 77 the plate's source) answers on them — if the probe says «no», the eggs are not
+foliage pickups and the plate is right to stay silent; then the take goes through another path (an actor / `UpdateHighlightTarget`'s sphere trace).
+
 ## Forensics
 
 - Actors within 4 m of the hero at 09:00 (remote, read-only): `BP_CampOwner_C` (187 cm), `StaticMeshActor` (181), `BP_ManualSpawnPoint_C` ×2, `CritterAIController_C` ×2,
