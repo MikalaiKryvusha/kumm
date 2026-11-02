@@ -3,6 +3,106 @@
 
 
 
+## 2026-11-02 11:3x +03:00 (third part) — the Svarog blocks of STATUS «Where to continue», moved at the soft closure of chat f73138c5 (verbatim)
+
+> **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied
+> (`SvarogsDream/_backups/svarog-saves-2026-10-29_2103-before-debt024`), configs snapped (`_harness/cfg_snap`, 21:04), the 13:43 build `f44c36e` hot-deployed
+> into the game WITHOUT a run (test debt waived with this reason), cases written — `testcases/TC_svarog_debt024_tails_2026-10-29.md`. Return order: interview #024
+> tails (S10c/R1 tooltip gap, CD1 skill-slot digit, `InstantTranslate` of bugs 56/57 — the run report `testcases/reports/2026-10-18_svarog-day-buff-strip-passes1-5.md`
+> is partial), then the bug wave 55–62 by plan 32.
+> **Svarog — return order** (the far shelf since 2026-10-29 21:07, see PARKED above): interview #024 answers (Q3 digit lower, Q4 strip order and
+> bright passives — built 2026-10-18 09:14, run in game 13:00–13:35 the same day, partial; correction 2026-10-29: "never run in game" stood here wrongly); 00000 — the owner's bug wave 2026-10-18 (plan 32, bugs 55–62, the ⇅ button; chronicle 2026-10-26 19:38);
+> 0000–000 — the items of 17.10 (J4, J5, G1, pop-ups, hair, storages, tips, frames, HUD C3/C4/K1; chronicle 2026-10-25 12:07); 00 — plan 27
+> (`plans/27_svarog_random_hero_traits.md`: fixes 8–10 of `AuthorBugs.cs` in combat, case R8; the "New hero" window, "Veles' Protection", Staggered, attribute > 95 → 90).
+
+## 2026-11-02 11:3x +03:00 (second part) — the NOW list of chat f73138c5, moved from STATUS at its soft closure (verbatim)
+
+> **NOW — chat of 2026-11-02 from 09:50 (`[OWNER]` «продолжаем делать сборку Конана»).** DONE and seen in game 10:14–10:53 (report
+> `testcases/reports/2026-11-02_conan-hub-rectangle-and-batch.md`, KUMM `0b90d1c`): the colour rectangle and every chooser at its field (R1–R5); the Xevyr rows
+> D5–D10; fixes it found — hue-word colour names, opaque popups (a black block), the Damage Meter corner save (`SetSelectedIndex(Index, SelectInfo)`, new tool
+> `_config/fn-params.lua`); «E Взять» 5 checks a second while shown (P3); the places of «E Взять» (−14 % / +6 %) and the corpse strip (−22 %) as hub rows;
+> Hosav's kill XP line to the centre of the upper half (`W_Kill_xp` padding −258, pak in the game). **The owner's 10:54 decision:** strip 30 % smaller, backing
+> 60 %, both hub rows. The shock wave = `P_bow_powercharge_release` — the hub row «Ударная волна полного заряда» (default 0) scales its colour tables.
+> **11:27 — the shock wave settled** (pack `c817b4e`): `[OWNER]` 11:17 «золотая вспышка - НЕ ПРИ ВЫСТРЕЛЕ!!! А ПРИ ПОЛНОМ НАТЯЖЕНИИ» · «ВТОРУЮ ,КРУГЛЫЙ КОЛЬЦО
+> СПЛЕШ!» — the row scales the right system (`P_bow_powercharge_release`). Review folder 60 — two clips 120 fps ×5 (100 % / ВЫКЛ), opened for the owner; his eye
+> decides W1/W2. Sliders say «ВЫКЛ» at zero (`[OWNER]` 11:22 «не 0%, а ВЫКЛ» · «уже же делали такое») — seen. New tools `_config/slow-shot.sh` (refuses an
+> unquiet stand) and `quiet-stand.lua` (EXP-0444). Game closed, lock released.
+> **11:15 — the batch is DONE and seen** (pack `521a7ca`, KUMM `8b5039f`): K1b, S3, S4, SC1, SC2 pass (strip 0.70 / 0.60 / −22 %, the size and backing rows,
+> the XP line centred, the rows scroll). **Waits for the owner (asked 11:10 in chat):** which bow flash is «the shock wave» — the GOLDEN flash at full draw
+> (`P_bow_powercharge_charged`) or the flash at the LMB release (`P_bow_powercharge_release`, the one the row scales now). A bow shot = RMB held + LMB click
+> (`[OWNER]` 11:07). **Cases W1, W2 wait for the owner** (called 11:16 by `review.mjs --call`). Bug 75 — stand attempts spoiled (a probe crash EXP-0443, crocodiles), next steps in the bug doc. Game closed, lock released.
+> **IN FLIGHT 10:57 (done 11:06):** the kit rebuild (`scratchpad/kit_all.sh`: strip 0.70 / 0.6, the rows `ui_strip_scale/back`, `arc_wave`) → deploy KrinikConanUI +
+> KrinikConanArchery → cases S3, S4, K1b, SC1, SC2, W1, W2 (W — a 60 fps clip of a real full-charge shot; desktop HDR off for it, back on after). **10:57
+> `[OWNER]` the settings rows scroll** («это скролящийся список. КОгда много пунктов - появляется скрол бар») — the window keeps 845, the page scrolls (Lua done). Then: the pack commit; bug 75 (quick-loot rim jump), bug 74
+> (nest eggs), the climbing jump (09:07), K1–K7 on the clean copy. Review folder 59 answered (strip). Seam: «E Взять» shows up to ≈ 14 s late after the hero comes back to stones.
+
+## 2026-11-02 11:3x +03:00 — moved from STATUS «Where to continue» at the soft closure of chat f73138c5 (verbatim; the bonsai trim)
+
+> **Chat c5fe291c (20:33–21:58) — its done list moved verbatim to the chronicle, entry 2026-11-01 21:58 +03:00:** review folders moved to the Conan dir; Xevyr variant A;
+> «Клавиша вызова курсора»; logo tone; minimap (accepted); ×3 arrow hidden at impact (confirmed); bug 73 DONE; «E Взять» prompt (plan 42) — the probe as the camera
+> mod sees it, fade 0.2 s, the backing only under the word at 0.35 (pack `ac31b3a`; 0.35 also set live in the running game; the layout needs a restart).
+> **NOW (chat 70dda2b5, from 22:13; dayloop from 22:55 by `[OWNER]` «работай автономно»):** DONE and seen in game — «E Взять»: the owner's layout (P6, P7), the
+> fade by the real-E path (P8), the A-B flight within noise (P9: on 15.14 ms vs off 15.17 ms), the list growth fixed (P11), the E-to-word gap 6 by `[OWNER]` 22:48 «вариант 3» (P12);
+> the bench start hold 20 → 40 s (`[OWNER]` 22:38); hub mode — the list names the hub, H1–H3 pass; **arrows stay in the corpse**, the killing arrow too (UE4SS delegate
+> `Remove`, TC A6–A8, A10); the test-after-code hook no longer reads heredoc bodies; the guard `check-lua-shadow.py`. Run report
+> `testcases/reports/2026-11-01_conan-pickup-prompt-evening.md`. ❓ interview #030 (arrows into the corpse's loot) waits for the owner. Mockups 8–9 (own colour picker,
+> own key capture; refusal «Эта клавиша уже занята» by `[OWNER]` 23:34) — review folder 57. **IN FLIGHT 23:3x:** the kit rebuilt with the Damage Meter page rows
+> (`scratchpad/kitout/KrinikConanUI.pak`, 10 000 867 B, not yet copied into `_unpacked`), the Damage Meter adapter in `krinik_mod_settings.lua` (read the slot,
+> write through the author's window, `[NOT-TESTED]`) — cases D1–D4 of `TC_conan_hub_rows_audit_2026-11-01.md`. Review folders for the owner: 54, 55 (taken: 6), 56, 57.
+> **Handover written 2026-11-01 23:41 by a PREMATURE /end-chat-force (the window was 68–70 %, not at its limit — `[OWNER]` 23:43 «ты опять слишком рано чат закрыл» ·
+> «И ХУК ИСПРАВЬ»; the gate is in `.claude/hooks/context-budget.mjs` now); the chat CONTINUES in the dayloop. That work order (corrected 2026-11-02 08:19 +03:00 — both items are done):**
+> 1. ~~The owner's debt — interview #030~~ DONE 2026-11-02 00:22 (arrows into the corpse's loot, A11–A13 pass — «Awaiting human review» above).
+> 2. ~~Plan 40.3 D1–D4 — the Damage Meter page~~ DONE 00:27 (D1, D2 pass; the remote opens the Xevyr hub by the shared variable `KrinikHubRequest`).
+> ⚠️ **CHAT OF 2026-11-02 07:17 CLOSED 2026-11-02 09:04 +03:00 at 85 % (urgent closure).** Ceremonies skipped (judge pass, STATUS trim, README, budget door) — the next
+> /end-chat-soft pays them. The owner's game (launched by the agent 08:39) is HIS now — not closed; machine lock released. FIRST next chat, in order: (1) when the
+> game is closed — deploy `KrinikConanUI` (the colour-rectangle pak 13 124 437 B is in `_unpacked`), run D5–D10 + the rectangle + `place_at_field`; (2) the
+> owner's 08:54–09:04 words in `games/ConanExiles/mods/KrinikConanUI.md` → Open (corpse strip size / transparency / position, «E Взять» position and 5 checks a
+> second while shown, the XP line `W_Kill_xp` to the centre of the upper half) and `KrinikConanArchery.md` → Open (shock-wave opacity, default off); (3) bug 74
+> (nest eggs); (4) K1–K7 on the clean copy (launcher). Review folders 54, 56, 57, 58 wait for the owner.
+> ⚠️ Закрыто принудительно 2026-11-02 09:14 +03:00 по слову владельца «и закрывай чатик»: церемонии (проход судьи, обрезка STATUS, README, линтеры витрины) пропущены — долг платит
+> первый /end-chat-soft. Ложное утверждение: «пауза 5 у счётчика — значение владельца» → исправлено в кейсе X2. Последнее: строка анонимности сборщика отчёта
+> переписана (пак `4aca565`).
+> **NEW REQUEST 09:07 (a mod, after the closure — not started):** `[OWNER]` «запрос на мод в механике лазания по отвесным поверхностям - кнопка Прыжок должна
+> выполнять прыжок героя прямо из состояния ползания по отвестной поверхности - герой отпрыгивает в сторону нормали от поверхности, по которой карадкается, но с
+> небольшой скоростью вектора отпрыгивания - то есть, чуть-чуть отталкивается от поверхности, по которой ползёт, в направлении вектора нормали, и немножко - вверх».
+> Way: KrinikConanGameplay (read its notes first); recon the climbing state and the jump input in it (the game's climb component, the wall normal), then a jump =
+> leave climbing + a small launch along the normal plus a little up; a hub row for the push strength if it fits.
+> **BUG 09:10 (the owner's, not filed as a doc yet — file `bugs/75_…` first):** `[OWNER]` «при заборе предмета выделенного в окне квик лута по F на мгновение
+> контур выбора перемещается в последнюю нижнюю правую клетку - некрасиво, он прыгает туда сюда» · «это баг, нужно будет испрравить». The quick-loot window
+> (`W_QuickLootPanel`, our kit edit + `krinik_ui_fixes` hooks on `SlotItemAddedOrRemoved`): a 60 fps clip of an F take first (EXP-0430), then the control case
+> without our section (HOUSE_RULES 24) — find who moves the selection.
+> **NOW (chat of 2026-11-02 from 07:17, dayloop by `[OWNER]` 07:21 «работай над сборкой Конана автономно»):** the left-list seam FIXED (L0–L2); the
+> owner's 07:20–07:23 decisions on mockups 8–9 applied (palette and busy-key refusal as popups over the window, «Принять», no accepted-key caption — folder 57
+> re-shot, plan 40 I6.2). **Plan 40 I6.3 DONE 07:56:** the Xevyr hub has all five pages (Al-Merayah 13 rows, Lore & Loot 3, Proximity Party 4, Simple Minimap 6,
+> Damage Meter 8), each reading and writing the author's own values — X1–X8 pass (report `2026-11-02_conan-hub-xevyr-four-pages.md`; kit pak 10 583 661 B in
+> `_unpacked/KrinikConanUI/`, git-ignored). **I6.2 DONE 08:29:** colour rows with the palette popup and the key capture with the busy-key popup work in game
+> (C1–C9, report `2026-11-02_conan-hub-colour-key-rows.md`; kit pak 10 896 745 B; review folder 58 — NOT opened: the owner is away, it waits for his return).
+> **08:44 IN FLIGHT:** the SM colour row and the option lists (DM corner, SM time) built and deployed (pack `ca5377c`, kit pak 10 979 745 B) — D5 seen (rows in
+> place; the «▾» drew as «?» → «›» turned 90° in Lua), D6 seen (the list over the window, the chosen one rimmed); D7–D10 not run — **the owner took the
+> running game at 08:43 (his own clicks in the log): do not drive it**. Colour names shortened (`[OWNER]` frame 08:42 «темно-коричне» cut) — needs a restart.
+> **Owner's 08:44–08:45 decisions (plan 40 I6.2, recorded verbatim there):** a chooser opens AT ITS FIELD, never at the cursor (Lua `place_at_field` written,
+> `[NOT-TESTED]`); the palette → a COLOUR RECTANGLE (any colour by a click) instead of 16 swatches — NOT built (steps in plan 40). KUMM commit `48571ce` NOT
+> pushed: the auto-mode classifier refused that push («Out-of-Place Publication») — push it with the next commit. **Resolved 08:53:** the refusal was
+> right — the clean copy's release name was in three public files; scrubbed, the commits folded, pushed `3d4b427` (EXP-0440, `scrub-local.json` terms).
+> **Colour rectangle:** texture imported (1024 × 512), kit rebuilt with it 08:5x — NOT deployed / NOT seen (the owner is in the running game; a deploy needs
+> it closed). **OWNER'S NEW WORD 08:54 — the corpse strip 25 % smaller, its backing more transparent** (notes `KrinikConanUI.md` → Open, the way written) —
+> NOT DONE. **08:55 — the on-screen XP gain overlaps the hero: raise it; and his QUESTION whether its display time can be a hub row** (notes `KrinikConanUI.md`
+> → Open; answered «likely yes», nothing built). Order for the next run: deploy the rectangle pak → D5–D10 + the rectangle → the corpse strip → the XP popup
+> recon and raise → K1–K7 on the clean copy. **08:57 — hub rows for the position (x, y) of «E Взять» and the corpse strip, both by default LEFT of the hero in
+> third person** (notes `KrinikConanUI.md` → Open, the way written) — NOT DONE; do it together with the strip's size / transparency. **08:59 the XP line
+> «<creature> +N XP» is Hosav's `W_Kill_xp` (`/Game/Mods/UIMod_Hosav/Kill_XP/`, in the viewport with no parent; `LoadSaveOptions` — maybe Hosav's own setting) —
+> target: the centre of the upper half. 09:00 the owner's BUG — «E Взять» missing over nest eggs → `bugs/74_…` (recon first).** The colour-rectangle pak is in
+> `_unpacked/KrinikConanUI/` (13 124 437 B), NOT deployed (the owner's game). **09:02 — the full-charge shock-wave sprite around the bow: an opacity slider in
+> KrinikConanArchery, default 0 (off)** (notes `KrinikConanArchery.md` → Open). Hosav's XP_OnKill options have no position / time (09:02) — a native `W_Kill_xp` edit.
+> **The owner's launcher words 08:35–08:37 → HOUSE_RULES 25–26:** «Играть» closes the launcher, «Удалить» keeps it open (code done, launcher rebuilt,
+> `[NOT-TESTED]`); install / uninstall are tested on a COPY of the only Conan game folder in `D:\Instals\` (its name stays out of this public repository) — copied to
+> `D:\Games\Conan_Exiles_3_0_1_clean_test` (597 files, 58.3 GB); cases K1–K7 `testcases/TC_conan_clean_copy_install_launcher_2026-11-02.md`. Then the list's
+> «Моды Xevyr'а» entry → the hub.
+> 3. The owner's eye waits on review folders 54 (prompt in game), 56 (arrows in a corpse + the enemy bar beside «E Взять»), 57 (mockups 8–9).
+>    **Shown 2026-11-02 07:19 +03:00** (Explorer, all three); their notes corrected first: 56 — the answered loot question removed; 54 — «игра открыта» removed, the gap note added (frames predate variant 3). Verdicts not given yet.
+> ⚠️ Закрытие 23:41 было преждевременным, чат продолжается; церемонии закрытия (проход судьи, обрезка STATUS, README, линтеры витрины) — при настоящем закрытии.
+> Ложных утверждений на месте не осталось: «калька» в уроке и «вытянуть стрелу нельзя» в кейсе A9, интервью, конспекте и плане исправлены там, где стояли.
+
 ## 2026-11-01 23:00 +03:00 — moved from STATUS «Where to continue» during the dayloop of chat 70dda2b5 (verbatim; the bonsai trim — STATUS 221 lines)
 
 > 2. The HUD temperature by the game's debuff stage — frame the comfort (white) and the cold (blue) cases (only heat was framed, review folder 47).

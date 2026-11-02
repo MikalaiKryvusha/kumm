@@ -110,6 +110,7 @@ an `ExecuteInGameThreadWithDelay(100)` read — crashed the game in UE4SS (ACCES
 disarmed right after its read, and it never keeps the raw object across frames: copy what is needed (name, template path) inside the callback itself.
 **Repro:** after a probe run: `pult.sh "lua _G.__fx2_on=false; return 'off'"` (or restart the game) before any stand that spawns effects.
 **Trigger:** writing `NotifyOnNewObject` in a probe → read in the callback, no delayed access, and an off switch called at the end of the probe.
+<!-- class-ok: unguarded-remote-read — the probes are free-form Lua sent through the remote; its refusals are per pattern (FindAllOf over …Component since EXP-0330), and the two crashes of this class (EXP-0403 a property read, EXP-0443 a delayed birth-watch read) share no pattern a guard could match without refusing valid probes; the decision point (read inside the callback, disarm after) is the cheapest carrier -->
 none-cheap: probes live in the scratchpad; the rule is the decision point above
 
 ### EXP-0442 · 2026-11-02 · ❌→✅ · #conan #ui #umg #popup #colour
