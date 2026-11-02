@@ -255,7 +255,9 @@ reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/re
   **Recon 08:59 (remote, read-only):** the widget is `W_Kill_xp_C`, owned by the game instance, NO parent and NO slot — added to the viewport directly (its place is
   set by `SetPositionInViewport` / alignment, most likely each kill at the creature's projected point). Next: which pak brings it (vanilla or a mod — grep the
   paks view / `retoc list`), its functions (`pult.sh "funcs W_Kill_xp_C"`), then a native fix of the place (rule 8) — or, if it is projected each kill, a hook
-  on its show that sets the centre of the upper half.
+  on its show that sets the centre of the upper half. **Hosav's own options (09:02, `SaveUISettings_UIH_C`):** `XP_OnKill`, `XP_OnKill_Names`, `_Amount`,
+  `_Background`, `_Sound`, `_CustomColor`, `_Color` — NO position and NO display time; so by HOUSE_RULES rule 8 the place is a native edit of `W_Kill_xp` (its
+  position / alignment in its own graph — trace `PlayKill_Animation` and `Construct`), and a time row would be ours.
 
 - **The owner's word 2026-11-02 08:54 on the corpse strip** (`WBP_ContainerInfo`, his frame: «Труп · Разделать труп · Труп» over a dark band): `[OWNER]` «можно
   эти плашки 1) сделать меньше на 25% 2) фон сдлеать более прозрачным?» — NOT DONE. Way: the kit (`kit-conanui-edit.py`, the strip block): the strip
