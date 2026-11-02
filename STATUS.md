@@ -144,6 +144,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > «И ХУК ИСПРАВЬ»; the gate is in `.claude/hooks/context-budget.mjs` now); the chat CONTINUES in the dayloop. That work order (corrected 2026-11-02 08:19 +03:00 — both items are done):**
 > 1. ~~The owner's debt — interview #030~~ DONE 2026-11-02 00:22 (arrows into the corpse's loot, A11–A13 pass — «Awaiting human review» above).
 > 2. ~~Plan 40.3 D1–D4 — the Damage Meter page~~ DONE 00:27 (D1, D2 pass; the remote opens the Xevyr hub by the shared variable `KrinikHubRequest`).
+> ⚠️ **CHAT OF 2026-11-02 07:17 CLOSED 2026-11-02 09:04 +03:00 at 85 % (urgent closure).** Ceremonies skipped (judge pass, STATUS trim, README, budget door) — the next
+> /end-chat-soft pays them. The owner's game (launched by the agent 08:39) is HIS now — not closed; machine lock released. FIRST next chat, in order: (1) when the
+> game is closed — deploy `KrinikConanUI` (the colour-rectangle pak 13 124 437 B is in `_unpacked`), run D5–D10 + the rectangle + `place_at_field`; (2) the
+> owner's 08:54–09:04 words in `games/ConanExiles/mods/KrinikConanUI.md` → Open (corpse strip size / transparency / position, «E Взять» position and 5 checks a
+> second while shown, the XP line `W_Kill_xp` to the centre of the upper half) and `KrinikConanArchery.md` → Open (shock-wave opacity, default off); (3) bug 74
+> (nest eggs); (4) K1–K7 on the clean copy (launcher). Review folders 54, 56, 57, 58 wait for the owner.
 > **NOW (chat of 2026-11-02 from 07:17, dayloop by `[OWNER]` 07:21 «работай над сборкой Конана автономно»):** the left-list seam FIXED (L0–L2); the
 > owner's 07:20–07:23 decisions on mockups 8–9 applied (palette and busy-key refusal as popups over the window, «Принять», no accepted-key caption — folder 57
 > re-shot, plan 40 I6.2). **Plan 40 I6.3 DONE 07:56:** the Xevyr hub has all five pages (Al-Merayah 13 rows, Lore & Loot 3, Proximity Party 4, Simple Minimap 6,
