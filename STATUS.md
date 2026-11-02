@@ -127,10 +127,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **PARKED 2026-11-02 12:41 +03:00 — ALL MODS OFF in `D:\Games\Conan Exiles 3.0.1` for the owner's own shooting** (`[OWNER]` 12:40 «выключи все моды, дай я постреляю, и позову
-> тебя на запись»): `ConanSandbox/Mods/modlist.txt` → `modlist.txt.off`, `ConanSandbox/Binaries/Win64/dwmapi.dll` (UE4SS) → `dwmapi.dll.off`; the store
-> `Saved/KrinikSettings.lua` holds `arc_wave = 1`. Restore both names after his recording. The wave he means — `[OWNER]` 12:39 «спрайт, который возле лука
-> появляется при выстреле» — NOT the arrow's rings/dome (12:38 «нет, не то»); facts so far — `games/ConanExiles/mods/KrinikConanArchery.md` → Open.
+> **NOW 2026-11-02 13:25 +03:00 (chat 03118042) — the build is whole again** (66 paks, 9 Lua mods; the store holds `arc_wave = 1`; the oasis save lost its 2 iron arrows):
+> - ✅ **The arrow-choice list on a draw** (`[OWNER]` 12:49–12:56): shows only with ≥ 2 arrow kinds, never with one or with the hub row «Выбор стрел при натяжении»
+>   off — L1–L4 pass, packs `6a7cca5`, `c415cbe` (guide), report `testcases/reports/2026-11-02_conan-arrow-choice-and-bow-stance.md`.
+> - ❓ **Waits for the owner — the bow pose after a stamina break (bug 76):** it is the GAME's own combat-ready stance after any draw (≈ 10–11 s, then the bow
+>   is lowered) — seen in vanilla (S4). His choice asked in chat: keep it · lower the bow at once on a stamina break · shorten the stance after any shot.
+> - 🔴 **Ours, to fix:** the aim zoom kept through a stamina break with RMB held (`hold_aim_on_redraw`, case S5).
+> - ❓ **The shock wave:** the row «Ударная волна полного заряда» drives `P_bow_powercharge_release`, which draws nothing on screen; the owner's «sprite by the bow»
+>   was not reproduced in vanilla nor in the build (W4, W5 — `[OWNER]` 12:48 «нету спрайта» · «попробовал и 100% и ВЫКЛ - нету его»). The row's fate — his word.
+> - Owner's voice for calls: Russian, «Николай», NOT Irina and NOT eugene — the right voice was set up in another project (`[OWNER]` 12:46 «голос мы настраивали
+>   в других проектах, в цифровой версии Андиминиум, что ли»); not found yet (searched KAIF_VOICE_TOOL in ndim/KAGO/KrinikTribit/krinik_voice — the search was interrupted).
 > **CHAT f73138c5 CLOSED 2026-11-02 11:3x +03:00 (soft, `[OWNER]` «закрывай»). FIRST in the next chat, in order:**
 > 0. **The shock wave is NOT seen at 100 %** (`[OWNER]` 2026-11-02 12:26 «ты сам смотрел? разве не видишь?» · «что волны не было» · «выстрел на 6-й секунде
 >    выполнен, волны нет» — clip `01_volna_100.mp4`, folder 60; I showed it without watching it). NOT the tracer rings `M_particle_powershot_circles`: those are off

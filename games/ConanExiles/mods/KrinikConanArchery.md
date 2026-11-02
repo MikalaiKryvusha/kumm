@@ -135,8 +135,15 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
   E4 the rings (modules Lifetime_1, Size_1, ColorOverLife_1, SpawnPerUnit_0, ParameterDynamic_1, SizeScale_1, SizeMultiplyLife_1). In the aim view of our camera the
   hand (`b_R_prop`) sits under the quick bar at the screen's bottom edge. Asked the owner 12:3x with frames (review folder 61) whether the dome is his «wave» — **NO**:
   `[OWNER]` 12:38 «нет, не то» · 12:39 «а я тебя прошу спрайт, который возле лука появляется при выстреле». In the aim view the bow's lower part and the hand are
-  under the quick bar and the screen edge (release frame 4.133 s of the control capture: nothing above the bar), so the sprite was never in our frames. Next:
-  the owner shoots in a game with every mod off and calls for the recording (12:40).
+  under the quick bar and the screen edge (release frame 4.133 s of the control capture: nothing above the bar), so the sprite was never in our frames. 12:44 the owner
+  shot in the game with every mod off: `[OWNER]` «странно, нет этого справйта» · «но я помню, что видел его» — vanilla has no such sprite; something of the build
+  brings it (candidates: our `tune_glint` ×1.5 of `P_bow_powercharge_charged`, another pak). Next: the same shots in the full build, then control by halves.
+- **The arrow-choice list on a draw (2026-11-02 13:0x, pack after `c817b4e`):** section `on_aqs_display` — a post-hook of Arrow Quick Swap's
+  `UpdateDisplayUI` (`ArrowQuickSwap.md`); store key `arc_ammo_list` → `CFG.ammo_list` (default true). `[TESTED: 2026-11-02 · L1–L4 · testcases/reports/2026-11-02_conan-arrow-choice-and-bow-stance.md]`.
+  Trap: the hook registration at mod load fails («no UFunction» — the mod's class is not ready); the component's birth (`NotifyOnNewObject`) registers it.
+- **The aim zoom kept through a stamina break (case S5, ours, NOT FIXED):** with RMB held, the draw broken by stamina ends the montage's FOV notify, and
+  `hold_aim_on_redraw` in `on_fov_target` takes it for a re-draw — the zoom stays while the hero no longer draws. The hold must require a draw actually
+  under way. The bow pose itself is vanilla (bug 76).
 - seen 2026-10-31 15:51: the pause-menu list shows «v1.0.0»; the Krinik mods still stand at the bottom of the list (W11 «top» half open).
 - **NEW FEATURE, 1.0.0 (`[OWNER]` 2026-11-01 09:11 «KrinikConanArchery · в этот мод идет еще одна фича · После смерти - регдол труп врага не должен уничтожать
   воткнутые в него стрелы - все стрелы сохраняются, торчат из трупа, их можно собрать.»):** every arrow copy stuck in a creature stays stuck in its ragdoll

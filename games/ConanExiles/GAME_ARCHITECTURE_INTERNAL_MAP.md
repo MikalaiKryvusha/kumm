@@ -156,6 +156,12 @@ on `b_R_prop` (its emitter E0 is disabled in the game's own asset; E1 white 0.15
 `P_arrow_trail_powershot` (E0–E3 ribbon trail, E4 the rings `M_particle_powershot_circles` — rings round the arrow, then a dome over it). In the aim view of our
 camera the hand and the bow's lower part sit under the quick bar at the screen's bottom edge. Detail and the open question (the owner's «sprite by the bow») —
 `games/ConanExiles/mods/KrinikConanArchery.md` → Open.
+Bow combat-ready stance (vanilla, no paks, 2026-11-02 13:20–13:21): after ANY draw (a plain one or one broken by stamina) the hero holds the bow horizontal
+before him with the string at his right hand for ≈ 10–11 s after RMB up, then lowers it (left hand, slanted, string straight) — it looks like a drawn string
+(bug 76). A stamina break mid-draw: `AdjustStaminaCurrent(-200)` (HUD −60/99); the draw cost per hold — `ReceiveChargeHoldStaminaCostModifier`. Without our
+mods the game shows the modal «Играть без подключения» after world entry (a click on «Подтвердить» closes it). Hero inventory edits by the remote:
+`p.ShortcutBarInventory:RemoveItem(<slot index>, FName("None"), nil)` (params Index, Context, ObserverAlreadyUpToDate); `BackpackInventory` is an `ItemInventory`
+with `RemoveItem`, `DropItem`, `GetItemCount`.
 Hosav numbers («k», «M») — `games/ConanExiles/mods/UIMod_Hosav.md`.
 Sun and shadows (0.003 was set for a smooth sun; now 2.0 by the owner's choice): `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ~50×/s; live `2.0` (light turns in steps
 seconds apart) — the owner under palms 2026-10-29 00:46: «ну сейчас словно тени в порядке»; back at 0.003: «да, вернулось». The pack carries 2.0
