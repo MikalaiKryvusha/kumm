@@ -138,7 +138,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (report `testcases/reports/2026-11-02_conan-release-0.9.0.md`, V1–V6 S1–S2 Z1–Z3 pass); the public repo at 0.9.0 (`def3b3f`); pack `feb7e77`. The owner's
 >   game config and desktop shortcut restored after the runs.
 > - ✅ 19:38 the GitHub release v0.9.0 CREATED by the owner's word («Разрешаю»): https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.0
->   with the guide PDF; the 19 volumes were uploading in the background when the chat closed (assets 1 at 19:40) — **FIRST next chat:**
+>   with the guide PDF; the 19 volumes NOT uploaded — every `gh release upload` 19:42–19:46 failed «error connecting to api.github.com» (the VPN went off) — **FIRST next chat:**
 >   `gh release view v0.9.0 --repo MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --json assets --jq '.assets[].name'` and upload the missing
 >   `Krinik_Mod_Pack_0_9_0.zip.0NN` from `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_PlayGround\` by `gh release upload v0.9.0 --repo … <file>` one by one.
 > - ✅ the volume work dirs (65 GB) and the bundle in the clean copy removed by the owner's word (the clean copy = its 597-file list again). Pack `c357adb`
