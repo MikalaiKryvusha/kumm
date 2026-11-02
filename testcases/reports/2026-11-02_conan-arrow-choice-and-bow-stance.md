@@ -40,7 +40,7 @@ hub row `arc_ammo_list` (Lua `krinik_mod_settings.lua` + kit `kit-krinik-modsett
 - Bug 76 is vanilla behaviour (the stance), the owner's choice of what to do is asked.
 - New defect, ours: the aim zoom held through a stamina break (S5) — fixed 13:2x (`shots_at_aim`), S6 and S7 pass (13:27).
 
-**Traces.** Scratchpad `D:\Temp\claude\d--work-ai-sandbox-KUMM\03118042-689e-4a54-8ba0-f295ff725b9d\scratchpad\w\` — `w3_ctrl.mkv`, `w3b_norings.mkv`,
+**Traces.** (14:04: the .mkv captures deleted after the run by HOUSE_RULES rule 15 — the frames and sheets below stay) Scratchpad `D:\Temp\claude\d--work-ai-sandbox-KUMM\03118042-689e-4a54-8ba0-f295ff725b9d\scratchpad\w\` — `w3_ctrl.mkv`, `w3b_norings.mkv`,
 `l1.mkv`, `l2.mkv`, `l3.mkv`, `s1b.mkv`, `s2.mkv`, `s3.mkv`, `s4.mkv`, `van_stance.mkv`, frame sheets and `idle_vs_after.webp`, `van_pair.webp`; review folder 61
 (`D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\61_volna_eto_kolca`); `UE4SS.log` lines «выбор стрел …» 13:06–13:12.
 
