@@ -147,6 +147,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    UNCOMMITTED — the pak is git-ignored, nothing to commit), the adapter is in `krinik_mod_settings.lua` (`[NOT-TESTED]`). The Xevyr hub cannot be opened by the
 >    remote (`_G.__krinik_hub` lives in KrinikConanUI's own Lua state — EXP-0438): switch the list's «Моды Xevyr'а» entry to `hub = "xevyr"` for a test, or a shared variable.
 > 3. The owner's eye waits on review folders 54 (prompt in game), 56 (arrows in a corpse + the enemy bar beside «E Взять»), 57 (mockups 8–9).
+>    **Shown 2026-11-02 07:19 +03:00** (Explorer, all three); their notes corrected first: 56 — the answered loot question removed; 54 — «игра открыта» removed, the gap note added (frames predate variant 3). Verdicts not given yet.
 > ⚠️ Закрытие 23:41 было преждевременным, чат продолжается; церемонии закрытия (проход судьи, обрезка STATUS, README, линтеры витрины) — при настоящем закрытии.
 > Ложных утверждений на месте не осталось: «калька» в уроке и «вытянуть стрелу нельзя» в кейсе A9, интервью, конспекте и плане исправлены там, где стояли.
 > **CHAT c5fe291c CLOSED 2026-11-01 21:57 +03:00 (soft; `[OWNER]` 21:55 «и в новом чате продолжим делать сборку»). FIRST in the next chat, in order:**
