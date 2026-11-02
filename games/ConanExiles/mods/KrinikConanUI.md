@@ -263,6 +263,9 @@ reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/re
   `_Background`, `_Sound`, `_CustomColor`, `_Color` — NO position and NO display time; so by HOUSE_RULES rule 8 the place is a native edit of `W_Kill_xp` (its
   position / alignment in its own graph — trace `PlayKill_Animation` and `Construct`), and a time row would be ours.
 
+- **The rows scroll (2026-11-02 10:57, `[OWNER]` «в окне настроек Криника - лист с опциями, это скролящийся список. КОгда много пунктов - появляется скрол
+  бар»):** the window height is the mockup's 845 always (`MIN_HEIGHT`; it followed the tallest live page before), the page scrolls in the kit's
+  `SC_KrinikRows` (ScrollBox, Fill), whose bar shows only when the page does not fit. Cases SC1, SC2. `[NOT-TESTED]`.
 - **DECIDED 2026-11-02 10:54 after review folder 59 (four variants on one corpse):** `[OWNER]` «фон 60, меньше на» · «30» · «даем это настройкой в моде UI
   криника» — the strip 30 % smaller (render scale 0.70) with the backing alpha 0.6, both as hub rows «Плашка трупа: размер / фон» (`ui_strip_scale` 0.70,
   `ui_strip_back` 0.60, applied by `krinik_ui_fixes.place_strip` on the strip's events; the kit ships the same defaults — `kit-conanui-edit.py` STRIP_SCALE /

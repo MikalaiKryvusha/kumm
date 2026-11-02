@@ -127,6 +127,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW — chat of 2026-11-02 from 09:50 (`[OWNER]` «продолжаем делать сборку Конана»).** DONE and seen in game 10:14–10:53 (report
+> `testcases/reports/2026-11-02_conan-hub-rectangle-and-batch.md`, KUMM `0b90d1c`): the colour rectangle and every chooser at its field (R1–R5); the Xevyr rows
+> D5–D10; fixes it found — hue-word colour names, opaque popups (a black block), the Damage Meter corner save (`SetSelectedIndex(Index, SelectInfo)`, new tool
+> `_config/fn-params.lua`); «E Взять» 5 checks a second while shown (P3); the places of «E Взять» (−14 % / +6 %) and the corpse strip (−22 %) as hub rows;
+> Hosav's kill XP line to the centre of the upper half (`W_Kill_xp` padding −258, pak in the game). **The owner's 10:54 decision:** strip 30 % smaller, backing
+> 60 %, both hub rows. The shock wave = `P_bow_powercharge_release` — the hub row «Ударная волна полного заряда» (default 0) scales its colour tables.
+> **IN FLIGHT 10:57:** the kit rebuild (`scratchpad/kit_all.sh`: strip 0.70 / 0.6, the rows `ui_strip_scale/back`, `arc_wave`) → deploy KrinikConanUI +
+> KrinikConanArchery → cases S3, S4, K1b, SC1, SC2, W1, W2 (W — a 60 fps clip of a real full-charge shot; desktop HDR off for it, back on after). **10:57
+> `[OWNER]` the settings rows scroll** («это скролящийся список. КОгда много пунктов - появляется скрол бар») — the window keeps 845, the page scrolls (Lua done). Then: the pack commit; bug 75 (quick-loot rim jump), bug 74
+> (nest eggs), the climbing jump (09:07), K1–K7 on the clean copy. Review folder 59 answered (strip). Seam: «E Взять» shows up to ≈ 14 s late after the hero comes back to stones.
 > **Older handover blocks of 2026-11-01 — moved verbatim to the chronicle, entries 05:51 · 11:14 · 15:52 · 17:54 · 18:18 · 21:56 · 21:58 · 23:00.** Still open from them:
 > the HUD temperature comfort (white) and cold (blue) frames (folder 47); review folders 44–47 and 50 for the owner's eye; refill hunger / thirst in every run.
 > **Chat c5fe291c (20:33–21:58) — its done list moved verbatim to the chronicle, entry 2026-11-01 21:58 +03:00:** review folders moved to the Conan dir; Xevyr variant A;

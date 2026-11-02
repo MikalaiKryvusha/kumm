@@ -266,3 +266,5 @@ defaults and after a hub change; check rhythm shown vs hidden.
 | S4 | S3, the hub | «Плашка трупа: размер» → 100 %, «фон» → 0, «Сохранить», open a strip again | the strip at full size with no dark backing; then «Сбросить к исходным» → 70 % / 60 % | [NOT-TESTED] | — |
 | W1 | KrinikConanArchery with `tune_wave`, `arc_wave` default 0 | a full-charge shot (real input) | log «ударная волна полного заряда: яркость 0 %»; a 60 fps clip of the release shows no flash around the bow | [NOT-TESTED] | — |
 | W2 | W1, the hub «Ударная волна полного заряда» → 100 %, «Сохранить» | a full-charge shot | log «яркость 100 %»; the clip shows the flash as in the vanilla game | [NOT-TESTED] | — |
+| SC1 | the Lua with the fixed window height, the KrinikConanUI page (19 rows) | open the hub on that page | the window keeps the mockup height (log «window height 845»), the rows end at the window's bottom, a scroll bar stands at the right of the rows | [NOT-TESTED] | — |
+| SC2 | SC1 | the mouse wheel over the rows, then drag the scroll bar | the rows scroll down to «Плашка трупа: фон» and back; the camera and short pages (no bar) unaffected | [NOT-TESTED] | — |
