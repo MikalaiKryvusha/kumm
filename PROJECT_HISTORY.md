@@ -5784,3 +5784,32 @@ Integrity (VBS работает из-за WSL2, HVCI выключен) · обн
 > описаний вскрылось главное ограничение сборки: 🔴 **треть каталога владельцу недоступна** —
 > почти вся косметика висит на `Tot ! Custom` / `Tot ! Sudo`, а у тех в описании прямым текстом
 > «Single Player/Coop is NOT supported». Записано в шапке `docs/08` и `docs/09`.
+
+## 2026-11-02 14:03 +03:00 — STATUS bonsai trim (chat 03118042): two closed handover blocks moved verbatim
+
+Their open items stay in STATUS as one pointer line. Verbatim:
+
+> **CHAT f73138c5 CLOSED 2026-11-02 11:3x +03:00 (soft, `[OWNER]` «закрывай»). FIRST in the next chat, in order:**
+> 0. **The shock wave is NOT seen at 100 %** (`[OWNER]` 2026-11-02 12:26 «ты сам смотрел? разве не видишь?» · «что волны не было» · «выстрел на 6-й секунде
+>    выполнен, волны нет» — clip `01_volna_100.mp4`, folder 60; I showed it without watching it). NOT the tracer rings `M_particle_powershot_circles`: those are off
+>    by the owner's old word (`[OWNER]` 12:27 «кольца полностью выключить я просил, давно») — keep them off. Facts: a full-charge LMB release spawns
+>    `P_bow_powercharge_release` on the hero's `b_R_prop` (remote 11:10); its colour table read ORIGINAL (0.5, 1, 0.5) at 11:19, yet no wave on the clip, and
+>    `tune_wave` logged nothing in that session. Next: find why the release system draws nothing (does it render in a game with our Archery Lua off? —
+>    control case, HOUSE_RULES rule 24; then which of our edits hides it), and watch the WHOLE clip frame by frame before showing it.
+> 1. The owner's verdict on review folder 60 (`D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\60_udarnaya_volna_zamedlenie`, two clips 120 fps ×5: the
+>    shock wave at 100 % and ВЫКЛ) → cases W1/W2 of `TC_conan_hub_rows_audit_2026-11-01.md`. If the ring stays at ВЫКЛ — `tune_wave` (KrinikConanArchery
+>    `main.lua`) scales the wrong tables: look at `P_arrow_trail_powershot`'s rings (`M_particle_powershot_circles`, `tune_templates`) next.
+> 2. Bug 75 (the quick-loot rim jumps on an F take) — a stand away from the oasis crocodiles (`quiet-stand.lua` first), the body place on a frame, then a
+>    120 fps clip of an F take (`slow-shot.sh` pattern); control case without our sections (HOUSE_RULES rule 24). Steps in the bug doc.
+> 3. Bug 74 (nest eggs without «E Взять»), the climbing jump (09:07, KrinikConanGameplay — recon first), K1–K7 on the clean copy.
+> Every clip for the owner: `bash _config/slow-shot.sh` (refuses an unquiet stand) and a look at the frame before; a bow shot = RMB held + LMB click.
+
+> **CHAT c5fe291c CLOSED 2026-11-01 21:57 +03:00 (soft; `[OWNER]` 21:55 «и в новом чате продолжим делать сборку»). FIRST in the next chat, in order:**
+> 1. Restart the game when the owner is out of it (the backing-only-under-the-word layout of `ac31b3a` loads at start), then his verdict on «E Взять» (stones at his feet with the camera above; fade; backing 0.35); then the prompt's A-B flight (rule 7) and the
+>    enemy health bar sitting where the prompt sits (`plans/42_conan_pickup_prompt_foliage.md` → Next steps; report `testcases/reports/2026-11-01_conan-pickup-prompt.md`).
+> 2. Plan 40.3 I6 — the Xevyr pages with real rows, own colour and key controls (variant A, `[OWNER]` 20:37); the steps I6.1–I6.4 are written in
+>    `plans/40_epic40_phase3_inventory_button_list.md`; read `researches/conan-mod-settings-hub/xevyr-settings-recon.md` «Hard to bind» first.
+> 3. Plan 40 phase 4 — arrows stay in the corpse (`/bug-research` first). Then epic 40 phases 5–7 and epic 41 (8 phases, none started) — 16 blocks to 1.0.0
+>    counted at 21:55 (the list said to the owner in chat).
+> Review folders waiting for the owner: 51 (Xevyr page look — variant A chosen, the look itself not answered), 52 (logo tone), 53 (prompt mockup — taken).
+> Never in the owner's running game: a sweep of native calls over enum values (EXP-0433); a desktop recording while the game is not in front (EXP-0431).
