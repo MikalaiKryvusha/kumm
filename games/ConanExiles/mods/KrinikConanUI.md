@@ -101,7 +101,11 @@ shared variable `KrinikHubRequest` (`ModRef:SetSharedVariable` — the agent's r
 live are not filled. The Damage Meter page `dm` (`own = "DamageMeter"`): read — `GameplayStatics:LoadGameFromSlot("DamageMeter", 0)` (CDO when absent); write —
 the AUTHOR'S window: `ActivateModule(DN_UI_Settings)`, its controls by the author's maths (`DM_FIELDS`), its `SaveSettings`, then `ActivateModule(…, false)`
 (it stayed open behind ours otherwise); only from its own hub. Seen: D1 (values = the mod's), D2 (a real Save → slot `segmentTimer` 10). Open: the other four
-Xevyr pages; the list's Xevyr entry still a sub-list; the left-list name stands mid-height (seam); the save's one-frame flash unmeasured.
+Xevyr pages; the list's Xevyr entry still a sub-list; the save's one-frame flash unmeasured.
+**A hub hides another hub's pages by collapsing the WHOLE list row `HB_KrinikModItem_<key>`** (fixed 2026-11-02 07:3x, cases L0–L2, report
+`2026-11-02_conan-hub-left-list-seam.md`): collapsing only `Brd_KrinikMod_<key>` left the row with its bar box — the hidden bar Image keeps 32 units — so the
+Xevyr hub's one name stood under five empty rows, mid-height. **Trap:** a window opened by the remote during the world load is never filled (log «module opened,
+but no visible …») — open it after the HUD birth line «HudOutline] новый HUD».
 
 **Esc in a mod window opened over the inventory (2026-11-01, plan 40.3 B11).** The inventory stays only when the window's module row is Category **Modal** AND
 **CloseOnESC true** (live row edits on modules not yet created: Modal alone — Proximity Party failed; CloseOnESC alone with Popup — EAA failed; both — Simple Minimap,

@@ -169,3 +169,13 @@ Stand: the live game, the inventory open; the hub opened as Xevyr's by the remot
 | D2 | D1 | move «Пауза до новой стычки» to 10 by the real mouse, «Сохранить» | the log «saved through the author's window»; the author's own window then shows 10 s | pass | 00:25 a real click on the track + «Сохранить»: the log line; the mod's slot `segmentTimer` 10.00 (00:27 again → 5, slot 5) |
 | D3 | D2 | a 60 fps clip of the save | the author's window does not flash over ours, or the flash is measured | partial | 00:25 the author's window STAYED OPEN behind ours (its lines showed through the panel) → fixed: its module closed after its SaveSettings; 00:27 module inactive, frame clean. A one-frame flash during the save — not measured (no 60 fps clip) |
 | D4 | D1 | open the Krinik hub, «Сохранить» | the author's window does NOT open (the dm save runs only from its own hub) | — | — |
+
+### The left list of a hub with few pages (seam of D1, 2026-11-02)
+
+Stand: the live game in the world (HUD born — a window opened during the world load is not filled: log «module opened, but no visible …», the 00:30 run), the inventory open by a real Tab; the hub opened by the remote (`KrinikHubRequest`); a frame of the window at 4K; the remote reads `GetDesiredSize` / slot alignments of `SB_KrinikList`, `SC_KrinikMods`, `HB_KrinikModItem_dm`.
+
+| ID | Situation | Action | Expected | Status | Observed |
+|---|---|---|---|---|---|
+| L0 | the hub opened as Xevyr's by the remote after the HUD is born | read the list's widgets by the remote + a frame | the cause of the mid-height name named by numbers (which box is taller than its content and how it aligns) | pass | 07:29 frame: the name mid-height. Every slot Fill (V=0) — not an alignment; the list's desired height 214 for one 53-unit name: the five Krinik rows `HB_KrinikModItem_<key>` stayed visible (4) at 32 each — only their border was collapsed, the hidden bar Image kept its height. Collapsing them by the remote: desired 54, the name at the top (frame 07:30). The 00:30 «empty window» was a window opened during the world load (log «module opened, but no visible …»), not the alignment edit |
+| L1 | the fix deployed | open the hub as Xevyr's | the single name «The Damage Meter» at the TOP of the list, level with the page title | pass | 07:32 after a restart (fill 11 ms): «The Damage Meter» at the top, level with the page title, 4K frame |
+| L2 | L1 | open the hub as Krinik's | the five names from the top as before, no shift | pass | 07:32 (fill 22 ms): the five Krinik names from the top, the camera page selected, the long pack-manager name runs as designed |
