@@ -126,6 +126,11 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
             swatch box that opens OUR palette plate: the build's swatches + the mod's current colour; one palette for every colour row), `key` (a box that
             shows the key name; a click waits for the next key press and refuses keys the game swallows — Esc, the game's bound actions read from
             `Input.ini`). Each kind first as a mockup row in `mockups.html` (rule 23), then kit, then Lua.
+            **OWNER'S DECISIONS 2026-11-02 07:20–07:21 +03:00 on mockups 8–9 (review folder 57):** `[OWNER]` «не нужно дыигать другие опции, выбор цвета открывать
+            поп=апом поверх окна, не жвигая другие пункты» — the palette is a POPUP layered over the window at the swatch (below the row, or above it when the
+            panel has no room below); no row of the page moves, opens or collapses for it. `[OWNER]` «притнята F2, сохраниться - эту строоку убрать» — an accepted
+            key shows only in its box, no caption line under it (the refusal line «Эта клавиша уже занята» stays). `[OWNER]` 07:22 «кнопка не Выбрать. а Принять» — the palette's buttons are «Отмена» · «Принять». Mockups re-shot 2026-11-02 07:22 +03:00, folder 57 refreshed;
+            the look as a whole waits for his word.
       - [ ] I6.3 Binding per mod in Lua (an adapter per page: `read()` from the mod's SaveGame object / controller fields, `write(values)` into the same object +
             the mod's own save and apply path — recon «Hard to bind» item 3): Damage Meter first (13 rows; the window's `SaveSettings` path pushes into
             `dmgWidget`, `dmgComponent`, the controller), then Lore & Loot (5, `LLH_AC_PlayerComp_C.UpdateSettings`), Proximity Party (4), Simple Minimap (10,
