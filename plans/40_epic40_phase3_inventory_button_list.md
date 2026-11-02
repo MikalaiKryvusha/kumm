@@ -148,6 +148,11 @@ opens its window; Hosav's and fishing buttons are gone from the bar; Esc closes 
                0.2 s; no row moves.
             4. Adapters: DM theme / player bar / 9 followers, SM colour group (one colour row — the swatch replaces Тон / Насыщенность / Яркость / hex), LLH two
                colours, DM and SM cursor keys — written through the same `AUTHORS` ways. Then the list's «Моды Xevyr'а» entry → `hub = "xevyr"`.
+            **DONE 2026-11-02 08:29 +03:00 — steps 1–3 and step 4 except the SM colour group** (`[TESTED: 2026-11-02 · C1–C9, C8 partial — the fade not measured ·
+            testcases/reports/2026-11-02_conan-hub-colour-key-rows.md]`; review folder 58): kit kinds `color` / `color9` / `key`, the palette plate and the busy plate;
+            DM theme, player bar, nine bars, cursor key; LLH two colours; SM cursor key. Found on the way: the game binds 90 keys incl. F2 (free: F1, F3–F12, I, U, 9, 0).
+            **Still before the list's entry can switch to the hub:** the SM colour group (its window keeps `color` + H/S/V/A, not a colour button — recon first) and the
+            two dropdowns (DM «Сворачивать в угол», SM «Показ времени» — kind `drop`, a popup list by the same rule: over the window, no row moves). `[AI]`
       - [ ] I6.3 Binding per mod in Lua (an adapter per page: `read()` from the mod's SaveGame object / controller fields, `write(values)` into the same object +
             the mod's own save and apply path — recon «Hard to bind» item 3): Damage Meter first (13 rows; the window's `SaveSettings` path pushes into
             `dmgWidget`, `dmgComponent`, the controller), then Lore & Loot (5, `LLH_AC_PlayerComp_C.UpdateSettings`), Proximity Party (4), Simple Minimap (10,

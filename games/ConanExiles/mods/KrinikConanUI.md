@@ -109,6 +109,14 @@ module closed after; sm also gets its window fields `UIScale` / `clampRange`) an
 The kit re-orders the list and the switcher to PAGES (`keep_order`, effective on the second pass — the first creates the new widgets after the reused ones);
 Lua shows a page by its widget (`show_page`, `SetActiveWidget`), never by the PAGES index. Per-mod notes: `ProximityParty.md`, `LLHighlight.md`,
 `AlMerayah_Reborn.md`, `Simple_Minimap.md`, `DamageNumber.md`.
+**Colour and key rows (2026-11-02, plan 40.3 I6.2, `[TESTED: 2026-11-02 · C1–C9 · testcases/reports/2026-11-02_conan-hub-colour-key-rows.md]`):** kit kinds
+`color` (`Brd_KrinikSw_<id>` → `Brd_KrinikSwC_<id>_0` + `Txt_KrinikSwName_<id>`), `color9` (nine swatches), `key` (a UMG `InputKeySelector` `Ks_Krinik_<id>` styled
+as `.key`); the palette plate `Brd_KrinikPal` (16 cells `Brd_KrinikPalC_<i>` with `Img_KrinikPalC_<i>`, `Img_KrinikPalOld/New`, buttons `PalCancel` / `PalOk`) and the
+busy plate `Brd_KrinikKeyBusy` on the root canvas, both placed AT THE CURSOR. A value is linear `{R,G,B,A}` (a pick keeps the row's alpha); the name — the
+nearest palette colour by sRGB, «свой цвет» beyond 0.06. **Traps paid:** a transparent `BrushColor` does not hide a rounded-box outline — draw the cell brush
+only on the chosen one (`DrawAs` 4 / 0); a save must keep a SNAPSHOT of the values (the window's live list was shared and a later pick looked «unchanged»);
+`mouse-seq.ps1` sends LeftAlt when it brings the game forward — a waiting key selector catches it (press the key in the same call as the click). The busy-key
+list = Escape + `Default__InputSettings` ActionMappings / AxisMappings (90 keys; F2 among them).
 **A hub hides another hub's pages by collapsing the WHOLE list row `HB_KrinikModItem_<key>`** (fixed 2026-11-02 07:3x, cases L0–L2, report
 `2026-11-02_conan-hub-left-list-seam.md`): collapsing only `Brd_KrinikMod_<key>` left the row with its bar box — the hidden bar Image keeps 32 units — so the
 Xevyr hub's one name stood under five empty rows, mid-height. **Trap:** a window opened by the remote during the world load is never filled (log «module opened,
