@@ -105,6 +105,9 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
 
 ## Open
 
+- **REMOVED 2026-11-02 15:3x by interview #031, answer A** (`[OWNER]` «убрать строку, пока спрайт не найден. Найдётся — вернём её уже к нему»): the hub row
+  `arc_wave` (Lua PAGES, kit PAGES), `CFG.wave_opacity`, `tune_wave` and its call in `dress_arrow` are gone; the code lives in git (pack `a848a58`). The history
+  below stays for the day the sprite is found.
 - **The owner's word 2026-11-02 09:02 — the shock-wave sprite of a 100 % charged shot:** `[OWNER]` «при заряженном на 100% выстреле в момент выпуска стрелы вокруг
   лука появляется спрайт ударной волны - его нужно сделать отключаемым через мод Archery Криника, по умолчанию - выключен» · «настраивается через шкалу
   прозрачности». NOT DONE. Way: find the effect (the bow's full-charge release — a Niagara / particle or a widget sprite; recon on the release by the remote),
