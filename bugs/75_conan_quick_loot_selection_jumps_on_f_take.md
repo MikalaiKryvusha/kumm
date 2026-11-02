@@ -20,7 +20,7 @@ needed (EXP-0430: a frame series misses a 1–2-frame jump).
 
 ## Forensics
 
-None yet. Candidates: the game rebuilds the grid on `SlotItemAddedOrRemoved` and the focus lands on the last created cell before the selection is restored
+**Desk recon 2026-11-02 14:2x (code, no game):** our two hooks on `QuickLootPanel:SlotItemAddedOrRemoved` — KrinikConanArchery `sync_later(50)` (destroys corpse shafts beyond the arrow count) and KrinikConanUI `krinik_ui_fixes` `on_event` → `align` + `split_prompt` after `RECHECK_MS` (the strip's overlay slot alignment, the prompt split) — call no focus or selection function (`grep SetFocus|Select|Focus` → none); a layout pass could still move the rim, so the control case (both sections off) stays the next step. Candidates: the game rebuilds the grid on `SlotItemAddedOrRemoved` and the focus lands on the last created cell before the selection is restored
 (vanilla), or our hook on the same event (`krinik_ui_fixes` — alignment + the corpse line; `KrinikConanArchery` — the arrow sync) disturbs the focus.
 
 ## Hypotheses (ranked)
