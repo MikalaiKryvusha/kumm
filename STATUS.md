@@ -150,6 +150,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > owner's 08:54–09:04 words in `games/ConanExiles/mods/KrinikConanUI.md` → Open (corpse strip size / transparency / position, «E Взять» position and 5 checks a
 > second while shown, the XP line `W_Kill_xp` to the centre of the upper half) and `KrinikConanArchery.md` → Open (shock-wave opacity, default off); (3) bug 74
 > (nest eggs); (4) K1–K7 on the clean copy (launcher). Review folders 54, 56, 57, 58 wait for the owner.
+> **NEW REQUEST 09:07 (a mod, after the closure — not started):** `[OWNER]` «запрос на мод в механике лазания по отвесным поверхностям - кнопка Прыжок должна
+> выполнять прыжок героя прямо из состояния ползания по отвестной поверхности - герой отпрыгивает в сторону нормали от поверхности, по которой карадкается, но с
+> небольшой скоростью вектора отпрыгивания - то есть, чуть-чуть отталкивается от поверхности, по которой ползёт, в направлении вектора нормали, и немножко - вверх».
+> Way: KrinikConanGameplay (read its notes first); recon the climbing state and the jump input in it (the game's climb component, the wall normal), then a jump =
+> leave climbing + a small launch along the normal plus a little up; a hub row for the push strength if it fits.
 > **NOW (chat of 2026-11-02 from 07:17, dayloop by `[OWNER]` 07:21 «работай над сборкой Конана автономно»):** the left-list seam FIXED (L0–L2); the
 > owner's 07:20–07:23 decisions on mockups 8–9 applied (palette and busy-key refusal as popups over the window, «Принять», no accepted-key caption — folder 57
 > re-shot, plan 40 I6.2). **Plan 40 I6.3 DONE 07:56:** the Xevyr hub has all five pages (Al-Merayah 13 rows, Lore & Loot 3, Proximity Party 4, Simple Minimap 6,
