@@ -238,6 +238,10 @@ reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/re
 
 ## Open
 
+- **The owner's word 2026-11-02 09:04 — the pickup check rate while the plate shows:** `[OWNER]` «при открытой плашке E Взять, частота опросов должна повышаться
+  до 5 раз в секунду - для того, чтобы в случае увода луча с Берущегося предмета - плашка закрывалась быстрее». NOT DONE. Way: `krinik_pickup_prompt` — the check
+  chain 1 s while hidden, 200 ms while the plate is visible (back to 1 s when it hides); measure the cost (check 0.12 ms → ≤ 0.6 ms a second while shown).
+
 - **The owner's word 2026-11-02 08:57 — positions of «E Взять» and the corpse strip:** `[OWNER]` «можно виджеты E Взять и плашки трупов - дать настройку их
   положения на экране через наши настройки модов? По высоте и по горизонтали?» · «и по умолчанию сделать их в левой части экрана, чтобы в виде от третьего лица
   они не поверх героя были, а левее героя». NOT DONE. Way: hub rows on the KrinikConanUI page — «E Взять: по горизонтали / по высоте», «Плашка трупа: по горизонтали
