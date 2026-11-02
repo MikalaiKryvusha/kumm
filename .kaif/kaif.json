@@ -15,6 +15,10 @@
   "language": "ru",
   "canonArtifacts": [],
   "projectName": "KUMM",
+  "contour": {
+    "callName": "Николай",
+    "spokenProjectName": "Кумм"
+  },
   "voicePortrait": "D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md",
   "history": [
     {

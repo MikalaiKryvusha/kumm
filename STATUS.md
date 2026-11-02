@@ -136,8 +136,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - ✅ **Ours, fixed 13:2x:** the aim zoom no longer stays through a stamina break (the re-draw hold needs a shot since the aim entry; S6, S7 pass).
 > - ❓ **The shock wave:** the row «Ударная волна полного заряда» drives `P_bow_powercharge_release`, which draws nothing on screen; the owner's «sprite by the bow»
 >   was not reproduced in vanilla nor in the build (W4, W5 — `[OWNER]` 12:48 «нету спрайта» · «попробовал и 100% и ВЫКЛ - нету его»). The row's fate — his word.
-> - Owner's voice for calls: Russian, «Николай», NOT Irina and NOT eugene — the right voice was set up in another project (`[OWNER]` 12:46 «голос мы настраивали
->   в других проектах, в цифровой версии Андиминиум, что ли»); not found yet (searched KAIF_VOICE_TOOL in ndim/KAGO/KrinikTribit/krinik_voice — the search was interrupted).
+> - ✅ Owner's voice for calls (13:59): the soft voice of Unliminium — `.claude/settings.local.json` env `KAIF_VOICE_TOOL=D:/work/UnliminiumTheDigitalGame/tools/voice-soft.mjs`, `KAIF_VOICE=eugene`, `KAIF_VOICE_BEEPS=embedded`, `KAIF_VOICE_BEEP_VOLUME=2.5`; `.kaif/kaif.json` `contour.callName` «Николай» (`[OWNER]` «да, тепеь хорошо»).
 > **CHAT f73138c5 CLOSED 2026-11-02 11:3x +03:00 (soft, `[OWNER]` «закрывай»). FIRST in the next chat, in order:**
 > 0. **The shock wave is NOT seen at 100 %** (`[OWNER]` 2026-11-02 12:26 «ты сам смотрел? разве не видишь?» · «что волны не было» · «выстрел на 6-й секунде
 >    выполнен, волны нет» — clip `01_volna_100.mp4`, folder 60; I showed it without watching it). NOT the tracer rings `M_particle_powershot_circles`: those are off
