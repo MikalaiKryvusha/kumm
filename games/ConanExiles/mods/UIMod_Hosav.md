@@ -31,6 +31,7 @@ side panel, a settings window. KRINIK MODIFIED in the build: the pak is rebuilt 
 | `W_UI_SettingsButton` | «Настройки интерфейса» — its own viewport layer (`CanvasPanel_0` → `Overlay_0` → `Border_0` → vanilla `WBP_ButtonBase`) | author polls `Delay 3.0` + `IsModuleActive(CharacterInventory)` (silenced in the build); click → `ActivateModule('CharacterInventory', False)` then `ActivateModule('HosavUIsettings', True)`; moved into the hub bar it stops clicking (2026-10-29). **Since 2026-11-01 the button is always COLLAPSED** (`KrinikConanUI:PauseGameInMenu` 0.16.0, on every inventory and «Снаряжение» open) — the window opens from «Настройки модов» → «Прочее» → «Hosav's Custom UI» (`[OWNER]` 15:49 «настройки интерфейса оттуда уходят») |
 | `W_ExampleWidget_User` | the settings window | module `HosavUIsettings` in `UIModuleTable_UIH` (twin `HosavUISettings` in `DT_UIModuleTable_HosavNew`) |
 | `W_EnemyHealthbar_InHUD` / `W_NewEnemyHealth` | the enemy target frame in the HUD (not the bar over the mob's head) | — |
+| `Kill_XP/W_Kill_xp` | the kill line «<creature> / +N XP» (owned by the game instance, added to the viewport with no parent) | 46 exports. Tree: `CanvasPanel_0` → `CanvasPanelSlot_1` (anchors full screen) → overlay `FillScreen` → `OverlaySlot_2` (HAlign Center, VAlign Center, Padding Top **80** by the author) → `Border_XP` → `VerticalBox_0` (name `TextBlock_145`, `ExperienceAmount`). The graph sets NO place (no `SetPositionInViewport`, no slot call): `ExecuteUbergraph` = `GrabSavegame` → `LoadSaveOptions`, `SettingsChanged` bind, `PlayAnimation(Opacity / Opacity_NoBackground)` (colour tracks only), `PlaySound2D`. Its options in `SaveUISettings_UIH`: `XP_OnKill`, `_Names`, `_Amount`, `_Background`, `_Sound`, `_CustomColor`, `_Color` — no place, no time. Extract: `patch-mod-asset.py extract UIMod_Hosav W_Kill_xp <work>` (the bare name; `Kill_XP/W_Kill_xp` is refused) |
 
 ## Food, water and weight blink (recon 2026-10-30 ≈14:2x, plan 36 W36)
 
@@ -77,6 +78,11 @@ side panel, a settings window. KRINIK MODIFIED in the build: the pak is rebuilt 
 - Asset strings and layout — `_config/localization/asset-strings/UIMod_Hosav__*.tsv` (SaveUISettings_UIH, W_SmoothHP, W_UI_SettingsButton,
   DT_UIModuleTable_HosavNew, UIModuleTable_UIH, BPFL_Hosav_UI).
 - The «k» decimal (2026-10-30), server metrics off, the two-column layout (2026-10-26).
+- **The kill XP line to the centre of the upper half (2026-11-02 10:3x, `[OWNER]` 08:58 «его бы сельно вверх, в центр верхей половины экрана»):**
+  `UIMod_Hosav__W_Kill_xp.tsv` — `prop:OverlaySlot_2/Padding/Top -258`: a top padding T moves the line by the WHOLE T (measured live 10:4x by
+  `Border_XP.Slot:SetPadding` + `PlayKill_Animation` with `XP_Amount` / `CharacterName` set — line centre at 623 / 539 / 270 of 1080 for T 80 / 0 / −258);
+  −258 ≈ −H/4 of the 1031-unit canvas. The first try −516 (a «T/2» model) pinned the line to the top edge. Built 10:39 (the identity guard «1 of 228 chunks
+  differ» = this edit, copied by hand). A kill by `corpse-stand.sh` (KillCharacter) does NOT play the line — call `PlayKill_Animation` on the live widget.
 - The rebuilt outer pak is uncompressed — 2–3× larger than the author's (26 → 51 MB), no effect on the game.
 
 ## Open

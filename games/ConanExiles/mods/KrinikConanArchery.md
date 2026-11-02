@@ -110,6 +110,17 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
   прозрачности». NOT DONE. Way: find the effect (the bow's full-charge release — a Niagara / particle or a widget sprite; recon on the release by the remote),
   a hub row on the KrinikConanArchery page «Ударная волна при полном заряде» — a slider of its opacity 0–100 %, default 0 (off); applied natively (the effect's
   own parameter or its spawn skipped at 0), no per-frame work.
+  **Recon 2026-11-02 10:47–10:55 (live, `NotifyOnNewObject` on particle components + a real draw by `mouse-seq.ps1`; read the template 100 ms after the birth —
+  at the birth it is not set):** a draw spawns `P_bow_powercharge` on the hero (`CharacterMesh0` / `b_R_prop`); a FULL charge released spawns
+  **`/Game/Effects/Particles/P_bow_powercharge_release`** on the same bone — the shock wave; the flying arrow carries `P_arrow_trail_powershot`; the hit — the
+  world's `P_impact_sand` / `P_Water_Impact`. (Also seen: the hero keeps every finished `P_bow_powercharge` component attached — 4 after four draws.)
+  The release system: two CPU sprite emitters, material `M_particle_powershot_charged` (BLEND_Additive, unlit, the particle colour drives it; scalar params
+  cameracenterfade, distancefade, curve1/2, radscale, speed, zoom — none is an intensity); NO instance parameters. Emitter 0: colour (0.5, 1, 0.5), alpha 0.3,
+  lifetime 0 (the emitter's own), size 50–200; emitter 1: white, alpha 0.3 → 0, lifetime 0.15 s, size 200. **Lua reaches and WRITES the baked tables**:
+  `StaticFindObject(<system>:ParticleModuleColorOverLife_0/1).ColorOverLife.Table.Values[i]` (written 0.5×, read back, restored). Plan: the slider k scales
+  both colour tables from the originals (additive — dimmer is more transparent), k 0 = black = invisible; applied at load and on a hub save — zero per-frame
+  and zero per-shot work. **Not seen yet:** the look at k 1 vs 0 — a remote spawn (`SpawnEmitterAttached` on `b_R_prop`, even with the lifetime stretched to
+  3 s) showed nothing on the sand either way; the check is a 60 fps clip of a REAL full-charge shot (EXP-0430).
 - seen 2026-10-31 15:51: the pause-menu list shows «v1.0.0»; the Krinik mods still stand at the bottom of the list (W11 «top» half open).
 - **NEW FEATURE, 1.0.0 (`[OWNER]` 2026-11-01 09:11 «KrinikConanArchery · в этот мод идет еще одна фича · После смерти - регдол труп врага не должен уничтожать
   воткнутые в него стрелы - все стрелы сохраняются, торчат из трупа, их можно собрать.»):** every arrow copy stuck in a creature stays stuck in its ragdoll

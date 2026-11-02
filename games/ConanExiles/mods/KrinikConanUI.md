@@ -263,8 +263,13 @@ reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/re
   `_Background`, `_Sound`, `_CustomColor`, `_Color` — NO position and NO display time; so by HOUSE_RULES rule 8 the place is a native edit of `W_Kill_xp` (its
   position / alignment in its own graph — trace `PlayKill_Animation` and `Construct`), and a time row would be ours.
 
+- **DECIDED 2026-11-02 10:54 after review folder 59 (four variants on one corpse):** `[OWNER]` «фон 60, меньше на» · «30» · «даем это настройкой в моде UI
+  криника» — the strip 30 % smaller (render scale 0.70) with the backing alpha 0.6, both as hub rows «Плашка трупа: размер / фон» (`ui_strip_scale` 0.70,
+  `ui_strip_back` 0.60, applied by `krinik_ui_fixes.place_strip` on the strip's events; the kit ships the same defaults — `kit-conanui-edit.py` STRIP_SCALE /
+  STRIP_BACKING_ALPHA). The places (08:57): «E Взять» −14 % / +6 %, the strip −22 % / 0 (shifts of the screen, rows `ui_pickup_x/y`, `ui_strip_x/y`; −8 and
+  −15 were seen over the hero, frames p1 / s2f 10:40–10:42). Cases S1–S3, P1–P3 of `TC_conan_hub_rows_audit_2026-11-01.md`.
 - **The owner's word 2026-11-02 08:54 on the corpse strip** (`WBP_ContainerInfo`, his frame: «Труп · Разделать труп · Труп» over a dark band): `[OWNER]` «можно
-  эти плашки 1) сделать меньше на 25% 2) фон сдлеать более прозрачным?» — NOT DONE. Way: the kit (`kit-conanui-edit.py`, the strip block): the strip
+  эти плашки 1) сделать меньше на 25% 2) фон сдлеать более прозрачным?» — superseded by the decision above. Way: the kit (`kit-conanui-edit.py`, the strip block): the strip
   `OverlaySlot_5` content scaled to 0.75 (its render scale or the text sizes and paddings × 0.75 — the padding L/R 120 and the brush margins 0.40 scale with
   it), `Border_Underlay` brush colour alpha 0.8 → a lower value (show variants to the owner: 0.6 / 0.45 / 0.3 on one frame); then the kit build, a frame at
   the corpse (stand `_config/strip-open.sh`) before / after.

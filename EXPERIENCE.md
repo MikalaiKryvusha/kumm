@@ -91,6 +91,23 @@
 
 ## Entries
 
+### EXP-0442 · 2026-11-02 · ❌→✅ · #conan #ui #umg #popup #colour
+class: hidden-layer-shows-through
+**Lesson:** a popup plate at alpha 0.98 (the mockup's `.pop`) over a saturated DARK red swatch drew a pure BLACK block (0, 0, 0) inside the option list — not a
+2 % tint; a green swatch under the same plate showed nothing, and the live brush alpha 1 removed the block. A popup that covers live controls is OPAQUE (1.0);
+a near-opaque value saves nothing the eye sees and buys a colour-dependent artefact.
+**Repro:** open a chooser over a red colour row, `px` the swatch spot inside the plate: anything far from the plate's fill is a show-through.
+none-cheap: the kit's PLATE constant is the one place; the case O1 of `TC_conan_hub_rows_audit_2026-11-01.md` re-checks it
+
+### EXP-0441 · 2026-11-02 · ❌→✅ · #conan #ue4ss #lua #umg #api
+class: wrong-api-assumption
+**Lesson:** `ComboBoxString:SetSelectedIndex(v)` failed «UFunction expected 2 parameters, received 1» — this engine's signature is `(Index, SelectInfo)`; the
+third paid case of the class after `SetIsToggledOn(…, ShouldBroadcast, IsInstantTransition)` and `SetValue(RealValue, IsInitializing)`. And the failed call
+sat between «open the author's window» and «close it» inside one `pcall` — the window stayed on screen: an error path closes what the try opened.
+**Repro:** `bash pult.sh "lua _G.__fp='/Script/UMG.ComboBoxString:SetSelectedIndex'; return dofile('D:/work/ai_sandbox/ConanExiles/_config/fn-params.lua')"`
+**Trigger:** writing a Lua call into a native / blueprint function not called before → print its parameters with `fn-params.lua` first.
+mechanized: `ConanExiles/_config/fn-params.lua` (the remote prints a UFunction's parameters)
+
 ### EXP-0440 · 2026-11-02 · ❌→✅ · #anonymity #public-repo #game-source
 class: game-source-in-a-path
 **Lesson:** a folder name of the owner's download (the release / repacker name of the clean game copy) went into HOUSE_RULES, STATUS and a case file of the PUBLIC
