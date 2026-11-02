@@ -165,7 +165,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > third person** (notes `KrinikConanUI.md` → Open, the way written) — NOT DONE; do it together with the strip's size / transparency. **08:59 the XP line
 > «<creature> +N XP» is Hosav's `W_Kill_xp` (`/Game/Mods/UIMod_Hosav/Kill_XP/`, in the viewport with no parent; `LoadSaveOptions` — maybe Hosav's own setting) —
 > target: the centre of the upper half. 09:00 the owner's BUG — «E Взять» missing over nest eggs → `bugs/74_…` (recon first).** The colour-rectangle pak is in
-> `_unpacked/KrinikConanUI/` (13 124 437 B), NOT deployed (the owner's game).
+> `_unpacked/KrinikConanUI/` (13 124 437 B), NOT deployed (the owner's game). **09:02 — the full-charge shock-wave sprite around the bow: an opacity slider in
+> KrinikConanArchery, default 0 (off)** (notes `KrinikConanArchery.md` → Open). Hosav's XP_OnKill options have no position / time (09:02) — a native `W_Kill_xp` edit.
 > **The owner's launcher words 08:35–08:37 → HOUSE_RULES 25–26:** «Играть» closes the launcher, «Удалить» keeps it open (code done, launcher rebuilt,
 > `[NOT-TESTED]`); install / uninstall are tested on a COPY of the only Conan game folder in `D:\Instals\` (its name stays out of this public repository) — copied to
 > `D:\Games\Conan_Exiles_3_0_1_clean_test` (597 files, 58.3 GB); cases K1–K7 `testcases/TC_conan_clean_copy_install_launcher_2026-11-02.md`. Then the list's
