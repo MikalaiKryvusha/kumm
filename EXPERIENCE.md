@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0439 · 2026-11-02 · ❌→✅ · #conan #lua #ui #log #hub
+class: edit-blamed-without-the-log
+**Lesson:** the previous chat saw the hub EMPTY after an alignment edit, reverted it and closed «cause not read». The log said why in one line: the remote
+opened the window during the world load — «module opened, but no visible W_KrinikModSettings_C found» — so it was never filled. And the alignment was never
+the seam: every slot was Fill; the list was 214 units tall for one 53-unit name because hidden pages kept their rows. Before blaming an edit for an empty
+or wrong window: grep the section's own log lines of that opening, then read the widget numbers (`GetDesiredSize`, slot alignment, visibility) by the remote.
+**Repro:** `grep "ModSettings\] window\|no visible" UE4SS.log` after an opening; open a hub only after «HudOutline] новый HUD».
+none-cheap: one decision point — reading the section's log line of the opening before reverting
+
 ### EXP-0438 · 2026-11-01 · ❌ · #owner #question #interview
 class: question-taken-for-order
 **Lesson:** «п это сложно сделать? Обливион так умел» was a QUESTION; I wrote it into interview #030 as answer A and started the work — `[OWNER]` 23:38
