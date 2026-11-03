@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0452 · 2026-11-03 · ❌ · #conan #ue4ss #hook #crash #owner-game
+class: reading-an-object-param-in-a-native-slot-hook
+**Context:** bug 75, a remote post-hook on `QuickLootPanel:SlotItemSelectionChanged(Item)` logging `item:get():GetFName()`; the owner took items with F.
+**Result:** ❌ — the game crashed at the take (`EXCEPTION_ACCESS_VIOLATION reading 0x18`, UE4SS frames on top) right after the hook fired; `pcall` does not catch a
+native fault. The sibling hook on `SlotItemAddedOrRemoved(otherIndex)` read its INT param fine (`otherIndex=3`).
+**Lesson:** in a hook on a native slot that fires during a rebuild, read only plain params (int, bool); an object param may be a freed or half-built object —
+never `:get()` it in the same frame. Before any hook into the owner's running game, ask: does it read an object the engine is rebuilding?   → link:
+`bugs/75_conan_quick_loot_selection_jumps_on_f_take.md` · [[EXP-0403]]
+
 ### EXP-0451 · 2026-11-03 · ❌ · #conan #stand #camera #corpse #owner-time
 class: a-stand-built-by-hand-call-by-call
 **Context:** bug 75 control run — a corpse stand built in ~20 single remote calls (teleport, kill, place, aim, Shift), 19:22–19:50, the owner watching his screen.

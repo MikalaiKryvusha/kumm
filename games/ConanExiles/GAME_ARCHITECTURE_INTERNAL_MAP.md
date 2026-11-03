@@ -135,7 +135,9 @@ fires (UE4SS hooks it); the blueprint `HandleInventoryChanged` / `HandleLootCont
 **When the quick-loot window opens (corrected 2026-11-03 20:0x):** by itself when the crosshair is on a corpse that HAS LOOT of its own — `[OWNER]` 2026-11-03
 19:55 «убиваю кого-то, например, дикаря. и навожу на труп прцелл - окно само открывается» · 20:04 «окно квиклута показывается. когда есть что залутать из
 трупа»; a beast corpse (a Kappa — harvested, no loot) never opened it on any of nine stands of 19:22–19:50, not even with items put in by
-`AddItemTemplate` (`corpse-fill.lua`). The 2026-11-02 line «opens … after a Shift tap» was WRONG: Shift moves our camera (seen 19:50). Stand rule: a HUMANOID
+`AddItemTemplate` (`corpse-fill.lua`). The Shift tap of the 2026-11-02 recipe does NOT open the window — it WAKES THE IDLE CAMERA: after ≈30 s without real input
+the game's idle camera ignores `SetControlRotation` until a real key (line «The game's idle camera» below); without it every remote aim of the evening
+missed (corrected 20:5x — the 19:5x note «the Shift recipe is wrong» was itself wrong). Stand rule: a HUMANOID
 enemy corpse (it carries loot), never a beast; or `strip-open.sh` (the strip opened by code also shows the window). Spawning: `CheatManager:Summon` of the bare
 `/Game/Characters/NPCs/Humanoid/HumanoidNPCCharacter.HumanoidNPCCharacter_C` gives a template NPC titled «[Fighter]» in English (no table row — not a build
 defect); an NPC teleported from an UNLOADED area and killed at once falls through the ground (its body at z −44718 over ground −19850).
