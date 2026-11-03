@@ -129,7 +129,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 > **NEXT CHAT, FIRST (chat cb012770, 2026-11-03 23:25 +03:00):** (1) the owner's pick of the perk gap (review folder 62: 10 · 16 · 22) → `PERK_TEXT_PAD`, kit build, guide line
 > (bug 64 item 46); (2) bug 82 — load a region with nests (ostrich lands / swamp), find a nest egg, read what it is; (3) bug 80 — one real E over a corpse in a
-> bush; (4) bug 75 debt — the pretty, proper rim fix; (5) the rest of the guide's 1.0.0 list (all checked open against bug 64). Nexus texts — not now.
+> bush; (4) bug 75 debt — the pretty, proper rim fix; (4a) bug 64 item 12a — the enemy bar a little higher over its skull (`[OWNER]` 23:29, a kit override of `W_EnemyHealthbar`); (5) the rest of the guide's 1.0.0 list (all checked open against bug 64). Nexus texts — not now.
 > Stand recipe for the quick-loot window: `loot-stand.sh` → `quiet-stand.lua` → `loot-aim.sh` (hits in 2–10 steps) → `loot-take-clip.sh`.
 > **NOW 2026-11-03 21:54 +03:00 — chat cb012770, `[OWNER]` 21:02 «делаем сборку конана 1.0.0»:** working the 1.0.0 list below in order.
 > **CHAT ce994c74 CLOSED 2026-11-03 20:57 +03:00 (soft, `[OWNER]` 20:55 «работай автономно 10 минут. Затем начинай закрытие этого чата, в новом продолжим»).
