@@ -58,7 +58,7 @@ Native levers found: panel `SlotCycleSelectionNext` / `SlotCycleSelectionPrev` (
 `SlotItemAddedOrRemoved(otherIndex)`; grid `GetSelectedIndex() → VirtualIndex`, `SelectItem(VirtualIndex Index, bool Force)` — `VirtualIndex` exposes NO
 reflected fields: Lua gets an empty table back and `SelectItem({}, true)` only cleared the selection (frame sel12) — not usable.
 **Probe now in the running game** (remote hook, not shipped): post-hook `SlotItemAddedOrRemoved` → `SlotCycleSelectionNext(); SlotCycleSelectionPrev()` in the
-same frame — waits for the owner's F takes (asked by a voice call 20:4x). If it does not hold the rim: track the selected position ourselves (SetActor → 0,
+same frame — FAILED: the owner saw the rim jump with it (20:52). If it does not hold the rim: track the selected position ourselves (SetActor → 0,
 Next/Prev ±1) and after the rebuild step back to it with the same two calls.
 **Stand facts of the same hour:** with BOTH our Lua sections out the quick-loot window was NOT SEEN on any stand of the evening — but those stands aimed without the Shift tap that wakes
 the idle camera (game map), so the aim itself may have failed; B2 is open, not «not runnable»; a strip opened by code (`strip-open.sh`) shows the window but takes NO input (F, wheel do nothing — it is our own instance); `_config/aim-sweep.lua`
