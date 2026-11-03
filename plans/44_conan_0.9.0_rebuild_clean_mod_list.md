@@ -25,9 +25,9 @@
 
 ## Steps (each closes with its check)
 
-- [ ] 1. **Collapsed meter look survives.** Find what rebuilds the Damage Meter widget (hub, Esc, teleport, save) and re-apply the label on THAT event
+- [x] 1. **Collapsed meter look survives.** DONE 13:11 — the label on the meter widget's own birth; seen «— F1» after a teleport (frame). Find what rebuilds the Damage Meter widget (hub, Esc, teleport, save) and re-apply the label on THAT event
       (rule: events, not polling). Check: the label present after hub, Esc menu, teleport, 10 min idle — frames at 4K.
-- [ ] 2. **Bug 79** — `PauseGameInMenu` skips `W_IngameLoadingScreen_C`. Check: the teleport stand, then a waystone travel and a death/respawn — time 1.0
+- [x] 2. **Bug 79** DONE 13:11 on the teleport stand (time 1.00, landed in 4 s); waystone / respawn — later in this plan; — `PauseGameInMenu` skips `W_IngameLoadingScreen_C`. Check: the teleport stand, then a waystone travel and a death/respawn — time 1.0
       within 5 s, log lines.
 - [ ] 3. **Mod list fields.** A tool `set-pak-modinfo.py` (from `set-pak-version.py`): writes `description`, `changeNote`, `author`, `authorUrl` from a table;
       descriptions — the README's Russian «Что делает» text, plain (no BBCode, no URLs, no `\r`). Krinik paks: author «Кот Криник (KOT KRINIK)», URL — the

@@ -1,6 +1,6 @@
 # Bug 79 — the hub pause takes the in-game loading screen for a menu and freezes the world
 
-> **Created:** 2026-11-03 12:53 +03:00 · **Parent:** plan 43 item 20 (the Nexus screenshot stand) · **Status:** 🔴 open — reproduced once on the agent's stand
+> **Created:** 2026-11-03 12:53 +03:00 · **Parent:** plan 43 item 20 (the Nexus screenshot stand) · **Status:** 🟡 fixed 2026-11-03 13:11 on the teleport stand (time 1.00 through it, landed in 4 s); waystone and respawn cases still to run
 > **Outbound:** —
 
 ## What is seen

@@ -222,6 +222,13 @@ sRGB → linear (`u()` and `lin()` in `kit-krinik-modsettings.py`):
   carries its own left padding u(6). The kit's Python has no `ShiftChild`: a row in the old order is emptied by `clear_children()` and re-filled in script
   order before the save (no orphan → no GUID trap). Seen on all five pages (case C1).
 
+**After an in-game loading screen (2026-11-03, plan 44, bug 79).** A teleport / waystone / respawn shows `W_IngameLoadingScreen_C`; `IsFullscreenGUIActive` is
+true while it shows, and the pause section used to slow the world to 0.03 — the load never finished (the hero hung in the air). Since 2026-11-03 the poll
+skips it (`loading_screen_up()`, the object cached, searched only while full-screen and ≤ once per 2 s) and disarms as at a world load. After the same
+screen the game builds a NEW `DN_UI_DmgWidget_C` (the old one leaves the viewport) — the F1 label and the 20 % look were lost until `krinik_hud_outline`
+also applies them on that widget's birth (`NotifyOnNewObject(/Game/Mods/DamageNumber/UI/DN_UI_DmgWidget.DN_UI_DmgWidget_C)` + 500 ms). Seen 13:11: time 1.00
+through the teleport, landed in 4 s, the new widget «— F1» (frame). The owner's 12:55 «вод DPS вверху старый» was this loss after a teleport, not a stale build.
+
 **Mirror pair:** `ue4ss/feedback/collect_report.ps1` is a COPY of the pack's `_config/player-report/collect_report.ps1` (the Lua mod needs it inside the game
 folder). Check: `cmp _config/player-report/collect_report.ps1 _unpacked/KrinikConanUI/ue4ss/feedback/collect_report.ps1` — edit the source, copy again.
 
