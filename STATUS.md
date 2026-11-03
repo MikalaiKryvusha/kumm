@@ -127,6 +127,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-03 19:51 +03:00 — work toward 1.0.0 resumed (`[OWNER]` 19:21 «Продолжим делать сборку? то, что отложено до 1.0.0?»); the list = the guide's chapter
+> «Известные проблемы и планы на 1.0.0» (`ConanExiles/docs/guide/guide-3.0.1.html`) + kit info paks of the four Lua mods + the waystone / city frames.**
+> - ✅ **Food, water and weight blink in ONE phase** (`[OWNER]` 19:41 «мерцают крассным в рассинхрон» · «одну шину»): `krinik_hud_blink` drives the limit too,
+>   Hosav's animations stopped — S1–S3 pass, report `testcases/reports/2026-11-03_conan-hud-blink-one-bus.md`; the guide line updated (PDF — at the release).
+> - PARKED: **the quick-loot rim jump on F (bug 75)** — the window would not open on any stand of 19:22–19:50 (UI Lua out AND full build; Shift moves the camera
+>   in this build, so the 11-02 «Shift tap» recipe is wrong). The stand is now ONE command — `ConanExiles/_config/loot-stand.sh` (oasis, corpse, 3 stacks,
+>   hero 3 m off, crosshair on the body), then `loot-take-clip.sh`. Resume: find what opens the quick-loot window (game map «Loot change event», the
+>   interaction trace `UpdateHighlightTarget`) before any more clips.
+> - Next on the list: «E Взять» and the corpse strip both over a corpse in a bush; no «E Взять» over nest eggs; enemy health bars over the enemies.
 > **NOW 2026-11-03 19:05 +03:00 — Nexus mod 65 IS PUBLISHED (16:40), but its only file is QUARANTINED** (Files tab: «quarantined by our automated safety checks»;
 > header «Virus scan — Some suspicious files»): the request to the Nexus support address is written —
 > `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_request.txt` — SENT by the owner 2026-11-03 19:10, ticket 276571 (auto-reply; support hours 09:00–17:00 GMT, extra details — a reply to that mail); Nexus names no review time — check the Files tab of mod 65 for the quarantine line; do not delete or replace the file meanwhile (help article 117).

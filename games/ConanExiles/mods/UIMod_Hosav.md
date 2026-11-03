@@ -88,6 +88,6 @@ side panel, a settings window. KRINIK MODIFIED in the build: the pak is rebuilt 
 ## Open
 
 - W36 done 2026-10-30 (speed 0.30 here, the early zone in KrinikConanUI:HudBlink). Since 2026-11-01 12:1x the early zone is OUR colour tween, not these
-  animations (`PlayAnimationTimeRange` ignores its end from Lua — EXP-0422); KrinikConanUI stops `NoFood` / `NoWater` / `OverEncumbered_Weight` while it
+  animations (`PlayAnimationTimeRange` ignores its end from Lua — EXP-0422); KrinikConanUI stops `NoFood` / `NoWater` / `OverEncumbered_Weight` while it (since 2026-11-03 also AT the limit — one phase for all icons, the native start times put two limit icons out of phase)
   drives an icon. Trap of this asset: after its first pass `OverEncumbered_Weight` idles «playing» at the last key (alpha 0) and rewrites the image every frame;
   while food is at exactly 0 % the weight image is overridden too. The pink-to-red look — the owner's eye (review folder 45).
