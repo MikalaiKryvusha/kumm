@@ -129,7 +129,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 > **NOW 2026-11-03 19:05 +03:00 — Nexus mod 65 IS PUBLISHED (16:40), but its only file is QUARANTINED** (Files tab: «quarantined by our automated safety checks»;
 > header «Virus scan — Some suspicious files»): the request to the Nexus support address is written —
-> `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_request.txt` — the OWNER sends it from his Nexus account's mail.
+> `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_request.txt` — SENT by the owner 2026-11-03 19:10; Nexus names no review time — check the Files tab of mod 65 for the quarantine line; do not delete or replace the file meanwhile (help article 117).
 > The e-mail line of the description is a live `mailto:` link now (both halves; the source `nexus_full_description.bbcode` fixed too). The «Adult» mark:
 > RESOLVED — the owner removed the tags «Extreme violence» and «Sexualised» himself, the badge is gone (his frame 19:08).
 > Route details — `HOUSE_RULES_REFERENCE.md` §2, the Nexus row.
