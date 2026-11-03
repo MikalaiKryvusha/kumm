@@ -132,7 +132,14 @@ Native class chain of the panel: `W_QuickLootPanel_C` → `QuickLootPanel` (`Slo
 `HoldPromptVisibility` (default 3; 1 hides it); also `ShowOnlyText`, `BindingLabel`, `NoPresentationVisibility`.
 Loot change event (2026-10-29 00:2x, counters on nine candidates around a REAL Q hold): only the native `QuickLootPanel:SlotItemAddedOrRemoved`
 fires (UE4SS hooks it); the blueprint `HandleInventoryChanged` / `HandleLootContainerInventoryChanged` of `WBP_ContainerInfo` stay silent on a corpse.
-Quick-loot input (bug 75 stand, 2026-11-02): the window opens on a corpse under the crosshair after a Shift tap in our stand; the CELL is chosen by the WHEEL
+**When the quick-loot window opens (corrected 2026-11-03 20:0x):** by itself when the crosshair is on a corpse that HAS LOOT of its own — `[OWNER]` 2026-11-03
+19:55 «убиваю кого-то, например, дикаря. и навожу на труп прцелл - окно само открывается» · 20:04 «окно квиклута показывается. когда есть что залутать из
+трупа»; a beast corpse (a Kappa — harvested, no loot) never opened it on any of nine stands of 19:22–19:50, not even with items put in by
+`AddItemTemplate` (`corpse-fill.lua`). The 2026-11-02 line «opens … after a Shift tap» was WRONG: Shift moves our camera (seen 19:50). Stand rule: a HUMANOID
+enemy corpse (it carries loot), never a beast; or `strip-open.sh` (the strip opened by code also shows the window). Spawning: `CheatManager:Summon` of the bare
+`/Game/Characters/NPCs/Humanoid/HumanoidNPCCharacter.HumanoidNPCCharacter_C` gives a template NPC titled «[Fighter]» in English (no table row — not a build
+defect); an NPC teleported from an UNLOADED area and killed at once falls through the ground (its body at z −44718 over ground −19850).
+Quick-loot input (bug 75 stand, 2026-11-02): the CELL is chosen by the WHEEL
 (`QuickLootCycleSelectionNext = MouseScrollDown`, `…Prev = MouseScrollUp`), F takes the chosen stack, Shift is «Перейти» (to the inventory). Corpse skeleton
 bones are `b_root`, `b_pelvis`, `b_spine_1…` (170 bones on a humanoid); the mesh root lies at the feet, `GetSocketLocation(FName("pelvis"))` returns the root.
 Items into a corpse's loot: `Corpse_C.ItemInventoryReplicateToAll:AddItemTemplate(id, −1, None, n, true, 1, 0)` (`_config/corpse-fill.lua`).
@@ -204,6 +211,11 @@ R 72 T 88, brush 512×256; key art `Image_KeyArtOver/Under` Right/Bottom; versio
 `InteractionDistance + бонус`; каждое попадание проходит `CheckLineOfSight(actor, ImpactPoint + вперёд_камеры·10, компонент, экземпляр)`: цель =
 `InteractTargetOverride` → да; труп и `LootContainer` → `IsActorInInteractableRange(pawn)`, затем родная `IsInteractableInLineOfSight`;
 `PickupFoliage` и `IsPickupInterface` → расстояние героя < √300000 ≈ 548 см; прочее → `IsInteractableInLineOfSight`.
+**Order of the targets (3.0.1 kit bytecode, read 2026-11-03 19:5x — `uaj func … FunCombat_PlayerController.uasset VER_UE5_6 UpdateHighlightTarget` + the
+asset's import table by `uaj tojson <asset> <out.json> VER_UE5_6`):** `InteractTargetOverride` → `SphereTraceMulti` + `LineTraceMulti` (appended) → the hit loop
+(water, interfaces, `CheckLineOfSight`, lore items) sets `HasValidTarget` and highlights the ACTOR → only when no actor target: the foliage probe
+`PickupGatheringOneInstance` → the instance highlighted. So an actor under the crosshair (a corpse in a bush) wins over a foliage pickup at the same spot,
+and our «E Взять» plate may show there while E takes the corpse — to fix: `[OWNER]` 2026-11-03 19:57 «над трупом в кустах - чинить».
 **Правило для мода камеры (2026-10-26, подтверждено в игре):** игра продлевает луч взаимодействия на длину штанги и пересчитывает надбавку сама
 (запись мода затирается за ≈1 с). Камера обязана стоять от героя на длину штанги: сдвиг «назад» держать в `TargetArmLength`, не в
 `SocketOffset.X` — иначе луч короче на этот сдвиг и не достаёт низкие цели (трупы).

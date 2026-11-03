@@ -131,11 +131,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > «Известные проблемы и планы на 1.0.0» (`ConanExiles/docs/guide/guide-3.0.1.html`) + kit info paks of the four Lua mods + the waystone / city frames.**
 > - ✅ **Food, water and weight blink in ONE phase** (`[OWNER]` 19:41 «мерцают крассным в рассинхрон» · «одну шину»): `krinik_hud_blink` drives the limit too,
 >   Hosav's animations stopped — S1–S3 pass, report `testcases/reports/2026-11-03_conan-hud-blink-one-bus.md`; the guide line updated (PDF — at the release).
-> - PARKED: **the quick-loot rim jump on F (bug 75)** — the window would not open on any stand of 19:22–19:50 (UI Lua out AND full build; Shift moves the camera
->   in this build, so the 11-02 «Shift tap» recipe is wrong). The stand is now ONE command — `ConanExiles/_config/loot-stand.sh` (oasis, corpse, 3 stacks,
->   hero 3 m off, crosshair on the body), then `loot-take-clip.sh`. Resume: find what opens the quick-loot window (game map «Loot change event», the
->   interaction trace `UpdateHighlightTarget`) before any more clips.
-> - Next on the list: «E Взять» and the corpse strip both over a corpse in a bush; no «E Взять» over nest eggs; enemy health bars over the enemies.
+> - 🔴 **The quick-loot rim jump on F (bug 75) — B1 REPRODUCED 20:14 on a real stand:** answered by the owner — the window opens by itself over a corpse that
+>   HAS LOOT (`[OWNER]` 19:55 «убиваю кого-то, например, дикаря. и навожу на труп прцелл - окно само открывается» · 20:04 «когда есть что залутать из трупа»); a
+>   Kappa corpse never has loot — why nine stands of 19:22–19:50 failed (game map, «When the quick-loot window opens»). Stand: the oasis camp boss «Эника из
+>   Киммерии» killed by `corpse-stand.sh 250` (from −78166, 245999), the hero 3 m off, aim by `PlayerCameraManager:GetCameraLocation()` on bone `b_spine_2`
+>   (6 passes); 120 fps `loot-take-clip.sh` with `SEQ="wait:700,wheel:-1,wait:900,kdown:F,wait:80,kup:F,wait:2500"`: F on cell 1 → the items shift left and the rim
+>   stands ≈ 5 sampled frames on an EMPTY cell (row 2, column 6), then goes. NEXT: B2 on this stand with the two Lua sections out.
+> - NEW owner remarks: (1) `[OWNER]` 20:14 «под иконкой перегруза тень слишком сильная, не такая, как под жаждой и голодом - там или легче или нет» · «Сделать
+>   однотипно легко всем иконкам худа» — recon first (the weight icon's shadow: Hosav's image or our `Image_Weight_Blinking` paint); (2) seen by the agent 20:13:
+>   the quick-loot window lies over the tutorial journal panel («Выживший — Потратьте очки характеристик») and that text shows through the window's grid — to file.
+> - Next on the list: no «E Взять» over nest eggs; enemy health bars over the enemies. «E Взять» beside the corpse strip over a corpse in a bush — TO FIX (`[OWNER]` 19:57 «над трупом в кустах - чинить»), in progress 19:57.
 > **NOW 2026-11-03 19:05 +03:00 — Nexus mod 65 IS PUBLISHED (16:40), but its only file is QUARANTINED** (Files tab: «quarantined by our automated safety checks»;
 > header «Virus scan — Some suspicious files»): the request to the Nexus support address is written —
 > `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_request.txt` — SENT by the owner 2026-11-03 19:10, ticket 276571 (auto-reply; support hours 09:00–17:00 GMT, extra details — a reply to that mail); Nexus names no review time — check the Files tab of mod 65 for the quarantine line; do not delete or replace the file meanwhile (help article 117).
