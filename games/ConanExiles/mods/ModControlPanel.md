@@ -4,6 +4,9 @@
 > **Status:** living notes — the ONE place for this mod's internals
 > **Outbound:** —
 
+**REMOVED from the build 2026-11-03 22:4x** (`[AI]` by mandate — `[OWNER]` 22:39 «аналогичный вопрос про автономность работы»): it was empty here, LBPR opens
+its own window from «Настройки модов → Прочее» (`KrinikConanUI.md`, `krinik_mods_button`). The notes below stay for a return.
+
 **What it is.** One settings window («Панель управления») for the mods that support it. It gives nothing by itself — it is the HOST other mods' settings live
 in; it is in the build for LBPR, whose settings do not open without it (the owner's choice 2026-09-09). Load order: BEFORE LBPR (the host first).
 

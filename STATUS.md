@@ -136,12 +136,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    Live demo 22:18 — `[OWNER]` «вижу, починила, хотя и некрасиво» · «пока сойдёт»: DEBT `[OWNER]` 22:18 «там долг на будущее - сделать красиво» · «починить правильно» (the ≈ 0.3–0.4 s with no rim; bug 75 «verdict»).
 > 2. ✅ **Aiming by the game's own answer** — `_config/loot-stand.sh` (hero 1.5 m) + `_config/loot-aim.sh` hit on five stands in a row (EXP-0454).
 > 3. ✅ The launcher's grey «Установить сборку» — DONE 2026-11-03 22:00 +03:00 (pack `068b935`, report `2026-11-03_conan-launcher-install-button-gold.md`; the box wording
->    waits for the owner's eye). **HUD icon shadows — BUILT 2026-11-03 22:34 +03:00, NOT in game yet** (pack `d569d13`): the weight icon was the game's buff texture with
->    a soft black shadow, stacked twice by Hosav; now our 256 px icon in Hosav's style overrides it (KrinikConanUI kit). The new pak sits in the library;
->    deploy waits for the running game (PID 27572 — the owner took items in it at 22:18) to close, then a frame of the HUD icons. Then: bug 81 (the window over the
->    journey tracker, ways A/B/C to the owner's eye), ❓ ModControlPanel «Нет доступных виджетов» — CAUSE READ 22:4x: LBPR 1.0.5 has its own settings window
->    (module `LBPRWidgetID`) and never plugs into the panel (`mods/ModControlPanel.md` «Open») — to the owner: drop the empty panel and open LBPR's window
->    from «Настройки модов → Прочее»? (a build composition change, his call), the quick-loot window over the tutorial panel, bug 80 (corpse in a bush).
+>    waits for the owner's eye). ✅ **HUD icon shadows — DONE 2026-11-03 22:47 +03:00** (packs `d569d13`, `9ba2dbc`): the weight icon was the game's buff texture with a soft
+>    black shadow, stacked twice by Hosav; our 256 px icon in Hosav's style overrides it — seen in game (W1, W2), the look waits for the owner's eye.
+>    ✅ **ModControlPanel out of the build** (`[AI]` by mandate, `[OWNER]` 22:39 «аналогичный вопрос про автономность работы»): LBPR 1.0.5 never plugged into it;
+>    LBPR's own window is in «Настройки модов → Прочее» (M1, M2; the real click M3 not run). Report `2026-11-03_conan-hud-weight-icon-and-mcp.md`.
+>    Then: bug 81 (the window over the journey tracker, ways A/B/C to the owner's eye), bug 80 (corpse in a bush), the rest of the guide's 1.0.0 list.
 > 4. Nexus: ticket 276571 — look at the Files tab of mod 65 for the quarantine line.
 > Done in this chat: the Nexus page checked (Adult — the owner's tags; the e-mail a live link; the quarantine request sent); the HUD blink in one phase
 > (report `2026-11-03_conan-hud-blink-one-bus.md`); bug 75 reproduced and its cause read; the game map corrected (when the quick-loot window opens; the Shift

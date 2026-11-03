@@ -184,7 +184,10 @@ export function introduce(phrase, cfg) {
 // agent works; `dryRun` prints the phrase and the banner and makes no sound
 export function callDoor(root, text, { dryRun = false, log = console.log } = {}) {
   const cfg = cfgOf(root);
-  const phrase = introduce(cfg.callName + ', ' + String(text).trim(), cfg);
+  // The name is said once: a text that already opens with it is not prefixed again (KUMM 2026-11-03 22:38, the owner: «нахуя дважды имя моё произносишь?»).
+  const body = String(text).trim();
+  const named = cfg.callName && body.toLowerCase().startsWith(String(cfg.callName).toLowerCase());
+  const phrase = introduce(named ? body : cfg.callName + ', ' + body, cfg);
   if (dryRun) { log('CALL' + (cfg.session ? ' · ' + cfg.session : '') + ' (dry run, no sound): ' + phrase); return phrase; }
   signalCall(root, phrase, { log });
   return phrase;
