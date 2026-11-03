@@ -1,6 +1,7 @@
 # Bug 80 — over a corpse lying in a bush both the corpse strip and our «E Взять» show; only one of them is what E does
 
-**Status:** 🔬 research · **Severity:** S2 (a prompt that lies about the key) · **Version/build:** pack ConanExiles `37ed9e8`, KrinikConanUI
+**Status:** 🔧 fix built and seen 2026-11-03 23:03 +03:00 (KrinikConanUI `krinik_pickup_prompt`: our plate off while the game's corpse strip is on screen); the real E over a
+corpse in a bush NOT observed yet · **Severity:** S2 (a prompt that lies about the key) · **Version/build:** pack ConanExiles `37ed9e8`, KrinikConanUI
 `krinik_pickup_prompt` (bug 77 version) · **When/context:** seen by the agent 2026-11-02 15:18 (STATUS, «Seen 15:18 (to check)»); the guide's 1.0.0 chapter
 lists it · **Fixing:** this session, after the study below
 `[OWNER]` 2026-11-03 19:57 «над трупом в кустах - чинить» · «нужно ту плашку показывать, которая сработает,или взятие куста, или открытие трупа - это нужно изучить».
@@ -33,9 +34,18 @@ A corpse lying in a bush: the game's corpse strip («Труп … нажмите
 3. Vary: the crosshair on the body's middle / its edge over the bush.
 4. Then the fix by the observed rule — most likely «our plate hides while the game highlights an actor» if E took the corpse.
 
+## The fix (2026-11-03 23:0x)
+
+The rule taken from the controller's code (forensics above: an actor target first, the foliage probe only without one): while the corpse strip is on
+screen, E opens the corpse — so `krinik_pickup_prompt.check` shows our «E Взять» only when the module `ContainerInfo` is NOT active AND no live
+`WBP_ContainerInfo_C` (remembered at birth by `NotifyOnNewObject`, no search) is in the viewport and visible (the module flag alone missed the strip —
+`aim-sweep.lua`, 20:4x). Seen 23:05 (the oasis, the hero over the bush `bush-corpse.lua` found, the strip opened by `strip-open.sh`): over the bush the plate
+visibility 3 / opacity 1.00 → strip on → 1 / 0.00 → strip removed → 3 / 1.00. Owed: one REAL E over a corpse lying in a bush, to see that the corpse opens
+(the code says so). Stand fix of the same minute: `bush-corpse.lua` called a non-existent `IsDead` and found «no living humanoid» among ten.
+
 ## Decisions made without the owner
 
-— (open)
+- `[AI]` by mandate (`[OWNER]` 22:39 «аналогичный вопрос про автономность работы»): the strip wins (the game's own order), our plate yields.
 
 ## Links
 

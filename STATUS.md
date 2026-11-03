@@ -141,8 +141,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    ✅ **ModControlPanel out of the build** (`[AI]` by mandate, `[OWNER]` 22:39 «аналогичный вопрос про автономность работы»): LBPR 1.0.5 never plugged into it;
 >    LBPR's own window is in «Настройки модов → Прочее» (M1, M2; the real click M3 not run). Report `2026-11-03_conan-hud-weight-icon-and-mcp.md`.
 >    ✅ **Bug 81 — the quick-loot window no longer lets the journey tracker's text through** (pack `a23c9a6`, way A — the tracker not drawn while the
->    window shows; seen 22:56). Then: bug 80 (corpse in a bush), the rest of the guide's 1.0.0 list (the guide line for bug 81 is not in the guide — it was
->    the agent's own find).
+>    window shows; seen 22:56). 🔧 **Bug 80 — over a corpse in a bush only the corpse strip** (pack `4a739c1`, guide `1bb38f8`): our «E Взять» off while the
+>    strip is on screen (seen 23:05 by a code-opened strip over a bush); owed — one REAL E over a corpse lying in a bush. Next: the rest of the guide's 1.0.0
+>    list. At the 1.0.0 release: rewrite the Nexus builder's known-issues lists (`_config/release/build_nexus_description.py`) from the guide — they still
+>    name fixed items (the bush prompt, the rim on F).
 > 4. Nexus: ticket 276571 — look at the Files tab of mod 65 for the quarantine line.
 > Done in this chat: the Nexus page checked (Adult — the owner's tags; the e-mail a live link; the quarantine request sent); the HUD blink in one phase
 > (report `2026-11-03_conan-hud-blink-one-bus.md`); bug 75 reproduced and its cause read; the game map corrected (when the quick-loot window opens; the Shift
