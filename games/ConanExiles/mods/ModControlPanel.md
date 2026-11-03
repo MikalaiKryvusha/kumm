@@ -36,4 +36,11 @@ the raw `.uexp` before calling a widget code-less (2026-11-01: the first «code-
 ## Open
 
 - A player whose old MCP save holds «All» sees a category that no longer matches until he picks «Все» once (not seen live — no such save here).
-- The panel reads «Нет доступных виджетов» in this build (2026-10-31 and 2026-11-01): LBPR's settings do not show in it — not checked why.
+- The panel reads «Нет доступных виджетов» in this build (2026-10-31 and 2026-11-01). **Why (read 2026-11-03 22:4x):** LBPR v1.0.5 (Enhanced,
+  Workshop 3755091710) does not plug into this panel at all — not one package of its pak names `ModControlPanel`, `DAC_ControlPanel`, `W_CP` or `MDC_MCP`
+  (a name scan of its `.uheader` files in `Conan Exiles Mods/_text-extract-3.0.1/3755091710/x/`); it carries its OWN settings window `UI/W_LBPRMenu` (tabs
+  Building · Placeables · Thralls · About) in its own UI module row `LBPRWidgetID` (`Framework/UIModule_PATCH`, Category Popup) and a console command
+  `LBPRConfig` (`ConsoleCommand_PATCH`, `RequireAdmin`). The modinfo line «Please use ModControlPanel as required to access the LBPR settings» is stale.
+  Live: `GUIModuleController:ActivateModule(FName('LBPRWidgetID'), true, false)` creates the live `W_LBPRMenu_C` and the module reads active (the window
+  itself not seen on a background frame — a Popup needs the game in front; not looked at yet). So this panel is empty in the build; whether to drop it and
+  open LBPR's window from «Настройки модов» is the owner's choice (STATUS).

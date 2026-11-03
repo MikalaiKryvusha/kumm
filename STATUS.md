@@ -139,7 +139,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    waits for the owner's eye). **HUD icon shadows — BUILT 2026-11-03 22:34 +03:00, NOT in game yet** (pack `d569d13`): the weight icon was the game's buff texture with
 >    a soft black shadow, stacked twice by Hosav; now our 256 px icon in Hosav's style overrides it (KrinikConanUI kit). The new pak sits in the library;
 >    deploy waits for the running game (PID 27572 — the owner took items in it at 22:18) to close, then a frame of the HUD icons. Then: bug 81 (the window over the
->    journey tracker, ways A/B/C to the owner's eye), the quick-loot window over the tutorial panel, bug 80 (corpse in a bush).
+>    journey tracker, ways A/B/C to the owner's eye), ❓ ModControlPanel «Нет доступных виджетов» — CAUSE READ 22:4x: LBPR 1.0.5 has its own settings window
+>    (module `LBPRWidgetID`) and never plugs into the panel (`mods/ModControlPanel.md` «Open») — to the owner: drop the empty panel and open LBPR's window
+>    from «Настройки модов → Прочее»? (a build composition change, his call), the quick-loot window over the tutorial panel, bug 80 (corpse in a bush).
 > 4. Nexus: ticket 276571 — look at the Files tab of mod 65 for the quarantine line.
 > Done in this chat: the Nexus page checked (Adult — the owner's tags; the e-mail a live link; the quarantine request sent); the HUD blink in one phase
 > (report `2026-11-03_conan-hud-blink-one-bus.md`); bug 75 reproduced and its cause read; the game map corrected (when the quick-loot window opens; the Shift
