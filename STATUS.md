@@ -136,6 +136,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Damage Meter look kept after loading screens, bug 79 (the pause froze the world on a teleport); the game's mod list fields from the README (`set-pak-modinfo.py`,
 > step 2b of `make_volumes.sh`); the camera page material out of the archive. Next: steps 6–7 (deploy + smoke, volumes, GitHub 7 parts, Nexus zip, frames).
 > The GitHub release holds only the guide PDF now (all old parts removed); the uploads wait for the new archive.
+> **14:48 Nexus draft 65 READY to publish** (not published — the owner's button): the new 12.4 GB zip saved as a new Main file (Primary, 0.9.0, changelog),
+> the old file archived (the form needs «Upload type»: «Add as new file»; the version field takes only real keystrokes — `cdp-keys.mjs`); the description
+> sizes 12.4 GB; the gallery: cover (thumbnail), hero, Xevyr window, launcher, hub, Esc, fishing, bow, Iruk city. GitHub: parts 1–3 of 7 verified by digest, 4–7 uploading.
 > **13:50 the new archive is BUILT** (`D:/Temp/krinik_release_20261103c`, «OK: 166 files, hashes equal», sha256 of the stream `52b240a7…3c84`, 12.4 GB): 7 GitHub
 > parts in `…_GitHub\`, one zip in `…_Nexus\` (`7z t` OK). GitHub upload by the scratchpad `upload_gh.sh` — parts checked by the asset `digest` (EXP-0450);
 > Nexus: the gallery has the new hub / Esc / fishing / bow frames with short titles; still to do — the description size 12.7 → 12.4 (a save did not take,
