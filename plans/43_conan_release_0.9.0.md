@@ -72,6 +72,15 @@ material for a new PlayGround page. Fit criteria:
       `nexus_description.txt` and rewritten — 19 sentences in English, then the same 19 in Russian (what the pack is and how it changes play, the Russian-only
       language, requirements, install, removal, feedback, 0.9.0 state, rights). The PlayGround folder's `playground_post.txt` stays as it was. Open for the owner:
       Nexus Mods asks for each author's permission to re-host their files — the pack bundles 64 other authors' mods.
+- 17. **The Nexus Mods page — draft mod 65** (`https://www.nexusmods.com/games/conanexilesenhanced/mods/65/edit/general`; `[OWNER]` 10:56 «еще нужно добавить
+      раздел состава сборки, все моды, авторы, что делают, в формате, который принимает редактор Нексуса» · 11:00 «продолжай, на двух языках, с геммер-ссылками,
+      с картинками, всё по красоте»): Full description written by the agent through CDP — EN then RU: Description (11 sentences), Main features (the owner's
+      text, fixed only: a cut sentence, a typo «отпервого», a heading run into a paragraph, hard wraps), Pack contents (72 mods from the README tables, each name
+      a link, KRINIK MODIFIED in colour, in a spoiler), Requirements, Installation (the owner's), Known issues and plans (spoiler), Shout outs, Links, rights.
+      Images — 1920 webp in the public repo `docs/nexus/` (commit `aa4e1ab`, raw URLs). Saved by the draft's Save («Mod saved successfully.»), read back from a
+      fresh tab: text equal, 204 items, 7 images, 4 spoilers. NOT published (Publish is the owner's). The owner's draft before the write —
+      `…\Krinik_Mod_Pack_0_9_0_3_parts\nexus_full_description_owner_draft_1059.bbcode`; the result — pack `docs/guide/nexus-description-0.9.0.bbcode`, builder
+      `_config/release/build_nexus_description.py` (pack `f713463`). Media and Files tabs of the draft — not touched.
 - GitHub limits (docs.github.com, read 2026-11-03): a release asset under 2 GiB, up to 1 000 assets per release, no limit on the release's total size or
   download traffic. Git LFS is no way around it: 2 GB per file on Free / Pro, 10 GB storage and 10 GB traffic a month on Free.
 
