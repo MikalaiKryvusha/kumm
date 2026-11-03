@@ -136,7 +136,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   Kappa corpse never has loot — why nine stands of 19:22–19:50 failed (game map, «When the quick-loot window opens»). Stand: the oasis camp boss «Эника из
 >   Киммерии» killed by `corpse-stand.sh 250` (from −78166, 245999), the hero 3 m off, aim by `PlayerCameraManager:GetCameraLocation()` on bone `b_spine_2`
 >   (6 passes); 120 fps `loot-take-clip.sh` with `SEQ="wait:700,wheel:-1,wait:900,kdown:F,wait:80,kup:F,wait:2500"`: F on cell 1 → the items shift left and the rim
->   stands ≈ 5 sampled frames on an EMPTY cell (row 2, column 6), then goes. CAUSE READ 20:39 (native grid rebuild, bug 75); a probe fix (next+prev after the rebuild) is live in the running game — ⏳ WAITS FOR THE OWNER: his F takes (voice call 20:4x). B2 with the Lua out — tried 20:23, NOT seen yet:
+>   stands ≈ 5 sampled frames on an EMPTY cell (row 2, column 6), then goes. CAUSE READ 20:39 (native grid rebuild, bug 75); a probe fix (next+prev after the rebuild) is live in the running game — ⏳ WAITS FOR THE OWNER — ждёт владельца (B2 of TC_conan_quick_loot_f_take_2026-11-02): his F takes with the probe on (voice call 20:4x). B2 with the Lua out — tried 20:23, NOT seen yet:
 >   with the Lua out the window did not show over the second boss corpse (97 bones — a female skeleton; bone 5 is an arm, aim at `b_head`); a crocodile walked
 >   in once (quiet-stand 40 m first); an earlier blind F may have emptied that corpse. Resume: a FRESH boss corpse, check its loot count first (`ItemInventory`
 >   of the corpse), then the clip. The Lua sections are back, the game closed.
