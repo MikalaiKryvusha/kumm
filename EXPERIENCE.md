@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0456 · 2026-11-03 · ✅ · #conan #ue4ss #widget #recon
+class: read-the-actors-own-widgets
+**Context:** «whose is the health bar over the enemy» — two plans named mod candidates (Hosav, SudoExile) without a read.
+**Result:** ✅ — one remote call over a summoned fighter: `K2_GetComponentsByClass(WidgetComponent)` → `GetUserWidgetObject()` named the game's own
+`W_EnemyHealthbar` and `W_FloatingName` in seconds.
+**Lesson:** for a widget drawn over an actor, read the actor's own WidgetComponents first; mod candidates come after.   → link: game map «An enemy's health bar»
+
 ### EXP-0455 · 2026-11-03 · ❌ · #conan #backlog #guide #stale
 class: a-list-copied-without-checking-its-rows
 **Context:** the 1.0.0 dayloop worked the guide's «Известные проблемы» line by line; «the window jerks under the wheel» was taken for open.
