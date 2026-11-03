@@ -67,6 +67,11 @@ material for a new PlayGround page. Fit criteria:
       equal (`71a0b672…56fd`), `7z t` 241 files. 10:49 the old volumes `.009`–`.019` deleted from the release, `gh release edit --notes-file` done (pack
       `8c4926e` holds the source); the 7 parts upload by the scratchpad `upload_gh.sh` (one by one, size checked, 5 tries each). Voice lint SKIPPED — the
       portrait's §8 has no pattern table.
+- 16. **Nexus instead of PlayGround for the 3-part set** (`[OWNER]` 2026-11-03 10:53 «в файле txt для плейграунд - переименуй, теперь это будет нексус - напиши
+      краткое Description на 10..20 предложений» · «на двух языках EN и RU»): in `…\Krinik_Mod_Pack_0_9_0_3_parts\` the post copy renamed to
+      `nexus_description.txt` and rewritten — 19 sentences in English, then the same 19 in Russian (what the pack is and how it changes play, the Russian-only
+      language, requirements, install, removal, feedback, 0.9.0 state, rights). The PlayGround folder's `playground_post.txt` stays as it was. Open for the owner:
+      Nexus Mods asks for each author's permission to re-host their files — the pack bundles 64 other authors' mods.
 - GitHub limits (docs.github.com, read 2026-11-03): a release asset under 2 GiB, up to 1 000 assets per release, no limit on the release's total size or
   download traffic. Git LFS is no way around it: 2 GB per file on Free / Pro, 10 GB storage and 10 GB traffic a month on Free.
 
