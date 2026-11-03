@@ -25,7 +25,9 @@ prompt is another widget (not read yet — likely the game's interaction module 
 
 ## Study → fix
 
-1. Read the talk prompt's widget class by the remote over a living NPC (the module / the widget in the viewport while the prompt shows).
+1. Read the talk prompt's widget class by the remote over a living NPC (the module / the widget in the viewport while the prompt shows). The line «Нажмите E,
+   чтобы говорить» is most likely the shared `W_ActionTutorial` (game map); the fork to read first: is its container the same `WBP_ContainerInfo` (then
+   `place_strip` misses it because of a condition) or another module (then the strip code needs a second target).
 2. List the other interaction prompt widgets (campfire, chest, door, workbench) — one class or several.
 3. Apply the same place / scale / backing as the strip, from the same hub rows (one setting for all — «все виджеты интеракции»), event-driven as `align`.
 4. Frames of each before / after.
