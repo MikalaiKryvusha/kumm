@@ -673,3 +673,16 @@ by tags, without a table of their own.
   (`/Game/Items/ItemTable`, `row.Name:ToString()` Russian): Лук из кости дракона 54003, Лук из звездного металла 51586, Лук Бездны 43001, Меч Крома 50506,
   Огромный меч Великого Волка 50543, Обсидиановая стрела 51503, Взрывная стрела 53617, Змеиная стрела 53651. Food and water — the fields
   `GetHungerSystem().FoodCurrent / DrinkCurrent = 100.0`.
+
+## The game's own mod list (main menu «Моды», 2026-11-03, plan 44)
+
+- The panel «Сведения о моде» shows a pak's `modinfo.json` fields as they are: `name`, `description`, `author`, `authorUrl`, `changeNote` (and the version) —
+  Workshop BBCode and links are drawn raw; Cyrillic renders. The fields live in the outer wrapper (`ConanSandbox/Mods/modinfo.json` next to `manifest.json`
+  with the MD5 of every file); `_config/devkit/set-pak-modinfo.py` rewrites them without a re-cook (the file list and every other file byte-equal).
+- Opening the list by the remote: `call W_MainMenu_MainMenu_C_<N> BndEvt__W_MainMenu_MainMenu_B_Mods_K2Node_ComponentBoundEvent_1_SignalClicked__DelegateSignature WidgetTree_<M>.B_Mods`.
+- Only cooked mods are listed. A wrapper with only modinfo/manifest → «Incompatible Mods Detected … Missing platform-specific pak»; with tiny legacy
+  `<Mod>-Windows.pak` / `-WindowsServer.pak` → «Missing AssetRegistry.bin in mod folder» (the modal blocks a clean close). A Lua-only mod needs a kit-cooked
+  empty mod to appear (`kit-buildmod.py`).
+- An in-game loading screen (`W_IngameLoadingScreen_C`: `TeleportPlayer`, waystones, respawn) counts as full-screen GUI (`IsFullscreenGUIActive`) and is
+  followed by a NEW Damage Meter widget `DN_UI_DmgWidget_C` (and a new Hosav HUD) — mods that decorate widgets must re-apply on the widget's own birth (bug 79,
+  KrinikConanUI notes).
