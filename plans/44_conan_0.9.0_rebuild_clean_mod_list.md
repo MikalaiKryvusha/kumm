@@ -1,6 +1,6 @@
 # Plan 44 — rebuild 0.9.0: the collapsed meter fixed, the pause on loading screens fixed, a clean in-game mod list
 
-> **Created:** 2026-11-03 12:59 +03:00 · **Parent:** plan 43 (release 0.9.0), bug 79 · **Status:** started
+> **Created:** 2026-11-03 12:59 +03:00 · **Parent:** plan 43 (release 0.9.0), bug 79 · **Status:** done 2026-11-03 15:09 except step 4 (moved to 1.0.0)
 > **Outbound:** the GitHub release v0.9.0 (parts re-uploaded), the Nexus draft 65 (file and two gallery frames replaced)
 
 ## The owner's words (verbatim, 2026-11-03 12:55–12:59)
@@ -40,5 +40,5 @@
       pak without content; first one mod as a probe, the game's log clean. Check: the list shows all 7 Krinik mods.
 - [x] 5. DONE 13:2x — the camera page material moved to `docs/camera-mod-page/` (excluded from the public tree too). Was: the export excludes `KrinikConanCamera/nexus-screenshots/`, `nexus-logo/`.
 - [x] 6. DONE 13:2x–13:30 — the 66 game paks rewritten (66 ok), -Verify 108/0, no mount failure; seen: the game list (clean names and Russian lines), the Esc list (Krinik on top), the meter «— F1». Was: deploy into the working game, `-Verify`, smoke by eye (menu, world, hub, meter).
-- [~] 7. IN PROGRESS 14:1x — archive c built (166 files, hashes equal, 12.4 GB); GitHub parts by digest (EXP-0450); Nexus: new zip uploading in tab E5CF…, new gallery frames (hub, Esc, fishing, bow, Iruk city) titled; the city frame without the hero (the third-person camera did not come back by the remote); the waystone frame dropped — Waystones Enhanced stones are player-built. Was: `make_volumes.sh` (configs backed up and restored), the 7 GitHub parts and the Nexus zip cut and checked; uploads: GitHub (old parts removed first),
+- [x] 7. DONE 15:09 — GitHub: 7 parts, every digest equal to the local sha256; Nexus: the new zip Primary (0.9.0, changelog), the old file archived, gallery and description final; Publish — the owner. Was: IN PROGRESS 14:1x — archive c built (166 files, hashes equal, 12.4 GB); GitHub parts by digest (EXP-0450); Nexus: new zip uploading in tab E5CF…, new gallery frames (hub, Esc, fishing, bow, Iruk city) titled; the city frame without the hero (the third-person camera did not come back by the remote); the waystone frame dropped — Waystones Enhanced stones are player-built. Was: `make_volumes.sh` (configs backed up and restored), the 7 GitHub parts and the Nexus zip cut and checked; uploads: GitHub (old parts removed first),
       Nexus file replaced; the hub and Esc frames replaced in the Nexus gallery; the city and waystone frames (`[OWNER]` 12:47–12:48).

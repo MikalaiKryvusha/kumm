@@ -136,6 +136,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Damage Meter look kept after loading screens, bug 79 (the pause froze the world on a teleport); the game's mod list fields from the README (`set-pak-modinfo.py`,
 > step 2b of `make_volumes.sh`); the camera page material out of the archive. Next: steps 6–7 (deploy + smoke, volumes, GitHub 7 parts, Nexus zip, frames).
 > The GitHub release holds only the guide PDF now (all old parts removed); the uploads wait for the new archive.
+> **15:09 RELEASE 0.9.0 PUBLISHED ON GITHUB, NEXUS READY (plan 44 done but step 4):** https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.0 —
+> 7 parts, every asset digest equal to the local sha256 (`.007` 1 333 200 694 bytes), the guide PDF, notes 12.4 GB. Nexus draft 65 — complete, waits for the
+> owner's Publish. Local copies kept: `…\Krinik_Mod_Pack_0_9_0_GitHub\` (7 parts), `…\Krinik_Mod_Pack_0_9_0_Nexus\` (zip + media + texts); the work dir removed.
+> Open for 1.0.0: kit-cooked info paks for the four Lua mods (plan 44 step 4), the waystone frame, the city frame with the hero (the remote third-person switch).
 > **14:48 Nexus draft 65 READY to publish** (not published — the owner's button): the new 12.4 GB zip saved as a new Main file (Primary, 0.9.0, changelog),
 > the old file archived (the form needs «Upload type»: «Add as new file»; the version field takes only real keystrokes — `cdp-keys.mjs`); the description
 > sizes 12.4 GB; the gallery: cover (thumbnail), hero, Xevyr window, launcher, hub, Esc, fishing, bow, Iruk city. GitHub: parts 1–3 of 7 verified by digest, 4–7 uploading.
