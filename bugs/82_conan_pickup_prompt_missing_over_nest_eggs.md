@@ -30,6 +30,9 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   `Environment/Props/Meshes/SM_KappaNest` (pakchunk1030); egg-like foliage types exist in the DLC (`DLC_Siptah/…/FT_Siptah_SerpentEgg_1…3`) and placeable
   egg blueprints (`DLC/Special/a2c4/…/BP_PL_Spider_Eggs_Randomized`). No loaded actor's class names a nest or an egg in the oasis region.
 
+- 23:3x: over all loaded foliage of the oasis region no mesh names a nest (0); with no nest actor either, a nest is to find in another region
+  (the ostrich lands, the swamp for snake / locust nests) — load the region by a teleport first, then repeat the two counts.
+
 ## Study (next)
 
 1. Find eggs: over all `InstancedFoliageActor`s, the components whose mesh names an egg — their instances with `Scale3D` ≠ 0 (not taken), the nearest.
