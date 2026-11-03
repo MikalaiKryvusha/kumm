@@ -661,6 +661,10 @@ by tags, without a table of their own.
   (220425, 43688), Godsight Spire (−135060, 74567), Skyfall Ridge (−177478, −141986), Riversend (−193946, −32220), Shattered Springs (−193314, 21149), Eyelet
   Lake (−179518, −170940), The Crowngrove (−256864, −10091), Oasis of Nekhet (−256741, 39991), Imi's Cradle (32653, 21022), Priestking's Retreat
   (−28442, 27185) and more — the scripts `markers.lua` / `vistas.py` of that session, the method above is enough to redo them.
+- **The corpse / quick-loot stand (2026-11-03 19:3x, KUMM bug 75):** the oasis beach at (−78166, 245999) — `p:K2_TeleportTo({X=-78166,Y=245999,Z=-15000},…)`
+  (he lands at z −20073; `exec TeleportPlayer` does nothing in 3.0.1), open sand and grass, crocodiles and Kappas around — `quiet-stand.lua` leaves their corpses;
+  the hero next to one by `corpse-face.lua` (`_G.__cf_dist=300`, the east side is open here) or `corpse-approach.lua` (his own side). NOT suitable: Iruk city
+  (townsfolk respawn, a living cook under the crosshair), the ostrich-nest canyon (−61703, 268654 — `corpse-face` puts the hero into the cliff).
 - **The release screenshot stand (2026-11-02 19:15, `[OWNER]` «КАДР ОХУЕННЫЙ!!!!»):** the edge of the Oasis Overlook plateau (+9 m) at (−253750, 18150) — south of it the
   plateau drops to the green Nekhet oasis floor (−45 m) with palms and water, the ruined temple on the left, dunes and rock pillars beyond; the hero faces
   south (yaw ≈ 92), the owner's own camera (`config.lua`) and wheel distance 745; noon by `SetTimeOfDay(11.0)`. Height grids by `_config/terrain-probe.sh`

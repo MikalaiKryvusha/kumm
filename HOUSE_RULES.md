@@ -59,7 +59,11 @@
     7. How the stand was set up — one line in the game map.
 12. **The agent installs a CLI tool it needs by itself** (`winget`, `pip install --user`, `npm i -g`, `cargo install`), checks it by its
     version and writes one line into the reference.
-13. **While the game is open, steps are narrated by voice.**
+13. **While the game is open, the run is narrated by voice — in general, not every step.** At a run's start and when its purpose changes, one phrase: what is
+    tested and what will look different from the usual build (a mod part switched off for a control case, a stand teleport, killed NPCs). The owner sees
+    the game on his screen even on the background path. Voice: `node D:/work/UnliminiumTheDigitalGame/tools/voice-soft.mjs "<фраза>" --play --voice eugene`.
+    (`[OWNER]` 2026-11-03 19:26–19:27 «ты хоть предупреждай голосом» · «чтобы я не триггерился» · «не понимая, что ты тестируешь» · «я же вижу на экране игру» ·
+    «каждый шаг не нужно» · «хотя бы в общем» — after a control run with KrinikConanUI's Lua out showed him the old UI unannounced.)
 14. **In chat the owner is told the MEANING, never a bare number.** Every bug, plan, item, case or interview is named by what the player sees
     or what breaks («камера дрожит, когда герой стоит»), in Russian words. A number may follow in parentheses only for lookup. Before sending,
     scan the reply for «баг NN», «п. NN», «план NN», «#NNN», case codes (F4, H2) standing without their meaning — rewrite each.

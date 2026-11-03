@@ -30,6 +30,6 @@ corpse's `ItemInventoryReplicateToAll` by `AddItemTemplate(id, −1, None, n, tr
 
 | ID | Steps | Expected | Status | Observed |
 |---|---|---|---|---|
-| B1 | our build: the window with ≥ 3 stacks, F on the first cell, 120 fps | the jump seen or not; frame numbers | | |
-| B2 | control: `krinik_ui_fixes` hooks and the archery loot sync out (Lua `enabled.txt` moved out), the same take | the jump present (vanilla) or gone (ours) | | |
+| B1 | our build: the window with ≥ 3 stacks, F on the first cell, 120 fps | the jump seen or not; frame numbers | fail | 2026-11-02 15:19–15:21: the rim on the last cell for 6 captured frames (≈ 70 ms) after the take (bug 75 Forensics) |
+| B2 | control: `krinik_ui_fixes` hooks and the archery loot sync out (Lua `enabled.txt` moved out), the same take | the jump present (vanilla) or gone (ours) | blocked | 2026-11-03 19:34: the window did not open over a Kappa corpse under the crosshair (game in front, 120 fps clip `loot-take-clip.sh`), F took nothing — stand notes in bug 75 |
 | B3 | after the fix (if any): the same take | no frame with the rim elsewhere | | |

@@ -36,6 +36,20 @@ body's bone `b_pelvis` — the skeleton's names are `b_root`, `b_pelvis`, …) p
 first, then corpse-face with the default radius, corpse-aim, Shift), the Lua out, the same sequence; then the kit `W_QuickLootPanel` edit out if the Lua is not it.
 Stand tools added: `_config/corpse-aim.lua`, `_config/corpse-fill.lua`, `corpse-face.lua` `_G.__cf_radius` and `_G.__cf_body`.
 
+**B2 try 2026-11-03 19:22–19:34 (both Lua sections out, the owner's working game, pack `d457db7`) — NOT RUN: the quick-loot window never opened.**
+Stand path, so the next try starts from the end: the live save stood in Iruk city (a living cook under the crosshair — `quiet-stand.lua` does not count city
+NPCs, and kills respawning townsfolk); `exec TeleportPlayer x y z` does nothing (the reply «ok», the hero stays) — `p:K2_TeleportTo({X,Y,Z},{…})` moves him;
+the ostrich-nest canyon (−61703, 268654) is a crevice — `corpse-face.lua` (always EAST of the body) put the hero inside the cliff; **the open stand is the
+oasis beach (−78166, 245999, teleport z −15000, he lands at −20073)**: `quiet-stand.lua` leaves a Kappa corpse on the grass; `corpse-face.lua` with
+`_G.__cf_dist=300` there gives a first-person view of the body; the new `_config/corpse-approach.lua` puts the hero on HIS OWN side of the body
+(`[NOT-TESTED]` beyond this stand); `corpse-aim.lua` does not converge (pitch −88 / −77 / −54 / −82 over four calls — the camera swings with the rotation).
+With the crosshair ON the Kappa's head (frame st13), the game IN FRONT (a 120 fps `ddagrab` capture by the new `_config/loot-take-clip.sh`: Shift tap,
+wheel, F) — no corpse strip and no quick-loot window in any frame; the F took nothing (13 items left in each of three corpses).
+**Open question this raises:** in B1 (2026-11-02, our build) the same Shift-tap recipe opened the window — so either the window needs something of
+`KrinikConanUI`'s Lua (unlikely: `krinik_ui_fixes` only aligns), or the 11-02 stand differed (third person?). Next: run the SAME stand with our build ON
+first (if the window opens there and not with the Lua out, that difference is itself the finding); desk read of `W_QuickLootPanel` /
+`UpdateHighlightTarget` bytecode in parallel.
+
 ## Hypotheses (ranked)
 
 1. Vanilla: the panel re-creates its slots and the newest slot takes the focus for a frame.
