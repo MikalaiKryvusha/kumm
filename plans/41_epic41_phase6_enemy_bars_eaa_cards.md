@@ -1,7 +1,7 @@
 # Plan 41 · phase 6 — enemy health bars over the mobs (row 12) and the EAA class cards with English painted into textures (row 23)
 
 > **Created:** 2026-11-01 · **Parent:** `plans/41_EPIC_conan_1.0.0_defects_and_stability.md` phase 6; bug 64 rows 12 and 23; `[OWNER]` 2026-10-26 «нужно выше» (the bars)
-> **Status:** written 2026-11-01 13:30 +03:00; not started
+> **Status:** written 2026-11-01 13:30 +03:00; row 12 (the bars) CLOSED 2026-11-03 23:29 by the owner's eye («я вижу, что полоски на комфортной высоте»); row 23 (EAA cards) not started
 > **Outbound:** the fork texture vs overlay for row 23 → `interviews/` with frames of both
 
 ## Goal vector (Achieve)
