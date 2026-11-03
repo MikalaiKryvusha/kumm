@@ -50,6 +50,21 @@ wheel, F) — no corpse strip and no quick-loot window in any frame; the F took 
 first (if the window opens there and not with the Lua out, that difference is itself the finding); desk read of `W_QuickLootPanel` /
 `UpdateHighlightTarget` bytecode in parallel.
 
+**The cause, read 2026-11-03 20:39–20:45 (the owner's own F takes in our running game, `_config/quickloot-trace.lua` — post-hooks on the panel's native
+slots, «[QLT]» lines in UE4SS.log):** one F take = `SlotItemSelectionChanged` ×3 → `SlotItemAddedOrRemoved` → `SlotItemSelectionChanged` ×4 →
+`SlotItemAddedOrRemoved`, all within 2 ms (one frame): the grid is rebuilt and the selection walks the cells, ending on the LAST one; the rim is drawn there
+until the next update. All of it is NATIVE (`QuickLootPanel`, `InventoryGridViewBase` — `W_QuickLootPanel` has no blueprint functions at all).
+Native levers found: panel `SlotCycleSelectionNext` / `SlotCycleSelectionPrev` (no parameters), `SlotNavigateUp/Down`, `SlotItemSelectionChanged(Item)`,
+`SlotItemAddedOrRemoved(otherIndex)`; grid `GetSelectedIndex() → VirtualIndex`, `SelectItem(VirtualIndex Index, bool Force)` — `VirtualIndex` exposes NO
+reflected fields: Lua gets an empty table back and `SelectItem({}, true)` only cleared the selection (frame sel12) — not usable.
+**Probe now in the running game** (remote hook, not shipped): post-hook `SlotItemAddedOrRemoved` → `SlotCycleSelectionNext(); SlotCycleSelectionPrev()` in the
+same frame — waits for the owner's F takes (asked by a voice call 20:4x). If it does not hold the rim: track the selected position ourselves (SetActor → 0,
+Next/Prev ±1) and after the rebuild step back to it with the same two calls.
+**Stand facts of the same hour:** with BOTH our Lua sections out the quick-loot window never opened on any corpse (kappa or humanoid) — B2 as designed is not
+runnable; a strip opened by code (`strip-open.sh`) shows the window but takes NO input (F, wheel do nothing — it is our own instance); `_config/aim-sweep.lua`
+(steps the view and stops when the GAME shows the strip) needs the game to hold the focus for the whole sweep (`NOT-TESTED`: two «miss» runs while the focus
+had returned to VS Code).
+
 ## Hypotheses (ranked)
 
 1. Vanilla: the panel re-creates its slots and the newest slot takes the focus for a frame.
