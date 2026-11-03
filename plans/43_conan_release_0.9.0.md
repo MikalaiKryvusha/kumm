@@ -94,6 +94,11 @@ material for a new PlayGround page. Fit criteria:
       zip), Media (header 1300×372 from the cover top, 7 gallery frames), Files (the zip uploading; display name «Krinik Mod Pack 0.9.0», version 0.9.0).
       **STOPPED for the owner:** Permissions → «Does your mod include content created by others?» offers only «No (all content is mine)» and «Yes (I have
       permission)» — the second is his statement that the 64 authors allowed re-hosting; the agent does not make it. Requirements — none (all inside).
+      **11:4x the owner answered (AskUserQuestion): «Разрешения есть, ставь Yes»** — Permissions filled and saved («Mod saved successfully.»): «Yes (I have
+      permission)», Credits (the 72 entries → Pack contents and the README, UE4SS, Taurin78), «Write your own (custom)»: MIT for the author's work, other mods
+      keep their own licenses; a fresh tab read back credits 474 chars, license 427, custom = true; the Yes answer not read back yet (the next fresh tab
+      got «Failed to fetch mod settings (403)» after ~10 quick tab opens — no more helper tabs; read it from the upload tab after «Save file»).
+      The 3-part set deleted by his «Удалить».
       Cleanup (`[OWNER]` 11:21 «почисти место на диске»): both release work dirs and every old-archive part removed — D: 80 → 131 GB free.
 - GitHub limits (docs.github.com, read 2026-11-03): a release asset under 2 GiB, up to 1 000 assets per release, no limit on the release's total size or
   download traffic. Git LFS is no way around it: 2 GB per file on Free / Pro, 10 GB storage and 10 GB traffic a month on Free.
