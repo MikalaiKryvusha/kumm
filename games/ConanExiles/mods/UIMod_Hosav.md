@@ -65,6 +65,13 @@ side panel, a settings window. KRINIK MODIFIED in the build: the pak is rebuilt 
 - Rebuild after a recipe edit: `rebuild-krinik-paks.py --only UIMod_Hosav` builds, but its identity guard refuses an INTENDED change («1 of 228 chunks
   differ — НЕ СТАВЛЮ»); then copy `D:\Temp\kumm-rebuild-krinik\UIMod_Hosav-<n>\out\UIMod_Hosav.pak` into the library folder and `<game>\ConanSandbox\Mods`.
 
+## The icons' textures (read live 2026-11-03 22:2x)
+
+- `Image_Eat` → `/Game/Mods/UIMod_Hosav/T_FoodIcon_Hosav` (128 × 128), `Image_Water` → `/Game/Mods/UIMod_Hosav/T_DrinkIcon_Hosav` (128 × 128) — Hosav's own:
+  a light body, a thin dark outline. `Image_Weight` AND `Image_Weight_Blinking` → the GAME's `/Game/UI/Textures/Icons/Buffs/T_BuffIconEncumberance_T1`
+  (64 × 64, a white body in a soft black shadow ≈ 14 px); the blink image's tint is red (1, 0, 0) — two shadows stacked while it shows.
+- The build overrides that vanilla texture in KrinikConanUI's kit pak (see `KrinikConanUI.md`, the kit table) — no edit of this pak.
+
 ## Temperature icon stages (`W_SmoothHP::Get_TempImage`, 2026-11-01)
 
 - `kismet-trace.py` on the legacy asset (NOT the author's `SUPERUI_Backup_ForFuckups/W_SmoothHP` — a `find` picks it first): the hero's
