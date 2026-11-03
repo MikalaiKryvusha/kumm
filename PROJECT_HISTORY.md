@@ -3,6 +3,141 @@
 
 
 
+## 2026-11-03 20:58 +03:00 (second part) — the older pointer blocks (2026-10-26 … 2026-11-02) of STATUS «Where to continue», moved at the soft closure of chat ce994c74 (verbatim; the bonsai trim)
+
+> **CHAT f73138c5 (closed 11:3x) and CHAT c5fe291c (closed 2026-11-01 21:57) FIRST lists — moved verbatim to the chronicle, entry 2026-11-02 14:03 +03:00.** The shock wave and review folder 60 — answered this chat (W3–W5). Still open: bug 75 (the quick-loot rim jumps on an F take), the climbing jump,
+> K1–K7 on the clean copy, epic 40 phases 5–7 and epic 41; review folders 51 (Xevyr look) and 52 (logo tone); every clip — `_config/slow-shot.sh` after a
+> quiet stand. Never in the owner's running game: a sweep of native calls over enum values (EXP-0433).
+> **This chat's NOW list (09:50–11:27) — moved verbatim to the chronicle, entry 2026-11-02 11:3x +03:00 (second part); run report `testcases/reports/2026-11-02_conan-hub-rectangle-and-batch.md`.**
+> **Older handover blocks of 2026-11-01 — moved verbatim to the chronicle, entries 05:51 · 11:14 · 15:52 · 17:54 · 18:18 · 21:56 · 21:58 · 23:00.** Still open from them:
+> the HUD temperature comfort (white) and cold (blue) frames (folder 47); review folders 44–47 and 50 for the owner's eye; refill hunger / thirst in every run.
+> **Blocks of chats 70dda2b5 and 2026-11-02 07:17 (their NOW lists, closures and the 08:35–09:10 owner words) — moved verbatim to the chronicle, entry 2026-11-02 11:3x +03:00.** Open from them: the climbing jump (`[OWNER]` 09:07, verbatim there; way — KrinikConanGameplay, recon of the climb state first), bug 74 (nest eggs), K1–K7 on the clean copy (`testcases/TC_conan_clean_copy_install_launcher_2026-11-02.md`).
+> **Frame measurements are free now** (the «кино» condition erased 08:46): the unrun cases of `testcases/TC_conan_3.0.1_ru_fps_perf_2026-10-25.md` (PF1, BN1–BN4, BN7–BN9 and 7 more — the bench flights, `_config/bench-flight.sh` / `bench-batch.sh`, A-B-A-B pairs) and plan 36 item 23 (q2–q4) — the agent runs them itself, ≈ 2–3 h; a heavy block for a fresh chat.
+> **2026-11-01 08:58 — RELEASE 1.0.0 TONIGHT (2026-11-01 evening)** — `[OWNER]` 2026-11-01 08:58 «делаем сейчас 2, а 3 делаем в новой версии сборки. систему афиксов я ОЧЕНЬ ОЧЕНЬ ОЧЕНЬ ХОЧУ, но сейчас делать если возьмемся - это нахуй еще на неделю затянет работу над 1.0.0 - а выпустить релиз хочется уже сегодня вечером, а сейчас 9 утра сегодня». Order for the next chat: the release blockers first — the hub remarks (0), the caverns chests by option 2 (interview #029 answered; notes `games/ConanExiles/mods/CavernsOfSet.md` → Decision), plan 35 item 6 (archive on a clean game, volumes ≤ 700 MB), the README-PDF, the 1.0.0 release on the public repo. **ALSO BEFORE THE RELEASE, IN 1.0.0** (`[OWNER]` 2026-11-01 09:01 «ДО ВЫПУСКА, ЭТО ВСЕ ИДЕТ В ВЕРСИЮ 1.0.0» — about this list): the inventory button «Настройки модов» (plan 38 phase 1); the hub row «how long an enemy shout stays on screen»; the video of every food / water blink intensity; the English «All» and «Top Left» in two mods' dropdowns (bug 64 items 47, 49 — the `lit:` route of item 48); the third-person stone pickup — SPAWN the stone and test (R2); the frame measurements (fps perf TC, plan 36 item 23); **09:11 added:** arrows stay stuck in
+the ragdoll corpse and can be picked up (KrinikConanArchery — notes `games/ConanExiles/mods/KrinikConanArchery.md` → Open, the cause already known). `[AI]` affixes (idea 24) stay in the NEXT version by the owner's own word of 08:58 «3 делаем в новой версии сборки»; confirmed 09:01 «афиксы в новой версии». Affixes (random item properties) — the next build version, `ideas/24_conan_loot_affixes_next_version.md`.
+> **ORDER (`[OWNER]` 2026-11-01 11:11–11:12 «да не нужно архив собирать!! Сборка же еще не готова!!» · «релизный архив соберем и все документы обновим,
+> когда сборку сделаем и протестируем на всех разрешениях 16 к 9»):** the release archive and the document refresh go LAST — after the build is finished and
+> tested at 720p / 1080p / 2K / 4K. The 11:10 archive run was stopped and its 16 GB removed; `make_volumes.sh` waits for that moment.
+> - **Earlier FIRST list (still valid):** (2) Item 28 step 2 — `install.cmd` on a copy of the game without mods, `-Verify`, world entry. (3) The remaining unrun cases of
+>   `TC_conan_build_stability_compat_perf_2026-10-26.md` (U4–U6, C1–C3 …) — one launch each, frame + log. (4) W20 mod settings windows — mock-ups first (taste).
+>   (5) The release gate at 720p / 1080p / 2K / 4K (rule 17). (6) Item 21 — a vanilla quick-bar frame needs a clean-game stand (also for q4).
+> - **Waiting for the owner:** the crash-report README.
+> - Work trees kept: `_paksview-3.0.1` (66 GB) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB) — rule 15. Outward: watch https://github.com/Arora-Sir/Super-Artemis/issues/3.
+>
+>
+> **2026-10-29 10:2x — THE OWNER'S WORK ORDER (read first): `plans/36_…` → "The owner's work order 2026-10-29", W1–W16 — the table holds each item's
+> state.** Only those items are worked; any other debt of the build is asked first. The day's done list — chronicle, entry 2026-10-29 18:43.
+>
+> **Conan build debts — plan 36 (`plans/36_conan_build_debts_plans.md`, since 2026-10-26 20:14):** 35 items with hours, done
+> in a row (`[OWNER]` «пот по ним пиши планы» · «и по планам делаем»). Each item's status — in the plan's "Queue" table.
+>
+> Conan session rules (hours, other mods natively, the settings reference after exit) — `HOUSE_RULES.md` §1; the former "New chat order" 17:40 — chronicle, entry 2026-10-27 00:13.
+> 0. **The Conan 3.0.1 build towards release 1.0.0 — plan 35 (`plans/35_conan_build_turnkey_quality.md`).** The owner's decisions of 26.10 evening (plan 35: G5,
+>    G7, G10–G12, B3, B4, B7): version 1.0.0; archive — volumes ≤ 700 MB (8 paks over 700 MB → multi-volume 7-Zip zip `-tzip -mx0 -v700m`, G10); README
+>    for PlayGround — a PDF on «выцветшей старинной бумаге», pages 1–2 for the storefront, thanks to Taurin78 in the fixes (G11); crafting in the inventory
+>    while paused — speed up (G12); hub — no flicker and no jumps (B4). The owner's order: tech debts → translation → a run through the world → volumes and README.
+>    Done 26.10 16:54–19:40 (T2b, M2, H9, U7, LM1, S1e) — chronicle, entry 2026-10-27 00:13.
+>    **Next, in order (hours):** (1) Ragnar's New Factions — DONE 2026-10-29 (KRINIK MODIFIED: the 4 smelter rows and the dead Zingaran boss row
+>    removed from `RNF_Shared_WeightedSpawns`, manifest `krinikBuild`; checked 2026-10-30 23:5x — this line was stale);
+>    (2) G12 crafting: one real craft of «Бечевка» with the hub open (the remote does not start a craft — case P1), measure, enable `CRAFT_SPEEDUP` — ≈ 1 h;
+>    (3) B4: the same hub recording on a game without paks (reference), the late emblem (bugs/64 item 26), splitting by pak — ≈ 2–3 h; B7: the fishing button
+>    to Hosav and its look (inserts `BPC_EFT_Tuning.Graft` into `ButtonContainerRight`) — ≈ 2 h; (4) bugs/64 item 21 the Damage Meter slider, item 23 EAA
+>    class cards (text painted in textures) — ≈ 2–4 h; (5) mod cost q4 A-B-A-B — ≈ 1–2 h; (6) archive on a clean game and volumes — ≈ 1–2 h;
+>    (7) README-PDF — after 1–6. Instruments: `close-game.ps1` and `long-run.sh` close `CrashReportClient` themselves after a crash — DONE (both call
+>    `close-crash-reporter.ps1`; checked 2026-10-31 19:0x — this line was stale). Wait for the owner: interview #025 (ambush frequency; the `rawf:` instrument is ready), «table» on the fish card.
+> 1. **Conan, main stream — the measurement queue** (`[OWNER]` «Замеры ручек подгрузки … Ветка появления NPC … Эталон на чистой игре без паков модов» ·
+>    «можно начинать их грузить дальше по дистанции, но больше кадров выделять. У меня много врам и рам»): batches in `ConanExiles/_config/bench-batches/`
+>    (README — the before/after order of each): q1 (on the fly) done 02:18 — the streaming budget and the 8 GB texture pool are within noise, «без ткани» refuted by
+>    repeating q3b (40 vs 36); flight noise 36–52 stutters — only A-B-A-B pairs decide (EXP-0335). Next q2 `s.AsyncPostLoadEnabled`,
+>    q3 `p.Chaos.EnableAsyncInitBody`, q4 without the mod paks. Analysis — `researches/conan-main-thread/README.md` §3–4.
+> 2. **Plan 34 — rewrite our Conan mods** (`plans/34_conan_mods_cpu_respect.md`): by the Unliminium rules — events instead of polling, a shared
+>    `KrinikCore` registry, a per-frame budget, self-measurement; mod cost now ≈ 0.4 ms, UE4SS hooks ≈ 0. The choice of path (step 3) — the owner's, with numbers.
+> 3. Open since 25.10: the HUD outline is sharp by 2 pixels (`KrinikHudOutline`, not started); the AMR, Emberlight, Pickup+, Horti windows do not open
+>    by a bare `ActivateModule` (Lore & Loot `LLH_Settings` DOES since 2026-10-31 16:15 — report `2026-10-31_conan-mod-windows-u4-u6.md`) — open them by the player's path; compatibility `ConanExiles/docs/17` (missing packages, Ancient Civ vs TDI, item
+>    51420); DLSS scale 0.58 — show the owner.
+>
+> The Conan 3.0.1 build — 64 paks + 8 Lua mods, everything mounts (plan 33; the former "PARKED ORDER" — chronicle, 2026-10-25 22:15).
+> Svarog (the far shelf since 2026-10-29 21:07): the PARKED block and the return order — chronicle, entry 2026-11-02 11:3x +03:00 (third part); CPU budget, run order, the MVP jump decision — entry 2026-10-27 21:08.
+
+
+## 2026-11-03 20:56 +03:00 — the 0.9.0 release and 2026-11-02 blocks of STATUS «Where to continue», moved at the soft closure of chat ce994c74 (verbatim; the bonsai trim)
+
+> **NOW 2026-11-03 10:41 +03:00 — 0.9.0 in three equal parts:** `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_3_parts\` (≈ 4.56 GB each, the same
+> archive byte for byte, `7z t` OK — plan 43 item 13). The GitHub release lacks volumes `.001`–`.008` (`.009`–`.019` and the PDF are there); GitHub takes
+> assets only under 2 GiB, so the 3-part set does not fit it. **10:47 the owner chose 1900 MiB parts for GitHub:** 7 parts in
+> `…\Krinik_Mod_Pack_0_9_0_GitHub\`, the old volumes deleted from the release, the bilingual notes published; the 7 parts uploading (plan 43 item 15) —
+> check `gh release view v0.9.0 --repo MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --json assets` lists `.001`–`.007` uploaded with their sizes.
+> **13:2x PLAN 44 — the 0.9.0 rebuild in progress** (`plans/44_conan_0.9.0_rebuild_clean_mod_list.md`, the owner's words there): fixed and seen — the collapsed
+> Damage Meter look kept after loading screens, bug 79 (the pause froze the world on a teleport); the game's mod list fields from the README (`set-pak-modinfo.py`,
+> step 2b of `make_volumes.sh`); the camera page material out of the archive. Next: steps 6–7 (deploy + smoke, volumes, GitHub 7 parts, Nexus zip, frames).
+> The GitHub release holds only the guide PDF now (all old parts removed); the uploads wait for the new archive.
+> **15:09 RELEASE 0.9.0 PUBLISHED ON GITHUB, NEXUS READY (plan 44 done but step 4):** https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.0 —
+> 7 parts, every asset digest equal to the local sha256 (`.007` 1 333 200 694 bytes), the guide PDF, notes 12.4 GB. Nexus draft 65 — complete, waits for the
+> owner's Publish. Local copies kept: `…\Krinik_Mod_Pack_0_9_0_GitHub\` (7 parts), `…\Krinik_Mod_Pack_0_9_0_Nexus\` (zip + media + texts); the work dir removed.
+> Open for 1.0.0: kit-cooked info paks for the four Lua mods (plan 44 step 4), the waystone frame, the city frame with the hero (the remote third-person switch).
+> **14:48 Nexus draft 65 READY to publish** (not published — the owner's button): the new 12.4 GB zip saved as a new Main file (Primary, 0.9.0, changelog),
+> the old file archived (the form needs «Upload type»: «Add as new file»; the version field takes only real keystrokes — `cdp-keys.mjs`); the description
+> sizes 12.4 GB; the gallery: cover (thumbnail), hero, Xevyr window, launcher, hub, Esc, fishing, bow, Iruk city. GitHub: parts 1–3 of 7 verified by digest, 4–7 uploading.
+> **13:50 the new archive is BUILT** (`D:/Temp/krinik_release_20261103c`, «OK: 166 files, hashes equal», sha256 of the stream `52b240a7…3c84`, 12.4 GB): 7 GitHub
+> parts in `…_GitHub\`, one zip in `…_Nexus\` (`7z t` OK). GitHub upload by the scratchpad `upload_gh.sh` — parts checked by the asset `digest` (EXP-0450);
+> Nexus: the gallery has the new hub / Esc / fishing / bow frames with short titles; still to do — the description size 12.7 → 12.4 (a save did not take,
+> then 403 — wait between reloads), the file replaced by the new zip, the city and waystone frames (the marker of «Город-государство Ирук» is on a hill).
+> **11:50 REBUILT WITHOUT PLAYGROUND (plan 43 item 18)** — uploads running: GitHub 7 parts (`upload_gh.sh` in the scratchpad), Nexus one 12.7 GB zip in the
+> debug Chrome tab of draft 65 (do NOT navigate that tab until «Save file»; 11:50 the owner opened the page in that tab and the upload at ~25 % was lost —
+> restarted 11:51; tell the owner beforehand: look at the draft in his own browser, not in the debug Chrome). Waiting for the owner: the Nexus Permissions answer (third-party content).
+> **11:1x the Nexus page — draft mod 65** (`…/games/conanexilesenhanced/mods/65/edit/general`): the bilingual Full description written and SAVED by the agent
+> (plan 43 item 17), not published; open — the Media and Files tabs, and the re-hosting permission of the 64 other authors' mods (the owner's call).
+> **NOW 2026-11-02 19:36 +03:00 — RELEASE 0.9.0 BUILT AND TESTED (plan `plans/43_conan_release_0.9.0.md`, cases `testcases/TC_conan_release_0.9.0_2026-11-02.md`):**
+> `[OWNER]` 18:40 «выпустим версию 0.9.0» · «Все моды Krinik опускаем до версии 0.9.0» · «Выпускаем сборку в том виде, в котором есть» (verbatim — the plan).
+> - ✅ pack `d329e2e` pushed: packVersion and every Krinik mod 0.9.0, three paks rebuilt (UI by the kit, Gameplay by `build-level-mod.py`, Archery by a modinfo
+>   repack), the menu logo line «0.9.0» seen at 4K, the launcher draws «3.0.1» / «0.9.0» under the logos (Cambria Bold, as the menu), the guide chapter 9
+>   «Известные проблемы и планы на 1.0.0», the cover (wallpapers) and the public README template at 0.9.0; deployed into the working game, `-Verify` 108/0.
+> - ✅ the PlayGround material folder `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_PlayGround\` (frames, cover, guide title page, PDF, `playground_post.txt`);
+>   the hero frame over the Nekhet oasis ACCEPTED (`[OWNER]` 19:20 «кадр принят»); a NEW PlayGround page recommended (the old one is the 2.2.3 build), the owner uploads.
+> - ✅ 19 volumes (12.74 GiB, hashes equal) in the PlayGround folder; install from them on the clean copy — `-Verify` clean, uninstall back to the 597-file set
+>   (report `testcases/reports/2026-11-02_conan-release-0.9.0.md`, V1–V6 S1–S2 Z1–Z3 pass); the public repo at 0.9.0 (`def3b3f`); pack `feb7e77`. The owner's
+>   game config and desktop shortcut restored after the runs.
+> - ✅ 19:38 the GitHub release v0.9.0 CREATED by the owner's word («Разрешаю»): https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.0
+>   with the guide PDF; the 19 volumes NOT uploaded — every `gh release upload` 19:42–19:46 failed «error connecting to api.github.com» (the VPN went off) — **FIRST next chat:**
+>   `gh release view v0.9.0 --repo MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --json assets --jq '.assets[].name'` and upload the missing
+>   `Krinik_Mod_Pack_0_9_0.zip.0NN` from `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_PlayGround\` by `gh release upload v0.9.0 --repo … <file>` one by one.
+> - ✅ the volume work dirs (65 GB) and the bundle in the clean copy removed by the owner's word (the clean copy = its 597-file list again). Pack `c357adb`
+>   (`_config/branding/logos-on-shot.py` with the owner's accepted values). Machine lock released.
+> - The PlayGround page — the owner's: advised to EDIT the existing page (his «Сборка обновлена» line), title with «для 3.0.1 [0.9.0]», files and text from the folder.
+> ⚠️ Закрыто принудительно 2026-11-02 19:4x +03:00 по слову владельца («закрывай чат, мне нужно будет ВПН вырубить»): церемонии (проход судьи, обрезка STATUS,
+> README, линтеры витрины) пропущены — долг платит первый /end-chat-soft. Ложных утверждений на месте не осталось.
+> - ❌ I crashed the owner's game 19:11 by a blind inventory sweep (EXP-0448) — relaunched, his save and camera intact.
+> **NOW 2026-11-02 13:25 +03:00 (chat 03118042) — the build is whole again** (66 paks, 9 Lua mods; the store holds `arc_wave = 1`; the oasis save lost its 2 iron arrows):
+> - ✅ **The arrow-choice list on a draw** (`[OWNER]` 12:49–12:56): shows only with ≥ 2 arrow kinds, never with one or with the hub row «Выбор стрел при натяжении»
+>   off — L1–L4 pass, packs `6a7cca5`, `c415cbe` (guide), report `testcases/reports/2026-11-02_conan-arrow-choice-and-bow-stance.md`.
+> - ✅ **The string frozen drawn after a draw at low stamina (bug 76) — FIXED 13:5x:** the bow's string animation stayed on the last frame of the charge
+>   (a triangle to the chest, `[OWNER]` 13:38 «ОНА ТРЕУГОЛЬНАЯ!!!»); KrinikConanArchery calls the game's own string settle at the end of the attack — B1–B3
+>   pass. My 13:2x «vanilla stance» claim was drawn from behind and is corrected in every place it stood. The owner confirmed 13:55 «пофиксилось, я протестил» — bug 76 DONE.
+> - ✅ **Ours, fixed 13:2x:** the aim zoom no longer stays through a stamina break (the re-draw hold needs a shot since the aim entry; S6, S7 pass).
+> - ❓ **The shock wave:** the row «Ударная волна полного заряда» drives `P_bow_powercharge_release`, which draws nothing on screen; the owner's «sprite by the bow»
+>   was not reproduced in vanilla nor in the build (W4, W5 — `[OWNER]` 12:48 «нету спрайта» · «попробовал и 100% и ВЫКЛ - нету его»). The row's fate — interview #031 (`interviews/interview_031_conan_shock_wave_row.md`, ❓ waits; recommended: remove the row until the sprite is found).
+> **ORDER 2026-11-02 15:46 — until the owner's evening play, no build code:** `[OWNER]` «давай дальше такие работы, которые не ппишут код сборки, а тестирование,
+> изучение, поиск причин, запись знание». Work = test runs, recon, cause hunts, notes; a found defect is filed with its fix plan, the code waits for his word.
+> **NOW 2026-11-02 15:1x +03:00 (chat aa2bfa46) — packs `008faf4`, `a848a58` pushed; machine lock released, my game closed, the owner's camera `config.lua` byte-equal:**
+> - ✅ **Bug 77 DONE** — «E Взять» asks the GAME's own pickup probe (`EnvironmentFunctionLibrary:PickupGatheringOneInstance`, a static — plan 42's «not a UFunction»
+>   corrected) once a second, 5 / s while shown, no near list: 0.3–1.2 s to show, 0.3–0.4 s to hide, 0.9 s 150 m away; the E rim fades with the plate; the plate on
+>   the crosshair dot's line just left of it (−1 % / 0 %). Report `testcases/reports/2026-11-02_conan-pickup-native-probe.md`. His eye on the new place — open.
+> - ✅ **Bug 78 DONE** — the wheel in the bow aim chooses arrows (up and down) and the camera stays; three causes: our translation turned AQS's service «None» into
+>   «Нет» (the mod never bound the wheel), the game's zoom took the wheel in the aim (KrinikConanCamera step 0 while aiming), AQS listed arrow STACKS («up» stalled;
+>   KrinikConanArchery `one_row_per_kind`). Report `testcases/reports/2026-11-02_conan-wheel-in-bow-aim.md`.
+> - 🟡 **Bug 75 (the quick-loot rim jumps on an F take) — REPRODUCED 15:21 on 120 fps:** after the take the rim sits ≈ 70 ms on the bottom-right cell, then on
+>   cell 1. The control (our two Lua sections out) NOT run — the stand slipped (steps and the new stand tools `corpse-aim.lua`, `corpse-fill.lua` in the bug). NEXT.
+> - 🔎 Seen 15:18 (to check): over a corpse lying in a bush both the corpse strip and «E Взять» show — the plate answers the game's foliage probe, while E there may
+>   open the corpse's loot; read the order in `UpdateHighlightTarget` (actor targets before `PickupGatheringOneInstance`?) and hide the plate when an actor target wins.
+> - 🔎 Bug 74 (nest eggs): a palm-leaf nest with three eggs found at ≈ −41290, 255086 (the bug file) — next: the probe's answer on them.
+> - ✅ **Interview #031 answered A (15:36) — the shock-wave row removed** (Lua both mods, kit PAGES; the KrinikConanUI pak rebuilt in the kit).
+> - The owner plays his local build tonight (`[OWNER]` 15:37 «я вечером поиграю» · «сегодняшние правки хорошо бы поставить в мою локальную сборку»): today's fixes are
+>   deployed into `D:\Games\Conan Exiles 3.0.1`; the launcher `KrinikConanLauncher.exe` + icons + the guide PDF copied into its root and a desktop shortcut
+>   «Krinik Conan» made (`[OWNER]` 15:37 «ярлык нашего лаунчера на рабочий стол добавишь?») — the launcher opened, found the game, «Играть» / «Удалить сборку» shown.
+> - **CHAT 03118042 CLOSED 2026-11-02 14:1x (soft, `[OWNER]` «ну так пора закрывать, чего ты встал»). FIRST in the next chat:** (1) bug 75 — the stand works now (noon by `BP_TimeOfDayManager_C:SetTimeOfDay(12.0)`, the fixed `quiet-stand.lua` (pack `40db56d` — kills humanoids, every `BP_NPC_Wildlife_*`, every `BP_NightTerrors_*`), `_G.__cf_dist=300` + `corpse-face.lua` + a Shift tap → the quick-loot window opens); needs a HUMANOID corpse with ≥ 3 items, then a 120 fps F take and the control case (steps in the bug); (2) the wall jump — a tall wall, read `CurrentWall` while climbing (game map, «Climbing»); (3) bug 74 nest eggs — the owner's spot; (4) interview #031 (shock-wave row) for his answer. KAIF #190 delivered (call name default). The machine: the owner gave the screen for input cases «в любое угодное тебе время» (14:08) — input only by `mouse-seq.ps1`.
+> - 🔎 Recon of 14:00–14:10 (all need the game in front — the owner: «в любое угодное тебе время», 14:08): bug 74 nest eggs — the only egg mesh loaded is snake eggs (covered), the owner's palm-leaf nest (his frame 085957) not found — next: his spot; bug 75 — our loot-event hooks touch no focus, the stand try failed (hero onto a beast body) — next steps in the bug; the wall jump — climbing is native (`ExitClimbing`, `CurrentWall`, game map) — next: a tall wall and a read while climbing.
+> - ✅ Owner's voice for calls (13:59): the soft voice of Unliminium — `.claude/settings.local.json` env `KAIF_VOICE_TOOL=D:/work/UnliminiumTheDigitalGame/tools/voice-soft.mjs`, `KAIF_VOICE=eugene`, `KAIF_VOICE_BEEPS=embedded`, `KAIF_VOICE_BEEP_VOLUME=2.5`; `.kaif/kaif.json` `contour.callName` «Николай» (`[OWNER]` «да, тепеь хорошо»).
+
 ## 2026-11-02 11:3x +03:00 (third part) — the Svarog blocks of STATUS «Where to continue», moved at the soft closure of chat f73138c5 (verbatim)
 
 > **PARKED 2026-10-29 21:07 — Svarog (the far shelf, not raised at entry):** the 21:02 session took it up for four minutes: saves copied

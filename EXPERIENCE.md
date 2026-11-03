@@ -99,6 +99,7 @@ native fault. The sibling hook on `SlotItemAddedOrRemoved(otherIndex)` read its 
 **Lesson:** in a hook on a native slot that fires during a rebuild, read only plain params (int, bool); an object param may be a freed or half-built object —
 never `:get()` it in the same frame. Before any hook into the owner's running game, ask: does it read an object the engine is rebuilding?   → link:
 `bugs/75_conan_quick_loot_selection_jumps_on_f_take.md` · [[EXP-0403]]
+none-cheap: a guard would have to parse the free Lua sent through the remote for `:get()` on a hook param — the remote runs free code by design; the rule stands at the decision point (this entry + bug 75).
 
 ### EXP-0451 · 2026-11-03 · ❌ · #conan #stand #camera #corpse #owner-time
 class: a-stand-built-by-hand-call-by-call
@@ -118,6 +119,7 @@ class: a-size-match-is-not-the-same-file
 fixed-size cuts), so the script reported them «present» and the release would have mixed two archives; caught by reading the log line «present».
 **Lesson:** a remote file counts as done only by its CONTENT: GitHub gives `digest` (sha256) per release asset (`gh api repos/<r>/releases/tags/<t> --jq '.assets[].digest'`);
 compare it with the local sha256, delete and re-upload on mismatch, read the digest again after. Before a rebuild's upload, delete every old part first.
+none-cheap: the upload was a one-off scratchpad script; the rule «compare the asset digest» is a step of the release ritual (plan 44), not a standing tool.
 
 ### EXP-0449 · 2026-11-03 · ❌ · #windows #background #upload #github #release
 class: a-stopped-task-leaves-its-children-running
@@ -127,6 +129,7 @@ class: a-stopped-task-leaves-its-children-running
 the public release for ~20 minutes; found only because a part file was «Device or resource busy» on delete.
 **Lesson:** after stopping a background script on Windows, list its processes by command line (`Get-CimInstance Win32_Process` … `CommandLine -match <script>`) and
 kill every PID of the script and its children; then read the target's state (`gh release view … assets`) before building on it.
+none-cheap: stopping a background task is rare and the check is one `Get-Process` by name after it; the rule lives at the decision point.
 
 ### EXP-0448 · 2026-11-02 · ❌ · #conan #remote #inventory #crash #owner-game
 class: blind-native-calls-in-the-owners-game
