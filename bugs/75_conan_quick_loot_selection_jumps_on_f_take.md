@@ -1,6 +1,6 @@
 # Bug 75 — the quick-loot selection rim jumps to the last cell for a moment when an item is taken with F
 
-**Status:** ✅ DONE 2026-11-03 21:52 +03:00 (section `krinik_loot_rim` 0.1.0 of KrinikConanUI; cases B2–B5 pass) · **Severity:** S3 visual, filed as a document by the owner's word («это баг, нужно будет испрравить») · **Version/build:** pack ConanExiles
+**Status:** 🟡 PARTIAL — the jump HIDDEN 2026-11-03 21:52 +03:00 (section `krinik_loot_rim` 0.1.0, cases B2–B5 pass); OWED: the proper, pretty fix (`[OWNER]` 22:18 «там долг на будущее - сделать красиво» · «починить правильно») · **Severity:** S3 visual, filed as a document by the owner's word («это баг, нужно будет испрравить») · **Version/build:** pack ConanExiles
 `4aca565`, KrinikConanUI 1.0.0 (kit edit of `W_QuickLootPanel` + `krinik_ui_fixes` hooks on `QuickLootPanel:SlotItemAddedOrRemoved`) · **When/context:**
 2026-11-02 09:10 +03:00, the owner's play; recorded in STATUS the same minute, this document 2026-11-02 10:4x
 **Fixing:** the next game run of this session, after the hub batch (cases B1–B3 below)
@@ -108,6 +108,12 @@ The same pooled cell class `InventoryGridSlotView_C` serves 79 widgets (the inve
 there walks the selection the same way is NOT checked — no owner remark about them so far.
 
 Hygiene: none (Lua, no unit tests). Functional run: B2–B5 in the live game, real wheel and F, 120 fps clips read frame by frame.
+
+## The owner's verdict (live demo 2026-11-03 22:18)
+
+`[OWNER]` 22:18 «я сам взял» · «вижу, починила, хотя и некрасиво» · «пока сойдёт». Accepted for now; the ugly part is the ≈ 0.3–0.4 s with NO rim after a take.
+Way for later `[AI]`: light the kept cell's rim at once (its `SelectIndicator` opacity, or its `AnimSelect` jumped to the end) while the other rims are hidden —
+not tried; listed in STATUS «Where to continue».
 
 ## Decisions made without the owner
 

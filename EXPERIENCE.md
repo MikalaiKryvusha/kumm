@@ -99,7 +99,7 @@ body at pitch −40, the game brought to the front, then `aim-sweep.lua` until t
 Two traps paid: the camera-to-body aim converges to a view straight down (pitch −78), where a yaw step barely moves the screen point; a sweep started
 while the game was behind read a stale strip as «hit» at step 0.
 **Lesson:** aim by what the game answers (its module, its strip), start from the hero's own line of sight, and hold the game in front for the whole sweep.
-→ link: `bugs/75_DONE_conan_quick_loot_selection_jumps_on_f_take.md` · [[EXP-0451]] · mechanized: `ConanExiles/_config/loot-aim.sh`
+→ link: `bugs/75_conan_quick_loot_selection_jumps_on_f_take.md` · [[EXP-0451]] · mechanized: `ConanExiles/_config/loot-aim.sh`
 
 ### EXP-0453 · 2026-11-03 · ❌ · #conan #ue4ss #lua #log #trace
 class: the-tool-lied-about-silence
@@ -108,7 +108,7 @@ class: the-tool-lied-about-silence
 (2) a UE4SS object wrapper is a NEW Lua value on every call: `==` between two wrappers of one panel is false — compare `obj:GetAddress()`; (3) every panel
 bound to the same corpse inventory gets the slot — a code-opened strip, removed but not collected, fired first and the trace read its rimless grid.
 **Lesson:** before calling a hook silent, read the log again after ~20 s or keep a counter in `_G` and read it by the remote; never compare UE4SS objects by
-`==`; filter a slot's object by «on screen» (`IsInViewport` of its container).   → link: `bugs/75_DONE_conan_quick_loot_selection_jumps_on_f_take.md`
+`==`; filter a slot's object by «on screen» (`IsInViewport` of its container).   → link: `bugs/75_conan_quick_loot_selection_jumps_on_f_take.md`
 none-cheap: a guard would have to parse free Lua sent through the remote; the counter pattern stands in `krinik_loot_rim.lua` (`_G.__krinik_loot_rim_seen`).
 
 ### EXP-0452 · 2026-11-03 · ❌ · #conan #ue4ss #hook #crash #owner-game
@@ -118,7 +118,7 @@ class: reading-an-object-param-in-a-native-slot-hook
 native fault. The sibling hook on `SlotItemAddedOrRemoved(otherIndex)` read its INT param fine (`otherIndex=3`).
 **Lesson:** in a hook on a native slot that fires during a rebuild, read only plain params (int, bool); an object param may be a freed or half-built object —
 never `:get()` it in the same frame. Before any hook into the owner's running game, ask: does it read an object the engine is rebuilding?   → link:
-`bugs/75_DONE_conan_quick_loot_selection_jumps_on_f_take.md` · [[EXP-0403]]
+`bugs/75_conan_quick_loot_selection_jumps_on_f_take.md` · [[EXP-0403]]
 none-cheap: a guard would have to parse the free Lua sent through the remote for `:get()` on a hook param — the remote runs free code by design; the rule stands at the decision point (this entry + bug 75).
 
 ### EXP-0451 · 2026-11-03 · ❌ · #conan #stand #camera #corpse #owner-time
@@ -129,7 +129,7 @@ at a BONE; (2) the view is our camera mod's, not `CameraThirdPerson` — aim fro
 the body); (3) `exec TeleportPlayer` does nothing — `K2_TeleportTo`; (4) the city and a canyon are not stands. `[OWNER]` 19:41 «ты камеру себе поставишь, как удобно для
 тестом, или блять собираешься два часа страдать???». Even then the quick-loot window did not open — the stand's real unknown was never the camera.
 **Lesson:** a stand that fails twice becomes ONE script before the third try (`_config/loot-stand.sh`), and the unknown it depends on («what opens the window») is
-answered by a read of the game's code first, not by more frames.   → link: `bugs/75_DONE_conan_quick_loot_selection_jumps_on_f_take.md` · HOUSE_RULES rule 11 ·
+answered by a read of the game's code first, not by more frames.   → link: `bugs/75_conan_quick_loot_selection_jumps_on_f_take.md` · HOUSE_RULES rule 11 ·
 mechanized: `ConanExiles/_config/loot-stand.sh`
 
 ### EXP-0450 · 2026-11-03 · ❌ · #github #release #upload #verification

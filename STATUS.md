@@ -130,9 +130,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **NOW 2026-11-03 21:54 +03:00 — chat cb012770, `[OWNER]` 21:02 «делаем сборку конана 1.0.0»:** working the 1.0.0 list below in order.
 > **CHAT ce994c74 CLOSED 2026-11-03 20:57 +03:00 (soft, `[OWNER]` 20:55 «работай автономно 10 минут. Затем начинай закрытие этого чата, в новом продолжим»).
 > FIRST in the next chat, in order:**
-> 1. ✅ **The quick-loot rim jump on F (bug 75) — DONE 2026-11-03 21:54 +03:00** (new chat): the new section `krinik_loot_rim` of KrinikConanUI hides the other cells'
+> 1. 🟡 **The quick-loot rim jump on F (bug 75) — HIDDEN 2026-11-03 21:54 +03:00** (new chat): the new section `krinik_loot_rim` of KrinikConanUI hides the other cells'
 >    rims for 350 ms on a take (the owner's way, 21:26 «можно … просто её делать невидимой на время мерцания?»); B2 control (the jump is the game's), B3–B5 pass
 >    after a normal start — report `testcases/reports/2026-11-03_conan-quick-loot-rim-hold.md`; the guide line moved from «Известные проблемы» to KrinikConanUI.
+>    Live demo 22:18 — `[OWNER]` «вижу, починила, хотя и некрасиво» · «пока сойдёт»: DEBT `[OWNER]` 22:18 «там долг на будущее - сделать красиво» · «починить правильно» (the ≈ 0.3–0.4 s with no rim; bug 75 «verdict»).
 > 2. ✅ **Aiming by the game's own answer** — `_config/loot-stand.sh` (hero 1.5 m) + `_config/loot-aim.sh` hit on five stands in a row (EXP-0454).
 > 3. ✅ The launcher's grey «Установить сборку» — DONE 2026-11-03 22:00 +03:00 (pack `068b935`, report `2026-11-03_conan-launcher-install-button-gold.md`; the box wording
 >    waits for the owner's eye). Next: the HUD icon shadows, the quick-loot window over the tutorial panel, bug 80 (corpse in a bush).
@@ -144,7 +145,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > «Известные проблемы и планы на 1.0.0» (`ConanExiles/docs/guide/guide-3.0.1.html`) + kit info paks of the four Lua mods + the waystone / city frames.**
 > - ✅ **Food, water and weight blink in ONE phase** (`[OWNER]` 19:41 «мерцают крассным в рассинхрон» · «одну шину»): `krinik_hud_blink` drives the limit too,
 >   Hosav's animations stopped — S1–S3 pass, report `testcases/reports/2026-11-03_conan-hud-blink-one-bus.md`; the guide line updated (PDF — at the release).
-> - ✅ bug 75 (the rim jump on F) — DONE in chat cb012770; the two 2026-11-03 evening blocks on it moved verbatim to the chronicle, entry 2026-11-03 21:55 +03:00.
+> - 🟡 bug 75 (the rim jump on F) — hidden in chat cb012770, the proper fix owed; the two 2026-11-03 evening blocks on it moved verbatim to the chronicle, entry 2026-11-03 21:55 +03:00.
 > - NEW owner remarks: (1) `[OWNER]` 20:14 «под иконкой перегруза тень слишком сильная, не такая, как под жаждой и голодом - там или легче или нет» · «Сделать
 >   однотипно легко всем иконкам худа» — recon first (the weight icon's shadow: Hosav's image or our `Image_Weight_Blinking` paint); (2) seen by the agent 20:13:
 >   the quick-loot window lies over the tutorial journal panel («Выживший — Потратьте очки характеристик») and that text shows through the window's grid — to file.
