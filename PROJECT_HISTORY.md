@@ -5948,3 +5948,18 @@ Their open items stay in STATUS as one pointer line. Verbatim:
 >    counted at 21:55 (the list said to the owner in chat).
 > Review folders waiting for the owner: 51 (Xevyr page look — variant A chosen, the look itself not answered), 52 (logo tone), 53 (prompt mockup — taken).
 > Never in the owner's running game: a sweep of native calls over enum values (EXP-0433); a desktop recording while the game is not in front (EXP-0431).
+
+## 2026-11-03 21:55 +03:00 — STATUS trim (chat cb012770): the bug 75 blocks of 2026-11-03 evening moved verbatim (the bug is DONE)
+
+> - 🔴 **The quick-loot rim jump on F (bug 75) — B1 REPRODUCED 20:14 on a real stand:** answered by the owner — the window opens by itself over a corpse that
+>   HAS LOOT (`[OWNER]` 19:55 «убиваю кого-то, например, дикаря. и навожу на труп прцелл - окно само открывается» · 20:04 «когда есть что залутать из трупа»); a
+>   Kappa corpse never has loot — why nine stands of 19:22–19:50 failed (game map, «When the quick-loot window opens»). Stand: the oasis camp boss «Эника из
+>   Киммерии» killed by `corpse-stand.sh 250` (from −78166, 245999), the hero 3 m off, aim by `PlayerCameraManager:GetCameraLocation()` on bone `b_spine_2`
+>   (6 passes); 120 fps `loot-take-clip.sh` with `SEQ="wait:700,wheel:-1,wait:900,kdown:F,wait:80,kup:F,wait:2500"`: F on cell 1 → the items shift left and the rim
+>   stands ≈ 5 sampled frames on an EMPTY cell (row 2, column 6), then goes. CAUSE READ 20:39 (native grid rebuild, bug 75); the probe fix (next+prev after the rebuild) FAILED (the owner saw the jump 20:52). B2 (the control run) is THE AGENT'S work — `[OWNER]` 21:01 «B2 это твоя работа как разработчика и тестировщика, не Николая - заказчика»; never parked on the owner. B2 with the Lua out — tried 20:23, NOT seen yet:
+>   with the Lua out the window did not show over the second boss corpse (97 bones — a female skeleton; bone 5 is an arm, aim at `b_head`); a crocodile walked
+>   in once (quiet-stand 40 m first); an earlier blind F may have emptied that corpse. Resume: a FRESH boss corpse, check its loot count first (`ItemInventory`
+>   of the corpse), then the clip. The Lua sections are back; the game crashed 20:52 on my hook (EXP-0452) and is closed.
+> - 20:55: the probe fix (next+prev after the rebuild) FAILED — `[OWNER]` 20:52 «прыгает рамка»; then MY remote hook on `SlotItemSelectionChanged` reading its
+>   Item param CRASHED his game at his F take (EXP-0452). `SlotItemAddedOrRemoved` gives `otherIndex` (=3 at that take) — the next fix can key on it.
+>   Aim on a stand: a real Shift tap first (it wakes the idle camera — game map), then `SetControlRotation` / `aim-sweep.lua`.

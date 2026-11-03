@@ -141,6 +141,16 @@ the game's idle camera ignores `SetControlRotation` until a real key (line «The
 enemy corpse (it carries loot), never a beast; or `strip-open.sh` (the strip opened by code also shows the window). Spawning: `CheatManager:Summon` of the bare
 `/Game/Characters/NPCs/Humanoid/HumanoidNPCCharacter.HumanoidNPCCharacter_C` gives a template NPC titled «[Fighter]» in English (no table row — not a build
 defect); an NPC teleported from an UNLOADED area and killed at once falls through the ground (its body at z −44718 over ground −19850).
+**The quick-loot grid and its rim (2026-11-03, bug 75):** `W_QuickLootPanel.InventoryGridView` = `InventoryGridView_C` (6 × 3, `m_HideEmptySlots` true,
+`EnableNavigationWrap` false) → `SizeBox` → `ScrollBox` → `InventoryBox` → CanvasPanel `ItemGrid` with 18 POOLED `InventoryGridSlotView_C` cells (pools
+`m_GridSlotViewPool`, `m_ItemIconViewPool`; a rebuild re-places them — canvas order ≠ place, read `Slot:GetPosition()`, steps of 100). The selection rim is
+the cell's `SelectIndicator` (Border, visibility 3) whose render opacity the cell's animation `AnimSelect` (0.3 s) drives. An F take rebuilds the grid
+natively and walks the selection: the walk's last cell keeps a full rim ≈ 250 ms (the owner's «прыгает в нижнюю правую»), then the rim lands on the item that
+slid into the taken place — vanilla (control B2); our `krinik_loot_rim` hides the other rims meanwhile. `QuickLootPanel:SetActor` fires EVERY frame while the
+window shows (270 calls in a minute) — never hook it for work. Every panel bound to the same corpse inventory (a code-opened strip too) gets the slots.
+`UE4SS.log` is written with a delay of up to minutes (EXP-0453).
+**The aim for a corpse stand (2026-11-03 21:2x):** the hero 1.5 m from the body (from 3 m the window never opened); a real Shift tap; the view from the HERO
+toward the body at pitch −40; the game in front; `aim-sweep.lua` until the game shows the strip — `_config/loot-aim.sh` (EXP-0454).
 Quick-loot input (bug 75 stand, 2026-11-02): the CELL is chosen by the WHEEL
 (`QuickLootCycleSelectionNext = MouseScrollDown`, `…Prev = MouseScrollUp`), F takes the chosen stack, Shift is «Перейти» (to the inventory). Corpse skeleton
 bones are `b_root`, `b_pelvis`, `b_spine_1…` (170 bones on a humanoid); the mesh root lies at the feet, `GetSocketLocation(FName("pelvis"))` returns the root.

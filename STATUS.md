@@ -127,15 +127,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-03 21:54 +03:00 — chat cb012770, `[OWNER]` 21:02 «делаем сборку конана 1.0.0»:** working the 1.0.0 list below in order.
 > **CHAT ce994c74 CLOSED 2026-11-03 20:57 +03:00 (soft, `[OWNER]` 20:55 «работай автономно 10 минут. Затем начинай закрытие этого чата, в новом продолжим»).
 > FIRST in the next chat, in order:**
-> 1. **The quick-loot rim jump on F (bug 75)** — `[OWNER]` 20:39 «рамку чини». The cause is read (native grid rebuild; bug 75 «The cause»); the next-plus-prev
->    probe FAILED. Next fix: in `krinik_ui_fixes` keep the selected position ourselves (window opens → 0; `SlotCycleSelectionNext/Prev` ±1) and after
->    `SlotItemAddedOrRemoved(otherIndex)` step back to it with the same two calls; NEVER read an object param in those hooks (EXP-0452 — it crashed his game).
->    Stand (all written): a HUMANOID corpse with loot (`corpse-stand.sh 250` at the oasis −78166, 245999), a real Shift tap FIRST (wakes the idle camera),
->    then aim (`aim-sweep.lua` or `PlayerCameraManager` passes), the 120 fps clip `loot-take-clip.sh` with the wheel before F.
-> 2. **Aiming by the game's own answer** (`[OWNER]` 20:38 «когда ты нахуй нормально сможешь уже игрой управлять? видеть, куда ты идешь, куда смотришь»):
->    finish `_config/aim-sweep.lua` (Shift tap first; prove one «hit» on a frame) — every corpse case depends on it.
+> 1. ✅ **The quick-loot rim jump on F (bug 75) — DONE 2026-11-03 21:54 +03:00** (new chat): the new section `krinik_loot_rim` of KrinikConanUI hides the other cells'
+>    rims for 350 ms on a take (the owner's way, 21:26 «можно … просто её делать невидимой на время мерцания?»); B2 control (the jump is the game's), B3–B5 pass
+>    after a normal start — report `testcases/reports/2026-11-03_conan-quick-loot-rim-hold.md`; the guide line moved from «Известные проблемы» to KrinikConanUI.
+> 2. ✅ **Aiming by the game's own answer** — `_config/loot-stand.sh` (hero 1.5 m) + `_config/loot-aim.sh` hit on five stands in a row (EXP-0454).
 > 3. The launcher's grey «Установить сборку» (cause and fix way below), the HUD icon shadows, the quick-loot window over the tutorial panel, bug 80 (corpse in a bush).
 > 4. Nexus: ticket 276571 — look at the Files tab of mod 65 for the quarantine line.
 > Done in this chat: the Nexus page checked (Adult — the owner's tags; the e-mail a live link; the quarantine request sent); the HUD blink in one phase
@@ -145,15 +143,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > «Известные проблемы и планы на 1.0.0» (`ConanExiles/docs/guide/guide-3.0.1.html`) + kit info paks of the four Lua mods + the waystone / city frames.**
 > - ✅ **Food, water and weight blink in ONE phase** (`[OWNER]` 19:41 «мерцают крассным в рассинхрон» · «одну шину»): `krinik_hud_blink` drives the limit too,
 >   Hosav's animations stopped — S1–S3 pass, report `testcases/reports/2026-11-03_conan-hud-blink-one-bus.md`; the guide line updated (PDF — at the release).
-> - 🔴 **The quick-loot rim jump on F (bug 75) — B1 REPRODUCED 20:14 on a real stand:** answered by the owner — the window opens by itself over a corpse that
->   HAS LOOT (`[OWNER]` 19:55 «убиваю кого-то, например, дикаря. и навожу на труп прцелл - окно само открывается» · 20:04 «когда есть что залутать из трупа»); a
->   Kappa corpse never has loot — why nine stands of 19:22–19:50 failed (game map, «When the quick-loot window opens»). Stand: the oasis camp boss «Эника из
->   Киммерии» killed by `corpse-stand.sh 250` (from −78166, 245999), the hero 3 m off, aim by `PlayerCameraManager:GetCameraLocation()` on bone `b_spine_2`
->   (6 passes); 120 fps `loot-take-clip.sh` with `SEQ="wait:700,wheel:-1,wait:900,kdown:F,wait:80,kup:F,wait:2500"`: F on cell 1 → the items shift left and the rim
->   stands ≈ 5 sampled frames on an EMPTY cell (row 2, column 6), then goes. CAUSE READ 20:39 (native grid rebuild, bug 75); the probe fix (next+prev after the rebuild) FAILED (the owner saw the jump 20:52). B2 (the control run) is THE AGENT'S work — `[OWNER]` 21:01 «B2 это твоя работа как разработчика и тестировщика, не Николая - заказчика»; never parked on the owner. B2 with the Lua out — tried 20:23, NOT seen yet:
->   with the Lua out the window did not show over the second boss corpse (97 bones — a female skeleton; bone 5 is an arm, aim at `b_head`); a crocodile walked
->   in once (quiet-stand 40 m first); an earlier blind F may have emptied that corpse. Resume: a FRESH boss corpse, check its loot count first (`ItemInventory`
->   of the corpse), then the clip. The Lua sections are back; the game crashed 20:52 on my hook (EXP-0452) and is closed.
+> - ✅ bug 75 (the rim jump on F) — DONE in chat cb012770; the two 2026-11-03 evening blocks on it moved verbatim to the chronicle, entry 2026-11-03 21:55 +03:00.
 > - NEW owner remarks: (1) `[OWNER]` 20:14 «под иконкой перегруза тень слишком сильная, не такая, как под жаждой и голодом - там или легче или нет» · «Сделать
 >   однотипно легко всем иконкам худа» — recon first (the weight icon's shadow: Hosav's image or our `Image_Weight_Blinking` paint); (2) seen by the agent 20:13:
 >   the quick-loot window lies over the tutorial journal panel («Выживший — Потратьте очки характеристик») and that text shows through the window's grid — to file.
@@ -162,9 +152,6 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   a disabled MetalButton paints grey. In the working game root the uninstaller exists → «Играть» shows there; so his grey button is a launcher run from a
 >   folder WITHOUT `install.cmd` (where — ask nothing, check the clean copy and the extracted archives). Fix way `[AI]`: the main button stays gold; a click
 >   without `install.cmd` tells the player where to run the launcher from — the wording to the owner's eye first.
-> - 20:55: the probe fix (next+prev after the rebuild) FAILED — `[OWNER]` 20:52 «прыгает рамка»; then MY remote hook on `SlotItemSelectionChanged` reading its
->   Item param CRASHED his game at his F take (EXP-0452). `SlotItemAddedOrRemoved` gives `otherIndex` (=3 at that take) — the next fix can key on it.
->   Aim on a stand: a real Shift tap first (it wakes the idle camera — game map), then `SetControlRotation` / `aim-sweep.lua`.
 > - Next on the list: no «E Взять» over nest eggs; enemy health bars over the enemies. «E Взять» beside the corpse strip over a corpse in a bush — TO FIX (`[OWNER]` 19:57 «над трупом в кустах - чинить» · «нужно ту плашку показывать, которая сработает … это нужно изучить»): bug 80 — the study first (a real E over a corpse in a bush; `_config/bush-corpse.lua`).
 > **NOW 2026-11-03 19:05 +03:00 — Nexus mod 65 IS PUBLISHED (16:40), but its only file is QUARANTINED** (Files tab: «quarantined by our automated safety checks»;
 > header «Virus scan — Some suspicious files»): the request to the Nexus support address is written —

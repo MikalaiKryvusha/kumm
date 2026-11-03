@@ -1,6 +1,6 @@
 # Bug 75 — the quick-loot selection rim jumps to the last cell for a moment when an item is taken with F
 
-**Status:** 🔴 OPEN · **Severity:** S3 visual, filed as a document by the owner's word («это баг, нужно будет испрравить») · **Version/build:** pack ConanExiles
+**Status:** ✅ DONE 2026-11-03 21:52 +03:00 (section `krinik_loot_rim` 0.1.0 of KrinikConanUI; cases B2–B5 pass) · **Severity:** S3 visual, filed as a document by the owner's word («это баг, нужно будет испрравить») · **Version/build:** pack ConanExiles
 `4aca565`, KrinikConanUI 1.0.0 (kit edit of `W_QuickLootPanel` + `krinik_ui_fixes` hooks on `QuickLootPanel:SlotItemAddedOrRemoved`) · **When/context:**
 2026-11-02 09:10 +03:00, the owner's play; recorded in STATUS the same minute, this document 2026-11-02 10:4x
 **Fixing:** the next game run of this session, after the hub batch (cases B1–B3 below)
@@ -83,9 +83,41 @@ had returned to VS Code).
   was put — the face stand is `[NOT-TESTED]`). Next: a stand away from the oasis crocodiles (kill or freeze them first — `KillCharacter` on
   `BP_NPC_Wildlife_Crocodile_C`, read the nearest by name), check the corpse body place on a frame, then the 60 fps clip of an F take.
 
+## The mechanism, measured 2026-11-03 21:09–21:17 (trace `_config/quickloot-rim-trace.lua`, 120 fps clips)
+
+The grid of `W_QuickLootPanel` is `InventoryGridView_C` (6 × 3, `m_HideEmptySlots` true) → `SizeBox` → `ScrollBox` → `InventoryBox` → CanvasPanel `ItemGrid` with
+18 POOLED `InventoryGridSlotView_C` cells (pools `m_GridSlotViewPool`, `m_ItemIconViewPool`); a rebuild re-places the cells, so their canvas order is not their
+place on screen (`Slot:GetPosition()` — steps of 100). The rim is each cell's own `SelectIndicator` (a Border, visibility HitTestInvisible 3) whose RENDER
+OPACITY the cell's widget animation `AnimSelect` (0.3 s) drives. After an F take the walk's last cell keeps opacity 1.00 with its `AnimSelect` «playing» at
+0.300 for ≈ 250 ms while the right cell has none; then the rim lands on the right cell (the item that slid into the taken place, or the previous one when the
+last item is taken). Control B2 (both our Lua sections out): the same jump — the game's C++, not ours.
+
+## The fix (2026-11-03 21:3x, the owner's way)
+
+`[OWNER]` 2026-11-03 21:26 «до взятия рамка стоит на первом предмете, или на том, который колесом мыши выделят. После взятия стоит на том. который подъезжает в
+клетку» · «мерцает рамка переносом в нижнюю правую - можно нахуй просто её делать невидимой на время мерцания?». The new section
+`ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_loot_rim.lua` (in `main.lua` SECTIONS): the rim's place is read one tick after every
+`SlotItemSelectionChanged` (never inside a take, no param read); on a take (`SlotItemAddedOrRemoved`) every other cell's rim Border is Hidden at both slot
+calls and one tick later, for 350 ms, then given back, and the place is read again. Seen: B3 (a middle cell), B4 (the last item of the row), B5 (after a
+normal start) — no frame with the rim on another cell; the rim is absent ≈ 0.3–0.4 s, then lights on its place. Report
+`testcases/reports/2026-11-03_conan-quick-loot-rim-hold.md`. The failed probe of 20:4x (next + prev after the rebuild) was a remote hook, never shipped.
+
+TWINS: searched `SlotItemAddedOrRemoved|AnimSelect|SelectIndicator` in the pack's Lua (`grep -rln … --include=*.lua _unpacked _config`) — found 2 other
+sites: `KrinikConanArchery/…/main.lua` and `krinik_ui_fixes.lua`, both hook the slot for other work (the arrow sync, the strip alignment) and touch no rim.
+The same pooled cell class `InventoryGridSlotView_C` serves 79 widgets (the inventory, chests, the hotbar, the siege payload): whether a take or a move
+there walks the selection the same way is NOT checked — no owner remark about them so far.
+
+Hygiene: none (Lua, no unit tests). Functional run: B2–B5 in the live game, real wheel and F, 120 fps clips read frame by frame.
+
 ## Decisions made without the owner
 
-— (open)
+- `[AI]` A new section `krinik_loot_rim` instead of more code in `krinik_ui_fixes`: one purpose, and the remote can load it hot without doubling the
+  other section's hooks.
+- `[AI]` HOLD_MS 350 (the animation's 0.3 s + a frame) — the stuck rim was measured 246 ms; shorter would risk the last frames of the stuck rim.
+- `[AI]` The right cell's rim is not forced on during the hold: it lights when the game lights it (≈ 0.3–0.4 s without a rim) — the owner's own «невидимой на
+  время мерцания»; lighting it at once would mean driving the game's animation (not tried).
+- `[AI]` HOUSE_RULES rule 24 (no compensating patches): the cause is C++ of the game (B2), no asset or blueprint holds the walk; the owner named this way
+  himself — recorded here, not asked again.
 
 ## Links
 
