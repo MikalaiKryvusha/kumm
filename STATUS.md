@@ -142,9 +142,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    LBPR's own window is in «Настройки модов → Прочее» (M1, M2; the real click M3 not run). Report `2026-11-03_conan-hud-weight-icon-and-mcp.md`.
 >    ✅ **Bug 81 — the quick-loot window no longer lets the journey tracker's text through** (pack `a23c9a6`, way A — the tracker not drawn while the
 >    window shows; seen 22:56). 🔧 **Bug 80 — over a corpse in a bush only the corpse strip** (pack `4a739c1`, guide `1bb38f8`): our «E Взять» off while the
->    strip is on screen (seen 23:05 by a code-opened strip over a bush); owed — one REAL E over a corpse lying in a bush. Next: the rest of the guide's 1.0.0
->    list. At the 1.0.0 release: rewrite the Nexus builder's known-issues lists (`_config/release/build_nexus_description.py`) from the guide — they still
->    name fixed items (the bush prompt, the rim on F).
+>    strip is on screen (seen 23:05 by a code-opened strip over a bush); owed — one REAL E over a corpse lying in a bush. ✅ The quick-loot window keeps its edges under the wheel — a REAL wheel seen 2026-11-03 23:18 +03:00 (plan 36 W10a, bug 64
+>    item 45 — fixed 2026-10-30, the guide listed it as open by mistake; guide `1d6a62c`). 🔬 Bug 82 (no «E Взять» over nest eggs): snake eggs work, nest eggs
+>    are another object kind — the next step is a real nest under the crosshair. Next: the rest of the guide's 1.0.0 list (all checked open against bug 64:
+>    items 4, 6, 12, 13, 15, 17, 23, 27, 46). Nexus texts — NOT NOW (`[OWNER]` 23:13 «пока не думай про описания для нексуса»).
 > 4. Nexus: ticket 276571 — look at the Files tab of mod 65 for the quarantine line.
 > Done in this chat: the Nexus page checked (Adult — the owner's tags; the e-mail a live link; the quarantine request sent); the HUD blink in one phase
 > (report `2026-11-03_conan-hud-blink-one-bus.md`); bug 75 reproduced and its cause read; the game map corrected (when the quick-loot window opens; the Shift
