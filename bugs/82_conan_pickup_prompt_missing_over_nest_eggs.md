@@ -25,6 +25,11 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   untaken one (−62077, 254132, −20093) with the hero 0.6 m off looking down: our plate visibility 3 / opacity 1.00 and the game's probe `true` — snake eggs
   are fine. So the guide's «яйца в гнезде» are NOT foliage pickups (an ostrich / bird nest is another kind of object) — the study goes to step 2.
 
+- Asset names (23:2x, `retoc-5.8 list --path <chunk>.utoc` over the 37 game chunks, grep «nest» / «egg»): the nests are PLACEABLE meshes —
+  `Items/Placeables/meshes/SM_Nest_ostrich`, `SM_snake_nest_swamp`, `SM_branch_nest`, `SM_branch_nest_small`, `SM_locust_nest_desert|swamp` (pakchunk1050),
+  `Environment/Props/Meshes/SM_KappaNest` (pakchunk1030); egg-like foliage types exist in the DLC (`DLC_Siptah/…/FT_Siptah_SerpentEgg_1…3`) and placeable
+  egg blueprints (`DLC/Special/a2c4/…/BP_PL_Spider_Eggs_Randomized`). No loaded actor's class names a nest or an egg in the oasis region.
+
 ## Study (next)
 
 1. Find eggs: over all `InstancedFoliageActor`s, the components whose mesh names an egg — their instances with `Scale3D` ≠ 0 (not taken), the nearest.
