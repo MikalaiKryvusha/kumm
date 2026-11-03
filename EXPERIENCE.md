@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0451 · 2026-11-03 · ❌ · #conan #stand #camera #corpse #owner-time
+class: a-stand-built-by-hand-call-by-call
+**Context:** bug 75 control run — a corpse stand built in ~20 single remote calls (teleport, kill, place, aim, Shift), 19:22–19:50, the owner watching his screen.
+**Result:** ❌ — the crosshair missed the body nine times: (1) the corpse's `SkeletalMeshComponent` location is the death spot, the ragdoll lies up to 1.5 m off — aim
+at a BONE; (2) the view is our camera mod's, not `CameraThirdPerson` — aim from `PlayerCameraManager:GetCameraLocation()`, repeated, with the hero 3 m off (never ON
+the body); (3) `exec TeleportPlayer` does nothing — `K2_TeleportTo`; (4) the city and a canyon are not stands. `[OWNER]` 19:41 «ты камеру себе поставишь, как удобно для
+тестом, или блять собираешься два часа страдать???». Even then the quick-loot window did not open — the stand's real unknown was never the camera.
+**Lesson:** a stand that fails twice becomes ONE script before the third try (`_config/loot-stand.sh`), and the unknown it depends on («what opens the window») is
+answered by a read of the game's code first, not by more frames.   → link: `bugs/75_conan_quick_loot_selection_jumps_on_f_take.md` · HOUSE_RULES rule 11 ·
+mechanized: `ConanExiles/_config/loot-stand.sh`
+
 ### EXP-0450 · 2026-11-03 · ❌ · #github #release #upload #verification
 class: a-size-match-is-not-the-same-file
 **Context:** re-uploading the 7 parts of a REBUILT archive into the same release; my upload script skipped a part when an asset of the same name and size was present.
