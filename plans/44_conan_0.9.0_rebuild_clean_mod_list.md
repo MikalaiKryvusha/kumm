@@ -29,12 +29,12 @@
       (rule: events, not polling). Check: the label present after hub, Esc menu, teleport, 10 min idle — frames at 4K.
 - [x] 2. **Bug 79** DONE 13:11 on the teleport stand (time 1.00, landed in 4 s); waystone / respawn — later in this plan; — `PauseGameInMenu` skips `W_IngameLoadingScreen_C`. Check: the teleport stand, then a waystone travel and a death/respawn — time 1.0
       within 5 s, log lines.
-- [ ] 3. **Mod list fields.** A tool `set-pak-modinfo.py` (from `set-pak-version.py`): writes `description`, `changeNote`, `author`, `authorUrl` from a table;
+- [x] 3. **Mod list fields.** BUILT 13:2x — `_config/devkit/set-pak-modinfo.py` (also `name` from the README; author-as-URL and name-as-URL fixed by rule); a dry run matched all 66 paks; two real writes seen in the game's list 13:17 (More Katanas — the Russian line, Hazelberry, the Workshop URL); `make_volumes.sh` step 2b runs it on the export. A tool `set-pak-modinfo.py` (from `set-pak-version.py`): writes `description`, `changeNote`, `author`, `authorUrl` from a table;
       descriptions — the README's Russian «Что делает» text, plain (no BBCode, no URLs, no `\r`). Krinik paks: author «Кот Криник (KOT KRINIK)», URL — the
       Nexus page, change note 0.9.0. Check: every pak's modinfo read back; the game's list — frames of several entries.
-- [ ] 4. **The Lua-only Krinik mods in the list** — a modinfo-only wrapper pak per mod (Camera, Graphics, ModPackManager, the translation) if the game lists a
+- [~] 4. **The Lua-only Krinik mods in the list** — MOVED TO 1.0.0: two probes refused by the game (a wrapper without platform paks — «Missing platform-specific pak»; with tiny legacy paks — «Missing AssetRegistry.bin in mod folder»): each needs a kit-cooked empty mod. For 0.9.0 the three Krinik paks name the four Lua mods in their description. Was: — a modinfo-only wrapper pak per mod (Camera, Graphics, ModPackManager, the translation) if the game lists a
       pak without content; first one mod as a probe, the game's log clean. Check: the list shows all 7 Krinik mods.
-- [ ] 5. The export excludes `KrinikConanCamera/nexus-screenshots/`, `nexus-logo/`.
+- [x] 5. DONE 13:2x — the camera page material moved to `docs/camera-mod-page/` (excluded from the public tree too). Was: the export excludes `KrinikConanCamera/nexus-screenshots/`, `nexus-logo/`.
 - [ ] 6. Deploy into the working game, `-Verify`, smoke by eye (menu, world, hub, meter).
 - [ ] 7. `make_volumes.sh` (configs backed up and restored), the 7 GitHub parts and the Nexus zip cut and checked; uploads: GitHub (old parts removed first),
       Nexus file replaced; the hub and Esc frames replaced in the Nexus gallery; the city and waystone frames (`[OWNER]` 12:47–12:48).

@@ -132,6 +132,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > assets only under 2 GiB, so the 3-part set does not fit it. **10:47 the owner chose 1900 MiB parts for GitHub:** 7 parts in
 > `…\Krinik_Mod_Pack_0_9_0_GitHub\`, the old volumes deleted from the release, the bilingual notes published; the 7 parts uploading (plan 43 item 15) —
 > check `gh release view v0.9.0 --repo MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --json assets` lists `.001`–`.007` uploaded with their sizes.
+> **13:2x PLAN 44 — the 0.9.0 rebuild in progress** (`plans/44_conan_0.9.0_rebuild_clean_mod_list.md`, the owner's words there): fixed and seen — the collapsed
+> Damage Meter look kept after loading screens, bug 79 (the pause froze the world on a teleport); the game's mod list fields from the README (`set-pak-modinfo.py`,
+> step 2b of `make_volumes.sh`); the camera page material out of the archive. Next: steps 6–7 (deploy + smoke, volumes, GitHub 7 parts, Nexus zip, frames).
+> The GitHub release holds only the guide PDF now (all old parts removed); the uploads wait for the new archive.
 > **11:50 REBUILT WITHOUT PLAYGROUND (plan 43 item 18)** — uploads running: GitHub 7 parts (`upload_gh.sh` in the scratchpad), Nexus one 12.7 GB zip in the
 > debug Chrome tab of draft 65 (do NOT navigate that tab until «Save file»; 11:50 the owner opened the page in that tab and the upload at ~25 % was lost —
 > restarted 11:51; tell the owner beforehand: look at the draft in his own browser, not in the debug Chrome). Waiting for the owner: the Nexus Permissions answer (third-party content).
