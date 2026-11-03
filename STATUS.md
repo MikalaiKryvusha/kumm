@@ -127,6 +127,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-03 19:05 +03:00 — Nexus mod 65 IS PUBLISHED (16:40), but its only file is QUARANTINED** (Files tab: «quarantined by our automated safety checks»;
+> header «Virus scan — Some suspicious files»): the request to the Nexus support address is written —
+> `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_request.txt` — the OWNER sends it from his Nexus account's mail.
+> The e-mail line of the description is a live `mailto:` link now (both halves; the source `nexus_full_description.bbcode` fixed too). The «Adult» mark:
+> the API says `adultContent: false`, no adult tag is set, no badge on the page or the mod card — where the owner sees it is asked.
+> Route details — `HOUSE_RULES_REFERENCE.md` §2, the Nexus row.
 > **NOW 2026-11-03 10:41 +03:00 — 0.9.0 in three equal parts:** `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_3_parts\` (≈ 4.56 GB each, the same
 > archive byte for byte, `7z t` OK — plan 43 item 13). The GitHub release lacks volumes `.001`–`.008` (`.009`–`.019` and the PDF are there); GitHub takes
 > assets only under 2 GiB, so the 3-part set does not fit it. **10:47 the owner chose 1900 MiB parts for GitHub:** 7 parts in
