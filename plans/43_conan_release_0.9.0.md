@@ -52,6 +52,16 @@ material for a new PlayGround page. Fit criteria:
       into three by `split -b 4558326349` (a 7-Zip zip volume is a plain byte cut of one zip, so the archive is the same one tested on 2026-11-02) —
       `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_3_parts\Krinik_Mod_Pack_0_9_0.zip.001`–`.003`, 4 558 326 349 / 4 558 326 349 / 4 558 326 347 bytes;
       SHA-256 of the joined stream equal to the 19 parts' (`71a0b672…56fd`); `7z t` on `.001` — «Everything is Ok», 241 files.
+      `playground_post.txt` (PlayGround folder, copy in the 3-part folder) rewritten for three parts (`[OWNER]` 10:42 «а описание исправить txt не хочешь?»):
+      install step 2 names `.001`, `.002`, `.003`; the files block «часть N из 3», 4,24 ГБ each. `github_release_notes.md` keeps the 19 parts (GitHub).
+- 14. **The GitHub release notes rewritten bilingual** (`[OWNER]` 2026-11-03 10:43 «описанние релиз ноутсв для GH у тебя скупое получилось, или изучай
+      описания KATRUN, KAIF» · «они двуязычные»): the layout of the KAIF v2.9 release page (logo, date, RU/EN anchors, sections with icons, a paragraph on one
+      line); Russian first, as the pack README; the features from the PlayGround post, «Что нового», the known issues and plans verbatim from the guide's
+      chapters, install by «all parts from Assets» (no part count, so a re-cut needs no edit). Rendered by `gh api markdown` and seen. Source
+      `ConanExiles/docs/guide/github-release-0.9.0.md` (pack `b972a17`), copy in the PlayGround folder. NOT yet put on the release page (`gh release edit
+      --notes-file`) — an outward step, the owner's word. KATRUN: no such repository among the owner's or on GitHub search — asked.
+- GitHub limits (docs.github.com, read 2026-11-03): a release asset under 2 GiB, up to 1 000 assets per release, no limit on the release's total size or
+  download traffic. Git LFS is no way around it: 2 GB per file on Free / Pro, 10 GB storage and 10 GB traffic a month on Free.
 
 ## Decisions made without the owner
 
