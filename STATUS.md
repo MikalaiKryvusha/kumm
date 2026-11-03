@@ -129,7 +129,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 > **NOW 2026-11-03 10:41 +03:00 — 0.9.0 in three equal parts:** `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_3_parts\` (≈ 4.56 GB each, the same
 > archive byte for byte, `7z t` OK — plan 43 item 13). The GitHub release lacks volumes `.001`–`.008` (`.009`–`.019` and the PDF are there); GitHub takes
-> assets only under 2 GiB, so the 3-part set does not fit it. How the heavy files reach GitHub — the owner's choice, asked in chat 2026-11-03 10:4x.
+> assets only under 2 GiB, so the 3-part set does not fit it. **10:47 the owner chose 1900 MiB parts for GitHub:** 7 parts in
+> `…\Krinik_Mod_Pack_0_9_0_GitHub\`, the old volumes deleted from the release, the bilingual notes published; the 7 parts uploading (plan 43 item 15) —
+> check `gh release view v0.9.0 --repo MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --json assets` lists `.001`–`.007` uploaded with their sizes.
 > **NOW 2026-11-02 19:36 +03:00 — RELEASE 0.9.0 BUILT AND TESTED (plan `plans/43_conan_release_0.9.0.md`, cases `testcases/TC_conan_release_0.9.0_2026-11-02.md`):**
 > `[OWNER]` 18:40 «выпустим версию 0.9.0» · «Все моды Krinik опускаем до версии 0.9.0» · «Выпускаем сборку в том виде, в котором есть» (verbatim — the plan).
 > - ✅ pack `d329e2e` pushed: packVersion and every Krinik mod 0.9.0, three paks rebuilt (UI by the kit, Gameplay by `build-level-mod.py`, Archery by a modinfo

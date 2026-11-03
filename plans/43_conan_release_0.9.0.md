@@ -60,6 +60,13 @@ material for a new PlayGround page. Fit criteria:
       chapters, install by «all parts from Assets» (no part count, so a re-cut needs no edit). Rendered by `gh api markdown` and seen. Source
       `ConanExiles/docs/guide/github-release-0.9.0.md` (pack `b972a17`), copy in the PlayGround folder. NOT yet put on the release page (`gh release edit
       --notes-file`) — an outward step, the owner's word. KATRUN: no such repository among the owner's or on GitHub search — asked.
+- 15. **The GitHub set of 1900 MiB parts** (`[OWNER]` 2026-11-03 10:46 «нужно еще в описание сделать короткое описание, как рерюме, что из себя представляет
+      сборка и как меняет игровой опыт» · 10:47 «пересобирай файлами по 1900 МБ для GH, и отправляем такой набор в релиз GH с соотвествующем описанием»):
+      the notes got «Коротко» / «In short» on top of each language (a plain paragraph — a blockquote renders grey) and install step 2 names the 7 parts;
+      `split -b 1900M` → `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_GitHub\` `.001`–`.006` 1 992 294 400 bytes, `.007` 1 721 212 645; stream SHA-256
+      equal (`71a0b672…56fd`), `7z t` 241 files. 10:49 the old volumes `.009`–`.019` deleted from the release, `gh release edit --notes-file` done (pack
+      `8c4926e` holds the source); the 7 parts upload by the scratchpad `upload_gh.sh` (one by one, size checked, 5 tries each). Voice lint SKIPPED — the
+      portrait's §8 has no pattern table.
 - GitHub limits (docs.github.com, read 2026-11-03): a release asset under 2 GiB, up to 1 000 assets per release, no limit on the release's total size or
   download traffic. Git LFS is no way around it: 2 GB per file on Free / Pro, 10 GB storage and 10 GB traffic a month on Free.
 
