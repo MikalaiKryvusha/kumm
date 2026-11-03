@@ -100,6 +100,10 @@ material for a new PlayGround page. Fit criteria:
       got «Failed to fetch mod settings (403)» after ~10 quick tab opens — no more helper tabs; read it from the upload tab after «Save file»).
       The 3-part set deleted by his «Удалить».
       Cleanup (`[OWNER]` 11:21 «почисти место на диске»): both release work dirs and every old-archive part removed — D: 80 → 131 GB free.
+- 19. **Found 2026-11-03 12:15 (the owner asked «а что там много в сборке весит?»):** of 12.7 GB, the paks are 12.3 GB — eight other authors' paks 9.5 GB
+      (Shemite City State 2.0, Ymir's Respite 1.6, Caverns of Set 1.6, Beyond Decor 1.5, Highmane's Arsenal 1.2, Ancient Civilization 1.1, Hair We Go 0.8, Ostavar
+      Salon 0.7). **Junk shipped:** `pack/src/KrinikConanCamera/nexus-screenshots/` (PNG ~17 MB each + JPG copies + `podpisannye-A/`) and `nexus-logo/` ≈ 380 MB —
+      the camera mod's Nexus page material. Not rebuilt now (the Nexus upload was half done); exclude these folders from the export in the next build (1.0.0).
 - GitHub limits (docs.github.com, read 2026-11-03): a release asset under 2 GiB, up to 1 000 assets per release, no limit on the release's total size or
   download traffic. Git LFS is no way around it: 2 GB per file on Free / Pro, 10 GB storage and 10 GB traffic a month on Free.
 
