@@ -134,7 +134,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    rims for 350 ms on a take (the owner's way, 21:26 «можно … просто её делать невидимой на время мерцания?»); B2 control (the jump is the game's), B3–B5 pass
 >    after a normal start — report `testcases/reports/2026-11-03_conan-quick-loot-rim-hold.md`; the guide line moved from «Известные проблемы» to KrinikConanUI.
 > 2. ✅ **Aiming by the game's own answer** — `_config/loot-stand.sh` (hero 1.5 m) + `_config/loot-aim.sh` hit on five stands in a row (EXP-0454).
-> 3. The launcher's grey «Установить сборку» (cause and fix way below), the HUD icon shadows, the quick-loot window over the tutorial panel, bug 80 (corpse in a bush).
+> 3. ✅ The launcher's grey «Установить сборку» — DONE 2026-11-03 22:00 +03:00 (pack `068b935`, report `2026-11-03_conan-launcher-install-button-gold.md`; the box wording
+>    waits for the owner's eye). Next: the HUD icon shadows, the quick-loot window over the tutorial panel, bug 80 (corpse in a bush).
 > 4. Nexus: ticket 276571 — look at the Files tab of mod 65 for the quarantine line.
 > Done in this chat: the Nexus page checked (Adult — the owner's tags; the e-mail a live link; the quarantine request sent); the HUD blink in one phase
 > (report `2026-11-03_conan-hud-blink-one-bus.md`); bug 75 reproduced and its cause read; the game map corrected (when the quick-loot window opens; the Shift
@@ -147,11 +148,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - NEW owner remarks: (1) `[OWNER]` 20:14 «под иконкой перегруза тень слишком сильная, не такая, как под жаждой и голодом - там или легче или нет» · «Сделать
 >   однотипно легко всем иконкам худа» — recon first (the weight icon's shadow: Hosav's image or our `Image_Weight_Blinking` paint); (2) seen by the agent 20:13:
 >   the quick-loot window lies over the tutorial journal panel («Выживший — Потратьте очки характеристик») and that text shows through the window's grid — to file.
->   (3) `[OWNER]` 20:54 «почему в лаунчере кнопка Установить сборку - серого цвета? Если же это основная CTA кнопка» — the main button must be GOLD like «Играть».
->   Cause read 20:56 (`ConanExiles/_config/launcher/KrinikConanLauncher.cs` `applyState`): `install.Enabled = File.Exists(install.cmd beside the launcher)`;
->   a disabled MetalButton paints grey. In the working game root the uninstaller exists → «Играть» shows there; so his grey button is a launcher run from a
->   folder WITHOUT `install.cmd` (where — ask nothing, check the clean copy and the extracted archives). Fix way `[AI]`: the main button stays gold; a click
->   without `install.cmd` tells the player where to run the launcher from — the wording to the owner's eye first.
+>   (3) ✅ the launcher's grey main button — DONE (item 3 above): the desktop shortcut leads to the launcher in the GAME root, where install.cmd never lies.
 > - Next on the list: no «E Взять» over nest eggs; enemy health bars over the enemies. «E Взять» beside the corpse strip over a corpse in a bush — TO FIX (`[OWNER]` 19:57 «над трупом в кустах - чинить» · «нужно ту плашку показывать, которая сработает … это нужно изучить»): bug 80 — the study first (a real E over a corpse in a bush; `_config/bush-corpse.lua`).
 > **NOW 2026-11-03 19:05 +03:00 — Nexus mod 65 IS PUBLISHED (16:40), but its only file is QUARANTINED** (Files tab: «quarantined by our automated safety checks»;
 > header «Virus scan — Some suspicious files»): the request to the Nexus support address is written —
