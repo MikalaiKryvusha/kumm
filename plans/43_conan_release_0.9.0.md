@@ -46,6 +46,12 @@ material for a new PlayGround page. Fit criteria:
 - [ ] 11. The PlayGround page — the owner (his account); everything in `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_PlayGround\`.
 - [x] 12. Remove `D:/Temp/krinik_release_20261102` (39 GB, run 1) and `…b` (export + check, 26 GB) — done 19:39 by the owner's «РАЗРЕШАЮ»; the clean copy's bundle too.
 - Item 10 update 19:38: the release CREATED by the owner's «Разрешаю» (tag v0.9.0, the guide PDF attached); the 19 volumes uploading at the chat's close — finish by STATUS.
+- Item 10 update 2026-11-03 10:38: `gh release view` lists the PDF and volumes `.009`–`.019` only — **`.001`–`.008` are missing** (the owner: «не все архивы
+  прошлой сборки отображаются»). GitHub takes a release asset only under 2 GiB, so the 3-part set below cannot go there; the 19 parts of 700 MiB can.
+- 13. **The 3-part set** (`[OWNER]` 2026-11-03 10:36 «перепакуй сборку 0.9.0, пожалуйста, тремя файлами одинакового размера»): the 19 volumes joined and cut
+      into three by `split -b 4558326349` (a 7-Zip zip volume is a plain byte cut of one zip, so the archive is the same one tested on 2026-11-02) —
+      `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_3_parts\Krinik_Mod_Pack_0_9_0.zip.001`–`.003`, 4 558 326 349 / 4 558 326 349 / 4 558 326 347 bytes;
+      SHA-256 of the joined stream equal to the 19 parts' (`71a0b672…56fd`); `7z t` on `.001` — «Everything is Ok», 241 files.
 
 ## Decisions made without the owner
 
