@@ -127,7 +127,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NEXT CHAT, FIRST (chat cb012770, 2026-11-03 23:25 +03:00):** (1) the owner's pick of the perk gap (review folder 62: 10 · 16 · 22) → `PERK_TEXT_PAD`, kit build, guide line
+> **NEXT CHAT, FIRST (chat cb012770, 2026-11-03 23:25 +03:00):** (0) bug 83 — the NPC talk prompt and every interaction strip like the corpse strip (left, 0.70, backing 0.60; `[OWNER]` 23:30 «я просил все виджеты интеракици - влево, меньше, прозрачнее фон»); (1) the owner's pick of the perk gap (review folder 62: 10 · 16 · 22) → `PERK_TEXT_PAD`, kit build, guide line
 > (bug 64 item 46); (2) bug 82 — load a region with nests (ostrich lands / swamp), find a nest egg, read what it is; (3) bug 80 — one real E over a corpse in a
 > bush; (4) bug 75 debt — the pretty, proper rim fix; (4a) bug 64 item 12a — the enemy bar a little higher over its skull (`[OWNER]` 23:29, a kit override of `W_EnemyHealthbar`); (5) the rest of the guide's 1.0.0 list (all checked open against bug 64). Nexus texts — not now.
 > Stand recipe for the quick-loot window: `loot-stand.sh` → `quiet-stand.lua` → `loot-aim.sh` (hits in 2–10 steps) → `loot-take-clip.sh`.
