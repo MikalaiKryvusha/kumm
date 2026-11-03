@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0450 · 2026-11-03 · ❌ · #github #release #upload #verification
+class: a-size-match-is-not-the-same-file
+**Context:** re-uploading the 7 parts of a REBUILT archive into the same release; my upload script skipped a part when an asset of the same name and size was present.
+**Result:** ❌ — parts `.001`–`.005` of the previous archive (uploaded by a run that was later stopped) had the same names and exactly the same sizes (1 992 294 400 —
+fixed-size cuts), so the script reported them «present» and the release would have mixed two archives; caught by reading the log line «present».
+**Lesson:** a remote file counts as done only by its CONTENT: GitHub gives `digest` (sha256) per release asset (`gh api repos/<r>/releases/tags/<t> --jq '.assets[].digest'`);
+compare it with the local sha256, delete and re-upload on mismatch, read the digest again after. Before a rebuild's upload, delete every old part first.
+
 ### EXP-0449 · 2026-11-03 · ❌ · #windows #background #upload #github #release
 class: a-stopped-task-leaves-its-children-running
 **Context:** a background `bash upload_gh.sh` looped `gh release upload` over 7 parts; the archive was then rebuilt (PlayGround out), so the upload had to stop.
