@@ -136,6 +136,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Damage Meter look kept after loading screens, bug 79 (the pause froze the world on a teleport); the game's mod list fields from the README (`set-pak-modinfo.py`,
 > step 2b of `make_volumes.sh`); the camera page material out of the archive. Next: steps 6–7 (deploy + smoke, volumes, GitHub 7 parts, Nexus zip, frames).
 > The GitHub release holds only the guide PDF now (all old parts removed); the uploads wait for the new archive.
+> **13:50 the new archive is BUILT** (`D:/Temp/krinik_release_20261103c`, «OK: 166 files, hashes equal», sha256 of the stream `52b240a7…3c84`, 12.4 GB): 7 GitHub
+> parts in `…_GitHub\`, one zip in `…_Nexus\` (`7z t` OK). GitHub upload by the scratchpad `upload_gh.sh` — parts checked by the asset `digest` (EXP-0450);
+> Nexus: the gallery has the new hub / Esc / fishing / bow frames with short titles; still to do — the description size 12.7 → 12.4 (a save did not take,
+> then 403 — wait between reloads), the file replaced by the new zip, the city and waystone frames (the marker of «Город-государство Ирук» is on a hill).
 > **11:50 REBUILT WITHOUT PLAYGROUND (plan 43 item 18)** — uploads running: GitHub 7 parts (`upload_gh.sh` in the scratchpad), Nexus one 12.7 GB zip in the
 > debug Chrome tab of draft 65 (do NOT navigate that tab until «Save file»; 11:50 the owner opened the page in that tab and the upload at ~25 % was lost —
 > restarted 11:51; tell the owner beforehand: look at the draft in his own browser, not in the debug Chrome). Waiting for the owner: the Nexus Permissions answer (third-party content).
