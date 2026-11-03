@@ -136,7 +136,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   Kappa corpse never has loot — why nine stands of 19:22–19:50 failed (game map, «When the quick-loot window opens»). Stand: the oasis camp boss «Эника из
 >   Киммерии» killed by `corpse-stand.sh 250` (from −78166, 245999), the hero 3 m off, aim by `PlayerCameraManager:GetCameraLocation()` on bone `b_spine_2`
 >   (6 passes); 120 fps `loot-take-clip.sh` with `SEQ="wait:700,wheel:-1,wait:900,kdown:F,wait:80,kup:F,wait:2500"`: F on cell 1 → the items shift left and the rim
->   stands ≈ 5 sampled frames on an EMPTY cell (row 2, column 6), then goes. NEXT: B2 on this stand with the two Lua sections out.
+>   stands ≈ 5 sampled frames on an EMPTY cell (row 2, column 6), then goes. NEXT: B2 on this stand with the two Lua sections out — tried 20:23, NOT seen yet:
+>   with the Lua out the window did not show over the second boss corpse (97 bones — a female skeleton; bone 5 is an arm, aim at `b_head`); a crocodile walked
+>   in once (quiet-stand 40 m first); an earlier blind F may have emptied that corpse. Resume: a FRESH boss corpse, check its loot count first (`ItemInventory`
+>   of the corpse), then the clip. The Lua sections are back, the game closed.
 > - NEW owner remarks: (1) `[OWNER]` 20:14 «под иконкой перегруза тень слишком сильная, не такая, как под жаждой и голодом - там или легче или нет» · «Сделать
 >   однотипно легко всем иконкам худа» — recon first (the weight icon's shadow: Hosav's image or our `Image_Weight_Blinking` paint); (2) seen by the agent 20:13:
 >   the quick-loot window lies over the tutorial journal panel («Выживший — Потратьте очки характеристик») and that text shows through the window's grid — to file.
