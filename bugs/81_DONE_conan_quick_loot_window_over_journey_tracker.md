@@ -1,6 +1,6 @@
 # Bug 81 — the quick-loot window lies over the journey tracker, and the tracker's text shows through the window's grid
 
-**Status:** 🔴 OPEN · **Severity:** S3 visual (the agent's own find, filed as a document by the 1.0.0 list in STATUS) · **Version/build:** pack ConanExiles
+**Status:** ✅ DONE 2026-11-03 22:57 +03:00 (way A, KrinikConanUI `krinik_ui_fixes` 1.4.0) · **Severity:** S3 visual (the agent's own find, filed as a document by the 1.0.0 list in STATUS) · **Version/build:** pack ConanExiles
 `068b935`, KrinikConanUI 0.9.0 · **When/context:** seen by the agent 2026-11-03 20:13 +03:00 on the bug 75 stand; recorded in STATUS «NEW owner remarks (2)»;
 this document 2026-11-03 22:29 +03:00
 **Fixing:** after the HUD weight icon (this chat's dayloop)
@@ -40,9 +40,19 @@ The right-hand journey tracker (`WBP_JourneyTracker_C`, owned by the game instan
   against it (bug 64, plan 36 W6).
 The look is the owner's eye: a frame of A and B on the same corpse before the choice.
 
+## The fix (2026-11-03 22:5x)
+
+Frames of the three ways on one corpse 22:49: as is · A (the tracker not drawn) · B (the window's tile tinted 0.35) — A clean, B no help (the see-through
+is the tile texture's own alpha). `krinik_ui_fixes` 1.4.0: `align` (the window's own events) sets the tracker's RENDER opacity 0 while the window shows;
+the window closes without an event when the view leaves the corpse, so a watch every 250 ms runs ONLY while the tracker is hidden and gives it back (1.0)
+once the window is off screen. Seen after a normal start 22:56: window open → tracker opacity 0.0, no text inside the grid; view turned away 120° →
+opacity 1.0, the tracker on the frame. Hygiene: none. Functional run: real game, the window opened by the game on a real corpse, frames read.
+TWINS: other panels under the window — none seen on these stands (the quest panel stays left of it by the kit layout).
+
 ## Decisions made without the owner
 
-— (open)
+- `[AI]` by mandate (`[OWNER]` 22:39 «аналогичный вопрос про автономность работы»): way A of three, after the frames of A and B.
+- `[AI]` render opacity, not visibility — the game switches the tracker's visibility itself.
 
 ## Links
 

@@ -140,7 +140,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    black shadow, stacked twice by Hosav; our 256 px icon in Hosav's style overrides it — seen in game (W1, W2), the look waits for the owner's eye.
 >    ✅ **ModControlPanel out of the build** (`[AI]` by mandate, `[OWNER]` 22:39 «аналогичный вопрос про автономность работы»): LBPR 1.0.5 never plugged into it;
 >    LBPR's own window is in «Настройки модов → Прочее» (M1, M2; the real click M3 not run). Report `2026-11-03_conan-hud-weight-icon-and-mcp.md`.
->    Then: bug 81 (the window over the journey tracker, ways A/B/C to the owner's eye), bug 80 (corpse in a bush), the rest of the guide's 1.0.0 list.
+>    ✅ **Bug 81 — the quick-loot window no longer lets the journey tracker's text through** (pack `a23c9a6`, way A — the tracker not drawn while the
+>    window shows; seen 22:56). Then: bug 80 (corpse in a bush), the rest of the guide's 1.0.0 list (the guide line for bug 81 is not in the guide — it was
+>    the agent's own find).
 > 4. Nexus: ticket 276571 — look at the Files tab of mod 65 for the quarantine line.
 > Done in this chat: the Nexus page checked (Adult — the owner's tags; the e-mail a live link; the quarantine request sent); the HUD blink in one phase
 > (report `2026-11-03_conan-hud-blink-one-bus.md`); bug 75 reproduced and its cause read; the game map corrected (when the quick-loot window opens; the Shift
