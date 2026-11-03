@@ -21,6 +21,10 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   pickup; no `FoliageInstancedStaticMeshComponent` with an «egg» or «nest» mesh within 30 m (`GetInstancesOverlappingSphere(hero, 3000, true)` → 0). So this
   canyon has no eggs now (taken, or never there) — the stand is elsewhere.
 
+- Over ALL loaded foliage (23:1x): the only egg mesh among the pickups is `SM_SnakeEggs_single` (`PickupFoliageComponent_C`, 57 instances); at the nearest
+  untaken one (−62077, 254132, −20093) with the hero 0.6 m off looking down: our plate visibility 3 / opacity 1.00 and the game's probe `true` — snake eggs
+  are fine. So the guide's «яйца в гнезде» are NOT foliage pickups (an ostrich / bird nest is another kind of object) — the study goes to step 2.
+
 ## Study (next)
 
 1. Find eggs: over all `InstancedFoliageActor`s, the components whose mesh names an egg — their instances with `Scale3D` ≠ 0 (not taken), the nearest.
