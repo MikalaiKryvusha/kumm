@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0455 · 2026-11-03 · ❌ · #conan #backlog #guide #stale
+class: a-list-copied-without-checking-its-rows
+**Context:** the 1.0.0 dayloop worked the guide's «Известные проблемы» line by line; «the window jerks under the wheel» was taken for open.
+**Result:** ❌ — it was fixed 2026-10-30 (plan 36 W10a, «the owner's wheel check pending»); the guide chapter of 2026-11-02 listed it as open. The owner: «насколько
+помню, ты уже починил дергание» · «раз ты так небрежно работаешь - то тестируй». A real wheel at 120 fps confirmed it fixed (23:16).
+**Lesson:** before working a list item, grep its plan 36 W row and bug 64 item — a «done … pending» row is a TEST to run, not a fix to write; the guide is a mirror
+of those rows (HOUSE_RULES rule 20).   → link: `plans/36_conan_build_debts_plans.md` W10a · HOUSE_RULES rule 20
+
 ### EXP-0454 · 2026-11-03 · ✅ · #conan #stand #camera #corpse #aim
 class: aim-by-the-games-answer
 **Context:** bug 75 — the quick-loot window needs the crosshair on a humanoid corpse; arithmetic aims (camera → bone) missed for two evenings.
