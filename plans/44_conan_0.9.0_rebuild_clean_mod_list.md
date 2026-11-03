@@ -12,6 +12,10 @@
 описания правильно, без лишних символов.Ю которые не рендерятся» · (a frame of the game's mod list: `[h1][b]CONTENT[/b][/h1]`, a raw URL) · «а наших
 модов здесь я всех не нашёл, почему-то, и описаний нет!» · (a frame: KrinikConanUI — «Автор --», «URL автора --», «Список изменений --»).
 
+**13:00 and 13:35:** `[OWNER]` «доделываем это. пересобираем. переснимаем кадры. перезаливаем сборку на гитхаб. перезаливаем сборку на Nexus. работай
+автономно!» · «работаем в этом чате, без оставновки по переполнению контекста. До упора. Наша задача - собрать сборку 0.9.0, и опубликовать её на ГитХаб и
+Нексус» — this chat is NOT closed at the 85 % budget line until the release is published (his word beats the budget hint, memory `owner-order-beats-budget-hint`).
+
 ## What is established (12:55–12:59)
 
 - The working game's files equal the pack (`-Verify` 108/0; 13 of 14 Krinik Lua files byte-equal, the 14th differs in a comment only) — the 0.9.0 archive
