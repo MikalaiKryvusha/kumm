@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0449 · 2026-11-03 · ❌ · #windows #background #upload #github #release
+class: a-stopped-task-leaves-its-children-running
+**Context:** a background `bash upload_gh.sh` looped `gh release upload` over 7 parts; the archive was then rebuilt (PlayGround out), so the upload had to stop.
+**Tried / did:** `TaskStop` on the background task, then `taskkill` of the one `gh.exe` seen.
+**Result:** ❌ — the script's own `bash.exe` (two of them) lived on, started the next `gh release upload` and pushed parts `.003`–`.005` of the OLD archive to
+the public release for ~20 minutes; found only because a part file was «Device or resource busy» on delete.
+**Lesson:** after stopping a background script on Windows, list its processes by command line (`Get-CimInstance Win32_Process` … `CommandLine -match <script>`) and
+kill every PID of the script and its children; then read the target's state (`gh release view … assets`) before building on it.
+
 ### EXP-0448 · 2026-11-02 · ❌ · #conan #remote #inventory #crash #owner-game
 class: blind-native-calls-in-the-owners-game
 **Context:** the release screenshot stand; the owner had just placed the hero and his camera himself, in the game running in front.

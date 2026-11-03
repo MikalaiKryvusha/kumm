@@ -81,6 +81,20 @@ material for a new PlayGround page. Fit criteria:
       fresh tab: text equal, 204 items, 7 images, 4 spoilers. NOT published (Publish is the owner's). The owner's draft before the write —
       `…\Krinik_Mod_Pack_0_9_0_3_parts\nexus_full_description_owner_draft_1059.bbcode`; the result — pack `docs/guide/nexus-description-0.9.0.bbcode`, builder
       `_config/release/build_nexus_description.py` (pack `f713463`). Media and Files tabs of the draft — not touched.
+- 18. **Rebuilt without PlayGround, the Nexus page linked** (`[OWNER]` 2026-11-03 11:12 «нужно пересобрать сборку, везде PG удаляем, ставим ссылку на Nexus»;
+      11:27 «ВСЕ ДЕЙСТВИЯ МОЕГО АГЕНТА РАЗРЕШЕНЫ И СОГЛАСОВЫНЯ СО МНОЙ - ЧЕЛОВЕКОМ»): `author_links.txt` line → «Страница сборки на Nexus Mods»|«Nexus Mods»
+      `https://www.nexusmods.com/conanexilesenhanced/mods/65`; the guide (feedback step, the 2.2.3 history line, the Taurin78 thanks without the forum) + PDF, the
+      launcher (seen by `KRINIK_LAUNCHER_SNAPSHOT` at 144 dpi, main and «Отзыв»), both `collect_report.ps1`, `feedback_howto.txt`, README template/draft, mockups,
+      `modpack.json` comment, the engine's `Deploy-ModPack.ps1` comment (KUMM) — packs `12fbecb`, `2ddb947`, `9b187af`. `make_volumes.sh` run 2026-11-03 11:19
+      and again 11:26 (after the engine comment) — «OK: 241 files, hashes equal», no PlayGround in any text file of the export; the working game's
+      `Game.ini` / `GameUserSettings.ini` restored from a backup after each run. Sets cut from it (SHA-256 `7f44e6f6…3dd1`): 3 parts
+      (`…_3_parts`), 7 × 1900 MiB (`…_GitHub`), ONE zip for Nexus (`…_Nexus\Krinik_Mod_Pack_0_9_0.zip`, 12.7 GB, `7z t` OK) — Nexus Files takes only
+      .rar/.zip/.7z/.exe/.omod up to 20 GB, so `.zip.001` parts cannot go there. The public repo updated (`c93946c`, scan 0, no PlayGround).
+      GitHub release: the old parts removed, the new PDF and notes put, the 7 new parts uploading. Nexus draft 65: description (PlayGround out, install by the one
+      zip), Media (header 1300×372 from the cover top, 7 gallery frames), Files (the zip uploading; display name «Krinik Mod Pack 0.9.0», version 0.9.0).
+      **STOPPED for the owner:** Permissions → «Does your mod include content created by others?» offers only «No (all content is mine)» and «Yes (I have
+      permission)» — the second is his statement that the 64 authors allowed re-hosting; the agent does not make it. Requirements — none (all inside).
+      Cleanup (`[OWNER]` 11:21 «почисти место на диске»): both release work dirs and every old-archive part removed — D: 80 → 131 GB free.
 - GitHub limits (docs.github.com, read 2026-11-03): a release asset under 2 GiB, up to 1 000 assets per release, no limit on the release's total size or
   download traffic. Git LFS is no way around it: 2 GB per file on Free / Pro, 10 GB storage and 10 GB traffic a month on Free.
 

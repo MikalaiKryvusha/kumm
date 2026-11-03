@@ -132,6 +132,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > assets only under 2 GiB, so the 3-part set does not fit it. **10:47 the owner chose 1900 MiB parts for GitHub:** 7 parts in
 > `…\Krinik_Mod_Pack_0_9_0_GitHub\`, the old volumes deleted from the release, the bilingual notes published; the 7 parts uploading (plan 43 item 15) —
 > check `gh release view v0.9.0 --repo MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --json assets` lists `.001`–`.007` uploaded with their sizes.
+> **11:50 REBUILT WITHOUT PLAYGROUND (plan 43 item 18)** — uploads running: GitHub 7 parts (`upload_gh.sh` in the scratchpad), Nexus one 12.7 GB zip in the
+> debug Chrome tab of draft 65 (do NOT navigate that tab until «Save file»). Waiting for the owner: the Nexus Permissions answer (third-party content).
 > **11:1x the Nexus page — draft mod 65** (`…/games/conanexilesenhanced/mods/65/edit/general`): the bilingual Full description written and SAVED by the agent
 > (plan 43 item 17), not published; open — the Media and Files tabs, and the re-hosting permission of the 64 other authors' mods (the owner's call).
 > **NOW 2026-11-02 19:36 +03:00 — RELEASE 0.9.0 BUILT AND TESTED (plan `plans/43_conan_release_0.9.0.md`, cases `testcases/TC_conan_release_0.9.0_2026-11-02.md`):**
