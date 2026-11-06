@@ -24,7 +24,8 @@ the pak (formerly KrinikLevelUncapped, a fork of MrSerji's Level 1000 — the ow
 | Lua | +3 cm/s to run, sprint and jump per Agility point (the owner 13.09: as in Oblivion); the hero taken by the spawn event, no scene search every second (29.10); **seen live 2026-10-31 12:05** with points spent in «Хар-ки»: Athleticism 2/3/4 → MaxWalkSpeed 296.4/298.4/300.3, JumpZ 432 at 4; `SetStat` does not move an attribute in 3.0.1 (report `2026-10-31_conan-agility-law-live.md`) | — |
 | pak (since 2026-11-01) | `/Game/Mods/Mines_of_Set/Tables/Caverns_of_Set_Loot_Chest_Table` — the loot table the Caverns of Set chests import and the mod lost; built in step 3b from a copy of the vanilla `DT_LC_RelicHunter` (retoc-5.8 from `_paksview-3.0.1`, read `VER_UE5_8`, written with the 5.6 object version for the old retoc) | 12 rows from `_config/caverns_loot.py`; notes `CavernsOfSet.md` → The fix |
 
-Another mod that injects rows into these tables by its own controller (EAA writes row 7 of `DT_AttributeSystem`) still injects on top.
+Another mod that injects rows into these tables by its own controller (EAA writes row 7 of `DT_AttributeSystem`) still injects on top. Judged 2026-11-06 12:26 +03:00
+(plan 45 step 11): row 7 — this pak keeps the game's `RewardPerLevel` 1, EAA sets 2; nothing of ours is lost (A).
 
 ## Version
 

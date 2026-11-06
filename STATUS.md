@@ -142,8 +142,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Anvil Keeper armour — no stat bonuses) → replaced by the game's version at every build (`vanilla:`, new in `patch-mod-asset.py`), live 51/51; the thrall
 > system blueprint (BMNB vs LBPR) — C → **interview #033**; buff icon, empty map — A. Step 7 DONE (2026-11-06 12:22 +03:00): 392 rows the log hides → one real pair (MSCasaDesFlores
 > Weapons → Nails, A in effect) — `hidden-row-pairs.py --index` + `mod-table-keys.py`. Storage Reach Expanded's stale console table → the game's + its 3 rows
-> (`vanilla+own:`), live 8/8. NEXT: plan 45 steps 9 (code: `RegisterHook` / `RegisterKeyBind` pairs), 10 (resources), 11 (mechanics done twice), 12; the
-> owner's #032 (Zath dancer recipes) and #033 (thrall placement ghost). Owed: BMNB's own function (knock a boss out, recruit) in play.
+> (`vanilla+own:`), live 8/8. Step 9 (code) DONE — only our own hooks / keys and UE4SS's stock enablers
+> share targets (`lua-hook-pairs.py`); step 11 (mechanics) — only the ambush pair is doubled → the owner's #025. NEXT: plan 45 step 10 (resources — the A-B-A
+> flight, plan 34), 12 (other kinds); the owner's #025 (ambushes), #032 (Zath dancer recipes), #033 (thrall placement ghost). Owed: BMNB's own function (knock a boss out, recruit) in play.
 > (superseded) The previous chat's FIRST order — build the Heritage merge maps of pack `2a7ed07`: done 10:56, found needless, reverted (the maps removed from the pack).
 > Owner's open items: none waiting (perk gap 14 done, mask 3 710 done; Nexus follow-up letter drafted for him to send — ticket 276571).
 > **NOW 2026-11-06 09:05 +03:00 — chat of 2026-11-06, `[OWNER]` «продолжаем делать сборку Конана 1.0.0»:** DONE in one kit build + one run (pack `1dfd312`, report

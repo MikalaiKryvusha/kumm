@@ -83,11 +83,14 @@ Each group by the guide: read original + both sides → classify per field → r
       tables re-checked against 3.0.1 (2026-11-06 12:15 +03:00): `HairColorSelections` (MSCasaDesFlores Nails) — identical, A; `CustomConsoleCommandsDataTable`
       (StorageReachExpanded) — 5 game console commands missing, its own 3 kept → MERGED 2026-11-06 12:21 +03:00 (`vanilla+own:`), live 8/8; ours —
       KrinikConanGameplay's `DT_AttributeSystem`, `DT_ExperienceSystemLevel`, `DT_FeatsPerLevel` (built by us from the 3.0.1 kit — check the row sets once). Closes when #033 is answered and the re-checks done.
-- [ ] 9. **Code:** every UE4SS `RegisterHook` target and `RegisterKeyBind` key in the build's Lua mods (ours and others'), and the blueprint mod controllers'
-      overrides of the same game function — pairs listed.
+- [x] 9. **Code:** every UE4SS `RegisterHook` target and `RegisterKeyBind` key in the build's Lua mods (ours and others'), and the blueprint mod controllers'
+      overrides of the same game function — pairs listed. **DONE 2026-11-06 12:24 +03:00** (`ConanExiles/_config/lua-hook-pairs.py`): 11 hook targets, 2 shared (ours only;
+      UE4SS's two stock enablers), 4 key binds, 1 shared (ours) — B, nothing to merge; blueprint overrides of one vanilla class — the thrall system (step 8).
 - [ ] 10. **Resources:** the A-B-A flight with the full build (plan 34 / acceptance criterion 3) — the mods' cost per frame; pairs that spend the same budget.
 - [ ] 11. **Mechanics:** the build's features done twice (ambushes: Night Terrors + PvE Plus Ambush; loot boosts; XP pop-ups; weather) — from the mods' notes
-      and descriptions; the stacking numbers.
+      and descriptions; the stacking numbers. **2026-11-06 12:26 +03:00:** swept by keyword over the manifest (register line): only the ambush pair is a doubled feature —
+      waits for the owner's interview #025; levels / storage / loot / fishing / thrall extras — A or B (the off mods excluded; `DT_AttributeSystem` row 7 — only
+      EAA). Closes with #025.
 - [ ] 12. **Other kinds found on the way** (screen places, localization keys, author-demanded load order, saves, `Engine.ini` keys) — each gets a row in the
       guide's list and a step here.
 

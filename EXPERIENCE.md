@@ -91,6 +91,20 @@
 
 ## Entries
 
+### EXP-0460 · 2026-11-06 · ❌→✅ · #conan #mods #stale-copy #tables
+class: mod-ships-stale-vanilla-table
+**Context:** plan 45 step 8 — a mod that ships a VANILLA table path whole (LegitReligious `ItemStatModificationTable`, Storage Reach Expanded
+`CustomConsoleCommandsDataTable`).
+**Result:** ❌ both were copies from an older game: identical values, the newer 3.0.1 rows missing (51 stat rows — Derketo Acolyte, Anvil Keeper armour without
+bonuses; 5 console commands); nobody noticed for weeks because the files «just override». ✅ fixed natively: `vanilla:` (the game's version at every build)
+and `vanilla+own:` (the game's + the mod's own rows) in `patch-mod-asset.py`, seen live.
+**Lesson:** every vanilla table a mod ships whole is a suspect stale copy — compare its keys AND values with the current game (`uaj rows` + a JSON value diff)
+before calling it the mod's change; a copy with no own rows is pure harm.
+**Repro:** `python -I -X utf8 _config/mod-overrides.py <out.tsv> "<game>/ConanSandbox/Mods"` → the `override` rows whose path is a data table → keys by
+`uaj rows <asset> VER_UE5_8` against the game-only view's copy.
+**Trigger:** a new mod or a game patch → run the override matrix and this check for each whole vanilla table.
+**Not for:** blueprints shipped whole — there a copy is a code change (kind 3, read the functions).
+
 ### EXP-0459 · 2026-11-06 · ❌ · #conan #ue4ss #remote #crash #soft-pointer
 class: ue4ss-opaque-userdata-into-ufunction
 **Context:** reading a data table's `TSoftClassPtr` field (`NPCClass` of `SpawnDataTable`) live through the remote; UE4SS returns it as an opaque
