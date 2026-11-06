@@ -82,6 +82,10 @@ visibility by the `XCS_Panel` event in `KrinikPauseGameInMenu` 0.7.0 (retry ≤4
   («Я ВИДЕЛ КАК ТЫ ПЕРЕКЛЮЧАЛ СТРАНИЦЫ ХАБА, И ТАМ ПОЛНЫЙ ПИЗДЕЦ!!!»); the analysis had full-width late changes 90–445 ms after the switches and I explained
   them away; the video was HDR-overexposed. Repro now: `W_Carousel_C:NextCarouselWindow()` / `PrevCarouselWindow()` by the remote with the hub open. Next:
   HDR off, frames of each 0–500 ms window, name the elements that move, then bisect by mods (control: mods' Lua out).
+  `[OWNER]` 20:39 «ЗНАЧИТ ЗАПИСЫВАЙ В 300 кадров в секунду АЖДОЕ ПЕРЕКЛЮЧЕНИЕ в отдельности!» → **done 20:4x:** 10 clips, one per switch (c01–c05 Next,
+  c06–c10 Prev), HDR off, `t.MaxFPS 300` — the game renders ≈ 90 fps, the clips hold 215–238 frames each; review folder
+  `69_hub_kazhdoe_pereklyuchenie`. Recipe: ffmpeg in the background needs `-nostdin` and forward-slash ASCII paths (a `\0…` name and a Cyrillic argv
+  wrote nothing). NEXT (next chat): frame-by-frame of every clip, name each moving element, then the mod bisect.
   **Run 2026-11-06 19:30 (case H1 of `TC_conan_music_recon_2026-11-06.md`), the reading WITHDRAWN:** tabs switched by `W_Carousel_C:Next/PrevCarouselWindow` (synthetic Q/E keys do
   not reach the game — three ways tried 18:10–18:15), 60 fps capture: the tab bar never changed after a switch, the bottom buttons stood still, the mod icons on
   «Снаряжение» present in every frame of the return. One variant only — the first open after the world entry and the owner's real keys are still to run
