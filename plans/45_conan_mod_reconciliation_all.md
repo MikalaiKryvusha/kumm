@@ -34,7 +34,8 @@ Each group by the guide: read original + both sides → classify per field → r
       across the four containers — `REGISTER.md`). Xevyr's shared UI rows `XCS_Panel`, `Xev_MouseInteraction` (`DT_UIModuleTable`) — ProximityParty → Simple_Minimap → LLHighlight → AlMerayah_Reborn
       (2 rows; likely A).
 - [x] 3. **DONE 2026-11-06 10:22 +03:00 — outcome A** (RSP's 8 rows equal the game's; only EAA, the winner, changes them; `row-diff.py` now knows the load order — a loser's
-      change under a winner that keeps the original is reported «B — LOST»). Werewolf / werehyena harvest loot (`Gathering_v2/LootTable_Resource`, 8 rows) — ResourceStimulusPackage → EnhancedArmoryAndArsenal.
+      change under a winner that keeps the original was then reported «B — LOST»; since the same day — «survives if the winner merges by field, lost if it
+      replaces whole rows — decide live»). Werewolf / werehyena harvest loot (`Gathering_v2/LootTable_Resource`, 8 rows) — ResourceStimulusPackage → EnhancedArmoryAndArsenal.
 - [x] 4. **DONE 2026-11-06 11:09 +03:00 — outcome B, MERGED BY THE GAME ITSELF, nothing to build** (live `SpawnDataTable` with the ORIGINAL Heritage, `_config/live-rows.lua`:
       BMNB's `ProfessionTemplate` / `StatTemplate` / `StatModifierTemplate` / `NPCClass` SAME on 17 of 17 rows, Heritage's races on 17 of 17; report
       `testcases/reports/2026-11-06_conan-boss-rows-heritage-bmnb-live.md`). **CORRECTED:** the file-level «LOST» below was FALSE — the game merges rows field by

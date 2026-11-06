@@ -41,7 +41,7 @@ function projectRoot(cwd) {
   for (let d = resolve(cwd); ;) {
     if (existsSync(join(d, DEPLOYMENT))) return d;
     const up = dirname(d);
-    if (up === d) return cwd;
+    if (up === d) return process.env.CLAUDE_PROJECT_DIR || cwd;   // cwd OUTSIDE the project (a sibling working directory) — KUMM KAIF bug 30
     d = up;
   }
 }
