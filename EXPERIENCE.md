@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0461 · 2026-11-06 · ❌→✅ · #interview #owner-review #contour #queue #claim
+class: deferred-interview-read-as-waiting
+mechanized: none — the fix is the status form; the contour's closing words are `CLOSED|WITHDRAWN|MOVED|ЗАКРЫТ|СНЯТ|ПЕРЕНЕСЕН`, and only ✅ ⛔ ➡ 🟢 may stand before them (`.kaif/tools/contour/texts.mjs` `statusClosedWord`)
+**Context:** the owner took interview #025 (ambush frequency) off the agenda on 2026-10-31; its status read «**⏸ снято с повестки…**».
+**Result:** ❌ the ⏸ (and the bold before the word) kept the queue printing #025 as waiting; the next chat carried «ambushes wait for your decision» into STATUS,
+plan 45, the register and the farewell — a standing falsehood. ✅ status rewritten «⛔ СНЯТО с повестки…», the queue dropped it; the three places corrected
+(commit `60d73d5`). Merging interviews: the old ones get «➡ ПЕРЕНЕСЕНО … в #NNN» — they leave the queue the same way.
+**Lesson:** before writing «the owner's decision is waiting», read the interview's STATUS line, not the queue's colour; a deferral or a merge is written with a
+closing word the contour knows, never a pause icon.
+
 ### EXP-0460 · 2026-11-06 · ❌→✅ · #conan #mods #stale-copy #tables
 class: mod-ships-stale-vanilla-table
 mechanized: `patch-mod-asset.py` `vanilla:` / `vanilla+own:` (the fix) and the guide's kind 6 detector row
