@@ -3,6 +3,99 @@
 
 
 
+## 2026-11-07 00:33 +03:00 - the blocks of the 2026-11-06 chats 1-4 of STATUS «Where to continue», moved at the soft closure of the fifth chat (verbatim; the bonsai trim)
+
+> ⚠️ **Чат 2026-11-06 (третий) закрыт принудительно 2026-11-06 17:21 +03:00 на 85 %:** церемонии пропущены (судья по последним пунктам, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft.
+> Ложные утверждения на месте: нет (Heritage/«яйца Каппы»/BMNB «свой рост»/засады #025 — исправлены по местам этим чатом).
+> **Сделано:** интервью #032/#033 сведены в #034 и применены; правка BMNB пересажена в LBPR (`kismet-graft.py`, KRINIK MODIFIED; G4 открыт); `extract` читал копию игры — починен;
+> баг 82 DONE; критерий 3 A-B-A-B — в шуме, на краю; Quick Win `p.Chaos.…MaxQueueSizeBeforeForce=100000` ВЗЯТ в Engine.ini (−28 % рывков); `p.MaxPayloadSize` не взят;
+> разведка музыки — готового мода нет (`researches/conan-custom-music-mods/`).
+> **Correction 2026-11-06 17:41 +03:00 (the next chat):** the q8 series was NOT interrupted after A1 (the previous closure's line was false) — the background script outlived the chat and
+> ran to 17:31:48: A1 cold 48.2 fps · 85 stutters, F1 53.3 · 70; B1 (3072) — NO flights (cvar read 3072, the bench printed nothing); A2 cold 47.9 · 81, F1 49.9 · 72;
+> B2 — launch refused: A2's game (PID 40128) was left running WITHOUT a window by `close-game.ps1` and stayed until ≈17:41 (closed by PID; the owner: «игра не запущена»).
+> The live Engine.ini kept the B2 line until ≈17:41 — restored from `.bak-q8b` (diff = only that line). No B measurement exists: the q8 question stays open (EXP-0468).
+
+> ⚠️ **Чат 2026-11-06 (четвёртый) закрыт принудительно 2026-11-06 20:48 +03:00 на 85 %:** церемонии пропущены (судья, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft. Ложные утверждения на месте: нет («хаб не дёргается», «серия q8 прервана», ролики теней — исправлены по местам). Игра закрыта, замок снят, HDR включён.
+> **ПЕРВЫМ ДЕЛОМ:** (1) хаб — разобрать в полном разрешении ролики папки отсмотра 69 (по одному на переключение), назвать каждый дёргающийся элемент, затем бисекция модов (баг 64). (2) Тени пальм — переснять серию с `hdr.ps1 off` и `SetTimeOfDay` перед каждым роликом; сборка пока 2.0/−1.0 (баг 67). (3) Мод музыки: развернуть сцену смерти и прогнать M7 вместе с кейсами бага 79 (смерть/подземелье/камень пути). (4) Карточки EAA векторами и строками — маршрут в баге 64, п. 23.
+> **NOW 2026-11-06 19:20 +03:00 — chat of 2026-11-06 (fourth), `/dayloop` (`[OWNER]` 17:50 «работай автономно»):** plan 46 **KrinikConanMusic** (`[OWNER]` 17:25 «да, я хотел бы мод музыки»,
+> verbatim — idea 25): a Lua detector + our own player program (miniaudio), the Palworld 4679 design; in the game (dev-only) places and combat work with test tones,
+> the game's music muted by its sound class only where our folder has tracks; 19 folders with Russian READMEs from one table. Open: scene-change cost spikes
+> 2–3 ms (rule 7), death/Purge/menu, the game's music slider, the A-B-A flight, the owner's look. Notes `games/ConanExiles/mods/KrinikConanMusic.md`, cases
+> `TC_conan_music_recon_2026-11-06.md`. Test tones sit in the GAME folder's `music/` — remove after the tests. The owner's groundwork ideas (playlist setting, now-playing
+> HUD widget) — plan 46 «Groundwork»; his 1.0.0 notes (hub test, EAA cards by vectors and strings, quick loot partial) — bugs 64 / 75. `close-game.ps1` closes a
+> windowless game (fixed). Hub Q/E test BLOCKED: synthetic keys do not reach the game (three ways tried) — next: the hub's own tab function by the remote.
+> **Bug 67 (palm shadows) 2026-11-06 19:42 +03:00:** the owner rejected the 2.0 sun step as a patch (19:22–19:26, acceptance: smooth sun · no flicker · no constant re-render);
+> recon on three tracks (engine help from the 5.8 renderer binary, the game's palms in the Dev Kit, the web — `researches/conan-shadow-flicker/2026-11-06_*`):
+> the light's turn re-samples the VSM pages; measured at the oasis: 0.1–0.25° steps as calm as 2.0, 0.003 ≈ 2× worse; our bias −1.0 coarser than the game's
+> −1.5. **The series is VOID** (20:37 the owner rejected review folder 68 — overexposed HDR capture, EXP-0470; time of day not fixed, EXP-0469); folder
+> removed, the interim 0.25/−1.5 reverted before deploy — the build stays 2.0/−1.0. NEXT: re-run with `hdr.ps1 off` + `SetTimeOfDay` before each clip.
+> Music mod: scene-change spikes fixed; the death scene coded (hooks `DeathMusic` / `ClientOnRespawned`), NOT deployed/tested (case M7, rides on bug 79 D1).
+> Hub: the jitter is REPRODUCED (the owner's eye 20:38; my «not found» was false — EXP-0471). One clip per switch, ~90 fps, HDR off — review folder 69;
+> first readings in bug 64 (a band crawling down 400 ms after a switch, the perk text blurred ~5 frames, the Journey tab shifting). **FIRST next chat:** name
+> every moving element at full resolution, then the mod bisect.
+> **Crash checking is the owner's own gameplay** (`[OWNER]` 20:36 «на вылеты я буду проверять геймплейм»; HOUSE_RULES 28, plan 47 — fly-throughs are not a
+> crash check); the 19:42 fly-through run was stopped 20:36. `[OWNER]` 20:36 «а ты мне делай сборку, в которую я уже мог бы играть»: the game folder holds
+> the build, `-Verify` 111/111 at 20:40, game closed, lock released. Bug 79 cases (respawn, dungeon, waystone) — `TC_conan_pause_loading_screen_paths_2026-11-06.md`, not run.
+> The owner asked what to fix for comfortable evening play; the answer in chat 18:05 — a long crash-free run, the pause on the in-game loading screen
+> (waystone, respawn), the hub test, the dusk light jump, then the rest.
+> **FIRST in the next chat:** (1) q8 Nanite — no B data (the correction above); `close-game.ps1` now closes a windowless game — the series can be re-run. (2) G4: свой раб-босс через колесо боли прямыми вызовами (кейсы `TC_conan_thrall_ghost_graft_2026-11-06.md`).
+> (3) Музыка — показать владельцу русскую копию вердикта и предложить свой UE4SS-мод (разведка пультом мелодий 3.0.1).
+> ✅ **Chat of 2026-11-06 (second) soft-closed ≈ 2026-11-06 13:1x +03:00 at 85 %:** the previous chat's skipped ceremonies paid — judge pass (VERIFIED WITH CAVEATS, fixed), STATUS trim, closing lints (attribution OK; experience-lint: 2 old findings EXP-0455 and an earlier one without a mechanization field — debt), engine syntax OK; README unchanged (the engine was not touched). Standing falsehoods corrected in place: Heritage «LOST» (plan 45 / register / notes), the merge rule «per table», bug 82 «plate hidden».
+> **NOW 2026-11-06 12:46 +03:00 — chat of 2026-11-06 (second), `/dayloop` (`[OWNER]` «работай автономно. Буду нужен - зови голосом»): plan 45 — steps 4, 5, 7, 9 DONE; 1, 6, 8, 11 wait
+> for the owner; 10 is plan 34 / criterion 3.** What the build got: 7 EAA boss rows recruitable again (BMNB fields into `DT_EAA_Spawntable`); LegitReligious's stale
+> stat table → the game's (51 rows back: Derketo Acolyte, Anvil Keeper armour); Storage Reach Expanded's console table → the game's + its 3 commands; Heritage
+> back to unmodified (the previous chat's «LOST» was false). **The merge rule of a table row is the LATER mod's** (Heritage, Era of Trials `*_Merge` — by field;
+> Mines of Set, EAA, Era of Trials `*_Add` — whole row): judge every pair LIVE by `ConanExiles/_config/live-rows.lua` (EXP-0458). New tools: `live-rows.lua`,
+> `hidden-row-pairs.py` + `mod-table-keys.py`, `lua-hook-pairs.py`, `patch-mod-asset.py` `vanilla:` / `vanilla+own:` (FName suffixes fixed), `uaj rows`.
+> Guide kind 6 «a mod vs the game» (EXP-0460). Reports `testcases/reports/2026-11-06_conan-{boss-rows-heritage-bmnb-live,religion-and-eaa-rows-live,stale-stat-table-and-thrall-system}.md`;
+> the judge pass: VERIFIED WITH CAVEATS (caveats fixed). KAIF #194 (refresh hooks from a sibling cwd) filed and patched locally.
+> **2026-11-06 15:29 +03:00 `[OWNER]` «нужно будет изучить проект https://github.com/LTSharpe/OblivionRemasteredPerformanceFix и понять, если в нём наработки, который мы можем легко и
+> просто как Quick Win взять в конан»** — recon by a helper → `researches/conan-oblivion-perffix-recon/README.md` (fixes table, cvar-level Quick-Win shortlist, the DLL port's
+> cost); the shortlist then measured by the A-B-A fly-through bench; the verdict to the owner as a Russian reading copy. **2026-11-06 16:04 +03:00:** recon done (4 cvar lines; the DLL
+> port = an epic); `p.Chaos.AccelerationStructureTimeSlicingMaxQueueSizeBeforeForce=100000` TAKEN into the build's Engine.ini (stutters −28 %, CPU −0.3 ms, report
+> `2026-11-06_conan-quickwin-chaos-queue.md`); `r.GPUScene.ParallelUpdate` already on (2048); `p.MaxPayloadSize` NOT taken (A-B-A-B across launches: no gain, report `2026-11-06_conan-quickwin-maxpayload.md`; batch q7, the
+> live ini's B line by `ini-temp.py … q7`, revert after); `NumInitialRootPages` series ran 17:11-17:31 without a B measurement (correction above) (one background script `scratchpad/q8-series.sh` of this session, 4 launches, holds the machine lock up to 60 min, prints the flights and restores the ini; batch `bench-batches/q8-nanite-rootpages.txt`: A 2048 vs B 3072 across launches, the COLD first flight is the measure). Criterion 3 A-B-A-B: within noise, narrowly (`2026-11-06_conan-build-vs-vanilla-paks-abab.md`).
+> **2026-11-06 17:09 `[OWNER]` «для игры есть моды по интеграции музыки пользователя?» · «чтобы были папку, куда закидваются треки под определённые сценарии в игре»** — web recon DONE 17:20 → `researches/conan-custom-music-mods/README.md`: no ready per-situation user-folder mod for Conan; the Palworld UE4SS pattern (Nexus palworld/4679) is the model; our path — a client UE4SS mod, first a remote recon of 3.0.1's music cues; answered in chat 17:20.
+> G4 of the LBPR graft (a boss ghost at 1.2): two tries inconclusive — a with/without control on template 505 (same height), and by the owner's route
+> «дебаг пультом. прямыми вызовыми» (16:49) `FindOrSetupThrallComponent` + `StartMovingThrall` on the oasis boss — crashes WITH and WITHOUT the graft (not the graft).
+> NEXT: a boss the PLAYER owns by direct calls (the thrall conversion path), then the with/without pair (cases in `testcases/TC_conan_thrall_ghost_graft_2026-11-06.md`).
+> **Interview #034 (merged 13:31 from #032/#033) ANSWERED 13:34 and applied:** Q1 A — Era of Trials' Zathite recipes stay; Q2 A — LBPR owns the thrall system, plus the owner's
+> «если получится, то в LBPR нужно затянуть модельки из Bosses My New Besties» → plan 45 step 8a: **BUILT 2026-11-06 14:18 +03:00** — BMNB's lines grafted into LBPR's
+> `ShowThrallPlaceable` (LBPR KRINIK MODIFIED, `kismet-graft.py`, `patch-mod-asset.py graft:`), in game G1, G2 pass, G3 partial (judge: VERIFIED WITH CAVEATS); owed: a boss ghost at 1.2 SEEN (needs a recruited boss
+> item — rides with «BMNB's own function in play») and LBPR's toggles walked. Also fixed: `extract` gave the GAME's copy of a vanilla path (EXP-0462). Report
+> `testcases/reports/2026-11-06_conan-thrall-ghost-graft.md`. 2026-11-06 13:36 +03:00 `[OWNER]` «работай автономно -
+> буду нужен, то зови голосом» → `/dayloop`. Ambushes (#025) are NOT waiting — the owner took them off the agenda 2026-10-31 21:11
+> (the «waits for #025» of this chat was false, corrected in plan 45 step 11, the register and here). Owed by the agent: BMNB's own function in play (knock a boss out, recruit); bug 82 — DONE 2026-11-06 14:41: over a real nest egg (snake eggs, pickable foliage) the plate shows and a real E takes the egg (item 13011 0 → 1); the Kappa «nests» of the earlier runs are palm bushes (the false «shown over nest eggs» corrected in the bug); guide line removed. Nexus follow-up letter — drafted for the owner (ticket 276571).
+> **NOW 2026-11-06 09:05 +03:00 — chat of 2026-11-06, `[OWNER]` «продолжаем делать сборку Конана 1.0.0»:** DONE in one kit build + one run (pack `1dfd312`, report
+> `testcases/reports/2026-11-06_conan-interaction-prompts-perks-enemy-bar.md`): 🔧 bug 83 — all five interaction prompts like the corpse strip (I1–I4, P1 pass; the
+> owner's eye — review folder 65); 🔧 bug 64 item 12a — the enemy bar 4 units over its skull (E1; folder 66); ✅ the perk gap — 22 cut the last perk (the column does
+> NOT scroll); `[OWNER]` 09:17 «ставь 14» — built, seen (K3, pack `94e713a`). Next on the list: nest eggs (bug 82), a real E over a corpse in a
+> bush (bug 80), the rim on F done properly (bug 75), the rest of the guide's 1.0.0 list.
+> **Northern Timber - Enhanced 4.0.2** (`[OWNER]` 09:27 «Поставь, попробуй»): tried in the world — 0 load errors, overwrites ONE vanilla row (`ResourceStatTable · Resin`),
+> shares no row with the build; removed after (pak, modlist, `Saved/ExtractedMods`). Whether to take it — the owner (`researches/conan-mod-candidates/`).
+> **Table conflicts of the build** — `who-overwrites-table.py --shared-rows` (new): 143 rows written by 2+ mods, list and first reading in `researches/conan-table-conflicts/`;
+> to judge: item 51420 (SevereWeather vs Mines of Set), LegitReligious vs EraOfTrials (59), Asghaard vs TDI (47), RSP vs EAA (8).
+> **Mods must be consistent — a general rule and guide** (`[OWNER]` 09:33–09:36): `researches/mod-reconciliation/GUIDE.md` (any game; overlap kinds an OPEN list —
+> tables, code, assets, resources, mechanics are the owner's examples; four outcomes A identical · B merge · C the owner chooses · D separate), `HOUSE_RULES.md`
+> rule 27, hook «mod-reconciliation-gate» (`style-gate.mjs --cmds`, report `2026-11-06_mod-reconciliation-gate.md`). First judged: row 51420 — a VANILLA armour
+> piece both Severe Weather and Mines of Set re-declare (not two items under one id; corrected 09:34).
+> **ALL mod conflicts to be resolved** (`[OWNER]` 09:40 «Ты понимаешь что нужно будет разобраться и поршать ВСЕ конфликты?»): `plans/45_conan_mod_reconciliation_all.md` —
+> the 143 rows by group (steps 1–6), the rows the log cannot show (7), assets / code / resources / mechanics (8–12). Step 1 (row 51420 Grey One Mask): outcome C (Severe Weather's breather lost to Mines of Set); `[OWNER]` 09:55 «Предлагаю 3 710»; merge = six `copyprop:` lines
+> (a new operation of the pak-patch tool) in the Mines of Set map — DONE 2026-11-06 10:08 +03:00 (pack `f4a56e1`; in game: the mask a breather, armour 38). Step 2 (Xevyr's shared UI rows +
+> the shared Xevyr files) — outcome A, nothing to merge (2026-11-06 10:19 +03:00). Step 3 (werewolf loot, RSP → EAA) — outcome A. NEXT: step 4 (boss / elite
+> spawns: Bosses My New Besties → Heritage / EAA; Heritage → Era of Trials), then 5, 6, 7 and the other kinds 8–12. Register of judged overlaps:
+> `researches/mod-reconciliation/REGISTER.md`. Russian reading copy for the owner: `researches/mod-reconciliation/GUIDE_ru.md` (HOUSE_RULES 1a).
+> **Nexus quarantine** (`[OWNER]` 08:51 «каковы могут быть причины…»): our 11-03 request covers all three Nexus causes (exe source + build steps, UE4SS DLLs with
+> upstream link and hashes, no nested archives; all three links answer 200 publicly 08:53) — most likely the manual queue. BUT (`[OWNER]` 09:18 «они там пишут про
+> способ сборки … они поймут, как собрать?»): the letter did not name the build script and misnamed `BuildInfo.g.cs`; the README has no build section. Checked 09:19:
+> a fresh public clone builds the launcher by `python _config/release/build-docs.py --no-pdf` (same size 4 429 824 B; hash differs — fixed: `-deterministic`, two
+> builds one hash; report `2026-11-06_conan-launcher-deterministic-build.md`). The follow-up with full steps — `…\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_followup.txt`,
+> the owner sends it as a reply in ticket 276571. Open: a «how to build the launcher» section in the README (the owner's storefront).
+> **Owner's note 2026-11-06 08:48 +03:00:** `[OWNER]` «еще нам предложили взять в сборку мод Northern Timber - Enhanced 4.0.2» · «нужно изучить его потенциальную конфликтность, и что он
+> нам даст» — web recon by a helper → `researches/conan-mod-candidates/northern_timber_enhanced_web_recon.md`; then the pak-level check (`mod-overrides.py`
+> against the build's Mods) by the main session; the verdict to the owner with the conflicts table (memory: advice on a mod = its conflict study).
+
+
 ## 2026-11-03 20:58 +03:00 (second part) — the older pointer blocks (2026-10-26 … 2026-11-02) of STATUS «Where to continue», moved at the soft closure of chat ce994c74 (verbatim; the bonsai trim)
 
 > **CHAT f73138c5 (closed 11:3x) and CHAT c5fe291c (closed 2026-11-01 21:57) FIRST lists — moved verbatim to the chronicle, entry 2026-11-02 14:03 +03:00.** The shock wave and review folder 60 — answered this chat (W3–W5). Still open: bug 75 (the quick-loot rim jumps on an F take), the climbing jump,
