@@ -84,6 +84,13 @@ visibility by the `XCS_Panel` event in `KrinikPauseGameInMenu` 0.7.0 (retry ≤4
   before «not reproduced» (TESTING_FRAMEWORK: ≥ 3 variants).
 - Item 23 (EAA class cards): the owner's decided route — the card text is NOT re-painted into textures: the cards get our widget layer with vector shapes and
   real strings (a localizable `FText`, Russian), drawn over a text-free card image. Fixing: after KrinikConanMusic's first build (plan 46).
+  **Found 2026-11-06 19:43 +03:00 (the EAA container `EnhancedArmoryAndArsenal-Windows.utoc`, `retoc list`):** the class menu `UI/BP_EAA_Classmenu`, one widget per class
+  `UI/BP_EAA_Class_<Guardian|Bandit|…>`, the card art with painted English text `UI/iron_warden_final_1610x1086`, `gold_tongue_1610x1086`,
+  `beastbinder_1610x1086`, `sand_jackal_1610x1086` (+ the rest of that size), the menu buttons `UI/Buttons/*` (`class_menu_1/2`, `magic_school_menu`, …).
+  Route: (1) extract the cooked textures (`retoc to-legacy --filter <name>` + a BC decoder) and read where the text is painted; (2) a text-free card image
+  (the painted words removed, the art kept); (3) in the card widget (kit edit of `BP_EAA_Class_*`, KRINIK MODIFIED) a vector frame and two TextBlocks — the
+  class name and the line under the portrait — Russian `FText` from our translation table; (4) frames at 720p–4K (HOUSE_RULES 17). The Dev Kit has no copy of
+  the mod's assets — the edit goes through the pak (`patch-mod-asset.py`), as for the other KRINIK MODIFIED paks.
 
 ## Item 11 — the camera-relative searches (twin check, owner's question «какие ещё поиски в игре есть, и они могли сломаться»)
 The game builds the interaction ray in `FunCombat_PlayerController_C::GetLineTraceStartAndEndFromCamera(Distance)` — start = the camera,
