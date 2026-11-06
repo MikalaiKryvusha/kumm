@@ -1,6 +1,6 @@
 # Recon — Northern Timber - Enhanced 4.0.2 (web)
 
-> **Created:** 2026-11-06 · **Parent:** the owner's chat request 2026-11-06 08:47 · **Status:** web recon done, pak-level conflict check pending (the main session) · **Outbound:** —
+> **Created:** 2026-11-06 · **Parent:** the owner's chat request 2026-11-06 08:47 · **Status:** web recon done; pak-level check done 2026-11-06 09:09 +03:00 (no vanilla file overridden); the in-game table-merge log check waits for the owner's word · **Outbound:** —
 
 Read-only web recon. Nothing from the mod was downloaded or run; no login; nothing posted. Steam pages were read through the public Workshop page, the public comment-render endpoint and the public `ISteamRemoteStorage/GetPublishedFileDetails` API (pulled 2026-11-06 08:50–08:53). Nexus was checked through the public Nexus GraphQL API (`api.nexusmods.com/v2/graphql`) because the Nexus website returns 403 to the fetcher.
 
@@ -119,6 +119,21 @@ Named modpack mods — mentions found:
 ## Localization
 
 - No localization or language list mentioned on the page, in the change notes or in any comment (searched for russian, translat, locali, language) — **not found**. Russian localization: not found. Only English text appears in the descriptions and the piece list. Whether the pak carries any string tables — pending the pak check.
+
+## Pak-level check (the main session, 2026-11-06 09:09 +03:00)
+
+- **The file:** `NorthernTimber4.0.2.pak` from the author's Google Drive link, 483 375 294 B — byte-equal in size to the Workshop file of 4.0.2. Kept only in the
+  session scratchpad; nothing of it was run.
+- **Conflict kind 1 (a vanilla file overridden):** `mod-overrides.py` over the pak and the build's 65 paks — **0 vanilla paths** in the mod (1 688 assets, all
+  under its own folder). It overrides no game file and shares no file with any mod of the build.
+- **Conflict kind 2 (rows merged into the game's tables by its controller `BP_NT_ModController`):** its own tables `dt_NT_ItemTable`, `dt_NT_RecipesTable`,
+  `dt_NT_FeatTable`, `dt_NT_ResourceStatTable`, `dt_NT_BuildingGameplayTagTable`, `dt_NT_BuildingGameplayTagsOrder`, `dt_NT_ConstructionSubClassData`. Build mods
+  merging into the SAME vanilla tables: items / recipes / feats — Era of Trials, WO Riding Thralls, the fishing mod, EAA and others (ordinary for any content
+  mod; a clash only when ROW NAMES / item IDs coincide); **resource yields — `DT_EAA_ResourceStatTable` (EAA) and `DT_NightTerrors_ResourceStatTable`** — the
+  one place with a real chance of a row clash (NT's legacy note: «T1 Stone Pick will gather Resin from Trees» = a vanilla tool's yield row; whoever loads later
+  wins that row). Building gameplay tags — the build carries `DT_GameplayTag_Building_Custom` / `_Shupaa` in two mods each.
+- **What decides kind 2:** only the game's own log (`_config/who-overwrites-table.py`: «MergeDataTables - Found existing table entry … overwriting»). A trial start
+  with the pak in the working game was REFUSED by the agent's permission guard (a third-party download loaded into the game) — waits for the owner's word.
 
 ## Open questions
 
