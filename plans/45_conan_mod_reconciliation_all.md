@@ -62,11 +62,11 @@ Each group by the guide: read original + both sides → classify per field → r
 - [x] 5. **DONE 2026-11-06 11:49 +03:00 — outcome B, merged by TDI itself:** both mods' appends (Ancient Civilization's crafting groups, TDI's repair kits) live on 47/47
       crafter rows; the file «C» ×47 was TDI's empty placeholders; Ancient Civilization's `ThrallGroup` «Warrior» not applied (vanilla «Crafter» — right for
       a crafter). Armourer templates (`ProfessionTemplateDataTable`, 47 rows) — Asghaard_Ancient_Civilization → TDI_LegendaryRepair.
-- [ ] 6. Religious items and recipes (`Items/ItemTable` 54, `RecipesTable` 5) — LegitReligious_Enhanced → EraOfTrials. **2026-11-06 11:41 +03:00:** the 54 weapons — B, Era of Trials
+- [x] 6. Religious items and recipes (`Items/ItemTable` 54, `RecipesTable` 5) — LegitReligious_Enhanced → EraOfTrials. **2026-11-06 11:41 +03:00:** the 54 weapons — B, Era of Trials
       merges its ammo by field (`EoT_DT_BowCompatableAmmunitions_Merge`): LR's stamina / container / repair / descriptions live 54/54, every ammo list = LR's +
       Era of Trials' arrow 47210132; the 5 Zathite dancer recipes — C (LR fixes a vanilla zero «Venom-purified blood», Era of Trials redesigns the recipe
       whole; live = Era of Trials) → interview #034 Q1 (was #032). Also found: LegitReligious ships the WHOLE vanilla `Items/ItemStatModificationTable` (kind 3 — step 8).
-      Closes when #034 Q1 is answered and applied.
+      **DONE 2026-11-06 13:35 +03:00:** `[OWNER]` interview #034 Q1 = A (13:34) — Era of Trials' recipes stay as they are live; nothing to build.
 - [x] 7. The rows the log cannot show — «added by A, overwritten by B»: for every pair of mods merging into the same game table (the `owntable` rows of
       `mod-overrides.py`), compare their row KEYS offline (their own tables' row names) — the full list of shared keys, beyond the log's 143.
       **Tool 2026-11-06 11:53 +03:00:** `python -X utf8 ConanExiles/_config/hidden-row-pairs.py` — logged single-writer rows (3 599 in 43 tables) that are not vanilla keys
@@ -83,7 +83,13 @@ Each group by the guide: read original + both sides → classify per field → r
       whole copy of `Items/ItemStatModificationTable` hid 51 rows of 3.0.1 → replaced by the game's version (`vanilla:`), live 51/51. Single-mod whole
       tables re-checked against 3.0.1 (2026-11-06 12:15 +03:00): `HairColorSelections` (MSCasaDesFlores Nails) — identical, A; `CustomConsoleCommandsDataTable`
       (StorageReachExpanded) — 5 game console commands missing, its own 3 kept → MERGED 2026-11-06 12:21 +03:00 (`vanilla+own:`), live 8/8; ours —
-      KrinikConanGameplay's `DT_AttributeSystem`, `DT_ExperienceSystemLevel`, `DT_FeatsPerLevel` (built by us from the 3.0.1 kit — checked 2026-11-06 12:44 +03:00: each 10 000 rows, all 60 game rows present — the uncap, not a stale copy). Closes when #033 is answered and the re-checks done.
+      KrinikConanGameplay's `DT_AttributeSystem`, `DT_ExperienceSystemLevel`, `DT_FeatsPerLevel` (built by us from the 3.0.1 kit — checked 2026-11-06 12:44 +03:00: each 10 000 rows, all 60 game rows present — the uncap, not a stale copy). `[OWNER]` interview #034 Q2 = A (13:34) — LBPR stays the owner of the file (as live, nothing to build), with the comment
+      «если получится, то в LBPR нужно затянуть модельки из Bosses My New Besties» → step 8a. Re-checks done; step 8 closes with 8a.
+- [ ] 8a. **BMNB's boss placement-ghost scale carried INTO LBPR's `BP_ThrallSystemComponent`** (the owner's 13:34 comment, «если получится»): read BMNB's
+      `ShowThrallPlaceable` bytecode (tag check `Npc.Boss.Miniboss` / `Npc.Boss.WorldBoss` → `SetActorScale3D` by the thrall's scale) and LBPR's version of the
+      same function; port BMNB's addition into LBPR's asset by a re-appliable script next to the pak (rule 8), LBPR marked KRINIK MODIFIED; verify live: a
+      recruited world boss's ghost at its own size AND LBPR's placement toggles still working. If the bytecode will not take the edit — tell the owner what
+      was tried (his «если получится» makes «cannot» a legal outcome, never a silent one).
 - [x] 9. **Code:** every UE4SS `RegisterHook` target and `RegisterKeyBind` key in the build's Lua mods (ours and others'), and the blueprint mod controllers'
       overrides of the same game function — pairs listed. **DONE 2026-11-06 12:24 +03:00** (`ConanExiles/_config/lua-hook-pairs.py`): 11 hook targets, 2 shared (ours only;
       UE4SS's two stock enablers), 4 key binds, 1 shared (ours) — B, nothing to merge; blueprint overrides of one vanilla class — the thrall system (step 8).
