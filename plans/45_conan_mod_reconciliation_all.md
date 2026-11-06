@@ -20,7 +20,9 @@ Each group by the guide: read original + both sides → classify per field → r
 
 - [ ] 1. `Items/ItemTable` 51420 — SevereWeatherEnhanced → Mines_of_Set (1 row; a vanilla armour piece both re-declare). Notes: `SevereWeatherEnhanced.md`,
       `CavernsOfSet.md`. **Read 2026-11-06 09:43 +03:00 — outcome C:** the Grey One Mask is a sandstorm breather in Severe Weather, a plain mask with a text fix in Mines of Set;
-      Mines of Set wins → the breather is lost. Proposed merge — Severe Weather's row + Mines of Set's text; `RepairXP` (12665 vs 3710) → the owner. Then: a
+      Mines of Set wins → the breather is lost. Proposed merge — Severe Weather's row + Mines of Set's text; `RepairXP` (12665 vs 3710) → the owner.
+      `[OWNER]` 09:53 «С нашей ускоренной прокачкой, с нашей новой кривой - что предлагаешь?» → `[AI]` proposed 3 710: the value Mines of Set gives the whole Grey One
+      set (51420–51424); vanilla caps the field at 2000, 12 665 is above every vanilla item; on our curve 3 710 ≈ 0.9 of a level at 72, ½ at 200. Waits for his word. Then: a
       `patch-mod-asset.py` map on Mines of Set's table (number field support needed), a world start, the live row, the mask's tooltip.
 - [ ] 2. Xevyr's shared UI rows `XCS_Panel`, `Xev_MouseInteraction` (`DT_UIModuleTable`) — ProximityParty → Simple_Minimap → LLHighlight → AlMerayah_Reborn
       (2 rows; likely A).

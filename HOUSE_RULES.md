@@ -8,6 +8,9 @@
 
 1. **The agent talks to the owner in Russian in chat and writes all project and KAIF documentation in English.** The owner's verbatim
    quotes stay Russian; interviews (the owner answers inside them) stay Russian.
+   1a. **Anything the agent wants the owner to READ comes as a Russian document** — a reading copy written from the meaning of the English source (never a
+       link to the English file), in `<the source's folder>/<NAME>_ru.md`, its header naming the source and the moment; shown to him per the show rule.
+       (`[OWNER]` 2026-11-06 09:51 «я читаю на русском языке. Если хочешь, чтобы я что-то почитал - мне нужен RU док от тебя».)
 2. **Knowledge is written down the moment it is understood, in the same move.** New — a new line; changed — an edit in place; outdated —
    deleted. Where: vision — `GOAL.md`; path — `MASTER_PLAN.md`; a task — its plan in `plans/`; a rule — this file; a stand, route or tool —
    `HOUSE_RULES_REFERENCE.md`; the engine — the project maps; a game — `games/<Game>/GAME_*_MAP.md`; a mod of a build — its ONE notes file
