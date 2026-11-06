@@ -559,6 +559,11 @@ Lua-моды UE4SS ждут только отложенными действия
   still rebuilds its content on every show (lists, cells, perks: the same late changes, run 9). The page's refresh on activation is the assembly's cause.
   `CraftingGUI_C` rebuilds its centre/right panels (`BP_Handle*PanelWidgetCreated`) on the MODULE ACTIVATION, not on a plain `AddToViewport`; a page that
   STAYS in the viewport and is only Collapsed / shown re-creates nothing on later shows (0 births, 3 cycles — `hubswitch/collapse-test.lua`, 23:45).
+  A page instance created by OUR code (`WidgetBlueprintLibrary:Create(pc, <class>, pc)` + `AddToViewport`) builds COMPLETE without the module controller
+  (`W_FeatWindow`, `CraftingGUI` — frames 2026-11-06 23:56–23:57); 9 such extra instances do not disturb native switches (bisect 2026-11-07 00:10).
+  **CRASH RULE (bisect 00:10, 5 steps):** `SetVisibility` on ANY widget inside a `CarouselWindow:OnChildActivated` hook (inside the native switch) crashes
+  the game (EXCEPTION_ACCESS_VIOLATION in UE4SS) — `SetRenderOpacity` there is safe (prototypes v3/v4, 22:2x–22:35). Visibility changes go to the next tick.
+  UE4SS `NotifyOnNewObject` with a page CLASS path did not fire for the game's page windows (00:11) — use the `UserWidget` notify + a class check.
 - **Hub tab switching (2026-10-29 16:56, remote probes).** The tabs are changed by the NATIVE parent class of `W_Carousel_C`:
   `/Script/ConanSandbox.CarouselWindow` — `NextCarouselWindow` (E), `PrevCarouselWindow` (Q), `SetCarouselIndex`; the blueprint has no own Next/Prev
   (a hook by the blueprint path fails «no UFunction»). Module events lag the switch: `NextCarouselWindow` 17.535 → `XCS_Panel` false 17.681

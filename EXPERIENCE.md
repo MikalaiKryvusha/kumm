@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0474 · 2026-11-07 · ❌ · #conan #ue4ss #crash #hub #bisect
+class: widget-mutation-inside-native-call
+mechanized: `ConanExiles/_config/pult.sh` exit 4 on a dead game (HOUSE_RULES 29) stops the series; the crash rule stands in the game map
+**Lesson:** two prototype runs crashed the game on the first hub switch; a 5-step bisect in one background game (extra pages alone · class notify · widget
+counter + empty hook · our page visible · `SetVisibility` in the `OnChildActivated` hook) named the cause in 10 minutes: `SetVisibility` inside the native
+switch. `SetRenderOpacity` there is safe. Bisect one ingredient per step, with an alive-check after each, instead of re-running the whole prototype.
+
 ### EXP-0473 · 2026-11-06 · ❌ · #conan #ue4ss #hooks #hub #input
 class: hook-on-the-wrong-entry
 mechanized: none — plan 48 «Progress» and the game map carry the hook point
