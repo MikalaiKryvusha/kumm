@@ -1,6 +1,6 @@
 # Bug 80 — over a corpse lying in a bush both the corpse strip and our «E Взять» show; only one of them is what E does
 
-**Status:** 🔧 fix built and seen 2026-11-03 23:03 +03:00 (KrinikConanUI `krinik_pickup_prompt`: our plate off while the game's corpse strip is on screen); the real E over a
+**Status:** ✅ DONE (a real E over a corpse in a bush opened the corpse — the status section) · was 🔧 fix built and seen 2026-11-03 23:03 +03:00 (KrinikConanUI `krinik_pickup_prompt`: our plate off while the game's corpse strip is on screen); the real E over a
 corpse in a bush NOT observed yet · **Severity:** S2 (a prompt that lies about the key) · **Version/build:** pack ConanExiles `37ed9e8`, KrinikConanUI
 `krinik_pickup_prompt` (bug 77 version) · **When/context:** seen by the agent 2026-11-02 15:18 (STATUS, «Seen 15:18 (to check)»); the guide's 1.0.0 chapter
 lists it · **Fixing:** this session, after the study below
@@ -46,6 +46,18 @@ visibility 3 / opacity 1.00 → strip on → 1 / 0.00 → strip removed → 3 / 
 ## Decisions made without the owner
 
 - `[AI]` by mandate (`[OWNER]` 22:39 «аналогичный вопрос про автономность работы»): the strip wins (the game's own order), our plate yields.
+
+## ✅ STATUS: DONE (2026-11-06 22:03 +03:00)
+
+`[OWNER]` 2026-11-06 21:01 «тестируем E Взять над кустом с трупом». Run 2026-11-06 22:00–22:03 (cases `testcases/TC_conan_bush_corpse_real_e_2026-11-06.md`,
+report `testcases/reports/2026-11-06_conan-bush-corpse-real-e.md`):
+- Hygiene: none new (no code changed — the 2026-11-03 fix is what was tested).
+- Functional run: the oasis stand, `bush-corpse.lua` moved the humanoid boss «Нурус Тихорез» onto a spot the game's foliage probe answers yes for and killed
+  him there; `loot-aim.sh` put the crosshair on the body by the game's answer. B1 pass — only the corpse strip and the quick-loot window, our plate
+  visibility 1 / opacity 0.00 (frame `b1.jpg`). B2 pass — a REAL E opened the corpse's loot window (its 7 items), no bush item taken (frame `b2.jpg`). B3 pass —
+  five views around the body: strip on → plate hidden (2 views), strip off → plate shown (3 views, visibility 3 / opacity 1.00); a real E over «E Взять»
+  took a branch («Ветка +1», frame pair `b3_pair.jpg`). The strip and our plate never showed together; each said what E did.
+REAL WORLD: accumulated — the owner's working game folder with the full build and the oasis save; data and machine — his game, his PC; path — the real E key.
 
 ## Links
 

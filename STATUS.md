@@ -136,6 +136,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > ran to 17:31:48: A1 cold 48.2 fps · 85 stutters, F1 53.3 · 70; B1 (3072) — NO flights (cvar read 3072, the bench printed nothing); A2 cold 47.9 · 81, F1 49.9 · 72;
 > B2 — launch refused: A2's game (PID 40128) was left running WITHOUT a window by `close-game.ps1` and stayed until ≈17:41 (closed by PID; the owner: «игра не запущена»).
 > The live Engine.ini kept the B2 line until ≈17:41 — restored from `.bak-q8b` (diff = only that line). No B measurement exists: the q8 question stays open (EXP-0468).
+> **NOW 2026-11-06 22:03 +03:00 — chat of 2026-11-06 (fifth), the owner's three orders 21:01 («делаем сборку конана» · «чиним переключения страниц на хабе» · «тестируем E
+> Взять над кустом с трупом»):** (1) **hub dark wave REMOVED** — vanilla `W_Carousel.AnimBackgroundFadeOut` (0.5 s mask slide) made instant in the
+> KrinikConanUI kit pak (pack `850f57c`); build 1 lost the see-through «Снаряжение» (exclusive range end — `[OWNER]` 21:30 «мне не нравится»), build 2 fixed it;
+> W1/W2 pass, vanilla control proves it. **The 2–6 frame page assembly is VANILLA** (same with the hub slowdown off and with no mod paks) — waits for the
+> owner's choice (asked in chat): leave it, or hide each new page until it is built (a short empty backing instead of the assembly). Report
+> `testcases/reports/2026-11-06_conan-hub-instant-switch.md`, bug 64. (2) **Bug 80 DONE** — a real E over a corpse in a bush opens the corpse, «E Взять» never
+> shows with the strip (report `2026-11-06_conan-bush-corpse-real-e.md`). Stand rule: wait out the «Обновляется каталог обликов» plate before a run
+> (`[OWNER]` 21:30). Game closed, lock released, HDR on.
 > ⚠️ **Чат 2026-11-06 (четвёртый) закрыт принудительно 2026-11-06 20:48 +03:00 на 85 %:** церемонии пропущены (судья, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft. Ложные утверждения на месте: нет («хаб не дёргается», «серия q8 прервана», ролики теней — исправлены по местам). Игра закрыта, замок снят, HDR включён.
 > **ПЕРВЫМ ДЕЛОМ:** (1) хаб — разобрать в полном разрешении ролики папки отсмотра 69 (по одному на переключение), назвать каждый дёргающийся элемент, затем бисекция модов (баг 64). (2) Тени пальм — переснять серию с `hdr.ps1 off` и `SetTimeOfDay` перед каждым роликом; сборка пока 2.0/−1.0 (баг 67). (3) Мод музыки: развернуть сцену смерти и прогнать M7 вместе с кейсами бага 79 (смерть/подземелье/камень пути). (4) Карточки EAA векторами и строками — маршрут в баге 64, п. 23.
 > **NOW 2026-11-06 19:20 +03:00 — chat of 2026-11-06 (fourth), `/dayloop` (`[OWNER]` 17:50 «работай автономно»):** plan 46 **KrinikConanMusic** (`[OWNER]` 17:25 «да, я хотел бы мод музыки»,
