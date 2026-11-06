@@ -138,7 +138,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the judge pass: VERIFIED WITH CAVEATS (caveats fixed). KAIF #194 (refresh hooks from a sibling cwd) filed and patched locally.
 > **2026-11-06 15:29 +03:00 `[OWNER]` «нужно будет изучить проект https://github.com/LTSharpe/OblivionRemasteredPerformanceFix и понять, если в нём наработки, который мы можем легко и
 > просто как Quick Win взять в конан»** — recon by a helper → `researches/conan-oblivion-perffix-recon/README.md` (fixes table, cvar-level Quick-Win shortlist, the DLL port's
-> cost); the shortlist then measured by the A-B-A fly-through bench; the verdict to the owner as a Russian reading copy.
+> cost); the shortlist then measured by the A-B-A fly-through bench; the verdict to the owner as a Russian reading copy. **2026-11-06 16:04 +03:00:** recon done (4 cvar lines; the DLL
+> port = an epic); `p.Chaos.AccelerationStructureTimeSlicingMaxQueueSizeBeforeForce=100000` TAKEN into the build's Engine.ini (stutters −28 %, CPU −0.3 ms, report
+> `2026-11-06_conan-quickwin-chaos-queue.md`); `r.GPUScene.ParallelUpdate` already on (2048); `p.MaxPayloadSize` A-B-A-B across launches IN FLIGHT (batch q7, the
+> live ini's B line by `ini-temp.py … q7`, revert after); `NumInitialRootPages` next. Criterion 3 A-B-A-B: within noise, narrowly (`2026-11-06_conan-build-vs-vanilla-paks-abab.md`).
+> G4 of the LBPR graft: a with/without control inconclusive — a recruited boss item needed (the agent's).
 > **Interview #034 (merged 13:31 from #032/#033) ANSWERED 13:34 and applied:** Q1 A — Era of Trials' Zathite recipes stay; Q2 A — LBPR owns the thrall system, plus the owner's
 > «если получится, то в LBPR нужно затянуть модельки из Bosses My New Besties» → plan 45 step 8a: **BUILT 2026-11-06 14:18 +03:00** — BMNB's lines grafted into LBPR's
 > `ShowThrallPlaceable` (LBPR KRINIK MODIFIED, `kismet-graft.py`, `patch-mod-asset.py graft:`), in game G1, G2 pass, G3 partial (judge: VERIFIED WITH CAVEATS); owed: a boss ghost at 1.2 SEEN (needs a recruited boss

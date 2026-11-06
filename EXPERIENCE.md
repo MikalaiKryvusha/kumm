@@ -103,6 +103,13 @@ only plain values (location, scale, names) of actors — never raw pointer/class
 A third crash the same day (14:35): `FindAllOf('StaticMeshActor')` + `x.StaticMeshComponent.StaticMesh` over the whole level — the component-enumeration class the
 remote already refuses for `FindAllOf(<…Component>)`; one named actor's own component is safe.
 
+### EXP-0466 · 2026-11-06 · ❌→✅ · #testing #bench #report
+class: bench-numbers-across-sessions
+none-cheap: the run report template says it; the bench batch puts both sides in one launch where the value is live
+**Lesson:** the fly-through bench drifts between sessions (the same build: 33–56 stutters at 14:4x, 77–80 at 15:4x) — compare A and B INSIDE one launch when the
+value can be set live, and across launches only as A-B-A-B; and the testrun linter reads `Functional run:` only at the START of a line (a `- ` list marker hides
+it from the pass check).
+
 ### EXP-0465 · 2026-11-06 · ❌ · #conan #stand #claim #bug82
 class: stand-object-named-not-verified
 mechanized: none — bug 82 and the game map name the mesh
