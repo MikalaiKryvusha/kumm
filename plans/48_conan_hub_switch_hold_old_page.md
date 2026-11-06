@@ -50,6 +50,13 @@ The owner: «клик выполнен, видуального переключ�
   страницы в направлении от текущей вправо и влево.» → the hub opens on its page as now; the other 8 pages are built in the background ONE at a time, nearest
   first, alternating right and left; built pages are KEPT hidden; a switch hides one ready page and shows another in one frame. `[AI]` assumption to confirm:
   the pages live while the hub is open and are released at its close.
+- **IsPersistent from the start 2026-11-06 23:15 +03:00 (the owner 23:08 «этот флаг постоянное окно давай попробуем включить»):** a dev UE4SS mod set the flag on the 9 rows
+  at `NotifyOnNewObject(GUIModuleController)` (log: «GUIModuleController born … IsPersistent set on 9 rows», 23:09:24) — the left tabs' windows now SURVIVE
+  (CraftingGUI_C 1 / W_FeatWindow_C 1 alive off-screen, 0 before). BUT run 9 (click pass) has the SAME late assembly (Хар-ки +21/+35/+49 ms, Таланты
+  +28/+56): a page REBUILDS ITS CONTENT on every show even when its window is kept. The real cause is the pages' refresh on activation (lists, cells, perks
+  rebuilt). NEXT: which function each page runs on activation and what it re-creates (births per show with the window kept); then the owner's lazy build =
+  run that refresh for the hidden pages ahead of time, and show without a second refresh. The test mod is saved in `ConanExiles/_config/hubswitch/
+  KrinikHubPersistTest/` (removed from the game).
 - Review folder 70 (`70_hub_dergaetsya_x15`): the four «Снаряжение» switches of run 7 slowed ×15 (`[OWNER]` 22:56 «покажи, что дергается, замедли в 15 раз»).
 - Measure tool: `scratchpad/hub_run.sh <tag>` + `hub_switches.py` (to move into the pack `_config/` with the build).
 
