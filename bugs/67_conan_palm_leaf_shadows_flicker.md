@@ -38,7 +38,8 @@ fix with the sun smooth again. Fixing: right after the KrinikConanMusic run of 2
 **Recon and measurement 2026-11-06 19:40 +03:00:** the game separates the sun disk from the shadow light (`SolarUpdateAngleDelta` help); the web recon (Epic, Fortnite):
 the light's turn re-samples the pages — the cause is the rotation, not the re-draw. Measured at the oasis (report `testcases/reports/2026-11-06_conan-palm-shadow-sun-step.md`):
 0.003 flickers ≈ 2× more; 0.1 and 0.25 are as calm as 2.0 with steps 8–20× smaller; our bias −1.0 is coarser than the game's −1.5. Candidate fix:
-0.1 or 0.25 + bias −1.5 — clips for the owner's eye in review folder 68; the build unchanged until his word.
+0.1 or 0.25 + bias −1.5 — clips for the owner's eye in review folder 68; the build unchanged until his word. **Caveat:** the series ran without a fixed time
+of day (≈ one game hour passed, EXP-0469) — re-run with `SetTimeOfDay` before each clip after the 19:42 long run.
 
 ## Goal vector and acceptance
 

@@ -39,6 +39,9 @@ Functional run: walked on the real game at the oasis; the metric READ per clip (
 2. Our `Engine.ini` sets `ResolutionLodBiasDirectional[Moving] = −1.0`, coarser than the game's own Cine −1.5 (the game log: −1.5 by the quality group,
    then our −1.0); −1.5 lowers the flicker at 0.003 (1.55 → 1.10) and keeps 0.1 calm.
 3. Whether a 0.1–0.25° step is seen in play is the owner's eye — the clips are 6 s and may hold no step.
+4. **Confound (the owner's question 20:02 «время дня разное в них?»):** the time of day was NOT fixed — the series ran ~2.5 real minutes ≈ one game hour
+   from 09:10 (EXP-0469); A1 vs A2 (same setting) 1.55 vs 0.86 shows the drift. The ordering holds over three pairs but is not clean — a re-run with
+   `SetTimeOfDay(10.0)` before each clip is owed.
 
 ## 6. Traces
 
