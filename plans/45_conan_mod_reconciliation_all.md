@@ -1,0 +1,54 @@
+# Plan 45 — reconcile EVERY overlap between the mods of the Conan 3.0.1 build
+
+> **Created:** 2026-11-06 · on the owner's word `[OWNER]` 2026-11-06 09:40 «Ты понимаешь что нужно будет разобраться и поршать ВСЕ конфликты?» (with the table of
+> the 143 shared rows pasted)
+> **Parent:** `researches/mod-reconciliation/GUIDE.md` (the method, `HOUSE_RULES.md` rule 27); `researches/conan-table-conflicts/README.md` (the findings);
+> `MASTER_PLAN.md` acceptance criterion 2 of the build
+> **Status:** 🔧 started 2026-11-06 09:40 +03:00 — group 1 (row 51420) being read
+> **Outbound:** outcome C of each group → the owner, one question per group (scenario of what the player sees)
+
+## Goal vector (Maintain)
+
+The build's mods are consistent: every overlap between two mods — in tables, code, assets, resources, mechanics and any other kind the guide's open list grows
+to — carries a judged and applied outcome. **Acceptance:** (1) `who-overwrites-table.py --shared-rows` on a world start: every listed row is in the guide's
+register as A (identical) or resolved B / C / D, live values match the merge; (2) the other kinds' detectors (steps 6–10) — each finding in the register;
+(3) no outcome «not judged».
+
+## Steps — table rows (kind 1; the 143 rows of 2026-11-06, by group)
+
+Each group by the guide: read original + both sides → classify per field → resolve → verify in game → register.
+
+- [ ] 1. `Items/ItemTable` 51420 — SevereWeatherEnhanced → Mines_of_Set (1 row; a vanilla armour piece both re-declare). Notes: `SevereWeatherEnhanced.md`,
+      `CavernsOfSet.md`.
+- [ ] 2. Xevyr's shared UI rows `XCS_Panel`, `Xev_MouseInteraction` (`DT_UIModuleTable`) — ProximityParty → Simple_Minimap → LLHighlight → AlMerayah_Reborn
+      (2 rows; likely A).
+- [ ] 3. Werewolf / werehyena harvest loot (`Gathering_v2/LootTable_Resource`, 8 rows) — ResourceStimulusPackage → EnhancedArmoryAndArsenal.
+- [ ] 4. Boss / elite spawns (`SpawnTable/SpawnDataTable`, 24 rows) — BossesMyNewBesties → Heritage (17), → EnhancedArmoryAndArsenal (7); Heritage → EraOfTrials
+      (2 dialogue NPCs).
+- [ ] 5. Armourer templates (`ProfessionTemplateDataTable`, 47 rows) — Asghaard_Ancient_Civilization → TDI_LegendaryRepair.
+- [ ] 6. Religious items and recipes (`Items/ItemTable` 54, `RecipesTable` 5) — LegitReligious_Enhanced → EraOfTrials.
+- [ ] 7. The rows the log cannot show — «added by A, overwritten by B»: for every pair of mods merging into the same game table (the `owntable` rows of
+      `mod-overrides.py`), compare their row KEYS offline (their own tables' row names) — the full list of shared keys, beyond the log's 143.
+
+## Steps — the other kinds (the guide's open list)
+
+- [ ] 8. **Assets:** `mod-overrides.py` over the build — every vanilla path shipped by two paks (first run 2026-11-06: `BP_ThrallSystemComponent`,
+      `WBP_BuffIcon` in two mods each; `Dev/AlmostEmpty.umap` in six).
+- [ ] 9. **Code:** every UE4SS `RegisterHook` target and `RegisterKeyBind` key in the build's Lua mods (ours and others'), and the blueprint mod controllers'
+      overrides of the same game function — pairs listed.
+- [ ] 10. **Resources:** the A-B-A flight with the full build (plan 34 / acceptance criterion 3) — the mods' cost per frame; pairs that spend the same budget.
+- [ ] 11. **Mechanics:** the build's features done twice (ambushes: Night Terrors + PvE Plus Ambush; loot boosts; XP pop-ups; weather) — from the mods' notes
+      and descriptions; the stacking numbers.
+- [ ] 12. **Other kinds found on the way** (screen places, localization keys, author-demanded load order, saves, `Engine.ini` keys) — each gets a row in the
+      guide's list and a step here.
+
+## Verification
+
+After each resolved group: a world start, `--shared-rows`, the live value of one merged row by the remote, one in-game look of what the player sees. Run report
+per batch in `testcases/reports/`.
+
+## Risks
+
+- A merged row inside another author's pak is lost on that mod's update — the map next to the pak re-applies it (`patch-mod-asset.py build`).
+- Number fields in rows are not yet writable by `patch-mod-asset.py` — extend it at the first B case that needs one.
+- Outcome D on an item id changes players' saves — none expected so far (51420 is a vanilla id).
