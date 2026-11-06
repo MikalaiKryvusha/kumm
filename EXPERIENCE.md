@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0469 · 2026-11-06 · ❌ · #conan #stand #shadows #measurement #time-of-day
+class: stand-without-fixed-time
+mechanized: none — HOUSE_RULES rule 11 already names «time of day» in the stand step; the shadow series skipped it
+**Lesson:** a game day in Conan is 55.2 min (≈ 2.3 min per game hour, the sun ≈ 0.11°/s); the palm-shadow series of 19:36 took 8 clips over ~2.5 real
+minutes from a save at 09:10 — almost a game hour, the sun visibly moved, two identical settings read 1.55 and 0.86. The owner noticed «время дня разное в
+них». Any light/shadow/sky measurement sets the time BEFORE EACH clip: `FindFirstOf('BP_TimeOfDayManager_C'):SetTimeOfDay(10.0)` (game map line 253).
+
 ### EXP-0468 · 2026-11-06 · ❌→✅ · #bench #conan #closure #claim #background
 class: background-run-outlives-the-chat
 mechanized: `ConanExiles/_config/close-game.ps1` stops a windowless game by PID (2026-11-06)
