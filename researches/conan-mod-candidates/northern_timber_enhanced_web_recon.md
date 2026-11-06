@@ -135,6 +135,19 @@ Named modpack mods — mentions found:
 - **What decides kind 2:** only the game's own log (`_config/who-overwrites-table.py`: «MergeDataTables - Found existing table entry … overwriting»). A trial start
   with the pak in the working game was REFUSED by the agent's permission guard (a third-party download loaded into the game) — waits for the owner's word.
 
+## In-game trial (2026-11-06 09:30 +03:00, `[OWNER]` 09:27 «Поставь, попробуй»)
+
+- Installed into the working game before the Krinik mods (modlist line 63), a fresh start into the world (28 s). The game mounted it and registered
+  `/Game/Mods/NorthernTimber/` as a mod controller; **0 errors / warnings** under `/Game/Mods/NorthernTimber` in `ConanSandbox.log`.
+- `who-overwrites-table.py` (3 896 merges, 44 tables): Northern Timber **overwrote exactly ONE existing row — `ResourceStatTable · Resin`** (the resin yield; its
+  legacy note «T1 Stone Pick will gather Resin from Trees»). `--shared-rows`: **no row** where Northern Timber and another build mod both wrote. Its item / recipe /
+  feat rows are all NEW rows (new rows are not logged — the game prints only overwrites), so no item-ID collision with the build was seen.
+- The `Resin` row belongs to vanilla; no build mod overwrites it, so Northern Timber's version stands as is. The change is gameplay (resin from trees by a pick),
+  the owner's call.
+- Removed after the run: the pak, the modlist line (byte-equal to the backup), and the game's extracted copies `Saved/ExtractedMods/NorthernTimber-Windows.{pak,ucas,utoc}`
+  (the game unpacks every mod there at mount — a removed mod leaves them behind).
+- Not checked: the missing textures and lantern artifacts the author lists (an in-game look at the build pieces), performance.
+
 ## Open questions
 
 1. Does the pak override any vanilla asset or data-table row (recipes, harvest tables — see the legacy "T1 Stone Pick will gather Resin from Trees" line, feat tables, build-upgrade tags)? Pak-level check pending in the main session.

@@ -132,6 +132,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > owner's eye — review folder 65); 🔧 bug 64 item 12a — the enemy bar 4 units over its skull (E1; folder 66); ✅ the perk gap — 22 cut the last perk (the column does
 > NOT scroll); `[OWNER]` 09:17 «ставь 14» — built, seen (K3, pack `94e713a`). Next on the list: nest eggs (bug 82), a real E over a corpse in a
 > bush (bug 80), the rim on F done properly (bug 75), the rest of the guide's 1.0.0 list.
+> **Northern Timber - Enhanced 4.0.2** (`[OWNER]` 09:27 «Поставь, попробуй»): tried in the world — 0 load errors, overwrites ONE vanilla row (`ResourceStatTable · Resin`),
+> shares no row with the build; removed after (pak, modlist, `Saved/ExtractedMods`). Whether to take it — the owner (`researches/conan-mod-candidates/`).
+> **Table conflicts of the build** — `who-overwrites-table.py --shared-rows` (new): 143 rows written by 2+ mods, list and first reading in `researches/conan-table-conflicts/`;
+> to judge: item 51420 (SevereWeather vs Mines of Set), LegitReligious vs EraOfTrials (59), Asghaard vs TDI (47), RSP vs EAA (8).
 > **Nexus quarantine** (`[OWNER]` 08:51 «каковы могут быть причины…»): our 11-03 request covers all three Nexus causes (exe source + build steps, UE4SS DLLs with
 > upstream link and hashes, no nested archives; all three links answer 200 publicly 08:53) — most likely the manual queue. BUT (`[OWNER]` 09:18 «они там пишут про
 > способ сборки … они поймут, как собрать?»): the letter did not name the build script and misnamed `BuildInfo.g.cs`; the README has no build section. Checked 09:19:
