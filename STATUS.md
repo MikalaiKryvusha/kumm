@@ -130,23 +130,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > ⚠️ **ЧАТ 2026-11-06 ЗАКРЫТ ПРИНУДИТЕЛЬНО 2026-11-06 10:52 +03:00 по слову владельца** (`[OWNER]` 10:51 «закрывай чат» · «в новом продолжим»), контекст 84 %: церемонии пропущены
 > (проход судьи, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft. Ложных утверждений на месте не осталось (поправленное за чат:
 > «RepairXP — опыт за изготовление» — исправлено в карте игры и плане 09:55; «51420 — два предмета под одним номером» — исправлено в разведке и STATUS 09:34).
-> **NOW 2026-11-06 11:17 +03:00 — chat of 2026-11-06 (second), `/dayloop` (`[OWNER]` «работай автономно. Буду нужен - зови голосом»):** plan 45 step 4 DONE — the 17 boss rows
-> lose NOTHING: the live `SpawnDataTable` with the ORIGINAL Heritage holds BMNB's four recruitability fields and Heritage's races on 17 of 17 (new reader
-> `ConanExiles/_config/live-rows.lua`); the previous chat's «LOST» was false (file reading; EXP-0458) — the merge built from it is REVERTED (Heritage ships
-> unmodified). Control of step 1 (original Mines of Set): Mines of Set replaces WHOLE rows — the Grey One Mask merge is needed and stands. **The merge rule is the LATER
-> MOD's, judged live per pair** (by field: Heritage, Era of Trials' `*_Merge`; whole row: Mines of Set, EAA, Era of Trials' `*_Add` — in the same spawn table).
-> Then (2026-11-06 11:42 +03:00): BMNB → EAA, 7 boss rows — LOST → merged (21 `copyprop:` in `DT_EAA_Spawntable`, EAA `krinikBuild`; `patch-mod-asset.py` taught FName suffixes),
-> live 7/7; Heritage → Era of Trials 2 NPCs — both kept; LegitReligious → Era of Trials 54 weapons — both kept; 5 Zathite dancer recipes — C → **interview #032
-> (the owner's choice, recommended: Era of Trials as is)**. Reports `2026-11-06_conan-boss-rows-heritage-bmnb-live.md`, `2026-11-06_conan-religion-and-eaa-rows-live.md`.
-> A probe crashed the game once (11:02, soft pointer into a UFunction — EXP-0459). Step 5 (Asghaard → TDI, 47 crafter rows) DONE 2026-11-06 11:49 +03:00 — both appends live 47/47. Step 8 (2026-11-06 12:10 +03:00): LegitReligious's stale whole copy of the game's stat table hid 51 rows of 3.0.1 (Derketo Acolyte set,
-> Anvil Keeper armour — no stat bonuses) → replaced by the game's version at every build (`vanilla:`, new in `patch-mod-asset.py`), live 51/51; the thrall
-> system blueprint (BMNB vs LBPR) — C → **interview #033**; buff icon, empty map — A. Step 7 DONE (2026-11-06 12:22 +03:00): 392 rows the log hides → one real pair (MSCasaDesFlores
-> Weapons → Nails, A in effect) — `hidden-row-pairs.py --index` + `mod-table-keys.py`. Storage Reach Expanded's stale console table → the game's + its 3 rows
-> (`vanilla+own:`), live 8/8. Step 9 (code) DONE — only our own hooks / keys and UE4SS's stock enablers
-> share targets (`lua-hook-pairs.py`); step 11 (mechanics) — only the ambush pair is doubled → the owner's #025. NEXT: plan 45 step 10 (resources — the A-B-A
-> flight, plan 34), 12 (other kinds); the owner's #025 (ambushes), #032 (Zath dancer recipes), #033 (thrall placement ghost). Owed: BMNB's own function (knock a boss out, recruit) in play.
-> (superseded) The previous chat's FIRST order — build the Heritage merge maps of pack `2a7ed07`: done 10:56, found needless, reverted (the maps removed from the pack).
-> Owner's open items: none waiting (perk gap 14 done, mask 3 710 done; Nexus follow-up letter drafted for him to send — ticket 276571).
+> **NOW 2026-11-06 12:46 +03:00 — chat of 2026-11-06 (second), `/dayloop` (`[OWNER]` «работай автономно. Буду нужен - зови голосом»): plan 45 — steps 4, 5, 7, 9 DONE; 1, 6, 8, 11 wait
+> for the owner; 10 is plan 34 / criterion 3.** What the build got: 7 EAA boss rows recruitable again (BMNB fields into `DT_EAA_Spawntable`); LegitReligious's stale
+> stat table → the game's (51 rows back: Derketo Acolyte, Anvil Keeper armour); Storage Reach Expanded's console table → the game's + its 3 commands; Heritage
+> back to unmodified (the previous chat's «LOST» was false). **The merge rule of a table row is the LATER mod's** (Heritage, Era of Trials `*_Merge` — by field;
+> Mines of Set, EAA, Era of Trials `*_Add` — whole row): judge every pair LIVE by `ConanExiles/_config/live-rows.lua` (EXP-0458). New tools: `live-rows.lua`,
+> `hidden-row-pairs.py` + `mod-table-keys.py`, `lua-hook-pairs.py`, `patch-mod-asset.py` `vanilla:` / `vanilla+own:` (FName suffixes fixed), `uaj rows`.
+> Guide kind 6 «a mod vs the game» (EXP-0460). Reports `testcases/reports/2026-11-06_conan-{boss-rows-heritage-bmnb-live,religion-and-eaa-rows-live,stale-stat-table-and-thrall-system}.md`;
+> the judge pass: VERIFIED WITH CAVEATS (caveats fixed). KAIF #194 (refresh hooks from a sibling cwd) filed and patched locally.
+> **Owner's open items (called by voice in this chat; #032, #033 marked shown):** #025 ambushes (Night Terrors + PvE Plus Ambush), #032 the Zathite dancer recipes (LegitReligious vs Era of Trials),
+> #033 the boss thrall placement ghost (BMNB vs LBPR). Owed by the agent: BMNB's own function in play (knock a boss out, recruit); bug 82 — the next step is
+> written in the bug. Nexus follow-up letter — drafted for the owner (ticket 276571).
 > **NOW 2026-11-06 09:05 +03:00 — chat of 2026-11-06, `[OWNER]` «продолжаем делать сборку Конана 1.0.0»:** DONE in one kit build + one run (pack `1dfd312`, report
 > `testcases/reports/2026-11-06_conan-interaction-prompts-perks-enemy-bar.md`): 🔧 bug 83 — all five interaction prompts like the corpse strip (I1–I4, P1 pass; the
 > owner's eye — review folder 65); 🔧 bug 64 item 12a — the enemy bar 4 units over its skull (E1; folder 66); ✅ the perk gap — 22 cut the last perk (the column does
