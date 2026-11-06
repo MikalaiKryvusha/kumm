@@ -49,7 +49,9 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   game most likely takes them by its gathering of instanced meshes (`Gathering_v2/ItemNameToTemplateID` by the mesh name). NEXT: at that egg, call the same
   probe the plate uses with this component (or the game's interaction trace) and see what it answers; then widen the plate's question to instanced meshes
   of such actors. Remote notes: `funcs` / `dump` by the instance name answered nothing; components through `K2_GetComponentsByClass` — an empty list (the
-  Lua conversion of the returned array — to look at).
+  Lua conversion of the returned array — to look at). Note: the plate already asks the game's OWN probe — `PickupGatheringOneInstance`, the call of
+  `FunCombat_PlayerController:UpdateHighlightTarget` (bugs/77) — so if E takes these eggs, `UpdateHighlightTarget` reaches them by ANOTHER branch: read its
+  other calls in the bytecode trace of bug 77 (`kismet-trace.py`) and ask that one too.
 
 ## Study (next)
 
