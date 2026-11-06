@@ -747,7 +747,10 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
 - Stand: `exec MakeMeAdmin` + `exec SpawnItem 25002 1` (`XX_Barkeeper Thrall Item`, row `Tavern_Barkeeper`; 147 `ThrallItem` rows in `ItemTable`, field
   `SpawnTemplateID`) → the instance `ThrallItem_…` in `BackpackInventory` → `item:OnUseItem(hero, controller)` = the player's «use»: placement starts, the ghost stands
   where the camera looks (open walkable ground — a Kappa in front hid it). Tool: `ConanExiles/_config/thrall-ghost-probe.lua` (modes list · use · hook · seen · stop).
-- What NOT to do: `StartMovingThrall(<hostile NPC>)` crashed the game (access violation 0x10, 13:59); reading `PlaceableThrallActor` / `CurrentThrallBrushClass` from Lua
+- A thrall the player owns comes only through the wheel of pain: `BasePlayerChar_C:StartThrallifyingPrisoner(ThrallConverter: Actor)` → a `ThrallItem` in the
+  wheel's inventory. `FindOrSetupThrallComponent(npc, ThrallInfo)` returns a component but does NOT make the NPC the player's thrall.
+- What NOT to do: `StartMovingThrall(<hostile NPC>)` crashed the game (access violation 0x10, 13:59; again 16:56 after `FindOrSetupThrallComponent`, and the same
+  with the original LBPR pak — a call on an NPC the player does not own); reading `PlaceableThrallActor` / `CurrentThrallBrushClass` from Lua
   preceded a crash (0x242, 14:08); the remote refuses `FindAllOf(<…Component>)` (it crashed the game before). `RegisterHook` on `Actor:SetActorScale3D` does not see
   BP→native calls; the hook on the BP `ShowThrallPlaceable` fires once per use (after the body) but its return value is not readable in Lua.
 - The ghost actor is not a `Character`/`Pawn` and was not found by class name; its scale was not read as a number (G3 judged by a frame).
