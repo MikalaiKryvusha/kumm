@@ -15,6 +15,11 @@ deployed by `Deploy-ModPack.ps1` through the manifest's `engineIni` field.
 `testcases/reports/2026-11-06_conan-quickwin-chaos-queue.md`. Read at the same time (Constructor values): `p.MaxPayloadSize` 100000, `r.GPUScene.ParallelUpdate`
 2048, `r.Nanite.Streaming.NumInitialRootPages` 2048, `r.RHICmd.ParallelTranslate.Enable` true.
 
+## Engine.ini — the sun step and the shadow resolution (bug 67, 2026-11-06 20:37 +03:00, interim until the owner's eye)
+
+`DynamicSky.SolarUpdateAngleDelta` 2.0 → **0.25** (the light turns every ~2.3 s; measured as calm as 2.0); `r.Shadow.Virtual.ResolutionLodBiasDirectional[Moving]`
+−1.0 → **−1.5** = the game's own Cine value (our −1.0 made the shadows coarser). Report `testcases/reports/2026-11-06_conan-palm-shadow-sun-step.md`.
+
 ## Section 1 — blood on the ground lies 5 minutes (W28, DONE 2026-10-30 12:45)
 
 - The game: a weapon hit (`BP_CollisionComponent.DoHandleHitFeedback`, attacker side) → `SpawnDecalAtLocation(M_blood_ground_decal, …, LifeSpan 3.0)`

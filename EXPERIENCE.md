@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0470 · 2026-11-06 · ❌ · #capture #hdr #video #measurement #conan
+class: capture-on-hdr-desktop
+mechanized: none — HOUSE_RULES rule 4 names `hdr.ps1 off` for clips, the ddagrab path skipped it
+**Lesson:** a desktop capture (`ffmpeg ddagrab`) of the HDR desktop is overexposed in SDR — the owner rejected the whole review folder («снял видео с
+пересветом») and the shadow metric taken from those clips was void. Before ANY screen video: `powershell -File SvarogsDream/tools/hdr.ps1 off`, a test frame
+looked at, then record; HDR back after.
+
 ### EXP-0469 · 2026-11-06 · ❌ · #conan #stand #shadows #measurement #time-of-day
 class: stand-without-fixed-time
 mechanized: none — HOUSE_RULES rule 11 already names «time of day» in the stand step; the shadow series skipped it

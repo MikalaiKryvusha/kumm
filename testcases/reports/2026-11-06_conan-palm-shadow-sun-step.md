@@ -50,5 +50,8 @@ script `ConanExiles/_config/shadow_flicker_metric.py`.
 
 ## 7. Verdict
 
-partial — the measurement points to 0.1–0.25 + bias −1.5; the build is not changed until the owner's eye on the clips (taste class) and a live look at
+**INVALID (2026-11-06 20:37, the owner: «Вся папка забракована - ты снял видео с пересветом»):** the desktop was in HDR and the ddagrab capture is
+overexposed — the sand clips, the shadow contrast is lost, the metric is not trustworthy; with the unfixed time of day (finding 4) the series proves nothing.
+The interim ini change was reverted before deploy; review folder 68 removed. Re-run: `hdr.ps1 off` before recording (HOUSE_RULES rule 4), `SetTimeOfDay`
+before each clip. Was: partial — the measurement points to 0.1–0.25 + bias −1.5; the build is not changed until the owner's eye on the clips (taste class) and a live look at
 the step.
