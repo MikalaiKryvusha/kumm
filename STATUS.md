@@ -127,9 +127,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> ⚠️ **ЧАТ 2026-11-06 ЗАКРЫТ ПРИНУДИТЕЛЬНО 2026-11-06 10:52 +03:00 по слову владельца** (`[OWNER]` 10:51 «закрывай чат» · «в новом продолжим»), контекст 84 %: церемонии пропущены
-> (проход судьи, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft. Ложных утверждений на месте не осталось (поправленное за чат:
-> «RepairXP — опыт за изготовление» — исправлено в карте игры и плане 09:55; «51420 — два предмета под одним номером» — исправлено в разведке и STATUS 09:34).
+> ✅ **Chat of 2026-11-06 (second) soft-closed ≈ 2026-11-06 13:1x +03:00 at 85 %:** the previous chat's skipped ceremonies paid — judge pass (VERIFIED WITH CAVEATS, fixed), STATUS trim, closing lints (attribution OK; experience-lint: 2 old findings EXP-0455 and an earlier one without a mechanization field — debt), engine syntax OK; README unchanged (the engine was not touched). Standing falsehoods corrected in place: Heritage «LOST» (plan 45 / register / notes), the merge rule «per table», bug 82 «plate hidden».
 > **NOW 2026-11-06 12:46 +03:00 — chat of 2026-11-06 (second), `/dayloop` (`[OWNER]` «работай автономно. Буду нужен - зови голосом»): plan 45 — steps 4, 5, 7, 9 DONE; 1, 6, 8, 11 wait
 > for the owner; 10 is plan 34 / criterion 3.** What the build got: 7 EAA boss rows recruitable again (BMNB fields into `DT_EAA_Spawntable`); LegitReligious's stale
 > stat table → the game's (51 rows back: Derketo Acolyte, Anvil Keeper armour); Storage Reach Expanded's console table → the game's + its 3 commands; Heritage

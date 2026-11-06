@@ -93,6 +93,7 @@
 
 ### EXP-0460 · 2026-11-06 · ❌→✅ · #conan #mods #stale-copy #tables
 class: mod-ships-stale-vanilla-table
+mechanized: `patch-mod-asset.py` `vanilla:` / `vanilla+own:` (the fix) and the guide's kind 6 detector row
 **Context:** plan 45 step 8 — a mod that ships a VANILLA table path whole (LegitReligious `ItemStatModificationTable`, Storage Reach Expanded
 `CustomConsoleCommandsDataTable`).
 **Result:** ❌ both were copies from an older game: identical values, the newer 3.0.1 rows missing (51 stat rows — Derketo Acolyte, Anvil Keeper armour without
@@ -107,6 +108,7 @@ before calling it the mod's change; a copy with no own rows is pure harm.
 
 ### EXP-0459 · 2026-11-06 · ❌ · #conan #ue4ss #remote #crash #soft-pointer
 class: ue4ss-opaque-userdata-into-ufunction
+mechanized: `_config/live-rows.lua` reads every field as text by the table exporter — no userdata reaches a UFunction
 **Context:** reading a data table's `TSoftClassPtr` field (`NPCClass` of `SpawnDataTable`) live through the remote; UE4SS returns it as an opaque
 `TSoftObjectPtrUserdata` (no methods, no fields).
 **Tried / did:** passed that userdata to `Default__KismetSystemLibrary:Conv_SoftClassReferenceToString`.
@@ -120,6 +122,7 @@ and a name only.   → link: `plans/45_conan_mod_reconciliation_all.md` step 4
 
 ### EXP-0458 · 2026-11-06 · ❌ · #conan #tables #reconciliation #claim
 class: file-reading-claimed-as-live-outcome
+mechanized: `row-diff.py` prints «decide live (live-rows.lua)» instead of an outcome for a winner-keeps-vanilla field
 **Context:** plan 45 step 4 — `row-diff.py` over the mods' FILES called BMNB's recruitability fields «B — LOST» on 17 boss rows under Heritage; the whole
 merge (55 `copyprop:` lines, a KRINIK MODIFIED pak) was built on it.
 **Result:** ❌ — the live table (remote, original Heritage, 2026-11-06 11:01–11:07) holds BMNB's four recruitability fields on 17 of 17 rows: `SpawnDataTable`
