@@ -32,7 +32,8 @@ Each group by the guide: read original + both sides → classify per field → r
 - [x] 2. **DONE 2026-11-06 10:19 +03:00 — outcome A** (the rows sit in the shared `Xevyr_Shared` tables every Xevyr mod ships, identical; all 26 shared Xevyr files identical
       across the four containers — `REGISTER.md`). Xevyr's shared UI rows `XCS_Panel`, `Xev_MouseInteraction` (`DT_UIModuleTable`) — ProximityParty → Simple_Minimap → LLHighlight → AlMerayah_Reborn
       (2 rows; likely A).
-- [ ] 3. Werewolf / werehyena harvest loot (`Gathering_v2/LootTable_Resource`, 8 rows) — ResourceStimulusPackage → EnhancedArmoryAndArsenal.
+- [x] 3. **DONE 2026-11-06 10:22 +03:00 — outcome A** (RSP's 8 rows equal the game's; only EAA, the winner, changes them; `row-diff.py` now knows the load order — a loser's
+      change under a winner that keeps the original is reported «B — LOST»). Werewolf / werehyena harvest loot (`Gathering_v2/LootTable_Resource`, 8 rows) — ResourceStimulusPackage → EnhancedArmoryAndArsenal.
 - [ ] 4. Boss / elite spawns (`SpawnTable/SpawnDataTable`, 24 rows) — BossesMyNewBesties → Heritage (17), → EnhancedArmoryAndArsenal (7); Heritage → EraOfTrials
       (2 dialogue NPCs).
 - [ ] 5. Armourer templates (`ProfessionTemplateDataTable`, 47 rows) — Asghaard_Ancient_Civilization → TDI_LegendaryRepair.
