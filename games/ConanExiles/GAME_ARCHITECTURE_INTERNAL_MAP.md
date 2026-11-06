@@ -108,7 +108,9 @@ campfire) the game draws five sibling prompts from `/Game/UI/HUD/FloatingNames/`
 (a thrall: name, title, owner, state), `W_DBNORevive` (a downed ally: «Revive» / «Revive and Follow Me»). One shape for all: root Overlay → SizeBox (centre,
 centre) → Border `Container` (the dark backing, brush colour alpha 0.6 in vanilla) → VerticalBox (padding top/bottom 12) → texts and the shared
 `W_ActionTutorial`. `W_OnScreenInfoContainer` has an empty designer tree (it switches the modules by name). None of the build's paks overrides them
-(`mod-overrides.py` over the game's Mods, 2026-11-06).
+(`mod-overrides.py` over the game's Mods, 2026-11-06). Stand (bug 83): a talkable NPC by the oasis — `BP_HumanoidDialogueNPC_C` «Поборник Внешней тьмы»
+(take the NEAREST: several live in the world, one 4.5 km off); the prompt shows only within ≈ 3 m — hero `K2_TeleportTo` 2 m off, `SetControlRotation` toward
+it, a real Shift tap and the game held in front; any of the five prompts by code — `_config/info-open.lua` (`_G.__io_w`, `_G.__io_actor`, read-back by `_G.__io_read`).
 Окно быстрого лута `W_QuickLootPanel`: сетка `InventoryGridView` (слот `VerticalBox_1.VerticalBoxSlot_2`, отступы 10) и внизу
 `WidgetSwitcherTooltips` — ряд навигации (индекс 0, при открытии) и ряд действий с предметом (индекс 1, после выбора колесом); переключатель
 меряется по активному ряду, и окно меняло ширину при прокрутке (2026-10-28). Замер 22:05 (пульт, ширина по содержимому, единицы UMG): ряд

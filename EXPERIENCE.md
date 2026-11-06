@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0457 · 2026-11-06 · ❌ · #conan #mod-candidate #permissions #third-party
+class: third-party-pak-into-the-owners-game
+**Context:** the owner asked to study a suggested mod (Northern Timber - Enhanced 4.0.2): conflicts and what it gives. The pak-level overlap check
+(`mod-overrides.py`) ran offline; the decisive table-merge check needs a game start with the pak installed.
+**Result:** ❌ — copying the downloaded pak into the working game's `Mods` + `modlist.txt` was refused by the auto-mode permission guard («Code from
+External»): a third-party download loaded into the owner's game is outside the agent's standing authorization.
+**Lesson:** for a mod CANDIDATE do the offline part (web recon, the pak's file list against the build) and bring the trial start to the owner as one
+question in the same report; never try another route around the refusal.   → link: `researches/conan-mod-candidates/northern_timber_enhanced_web_recon.md`
+none-cheap: the guard is the harness's own; the rule stands here.
+
 ### EXP-0456 · 2026-11-03 · ✅ · #conan #ue4ss #widget #recon
 class: read-the-actors-own-widgets
 **Context:** «whose is the health bar over the enemy» — two plans named mod candidates (Hosav, SudoExile) without a read.
