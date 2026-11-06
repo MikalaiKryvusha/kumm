@@ -73,6 +73,14 @@ The owner: «клик выполнен, видуального переключ�
   the native switch removes them, so the switch path itself must change (the next fork: intercept the carousel's activation so our Lua shows/hides kept
   pages instead of the module controller removing/adding them — recon of `GUIModuleController` deactivation and whether `IsPersistent` windows can be
   kept in the viewport collapsed).
+- **The decisive test (2026-11-06 23:45 +03:00, background game, kept windows; `hubswitch/readd-test.lua`, `collapse-test.lua`):** the panel re-creation
+  (`BP_Handle*PanelWidgetCreated`) is triggered by the MODULE ACTIVATION, not by a plain `AddToViewport` (0 calls); a re-added page still fills its
+  grids on Construct (67–93 births) and on its first show (25). **A page that STAYS in the viewport and is only Collapsed (1) / shown (4): 0 births on every
+  later show (3 cycles)** — it appears complete at once. So the owner's lazy build works as: each page built once (added, shown at RenderOpacity 0 until no
+  births, then collapsed), kept IN the viewport; a tab switch = collapse one, show the other. The open fork: taking the switch from the module controller —
+  the native `ButtonPressed` → `SetCarouselIndex` (and Q/E) still deactivates/activates modules (remove/add + panel rebuild); and other mods listen to the
+  module events (`XCS_Panel`, EAA / EoT / Accessory injections on `CharacterInventory`). Recon next: what the native switch does to a page that is already
+  in the viewport and visible; whether the module events can be kept while our layer shows the kept pages.
 - **The pages' lifetime — decided by measurement (`[OWNER]` 2026-11-06 23:18 +03:00 verbatim):** «можно было бы до выхода из мира держать. Вряд ли они будут много ОЗУ
   занимать. А вообще, нужно измерять. Может есть смысл их убирать при закрытии хаба, и пересоздавать вновь лениво на следующем открытии» → acceptance step:
   the game's working set (private bytes) with the hub closed — before the first open, with all 9 pages kept, after 5 open/close cycles (no growth = no
