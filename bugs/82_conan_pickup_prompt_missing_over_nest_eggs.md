@@ -73,6 +73,15 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   `strip_on_screen()` (a remembered `FloatingNames` strip `IsInViewport` + `IsVisible` — the bug-80 rule «yield to the game's own strip»). NEXT at the G1 stand:
   read those two values in that same second (most likely suspect — a `FloatingNames` strip of the nest / a nearby corpse counted as «on screen» though not
   seen in the frame); then fix the gating by the cause, not by an exception for eggs.
+- **2026-11-06 14:24 +03:00 — the real E case (dayloop, background path, `mouse-seq.ps1 -Seq "wait:400,kdown:E,wait:90,kup:E,wait:1500"`):** stand as above
+  (`SM_KappaEggs_North_Camp_12`, egg 0 at (−89505, 232442, −20170) this time, hero 150 cm west, camera pitch −71.5): probe **true**; the plate's log «плашка «E Взять»
+  в прицеле» at 14:23:00; the 4K frame of the same minute shows NO plate (`egg-before.jpg`, session scratchpad). Real E → eggs whole **5 → 5** (instance scales), and
+  the hero's WATER went 0 % → 30 % (frame `egg-after.jpg`: «30 % (05:57)») — the E press DRANK: the nest stands at the water's edge and the game's own E took the
+  water, not the egg. Variant 2 (probe re-aimed from the current camera) — probe false; variant 3 (hero 150 cm east of the egg) — probe false. **New reading, a
+  hypothesis:** at this nest the game's E prefers water over the egg while our plate says «E Взять» — the plate promises an action the press does not do. Next: a
+  nest away from water (the 70 m Kappa eggs of 12:45 — check which `SM_KappaEggs_*` are dry), the same E; and read what the game's E handler prefers
+  (`PickupGatheringOneInstance` vs the water-drink interaction) — if water wins whenever both are in reach, the plate must ask the same priority (bug 77's rule: the
+  plate asks the game, never guesses). Not closed.
 
 ## Study (next)
 
