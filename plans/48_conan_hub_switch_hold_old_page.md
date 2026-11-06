@@ -121,6 +121,21 @@ Rules: every adapter call is timed (`os.clock`) and logged once a minute with th
 Build order: the page the hub opens on first, then the others nearest first, alternating right and left, one per step. Open fork: how the controller
 takes the switch from the module controller (tab clicks `ButtonPressed`, Q/E input) — recon next.
 
+## Inventory — every mod UI embedded in the hub today (2026-11-06, from the game map and the mod notes; the adapters to write)
+
+| # | Mod | Page | What it embeds | Today's trigger | Our patches today | Adapter call |
+|---|---|---|---|---|---|---|
+| 1 | Era of Trials | Снаряжение, Параметры | magic-school icons right of the paperdoll; stats-window rows | `EoT_AC_InterfaceInjectorComponent` on `SignalActivated` of `CharacterInventory` / `CharacterStatsWindow` / carousel → `Delay 0.1` | 1st Delay → 1e9 (KRINIK MODIFIED); `krinik_pause_in_menu` calls `ExecuteUbergraph(15)` on `W_UICharacterDisplay_C` birth | `on_built(CharacterInventory)` → the injector's own code path, once |
+| 2 | Enhanced Armory and Arsenal | Снаряжение | the sword emblem (`Button_Axe`) and its gem indicator | `AC_EAA_Inventorybutton` on `CharacterInventory.SignalActivated` → `Delay 1.0` → resume 286 | Delay → 1e9; resume 286 called by our pause section | `on_built` → create once; `on_shown` → `UpdateIndicator` |
+| 3 | Accessory System (the EAA copy in `ModsShared`) | Снаряжение | «Аксессуары» button under the boots | `AC_acs_AccessorySystem_Persistent` `Delay 0.2` | Delay → 0.0015 (its resume point must not be called from outside — EXP-0371) | `on_built` |
+| 4 | Xevyr shared (`XCS_Panel`) | Снаряжение | side tab «Моды Xevyr» | its own module opens with «Снаряжение», window re-created per entry | collapsed by our `Construct` hook (`krinik_mods_button`) | none (stays collapsed) or `on_built` collapse once |
+| 5 | Exiles Fishing (JaarFishing) | Снаряжение bottom bar | «Настройка рыбалки» button | `BPC_EFT_Tuning.Graft` (0.3 s poll — patched off) | polls off; Graft no longer called — entry in our «Настройки модов» list | none |
+| 6 | UIMod Hosav | Снаряжение bottom bar | «Настройки интерфейса» button (a viewport layer) | `Delay 3.0` + `IsModuleActive` poll — patched off | collapsed on every inventory open by our pause section | none |
+| 7 | Simple Minimap | Карта | `SM_UI_CustomMapOverlay`, `SM_UI_MapHelper` (markers, the hint row) | born with the map page (66 births per show) | `SM_UI_MapHelper` slot moved (KRINIK MODIFIED) | `on_built(FullscreenMap)` |
+| 8 | KrinikConanUI (ours) | Снаряжение bottom bar | «Настройки модов» button + its list | `XCS_Panel` true (a game module event) | — | `on_built(CharacterInventory)` — the first adapter, written by us as the API's reference |
+
+Also on every switch the hub's bottom bar `WBP_ButtonBar_C` is re-created (vanilla) — the controller keeps one per page.
+
 ## Steps
 
 1. [ ] **Recon (remote, read-only):** at a switch, in order with timestamps — the old window's fate (removed from the viewport? destroyed? still valid one
