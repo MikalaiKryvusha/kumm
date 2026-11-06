@@ -41,3 +41,6 @@ PLAYER owns is needed — next: the thrall conversion path by direct calls (the 
 **G4 recon ⟦NOW⟧ (read-only):** `BasePlayerChar_C:StartThrallifyingPrisoner(ThrallConverter: Actor)` — the wheel of pain is an Actor that turns a prisoner into a thrall
 ITEM in its inventory (`CraftingQueue` handles the thrall owners / crafting); next: the wheel actor class and the function that creates the `ThrallItem` from a character
 (`ThrallItem:SetupThrallFromItem`, its `ThrallCharLayout`) — then place that item (the barkeeper route `OnUseItem`) with and without the graft.
+
+**G4 recon, a dead end ⟦NOW⟧:** `retoc list <game .utoc>` gives chunk ids WITHOUT paths (no directory index in 3.0.1 containers) — the wheel class is not found offline
+that way; next: in the game, the wheel's class by `StaticFindObject` of candidate names, or the asset registry.
