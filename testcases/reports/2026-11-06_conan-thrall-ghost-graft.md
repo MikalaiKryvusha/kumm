@@ -47,6 +47,8 @@ Conan Exiles 3.0.1, `D:\Games\Conan Exiles 3.0.1`, the build's mods; edited `No_
 5. The ghost is built from the thrall ITEM's character layout: changing `ThrallInfo.SpawnTableId` to `Aesir_Boss` gives the same ghost (frames identical) — a boss ghost
    needs a recruited boss item.
 
+6. G4 control run 2026-11-06 15:34-15:37 +03:00: thrall item template 505 (row Aesir_Boss) has the same ghost height with the original LBPR pak and with the graft (sheet `2026-11-06_conan-thrall-ghost-g4-sheet.webp` next to this report) - inconclusive, a boss-TAGGED ghost is still needed. The grafted pak restored after (md5 70e6d4f5...).
+
 ## 6. Traces
 
 Frames `scratchpad/thrall/g2-Tavern_Barkeeper.jpg`, `g2-Aesir_Boss.jpg` (session scratchpad); crash folders
