@@ -64,6 +64,15 @@ The owner: «клик выполнен, видуального переключ�
   Спутники 9; Параметры 0. `WBP_ButtonBar_C` (the hub's bottom bar) is born on EVERY switch. The windows themselves are not reborn. NEXT (no game needed):
   read the open handler of the heavy pages (`W_FeatWindow`, `CraftingGUI`, `W_FullscreenMap`, `W_Attributes`) — what event rebuilds the grid/list
   (`SignalOpened` / `SendWindowOpenedNotifications` of `WindowRoot`, or the page's own Construct-like event) — by `kismet-trace.py` on the extracted assets.
+- **Who rebuilds (2026-11-06 23:40 +03:00, `hubswitch/page-calls-probe.lua`, every UFunction of `CraftingGUI_C` hooked, windows kept):** leaving «Снаряжение» runs its
+  `Destruct` (the kept window is still REMOVED from the viewport); returning runs `BP_HandleCenterPanelWidgetCreated`, `BP_HandleRightPanelWidgetCreated`,
+  `HandleShortcutBarActivated`, `UpdateTutorialUnderlayVisibility` — the NATIVE window code creates the centre and right panels anew on every show and only
+  notifies the blueprint. So the rebuild is the engine's C++ reaction to remove-from-viewport → add-to-viewport (Destruct → Construct), not a blueprint
+  we could patch. (The probe found no class at `/Game/UI/Inventory/W_FeatWindow.W_FeatWindow_C` / `…/W_Attributes_C` — their real paths to read.)
+  Consequence for the owner's lazy build: a built page must NEVER leave the viewport — hidden pages stay added and are only collapsed / made transparent;
+  the native switch removes them, so the switch path itself must change (the next fork: intercept the carousel's activation so our Lua shows/hides kept
+  pages instead of the module controller removing/adding them — recon of `GUIModuleController` deactivation and whether `IsPersistent` windows can be
+  kept in the viewport collapsed).
 - **The pages' lifetime — decided by measurement (`[OWNER]` 2026-11-06 23:18 +03:00 verbatim):** «можно было бы до выхода из мира держать. Вряд ли они будут много ОЗУ
   занимать. А вообще, нужно измерять. Может есть смысл их убирать при закрытии хаба, и пересоздавать вновь лениво на следующем открытии» → acceptance step:
   the game's working set (private bytes) with the hub closed — before the first open, with all 9 pages kept, after 5 open/close cycles (no growth = no
