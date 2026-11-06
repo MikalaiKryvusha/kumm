@@ -175,54 +175,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **Owner's note 2026-11-06 08:48 +03:00:** `[OWNER]` «еще нам предложили взять в сборку мод Northern Timber - Enhanced 4.0.2» · «нужно изучить его потенциальную конфликтность, и что он
 > нам даст» — web recon by a helper → `researches/conan-mod-candidates/northern_timber_enhanced_web_recon.md`; then the pak-level check (`mod-overrides.py`
 > against the build's Mods) by the main session; the verdict to the owner with the conflicts table (memory: advice on a mod = its conflict study).
-> ⚠️ **ЧАТ cb012770 ЗАКРЫТ ПРИНУДИТЕЛЬНО 2026-11-03 23:34 +03:00 на 85 %:** церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) — долг платит первый
-> /end-chat-soft. Ложных утверждений на месте не осталось. Сделано в чате: рамка добычи на F скрыта (баг 75 — долг «сделать красиво»), гиря HUD без тени, ModControlPanel
-> убрана (окно LBPR в «Прочее»), окно добычи не просвечивает «Путь» (баг 81), «E Взять» уступает плашке трупа (баг 80), колесо над окном — проверено, полоски
-> врагов — принято владельцем; игра закрыта, замок снят; паки и KUMM запушены.
-> **NEXT CHAT, FIRST (chat cb012770, 2026-11-03 23:25 +03:00):** (0) bug 83 — the NPC talk prompt and every interaction strip like the corpse strip (left, 0.70, backing 0.60; `[OWNER]` 23:30 «я просил все виджеты интеракици - влево, меньше, прозрачнее фон»); (1) OWNER'S DEBT — the perk gap 22 (`[OWNER]` 23:50 «давай 22 поставим»; `PERK_TEXT_PAD` already 22 in kit-conanui-edit.py): kit edit run + kit build + deploy + a «Сила» frame — CHECK the column with 22 on «Сила»: does it scroll or clip the last perks (`[OWNER]` 23:50 «там же можно скролить?» — not known); then the guide line
-> (bug 64 item 46); (2) bug 82 — load a region with nests (ostrich lands / swamp), find a nest egg, read what it is; (3) bug 80 — one real E over a corpse in a
-> bush; (4) bug 75 debt — the pretty, proper rim fix; (4a) bug 64 item 12a — the enemy bar a little higher over its skull (`[OWNER]` 23:29, a kit override of `W_EnemyHealthbar`); (5) the rest of the guide's 1.0.0 list (all checked open against bug 64). Nexus texts — not now.
-> Stand recipe for the quick-loot window: `loot-stand.sh` → `quiet-stand.lua` → `loot-aim.sh` (hits in 2–10 steps) → `loot-take-clip.sh`.
-> **NOW 2026-11-03 21:54 +03:00 — chat cb012770, `[OWNER]` 21:02 «делаем сборку конана 1.0.0»:** working the 1.0.0 list below in order.
-> **CHAT ce994c74 CLOSED 2026-11-03 20:57 +03:00 (soft, `[OWNER]` 20:55 «работай автономно 10 минут. Затем начинай закрытие этого чата, в новом продолжим»).
-> FIRST in the next chat, in order:**
-> 1. 🟡 **The quick-loot rim jump on F (bug 75) — HIDDEN 2026-11-03 21:54 +03:00** (new chat): the new section `krinik_loot_rim` of KrinikConanUI hides the other cells'
->    rims for 350 ms on a take (the owner's way, 21:26 «можно … просто её делать невидимой на время мерцания?»); B2 control (the jump is the game's), B3–B5 pass
->    after a normal start — report `testcases/reports/2026-11-03_conan-quick-loot-rim-hold.md`; the guide line moved from «Известные проблемы» to KrinikConanUI.
->    Live demo 22:18 — `[OWNER]` «вижу, починила, хотя и некрасиво» · «пока сойдёт»: DEBT `[OWNER]` 22:18 «там долг на будущее - сделать красиво» · «починить правильно» (the ≈ 0.3–0.4 s with no rim; bug 75 «verdict»).
-> 2. ✅ **Aiming by the game's own answer** — `_config/loot-stand.sh` (hero 1.5 m) + `_config/loot-aim.sh` hit on five stands in a row (EXP-0454).
-> 3. ✅ The launcher's grey «Установить сборку» — DONE 2026-11-03 22:00 +03:00 (pack `068b935`, report `2026-11-03_conan-launcher-install-button-gold.md`; the box wording
->    waits for the owner's eye). ✅ **HUD icon shadows — DONE 2026-11-03 22:47 +03:00** (packs `d569d13`, `9ba2dbc`): the weight icon was the game's buff texture with a soft
->    black shadow, stacked twice by Hosav; our 256 px icon in Hosav's style overrides it — seen in game (W1, W2), the look waits for the owner's eye.
->    ✅ **ModControlPanel out of the build** (`[AI]` by mandate, `[OWNER]` 22:39 «аналогичный вопрос про автономность работы»): LBPR 1.0.5 never plugged into it;
->    LBPR's own window is in «Настройки модов → Прочее» (M1, M2; the real click M3 not run). Report `2026-11-03_conan-hud-weight-icon-and-mcp.md`.
->    ✅ **Bug 81 — the quick-loot window no longer lets the journey tracker's text through** (pack `a23c9a6`, way A — the tracker not drawn while the
->    window shows; seen 22:56). 🔧 **Bug 80 — over a corpse in a bush only the corpse strip** (pack `4a739c1`, guide `1bb38f8`): our «E Взять» off while the
->    strip is on screen (seen 23:05 by a code-opened strip over a bush); owed — one REAL E over a corpse lying in a bush. ✅ The quick-loot window keeps its edges under the wheel — a REAL wheel seen 2026-11-03 23:18 +03:00 (plan 36 W10a, bug 64
->    item 45 — fixed 2026-10-30, the guide listed it as open by mistake; guide `1d6a62c`). 🔬 Bug 82 (no «E Взять» over nest eggs): snake eggs work, nest eggs
->    are another object kind — the next step is a real nest under the crosshair. Next: the rest of the guide's 1.0.0 list (all checked open against bug 64:
->    items 4, 6, 12, 13, 15, 17, 23, 27, 46). Nexus texts — NOT NOW (`[OWNER]` 23:13 «пока не думай про описания для нексуса»).
-> 4. Nexus: ticket 276571 — look at the Files tab of mod 65 for the quarantine line.
-> Done in this chat: the Nexus page checked (Adult — the owner's tags; the e-mail a live link; the quarantine request sent); the HUD blink in one phase
-> (report `2026-11-03_conan-hud-blink-one-bus.md`); bug 75 reproduced and its cause read; the game map corrected (when the quick-loot window opens; the Shift
-> tap wakes the idle camera); voice rule 13 rewritten («в общем», at a run's start); EXP-0451, EXP-0452.
-> **NOW 2026-11-03 19:51 +03:00 — work toward 1.0.0 resumed (`[OWNER]` 19:21 «Продолжим делать сборку? то, что отложено до 1.0.0?»); the list = the guide's chapter
-> «Известные проблемы и планы на 1.0.0» (`ConanExiles/docs/guide/guide-3.0.1.html`) + kit info paks of the four Lua mods + the waystone / city frames.**
-> - ✅ **Food, water and weight blink in ONE phase** (`[OWNER]` 19:41 «мерцают крассным в рассинхрон» · «одну шину»): `krinik_hud_blink` drives the limit too,
->   Hosav's animations stopped — S1–S3 pass, report `testcases/reports/2026-11-03_conan-hud-blink-one-bus.md`; the guide line updated (PDF — at the release).
-> - 🟡 bug 75 (the rim jump on F) — hidden in chat cb012770, the proper fix owed; the two 2026-11-03 evening blocks on it moved verbatim to the chronicle, entry 2026-11-03 21:55 +03:00.
-> - NEW owner remarks: (1) `[OWNER]` 20:14 «под иконкой перегруза тень слишком сильная, не такая, как под жаждой и голодом - там или легче или нет» · «Сделать
->   однотипно легко всем иконкам худа» — recon first (the weight icon's shadow: Hosav's image or our `Image_Weight_Blinking` paint); (2) seen by the agent 20:13:
->   the quick-loot window lies over the tutorial journal panel («Выживший — Потратьте очки характеристик») and that text shows through the window's grid — to file.
->   (3) ✅ the launcher's grey main button — DONE (item 3 above): the desktop shortcut leads to the launcher in the GAME root, where install.cmd never lies.
-> - Next on the list: no «E Взять» over nest eggs; enemy health bars over the enemies. «E Взять» beside the corpse strip over a corpse in a bush — TO FIX (`[OWNER]` 19:57 «над трупом в кустах - чинить» · «нужно ту плашку показывать, которая сработает … это нужно изучить»): bug 80 — the study first (a real E over a corpse in a bush; `_config/bush-corpse.lua`).
-> **NOW 2026-11-03 19:05 +03:00 — Nexus mod 65 IS PUBLISHED (16:40), but its only file is QUARANTINED** (Files tab: «quarantined by our automated safety checks»;
-> header «Virus scan — Some suspicious files»): the request to the Nexus support address is written —
-> `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_request.txt` — SENT by the owner 2026-11-03 19:10, ticket 276571 (auto-reply; support hours 09:00–17:00 GMT, extra details — a reply to that mail); Nexus names no review time — check the Files tab of mod 65 for the quarantine line; do not delete or replace the file meanwhile (help article 117).
-> The e-mail line of the description is a live `mailto:` link now (both halves; the source `nexus_full_description.bbcode` fixed too). The «Adult» mark:
-> RESOLVED — the owner removed the tags «Extreme violence» and «Sexualised» himself, the badge is gone (his frame 19:08).
-> Route details — `HOUSE_RULES_REFERENCE.md` §2, the Nexus row.
-> **The 0.9.0 release blocks of 2026-11-02 19:36 – 2026-11-03 15:09 and the 2026-11-02 chat blocks (03118042, aa2bfa46) — moved verbatim to the chronicle, entry 2026-11-03 20:56 +03:00.**
+> **The 2026-11-03 chat blocks (cb012770, ce994c74, the 1.0.0 resume of 19:51, the Nexus publication of 19:05) and the 0.9.0 release pointers — moved verbatim to the chronicle, entry 2026-11-06 12:34 +03:00.** Still open from them: nest eggs (bug 82), a real E over a corpse in a bush (bug 80), the rim on F done properly (bug 75), the rest of the guide's 1.0.0 list; Nexus — ticket 276571.
 > **Older pointer blocks (2026-10-26 … 2026-11-02: chat FIRST lists, the 1.0.0 orders, plan 35/36/34 queues, the measurement queue) — moved verbatim to the chronicle, entry 2026-11-03 20:58 +03:00 (second part).** The live backlog: the guide chapter «Известные проблемы и планы на 1.0.0», epics `plans/40_…` and `plans/41_…`, `plans/36_…` (W table), `plans/35_…`, `plans/34_…`; work trees `_paksview-3.0.1` (66 GB) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB) stay.
 
 ## Open bugs
