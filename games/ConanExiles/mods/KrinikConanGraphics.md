@@ -8,6 +8,13 @@
 **What it is.** A Lua mod (`ue4ss/Mods/KrinikConanGraphics`) + the build's optimized `Engine.ini` (distances, shadows, fog, DLSS, the sun step), the ini
 deployed by `Deploy-ModPack.ps1` through the manifest's `engineIni` field.
 
+## Engine.ini — the physics rebuild queue (2026-11-06 16:00 +03:00, Quick Win from OblivionRemasteredPerformanceFix)
+
+`p.Chaos.AccelerationStructureTimeSlicingMaxQueueSizeBeforeForce=100000` at the top of `[SystemSettings]` (Conan's default read live: 1000). A-B-A-B in one launch
+(batch `ConanExiles/_config/bench-batches/q6-chaos-queue.txt`): stutters ≥50 ms 80/77 → 53/60, CPU 16.43/16.26 → 15.93/16.08 ms; report
+`testcases/reports/2026-11-06_conan-quickwin-chaos-queue.md`. Read at the same time (Constructor values): `p.MaxPayloadSize` 100000, `r.GPUScene.ParallelUpdate`
+2048, `r.Nanite.Streaming.NumInitialRootPages` 2048, `r.RHICmd.ParallelTranslate.Enable` true.
+
 ## Section 1 — blood on the ground lies 5 minutes (W28, DONE 2026-10-30 12:45)
 
 - The game: a weapon hit (`BP_CollisionComponent.DoHandleHitFeedback`, attacker side) → `SpawnDecalAtLocation(M_blood_ground_decal, …, LifeSpan 3.0)`
