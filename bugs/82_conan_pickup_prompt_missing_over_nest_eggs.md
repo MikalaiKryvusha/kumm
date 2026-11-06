@@ -57,6 +57,13 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   `InteractableInterface`. The eggs blueprint implements NO interface (its names hold none) → if E takes these eggs, it is branch (1), the same probe — so the
   decisive case is AT the egg: the hero 1–2 m from `SM_KappaEggs_North_Camp_12` (−89380, 232461, −20150), the crosshair on an egg, the plate's probe answer
   and a real E (front path). If the probe says false and E takes the egg, the take is not `UpdateHighlightTarget` at all — read the E press handler next.
+- **2026-11-06 13:01 +03:00 — the decisive case run (G1):** hero teleported 150 cm from egg 0 of `SM_KappaEggs_North_Camp_12` (5 egg instances), view aimed by
+  `SetControlRotation` (`ConanExiles/_config/egg-stand.lua`, `egg-probe.lua` — run by `pult.sh "lua return dofile('…')"`, stand first, probe after ≥ 2 s): the plate's own probe,
+  called exactly as the plate calls it, answered **true twice** (camera→egg 439–448 cm, arm bonus 230, reach 90, radius 200). Yet the frame at that moment
+  (4K window capture) shows NO «E Взять» plate at the crosshair (the hero stood inside the nest's palm bush). So the probe sees the eggs, and the plate's own
+  gating hides it — read `krinik_pickup_prompt.lua` around the call (line ~207: what runs before `show(found)` — a timer not started in this state, a
+  distance or component-class filter, the bug-80 rule «off while the corpse strip is on screen») and re-run G1 with the plate's log on. A real E there —
+  not done yet (front path).
 
 ## Study (next)
 
