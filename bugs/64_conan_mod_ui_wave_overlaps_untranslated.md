@@ -97,6 +97,10 @@ visibility by the `XCS_Panel` event in `KrinikPauseGameInMenu` 0.7.0 (retry ≤4
   `[OWNER]` 2026-11-06 20:58 (watched the clips slowed 5× and 10× — `*_x5.mp4`, `*_x10.mp4` in folder 69): «там четко видно, как при переключении страниц
   хаба, они перекрывают друг друга, сливаются, где-то что-то раскрывается, куда-т прыгает - полный пиздец» → what to name per clip: (1) two pages drawn
   over each other / blended during the switch; (2) something expanding (a panel or list opening); (3) elements jumping position. Then the mod bisect.
+  `[OWNER]` 2026-11-06 20:59: «сраницы хаба можно а) в случайном порядке открывать, кликая по ним мышью, б) и мне показалось, что ты не все страницы хаба
+  прошёл» · «иногда появляются элементы спустя секунды, как открыл страницу очередную, например там, где герой стоит» → the next recording: (a) every tab
+  of the hub (count them first — the carousel's own list), opened in RANDOM order by a real mouse click on the tab (input.ps1 -Click; the game in front),
+  not only Next/Prev; (b) each clip long enough (≥ 4 s after the switch) to catch elements that appear SECONDS later, the hero's page («Снаряжение») first.
   **Run 2026-11-06 19:30 (case H1 of `TC_conan_music_recon_2026-11-06.md`), the reading WITHDRAWN:** tabs switched by `W_Carousel_C:Next/PrevCarouselWindow` (synthetic Q/E keys do
   not reach the game — three ways tried 18:10–18:15), 60 fps capture: the tab bar never changed after a switch, the bottom buttons stood still, the mod icons on
   «Снаряжение» present in every frame of the return. One variant only — the first open after the world entry and the owner's real keys are still to run
