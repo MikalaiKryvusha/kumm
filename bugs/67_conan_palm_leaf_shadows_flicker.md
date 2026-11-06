@@ -35,6 +35,11 @@ VSM guidance and shipped UE5 games with a moving sun and wind-swayed foliage (ca
 not reasoning; (2) the never-run discriminating run `r.Shadow.Virtual.Enable=0` under palms (VSM vs the temporal upscaler), 60 fps video; (3) the cause
 fix with the sun smooth again. Fixing: right after the KrinikConanMusic run of 2026-11-06 evening.
 
+**Recon and measurement 2026-11-06 19:40 +03:00:** the game separates the sun disk from the shadow light (`SolarUpdateAngleDelta` help); the web recon (Epic, Fortnite):
+the light's turn re-samples the pages — the cause is the rotation, not the re-draw. Measured at the oasis (report `testcases/reports/2026-11-06_conan-palm-shadow-sun-step.md`):
+0.003 flickers ≈ 2× more; 0.1 and 0.25 are as calm as 2.0 with steps 8–20× smaller; our bias −1.0 is coarser than the game's −1.5. Candidate fix:
+0.1 or 0.25 + bias −1.5 — clips for the owner's eye in review folder 68; the build unchanged until his word.
+
 ## Goal vector and acceptance
 
 Avoid: leaf shadows on sand under palms visibly jitter frame to frame. Done when the owner, standing under palms at 4K, says the shadows do
