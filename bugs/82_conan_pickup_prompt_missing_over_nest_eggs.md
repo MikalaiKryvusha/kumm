@@ -37,6 +37,13 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   loaded `StaticMeshActor`s / components whose mesh is `SM_Nest_*` / `SM_KappaNest` / `SM_*_nest*` (the nests are placeable meshes) — their positions give
   the stand; then the actor under the crosshair at that nest (a container or a harvestable) — its class decides the fix.
 
+- **2026-11-06 12:49 +03:00 — FOUND the nest eggs (the oasis save, read-only scan `nest_scan.lua`, actors only, class defaults skipped):** the eggs a hero takes with E are
+  `/Game/Items/GatheringResources/SM_KappaEggs_Blueprint.SM_KappaEggs_Blueprint_C` — a gathering-resource ACTOR (3 loaded, the nearest 70 m from the oasis
+  spawn), next to `SM_KappaNest` meshes (`StaticMeshActor` `SM_KappaEggs*` in `Gameplay_NPCs_Desert_SouthWest`). The 13 vulture nests (`SM_Nest_ostrich` mesh,
+  `Wildlife_split113`) are plain decoration. Our plate asks only the FOLIAGE probe (`PickupGatheringOneInstance`) — an actor of this class is outside its
+  question: that is the cause, most likely. NEXT: stand the hero at the 70 m Kappa eggs, read the actor's interaction (its functions — `funcs SM_KappaEggs_Blueprint_C`)
+  and what the game shows under the crosshair; then the plate asks the same question for this actor kind (an event, not polling — house rule 7).
+
 ## Study (next)
 
 1. Find eggs: over all `InstancedFoliageActor`s, the components whose mesh names an egg — their instances with `Scale3D` ≠ 0 (not taken), the nearest.
