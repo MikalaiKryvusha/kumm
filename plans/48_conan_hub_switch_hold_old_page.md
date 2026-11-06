@@ -39,6 +39,13 @@ The owner: «клик выполнен, видуального переключ�
   `AddToViewport(40)` + `SetVisibility(4)` is not seen, and setting `MaskOffset` on `Background:GetDynamicMaterial()` does not hold the backing. NEXT — read,
   not guess: after the re-add, the old window's visibility / parent / in-viewport / render opacity by the remote; which material instance the carousel's
   animation track drives (the track may create its own MID — then set the parameter on THAT one, or play the instant animation forward/reverse ourselves).
+- **The cause, not the symptom (`[OWNER]` 2026-11-06 23:05 +03:00 «а может нам подход изменить? Править именно то КАК игра собирает сраницы хаба. Не симптомы лечить, а
+  причины»):** the game DESTROYS a tab window when it is left and builds it again (100–300 widgets) on every visit — one instance at a time (remote count
+  22:59). Experiment 22:59 (run 8): `IsPersistent = true` on the 9 hub rows of `DT_UIModuleTable` by a live `dt:ForEachRow` edit at the MAIN MENU — no effect
+  (windows still destroyed, numbers as run 2): the flag is taken earlier, at the module registration. NEXT: the flag in the table from the start —
+  a native edit of the vanilla `DT_UIModuleTable` (the 9 rows `IsPersistent`, maybe `PreloadOnStartup`) by the mod-reconciliation guide (every mod merges rows
+  into this table — kind 6 risk), then the same run; if the pages stop rebuilding, the prototype is not needed.
+- Review folder 70 (`70_hub_dergaetsya_x15`): the four «Снаряжение» switches of run 7 slowed ×15 (`[OWNER]` 22:56 «покажи, что дергается, замедли в 15 раз»).
 - Measure tool: `scratchpad/hub_run.sh <tag>` + `hub_switches.py` (to move into the pack `_config/` with the build).
 
 ## Steps
