@@ -25,7 +25,8 @@ the pak (formerly KrinikLevelUncapped, a fork of MrSerji's Level 1000 — the ow
 | pak (since 2026-11-01) | `/Game/Mods/Mines_of_Set/Tables/Caverns_of_Set_Loot_Chest_Table` — the loot table the Caverns of Set chests import and the mod lost; built in step 3b from a copy of the vanilla `DT_LC_RelicHunter` (retoc-5.8 from `_paksview-3.0.1`, read `VER_UE5_8`, written with the 5.6 object version for the old retoc) | 12 rows from `_config/caverns_loot.py`; notes `CavernsOfSet.md` → The fix |
 
 Another mod that injects rows into these tables by its own controller (EAA writes row 7 of `DT_AttributeSystem`) still injects on top. Judged 2026-11-06 12:26 +03:00
-(plan 45 step 11): row 7 — this pak keeps the game's `RewardPerLevel` 1, EAA sets 2; nothing of ours is lost (A).
+(plan 45 step 11): row 7 — this pak keeps the game's `RewardPerLevel` 1, EAA sets 2; nothing of ours is lost (A). Row sets against 3.0.1 (2026-11-06 12:44 +03:00, `uaj rows`): `DT_AttributeSystem`, `DT_ExperienceSystemLevel`,
+`DT_FeatsPerLevel` — 10 000 rows each, all 60 game rows present (kind 6 «a mod vs the game» — clean).
 
 ## Version
 

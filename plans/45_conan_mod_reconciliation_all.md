@@ -83,7 +83,7 @@ Each group by the guide: read original + both sides → classify per field → r
       whole copy of `Items/ItemStatModificationTable` hid 51 rows of 3.0.1 → replaced by the game's version (`vanilla:`), live 51/51. Single-mod whole
       tables re-checked against 3.0.1 (2026-11-06 12:15 +03:00): `HairColorSelections` (MSCasaDesFlores Nails) — identical, A; `CustomConsoleCommandsDataTable`
       (StorageReachExpanded) — 5 game console commands missing, its own 3 kept → MERGED 2026-11-06 12:21 +03:00 (`vanilla+own:`), live 8/8; ours —
-      KrinikConanGameplay's `DT_AttributeSystem`, `DT_ExperienceSystemLevel`, `DT_FeatsPerLevel` (built by us from the 3.0.1 kit — check the row sets once). Closes when #033 is answered and the re-checks done.
+      KrinikConanGameplay's `DT_AttributeSystem`, `DT_ExperienceSystemLevel`, `DT_FeatsPerLevel` (built by us from the 3.0.1 kit — checked 2026-11-06 12:44 +03:00: each 10 000 rows, all 60 game rows present — the uncap, not a stale copy). Closes when #033 is answered and the re-checks done.
 - [x] 9. **Code:** every UE4SS `RegisterHook` target and `RegisterKeyBind` key in the build's Lua mods (ours and others'), and the blueprint mod controllers'
       overrides of the same game function — pairs listed. **DONE 2026-11-06 12:24 +03:00** (`ConanExiles/_config/lua-hook-pairs.py`): 11 hook targets, 2 shared (ours only;
       UE4SS's two stock enablers), 4 key binds, 1 shared (ours) — B, nothing to merge; blueprint overrides of one vanilla class — the thrall system (step 8).
