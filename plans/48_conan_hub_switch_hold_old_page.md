@@ -85,7 +85,13 @@ The owner: «клик выполнен, видуального переключ�
   контроллер хаба АДЕКВАТНЫЙ» · «и к нему попривязывав UI модов других авторов»** → the plan's direction: OUR hub controller (KrinikConanUI) owns the pages —
   built lazily once, kept in the viewport, switched by collapse/show in one frame; the other authors' hub UI (Era of Trials icons, EAA emblem and buttons, the
   Accessory System button, Xevyr's side tab, fishing) is bound to OUR controller's events (page built / page shown), not to the game's module signals and
-  their delays.
+  their delays. `[OWNER]` 2026-11-06 23:48 +03:00 (verbatim): «а встройки модов привязываю к нему напрямую. через интерфесы» · «но чтобы это работало быстро» → the binding
+  contract is an INTERFACE: one adapter per mod with the same calls (page built → embed its widgets; page shown; page hidden), called by our controller
+  directly in the same frame — no polling, no delays, no game signals; the cost of each call measured (MASTER_PLAN 1 ms rule; opening windows may lag).
+  `[OWNER]` 2026-11-06 23:48 +03:00 «контроллер определяет стандартный понятный API» → the controller DEFINES the API (one documented table of calls and their arguments);
+  every mod adapter implements it — the API is written first, in the mod notes, before any adapter. `[OWNER]` 2026-11-06 23:49 +03:00 «на него переделываем UI модов» → the
+  other authors' hub UI is REWORKED onto the API (their delay/poll paths removed natively, as the EAA / EoT / fishing delays were — HOUSE_RULES rule 8,
+  KRINIK MODIFIED), not wrapped from outside.
 - **The pages' lifetime — decided by measurement (`[OWNER]` 2026-11-06 23:18 +03:00 verbatim):** «можно было бы до выхода из мира держать. Вряд ли они будут много ОЗУ
   занимать. А вообще, нужно измерять. Может есть смысл их убирать при закрытии хаба, и пересоздавать вновь лениво на следующем открытии» → acceptance step:
   the game's working set (private bytes) with the hub closed — before the first open, with all 9 pages kept, after 5 open/close cycles (no growth = no
