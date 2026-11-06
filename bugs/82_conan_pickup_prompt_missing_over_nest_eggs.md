@@ -64,6 +64,10 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   gating hides it — read `krinik_pickup_prompt.lua` around the call (line ~207: what runs before `show(found)` — a timer not started in this state, a
   distance or component-class filter, the bug-80 rule «off while the corpse strip is on screen») and re-run G1 with the plate's log on. A real E there —
   not done yet (front path).
+  The gating read (`krinik_pickup_prompt.lua:199-200`): before the probe the plate hides when `GUIModuleController:IsModuleActive(CONTAINER_MODULE)` or
+  `strip_on_screen()` (a remembered `FloatingNames` strip `IsInViewport` + `IsVisible` — the bug-80 rule «yield to the game's own strip»). NEXT at the G1 stand:
+  read those two values in that same second (most likely suspect — a `FloatingNames` strip of the nest / a nearby corpse counted as «on screen» though not
+  seen in the frame); then fix the gating by the cause, not by an exception for eggs.
 
 ## Study (next)
 
