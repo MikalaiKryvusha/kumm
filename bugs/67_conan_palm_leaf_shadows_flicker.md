@@ -25,6 +25,11 @@ shadow-casting light (and the VSM cache) updates rarely. Recon of that question 
 English layout) → three recon tracks: the internet (Epic docs, shipped games), the GAME's own setup (palm assets, foliage material WPO, the sky blueprint and its
 directional light — Dev Kit + paks), the ENGINE's code (UE 5.8 VSM cache invalidation, if the EpicGames source is reachable).
 
+`[OWNER]` 2026-11-06 19:26 (verbatim): «Ты уже находил и утверждал ранее, что тень листьем пальм мерчает из-за перерисвовывания кеша. Кеш перерисовывается из-за
+нашего плавного движения света. Я МИЛЛИОН РАЗ видел играх ДИНАМИЧЕСКИЕ тени и свет. Где И солнце плавно двигает, И ничего не мерцает, И КЕШ не жрёт
+вычислительные ресурсы из-за постоянных перерисовок. НУЖНО ПОНЯТЬ, КАК ЭТО СДЕЛАТЬ У НАС В КОНАНЕ!» → **the acceptance, all three at once: the sun moves
+smoothly · the leaf shadows do not flicker · the shadow cache is not re-rendered constantly.**
+
 Reading (`[AI]`): the sun-step 2.0 is a compensating patch (HOUSE_RULES rule 24) — it hides the symptom. Next, in this order: (1) recon of Epic's
 VSM guidance and shipped UE5 games with a moving sun and wind-swayed foliage (cache invalidation by WPO, WPO disable distance for shadows) — sources,
 not reasoning; (2) the never-run discriminating run `r.Shadow.Virtual.Enable=0` under palms (VSM vs the temporal upscaler), 60 fps video; (3) the cause

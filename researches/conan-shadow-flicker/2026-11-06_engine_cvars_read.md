@@ -24,6 +24,14 @@ stands right BEFORE the cvar name — pairing checked on known cvars), script `s
 | `r.Shadow.Virtual.Clipmap.WPODisableDistance.LodBias` | «The number of clipmap levels further than the distance that an instance would be animated to allow shadow animation. Typically 2-4 works well but may need to be adjusted for very low light angles with significant WPO movement.» | registered |
 | `r.Shadow.Virtual.Clipmap.ZRangeScale` | «… Should generally be at least 10 or it will result in excessive cache invalidations. Values that are too large cause depth imprecisions and shadow flickering.» (pairing to be confirmed) | — |
 
+## The game's own sun model (help text read from `ConanSandbox-Win64-Shipping.exe`, 2026-11-06)
+
+`DynamicSky.SolarUpdateAngleDelta` — «How many degrees can the sun/moon move in the sky before we rotate the corresponding directional light to match.»
+So Conan ALREADY separates the visible sun from the shadow-casting light: the disk in the sky moves smoothly, the directional light (and every shadow)
+follows in steps of this many degrees. 0.003° ⇒ a light turn almost every frame (full clipmap re-render, the flicker); 0.015° (the game's quality default);
+2.0° ⇒ a step every few seconds of play, visible as a jump. The owner's target (bug 67, 19:26): smooth sun + no flicker + no constant re-render — a
+smooth SHADOW motion without per-frame invalidation is the open question for the web track.
+
 ## Reading
 
 1. A sun turned every frame (`SolarUpdateAngleDelta` 0.003) keeps the directional light «moving»: its clipmap is re-rendered every frame (engine's own words
