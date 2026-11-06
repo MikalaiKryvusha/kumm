@@ -34,7 +34,7 @@ found in work gets its row here the same day, with its detector.
 
 | Kind | What two mods share | Who wins without us | Detector (Conan) |
 |---|---|---|---|
-| **1. Tables** | a row of a game data table (an item id, a spawn row, a recipe, a UI module row) merged by both mods' controllers | the mod loaded LATER replaces the WHOLE row | `who-overwrites-table.py --shared-rows` over a world start's log |
+| **1. Tables** | a row of a game data table (an item id, a spawn row, a recipe, a UI module row) merged by both mods' controllers | Conan — DEPENDS ON THE TABLE, seen only live: `Items/ItemTable` — the later mod's WHOLE row replaces the earlier's (row 51420, original Mines of Set over Severe Weather, live 2026-11-06 11:13); `SpawnTable/SpawnDataTable` and `ProfessionTemplateDataTable` — merged FIELD BY FIELD (a field the later mod keeps at the original or leaves empty does not overwrite; arrays appended; live 2026-10-26 `ConanExiles/docs/17` items 2–3, 2026-11-06 the 17 boss rows). The log says «overwriting» either way. A table not yet seen — prove it live | `who-overwrites-table.py --shared-rows` over a world start's log (finds the rows), `_config/live-rows.lua` (the live value per field — the judge) |
 | **2. Code** | a game function / event both hook or replace (UE4SS Lua `RegisterHook`, a blueprint override, a mod controller re-setting the same variable; a key binding both claim) | both run, in an order nobody chose; a key — the last binder | grep the mods' Lua for the same `RegisterHook` target / `RegisterKeyBind` key; the game map's tables of keys (e.g. the numpad of the camera mod) |
 | **3. Assets** | the same vanilla asset path shipped in two paks (a widget, a blueprint, a texture, a sound) | the pak LATER in `modlist.txt` — the whole file, the other's edits vanish | `mod-overrides.py <out.tsv> <Mods folder>` — rows `override` with the same path in two mods |
 | **4. Resources** | the same scarce runtime budget: CPU per frame (polling Lua, per-frame searches), GPU (fog, lights), memory, load time, the HUD's screen space | nobody «wins» — the game slows or the screen crowds | A-B-A flights (`MsCPUBusy`, stutters), the 1 ms rule of `HOUSE_RULES.md` rule 7; frames of the HUD with both mods on |
@@ -45,12 +45,15 @@ found in work gets its row here the same day, with its detector.
 | Outcome | What the two sides say | Resolution |
 |---|---|---|
 | **A — identical** | both bring the same value / the same file / the same behaviour | nothing to do; record «identical» |
-| **B — different parts** | each changes parts the other leaves at the original | MERGE: one result = original + A's changes + B's changes, shipped once (in the mod loaded last, or in our own pak), KRINIK MODIFIED |
+| **B — different parts** | each changes parts the other leaves at the original | MERGE: one result = original + A's changes + B's changes, shipped once (in the mod loaded last, or in our own pak), KRINIK MODIFIED — except a Conan table the game merges by field itself (spawns, profession templates): confirm live, build nothing |
 | **C — same part, different values** | both change one part differently (a field, one pixel of the same texture, one key, one gameplay number) | the OWNER chooses; then as B with his value |
 | **D — one name, two different things** | the shared name is NOT the game's original and the two sides mean different things (two new items under one id, two mods' widgets at one path, one key for two actions) | SEPARATE: rename / renumber / rebind one side and every reference to it (recipes, loot, vendors, spawns, saves — an id stored in players' saves changes, the old item is lost there) |
 
 Kind-specific notes:
-- **Tables:** a field the WINNING mod leaves at vanilla while the losing mod changed it is the silent loss this guide exists for — outcome B, not A.
+- **Tables (Conan):** whether a field the later mod leaves at vanilla SURVIVES depends on the table's merge (row above): on a field-merged table (spawns,
+  profession templates) it survives and B needs nothing built; on a whole-row table (items) it is LOST and B is a merge we build (51420). Decide by the LIVE
+  table (`live-rows.lua`) with the mods unmodified, never by the files alone and never by one table's rule applied to another: on 2026-11-06 a file reading
+  called 17 boss rows «LOST» (false — field-merged), and an hour later the opposite rule, generalized from those rows, was false for the item table (KUMM EXP-0458).
 - **Code:** two hooks on one function are fine when they touch different state (B, nothing to merge); when both set the same state, one must own it (C) — usually
   ours yields to the mod's own setting first (rule 8).
 - **Assets:** a whole-file override cannot be «merged at runtime»; B means building ONE asset carrying both mods' edits (our kit pak, or one mod's pak).
@@ -70,7 +73,8 @@ Kind-specific notes:
    touching a mod, read its notes `games/<Game>/mods/<Mod>.md` (the knowledge-hook demands it; create them if missing).
 3. **Classify** part by part against the original → A / B / C / D (a script for tables; by eye for assets and code, with frames).
 4. **Resolve** by the outcome table; native, by a map or script next to the pak, KRINIK MODIFIED, `modpack.json` entry `krinikModified` names what was merged.
-5. **Verify by the game:** the detector again (tables: the row still merges — check the VALUE live by the remote); one in-game look or a measured case of what
+5. **Verify by the game:** the detector again (tables: the row still merges — check the VALUE live by the remote: `bash _config/pult.sh "lua _G.__lr={table=…,
+   mod=…, rows={…}, fields={…}}; return dofile('D:/work/ai_sandbox/ConanExiles/_config/live-rows.lua')"` — SAME / DIFF per field against one mod's table); one in-game look or a measured case of what
    the player sees (the item's stats, the spawn, the drop rate, the frame time).
 6. **Record** the outcome in `REGISTER.md` (next to this guide — kept apart so that a new line does not make the guide «changed after reading») and in both
    mods' notes.

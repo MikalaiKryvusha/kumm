@@ -91,6 +91,33 @@
 
 ## Entries
 
+### EXP-0459 · 2026-11-06 · ❌ · #conan #ue4ss #remote #crash #soft-pointer
+class: ue4ss-opaque-userdata-into-ufunction
+**Context:** reading a data table's `TSoftClassPtr` field (`NPCClass` of `SpawnDataTable`) live through the remote; UE4SS returns it as an opaque
+`TSoftObjectPtrUserdata` (no methods, no fields).
+**Tried / did:** passed that userdata to `Default__KismetSystemLibrary:Conv_SoftClassReferenceToString`.
+**Result:** ❌ — the game died at once: `EXCEPTION_ACCESS_VIOLATION reading address 0x1c` inside UE4SS (crash window on the owner's screen, 11:02).
+**Lesson:** never hand a UE4SS opaque userdata (soft pointers, anything printing `…Userdata: <addr>`) as a parameter of a UFunction; read such a column as
+TEXT through the engine's own exporter on the TABLE (`DataTableFunctionLibrary:GetDataTableColumnAsString(dt, FName(col))`) — parameters are an object
+and a name only.   → link: `plans/45_conan_mod_reconciliation_all.md` step 4
+**Repro:** `pult.sh "lua return dofile('…/_config/fn-params.lua')"` with `_G.__fp` set to the function first — any parameter typed soft/struct-by-ref is a stop.
+**Trigger:** a remote call whose argument came out of a row/property and prints as `…Userdata:` → stop, find a text exporter instead.
+**Not for:** UObject userdata (`IsValid()` answers) — those pass to UFunctions fine.
+
+### EXP-0458 · 2026-11-06 · ❌ · #conan #tables #reconciliation #claim
+class: file-reading-claimed-as-live-outcome
+**Context:** plan 45 step 4 — `row-diff.py` over the mods' FILES called BMNB's recruitability fields «B — LOST» on 17 boss rows under Heritage; the whole
+merge (55 `copyprop:` lines, a KRINIK MODIFIED pak) was built on it.
+**Result:** ❌ — the live table (remote, original Heritage, 2026-11-06 11:01–11:07) holds BMNB's four recruitability fields on 17 of 17 rows: `SpawnDataTable`
+merges rows FIELD BY FIELD — already observed on 2026-10-26 (`ConanExiles/docs/17` item 3), never read before judging. Then ❌ again the other way: the fix
+generalized «the game merges by field» to every table, and the control of row 51420 (original Mines of Set, 11:13) showed `Items/ItemTable` replacing the
+WHOLE row — Severe Weather's breather really lost there.
+**Lesson:** the merge rule is a property of EACH TABLE, observed live with the mods unmodified — never read from the files, never carried from one table to
+another. Field-merged so far: `SpawnDataTable`, `ProfessionTemplateDataTable`; whole-row: `Items/ItemTable`.
+**Repro:** `pult.sh "lua _G.__lr={table=…, mod=…, rows={…}, fields={…}}; return dofile('D:/work/ai_sandbox/ConanExiles/_config/live-rows.lua')"` → SAME/DIFF per field.
+**Trigger:** writing «LOST» or a B outcome for a table row → run `live-rows.lua` first.
+**Not for:** whole-file overrides (assets, kind 3) — there the later pak really replaces everything.
+
 ### EXP-0457 · 2026-11-06 · ❌ · #conan #mod-candidate #permissions #third-party
 class: third-party-pak-into-the-owners-game
 **Context:** the owner asked to study a suggested mod (Northern Timber - Enhanced 4.0.2): conflicts and what it gives. The pak-level overlap check

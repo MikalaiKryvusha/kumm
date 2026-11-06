@@ -19,7 +19,7 @@ Full list: `shared_rows_2026-11-06.txt` (143 rows).
 |---:|---|---|---|
 | 54 | `Items/ItemTable` | LegitReligious_Enhanced → EraOfTrials | two religion mods over the same vanilla religious items — whose item stats and names stand |
 | 47 | `SpawnTable/ProfessionTemplateDataTable` | Asghaard_Ancient_Civilization → TDI_LegendaryRepair | armorer templates: Asghaard's edits lost to TDI's |
-| 17 | `SpawnTable/SpawnDataTable` | BossesMyNewBesties → Heritage | boss / elite spawn rows: Heritage's version stands |
+| 17 | `SpawnTable/SpawnDataTable` | BossesMyNewBesties → Heritage | boss / elite spawn rows: the spawn table merges by field — live, both mods' changes stand (BMNB's recruitability + Heritage's races, 17 of 17; judged 2026-11-06 11:16 +03:00, `mod-reconciliation/REGISTER.md`). Corrected: «Heritage's version stands» read the log's «overwriting» as a whole-row win |
 | 8 | `Gathering_v2/LootTable_Resource` | ResourceStimulusPackage → EnhancedArmoryAndArsenal | werewolf / werehyena harvest loot: EAA's stands, RSP's boost lost there |
 | 7 | `SpawnTable/SpawnDataTable` | BossesMyNewBesties → EnhancedArmoryAndArsenal | Siptah / Black Pool bosses |
 | 5 | `Items/Recipes/RecipesTable` | LegitReligious_Enhanced → EraOfTrials | religious recipes |

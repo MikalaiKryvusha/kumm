@@ -19,7 +19,8 @@ register as A (identical) or resolved B / C / D, live values match the merge; (2
 Each group by the guide: read original + both sides → classify per field → resolve → verify in game → register.
 
 - [x] 1. **DONE 2026-11-06 10:08 +03:00 (pack `f4a56e1`, cases G1–G3 pass, report `2026-11-06_conan-grey-one-mask-merge.md`): in game the mask is a breather («Использовать (F)»),
-      armour 38, «Легкий доспех»; repair XP 3 710.** `Items/ItemTable` 51420 — SevereWeatherEnhanced → Mines_of_Set (1 row; a vanilla armour piece both re-declare). Notes: `SevereWeatherEnhanced.md`,
+      armour 38, «Легкий доспех»; repair XP 3 710.** Control 2026-11-06 11:15 +03:00 (case M0, original Mines of Set): the live row is the plain armour — the loss was real, the
+      item table replaces whole rows; the merge stands. `Items/ItemTable` 51420 — SevereWeatherEnhanced → Mines_of_Set (1 row; a vanilla armour piece both re-declare). Notes: `SevereWeatherEnhanced.md`,
       `CavernsOfSet.md`. **Read 2026-11-06 09:43 +03:00 — outcome C:** the Grey One Mask is a sandstorm breather in Severe Weather, a plain mask with a text fix in Mines of Set;
       Mines of Set wins → the breather is lost. Proposed merge — Severe Weather's row + Mines of Set's text; `RepairXP` (12665 vs 3710) → the owner.
       `[OWNER]` 09:53 «С нашей ускоренной прокачкой, с нашей новой кривой - что предлагаешь?» → `[AI]` proposed 3 710: the value Mines of Set gives the whole Grey One
@@ -34,18 +35,23 @@ Each group by the guide: read original + both sides → classify per field → r
       (2 rows; likely A).
 - [x] 3. **DONE 2026-11-06 10:22 +03:00 — outcome A** (RSP's 8 rows equal the game's; only EAA, the winner, changes them; `row-diff.py` now knows the load order — a loser's
       change under a winner that keeps the original is reported «B — LOST»). Werewolf / werehyena harvest loot (`Gathering_v2/LootTable_Resource`, 8 rows) — ResourceStimulusPackage → EnhancedArmoryAndArsenal.
-- [ ] 4. (start here: notes `BossesMyNewBesties.md`, `Heritage.md`, `EraOfTrials.md` created 2026-11-06 10:35 +03:00 — read them first; expectation to CHECK, not a finding:
+- [x] 4. **DONE 2026-11-06 11:09 +03:00 — outcome B, MERGED BY THE GAME ITSELF, nothing to build** (live `SpawnDataTable` with the ORIGINAL Heritage, `_config/live-rows.lua`:
+      BMNB's `ProfessionTemplate` / `StatTemplate` / `StatModifierTemplate` / `NPCClass` SAME on 17 of 17 rows, Heritage's races on 17 of 17; report
+      `testcases/reports/2026-11-06_conan-boss-rows-heritage-bmnb-live.md`). **CORRECTED:** the file-level «LOST» below was FALSE — the game merges rows field by
+      field, as `ConanExiles/docs/17` item 3 had shown on 2026-10-26 (KUMM EXP-0458); the merge built on it (two maps, a KRINIK MODIFIED Heritage) is reverted and
+      `row-diff.py` no longer prints «LOST» for that case. Still open from this group: Heritage → EraOfTrials (2 dialogue NPCs) and BMNB → EAA (7) — judge by
+      `live-rows.lua`. History of the step: (start here: notes `BossesMyNewBesties.md`, `Heritage.md`, `EraOfTrials.md` created 2026-11-06 10:35 +03:00 — read them first; expectation to CHECK, not a finding:
       BMNB makes bosses recruitable, Heritage gives them faces → likely different fields → a B merge; Heritage's rows — `HeritageSpawnDataUniques` (17 bosses are
       named characters → most likely here) and `HeritageSpawnDataMasses`; PARTIAL 2026-11-06 10:37 +03:00 (`row-diff.py` vanilla · BMNB · Heritage Uniques, 17 rows): 3 rows —
       C on `LootTable` (both change the boss's loot table differently); 14 rows are ABSENT from `HeritageSpawnDataUniques` → Heritage writes them from
       `HeritageSpawnDataMasses` — re-run with that table as the last side before judging (the 14 «A» lines were computed without Heritage's row — invalid);
       RE-RUN 2026-11-06 10:38 +03:00 with both Heritage tables (14 rows in Masses, 3 in Uniques): on each row BMNB changes `ProfessionTemplate` («BMNB_OriginalStats_<Boss>»),
       `StatTemplate` («All Thralls Base»), `NPCClass` (the knockable `…_nok…` class — the mod's recruitability), and `LootTable`; Heritage changes
-      `MaleRaceTemplate` / `FemaleRaceTemplate` and `LootTable`. Heritage loads later → **BMNB's three recruitability fields are most likely LOST on all 17
+      `MaleRaceTemplate` / `FemaleRaceTemplate` and `LootTable`. Heritage loads later → **[FALSE — see the head of this step] BMNB's three recruitability fields are most likely LOST on all 17
       bosses** → outcome B (merge: `copyprop:` of the three into Heritage's rows) — to confirm in game (knock out one of them). The `LootTable` «C» is most
       likely FALSE: it is an object reference and `row-diff.py` compares the raw import index (−67 vs −14, per file) — teach it to resolve imports to paths first;
-      DONE 2026-11-06 10:47 +03:00: `row-diff.py` resolves object references → `LootTable` identical; **all 17 rows — B, LOST** (BMNB's `ProfessionTemplate`, `StatTemplate`
-      ×17, `StatModifierTemplate` ×10, `NPCClass` ×11 under Heritage). NEXT: the merge maps for Heritage's two tables, `rebuild-krinik-paks.py` (Heritage has
+      DONE 2026-11-06 10:47 +03:00: `row-diff.py` resolves object references → `LootTable` identical; **[FALSE — the live table keeps them] all 17 rows — B, LOST** (BMNB's `ProfessionTemplate`, `StatTemplate`
+      ×17, `StatModifierTemplate` ×10, `NPCClass` ×11 under Heritage). [superseded — not needed] NEXT: the merge maps for Heritage's two tables, `rebuild-krinik-paks.py` (Heritage has
       no `krinikBuild` yet — add one), a world start, knock out a boss (e.g. the Keymaster) — recruitable after, not before; BMNB's table is
       `/Game/Mods/BossesMyNewBesties/BMNB_SpawnDataTable`; Heritage's spawn table is not named «*spawn*table*» — list its container; vanilla
       `Systems/SpawnTable/SpawnDataTable` by `retoc to-legacy --filter SpawnDataTable` + `uaj tojson`; then `row-diff.py` in load order.) Boss / elite spawns (`SpawnTable/SpawnDataTable`, 24 rows) — BossesMyNewBesties → Heritage (17), → EnhancedArmoryAndArsenal (7); Heritage → EraOfTrials

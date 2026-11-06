@@ -18,6 +18,8 @@ recruitable).
 
 ## Open
 
-- 2026-11-06 (plan 45 step 4): 17 of its boss / elite spawn rows are overwritten by Heritage, 7 by EAA (both load later). Likely different fields (this mod —
-  recruitability; Heritage — faces; EAA — its bosses) → a B merge to read field by field. Read 2026-11-06 (`BMNB_SpawnDataTable`, 173 imports): against
-  Heritage's `HeritageSpawnDataUniques` 3 of the 17 rows differ on `LootTable` (outcome C); the other 14 sit in Heritage's `HeritageSpawnDataMasses` — not read yet.
+- 2026-11-06 (plan 45 step 4): 17 of its boss / elite spawn rows are also written by Heritage, 7 by EAA (both load later). **Heritage — judged 2026-11-06 11:10 +03:00:** the game
+  merges the rows field by field; the live `SpawnDataTable` keeps this mod's `ProfessionTemplate`, `StatTemplate`, `StatModifierTemplate`, `NPCClass` on 17 of 17
+  rows (e.g. `Aesir_Boss` → `/Game/Mods/BossesMyNewBesties/HumanoidNPCCharacter_20percentbigger_noknockout`) beside Heritage's races — nothing lost, nothing
+  built. (Corrected: «`LootTable` C» and «LOST» of the file-level reading were false — the import index, then whole-row thinking; KUMM EXP-0458.) EAA's 7 —
+  not judged yet. The mod's own function (knock a boss out, recruit him) — not run in game yet.

@@ -14,9 +14,11 @@ into the game's `Systems/SpawnTable/SpawnDataTable` by `HeritageSpawnControl`; r
 character-creation presets `HeritageCCMalePresets`, `HeritageCCFemalePresets`, `HeritageTrueHairCC`; `HeritageHub`; old copies under `Holdovers/` (not
 merged — check before reading them as live). Read 2026-11-06 (`patch-mod-asset.py extract Heritage HeritageSpawnDataUniques|HeritageSpawnDataMasses`, imports
 57 / 47): its spawn rows change `MaleRaceTemplate` / `FemaleRaceTemplate` (e.g. Keymaster → `Race_HyperboreanMale/Female`) and `LootTable`, and keep the game's
-`ProfessionTemplate`, `StatTemplate`, `NPCClass` — so over Bosses My New Besties (loaded earlier) it wipes that mod's recruitability on 17 bosses (plan 45 step 4).
+`ProfessionTemplate`, `StatTemplate`, `NPCClass`. **It does NOT wipe Bosses My New Besties (loaded earlier):** the game merges rows field by field — the live
+`SpawnDataTable` (2026-11-06 11:09 +03:00, this pak unmodified) holds BMNB's four recruitability fields AND this mod's races on all 17 shared boss rows (plan 45 step 4,
+`_config/live-rows.lua`). Corrected: an earlier line here said «wipes that mod's recruitability» from a file-level reading — false (KUMM EXP-0458). Ships unmodified.
 
 ## Open
 
-- 2026-11-06 (plan 45 step 4): wins 17 boss / elite spawn rows over Bosses My New Besties; loses 2 dialogue-NPC rows (Muriela the Artisan, Yakira) to Era of
-  Trials.
+- 2026-11-06 (plan 45 step 4): shares 17 boss / elite spawn rows with Bosses My New Besties — judged, the game merges them (above); 2 dialogue-NPC rows
+  (Muriela the Artisan, Yakira) shared with Era of Trials — not judged yet (`live-rows.lua`).
