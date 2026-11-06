@@ -122,6 +122,11 @@ visibility by the `XCS_Panel` event in `KrinikPauseGameInMenu` 0.7.0 (retry ≤4
   Who stretches it — the bisect next: our hub pause (dilation 0.03) off, then the game without mod paks (`modlist.txt` → `.off`, report
   `2026-11-06_conan-build-vs-vanilla-paks-abab.md`). `[OWNER]` 21:30 «тебе стоило в мире дождаться закрытия плашки ОБНОВЛЕНИЕ КАТАЛОГА ОБЛИКОВ» — the stand
   waits for that plate to close before recording.
+  **The owner's decision on the page assembly, 2026-11-06 22:10 +03:00 (verbatim, answering «А оставить / Б прятать новую страницу»):** «В - клик выполнен, видуального
+  переключения не происходит, пока новая страница полностью не соберётся. Как только она полностью собралась - она дергает колбек, или сигнал посылает -
+  выполняется рендер - предыдущая страница закрыватся, новая мгновенно одним кадром открывается. Да, будет задержка в переключении табов, но будет КРАСИВО!»
+  → acceptance: after a click the OLD page stays on screen unchanged; the new page is built off-screen; when it is complete (a signal, not a timer), in ONE
+  frame the old page goes and the complete new page shows. A delay of the switch is accepted.
   **Run 2026-11-06 19:30 (case H1 of `TC_conan_music_recon_2026-11-06.md`), the reading WITHDRAWN:** tabs switched by `W_Carousel_C:Next/PrevCarouselWindow` (synthetic Q/E keys do
   not reach the game — three ways tried 18:10–18:15), 60 fps capture: the tab bar never changed after a switch, the bottom buttons stood still, the mod icons on
   «Снаряжение» present in every frame of the return. One variant only — the first open after the world entry and the owner's real keys are still to run
