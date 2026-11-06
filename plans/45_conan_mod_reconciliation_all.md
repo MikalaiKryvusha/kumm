@@ -4,7 +4,7 @@
 > the 143 shared rows pasted)
 > **Parent:** `researches/mod-reconciliation/GUIDE.md` (the method, `HOUSE_RULES.md` rule 27); `researches/conan-table-conflicts/README.md` (the findings);
 > `MASTER_PLAN.md` acceptance criterion 2 of the build
-> **Status:** 🔧 started 2026-11-06 09:40 +03:00; steps 1–4 done, step 6 waits for interview #032 (2026-11-06 11:41 +03:00); next — step 5, then 7–12
+> **Status:** 🔧 started 2026-11-06 09:40 +03:00; steps 1–4 done, step 6 waits for interview #034 Q1 (asked 2026-11-06 11:41 +03:00 as #032, merged into #034 at 13:3x); next — step 5, then 7–12
 > **Outbound:** outcome C of each group → the owner, one question per group (scenario of what the player sees)
 
 ## Goal vector (Maintain)
@@ -65,8 +65,8 @@ Each group by the guide: read original + both sides → classify per field → r
 - [ ] 6. Religious items and recipes (`Items/ItemTable` 54, `RecipesTable` 5) — LegitReligious_Enhanced → EraOfTrials. **2026-11-06 11:41 +03:00:** the 54 weapons — B, Era of Trials
       merges its ammo by field (`EoT_DT_BowCompatableAmmunitions_Merge`): LR's stamina / container / repair / descriptions live 54/54, every ammo list = LR's +
       Era of Trials' arrow 47210132; the 5 Zathite dancer recipes — C (LR fixes a vanilla zero «Venom-purified blood», Era of Trials redesigns the recipe
-      whole; live = Era of Trials) → interview #032. Also found: LegitReligious ships the WHOLE vanilla `Items/ItemStatModificationTable` (kind 3 — step 8).
-      Closes when #032 is answered and applied.
+      whole; live = Era of Trials) → interview #034 Q1 (was #032). Also found: LegitReligious ships the WHOLE vanilla `Items/ItemStatModificationTable` (kind 3 — step 8).
+      Closes when #034 Q1 is answered and applied.
 - [x] 7. The rows the log cannot show — «added by A, overwritten by B»: for every pair of mods merging into the same game table (the `owntable` rows of
       `mod-overrides.py`), compare their row KEYS offline (their own tables' row names) — the full list of shared keys, beyond the log's 143.
       **Tool 2026-11-06 11:53 +03:00:** `python -X utf8 ConanExiles/_config/hidden-row-pairs.py` — logged single-writer rows (3 599 in 43 tables) that are not vanilla keys
@@ -79,7 +79,7 @@ Each group by the guide: read original + both sides → classify per field → r
 
 - [ ] 8. **Assets:** `mod-overrides.py` over the build — every vanilla path shipped by two paks (first run 2026-11-06: `BP_ThrallSystemComponent`,
       `WBP_BuffIcon` in two mods each; `Dev/AlmostEmpty.umap` in six). **2026-11-06 12:09 +03:00:** `WBP_BuffIcon` — A (same hash); `AlmostEmpty` — A in effect (empty kit
-      map); `BP_ThrallSystemComponent` — C (BMNB's boss placement-ghost scale lost under LBPR) → interview #033; and a MOD-vs-GAME case: LegitReligious's stale
+      map); `BP_ThrallSystemComponent` — C (BMNB's boss placement-ghost scale lost under LBPR) → interview #034 Q2 (was #033); and a MOD-vs-GAME case: LegitReligious's stale
       whole copy of `Items/ItemStatModificationTable` hid 51 rows of 3.0.1 → replaced by the game's version (`vanilla:`), live 51/51. Single-mod whole
       tables re-checked against 3.0.1 (2026-11-06 12:15 +03:00): `HairColorSelections` (MSCasaDesFlores Nails) — identical, A; `CustomConsoleCommandsDataTable`
       (StorageReachExpanded) — 5 game console commands missing, its own 3 kept → MERGED 2026-11-06 12:21 +03:00 (`vanilla+own:`), live 8/8; ours —
@@ -92,8 +92,9 @@ Each group by the guide: read original + both sides → classify per field → r
       build's acceptance criterion 3 (the whole build vs the game without paks, A-B-A-B flights) — not a reconciliation finding; closes with that measurement.
 - [ ] 11. **Mechanics:** the build's features done twice (ambushes: Night Terrors + PvE Plus Ambush; loot boosts; XP pop-ups; weather) — from the mods' notes
       and descriptions; the stacking numbers. **2026-11-06 12:26 +03:00:** swept by keyword over the manifest (register line): only the ambush pair is a doubled feature —
-      waits for the owner's interview #025; levels / storage / loot / fishing / thrall extras — A or B (the off mods excluded; `DT_AttributeSystem` row 7 — only
-      EAA). Closes with #025.
+      both stay on with the authors' numbers — the owner took ambush tuning off the agenda (`[OWNER]` 2026-10-31 21:11, interview #025 status; the 11-06
+      «waits for #025» was false, corrected 2026-11-06 13:31 +03:00); levels / storage / loot / fishing / thrall extras — A or B (the off mods excluded; `DT_AttributeSystem` row 7 — only
+      EAA). The ambush pair reopens when the owner raises the topic.
 - [ ] 12. **Other kinds found on the way** (screen places, localization keys, author-demanded load order, saves, `Engine.ini` keys) — each gets a row in the
       guide's list and a step here. **2026-11-06 12:28 +03:00:** localization — no mod ships a `Localization/` path (override matrix), the build's only `Game.locres` is ours
       (Krinik Russian Translation) — nothing shared; `Engine.ini` keys set at runtime — the deploy's `-Verify` warning (Phase 1 slice, `source.folder` mods);

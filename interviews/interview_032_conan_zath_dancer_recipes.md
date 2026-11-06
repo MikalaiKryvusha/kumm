@@ -3,7 +3,7 @@
 > Topic: пять рецептов набора танцовщицы Зата правят два мода, LegitReligious и Era of Trials, и каждый по-своему; в игре сейчас рецепт Era of Trials
 > Source of the idea: план 45, шаг 6 (сведение модов сборки по `researches/mod-reconciliation/GUIDE.md`, исход C — выбирает владелец)
 > Created: 2026-11-06 11:39 +03:00
-> Status: ❓ ждёт ответа
+> Status: ➡ ПЕРЕНЕСЕНО 2026-11-06 13:30 +03:00 в сводное интервью #034, Q1 (`interviews/interview_034_conan_two_mod_choices.md`) — по слову владельца «Интервью сведи в одно»; ответ — там
 
 ## Что сейчас
 

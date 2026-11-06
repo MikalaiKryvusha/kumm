@@ -3,7 +3,7 @@
 > Topic: один и тот же файл игры, систему рабов, везут два мода — Bosses My New Besties и Less Building Placement Restrictions; в игре работает версия второго
 > Source of the idea: план 45, шаг 8 (сведение модов сборки по `researches/mod-reconciliation/GUIDE.md`, исход C — выбирает владелец)
 > Created: 2026-11-06 12:08 +03:00
-> Status: ❓ ждёт ответа
+> Status: ➡ ПЕРЕНЕСЕНО 2026-11-06 13:30 +03:00 в сводное интервью #034, Q2 (`interviews/interview_034_conan_two_mod_choices.md`) — по слову владельца «Интервью сведи в одно»; ответ — там
 
 ## Что сейчас
 
