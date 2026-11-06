@@ -94,6 +94,9 @@ visibility by the `XCS_Panel` event in `KrinikPauseGameInMenu` 0.7.0 (retry ≤4
   blurred/pale for ~5 frames after the switch, then sharp — a fade or a re-layout of that text, to be named at full resolution; c01 at full size: the «Знания»
   grid stands still, a dark band along the panel's left edge comes and goes. c06 (→ «Путешествие»), frames 121–128 at 440 px: the card grid and the
   «Этапы путешествия» column look shifted in height in the first frames — compare positions at full resolution.
+  `[OWNER]` 2026-11-06 20:58 (watched the clips slowed 5× and 10× — `*_x5.mp4`, `*_x10.mp4` in folder 69): «там четко видно, как при переключении страниц
+  хаба, они перекрывают друг друга, сливаются, где-то что-то раскрывается, куда-т прыгает - полный пиздец» → what to name per clip: (1) two pages drawn
+  over each other / blended during the switch; (2) something expanding (a panel or list opening); (3) elements jumping position. Then the mod bisect.
   **Run 2026-11-06 19:30 (case H1 of `TC_conan_music_recon_2026-11-06.md`), the reading WITHDRAWN:** tabs switched by `W_Carousel_C:Next/PrevCarouselWindow` (synthetic Q/E keys do
   not reach the game — three ways tried 18:10–18:15), 60 fps capture: the tab bar never changed after a switch, the bottom buttons stood still, the mod icons on
   «Снаряжение» present in every frame of the return. One variant only — the first open after the world entry and the owner's real keys are still to run
