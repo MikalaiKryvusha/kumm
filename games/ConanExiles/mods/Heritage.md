@@ -12,7 +12,9 @@
 `/Game/Mods/Heritage/` (listed 2026-11-06): spawn rows — `HeritageSpawnDataUniques` (the named characters) and `HeritageSpawnDataMasses` (the crowd), merged
 into the game's `Systems/SpawnTable/SpawnDataTable` by `HeritageSpawnControl`; race templates `HeritageRaceTemplateUniques` / `…Special` / `…Masses`;
 character-creation presets `HeritageCCMalePresets`, `HeritageCCFemalePresets`, `HeritageTrueHairCC`; `HeritageHub`; old copies under `Holdovers/` (not
-merged — check before reading them as live).
+merged — check before reading them as live). Read 2026-11-06 (`patch-mod-asset.py extract Heritage HeritageSpawnDataUniques|HeritageSpawnDataMasses`, imports
+57 / 47): its spawn rows change `MaleRaceTemplate` / `FemaleRaceTemplate` (e.g. Keymaster → `Race_HyperboreanMale/Female`) and `LootTable`, and keep the game's
+`ProfessionTemplate`, `StatTemplate`, `NPCClass` — so over Bosses My New Besties (loaded earlier) it wipes that mod's recruitability on 17 bosses (plan 45 step 4).
 
 ## Open
 

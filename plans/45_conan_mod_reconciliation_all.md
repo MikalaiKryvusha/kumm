@@ -38,7 +38,12 @@ Each group by the guide: read original + both sides → classify per field → r
       BMNB makes bosses recruitable, Heritage gives them faces → likely different fields → a B merge; Heritage's rows — `HeritageSpawnDataUniques` (17 bosses are
       named characters → most likely here) and `HeritageSpawnDataMasses`; PARTIAL 2026-11-06 10:37 +03:00 (`row-diff.py` vanilla · BMNB · Heritage Uniques, 17 rows): 3 rows —
       C on `LootTable` (both change the boss's loot table differently); 14 rows are ABSENT from `HeritageSpawnDataUniques` → Heritage writes them from
-      `HeritageSpawnDataMasses` — re-run with that table as the last side before judging (the 14 «A» lines were computed without Heritage's row — invalid); BMNB's table is
+      `HeritageSpawnDataMasses` — re-run with that table as the last side before judging (the 14 «A» lines were computed without Heritage's row — invalid);
+      RE-RUN 2026-11-06 10:38 +03:00 with both Heritage tables (14 rows in Masses, 3 in Uniques): on each row BMNB changes `ProfessionTemplate` («BMNB_OriginalStats_<Boss>»),
+      `StatTemplate` («All Thralls Base»), `NPCClass` (the knockable `…_nok…` class — the mod's recruitability), and `LootTable`; Heritage changes
+      `MaleRaceTemplate` / `FemaleRaceTemplate` and `LootTable`. Heritage loads later → **BMNB's three recruitability fields are most likely LOST on all 17
+      bosses** → outcome B (merge: `copyprop:` of the three into Heritage's rows) — to confirm in game (knock out one of them). The `LootTable` «C» is most
+      likely FALSE: it is an object reference and `row-diff.py` compares the raw import index (−67 vs −14, per file) — teach it to resolve imports to paths first; BMNB's table is
       `/Game/Mods/BossesMyNewBesties/BMNB_SpawnDataTable`; Heritage's spawn table is not named «*spawn*table*» — list its container; vanilla
       `Systems/SpawnTable/SpawnDataTable` by `retoc to-legacy --filter SpawnDataTable` + `uaj tojson`; then `row-diff.py` in load order.) Boss / elite spawns (`SpawnTable/SpawnDataTable`, 24 rows) — BossesMyNewBesties → Heritage (17), → EnhancedArmoryAndArsenal (7); Heritage → EraOfTrials
       (2 dialogue NPCs).
