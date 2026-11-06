@@ -92,7 +92,10 @@ Each group by the guide: read original + both sides → classify per field → r
       waits for the owner's interview #025; levels / storage / loot / fishing / thrall extras — A or B (the off mods excluded; `DT_AttributeSystem` row 7 — only
       EAA). Closes with #025.
 - [ ] 12. **Other kinds found on the way** (screen places, localization keys, author-demanded load order, saves, `Engine.ini` keys) — each gets a row in the
-      guide's list and a step here.
+      guide's list and a step here. **2026-11-06 12:28 +03:00:** localization — no mod ships a `Localization/` path (override matrix), the build's only `Game.locres` is ours
+      (Krinik Russian Translation) — nothing shared; `Engine.ini` keys set at runtime — the deploy's `-Verify` warning (Phase 1 slice, `source.folder` mods);
+      a NEW kind met in step 8 — **a mod vs the GAME** (a stale whole copy of a vanilla table; EXP-0460) — two found and fixed. Open: screen places of HUD
+      widgets (the UI epic's frames), author-demanded load order (Hosav last of UI mods — `modlist.txt` order checked by hand when a UI mod is added).
 
 ## Verification
 

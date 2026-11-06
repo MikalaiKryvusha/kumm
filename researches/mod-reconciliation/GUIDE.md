@@ -39,6 +39,7 @@ found in work gets its row here the same day, with its detector.
 | **3. Assets** | the same vanilla asset path shipped in two paks (a widget, a blueprint, a texture, a sound) | the pak LATER in `modlist.txt` — the whole file, the other's edits vanish | `mod-overrides.py <out.tsv> <Mods folder>` — rows `override` with the same path in two mods |
 | **4. Resources** | the same scarce runtime budget: CPU per frame (polling Lua, per-frame searches), GPU (fog, lights), memory, load time, the HUD's screen space | nobody «wins» — the game slows or the screen crowds | A-B-A flights (`MsCPUBusy`, stutters), the 1 ms rule of `HOUSE_RULES.md` rule 7; frames of the HUD with both mods on |
 | **5. Mechanics** | the same gameplay feature done twice (two ambush systems, two loot boosts, two XP pop-ups, two weather systems; balance stacking: two mods each ×2 → ×4) | both act — the feature doubles or fights itself | the mods' descriptions + our catalog notes per mod; a gameplay case that measures the result (drops per kill, ambushes per hour) |
+| **6. A mod vs the GAME** (found 2026-11-06) | not two mods: one mod ships a vanilla asset WHOLE, copied from an OLDER game version — the newer game's rows / fields vanish (LegitReligious' stat table: 51 rows of 3.0.1; Storage Reach Expanded's console table: 5 commands) | the mod's stale copy | the `override` rows of `mod-overrides.py` that are data tables → `uaj rows` + a value diff against the game-only view's copy (KUMM EXP-0460); fix — `patch-mod-asset.py` `vanilla:` / `vanilla+own:` |
 
 ## The four outcomes (any kind)
 
