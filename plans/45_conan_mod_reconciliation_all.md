@@ -29,7 +29,8 @@ Each group by the guide: read original + both sides → classify per field → r
       (`ItemClass`, `ArmourValue`, `FirstModifier`, `Icon`, `IconLayers`, `GameplayTags` ← `SevereWeatherEnhanced:LFS_ItemTable:51420`; the new `patch-mod-asset.py`
       operation); `RepairXP` 3 710 and the texts stay Mines of Set's. Next: the rebuild, a world start, the live row, the mask's tooltip. Then: a
       `patch-mod-asset.py` map on Mines of Set's table (number field support needed), a world start, the live row, the mask's tooltip.
-- [ ] 2. Xevyr's shared UI rows `XCS_Panel`, `Xev_MouseInteraction` (`DT_UIModuleTable`) — ProximityParty → Simple_Minimap → LLHighlight → AlMerayah_Reborn
+- [x] 2. **DONE 2026-11-06 10:19 +03:00 — outcome A** (the rows sit in the shared `Xevyr_Shared` tables every Xevyr mod ships, identical; all 26 shared Xevyr files identical
+      across the four containers — `REGISTER.md`). Xevyr's shared UI rows `XCS_Panel`, `Xev_MouseInteraction` (`DT_UIModuleTable`) — ProximityParty → Simple_Minimap → LLHighlight → AlMerayah_Reborn
       (2 rows; likely A).
 - [ ] 3. Werewolf / werehyena harvest loot (`Gathering_v2/LootTable_Resource`, 8 rows) — ResourceStimulusPackage → EnhancedArmoryAndArsenal.
 - [ ] 4. Boss / elite spawns (`SpawnTable/SpawnDataTable`, 24 rows) — BossesMyNewBesties → Heritage (17), → EnhancedArmoryAndArsenal (7); Heritage → EraOfTrials
