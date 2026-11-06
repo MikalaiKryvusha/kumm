@@ -146,9 +146,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **Bug 67 (palm shadows) 2026-11-06 19:42 +03:00:** the owner rejected the 2.0 sun step as a patch (19:22–19:26, acceptance: smooth sun · no flicker · no constant re-render);
 > recon on three tracks (engine help from the 5.8 renderer binary, the game's palms in the Dev Kit, the web — `researches/conan-shadow-flicker/2026-11-06_*`):
 > the light's turn re-samples the VSM pages; measured at the oasis: 0.1–0.25° steps as calm as 2.0, 0.003 ≈ 2× worse; our bias −1.0 coarser than the game's
-> −1.5. Clips for his eye — review folder 68; the build unchanged until his word (he was called by voice 19:40). Music mod: scene-change spikes fixed,
-> hub test partial (tabs by `W_Carousel_C` calls — tab bar still, mod icons present; 1 variant). **A 60-min long run (crash check) started 19:42 in the
-> background** (`long-run.sh 60`, the music mod rides along; test tones removed from the game folder).
+> −1.5. **The series is VOID** (20:37 the owner rejected review folder 68 — overexposed HDR capture, EXP-0470; time of day not fixed, EXP-0469); folder
+> removed, the interim 0.25/−1.5 reverted before deploy — the build stays 2.0/−1.0. NEXT: re-run with `hdr.ps1 off` + `SetTimeOfDay` before each clip.
+> Music mod: scene-change spikes fixed; the death scene coded (hooks `DeathMusic` / `ClientOnRespawned`), NOT deployed/tested (case M7, rides on bug 79 D1).
+> Hub: tabs by `W_Carousel_C` calls at 56 fps — tab bar still, buttons still, mod icons present (1 variant; first open and real keys not covered).
+> **Crash checking is the owner's own gameplay** (`[OWNER]` 20:36 «на вылеты я буду проверять геймплейм»; HOUSE_RULES 28, plan 47 — fly-throughs are not a
+> crash check); the 19:42 fly-through run was stopped 20:36. `[OWNER]` 20:36 «а ты мне делай сборку, в которую я уже мог бы играть»: the game folder holds
+> the build, `-Verify` 111/111 at 20:40, game closed, lock released. Bug 79 cases (respawn, dungeon, waystone) — `TC_conan_pause_loading_screen_paths_2026-11-06.md`, not run.
 > The owner asked what to fix for comfortable evening play; the answer in chat 18:05 — a long crash-free run, the pause on the in-game loading screen
 > (waystone, respawn), the hub test, the dusk light jump, then the rest.
 > **FIRST in the next chat:** (1) q8 Nanite — no B data (the correction above); `close-game.ps1` now closes a windowless game — the series can be re-run. (2) G4: свой раб-босс через колесо боли прямыми вызовами (кейсы `TC_conan_thrall_ghost_graft_2026-11-06.md`).
