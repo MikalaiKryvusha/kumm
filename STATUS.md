@@ -127,6 +127,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> ⚠️ **Чат 2026-11-06 (третий) закрыт принудительно 2026-11-06 17:21 +03:00 на 85 %:** церемонии пропущены (судья по последним пунктам, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft.
+> Ложные утверждения на месте: нет (Heritage/«яйца Каппы»/BMNB «свой рост»/засады #025 — исправлены по местам этим чатом).
+> **Сделано:** интервью #032/#033 сведены в #034 и применены; правка BMNB пересажена в LBPR (`kismet-graft.py`, KRINIK MODIFIED; G4 открыт); `extract` читал копию игры — починен;
+> баг 82 DONE; критерий 3 A-B-A-B — в шуме, на краю; Quick Win `p.Chaos.…MaxQueueSizeBeforeForce=100000` ВЗЯТ в Engine.ini (−28 % рывков); `p.MaxPayloadSize` не взят;
+> разведка музыки — готового мода нет (`researches/conan-custom-music-mods/`).
+> **ПЕРВЫМ ДЕЛОМ в новом чате:** (1) серия q8 Nanite прервана после A1 (cold 48.2 к/с · 85 рывков; F1 53.3 · 70; умолчание 2048) — перезапустить `scratchpad`-скрипт заново: пачка
+> `ConanExiles/_config/bench-batches/q8-nanite-rootpages.txt`, A/B через `ini-temp.py add … q8 r.Nanite.Streaming.NumInitialRootPages=3072`, откат копией `.bak` (EXP-0466), цепочки с `pipefail` (EXP-0467);
+> рабочий Engine.ini игры уже без строки Nanite, замок снят, игра закрыта. (2) G4: свой раб-босс через колесо боли прямыми вызовами (кейсы `TC_conan_thrall_ghost_graft_2026-11-06.md`).
+> (3) Музыка — показать владельцу русскую копию вердикта и предложить свой UE4SS-мод (разведка пультом мелодий 3.0.1).
 > ✅ **Chat of 2026-11-06 (second) soft-closed ≈ 2026-11-06 13:1x +03:00 at 85 %:** the previous chat's skipped ceremonies paid — judge pass (VERIFIED WITH CAVEATS, fixed), STATUS trim, closing lints (attribution OK; experience-lint: 2 old findings EXP-0455 and an earlier one without a mechanization field — debt), engine syntax OK; README unchanged (the engine was not touched). Standing falsehoods corrected in place: Heritage «LOST» (plan 45 / register / notes), the merge rule «per table», bug 82 «plate hidden».
 > **NOW 2026-11-06 12:46 +03:00 — chat of 2026-11-06 (second), `/dayloop` (`[OWNER]` «работай автономно. Буду нужен - зови голосом»): plan 45 — steps 4, 5, 7, 9 DONE; 1, 6, 8, 11 wait
 > for the owner; 10 is plan 34 / criterion 3.** What the build got: 7 EAA boss rows recruitable again (BMNB fields into `DT_EAA_Spawntable`); LegitReligious's stale
