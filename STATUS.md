@@ -140,7 +140,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > просто как Quick Win взять в конан»** — recon by a helper → `researches/conan-oblivion-perffix-recon/README.md` (fixes table, cvar-level Quick-Win shortlist, the DLL port's
 > cost); the shortlist then measured by the A-B-A fly-through bench; the verdict to the owner as a Russian reading copy. **2026-11-06 16:04 +03:00:** recon done (4 cvar lines; the DLL
 > port = an epic); `p.Chaos.AccelerationStructureTimeSlicingMaxQueueSizeBeforeForce=100000` TAKEN into the build's Engine.ini (stutters −28 %, CPU −0.3 ms, report
-> `2026-11-06_conan-quickwin-chaos-queue.md`); `r.GPUScene.ParallelUpdate` already on (2048); `p.MaxPayloadSize` A-B-A-B across launches IN FLIGHT (batch q7, the
+> `2026-11-06_conan-quickwin-chaos-queue.md`); `r.GPUScene.ParallelUpdate` already on (2048); `p.MaxPayloadSize` NOT taken (A-B-A-B across launches: no gain, report `2026-11-06_conan-quickwin-maxpayload.md`; batch q7, the
 > live ini's B line by `ini-temp.py … q7`, revert after); `NumInitialRootPages` next. Criterion 3 A-B-A-B: within noise, narrowly (`2026-11-06_conan-build-vs-vanilla-paks-abab.md`).
 > G4 of the LBPR graft: a with/without control inconclusive — a recruited boss item needed (the agent's).
 > **Interview #034 (merged 13:31 from #032/#033) ANSWERED 13:34 and applied:** Q1 A — Era of Trials' Zathite recipes stay; Q2 A — LBPR owns the thrall system, plus the owner's
