@@ -20,9 +20,9 @@ REAL WORLD: accumulated — the owner's working session with all other hooks wir
 
 | # | Moment | Command | Exit / outcome |
 |---|---|---|---|
-| 1 | 2026-11-06 ≈09:37 +03:00 | a Bash call carrying the tools' names, in the live session, the guide not read | refused: «mod-reconciliation-gate: … документ в этой работе ещё не прочитан» |
-| 2 | 2026-11-06 ≈09:37 +03:00 | `echo '<event>' \| node tools/hooks/style-gate.mjs --gate|--mark --style GUIDE.md --stamp <tmp> --paths … --cmds …` ×8 | see Checks |
-| 3 | 2026-11-06 ≈09:38 +03:00 | `node tools/test-guards.mjs` | «184 of 184 as expected» |
+| 1 | ≈ 2026-11-06 09:37 +03:00 | a Bash call carrying the tools' names, in the live session, the guide not read | refused: «mod-reconciliation-gate: … документ в этой работе ещё не прочитан» |
+| 2 | ≈ 2026-11-06 09:37 +03:00 | `echo '<event>' \| node tools/hooks/style-gate.mjs --gate|--mark --style GUIDE.md --stamp <tmp> --paths … --cmds …` ×8 | see Checks |
+| 3 | ≈ 2026-11-06 09:38 +03:00 | `node tools/test-guards.mjs` | «184 of 184 as expected» |
 
 ## 4. Checks
 
