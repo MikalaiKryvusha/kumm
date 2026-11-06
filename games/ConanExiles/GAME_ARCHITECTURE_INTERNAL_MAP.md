@@ -103,8 +103,10 @@ WBP_ContainerInfo` (pakchunk1110; моды сборки его не переоп
 «Труп», `ActionTutorial` «нажмите E…»; отступы слева и справа 20) и `OverlaySlot_3` (`W_QuickLootPanel`, отступ слева 500 — место окна жёстко от левого
 края плашки). Модуль ставит на экран модульная система, `W_OnScreenInfoContainer` только включает его по имени (`ContainerInfo` и др.).
 **Item table field `RepairXP` (read 2026-11-06 over the 3.0.1 `Items/ItemTable`, 5 821 rows):** non-zero in 2 930 rows; the vanilla maximum is 2000 (tier-5 armour
-almost all 2000; tier 1 median 472, tier 2 — 1004, tier 3 — 1848); it also sits on items nobody repairs (Essence of Rot 2000) — most likely the player's XP for
-CRAFTING the item, despite the name (inferred, no source read). Our XP curve to set it against: `KrinikConanGameplay` 500 × level^0.5 per level (≈ 4 240 at
+almost all 2000; tier 1 median 472, tier 2 — 1004, tier 3 — 1848). **Meaning — Funcom's own modding wiki, «Item Table Primer», section «Durability»:
+«Repair XP - How much XP you get from repairing the item.»** (https://conanexiles.com/wp-content/wiki/3051061965.html, read 2026-11-06 09:55; the same page
+describes every column of the item table — the reference for any item field). Corrected the same minute: my 09:53 guess «XP for crafting» (from Essence of Rot
+carrying 2000 — a value on an item nobody repairs, a data quirk) was wrong. Our XP curve to set it against: `KrinikConanGameplay` 500 × level^0.5 per level (≈ 4 240 at
 level 72, ≈ 7 070 at 200), `PlayerXPRateMultiplier` 1 in the 3.0.1 `ServerSettings.ini`.
 **The other interaction prompts (kit probe `kit-probe-tree.py`, 2026-11-06, bug 83).** Besides `WBP_ContainerInfo` (corpses, chests, crafting stations, a
 campfire) the game draws five sibling prompts from `/Game/UI/HUD/FloatingNames/`: `W_DialogueNPCInfo` (an NPC to talk to: `T_Name`, `T_Title`, `T_State`,

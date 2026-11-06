@@ -22,7 +22,11 @@ Each group by the guide: read original + both sides → classify per field → r
       `CavernsOfSet.md`. **Read 2026-11-06 09:43 +03:00 — outcome C:** the Grey One Mask is a sandstorm breather in Severe Weather, a plain mask with a text fix in Mines of Set;
       Mines of Set wins → the breather is lost. Proposed merge — Severe Weather's row + Mines of Set's text; `RepairXP` (12665 vs 3710) → the owner.
       `[OWNER]` 09:53 «С нашей ускоренной прокачкой, с нашей новой кривой - что предлагаешь?» → `[AI]` proposed 3 710: the value Mines of Set gives the whole Grey One
-      set (51420–51424); vanilla caps the field at 2000, 12 665 is above every vanilla item; on our curve 3 710 ≈ 0.9 of a level at 72, ½ at 200. Waits for his word. Then: a
+      set (51420–51424); vanilla caps the field at 2000, 12 665 is above every vanilla item; on our curve 3 710 ≈ 0.9 of a level at 72, ½ at 200 — PER REPAIR
+      (the field is the XP for repairing the item — Funcom's «Item Table Primer», game map; 12 665 per repair would make repairing the mask an XP farm).
+      **DECIDED** `[OWNER]` 2026-11-06 09:55 «Предлагаю 3 710». Merge built as six `copyprop:` lines in `ConanExiles/_config/krinik_patches/Mines_of_Set__Caverns_of_Set_Item_Table.tsv`
+      (`ItemClass`, `ArmourValue`, `FirstModifier`, `Icon`, `IconLayers`, `GameplayTags` ← `SevereWeatherEnhanced:LFS_ItemTable:51420`; the new `patch-mod-asset.py`
+      operation); `RepairXP` 3 710 and the texts stay Mines of Set's. Next: the rebuild, a world start, the live row, the mask's tooltip. Then: a
       `patch-mod-asset.py` map on Mines of Set's table (number field support needed), a world start, the live row, the mask's tooltip.
 - [ ] 2. Xevyr's shared UI rows `XCS_Panel`, `Xev_MouseInteraction` (`DT_UIModuleTable`) — ProximityParty → Simple_Minimap → LLHighlight → AlMerayah_Reborn
       (2 rows; likely A).

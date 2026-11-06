@@ -13,8 +13,8 @@
 ## Goal vector (Maintain)
 
 **The mods of a build are CONSISTENT with each other** (`[OWNER]` «моды должны быть согласованные»): every mod brings its own changes and keeps them, no change
-of one mod is silently lost to another or fights another — in ANYTHING two mods share. Acceptance per build: each overlap found carries a recorded outcome (the
-register at the end of this guide or the game's findings file), and none is «not judged».
+of one mod is silently lost to another or fights another — in ANYTHING two mods share. Acceptance per build: each overlap found carries a recorded outcome
+(`REGISTER.md` next to this guide), and none is «not judged».
 
 ## The rule
 
@@ -72,10 +72,9 @@ Kind-specific notes:
 4. **Resolve** by the outcome table; native, by a map or script next to the pak, KRINIK MODIFIED, `modpack.json` entry `krinikModified` names what was merged.
 5. **Verify by the game:** the detector again (tables: the row still merges — check the VALUE live by the remote); one in-game look or a measured case of what
    the player sees (the item's stats, the spawn, the drop rate, the frame time).
-6. **Record** the outcome in the register below and in both mods' notes.
+6. **Record** the outcome in `REGISTER.md` (next to this guide — kept apart so that a new line does not make the guide «changed after reading») and in both
+   mods' notes.
 
-## Register of judged overlaps
-
-| Game · kind · what | Sides (wins last) | Outcome | Resolution | Date |
-|---|---|---|---|---|
-| Conan · table · `Items/ItemTable` 51420 «Grey One Mask» | SevereWeatherEnhanced → Mines_of_Set | **C** (`row-diff.py`, 2026-11-06 09:43 +03:00): Severe Weather makes the vanilla mask a SANDSTORM BREATHER (`ItemClass` `BPGameItemArmor_C` → `BP_SandstormBreather_C`, armour 35 → 38, modifier «Light» → «Light Armor», its own `Icon` with `IconLayers` emptied, tags cut to `Item.Armor`, `RepairXP` 2000 → 12665); Mines of Set re-declares the vanilla mask (`ShortDesc` «Grey One» → «Grey Ones», `RepairXP` → 3710). Mines of Set loads later → **the breather function of this mask is LOST in the build today**. Both turn `<LoreItalics>` into `<span style="italic">` (identical). Same field, different values: `RepairXP`, `IconLayers` | proposed merge: Severe Weather's row (the breather) + Mines of Set's text fix; `RepairXP` — the owner | 2026-11-06 |
+Tools (Conan): `who-overwrites-table.py --shared-rows` (step 1, tables) · `row-diff.py <original.json> <row> <modA.json> <modB.json>` (step 3, tables; texts by
+their source string) · `patch-mod-asset.py build` with `copyprop:<Row>/<Field>\t<Mod>:<Asset>:<Row>` (step 4 — a whole field from another mod's row, taken from
+that mod's pak at every build).

@@ -141,7 +141,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > rule 27, hook «mod-reconciliation-gate» (`style-gate.mjs --cmds`, report `2026-11-06_mod-reconciliation-gate.md`). First judged: row 51420 — a VANILLA armour
 > piece both Severe Weather and Mines of Set re-declare (not two items under one id; corrected 09:34).
 > **ALL mod conflicts to be resolved** (`[OWNER]` 09:40 «Ты понимаешь что нужно будет разобраться и поршать ВСЕ конфликты?»): `plans/45_conan_mod_reconciliation_all.md` —
-> the 143 rows by group (steps 1–6), the rows the log cannot show (7), assets / code / resources / mechanics (8–12). In work: step 1, row 51420.
+> the 143 rows by group (steps 1–6), the rows the log cannot show (7), assets / code / resources / mechanics (8–12). Step 1 (row 51420 Grey One Mask): outcome C (Severe Weather's breather lost to Mines of Set); `[OWNER]` 09:55 «Предлагаю 3 710»; merge = six `copyprop:` lines
+> (a new operation of the pak-patch tool) in the Mines of Set map — the rebuild runs, then a world start and the tooltip. Register of judged overlaps:
+> `researches/mod-reconciliation/REGISTER.md`. Russian reading copy for the owner: `researches/mod-reconciliation/GUIDE_ru.md` (HOUSE_RULES 1a).
 > **Nexus quarantine** (`[OWNER]` 08:51 «каковы могут быть причины…»): our 11-03 request covers all three Nexus causes (exe source + build steps, UE4SS DLLs with
 > upstream link and hashes, no nested archives; all three links answer 200 publicly 08:53) — most likely the manual queue. BUT (`[OWNER]` 09:18 «они там пишут про
 > способ сборки … они поймут, как собрать?»): the letter did not name the build script and misnamed `BuildInfo.g.cs`; the README has no build section. Checked 09:19:
