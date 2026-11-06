@@ -23,7 +23,7 @@
   `HasTag` (`Npc.Boss.Miniboss`, `Npc.Boss.WorldBoss`), `BooleanOR`, `SelectVector((1.2,1.2,1.2), thrall scale, isBoss)` → `SetActorScale3D`; this mod's own edits
   untouched (28 of 29 exports byte-identical, only `ShowThrallPlaceable` changed). Recipe: `ConanExiles/_config/krinik_patches/No_Building_Placement_Restrictions__BP_ThrallSystemComponent.tsv`
   (`graft:ShowThrallPlaceable\tBossesMyNewBesties`), built by `patch-mod-asset.py` → `kismet-graft.py`; manifest `krinikBuild` / `krinikModified`; original pak in
-  `_patch-originals`. Live: loads, the five grafted locals in the live UFunction, an ordinary thrall's ghost as before (report
+  `_patch-originals`. Live: loads, the five grafted locals in the live UFunction; seven ordinary placements without a script warning, the ghost's scale not read (report
   `testcases/reports/2026-11-06_conan-thrall-ghost-graft.md`). Open: the boss ghost's 1.2 itself — needs a recruited boss thrall item (BMNB's own function);
   LBPR's toggles not walked in game after the edit.
 - On a mod update: put the new pak into `_patch-originals`, rebuild by the recipe — the graft stops (exit 3) if the author changed the statements it lands on.

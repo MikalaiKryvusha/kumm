@@ -26,8 +26,11 @@ Conan Exiles 3.0.1, `D:\Games\Conan Exiles 3.0.1`, the build's mods; edited `No_
   to-zen control + original dependencies = LBPR's chunk byte-exact, the edited to-zen keeps the control's dependency sections, back-parse of the finished chunk = the
   patched legacy.
 - Functional run: walked on the real game with the build — G1 pass (3 world entries, LBPR's container re-extracted, no error for the asset); G2 pass (live UFunction
-  has 48 properties incl. the five grafted); G3 pass by eye (a human-size ghost on open sand, frame `g2-Tavern_Barkeeper.jpg`; 7 uses, 0 script warnings from
-  `ShowThrallPlaceable`); G4 blocked; G5 not run (offline export compare only).
+  has 48 properties incl. the five grafted); G3 partial (in placement mode a human-size figure stands on open sand, frame `g2-Tavern_Barkeeper.jpg` — that it IS the
+  placement ghost was not confirmed (opaque, no placement prompt in the frame), its scale number not read; 7 uses, 0 script warnings from `ShowThrallPlaceable` — no
+  failure seen, which does not show the grafted lines running); G4 blocked; G5 not run (offline export compare only). Independent judge pass 2026-11-06 14:31 +03:00 (subagent, the
+  build re-run from the recipe): VERIFIED WITH CAVEATS — the inner files of the rebuilt pak byte-identical to the deployed one (only the outer pak's file order
+  differs), 19/19 jumps confirmed by its own alignment, the six grafted statements identical to BMNB's, `extract` now gives three different copies.
 
 ## 5. Found
 
@@ -36,6 +39,8 @@ Conan Exiles 3.0.1, `D:\Games\Conan Exiles 3.0.1`, the build's mods; edited `No_
    vanilla-path paks (LegitReligious, Storage Reach Expanded) use `PATCH_VIEW` (only the mod) — not affected.
 2. UAssetAPI 1.1.0 parses UE 5.8 function FProperties into garbage (names like sound-cue paths) — the graft reads them by bytes (43-byte base + tail per type).
 3. retoc `to-zen` of this blueprint differs from the cooked chunk ONLY in the dependency sections (96 bytes, 24 entries fewer) — the original sections are put back.
+   The finished chunk grows 97 120 → 113 137 bytes: UAssetAPI's write marks all names as export-data names, so the zen name map carries all 847 names instead of 403 —
+   harmless (G1, G2 live; the back-parse guard holds).
 4. Crash 1 (13:59) — `StartMovingThrall` on a hostile non-thrall NPC; control with the original pak NOT run, cause not proven. Crash 2 (14:08) — after Lua reads of
    `PlaceableThrallActor` / class properties; launch 3 with the same placement and without those reads stayed alive — the probe, most likely (not proven by a control).
    Both crash-report windows closed by PID (25448, 30136).
@@ -49,5 +54,6 @@ Frames `scratchpad/thrall/g2-Tavern_Barkeeper.jpg`, `g2-Aesir_Boss.jpg` (session
 
 ## 7. Verdict
 
-partial — the graft is in the game and runs on every placement without errors (G1–G3); the boss ghost's 1.2 itself (G4) is not observed: it waits for a
+partial — the grafted asset loads and its new locals are in the live function (G1, G2); seven placements of an ordinary thrall ran with no script warning (G3
+partial — no failure seen, the grafted lines' effect not observed); the boss ghost's 1.2 itself (G4) is not observed: it waits for a
 recruited boss item (BMNB's own function in play — already owed in STATUS); G5 not walked.

@@ -88,6 +88,12 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   instance. Unknown yet: whether the egg went into the inventory as an item while the instance stays (instance scale is not the pickup signal for eggs — stones
   had it), or the press does another action. Next: the hero's inventory count of the Kappa egg item before/after (its template id — `ItemTable`), and the game
   log of the press (`Gathering` / harvest lines). The owner's original symptom («no plate over nest eggs») does NOT reproduce: the plate shows at two nests.
+  **2026-11-06 14:30 +03:00 — the inventory answers:** the same dry nest, Kappas removed, probe true; `BackpackInventory:GetNumberOfItemsByTemplate(13011)` («Egg», the only egg
+  item of `ItemTable` besides 18256 «Egg Surprise») **0 → 0**, `GetItemCount()` **47 → 47** around a real E. So the plate says «E Взять» and the E press takes
+  nothing — the plate PROMISES a pickup the game does not do there (the probe `PickupGatheringOneInstance` answers true over the nest, the press does not gather).
+  The water stat rising on that press is not explained. Next (the cause, not a patch): what the game's own E does at this spot — the press handler's path
+  (`EnvironmentFunctionLibrary` pickup vs the interaction trace), and whether vanilla Kappa nest eggs are gatherable by E at all (they may be a harvest-by-tool
+  node); then the plate asks the same thing the press does (bug 77's rule).
 
 ## Study (next)
 
