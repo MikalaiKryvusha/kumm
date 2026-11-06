@@ -8,6 +8,8 @@
 `[OWNER]` «при заборе предмета выделенного в окне квик лута по F на мгновение контур выбора перемещается в последнюю нижнюю правую клетку - некрасиво, он прыгает
 туда сюда» · «это баг, нужно будет испрравить» · 2026-11-02 09:10.
 
+`[OWNER]` 2026-11-06 17:48 «выделение в быстром луте прыгает при взятии на F; - ты это частично починил» — confirms the PARTIAL status above; the owed proper fix stands.
+
 ## Symptom
 
 In the quick-loot window (`W_QuickLootPanel`, a corpse or a chest), the player selects an item and takes it with F: for a moment the selection rim jumps to

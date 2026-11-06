@@ -70,6 +70,17 @@ visibility by the `XCS_Panel` event in `KrinikPauseGameInMenu` 0.7.0 (retry ≤4
 | — | Building placement at max zoom (twin of 11) | owner 09:4x: «костёр смотрит и следует ровно за прицелом» | — | — | fine, not broken |
 | 7 | Parameters tab, magic school icons (Era of Trials) | tooltips English: «Entropic magic is dark, deceitful, and unfair…», «You have {0} Entropic Amp…» (six schools + Readiness) | corrected 2026-10-26 ≈11:50: NOT string literals — keyed FText in blueprint bytecode (`29 01 1F <src> 1F <key> 1F <ns>`), `.locres` reaches them by key; the inventory `all-mods-ftext.csv` simply missed multi-line sources. Scan `_config/compat/missing-bytecode-ftext.py` over all mods: 72 keys outside the inventory (EAA 39, EoT 10, Hosav 6, Minimap 4, …), 59 player-visible keys → 53 worklist rows 23224–23276, translated | locres rebuild | partial — Exiles Fishing panel Russian natively (58 strings, W_EFT_Panel, frame 11:02; pak KRINIK MODIFIED in `_krinik-modified/3718368769`); BPC_EFT_Tuning / W_EFT_AdminButton natively (BP-safe splice build); Era of Trials + the other 52 rows — locres rebuild in progress, in-game frame pending. Fishing admin panel (owner's screenshot 12:51): 9 bytecode string literals stay English (`FPText`, `WaitText`, `TierText`, `PerHourText`, `PresetText`, `ProfStore`, `W_EFT_FishCard.Init`); the mod's own text table `DT_ExilesFishing_Texts` is not read by the panel; no public sources; fork to the owner — own bytecode relinker / ask the author (Discord) / Lua on the panel → owner: «Свой пересчёт байткода»; **fixed 13:13**: `kismet.py` (Kismet 5.8 walker, 190/190 functions self-checked) replaced 12 literals, panel Russian in the game, no crash (T4) |
 
+## The owner's word 2026-11-06 17:48 +03:00 on items 15/17 and 23 (verbatim, answering the 1.0.0 list)
+
+> хаб вздрагивает при переключении вкладок клавишами Q и E, часть элементов модов появляется с задержкой, и текст на вкладках дрожит; - это, вероятно. может быть ты уже и починил. Нужны тесты.
+> на карточках классов Enhanced Armory and Arsenal английский текст нарисован прямо на картинках; - переделать не картинками, а векторами и строками
+
+- Items 15 / 17 (hub shake on Q/E, late mod elements, tab text jitter): the next step is a TEST, not a fix — a 60 fps video of Q/E switching on every
+  hub tab (memory `ui-flicker-needs-60fps-video`), frame-by-frame; a pass closes the item, a fail reopens the bisect. Fixing: the next game run of the
+  2026-11-06 evening chat (the KrinikConanMusic recon run).
+- Item 23 (EAA class cards): the owner's decided route — the card text is NOT re-painted into textures: the cards get our widget layer with vector shapes and
+  real strings (a localizable `FText`, Russian), drawn over a text-free card image. Fixing: after KrinikConanMusic's first build (plan 46).
+
 ## Item 11 — the camera-relative searches (twin check, owner's question «какие ещё поиски в игре есть, и они могли сломаться»)
 The game builds the interaction ray in `FunCombat_PlayerController_C::GetLineTraceStartAndEndFromCamera(Distance)` — start = the camera,
 direction = screen centre (the crosshair). Every distance measured along it was sized for the vanilla camera at 200 cm. Read 2026-10-26
