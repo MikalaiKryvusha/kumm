@@ -91,6 +91,38 @@
 
 ## Entries
 
+### EXP-0464 · 2026-11-06 · ❌ · #conan #remote #crash #probe #thrall
+class: probe-calls-game-function-outside-its-contract
+mechanized: none — the game map's «Thrall placement» section lists the calls that crashed
+**Context:** plan 45 step 8a, G4 — getting a boss's placement ghost on screen.
+**Result:** ❌ two crashes from my own probes: `StartMovingThrall(<hostile NPC>)` (the function expects an owned thrall — access violation 0x10) and Lua reads of
+`PlaceableThrallActor` / `CurrentThrallBrushClass` (0x242). `pcall` does not catch a native crash. The run that stayed alive used the player's own path:
+`exec SpawnItem 25002 1` → `ThrallItem:OnUseItem(hero, controller)`.
+**Lesson:** drive a game system by the PLAYER's entry point (an item's use, a UI handler), not by a mid-level function with an object it was never meant for; read
+only plain values (location, scale, names) of actors — never raw pointer/class properties of a native component.
+
+### EXP-0463 · 2026-11-06 · ❌→✅ · #conan #ue5 #kismet #zen #retoc #uassetapi #reconciliation #graft
+class: two-mods-one-blueprint-function
+mechanized: yes — `ConanExiles/_config/devkit/kismet-graft.py` + `patch-mod-asset.py` line `graft:<Function>\t<DonorMod>` (three guards: control to-zen = cooked chunk,
+dependency sections unchanged, back-parse = patched legacy)
+**Context:** BMNB and LBPR both ship `BP_ThrallSystemComponent`; the owner wants BMNB's ghost scale inside LBPR («если получится»).
+**Result:** ✅ grafted: statements of the donor are aligned with the game's and the receiver's BY MEANING (names, objects, property paths and jump targets resolved to
+strings), inserted, names/imports remapped and appended, the receiver's absolute jumps re-pointed by «new start of the same statement + offset», the donor's new locals
+appended as raw FFields. Three facts paid for it: (1) UAssetAPI 1.1.0 misreads UE 5.8 function FProperties (names come out as sound-cue paths) — the FField is
+43 bytes + a tail by type (Bool 6, Struct/Object/Interface 4); (2) retoc `to-zen` of this blueprint equals the cooked chunk EXCEPT the dependency sections (96 bytes
+fewer) — put the original sections back; (3) UAssetAPI's write marks all names as export-data names, so the zen name batch doubles (15 → 31 KB) — harmless.
+**Lesson:** a blueprint merge of two mods is a byte graft with semantic alignment and a control that reproduces the cooked chunk byte-exact; trust the graft only
+when the result vs donor differs exactly by the receiver's edits and vs receiver exactly by the donor's.
+
+### EXP-0462 · 2026-11-06 · ❌→✅ · #conan #retoc #extract #reconciliation #claim
+class: reader-returns-the-game-copy
+mechanized: yes — `patch-mod-asset.py` `priority_view` (the mod's container as `<Mod>_P`) in `extract` and in the graft route
+**Context:** reading BMNB's and LBPR's copies of `BP_ThrallSystemComponent` by `patch-mod-asset.py extract`.
+**Result:** ❌ both «copies» were byte-identical — both were the GAME's file: retoc ranks the game's containers above mods' for a duplicated path. A view with only the
+mod loses every reference to the game (`UnknownExport`). ✅ retoc ranks a `_P` container highest (`iostore.rs` sort_container_name): the full view + the mod as
+`<Mod>_P` gives the mod's copy with resolved references. The 12:09 reading «BMNB gives the ghost its own scale» was also false (the constant 1.2 was not read) — corrected.
+**Lesson:** when two «different» files of two mods come out identical, suspect the reader first: check the md5 against the game's own copy.
+
 ### EXP-0461 · 2026-11-06 · ❌→✅ · #interview #owner-review #contour #queue #claim
 class: deferred-interview-read-as-waiting
 mechanized: none — the fix is the status form; the contour's closing words are `CLOSED|WITHDRAWN|MOVED|ЗАКРЫТ|СНЯТ|ПЕРЕНЕСЕН`, and only ✅ ⛔ ➡ 🟢 may stand before them (`.kaif/tools/contour/texts.mjs` `statusClosedWord`)

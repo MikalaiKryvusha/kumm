@@ -18,3 +18,12 @@
   `CheckTargetLocationForBuildings`, `CheckValidPlacement`, `PlaceThrallImplementation`, `ServerTeleportThrallInternal`, `ShowThrallPlaceable` — reading its
   config `ST_LBPRConfig` (`ThrallPlaceAnywhereAdmin/Everyone`, `OverlappingFollower`, `PlacementofFollowersNextToOthersRadius`, `InsideCollisionCavesDungeons`,
   `PlacementOnLandClaim`, walkable-floor toggles). BMNB's change in `ShowThrallPlaceable` (a boss's ghost scale) is lost under this copy — C, interview #033.
+- **KRINIK MODIFIED 2026-11-06 14:16 +03:00 (plan 45 step 8a, `[OWNER]` interview #034 Q2 = A + «если получится, то в LBPR нужно затянуть модельки из Bosses My New Besties»):**
+  BMNB's lines are GRAFTED into this mod's `ShowThrallPlaceable` — after the vanilla `GetActorScale3D` statement: `GetActorGameplayTags(GetOwnerCharacter)`, two
+  `HasTag` (`Npc.Boss.Miniboss`, `Npc.Boss.WorldBoss`), `BooleanOR`, `SelectVector((1.2,1.2,1.2), thrall scale, isBoss)` → `SetActorScale3D`; this mod's own edits
+  untouched (28 of 29 exports byte-identical, only `ShowThrallPlaceable` changed). Recipe: `ConanExiles/_config/krinik_patches/No_Building_Placement_Restrictions__BP_ThrallSystemComponent.tsv`
+  (`graft:ShowThrallPlaceable\tBossesMyNewBesties`), built by `patch-mod-asset.py` → `kismet-graft.py`; manifest `krinikBuild` / `krinikModified`; original pak in
+  `_patch-originals`. Live: loads, the five grafted locals in the live UFunction, an ordinary thrall's ghost as before (report
+  `testcases/reports/2026-11-06_conan-thrall-ghost-graft.md`). Open: the boss ghost's 1.2 itself — needs a recruited boss thrall item (BMNB's own function);
+  LBPR's toggles not walked in game after the edit.
+- On a mod update: put the new pak into `_patch-originals`, rebuild by the recipe — the graft stops (exit 3) if the author changed the statements it lands on.

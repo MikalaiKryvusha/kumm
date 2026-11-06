@@ -735,3 +735,19 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
 - An in-game loading screen (`W_IngameLoadingScreen_C`: `TeleportPlayer`, waystones, respawn) counts as full-screen GUI (`IsFullscreenGUIActive`) and is
   followed by a NEW Damage Meter widget `DN_UI_DmgWidget_C` (and a new Hosav HUD) — mods that decorate widgets must re-apply on the widget's own birth (bug 79,
   KrinikConanUI notes).
+
+## Thrall placement (read 2026-11-06 14:17 +03:00, plan 45 step 8a)
+
+- The hero's `BP_ThrallSystemComponent` (`BasePlayerChar_C….BP_ThrallSystemComponent`, class `/Game/Systems/Thrall/BP_ThrallSystemComponent`, parent
+  `/Script/ConanSandbox.ThrallSystemComponent`) — functions `ShowThrallPlaceable(ThrallInfo) → ghost actor`, `StopPlacingThrall`, `StartMovingThrall(thrall)`,
+  `PlaceThrall`, `CanBePlaced`, `CheckValidPlacement`; state `IsPlacingThrall`, `ThrallPlacementMode` (1 placing from an item; the BP compares 2 and 3 too).
+- `FThrallInfo`: ThrallName, ThrallIcon, ThrallTier_DEPR, ThrallProfessionTier, ThrallBuff, ThrallProfession, BonusRecipes, CraftingGroups, ThrallTemplateID, ThrallGroup,
+  SpawnTableId, IsFemale, ThrallItemID. The ghost's LOOK comes from the thrall item's character layout (`ThrallItem.ThrallCharLayout`), not from `SpawnTableId`:
+  the barkeeper item with `SpawnTableId = Aesir_Boss` shows the same naked human ghost.
+- Stand: `exec MakeMeAdmin` + `exec SpawnItem 25002 1` (`XX_Barkeeper Thrall Item`, row `Tavern_Barkeeper`; 147 `ThrallItem` rows in `ItemTable`, field
+  `SpawnTemplateID`) → the instance `ThrallItem_…` in `BackpackInventory` → `item:OnUseItem(hero, controller)` = the player's «use»: placement starts, the ghost stands
+  where the camera looks (open walkable ground — a Kappa in front hid it). Tool: `ConanExiles/_config/thrall-ghost-probe.lua` (modes list · use · hook · seen · stop).
+- What NOT to do: `StartMovingThrall(<hostile NPC>)` crashed the game (access violation 0x10, 13:59); reading `PlaceableThrallActor` / `CurrentThrallBrushClass` from Lua
+  preceded a crash (0x242, 14:08); the remote refuses `FindAllOf(<…Component>)` (it crashed the game before). `RegisterHook` on `Actor:SetActorScale3D` does not see
+  BP→native calls; the hook on the BP `ShowThrallPlaceable` fires once per use (after the body) but its return value is not readable in Lua.
+- The ghost actor is not a `Character`/`Pawn` and was not found by class name; its scale was not read as a number (G3 judged by a frame).

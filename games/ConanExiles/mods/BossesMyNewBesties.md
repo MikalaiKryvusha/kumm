@@ -12,9 +12,15 @@ stutters come, check this pair first (manifest).
 `/Game/Mods/BossesMyNewBesties/BMNB_SpawnDataTable` — its spawn rows, merged into the game's `Systems/SpawnTable/SpawnDataTable` (the boss rows it makes
 recruitable).
 
-`/Game/Systems/Thrall/BP_ThrallSystemComponent` — a vanilla path shipped whole; its only change against the game (2026-11-06 12:09 +03:00, `kismet-trace.py`): in
-`ShowThrallPlaceable` a thrall tagged `Npc.Boss.Miniboss` / `Npc.Boss.WorldBoss` gives the placement ghost its own actor scale. Less Building Placement
-Restrictions ships the same path and loads later — this change is lost in the build (C, interview #033); recruitment itself is in the spawn tables.
+`/Game/Systems/Thrall/BP_ThrallSystemComponent` — a vanilla path shipped whole; its only change against the game — `ShowThrallPlaceable`, read byte-exact
+2026-11-06 13:49 +03:00 from THIS mod's container (`kismet-trace.py` on a view «game + this mod as `<Mod>_P`»): the vanilla code gives the placement ghost the thrall's
+`GetActorScale3D`; BMNB adds `GetActorGameplayTags(GetOwnerCharacter)` → `HasTag Npc.Boss.Miniboss` OR `HasTag Npc.Boss.WorldBoss` → `SelectVector((1.2, 1.2, 1.2),
+thrall scale, isBoss)` → `SetActorScale3D`: a boss's ghost is a FIXED 1.2 (its recruited NPC class is «20percentbigger»), every other thrall's ghost as in the game.
+(Corrected: «gives the placement ghost its own actor scale» of 12:09 was false — the constant was not read.) Less Building Placement Restrictions ships the same path
+and loads later; the change is GRAFTED into LBPR's copy (plan 45 step 8a, `ConanExiles/_config/devkit/kismet-graft.py`; see LBPR's notes); recruitment itself is
+in the spawn tables.
+How to read this asset of this mod: `patch-mod-asset.py extract` returns the GAME's copy for a vanilla path (retoc ranks the game's containers higher) — use the
+`_P` view instead (`researches/mod-reconciliation/GUIDE.md` step 2, the read-a-mod's-vanilla-path note).
 
 ## How to look inside
 

@@ -137,7 +137,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Guide kind 6 «a mod vs the game» (EXP-0460). Reports `testcases/reports/2026-11-06_conan-{boss-rows-heritage-bmnb-live,religion-and-eaa-rows-live,stale-stat-table-and-thrall-system}.md`;
 > the judge pass: VERIFIED WITH CAVEATS (caveats fixed). KAIF #194 (refresh hooks from a sibling cwd) filed and patched locally.
 > **Interview #034 (merged 13:31 from #032/#033) ANSWERED 13:34 and applied:** Q1 A — Era of Trials' Zathite recipes stay; Q2 A — LBPR owns the thrall system, plus the owner's
-> «если получится, то в LBPR нужно затянуть модельки из Bosses My New Besties» → plan 45 step 8a (port BMNB's boss ghost scale into LBPR's asset). 2026-11-06 13:36 +03:00 `[OWNER]` «работай автономно -
+> «если получится, то в LBPR нужно затянуть модельки из Bosses My New Besties» → plan 45 step 8a: **BUILT 2026-11-06 14:18 +03:00** — BMNB's lines grafted into LBPR's
+> `ShowThrallPlaceable` (LBPR KRINIK MODIFIED, `kismet-graft.py`, `patch-mod-asset.py graft:`), in game G1–G3 pass; owed: a boss ghost at 1.2 SEEN (needs a recruited boss
+> item — rides with «BMNB's own function in play») and LBPR's toggles walked. Also fixed: `extract` gave the GAME's copy of a vanilla path (EXP-0462). Report
+> `testcases/reports/2026-11-06_conan-thrall-ghost-graft.md`. 2026-11-06 13:36 +03:00 `[OWNER]` «работай автономно -
 > буду нужен, то зови голосом» → `/dayloop`. Ambushes (#025) are NOT waiting — the owner took them off the agenda 2026-10-31 21:11
 > (the «waits for #025» of this chat was false, corrected in plan 45 step 11, the register and here). Owed by the agent: BMNB's own function in play (knock a boss out, recruit); bug 82 — narrowed: at a Kappa
 > nest egg «E Взять» IS shown (frame + the plate's log, stand `ConanExiles/_config/egg-stand.lua`) — most likely fixed by bug 77's rework; owed: a real E

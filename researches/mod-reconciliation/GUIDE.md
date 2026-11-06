@@ -70,7 +70,10 @@ Kind-specific notes:
 1. **Detect** with the kind's detector (table above); write the overlaps into the game's findings file (`researches/<game>-…/`).
 2. **Read three versions:** the original, side A, side B. Conan: a mod's asset — `python -I -X utf8 ConanExiles/_config/devkit/patch-mod-asset.py extract
    <Container> <Asset> <work>` → JSON (`Exports[0].Table.Data[]` for a table: `{Name: <key>, Value: [{Name: <field>, Value: …}]}`); the original —
-   `retoc-5.8 to-legacy --version UE5_7 --no-shaders --filter <Asset> D:/work/ai_sandbox/_paksview-3.0.1 <work>` → `uaj tojson … VER_UE5_8`. Before
+   `retoc-5.8 to-legacy --version UE5_7 --no-shaders --filter <Asset> D:/work/ai_sandbox/_paksview-3.0.1 <work>` → `uaj tojson … VER_UE5_8`. A VANILLA path a mod
+   ships whole (kind 3, kind 6): a view with every container plus the mod's as `<Mod>_P` (retoc ranks `_P` highest; otherwise the GAME's copy comes out and two mods
+   «agree» — KUMM EXP-0462) — `patch-mod-asset.py extract` does it since 2026-11-06 (`priority_view`). Merging two blueprints' edits of ONE function — `graft:` (kind 3
+   outcome B, `kismet-graft.py`). Before
    touching a mod, read its notes `games/<Game>/mods/<Mod>.md` (the knowledge-hook demands it; create them if missing).
 3. **Classify** part by part against the original → A / B / C / D (a script for tables; by eye for assets and code, with frames).
 4. **Resolve** by the outcome table; native, by a map or script next to the pak, KRINIK MODIFIED, `modpack.json` entry `krinikModified` names what was merged.

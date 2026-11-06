@@ -85,7 +85,10 @@ Each group by the guide: read original + both sides → classify per field → r
       (StorageReachExpanded) — 5 game console commands missing, its own 3 kept → MERGED 2026-11-06 12:21 +03:00 (`vanilla+own:`), live 8/8; ours —
       KrinikConanGameplay's `DT_AttributeSystem`, `DT_ExperienceSystemLevel`, `DT_FeatsPerLevel` (built by us from the 3.0.1 kit — checked 2026-11-06 12:44 +03:00: each 10 000 rows, all 60 game rows present — the uncap, not a stale copy). `[OWNER]` interview #034 Q2 = A (13:34) — LBPR stays the owner of the file (as live, nothing to build), with the comment
       «если получится, то в LBPR нужно затянуть модельки из Bosses My New Besties» → step 8a. Re-checks done; step 8 closes with 8a.
-- [ ] 8a. **BMNB's boss placement-ghost scale carried INTO LBPR's `BP_ThrallSystemComponent`** (the owner's 13:34 comment, «если получится»): read BMNB's
+- [ ] 8a. **BMNB's boss placement-ghost scale carried INTO LBPR's `BP_ThrallSystemComponent`** (the owner's 13:34 comment, «если получится»).
+      **BUILT AND IN THE GAME 2026-11-06 14:16 +03:00** (LBPR KRINIK MODIFIED, recipe `graft:` in `_config/krinik_patches/`; tools `kismet-graft.py`, `patch-mod-asset.py` `graft_chunk`,
+      `uaj rawput`): G1–G3 pass, G4 (a boss ghost at 1.2 seen) blocked — needs a recruited boss thrall item; G5 (LBPR toggles in game) not run. Report
+      `testcases/reports/2026-11-06_conan-thrall-ghost-graft.md`. Closes with G4 + G5 — they ride with «BMNB's own function in play» (STATUS). The original text of the step: read BMNB's
       `ShowThrallPlaceable` bytecode (tag check `Npc.Boss.Miniboss` / `Npc.Boss.WorldBoss` → `SetActorScale3D` by the thrall's scale) and LBPR's version of the
       same function; port BMNB's addition into LBPR's asset by a re-appliable script next to the pak (rule 8), LBPR marked KRINIK MODIFIED; verify live: a
       recruited world boss's ghost at its own size AND LBPR's placement toggles still working. If the bytecode will not take the edit — tell the owner what
