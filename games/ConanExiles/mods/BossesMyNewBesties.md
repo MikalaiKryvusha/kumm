@@ -12,6 +12,10 @@ stutters come, check this pair first (manifest).
 `/Game/Mods/BossesMyNewBesties/BMNB_SpawnDataTable` — its spawn rows, merged into the game's `Systems/SpawnTable/SpawnDataTable` (the boss rows it makes
 recruitable).
 
+`/Game/Systems/Thrall/BP_ThrallSystemComponent` — a vanilla path shipped whole; its only change against the game (2026-11-06 12:09 +03:00, `kismet-trace.py`): in
+`ShowThrallPlaceable` a thrall tagged `Npc.Boss.Miniboss` / `Npc.Boss.WorldBoss` gives the placement ghost its own actor scale. Less Building Placement
+Restrictions ships the same path and loads later — this change is lost in the build (C, interview #033); recruitment itself is in the spawn tables.
+
 ## How to look inside
 
 `python -I -X utf8 ConanExiles/_config/devkit/patch-mod-asset.py extract BossesMyNewBesties BMNB_SpawnDataTable <work>`.

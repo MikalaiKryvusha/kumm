@@ -29,4 +29,11 @@ NOT true as read below: it re-declares vanilla item rows and ships a vanilla tab
   container size, repair item, descriptions and ammo list — all live 54/54; Era of Trials only appends its arrow 47210132 to the ammo (its `*_Merge` merges by
   field). The 5 Zathite dancer recipes: this mod fixes the vanilla «Venom-purified blood» ×0 to ×5; Era of Trials' redesign replaces the rows whole — the
   owner's choice, interview #032.
-- The shipped vanilla `Items/ItemStatModificationTable` — check whether another mod of the build ships the same path (`mod-overrides.py`, plan 45 step 8).
+- ~~The shipped vanilla `Items/ItemStatModificationTable`~~ — judged 2026-11-06 12:09 +03:00 (plan 45 step 8): a STALE copy (1 653 rows, values = 3.0.1, none of its own), 51 rows of
+  3.0.1 missing (Derketo Acolyte set, Anvil Keeper armour) — live 0/51. No other mod ships the path.
+
+## Our edits — KRINIK MODIFIED (2026-11-06 12:09 +03:00)
+
+The `ItemStatModificationTable` chunk is replaced by the GAME's own version at every build: `_config/krinik_patches/LegitReligious_Enhanced__ItemStatModificationTable.tsv`
+= `vanilla:` (a `patch-mod-asset.py` operation), `krinikBuild` with `PATCH_VIEW` (the shared view held the game's copy of the same path — the to-zen guard caught
+it). Live after: 51/51, total 3 404 rows. Original: `_patch-originals/LegitReligious_Enhanced.pak`; library copy `_krinik-modified/3720748663`.

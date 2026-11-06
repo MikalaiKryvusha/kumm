@@ -68,11 +68,18 @@ Each group by the guide: read original + both sides → classify per field → r
       Closes when #032 is answered and applied.
 - [ ] 7. The rows the log cannot show — «added by A, overwritten by B»: for every pair of mods merging into the same game table (the `owntable` rows of
       `mod-overrides.py`), compare their row KEYS offline (their own tables' row names) — the full list of shared keys, beyond the log's 143.
+      **Tool 2026-11-06 11:53 +03:00:** `python -X utf8 ConanExiles/_config/hidden-row-pairs.py` — logged single-writer rows (3 599 in 43 tables) that are not vanilla keys
+      (`uaj rows`, a new command); first table: `ProfessionTemplateDataTable` — 3 (EAA's own pets, likely EAA's two tables). Full pass running; then for each
+      hidden row find the first mod (its own tables' keys) and judge the pair live like steps 4–6.
 
 ## Steps — the other kinds (the guide's open list)
 
 - [ ] 8. **Assets:** `mod-overrides.py` over the build — every vanilla path shipped by two paks (first run 2026-11-06: `BP_ThrallSystemComponent`,
-      `WBP_BuffIcon` in two mods each; `Dev/AlmostEmpty.umap` in six).
+      `WBP_BuffIcon` in two mods each; `Dev/AlmostEmpty.umap` in six). **2026-11-06 12:09 +03:00:** `WBP_BuffIcon` — A (same hash); `AlmostEmpty` — A in effect (empty kit
+      map); `BP_ThrallSystemComponent` — C (BMNB's boss placement-ghost scale lost under LBPR) → interview #033; and a MOD-vs-GAME case: LegitReligious's stale
+      whole copy of `Items/ItemStatModificationTable` hid 51 rows of 3.0.1 → replaced by the game's version (`vanilla:`), live 51/51. Also single-mod whole
+      tables to re-check against 3.0.1 the same way: `HairColorSelections` (MSCasaDesFlores Nails), `CustomConsoleCommandsDataTable` (StorageReachExpanded);
+      ours — KrinikConanGameplay's `DT_AttributeSystem`, `DT_ExperienceSystemLevel`, `DT_FeatsPerLevel`. Closes when #033 is answered and the re-checks done.
 - [ ] 9. **Code:** every UE4SS `RegisterHook` target and `RegisterKeyBind` key in the build's Lua mods (ours and others'), and the blueprint mod controllers'
       overrides of the same game function — pairs listed.
 - [ ] 10. **Resources:** the A-B-A flight with the full build (plan 34 / acceptance criterion 3) — the mods' cost per frame; pairs that spend the same budget.
