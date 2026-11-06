@@ -108,7 +108,8 @@ class: bench-numbers-across-sessions
 none-cheap: the run report template says it; the bench batch puts both sides in one launch where the value is live
 **Lesson:** the fly-through bench drifts between sessions (the same build: 33–56 stutters at 14:4x, 77–80 at 15:4x) — compare A and B INSIDE one launch when the
 value can be set live, and across launches only as A-B-A-B; and the testrun linter reads `Functional run:` only at the START of a line (a `- ` list marker hides
-it from the pass check).
+it from the pass check). `ini-temp.py revert` refuses after a launch: the game rewrites `Engine.ini` and DROPS the `; KUMM-TEMP <label>` comment, so the tool no
+longer recognises its own line — `diff <ini>.bak-<label> <ini>`; when the only difference is that one line, copy the backup back (done 2026-11-06 16:28, q7).
 
 ### EXP-0465 · 2026-11-06 · ❌ · #conan #stand #claim #bug82
 class: stand-object-named-not-verified
