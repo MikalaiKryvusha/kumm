@@ -75,7 +75,9 @@
       «Настройка рыбалки». Нативно: место и стиль — правкой ассетов (KRINIK MODIFIED обоих модов). Готово: кадр нижней панели, две кнопки в ряд.
 
 **В. Цена модов (критерий 3)**
-- [ ] В1. Пачка q4 «с паками / без паков» парами A-B-A-B (`_config/bench-batches/`). Готово: разница в шуме облёта, отчёт прогона.
+- [x] В1. Пачка q4 «с паками / без паков» парами A-B-A-B (`_config/bench-batches/`). Готово: разница в шуме облёта, отчёт прогона.
+      **Done 2026-11-06 15:32 +03:00** (report `testcases/reports/2026-11-06_conan-build-vs-vanilla-paks-abab.md`): within the noise, narrowly — the build 58.1 vs 62.5 fps mean, CPU
+      15.25 vs 14.34 ms, stutters ≥50 ms 44 vs 28 per 175 s flight; B's own spread 56–68 fps. Next: the cost split by pak groups and by our Lua mods (plan 34).
 - [ ] В2. План 34 — наши Lua-моды на события вместо опроса; выбор пути — владельцу с цифрами.
 
 **Г. Архив для игроков (выгрузка под ключ; найдено 2026-10-26 при сборе фактов для путеводителя)**

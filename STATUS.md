@@ -136,6 +136,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `hidden-row-pairs.py` + `mod-table-keys.py`, `lua-hook-pairs.py`, `patch-mod-asset.py` `vanilla:` / `vanilla+own:` (FName suffixes fixed), `uaj rows`.
 > Guide kind 6 «a mod vs the game» (EXP-0460). Reports `testcases/reports/2026-11-06_conan-{boss-rows-heritage-bmnb-live,religion-and-eaa-rows-live,stale-stat-table-and-thrall-system}.md`;
 > the judge pass: VERIFIED WITH CAVEATS (caveats fixed). KAIF #194 (refresh hooks from a sibling cwd) filed and patched locally.
+> **2026-11-06 15:29 +03:00 `[OWNER]` «нужно будет изучить проект https://github.com/LTSharpe/OblivionRemasteredPerformanceFix и понять, если в нём наработки, который мы можем легко и
+> просто как Quick Win взять в конан»** — recon by a helper → `researches/conan-oblivion-perffix-recon/README.md` (fixes table, cvar-level Quick-Win shortlist, the DLL port's
+> cost); the shortlist then measured by the A-B-A fly-through bench; the verdict to the owner as a Russian reading copy.
 > **Interview #034 (merged 13:31 from #032/#033) ANSWERED 13:34 and applied:** Q1 A — Era of Trials' Zathite recipes stay; Q2 A — LBPR owns the thrall system, plus the owner's
 > «если получится, то в LBPR нужно затянуть модельки из Bosses My New Besties» → plan 45 step 8a: **BUILT 2026-11-06 14:18 +03:00** — BMNB's lines grafted into LBPR's
 > `ShowThrallPlaceable` (LBPR KRINIK MODIFIED, `kismet-graft.py`, `patch-mod-asset.py graft:`), in game G1, G2 pass, G3 partial (judge: VERIFIED WITH CAVEATS); owed: a boss ghost at 1.2 SEEN (needs a recruited boss
