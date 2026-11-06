@@ -548,6 +548,11 @@ Lua-моды UE4SS ждут только отложенными действия
   `W_NewJourneyWindow_C`, `W_GuildView_C`, `W_FollowersView_C`, `W_FullscreenMap_C`, `W_StoreWindow_C`) have NO widget animations and no fade fields; most
   rows `NonBlockingLoad` True. Measured 2026-11-06 (KUMM bug 64): each page assembles over 4–6 frames after the click (≈ 93 fps) — panels, list rows and
   auto-wrapped texts arrive frames apart.
+- **Hub tab switching by the MOUSE (2026-11-06 22:2x, KUMM plan 48).** `CarouselWindow` UFunctions (by `ForEachFunction`; the remote's `funcs` fails on it):
+  SetCarouselIndex, PrevCarouselWindow, NextCarouselWindow, ButtonPressed, OnChildActivated, CloseOtherModules, OnUndistributedAttributePointsChanged,
+  OnCharacterFeatPointsChanged; the blueprint adds UpdateTabIndexes. A click on a tab = `ButtonPressed` → native `SetCarouselIndex` in C++ — a UE4SS hook
+  on Next/Prev/SetCarouselIndex does NOT fire for it (the remote's own calls do); `OnChildActivated` fires on every switch after the new window exists. The
+  switch removes the old tab window from the viewport and later collapses it; the object stays valid (`hub-switch-probe.lua`).
 - **Hub tab switching (2026-10-29 16:56, remote probes).** The tabs are changed by the NATIVE parent class of `W_Carousel_C`:
   `/Script/ConanSandbox.CarouselWindow` — `NextCarouselWindow` (E), `PrevCarouselWindow` (Q), `SetCarouselIndex`; the blueprint has no own Next/Prev
   (a hook by the blueprint path fails «no UFunction»). Module events lag the switch: `NextCarouselWindow` 17.535 → `XCS_Panel` false 17.681
