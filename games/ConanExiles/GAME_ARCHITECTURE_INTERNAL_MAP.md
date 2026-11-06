@@ -537,6 +537,17 @@ Lua-моды UE4SS ждут только отложенными действия
   the wheel path is `HideDisplay` → `RevealDisplay` (animation `Reveal` on `CanvasPanel_32.RenderOpacity`), auto-hide after `MinDisplayTime`.
   Trace recipe: a remote `lua` `RegisterHook("/Script/ConanSandbox.GUIModuleController:ActivateModule", …)` + `NotifyOnNewObject(<widget BP>)` printing
   `os.clock()` — every call, not only state changes (the pause mod logs changes only).
+- **The hub carousel asset (2026-11-06, kit probes `_config/devkit/kit-probe-carousel.py` / `kit-probe-hub-windows.py`, JSON next to them).**
+  `/Game/UI/HUD/Carousel/W_Carousel`: tree `Content` (Overlay) → `Background` (Image, material `M_UI_RadialBackgroundGradient` — the dark backing) +
+  `VerticalBox_3` → `SizeBox_0` → `TabButtonBox` (9 `WBP_ButtonBase` tabs + `ImageLeft` / `ImageRight` Q/E glyphs) + `Img_Divider`. Class default
+  `CarouselWindowNames` = CharacterInventory, FeatWindow, Attributes, CharacterStatsWindow, ExilesJourney, Guild, Followers, FullscreenMap, Stores (the
+  screen order: Снаряжение, Таланты, Хар-ки, Параметры, Путешествие, Клан, Спутники, Карта, Базар). One animation `AnimBackgroundFadeOut`: a
+  `MovieSceneWidgetMaterialTrack` on `Background`, `MaskOffset` 0 → 1 over 10 frames at 20 fps (0.5 s; tick resolution 60000; the playback range END is
+  EXCLUSIVE — vanilla ends 1 tick after the last key) — the mask slide between «Снаряжение» (no backing, the world shows) and the other tabs: the
+  «dark wave». Tab windows (rows of `DT_UIModuleTable`, widget classes `CraftingGUI_C`, `W_FeatWindow_C`, `W_Attributes_C`, `W_CharacterStatsWindow_C`,
+  `W_NewJourneyWindow_C`, `W_GuildView_C`, `W_FollowersView_C`, `W_FullscreenMap_C`, `W_StoreWindow_C`) have NO widget animations and no fade fields; most
+  rows `NonBlockingLoad` True. Measured 2026-11-06 (KUMM bug 64): each page assembles over 4–6 frames after the click (≈ 93 fps) — panels, list rows and
+  auto-wrapped texts arrive frames apart.
 - **Hub tab switching (2026-10-29 16:56, remote probes).** The tabs are changed by the NATIVE parent class of `W_Carousel_C`:
   `/Script/ConanSandbox.CarouselWindow` — `NextCarouselWindow` (E), `PrevCarouselWindow` (Q), `SetCarouselIndex`; the blueprint has no own Next/Prev
   (a hook by the blueprint path fails «no UFunction»). Module events lag the switch: `NextCarouselWindow` 17.535 → `XCS_Panel` false 17.681

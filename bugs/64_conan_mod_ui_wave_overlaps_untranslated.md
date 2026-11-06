@@ -105,6 +105,23 @@ visibility by the `XCS_Panel` event in `KrinikPauseGameInMenu` 0.7.0 (retry ≤4
   не нужен. Страницы должны переключаться четко и мгновенно. Однга закрылась - в следующем кадре полностью отрисованная новая в полноценном виде, на ней ничего
   не прялет, не открывается, не дорисовывается.» → (1) the dark-wave transition effect on some pages is REMOVED; (2) the frame after a switch shows the new page
   complete; (3) nothing on it jumps, opens or is drawn later. Check: per-switch clips, frame +1 after the switch equals frame +N (no late change) on every tab.
+  **Anatomy 2026-11-06 21:0x–21:35 (numbers first — `[OWNER]` 21:04 «активно пользуйся cli инструментами … они могут сказать тебе больше, чем твои
+  "глаза"»; `scratchpad/hub_anatomy.py`, `hub_switches.py`: per real frame — luma, |diff| to the previous frame, the blend coefficient between the old and the
+  settled page; frame sheets by ffmpeg `select`).** The hub = `W_Carousel` (9 tabs, `CarouselWindowNames`: CharacterInventory, FeatWindow, Attributes,
+  CharacterStatsWindow, ExilesJourney, Guild, Followers, FullscreenMap, Stores — folder 69 covered 6 of them). Two defects, both VANILLA by the assets (no mod
+  ships `W_Carousel`, its material or a tab window — `mod-overrides.py` 21:1x):
+  (1) **The dark wave** = `W_Carousel.AnimBackgroundFadeOut` (0.5 s) drives `MaskOffset` of `Background` (`M_UI_RadialBackgroundGradient`) 0 → 1: between
+  «Снаряжение» (no backing — the world shows through) and any other tab the mask slides over the screen — 280 ms forward (c01), 430 ms back (c10). Fix: the
+  animation one tick long in the `KrinikConanUI` kit pak (`kit-conanui-edit.py` CAROUSEL block). Build 1 (21:20) ended the range ON the last key — the range end is
+  EXCLUSIVE, the end state never applied and «Снаряжение» lost its see-through backing (`[OWNER]` 21:30 «ты выключил прозрачность хаба??? мне не нравится»,
+  frame 21:31); build 2 ends one tick after the key, as vanilla does.
+  (2) **Every page assembles over 4–6 frames (45–65 ms at ≈ 93 fps)** — run 21:26 (`run1.mp4`, 11 real mouse clicks over all 9 tabs): «Хар-ки» — rows first,
+  the track nodes a frame later, the perk descriptions drawn on ONE line over each other for 2 frames, then «unfold» (class A — auto-wrap from the previous
+  frame's width); «Таланты» — empty cells for 5 frames, then the rows fill and the header icon row jumps left as the scroll bar appears; «Снаряжение» — only
+  the left inventory panel for 4 frames (the paperdoll and craft panels missing, their captions squashed), then all at once, the grid fills a frame later.
+  Who stretches it — the bisect next: our hub pause (dilation 0.03) off, then the game without mod paks (`modlist.txt` → `.off`, report
+  `2026-11-06_conan-build-vs-vanilla-paks-abab.md`). `[OWNER]` 21:30 «тебе стоило в мире дождаться закрытия плашки ОБНОВЛЕНИЕ КАТАЛОГА ОБЛИКОВ» — the stand
+  waits for that plate to close before recording.
   **Run 2026-11-06 19:30 (case H1 of `TC_conan_music_recon_2026-11-06.md`), the reading WITHDRAWN:** tabs switched by `W_Carousel_C:Next/PrevCarouselWindow` (synthetic Q/E keys do
   not reach the game — three ways tried 18:10–18:15), 60 fps capture: the tab bar never changed after a switch, the bottom buttons stood still, the mod icons on
   «Снаряжение» present in every frame of the return. One variant only — the first open after the world entry and the owner's real keys are still to run
