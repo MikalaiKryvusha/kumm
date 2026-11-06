@@ -18,7 +18,8 @@ register as A (identical) or resolved B / C / D, live values match the merge; (2
 
 Each group by the guide: read original + both sides → classify per field → resolve → verify in game → register.
 
-- [ ] 1. `Items/ItemTable` 51420 — SevereWeatherEnhanced → Mines_of_Set (1 row; a vanilla armour piece both re-declare). Notes: `SevereWeatherEnhanced.md`,
+- [x] 1. **DONE 2026-11-06 10:08 +03:00 (pack `f4a56e1`, cases G1–G3 pass, report `2026-11-06_conan-grey-one-mask-merge.md`): in game the mask is a breather («Использовать (F)»),
+      armour 38, «Легкий доспех»; repair XP 3 710.** `Items/ItemTable` 51420 — SevereWeatherEnhanced → Mines_of_Set (1 row; a vanilla armour piece both re-declare). Notes: `SevereWeatherEnhanced.md`,
       `CavernsOfSet.md`. **Read 2026-11-06 09:43 +03:00 — outcome C:** the Grey One Mask is a sandstorm breather in Severe Weather, a plain mask with a text fix in Mines of Set;
       Mines of Set wins → the breather is lost. Proposed merge — Severe Weather's row + Mines of Set's text; `RepairXP` (12665 vs 3710) → the owner.
       `[OWNER]` 09:53 «С нашей ускоренной прокачкой, с нашей новой кривой - что предлагаешь?» → `[AI]` proposed 3 710: the value Mines of Set gives the whole Grey One

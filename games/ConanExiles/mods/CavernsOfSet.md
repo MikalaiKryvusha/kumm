@@ -39,7 +39,7 @@ needs `global.utoc` for script objects) → `UAssetGUI tojson <umap> <json> VER_
 - Tell the author (PNutt) on the Workshop page — an outward message, only by the owner's word.
 - **What the author meant — the sources (2026-11-01 08:4x):** the Workshop description (Steam `GetPublishedFileDetails`) says nothing about chests; it names a
   «higher mid-game to end-game dungeon» and feats / craftables «spread out within the mod area for players to find and learn» (the level's 21
-  `feat_teacher` interactables). The mod's own `Caverns_of_Set_Item_Table` (47 rows): Set's Divine Touch / Restraints / Sedation Arrow / Fang
+  `feat_teacher` interactables). The mod's own `Caverns_of_Set_Item_Table` (46 rows — counted 2026-11-06 in the JSON; «47» here before was a miscount): Set's Divine Touch / Restraints / Sedation Arrow / Fang
   (77991101–104), Grey One armour set (51420–51424), 12 Grey Ancients weapons and a shield (77991106–117), Sacred Eldarium (77991105), Altar of Tranquility,
   Blessed Forge and Smelting Furnace of Set, Grey One Banner (80718), dragon trophies and heads, Set's Healing Tincture (77991133), Set's Sacred Shemagh
   (77991140), plus `XX_*` creature attack rows. The chest table itself is lost, so its exact contents are NOT known from any source.
@@ -74,7 +74,11 @@ needs `global.utoc` for script objects) → `UAssetGUI tojson <umap> <json> VER_
 - **Row 51420 «Grey One Mask» shared with Severe Weather (plan 45 step 1, 2026-11-06 09:43 +03:00):** `Caverns_of_Set_Item_Table` (`patch-mod-asset.py extract Mines_of_Set
   Caverns_of_Set_Item_Table`) re-declares the vanilla Grey One set 51420–51424 — against vanilla on 51420: `ShortDesc` «…the Grey One» → «…the Grey Ones», `RepairXP`
   2000 → 3710, `<LoreItalics>` → `<span style="italic">` in `LongDesc`. Loading after Severe Weather, it wipes that mod's sandstorm-breather version of the mask
-  (outcome C — `researches/mod-reconciliation/GUIDE.md` register).
+  (outcome C — `researches/mod-reconciliation/REGISTER.md`). **Merged 2026-11-06** (`[OWNER]` 09:55 «Предлагаю 3 710»): six `copyprop:` lines at the end of
+  `ConanExiles/_config/krinik_patches/Mines_of_Set__Caverns_of_Set_Item_Table.tsv` take `ItemClass`, `ArmourValue`, `FirstModifier`, `Icon`, `IconLayers`,
+  `GameplayTags` of row 51420 from `SevereWeatherEnhanced:LFS_ItemTable:51420` at every build; `RepairXP` 3 710 and the texts stay this mod's. Built chunk read:
+  `BP_SandstormBreather_C`, armour 38, «Light Armor», `RepairXP` 3710, «…Grey Ones», 46 rows. Rebuild: `rebuild-krinik-paks.py --only Mines_of_Set
+  --expect-changed Caverns_of_Set_Item_Table [--install]`.
 - The owner's look at the balance (Set weapons in nearly every caverns chest) — fewer T4 rolls in `caverns_loot.py` row 1 if it is too generous.
 
 ## The author's side (checked 2026-11-01 08:5x, Steam API + the Workshop pages)
