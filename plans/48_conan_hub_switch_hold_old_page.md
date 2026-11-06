@@ -81,6 +81,10 @@ The owner: «клик выполнен, видуального переключ�
   the native `ButtonPressed` → `SetCarouselIndex` (and Q/E) still deactivates/activates modules (remove/add + panel rebuild); and other mods listen to the
   module events (`XCS_Panel`, EAA / EoT / Accessory injections on `CharacterInventory`). Recon next: what the native switch does to a page that is already
   in the viewport and visible; whether the module events can be kept while our layer shows the kept pages.
+- **Native switch onto kept pages (23:48–23:50, `hubswitch/native-on-kept.lua`, background):** every kept page held in the viewport (re-added collapsed after
+  each switch) — the NATIVE activation still rebuilds the heavy pages: lap 2 Таланты 118 births (141 without), Снаряжение 289 (288), Карта 66; light pages 0
+  (Хар-ки, Параметры, Путешествие). So instant heavy pages need OUR controller to do the switch (collapse/show), not the module controller — the owner's
+  decision below is confirmed by numbers.
 - **The owner's decision 2026-11-06 23:48 +03:00 (verbatim): «из-за этих ебучих "сигналов" UI модов открывается с задержками» · «наконец-то сможем это починить, сделав свой
   контроллер хаба АДЕКВАТНЫЙ» · «и к нему попривязывав UI модов других авторов»** → the plan's direction: OUR hub controller (KrinikConanUI) owns the pages —
   built lazily once, kept in the viewport, switched by collapse/show in one frame; the other authors' hub UI (Era of Trials icons, EAA emblem and buttons, the
