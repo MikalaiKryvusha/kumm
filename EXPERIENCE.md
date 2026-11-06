@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0473 · 2026-11-06 · ❌ · #conan #ue4ss #hooks #hub #input
+class: hook-on-the-wrong-entry
+mechanized: none — plan 48 «Progress» and the game map carry the hook point
+**Lesson:** a hub prototype hooked `CarouselWindow:Next/Prev/SetCarouselIndex` and did nothing on REAL mouse clicks: the click goes `ButtonPressed` → native
+`SetCarouselIndex` in C++, which never passes UE4SS's hook. The remote's own Next/Prev calls DID fire the hook — so a test by the remote proves nothing about
+the player's path. Hook the event that every path reaches (`OnChildActivated`), and test by the player's input.
+
+### EXP-0472 · 2026-11-06 · ❌ · #unreal #movie-scene #kit #animation
+class: off-by-one-boundary
+mechanized: none — the kit script names `CAROUSEL_RANGE_TICKS` = key + 1
+**Lesson:** shortening a UMG animation to one tick I put the playback end ON the last key; the range end is EXCLUSIVE, the end state never applied and the
+hub lost its see-through page (the owner saw it in a minute). Vanilla ends one tick after its last key — copy that shape, then look at the end state on a frame.
+
 ### EXP-0471 · 2026-11-06 · ❌ · #ui #hub #video #claim #owner-eye
 class: evidence-explained-away
 mechanized: none — memory `owner-eye-beats-my-measurement`; the TC row now names the rule
