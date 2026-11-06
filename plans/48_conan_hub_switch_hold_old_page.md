@@ -57,6 +57,13 @@ The owner: «клик выполнен, видуального переключ�
   rebuilt). NEXT: which function each page runs on activation and what it re-creates (births per show with the window kept); then the owner's lazy build =
   run that refresh for the hidden pages ahead of time, and show without a second refresh. The test mod is saved in `ConanExiles/_config/hubswitch/
   KrinikHubPersistTest/` (removed from the game).
+- **What a kept page re-creates on every show (2026-11-06 23:35 +03:00, background game, windows kept by the dev mod, `hubswitch/page-births-probe.lua`, UserWidget births
+  600 ms after `OnChildActivated`; the same numbers on the 1st and the 2nd visit):** Таланты 141 (InventoryGridSlotView 71, InventoryIconView 51, buttons 10,
+  InventoryGridView 3); Снаряжение 288 (grid slots 80, icons 68, hotkey icons 42, buttons 16, action tutorials 12, help entries 12, item stats 8, hotbar 8);
+  Карта 66 (hotkey icons, help entries, tutorials 16 each, map markers 13); Базар 24; Хар-ки 16 (attributes 6, perk views 2 …); Клан 12; Путешествие 8;
+  Спутники 9; Параметры 0. `WBP_ButtonBar_C` (the hub's bottom bar) is born on EVERY switch. The windows themselves are not reborn. NEXT (no game needed):
+  read the open handler of the heavy pages (`W_FeatWindow`, `CraftingGUI`, `W_FullscreenMap`, `W_Attributes`) — what event rebuilds the grid/list
+  (`SignalOpened` / `SendWindowOpenedNotifications` of `WindowRoot`, or the page's own Construct-like event) — by `kismet-trace.py` on the extracted assets.
 - **The pages' lifetime — decided by measurement (`[OWNER]` 2026-11-06 23:18 +03:00 verbatim):** «можно было бы до выхода из мира держать. Вряд ли они будут много ОЗУ
   занимать. А вообще, нужно измерять. Может есть смысл их убирать при закрытии хаба, и пересоздавать вновь лениво на следующем открытии» → acceptance step:
   the game's working set (private bytes) with the hub closed — before the first open, with all 9 pages kept, after 5 open/close cycles (no growth = no
