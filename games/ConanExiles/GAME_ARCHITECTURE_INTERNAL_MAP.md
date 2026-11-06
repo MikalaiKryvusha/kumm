@@ -557,6 +557,8 @@ Lua-моды UE4SS ждут только отложенными действия
   `dt:ForEachRow` edit at the main menu does NOT keep them (2026-11-06 22:59): the flag is read at module registration, before the main menu. Set at
   `NotifyOnNewObject('/Script/ConanSandbox.GUIModuleController')` (a UE4SS mod, 23:09) it DOES keep them — the left windows live off-screen — but each page
   still rebuilds its content on every show (lists, cells, perks: the same late changes, run 9). The page's refresh on activation is the assembly's cause.
+  `CraftingGUI_C` rebuilds its centre/right panels (`BP_Handle*PanelWidgetCreated`) on the MODULE ACTIVATION, not on a plain `AddToViewport`; a page that
+  STAYS in the viewport and is only Collapsed / shown re-creates nothing on later shows (0 births, 3 cycles — `hubswitch/collapse-test.lua`, 23:45).
 - **Hub tab switching (2026-10-29 16:56, remote probes).** The tabs are changed by the NATIVE parent class of `W_Carousel_C`:
   `/Script/ConanSandbox.CarouselWindow` — `NextCarouselWindow` (E), `PrevCarouselWindow` (Q), `SetCarouselIndex`; the blueprint has no own Next/Prev
   (a hook by the blueprint path fails «no UFunction»). Module events lag the switch: `NextCarouselWindow` 17.535 → `XCS_Panel` false 17.681
