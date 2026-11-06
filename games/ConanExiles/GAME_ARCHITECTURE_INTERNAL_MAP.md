@@ -554,7 +554,9 @@ Lua-моды UE4SS ждут только отложенными действия
   on Next/Prev/SetCarouselIndex does NOT fire for it (the remote's own calls do); `OnChildActivated` fires on every switch after the new window exists. The
   switch removes the old tab window from the viewport and later collapses it; the object stays valid (`hub-switch-probe.lua`). A left tab's window is then
   DESTROYED — one instance per tab at a time, rebuilt (100–300 widgets, 50–500 ms) on every visit. `IsPersistent = true` set on the 9 hub rows by a live
-  `dt:ForEachRow` edit at the main menu does NOT keep them (2026-11-06 22:59): the flag is read at module registration, before the main menu.
+  `dt:ForEachRow` edit at the main menu does NOT keep them (2026-11-06 22:59): the flag is read at module registration, before the main menu. Set at
+  `NotifyOnNewObject('/Script/ConanSandbox.GUIModuleController')` (a UE4SS mod, 23:09) it DOES keep them — the left windows live off-screen — but each page
+  still rebuilds its content on every show (lists, cells, perks: the same late changes, run 9). The page's refresh on activation is the assembly's cause.
 - **Hub tab switching (2026-10-29 16:56, remote probes).** The tabs are changed by the NATIVE parent class of `W_Carousel_C`:
   `/Script/ConanSandbox.CarouselWindow` — `NextCarouselWindow` (E), `PrevCarouselWindow` (Q), `SetCarouselIndex`; the blueprint has no own Next/Prev
   (a hook by the blueprint path fails «no UFunction»). Module events lag the switch: `NextCarouselWindow` 17.535 → `XCS_Panel` false 17.681

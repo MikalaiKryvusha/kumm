@@ -147,8 +147,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **The owner chose 22:10 (bug 64, verbatim):** the old page stays until the new one is complete, then one frame — **plan 48**. Prototype (remote, not in the
 > build) holds the new page invisible until no widget is born → the late assembly gone on 7 of 9 tabs; to/from «Снаряжение» the bare world still shows 50–160 ms
 > (3 tries — stop). **The owner 22:57: fix the CAUSE** — the game rebuilds each tab window on every visit; a live `IsPersistent` edit at the main menu is
-> too late (22:59). NEXT: `IsPersistent` in the vanilla `DT_UIModuleTable` from the start (a pak edit, by the mod-reconciliation guide), then the click pass —
-> plan 48 «Progress». Review folder 70 — the «Снаряжение» switches ×15. Tools
+> too late (22:59); set at the controller's birth (23:09) it keeps the windows, but each page still rebuilds its content on every show. The owner's design
+> 23:07: lazy background build of the other pages, nearest first; lifetime by a RAM measurement (23:18). NEXT: what each page re-creates on activation, then
+> the lazy build — plan 48 «Progress». Review folder 70 — the «Снаряжение» switches ×15. Tools
 > `ConanExiles/_config/hubswitch/` (`hub_run.sh <tag>`, `hub_switches.py`).
 > ⚠️ **Чат 2026-11-06 (четвёртый) закрыт принудительно 2026-11-06 20:48 +03:00 на 85 %:** церемонии пропущены (судья, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft. Ложные утверждения на месте: нет («хаб не дёргается», «серия q8 прервана», ролики теней — исправлены по местам). Игра закрыта, замок снят, HDR включён.
 > **ПЕРВЫМ ДЕЛОМ:** (1) хаб — разобрать в полном разрешении ролики папки отсмотра 69 (по одному на переключение), назвать каждый дёргающийся элемент, затем бисекция модов (баг 64). (2) Тени пальм — переснять серию с `hdr.ps1 off` и `SetTimeOfDay` перед каждым роликом; сборка пока 2.0/−1.0 (баг 67). (3) Мод музыки: развернуть сцену смерти и прогнать M7 вместе с кейсами бага 79 (смерть/подземелье/камень пути). (4) Карточки EAA векторами и строками — маршрут в баге 64, п. 23.
