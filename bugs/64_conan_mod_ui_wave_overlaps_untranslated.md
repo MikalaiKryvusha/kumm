@@ -92,7 +92,8 @@ visibility by the `XCS_Panel` event in `KrinikPauseGameInMenu` 0.7.0 (retry ≤4
   in (184..2136 × 128..1272); c06 — +33 ms (144..3176 × 120..1904). A 960-px strip of c01 shows only the icons' and «Разблокировать» brightness
   changing — read each box at FULL resolution next. c02 (→ «Характеристики», «Сила»), frames 75–84 at 480 px: the perk-description column is
   blurred/pale for ~5 frames after the switch, then sharp — a fade or a re-layout of that text, to be named at full resolution; c01 at full size: the «Знания»
-  grid stands still, a dark band along the panel's left edge comes and goes.
+  grid stands still, a dark band along the panel's left edge comes and goes. c06 (→ «Путешествие»), frames 121–128 at 440 px: the card grid and the
+  «Этапы путешествия» column look shifted in height in the first frames — compare positions at full resolution.
   **Run 2026-11-06 19:30 (case H1 of `TC_conan_music_recon_2026-11-06.md`), the reading WITHDRAWN:** tabs switched by `W_Carousel_C:Next/PrevCarouselWindow` (synthetic Q/E keys do
   not reach the game — three ways tried 18:10–18:15), 60 fps capture: the tab bar never changed after a switch, the bottom buttons stood still, the mod icons on
   «Снаряжение» present in every frame of the return. One variant only — the first open after the world entry and the owner's real keys are still to run
