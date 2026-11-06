@@ -32,3 +32,8 @@ ordinary thrall (control: unchanged) · LBPR's own placement rule (unchanged). N
 the live oasis boss (`HumanoidNPCCharacter_20percentbigger_boss_C`, tag Npc.Boss.Miniboss read by the remote) → the hero's `BP_ThrallSystemComponent:FindOrSetupThrallComponent(boss)`
 → `StartMovingThrall(boss)` (the game builds the moving ghost through `ShowThrallPlaceable`) → a frame; the same with the original LBPR pak (control). The 13:59 crash
 was `StartMovingThrall` on the boss WITHOUT a thrall component (the likely cause, not proven).
+
+**G4 by direct calls, ⟦NOW⟧ (the owner's route):** `FindOrSetupThrallComponent(boss, {SpawnTableId=Aesir_Boss, ThrallTemplateID=505})` → ok; `StartMovingThrall(boss)` →
+CRASH (access violation 0x10, 16:56) — and the SAME crash with the ORIGINAL LBPR pak (control, 16:58): the call itself fails on a hostile NPC the game does not own,
+whatever the thrall component; the graft is not the cause. Both report windows closed by PID; the grafted pak restored (md5 70e6d4f5). G4 still open: a boss the
+PLAYER owns is needed — next: the thrall conversion path by direct calls (the wheel's converter actor / `ThrallItem:SetupThrallFromItem` on a boss), not `StartMovingThrall` on an enemy.
