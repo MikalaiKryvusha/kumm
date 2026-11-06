@@ -58,7 +58,9 @@ Each group by the guide: read original + both sides → classify per field → r
       `/Game/Mods/BossesMyNewBesties/BMNB_SpawnDataTable`; Heritage's spawn table is not named «*spawn*table*» — list its container; vanilla
       `Systems/SpawnTable/SpawnDataTable` by `retoc to-legacy --filter SpawnDataTable` + `uaj tojson`; then `row-diff.py` in load order.) Boss / elite spawns (`SpawnTable/SpawnDataTable`, 24 rows) — BossesMyNewBesties → Heritage (17), → EnhancedArmoryAndArsenal (7); Heritage → EraOfTrials
       (2 dialogue NPCs).
-- [ ] 5. Armourer templates (`ProfessionTemplateDataTable`, 47 rows) — Asghaard_Ancient_Civilization → TDI_LegendaryRepair.
+- [x] 5. **DONE 2026-11-06 11:49 +03:00 — outcome B, merged by TDI itself:** both mods' appends (Ancient Civilization's crafting groups, TDI's repair kits) live on 47/47
+      crafter rows; the file «C» ×47 was TDI's empty placeholders; Ancient Civilization's `ThrallGroup` «Warrior» not applied (vanilla «Crafter» — right for
+      a crafter). Armourer templates (`ProfessionTemplateDataTable`, 47 rows) — Asghaard_Ancient_Civilization → TDI_LegendaryRepair.
 - [ ] 6. Religious items and recipes (`Items/ItemTable` 54, `RecipesTable` 5) — LegitReligious_Enhanced → EraOfTrials. **2026-11-06 11:41 +03:00:** the 54 weapons — B, Era of Trials
       merges its ammo by field (`EoT_DT_BowCompatableAmmunitions_Merge`): LR's stamina / container / repair / descriptions live 54/54, every ammo list = LR's +
       Era of Trials' arrow 47210132; the 5 Zathite dancer recipes — C (LR fixes a vanilla zero «Venom-purified blood», Era of Trials redesigns the recipe

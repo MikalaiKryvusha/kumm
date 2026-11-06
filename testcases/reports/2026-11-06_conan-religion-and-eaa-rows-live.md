@@ -24,6 +24,7 @@ REAL WORLD: accumulated — the owner's working install and save; data and machi
 | 4 | 2026-11-06 11:35 +03:00 | `python -I -X utf8 _config/devkit/rebuild-krinik-paks.py --only EnhancedArmoryAndArsenal --expect-changed DT_EAA_Spawntable --install` | 1 · UAssetGUI wrote no asset — the copied `…_Warrior_1` names lacked their FName base in the name map; fixed in `patch-mod-asset.py` |
 | 5 | 2026-11-06 11:36 +03:00 | the same command again | 0 · 1472 chunks identical, 1 changed on purpose (DT_EAA_Spawntable); installed |
 | 6 | 2026-11-06 11:39 +03:00 | run 3's 7-row reads again with the merged EAA | 0 · BMNB's 4 fields SAME 7/7; EAA's NpcTags, LootTable SAME 7/7 |
+| 7 | 2026-11-06 11:48 +03:00 | `live-rows.lua` on `ProfessionTemplateDataTable` 47 rows vs `TDI_Legin_TemplateTableProfession` (CraftingGroups, BonusRecipes, ThrallGroup) + a count of both mods' ids in the live lists | 0 · Ancient Civilization's group 47/47, TDI's kit 47/47; ThrallGroup «Crafter» 47/47 (plan 45 step 5) |
 
 ## 4. Checks
 
@@ -38,6 +39,7 @@ Functional run: walked — the game's world load with the shipped paks; read —
 | E0 | fail → fixed | before: the 7 rows (Silent Legion ×3, Siptah devolved bird / spider / werewolf, white tiger) carried vanilla `StatTemplate` / `StatModifierTemplate` and vanilla `ProfessionTemplate` or `NPCClass` — not recruitable as BMNB means; EAA replaces whole rows |
 | E1 | pass | after the merge (`EnhancedArmoryAndArsenal__DT_EAA_Spawntable.tsv`, 21 `copyprop:`): BMNB's 4 fields SAME 7/7, EAA's tags and loot SAME 7/7 |
 | D0 | pass | Muriela the Artisan, Yakira: Heritage's faces and Era of Trials' vendor class both live |
+| P0 | pass | 47 tier-4 crafters: both appends live (Ancient Civilization 3780759 / 3780751, TDI 22120501 / 22120500); Ancient Civilization's «Warrior» thrall group not applied — vanilla «Crafter» |
 
 ## 5. Found
 

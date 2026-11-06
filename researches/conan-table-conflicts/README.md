@@ -18,7 +18,7 @@ Full list: `shared_rows_2026-11-06.txt` (143 rows).
 | Rows | Table | Chain (the last one wins) | First reading |
 |---:|---|---|---|
 | 54 | `Items/ItemTable` | LegitReligious_Enhanced → EraOfTrials | judged 2026-11-06 (live): vanilla bows and religious weapons — LegitReligious's stats live 54/54, Era of Trials only appends its arrow to the ammo; both kept (`mod-reconciliation/REGISTER.md`) |
-| 47 | `SpawnTable/ProfessionTemplateDataTable` | Asghaard_Ancient_Civilization → TDI_LegendaryRepair | armorer templates — first reading «Asghaard's edits lost» NOT confirmed: TDI merges by field on `Armorer_4` (2026-10-26, `ConanExiles/docs/17`); the 47 rows wait for a live check (plan 45 step 5) |
+| 47 | `SpawnTable/ProfessionTemplateDataTable` | Asghaard_Ancient_Civilization → TDI_LegendaryRepair | armorer templates — first reading «Asghaard's edits lost» NOT confirmed: TDI merges by field on `Armorer_4` (2026-10-26, `ConanExiles/docs/17`); judged live 2026-11-06: both mods' appends (crafting groups, repair kits) on 47/47 — B, nothing to do |
 | 17 | `SpawnTable/SpawnDataTable` | BossesMyNewBesties → Heritage | boss / elite spawn rows: Heritage merges by field — live, both mods' changes stand (BMNB's recruitability + Heritage's races, 17 of 17; judged 2026-11-06 11:16 +03:00, `mod-reconciliation/REGISTER.md`). Corrected: «Heritage's version stands» read the log's «overwriting» as a whole-row win |
 | 8 | `Gathering_v2/LootTable_Resource` | ResourceStimulusPackage → EnhancedArmoryAndArsenal | werewolf / werehyena harvest loot — judged A: RSP re-declares the rows unchanged, nothing lost (corrected: «RSP's boost lost» was the first reading) |
 | 7 | `SpawnTable/SpawnDataTable` | BossesMyNewBesties → EnhancedArmoryAndArsenal | Siptah / Black Pool bosses — judged live: EAA replaces whole rows, BMNB's recruitability was lost → merged into EAA's table, both live 7/7 |
@@ -29,5 +29,5 @@ Full list: `shared_rows_2026-11-06.txt` (143 rows).
 
 ## Next
 
-Done 2026-11-06 except: Asghaard → TDI (47) — a live check by `_config/live-rows.lua` (plan 45 step 5); the 5 recipes — the owner (interview #032). The log's
+Done 2026-11-06 except the 5 recipes — the owner (interview #032). The log's
 «overwriting» never says whether a row was replaced whole or merged by field — that is the later mod's own way, seen only live (`mod-reconciliation/GUIDE.md`).
