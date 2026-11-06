@@ -64,6 +64,11 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   gating hides it — read `krinik_pickup_prompt.lua` around the call (line ~207: what runs before `show(found)` — a timer not started in this state, a
   distance or component-class filter, the bug-80 rule «off while the corpse strip is on screen») and re-run G1 with the plate's log on. A real E there —
   not done yet (front path).
+  **CORRECTED 2026-11-06 13:06 +03:00 — the bullet above is FALSE as a conclusion:** the second run (13:04–13:06) at the same stand: both gates false (`egg-gate.lua`:
+  `ContainerInfo` inactive, no strip on screen), the plate's log «плашка «E Взять» в прицеле» (13:05:29; 60 of 60 checks found an item), and the 4K frame
+  shows **«E Взять» at the crosshair over the Kappa nest**. The first frame was most likely taken before the plate's once-a-second check. So over Kappa eggs
+  the plate WORKS; the guide's line (2026-11-02) is older than the plate's rework on the game's own probe (bug 77, 2026-11-02 14:2x) — most likely fixed by
+  it. Open: a real E there (front path) and, if the owner meant other nests (birds'), their kind; else close the bug and drop the guide line.
   The gating read (`krinik_pickup_prompt.lua:199-200`): before the probe the plate hides when `GUIModuleController:IsModuleActive(CONTAINER_MODULE)` or
   `strip_on_screen()` (a remembered `FloatingNames` strip `IsInViewport` + `IsVisible` — the bug-80 rule «yield to the game's own strip»). NEXT at the G1 stand:
   read those two values in that same second (most likely suspect — a `FloatingNames` strip of the nest / a nearby corpse counted as «on screen» though not

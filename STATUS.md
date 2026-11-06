@@ -140,7 +140,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the judge pass: VERIFIED WITH CAVEATS (caveats fixed). KAIF #194 (refresh hooks from a sibling cwd) filed and patched locally.
 > **Owner's open items (called by voice in this chat; #032, #033 marked shown):** #025 ambushes (Night Terrors + PvE Plus Ambush), #032 the Zathite dancer recipes (LegitReligious vs Era of Trials),
 > #033 the boss thrall placement ghost (BMNB vs LBPR). Owed by the agent: BMNB's own function in play (knock a boss out, recruit); bug 82 — narrowed: at a Kappa
-> nest egg the plate's own probe says TRUE yet the plate stays hidden → read `krinik_pickup_prompt.lua`'s gating, stand `ConanExiles/_config/egg-stand.lua`. Nexus follow-up letter — drafted for the owner (ticket 276571).
+> nest egg «E Взять» IS shown (frame + the plate's log, stand `ConanExiles/_config/egg-stand.lua`) — most likely fixed by bug 77's rework; owed: a real E
+> there, then close bug 82 and drop the guide line (an earlier «plate hidden» note of this chat was a too-early frame — corrected in the bug). Nexus follow-up letter — drafted for the owner (ticket 276571).
 > **NOW 2026-11-06 09:05 +03:00 — chat of 2026-11-06, `[OWNER]` «продолжаем делать сборку Конана 1.0.0»:** DONE in one kit build + one run (pack `1dfd312`, report
 > `testcases/reports/2026-11-06_conan-interaction-prompts-perks-enemy-bar.md`): 🔧 bug 83 — all five interaction prompts like the corpse strip (I1–I4, P1 pass; the
 > owner's eye — review folder 65); 🔧 bug 64 item 12a — the enemy bar 4 units over its skull (E1; folder 66); ✅ the perk gap — 22 cut the last perk (the column does
