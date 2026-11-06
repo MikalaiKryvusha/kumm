@@ -104,6 +104,15 @@ The owner: «клик выполнен, видуального переключ�
 - Review folder 70 (`70_hub_dergaetsya_x15`): the four «Снаряжение» switches of run 7 slowed ×15 (`[OWNER]` 22:56 «покажи, что дергается, замедли в 15 раз»).
 - Measure tool: `scratchpad/hub_run.sh <tag>` + `hub_switches.py` (to move into the pack `_config/` with the build).
 
+## The controller's core proven: OUR code builds the pages (2026-11-06 23:57 +03:00, background, `hubswitch/create-page-test.lua`)
+
+`WidgetBlueprintLibrary:Create(pc, <page class>, pc)` + `AddToViewport(41)` at RenderOpacity 0, WITHOUT the module controller: `W_FeatWindow_C` — 183 births
+at create + 382 in 1 s, the page COMPLETE on the frame (grid, icons, category row, bottom bar); `CraftingGUI_C` — 114 + 322, COMPLETE (inventory, paperdoll,
+craft panel, hotbar, bottom bar) — only the mods' embeds missing (they come by the game's signals → the API). **Design that needs no input takeover
+(«shadow pages»):** the game still opens the hub and switches tabs natively (carousel, backing, mouse mode — all its own); our controller keeps its own built
+instance of every page, collapsed; on `OnChildActivated` (inside the native call, before the frame renders) it collapses the game's fresh page and shows
+ours. The game's rebuild still runs, but invisibly. Next: this prototype in the background game — births and frames per switch.
+
 ## The hub controller API — DRAFT `[AI]` (for the owner's review; the owner set the direction 23:48, the calls are the agent's proposal)
 
 The controller (KrinikConanUI section `krinik_hub`) owns the 9 pages; a page id is the module name (`CharacterInventory`, `FeatWindow`, …).

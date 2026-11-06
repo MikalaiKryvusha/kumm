@@ -141,6 +141,12 @@
     (`[OWNER]` 2026-11-06 20:35 «Часовой прогон на вылеты - это активное взаимодействие с миром, геймплей, а не твои демо летания» · «Твои демо летания, это
     "парадокс пестицида"».)
 
+29. **A run checks that the game is alive at every step, and a series stops on a dead game.**
+    1. `ConanExiles/_config/pult.sh` refuses a command with exit 4 «ИГРА НЕ РАБОТАЕТ» when the game process is gone or a crash-report window is open.
+    2. Every loop of remote commands ends on a non-zero exit (`P … || break`); a background launch is followed by a check of the process before the next step.
+    3. A crash in the agent's run: close the report window by PID (rule 9), read `UE4SS.log` up to the crash, write the cause before the next run.
+    (`[OWNER]` 2026-11-07 00:03 «заебал ты скрипты свои запускать без контроля того, работает игра, или нахуй упала к ебеням».)
+
 19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
     mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +
