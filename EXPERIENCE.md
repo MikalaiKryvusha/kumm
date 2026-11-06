@@ -100,6 +100,15 @@ mechanized: none — the game map's «Thrall placement» section lists the calls
 `exec SpawnItem 25002 1` → `ThrallItem:OnUseItem(hero, controller)`.
 **Lesson:** drive a game system by the PLAYER's entry point (an item's use, a UI handler), not by a mid-level function with an object it was never meant for; read
 only plain values (location, scale, names) of actors — never raw pointer/class properties of a native component.
+A third crash the same day (14:35): `FindAllOf('StaticMeshActor')` + `x.StaticMeshComponent.StaticMesh` over the whole level — the component-enumeration class the
+remote already refuses for `FindAllOf(<…Component>)`; one named actor's own component is safe.
+
+### EXP-0465 · 2026-11-06 · ❌ · #conan #stand #claim #bug82
+class: stand-object-named-not-verified
+mechanized: none — bug 82 and the game map name the mesh
+**Context:** bug 82 (no «E Взять» over nest eggs); two chats built a stand on `SM_KappaEggs_Blueprint_C.InstancedBushes`, trusting the actor's NAME.
+**Result:** ❌ its mesh is `palm_ground_misc_01` — the nest's palm bush; «the plate IS shown over nest eggs» (STATUS, bug 82, the farewell) was a claim about a bush.
+**Lesson:** before a stand's object stands for the thing in the case, read what it IS (the mesh, the class, the item it gives) — a name is a hypothesis.
 
 ### EXP-0463 · 2026-11-06 · ❌→✅ · #conan #ue5 #kismet #zen #retoc #uassetapi #reconciliation #graft
 class: two-mods-one-blueprint-function

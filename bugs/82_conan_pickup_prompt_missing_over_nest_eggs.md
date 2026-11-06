@@ -67,7 +67,9 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   **CORRECTED 2026-11-06 13:06 +03:00 — the bullet above is FALSE as a conclusion:** the second run (13:04–13:06) at the same stand: both gates false (`egg-gate.lua`:
   `ContainerInfo` inactive, no strip on screen), the plate's log «плашка «E Взять» в прицеле» (13:05:29; 60 of 60 checks found an item), and the 4K frame
   shows **«E Взять» at the crosshair over the Kappa nest**. The first frame was most likely taken before the plate's once-a-second check. So over Kappa eggs
-  the plate WORKS; the guide's line (2026-11-02) is older than the plate's rework on the game's own probe (bug 77, 2026-11-02 14:2x) — most likely fixed by
+  the plate WORKS [**CORRECTED 2026-11-06 14:37 +03:00: FALSE — the stand's «eggs» are the instances of `SM_KappaEggs_Blueprint_C.InstancedBushes`, live mesh
+  `/Game/Marketplace/Jungle_Pack_01/Ground_Plants/palm_ground_misc_01` at all three loaded nests: the plate was over a PALM BUSH, not an egg; see the last entry**];
+  the guide's line (2026-11-02) is older than the plate's rework on the game's own probe (bug 77, 2026-11-02 14:2x) — most likely fixed by
   it. Open: a real E there (front path) and, if the owner meant other nests (birds'), their kind; else close the bug and drop the guide line.
   The gating read (`krinik_pickup_prompt.lua:199-200`): before the probe the plate hides when `GUIModuleController:IsModuleActive(CONTAINER_MODULE)` or
   `strip_on_screen()` (a remembered `FloatingNames` strip `IsInViewport` + `IsVisible` — the bug-80 rule «yield to the game's own strip»). NEXT at the G1 stand:
@@ -94,6 +96,12 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   The water stat rising on that press is not explained. Next (the cause, not a patch): what the game's own E does at this spot — the press handler's path
   (`EnvironmentFunctionLibrary` pickup vs the interaction trace), and whether vanilla Kappa nest eggs are gatherable by E at all (they may be a harvest-by-tool
   node); then the plate asks the same thing the press does (bug 77's rule).
+- **2026-11-06 14:37 +03:00 — the stand aimed at a bush.** `SM_KappaEggs_Blueprint` (`/Game/Items/GatheringResources/`) has no functions: a SceneComponent + one
+  `InstancedStaticMeshComponent` `InstancedBushes` whose mesh is `palm_ground_misc_01` (BP default AND live at `SM_KappaEggs_North_Camp_10/11/12`). Every
+  «egg» case above (the probe true, «E Взять» on the frame, the real E that filled water) was over the nest's PALM BUSH — a gatherable plant. The owner's symptom
+  (the guide: «над яйцами в гнезде подсказка «E Взять» не появляется, хотя герой берёт их клавишей E») is untouched by those runs. Next: where the eggs
+  the hero takes by E live (a frame at a nest from the owner's distance, then the actor under the crosshair by a single trace — never a loop over
+  `StaticMeshActor` components: that loop crashed the game 14:35, report window closed by PID 43612).
 
 ## Study (next)
 

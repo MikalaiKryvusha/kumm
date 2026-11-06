@@ -751,3 +751,10 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   preceded a crash (0x242, 14:08); the remote refuses `FindAllOf(<…Component>)` (it crashed the game before). `RegisterHook` on `Actor:SetActorScale3D` does not see
   BP→native calls; the hook on the BP `ShowThrallPlaceable` fires once per use (after the body) but its return value is not readable in Lua.
 - The ghost actor is not a `Character`/`Pawn` and was not found by class name; its scale was not read as a number (G3 judged by a frame).
+
+## Kappa nests (read 2026-11-06 14:36, bug 82)
+
+- `SM_KappaEggs_Blueprint_C` (`/Game/Items/GatheringResources/SM_KappaEggs_Blueprint`, actors `SM_KappaEggs_North_Camp_10/11/12` near the oasis) holds no eggs:
+  a SceneComponent and one `InstancedStaticMeshComponent` `InstancedBushes`, mesh `palm_ground_misc_01` (5 palm-bush instances per nest). The plate's «E Взять»
+  over it and a real E there are a BUSH case (the E press raised the water stat; no item entered the backpack). Where the eggs the hero takes by E live — open.
+- Do not loop `FindAllOf('StaticMeshActor')` reading their components — that crashed the game (14:35).
