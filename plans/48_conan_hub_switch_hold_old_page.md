@@ -123,6 +123,14 @@ ours. The game's rebuild still runs, but invisibly. Next: this prototype in the 
   alive-check after each): (a) 9 extra pages NOT collapsed (opacity 0, HitTestInvisible) + native switch; (b) `SetRenderOpacity` on the game's newborn page
   inside the hook (worked without extra pages in the hold prototype v3/v4 22:2x); (c) opacity on our page inside the hook. Helpers: `hubswitch/extra-pages-switch.lua`
   (`_G.__ep`), `pult.sh` exit 4.
+- **Bisect 2 (00:18–00:21, one background game; hooks installed AFTER several native switches): every ingredient survives, alone and all together** —
+  (a) 9 extra pages at opacity 0 + HitTestInvisible; (b) opacity 0 on the game's newborn page inside the hook; (c) opacity on our page inside the hook;
+  (d) next-tick `SetVisibility` on our page; (e) next-tick `SetVisibility` on the game's newborn page — 12+ switches alive with (b)–(e) active at once.
+  **v3 re-run in a CLEAN game (00:22) crashes again on switch 1 — reproducible.** The remaining difference: in v3 the FIRST native opening of a page (e.g.
+  FeatWindow never opened by the game before) happens with the hooks and our instance of that class already present; in bisect 2 every page had been opened
+  natively before the hooks. NEXT (one step each, alive-check after each): clean game → our 9 pages → hooks (b)–(e) → the first native switch; then the
+  same with each page visited natively once BEFORE our pages are created (if that survives, the controller builds its pages after the game has opened each
+  class once — or preloads the classes).
 
 ## The hub controller API — DRAFT `[AI]` (for the owner's review; the owner set the direction 23:48, the calls are the agent's proposal)
 

@@ -149,7 +149,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (3 tries — stop). **The owner 22:57: fix the CAUSE** — the game rebuilds each tab window on every visit; a live `IsPersistent` edit at the main menu is
 > too late (22:59); set at the controller's birth (23:09) it keeps the windows, but each page still rebuilds its content on every show. The owner's design
 > 23:07: lazy background build of the other pages, nearest first; lifetime by a RAM measurement (23:18). NEXT: what each page re-creates on activation, then
-> the lazy build — plan 48 «Progress». Review folder 70 — the «Снаряжение» switches ×15. Tools
+> the lazy build — plan 48 «Progress».
+> **NOW 2026-11-07 00:24 +03:00 — `/dayloop` (the owner's order 23:53, game ONLY in the background — his word 23:32; verbatim in plan 48):** the owner decided OUR hub
+> controller + a standard API for the other mods' hub UI (plan 48: API draft, inventory of 8 embeds). Proven: our code builds complete pages
+> (`WidgetBlueprintLibrary:Create`); a page kept in the viewport shows with 0 rebuilds; the native switch rebuilds heavy pages even when kept → our controller
+> shows its own instances (shadow pages). The shadow prototype CRASHES the game on the first switch in a clean game (reproducible); the bisect found one crash
+> rule (`SetVisibility` inside `OnChildActivated`) and narrowed the rest to the first native opening of a page with our instance + hooks present — NEXT
+> step in plan 48. **HOUSE_RULES 29 (new, the owner's word 00:03):** `pult.sh` exits 4 on a dead game; every series ends with `|| break`. Review folder 70 — the «Снаряжение» switches ×15. Tools
 > `ConanExiles/_config/hubswitch/` (`hub_run.sh <tag>`, `hub_switches.py`).
 > ⚠️ **Чат 2026-11-06 (четвёртый) закрыт принудительно 2026-11-06 20:48 +03:00 на 85 %:** церемонии пропущены (судья, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft. Ложные утверждения на месте: нет («хаб не дёргается», «серия q8 прервана», ролики теней — исправлены по местам). Игра закрыта, замок снят, HDR включён.
 > **ПЕРВЫМ ДЕЛОМ:** (1) хаб — разобрать в полном разрешении ролики папки отсмотра 69 (по одному на переключение), назвать каждый дёргающийся элемент, затем бисекция модов (баг 64). (2) Тени пальм — переснять серию с `hdr.ps1 off` и `SetTimeOfDay` перед каждым роликом; сборка пока 2.0/−1.0 (баг 67). (3) Мод музыки: развернуть сцену смерти и прогнать M7 вместе с кейсами бага 79 (смерть/подземелье/камень пути). (4) Карточки EAA векторами и строками — маршрут в баге 64, п. 23.
