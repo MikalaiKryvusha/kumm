@@ -50,6 +50,7 @@ plate beside a talk prompt (P1); values READ by the remote and frames looked at.
 | K2 | fail | the column does not scroll; at 22 two lines of the last perk cut — the owner's pick back to him (review folder 64) |
 | E1 | pass | ≈ 8 px of air under the bar; the look waits for the owner's eye (folder 66) |
 | P1 | pass | «E Взять» off beside a talk prompt |
+| K3 | pass | 09:24 re-run with the owner's 14 on the built pak: 14 on 20 rows, the last perk of «Сила» whole |
 
 ## 5. Found
 
@@ -66,4 +67,4 @@ The stand script `ConanExiles/_config/info-open.lua`.
 
 ## 7. Verdict
 
-partial — bug 83 and item 12a pass; the perk gap 22 fails its own condition (the column does not scroll) and goes back to the owner.
+pass after the re-run — bug 83 and item 12a pass; the perk gap 22 failed (the column does not scroll), the owner chose 14 (09:17), the built pak passes K3.

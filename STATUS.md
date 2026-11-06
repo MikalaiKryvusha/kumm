@@ -129,12 +129,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 > **NOW 2026-11-06 09:05 +03:00 — chat of 2026-11-06, `[OWNER]` «продолжаем делать сборку Конана 1.0.0»:** DONE in one kit build + one run (pack `1dfd312`, report
 > `testcases/reports/2026-11-06_conan-interaction-prompts-perks-enemy-bar.md`): 🔧 bug 83 — all five interaction prompts like the corpse strip (I1–I4, P1 pass; the
-> owner's eye — review folder 65); 🔧 bug 64 item 12a — the enemy bar 4 units over its skull (E1; folder 66); ❓ the perk gap 22 — built, but the «Сила» column does
-> NOT scroll and the last perk is cut at 22 (fits at 10) — the owner chooses again (folder 64). Next on the list: nest eggs (bug 82), a real E over a corpse in a
+> owner's eye — review folder 65); 🔧 bug 64 item 12a — the enemy bar 4 units over its skull (E1; folder 66); ✅ the perk gap — 22 cut the last perk (the column does
+> NOT scroll); `[OWNER]` 09:17 «ставь 14» — built, seen (K3, pack `94e713a`). Next on the list: nest eggs (bug 82), a real E over a corpse in a
 > bush (bug 80), the rim on F done properly (bug 75), the rest of the guide's 1.0.0 list.
 > **Nexus quarantine** (`[OWNER]` 08:51 «каковы могут быть причины…»): our 11-03 request covers all three Nexus causes (exe source + build steps, UE4SS DLLs with
-> upstream link and hashes, no nested archives; all three links answer 200 publicly 08:53) — most likely the manual queue; a short follow-up to ticket 276571 is
-> drafted for the owner to send.
+> upstream link and hashes, no nested archives; all three links answer 200 publicly 08:53) — most likely the manual queue. BUT (`[OWNER]` 09:18 «они там пишут про
+> способ сборки … они поймут, как собрать?»): the letter did not name the build script and misnamed `BuildInfo.g.cs`; the README has no build section. Checked 09:19:
+> a fresh public clone builds the launcher by `python _config/release/build-docs.py --no-pdf` (same size 4 429 824 B; hash differs — fixed: `-deterministic`, two
+> builds one hash; report `2026-11-06_conan-launcher-deterministic-build.md`). The follow-up with full steps — `…\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_followup.txt`,
+> the owner sends it as a reply in ticket 276571. Open: a «how to build the launcher» section in the README (the owner's storefront).
 > **Owner's note 2026-11-06 08:48 +03:00:** `[OWNER]` «еще нам предложили взять в сборку мод Northern Timber - Enhanced 4.0.2» · «нужно изучить его потенциальную конфликтность, и что он
 > нам даст» — web recon by a helper → `researches/conan-mod-candidates/northern_timber_enhanced_web_recon.md`; then the pak-level check (`mod-overrides.py`
 > against the build's Mods) by the main session; the verdict to the owner with the conflicts table (memory: advice on a mod = its conflict study).
