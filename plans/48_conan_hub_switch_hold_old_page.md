@@ -57,6 +57,11 @@ The owner: «клик выполнен, видуального переключ�
   rebuilt). NEXT: which function each page runs on activation and what it re-creates (births per show with the window kept); then the owner's lazy build =
   run that refresh for the hidden pages ahead of time, and show without a second refresh. The test mod is saved in `ConanExiles/_config/hubswitch/
   KrinikHubPersistTest/` (removed from the game).
+- **The pages' lifetime — decided by measurement (`[OWNER]` 2026-11-06 23:18 +03:00 verbatim):** «можно было бы до выхода из мира держать. Вряд ли они будут много ОЗУ
+  занимать. А вообще, нужно измерять. Может есть смысл их убирать при закрытии хаба, и пересоздавать вновь лениво на следующем открытии» → acceptance step:
+  the game's working set (private bytes) with the hub closed — before the first open, with all 9 pages kept, after 5 open/close cycles (no growth = no
+  leak); the two policies compared: keep until the world is left vs release at the hub close and rebuild lazily at the next open (the first-switch delay
+  measured for each). The number decides; the default until measured — keep until the world is left (his first choice).
 - Review folder 70 (`70_hub_dergaetsya_x15`): the four «Снаряжение» switches of run 7 slowed ×15 (`[OWNER]` 22:56 «покажи, что дергается, замедли в 15 раз»).
 - Measure tool: `scratchpad/hub_run.sh <tag>` + `hub_switches.py` (to move into the pack `_config/` with the build).
 
