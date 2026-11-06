@@ -467,15 +467,15 @@ Simple Minimap ставит карту во время игры: центр сл
 
 | Что | Как на самом деле |
 |---|---|
-| Строка, которую пишут мод и игра (или два мода) | ЗАВИСИТ ОТ ТАБЛИЦЫ (журнал в обоих случаях пишет `MergeDataTables - Found existing table entry … overwriting`): `SpawnTable/SpawnDataTable`, `ProfessionTemplateDataTable` — ПО ПОЛЯМ (2026-10-26; 2026-11-06 — 17 рядов боссов BMNB + Heritage, все четыре поля вербовки и расы живые); `Items/ItemTable` — ЦЕЛИКОМ строка позднего мода (2026-11-06, ряд 51420: исходный Mines of Set над Severe Weather — класс, доспех, иконки игровые/Mines). Новая таблица — проверять вживую `_config/live-rows.lua` |
+| Строка, которую пишут мод и игра (или два мода) | ЗАВИСИТ ОТ ТОГО, КАК ВЛИВАЕТ ПОЗДНИЙ МОД (журнал в обоих случаях пишет `MergeDataTables - Found existing table entry … overwriting`). ПО ПОЛЯМ: Heritage (17 рядов боссов над BMNB — вербовка и расы живые), таблицы Era of Trials `*_Merge` (54 оружия над LegitReligious — у луков список стрел LR + стрела EoT 47210132; 2 NPC над Heritage), TDI / Ancient Civilization (2026-10-26). ЦЕЛИКОМ: Mines of Set (предмет 51420 над Severe Weather), EAA (7 рядов боссов над BMNB — в той же таблице появления!), рецепты Era of Trials `*_Add`. Каждую пару — вживую `_config/live-rows.lua` (2026-11-06) |
 | Массив (`CraftingGroups`, `BonusRecipes`) | дописывается: `Armorer_4` — 8 игровых групп + 1 Ancient Civilization = 9, 30 рецептов + 1 TDI = 31 |
 | Пустое поле мода (`[]`, `None`, 0) | не затирает игровое: у TDI `ThrallTier 0`, `StatTemplate None` — в игре 4 и Artisan Base |
 | Два мода, разные поля одной строки | оба применяются: боссы — расы Heritage + характеристики и оглушение Bosses My New Besties |
 | Исключение, не понятое до конца | `ThrallGroup = Warrior` Ancient Civilization в `Armorer_4` не применился (в игре Crafter) |
 
 Чтение живой строки: `StaticFindObject('/Game/Systems/SpawnTable/<Таблица>.<Таблица>'):ForEachRow(function(name, row) … row.<Поле> … end)`
-(имя строки — строка Lua; массив — `:GetArrayNum()`, имя — `:ToString()`). В таблице, сливаемой по полям, потеря правки — только там, где два мода меняют ОДНО поле
-(`ConanExiles/docs/17`); в таблице предметов теряется всё, что поздний мод оставил игровым (ряд 51420, план KUMM 45 шаг 1).
+(имя строки — строка Lua; массив — `:GetArrayNum()`, имя — `:ToString()`). Если поздний мод вливает по полям, потеря правки — только там, где два мода меняют ОДНО поле (`ConanExiles/docs/17`); если он заменяет
+строку целиком, теряется всё, что он оставил игровым (ряд 51420, 7 боссов EAA — план KUMM 45 шаги 1 и 4).
 Живое значение полей ряда против таблицы мода одним вызовом — `_config/live-rows.lua` (текстом через `DataTableFunctionLibrary:GetDataTableColumnAsString`;
 мягкую ссылку из ряда в функцию не передавать — падение игры, KUMM EXP-0459).
 

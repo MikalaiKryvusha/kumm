@@ -133,11 +133,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **NOW 2026-11-06 11:17 +03:00 — chat of 2026-11-06 (second), `/dayloop` (`[OWNER]` «работай автономно. Буду нужен - зови голосом»):** plan 45 step 4 DONE — the 17 boss rows
 > lose NOTHING: the live `SpawnDataTable` with the ORIGINAL Heritage holds BMNB's four recruitability fields and Heritage's races on 17 of 17 (new reader
 > `ConanExiles/_config/live-rows.lua`); the previous chat's «LOST» was false (file reading; EXP-0458) — the merge built from it is REVERTED (Heritage ships
-> unmodified). Control of step 1 (original Mines of Set): `Items/ItemTable` replaces WHOLE rows — the Grey One Mask merge is needed and stands. **The merge rule is
-> per table, judged live** (spawns, profession templates — by field; items — whole row). Report `testcases/reports/2026-11-06_conan-boss-rows-heritage-bmnb-live.md`.
-> A probe crashed the game once (11:02, soft pointer into a UFunction — EXP-0459). NEXT: plan 45 — BMNB → EAA (7 rows) and Heritage → Era of Trials (2) by
-> `live-rows.lua`; steps 5 (Asghaard → TDI, 47 — profession templates, field-merged: likely nothing lost, confirm live), 6 (LegitReligious → Era of Trials, 59 —
-> ITEM table: whole-row, real losses likely), 7, 8–12. Owed: BMNB's own function (knock a boss out, recruit) in play.
+> unmodified). Control of step 1 (original Mines of Set): Mines of Set replaces WHOLE rows — the Grey One Mask merge is needed and stands. **The merge rule is the LATER
+> MOD's, judged live per pair** (by field: Heritage, Era of Trials' `*_Merge`; whole row: Mines of Set, EAA, Era of Trials' `*_Add` — in the same spawn table).
+> Then (2026-11-06 11:42 +03:00): BMNB → EAA, 7 boss rows — LOST → merged (21 `copyprop:` in `DT_EAA_Spawntable`, EAA `krinikBuild`; `patch-mod-asset.py` taught FName suffixes),
+> live 7/7; Heritage → Era of Trials 2 NPCs — both kept; LegitReligious → Era of Trials 54 weapons — both kept; 5 Zathite dancer recipes — C → **interview #032
+> (the owner's choice, recommended: Era of Trials as is)**. Reports `2026-11-06_conan-boss-rows-heritage-bmnb-live.md`, `2026-11-06_conan-religion-and-eaa-rows-live.md`.
+> A probe crashed the game once (11:02, soft pointer into a UFunction — EXP-0459). NEXT: plan 45 step 5 (Asghaard → TDI, 47 profession rows, live), 7 (rows the
+> log cannot show), 8 (assets — LegitReligious ships the whole vanilla `Items/ItemStatModificationTable`), 9–12. Owed: BMNB's own function (knock a boss out, recruit) in play.
 > (superseded) The previous chat's FIRST order — build the Heritage merge maps of pack `2a7ed07`: done 10:56, found needless, reverted (the maps removed from the pack).
 > Owner's open items: none waiting (perk gap 14 done, mask 3 710 done; Nexus follow-up letter drafted for him to send — ticket 276571).
 > **NOW 2026-11-06 09:05 +03:00 — chat of 2026-11-06, `[OWNER]` «продолжаем делать сборку Конана 1.0.0»:** DONE in one kit build + one run (pack `1dfd312`, report

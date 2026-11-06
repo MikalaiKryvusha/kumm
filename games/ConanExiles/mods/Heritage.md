@@ -21,4 +21,4 @@ merged — check before reading them as live). Read 2026-11-06 (`patch-mod-asset
 ## Open
 
 - 2026-11-06 (plan 45 step 4): shares 17 boss / elite spawn rows with Bosses My New Besties — judged, the game merges them (above); 2 dialogue-NPC rows
-  (Muriela the Artisan, Yakira) shared with Era of Trials — not judged yet (`live-rows.lua`).
+  (Muriela the Artisan, Yakira) shared with Era of Trials — judged 2026-11-06 11:41 +03:00: this mod's faces and Era of Trials' vendor class both live (B, nothing to do).

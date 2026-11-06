@@ -17,18 +17,17 @@ Full list: `shared_rows_2026-11-06.txt` (143 rows).
 
 | Rows | Table | Chain (the last one wins) | First reading |
 |---:|---|---|---|
-| 54 | `Items/ItemTable` | LegitReligious_Enhanced → EraOfTrials | two religion mods over the same vanilla religious items — whose item stats and names stand |
-| 47 | `SpawnTable/ProfessionTemplateDataTable` | Asghaard_Ancient_Civilization → TDI_LegendaryRepair | armorer templates: Asghaard's edits lost to TDI's |
-| 17 | `SpawnTable/SpawnDataTable` | BossesMyNewBesties → Heritage | boss / elite spawn rows: the spawn table merges by field — live, both mods' changes stand (BMNB's recruitability + Heritage's races, 17 of 17; judged 2026-11-06 11:16 +03:00, `mod-reconciliation/REGISTER.md`). Corrected: «Heritage's version stands» read the log's «overwriting» as a whole-row win |
-| 8 | `Gathering_v2/LootTable_Resource` | ResourceStimulusPackage → EnhancedArmoryAndArsenal | werewolf / werehyena harvest loot: EAA's stands, RSP's boost lost there |
-| 7 | `SpawnTable/SpawnDataTable` | BossesMyNewBesties → EnhancedArmoryAndArsenal | Siptah / Black Pool bosses |
-| 5 | `Items/Recipes/RecipesTable` | LegitReligious_Enhanced → EraOfTrials | religious recipes |
-| 2 | `SpawnTable/SpawnDataTable` | Heritage → EraOfTrials | dialogue NPCs Muriela, Yakira |
+| 54 | `Items/ItemTable` | LegitReligious_Enhanced → EraOfTrials | judged 2026-11-06 (live): vanilla bows and religious weapons — LegitReligious's stats live 54/54, Era of Trials only appends its arrow to the ammo; both kept (`mod-reconciliation/REGISTER.md`) |
+| 47 | `SpawnTable/ProfessionTemplateDataTable` | Asghaard_Ancient_Civilization → TDI_LegendaryRepair | armorer templates — first reading «Asghaard's edits lost» NOT confirmed: TDI merges by field on `Armorer_4` (2026-10-26, `ConanExiles/docs/17`); the 47 rows wait for a live check (plan 45 step 5) |
+| 17 | `SpawnTable/SpawnDataTable` | BossesMyNewBesties → Heritage | boss / elite spawn rows: Heritage merges by field — live, both mods' changes stand (BMNB's recruitability + Heritage's races, 17 of 17; judged 2026-11-06 11:16 +03:00, `mod-reconciliation/REGISTER.md`). Corrected: «Heritage's version stands» read the log's «overwriting» as a whole-row win |
+| 8 | `Gathering_v2/LootTable_Resource` | ResourceStimulusPackage → EnhancedArmoryAndArsenal | werewolf / werehyena harvest loot — judged A: RSP re-declares the rows unchanged, nothing lost (corrected: «RSP's boost lost» was the first reading) |
+| 7 | `SpawnTable/SpawnDataTable` | BossesMyNewBesties → EnhancedArmoryAndArsenal | Siptah / Black Pool bosses — judged live: EAA replaces whole rows, BMNB's recruitability was lost → merged into EAA's table, both live 7/7 |
+| 5 | `Items/Recipes/RecipesTable` | LegitReligious_Enhanced → EraOfTrials | the 5 Zathite dancer recipes — C (Era of Trials' redesign stands whole; LegitReligious's fix of a vanilla zero lost) → interview #032 |
+| 2 | `SpawnTable/SpawnDataTable` | Heritage → EraOfTrials | dialogue NPCs Muriela, Yakira — judged live: both kept (Heritage's faces, Era of Trials' vendor class) |
 | 2 | `UI/Data/DataTables/DT_UIModuleTable` | ProximityParty → Simple_Minimap (→ LLHighlight → AlMerayah_Reborn) | Xevyr's shared rows `XCS_Panel`, `Xev_MouseInteraction` — one author's own family, most likely identical |
 | 1 | `Items/ItemTable` · 51420 | SevereWeatherEnhanced → Mines_of_Set | NOT two items under one id (corrected 2026-11-06 09:34 +03:00): 51420 is a VANILLA armour piece (armour 38, tier 5, durability 660) that both mods re-declare — Severe Weather's `LFS_ItemTable` holds 15 vanilla ids, Mines of Set's item table re-declares the Grey One set 51420–51424; the fields each changes against vanilla decide the case (`RESOLUTION_GUIDE.md`) |
 
 ## Next
 
-1. Item 51420: diff both mods' rows against the vanilla row (which fields each changes) — `RESOLUTION_GUIDE.md` step 2.
-2. The 54 + 5 religious rows: compare LegitReligious and EraOfTrials values for a few rows — identical or a lost change.
-3. Asghaard → TDI (47) and RSP → EAA (8): what each side changes in the row; decide the order or a merged row (native, `HOUSE_RULES.md` rule 8).
+Done 2026-11-06 except: Asghaard → TDI (47) — a live check by `_config/live-rows.lua` (plan 45 step 5); the 5 recipes — the owner (interview #032). The log's
+«overwriting» never says whether a row was replaced whole or merged by field — that is the later mod's own way, seen only live (`mod-reconciliation/GUIDE.md`).

@@ -20,5 +20,12 @@ stats (`DT_EAA_ResourceStatTable`, `DT_EAA_WeaponTypeResourceStatTable`), loot (
 
 ## Open
 
-- 2026-11-06 (plan 45): it wins 8 werewolf / werehyena rows of `LootTable_Resource` over Resource Stimulus Package (step 3) and 7 boss spawn rows over
-  Bosses My New Besties (step 4).
+- 2026-11-06 (plan 45): it wins 8 werewolf / werehyena rows of `LootTable_Resource` over Resource Stimulus Package (step 3, A — RSP unchanged). Its merge
+  REPLACES WHOLE ROWS (seen live 2026-11-06 11:41 +03:00): on the 7 spawn rows it shares with Bosses My New Besties (`DT_EAA_Spawntable`: Silent Legion warriors 1–3, Siptah
+  devolved bird / demon-spider / werewolf bosses, the white tiger; EAA changes only `NpcTags` and `LootTable`) BMNB's recruitability was lost.
+
+## Our edits — the spawn merge (KRINIK MODIFIED, 2026-11-06 11:41 +03:00)
+
+BMNB's `ProfessionTemplate` / `StatTemplate` / `StatModifierTemplate` / `NPCClass` of those 7 rows copied into `DT_EAA_Spawntable` — 21 `copyprop:` lines,
+`ConanExiles/_config/krinik_patches/EnhancedArmoryAndArsenal__DT_EAA_Spawntable.tsv`, part of EAA's `krinikBuild`; rebuilt chunk 1 of 1472, live after: both
+mods' fields 7/7 (plan 45 step 4).

@@ -112,8 +112,10 @@ merge (55 `copyprop:` lines, a KRINIK MODIFIED pak) was built on it.
 merges rows FIELD BY FIELD — already observed on 2026-10-26 (`ConanExiles/docs/17` item 3), never read before judging. Then ❌ again the other way: the fix
 generalized «the game merges by field» to every table, and the control of row 51420 (original Mines of Set, 11:13) showed `Items/ItemTable` replacing the
 WHOLE row — Severe Weather's breather really lost there.
-**Lesson:** the merge rule is a property of EACH TABLE, observed live with the mods unmodified — never read from the files, never carried from one table to
-another. Field-merged so far: `SpawnDataTable`, `ProfessionTemplateDataTable`; whole-row: `Items/ItemTable`.
+Then ❌ a third time: «per table» fell at 11:33 — in the SAME `SpawnDataTable`, EAA (later than BMNB) replaces 7 rows whole while Heritage merges 17 by field.
+**Lesson:** the merge rule is a property of the LATER MOD'S way of merging (its controller / `*_Merge` vs plain tables), observed live PER PAIR with the mods
+unmodified — never read from the files, never carried to another pair. By field so far: Heritage, Era of Trials' `*_Merge`, TDI / Ancient Civilization;
+whole row: Mines of Set, EAA, Era of Trials' `*_Add`. Three generalizations in one hour were each refuted by the next pair — stop generalizing, measure.
 **Repro:** `pult.sh "lua _G.__lr={table=…, mod=…, rows={…}, fields={…}}; return dofile('D:/work/ai_sandbox/ConanExiles/_config/live-rows.lua')"` → SAME/DIFF per field.
 **Trigger:** writing «LOST» or a B outcome for a table row → run `live-rows.lua` first.
 **Not for:** whole-file overrides (assets, kind 3) — there the later pak really replaces everything.

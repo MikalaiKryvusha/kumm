@@ -4,7 +4,7 @@
 > the 143 shared rows pasted)
 > **Parent:** `researches/mod-reconciliation/GUIDE.md` (the method, `HOUSE_RULES.md` rule 27); `researches/conan-table-conflicts/README.md` (the findings);
 > `MASTER_PLAN.md` acceptance criterion 2 of the build
-> **Status:** 🔧 started 2026-11-06 09:40 +03:00 — group 1 (row 51420) being read
+> **Status:** 🔧 started 2026-11-06 09:40 +03:00; steps 1–4 done, step 6 waits for interview #032 (2026-11-06 11:41 +03:00); next — step 5, then 7–12
 > **Outbound:** outcome C of each group → the owner, one question per group (scenario of what the player sees)
 
 ## Goal vector (Maintain)
@@ -39,8 +39,10 @@ Each group by the guide: read original + both sides → classify per field → r
       BMNB's `ProfessionTemplate` / `StatTemplate` / `StatModifierTemplate` / `NPCClass` SAME on 17 of 17 rows, Heritage's races on 17 of 17; report
       `testcases/reports/2026-11-06_conan-boss-rows-heritage-bmnb-live.md`). **CORRECTED:** the file-level «LOST» below was FALSE — the game merges rows field by
       field, as `ConanExiles/docs/17` item 3 had shown on 2026-10-26 (KUMM EXP-0458); the merge built on it (two maps, a KRINIK MODIFIED Heritage) is reverted and
-      `row-diff.py` no longer prints «LOST» for that case. Still open from this group: Heritage → EraOfTrials (2 dialogue NPCs) and BMNB → EAA (7) — judge by
-      `live-rows.lua`. History of the step: (start here: notes `BossesMyNewBesties.md`, `Heritage.md`, `EraOfTrials.md` created 2026-11-06 10:35 +03:00 — read them first; expectation to CHECK, not a finding:
+      `row-diff.py` no longer prints «LOST» for that case. **The rest of the group, 2026-11-06 11:41 +03:00:** Heritage → EraOfTrials (2 dialogue NPCs) — B, Era of Trials merges
+      by field, both live; BMNB → EAA (7: Silent Legion ×3, Siptah devolved bosses ×3, white tiger) — B LOST (EAA replaces whole rows, the SAME table) → merged
+      by 21 `copyprop:` into `DT_EAA_Spawntable` (EAA `krinikBuild`), live after: both mods' fields 7/7 (report `2026-11-06_conan-religion-and-eaa-rows-live.md`).
+      Step 4 is closed: 24 of 24 rows judged. History of the step: (start here: notes `BossesMyNewBesties.md`, `Heritage.md`, `EraOfTrials.md` created 2026-11-06 10:35 +03:00 — read them first; expectation to CHECK, not a finding:
       BMNB makes bosses recruitable, Heritage gives them faces → likely different fields → a B merge; Heritage's rows — `HeritageSpawnDataUniques` (17 bosses are
       named characters → most likely here) and `HeritageSpawnDataMasses`; PARTIAL 2026-11-06 10:37 +03:00 (`row-diff.py` vanilla · BMNB · Heritage Uniques, 17 rows): 3 rows —
       C on `LootTable` (both change the boss's loot table differently); 14 rows are ABSENT from `HeritageSpawnDataUniques` → Heritage writes them from
@@ -57,7 +59,11 @@ Each group by the guide: read original + both sides → classify per field → r
       `Systems/SpawnTable/SpawnDataTable` by `retoc to-legacy --filter SpawnDataTable` + `uaj tojson`; then `row-diff.py` in load order.) Boss / elite spawns (`SpawnTable/SpawnDataTable`, 24 rows) — BossesMyNewBesties → Heritage (17), → EnhancedArmoryAndArsenal (7); Heritage → EraOfTrials
       (2 dialogue NPCs).
 - [ ] 5. Armourer templates (`ProfessionTemplateDataTable`, 47 rows) — Asghaard_Ancient_Civilization → TDI_LegendaryRepair.
-- [ ] 6. Religious items and recipes (`Items/ItemTable` 54, `RecipesTable` 5) — LegitReligious_Enhanced → EraOfTrials.
+- [ ] 6. Religious items and recipes (`Items/ItemTable` 54, `RecipesTable` 5) — LegitReligious_Enhanced → EraOfTrials. **2026-11-06 11:41 +03:00:** the 54 weapons — B, Era of Trials
+      merges its ammo by field (`EoT_DT_BowCompatableAmmunitions_Merge`): LR's stamina / container / repair / descriptions live 54/54, every ammo list = LR's +
+      Era of Trials' arrow 47210132; the 5 Zathite dancer recipes — C (LR fixes a vanilla zero «Venom-purified blood», Era of Trials redesigns the recipe
+      whole; live = Era of Trials) → interview #032. Also found: LegitReligious ships the WHOLE vanilla `Items/ItemStatModificationTable` (kind 3 — step 8).
+      Closes when #032 is answered and applied.
 - [ ] 7. The rows the log cannot show — «added by A, overwritten by B»: for every pair of mods merging into the same game table (the `owntable` rows of
       `mod-overrides.py`), compare their row KEYS offline (their own tables' row names) — the full list of shared keys, beyond the log's 143.
 
