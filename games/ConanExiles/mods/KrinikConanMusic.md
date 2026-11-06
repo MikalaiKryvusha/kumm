@@ -51,7 +51,8 @@ crossfade and a 60 s grace period, outside the game process. Design taken from P
 
 ## Open
 
-- Scene-change spikes 2–3 ms (log + mute + state write + folder read in one call) — spread over ticks; then the A-B-A flight (HOUSE_RULES rule 7).
+- Scene-change spikes 2–3 ms — FIXED 2026-11-06 19:22 run: the change is spread over seconds (decide · write state · read folders), one log line per call;
+  every minute's worst call ≤ 1 ms (the os.clock quantum), 5–12 ms per minute. Still owed: the A-B-A flight (HOUSE_RULES rule 7).
 - Death, the Purge, the menu — not detected yet (the classes are known: MusicDeath, MusicPurge, MusicMenu).
 - The game's music slider is not followed yet (volume comes from the mod's `config.lua`).
 - Whether the start from Lua flashes a console window — filmed only after the fact.
