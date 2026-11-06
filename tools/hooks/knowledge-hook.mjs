@@ -205,7 +205,10 @@ function toolUses(transcriptText) {
 export const notesRead = (uses, mod) => uses.some((u) => u.name === 'Read' && norm(u.input.file_path).endsWith(norm(notesRel(mod))));
 export function studiedNotWritten(uses, isMod) {
   const last = {};   // мод → индекс последнего разбора
-  uses.forEach((u, i) => { const r = modOf(u.name, u.input, isMod); if (r && r.study) last[r.mod] = i; });
+  // M20 (2026-11-06): долг остановки — только у НАСТОЯЩЕГО мода (конспект или манифест), для любого вида разбора. Проверочный вызов
+  // хука с фиктивным `patch-mod-asset.py extract X …` (сам отклонённый замком) записал «разобран X» и запер остановку на конспекте X.md;
+  // проверка isMod стояла лишь у retoc (M19). [TESTED: 2026-11-06 · selftest M20 · KUMM testcases/reports/2026-11-06_mod-reconciliation-gate.md]
+  uses.forEach((u, i) => { const r = modOf(u.name, u.input, isMod); if (r && r.study && (!isMod || isMod(r.mod))) last[r.mod] = i; });
   return Object.keys(last).filter((mod) => !uses.some((u, i) => i > last[mod] && (u.name === 'Edit' || u.name === 'Write') &&
     norm(u.input.file_path).endsWith(norm(notesRel(mod)))));
 }
@@ -317,6 +320,12 @@ function selftest() {
   const s4 = respond({ hook_event_name: 'Stop' }, stamp, 900000, use('Bash', rv('WBP_ContainerInfo')) + '\n', () => false);
   const okV = !g10 && deny(g11) && deny(g12) && !(s4 && /WBP_ContainerInfo/.test(s4.reason || ''));
   if (!okV) fail++; console.log(`${okV ? 'ok  ' : 'FAIL'} M19 retoc ванильного ассета — без замка и без блока остановки · мод из манифеста и мод с конспектом — замок`);
+  // M20 (2026-11-06): фиктивное имя в patch-mod-asset — не мод: без долга остановки; настоящий мод — с долгом (контроль).
+  const pma = (m) => use('Bash', { command: `python -I -X utf8 patch-mod-asset.py extract ${m} LFS_ItemTable w` }) + '\n';
+  const s5 = respond({ hook_event_name: 'Stop' }, stamp, 950000, pma('X'), (p) => /SevereWeatherEnhanced/.test(p));
+  const s6 = respond({ hook_event_name: 'Stop' }, stamp, 960000, pma('SevereWeatherEnhanced'), (p) => /SevereWeatherEnhanced/.test(p));
+  const okX = !(s5 && /\bX\b/.test(s5.reason || '')) && s6 && /SevereWeatherEnhanced/.test(s6.reason || '');
+  if (!okX) fail++; console.log(`${okX ? 'ok  ' : 'FAIL'} M20 разбор фиктивного «мода» — без долга остановки · настоящий мод — долг`);
   try { rmSync(stamp); rmSync(dir, { recursive: true, force: true }); } catch { /* временная папка ОС */ }
   console.log(fail ? `selftest: ${fail} FAIL` : 'selftest: all ok');
   process.exitCode = fail ? 1 : 0;
