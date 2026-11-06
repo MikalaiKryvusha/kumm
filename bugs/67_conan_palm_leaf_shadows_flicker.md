@@ -17,6 +17,15 @@ VSM (and their community fixes) keep both — Epic's guidance on time-of-day wit
 `[OWNER]` «эти ебучие тени не должны перерисовываться и пересчитываться так часто!» — the target design: the visible sun moves smoothly, the
 shadow-casting light (and the VSM cache) updates rarely. Recon of that question — `researches/conan-shadow-flicker/2026-10-29_light-rotation-cache.md`.
 
+## The owner's word 2026-11-06 19:22 +03:00 (verbatim) — the 2.0 step is NOT the answer
+
+> Я тебе скажу честно, что я думаю по этому поводу: это какоё-то полный дибилизм!!! Я видел множество игру, где тени плавно динамически двигаются, при этом в старых играх! И нет никаких мерчаний. А эта игра на суппер современном UE 5.8!!! И вы блять вынуждены тени перерисовывать раз в несолько секунд - ЭТО ЧТО-ТО ВОПИЮЩЕ НЕПРАВИЛЬНО ИЛИ В УСТРОЙСТВЕ ТЕНЕЙ В ИГРЕ, ИЛИ В НАШЕМ ПОНИМАНИИ УСТРОЙСТВА ИГРЫ!
+
+Reading (`[AI]`): the sun-step 2.0 is a compensating patch (HOUSE_RULES rule 24) — it hides the symptom. Next, in this order: (1) recon of Epic's
+VSM guidance and shipped UE5 games with a moving sun and wind-swayed foliage (cache invalidation by WPO, WPO disable distance for shadows) — sources,
+not reasoning; (2) the never-run discriminating run `r.Shadow.Virtual.Enable=0` under palms (VSM vs the temporal upscaler), 60 fps video; (3) the cause
+fix with the sun smooth again. Fixing: right after the KrinikConanMusic run of 2026-11-06 evening.
+
 ## Goal vector and acceptance
 
 Avoid: leaf shadows on sand under palms visibly jitter frame to frame. Done when the owner, standing under palms at 4K, says the shadows do
