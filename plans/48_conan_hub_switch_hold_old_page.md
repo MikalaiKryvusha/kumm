@@ -113,6 +113,17 @@ craft panel, hotbar, bottom bar) — only the mods' embeds missing (they come by
 instance of every page, collapsed; on `OnChildActivated` (inside the native call, before the frame renders) it collapses the game's fresh page and shows
 ours. The game's rebuild still runs, but invisibly. Next: this prototype in the background game — births and frames per switch.
 
+## Shadow-pages prototype — crashes and the bisect (2026-11-07 00:00–00:16, background; the rule HOUSE_RULES 29 born here)
+
+- v1 (00:00) and v2 (00:08) crashed the game on the first native switch; bisect 00:10 in one game: 9 extra pages collapsed — OK; page-class notify — OK (but it
+  never fires for page windows); UserWidget counter + empty `OnChildActivated` hook — OK; our extra `CraftingGUI` visible — OK; **`SetVisibility` inside the
+  `OnChildActivated` hook — CRASH** (game map, crash rule; EXP-0474).
+- v3 (00:16: visibility moved to the next tick; inside the hook only `SetRenderOpacity` on the game's newborn page, the previous and our page; hidden pages
+  kept at opacity 0 + HitTestInvisible, not collapsed) — CRASH on the first switch. Three prototype attempts → stop, bisect next (one ingredient per step,
+  alive-check after each): (a) 9 extra pages NOT collapsed (opacity 0, HitTestInvisible) + native switch; (b) `SetRenderOpacity` on the game's newborn page
+  inside the hook (worked without extra pages in the hold prototype v3/v4 22:2x); (c) opacity on our page inside the hook. Helpers: `hubswitch/extra-pages-switch.lua`
+  (`_G.__ep`), `pult.sh` exit 4.
+
 ## The hub controller API — DRAFT `[AI]` (for the owner's review; the owner set the direction 23:48, the calls are the agent's proposal)
 
 The controller (KrinikConanUI section `krinik_hub`) owns the 9 pages; a page id is the module name (`CharacterInventory`, `FeatWindow`, …).
