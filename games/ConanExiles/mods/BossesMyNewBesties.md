@@ -19,4 +19,5 @@ recruitable).
 ## Open
 
 - 2026-11-06 (plan 45 step 4): 17 of its boss / elite spawn rows are overwritten by Heritage, 7 by EAA (both load later). Likely different fields (this mod —
-  recruitability; Heritage — faces; EAA — its bosses) → a B merge to read field by field.
+  recruitability; Heritage — faces; EAA — its bosses) → a B merge to read field by field. Read 2026-11-06 (`BMNB_SpawnDataTable`, 173 imports): against
+  Heritage's `HeritageSpawnDataUniques` 3 of the 17 rows differ on `LootTable` (outcome C); the other 14 sit in Heritage's `HeritageSpawnDataMasses` — not read yet.
