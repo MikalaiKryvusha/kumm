@@ -162,6 +162,9 @@ function notesByTitle(name) {
       if (!f.endsWith('.md')) continue;
       const first = readFileSync(join(dir, f), 'utf8').split('\n', 1)[0];
       if (first.includes(`— ${name} `) || first.endsWith(`— ${name}`)) return f.slice(0, -3);
+      // M21 (2026-11-06): контейнер мода назван в заголовке «container <Имя>» — разбор зовёт мод именем контейнера (Mines_of_Set), конспект
+      // назван по игре (CavernsOfSet.md); без этого замок требовал второй конспект — пару одного знания.
+      if (first.includes(`container ${name}`)) return f.slice(0, -3);
     }
   } catch { /* нет папки — нет конспекта */ }
   return null;
@@ -182,7 +185,11 @@ const RETOC = STUDY[2];
 export function modOf(tool, input, isMod = (name) => packMods().has(name)) {
   if (tool === 'Bash' || tool === 'PowerShell') {
     const c = String(input.command || '');
-    for (const re of STUDY) { const m = c.match(re); if (m) return re === RETOC && !isMod(m[1]) ? null : { mod: m[1], study: true }; }
+    for (const re of STUDY) {   // M21: имя разбора тоже сводится к имени конспекта (контейнер → конспект по заголовку)
+      const m = c.match(re); if (!m) continue;
+      const mod = noteName(m[1]);
+      return re === RETOC && !isMod(mod) ? null : { mod, study: true };
+    }
     for (const re of WORK) { const m = c.match(re); if (m) return { mod: noteName(m[1] || m[2] || m[3]), study: false }; }
   }
   if (tool === 'Edit' || tool === 'Write') {
@@ -326,6 +333,10 @@ function selftest() {
   const s6 = respond({ hook_event_name: 'Stop' }, stamp, 960000, pma('SevereWeatherEnhanced'), (p) => /SevereWeatherEnhanced/.test(p));
   const okX = !(s5 && /\bX\b/.test(s5.reason || '')) && s6 && /SevereWeatherEnhanced/.test(s6.reason || '');
   if (!okX) fail++; console.log(`${okX ? 'ok  ' : 'FAIL'} M20 разбор фиктивного «мода» — без долга остановки · настоящий мод — долг`);
+  // M21 (2026-11-06): разбор по имени контейнера (Mines_of_Set) находит конспект с «container Mines_of_Set» в заголовке (живой файл CavernsOfSet.md).
+  const m21 = modOf('Bash', { command: 'python -I -X utf8 patch-mod-asset.py extract Mines_of_Set Caverns_of_Set_Item_Table w' }, () => true);
+  const okM21 = m21 && m21.mod === 'CavernsOfSet' && m21.study; if (!okM21) fail++;
+  console.log(`${okM21 ? 'ok  ' : 'FAIL'} M21 разбор по имени контейнера → конспект по заголовку «container <Имя>» (Mines_of_Set → CavernsOfSet)`);
   try { rmSync(stamp); rmSync(dir, { recursive: true, force: true }); } catch { /* временная папка ОС */ }
   console.log(fail ? `selftest: ${fail} FAIL` : 'selftest: all ok');
   process.exitCode = fail ? 1 : 0;

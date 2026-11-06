@@ -78,4 +78,4 @@ Kind-specific notes:
 
 | Game · kind · what | Sides (wins last) | Outcome | Resolution | Date |
 |---|---|---|---|---|
-| Conan · table · `Items/ItemTable` 51420 | SevereWeatherEnhanced → Mines_of_Set | being read — a VANILLA armour piece (armour 38, tier 5, durability 660) re-declared by both, so not D | — | 2026-11-06 |
+| Conan · table · `Items/ItemTable` 51420 «Grey One Mask» | SevereWeatherEnhanced → Mines_of_Set | **C** (`row-diff.py`, 2026-11-06 09:43 +03:00): Severe Weather makes the vanilla mask a SANDSTORM BREATHER (`ItemClass` `BPGameItemArmor_C` → `BP_SandstormBreather_C`, armour 35 → 38, modifier «Light» → «Light Armor», its own `Icon` with `IconLayers` emptied, tags cut to `Item.Armor`, `RepairXP` 2000 → 12665); Mines of Set re-declares the vanilla mask (`ShortDesc` «Grey One» → «Grey Ones», `RepairXP` → 3710). Mines of Set loads later → **the breather function of this mask is LOST in the build today**. Both turn `<LoreItalics>` into `<span style="italic">` (identical). Same field, different values: `RepairXP`, `IconLayers` | proposed merge: Severe Weather's row (the breather) + Mines of Set's text fix; `RepairXP` — the owner | 2026-11-06 |

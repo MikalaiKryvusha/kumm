@@ -29,5 +29,9 @@ stands on fog (the build runs `r.Fog=1` for it). Settings — console `dc SW_con
   being judged by `researches/mod-reconciliation/GUIDE.md`. Read 2026-11-06 09:37 +03:00 (`patch-mod-asset.py extract SevereWeatherEnhanced LFS_ItemTable`): `LFS_ItemTable`
   holds 15 rows, ALL vanilla item ids (51420, 52011, 91005, 52071, 52076, 52541, 91040, 52603, 52649, 52654, 52935, 95090, 95105, 91320, 51378) — the mod
   re-declares vanilla items (most likely their temperature modifiers: row 51420 carries `FirstModifier` = its own text key `LFS_ItemTable_51420_FirstModifier`);
-  row 51420 = armour 38, `ArmorType` 10, tier 5, durability 660, weight 7.09, repair items 12516 ×10 and 14152 ×5. Next: the vanilla row and Mines of Set's
-  row of 51420, field by field.
+  row 51420 = armour 38, `ArmorType` 10, tier 5, durability 660, weight 7.09, repair items 12516 ×10 and 14152 ×5.
+  **What the 15 rows are (read 2026-11-06 09:43 +03:00):** all 15 vanilla HEADGEAR made sandstorm breathers — `ItemClass` → `BP_SandstormBreather_C`: 51420 Grey One Mask, 52011 and
+  91005 Medium Cap, 52071 Darfari Watcher Mask, 52076 Darfari Speaker Mask, 52541 and 91040 Relic Hunter Turban, 52603 / 52649 / 52654 Silent Legion helmets,
+  52935 Zamorian Thief Hood, 95090 and 95105 Durable Medium Cap, 91320 Redeemed Legion Helmet, 51378 Voidforged Dragon Helmet. On 51420 against vanilla
+  (`ConanExiles/_config/row-diff.py`): armour 35 → 38, «Light» → «Light Armor», own `Icon` with `IconLayers` emptied, tags cut to `Item.Armor`, `RepairXP` 2000 → 12665.
+  **Only 51420 clashes** — Mines of Set re-declares it and loads later, so the Grey One Mask is NOT a breather in the build today (plan 45 step 1, outcome C).

@@ -1,4 +1,4 @@
-# Mod notes — Caverns of Set (Workshop 3722525736, PNutt)
+# Mod notes — Caverns of Set (container Mines_of_Set, Workshop 3722525736, PNutt)
 
 > **Created:** 2026-11-01 · **Parent:** case C1 of `testcases/TC_conan_build_stability_compat_perf_2026-10-26.md`; pack `docs/17-совместимость-3.0.1-по-журналу.md`
 > **Status:** living notes — the ONE place for this mod's internals
@@ -71,6 +71,10 @@ needs `global.utoc` for script objects) → `UAssetGUI tojson <umap> <json> VER_
 
 ## Open
 
+- **Row 51420 «Grey One Mask» shared with Severe Weather (plan 45 step 1, 2026-11-06 09:43 +03:00):** `Caverns_of_Set_Item_Table` (`patch-mod-asset.py extract Mines_of_Set
+  Caverns_of_Set_Item_Table`) re-declares the vanilla Grey One set 51420–51424 — against vanilla on 51420: `ShortDesc` «…the Grey One» → «…the Grey Ones», `RepairXP`
+  2000 → 3710, `<LoreItalics>` → `<span style="italic">` in `LongDesc`. Loading after Severe Weather, it wipes that mod's sandstorm-breather version of the mask
+  (outcome C — `researches/mod-reconciliation/GUIDE.md` register).
 - The owner's look at the balance (Set weapons in nearly every caverns chest) — fewer T4 rolls in `caverns_loot.py` row 1 if it is too generous.
 
 ## The author's side (checked 2026-11-01 08:5x, Steam API + the Workshop pages)
