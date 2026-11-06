@@ -52,6 +52,11 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   Lua conversion of the returned array — to look at). Note: the plate already asks the game's OWN probe — `PickupGatheringOneInstance`, the call of
   `FunCombat_PlayerController:UpdateHighlightTarget` (bugs/77) — so if E takes these eggs, `UpdateHighlightTarget` reaches them by ANOTHER branch: read its
   other calls in the bytecode trace of bug 77 (`kismet-trace.py`) and ask that one too.
+- **2026-11-06 12:56 +03:00 — `UpdateHighlightTarget` read** (`kismet-trace.py` over the 3.0.1 `FunCombat_PlayerController`, 1 122 lines): two branches — (1) the probe the plate
+  uses, `PickupGatheringOneInstance`; (2) `SphereTraceMulti` / `LineTraceMulti` keeping hits whose actor (or its `InteractTargetOverride`) implements
+  `InteractableInterface`. The eggs blueprint implements NO interface (its names hold none) → if E takes these eggs, it is branch (1), the same probe — so the
+  decisive case is AT the egg: the hero 1–2 m from `SM_KappaEggs_North_Camp_12` (−89380, 232461, −20150), the crosshair on an egg, the plate's probe answer
+  and a real E (front path). If the probe says false and E takes the egg, the take is not `UpdateHighlightTarget` at all — read the E press handler next.
 
 ## Study (next)
 
