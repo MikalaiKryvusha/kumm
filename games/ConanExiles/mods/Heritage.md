@@ -9,8 +9,10 @@
 
 ## Assets
 
-Its spawn rows reach the game's `Systems/SpawnTable/SpawnDataTable` (the log names it as the writer); the asset name is not «*spawn*table*» — list the
-container (`UnrealPak <ExtractedMods>/Heritage-Windows.utoc -List`) to find it.
+`/Game/Mods/Heritage/` (listed 2026-11-06): spawn rows — `HeritageSpawnDataUniques` (the named characters) and `HeritageSpawnDataMasses` (the crowd), merged
+into the game's `Systems/SpawnTable/SpawnDataTable` by `HeritageSpawnControl`; race templates `HeritageRaceTemplateUniques` / `…Special` / `…Masses`;
+character-creation presets `HeritageCCMalePresets`, `HeritageCCFemalePresets`, `HeritageTrueHairCC`; `HeritageHub`; old copies under `Holdovers/` (not
+merged — check before reading them as live).
 
 ## Open
 

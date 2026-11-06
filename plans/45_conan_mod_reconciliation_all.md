@@ -35,7 +35,8 @@ Each group by the guide: read original + both sides → classify per field → r
 - [x] 3. **DONE 2026-11-06 10:22 +03:00 — outcome A** (RSP's 8 rows equal the game's; only EAA, the winner, changes them; `row-diff.py` now knows the load order — a loser's
       change under a winner that keeps the original is reported «B — LOST»). Werewolf / werehyena harvest loot (`Gathering_v2/LootTable_Resource`, 8 rows) — ResourceStimulusPackage → EnhancedArmoryAndArsenal.
 - [ ] 4. (start here: notes `BossesMyNewBesties.md`, `Heritage.md`, `EraOfTrials.md` created 2026-11-06 10:35 +03:00 — read them first; expectation to CHECK, not a finding:
-      BMNB makes bosses recruitable, Heritage gives them faces → likely different fields → a B merge; BMNB's table is
+      BMNB makes bosses recruitable, Heritage gives them faces → likely different fields → a B merge; Heritage's rows — `HeritageSpawnDataUniques` (17 bosses are
+      named characters → most likely here) and `HeritageSpawnDataMasses`; BMNB's table is
       `/Game/Mods/BossesMyNewBesties/BMNB_SpawnDataTable`; Heritage's spawn table is not named «*spawn*table*» — list its container; vanilla
       `Systems/SpawnTable/SpawnDataTable` by `retoc to-legacy --filter SpawnDataTable` + `uaj tojson`; then `row-diff.py` in load order.) Boss / elite spawns (`SpawnTable/SpawnDataTable`, 24 rows) — BossesMyNewBesties → Heritage (17), → EnhancedArmoryAndArsenal (7); Heritage → EraOfTrials
       (2 dialogue NPCs).
