@@ -18,8 +18,8 @@ set live by `exec`); the flight `krinik-show` 175 s.
 
 ## 4. Checks
 
-- Hygiene: none.
-- Functional run: walked on the real game, the bench's numbers READ:
+Hygiene: none.
+Functional run: walked on the real game, the bench's numbers READ:
 
 | Flight | value | fps (median) | 1 % low | stutters ≥50 ms | worst ms | CPU ms | GPU ms |
 |---|---|---|---|---|---|---|---|
