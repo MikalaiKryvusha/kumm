@@ -134,6 +134,13 @@
        the findings files until it is read within the hour.
     (`[OWNER]` 2026-11-06 09:33–09:36 — verbatim in the guide's header.)
 
+28. **A crash-check («долгий прогон на вылеты») is active GAMEPLAY, never fly-throughs.** Fly-throughs measure frames only; a crash check walks the
+    game's systems: combat, gathering, crafting, building, thralls, inventory and the hub, eating and drinking, swimming and climbing, travel across areas,
+    loading screens (death and respawn, dungeons, waystones), day and night, saving. The order, places and parameters change from run to run (the
+    pesticide paradox, TESTING_FRAMEWORK principle 5); memory, FPS, crashes and Lua errors are read at checkpoints. Plan `plans/47_conan_gameplay_soak.md`.
+    (`[OWNER]` 2026-11-06 20:35 «Часовой прогон на вылеты - это активное взаимодействие с миром, геймплей, а не твои демо летания» · «Твои демо летания, это
+    "парадокс пестицида"».)
+
 19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
     mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +
