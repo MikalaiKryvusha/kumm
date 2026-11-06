@@ -43,6 +43,13 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   `Wildlife_split113`) are plain decoration. Our plate asks only the FOLIAGE probe (`PickupGatheringOneInstance`) — an actor of this class is outside its
   question: that is the cause, most likely. NEXT: stand the hero at the 70 m Kappa eggs, read the actor's interaction (its functions — `funcs SM_KappaEggs_Blueprint_C`)
   and what the game shows under the crosshair; then the plate asks the same question for this actor kind (an event, not polling — house rule 7).
+- **2026-11-06 12:53 +03:00 — the actor read:** `SM_KappaEggs_Blueprint_C` derives straight from `Actor`; the nearest instance `Wildlife_split042…SM_KappaEggs_North_Camp_12` at
+  (−89380, 232461, −20150). Its blueprint (offline: `retoc to-legacy` + `uaj exports`) holds ONE component of eggs — `InstancedBushes`, a plain
+  `InstancedStaticMeshComponent` (not the foliage `PickupFoliageComponent_C` the plate asks about). So the eggs are mesh INSTANCES inside a level actor; the
+  game most likely takes them by its gathering of instanced meshes (`Gathering_v2/ItemNameToTemplateID` by the mesh name). NEXT: at that egg, call the same
+  probe the plate uses with this component (or the game's interaction trace) and see what it answers; then widen the plate's question to instanced meshes
+  of such actors. Remote notes: `funcs` / `dump` by the instance name answered nothing; components through `K2_GetComponentsByClass` — an empty list (the
+  Lua conversion of the returned array — to look at).
 
 ## Study (next)
 
