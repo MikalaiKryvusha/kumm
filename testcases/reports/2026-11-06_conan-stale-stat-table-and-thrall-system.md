@@ -26,6 +26,9 @@ the game's own load of the shipped paks.
 | 6 | 2026-11-06 12:04 +03:00 | the same with `"env": {"PATCH_VIEW": "<work>/view"}` | 0 · 13 chunks identical, 1 changed on purpose; installed |
 | 7 | 2026-11-06 12:06 +03:00 | run 4 again | 0 · live rows 3 404; of the 51 — present 51 |
 | 8 | 2026-11-06 12:08 +03:00 | `kismet-trace.py` of `ShowThrallPlaceable`, game vs BMNB | 0 · BMNB adds: boss tag → the ghost's `SetActorScale3D` = the thrall's scale |
+| 9 | 2026-11-06 12:17 +03:00 | `rebuild-krinik-paks.py --only StorageReachExpanded --expect-changed CustomConsoleCommandsDataTable --install --keep` (after a false stop on a soft path, fixed) | 0 · 8 chunks identical, 1 changed on purpose |
+| 10 | 2026-11-06 12:18 +03:00 | `python -X utf8 _config/hidden-row-pairs.py --index <mod-keys.tsv>` (index by `mod-table-keys.py`, 39 664 keys) | 0 · 392 hidden rows → 1 real cross-mod pair (MSCasaDesFlores Weapons → Nails) |
+| 11 | 2026-11-06 12:21 +03:00 | `pult.sh` — `cmd_check.lua`; `live-rows.lua` on item 147483093 in three tables | 0 · 8/8 console commands; the nails item = the Nails mod's whole version |
 
 ## 4. Checks
 
@@ -38,7 +41,9 @@ Functional run: walked — the game's world load with the shipped paks; read —
 | S0 | fail → the finding | the stale copy wins: 0 of the 51 rows of 3.0.1 live — the Derketo Acolyte set and the Anvil Keeper armour had no stat modifications |
 | S1 | pass | after `vanilla:`: 51 of 51 live, 3 404 rows = 3 353 + 51 (the 1 700 rows the mods merge — unchanged) |
 | — | C | `BP_ThrallSystemComponent`: BMNB's boss placement-ghost scale lost under LBPR → interview #033 |
-| — | A | `WBP_BuffIcon` (Era of Trials = Highmane's Arsenal, one hash); `Dev/AlmostEmpty.umap` (not a game asset) |
+| — | A | `WBP_BuffIcon` (Era of Trials = Highmane's Arsenal, one hash); `Dev/AlmostEmpty.umap` (not a game asset); `HairColorSelections` (identical to 3.0.1) |
+| C0 | pass | Storage Reach Expanded's console table = the game's + its 3: the 5 commands of 3.0.1 and `SRE.show/reset/set` live |
+| N0 | pass (a reading) | item 147483093: the Nails mod's whole version live (its mesh, station, icon) — A in effect |
 
 ## 5. Found
 

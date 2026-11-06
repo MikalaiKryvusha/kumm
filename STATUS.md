@@ -140,8 +140,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (the owner's choice, recommended: Era of Trials as is)**. Reports `2026-11-06_conan-boss-rows-heritage-bmnb-live.md`, `2026-11-06_conan-religion-and-eaa-rows-live.md`.
 > A probe crashed the game once (11:02, soft pointer into a UFunction — EXP-0459). Step 5 (Asghaard → TDI, 47 crafter rows) DONE 2026-11-06 11:49 +03:00 — both appends live 47/47. Step 8 (2026-11-06 12:10 +03:00): LegitReligious's stale whole copy of the game's stat table hid 51 rows of 3.0.1 (Derketo Acolyte set,
 > Anvil Keeper armour — no stat bonuses) → replaced by the game's version at every build (`vanilla:`, new in `patch-mod-asset.py`), live 51/51; the thrall
-> system blueprint (BMNB vs LBPR) — C → **interview #033**; buff icon, empty map — A. Step 7 tool `hidden-row-pairs.py`: 392 rows the log hides (a row new to the
-> game re-declared by a second table) — to judge. NEXT: step 7 (the 392, by table), the step-8 re-checks of single-mod whole tables, 9–12. Owed: BMNB's own function (knock a boss out, recruit) in play.
+> system blueprint (BMNB vs LBPR) — C → **interview #033**; buff icon, empty map — A. Step 7 DONE (2026-11-06 12:22 +03:00): 392 rows the log hides → one real pair (MSCasaDesFlores
+> Weapons → Nails, A in effect) — `hidden-row-pairs.py --index` + `mod-table-keys.py`. Storage Reach Expanded's stale console table → the game's + its 3 rows
+> (`vanilla+own:`), live 8/8. NEXT: plan 45 steps 9 (code: `RegisterHook` / `RegisterKeyBind` pairs), 10 (resources), 11 (mechanics done twice), 12; the
+> owner's #032 (Zath dancer recipes) and #033 (thrall placement ghost). Owed: BMNB's own function (knock a boss out, recruit) in play.
 > (superseded) The previous chat's FIRST order — build the Heritage merge maps of pack `2a7ed07`: done 10:56, found needless, reverted (the maps removed from the pack).
 > Owner's open items: none waiting (perk gap 14 done, mask 3 710 done; Nexus follow-up letter drafted for him to send — ticket 276571).
 > **NOW 2026-11-06 09:05 +03:00 — chat of 2026-11-06, `[OWNER]` «продолжаем делать сборку Конана 1.0.0»:** DONE in one kit build + one run (pack `1dfd312`, report
