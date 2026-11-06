@@ -135,6 +135,9 @@ ours. The game's rebuild still runs, but invisibly. Next: this prototype in the 
   SURVIVE (3 of 3).** So no single operation and no combination of them crashes; what crashes is the v3 SCRIPT itself. Its remaining differences: the pages
   built one per 400 ms by a chain of `ExecuteInGameThreadWithDelay` with a `building` flag around `Create`, and `print` from delayed callbacks. NEXT: build the
   controller from the bisect-3 code (pages created at once, as `extra-pages-switch.lua`; the hook body of bisect 3), then add the lazy chain back alone.
+- **v4 (00:28, `hubswitch/shadow-pages-v4.lua` = bisect-3 code for all 9 pages): switch 1 (to FeatWindow, our FeatWindow shown) survives; switch 2
+  (to Attributes: our FeatWindow hidden, our W_Attributes shown) CRASHES.** In the bisects «ours» was always FeatWindow. NEXT bisect: (f) show our W_Attributes
+  alone (no switch); (g) hide our FeatWindow, show our W_Attributes by opacity + next-tick visibility WITHOUT a native switch; (h) then with the switch.
 
 ## The hub controller API — DRAFT `[AI]` (for the owner's review; the owner set the direction 23:48, the calls are the agent's proposal)
 
