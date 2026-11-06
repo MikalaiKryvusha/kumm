@@ -101,6 +101,10 @@ visibility by the `XCS_Panel` event in `KrinikPauseGameInMenu` 0.7.0 (retry ≤4
   прошёл» · «иногда появляются элементы спустя секунды, как открыл страницу очередную, например там, где герой стоит» → the next recording: (a) every tab
   of the hub (count them first — the carousel's own list), opened in RANDOM order by a real mouse click on the tab (input.ps1 -Click; the game in front),
   not only Next/Prev; (b) each clip long enough (≥ 4 s after the switch) to catch elements that appear SECONDS later, the hero's page («Снаряжение») first.
+  **ACCEPTANCE of items 15/17 — the owner's word 2026-11-06 21:00 (verbatim):** «и ещё там есть такой эффект темной волны на неёокторых страниах хаба - он нахуй
+  не нужен. Страницы должны переключаться четко и мгновенно. Однга закрылась - в следующем кадре полностью отрисованная новая в полноценном виде, на ней ничего
+  не прялет, не открывается, не дорисовывается.» → (1) the dark-wave transition effect on some pages is REMOVED; (2) the frame after a switch shows the new page
+  complete; (3) nothing on it jumps, opens or is drawn later. Check: per-switch clips, frame +1 after the switch equals frame +N (no late change) on every tab.
   **Run 2026-11-06 19:30 (case H1 of `TC_conan_music_recon_2026-11-06.md`), the reading WITHDRAWN:** tabs switched by `W_Carousel_C:Next/PrevCarouselWindow` (synthetic Q/E keys do
   not reach the game — three ways tried 18:10–18:15), 60 fps capture: the tab bar never changed after a switch, the bottom buttons stood still, the mod icons on
   «Снаряжение» present in every frame of the return. One variant only — the first open after the world entry and the owner's real keys are still to run
