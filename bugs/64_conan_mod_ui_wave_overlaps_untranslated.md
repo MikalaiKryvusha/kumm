@@ -86,6 +86,11 @@ visibility by the `XCS_Panel` event in `KrinikPauseGameInMenu` 0.7.0 (retry ≤4
   c06–c10 Prev), HDR off, `t.MaxFPS 300` — the game renders ≈ 90 fps, the clips hold 215–238 frames each; review folder
   `69_hub_kazhdoe_pereklyuchenie`. Recipe: ffmpeg in the background needs `-nostdin` and forward-slash ASCII paths (a `\0…` name and a Cyrillic argv
   wrote nothing). NEXT (next chat): frame-by-frame of every clip, name each moving element, then the mod bisect.
+  First reading (`_config/frame_settle.py <clip> --spike 6`): c01 (the first tab → «Знания», «Выживание») — late changes for 400 ms after the switch, a
+  full-width band crawling DOWN the screen (y 1384–1632 at +298 ms, 1496–1760 +321, 1608–1880 +356, 1712–1968 +379, 1784–2000 +402) plus full-screen
+  changes at +126/+195/+252 ms; c02 — at +22 ms (1240..3656 × 120..1904) and +55 ms (2672..3608 × 872..1992); c03, c07 — a small late change at +70 ms
+  in (184..2136 × 128..1272); c06 — +33 ms (144..3176 × 120..1904). A 960-px strip of c01 shows only the icons' and «Разблокировать» brightness
+  changing — read each box at FULL resolution next.
   **Run 2026-11-06 19:30 (case H1 of `TC_conan_music_recon_2026-11-06.md`), the reading WITHDRAWN:** tabs switched by `W_Carousel_C:Next/PrevCarouselWindow` (synthetic Q/E keys do
   not reach the game — three ways tried 18:10–18:15), 60 fps capture: the tab bar never changed after a switch, the bottom buttons stood still, the mod icons on
   «Снаряжение» present in every frame of the return. One variant only — the first open after the world entry and the owner's real keys are still to run
