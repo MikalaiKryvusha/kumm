@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0471 · 2026-11-06 · ❌ · #ui #hub #video #claim #owner-eye
+class: evidence-explained-away
+mechanized: none — memory `owner-eye-beats-my-measurement`; the TC row now names the rule
+**Lesson:** the frame analysis printed 6–7 full-width late changes 90–445 ms after the hub tab switches; I labelled them «the panel fading in» and reported
+«no jitter found». The owner had watched the same run: «ТАМ ПОЛНЫЙ ПИЗДЕЦ». A late change after a switch IS the defect class under test — name every element
+that moves in those frames before any verdict; «normal transition» is a claim that needs its own proof (a vanilla control without mods).
+
 ### EXP-0470 · 2026-11-06 · ❌ · #capture #hdr #video #measurement #conan
 class: capture-on-hdr-desktop
 mechanized: none — HOUSE_RULES rule 4 names `hdr.ps1 off` for clips, the ddagrab path skipped it

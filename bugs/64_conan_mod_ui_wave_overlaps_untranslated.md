@@ -78,7 +78,11 @@ visibility by the `XCS_Panel` event in `KrinikPauseGameInMenu` 0.7.0 (retry ≤4
 - Items 15 / 17 (hub shake on Q/E, late mod elements, tab text jitter): the next step is a TEST, not a fix — a 60 fps video of Q/E switching on every
   hub tab (memory `ui-flicker-needs-60fps-video`), frame-by-frame; a pass closes the item, a fail reopens the bisect. Fixing: the next game run of the
   2026-11-06 evening chat (the KrinikConanMusic recon run).
-  **Run 2026-11-06 19:30 (case H1 of `TC_conan_music_recon_2026-11-06.md`):** tabs switched by `W_Carousel_C:Next/PrevCarouselWindow` (synthetic Q/E keys do
+  **CORRECTION 2026-11-06 20:38 — the item is REPRODUCED, the reading below was false:** the owner watched the 19:30 run live and saw the hub jump
+  («Я ВИДЕЛ КАК ТЫ ПЕРЕКЛЮЧАЛ СТРАНИЦЫ ХАБА, И ТАМ ПОЛНЫЙ ПИЗДЕЦ!!!»); the analysis had full-width late changes 90–445 ms after the switches and I explained
+  them away; the video was HDR-overexposed. Repro now: `W_Carousel_C:NextCarouselWindow()` / `PrevCarouselWindow()` by the remote with the hub open. Next:
+  HDR off, frames of each 0–500 ms window, name the elements that move, then bisect by mods (control: mods' Lua out).
+  **Run 2026-11-06 19:30 (case H1 of `TC_conan_music_recon_2026-11-06.md`), the reading WITHDRAWN:** tabs switched by `W_Carousel_C:Next/PrevCarouselWindow` (synthetic Q/E keys do
   not reach the game — three ways tried 18:10–18:15), 60 fps capture: the tab bar never changed after a switch, the bottom buttons stood still, the mod icons on
   «Снаряжение» present in every frame of the return. One variant only — the first open after the world entry and the owner's real keys are still to run
   before «not reproduced» (TESTING_FRAMEWORK: ≥ 3 variants).
