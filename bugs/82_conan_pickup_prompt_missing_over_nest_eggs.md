@@ -33,6 +33,10 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
 - 23:3x: over all loaded foliage of the oasis region no mesh names a nest (0); with no nest actor either, a nest is to find in another region
   (the ostrich lands, the swamp for snake / locust nests) — load the region by a teleport first, then repeat the two counts.
 
+- 2026-11-06 12:45 +03:00 (chat of 2026-11-06, second): the game maps know only the ostrich-nest canyon (no eggs there). Next concrete step: in a region load, list the
+  loaded `StaticMeshActor`s / components whose mesh is `SM_Nest_*` / `SM_KappaNest` / `SM_*_nest*` (the nests are placeable meshes) — their positions give
+  the stand; then the actor under the crosshair at that nest (a container or a harvestable) — its class decides the fix.
+
 ## Study (next)
 
 1. Find eggs: over all `InstancedFoliageActor`s, the components whose mesh names an egg — their instances with `Scale3D` ≠ 0 (not taken), the nearest.
