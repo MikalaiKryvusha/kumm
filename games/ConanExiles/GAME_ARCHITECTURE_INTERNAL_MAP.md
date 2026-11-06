@@ -756,5 +756,7 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
 
 - `SM_KappaEggs_Blueprint_C` (`/Game/Items/GatheringResources/SM_KappaEggs_Blueprint`, actors `SM_KappaEggs_North_Camp_10/11/12` near the oasis) holds no eggs:
   a SceneComponent and one `InstancedStaticMeshComponent` `InstancedBushes`, mesh `palm_ground_misc_01` (5 palm-bush instances per nest). The plate's «E Взять»
-  over it and a real E there are a BUSH case (the E press raised the water stat; no item entered the backpack). Where the eggs the hero takes by E live — open.
+  over it and a real E there are a BUSH case (the E press raised the water stat; no item entered the backpack).
+- The eggs a hero takes by E: pickable foliage `SM_SnakeEggs_single` in `PickupFoliageComponent_C` (e.g. a nest of three at (−57399, 237721, −20027);
+  18 within 400 m of the oasis); E gives item 13011 «Egg». Stand: `ConanExiles/_config/egg-find.lua`.
 - Do not loop `FindAllOf('StaticMeshActor')` reading their components — that crashed the game (14:35).

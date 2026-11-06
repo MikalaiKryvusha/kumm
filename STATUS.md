@@ -142,10 +142,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > item — rides with «BMNB's own function in play») and LBPR's toggles walked. Also fixed: `extract` gave the GAME's copy of a vanilla path (EXP-0462). Report
 > `testcases/reports/2026-11-06_conan-thrall-ghost-graft.md`. 2026-11-06 13:36 +03:00 `[OWNER]` «работай автономно -
 > буду нужен, то зови голосом» → `/dayloop`. Ambushes (#025) are NOT waiting — the owner took them off the agenda 2026-10-31 21:11
-> (the «waits for #025» of this chat was false, corrected in plan 45 step 11, the register and here). Owed by the agent: BMNB's own function in play (knock a boss out, recruit); bug 82 — REOPENED in full 2026-11-06 14:37 +03:00: the
-> «egg» instances of `SM_KappaEggs_Blueprint` are PALM BUSHES (live mesh `palm_ground_misc_01` at all 3 nests) — the stand aimed at a bush, so «over a nest egg
-> «E Взять» IS shown» was FALSE (corrected in the bug); a real E there fills water and takes no egg (item 13011 0 → 0). Next: find where the real eggs are and
-> how the owner's hero takes them by E (the guide's known-issue line stays). Nexus follow-up letter — drafted for the owner (ticket 276571).
+> (the «waits for #025» of this chat was false, corrected in plan 45 step 11, the register and here). Owed by the agent: BMNB's own function in play (knock a boss out, recruit); bug 82 — DONE 2026-11-06 14:41: over a real nest egg (snake eggs, pickable foliage) the plate shows and a real E takes the egg (item 13011 0 → 1); the Kappa «nests» of the earlier runs are palm bushes (the false «shown over nest eggs» corrected in the bug); guide line removed. Nexus follow-up letter — drafted for the owner (ticket 276571).
 > **NOW 2026-11-06 09:05 +03:00 — chat of 2026-11-06, `[OWNER]` «продолжаем делать сборку Конана 1.0.0»:** DONE in one kit build + one run (pack `1dfd312`, report
 > `testcases/reports/2026-11-06_conan-interaction-prompts-perks-enemy-bar.md`): 🔧 bug 83 — all five interaction prompts like the corpse strip (I1–I4, P1 pass; the
 > owner's eye — review folder 65); 🔧 bug 64 item 12a — the enemy bar 4 units over its skull (E1; folder 66); ✅ the perk gap — 22 cut the last perk (the column does

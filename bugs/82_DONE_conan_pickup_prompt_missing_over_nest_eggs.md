@@ -118,3 +118,18 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
 ## Links
 
 Bug 77 (the plate asks the game's probe), bug 80 (the plate yields to the corpse strip), game map «Foliage pickups — what they are».
+
+## ✅ STATUS: DONE (2026-11-06 14:41 +03:00)
+
+- **The real eggs found:** pickable foliage — mesh `SM_SnakeEggs_single` in `PickupFoliageComponent_C` (18 instances within 400 m of the oasis), e.g. the nest at
+  (−57399, 237721, −20027) with three eggs; stand `ConanExiles/_config/egg-find.lua` (`_G.__ef_go = true` puts the hero at the nearest egg).
+- Hygiene: none new (the plate's code was not changed in this bug).
+- Functional run: background path, the build as shipped, 2026-11-06 14:39–14:40 +03:00 — the probe true; the 4K frame shows **«E Взять» at the crosshair over the nest
+  with three eggs**; a real E (`mouse-seq.ps1`, SendInput) → item 13011 «Egg» in the backpack **0 → 1**, items **47 → 48**, eggs in reach **3 → 2**, the frame after
+  shows two eggs. The acceptance line of this bug is met. Fixed by bug 77's rework (the plate asks the game's own pickup probe), not by an edit here.
+- The guide's known-issue line removed (guide, `build_nexus_description.py` both languages); the published 0.9.0 notes stay as history.
+
+## Decisions made without the owner
+
+- `[AI]` The owner's «nest eggs» read as the pickable snake eggs in nests (the eggs a hero takes by E) — the Kappa «nests» of the earlier runs hold only palm bushes.
+  If he meant another nest, the bug reopens with its place.
