@@ -143,6 +143,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `TC_conan_music_recon_2026-11-06.md`. Test tones sit in the GAME folder's `music/` — remove after the tests. The owner's groundwork ideas (playlist setting, now-playing
 > HUD widget) — plan 46 «Groundwork»; his 1.0.0 notes (hub test, EAA cards by vectors and strings, quick loot partial) — bugs 64 / 75. `close-game.ps1` closes a
 > windowless game (fixed). Hub Q/E test BLOCKED: synthetic keys do not reach the game (three ways tried) — next: the hub's own tab function by the remote.
+> **Bug 67 (palm shadows) 2026-11-06 19:42 +03:00:** the owner rejected the 2.0 sun step as a patch (19:22–19:26, acceptance: smooth sun · no flicker · no constant re-render);
+> recon on three tracks (engine help from the 5.8 renderer binary, the game's palms in the Dev Kit, the web — `researches/conan-shadow-flicker/2026-11-06_*`):
+> the light's turn re-samples the VSM pages; measured at the oasis: 0.1–0.25° steps as calm as 2.0, 0.003 ≈ 2× worse; our bias −1.0 coarser than the game's
+> −1.5. Clips for his eye — review folder 68; the build unchanged until his word (he was called by voice 19:40). Music mod: scene-change spikes fixed,
+> hub test partial (tabs by `W_Carousel_C` calls — tab bar still, mod icons present; 1 variant). **A 60-min long run (crash check) started 19:42 in the
+> background** (`long-run.sh 60`, the music mod rides along; test tones removed from the game folder).
 > The owner asked what to fix for comfortable evening play; the answer in chat 18:05 — a long crash-free run, the pause on the in-game loading screen
 > (waystone, respawn), the hub test, the dusk light jump, then the rest.
 > **FIRST in the next chat:** (1) q8 Nanite — no B data (the correction above); `close-game.ps1` now closes a windowless game — the series can be re-run. (2) G4: свой раб-босс через колесо боли прямыми вызовами (кейсы `TC_conan_thrall_ghost_graft_2026-11-06.md`).
