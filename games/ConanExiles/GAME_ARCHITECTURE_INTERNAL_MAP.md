@@ -696,6 +696,8 @@ by tags, without a table of their own.
 - **Points:** the save's beach (-78471, 245900) ground −20167, day energy ≈ 21–22 («тепло»); the volcano (-60000, -220000) ground 45640, energy 70 within
   seconds; the caverns (-154300, 6216) energy ≈ 33; the north-west (-300000, -260000) at night −26 … −30 (no ground point below −30 found yet).
 - The game day lasts 55.2 min (`ConanTimeOfDayManager:GetDayLength`), ≈ 2.3 min per game hour; `GetTimeOfDay` / `SetTimeOfDay` on `BP_TimeOfDayManager_C`.
+- So the sun moves ≈ 0.11°/s, and the shadow-casting light turns (`DynamicSky.SolarUpdateAngleDelta`, the disk always smooth): 0.003° ≈ 36×/s, 0.1° ≈ 1×/s,
+  0.25° ≈ every 2.3 s, 2.0° ≈ every 18 s (bug 67). A light/shadow measurement fixes the time before each clip (EXP-0469).
 - The idle vanity camera hides the HUD: `FindFirstOf('GUIModuleController'):EnableVanityCameraMode(false)` before a HUD frame.
 - **Every named place of the map with its coordinates (2026-11-02 19:0x):** the DataTable `/Game/Systems/Map/MapMarkers_ConanSandbox` (424 rows; row fields
   `Name` — Russian FText, `Location` — a vector in cm), read by `t:ForEachRow(function(name,row) … end)` from the remote; the English names come from
