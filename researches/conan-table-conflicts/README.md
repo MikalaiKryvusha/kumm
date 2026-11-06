@@ -25,10 +25,10 @@ Full list: `shared_rows_2026-11-06.txt` (143 rows).
 | 5 | `Items/Recipes/RecipesTable` | LegitReligious_Enhanced → EraOfTrials | religious recipes |
 | 2 | `SpawnTable/SpawnDataTable` | Heritage → EraOfTrials | dialogue NPCs Muriela, Yakira |
 | 2 | `UI/Data/DataTables/DT_UIModuleTable` | ProximityParty → Simple_Minimap (→ LLHighlight → AlMerayah_Reborn) | Xevyr's shared rows `XCS_Panel`, `Xev_MouseInteraction` — one author's own family, most likely identical |
-| 1 | `Items/ItemTable` · 51420 | SevereWeatherEnhanced → Mines_of_Set | one item id claimed by two unrelated mods — the likeliest real clash |
+| 1 | `Items/ItemTable` · 51420 | SevereWeatherEnhanced → Mines_of_Set | NOT two items under one id (corrected 2026-11-06 09:34 +03:00): 51420 is a VANILLA armour piece (armour 38, tier 5, durability 660) that both mods re-declare — Severe Weather's `LFS_ItemTable` holds 15 vanilla ids, Mines of Set's item table re-declares the Grey One set 51420–51424; the fields each changes against vanilla decide the case (`RESOLUTION_GUIDE.md`) |
 
 ## Next
 
-1. Item 51420: read both mods' rows (which item each means) — a real id clash if they differ.
+1. Item 51420: diff both mods' rows against the vanilla row (which fields each changes) — `RESOLUTION_GUIDE.md` step 2.
 2. The 54 + 5 religious rows: compare LegitReligious and EraOfTrials values for a few rows — identical or a lost change.
 3. Asghaard → TDI (47) and RSP → EAA (8): what each side changes in the row; decide the order or a merged row (native, `HOUSE_RULES.md` rule 8).

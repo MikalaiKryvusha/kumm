@@ -136,6 +136,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > shares no row with the build; removed after (pak, modlist, `Saved/ExtractedMods`). Whether to take it — the owner (`researches/conan-mod-candidates/`).
 > **Table conflicts of the build** — `who-overwrites-table.py --shared-rows` (new): 143 rows written by 2+ mods, list and first reading in `researches/conan-table-conflicts/`;
 > to judge: item 51420 (SevereWeather vs Mines of Set), LegitReligious vs EraOfTrials (59), Asghaard vs TDI (47), RSP vs EAA (8).
+> **Mods must be consistent — a general rule and guide** (`[OWNER]` 09:33–09:36): `researches/mod-reconciliation/GUIDE.md` (any game; overlap kinds an OPEN list —
+> tables, code, assets, resources, mechanics are the owner's examples; four outcomes A identical · B merge · C the owner chooses · D separate), `HOUSE_RULES.md`
+> rule 27, hook «mod-reconciliation-gate» (`style-gate.mjs --cmds`, report `2026-11-06_mod-reconciliation-gate.md`). First judged: row 51420 — a VANILLA armour
+> piece both Severe Weather and Mines of Set re-declare (not two items under one id; corrected 09:34).
 > **Nexus quarantine** (`[OWNER]` 08:51 «каковы могут быть причины…»): our 11-03 request covers all three Nexus causes (exe source + build steps, UE4SS DLLs with
 > upstream link and hashes, no nested archives; all three links answer 200 publicly 08:53) — most likely the manual queue. BUT (`[OWNER]` 09:18 «они там пишут про
 > способ сборки … они поймут, как собрать?»): the letter did not name the build script and misnamed `BuildInfo.g.cs`; the README has no build section. Checked 09:19:

@@ -123,6 +123,14 @@
 26. **The launcher: «Играть» starts the game and closes the launcher; «Удалить сборку» keeps the launcher open** (it swaps back to «Установить сборку» when
     the uninstaller's window closes). (`[OWNER]` 2026-11-02 08:35 «когда игра запущена через лаунчер по ИГРАТЬ - лаунчер нужно закрывать, чтобы не ел ресурсы
     ПК» · 08:36 «в отличие от «Удалить» - удалить не должна закрывать лаунчер».)
+27. **The mods of a build are consistent with each other — reconciled by `researches/mod-reconciliation/GUIDE.md`.**
+    1. Anything two mods share (tables, code, assets, resources, mechanics — and every other kind; the list is open) is an overlap: it is judged by reading both
+       sides against the game's original and gets one of four outcomes — identical · merge different parts · the owner chooses on the same part · separate one
+       name used for two different things.
+    2. The work of reconciling mods starts by reading the guide in full; the hook `mod-reconciliation-gate` (`tools/hooks/style-gate.mjs`) refuses the tools and
+       the findings files until it is read within the hour.
+    (`[OWNER]` 2026-11-06 09:33–09:36 — verbatim in the guide's header.)
+
 19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
     mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +

@@ -34,6 +34,9 @@
 //                 после Read — прошёл; партия notes_xunity.py --add прошла при свежей метке.
 //                 russian-gate: 2026-10-13 — подключён в живой сессии и сразу остановил три записи с кириллицей (AGENT_GUIDE,
 //                 STYLE.md, память) — «документ ещё не прочитан»; Read RUSSIAN_RULES.md целиком → те же три записи прошли
+//                 mod-reconciliation-gate (--cmds): 2026-11-06 ≈09:37 — в живой сессии остановил Bash с именами инструментов сведения
+//                 («документ ещё не прочитан»); восемь вызовов напрямую: инструмент / файл разбора без чтения → 2, чужая команда и сам
+//                 GUIDE.md → 0, отрывок не ставит метку, Read целиком → 0; tools/test-guards.mjs 184 из 184
 import { readFileSync, statSync, writeFileSync } from 'node:fs';
 
 const args = process.argv.slice(2);
@@ -65,8 +68,13 @@ const mtime = (p) => { try { return statSync(p).mtimeMs; } catch { return -1; } 
 const PATHS_OPT = opt('--paths');
 const LABEL = opt('--label', 'style-gate');
 const REASON = opt('--reason', 'Правило владельца 2026-10-06: «чтение методички - обязательством в хук делаем».');
+// --cmds <regex> — команды Bash, которые тоже судятся (2026-11-06: руководство по сведению модов, KUMM researches/conan-table-conflicts/
+// RESOLUTION_GUIDE.md — `[OWNER]` «и когда занимаешься сведением водов друг с другом - пускай ХУК тебе напоминает прочесть это руководство»:
+// сведение идёт и правкой документов разбора (--paths), и инструментами — журналом слияний и извлечением / сборкой таблиц модов).
+// [TESTED: 2026-11-06 · eight direct calls + a live refusal, test-guards 184 of 184 · testcases/reports/2026-11-06_mod-reconciliation-gate.md]
+const CMDS_OPT = opt('--cmds');
 const GATED = PATHS_OPT ? [new RegExp(PATHS_OPT)] : PATHS;
-const GATED_TOOLS = PATHS_OPT ? [] : TOOLS;
+const GATED_TOOLS = CMDS_OPT ? [new RegExp(CMDS_OPT)] : PATHS_OPT ? [] : TOOLS;
 // Третье применение — методичка русского языка (KUMM/researches/russian-writing/RUSSIAN_RULES.md): `[OWNER]` «и хук на то, чтобы
 // читать эту методичку каждый раз, когда что-то пишешь по-русски» · 2026-10-13. Путь «русского» файла не узнать, поэтому
 // --cyrillic судит по ТЕКСТУ: Write/Edit, чей новый текст несёт кириллицу (в любом файле), и Bash с кириллицей в команде.

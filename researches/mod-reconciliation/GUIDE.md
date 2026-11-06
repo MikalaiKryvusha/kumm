@@ -1,0 +1,81 @@
+# Guide 01 — reconciling the mods of a build: every mod brings what it needs, none silently loses it to another
+
+> **Created:** 2026-11-06 · on the owner's word: `[OWNER]` 2026-11-06 09:33 «ЭТО МОЖНО РАЗВЕСТИ? ЧТО БЫ КАЖДЫЙ МОД ПРИНОСИЛ СВОЕ, ЕМУ НУЖНОЕ И НЕ КОНФЛИКТОВАЛ
+> С ДРУГИМИ? или тут есть нерешаемые конфликты?» · 09:34 «Заведи под это руководство» · «и когда занимаешься сведением водов друг с другом - пускай ХУК тебе
+> напоминает прочесть это руководство» · 09:35 «не только таблицы» · «это обобщенное правило и ркуоводство» · «таблицы, код, ассеты, ресурсы, и механики» ·
+> 09:36 «моды должны быть согласованные» · «НЕ ПЯТЬ» · «ЭТО Я ПРИМЕР ПРИВЕЛ ТЕБЕ» · «МОЙ ПРИМЕР МОЖЕТ БЫТЬ НЕ ИСЧЕРПАЕМЫМ»
+> **Parent:** the build's acceptance criterion 2 (`MASTER_PLAN.md`: no row where a mod silently loses its change); `MASTER_PLAN.md` Phase 3 «compatibility»;
+> first findings — `researches/conan-table-conflicts/README.md` (143 shared rows of the Conan build, 2026-11-06)
+> **Status:** 🔧 the method for any game; Conan tools proven for tables (step 1, the reading of step 2 on row 51420); a field classifier script and a
+> merged-row build are not written yet
+> **Outbound:** outcome C of any kind → the owner's choice; the guard — `tools/hooks/style-gate.mjs` «mod-reconciliation-gate» (`HOUSE_RULES.md` rule 27)
+
+## Goal vector (Maintain)
+
+**The mods of a build are CONSISTENT with each other** (`[OWNER]` «моды должны быть согласованные»): every mod brings its own changes and keeps them, no change
+of one mod is silently lost to another or fights another — in ANYTHING two mods share. Acceptance per build: each overlap found carries a recorded outcome (the
+register at the end of this guide or the game's findings file), and none is «not judged».
+
+## The rule
+
+1. Reconciling mods (finding overlaps, reading both sides, choosing an outcome, merging) is done BY THIS GUIDE — the hook refuses the work until it is read.
+2. An overlap is judged by READING BOTH SIDES against the game's own original (vanilla), never by a guess from names.
+3. The outcome is one of four — A identical · B different parts · C same part, different values · D one name, two different things — and it is recorded.
+4. A merge is native and re-appliable: a script or a map next to the pak (`HOUSE_RULES.md` rule 8), the mod marked KRINIK MODIFIED; never a runtime patch that
+   re-sets the value after the game (rule 24).
+5. Outcome C is the owner's choice — one question per group of rows, the two values side by side as a scenario of what the player sees.
+
+## Kinds of overlap — an OPEN list
+
+Anything two mods share is an overlap. The rows below are the owner's examples (tables, code, assets, resources, mechanics) — NOT the whole list
+(`[OWNER]` «НЕ ПЯТЬ» · «МОЙ ПРИМЕР МОЖЕТ БЫТЬ НЕ ИСЧЕРПАЕМЫМ»). Others already known: the screen place of two HUD widgets, the same localization key, the load
+order a mod's author demands (Hosav after other UI mods), save data both write, console variables / `Engine.ini` keys both set, server settings. A new kind
+found in work gets its row here the same day, with its detector.
+
+| Kind | What two mods share | Who wins without us | Detector (Conan) |
+|---|---|---|---|
+| **1. Tables** | a row of a game data table (an item id, a spawn row, a recipe, a UI module row) merged by both mods' controllers | the mod loaded LATER replaces the WHOLE row | `who-overwrites-table.py --shared-rows` over a world start's log |
+| **2. Code** | a game function / event both hook or replace (UE4SS Lua `RegisterHook`, a blueprint override, a mod controller re-setting the same variable; a key binding both claim) | both run, in an order nobody chose; a key — the last binder | grep the mods' Lua for the same `RegisterHook` target / `RegisterKeyBind` key; the game map's tables of keys (e.g. the numpad of the camera mod) |
+| **3. Assets** | the same vanilla asset path shipped in two paks (a widget, a blueprint, a texture, a sound) | the pak LATER in `modlist.txt` — the whole file, the other's edits vanish | `mod-overrides.py <out.tsv> <Mods folder>` — rows `override` with the same path in two mods |
+| **4. Resources** | the same scarce runtime budget: CPU per frame (polling Lua, per-frame searches), GPU (fog, lights), memory, load time, the HUD's screen space | nobody «wins» — the game slows or the screen crowds | A-B-A flights (`MsCPUBusy`, stutters), the 1 ms rule of `HOUSE_RULES.md` rule 7; frames of the HUD with both mods on |
+| **5. Mechanics** | the same gameplay feature done twice (two ambush systems, two loot boosts, two XP pop-ups, two weather systems; balance stacking: two mods each ×2 → ×4) | both act — the feature doubles or fights itself | the mods' descriptions + our catalog notes per mod; a gameplay case that measures the result (drops per kill, ambushes per hour) |
+
+## The four outcomes (any kind)
+
+| Outcome | What the two sides say | Resolution |
+|---|---|---|
+| **A — identical** | both bring the same value / the same file / the same behaviour | nothing to do; record «identical» |
+| **B — different parts** | each changes parts the other leaves at the original | MERGE: one result = original + A's changes + B's changes, shipped once (in the mod loaded last, or in our own pak), KRINIK MODIFIED |
+| **C — same part, different values** | both change one part differently (a field, one pixel of the same texture, one key, one gameplay number) | the OWNER chooses; then as B with his value |
+| **D — one name, two different things** | the shared name is NOT the game's original and the two sides mean different things (two new items under one id, two mods' widgets at one path, one key for two actions) | SEPARATE: rename / renumber / rebind one side and every reference to it (recipes, loot, vendors, spawns, saves — an id stored in players' saves changes, the old item is lost there) |
+
+Kind-specific notes:
+- **Tables:** a field the WINNING mod leaves at vanilla while the losing mod changed it is the silent loss this guide exists for — outcome B, not A.
+- **Code:** two hooks on one function are fine when they touch different state (B, nothing to merge); when both set the same state, one must own it (C) — usually
+  ours yields to the mod's own setting first (rule 8).
+- **Assets:** a whole-file override cannot be «merged at runtime»; B means building ONE asset carrying both mods' edits (our kit pak, or one mod's pak).
+- **Resources:** the outcome is decided by measurement: A — within noise; B — each mod's cost cut (event instead of polling, rule 7); C — the owner chooses
+  which mod keeps the budget; D does not apply.
+- **Mechanics:** A — the same feature with the same numbers (keep one mod's, switch the other's part off); B — complementary parts (keep both, check the
+  stacking numbers); C — the owner chooses the system; D — two features under one name in the UI → rename.
+
+## Steps
+
+0. **Ask what the two mods share** — beyond the kinds listed: what each mod changes, reads, draws, binds, spends, saves. Every answer is an overlap to judge;
+   a new kind goes into the list above.
+1. **Detect** with the kind's detector (table above); write the overlaps into the game's findings file (`researches/<game>-…/`).
+2. **Read three versions:** the original, side A, side B. Conan: a mod's asset — `python -I -X utf8 ConanExiles/_config/devkit/patch-mod-asset.py extract
+   <Container> <Asset> <work>` → JSON (`Exports[0].Table.Data[]` for a table: `{Name: <key>, Value: [{Name: <field>, Value: …}]}`); the original —
+   `retoc-5.8 to-legacy --version UE5_7 --no-shaders --filter <Asset> D:/work/ai_sandbox/_paksview-3.0.1 <work>` → `uaj tojson … VER_UE5_8`. Before
+   touching a mod, read its notes `games/<Game>/mods/<Mod>.md` (the knowledge-hook demands it; create them if missing).
+3. **Classify** part by part against the original → A / B / C / D (a script for tables; by eye for assets and code, with frames).
+4. **Resolve** by the outcome table; native, by a map or script next to the pak, KRINIK MODIFIED, `modpack.json` entry `krinikModified` names what was merged.
+5. **Verify by the game:** the detector again (tables: the row still merges — check the VALUE live by the remote); one in-game look or a measured case of what
+   the player sees (the item's stats, the spawn, the drop rate, the frame time).
+6. **Record** the outcome in the register below and in both mods' notes.
+
+## Register of judged overlaps
+
+| Game · kind · what | Sides (wins last) | Outcome | Resolution | Date |
+|---|---|---|---|---|
+| Conan · table · `Items/ItemTable` 51420 | SevereWeatherEnhanced → Mines_of_Set | being read — a VANILLA armour piece (armour 38, tier 5, durability 660) re-declared by both, so not D | — | 2026-11-06 |
