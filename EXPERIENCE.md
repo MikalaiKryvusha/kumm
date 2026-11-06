@@ -103,6 +103,12 @@ only plain values (location, scale, names) of actors — never raw pointer/class
 A third crash the same day (14:35): `FindAllOf('StaticMeshActor')` + `x.StaticMeshComponent.StaticMesh` over the whole level — the component-enumeration class the
 remote already refuses for `FindAllOf(<…Component>)`; one named actor's own component is safe.
 
+### EXP-0467 · 2026-11-06 · ❌ · #bench #shell #conan
+class: pipe-masks-the-failure
+none-cheap: one shell option in the run line
+**Lesson:** `bash enter-world-remote.sh | tail -1 && bash bench-batch.sh …` ran the bench in the MAIN MENU when the remote refused the «Continue» call (17:05,
+the owner saw the game stand in the menu): a pipe's status is `tail`'s. Run such chains with `set -o pipefail` (or without the pipe) so a failed world entry stops them.
+
 ### EXP-0466 · 2026-11-06 · ❌→✅ · #testing #bench #report
 class: bench-numbers-across-sessions
 none-cheap: the run report template says it; the bench batch puts both sides in one launch where the value is live
