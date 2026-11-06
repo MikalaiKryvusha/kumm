@@ -82,6 +82,12 @@ The guide's line: «Над яйцами в гнезде подсказка «E �
   nest away from water (the 70 m Kappa eggs of 12:45 — check which `SM_KappaEggs_*` are dry), the same E; and read what the game's E handler prefers
   (`PickupGatheringOneInstance` vs the water-drink interaction) — if water wins whenever both are in reach, the plate must ask the same priority (bug 77's rule: the
   plate asks the game, never guesses). Not closed.
+  **Same day 2026-11-06 14:27 +03:00 — a DRY nest refutes «the water won»:** `SM_KappaEggs_North_Camp_11` (−70605, 225303; sand, no water in the frame), 5 Kappas within 25 m removed
+  (`K2_DestroyActor`), probe **true**, the 4K frame shows **«E Взять» at the crosshair** (`egg11-before.jpg`, `egg11-after.jpg`, session scratchpad). Real E → eggs
+  whole **5 → 5**, and the hero's water again **26 % → 52 %**. So at a Kappa nest the E press does something that fills the water stat and does not remove an egg
+  instance. Unknown yet: whether the egg went into the inventory as an item while the instance stays (instance scale is not the pickup signal for eggs — stones
+  had it), or the press does another action. Next: the hero's inventory count of the Kappa egg item before/after (its template id — `ItemTable`), and the game
+  log of the press (`Gathering` / harvest lines). The owner's original symptom («no plate over nest eggs») does NOT reproduce: the plate shows at two nests.
 
 ## Study (next)
 
