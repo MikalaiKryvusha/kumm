@@ -127,6 +127,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-06 09:05 +03:00 — chat of 2026-11-06, `[OWNER]` «продолжаем делать сборку Конана 1.0.0»:** DONE in one kit build + one run (pack `1dfd312`, report
+> `testcases/reports/2026-11-06_conan-interaction-prompts-perks-enemy-bar.md`): 🔧 bug 83 — all five interaction prompts like the corpse strip (I1–I4, P1 pass; the
+> owner's eye — review folder 65); 🔧 bug 64 item 12a — the enemy bar 4 units over its skull (E1; folder 66); ❓ the perk gap 22 — built, but the «Сила» column does
+> NOT scroll and the last perk is cut at 22 (fits at 10) — the owner chooses again (folder 64). Next on the list: nest eggs (bug 82), a real E over a corpse in a
+> bush (bug 80), the rim on F done properly (bug 75), the rest of the guide's 1.0.0 list.
+> **Nexus quarantine** (`[OWNER]` 08:51 «каковы могут быть причины…»): our 11-03 request covers all three Nexus causes (exe source + build steps, UE4SS DLLs with
+> upstream link and hashes, no nested archives; all three links answer 200 publicly 08:53) — most likely the manual queue; a short follow-up to ticket 276571 is
+> drafted for the owner to send.
+> **Owner's note 2026-11-06 08:48 +03:00:** `[OWNER]` «еще нам предложили взять в сборку мод Northern Timber - Enhanced 4.0.2» · «нужно изучить его потенциальную конфликтность, и что он
+> нам даст» — web recon by a helper → `researches/conan-mod-candidates/northern_timber_enhanced_web_recon.md`; then the pak-level check (`mod-overrides.py`
+> against the build's Mods) by the main session; the verdict to the owner with the conflicts table (memory: advice on a mod = its conflict study).
 > ⚠️ **ЧАТ cb012770 ЗАКРЫТ ПРИНУДИТЕЛЬНО 2026-11-03 23:34 +03:00 на 85 %:** церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) — долг платит первый
 > /end-chat-soft. Ложных утверждений на месте не осталось. Сделано в чате: рамка добычи на F скрыта (баг 75 — долг «сделать красиво»), гиря HUD без тени, ModControlPanel
 > убрана (окно LBPR в «Прочее»), окно добычи не просвечивает «Путь» (баг 81), «E Взять» уступает плашке трупа (баг 80), колесо над окном — проверено, полоски

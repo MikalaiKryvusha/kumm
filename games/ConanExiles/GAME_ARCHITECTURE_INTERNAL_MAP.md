@@ -102,6 +102,13 @@ Tilde, ё, F10).
 WBP_ContainerInfo` (pakchunk1110; моды сборки его не переопределяют): `Overlay_Main` → `OverlaySlot_5` (плашка `Border_Underlay` → `Content`: имя,
 «Труп», `ActionTutorial` «нажмите E…»; отступы слева и справа 20) и `OverlaySlot_3` (`W_QuickLootPanel`, отступ слева 500 — место окна жёстко от левого
 края плашки). Модуль ставит на экран модульная система, `W_OnScreenInfoContainer` только включает его по имени (`ContainerInfo` и др.).
+**The other interaction prompts (kit probe `kit-probe-tree.py`, 2026-11-06, bug 83).** Besides `WBP_ContainerInfo` (corpses, chests, crafting stations, a
+campfire) the game draws five sibling prompts from `/Game/UI/HUD/FloatingNames/`: `W_DialogueNPCInfo` (an NPC to talk to: `T_Name`, `T_Title`, `T_State`,
+`ActionTutorial`), `W_PlaceableInfo` (a building / placeable: name, owner, bound player, decay), `W_SimpleInfo` (a simple object: name + action), `W_ThrallInfo`
+(a thrall: name, title, owner, state), `W_DBNORevive` (a downed ally: «Revive» / «Revive and Follow Me»). One shape for all: root Overlay → SizeBox (centre,
+centre) → Border `Container` (the dark backing, brush colour alpha 0.6 in vanilla) → VerticalBox (padding top/bottom 12) → texts and the shared
+`W_ActionTutorial`. `W_OnScreenInfoContainer` has an empty designer tree (it switches the modules by name). None of the build's paks overrides them
+(`mod-overrides.py` over the game's Mods, 2026-11-06).
 Окно быстрого лута `W_QuickLootPanel`: сетка `InventoryGridView` (слот `VerticalBox_1.VerticalBoxSlot_2`, отступы 10) и внизу
 `WidgetSwitcherTooltips` — ряд навигации (индекс 0, при открытии) и ряд действий с предметом (индекс 1, после выбора колесом); переключатель
 меряется по активному ряду, и окно меняло ширину при прокрутке (2026-10-28). Замер 22:05 (пульт, ширина по содержимому, единицы UMG): ряд

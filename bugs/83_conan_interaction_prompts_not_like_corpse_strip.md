@@ -1,6 +1,6 @@
 # Bug 83 — the NPC talk prompt (and other interaction strips) still sits centred, large, on a dense backing — not like the corpse strip
 
-**Status:** 🔴 OPEN · **Severity:** S2 (the owner's standing ask not carried to every widget) · **Version/build:** pack ConanExiles `1d6a62c`, KrinikConanUI
+**Status:** 🔧 FIXED 2026-11-06 09:0x (functional pass, the owner's eye pending — review folder 65) · **Severity:** S2 (the owner's standing ask not carried to every widget) · **Version/build:** pack ConanExiles `1d6a62c`, KrinikConanUI
 `krinik_ui_fixes` (the corpse strip only) · **When/context:** the owner's frame 2026-11-03 23:30, recorded 2026-11-03 23:31 +03:00 (chat cb012770)
 **Fixing:** the next chat, first after the owner's queue
 
@@ -32,9 +32,30 @@ prompt is another widget (not read yet — likely the game's interaction module 
 3. Apply the same place / scale / backing as the strip, from the same hub rows (one setting for all — «все виджеты интеракции»), event-driven as `align`.
 4. Frames of each before / after.
 
+## Recon log
+
+- 2026-11-06 08:42 +03:00 — `retoc list --path` over the 3.0.1 paks (`_paksview-3.0.1`): the interaction-info family lives in `/Game/UI/HUD/FloatingNames/` —
+  `W_DialogueNPCInfo` (the NPC talk prompt — candidate), `W_PlaceableInfo`, `W_SimpleInfo`, `W_ThrallInfo`, `W_DBNORevive`, `W_CastingInfo`, their switch
+  `W_OnScreenInfoContainer`; the container strip `WBP_ContainerInfo` sits apart in `/Game/UI/Widgets/HUD/Interact/`. A campfire already uses
+  `WBP_ContainerInfo` (`strip-open.sh … BP_PL_Crafting_CampFire_C`) — so chests and crafting stations are covered by `place_strip` today; the talk prompt is
+  not. Trees of the six read by `kit-probe-tree.py` (KIT_WIDGETS) — next step. Cases: `testcases/TC_conan_interaction_prompts_like_corpse_strip_2026-11-06.md`.
+
+## Fix (2026-11-06)
+
+- **Kit** (`kit-conanui-edit.py`, `INFO_WIDGETS`): the five prompts' `Container` border — render scale `STRIP_SCALE` 0.70, brush alpha `STRIP_BACKING_ALPHA` 0.6 (vanilla
+  already 0.6 there); six CookInfo lines (the five + `W_EnemyHealthbar`); `kit-missing-refs.py` 0 missing.
+- **Lua** `krinik_ui_fixes` 1.5.0: the five classes remembered at birth (`NotifyOnNewObject`), one tick later `place_strip` on their `Container` — the strip's
+  shift / scale / backing from the SAME hub rows; re-applied on a hub save. `krinik_pickup_prompt`: «E Взять» off while any of the five shows (found by the
+  run: the talk prompt and «E Взять» lit together).
+- Hub labels «Плашка трупа: …» → «Плашки: …», the «i» texts list corpse, chest, building, thrall and the person to talk to.
+- Run: cases I1–I4, P1 pass (I2 — the control with neutral rows: centred, 1.00, 0.80), report `testcases/reports/2026-11-06_conan-interaction-prompts-perks-enemy-bar.md`.
+  Status 🔧 — functional pass; the look waits for the owner's eye (review folder 65).
+
 ## Decisions made without the owner
 
-— (open)
+- `[AI]` One setting for all prompts (the existing strip rows) — from the owner's «все виджеты интеракции … как ты сделал для трупов».
+- `[AI]` The hub labels shortened to «Плашки: по горизонтали / по высоте / размер / фон» (the label column fits ≈ 28 characters; «Плашки взаимодействия: …» would not).
+- `[AI]` The downed-ally prompt `W_DBNORevive` included — same family, same shape.
 
 ## Links
 
