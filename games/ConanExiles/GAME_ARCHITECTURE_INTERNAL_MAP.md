@@ -552,7 +552,9 @@ Lua-моды UE4SS ждут только отложенными действия
   SetCarouselIndex, PrevCarouselWindow, NextCarouselWindow, ButtonPressed, OnChildActivated, CloseOtherModules, OnUndistributedAttributePointsChanged,
   OnCharacterFeatPointsChanged; the blueprint adds UpdateTabIndexes. A click on a tab = `ButtonPressed` → native `SetCarouselIndex` in C++ — a UE4SS hook
   on Next/Prev/SetCarouselIndex does NOT fire for it (the remote's own calls do); `OnChildActivated` fires on every switch after the new window exists. The
-  switch removes the old tab window from the viewport and later collapses it; the object stays valid (`hub-switch-probe.lua`).
+  switch removes the old tab window from the viewport and later collapses it; the object stays valid (`hub-switch-probe.lua`). A left tab's window is then
+  DESTROYED — one instance per tab at a time, rebuilt (100–300 widgets, 50–500 ms) on every visit. `IsPersistent = true` set on the 9 hub rows by a live
+  `dt:ForEachRow` edit at the main menu does NOT keep them (2026-11-06 22:59): the flag is read at module registration, before the main menu.
 - **Hub tab switching (2026-10-29 16:56, remote probes).** The tabs are changed by the NATIVE parent class of `W_Carousel_C`:
   `/Script/ConanSandbox.CarouselWindow` — `NextCarouselWindow` (E), `PrevCarouselWindow` (Q), `SetCarouselIndex`; the blueprint has no own Next/Prev
   (a hook by the blueprint path fails «no UFunction»). Module events lag the switch: `NextCarouselWindow` 17.535 → `XCS_Panel` false 17.681
