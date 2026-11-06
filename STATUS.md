@@ -149,7 +149,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > −1.5. **The series is VOID** (20:37 the owner rejected review folder 68 — overexposed HDR capture, EXP-0470; time of day not fixed, EXP-0469); folder
 > removed, the interim 0.25/−1.5 reverted before deploy — the build stays 2.0/−1.0. NEXT: re-run with `hdr.ps1 off` + `SetTimeOfDay` before each clip.
 > Music mod: scene-change spikes fixed; the death scene coded (hooks `DeathMusic` / `ClientOnRespawned`), NOT deployed/tested (case M7, rides on bug 79 D1).
-> Hub: tabs by `W_Carousel_C` calls at 56 fps — tab bar still, buttons still, mod icons present (1 variant; first open and real keys not covered).
+> Hub: the jitter is REPRODUCED (the owner's eye 20:38; my «not found» was false — EXP-0471). One clip per switch, ~90 fps, HDR off — review folder 69;
+> first readings in bug 64 (a band crawling down 400 ms after a switch, the perk text blurred ~5 frames, the Journey tab shifting). **FIRST next chat:** name
+> every moving element at full resolution, then the mod bisect.
 > **Crash checking is the owner's own gameplay** (`[OWNER]` 20:36 «на вылеты я буду проверять геймплейм»; HOUSE_RULES 28, plan 47 — fly-throughs are not a
 > crash check); the 19:42 fly-through run was stopped 20:36. `[OWNER]` 20:36 «а ты мне делай сборку, в которую я уже мог бы играть»: the game folder holds
 > the build, `-Verify` 111/111 at 20:40, game closed, lock released. Bug 79 cases (respawn, dungeon, waystone) — `TC_conan_pause_loading_screen_paths_2026-11-06.md`, not run.
