@@ -54,7 +54,7 @@ Era of Trials грузится позже и заменяет рецепт це�
 Техническое примечание: строки `Items/Recipes/RecipesTable` 52645–52648, 52659; `LegitReligiousRecipeTable` против `EoT_DT_Religious_Recipe_Add`;
 отчёт `testcases/reports/2026-11-06_conan-religion-and-eaa-rows-live.md`.
 
-**Answer:**
+**Answer:** A) <!-- owner-review: by Mikalai Kryvusha (KOT KRINIK) · 6 ноября 2026, 13:34 (+03:00) -->
 
 ### Q2. Призрак босса-раба при расстановке: какой мод оставить хозяином системы рабов?
 
@@ -95,4 +95,7 @@ Era of Trials грузится позже и заменяет рецепт це�
 `Npc.Boss.Miniboss` / `Npc.Boss.WorldBoss` → `SetActorScale3D` по масштабу раба); у LBPR изменены ещё 5 функций расстановки. Порядок: BMNB 3-й,
 LBPR 15-й в `modlist.txt`. Совместить обе правки в одном файле можно только пересборкой чертежа.
 
-**Answer:**
+**Answer:** A) <!-- owner-review: by Mikalai Kryvusha (KOT KRINIK) · 6 ноября 2026, 13:34 (+03:00) -->
+
+
+**Комментарий владельца (6 ноября 2026, 13:34 (+03:00)):** если получится, то в LBPR нужно затянуть модельки из Bosses My New Besties <!-- owner-review: by Mikalai Kryvusha (KOT KRINIK) · 6 ноября 2026, 13:34 (+03:00) -->

@@ -1,0 +1,22 @@
+{
+  "kind": "interview",
+  "document": "interviews/interview_034_conan_two_mod_choices.md",
+  "by": "Mikalai Kryvusha (KOT KRINIK)",
+  "at": "2026-11-06T10:34:56.500Z",
+  "atHuman": "6 ноября 2026, 13:34 (+03:00)",
+  "comment": "",
+  "answers": {
+    "Q1": {
+      "choice": "A",
+      "text": "",
+      "comment": ""
+    },
+    "Q2": {
+      "choice": "A",
+      "text": "",
+      "comment": "если получится, то в LBPR нужно затянуть модельки из Bosses My New Besties"
+    }
+  },
+  "rev": "b235b44fe9aff6a0a82e6d02fbb666e8690bbaa772a94cf84c2702e3ee192a98",
+  "revAfter": "e5a7f8fd1cd6e87bc2458c79545e42423690ad67a28fcb484abf8ec76e16b5d5"
+}
