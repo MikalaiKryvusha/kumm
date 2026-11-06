@@ -131,6 +131,10 @@ ours. The game's rebuild still runs, but invisibly. Next: this prototype in the 
   natively before the hooks. NEXT (one step each, alive-check after each): clean game → our 9 pages → hooks (b)–(e) → the first native switch; then the
   same with each page visited natively once BEFORE our pages are created (if that survives, the controller builds its pages after the game has opened each
   class once — or preloads the classes).
+- **Bisect 3 (00:25, clean background game): our 9 pages + hooks (b)–(e) installed BEFORE the game ever opened those pages — the first native switches
+  SURVIVE (3 of 3).** So no single operation and no combination of them crashes; what crashes is the v3 SCRIPT itself. Its remaining differences: the pages
+  built one per 400 ms by a chain of `ExecuteInGameThreadWithDelay` with a `building` flag around `Create`, and `print` from delayed callbacks. NEXT: build the
+  controller from the bisect-3 code (pages created at once, as `extra-pages-switch.lua`; the hook body of bisect 3), then add the lazy chain back alone.
 
 ## The hub controller API — DRAFT `[AI]` (for the owner's review; the owner set the direction 23:48, the calls are the agent's proposal)
 
