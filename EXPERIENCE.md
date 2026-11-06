@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0468 · 2026-11-06 · ❌→✅ · #bench #conan #closure #claim #background
+class: background-run-outlives-the-chat
+mechanized: `ConanExiles/_config/close-game.ps1` stops a windowless game by PID (2026-11-06)
+**Lesson:** a `run_in_background` script survives the chat's closure — the closing chat wrote «the series is interrupted after A1» while it ran on to its end
+(17:31). Its A2 game had NO main window, `CloseMainWindow()` reached nothing, the 60 s wait gave up without killing, the next launch was refused and the
+game stayed hidden 18 min; the next chat then claimed «the series is still running» from the ini line alone — the owner: «никакого фонового замера нет». Before
+any claim about a background run: read its OUTPUT file's tail and modification time (`tasks/<id>.output` of that session) — a running process and a line in a
+config are proxies.
+
 ### EXP-0464 · 2026-11-06 · ❌ · #conan #remote #crash #probe #thrall
 class: probe-calls-game-function-outside-its-contract
 mechanized: none — the game map's «Thrall placement» section lists the calls that crashed
