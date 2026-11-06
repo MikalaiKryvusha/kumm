@@ -104,6 +104,23 @@ The owner: «клик выполнен, видуального переключ�
 - Review folder 70 (`70_hub_dergaetsya_x15`): the four «Снаряжение» switches of run 7 slowed ×15 (`[OWNER]` 22:56 «покажи, что дергается, замедли в 15 раз»).
 - Measure tool: `scratchpad/hub_run.sh <tag>` + `hub_switches.py` (to move into the pack `_config/` with the build).
 
+## The hub controller API — DRAFT `[AI]` (for the owner's review; the owner set the direction 23:48, the calls are the agent's proposal)
+
+The controller (KrinikConanUI section `krinik_hub`) owns the 9 pages; a page id is the module name (`CharacterInventory`, `FeatWindow`, …).
+
+| Call | Who calls whom | When | Contract |
+|---|---|---|---|
+| `Hub.register(adapter)` | a mod → the controller | once, at the mod's load | `adapter = { id, pages = {…}, on_built, on_shown, on_hidden, on_closed }`; any field optional except `id` |
+| `adapter.on_built(page_id, window)` | controller → mod | once per page, right after the page is built (invisible) | the mod adds its widgets into `window` here — never later, never by a timer |
+| `adapter.on_shown(page_id, window)` | controller → mod | the frame the page becomes visible | refresh values only (no widget creation) |
+| `adapter.on_hidden(page_id, window)` | controller → mod | the frame the page is hidden | stop anything per-frame |
+| `adapter.on_closed()` | controller → mod | the hub closes | release what the mod holds |
+| `Hub.current()` / `Hub.is_open()` | any → controller | any time | the shown page id / whether the hub is open |
+
+Rules: every adapter call is timed (`os.clock`) and logged once a minute with the worst call; an adapter call that creates widgets in `on_shown` is a defect.
+Build order: the page the hub opens on first, then the others nearest first, alternating right and left, one per step. Open fork: how the controller
+takes the switch from the module controller (tab clicks `ButtonPressed`, Q/E input) — recon next.
+
 ## Steps
 
 1. [ ] **Recon (remote, read-only):** at a switch, in order with timestamps — the old window's fate (removed from the viewport? destroyed? still valid one
