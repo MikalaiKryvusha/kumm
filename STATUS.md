@@ -142,7 +142,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > port = an epic); `p.Chaos.AccelerationStructureTimeSlicingMaxQueueSizeBeforeForce=100000` TAKEN into the build's Engine.ini (stutters −28 %, CPU −0.3 ms, report
 > `2026-11-06_conan-quickwin-chaos-queue.md`); `r.GPUScene.ParallelUpdate` already on (2048); `p.MaxPayloadSize` NOT taken (A-B-A-B across launches: no gain, report `2026-11-06_conan-quickwin-maxpayload.md`; batch q7, the
 > live ini's B line by `ini-temp.py … q7`, revert after); `NumInitialRootPages` next. Criterion 3 A-B-A-B: within noise, narrowly (`2026-11-06_conan-build-vs-vanilla-paks-abab.md`).
-> G4 of the LBPR graft: a with/without control inconclusive — a recruited boss item needed (the agent's).
+> G4 of the LBPR graft (a boss ghost at 1.2): two tries inconclusive — a with/without control on template 505 (same height), and by the owner's route
+> «дебаг пультом. прямыми вызовыми» (16:49) `FindOrSetupThrallComponent` + `StartMovingThrall` on the oasis boss — crashes WITH and WITHOUT the graft (not the graft).
+> NEXT: a boss the PLAYER owns by direct calls (the thrall conversion path), then the with/without pair (cases in `testcases/TC_conan_thrall_ghost_graft_2026-11-06.md`).
 > **Interview #034 (merged 13:31 from #032/#033) ANSWERED 13:34 and applied:** Q1 A — Era of Trials' Zathite recipes stay; Q2 A — LBPR owns the thrall system, plus the owner's
 > «если получится, то в LBPR нужно затянуть модельки из Bosses My New Besties» → plan 45 step 8a: **BUILT 2026-11-06 14:18 +03:00** — BMNB's lines grafted into LBPR's
 > `ShowThrallPlaceable` (LBPR KRINIK MODIFIED, `kismet-graft.py`, `patch-mod-asset.py graft:`), in game G1, G2 pass, G3 partial (judge: VERIFIED WITH CAVEATS); owed: a boss ghost at 1.2 SEEN (needs a recruited boss
