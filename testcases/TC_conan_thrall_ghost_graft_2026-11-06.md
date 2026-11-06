@@ -37,3 +37,7 @@ was `StartMovingThrall` on the boss WITHOUT a thrall component (the likely cause
 CRASH (access violation 0x10, 16:56) — and the SAME crash with the ORIGINAL LBPR pak (control, 16:58): the call itself fails on a hostile NPC the game does not own,
 whatever the thrall component; the graft is not the cause. Both report windows closed by PID; the grafted pak restored (md5 70e6d4f5). G4 still open: a boss the
 PLAYER owns is needed — next: the thrall conversion path by direct calls (the wheel's converter actor / `ThrallItem:SetupThrallFromItem` on a boss), not `StartMovingThrall` on an enemy.
+
+**G4 recon ⟦NOW⟧ (read-only):** `BasePlayerChar_C:StartThrallifyingPrisoner(ThrallConverter: Actor)` — the wheel of pain is an Actor that turns a prisoner into a thrall
+ITEM in its inventory (`CraftingQueue` handles the thrall owners / crafting); next: the wheel actor class and the function that creates the `ThrallItem` from a character
+(`ThrallItem:SetupThrallFromItem`, its `ThrallCharLayout`) — then place that item (the barkeeper route `OnUseItem`) with and without the graft.
