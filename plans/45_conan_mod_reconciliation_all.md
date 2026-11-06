@@ -87,6 +87,8 @@ Each group by the guide: read original + both sides → classify per field → r
       overrides of the same game function — pairs listed. **DONE 2026-11-06 12:24 +03:00** (`ConanExiles/_config/lua-hook-pairs.py`): 11 hook targets, 2 shared (ours only;
       UE4SS's two stock enablers), 4 key binds, 1 shared (ours) — B, nothing to merge; blueprint overrides of one vanilla class — the thrall system (step 8).
 - [ ] 10. **Resources:** the A-B-A flight with the full build (plan 34 / acceptance criterion 3) — the mods' cost per frame; pairs that spend the same budget.
+      **2026-11-06 12:31 +03:00:** carried by plan 34 (our six Lua mods ≈ 0.4 ms per frame, UE4SS's hooks ≈ 0, 2026-10-26; timer polls rewritten on events since) and by the
+      build's acceptance criterion 3 (the whole build vs the game without paks, A-B-A-B flights) — not a reconciliation finding; closes with that measurement.
 - [ ] 11. **Mechanics:** the build's features done twice (ambushes: Night Terrors + PvE Plus Ambush; loot boosts; XP pop-ups; weather) — from the mods' notes
       and descriptions; the stacking numbers. **2026-11-06 12:26 +03:00:** swept by keyword over the manifest (register line): only the ambush pair is a doubled feature —
       waits for the owner's interview #025; levels / storage / loot / fishing / thrall extras — A or B (the off mods excluded; `DT_AttributeSystem` row 7 — only
