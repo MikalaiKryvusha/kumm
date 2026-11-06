@@ -200,6 +200,7 @@ none-cheap: the guard is the harness's own; the rule stands here.
 
 ### EXP-0456 · 2026-11-03 · ✅ · #conan #ue4ss #widget #recon
 class: read-the-actors-own-widgets
+subject-lesson
 **Context:** «whose is the health bar over the enemy» — two plans named mod candidates (Hosav, SudoExile) without a read.
 **Result:** ✅ — one remote call over a summoned fighter: `K2_GetComponentsByClass(WidgetComponent)` → `GetUserWidgetObject()` named the game's own
 `W_EnemyHealthbar` and `W_FloatingName` in seconds.
@@ -207,6 +208,7 @@ class: read-the-actors-own-widgets
 
 ### EXP-0455 · 2026-11-03 · ❌ · #conan #backlog #guide #stale
 class: a-list-copied-without-checking-its-rows
+mechanized: HOUSE_RULES rule 20 (a fix updates every describing place in the same commit) — the rule is the carrier; no machine guard
 **Context:** the 1.0.0 dayloop worked the guide's «Известные проблемы» line by line; «the window jerks under the wheel» was taken for open.
 **Result:** ❌ — it was fixed 2026-10-30 (plan 36 W10a, «the owner's wheel check pending»); the guide chapter of 2026-11-02 listed it as open. The owner: «насколько
 помню, ты уже починил дергание» · «раз ты так небрежно работаешь - то тестируй». A real wheel at 120 fps confirmed it fixed (23:16).
