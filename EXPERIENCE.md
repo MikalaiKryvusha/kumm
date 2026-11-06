@@ -111,6 +111,8 @@ mechanized: none — the game map's «Thrall placement» section lists the calls
 only plain values (location, scale, names) of actors — never raw pointer/class properties of a native component.
 A third crash the same day (14:35): `FindAllOf('StaticMeshActor')` + `x.StaticMeshComponent.StaticMesh` over the whole level — the component-enumeration class the
 remote already refuses for `FindAllOf(<…Component>)`; one named actor's own component is safe.
+A fourth, 2026-11-06 17:58 (KrinikConanMusic recon): `pcall(o:GetFullName)` on `snd.SoundClassObject` / an EMPTY `CurrentCombatMusic` — access violation 0x18
+inside UE4SS.dll; `pcall` is no guard. Call a method only after `o:IsValid()` returned true; read asset-side facts (a cue's sound class) OFFLINE from the paks.
 
 ### EXP-0467 · 2026-11-06 · ❌ · #bench #shell #conan
 class: pipe-masks-the-failure

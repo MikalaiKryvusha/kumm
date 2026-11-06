@@ -763,3 +763,14 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
 - The eggs a hero takes by E: pickable foliage `SM_SnakeEggs_single` in `PickupFoliageComponent_C` (e.g. a nest of three at (−57399, 237721, −20027);
   18 within 400 m of the oasis); E gives item 13011 «Egg». Stand: `ConanExiles/_config/egg-find.lua`.
 - Do not loop `FindAllOf('StaticMeshActor')` reading their components — that crashed the game (14:35).
+
+## Music (read 2026-11-06, plan 46 — KrinikConanMusic)
+
+- Places: ONE `BP_SoundStage_C` (native `AConanSoundStage`) plays rows of `SoundStageAudioTable` (group 0 = music, 2 crossfading slots; group 1 =
+  ambience, 5 slots); the playing music cue is `AudioComponents[1..2].Sound`, `AudioInfo[i].State` 0/1/2. Mods add stage tables (Caverns of Set, Ymir's Respite).
+- Combat: component `BP_AC_AudioController_C` of the hero — `AggroList` (in combat while not empty), `PlayingCombatMusicThreatLevel` (tier of the last
+  combat track, never reset), `AudioComp1/2`, BP event `UpdateCombatMusicStateWithNewActor`; tiers from `CombatMusicTable` (VeryEasy … Avatar).
+- Sound classes per kind: `Soundstage_2d_Music`, `MusicCombat`, `MusicCombat_Boss`, `MusicDeath`, `MusicPurge`, `MusicMenu`; `Properties.Volume` set at
+  runtime takes effect at once. Death ← `FunCombat_PlayerController`, Purge ← `BasePlayerChar` / `ConanCharacter:OnPurgeMusicRequested`, menu ←
+  `GUIModuleController:PlayMusic`. Detail, the cue list and the rows — `researches/conan-custom-music-mods/conan_music_system.md`,
+  `games/ConanExiles/mods/KrinikConanMusic.md`.

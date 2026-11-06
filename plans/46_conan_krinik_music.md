@@ -4,7 +4,10 @@
 > по Palworld и для нас его переделать» · «Поставляться в сборке он будет с пустыми папками, в которых будут лежить README.md, с описание, за какие сцены
 > отвечает текущая папка, какие треки в неё пользователю закидывать» (verbatim — `ideas/25_conan_krinik_music_user_folders.md`)
 > **Parent:** idea 25; recon `researches/conan-custom-music-mods/README.md` + `palworld_area_music_anatomy.md` + `conan_music_system.md`
-> **Status:** 🔧 started 2026-11-06 17:37 +03:00; phase 1 (recon) — offline part done (the game's scenes from its own tables), the live part next
+> **Status:** 🔧 started 2026-11-06 17:37 +03:00 · phase 1 recon DONE (offline + live, 2026-11-06 19:20 +03:00) · phase 2 player DONE (stand P0–P7, report
+> `2026-11-06_conan-music-player-stand.md`) · phase 3 detector WORKS for places and combat (cases M1–M3, M5 pass; M6 cost spikes open) · phase 4 folders +
+> READMEs DONE (generator `--verify`) · phase 5 manifest entry dev-only (`export: false`) · NEXT: spread the scene-change cost, death/Purge/menu, the game's
+> music slider, the A-B-A flight, then the owner's look at the folder list
 > **Outbound:** the folder list (the scenes the player sees) → the owner with the first build of the mod
 
 ## Goal vector (Achieve)

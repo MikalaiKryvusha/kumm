@@ -134,9 +134,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > разведка музыки — готового мода нет (`researches/conan-custom-music-mods/`).
 > **Correction 2026-11-06 17:41 +03:00 (the next chat):** the q8 series was NOT interrupted after A1 (the previous closure's line was false) — the background script outlived the chat and
 > ran to 17:31:48: A1 cold 48.2 fps · 85 stutters, F1 53.3 · 70; B1 (3072) — NO flights (cvar read 3072, the bench printed nothing); A2 cold 47.9 · 81, F1 49.9 · 72;
-> B2 — launch refused: A2's game (PID 40128) was left running WITHOUT a window by `close-game.ps1` and stayed until ⟦TIME⟩ (closed by PID; the owner: «игра не запущена»).
-> The live Engine.ini kept the B2 line until ⟦TIME⟩ — restored from `.bak-q8b` (diff = only that line). No B measurement exists: the q8 question stays open (EXP-0468).
-> **FIRST in the next chat:** (1) q8 Nanite — no B data (the correction above); re-run only after `close-game.ps1` is made to close a windowless game. (2) G4: свой раб-босс через колесо боли прямыми вызовами (кейсы `TC_conan_thrall_ghost_graft_2026-11-06.md`).
+> B2 — launch refused: A2's game (PID 40128) was left running WITHOUT a window by `close-game.ps1` and stayed until ≈17:41 (closed by PID; the owner: «игра не запущена»).
+> The live Engine.ini kept the B2 line until ≈17:41 — restored from `.bak-q8b` (diff = only that line). No B measurement exists: the q8 question stays open (EXP-0468).
+> **NOW 2026-11-06 19:20 +03:00 — chat of 2026-11-06 (fourth), `/dayloop` (`[OWNER]` 17:50 «работай автономно»):** plan 46 **KrinikConanMusic** (`[OWNER]` 17:25 «да, я хотел бы мод музыки»,
+> verbatim — idea 25): a Lua detector + our own player program (miniaudio), the Palworld 4679 design; in the game (dev-only) places and combat work with test tones,
+> the game's music muted by its sound class only where our folder has tracks; 19 folders with Russian READMEs from one table. Open: scene-change cost spikes
+> 2–3 ms (rule 7), death/Purge/menu, the game's music slider, the A-B-A flight, the owner's look. Notes `games/ConanExiles/mods/KrinikConanMusic.md`, cases
+> `TC_conan_music_recon_2026-11-06.md`. Test tones sit in the GAME folder's `music/` — remove after the tests. The owner's groundwork ideas (playlist setting, now-playing
+> HUD widget) — plan 46 «Groundwork»; his 1.0.0 notes (hub test, EAA cards by vectors and strings, quick loot partial) — bugs 64 / 75. `close-game.ps1` closes a
+> windowless game (fixed). Hub Q/E test BLOCKED: synthetic keys do not reach the game (three ways tried) — next: the hub's own tab function by the remote.
+> The owner asked what to fix for comfortable evening play; the answer in chat 18:05 — a long crash-free run, the pause on the in-game loading screen
+> (waystone, respawn), the hub test, the dusk light jump, then the rest.
+> **FIRST in the next chat:** (1) q8 Nanite — no B data (the correction above); `close-game.ps1` now closes a windowless game — the series can be re-run. (2) G4: свой раб-босс через колесо боли прямыми вызовами (кейсы `TC_conan_thrall_ghost_graft_2026-11-06.md`).
 > (3) Музыка — показать владельцу русскую копию вердикта и предложить свой UE4SS-мод (разведка пультом мелодий 3.0.1).
 > ✅ **Chat of 2026-11-06 (second) soft-closed ≈ 2026-11-06 13:1x +03:00 at 85 %:** the previous chat's skipped ceremonies paid — judge pass (VERIFIED WITH CAVEATS, fixed), STATUS trim, closing lints (attribution OK; experience-lint: 2 old findings EXP-0455 and an earlier one without a mechanization field — debt), engine syntax OK; README unchanged (the engine was not touched). Standing falsehoods corrected in place: Heritage «LOST» (plan 45 / register / notes), the merge rule «per table», bug 82 «plate hidden».
 > **NOW 2026-11-06 12:46 +03:00 — chat of 2026-11-06 (second), `/dayloop` (`[OWNER]` «работай автономно. Буду нужен - зови голосом»): plan 45 — steps 4, 5, 7, 9 DONE; 1, 6, 8, 11 wait
