@@ -43,7 +43,10 @@ Each group by the guide: read original + both sides → classify per field → r
       `StatTemplate` («All Thralls Base»), `NPCClass` (the knockable `…_nok…` class — the mod's recruitability), and `LootTable`; Heritage changes
       `MaleRaceTemplate` / `FemaleRaceTemplate` and `LootTable`. Heritage loads later → **BMNB's three recruitability fields are most likely LOST on all 17
       bosses** → outcome B (merge: `copyprop:` of the three into Heritage's rows) — to confirm in game (knock out one of them). The `LootTable` «C» is most
-      likely FALSE: it is an object reference and `row-diff.py` compares the raw import index (−67 vs −14, per file) — teach it to resolve imports to paths first; BMNB's table is
+      likely FALSE: it is an object reference and `row-diff.py` compares the raw import index (−67 vs −14, per file) — teach it to resolve imports to paths first;
+      DONE 2026-11-06 10:47 +03:00: `row-diff.py` resolves object references → `LootTable` identical; **all 17 rows — B, LOST** (BMNB's `ProfessionTemplate`, `StatTemplate`
+      ×17, `StatModifierTemplate` ×10, `NPCClass` ×11 under Heritage). NEXT: the merge maps for Heritage's two tables, `rebuild-krinik-paks.py` (Heritage has
+      no `krinikBuild` yet — add one), a world start, knock out a boss (e.g. the Keymaster) — recruitable after, not before; BMNB's table is
       `/Game/Mods/BossesMyNewBesties/BMNB_SpawnDataTable`; Heritage's spawn table is not named «*spawn*table*» — list its container; vanilla
       `Systems/SpawnTable/SpawnDataTable` by `retoc to-legacy --filter SpawnDataTable` + `uaj tojson`; then `row-diff.py` in load order.) Boss / elite spawns (`SpawnTable/SpawnDataTable`, 24 rows) — BossesMyNewBesties → Heritage (17), → EnhancedArmoryAndArsenal (7); Heritage → EraOfTrials
       (2 dialogue NPCs).
