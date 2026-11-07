@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0489 · 2026-11-08 · ❌ · #perf #fps #measurement #nfsu2 #tablet
+class: an FPS reading taken in a game's pause / options menu is not a gameplay reading
+**Context:** Underground 2 Revived on the owner's tablet; A-B of graphics options sampled with the options menu open.
+**Tried / did:** read "empty world = 60 FPS" in the menu and told the owner the other players' cars were the cause.
+**Result:** ❌ — driving in the same empty world gave 36 FPS: the menu pauses game logic, the reading was inflated; the claim was corrected in chat.
+**Lesson:** sample FPS only while driving (the counter's `pause = 0`, `drive = 2`); change an option in the menu, LEAVE the menu, then measure. → link: researches/nfsu2-tablet/README.md
+**Trigger:** any A-B where the option lives in an in-game menu.
+**Not for:** loading-screen or menu performance itself.
+
 ### EXP-0488 · 2026-11-07 · ❌ · #ue4ss #conan #remote #crash #trace
 class: an unproven read inside a remote probe crashes the owner's game
 mechanized: none
