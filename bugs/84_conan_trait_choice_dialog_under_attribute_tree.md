@@ -32,3 +32,11 @@ The case is a UI case — a clip, watched (HOUSE_RULES rule 4).
 ## Decisions made without the owner
 
 - `[AI]` Read as a defect report: the owner sent only the frame.
+
+## Forensics — live read 2026-11-07 19:5x (remote, no input; `_config/widgets-like.lua`, the owner's session)
+
+In the viewport at once: **two `W_Attributes_C`, both VISIBLE — one at render opacity 1.00, one at 0.00**; `W_FeatWindow_C` VISIBLE at opacity 0.00; 12 visible `W_Attribute_C`,
+112 visible `W_AttributePerkPip_C` (the tree's round icons). The game keeps ONE attributes window (plan 48: «each native «Параметры» activation kills other stats
+windows») — a second one in the viewport is our controller's. Reading `[AI]`: the trait dialog lives in one page while the other page (added later = higher in the
+viewport) draws its tree over it; the opacity-0 page/window are the controller's «held until quiet» state left behind. Suspect 1 (`krinik_hub_controller`) is the
+prime one; the control case (section off) decides. Fix in the controller (plan 48), not a patch over the dialog (rule 24).
