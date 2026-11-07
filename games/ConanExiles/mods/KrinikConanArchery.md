@@ -143,6 +143,12 @@ game-thread trigger is found: the shafts after the full loot window and after a 
   stealth hearing (`HearingRadius`), so `ReportNoiseEvent` is out. Section «промах будит моба»: in the hero-arrow stop hook (`StopProjectileInternal`, `visuals`
   registry = hero arrows only) → every `BaseNPC_C` within `CFG.miss_alert_cm` 1000 of the arrow gets `UpdatedHeardActors({ hero = arrow:GetInstigator() })`; the game
   decides who engages. Log «стрела упала: мобов в 10 м — N, «услышали» M (… мс)».
+  **Timid animals flee (`[OWNER]` 2026-11-07 22:20 +03:00 «пугливые животные должны не бросаться на героя, а убегать услышав падение стрелы рядом»):** check first whether the
+  game's own «heard» already makes a timid animal flee; if not — the controller's native `HumanAIController_C.StartPanic` / `GetPanicCenter` (panic centred on the
+  arrow's landing point) for animals the game itself treats as fleeing (its faction / behaviour data, not a list of ours). NOT BUILT.
+  **Cost fix 2026-11-07 22:20 +03:00:** the first build searched `FindAllOf("BaseNPC_C")` — 12.00 ms per arrow (22:17); now `KismetSystemLibrary:SphereOverlapActors` (Pawn, class
+  `BaseNPC_C`) — the remote probe found the Kappa in a 10 m sphere at ≤ 1 ms (os.clock step). Stand traps: a creature teleported far from its home is pulled back
+  (`TeleportHome`, 25 m → 111 m); `FindFirstOf('PlayerController')` is a TrivialObject — use `FunCombat_PlayerController_C` (arrow-stand.sh summon is broken by it).
 - **(order text)** (the owner's order 2026-11-07 21:50): `[OWNER]` «промах из лука пмо мобу, если стрела ударилась об землю, или другого
   мода. или об стену. или об предмет - где-то рядом в 10 метрах от моба - должна приводить к тому, что моб узнает об присутсткии героя и начинает к нему бежать для
   нападения на героя, словно слышит, что стрела рядом с ним упала - и это вызывает аггресию моба». Trigger: the copy's birth (`NotifyOnNewObject` BP_DummyProjectile,
