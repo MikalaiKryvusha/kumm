@@ -159,7 +159,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 10. `[OWNER]` 20:30 «посмотри, как идёт дождь сейчас» — read from a 2-s window clip 20:30: NO rain streaks visible; only translucent mist / splash puffs near the ground
 >    that shift and change shape between neighbouring frames. Suspect: rain particles not drawn (or too thin at 4K / culled), only the ground mist sprites left — recon the
 >    weather rain emitter vs our Engine.ini (particle / translucency cvars). `[OWNER]` 20:31 «тучка тупо над героем» — the rain comes from a small cloud fixed over the
->    hero (a hero-attached emitter), not from the sky.
+>    hero (a hero-attached emitter), not from the sky. `[OWNER]` 20:31 «я много раз просил это исправить» — AN OLD DEBT: `plans/04_conan_ochered_zakazov.md` (2026-09-09, 2.2.3:
+>    «дождь виден на больших отдалениях, появляется из воздуха; нужно сильно повысить высоту дождя» · «дождь всё ещё сломан»; mechanism there: the rain spawns in a BOX
+>    around the player; the scene-capture theory refuted) — take it after bug 84, starting from that plan's section.
 > ✅ **19:19 BUG 67 DONE** (`bugs/67_DONE_…`, report `testcases/reports/2026-11-07_conan-palm-shadow-wpo-bound-fix.md`): deployed by the build (`modpack.json`
 > KrinikConanGraphics kind `pak`), fresh launch: bound 100, sun 0.0025, blink 0.14–0.24 % at wind 0.21–0.22. Guide line marked fixed. Open: a gameplay crash pass with the pak.
 > ✅ **19:10 BUG 67 FIXED AND SEEN:** `KrinikConanGraphics.pak` (M_Foliage with `MaxWorldPositionOffsetDisplacement` 100 cm, kit-cooked) → turning sun 0.06–0.44 % blink vs
