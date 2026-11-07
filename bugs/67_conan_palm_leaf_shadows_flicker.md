@@ -62,6 +62,57 @@ shadows (blur levers out), no frame-to-frame leaf flicker; next — lever 2: the
 **Refuted 2026-11-07 15:0x–15:2x at continuous light** (report, section 5a): SMRT 32/16; Nanite `MaxPixelsPerEdge` 0.5/0.25; ray-traced sun shadows (blobs from the
 palms' baked RT proxies); the mask lever (the palm leaves are opaque geometry, `M_Foliage` blend 0). Three-attempts rule reached → `/bug-research` next.
 
+**Open check (2026-11-07 15:3x, `[OWNER]` 15:30 «это сплошная геометрия, Так а какого хуя она то отбрасывает тень. то не отбрасывает?»):** the mechanism
+told to him — a leaf thinner than one shadow texel hits or misses the texel sample points as the grid shifts with the turning light (and the wind). By that
+mechanism −1.5 / −2.0 MUST calm it, yet the metric saw no change → first verify the lever took effect at all: one frame crop of a leaf shadow edge at −1.0
+vs −2.0, same pose and hour (`fixed-cam.lua`); identical edges = the cvar did not reach those pages (clipmap level / `…Moving` / page pool), not «did not help».
+
+**`[OWNER]` 2026-11-07 15:31 «МОЖНО ЛИСТЫ ПАЛЬМ СДЕЛАТЬ ТОЛСТЫМИ НАХУЙ?»** → the path: thicken the leaves ONLY in the shadow pass — `Shadow Pass Switch`
+in the leaf material drives a WPO that widens each frond in its own plane (or pushes along the normal), so the shadow-casting leaf is wider than a shadow
+texel and stops slipping between sample points; the visible leaf unchanged, the shadow stays sharp. The palms' parent material is
+`/FLX_Materials/Materials/Environment/Core/M_Foliage` (read live 15:3x) and it IS in the kit: `F:/CEUE5Devkit/UE4/Plugins/FLX/FLX_Materials/Content/Materials/
+Environment/Core/M_Foliage.uasset` (the palm MIs are not). `M_Foliage` is shared by all foliage → every tree / bush shadow gets the same treatment.
+`[OWNER]` 15:32 «ДЕЛАЕМ» · «УЗНАТЬ ТЕКУЩУЮ ТОЛЩИНУ ЛИСТА» · «ЗАТЕМ ПОПРОБОВАТЬ ТОЛЩЕ в 2 раза в 3 раза в 4 раза в 5 раз и так далее, пока не будет найдена
+толщина, при которой листы не мерцают!» → steps: (1) measure the leaflet width from the mesh (kit export), compare with the shadow texel; (2) a shadow-only
+widening factor as a material parameter; (3) ×2, ×3, ×4, ×5… under the clean stand (continuous light 0.003) until the flicker is gone.
+`[OWNER]` 15:35 «Частоту смещения теней ставим 0,03» · «зовешь меня голосом смотреть в игре тени, Я САМ БУДУ СМОТРЕТЬ! Ты ставишь толщину листа - зовешь меня» →
+the tests run at `DynamicSky.SolarUpdateAngleDelta 0.03`; each thickness is judged by HIS eye live in the game, called by voice — not by the agent's metric.
+**15:4x — the leaf can't be widened in the material yet** (kit 15:35–15:39: the kit holds only a 64-triangle fallback of the palm mesh; `M_Foliage`'s WPO lives in
+`MF_FLX_UVPivot_WPO` / `MF_FLX-TreeMotion`, pivots baked in UV1/UV2, no «side of the midrib» data — `kit-probe-mf-graph.py`). Equivalent for the shadow: a texel 2×
+finer = a leaf 2× thicker relative to the grid. Recon `researches/conan-shadow-flicker/2026-11-07_continuous_sun_crisp_foliage.md` found the confound of the −1.5/−2.0
+refutation: the VSM dynamic-res throttle (live: `DynamicRes.MaxResolutionLodBias 2.0`, `MaxPagePoolLoadFactor 0.85`, pool `MaxPhysicalPages 4096`) can coarsen the
+shadow by up to 2 steps while the sun re-renders the map. Live with the owner 15:43: delta 0.03, throttle 0 / 0, pool 8192, then bias −1 (×1), −2 (×2), −3 (×4),
+−4 (×8) — his eye per step. `[OWNER]` 15:43 «смещение солнца ещё плавнее, 0,01» · 15:44 «еще плавнее в 2 раза» (→ 0.005) · 15:45 «вот теперь тени ПЛАВНЫЕ!!!! Но
+листья мерцают!!! Делаем листья ЕЩЕ ТОЛЩЕ!» → **delta 0.005 = smooth by his eye**; leaf ×1 flickers → ×2 (bias −2.0) set 15:45. `[OWNER]` 15:43 «камеру мне отдай!!!»
+**15:45–15:47 by his eye, throttle off, pool 8192, delta 0.005:** ×2 (−2.0) «мерцают листья», ×4 (−3.0) «мерцают», ×10 (−4.3; `Clipmap.FirstLevel` 6 — no floor hit)
+flicker on → **the «leaf thinner than a texel» mechanism is REFUTED by the owner's eye** (the texel near the palms is sub-centimetre, a leaflet several cm). Bias back
+to −1.0 at 15:48. `[OWNER]` 15:48 «толще листья ав 100 раз, не трогай точность» · 15:49 «ПРАВЬ НАУЙ МАТЕРИАЛ И ПЕРЕЗАПУСКАй!» · 15:50 «плавнасть солнца
+запомнил какая нужна?» (→ 0.005 written into the pack's Engine.ini) · 15:51 «текперь нужно при этой плавности добиться - четких теней листвы пальм - без мерцания
+отдельных листиков off/on его тени» → **acceptance now: delta 0.005 + crisp palm-leaf shadows + no leaflet shadow popping off/on**; the route — the leaf material
+(`M_Foliage`, shadow-pass-only enlargement around each leaf's pivot, factor live), a kit build and a restart.
+**15:5x — the material route is CLOSED by the data** (T3D export of the FLX functions, `devkit/kit-export-t3d.py`): the palm wind is mask-based —
+`MF_BranchBend` = mask (UV / vertex-colour weights) × wind vector, `MF_LeafShimmer` = lerp × `VertexNormalWS`; no per-leaf pivot or axis exists in the palm data
+(`MF_FLX_UVPivot_WPO` is behind `UVPivotWind_Enable`, default off), so a shader cannot know where a leaf's edges are → no true «thicker leaf». New lead for
+the leaflet pop: Nanite re-selects simplified clusters for every shadow re-render, so edge leaflets drop in and out; `r.Nanite.MaxPixelsPerEdge` 1.2 → 0.25 set live
+15:5x for the owner's eye (the earlier metric run of 0.5/0.25 was on a box of mostly solid shadow — not a verdict).
+**16:00–16:08 live with the owner (11:00, review folder 72):** 144-fps captures (the game gives ≈ 40 fps) — `leaf_pop_finder.py` frames 73–78: a long frond tip
+shadow present (73, 74), gone (75–77), back (78) — `kadry_73_80_ten_lista_strelki.webp`; `[OWNER]` 16:04 «вот, ты увидел» · «и таких мест ДОХУЯ» · 16:05 «Дело не в
+кочниках» · «они пропадают ПО ВСЕМУ ПЯТНУ КРОНЫ ПАЛЬМЫ». Refuted by his eye: `Clipmap.WPODisableDistance 0` (still pops), `r.Shadow.Virtual.Cache 0` (still pops;
+blink map `shadow_pop_map.py`: 1677 vs 1494 blinking ground pixels). `[OWNER]` 16:08 «это ебучий алгоритм какой-то, который решает, как луч проходит через лист, и
+будет лист отбрасывать тень, или нет» · «нужно этот ебучий алгоритм переделывать!» · «чтобы КАЖДЫЙ ЛИСТ ВСЕГДА тень отбрасывал!» → that algorithm is SMRT (shadow-map
+ray tracing: per-pixel rays with a NEW random direction and texel dither every frame — kit shader `VirtualShadowMapProjectionDirectional.ush`); set live 16:08:
+`SMRT.RayCountDirectional 0` + `SMRT.TexelDitherScaleDirectional 0` (one fixed sample per pixel — every leaf casts every frame, a hard sharp edge), cache back on.
+**REFUTED 16:09** `[OWNER]` «пиши видео, сейчас полный пиздец стал, сильно хуже стало!» · «этилистья начали рендерится как шкалы прогресса»; blink map: 50 851 blinking
+ground pixels vs 1 677 with SMRT on (×30). Reading `[AI]`: the blinking is the shadow-map texel grid re-sampled at every light turn; SMRT's random rays + dither
+HIDE it (blur the stair steps), they do not cause it — without them the grid crawls visibly («progress bars»). Restored 16 rays / dither 2 at 16:09.
+16:10 SMRT 32 rays / 16 samples: `[OWNER]` 16:11 «мерцают и рендерятся, медленнее рендерятся, но всё равно» · «исчезают, появляются и заполняются» (blink map 2 276 vs
+1 677 — no gain); restored 16 / 8. 16:12 DLSS off live (the «fill in» = temporal history?) — his verdict pending; `[OWNER]` 16:12 «иди в интренте в разведку, чем это
+вызвано» → recon `researches/conan-shadow-flicker/2026-11-07_leaf_shadows_fill_in_recon.md` (a helper); «ставь 11 утра»; «тень нужно ещё плавнее в 2 раза» →
+**delta 0.0025** (pack Engine.ini updated). Live now: 11:00, delta 0.0025, DLSS 0, throttle 0/0, pool 8192, SMRT 16/8, bias −1.0, Nanite MaxPixelsPerEdge 0.25.
+16:13 DLSS off: `[OWNER]` «если сейчас ДЛСС выключен, то не помогло, мерцают»; blink map 15 391 vs 1 677 (raw SMRT noise without temporal AA) — DLSS back on.
+Summary of the live day: every per-frame lever only hides or reveals the same thing — the shadow grid re-sampled at each light turn; the next step is the
+helper's recon of WHY leaflets vanish for frames (page feedback one frame late, HZB/instance culling of casters, Nanite shadow raster budget). `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
+
 ## Goal vector and acceptance
 
 Avoid: leaf shadows on sand under palms visibly jitter frame to frame. Done when the owner, standing under palms at 4K, says the shadows do

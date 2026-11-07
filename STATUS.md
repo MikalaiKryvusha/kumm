@@ -141,6 +141,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the palm leaves are OPAQUE geometry (`MI_AfricanOilPalm01/D01/02` on `M_Foliage`, blend 0) — no mask threshold to lower. The probe of all mesh components crashed
 > the game once (fixed, `palm-material-probe.lua`). NEXT for bug 67: `/bug-research` (3+ levers failed) — how shipped games keep crisp foliage shadows under a
 > continuously moving sun; candidates: palm assets without RT proxies (kit), VSM page-grid stabilisation. Game closed, lock released, build unchanged (2.0 / −1.0).
+> **16:1x — live with the owner (bug 67, full log in the bug):** his eye set the sun step **0.0025** (pack Engine.ini, not deployed yet — the game runs it live);
+> refuted by his eye today: texel ×2/×4/×10, throttle off, Nanite edge 0.25, WPO-disable off, cache off, SMRT 0 (×30 worse), SMRT 32/16, DLSS off (×9 worse);
+> the leaf material cannot be thickened (mask-based wind, no pivots). Tools: `leaf_pop_finder.py`, `shadow_pop_map.py` (blink counts), review folder 72.
+> OPEN: helper recon `researches/conan-shadow-flicker/2026-11-07_leaf_shadows_fill_in_recon.md` (why leaflets vanish for frames) → its first live test with the
+> owner. Game open (PID 49596) with live test values (throttle 0/0, pool 8192, Nanite 0.25, t.MaxFPS 144) — a restart returns the pack's values.
 > ⚠️ **Чат 2026-11-07 (второй) закрыт принудительно 2026-11-07 12:43 +03:00 на 85 % окна: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) —
 > долг платит первый /end-chat-soft.** Ложных утверждений на месте: нет (исправлено в этом чате: «E/Q пульта ходят только по 4 вкладкам» — в карте игры и плане 48).
 > Игра закрыта, замок снят, всё запушено (KUMM `43b54c7`+, пак `d85dfbe`). Сделано за чат — блоки UPDATE ниже и NOW: пустой хаб при быстром переключении,

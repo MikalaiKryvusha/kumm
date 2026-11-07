@@ -275,7 +275,12 @@ foliage sway reads `MPC_BiomeSettings` `WindIntensity` / `Wind Speed` / `Wind St
 plus the level's `WindDirectionalSource2` (strength 0.1, speed 3.482; `SetStrength`/`SetSpeed`) — all 0 = still palms. **Oasis palms:** ISM meshes
 `GFL_AfricanOilPalm01…05` (+ `_HLOD` billboards, `M_Foliage_Billboard`, masked 0.5), leaf materials `/Game/Environment/Foliage/Materials/FLX/MI_AfricanOilPalm01`,
 `…D01`, `…02` on `M_Foliage` — OPAQUE (BlendMode 0), two-sided; with `r.RayTracing.Enable 1` their ray-traced shadows come from baked proxies (blobs).
-`r.RayTracing.Enable` takes > 10 s to switch (the remote times out; read it back). At night Night Terrors (`BP_NightTerrors_*`) come to the hero. `AdjustStaminaRegenMod(1000)` выносливость НЕ удержал; работает повтор `AdjustStaminaCurrent(1000.0)` раз в 250 мс.
+`r.RayTracing.Enable` takes > 10 s to switch (the remote times out; read it back). **Foliage material (2026-11-07):** `M_Foliage` (`/FLX_Materials/Materials/
+Environment/Core/M_Foliage`, in the kit; Material Attributes, Nanite, opaque, two-sided) moves vertices inside `MF_FLX-TreeMotion` = `MF_WindWaveFront` +
+`MF_TreeBend` + `MF_BranchBend` (mask from UV / vertex-colour weights × wind vector) + `MF_LeafShimmer` (lerp × `VertexNormalWS`) — MASK-based, no per-leaf
+pivot or axis; `MF_FLX_UVPivot_WPO` (pivots in UV1/UV2 + local bounds) sits behind `UVPivotWind_Enable` (default off). The kit holds only a 64-triangle fallback of
+the palm meshes. Material-function links are read from a T3D export (`devkit/kit-export-t3d.py`); `MaterialEditingLibrary.get_inputs_for_material_expression`
+refuses functions. At night Night Terrors (`BP_NightTerrors_*`) come to the hero. `AdjustStaminaRegenMod(1000)` выносливость НЕ удержал; работает повтор `AdjustStaminaCurrent(1000.0)` раз в 250 мс.
 Стенд прогона пультом (2026-10-28, правило дома о тестовом окружении): убрать всех рядом — `K2_DestroyActor` у каждого `Character` в радиусе
 60 м (лагерь NPC вокруг героя — враги стоят вплотную и бьют); существа дальше ≈150 м от героя СПЯТ (`bHidden`, тик и столкновения выключены):
 перенос спящего к герою его не будит (сеттеры столкновений не действуют, стрелы проходят насквозь), а игра потом прячет его в пул (0,0,0) —

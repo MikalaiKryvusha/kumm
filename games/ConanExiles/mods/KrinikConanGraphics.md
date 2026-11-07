@@ -15,7 +15,12 @@ deployed by `Deploy-ModPack.ps1` through the manifest's `engineIni` field.
 `testcases/reports/2026-11-06_conan-quickwin-chaos-queue.md`. Read at the same time (Constructor values): `p.MaxPayloadSize` 100000, `r.GPUScene.ParallelUpdate`
 2048, `r.Nanite.Streaming.NumInitialRootPages` 2048, `r.RHICmd.ParallelTranslate.Enable` true.
 
-## Engine.ini — the sun step stays 2.0, the bias −1.0 (bug 67, 2026-11-06)
+## Engine.ini — the sun step 0.0025 since 2026-11-07 16:12 (bug 67; 0.005 from 15:5x)
+
+`DynamicSky.SolarUpdateAngleDelta=0.0025` (16:12 «тень нужно ещё плавнее в 2 раза»; before: 0.005) — the owner's eye live at the oasis: 0.03 → 0.01 → 0.005 «вот теперь тени ПЛАВНЫЕ!!!!» (15:45); every step ≥ 0.1° rejected
+(14:53). The leaf-shadow flicker stays open — the fix goes into the leaf material (shadow-only enlargement), not into the sun step.
+
+## Engine.ini — the sun step stays 2.0, the bias −1.0 (bug 67, 2026-11-06) — superseded above
 
 An interim 0.25 / −1.5 was prepared 20:37 and REVERTED before deploy: the measurement behind it was void (overexposed HDR capture, time of day not fixed —
 report `testcases/reports/2026-11-06_conan-palm-shadow-sun-step.md`). Note for the re-run: the game's own Cine bias is −1.5, ours −1.0.
