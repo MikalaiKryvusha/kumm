@@ -167,10 +167,10 @@ in front: the owner's screen)` |
 
 ### 2. RNF: четыре плавильщика без таблиц спавна
 Журнал: `SpawnTable … could not find` ×4 — `RNF_Shared_WeightedSpawns` называет `RNF_NPC_WadaiFlesheaters_Smelter1–4`, их таблиц в паке нет.
-- [ ] Выгрузить `RNF_Shared_WeightedSpawns` (`patch-mod-asset.py extract`), найти четыре ряда.
-- [ ] Путь: убрать четыре ряда из взвешенного списка (у остальных NPC лагеря таблицы есть — лагерь не опустеет). Добавить таблицы с нуля
+- [x] Выгрузить `RNF_Shared_WeightedSpawns` (`patch-mod-asset.py extract`), найти четыре ряда.
+- [x] Путь: убрать четыре ряда из взвешенного списка (у остальных NPC лагеря таблицы есть — лагерь не опустеет). Добавить таблицы с нуля
       склейкой нельзя без кита — не беру.
-- [ ] Пересобрать пак, KRINIK MODIFIED, поле `krinikModified` в `modpack.json`.
+- [x] Пересобрать пак, KRINIK MODIFIED, поле `krinikModified` в `modpack.json`. (Проверено 2026-11-07: `krinikModified` RNF в `modpack.json`, строка 2 таблицы выше.)
 Готово: запуск — в журнале ноль строк `could not find` про `Smelter`, пак смонтирован, лагерь Wadai на месте (кадр).
 
 ### 3. Г12: быстрый крафт при открытом хабе — ✅ DONE 2026-10-31 11:55 (`CRAFT_SPEEDUP = true`, report `2026-10-31_conan-craft-speed-in-inventory.md`; README of the build must say it plainly — the owner: «это будетнемного читетство»)
@@ -190,9 +190,9 @@ in front: the owner's screen)` |
 Разведка — строка `PARKED:` в `STATUS.md` и план 35 Г13. Имя пользователя Windows — начало имён наших модов: подстановка по всему тексту
 запрещена, заменяются только строки `LogInit: Computer:`, `LogInit: User:`, `MachineId=`, поля `MachineId`, `LoginId`, `EpicAccountId`,
 пути профиля.
-- [ ] `Собрать отчёт.cmd` + `collect-report.ps1` (PowerShell 5.1, без Python у игрока) в `extras` манифеста: последний журнал + 3 прошлых,
+- [x] `Собрать отчёт.cmd` + `collect-report.ps1` (PowerShell 5.1, без Python у игрока) в `extras` манифеста: последний журнал + 3 прошлых,
       падения за 7 дней (без `UEMinidump.dmp`), `UE4SS.log`, `modlist.txt`, версия сборки → zip на рабочий стол.
-- [ ] README: раздел «Если игра упала».
+- [x] README: раздел «Если игра упала». (Проверено 2026-11-07: в руководстве игрока — кнопка «Отзыв» и `collect_report.cmd`, `collect_report.*` в `extras` манифеста.)
 Готово: на падении `UECC-Windows-D5516A09…_0000` zip собран; поиск в распакованном zip по MachineId, LoginId, EpicAccountId, имени
 компьютера, `Users\<имя>` — 0; имена модов `Krinik…` целы.
 
