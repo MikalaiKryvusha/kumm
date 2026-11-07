@@ -38,6 +38,12 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
 
 ## Open
 
+- **M6 try 2026-11-07 19:2x — FAILED TO EXERCISE (not a verdict on the mod):** `_config/m6-air-shot.sh` (owner-idle FREE → tp to the oasis → side `fixed-cam.lua` →
+  `input.ps1 -Key 3` → 3 s window capture while `mouse-seq.ps1` sends Space · RMB down · LMB click · RMB up). The 12-frame sheet: the hero stands in one pose in all
+  frames, no jump, no draw; the view stayed the normal third-person camera (the side camera did not apply); a game line «Всё пошло не так…» at the bottom (unread).
+  The real keys did not reach the hero, or the focus did not hold. Next: check focus right before the sequence (the slow-shot path that worked 2026-11-02 runs with
+  the game ALREADY in front), drop the fixed camera for this case, read what «Всё пошло не так…» is. After the run the foreground was handed back to VS Code.
+
 - **NEXT FEATURE (the owner 2026-11-07 10:50, verbatim):** «и было бы хорошо, если бы если игрок попадает в тайминг при ComboStep >= 1, и нажимает в этот тайминг пробел -
   чтобы герой подпрыгивал с замахом меча за голову, нанося удат в падении из пряжка на землю» — a combo finisher: inside the combo advance window (combo step ≥ 1)
   Space = a leap with the sword raised over the head and a downward strike on landing. 10:50 «если это сейчас сложно - на будущее идея» → an idea for later.
