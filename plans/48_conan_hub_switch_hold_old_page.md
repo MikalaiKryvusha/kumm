@@ -158,6 +158,22 @@ ours. The game's rebuild still runs, but invisibly. Next: this prototype in the 
   (the parent classes' UFunctions: activate / open / signal), then call it once on our instance at its build. Pages the game keeps single (stats) need
   that page's own path: adopt the game's instance instead of a second one.
 
+## Our «Снаряжение» cannot live beside the hub; the far tabs by index (2026-11-07 06:47–07:01 +03:00, background)
+
+- Native parents found (game map): our `CraftingGUI_C` builds its panels only with `SetInteractionActor`: the hero as the actor → the follower layout
+  («Содержимое рюкзака», «Снаряжение питомца»); `nil` → the full hub inventory (bag, paperdoll, level, crafting — frame `craft_nil.jpg`).
+- **But an inventory window with its actor set CLOSES the open hub** (three frames 06:58: hub open → our CraftingGUI + `SetInteractionActor(nil)` → the
+  world and the HUD, hub closed → a native switch reopens it). Built while the hub is closed, ours survives; opening the hub takes ours OUT of the viewport;
+  re-adding it closes the hub again, and its bag comes back empty (07:00). The game allows ONE open inventory window. v6 (`hubswitch/shadow-pages-v6.lua`,
+  init + re-add after every switch) therefore kept the hub closed — 12 switches, 0 crashes, every switch «lost» our CraftingGUI. Three attempts on this
+  sub-task → stop.
+- **Consequence for the controller `[AI]`:** «Снаряжение» stays the GAME's own page (it also carries 6 of the 8 mod embeds); our controller holds the
+  previous page (ours, kept in the viewport) until the game's «Снаряжение» is quiet, then swaps in one frame — the hold prototype's «complete» signal
+  (no widget born for two samples). «Параметры» likewise the game's page (the game kills any second stats window). Shadow pages (ours) for the other
+  seven — «Таланты» and «Хар-ки» proven complete with the hero's data; «Путешествие», «Клан», «Спутники», «Карта», «Базар» — to check as ours next.
+- Remote tools learnt: `GUIModuleController:ActivateModule(FName('CharacterInventory'), false, false)` CLOSES the hub; `CarouselWindow:SetCarouselIndex(k)`
+  (0-based, 4–8 = the five far tabs) switches natively but leaves the tab header's highlight on the old tab (frames 07:01) — a test path, not the player's.
+
 ## The hub controller API — DRAFT `[AI]` (for the owner's review; the owner set the direction 23:48, the calls are the agent's proposal)
 
 The controller (KrinikConanUI section `krinik_hub`) owns the 9 pages; a page id is the module name (`CharacterInventory`, `FeatWindow`, …).

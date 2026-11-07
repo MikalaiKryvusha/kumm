@@ -572,7 +572,10 @@ Lua-моды UE4SS ждут только отложенными действия
   `W_Attributes_C` and `W_FeatWindow_C` are complete with the hero's data (the test save's attributes are really 0 with 77 points unspent — the game's own
   page shows the same, frame 2026-11-07 06:5x). Native parents: `WindowRoot` (`SetupUI`, `Open`, `Close`, `SendWindowOpenedNotifications`, `m_GUIModule`),
   `CraftingGUIBase` (`GetPanel`, `BP_Handle*PanelWidgetCreated`, `AddDefaultSelectedInventoryGrid`), `AttributesBase` (`BindAttributeDelegates` — fails
-  when called on our instance, `UpdateAttributeInfo`).
+  when called on our instance, `UpdateAttributeInfo`). `WindowRoot:SetInteractionActor` builds an inventory window's panels (hero → the follower layout,
+  `nil` → the hub's own) — and an inventory window with its actor set entering the viewport CLOSES the open hub: the game keeps one open inventory window;
+  opening the hub takes any other CraftingGUI out of the viewport (plan 48, 2026-11-07 06:58–07:00). `CarouselWindow:SetCarouselIndex(k)` (0-based) reaches
+  every tab natively, the header highlight stays on the old tab.
 - **Hub tab switching (2026-10-29 16:56, remote probes).** The tabs are changed by the NATIVE parent class of `W_Carousel_C`:
   `/Script/ConanSandbox.CarouselWindow` — `NextCarouselWindow` (E), `PrevCarouselWindow` (Q), `SetCarouselIndex`; the blueprint has no own Next/Prev
   (a hook by the blueprint path fails «no UFunction»). Module events lag the switch: `NextCarouselWindow` 17.535 → `XCS_Panel` false 17.681
@@ -620,7 +623,7 @@ Lua-моды UE4SS ждут только отложенными действия
   UMG `Btn_Open`, style paddings 8/2 → text) clicks via `CustomEvent` → `ActivateModule('ExilesFishingTuning')`; it takes a vanilla `WBP_ButtonBase` as
   HitTestInvisible content (`SetContent`) and keeps its own click — but then the hover glow is lost. The bar: `WBP_ButtonBar` → `ButtonContainerLeft` (starts
   at x 0) / `ButtonContainerRight`. Remote facts: inside a module activation callback `IsModuleActive(<that module>)` is still false; `GetCachedGeometry`
-  through `SlateBlueprintLibrary` returns zeros; `GUIModuleController` has no `DeactivateModule` (close by a real Esc).
+  through `SlateBlueprintLibrary` returns zeros; `GUIModuleController` has no `DeactivateModule`, but `ActivateModule(FName('CharacterInventory'), false, false)` closes the hub (2026-11-07 06:59, frames).
 - **Esc and windows over the hub (2026-10-30, KRINIK MODIFIED + `KrinikPauseGameInMenu` 0.11.0).** Module rows (`UIModuleTableRow`): vanilla popups over a hub
   tab (`PerkSelection`, `ThrallBonuses`, `InventorySettingsPopup`) are `Category Modal`, `FullscreenGUIAction None`, `CloseOnESC true` — and Esc is taken by their
   OWN cancel button: a `WBP_ButtonBase` (native `FLXButtonBase`) with `KeyShortcutName` «Escape» (the input action `Escape` = Esc / gamepad B). The controller does
