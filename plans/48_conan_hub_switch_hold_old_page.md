@@ -149,8 +149,8 @@ ours. The game's rebuild still runs, but invisibly. Next: this prototype in the 
   `W_CharacterStatsWindow` was gone (06:35:16). In a clean game stats + attributes alone survive the first show of attributes — the destroyer is not that.
 - **The trace (06:46, `NotifyOnNewObject(UserWidget)` names + a mark per `OnChildActivated`):** each NATIVE activation of «Параметры» creates
   `W_CharacterStatsWindow_C` twice and our stats instance is destroyed every time (v5 counter `lost` +1 per visit) — the game keeps one stats window
-  and kills the others. `OnChildActivated` fires TWICE per switch. The remote's `NextCarouselWindow` in the background game cycles only 4 tabs
-  (Снаряжение → Таланты → Хар-ки → Параметры → Снаряжение) — the other 5 need `SetCarouselIndex` or real clicks.
+  and kills the others. `OnChildActivated` fires TWICE per switch. ~~The remote's `NextCarouselWindow` in the background game cycles only 4 tabs~~ —
+  corrected 2026-11-07 10:2x: `NextCarouselWindow` / `PrevCarouselWindow` walk all 9 tabs (fast-burst-eq, 20 bursts, every final tab as simulated on a ring of 9).
 - **v5 (`hubswitch/shadow-pages-v5.lua`): 27 native switches, 0 crashes, 0 Lua errors** (v4 crashed on the 2nd). Rules: a page is kept by its NAME and
   found alive by `FindAllOf` before every touch; a lost page is rebuilt on the next tick; inside the native switch only the game's newborn gets opacity 0;
   our previous page stays on screen through that frame. Frames: «Таланты» ours complete WITH the hero's data (level 76, 752 points); «Хар-ки» ours complete too; «Снаряжение» ours
@@ -207,6 +207,23 @@ on our page — real clicks. Details — `games/ConanExiles/mods/Simple_Minimap.
 NEXT: build lazily on open — the owner's design — instead of all at once; release by
 the RAM measurement), the Simple Minimap adapter, then v7 as a section of KrinikConanUI; the 144 fps recording when the game may come to the front; real mouse clicks (`ButtonPressed`); the bottom-bar `WBP_ButtonBar_C` reborn per
 switch; the mods' embeds on our pages (API, inventory below).
+
+## Fast switching — the empty hub fixed (2026-11-07 10:1x–10:3x +03:00, background, TC `testcases/TC_conan_hub_fast_switch_2026-11-07.md`)
+
+- **The owner's defect (≈10:10, verbatim):** «при быстрром переключении табов ХАБА, иногда они иои не открываются, или открываются пустыми - не предусмотрена
+  обработка события переключения. пока контроллер, видимо, еще не обработал предыдущее переключение»; 10:23 «я по E Q переключался, когда даги нашёл».
+- **Reproduced** by `ConanExiles/_config/hubswitch/fast-burst.lua` (bursts of 8–12 native switches, gaps 1 tick … 150 ms, every tick sampled): 2 of 6 bursts ended
+  on an EMPTY hub (0 pages drawn for the whole 1.5 s after the last switch); the log had 8 «хаб закрыт» lines while the hub never closed.
+- **Cause:** `check_closed` judged «closed» by the LAST game page the controller had recorded. A native switch removes that page and adds the newborn in one
+  call, but `on_switch` records the newborn only a tick later; a close check landing in that tick (`ActivateModule` fires during switches) «closed» an open hub —
+  our pages collapsed, the pending switch cancelled (`gen`), the newborn left at opacity 0.
+- **Fix (KrinikConanUI `krinik_hub_controller`):** closed = NO game page of any of the 9 tabs in the viewport (`game_page_in_viewport`); our own page builds no
+  longer leave a stale «newborn» (`S.building`).
+- **After:** SetCarouselIndex bursts 18 of 18 OK (seeds 7, 11), E/Q bursts (`fast-burst-eq.lua`, `Next/PrevCarouselWindow`) 20 of 20 OK (seeds 5, 23); bare
+  ticks after the last switch 0, overlays 0, false «хаб закрыт» 0. Real mouse clicks / real E and Q keys — not run (the game in front).
+- **The Simple Minimap row on our «Карта» stood high** (`[OWNER]` 10:23 «и тут кнопки поехали вверх, нужно ниже их», his frame): the adapter copied the slot of
+  «the last live helper», which at our lazy build was one the mod had not placed yet (VAlign Top); the mod's own placement read live — Left / Center / 0 — is now
+  set as constants. Seen on a 4K frame of a fresh game: the row centred on the bar, level with «Сброс маркеров».
 
 ## The hub controller API — DRAFT `[AI]` (for the owner's review; the owner set the direction 23:48, the calls are the agent's proposal)
 

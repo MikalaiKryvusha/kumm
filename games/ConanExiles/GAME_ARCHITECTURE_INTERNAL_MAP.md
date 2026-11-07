@@ -567,7 +567,7 @@ Lua-моды UE4SS ждут только отложенными действия
   **STALE-REF RULE (2026-11-07 06:29, plan 48):** a Lua ref to a widget is a raw pointer; the game DESTROYS extra page instances (every native activation of
   «Параметры» creates `W_CharacterStatsWindow_C` twice and kills any other stats window, ours included) — touching the dead ref crashes inside UE4SS. Keep a
   widget by its `GetFullName()` and find it alive through `FindAllOf(<class>)` before each touch (`hubswitch/shadow-pages-v5.lua`: 27 switches, 0 crashes).
-  `OnChildActivated` fires twice per switch. The remote's `NextCarouselWindow` in a background game cycles 4 tabs only (Снаряжение … Параметры). A page
+  `OnChildActivated` fires twice per switch. The remote's `NextCarouselWindow` / `PrevCarouselWindow` walk the ring of ALL 9 tabs (fast-burst-eq, 20 bursts, 2026-11-07 10:2x; the «4 tabs only» of 06:46 was wrong — corrected). A page
   instance built by our code: `CraftingGUI_C` shows the hotbar only (no inventory, no paperdoll — the panels come with the module activation);
   `W_Attributes_C` and `W_FeatWindow_C` are complete with the hero's data (the test save's attributes are really 0 with 77 points unspent — the game's own
   page shows the same, frame 2026-11-07 06:5x). Native parents: `WindowRoot` (`SetupUI`, `Open`, `Close`, `SendWindowOpenedNotifications`, `m_GUIModule`),

@@ -152,6 +152,9 @@
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +
     KrinikConanModPackStatus»; 16:48 «KrinikIntro · KrinikConanModPackStatus — вот это все организационные вопросы» · «Я предлагаю их объединять в
     KrinikConanModPackManager» — the shipped set is 7: Camera, Archery, Gameplay, UI, Graphics, RussianTranslation, ModPackManager.)
+    **Since 2026-11-07 the set is 8 — `KrinikConanLocomotion`:** jumping while shooting (moved from Archery), jumping while swinging a melee weapon (new), the
+    jump and the run growing with the hero's level and attributes (moved from Gameplay), PLAN — jumping off a climbed wall. (`[OWNER]` 2026-11-07 10:39
+    «Немного изменяем состав и структуру модов Krinik» · «ДОбавляем мод KrinikConanLocomotion» — the list verbatim in `games/ConanExiles/mods/KrinikConanLocomotion.md`.)
 
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · two maps for every game · KAIF
 feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images — WebP, never PNG). The
