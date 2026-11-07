@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0484 · 2026-11-07 · ❌ · #input #conan #mouse-seq
+class: a synthetic press left «held» in the game after an input series
+mechanized: none yet — NEXT: `mouse-seq.ps1` sends `rup`/`lup` and up for every key it pressed in a `finally` at the end of every run
+**Lesson:** after the M6 series (RMB down … up, Space, Shift) the owner's map / hub behaved «словно ПКМ» held (2026-11-07 20:21) — the game missed a release. A release
+sent by request (`mouse-seq -MinIdle 0 "rup,lup,kup:0x10,vkup:0x20"`, the owner's «отлепишь меня плиз?») cleared it. Every input tool releases everything it pressed,
+always, even on error; a run that leaves a button down breaks the owner's game after the agent has moved on.
+
 ### EXP-0483 · 2026-11-07 · ❌ · #input #rule30 #guard #conan
 class: a real-input tool outside the guard's list, and a guard that checks once per command
 mechanized: `input.ps1` probes owner-idle before any send (exit 5); `owner-presence.mjs` REAL_INPUT now includes `input.ps1` and `m6-air-shot.sh` (refused a run live 19:3x)
