@@ -242,11 +242,12 @@ Also on every switch the hub's bottom bar `WBP_ButtonBar_C` is re-created (vanil
 
 ## Steps
 
-1. [ ] **Recon (remote, read-only):** at a switch, in order with timestamps — the old window's fate (removed from the viewport? destroyed? still valid one
-   frame later?), the new window's birth, the births of widgets inside it until quiet, its `GetDesiredSize` per frame. Cases in a TC file; frames at 144 fps.
-2. [ ] **FORK — how the old page stays:** (a) keep the old window object alive and in the viewport until the new one is ready (re-add / hold a ref, Z-order);
-   (b) a frozen copy of the screen under the hub (render target of the viewport); (c) another engine way found by recon. `FORK:` line with the recon doc.
-3. [ ] **The «complete» signal:** from step 1's numbers — e.g. no widget born in the new window for N frames and its desired size unchanged; the new window at
-   `RenderOpacity` 0 (laid out and ticking, not drawn) until then.
-4. [ ] **Build** in `KrinikConanUI` (a section next to `krinik_pause_in_menu`, which already hooks the carousel), log lines per switch (delay, frames waited).
-5. [ ] **Test** by the acceptance on all 9 tabs, both directions, random order, real clicks; control — the section off; crash watch.
+1. [x] **Recon** — DONE 2026-11-06 22:13–23:50 («Progress» above: the old window's fate, births until quiet, the native rebuild on activation).
+2. [x] **FORK — how the old page stays** — DECIDED by the owner 2026-11-06 23:48 (our own controller, verbatim above); built as the mixed design 2026-11-07
+   (our instances for 7 tabs; the game's held pages for Снаряжение / Параметры — the game tolerates no second inventory or stats window, v6 / v8).
+3. [x] **The «complete» signal** — no UserWidget born for 2 samples (the game's held pages); our pages are complete when kept.
+4. [x] **Build** — DONE 2026-11-07 07:35 (KrinikConanUI section `krinik_hub_controller`, pack `374b90d`; idle while closed `692460f`); one log line per hub close.
+5. [ ] **Test** — by the remote in the background: DONE (S1–S5, one page per tick on every probed switch, 0 errors). OPEN: real clicks, Esc / Tab, a 144 fps
+   recording by `hub_switches.py`, the control with the section off — the game in front (the owner's word; STATUS «Awaiting»).
+6. [ ] **Open:** a direct click between Снаряжение and Параметры (3–4 bare ticks); the minimap helper's «Свои маркеры» click on our map; the API for the
+   other mods' embeds stays a draft — only Simple Minimap needed an adapter in the mixed design.
