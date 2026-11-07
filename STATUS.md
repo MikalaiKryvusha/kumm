@@ -147,7 +147,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > paks'; next: by pak groups. Bug 64 item 21 (Damage Meter window) seen fixed at 4K 08:51. **Item 27 (Accessory System «Снаряжение EAA» tab) partly fixed 09:00**
 > (pack `f007d6e`: captions «(торговец)» / «(админ)» fit, the legend regrouped and on screen; left — the legend wider than its panel, gem letters' font); the window
 > opens by the remote (game map, `acs_WardrobeGUI`). Queue (guide's 1.0.0 list, item 13): mod windows from `_config/compat/ui-overflow-candidates.tsv` by frames —
-> the thrall stats panel needs a thrall stand first.
+> the thrall stats panel needs a thrall stand first. **09:0x–09:12 two walks of 12 mod settings windows** (report `2026-11-07_conan-mod-settings-windows-walk.md`):
+> fixed Al-Merayah labels, «Сохранить» buttons, Emberlight farming descriptions (pack `291942b`); open — Pickup+ hint English (row translated, not
+> reaching the game), Ironlight admin headers and SAVE/CLOSE English (not gathered — the asset-strings path).
 > ✅ **Chat of 2026-11-06 (fifth) soft-closed 2026-11-07 00:32 +03:00 by the owner's word (00:30, «завтра продолжим»).** The debt of the two forced closures of 2026-11-06
 > is PAID: STATUS trimmed (89 lines to the chronicle), experience lint 0 findings, attribution lint 0 new (bug 67 line marked), budget gate passed, engine
 > syntax + 4 core tests green, the chat's claims re-checked (deployed KrinikConanUI = build 2, test mods removed, modlist and settings restored, pushes in sync).
