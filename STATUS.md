@@ -142,8 +142,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > of KrinikConanUI (pack `374b90d`, deployed; `692460f` — idle while the hub is closed, 2 open/close cycles 0 errors):** one page per tick on every probed
 > transition, the minimap row on our «Карта», 0 errors; bug 64 item 15 → 🟡. Also this chat: bug 79 respawn case passes (no freeze); `pult.sh` works by an
 > absolute path (pack `42fc264`). NEXT: the player's
-> path with the game in FRONT (real clicks, Esc/Tab, 144 fps recording — the owner's word needed: the game was ordered background-only), the Simple
-> Minimap adapter on our «Карта», v7 into KrinikConanUI; the 144 fps recording and real clicks when the game may come to the front.
+> path with the game in FRONT (real clicks, Esc/Tab, 144 fps recording — the owner's word needed: the game was ordered background-only); the minimap
+> helper's «Свои маркеры» click on our map; the Damage Meter window frame (bug 64 item 21 — the fix applied 2026-10-26, never seen). In flight 08:3x: our Lua
+> mods' cost A-B-A-B (TC `TC_conan_our_lua_mods_cost_abab_2026-11-07.md`; A-B-A done — CPU within noise, stutters A 32–44 vs B 26–27 per flight).
 > ✅ **Chat of 2026-11-06 (fifth) soft-closed 2026-11-07 00:32 +03:00 by the owner's word (00:30, «завтра продолжим»).** The debt of the two forced closures of 2026-11-06
 > is PAID: STATUS trimmed (89 lines to the chronicle), experience lint 0 findings, attribution lint 0 new (bug 67 line marked), budget gate passed, engine
 > syntax + 4 core tests green, the chat's claims re-checked (deployed KrinikConanUI = build 2, test mods removed, modlist and settings restored, pushes in sync).
