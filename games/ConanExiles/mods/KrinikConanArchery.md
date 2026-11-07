@@ -23,7 +23,7 @@ name — «мод KrinikConanAim переименовываем в KrinikConanAr
 | Lua | the hero's arrow flies to the camera's aim point; the arrow look; leaving the aim on RMB release; the camera above the arrow in first person; aim kept on a new draw; the full-charge sound only for the player's hero |
 | Lua 0.5.0 | Oblivion Remastered ballistics: gravity 0.55, speed by the draw, minimum 0.5 |
 | Lua 0.6.0 | the per-tick gravity recompute removed — the arrow's curve `FC_BowProjectileGravCurve_*` is dropped |
-| Lua 0.7.0 | shooting in a jump: the bow fires in the air, a jump mid-draw takes off |
+| Lua 0.7.0 | shooting in a jump: the bow fires in the air, a jump mid-draw takes off — **MOVED 2026-11-07 to `KrinikConanLocomotion` (section `krinik_air_combat`, notes `KrinikConanLocomotion.md`) by the owner's word 10:39; no longer in this mod** |
 
 No overlaps: the 2h_bow montage is in the game's pak only among the build's 101 containers (`retoc list --path`, 2026-10-28). Cases — KUMM
 `testcases/TC_conan_bow_*_2026-10-2*.md`.
