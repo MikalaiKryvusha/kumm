@@ -131,6 +131,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> ⚠️ **Чат 2026-11-07 закрыт принудительно 2026-11-07 09:46 +03:00 на 85 % окна: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) —
+> долг платит первый /end-chat-soft.** Ложных утверждений на месте: нет (исправлены в этом же чате: «наша страница характеристик не привязана к герою»,
+> «мод мини-карты держит одну строку», выдуманный хеш пака — во всех местах). Игра закрыта, замок снят, всё запушено.
+> **ПЕРВЫМ в следующем чате:** (1) загон Emberlight — таблица готова `ConanExiles/_config/localization/asset-strings/Emberlight__W_AnimalPen.tsv`, нужна
+> строка `krinikBuild` для Emberlight в `modpack.json`, сборка пака (как у Ironlight, `games/ConanExiles/mods/Emberlight.md` «Open»), выкатка, кадр
+> `walk-mod-windows.sh <dir> W_AnimalPen`; (2) проверка пути игрока для контроллера хаба — ждёт слова владельца об игре впереди (раздел «Awaiting»);
+> (3) обход остальных окон модов из `_config/compat/ui-overflow-candidates.tsv` тем же циклом (EXP-0478).
 > **NOW 2026-11-07 06:47 +03:00 — chat of 2026-11-07, `/dayloop` (the owner's «Работай автономно» 06:24), plan 48:** the v4 crash CAUSE found — a stale Lua ref to a page the
 > game destroyed (each native «Параметры» activation kills other stats windows); v5 keeps pages by name (27 switches, 0 crashes). **v7 = the mixed controller
 > (pack `aec1471`, `hubswitch/shadow-pages-v7.lua`):** our own pages for 7 tabs, the game's own «Снаряжение» and «Параметры» held invisible until quiet (the game
