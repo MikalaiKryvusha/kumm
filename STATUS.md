@@ -158,6 +158,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **18:31 DECISION `[OWNER]` «консервативная растеризация» · «мне нравится, пробуем.»** FIRST next: read `researches/conan-shadow-flicker/2026-11-07_global_shader_rebuild_recon.md`
 > (a helper wrote it) → if feasible: patch `NaniteRasterizer.ush` setup (C0/C1/C2 += ½·(|Edge.x|+|Edge.y|), shadow views only) + HW raster conservative state, rebuild, A/B on the
 > clean stand (`stand-keeper.sh`, fixed cam, 11:00 per clip, turning 0.0025) — the owner judges by eye. Game is running under RenderDoc (PID 8396) — relaunch plain for the A/B.
+> **18:35 recon done (`…/2026-11-07_global_shader_rebuild_recon.md`):** the Nanite raster of WPO foliage is a MATERIAL shader (programmable raster, includes Material.ush),
+> not in the global cache → the route is a MATERIAL OVERRIDE MOD: patch the kit's `NaniteRasterizer.ush` (scoped to the VSM permutation), recook `M_Foliage`
+> (`/FLX_Materials/Materials/Environment/Core/M_Foliage`, in the kit) in a Krinik kit pak (as KrinikConanUI), ship via Mods/. Risks: kit CL 378787 vs game 379176; the palm MIs may
+> carry static switches (own shader maps, not in the kit). Back up the kit file before editing; restore it after the cook so other kit mods build unpatched.
 > ~~**FIRST next chat (bug 67):** the forced re-render with the light still blinks ×100 (16:26) → leaflets are lost by the shadow re-render~~ (refuted above) — test the Nanite cluster
 > buffers (double MaxCandidateClusters / MaxVisibleClusters / MaxNodes, `nanitestats virtualshadowmaps`), the order in bug 67 and the recon
 > `researches/conan-shadow-flicker/2026-11-07_leaf_shadows_fill_in_recon.md`; measure by `shadow_pop_map.py` on a 2-s window capture; the owner watches live. Game open (PID 49596) with live test values (throttle 0/0, pool 8192, Nanite 0.25, t.MaxFPS 144) — a restart returns the pack's values.

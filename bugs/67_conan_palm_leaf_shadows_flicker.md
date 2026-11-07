@@ -213,7 +213,7 @@ no longer culls it); (2) after the half-edge constants (`:89–91`, 8.16 fixed p
 `C0 += (S/2)·(abs(Edge12.x) + abs(Edge12.y))`, same for C1 / Edge20, C2 / Edge01 — the edge-function test at the texel centre then passes for any texel the triangle
 overlaps; (3) skip the top-left fill rule (`:99–101`) on that path (conservative coverage has no shared-edge ownership); (4) depth outside the true triangle is
 extrapolated from `DepthPlane` — clamp it to the triangle's nearest vertex depth to avoid a leak; (5) the hardware raster path (large clusters) needs the D3D12
-conservative-raster PSO state for the VSM pass. Find the VSM permutation define in `NaniteRasterizer.usf` (`VIRTUAL_TEXTURE_TARGET` or similar) to scope it. Accept by
+conservative-raster PSO state for the VSM pass. Scope it by `#if VIRTUAL_TEXTURE_TARGET` — the VSM permutation define (`NaniteRasterizer.usf:256`, 18:36). Accept by
 the clean-stand blink count (turning 0.0025, wind) and the owner's eye; check the leaf-shadow thickness at −1 against today's `bias_compare.webp`. `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
 
 ## Goal vector and acceptance
