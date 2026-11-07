@@ -45,3 +45,7 @@ Renamed from «Krinik Russian Translation» 2026-10-30 (W33). ≈54 451 entries 
   `Game.locres` has neither the key nor the Russian text — the game shows English. `locres-set-tr.py` only replaces existing entries. Next: find where the
   build drops it (the source has `<` and `|` — suspect the gather step), or teach the writer to ADD an entry (namespace, key, the source string's hash);
   then sweep the table for other rows absent from the locres (a script: every `dm-fish-ru.tsv` row's key present?).
+  **Sweep done 2026-11-07 09:1x:** of 23 275 translated rows, 22 717 join a key of `all-mods-ftext.csv`; 427 keys are absent from `Game.locres`, 233 of them look
+  like phrases — many are the authors' placeholders («XX_Desc: …», «Example Help Text»), some are live (the Pickup+ hint). The list:
+  `ConanExiles/_config/localization/locres-missing-2026-11-07.tsv` (row · asset · EN). Next: mark the live ones by the asset (a widget or a table the game reads),
+  then find the drop in the build.
