@@ -89,6 +89,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 ## ❓ Awaiting human review (interviews / homework)
 
+- ❓ **2026-11-07 07:4x — the hub controller's player-path test needs the game in FRONT** (real mouse clicks on the tabs, Esc/Tab closing, a 144 fps recording
+  of the switches): the work of plan 48 runs background-only by the owner's word of 2026-11-06 23:32. Asked in the chat; until his word the section is proven
+  by the remote's switches only.
+
 > Decisions the agent must not make alone (brand/UX/architecture), or actions only the human can do
 > (test on real hardware, external accounts). Filed in `interviews/` and `homeworks/`.
 
