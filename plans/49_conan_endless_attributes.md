@@ -35,6 +35,6 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
 
 - [ ] Recon: where the cap 20 lives (the attribute data table / `StatHolder` / the UI's `+` condition), and the per-point curves (game map, attributes section).
 - [ ] Recon: the attribute screen's widgets (`W_Paperdoll…` / the attribute tree), how a row draws its scale and perk nodes, and the perks' data (are there perks past 20 — the
-      game has none; what a page past 20 shows is the owner's decision → mockup).
+      game has none; `[AI]` what a page past 20 shows goes to him as a mockup).
 - [ ] Mockup of the paging (scroll bar vs page switch) on our own frame, statuses on every element — to the owner.
 - [ ] Build, cases, frames at four resolutions.

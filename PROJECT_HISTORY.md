@@ -3,6 +3,56 @@
 
 
 
+## 2026-11-07 23:03 +03:00 — STATUS «Where to continue» blocks of 2026-11-07 chats 4–5 (bug 85, the bow features, bug 67 tail), moved verbatim at the soft closure
+
+> **NOW 2026-11-07 19:2x — chat of 2026-11-07 (fourth), `/dayloop` by the owner's word 18:56.** Bug 67 (palm shadows, a month) DONE — below. Game log after the
+> deploy: no M_Foliage / shader errors; all 134 loaded foliage kinds are `M_Foliage` children — an olive tree (−132700, 202500) renders normally by frame 19:22. Open: a gameplay crash pass. Next in
+> the loop: Locomotion M6 — the hero DID jump with the bow by real input at 19:24:59 and 19:26:00 (the mod's log «выстрел в воздухе разрешён»), remote Z probes are too slow;
+> judge by that log line + a 60-fps clip. 19:37: draw + release by real input fired an arrow; the synthetic JUMP is unreliable (2 of ~7) — see the notes «19:37 result». Rule 30 hole closed (`input.ps1`).
+> Then quick-loot R3, plan 45 boss spawns. Game running (background launch 19:14), keeper timer on.
+> **NOW 2026-11-07 21:42 +03:00 — the crash item 00 is CAUSED AND FIXED (bug 85, `bugs/85_conan_crash_keybind_lua_races_game_thread.md`):** a `RegisterKeyBind` callback (Archery's LMB/E/Q) runs Lua
+>   on UE4SS's input thread while the mod's game-thread Lua runs — unlocked, one Lua state (UE4SS source at `8333063`; upstream half-fixed it in `97c5642a`). The «two
+>   corpses» line below is REFUTED (one corpse, the late-copy pass). Archery + Camera off key binds (Camera → hero event `InpActEvt_AnyKey_K2Node_InputKeyEvent_1`); the
+>   guard refuses `RegisterKeyBind`. OPEN: (1) KrinikConanUI twins — 4 sites (LMB ×3, Esc), need game-thread click events (`WBP_ButtonBase`, hub widgets); (2) Camera
+>   K4 failed in the 21:38 run (its delayed action never ran) — fixed, check K4–K8 at the next launch (numpad DEAD in the run the owner plays now); (3) Archery K10 «arrows
+>   into an already dead body → its loot» (owner 21:41) — written, next launch; (4) the crash check is the owner's own gameplay (`[OWNER]` 21:39 «я вылет при убийстве буду
+>   проверять сам» · «это ты не сможешь воспроизвести»). Cases `testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md`.
+> **NOW 2026-11-07 22:50 +03:00 — `/dayloop` (owner «комп твой, работай автономно» 22:03), the owner shoots on the agent's stands («стреляь буду я, а ты читать логи» 22:24).** PASS: camera
+>   numpad K4–K7, draw time by Agility K11–K12 (montage slowed during the charge), missed-arrow alert cost ≤ 1 ms (SphereOverlapActors). BROKEN, in work: headshot ×2 damage /
+>   ×2 XP — UE4SS runs Blueprint-function callbacks AFTER the body (EXP-0487), the doubling lands after the kill; plan: decide in the OUT param of the projectile's
+>   `GetProjectileDamageOverDistance` (returns before the damage) and get the bone there by a line trace (`LineTraceSingleForObjects` types {2,3} passed; a batch probe
+>   crashed the game 22:47 — EXP-0488). Recorded, not built: hostile mobs give up / leash (3 blind attempts, recon the beast AI next), timid animals flee 2 min, headshot
+>   slow motion 0.5× 2 s, bugs 86 (attribute caption), 87 (beasts walk into the hero), 88 (debuff line fonts), plan 49 (endless attributes, screen paging).
+> **NEXT LAUNCH — run first (all in the game folder, none run yet; cases in `testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md`):** Camera numpad K4–K8;
+>   Archery: arrows into an already dead body → its loot (K10), draw time by Agility 5 s × 0.99^n (K11–K12, owner 21:43/21:46), a missed arrow wakes mobs within 10 m via
+>   the hate list `UpdatedHeardActors` (K13, owner 21:50), headshot ×2 damage + first-hit one-shot headshot ×2 XP (K14–K17, owner 21:57). Pack `1f3f120`.
+>   **Owner's order 22:00 NOT BUILT:** drawing / shooting the bow from a crouch keeps the crouch (recon: what stands the hero up on RMB). Notes — `games/ConanExiles/mods/KrinikConanArchery.md` → Open.
+> **00. (was) CRASH FIRST (2026-11-07 21:17, the owner playing):** EXCEPTION_ACCESS_VIOLATION reading 0xffffffffffffffff inside UE4SS. UE4SS.log tail: an arrow hit an Imp → the Imp
+>   died → `KrinikConanArchery` «arrows in the corpse» ran on two `Corpse_C` births at 21:17:54.36 / .38 → crash. Prime suspect: the corpse-arrow code touching a destroyed actor (the known
+>   class: a dead creature kept in a Lua ref — game map «Stand rule» 2026-10-28). Crash window closed (PID 26460). Read the code of `on_corpse_born` / the re-attach first; repro with arrows into imps. The owner 21:18: many bow kills without a crash — a RARE case; the unusual line: TWO `Corpse_C` births 20 ms apart (a race of two corpses / one arrow set?).
+> ✅ **19:19 BUG 67 DONE** (`bugs/67_DONE_…`, report `testcases/reports/2026-11-07_conan-palm-shadow-wpo-bound-fix.md`): deployed by the build (`modpack.json`
+> KrinikConanGraphics kind `pak`), fresh launch: bound 100, sun 0.0025, blink 0.14–0.24 % at wind 0.21–0.22. Guide line marked fixed. Open: a gameplay crash pass with the pak.
+> ✅ **19:10 BUG 67 FIXED AND SEEN:** `KrinikConanGraphics.pak` (M_Foliage with `MaxWorldPositionOffsetDisplacement` 100 cm, kit-cooked) → turning sun 0.06–0.44 % blink vs
+> 12–16 % before at the same wind; shadows sharp, wind on. Installed by hand in `Mods/` (before KrinikConanGameplay) + `_unpacked/KrinikConanGraphics/`. NEXT: the
+> `modpack.json` entry (pak + modlist order) and a real deploy; Engine.ini sun 0.0025 deploy; a gameplay pass; the kit's `M_Foliage` stays modified (backup in the pack).
+> **18:54 ROOT CAUSE FOUND (bug 67 «THE KEY»):** `M_Foliage.MaxWorldPositionOffsetDisplacement = 0` (palm MIs inherit) — Nanite leaf cluster bounds get no wind padding; a
+> turning sun re-culls every frame and drops wind-displaced leaflets on some frames. The hero / trunk / rocks (no WPO) never blink. FIRST: set a real bound (≈100 cm) —
+> live test, then cook `M_Foliage` with it in `KrinikConanGraphics` (kit route proven 18:40; WITHOUT the conservative patch), owner's eye. Test pak removed 18:52.
+> **18:50 RESULT:** the conservative pak is IN THE GAME (`Mods/KrinikConanGraphics.pak`, modlist before KrinikConanGameplay — a test install, not in `modpack.json`): leaflet
+> shadows visibly fuller, but the blink count under the turning sun did NOT drop (24–29 % at wind 0.23–0.25 vs 17–20 % before) — texel-centre sampling is not the main
+> cause; the owner's eye asked (voice). If he sees no gain: remove the pak (file + modlist line; backup `scratchpad/modlist.before.txt` is temporary — the line to delete is
+> `KrinikConanGraphics.pak`) and go back to the evidence: the blink needs a turning light AND moving leaves.
+> ✅ **18:43 kit RESTORED** (shader sha256 `40b1c41c9f90a58dc0de…` again, `active.txt` back in KrinikConanUI) after the cook 18:40–18:42: `KrinikConanGraphics.pak` 1.18 MB
+> (M_Foliage + `ShaderArchive-KrinikConanGraphics`, 123 shaders compiled with the patch, «0 error(s)») → `ConanExiles/_unpacked/KrinikConanGraphics/`. NEXT: install the pak
+> (Mods/ + modlist), relaunch plain, A/B on the clean stand. The cook recipe (the kit state DURING a cook, corrected stamp — it ran 18:40, not «18:5x»):
+> `F:/CEUE5Devkit/Engine/Shaders/Private/Nanite/NaniteRasterizer.ush` = the CONSERVATIVE patch (original in the pack
+> `_config/devkit/engine_shader_patches/NaniteRasterizer.ush.orig`, sha256 `40b1c41c9f90a58dc0de…`; README there); the kit's ACTIVE mod moved from KrinikConanUI to the new
+> kit mod `UE4/Content/Mods/KrinikConanGraphics` (`active.txt`; CookInfo cooks `/FLX_Materials/…/M_Foliage`); `kit-buildmod.py` learned plugin packages (`PLUGIN_ROOTS`).
+> Cook: `python -I -X utf8 _config/devkit/kit-buildmod.py KrinikConanGraphics <out>`.
+> ~~**FIRST next chat (bug 67):** the forced re-render with the light still blinks ×100 (16:26) → leaflets are lost by the shadow re-render~~ (refuted above) — test the Nanite cluster
+> buffers (double MaxCandidateClusters / MaxVisibleClusters / MaxNodes, `nanitestats virtualshadowmaps`), the order in bug 67 and the recon
+> `researches/conan-shadow-flicker/2026-11-07_leaf_shadows_fill_in_recon.md`; measure by `shadow_pop_map.py` on a 2-s window capture; the owner watches live. Game open (PID 49596) with live test values (throttle 0/0, pool 8192, Nanite 0.25, t.MaxFPS 144) — a restart returns the pack's values.
+
 ## 2026-11-07 00:33 +03:00 - the blocks of the 2026-11-06 chats 1-4 of STATUS «Where to continue», moved at the soft closure of the fifth chat (verbatim; the bonsai trim)
 
 > ⚠️ **Чат 2026-11-06 (третий) закрыт принудительно 2026-11-06 17:21 +03:00 на 85 %:** церемонии пропущены (судья по последним пунктам, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft.
