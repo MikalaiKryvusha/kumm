@@ -91,6 +91,12 @@
 
 ## Entries
 
+### EXP-0476 · 2026-11-07 · ❌ · #conan #tools #remote #testrun
+class: shell-lied
+mechanized: `ConanExiles/_config/pult.sh` converts its folder by `cygpath -w` and stops on an empty game path (exit 2)
+**Lesson:** two slips of one morning: `pult.sh` called by an absolute Git-Bash path handed Windows Python «/d/…» and wrote commands into the drive root (40
+lines of «No such file», no error code that meant it); and a run report's `- Functional run:` bullet is not seen by `kaif-testrun-lint` — the label starts the line.
+
 ### EXP-0475 · 2026-11-07 · ✅ · #conan #ue4ss #crash #hub #lua
 class: stale-raw-pointer
 mechanized: `ConanExiles/_config/hubswitch/shadow-pages-v5.lua` keeps widgets by name; the stale-ref rule stands in the game map
