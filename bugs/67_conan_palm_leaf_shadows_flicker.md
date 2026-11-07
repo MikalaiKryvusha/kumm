@@ -222,7 +222,16 @@ the small gaps between leaflets filled, edges still sharp — the patch is live.
 **18:47–18:49 (c16) — conservative raster does NOT remove the blinking by the count:** wind 0.23–0.25, turning 28.6 / 24.0 / 26.8 % (without the patch at 0.23–0.27:
 17–20 %); still sun 0.36 / 0.15 %. So texel-centre point sampling («THE LINE» of 18:2x) is NOT the main cause — that claim is withdrawn as a cause (the line is real, the
 patch is live, the blinking stays). Caveat: the metric counts any back-and-forth within 3 frames, and fuller wind-moved leaf shadows may oscillate honestly; the owner's eye
-asked 18:5x (voice call). Pak still installed for his look. `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
+asked 18:5x (voice call). Pak still installed for his look.
+`[OWNER]` 18:51 «так же плохо, мигает» → the test pak removed (modlist line + file; modlist identical to the backup). Sway check 18:52: under a still sun the leaf shadow DOES
+sway smoothly (10 % of pixels change over 2 s, 0.5 per frame) — not frozen; turning: 0.9–3.4 per frame.
+**18:53 THE KEY (the owner 18:53 «почему тень ебучего героя с луком в руках - не мигает?» · «а листьев - мигает?!»):** the hero (skeletal, no WPO), the palm trunk and rocks
+(Nanite, no WPO) never blink — only WPO-animated Nanite leaves do. **Read live 18:54: `M_Foliage.MaxWorldPositionOffsetDisplacement = 0.0`; `MI_AfricanOilPalm01` / `02`
+`BasePropertyOverrides.bOverride_MaxWorldPositionOffsetDisplacement = false`** → Nanite does not pad the leaf clusters' bounds for the wind (`Nanite/NaniteSceneCommon.ush:59`
+pads by `MaxWPOExtent`); wind-displaced leaflets leave their cluster bounds; under a still sun the page set and culling stay fixed, under a turning sun every page is
+re-rendered and re-culled each frame, so out-of-bounds leaf clusters are dropped on some frames and kept on others; stronger wind → farther out → more blinking. Fits EVERY
+measurement of the day. Fix: a real `MaxWorldPositionOffsetDisplacement` on `M_Foliage` (the MIs inherit) — live test, then the kit mod (the cook route is proven).
+`[OWNER]` 18:55 «ЗАЧЕМ ЭТО РЕШАТЬ КАЖДЫЙ КАДР????» — answered: a new light direction needs a new shadow render and so a new cull; the defect is the zero bound, not the per-frame cull. `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
 
 ## Goal vector and acceptance
 
