@@ -131,6 +131,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-07 ≈11:00 +03:00 — chat of 2026-11-07 (second), `/dayloop` (the owner's «работай автономно» 10:12), the owner's queue in order:**
+> DONE + pushed (pack `f59a5a2`, KUMM `b3f6ce0`): the empty hub on fast tab switching (38 of 38 bursts), EoT icons on «Параметры» on time, the minimap row on our
+> «Карта», the «E Взять» backing under E (alpha 0.45). IN WORK (deployed, under test): (1) `KrinikConanLocomotion` — the new mod (HOUSE_RULES 19): jump
+> shooting moved from Archery, the run/jump growth from Gameplay (its Lua half gone), melee — one swing in the air (`krinik_air_combat`); (2) «E Взять» checks
+> 10 / s while shown, fade 0.10 s; (3) the hub's middle «dances» on item select — `CraftingGUI` ScaleBox content height followed the item (fix: `SizeBox_2`
+> fixed height at birth, `krinik_ui_fixes` 1.6.0; live A/B shift 2–3 px → 0; a 1 px «Прочность» residual inside the details panel to read). QUEUE: (4) the
+> quick-loot rim — no animations, instant moves, then drop our hide-the-rim patch (`krinik_loot_rim`) if the last-cell jump is gone (the owner 10:57);
+> (5) the two bag-header tooltips («Выберите стопку…») in the game's tooltip look (10:58); (6) eating / drinking in the inventory raises hunger / thirst
+> slowly under the hub's world time 0.03 — fix «по аналогии, как исправляли по крафту» (10:59–11:00); then palm shadows re-shoot (bug 67), the Emberlight pen.
 > ⚠️ **Чат 2026-11-07 закрыт принудительно 2026-11-07 09:46 +03:00 на 85 % окна: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) —
 > долг платит первый /end-chat-soft.** Ложных утверждений на месте: нет (исправлены в этом же чате: «наша страница характеристик не привязана к герою»,
 > «мод мини-карты держит одну строку», выдуманный хеш пака — во всех местах). Игра закрыта, замок снят, всё запушено.

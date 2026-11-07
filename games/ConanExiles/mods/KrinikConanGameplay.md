@@ -13,8 +13,9 @@ the pak (formerly KrinikLevelUncapped, a fork of MrSerji's Level 1000 — the ow
 - Pak (not in git), built with no kit: `python -I -X utf8 _config/devkit/build-level-mod.py --name KrinikConanGameplay --work <empty folder outside the
   pack> --out _unpacked/KrinikConanGameplay` (needs the MrS archive in the library and `_tools/retoc`, `_tools/UAssetGUI`, `_tools/repak`; step 6 checks
   3 × 10 000 rows against the generators). The builder writes `modinfo.json` itself — the version = the manifest's `packVersion` (1.0.0) since 2026-10-31.
-- Lua `_unpacked/KrinikConanGameplay/ue4ss/Scripts/main.lua` + `krinik_oblivion_locomotion.lua` → `ue4ss/Mods/KrinikConanGameplay`; log prefix
-  «[KrinikConanGameplay:<section>]». The pak stays LAST in the load order (it replaces three vanilla progression tables whole).
+- **No Lua half since 2026-11-07:** the section `krinik_oblivion_locomotion` moved to `KrinikConanLocomotion` (`[OWNER]` 2026-11-07 10:39, HOUSE_RULES rule 19;
+  notes `KrinikConanLocomotion.md`); the game's `ue4ss/Mods/KrinikConanGameplay` folder was removed file by file. The pak stays LAST in the load order (it
+  replaces three vanilla progression tables whole).
 
 ## What it changes
 
