@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0483 · 2026-11-07 · ❌ · #input #rule30 #guard #conan
+class: a real-input tool outside the guard's list, and a guard that checks once per command
+mechanized: `input.ps1` probes owner-idle before any send (exit 5); `owner-presence.mjs` REAL_INPUT now includes `input.ps1` and `m6-air-shot.sh` (refused a run live 19:3x)
+**Lesson:** within one command `mouse-seq` refused («OWNER AT THE KEYBOARD») and the next line, `input.ps1 -Key 0x20`, still sent Space into the game while the owner
+typed — the hook judges the command once at its start, and `input.ps1` had no probe of its own. Every tool that sends real input carries its own presence probe
+right before sending; the hook's list is the second layer, not the only one. When a new real-input tool is born, add it to the hook's regex the same move.
+
 ### EXP-0482 · 2026-11-07 · ❌→✅ · #conan #shadows #rendering #method #nanite #wpo
 class: a month of tuning knobs on the symptom instead of asking what does NOT show it
 mechanized: bug 67 closure; game map line «root cause»; `kit-foliage-wpo.py`

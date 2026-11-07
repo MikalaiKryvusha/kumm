@@ -21,7 +21,8 @@ const NOTE_EVERY_MS = 5 * 60 * 1000
 const PROBE = 'D:/work/ai_sandbox/_tools/owner-idle.ps1'
 // a RUN of the tool (its script file), not its name in text; git commands that only mention the files (add / commit / diff …) are not runs — the first version
 // refused `git add _config/mouse-seq.ps1` + a commit message naming it (2026-11-07 12:3x, a false hit)
-const REAL_INPUT = /(mouse-seq|hover-watch|launch-fg|esc-when-idle)\.ps1|(loot-aim|loot-take-clip|hub_run)\.sh/i
+// + input.ps1 and m6-air-shot.sh (2026-11-07 19:3x: input.ps1 sent a real Space while the owner typed — it was missing here and had no guard of its own)
+const REAL_INPUT = /(mouse-seq|hover-watch|launch-fg|esc-when-idle|input)\.ps1|(loot-aim|loot-take-clip|hub_run|m6-air-shot)\.sh/i
 const ONLY_GIT = /^\s*(cd\s+\S+\s*&&\s*)?git\s/i
 const STAMP = join(process.env.CLAUDE_PROJECT_DIR || '.', 'tools', 'hooks', '.owner-presence-note.stamp')
 

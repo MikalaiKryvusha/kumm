@@ -153,9 +153,9 @@
     (`[OWNER]` 2026-11-07 00:03 «заебал ты скрипты свои запускать без контроля того, работает игра, или нахуй упала к ебеням».)
 
 30. **No real input while a person is at the PC; a free PC is tested boldly.**
-    1. Before any real input or a game brought to the front (`mouse-seq`, `hover-watch`, `launch-fg`, `loot-aim`, `loot-take-clip`) — `powershell -File
+    1. Before any real input or a game brought to the front (`mouse-seq`, `input.ps1`, `hover-watch`, `launch-fg`, `loot-aim`, `loot-take-clip`, `m6-air-shot`) — `powershell -File
        D:/work/ai_sandbox/_tools/owner-idle.ps1`: exit 5 BUSY (keyboard/mouse touched < 10 s ago) → no such run, do the work that needs no input; exit 0 FREE → test.
-    2. The mechanical half: `mouse-seq.ps1` refuses with exit 5 by the same probe; the hook `tools/hooks/owner-presence.mjs` (PreToolUse, Bash|PowerShell) refuses
+    2. The mechanical half: `mouse-seq.ps1` and `input.ps1` (since 2026-11-07 19:3x — it sent a real Space while the owner typed) refuse with exit 5 by the same probe; the hook `tools/hooks/owner-presence.mjs` (PreToolUse, Bash|PowerShell) refuses
        those commands while BUSY and notes «компьютер СВОБОДЕН / ЗАНЯТ» into the agent's context at most once per 5 min.
     (`[OWNER]` 2026-11-07 12:36–12:37 «тебе бы было полезно видеть, что кто-то что-то с физической клавы набирает» · «когда это происходит - лучше тебе тесты не
     запускать» · «а когда с клавы никто не набирает - значит нет пользователя за ПК, можно тестить смело» · «разработай себе тулз…» · «пусть он в фоне, когда ты
