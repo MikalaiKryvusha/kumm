@@ -139,6 +139,25 @@ ours. The game's rebuild still runs, but invisibly. Next: this prototype in the 
   (to Attributes: our FeatWindow hidden, our W_Attributes shown) CRASHES.** In the bisects «ours» was always FeatWindow. NEXT bisect: (f) show our W_Attributes
   alone (no switch); (g) hide our FeatWindow, show our W_Attributes by opacity + next-tick visibility WITHOUT a native switch; (h) then with the switch.
 
+## Bisect (f) and the crash cause found; v5 crash-proof (2026-11-07 06:26–06:46 +03:00, background, TC `testcases/TC_conan_hub_shadow_pages_bisect_2026-11-07.md`)
+
+- **F1 (06:28:44):** our W_Attributes shown alone — alive, the page on the frame, but every attribute reads 0 (not bound to the hero: our instance never got
+  the module activation). **The crash (06:29:10) came on the NEXT command** — `SetRenderOpacity` over all of `_G.__ep` — no «исполнено» line for it;
+  `EXCEPTION_ACCESS_VIOLATION` inside UE4SS (two nested Lua frames, a read of `0x400abf6ee53`): one of our pages had been DESTROYED and Lua still held its raw
+  pointer. `hubswitch/page-census.lua` (live instances per class via `FindAllOf`, never through our refs): untouched, all 9 survive 90 s; after F1 our
+  `W_CharacterStatsWindow` was gone (06:35:16). In a clean game stats + attributes alone survive the first show of attributes — the destroyer is not that.
+- **The trace (06:46, `NotifyOnNewObject(UserWidget)` names + a mark per `OnChildActivated`):** each NATIVE activation of «Параметры» creates
+  `W_CharacterStatsWindow_C` twice and our stats instance is destroyed every time (v5 counter `lost` +1 per visit) — the game keeps one stats window
+  and kills the others. `OnChildActivated` fires TWICE per switch. The remote's `NextCarouselWindow` in the background game cycles only 4 tabs
+  (Снаряжение → Таланты → Хар-ки → Параметры → Снаряжение) — the other 5 need `SetCarouselIndex` or real clicks.
+- **v5 (`hubswitch/shadow-pages-v5.lua`): 27 native switches, 0 crashes, 0 Lua errors** (v4 crashed on the 2nd). Rules: a page is kept by its NAME and
+  found alive by `FindAllOf` before every touch; a lost page is rebuilt on the next tick; inside the native switch only the game's newborn gets opacity 0;
+  our previous page stays on screen through that frame. Frames: «Таланты» ours complete WITH the hero's data (level 76, 752 points); «Снаряжение» ours
+  shows only the hotbar — no inventory, no paperdoll (the centre/right panels come from `BP_Handle*PanelWidgetCreated`, called by the MODULE ACTIVATION).
+- **What the shadow design still needs:** our instances must be INITIALISED like the game's — recon of what the native activation calls on a window
+  (the parent classes' UFunctions: activate / open / signal), then call it once on our instance at its build. Pages the game keeps single (stats) need
+  that page's own path: adopt the game's instance instead of a second one.
+
 ## The hub controller API — DRAFT `[AI]` (for the owner's review; the owner set the direction 23:48, the calls are the agent's proposal)
 
 The controller (KrinikConanUI section `krinik_hub`) owns the 9 pages; a page id is the module name (`CharacterInventory`, `FeatWindow`, …).

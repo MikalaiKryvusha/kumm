@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0475 · 2026-11-07 · ✅ · #conan #ue4ss #crash #hub #lua
+class: stale-raw-pointer
+mechanized: `ConanExiles/_config/hubswitch/shadow-pages-v5.lua` keeps widgets by name; the stale-ref rule stands in the game map
+**Lesson:** the bisect blamed the switch while the crash came from a Lua table of widget refs — the game had destroyed one widget and the next touch read
+freed memory. Read the crash TIME against the last «исполнено» line: the crashing command is the one with no such line. Never hold UE4SS widget refs
+across ticks: keep the name, re-find with `FindAllOf`, and count what vanished (a census tool that never touches your own refs).
+
 ### EXP-0474 · 2026-11-07 · ❌ · #conan #ue4ss #crash #hub #bisect
 class: widget-mutation-inside-native-call
 mechanized: `ConanExiles/_config/pult.sh` exit 4 on a dead game (HOUSE_RULES 29) stops the series; the crash rule stands in the game map

@@ -564,6 +564,12 @@ Lua-моды UE4SS ждут только отложенными действия
   **CRASH RULE (bisect 00:10, 5 steps):** `SetVisibility` on ANY widget inside a `CarouselWindow:OnChildActivated` hook (inside the native switch) crashes
   the game (EXCEPTION_ACCESS_VIOLATION in UE4SS) — `SetRenderOpacity` there is safe (prototypes v3/v4, 22:2x–22:35). Visibility changes go to the next tick.
   UE4SS `NotifyOnNewObject` with a page CLASS path did not fire for the game's page windows (00:11) — use the `UserWidget` notify + a class check.
+  **STALE-REF RULE (2026-11-07 06:29, plan 48):** a Lua ref to a widget is a raw pointer; the game DESTROYS extra page instances (every native activation of
+  «Параметры» creates `W_CharacterStatsWindow_C` twice and kills any other stats window, ours included) — touching the dead ref crashes inside UE4SS. Keep a
+  widget by its `GetFullName()` and find it alive through `FindAllOf(<class>)` before each touch (`hubswitch/shadow-pages-v5.lua`: 27 switches, 0 crashes).
+  `OnChildActivated` fires twice per switch. The remote's `NextCarouselWindow` in a background game cycles 4 tabs only (Снаряжение … Параметры). A page
+  instance built by our code is NOT initialised like the game's: `CraftingGUI_C` shows the hotbar only, `W_Attributes_C` reads 0 on every attribute;
+  `W_FeatWindow_C` is complete with the hero's data.
 - **Hub tab switching (2026-10-29 16:56, remote probes).** The tabs are changed by the NATIVE parent class of `W_Carousel_C`:
   `/Script/ConanSandbox.CarouselWindow` — `NextCarouselWindow` (E), `PrevCarouselWindow` (Q), `SetCarouselIndex`; the blueprint has no own Next/Prev
   (a hook by the blueprint path fails «no UFunction»). Module events lag the switch: `NextCarouselWindow` 17.535 → `XCS_Panel` false 17.681
