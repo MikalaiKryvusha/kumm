@@ -19,6 +19,8 @@ Conan Exiles 3.0.1 build, background game at 3840×2160; the windows opened as b
 - 09:07–09:08 — `bash walk-mod-windows.sh <dir> AMR_Settings EmberlightMasterConfig UIHortiSettings` after the fix.
 - 09:30–09:33 — walk 3: `walk-mod-windows.sh <dir> EAA_MagicUI EAA_Enchant EAA_Famemenu EAA_Armorsettings`; `locres-fixes-2026-11-07d.tsv` (12 enchanting
   buttons), regress lost 0 changed 12, the deploy, `EAA_Enchant` framed again.
+- 09:35–09:38 — walk 4: `EAA_Profession EAA_Adminmenu EAA_Codes EAA_Skilltree_General`; `locres-fixes-2026-11-07e.tsv` (the Shift+V line), regress lost 0
+  changed 1, the deploy, `EAA_Adminmenu` framed again — the line inside.
 - 09:11–09:12 — walk 2: `bash walk-mod-windows.sh <dir> HosavUIsettings IronlightAdminUI ExilesFishingTuning EAA_Classmenu`; sheet `mw6.jpg`.
 
 ## Checks
