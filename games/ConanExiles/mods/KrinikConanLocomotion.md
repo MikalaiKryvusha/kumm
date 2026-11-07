@@ -57,6 +57,11 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
   (the `input.ps1 -Key 0x20` press) — the hero DID jump with the bow and the air-shot permission fired; the remote Z probe is too slow (its answer comes after the
   landing), so «Z stayed −20068» proves nothing. No such line after 19:26 — the presses after `game-front.ps1` did not jump (its Alt tap = the game's dodge key may
   swallow them — check). NEXT: judge M6 by the mod's log line + a 60-fps clip around the press (not by remote Z); check the arrow left the bow (arrow count / a projectile).
+  **19:37 result:** the bow by REAL input works on the ground — draw (RMB) and release (LMB) fired arrow #3 (Archery log «#3 из лука» 19:37:19); `mouse-seq` itself
+  brings the game forward (Alt + SetForegroundWindow, lines 68–70) and gives the window back, so its Spaces went to the game, NOT to VS Code (the «spaces in VS Code»
+  claim above is withdrawn). The JUMP by a synthetic Space is unreliable: 2 of ~7 presses jumped (19:24:59, 19:26:00 — the mod's «прыжок с луком» line), the scan-code
+  and the new VK-only (`vkdown`/`vkup`, mouse-seq) Spaces after 19:28 did not; the idle (vanity) camera eats the first press (`EnableVanityCameraMode(false)` first).
+  NEXT: find what the two jumping presses had (timing after focus? the bow state?) — e.g. hold Space 200+ ms, press it twice; judge by the mod's log line.
 
 - **NEXT FEATURE (the owner 2026-11-07 10:50, verbatim):** «и было бы хорошо, если бы если игрок попадает в тайминг при ComboStep >= 1, и нажимает в этот тайминг пробел -
   чтобы герой подпрыгивал с замахом меча за голову, нанося удат в падении из пряжка на землю» — a combo finisher: inside the combo advance window (combo step ≥ 1)

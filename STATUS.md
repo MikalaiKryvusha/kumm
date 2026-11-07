@@ -134,7 +134,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **NOW 2026-11-07 19:2x — chat of 2026-11-07 (fourth), `/dayloop` by the owner's word 18:56.** Bug 67 (palm shadows, a month) DONE — below. Game log after the
 > deploy: no M_Foliage / shader errors; all 134 loaded foliage kinds are `M_Foliage` children — an olive tree (−132700, 202500) renders normally by frame 19:22. Open: a gameplay crash pass. Next in
 > the loop: Locomotion M6 — the hero DID jump with the bow by real input at 19:24:59 and 19:26:00 (the mod's log «выстрел в воздухе разрешён»), remote Z probes are too slow;
-> judge by that log line + a 60-fps clip; `game-front.ps1` (new) brings the game forward with proof, its Alt tap may eat the press. Rule 30 hole closed (`input.ps1`).
+> judge by that log line + a 60-fps clip. 19:37: draw + release by real input fired an arrow; the synthetic JUMP is unreliable (2 of ~7) — see the notes «19:37 result». Rule 30 hole closed (`input.ps1`).
 > Then quick-loot R3, plan 45 boss spawns. Game running (background launch 19:14), keeper timer on.
 > ✅ **19:19 BUG 67 DONE** (`bugs/67_DONE_…`, report `testcases/reports/2026-11-07_conan-palm-shadow-wpo-bound-fix.md`): deployed by the build (`modpack.json`
 > KrinikConanGraphics kind `pak`), fresh launch: bound 100, sun 0.0025, blink 0.14–0.24 % at wind 0.21–0.22. Guide line marked fixed. Open: a gameplay crash pass with the pak.
