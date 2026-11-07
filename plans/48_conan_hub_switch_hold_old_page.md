@@ -194,7 +194,12 @@ has only `Construct`), so «closed» = the game's page of the current tab has le
 from «Снаряжение» (`ActivateModule(CharacterInventory,false)`), from «Таланты» (`FeatWindow,false`) and «Карта» (`FullscreenMap,false`) — `CharacterInventory,false`
 closes the hub ONLY on «Снаряжение»: 3 closes, 3 reopens, 0 errors; frames — the bare world with no page of ours after each close, the complete «Снаряжение»
 after each reopen. Not yet: the player's Esc / Tab / «Закрыть» path (the game in front).
-NEXT: lazy build on open (the owner's design) instead of all at once; build lazily on open — the owner's design — instead of all at once; release by
+**v10 — lazy build + the RAM measurement (07:23–07:26, `hubswitch/shadow-pages-v10.lua`):** nothing is built at load; the first shown tab of ours is built on
+demand, the other six one per tick, nearest first alternating right/left (from «Таланты»: 3, 9, 5, 8, 6, 7); build cost (os.clock) max 77 ms, sum 311 ms —
+in the hub, «opening windows — lag allowed» (MASTER_PLAN). Private bytes: world 13 004 MB, hub 13 324, after the lazy build 13 189, after 5 close/open/sweep
+cycles 13 217 · 13 212 · 13 218 · 12 979 · 12 981 MB — flat (noise ≫ the pages' cost), no leak → **the lifetime stays the owner's first choice: keep until the
+world is left** (`[OWNER]` 2026-11-06 23:18, verbatim above). Frame after cycle 5: «Клан» complete.
+NEXT: build lazily on open — the owner's design — instead of all at once; release by
 the RAM measurement), the Simple Minimap adapter, then v7 as a section of KrinikConanUI; the 144 fps recording when the game may come to the front; real mouse clicks (`ButtonPressed`); the bottom-bar `WBP_ButtonBar_C` reborn per
 switch; the mods' embeds on our pages (API, inventory below).
 
