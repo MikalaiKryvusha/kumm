@@ -214,7 +214,15 @@ no longer culls it); (2) after the half-edge constants (`:89–91`, 8.16 fixed p
 overlaps; (3) skip the top-left fill rule (`:99–101`) on that path (conservative coverage has no shared-edge ownership); (4) depth outside the true triangle is
 extrapolated from `DepthPlane` — clamp it to the triangle's nearest vertex depth to avoid a leak; (5) the hardware raster path (large clusters) needs the D3D12
 conservative-raster PSO state for the VSM pass. Scope it by `#if VIRTUAL_TEXTURE_TARGET` — the VSM permutation define (`NaniteRasterizer.usf:256`, 18:36). Accept by
-the clean-stand blink count (turning 0.0025, wind) and the owner's eye; check the leaf-shadow thickness at −1 against today's `bias_compare.webp`. `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
+the clean-stand blink count (turning 0.0025, wind) and the owner's eye; check the leaf-shadow thickness at −1 against today's `bias_compare.webp`.
+**18:40–18:47 BUILT AND IN THE GAME:** kit cook of `KrinikConanGraphics` (M_Foliage + `ShaderArchive-KrinikConanGraphics`, 123 shaders, «0 error(s)», pak 1.18 MB), kit
+restored 18:43 (sha256 ok, active mod back to KrinikConanUI); pak installed in `Mods/` before KrinikConanGameplay (modlist backup in the scratchpad), game relaunched plain
+18:44, mounted, no fatal. **Seen 18:47 (hard shadow SMRT 0, still sun, wind off, 11:00, `scratchpad/cons_compare.webp`):** leaflet shadows visibly fuller, tips solid,
+the small gaps between leaflets filled, edges still sharp — the patch is live. Blink series (c16) running. Not yet in the manifest (`modpack.json`) — a test install.
+**18:47–18:49 (c16) — conservative raster does NOT remove the blinking by the count:** wind 0.23–0.25, turning 28.6 / 24.0 / 26.8 % (without the patch at 0.23–0.27:
+17–20 %); still sun 0.36 / 0.15 %. So texel-centre point sampling («THE LINE» of 18:2x) is NOT the main cause — that claim is withdrawn as a cause (the line is real, the
+patch is live, the blinking stays). Caveat: the metric counts any back-and-forth within 3 frames, and fuller wind-moved leaf shadows may oscillate honestly; the owner's eye
+asked 18:5x (voice call). Pak still installed for his look. `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
 
 ## Goal vector and acceptance
 

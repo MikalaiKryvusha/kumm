@@ -8,6 +8,14 @@
 **What it is.** A Lua mod (`ue4ss/Mods/KrinikConanGraphics`) + the build's optimized `Engine.ini` (distances, shadows, fog, DLSS, the sun step), the ini
 deployed by `Deploy-ModPack.ps1` through the manifest's `engineIni` field.
 
+## Kit pak — conservative shadow raster for foliage (bug 67, IN WORK since 2026-11-07 18:40; first build 18:42, 1.18 MB, 123 shaders, kit restored 18:43)
+
+The owner's decision 2026-11-07 18:31 (bug 67, verbatim there): leaf shadows cast in every frame — conservative coverage in the Nanite shadow raster. The raster of
+WPO foliage is a MATERIAL shader, so the mod overrides `/FLX_Materials/Materials/Environment/Core/M_Foliage` (shared by all foliage) cooked by the kit with the patched
+`Nanite/NaniteRasterizer.ush` (`_config/devkit/engine_shader_patches/`, VSM permutation only). Kit mod folder `F:/CEUE5Devkit/UE4/Content/Mods/KrinikConanGraphics`
+(`Local/CookInfo.ini` → `FilesToCook=/FLX_Materials/…/M_Foliage.uasset`; `kit-buildmod.py` cooks plugin packages via `PLUGIN_ROOTS`). The kit's shader is restored
+from `.orig` after each cook. Not built / not seen in game yet; open: the palm MIs' own static switches, the kit CL 378787 vs the game 379176.
+
 ## Engine.ini — the physics rebuild queue (2026-11-06 16:00 +03:00, Quick Win from OblivionRemasteredPerformanceFix)
 
 `p.Chaos.AccelerationStructureTimeSlicingMaxQueueSizeBeforeForce=100000` at the top of `[SystemSettings]` (Conan's default read live: 1000). A-B-A-B in one launch

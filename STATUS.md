@@ -162,7 +162,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > not in the global cache → the route is a MATERIAL OVERRIDE MOD: patch the kit's `NaniteRasterizer.ush` (scoped to the VSM permutation), recook `M_Foliage`
 > (`/FLX_Materials/Materials/Environment/Core/M_Foliage`, in the kit) in a Krinik kit pak (as KrinikConanUI), ship via Mods/. Risks: kit CL 378787 vs game 379176; the palm MIs may
 > carry static switches (own shader maps, not in the kit). Back up the kit file before editing; restore it after the cook so other kit mods build unpatched.
-> ⚠️ **KIT STATE since 18:5x (restore when done):** `F:/CEUE5Devkit/Engine/Shaders/Private/Nanite/NaniteRasterizer.ush` = the CONSERVATIVE patch (original in the pack
+> **18:50 RESULT:** the conservative pak is IN THE GAME (`Mods/KrinikConanGraphics.pak`, modlist before KrinikConanGameplay — a test install, not in `modpack.json`): leaflet
+> shadows visibly fuller, but the blink count under the turning sun did NOT drop (24–29 % at wind 0.23–0.25 vs 17–20 % before) — texel-centre sampling is not the main
+> cause; the owner's eye asked (voice). If he sees no gain: remove the pak (file + modlist line; backup `scratchpad/modlist.before.txt` is temporary — the line to delete is
+> `KrinikConanGraphics.pak`) and go back to the evidence: the blink needs a turning light AND moving leaves.
+> ✅ **18:43 kit RESTORED** (shader sha256 `40b1c41c9f90a58dc0de…` again, `active.txt` back in KrinikConanUI) after the cook 18:40–18:42: `KrinikConanGraphics.pak` 1.18 MB
+> (M_Foliage + `ShaderArchive-KrinikConanGraphics`, 123 shaders compiled with the patch, «0 error(s)») → `ConanExiles/_unpacked/KrinikConanGraphics/`. NEXT: install the pak
+> (Mods/ + modlist), relaunch plain, A/B on the clean stand. The cook recipe (the kit state DURING a cook, corrected stamp — it ran 18:40, not «18:5x»):
+> `F:/CEUE5Devkit/Engine/Shaders/Private/Nanite/NaniteRasterizer.ush` = the CONSERVATIVE patch (original in the pack
 > `_config/devkit/engine_shader_patches/NaniteRasterizer.ush.orig`, sha256 `40b1c41c9f90a58dc0de…`; README there); the kit's ACTIVE mod moved from KrinikConanUI to the new
 > kit mod `UE4/Content/Mods/KrinikConanGraphics` (`active.txt`; CookInfo cooks `/FLX_Materials/…/M_Foliage`); `kit-buildmod.py` learned plugin packages (`PLUGIN_ROOTS`).
 > Cook: `python -I -X utf8 _config/devkit/kit-buildmod.py KrinikConanGraphics <out>`.
