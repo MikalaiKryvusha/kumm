@@ -133,7 +133,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > tolerates no second inventory or stats window — v6, v8 closed the hub); 13 switches over all 9 tabs, 0 crashes, every frame the right page complete; per-tick
 > probe — one page per tick on 9 of 11 transitions, a direct click between «Снаряжение» and «Параметры» shows 3–4 ticks of bare world (open). Report
 > `testcases/reports/2026-11-07_conan-hub-controller-shadow-pages.md`. **v9 (pack `1d97341`) adds the lifecycle:** our pages collapse when the hub closes (event
-> checks on Esc/Tab/ActivateModule, no timer), back on reopen — 3/3 by the remote. NEXT (plan 48 «v7», «v9»): lazy build on open, RAM, the Simple
+> checks on Esc/Tab/ActivateModule, no timer), back on reopen — 3/3 by the remote. **v10 (pack `45dfa04`): lazy build** one page per tick, nearest first
+> (max 77 ms per page, in the hub); RAM flat over 5 cycles → pages kept until the world is left. NEXT (plan 48 «v7»…«v10»): the Simple
 > Minimap adapter on our «Карта», v7 into KrinikConanUI; the 144 fps recording and real clicks when the game may come to the front.
 > ✅ **Chat of 2026-11-06 (fifth) soft-closed 2026-11-07 00:32 +03:00 by the owner's word (00:30, «завтра продолжим»).** The debt of the two forced closures of 2026-11-06
 > is PAID: STATUS trimmed (89 lines to the chronicle), experience lint 0 findings, attribution lint 0 new (bug 67 line marked), budget gate passed, engine
