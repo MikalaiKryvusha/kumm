@@ -22,6 +22,7 @@ by the remote; prototypes by a remote `dofile` (not in the build); the machine l
 - 07:09–07:10 — v8: `shadow-pages-v8.lua` + the probe over 12 switches.
 - 07:17–07:32 — v9 (close/reopen ×3), v10 (lazy build, private bytes over 5 cycles), the Simple Minimap helper on our map.
 - 07:34–07:37 — the section in the build: `Deploy-ModPack.ps1 -PackDir ConanExiles -Deploy -Only KrinikConanUI`, world entry, the probe, `SetCarouselIndex` ×13, a close by `ActivateModule(CharacterStatsWindow,false)`.
+- 07:46–07:48 — the section idle while the hub is closed (pack `692460f`): deploy, the probe, open → 5 switches → close → open → 4 switches → close; two «хаб закрыт» lines, 0 errors.
 
 ## Checks
 
