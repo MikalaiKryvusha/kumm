@@ -55,8 +55,9 @@ The owner's original settings (`resolution = 2560x1600`, `fps = 120`, reflection
 5. The port has no separate car detail for the own car vs others: the Car detail option sets one global least-LOD for all cars (`runtime/photo.c`, `G_LEAST_LOD_A/B`); only photo mode forces full detail.
 6. Memory is tight (11.4 of 11.5 GB used, 6.3 GB swap with background apps); the upscaled HUD costs ~5 FPS as well as memory.
 
-## Applied on the tablet (2026-11-08)
+## Applied on the tablet (2026-11-08 02:3x, read back from OPFS)
 
-- `settings.ini`: `fps = 60`, `fps_counter = on`, `roam_max_cars = 12`, `resolution` removed (render = device default scale 0.75), `other_headlights` default (players), main world (`roam_room` default); kept `ui_textures = uhud`, `hud = wide`, `fov_scale = correct`.
-- `registry.txt`: car reflections 0 (+ update 0), road reflections 0, DoF 0, motion blur 0; world detail 3, car detail max, shadows 2, glow, streaks, rain, fog, particles on.
+- `settings.ini`: `fps = 60`, `fps_counter = on`, `roam_max_cars = 16`, `resolution` removed and `render` default (the device default scale 0.75), `other_headlights` default (players), main world (`roam_room` default); kept `ui_textures = uhud`, `hud = wide`, `fov_scale = correct`.
+- `registry.txt`: car reflections 1 with update 0 (slow), road reflections 0, DoF 0, motion blur 0; world detail 3, car detail 1 (max), shadows 2, performance level 5, glow, streaks, rain, fog, particles, crowd on; racing resolution 0 (720p, equal to 1080p here); Exposure 20, White Level 100.
+- The owner reads the Russian notes: `README_ru.md`.
 - Revert: copy `owner_backup_2026-11-07/settings.ini` and `registry.txt` back into OPFS `/save/` (or the in-game Options).

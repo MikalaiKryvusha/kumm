@@ -41,7 +41,7 @@ Achieve: the owner's free roam in the main world runs at ≥ 50 FPS sustained wi
 
 | ID | Stand | Setting under test | Expected | Status | Observation |
 |---|---|---|---|---|---|
-| R2a | — | in-game resolution rows: list and the render size of each | rows named, sizes from the log | | |
+| R2a | empty | in-game resolution rows: list and the render size of each | rows named, sizes from the log | pass | 02:2x: the game lists only 720p and 1080p on this tablet (no native-size row); the log prints no render-size line |
 | G1 | empty | scale 0.5, reflections off | > G2 if GPU-bound | pass | first try void (`drive 0`); re-run 00:1x driving: 56–57 / 45, frame 17.5–17.9 ms |
 | G2 | empty | scale 0.75, reflections off | ≈ 49 (2026-11-07) | pass | 00:2x: 51 / 41–44, frame 19.8 ms |
 | G3 | empty | scale 1.0, reflections off | < G2 if GPU-bound | pass | 00:2x: 45–47 / 33–37, frame 21.5–22.1 ms — resolution scales weakly: ~16–17 ms of the frame do not depend on pixels |
@@ -50,7 +50,7 @@ Achieve: the owner's free roam in the main world runs at ≥ 50 FPS sustained wi
 | G9 | empty | 0.75, car reflections max only, road off | | pass | 00:3x: 39–44 / 29–32 |
 | G10 | empty | 0.75, road reflections max only, car off | | pass | 00:3x: 35 / 28 — road reflections are the heaviest single option |
 | G11 | empty | 0.75, car reflections level 1, slow update, road off | | pass | 00:3x: 45–46 / 36–37 — car shine kept for ~5 FPS |
-| G6 | empty | best of G1–G5, in-game row native vs 720p | the native row per the port notes | | |
+| G6 | empty | recommended set, in-game row 720p (`g_RacingResolution 0`) vs 1080p (`1`) | the native row per the port notes | pass | 02:2x: 720p 57–59 / 51–52, 1080p 59 / 52 — no difference: with `native_resolution = on` the port raises both rows to the page's size × render scale; only the page's «Разрешение» matters. 720p restored (the owner's value), White Level read back 100 |
 | G12 | empty | refl off, 0.75, world detail (g_WorldLodLevel) 3 → 1 | fewer draws far away | pass | 01:32: 49–50 / 37–43 vs A2 51–56 — no gain (standing; driving not measured) |
 | G13 | empty | refl off, 0.75, rain + particles off | | pass | 01:35: 48–51 / 39–43 — no gain |
 | G14 | empty | refl off, 0.75, crowd (Зрители) off | | pass | 01:38: 52 / 41–44 — no gain |
@@ -71,6 +71,6 @@ Achieve: the owner's free roam in the main world runs at ≥ 50 FPS sustained wi
 | C1b | crowd | refl off, 0.75, cars 16, headlights off | | pass | 01:24: 29–31 / 17–19 |
 | F1 | empty | refl off, 0.5, fps 120 | reachable? | fail | 01:11: 51–53 median, peaks 75–80 — 120 not reachable |
 | F2 | pause menu in the empty world (the game holds 60 there: 59–61) | display 144 Hz vs 120 Hz at fps 60: present-interval spread | 120 Hz even (~16.7 ms), 144 Hz alternating 13.9 / 20.8 ms | pass (no difference) | 01:5x: 144 Hz — 301 presents / 5 s, intervals p10 8.5 · p50 16.3 · p90 23.8 ms; 120 Hz (system peak/min 120, renderFrameRate confirmed 120) — 312 / 5 s, p10 8.1 · p50 16.6 · p90 23.7 ms. Both spreads equally wide: Chrome's compositor jitter dominates, the display rate brings no visible gain at this instrument's resolution. The owner's 144 Hz restored (settings read back 144.0 / 144.0, renderFrameRate 144). Expectation not confirmed | method: `trace-pacing.mjs` — a CDP Chrome trace (`viz`), intervals of `Display::DrawAndSwap` (works: 4 s trace 01:4x gave 221 presents); `dumpsys SurfaceFlinger --latency` gives only zero rows on Android 16 |
-| M4 | main, city | chosen config, driving away from the spawn | ≥ 50 (R1) | | |
-| T1 | main, city | chosen config, 10 minutes | ≤ 10 % drop (R2) | | |
+| M4 | main world, city streets, DRIVING | recommended set (0.75, car refl 1 slow, road off, DoF off, 16 cars, upscaled HUD) | ≥ 50 (R1) | fail | 02:0x–02:1x: out of the garage alley (reverse+right, forward-left), across the square, along the lit street past «Cactus Cantina»: 35 / 24 · 37 / 24 · 28 / 19 · 21 / 16 (scraping a wall on the sidewalk) with 14–16 cars near — R1 not reachable in the crowded main world on this tablet in this port |
+| T1 | World 1, garage, standing | recommended set with original HUD, 10 minutes | ≤ 10 % drop (R2) | pass | 01:54–02:05: minute 1 37–44, minute 4 41, minute 7 43, minute 10 43 (worst 19–31); thermal status 3 → 2, skin 55.8 → 55.0 °C — no throttling collapse |
 | A1 | empty | control: G2 repeated at the end of batch 1 | ≈ G2 (thermal drift check) | pass | 01:27: 49–51 / 37–39 vs G2 51 / 41–44 — no thermal drift over the batch |

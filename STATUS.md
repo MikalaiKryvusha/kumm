@@ -131,6 +131,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **SIDE TASK DONE 2026-11-08 02:3x — Underground 2 (nfsu2.xyz) on the owner's tablet** (plan 50, owner's order 2026-11-07 23:12 and «работай автономно» 00:55): all cases run (`testcases/TC_nfsu2_tablet_fps_2026-11-08.md`), the recommended set applied on the tablet, notes for the owner `researches/nfsu2-tablet/README_ru.md`, stand tools `researches/nfsu2-tablet/tools/`. Waits for his eye on the look (car shine kept at level 1, upscaled HUD kept). The Conan items below are untouched.
 > **HANDOVER 2026-11-07 23:03 +03:00 — chat of 2026-11-07 (fifth) closed by the owner («заакрывай чат, завтра продолжим»).** Read first: `bugs/85_…` (the crash cause), the
 >   Archery notes `games/ConanExiles/mods/KrinikConanArchery.md` → Open (every order of the evening, verbatim), `testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md`.
 >   DONE + seen: the bow-kill crash cause (key-bind Lua off the game thread — Archery and Camera off `RegisterKeyBind`, guard refuses it); camera numpad via the hero event

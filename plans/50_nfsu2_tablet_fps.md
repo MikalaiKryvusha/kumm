@@ -2,7 +2,7 @@
 
 > **Created:** 2026-11-08 · on the owner's word (chat 2026-11-07 23:12 «FPS от 50 или выше» · «Охуенная графика»; 23:26 «можно и в 120 целится … но не жертвою графики сильной»; 2026-11-08 00:06 «Ты план написал, по которому ты эти работы будешь делать?» · «Разрешение снимал?» · «читай конспекты по порту и треды в интернете»)
 > **Parent:** `researches/nfsu2-tablet/README.md` (first pass, 2026-11-07: no plan, part of it measured in a pause menu — EXP-0489)
-> **Status:** 🔧 plan written 2026-11-08 00:1x; recon R1–R3 in progress
+> **Status:** ✅ measured 2026-11-08 02:1x — all cases run (`testcases/TC_nfsu2_tablet_fps_2026-11-08.md`); acceptance 1 not reachable in the crowded main world (hardware/port limit, measured), 2 and 3 pass, 4 waits for the owner's eye; the recommended set applied on the tablet; notes for the owner `researches/nfsu2-tablet/README_ru.md`
 > **Outbound:** optional feature request to the port's author (own car detail vs other players') — the owner's call
 
 ## Goal vector (Achieve)
@@ -19,15 +19,15 @@ The owner plays free roam in the main world with other players on his tablet at 
 ## Steps
 
 - [x] **R0 — read the port's own notes:** `discord-bot/faq.md`, `knowledge.md` (community answers), `docs/web/PLAYING.md`, changelog. Found: the in-game resolution row matters (use the native-size row, not 720p/1080p); "GPU done" counts frames in flight; 144 Hz gets uneven pacing at 60 and 120; a throttling phone is steady at 30.
-- [ ] **R1 — internet threads** (helper agent): players' FPS numbers and settings on Android / Mali, crowded free roam.
-- [ ] **R2 — the in-game resolution rows**: which rows the game lists on this tablet and the render size each really draws (the game log / `[app]` lines).
-- [ ] **R3 — the full list of graphics-relevant settings** (port `settings.ini` web keys + in-game Display and advanced options) → the case table.
-- [ ] **M1 — GPU stand (empty own world, standing at the garage, driving state)**: render scale 0.5 / 0.75 / 1.0 × reflections off / on; the in-game resolution row native vs 720p.
-- [ ] **M2 — crowd stand (main world, garage spawn)**: players' cars 0 / 16 / 32 at the best M1 config; `roam_rate`; `other_headlights`.
-- [ ] **M3 — frame rate and pacing**: 120 in the empty world at the best config; display 144 vs 120 Hz (frame-time spread); 30 as the steady fallback.
-- [ ] **M4 — city away from spawn**: drive (ArrowUp held) in the main world; the chosen config's FPS.
-- [ ] **T1 — 10-minute soak** at the chosen config: FPS and thermal status every 2 minutes.
-- [ ] **A — apply** the chosen config, write the case results, update the research doc, show the owner (frames on the tablet; his eye decides car reflections on/off).
+- [x] **R1 — internet threads** (helper agent): almost no player numbers for Mali; port issues #79 (car churn drops), #122, #128; Project Velocity #2 (same SoC, ~0.15 ms per draw call).
+- [x] **R2 — the in-game resolution rows**: only 720p and 1080p on this tablet; FPS equal (57–59 vs 59) — the port raises both to the page size × render scale (cases R2a, G6).
+- [x] **R3 — the full list of graphics-relevant settings**: the start page read in full (every tab), the case matrix in the TC file.
+- [x] **M1 — GPU stand**: G1–G16 (render scale, reflections, HUD textures, FOV, detail options).
+- [x] **M2 — crowd stand**: C1–C7 (cars 0 / 8 / 16 / 32, World 1, roam_rate, headlights).
+- [x] **M3 — frame rate and pacing**: F1 (120 unreachable), F2 (144 vs 120 Hz — no difference by a Chrome trace).
+- [x] **M4 — city driving**: learned to drive from the PC (R to the road, held keys via CDP, 480 px frames); main world 21–37.
+- [x] **T1 — 10-minute soak**: 37–44 → 43, no throttling collapse.
+- [x] **A — applied** the recommended set; research doc and Russian notes written; the owner's eye on the look is his (acceptance 4).
 
 ## Risks
 
@@ -39,4 +39,10 @@ The owner plays free roam in the main world with other players on his tablet at 
 
 ## Decisions made without the owner
 
-(filled at closing)
+- `[AI]` Applied set: car reflections at level 1 with slow update (keeps the car shine for ~5 FPS) instead of off — the owner's priority is the look («Охуенная графика»); off is named in the notes as the +5 option.
+- `[AI]` Kept the owner's upscaled HUD (`ui_textures = uhud`) although it costs ~5 FPS — his visual choice; the notes name it.
+- `[AI]` Kept the main world (he plays with others; «где много движения других игроков»); World 1–4 named in the notes as +10 at the spawn.
+- `[AI]` Players' cars 16 (the port's phone default) instead of his 64 — 32 cars measured 24–25 at the spawn.
+- `[AI]` Depth of field off — by the owner's word in chat 2026-11-07 23:36 («глубиной резкости можно пожертвовать»), so this one is his.
+- `[AI]` The display refresh stays 144 Hz (his setting): 120 Hz measured no pacing gain.
+- `[AI]` The in-game resolution row left at 720p (the owner's value): 1080p measured equal.
