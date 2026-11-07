@@ -44,12 +44,12 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
   The real keys did not reach the hero, or the focus did not hold. Next: check focus right before the sequence (the slow-shot path that worked 2026-11-02 runs with
   the game ALREADY in front), drop the fixed camera for this case, read what «Всё пошло не так…» is. After the run the foreground was handed back to VS Code.
   19:3x probe: `input.ps1 -Key 0x20` (game focused, «key 0x20 pressed x1») → the hero's Z stayed −20068 before and after (no jump) — real Space does not
-  move the hero in this session at all; ~~suspect the hero's state~~ — CORRECTED 19:4x, the cause is the input path:
-  `input.ps1` does NOT bring the game forward (it only asserts focus), and `mouse-seq.ps1` sends to whatever window is in front — the Space probes of 19:3x–19:4x
+  move the hero in this session at all; ~~suspect the hero's state~~ — CORRECTED 19:2x–19:3x, the cause is the input path:
+  `input.ps1` does NOT bring the game forward (it only asserts focus), and `mouse-seq.ps1` sends to whatever window is in front — the Space probes of 19:2x–19:3x
   went to the owner's VS Code (up to three spaces; told to him). `mouse-seq` sends scan codes (`KEYEVENTF_SCANCODE`); `input.ps1 -Key` uses `keybd_event` with no
   scan code (raw-input games may ignore it). NEXT for M6: bring the game forward with a tool that does it (`SetForegroundWindow` on the game window, as in
   `esc-when-idle.ps1`), check that the foreground IS the game, only then `mouse-seq`; give the foreground back after.
-  19:5x: `_config/game-front.ps1` (new: owner-idle probe → Alt tap + `SetForegroundWindow` → «front <prev hwnd>» only when the game IS in front; `-Restore`) works —
+  19:3x: `_config/game-front.ps1` (new: owner-idle probe → Alt tap + `SetForegroundWindow` → «front <prev hwnd>» only when the game IS in front; `-Restore`) works —
   the game came forward and the focus went back each time. Its Alt tap counts as input, so `mouse-seq` right after it runs with `-MinIdle 0` (the probe was just done).
   Three real Space presses with the game verified in front (incl. 0.8 s after activation) — the hero's Z read by the remote stayed −20068. FIRST next: check the READER —
   a jump by the remote's input event (`InpActEvt_Jump_*`, worked in the morning) with the same Z probe; if Z does not move then either, the probe reads the wrong pawn.
