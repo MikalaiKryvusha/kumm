@@ -27,6 +27,18 @@
 | `SM_DT_UIModule` pak (2026-11-01) | row `SM_UI_Settings` Category Popup → Modal, CloseOnESC false → true (`_config/krinik_patches/Simple_Minimap__SM_DT_UIModule.tsv`, the last pair of `krinikBuild`) | Esc in the settings window opened from «Настройки модов» → «Моды Xevyr'а» closed the inventory too (plan 40.3 B11) |
 | KrinikConanUI Lua `krinik_minimap_coords` (2026-10-31) | at each minimap creation (+600 ms): `Coordinates` moved into our `Border_KrinikCoords` (plain black 0.55, RoundedBox r 6, padding 4/0) in `MinimapOverlay`, slot centre/top, top inset 46, font 13 (ACCEPTED by the owner 10:09 «вот теперь хорошо»); `MinimapScale` RenderTranslation (+16.0, −16.3) — into the corner with an 8 px gap to the top and the right at 1080p (the owner 09:58–10:25: 4 px, then «может увеличить до 8 пкс»; cases C7–C11). The gap is in UI units: the engine's DPI scale turns them into pixels by the screen height, so it is a share of the screen (≈ 0.74 % of the height; ≈ 16 px at 4K) — the owner's question 10:24 «наверное отступы в процентах нужно считать»; to be confirmed on frames at 720p / 2K / 4K in the plan 35 release gate. Measuring tool: a band at the ring's vertical centre (other red things at the screen edge spoil a whole-column scan); sub-pixel shifts snap — steps under ≈ 0.5 unit may not move a pixel; hidden coordinates keep the plate hidden. The look is the owner's pick 09:54 (`[OWNER]` «простая демная подложка, шрифт коардинат больше, плашку выше»; the clock-style plate of 09:48 was the rejected B) | the owner 2026-10-27: «в миникарте коардинаты нужно будет переместить внутрь круга, сделать им подложку» (item 31); a new widget cannot be added by a pak property edit |
 
+## The map helper and our hub controller (KUMM plan 48, 2026-11-07 07:27–07:31)
+
+- On the game's «Карта» page the helper `SM_UI_MapHelper_C` (outer `BP_ConanGameInstance_C` — the mod creates it with the game instance as owner) sits in
+  `Overlay` < `sb_ButtonBar` (SizeBox) < `MouseControlBox` < `VerticalBox_59` < `Overlay_0` of `W_FullscreenMap_C`; desired size 1039×48, Visible.
+- Our own `W_FullscreenMap_C` instance (the controller's page) is identical except the helper row («Shift + мышь Новый маркер», «Свои маркеры») — frames
+  `map_cmp.jpg`. `WidgetTree:FindWidget(FName('sb_ButtonBar'))` returned nothing; our `sb_ButtonBar` is found through `FindAllOf('SizeBox')` + name +
+  `GetOuter():GetOuter()` = our page.
+- A second helper created by us (`Create(pc, SM_UI_MapHelper_C, pc)`) and added to our `Overlay` (`AddChild` returned a slot; copying the slot's alignment
+  failed) did not show, and right after it `FindAllOf('SM_UI_MapHelper_C')` listed ONE helper — the mod keeps one instance or ours died. NEXT: read how the
+  mod creates and places the helper (its BP graph — `kismet-trace.py`), then either move the ONE helper into our page on show / back on hide, or call the
+  mod's own placement function with our page.
+
 ## Open
 
 - «и всю миникарту правее и выше» (item 31, the owner's second word). **Tried 2026-10-31 09:51 and reverted:** the author's `LoadSettings` 0.5 (our
