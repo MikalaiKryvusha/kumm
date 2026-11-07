@@ -46,6 +46,14 @@ mod holds by distance). Section «КОЛЕСО В ПРИЦЕЛЕ ЛУКА»: a p
 reads `AllowShowingUI` (= substate 16); while true the watcher's `want_step` is 0 (also written at once at the aim entry); log «прицел лука: вход / выход».
 Without AQS no hook — the wheel zooms in the aim as in the game. `[TESTED: 2026-11-02 · W2, W3 · testcases/reports/2026-11-02_conan-wheel-in-bow-aim.md]`.
 
+## Numpad keys — the hero's game-thread event, not RegisterKeyBind (bug 85, 2026-11-07)
+
+`bind` / `bind_ctrl` only fill `key_actions[<engine key name>] = { plain, ctrl }` (`VK_KEY_NAME`: NumPadZero…NumPadNine, Multiply, Add, Subtract, Decimal, Divide);
+a `RegisterHook` on `/Game/Characters/BasePlayerChar.BasePlayerChar_C:InpActEvt_AnyKey_K2Node_InputKeyEvent_1` (name read from the cooked asset) runs the action on
+the game thread; Ctrl by the controller's `IsInputKeyDown(LeftControl / RightControl)`. Installed inside the hero-birth delayed action of the neck hooks — a
+SEPARATE delayed action of the same 1600 ms never ran (21:39 run, K4 fail). Log «клавиши камеры: событие героя «любая клавиша» подписано». Cases K4–K8 of
+`testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md` — at the next launch. Note: a deploy of this mod OVERWRITES the owner's `config.lua` (seen 21:38) — copy out, restore.
+
 ## Checks
 
 - In game 2026-10-31 16:41: `[KrinikConanCamera]` 81 log lines, «config.lua прочитан», «ВЫБРАН компонент: SpringArmComponent …». Cases of the camera work —

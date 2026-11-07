@@ -106,6 +106,18 @@ actor's own big mesh; registry «actor address → mesh», cap 64. Seen: the log
 the owner's check in the running game (asked 21:11). The background twin of a real shot: the remote `FindFirstOf('BasePlayerChar_C'):LaunchProjectile()` fires the
 equipped bow from the hero with no input (21:05, seen in the archery log as a normal shot).
 
+## No key binds — bug 85 (2026-11-07 21:3x)
+
+The shafts sync used `RegisterKeyBind(E / Q / LMB)`; a key-bind callback runs Lua on UE4SS's input thread while this mod's game-thread Lua runs (corpse pass),
+unlocked, in one Lua state — the crash of 2026-11-07 21:17 (bug 85, root cause from the UE4SS source). Removed; the guard `_config/check-lua-game-thread.py`
+now refuses `RegisterKeyBind`. Kept: the quick-loot trigger (`QuickLootPanel:SlotItemAddedOrRemoved`, seen working 21:40:54 in the owner's play). Lost until a
+game-thread trigger is found: the shafts after the full loot window and after a beast harvest stay in the corpse until it vanishes.
+
+**Arrows into an already dead body (written 2026-11-07 21:42 +03:00, `[OWNER]` 21:41 «когда моб умер, но в его тело ещё стреляют - эти стрелы тоже нужно класть в добычу моба»):**
+`on_corpse_hit` — at a copy's birth (+100 ms) whose attach parent's owner is a `CorpseBase`: one arrow of `ProjectileItemTemplateID` into the corpse's
+`ItemInventory`, the copy's life = the corpse's, `IsLootable` false (no double take), the copy joins `corpse_arrows` (the shafts sync). Case K10 of
+`testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md` — not run yet (next launch).
+
 ## Open
 
 - **REMOVED 2026-11-02 15:3x by interview #031, answer A** (`[OWNER]` «убрать строку, пока спрайт не найден. Найдётся — вернём её уже к нему»): the hub row

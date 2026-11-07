@@ -136,7 +136,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the loop: Locomotion M6 — the hero DID jump with the bow by real input at 19:24:59 and 19:26:00 (the mod's log «выстрел в воздухе разрешён»), remote Z probes are too slow;
 > judge by that log line + a 60-fps clip. 19:37: draw + release by real input fired an arrow; the synthetic JUMP is unreliable (2 of ~7) — see the notes «19:37 result». Rule 30 hole closed (`input.ps1`).
 > Then quick-loot R3, plan 45 boss spawns. Game running (background launch 19:14), keeper timer on.
-> **00. CRASH FIRST (2026-11-07 21:17, the owner playing):** EXCEPTION_ACCESS_VIOLATION reading 0xffffffffffffffff inside UE4SS. UE4SS.log tail: an arrow hit an Imp → the Imp
+> **NOW 2026-11-07 21:42 +03:00 — the crash item 00 is CAUSED AND FIXED (bug 85, `bugs/85_conan_crash_keybind_lua_races_game_thread.md`):** a `RegisterKeyBind` callback (Archery's LMB/E/Q) runs Lua
+>   on UE4SS's input thread while the mod's game-thread Lua runs — unlocked, one Lua state (UE4SS source at `8333063`; upstream half-fixed it in `97c5642a`). The «two
+>   corpses» line below is REFUTED (one corpse, the late-copy pass). Archery + Camera off key binds (Camera → hero event `InpActEvt_AnyKey_K2Node_InputKeyEvent_1`); the
+>   guard refuses `RegisterKeyBind`. OPEN: (1) KrinikConanUI twins — 4 sites (LMB ×3, Esc), need game-thread click events (`WBP_ButtonBase`, hub widgets); (2) Camera
+>   K4 failed in the 21:38 run (its delayed action never ran) — fixed, check K4–K8 at the next launch (numpad DEAD in the run the owner plays now); (3) Archery K10 «arrows
+>   into an already dead body → its loot» (owner 21:41) — written, next launch; (4) the crash check is the owner's own gameplay (`[OWNER]` 21:39 «я вылет при убийстве буду
+>   проверять сам» · «это ты не сможешь воспроизвести»). Cases `testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md`.
+> **00. (was) CRASH FIRST (2026-11-07 21:17, the owner playing):** EXCEPTION_ACCESS_VIOLATION reading 0xffffffffffffffff inside UE4SS. UE4SS.log tail: an arrow hit an Imp → the Imp
 >   died → `KrinikConanArchery` «arrows in the corpse» ran on two `Corpse_C` births at 21:17:54.36 / .38 → crash. Prime suspect: the corpse-arrow code touching a destroyed actor (the known
 >   class: a dead creature kept in a Lua ref — game map «Stand rule» 2026-10-28). Crash window closed (PID 26460). Read the code of `on_corpse_born` / the re-attach first; repro with arrows into imps. The owner 21:18: many bow kills without a crash — a RARE case; the unusual line: TWO `Corpse_C` births 20 ms apart (a race of two corpses / one arrow set?).
 > **0. AT ONCE next chat (owner 20:53-20:54, his request in chat):** give him a top-tier bow and many good arrows — id 51405 (old notes) is NOT a bow in this build (he got a
