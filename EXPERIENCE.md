@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0478 · 2026-11-07 · ✅ · #conan #translation #ui #windows #method
+class: none — a working loop
+mechanized: `_config/walk-mod-windows.sh` + `devkit/locres-set-tr.py` (source guard) + `locres-regress.py`; the module list in the game map
+**Lesson:** the fastest honest loop for mod windows' Russian: list the live UI modules, walk them in the background (4 per launch, a 2×2 sheet), fix by
+`locres-fixes-<date><letter>.tsv` together with the source row (a script FILE — `\n` built by `chr(92)`), regress «lost 0», redeploy, frame the one window again.
+Seven windows fixed in an hour. A culture-invariant text needs an asset edit instead; a «translated but English» string — look for its key in the built file first.
+
 ### EXP-0477 · 2026-11-07 · ✅ · #conan #translation #locres #pipeline
 class: escaping-layer
 mechanized: `ConanExiles/_config/devkit/hosav-ru-entries.py` reads «¦» back as «|»; `join-report.txt` lists every NO-KEY source
