@@ -2,7 +2,8 @@
 
 > **Created:** 2026-11-06 · on the owner's word (bug 64 items 15/17, his decision of 2026-11-06 22:10 — verbatim in the bug)
 > **Parent:** `bugs/64_conan_mod_ui_wave_overlaps_untranslated.md`; measured basis — `testcases/reports/2026-11-06_conan-hub-instant-switch.md`
-> **Status:** 🔲 recon (step 1) · **Outbound:** —
+> **Status:** 🟡 in the build since 2026-11-07 07:35 +03:00 — KrinikConanUI section `krinik_hub_controller` (pack `374b90d`); proven by the remote's switches in a
+> background game; the player's path (real clicks, Esc/Tab, a 144 fps recording) waits for the game in front · **Outbound:** —
 
 ## Goal vector (Achieve)
 

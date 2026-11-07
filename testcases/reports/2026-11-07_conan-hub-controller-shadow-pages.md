@@ -20,6 +20,8 @@ by the remote; prototypes by a remote `dofile` (not in the build); the machine l
 - 06:53–06:56 — v6: `shadow-pages-v6.lua`, ×12 switches; 06:57–07:01 — three-frame and close/open tests of our CraftingGUI; `SetCarouselIndex(4…8)`.
 - 07:03–07:08 — v7: `shadow-pages-v7.lua`, `SetCarouselIndex` 1…8, 0, 4, 0, 8, 3 with frames; then `tick-visibility-probe.lua` over 11 switches.
 - 07:09–07:10 — v8: `shadow-pages-v8.lua` + the probe over 12 switches.
+- 07:17–07:32 — v9 (close/reopen ×3), v10 (lazy build, private bytes over 5 cycles), the Simple Minimap helper on our map.
+- 07:34–07:37 — the section in the build: `Deploy-ModPack.ps1 -PackDir ConanExiles -Deploy -Only KrinikConanUI`, world entry, the probe, `SetCarouselIndex` ×13, a close by `ActivateModule(CharacterStatsWindow,false)`.
 
 ## Checks
 
@@ -48,5 +50,5 @@ frames `f1.jpg`, `v5_1.jpg`, `v5_2.jpg`, `att_bind.jpg`, `att_game.jpg`, `craft_
 
 ## Verdict
 
-partial — the controller core (v7) holds on all 9 tabs with no crash and shows the old page until the new one on 9 of 11 transitions;
+partial — the section `krinik_hub_controller` is in the build: one page per tick on 13 of 13 probed transitions, 0 errors, the minimap row on our map; the controller core (v7) holds on all 9 tabs with no crash and shows the old page until the new one on 9 of 11 transitions;
 not yet seen: the player's mouse path, a 144 fps recording, the hub's close and re-open with our pages, the mods' embed on our «Карта».
