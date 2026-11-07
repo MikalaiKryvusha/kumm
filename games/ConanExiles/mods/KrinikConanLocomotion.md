@@ -44,7 +44,11 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
   The real keys did not reach the hero, or the focus did not hold. Next: check focus right before the sequence (the slow-shot path that worked 2026-11-02 runs with
   the game ALREADY in front), drop the fixed camera for this case, read what «Всё пошло не так…» is. After the run the foreground was handed back to VS Code.
   19:3x probe: `input.ps1 -Key 0x20` (game focused, «key 0x20 pressed x1») → the hero's Z stayed −20068 before and after (no jump) — real Space does not
-  move the hero in this session at all; suspect the hero's state (the «Всё пошло не так…» line, the open «Выживший» tip) before the input tools.
+  move the hero in this session at all; ~~suspect the hero's state~~ — CORRECTED 19:4x, the cause is the input path:
+  `input.ps1` does NOT bring the game forward (it only asserts focus), and `mouse-seq.ps1` sends to whatever window is in front — the Space probes of 19:3x–19:4x
+  went to the owner's VS Code (up to three spaces; told to him). `mouse-seq` sends scan codes (`KEYEVENTF_SCANCODE`); `input.ps1 -Key` uses `keybd_event` with no
+  scan code (raw-input games may ignore it). NEXT for M6: bring the game forward with a tool that does it (`SetForegroundWindow` on the game window, as in
+  `esc-when-idle.ps1`), check that the foreground IS the game, only then `mouse-seq`; give the foreground back after.
 
 - **NEXT FEATURE (the owner 2026-11-07 10:50, verbatim):** «и было бы хорошо, если бы если игрок попадает в тайминг при ComboStep >= 1, и нажимает в этот тайминг пробел -
   чтобы герой подпрыгивал с замахом меча за голову, нанося удат в падении из пряжка на землю» — a combo finisher: inside the combo advance window (combo step ≥ 1)
