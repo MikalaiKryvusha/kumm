@@ -664,6 +664,9 @@ Lua-моды UE4SS ждут только отложенными действия
   the hero): `InventoryActivated` → `GUIModule_Activate` async → `OnActivate_9DB3…` → `Delay 0.2` → resume 61 (cast of the persistent
   `Temp_object_Variable` = the hub window → find the paperdoll → `Create` + `AddChild`). Calling 61 from Lua crashes the game (EXP-0371); since
   KRINIK MODIFIED the delay is 0.0015. Click → module `acs_WardrobeGUI` («Гардероб — Экипировка»). Build with `PATCH_VIEW_EXCLUDE=HighmanesArsenal`.
+  By the remote (2026-11-07 08:5x, background): the BARE module opens empty («Wardrobe — Placeholder Text») — open the inventory, then call the button's own
+  `BndEvt__W_acs_InventoryButton_acsButton_K2Node_ComponentBoundEvent_3_OnButtonClickedEvent__DelegateSignature()`; a category (`WBP_ButtonBase_C` with its label in a
+  TextBlock) is switched by the window's `W_acs_Wardrobe_C:ButtonToggled(<button>, true)` — the button's own `SetIsToggledOn(true)` does not switch the layout.
   `KrinikPauseGameInMenu` 0.9.1 also runs its pause poll on the `XCS_Panel` open event — the hub's time is 0.03 from its first frame.
 - **Stand: the hub pause must be armed first (2026-10-29 18:33).** `KrinikPauseGameInMenu` arms only after it sees the hero in the world with the
   full-screen UI CLOSED (log «взведено: герой в мире…»). A hub opened by the remote ≈1 s after `enter-world-remote.sh` stays at time 1.0 for the whole
