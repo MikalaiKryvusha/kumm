@@ -143,8 +143,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > transition, the minimap row on our «Карта», 0 errors; bug 64 item 15 → 🟡. Also this chat: bug 79 respawn case passes (no freeze); `pult.sh` works by an
 > absolute path (pack `42fc264`). NEXT: the player's
 > path with the game in FRONT (real clicks, Esc/Tab, 144 fps recording — the owner's word needed: the game was ordered background-only); the minimap
-> helper's «Свои маркеры» click on our map; the Damage Meter window frame (bug 64 item 21 — the fix applied 2026-10-26, never seen). In flight 08:3x: our Lua
-> mods' cost A-B-A-B (TC `TC_conan_our_lua_mods_cost_abab_2026-11-07.md`; A-B-A done — CPU within noise, stutters A 32–44 vs B 26–27 per flight).
+> helper's «Свои маркеры» click on our map; DONE 08:49: our Lua mods cost within the flight noise (A-B-A-B, CPU −0.06 ms, report `2026-11-07_conan-our-lua-mods-cost-abab.md`) — the build's +0.9 ms is the
+> paks'; next: by pak groups. Bug 64 item 21 (Damage Meter window) seen fixed at 4K 08:51.
 > ✅ **Chat of 2026-11-06 (fifth) soft-closed 2026-11-07 00:32 +03:00 by the owner's word (00:30, «завтра продолжим»).** The debt of the two forced closures of 2026-11-06
 > is PAID: STATUS trimmed (89 lines to the chronicle), experience lint 0 findings, attribution lint 0 new (bug 67 line marked), budget gate passed, engine
 > syntax + 4 core tests green, the chat's claims re-checked (deployed KrinikConanUI = build 2, test mods removed, modlist and settings restored, pushes in sync).
@@ -181,7 +181,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 Files without the DONE tag — 29 (2026-10-18 13:45):
 
 - 🔴 `bugs/64_conan_mod_ui_wave_overlaps_untranslated.md` — the UI of the Conan 3.0.1 build's mods, 26 items: open 4, 5, 6, 12, 13 (partly),
-  15–18, 21 (Damage Meter slider), 23 (EAA class cards — text in textures), 26 (late emblem in the hub); closed by a frame 2, 3, 7, 7b, 8 (again 2026-10-31 at 1080p, list 540), 9–11,
+  15 (🟡 hub controller in the build), 16–18, 23 (EAA class cards — text in textures), 26 (late emblem in the hub); closed by a frame 2, 3, 7, 21 (4K, 2026-11-07), 7b, 8 (again 2026-10-31 at 1080p, list 540), 9–11,
   14, 16, 19, 20, 22, 24, 25 — work order in plan 35.
 - 🔴 The owner's bugs 55–62 (2026-10-18 13:35–13:43, a wave in 5 minutes of play) — `bugs/55_…` – `bugs/62_…`; order and plan 32 — item 00000 above.
 
