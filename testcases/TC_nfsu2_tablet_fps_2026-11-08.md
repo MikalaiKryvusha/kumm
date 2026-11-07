@@ -55,18 +55,20 @@ Achieve: the owner's free roam in the main world runs at ≥ 50 FPS sustained wi
 | G13 | empty | refl off, 0.75, rain + particles off | | | |
 | G14 | empty | refl off, 0.75, crowd (Зрители) off | | | |
 | G15 | empty | refl off, 0.75, «Уровень детализации» (g_PerformanceLevel) 5 → 3 | | | |
-| G7 | empty | best config, Поле зрения Оригинал vs Исправленное | Исправленное draws more to the sides | | |
-| G8 | empty | best config, Меню и HUD Оригинал vs Улучшенный | memory, not FPS | | |
+| G7 | empty | refl off, 0.75, Поле зрения Оригинал (vs Исправленное in A1) | Исправленное draws more to the sides | pass | 01:04: 49 / 37–39 vs A1 49–51 — no cost |
+| G8 | empty | refl off, 0.75, Меню и HUD Оригинал (vs Улучшенный in A1) | memory, not FPS | pass | 01:08: 54–56 / 45–48 vs 49–51 / 37–39 — the upscaled HUD costs ~5 FPS (expectation refuted) |
+| A0 | empty | batch start control | | void | 00:59: never reached `drive 2` (state stayed `drive 1`), sample not counted |
 | C1 | crowd | G11 config (car refl 1), cars 16 | | pass | 00:4x: 28–32 / 15–19 (empty world same config 45) |
 | C6 | World 1 (~170 players), garage | refl off, 0.75, cars 16 (4–6 near) | quieter world helps | pass | 00:5x: 39–40 / 21–29 |
 | C7 | crowd | refl off, 0.75, cars 8 | | pass | 00:4x: 29–32 / 15–19 — same as 16: at the spawn any cars cost ~15 FPS (churn of cars loaded/removed, port issue #79) |
 | D1 | World 1, city streets, DRIVING | refl off, 0.75, cars 16 (2–7 near) | | pass | 01:0x: learned to drive: R puts the car on the road, ArrowUp held via CDP, steering by 480 px frames every ~3 s; on the move 33–40 / 21–23 — driving costs ~10 FPS more than standing (streaming, far view) |
-| C2 | crowd | best G config, cars 32 | | | |
+| C2 | crowd | refl off, 0.75, cars 32 | | pass | 01:14: 24–25 / 15 (27–29 near) |
 | C3 | crowd | G11 config, cars 0 | the crowd's cost without cars drawn | pass | 00:4x: 44 / 32–35 ≈ empty world: the network crowd itself is nearly free; the drawn cars cost |
-| C4 | crowd | `roam_rate` 10 | | | |
-| C5 | crowd | `other_headlights = off` | | | |
-| F1 | empty | best config, fps 120 | reachable? | | |
+| C4 | crowd | refl off, 0.75, cars 16, `roam_rate` 10 | | pass | 01:17: 31–35 / 19–21 vs C1b 29–31 — within noise |
+| C5 | crowd | same, Фары других машин «Игроки» (vs «Откл.» in C1b) | | pass | 01:21: 28–29 / 16 vs C1b 29–31 / 17–19 — within noise |
+| C1b | crowd | refl off, 0.75, cars 16, headlights off | | pass | 01:24: 29–31 / 17–19 |
+| F1 | empty | refl off, 0.5, fps 120 | reachable? | fail | 01:11: 51–53 median, peaks 75–80 — 120 not reachable |
 | F2 | empty | display 120 Hz vs 144 Hz at fps 60: frame-time spread | 120 Hz even | | |
 | M4 | main, city | chosen config, driving away from the spawn | ≥ 50 (R1) | | |
 | T1 | main, city | chosen config, 10 minutes | ≤ 10 % drop (R2) | | |
-| A1 | — | control: G2 repeated at the end | ≈ G2 (thermal drift check) | | |
+| A1 | empty | control: G2 repeated at the end of batch 1 | ≈ G2 (thermal drift check) | pass | 01:27: 49–51 / 37–39 vs G2 51 / 41–44 — no thermal drift over the batch |
