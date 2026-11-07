@@ -131,6 +131,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **UPDATE 2026-11-07 12:1x:** (1)–(4) DONE and pushed — KrinikConanLocomotion in the build (pack `158b186`, melee M1–M5 pass, the bow's air shot by real input open),
+> «E Взять» timing (P1), the hub dance (D2), the quick-loot rim instant with `krinik_loot_rim` off (pack `543b0ef`, R1/R2 pass, R3 open). NEXT: (5) the bag-header
+> tooltips, (6) eating under the hub's slow time — IMM_WAR overrides `BP_HungerSystem` / `BPGameItemFood` (recon the restore rate first). D: — 93 GB free; the agent's
+> trees (`D:\Temp\claude`, `_paksview-*`) are hard links (free ≈ 0 if deleted); the real candidates (`_text-extract-3.0.1` 20 GB, the clean copy 59 GB) are the owner's call.
 > **NOW 2026-11-07 ≈11:00 +03:00 — chat of 2026-11-07 (second), `/dayloop` (the owner's «работай автономно» 10:12), the owner's queue in order:**
 > DONE + pushed (pack `f59a5a2`, KUMM `b3f6ce0`): the empty hub on fast tab switching (38 of 38 bursts), EoT icons on «Параметры» on time, the minimap row on our
 > «Карта», the «E Взять» backing under E (alpha 0.45). IN WORK (deployed, under test): (1) `KrinikConanLocomotion` — the new mod (HOUSE_RULES 19): jump

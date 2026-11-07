@@ -1,6 +1,9 @@
 # Bug 75 — the quick-loot selection rim jumps to the last cell for a moment when an item is taken with F
 
-**Status:** 🟡 PARTIAL — the jump HIDDEN 2026-11-03 21:52 +03:00 (section `krinik_loot_rim` 0.1.0, cases B2–B5 pass); OWED: the proper, pretty fix (`[OWNER]` 22:18 «там долг на будущее - сделать красиво» · «починить правильно») · **Severity:** S3 visual, filed as a document by the owner's word («это баг, нужно будет испрравить») · **Version/build:** pack ConanExiles
+**Status:** 🔧 the CAUSE fixed 2026-11-07 ≈11:27 +03:00 — the cell's `AnimSelect` (the rim's 0.3 s fade, played in reverse on the walk's last cell) made instant in the
+KrinikConanUI kit pak; the rim moves in one frame and stays through an F take, never hidden (R1, R2 of `testcases/TC_conan_quick_loot_rim_instant_2026-11-07.md`, report
+`2026-11-07_conan-quick-loot-rim-instant.md`); `krinik_loot_rim` OFF (`[OWNER]` 2026-11-07 10:57 «не нужно её прятать даже на короткий момент»); open: R3 (the last item) and the
+owner's eye · before: 🟡 PARTIAL — the jump HIDDEN 2026-11-03 21:52 +03:00 (section `krinik_loot_rim` 0.1.0, cases B2–B5 pass); OWED: the proper, pretty fix (`[OWNER]` 22:18 «там долг на будущее - сделать красиво» · «починить правильно») · **Severity:** S3 visual, filed as a document by the owner's word («это баг, нужно будет испрравить») · **Version/build:** pack ConanExiles
 `4aca565`, KrinikConanUI 1.0.0 (kit edit of `W_QuickLootPanel` + `krinik_ui_fixes` hooks on `QuickLootPanel:SlotItemAddedOrRemoved`) · **When/context:**
 2026-11-02 09:10 +03:00, the owner's play; recorded in STATUS the same minute, this document 2026-11-02 10:4x
 **Fixing:** the next game run of this session, after the hub batch (cases B1–B3 below)
