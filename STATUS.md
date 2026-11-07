@@ -139,7 +139,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `testcases/reports/2026-11-07_conan-hub-controller-shadow-pages.md`. **v9 (pack `1d97341`) adds the lifecycle:** our pages collapse when the hub closes (event
 > checks on Esc/Tab/ActivateModule, no timer), back on reopen — 3/3 by the remote. **v10 (pack `45dfa04`): lazy build** one page per tick, nearest first
 > (max 77 ms per page, in the hub); RAM flat over 5 cycles → pages kept until the world is left. **IN THE BUILD since 07:35 — section `krinik_hub_controller`
-> of KrinikConanUI (pack `374b90d`, deployed):** one page per tick on 13 of 13 probed transitions, the minimap row on our «Карта», 0 errors. NEXT: the player's
+> of KrinikConanUI (pack `374b90d`, deployed; `692460f` — idle while the hub is closed, 2 open/close cycles 0 errors):** one page per tick on every probed
+> transition, the minimap row on our «Карта», 0 errors; bug 64 item 15 → 🟡. Also this chat: bug 79 respawn case passes (no freeze); `pult.sh` works by an
+> absolute path (pack `42fc264`). NEXT: the player's
 > path with the game in FRONT (real clicks, Esc/Tab, 144 fps recording — the owner's word needed: the game was ordered background-only), the Simple
 > Minimap adapter on our «Карта», v7 into KrinikConanUI; the 144 fps recording and real clicks when the game may come to the front.
 > ✅ **Chat of 2026-11-06 (fifth) soft-closed 2026-11-07 00:32 +03:00 by the owner's word (00:30, «завтра продолжим»).** The debt of the two forced closures of 2026-11-06
