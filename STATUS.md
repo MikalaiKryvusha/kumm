@@ -131,6 +131,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> ⚠️ **Чат 2026-11-07 (второй) закрыт принудительно 2026-11-07 12:43 +03:00 на 85 % окна: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) —
+> долг платит первый /end-chat-soft.** Ложных утверждений на месте: нет (исправлено в этом чате: «E/Q пульта ходят только по 4 вкладкам» — в карте игры и плане 48).
+> Игра закрыта, замок снят, всё запушено (KUMM `43b54c7`+, пак `d85dfbe`). Сделано за чат — блоки UPDATE ниже и NOW: пустой хаб при быстром переключении,
+> значки EoT на «Параметрах», строка мини-карты, «E Взять» (подложка, 10/с, фейд 0,1), новый мод KrinikConanLocomotion (удар мечом в прыжке), «пляска» хаба,
+> рамка лута мгновенная, подсказки Inventory Compactor, значки еды в хабе, загон Emberlight, правило 30 (владелец за клавиатурой → без ввода).
+> **ПЕРВЫМ в следующем чате:** тени пальм (баг 67 — пересъёмка с `hdr.ps1 off` и `SetTimeOfDay` на каждый ролик); выстрел из лука в прыжке настоящими кнопками
+> (Locomotion M6); рамка лута R3 (последний предмет ряда). Перед любым вводом — `powershell -File D:/work/ai_sandbox/_tools/owner-idle.ps1` (правило 30).
+> Диск D: 93 ГБ свободно; кандидаты на удаление — решение владельца: `_text-extract-3.0.1` 20 ГБ, два комплекта выпуска 0.9.0 по 13 ГБ, `_bench` 9 ГБ, Svarog 24 ГБ
+> (рабочие деревья агента — жёсткие ссылки, место не освобождают).
 > **UPDATE 2026-11-07 12:2x:** (5) DONE — Inventory Compactor's two buttons show the game's dark tooltip (`krinik_ui_fixes` 1.7.0, notes `InventoryCompactor.md`);
 > (7) DONE 12:30 — the Emberlight pen in Russian (pack `d9964dd`). (6) DONE — eating / drinking in the hub: the gauges poll at once and animate 0.1 × dilation (`krinik_pause_in_menu` 0.17.0; the stat itself rose at once, the
 > gauges lagged ≈ 10 s + 3.3 s); pack `2856384`, report `2026-11-07_conan-compactor-tooltips-and-eating-gauges.md`. Queue empty of the owner's items → NEXT: palm
