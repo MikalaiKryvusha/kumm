@@ -53,6 +53,10 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
   the game came forward and the focus went back each time. Its Alt tap counts as input, so `mouse-seq` right after it runs with `-MinIdle 0` (the probe was just done).
   Three real Space presses with the game verified in front (incl. 0.8 s after activation) — the hero's Z read by the remote stayed −20068. FIRST next: check the READER —
   a jump by the remote's input event (`InpActEvt_Jump_*`, worked in the morning) with the same Z probe; if Z does not move then either, the probe reads the wrong pawn.
+  **19:3x CORRECTION by the UE4SS log:** the mod logged «прыжок с луком: выстрел в воздухе разрешён (7, 8)» at 19:24:59 (the m6-air-shot run) and «(9, 10)» at 19:26:00
+  (the `input.ps1 -Key 0x20` press) — the hero DID jump with the bow and the air-shot permission fired; the remote Z probe is too slow (its answer comes after the
+  landing), so «Z stayed −20068» proves nothing. No such line after 19:26 — the presses after `game-front.ps1` did not jump (its Alt tap = the game's dodge key may
+  swallow them — check). NEXT: judge M6 by the mod's log line + a 60-fps clip around the press (not by remote Z); check the arrow left the bow (arrow count / a projectile).
 
 - **NEXT FEATURE (the owner 2026-11-07 10:50, verbatim):** «и было бы хорошо, если бы если игрок попадает в тайминг при ComboStep >= 1, и нажимает в этот тайминг пробел -
   чтобы герой подпрыгивал с замахом меча за голову, нанося удат в падении из пряжка на землю» — a combo finisher: inside the combo advance window (combo step ≥ 1)
