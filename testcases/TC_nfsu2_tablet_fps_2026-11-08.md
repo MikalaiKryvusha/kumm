@@ -51,6 +51,10 @@ Achieve: the owner's free roam in the main world runs at ≥ 50 FPS sustained wi
 | G10 | empty | 0.75, road reflections max only, car off | | pass | 00:3x: 35 / 28 — road reflections are the heaviest single option |
 | G11 | empty | 0.75, car reflections level 1, slow update, road off | | pass | 00:3x: 45–46 / 36–37 — car shine kept for ~5 FPS |
 | G6 | empty | best of G1–G5, in-game row native vs 720p | the native row per the port notes | | |
+| G12 | empty | refl off, 0.75, world detail (g_WorldLodLevel) 3 → 1 | fewer draws far away | | |
+| G13 | empty | refl off, 0.75, rain + particles off | | | |
+| G14 | empty | refl off, 0.75, crowd (Зрители) off | | | |
+| G15 | empty | refl off, 0.75, «Уровень детализации» (g_PerformanceLevel) 5 → 3 | | | |
 | G7 | empty | best config, Поле зрения Оригинал vs Исправленное | Исправленное draws more to the sides | | |
 | G8 | empty | best config, Меню и HUD Оригинал vs Улучшенный | memory, not FPS | | |
 | C1 | crowd | G11 config (car refl 1), cars 16 | | pass | 00:4x: 28–32 / 15–19 (empty world same config 45) |

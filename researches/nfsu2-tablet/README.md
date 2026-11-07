@@ -12,6 +12,14 @@
 - Access: `adb connect <tablet LAN address>:<port>` (wireless debugging, address and port from the owner; the KAST project's notes name the device), then `adb forward tcp:9333 localabstract:chrome_devtools_remote` — CDP into the page: OPFS files (`/save/settings.ini`, `/save/registry.txt`), the `#fps` counter element (`fps_counter = detailed` gives frame ms, tris/frame, roam cars, drive/pause), key input via `Input.dispatchKeyEvent` (the game takes the keyboard). The live game log is in `localStorage['nfsu2.lastgame.save'].log`; `[gpu] 60 s …` lines give GPU done p50/p90 per minute.
 - Real taps (`adb shell input tap`) for page buttons that need a user gesture (Play). A `location.reload()` while the game runs is stopped by Chrome's "Reload site?" dialog and freezes CDP — quit through F9 → «Выйти из игры» instead.
 
+## Driving the game from the PC (learned 2026-11-08)
+
+- The port's automation (`NFSU2_INPUT_SCRIPT`, the autotest `autopilot` / `roam call 0x5fae20`) is closed in the production page: `settings.ini` refuses the page's automation variables (`PATH_VARS` in `web/src/app/settings.ts`).
+- Keys via CDP `Input.dispatchKeyEvent` work as a held keyboard: a `keyDown` … `keyUp` pair with a sleep between is a held key (`cdp-keys.mjs ArrowUp:8000`); two keys at once = two parallel processes.
+- After «Возвращение в город» the car stands with its nose in the garage door of a dead-end alley: reverse (`ArrowDown` + `ArrowLeft` 2.5 s), then forward-right. **R** puts the car back on the nearest road along its direction — the cheapest way back onto a road after a wall.
+- Steering is closed-loop by eye: a 480 px frame (`exec-out screencap` → magick crop of the game area) every ~3 s, then the next key hold. Enough for a minute of city driving and an FPS sample on the move.
+- The menus are keyboard-driven: pause = Escape; pause carousel → «Настройка» (3× Right) → «Изображение» (Right, Enter) → «Настройка параметров изображения» (4× Down, Enter). The game remembers the cursor position inside menus, so a key path is not reproducible across visits — set the graphics through `registry.txt` before Play instead.
+
 ## How the port decides defaults (source, `web/src/app/device.ts`, `phonegraphics.ts`, `settings.ts`)
 
 - The tablet's Chrome reports `userAgentData.mobile = true` → the port treats it as a PHONE: `render = scale:0.75`, fullscreen, 4:3 HUD, `roam_max_cars = 16`, and the registry seeded with the "phone graphics" (car + road reflections, motion blur, DoF, overbright, bleach bypass off). Dev's own PC measurement of that set: draws 1639 → 1118, render passes 30 → 4, GPU −54 %.
@@ -36,7 +44,7 @@ Owner's original settings: menus at 120 fps; thermal status rose 2 → 4 (critic
 ## Conclusions
 
 1. **The heavy part is car and road reflections** (36 → 49 together); DoF, glow, car LOD, car shadows cost ~0–4 FPS each — classic PC-era advice (glow, AA, resolution) does not transfer to this port on Mali.
-2. **The spawn crowd at the garage caps at ~35 FPS whatever the graphics**: every remote car adds draw calls that Chrome's renderer main thread translates to WebGPU; fewer cars help a little (24 → 6: 28 → 35). In the wider city with fewer players near, the phone preset gives ~50.
+2. **The spawn crowd at the garage caps at ~30–35 FPS whatever the graphics** — corrected 2026-11-08 (plan 50, cases C1/C3/C7): with 0 cars drawn the same crowd gives 44 (≈ the empty world), with 8 or 16 cars ~30: the cost is the cars being loaded and removed all the time at the spawn (port issue #79), not their count or detail. Driving the city (World 1, 2–7 cars near) gives 33–40 with the phone preset at 75 % — the earlier "~50 in the wider city" was a guess from standing readings and is withdrawn.
 3. **120 FPS is out of reach on this tablet in this port** (empty world, light preset: ~49–60). `fps = 120` only overheats the SoC into throttling; `fps = 60` is the right cap.
 4. The port has no separate car detail for the own car vs others: the game's Car detail option sets one global least-LOD for all cars (`runtime/photo.c`, `G_LEAST_LOD_A/B`); only photo mode forces full detail.
 5. Memory is tight: 11.4 of 11.5 GB used, 6.3 GB swap in use with many background apps — closing apps before playing removes stutter risk; `ui_textures = uhud` costs memory, not FPS.
