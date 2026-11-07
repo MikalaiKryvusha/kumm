@@ -568,8 +568,11 @@ Lua-моды UE4SS ждут только отложенными действия
   «Параметры» creates `W_CharacterStatsWindow_C` twice and kills any other stats window, ours included) — touching the dead ref crashes inside UE4SS. Keep a
   widget by its `GetFullName()` and find it alive through `FindAllOf(<class>)` before each touch (`hubswitch/shadow-pages-v5.lua`: 27 switches, 0 crashes).
   `OnChildActivated` fires twice per switch. The remote's `NextCarouselWindow` in a background game cycles 4 tabs only (Снаряжение … Параметры). A page
-  instance built by our code is NOT initialised like the game's: `CraftingGUI_C` shows the hotbar only, `W_Attributes_C` reads 0 on every attribute;
-  `W_FeatWindow_C` is complete with the hero's data.
+  instance built by our code: `CraftingGUI_C` shows the hotbar only (no inventory, no paperdoll — the panels come with the module activation);
+  `W_Attributes_C` and `W_FeatWindow_C` are complete with the hero's data (the test save's attributes are really 0 with 77 points unspent — the game's own
+  page shows the same, frame 2026-11-07 06:5x). Native parents: `WindowRoot` (`SetupUI`, `Open`, `Close`, `SendWindowOpenedNotifications`, `m_GUIModule`),
+  `CraftingGUIBase` (`GetPanel`, `BP_Handle*PanelWidgetCreated`, `AddDefaultSelectedInventoryGrid`), `AttributesBase` (`BindAttributeDelegates` — fails
+  when called on our instance, `UpdateAttributeInfo`).
 - **Hub tab switching (2026-10-29 16:56, remote probes).** The tabs are changed by the NATIVE parent class of `W_Carousel_C`:
   `/Script/ConanSandbox.CarouselWindow` — `NextCarouselWindow` (E), `PrevCarouselWindow` (Q), `SetCarouselIndex`; the blueprint has no own Next/Prev
   (a hook by the blueprint path fails «no UFunction»). Module events lag the switch: `NextCarouselWindow` 17.535 → `XCS_Panel` false 17.681

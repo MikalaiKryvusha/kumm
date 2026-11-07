@@ -36,7 +36,7 @@ Every remote step through `P … || break` (`pult.sh` exit 4 = dead game, HOUSE_
 
 | # | Case | Steps | Expected | Status · observation |
 |---|---|---|---|---|
-| F1 | our W_Attributes alone | create the 9 pages (`extra-pages-switch.lua`), all HitTestInvisible at opacity 0; then our W_Attributes `SetRenderOpacity(1)` + `SetVisibility(4)` | alive 2 s later; the page seen on a frame | pass (alive, frame `f1.jpg` 06:28) — but the attributes read 0: our instance is not bound to the hero |
+| F1 | our W_Attributes alone | create the 9 pages (`extra-pages-switch.lua`), all HitTestInvisible at opacity 0; then our W_Attributes `SetRenderOpacity(1)` + `SetVisibility(4)` | alive 2 s later; the page seen on a frame | pass (alive, frame `f1.jpg` 06:28; the attributes 0 with 77 points unspent are the save's real values — the game's page shows the same, `att_game.jpg` 06:5x) |
 | F2 | each of the 9 pages alone | as F1 for every index 1–9, the previous one hidden first | alive after each | **fail → cause found:** the first touch of all refs crashed (06:29:10); one of our pages had been destroyed (stats window, census 06:35:16) — a stale raw pointer |
 | G1 | our FeatWindow → our W_Attributes, no switch | F1 stand, our FeatWindow shown; then its opacity 0, W_Attributes opacity 1, next tick visibility 3 / 4 | alive | superseded by V1 (the crash was the stale ref, not the switch) |
 | H1 | the same inside the native switch | v4 hook, switches FeatWindow → Attributes ×3 | alive after each | superseded by V1 |

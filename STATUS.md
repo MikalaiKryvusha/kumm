@@ -129,7 +129,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 > **NOW 2026-11-07 06:47 +03:00 — chat of 2026-11-07, `/dayloop` (the owner's «Работай автономно» 06:24), plan 48:** the v4 crash CAUSE found — a stale Lua ref to a page the
 > game destroyed (each native «Параметры» activation kills other stats windows); **v5 keeps pages by name: 27 native switches, 0 crashes** (pack `adf2e21`). NEXT:
-> our page instances are not initialised like the game's (our «Снаряжение» — hotbar only, our «Хар-ки» — zeros; «Таланты» complete) — recon what the native
+> our page instances are not initialised like the game's (our «Снаряжение» — hotbar only; our «Хар-ки» and «Таланты» complete with the hero's data — the zeros are the save's real 0 with 77 points unspent, corrected 06:5x) — recon what the native
 > module activation calls on a window, then call it on ours; the 5 tabs past «Параметры» by `SetCarouselIndex`. Details — plan 48 «Bisect (f) and the crash cause».
 > ✅ **Chat of 2026-11-06 (fifth) soft-closed 2026-11-07 00:32 +03:00 by the owner's word (00:30, «завтра продолжим»).** The debt of the two forced closures of 2026-11-06
 > is PAID: STATUS trimmed (89 lines to the chronicle), experience lint 0 findings, attribution lint 0 new (bug 67 line marked), budget gate passed, engine
