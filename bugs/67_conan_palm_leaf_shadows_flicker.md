@@ -50,6 +50,18 @@ the calmest; finer texels (−1.5/−2.0) do not help (lever 1 of 13:04 refuted)
 0.1° — review folder 71 for the owner's eye; the build stays at 2.0 until his word. Open: is the sun DISK smooth at a stepped light (help says yes, not seen);
 path B (crossfade in the kit) if he sees the 0.1° steps.
 
+**The owner's word 2026-11-07 14:53 +03:00 (verbatim, after review folder 71):** `[OWNER]` «МЕНЯ НЕ ЕБЁТ КАК НА 2 ГРАДУСАХ!!! 2 ГРАЗУСА, 0.1 ГРАДУС - это
+ЕПРИЕМЛЕМО РЕЗКОЕ ДВИЖЕНИЕ ТЕНЕ!» → **any light step is rejected (2°, 0.1°, 0.25° alike); the shadow moves continuously — the light turns every frame — and does
+not flicker.** The 0.1° candidate above is withdrawn. Levers left that keep the light continuous: ray-traced sun shadows (recon pattern G), denser / softer
+VSM sampling (SMRT rays, samples, light source angle), the leaf shadows themselves (the owner's 14:19 reading: a leaf moved by the wind pops in and out).
+
+`[OWNER]` 2026-11-07 14:54 «нужно сделать ПЛАВНОЕ ПЕРЕМЕЩЕНИЕ СВЕТА И ТЕНЕЙ, РЕЗКИЕ ЧЕТКИЕ ТЕНИ, НА КОТОРЫХ ЛИСТЬСЯ НЕ МЕРЦАЮТ ОТ КАДРА К КАДРУ!!!!» · «ты там что-то
+говорил про то, чтобы сделать листья плотнее, чтобы они не игнорировались в отрисвовщике теней - почему не сделал?» → acceptance: continuous light, SHARP
+shadows (blur levers out), no frame-to-frame leaf flicker; next — lever 2: the palm leaf material's opacity-mask clip value in the shadow pass (kit asset edit).
+
+**Refuted 2026-11-07 15:0x–15:2x at continuous light** (report, section 5a): SMRT 32/16; Nanite `MaxPixelsPerEdge` 0.5/0.25; ray-traced sun shadows (blobs from the
+palms' baked RT proxies); the mask lever (the palm leaves are opaque geometry, `M_Foliage` blend 0). Three-attempts rule reached → `/bug-research` next.
+
 ## Goal vector and acceptance
 
 Avoid: leaf shadows on sand under palms visibly jitter frame to frame. Done when the owner, standing under palms at 4K, says the shadows do

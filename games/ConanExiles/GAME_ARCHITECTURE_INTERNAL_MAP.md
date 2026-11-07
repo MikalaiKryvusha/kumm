@@ -272,7 +272,10 @@ attacks); it hits the god hero; then `K2_DestroyActor` it. The game's idle camer
 (`_config/fixed-cam.lua`, `GameplayStatics:BeginDeferredActorSpawnFromClass` + `FinishSpawningActor`, `SetViewTargetWithBlend`) holds a fixed view through the idle
 camera, the game behind, 30+ clips. The oasis camp boss is `HumanoidNPCCharacter_20percentbigger_boss_C` (quiet-stand prefix `HumanoidNPCCharacter`). **Wind:**
 foliage sway reads `MPC_BiomeSettings` `WindIntensity` / `Wind Speed` / `Wind Strength` (live 0.1 each; set by `KismetMaterialLibrary:SetScalarParameterValue`)
-plus the level's `WindDirectionalSource2` (strength 0.1, speed 3.482; `SetStrength`/`SetSpeed`) — all 0 = still palms. At night Night Terrors (`BP_NightTerrors_*`) come to the hero. `AdjustStaminaRegenMod(1000)` выносливость НЕ удержал; работает повтор `AdjustStaminaCurrent(1000.0)` раз в 250 мс.
+plus the level's `WindDirectionalSource2` (strength 0.1, speed 3.482; `SetStrength`/`SetSpeed`) — all 0 = still palms. **Oasis palms:** ISM meshes
+`GFL_AfricanOilPalm01…05` (+ `_HLOD` billboards, `M_Foliage_Billboard`, masked 0.5), leaf materials `/Game/Environment/Foliage/Materials/FLX/MI_AfricanOilPalm01`,
+`…D01`, `…02` on `M_Foliage` — OPAQUE (BlendMode 0), two-sided; with `r.RayTracing.Enable 1` their ray-traced shadows come from baked proxies (blobs).
+`r.RayTracing.Enable` takes > 10 s to switch (the remote times out; read it back). At night Night Terrors (`BP_NightTerrors_*`) come to the hero. `AdjustStaminaRegenMod(1000)` выносливость НЕ удержал; работает повтор `AdjustStaminaCurrent(1000.0)` раз в 250 мс.
 Стенд прогона пультом (2026-10-28, правило дома о тестовом окружении): убрать всех рядом — `K2_DestroyActor` у каждого `Character` в радиусе
 60 м (лагерь NPC вокруг героя — враги стоят вплотную и бьют); существа дальше ≈150 м от героя СПЯТ (`bHidden`, тик и столкновения выключены):
 перенос спящего к герою его не будит (сеттеры столкновений не действуют, стрелы проходят насквозь), а игра потом прячет его в пул (0,0,0) —

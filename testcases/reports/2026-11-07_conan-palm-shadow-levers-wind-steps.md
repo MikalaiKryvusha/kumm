@@ -61,7 +61,17 @@ Step series, wind on, bias −1.0 (median / p90):
 Clips `D:\Games\Conan Exiles Mods\_shadow_runs\2026-11-07_wind\`, `…\2026-11-07_steps\`; review folder 71 (`НА ОТСМОТР НИКОЛАЕМ\71_teni_palm_shag_sveta`, clips 1–4 +
 `chto_smotret.md`); tools `_config/palm-shadow-series.sh`, `fixed-cam.lua`, `shadow_flicker_metric.py`, `quiet-stand.lua`.
 
+## 5a. Second part (15:0x–15:2x, continuous light 0.003 only — after the owner rejected every step at 14:53)
+
+- SMRT 32 rays / 16 samples: same as base (series cut by a remote timeout on `r.RayTracing.Enable`, re-run: no change).
+- `r.Nanite.MaxPixelsPerEdge` 0.5 / 0.25 (base 1.2): 0.14–0.19 vs base 0.14–0.15 — no effect.
+- Ray-traced sun shadows (`r.RayTracing.Enable 1` + `Shadows 1`, also with ISM `MinLOD 0`, `EvaluateWPO 1`): the shadow becomes smooth BLOBS — the palms' baked
+  ray-tracing proxies, no leaves; 41 fps captured. Not the owner's crisp shadows.
+- The palm leaf materials are opaque (`M_Foliage`, BlendMode 0, clip 0.333 unused) — the «denser leaves» mask lever does not exist for these palms.
+- A crash at 15:01:49 (ACCESS_VIOLATION in UE4SS.dll): `palm-material-probe.lua` read `StaticMesh` of every mesh component; crash window closed (PID 37276);
+  the probe now skips templates and invalid objects (re-run clean).
+
 ## 7. Verdict
 
-partial — the measurement points to a 0.1° (or 0.25°) light step: calm like 2.0, steps 8–20× smaller (the sun disk: per the game's help the delta turns only the light — NOT checked by eye); the build stays at 2.0
+fail — no lever gives continuous light + sharp shadows + no flicker (the owner's acceptance 14:53–14:54; the step candidate he REJECTED). Was: the measurement pointed to a 0.1° (or 0.25°) light step: calm like 2.0, steps 8–20× smaller (the sun disk: per the game's help the delta turns only the light — NOT checked by eye); the build stays at 2.0
 until the owner's eye on folder 71 (taste class). The live game was returned to 2.0 / −1.0, wind restored, the view back on the hero.

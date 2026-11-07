@@ -135,9 +135,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > автономно» · «бери игру вперед» → `/dayloop` after this item.** Clean stand built (fixed CameraActor `fixed-cam.lua`, window capture `gfxcapture`, time 14.0
 > per clip, quiet-stand catches the camp boss now; tools row HOUSE_RULES_REFERENCE «shadow / clip stand»). Measured (report
 > `testcases/reports/2026-11-07_conan-palm-shadow-levers-wind-steps.md`): the every-frame light flickers with AND without wind; finer texels −1.5/−2.0 do NOT help
-> (lever 1 refuted); light steps 0.1° / 0.25° calm like 2.0, 0.05° blinks. **Waiting for the owner's eye:** review folder 71 (clips 1–4 + `chto_smotret.md`) —
-> if he sees no flicker/step in 0.1° → the pack's `Engine.ini` `DynamicSky.SolarUpdateAngleDelta=0.1`; build stays 2.0 until his word. Open: the sun DISK at a
-> stepped light (help says smooth, not seen by eye); path B (crossfade in the kit). Game open (PID 28232), live values back to 2.0 / −1.0, wind restored.
+> (lever 1 refuted); light steps 0.1° / 0.25° calm like 2.0 by the metric — **REJECTED by the owner 14:53: any step (2°, 0.1°) is an unacceptable sharp shadow
+> move; target = continuous light, SHARP shadows, no frame-to-frame leaf flicker (bug 67, verbatim).** Also refuted 15:0x–15:2x: SMRT 32/16, Nanite
+> `MaxPixelsPerEdge` 0.5/0.25 (no change); ray-traced sun shadows give BLOBS (baked ray-tracing proxies of the palms, `RayTracingProxies.ProjectEnabled 1`), 41 fps;
+> the palm leaves are OPAQUE geometry (`MI_AfricanOilPalm01/D01/02` on `M_Foliage`, blend 0) — no mask threshold to lower. The probe of all mesh components crashed
+> the game once (fixed, `palm-material-probe.lua`). NEXT for bug 67: `/bug-research` (3+ levers failed) — how shipped games keep crisp foliage shadows under a
+> continuously moving sun; candidates: palm assets without RT proxies (kit), VSM page-grid stabilisation. Game closed, lock released, build unchanged (2.0 / −1.0).
 > ⚠️ **Чат 2026-11-07 (второй) закрыт принудительно 2026-11-07 12:43 +03:00 на 85 % окна: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) —
 > долг платит первый /end-chat-soft.** Ложных утверждений на месте: нет (исправлено в этом чате: «E/Q пульта ходят только по 4 вкладкам» — в карте игры и плане 48).
 > Игра закрыта, замок снят, всё запушено (KUMM `43b54c7`+, пак `d85dfbe`). Сделано за чат — блоки UPDATE ниже и NOW: пустой хаб при быстром переключении,
