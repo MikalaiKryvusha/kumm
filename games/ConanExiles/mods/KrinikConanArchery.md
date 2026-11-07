@@ -120,6 +120,13 @@ game-thread trigger is found: the shafts after the full loot window and after a 
 
 ## Open
 
+- **Draw time by Agility (the owner's order 2026-11-07 21:43, NOT BUILT):** `[OWNER]` «каждый пункт Пропорства должен уменьшать время натяжения лука на 1%» ·
+  «причем каждый процент не абсолютно применяется, а к предыдущему значению времени натяжения … оно прогрессивно 100 раз уменьшалось по 1%» → full-draw
+  time = base × 0.99^Agility. Vanilla base (kit montage `AM_combat_2h_bow_combo_heavy_c0`, game map): the charge `BP_PowerCharge` starts 0.552 s, lasts 1.28 s →
+  full at ≈ 1.83 s. 21:45 he asked the table for a base of 5 s (`[OWNER]` «если сделаем жл полного натяжения 5 секунд на нулевом уровне проворства») — the base is
+  his decision, not taken yet: 5 s gives 4.09 s at 20, 1.83 s (= vanilla) at 100, 0.67 s at 200. Way: the draw montage's play rate on the hero's AnimInstance
+  (`Montage_SetPlayRate`) for the draw part + the bow string's own single-node rate; Agility read as `KrinikConanLocomotion` does (`read_agility`).
+
 - **REMOVED 2026-11-02 15:3x by interview #031, answer A** (`[OWNER]` «убрать строку, пока спрайт не найден. Найдётся — вернём её уже к нему»): the hub row
   `arc_wave` (Lua PAGES, kit PAGES), `CFG.wave_opacity`, `tune_wave` and its call in `dress_arrow` are gone; the code lives in git (pack `a848a58`). The history
   below stays for the day the sprite is found.
