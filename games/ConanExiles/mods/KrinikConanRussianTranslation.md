@@ -25,6 +25,10 @@ Renamed from «Krinik Russian Translation» 2026-10-30 (W33). ≈54 451 entries 
   rows too (one entry by key, its source guard wants the same row in `dm-fish-ru.tsv`): `locres-fixes-2026-11-02.tsv`, 54 457 entries, 1 changed.
 - Deploy: `Deploy-ModPack.ps1 -PackDir ConanExiles -Deploy -Only KrinikConanRussianTranslation` (one name per `-Only` when called through `-File`).
 
+- **Culture-invariant text is out of the `.locres`'s reach (2026-11-07):** an FText with `Flags: CultureInvariant` (`CultureInvariantString` in the asset's JSON)
+  is never gathered and never localized — translate it in the mod's asset: an `asset-strings/<Mod>__<Asset>.tsv` of «old ⇥ new» rows (uaj replaces the
+  invariant string) built into the mod's pak (`krinikBuild`, KRINIK MODIFIED). First case — Ironlight's admin panel (`Ironlight.md`).
+
 ## Our edits of vanilla strings (vanilla-overrides-ru.tsv)
 
 | Key (Exiles_UI) | Text | Why |
