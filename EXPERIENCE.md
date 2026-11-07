@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0479 · 2026-11-07 · ❌→✅ · #conan #capture #testrun #stand #shadows
+class: a metric over a frame nobody looked at
+mechanized: `_config/palm-shadow-series.sh` (window capture `gfxcapture`, `QUIET`, per-clip time of day) + `fixed-cam.lua`; tools row in HOUSE_RULES_REFERENCE
+**Lesson:** three palm-shadow series in a row were garbage, each caught only by LOOKING at one frame: ddagrab filmed the owner's VS Code (metric 0.000),
+then a camp boss fought the hero and the idle camera orbited (metric ~40), then the box sat on bare sand after a time change (0.06). Before reading any
+clip metric, read one frame of THAT clip. Capture the game window, not the desktop; fix the view with a CameraActor, not the player camera; choose the box
+after the time of day is set. With the stand clean the answer came in 20 minutes.
+
 ### EXP-0478 · 2026-11-07 · ✅ · #conan #translation #ui #windows #method
 class: none — a working loop
 mechanized: `_config/walk-mod-windows.sh` + `devkit/locres-set-tr.py` (source guard) + `locres-regress.py`; the module list in the game map

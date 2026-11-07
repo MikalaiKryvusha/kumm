@@ -42,6 +42,14 @@ the light's turn re-samples the pages — the cause is the rotation, not the re-
 captured without `hdr.ps1 off`); the build stays at 2.0 / −1.0.** Also: the series ran without a fixed time
 of day (≈ one game hour passed, EXP-0469) — re-run with `SetTimeOfDay` before each clip after the 19:42 long run.
 
+## Measurement 2026-11-07 14:2x–14:4x +03:00 — clean stand (report `testcases/reports/2026-11-07_conan-palm-shadow-levers-wind-steps.md`)
+
+Fixed CameraActor, time 14.0 before each clip, window capture (no HDR overexposure), wind off and on. `[OWNER]` 14:19 «хотя мерцания во много вызванны ветром» ·
+«так как это сдвигает лист - и он от появляется в тени, то исчезает». Seen: the every-frame light (0.003) flickers with AND without wind; a still light is
+the calmest; finer texels (−1.5/−2.0) do not help (lever 1 of 13:04 refuted); steps 0.1° and 0.25° are as calm as 2.0, 0.05° blinks per step. Candidate:
+0.1° — review folder 71 for the owner's eye; the build stays at 2.0 until his word. Open: is the sun DISK smooth at a stepped light (help says yes, not seen);
+path B (crossfade in the kit) if he sees the 0.1° steps.
+
 ## Goal vector and acceptance
 
 Avoid: leaf shadows on sand under palms visibly jitter frame to frame. Done when the owner, standing under palms at 4K, says the shadows do

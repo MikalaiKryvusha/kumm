@@ -268,7 +268,11 @@ UE4SS hook on a STATIC UFunction (`GameplayStatics:*`): the first callback param
 return value is not passed; editing a parameter in the pre-hook does not reach the call.
 Stand for creature hits (2026-10-30): the creature keeps its controller and normal time (detached or `CustomTimeDilation` 0.0001 — it never
 attacks); it hits the god hero; then `K2_DestroyActor` it. The game's idle camera (no real input ≈30 s) hides the HUD and orbits the hero —
-`SetControlRotation` is ignored until a real key (a Shift tap by `mouse-seq.ps1`). At night Night Terrors (`BP_NightTerrors_*`) come to the hero. `AdjustStaminaRegenMod(1000)` выносливость НЕ удержал; работает повтор `AdjustStaminaCurrent(1000.0)` раз в 250 мс.
+`SetControlRotation` is ignored until a real key (a Shift tap by `mouse-seq.ps1`). **No-input twin (2026-11-07):** a spawned `CameraActor` made the view target
+(`_config/fixed-cam.lua`, `GameplayStatics:BeginDeferredActorSpawnFromClass` + `FinishSpawningActor`, `SetViewTargetWithBlend`) holds a fixed view through the idle
+camera, the game behind, 30+ clips. The oasis camp boss is `HumanoidNPCCharacter_20percentbigger_boss_C` (quiet-stand prefix `HumanoidNPCCharacter`). **Wind:**
+foliage sway reads `MPC_BiomeSettings` `WindIntensity` / `Wind Speed` / `Wind Strength` (live 0.1 each; set by `KismetMaterialLibrary:SetScalarParameterValue`)
+plus the level's `WindDirectionalSource2` (strength 0.1, speed 3.482; `SetStrength`/`SetSpeed`) — all 0 = still palms. At night Night Terrors (`BP_NightTerrors_*`) come to the hero. `AdjustStaminaRegenMod(1000)` выносливость НЕ удержал; работает повтор `AdjustStaminaCurrent(1000.0)` раз в 250 мс.
 Стенд прогона пультом (2026-10-28, правило дома о тестовом окружении): убрать всех рядом — `K2_DestroyActor` у каждого `Character` в радиусе
 60 м (лагерь NPC вокруг героя — враги стоят вплотную и бьют); существа дальше ≈150 м от героя СПЯТ (`bHidden`, тик и столкновения выключены):
 перенос спящего к герою его не будит (сеттеры столкновений не действуют, стрелы проходят насквозь), а игра потом прячет его в пул (0,0,0) —
