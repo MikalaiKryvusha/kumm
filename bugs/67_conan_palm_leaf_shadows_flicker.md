@@ -111,7 +111,14 @@ HIDE it (blur the stair steps), they do not cause it — without them the grid c
 **delta 0.0025** (pack Engine.ini updated). Live now: 11:00, delta 0.0025, DLSS 0, throttle 0/0, pool 8192, SMRT 16/8, bias −1.0, Nanite MaxPixelsPerEdge 0.25.
 16:13 DLSS off: `[OWNER]` «если сейчас ДЛСС выключен, то не помогло, мерцают»; blink map 15 391 vs 1 677 (raw SMRT noise without temporal AA) — DLSS back on.
 Summary of the live day: every per-frame lever only hides or reveals the same thing — the shadow grid re-sampled at each light turn; the next step is the
-helper's recon of WHY leaflets vanish for frames (page feedback one frame late, HZB/instance culling of casters, Nanite shadow raster budget). `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
+helper's recon of WHY leaflets vanish for frames (page feedback one frame late, HZB/instance culling of casters, Nanite shadow raster budget).
+**16:26 DECISIVE (recon `2026-11-07_leaf_shadows_fill_in_recon.md`, its first test):** the light STILL (delta 2.0) + `r.Shadow.Virtual.Cache.ForceInvalidateDirectional 1`
+(the map re-rendered every frame) → 169 666 blinking ground pixels (25.6 %) vs 1 677 normally — **the leaflets are lost by the shadow RE-RENDER itself, not by the
+rotation**. Prime suspect: Nanite cluster buffers overflow in the shadow pass (Funcom's Windows_HighVRAM profile halves MaxVisibleClusters 4194304 → 2097152 and
+MaxCandidateClusters 16777216 → 8388608; an Epic VSM engineer on a Conan thread: «I'd focus on the Nanite buffer overflow investigation first»). NEXT, in order:
+`nanitestats virtualshadowmaps` at delta 2.0 vs 0.0025; double MaxCandidateClusters / MaxVisibleClusters / MaxNodes (+ `r.Shadow.Virtual.Nanite.AllowMultipassViews 1`) and
+re-run the forced re-render test; then `r.Nanite.Streaming.QualityScale.MinQuality 1`, StreamingPoolSize 1024; `r.Shadow.NaniteLODBias 0`. A winning value may need a
+`[ConsoleVariables]` / Lua route — the device profile outranks SystemSettings. Values restored 16:27 (0.0025, ForceInvalidate 0). `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
 
 ## Goal vector and acceptance
 
