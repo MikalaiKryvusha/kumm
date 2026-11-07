@@ -188,7 +188,13 @@ then the hub empties (probe runs of 30 ticks with no page). The game tolerates n
 design; the gap is limited to a direct click between «Снаряжение» and «Параметры» (Q/E never pass between them).
 **Scope of the mods' adapters shrinks:** with «Снаряжение» and «Параметры» the game's own pages, their embeds (EoT, EAA, Accessory System, Xevyr, fishing,
 Hosav, our «Настройки модов») keep working natively; of the inventory below only Simple Minimap's map overlay sits on a page of OURS («Карта»).
-NEXT: the hub's lifecycle (our shown page must hide when the hub closes; build lazily on open — the owner's design — instead of all at once; release by
+**v9 — the lifecycle (07:17–07:21, `hubswitch/shadow-pages-v9.lua`):** the carousel never dies or hides (one `W_Carousel_C` across close/open, its BP
+has only `Construct`), so «closed» = the game's page of the current tab has left the viewport, checked 1 / 100 / 300 ms after Esc, Tab (key binds) and every
+`ActivateModule` (the remote's path) — no timer. On close our pages are Collapsed; the next native switch (the reopening) puts them back. Remote close
+from «Снаряжение» (`ActivateModule(CharacterInventory,false)`), from «Таланты» (`FeatWindow,false`) and «Карта» (`FullscreenMap,false`) — `CharacterInventory,false`
+closes the hub ONLY on «Снаряжение»: 3 closes, 3 reopens, 0 errors; frames — the bare world with no page of ours after each close, the complete «Снаряжение»
+after each reopen. Not yet: the player's Esc / Tab / «Закрыть» path (the game in front).
+NEXT: lazy build on open (the owner's design) instead of all at once; build lazily on open — the owner's design — instead of all at once; release by
 the RAM measurement), the Simple Minimap adapter, then v7 as a section of KrinikConanUI; the 144 fps recording when the game may come to the front; real mouse clicks (`ButtonPressed`); the bottom-bar `WBP_ButtonBar_C` reborn per
 switch; the mods' embeds on our pages (API, inventory below).
 
