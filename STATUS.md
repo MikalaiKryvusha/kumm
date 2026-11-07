@@ -149,6 +149,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 7. `[OWNER]` 20:05 «с шеудером водыы, предположительно, похожая проблема, как и с шейдером тени листвы пальм - есть какая- то неестественная рябь, что-то то появляется то
 >    исчезает» — his frame: fine sparkling speckles over the oasis water. Method: the clean stand, still vs turning sun first (sun glint / Lumen reflections re-evaluated
 >    each light step?), then «what on the water does NOT sparkle». His frame is in the chat only (no file).
+> 8. `[OWNER]` 20:12 «очень странно выглядят вдали входы в пещеры - как черное бельмо. Скала покрыта дымкой (полааю, шейдер) а этот черный вход словно не покрыт этой
+>    дымкой - вероятно, баг» — a far cave mouth renders pure black, unfogged, while the rock around is hazed. Suspects: the cave-mouth blocker mesh with an unlit /
+>    translucent material that skips fog; our pack Engine.ini fog settings (control: the game's default fog). Frame in the chat only.
 > ✅ **19:19 BUG 67 DONE** (`bugs/67_DONE_…`, report `testcases/reports/2026-11-07_conan-palm-shadow-wpo-bound-fix.md`): deployed by the build (`modpack.json`
 > KrinikConanGraphics kind `pak`), fresh launch: bound 100, sun 0.0025, blink 0.14–0.24 % at wind 0.21–0.22. Guide line marked fixed. Open: a gameplay crash pass with the pak.
 > ✅ **19:10 BUG 67 FIXED AND SEEN:** `KrinikConanGraphics.pak` (M_Foliage with `MaxWorldPositionOffsetDisplacement` 100 cm, kit-cooked) → turning sun 0.06–0.44 % blink vs
