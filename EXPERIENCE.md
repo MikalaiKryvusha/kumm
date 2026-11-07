@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0482 · 2026-11-07 · ❌→✅ · #conan #shadows #rendering #method #nanite #wpo
+class: a month of tuning knobs on the symptom instead of asking what does NOT show it
+mechanized: bug 67 closure; game map line «root cause»; `kit-foliage-wpo.py`
+**Lesson:** the palm-leaf shadow flicker cost a month of cvar turning (SMRT, bias, Nanite buffers, cache, DLSS, a shader patch) and two wrong «causes». It fell in
+minutes to the owner's question «почему тень героя с луком не мигает, а листьев мигает?»: compare what flickers with what does NOT under the same light (hero —
+skeletal, trunk/rocks — Nanite without WPO, leaves — Nanite WITH WPO), then read the one property that differs (`MaxWorldPositionOffsetDisplacement = 0`).
+For any rendering artifact: first list the casters / objects that do NOT show it on the same frame and name their difference; read the asset properties of that
+difference before touching a single cvar. A clean stand + a discriminating control (still vs turning light) beat any number of levers.
+
 ### EXP-0481 · 2026-11-07 · ❌ · #conan #cvar #crash #nanite
 class: a live cvar raised past a hardware limit without reading the limit first
 mechanized: none — the limit stands in the game map (Nanite streaming pool line)
