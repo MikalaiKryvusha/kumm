@@ -27,7 +27,9 @@ _config/localization/il-event-phrases-ru.tsv _config/localization/asset-strings/
 
 ## How to look inside
 
-`python -I -X utf8 _config/devkit/patch-mod-asset.py extract Ironlight-Core <Asset> <work>` → `<work>/<Asset>.json`.
+`python -I -X utf8 _config/devkit/patch-mod-asset.py extract Ironlight-Core <Asset> <work>` → `<work>/<Asset>.json`. `IL_WBP_AdminUI` (2026-11-07): 189 exports,
+175 imports; the six headers/buttons are `TextPropertyData` with `Flags: CultureInvariant`, `HistoryType: None`, the text in `CultureInvariantString` — one
+occurrence each.
 
 ## Open
 
