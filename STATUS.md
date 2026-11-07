@@ -141,7 +141,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (`exec MakeMeAdmin` first). Also fix the game map line that names 51405 as a bow.
 > **0b. (owner 21:04, his frame and words in chat):** the MAGENTA part of the HUD health / stamina bars (the reduced-max share, «-350 HP / 50%») must default to a FADED GREY —
 >   UIMod_Hosav `W_SmoothHP` (no setting for it in our notes: an asset edit of the HUD pak, rule 8 — first look for the mod's own option). <!-- attribution-ok: verbatim in the chat of 2026-11-07 21:04 -->
-> **0c. (owner 21:05, chat):** «our level curve, 500 XP per level» — the manifest note of KrinikConanGameplay says XP 500 × level^0.5; verify the live per-level XP against it next to (b) endless attributes. <!-- attribution-ok: verbatim in the chat of 2026-11-07 21:05 -->
+> **0c. (owner 21:05, chat):** «our level curve, 500 XP per level» — the manifest note of KrinikConanGameplay says XP 500 × level^0.5; verify the live per-level XP against it next to (b) endless attributes. **DECISION 21:06 (chat): the base becomes 1000** (1000 instead of 500 in the curve of KrinikConanGameplay; rebuild its pak). <!-- attribution-ok: verbatim in the chat of 2026-11-07 21:05-21:06 -->
 > **FIRST NEXT CHAT — the owner's order 2026-11-07 20:50 (verbatim):** `[OWNER]` «сейчас стрелба откоючает спринт. В новом чате начнём с того, что продолжим делать мод
 >   Локомодации. Спринт и стрельбу делаем возможными одновременно.» · «И откобчаем лимит на прокачку атрибутов. Делаем её бесконечной.» · «И она бесконечно будет по фотмулам
 >   влиять на характеристики героя». So, in order: (a) KrinikConanLocomotion — sprint and bow shooting at the same time (now a shot cancels the sprint); (b) attributes without
