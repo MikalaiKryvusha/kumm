@@ -162,6 +162,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > not in the global cache → the route is a MATERIAL OVERRIDE MOD: patch the kit's `NaniteRasterizer.ush` (scoped to the VSM permutation), recook `M_Foliage`
 > (`/FLX_Materials/Materials/Environment/Core/M_Foliage`, in the kit) in a Krinik kit pak (as KrinikConanUI), ship via Mods/. Risks: kit CL 378787 vs game 379176; the palm MIs may
 > carry static switches (own shader maps, not in the kit). Back up the kit file before editing; restore it after the cook so other kit mods build unpatched.
+> **NOW 2026-11-07 19:2x — chat of 2026-11-07 (fourth), `/dayloop` by the owner's word 18:56.** Bug 67 (palm shadows, a month) DONE — below. Game log after the
+> deploy: no M_Foliage / shader errors. Open from it: other biomes' foliage by frame (all `M_Foliage` children got the 100 cm bound), a gameplay crash pass. Next in
+> the loop: the bow's air shot by real input (Locomotion M6), quick-loot R3, plan 45 boss spawns. Game running (background launch 19:14), keeper timer on, fixed cam on.
 > ✅ **19:19 BUG 67 DONE** (`bugs/67_DONE_…`, report `testcases/reports/2026-11-07_conan-palm-shadow-wpo-bound-fix.md`): deployed by the build (`modpack.json`
 > KrinikConanGraphics kind `pak`), fresh launch: bound 100, sun 0.0025, blink 0.14–0.24 % at wind 0.21–0.22. Guide line marked fixed. Open: a gameplay crash pass with the pak.
 > ✅ **19:10 BUG 67 FIXED AND SEEN:** `KrinikConanGraphics.pak` (M_Foliage with `MaxWorldPositionOffsetDisplacement` 100 cm, kit-cooked) → turning sun 0.06–0.44 % blink vs
