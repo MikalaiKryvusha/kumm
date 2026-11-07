@@ -524,6 +524,12 @@ Simple Minimap ставит карту во время игры: центр сл
 персонажа (`W_PaperdollPanel`) — родной шаблон `ST_UI_GeneralText` / `Level_ExpandedDetails` «({Percentage}% {CurrentXp}/{MaxXp})», значения внутри
 уровня, формируются кодом (2026-10-28).
 Lua-моды UE4SS ждут только отложенными действиями игрового потока (`ExecuteInGameThreadWithDelay`): рабочий поток задержек роняет игру (баг 66).
+Arrow damage path (remote diagnostics 2026-11-07 22:3x, bug 85 K14): a hit on a CREATURE runs on the target's `BP_CollisionComponent_C`: `TakeProjectileDamage` →
+`ApplyDamageAll(DamageStructure, Combo, AttackBlocked, DamagedActor, HitFromDirection, HitInfo, EventInstigator, DamageCauser, DamageMultiplier)` →
+`ApplyAllDamageModifications` → `ApplyDamageModifiers` ×3; a hit on the world / a static mesh runs `ApplyDamageSpecific` (the same params + a leading `Type`).
+`EventInstigator` = `FunCombat_PlayerController_C`, `DamageCauser` = `BP_Visual_BowProjectileBase_C`. Head bones: humans / hyena `b_head`, Kappa `rig_bone_head`,
+deer / fawn `rig_bone_deer-head`; ears are separate bones (`b_R_ear`). Kill XP = the mob's `BP_XPHolder_C.xpToGive`. Mob hate list —
+`/Game/Systems/AI/NewAI/BPTargetDistributionComponent.BPTargetDistributionComponent_C` (`UpdatedHeardActors`, `AddToHatelist(TargetWrapper{RawTarget, SubTargetIndex})`).
 UE4SS build 1181 (`8333063`), threads (source read 2026-11-07, bug 85): `RegisterKeyBind` / `RegisterKeyBindAsync` callbacks run on UE4SS's event-loop thread;
 `RegisterHook` callbacks and delayed-action batches run on the game thread WITHOUT the mod lock; a mod's Lua threads share one `lua_State` → no key binds in our
 mods (guard `check-lua-game-thread.py`). Gameplay keys on the game thread: `/Game/Characters/BasePlayerChar.BasePlayerChar_C:InpActEvt_AnyKey_K2Node_InputKeyEvent_1(Key)`

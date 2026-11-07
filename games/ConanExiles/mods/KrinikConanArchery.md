@@ -129,6 +129,9 @@ game-thread trigger is found: the shafts after the full loot window and after a 
   first hero arrow): hero instigator (a PlayerController) + a `BP_BaseProjectile` causer + bone name containing «head» → `DamageMultiplier` ×2; the hero's first hit on
   that mob and a head hit → `xpToGive` ×2 for that hit, restored 100 ms later (and on the next hero hit) if it lived. `[AI]` Only the hero's arrows get ×2 damage (NPC
   archers' head hits on the hero are not doubled) — a reading of «попадание в голову» in the bow context; the owner may widen it.
+- **Headshot kill slow motion (the owner's order 2026-11-07 22:38 +03:00, NOT BUILT):** `[OWNER]` «при убийстве в голову с x2 опытом, нужно замедлять игру в 2 раза на 2 секунды от смерти
+  мода» — on the ×2-XP kill (first hero hit, head, kill): global time dilation 0.5 for 2 s from the death (`GameplayStatics:SetGlobalTimeDilation`, back to 1.0 after —
+  the 2 s counted in real time; check the death moment's event: the corpse birth).
 - **(order text) Headshots (the owner's order 2026-11-07 21:57 +03:00):** `[OWNER]` «попадаение у голову увеличивает урон в 2 раза. Убийство моба попадаем у голову с ОДНОГО выстрела
   первого - x2 опыта, что показывается в виджете с полученным за убийство опытом.» · «Если были героем игрока нанесены любые другие удары по этому мобу, то x2 больше за
   убийство в голову не засчитывается. Убить нужно именно первым ваншотам в голову». (21:55 he asked only whether head hits are distinguishable — yes: the hit's
@@ -146,6 +149,23 @@ game-thread trigger is found: the shafts after the full loot window and after a 
   **Timid animals flee (`[OWNER]` 2026-11-07 22:20 +03:00 «пугливые животные должны не бросаться на героя, а убегать услышав падение стрелы рядом»):** check first whether the
   game's own «heard» already makes a timid animal flee; if not — the controller's native `HumanAIController_C.StartPanic` / `GetPanicCenter` (panic centred on the
   arrow's landing point) for animals the game itself treats as fleeing (its faction / behaviour data, not a list of ours). NOT BUILT.
+  **Seen 2026-11-07 22:28 +03:00 (the owner's shots near a gazelle, log «стрела упала: мобов в 10 м — 1, «услышали» 1 (1.00 мс)» ×2):** `[OWNER]` «она пугается, начинает бежать, но очень
+  быстро успокаивается» → the game's own «heard» already makes a timid animal flee — only too briefly. `[OWNER]` 22:27 «нужно бы. чтобы пугливые животные не успокаивались
+  минуты 2» → next: keep the flight ≈ 120 s (the controller's panic: `StartPanic` / `StartPanicTimer` / `GetPanicRadius` / `GetPanicCenter` of `HumanAIController_C` — read
+  the panic timer's own duration first, set it natively).
+  **Hostile mobs give up (2026-11-07 22:30 +03:00):** `[OWNER]` «не добегают до меня злые» · «бегут. но потом передумывают, и бегут назад» · «и словно не понимают, куда им бежать» ·
+  «словно у них конфликт между их точкой привязки, которая их держит, и бегством за мной» · «не должно быть никаких точек привязки у злых мобов». Remote: `AddToHatelist`
+  takes `/Script/ConanSandbox.TargetWrapper {RawTarget (interface), SubTargetIndex}`; `AddToHatelist({RawTarget = hero})` on a hyena 50.7 m away — it did not move (5 reads
+  over 7 s). Lever named by the owner: the leash — `ConanAttackerAIController:SetShouldNotLeash(true)`; 22:29 set on 9 hyenas within 150 m for the owner's next shots.
+  22:30 the owner narrowed it: `[OWNER]` «или по крайней мере. они должны спавниться где-то. но не должно быть вызовов, которые дергают их бежать назад на свою точку
+  привязки» — the spawn point stays, the pull-back (leash) goes.
+  22:30 result: `[OWNER]` «нет, не бежит, стоит на месте и дергается в разные стороны» (unleashed hyenas after a heard arrow) — attempt 3 of 3 blind (heard · AddToHatelist ·
+  SetShouldNotLeash). STOP poking (BUG_FIXING 3-attempts rule): next is a recon of the beast AI — its behaviour tree and blackboard keys (`UpdateBBKeysFromPawn`,
+  `GetAllowedHomeRange`, `ReturnHomeIfTooFarWhilePlayingIdleEmote`, `LeashIfNoTargetAnymore`, `FinishLeashing`, `ManageGiveUpHate`, `ManageLeashingHate`, `CanEngageTarget`'s
+  `TriggeringHateType`), by bytecode of `BPTargetDistributionComponent` and the creature BT, before any further code. Also open: why «heard» moves a hostile toward the
+  noise but not after the hero. Clue 2026-11-07 22:31 +03:00: `[OWNER]` «ближняя гиена бежит ко мне» · «а дальняя не бежит» — a DISTANCE threshold (engage / disengage / give-up range:
+  `CanAttackWithinDisengagementDistance`, `ShouldBuildGiveUpHate`, the perception / aggro radius) — first thing to read in the recon.
+  The order «no anchor points for hostile mobs» is wider than archery — a build-wide rule (which mod owns it: KrinikConanGameplay) — recorded, decide the home after the test.
   **Cost fix 2026-11-07 22:20 +03:00:** the first build searched `FindAllOf("BaseNPC_C")` — 12.00 ms per arrow (22:17); now `KismetSystemLibrary:SphereOverlapActors` (Pawn, class
   `BaseNPC_C`) — the remote probe found the Kappa in a 10 m sphere at ≤ 1 ms (os.clock step). Stand traps: a creature teleported far from its home is pulled back
   (`TeleportHome`, 25 m → 111 m); `FindFirstOf('PlayerController')` is a TrivialObject — use `FunCombat_PlayerController_C` (arrow-stand.sh summon is broken by it).

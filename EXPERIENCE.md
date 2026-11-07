@@ -91,6 +91,21 @@
 
 ## Entries
 
+### EXP-0488 · 2026-11-07 · ❌ · #ue4ss #conan #remote #crash #trace
+class: an unproven read inside a remote probe crashes the owner's game
+mechanized: none
+**Lesson:** a remote probe (22:47) looped `LineTraceSingleForObjects` over three object-type sets and read `hit.Component:Get()` from the OUT `FHitResult` table and
+`mesh:GetCollisionObjectType()` — EXCEPTION_ACCESS_VIOLATION reading 0x18 inside UE4SS, the owner's game gone mid-test. The same trace with one set and no weak-pointer
+read had passed a minute before. A probe on the owner's running game adds ONE unproven read per call, never a batch of them (EXP-0403: pcall does not catch a native crash).
+
+### EXP-0487 · 2026-11-07 · ❌ · #ue4ss #conan #hook-timing #bp
+class: a «pre» hook on a Blueprint function runs AFTER its body
+mechanized: game map line «Arrow damage path»
+**Lesson:** UE4SS 1181 runs the callback of a BLUEPRINT function (script→script calls and even `ReceiveHit` dispatched from C++) after the function body: hook order
+inner→outer (ApplyDamageModifiers, ApplyDamageAll, TakeProjectileDamage); `GetProjectileDamageOverDistance` → `ApplyDamageAll` → `ReceiveHit`; the one-shot hyena died 5 ms
+BEFORE our «×2» write. Writing a param in such a callback changes nothing that the body already used. To change a value BEFORE it is used, write the OUT param of an
+inner function that returns before the use (its callback runs before the caller continues). Every «I doubled X» claim needs the effect observed, not the log line.
+
 ### EXP-0486 · 2026-11-07 · ❌ · #ue4ss #conan #lua #delayed-action
 class: two game-thread delayed actions of the same delay — one silently never runs
 mechanized: none — rule of thumb in the game map (UE4SS line): chain dependent setup inside ONE delayed action

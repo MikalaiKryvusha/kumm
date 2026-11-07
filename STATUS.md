@@ -143,6 +143,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   K4 failed in the 21:38 run (its delayed action never ran) — fixed, check K4–K8 at the next launch (numpad DEAD in the run the owner plays now); (3) Archery K10 «arrows
 >   into an already dead body → its loot» (owner 21:41) — written, next launch; (4) the crash check is the owner's own gameplay (`[OWNER]` 21:39 «я вылет при убийстве буду
 >   проверять сам» · «это ты не сможешь воспроизвести»). Cases `testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md`.
+> **NOW 2026-11-07 22:50 +03:00 — `/dayloop` (owner «комп твой, работай автономно» 22:03), the owner shoots on the agent's stands («стреляь буду я, а ты читать логи» 22:24).** PASS: camera
+>   numpad K4–K7, draw time by Agility K11–K12 (montage slowed during the charge), missed-arrow alert cost ≤ 1 ms (SphereOverlapActors). BROKEN, in work: headshot ×2 damage /
+>   ×2 XP — UE4SS runs Blueprint-function callbacks AFTER the body (EXP-0487), the doubling lands after the kill; plan: decide in the OUT param of the projectile's
+>   `GetProjectileDamageOverDistance` (returns before the damage) and get the bone there by a line trace (`LineTraceSingleForObjects` types {2,3} passed; a batch probe
+>   crashed the game 22:47 — EXP-0488). Recorded, not built: hostile mobs give up / leash (3 blind attempts, recon the beast AI next), timid animals flee 2 min, headshot
+>   slow motion 0.5× 2 s, bugs 86 (attribute caption), 87 (beasts walk into the hero), 88 (debuff line fonts), plan 49 (endless attributes, screen paging).
 > **NEXT LAUNCH — run first (all in the game folder, none run yet; cases in `testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md`):** Camera numpad K4–K8;
 >   Archery: arrows into an already dead body → its loot (K10), draw time by Agility 5 s × 0.99^n (K11–K12, owner 21:43/21:46), a missed arrow wakes mobs within 10 m via
 >   the hate list `UpdatedHeardActors` (K13, owner 21:50), headshot ×2 damage + first-hit one-shot headshot ×2 XP (K14–K17, owner 21:57). Pack `1f3f120`.
