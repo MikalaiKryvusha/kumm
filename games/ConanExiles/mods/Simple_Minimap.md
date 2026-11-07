@@ -34,10 +34,13 @@
 - Our own `W_FullscreenMap_C` instance (the controller's page) is identical except the helper row («Shift + мышь Новый маркер», «Свои маркеры») — frames
   `map_cmp.jpg`. `WidgetTree:FindWidget(FName('sb_ButtonBar'))` returned nothing; our `sb_ButtonBar` is found through `FindAllOf('SizeBox')` + name +
   `GetOuter():GetOuter()` = our page.
-- A second helper created by us (`Create(pc, SM_UI_MapHelper_C, pc)`) and added to our `Overlay` (`AddChild` returned a slot; copying the slot's alignment
-  failed) did not show, and right after it `FindAllOf('SM_UI_MapHelper_C')` listed ONE helper — the mod keeps one instance or ours died. NEXT: read how the
-  mod creates and places the helper (its BP graph — `kismet-trace.py`), then either move the ONE helper into our page on show / back on hide, or call the
-  mod's own placement function with our page.
+- **The helper's class lives at `/Game/Mods/Simple_Minimap/UI/CustomMarker/SM_UI_MapHelper.SM_UI_MapHelper_C`** (the extract 07:30). The first try (07:29)
+  used `…/UI/SM_UI_MapHelper…` — no class, nothing created; the note «the mod keeps one instance» written from it was wrong (corrected 07:33).
+- **Adapter proven (07:32):** `Create(pc, <that class>, pc)` → `AddChild` into our page's `Overlay` (in `sb_ButtonBar`) → slot alignment and padding copied
+  from the game's helper → our «Карта» bottom bar identical to the game's (frame `sm_cmp3.jpg`: «Сброс маркеров», «Shift + мышь Новый маркер», «Свои маркеры»,
+  «Земли изгнанников», «Закрыть»). Its BP: `Construct`, the two buttons' click events (`btn_Info`, `btn_Search`) and the dispatcher `SearchClicked` — on the
+  game's page somebody (the map overlay of the mod) binds to it; on ours nobody does yet: the «Свои маркеры» click on our page is NOT checked (real clicks — the
+  game in front).
 
 ## Open
 

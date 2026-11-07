@@ -199,8 +199,10 @@ demand, the other six one per tick, nearest first alternating right/left (from �
 in the hub, «opening windows — lag allowed» (MASTER_PLAN). Private bytes: world 13 004 MB, hub 13 324, after the lazy build 13 189, after 5 close/open/sweep
 cycles 13 217 · 13 212 · 13 218 · 12 979 · 12 981 MB — flat (noise ≫ the pages' cost), no leak → **the lifetime stays the owner's first choice: keep until the
 world is left** (`[OWNER]` 2026-11-06 23:18, verbatim above). Frame after cycle 5: «Клан» complete.
-**The Simple Minimap adapter — recon (07:27–07:31):** our «Карта» lacks only the mod's helper row; a second helper of ours does not show and the mod
-seems to keep one instance (3 attempts — stop; details and NEXT in `games/ConanExiles/mods/Simple_Minimap.md` «The map helper and our hub controller»).
+**The Simple Minimap adapter (07:27–07:32):** our «Карта» lacked only the mod's helper row; created from its real class path
+(`…/UI/CustomMarker/SM_UI_MapHelper`) and added to our page's bottom-bar `Overlay` with the game's slot settings, the row is identical on our page (the
+first try used a wrong path; the note «the mod keeps one instance» was wrong — corrected 07:33). Open: its «Свои маркеры» click (dispatcher `SearchClicked`)
+on our page — real clicks. Details — `games/ConanExiles/mods/Simple_Minimap.md` «The map helper and our hub controller».
 NEXT: build lazily on open — the owner's design — instead of all at once; release by
 the RAM measurement), the Simple Minimap adapter, then v7 as a section of KrinikConanUI; the 144 fps recording when the game may come to the front; real mouse clicks (`ButtonPressed`); the bottom-bar `WBP_ButtonBar_C` reborn per
 switch; the mods' embeds on our pages (API, inventory below).
