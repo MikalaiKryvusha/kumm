@@ -155,6 +155,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **18:2x THE MECHANISM (bug 67 «THE LINE»):** `Nanite/NaniteRasterizer.ush:143/157` — a shadow texel takes the leaf's depth only if its CENTRE is inside the leaf triangle;
 > the turning sun + wind slide thin leaflet edges across texel centres. Seen: −1 texel stair-steps visible on leaflets; needle tips thinner than any texel. NEXT: the fix that keeps
 > smooth sun + wind + sharp shadows — conservative coverage in the Nanite SHADOW raster (can the game's compiled global shaders be rebuilt from the kit? recon first).
+> **18:31 DECISION `[OWNER]` «консервативная растеризация» · «мне нравится, пробуем.»** FIRST next: read `researches/conan-shadow-flicker/2026-11-07_global_shader_rebuild_recon.md`
+> (a helper wrote it) → if feasible: patch `NaniteRasterizer.ush` setup (C0/C1/C2 += ½·(|Edge.x|+|Edge.y|), shadow views only) + HW raster conservative state, rebuild, A/B on the
+> clean stand (`stand-keeper.sh`, fixed cam, 11:00 per clip, turning 0.0025) — the owner judges by eye. Game is running under RenderDoc (PID 8396) — relaunch plain for the A/B.
 > ~~**FIRST next chat (bug 67):** the forced re-render with the light still blinks ×100 (16:26) → leaflets are lost by the shadow re-render~~ (refuted above) — test the Nanite cluster
 > buffers (double MaxCandidateClusters / MaxVisibleClusters / MaxNodes, `nanitestats virtualshadowmaps`), the order in bug 67 and the recon
 > `researches/conan-shadow-flicker/2026-11-07_leaf_shadows_fill_in_recon.md`; measure by `shadow_pop_map.py` on a 2-s window capture; the owner watches live. Game open (PID 49596) with live test values (throttle 0/0, pool 8192, Nanite 0.25, t.MaxFPS 144) — a restart returns the pack's values.

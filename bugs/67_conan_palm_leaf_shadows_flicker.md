@@ -195,7 +195,26 @@ Recon `researches/conan-shadow-flicker/2026-11-07_moving_sun_edge_aliasing_recon
 fixes in the field = a stepped shadow projection with a crossfade, temporal accumulation of the shadow, or more resolution. Untested tips: `r.Shadow.Virtual.SMRT.AdaptiveRayCount 0`,
 contact shadows. **Fix path that keeps all three of the owner's demands (smooth sun, wind, sharp shadows): conservative coverage for shadow casters** — a texel is shadow
 when the leaf triangle TOUCHES it, not only when it covers its centre — a change in the Nanite shadow rasterizer (the game ships compiled global shaders: rebuilding them
-from the kit is the open question). RenderDoc `rdoc_shaders.py` (reflection per dispatch) timed out at 3 000 events in 580 s — too slow by per-event replay. `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
+from the kit is the open question). RenderDoc `rdoc_shaders.py` (reflection per dispatch) timed out at 3 000 events in 580 s — too slow by per-event replay.
+**Fix options (the owner 18:27 «как такое исправляют адекватно? Гестирезис? Пересчет раз в N времени? Плавный переход из состояния в состояние за время 60 секунд? Ещё что-то?
+что говорят эксперты графики в интернете? Энтузиасты? Мододелы?»):** recalculation every N = the stepped sun he rejected (Unity HDRP 0.5°, our `SolarUpdateAngleDelta`);
+hysteresis = temporal accumulation of the shadow (blinks damped, edge lags and softens); **smooth transition = two still sharp shadow maps crossfaded while the sun moves**
+— `[AI]` recommended: the only option with all three demands (smooth sun, wind, sharp edges, no blink — each map's grid is still), price ≈ 2× shadow GPU work; plus finer bias
+(−2 halves it), contact shadows (an addition). No expert or modder has a cvar fix; Fortnite pays for an uncached sun. All real fixes need a shader change → recon
+`2026-11-07_global_shader_rebuild_recon.md` (running) decides feasibility. Cheap tip under test: `SMRT.AdaptiveRayCount 0` (c15).
+`SMRT.AdaptiveRayCount 0` REFUTED (c15): 1.4 / 4.5 % vs 0.6 / 2.2 %. `[OWNER]` 18:29 «можно листы сделать так, чтобы они ВСЕГДА отбрасывали тень? чтобы по всех кадрах попадали в
+текстель 100%» → offered **conservative rasterization** for the shadow pass only (each edge function pushed out by half a texel: `C += 0.5·(|Edge.x|+|Edge.y|)` in the
+triangle setup, `NaniteRasterizer.ush:89–105`; the hardware path — D3D12 conservative raster state); price — leaf shadows ≈ ½ texel fatter per side (visible at −1, little at −2).
+**DECISION `[OWNER]` 2026-11-07 18:31 «консервативная растеризация» · «мне нравится, пробуем.»** — the fix path; gate: the shader-rebuild recon (can the game load a rebuilt
+global shader).
+**Patch design (read 18:3x from `Nanite/NaniteRasterizer.ush` `SetupTriangle`, lines 28–130), shadow (VSM) views only:** (1) the bounding rect «round to nearest pixel»
+(`:65–66`) → every pixel the triangle TOUCHES: `MinPixel = floor(MinSubpixel / S)`, `MaxPixel = floor(MaxSubpixel / S)` (so a sub-texel leaflet keeps ≥ 1 texel and `:76`
+no longer culls it); (2) after the half-edge constants (`:89–91`, 8.16 fixed point, edges in 4.8 subpixels) push each edge out by half a pixel:
+`C0 += (S/2)·(abs(Edge12.x) + abs(Edge12.y))`, same for C1 / Edge20, C2 / Edge01 — the edge-function test at the texel centre then passes for any texel the triangle
+overlaps; (3) skip the top-left fill rule (`:99–101`) on that path (conservative coverage has no shared-edge ownership); (4) depth outside the true triangle is
+extrapolated from `DepthPlane` — clamp it to the triangle's nearest vertex depth to avoid a leak; (5) the hardware raster path (large clusters) needs the D3D12
+conservative-raster PSO state for the VSM pass. Find the VSM permutation define in `NaniteRasterizer.usf` (`VIRTUAL_TEXTURE_TARGET` or similar) to scope it. Accept by
+the clean-stand blink count (turning 0.0025, wind) and the owner's eye; check the leaf-shadow thickness at −1 against today's `bias_compare.webp`. `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
 
 ## Goal vector and acceptance
 
