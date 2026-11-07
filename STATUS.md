@@ -143,6 +143,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   K4 failed in the 21:38 run (its delayed action never ran) — fixed, check K4–K8 at the next launch (numpad DEAD in the run the owner plays now); (3) Archery K10 «arrows
 >   into an already dead body → its loot» (owner 21:41) — written, next launch; (4) the crash check is the owner's own gameplay (`[OWNER]` 21:39 «я вылет при убийстве буду
 >   проверять сам» · «это ты не сможешь воспроизвести»). Cases `testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md`.
+> **NEXT LAUNCH — run first (all in the game folder, none run yet; cases in `testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md`):** Camera numpad K4–K8;
+>   Archery: arrows into an already dead body → its loot (K10), draw time by Agility 5 s × 0.99^n (K11–K12, owner 21:43/21:46), a missed arrow wakes mobs within 10 m via
+>   the hate list `UpdatedHeardActors` (K13, owner 21:50), headshot ×2 damage + first-hit one-shot headshot ×2 XP (K14–K17, owner 21:57). Pack `1f3f120`.
+>   **Owner's order 22:00 NOT BUILT:** drawing / shooting the bow from a crouch keeps the crouch (recon: what stands the hero up on RMB). Notes — `games/ConanExiles/mods/KrinikConanArchery.md` → Open.
 > **00. (was) CRASH FIRST (2026-11-07 21:17, the owner playing):** EXCEPTION_ACCESS_VIOLATION reading 0xffffffffffffffff inside UE4SS. UE4SS.log tail: an arrow hit an Imp → the Imp
 >   died → `KrinikConanArchery` «arrows in the corpse» ran on two `Corpse_C` births at 21:17:54.36 / .38 → crash. Prime suspect: the corpse-arrow code touching a destroyed actor (the known
 >   class: a dead creature kept in a Lua ref — game map «Stand rule» 2026-10-28). Crash window closed (PID 26460). Read the code of `on_corpse_born` / the re-attach first; repro with arrows into imps. The owner 21:18: many bow kills without a crash — a RARE case; the unusual line: TWO `Corpse_C` births 20 ms apart (a race of two corpses / one arrow set?).

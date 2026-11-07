@@ -120,6 +120,23 @@ game-thread trigger is found: the shafts after the full loot window and after a 
 
 ## Open
 
+- **Crouch stays while drawing (the owner's order 2026-11-07 22:00 +03:00, NOT BUILT):** `[OWNER]` «Если герой в присяде, то натяжение лука по ПКМ не должно выводить его из присяда в
+  стойку.» · «Можно и натягивать и стрелять лук из присяда». Recon first: which call stands the hero up on the aim entry (the bow aim montage / an UnCrouch in
+  `BaseBPCombat` on RMB — bytecode), then keep the crouch natively (the hero's crouch state through the draw and the shot); the crouched draw pose — the owner's eye.
+- **Headshots — BUILT 2026-11-07 22:00 +03:00, NOT RUN (cases K14–K17):** lever by bytecode of `BP_CollisionComponent.TakeProjectileDamage` — the arrow's native multiplier goes as
+  `DamageMultiplier` into `ApplyDamageSpecific(Type, DamageStructure, Combo, AttackBlocked, DamagedActor, HitFromDirection, HitInfo, EventInstigator, DamageCauser,
+  DamageMultiplier)`; kill XP = the mob's `BP_XPHolder_C.xpToGive` (remote). Section «выстрел в голову»: a pre-hook of `ApplyDamageSpecific` (installed at hero birth +
+  first hero arrow): hero instigator (a PlayerController) + a `BP_BaseProjectile` causer + bone name containing «head» → `DamageMultiplier` ×2; the hero's first hit on
+  that mob and a head hit → `xpToGive` ×2 for that hit, restored 100 ms later (and on the next hero hit) if it lived. `[AI]` Only the hero's arrows get ×2 damage (NPC
+  archers' head hits on the hero are not doubled) — a reading of «попадание в голову» in the bow context; the owner may widen it.
+- **(order text) Headshots (the owner's order 2026-11-07 21:57 +03:00):** `[OWNER]` «попадаение у голову увеличивает урон в 2 раза. Убийство моба попадаем у голову с ОДНОГО выстрела
+  первого - x2 опыта, что показывается в виджете с полученным за убийство опытом.» · «Если были героем игрока нанесены любые другие удары по этому мобу, то x2 больше за
+  убийство в голову не засчитывается. Убить нужно именно первым ваншотам в голову». (21:55 he asked only whether head hits are distinguishable — yes: the hit's
+  `BoneName`, `b_head` on humans and the Imp, seen in the corpse log 21:40:49; beasts' head bones — per species.) Plan: (1) recon where an arrow's damage is computed
+  (target side `BP_CollisionComponent.TakeProjectileDamage`, bytecode) and multiply it natively ×2 on a head bone; (2) per-mob «hero hit it before» record (any hero
+  damage, not only arrows); (3) kill XP: how the game grants it (`BP_XPHolder_C` on the mob, `BP_ProgressionSystem`) and how UIMod_Hosav's kill-XP widget shows it —
+  ×2 at the source so the widget shows the doubled number.
+
 - **A missed arrow wakes the mob — BUILT 2026-11-07 21:54 +03:00, NOT RUN (case K13):** recon by the remote: a mob (`BaseNPC_C`, the Imp's controller `CreatureAIController_C`)
   has `BPTargetDistributionComponent_C` (`/Game/Systems/AI/NewAI/…`) — its hate list: `UpdatedHeardActors(NewHeardActors: Actor[])` (the game's «heard»),
   `AddToHatelist(NewTarget struct)`, `CanEngageTarget(Target, TriggeringHateType)`; its `ConanAIPerceptionComponent` senses = sight only (`AISense_NewSight`) + Conan's
