@@ -136,6 +136,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the loop: Locomotion M6 — the hero DID jump with the bow by real input at 19:24:59 and 19:26:00 (the mod's log «выстрел в воздухе разрешён»), remote Z probes are too slow;
 > judge by that log line + a 60-fps clip. 19:37: draw + release by real input fired an arrow; the synthetic JUMP is unreliable (2 of ~7) — see the notes «19:37 result». Rule 30 hole closed (`input.ps1`).
 > Then quick-loot R3, plan 45 boss spawns. Game running (background launch 19:14), keeper timer on.
+> **FIRST NEXT CHAT — the owner's order 2026-11-07 20:50 (verbatim):** `[OWNER]` «сейчас стрелба откоючает спринт. В новом чате начнём с того, что продолжим делать мод
+>   Локомодации. Спринт и стрельбу делаем возможными одновременно.» · «И откобчаем лимит на прокачку атрибутов. Делаем её бесконечной.» · «И она бесконечно будет по фотмулам
+>   влиять на характеристики героя». So, in order: (a) KrinikConanLocomotion — sprint and bow shooting at the same time (now a shot cancels the sprint); (b) attributes without
+>   the cap of 20 (the «+» stays); (c) every attribute keeps adding to the hero's stats by its formulas past 20 (read the game's per-point curves first — game map). Then bug 84.
 > **THE OWNER'S QUEUE 19:48–20:00 (verbatim; his debt — FIRST, before the loop items):**
 > 1. Bug 84 — TOP: the hub controller duplicates pages — the trait dialog under the attribute tree (19:48) AND the fullscreen map stuck twice 20:19–20:25 (two `W_FullscreenMap_C`,
 >    the owner trapped; freed by the remote: map + carousel removed, game input). Control case (section off), then the fix; a game restart restores the hub.
