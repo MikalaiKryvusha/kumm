@@ -161,7 +161,28 @@ frame, its GPU feedback asks for slightly different clusters each frame, and a 5
 clusters; a still (cached) light asks for nothing new. Running: A-B-A-B 512 / 2048 with 60 s settle each (c10), wind read per clip.
 **17:39 — CRASH in the agent's run (my error):** `exec r.Nanite.Streaming.StreamingPoolSize 2048` → «Fatal error: NaniteStreamingManager.cpp:640 Streaming pool size (2048MB)
 must be smaller than the largest allocation supported by the graphics hardware (2048MB)». The limit on this RTX 5070 Ti / driver: the pool must stay BELOW 2048 MB (1024 ran
-fine). Crash-report window closed, PID 12680; machine lock released. The c10 series died after its first clip (pool 512, wind 0.152). Re-run with 512 / 1536. `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
+fine). Crash-report window closed, PID 12680; machine lock released. The c10 series died after its first clip (pool 512, wind 0.152). Re-run with 512 / 1536.
+**17:43–17:48 relaunched game, same stand — pool REFUTED, WIND drives the amplitude (c11, turning sun, 60 s settle):** 512 @ wind 0.229 → 17.6 %; 1536 @ 0.265 → 17.1 %;
+512 @ 0.245 → 19.8 %; 1536 @ 0.197 → 7.5 %; earlier 1–2 % at wind 0.152–0.167 (17:33–17:39). The «decline over time» was the weather's wind (`MPC_BiomeSettings.WindIntensity`
+varies 0.15–0.27), not streaming. Working model `[AI]`: blink = light turning × leaf wind/shimmer (`MF_LeafShimmer`); a still (cached) light keeps the shadow and does not
+carry the per-frame leaf jitter into it. Next: still sun + `r.Shadow.Virtual.Cache 0` at high wind vs turning at the same wind.
+**17:50–17:52 (c12) — BOTH factors are needed:** at the same wind 0.18–0.20: still sun 0.03 / 0.15 %; still sun + cache OFF (re-render every frame with the wind) 0.01 / 0.03 %;
+turning 8.0 / 10.9 %. The cache did not hide the wind — a re-render with a still light and moving leaves is stable; a turning light with calm leaves is near-stable (1–2 % at
+low wind); turning light AND moving leaves blink. Prime suspect now: one-pass occlusion culling against the PREVIOUS frame's HZB through the PREVIOUS light matrix
+(`Nanite/NaniteCullingCommon.ush:619` «VSM supports one-pass occlusion culling … using only previous-frame with artifacts as a result», `:632`, `:639`): exact when the
+matrix is unchanged or the leaves are still; with both changing, leaf clusters are judged occluded and drop out for a frame. Test running (c13): `r.Nanite.Culling.HZB 0`.
+**18:00 — HZB culling REFUTED (c13):** `r.Nanite.Culling.HZB 0` → 25.3 / 18.6 / 10.9 % vs 19.8 / 23.1 / 17.2 % with it (wind 0.18 → 0.10 over the series; the instantaneous
+`WindIntensity` read tracks the amplitude only loosely). **RenderDoc (18:03, game relaunched under it, PID 8396):** two consecutive frames captured
+(`D:/Temp/kumm-rdoc/conan_frame2988.rdc`, `…2989.rdc`, ≈ 5 GB each) — the Shipping build carries NO marker and NO resource name (20 706 anonymous actions: 12 458
+ExecuteIndirect, 5 636 indirect dispatches, 634 dispatches); finding the VSM passes needs shader-bytecode matching (`rdoc/rdoc_passes.py` lists actions). Cheap discriminator
+first (c14): DLSS off, still vs turning — a temporal upscaler resets its history where lighting changes every frame (turning light) and averages SMRT noise and leaf
+jitter where it does not (still light); the owner's DLSS-off look of 16:13 had no still-light control on a clean stand.
+**18:08–18:11 — DLSS REFUTED (c14, wind 0.12–0.14):** still sun 0.17 / 0.16 %, still sun DLSS OFF 0.12 % (the raw shadow is stable — DLSS hid nothing); turning 1.4 / 0.5 %,
+turning DLSS OFF 7.8 % (DLSS damps it, never makes it). **Summary of the clean-stand day:** the raw shadow map differs frame to frame ONLY under a turning light, more with
+stronger wind; refuted: re-render / cache, Nanite buffers / LOD bias / MinQuality / MaxPixelsPerEdge, streaming pool, SMRT, receiver mask, HZB culling, WPO-disable distance,
+DLSS; finer VSM bias −2 halves it. Working model `[AI]`: shadow-edge aliasing under a sub-texel shift of the light projection every frame (thin leaflet edges flip texels),
+amplified by the leaves' own motion. Next: (a) find the VSM depth pass in the two RenderDoc frames by shader bytecode and diff the leaf region of the map; (b) recon — how
+VSM titles keep a continuously moving sun stable on foliage (projection snapping to whole texels per clipmap level, filtering). `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
 
 ## Goal vector and acceptance
 
