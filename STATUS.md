@@ -131,6 +131,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **UPDATE 2026-11-07 12:2x:** (5) DONE — Inventory Compactor's two buttons show the game's dark tooltip (`krinik_ui_fixes` 1.7.0, notes `InventoryCompactor.md`);
+> (6) DONE — eating / drinking in the hub: the gauges poll at once and animate 0.1 × dilation (`krinik_pause_in_menu` 0.17.0; the stat itself rose at once, the
+> gauges lagged ≈ 10 s + 3.3 s); pack `2856384`, report `2026-11-07_conan-compactor-tooltips-and-eating-gauges.md`. Queue empty of the owner's items → NEXT: palm
+> shadows re-shoot (bug 67: HDR off, `SetTimeOfDay` per clip), the Emberlight pen, the bow's air shot by real input (Locomotion M6), quick-loot R3.
 > **UPDATE 2026-11-07 12:1x:** (1)–(4) DONE and pushed — KrinikConanLocomotion in the build (pack `158b186`, melee M1–M5 pass, the bow's air shot by real input open),
 > «E Взять» timing (P1), the hub dance (D2), the quick-loot rim instant with `krinik_loot_rim` off (pack `543b0ef`, R1/R2 pass, R3 open). NEXT: (5) the bag-header
 > tooltips, (6) eating under the hub's slow time — IMM_WAR overrides `BP_HungerSystem` / `BPGameItemFood` (recon the restore rate first). D: — 93 GB free; the agent's
