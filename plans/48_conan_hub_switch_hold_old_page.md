@@ -174,6 +174,24 @@ ours. The game's rebuild still runs, but invisibly. Next: this prototype in the 
 - Remote tools learnt: `GUIModuleController:ActivateModule(FName('CharacterInventory'), false, false)` CLOSES the hub; `CarouselWindow:SetCarouselIndex(k)`
   (0-based, 4–8 = the five far tabs) switches natively but leaves the tab header's highlight on the old tab (frames 07:01) — a test path, not the player's.
 
+## v7 — the mixed controller works on all 9 tabs (2026-11-07 07:03–07:05 +03:00, background, `hubswitch/shadow-pages-v7.lua`)
+
+Ours for Таланты, Хар-ки, Путешествие, Клан, Спутники, Карта, Базар (built once, kept in the viewport, shown the tick after the native switch); the game's
+page held at opacity 0 until quiet for Снаряжение and Параметры (2 and ≤ 4 ticks), the previous page on screen meanwhile. 13 switches by `SetCarouselIndex`
+(1…8, then 0, 4, 0, 8, 3): 0 crashes, 0 Lua errors, 0 pages lost, 0 hold timeouts; every frame 1.5 s after a switch shows the right page complete (TC V7).
+**Per-tick log (07:08, `hubswitch/tick-visibility-probe.lua`: per tick, which hub pages are drawn — in the viewport, not Collapsed/Hidden, opacity > 0;
+11 switches):** 9 of 11 transitions show exactly ONE page every tick — the old page until the new one, the swap within one tick (Хар → Пар: Хар ×2 then
+Пар; Пут → Снар: Пут ×4 then Снар; ours → ours: the swap on tick 1). **Open: from one GAME page to the other** (Пар → Снар 4 ticks, Снар → Пар 3 ticks
+with NO page — the bare world): the native switch removes the old game page itself. v8 (`shadow-pages-v8.lua`, 07:09) tried an afterimage — our hidden
+«Параметры» drawn while leaving the game's — and broke the hub: with our second stats window alive, the next «Параметры» visit shows its page one tick and
+then the hub empties (probe runs of 30 ticks with no page). The game tolerates no second stats window, as no second inventory window. v7 stays the
+design; the gap is limited to a direct click between «Снаряжение» and «Параметры» (Q/E never pass between them).
+**Scope of the mods' adapters shrinks:** with «Снаряжение» and «Параметры» the game's own pages, their embeds (EoT, EAA, Accessory System, Xevyr, fishing,
+Hosav, our «Настройки модов») keep working natively; of the inventory below only Simple Minimap's map overlay sits on a page of OURS («Карта»).
+NEXT: the hub's lifecycle (our shown page must hide when the hub closes; build lazily on open — the owner's design — instead of all at once; release by
+the RAM measurement), the Simple Minimap adapter, then v7 as a section of KrinikConanUI; the 144 fps recording when the game may come to the front; real mouse clicks (`ButtonPressed`); the bottom-bar `WBP_ButtonBar_C` reborn per
+switch; the mods' embeds on our pages (API, inventory below).
+
 ## The hub controller API — DRAFT `[AI]` (for the owner's review; the owner set the direction 23:48, the calls are the agent's proposal)
 
 The controller (KrinikConanUI section `krinik_hub`) owns the 9 pages; a page id is the module name (`CharacterInventory`, `FeatWindow`, …).

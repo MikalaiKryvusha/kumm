@@ -128,9 +128,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > commands, what to verify first.
 
 > **NOW 2026-11-07 06:47 +03:00 — chat of 2026-11-07, `/dayloop` (the owner's «Работай автономно» 06:24), plan 48:** the v4 crash CAUSE found — a stale Lua ref to a page the
-> game destroyed (each native «Параметры» activation kills other stats windows); **v5 keeps pages by name: 27 native switches, 0 crashes** (pack `adf2e21`). NEXT:
-> our page instances are not initialised like the game's (our «Снаряжение» — hotbar only; our «Хар-ки» and «Таланты» complete with the hero's data — the zeros are the save's real 0 with 77 points unspent, corrected 06:5x) — recon what the native
-> module activation calls on a window, then call it on ours; the 5 tabs past «Параметры» by `SetCarouselIndex`. Details — plan 48 «Bisect (f) and the crash cause».
+> game destroyed (each native «Параметры» activation kills other stats windows); v5 keeps pages by name (27 switches, 0 crashes). **v7 = the mixed controller
+> (pack `aec1471`, `hubswitch/shadow-pages-v7.lua`):** our own pages for 7 tabs, the game's own «Снаряжение» and «Параметры» held invisible until quiet (the game
+> tolerates no second inventory or stats window — v6, v8 closed the hub); 13 switches over all 9 tabs, 0 crashes, every frame the right page complete; per-tick
+> probe — one page per tick on 9 of 11 transitions, a direct click between «Снаряжение» and «Параметры» shows 3–4 ticks of bare world (open). Report
+> `testcases/reports/2026-11-07_conan-hub-controller-shadow-pages.md`. NEXT (plan 48 «v7»): the hub lifecycle (hide on close, lazy build on open, RAM), the Simple
+> Minimap adapter on our «Карта», v7 into KrinikConanUI; the 144 fps recording and real clicks when the game may come to the front.
 > ✅ **Chat of 2026-11-06 (fifth) soft-closed 2026-11-07 00:32 +03:00 by the owner's word (00:30, «завтра продолжим»).** The debt of the two forced closures of 2026-11-06
 > is PAID: STATUS trimmed (89 lines to the chronicle), experience lint 0 findings, attribution lint 0 new (bug 67 line marked), budget gate passed, engine
 > syntax + 4 core tests green, the chat's claims re-checked (deployed KrinikConanUI = build 2, test mods removed, modlist and settings restored, pushes in sync).
