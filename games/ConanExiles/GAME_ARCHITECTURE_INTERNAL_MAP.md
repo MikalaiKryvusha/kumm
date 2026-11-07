@@ -623,7 +623,9 @@ Lua-моды UE4SS ждут только отложенными действия
   UMG `Btn_Open`, style paddings 8/2 → text) clicks via `CustomEvent` → `ActivateModule('ExilesFishingTuning')`; it takes a vanilla `WBP_ButtonBase` as
   HitTestInvisible content (`SetContent`) and keeps its own click — but then the hover glow is lost. The bar: `WBP_ButtonBar` → `ButtonContainerLeft` (starts
   at x 0) / `ButtonContainerRight`. Remote facts: inside a module activation callback `IsModuleActive(<that module>)` is still false; `GetCachedGeometry`
-  through `SlateBlueprintLibrary` returns zeros; `GUIModuleController` has no `DeactivateModule`, but `ActivateModule(FName('CharacterInventory'), false, false)` closes the hub (2026-11-07 06:59, frames).
+  through `SlateBlueprintLibrary` returns zeros; `GUIModuleController` has no `DeactivateModule`, but `ActivateModule(FName('CharacterInventory'), false, false)` closes the hub (2026-11-07 06:59, frames) —
+  only while «Снаряжение» is shown; on another tab the hub closes by that TAB's module (`FeatWindow`, `FullscreenMap`, `CharacterStatsWindow` … `, false, false`,
+  2026-11-07 07:19). The hero dies by the remote's console `exec suicide`; with no bedroll the game respawns him by itself ≈ 8 s later (2026-11-07 07:41).
 - **Esc and windows over the hub (2026-10-30, KRINIK MODIFIED + `KrinikPauseGameInMenu` 0.11.0).** Module rows (`UIModuleTableRow`): vanilla popups over a hub
   tab (`PerkSelection`, `ThrallBonuses`, `InventorySettingsPopup`) are `Category Modal`, `FullscreenGUIAction None`, `CloseOnESC true` — and Esc is taken by their
   OWN cancel button: a `WBP_ButtonBase` (native `FLXButtonBase`) with `KeyShortcutName` «Escape» (the input action `Escape` = Esc / gamepad B). The controller does
