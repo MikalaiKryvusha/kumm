@@ -46,7 +46,7 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
   19:3x probe: `input.ps1 -Key 0x20` (game focused, «key 0x20 pressed x1») → the hero's Z stayed −20068 before and after (no jump) — real Space does not
   move the hero in this session at all; ~~suspect the hero's state~~ — CORRECTED 19:2x–19:3x, the cause is the input path:
   `input.ps1` does NOT bring the game forward (it only asserts focus), and `mouse-seq.ps1` sends to whatever window is in front — the Space probes of 19:2x–19:3x
-  went to the owner's VS Code (up to three spaces; told to him). `mouse-seq` sends scan codes (`KEYEVENTF_SCANCODE`); `input.ps1 -Key` uses `keybd_event` with no
+  — CORRECTED by the mod log: the `input.ps1` press of 19:26 reached the game (the hero jumped); at most ONE space (the `mouse-seq` press made with VS Code in front) went to the owner's VS Code. `mouse-seq` sends scan codes (`KEYEVENTF_SCANCODE`); `input.ps1 -Key` uses `keybd_event` with no
   scan code (raw-input games may ignore it). NEXT for M6: bring the game forward with a tool that does it (`SetForegroundWindow` on the game window, as in
   `esc-when-idle.ps1`), check that the foreground IS the game, only then `mouse-seq`; give the foreground back after.
   19:3x: `_config/game-front.ps1` (new: owner-idle probe → Alt tap + `SetForegroundWindow` → «front <prev hwnd>» only when the game IS in front; `-Restore`) works —
