@@ -1,0 +1,1 @@
+(() => { const el = document.getElementById('fps'); if (!el) return 'nogame'; const o = {}; el.querySelectorAll('dt').forEach(dt => { const dd = dt.nextElementSibling; if (dd) o[dt.textContent.trim()] = dd.textContent.trim() }); return 'drive=' + o.drive + ' pause=' + o.pause + ' loading=' + o.loading })()

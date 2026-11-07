@@ -68,7 +68,7 @@ Achieve: the owner's free roam in the main world runs at ≥ 50 FPS sustained wi
 | C5 | crowd | same, Фары других машин «Игроки» (vs «Откл.» in C1b) | | pass | 01:21: 28–29 / 16 vs C1b 29–31 / 17–19 — within noise |
 | C1b | crowd | refl off, 0.75, cars 16, headlights off | | pass | 01:24: 29–31 / 17–19 |
 | F1 | empty | refl off, 0.5, fps 120 | reachable? | fail | 01:11: 51–53 median, peaks 75–80 — 120 not reachable |
-| F2 | empty | display 120 Hz vs 144 Hz at fps 60: frame-time spread | 120 Hz even | | |
+| F2 | empty | display 120 Hz vs 144 Hz at fps 60: frame-time spread | 120 Hz even | blocked | 01:4x: `dumpsys SurfaceFlinger --latency` returns only zero rows for the web app's layers on Android 16 (BLAST SurfaceView and ChromeNativeWindowSurface tried); the page's counter averages frame time. Source instead: the port's `discord-bot/knowledge.md` — a 144–165 Hz screen at 60 or 120 "neither spaces those evenly: some frames show twice" |
 | M4 | main, city | chosen config, driving away from the spawn | ≥ 50 (R1) | | |
 | T1 | main, city | chosen config, 10 minutes | ≤ 10 % drop (R2) | | |
 | A1 | empty | control: G2 repeated at the end of batch 1 | ≈ G2 (thermal drift check) | pass | 01:27: 49–51 / 37–39 vs G2 51 / 41–44 — no thermal drift over the batch |

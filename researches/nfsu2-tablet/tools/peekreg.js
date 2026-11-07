@@ -1,0 +1,1 @@
+(async()=>{const r=await navigator.storage.getDirectory();const s=await r.getDirectoryHandle("save");return (await (await (await s.getFileHandle("registry.txt")).getFile()).text()).replace(/\n/g," | ")})()
