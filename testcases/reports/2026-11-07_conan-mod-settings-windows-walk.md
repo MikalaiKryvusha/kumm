@@ -30,7 +30,8 @@ Functional run: the real build, each window opened through the game's module con
 
 ## Found
 
-- Pickup+'s hint «If set to < 100 = off | Max. = 5000 | Standard = 900» shows in English though its row (4459) is translated — the string does not reach the game.
+- Pickup+'s hint «If set to < 100 = off | Max. = 5000 | Standard = 900» showed in English though its row (4459) is translated — the stitcher lost every source with
+  «|»; fixed 09:16–09:19 (full rebuild, 54 458 entries, lost 0; the hint Russian on the frame).
 - Pickup+'s «Yes» option untranslated — left (an option may be compared in code, bug 78).
 - LBPR (bare module over the HUD) and the Ambush module (nothing shown bare) — to be judged on the player's own path.
 - Walk 2: Hosav settings, Exiles Fishing tuning, the EAA class menu — fine (the class cards' painted text is item 23); Ironlight's admin panel — the section

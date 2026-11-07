@@ -40,7 +40,9 @@ Renamed from «Krinik Russian Translation» 2026-10-30 (W33). ≈54 451 entries 
 ## Open
 
 - A control run swaps the game's `Game.locres` for an older one by hand (W6 C1, 2026-10-30 19:3x) — redeploy the pack's file after it.
-- **An entry lost by the build (2026-11-07 09:1x):** Pickup+'s admin hint «If set to < 100 = off | Max. = 5000 | Standard = 900» (asset
+- **An entry lost by the build (2026-11-07 09:1x) — FIXED 09:19 (pack `38e806c`):** the cause — `build-ru-table.py` escapes a cell's «|» as «¦» for the markdown
+  table, and `hosav-ru-entries.py` matched the escaped EN against the source (join-report `NO-KEY … ¦`); the stitcher now reads «¦» back as «|»; full rebuild
+  54 458 entries (+1), lost 0, changed 0; the hint is Russian in game. The history: Pickup+'s admin hint «If set to < 100 = off | Max. = 5000 | Standard = 900» (asset
   `Pickup+_Widget_AdminSettings`, key `019FDEDA4E1EF0C9BF87F89E17E8D200` in `all-mods-ftext.csv`) is translated in `dm-fish-ru.tsv` row 4459, yet the built
   `Game.locres` has neither the key nor the Russian text — the game shows English. `locres-set-tr.py` only replaces existing entries. Next: find where the
   build drops it (the source has `<` and `|` — suspect the gather step), or teach the writer to ADD an entry (namespace, key, the source string's hash);
