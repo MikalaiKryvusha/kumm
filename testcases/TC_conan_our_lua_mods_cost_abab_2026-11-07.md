@@ -25,5 +25,5 @@ stand needs them); restored on any exit (`trap`).
 
 | # | Case | Steps | Expected | Status · observation |
 |---|---|---|---|---|
-| C1 | A-B-A-B over 4 launches | the script `ours_abab.sh` in the session scratchpad | 4 launches × 3 flights, no «⚠ Undermesh» flag | not run |
-| C2 | the cost | median CPU ms of A flights minus B flights | ≤ 1.0 ms | not run |
+| C1 | A-B-A-B over 4 launches | the script `ours_abab.sh` in the session scratchpad | 4 launches × 3 flights, no «⚠ Undermesh» flag | pass (07:51–08:49; the 4th launch redone at 08:36 after a hung exit) — report `2026-11-07_conan-our-lua-mods-cost-abab.md` |
+| C2 | the cost | median CPU ms of A flights minus B flights | ≤ 1.0 ms | pass — A 14.64 vs B 14.70 ms (−0.06), inside A's spread 0.75 |

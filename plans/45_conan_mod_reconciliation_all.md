@@ -98,7 +98,7 @@ Each group by the guide: read original + both sides → classify per field → r
       UE4SS's two stock enablers), 4 key binds, 1 shared (ours) — B, nothing to merge; blueprint overrides of one vanilla class — the thrall system (step 8).
 - [ ] 10. **Resources:** the A-B-A flight with the full build (plan 34 / acceptance criterion 3) — the mods' cost per frame; pairs that spend the same budget.
       **2026-11-06 12:31 +03:00:** carried by plan 34 (our six Lua mods ≈ 0.4 ms per frame, UE4SS's hooks ≈ 0, 2026-10-26; timer polls rewritten on events since) and by the
-      build's acceptance criterion 3 (the whole build vs the game without paks, A-B-A-B flights) — not a reconciliation finding; closes with that measurement.
+      build's acceptance criterion 3 (the whole build vs the game without paks, A-B-A-B flights) — not a reconciliation finding; closes with that measurement. **2026-11-07 08:49 +03:00:** our seven Lua mods — within the flight noise (CPU A − B −0.06 ms, report `2026-11-07_conan-our-lua-mods-cost-abab.md`); the build's +0.9 ms is the paks' — next: by pak groups.
 - [ ] 11. **Mechanics:** the build's features done twice (ambushes: Night Terrors + PvE Plus Ambush; loot boosts; XP pop-ups; weather) — from the mods' notes
       and descriptions; the stacking numbers. **2026-11-06 12:26 +03:00:** swept by keyword over the manifest (register line): only the ambush pair is a doubled feature —
       both stay on with the authors' numbers — the owner took ambush tuning off the agenda (`[OWNER]` 2026-10-31 21:11, interview #025 status; the 11-06
