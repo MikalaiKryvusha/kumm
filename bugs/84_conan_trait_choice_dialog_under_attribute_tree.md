@@ -40,3 +40,9 @@ In the viewport at once: **two `W_Attributes_C`, both VISIBLE — one at render 
 windows») — a second one in the viewport is our controller's. Reading `[AI]`: the trait dialog lives in one page while the other page (added later = higher in the
 viewport) draws its tree over it; the opacity-0 page/window are the controller's «held until quiet» state left behind. Suspect 1 (`krinik_hub_controller`) is the
 prime one; the control case (section off) decides. Fix in the controller (plan 48), not a patch over the dialog (rule 24).
+
+## Twin — the map tab stuck (2026-11-07 20:19, the owner «я что-то нажал, что карда залипла»)
+
+Live read: the hub open on «Карта» with **two `W_FullscreenMap_C` in the viewport — op 1.00 and op 0.00** (the same double-instance pattern). Recovery by the remote 20:20:
+both removed from the viewport + `SetInputMode_GameOnly` — the hub then showed an empty «Карта» tab (the owner closes it with Esc / Tab). TWINS: the controller's pages —
+«Параметры» (bug 84) and «Карта» — exist twice; the fix in `krinik_hub_controller` must cover every page it holds, not one.
