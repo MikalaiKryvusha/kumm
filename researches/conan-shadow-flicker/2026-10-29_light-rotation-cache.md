@@ -1,7 +1,7 @@
 # Smooth sun without leaf-shadow flicker: light rotation vs the VSM cache (Conan Exiles Enhanced 3.0.1, UE 5.8)
 
 > **Created:** 2026-10-29 01:04 · **Parent:** `2026-10-29_recon.md` (this folder; cause H1 = the sun's light rotates almost every frame) ·
-> KUMM `bugs/67_conan_palm_leaf_shadows_flicker.md` · **Status:** 🟡 recon done, no run yet · **Outbound:** none
+> KUMM `bugs/67_DONE_conan_palm_leaf_shadows_flicker.md` · **Status:** 🟡 recon done, no run yet · **Outbound:** none
 >
 > Question: can the sun move smoothly (`DynamicSky.SolarUpdateAngleDelta=0.003`) AND the palm-frond shadows stay calm, «как в других играх»?
 

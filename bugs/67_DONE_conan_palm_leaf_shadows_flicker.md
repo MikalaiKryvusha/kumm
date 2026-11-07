@@ -284,3 +284,19 @@ same wind: 12–16 %); still sun 0.30 %; in game `M_Foliage bound = 100.0`; fram
 wind; sway 5–17 % of pixels in 2 s at 0.3 per frame. Live UE4SS write of the property + `r.Nanite` toggle did NOT work (16 vs 16–21 %) — the value must be cooked.
 Hygiene: kit cook «0 error(s)». Functional run: the game with the pak, clean stand, counts and frames read (above). Owner: accepted by the agent's own counts by his word 18:56.
 Open: the build manifest entry for the pak and its deploy; a crash-free gameplay pass with the pak; the bound value (100 cm) is a first guess — larger winds may need more.
+19:12 the manifest entry is in (`KrinikConanGraphics` kind `lua` → `pak`) and deployed by the build's own `-Deploy -Only KrinikConanGraphics -WithEngineIni`, `-Verify` clean.
+
+## Decisions made without the owner (the fix of 2026-11-07)
+
+- `[AI]` The bound value 100 cm — a first guess for palm-frond wind sway (vanilla 0); the counts at wind 0.15–0.22 show no blinking; a storm may need more.
+- `[AI]` The fix lives in `KrinikConanGraphics` (manifest kind `lua` → `pak`, version text «0.9.0 + unreleased fix» — the version NUMBER stays the release's).
+- `[AI]` The conservative shadow-raster patch is dropped (refuted 18:51 by the owner's eye and the count); kept in `_config/devkit/engine_shader_patches/` for the record.
+- `[AI]` The guide's 0.9.0 known-issues line is kept and marked «Исправлено 7 ноября … войдёт в следующую версию сборки».
+- Acceptance by the agent's counts and frames — the owner's mandate `[OWNER]` 2026-11-07 18:56 «не позовешь меня посмотреть, а АВТОНОМНО!».
+
+## ✅ STATUS: DONE (2026-11-07 19:19 +03:00)
+
+Hygiene: kit cook «0 error(s)», `modpack.json` parses, Deploy `-Verify` clean (113 / 0).
+Functional run: the build's own deploy, a fresh launch, the oasis palm under the moving sun 0.0025 with the wind — 0.14–0.24 % blinking sand pixels at wind 0.21–0.22
+(before 17–20 %), shadows sharp and swaying; report `testcases/reports/2026-11-07_conan-palm-shadow-wpo-bound-fix.md`.
+REAL WORLD: accumulated — the owner's working game folder with all 66 mods and his save; data and machine — his PC; path — the build's deploy and a normal launch: verified on the real world.

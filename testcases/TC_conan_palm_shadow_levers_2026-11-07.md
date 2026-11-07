@@ -1,6 +1,6 @@
 # TC — Conan: palm leaf shadow flicker levers at a smooth sun (bug 67), re-run of 2026-11-06
 
-> **Created:** 2026-11-07 · **Parent:** `bugs/67_conan_palm_leaf_shadows_flicker.md`; recon `researches/conan-shadow-flicker/2026-11-06_vsm_foliage_recon.md`
+> **Created:** 2026-11-07 · **Parent:** `bugs/67_DONE_conan_palm_leaf_shadows_flicker.md`; recon `researches/conan-shadow-flicker/2026-11-06_vsm_foliage_recon.md`
 > (experiments 1, 3, 4, 6) · **Status:** cases written 2026-11-07 13:32 +03:00, not run · **Outbound:** clips → the owner's review folder (taste class)
 
 ## Basis

@@ -162,6 +162,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > not in the global cache → the route is a MATERIAL OVERRIDE MOD: patch the kit's `NaniteRasterizer.ush` (scoped to the VSM permutation), recook `M_Foliage`
 > (`/FLX_Materials/Materials/Environment/Core/M_Foliage`, in the kit) in a Krinik kit pak (as KrinikConanUI), ship via Mods/. Risks: kit CL 378787 vs game 379176; the palm MIs may
 > carry static switches (own shader maps, not in the kit). Back up the kit file before editing; restore it after the cook so other kit mods build unpatched.
+> ✅ **19:19 BUG 67 DONE** (`bugs/67_DONE_…`, report `testcases/reports/2026-11-07_conan-palm-shadow-wpo-bound-fix.md`): deployed by the build (`modpack.json`
+> KrinikConanGraphics kind `pak`), fresh launch: bound 100, sun 0.0025, blink 0.14–0.24 % at wind 0.21–0.22. Guide line marked fixed. Open: a gameplay crash pass with the pak.
 > ✅ **19:10 BUG 67 FIXED AND SEEN:** `KrinikConanGraphics.pak` (M_Foliage with `MaxWorldPositionOffsetDisplacement` 100 cm, kit-cooked) → turning sun 0.06–0.44 % blink vs
 > 12–16 % before at the same wind; shadows sharp, wind on. Installed by hand in `Mods/` (before KrinikConanGameplay) + `_unpacked/KrinikConanGraphics/`. NEXT: the
 > `modpack.json` entry (pak + modlist order) and a real deploy; Engine.ini sun 0.0025 deploy; a gameplay pass; the kit's `M_Foliage` stays modified (backup in the pack).
