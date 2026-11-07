@@ -136,6 +136,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the loop: Locomotion M6 — the hero DID jump with the bow by real input at 19:24:59 and 19:26:00 (the mod's log «выстрел в воздухе разрешён»), remote Z probes are too slow;
 > judge by that log line + a 60-fps clip. 19:37: draw + release by real input fired an arrow; the synthetic JUMP is unreliable (2 of ~7) — see the notes «19:37 result». Rule 30 hole closed (`input.ps1`).
 > Then quick-loot R3, plan 45 boss spawns. Game running (background launch 19:14), keeper timer on.
+> **0. AT ONCE next chat (owner 20:53-20:54, his request in chat):** give him a top-tier bow and many good arrows — id 51405 (old notes) is NOT a bow in this build (he got a
+>   wrong item); iron arrows 53612 x500 were given. Read real ids first: `_config/find-items.lua` returned 0 rows — the ItemTable name column is not «Name»; find the column, then spawn
+>   (`exec MakeMeAdmin` first). Also fix the game map line that names 51405 as a bow.
 > **FIRST NEXT CHAT — the owner's order 2026-11-07 20:50 (verbatim):** `[OWNER]` «сейчас стрелба откоючает спринт. В новом чате начнём с того, что продолжим делать мод
 >   Локомодации. Спринт и стрельбу делаем возможными одновременно.» · «И откобчаем лимит на прокачку атрибутов. Делаем её бесконечной.» · «И она бесконечно будет по фотмулам
 >   влиять на характеристики героя». So, in order: (a) KrinikConanLocomotion — sprint and bow shooting at the same time (now a shot cancels the sprint); (b) attributes without
