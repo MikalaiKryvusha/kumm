@@ -147,6 +147,15 @@
     3. A crash in the agent's run: close the report window by PID (rule 9), read `UE4SS.log` up to the crash, write the cause before the next run.
     (`[OWNER]` 2026-11-07 00:03 «заебал ты скрипты свои запускать без контроля того, работает игра, или нахуй упала к ебеням».)
 
+30. **No real input while a person is at the PC; a free PC is tested boldly.**
+    1. Before any real input or a game brought to the front (`mouse-seq`, `hover-watch`, `launch-fg`, `loot-aim`, `loot-take-clip`) — `powershell -File
+       D:/work/ai_sandbox/_tools/owner-idle.ps1`: exit 5 BUSY (keyboard/mouse touched < 10 s ago) → no such run, do the work that needs no input; exit 0 FREE → test.
+    2. The mechanical half: `mouse-seq.ps1` refuses with exit 5 by the same probe; the hook `tools/hooks/owner-presence.mjs` (PreToolUse, Bash|PowerShell) refuses
+       those commands while BUSY and notes «компьютер СВОБОДЕН / ЗАНЯТ» into the agent's context at most once per 5 min.
+    (`[OWNER]` 2026-11-07 12:36–12:37 «тебе бы было полезно видеть, что кто-то что-то с физической клавы набирает» · «когда это происходит - лучше тебе тесты не
+    запускать» · «а когда с клавы никто не набирает - значит нет пользователя за ПК, можно тестить смело» · «разработай себе тулз…» · «пусть он в фоне, когда ты
+    работаешь над KUMM, сообщает тебе такие сведения».)
+
 19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
     mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +

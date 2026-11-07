@@ -53,3 +53,4 @@ interviews/decisions/*.lock
 /FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md.tmp
 .kaif/autonomy.json
 /FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md.state
+tools/hooks/.owner-presence-note.stamp
