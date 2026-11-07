@@ -137,7 +137,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > judge by that log line + a 60-fps clip. 19:37: draw + release by real input fired an arrow; the synthetic JUMP is unreliable (2 of ~7) — see the notes «19:37 result». Rule 30 hole closed (`input.ps1`).
 > Then quick-loot R3, plan 45 boss spawns. Game running (background launch 19:14), keeper timer on.
 > **THE OWNER'S QUEUE 19:48–20:00 (verbatim; his debt — FIRST, before the loop items):**
-> 1. Bug 84 — the «Выберите Черту» dialog drawn under the attribute tree (his frame 19:48); forensics: TWO `W_Attributes_C` in the viewport (op 1 / op 0) = our hub controller.
+> 1. Bug 84 — TOP: the hub controller duplicates pages — the trait dialog under the attribute tree (19:48) AND the fullscreen map stuck twice 20:19–20:25 (two `W_FullscreenMap_C`,
+>    the owner trapped; freed by the remote: map + carousel removed, game input). Control case (section off), then the fix; a game restart restores the hub.
 > 2. `[OWNER]` 19:50 «я прокачал проворство до 20, и провал плюсик - это нужно убрать, так как прокачка у нас бесконечная» · «можно сколь угодно повышать дальше атрибут» —
 >    attributes stop at 20 (the «+» disappears); the build's levelling is endless (KrinikConanGameplay: 10 000 levels) → attributes must rise past 20. Recon the cap first.
 > 3. `[OWNER]` 19:50 «там сказано, что все стрелы летят вдвое быстрее. Это правда?» · «проверь, оно наше значение скорости умножило на два?» — ANSWERED 20:00 from the

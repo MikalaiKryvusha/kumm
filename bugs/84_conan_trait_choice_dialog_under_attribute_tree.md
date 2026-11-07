@@ -46,3 +46,9 @@ prime one; the control case (section off) decides. Fix in the controller (plan 4
 Live read: the hub open on «Карта» with **two `W_FullscreenMap_C` in the viewport — op 1.00 and op 0.00** (the same double-instance pattern). Recovery by the remote 20:20:
 both removed from the viewport + `SetInputMode_GameOnly` — the hub then showed an empty «Карта» tab (the owner closes it with Esc / Tab). TWINS: the controller's pages —
 «Параметры» (bug 84) and «Карта» — exist twice; the fix in `krinik_hub_controller` must cover every page it holds, not one.
+
+**20:21–20:25 — the owner stuck again («опять!» · «словно ПКМ» · «не отлипло, не погу закрыть!» · «и вверху нет веладок хаба»):** the standalone fullscreen map (no hub
+tabs) again with TWO `W_FullscreenMap_C` (op 1 / op 0); releases sent by `mouse-seq` (rup/lup/Shift/Space, then a full RMB and LMB click on the map) did NOT free it;
+removing only the op-0 copy did NOT; removing the map and `W_Carousel_C` + `SetInputMode_GameOnly` + cursor off returned him to the world (frame 20:24). So the
+stuck state is the duplicate page / modal stack, not a held button (EXP-0484 stays as a hygiene rule, not this cause). A game restart restores the hub. **This bug is
+the owner's top debt now:** fix `krinik_hub_controller` so no page / the map exists twice; control case first (the section off → does the map still stick?).
