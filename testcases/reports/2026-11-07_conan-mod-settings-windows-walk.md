@@ -36,6 +36,8 @@ Functional run: the real build, each window opened through the game's module con
 - LBPR (bare module over the HUD) and the Ambush module (nothing shown bare) — to be judged on the player's own path.
 - Walk 2: Hosav settings, Exiles Fishing tuning, the EAA class menu — fine (the class cards' painted text is item 23); Ironlight's admin panel — the section
   headers «SETTLEMENT», «TRAINING & WORK», «NEEDS», «SKILLS» and the buttons «SAVE» / «CLOSE» in English, absent from the gathered table.
+  Culture-invariant FText — fixed 09:24–09:28 by an asset edit (`asset-strings/Ironlight__IL_WBP_AdminUI.tsv`, 6 strings; the pak rebuilt with both Ironlight
+  edits, deployed `-Only Ironlight-Settlements`); the frame shows «ПОСЕЛЕНИЕ», «ТРЕНИРОВКИ И РАБОТА», «ПОТРЕБНОСТИ», «СОХРАНИТЬ», «ЗАКРЫТЬ», all inside.
 
 ## Traces
 
