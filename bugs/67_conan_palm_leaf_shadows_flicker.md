@@ -85,7 +85,8 @@ shadow by up to 2 steps while the sun re-renders the map. Live with the owner 15
 −4 (×8) — his eye per step. `[OWNER]` 15:43 «смещение солнца ещё плавнее, 0,01» · 15:44 «еще плавнее в 2 раза» (→ 0.005) · 15:45 «вот теперь тени ПЛАВНЫЕ!!!! Но
 листья мерцают!!! Делаем листья ЕЩЕ ТОЛЩЕ!» → **delta 0.005 = smooth by his eye**; leaf ×1 flickers → ×2 (bias −2.0) set 15:45. `[OWNER]` 15:43 «камеру мне отдай!!!»
 **15:45–15:47 by his eye, throttle off, pool 8192, delta 0.005:** ×2 (−2.0) «мерцают листья», ×4 (−3.0) «мерцают», ×10 (−4.3; `Clipmap.FirstLevel` 6 — no floor hit)
-flicker on → **the «leaf thinner than a texel» mechanism is REFUTED by the owner's eye** (the texel near the palms is sub-centimetre, a leaflet several cm). Bias back
+flicker on → ~~**the «leaf thinner than a texel» mechanism is REFUTED by the owner's eye** (the texel near the palms is sub-centimetre, a leaflet several cm)~~ — CORRECTED
+2026-11-07 18:2x: the texel was never measured; at −1 its stair-steps are visible on leaflet edges, the needle tips stay thinner than a texel at any bias (see «THE LINE»). Bias back
 to −1.0 at 15:48. `[OWNER]` 15:48 «толще листья ав 100 раз, не трогай точность» · 15:49 «ПРАВЬ НАУЙ МАТЕРИАЛ И ПЕРЕЗАПУСКАй!» · 15:50 «плавнасть солнца
 запомнил какая нужна?» (→ 0.005 written into the pack's Engine.ini) · 15:51 «текперь нужно при этой плавности добиться - четких теней листвы пальм - без мерцания
 отдельных листиков off/on его тени» → **acceptance now: delta 0.005 + crisp palm-leaf shadows + no leaflet shadow popping off/on**; the route — the leaf material
@@ -182,7 +183,19 @@ turning DLSS OFF 7.8 % (DLSS damps it, never makes it). **Summary of the clean-s
 stronger wind; refuted: re-render / cache, Nanite buffers / LOD bias / MinQuality / MaxPixelsPerEdge, streaming pool, SMRT, receiver mask, HZB culling, WPO-disable distance,
 DLSS; finer VSM bias −2 halves it. Working model `[AI]`: shadow-edge aliasing under a sub-texel shift of the light projection every frame (thin leaflet edges flip texels),
 amplified by the leaves' own motion. Next: (a) find the VSM depth pass in the two RenderDoc frames by shader bytecode and diff the leaf region of the map; (b) recon — how
-VSM titles keep a continuously moving sun stable on foliage (projection snapping to whole texels per clipmap level, filtering). `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
+VSM titles keep a continuously moving sun stable on foliage (projection snapping to whole texels per clipmap level, filtering).
+**18:2x — THE LINE (the owner 18:23 «КТО ЭТО ДЕЛАЕТ???? КАКАЯ СТРОЧКА КОДА ЭТО ДЕЛАЕТ?»):** the Nanite software rasterizer writing leaf depth into the VSM page —
+`F:/CEUE5Devkit/Engine/Shaders/Private/Nanite/NaniteRasterizer.ush:143` `if (min3(CY0, CY1, CY2) >= 0)` → `:145` `WritePixel(...)`, and `:157` `if (min3(CX0, CX1, CX2) >= 0)`
+(edge functions at the texel CENTRE; `:99–105` the sub-pixel / top-left rule): a shadow texel takes the leaf's depth only if its centre lies inside the leaf triangle — a
+yes/no point sample. A sub-texel shift of the projection (the sun turning) plus the leaf's wind motion moves a thin leaflet's edge across texel centres → texels flip.
+**Seen 18:2x (hard shadow: SMRT 0, dither 0, still sun, wind off, 11:00 per crop — `scratchpad/bias_compare.webp`):** bias −1 (live) shows TEXEL STAIR-STEPS by eye on
+leaflet edges and tips; −3 visibly finer; 0 coarser → the bias DOES apply (the helper's «clamp» doubt refuted) and the shadow texel is comparable to a leaflet tip
+(the «sub-centimetre texel» of 15:4x was wrong). The tips are needles thinner than any texel, so finer bias halves the flicker and cannot end it.
+Recon `researches/conan-shadow-flicker/2026-11-07_moving_sun_edge_aliasing_recon.md`: no stock cvar fixes it; Fortnite drops the sun cache; Unity HDRP steps the sun 0.5°;
+fixes in the field = a stepped shadow projection with a crossfade, temporal accumulation of the shadow, or more resolution. Untested tips: `r.Shadow.Virtual.SMRT.AdaptiveRayCount 0`,
+contact shadows. **Fix path that keeps all three of the owner's demands (smooth sun, wind, sharp shadows): conservative coverage for shadow casters** — a texel is shadow
+when the leaf triangle TOUCHES it, not only when it covers its centre — a change in the Nanite shadow rasterizer (the game ships compiled global shaders: rebuilding them
+from the kit is the open question). RenderDoc `rdoc_shaders.py` (reflection per dispatch) timed out at 3 000 events in 580 s — too slow by per-event replay. `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
 
 ## Goal vector and acceptance
 

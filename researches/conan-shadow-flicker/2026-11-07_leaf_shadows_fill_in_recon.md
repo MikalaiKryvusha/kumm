@@ -10,7 +10,9 @@
 
 ## 0. What the live day already rules out (bug 67, 15:45–16:13)
 
-- **Grid aliasing is not the main cause of the leaflet drop-outs.** At bias −4.3 a texel is sub-centimetre and a leaflet is several centimetres, and leaflets still vanish
+- **CORRECTED 2026-11-07 18:2x — this paragraph is wrong:** the texel size was assumed, never measured; on a clean stand the stair-steps of the −1 texel are visible on the
+  leaflet edges and the needle tips stay thinner than a texel at −3 (bug 67, «THE LINE»). Original text, kept for the record:
+- ~~**Grid aliasing is not the main cause of the leaflet drop-outs.**~~ At bias −4.3 a texel is sub-centimetre and a leaflet is several centimetres, and leaflets still vanish
   for 2–3 frames. *[INF]* A caster several texels wide cannot drop out of a fine grid because of re-sampling. On those frames **its geometry is missing from
   the shadow render**, or its shadow is computed from a different (coarser) version of the geometry. Grid re-sampling explains the edge crawl (SMRT 0 "progress bars"). It does not explain whole leaflets disappearing.
 - **Temporal history is not the cause.** DLSS off at 16:13: «не помогло, мерцают». The "fill in" is therefore not DLSS or TSR convergence. *[INF]* Lumen's indirect light is low-frequency and cannot draw leaflet shapes.

@@ -152,6 +152,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > relaunch, A-B-A-B pool 512 / 1536. Tools new today: `stand-keeper.sh`, `wind.lua`, `rdoc/` (RenderDoc 1.47 installed by the owner's word 17:22). Bug 67 holds the full log.
 > 18:0x: pool refuted (the amplitude follows the weather's wind), HZB culling refuted; BOTH a turning light and moving leaves are needed. Game runs UNDER RenderDoc (PID 8396).
 > Work tree: `D:/Temp/kumm-rdoc/` — two frame captures ≈ 10 GB (bug 67, the VSM pass hunt); delete file by file when bug 67 closes or the captures are read.
+> **18:2x THE MECHANISM (bug 67 «THE LINE»):** `Nanite/NaniteRasterizer.ush:143/157` — a shadow texel takes the leaf's depth only if its CENTRE is inside the leaf triangle;
+> the turning sun + wind slide thin leaflet edges across texel centres. Seen: −1 texel stair-steps visible on leaflets; needle tips thinner than any texel. NEXT: the fix that keeps
+> smooth sun + wind + sharp shadows — conservative coverage in the Nanite SHADOW raster (can the game's compiled global shaders be rebuilt from the kit? recon first).
 > ~~**FIRST next chat (bug 67):** the forced re-render with the light still blinks ×100 (16:26) → leaflets are lost by the shadow re-render~~ (refuted above) — test the Nanite cluster
 > buffers (double MaxCandidateClusters / MaxVisibleClusters / MaxNodes, `nanitestats virtualshadowmaps`), the order in bug 67 and the recon
 > `researches/conan-shadow-flicker/2026-11-07_leaf_shadows_fill_in_recon.md`; measure by `shadow_pop_map.py` on a 2-s window capture; the owner watches live. Game open (PID 49596) with live test values (throttle 0/0, pool 8192, Nanite 0.25, t.MaxFPS 144) — a restart returns the pack's values.
