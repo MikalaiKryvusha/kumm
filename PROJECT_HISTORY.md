@@ -6107,3 +6107,127 @@ Their open items stay in STATUS as one pointer line. Verbatim:
 > RESOLVED — the owner removed the tags «Extreme violence» and «Sexualised» himself, the badge is gone (his frame 19:08).
 > Route details — `HOUSE_RULES_REFERENCE.md` §2, the Nexus row.
 > **The 0.9.0 release blocks of 2026-11-02 19:36 – 2026-11-03 15:09 and the 2026-11-02 chat blocks (03118042, aa2bfa46) — moved verbatim to the chronicle, entry 2026-11-03 20:56 +03:00.**
+
+## 2026-11-07 19:28 +03:00 — STATUS bonsai trim (chat of 2026-11-07, fourth): the bug 67 blocks (DONE) and the 2026-11-06/07 chat blocks moved verbatim
+
+> **NOW 2026-11-07 14:47 +03:00 — chat of 2026-11-07 (third), `/resume` «продолжаем делалть конан» → bug 67 palm shadows; the owner 13:46 «комп твой, работай
+> автономно» · «бери игру вперед» → `/dayloop` after this item.** Clean stand built (fixed CameraActor `fixed-cam.lua`, window capture `gfxcapture`, time 14.0
+> per clip, quiet-stand catches the camp boss now; tools row HOUSE_RULES_REFERENCE «shadow / clip stand»). Measured (report
+> `testcases/reports/2026-11-07_conan-palm-shadow-levers-wind-steps.md`): the every-frame light flickers with AND without wind; finer texels −1.5/−2.0 do NOT help
+> (lever 1 refuted); light steps 0.1° / 0.25° calm like 2.0 by the metric — **REJECTED by the owner 14:53: any step (2°, 0.1°) is an unacceptable sharp shadow
+> move; target = continuous light, SHARP shadows, no frame-to-frame leaf flicker (bug 67, verbatim).** Also refuted 15:0x–15:2x: SMRT 32/16, Nanite
+> `MaxPixelsPerEdge` 0.5/0.25 (no change); ray-traced sun shadows give BLOBS (baked ray-tracing proxies of the palms, `RayTracingProxies.ProjectEnabled 1`), 41 fps;
+> the palm leaves are OPAQUE geometry (`MI_AfricanOilPalm01/D01/02` on `M_Foliage`, blend 0) — no mask threshold to lower. The probe of all mesh components crashed
+> the game once (fixed, `palm-material-probe.lua`). NEXT for bug 67: `/bug-research` (3+ levers failed) — how shipped games keep crisp foliage shadows under a
+> continuously moving sun; candidates: palm assets without RT proxies (kit), VSM page-grid stabilisation. Game closed, lock released, build unchanged (2.0 / −1.0).
+> **16:1x — live with the owner (bug 67, full log in the bug):** his eye set the sun step **0.0025** (pack Engine.ini, not deployed yet — the game runs it live);
+> refuted by his eye today: texel ×2/×4/×10, throttle off, Nanite edge 0.25, WPO-disable off, cache off, SMRT 0 (×30 worse), SMRT 32/16, DLSS off (×9 worse);
+> the leaf material cannot be thickened (mask-based wind, no pivots). Tools: `leaf_pop_finder.py`, `shadow_pop_map.py` (blink counts), review folder 72.
+> **NOW 2026-11-07 16:57 — chat of 2026-11-07 (fourth), `/resume`, bug 67:** the 16:26 «×100» was a dirty stand (crown in the count box, hero attacked, idle camera) —
+> CORRECTED in bug 67: on a clean stand (`stand-keeper.sh` — new, HOUSE_RULES rule 11.6a) the forced re-render with a still light blinks no more than the still light,
+> Nanite buffers / LODBias / MinQuality within noise. **17:0x–17:3x proven:** only the light DIRECTION change pops leaflets (turning 0.7–26 %, still 0.05 %, still + cache off 0.01 %);
+> refuted on the clean stand: Nanite buffers, NaniteLODBias, MinQuality, MaxPixelsPerEdge, SMRT, receiver mask, WPO-disable distance; finer bias halves it. Lead: the Nanite
+> STREAMING pool (512 MB) — a flush flares 9.3 % then decays to 2.1 %. **17:39 the game CRASHED in my run: pool 2048 ≥ the GPU's 2048 MB max allocation** (bug 67) — next:
+> relaunch, A-B-A-B pool 512 / 1536. Tools new today: `stand-keeper.sh`, `wind.lua`, `rdoc/` (RenderDoc 1.47 installed by the owner's word 17:22). Bug 67 holds the full log.
+> 18:0x: pool refuted (the amplitude follows the weather's wind), HZB culling refuted; BOTH a turning light and moving leaves are needed. Game runs UNDER RenderDoc (PID 8396).
+> Work tree: `D:/Temp/kumm-rdoc/` — two frame captures ≈ 10 GB (bug 67, the VSM pass hunt); delete file by file when bug 67 closes or the captures are read.
+> **18:2x THE MECHANISM (bug 67 «THE LINE»):** `Nanite/NaniteRasterizer.ush:143/157` — a shadow texel takes the leaf's depth only if its CENTRE is inside the leaf triangle;
+> the turning sun + wind slide thin leaflet edges across texel centres. Seen: −1 texel stair-steps visible on leaflets; needle tips thinner than any texel. NEXT: the fix that keeps
+> smooth sun + wind + sharp shadows — conservative coverage in the Nanite SHADOW raster (can the game's compiled global shaders be rebuilt from the kit? recon first).
+> **18:31 DECISION `[OWNER]` «консервативная растеризация» · «мне нравится, пробуем.»** FIRST next: read `researches/conan-shadow-flicker/2026-11-07_global_shader_rebuild_recon.md`
+> (a helper wrote it) → if feasible: patch `NaniteRasterizer.ush` setup (C0/C1/C2 += ½·(|Edge.x|+|Edge.y|), shadow views only) + HW raster conservative state, rebuild, A/B on the
+> clean stand (`stand-keeper.sh`, fixed cam, 11:00 per clip, turning 0.0025) — the owner judges by eye. Game is running under RenderDoc (PID 8396) — relaunch plain for the A/B.
+> **18:35 recon done (`…/2026-11-07_global_shader_rebuild_recon.md`):** the Nanite raster of WPO foliage is a MATERIAL shader (programmable raster, includes Material.ush),
+> not in the global cache → the route is a MATERIAL OVERRIDE MOD: patch the kit's `NaniteRasterizer.ush` (scoped to the VSM permutation), recook `M_Foliage`
+> (`/FLX_Materials/Materials/Environment/Core/M_Foliage`, in the kit) in a Krinik kit pak (as KrinikConanUI), ship via Mods/. Risks: kit CL 378787 vs game 379176; the palm MIs may
+> carry static switches (own shader maps, not in the kit). Back up the kit file before editing; restore it after the cook so other kit mods build unpatched.
+> ⚠️ **Чат 2026-11-07 (второй) закрыт принудительно 2026-11-07 12:43 +03:00 на 85 % окна: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) —
+> долг платит первый /end-chat-soft.** Ложных утверждений на месте: нет (исправлено в этом чате: «E/Q пульта ходят только по 4 вкладкам» — в карте игры и плане 48).
+> Игра закрыта, замок снят, всё запушено (KUMM `43b54c7`+, пак `d85dfbe`). Сделано за чат — блоки UPDATE ниже и NOW: пустой хаб при быстром переключении,
+> значки EoT на «Параметрах», строка мини-карты, «E Взять» (подложка, 10/с, фейд 0,1), новый мод KrinikConanLocomotion (удар мечом в прыжке), «пляска» хаба,
+> рамка лута мгновенная, подсказки Inventory Compactor, значки еды в хабе, загон Emberlight, правило 30 (владелец за клавиатурой → без ввода).
+> **ПЕРВЫМ в следующем чате:** тени пальм (баг 67). `[OWNER]` 2026-11-07 12:59 «ТО ЕСТЬ - ТО ЖЕ САМОЕ, что было месяц назад? И опять нахуй будут тени пальм мерцать
+> из-за перерисовки кеша?!» — мелкая ступень солнца НЕ его цель (это компромисс со скачками); цель — плавное солнце без мерцания: путь B исследования
+> 2026-11-06 (`researches/conan-shadow-flicker/2026-11-06_vsm_foliage_recon.md`) — в ките плавная смена двух направленных источников ≈0,5 с на каждом шаге света
+> (сначала найти, какой блюпринт поворачивает свет: `BP_TimeOfDayManager` в ките, UDS-небо, вероятно, в ProtectedAssets); потом ролики с `hdr.ps1 off`;
+> **проверка веба 13:02 (по просьбе владельца):** «ступени не дают всех трёх» верно ЛИШЬ при запрете перерисовки каждый кадр; Fortnite даёт плавное солнце
+> перерисовкой тени солнца каждый кадр (без кэша, ≈½ разрешения) — это путь A' к замеру; «мерцание от поворота сетки» — МОЙ вывод, источником не подтверждён;
+> другие кандидаты мерцания листвы на VSM (форум Epic): контактные тени источника, Two Sided Foliage, TSR на листьях мельче пикселя, LodBias −1; «смена двух
+> источников» в Skyrim — не подтверждено (известно только: шаг + переход `fSunShadowUpdateTime`). Сначала дискриминирующие замеры, потом решение;
+> `[OWNER]` 13:04 «можно так переделать пересчет листьев пальм, чтобы на мелких углах повората солнца ЛИСТЬЯ НЕ ПРЫГАЛИ ТУДА СЮДА, не скрывались и показывались!!! ·
+> Повысить строгость их показа!» → рычаги: (1) мельче тексель солнца `ResolutionLodBiasDirectional`/`…Moving` −1.5 (игра Cine) и −2.0 (у нас −1.0 — грубее игры)
+> — ПЕРВЫЙ замер; (2) порог маски листа в тени (материал/ассет); (3) тень-прокси пальмы (Fortnite), ассет в ките; выстрел из лука в прыжке настоящими кнопками
+> (Locomotion M6); рамка лута R3 (последний предмет ряда). Перед любым вводом — `powershell -File D:/work/ai_sandbox/_tools/owner-idle.ps1` (правило 30).
+> Диск D: 93 ГБ свободно; кандидаты на удаление — решение владельца: `_text-extract-3.0.1` 20 ГБ, два комплекта выпуска 0.9.0 по 13 ГБ, `_bench` 9 ГБ, Svarog 24 ГБ
+> (рабочие деревья агента — жёсткие ссылки, место не освобождают).
+> **UPDATE 2026-11-07 12:2x:** (5) DONE — Inventory Compactor's two buttons show the game's dark tooltip (`krinik_ui_fixes` 1.7.0, notes `InventoryCompactor.md`);
+> (7) DONE 12:30 — the Emberlight pen in Russian (pack `d9964dd`). (6) DONE — eating / drinking in the hub: the gauges poll at once and animate 0.1 × dilation (`krinik_pause_in_menu` 0.17.0; the stat itself rose at once, the
+> gauges lagged ≈ 10 s + 3.3 s); pack `2856384`, report `2026-11-07_conan-compactor-tooltips-and-eating-gauges.md`. Queue empty of the owner's items → NEXT: palm
+> shadows re-shoot (bug 67: HDR off, `SetTimeOfDay` per clip), the bow's air shot by real input (Locomotion M6), quick-loot R3.
+> **UPDATE 2026-11-07 12:1x:** (1)–(4) DONE and pushed — KrinikConanLocomotion in the build (pack `158b186`, melee M1–M5 pass, the bow's air shot by real input open),
+> «E Взять» timing (P1), the hub dance (D2), the quick-loot rim instant with `krinik_loot_rim` off (pack `543b0ef`, R1/R2 pass, R3 open). NEXT: (5) the bag-header
+> tooltips, (6) eating under the hub's slow time — IMM_WAR overrides `BP_HungerSystem` / `BPGameItemFood` (recon the restore rate first). D: — 93 GB free; the agent's
+> trees (`D:\Temp\claude`, `_paksview-*`) are hard links (free ≈ 0 if deleted); the real candidates (`_text-extract-3.0.1` 20 GB, the clean copy 59 GB) are the owner's call.
+> **NOW 2026-11-07 ≈11:00 +03:00 — chat of 2026-11-07 (second), `/dayloop` (the owner's «работай автономно» 10:12), the owner's queue in order:**
+> DONE + pushed (pack `f59a5a2`, KUMM `b3f6ce0`): the empty hub on fast tab switching (38 of 38 bursts), EoT icons on «Параметры» on time, the minimap row on our
+> «Карта», the «E Взять» backing under E (alpha 0.45). IN WORK (deployed, under test): (1) `KrinikConanLocomotion` — the new mod (HOUSE_RULES 19): jump
+> shooting moved from Archery, the run/jump growth from Gameplay (its Lua half gone), melee — one swing in the air (`krinik_air_combat`); (2) «E Взять» checks
+> 10 / s while shown, fade 0.10 s; (3) the hub's middle «dances» on item select — `CraftingGUI` ScaleBox content height followed the item (fix: `SizeBox_2`
+> fixed height at birth, `krinik_ui_fixes` 1.6.0; live A/B shift 2–3 px → 0; a 1 px «Прочность» residual inside the details panel to read). QUEUE: (4) the
+> quick-loot rim — no animations, instant moves, then drop our hide-the-rim patch (`krinik_loot_rim`) if the last-cell jump is gone (the owner 10:57);
+> (5) the two bag-header tooltips («Выберите стопку…») in the game's tooltip look (10:58); (6) eating / drinking in the inventory raises hunger / thirst
+> slowly under the hub's world time 0.03 — fix «по аналогии, как исправляли по крафту» (10:59–11:00); then palm shadows re-shoot (bug 67), the Emberlight pen.
+> ⚠️ **Чат 2026-11-07 закрыт принудительно 2026-11-07 09:46 +03:00 на 85 % окна: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) —
+> долг платит первый /end-chat-soft.** Ложных утверждений на месте: нет (исправлены в этом же чате: «наша страница характеристик не привязана к герою»,
+> «мод мини-карты держит одну строку», выдуманный хеш пака — во всех местах). Игра закрыта, замок снят, всё запушено.
+> **ПЕРВЫМ в следующем чате:** (1) загон Emberlight — таблица готова `ConanExiles/_config/localization/asset-strings/Emberlight__W_AnimalPen.tsv`, нужна
+> строка `krinikBuild` для Emberlight в `modpack.json`, сборка пака (как у Ironlight, `games/ConanExiles/mods/Emberlight.md` «Open»), выкатка, кадр
+> `walk-mod-windows.sh <dir> W_AnimalPen`; (2) проверка пути игрока для контроллера хаба — ждёт слова владельца об игре впереди (раздел «Awaiting»);
+> (3) обход остальных окон модов из `_config/compat/ui-overflow-candidates.tsv` тем же циклом (EXP-0478).
+> **NOW 2026-11-07 06:47 +03:00 — chat of 2026-11-07, `/dayloop` (the owner's «Работай автономно» 06:24), plan 48:** the v4 crash CAUSE found — a stale Lua ref to a page the
+> game destroyed (each native «Параметры» activation kills other stats windows); v5 keeps pages by name (27 switches, 0 crashes). **v7 = the mixed controller
+> (pack `aec1471`, `hubswitch/shadow-pages-v7.lua`):** our own pages for 7 tabs, the game's own «Снаряжение» and «Параметры» held invisible until quiet (the game
+> tolerates no second inventory or stats window — v6, v8 closed the hub); 13 switches over all 9 tabs, 0 crashes, every frame the right page complete; per-tick
+> probe — one page per tick on 9 of 11 transitions, a direct click between «Снаряжение» and «Параметры» shows 3–4 ticks of bare world (open). Report
+> `testcases/reports/2026-11-07_conan-hub-controller-shadow-pages.md`. **v9 (pack `1d97341`) adds the lifecycle:** our pages collapse when the hub closes (event
+> checks on Esc/Tab/ActivateModule, no timer), back on reopen — 3/3 by the remote. **v10 (pack `45dfa04`): lazy build** one page per tick, nearest first
+> (max 77 ms per page, in the hub); RAM flat over 5 cycles → pages kept until the world is left. **IN THE BUILD since 07:35 — section `krinik_hub_controller`
+> of KrinikConanUI (pack `374b90d`, deployed; `692460f` — idle while the hub is closed, 2 open/close cycles 0 errors):** one page per tick on every probed
+> transition, the minimap row on our «Карта», 0 errors; bug 64 item 15 → 🟡. Also this chat: bug 79 respawn case passes (no freeze); `pult.sh` works by an
+> absolute path (pack `42fc264`). NEXT: the player's
+> path with the game in FRONT (real clicks, Esc/Tab, 144 fps recording — the owner's word needed: the game was ordered background-only); the minimap
+> helper's «Свои маркеры» click on our map; DONE 08:49: our Lua mods cost within the flight noise (A-B-A-B, CPU −0.06 ms, report `2026-11-07_conan-our-lua-mods-cost-abab.md`) — the build's +0.9 ms is the
+> paks'; next: by pak groups. Bug 64 item 21 (Damage Meter window) seen fixed at 4K 08:51. **Item 27 (Accessory System «Снаряжение EAA» tab) partly fixed 09:00**
+> (pack `f007d6e`, legend pass 2 `4cf0340`: captions «(торговец)» / «(админ)» fit, the legend in 12 short lines inside its panel bar the last ≈ 7 px; left — gem letters' font); the window
+> opens by the remote (game map, `acs_WardrobeGUI`). Queue (guide's 1.0.0 list, item 13): mod windows from `_config/compat/ui-overflow-candidates.tsv` by frames —
+> the thrall stats panel needs a thrall stand first. **09:0x–09:12 two walks of 12 mod settings windows** (report `2026-11-07_conan-mod-settings-windows-walk.md`):
+> fixed Al-Merayah labels, «Сохранить» buttons, Emberlight farming descriptions (pack `291942b`); Pickup+ hint FIXED 09:19 (the translation stitcher lost
+> sources with «|», pack `38e806c`); open — Ironlight admin headers and buttons FIXED 09:28 (culture-invariant FText — an asset edit, pack `6413000`); EAA enchanting buttons
+> fit (pack `4596f3a`, walk 3 of the EAA windows 09:30); walk 4 — the EAA admin menu Shift+V line fixed 09:38. Walk 5: the minimap marker line fixed 09:43; open — the Emberlight animal pen's English words (bug 64 item 13).
+> ✅ **Chat of 2026-11-06 (fifth) soft-closed 2026-11-07 00:32 +03:00 by the owner's word (00:30, «завтра продолжим»).** The debt of the two forced closures of 2026-11-06
+> is PAID: STATUS trimmed (89 lines to the chronicle), experience lint 0 findings, attribution lint 0 new (bug 67 line marked), budget gate passed, engine
+> syntax + 4 core tests green, the chat's claims re-checked (deployed KrinikConanUI = build 2, test mods removed, modlist and settings restored, pushes in sync).
+> **FIRST next chat — plan 48 (our hub controller), the game ONLY in the background, `pult.sh` exit 4 = stop:** bisect steps (f) show our W_Attributes alone,
+> (g) our FeatWindow → our W_Attributes by opacity + next-tick visibility without a native switch, (h) the same with the switch — then v5 of
+> `hubswitch/shadow-pages-v4.lua`; after it holds 9 tabs: the mods' adapters by the API (inventory in plan 48), the lifetime by RAM, real clicks (front, ask).
+> **NOW 2026-11-06 22:03 +03:00 — chat of 2026-11-06 (fifth), the owner's three orders 21:01 («делаем сборку конана» · «чиним переключения страниц на хабе» · «тестируем E
+> Взять над кустом с трупом»):** (1) **hub dark wave REMOVED** — vanilla `W_Carousel.AnimBackgroundFadeOut` (0.5 s mask slide) made instant in the
+> KrinikConanUI kit pak (pack `850f57c`); build 1 lost the see-through «Снаряжение» (exclusive range end — `[OWNER]` 21:30 «мне не нравится»), build 2 fixed it;
+> W1/W2 pass, vanilla control proves it. **The 2–6 frame page assembly is VANILLA** (same with the hub slowdown off and with no mod paks) — waits for the
+> owner's choice (asked in chat): leave it, or hide each new page until it is built (a short empty backing instead of the assembly). Report
+> `testcases/reports/2026-11-06_conan-hub-instant-switch.md`, bug 64. (2) **Bug 80 DONE** — a real E over a corpse in a bush opens the corpse, «E Взять» never
+> shows with the strip (report `2026-11-06_conan-bush-corpse-real-e.md`). Stand rule: wait out the «Обновляется каталог обликов» plate before a run
+> (`[OWNER]` 21:30). Game closed, lock released, HDR on.
+> **The owner chose 22:10 (bug 64, verbatim):** the old page stays until the new one is complete, then one frame — **plan 48**. Prototype (remote, not in the
+> build) holds the new page invisible until no widget is born → the late assembly gone on 7 of 9 tabs; to/from «Снаряжение» the bare world still shows 50–160 ms
+> (3 tries — stop). **The owner 22:57: fix the CAUSE** — the game rebuilds each tab window on every visit; a live `IsPersistent` edit at the main menu is
+> too late (22:59); set at the controller's birth (23:09) it keeps the windows, but each page still rebuilds its content on every show. The owner's design
+> 23:07: lazy background build of the other pages, nearest first; lifetime by a RAM measurement (23:18). NEXT: what each page re-creates on activation, then
+> the lazy build — plan 48 «Progress».
+> **NOW 2026-11-07 00:24 +03:00 — `/dayloop` (the owner's order 23:53, game ONLY in the background — his word 23:32; verbatim in plan 48):** the owner decided OUR hub
+> controller + a standard API for the other mods' hub UI (plan 48: API draft, inventory of 8 embeds). Proven: our code builds complete pages
+> (`WidgetBlueprintLibrary:Create`); a page kept in the viewport shows with 0 rebuilds; the native switch rebuilds heavy pages even when kept → our controller
+> shows its own instances (shadow pages). The shadow prototype CRASHES the game on the first switch in a clean game (reproducible); the bisect found one crash
+> rule (`SetVisibility` inside `OnChildActivated`) and narrowed the rest to the first native opening of a page with our instance + hooks present — NEXT
+> step in plan 48. **HOUSE_RULES 29 (new, the owner's word 00:03):** `pult.sh` exits 4 on a dead game; every series ends with `|| break`. Review folder 70 — the «Снаряжение» switches ×15. Tools
+> `ConanExiles/_config/hubswitch/` (`hub_run.sh <tag>`, `hub_switches.py`).
