@@ -146,7 +146,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 4. `[OWNER]` 19:58 «при наведении прицела на такие камни, нужно показывать нашу плашку E · E Читать» — the glowing carved lore stones get our «E Читать» plate on aim.
 > 5. `[OWNER]` 19:58 «тени пальм починили, но шейдер у камней и поверхностей (предположительно) такой же сломанный, требует переделки по аналогии с тенями листиков пальм» —
 >    his frame: grainy / dithered shadow on a sand rock face; rocks have no WPO — a different cause to find (SMRT noise / self-shadow), same clean-stand method.
-> 6. Disk D: was 100 % full 19:50 (commits failed); the owner deleted two games (14 GB free 19:59). `_bench` 9.4 GB of old recordings — waits for his «да» (classifier).
+> 6. Disk D: was 100 % full 19:50 (commits failed); the owner deleted two games (14 GB free 19:59; 9.1 GB at 20:32 — something keeps writing). `_bench` 9.4 GB of old
+>    recordings — waits for his «да» (classifier). The CLEAN Conan original in `D:Instals` is GONE (20:32) — `D:/Games/Conan_Exiles_3_0_1_clean_test` is now the ONLY clean copy
+>    (HOUSE_RULES rule 25): never delete it; rule 25 must name it as the original.
 > 7. `[OWNER]` 20:05 «с шеудером водыы, предположительно, похожая проблема, как и с шейдером тени листвы пальм - есть какая- то неестественная рябь, что-то то появляется то
 >    исчезает» — his frame: fine sparkling speckles over the oasis water. Method: the clean stand, still vs turning sun first (sun glint / Lumen reflections re-evaluated
 >    each light step?), then «what on the water does NOT sparkle». His frame is in the chat only (no file).
