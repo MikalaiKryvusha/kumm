@@ -91,6 +91,22 @@
 
 ## Entries
 
+### EXP-0481 · 2026-11-07 · ❌ · #conan #cvar #crash #nanite
+class: a live cvar raised past a hardware limit without reading the limit first
+mechanized: none — the limit stands in the game map (Nanite streaming pool line)
+**Lesson:** `r.Nanite.Streaming.StreamingPoolSize 2048` killed the game at once — the pool must be smaller than the GPU's largest single allocation (2048 MB here). Before
+raising a size cvar live (pools, buffers), grep the exe help / log for its limit or step up gradually (512 → 1024 → 1536) and check the game is alive after each step.
+
+### EXP-0480 · 2026-11-07 · ❌→✅ · #conan #stand #shadows #measurement #resume
+class: a stand inherited from the previous chat taken as ready
+mechanized: `ConanExiles/_config/stand-keeper.sh` + `stand-keeper.lua` (god + in-game 600 m / 20 s clean-up timer); HOUSE_RULES rule 11.6a; `shadow_pop_map.py` box argument
+**Lesson:** after `/resume` I ran a series straight into the game left open by the last chat — the owner's low camera under a palm, no god, no clean-up, idle
+camera orbiting: the hero was beaten through the clips and the count box held the crown in the wind; the owner caught it in 1 minute. Worse, the previous
+chat's «decisive ×100» (16:26) was the same kind of dirty count and had been written as the cause into bug 67 and STATUS. A run starts with the stand
+(keeper on, fixed cam, hour, one frame read, box on bare receiver), even when a game is already open; a result from a stand nobody checked is re-measured
+before it is built on. On the clean stand the true trigger (the turning sun, 26 % vs 0.19 %) showed in one series. A bash loop of `pult.sh` beside a series
+mixes the remote's single `result.txt` — keep periodic work inside the game (`LoopAsync`).
+
 ### EXP-0479 · 2026-11-07 · ❌→✅ · #conan #capture #testrun #stand #shadows
 class: a metric over a frame nobody looked at
 mechanized: `_config/palm-shadow-series.sh` (window capture `gfxcapture`, `QUIET`, per-clip time of day) + `fixed-cam.lua`; tools row in HOUSE_RULES_REFERENCE

@@ -1,7 +1,8 @@
 # Research — why palm leaflet shadows vanish, return and "fill in" over frames under a turning sun (VSM + Nanite, UE 5.8)
 
 > **Created:** 2026-11-07 (helper agent, web + local read-only, no game run; written 16:24 +03:00) · **Parent:** bug 67 ·
-> **Status:** recon done; none of the tests below has been run · **Outbound:** test order → the main session (bug 67)
+> **Status:** recon done; 2026-11-07 16:5x tests 1, 3 (buffers ×2), 4 (MinQuality 1), 5 (NaniteLODBias 0) run on a clean stand with a STILL light — the forced
+> re-render does not make leaflets blink on the sand, every lever within noise (bug 67, «CORRECTION 16:57»); the turning-sun run is next · **Outbound:** test order → the main session (bug 67)
 >
 > Builds on `2026-11-06_vsm_foliage_recon.md` and `2026-11-07_continuous_sun_crisp_foliage.md` (not retold). Registry = `ConanExiles/_config/cvars-registered.txt`.
 > Every cvar here was grepped as an exact line (✅ present / ❌ absent). Help texts were read from `ConanSandbox-Win64-Shipping.exe` (UTF-16 scan, read-only).
@@ -149,3 +150,21 @@ Any winner goes into the pack's `Engine.ini` only if a value that the device pro
 - Epic docs: Virtual Shadow Maps — https://dev.epicgames.com/documentation/en-us/unreal-engine/virtual-shadow-maps-in-unreal-engine
 - UE 5.4 cvar wiki — …/r.nanite.shadowraster.pixelsperedgescaling, …/r.shadow.virtual.usehzb, …/r.shadow.virtual.nonnanite.usehzb (https://indxzero.github.io/ue544cvarwiki/)
 - Local: exe help (scratchpad `helpscan.py`, read-only), `Saved/Logs/ConanSandbox.log` (device profile pushes), kit `UE4/Config/DefaultEngine.ini`, `DefaultDeviceProfiles.ini`.
+
+## 4. Shader reading 2026-11-07 17:2x (helper, kit `F:/CEUE5Devkit/Engine/Shaders/Private/`; no renderer C++ in the kit)
+
+Measured first (bug 67, clean stand): only a change of the light DIRECTION pops leaflets; a full re-render with the same direction is stable. What in the shaders
+switches on only when the light moves — the C++ marks a moving directional light's views UNCACHED (`VSM_PROJ_FLAG_UNCACHED` / `NANITE_VIEW_FLAG_UNCACHED`), and then:
+
+1. **Receiver-mask culling of casters (prime suspect).** `Nanite/NaniteInstanceHierarchyCulling.usf:194` `Cull.bUseReceiverMask = Cull.bUseReceiverMask && Cull.bIsViewUncached;`
+   · `Nanite/NaniteCullingCommon.ush:350` `bUseReceiverMask = bUseReceiverMask && !bInCacheAsStatic;` · the mask marks only the receiver's own 8×8-per-page cell, with no
+   widening for SMRT ray spread or texel dither (`VirtualShadowMaps/VirtualShadowMapPageMarking.ush:75-79`, `MarkPageReceiverMask`) · clusters outside the marked cells
+   are culled (`VirtualShadowMaps/VirtualShadowMapPageOverlap.ush:181-199`, `IntersectMask8x8`). Switch: `r.Shadow.Virtual.UseReceiverMaskDirectional` (live 1).
+   *[INF]* SMRT samples the map along rays AWAY from the receiver's texel, into cells whose leaf clusters were culled — and the cells and rays change every frame.
+2. **No static caching for an uncached view** — `VirtualShadowMapPageCacheCommon.ush:96` `if (bViewUncached) { return false; }` in `ShouldCacheInstanceAsStatic`;
+   with a still light a leaf beyond its WPO-disable distance is cached static (`:40`, `:104`).
+3. **One-pass occlusion against the previous frame's HZB through the previous light matrix** — `Nanite/NaniteCullingCommon.ush:619` («VSM supports one-pass
+   occlusion culling … using only previous-frame with artifacts as a result»), `:632`, `:639`; WPO leaves protected only by `MaxWPOExtent` padding.
+4. Dynamic depth-cull range for non-static geometry (`NaniteCullingCommon.ush:535-537`).
+SMRT's random seed is `View.StateFrameIndex` (`VirtualShadowMapProjectionDirectional.ush:244`) — per frame with or without light motion, so it is not the trigger alone.
+Test order: `UseReceiverMaskDirectional 0` under the turning sun (series c7), then the HZB path.

@@ -144,7 +144,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **16:1x — live with the owner (bug 67, full log in the bug):** his eye set the sun step **0.0025** (pack Engine.ini, not deployed yet — the game runs it live);
 > refuted by his eye today: texel ×2/×4/×10, throttle off, Nanite edge 0.25, WPO-disable off, cache off, SMRT 0 (×30 worse), SMRT 32/16, DLSS off (×9 worse);
 > the leaf material cannot be thickened (mask-based wind, no pivots). Tools: `leaf_pop_finder.py`, `shadow_pop_map.py` (blink counts), review folder 72.
-> **FIRST next chat (bug 67):** the forced re-render with the light still blinks ×100 (16:26) → leaflets are lost by the shadow re-render — test the Nanite cluster
+> **NOW 2026-11-07 16:57 — chat of 2026-11-07 (fourth), `/resume`, bug 67:** the 16:26 «×100» was a dirty stand (crown in the count box, hero attacked, idle camera) —
+> CORRECTED in bug 67: on a clean stand (`stand-keeper.sh` — new, HOUSE_RULES rule 11.6a) the forced re-render with a still light blinks no more than the still light,
+> Nanite buffers / LODBias / MinQuality within noise. **17:0x–17:3x proven:** only the light DIRECTION change pops leaflets (turning 0.7–26 %, still 0.05 %, still + cache off 0.01 %);
+> refuted on the clean stand: Nanite buffers, NaniteLODBias, MinQuality, MaxPixelsPerEdge, SMRT, receiver mask, WPO-disable distance; finer bias halves it. Lead: the Nanite
+> STREAMING pool (512 MB) — a flush flares 9.3 % then decays to 2.1 %. **17:39 the game CRASHED in my run: pool 2048 ≥ the GPU's 2048 MB max allocation** (bug 67) — next:
+> relaunch, A-B-A-B pool 512 / 1536. Tools new today: `stand-keeper.sh`, `wind.lua`, `rdoc/` (RenderDoc 1.47 installed by the owner's word 17:22). Bug 67 holds the full log.
+> ~~**FIRST next chat (bug 67):** the forced re-render with the light still blinks ×100 (16:26) → leaflets are lost by the shadow re-render~~ (refuted above) — test the Nanite cluster
 > buffers (double MaxCandidateClusters / MaxVisibleClusters / MaxNodes, `nanitestats virtualshadowmaps`), the order in bug 67 and the recon
 > `researches/conan-shadow-flicker/2026-11-07_leaf_shadows_fill_in_recon.md`; measure by `shadow_pop_map.py` on a 2-s window capture; the owner watches live. Game open (PID 49596) with live test values (throttle 0/0, pool 8192, Nanite 0.25, t.MaxFPS 144) — a restart returns the pack's values.
 > ⚠️ **Чат 2026-11-07 (второй) закрыт принудительно 2026-11-07 12:43 +03:00 на 85 % окна: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) —

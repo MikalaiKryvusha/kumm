@@ -205,7 +205,13 @@ mods the game shows the modal «Играть без подключения» aft
 `p.ShortcutBarInventory:RemoveItem(<slot index>, FName("None"), nil)` (params Index, Context, ObserverAlreadyUpToDate); `BackpackInventory` is an `ItemInventory`
 with `RemoveItem`, `DropItem`, `GetItemCount`.
 Hosav numbers («k», «M») — `games/ConanExiles/mods/UIMod_Hosav.md`.
-Sun and shadows (0.003 was set for a smooth sun; now 2.0 by the owner's choice): `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ~50×/s; live `2.0` (light turns in steps
+**Palm-leaf shadow flicker, proven 2026-11-07 17:0x (bug 67, clean stand):** only a change of the sun light's DIRECTION pops leaflet shadows (turning 0.0025: 6–27 % of
+sand pixels blink; still sun 0.05 %; still sun with `r.Shadow.Virtual.Cache 0` 0.01 %); Nanite buffers ×2, `r.Shadow.NaniteLODBias 0`, `QualityScale.MinQuality 1` — no effect;
+finer VSM bias −2/−3 halves it. `r.Nanite 0` leaves the palms a bare trunk in the shadow (the Nanite fallback has no crown). `r.Shadow.Virtual.Visualize` /
+`ShowFlag.VisualizeVirtualShadowMap` draw nothing in the Shipping exe. **Nanite streaming pool** `r.Nanite.Streaming.StreamingPoolSize`: 512 MB live (device profile
+Windows_HighVRAM), resizes at runtime (a resize flushes the pool); **2048 = fatal crash** («must be smaller than the largest allocation supported by the graphics hardware
+(2048MB)», NaniteStreamingManager.cpp:640, 2026-11-07 17:39) — keep it ≤ 1536 on this RTX 5070 Ti. Live now: `SolarUpdateAngleDelta` 0.0025 in the pack (the owner's smooth sun, 2026-11-07 16:12).
+Sun and shadows (history below — 0.003 was set for a smooth sun, then 2.0, now 0.0025): `DynamicSky.SolarUpdateAngleDelta = 0.003` (game 0.015) turns the sun light ~50×/s; live `2.0` (light turns in steps
 seconds apart) — the owner under palms 2026-10-29 00:46: «ну сейчас словно тени в порядке»; back at 0.003: «да, вернулось». The pack carries 2.0
 (bug 67; 2.0 written, reverted once for the smooth sun, then 2.0 by the owner's final choice 2026-10-29 01:10 — no cvar keeps 0.003 smooth without the redraw); the game log shows the quality group 0.015 first, then ours.
 Stand rule (2026-10-28 23:52 crash): never keep a killed creature in `_G` — the dead actor is destroyed and the next call on it is an access

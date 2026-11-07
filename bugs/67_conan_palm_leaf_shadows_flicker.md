@@ -118,7 +118,50 @@ rotation**. Prime suspect: Nanite cluster buffers overflow in the shadow pass (F
 MaxCandidateClusters 16777216 → 8388608; an Epic VSM engineer on a Conan thread: «I'd focus on the Nanite buffer overflow investigation first»). NEXT, in order:
 `nanitestats virtualshadowmaps` at delta 2.0 vs 0.0025; double MaxCandidateClusters / MaxVisibleClusters / MaxNodes (+ `r.Shadow.Virtual.Nanite.AllowMultipassViews 1`) and
 re-run the forced re-render test; then `r.Nanite.Streaming.QualityScale.MinQuality 1`, StreamingPoolSize 1024; `r.Shadow.NaniteLODBias 0`. A winning value may need a
-`[ConsoleVariables]` / Lua route — the device profile outranks SystemSettings. Values restored 16:27 (0.0025, ForceInvalidate 0). `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
+`[ConsoleVariables]` / Lua route — the device profile outranks SystemSettings. Values restored 16:27 (0.0025, ForceInvalidate 0).
+**CORRECTION 2026-11-07 16:57 +03:00 — the 16:26 «decisive» count is NOT valid evidence.** It counted the old fixed «ground area», which on the owner's low
+camera under the palm held the crown itself (wind on the visible fronds); the stand was not kept clean either (`[OWNER]` 16:45 «Что твоего героя пиздят со всех
+сторон!» · «и камера вращается от неактивности!»). Re-run on a CLEAN stand (`stand-keeper.sh` 600 m / 20 s, god, `fixed-cam.lua` dz 350 pitch −55, 11:00, blinks
+counted only in a box of bare sand with the palm shadow, `shadow_pop_map.py … 250,470,1500,940`): still light 534 px (0.09 %); still light + forced re-render
+every frame 325 / 123 px (A / A2); + Nanite buffers ×2 157; + `r.Shadow.NaniteLODBias 0` 338; + `QualityScale.MinQuality 1` 1167 (0.20 %) — **all within noise:
+the per-frame shadow re-render does NOT drop leaflets on the sand.** The Nanite-overflow lead (C1) loses its basis; the live symptom is under the TURNING sun —
+series «T» (0.0025) vs «S» (still) with the same levers is next. The owner saw «переставало мерцать» (16:52) during clips C (LODBias 0) / D (MinQuality 1) of the
+re-run, on the still light — the counts above do not single either out. The first series of 16:4x (hero beaten, camera orbiting, crown in the box) — void.
+**17:0x — THE TURNING SUN IS THE TRIGGER (clean stand, same box):** sun 0.0025 → 156 929 / 154 473 blinking px (26.7 % / 26.3 %, T / T2); sun still → 1 106 (0.19 %);
+turning + Nanite buffers ×2 → 25.2 %; turning + `NaniteLODBias 0` → 24.5 % (no help). The blink map (scratchpad c2/T.webp) shows WHOLE leaflet-shadow patches
+popping, not edge crawl. Same geometry re-rendered with the SAME light direction is stable; a new direction every frame pops leaflets. `…ResolutionLodBiasDirectionalMoving`
+is −1.0 like the static bias (no coarser «moving» resolution). Next on the same stand: bias −2 / −3 / 0 under the turning sun, and `r.Shadow.Virtual.Cache 0` with a still
+light (is the forced re-render real?).
+**17:0x — PROVEN on the clean stand (series c3):** still sun + `r.Shadow.Virtual.Cache 0` (full re-render every frame, wind on) → 38 px (0.01 %); still sun → 307 (0.05 %);
+turning sun at bias 0 / −1 / −2 / −3 → 10.8 / 9.3 / 5.1 / 6.2 % (the same «turning, −1» gave 26 % in series c2 — ×3 between series). The owner's eye 17:06 «ну вот было в
+порядке только что» = the still-sun clips. **Only a change of the light DIRECTION pops leaflets; re-render, cache, wind, Nanite buffers are not the trigger; finer texels
+halve it, never remove it.** The code mechanism is NOT proven yet — two candidates: (a) rasterizing thin leaflets into the shadow map (an edge-on leaflet falls between
+sample points under a new projection); (b) Nanite's cluster selection for the light's view changes with the projection. Discriminator running: `r.Nanite 0` (fallback
+meshes, no cluster selection) under the turning sun. `r.Shadow.Virtual.Visualize` + `ShowFlag.VisualizeVirtualShadowMap 1` show nothing in this Shipping exe (17:09 frame).
+**17:13 — `r.Nanite 0` is VOID as a discriminator:** 3 blinking px under the turning sun, but the frame (c4/nanite_on_off.webp) shows NO crown shadow at all — the palm's
+Nanite fallback is a bare trunk, nothing left to flicker. Both candidates live inside Nanite (it selects the clusters AND rasterizes small triangles into the shadow);
+next discriminator: `r.Nanite.MaxPixelsPerEdge` 0.25 / 1.2 / 4 / 16 under the turning sun (selection) against the bias series above (sample density, ×2).
+**17:15 — Nanite selection REFUTED:** `MaxPixelsPerEdge` 0.25 / 1.2 / 4 → 6.5 / 7.2 / 5.3 % (c5), and the owner's eye 17:14 «мерцает на всех положиениях». Reading `[AI]`:
+a blink is on-off-on within three frames — a monotonic geometric change under a slowly turning sun would leave a leaflet gone for a while, so the per-frame back-and-forth
+points to per-frame noise re-drawn at every new direction (SMRT rays + texel dither) — series c6 (SMRT 0 + dither 0, still vs turning) running.
+**Requirement `[OWNER]` 2026-11-07 17:16 «и еще колебания листов на ветру» · «но ещё шум дает колебание листов на ветру» · «но это НЕ ПРИЧИНА» · «ветер должен быть»:** the wind
+and the leaf-shimmer noise (`MF_LeafShimmer`) stay — the fix keeps the leaves moving and their shadows steady; wind off is never the fix (a diagnostic at most, `_config/wind.lua`).
+**17:1x–17:2x (clean stand):** SMRT 0 + dither 0 (c6): still sun 0.04 % → **3.5 %** without SMRT (the wind-moved leaf shadow DOES change every frame; SMRT + temporal hide
+it while the sun stands), turning 4.8 % → 8.0 % without SMRT — SMRT is not the cause. The owner 17:20 «вот сейчас ровно» = the 2.0 still-sun window again; `[OWNER]` 17:21
+«при неподвижном солнце, да, перцания пропадают - это ЗАЦЕПКА, а не способ починки» · «солнце должно двигаться плавно»; 17:23 «могут быть баги или в рендерере … или в
+шейдерах». Shader reading → recon §4: a moving light's views are UNCACHED, which switches on receiver-mask caster culling, drops static caching, uses the previous-frame HZB.
+**Receiver mask REFUTED (c7):** `r.Shadow.Virtual.UseReceiverMaskDirectional 0` → 3.5 / 3.3 % vs 1.7 / 2.9 % with it. `r.Shadow.Virtual.UseHZB` is already 0. Baseline «turning»
+falls series by series (26 → 9 → 6.5 → 4.8 → 2 %) — compare inside a series only. Next (c8): `Clipmap.WPODisableDistance 0` (the leaf shadow without wind on coarse levels +
+the coarser-level fallback for an unmapped page, `VirtualShadowMapProjectionDirectional.ush:59`). RenderDoc 1.47 installed (the owner's word 17:22 «разрешаю установить!»),
+`_config/rdoc/launch-rdoc.sh` + `rdoc_trigger.py` ready for a frame capture.
+**17:3x:** `Clipmap.WPODisableDistance 0` (c8) — 1.4 / 1.5 % vs 1.6 / 0.7 %: no effect. The wind varies by the weather (`wind.lua read`: WindIntensity 0.195 at 17:17, 0.167 at
+17:33) but too little to explain the baseline 26 → 1 %. **Nanite streaming pool lead (c9):** before a flush 5.85 %; `StreamingPoolSize` 512 → 1024 (a resize flushes the pool)
+→ 9.3 % at once, 3.7 % after 20 s, 2.1 % after 60 s — a flare and a decay below the start. Reading `[AI]`: under a turning light every shadow page is re-rendered every
+frame, its GPU feedback asks for slightly different clusters each frame, and a 512 MB pool (4K + shadows) thrashes at the margin — leaflets swap between coarse and fine
+clusters; a still (cached) light asks for nothing new. Running: A-B-A-B 512 / 2048 with 60 s settle each (c10), wind read per clip.
+**17:39 — CRASH in the agent's run (my error):** `exec r.Nanite.Streaming.StreamingPoolSize 2048` → «Fatal error: NaniteStreamingManager.cpp:640 Streaming pool size (2048MB)
+must be smaller than the largest allocation supported by the graphics hardware (2048MB)». The limit on this RTX 5070 Ti / driver: the pool must stay BELOW 2048 MB (1024 ran
+fine). Crash-report window closed, PID 12680; machine lock released. The c10 series died after its first clip (pool 512, wind 0.152). Re-run with 512 / 1536. `[OWNER]` 15:47 «что такое точность? зачем ты её меняешь?» — explained: the texel size stood in for the leaf thickness the material cannot give. — during a live look the owner drives the camera; no fixed camera.
 
 ## Goal vector and acceptance
 

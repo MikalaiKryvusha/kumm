@@ -59,6 +59,11 @@
         probes spent searching foliage for a stone, case R2.)
     6. Interference (an enemy hits the hero, combat noise, the camera drifted) — remove it and repeat; a case run under interference does
        not count.
+    6a. Conan: for the WHOLE run the stand is kept clean by `bash ConanExiles/_config/stand-keeper.sh` (god on + an in-game timer: every living humanoid
+        and beast within 600 m killed every 20 s; `stand-keeper.sh last` · `off`), the camera held by `fixed-cam.lua` (the idle camera orbits after ≈30 s),
+        the hour set before each clip — 11:00 for the palm-shadow stand. Started BEFORE the first clip; a one-off clean-up is not a stand.
+        (`[OWNER]` 2026-11-07 16:45–16:47 «Что твоего героя пиздят со всех сторон!» · «и камера вращается от неактивности!» · «600 м!!!!» · «каждые 20 секунд!!!» ·
+        «и 11 утра ставить!»)
     7. How the stand was set up — one line in the game map.
 12. **The agent installs a CLI tool it needs by itself** (`winget`, `pip install --user`, `npm i -g`, `cargo install`), checks it by its
     version and writes one line into the reference.
