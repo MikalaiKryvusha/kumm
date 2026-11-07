@@ -17,8 +17,8 @@ the machine lock taken.
 
 ## Checks
 
-- Hygiene: none.
-- Functional run: the real game (background), the hero killed by the console, the game's own respawn; READ: the pause section's log lines, the world time,
+Hygiene: none.
+Functional run: the real game (background), the hero killed by the console, the game's own respawn; READ: the pause section's log lines, the world time,
   one frame.
 - D1 pass — the respawn selection opened (07:41:40), time 1.0, no «полноэкранный интерфейс: ОТКРЫТ».
 - D2 pass — the respawn by itself 8 s later, «взведено: герой в мире» 07:41:50, time 1.0 twice, the hero standing at the desert spawn on the frame.
