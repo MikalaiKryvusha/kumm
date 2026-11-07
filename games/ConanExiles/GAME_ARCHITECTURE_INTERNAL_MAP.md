@@ -524,6 +524,10 @@ Simple Minimap ставит карту во время игры: центр сл
 персонажа (`W_PaperdollPanel`) — родной шаблон `ST_UI_GeneralText` / `Level_ExpandedDetails` «({Percentage}% {CurrentXp}/{MaxXp})», значения внутри
 уровня, формируются кодом (2026-10-28).
 Lua-моды UE4SS ждут только отложенными действиями игрового потока (`ExecuteInGameThreadWithDelay`): рабочий поток задержек роняет игру (баг 66).
+UE4SS build 1181 (`8333063`), threads (source read 2026-11-07, bug 85): `RegisterKeyBind` / `RegisterKeyBindAsync` callbacks run on UE4SS's event-loop thread;
+`RegisterHook` callbacks and delayed-action batches run on the game thread WITHOUT the mod lock; a mod's Lua threads share one `lua_State` → no key binds in our
+mods (guard `check-lua-game-thread.py`). Gameplay keys on the game thread: `/Game/Characters/BasePlayerChar.BasePlayerChar_C:InpActEvt_AnyKey_K2Node_InputKeyEvent_1(Key)`
+(the hero BP has no input event for E «use» — handled in C++). Two delayed actions of the same delay: one may never run (EXP-0486) — chain setup in one action.
 
 ## Где наши моды встают в игру
 

@@ -91,6 +91,22 @@
 
 ## Entries
 
+### EXP-0486 · 2026-11-07 · ❌ · #ue4ss #conan #lua #delayed-action
+class: two game-thread delayed actions of the same delay — one silently never runs
+mechanized: none — rule of thumb in the game map (UE4SS line): chain dependent setup inside ONE delayed action
+**Lesson:** KrinikConanCamera's key hook, scheduled as its own `ExecuteInGameThreadWithDelay(1600, …)` next to the neck hook's (same 1600), left no log line at all
+while the neck hook ran (21:39 run, bug 85 K4). UE4SS `process_delayed_actions` (build `8333063`) skips a ready action while `m_is_currently_executing_game_action`
+is set — likely the cause. Put setup steps that must all happen into one delayed action, and log every setup step so a silent drop is visible.
+
+### EXP-0485 · 2026-11-07 · ❌→✅ · #ue4ss #conan #crash #thread #guard
+class: Lua run off the game thread — key binds are the twin of LoopAsync / ExecuteWithDelay
+mechanized: `ConanExiles/_config/check-lua-game-thread.py` refuses `RegisterKeyBind` / `RegisterKeyBindAsync` (red on 10 calls before the fix)
+**Lesson:** the bow-kill crash (bug 85) was a `RegisterKeyBind(LMB)` callback running Lua on UE4SS's event-loop thread while the same mod ran game-thread Lua
+(delayed corpse pass) — unlocked, one `lua_State`. The 2026-10-28 guard knew only the worker-thread delays, so the class came back by another door. When a
+crash stack is all UE4SS: map the offsets to the DLL's exports (`pefile`, UE4SS exports its C++ API), then read the source at the build's commit — it named the
+race in an hour where guesses («two corpses», «garbage out-param») were both refuted. Game-thread replacements: the hero BP's
+`InpActEvt_AnyKey_K2Node_InputKeyEvent_1` for gameplay keys, native widget events for menu clicks.
+
 ### EXP-0484 · 2026-11-07 · ❌ · #input #conan #mouse-seq
 class: a synthetic press left «held» in the game after an input series
 mechanized: none yet — NEXT: `mouse-seq.ps1` sends `rup`/`lup` and up for every key it pressed in a `finally` at the end of every run

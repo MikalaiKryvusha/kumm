@@ -120,11 +120,22 @@ game-thread trigger is found: the shafts after the full loot window and after a 
 
 ## Open
 
+- **A missed arrow wakes the mob (the owner's order 2026-11-07 21:50, NOT BUILT):** `[OWNER]` «промах из лука пмо мобу, если стрела ударилась об землю, или другого
+  мода. или об стену. или об предмет - где-то рядом в 10 метрах от моба - должна приводить к тому, что моб узнает об присутсткии героя и начинает к нему бежать для
+  нападения на героя, словно слышит, что стрела рядом с ним упала - и это вызывает аггресию моба». Trigger: the copy's birth (`NotifyOnNewObject` BP_DummyProjectile,
+  game thread, already hooked) whose hit is NOT a living creature → hostile NPCs within 1000 cm of the impact point get the hero as a target. Recon first: how Conan NPCs
+  notice the player (AI perception hearing `ReportNoiseEvent`? the game's own threat / aggro list — the hero's `BP_AC_AudioController_C.AggroList` exists) — game map has
+  no line yet. Only arrows of the player's hero; «hostile» — what the game itself would aggro (not thralls, not neutral villagers — check by the game's faction test).
+- **Draw time by Agility — BUILT 2026-11-07 21:5x, NOT RUN:** lever found by bytecode (`BaseBPCombat`: `SetPowerCharge(Duration)` sets `PowerChargeTimeScale = Duration`,
+  `PowerChargeStartTimeStamp = GetTimeSeconds()`; charge = clamp((Stop − Start) / TimeScale)). Section «натяжение по Проворству»: a post-hook of
+  `BaseBPCombat_C:SetPowerCharge` (player only) writes `PowerChargeTimeScale = max(5 × 0.99^n − 0.552, 0.05)`; the full-charge «дзинь» moved from the montage's second
+  hold to a delayed action at the real full moment. Agility = `GetIntStat(19, 0)`. In the game folder 21:5x — loads at the next launch.
+
 - **Draw time by Agility (the owner's order 2026-11-07 21:43, NOT BUILT):** `[OWNER]` «каждый пункт Пропорства должен уменьшать время натяжения лука на 1%» ·
   «причем каждый процент не абсолютно применяется, а к предыдущему значению времени натяжения … оно прогрессивно 100 раз уменьшалось по 1%» → full-draw
   time = base × 0.99^Agility. Vanilla base (kit montage `AM_combat_2h_bow_combo_heavy_c0`, game map): the charge `BP_PowerCharge` starts 0.552 s, lasts 1.28 s →
   full at ≈ 1.83 s. 21:45 he asked the table for a base of 5 s (`[OWNER]` «если сделаем жл полного натяжения 5 секунд на нулевом уровне проворства») — the base is
-  his decision, not taken yet: 5 s gives 4.09 s at 20, 1.83 s (= vanilla) at 100, 0.67 s at 200. Way: the draw montage's play rate on the hero's AnimInstance
+  5 s gives 4.09 s at 20, 1.83 s (= vanilla) at 100, 0.67 s at 200. **DECIDED 2026-11-07 21:46:** `[OWNER]` «суппер, так и делаем» — base 5 s at Agility 0, × 0.99 per point. Way: the draw montage's play rate on the hero's AnimInstance
   (`Montage_SetPlayRate`) for the draw part + the bow string's own single-node rate; Agility read as `KrinikConanLocomotion` does (`read_agility`).
 
 - **REMOVED 2026-11-02 15:3x by interview #031, answer A** (`[OWNER]` «убрать строку, пока спрайт не найден. Найдётся — вернём её уже к нему»): the hub row
