@@ -51,10 +51,12 @@ Achieve: the owner's free roam in the main world runs at ≥ 50 FPS sustained wi
 | G10 | empty | 0.75, road reflections max only, car off | | pass | 00:3x: 35 / 28 — road reflections are the heaviest single option |
 | G11 | empty | 0.75, car reflections level 1, slow update, road off | | pass | 00:3x: 45–46 / 36–37 — car shine kept for ~5 FPS |
 | G6 | empty | best of G1–G5, in-game row native vs 720p | the native row per the port notes | | |
-| G12 | empty | refl off, 0.75, world detail (g_WorldLodLevel) 3 → 1 | fewer draws far away | | |
-| G13 | empty | refl off, 0.75, rain + particles off | | | |
-| G14 | empty | refl off, 0.75, crowd (Зрители) off | | | |
-| G15 | empty | refl off, 0.75, «Уровень детализации» (g_PerformanceLevel) 5 → 3 | | | |
+| G12 | empty | refl off, 0.75, world detail (g_WorldLodLevel) 3 → 1 | fewer draws far away | pass | 01:32: 49–50 / 37–43 vs A2 51–56 — no gain (standing; driving not measured) |
+| G13 | empty | refl off, 0.75, rain + particles off | | pass | 01:35: 48–51 / 39–43 — no gain |
+| G14 | empty | refl off, 0.75, crowd (Зрители) off | | pass | 01:38: 52 / 41–44 — no gain |
+| G15 | empty | refl off, 0.75, «Уровень детализации» (g_PerformanceLevel) 5 → 3 | | pass | 01:42: 53–56 / 40–45 — within the control's noise |
+| G16 | empty | refl off, 0.75, car detail 0 + car shadows 0 | | pass | 01:45: 43–44 / 36–37 — WORSE than the control; unexplained (registry value 0 may not mean "low"); not used |
+| A2 | empty | control at the end of batch 2 | ≈ A1 | pass | 01:48: 51–56 / 41–51 — noise band of a standing sample ≈ ±3 FPS |
 | G7 | empty | refl off, 0.75, Поле зрения Оригинал (vs Исправленное in A1) | Исправленное draws more to the sides | pass | 01:04: 49 / 37–39 vs A1 49–51 — no cost |
 | G8 | empty | refl off, 0.75, Меню и HUD Оригинал (vs Улучшенный in A1) | memory, not FPS | pass | 01:08: 54–56 / 45–48 vs 49–51 / 37–39 — the upscaled HUD costs ~5 FPS (expectation refuted) |
 | A0 | empty | batch start control | | void | 00:59: never reached `drive 2` (state stayed `drive 1`), sample not counted |
@@ -68,7 +70,7 @@ Achieve: the owner's free roam in the main world runs at ≥ 50 FPS sustained wi
 | C5 | crowd | same, Фары других машин «Игроки» (vs «Откл.» in C1b) | | pass | 01:21: 28–29 / 16 vs C1b 29–31 / 17–19 — within noise |
 | C1b | crowd | refl off, 0.75, cars 16, headlights off | | pass | 01:24: 29–31 / 17–19 |
 | F1 | empty | refl off, 0.5, fps 120 | reachable? | fail | 01:11: 51–53 median, peaks 75–80 — 120 not reachable |
-| F2 | empty | display 120 Hz vs 144 Hz at fps 60: frame-time spread | 120 Hz even | blocked | 01:4x: `dumpsys SurfaceFlinger --latency` returns only zero rows for the web app's layers on Android 16 (BLAST SurfaceView and ChromeNativeWindowSurface tried); the page's counter averages frame time. Source instead: the port's `discord-bot/knowledge.md` — a 144–165 Hz screen at 60 or 120 "neither spaces those evenly: some frames show twice" |
+| F2 | pause menu in the empty world (the game holds 60 there: 59–61) | display 144 Hz vs 120 Hz at fps 60: present-interval spread | 120 Hz even (~16.7 ms), 144 Hz alternating 13.9 / 20.8 ms | pass (no difference) | 01:5x: 144 Hz — 301 presents / 5 s, intervals p10 8.5 · p50 16.3 · p90 23.8 ms; 120 Hz (system peak/min 120, renderFrameRate confirmed 120) — 312 / 5 s, p10 8.1 · p50 16.6 · p90 23.7 ms. Both spreads equally wide: Chrome's compositor jitter dominates, the display rate brings no visible gain at this instrument's resolution. The owner's 144 Hz restored (settings read back 144.0 / 144.0, renderFrameRate 144). Expectation not confirmed | method: `trace-pacing.mjs` — a CDP Chrome trace (`viz`), intervals of `Display::DrawAndSwap` (works: 4 s trace 01:4x gave 221 presents); `dumpsys SurfaceFlinger --latency` gives only zero rows on Android 16 |
 | M4 | main, city | chosen config, driving away from the spawn | ≥ 50 (R1) | | |
 | T1 | main, city | chosen config, 10 minutes | ≤ 10 % drop (R2) | | |
 | A1 | empty | control: G2 repeated at the end of batch 1 | ≈ G2 (thermal drift check) | pass | 01:27: 49–51 / 37–39 vs G2 51 / 41–44 — no thermal drift over the batch |

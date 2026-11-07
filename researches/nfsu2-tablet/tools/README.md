@@ -25,3 +25,4 @@ The nfsu2.xyz web app must be open on the tablet (its page is found by URL in `h
 | `rlog.js` · `peekreg.js` | render/resolution lines of the current game log · the registry text |
 
 Quit the game through the site menu (F9 → «Выйти из игры» → confirm), never by reloading the page: Chrome's "Reload site?" dialog freezes CDP.
+| `trace-pacing.mjs [s]` | a CDP Chrome trace (viz): intervals between presented frames (`Display::DrawAndSwap`) — frame pacing |
