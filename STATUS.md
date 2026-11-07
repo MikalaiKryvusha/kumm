@@ -138,7 +138,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Then quick-loot R3, plan 45 boss spawns. Game running (background launch 19:14), keeper timer on.
 > **00. CRASH FIRST (2026-11-07 21:17, the owner playing):** EXCEPTION_ACCESS_VIOLATION reading 0xffffffffffffffff inside UE4SS. UE4SS.log tail: an arrow hit an Imp → the Imp
 >   died → `KrinikConanArchery` «arrows in the corpse» ran on two `Corpse_C` births at 21:17:54.36 / .38 → crash. Prime suspect: the corpse-arrow code touching a destroyed actor (the known
->   class: a dead creature kept in a Lua ref — game map «Stand rule» 2026-10-28). Crash window closed (PID 26460). Read the code of `on_corpse_born` / the re-attach first; repro with arrows into imps.
+>   class: a dead creature kept in a Lua ref — game map «Stand rule» 2026-10-28). Crash window closed (PID 26460). Read the code of `on_corpse_born` / the re-attach first; repro with arrows into imps. The owner 21:18: many bow kills without a crash — a RARE case; the unusual line: TWO `Corpse_C` births 20 ms apart (a race of two corpses / one arrow set?).
 > **0. AT ONCE next chat (owner 20:53-20:54, his request in chat):** give him a top-tier bow and many good arrows — id 51405 (old notes) is NOT a bow in this build (he got a
 >   wrong item); iron arrows 53612 x500 were given. Read real ids first: `_config/find-items.lua` returned 0 rows — the ItemTable name column is not «Name»; find the column, then spawn
 >   (`exec MakeMeAdmin` first). Also fix the game map line that names 51405 as a bow.
