@@ -22,7 +22,8 @@
 
 ## Open
 
-- **The animal pen (`W_AnimalPen`) shows «FOOD», «WATER», «ADD», «REMOVE» in English** (frame 2026-11-07 09:41, bare module). Next: extract `W_AnimalPen` and
-  read whether they are culture-invariant FText (→ an `asset-strings` table and a `krinikBuild`, like Ironlight's admin panel) or gathered rows missing from
-  the `.locres` (→ `locres-missing-2026-11-07.tsv`). 15 candidates of `DT_HortiDecoPrimaryButtonsTable` in `_config/compat/ui-overflow-candidates.tsv` wait for
+- **The animal pen (`W_AnimalPen`) shows «FOOD», «WATER», «ADD», «REMOVE» in English** (frame 2026-11-07 09:41, bare module). Read 09:4x: the container is
+  `Emberlight` (`extract Emberlight W_AnimalPen` — 243 exports, 391 imports); all four are CULTURE-INVARIANT FText («FOOD» ×1, «WATER» ×1, «ADD» ×2, «REMOVE» ×5)
+  → an `asset-strings/Emberlight__W_AnimalPen.tsv` («FOOD ⇥ ЕДА», «WATER ⇥ ВОДА», «ADD ⇥ ДОБАВИТЬ», «REMOVE ⇥ ЗАБРАТЬ» — to fit, check by a frame) and a
+  `krinikBuild` entry for Emberlight (KRINIK MODIFIED), like Ironlight's admin panel. 15 candidates of `DT_HortiDecoPrimaryButtonsTable` in `_config/compat/ui-overflow-candidates.tsv` wait for
   a frame of the decoration window.
