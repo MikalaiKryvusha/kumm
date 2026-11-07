@@ -8,7 +8,15 @@
 **What it is.** A Lua mod (`ue4ss/Mods/KrinikConanGraphics`) + the build's optimized `Engine.ini` (distances, shadows, fog, DLSS, the sun step), the ini
 deployed by `Deploy-ModPack.ps1` through the manifest's `engineIni` field.
 
-## Kit pak — conservative shadow raster for foliage (bug 67, IN WORK since 2026-11-07 18:40; first build 18:42, 1.18 MB, 123 shaders, kit restored 18:43)
+## Kit pak — the foliage WPO bound (bug 67 FIXED 2026-11-07 19:10)
+
+`KrinikConanGraphics.pak` overrides `/FLX_Materials/Materials/Environment/Core/M_Foliage` with `MaxWorldPositionOffsetDisplacement` **100 cm** (vanilla 0): Nanite pads the
+wind into the leaf cluster bounds, so the turning sun no longer drops leaflets from the shadow (blink 12–16 % → 0.06–0.44 %). Rebuild: kit editor
+`-run=PythonScript -Script=_config/devkit/kit-foliage-wpo.py` (env `KRINIK_WPO_BOUND`) → move `active.txt` to `UE4/Content/Mods/KrinikConanGraphics` →
+`kit-buildmod.py KrinikConanGraphics <out>` → `active.txt` back to KrinikConanUI. The kit asset is modified in place (backup `kit_asset_backups/M_Foliage.uasset.orig`).
+Load order: before KrinikConanGameplay. All foliage on `M_Foliage` gets the bound.
+
+## Kit pak — conservative shadow raster for foliage (REFUTED 2026-11-07 18:51 — did not reduce the blink; dropped; the patch stays in `engine_shader_patches/`)
 
 The owner's decision 2026-11-07 18:31 (bug 67, verbatim there): leaf shadows cast in every frame — conservative coverage in the Nanite shadow raster. The raster of
 WPO foliage is a MATERIAL shader, so the mod overrides `/FLX_Materials/Materials/Environment/Core/M_Foliage` (shared by all foliage) cooked by the kit with the patched

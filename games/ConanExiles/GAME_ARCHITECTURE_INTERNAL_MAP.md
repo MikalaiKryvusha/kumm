@@ -207,7 +207,9 @@ with `RemoveItem`, `DropItem`, `GetItemCount`.
 Hosav numbers («k», «M») — `games/ConanExiles/mods/UIMod_Hosav.md`.
 **Palm-leaf shadow flicker, proven 2026-11-07 17:0x–17:5x (bug 67, clean stand):** leaflet shadows pop only when the sun light's DIRECTION changes AND the leaves move in
 the wind together (turning 0.0025 at wind 0.18–0.20: 8–11 % of sand pixels blink, 17–20 % at 0.23–0.27, 1–2 % at 0.15–0.17; still sun 0.03 %; still sun with
-`r.Shadow.Virtual.Cache 0` 0.01 %); the weather moves `MPC_BiomeSettings.WindIntensity` 0.15–0.27 (`_config/wind.lua read`); Nanite buffers ×2, `r.Shadow.NaniteLODBias 0`, `QualityScale.MinQuality 1` — no effect;
+`r.Shadow.Virtual.Cache 0` 0.01 %); the weather moves `MPC_BiomeSettings.WindIntensity` 0.15–0.27 (`_config/wind.lua read`); **root cause (18:54): `M_Foliage`
+`MaxWorldPositionOffsetDisplacement = 0` and the palm MIs do not override it — Nanite pads no WPO into the leaf cluster bounds, so a re-cull under a turning sun drops
+wind-displaced leaflets on some frames; the hero, trunks and rocks (no WPO) never blink.** The property is writable live by UE4SS; proxies take it after `r.Nanite 0` → `1`; Nanite buffers ×2, `r.Shadow.NaniteLODBias 0`, `QualityScale.MinQuality 1` — no effect;
 finer VSM bias −2/−3 halves it. `r.Nanite 0` leaves the palms a bare trunk in the shadow (the Nanite fallback has no crown). `r.Shadow.Virtual.Visualize` /
 `ShowFlag.VisualizeVirtualShadowMap` draw nothing in the Shipping exe. **Nanite streaming pool** `r.Nanite.Streaming.StreamingPoolSize`: 512 MB live (device profile
 Windows_HighVRAM), resizes at runtime (a resize flushes the pool); **2048 = fatal crash** («must be smaller than the largest allocation supported by the graphics hardware

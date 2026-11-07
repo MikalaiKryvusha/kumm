@@ -271,3 +271,16 @@ The trade-off is the owner's: smooth sun (0.003, flicker) vs calm shadows (2.0, 
 edit the sky blueprint in the kit (Ultra Dynamic Sky / `DynamicSky`): keep the visible sun moving smoothly, update the shadow-casting directional light
 rarely (and, if possible, ease between its steps instead of jumping) — the same kit route as `KrinikUIFixes` / `KrinikConanArchery`. First step:
 read the sky blueprint (which asset drives `DynamicSky.SolarUpdateAngleDelta`, where the light rotation is set).
+`[OWNER]` 2026-11-07 18:56 «не позовешь меня посмотреть, а АВТОНОМНО! ДЕЙЛУП ВКЛБЮЧАЙ» → `/dayloop`; the fix is accepted by the agent's own clean-stand counts and frames, no call to the owner.
+
+## ✅ FIX FOUND AND SEEN — 2026-11-07 19:08–19:10 +03:00
+
+**Cause:** `/FLX_Materials/Materials/Environment/Core/M_Foliage` ships with `MaxWorldPositionOffsetDisplacement = 0` (the palm MIs inherit it) — Nanite pads no wind
+into the leaf cluster bounds; under a turning sun every shadow page is re-rendered and re-culled each frame, and wind-displaced leaflets outside their bounds are dropped
+on some frames. **Fix:** `M_Foliage` with a 100 cm bound (`_config/devkit/kit-foliage-wpo.py`, kit asset backup `_config/devkit/kit_asset_backups/M_Foliage.uasset.orig`),
+cooked by the kit into `KrinikConanGraphics.pak` (1.18 MB, no shader patch — the conservative raster is refuted and dropped), installed in `Mods/` before KrinikConanGameplay.
+**Seen (c19, clean stand: keeper 600 m / 20 s, fixed cam, 11:00 per clip, wind 0.15–0.17):** turning sun 0.0025 → 0.11 / 0.09 / 0.44 / 0.06 % blinking sand pixels (before,
+same wind: 12–16 %); still sun 0.30 %; in game `M_Foliage bound = 100.0`; frames 2 s apart (`scratchpad/c19/fixed_pair.webp`): full sharp leaflet shadows, moved by the
+wind; sway 5–17 % of pixels in 2 s at 0.3 per frame. Live UE4SS write of the property + `r.Nanite` toggle did NOT work (16 vs 16–21 %) — the value must be cooked.
+Hygiene: kit cook «0 error(s)». Functional run: the game with the pak, clean stand, counts and frames read (above). Owner: accepted by the agent's own counts by his word 18:56.
+Open: the build manifest entry for the pak and its deploy; a crash-free gameplay pass with the pak; the bound value (100 cm) is a first guess — larger winds may need more.
