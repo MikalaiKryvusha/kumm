@@ -120,7 +120,13 @@ game-thread trigger is found: the shafts after the full loot window and after a 
 
 ## Open
 
-- **A missed arrow wakes the mob (the owner's order 2026-11-07 21:50, NOT BUILT):** `[OWNER]` «промах из лука пмо мобу, если стрела ударилась об землю, или другого
+- **A missed arrow wakes the mob — BUILT 2026-11-07 21:54 +03:00, NOT RUN (case K13):** recon by the remote: a mob (`BaseNPC_C`, the Imp's controller `CreatureAIController_C`)
+  has `BPTargetDistributionComponent_C` (`/Game/Systems/AI/NewAI/…`) — its hate list: `UpdatedHeardActors(NewHeardActors: Actor[])` (the game's «heard»),
+  `AddToHatelist(NewTarget struct)`, `CanEngageTarget(Target, TriggeringHateType)`; its `ConanAIPerceptionComponent` senses = sight only (`AISense_NewSight`) + Conan's
+  stealth hearing (`HearingRadius`), so `ReportNoiseEvent` is out. Section «промах будит моба»: in the hero-arrow stop hook (`StopProjectileInternal`, `visuals`
+  registry = hero arrows only) → every `BaseNPC_C` within `CFG.miss_alert_cm` 1000 of the arrow gets `UpdatedHeardActors({ hero = arrow:GetInstigator() })`; the game
+  decides who engages. Log «стрела упала: мобов в 10 м — N, «услышали» M (… мс)».
+- **(order text)** (the owner's order 2026-11-07 21:50): `[OWNER]` «промах из лука пмо мобу, если стрела ударилась об землю, или другого
   мода. или об стену. или об предмет - где-то рядом в 10 метрах от моба - должна приводить к тому, что моб узнает об присутсткии героя и начинает к нему бежать для
   нападения на героя, словно слышит, что стрела рядом с ним упала - и это вызывает аггресию моба». Trigger: the copy's birth (`NotifyOnNewObject` BP_DummyProjectile,
   game thread, already hooked) whose hit is NOT a living creature → hostile NPCs within 1000 cm of the impact point get the hero as a target. Recon first: how Conan NPCs
