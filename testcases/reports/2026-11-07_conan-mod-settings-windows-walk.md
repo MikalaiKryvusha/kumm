@@ -17,6 +17,8 @@ Conan Exiles 3.0.1 build, background game at 3840×2160; the windows opened as b
 - 09:06 — `python -I -X utf8 devkit/locres-set-tr.py localization/Game/ru/Game.locres localization/locres-fixes-2026-11-07b.tsv` (source rows edited first),
   `locres-regress.py` (54 457 → 54 457, lost 0, changed 11), the deploy.
 - 09:07–09:08 — `bash walk-mod-windows.sh <dir> AMR_Settings EmberlightMasterConfig UIHortiSettings` after the fix.
+- 09:30–09:33 — walk 3: `walk-mod-windows.sh <dir> EAA_MagicUI EAA_Enchant EAA_Famemenu EAA_Armorsettings`; `locres-fixes-2026-11-07d.tsv` (12 enchanting
+  buttons), regress lost 0 changed 12, the deploy, `EAA_Enchant` framed again.
 - 09:11–09:12 — walk 2: `bash walk-mod-windows.sh <dir> HosavUIsettings IronlightAdminUI ExilesFishingTuning EAA_Classmenu`; sheet `mw6.jpg`.
 
 ## Checks
@@ -32,6 +34,8 @@ Functional run: the real build, each window opened through the game's module con
 
 - Pickup+'s hint «If set to < 100 = off | Max. = 5000 | Standard = 900» showed in English though its row (4459) is translated — the stitcher lost every source with
   «|»; fixed 09:16–09:19 (full rebuild, 54 458 entries, lost 0; the hint Russian on the frame).
+- Walk 3: the EAA magic-school menu (the author's notice), fame settings, armor rating — fine; the enchanting window's belt column ran past the panel —
+  fixed by «Пояс «…»» (and «Ожерелье», «Кольцо»), the column inside on the 09:33 frame.
 - Pickup+'s «Yes» option untranslated — left (an option may be compared in code, bug 78).
 - LBPR (bare module over the HUD) and the Ambush module (nothing shown bare) — to be judged on the player's own path.
 - Walk 2: Hosav settings, Exiles Fishing tuning, the EAA class menu — fine (the class cards' painted text is item 23); Ironlight's admin panel — the section
