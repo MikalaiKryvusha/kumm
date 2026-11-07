@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0490 · 2026-11-08 · ❌→✅ · #perf #plan #recon #nfsu2 #tablet #process
+class: performance tuning started as ad-hoc pokes, without a plan, a case file or the product's own notes
+**Context:** Underground 2 Revived on the owner's tablet; first pass (2026-11-07) changed settings one by one in the game and concluded from menu readings.
+**Tried / did:** pokes → wrong cause told to the owner twice; the owner asked «Ты план написал?» · «В оболочке ВСЕ НАСТРОЙКИ ИЗУЧИЛ?» · «читай конспекты по порту». Then: the port's own community notes (`discord-bot/knowledge.md`), the full settings UI read, plan 50 + a case file with dimensions, batches of cases each from a fresh launch, controls at the start and end.
+**Result:** ✅ 33 cases with statuses in one night; the real cause (draw calls in Chrome, spawn churn) found; two earlier claims withdrawn.
+**Lesson:** for "make it run faster" work: (1) read the product's own docs/FAQ/bot knowledge base first; (2) inventory EVERY setting from its UI/source; (3) plan + case file before the first run; (4) one variable per fresh launch, controls A-B-A. → link: plans/50_nfsu2_tablet_fps.md, researches/nfsu2-tablet/
+**Trigger:** any request "set it up optimally / why is it slow" on a product with settings.
+**Not for:** a one-line known fix.
+
 ### EXP-0489 · 2026-11-08 · ❌ · #perf #fps #measurement #nfsu2 #tablet
 class: an FPS reading taken in a game's pause / options menu is not a gameplay reading
 **Context:** Underground 2 Revived on the owner's tablet; A-B of graphics options sampled with the options menu open.
