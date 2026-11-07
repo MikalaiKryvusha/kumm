@@ -91,6 +91,12 @@
 
 ## Entries
 
+### EXP-0477 · 2026-11-07 · ✅ · #conan #translation #locres #pipeline
+class: escaping-layer
+mechanized: `ConanExiles/_config/devkit/hosav-ru-entries.py` reads «¦» back as «|»; `join-report.txt` lists every NO-KEY source
+**Lesson:** a translated row stayed English in game for weeks: the markdown table escaped «|» as «¦», and the stitcher matched that escaped text against the
+mod's source by exact bytes. When a translation is «done but not shown», check the built file for the KEY first, then the join report of the step that dropped it.
+
 ### EXP-0476 · 2026-11-07 · ❌ · #conan #tools #remote #testrun
 class: shell-lied
 mechanized: `ConanExiles/_config/pult.sh` converts its folder by `cygpath -w` and stops on an empty game path (exit 2)
