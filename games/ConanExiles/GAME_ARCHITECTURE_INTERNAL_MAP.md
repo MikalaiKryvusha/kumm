@@ -667,6 +667,12 @@ Lua-моды UE4SS ждут только отложенными действия
   By the remote (2026-11-07 08:5x, background): the BARE module opens empty («Wardrobe — Placeholder Text») — open the inventory, then call the button's own
   `BndEvt__W_acs_InventoryButton_acsButton_K2Node_ComponentBoundEvent_3_OnButtonClickedEvent__DelegateSignature()`; a category (`WBP_ButtonBase_C` with its label in a
   TextBlock) is switched by the window's `W_acs_Wardrobe_C:ButtonToggled(<button>, true)` — the button's own `SetIsToggledOn(true)` does not switch the layout.
+- **The mods' UI modules, live list (2026-11-07 09:0x):** every mod merges its own table (`FindAllOf('DataTable')` with «UIModule» in the path;
+  `dt:ForEachRow(function(name) … end)` — `name` may come as a string, `ToString()` otherwise; on the merged vanilla table the call errors). Settings windows a
+  bare `ActivateModule(<row>, true, false)` opens well: `AMR_Settings`, `Pickup+_Settings`, `EmberlightMasterConfig`, `UIHortiSettings`, `LLH_Settings`,
+  `PIFC_Settings`, `PrP_Settings`, `SM_UI_Settings`, `DN_UI_Settings`; bare and NOT representative: `LBPRWidgetID` (over the HUD), `AmbushMultiUserWidgetID`
+  (nothing), `acs_WardrobeGUI` (empty — use the button), `PRMainMenu` (crashed 2026-10-26). Also: `HosavUIsettings`, `EAA_*` (≈50 rows), `IronlightAdminUI`,
+  `TLI` `PetStatsWindow` / `FollowerStatsWindow`, `JaarFishing`, `CodexPiscium`, `ExilesFishingTuning`, `WSEMap`.
   `KrinikPauseGameInMenu` 0.9.1 also runs its pause poll on the `XCS_Panel` open event — the hub's time is 0.03 from its first frame.
 - **Stand: the hub pause must be armed first (2026-10-29 18:33).** `KrinikPauseGameInMenu` arms only after it sees the hero in the world with the
   full-screen UI CLOSED (log «взведено: герой в мире…»). A hub opened by the remote ≈1 s after `enter-world-remote.sh` stays at time 1.0 for the whole
