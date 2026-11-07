@@ -31,3 +31,9 @@ log lines above, `TimeDilation` read 5 s after.
 
 `PauseGameInMenu`: exclude `W_IngameLoadingScreen_C` (and any loading-screen class) from the full-screen check; rebuild KrinikConanUI's Lua (no pak);
 cases (1)–(3) plus the teleport stand. Needs the owner's word on timing — the fix changes the 0.9.0 archive (new archive, new uploads).
+
+## Respawn case (2026-11-07 07:41, background game, pack `374b90d`)
+
+Death by `pult.sh "exec suicide"` → the respawn selection → the respawn by itself 8 s later (no bedroll) → «взведено: герой в мире» — no «полноэкранный интерфейс: ОТКРЫТ»,
+world time 1.0 read twice, the hero standing on the frame. Case D1–D2 pass (`testcases/TC_conan_pause_loading_screen_respawn_2026-11-07.md`); the in-game
+loading screen did not show on this path. Still to run: waystone travel and a dungeon entrance.
