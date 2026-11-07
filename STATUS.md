@@ -150,8 +150,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the thrall stats panel needs a thrall stand first. **09:0x–09:12 two walks of 12 mod settings windows** (report `2026-11-07_conan-mod-settings-windows-walk.md`):
 > fixed Al-Merayah labels, «Сохранить» buttons, Emberlight farming descriptions (pack `291942b`); Pickup+ hint FIXED 09:19 (the translation stitcher lost
 > sources with «|», pack `38e806c`); open — Ironlight admin headers and buttons FIXED 09:28 (culture-invariant FText — an asset edit, pack `6413000`); EAA enchanting buttons
-> fit (pack `4596f3a`, walk 3 of the EAA windows 09:30); walk 4 — the EAA admin menu Shift+V line fixed 09:38. Open from walk 5: the minimap marker window's long line, the Emberlight
-> animal pen's English words (bug 64 item 13).
+> fit (pack `4596f3a`, walk 3 of the EAA windows 09:30); walk 4 — the EAA admin menu Shift+V line fixed 09:38. Walk 5: the minimap marker line fixed 09:43; open — the Emberlight animal pen's English words (bug 64 item 13).
 > ✅ **Chat of 2026-11-06 (fifth) soft-closed 2026-11-07 00:32 +03:00 by the owner's word (00:30, «завтра продолжим»).** The debt of the two forced closures of 2026-11-06
 > is PAID: STATUS trimmed (89 lines to the chronicle), experience lint 0 findings, attribution lint 0 new (bug 67 line marked), budget gate passed, engine
 > syntax + 4 core tests green, the chat's claims re-checked (deployed KrinikConanUI = build 2, test mods removed, modlist and settings restored, pushes in sync).
