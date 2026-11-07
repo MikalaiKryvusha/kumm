@@ -26,28 +26,34 @@
 - The owner had overridden it: `resolution = 2560x1600` (forces full native render, the 0.75 scale no longer applies), `fps = 120`, `roam_max_cars = 64`, `other_headlights = all`, `ui_textures = uhud`; in game car reflections 3, road reflections 3, DoF on.
 - `fps = auto` follows the display (144 Hz → 120). Per remote car the game thread pays ~0.28 ms/frame on a Ryzen 5900X, "several times that" on a laptop (dev comment).
 
-## Measurements (median / worst FPS over 20 s of DRIVING — never in a menu: the pause menu stops game logic and reads high)
+## Measurements
 
-| Place | Settings | FPS |
-|---|---|---|
-| garage, main world (4 190 players), 24 cars near | reflections max, DoF on, scale 0.75, fps 60 | 28 / 17 |
-| same, 12 cars | same | 31–33 / 20 |
-| same, 6 cars | same | 35 / 20 |
-| empty own world, 0 cars | reflections max, scale 0.75 | 36 / 28 |
-| empty world | road reflections off | 42 / 33 |
-| empty world | + car reflections off (= the port's phone preset, DoF off) | 49 / 40 |
-| empty world | + light glow off | 47 / 37 (no gain — glow kept on) |
-| garage crowd, 12 cars | reflections off, DoF off, scale 0.67 | 32–35 / 19–21; GPU done p50 17 ms; Chrome renderer main thread ~60 % |
+Median / worst FPS over 20 s with the counter in the driving state (`drive 2`, `pause 0`) — never in a menu: the pause menu stops game logic and reads high (EXP-0489). Full case list with moments: `testcases/TC_nfsu2_tablet_fps_2026-11-08.md`. Noise band of a standing sample ≈ ±3 FPS (controls A1, A2). "Empty" = own world, standing at the garage; "crowd" = the main world (~4 200 players) at the garage, where everybody spawns.
 
-Owner's original settings: menus at 120 fps; thermal status rose 2 → 4 (critical) and skin 52 → 58 °C within ~2 minutes in menus/garage.
+| Lever | Values | FPS | Cost |
+|---|---|---|---|
+| Road reflections (empty, 0.75) | off → max | 51 → 35 | −16, the heaviest option |
+| Car reflections (empty, 0.75) | off / level 1 + slow update / max | 51 / 45 / 39–44 | −6 / −10 |
+| Both reflections (empty) | max at 0.5 / max at 0.75 | 37 / 36 | reflections cost draw calls, not pixels |
+| Render scale (empty, refl off) | 50 % / 75 % / 100 % | 56 / 51 / 46 (frame 17.9 / 19.8 / 21.5 ms) | ~16–17 ms of a frame do not depend on pixels |
+| Menus and HUD textures (empty) | Original / Upscaled | 54–56 / 49–51 | −5 |
+| Players' cars (crowd, refl off or low) | 0 / 8 / 16 / 32 | 44 / 29–32 / 28–32 / 24–25 | any cars at the spawn −15: loading/removal churn (port issue #79) |
+| World (garage, refl off, 16 cars) | main / World 1 (~170 players) | ~30 / 39–40 | |
+| Driving the city (World 1, refl off, 0.75) | | 33–40 / 21–23 | driving costs ~10 vs standing |
+| Frame cap (empty, 0.5, refl off) | 120 | 51–53, peaks 75–80 | 120 unreachable |
+| Display 144 vs 120 Hz (pause menu at 60) | present intervals p50 / p90 | 16.3 / 23.8 vs 16.6 / 23.7 ms | no difference |
+| No gain (within noise) | DoF · light glow · car shadows · car LOD · world detail 1 · rain + particles off · crowd off · «Уровень детализации» 3 · field of view · `roam_rate` 10 · other cars' headlights | 0–4 | |
+
+The owner's original settings (`resolution = 2560x1600`, `fps = 120`, reflections max): menus at 120; thermal status rose 2 → 4 (critical) and skin 52 → 58 °C within ~2 minutes in menus and the garage.
 
 ## Conclusions
 
-1. **The heavy part is car and road reflections** (36 → 49 together); DoF, glow, car LOD, car shadows cost ~0–4 FPS each — classic PC-era advice (glow, AA, resolution) does not transfer to this port on Mali.
-2. **The spawn crowd at the garage caps at ~30–35 FPS whatever the graphics** — corrected 2026-11-08 (plan 50, cases C1/C3/C7): with 0 cars drawn the same crowd gives 44 (≈ the empty world), with 8 or 16 cars ~30: the cost is the cars being loaded and removed all the time at the spawn (port issue #79), not their count or detail. Driving the city (World 1, 2–7 cars near) gives 33–40 with the phone preset at 75 % — the earlier "~50 in the wider city" was a guess from standing readings and is withdrawn.
-3. **120 FPS is out of reach on this tablet in this port** (empty world, light preset: ~49–60). `fps = 120` only overheats the SoC into throttling; `fps = 60` is the right cap.
-4. The port has no separate car detail for the own car vs others: the game's Car detail option sets one global least-LOD for all cars (`runtime/photo.c`, `G_LEAST_LOD_A/B`); only photo mode forces full detail.
-5. Memory is tight: 11.4 of 11.5 GB used, 6.3 GB swap in use with many background apps — closing apps before playing removes stutter risk; `ui_textures = uhud` costs memory, not FPS.
+1. **What costs is the number of draw calls, not pixels.** About 16–17 ms of every frame go to translating the game's draws to WebGPU in Chrome's renderer main thread (~60 % busy); a reflection redraws the scene (road reflections −16, car reflections −6…−10); resolution moves only ~5 FPS per step. Same picture on the same SoC in another port (Project Velocity issue #2: Dimensity 8300, ~0.15 ms per draw call).
+2. **The spawn crowd costs ~15 FPS whatever the graphics**: with 0 cars drawn the same crowd gives 44 (≈ the empty world), with 8, 16 or 32 cars 24–32 — the cars loaded and removed all the time near the garage (port issue #79), not their detail. A quieter world (World 1–4) gives ~10 more at the same spot.
+3. **50+ is reachable standing / in quiet places; on the move in the city the light set gives 33–40.** Driving streams the city and draws the far view.
+4. **120 FPS is out of reach** in this port on this tablet; `fps = 120` only heats the SoC into throttling. 60 is the cap; 30 is the port's own advice for a phone that stutters after warming.
+5. The port has no separate car detail for the own car vs others: the Car detail option sets one global least-LOD for all cars (`runtime/photo.c`, `G_LEAST_LOD_A/B`); only photo mode forces full detail.
+6. Memory is tight (11.4 of 11.5 GB used, 6.3 GB swap with background apps); the upscaled HUD costs ~5 FPS as well as memory.
 
 ## Applied on the tablet (2026-11-08)
 
