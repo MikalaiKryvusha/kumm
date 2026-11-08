@@ -290,7 +290,15 @@ plus the level's `WindDirectionalSource2` (strength 0.1, speed 3.482; `SetStreng
 `r.Lumen.Reflections.HardwareRayTracing 1` BUT `r.RayTracing.Enable 0` (ray tracing compiled in, `r.RayTracing 1`, switched off at run time) → Lumen falls back to
 SOFTWARE tracing; `LightingMode 0`, `sg.ReflectionQuality 3`, `r.Water.SingleLayer.Reflection 1`. The owner's white streak on the water behind a trunk (2026-11-07 20:12)
 is the software fallback where the screen trace is blocked: with `ScreenTraces 0` the whole oasis water turns sky-white (frame B, oasis beach −80500, 245900);
-with `r.RayTracing.Enable 1` the fallback reflects the shore correctly (frames C, D); `LightingMode 2` (hit lighting) looked the same as C. TC
+with `r.RayTracing.Enable 1` the fallback reflects the shore correctly (frames C, D); `LightingMode 2` (hit lighting) looked the same as C. **What `r.RayTracing.Enable 1` touches (read live 13:26):** NOT the sun shadows — `r.RayTracing.Shadows 0`,
+`r.Shadow.Virtual.Enable 1` stay (the palm-leaf VSM fix of bug 67 keeps working); YES Lumen GI — `r.Lumen.ScreenProbeGather.HardwareRayTracing 1` switches the indirect
+light (soft occlusion under crowns, bounce from sand / rock) to hardware rays over the Nanite proxies (`r.RayTracing.Geometry.NaniteProxies 1`; palms as 64-triangle
+proxies) — GI-only-software variant: `r.Lumen.ScreenProbeGather.HardwareRayTracing 0`. **Views for render comparisons (2026-11-08, `_config/view-scout.sh`
+→ `rt-gallery.sh`, "name X Y dz pitch yaw", hour 11):** oasis beach water (−80300, 245900, 300, −6, 180 / 270; under palms 90) · oasis from above (−78166, 245999,
+900, −20, 180 / 270 / 0) · Overlook panorama (−253750, 18150, 600, −12, 90 / 0) · Nekhet pond (−256741, 39991, 500, −8, 0) · Shattered Springs green pool (−193314,
+21149, 500, −8, 270) · Skyfall snow panorama (−177478, −141986, 800, −12, 90) · Godsight desert (−135060, 74567, 800, −12, 0) · Crowngrove canopy (−256864, −10091,
+500, −8, 90) · river canyon (−32653, 21022, 500, −8, 90) · Priestking's Retreat still water (−28442, 27185, 500, −8, 90 / 180). Riversend puts the camera under
+water, Eyelet Lake inside an ice cave. TC
 `TC_conan_xp1000_and_water_reflections_2026-11-08.md`. **Foliage material (2026-11-07):** `M_Foliage` (`/FLX_Materials/Materials/
 Environment/Core/M_Foliage`, in the kit; Material Attributes, Nanite, opaque, two-sided) moves vertices inside `MF_FLX-TreeMotion` = `MF_WindWaveFront` +
 `MF_TreeBend` + `MF_BranchBend` (mask from UV / vertex-colour weights × wind vector) + `MF_LeafShimmer` (lerp × `VertexNormalWS`) — MASK-based, no per-leaf

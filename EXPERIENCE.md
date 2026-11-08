@@ -97,6 +97,8 @@ mechanized: `ConanExiles/_config/no-power-throttle.ps1` (ProcessPowerThrottling 
 **Lesson:** `krinik-show` on the background path gave 19–23 FPS with 40–46 ms CPU per frame (front-path reference ≈ 60 FPS / 15 ms) — with and without our stand keeper,
 so not our mods. `no-power-throttle.ps1` on the game PID → the same flight 46 FPS / 21 ms CPU, GPU 12.3 ms. Still not the front path: a background flight compares
 A-B under equal conditions (GPU ms carries a GPU cost), but its FPS is never compared with front-path references. Run the opt-out before any background measurement.
+**Twin, same day:** `TaskStop` on a background Bash batch did NOT kill the Git Bash script — twice it kept running its next flights (journal `rt-C2` after the stop;
+the C-D batch's shell 1189 alive 6 min later). After a stop: `ps -ef | grep -E "bash|sleep|PresentMon"` and `kill` the batch's shell and its `sleep` by MSYS PID.
 
 ### EXP-0490 · 2026-11-08 · ❌→✅ · #perf #plan #recon #nfsu2 #tablet #process
 class: performance tuning started as ad-hoc pokes, without a plan, a case file or the product's own notes
