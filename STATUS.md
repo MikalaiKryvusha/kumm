@@ -159,11 +159,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **0b. (owner 21:04, his frame and words in chat):** the MAGENTA part of the HUD health / stamina bars (the reduced-max share, «-350 HP / 50%») must default to a FADED GREY —
 >   UIMod_Hosav `W_SmoothHP` (no setting for it in our notes: an asset edit of the HUD pak, rule 8 — first look for the mod's own option). <!-- attribution-ok: verbatim in the chat of 2026-11-07 21:04 -->
 > **NOW 2026-11-08 (chat «resume»; dayloop by «комп твой, работай автономно» 12:22):** ✅ 0c XP base 1000 — built, deployed, seen live (65 → 8 062, 100 → 10 000), pack `fe5c37b`.
->   🟡 0b HUD grey — four `flt:CorruptionProgressColor` rows (0.35 grey, alpha 0.5), pak rebuilt in `D:/Temp/kumm-rebuild-krinik/UIMod_Hosav-2/out` (identity guard refused
->   the intended change — copy by hand into the library + game Mods with the game CLOSED), H1 frame owed. 🟡 Water streak — mechanism found (software Lumen fallback;
->   `r.RayTracing.Enable 1` fixes it in frames); A-C-A-C flights on the background path with `no-power-throttle.ps1` running (front path refused — owner at keyboard).
->   🔬 Sprint + bow — not our Lua; the game's `EvaluateMovement_Sprint` has no attack test → native `K2_CanSprint` suspected (Locomotion notes); live probe next.
->   Machine lock `kumm` held until 13:54; the game runs (background, PID 47664).
+>   ✅ 0b HUD grey — built, in the library and the game, seen live 13:10 (pack `e85d74b`); the shade is the owner's eye (review folder 73).
+>   ❓ Water streak — mechanism proven (software Lumen fallback; `r.RayTracing.Enable 1` fixes it in frames); cost on `krinik-show` (background, throttle off) ≈ −5 FPS
+>   (−9 %), +1.2 ms GPU, +1.7 ms CPU, hitches equal — **waits for the owner's word «включаем лучи?»** (review folder `НА ОТСМОТР НИКОЛАЕМ/73_hud_seryy_i_otrazheniya_vody`).
+>   🟡 Attributes past 20 (plan 49) — the cap is ONE value `BP_ProgressionSystem.MaxAttributePointsSpent` 20 (UI «+» and server); effects past 20 continue (seen live);
+>   FORK pak-CDO vs Lua-on-spawn recorded in the plan; the screen paging needs the owner's mockup choice.
+>   🔬 Sprint + bow — not our Lua; `EvaluateMovement_Sprint` has no attack test → native `K2_CanSprint` suspected; `sprint-probe.lua` ready; the stand needs a hero under
+>   the weight limit (the oasis save: 104 / 100) and real Shift + RMB (front path, owner away).
 > **0c. (owner 21:05, chat):** «our level curve, 500 XP per level» — the manifest note of KrinikConanGameplay says XP 500 × level^0.5; verify the live per-level XP against it next to (b) endless attributes. **DECISION 21:06 (chat): the base becomes 1000** (1000 instead of 500 in the curve of KrinikConanGameplay; rebuild its pak). <!-- attribution-ok: verbatim in the chat of 2026-11-07 21:05-21:06 -->
 > **FIRST NEXT CHAT — the owner's order 2026-11-07 20:50 (verbatim):** `[OWNER]` «сейчас стрелба откоючает спринт. В новом чате начнём с того, что продолжим делать мод
 >   Локомодации. Спринт и стрельбу делаем возможными одновременно.» · «И откобчаем лимит на прокачку атрибутов. Делаем её бесконечной.» · «И она бесконечно будет по фотмулам

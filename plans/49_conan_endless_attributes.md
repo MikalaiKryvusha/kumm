@@ -43,9 +43,15 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       - The stored value is not clamped (Agility 22 was accepted and shown on 2026-09-13, `ideas/03` :448).
       - Native `UAttributeSystem` per-point bonuses are flat floats (`BonusDamageMeleePercentagePerAttribute`, `BonusArmorPerAttribute`, `BonusHealthPercentagePerAttribute`,
         `BonusDamageRangedPercentagePerAttribute`, `BonusStaminaPerAttribute`, `BonusEncumbrancePerAttribute`) — linear per point; whether the native code clamps the
-        attribute at 20 when applying them is NOT read (live check: an attribute at 25 → the stat).
+        attribute at 20 when applying them is NOT read (live check: an attribute at 25 → the stat). `BP_AttributeSystem` CDO overrides (read 2026-11-08):
+        melee damage +0.05 (5 %) per point, armour +8, health +0.10 (10 %), encumbrance +15; ranged damage and stamina keep the C++ defaults (not in the CDO).
       - `ServerGiveAttribute` → the ubergraph (offset 1014): `IsServer` → `StatHolder:GetIntStat` → the SAME `CanGiveAttribute` — one variable gates the UI and
         the server. `GetAttributePointCost(A)` = `DT_AttributeSystem` row named `A` → `CostPerPoint` (our pak: 10 000 rows, cost 1 — no wall past 20).
+      **Seen live 2026-11-08 13:1x (remote, no input; TC `TC_conan_xp1000_and_water_reflections_2026-11-08.md` A1–A2):** the lever — with
+      `ps.MaxAttributePointsSpent = 2` three `ServerGiveAttribute(19)` stop Agility at 2; with 10 000 the next gives 3 (stat ids: `AttributeHealth` 14 = Vitality,
+      `AttributeAthleticism` 19 = Agility, `StatHolder:GetIntStat(id, 1)`; `ServerResetAttributeAll` refunds). Effects past 20 continue (HUD, the hero at 50 %
+      corruption, Vitality = Agility = n): health max shown 100 / 350 / 360 / 400 at n = 0 / 20 / 21 / 25 (+10 per point past 20, ×2 without the corruption),
+      stamina 50 / 60 / 60 / 62, the speed line 71 / 78 / 78 / 80 — the native per-point bonuses have no cap; only the «+» (`CanGiveAttribute`) and the bar scale stop at 20.
       `FORK: options <a pak edit of the BP_ProgressionSystem CDO (MaxAttributePointsSpent → 10 000) and of W_Attribute (MaxAttributePointAllotment → the page size) |
       Lua sets ProgressionSystem.MaxAttributePointsSpent on the hero's spawn event> · price of error <a whole vanilla blueprint shipped in our pak overrides it for every
       mod that ships the same path and goes stale on a game update; a Lua assignment is one line per spawn> · consulted <HOUSE_RULES rules 8 and 24 (native data first;

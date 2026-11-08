@@ -22,7 +22,10 @@
   - R1 pass (mechanism) — B: the oasis water sky-white everywhere (the fallback = the streak); C / D: the shore reflected, no white; E = C by eye.
   - R2 — see «Flights» below.
   - H0 pass — 12:26 frame (old pak): the reduced share magenta on both bars. H1 — owed (pak not installed while the game runs).
-- **Flights:** (the batch is filled when it ends)
+- **Flights:** the A-C-A-C batch (background, throttle off, RT read back before each): rtb-A1 47.9 avg / 53.9 median, GPU 13.02, CPU 18.10, 158 hitches,
+  worst 224.7 ms · rtb-C1 43.9 / 48.1, GPU 14.05, CPU 20.29, 108, 140.5 · rtb-A2 51.6 / 57.0, GPU 12.40, CPU 17.11, 77, 184.3 · rtb-C2 47.4 / 52.2, GPU 13.67,
+  CPU 18.67, 80, 140.8. Ray-traced Lumen costs ≈ 5 FPS (≈ 9 %), +1.2 ms GPU, +1.7 ms CPU; hitches unchanged within noise; the worst frame lower with RT.
+  Earlier, invalid:
   - rt-A1 (background, stand keeper on): 23.4 avg / 24.6 median FPS, CPU 40.3 ms, GPU 13.3 ms, 782 hitches — INVALID (background throttled).
   - rt-A1b (background, keeper off): 19.4 / 21.5, CPU 46.1 ms — INVALID: the same throttle, and CONTAMINATED — the first batch, stopped by TaskStop, kept
     running its children (journal entry `rt-C2` appeared between A1b and A1c; A1b recorded only 59 s). A stopped batch's flights are checked by `ps` before the next.
