@@ -102,6 +102,12 @@ side panel, a settings window. KRINIK MODIFIED in the build: the pak is rebuilt 
   The twins, read 2026-11-08 12:5x (`extract` + `kismet-trace` + a JSON scan for R > 0.8, G < 0.1, B > 0.8): `W_UI_ClanMate_HealthAndStamina` has its own
   `CorruptionColor` with the same custom-colour switch and the fallback (0.14, 0, 0.14, 1.0) @uexp+3769 — a DARK purple, not the magenta; `W_EnemyHealthbar_InHUD`
   (`ProgressCorruptionPercentageNew`) and `W_SmoothHP_Horse` (`Get_CorruptionIcon`, `GetCorruptionAmount`) carry no magenta literal. Only the hero's bars were changed.
+  **The game's own bars (not Hosav), read live 2026-11-08 13:19:** the inventory paperdoll's health / stamina bars (`W_PaperdollPanel` → `HealthBar` =
+  `W_CharHealthStaminaThirstHungerViewer` → `/Game/UI/HUD/Deprecated/W_HealthBar`, native `UHealthBarBase::UpdateBar(Current, corruptedMaxValue, corruptionMult,
+  dbno)`) draw the reduced share by the material `/Game/UI/Materials/Gauges/M_UI_HealthGauge` (parameters `ColorFill`, `ColorDelta`, `ColorUnderlay`,
+  `ColorCorruption`, `FillAmount`, `DeltaAmount`, `CorruptionAmount`); every live `W_HealthBar_C` MID reads `ColorCorruption` (0.215, 0.064, 0.932, 0.9) — the blue-violet
+  share in the paperdoll. A vanilla material: a change is an asset override of the game's material (or `SetVectorParameterValue` on each bar's MID) — not done, the
+  owner's order named the HUD bars.
 
 ## Open
 
