@@ -195,7 +195,7 @@ the dossier step).
 | Fact | Value | Probe |
 |---|---|---|
 | OS | Windows 11 Pro 10.0.26200 | `(Get-CimInstance Win32_OperatingSystem).Caption` |
-| CPU, memory | AMD Ryzen 7 5700G, 8/16, 31.9 GB | `Get-CimInstance Win32_Processor` |
+| CPU, memory | AMD Ryzen 7 5700G, 8/16, 31.9 GB (4 × 8 GB DDR4). **Since 2026-11-08 the owner runs a light CPU and DDR4 overclock and a steeper CPU fan curve** (`[OWNER]` 2026-11-08 22:56 «я чуть-чуть разограл процессор» · «разогнал RAM DDR4»): frame-time / CPU numbers taken before that day are not comparable with later ones — re-measure the baseline; a new crash or memory corruption is checked against the overclock before blaming a mod. WMI still reports 3200 MT/s and 3801 MHz (it shows the configured profile, not the live clock) | `Get-CimInstance Win32_Processor`; `Get-CimInstance Win32_PhysicalMemory \| Select Speed, ConfiguredClockSpeed` |
 | GPU | RTX 5070 Ti (Gigabyte), 16 GB, driver 621.01, power limit 300 W; `AdapterRAM` lies (4 GB) — trust `nvidia-smi` | `nvidia-smi --query-gpu=name,driver_version,memory.total,power.limit --format=csv,noheader` |
 | Screen | TV 3840×2160 @ 144 Hz; desktop at 300 % DPI — a probe without `SetProcessDPIAware` sees 1280×720 | `Get-CimInstance Win32_VideoController \| % {$_.CurrentHorizontalResolution, $_.CurrentRefreshRate}` |
 | Frame-time capture | only `D:\work\ai_sandbox\_tools\PresentMon-2.5.1-x64.exe`, its own `--session_name`; a hung session — `logman stop <name> -ets`; the agent's shell is elevated | `& '<path>' --help` |
