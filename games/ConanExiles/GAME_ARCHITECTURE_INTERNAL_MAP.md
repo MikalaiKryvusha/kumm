@@ -900,3 +900,9 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
 - **Shipping an edited VANILLA blueprint** (first time 2026-11-08): the game's chunk by `retoc get <view> <chunk id>`, the same-size edit of the legacy .uexp,
   `splice_chunk` (original zen header + edited .uexp), the chunk added to our container by `unpack-raw` → `chunks/<id>` + `chunk_paths` → `pack-raw`
   (`_config/devkit/vanilla_patches.py`). Check first that no mod ships the path (`mod-overrides.py`).
+- **A bow shot by the remote, no real input (2026-11-08 23:46):** `FindFirstOf('BasePlayerChar_C'):LaunchProjectile()` fires nothing any more (it did on 2026-11-01).
+  The working twin — the hero's own input events: `InpActEvt_SpecialActionV2_K2Node_InputActionEvent_7({KeyName=FName('RightMouseButton')})` (RMB down) · ≈ 0.8 s ·
+  `InpActEvt_PrimaryActionV2_…_9` then `_10` (`LeftMouseButton`) · `InpActEvt_SpecialActionV2_…_8` (RMB up); the hot-bar slot N in hand —
+  `InpActEvt_Shortcut<N-1>_…`. Seen as normal shots in the archery log («#N из лука, заряд 0.00 … скорость A → B»).
+- **Branched perks by the remote:** `BP_PerkSystemComponent_C.ChosenBranchedPerks` (array of row names) holds the picked «a / b» traits; `AddBranchedPerk(FName('<row>'))`
+  adds one at once (seen: `Agility_10b` → the projectile speed ×1.2 on the next shot). `ServerResetAttributeAll` empties the array — a reset drops the chosen traits.

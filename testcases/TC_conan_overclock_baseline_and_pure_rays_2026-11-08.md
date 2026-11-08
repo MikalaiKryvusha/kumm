@@ -2,7 +2,7 @@
 
 > **Created:** 2026-11-08 · on the owner's word `[OWNER]` 2026-11-08 23:05 «2 - замер делаем, да» · 23:16 «пока ты изучаешь моды - ты мог бы прогон производительности запустить»
 > **Parent:** STATUS «NOW 2026-11-08 22:58» quick win (2); `TC_conan_xp1000_and_water_reflections_2026-11-08.md` R3 (the pre-overclock rtb batch)
-> **Status:** 🔲 written 2026-11-08 23:17 +03:00 — not run
+> **Status:** ✅ run 2026-11-08 23:20–23:36; written 2026-11-08 23:17 +03:00
 > **Outbound:** the numbers → the owner in chat
 
 ## 1. Goal vector
@@ -20,8 +20,8 @@ The game is closed by its PID after the batch.
 
 | # | Case | Expected | Status |
 |---|---|---|---|
-| P1 | `set-reflections.sh now` → `bench-flight.sh krinik-show oc-A1` | read-back «0 1»; a PresentMon line with avg / median / CPU / GPU / hitches | — |
-| P2 | `set-reflections.sh 6` → `bench-flight.sh krinik-show oc-6a` | read-back «1 0» | — |
-| P3 | `now` → `oc-A2` | as P1 | — |
-| P4 | `6` → `oc-6b` | as P2 | — |
-| P5 | compare oc-A vs rtb-A (overclock) and oc-6 vs oc-A (variant 6) | numbers side by side; a flight with «Undermesh / Delaying playing state» in its window is not counted | — |
+| P1 | `set-reflections.sh now` → `bench-flight.sh krinik-show oc-A1` | read-back «0 1»; a PresentMon line with avg / median / CPU / GPU / hitches | pass — oc-A1 61.5 / 67.3, CPU 14.41 |
+| P2 | `set-reflections.sh 6` → `bench-flight.sh krinik-show oc-6a` | read-back «1 0» | pass — oc-6a 48.8 / 52.8, CPU 18.44 |
+| P3 | `now` → `oc-A2` | as P1 | pass — oc-A2 54.9 / 60.3, CPU 16.11 |
+| P4 | `6` → `oc-6b` | as P2 | pass — oc-6b 48.2 / 53.5, CPU 18.21 |
+| P5 | compare oc-A vs rtb-A (overclock) and oc-6 vs oc-A (variant 6) | numbers side by side; a flight with «Undermesh / Delaying playing state» in its window is not counted | pass — overclock ≈ +17 % avg FPS, −13 % CPU (vs rtb-A of 12:5x); variant 6 ≈ −17 % FPS, +3 ms CPU (report 2026-11-08_conan-overclock-baseline-pure-rays.md) |

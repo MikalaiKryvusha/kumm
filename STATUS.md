@@ -136,6 +136,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   (item 2 below) is deferred «на сильно позже»** by the owner (22:56). Offered to him as quick wins, waiting for his pick: (1) attributes past 20 — plan 49 FORK, recommended
 >   (A) pak edit of `MaxAttributePointsSpent` after a `mod-overrides.py` check, (B) Lua on hero spawn; (2) a new A-B baseline after the overclock + the cost of variant 6;
 >   (3) keep or drop the ×2 arrow speed of «Верная рука». The voice item 1 below is done first regardless.
+>   **DONE by 23:50, all seen live:** (0) voice — Silero v5 eugene installed self-contained in `D:/work/ai_sandbox/tools/silero_tts` (own venv + model, the owner's
+>   timbre); KAIF 2.10's `voice-soft.mjs` taken ahead into `.kaif/tools/contour/`: every spoken phrase is first a file `voice/<stamp>_<meaning>.txt` (HOUSE_RULES
+>   rule 13; owner «слышу четко» · «да, вот правильно»). (1) owner's pick A → `vanilla_patches.py` (pack `121899e`): attribute cap 10000, Agility 26 with «+» (plan 49
+>   criteria 1–2; paging 3–5 next). (2) bench after the overclock: build ≈ +17 % FPS, −13 % CPU vs 12:5x; variant 6 «pure rays» costs ≈ 17 % FPS / +3 ms CPU (report
+>   `2026-11-08_conan-overclock-baseline-pure-rays.md`) — variant 6 was only ever set live; the game is closed, so the next start runs the build's Engine.ini (RT off,
+>   screen traces on) — whether the build ships 6 at this price is the owner's call (asked in chat 23:5x). (3) owner: «это имбаланс … 20%»
+>   → Dead Shot ×1.2 (5999 → 3000 cm/s; report `2026-11-08_conan-attributes-uncapped-dead-shot.md`, guide `bb00ad7`).
 > **HANDOVER 2026-11-08 14:52 +03:00 — chat of 2026-11-08 (first) closed by the owner («и закрываем чат, в новом продолжим»).** The game is OPEN in front and the owner
 >   plays (PID 40564, launched 13:09 background, brought forward 14:28) — do NOT close it; reflections set LIVE to variant 6 (below), not in the build's Engine.ini.
 >   DONE + seen this chat: XP base 1000 (65 → 8 062, 100 → 10 000; pack `fe5c37b`) · HUD reduced-max share faded grey (Hosav `CorruptionProgressColor`; pack `e85d74b`)

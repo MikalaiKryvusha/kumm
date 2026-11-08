@@ -2,7 +2,8 @@
 
 > **Created:** 2026-11-07 · on the owner's words of 2026-11-07 19:50 – 22:02 (verbatim below)
 > **Parent:** STATUS «FIRST NEXT CHAT» items (b), (c) and the owner's queue item 2; bugs 84, 86 (the same screen)
-> **Status:** 🔲 recorded 2026-11-07 22:03 +03:00 — not started
+> **Status:** 🟡 recorded 2026-11-07 22:03 +03:00 · recon done 2026-11-08 13:1x · the cap removed by a pak edit 2026-11-08 23:47 (criteria 1–2 seen live) — the
+> screen paging (criteria 3–5) not started
 > **Outbound:** —
 
 ## Goal vector (Achieve)
@@ -58,7 +59,9 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       a value set once by an event is not a re-set after the game's work), the asset-override detector `mod-overrides.py` to run before the pak path>` — **DECIDED
       2026-11-08 23:05 by the owner: (A)** `[OWNER]` «(А) — правку пака скриптом». `mod-overrides.py` 23:2x: no mod of the build ships `BP_ProgressionSystem` or
       `BP_BaseProjectile`.
-- [ ] Build (A): `_config/devkit/vanilla_patches.py` — the GAME's chunk (`retoc get`) + `uaj setstr prop:Default__BP_ProgressionSystem_C/MaxAttributePointsSpent 10000`,
+- [x] **DONE 2026-11-08 23:47, seen live (pack `121899e`, guide `bb00ad7`; report `testcases/reports/2026-11-08_conan-attributes-uncapped-dead-shot.md`):**
+      cap 10000, Agility 25 → 26 accepted by the server, «+» on the 4K frame of «Хар-ки»; criterion 1 met (bar full past 20 — criteria 3–5 are the paging steps below).
+      Build (A): `_config/devkit/vanilla_patches.py` — the GAME's chunk (`retoc get`) + `uaj setstr prop:Default__BP_ProgressionSystem_C/MaxAttributePointsSpent 10000`,
       same-size .uexp, `splice_chunk`; injected by `build-level-mod.py` step 4b into the three KrinikConanGameplay containers; step 6 checks the chunks. Cases
       `testcases/TC_conan_attributes_uncapped_and_dead_shot_2026-11-08.md` A1–A3. The same module carries the owner's Dead Shot change (×2 → ×1.2, D1–D2).
 - [ ] Recon: the attribute screen's widgets (`W_Paperdoll…` / the attribute tree), how a row draws its scale and perk nodes, and the perks' data (are there perks past 20 — the
