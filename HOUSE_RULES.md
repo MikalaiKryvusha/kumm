@@ -64,6 +64,11 @@
         the hour set before each clip — 11:00 for the palm-shadow stand. Started BEFORE the first clip; a one-off clean-up is not a stand.
         (`[OWNER]` 2026-11-07 16:45–16:47 «Что твоего героя пиздят со всех сторон!» · «и камера вращается от неактивности!» · «600 м!!!!» · «каждые 20 секунд!!!» ·
         «и 11 утра ставить!»)
+    6b. **A frame-time MEASUREMENT gets a still scene, not a clean-by-killing one:** the stand keeper's kill timer is OFF during any capture; before each capture
+        the NPCs within 600 m are FROZEN (`ConanExiles/_config/freeze-npcs.lua`, no kill — a kill pass makes the game stutter), the weather is stopped and frozen
+        (`BP_SC_WeatherHandler_C:ForceStopAllWeathers()` + `FreezeWeather()` — rain spreads the numbers), then 30 s for the game to settle; only then the capture.
+        (`[OWNER]` 2026-11-09 00:45–00:47 «замер некоректен» · «мобов нужно убивать ДО замера в радиусе 600 метров» · «и дать игре обработать это - секунл 30» ·
+        «там всё сильно тормозит, когда убиваешь мобов - нельзя в это время замерять» · «или просто не убивай, а всех замораживай на месте» · «и дождь нужно отключать».)
     7. How the stand was set up — one line in the game map.
 12. **The agent installs a CLI tool it needs by itself** (`winget`, `pip install --user`, `npm i -g`, `cargo install`), checks it by its
     version and writes one line into the reference.

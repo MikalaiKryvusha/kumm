@@ -911,3 +911,26 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   the row). A perk's description is a vanilla `Exiles_UI` string — our Russian over it goes through `vanilla-overrides-ru.tsv` (translation notes).
 - **Water with NO reflection path (RT 0 + ScreenTraces 0, `set-reflections.sh off`, oasis stand 2026-11-09 00:0x):** the water shows a grey-blue sky colour with its
   ripples and sparkle; the shore, palms and rocks are not reflected (as shipped, screen traces put the warm shore on the water). Review folder 75.
+
+## World ↔ the in-game map, beaches on the big river (2026-11-09 00:4x)
+
+- **The map's orientation (fitted on 5 vistas — Oasis Overlook, Godsight Spire, Shattered Springs, Nekhet, Priestking's Retreat landed on their eye icons):** map RIGHT = +X,
+  map DOWN = +Y. On the full-map frame («Карта» tab, default zoom) captured at 3840×2160 and viewed at 2000×1125: `px = 0.0026606 × X + 912.3`, `py = 0.0026606 × Y + 53.9`
+  (inverse `X = (px − 912.3) / 0.0026606`, `Y = (py − 53.9) / 0.0026606`). The map shows the player's own icon NOT at all (two frames at different hero places were identical).
+  The fit: `ConanExiles/_config/map-fit-vistas.py` (brute force over axis signs and vista↔eye pairs), map points → start / march / view: `_config/map-to-world.py`. The big river (desert → jungle delta →
+  Buccaneer Bay) runs map columns E–N, rows 3–8; the oasis-beach save (−78471, 245900) sits on its lower, desert part.
+- **Water level:** one `WaterBodyOcean_2` (Z −20240) for the sea AND the big river; land at −20230…−20080 is the beach. Edge finding: `_config/shore-find.lua` (march along a
+  heading, ground traced down every 3 m, the first point below −20240 is water). Map markers are place CENTRES (a lake marker can be in the desert, a cove marker
+  in a mangrove creek) — never a beach by themselves.
+- **Five river beaches (seen on frames, 2026-11-09 00:43):** `delta_falls` start (181428, 103775) march 22 view 11 — cliffs with waterfalls and palms across the water;
+  `delta_jungle` (145721, 146999) −40 / −28 — jungle river; `river_bend` (98739, 205258) −80 / −46 — wide river, red cliffs, rock spires far; `desert_arch` (17929, 244723)
+  −90 / −9 — red cliffs and a stone arch across the water; `oasis_falls` (−80500, 245900) −161 / −161 — the waterfall and the temple. Tools: `_config/shore-try.sh` (try views),
+  `_config/water-scenes.sh` (frames without the interface + one-minute captures per setting), `_config/behind-cam.lua`, `_config/top-scout.sh` (top-down frame; a high one shows
+  LOD terrain and the world edge sea in the north-east — not the river).
+- **Interface off for a clean frame:** `GUIModuleController:EnableVanityCameraMode(true)` hides the whole HUD (our CameraActor view target stays put); a teleport brings the HUD back.
+- **Drowning:** a point picked blind can put the hero on the SEA FLOOR (tp_ground hits the bottom, the water is not traced) — he drowned 2026-11-09 00:29 and respawned naked.
+- **Weather off by the remote (2026-11-09 00:47, seen — rain gone, clear sky):** `FindFirstOf('BP_SC_WeatherHandler_C')` → `ForceStopAllWeathers()` then `FreezeWeather()`
+  (`UnfreezeWeather()` back); the handler also has `ForceChangeWeather`, `ForceChangeWeatherSeverity`, `ForceChangeFogSeverity`, `ForceChangeWind*`, `Debug_ToggleWeatherOnOff`.
+  The jungle river and coast rain often; the rain doc — `ConanExiles/docs/11-дождь.md`.
+- **NPCs frozen, not killed:** `_config/freeze-npcs.lua` — `CustomTimeDilation = 0` on the humanoid / wildlife Characters within a radius (`_G.__fz={undo=true}` unfreezes);
+  `stand-keeper.sh off` can lose its answer to another remote call — check `stand-keeper.sh last` / the UE4SS line «[stand-keeper] stopped».

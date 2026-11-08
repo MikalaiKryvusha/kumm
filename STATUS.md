@@ -143,6 +143,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   `2026-11-08_conan-overclock-baseline-pure-rays.md`) — variant 6 was only ever set live; the game is closed, so the next start runs the build's Engine.ini (RT off,
 >   screen traces on) — whether the build ships 6 at this price is the owner's call (asked in chat 23:5x). (3) owner: «это имбаланс … 20%»
 >   → Dead Shot ×1.2 (5999 → 3000 cm/s; report `2026-11-08_conan-attributes-uncapped-dead-shot.md`, guide `bb00ad7`).
+> **IN FLIGHT 2026-11-09 00:50 +03:00 — water reflections on five river beaches** (`[OWNER]` 2026-11-09 00:07, TC `TC_conan_water_reflections_five_scenes_2026-11-09.md`): batch
+>   `_config/water-scenes.sh <scratch>/ws off,6,sw` over delta_falls · delta_jungle · river_bend · desert_arch · oasis_falls (specs in the game map «World ↔ the
+>   in-game map»); per setting: weather stopped, NPCs frozen, 30 s, a 4K frame without the interface, then a 60 s PresentMon capture (`static-bench.sh`, labels
+>   `ws-NN-<scene>-<setting>`). Summary + charts: `C:/Python314/python.exe -X utf8 _config/water-scenes-report.py "D:/Games/Conan Exiles Mods/_bench" <out>` →
+>   review folder 76 (frames + charts + table). «sw» = the third way from `researches/conan-water-reflections/` (software Lumen, longer reach: TraceDistanceScale 4,
+>   6 clipmaps, extent 5000). The owner: screen-space reflection is NOT used. The game PID 6908 is the agent's (background); the hero drowned once (00:29) and is naked.
+>   Lessons of the evening: map markers are centres — beaches are found by the vista-fitted map (`map-fit-vistas.py`) + `shore-find.lua`; measure with frozen NPCs and no rain.
 > **HANDOVER 2026-11-08 14:52 +03:00 — chat of 2026-11-08 (first) closed by the owner («и закрываем чат, в новом продолжим»).** The game is OPEN in front and the owner
 >   plays (PID 40564, launched 13:09 background, brought forward 14:28) — do NOT close it; reflections set LIVE to variant 6 (below), not in the build's Engine.ini.
 >   DONE + seen this chat: XP base 1000 (65 → 8 062, 100 → 10 000; pack `fe5c37b`) · HUD reduced-max share faded grey (Hosav `CorruptionProgressColor`; pack `e85d74b`)
