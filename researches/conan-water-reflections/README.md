@@ -179,3 +179,13 @@ Try one line at a time to see which one buys the FPS. `SkeletalMeshes 0` takes c
 - whether Conan's water uses the Single Layer Water shading model;
 - the values of the two distance field cvars;
 - the sky light's mode (Real Time Capture or Captured Scene).
+
+## Live result (2026-11-09 00:4x – 01:39)
+
+- Distance fields ARE cooked in 3.0.1: `r.GenerateMeshDistanceFields` 1, `r.DistanceFields.SupportEvenIfHardwareRayTracingSupported` 1 (read live). Defaults read:
+  `r.Lumen.TraceDistanceScale` 1, `r.AOGlobalDistanceField.NumClipmaps` 4, `r.LumenScene.GlobalSDF.ClipmapExtent` 2500, `r.LumenScene.Heightfield.Tracing` 1,
+  `r.Water.SingleLayer.Reflection` 1.
+- Candidate 1 tried as variant `sw` of `ConanExiles/_config/set-reflections.sh` (RT 0, screen traces 0, TraceDistanceScale 4, 6 clipmaps, extent 5000): the far shore,
+  cliffs and arch appear in the water as warm, soft (coarse) reflections over the whole surface; with the defaults (`off`) the water shows only the sky.
+- Cost on four still river beaches (one-minute captures, NPCs frozen, no rain): `sw` ≈ −1 % FPS vs `off`, hardware rays (variant 6) ≈ −6 %; the fifth scene is void
+  (hitches + rain) — report `testcases/reports/2026-11-09_conan-water-reflections-five-scenes.md`, review folder 76. Candidates 2 and 3 not tried yet.
