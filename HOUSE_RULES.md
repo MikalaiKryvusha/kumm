@@ -69,7 +69,12 @@
     version and writes one line into the reference.
 13. **While the game is open, the run is narrated by voice — in general, not every step.** At a run's start and when its purpose changes, one phrase: what is
     tested and what will look different from the usual build (a mod part switched off for a control case, a stand teleport, killed NPCs). The owner sees
-    the game on his screen even on the background path. Voice: `node D:/work/UnliminiumTheDigitalGame/tools/voice-soft.mjs "<фраза>" --play --voice eugene`.
+    the game on his screen even on the background path. **Voice — file first:** (1) Write the phrase into `voice/<YYYY-MM-DD_HH-MM-SS>_<meaning>.txt` (Latin
+    meaning, the folder is committed — the project's history); (2) speak it: `node .kaif/tools/contour/voice-soft.mjs --file voice/<…>.txt --play` with the env of
+    `.claude/settings.local.json` (`KAIF_VOICE_RENDER` = the Silero v5 eugene renderer in `D:/work/ai_sandbox/tools/silero_tts`, its README; beeps 2.5) — in a shell
+    without that env, export the three `KAIF_VOICE_*` lines first. (3) Read its `voice log:` and `voice-soft:` lines and the exit code; a recording starts only after
+    they were read. The tool is KAIF 2.10's (decision №156), taken ahead of the update; the timbre is the owner's tuned one. (`[OWNER]` 2026-11-08 23:09 «посмори новое
+    требование по голову в WIP 2.10 KAIF - писать в txt командой записи, фалйы именовать и складировать» · 23:10 «твой голос оставь, мы его настроили» · «да, вот правильно».)
     (`[OWNER]` 2026-11-03 19:26–19:27 «ты хоть предупреждай голосом» · «чтобы я не триггерился» · «не понимая, что ты тестируешь» · «я же вижу на экране игру» ·
     «каждый шаг не нужно» · «хотя бы в общем» — after a control run with KrinikConanUI's Lua out showed him the old UI unannounced.)
 14. **In chat the owner is told the MEANING, never a bare number.** Every bug, plan, item, case or interview is named by what the player sees
