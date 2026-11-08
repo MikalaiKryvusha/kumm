@@ -161,7 +161,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **NOW 2026-11-08 (chat «resume»; dayloop by «комп твой, работай автономно» 12:22):** ✅ 0c XP base 1000 — built, deployed, seen live (65 → 8 062, 100 → 10 000), pack `fe5c37b`.
 >   ✅ 0b HUD grey — built, in the library and the game, seen live 13:10 (pack `e85d74b`); the shade is the owner's eye (review folder 73).
 >   ❓ Water streak — mechanism proven (software Lumen fallback; `r.RayTracing.Enable 1` fixes it in frames); cost on `krinik-show` (background, throttle off) ≈ −5 FPS
->   (−9 %), +1.2 ms GPU, +1.7 ms CPU, hitches equal — **waits for the owner's word «включаем лучи?»** (review folder `НА ОТСМОТР НИКОЛАЕМ/73_hud_seryy_i_otrazheniya_vody`).
+>   (−9 %), +1.2 ms GPU, +1.7 ms CPU, hitches equal — review folders 73 (frames A–D) and 74 (16 pairs, variant 5 left / 4 right). **The owner's order 2026-11-08 14:02:**
+>   `[OWNER]` «доменяй оба варианта, затем скажешь, сколько стоит первый, сколько стоит второй, в каком графика лучше» · «и дашь мне поигать в 4, и дашь поиграть в 5» ·
+>   «позовешь голосом» — flights now / 4 / 5 ×2 running (`rtv-*` in the bench journal); then the numbers, the look verdict, the game in front with variant 4, his word → 5
+>   (`_config/set-reflections.sh 4|5|now`), a voice call when ready.
 >   🟡 Attributes past 20 (plan 49) — the cap is ONE value `BP_ProgressionSystem.MaxAttributePointsSpent` 20 (UI «+» and server); effects past 20 continue (seen live);
 >   FORK pak-CDO vs Lua-on-spawn recorded in the plan; the screen paging needs the owner's mockup choice.
 >   🔬 Sprint + bow — not our Lua; `EvaluateMovement_Sprint` has no attack test → native `K2_CanSprint` suspected; `sprint-probe.lua` ready; the stand needs a hero under
