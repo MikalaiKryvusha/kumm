@@ -131,6 +131,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-08 22:58 +03:00 — chat of 2026-11-08 (second), opened by /resume.** The game is NOT running (no ConanSandbox process at 22:57). The owner overclocked CPU
+>   and DDR4 and raised the CPU fan curve (dossier row in `HOUSE_RULES.md` §3, KUMM `3aedb17`) — old frame-time baselines are not comparable. **The rock flicker in the water
+>   (item 2 below) is deferred «на сильно позже»** by the owner (22:56). Offered to him as quick wins, waiting for his pick: (1) attributes past 20 — plan 49 FORK, recommended
+>   (A) pak edit of `MaxAttributePointsSpent` after a `mod-overrides.py` check, (B) Lua on hero spawn; (2) a new A-B baseline after the overclock + the cost of variant 6;
+>   (3) keep or drop the ×2 arrow speed of «Верная рука». The voice item 1 below is done first regardless.
 > **HANDOVER 2026-11-08 14:52 +03:00 — chat of 2026-11-08 (first) closed by the owner («и закрываем чат, в новом продолжим»).** The game is OPEN in front and the owner
 >   plays (PID 40564, launched 13:09 background, brought forward 14:28) — do NOT close it; reflections set LIVE to variant 6 (below), not in the build's Engine.ini.
 >   DONE + seen this chat: XP base 1000 (65 → 8 062, 100 → 10 000; pack `fe5c37b`) · HUD reduced-max share faded grey (Hosav `CorruptionProgressColor`; pack `e85d74b`)
