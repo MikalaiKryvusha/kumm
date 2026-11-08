@@ -293,7 +293,10 @@ is the software fallback where the screen trace is blocked: with `ScreenTraces 0
 with `r.RayTracing.Enable 1` the fallback reflects the shore correctly (frames C, D); `LightingMode 2` (hit lighting) looked the same as C. **What `r.RayTracing.Enable 1` touches (read live 13:26):** NOT the sun shadows — `r.RayTracing.Shadows 0`,
 `r.Shadow.Virtual.Enable 1` stay (the palm-leaf VSM fix of bug 67 keeps working); YES Lumen GI — `r.Lumen.ScreenProbeGather.HardwareRayTracing 1` switches the indirect
 light (soft occlusion under crowns, bounce from sand / rock) to hardware rays over the Nanite proxies (`r.RayTracing.Geometry.NaniteProxies 1`; palms as 64-triangle
-proxies) — GI-only-software variant: `r.Lumen.ScreenProbeGather.HardwareRayTracing 0`. **Views for render comparisons (2026-11-08, `_config/view-scout.sh`
+proxies) — GI-only-software variant: `r.Lumen.ScreenProbeGather.HardwareRayTracing 0`. **Cost on `krinik-show` (2026-11-08 14:05–14:26, background,
+throttle off, now→4→5 ×2):** the game is CPU-bound in all three (GPU ≈ 15 of ≈ 22 ms); RT costs the CPU too (the render thread prepares the ray-tracing scene every
+frame): variant 4 (RT + screen traces) −15 % FPS, +3.5 ms CPU, +1.8 ms GPU, +40 % hitches; variant 5 (RT only) −8 %, +1.5 ms CPU, +1.4 ms GPU, +10 % hitches;
+look (gallery, review folder 74): 4 keeps far water and rock reflections that 5 loses (5 shows the sky on far water). **Views for render comparisons (2026-11-08, `_config/view-scout.sh`
 → `rt-gallery.sh`, "name X Y dz pitch yaw", hour 11):** oasis beach water (−80300, 245900, 300, −6, 180 / 270; under palms 90) · oasis from above (−78166, 245999,
 900, −20, 180 / 270 / 0) · Overlook panorama (−253750, 18150, 600, −12, 90 / 0) · Nekhet pond (−256741, 39991, 500, −8, 0) · Shattered Springs green pool (−193314,
 21149, 500, −8, 270) · Skyfall snow panorama (−177478, −141986, 800, −12, 90) · Godsight desert (−135060, 74567, 800, −12, 0) · Crowngrove canopy (−256864, −10091,
