@@ -131,46 +131,31 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **SIDE TASK DONE 2026-11-08 02:3x — Underground 2 (nfsu2.xyz) on the owner's tablet** (plan 50, owner's order 2026-11-07 23:12 and «работай автономно» 00:55): all cases run (`testcases/TC_nfsu2_tablet_fps_2026-11-08.md`), the recommended set applied on the tablet, notes for the owner `researches/nfsu2-tablet/README_ru.md`, stand tools `researches/nfsu2-tablet/tools/`. Waits for his eye on the look (car shine kept at level 1, upscaled HUD kept). The Conan items below are untouched.
-> **HANDOVER 2026-11-07 23:03 +03:00 — chat of 2026-11-07 (fifth) closed by the owner («заакрывай чат, завтра продолжим»).** Read first: `bugs/85_…` (the crash cause), the
->   Archery notes `games/ConanExiles/mods/KrinikConanArchery.md` → Open (every order of the evening, verbatim), `testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md`.
->   DONE + seen: the bow-kill crash cause (key-bind Lua off the game thread — Archery and Camera off `RegisterKeyBind`, guard refuses it); camera numpad via the hero event
->   (K4–K7); draw time by Agility 5 s × 0.99^n with the draw montage slowed during the charge (K11–K12); the missed-arrow alert at ≤ 1 ms (SphereOverlapActors).
+> **HANDOVER 2026-11-08 14:52 +03:00 — chat of 2026-11-08 (first) closed by the owner («и закрываем чат, в новом продолжим»).** The game is OPEN in front and the owner
+>   plays (PID 40564, launched 13:09 background, brought forward 14:28) — do NOT close it; reflections set LIVE to variant 6 (below), not in the build's Engine.ini.
+>   DONE + seen this chat: XP base 1000 (65 → 8 062, 100 → 10 000; pack `fe5c37b`) · HUD reduced-max share faded grey (Hosav `CorruptionProgressColor`; pack `e85d74b`)
+>   · the bow for the owner (`exec SpawnItem 54003 1` answered ok; the new bow not identified on the inventory frame — many bows there; the map lines naming 51405 as a bow NOT fixed yet) · attributes past 20: the cap is ONE value `BP_ProgressionSystem.MaxAttributePointsSpent` 20, effects keep growing past 20
+>   (plan 49, seen live) · reflections: cost and look of variants 4 / 5 (TC `testcases/TC_conan_xp1000_and_water_reflections_2026-11-08.md`, review folders 73, 74).
 >   FIRST next chat, in order:
->   1. **Two game crashes of the agent's own probes this evening** (22:47 a batch trace probe, EXP-0488; 23:01 ~7 s after `_config/spawn-creature.lua` spawned a gazelle
->      — frozen, `SpawnDefaultController`): read the 23:01 crash folder (`ConanSandbox/Saved/Crashes`, newest) and UE4SS.log before ANY spawn again; the owner asked
->      «научисть спавнить гажель» — the stand needs a working spawn (CheatManager:Summon spawns nothing; the deferred spawn crashed).
->   2. **Headshot ×2 damage / ×2 XP (owner 21:57) — not working yet.** UE4SS runs Blueprint-function callbacks AFTER the body (EXP-0487), so the doubling lands after the
->      kill. Proven: writing the OUT multiplier in `BP_BaseProjectile_C:GetProjectileDamageOverDistance`'s callback DOES reach the damage (×10 test 22:53: a 0.33-charge
->      arrow killed a hyena). Pack `cf56300` decides there with `FindClosestBone_K2` at the arrow's point — in the 22:57 shots it exited on the bone test (no log): log
->      the chosen bone and its distance for every hero hit, then fix the bone source. Then: ×2 XP before the death, the Hosav kill widget showing ×2, slow motion 0.5× 2 s on
->      a headshot ×2 kill (owner 22:37). Ears / jaw / neck as head — the owner did not answer yet.
->   3. Recorded, not built (owner orders, all in the Archery notes): hostile mobs give up / leash back — STOP blind pokes, recon the beast AI by bytecode (3 attempts
->      failed: heard, AddToHatelist, SetShouldNotLeash; clue: the near hyena runs, the far one does not); timid animals flee ≈ 2 min; crouch kept while drawing (22:00).
->   4. UI twins of bug 85 (KrinikConanUI LMB ×3 + Esc on `RegisterKeyBind`) — need game-thread click events; bugs 86 (attribute caption under a node), 87 (beasts walk
->      into the hero — capsules touch, AI reach 150 cm), 88 (debuff line fonts); plan 49 (endless attributes + screen paging).
->   The owner's own items below (bow for him, HUD grey, level curve 1000, sprint + bow, attributes past 20) are still open.
-> **Moved verbatim to the chronicle (entry 2026-11-07 23:03 +03:00):** NOW blocks 19:2x–22:50, NEXT LAUNCH, item 00 (solved — bug 85), bug 67 blocks 18:43–19:19.
-> **0. AT ONCE next chat (owner 20:53-20:54, his request in chat):** give him a top-tier bow and many good arrows — id 51405 (old notes) is NOT a bow in this build (he got a
->   wrong item); iron arrows 53612 x500 were given. Read real ids first: `_config/find-items.lua` returned 0 rows — the ItemTable name column is not «Name»; find the column, then spawn
->   (`exec MakeMeAdmin` first). Also fix the game map line that names 51405 as a bow. **Found 2026-11-08 12:1x (no game run):** the game map already lists bow ids read from
->   ItemTable by `row.Name:ToString()` — `GAME_ARCHITECTURE_INTERNAL_MAP.md` ≈line 806: Лук из кости дракона 54003, Лук из звездного металла 51586, Лук Бездны 43001; the 51405
->   lines to fix stand at ≈266 and ≈761 («Мощный охотничий лук»). `[AI]` Quick-win order proposed to the owner in chat 2026-11-08 12:1x (bow · curve 1000 · SSR streak · HUD grey · sprint+bow) — awaiting his word.
-> **0b. (owner 21:04, his frame and words in chat):** the MAGENTA part of the HUD health / stamina bars (the reduced-max share, «-350 HP / 50%») must default to a FADED GREY —
->   UIMod_Hosav `W_SmoothHP` (no setting for it in our notes: an asset edit of the HUD pak, rule 8 — first look for the mod's own option). <!-- attribution-ok: verbatim in the chat of 2026-11-07 21:04 -->
-> **NOW 2026-11-08 (chat «resume»; dayloop by «комп твой, работай автономно» 12:22):** ✅ 0c XP base 1000 — built, deployed, seen live (65 → 8 062, 100 → 10 000), pack `fe5c37b`.
->   ✅ 0b HUD grey — built, in the library and the game, seen live 13:10 (pack `e85d74b`); the shade is the owner's eye (review folder 73).
->   ❓ Water streak — mechanism proven (software Lumen fallback); `r.RayTracing.Enable 1` removed it only at the hero-occluder camera — **CORRECTED 14:35: the owner's frame of
-variant 4 shows the white streak beside a palm trunk** (his eye, oasis beach), so RT alone does not fix it; levers being tested on his view; cost on `krinik-show` (background, throttle off) ≈ −5 FPS
->   (−9 %), +1.2 ms GPU, +1.7 ms CPU, hitches equal — review folders 73 (frames A–D) and 74 (16 pairs, variant 5 left / 4 right). **The owner's order 2026-11-08 14:02:**
->   `[OWNER]` «доменяй оба варианта, затем скажешь, сколько стоит первый, сколько стоит второй, в каком графика лучше» · «и дашь мне поигать в 4, и дашь поиграть в 5» ·
->   «позовешь голосом» — flights now / 4 / 5 ×2 running (`rtv-*` in the bench journal); then the numbers, the look verdict, the game in front with variant 4, his word → 5
->   (`_config/set-reflections.sh 4|5|now`), a voice call when ready.
->   🟡 Attributes past 20 (plan 49) — the cap is ONE value `BP_ProgressionSystem.MaxAttributePointsSpent` 20 (UI «+» and server); effects past 20 continue (seen live);
->   FORK pak-CDO vs Lua-on-spawn recorded in the plan; the screen paging needs the owner's mockup choice.
->   🔬 Sprint + bow — not our Lua; `EvaluateMovement_Sprint` has no attack test → native `K2_CanSprint` suspected; `sprint-probe.lua` ready; the stand needs a hero under
->   the weight limit (the oasis save: 104 / 100) and real Shift + RMB (front path, owner away).
-> **0c. (owner 21:05, chat):** «our level curve, 500 XP per level» — the manifest note of KrinikConanGameplay says XP 500 × level^0.5; verify the live per-level XP against it next to (b) endless attributes. **DECISION 21:06 (chat): the base becomes 1000** (1000 instead of 500 in the curve of KrinikConanGameplay; rebuild its pak). <!-- attribution-ok: verbatim in the chat of 2026-11-07 21:05-21:06 -->
+>   1. **The voice is broken since KLAS left the machine (2026-11-08):** `D:/work/UnliminiumTheDigitalGame/tools/voice-soft.mjs` defaults to `F:\KLAS\…` (gone) → every
+>      voice call of this chat was SILENT until 14:49 (`MODULE_NOT_FOUND`, output hidden by `>/dev/null`). Works with env `KAIF_VOICE_BASE_TOOL=F:/krinik_tts/voice-say.mjs`
+>      (the engine moved to `F:\krinik_tts`, its README). **The owner's order 14:47–14:48:** `[OWNER]` «скачай и установи Сиеро и голос Евгений с нашими настройками» ·
+>      «в D/work/ai_sandbox/tools» — install Silero (v5 ru, voice eugene) into `D:/work/ai_sandbox/tools`, point `voice-soft.mjs` / `settings.local.json` env at it, and
+>      NEVER hide a voice call's output: check its exit and the «soft voice:» line. `[OWNER]` 14:46 «ты не предупредил меня голосом ДО ЗАПИСИ» · «и даже не пискнул» —
+>      a recording starts only after a voice warning that was HEARD (the tool's output read).
+>   2. **Reflections — the owner's direction 14:44:** `[OWNER]` «не, экранное отражение - зло» → ray-only. Variant 5 (RT 1, `ScreenTraces 0`): no streak at the palm, but
+>      «иногда в воде скалы то исчезают то появляются». Variant 6 «pure rays» = 5 + `r.Lumen.Reflections.DistantScreenTraces 0` + `SampleSceneColorAtHit 0` — set live
+>      14:45 (`_config/set-reflections.sh 6`), his clips of the flicker: scratchpad `owner_flicker_v6_b.mkv` (14:49, HDR on) and `owner_flicker_v6_sdr.mkv` (14:50, HDR
+>      off; «увидишь, как на воде над камнем мерцает часть скалы») — the water above the stone at the shore, crop `1080,770 840×240` of 3840×2160: change spikes at frames
+>      201–202, 212, 246–247, 261, 339, 346 (mean 7.1, spikes 22–28). Next: look at frames 195–210 of that crop at 60 fps; candidates — Nanite ray-tracing proxies of the
+>      rock (`r.RayTracing.Geometry.NaniteProxies`), the surface cache, temporal (`r.Lumen.Reflections.Temporal.*`); A-B on his view. Cost of 6 not measured. The scratchpad
+>      is swept after 24 h — copy the two clips into the review folder first if still needed.
+>   3. Sprint + bow — `sprint-probe.lua` ready; native `K2_CanSprint` suspected (Locomotion notes); needs a hero under the weight limit and real Shift + RMB.
+>   4. Plan 49 — FORK pak-CDO vs Lua-on-spawn for `MaxAttributePointsSpent`; the screen paging mockup for the owner.
+>   5. Still open from 2026-11-07 (chronicle entry 2026-11-08 14:52): the two crashes of the agent's probes (read the 23:01 crash folder before any spawn), headshot ×2,
+>      beast AI give-up / leash, UI twins of bug 85, bugs 86–88; the owner's queue below.
+>   Machine lock `kumm` until 15:32 — release it at the start (`node D:/work/ai_sandbox/_tools/machine-lock.mjs release --who kumm`) if the owner is just playing.
+> **Moved verbatim to the chronicle (entry 2026-11-08 14:52 +03:00):** SIDE TASK nfsu2, HANDOVER 2026-11-07 23:03, items 0 / 0b / 0c and the NOW block of 2026-11-08.
 > **FIRST NEXT CHAT — the owner's order 2026-11-07 20:50 (verbatim):** `[OWNER]` «сейчас стрелба откоючает спринт. В новом чате начнём с того, что продолжим делать мод
 >   Локомодации. Спринт и стрельбу делаем возможными одновременно.» · «И откобчаем лимит на прокачку атрибутов. Делаем её бесконечной.» · «И она бесконечно будет по фотмулам
 >   влиять на характеристики героя». So, in order: (a) KrinikConanLocomotion — sprint and bow shooting at the same time (now a shot cancels the sprint); (b) attributes without

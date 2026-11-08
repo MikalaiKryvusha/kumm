@@ -294,7 +294,12 @@ with `r.RayTracing.Enable 1` the fallback reflected the shore at the hero-occlud
 saw the white streak WITH RT on (variant 4), so RT alone does not remove it; tested on his own view 14:36–14:40 (oasis beach −80951, 239474, behind a palm):
 variant 4, far field (`r.LumenScene.FarField 1`, + `Retrace.FarField 1`) and variant 5 gave the SAME white water right of the trunk; after two steps sideways and the
 sun lower the white became a sun glint under the sun — there it was the real reflection of the bright sky / sun through the gap between the cliffs (the trunk stood in
-front of the cliff edge), not a missing reflection; the owner: «ООО, сейчас красиво» (variant 4); `LightingMode 2` (hit lighting) looked the same as C. **What `r.RayTracing.Enable 1` touches (read live 13:26):** NOT the sun shadows — `r.RayTracing.Shadows 0`,
+front of the cliff edge), not a missing reflection; the owner: «ООО, сейчас красиво» (variant 4); variant 5 at 11:00, his eye 14:42: «сейчас артефакта нет у пальмы, но иногда в воде скалы то исчезают то
+появляются» (reflections of rocks flicker with RT only — suspect the ray-tracing proxies / surface cache; variant 4 takes near reflections from the frame) → back to 4; 14:43 «сейчас артефакт есть» (the streak with screen traces on) → `[OWNER]` 14:44 «не, экранное
+отражение - зло» — the direction is ray-only. Two more screen paths stay on with `ScreenTraces 0` (dump `DumpCVars r.Lumen.Reflections` in the game log):
+`r.Lumen.Reflections.DistantScreenTraces 1` (far reflections searched in screen space, depth threshold 2, max 200000) and `r.Lumen.Reflections.SampleSceneColorAtHit 1`
+(a ray hit visible on screen takes the frame's colour, else the surface cache — a suspect of the rock flicker). **Variant 6 «pure rays»:** RT 1 + `ScreenTraces 0` +
+`DistantScreenTraces 0` + `SampleSceneColorAtHit 0` — set live 14:45 for the owner's eye; `LightingMode 2` (hit lighting) looked the same as C. **What `r.RayTracing.Enable 1` touches (read live 13:26):** NOT the sun shadows — `r.RayTracing.Shadows 0`,
 `r.Shadow.Virtual.Enable 1` stay (the palm-leaf VSM fix of bug 67 keeps working); YES Lumen GI — `r.Lumen.ScreenProbeGather.HardwareRayTracing 1` switches the indirect
 light (soft occlusion under crowns, bounce from sand / rock) to hardware rays over the Nanite proxies (`r.RayTracing.Geometry.NaniteProxies 1`; palms as 64-triangle
 proxies) — GI-only-software variant: `r.Lumen.ScreenProbeGather.HardwareRayTracing 0`. **Cost on `krinik-show` (2026-11-08 14:05–14:26, background,

@@ -102,6 +102,7 @@ the C-D batch's shell 1189 alive 6 min later). After a stop: `ps -ef | grep -E "
 
 ### EXP-0490 · 2026-11-08 · ❌→✅ · #perf #plan #recon #nfsu2 #tablet #process
 class: performance tuning started as ad-hoc pokes, without a plan, a case file or the product's own notes
+subject-lesson
 **Context:** Underground 2 Revived on the owner's tablet; first pass (2026-11-07) changed settings one by one in the game and concluded from menu readings.
 **Tried / did:** pokes → wrong cause told to the owner twice; the owner asked «Ты план написал?» · «В оболочке ВСЕ НАСТРОЙКИ ИЗУЧИЛ?» · «читай конспекты по порту». Then: the port's own community notes (`discord-bot/knowledge.md`), the full settings UI read, plan 50 + a case file with dimensions, batches of cases each from a fresh launch, controls at the start and end.
 **Result:** ✅ 33 cases with statuses in one night; the real cause (draw calls in Chrome, spawn churn) found; two earlier claims withdrawn.
@@ -111,6 +112,7 @@ class: performance tuning started as ad-hoc pokes, without a plan, a case file o
 
 ### EXP-0489 · 2026-11-08 · ❌ · #perf #fps #measurement #nfsu2 #tablet
 class: an FPS reading taken in a game's pause / options menu is not a gameplay reading
+none-cheap: the menu state differs per game; the sampler's drive/pause flag is already the check (researches/nfsu2-tablet/README.md)
 **Context:** Underground 2 Revived on the owner's tablet; A-B of graphics options sampled with the options menu open.
 **Tried / did:** read "empty world = 60 FPS" in the menu and told the owner the other players' cars were the cause.
 **Result:** ❌ — driving in the same empty world gave 36 FPS: the menu pauses game logic, the reading was inflated; the claim was corrected in chat.
