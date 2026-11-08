@@ -884,3 +884,19 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   runtime takes effect at once. Death ← `FunCombat_PlayerController`, Purge ← `BasePlayerChar` / `ConanCharacter:OnPurgeMusicRequested`, menu ←
   `GUIModuleController:PlayMusic`. Detail, the cue list and the rows — `researches/conan-custom-music-mods/conan_music_system.md`,
   `games/ConanExiles/mods/KrinikConanMusic.md`.
+
+## Attribute perks and the attribute cap (read 2026-11-08 23:1x, plan 49)
+
+- **Perk data:** `/Game/Systems/Perks/PerksTable` (row struct `PerksTableRow`: `PerkName`, `PerkDescription`, `Icon`, `TargetIntStat`, `AttributePointsRequired`);
+  rows `<Attribute>_10a/_10b/_20a/_20b` per attribute (Strength, Agility, Vitality, Grit, Resourcefulness, Leadership) plus `Corrupted_*`. The table holds only names,
+  texts and thresholds — the EFFECTS live in blueprints that ask `I_PerkSystemInterface.HasPerk(<row name>)` (`BaseBPCombat`, `BP_BaseProjectile`, `BP_AttributeSystem`)
+  or in native code (`EPlayerPerks` enum).
+- **«Верная рука» = `Agility_10b` (Dead Shot)**, «Все метательное оружие и стрелы летят вдвое быстрее и наносят на 15% больше урона издалека»: in
+  `BP_BaseProjectile` ubergraph the initial speed = `ProjectileInitialSpeed × 2.0` when the bool `ApplyPerkProjectileSpeed` is set (`Double 2.0 @uexp+23646` — the
+  only 2.0 literal in that graph; `kismet-trace.py … ExecuteUbergraph_BP_BaseProjectile`, lines 1916–2202). Since 2026-11-08 our KrinikConanGameplay ships
+  ×1.2 (owner's word, `vanilla_patches.py`). Ricochet perk — `Perk_HasRicochet` / `Perk_RicochetArrowsRicochetCount` in the same graph.
+- **The attribute cap** is ONE CDO int, `BP_ProgressionSystem.MaxAttributePointsSpent` = 20 (plan 49 recon); since 2026-11-08 our pak ships 10 000. The bar scale
+  `W_Attribute.MaxAttributePointAllotment` = 20 is untouched — past 20 the bar stays full until the paging step.
+- **Shipping an edited VANILLA blueprint** (first time 2026-11-08): the game's chunk by `retoc get <view> <chunk id>`, the same-size edit of the legacy .uexp,
+  `splice_chunk` (original zen header + edited .uexp), the chunk added to our container by `unpack-raw` → `chunks/<id>` + `chunk_paths` → `pack-raw`
+  (`_config/devkit/vanilla_patches.py`). Check first that no mod ships the path (`mod-overrides.py`).

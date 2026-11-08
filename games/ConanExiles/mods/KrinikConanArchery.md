@@ -120,6 +120,9 @@ game-thread trigger is found: the shafts after the full loot window and after a 
 
 ## Open
 
+- **Dead Shot («Верная рука», `Agility_10b`) — the ×2 arrow speed is the GAME's** (`BP_BaseProjectile` ubergraph, game map «Attribute perks»); since 2026-11-08 the
+  build ships ×1.2 from `KrinikConanGameplay` (`vanilla_patches.py`), not from this mod. Our Lua reads the launched speed, so the draw scaling stays on top of it.
+  Before: uncharged 2484–2499 cm/s without the trait, 4997–5004 with it (this mod's log, 2026-11-07 20:00). Cases D1–D2 of `TC_conan_attributes_uncapped_and_dead_shot_2026-11-08.md`.
 - **Crouch stays while drawing (the owner's order 2026-11-07 22:00 +03:00, NOT BUILT):** `[OWNER]` «Если герой в присяде, то натяжение лука по ПКМ не должно выводить его из присяда в
   стойку.» · «Можно и натягивать и стрелять лук из присяда». Recon first: which call stands the hero up on the aim entry (the bow aim montage / an UnCrouch in
   `BaseBPCombat` on RMB — bytecode), then keep the crouch natively (the hero's crouch state through the draw and the shot); the crouched draw pose — the owner's eye.
