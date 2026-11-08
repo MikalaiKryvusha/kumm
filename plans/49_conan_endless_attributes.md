@@ -33,7 +33,23 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
 
 ## Steps
 
-- [ ] Recon: where the cap 20 lives (the attribute data table / `StatHolder` / the UI's `+` condition), and the per-point curves (game map, attributes section).
+- [x] Recon: where the cap 20 lives — **2026-11-08 13:0x, bytecode of the 3.0.1 assets** (`retoc-5.8 to-legacy --filter BP_ProgressionSystem | UI/Inventory/Attributes`,
+      `UAssetGUI tojson VER_UE5_8`, `kismet-trace.py`):
+      - `BP_ProgressionSystem::CanGiveAttribute(Attribute) → CanGiveAttribute, HasBeenMaxed` = `Attribute < MaxAttributePointsSpent` AND `AttributePointsUndistributed ≥
+        GetAttributePointCost(Attribute)`; `HasBeenMaxed` = NOT the first. **`MaxAttributePointsSpent` is a CDO int = 20**, used ONLY there.
+      - `W_Attributes::AttributeViewUpdateRequested` reads the attribute by `StatHolder:GetIntStat`, calls `CanGiveAttribute`, passes its result to
+        `W_Attribute::UpdateAttributeView(CanGiveAttribute, …)` → the ubergraph sets `LevelAttributeButton` («+») visible / collapsed by it.
+      - `W_Attribute::UpdateView` scales the bar by `MaxAttributePointAllotment` (CDO int = **20**), `FClamp(value / 20, 0, 1)` — past 20 the bar stays full.
+      - The stored value is not clamped (Agility 22 was accepted and shown on 2026-09-13, `ideas/03` :448).
+      - Native `UAttributeSystem` per-point bonuses are flat floats (`BonusDamageMeleePercentagePerAttribute`, `BonusArmorPerAttribute`, `BonusHealthPercentagePerAttribute`,
+        `BonusDamageRangedPercentagePerAttribute`, `BonusStaminaPerAttribute`, `BonusEncumbrancePerAttribute`) — linear per point; whether the native code clamps the
+        attribute at 20 when applying them is NOT read (live check: an attribute at 25 → the stat).
+      - `ServerGiveAttribute` → the ubergraph (offset 1014): `IsServer` → `StatHolder:GetIntStat` → the SAME `CanGiveAttribute` — one variable gates the UI and
+        the server. `GetAttributePointCost(A)` = `DT_AttributeSystem` row named `A` → `CostPerPoint` (our pak: 10 000 rows, cost 1 — no wall past 20).
+      `FORK: options <a pak edit of the BP_ProgressionSystem CDO (MaxAttributePointsSpent → 10 000) and of W_Attribute (MaxAttributePointAllotment → the page size) |
+      Lua sets ProgressionSystem.MaxAttributePointsSpent on the hero's spawn event> · price of error <a whole vanilla blueprint shipped in our pak overrides it for every
+      mod that ships the same path and goes stale on a game update; a Lua assignment is one line per spawn> · consulted <HOUSE_RULES rules 8 and 24 (native data first;
+      a value set once by an event is not a re-set after the game's work), the asset-override detector `mod-overrides.py` to run before the pak path>` — undecided.
 - [ ] Recon: the attribute screen's widgets (`W_Paperdoll…` / the attribute tree), how a row draws its scale and perk nodes, and the perks' data (are there perks past 20 — the
       game has none; `[AI]` what a page past 20 shows goes to him as a mockup).
 - [ ] Mockup of the paging (scroll bar vs page switch) on our own frame, statuses on every element — to the owner.

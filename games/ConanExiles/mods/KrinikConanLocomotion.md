@@ -63,6 +63,21 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
   and the new VK-only (`vkdown`/`vkup`, mouse-seq) Spaces after 19:28 did not; the idle (vanity) camera eats the first press (`EnableVanityCameraMode(false)` first).
   NEXT: find what the two jumping presses had (timing after focus? the bow state?) — e.g. hold Space 200+ ms, press it twice; judge by the mod's log line.
 
+- **Sprint + bow at the same time (the owner 2026-11-07 20:50 «Спринт и стрельбу делаем возможными одновременно»; 2026-11-08 12:22 «очень хочется это») —
+  recon 2026-11-08 12:3x (read-only, no run):** none of our Lua stops the sprint on draw / shot — `krinik_oblivion_locomotion.lua` only writes
+  `PlayerSprintSpeedScale` on an Agility change (:208), `krinik_air_combat.lua` only exits substate 8 at take-off, Archery hooks `SetPowerCharge` / `EndPowerCharge`
+  (play rate, FOV). The game: `EvaluateMovement_Sprint` = `TrySprint` AND `K2_CanSprint` AND «not in a substate» AND `EvaluateMovement_Range` (graph read 2026-09-13,
+  `ideas/03` :388); substates (`ECharacterSubState.h`): Sprinting 7, Attacking 11, PowerCharge 15, ChargeHold 16 — a draw is an attack. Likely lever: the
+  substate test inside `BaseBPCombat_C:EvaluateMovement_Sprint` (bytecode: `retoc to-legacy --filter BaseBPCombat` → `uaj exports` → `kismet-trace.py
+  … EvaluateMovement_Sprint`, also `TrySprint`, `OnSubstateChanged_Sprint`). Unknown: which substates it refuses; whether aiming caps the speed separately
+  (`MovementSpeedOverride`, `ConanCharacter.h:487`). Control case first (Krinik Lua off vs on: sprint, RMB, read `GetSubstateList()` + `MaxWalkSpeed`).
+  **Bytecode read 2026-11-08 12:4x** (`retoc-5.8 to-legacy --filter BaseBPCombat|BasePlayerChar` of `_paksview-3.0.1`, `UAssetGUI tojson VER_UE5_8`, `kismet-trace.py`):
+  `BaseBPCombat::EvaluateMovement_Sprint` = `TrySprint` (reads `bTrySprint`) AND `K2_CanSprint` AND NOT `InSubstate(18)` — no attack test there;
+  `OnSubstateChanged_Sprint` on entering 7 stops the sprint only if `InSubstate(14)`, the rest is sigil timers (long jump 1.75 s, sprint cost). `BasePlayerChar`
+  has NO `K2_CanSprint` override (its sprint functions: `SprintAction`, `ResetSprint`, `HandleSprintStamina`, input events) → the attack / aim refusal is in the
+  NATIVE `AConanCharacter::K2_CanSprint` default (BlueprintNativeEvent) or a native exit of substate 7 on an attack substate. Next: a live probe — while
+  drawing, call `K2_CanSprint` by the remote and read `Value`; if false, a UE4SS post-hook on the native `K2_CanSprint` that sets `Value = true` for the hero with
+  a bow drawn is the lever (native function — its out param is written before the caller reads it, unlike EXP-0487's BP case); check the aim speed cap after.
 - **NEXT FEATURE (the owner 2026-11-07 10:50, verbatim):** «и было бы хорошо, если бы если игрок попадает в тайминг при ComboStep >= 1, и нажимает в этот тайминг пробел -
   чтобы герой подпрыгивал с замахом меча за голову, нанося удат в падении из пряжка на землю» — a combo finisher: inside the combo advance window (combo step ≥ 1)
   Space = a leap with the sword raised over the head and a downward strike on landing. 10:50 «если это сейчас сложно - на будущее идея» → an idea for later.

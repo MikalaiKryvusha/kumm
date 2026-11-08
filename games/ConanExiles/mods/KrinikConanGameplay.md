@@ -36,6 +36,11 @@ Another mod that injects rows into these tables by its own controller (EAA write
 **Since 2026-11-02 18:50 the build version is 0.9.0** (`[OWNER]` 18:40 «Все моды Krinik опускаем до версии 0.9.0», plan 43): `packVersion` 0.9.0, the pak rebuilt by
 `build-level-mod.py` (step 6: 3 × 10 000 rows equal to the generators, the Caverns chest table in place), its `modinfo.json` read back 0 / 9 / 0.
 
+**Since 2026-11-08 12:2x the XP base is 1000** (`[OWNER]` 2026-11-07 21:06 chat «база 1000»; 2026-11-08 12:21 «уровень 1000 делаеми»): `XP_ANCHOR = 1000` in
+`build-level-mod.py`, XP per level 1000 × L^0.5, total to level 10 000 ≈ 666.7 M (int32 holds it); step 6 of the build — 3 × 10 000 rows equal to the generators.
+**Seen live 2026-11-08 12:26–12:27:** `SetLevel(65)` → «(8 062)» to the next = 1000 × √65; `SetLevel(100)` → «(10 000)» (TC `TC_conan_xp1000_and_water_reflections_2026-11-08.md` L1, L2).
+The 500-base numbers in the row table above are history.
+
 ## Open
 
 - seen 2026-10-31 15:51: the pause-menu list shows «v1.0.0» (report `testcases/reports/2026-10-31_conan-krinik-versions-1.0.0.md`).

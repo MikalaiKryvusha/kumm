@@ -285,7 +285,13 @@ foliage sway reads `MPC_BiomeSettings` `WindIntensity` / `Wind Speed` / `Wind St
 plus the level's `WindDirectionalSource2` (strength 0.1, speed 3.482; `SetStrength`/`SetSpeed`) — all 0 = still palms. **Oasis palms:** ISM meshes
 `GFL_AfricanOilPalm01…05` (+ `_HLOD` billboards, `M_Foliage_Billboard`, masked 0.5), leaf materials `/Game/Environment/Foliage/Materials/FLX/MI_AfricanOilPalm01`,
 `…D01`, `…02` on `M_Foliage` — OPAQUE (BlendMode 0), two-sided; with `r.RayTracing.Enable 1` their ray-traced shadows come from baked proxies (blobs).
-`r.RayTracing.Enable` takes > 10 s to switch (the remote times out; read it back). **Foliage material (2026-11-07):** `M_Foliage` (`/FLX_Materials/Materials/
+`r.RayTracing.Enable` takes > 10 s to switch (the remote times out; read it back). **Reflections (read live 2026-11-08 12:27, the build's defaults):**
+`r.DynamicGlobalIlluminationMethod 1` and `r.ReflectionMethod 1` (Lumen), `r.Lumen.Reflections.ScreenTraces 1`, `r.Lumen.HardwareRayTracing 1` and
+`r.Lumen.Reflections.HardwareRayTracing 1` BUT `r.RayTracing.Enable 0` (ray tracing compiled in, `r.RayTracing 1`, switched off at run time) → Lumen falls back to
+SOFTWARE tracing; `LightingMode 0`, `sg.ReflectionQuality 3`, `r.Water.SingleLayer.Reflection 1`. The owner's white streak on the water behind a trunk (2026-11-07 20:12)
+is the software fallback where the screen trace is blocked: with `ScreenTraces 0` the whole oasis water turns sky-white (frame B, oasis beach −80500, 245900);
+with `r.RayTracing.Enable 1` the fallback reflects the shore correctly (frames C, D); `LightingMode 2` (hit lighting) looked the same as C. TC
+`TC_conan_xp1000_and_water_reflections_2026-11-08.md`. **Foliage material (2026-11-07):** `M_Foliage` (`/FLX_Materials/Materials/
 Environment/Core/M_Foliage`, in the kit; Material Attributes, Nanite, opaque, two-sided) moves vertices inside `MF_FLX-TreeMotion` = `MF_WindWaveFront` +
 `MF_TreeBend` + `MF_BranchBend` (mask from UV / vertex-colour weights × wind vector) + `MF_LeafShimmer` (lerp × `VertexNormalWS`) — MASK-based, no per-leaf
 pivot or axis; `MF_FLX_UVPivot_WPO` (pivots in UV1/UV2 + local bounds) sits behind `UVPivotWind_Enable` (default off). The kit holds only a 64-triangle fallback of

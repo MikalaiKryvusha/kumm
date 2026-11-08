@@ -1,0 +1,44 @@
+# Test cases — Conan build: XP curve base 1000 · water reflections without the screen-space streak
+
+**Created:** 2026-11-08 · **Under test:** (1) `KrinikConanGameplay` pak rebuilt with `XP_ANCHOR = 1000`; (2) reflection settings for the
+white streak on the water beside a palm trunk · **Version/build:** Conan 3.0.1 build 0.9.0, game `D:\Games\Conan Exiles 3.0.1`
+**Test basis:**
+- XP: `[OWNER]` 2026-11-07 21:06 (chat, STATUS item 0c) — base 1000 instead of 500; 2026-11-08 12:21 «уровень 1000 делаеми». Law: XP per level = 1000 × L^0.5.
+- Reflections: `[OWNER]` 2026-11-07 20:12 «отражение на воде в экранном пространстве, баг - за деревом белый след»; 2026-11-08 12:22 «Я боюсь, что лучи
+  ОЧЕНЬ сильно просадят FPS» · «давай включать. пробовать. замерять на нашем демо пролёте». The look is the owner's verdict (taste class); the agent brings
+  frames from one place and the flight numbers.
+
+## 1. Goal vector
+
+Achieve: levelling twice slower per level with the same law. Avoid: the white screen-space fallback streak on the water behind a trunk, without a visible
+loss of reflection quality and without a large FPS drop on the `krinik-show` flight.
+
+## 2. Requirements under test
+
+| # | Requirement | Fit criterion |
+|---|---|---|
+| R1 | WHEN the hero is set to level L, the HUD shall show 1000 × √L XP to the next level | L = 65 → 8 062; L = 100 → 10 000 (±1 rounding) |
+| R2 | The reflection variant offered shall not show the white streak behind the trunk | frame from one camera place, by eye; the streak visible in A |
+| R3 | The offered variant's cost shall be measured on `krinik-show` | median FPS, 1 % low, stutters ≥ 50 ms — A-B-A-B pairs |
+
+## 3. Coverage matrix
+
+| Dimension | Values covered | NOT covered |
+|---|---|---|
+| level | 65, 100 | 10 000 (the builder's step 6 checks the table rows) |
+| reflection method | A current · B `r.Lumen.Reflections.ScreenTraces 0` · C hardware RT reflections (if the game allows) | other water bodies than the oasis |
+| time of day | 11:00 (the palm stand hour) | night, rain |
+
+## 4. Cases
+
+Stand: oasis save, god on (`god-on.sh`), `stand-keeper.sh` running, camera by `fixed-cam.lua`, hour 11:00, background path allowed (machine is the agent's).
+
+| # | Steps | Expected | Status |
+|---|---|---|---|
+| L1 | remote `exec MakeMeAdmin`; `CheatManager:SetLevel(65)`; frame of the HUD XP line | «(8 062)» to the next | pass — 12:26 frame: badge 65, «XP: 345,1k / 353,1k (8 062)» (old pak gave 4 031 on 2026-10-31) |
+| L2 | `SetLevel(100)`; frame | «(10 000)» | pass — 12:27 frame: badge 100, «661,4k / 671,4k (10 000)» |
+| R0 | read live cvars: `r.Lumen.Reflections.ScreenTraces`, `r.RayTracing.Enable`, `r.Lumen.HardwareRayTracing`, `r.Lumen.Reflections.HardwareRayTracing`, `r.ReflectionMethod`, `r.SSR.Quality` | values recorded (what the game runs now) | pass — 12:27: ScreenTraces 1, RayTracing.Enable 0 (r.RayTracing 1), Lumen HWRT 1, Reflections.HWRT 1, LightingMode 0, ReflectionMethod 1, SSR.Quality 3 — Lumen runs software tracing |
+| R1 | camera on the water with an occluder in front (the hero at the waterline −80500, 245900, fixed camera 3.5 m behind, 0.9 m up, 11:00); frames A current · B ScreenTraces 0 · C RT 1 · D RT 1 + ScreenTraces 0 · E C + LightingMode 2 | B / C / D show what the fallback is | pass (mechanism) — B: the whole water sky-white (the software fallback = the streak's colour); C, D: the shore reflected, warm, no white; E = C by eye. A at this camera had no visible streak (the hero is a low occluder); a palm-trunk camera not found yet |
+| R2 | `bench-flight.sh krinik-show` A, C, A, C (B too if C is not possible) | numbers per run; difference vs noise (±4 stutters, ≈1 FPS) | [NOT-TESTED] |
+| H1 | UIMod_Hosav rebuilt with four `flt:CorruptionProgressColor` rows (owner 2026-11-07 21:04 «блёклый серый»); game restarted; hero with reduced max health (the save already shows «Здоровье снижено на 100 HP / 50%»); frame of the HUD bars at 4K | the reduced share of both bars faded grey, the live part red / yellow as before | [NOT-TESTED] |
+| H0 | control: the frame of 12:26 (old pak) | the reduced share magenta | pass — `lv65_small.webp` 12:26: both bars' right half magenta |

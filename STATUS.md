@@ -153,9 +153,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **Moved verbatim to the chronicle (entry 2026-11-07 23:03 +03:00):** NOW blocks 19:2x–22:50, NEXT LAUNCH, item 00 (solved — bug 85), bug 67 blocks 18:43–19:19.
 > **0. AT ONCE next chat (owner 20:53-20:54, his request in chat):** give him a top-tier bow and many good arrows — id 51405 (old notes) is NOT a bow in this build (he got a
 >   wrong item); iron arrows 53612 x500 were given. Read real ids first: `_config/find-items.lua` returned 0 rows — the ItemTable name column is not «Name»; find the column, then spawn
->   (`exec MakeMeAdmin` first). Also fix the game map line that names 51405 as a bow.
+>   (`exec MakeMeAdmin` first). Also fix the game map line that names 51405 as a bow. **Found 2026-11-08 12:1x (no game run):** the game map already lists bow ids read from
+>   ItemTable by `row.Name:ToString()` — `GAME_ARCHITECTURE_INTERNAL_MAP.md` ≈line 806: Лук из кости дракона 54003, Лук из звездного металла 51586, Лук Бездны 43001; the 51405
+>   lines to fix stand at ≈266 and ≈761 («Мощный охотничий лук»). `[AI]` Quick-win order proposed to the owner in chat 2026-11-08 12:1x (bow · curve 1000 · SSR streak · HUD grey · sprint+bow) — awaiting his word.
 > **0b. (owner 21:04, his frame and words in chat):** the MAGENTA part of the HUD health / stamina bars (the reduced-max share, «-350 HP / 50%») must default to a FADED GREY —
 >   UIMod_Hosav `W_SmoothHP` (no setting for it in our notes: an asset edit of the HUD pak, rule 8 — first look for the mod's own option). <!-- attribution-ok: verbatim in the chat of 2026-11-07 21:04 -->
+> **NOW 2026-11-08 (chat «resume»; dayloop by «комп твой, работай автономно» 12:22):** ✅ 0c XP base 1000 — built, deployed, seen live (65 → 8 062, 100 → 10 000), pack `fe5c37b`.
+>   🟡 0b HUD grey — four `flt:CorruptionProgressColor` rows (0.35 grey, alpha 0.5), pak rebuilt in `D:/Temp/kumm-rebuild-krinik/UIMod_Hosav-2/out` (identity guard refused
+>   the intended change — copy by hand into the library + game Mods with the game CLOSED), H1 frame owed. 🟡 Water streak — mechanism found (software Lumen fallback;
+>   `r.RayTracing.Enable 1` fixes it in frames); A-C-A-C flights on the background path with `no-power-throttle.ps1` running (front path refused — owner at keyboard).
+>   🔬 Sprint + bow — not our Lua; the game's `EvaluateMovement_Sprint` has no attack test → native `K2_CanSprint` suspected (Locomotion notes); live probe next.
+>   Machine lock `kumm` held until 13:54; the game runs (background, PID 47664).
 > **0c. (owner 21:05, chat):** «our level curve, 500 XP per level» — the manifest note of KrinikConanGameplay says XP 500 × level^0.5; verify the live per-level XP against it next to (b) endless attributes. **DECISION 21:06 (chat): the base becomes 1000** (1000 instead of 500 in the curve of KrinikConanGameplay; rebuild its pak). <!-- attribution-ok: verbatim in the chat of 2026-11-07 21:05-21:06 -->
 > **FIRST NEXT CHAT — the owner's order 2026-11-07 20:50 (verbatim):** `[OWNER]` «сейчас стрелба откоючает спринт. В новом чате начнём с того, что продолжим делать мод
 >   Локомодации. Спринт и стрельбу делаем возможными одновременно.» · «И откобчаем лимит на прокачку атрибутов. Делаем её бесконечной.» · «И она бесконечно будет по фотмулам

@@ -91,6 +91,17 @@ side panel, a settings window. KRINIK MODIFIED in the build: the pak is rebuilt 
   −258 ≈ −H/4 of the 1031-unit canvas. The first try −516 (a «T/2» model) pinned the line to the top edge. Built 10:39 (the identity guard «1 of 228 chunks
   differ» = this edit, copied by hand). A kill by `corpse-stand.sh` (KillCharacter) does NOT play the line — call `PlayKill_Animation` on the live widget.
 - The rebuilt outer pak is uncompressed — 2–3× larger than the author's (26 → 51 MB), no effect on the game.
+- **The reduced-max share of the health and stamina bars — faded grey instead of magenta (2026-11-08 12:4x, `[OWNER]` 2026-11-07 21:04 STATUS 0b;
+  12:21 «разведываем»):** the share is `ProgressBar_Corruption` (health, slot 49 in `Border_CorruptionBar`) and `ProgressBar_CorruptionStam` (stamina, slot 50 in
+  `Border_CorruptionStamina`); their `FillColorAndOpacity` is BOUND to `CorruptionProgressColor` (their `Percent` to `Progress_Corruption`). The function returns
+  `SavedGame.CorruptionProgressColor` when the player's option `CorruptionProgressCustomColor` is on (settings window: `CheckBox_CorruptionColor` «Свой цвет полосы
+  скверны» + `ColorPicker_CorruptionColor`; save object default (1.0, 0.01768, 0.9313, 1.0), the option off by default, the live `HosavUISave_New.sav` holds neither
+  field), else the literal LinearColor (1.0, 0.01768, 0.9313, 0.6) at `@uexp+47243…47258` — the magenta. Build: four `flt:CorruptionProgressColor` rows in
+  `UIMod_Hosav__W_SmoothHP.tsv` → (0.35, 0.35, 0.35, 0.5) `[AI]` (the grey is the owner's eye to judge); read back by `kismet-trace.py` on the rebuilt asset. The
+  designer `FillColorAndOpacity` of both bars holds the same magenta but the binding overrides it every frame. `prop:` rows cannot write a LinearColor (`uaj`).
+  The twins, read 2026-11-08 12:5x (`extract` + `kismet-trace` + a JSON scan for R > 0.8, G < 0.1, B > 0.8): `W_UI_ClanMate_HealthAndStamina` has its own
+  `CorruptionColor` with the same custom-colour switch and the fallback (0.14, 0, 0.14, 1.0) @uexp+3769 — a DARK purple, not the magenta; `W_EnemyHealthbar_InHUD`
+  (`ProgressCorruptionPercentageNew`) and `W_SmoothHP_Horse` (`Get_CorruptionIcon`, `GetCorruptionAmount`) carry no magenta literal. Only the hero's bars were changed.
 
 ## Open
 

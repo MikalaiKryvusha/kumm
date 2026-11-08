@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0491 · 2026-11-08 · ❌→✅ · #perf #bench #conan #background #measurement
+class: a frame-time measurement of a game whose window is not in front is throttled by Windows (EcoQoS) — invalid
+mechanized: `ConanExiles/_config/no-power-throttle.ps1` (ProcessPowerThrottling EXECUTION_SPEED opt-out for the game PID)
+**Lesson:** `krinik-show` on the background path gave 19–23 FPS with 40–46 ms CPU per frame (front-path reference ≈ 60 FPS / 15 ms) — with and without our stand keeper,
+so not our mods. `no-power-throttle.ps1` on the game PID → the same flight 46 FPS / 21 ms CPU, GPU 12.3 ms. Still not the front path: a background flight compares
+A-B under equal conditions (GPU ms carries a GPU cost), but its FPS is never compared with front-path references. Run the opt-out before any background measurement.
+
 ### EXP-0490 · 2026-11-08 · ❌→✅ · #perf #plan #recon #nfsu2 #tablet #process
 class: performance tuning started as ad-hoc pokes, without a plan, a case file or the product's own notes
 **Context:** Underground 2 Revived on the owner's tablet; first pass (2026-11-07) changed settings one by one in the game and concluded from menu readings.
