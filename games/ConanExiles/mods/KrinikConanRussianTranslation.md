@@ -35,6 +35,7 @@ Renamed from «Krinik Russian Translation» 2026-10-30 (W33). ≈54 451 entries 
 |---|---|---|
 | `DA4E821B4EE35B69F5E9128CF11CB58F` | «Разделайте труп и получите ресурсы\nили нажмите {0}, чтобы забрать предметы» | the corpse prompt on two lines (W6), ON since 2026-10-30 18:4x — needs KrinikConanUI's `W_ActionTutorial` layout (`KrinikConanUI.md`) |
 | four hold-suffix keys | «(удерж.)» instead of «(удерживайте)» | the owner 2026-10-30 08:32 (W10a) |
+| `6AACBD69401B828B331DB891FB6388CC` (PerksTable `Agility_10b` PerkDescription) | «Все метательное оружие и стрелы летят на 20% быстрее и наносят на 15% больше урона издалека.» | Dead Shot «Верная рука» is ×1.2 in our build (KrinikConanGameplay); `[OWNER]` 2026-11-08 23:55 «а текст перка подправил?»; seen 2026-11-09 00:0x in «Хар-ки» (4K frame, review folder 75) |
 
 ## Checks
 

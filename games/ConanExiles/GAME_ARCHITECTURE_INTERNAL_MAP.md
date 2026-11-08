@@ -906,3 +906,8 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   `InpActEvt_Shortcut<N-1>_…`. Seen as normal shots in the archery log («#N из лука, заряд 0.00 … скорость A → B»).
 - **Branched perks by the remote:** `BP_PerkSystemComponent_C.ChosenBranchedPerks` (array of row names) holds the picked «a / b» traits; `AddBranchedPerk(FName('<row>'))`
   adds one at once (seen: `Agility_10b` → the projectile speed ×1.2 on the next shot). `ServerResetAttributeAll` empties the array — a reset drops the chosen traits.
+- **The attribute window by the remote (2026-11-09 00:0x):** `GUIModuleController:ActivateModule(FName('Attributes'), true, false)` opens «Хар-ки»; the right info column
+  switches to an attribute by `W_AttributeInfo_C:SetAttributeInfo(<the visible W_Attribute_C named A_Agility / A_Vitality …>)` (`W_Attribute_C:Select` only highlights
+  the row). A perk's description is a vanilla `Exiles_UI` string — our Russian over it goes through `vanilla-overrides-ru.tsv` (translation notes).
+- **Water with NO reflection path (RT 0 + ScreenTraces 0, `set-reflections.sh off`, oasis stand 2026-11-09 00:0x):** the water shows a grey-blue sky colour with its
+  ripples and sparkle; the shore, palms and rocks are not reflected (as shipped, screen traces put the warm shore on the water). Review folder 75.

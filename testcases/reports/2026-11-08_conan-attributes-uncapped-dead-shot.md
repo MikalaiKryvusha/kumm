@@ -54,3 +54,5 @@ frame `scratchpad/attr26.webp` (3840×2160) and `hand.webp`; `UE4SS.log` 23:46:3
 
 pass — both edits seen working in the game. REAL WORLD: accumulated — the owner's save with Agility 26 / Vitality 25 and Dead Shot re-added by the
 remote; data and machine — his game folder and save; path — the attribute window and a bow shot the way the game takes them (input events, not real mouse).
+
+- 2026-11-09 00:0x D3 (the perk text, added after the owner asked): `vanilla-override.py` + `locres-regress.py` (54458 → 54459, lost 0) + deploy; the 4K frame of «Хар-ки» with the Agility column shows «Верная рука — Все метательное оружие и стрелы летят на 20% быстрее …» — pass.
