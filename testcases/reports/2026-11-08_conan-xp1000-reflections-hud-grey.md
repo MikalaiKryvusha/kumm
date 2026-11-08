@@ -20,6 +20,7 @@
   - L1 pass — «(8 062)» at level 65 (= 1000 × √65). L2 pass — «(10 000)» at level 100.
   - R0 pass — Lumen software tracing (RayTracing.Enable 0 with HWRT flags on).
   - R1 pass (mechanism) — B: the oasis water sky-white everywhere (the fallback = the streak); C / D: the shore reflected, no white; E = C by eye.
+    CORRECTED 14:35: that held only at the hero-occluder camera — the owner's frame of variant 4 behind a palm trunk shows the white streak; RT alone does not fix it.
   - R2 — see «Flights» below.
   - H0 pass — 12:26 frame (old pak): the reduced share magenta on both bars. H1 — owed (pak not installed while the game runs).
 - **Flights:** the A-C-A-C batch (background, throttle off, RT read back before each): rtb-A1 47.9 avg / 53.9 median, GPU 13.02, CPU 18.10, 158 hitches,

@@ -290,7 +290,11 @@ plus the level's `WindDirectionalSource2` (strength 0.1, speed 3.482; `SetStreng
 `r.Lumen.Reflections.HardwareRayTracing 1` BUT `r.RayTracing.Enable 0` (ray tracing compiled in, `r.RayTracing 1`, switched off at run time) → Lumen falls back to
 SOFTWARE tracing; `LightingMode 0`, `sg.ReflectionQuality 3`, `r.Water.SingleLayer.Reflection 1`. The owner's white streak on the water behind a trunk (2026-11-07 20:12)
 is the software fallback where the screen trace is blocked: with `ScreenTraces 0` the whole oasis water turns sky-white (frame B, oasis beach −80500, 245900);
-with `r.RayTracing.Enable 1` the fallback reflects the shore correctly (frames C, D); `LightingMode 2` (hit lighting) looked the same as C. **What `r.RayTracing.Enable 1` touches (read live 13:26):** NOT the sun shadows — `r.RayTracing.Shadows 0`,
+with `r.RayTracing.Enable 1` the fallback reflected the shore at the hero-occluder camera (frames C, D) — CORRECTED 2026-11-08 14:35: beside a palm trunk the owner
+saw the white streak WITH RT on (variant 4), so RT alone does not remove it; tested on his own view 14:36–14:40 (oasis beach −80951, 239474, behind a palm):
+variant 4, far field (`r.LumenScene.FarField 1`, + `Retrace.FarField 1`) and variant 5 gave the SAME white water right of the trunk; after two steps sideways and the
+sun lower the white became a sun glint under the sun — there it was the real reflection of the bright sky / sun through the gap between the cliffs (the trunk stood in
+front of the cliff edge), not a missing reflection; the owner: «ООО, сейчас красиво» (variant 4); `LightingMode 2` (hit lighting) looked the same as C. **What `r.RayTracing.Enable 1` touches (read live 13:26):** NOT the sun shadows — `r.RayTracing.Shadows 0`,
 `r.Shadow.Virtual.Enable 1` stay (the palm-leaf VSM fix of bug 67 keeps working); YES Lumen GI — `r.Lumen.ScreenProbeGather.HardwareRayTracing 1` switches the indirect
 light (soft occlusion under crowns, bounce from sand / rock) to hardware rays over the Nanite proxies (`r.RayTracing.Geometry.NaniteProxies 1`; palms as 64-triangle
 proxies) — GI-only-software variant: `r.Lumen.ScreenProbeGather.HardwareRayTracing 0`. **Cost on `krinik-show` (2026-11-08 14:05–14:26, background,

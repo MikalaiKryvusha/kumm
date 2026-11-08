@@ -160,7 +160,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   UIMod_Hosav `W_SmoothHP` (no setting for it in our notes: an asset edit of the HUD pak, rule 8 — first look for the mod's own option). <!-- attribution-ok: verbatim in the chat of 2026-11-07 21:04 -->
 > **NOW 2026-11-08 (chat «resume»; dayloop by «комп твой, работай автономно» 12:22):** ✅ 0c XP base 1000 — built, deployed, seen live (65 → 8 062, 100 → 10 000), pack `fe5c37b`.
 >   ✅ 0b HUD grey — built, in the library and the game, seen live 13:10 (pack `e85d74b`); the shade is the owner's eye (review folder 73).
->   ❓ Water streak — mechanism proven (software Lumen fallback; `r.RayTracing.Enable 1` fixes it in frames); cost on `krinik-show` (background, throttle off) ≈ −5 FPS
+>   ❓ Water streak — mechanism proven (software Lumen fallback); `r.RayTracing.Enable 1` removed it only at the hero-occluder camera — **CORRECTED 14:35: the owner's frame of
+variant 4 shows the white streak beside a palm trunk** (his eye, oasis beach), so RT alone does not fix it; levers being tested on his view; cost on `krinik-show` (background, throttle off) ≈ −5 FPS
 >   (−9 %), +1.2 ms GPU, +1.7 ms CPU, hitches equal — review folders 73 (frames A–D) and 74 (16 pairs, variant 5 left / 4 right). **The owner's order 2026-11-08 14:02:**
 >   `[OWNER]` «доменяй оба варианта, затем скажешь, сколько стоит первый, сколько стоит второй, в каком графика лучше» · «и дашь мне поигать в 4, и дашь поиграть в 5» ·
 >   «позовешь голосом» — flights now / 4 / 5 ×2 running (`rtv-*` in the bench journal); then the numbers, the look verdict, the game in front with variant 4, his word → 5
