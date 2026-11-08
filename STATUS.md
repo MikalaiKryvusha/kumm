@@ -145,7 +145,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   → Dead Shot ×1.2 (5999 → 3000 cm/s; report `2026-11-08_conan-attributes-uncapped-dead-shot.md`, guide `bb00ad7`).
 > **DONE 2026-11-09 01:43 +03:00 (partial):** five beaches × off / rays / sw measured, review folder 76 with `voda_tri_rezhima.html` (pack `a14be23`, report
 >   `2026-11-09_conan-water-reflections-five-scenes.md`): rays ≈ −6 %, sw ≈ −1 % without delta_falls (its rays / sw hitched and it RAINED there despite the weather stop —
->   re-shoot); sw = warm soft reflections of the far shore, rays = sharp near ones. Waits for the owner's pick of the water. Guard owed: one batch at a time (EXP-0493).
+>   re-shoot); sw = warm soft reflections of the far shore, rays = sharp near ones. **Re-shot warm 01:5x: the drop was shader warm-up (rays −5.6 %, sw −1.8 %, 0 hitches).
+>   The owner's pick 01:47: sw — SHIPPED in KrinikConanGraphics' Engine.ini (pack `e3333da`), read back live.** Guard owed: one batch at a time (EXP-0493).
 > **(was) IN FLIGHT 2026-11-09 00:50 +03:00 — water reflections on five river beaches** (`[OWNER]` 2026-11-09 00:07, TC `TC_conan_water_reflections_five_scenes_2026-11-09.md`): batch
 >   `_config/water-scenes.sh <scratch>/ws off,6,sw` over delta_falls · delta_jungle · river_bend · desert_arch · oasis_falls (specs in the game map «World ↔ the
 >   in-game map»); per setting: weather stopped, NPCs frozen, 30 s, a 4K frame without the interface, then a 60 s PresentMon capture (`static-bench.sh`, labels
