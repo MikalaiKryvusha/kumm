@@ -143,7 +143,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   `2026-11-08_conan-overclock-baseline-pure-rays.md`) — variant 6 was only ever set live; the game is closed, so the next start runs the build's Engine.ini (RT off,
 >   screen traces on) — whether the build ships 6 at this price is the owner's call (asked in chat 23:5x). (3) owner: «это имбаланс … 20%»
 >   → Dead Shot ×1.2 (5999 → 3000 cm/s; report `2026-11-08_conan-attributes-uncapped-dead-shot.md`, guide `bb00ad7`).
-> **IN FLIGHT 2026-11-09 00:50 +03:00 — water reflections on five river beaches** (`[OWNER]` 2026-11-09 00:07, TC `TC_conan_water_reflections_five_scenes_2026-11-09.md`): batch
+> **DONE 2026-11-09 01:43 +03:00 (partial):** five beaches × off / rays / sw measured, review folder 76 with `voda_tri_rezhima.html` (pack `a14be23`, report
+>   `2026-11-09_conan-water-reflections-five-scenes.md`): rays ≈ −6 %, sw ≈ −1 % without delta_falls (its rays / sw hitched and it RAINED there despite the weather stop —
+>   re-shoot); sw = warm soft reflections of the far shore, rays = sharp near ones. Waits for the owner's pick of the water. Guard owed: one batch at a time (EXP-0493).
+> **(was) IN FLIGHT 2026-11-09 00:50 +03:00 — water reflections on five river beaches** (`[OWNER]` 2026-11-09 00:07, TC `TC_conan_water_reflections_five_scenes_2026-11-09.md`): batch
 >   `_config/water-scenes.sh <scratch>/ws off,6,sw` over delta_falls · delta_jungle · river_bend · desert_arch · oasis_falls (specs in the game map «World ↔ the
 >   in-game map»); per setting: weather stopped, NPCs frozen, 30 s, a 4K frame without the interface, then a 60 s PresentMon capture (`static-bench.sh`, labels
 >   `ws-NN-<scene>-<setting>`). Summary + charts: `C:/Python314/python.exe -X utf8 _config/water-scenes-report.py "D:/Games/Conan Exiles Mods/_bench" <out>` →
