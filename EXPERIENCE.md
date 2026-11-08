@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0492 · 2026-11-09 · ❌→✅ · #conan #gameplay #text #testcases #owner-saw-first
+class: a gameplay number changed while the player-facing text that states it was left stale
+mechanized: no — a case line: every gameplay change carries a case «the text the player reads about it» (TC_conan_attributes_uncapped_and_dead_shot D3)
+**Lesson:** Dead Shot went ×2 → ×1.2 in the blueprint, seen in the arrow log, reported done — the perk window still said «вдвое быстрее»; the owner asked «а текст
+перка подправил?». When a number of a mechanic changes, the case set includes its description (perk, item tooltip, guide row): find the text by the
+row's localization key (`PerksTable` → `PerkDescription` key → `vanilla-overrides-ru.tsv` for vanilla `Exiles_UI` strings) and look at it in game by a frame.
+
 ### EXP-0491 · 2026-11-08 · ❌→✅ · #perf #bench #conan #background #measurement
 class: a frame-time measurement of a game whose window is not in front is throttled by Windows (EcoQoS) — invalid
 mechanized: `ConanExiles/_config/no-power-throttle.ps1` (ProcessPowerThrottling EXECUTION_SPEED opt-out for the game PID)
