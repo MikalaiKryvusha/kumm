@@ -5,7 +5,7 @@
 > какие-то альтернативы» · «Снимай кадр без интерфейса. Затем возвращай интерфейс, ставь время 11 часов, и минуту стой - пиши FPS график» · «Померяем в среднем
 > на статичных сценах в выборке по 5 сценам по минутному бенчу сколько разница в FPS»
 > **Parent:** `TC_conan_overclock_baseline_and_pure_rays_2026-11-08.md` (fly-through cost of variant 6); review folder 75 (water with no reflection path)
-> **Status:** 🔲 written 2026-11-09 00:10 +03:00 — not run
+> **Status:** 🟡 run 2026-11-09 01:02–01:39 — partial (delta_falls rays / sw to re-shoot); written 2026-11-09 00:10 +03:00
 > **Outbound:** frames + the FPS table → the owner (review folder 76)
 
 ## 1. Goal vector
