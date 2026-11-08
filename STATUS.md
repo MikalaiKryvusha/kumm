@@ -131,53 +131,25 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW 2026-11-08 22:58 +03:00 — chat of 2026-11-08 (second), opened by /resume.** The game is NOT running (no ConanSandbox process at 22:57). The owner overclocked CPU
->   and DDR4 and raised the CPU fan curve (dossier row in `HOUSE_RULES.md` §3, KUMM `3aedb17`) — old frame-time baselines are not comparable. **The rock flicker in the water
->   (item 2 below) is deferred «на сильно позже»** by the owner (22:56). Offered to him as quick wins, waiting for his pick: (1) attributes past 20 — plan 49 FORK, recommended
->   (A) pak edit of `MaxAttributePointsSpent` after a `mod-overrides.py` check, (B) Lua on hero spawn; (2) a new A-B baseline after the overclock + the cost of variant 6;
->   (3) keep or drop the ×2 arrow speed of «Верная рука». The voice item 1 below is done first regardless.
->   **DONE by 23:50, all seen live:** (0) voice — Silero v5 eugene installed self-contained in `D:/work/ai_sandbox/tools/silero_tts` (own venv + model, the owner's
->   timbre); KAIF 2.10's `voice-soft.mjs` taken ahead into `.kaif/tools/contour/`: every spoken phrase is first a file `voice/<stamp>_<meaning>.txt` (HOUSE_RULES
->   rule 13; owner «слышу четко» · «да, вот правильно»). (1) owner's pick A → `vanilla_patches.py` (pack `121899e`): attribute cap 10000, Agility 26 with «+» (plan 49
->   criteria 1–2; paging 3–5 next). (2) bench after the overclock: build ≈ +17 % FPS, −13 % CPU vs 12:5x; variant 6 «pure rays» costs ≈ 17 % FPS / +3 ms CPU (report
->   `2026-11-08_conan-overclock-baseline-pure-rays.md`) — variant 6 was only ever set live; the game is closed, so the next start runs the build's Engine.ini (RT off,
->   screen traces on) — whether the build ships 6 at this price is the owner's call (asked in chat 23:5x). (3) owner: «это имбаланс … 20%»
->   → Dead Shot ×1.2 (5999 → 3000 cm/s; report `2026-11-08_conan-attributes-uncapped-dead-shot.md`, guide `bb00ad7`).
-> **DONE 2026-11-09 01:43 +03:00 (partial):** five beaches × off / rays / sw measured, review folder 76 with `voda_tri_rezhima.html` (pack `a14be23`, report
->   `2026-11-09_conan-water-reflections-five-scenes.md`): rays ≈ −6 %, sw ≈ −1 % without delta_falls (its rays / sw hitched and it RAINED there despite the weather stop —
->   re-shoot); sw = warm soft reflections of the far shore, rays = sharp near ones. **Re-shot warm 01:5x: the drop was shader warm-up (rays −5.6 %, sw −1.8 %, 0 hitches).
->   The owner's pick 01:47: sw — SHIPPED in KrinikConanGraphics' Engine.ini (pack `e3333da`), read back live.** Guard owed: one batch at a time (EXP-0493).
-> **(was) IN FLIGHT 2026-11-09 00:50 +03:00 — water reflections on five river beaches** (`[OWNER]` 2026-11-09 00:07, TC `TC_conan_water_reflections_five_scenes_2026-11-09.md`): batch
->   `_config/water-scenes.sh <scratch>/ws off,6,sw` over delta_falls · delta_jungle · river_bend · desert_arch · oasis_falls (specs in the game map «World ↔ the
->   in-game map»); per setting: weather stopped, NPCs frozen, 30 s, a 4K frame without the interface, then a 60 s PresentMon capture (`static-bench.sh`, labels
->   `ws-NN-<scene>-<setting>`). Summary + charts: `C:/Python314/python.exe -X utf8 _config/water-scenes-report.py "D:/Games/Conan Exiles Mods/_bench" <out>` →
->   review folder 76 (frames + charts + table). «sw» = the third way from `researches/conan-water-reflections/` (software Lumen, longer reach: TraceDistanceScale 4,
->   6 clipmaps, extent 5000). The owner: screen-space reflection is NOT used. The game PID 6908 is the agent's (background); the hero drowned once (00:29) and is naked.
->   Lessons of the evening: map markers are centres — beaches are found by the vista-fitted map (`map-fit-vistas.py`) + `shore-find.lua`; measure with frozen NPCs and no rain.
-> **HANDOVER 2026-11-08 14:52 +03:00 — chat of 2026-11-08 (first) closed by the owner («и закрываем чат, в новом продолжим»).** The game is OPEN in front and the owner
->   plays (PID 40564, launched 13:09 background, brought forward 14:28) — do NOT close it; reflections set LIVE to variant 6 (below), not in the build's Engine.ini.
->   DONE + seen this chat: XP base 1000 (65 → 8 062, 100 → 10 000; pack `fe5c37b`) · HUD reduced-max share faded grey (Hosav `CorruptionProgressColor`; pack `e85d74b`)
->   · the bow for the owner (`exec SpawnItem 54003 1` answered ok; the new bow not identified on the inventory frame — many bows there; the map lines naming 51405 as a bow NOT fixed yet) · attributes past 20: the cap is ONE value `BP_ProgressionSystem.MaxAttributePointsSpent` 20, effects keep growing past 20
->   (plan 49, seen live) · reflections: cost and look of variants 4 / 5 (TC `testcases/TC_conan_xp1000_and_water_reflections_2026-11-08.md`, review folders 73, 74).
+> **HANDOVER 2026-11-09 02:02 +03:00 — chat of 2026-11-08 (second) closed by the owner («аодводим итоги сегодняшней работы. закрываем чат»).** The game is CLOSED,
+>   the machine lock released. DONE + seen this chat (reports in `testcases/reports/2026-11-08_*` / `2026-11-09_*`):
+>   - Voice: self-contained Silero v5 eugene in `D:/work/ai_sandbox/tools/silero_tts` (README there); KAIF 2.10's `.kaif/tools/contour/voice-soft.mjs` taken ahead —
+>     every spoken phrase is first a file `voice/<stamp>_<meaning>.txt`, spoken with `--file` (HOUSE_RULES rule 13, env in `.claude/settings.local.json`).
+>   - Attributes past 20 (plan 49 criteria 1–2): `ConanExiles/_config/devkit/vanilla_patches.py` injects the edited vanilla `BP_ProgressionSystem` (cap 10 000) into
+>     KrinikConanGameplay (build step 4b); «Верная рука» (Dead Shot) ×2 → ×1.2 in `BP_BaseProjectile`, its Russian text «на 20% быстрее» (`vanilla-overrides-ru.tsv`).
+>   - The owner's CPU + DDR4 overclock: build ≈ +17 % FPS vs the day before (HOUSE_RULES dossier).
+>   - Water reflections: the owner's pick «программные отражения с дальностью» (software Lumen, TraceDistanceScale 4, 6 clipmaps, extent 5000, no rays, no screen
+>     traces) SHIPPED in KrinikConanGraphics' Engine.ini, read back live; ≈ −1.5 % FPS on five still river beaches (rays −6 %); review folder 76 + HTML page.
+>   - Tools: map ↔ world by vistas (`_config/map-fit-vistas.py`, `map-to-world.py`), beaches by `shore-find.lua` / `shore-try.sh`, measurements by `water-scenes.sh`
+>     (NPCs frozen by `freeze-npcs.lua`, weather off, 30 s, one-minute `static-bench.sh`), report + charts + page (`water-scenes-report.py`, `water-scenes-html.py`).
 >   FIRST next chat, in order:
->   1. **The voice is broken since KLAS left the machine (2026-11-08):** `D:/work/UnliminiumTheDigitalGame/tools/voice-soft.mjs` defaults to `F:\KLAS\…` (gone) → every
->      voice call of this chat was SILENT until 14:49 (`MODULE_NOT_FOUND`, output hidden by `>/dev/null`). Works with env `KAIF_VOICE_BASE_TOOL=F:/krinik_tts/voice-say.mjs`
->      (the engine moved to `F:\krinik_tts`, its README). **The owner's order 14:47–14:48:** `[OWNER]` «скачай и установи Сиеро и голос Евгений с нашими настройками» ·
->      «в D/work/ai_sandbox/tools» — install Silero (v5 ru, voice eugene) into `D:/work/ai_sandbox/tools`, point `voice-soft.mjs` / `settings.local.json` env at it, and
->      NEVER hide a voice call's output: check its exit and the «soft voice:» line. `[OWNER]` 14:46 «ты не предупредил меня голосом ДО ЗАПИСИ» · «и даже не пискнул» —
->      a recording starts only after a voice warning that was HEARD (the tool's output read).
->   2. **Reflections — the owner's direction 14:44:** `[OWNER]` «не, экранное отражение - зло» → ray-only. Variant 5 (RT 1, `ScreenTraces 0`): no streak at the palm, but
->      «иногда в воде скалы то исчезают то появляются». Variant 6 «pure rays» = 5 + `r.Lumen.Reflections.DistantScreenTraces 0` + `SampleSceneColorAtHit 0` — set live
->      14:45 (`_config/set-reflections.sh 6`), his clips of the flicker: scratchpad `owner_flicker_v6_b.mkv` (14:49, HDR on) and `owner_flicker_v6_sdr.mkv` (14:50, HDR
->      off; «увидишь, как на воде над камнем мерцает часть скалы») — the water above the stone at the shore, crop `1080,770 840×240` of 3840×2160: change spikes at frames
->      201–202, 212, 246–247, 261, 339, 346 (mean 7.1, spikes 22–28). Next: look at frames 195–210 of that crop at 60 fps; candidates — Nanite ray-tracing proxies of the
->      rock (`r.RayTracing.Geometry.NaniteProxies`), the surface cache, temporal (`r.Lumen.Reflections.Temporal.*`); A-B on his view. Cost of 6 not measured. The scratchpad
->      is swept after 24 h — copy the two clips into the review folder first if still needed.
->   3. Sprint + bow — `sprint-probe.lua` ready; native `K2_CanSprint` suspected (Locomotion notes); needs a hero under the weight limit and real Shift + RMB.
->   4. Plan 49 — FORK pak-CDO vs Lua-on-spawn for `MaxAttributePointsSpent`; the screen paging mockup for the owner.
->   5. Still open from 2026-11-07 (chronicle entry 2026-11-08 14:52): the two crashes of the agent's probes (read the 23:01 crash folder before any spawn), headshot ×2,
->      beast AI give-up / leash, UI twins of bug 85, bugs 86–88; the owner's queue below.
->   Machine lock `kumm` until 15:32 — release it at the start (`node D:/work/ai_sandbox/_tools/machine-lock.mjs release --who kumm`) if the owner is just playing.
+>   1. Guard owed (EXP-0493): `static-bench.sh` and `water-scenes.sh` refuse to start while another PresentMon / batch runs; after any stop — `ps` and kill to the root shell.
+>   2. Plan 49 criteria 3–5: the attribute screen pages past 20 — a mockup with statuses for the owner first (HOUSE_RULES rule 23); the bar scale `W_Attribute.MaxAttributePointAllotment` 20.
+>   3. Sprint + bow shooting at the same time (KrinikConanLocomotion; native `K2_CanSprint` suspected); the hero's gear — he drowned 2026-11-09 00:29 and respawned naked
+>      (the save is the agent's to use; spawn the bow back by `exec SpawnItem`).
+>   4. The rock flicker in the water — deferred by the owner «на сильно позже»; re-check under the new software reflections before any work.
+>   5. Older open items — the owner's queue of 2026-11-07 below (bug 84, the lore-stone «E Читать», rock / water shader noise, black cave mouths, rain).
+> **Moved verbatim to the chronicle (entry 2026-11-09 02:02 +03:00):** the blocks NOW of 2026-11-08 22:58, DONE / IN FLIGHT of the night and HANDOVER of 2026-11-08 at 14.52.
 > **Moved verbatim to the chronicle (entry 2026-11-08 14:52 +03:00):** SIDE TASK nfsu2, HANDOVER 2026-11-07 23:03, items 0 / 0b / 0c and the NOW block of 2026-11-08.
 > **FIRST NEXT CHAT — the owner's order 2026-11-07 20:50 (verbatim):** `[OWNER]` «сейчас стрелба откоючает спринт. В новом чате начнём с того, что продолжим делать мод
 >   Локомодации. Спринт и стрельбу делаем возможными одновременно.» · «И откобчаем лимит на прокачку атрибутов. Делаем её бесконечной.» · «И она бесконечно будет по фотмулам
