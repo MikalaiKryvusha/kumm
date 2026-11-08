@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0493 · 2026-11-09 · ❌→✅ · #perf #bench #conan #background #measurement #owner-saw-first
+class: a stopped background batch keeps running and corrupts the next measurement
+mechanized: no — to do after the running batch: `static-bench.sh` refuses when a PresentMon process is alive; `water-scenes.sh` refuses when another copy runs
+**Lesson:** the second time in two days (EXP-0491 twin): `TaskStop` on a background Git Bash batch left its script running; three batches ran at once, each capture's
+`--stop_existing_session kumm-pm` cut the others' captures to 7–39 s of 60, and the settings switched under each other — the owner saw «замер некоректен» before I did,
+and I first blamed an occluded game window (refuted: background flights record fully). After ANY stop of a batch: `ps -ef | grep -E "bash|sleep|PresentMon"`, kill by
+MSYS PID up to the root shell, check again — only then start the next batch. A measurement also needs a still stand: NPCs frozen, weather off, 30 s (HOUSE_RULES 11.6b).
+
 ### EXP-0492 · 2026-11-09 · ❌→✅ · #conan #gameplay #text #testcases #owner-saw-first
 class: a gameplay number changed while the player-facing text that states it was left stale
 mechanized: no — a case line: every gameplay change carries a case «the text the player reads about it» (TC_conan_attributes_uncapped_and_dead_shot D3)
