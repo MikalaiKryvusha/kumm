@@ -75,3 +75,10 @@ Route (plan 36 W30): on the target's projectile hit (`BP_CollisionComponent.Take
 `DoHandleHitFeedback` does (a ground trace under the hit, the same size and rotation) and call `SetFadeOut(0, 3)` — section 1 then extends it.
 Needs: the decal size/rotation from the bytecode of `DoHandleHitFeedback`; a stand where arrows hit a target (the hero's shot needs input — a
 background twin: a projectile spawned by the remote).
+
+## Engine.ini — water reflections: software Lumen with reach (2026-11-09 01:48, the owner's pick)
+
+`r.RayTracing.Enable=0`, `r.Lumen.Reflections.ScreenTraces=0`, `r.Lumen.Reflections.DistantScreenTraces=0`, `r.Lumen.TraceDistanceScale=4`, `r.AOGlobalDistanceField.NumClipmaps=6`,
+`r.LumenScene.GlobalSDF.ClipmapExtent=5000` at the top of `[SystemSettings]` — `[OWNER]` 2026-11-09 01:47 «Твой вариант програмных отражений ОХУЕНЕН. самый красивый. Его и берём».
+Read back live after a launch (01:50). Cost on five still river beaches ≈ −1.5 % FPS vs no reflection (rays ≈ −6 %); report `testcases/reports/2026-11-09_conan-water-reflections-five-scenes.md`.
+A measurement after switching a reflection mode for the first time in a game session hitches on shader warm-up — switch once before measuring.

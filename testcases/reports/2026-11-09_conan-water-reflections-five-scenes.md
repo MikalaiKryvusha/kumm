@@ -46,4 +46,10 @@ CSVs `_bench/2026-11-09_01*_ws-*.csv`; batch log `scratchpad/ws2/log.txt`.
 
 ## 7. Verdict
 
-partial — four scenes measured cleanly, delta_falls' rays / sw captures carry hundreds of hitches and need a re-shot; the look is the owner's verdict.
+partial at 01:39 → pass after the delta_falls re-shoot (below).
+
+**Re-shoot 2026-11-09 01:5x (warm game, rays switched on once before the batch):** delta_falls off 68.1 / 68.6 · rays 64.3 / 65.2 (−5.6 %) · sw 66.9 / 67.4 (−1.8 %),
+0 hitches in all three. The first run's 31 fps with hundreds of hitches was the one-time shader warm-up of the first ray-tracing / software-Lumen switch in that
+game session, not the modes' cost. Over five scenes now: rays ≈ −6 %, sw ≈ −1.5 %. **The owner's pick 2026-11-09 01:47: sw** («Твой вариант програмных отражений
+ОХУЕНЕН. самый красивый. Его и берём») — shipped in KrinikConanGraphics' Engine.ini, read back live after a launch: RT 0, ScreenTraces 0, DistantScreenTraces 0,
+TraceDistanceScale 4, NumClipmaps 6, ClipmapExtent 5000. Verdict: pass.
