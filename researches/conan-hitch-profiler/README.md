@@ -84,7 +84,11 @@ loss stated and below 1 %).
   (`ForEachProperty`: also `InvokerTilePriorityBumpDistanceThresholdInTileUnits`, `InvokerTilePriorityBumpIncrease`, `bUseVirtualFilters`) → **quick-win candidate N1:**
   `[/Script/NavigationSystem.RecastNavMesh] bDoFullyAsyncNavDataGathering=True` in the game's Engine.ini before launch (the generator reads it at creation),
   A-B over launches like A1; read back live by `GetPropertyValue`; NPC pathing by eye (tiles may arrive a little later).
-- **Next (a new chat):** (1) N1 above; (2) candidates to A-B on flights AND on a running-hero route:
+- **N1 first try 2026-11-09 20:49–20:53** (front path, the line appended to the game's `Saved/Config/Windows/Engine.ini`, read back live `true`; traced flight
+  `hitch-3-n1`, 8.55 GB): hitches **39 vs 67** of the traced base `hitch-2` (−42 %), FPS 53.1 vs 55.7 (−5 %), worst frame **356 vs 196 ms**, CPU 16.84 vs 15.59 ms.
+  ONE traced flight per side — not a verdict. The ini restored from the backup after (hash `E337D3FD9EE7…`, no `bDoFullyAsyncNavDataGathering` line); NOT shipped.
+  Open: where the navmesh loop went (the game thread's share in `hitch-3-n1`: `hitch-analyze.py` with the PresentMon start of that trace) and what the 356 ms frame is.
+- **Next (a new chat):** (1) N1: the per-thread read of `hitch-3-n1`, then untraced A-B-A-B launches (background path, as A1); (2) candidates to A-B on flights AND on a running-hero route:
   `DataGatheringMode` Instant vs Lazy, async gathering on, fewer simultaneous jobs, a smaller invoker radius (the invokers' `TileGenerationRadius` /
   `TileRemovalRadius` on the hero and NPCs); (3) only then REA + Ghidra (`_tools/node24/rea/rea.cmd`, REA 6.8.0 installed; Ghidra 12.2 in `_tools/ghidra`) on
   `ExportGeometry` and the scan at RVA `0x26EEC30`.

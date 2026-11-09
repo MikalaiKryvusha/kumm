@@ -147,7 +147,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   - REA (`morluto/rea`, the owner's pointer 20:35) installed with a portable Node 24.22.2 (`_tools/node24/rea/rea.cmd`; the global Node 24.15 untouched — pm2
 >     production runs on it); Ghidra 12.2 downloading into `_tools/ghidra`. The MCP registration (`rea-agents setup`) — next chat.
 >   - Voice: Cyrillic words only, «Кей Ю Эм Эм», numbers in words — HOUSE_RULES 13 + hook `voice-cyrillic-gate.mjs` (live from the next chat).
->   - The machine lock `kumm` to 21:15; KCCP waits for «замеры закончены, машина твоя»; the game (launch 20:18, front) still runs.
+>   - **N1 `bDoFullyAsyncNavDataGathering=True`** (`[/Script/NavigationSystem.RecastNavMesh]`, read back true): one traced flight — hitches 39 vs 67, FPS −5 %, worst
+>     356 vs 196 ms → NOT a verdict; the game's ini restored (hash `E337D3FD9EE7…`). FIRST next chat: the per-thread read of `hitch-3-n1`, then untraced A-B-A-B.
+>   - Kept on disk for that: `D:/Games/Conan Exiles Mods/_bench/wpr/2026-11-09_202122_hitch-2.etl` and `…_204955_hitch-3-n1.etl` (8.5 GB each) — delete when N1 closes.
+>   - 20:55: the game closed, the lock released, KCCP told «замеры закончены, машина твоя».
 >   - Bug 90 (camera enters creatures — the game's camera channel ignored by creature bodies) PARKED by the owner 19:52.
 >   - Still queued: A2 `r.CreateShadersOnLoad`, A3 batch `q9-fastalloc-pages.txt`.
 > **HANDOVER 2026-11-09 18:43 +03:00 — chat of 2026-11-09 closed by the owner («этот чат закрываем, в новом продолжим делать Квик Вины по сборке»).** The game is CLOSED, the machine
