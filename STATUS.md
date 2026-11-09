@@ -147,8 +147,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   - REA (`morluto/rea`, the owner's pointer 20:35) installed with a portable Node 24.22.2 (`_tools/node24/rea/rea.cmd`; the global Node 24.15 untouched — pm2
 >     production runs on it); Ghidra 12.2 downloading into `_tools/ghidra`. The MCP registration (`rea-agents setup`) — next chat.
 >   - Voice: Cyrillic words only, «Кей Ю Эм Эм», numbers in words — HOUSE_RULES 13 + hook `voice-cyrillic-gate.mjs` (live from the next chat).
->   - **N1 `bDoFullyAsyncNavDataGathering=True`** (`[/Script/NavigationSystem.RecastNavMesh]`, read back true): one traced flight — hitches 39 vs 67, FPS −5 %, worst
->     356 vs 196 ms → NOT a verdict; the game's ini restored (hash `E337D3FD9EE7…`). FIRST next chat: the per-thread read of `hitch-3-n1`, then untraced A-B-A-B.
+>   - **N1 `bDoFullyAsyncNavDataGathering=True` MEASURED 21:00–21:22** (front, A-B-B-A, report `testcases/reports/2026-11-09_conan-quickwin-n1-async-navmesh.md`):
+>     hitches −48 % (42.5 → 22), worst frame −43 % (≈ 175 → ≈ 97 ms), 1 % low +12 %, FPS same; the navmesh loop gone from the game thread. Told the owner by voice
+>     21:23 — waits for his word to ship (into `_unpacked/KrinikConanGraphics/Engine.ini` as a `[/Script/NavigationSystem.RecastNavMesh]` section) + NPC pathing by eye.
 >   - Kept on disk for that: `D:/Games/Conan Exiles Mods/_bench/wpr/2026-11-09_202122_hitch-2.etl` and `…_204955_hitch-3-n1.etl` (8.5 GB each) — delete when N1 closes.
 >   - 20:55: the game closed, the lock released, KCCP told «замеры закончены, машина твоя».
 >   - Bug 90 (camera enters creatures — the game's camera channel ignored by creature bodies) PARKED by the owner 19:52.
