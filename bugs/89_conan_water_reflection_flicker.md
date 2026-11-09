@@ -126,6 +126,16 @@ then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? 
   shimmering / specular aliasing; which normal terms the ocean preset combines at distance (`UseFluxWaveDistant` off, `UseWaterRoughnessAdvanced`, `MF_DistantLayer`,
   `MF_ImposibleNormalFix`, `DetailWaveUVSwitching`); whether the game ships a permutation with `UseFluxWaveDistant` / `UseWaterRoughnessAdvanced` on (another MI using them).
 
+## Two more probes (2026-11-09 17:51–17:58)
+
+- The game ships FluidFlux permutations `MI_OceanOver_{00W, 0CW, S00, S0W, SCW}` and `MI_OceanOver_Waves_Horizon` (the only one overriding `UseFluxWaveDistant` besides SCW).
+  `SetWaterMaterial(MI_OceanOver_Waves_Horizon)` on `WaterBodyOcean_2`: the metric fell 6.66 → 1.29 — but the WATER VANISHED (the river bed showed): it is a horizon-edge
+  material, not a fix. Restored (`MI_OceanOver_EpicTest` read back). A metric number is never read without the frame.
+- Render targets alive in the world (14): ripples / forces / interaction normal / sand / foam / water distance field / rain / UI — none is the ocean's wave texture, so
+  «a wave render target without mips aliasing far away» is not supported; the wave normals come from ordinary textures (with mips) and the simulation state.
+- Owner 17:49–17:50: «уверне, что вода красиво сделана во многих играх» · «и алгоритмы давно изучены и описаны в papers» → the research (`researches/fluidflux-distant-shimmer/`)
+  also covers Toksvig 2005, LEAN 2010, LEADR 2013, Kaplanyan 2016 specular AA, Bruneton 2010 ocean lighting — and how each could apply without the FluidFlux source.
+
 ## Fix plan
 
 **The owner's target** (`[OWNER]` 2026-11-09 16:59 «какой конфиг даст: - красивая вода и отркжения - без мерцаний - много FPS ?»). Candidates on top of the shipped `sw`
