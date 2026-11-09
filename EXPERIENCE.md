@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0496 · 2026-11-09 · ❌ · #conan #water #fluidflux #restore #look-at-what-you-made #owner-saw-first
+class: a «restored» claim checked by reading a NAME back, not by looking at the screen
+mechanized: no — after any live swap of a material / asset, the restore check is a frame of the same view, compared with the frame before the swap
+**Lesson:** `WaterBodyComponent:SetWaterMaterial(<another FluidFlux MI>)` on `WaterBodyOcean_2` made the river vanish; setting the old MIC back returned its name
+(`WaterMaterial` read `MI_OceanOver_EpicTest`) but NOT the water — the body stayed broken for the session. I reported «вернул родной» twice by the name read-back; the owner
+saw the empty riverbed on his screen first (18:28). Swapping the water body's material live is a one-way door: do it only right before closing the game, and never call it
+restored without a frame. A game restart is the restore.
+
 ### EXP-0495 · 2026-11-09 · ❌→✅ · #conan #ue4ss #lua #crash #stand #streaming
 class: a Lua tool keeps UObject references across world streaming and later writes into freed objects — a native crash `pcall` cannot catch
 mechanized: yes — `ConanExiles/_config/freeze-npcs.lua` stores no references any more: undo re-finds live Characters (`IsValid()`) with `CustomTimeDilation == 0`

@@ -130,11 +130,22 @@ then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? 
 
 - The game ships FluidFlux permutations `MI_OceanOver_{00W, 0CW, S00, S0W, SCW}` and `MI_OceanOver_Waves_Horizon` (the only one overriding `UseFluxWaveDistant` besides SCW).
   `SetWaterMaterial(MI_OceanOver_Waves_Horizon)` on `WaterBodyOcean_2`: the metric fell 6.66 → 1.29 — but the WATER VANISHED (the river bed showed): it is a horizon-edge
-  material, not a fix. Restored (`MI_OceanOver_EpicTest` read back). A metric number is never read without the frame.
+  material, not a fix. ~~Restored (`MI_OceanOver_EpicTest` read back).~~ **CORRECTED 18:30:** only the NAME came back — the water stayed GONE on screen (the owner: «ты решил воду вообще отключить? по сталину: нет воды - нет проблем?» · «ты видишь, что тут нет воды?»); `SetWaterMaterial` at runtime breaks the water body for the session, a game restart restores it. A metric number is never read without the frame.
 - Render targets alive in the world (14): ripples / forces / interaction normal / sand / foam / water distance field / rain / UI — none is the ocean's wave texture, so
   «a wave render target without mips aliasing far away» is not supported; the wave normals come from ordinary textures (with mips) and the simulation state.
 - Owner 17:49–17:50: «уверне, что вода красиво сделана во многих играх» · «и алгоритмы давно изучены и описаны в papers» → the research (`researches/fluidflux-distant-shimmer/`)
   also covers Toksvig 2005, LEAN 2010, LEADR 2013, Kaplanyan 2016 specular AA, Bruneton 2010 ocean lighting — and how each could apply without the FluidFlux source.
+
+## Research levers tried (2026-11-09 18:10–18:27, research `researches/fluidflux-distant-shimmer/README.md`)
+
+- The FluidFlux author documents no distant-aliasing fix; his 2.0 note «TSR antialiasing still causes some issues, so it is better to use TemporalAA». `WaveTextureDecodeNormal`
+  is a divisor — the earlier «0 → 12.65» was a division by zero, not a clue. The Gerstner layer is compiled out (`UseFluxWaveGerstner` off) — `GerstnerNormalScale` could do nothing.
+- At the owner's spot (no denoiser, base 5.76–5.84): `r.AntiAliasingMethod 2` (TAA) **8.85 — worse** · `CoastlineNormalFalloff 3000` 6.12 · `CoastlineNormalRange 100` 5.85 ·
+  `FoamNormalScale 0` 5.44 · `WaterSpecularHorizonDistance 30000` 5.00 (−13 %, weaker far reflection — a look change).
+- Shipped permutations `MI_OceanOver_{00W, 0CW, S00, S0W}` swapped in: 1.34–1.38 — every one makes the water INVISIBLE (frames), so no diagnostic value; and the swap broke
+  the water for the session (EXP-0496).
+- **Status:** no lever on the shipped material reaches the root. The research's conclusion: the real fixes (roughness from normal variance — Toksvig / LEAN; distance fade of the
+  fine normal — Bruneton) need a rewritten water material (no FluidFlux source in the kit). That choice is the owner's.
 
 ## Fix plan
 
