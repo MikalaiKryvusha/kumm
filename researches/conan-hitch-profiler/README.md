@@ -161,6 +161,13 @@ Overlay). The one system-shaped stall — the 356 ms whole-process `WrResource` 
 the game thread (22384) was ON-CPU 92 · 98 · 81 · 98 · 81 % of the frame (83 · 81 · 61 · 72 · 58 ms), READY-but-preempted 0.1 · 0.1 · 0.9 · 0.2 · 0.0 ms,
 waiting 7 · 2 · 13 · 1 · 14 ms. → **The engine, not the system:** the hitches left are the game's own game-thread work; the system took < 1 ms per hitch.
 
+## Future — dig deeper into the streaming-in work (the owner 22:05)
+
+`[OWNER]` 2026-11-09 22:05 «На будущее - покапать ещё дальше в это - "Игровой поток в них считает 81–98 % времени, система отнимает меньше миллисекунды. Это работа
+подгружаемого мира: блюпринты, отражение типов, сборка мусора."» → which actors' Blueprints run in the hitch frames (the BP VM stacks of the light trace → the callers'
+strings; `stat`-free: the `LogStreamableManager` / `LoadErrors` lines at those moments; UE4SS hooks on `BeginPlay` with a time per class), GC passes in the hitch frames
+(`gc.*` cvars, `Collect garbage` timing lines), and REA + Ghidra on the hottest diffuse blocks. Tools: `hitch-trace-light.ps1`, `hitch-hotspots.py`, `hitch-preempt.py`.
+
 ## Gaps
 - Alignment of PresentMon's frame times with xperf's `-range` clock — to be checked on the trace (step 4).
 - Function names inside the exe are not available; a hot exe region can only be named by address range.
