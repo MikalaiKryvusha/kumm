@@ -131,6 +131,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-09 18:54 +03:00 — chat kumm-2d: quick wins tier A, prepared, waiting for the machine.** Case set `testcases/TC_conan_quickwins_tier_a_2026-11-09.md` (S0, S1 pass:
+>   none of the candidates is in the pack; `ini-temp.py add/revert` comes back byte-equal); A3 batch `ConanExiles/_config/bench-batches/q9-fastalloc-pages.txt` (pack `ee340dc`).
+>   KCCP holds the machine lock to 19:45 (ESP32 toolchain download), asked for a quiet window by SendMessage; kumm-5d confirmed quiet. Next: A1 four launches
+>   (base / `niagara.CreateShadersOnLoad=1` × 2, cold `krinik-show` flight each, background path), then A2, then A3 live.
 > **HANDOVER 2026-11-09 18:43 +03:00 — chat of 2026-11-09 closed by the owner («этот чат закрываем, в новом продолжим делать Квик Вины по сборке»).** The game is CLOSED, the machine
 >   is KCCP's (its lock to 18:57; ask KCCP «no builds / no GUI windows» before any measurement or recording — HOUSE_RULES 11.6c). DONE this chat (chronicle entry of this moment):
 >   plan 51 DONE (RAM: still 0 %, flight +2…+8 %; view distance 1.5 shipped, +4.7 %, accepted); bench guards (EXP-0493); `freeze-npcs.lua` crash fix (EXP-0495); A-B video tool
