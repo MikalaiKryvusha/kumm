@@ -1,4 +1,4 @@
-# Plan 51 — Conan: re-measure FPS on the five water beaches after the RAM sub-timing tuning (KAGO, 2026-11-09)
+# Plan 51 — Conan: re-measure FPS on the five water beaches after the RAM sub-timing tuning, then view distance 1.5 (KAGO, 2026-11-09)
 
 > **Created:** 2026-11-09 · written by the KAGO session on the owner's word (KAGO chat 2026-11-09 ~13:3x: «агенту в проект KUMM напиши задание — перемерить у пяти мест воды FPS после твоих достижений по RAM»)
 > **Parent:** `testcases/reports/2026-11-09_conan-water-reflections-five-scenes.md` (the «before» numbers) · KAGO `STATUS.md` → «настройка ПРОЦЕССОРА и памяти», 09.11
@@ -44,6 +44,13 @@ Expected effect (KAGO's estimate, NOT a measurement): about +3–6 % FPS where C
 - [ ] **S3 — measure**: `bash water-scenes.sh <ws> sw delta_falls delta_jungle river_bend desert_arch oasis_falls` (weather stopped + frozen, NPCs within 600 m frozen, 30 s settle, one minute each). **Only `sw`** — the owner: «только для нашей принятой sw рефлекции» (no `off`, no rays).
 - [ ] **S4 — report**: `testcases/reports/2026-11-09_conan-water-fps-after-ram-tuning.md` with the before/after table, Δ % per scene and the five-scene mean, CPU ms per frame if the captures give it; note the in-game time of day (the owner's earlier caveat: different time of day can move the number a few %).
 - [ ] **S5 — tell the owner** by voice (file first — `voice/<stamp>_<meaning>.txt`, the shared rules `D:/work/ai_sandbox/tools/silero_tts/VOICE_RULES.md`, «Николай, это КУММ. …») and in the chat; release the lock.
+
+- [ ] **S6 — view distance 2.0 → 1.5, ONLY AFTER S3–S4** (the owner, KAGO chat 2026-11-09 ~13:4x: «дальность в конане ставим 1.5» · «остальное по конану не трогаем»).
+  The distance keys that stand at 2.0 today (KAGO's read-only recon saw `r.ViewDistanceScale`, `foliage.LODDistanceScale`, `grass.CullDistanceScale` = 2.0) → **1.5** in
+  KUMM's source of truth (KrinikConanGraphics' Engine.ini / the build), deploy, then READ BACK live through ConsoleBridge (`?r.ViewDistanceScale` etc. — the game is known
+  to override some lines, see EXPERIENCE on `foliage.LODDistanceScale`). Nothing else changes: `r.StaticMeshLODDistanceScale` 0.75, reflections, grass density — untouched.
+  If a key turns out not to be at 2.0 or its role is unclear — ask the owner before touching it. Then the same five beaches again (sw only) → a third column «RAM + distance 1.5»,
+  and frames so the owner can judge the look; tell him by voice. Why after: changing the distance before S3 would mix two variables and void the RAM comparison.
 
 ## Risks
 
