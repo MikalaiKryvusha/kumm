@@ -41,6 +41,28 @@ loss stated and below 1 %).
   or `-a cswitch`), to see whether the game thread computes or waits; (b) `ntoskrnl` functions with MS symbols (`-symbols`, `_NT_SYMBOL_PATH`) — page faults /
   file reads vs scheduling; (c) a baseline of normal 16 ms windows in the same pass.
 
+## Run 1, deeper — the 196 ms hitch at flight 99.3 s (2026-11-09 20:3x)
+
+- Thread split (`xperf -a dumper -range` over the window, `SampledProfile` rows by `ThreadID`): thread **29376 has 234 samples in the 236 ms window — busy the whole
+  hitch** (computing, not waiting); every other game thread 34–81. 29376's start address is the exe's thread entry `+0x8988060` (the game thread by its load — to
+  confirm by name: `ThreadName` rundown events are not in the window).
+- 29376 by module: exe 173 · ntoskrnl 25 · UE4SS 13 · nvlddmkm 7 · vcruntime140 6 · ntdll 5. **102 of the 234 samples fall in ONE 256-byte loop** at
+  exe RVA `0x26EEC30 … 0x26EEC67` (image base `0x7FF6950E0000` of the live process; `ConanExiles/_config/disasm-rva.py`, capstone 5.0.7):
+  `subsd`/`mulsd` × 3 + `addsd` = **squared distance of two FVectors (3 doubles)**, `jb` against a threshold, `add rdx, 0x18` (stride 24 bytes = one FVector),
+  `cmp rdx, rax; jne` — a **brute-force linear scan over an array of positions: "is any point within radius R"**, on the game thread, ~100 ms of one frame.
+  A second block `+0x29F6DA0` (22 samples).
+- Which subsystem owns the loop is not known yet (no PDB): its function, its callers (the trace has stacks — `Stack` rows after each sample) and the strings the
+  function and its callers reference name it.
+
+## REA — the tool the owner pointed to (2026-11-09 20:35–20:36)
+`[OWNER]` «найди в ГитХаб инструменты по статической рекомпиляции. Рея там есть, она тебе поможет» · «ты работаешь с бинарными вызовами» · «там почти 400000 звезд»
+→ **`morluto/rea`** (≈ 446 k stars, MIT, npm `rea-agents`): «Reverse engineer anything with agents, from app behavior down to native binaries» — one MCP server +
+CLI; native binaries → pseudocode, assembly, strings, symbols, calls and references through a provider: Hopper, **Ghidra**, IDA or Kuna. Needs Node 24.x ≥ 24.22.1
+(this machine: 24.15.0 global — the owner's pm2 production server runs on it, so a PORTABLE Node in `_tools` for REA, the global one untouched). Java 21 is
+installed (`C:\Program Files\Microsoft\jdk-21.0.11.10-hotspot`); Ghidra is not. Steps: portable Node → `npm i -g rea-agents` into its prefix → Ghidra from
+the NSA GitHub release → `rea` native provider → the function at RVA `0x26EEC30`, its callers, its strings. `npx rea-agents setup` (the MCP for Claude Code) —
+loads at the next session start.
+
 ## Gaps
 - Alignment of PresentMon's frame times with xperf's `-range` clock — to be checked on the trace (step 4).
 - Function names inside the exe are not available; a hot exe region can only be named by address range.
