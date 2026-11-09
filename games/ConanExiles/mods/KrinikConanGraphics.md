@@ -90,4 +90,7 @@ background twin: a projectile spawned by the remote).
 `r.LumenScene.GlobalSDF.ClipmapExtent=5000` at the top of `[SystemSettings]` — `[OWNER]` 2026-11-09 01:47 «Твой вариант програмных отражений ОХУЕНЕН. самый красивый. Его и берём».
 Read back live after a launch (01:50). Cost on five still river beaches ≈ −1.5 % FPS vs no reflection (rays ≈ −6 %); report `testcases/reports/2026-11-09_conan-water-reflections-five-scenes.md`.
 A measurement after switching a reflection mode for the first time in a game session hitches on shader warm-up — switch once before measuring.
+**The owner's look rule for water** (`[OWNER]` 2026-11-09 17:40–17:41 «вблизи резкая вода красивее, из-за четких светов и теней на ней» · «сглаженная вода вблизи -
+мыльная» · «нужно решать проблему мерцания в корне, чтобы без шумодава вода была четкой и не мерцало»): near water stays sharp — no denoiser
+(`r.Water.SingleLayer.Reflection.Denoising` stays 0), no global roughness raise; a fix touches the far water only.
 **Open — bug 89 (2026-11-09 15:45):** the owner sees the water reflection flicker like the palm-leaf shadows did (dark dashes and grain at `river_bend`); cause not yet found.
