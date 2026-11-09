@@ -151,6 +151,16 @@ UE4SS.log: 621 lines (`[KrinikConanCamera]` 322, `[KrinikConanBench]` 178).
   building BPs fixed at the source (HOUSE_RULES rule 8 — read `games/ConanExiles/mods/AlMerayah*.md` first); (3) `[KrinikConanCamera]` 322 lines per flight → quieter
   by default during play (the owner's «mods log in detail» rule — keep detail, move it off the per-frame path).
 
+## Engine or system? (the owner 22:01 «это точно движок? не что-то сторонее в системе или сама система?»)
+
+The game thread is ON-CPU most of each remaining hitch window (N1 trace, the five longest, window = frame + 40 ms pad): 119 of 141 · 98 of 123 · 112 of 117 ·
+106 of 116 · 104 of 115 samples (1 ms each) — it computes its own work; a system cause would leave it OFF-CPU (preempted «Ready», or waiting on I/O). Other
+processes in the windows are small on a 16-thread CPU (WmiPrvSE ≈ 52 ms of CPU in the 236 ms window of the 196 ms hitch, NordVPN, VS Code, Parsec, NVIDIA
+Overlay). The one system-shaped stall — the 356 ms whole-process `WrResource` freeze — appeared only under the heavy disk-writing probe. **Strict proof
+(2026-11-09 22:0x, `ConanExiles/_config/hitch-preempt.py` on the LIGHT trace `light-1-n1`, offset 41 807 936 µs, the five longest hitches, window = the frame itself):**
+the game thread (22384) was ON-CPU 92 · 98 · 81 · 98 · 81 % of the frame (83 · 81 · 61 · 72 · 58 ms), READY-but-preempted 0.1 · 0.1 · 0.9 · 0.2 · 0.0 ms,
+waiting 7 · 2 · 13 · 1 · 14 ms. → **The engine, not the system:** the hitches left are the game's own game-thread work; the system took < 1 ms per hitch.
+
 ## Gaps
 - Alignment of PresentMon's frame times with xperf's `-range` clock — to be checked on the trace (step 4).
 - Function names inside the exe are not available; a hot exe region can only be named by address range.
