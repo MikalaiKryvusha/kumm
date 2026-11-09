@@ -51,8 +51,16 @@ loss stated and below 1 %).
   `subsd`/`mulsd` × 3 + `addsd` = **squared distance of two FVectors (3 doubles)**, `jb` against a threshold, `add rdx, 0x18` (stride 24 bytes = one FVector),
   `cmp rdx, rax; jne` — a **brute-force linear scan over an array of positions: "is any point within radius R"**, on the game thread, ~100 ms of one frame.
   A second block `+0x29F6DA0` (22 samples).
-- Which subsystem owns the loop is not known yet (no PDB): its function, its callers (the trace has stacks — `Stack` rows after each sample) and the strings the
-  function and its callers reference name it.
+- **NAMED (2026-11-09 20:4x) — the AI navigation mesh (Recast) rebuild.** All 101 hot samples share ONE 14-frame call stack (the trace's `Stack` rows); the strings each
+  caller references (`disasm-rva.py` around each return address) name the chain: `FRecastNavMeshGenerator::ProcessTileTasksAndGetUpdatedTiles` → tile build
+  (`CreateHeightField: …`, `URecastNavMeshDataChunk::DetachTiles`) → `UNavigationSystemBase` / `UAISystemBase::InitializeActorsForPlay` → `UNavCollisionBase::ExportGeometry`
+  → the squared-distance loop. The game rebuilds navmesh tiles as the world streams, and the geometry gathering for them runs ON THE GAME THREAD.
+- Thread 29376 is the game thread: it is the busiest thread in a NORMAL 200 ms stretch too (195 of 200 samples), and **47 of those 195 (≈ 24 %) are the same
+  navmesh loop** — on the flight the navmesh rebuild eats about a quarter of the game thread all the time, and a hundred milliseconds in the worst frame.
+- `ai.nav.GNavmeshSynchronousTileGeneration` = 0 (read live 20:39, `LastSetBy: Constructor`) — the tile build itself is async; the game-thread part is the geometry
+  gathering (UE: `ARecastNavMesh::bDoFullyAsyncNavDataGathering`, default false → gathering on the game thread). Levers to check next: that property (config of
+  `/Script/NavigationSystem.RecastNavMesh`), `MaxSimultaneousTileGenerationJobsCount`, the runtime generation mode, `ai.navigation.MaxDirtyAreasCountWhileSuspended`.
+  Caveat: the flight streams the world faster than a running hero — the share in real play is to be measured.
 
 ## REA — the tool the owner pointed to (2026-11-09 20:35–20:36)
 `[OWNER]` «найди в ГитХаб инструменты по статической рекомпиляции. Рея там есть, она тебе поможет» · «ты работаешь с бинарными вызовами» · «там почти 400000 звезд»
