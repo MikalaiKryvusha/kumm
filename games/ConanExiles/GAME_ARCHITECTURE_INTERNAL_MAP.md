@@ -897,6 +897,8 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   ×1.2 (owner's word, `vanilla_patches.py`). Ricochet perk — `Perk_HasRicochet` / `Perk_RicochetArrowsRicochetCount` in the same graph.
 - **The attribute cap** is ONE CDO int, `BP_ProgressionSystem.MaxAttributePointsSpent` = 20 (plan 49 recon); since 2026-11-08 our pak ships 10 000. The bar scale
   `W_Attribute.MaxAttributePointAllotment` = 20 is untouched — past 20 the bar stays full until the paging step.
+  `W_Attribute::UpdateView` (read 2026-11-09, plan 49): bar = `IPB_ProgressBar:InterpolateToPercent(FClamp(FullValue / MaxAttributePointAllotment, 0, 1), 0.2)`, the number
+  `T_Current` = `AttributeValue`; the perk pips come from data — `SharedPerkPips` by each perk's `AttributePointsRequired` (`UpdatePipIcons`, `PostPipsPlacedOnCanvas`).
 - **Shipping an edited VANILLA blueprint** (first time 2026-11-08): the game's chunk by `retoc get <view> <chunk id>`, the same-size edit of the legacy .uexp,
   `splice_chunk` (original zen header + edited .uexp), the chunk added to our container by `unpack-raw` → `chunks/<id>` + `chunk_paths` → `pack-raw`
   (`_config/devkit/vanilla_patches.py`). Check first that no mod ships the path (`mod-overrides.py`).

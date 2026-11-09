@@ -139,6 +139,9 @@ Legend. **Look risk:** none / possible / yes. **Load:** CPU-GT = game thread, CP
 ## 5. Gaps
 
 - Whether Conan's effects are Cascade or Niagara (A4/A5 vs A1) is unknown. A `dumpticks` in a camp (`conan-main-thread` §2B) would show which.
+  Name count 2026-11-09 19:58 (`retoc list --path` over the 36 `pakchunk*-Windows.utoc` of `_paksview-3.0.1`, 93 553 `.uasset` paths): 694 unique `P_*` (the usual
+  Cascade prefix), 250 `NS_*` (Niagara), 16 `PS_*`. *Hypothesis by name, classes not read:* Cascade is still the larger share → A4/A5 are worth a run. Measured
+  meanwhile: A1 (Niagara on load) −31 % flight hitches, `testcases/reports/2026-11-09_conan-quickwins-shaders-on-load.md`.
 - The Conan 3.0.1 values of A1, A2, A3, A4, A5 and B1 were not read in game; the defaults above come from 5.4.4 source.
 - VynnGfx's `.pak` contents and Ultra+ Oblivion's cvar set were not read (packaged). Unpacking them could show lines that this file has not checked.
 - The Digital Foundry test is known through a news report, not the video. Epic's Hitch Hunt talk is known through a news report, not the slides.

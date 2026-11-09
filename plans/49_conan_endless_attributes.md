@@ -69,6 +69,26 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
 - [x] Mockup of the paging (scroll bar vs page switch) on our own frame, statuses on every element — to the owner (review folder 79, 19:41).
       **DECIDED 2026-11-09 19:45 by the owner: B** `[OWNER]` «давай прокрутка каждого ряда отдельно» · «4 варианта этой идеи» → next: four variants of the
       per-row scroll on the same frame, review folder 80.
+      **DECIDED 2026-11-09 19:58 by the owner: B2** `[OWNER]` «В2 хороший, примерно так и будем делать» — arrows ‹ › at both ends of a row past 20, the open window «21–40»
+      over the right end, the wheel over the row pages by 20, every row on its own, the perk column follows the selected row (folder 80, `02_B2_strelki.webp`).
+- [ ] Recon for B2: how `W_Attribute` draws the bar and its pips (`UpdateView`, `MaxAttributePointAllotment`), where the arrows and the window label can live
+      (a kit edit of `W_Attribute` vs a Lua overlay — HOUSE_RULES rule 8 / rule 24: native first), how the perk column (`W_AttributeInfo`) is filled per page.
+      **Read 2026-11-09 20:01** (`retoc-5.8 to-legacy --version UE5_7 --filter UI/Inventory/Attributes` of `_paksview-3.0.1` → `UAssetGUI tojson VER_UE5_8` →
+      `uaj exports <asset> VER_UE5_8` → `kismet-trace.py`; 14 assets):
+      - `W_Attribute::UpdateView` (594 bytes): `T_Current:SetText(Conv_IntToText(AttributeValue))`; the bar `IPB_ProgressBar:InterpolateToPercent(FClamp(FullValue /
+        MaxAttributePointAllotment, 0, 1), 0.2)`; the corruption bar `IPB_CorruptionBar` the same with `CorruptionValue`. → the page is ONE shift in this formula:
+        `(FullValue − Page × 20) / 20` — a native edit of the widget, not a post-hook re-set (rule 24).
+      - The perk pips come from data: `SharedPerkPips` keyed by each perk's `AttributePointsRequired` (ubergraph, `UpdatePipIcons`, `PostPipsPlacedOnCanvas`) — a page shows
+        the pips whose `AttributePointsRequired` fall in its window; future perks past 20 appear by data (the owner's 2026-11-07 22:03 word).
+      - Functions of the row: `UpdateView`, `UpdateAttributeView`, `UpdateModifiers`, `UpdatePipIcons`, `PostPipsPlacedOnCanvas`, `Select` / `Deselect`, `OnMouseEnter` /
+        `OnMouseLeave`, `IncreaseAttribute`, `GetFullAttributeValue`, `GetInvestedPoints`, the buttons `LevelAttributeButton`, `LevelCorruptionButton`.
+      - The row's parent is the NATIVE `AttributeEntry` (`/Script/ConanSandbox`); the pips are native `AttributePerkPip` on a `CanvasPanel`, placed by C++ — no position
+        maths in the blueprint; `W_AttributeProgressBar` is a bare `InterpolatedProgressBar` (no BP functions). The native code then calls the BP event
+        `PostPipsPlacedOnCanvas` (→ the ubergraph) — the game's own hook point after placement, the native place to re-place the pips of a page (rule 24 holds: it is the
+        game's event, not a timer re-set). The window `W_Attributes` relays it (`AttributePostPipsPlacedOnCanvas`) and owns `AttributeViewUpdateRequested`.
+      Next: read how C++ places a pip (the X from `AttributePointsRequired` and the canvas width — a live read of the pip slots' positions at 20 vs a perk at 5), then the
+      build route: a kit edit of `W_Attribute` (arrows · window label · `Page` var · `UpdateView` shift · pips re-placed in `PostPipsPlacedOnCanvas` · the wheel in
+      `OnMouseWheel`), the perk column page in `W_AttributeInfo`.
       Spec (`[AI]`, 2026-11-09 19:06): base — a 4K frame of «Хар-ки» opened by the remote (`ActivateModule(FName('Attributes'))`) with an attribute past 20; two variants
       on the same frame, labelled A and B, into one flat review folder (HOUSE_RULES 11.6d):
       A «страницы шкалы» — under each row's scale a switch «‹ 1–20 · 21–40 ›», the current page lit; the perk column follows the page of the selected row.
