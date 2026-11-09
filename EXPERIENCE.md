@@ -91,6 +91,27 @@
 
 ## Entries
 
+### EXP-0500 · 2026-11-10 · ❌→✅ · #review #judge #guard #regex #heuristic #process
+class: a pattern guard grown by review rounds turns into whack-a-mole
+mechanized: yes — `tools/hooks/guide-no-raw-voice.mjs` judges BY DIFFERENCE (new lines only), the GAP in its header lists the accepted misses
+**Lesson:** six independent judge rounds on one guard: rounds 1–3 found real defects (an exemption block that an injected marker pair switched off), rounds 4–6 found
+ever narrower regex shapes of an English quote. Two moves stopped the churn: (1) judging by difference (a line that existed before is not a finding) removed the
+creed exemption and with it a whole class of bypasses — fewer entities, not more patterns; (2) splitting the threat: the reliable part (any Cyrillic, any non-UTF-8 write)
+is caught fully, the heuristic part (English quotes) is bounded and its misses are WRITTEN in the GAP, and the judge's prompt says "the GAP is not a finding". The
+judge must also be told the threat model (the agent pasting, not an adversary) or it hunts adversarial shapes forever. Round 6 still found a real one: a cp1251 write
+from PowerShell `Add-Content` reads as U+FFFD and passed — decode the bytes with a fatal UTF-8 decoder.
+**Trigger:** a guard or linter whose review rounds keep returning findings of the same family.
+
+### EXP-0499 · 2026-11-10 · ❌→✅ · #kaif #canon #rulebook #owner-voice
+class: the rulebook turns into a dump of the owner's raw messages
+mechanized: yes — `tools/hooks/guide-no-raw-voice.mjs` (PreToolUse + pre-commit), KAIF #196
+**Lesson:** "the rulebook takes the rule, not the quote" stood in the canon since KAIF 2.8 and I still pasted seven of the owner's chat lines into a new rule
+(2026-11-10 01:43); AGENT_GUIDE had 32 such lines, HOUSE_RULES 66 — a rule the agent knows and breaks needs a guard. The owner's words go to a PROJECT_HISTORY.md
+entry FIRST (through a file, never argv), the rule stays as an English statement + `[OWNER] <date> · <where the verbatim lives>`; Russian DATA (UI strings, terms,
+tool output) carries `<!-- verbatim-ok: <reason> -->`. A second reviewer comparing old vs new text found data strings I had translated away (scan patterns, banned
+headings) — removing quotes must not remove data.
+**Trigger:** writing an owner's instruction into AGENT_GUIDE.md, HOUSE_RULES.md or CLAUDE.md.
+
 ### EXP-0498 · 2026-11-09 · ✅ · #perf #profiler #etw #xperf #hitch #conan #no-pdb
 class: naming a hitch of a Shipping exe with no PDB and no Unreal Insights
 mechanized: yes — `ConanExiles/_config/hitch-trace-light.ps1` (in-memory ring probe) · `hitch-analyze.py` · `hitch-hotspots.py` · `hitch-preempt.py` · `disasm-rva.py`

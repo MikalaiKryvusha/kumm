@@ -50,4 +50,21 @@ if ! node tools/check-perf-world.mjs --staged >&2; then
   exit 1
 fi
 
+# Четвёртый гейт (2026-11-10, KAIF #196): в своде правил (AGENT_GUIDE.md, HOUSE_RULES.md, CLAUDE.md) нет сырого голоса владельца —
+# правило, а не цитата. Судит новые строки против HEAD. Тот же страж стоит хуком PreToolUse на Write/Edit; здесь он ловит то, что
+# пришло мимо них (оболочка, скрипт обновления KAIF). Код 3 — поломка самого стража, не находка.
+set +e
+if [ -f tools/hooks/guide-no-raw-voice.mjs ]; then node tools/hooks/guide-no-raw-voice.mjs --staged >&2; rc=$?; else echo "guide-no-raw-voice.mjs not found" >&2; rc=3; fi
+set -e
+if [ "$rc" -eq 3 ]; then
+  echo "" >&2
+  echo "КОММИТ ОСТАНОВЛЕН: страж свода правил сломался (строка выше) — это поломка стража, не находка." >&2
+  exit 1
+elif [ "$rc" -ne 0 ]; then
+  echo "" >&2
+  echo "КОММИТ ОСТАНОВЛЕН: в своде правил дословные слова владельца или файл не в UTF-8 (строки выше)." >&2
+  echo "  правило — утверждением по-английски + строка-адрес [OWNER] <дата> · <где слова>; слова — в PROJECT_HISTORY.md" >&2
+  exit 1
+fi
+
 exit 0

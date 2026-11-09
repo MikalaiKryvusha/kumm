@@ -3,6 +3,478 @@
 
 
 
+## 2026-11-10 01:55 +03:00 — HOUSE_RULES.md and CLAUDE.md cleaned of the owner's raw voice (the twins of the AGENT_GUIDE clean-up): the passages, moved here verbatim
+
+> Why: the same order and the same class as the entry below (2026-11-10 01:52, KAIF #196): a rulebook carries rules as statements with a provenance line,
+> the owner's verbatim words live in the chronicle. HOUSE_RULES rule 3 already said so («No rationale, no history, no quotes»), and the file still held 66 lines
+> of his words. Below — §1–§3 of HOUSE_RULES.md and the budget line of CLAUDE.md exactly as they stood before the clean-up.
+
+### HOUSE_RULES.md lines 1–245 (working tree after commit dfbde1e)
+
+````text
+# House rules — KUMM
+
+> The project's local rules (tier 4 of the document taxonomy, `AGENT_GUIDE.md`). A rule is a statement: the agent trusts it and follows it.
+> The history of the rules and the owner's verbatim words live in `PROJECT_HISTORY.md`. Stands, routes and tools — `HOUSE_RULES_REFERENCE.md`:
+> open it by search when a task touches that place.
+
+## 1. Rules (The owner's standing rules)
+
+1. **The agent talks to the owner in Russian in chat and writes all project and KAIF documentation in English.** The owner's verbatim
+   quotes stay Russian; interviews (the owner answers inside them) stay Russian.
+   1a. **Anything the agent wants the owner to READ comes as a Russian document** — a reading copy written from the meaning of the English source (never a
+       link to the English file), in `<the source's folder>/<NAME>_ru.md`, its header naming the source and the moment; shown to him per the show rule.
+       (`[OWNER]` 2026-11-06 09:51 «я читаю на русском языке. Если хочешь, чтобы я что-то почитал - мне нужен RU док от тебя».)
+2. **Knowledge is written down the moment it is understood, in the same move.** New — a new line; changed — an edit in place; outdated —
+   deleted. Where: vision — `GOAL.md`; path — `MASTER_PLAN.md`; a task — its plan in `plans/`; a rule — this file; a stand, route or tool —
+   `HOUSE_RULES_REFERENCE.md`; the engine — the project maps; a game — `games/<Game>/GAME_*_MAP.md`; a mod of a build — its ONE notes file
+   `games/<Game>/mods/<Mod>.md` (what it does · assets and functions with numbers · our edits · how to look inside · open), the maps keep a pointer;
+   recon — `researches/`. Before asking the owner about a subsystem, read its map line; no line — write it first.
+   Work on a mod starts by reading its notes, once per session, in its own tool call; the knowledge-hook refuses the work until then
+   (`[OWNER]` 2026-10-30 ≈14:25 · verbatim in the hook header and KAIF #186).
+3. **A rule is written as a statement, and only genuinely important and critical instructions are written.** What to do — in steps. No
+   rationale, no history, no quotes: a rule's history and the owner's words go to `PROJECT_HISTORY.md`.
+4. **A smoke run of anything new is recorded on video; UI — always.** Clip — `bash SvarogsDream/tools/rec_clip.sh <name> <seconds>
+   "<remote command>"…` (turn desktop HDR off before recording — `powershell -File SvarogsDream/tools/hdr.ps1 off`). Watch the clip before
+   the verdict: the frame sheet next to the clip; transitions — `ffmpeg -ss <s> -t <s> -vf fps=10,scale=960:-1,tile=…`; what is seen — one
+   line in the case. A UI case without a watched clip does not get `pass`.
+5. **At most two helpers (Agent, workflow) at a time.** Cut big work into pieces and queue them.
+6. **Saves during development are the agent's to use freely.** The owner does not play the Conan build for progress: load, overwrite, break and
+   delete the game save and the mods' saves (`Saved/Game_0.db`, `Saved/SaveGames/*.sav`, `Saved/KrinikSettings.lua`) as a test needs — no copy before a run,
+   no restore after it, no question to the owner. A save that broke world entry is a stand to repair (`_config/save-restore.sh` from any copy).
+   (`[OWNER]` 2026-11-01 08:47 «обсолютно поебать. Я не играю на прохождение, мы делаем сборку» · «на время разработки можно делать что угодно с ними».)
+7. **Mods of any game respect the CPU.** Work on the game thread — on a game event, never by timer polling; scene searches (`FindAllOf`,
+   `FindFirstOf`, widget walks) — no more often than an event and never in a per-frame loop. A mod measures itself: `os.clock` around its
+   handlers, the sum and the worst call to its log once a minute. Accepting an edit — an A-B-A flight: median `MsCPUBusy` and stutters no
+   worse than without the mod. The budget — `MASTER_PLAN.md`.
+8. **Other authors' mods are fixed natively.** The mod has its own setting — change its default value in our shipment; before any other way, look for that
+   setting first (the owner's remarks on a mod's widget — the XP line of Hosav, the damage meter — start with the mod's own options) (`[OWNER]` 2026-11-02 09:01
+   «если есть уже настройки по тем вещам, о которых я говорю - тогда через них настраиваем, и это становится значениями по-умолчанию в поставке сборки»). Otherwise — edit its
+   pak directly (`retoc to-legacy` → UAssetGUI JSON → edit → `retoc to-zen`, techniques in `ConanExiles/_config/devkit/build-level-mod.py`),
+   by a script next to the pak, so it can be re-applied after a mod update; strings in bytecode — the same way. An edited mod is marked
+   **KRINIK MODIFIED** in the shipment (storefront, mod list, its `modpack.json` entry). A Lua UI fix — only when the asset will not yield:
+   once, no polling, with an A-B measurement.
+9. **A crash-report window is removed at once.** The game crashed in my run → `Get-Process CrashReportClient | Select Id, StartTime,
+   MainWindowTitle` → `Stop-Process -Id <PID>` (by PID, never by name; a hung game — also by PID). The run report carries «окно отчёта о
+   падении закрыто, PID …».
+10. **No effort estimates in epics and plans — neither hours nor chats.** Plans carry steps, gates and acceptance, never a duration. (`[OWNER]` 2026-11-01 13:36
+    «убрать из эпиков и планов часы оценок. Я знаю, что вы оцениваете неверно, и на самом деле быстрее все делаете. Убрать часы, чтобы они вас не обманывали» —
+    supersedes «work is estimated in hours» of 2026-10-2x.)
+11. **The agent prepares its own test stand, free of interference.**
+    1. Before the first case — a "stand" step in the case file: place, creature, its behaviour, weapon, time of day, weather — and how each
+       is set up by the remote.
+    2. The place — no enemies, companions or construction nearby (teleport by the remote).
+    3. The hero — fitted to the case: god mode on and off, arrows and gear spawned by the remote, bows swapped, stamina by the remote.
+    4. A creature — spawned, of the right class at the right distance; frozen, made peaceful or killed as the case needs. A target without
+       a creature — a wall or a rock in front of the hero.
+    5. The case's action — done by the agent itself.
+    5a. An object the case needs (a stone or a stick to pick up, a chest, a resource node) — SPAWNED by the remote in front of the hero, never searched
+        for in the world and never asked of the owner. (`[OWNER]` 2026-11-01 08:45 «СОЗДАВАЙ СЕБЕ САМ ТЕСТОВЫЕ УСЛОВИЯ!!! ЗАСПАВНИ КАМЕНЬ!!» — after four
+        probes spent searching foliage for a stone, case R2.)
+    6. Interference (an enemy hits the hero, combat noise, the camera drifted) — remove it and repeat; a case run under interference does
+       not count.
+    6a. Conan: for the WHOLE run the stand is kept clean by `bash ConanExiles/_config/stand-keeper.sh` (god on + an in-game timer: every living humanoid
+        and beast within 600 m killed every 20 s; `stand-keeper.sh last` · `off`), the camera held by `fixed-cam.lua` (the idle camera orbits after ≈30 s),
+        the hour set before each clip — 11:00 for the palm-shadow stand. Started BEFORE the first clip; a one-off clean-up is not a stand.
+        (`[OWNER]` 2026-11-07 16:45–16:47 «Что твоего героя пиздят со всех сторон!» · «и камера вращается от неактивности!» · «600 м!!!!» · «каждые 20 секунд!!!» ·
+        «и 11 утра ставить!»)
+    6b. **A frame-time MEASUREMENT gets a still scene, not a clean-by-killing one:** the stand keeper's kill timer is OFF during any capture; before each capture
+        the NPCs within 600 m are FROZEN (`ConanExiles/_config/freeze-npcs.lua`, no kill — a kill pass makes the game stutter), the weather is stopped and frozen
+        (`BP_SC_WeatherHandler_C:ForceStopAllWeathers()` + `FreezeWeather()` — rain spreads the numbers), then 30 s for the game to settle; only then the capture.
+        (`[OWNER]` 2026-11-09 00:45–00:47 «замер некоректен» · «мобов нужно убивать ДО замера в радиусе 600 метров» · «и дать игре обработать это - секунл 30» ·
+        «там всё сильно тормозит, когда убиваешь мобов - нельзя в это время замерять» · «или просто не убивай, а всех замораживай на месте» · «и дождь нужно отключать».)
+    6c. **Before a measurement series the machine is taken from the neighbour sessions:** `ListAgents` → every peer session gets a SendMessage «no builds, compiles,
+        tests, installs, downloads or heavy CPU / GPU / disk work until I hand the machine back»; they wait with no exception and open no GUI windows while a screen recording runs (2026-11-09 17:19: a neighbour simulator window landed in an A-B video); at the end of the series each gets
+        «замеры закончены, машина твоя». While the quiet window is not yet given, do the work that needs no clean machine (recon from files, code, documents, cases)
+        — never sit idle waiting. (`[OWNER]` 2026-11-09 18:59 «ты пока что можешь делать то, что не требует чистых ресурсов».) (`[OWNER]` 2026-11-09 15:24–15:25 «соседнего агента KCCP проси ничего не билдить, когда ты будешь замерять» · «чтобы он не
+        грузил машину» · «пусть ждёт, пока ты ему не отдашь машину».)
+    6e. **The probe must not change the circuit.** (1) Before / after numbers come from the LIGHTEST instrument (PresentMon only), the same on both sides, A-B-B-A —
+        a differential measurement; (2) a profiler (ETW / xperf) only NAMES a hitch, on its own flight, and its numbers are never compared with untraced ones (its own
+        cost, measured 2026-11-09: traced base 67 hitches / 55.7 FPS vs untraced 35–59 / 58–59); (3) the profiler writes into memory or another disk, never the game's
+        disk, during the flight; (4) nothing of ours runs inside the measured window — no voice, no remote calls, no neighbour work; (5) every lightening of the probe is
+        proven by one control pair. (`[OWNER]` 2026-11-09 21:26–21:27 «давай подумаем. как замерять аккуратнее» · «мы как инженеры должны подумать, как нашим "щупом
+        осцилографа не внести изменения в измеряемую схему"».)
+    6d. **A graphics option is compared by an A-B VIDEO:** the same still view, 3 s option A, 3 s option B, switched 5 times in a row, the current option labelled on
+        the video; the game in front, desktop HDR off for the recording. A frame series or an animation does not replace it. **Frames for a comparison go into ONE flat
+        folder**, named so the pair stands next to each other (`01_river_bend_A.webp`, `01_river_bend_B.webp`) — the owner flips them with the mouse wheel; no subfolders.
+        (`[OWNER]` 2026-11-09 17:11–17:13 «нужна не анимация, а видео» · «2 секунды одна опция. потом 2 - другая.» · «И так переключать раз 5. АБ сравнение» · 17:14 «а лучше 3 секунды» · «только так
+        идеально можно графику тестить» · «поэтому я тебя прошу кадры в одну папку складывать - я их переключаю колесом мыши быстро».)
+    7. How the stand was set up — one line in the game map.
+12. **The agent installs a CLI tool it needs by itself** (`winget`, `pip install --user`, `npm i -g`, `cargo install`), checks it by its
+    version and writes one line into the reference.
+13. **While the game is open, the run is narrated by voice — in general, not every step.** At a run's start and when its purpose changes, one phrase: what is
+    tested and what will look different from the usual build (a mod part switched off for a control case, a stand teleport, killed NPCs). The owner sees
+    the game on his screen even on the background path. **The phrase is Cyrillic words only — no Latin letter, no digit, no unit sign: the project is said as
+    «Николай, это Кей Ю Эм Эм»; numbers and units in Russian words («тридцать один процент», «пятьдесят миллисекунд»); never «KUMM», «KAIF», «A-B», a cvar, «31 %»,
+    «140 мс».** The hook `tools/hooks/voice-cyrillic-gate.mjs` (PreToolUse, Bash | PowerShell) refuses a voice call whose phrase file holds any of them.
+    (`[OWNER]` 2026-11-09 20:15–20:16 «тебе каиф не говорил, что в речи писать только кирилицей?» · «никаких латинских символом» · «если нужно сказать KUMM, то это
+    будет Кей Ю Эм Эм» · «цифры все словами русскими, и единицы измерения - все словами на кирилице» — after «Николай, это KUMM».) **Voice — file first:** (1) Write the phrase into `voice/<YYYY-MM-DD_HH-MM-SS>_<meaning>.txt` (Latin
+    meaning, the folder is committed — the project's history); (2) speak it: `node .kaif/tools/contour/voice-soft.mjs --file voice/<…>.txt --play` with the env of
+    `.claude/settings.local.json` (`KAIF_VOICE_RENDER` = the Silero v5 eugene renderer in `D:/work/ai_sandbox/tools/silero_tts`, its README; beeps 2.5) — in a shell
+    without that env, export the three `KAIF_VOICE_*` lines first. (3) Read its `voice log:` and `voice-soft:` lines and the exit code; a recording starts only after
+    they were read. The tool is KAIF 2.10's (decision №156), taken ahead of the update; the timbre is the owner's tuned one. (`[OWNER]` 2026-11-08 23:09 «посмори новое
+    требование по голову в WIP 2.10 KAIF - писать в txt командой записи, фалйы именовать и складировать» · 23:10 «твой голос оставь, мы его настроили» · «да, вот правильно».)
+    (`[OWNER]` 2026-11-03 19:26–19:27 «ты хоть предупреждай голосом» · «чтобы я не триггерился» · «не понимая, что ты тестируешь» · «я же вижу на экране игру» ·
+    «каждый шаг не нужно» · «хотя бы в общем» — after a control run with KrinikConanUI's Lua out showed him the old UI unannounced.)
+14. **In chat the owner is told the MEANING, never a bare number.** Every bug, plan, item, case or interview is named by what the player sees
+    or what breaks («камера дрожит, когда герой стоит»), in Russian words. A number may follow in parentheses only for lookup. Before sending,
+    scan the reply for «баг NN», «п. NN», «план NN», «#NNN», case codes (F4, H2) standing without their meaning — rewrite each.
+15. **The agent cleans up after itself on the owner's machine.** Working files live in the session scratchpad. When a piece of work is
+    done (committed, shipped), delete its heavy working files at once, file by file: unpacks, copies of paks, frames, builds. What a later
+    chat needs goes into a repository (STATUS, `plans/`, `researches/`, the pack), never into a scratchpad — scratchpads of sessions idle
+    for 24 h are swept at session start by `tools/hooks/scratch-sweep.mjs`. A work tree outside the scratchpad (`_paksview-*`, `_text-extract-*`)
+    is named in STATUS with its size and the task that needs it; when the task closes, the tree goes.
+16. **A game is worked with in two ways — in front and in the background; the owner picks one at the moment, the agent masters both.**
+    1. Launch by the path the owner named last: Conan — `launch-fg.ps1` (in front) or `launch-bg.ps1` (background), `HOUSE_RULES_REFERENCE.md` §6.
+    2. The two paths differ ONLY in whether the owner sees the game on his screen. Every instrument and every kind of work — remote calls, frames,
+       world entry, tests — works on both; an instrument that needs focus (real mouse, real keys) gets a background twin, never a silent switch of the path.
+    3. Before a launch — no game of ours already running (the scripts refuse with exit 2 and the PID).
+    (`[OWNER]` 2026-10-30 ≈15:3x · verbatim in `PROJECT_HISTORY.md`, entry «the owner's words behind HOUSE_RULES §1 rule 16».)
+
+16a. **The machine is the agent's for the Conan build — the game may be in FRONT at any time** (screen capture, real input, measurements): no slot to agree, no question. (`[OWNER]` 2026-11-01 13:40 «в любое время можешь игру на передний план выводить. Ты еще не понял, что последних нескольок дней комп ПОЛНСТЬЮ ТВОЙ!!!! ТАк как мне нужна сборка, а ты телишься блять!»)
+
+17. **Everything we put on a screen — mod UI, installer, launcher, any window — works on every main 16:9 resolution: 720p, 1080p, 2K, 4K.**
+    1. Readable at each: text never smaller than the game's or Windows' own text at that size.
+    2. A Windows window respects the Windows display scale (per-monitor DPI aware; the owner's TV runs 300 %) and is never bitmap-stretched.
+    3. Images come from sources large enough for 4K at that scale, or vector — never pixelated.
+    4. Accepted by frames at all four resolutions, looked at by eye.
+    (`[OWNER]` 2026-10-09 for Svarog · 2026-10-31 09:31 for the build's installer · 09:32 for every mod of the build that brings or changes UI:
+    «все наши моды в сборке, которые приносят или меняют UI, должны уважительно масштабироваться с разрешением игры в стандартном ряду 16 к 9» ·
+    verbatim in `MASTER_PLAN.md`, `ideas/22_conan_build_gui_installer.md`, plan 35 release gate.)
+18. **File and folder names we create — English letters, digits and underscores only: no spaces, no Cyrillic, no hyphens.** `collect_report.cmd`,
+    `uninstall_krinik_build.cmd`, `_kumm_backup`. The text INSIDE a file stays Russian where the player reads it. Older names are renamed when touched;
+    existing hyphenated names of tools and mods (`Deploy-ModPack.ps1`, `ConanCameraControl`) wait for the owner's word.
+    (`[OWNER]` 2026-10-31 16:09 «никаких пробелов и кириллицы в названиях файлов и папок!!!» · «только английский язык и нижние подчеркивания».)
+20. **A fix updates every place that describes the fixed thing — in the same commit.** The user guide (`ConanExiles/docs/guide/guide-3.0.1.html`), bug 64's
+    item, plan 36's W row, the mod's notes: a fix that leaves a stale line anywhere is not done. Nothing is copied from an older document without checking it
+    against bug 64 / plan 36 first. (`[OWNER]` 2026-10-31 17:49 «ОНО УЖЕ НАХУЙ ВСЕ ПОЧИНЕНО ТОБОЮ ЖЕ БЛЯТЬ В ПРОШЛЫХ СЕССИЯХ!!» · «КАКОГО ХУЯ ТЫ НЕ
+    АКТУАЛИЗИРУЕШЬ СВОИ ЗНАНИЯ БЛЯТЬ» · «ПО ТОМУ ЧТО ТЫ ЖЕ ЧИНИШЬ».)
+21. **In every Russian text of the build the slider control is «шкала»** («Текущая шкала», «на шкале», «своими шкалами») — never «ползунок» or «слайдер»;
+    the owner's verbatim quotes keep their own word. (`[OWNER]` 2026-10-31 19:08 «шкала» · «везде так пишем».) Applied: `Game.locres` 4 entries
+    (`locres-set-tr.py`), `ru_table.lua`, the settings-hub mockups; the SOURCE `dm-fish-ru.tsv` (and the table `dm-fish-ru.md` built from it) only on
+    2026-10-31 23:2x — until then a full locres rebuild brought «ползунок» back (pack `ee13fcb`).
+22. **The author's links (`author_links.txt`) are a SECTION OF LINKS — never «contacts», never a list under «feedback» or «куда писать».** In the README, the
+    guide and the launcher they stand under their own heading («Ссылки» / «Links», «Автор сборки и ссылки») with no sentence that calls them addresses for
+    reports; one source file feeds all three places (`build-docs.py`, `_config/public_release/mods-table.mjs`). (`[OWNER]` 2026-10-31 21:33 «ЭТО НЕ КОНТАКТЫ,
+    ПОВТОРЯЮ НАХУЙ ТЕБЕ ЕЩЕ РАЗ!» · «это просто раздел с ссылками»; earlier 11:20 «сделаешь раздел со ссылками автора».)
+23. **A mockup never passes a wish for a working thing.** Every row, button and option on a mockup the owner sees carries its status on the mockup itself:
+    «работает» (code exists and was seen in game) · «нет механики — будет сделано» · «нет механики — предложение». Building a window from an accepted mockup, the
+    report lists every mockup element NOT carried into the game and why — nothing is dropped silently. (`[OWNER]` 2026-11-01 13:25 «то есть, ты мне макеты
+    показываешь такие, которые не сделаны?» — the vignette rows of the 10-31 mockups had no mechanics and were silently left out of the game window; plan 39 D5.)
+24. **A fix removes the CAUSE — no compensating patches.** Before writing a fix of a game behaviour:
+    1. Run the control case: the same action with our mod's part switched off (Lua `enabled.txt` moved out, or the pak removed) — find who makes the defect.
+    2. Ours → fix the place in our code that makes it. The game's → fix it in the game's own data or function natively (rule 8), at the source.
+    3. A correction applied AFTER the game did its work (move, re-set, re-colour by a timer), tuned by numbers per surface or per creature, is a crutch:
+       it is not shipped; an existing one is listed and replaced by the cause fix.
+    (`[OWNER]` 2026-11-01 15:07–15:08 «странно, что мы что-то куда-то досылаем» · «почему выглядит как костыль?» · «лучше бы чинить качественно, а не костылями» ·
+    «не люблю костыли» · «это временные решения, которые потом еще что-то ломают» · «нужно сразу чинить качественно и правильно».)
+25. **The build's install, uninstall and the launcher's buttons are tested on a COPY of the owner's clean game** — the original
+    the only Conan game folder in `D:\Instals\` (its name stays out of this public repository) (59 GB) is never touched; the copy is `D:\Games\Conan_Exiles_3_0_1_clean_test` (robocopy);
+    never on the working game `D:\Games\Conan Exiles 3.0.1`. **Since 2026-11-07 ≈20:00 the original in `D:\Instals\` is gone (the owner freed D:) — the copy is the
+    ONLY clean Conan: no test runs on it directly any more; a test copies it first (59 GB free needed) or waits for the owner's word.** (`[OWNER]` 2026-11-02 08:37 «ты тестировал установку и удаления сборки на чистой версии? я же тебе
+    нашёл чистую версию - её копируй, и на копии нужно тестировать» · «D installs»; first word 2026-11-01 13:41, plan 40.7.)
+26. **The launcher: «Играть» starts the game and closes the launcher; «Удалить сборку» keeps the launcher open** (it swaps back to «Установить сборку» when
+    the uninstaller's window closes). (`[OWNER]` 2026-11-02 08:35 «когда игра запущена через лаунчер по ИГРАТЬ - лаунчер нужно закрывать, чтобы не ел ресурсы
+    ПК» · 08:36 «в отличие от «Удалить» - удалить не должна закрывать лаунчер».)
+27. **The mods of a build are consistent with each other — reconciled by `researches/mod-reconciliation/GUIDE.md`.**
+    1. Anything two mods share (tables, code, assets, resources, mechanics — and every other kind; the list is open) is an overlap: it is judged by reading both
+       sides against the game's original and gets one of four outcomes — identical · merge different parts · the owner chooses on the same part · separate one
+       name used for two different things.
+    2. The work of reconciling mods starts by reading the guide in full; the hook `mod-reconciliation-gate` (`tools/hooks/style-gate.mjs`) refuses the tools and
+       the findings files until it is read within the hour.
+    (`[OWNER]` 2026-11-06 09:33–09:36 — verbatim in the guide's header.)
+
+28. **A crash-check («долгий прогон на вылеты») is active GAMEPLAY, never fly-throughs.** Fly-throughs measure frames only; a crash check walks the
+    game's systems: combat, gathering, crafting, building, thralls, inventory and the hub, eating and drinking, swimming and climbing, travel across areas,
+    loading screens (death and respawn, dungeons, waystones), day and night, saving. The order, places and parameters change from run to run (the
+    pesticide paradox, TESTING_FRAMEWORK principle 5); memory, FPS, crashes and Lua errors are read at checkpoints. Plan `plans/47_conan_gameplay_soak.md`.
+    (`[OWNER]` 2026-11-06 20:35 «Часовой прогон на вылеты - это активное взаимодействие с миром, геймплей, а не твои демо летания» · «Твои демо летания, это
+    "парадокс пестицида"».)
+
+29. **A run checks that the game is alive at every step, and a series stops on a dead game.**
+    1. `ConanExiles/_config/pult.sh` refuses a command with exit 4 «ИГРА НЕ РАБОТАЕТ» when the game process is gone or a crash-report window is open.
+    2. Every loop of remote commands ends on a non-zero exit (`P … || break`); a background launch is followed by a check of the process before the next step.
+    3. A crash in the agent's run: close the report window by PID (rule 9), read `UE4SS.log` up to the crash, write the cause before the next run.
+    (`[OWNER]` 2026-11-07 00:03 «заебал ты скрипты свои запускать без контроля того, работает игра, или нахуй упала к ебеням».)
+
+30. **No real input while a person is at the PC; a free PC is tested boldly.**
+    1. Before any real input or a game brought to the front (`mouse-seq`, `input.ps1`, `hover-watch`, `launch-fg`, `loot-aim`, `loot-take-clip`, `m6-air-shot`) — `powershell -File
+       D:/work/ai_sandbox/_tools/owner-idle.ps1`: exit 5 BUSY (keyboard/mouse touched < 10 s ago) → no such run, do the work that needs no input; exit 0 FREE → test.
+    2. The mechanical half: `mouse-seq.ps1` and `input.ps1` (since 2026-11-07 19:3x — it sent a real Space while the owner typed) refuse with exit 5 by the same probe; the hook `tools/hooks/owner-presence.mjs` (PreToolUse, Bash|PowerShell) refuses
+       those commands while BUSY and notes «компьютер СВОБОДЕН / ЗАНЯТ» into the agent's context at most once per 5 min.
+    (`[OWNER]` 2026-11-07 12:36–12:37 «тебе бы было полезно видеть, что кто-то что-то с физической клавы набирает» · «когда это происходит - лучше тебе тесты не
+    запускать» · «а когда с клавы никто не набирает - значит нет пользователя за ПК, можно тестить смело» · «разработай себе тулз…» · «пусть он в фоне, когда ты
+    работаешь над KUMM, сообщает тебе такие сведения».)
+
+31. **Every large work and every commit of code goes to an independent judge, round after round, until the judge has almost nothing left to find; its
+    findings are verified before fixing** — the steps live in the canon, `AGENT_GUIDE.md` → "Notes from the human" (`[OWNER]` 2026-11-10 01:41–01:43, verbatim there).
+
+19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
+    mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
+    описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +
+    KrinikConanModPackStatus»; 16:48 «KrinikIntro · KrinikConanModPackStatus — вот это все организационные вопросы» · «Я предлагаю их объединять в
+    KrinikConanModPackManager» — the shipped set is 7: Camera, Archery, Gameplay, UI, Graphics, RussianTranslation, ModPackManager.)
+    **Since 2026-11-07 the set is 8 — `KrinikConanLocomotion`:** jumping while shooting (moved from Archery), jumping while swinging a melee weapon (new), the
+    jump and the run growing with the hero's level and attributes (moved from Gameplay), PLAN — jumping off a climbed wall. (`[OWNER]` 2026-11-07 10:39
+    «Немного изменяем состав и структуру модов Krinik» · «ДОбавляем мод KrinikConanLocomotion» — the list verbatim in `games/ConanExiles/mods/KrinikConanLocomotion.md`.)
+    **Since 2026-11-09 the set is 9 — `KrinikConanEngineTweaks`:** all our engine fixes and engine tuning (the performance cvars and config of the quick wins — N1
+    async navmesh gathering, A1 Niagara shaders on load when shipped, the physics queue `p.Chaos.…` moved from KrinikConanGraphics); the LOOK settings stay in
+    KrinikConanGraphics. (`[OWNER]` 2026-11-09 21:49 «все наши правки и тюнинг движка собираем в новый мод KrinikConanEngineTweaks».) The split of the current
+    Engine.ini lines between the two mods — a list for his eye before the move (`[AI]` proposal).
+
+The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · two maps for every game · KAIF
+feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images — WebP, never PNG). The
+context-budget hook's hint is obeyed (`CLAUDE.md`).
+
+## 2. Most critical routes
+
+- **Commit** — three calls: `git add <files one by one>` · `git commit -F <message file>` · `git push`; never `-A`.
+- **Conan pack** — after every commit `git push origin main` (the private GitHub repo `conan-exiles-modpack`). The F mirror is retired: GitHub LFS works again,
+  every F ref is on GitHub (`[OWNER]` «Да, в приватный реп» · «После этого удалить временное хранилище на F.» · «РАЗРЕШАЮ ИСПРАВИТЬ ПРАВИЛО» · 2026-10-30 17:01–17:12).
+  The pack has no LFS: a file over 50 MB is a stop and a question first.
+- **The machine is shared with KAGO.** Game and load — only under the lock: `node D:/work/ai_sandbox/_tools/machine-lock.mjs take --who
+  kumm --what <why> --minutes <n>` → work → `release --who kumm` (exit 3 — taken: work offline). Whoever launched the game closes it right
+  after the run.
+- **KAIF feedback** — `node .kaif/kaif-core.mjs report bugs/KAIF/NN_*.md` (`--dry-run` first), without asking.
+- **Shells** — Windows PowerShell 5.1 (no `&&`, `??`, `?.`) and Git Bash. `Set-Content` — only with `-Encoding utf8` (ANSI 1251).
+
+## 3. Environment dossier — the machine's facts (Environment dossier)
+
+Taken 2026-08-15, refined up to 2026-10-25; facts older than four weeks are hypotheses — re-probe before relying on them (`/refresh-context`,
+the dossier step).
+
+| Fact | Value | Probe |
+|---|---|---|
+| OS | Windows 11 Pro 10.0.26200 | `(Get-CimInstance Win32_OperatingSystem).Caption` |
+| CPU, memory | AMD Ryzen 7 5700G, 8/16, 31.9 GB (4 × 8 GB DDR4). **Since 2026-11-08 the owner runs a light CPU and DDR4 overclock and a steeper CPU fan curve** (`[OWNER]` 2026-11-08 22:56 «я чуть-чуть разограл процессор» · «разогнал RAM DDR4»): frame-time / CPU numbers taken before that day are not comparable with later ones — re-measure the baseline; a new crash or memory corruption is checked against the overclock before blaming a mod. **2026-11-09 KAGO tuned the RAM sub-timings** (latency 109 → ≈ 90 ns; probe `node D:/work/ai_sandbox/KAGO/tools/mem-latency.mjs`): Conan still scenes +0 %, the `krinik-show` flight +2…+8 % (plan 51). WMI still reports 3200 MT/s and 3801 MHz (it shows the configured profile, not the live clock) | `Get-CimInstance Win32_Processor`; `Get-CimInstance Win32_PhysicalMemory \| Select Speed, ConfiguredClockSpeed` |
+| GPU | RTX 5070 Ti (Gigabyte), 16 GB, driver 621.01, power limit 300 W; `AdapterRAM` lies (4 GB) — trust `nvidia-smi` | `nvidia-smi --query-gpu=name,driver_version,memory.total,power.limit --format=csv,noheader` |
+| Screen | TV 3840×2160 @ 144 Hz; desktop at 300 % DPI — a probe without `SetProcessDPIAware` sees 1280×720 | `Get-CimInstance Win32_VideoController \| % {$_.CurrentHorizontalResolution, $_.CurrentRefreshRate}` |
+| Frame-time capture | only `D:\work\ai_sandbox\_tools\PresentMon-2.5.1-x64.exe`, its own `--session_name`; a hung session — `logman stop <name> -ets`; the agent's shell is elevated | `& '<path>' --help` |
+| Auto-lock | off | `(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System').InactivityTimeoutSecs` |
+| `TEMP` | `D:\Temp`; Claude home `%USERPROFILE%\.claude` → `F:\Claude\.claude` | `[Environment]::GetEnvironmentVariable('TEMP','User')` |
+| Shells | Windows PowerShell 5.1 (no `pwsh`) · Git Bash 5.2.21 · `cmd` | `$PSVersionTable`; `bash --version` |
+| Encodings | console UTF-8; ANSI 1251 — `Set-Content`/`Add-Content` only with `-Encoding utf8`; PowerShell `ru-RU` | `[Console]::OutputEncoding.WebName` |
+| Tools | Node v24.15.0 · npm 10.8.2 · git 2.43.0 · gh 2.95.0 · `winget` | `node -v; git --version; gh --version` |
+| `tar` / `curl` | PowerShell: `tar` is bsdtar (`D:\…` = a remote host), `curl` is an alias of `Invoke-WebRequest`; Git Bash: GNU `tar`, real `curl` | `Get-Command tar,curl`; `type -p tar curl` |
+| Line endings | `core.autocrlf = true` | `git config --get core.autocrlf` |
+````
+### CLAUDE.md lines 1–12 (working tree after commit dfbde1e)
+
+````text
+# Agent rules
+
+This project is KAIF-wrapped. Before every task read `AGENT_GUIDE.md` (the canon) and `STATUS.md` (current state); think per `PHILOSOPHY.md`; write requirements per `REQUIREMENTS_FRAMEWORK.md`; test per `TESTING_FRAMEWORK.md`; debug per `BUG_FIXING_FRAMEWORK.md`; execute tasks per the fable loop (`/fable-method`, `/fable-judge`).
+
+A message that opens with the word `resume` (or the /resume alias of your language) is an ORDER to run /resume in full before the rest of the message (`AGENT_GUIDE.md` → "A leading skill word is an order").
+
+The context-budget hook warns at 70 % and 75 % — warnings only: keep working at the normal pace and keep `STATUS.md` fresh after each cut. At 85 % close the chat with a handover (`/end-chat-soft` if a cut is near, otherwise `/end-chat-force`). (`[OWNER]` 2026-10-31 21:26 «на 70 и 75 я просил лишь предупреждать, а не закрываться» · «ты слишком рано закрываешься».)
+
+Talk to the owner in Russian in chat; write every project and KAIF document in English (the owner's verbatim quotes and interviews stay Russian).
+
+````
+
+## 2026-11-10 01:52 +03:00 — AGENT_GUIDE.md cleaned of the owner's raw voice: the passages that carried his verbatim words, moved here verbatim
+
+> Why: the owner's order of 2026-11-10 01:46 — the guide is a thesis handbook of the project's truths, agreements, instructions, rules and constraints;
+> never a chronicle, a cheat sheet or a store of his messages. His words, verbatim:
+> «вычиститт нахуй  AGENT_GUIDE от сырого голоса пользователя !!!» · «КАИФ ДОЛЖЕН ТЕБЕ УСТАНАВЛИВАТЬ, ЧТО AGENT_GUID - тезисная методичка истин и логоворенностий,
+> инструкций, правил и ограничений по проекту» · «а не летопись» · «и не бесконечная шпоргалка» · «и не свалка сырых собщений пользователя» · «можешь в апстим КАИФ
+> баг поднять, что до сох пор КАИФ тебе это ясно не пояснял, и ты превратил этот документ в свалку» · 01:47 «неужели нигде про это не сказано тебе в КАИФ?» ·
+> 01:48 «в самом каноне каис?» · «КАИФ» · «заводи сторожа или хук» · «что тут лучше» · «и неси это в апстим» · 01:49 «и продолжай работать АВТОНОМНО» ·
+> «На отправки в апстим РАЗРЕШАЮ, ОДОБРЯЮ» · «РАБОТЫ ПО МОДИНГУ КОНАНА РАЗРЕШАЮ, ОДОБРЯЮ» · «усли нужно будет удалить что-то - РАЗРЕШАЮ» · 01:50
+> «хуккккккккзарегистрировать - разрешаю».
+> The rules stay in the guide as statements with a provenance line pointing HERE; the guard `tools/hooks/guide-no-raw-voice.mjs` (PreToolUse + pre-commit)
+> keeps the guide clean. KAIF ticket #196. Below — every affected passage exactly as it stood before the clean-up.
+
+### AGENT_GUIDE.md lines 17–25 (working tree after commit dfbde1e)
+
+````text
+> 🔴 **AGENT, SAY IT IN THE CHAT BEFORE STARTING ANY WORK** — in full, together with the creed
+> above: on session entry (`/resume`), before any non-trivial task, and on every context refresh
+> in a long session. Do not skip items and do not paraphrase. The principles are unpacked in
+> `PHILOSOPHY.md`. Cadence is the owner's setting — one box is ticked here: ☐ full text before
+> every non-trivial task and on every refresh (default) · ☑ full text once per session on entry,
+> then one line «creed and prayer said at <time>» before each task — in this project the line also
+> names the three principles most relevant to that task, and a context refresh gets the same one line
+> (`[OWNER]` «да, как в KAGO» · 2026-09-18 — interview #001, Q2; the same setting the owner chose in KAGO).
+
+````
+
+### AGENT_GUIDE.md lines 59–70 (working tree after commit dfbde1e)
+
+````text
+> 🤖 **AUTONOMOUS MODE.** When the human has stepped away / granted autonomy and there is no active
+> interactive task, and `STATUS.md` has an open autonomous backlog — the agent SHOULD, on its own
+> initiative, enter the appropriate loop skill (`/autoloop`, `/dayloop`, or `/nightloop` — or
+> `/guarded-loop` when the owner asked for a protected run) and grind the
+> backlog, committing progress and self-restarting after each task. Stop only on the skill's stop
+> conditions. Do not enter a loop if the human just gave a specific interactive task.
+> **In KUMM the owner's «работай автономно» / «работай сам» / «автопилот» IS the order to enter `/dayloop` at once — after the tasks of the same
+> message, never instead of the loop.** The loop ends only by his word or by the context-budget closure (85 % → `/end-chat-soft` / `-force`, whose farewell
+> the farewell hook files; 70 % and 75 % are warnings only — `[OWNER]` 2026-10-31 21:26, verbatim in `CLAUDE.md`). The mechanical half — `tools/hooks/autonomy-guard.mjs` (Stop + UserPromptSubmit) refuses a voluntary stop while the
+> order stands. `[OWNER]` 2026-10-30 · verbatim in the hook header; the miss it closes — EXP-0379.
+> **Any «…автономно» is the order** («гоу автономно», «давай автономно»), and **an interrupt (Esc) or a task given mid-loop («чини») does not end it**:
+> do the task, then go back into the loop in the same turn — only «стоп» or the closure ends it (EXP-0388, the guard's pattern widened the same day).
+````
+
+### AGENT_GUIDE.md lines 303–332 (working tree after commit dfbde1e)
+
+````text
+### Boundaries for subagents working next to the owner's data (field-paid, S1)
+
+A subagent obeys the boundaries its PROMPT states, not the ones the parent had in mind. On
+2026-09-08 an agent tasked with reading strings out of a game's binaries redirected its own report
+INTO the files it was scanning (`> "$f"` instead of `>> report`), destroying
+`ConanSandbox-Win64-Shipping.exe` (192 MB) and `Dreamworld.dll` (5.6 MB) with a zero exit code. The
+agent broke no rule: the prompt named an OUTPUT path and never named a boundary, so writing into the
+game folder was inside what it had been allowed. `bugs/02_agent_overwrote_game_binaries.md`.
+
+Three obligations, in executable form. They apply to every spawned agent — subagent, workflow agent,
+teammate — whose task comes near a game install, a library of the owner's files, or any tree the
+project does not own:
+
+1. **Put the boundary in the prompt, as a sentence the agent can check itself against.** Copy this
+   line verbatim into the prompt: *"Читать можно всё; ПИСАТЬ можно только в scratchpad и в
+   репозиторий сборки. Ни одна твоя команда не создаёт и не изменяет файл внутри папки игры.
+   Перенаправление оболочки (`>`, `>>`, `tee`) в путь внутри папки игры запрещено."*
+2. **Binary and bulk-file analysis belongs to the MAIN session, done by a script.** A script names
+   its output file as a constant next to the declaration; a shell loop builds the output name from
+   the input name, and that is the whole defect class. Where a subagent must analyse binaries, it
+   receives an EXTRACT produced by the main session, not the path to the original.
+3. **Run the integrity guard before and after any autonomous batch that touches such a tree.** For a
+   game with a checksum manifest that is one command — for Conan
+   `python _config/verify-install.py`, which prints a countable list of files to re-fetch with their
+   expected hashes. No manifest? Snapshot sizes and hashes of the tree's executables first; a
+   diff of two numbers is the check any session performs perfectly.
+
+The reason this sits in the canon rather than in a bug document: the incident cost the owner a
+198 MB re-download and, worse, the belief that autonomous work is safe near his files. That belief
+is the project's actual working capital.
+````
+
+### AGENT_GUIDE.md lines 578–583 (working tree after commit dfbde1e)
+
+````text
+Both halves talk to the outside world — one to Nexus through a browser, the other to game folders on disk — so **the
+harness builds downward from the network**: the pure functions first (regression tests of the pure core — the first
+since 2026-09-08, four since 2026-10-14), then a fixture pack (`tools/fixture-pack.mjs`), then the live path; growing it is open backlog work
+(`STATUS.md`). **Live-path rule:** anything that touches Nexus is rate-limited courtesy toward someone else's server
+(README, «Оговорки») — never loop live calls in a test; hit one mod, once, and cache what you learned into a recon doc
+in `researches/`. Grow this tooling
+````
+
+### AGENT_GUIDE.md lines 616–642 (working tree after commit dfbde1e)
+
+````text
+- **Ignore first, then the tool.** Any new tool, export, dump, key, or binary enters the project ONLY
+  after its `.gitignore` line exists. A secret caught by a gate is a success of procedure; a secret
+  caught by the owner is a failure of the framework.
+- **Nothing that deanonymises the owner or his machine enters the repository — and that is enforced
+  by code, not by memory.** `kumm` is PUBLIC. On 2026-09-12 two UE4SS logs went in raw, and before
+  them the owner's Windows profile path and his SteamID sat in three reports; nobody broke a rule,
+  because there was no rule — there was memory. His instruction, verbatim: *«это должно стать
+  ОБЯЗАТЕЛЬСТВОМ этого проекта KUMM, чтобы оно всегда так работало, кодом, проверками, хуками, а не
+  на памяти Николая и ИИ агента»*. The machinery:
+  - `node tools/scrub-identity.mjs` — checks every tracked file; `--fix` anonymises what can be
+    anonymised mechanically (profile paths, `ls` owner column, host name, SteamID, e-mail, MAC,
+    LAN IP; in LOGS also the timezone line and absolute paths → `<GAME>\…`, `<WORK>\…`).
+  - **The tool stores no secrets.** User name, host name and home directory are asked of the OS at
+    run time: a deny-list of the owner's identifiers, committed to a public repo, would BE the leak.
+  - **A "manual" class the tool refuses to rewrite itself** — where a placeholder would destroy the
+    surrounding sentence. The gate BLOCKS and a human or agent rewrites it neutrally, keeping the
+    technical meaning. Its vocabulary is deliberately NOT in the tool: it lives in
+    `tools/scrub-local.json`, which `.gitignore` closes, because **a public list of what we hide
+    tells the reader exactly what we hide** — the first version of the rule made that mistake.
+    No such file → the rule is off, and the tool says so on every run instead of implying it checked
+    everything.
+  - `tools/hooks/pre-commit` blocks the commit; enable it once per clone with
+    `node tools/scrub-identity.mjs --install-hook`. Proven both ways on 2026-09-12: a profile path
+    stopped the commit (HEAD unchanged), a clean file went through. Since 2026-09-18 the same hook runs a
+    second gate — `tools/check-claim-before-evidence.mjs` (`HOUSE_RULES.md` → Tools of this project).
+  - **Anonymising now does NOT clean git history.** What was pushed stays in the history of the
+    public repository; removing it means a rewrite and a force-push, and that is the owner's call.
+````
+
+### AGENT_GUIDE.md lines 815–829 (working tree after commit dfbde1e)
+
+````text
+**IMAGES ARE WEBP — JPEG ONLY WHERE WEBP CANNOT BE WRITTEN — PNG NEVER.** The owner's word, 2026-10-04 evening,
+verbatim: `[OWNER]` «запиши в канон этого проекта, что мы не работает в PNG!!! ОН ТЯЖЁЛЫЙ!!! Всегда в приоритете webP,
+если с ним что-то не получается, то допустим jpg» · «но никогда не PNG» · «и перееделай свои интсументы на лёгки webp» ·
+«и все, что уже есть, переконвертируй в webp 90%» · «где нужна прозрачность - с альфа каналом. Где не нужна - без». Said
+when a session piled 4K comparison frames into PNG (~15–20 MB each, 155 MB in one harness folder). The steps:
+
+1. **Every image the agent writes — a frame, a crop, a comparison, a sheet of variants, a mockup snapshot, a gallery
+   file — is saved as WebP at quality 90.** Alpha is kept ONLY when the picture has a pixel that is not opaque; an
+   opaque picture is saved without it. The converter decides by the pixels, not the agent by eye:
+   `python <SvarogsDream>/tools/to_webp.py <files…>` (deletes the source only after the WebP is written and reopened).
+2. **A tool that cannot write WebP itself** (Unity's `ScreenCapture`, a browser screenshot) writes JPEG, and the same
+   call path converts it to WebP at once — never a PNG stage.
+3. **Check:** `git ls-files "*.png"` prints nothing in this repository and in every build repository the project
+   works in; a PNG on disk under the work trees is a conversion still owed.
+
+````
+
+### AGENT_GUIDE.md lines 1186–1240 (working tree after commit dfbde1e)
+
+````text
+## Notes from the human
+
+**Do the next step — never end a turn asking permission for your own work** (owner's word 2026-10-08 ≈11:10, verbatim:
+`[OWNER]` «Так. Давай изменим твои правила, и может хук напишем. Я тебе уже говорил про такое "Запустить эту проверку
+сейчас?" - а ты не послушал меня, и продолжаешь задавать эти ненужные вопросы»). The executable form:
+
+1. Before ending a turn, read your last line. If it is a question whose subject is YOUR next action («Запустить…?»,
+   «Сделать…?», «Продолжаю?», «Хотите, чтобы я…?», «Shall I…?») — delete it and DO that action now, then report.
+2. A question that is genuinely the owner's (vision, taste, his data, his money) goes to `interviews/`; in chat it carries
+   the marker `<!-- owner-decision -->`.
+3. The guard: `tools/hooks/no-permission-question.mjs` (Stop hook, `HOUSE_RULES.md` → Tools of this project) refuses to stop on such a last line; self-test
+   `node tools/test-guards.mjs`, part H.
+
+**Code goes to an independent judge in rounds until the judge has almost nothing left to find; the judge's findings are verified, not obeyed** — the
+working order of KUMM's game modding (owner's word 2026-11-10 01:41–01:43, verbatim: `[OWNER]` «периодически код, который пишешь, отдавай на рувью
+независимому судье» · «и правь что они будут приносить - они могут ошибаться. как и ты, находите истину» · «запиши это в каноны проекта» · «крупные работы,
+комиты - отдаются на седейство независимому седье, он проверяет код» · «по его отзыву код чиним и улучшаем» · «и так, пока судье будет почти не к чему
+придраться» · «этот воркфлоу применяем к проекту KUMM по моддингу игр»). The executable form:
+
+1. **Every large work and every commit of code** (the engine, a mod's Lua, a pak script, a tool) goes to the judge before the push: a fresh helper (Agent; at most
+   two at a time — `HOUSE_RULES.md` rule 5) given the diff and the files it touches, never the writer's rationale or conclusion; it returns each finding with a
+   quoted line and a failure scenario (correctness first, then quality — simplification, naming, missing checks).
+2. **Check every finding against the code or a run before acting** (`BUG_FIXING_FRAMEWORK.md` → "A finding is not a finding until verified"): confirmed →
+   fixed or improved in the same work and re-run; refuted → one line why. The judge errs like the writer; the truth is what the code and the run show.
+3. **Repeat the round on the new diff** (a fresh judge each time) until a round brings no confirmed defect — at most cosmetic remarks the agent may decline
+   with a line why. A finding that survives three rounds of fixing is a stop: `/bug-research` (`PHILOSOPHY.md` → the rule when stuck).
+4. The commit message carries `review: <R> rounds — <N> findings, fixed <K>, refuted <M>` (or `review: skipped — <why>` for a trivial edit: a typo, a comment).
+
+**Every game we mod has two maps, like KAIF's own pair** (owner's word 2026-10-13: `[OWNER]` «как внешняя и внутренняя карты
+KAIF, только подробный, по каждой игре, которую мы модифицируем» · «он нужен, чтобы не изучать игру каждый раз по-новому»). The steps:
+
+1. In the game's dossier `games/<Game>/` keep `GAME_STRUCTURE_EXTERNAL_MAP.md` (install tree, saves, registry, logs, our mods and
+   tools — where things live) and `GAME_ARCHITECTURE_INTERNAL_MAP.md` (classes by area, mechanics with numbers and `File:line`, where
+   our mods hook in). Model: `games/SvarogsDream/`.
+2. Before decompiling or probing the game, read both maps; whatever the probe finds goes into them in the same move.
+3. A game without the pair gets it the first time we work on it.
+
+From this project's owner (recorded 2026-08-15, at the KAIF deployment):
+
+- **The chat is Russian; every document is English** (owner's word 2026-10-28, supersedes the 2026-08-15 note and the "Languages"
+  table above for this project): all project and KAIF documentation — canon, house rules, plans, bugs, researches, maps, reports — is
+  written in English; the owner's verbatim quotes stay Russian; interviews (he answers inside them) and the `README.md` storefront stay
+  Russian. Older Russian documents are rewritten in English when taken into work.
+  The README is the owner's own handwriting — edit it from the meaning, never as a translation, and
+  never put `[AI]` marks in it.
+- **This deployment is tied to origin.** KAIF defects, improvement requests and FIELD REPORTS go upstream
+  to `MikalaiKryvusha/KAIF` by the agent, without asking. The 2026-08-15 wording of this note said "on the
+  owner's behalf, through the send gate" — superseded by his word of 2026-09-18, recorded verbatim:
+  `[OWNER]` «будешь писать отчёт в KAIF, напиши, что ты не разобрался, что отправлять нужно без спроса
+  владельца, и владельцу пришлось тебя тыкать в это носом. ОТПРАВКА В KAIF ВСЕГДА РАЗРЕШЕНА И
+  ОБЯЗАТЕЛЬНА!!!! БЕЗ ДОПОЛНИТЕЛЬНОГО ЗАПРОСА РАЗРЕШЕНИЯ У ВЛАДЕЛЬЦА!!! КТО РАБОТАЕТ ПО КАИФ, ТОТ ОБЯЗАТ В
+  КАИФ НЕСТИ ОБРАТНУЮ СВЯЗЬ ОБЯЗАТЕЛЬНО, ЭТО КАНОН!!!!» The same word stands in the KAIF origin since issue
+  #15 («Все баги, которые ИИ агенты находят при работе с KAIF — без участия человека рапортуются агентом в
+  KAIF github»).
+- The owner plays Palworld now and will play Oblivion Remastered next — the second game is the standing
+````
+
 ## 2026-11-09 22:45 +03:00 — STATUS «Where to continue»: the owner's order of 2026-11-07 20:50 and his queue 19:48–20:00, moved verbatim at the soft closure of chat kumm-2d
 
 > **FIRST NEXT CHAT — the owner's order 2026-11-07 20:50 (verbatim):** `[OWNER]` «сейчас стрелба откоючает спринт. В новом чате начнём с того, что продолжим делать мод
