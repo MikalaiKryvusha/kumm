@@ -141,7 +141,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >     native pips + the game's `PostPipsPlacedOnCanvas` event) — next: how C++ places a pip, then the kit edit of `W_Attribute`.
 >   - Sprint + bow: probes in the Locomotion notes; `sprint-run-probe.lua` now checks the bow as the mod does (three-arg `GetAttachedActors`; the bow is in slot 1) —
 >     runs at the next OWN launch (waived in the test hook until then).
->   - KCCP has the machine from 19:53 (the owner's reader test; its lock runs 20 minutes); the running game is the OWNER's now — the next own run waits for his game to close.
+>   - **HITCH PROFILER (the owner's ask 19:39) — CAUSE NAMED 20:4x:** the longest flight hitch (196 ms) is the AI navmesh (Recast) rebuild gathering geometry ON THE
+>     GAME THREAD (`ExportGeometry` → a squared-distance scan, exe RVA `0x26EEC30`); ≈ 24 % of the game thread even in normal flight frames. Live settings and the next
+>     A-B candidates — `researches/conan-hitch-profiler/README.md`. Tools: `ConanExiles/_config/hitch-trace.ps1`, `hitch-analyze.py`, `disasm-rva.py`.
+>   - REA (`morluto/rea`, the owner's pointer 20:35) installed with a portable Node 24.22.2 (`_tools/node24/rea/rea.cmd`; the global Node 24.15 untouched — pm2
+>     production runs on it); Ghidra 12.2 downloading into `_tools/ghidra`. The MCP registration (`rea-agents setup`) — next chat.
+>   - Voice: Cyrillic words only, «Кей Ю Эм Эм», numbers in words — HOUSE_RULES 13 + hook `voice-cyrillic-gate.mjs` (live from the next chat).
+>   - The machine lock `kumm` to 21:15; KCCP waits for «замеры закончены, машина твоя»; the game (launch 20:18, front) still runs.
 >   - Bug 90 (camera enters creatures — the game's camera channel ignored by creature bodies) PARKED by the owner 19:52.
 >   - Still queued: A2 `r.CreateShadersOnLoad`, A3 batch `q9-fastalloc-pages.txt`.
 > **HANDOVER 2026-11-09 18:43 +03:00 — chat of 2026-11-09 closed by the owner («этот чат закрываем, в новом продолжим делать Квик Вины по сборке»).** The game is CLOSED, the machine

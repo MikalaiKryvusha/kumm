@@ -61,6 +61,22 @@ loss stated and below 1 %).
   gathering (UE: `ARecastNavMesh::bDoFullyAsyncNavDataGathering`, default false → gathering on the game thread). Levers to check next: that property (config of
   `/Script/NavigationSystem.RecastNavMesh`), `MaxSimultaneousTileGenerationJobsCount`, the runtime generation mode, `ai.navigation.MaxDirtyAreasCountWhileSuspended`.
   Caveat: the flight streams the world faster than a running hero — the share in real play is to be measured.
+- The owner's questions 20:42 («навигационная сетка - это по которой мобы ходят?» · «поиск пути?» · «на CUDA её можно переписать? она к решению СЛАУ и перемножение
+  матриц сводится?» · «или к работе с изображениями?») — answered: the navmesh is what NPCs walk on; path search over it is cheap and NOT the hot spot — BUILDING it
+  is. Recast's build is voxel/image-like (rasterize triangles into a span heightfield → walkability filters → distance field → watershed regions → contours →
+  polygons), not linear algebra; steps 1–2 are GPU-friendly (published GPU navmesh builders exist). Our hot spot comes before the build: the geometry gathering's
+  O(n²)-looking squared-distance scan — a spatial grid / hash fixes such a loop on the CPU. Replacing a native function of the Shipping exe needs a UE4SS C++
+  native hook (no source). Order (Pareto): engine settings first (async gathering, generation only around navigation invokers, rebuild budget per frame), the
+  native rewrite only if they fail.
+- **Live navmesh settings (remote read 2026-11-09 20:4x, `RecastNavMesh-Default` of `ConanSandbox`):** `RuntimeGeneration` 2 (Dynamic) · `MaxSimultaneousTileGenerationJobsCount`
+  1024 · `TileSizeUU` 988 · `CellSize` 19 · `CellHeight` 10 · `AgentRadius` 32 · `TileNumberHardLimit` 1 048 576 · `bFixedTilePoolSize` true; `NavigationSystemV1`:
+  `bGenerateNavigationOnlyAroundNavigationInvokers` **true** (already invokers-only) · `DataGatheringMode` 2 (**Lazy** — geometry gathered at tile-build time) ·
+  `bAutoCreateNavigationData` true. Not readable by the remote (`?`): `bDoFullyAsyncNavDataGathering`, `bUseVirtualGeometryFilteringAndDirtying`, `bForceRebuildOnLoad`
+  (absent in this build, or a bitfield the remote cannot read — check first: the class's property list).
+- **Next (a new chat):** (1) the `RecastNavMesh` property list → whether async gathering exists; (2) candidates to A-B on flights AND on a running-hero route:
+  `DataGatheringMode` Instant vs Lazy, async gathering on, fewer simultaneous jobs, a smaller invoker radius (the invokers' `TileGenerationRadius` /
+  `TileRemovalRadius` on the hero and NPCs); (3) only then REA + Ghidra (`_tools/node24/rea/rea.cmd`, REA 6.8.0 installed; Ghidra 12.2 in `_tools/ghidra`) on
+  `ExportGeometry` and the scan at RVA `0x26EEC30`.
 
 ## REA — the tool the owner pointed to (2026-11-09 20:35–20:36)
 `[OWNER]` «найди в ГитХаб инструменты по статической рекомпиляции. Рея там есть, она тебе поможет» · «ты работаешь с бинарными вызовами» · «там почти 400000 звезд»
