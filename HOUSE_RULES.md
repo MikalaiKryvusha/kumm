@@ -73,6 +73,11 @@
         tests, installs, downloads or heavy CPU / GPU / disk work until I hand the machine back»; they wait with no exception; at the end of the series each gets
         «замеры закончены, машина твоя». (`[OWNER]` 2026-11-09 15:24–15:25 «соседнего агента KCCP проси ничего не билдить, когда ты будешь замерять» · «чтобы он не
         грузил машину» · «пусть ждёт, пока ты ему не отдашь машину».)
+    6d. **A graphics option is compared by an A-B VIDEO:** the same still view, 3 s option A, 3 s option B, switched 5 times in a row, the current option labelled on
+        the video; the game in front, desktop HDR off for the recording. A frame series or an animation does not replace it. **Frames for a comparison go into ONE flat
+        folder**, named so the pair stands next to each other (`01_river_bend_A.webp`, `01_river_bend_B.webp`) — the owner flips them with the mouse wheel; no subfolders.
+        (`[OWNER]` 2026-11-09 17:11–17:13 «нужна не анимация, а видео» · «2 секунды одна опция. потом 2 - другая.» · «И так переключать раз 5. АБ сравнение» · 17:14 «а лучше 3 секунды» · «только так
+        идеально можно графику тестить» · «поэтому я тебя прошу кадры в одну папку складывать - я их переключаю колесом мыши быстро».)
     7. How the stand was set up — one line in the game map.
 12. **The agent installs a CLI tool it needs by itself** (`winget`, `pip install --user`, `npm i -g`, `cargo install`), checks it by its
     version and writes one line into the reference.
