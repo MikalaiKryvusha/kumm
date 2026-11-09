@@ -111,6 +111,32 @@ installed (`C:\Program Files\Microsoft\jdk-21.0.11.10-hotspot`); Ghidra is not. 
 the NSA GitHub release → `rea` native provider → the function at RVA `0x26EEC30`, its callers, its strings. `npx rea-agents setup` (the MCP for Claude Code) —
 loads at the next session start.
 
+## The hitches left with N1 — hot code of the five longest (2026-11-09 21:30, `ConanExiles/_config/hitch-hotspots.py` on `hitch-3-n1`)
+
+No single owner this time: the hottest 256-byte exe block of the game thread holds 2–3 of ~100–120 samples per hitch (the navmesh loop held 102 of 234).
+Strings around the hot blocks: the Blueprint VM (`LetObjAccessNone`, «Accessed None attempting to …», `AccessNoneDefaultObject`) — scripts of freshly streamed
+actors; reflection (`FField::GetFName`, `FField::GetName`); serialization / GC (`DisableGarbageElimination`, `EnablePendingKill`); and a LOG-OUTPUT block
+(«stdout», «Error flushing file», RVA `0x1317600`) — the hottest block in 3 of 5 hitches. Reading: diffuse game-thread work of streaming-in (BP BeginPlay /
+construction, reflection, GC) plus log writes inside the frame — the log control pair (method point 4) is the next probe. The image base was the same in
+every launch of the session (`0x7FF6950E0000`, derived from the game thread's start address `+0x8988060`).
+
+## Measuring cleaner — the method agreed with the owner (2026-11-09 21:26, his «давай подумаем. как замерять аккуратнее. Лететь медленнее? не писать лог? а как тогда?»)
+
+1. Hitch COUNTS for before / after — PresentMon only (no ETW), fresh launches A-B-B-A, ≥ 2 per side (the N1 series protocol, `n1-launch.sh`).
+2. The PROFILER only to name a hitch, on its own flight, recorded into an in-memory ring (`xperf … -BufferingMode` / circular, flushed after the flight) — no disk
+   writes during the flight (the N1 traced worst frame froze behind a log write while 8.5 GB went to D:).
+3. Two routes: the fast `krinik-show` (25 m/s, a streaming stress test, good for before / after) and a hero-speed route (5–7 m/s) closer to play.
+4. Our mods' logs: one control pair — UE4SS log on vs off. If it matters, the fix is buffered logging (lines kept in memory, flushed rarely, off the frame),
+   not silence (the owner's rule: mods log in detail).
+5. Order and repeats as in point 1.
+
+## The light probe — proven (2026-11-09 21:32, `ConanExiles/_config/hitch-trace-light.ps1`, N1 on, front)
+
+Kernel `PROC_THREAD+LOADER+PROFILE+CSWITCH`, stacks on the profile only, a 2 GB in-memory ring (`-Buffering`, 2048 × 1 MB), flushed to C: after the flight
+(1.42 GB). Flight `light-1-n1`: 25 hitches · worst 90.2 ms · 1 % low 26.1 · 57.5 FPS — the same as the untraced N1 launches (19 · 25 hitches, 94 · 101 ms,
+27.0 · 26.3, 60.3 · 59.0 FPS); the heavy probe gave 39 · 356 ms · 22.9 · 53.1. The light probe leaves the hitches as they are; its cost is ≈ 2–4 % of FPS.
+From now on: name hitches with the LIGHT probe only. (No PresentMon ETL pass needed: the live CSV + the PresentMon process start, as before.)
+
 ## Gaps
 - Alignment of PresentMon's frame times with xperf's `-range` clock — to be checked on the trace (step 4).
 - Function names inside the exe are not available; a hot exe region can only be named by address range.

@@ -74,6 +74,12 @@
         «замеры закончены, машина твоя». While the quiet window is not yet given, do the work that needs no clean machine (recon from files, code, documents, cases)
         — never sit idle waiting. (`[OWNER]` 2026-11-09 18:59 «ты пока что можешь делать то, что не требует чистых ресурсов».) (`[OWNER]` 2026-11-09 15:24–15:25 «соседнего агента KCCP проси ничего не билдить, когда ты будешь замерять» · «чтобы он не
         грузил машину» · «пусть ждёт, пока ты ему не отдашь машину».)
+    6e. **The probe must not change the circuit.** (1) Before / after numbers come from the LIGHTEST instrument (PresentMon only), the same on both sides, A-B-B-A —
+        a differential measurement; (2) a profiler (ETW / xperf) only NAMES a hitch, on its own flight, and its numbers are never compared with untraced ones (its own
+        cost, measured 2026-11-09: traced base 67 hitches / 55.7 FPS vs untraced 35–59 / 58–59); (3) the profiler writes into memory or another disk, never the game's
+        disk, during the flight; (4) nothing of ours runs inside the measured window — no voice, no remote calls, no neighbour work; (5) every lightening of the probe is
+        proven by one control pair. (`[OWNER]` 2026-11-09 21:26–21:27 «давай подумаем. как замерять аккуратнее» · «мы как инженеры должны подумать, как нашим "щупом
+        осцилографа не внести изменения в измеряемую схему"».)
     6d. **A graphics option is compared by an A-B VIDEO:** the same still view, 3 s option A, 3 s option B, switched 5 times in a row, the current option labelled on
         the video; the game in front, desktop HDR off for the recording. A frame series or an animation does not replace it. **Frames for a comparison go into ONE flat
         folder**, named so the pair stands next to each other (`01_river_bend_A.webp`, `01_river_bend_B.webp`) — the owner flips them with the mouse wheel; no subfolders.

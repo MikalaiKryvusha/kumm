@@ -150,7 +150,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   - **N1 `bDoFullyAsyncNavDataGathering=True` MEASURED 21:00–21:22** (front, A-B-B-A, report `testcases/reports/2026-11-09_conan-quickwin-n1-async-navmesh.md`):
 >     hitches −48 % (42.5 → 22), worst frame −43 % (≈ 175 → ≈ 97 ms), 1 % low +12 %, FPS same; the navmesh loop gone from the game thread. Told the owner by voice
 >     21:23 — waits for his word to ship (into `_unpacked/KrinikConanGraphics/Engine.ini` as a `[/Script/NavigationSystem.RecastNavMesh]` section) + NPC pathing by eye.
->   - Kept on disk for that: `D:/Games/Conan Exiles Mods/_bench/wpr/2026-11-09_202122_hitch-2.etl` and `…_204955_hitch-3-n1.etl` (8.5 GB each) — delete when N1 closes.
+>   - Kept on disk: `D:/Games/Conan Exiles Mods/_bench/wpr/2026-11-09_202122_hitch-2.etl`, `…_204955_hitch-3-n1.etl` (8.5 GB each, heavy probe) and
+>     `C:/Temp/kumm-wpr/2026-11-09_213224_light-1-n1.etl` (1.4 GB, light probe) — delete when the hitch work closes.
+>   - **The light probe is proven** (`hitch-trace-light.ps1`: in-memory ring, written to C: after the flight): hitches as untraced — use only it (HOUSE_RULES 11.6e).
+>   - Hitches left with N1 — diffuse game-thread work of streaming-in (Blueprint VM, reflection, GC) + a log-output block hot in 3 of 5; NEXT: the log control
+>     pair (UE log / UE4SS log on vs off, A-B-B-A, PresentMon only), then A1 + N1 together.
 >   - 20:55: the game closed, the lock released, KCCP told «замеры закончены, машина твоя».
 >   - Bug 90 (camera enters creatures — the game's camera channel ignored by creature bodies) PARKED by the owner 19:52.
 >   - Still queued: A2 `r.CreateShadersOnLoad`, A3 batch `q9-fastalloc-pages.txt`.
