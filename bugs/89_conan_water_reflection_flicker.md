@@ -71,6 +71,14 @@ then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? 
 — does the blink go with the reflection? (2) `r.Water.SingleLayer.ForceVelocity` / `r.VelocityOutputPass 1` — TSR? (3) `r.Water.SingleLayer.RefractionDownsampleFactor 2`
 — the stripes? (4) the waves frozen — WPO? (5) reflections mode `off` vs `sw` vs rays. Every lever that helps — its FPS cost A-B-A-B before it enters Engine.ini.
 
+## Live result (2026-11-09 17:0x–17:2x, river_bend, cases `testcases/TC_conan_water_reflection_flicker_2026-11-09.md`)
+
+- **Hypothesis 0 CONFIRMED in part:** the water reflection is full-resolution (DownsampleFactor 1, no checkerboard) but its denoiser is OFF (`Denoising 0`).
+- Flicker metric (far-water band, frame-to-frame mean abs diff): shipped 5.64 / 5.39 · no reflection 1.23 · **denoiser on 4.17 / 4.11 / 4.05** · + half res 4.41 · TSR
+  velocity modes 4.06 / 4.07 (no effect) · rays 5.43 → 4.66 with the denoiser. The remaining ≈ 4 is common to rays too — the reflection moving with the waves, not a defect.
+- By eye (4K crop, folder 78): the dark dashes / grain go; the reflection gets softer, with soft dark blotches where the cliffs reflect — the owner's call.
+- **Fix candidate:** `r.Water.SingleLayer.Reflection.Denoising=1` in KrinikConanGraphics' Engine.ini — waits for its FPS cost (KCCP's quiet window) and the owner's eye.
+
 ## Fix plan
 
 **The owner's target** (`[OWNER]` 2026-11-09 16:59 «какой конфиг даст: - красивая вода и отркжения - без мерцаний - много FPS ?»). Candidates on top of the shipped `sw`
