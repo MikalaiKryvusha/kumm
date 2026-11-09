@@ -131,29 +131,19 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **DONE 2026-11-09 16:43 +03:00 — plan 51 (the owner: «давай продолжим делать сборку модов 1.0.0 по Конану. но начнём с того, что KAGO нам комп ускорил»).** RAM: still beaches 0 %, the
->   krinik-show flight +2…+8 %; view distance 1.5 SHIPPED in KrinikConanGraphics' Engine.ini, read back live, +4.7 % on the beaches; the look of 1.5 waits for the owner's eye
->   (review folder 77, per-beach subfolders). Handover item 1 (two-batch guard) DONE; `freeze-npcs.lua` crash fixed (EXP-0495). Game closed, lock released, KCCP given the machine
->   back. Distance 1.5 ACCEPTED by the owner 16:47 («5% Кадров нам нужны!»); plan 51 DONE. Report `testcases/reports/2026-11-09_conan-water-fps-after-ram-tuning.md`. Bug 89: the denoiser (OFF in 3.0.1) calms the far water but makes the near water soapy — REJECTED by the owner 17:41 («нужно решать проблему мерцания в корне»); the root is the far wave normals of FluidFlux (`M_FluxSurfaceOver`); research done (`researches/fluidflux-distant-shimmer/`), no shipped-material lever reaches it — PARKED by the owner 18:42: route A (rebuild the Lumen global shaders for rough SLW reflections) chosen but deferred behind 1.0.0; guru tweaks recon `researches/ue5-guru-tweaks-2026-11/` (8 candidates to A-B). NEXT: bug 89 (water reflection flicker at river_bend — the owner «потом исследуем»), then
->   handover items 2–3 below (attribute pages past 20 — mockup first; sprint + bow).
-> **HANDOVER 2026-11-09 02:02 +03:00 — chat of 2026-11-08 (second) closed by the owner («аодводим итоги сегодняшней работы. закрываем чат»).** The game is CLOSED,
->   the machine lock released. DONE + seen this chat (reports in `testcases/reports/2026-11-08_*` / `2026-11-09_*`):
->   - Voice: self-contained Silero v5 eugene in `D:/work/ai_sandbox/tools/silero_tts` (README there); KAIF 2.10's `.kaif/tools/contour/voice-soft.mjs` taken ahead —
->     every spoken phrase is first a file `voice/<stamp>_<meaning>.txt`, spoken with `--file` (HOUSE_RULES rule 13, env in `.claude/settings.local.json`).
->   - Attributes past 20 (plan 49 criteria 1–2): `ConanExiles/_config/devkit/vanilla_patches.py` injects the edited vanilla `BP_ProgressionSystem` (cap 10 000) into
->     KrinikConanGameplay (build step 4b); «Верная рука» (Dead Shot) ×2 → ×1.2 in `BP_BaseProjectile`, its Russian text «на 20% быстрее» (`vanilla-overrides-ru.tsv`).
->   - The owner's CPU + DDR4 overclock: build ≈ +17 % FPS vs the day before (HOUSE_RULES dossier).
->   - Water reflections: the owner's pick «программные отражения с дальностью» (software Lumen, TraceDistanceScale 4, 6 clipmaps, extent 5000, no rays, no screen
->     traces) SHIPPED in KrinikConanGraphics' Engine.ini, read back live; ≈ −1.5 % FPS on five still river beaches (rays −6 %); review folder 76 + HTML page.
->   - Tools: map ↔ world by vistas (`_config/map-fit-vistas.py`, `map-to-world.py`), beaches by `shore-find.lua` / `shore-try.sh`, measurements by `water-scenes.sh`
->     (NPCs frozen by `freeze-npcs.lua`, weather off, 30 s, one-minute `static-bench.sh`), report + charts + page (`water-scenes-report.py`, `water-scenes-html.py`).
->   FIRST next chat, in order:
->   1. Guard owed (EXP-0493): `static-bench.sh` and `water-scenes.sh` refuse to start while another PresentMon / batch runs; after any stop — `ps` and kill to the root shell.
->   2. Plan 49 criteria 3–5: the attribute screen pages past 20 — a mockup with statuses for the owner first (HOUSE_RULES rule 23); the bar scale `W_Attribute.MaxAttributePointAllotment` 20.
->   3. Sprint + bow shooting at the same time (KrinikConanLocomotion; native `K2_CanSprint` suspected); the hero's gear — he drowned 2026-11-09 00:29 and respawned naked
->      (the save is the agent's to use; spawn the bow back by `exec SpawnItem`).
->   4. The rock flicker in the water — deferred by the owner «на сильно позже»; re-check under the new software reflections before any work.
->   5. Older open items — the owner's queue of 2026-11-07 below (bug 84, the lore-stone «E Читать», rock / water shader noise, black cave mouths, rain).
+> **HANDOVER 2026-11-09 18:43 +03:00 — chat of 2026-11-09 closed by the owner («этот чат закрываем, в новом продолжим делать Квик Вины по сборке»).** The game is CLOSED, the machine
+>   is KCCP's (its lock to 18:57; ask KCCP «no builds / no GUI windows» before any measurement or recording — HOUSE_RULES 11.6c). DONE this chat (chronicle entry of this moment):
+>   plan 51 DONE (RAM: still 0 %, flight +2…+8 %; view distance 1.5 shipped, +4.7 %, accepted); bench guards (EXP-0493); `freeze-npcs.lua` crash fix (EXP-0495); A-B video tool
+>   `ConanExiles/_config/ab-video.sh` (3 s × 5, labels; HOUSE_RULES 11.6d); bug 89 water flicker researched and PARKED (route A chosen, deferred).
+>   **FIRST next chat — QUICK WINS for the build** (the owner's word above): the candidates of `researches/ue5-guru-tweaks-2026-11/README.md` (tier A first), each as
+>   1) a live A-B (cvar by the remote) on a still beach / the krinik-show flight, A-B-A-B, in a KCCP quiet window; 2) an A-B VIDEO (3 s × 5) when the look may change;
+>   3) into `_unpacked/KrinikConanGraphics/Engine.ini` only with numbers and the owner's eye. Top lines: `niagara.CreateShadersOnLoad=1`, `r.CreateShadersOnLoad=1` (first-sight
+>   stutter — needs a fresh-launch first-combat test), `d3d12.FastAllocator.MinPagesToRetain=32`, `FX.BatchAsync=1`, `r.TSR.History.ScreenPercentage 200` (−10 % water blink, GPU cost).
+>   Then: 2. Plan 49 criteria 3–5 — attribute pages past 20, a mockup with statuses first (HOUSE_RULES rule 23); the bar scale `W_Attribute.MaxAttributePointAllotment` 20.
+>   3. Sprint + bow shooting at the same time (KrinikConanLocomotion; read `games/ConanExiles/mods/KrinikConanLocomotion.md` first; native `K2_CanSprint` suspected).
+>   4. Older open items — the owner's queue of 2026-11-07 below (bug 84, the lore-stone «E Читать», black cave mouths, rain).
+>   Traps of this chat: never swap the ocean material live (EXP-0496); compare front only with front, background only with background (EXP-0494); a metric is read with its frame.
+> **Moved verbatim to the chronicle (entry 2026-11-09 18:43 +03:00):** the blocks DONE plan 51 of 2026-11-09 16:43 and HANDOVER 2026-11-09 02:02.
 > **Moved verbatim to the chronicle (entry 2026-11-09 02:02 +03:00):** the blocks NOW of 2026-11-08 22:58, DONE / IN FLIGHT of the night and HANDOVER of 2026-11-08 at 14.52.
 > **Moved verbatim to the chronicle (entry 2026-11-08 14:52 +03:00):** SIDE TASK nfsu2, HANDOVER 2026-11-07 23:03, items 0 / 0b / 0c and the NOW block of 2026-11-08.
 > **FIRST NEXT CHAT — the owner's order 2026-11-07 20:50 (verbatim):** `[OWNER]` «сейчас стрелба откоючает спринт. В новом чате начнём с того, что продолжим делать мод
