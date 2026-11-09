@@ -71,7 +71,7 @@ then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? 
 — does the blink go with the reflection? (2) `r.Water.SingleLayer.ForceVelocity` / `r.VelocityOutputPass 1` — TSR? (3) `r.Water.SingleLayer.RefractionDownsampleFactor 2`
 — the stripes? (4) the waves frozen — WPO? (5) reflections mode `off` vs `sw` vs rays. Every lever that helps — its FPS cost A-B-A-B before it enters Engine.ini.
 
-## Live result (2026-11-09 17:0x–17:2x, river_bend, cases `testcases/TC_conan_water_reflection_flicker_2026-11-09.md`)
+## Live result (2026-11-09 17:02–17:09, river_bend, cases `testcases/TC_conan_water_reflection_flicker_2026-11-09.md`)
 
 - **Hypothesis 0 CONFIRMED in part:** the water reflection is full-resolution (DownsampleFactor 1, no checkerboard) but its denoiser is OFF (`Denoising 0`).
 - Flicker metric (far-water band, frame-to-frame mean abs diff): shipped 5.64 / 5.39 · no reflection 1.23 · **denoiser on 4.17 / 4.11 / 4.05** · + half res 4.41 · TSR
