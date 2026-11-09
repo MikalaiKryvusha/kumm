@@ -131,10 +131,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW 2026-11-09 19:52 +03:00 — chat kumm-2d, dayloop by the owner's «работай автономно» (18:59).** The machine lock `kumm` to 20:30, KCCP and kumm-5d quiet; the game of
->   launch L6 RUNS and the owner plays in it — do not close it (memory «Игру владельца не закрывать»).
+> **HANDOVER 2026-11-09 22:45 +03:00 — chat kumm-2d closed by the owner («закрывай чат»).** The game (launch 22:06, front) is the OWNER's — he plays in it; no machine lock held;
+>   KCCP closed its chat. Pushed: KUMM and the pack (`conan-exiles-modpack`). Report of the evening: N1 found by the profiler and SHIPPED in the new mod.
+>   **FIRST next chat (in order):**
+>   1. `KrinikConanEngineTweaks` into the guide (`ConanExiles/docs/guide/guide-3.0.1.html`) and the README mod list (HOUSE_RULES rule 20 · rule 19: Krinik mods at the top);
+>      then the deploy merge of several ini sources (KUMM `Deploy-ModPack.ps1` `engineIni` + a `tools/fixture-pack.mjs` case) so the mod ships its own file.
+>   2. Plan 49 B2 (the owner's pick): the kit edit of `W_Attribute` — `Page` var, the `UpdateView` shift, arrows, pips re-placed in `PostPipsPlacedOnCanvas` (recon in the plan).
+>   3. Sprint + bow: `sprint-run-probe.lua` with the bow in slot 1 (`InpActEvt_Shortcut0_…_25`), `_G.__srp_draw=true` → is `K2_CanSprint` the refusal.
+>   4. FUTURE (the owner 22:05): the streaming-in work of the remaining hitches — research doc «Future»; the light probe only.
+>   Traps of this chat: the voice is Cyrillic words only («Кей Ю Эм Эм», numbers in words — hook from this chat on); `close-game.ps1` may leave the game after 60 s — stop
+>   own PID; the game drops ini comments on exit; the heavy ETW probe distorts — `hitch-trace-light.ps1` only.
 >   - A1 `niagara.CreateShadersOnLoad=1` MEASURED (report `testcases/reports/2026-11-09_conan-quickwins-shaders-on-load.md`): flight hitches −31 % (52 → 36 mean over 3 pairs),
->     FPS / RAM / VRAM unchanged, worst frame and first minute not better; told to the owner 19:4x; NOT shipped — waits for his word.
+>     FPS / RAM / VRAM unchanged — SHIPPED in KrinikConanEngineTweaks (the owner 22:05).
 >   - The owner asked 19:39 to profile the hitches (what the engine does in a hitch frame): first WPR `CPU+GPU` run dropped 5 M events (23 GB, deleted) — redo with a
 >     lighter profile, hitches found by `PresentMon --etl_file` on the same trace.
 >   - Plan 49: the owner picked B (per-row scroll) 19:45, then **B2 — arrows at the row ends** 19:58 (review folder 80); `W_Attribute` recon done (bar formula,
@@ -167,55 +175,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   - 20:55: the game closed, the lock released, KCCP told «замеры закончены, машина твоя».
 >   - Bug 90 (camera enters creatures — the game's camera channel ignored by creature bodies) PARKED by the owner 19:52.
 >   - Still queued: A2 `r.CreateShadersOnLoad`, A3 batch `q9-fastalloc-pages.txt`.
-> **HANDOVER 2026-11-09 18:43 +03:00 — chat of 2026-11-09 closed by the owner («этот чат закрываем, в новом продолжим делать Квик Вины по сборке»).** The game is CLOSED, the machine
->   is KCCP's (its lock to 18:57; ask KCCP «no builds / no GUI windows» before any measurement or recording — HOUSE_RULES 11.6c). DONE this chat (chronicle entry of this moment):
->   plan 51 DONE (RAM: still 0 %, flight +2…+8 %; view distance 1.5 shipped, +4.7 %, accepted); bench guards (EXP-0493); `freeze-npcs.lua` crash fix (EXP-0495); A-B video tool
->   `ConanExiles/_config/ab-video.sh` (3 s × 5, labels; HOUSE_RULES 11.6d); bug 89 water flicker researched and PARKED (route A chosen, deferred).
->   **FIRST next chat — QUICK WINS for the build** (the owner's word above): the candidates of `researches/ue5-guru-tweaks-2026-11/README.md` (tier A first), each as
->   1) a live A-B (cvar by the remote) on a still beach / the krinik-show flight, A-B-A-B, in a KCCP quiet window; 2) an A-B VIDEO (3 s × 5) when the look may change;
->   3) into `_unpacked/KrinikConanGraphics/Engine.ini` only with numbers and the owner's eye. Top lines: `niagara.CreateShadersOnLoad=1`, `r.CreateShadersOnLoad=1` (first-sight
->   stutter — needs a fresh-launch first-combat test), `d3d12.FastAllocator.MinPagesToRetain=32`, `FX.BatchAsync=1`, `r.TSR.History.ScreenPercentage 200` (−10 % water blink, GPU cost).
->   Then: 2. Plan 49 criteria 3–5 — attribute pages past 20, a mockup with statuses first (HOUSE_RULES rule 23); the bar scale `W_Attribute.MaxAttributePointAllotment` 20.
->   3. Sprint + bow shooting at the same time (KrinikConanLocomotion; read `games/ConanExiles/mods/KrinikConanLocomotion.md` first; native `K2_CanSprint` suspected).
->   4. Older open items — the owner's queue of 2026-11-07 below (bug 84, the lore-stone «E Читать», black cave mouths, rain).
->   Traps of this chat: never swap the ocean material live (EXP-0496); compare front only with front, background only with background (EXP-0494); a metric is read with its frame.
+> **Moved verbatim to the chronicle (entry 2026-11-09 22:44 +03:00):** the HANDOVER 2026-11-09 18:43 block (the quick-wins order of the first chat of 2026-11-09).
 > **Moved verbatim to the chronicle (entry 2026-11-09 18:43 +03:00):** the blocks DONE plan 51 of 2026-11-09 16:43 and HANDOVER 2026-11-09 02:02.
 > **Moved verbatim to the chronicle (entry 2026-11-09 02:02 +03:00):** the blocks NOW of 2026-11-08 22:58, DONE / IN FLIGHT of the night and HANDOVER of 2026-11-08 at 14.52.
 > **Moved verbatim to the chronicle (entry 2026-11-08 14:52 +03:00):** SIDE TASK nfsu2, HANDOVER 2026-11-07 23:03, items 0 / 0b / 0c and the NOW block of 2026-11-08.
-> **FIRST NEXT CHAT — the owner's order 2026-11-07 20:50 (verbatim):** `[OWNER]` «сейчас стрелба откоючает спринт. В новом чате начнём с того, что продолжим делать мод
->   Локомодации. Спринт и стрельбу делаем возможными одновременно.» · «И откобчаем лимит на прокачку атрибутов. Делаем её бесконечной.» · «И она бесконечно будет по фотмулам
->   влиять на характеристики героя». So, in order: (a) KrinikConanLocomotion — sprint and bow shooting at the same time (now a shot cancels the sprint); (b) attributes without
->   the cap of 20 (the «+» stays); (c) every attribute keeps adding to the hero's stats by its formulas past 20 (read the game's per-point curves first — game map). Then bug 84.
-> **THE OWNER'S QUEUE 19:48–20:00 (verbatim; his debt — FIRST, before the loop items):**
-> 1. Bug 84 — TOP: the hub controller duplicates pages — the trait dialog under the attribute tree (19:48) AND the fullscreen map stuck twice 20:19–20:25 (two `W_FullscreenMap_C`,
->    the owner trapped; freed by the remote: map + carousel removed, game input). Control case (section off), then the fix; a game restart restores the hub.
-> 2. `[OWNER]` 19:50 «я прокачал проворство до 20, и провал плюсик - это нужно убрать, так как прокачка у нас бесконечная» · «можно сколь угодно повышать дальше атрибут» —
->    attributes stop at 20 (the «+» disappears); the build's levelling is endless (KrinikConanGameplay: 10 000 levels) → attributes must rise past 20. Recon the cap first.
-> 3. `[OWNER]` 19:50 «там сказано, что все стрелы летят вдвое быстрее. Это правда?» · «проверь, оно наше значение скорости умножило на два?» — ANSWERED 20:00 from the
->    Archery log: uncharged 2484–2499 cm/s before the trait «Верная рука», 4997–5004 after (×2); full charge ≈ 9960–9996. Whether to keep the ×2 — asked him.
-> 4. `[OWNER]` 19:58 «при наведении прицела на такие камни, нужно показывать нашу плашку E · E Читать» — the glowing carved lore stones get our «E Читать» plate on aim.
-> 5. `[OWNER]` 19:58 «тени пальм починили, но шейдер у камней и поверхностей (предположительно) такой же сломанный, требует переделки по аналогии с тенями листиков пальм» —
->    his frame: grainy / dithered shadow on a sand rock face; rocks have no WPO — a different cause to find (SMRT noise / self-shadow), same clean-stand method.
-> 6. Disk D: was 100 % full 19:50 (commits failed); the owner deleted two games (14 GB free 19:59; 9.1 GB at 20:32 — something keeps writing). `_bench` 9.4 GB of old
->    recordings — waits for his «да» (classifier). The CLEAN Conan original in `D:Instals` is GONE (20:32) — `D:/Games/Conan_Exiles_3_0_1_clean_test` is now the ONLY clean copy
->    (HOUSE_RULES rule 25): never delete it; rule 25 must name it as the original. **20:41 the owner ordered deleted (verbatim list, «удаляй»):** `D:/Games/` Neverwinter
->    Nights EE, Gothic 3, Medieval Dynasty (2021) (the paused MD project has NO installed game now), For The King II, Oblivion Remastered Mods and Mafia II Mods (the mod
->    LIBRARIES of the parked packs — no git there; the packs in `D:/work/ai_sandbox` stay; a return needs a re-download).
-> 7. `[OWNER]` 20:05 «с шеудером водыы, предположительно, похожая проблема, как и с шейдером тени листвы пальм - есть какая- то неестественная рябь, что-то то появляется то
->    исчезает» — his frame: fine sparkling speckles over the oasis water. Method: the clean stand, still vs turning sun first (sun glint / Lumen reflections re-evaluated
->    each light step?), then «what on the water does NOT sparkle». His frame is in the chat only (no file).
-> 8. `[OWNER]` 20:12 «очень странно выглядят вдали входы в пещеры - как черное бельмо. Скала покрыта дымкой (полааю, шейдер) а этот черный вход словно не покрыт этой
->    дымкой - вероятно, баг» — a far cave mouth renders pure black, unfogged, while the rock around is hazed. Suspects: the cave-mouth blocker mesh with an unlit /
->    translucent material that skips fog; our pack Engine.ini fog settings (control: the game's default fog). Frame in the chat only.
-> 9. `[OWNER]` 20:12 «отражение на воде в экранном пространстве, баг - за деревом белый след» — a bright streak on the water beside a palm trunk: the screen-space
->    reflection trace is occluded by the trunk and falls back to the sky. Levers to measure: Lumen reflections without screen traces (`r.Lumen.Reflections.ScreenTraces 0`),
->    the water's own reflection settings; check the cost (FPS) A-B-A-B.
-> 10. `[OWNER]` 20:30 «посмотри, как идёт дождь сейчас» — read from a 2-s window clip 20:30: NO rain streaks visible; only translucent mist / splash puffs near the ground
->    that shift and change shape between neighbouring frames. Suspect: rain particles not drawn (or too thin at 4K / culled), only the ground mist sprites left — recon the
->    weather rain emitter vs our Engine.ini (particle / translucency cvars). `[OWNER]` 20:31 «тучка тупо над героем» — the rain comes from a small cloud fixed over the
->    hero (a hero-attached emitter), not from the sky. `[OWNER]` 20:31 «я много раз просил это исправить» — AN OLD DEBT: `plans/04_conan_ochered_zakazov.md` (2026-09-09, 2.2.3:
->    «дождь виден на больших отдалениях, появляется из воздуха; нужно сильно повысить высоту дождя» · «дождь всё ещё сломан»; mechanism there: the rain spawns in a BOX
->    around the player; the scene-capture theory refuted) — take it after bug 84, starting from that plan's section.
+> **Moved verbatim to the chronicle (entry 2026-11-09 22:45 +03:00):** the owner's order of 2026-11-07 20:50 (FIRST NEXT CHAT: sprint + bow, attributes past 20) and THE OWNER'S QUEUE 19:48–20:00. Still open from them: bug 84 (the hub duplicates pages / the fullscreen map twice) · the lore stones' «E Читать» plate · grainy shadow on sand rocks · speckles on the oasis water · black far cave mouths (unfogged) · the bright SSR streak behind palm trunks · the rain from a small cloud over the hero (old debt, `plans/04_conan_ochered_zakazov.md`) · `_bench` 9.4 GB of old recordings waits for his «да»; sprint + bow and attribute paging — in the handover above.
 > **Blocks moved verbatim to the chronicle (entry 2026-11-07 19:28 +03:00):** the bug 67 handover blocks of 2026-11-07 14:47–19:19 (the bug is DONE) and the chat blocks of 2026-11-06 (fifth) … 2026-11-07 (second) (forced closures 09:46 and 12:43, the hub controller v4–v10, the dayloops of 06:24 / 10:12, the UPDATE lists). Still open from them: the hub controller player path with the game in FRONT; the minimap helper «Свои маркеры» click on our map; quick-loot R3 (last cell of a row); plan 45 step 4+ (boss / elite spawns); KrinikConanMusic M7 with bug 79 cases; mod windows of `_config/compat/ui-overflow-candidates.tsv`; the guide’s 1.0.0 list.
 > **The blocks of the 2026-11-06 chats 1-4 (forced closures of the third and the fourth, the q8 correction, the dayloops of 09:05, 12:46, 19:20, bug 67, the music mod, interview #034, plan 45 steps 1-3, Nexus quarantine) - moved verbatim to the chronicle, entry 2026-11-07 00:33 +03:00.** Still open from them: plan 45 step 4 onward (boss / elite spawns) and kinds 8-12; bug 67 palm shadows (re-shoot with hdr.ps1 off + SetTimeOfDay; build stays 2.0/-1.0); KrinikConanMusic death scene M7 with bug 79 cases (respawn, dungeon, waystone); q8 Nanite B data; G4 boss ghost by the thrall conversion path; Nexus ticket 276571 follow-up letter (the owner sends it); Northern Timber - the owner decides.
 > **The 2026-11-03 chat blocks (cb012770, ce994c74, the 1.0.0 resume of 19:51, the Nexus publication of 19:05) and the 0.9.0 release pointers — moved verbatim to the chronicle, entry 2026-11-06 12:34 +03:00.** Still open from them: nest eggs (bug 82), a real E over a corpse in a bush (bug 80), the rim on F done properly (bug 75), the rest of the guide's 1.0.0 list; Nexus — ticket 276571.

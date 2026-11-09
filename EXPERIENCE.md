@@ -91,6 +91,22 @@
 
 ## Entries
 
+### EXP-0498 · 2026-11-09 · ✅ · #perf #profiler #etw #xperf #hitch #conan #no-pdb
+class: naming a hitch of a Shipping exe with no PDB and no Unreal Insights
+mechanized: yes — `ConanExiles/_config/hitch-trace-light.ps1` (in-memory ring probe) · `hitch-analyze.py` · `hitch-hotspots.py` · `hitch-preempt.py` · `disasm-rva.py`
+**Lesson:** a hitch is named without symbols in four moves: (1) the frames from the LIVE PresentMon CSV, aligned to the ETW clock by the PresentMon process start in
+`xperf -a process` (PresentMon `--etl_file` found no presents in a trace with `DXGI + DxgKrnl:0x1`); (2) `xperf -a dumper -range` over the hitch → the busiest thread =
+the game thread, its samples by 256-byte exe block; (3) the hottest block disassembled (capstone) — the loop's shape says the work (24-byte stride + squared distance =
+a scan over FVectors); (4) the strings referenced around EVERY return address of the sample's stack name the subsystem (`FRecastNavMeshGenerator::ProcessTileTasks…`,
+`UNavCollisionBase::ExportGeometry`). Image base is the same per boot (`0x7FF6950E0000`); low 16 bits of an address survive ASLR. Result: N1 (async navmesh gathering)
+−48 % hitches. The probe itself must be light: the heavy one (8.5 GB to the game's disk) added hitches and a 356 ms freeze (HOUSE_RULES 11.6e).
+
+### EXP-0497 · 2026-11-09 · ❌→✅ · #conan #ini #bench #tools
+class: the game rewrites its Engine.ini on exit and drops comment lines — a marker-comment-based revert refuses
+mechanized: yes — `ConanExiles/_config/ini-temp.py` keeps its lines in a `.pairs` sidecar and reverts by them (proven on a copy and on the game)
+**Lesson:** the series' scripts (`n1-launch.sh`, `ab-launch.sh`) restore the ini from a byte copy and print its sha256 after every launch; `close-game.ps1` sometimes leaves
+the game after 60 s («STILL RUNNING») — the series stops its OWN leftover PID or the next launch refuses.
+
 ### EXP-0496 · 2026-11-09 · ❌ · #conan #water #fluidflux #restore #look-at-what-you-made #owner-saw-first
 class: a «restored» claim checked by reading a NAME back, not by looking at the screen
 mechanized: no — after any live swap of a material / asset, the restore check is a frame of the same view, compared with the frame before the swap
