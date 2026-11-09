@@ -73,7 +73,12 @@ loss stated and below 1 %).
   `bGenerateNavigationOnlyAroundNavigationInvokers` **true** (already invokers-only) · `DataGatheringMode` 2 (**Lazy** — geometry gathered at tile-build time) ·
   `bAutoCreateNavigationData` true. Not readable by the remote (`?`): `bDoFullyAsyncNavDataGathering`, `bUseVirtualGeometryFilteringAndDirtying`, `bForceRebuildOnLoad`
   (absent in this build, or a bitfield the remote cannot read — check first: the class's property list).
-- **Next (a new chat):** (1) the `RecastNavMesh` property list → whether async gathering exists; (2) candidates to A-B on flights AND on a running-hero route:
+- **Read again 20:4x with `GetPropertyValue` (the bitfields):** `bDoFullyAsyncNavDataGathering` **false**, `bUseVirtualGeometryFilteringAndDirtying` false,
+  `bForceRebuildOnLoad` false, `bRebuildAtRuntime` false (the earlier «?» was the reader's `ok and v or …` swallowing a `false`). The class has the property
+  (`ForEachProperty`: also `InvokerTilePriorityBumpDistanceThresholdInTileUnits`, `InvokerTilePriorityBumpIncrease`, `bUseVirtualFilters`) → **quick-win candidate N1:**
+  `[/Script/NavigationSystem.RecastNavMesh] bDoFullyAsyncNavDataGathering=True` in the game's Engine.ini before launch (the generator reads it at creation),
+  A-B over launches like A1; read back live by `GetPropertyValue`; NPC pathing by eye (tiles may arrive a little later).
+- **Next (a new chat):** (1) N1 above; (2) candidates to A-B on flights AND on a running-hero route:
   `DataGatheringMode` Instant vs Lazy, async gathering on, fewer simultaneous jobs, a smaller invoker radius (the invokers' `TileGenerationRadius` /
   `TileRemovalRadius` on the hero and NPCs); (3) only then REA + Ghidra (`_tools/node24/rea/rea.cmd`, REA 6.8.0 installed; Ghidra 12.2 in `_tools/ghidra`) on
   `ExportGeometry` and the scan at RVA `0x26EEC30`.
