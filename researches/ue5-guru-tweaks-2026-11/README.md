@@ -1,6 +1,6 @@
 # Research — UE5 tweak gurus: speed without a worse picture, for Conan 3.0.1
 
-> **Created:** 2026-11-09 · **Parent:** the owner's question 2026-11-09 16:49 «может быть в интернете от ГУРУ ТВИКОВ АНРИЛ ЭНДЖИН есть лайфхаки, что еще можно крутануть, чтобы картинка не стала хуже, но чтобы движок работал лучше и быстрее?» · **Status:** recon, nothing measured · **Outbound:** candidates for an A-B-A-B measurement
+> **Created:** 2026-11-09 · **Parent:** the owner's question 2026-11-09 16:49 «может быть в интернете от ГУРУ ТВИКОВ АНРИЛ ЭНДЖИН есть лайфхаки, что еще можно крутануть, чтобы картинка не стала хуже, но чтобы движок работал лучше и быстрее?» · **Status:** recon, nothing measured; 2026-11-09 18:55 tier A prepared for runs — cases `testcases/TC_conan_quickwins_tier_a_2026-11-09.md`, A3 batch `ConanExiles/_config/bench-batches/q9-fastalloc-pages.txt`, none of A1–A6 is in the pack (grep) · **Outbound:** candidates for an A-B-A-B measurement
 
 **Owner's priorities for this recon, and a caveat on our metric:**
 - `[OWNER]` 2026-11-09 16:50 «ещё бы фризы уменьшить - было бы суппер». Stutter is the first target and average FPS the second. He already counts anything above 60 fps as very good.
