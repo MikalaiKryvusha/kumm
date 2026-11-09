@@ -932,5 +932,6 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
 - **Weather off by the remote (2026-11-09 00:47, seen — rain gone, clear sky):** `FindFirstOf('BP_SC_WeatherHandler_C')` → `ForceStopAllWeathers()` then `FreezeWeather()`
   (`UnfreezeWeather()` back); the handler also has `ForceChangeWeather`, `ForceChangeWeatherSeverity`, `ForceChangeFogSeverity`, `ForceChangeWind*`, `Debug_ToggleWeatherOnOff`.
   The jungle river and coast rain often; the rain doc — `ConanExiles/docs/11-дождь.md`.
-- **NPCs frozen, not killed:** `_config/freeze-npcs.lua` — `CustomTimeDilation = 0` on the humanoid / wildlife Characters within a radius (`_G.__fz={undo=true}` unfreezes);
+- **NPCs frozen, not killed:** `_config/freeze-npcs.lua` — `CustomTimeDilation = 0` on the humanoid / wildlife Characters within a radius (`_G.__fz={undo=true}` unfreezes the LOADED ones it re-finds; NPCs frozen at a far
+  place and unloaded since are skipped — storing their refs crashed the game 2026-11-09 16:06, EXP-0495);
   `stand-keeper.sh off` can lose its answer to another remote call — check `stand-keeper.sh last` / the UE4SS line «[stand-keeper] stopped».

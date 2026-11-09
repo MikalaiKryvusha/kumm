@@ -24,6 +24,12 @@ WPO foliage is a MATERIAL shader, so the mod overrides `/FLX_Materials/Materials
 (`Local/CookInfo.ini` → `FilesToCook=/FLX_Materials/…/M_Foliage.uasset`; `kit-buildmod.py` cooks plugin packages via `PLUGIN_ROOTS`). The kit's shader is restored
 from `.orig` after each cook. Not built / not seen in game yet; open: the palm MIs' own static switches, the kit CL 378787 vs the game 379176.
 
+## Engine.ini — view distance 1.5 (2026-11-09 16:2x, the owner's word via KAGO)
+
+`r.ViewDistanceScale`, `foliage.LODDistanceScale`, `grass.CullDistanceScale` 2.0 → **1.5** (`[OWNER]` KAGO chat 2026-11-09 ~13:4x «дальность в конане ставим 1.5» · «остальное
+по конану не трогаем», plan 51 S6); `r.StaticMeshLODDistanceScale` 0.75 untouched. Read back live 1.5 · 1.5 · 1.5 after a fresh launch — these `[SystemSettings]` lines DO reach
+the scene (the file's old warning that the game overrides them is refuted for them; `sg.ViewDistanceQuality` stays 4). Cost / look — plan 51 report.
+
 ## Engine.ini — the physics rebuild queue (2026-11-06 16:00 +03:00, Quick Win from OblivionRemasteredPerformanceFix)
 
 `p.Chaos.AccelerationStructureTimeSlicingMaxQueueSizeBeforeForce=100000` at the top of `[SystemSettings]` (Conan's default read live: 1000). A-B-A-B in one launch
@@ -82,3 +88,4 @@ background twin: a projectile spawned by the remote).
 `r.LumenScene.GlobalSDF.ClipmapExtent=5000` at the top of `[SystemSettings]` — `[OWNER]` 2026-11-09 01:47 «Твой вариант програмных отражений ОХУЕНЕН. самый красивый. Его и берём».
 Read back live after a launch (01:50). Cost on five still river beaches ≈ −1.5 % FPS vs no reflection (rays ≈ −6 %); report `testcases/reports/2026-11-09_conan-water-reflections-five-scenes.md`.
 A measurement after switching a reflection mode for the first time in a game session hitches on shader warm-up — switch once before measuring.
+**Open — bug 89 (2026-11-09 15:45):** the owner sees the water reflection flicker like the palm-leaf shadows did (dark dashes and grain at `river_bend`); cause not yet found.

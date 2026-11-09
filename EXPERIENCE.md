@@ -91,9 +91,24 @@
 
 ## Entries
 
+### EXP-0495 · 2026-11-09 · ❌→✅ · #conan #ue4ss #lua #crash #stand #streaming
+class: a Lua tool keeps UObject references across world streaming and later writes into freed objects — a native crash `pcall` cannot catch
+mechanized: yes — `ConanExiles/_config/freeze-npcs.lua` stores no references any more: undo re-finds live Characters (`IsValid()`) with `CustomTimeDilation == 0`
+**Lesson:** `freeze-npcs.lua` appended every frozen NPC to `_G.__frozen` at each of five beaches 2–3 km apart; its undo wrote `CustomTimeDilation` into all of them, the
+far ones already unloaded → EXCEPTION_ACCESS_VIOLATION in UE4SS, game down (16:06:32). Re-run of the same sequence after the fix: 51 frozen at beach 1, 43 at beach 5,
+undo found 43 — the 51 were gone, exactly the objects the old code touched. Never carry UObject refs in `_G` across teleports / streaming: re-find by class at use time.
+
+### EXP-0494 · 2026-11-09 · ❌→✅ · #perf #bench #conan #foreground #background #measurement
+class: a before/after measurement mixes the window path (front vs background) into the delta
+mechanized: no — the bench journal line carries no path; to add: `static-bench.sh` writes `front|bg` (GetForegroundWindow == game) into the journal row
+**Lesson:** plan 51 measured «after RAM» with the game IN FRONT (the owner wanted to watch) against a night «before» taken in the BACKGROUND: the five-scene mean read
+−1.6 % — a «slowdown» that was the path, not the RAM. One control scene on the background path (river_bend 75.4 vs 70.8 in front, −6 % for being in front; why the front path
+costs more — not checked) exposed it. Compare front only with front, background only with background; when the owner asks for front, keep a background
+control for any before/after taken earlier in the background.
+
 ### EXP-0493 · 2026-11-09 · ❌→✅ · #perf #bench #conan #background #measurement #owner-saw-first
 class: a stopped background batch keeps running and corrupts the next measurement
-mechanized: no — to do after the running batch: `static-bench.sh` refuses when a PresentMon process is alive; `water-scenes.sh` refuses when another copy runs
+mechanized: yes — 2026-11-09 15:3x: `static-bench.sh` refuses (exit 5) while a PresentMon process is alive (seen: a 15 s probe capture kept all its 14.9 s); `water-scenes.sh` refuses (exit 5) while its lock `_bench/.water-scenes.pid` holds a live PID (seen: live → 5, dead PID → runs, lock removed)
 **Lesson:** the second time in two days (EXP-0491 twin): `TaskStop` on a background Git Bash batch left its script running; three batches ran at once, each capture's
 `--stop_existing_session kumm-pm` cut the others' captures to 7–39 s of 60, and the settings switched under each other — the owner saw «замер некоректен» before I did,
 and I first blamed an occluded game window (refuted: background flights record fully). After ANY stop of a batch: `ps -ef | grep -E "bash|sleep|PresentMon"`, kill by

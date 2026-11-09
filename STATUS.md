@@ -131,6 +131,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **DONE 2026-11-09 16:43 +03:00 — plan 51 (the owner: «давай продолжим делать сборку модов 1.0.0 по Конану. но начнём с того, что KAGO нам комп ускорил»).** RAM: still beaches 0 %, the
+>   krinik-show flight +2…+8 %; view distance 1.5 SHIPPED in KrinikConanGraphics' Engine.ini, read back live, +4.7 % on the beaches; the look of 1.5 waits for the owner's eye
+>   (review folder 77, per-beach subfolders). Handover item 1 (two-batch guard) DONE; `freeze-npcs.lua` crash fixed (EXP-0495). Game closed, lock released, KCCP given the machine
+>   back. Report `testcases/reports/2026-11-09_conan-water-fps-after-ram-tuning.md`. NEXT: bug 89 (water reflection flicker at river_bend — the owner «потом исследуем»), then
+>   handover items 2–3 below (attribute pages past 20 — mockup first; sprint + bow).
 > **HANDOVER 2026-11-09 02:02 +03:00 — chat of 2026-11-08 (second) closed by the owner («аодводим итоги сегодняшней работы. закрываем чат»).** The game is CLOSED,
 >   the machine lock released. DONE + seen this chat (reports in `testcases/reports/2026-11-08_*` / `2026-11-09_*`):
 >   - Voice: self-contained Silero v5 eugene in `D:/work/ai_sandbox/tools/silero_tts` (README there); KAIF 2.10's `.kaif/tools/contour/voice-soft.mjs` taken ahead —
@@ -198,6 +203,7 @@ Files without the DONE tag — 29 (2026-10-18 13:45):
   15 (🟡 hub controller in the build), 16–18, 23 (EAA class cards — text in textures), 26 (late emblem in the hub); closed by a frame 2, 3, 7, 21 (4K, 2026-11-07), 7b, 8 (again 2026-10-31 at 1080p, list 540), 9–11,
   14, 16, 19, 20, 22, 24, 25 — work order in plan 35.
 - 🔧 `bugs/85_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: cause fixed in Archery + Camera; the KrinikConanUI twins open; the owner's gameplay is the check.
+- 🔴 `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; after plan 51.
 - 🔴 `bugs/86_…` (attribute tree caption under a node icon), `bugs/87_…` (beasts walk into the hero), `bugs/88_…` (corruption debuff line fonts) — 2026-11-07, the owner's frames.
 - 🔴 The owner's bugs 55–62 (2026-10-18 13:35–13:43, a wave in 5 minutes of play) — `bugs/55_…` – `bugs/62_…`; order and plan 32 — item 00000 above.
 
