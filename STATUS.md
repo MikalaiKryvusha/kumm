@@ -137,8 +137,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >     FPS / RAM / VRAM unchanged, worst frame and first minute not better; told to the owner 19:4x; NOT shipped — waits for his word.
 >   - The owner asked 19:39 to profile the hitches (what the engine does in a hitch frame): first WPR `CPU+GPU` run dropped 5 M events (23 GB, deleted) — redo with a
 >     lighter profile, hitches found by `PresentMon --etl_file` on the same trace.
->   - Plan 49: the owner picked B (per-row scroll) 19:45 and asked for 4 variants of it — next (review folder 80; mockup tool `ConanExiles/_config/mockups/attr_paging_mockup.py`).
->   - Sprint + bow: probes in the Locomotion notes; next — a bow into the hand by the remote.
+>   - Plan 49: the owner picked B (per-row scroll) 19:45, then **B2 — arrows at the row ends** 19:58 (review folder 80); `W_Attribute` recon done (bar formula,
+>     native pips + the game's `PostPipsPlacedOnCanvas` event) — next: how C++ places a pip, then the kit edit of `W_Attribute`.
+>   - Sprint + bow: probes in the Locomotion notes; `sprint-run-probe.lua` now checks the bow as the mod does (three-arg `GetAttachedActors`; the bow is in slot 1) —
+>     runs at the next OWN launch (waived in the test hook until then).
+>   - KCCP has the machine from 19:53 (the owner's reader test; its lock runs 20 minutes); the running game is the OWNER's now — the next own run waits for his game to close.
 >   - Bug 90 (camera enters creatures — the game's camera channel ignored by creature bodies) PARKED by the owner 19:52.
 >   - Still queued: A2 `r.CreateShadersOnLoad`, A3 batch `q9-fastalloc-pages.txt`.
 > **HANDOVER 2026-11-09 18:43 +03:00 — chat of 2026-11-09 closed by the owner («этот чат закрываем, в новом продолжим делать Квик Вины по сборке»).** The game is CLOSED, the machine
