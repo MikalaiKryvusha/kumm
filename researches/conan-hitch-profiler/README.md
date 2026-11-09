@@ -88,7 +88,16 @@ loss stated and below 1 %).
   `hitch-3-n1`, 8.55 GB): hitches **39 vs 67** of the traced base `hitch-2` (−42 %), FPS 53.1 vs 55.7 (−5 %), worst frame **356 vs 196 ms**, CPU 16.84 vs 15.59 ms.
   ONE traced flight per side — not a verdict. The ini restored from the backup after (hash `E337D3FD9EE7…`, no `bDoFullyAsyncNavDataGathering` line); NOT shipped.
   Open: where the navmesh loop went (the game thread's share in `hitch-3-n1`: `hitch-analyze.py` with the PresentMon start of that trace) and what the 356 ms frame is.
-- **Next (a new chat):** (1) N1: the per-thread read of `hitch-3-n1`, then untraced A-B-A-B launches (background path, as A1); (2) candidates to A-B on flights AND on a running-hero route:
+- **N1 per-thread read (2026-11-09 21:0x, `ConanExiles/_config/hitch-threads.py`, the loop found by its low 16 address bits `0xEC30…0xEC67` — ASLR moves the image by
+  64 KB; control: the base trace's 196 ms window → thread 29376, 102 in the loop ✓):** with N1 the navmesh loop has **0 samples on every thread** in both a normal
+  200 ms window and the worst frame (base: 47 of the game thread's 195 in a normal window). The game thread (1148, busiest — 195 of 200) no longer runs it.
+- **The N1 worst frame (356 ms at flight 106.05 s) is a different hitch — a whole-process freeze:** the game thread worked only ≈ 75 ms of the ≈ 396 ms window;
+  at 147.202 s (trace clock) it switched out `Waiting / WrResource` and did not run again for ≈ 320 ms, and ALL game threads fell to 3–6 samples per 50 ms. Its
+  last stack (147 201 524): exe → `UE4SS.dll` (≈ 28 frames, the Lua VM's nested calls — one of our Lua mods) → `ntdll`. *Hypothesis, not proven:* a synchronous
+  write of a Lua mod (a log line) blocked on a file-system resource while the 8.5 GB ETL trace was being written to the same disk D: — an artifact of tracing,
+  AND a real risk: our mods' detailed logs are written on the game thread. To check: the same window's `FileIo` events (add `FILE_IO+FILE_IO_INIT` to the kernel
+  flags), the trace written to another disk (C: or F:), and which mod logs at that moment (UE4SS.log line times).
+- **Next (a new chat):** (1) N1: untraced A-B-A-B launches (background path, as A1) — the per-thread read is DONE above; (2) candidates to A-B on flights AND on a running-hero route:
   `DataGatheringMode` Instant vs Lazy, async gathering on, fewer simultaneous jobs, a smaller invoker radius (the invokers' `TileGenerationRadius` /
   `TileRemovalRadius` on the hero and NPCs); (3) only then REA + Ghidra (`_tools/node24/rea/rea.cmd`, REA 6.8.0 installed; Ghidra 12.2 in `_tools/ghidra`) on
   `ExportGeometry` and the scan at RVA `0x26EEC30`.
