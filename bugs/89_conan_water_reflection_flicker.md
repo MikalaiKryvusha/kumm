@@ -73,6 +73,18 @@ then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? 
 
 ## Fix plan
 
+**The owner's target** (`[OWNER]` 2026-11-09 16:59 «какой конфиг даст: - красивая вода и отркжения - без мерцаний - много FPS ?»). Candidates on top of the shipped `sw`
+reflections, each judged at river_bend by a 4K frame + a 60 fps clip + a one-minute capture (the look — his eye, review folder; flicker and FPS — measured):
+
+| Variant | Lines | Expected (not observed) |
+|---|---|---|
+| A — denoiser | `r.Water.SingleLayer.Reflection.Denoising=1` | the blink goes, the reflection a little softer; small GPU cost |
+| B — full res + denoiser | A + `r.Water.SingleLayer.Reflection.DownsampleFactor=1` + `r.Water.SingleLayer.Reflection.DownsampleCheckerboard=0` | no blink, sharper; more GPU |
+| C — half res + denoiser | A + `r.Water.SingleLayer.Reflection.DownsampleFactor=2` | no blink, the softest; the cheapest |
+
+Rationale `[AI]`: the game is CPU-bound (CPU ≈ GPU 13–15 ms on the beaches), water-reflection work is GPU — a denoiser is expected to cost little FPS. Step 0 still first:
+if the live `Denoising` already reads 1, hypothesis 0 is refuted and the ladder below goes on (waves / TSR velocity / refraction).
+
 Control cases first (HOUSE_RULES rule 24: find who makes it), each A-B on the same still view with a 60 fps clip; the fix at the cause, then the cost A-B-A-B.
 The owner foresees the route: `[OWNER]` 2026-11-09 15:45 «может и шейдер отражений в воде придется переписывать» — if the controls point at the water material, it is
 overridden through the kit like bug 67's `M_Foliage` (our asset in the KrinikConanGraphics pak, `kit-buildmod.py`), not compensated by cvars.
