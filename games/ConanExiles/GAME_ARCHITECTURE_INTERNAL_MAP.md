@@ -921,7 +921,7 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   Buccaneer Bay) runs map columns E–N, rows 3–8; the oasis-beach save (−78471, 245900) sits on its lower, desert part.
 - **Water rendering (static read 2026-11-09, bug 89):** Single Layer Water; Lumen reflects it in its own pass (`LumenReflectionCommon.ush:27`, `ReflectionPass 1`) with its
   own levers `r.Water.SingleLayer.Reflection.{DownsampleFactor, DownsampleCheckerboard, Denoising, ScreenSpaceReconstruction}` — `Denoising` «removes noise and flickering»
-  (help text from the exe by `ConanExiles/_config/cvar-help.py`); live values not read yet. Material candidates of `WaterBodyOcean_2`: Water plugin `Water_Material_Ocean`
+  (help text from the exe by `ConanExiles/_config/cvar-help.py`); live 3.0.1 defaults (17:0x): Reflection 1, DownsampleFactor 1, Checkerboard 0, **Denoising 0**, SSR-recon 0, ForceVelocity −1 — the denoiser off makes the blink (bug 89; flicker measured by `_config/flicker-metric.py` over a `capture-burst.ps1` series, a side-by-side loop by `_config/anim-pair.py`). Material candidates of `WaterBodyOcean_2`: Water plugin `Water_Material_Ocean`
   or Funcom `OptimizedWater/MI_water_4_way_pan_cheap_Ocean`; the game also ships FluidFlux (`Marketplace/FluidFlux`).
 - **Water level:** one `WaterBodyOcean_2` (Z −20240) for the sea AND the big river; land at −20230…−20080 is the beach. Edge finding: `_config/shore-find.lua` (march along a
   heading, ground traced down every 3 m, the first point below −20240 is water). Map markers are place CENTRES (a lake marker can be in the desert, a cove marker
