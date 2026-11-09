@@ -157,6 +157,23 @@ then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? 
 - Open: the engine side of far mirror reflections on SLW (Lumen water reflection pass without temporal history when its denoiser is off; TSR rejecting water history as
   moving). Engine shaders are in the kit; the engine binary is not ours to rebuild — only cvars and materials are reachable.
 
+## Web: the root confirmed (2026-11-09 18:38–18:45)
+
+- Epic forum, «Singlewater Layer shader rendering at distance» (2023-11, BananableOffense): «some kind of aliasing from normal mapping combined with the fact that reflections
+  are forced sharp with SLW» · «Increasing distant roughness is not a good option with SLW. It will fade the reflection, but not scatter the rays» · fading the normals far
+  «the water will look smooth at a distance which is also unnatural». https://forums.unrealengine.com/t/singlewater-layer-shader-rendering-at-distance/1351302
+- «5.1 Single Layer Water Forced-Mirror on Lumen-reflections» (2023-03): forced mirror came with 5.1, «to avoid the cost of two lumen denoising passes»; «There are no CVars
+  I can think of that enables rough transparent reflections» — only rebuilding the engine. https://forums.unrealengine.com/t/5-1-single-layer-water-forced-mirror-on-lumen-reflections/788169
+- «Roughness-responsive reflections for Single Layer Water» (2026-04, Tim.Doerries): rough water reflections need «a more expensive denoising path» and water motion
+  vectors for both the surface and the scene behind; «There's likely a toggle somewhere that forces reflections to zero roughness». No fix posted.
+  https://forums.unrealengine.com/t/roughness-responsive-reflections-for-single-layer-water/2722289
+- No Conan or UE5 mod / plugin fixing it was found (Nexus, GitHub, Funcom forum).
+- Kit shaders: the ray direction is a pure mirror when `TopLayerRoughness < 0.001` (`Lumen/LumenReflections.usf:366`, `ReflectionGenerateRaysCS`); where the SLW pass gets its
+  zero roughness is not found yet (shader or the C++ in the exe). Lumen passes are GLOBAL shaders — they live in the game's `global.utoc/ucas`, not in a material, so the
+  bug 67 trick (an engine `.ush` patched into a material's cook) does not reach them; the kit is CL 378787, the game 379176.
+- The owner, 18:39: «мы же шейдер теней переисали на консервативный - и нам помогло» — corrected from the notes: the conservative-raster patch was REFUTED (2026-11-07
+  18:51); the bug 67 fix was `MaxWorldPositionOffsetDisplacement` 100 cm in `M_Foliage`.
+
 ## Fix plan
 
 **The owner's target** (`[OWNER]` 2026-11-09 16:59 «какой конфиг даст: - красивая вода и отркжения - без мерцаний - много FPS ?»). Candidates on top of the shipped `sw`
