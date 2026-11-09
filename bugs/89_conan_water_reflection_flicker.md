@@ -50,9 +50,26 @@ Rivers and lakes elsewhere use `Environment/Water/Material/FLX/MI_Water_River_*`
   ([stripe thread](https://forums.unrealengine.com/t/stripe-artifact-renders-on-single-layer-water-surface/2719346)).
 - Diagnostics: `r.Water.SingleLayer.Reflection 0` (reflections off on water only).
 
-**Control ladder for the live session (same still view, 60 fps clip each, one lever at a time):** (1) `r.Water.SingleLayer.Reflection 0` — does the blink go with the
-reflection? (2) `r.Water.SingleLayer.ForceVelocity 1` / `r.VelocityOutputPass 1` — TSR? (3) `r.Water.SingleLayer.RefractionDownsampleFactor 2` — the stripes?
-(4) the waves frozen (Gerstner amplitude / `r.Water.WaterMesh.*` or time) — WPO? (5) reflections mode `off` vs `sw` vs rays.
+**Static read of the engine (2026-11-09 16:5x, the owner: «а ты не хочешь пока заняться шейдером? статически его почитать»):**
+- Shaders (kit `F:/CEUE5Devkit/Engine/Shaders/Private/`): Lumen reflections run a separate pass for the water — `Lumen/LumenReflectionCommon.ush:27` «0: Opaque, 1:
+  SingleLayerWater, 2: FrontLayerTranslucency», `:333-335` `ReflectionPass == 1 → IsSingleLayerWater`; the same downsampled tracing + temporal pipeline as opaque surfaces,
+  on a surface whose waves move every frame. Composite: `SingleLayerWaterComposite.usf`, shading `SingleLayerWaterShading.ush`.
+- The water pass has its OWN levers, registered in 3.0.1 (`ConanExiles/_config/cvars-registered.txt`); help texts read from the game exe (UTF-16 strings next to the
+  names, script `cvar_help.py` in the session scratchpad — the help string PRECEDES its name in the exe):
+  - `r.Water.SingleLayer.Reflection.Denoising` — «Whether to use denoising for Single Layer Water reflection traces. Adds some cost and makes reflections softer, but
+    **removes noise and flickering**.» ← the owner's symptom, word for word.
+  - `r.Water.SingleLayer.Reflection.DownsampleFactor` — «Downsample factor for Single Layer Water Reflection. Downsampling will introduce extra noise, so it's
+    recommend to be used together with denoising (r.Water.SingleLayer.Reflection.Denoiser 1).» (the `.Denoiser` name of the help is not registered — `.Denoising` is.)
+  - `r.Water.SingleLayer.Reflection.ScreenSpaceReconstruction` — «Usually not needed, as water has mostly mirror reflections.»
+  - `r.Water.SingleLayer.Reflection.DownsampleCheckerboard` (help not separated), `r.Water.SingleLayer.TiledComposite`, `r.Water.SingleLayer.ForceVelocity`
+    («0 none · 1 depth prepass (default, supports Motion Vector World Offset) · 2 base pass»).
+- **Hypothesis 0 (ranked first now):** the water reflection is traced downsampled / checkerboarded WITHOUT its denoiser → per-frame noise on the waves = dark dashes and
+  grain that blink. Not observed yet: the live values are unknown.
+
+**Control ladder for the live session (same still view, 60 fps clip each, one lever at a time):** (0) READ the live values of the five water-reflection cvars above;
+then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? then `DownsampleFactor 1` / `DownsampleCheckerboard 0`; (1) `r.Water.SingleLayer.Reflection 0`
+— does the blink go with the reflection? (2) `r.Water.SingleLayer.ForceVelocity` / `r.VelocityOutputPass 1` — TSR? (3) `r.Water.SingleLayer.RefractionDownsampleFactor 2`
+— the stripes? (4) the waves frozen — WPO? (5) reflections mode `off` vs `sw` vs rays. Every lever that helps — its FPS cost A-B-A-B before it enters Engine.ini.
 
 ## Fix plan
 
