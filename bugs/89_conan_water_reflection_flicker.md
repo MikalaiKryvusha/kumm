@@ -83,6 +83,34 @@ then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? 
 - The denoiser is a partial fix (owner: «лучше»); the RADICAL fix is at the cause, the way bug 67 was fixed in `M_Foliage`: the water material — identify the material live,
   read its parameters (normal detail / far normal / roughness), try them live by A-B videos, then override the material through the kit.
 
+## The water material (live, 2026-11-09 17:28–17:40)
+
+- `WaterBodyOcean_2` draws **FluidFlux**, not Epic's water material: `WaterMaterial` = `/Game/Maps/MI_OceanOver_EpicTest` (MIC) → parent
+  `/Game/Marketplace/FluidFlux/Surface/Templates/Ocean/Materials/Permutations/MI_OceanOver_SCW` → master `/Game/Marketplace/FluidFlux/Surface/Materials/M_FluxSurfaceOver`;
+  rendered through the MID `GetWaterMaterialInstance()` (`WaterMID_*`). The game map's material candidates were wrong — corrected there.
+- Preset values (MI_OceanOver_SCW): `WaterRoughnessMin 0.07` (near-mirror), `WaterRoughnessFromFresnel 0.3`, `WaterRoughnessFromSpecular 0.007 / Div 0.997`,
+  `DetailWaveHeight 25`, `DetailWaveLength 1000`, `DetailWaveRange 25000`, `WaveDetailWPOScale 1.1`, `WaveTextureRange 4000`, `WaveTextureFalloff 120000`,
+  `StateVelocityScale 0.9`, `WaterSpecular (0.05, 0.4, 8, 0.2)`; switches `UseOcean`, `UseSimulation`, `UseSimulationBlend`, `UseDetailWave`, `UseCoastline` on,
+  `UseFluxWaveDistant`, `UsePreciseCoastline`, `UseFoamDithering` off. EpicTest overrides only scattering / refraction / foam colour.
+- **Live levers on the MID (denoiser on; flicker metric, base 4.0–4.3):** `WaterRoughnessMin` 0.15 → 3.78, **0.35 → 2.75 (−35 %)** · `DetailWaveHeight 0` 4.10 ·
+  `DetailWaveRange 8000` 4.19 · `WaveDetailWPOScale 0` 3.84 · `WaterRoughnessFromFresnel 0` 4.40 · `WaveTextureFalloff 20000` 4.10 · `StateVelocityScale 0` 3.92 ·
+  `WaveTextureRange 1000` 3.98. All restored after.
+- **Reading:** the blink lives in the ROUGHNESS dimension — a near-mirror surface (0.07) with sub-pixel wave normals far away = specular aliasing; detail waves, their WPO and
+  the simulation's flow are not it. A global roughness raise mattes the near water too (a look change). The radical fix at the cause: roughness that grows with
+  DISTANCE (or with normal variance — specular anti-aliasing) inside `M_FluxSurfaceOver`, near water kept a mirror — a kit override like bug 67's `M_Foliage`.
+  Next: read `M_FluxSurfaceOver` in the kit (T3D export) — where roughness and the wave normals are computed, which master parameters exist beyond the preset.
+
+## The owner's spot and the engine levers (2026-11-09 17:22–17:35)
+
+- **FPS cost of the denoiser = none** (KCCP's quiet window, river_bend, background, 60 s each, A-B-A-B): off 71.2 / 72.2 · on 71.8 / 72.9 FPS, 0 hitches.
+- Engine state read live: `r.NGX.DLSS.Enable 0` (TSR, `r.AntiAliasingMethod 4`), `r.Lumen.Reflections.SmoothBias 0.3` (pulls reflections towards mirror), `r.Lumen.Reflections.
+  Temporal.MaxFramesAccumulated 12`, `MaxRoughnessToTrace −1`. (I set DLSS to 1 by mistake at the end of one series — restored to 0, read back.)
+- **The owner's spot** (`[OWNER]` 17:34 «мерцание особенно вот тут видно» · «я этот участок рассматриваю, где две горы отражается» — the far water under the two spires,
+  box x 0.52–0.66 · y 0.465–0.52 of the frame; `flicker-metric.py … 0.465 0.52 0.52 0.66`): no reflection 0.97 · **shipped 6.18 / 6.23** · denoiser 3.46 / 3.57 (−44 %) ·
+  + half res 4.20 · + roughness 0.15 2.90 · + roughness 0.35 2.08 · + 32 frames accumulated 2.85 · SmoothBias 0 3.17 · rays + denoiser 3.28 · rays alone 3.98.
+  The wide band hid it: the spot is where the blink concentrates.
+- Candidates for the owner's A-B videos: B1 = denoiser + 32 frames (no look change expected) · B2 = B1 + `WaterRoughnessMin 0.15` (MIC parameter of the water; a look change).
+
 ## Fix plan
 
 **The owner's target** (`[OWNER]` 2026-11-09 16:59 «какой конфиг даст: - красивая вода и отркжения - без мерцаний - много FPS ?»). Candidates on top of the shipped `sw`
