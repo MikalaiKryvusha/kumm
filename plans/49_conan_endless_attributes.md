@@ -97,6 +97,18 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       Every element carries one of the rule-23 statuses: the row value past 20 and the «+» — «работает» (seen 2026-11-08); the page switch / scroll bar, the
       perk column following it, the bar re-scaled per page — «нет механики — будет сделано»; perk nodes on page 2+ — «нет механики — предложение» (the game has no perks
       past 20; the owner's future perks); a bare scale on a page without perks — «нет механики — будет сделано».
+- [ ] **The build route of B2 — a FORK, recon first (2026-11-10).** The row needs NEW logic (a `Page` variable, the bar shift `(FullValue − Page × 20) / 20` in
+      `UpdateView`, the arrows' clicks, the wheel, the window label, the pips of a page in `PostPipsPlacedOnCanvas`, the perk column per page).
+      `FORK: options <A the kit graph: edit W_Attribute in the devkit (does the kit's Python create K2 nodes? — probe `_config/devkit/kit-probe-bp-graph-api.py`) |
+      B bytecode authoring in the cooked asset (`_config/devkit/kismet.py` writes operators; `kismet-graft.py` only transplants an existing edit) |
+      C a Lua half on the game's own events (post-hooks of `UpdateView` / `PostPipsPlacedOnCanvas`, widgets spawned once) — HOUSE_RULES rule 8: Lua UI only when the asset
+      will not yield, rule 24: a re-set after the game's work is a crutch> · price of error <A/B — a broken widget asset breaks the whole «Хар-ки» screen for every player
+      and goes stale on a game update; C — per-frame re-sets and a seam the owner sees> · consulted <the kit probe (pending), HOUSE_RULES rules 8 and 24, the earlier
+      field route of KrinikConanUI kit edits (`kit-conanui-edit.py` — tree and properties only)>` — decided after the probe.
+      Recon 2026-11-10 (files read): `kismet.py` parses UE 5.8 bytecode and lengthens string literals with the jumps re-based; `kismet-graft.py` inserts an existing
+      donor's operators and new LOCAL variables into one function. Neither adds a CLASS variable (`Page`) or a widget. The widget TREE is editable by the kit's Python
+      (proven: `kit-conanui-edit.py` added `T_CorpseText1` to `WBP_ContainerInfo`, 2026-10-30). So the likely shape is a hybrid: the arrows and the window label added to
+      `W_Attribute`'s tree by the kit (A, tree only), the logic either as kit graph nodes (if the probe shows the API) or as a Lua half bound to the game's events (C).
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).

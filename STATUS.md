@@ -131,6 +131,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-10 02:25 +03:00 — chat of 2026-11-10 (dayloop, the owner's order: the Conan build 1.0.0 backlog, autonomously).**
+>   - DONE: the rulebook cleaned of the owner's raw voice (AGENT_GUIDE, HOUSE_RULES, CLAUDE.md; verbatim → PROJECT_HISTORY entries 2026-11-10 01:52 / 01:55),
+>     the guard `tools/hooks/guide-no-raw-voice.mjs` (PreToolUse, live refusal seen; `--staged` in pre-commit), KAIF #196; the canon rules «code goes to an independent
+>     judge in rounds» and «the guide is a thesis handbook» (AGENT_GUIDE → Notes from the human). Reports `testcases/reports/2026-11-10_guide-no-raw-voice.md`.
+>   - DONE: item 1 of the handover below — `KrinikConanEngineTweaks` has its own manifest entry; KUMM merges a mod's `engineIni` part by section
+>     (`Deploy-ModPack.ps1`, `-EngineIniOut`, `-Verify` per key; fixture 47/47); the pack's `deploy-config.py` takes Engine.ini from the engine; deployed 02:17, the real
+>     `-Verify` clean; the guide (+ Locomotion and EngineTweaks rows, PDF rebuilt) and `README.draft.md` (mods-table, 9 Krinik mods). Report
+>     `testcases/reports/2026-11-10_engine-ini-mod-parts-merge.md`. Not re-read in a running game (the keys are those read live 2026-11-09 22:07).
+>   - NEXT: item 2 below (plan 49 B2) — the logic edit of `W_Attribute` (a page var, the bar shift, arrows, the wheel) needs a bytecode graft (`_config/devkit/kismet-graft.py`)
+>     or the kit graph; first the recon step of plan 49 «how C++ places a pip»; then items 3, 4.
 > **HANDOVER 2026-11-09 22:45 +03:00 — chat kumm-2d closed by the owner («закрывай чат»).** The game (launch 22:06, front) is the OWNER's — he plays in it; no machine lock held;
 >   KCCP closed its chat. Pushed: KUMM and the pack (`conan-exiles-modpack`). Report of the evening: N1 found by the profiler and SHIPPED in the new mod.
 >   **FIRST next chat (in order):**

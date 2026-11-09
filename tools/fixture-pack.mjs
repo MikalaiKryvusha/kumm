@@ -227,6 +227,91 @@ const u4 = ups(['-Remove'])
 expect('откат: -Remove при журнале = тот же откат, папка как до установки, деинсталлятор убран',
   u4.code === 0 && snap(UGAME) === before, `${u4.out}\n${snap(UGAME)}`)
 
+// ---- кусок Engine.ini, который несёт сам мод (поле engineIni мода; KrinikConanEngineTweaks, 2026-11-10): раскатка вливает его в Engine.ini
+// сборки ПО СЕКЦИЯМ — ключ той же секции заменяется (с предупреждением), новые строки встают в конец секции, новая секция — в конец файла;
+// -Verify видит каждую строку куска; -EngineIniOut пишет тот же текст в файл; выключенный мод свой кусок не вливает.
+const IDIR = path.join(DIR, 'inipack'), IGAME = path.join(IDIR, 'game'), IINI = path.join(IGAME, 'Game', 'Config', 'Engine.ini')
+put(path.join(IGAME, 'FixtureGame.exe'), '')
+put(path.join(IDIR, 'gfx', 'Engine.ini'), '[Core.System]\r\nPaths=../x\r\n\r\n[SystemSettings]\r\n; наш комментарий\r\nr.Pack=1\r\nr.Keep=5\r\n\r\n[Tail]\r\nT=1\r\n')
+put(path.join(IDIR, 'tweaks', 'Engine.tweaks.ini'), '[SystemSettings]\r\nr.Tweak=1\r\nr.Pack=2\r\n\r\n[/Script/Nav.Recast]\r\nbAsync=True\r\n')
+// Plain — обычный мод рядом: при выключенном Tweaks раскатке есть что ставить (иначе «No mods selected», контроль ниже)
+put(path.join(IDIR, 'plain', 'p.txt'), 'plain')
+const IMODS = [{ name: 'Tweaks', kind: 'config', version: '1', source: { folder: 'tweaks' }, engineIni: 'Engine.tweaks.ini' },
+  { name: 'Plain', kind: 'files', version: '1', source: { folder: 'plain' }, install: [{ from: 'p.txt', to: 'Game/p.txt' }], verify: ['Game/p.txt'] }]
+const writeIni = mods => writeFileSync(path.join(IDIR, 'modpack.json'), JSON.stringify({
+  packName: 'KUMM fixture ini pack', builtFor: 'fixture', nexusGame: 'fixturegame', gameExe: 'FixtureGame.exe', library: 'mods',
+  engineIni: { file: 'gfx/Engine.ini', target: 'Game/Config/Engine.ini', section: '[SystemSettings]' }, mods }, null, 2))
+writeIni(IMODS)
+mkdirSync(path.join(IDIR, 'mods'), { recursive: true })
+writeFileSync(path.join(IDIR, 'targets.json'), JSON.stringify({ targets: [{ name: 'fixture', path: IGAME }] }, null, 2))
+const ips = args => {
+  try { return { code: 0, out: execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', DEPLOY, '-PackDir', IDIR, ...args], { encoding: 'utf8' }) } }
+  catch (e) { return { code: e.status ?? 1, out: `${e.stdout ?? ''}${e.stderr ?? ''}` } }
+}
+const WANT = '[Core.System]\r\nPaths=../x\r\n\r\n[SystemSettings]\r\n; наш комментарий\r\nr.Pack=2\r\nr.Keep=5\r\n; ===== Tweaks (tweaks/Engine.tweaks.ini, merged by KUMM) =====\r\nr.Tweak=1\r\n\r\n' +
+  '[Tail]\r\nT=1\r\n\r\n; ===== Tweaks (tweaks/Engine.tweaks.ini, merged by KUMM) =====\r\n[/Script/Nav.Recast]\r\nbAsync=True\r\n'
+const i1 = ips(['-Deploy', '-WithEngineIni', '-NoVerify'])
+const got = existsSync(IINI) ? readFileSync(IINI, 'utf8') : '(нет файла)'
+expect('кусок ini: слит по секциям — ключ заменён, новая строка в конце секции, новая секция в конце, комментарии сборки целы',
+  i1.code === 0 && got === WANT, `${i1.out}\n--- ждали\n${WANT}\n--- вышло\n${got}`)
+expect('кусок ini: раскатка говорит, что кусок перебил ключ сборки', /\[warn\]\s+Engine\.ini: Tweaks .* sets r\.Pack=2 over the pack's r\.Pack=1/.test(i1.out), i1.out)
+expect('кусок ini: мод без файлов — [ok] про Engine.ini, не «0 files»', /\[ok\]\s+Tweaks 1\s+\(its part goes into Engine\.ini/.test(i1.out) && !/Tweaks 1\s+\(0 files/.test(i1.out), i1.out)
+const iv = ips(['-Verify'])
+expect('кусок ini: -Verify — строки куска на месте, «nothing to verify» нет', iv.code === 0 && /\[ok\]\s+fixture: Engine\.ini part of Tweaks in place/.test(iv.out) && !/Tweaks: nothing to verify/.test(iv.out), iv.out)
+writeFileSync(IINI, got.replace('r.Tweak=1\r\n', ''))
+const iv2 = ips(['-Verify'])
+expect('кусок ini: игра потеряла строку куска — -Verify [FAIL] и код 1', iv2.code === 1 && /\[FAIL\]\s+fixture: Engine\.ini part of Tweaks: missing or different \[systemsettings\] r\.tweak=1 \(game: none\)/.test(iv2.out), iv2.out)
+const IOUT = path.join(IDIR, 'merged.ini')
+const io = ips(['-EngineIniOut', IOUT])
+expect('кусок ini: -EngineIniOut пишет тот же текст, что раскатка', io.code === 0 && existsSync(IOUT) && readFileSync(IOUT, 'utf8') === WANT, `${io.out}\n${existsSync(IOUT) ? readFileSync(IOUT, 'utf8') : '(нет файла)'}`)
+// Игра переписала файл: пробелы вокруг «=» пропали, комментариев нет — проверка по секции и ключу остаётся зелёной (судья 2026-11-10)
+writeFileSync(IINI, WANT.replace(/^;.*\r\n/gm, '').replace('r.Tweak=1', 'r.Tweak = 1'))
+const iv3 = ips(['-Verify'])
+expect('кусок ini: игра переписала файл без комментариев и с пробелами у «=» — -Verify всё равно зелёный', iv3.code === 0 && /Engine\.ini part of Tweaks in place/.test(iv3.out), iv3.out)
+// База с повтором секции: ключ куска заменяется в каждой копии (игра берёт последнее значение); кусок без секции — отказ, не тихая потеря
+const GFX = path.join(IDIR, 'gfx', 'Engine.ini'), GFX0 = readFileSync(GFX, 'utf8')
+writeFileSync(GFX, '[SystemSettings]\r\nr.Pack=1\r\n\r\n[Tail]\r\nT=1\r\n\r\n[SystemSettings]\r\nr.Pack=3\r\n')
+const id = ips(['-EngineIniOut', IOUT])
+const dup = existsSync(IOUT) ? readFileSync(IOUT, 'utf8') : ''
+expect('кусок ini: секция дважды в базе — ключ заменён в обеих копиях, новая строка в последней',
+  id.code === 0 && (dup.match(/r\.Pack=2/g) || []).length === 2 && !/r\.Pack=[13]/.test(dup) &&
+  dup.indexOf('r.Tweak=1') > dup.lastIndexOf('[SystemSettings]') && dup.indexOf('r.Tweak=1') < dup.indexOf('[/Script/Nav.Recast]'), `${id.out}\n${dup}`)
+writeFileSync(GFX, GFX0)
+const TW = path.join(IDIR, 'tweaks', 'Engine.tweaks.ini'), TW0 = readFileSync(TW, 'utf8')
+writeFileSync(TW, '; no section\r\nr.Lost=1\r\n')
+const ih = ips(['-EngineIniOut', IOUT])
+expect('кусок ini: кусок без секции — отказ с кодом 1 и причиной', ih.code === 1 && /has key lines before its first \[section\]/.test(ih.out), ih.out)
+writeFileSync(TW, 'r.Pre=7\r\n[SystemSettings]\r\nr.Tweak=1\r\n')
+const ip = ips(['-EngineIniOut', IOUT])
+expect('кусок ini: ключ до первой секции (игра его не читает) — отказ, а не перенос в секцию', ip.code === 1 && /before its first \[section\]/.test(ip.out), ip.out)
+writeFileSync(TW, TW0)
+// Ключ с несколькими значениями в базе (Paths= в [Core.System] Конана — 90 строк): кусок не схлопывает их в одно, а отказывает (судья, третий круг)
+writeFileSync(TW, '[Core.System]\r\nPaths=../d\r\n')
+writeFileSync(GFX, '[Core.System]\r\nPaths=../a\r\nPaths=../b\r\n\r\n[SystemSettings]\r\nr.Pack=1\r\n')
+const im = ips(['-EngineIniOut', IOUT])
+expect('кусок ini: ключ с несколькими значениями в базе — отказ, а не схлопывание', im.code === 1 && /a key with 2 values in \[Core\.System\]/.test(im.out), im.out)
+// -Verify с таким сломанным куском — [FAIL] и код 1, проверка доходит до конца (не падает)
+const ivb = ips(['-Verify'])
+expect('кусок ini: сломанный кусок под -Verify — [FAIL] с причиной, проверка дошла до конца', ivb.code === 1 && /\[FAIL\]\s+fixture: Engine\.ini parts: .*multi-value key/.test(ivb.out) && /Summary/.test(ivb.out), ivb.out)
+writeFileSync(GFX, GFX0)
+writeFileSync(TW, TW0)
+// Пак «база с Nexus + добавка» (engineIni.base/appendFile, как у Palworld): кусок мода влить некуда — раскатка отказывает, а не теряет его молча
+const BASEZ = path.join(IDIR, 'mods', 'BaseIni 1 1 2026-09-01T10-00Z abcdefghi.zip'), BASESRC = path.join(IDIR, 'basesrc', 'Engine.ini')
+put(BASESRC, '[SystemSettings]\r\nr.Base=1\r\n')
+execFileSync('powershell', ['-NoProfile', '-Command', `Compress-Archive -LiteralPath ${q(BASESRC)} -DestinationPath ${q(BASEZ)}`])
+put(path.join(IDIR, 'append.ini'), 'r.Append=1\r\n')
+const mpb = JSON.parse(readFileSync(path.join(IDIR, 'modpack.json'), 'utf8'))
+writeFileSync(path.join(IDIR, 'modpack.json'), JSON.stringify({ ...mpb, engineIni: { base: 'BaseIni*.zip', baseEntry: 'Engine.ini', appendFile: 'append.ini', target: 'Game/Config/Engine.ini' } }, null, 2))
+const iba = ips(['-Deploy', '-WithEngineIni', '-NoVerify'])
+expect('кусок ini: пак «база + добавка» — отказ «needs the pack\'s engineIni.file», кусок не теряется молча', /needs the pack's engineIni\.file/.test(iba.out) && !/wrote .*Engine\.ini \(read-only/.test(iba.out), iba.out)
+writeIni([{ ...IMODS[0], enabled: false }, IMODS[1]])
+const i3 = ips(['-Deploy', '-WithEngineIni', '-NoVerify'])
+expect('кусок ini: контроль — мод выключен, Engine.ini = файл сборки байт в байт', i3.code === 0 && readFileSync(IINI, 'utf8') === readFileSync(path.join(IDIR, 'gfx', 'Engine.ini'), 'utf8'), `${i3.out}\n${readFileSync(IINI, 'utf8')}`)
+const i4 = ips(['-Deploy', '-Only', 'Tweaks', '-WithEngineIni', '-NoVerify'])
+expect('кусок ini: выключенный мод, названный в -Only, — предупреждение «part is NOT merged»', /\[warn\]\s+Tweaks 1\s+\(disabled in the manifest - its Engine\.ini part is NOT merged\)/.test(i4.out), i4.out)
+const ir = ips(['-Remove', '-Only', 'Tweaks', '-IncludeDisabled'])
+expect('кусок ini: -Remove мода с куском — предупреждение, как убрать кусок', /\[warn\]\s+Tweaks: its Engine\.ini part stays/.test(ir.out), ir.out)
+
 // ---- ярлык на рабочем столе (manifest.shortcut; слово владельца 2026-11-01 11:11 «сборка на рабочем столе создает ярлык Krinik Conan»): install.ps1
 // из -Export создаёт его после удачной раскатки — на программу сборки, со значком сборки; деинсталлятор игрока его убирает. Путь игрока: выгрузка →
 // install.ps1 → uninstall .cmd. Имя уникальное: ярлык стенда живёт секунды на НАСТОЯЩЕМ рабочем столе и не путается с ярлыками владельца.
