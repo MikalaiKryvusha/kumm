@@ -70,7 +70,7 @@
         (`[OWNER]` 2026-11-09 00:45–00:47 «замер некоректен» · «мобов нужно убивать ДО замера в радиусе 600 метров» · «и дать игре обработать это - секунл 30» ·
         «там всё сильно тормозит, когда убиваешь мобов - нельзя в это время замерять» · «или просто не убивай, а всех замораживай на месте» · «и дождь нужно отключать».)
     6c. **Before a measurement series the machine is taken from the neighbour sessions:** `ListAgents` → every peer session gets a SendMessage «no builds, compiles,
-        tests, installs, downloads or heavy CPU / GPU / disk work until I hand the machine back»; they wait with no exception; at the end of the series each gets
+        tests, installs, downloads or heavy CPU / GPU / disk work until I hand the machine back»; they wait with no exception and open no GUI windows while a screen recording runs (2026-11-09 17:19: a neighbour simulator window landed in an A-B video); at the end of the series each gets
         «замеры закончены, машина твоя». (`[OWNER]` 2026-11-09 15:24–15:25 «соседнего агента KCCP проси ничего не билдить, когда ты будешь замерять» · «чтобы он не
         грузил машину» · «пусть ждёт, пока ты ему не отдашь машину».)
     6d. **A graphics option is compared by an A-B VIDEO:** the same still view, 3 s option A, 3 s option B, switched 5 times in a row, the current option labelled on

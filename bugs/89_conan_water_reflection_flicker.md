@@ -75,9 +75,13 @@ then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? 
 
 - **Hypothesis 0 CONFIRMED in part:** the water reflection is full-resolution (DownsampleFactor 1, no checkerboard) but its denoiser is OFF (`Denoising 0`).
 - Flicker metric (far-water band, frame-to-frame mean abs diff): shipped 5.64 / 5.39 · no reflection 1.23 · **denoiser on 4.17 / 4.11 / 4.05** · + half res 4.41 · TSR
-  velocity modes 4.06 / 4.07 (no effect) · rays 5.43 → 4.66 with the denoiser. The remaining ≈ 4 is common to rays too — the reflection moving with the waves, not a defect.
-- By eye (4K crop, folder 78): the dark dashes / grain go; the reflection gets softer, with soft dark blotches where the cliffs reflect — the owner's call.
-- **Fix candidate:** `r.Water.SingleLayer.Reflection.Denoising=1` in KrinikConanGraphics' Engine.ini — waits for its FPS cost (KCCP's quiet window) and the owner's eye.
+  velocity modes 4.06 / 4.07 (no effect) · rays 5.43 → 4.66 with the denoiser. The remaining ≈ 4 is common to rays too. ~~— the reflection moving with the waves, not a defect~~
+  **CORRECTED 2026-11-09 17:21:** that conclusion was mine and wrong — the owner, after the A-B video: `[OWNER]` «с шумодавом лучше, но радикально проблему не решает» ·
+  «мы с тенями решили радикаольно проблему». The remainder common to rays means the cause sits BEFORE the reflection method — the surface itself (sub-pixel wave normals
+  at distance → specular aliasing), not that it is fine.
+- By eye (4K crop, folder 78): the dark dashes / grain go; the reflection gets softer, with soft dark blotches where the cliffs reflect.
+- The denoiser is a partial fix (owner: «лучше»); the RADICAL fix is at the cause, the way bug 67 was fixed in `M_Foliage`: the water material — identify the material live,
+  read its parameters (normal detail / far normal / roughness), try them live by A-B videos, then override the material through the kit.
 
 ## Fix plan
 
