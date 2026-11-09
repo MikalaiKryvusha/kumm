@@ -73,6 +73,12 @@ loss stated and below 1 %).
   `bGenerateNavigationOnlyAroundNavigationInvokers` **true** (already invokers-only) · `DataGatheringMode` 2 (**Lazy** — geometry gathered at tile-build time) ·
   `bAutoCreateNavigationData` true. Not readable by the remote (`?`): `bDoFullyAsyncNavDataGathering`, `bUseVirtualGeometryFilteringAndDirtying`, `bForceRebuildOnLoad`
   (absent in this build, or a bitfield the remote cannot read — check first: the class's property list).
+- The owner 20:46 «ближе к работе с изображениями - ну так это щейдером решается» · «Аааааа, это RAM и L3 ?» — answered: the voxel / filter steps suit a compute
+  shader, but that is a rewrite of UE's Recast inside the exe with no source (a project, not a quick win), and the hot spot is earlier (gathering). RAM / L3 —
+  *hypothesis, not measured:* the loop streams an array of 24-byte points; the hottest sample sits right after the load (`subsd xmm2, [rdx+8]` → `add rdx, 0x18`
+  holds 44 of 102 — load-latency skid); if the array exceeds the 5700G's 16 MB L3 the loop is memory-bound, which fits KAGO's RAM-timing gain on the flight
+  (+2…+8 %). The fix is fewer comparisons (a spatial grid) or the gathering off the game thread (N1), not faster RAM. To measure: the array length (REA/Ghidra on
+  the caller) or a PMU cache-miss counter (WPR has no PMU here; `xperf -pmc` LLC misses on the thread).
 - **Read again 20:4x with `GetPropertyValue` (the bitfields):** `bDoFullyAsyncNavDataGathering` **false**, `bUseVirtualGeometryFilteringAndDirtying` false,
   `bForceRebuildOnLoad` false, `bRebuildAtRuntime` false (the earlier «?» was the reader's `ok and v or …` swallowing a `false`). The class has the property
   (`ForEachProperty`: also `InvokerTilePriorityBumpDistanceThresholdInTileUnits`, `InvokerTilePriorityBumpIncrease`, `bUseVirtualFilters`) → **quick-win candidate N1:**
