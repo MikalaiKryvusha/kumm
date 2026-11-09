@@ -14,7 +14,7 @@
 | `bDoFullyAsyncNavDataGathering=True` | `[/Script/NavigationSystem.RecastNavMesh]` | flight hitches −48 %, worst frame −43 %, 1 % low +12 %, FPS same (front, A-B-B-A) | `testcases/reports/2026-11-09_conan-quickwin-n1-async-navmesh.md` |
 | `niagara.CreateShadersOnLoad=1` | `[SystemSettings]` (read back as `Set CVar [[niagara.CreateShadersOnLoad:1]]`) | flight hitches −31 %, no FPS / RAM / VRAM cost (background, 3 pairs) | `testcases/reports/2026-11-09_conan-quickwins-shaders-on-load.md` |
 
-Candidates to move here from KrinikConanGraphics (performance, not look) — a list for the owner's eye before the move (`[AI]` proposal): `p.Chaos.AccelerationStructureTimeSlicingMaxQueueSizeBeforeForce=100000`.
+| `p.Chaos.AccelerationStructureTimeSlicingMaxQueueSizeBeforeForce=100000` | `[SystemSettings]` | flight hitches −28 % (2026-11-06) — MOVED here from KrinikConanGraphics `[OWNER]` 2026-11-09 22:10 «да, хорошо» | `testcases/reports/2026-11-06_conan-quickwin-chaos-queue.md` |
 
 ## Built 2026-11-09 22:0x — the interim route (one shipped ini)
 
