@@ -137,6 +137,20 @@ Kernel `PROC_THREAD+LOADER+PROFILE+CSWITCH`, stacks on the profile only, a 2 GB 
 27.0 · 26.3, 60.3 · 59.0 FPS); the heavy probe gave 39 · 356 ms · 22.9 · 53.1. The light probe leaves the hitches as they are; its cost is ≈ 2–4 % of FPS.
 From now on: name hitches with the LIGHT probe only. (No PresentMon ETL pass needed: the live CSV + the PresentMon process start, as before.)
 
+## Who writes the log during a flight (2026-11-09 21:3x, `ConanSandbox.log` of launch 21:31, window 18:32–18:35 UTC ≈ the flight + its 40 s hold)
+
+9 214 lines in ≈ 3 min (≈ 50 / s): `LogModController` 3 898 · `LogScript` 2 137 · `LogHttp` 932 · `LogStreamableManager` 630 · `LogSkeletalMesh` 349 · `LoadErrors` 224.
+UE4SS.log: 621 lines (`[KrinikConanCamera]` 322, `[KrinikConanBench]` 178).
+- **LogScript ≈ 1 180 of the top lines are ONE mod's level: AlMerayah_Reborn `Custom_PvE_Raid`** — «Script Msg: No world was found for object
+  (…Custom_PvE_Raid:PersistentLevel.BP_BuildWall_TN_C_N / BP_BuildTriangle_TN_C_N / BP_BuildCrenelatedWall_C_N [.InstancedBuildingComponent_N]) passed in to
+  UEngine::GetWorld» — the Blueprint-VM strings next to the hot code of the remaining hitches («Accessed None …», `LetObjAccessNone`) belong to this path.
+- `LogModController` «AModController::MergeDataTables - Found existing table entry for … overwriting» (WeightedSpawnTableRow 994, LootTable_Resource 596, ItemTable
+  379, ProfessionTemplateDataTable 196) — the window may still hold world entry; re-cut to the flight proper before acting.
+- `LogHttp` — the game retries `services.live.exiles.wintercloud.net … LoginWithSteam` (libcurl «Could not connect»), 15 times in the window.
+- Next: (1) the log control pair — `[Core.Log] LogScript=Error, LogModController=Warning` (or `Log … off`) vs as is, A-B-B-A, PresentMon only; (2) the AlMerayah
+  building BPs fixed at the source (HOUSE_RULES rule 8 — read `games/ConanExiles/mods/AlMerayah*.md` first); (3) `[KrinikConanCamera]` 322 lines per flight → quieter
+  by default during play (the owner's «mods log in detail» rule — keep detail, move it off the per-frame path).
+
 ## Gaps
 - Alignment of PresentMon's frame times with xperf's `-range` clock — to be checked on the trace (step 4).
 - Function names inside the exe are not available; a hot exe region can only be named by address range.
