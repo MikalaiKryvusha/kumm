@@ -192,6 +192,14 @@
     запускать» · «а когда с клавы никто не набирает - значит нет пользователя за ПК, можно тестить смело» · «разработай себе тулз…» · «пусть он в фоне, когда ты
     работаешь над KUMM, сообщает тебе такие сведения».)
 
+31. **Code the agent writes goes to an independent judge periodically — after every finished code piece (a feature, a fix), before its commit.**
+    1. The judge is a fresh helper (Agent, rule 5) given the diff and the files it touches — never the writer's rationale or conclusion.
+    2. Every finding is checked by the agent against the code or a run before acting: confirmed → fixed in the same piece; refuted → one line why, in the
+       run report or the commit message. The judge errs like the writer; truth is what the code and the run show.
+    3. The commit message names the review: «review: N findings — fixed K, refuted M».
+    (`[OWNER]` 2026-11-10 01:41 «периодически код, который пишешь, отдавай на рувью независимому судью» · «и правь что они будут приносить - они могут ошибаться.
+    как и ты, находите истину».)
+
 19. **Every mod we write is named `Krinik…`.** `ConanCameraControl` → `KrinikConanCamera`, `ConanModPackStatus` → `KrinikConanModPackStatus`. In the README our
     mods stand at the TOP of the one list of all the build's mods, among them — no separate section. (`[OWNER]` 2026-10-31 16:3x, answers in chat: «наши моды
     описываются вверху списка всех модов сборки на ряду всех модов сборки. Наши моды начинаются отныне с Krinik» · names chosen «KrinikConanCamera +
