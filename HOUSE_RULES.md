@@ -71,7 +71,8 @@
         «там всё сильно тормозит, когда убиваешь мобов - нельзя в это время замерять» · «или просто не убивай, а всех замораживай на месте» · «и дождь нужно отключать».)
     6c. **Before a measurement series the machine is taken from the neighbour sessions:** `ListAgents` → every peer session gets a SendMessage «no builds, compiles,
         tests, installs, downloads or heavy CPU / GPU / disk work until I hand the machine back»; they wait with no exception and open no GUI windows while a screen recording runs (2026-11-09 17:19: a neighbour simulator window landed in an A-B video); at the end of the series each gets
-        «замеры закончены, машина твоя». (`[OWNER]` 2026-11-09 15:24–15:25 «соседнего агента KCCP проси ничего не билдить, когда ты будешь замерять» · «чтобы он не
+        «замеры закончены, машина твоя». While the quiet window is not yet given, do the work that needs no clean machine (recon from files, code, documents, cases)
+        — never sit idle waiting. (`[OWNER]` 2026-11-09 18:59 «ты пока что можешь делать то, что не требует чистых ресурсов».) (`[OWNER]` 2026-11-09 15:24–15:25 «соседнего агента KCCP проси ничего не билдить, когда ты будешь замерять» · «чтобы он не
         грузил машину» · «пусть ждёт, пока ты ему не отдашь машину».)
     6d. **A graphics option is compared by an A-B VIDEO:** the same still view, 3 s option A, 3 s option B, switched 5 times in a row, the current option labelled on
         the video; the game in front, desktop HDR off for the recording. A frame series or an animation does not replace it. **Frames for a comparison go into ONE flat
