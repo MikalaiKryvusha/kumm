@@ -28,7 +28,9 @@ from `.orig` after each cook. Not built / not seen in game yet; open: the palm M
 
 `r.ViewDistanceScale`, `foliage.LODDistanceScale`, `grass.CullDistanceScale` 2.0 → **1.5** (`[OWNER]` KAGO chat 2026-11-09 ~13:4x «дальность в конане ставим 1.5» · «остальное
 по конану не трогаем», plan 51 S6); `r.StaticMeshLODDistanceScale` 0.75 untouched. Read back live 1.5 · 1.5 · 1.5 after a fresh launch — these `[SystemSettings]` lines DO reach
-the scene (the file's old warning that the game overrides them is refuted for them; `sg.ViewDistanceQuality` stays 4). Cost / look — plan 51 report.
+the scene (the file's old warning that the game overrides them is refuted for them; `sg.ViewDistanceQuality` stays 4). +4.7 % FPS on five still beaches (plan 51 report).
+**Accepted by the owner's eye** (review folder 77): `[OWNER]` 2026-11-09 16:47 «дальность на 1.5 не победнела. Чуууууть-чуть 2.0 приятнее, но не настолько, чтобы прям
+заметить разницу. А вот 5% Кадров нам нужны!»
 
 ## Engine.ini — the physics rebuild queue (2026-11-06 16:00 +03:00, Quick Win from OblivionRemasteredPerformanceFix)
 

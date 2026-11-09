@@ -2,8 +2,8 @@
 
 > **Created:** 2026-11-09 · written by the KAGO session on the owner's word (KAGO chat 2026-11-09 ~13:3x: «агенту в проект KUMM напиши задание — перемерить у пяти мест воды FPS после твоих достижений по RAM»)
 > **Parent:** `testcases/reports/2026-11-09_conan-water-reflections-five-scenes.md` (the «before» numbers) · KAGO `STATUS.md` → «настройка ПРОЦЕССОРА и памяти», 09.11
-> **Status:** 🟡 measured 2026-11-09 15:24–16:39 (KUMM) — S0 by proxy (latency 93.5 ns), S1–S4, S3b, S6 done: still beaches **0 %** from RAM (spread ≈ 4 %), the
-> krinik-show flight **+2…+8 %**, distance 1.5 shipped and read back live, **+4.7 %** on the beaches; S5 told by voice 16:4x; open: the look of 1.5 by the owner's eye
+> **Status:** ✅ DONE 2026-11-09 16:47 — measured 2026-11-09 15:24–16:39 (KUMM) — S0 by proxy (latency 93.5 ns), S1–S4, S3b, S6 done: still beaches **0 %** from RAM (spread ≈ 4 %), the
+> krinik-show flight **+2…+8 %**, distance 1.5 shipped and read back live, **+4.7 %** on the beaches; S5 told by voice 16:4x; the look of 1.5 accepted by the owner 16:47
 > (review folder 77). Report `testcases/reports/2026-11-09_conan-water-fps-after-ram-tuning.md`; cases `testcases/TC_conan_water_fps_after_ram_2026-11-09.md`
 > **Outbound:** the result goes to the owner (chat + voice) and one line back into KAGO's STATUS is welcome but not required
 
@@ -64,3 +64,16 @@ Expected effect (KAGO's estimate, NOT a measurement): about +3–6 % FPS where C
 - The weather comes back on delta_falls despite the freeze (seen in the night run) — check the frames; re-shoot that scene if it rains.
 - Another batch / PresentMon still alive (EXP-0493) — `ps` before starting, one batch only.
 - Different in-game time of day than the night run — record it; if the light differs a lot, say so next to the Δ.
+
+## ✅ STATUS: DONE (2026-11-09 16:47 +03:00)
+
+Hygiene: guards G1/G2 red-then-green; read-backs before every capture. Functional run: five still beaches background (RAM 0 %), two krinik-show flights (+2…+8 %),
+five beaches in front at distance 1.5 (+4.7 %), live read-back 1.5 — report `testcases/reports/2026-11-09_conan-water-fps-after-ram-tuning.md`.
+`[OWNER]` 2026-11-09 16:47 «дальность на 1.5 не победнела. Чуууууть-чуть 2.0 приятнее, но не настолько, чтобы прям заметить разницу. А вот 5% Кадров нам нужны!»
+
+## Decisions made without the owner
+
+- `[AI]` S0 checked by a proxy (`mem-latency.mjs` 93.5 ns) instead of ZenTimings: the owner was at the keyboard and ZenTimings is a GUI window over his screen.
+- `[AI]` The RAM delta re-measured on the background path after the front pass read −1.6 % (the night «before» was background; EXP-0494).
+- `[AI]` The flights ran with reflections `now` (the 11-08 baseline mode), not the shipped `sw`, so only the RAM changed between the two.
+- `[AI]` Rain at delta_falls was not re-shot: it rained in every pass; the scene is marked in the tables instead.

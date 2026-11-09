@@ -2,7 +2,7 @@
 
 ## 1. Work
 
-Plan `plans/51_conan_water_fps_after_ram_tuning.md` (KAGO, on the owner's word) · cases `testcases/TC_conan_water_fps_after_ram_2026-11-09.md` (G1–G2, W0, R1–R7,
+Plan `plans/51_DONE_conan_water_fps_after_ram_tuning.md` (KAGO, on the owner's word) · cases `testcases/TC_conan_water_fps_after_ram_2026-11-09.md` (G1–G2, W0, R1–R7,
 C1, F1, D0, D1–D6). Basis: the night «before» `testcases/reports/2026-11-09_conan-water-reflections-five-scenes.md` (sw, background) and the 11-08 flight baseline
 `testcases/reports/2026-11-08_conan-overclock-baseline-pure-rays.md` (`oc-A1` / `oc-A2`, background, reflections `now`).
 

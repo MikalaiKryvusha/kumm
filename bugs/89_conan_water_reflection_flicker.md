@@ -31,6 +31,29 @@ video» — a frame series at 6–7 fps misses one-two-frame blinks), then a str
 3. **Software Lumen reflection noise** — temporal denoise of rough reflections; screen traces are off by design (the owner banned screen-space reflection). Control: `off`
    mode on the same view (no reflection) and rays (variant 6) — does the blink follow the mode?
 
+## Recon (2026-11-09 16:4x, no game)
+
+**What the water is made of** (`retoc-5.8 list --path` over the game's utoc, listing in the session scratchpad): the sea AND the big river are one `WaterBodyOcean_2`
+(game map). Candidates for its material: Epic's Water plugin `Engine/Plugins/Experimental/Water/Content/Materials/WaterSurface/Water_Material_Ocean` (+ `_LOD`; Single
+Layer Water, Gerstner waves `Waves/GerstnerWaves_Ocean`) or Funcom's `ConanSandbox/Content/Environment/Water/Material/OptimizedWater/MI_water_4_way_pan_cheap_Ocean`.
+Rivers and lakes elsewhere use `Environment/Water/Material/FLX/MI_Water_River_*` / `MI_Water_Standing_Lake_*`; the game also ships the FluidFlux marketplace system
+(`Marketplace/FluidFlux/…`, with its own `MF_SSRTrace`, `MF_SSROutline`, `MF_SingleLayerWater`). **Which material `WaterBodyOcean_2` actually draws — to read live**
+(`WaterBodyComponent:GetWaterMaterial()` / its MID by the remote).
+
+**Known engine causes of this look (forums, UE 5.1–5.6 — not verified on 5.8):**
+- Gerstner waves are World Position Offset; Lumen does not support WPO, so the reflection is traced from the flat surface while the drawn surface moves — streaks on
+  waves ([forum: Single Layer Water reflection artifacts 5.1/5.2](https://forums.unrealengine.com/t/single-layer-water-reflection-artifacts-5-1-5-2/1171411)). The bug 67 class.
+- Dense per-pixel normals make noisy reflections; workarounds: less refraction, screen traces off ([5.3 glitch](https://forums.unrealengine.com/t/rendering-glitch-in-unreal-5-3-lumen-reflections/1392035)).
+- TSR ghosting / noise on water: the water writes no velocity → `r.VelocityOutputPass 1` (5.5) or `r.Water.SingleLayer.ForceVelocity 1` (5.6+)
+  ([TSR ghost thread](https://forums.unrealengine.com/t/singlelayerwater-and-temporal-aa-ghost-effect/2677186)).
+- Stripe artifact tied to full-resolution refraction → `r.Water.SingleLayer.RefractionDownsampleFactor`
+  ([stripe thread](https://forums.unrealengine.com/t/stripe-artifact-renders-on-single-layer-water-surface/2719346)).
+- Diagnostics: `r.Water.SingleLayer.Reflection 0` (reflections off on water only).
+
+**Control ladder for the live session (same still view, 60 fps clip each, one lever at a time):** (1) `r.Water.SingleLayer.Reflection 0` — does the blink go with the
+reflection? (2) `r.Water.SingleLayer.ForceVelocity 1` / `r.VelocityOutputPass 1` — TSR? (3) `r.Water.SingleLayer.RefractionDownsampleFactor 2` — the stripes?
+(4) the waves frozen (Gerstner amplitude / `r.Water.WaterMesh.*` or time) — WPO? (5) reflections mode `off` vs `sw` vs rays.
+
 ## Fix plan
 
 Control cases first (HOUSE_RULES rule 24: find who makes it), each A-B on the same still view with a 60 fps clip; the fix at the cause, then the cost A-B-A-B.
@@ -44,4 +67,4 @@ overridden through the kit like bug 67's `M_Foliage` (our asset in the KrinikCon
 ## Links
 
 `bugs/67_DONE_conan_palm_leaf_shadows_flicker.md` · `games/ConanExiles/mods/KrinikConanGraphics.md` (water reflections section) · `testcases/reports/2026-11-09_conan-water-reflections-five-scenes.md` ·
-`plans/51_conan_water_fps_after_ram_tuning.md`
+`plans/51_DONE_conan_water_fps_after_ram_tuning.md`

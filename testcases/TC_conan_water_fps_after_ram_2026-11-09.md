@@ -1,6 +1,6 @@
 # TC — Conan: FPS on the five water beaches after the RAM sub-timing tuning, then view distance 1.5 (plan 51)
 
-> **Created:** 2026-11-09 · plan `plans/51_conan_water_fps_after_ram_tuning.md` (written by KAGO on the owner's word)
+> **Created:** 2026-11-09 · plan `plans/51_DONE_conan_water_fps_after_ram_tuning.md` (written by KAGO on the owner's word)
 > **Parent:** `TC_conan_water_reflections_five_scenes_2026-11-09.md` (the «before» numbers, background path)
 > **Status:** 🟡 running from 2026-11-09 15:27 +03:00
 > **Outbound:** the before/after table → the owner (chat + voice), one line to KAGO
