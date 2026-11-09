@@ -84,7 +84,11 @@
     version and writes one line into the reference.
 13. **While the game is open, the run is narrated by voice — in general, not every step.** At a run's start and when its purpose changes, one phrase: what is
     tested and what will look different from the usual build (a mod part switched off for a control case, a stand teleport, killed NPCs). The owner sees
-    the game on his screen even on the background path. **Voice — file first:** (1) Write the phrase into `voice/<YYYY-MM-DD_HH-MM-SS>_<meaning>.txt` (Latin
+    the game on his screen even on the background path. **The phrase is Cyrillic words only — no Latin letter, no digit, no unit sign: the project is said as
+    «Николай, это Кей Ю Эм Эм»; numbers and units in Russian words («тридцать один процент», «пятьдесят миллисекунд»); never «KUMM», «KAIF», «A-B», a cvar, «31 %»,
+    «140 мс».** The hook `tools/hooks/voice-cyrillic-gate.mjs` (PreToolUse, Bash | PowerShell) refuses a voice call whose phrase file holds any of them.
+    (`[OWNER]` 2026-11-09 20:15–20:16 «тебе каиф не говорил, что в речи писать только кирилицей?» · «никаких латинских символом» · «если нужно сказать KUMM, то это
+    будет Кей Ю Эм Эм» · «цифры все словами русскими, и единицы измерения - все словами на кирилице» — after «Николай, это KUMM».) **Voice — file first:** (1) Write the phrase into `voice/<YYYY-MM-DD_HH-MM-SS>_<meaning>.txt` (Latin
     meaning, the folder is committed — the project's history); (2) speak it: `node .kaif/tools/contour/voice-soft.mjs --file voice/<…>.txt --play` with the env of
     `.claude/settings.local.json` (`KAIF_VOICE_RENDER` = the Silero v5 eugene renderer in `D:/work/ai_sandbox/tools/silero_tts`, its README; beeps 2.5) — in a shell
     without that env, export the three `KAIF_VOICE_*` lines first. (3) Read its `voice log:` and `voice-soft:` lines and the exit code; a recording starts only after
