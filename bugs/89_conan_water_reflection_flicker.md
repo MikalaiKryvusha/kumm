@@ -147,6 +147,16 @@ then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? 
 - **Status:** no lever on the shipped material reaches the root. The research's conclusion: the real fixes (roughness from normal variance — Toksvig / LEAN; distance fade of the
   fine normal — Bruneton) need a rewritten water material (no FluidFlux source in the kit). That choice is the owner's.
 
+## Epic's own water material — the same blink (2026-11-09 18:33–18:37)
+
+- `SetWaterMaterial(/Water/Materials/WaterSurface/Water_Material_Ocean)` on `WaterBodyOcean_2` (the last step of a session, one-way): the water renders — turquoise, clear,
+  near-mirror reflections of the spires (frame `ep_epic.jpg`); metric at the owner's spot 5.93 vs FluidFlux 6.58.
+- `[OWNER]` 18:35 «она точно так же мерцает и шумит вдали». **Two unrelated materials blink alike far away → the root is NOT in FluidFlux** but in the shared path:
+  Single Layer Water shading + Lumen reflections («forced to mirror» on SLW, Epic docs) + TSR. Rays blinked less raw (3.98 vs 6.2 FF).
+- `r.ScreenPercentage` 0 (auto), `r.Upscale.Quality 3`, DLSS off; native `r.ScreenPercentage 100` → 5.66 vs 5.94 / 6.03 — the internal resolution is not it.
+- Open: the engine side of far mirror reflections on SLW (Lumen water reflection pass without temporal history when its denoiser is off; TSR rejecting water history as
+  moving). Engine shaders are in the kit; the engine binary is not ours to rebuild — only cvars and materials are reachable.
+
 ## Fix plan
 
 **The owner's target** (`[OWNER]` 2026-11-09 16:59 «какой конфиг даст: - красивая вода и отркжения - без мерцаний - много FPS ?»). Candidates on top of the shipped `sw`
