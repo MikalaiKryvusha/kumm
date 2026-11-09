@@ -174,6 +174,13 @@ then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? 
 - The owner, 18:39: «мы же шейдер теней переисали на консервативный - и нам помогло» — corrected from the notes: the conservative-raster patch was REFUTED (2026-11-07
   18:51); the bug 67 fix was `MaxWorldPositionOffsetDisplacement` 100 cm in `M_Foliage`.
 
+## ⏸ PARKED 2026-11-09 18:43 — the owner's choice
+
+`[OWNER]` 18:42 «А или Б. Б не нравится за риск неестественного вида воды. А нравится - но это долго, а есть более интересные задачи». → Route A (rebuild the Lumen
+global shaders so the SLW reflection respects roughness — find where the SLW pass gets zero roughness, patch in the kit, cook the global shaders, replace them in the pak;
+first a recon of the kit CL 378787 vs the game 379176 compatibility) is the chosen fix, **deferred** behind the build's 1.0.0 work. Route B (own material fading the far
+normals) is rejected for the look; the denoiser is rejected (soap near). The build ships the water unchanged (sw reflections, denoiser off).
+
 ## Fix plan
 
 **The owner's target** (`[OWNER]` 2026-11-09 16:59 «какой конфиг даст: - красивая вода и отркжения - без мерцаний - много FPS ?»). Candidates on top of the shipped `sw`
