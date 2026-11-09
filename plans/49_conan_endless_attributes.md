@@ -67,4 +67,12 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
 - [ ] Recon: the attribute screen's widgets (`W_Paperdoll…` / the attribute tree), how a row draws its scale and perk nodes, and the perks' data (are there perks past 20 — the
       game has none; `[AI]` what a page past 20 shows goes to him as a mockup).
 - [ ] Mockup of the paging (scroll bar vs page switch) on our own frame, statuses on every element — to the owner.
+      Spec (`[AI]`, 2026-11-09 19:06): base — a 4K frame of «Хар-ки» opened by the remote (`ActivateModule(FName('Attributes'))`) with an attribute past 20; two variants
+      on the same frame, labelled A and B, into one flat review folder (HOUSE_RULES 11.6d):
+      A «страницы шкалы» — under each row's scale a switch «‹ 1–20 · 21–40 ›», the current page lit; the perk column follows the page of the selected row.
+      B «прокрутка» — the scale is a strip 20 points wide that scrolls along the row (a thin scroll bar under it, the wheel over the row); the perk column follows the
+      visible range.
+      Every element carries one of the rule-23 statuses: the row value past 20 and the «+» — «работает» (seen 2026-11-08); the page switch / scroll bar, the
+      perk column following it, the bar re-scaled per page — «нет механики — будет сделано»; perk nodes on page 2+ — «нет механики — предложение» (the game has no perks
+      past 20; the owner's future perks); a bare scale on a page without perks — «нет механики — будет сделано».
 - [ ] Build, cases, frames at four resolutions.

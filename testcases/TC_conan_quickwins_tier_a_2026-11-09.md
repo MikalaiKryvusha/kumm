@@ -34,7 +34,7 @@ Acceptance (per candidate):
 |---|---|---|---|
 | S0 | the four candidate names absent from the pack's ini and our configs (`grep -ri` over `ConanExiles/`) | no hit outside the registry dumps | pass 18:5x — only `cvars-from-binary-2026-09-08.txt` lists `r.CreateShadersOnLoad`, `r.RenderTargetPoolMin` |
 | S1 | `ini-temp.py add` then `revert` on the game's Engine.ini with the game closed | the file comes back byte-equal (sha256 before = after) | pass 18:52 — the line landed under `[SystemSettings]` (file line 99), revert: sha256 `0C74F450…CB49A` before = after, the `.bak-s1test` copy gone |
-| A1-L1 | launch A (no line), cold flight | numbers recorded | — |
+| A1-L1 | launch A (no line), cold flight | numbers recorded | pass 19:08 — 58.3 FPS, 59 hitches (17 in the first 60 s), worst 140.1 ms; RAM/VRAM not read (gap) |
 | A1-L2 | launch B `niagara.CreateShadersOnLoad=1`, log shows `Set CVar [[niagara.CreateShadersOnLoad:1]]`, cold flight | numbers recorded | — |
 | A1-L3 | launch A again | the A spread = \|L1 − L3\| | — |
 | A1-L4 | launch B again | B below A on both pairs beyond the spread, or «not seen» | — |

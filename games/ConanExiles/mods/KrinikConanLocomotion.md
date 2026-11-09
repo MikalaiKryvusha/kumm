@@ -78,6 +78,14 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
   NATIVE `AConanCharacter::K2_CanSprint` default (BlueprintNativeEvent) or a native exit of substate 7 on an attack substate. Next: a live probe — while
   drawing, call `K2_CanSprint` by the remote and read `Value`; if false, a UE4SS post-hook on the native `K2_CanSprint` that sets `Value = true` for the hero with
   a bow drawn is the lever (native function — its out param is written before the caller reads it, unlike EXP-0487's BP case); check the aim speed cap after.
+  **Live probes 2026-11-09 19:0x–19:1x (remote, no real input; launch L1 of the quick-win series, after its flight):** `K2_CanSprint` is read through its out param
+  (`p:K2_CanSprint(o)` → `o.Value`; a call without the table errors «expected 1 parameters»). A STANDING hero reads `false` — the stand-still probe
+  (`sprint-probe.lua`) cannot test the bow. The moving twin `ConanExiles/_config/sprint-run-probe.lua` (`AddMovementInput` every tick on the game thread + `bTrySprint`
+  for 2.2 s, sample at 1.5 s into `_G.__srp`): unarmed, no draw → `K2_CanSprint=true`, substates `7,39`, `MaxWalkSpeed` 734.7, speed 690.6 (walk 427.7).
+  With the RMB-down event `InpActEvt_SpecialActionV2_…_7` and EMPTY hands → substate `11` (attack), speed 15, `K2_CanSprint=false` — an unarmed RMB attack, NOT the bow
+  case. The hero's events found: `InpActEvt_Shortcut0…7_K2Node_InputActionEvent_25…18`, `InpActEvt_Sprint_…_16/17`, `InpActEvt_ToggleSprint_…_11/12`, `SetSprint`,
+  `StartSprint`, `StopSprint`, `GetShortcutBarInventory`. Pressing the eight shortcut events left `Children` = light + unarmed fists (either the bar is empty or a weapon
+  is not an attached child — not settled). NEXT: a bow into the hand (`exec SpawnItem` + equip, or read the bar), then `_G.__srp_draw=true`.
 - **NEXT FEATURE (the owner 2026-11-07 10:50, verbatim):** «и было бы хорошо, если бы если игрок попадает в тайминг при ComboStep >= 1, и нажимает в этот тайминг пробел -
   чтобы герой подпрыгивал с замахом меча за голову, нанося удат в падении из пряжка на землю» — a combo finisher: inside the combo advance window (combo step ≥ 1)
   Space = a leap with the sword raised over the head and a downward strike on landing. 10:50 «если это сейчас сложно - на будущее идея» → an idea for later.
