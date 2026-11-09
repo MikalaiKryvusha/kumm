@@ -200,6 +200,10 @@
     **Since 2026-11-07 the set is 8 — `KrinikConanLocomotion`:** jumping while shooting (moved from Archery), jumping while swinging a melee weapon (new), the
     jump and the run growing with the hero's level and attributes (moved from Gameplay), PLAN — jumping off a climbed wall. (`[OWNER]` 2026-11-07 10:39
     «Немного изменяем состав и структуру модов Krinik» · «ДОбавляем мод KrinikConanLocomotion» — the list verbatim in `games/ConanExiles/mods/KrinikConanLocomotion.md`.)
+    **Since 2026-11-09 the set is 9 — `KrinikConanEngineTweaks`:** all our engine fixes and engine tuning (the performance cvars and config of the quick wins — N1
+    async navmesh gathering, A1 Niagara shaders on load when shipped, the physics queue `p.Chaos.…` moved from KrinikConanGraphics); the LOOK settings stay in
+    KrinikConanGraphics. (`[OWNER]` 2026-11-09 21:49 «все наши правки и тюнинг движка собираем в новый мод KrinikConanEngineTweaks».) The split of the current
+    Engine.ini lines between the two mods — a list for his eye before the move (`[AI]` proposal).
 
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · two maps for every game · KAIF
 feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images — WebP, never PNG). The

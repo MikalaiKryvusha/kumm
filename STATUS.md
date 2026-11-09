@@ -155,6 +155,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   - **The light probe is proven** (`hitch-trace-light.ps1`: in-memory ring, written to C: after the flight): hitches as untraced — use only it (HOUSE_RULES 11.6e).
 >   - Hitches left with N1 — diffuse game-thread work of streaming-in (Blueprint VM, reflection, GC) + a log-output block hot in 3 of 5; NEXT: the log control
 >     pair (UE log / UE4SS log on vs off, A-B-B-A, PresentMon only), then A1 + N1 together.
+>   - **Log control pair 21:39–22:01 — NEGATIVE** (report `testcases/reports/2026-11-09_conan-quietlog-control-pair.md`): −37 % log lines, hitches and worst frame
+>     unchanged → the log is not a hitch driver. Hitches left with N1: ≈ 17–26 per fast flight, worst ≈ 85 ms — diffuse streaming-in work.
+>   - **New mod `KrinikConanEngineTweaks`** (the owner 21:49, HOUSE_RULES rule 19): engine tuning moves there; first — a list of Engine.ini lines Graphics vs EngineTweaks for his eye.
 >   - **Log spam found 21:3x:** ≈ 50 lines / s in the flight; ≈ 1 180 «No world was found … UEngine::GetWorld» from AlMerayah_Reborn's `Custom_PvE_Raid` building BPs
 >     (the BP-VM strings of the remaining hitches), `MergeDataTables … overwriting` ≈ 2 200 (re-cut the window), the Funcom login retries. Details + next — research doc.
 >   - 20:55: the game closed, the lock released, KCCP told «замеры закончены, машина твоя».
