@@ -111,6 +111,21 @@ then `r.Water.SingleLayer.Reflection.Denoising 1` (if 0) — does the blink go? 
   The wide band hid it: the spot is where the blink concentrates.
 - Candidates for the owner's A-B videos: B1 = denoiser + 32 frames (no look change expected) · B2 = B1 + `WaterRoughnessMin 0.15` (MIC parameter of the water; a look change).
 
+## The owner's verdict on the denoiser and the root hunt WITHOUT it (2026-11-09 17:38–17:55)
+
+- `[OWNER]` 17:40–17:41 «вблизи резкая вода красивее, из-за четких светов и теней на ней» · «но в дали сильнее прыгает всё» · «сглаженная вода вблизи - мыльная» ·
+  «вдали прыгает меньше» · «но вблизи некрасиво» · «нужно решать проблему мерцания в корне, чтобы без шумодава вода была четкой и не мерцало».
+  → **The denoiser is REJECTED as the fix** (soap near). The target: no denoiser, near water sharp, far water stable. Global roughness is out for the same reason.
+- Levers tried WITHOUT the denoiser at the owner's spot (base 4.9–5.4): `WaterRoughnessFromFresnel` 0.6 / 1.0 → 5.32 / 5.95 · Lumen 32 frames → 5.41 ·
+  `r.TSR.ShadingRejection.Flickering 1` (was 0) → 5.34, Period 3 → 5.34 · `r.TSR.History.ScreenPercentage 200` → 4.73–4.81 (−10 %) ·
+  `r.Lumen.Reflections.FixedStateFrameIndex 0` → 5.41 (the reflection rays' jitter is NOT it) · `WaveTextureDecodeNormal 0` → **12.65** (the wave texture's normal is the
+  smooth part; without it something finer dominates) · `WaveTextureChoppiness 30` 4.76 · `StateSteepnessScale 0` 5.34 · `WaveTextureHeight 10` 4.86.
+- Reading: the blink is the SURFACE — a mirror reflection of the dark spires and the bright sky sampled by wave normals finer than a pixel far away; the reflection method
+  only scales it (sw 6.2, rays 4.0 raw). The source normal term is not found among the preset's levers.
+- **Stopped poking (BUG_FIXING_FRAMEWORK: 3 attempts → research).** Next: `/bug-research` — FluidFlux's own documentation, changelog and forum (Imaginary Blend) on distant
+  shimmering / specular aliasing; which normal terms the ocean preset combines at distance (`UseFluxWaveDistant` off, `UseWaterRoughnessAdvanced`, `MF_DistantLayer`,
+  `MF_ImposibleNormalFix`, `DetailWaveUVSwitching`); whether the game ships a permutation with `UseFluxWaveDistant` / `UseWaterRoughnessAdvanced` on (another MI using them).
+
 ## Fix plan
 
 **The owner's target** (`[OWNER]` 2026-11-09 16:59 «какой конфиг даст: - красивая вода и отркжения - без мерцаний - много FPS ?»). Candidates on top of the shipped `sw`
