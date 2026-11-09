@@ -159,7 +159,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >     unchanged → the log is not a hitch driver. Hitches left with N1: ≈ 17–26 per fast flight, worst ≈ 85 ms — diffuse streaming-in work.
 >   - **New mod `KrinikConanEngineTweaks` — IN THE BUILD 22:07** (the owner 21:49 + 22:05 «обе фичи поставляем в моде и сборке 1.0.0»): N1 + A1 deployed and read back
 >     live; interim route — blocks in the one shipped Engine.ini, source `_unpacked/KrinikConanEngineTweaks/Engine.tweaks.ini` (notes `games/ConanExiles/mods/KrinikConanEngineTweaks.md`).
->     Open: NPC pathing by the owner's eye, the guide + README mod list (rule 20), the deploy merge of several ini sources, moving `p.Chaos…` here (his eye on the list).
+>     NPC pathing — the owner's eye PASS 22:16 («мобы хорошо ходят, не вижу заметной разницы»); `p.Chaos…` moved in (22:10 «да, хорошо»). Open: the guide + README mod
+>     list (rule 20), the deploy merge of several ini sources.
 >   - FUTURE (the owner 22:05): dig deeper into the streaming-in work of the remaining hitches — research doc, section «Future».
 >   - **Log spam found 21:3x:** ≈ 50 lines / s in the flight; ≈ 1 180 «No world was found … UEngine::GetWorld» from AlMerayah_Reborn's `Custom_PvE_Raid` building BPs
 >     (the BP-VM strings of the remaining hitches), `MergeDataTables … overwriting` ≈ 2 200 (re-cut the window), the Funcom login retries. Details + next — research doc.

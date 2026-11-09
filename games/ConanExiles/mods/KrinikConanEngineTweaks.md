@@ -29,5 +29,6 @@
   mod's ini needs either a merge step in the deploy (several `engineIni` sources, KUMM engine change — case in `tools/fixture-pack.mjs`) or the lines kept in the one
   shipped file under a `; KrinikConanEngineTweaks` block. Read `Deploy-ModPack.ps1` `engineIni` handling first; decide by the simpler route that keeps the mod separate in the
   storefront's mod list.
+- **NPC pathing — the owner's eye, PASS:** `[OWNER]` 2026-11-09 22:16 «мобы хорошо ходят, не вижу заметной разницы» (his play in the 22:07 launch, async gathering on).
 - After deploy: read both lines back live (`GetPropertyValue('bDoFullyAsyncNavDataGathering')`, the log `Set CVar`); NPC pathing in play by eye (the owner); the guide and
   the README mod list get the mod (HOUSE_RULES rule 20).
