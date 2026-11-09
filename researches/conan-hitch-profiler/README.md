@@ -26,6 +26,21 @@ loss stated and below 1 %).
    start time (alignment with xperf's µs clock checked on the first frame before trusting it).
 5. Per hitch: `xperf -tle -i <merged.etl> -a profile -detail -range <T1> <T2>` (modules) and `-a activityintervals -thread -range <T1> <T2>` (threads).
 
+## Run 1 — 2026-11-09 20:21–20:3x, front path, warm game (launch 20:18), one `krinik-show` flight
+
+- Tools: `ConanExiles/_config/hitch-trace.ps1 -Label hitch-2` (kernel PROFILE+CSWITCH+DISPATCHER with stacks, 1024 KB × 512–2048 buffers) → 8.56 GB for ≈ 4 min;
+  `ConanExiles/_config/hitch-analyze.py <etl> <live csv> <offset_us> <out.md> --top 30` — ONE xperf pass with 30 `-a profile -detail -range` actions.
+- **PresentMon `--etl_file` found no presents** in this trace (the user session `DXGI + DxgKrnl:0x1` lacks what it needs). Alignment used instead: the live
+  PresentMon CSV of `bench-flight.sh` + the PresentMon process start on the trace clock (`xperf -a process`: 41 443 705 µs; ran 175 s = the flight); window =
+  [TimeInMs − MsBetweenPresents − 20 ms, TimeInMs + 20 ms] + offset.
+- Flight: 55.7 FPS, 67 hitches ≥ 50 ms, worst 196.4 ms (tracing on — not comparable with untraced flights).
+- **By module, the 30 longest hitches** (`_bench/wpr/2026-11-09_202122_hitch-2_breakdown.md`): the game exe ≈ 60 % of the game's samples in the window, `ntoskrnl.exe`
+  ≈ 13 %, `nvwgf2umx.dll` (NVIDIA user driver) ≈ 12 %, `UE4SS.dll` 1–5 %, `D3D12Core` / `vcruntime140` / `ntdll` a few each — the SAME mix as the whole-flight average
+  (exe 57 %, driver 15 %, kernel 14 %, UE4SS 3.4 %). No foreign module appears in a hitch: the hitch is the engine's own work being longer that frame.
+- The module split cannot say which ENGINE work (no PDB). Next: (a) per-thread split in the hitch windows vs normal frames (`-a activityintervals -thread -range`
+  or `-a cswitch`), to see whether the game thread computes or waits; (b) `ntoskrnl` functions with MS symbols (`-symbols`, `_NT_SYMBOL_PATH`) — page faults /
+  file reads vs scheduling; (c) a baseline of normal 16 ms windows in the same pass.
+
 ## Gaps
 - Alignment of PresentMon's frame times with xperf's `-range` clock — to be checked on the trace (step 4).
 - Function names inside the exe are not available; a hot exe region can only be named by address range.
