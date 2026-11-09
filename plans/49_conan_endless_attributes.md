@@ -97,4 +97,8 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       Every element carries one of the rule-23 statuses: the row value past 20 and the «+» — «работает» (seen 2026-11-08); the page switch / scroll bar, the
       perk column following it, the bar re-scaled per page — «нет механики — будет сделано»; perk nodes on page 2+ — «нет механики — предложение» (the game has no perks
       past 20; the owner's future perks); a bare scale on a page without perks — «нет механики — будет сделано».
+- [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
+      диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
+      opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
+      First: find his earlier frames in the chat history / review folders, then a mockup with statuses (rule 23) before any build.
 - [ ] Build, cases, frames at four resolutions.
