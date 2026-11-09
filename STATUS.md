@@ -131,10 +131,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW 2026-11-09 18:54 +03:00 — chat kumm-2d: quick wins tier A, prepared, waiting for the machine.** Case set `testcases/TC_conan_quickwins_tier_a_2026-11-09.md` (S0, S1 pass:
->   none of the candidates is in the pack; `ini-temp.py add/revert` comes back byte-equal); A3 batch `ConanExiles/_config/bench-batches/q9-fastalloc-pages.txt` (pack `ee340dc`).
->   KCCP holds the machine lock to 19:45 (ESP32 toolchain download), asked for a quiet window by SendMessage; kumm-5d confirmed quiet. Next: A1 four launches
->   (base / `niagara.CreateShadersOnLoad=1` × 2, cold `krinik-show` flight each, background path), then A2, then A3 live.
+> **NOW 2026-11-09 19:52 +03:00 — chat kumm-2d, dayloop by the owner's «работай автономно» (18:59).** The machine lock `kumm` to 20:30, KCCP and kumm-5d quiet; the game of
+>   launch L6 RUNS and the owner plays in it — do not close it (memory «Игру владельца не закрывать»).
+>   - A1 `niagara.CreateShadersOnLoad=1` MEASURED (report `testcases/reports/2026-11-09_conan-quickwins-shaders-on-load.md`): flight hitches −31 % (52 → 36 mean over 3 pairs),
+>     FPS / RAM / VRAM unchanged, worst frame and first minute not better; told to the owner 19:4x; NOT shipped — waits for his word.
+>   - The owner asked 19:39 to profile the hitches (what the engine does in a hitch frame): first WPR `CPU+GPU` run dropped 5 M events (23 GB, deleted) — redo with a
+>     lighter profile, hitches found by `PresentMon --etl_file` on the same trace.
+>   - Plan 49: the owner picked B (per-row scroll) 19:45 and asked for 4 variants of it — next (review folder 80; mockup tool `ConanExiles/_config/mockups/attr_paging_mockup.py`).
+>   - Sprint + bow: probes in the Locomotion notes; next — a bow into the hand by the remote.
+>   - Bug 90 (camera enters creatures — the game's camera channel ignored by creature bodies) PARKED by the owner 19:52.
+>   - Still queued: A2 `r.CreateShadersOnLoad`, A3 batch `q9-fastalloc-pages.txt`.
 > **HANDOVER 2026-11-09 18:43 +03:00 — chat of 2026-11-09 closed by the owner («этот чат закрываем, в новом продолжим делать Квик Вины по сборке»).** The game is CLOSED, the machine
 >   is KCCP's (its lock to 18:57; ask KCCP «no builds / no GUI windows» before any measurement or recording — HOUSE_RULES 11.6c). DONE this chat (chronicle entry of this moment):
 >   plan 51 DONE (RAM: still 0 %, flight +2…+8 %; view distance 1.5 shipped, +4.7 %, accepted); bench guards (EXP-0493); `freeze-npcs.lua` crash fix (EXP-0495); A-B video tool

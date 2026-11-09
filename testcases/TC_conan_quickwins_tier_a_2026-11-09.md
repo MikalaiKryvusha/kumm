@@ -37,7 +37,7 @@ Acceptance (per candidate):
 | A1-L1 | launch A (no line), cold flight | numbers recorded | pass 19:08 — 58.3 FPS, 59 hitches (17 in the first 60 s), worst 140.1 ms; RAM/VRAM not read (gap) |
 | A1-L2 | launch B `niagara.CreateShadersOnLoad=1`, log shows `Set CVar [[niagara.CreateShadersOnLoad:1]]`, cold flight | numbers recorded | — |
 | A1-L3 | launch A again | the A spread = \|L1 − L3\| | — |
-| A1-L4 | launch B again | B below A on both pairs beyond the spread, or «not seen» | — |
+| A1-L4 | launch B again | B below A on both pairs beyond the spread, or «not seen» | pass 19:3x — plus a reversed pair L5 B / L6 A (the hitch count fell launch by launch): A 59 · 47 · 49 vs B 48 · 28 · 31, −31 %; FPS / RAM / VRAM same; worst frame not better; report `testcases/reports/2026-11-09_conan-quickwins-shaders-on-load.md` |
 | A2-L5…L8 | the same four launches for `r.CreateShadersOnLoad=1` (on top of A1 only if A1 shipped) | same | — |
 | A3 | `d3d12.FastAllocator.MinPagesToRetain` 5 → 32 live by `exec` on WARM flights A-B-A-B in one launch (a batch file in `bench-batches/`); if `exec` does not take it live — an ini launch pair | hitches ≥ 50 ms and the worst frame | — |
 | A4/A5 | `FX.BatchAsync=1`, then `FX.EarlyScheduleAsync=1` live, median `MsCPUBusy` in a busy camp at night | blocked: first find whether Conan's effects are Cascade (`dumpticks` in a camp) | — |

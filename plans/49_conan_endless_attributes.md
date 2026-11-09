@@ -66,7 +66,9 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       `testcases/TC_conan_attributes_uncapped_and_dead_shot_2026-11-08.md` A1–A3. The same module carries the owner's Dead Shot change (×2 → ×1.2, D1–D2).
 - [ ] Recon: the attribute screen's widgets (`W_Paperdoll…` / the attribute tree), how a row draws its scale and perk nodes, and the perks' data (are there perks past 20 — the
       game has none; `[AI]` what a page past 20 shows goes to him as a mockup).
-- [ ] Mockup of the paging (scroll bar vs page switch) on our own frame, statuses on every element — to the owner.
+- [x] Mockup of the paging (scroll bar vs page switch) on our own frame, statuses on every element — to the owner (review folder 79, 19:41).
+      **DECIDED 2026-11-09 19:45 by the owner: B** `[OWNER]` «давай прокрутка каждого ряда отдельно» · «4 варианта этой идеи» → next: four variants of the
+      per-row scroll on the same frame, review folder 80.
       Spec (`[AI]`, 2026-11-09 19:06): base — a 4K frame of «Хар-ки» opened by the remote (`ActivateModule(FName('Attributes'))`) with an attribute past 20; two variants
       on the same frame, labelled A and B, into one flat review folder (HOUSE_RULES 11.6d):
       A «страницы шкалы» — under each row's scale a switch «‹ 1–20 · 21–40 ›», the current page lit; the perk column follows the page of the selected row.
