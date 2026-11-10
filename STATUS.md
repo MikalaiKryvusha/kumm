@@ -139,8 +139,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >     (`Deploy-ModPack.ps1`, `-EngineIniOut`, `-Verify` per key; fixture 47/47); the pack's `deploy-config.py` takes Engine.ini from the engine; deployed 02:17, the real
 >     `-Verify` clean; the guide (+ Locomotion and EngineTweaks rows, PDF rebuilt) and `README.draft.md` (mods-table, 9 Krinik mods). Report
 >     `testcases/reports/2026-11-10_engine-ini-mod-parts-merge.md`. Not re-read in a running game (the keys are those read live 2026-11-09 22:07).
->   - NEXT: item 2 below (plan 49 B2) — the logic edit of `W_Attribute` (a page var, the bar shift, arrows, the wheel) needs a bytecode graft (`_config/devkit/kismet-graft.py`)
->     or the kit graph; first the recon step of plan 49 «how C++ places a pip»; then items 3, 4.
+>   - Committed and pushed: KUMM `aa37127` (rulebook + guard), `1b54d81` (the ini merge, 4 judge rounds); pack `a451ad5`. The running game read the merged Engine.ini
+>     (02:33: async gathering true, both cvars set).
+>   - NEXT: item 2 below (plan 49 B2) — route A is viable: the kit's Python has `BlueprintGraphEditor` (call-function / branch / variable get-set / bound-event nodes,
+>     pin links; `_config/devkit/kit-probe-bp-graph-api.json`). DONE in the kit 02:55: step 1 — `_config/devkit/kit-attribute-paging-edit.py` added the int member `Page`
+>     and wired `FullValue − Page × MaxAttributePointAllotment` into `UpdateView` (read back, compiles, saved into the kit's `Mods/KrinikConanUI/Content/UI/Inventory/
+>     Attributes/W_Attribute.uasset`; no other build mod ships `W_Attribute` — `mod-overrides.py`). 03:0x built (`CookInfo` line, 0 missing refs), deployed, LIVE PASS
+>     (TC `TC_conan_attribute_paging_step1_2026-11-10.md`: `Page` 1 → 25 shows 5 of 20, 39 → 19 of 20; `Page` 0 → vanilla). Every row lives twice among the live
+>     widgets (bug 84?). NEXT: plan 49 step 2 (arrows, label, wheel, pips, the perk column — the editor API is in `kit-probe-graph-editor-docs.json`); then items 3, 4.
 > **HANDOVER 2026-11-09 22:45 +03:00 — chat kumm-2d closed by the owner («закрывай чат»).** The game (launch 22:06, front) is the OWNER's — he plays in it; no machine lock held;
 >   KCCP closed its chat. Pushed: KUMM and the pack (`conan-exiles-modpack`). Report of the evening: N1 found by the profiler and SHIPPED in the new mod.
 >   **FIRST next chat (in order):**

@@ -91,6 +91,18 @@
 
 ## Entries
 
+### EXP-0501 · 2026-11-10 · ✅ · #conan #kit #blueprint #python #ui #graph
+class: blueprint logic believed impossible to author from the kit's Python
+mechanized: yes — `ConanExiles/_config/devkit/kit-attribute-paging-edit.py` (the worked example), `kit-probe-graph-editor-docs.json` (the signatures)
+**Lesson:** the UE 5.8-based Conan devkit ships `unreal.BlueprintGraphEditor` — Blueprint GRAPH authoring from Python: `ed = BlueprintGraphEditor.get_graph_editor_by_name
+(bp, "<graph>")` (an editor object per graph, not a static library), then `ed.add_call_function_node("/Script/Engine.KismetMathLibrary:Multiply_IntInt")` (the `:` form),
+`ed.add_get_member_variable_node(name)`, `add_branch_node`, `add_component_bound_event_node`, `list_all_nodes`; pins by `BlueprintEditorLibrary.find_input_pin /
+find_output_pin`, links by `BlueprintGraphPinLibrary.try_create_connection / break_single_pin_link`; members by `BlueprintEditorLibrary.add_member_variable(bp, name,
+get_basic_type_by_name("int"))`; then `compile_blueprint` and `EditorAssetLibrary.save_loaded_asset`. So new widget LOGIC is a kit edit, not a bytecode graft and not a
+Lua crutch. Traps: `WidgetBlueprint.widget_tree` / `WidgetTree.root_widget` are not exposed — iterate `unreal.Widget` under `<asset>:WidgetTree.`; a newly
+overridden vanilla asset needs its `FilesToCook=` line or the pak silently lacks it.
+**Trigger:** a vanilla widget needs new behaviour (a variable, a click, a formula change) in the Conan build.
+
 ### EXP-0500 · 2026-11-10 · ❌→✅ · #review #judge #guard #regex #heuristic #process
 class: a pattern guard grown by review rounds turns into whack-a-mole
 mechanized: yes — `tools/hooks/guide-no-raw-voice.mjs` judges BY DIFFERENCE (new lines only), the GAP in its header lists the accepted misses

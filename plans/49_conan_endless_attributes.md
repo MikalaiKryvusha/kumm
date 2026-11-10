@@ -109,6 +109,24 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       donor's operators and new LOCAL variables into one function. Neither adds a CLASS variable (`Page`) or a widget. The widget TREE is editable by the kit's Python
       (proven: `kit-conanui-edit.py` added `T_CorpseText1` to `WBP_ContainerInfo`, 2026-10-30). So the likely shape is a hybrid: the arrows and the window label added to
       `W_Attribute`'s tree by the kit (A, tree only), the logic either as kit graph nodes (if the probe shows the API) or as a Lua half bound to the game's events (C).
+      **Kit probes 2026-11-10 02:38–02:50** (`_config/devkit/kit-probe-bp-graph-api.py` · `kit-probe-w-attribute.py`, their `.json` next to them): the kit's Python has
+      `BlueprintGraphEditor` — an editor object per graph (`BlueprintGraphEditor.get_graph_editor_by_name(bp, "<graph>")`), with `add_call_function_node`,
+      `add_get_member_variable_node` / `add_set_member_variable_node`, `add_member_variable`, `add_branch_node`, `add_custom_event_node`, `add_component_bound_event_node`
+      (a button's OnClicked), `list_all_nodes`; pins by `BlueprintEditorLibrary.find_input_pin/find_output_pin`, links by `BlueprintGraphPinLibrary.try_create_connection` /
+      `break_pin_links`. **Route A is viable for the logic too** (`[AI]`; the FORK closes on the editor's own API as the domain authority).
+      - The tree (26 widgets): `overlay` → `HB_Info` (HorizontalBox) holds `I_Icon`, `VerticalBox_0` (the label `T_Label`, the value `T_Current`), `Progress` (Overlay:
+        `Overlay_3` = `IPB_ProgressBar` + `IPB_CorruptionBar` + `AttributeCanvas` (the pips), and the «+» `LevelAttributeButton`), `SizeBox_Corruption_Button`.
+        The tree is reached by iterating `unreal.Widget` under `<asset>.W_Attribute:WidgetTree.` (`WidgetTree.RootWidget` is not exposed).
+      - `UpdateView` (25 nodes): `FullValue` → two knots → `To Float (Integer)` → A of `float / float` (B = `To Float(MaxAttributePointAllotment)`) → `Clamp(0, 1)` →
+        `IPB_ProgressBar.InterpolateToPercent(·, 0.2)`; then the corruption bar the same with `CorruptionValue`. **The page shift is one insertion**: between the second
+        knot and `To Float` put `FullValue − Page × MaxAttributePointAllotment` (`Multiply_IntInt`, `Subtract_IntInt`, a new int member `Page`). The `UpdateAttributeView`
+        is an event inside `EventGraph` (126 nodes), not a function graph.
+      - [x] **Step 1 DONE 2026-11-10 03:0x** — `_config/devkit/kit-attribute-paging-edit.py`: member `Page` + the shift in `UpdateView`; `W_Attribute` added to
+        KrinikConanUI's `CookInfo.ini`; built, deployed; live (TC `TC_conan_attribute_paging_step1_2026-11-10.md` P1–P4 pass): `Page` 1 → 25 shows 5 of 20, 39 shows
+        19 of 20; `Page` 0 → vanilla. Every row lives twice among the live widgets (bug 84's duplicated pages?) — step 2 must drive the SHOWN instance.
+      - [ ] Step 2 — arrows ‹ › at the row ends (`Progress`'s overlay or `HB_Info`), visible only past 20; the window label «21–40» over the right end; clicks and the
+        wheel (`OnMouseWheel` override) set `Page` within 0…floor((FullValue−1)/20) and call `UpdateView`; the pips of a page (`PostPipsPlacedOnCanvas`); the perk
+        column follows the selected row's page (`W_AttributeInfo`). Mockup statuses of folder 80 stay the acceptance.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
