@@ -10,6 +10,13 @@
 A debuff row (skull icon, red plate): «Сильная скверна — Макс. ОЗ снижены на 175». «Сильная скверна —» is in a smaller font than «Макс. ОЗ снижены»; «на 175» wraps to a
 second line in the small font again; the red plate fills only ≈ 2/3 of the row width, the rest is dark.
 
+## Recon 2026-11-10 13:0x (parked for the owner's pick of bug 91)
+
+- The stand's hero carries the heavy corruption buff already: a component `00_BP_AC_Buff_Corruption_Heavy_C` among the hero's components (remote
+  `K2_GetComponentsByClass(ActorComponent)`), so the debuff row should exist without any setup. No live text widget held «скверна» except `W_CastingInfo.CorruptText`
+  («Скверна») with the hub closed — the debuff row is built where the buffs are listed (the HUD buff bar's hover or a hub page) — find it with the remote's text search
+  (`find_text.lua`, `_G.__ft='кверна'`) while that place is open.
+
 ## To do
 
 Find the widget (the status-effect / debuff row — vanilla, UIMod_Hosav or ours), whether the two sizes come from the translation (two runs of rich text / a bold

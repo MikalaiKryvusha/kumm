@@ -89,7 +89,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 ## ❓ Awaiting human review (interviews / homework)
 
-- ❓ **2026-11-10 12:49 +03:00 — the look of the corruption «+» hover label (bug 91), the owner's pick of four** — review folder `НА ОТСМОТР НИКОЛАЕМ/81_podpis_oskverneniya`
+- ❓ **2026-11-10 13:17 +03:00 — the «+» brightness of the attribute rows (plan 49), the owner's pick** — review folder `82_plyusy_yarche` (now 0.495 · V1 0.72 · V2 0.85 · V3 1.0 ·
+  V4 1.4, the game's texture, a higher tint); shown 13:16 in ImageGlass.
+- ✅ bug 91 — the owner picked V1 13:04 (a plate above the diamond); built in the kit, deployed 13:12 (pack `eef82bf`); the real-hover check waits for a free PC.
+- (done) **2026-11-10 12:49 +03:00 — the look of the corruption «+» hover label (bug 91), the owner's pick of four** — review folder `НА ОТСМОТР НИКОЛАЕМ/81_podpis_oskverneniya`
   (`chto_smotret.md`; mockup `ConanExiles/_config/mockups/corruption_label_mockup.py`): V1 a plate above the diamond · V2 under it · V3 the game's place with a plate ·
   V4 no label. To show him when he is free (he was at the keyboard at 12:5x); then the kit edit of `W_Attribute`'s `CorruptionLabel` branch.
 

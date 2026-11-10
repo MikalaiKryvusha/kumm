@@ -252,6 +252,12 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
              step 2 did not try) and returns `Handled`; W1–W4 pass by a real wheel (TC step 2).
           5. [x] cases: page 2 of the placeholder attribute shows its pips at 25/30/35/40, page 1 the stock ones, the column scrolls; frames at 1080p / 2K / 720p (case R) —
              report `testcases/reports/2026-11-10_conan-placeholder-perks-pages.md`. The arrows' owed checks D1, D2, M1 pass by real clicks (12:3x), a reopen keeps the page.
+- [ ] **The «+» brighter, in Conan's style** — `[OWNER]` 2026-11-10 13:13 «смотри, как автивный + выглядит, и как твоя стрелочка.» · «Мне нравится яркость твой
+      стрелки. Можно плюсы ярче сделать?» · «но чтобы сохранить стиль конана» (his crop: the «+» of a row next to our page arrow). Read 13:1x
+      (`_config/devkit/kit-probe-plus-button.py` → `.json`): `LevelAttributeButton` normal = `T_Attributes_perk_button_default` TINTED 0.495 (linear), hovered =
+      `T_Attributes_perk_button_hover` at 0.724, pressed = hover texture at 0.384, disabled = no draw. Variants (the same texture, a higher tint): review folder
+      `82_plyusy_yarche` (`_config/mockups/plus_brightness_mockup.py`): 0.495 now · V1 0.72 · V2 0.85 · V3 1.0 · V4 1.4 (Slate takes a tint above 1). Waits for his
+      pick; then the kit edit of the button style (the hovered tint kept above the normal one).
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
