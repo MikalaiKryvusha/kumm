@@ -184,8 +184,11 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           rim 3, dark fill) with a light-gold triangle, under the scale at its ends (x: 40 right of the «+» / 58 left of the pips at 20, y: +64 below the bar); the
           arrow with nowhere to go DIM (rim / fill / triangle at low alpha); numbers — the segment's start (left) and end (right) in rounded boxes (radius 10, rim muted
           bronze (150, 122, 80, 0.69) width 2, fill (22, 21, 20, 0.8), text (218, 210, 194), serif bold), 34 further inside than the arrows, 46 above the bar
-          (4K-frame pixels; the kit converts by the viewport scale). Next: the kit — Lo / Hi number widgets, the arrows' look and dim state, places by slot +
-          render translation, the combined label removed.
+          (4K-frame pixels; the kit converts by the viewport scale).
+          **REVISED 2026-11-10 10:19 by the owner — V7** (`mock_arrows/07_V7_bronzovye_chisla.webp`, `attr_arrows_mockup.py` v7): `[OWNER]` «всё же давай цифры как в v1» ·
+          «бронза, без контейнеров» — the numbers lose their boxes: serif bold text in bronze (198, 158, 102) with a dark drop shadow, at V6's places (34 inside, 46
+          above the bar); the arrows stay as in V6 (diamonds, dim when inactive). V7 shown 10:2x — the owner's verdict pending. Next: the kit — Lo / Hi number widgets,
+          the arrows' look and dim state, places by slot + render translation, the combined label removed.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).

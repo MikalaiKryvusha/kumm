@@ -136,8 +136,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >     added its pages at Z-order 41 over the game's modal (all hub modules and `PerkSelection` are Z 40); now 40 → the dialog on top (T2 pass). The owner's «map without
 >     tabs» NOT reproduced (Tab, Q, M — M opens the hub on «Карта» with tabs). TC `TC_conan_bug84_player_path_2026-11-10.md`; bug 84 stays 🟡 for the map.
 >   - **Plan 49 step 2 LIVE (pack `ba5b348`):** arrows ‹ › and «21–40» on rows past 20, pips hidden past page 0 — S1, S2, S4 pass; the wheel NOT built (kit refuses the
->     nodes, routes in plan 49); one judge round, findings verified (commit message). OWED: the look — the arrows are small and sit on the bar's ends, the label over
->     the last pip (frame `s1` of the TC) → a look pass + frames at four resolutions for the owner; then the perk column per page; the wheel.
+>     nodes, routes in plan 49); one judge round, findings verified (commit message). The LOOK by the owner's mockup rounds 10:00–10:19 → V7 (plan 49: diamond arrows
+>     under the scale ends, dim when inactive; bronze serif numbers above, no boxes) — shown, his verdict pending; then the kit build of V7, frames at four
+>     resolutions; then the perk column per page; the wheel.
+>   - Bug 92 DONE (HUD bars magenta again, pack `3ac94a4`); bug 91 OPEN (the corruption «+» hover label) — after the arrows.
 > **2026-11-10 02:25 +03:00 — chat of 2026-11-10 night (dayloop, the owner's order: the Conan build 1.0.0 backlog, autonomously).**
 >   - DONE: the rulebook cleaned of the owner's raw voice (AGENT_GUIDE, HOUSE_RULES, CLAUDE.md; verbatim → PROJECT_HISTORY entries 2026-11-10 01:52 / 01:55),
 >     the guard `tools/hooks/guide-no-raw-voice.mjs` (PreToolUse, live refusal seen; `--staged` in pre-commit), KAIF #196; the canon rules «code goes to an independent
