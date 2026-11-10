@@ -56,3 +56,6 @@ the owner's top debt now:** fix `krinik_hub_controller` so no page / the map exi
 **2026-11-10 03:0x — the same class seen on «Хар-ки» (plan 49 step 1 run, background, the window opened by `ActivateModule(FName('Attributes'), true, false)`):** every
 attribute row exists TWICE among the live `W_Attribute_C` (12 rows for 6 attributes; both answer `UpdateView`) — a second attribute page under the shown one, the
 dialog-under-the-tree of this bug would sit in the same stack. Control case still owed (the hub section off → one set of rows?). Probe `ConanExiles/_config/attr-page-probe.lua`.
+**2026-11-10 03:18 — not reproduced in one try:** a fresh background launch, «Хар-ки» opened once by the remote → `attr-rows-owners.lua` lists SIX rows, all
+visible, all owned by one `W_Attributes_C`. The 03:0x run (12 rows) differed by `attr-cap-probe.lua` first and three `attr-page-probe.lua` calls; one try is no verdict —
+next variants: open/close/open the window, the hub tab switch, the level-up «+» path.
