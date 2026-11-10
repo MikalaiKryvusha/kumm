@@ -63,3 +63,6 @@ next variants: open/close/open the window, the hub tab switch, the level-up «+�
 `true` again → `attr-rows-owners.lua` lists TWELVE rows, all `IsVisible` true, owned by TWO windows `W_Attributes_C_2147456032` and `…_2147456521`: closing the
 module does not destroy its window, re-opening adds a second one on top — the stack this bug is about. NEXT: the control case — the same three calls with
 `krinik_hub_controller` off (is it ours, or the game's own `ActivateModule`?), then the fix at the cause (rule 24).
+**2026-11-10 03:22 — control case:** the same three calls with `krinik_hub_controller` commented out in the deployed `main.lua` (restored after, 0 control lines
+left) → still TWO windows (`W_Attributes_C_2147456497`, `…_2147459867`, 6 rows each). On THIS path (the remote's `ActivateModule`) the stack is the GAME's, not
+our controller's. Not yet judged: the player's path (Tab / the hub tab keys, real input) — the owner's stuck map came by that path.
