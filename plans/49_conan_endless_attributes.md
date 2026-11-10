@@ -154,7 +154,9 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           **Probed 03:14 (`kit-probe-node-catalog.py`, 60 519 nodes, categories localized in the kit's Russian UI):** `Кнопка|Событие|AssignOnClicked` (a Bind to
           OnClicked WITH its matching custom event) and `Кнопка|Событие|BindEventtoOnClicked` exist. Route for the arrows: in `Construct`, a `Get Btn_KrinikPage*`
           node, then `ed.create_node_from_name("Кнопка|Событие|AssignOnClicked", <pos>, [<the getter's output pin>])` — the custom event runs `Page` ± 1 and the game's
-          `UpdateView` chain. Wheel: `OnMouseWheel` is not in the catalog by that name — `BlueprintEditorLibrary.add_function_override(bp, "OnMouseWheel")` next.
+          `UpdateView` chain. Wheel: **probed 03:15 (`kit-probe-wheel-override.py`, nothing saved): `add_function_override(bp, "OnMouseWheel")` works** — a graph
+          `OnMouseWheel` with the entry (`MyGeometry`, `MouseEvent`) and a return node (`Event Reply`): read the wheel delta from `MouseEvent`
+          (`GetWheelDelta`), `Page` ± 1, `UpdateView` chain, return `Handled`. **The recon of step 2 is complete — next session builds it.**
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
