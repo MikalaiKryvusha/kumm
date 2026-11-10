@@ -151,6 +151,10 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           **Probed 2026-11-10 03:12 (`kit-probe-bound-event.py`, nothing saved): NO** — «Cannot nativize 'Button' as 'Object' (allowed Class type: 'ActorComponent')».
           Next probe: `ed.list_available_nodes([])` filtered by «Clicked» / «Bind Event» in EventGraph — then `create_node_from_name("<Category|Name>", pos, [])` for the
           button's «On Clicked» or a «Bind Event to On Clicked» + custom event in `Construct`.
+          **Probed 03:14 (`kit-probe-node-catalog.py`, 60 519 nodes, categories localized in the kit's Russian UI):** `Кнопка|Событие|AssignOnClicked` (a Bind to
+          OnClicked WITH its matching custom event) and `Кнопка|Событие|BindEventtoOnClicked` exist. Route for the arrows: in `Construct`, a `Get Btn_KrinikPage*`
+          node, then `ed.create_node_from_name("Кнопка|Событие|AssignOnClicked", <pos>, [<the getter's output pin>])` — the custom event runs `Page` ± 1 and the game's
+          `UpdateView` chain. Wheel: `OnMouseWheel` is not in the catalog by that name — `BlueprintEditorLibrary.add_function_override(bp, "OnMouseWheel")` next.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
