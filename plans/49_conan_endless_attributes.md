@@ -216,9 +216,13 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           было кружков перков, так как мы их не добавили» · «есть только стоковые 1...20» · «а в каком-то навыке сделай пустышки для 21...40 - предусмотри, что они
           появляются» · «и что список справа их принимает и отображает и скролится». Steps (after the V8 look):
           1. [x] page past 1 shows no stock pips (live since step 2: `AttributeCanvas` hidden past page 0 — S2 frame);
-          2. [ ] placeholder perks for 21–40 in ONE attribute — rows in the game's perk data (the table that feeds `SharedPerkPips` by `AttributePointsRequired`; find it
-             by the pips probe's perk objects) with req 25 / 30 / 35 / 40, a neutral name and «перк-заглушка» description `[AI]`, in a pak of ours (KrinikConanGameplay
-             data or a merge table) — never a fake row in a vanilla asset copy;
+          2. [ ] placeholder perks for 21–40 in ONE attribute — rows in the game's perk data with req 25 / 30 / 35 / 40, a neutral name and «перк-заглушка» description
+             `[AI]`, in a pak of ours — never a fake row in a vanilla asset copy. **Recon 2026-11-10 11:1x (game map :897):** the data is `/Game/Systems/Perks/PerksTable`
+             (row struct `PerksTableRow`: `PerkName`, `PerkDescription`, `Icon`, `TargetIntStat`, `AttributePointsRequired`; rows `<Attribute>_10a/_10b/_20a/_20b`);
+             effects live in blueprints asking `HasPerk(<row>)` — a placeholder row has no effect by construction. Route: our own `DT_KrinikPerks` (row struct
+             `PerksTableRow`, rows e.g. `Leadership_25`, `_30`, `_35`, `_40`, `TargetIntStat` 20) merged into `PerksTable` by `ModController.MergeDataTables` at the main
+             menu — the same native path `krinik_mod_settings` uses for `DT_UIModuleTable` (`KrinikConanUI.md`). Then the C++ places a req-25 pip at 25/20 × 858 (past the
+             bar) — step 3 re-places them per page.
           3. [ ] the pips per page instead of hiding the canvas: on page p show the pips whose req is in (20p, 20p+20], each at X = (req − 20p) / 20 × 858.2, in the game's
              own `PostPipsPlacedOnCanvas` (rule 24 — its event after its own placement); stock pips stay on page 1;
           4. [ ] the right perk column (`W_AttributeInfo`) takes the placeholder perks, shows the selected row's page and scrolls when they do not fit (the column does not
