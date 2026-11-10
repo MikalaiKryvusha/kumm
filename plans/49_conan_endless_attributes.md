@@ -191,7 +191,21 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           верни» · «и сделай их кегель больше» — the numbers back at V1's places (over the arrows' x, 58 above the bar), size 50 (was 40 in 4K-frame pixels).
           10:21–10:23: `[OWNER]` «левые чуть-чуть дай правее» · «ты и кнопки левые подвигал - не нужно было, только цифры» — the LEFT NUMBER only +18; «стрелочки плохо
           центрированы» · «да, центрировать нужно по массе» — the triangle inside the diamond is centred by its CENTROID (w/6 toward the flat side), not its box.
-          V8 with both shown 10:23 in front (ImageGlass) — the owner's verdict pending. Next: the kit — Lo / Hi number widgets,
+          10:24–10:27 the triangle nudged toward its tip: w/4 → w/3 → 0.4 w → back to **w/3** (`[OWNER]` «хотя, нет, хватит трети, было хорошо на трети»).
+          **ACCEPTED 2026-11-10 10:27 — V8** `[OWNER]` «макет принят, делаем в игре, шикарно!» (`mock_arrows/08_V8_bronza_krupnee.webp`, `attr_arrows_mockup.py` v8 at
+          pack `227ab48`). **The spec for the kit (4K-frame pixels; widget units = px / 2.094 at 4K):**
+          - arrows: a diamond, half-diagonal 26, rim GOLD (222, 178, 102) width 3, fill (34, 30, 24, 0.92), a light-gold (255, 226, 160) triangle (height 18, width
+            9.9) shifted w/3 toward its tip from the diamond centre; under the scale, centre 64 below the bar line; x — the left arrow 40 right of the «+» centre, the right
+            arrow 58 left of the pips' column at 20 (the bar's right end − 64);
+          - the inactive arrow (no page that way) DIM: rim (120, 108, 90, 0.37) width 2, fill (28, 27, 26, 0.59), triangle (150, 140, 120, 0.33) — in UMG the Button's
+            Disabled brush, `SetIsEnabled(Page > 0)` / `SetIsEnabled(Page < maxPage)` in UpdateView;
+          - numbers: the segment's start (Page×20+1) over the left end and its end ((Page+1)×20) over the right end, serif bold size 50, bronze (198, 158, 102) with a
+            dark drop shadow (2, 3), centre 58 above the bar line; the left number 18 further right than the left arrow, the right one over the right arrow; no boxes;
+          - the combined label «1–20» goes; the numbers show on every page of a row past 20 (the pips stay on page 1 — the numbers sit above them, left of the pip
+            column at 20).
+          Build route: arrow textures from the mockup's own drawing code (4 TGAs: left / right × active / dim) → `import-logo-texture.py` → the Buttons' Normal /
+          Hovered / Pressed / Disabled brushes; `Txt_KrinikPage` (child 4) becomes the right number, a new `Txt_KrinikPageLo` (child 5) the left one; places by slot
+          alignment + render translation (no layout change of the row); then frames at four resolutions. Next: the kit — Lo / Hi number widgets,
           the arrows' look and dim state, places by slot + render translation, the combined label removed.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
