@@ -148,6 +148,9 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           found by name and never removes one (the GUID trap: run the script TWICE before a build after adding a widget — `KrinikConanUI.md`, «Kit Python traps»).
           FIRST probe of step 2: does `BlueprintGraphEditor.add_component_bound_event_node(<the Button>, "OnClicked")` accept a widget (its doc types `ActorComponent`)?
           If not — a custom event bound by `K2Node_AssignDelegate` / `add_dispatcher_event_node`, or the game's `Select` path.
+          **Probed 2026-11-10 03:12 (`kit-probe-bound-event.py`, nothing saved): NO** — «Cannot nativize 'Button' as 'Object' (allowed Class type: 'ActorComponent')».
+          Next probe: `ed.list_available_nodes([])` filtered by «Clicked» / «Bind Event» in EventGraph — then `create_node_from_name("<Category|Name>", pos, [])` for the
+          button's «On Clicked» or a «Bind Event to On Clicked» + custom event in `Construct`.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
