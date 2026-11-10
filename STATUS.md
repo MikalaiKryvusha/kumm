@@ -131,6 +131,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-10 12:38 +03:00 — chat of 2026-11-10 midday («продолжаем делать Конана», dayloop by the owner's 11:29 order).** Plan 49 steps 2–5 DONE and seen live: placeholder
+> perks `Krinik_Vitality_25/30/35/40` (KrinikConanUI `DT_KrinikPerks` merged into `PerksTable`), the pips follow the row's page (Lua `krinik_attr_pips`, post callback
+> of the native `AttributeEntry:UpdatePipIcons`; EXP-0504), the right perk column scrolls (`SB_KrinikPerkScroll`); the arrows' owed checks D1 / D2 / M1 by real clicks,
+> frames at 1080p / 2K / 720p — report `testcases/reports/2026-11-10_conan-placeholder-perks-pages.md`. Judge: 3 rounds (the 3rd — no confirmed defect). Pushed: pack
+> `4c5548e` (mod) + `e57403d` (guide line, PDF, build-docs waits for Chrome). Bug 91 REPRODUCED by a real hover (the row's own `CorruptionLabel`, no plate; recon
+> in the bug) — NEXT: the control case (vanilla `W_Attribute`), then variants of the label's look for the owner (taste class). Then the wheel over a row (kit refuses
+> the nodes); the column's bar look → the owner's eye. The game runs (background, launch 12:41, the agent's run; lock to 13:03).
 > **HANDOVER 2026-11-10 11:17 +03:00 — chat closed by the owner («закрывай чат, продолжим в новом»); FORCE-closed at 85 %: the bonsai trim of STATUS was NOT done (debt for the
 > next /end-chat-soft).** Game closed, no lock, no crash window; pushed KUMM and pack `c6afcc9`; the owner ordered «работай автономно» (11:04).
 > **FIRST next chat:** (1) plan 49 step 2 owed checks — a click on a DIM arrow, an arrow click on a MIDDLE row, frames at 1080p / 2K / 720p; (2) the owner's 10:28 order —

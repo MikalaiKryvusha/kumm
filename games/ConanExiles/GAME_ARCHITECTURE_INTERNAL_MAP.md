@@ -898,6 +898,13 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   rows `<Attribute>_10a/_10b/_20a/_20b` per attribute (Strength, Agility, Vitality, Grit, Resourcefulness, Leadership) plus `Corrupted_*`. The table holds only names,
   texts and thresholds — the EFFECTS live in blueprints that ask `I_PerkSystemInterface.HasPerk(<row name>)` (`BaseBPCombat`, `BP_BaseProjectile`, `BP_AttributeSystem`)
   or in native code (`EPlayerPerks` enum).
+  **Read whole 2026-11-10 11:33** (`ConanExiles/_config/devkit/kit-probe-perks-table.py` → `.json`): 48 rows — per attribute `_5`, `_10a`, `_10b`, `_15`, `_20a`, `_20b` (two
+  rows at one level = the branched «choose a trait» level) and `Corrupted_<Leadership|Strength|Vitality>_5/10/15/20`; `TargetIntStat` is the stat ENUM NAME:
+  Strength `AttributeMight`, Agility `AttributeAthleticism`, Vitality `AttributeHealth`, Grit `AttributeStamina`, Resourcefulness `AttributeEncumbrance`, Leadership
+  `AttributeLeadership`, the corrupted ones `AttributeSummoning` / `AttributeScourge` / `AttributeAbberation`; `Icon` — `/Game/UI/Textures/GUIs/Inventory/PerkIcons/
+  T_PerkIcon_01 | 02_a | 02_b | 03 | 03_a | 03_b | corrupt_01…04`. Referencers of the table: `BasePlayerChar`, `W_Attributes`, `W_Attribute`, `BP_PerkSystemComponent`,
+  `PAL_Systems` — the UI reads the table itself, so rows merged into it (`ModController.MergeDataTables`) reach the screen. Our placeholders `Krinik_Vitality_25…40`
+  (plan 49) come from KrinikConanUI's `DT_KrinikPerks`.
 - **«Верная рука» = `Agility_10b` (Dead Shot)**, «Все метательное оружие и стрелы летят вдвое быстрее и наносят на 15% больше урона издалека»: in
   `BP_BaseProjectile` ubergraph the initial speed = `ProjectileInitialSpeed × 2.0` when the bool `ApplyPerkProjectileSpeed` is set (`Double 2.0 @uexp+23646` — the
   only 2.0 literal in that graph; `kismet-trace.py … ExecuteUbergraph_BP_BaseProjectile`, lines 1916–2202). Since 2026-11-08 our KrinikConanGameplay ships

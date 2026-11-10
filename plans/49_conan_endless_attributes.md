@@ -218,19 +218,37 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           было кружков перков, так как мы их не добавили» · «есть только стоковые 1...20» · «а в каком-то навыке сделай пустышки для 21...40 - предусмотри, что они
           появляются» · «и что список справа их принимает и отображает и скролится». Steps (after the V8 look):
           1. [x] page past 1 shows no stock pips (live since step 2: `AttributeCanvas` hidden past page 0 — S2 frame);
-          2. [ ] placeholder perks for 21–40 in ONE attribute — rows in the game's perk data with req 25 / 30 / 35 / 40, a neutral name and «перк-заглушка» description
+          2. [x] placeholder perks for 21–40 in ONE attribute — rows in the game's perk data with req 25 / 30 / 35 / 40, a neutral name and «перк-заглушка» description
              `[AI]`, in a pak of ours — never a fake row in a vanilla asset copy. **Recon 2026-11-10 11:1x (game map :897):** the data is `/Game/Systems/Perks/PerksTable`
              (row struct `PerksTableRow`: `PerkName`, `PerkDescription`, `Icon`, `TargetIntStat`, `AttributePointsRequired`; rows `<Attribute>_10a/_10b/_20a/_20b`);
              effects live in blueprints asking `HasPerk(<row>)` — a placeholder row has no effect by construction. Route: our own `DT_KrinikPerks` (row struct
              `PerksTableRow`, rows e.g. `Leadership_25`, `_30`, `_35`, `_40`, `TargetIntStat` 20) merged into `PerksTable` by `ModController.MergeDataTables` at the main
              menu — the same native path `krinik_mod_settings` uses for `DT_UIModuleTable` (`KrinikConanUI.md`). Then the C++ places a req-25 pip at 25/20 × 858 (past the
              bar) — step 3 re-places them per page.
-          3. [ ] the pips per page instead of hiding the canvas: on page p show the pips whose req is in (20p, 20p+20], each at X = (req − 20p) / 20 × 858.2, in the game's
+             **BUILT 2026-11-10 11:35–11:40** — `_config/devkit/kit-krinik-perks.py` → KrinikConanUI `Local/DT_KrinikPerks` (rows `Krinik_Vitality_25/30/35/40`, Живучесть =
+             `AttributeHealth`, texts «Перк NN-го уровня (заглушка)» / «Место для будущего перка сборки. Пока перк ничего не даёт.» `[AI]`), CookInfo line, the Lua merge
+             `MERGES[2]` of `krinik_mod_settings`; live 11:40 «perks merge (main menu): rows 48 -> 52» (TC `TC_conan_placeholder_perks_21_40_2026-11-10.md` P1 pass); the
+             right column TAKES them (P5 partial — cut at the bottom, P6); the C++ placed their pips PAST the bar on the right column (P2 fail) → step 3.
+          3. [x] the pips per page instead of hiding the canvas: on page p show the pips whose req is in (20p, 20p+20], each at X = (req − 20p) / 20 × 858.2, in the game's
              own `PostPipsPlacedOnCanvas` (rule 24 — its event after its own placement); stock pips stay on page 1;
-          4. [ ] the right perk column (`W_AttributeInfo`) takes the placeholder perks, shows the selected row's page and scrolls when they do not fit (the column does not
-             scroll today — `KrinikConanUI.md`, `W_AttributeInfoEntry_PerkView` row);
-          5. [ ] cases: page 2 of the placeholder attribute shows its pips at 25/30/35/40, page 1 the stock ones, the column scrolls; frames at four resolutions. Next: the kit — Lo / Hi number widgets,
-          the arrows' look and dim state, places by slot + render translation, the combined label removed.
+             `FORK: options <A the kit graph (a loop over AttributeCanvas children) | B a Lua half at the game's own events> · price of error <A — a broken W_Attribute for
+             every player; B — a Lua dependency, a one-frame flash if the hook ran after paint> · consulted <the kit's node catalog, 60 518 names (KIT_CATALOG_OUT of
+             kit-probe-node-catalog.py): no ForEach and no macro call; the graph editor's API (kit-probe-graph-editor-docs.json) has no macro node; HOUSE_RULES rule 8
+             (Lua UI only when the asset will not yield, once, no polling) and rule 24 (at the game's event)>` → **B** `[AI]`. Read live 11:47 (remote hook count): a page
+             click does NOT re-run the C++ placement (0 per click, 12 per window open) — so the Lua half hooks `PostPipsPlacedOnCanvas` (remember the C++ X) AND
+             `UpdateView` (every refresh, the clicks included). Built: `krinik_attr_pips.lua` (KrinikConanUI section) + `kit-attribute-pips-pages.py` (the step-2 branch's
+             «else» SetVisibility literal Hidden → SelfHitTestInvisible: the canvas stays shown past page 0; compiled, saved 11:48). Pips read `AttributePointsRequired`
+             (native `AttributePerkPip`; also `IsCorrupted`, `PerkID`, `SharesSpot`).
+             **DONE 2026-11-10 12:2x** — build 3 of `krinik_attr_pips` (hooks `PostPipsPlacedOnCanvas` + the NATIVE `AttributeEntry:UpdatePipIcons`; a pip off its page is drawn
+             off-screen by its render translation — the collapse was undone because the native hook ran as a PRE-hook (corrected 12:3x by a two-callback trace; the post
+             callback since), a far slot X shrank the whole page; EXP-0504); judge round 1:
+             8 findings, 7 confirmed and fixed, 1 refuted (the pip X has no offset), 1 declined (hook retry). Live: P2b, P3, P4 pass, the page round trip keeps X.
+          4. [x] the right perk column (`W_AttributeInfo`) takes the placeholder perks, shows the selected row's page and scrolls when they do not fit — **DONE 2026-11-10 12:3x**:
+             `kit-attribute-info-scroll.py` (`SB_KrinikPerkScroll` around `PerkInfoBox`), P6 by the remote, P6b by a REAL wheel. The column lists ALL the attribute's perks
+             (stock and placeholders) and scrolls — it does not filter by the row's page (`[AI]`: the column is the attribute's whole perk list in the game too; the owner's
+             «список справа их принимает и отображает и скролится» is met; filtering by page — only if he asks).
+          5. [x] cases: page 2 of the placeholder attribute shows its pips at 25/30/35/40, page 1 the stock ones, the column scrolls; frames at 1080p / 2K / 720p (case R) —
+             report `testcases/reports/2026-11-10_conan-placeholder-perks-pages.md`. The arrows' owed checks D1, D2, M1 pass by real clicks (12:3x), a reopen keeps the page.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).

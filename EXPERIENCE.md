@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0504 · 2026-11-10 · ❌→✅ · #conan #ue4ss #lua #ui #widget #hide #canvas
+class: tool-format-assumed
+mechanized: yes — `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_attr_pips.lua` (each failed way commented at its line)
+**Lesson:** hiding game-managed child widgets from Lua took three builds. (1) `SetVisibility(Collapsed)` did not hold — because the hook on a NATIVE UFunction
+(`RegisterHook(path, fn)` with ONE callback) is a PRE-hook: the game's function ran after it and set the pips Visible (corrected 2026-11-10 12:3x: a two-callback
+trace read Collapsed in the first callback, Visible in the second; the earlier «re-set outside any hookable function» was wrong). Work that must follow a native
+function goes in the SECOND callback. (2) Moving a child far away by its CanvasPanelSlot position
+breaks the LAYOUT: a CanvasPanel measures its children, and the page in a ScaleBox shrank to a speck. (3) `SetRenderTranslation` far off-screen works — it changes
+no layout, carries the hit test, and the game never sets it. Also: a blueprint's call into the native parent (`UpdatePipIcons` of `AttributeEntry`) is hooked on the
+`/Script/<Module>.<NativeClass>:<Func>` path — the blueprint path says «no UFunction»; trace the ORDER of a refresh with remote post-hooks that log state per step
+before choosing the hook point.
+**Trigger:** Lua must hide or move widgets the game itself creates and refreshes (pips, list entries, markers).
+
 ### EXP-0503 · 2026-11-10 · ❌→✅ · #fixture #test-stand #desktop #owner-machine #cleanup
 class: experiment-left-live
 mechanized: yes — `tools/fixture-pack.mjs` sets `KUMM_DESKTOP_DIR` to its temp folder (install.ps1 and the stand's uninstaller read it first) and asserts nothing appeared on the real desktop
