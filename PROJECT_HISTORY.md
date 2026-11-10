@@ -3,6 +3,49 @@
 
 
 
+## ⟦NOW⟧ — STATUS «Where to continue»: the detail bullets of the HANDOVER 2026-11-09 22:45 block, moved verbatim at the bonsai trim of 2026-11-10
+
+> The FIRST list of that handover stays in STATUS (its item 1 done 2026-11-10); these bullets record the closed evening of 2026-11-09.
+
+### STATUS.md lines 169–202 (working tree after commit a906821)
+
+````text
+>   - A1 `niagara.CreateShadersOnLoad=1` MEASURED (report `testcases/reports/2026-11-09_conan-quickwins-shaders-on-load.md`): flight hitches −31 % (52 → 36 mean over 3 pairs),
+>     FPS / RAM / VRAM unchanged — SHIPPED in KrinikConanEngineTweaks (the owner 22:05).
+>   - The owner asked 19:39 to profile the hitches (what the engine does in a hitch frame): first WPR `CPU+GPU` run dropped 5 M events (23 GB, deleted) — redo with a
+>     lighter profile, hitches found by `PresentMon --etl_file` on the same trace.
+>   - Plan 49: the owner picked B (per-row scroll) 19:45, then **B2 — arrows at the row ends** 19:58 (review folder 80); `W_Attribute` recon done (bar formula,
+>     native pips + the game's `PostPipsPlacedOnCanvas` event) — next: how C++ places a pip, then the kit edit of `W_Attribute`.
+>   - Sprint + bow: probes in the Locomotion notes; `sprint-run-probe.lua` now checks the bow as the mod does (three-arg `GetAttachedActors`; the bow is in slot 1) —
+>     runs at the next OWN launch (waived in the test hook until then).
+>   - **HITCH PROFILER (the owner's ask 19:39) — CAUSE NAMED 20:4x:** the longest flight hitch (196 ms) is the AI navmesh (Recast) rebuild gathering geometry ON THE
+>     GAME THREAD (`ExportGeometry` → a squared-distance scan, exe RVA `0x26EEC30`); ≈ 24 % of the game thread even in normal flight frames. Live settings and the next
+>     A-B candidates — `researches/conan-hitch-profiler/README.md`. Tools: `ConanExiles/_config/hitch-trace.ps1`, `hitch-analyze.py`, `disasm-rva.py`.
+>   - REA (`morluto/rea`, the owner's pointer 20:35) installed with a portable Node 24.22.2 (`_tools/node24/rea/rea.cmd`; the global Node 24.15 untouched — pm2
+>     production runs on it); Ghidra 12.2 downloading into `_tools/ghidra`. The MCP registration (`rea-agents setup`) — next chat.
+>   - Voice: Cyrillic words only, «Кей Ю Эм Эм», numbers in words — HOUSE_RULES 13 + hook `voice-cyrillic-gate.mjs` (live from the next chat).
+>   - **N1 `bDoFullyAsyncNavDataGathering=True` MEASURED 21:00–21:22** (front, A-B-B-A, report `testcases/reports/2026-11-09_conan-quickwin-n1-async-navmesh.md`):
+>     hitches −48 % (42.5 → 22), worst frame −43 % (≈ 175 → ≈ 97 ms), 1 % low +12 %, FPS same; the navmesh loop gone from the game thread. Told the owner by voice
+>     21:23 — waits for his word to ship (into `_unpacked/KrinikConanGraphics/Engine.ini` as a `[/Script/NavigationSystem.RecastNavMesh]` section) + NPC pathing by eye.
+>   - Kept on disk: `D:/Games/Conan Exiles Mods/_bench/wpr/2026-11-09_202122_hitch-2.etl`, `…_204955_hitch-3-n1.etl` (8.5 GB each, heavy probe) and
+>     `C:/Temp/kumm-wpr/2026-11-09_213224_light-1-n1.etl` (1.4 GB, light probe) — delete when the hitch work closes.
+>   - **The light probe is proven** (`hitch-trace-light.ps1`: in-memory ring, written to C: after the flight): hitches as untraced — use only it (HOUSE_RULES 11.6e).
+>   - Hitches left with N1 — diffuse game-thread work of streaming-in (Blueprint VM, reflection, GC) + a log-output block hot in 3 of 5; NEXT: the log control
+>     pair (UE log / UE4SS log on vs off, A-B-B-A, PresentMon only), then A1 + N1 together.
+>   - **Log control pair 21:39–22:01 — NEGATIVE** (report `testcases/reports/2026-11-09_conan-quietlog-control-pair.md`): −37 % log lines, hitches and worst frame
+>     unchanged → the log is not a hitch driver. Hitches left with N1: ≈ 17–26 per fast flight, worst ≈ 85 ms — diffuse streaming-in work.
+>   - **New mod `KrinikConanEngineTweaks` — IN THE BUILD 22:07** (the owner 21:49 + 22:05 «обе фичи поставляем в моде и сборке 1.0.0»): N1 + A1 deployed and read back
+>     live; interim route — blocks in the one shipped Engine.ini, source `_unpacked/KrinikConanEngineTweaks/Engine.tweaks.ini` (notes `games/ConanExiles/mods/KrinikConanEngineTweaks.md`).
+>     NPC pathing — the owner's eye PASS 22:16 («мобы хорошо ходят, не вижу заметной разницы»); `p.Chaos…` moved in (22:10 «да, хорошо»). Open: the guide + README mod
+>     list (rule 20), the deploy merge of several ini sources.
+>   - FUTURE (the owner 22:05): dig deeper into the streaming-in work of the remaining hitches — research doc, section «Future».
+>   - **Log spam found 21:3x:** ≈ 50 lines / s in the flight; ≈ 1 180 «No world was found … UEngine::GetWorld» from AlMerayah_Reborn's `Custom_PvE_Raid` building BPs
+>     (the BP-VM strings of the remaining hitches), `MergeDataTables … overwriting` ≈ 2 200 (re-cut the window), the Funcom login retries. Details + next — research doc.
+>   - 20:55: the game closed, the lock released, KCCP told «замеры закончены, машина твоя».
+>   - Bug 90 (camera enters creatures — the game's camera channel ignored by creature bodies) PARKED by the owner 19:52.
+>   - Still queued: A2 `r.CreateShadersOnLoad`, A3 batch `q9-fastalloc-pages.txt`.
+````
+
 ## 2026-11-10 01:55 +03:00 — HOUSE_RULES.md and CLAUDE.md cleaned of the owner's raw voice (the twins of the AGENT_GUIDE clean-up): the passages, moved here verbatim
 
 > Why: the same order and the same class as the entry below (2026-11-10 01:52, KAIF #196): a rulebook carries rules as statements with a provenance line,
