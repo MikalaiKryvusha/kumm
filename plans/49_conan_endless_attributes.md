@@ -169,6 +169,15 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           The UpdateView prefix: `Page = Clamp(Page, 0, max(0, (FullValue − 1) / 20))`; arrows Visible + label SelfHitTestInvisible when that max > 0 (else all three
           Collapsed); label «Page×20+1–(Page+1)×20»; `AttributeCanvas` (the pips) shown only on page 0 — the game has no perks past 20 (the owner's future perks
           will need their own placement, X = (req − 20p) / 20 × 858.2). Cases `testcases/TC_conan_attribute_paging_step2_2026-11-10.md`.
+        - **The look — the owner's words 2026-11-10 10:00–10:07** (a crop of the built row: «1–20» on the bar, › inside the pips at 20): `[OWNER]` «видишь проблему» ·
+          «у тебя в макете слева была цифра, от которой начинается, справа - на какой наканчивается текущий отрезок» · «и кнопочки стрелочки у тебя не налазили на
+          шкалу» · «смотри, стрелки можно ниже шкалы по её краям, а цифры - выше» · «только нужен будет макет - красивые стрелки и красивые числа». The B2 mockup
+          (`02_B2_strelki.webp`, review folder 80) had ‹ left of the «+», › right of the bar, «21–40» over the right end, «21» / «40» under the bar's ends.
+          Mockup of 10:1x — `ConanExiles/_config/mockups/attr_arrows_mockup.py` over a real 4K frame (Проворство 26 on page 2 by the live mechanic, Живучесть 25 on
+          page 1): four looks, arrows under the scale at its ends, the segment's start above the left end and its end above the right end, right-end items left of
+          the pips at 20 — V1 thin gold chevrons + gold serif numbers · V2 arrows in diamonds like the game's «+» + light serif numbers · V3 cast arrowheads with a glow +
+          numbers in dark plates · V4 double chevrons + white serif numbers. Waits for the owner's pick; then the kit: Lo / Hi number widgets, the arrows moved by
+          slot + render translation (no change to the row's layout), the combined label removed.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
