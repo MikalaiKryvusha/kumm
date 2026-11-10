@@ -138,6 +138,11 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
         - `PostPipsPlacedOnCanvas` (the game's event after the C++ placed the pips) only signals `Signal Request Attribute View Update` — the pips of a page need
           the C++ placement rule read first (`AttributePerkPip` slots' X at 20 vs a perk at 5, a live read), then a re-place there;
         - every row exists twice live — the handler works on `self`, so the duplicate is harmless for the clicks; the remote's probe must pick the shown one.
+        - **The pip placement, read live 2026-11-10 03:10** (`_config/attr-pips-probe.lua`, row Сила 18): `AttributeCanvas` children are `W_AttributePerkPip_C`
+          100×30, slot X = `AttributePointsRequired` / 20 × 858.2 (5 → 214.5, 10 → 429.1, 15 → 643.6, 20 → 858.2); a branch level (two perks at one req) puts its
+          pips at Y 0 and 32, a single one at Y 16; a second set of 4 pips at Y 16 follows (the corruption pips — to confirm). So a page p re-places a pip at
+          X = (req − 20p) / 20 × 858.2 and hides it outside 1…20 of the page — done in `PostPipsPlacedOnCanvas` (the game's event after its own placement).
+          Process slip of that run: the game was opened without the voice phrase (HOUSE_RULES rule 13) — the phrase line went to /dev/null by my mistake.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
