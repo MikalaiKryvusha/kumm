@@ -91,8 +91,11 @@ side panel, a settings window. KRINIK MODIFIED in the build: the pak is rebuilt 
   −258 ≈ −H/4 of the 1031-unit canvas. The first try −516 (a «T/2» model) pinned the line to the top edge. Built 10:39 (the identity guard «1 of 228 chunks
   differ» = this edit, copied by hand). A kill by `corpse-stand.sh` (KillCharacter) does NOT play the line — call `PlayKill_Animation` on the live widget.
 - The rebuilt outer pak is uncompressed — 2–3× larger than the author's (26 → 51 MB), no effect on the game.
-- **The reduced-max share of the health and stamina bars — faded grey instead of magenta (2026-11-08 12:4x, `[OWNER]` 2026-11-07 21:04 STATUS 0b;
-  12:21 «разведываем»):** the share is `ProgressBar_Corruption` (health, slot 49 in `Border_CorruptionBar`) and `ProgressBar_CorruptionStam` (stamina, slot 50 in
+- **The reduced-max share of the health and stamina bars — MAGENTA again, the author's own colour, since 2026-11-10 10:15** (`[OWNER]` 2026-11-10 10:04 «нужно будет
+  вернуть фиолетовый цвет шкал здоровья и выносливости в ХУД, я понял, почему они были фиолетовыми» — the magenta shows corruption; KUMM bug 92): the four
+  `flt:CorruptionProgressColor` rows removed from `UIMod_Hosav__W_SmoothHP.tsv`, the pak rebuilt (`rebuild-krinik-paks.py --only UIMod_Hosav`, 1 of 228 chunks —
+  installed by hand, md5 29279d49aa01), seen on a 4K HUD frame 10:16. History: faded grey 2026-11-08 12:4x – 2026-11-10 (`[OWNER]` 2026-11-07 21:04 STATUS 0b;
+  12:21 «разведываем»). The share is `ProgressBar_Corruption` (health, slot 49 in `Border_CorruptionBar`) and `ProgressBar_CorruptionStam` (stamina, slot 50 in
   `Border_CorruptionStamina`); their `FillColorAndOpacity` is BOUND to `CorruptionProgressColor` (their `Percent` to `Progress_Corruption`). The function returns
   `SavedGame.CorruptionProgressColor` when the player's option `CorruptionProgressCustomColor` is on (settings window: `CheckBox_CorruptionColor` «Свой цвет полосы
   скверны» + `ColorPicker_CorruptionColor`; save object default (1.0, 0.01768, 0.9313, 1.0), the option off by default, the live `HosavUISave_New.sav` holds neither

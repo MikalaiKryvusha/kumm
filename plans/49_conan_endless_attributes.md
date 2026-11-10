@@ -176,8 +176,16 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           Mockup of 10:1x — `ConanExiles/_config/mockups/attr_arrows_mockup.py` over a real 4K frame (Проворство 26 on page 2 by the live mechanic, Живучесть 25 on
           page 1): four looks, arrows under the scale at its ends, the segment's start above the left end and its end above the right end, right-end items left of
           the pips at 20 — V1 thin gold chevrons + gold serif numbers · V2 arrows in diamonds like the game's «+» + light serif numbers · V3 cast arrowheads with a glow +
-          numbers in dark plates · V4 double chevrons + white serif numbers. Waits for the owner's pick; then the kit: Lo / Hi number widgets, the arrows moved by
-          slot + render translation (no change to the row's layout), the combined label removed.
+          numbers in dark plates · V4 double chevrons + white serif numbers.
+          **DECIDED 2026-11-10 10:11–10:17 by the owner — V6** (`mock_arrows/06_V6_spokoynye_pryamougolniki.webp`, drawn by `attr_arrows_mockup.py` v6): `[OWNER]`
+          «стрелки давай как в 2, и в такого же стиля прямоугольники цифры давай возьмем» · «да, для MVP шикарно» · «можно чуть спокойнее цвета для контейнеров цифр» ·
+          «и предусмотреть тусклое неактивное состояние для стрелки» · «давай цифры двинем чуть-чуть глубже внутрь» · «и чуть чуть опустим к шкале» · «вот тут правее и
+          ниже» (the left number) · «вот тут левее и ниже» (the right one) · «и делаем вот такие закругленные уголки». The spec for the kit: arrows — a diamond (gold
+          rim 3, dark fill) with a light-gold triangle, under the scale at its ends (x: 40 right of the «+» / 58 left of the pips at 20, y: +64 below the bar); the
+          arrow with nowhere to go DIM (rim / fill / triangle at low alpha); numbers — the segment's start (left) and end (right) in rounded boxes (radius 10, rim muted
+          bronze (150, 122, 80, 0.69) width 2, fill (22, 21, 20, 0.8), text (218, 210, 194), serif bold), 34 further inside than the arrows, 46 above the bar
+          (4K-frame pixels; the kit converts by the viewport scale). Next: the kit — Lo / Hi number widgets, the arrows' look and dim state, places by slot +
+          render translation, the combined label removed.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
