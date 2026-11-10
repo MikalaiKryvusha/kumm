@@ -587,6 +587,13 @@ mods (guard `check-lua-game-thread.py`). Gameplay keys on the game thread: `/Gam
   8 = 100, 11 = 1; **14–40 all 0 — Agility (19, the 2.x id) included.** Either the hero's attributes are really 0 after the 3.0 attribute reset
   (`ConanCharacter.ShowAttributeResetNotification`, `IsAttributeVersionUpToDate` = true) or 3.0.1 keeps attributes elsewhere. **Resolved 15:46:** the character
   window «Хар-ки» shows all six 0 and «Доступные очки 52» — the ids are right (19 = Agility), the points are unspent.
+  **The six attribute ids (read 2026-11-10 09:3x, a value raised by `ServerGiveAttribute` against the screen):** 14 Живучесть (Vitality), 15 Выдержка (Grit),
+  16 Мастерство (row `A_Encumbrance`), 17 Сила, 19 Проворство, **20 Авторитет** (row `A_Leadership`); 18 takes points but no row shows it. A raise by
+  `ServerGiveAttribute` across a branch level (10) opens NO trait dialog, and a later real «+» on that row left the screen (2) and the server (9) disagreeing — a
+  trait-dialog stand reaches the branch level by real «+» clicks only (`attr-cap-probe.lua` for reading, not for the stand).
+- **The key M opens the HUB on «Карта» (2026-11-10 09:29, frame):** the tab row stays on top — the game has no separate fullscreen map outside the carousel in 3.0.1;
+  `W_Carousel_C` is in the viewport for both, its `TabButtonBox` visibility the same (4). Our hub controller then draws its own map page (Z-order 41, op 1) over
+  the game's held one (op 0, HitTestInvisible) and collapses it on M / Tab (KUMM bug 84, TC `TC_conan_bug84_player_path_2026-11-10.md`).
 - **Mods that inject into the hub (2026-10-29).** Era of Trials: `EoT_AC_InterfaceInjectorComponent` subscribes to `SignalActivated` of the modules
   `CharacterInventory` and `CharacterStatsWindow`, casts the window root to `W_Carousel_C`, waits `Delay` 0.1–0.2 s and `Create` + `AddChild`s
   `EoT_W_CharInfoMagicDisplay` (six magic-school icons right of the paperdoll; on Construct a looping 0.5 s `Update` timer). A tab round trip

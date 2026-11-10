@@ -1,6 +1,7 @@
 # Bug 84 — Conan: the «Выберите Черту» (choose a trait) dialog is drawn UNDER the attribute tree and the tutorial header
 
-**Status:** 🔴 OPEN · **Severity:** S2 · **Fixing:** next item of the dayloop (after the control case)
+**Status:** 🟡 the dialog part FIXED and seen 2026-11-10 10:0x (our pages' Z-order 41 → 40; T1 fail → T2 pass); the map «without tabs» not reproduced ·
+**Severity:** S2 · **Fixing:** the map symptom — when the owner sees it again (a frame and the keys he pressed), or by a wider hunt (mouse tab clicks, RMB on the map)
 **Version/build:** Conan 3.0.1 build, KrinikConanUI with `krinik_hub_controller` (plan 48), 2026-11-07 · **When/context:** the owner's screenshot in chat
 2026-11-07 19:48 +03:00 (no words — the picture is the report; 75 attribute points available, «Опыт 251 100 / 254 230»)
 
@@ -85,3 +86,17 @@ HitTestInvisible, our other pages lazily built into the viewport the same way. T
 (frame), so it is not the owner's «map without tabs». Tab close / reopen clean. Hypothesis 1 not yet checked: no trait dialog came — a raise across 10 by the remote
 opens none, and a real «+» on a row the remote had raised left the screen and the server disagreeing (shown 2, server 9) — the stand for T1 must reach 9 by the game's
 own path, then one real «+». The owner's «map without tabs» stays unreproduced (variants tried: Tab, Q, M).
+
+## The cause and the fix — 2026-11-10 09:46–10:0x
+
+- **Reproduced (T1):** `ServerResetAttributeAll` → «Хар-ки» by keys → ten real «+» on Авторитет → the game opens `W_PerkSelection_C` (module `PerkSelection`, Modal) and our
+  `W_Attributes_C` page draws its tree over it. Discriminator: our page at op 0 → the dialog clean. **Cause — ours:** `krinik_hub_controller` adds its pages at
+  Z-order 41; every hub module and `PerkSelection` are Z 40 (`DT_UIModuleTable`, read live by `live-rows.lua`). HOUSE_RULES rule 24 — the cause fixed in our code.
+- **Fix:** `Z_ORDER = 40` in `krinik_hub_controller.lua` (pack). **T2 pass:** the same steps on the new build — the dialog over the page, the page dimmed by the game.
+- TWINS: searched `AddToViewport(` with a fixed Z in our Lua (`_unpacked/*/ue4ss/Scripts`) — found 3 — the controller's two (`Z_ORDER`) and KrinikConanModPackManager's
+  main-menu status line (`viewport_z = 1000`, a text over the main menu, not a hub page, no modal under it) — no twin.
+
+## Decisions made without the owner
+
+- `[AI]` Read as a defect report: the owner sent only the frame.
+- `[AI]` Our pages take the game's layer 40 (not «below 40»): the game's own pages live there, and a modal added later lands on top, as in the game without mods.

@@ -17,13 +17,11 @@ by real keys (Tab → E → E), the game in front, owner-idle FREE; frames by `c
 
 | # | Action | Expected | Status | Seen |
 |---|---|---|---|---|
-| S1 | open «Хар-ки» | rows past 20 (Проворство 39, Живучесть 28) show ‹ › and «1–20»; rows ≤ 20 show none; the bar of 39 full (page 0) | | |
-| S2 | a real click on › of Проворство | label «21–40», the bar 19 of 20, the pips hidden; the value «39» unchanged; other rows unchanged | | |
-| S3 | a second click on › of Проворство | stays on «21–40» (the last page of 39 — the clamp) | | |
-| S4 | a real click on ‹ of Проворство | «1–20», full bar, pips back | | |
-| S5 | the wheel down over the Живучесть row | «21–40», the bar 8 of 20 | | |
-| S6 | the wheel up over the same row | «1–20» | | |
-| S7 | the wheel over Сила (18) | nothing changes (no page past 20) | | |
+| S1 | open «Хар-ки» | rows past 20 (Проворство 39, Живучесть 28) show ‹ › and «1–20»; rows ≤ 20 show none; the bar of 39 full (page 0) | pass (look: fail) | 09:5x 4K frame `s1.jpg`: exactly as expected. The look is poor — small arrows ON the bar's ends, the label over the last pip and the › — a look pass for the owner's eye is owed |
+| S2 | a real click on › of Проворство | label «21–40», the bar 19 of 20, the pips hidden; the value «39» unchanged; other rows unchanged | pass | frame `s2.jpg`: «21–40», bar ≈ 95 %, pips gone, 39, Живучесть still «1–20» with pips |
+| S3 | a second click on › of Проворство | stays on «21–40» (the last page of 39 — the clamp) | not run | |
+| S4 | a real click on ‹ of Проворство | «1–20», full bar, pips back | pass | frame `s4.jpg` |
+| S5–S7 | the wheel | — | not built | the kit refuses the nodes (plan 49) |
 | S8 | the «+» of any row still raises it (the arrows do not cover it) | the value +1 | | |
 | S9 | close and reopen the hub | the screen opens on page 0 of every row (a fresh page per open) — or keeps the page; record which | | |
 | C1 | control: the pak without the step-2 edit (step 1 only) | no arrows, no label | | |

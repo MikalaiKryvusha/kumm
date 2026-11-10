@@ -157,6 +157,18 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           `UpdateView` chain. Wheel: **probed 03:15 (`kit-probe-wheel-override.py`, nothing saved): `add_function_override(bp, "OnMouseWheel")` works** — a graph
           `OnMouseWheel` with the entry (`MyGeometry`, `MouseEvent`) and a return node (`Event Reply`): read the wheel delta from `MouseEvent`
           (`GetWheelDelta`), `Page` ± 1, `UpdateView` chain, return `Handled`. **The recon of step 2 is complete — next session builds it.**
+        - **Build 2026-11-10 09:1x–09:4x — `_config/devkit/kit-attribute-paging-step2.py`** (9 kit runs, each stops before the save on any failed link; what the kit
+          refused, and the way round, `[AI]`): (1) `bIsVariable` is not reflected to the kit's Python — new widgets are no blueprint variables; (2)
+          `GetWidgetFromName` takes no FName literal (`set_pin_value` refuses it); so the arrows ‹ › (`Btn_KrinikPagePrev` right of the «+», which sits
+          H_ALIGN_LEFT in `Progress`; `Btn_KrinikPageNext` at the right end) and the label `Txt_KrinikPage` are children 2, 3, 4 of `Progress`, reached in the graphs
+          as `LevelAttributeButton.GetParent().GetChildAt(i)` + an exec «Cast To Button / TextBlock» (the TextBlock cast's pin is `AsText`); (3) the catalog
+          offers no call of `SignalRequestAttributeViewUpdate` — each click's `Set Page` flows INTO the game's own signal node after `PostPipsPlacedOnCanvas`
+          (an exec input takes many links); (4) **the wheel is NOT built**: in the `OnMouseWheel` function graph `create_node_from_name("Кнопка|Событие|CallOnClicked")`
+          returns None with or without the declaring class (runs 7–8) — the code stays behind `KIT_TRY_WHEEL=1`; next route: the wheel sets `Page` and calls
+          `UpdateView` with `GetFullAttributeValue` / `GetInvestedPoints` of the row itself, or an event-graph custom event called by name.
+          The UpdateView prefix: `Page = Clamp(Page, 0, max(0, (FullValue − 1) / 20))`; arrows Visible + label SelfHitTestInvisible when that max > 0 (else all three
+          Collapsed); label «Page×20+1–(Page+1)×20»; `AttributeCanvas` (the pips) shown only on page 0 — the game has no perks past 20 (the owner's future perks
+          will need their own placement, X = (req − 20p) / 20 × 858.2). Cases `testcases/TC_conan_attribute_paging_step2_2026-11-10.md`.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).

@@ -91,6 +91,18 @@
 
 ## Entries
 
+### EXP-0502 · 2026-11-10 · ❌→✅ · #conan #kit #blueprint #python #ui #graph
+class: tool-format-assumed
+mechanized: yes — `ConanExiles/_config/devkit/kit-attribute-paging-step2.py` (each workaround commented at its line; a failed link or compile stops before the save)
+**Lesson:** authoring NEW widgets plus their logic from the kit's Python hits five walls the probes of EXP-0501 did not show: (1) `bIsVariable` is not reflected —
+widgets made by `new_object` are no blueprint variables (a getter comes out untyped); (2) `set_pin_value` refuses an FName literal (`GetWidgetFromName` unusable);
+(3) the node catalog offers no call of the blueprint's own dispatcher; (4) two «Assign On Clicked» nodes name both events `OnClicked_событие` → the compile refuses
+a duplicate function; (5) a native parent's `BindWidget` property (`AttributeCanvas`) is not blueprint-readable. Ways round: reach a widget as
+`<a BP-variable sibling>.GetParent().GetChildAt(<index read at edit time>)` + an exec Cast (TextBlock's typed pin is `AsText`); feed your exec INTO the game's
+existing dispatcher-call node; `add_custom_event_node(<own name>)` + «Bind Event to On Clicked»; the compile errors are in the editor log (`LogBlueprint: Error`),
+the Python result only says False. Run the kit in the background, ≈1.5 min a run, and let every run stop BEFORE the save.
+**Trigger:** a kit edit that adds widgets AND graph logic to a vanilla widget.
+
 ### EXP-0501 · 2026-11-10 · ✅ · #conan #kit #blueprint #python #ui #graph
 class: blueprint logic believed impossible to author from the kit's Python
 mechanized: yes — `ConanExiles/_config/devkit/kit-attribute-paging-edit.py` (the worked example), `kit-probe-graph-editor-docs.json` (the signatures)
