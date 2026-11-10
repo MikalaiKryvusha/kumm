@@ -127,6 +127,17 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       - [ ] Step 2 — arrows ‹ › at the row ends (`Progress`'s overlay or `HB_Info`), visible only past 20; the window label «21–40» over the right end; clicks and the
         wheel (`OnMouseWheel` override) set `Page` within 0…floor((FullValue−1)/20) and call `UpdateView`; the pips of a page (`PostPipsPlacedOnCanvas`); the perk
         column follows the selected row's page (`W_AttributeInfo`). Mockup statuses of folder 80 stay the acceptance.
+        Design from the read graph (`kit-probe-w-attribute.json`, 2026-11-10; `[AI]`, to be built in the kit by a step-2 section of `kit-attribute-paging-edit.py`):
+        - the game's own pattern to copy: the «+» is `LevelAttributeButton` (a Button in `Progress`, an OverlaySlot) with a `K2Node_ComponentBoundEvent` «On Clicked
+          (LevelAttributeButton)» in `EventGraph` — the arrows are two more Buttons in the same overlay (`Btn_KrinikPagePrev` left-aligned, `Btn_KrinikPageNext`
+          right-aligned) with their own bound `OnClicked` events (`add_component_bound_event_node`), each: `Page` ± 1, clamped to 0…floor((FullValue − 1) / 20),
+          then the same `UpdateView` call the game makes;
+        - `UpdateView` is called in `EventGraph` after `GetIntStat` ×3 (AttributeValue, FullValue, CorruptionValue) and before `UpdateModifiers` — the arrows' handler
+          re-uses that node chain, so the bar, the value and the corruption bar stay the game's;
+        - the arrows' and the label's visibility: in `UpdateView` after the bar (FullValue > 20 → Visible, else Collapsed), the label text «21–40» from `Page`;
+        - `PostPipsPlacedOnCanvas` (the game's event after the C++ placed the pips) only signals `Signal Request Attribute View Update` — the pips of a page need
+          the C++ placement rule read first (`AttributePerkPip` slots' X at 20 vs a perk at 5, a live read), then a re-place there;
+        - every row exists twice live — the handler works on `self`, so the duplicate is harmless for the clicks; the remote's probe must pick the shown one.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
