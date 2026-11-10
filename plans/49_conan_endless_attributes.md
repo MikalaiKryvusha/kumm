@@ -205,7 +205,19 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
             column at 20).
           Build route: arrow textures from the mockup's own drawing code (4 TGAs: left / right × active / dim) → `import-logo-texture.py` → the Buttons' Normal /
           Hovered / Pressed / Disabled brushes; `Txt_KrinikPage` (child 4) becomes the right number, a new `Txt_KrinikPageLo` (child 5) the left one; places by slot
-          alignment + render translation (no layout change of the row); then frames at four resolutions. Next: the kit — Lo / Hi number widgets,
+          alignment + render translation (no layout change of the row); then frames at four resolutions.
+        - **The owner's order 2026-11-10 10:28 — perks past 20 must be possible now:** `[OWNER]` «и предусмотри, чтобы сейчас при переключении на 21 40 - на шкале не
+          было кружков перков, так как мы их не добавили» · «есть только стоковые 1...20» · «а в каком-то навыке сделай пустышки для 21...40 - предусмотри, что они
+          появляются» · «и что список справа их принимает и отображает и скролится». Steps (after the V8 look):
+          1. [x] page past 1 shows no stock pips (live since step 2: `AttributeCanvas` hidden past page 0 — S2 frame);
+          2. [ ] placeholder perks for 21–40 in ONE attribute — rows in the game's perk data (the table that feeds `SharedPerkPips` by `AttributePointsRequired`; find it
+             by the pips probe's perk objects) with req 25 / 30 / 35 / 40, a neutral name and «перк-заглушка» description `[AI]`, in a pak of ours (KrinikConanGameplay
+             data or a merge table) — never a fake row in a vanilla asset copy;
+          3. [ ] the pips per page instead of hiding the canvas: on page p show the pips whose req is in (20p, 20p+20], each at X = (req − 20p) / 20 × 858.2, in the game's
+             own `PostPipsPlacedOnCanvas` (rule 24 — its event after its own placement); stock pips stay on page 1;
+          4. [ ] the right perk column (`W_AttributeInfo`) takes the placeholder perks, shows the selected row's page and scrolls when they do not fit (the column does not
+             scroll today — `KrinikConanUI.md`, `W_AttributeInfoEntry_PerkView` row);
+          5. [ ] cases: page 2 of the placeholder attribute shows its pips at 25/30/35/40, page 1 the stock ones, the column scrolls; frames at four resolutions. Next: the kit — Lo / Hi number widgets,
           the arrows' look and dim state, places by slot + render translation, the combined label removed.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
