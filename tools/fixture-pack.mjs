@@ -19,6 +19,12 @@ import { fileURLToPath } from 'node:url'
 
 const KUMM = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DIR = path.join(tmpdir(), `kumm-fixture-${Date.now()}`)
+// The stand's own «desktop»: install.ps1 and the uninstaller read KUMM_DESKTOP_DIR before the real desktop, and every child process inherits it.
+// Until 2026-11-10 the shortcut case wrote to the owner's REAL desktop and a run that died before its last line left a «KUMM fixture <ms>» shortcut
+// there — 11 of them after one night (the owner 2026-11-10 11:01 «что ты за СВАЛКУ … УСТРОИЛ НА РАБОЧЕМ СТОЛЕ МОЁМ» · «у тебя что нет рабочей директории»).
+const DESK = path.join(DIR, 'desktop')
+mkdirSync(DESK, { recursive: true })
+process.env.KUMM_DESKTOP_DIR = DESK
 const LIB = path.join(DIR, 'mods')
 const GAME = path.join(DIR, 'game')
 
@@ -175,7 +181,7 @@ put(path.join(UDIR, 'nointro', 'Intro.bk2'), 'stub')
 put(path.join(UDIR, 'loc', 'Game.locres'), 'ru')
 put(path.join(UDIR, 'deep', 'x.txt'), 'new')
 put(path.join(UDIR, 'Engine.ini'), '[SystemSettings]\r\nr.Pack=1\r\n')
-put(path.join(UDIR, 'un.cmd.txt'), '@echo off\r\nchcp 65001 >nul\r\necho Удаление сборки\r\npowershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0{BACKUP}\\Deploy-ModPack.ps1" -Restore -GameDir "%~dp0."\r\nif errorlevel 1 ( pause & exit /b 1 )\r\nif not "{SHORTCUT}"=="" powershell -NoProfile -Command "Remove-Item -LiteralPath (Join-Path ([Environment]::GetFolderPath(\'Desktop\')) \'{SHORTCUT}.lnk\') -ErrorAction SilentlyContinue"\r\npause\r\n(goto) 2>nul & del "%~f0"\r\n')
+put(path.join(UDIR, 'un.cmd.txt'), '@echo off\r\nchcp 65001 >nul\r\necho Удаление сборки\r\npowershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0{BACKUP}\\Deploy-ModPack.ps1" -Restore -GameDir "%~dp0."\r\nif errorlevel 1 ( pause & exit /b 1 )\r\nif not "{SHORTCUT}"=="" powershell -NoProfile -Command "Remove-Item -LiteralPath (Join-Path $(if ($env:KUMM_DESKTOP_DIR) {$env:KUMM_DESKTOP_DIR} else {[Environment]::GetFolderPath(\'Desktop\')}) \'{SHORTCUT}.lnk\') -ErrorAction SilentlyContinue"\r\npause\r\n(goto) 2>nul & del "%~f0"\r\n')
 writeFileSync(path.join(UDIR, 'modpack.json'), JSON.stringify({
   packName: 'KUMM fixture undo pack', builtFor: 'fixture', nexusGame: 'fixturegame', gameExe: 'FixtureGame.exe', library: 'mods',
   modsDir: 'Game/Mods', modList: 'Game/Mods/modlist.txt',
@@ -314,7 +320,7 @@ expect('кусок ini: -Remove мода с куском — предупреж�
 
 // ---- ярлык на рабочем столе (manifest.shortcut; слово владельца 2026-11-01 11:11 «сборка на рабочем столе создает ярлык Krinik Conan»): install.ps1
 // из -Export создаёт его после удачной раскатки — на программу сборки, со значком сборки; деинсталлятор игрока его убирает. Путь игрока: выгрузка →
-// install.ps1 → uninstall .cmd. Имя уникальное: ярлык стенда живёт секунды на НАСТОЯЩЕМ рабочем столе и не путается с ярлыками владельца.
+// install.ps1 → uninstall .cmd. С 2026-11-10 ярлык ставится в «рабочий стол» стенда (KUMM_DESKTOP_DIR → DESK), настоящий стол владельца не трогается.
 // Контроль «без shortcut — без ярлыка и без ошибки» — прогоны выше: их деинсталлятор шёл с пустым {SHORTCUT}.
 // Своя чистая папка игры: в «ванили» выше лежит пак игрока вне modlist, и -Verify установки законно даёт код 1 — ярлык тогда не создаётся.
 const SC = `KUMM fixture ${Date.now()}`
@@ -329,7 +335,8 @@ writeFileSync(path.join(UDIR, 'modpack.json'), JSON.stringify(mp3, null, 2))
 const UEXP = path.join(DIR, 'undo-export')
 const ue = ups(['-Export', UEXP])
 const posh = cmd => execFileSync('powershell', ['-NoProfile', '-Command', cmd], { encoding: 'utf8' }).trim()
-const LNK = path.join(posh("[Environment]::GetFolderPath('Desktop')"), `${SC}.lnk`)
+const LNK = path.join(DESK, `${SC}.lnk`)
+const realLnk = path.join(posh("[Environment]::GetFolderPath('Desktop')"), `${SC}.lnk`)
 let inst
 try { inst = { code: 0, out: execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', path.join(UEXP, 'install.ps1'), '-GameDir', SGAME], { encoding: 'utf8' }) } }
 catch (e) { inst = { code: e.status ?? 1, out: `${e.stdout ?? ''}${e.stderr ?? ''}` } }
@@ -341,7 +348,8 @@ expect('ярлык: в деинсталляторе подставлено им�
 let un2 = ''
 try { un2 = execFileSync('cmd', ['/c', SUN], { input: '\r\n\r\n', encoding: 'utf8' }) } catch (e) { un2 = `${e.stdout ?? ''}${e.stderr ?? ''} code ${e.status}` }
 expect('ярлык: деинсталлятор игрока убрал ярлык, папка игры как до установки', !existsSync(LNK) && snap(SGAME) === sBefore, `${un2}\n${snap(SGAME)}`)
-if (existsSync(LNK)) unlinkSync(LNK)   // стенд не оставляет владельцу свой ярлык ни при каком исходе
+expect('ярлык: на НАСТОЯЩЕМ рабочем столе владельца стенд не создал ничего', !existsSync(realLnk), realLnk)
+if (existsSync(LNK)) unlinkSync(LNK)
 
 console.log(bad ? `\nСТЕНД: ${bad} провал(ов)` : '\nстенд: все проверки прошли')
 process.exit(bad ? 1 : 0)
