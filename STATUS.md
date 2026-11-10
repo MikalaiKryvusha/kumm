@@ -146,7 +146,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >     and wired `FullValue − Page × MaxAttributePointAllotment` into `UpdateView` (read back, compiles, saved into the kit's `Mods/KrinikConanUI/Content/UI/Inventory/
 >     Attributes/W_Attribute.uasset`; no other build mod ships `W_Attribute` — `mod-overrides.py`). 03:0x built (`CookInfo` line, 0 missing refs), deployed, LIVE PASS
 >     (TC `TC_conan_attribute_paging_step1_2026-11-10.md`: `Page` 1 → 25 shows 5 of 20, 39 → 19 of 20; `Page` 0 → vanilla). Every row lives twice among the live
->     widgets (bug 84?). NEXT: plan 49 step 2 (arrows, label, wheel, pips, the perk column — the editor API is in `kit-probe-graph-editor-docs.json`); then items 3, 4.
+>     widgets (bug 84?). Committed: pack `fca1f0c`, `28ed7a5`; KUMM `afe21fc`…`62da686`. Step 2 is DESIGNED in plan 49 (arrows = Buttons with bound OnClicked like the
+>     game's «+», `UpdateView` reuse, visibility past 20, pips re-placed in `PostPipsPlacedOnCanvas` by X = (req − 20p) / 20 × 858.2 — read live 03:10).
+>     NEXT: build step 2 in `kit-attribute-paging-edit.py` (a step-2 section), then items 3, 4. Slip of 03:09: a short game run without the voice phrase (rule 13).
 > **HANDOVER 2026-11-09 22:45 +03:00 — chat kumm-2d closed by the owner («закрывай чат»).** The game (launch 22:06, front) is the OWNER's — he plays in it; no machine lock held;
 >   KCCP closed its chat. Pushed: KUMM and the pack (`conan-exiles-modpack`). Report of the evening: N1 found by the profiler and SHIPPED in the new mod.
 >   **FIRST next chat (in order):**
