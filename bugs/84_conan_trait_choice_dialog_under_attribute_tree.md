@@ -59,3 +59,7 @@ dialog-under-the-tree of this bug would sit in the same stack. Control case stil
 **2026-11-10 03:18 — not reproduced in one try:** a fresh background launch, «Хар-ки» opened once by the remote → `attr-rows-owners.lua` lists SIX rows, all
 visible, all owned by one `W_Attributes_C`. The 03:0x run (12 rows) differed by `attr-cap-probe.lua` first and three `attr-page-probe.lua` calls; one try is no verdict —
 next variants: open/close/open the window, the hub tab switch, the level-up «+» path.
+**2026-11-10 03:20 — REPRODUCED, deterministic:** a fresh background launch → `ActivateModule(FName('Attributes'), true, false)` → the same with `false` (close) →
+`true` again → `attr-rows-owners.lua` lists TWELVE rows, all `IsVisible` true, owned by TWO windows `W_Attributes_C_2147456032` and `…_2147456521`: closing the
+module does not destroy its window, re-opening adds a second one on top — the stack this bug is about. NEXT: the control case — the same three calls with
+`krinik_hub_controller` off (is it ours, or the game's own `ActivateModule`?), then the fix at the cause (rule 24).
