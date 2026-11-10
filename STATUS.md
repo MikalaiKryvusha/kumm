@@ -144,6 +144,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > («The «+» brighter»), palette in `researches/conan-ui-color-scheme/`; (2) the judge round on `kit-corruption-label-plate.py` (build 2) and the scrollbar-thumb
 > edit of `kit-attribute-info-scroll.py` (deployed, seen by the remote; a REAL hover frame of the plate and of the gold thumb owed); (3) bug 88 (the corruption
 > debuff row — the hero has the heavy buff, recon in the bug). Rule learned: every colour from the game's FS_ palette (memory + research).
+> ⚠️ Закрыто принудительно 2026-11-10 13:48 +03:00 по слову владельца: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) — долг платит первый
+> /end-chat-soft. Ложных утверждений на месте не осталось (запись «игра возвращает видимость вне хуков» исправлена в EXPERIENCE, конспекте мода, плане, кейсах и отчёте).
 > **NOW 2026-11-10 12:38 +03:00 — chat of 2026-11-10 midday («продолжаем делать Конана», dayloop by the owner's 11:29 order).** Plan 49 steps 2–5 DONE and seen live: placeholder
 > perks `Krinik_Vitality_25/30/35/40` (KrinikConanUI `DT_KrinikPerks` merged into `PerksTable`), the pips follow the row's page (Lua `krinik_attr_pips`, post callback
 > of the native `AttributeEntry:UpdatePipIcons`; EXP-0504), the right perk column scrolls (`SB_KrinikPerkScroll`); the arrows' owed checks D1 / D2 / M1 by real clicks,
