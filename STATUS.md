@@ -137,9 +137,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >     tabs» NOT reproduced (Tab, Q, M — M opens the hub on «Карта» with tabs). TC `TC_conan_bug84_player_path_2026-11-10.md`; bug 84 stays 🟡 for the map.
 >   - **Plan 49 step 2 LIVE (pack `ba5b348`):** arrows ‹ › and «21–40» on rows past 20, pips hidden past page 0 — S1, S2, S4 pass; the wheel NOT built (kit refuses the
 >     nodes, routes in plan 49); one judge round, findings verified (commit message). **The LOOK — mockup V8 ACCEPTED 10:27** («макет принят, делаем в игре,
->     шикарно!»): the full spec with numbers is in plan 49 («ACCEPTED 2026-11-10 10:27 — V8»). NEXT: build it in the kit (arrow textures from
->     `ConanExiles/_config/mockups/attr_arrows_mockup.py`, Disabled brush + SetIsEnabled, two number TextBlocks, the «1–20» label removed), frames at four
->     resolutions; then the perk column per page; the wheel.
+>     шикарно!»): the full spec with numbers is in plan 49. **BUILT 10:52 and seen on a 4K frame** (`kit-attribute-paging-look.py`, textures
+>     `T_KrinikPageArrow*`, left / right numbers justified by the owner's 10:46 word) — the judge round on the look script runs; NEXT: frames at 1080p / 2K / 720p,
+>     the disabled-arrow click check, then the owner's 10:28 order (placeholder perks 21–40, pips per page, the right column scrolls — plan 49 steps 2–5); the wheel.
 >   - Bug 92 DONE (HUD bars magenta again, pack `3ac94a4`); bug 91 OPEN (the corruption «+» hover label) — after the arrows.
 > **2026-11-10 02:25 +03:00 — chat of 2026-11-10 night (dayloop, the owner's order: the Conan build 1.0.0 backlog, autonomously).**
 >   - DONE: the rulebook cleaned of the owner's raw voice (AGENT_GUIDE, HOUSE_RULES, CLAUDE.md; verbatim → PROJECT_HISTORY entries 2026-11-10 01:52 / 01:55),

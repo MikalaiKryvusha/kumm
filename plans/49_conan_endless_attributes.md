@@ -206,6 +206,12 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           Build route: arrow textures from the mockup's own drawing code (4 TGAs: left / right × active / dim) → `import-logo-texture.py` → the Buttons' Normal /
           Hovered / Pressed / Disabled brushes; `Txt_KrinikPage` (child 4) becomes the right number, a new `Txt_KrinikPageLo` (child 5) the left one; places by slot
           alignment + render translation (no layout change of the row); then frames at four resolutions.
+          **Built 2026-11-10 10:29–10:52** — `_config/branding/make-page-arrows.py` (6 TGAs from the mockup geometry) → `import-logo-texture.py` (new batch mode
+          `KIT_TGA_DIR`) → `Local/T_KrinikPageArrow{L,R}{,Hover,Dim}` + 6 CookInfo lines → `_config/devkit/kit-attribute-paging-look.py` (Button brushes, the old glyph
+          emptied as a sizer, `Txt_KrinikPage` = the right number, new `Txt_KrinikPageLo` = child 5, PT Serif size 18 + 1-unit outline, bronze, shadow; UpdateView: the
+          right number = hi, the left = lo, SetIsEnabled(Page > 0 / Page < maxPage)). 4K frames: build 1 — left items 20–31 px left, right 28–30 px right (on the pips),
+          arrows 8 high, numbers 9 low → corrected; build 3 — the owner 10:46 «поля левых цифр ровняй по левому краю» · «правых - по правому» → left numbers LEFT-justified,
+          right ones RIGHT-justified. The frame of build 3 matches V8 (shown to the owner 10:53).
         - **The owner's order 2026-11-10 10:28 — perks past 20 must be possible now:** `[OWNER]` «и предусмотри, чтобы сейчас при переключении на 21 40 - на шкале не
           было кружков перков, так как мы их не добавили» · «есть только стоковые 1...20» · «а в каком-то навыке сделай пустышки для 21...40 - предусмотри, что они
           появляются» · «и что список справа их принимает и отображает и скролится». Steps (after the V8 look):
