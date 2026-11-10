@@ -24,6 +24,12 @@ y ≈ 572 (1080p), over the right perk column, with no plate behind it — the c
 - **Reproduced 2026-11-10 12:4x by a REAL hover** (`hover-watch.ps1 -At 0.635/0.449`, the game in front, owner-idle FREE; frame `hw91/f_01187.jpg` of the
   session scratchpad): the label starts at the purple diamond of Живучесть and runs right over the perk column's text, no plate; the row glows (the game's hover).
   The fix is a LOOK (taste class): variants on a frame for the owner (a plate over / under the diamond, the label to the left, the label hidden) after the control.
+- **Control (static), 2026-11-10 12:5x — the defect is the GAME's:** the vanilla `W_Attribute` (`retoc to-legacy` from the game's paks) vs ours (the kit's cooked
+  asset), `uaj tojson` both, a script compared the six exports of the branch (`SizeBox_Corruption_Button`, `Danger_IDK_Why_This_Is_Here`, `CorruptionButtonOverlay`,
+  `CorruptionButtonBG`, `LevelCorruptionButton`, `CorruptionLabel`) and their slots by content: all the same (only export numbers shift). Our page arrows do not
+  touch it. Rule 8: fixed natively in our kit edit of `W_Attribute` once the owner picks the look.
+- **Variants for the owner 2026-11-10 12:5x:** review folder `НА ОТСМОТР НИКОЛАЕМ/81_podpis_oskverneniya` (V1 plate above · V2 under · V3 the game's place with a
+  plate · V4 no label; `ConanExiles/_config/mockups/corruption_label_mockup.py` over a real 4K frame). Waiting for his pick (STATUS «Awaiting human review»).
 
 ## Plan
 
