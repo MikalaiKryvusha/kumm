@@ -188,8 +188,10 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           **REVISED 2026-11-10 10:19 by the owner — V7** (`mock_arrows/07_V7_bronzovye_chisla.webp`, `attr_arrows_mockup.py` v7): `[OWNER]` «всё же давай цифры как в v1» ·
           «бронза, без контейнеров» — the numbers lose their boxes: serif bold text in bronze (198, 158, 102) with a dark drop shadow, at V6's places (34 inside, 46
           above the bar); the arrows stay as in V6 (diamonds, dim when inactive). **10:20 → V8** (`08_V8_bronza_krupnee.webp`): `[OWNER]` «только положение цифр
-          верни» · «и сделай их кегель больше» — the numbers back at V1's places (over the arrows' x, 58 above the bar), size 50 (was 40 in 4K-frame pixels). V8 shown
-          10:2x — the owner's verdict pending. Next: the kit — Lo / Hi number widgets,
+          верни» · «и сделай их кегель больше» — the numbers back at V1's places (over the arrows' x, 58 above the bar), size 50 (was 40 in 4K-frame pixels).
+          10:21–10:23: `[OWNER]` «левые чуть-чуть дай правее» · «ты и кнопки левые подвигал - не нужно было, только цифры» — the LEFT NUMBER only +18; «стрелочки плохо
+          центрированы» · «да, центрировать нужно по массе» — the triangle inside the diamond is centred by its CENTROID (w/6 toward the flat side), not its box.
+          V8 with both shown 10:23 in front (ImageGlass) — the owner's verdict pending. Next: the kit — Lo / Hi number widgets,
           the arrows' look and dim state, places by slot + render translation, the combined label removed.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
