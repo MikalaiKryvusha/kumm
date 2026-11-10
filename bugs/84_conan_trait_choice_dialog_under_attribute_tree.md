@@ -66,3 +66,22 @@ module does not destroy its window, re-opening adds a second one on top — the 
 **2026-11-10 03:22 — control case:** the same three calls with `krinik_hub_controller` commented out in the deployed `main.lua` (restored after, 0 control lines
 left) → still TWO windows (`W_Attributes_C_2147456497`, `…_2147459867`, 6 rows each). On THIS path (the remote's `ActivateModule`) the stack is the GAME's, not
 our controller's. Not yet judged: the player's path (Tab / the hub tab keys, real input) — the owner's stuck map came by that path.
+
+## The player's path — 2026-11-10 09:2x (TC `testcases/TC_conan_bug84_player_path_2026-11-10.md`, game in front, real keys by `mouse-seq.ps1`, counter `_config/hub-dupes.lua`)
+
+**P1 (controller on, Tab → E → E = «Хар-ки»):** `W_Attributes_C` ×2 in the viewport — `…2147444333` SelfHitTestInvisible op 1.00 (shown) and `…2147438132`
+HitTestInvisible op 0.00; plus `W_FullscreenMap_C` and `W_FeatWindow_C` in the viewport, HitTestInvisible op 0.00. Read against `krinik_hub_controller.lua`: this is
+the controller's DESIGN — its own page of the tab shown at Z-order 41 (`Z_ORDER`, `AddToViewport(41)`), the game's newborn of the tab held at op 0 and
+HitTestInvisible, our other pages lazily built into the viewport the same way. Two windows per tab is not by itself the defect; what the counter must judge is
+«more than one page that draws or takes input». Two `[AI]` hypotheses for the owner's two symptoms, both OURS (the remote control of 03:22 measured the remote's
+`ActivateModule` path, not this one):
+1. **The trait dialog under the tree** — the dialog is a separate viewport widget of the GAME (born by the game's page or a module) with a Z-order below our page's 41,
+   so our page's tree draws over it. Check: open the trait dialog (a perk threshold) and read its Z / its owner; then the same with the controller off.
+2. **The stuck map** — the controller learns «closed» only from Esc, Tab and an `ActivateModule` hook (the native C++ calls bypass UE4SS hooks — EXP-0473): a hub closed
+   by another key (M — the map, J — the journey) leaves OUR page at op 1 SelfHitTestInvisible in the viewport, taking the mouse — «не отлипло, не могу закрыть», no hub
+   tabs on top. Check: Tab → Q → Q (Карта) → M → count.
+
+**Results 09:25–09:36 (TC verdict):** hypothesis 2 REFUTED for M — M closes the hub clean (ours Collapsed); M from the world opens the HUB on «Карта» with its tabs
+(frame), so it is not the owner's «map without tabs». Tab close / reopen clean. Hypothesis 1 not yet checked: no trait dialog came — a raise across 10 by the remote
+opens none, and a real «+» on a row the remote had raised left the screen and the server disagreeing (shown 2, server 9) — the stand for T1 must reach 9 by the game's
+own path, then one real «+». The owner's «map without tabs» stays unreproduced (variants tried: Tab, Q, M).
