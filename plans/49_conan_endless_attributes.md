@@ -258,6 +258,12 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       `T_Attributes_perk_button_hover` at 0.724, pressed = hover texture at 0.384, disabled = no draw. Variants (the same texture, a higher tint): review folder
       `82_plyusy_yarche` (`_config/mockups/plus_brightness_mockup.py`): 0.495 now · V1 0.72 · V2 0.85 · V3 1.0 · V4 1.4 (Slate takes a tint above 1). Waits for his
       pick; then the kit edit of the button style (the hovered tint kept above the normal one).
+      13:18 `[OWNER]` «неужели ты не видишь, как ты не соблюдаешь цветовую схему???» — the grey tints were wrong; the palette read from the game
+      (`researches/conan-ui-color-scheme/`), warm variants G1 `#E9C27A` / G2 `#ECD97C` (files 05 / 06). **DECIDED 2026-11-10 13:41 +03:00 by the owner — G1 (05)** `[OWNER]`
+      «05 золото конана» · «и наши кнопочки влево вправо к нему приведи». TO BUILD: (1) `LevelAttributeButton` normal tint = the per-channel warm tint
+      (1.56, 0.99, 0.46) (rim → `#E9C27A`), hovered = the `#ECD97C` tint (1.61, 1.27, 0.47) on the hover texture's base, pressed darker (`#5E4A1F` role); (2) our page
+      arrows `T_KrinikPageArrow*` redrawn in the same gold: rim `#E9C27A`, hover `#ECD97C`, dim as now (`_config/branding/make-page-arrows.py` colours →
+      `import-logo-texture.py`), then frames at 4K and 1080p for his eye.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
