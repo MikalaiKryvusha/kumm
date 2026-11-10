@@ -131,6 +131,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **HANDOVER 2026-11-10 11:17 +03:00 — chat closed by the owner («закрывай чат, продолжим в новом»); FORCE-closed at 85 %: the bonsai trim of STATUS was NOT done (debt for the
+> next /end-chat-soft).** Game closed, no lock, no crash window; pushed KUMM and pack `c6afcc9`; the owner ordered «работай автономно» (11:04).
+> **FIRST next chat:** (1) plan 49 step 2 owed checks — a click on a DIM arrow, an arrow click on a MIDDLE row, frames at 1080p / 2K / 720p; (2) the owner's 10:28 order —
+> placeholder perks 21–40 (our `DT_KrinikPerks`, row struct `PerksTableRow`, merged into `/Game/Systems/Perks/PerksTable` by `MergeDataTables`), pips per page, the right
+> column scrolls (plan 49 steps 2–5); (3) bug 91. Kit scripts: `kit-attribute-paging-step2.py` → `kit-attribute-paging-look.py` (each TWICE) → `kit-buildmod.py`.
 > **NOW 2026-11-10 09:4x +03:00 — chat of 2026-11-10 morning («продолжаем делать сборку конана»).**
 >   - **Bug 84 — the trait dialog under the attribute tree FIXED and seen (pack `ba5b348`):** reproduced by ten real «+» clicks; cause OURS — `krinik_hub_controller`
 >     added its pages at Z-order 41 over the game's modal (all hub modules and `PerkSelection` are Z 40); now 40 → the dialog on top (T2 pass). The owner's «map without

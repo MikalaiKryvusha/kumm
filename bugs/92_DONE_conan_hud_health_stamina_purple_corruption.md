@@ -20,7 +20,7 @@ First: `git log -S` in the pack for the bar colours and the owner's earlier word
 ## The cause and the fix — 2026-11-10 10:14–10:16
 
 - Cause: pack commit `e85d74b` (2026-11-08) — four `flt:CorruptionProgressColor` rows in `_config/localization/asset-strings/UIMod_Hosav__W_SmoothHP.tsv` turned Hosav's
-  magenta (1.0, 0.0177, 0.931, 0.6) into faded grey (0.35, 0.35, 0.35, 0.5) by the owner's word of 2026-11-07 21:04. The magenta is the corruption share of the bars.
+  magenta (1.0, 0.0177, 0.931, 0.6) into faded grey (0.35, 0.35, 0.35, 0.5) by the owner's word of 2026-11-07 21:04 (verbatim in commit e85d74b). The magenta is the corruption share of the bars.
 - Fix: the four rows removed (the comment keeps the history), `rebuild-krinik-paks.py --only UIMod_Hosav` (its guard refuses the intended 1-of-228 chunk change — installed
   by hand into the library `_krinik-modified/3748867573/` and the game's `Mods`, md5 equal).
 
