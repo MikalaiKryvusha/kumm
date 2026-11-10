@@ -143,6 +143,11 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
           pips at Y 0 and 32, a single one at Y 16; a second set of 4 pips at Y 16 follows (the corruption pips — to confirm). So a page p re-places a pip at
           X = (req − 20p) / 20 × 858.2 and hides it outside 1…20 of the page — done in `PostPipsPlacedOnCanvas` (the game's event after its own placement).
           Process slip of that run: the game was opened without the voice phrase (HOUSE_RULES rule 13) — the phrase line went to /dev/null by my mistake.
+        - **The recipe for new widgets in an existing tree** (the field route, `kit-conanui-edit.py` :299–345): `tree = unreal.find_object(None, "<asset>.<name>:WidgetTree")`,
+          `w = unreal.new_object(unreal.Button, outer=tree, name="Btn_KrinikPageNext")`, `slot = <parent overlay>.add_child_to_overlay(w)`; a re-run REUSES the widget
+          found by name and never removes one (the GUID trap: run the script TWICE before a build after adding a widget — `KrinikConanUI.md`, «Kit Python traps»).
+          FIRST probe of step 2: does `BlueprintGraphEditor.add_component_bound_event_node(<the Button>, "OnClicked")` accept a widget (its doc types `ActorComponent`)?
+          If not — a custom event bound by `K2Node_AssignDelegate` / `add_dispatcher_event_node`, or the game's `Select` path.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
