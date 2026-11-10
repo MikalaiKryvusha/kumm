@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0503 · 2026-11-10 · ❌→✅ · #fixture #test-stand #desktop #owner-machine #cleanup
+class: experiment-left-live
+mechanized: yes — `tools/fixture-pack.mjs` sets `KUMM_DESKTOP_DIR` to its temp folder (install.ps1 and the stand's uninstaller read it first) and asserts nothing appeared on the real desktop
+**Lesson:** a test stand that exercises a «desktop shortcut» feature wrote to the owner's REAL desktop and cleaned up only on its last line — every run that died earlier left a
+«KUMM fixture <ms>» file; one night left 11 and the owner found the litter. A stand works in its OWN folder: every place the product writes outside the game folder
+(desktop, Start menu, AppData, registry) gets an override the stand points into its temp dir, plus a check that the owner's real location is untouched.
+**Trigger:** a test of anything that writes outside the stand's folder (shortcuts, user folders, registry).
+
 ### EXP-0502 · 2026-11-10 · ❌→✅ · #conan #kit #blueprint #python #ui #graph
 class: tool-format-assumed
 mechanized: yes — `ConanExiles/_config/devkit/kit-attribute-paging-step2.py` (each workaround commented at its line; a failed link or compile stops before the save)

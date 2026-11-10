@@ -141,6 +141,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >     `T_KrinikPageArrow*`, left / right numbers justified by the owner's 10:46 word) — the judge round on the look script runs; NEXT: frames at 1080p / 2K / 720p,
 >     the disabled-arrow click check, then the owner's 10:28 order (placeholder perks 21–40, pips per page, the right column scrolls — plan 49 steps 2–5); the wheel.
 >   - Bug 92 DONE (HUD bars magenta again, pack `3ac94a4`); bug 91 OPEN (the corruption «+» hover label) — after the arrows.
+>   - 11:00–11:07 the owner: numbers «слишком тяжелый вес, на -200» → the outline removed (plain PT Serif Regular); «цвет больше в бронзу» → (200, 135, 70) — rebuild
+>     running at 11:08 (`kit-attribute-paging-look.py`, frame to show). 11:01 «СВАЛКА на рабочем столе» — 11 «KUMM fixture» shortcuts from the night's stand runs:
+>     FIXED (KUMM `42ee2b8`: `KUMM_DESKTOP_DIR`, the stand checks the real desktop stays clean; EXP-0503). 11:04 «работай автономно» → dayloop after this cut.
 > **2026-11-10 02:25 +03:00 — chat of 2026-11-10 night (dayloop, the owner's order: the Conan build 1.0.0 backlog, autonomously).**
 >   - DONE: the rulebook cleaned of the owner's raw voice (AGENT_GUIDE, HOUSE_RULES, CLAUDE.md; verbatim → PROJECT_HISTORY entries 2026-11-10 01:52 / 01:55),
 >     the guard `tools/hooks/guide-no-raw-voice.mjs` (PreToolUse, live refusal seen; `--staged` in pre-commit), KAIF #196; the canon rules «code goes to an independent
