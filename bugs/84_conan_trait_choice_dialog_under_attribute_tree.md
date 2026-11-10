@@ -52,3 +52,7 @@ tabs) again with TWO `W_FullscreenMap_C` (op 1 / op 0); releases sent by `mouse-
 removing only the op-0 copy did NOT; removing the map and `W_Carousel_C` + `SetInputMode_GameOnly` + cursor off returned him to the world (frame 20:24). So the
 stuck state is the duplicate page / modal stack, not a held button (EXP-0484 stays as a hygiene rule, not this cause). A game restart restores the hub. **This bug is
 the owner's top debt now:** fix `krinik_hub_controller` so no page / the map exists twice; control case first (the section off → does the map still stick?).
+
+**2026-11-10 03:0x — the same class seen on «Хар-ки» (plan 49 step 1 run, background, the window opened by `ActivateModule(FName('Attributes'), true, false)`):** every
+attribute row exists TWICE among the live `W_Attribute_C` (12 rows for 6 attributes; both answer `UpdateView`) — a second attribute page under the shown one, the
+dialog-under-the-tree of this bug would sit in the same stack. Control case still owed (the hub section off → one set of rows?). Probe `ConanExiles/_config/attr-page-probe.lua`.
