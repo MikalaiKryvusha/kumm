@@ -153,6 +153,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >     NEXT: build step 2 in `kit-attribute-paging-edit.py` (a step-2 section: the two Buttons + label by `new_object` into `Progress`, run TWICE — GUID trap; the
 >     click and wheel handlers; the visibility past 20; the pips' X in `PostPipsPlacedOnCanvas`), judge rounds, build, live cases; then items 3, 4.
 >     Slip of 03:09: a short game run without the voice phrase (rule 13).
+>   - **Bug 84 (the owner's top debt) REPRODUCED 03:20:** open → close → open of the attribute module by `ActivateModule` leaves TWO live `W_Attributes` windows
+>     (12 visible rows; `_config/attr-rows-owners.lua`). FIRST next: the control case with `krinik_hub_controller` off — ours or the game's — then the cause fix.
 > **HANDOVER 2026-11-09 22:45 +03:00 — chat kumm-2d closed by the owner («закрывай чат»).** The game (launch 22:06, front) is the OWNER's — he plays in it; no machine lock held;
 >   KCCP closed its chat. Pushed: KUMM and the pack (`conan-exiles-modpack`). Report of the evening: N1 found by the profiler and SHIPPED in the new mod.
 >   **FIRST next chat (in order):**
