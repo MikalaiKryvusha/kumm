@@ -28,6 +28,9 @@ y ≈ 572 (1080p), over the right perk column, with no plate behind it — the c
   asset), `uaj tojson` both, a script compared the six exports of the branch (`SizeBox_Corruption_Button`, `Danger_IDK_Why_This_Is_Here`, `CorruptionButtonOverlay`,
   `CorruptionButtonBG`, `LevelCorruptionButton`, `CorruptionLabel`) and their slots by content: all the same (only export numbers shift). Our page arrows do not
   touch it. Rule 8: fixed natively in our kit edit of `W_Attribute` once the owner picks the look.
+- 12:58 the label shows on hovering the ROW (the cursor on Живучесть's bar, not on the diamond — frame `whl/w1.jpg` of the wheel case W1): the game shows it
+  with the row's hover glow, so the fix covers the row hover too.
+- **Bug 86 is the same defect** (the owner's frame of 2026-11-07 21:45: the caption over a perk icon of the right column) — one fix closes both.
 - **Variants for the owner 2026-11-10 12:5x:** review folder `НА ОТСМОТР НИКОЛАЕМ/81_podpis_oskverneniya` (V1 plate above · V2 under · V3 the game's place with a
   plate · V4 no label; `ConanExiles/_config/mockups/corruption_label_mockup.py` over a real 4K frame). Waiting for his pick (STATUS «Awaiting human review»).
 

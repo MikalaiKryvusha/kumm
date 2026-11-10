@@ -121,7 +121,9 @@ widgets made by `new_object` are no blueprint variables (a getter comes out unty
 a duplicate function; (5) a native parent's `BindWidget` property (`AttributeCanvas`) is not blueprint-readable. Ways round: reach a widget as
 `<a BP-variable sibling>.GetParent().GetChildAt(<index read at edit time>)` + an exec Cast (TextBlock's typed pin is `AsText`); feed your exec INTO the game's
 existing dispatcher-call node; `add_custom_event_node(<own name>)` + «Bind Event to On Clicked»; the compile errors are in the editor log (`LogBlueprint: Error`),
-the Python result only says False. Run the kit in the background, ≈1.5 min a run, and let every run stop BEFORE the save.
+the Python result only says False. Run the kit in the background, ≈1.5 min a run, and let every run stop BEFORE the save. (6, 2026-11-10 12:5x) A blueprint's
+OWN custom event is callable from a function graph (`OnMouseWheel`) by `ed.add_call_function_node("<asset>.<Class>_C:<EventName>")` — the way round the missing
+«Call On Clicked» node (`kit-attribute-paging-wheel.py`).
 **Trigger:** a kit edit that adds widgets AND graph logic to a vanilla widget.
 
 ### EXP-0501 · 2026-11-10 · ✅ · #conan #kit #blueprint #python #ui #graph

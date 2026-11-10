@@ -140,8 +140,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > of the native `AttributeEntry:UpdatePipIcons`; EXP-0504), the right perk column scrolls (`SB_KrinikPerkScroll`); the arrows' owed checks D1 / D2 / M1 by real clicks,
 > frames at 1080p / 2K / 720p — report `testcases/reports/2026-11-10_conan-placeholder-perks-pages.md`. Judge: 3 rounds (the 3rd — no confirmed defect). Pushed: pack
 > `4c5548e` (mod) + `e57403d` (guide line, PDF, build-docs waits for Chrome). Bug 91 REPRODUCED by a real hover (the row's own `CorruptionLabel`, no plate; recon
-> in the bug) — NEXT: the control case (vanilla `W_Attribute`), then variants of the label's look for the owner (taste class). Then the wheel over a row (kit refuses
-> the nodes); the column's bar look → the owner's eye. The game runs (background, launch 12:41, the agent's run; lock to 13:03).
+> in the bug), control done (the game's own branch), four looks in review folder 81 — waits for his pick. The WHEEL over a row BUILT 12:5x
+> (`kit-attribute-paging-wheel.py`, W1–W4 pass by a real wheel; the guide says it). Open for his eye: the column's bar look (Сила shows a bar for a 1.7-unit overflow).
+> The game runs (background, launch 12:56, the agent's run).
 > **HANDOVER 2026-11-10 11:17 +03:00 — chat closed by the owner («закрывай чат, продолжим в новом»); FORCE-closed at 85 %: the bonsai trim of STATUS was NOT done (debt for the
 > next /end-chat-soft).** Game closed, no lock, no crash window; pushed KUMM and pack `c6afcc9`; the owner ordered «работай автономно» (11:04).
 > **FIRST next chat:** (1) plan 49 step 2 owed checks — a click on a DIM arrow, an arrow click on a MIDDLE row, frames at 1080p / 2K / 720p; (2) the owner's 10:28 order —

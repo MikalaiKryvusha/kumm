@@ -247,6 +247,9 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
              `kit-attribute-info-scroll.py` (`SB_KrinikPerkScroll` around `PerkInfoBox`), P6 by the remote, P6b by a REAL wheel. The column lists ALL the attribute's perks
              (stock and placeholders) and scrolls — it does not filter by the row's page (`[AI]`: the column is the attribute's whole perk list in the game too; the owner's
              «список справа их принимает и отображает и скролится» is met; filtering by page — only if he asks).
+          4b. [x] **the wheel over a row — BUILT 2026-11-10 12:5x** (`_config/devkit/kit-attribute-paging-wheel.py`): the `OnMouseWheel` override calls OUR custom events
+             `KrinikPageNextClicked` / `KrinikPagePrevClicked` as functions of the generated class (`add_call_function_node("<asset>.W_Attribute_C:<event>")` — the route
+             step 2 did not try) and returns `Handled`; W1–W4 pass by a real wheel (TC step 2).
           5. [x] cases: page 2 of the placeholder attribute shows its pips at 25/30/35/40, page 1 the stock ones, the column scrolls; frames at 1080p / 2K / 720p (case R) —
              report `testcases/reports/2026-11-10_conan-placeholder-perks-pages.md`. The arrows' owed checks D1, D2, M1 pass by real clicks (12:3x), a reopen keeps the page.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и

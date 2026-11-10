@@ -21,7 +21,11 @@ by real keys (Tab → E → E), the game in front, owner-idle FREE; frames by `c
 | S2 | a real click on › of Проворство | label «21–40», the bar 19 of 20, the pips hidden; the value «39» unchanged; other rows unchanged | pass | frame `s2.jpg`: «21–40», bar ≈ 95 %, pips gone, 39, Живучесть still «1–20» with pips |
 | S3 | a second click on › of Проворство | stays on «21–40» (the last page of 39 — the clamp) | not run | |
 | S4 | a real click on ‹ of Проворство | «1–20», full bar, pips back | pass | frame `s4.jpg` |
-| S5–S7 | the wheel | — | not built | the kit refuses the nodes (plan 49) |
+| S5–S7 | the wheel | — | not built (until 12:5x) | the kit refuses the nodes (plan 49) |
+| W1 | (`kit-attribute-paging-wheel.py`, 2026-11-10 12:5x) a REAL wheel down over Живучесть (25, page 1) | the row pages to 21–40; Проворство keeps its page | **pass** | 12:58 the player path (Tab → E → E, the game in front, FREE), `mouse-seq` move 0.395/0.451 + wheel −1: the remote log Vi 0 → 1, Ag 0 (`whl/pages.txt` f2); frame `whl/w1.jpg`: «21–40», the placeholder pips at the quarters |
+| W2 | a real wheel up over the same row | back to 1–20 | **pass** | wheel +1: Vi 1 → 0 (f4) |
+| W3 | a real wheel over a row ≤ 20 (Сила 0) | nothing changes (the clamp) | **pass** | move 0.395/0.255 + wheel −1: St stays 0 |
+| W4 | a real wheel over the right perk column | the column scrolls, no row pages | **pass** | move 0.83/0.62 + wheel −3: rows unchanged; Сила's column scrolled to its end — offset 1.7 of 1.7 (the remote; invisible on the frame). Seam for the owner's eye: Сила overflows by 1.7 units and still shows a bar |
 | S8 | the «+» of any row still raises it (the arrows do not cover it) | the value +1 | | |
 | S9 | close and reopen the hub | the screen opens on page 0 of every row (a fresh page per open) — or keeps the page; record which | | |
 | C1 | control: the pak without the step-2 edit (step 1 only) | no arrows, no label | | |

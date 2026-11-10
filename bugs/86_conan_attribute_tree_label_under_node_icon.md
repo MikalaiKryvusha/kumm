@@ -23,6 +23,16 @@ The caption sits clear of the node icons (its own row or a place without nodes);
    — control case with KrinikConanUI's Lua out (rule 24).
 2. Frame at 4K and 1080p (rule 17), fix natively (rule 8), frame after.
 
+## Cause found 2026-11-10 12:5x — the same defect as bug 91
+
+The caption is the attribute ROW's own `CorruptionLabel` (W_Attribute, shown on hovering the row or its purple «+»), drawn with no plate from the diamond to the
+right — over the right column's perk icons and text (the «Ха» under the «≡» node is the column's perk icon). The branch is the game's own (vanilla == ours,
+the static control in bug 91). Reproduced by a real hover 2026-11-10 (bug 91). The fix is ONE: bug 91 — the owner's pick of four looks (review folder 81),
+then the kit edit; this bug closes with it. The «description cut by the frame edge» part is the column's height — the column scrolls since 2026-11-10
+(`SB_KrinikPerkScroll`, plan 49 step 4).
+
 ## Links
+
+- `bugs/91_conan_corruption_button_hover_tooltip.md` — the same defect (the fix lives there).
 
 - `bugs/84_conan_trait_choice_dialog_under_attribute_tree.md` (same screen) · `bugs/64_conan_mod_ui_wave_overlaps_untranslated.md`.
