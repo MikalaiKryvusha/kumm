@@ -148,6 +148,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-13 16:2x +03:00 (chat after `resume`, the owner's «продолжаем делать сборку Конана"; his game PID 30492 open for HIS check — not mine, not closed):**
+>   - Bug 75 REOPENED (the owner 16:07): the 2026-11-07 instant `AnimSelect` is in the deployed pak — another path; the read-only `quickloot-rim-trace.lua` is loaded
+>     into his game (`grep '\[QLR\]' UE4SS.log` — 0 lines at 16:23, he took nothing yet). Next: read his takes once, else my own stand (R3 + variants) when his game closes.
+>   - Bug 98 filed (first-person shadow): flags read (all visible parts cast; camera mode unknown) — stand when the game is mine. Bug 97 read: the game's design (feats /
+>     levels), one check left on his hero (feat 6 «Archer» known and the Archer journey still locked = a defect).
+>   - Plan 52 step 3 needs a live recon of the bow wield / sheath event (plan 52 step 3 note). Judges running: owner-presence hook + `game-front.ps1 -OwnerAsked`
+>     (then commit the pack's `game-front.ps1` + `fp-shadow-flags.lua`, add the guard self-test case), bug 96 round 3 on `krinik_pickup_prompt.lua`.
 > ⚠️ Закрыто принудительно 2026-11-13 16:06: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft.
 > Ложных утверждений на месте: нет.
 > **16:05 the owner's order** (`[OWNER]` «ПЕРЕДЕЛАТЬ ХУК!!!!!!!» · «он должен быть тебе помощником, а не препятствием!» · «я тебя явно попросил запустить мне игру, а хук

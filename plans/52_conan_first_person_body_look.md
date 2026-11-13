@@ -48,5 +48,10 @@ The kit's graph editor creates any action-menu node by `create_node_from_name("C
        (`b_headcam` forward) → Output; alphas and amounts from members; the EventGraph reads the owner's main anim instance (`Pitch`, `isAttacking`, `isThirdPerson`) and
        the weapon archetype (3 = bow). Saved as a NEW asset of KrinikConanArchery — no vanilla asset touched.
 3. [ ] Lua (KrinikConanArchery): at the hero's birth `Mesh:SetOverridePostProcessAnimBP(<class>, true)` — once, an event.
+       **Desk read 2026-11-13 16:2x:** the anim's `Alpha` follows `Active` only (`kit-pp-fp-look.py` header) — Lua owns `Active` = first person AND bow in hand AND no draw.
+       Events known in the mod: the camera switch (`BasePlayerChar_C:SwitchToFirstPersonCamera` / `SwitchToThirdPersonCamera`, hooked by KrinikConanCamera), the draw
+       (`BP_PowerCharge` / `BP_SetChargeHold` notifies — `hip_on` / `hip_off`, the aim stance `fp_aim_shift`). The bow test exists (`krinik_bow_sprint.lua`
+       `bow_in_hand`: a «bow» class attached, not on a sheath socket) but NO event for taking the bow up / putting it away is known — `WeaponEquipped` does not fire for
+       a properly wielded bow (bug 93). Next: a live recon of which hero event or substate fires on wield / sheath, before the Lua.
 4. [ ] Kit build → deploy → cases C1–C5 (TC `TC_conan_fp_bow_visible_2026-11-13.md`), the neck share and the eye offset tuned live by the remote; frames to the owner as
        one HTML page.
