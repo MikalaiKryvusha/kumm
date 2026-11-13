@@ -152,7 +152,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > folder — its name stays out of git); deployed 75/75, UE4SS 1181 on the new exe, main menu Revision 383,024 in Russian, «СБОРКА: моды 66/66» (the 3.1.0 log format
 > fixed in KrinikConanModPackManager), the owner's world `Game_1` + mod saves + his `config.lua` files copied from 3.0.1 (hash-checked), world entered three times; no
 > «too old», no missing imports. Machine lock released, no game of mine open. **NEXT (in order):** (1) DONE 20:05 (the camera records at the HUD's birth, «вернули 10» right after loading; owed C4 draw, C6 frames) —
-> record at the HUD's birth (bug 98, notes «Open»); (2) rebuild the 4 patched mods on the new originals — `rebuild-krinik-paks.py --only <C> --against-original`
+> record at the HUD's birth (bug 98, notes «Open»); (2) DONE 20:07 (in game not yet seen) rebuild the 4 patched mods on the new originals — `rebuild-krinik-paks.py --only <C> --against-original`
 > (SevereWeatherEnhanced, No_Building_Placement_Restrictions, IMM_WAR, EnhancedArmoryAndArsenal; the 3.1.0 view needs `Saved/ExtractedMods` — exists now);
 > (3) the 11 vanilla assets the patch changed under mods' whole copies (`_config/patch-rollback.py`, list in plan 53 step 5): our `M_Foliage` (KrinikConanGraphics),
 > EAA's `BP_PL_Crafting_Station` (3.1.0's crafting-queue fix), LegitReligious' stat table, Storage Reach's console table, LBPR (after its rebuild), map tiles of
