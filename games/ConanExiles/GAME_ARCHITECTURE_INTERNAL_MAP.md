@@ -148,6 +148,22 @@ function (`EvaluateMovement_RangeCombat`, `_Sprint`, `_Walk`, `_UsingItem`, `_Is
 (BP, out `Value`, degrees: W 0, W+D ≈ 46, D 90) lies inside its `DirectionRequirment` (X min, Y max). The speed is the row's `Speed` through `ApplyNewMovementSpeed`
 (× perk, snares, encumbrance — `ideas/03`). So a drawn bow (Ranged before Sprint) walks at 214 and never sprints; `EvaluateMovement_Sprint` itself has no direction
 test — the window is the row's. The native `K2_CanSprint` is false while drawing (15 / 16). KrinikConanLocomotion `krinik_bow_sprint` uses exactly these two doors.
+**The sprint key in `BasePlayerChar` (bytecode, 2026-11-13, `retoc-5.8 to-legacy --filter BasePlayerChar` → `uaj exports` → UAssetGUI `tojson VER_UE5_8` →
+`kismet-trace.py`):** the instance flag `SprintKeyIsDown` is set True on the sprint press and False on the release; `SprintAction(Pressed)` → `ClientStartSprint` or
+`ClientStopSprint` (→ native `StopSprint`, then `ServerStopSprint`); the toggle press calls `SprintAction(NOT TrySprint())`; `ResetSprint` = if in 7 → exit 7, enter 7;
+`OnSubstateChanged_Attacking(11, Entered)` only calls `AdjustStaminaForAttack`. No blueprint path stops the sprint on a draw: a bow draw runs 11 (attack) → 15 →
+16, and a sprint the player was already in dies at the draw (the owner's play) — HYPOTHESIS, to confirm by case S1b: at the first substate (11) the Ranged row
+wins and native code clears `bTrySprint` (bug 93; the
+sampler `ConanExiles/_config/sprint-bow-sample.lua` reads `try` = bTrySprint and `key` = SprintKeyIsDown every 100 ms). Exports of this asset by a PowerShell `>`
+carry a BOM that `kismet.load` rejects — write `uaj exports` through Bash.
+**Taking a weapon up stops the sprint (seen live 2026-11-13 by `ConanExiles/_config/stop-sprint-probe.lua`):** an RMB in a sprint calls
+`BaseBPCombat_C:WeaponEquipped` (twice), whose body is `ClearAttackQueue · ClearHeldActions · ActionEnd(0.25) · StopSprint · ServerStopSprint · HandleAggressiveState …`;
+`BaseBPCombat_C:StopSprint` is «if TrySprint() → bTrySprint = False». `SprintKeyIsDown` stays true, so the sprint never resumes while Shift is held.
+Lever: KrinikConanLocomotion `krinik_bow_sprint` lever c (WeaponEquipped post-hook → bTrySprint back) — bug 93.
+**Stand gear (2026-11-13):** a weapon added by `AddItemTemplate` to the shortcut bar did NOT come to hand — not by a real «1» (scan code or VK), not by
+`ShortcutBarInventory:UseShortcutItem(slot)`; `EquipmentInventory:AddItemTemplate(51405, 0, …)` (slot 0 = the main weapon) attaches `BP_bow_2h_C` on `Socket_Bow`, but the
+combat system does not wield it: RMB plays an unarmed attack (substate 11 ≈ 1 s with root motion, no 15 / 16, no shot). Arrows are taken from the BACKPACK
+(Arrow Quick Swap notes), not from an equipment slot (slot 1 did not persist a restart). An honest bow stand = a save whose hero holds the bow the game's way.
 Working route (KrinikConanArchery 0.7.0): at take-off `ExitSubstate(8)` for the player with the bow in hand; after a refused `StartJump` while
 attacking with the bow — `LaunchCharacter(0, 0, JumpZVelocity 420)`. Out params from Lua: `local o = {}; c:InSubstate(s, o); o.Success`. Bow in
 hand = an attached `BP_bow_2h_C` on `Socket_Bow` (on the back — `sheath_bow`).

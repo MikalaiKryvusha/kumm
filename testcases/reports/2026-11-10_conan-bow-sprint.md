@@ -41,7 +41,7 @@ Functional run: real mouse and keys into the live game, the hero's substates, Ma
 | S3 draw + walk | pass (214) | NOT RUN |
 | S4 draw + sprint sideways | fail (428) → build 2 window | NOT RUN |
 | S6 draw + Shift standing | — (new after judge round 1) | NOT RUN |
-| C1 cost | 2386 calls / 690 ms / worst 6 ms per minute (fail) | 2160–2217 calls, 14–67 ms, worst ≤ 1 ms tick per minute (pass) |
+| C1 cost | 2386 calls / 690 ms / worst 6 ms per minute (fail) | 2160–2217 calls, 14–67 ms, worst ≤ 1 ms tick per minute in the agent's minutes 19:53–19:55 — **CORRECTED 2026-11-13: not a pass**; the same build read «худший 2.000 мс» at 19:56:46 and 20:39–20:41 (the owner's play; judge round 2, finding 3) — re-measure on build 4 (bug 93) | <!-- claim-ok: 19:56 and 20:39–20:41 are log times of 2026-11-10, the date of the correction is 2026-11-13 -->
 
 ## 5. Found
 

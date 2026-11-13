@@ -156,7 +156,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   - **Sprint with the bow drawn — BUILT** (`KrinikConanLocomotion` section `krinik_bow_sprint.lua`, manifest verify line): the game's movement row table and
 >     `EvaluateMovementType` read (game map «The movement row»); levers: native `K2_CanSprint` post-hook + `EvaluateMovement_RangeCombat` → false under ONE gate.
 >     Real input on builds 1–2: sprint 735 with the draw kept, a shot on the run fired. Build 3 (after judge round 1, 8 of 10 findings fixed) is deployed; only S0 and
->     the cost line (14–67 ms a minute, worst ≤ 1 ms) were seen on it — S1, S2, S3, S4, S6, S7 owed (the owner was at the keyboard). Judge round 2 did NOT run (the helper died on an API 403 at 20:0x) — owed.
+>     the cost line (14–67 ms a minute; worst 1 ms in the agent's minutes, 2 ms in the owner's — corrected 2026-11-13) were seen on it — S1, S2, S3, S4, S6, S7 owed (the owner was at the keyboard).
+>     Judge round 2 ran 2026-11-13 (7 findings). **The owner's bug 2026-11-13 09:14 — a sprint started before the draw breaks at the draw: `bugs/93_…`, build 4 deployed, case S1b owed.**
 >     TC `testcases/TC_conan_bow_sprint_2026-11-10.md`, report `testcases/reports/2026-11-10_conan-bow-sprint.md`.
 >   - **Bow-kill crash — code recon done** (`researches/conan-bow-kill-crash-recon/README.md`, the owner 19:10 «разведка кода, поиск слабых мест»): top finding F1 — six
 >     live `RegisterKeyBind` in KrinikConanUI (LMB in feedback / mods button / mod settings fire on EVERY LMB = every bow shot; Esc, Tab), the guard misses

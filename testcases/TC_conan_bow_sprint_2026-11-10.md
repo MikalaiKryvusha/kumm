@@ -16,6 +16,7 @@ Dimensions: draw on/off × sprint key on/off × direction forward/sideways × sh
 |---|---|---|---|
 | S0 control — no draw | W + LShift 2.8 s | sub 7, max 735 | pass (build 1 19:33, build 3 19:56) |
 | S1 draw + sprint | RMB held, then W + LShift 2.8 s | sub 7 with 15 / 16, max 735; log «тип движения — спринт» | pass builds 1–2; build 3 owed |
+| S1b **sprint FIRST, then draw** (the owner's order, his play 2026-11-10 19:5x–20:4x: «в момент натяжения, когда выполняется приближение камеры - спринт прерывается», 2026-11-13 09:14) | W + LShift 1.5 s, then RMB held 2 s (keys kept), LMB, 1 s more | sub 7 kept through the draw (15 / 16), max 735 all along; the shot fires; the sprint goes on after it; sampler: `try` (bTrySprint) and `key` (SprintKeyIsDown) read every 100 ms | FAIL by the owner; his session log: «разрешений 0» every minute 19:52–20:36, then «разрешений 106» 20:39:33 and «148» 20:40:33 with «тип движения — спринт» (lines read by judge round 2 before the 09:23 launch overwrote the log) — the sprint engaged in some of his tries, not in this order; added 2026-11-13 09:22 |
 | S2 shot on the run | RMB, W + LShift 1.8 s, LMB | Archery log «из лука»; the sprint goes on after the shot | pass builds 1–2 (19:33:50, 19:44:36); build 3 owed |
 | S3 draw + walk (no Shift) | RMB held, W 2 s | max 214 (the game's aim speed) — unchanged | pass build 1; build 3 owed |
 | S4 draw + sprint sideways | RMB held, D + LShift 2 s | no sprint, no sub 7 (the Sprint row's 0…65° window): max 214 | fail build 1 (428) → fixed; build 3 owed |

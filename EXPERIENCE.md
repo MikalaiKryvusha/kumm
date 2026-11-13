@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0507 · 2026-11-13 · ❌ · #conan #testing #testcases #input-order #sprint #bow #remote
+class: cases-miss-the-players-natural-order
+mechanized: no — the carrier is the TC row S1b (`testcases/TC_conan_bow_sprint_2026-11-10.md`) and bug 93
+**Lesson:** a combined input (sprint + draw) has an ORDER, and the player's natural order is the one to test first. Every agent case of 2026-11-10 pressed RMB
+first and Shift after it; the owner sprints first and draws on the run — the feature never held for him at the draw (bug 93), while all agent cases passed.
+When a mechanic joins two held inputs, write a case per order (A then B, B then A) and per transition (the first substate of B — here substate 11 before 15),
+and sample the deciding flags densely around the transition. Also: a remote probe reads an actor's place by `K2_GetActorLocation()`; `GetActorLocation()`
+errors «attempt to call a TrivialObject value» — that error was first misread as an unreadable `.Pawn` (corrected the same session).
+**Trigger:** writing cases for any mechanic that combines two inputs or two states (sprint + aim, jump + attack, block + move).
+
 ### EXP-0506 · 2026-11-10 · ❌→✅ · #conan #ue4ss #movement #sprint #bow #hook #datatable
 class: tool-format-assumed
 mechanized: yes — `ConanExiles/_unpacked/KrinikConanLocomotion/ue4ss/Scripts/krinik_bow_sprint.lua` (header) + game map «The movement row»
