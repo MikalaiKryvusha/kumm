@@ -153,6 +153,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > rebuilt on 3.1.0; EAA's crafting station = the game's chunk, new plan line `game-chunk:`); BMNB animal pen, LBPR ×2, 4 map tiles, MSCasaDesFlores' orb — the table in
 > plan 53 step 12. Resume: `check-mod-updates.py --since 2026-11-03 --all` first (21:4x: 6 of 66 authors updated since the beta; Hair We Go's 21:36 upload taken and
 > deployed). NOW: our own mods (KrinikConanGraphics `M_Foliage` stale on 3.1.0, the «3.0.1» under the menu logo — KrinikConanUI kit build, list below).
+> **The kit updates 378787 → 383024 (= the 3.1.0 game) via the Epic launcher since 21:50** (the owner 21:47) — every kit build (Graphics `M_Foliage`, UI widgets,
+> Archery) waits for it: plan 53 step 10. KUMM `aac1d15` pushed (voice rule + hooks); the PACK commit (stale-copy-check.py, `game-chunk:`, EAA recipe) waits for
+> its judge round 2. In-game checks L1–L6 + the three fixes — the game in FRONT when the owner is idle (the hook refused twice at 22:0x while he typed).
 > The game, when launched, goes in FRONT (`launch-fg.ps1`, the owner 21:13). Voice comments during all work (HOUSE_RULES rule 13, the owner 21:30).
 > ⚠️ Закрыто принудительно 2026-11-13 20:1x +03:00 на 85 % контекста: церемонии пропущены (проход судьи по передаче, обрезка STATUS, README, линтеры витрины) — долг
 > платит первый /end-chat-soft. Ложных утверждений на месте: нет (ложь «перехват срабатывает до тела функции» исправлена в bug 98 и конспекте камеры).
