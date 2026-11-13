@@ -153,7 +153,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   - **Nexus quarantine — the third letter** written and SENT by the owner (11:02).
 >   - KrinikConanUI: placeholder-perk widget hooks only with the placeholders on (pack `ca3cdef`); the page arrows' generator in Conan gold (pack `d6c2897`).
 >   - The evening chat of 2026-11-10 left its work uncommitted — committed this chat (KUMM `02571b3`, pack `d3e92f9`).
-> **NOW (chat of 2026-11-13 11:46):** bug 96 FOUND and FIXED, pack `26f4cfa` pushed and deployed: a pickup bush touched once by E becomes a
+> **HANDOVER 2026-11-13 13:30 +03:00 — chat force-closed by the owner's word (`[OWNER]` 13:29 «этот чат пора закрывать через минут 5, продолжим в новом»).**
+> ⚠️ Закрыто принудительно 2026-11-13 13:30: церемонии пропущены (проход судьи по передаче, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft.
+> Ложных утверждений на месте: нет.
+> FIRST next chat: (a) bug 95 option B — read `ConanExiles/_config/devkit/kit-probe-ab-fp-look.json` (the kit probe started 13:28 in the background, read-only;
+> if the file is missing or `"ok": false`, re-run the command in the script header under the machine lock) → the AnimGraph node that bends the upper body by
+> `…FirstPersonAgressive` and what selects Passive vs NotPassive → the smallest native kit edit → build → first-person frames looking down (TC
+> `testcases/TC_conan_fp_bow_visible_2026-11-13.md`); (b) bug 96 judge ROUND 2 still owed (relaunched 13:29, its answer dies with this chat) — run a fresh judge on
+> pack `26f4cfa`, then the owner's play closes the bug; (c) then the handover list below from item 2. The machine lock «kumm» expires by itself at 13:48; the game is closed.
+> **Done this chat (2026-11-13 11:46 until the close):** bug 96 fixed (below); bug 95 cause found and option B chosen; bug 74 twin-checked (eggs spawn no actor);
+> KUMM `5423161`, `1a0c2a6`, `439e990`, `8e00173`, `e28f31a` + the closing commit; pack `26f4cfa` + the probe script commit.
+> **Bug 96 (was NOW 11:46):** FOUND and FIXED, pack `26f4cfa` pushed and deployed: a pickup bush touched once by E becomes a
 > `BP_ResourceActor_C` with the same look, E keeps gathering from it, and the plate asked only the foliage probe; `krinik_pickup_prompt.lua` now asks the game's
 > actor branch first (`GetIsPickupResource`). Runs 2–3 pass (`testcases/TC_conan_no_take_prompt_bush_2026-11-13.md`, report
 > `testcases/reports/2026-11-13_conan-bush-prompt-resource-actor.md`); review folder 83 holds the 4K frame. Judge round 1: 9 findings, all fixed; **round 2 OWED** —

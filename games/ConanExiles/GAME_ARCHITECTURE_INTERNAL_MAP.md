@@ -585,7 +585,10 @@ Simple Minimap ставит карту во время игры: центр сл
 pitches WITH the view as one rigid piece — at view pitch 0 / −30 / −55 / −80 the head stands 14 / 37 / 51 / 57 cm ahead of the actor origin while the bow hand
 `b_L_prop` swings 39 / 12 / −12 / −33; the held bow therefore keeps one place in the camera's frame, ≈ 75° below the centre (half vertical view 37.5° at FOV 107.5) —
 never on screen while only held; a draw brings it up (the owner: «по ПКМ лук появляется»). `CharacterMesh0` is invisible in first person (the drawn body is
-`MergedLodMesh` + batched followers). **Stand trap:** with no real input the idle camera orbits after ≈ 30 s and ignores `SetControlRotation` — stop it with
+`MergedLodMesh` + batched followers). **The cause in the anim blueprint** (kit `/Game/Master_AnimBP/AB_human_male`, ubergraph statements 1171–1221 by `uaj func` +
+`kpseudo.py`): first person sets `AdjustForLookingUpAndDownFirstPersonAgressive` = `MakeRotator(Roll = −Pitch)` (the full view pitch) and `…Passive` = × 0.15; third
+person `AdjustForLookingUpAndDownThirdPerson` = × 0.15; the AnimGraph reads them by property access, with cached poses `FirstPersonPosePassive` / `…NotPassive`;
+the graph topology — kit probe `_config/devkit/kit-probe-ab-fp-look.py` (graph editor `list_all_nodes` + `list_connected_pins`). **Stand trap:** with no real input the idle camera orbits after ≈ 30 s and ignores `SetControlRotation` — stop it with
 `GUIModuleController:EnableVanityCameraMode(false)` before first-person readings.
 Монтаж натяжки `AM_combat_2h_bow_combo_heavy_c0` (7,05 с, кит, 2026-10-28): `BP_SetChargeHold` 0,517 (1,333 с) и 1,851 (3,963 с — полный
 заряд), `BP_PowerCharge` 0,552 (1,28 с), выстрел `ProjectileAttack` 5,865, `BP_QueueWindow` 6,346. Монтаж общий с NPC-лучниками: звук,
