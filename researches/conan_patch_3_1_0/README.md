@@ -87,6 +87,9 @@ a spear-speed hotfix they expect, Rift / thrall teleport and fall problems, a di
 3. **Stale vanilla tables** (EXP-0460, its own trigger «a game patch»): Part Three adds item / armour rows; a mod that ships a whole vanilla table drops them.
    Check: `python -I -X utf8 _config/mod-overrides.py <out.tsv> "<game>/ConanSandbox/Mods"` → every whole data table vs the 3.1.0 game (`uaj rows`); rebuild every
    `patch-mod-asset.py` mod whose map has `vanilla:` / `vanilla+own:` rows FROM the 3.1.0 tables; `KrinikLevelUncapped` — only if the level tables changed.
+3a. **Our whole-asset overrides of vanilla blueprints** are 3.0.1 copies and silently undo any 3.1.0 change inside them: re-run every `kit-*-edit.py` that saves a vanilla
+   asset on the 3.1.0 kit (`KrinikConanUI`, `KrinikConanGraphics`, the archery montage). Never a parent anim blueprint: the `AB_human_male` override of 2026-11-13 broke
+   its children (bind pose, EXP-0511) and was rolled back the same hour; plan 52 adds a NEW post-process anim blueprint instead — rebuilt on the new kit, no override.
 4. **New game log lines:** «missing imports» warnings will appear for some mods on the first start — read them as a free list of broken references, not as a new
    error of the move; record the baseline for the «no new errors in the log» criterion.
 

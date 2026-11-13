@@ -91,6 +91,27 @@
 
 ## Entries
 
+### EXP-0511 · 2026-11-13 · ❌ · #conan #kit #animbp #override #children #mods #tpose #owner-saw-first
+class: verified-on-a-slice-of-the-product
+mechanized: no — the carrier is plan 52 (the post-process route) and the game map line «children of AB_human_male»
+**Lesson:** never override a PARENT anim blueprint in a modded build. The kit-recompiled `AB_human_male` stood the heroine in the bind pose: she runs its child
+`AB_human_female`, and every child (2 vanilla + at least Immersive Warriors' `IMWA_AB_MaleChildDrunk`) carries cooked data of the vanilla parent — «inconsistent folded
+node data» in `ConanSandbox.log`; other mods' children cannot be re-cooked without their sources. And the owner saw it first: after the deploy only first-person frames
+were looked at — read the anim class the hero ACTUALLY runs (`Mesh:GetAnimInstance():GetClass()`), take a third-person frame, and grep the game log for anim errors
+before any show. The way that touches nobody: a post-process anim blueprint of our own set on the hero's mesh only (`SetOverridePostProcessAnimBP`).
+**Trigger:** any kit edit of a vanilla anim blueprint, or of any blueprint class other assets derive from.
+
+### EXP-0510 · 2026-11-13 · ❌→✅ · #conan #kit #blueprint #python #animbp #compile #bisection
+class: tool-format-assumed
+mechanized: yes — `ConanExiles/_config/devkit/kit-ab-fp-upright.py` (a vanilla compile control before the edit, node marks compared, `KRINIK_AB_VARIANT` bisection, every way that failed commented at its line)
+**Lesson:** a kit compile that answers False with NO log line and NO node mark is bisected, not redesigned. Three designs of the bug-95 edit failed the same silent way
+(pin logic on the AnimGraph; the condition moved to the EventGraph) before a control showed the vanilla asset compiles and a variant ladder found the one bad link:
+a game enum (`GetWeaponArcheType` → `WeaponArcheTypes`) wired straight into `EqualEqual_ByteByte` — `try_create_connection` says True, the compiler refuses silently;
+through `Conv_ByteToInt` → `EqualEqual_IntInt` it compiles. Also paid: an anim blueprint with `use_multi_threaded_animation_update` refuses non-thread-safe game calls on
+an AnimGraph pin (thread-safe math alone compiled) — the game's own calls belong in `BlueprintUpdateAnimation`, the pin reads a member. Order: control (vanilla) →
+the smallest variant that compiles → add one piece per run, each run a separate kit process (≈ 2.5 min), the report naming the variant.
+**Trigger:** any kit Python edit whose `compile_blueprint` returns False without an error line.
+
 ### EXP-0509 · 2026-11-13 · ❌→✅ · #conan #ue4ss #prompt #pickup #foliage #bytecode #owner-frame
 class: partial-copy-of-game-decision
 mechanized: yes — `krinik_pickup_prompt.lua` `actor_target` (the game's actor branch copied in order); game map row «A pickup bush touched once becomes an ACTOR»

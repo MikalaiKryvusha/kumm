@@ -588,8 +588,27 @@ never on screen while only held; a draw brings it up (the owner: «по ПКМ �
 `MergedLodMesh` + batched followers). **The cause in the anim blueprint** (kit `/Game/Master_AnimBP/AB_human_male`, ubergraph statements 1171–1221 by `uaj func` +
 `kpseudo.py`): first person sets `AdjustForLookingUpAndDownFirstPersonAgressive` = `MakeRotator(Roll = −Pitch)` (the full view pitch) and `…Passive` = × 0.15; third
 person `AdjustForLookingUpAndDownThirdPerson` = × 0.15; the AnimGraph reads them by property access, with cached poses `FirstPersonPosePassive` / `…NotPassive`;
-the graph topology — kit probe `_config/devkit/kit-probe-ab-fp-look.py` (graph editor `list_all_nodes` + `list_connected_pins`). **Stand trap:** with no real input the idle camera orbits after ≈ 30 s and ignores `SetControlRotation` — stop it with
-`GUIModuleController:EnableVanityCameraMode(false)` before first-person readings.
+the graph topology — kit probe `_config/devkit/kit-probe-ab-fp-look.py` (graph editor `list_all_nodes` + `list_connected_pins`), read 2026-11-13 14:17: the
+NotPassive pose = `Transform (Modify) Bone b_spine_3` (Rotation ← `…Agressive`) → `b_L_upperarm` translation (−5.3, 0.1, −19.2) → `b_R_upperarm` → `Save cached pose
+FirstPersonPoseNotPassive`; the Passive pose = `b_spine_3` and `b_neck_1` (Rotation ← `…Passive`, 15 %) → `b_head` (Translation ← `HeadFOVAdjustments`) → `Save cached
+pose FirstPersonPosePassive`; the selector = `Blend Poses by bool` with `bActiveValue` ← `isPassive` (True → Passive), blend time 0.1 s each way, then the `isSwimming`
+and `isThirdPerson` blends above it. `isPassive` / `isAggressive` / `isAttacking` come from the combat component (`CombatBP->UpdateVarsFromConanCharacter`).
+**The game's bow test:** `BaseBPCombat::EvaluateMovement_RangeCombat` = `IsAttacking AND GetWeaponItemActive()->GetWeaponArcheType() == 3` (`WeaponArcheTypes`
+3 = `TwoHanded_Ranged`; `GetWeaponArcheType` is native on `GameItem`); the anim blueprint reaches the weapon by its native parent's
+`AnimInstanceHumanMalePlayer::GetWeaponItemPrimary(Character)`. Gauge of «the held bow in frame»: `_config/fp-bow-angle.lua` (the bow hand's angle off the view centre
+against the half vertical view). **The neck clipping looking up (bug 69) has the same root** (2026-11-13 15:03, the neck un-hidden, pitch +89): the combat pose (bow
+held, `isPassive` false) — half the frame is skin; the peaceful pose (bare hands, the bow on `sheath_bow`) — clean sky. KrinikConanCamera's `b_neck_1` hiding is the
+crutch over the combat pose's full bend. **The hero's body is split into components** (remote read 2026-11-13 15:22, the naked female hero): `CharacterMesh0`
+(`SK_human_female`, invisible — the leader pose), `MergedLodMesh` (visible: the torso with the upper arms), batched `…_head_01` and `bg3hair10` (invisible in first person
+by the game), `…_forearms`, `…_hands`, `…_underwear_upperbody`, `…_underwear`, `…_legs`, `…_feet`; hiding all but forearms + hands leaves the arms cut at the elbow (review
+folder 84). Industry practice for this camera — `researches/first-person-body-camera/README.md`. **The heroine runs `AB_human_female_C`, a CHILD of `AB_human_male`**;
+children of `AB_human_male` (kit asset registry, 2026-11-13 15:33, 129 anim blueprints): `AB_human_female`, `AB_human_werewolf` — plus mods' (Immersive Warriors'
+`IMWA_AB_MaleChildDrunk` seen in the log; Emberlight / Highmane's Arsenal carry dozens of anim blueprints, parents unread). A kit override of the parent breaks every child
+(bind pose, «inconsistent folded node data», EXP-0511). The hero's mesh has NO post-process anim blueprint (`GetPostProcessInstance` none, the mesh asset's slot none) and
+`SkeletalMeshComponent:SetOverridePostProcessAnimBP` exists — the free slot plan 52 uses. **Stand trap:** with no real input the idle camera orbits after ≈ 30 s and ignores `SetControlRotation` — stop it with
+`GUIModuleController:EnableVanityCameraMode(false)` before first-person readings. After an orbit both hero cameras (`AdjustableCamera`, `CameraThirdPerson`) read
+`IsActive()` false at a normal view with the HUD back until real input (2026-11-13 14:4x); a fresh world entry reads the third-person one active — a mod must not
+gate on that flag between inputs (the game asks it only inside `UpdateHighlightTarget`, at the E press; bug 96, the second judge's finding 5 refuted).
 Монтаж натяжки `AM_combat_2h_bow_combo_heavy_c0` (7,05 с, кит, 2026-10-28): `BP_SetChargeHold` 0,517 (1,333 с) и 1,851 (3,963 с — полный
 заряд), `BP_PowerCharge` 0,552 (1,28 с), выстрел `ProjectileAttack` 5,865, `BP_QueueWindow` 6,346. Монтаж общий с NPC-лучниками: звук,
 положенный в монтаж, слышен и у врагов — «дзинь» полного заряда `KrinikConanArchery` играет герою из Lua, уведомление в монтаже немое.

@@ -92,6 +92,14 @@ every deciding step (trace arguments, hit order, filter, |cos| choice, `CheckLin
 5. cosmetic — the summary's «щуп нашёл предмет» now also counts actor targets → «плашка горела»; outside the diff: the game also checks
    `CameraThirdPerson:IsActive()` (uht 73–76) — the code does not.
 
+**Round 2 verified and applied 2026-11-13 14:2x–14:57 (run 4 of the TC):** 1 CONFIRMED — the reorder is exact (a hit no closer to the crosshair than the best is dropped by the
+old code too, only after 3–4 game calls); applied; the differential `_config/pickup-target-diff.lua` (both orders on the same traces, 24 directions) — SAME 24 DIFF 0,
+old 0.033 / new 0.029 ms a call under load (the quiet-machine number and a many-hit camp owed). 2 CONFIRMED — a failing check never reached `stat_n`, the summary
+vanished; the summary now counts chain steps and names the errors (R3 pass). 3 CONFIRMED — applied: the first failure logged once. 4 PLAUSIBLE — applied: the pawn
+from `pc:K2_GetPawn()` per check. 5 the wording — applied («плашка горела»); the camera part — REFUTED as a change: between real inputs both cameras read inactive at
+a normal view (after the idle orbit), while the game asks only at the E press, when real input has re-activated the camera — the copy darkened the plate over a bush
+E takes; reverted, the reason at the code line. Cases: F1 (real E, the bush became an actor, plate on), F3, F4, R5 (first person) pass.
+
 ## Decisions made without the owner
 
 - `[AI]` The plate copies the game's actor branch from the 3.0.1 kit bytecode instead of calling `UpdateHighlightTarget` itself: calling the game's function once a

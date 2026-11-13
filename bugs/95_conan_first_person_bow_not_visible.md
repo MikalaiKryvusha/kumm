@@ -64,8 +64,58 @@ blueprint (where the first-person view pitch bends the upper body), then the kit
 - The AnimGraph reads them through property access (`AnimBlueprintExtension_PropertyAccess_0`) and keeps two cached poses `FirstPersonPosePassive`
   (`AnimGraphNode_SaveCachedPose_83`) and `FirstPersonPoseNotPassive` (`_64`). Working reading: the bow held = the combat («not passive») pose with the FULL bend —
   the measured rigid upper body; option B = the passive 15 % share while the bow is held and not drawn (the draw keeps the full bend — the aim follows the view).
-- NEXT: in the AnimGraph — which bone-modify node takes `…Agressive` / `…Passive` (bone, space), what selects Passive vs NotPassive (the blend's condition); then the
-  smallest native edit (the selection condition gets «bow drawn», or the Aggressive value = Passive while the bow is held and not drawn), kit build, frames.
+- **The AnimGraph, read 2026-11-13 14:17** (kit probe `_config/devkit/kit-probe-ab-fp-look.py` run 2, report `kit-probe-ab-fp-look.json`; run 1 at 13:28 died on a
+  deprecated property of `AnimNode_BlendListByBool` turned into an exception — every read is guarded now):
+  - NotPassive chain: Local→Component → `Transform (Modify) Bone b_spine_3`, Rotation = `…FirstPersonAgressive` (the full pitch) → `b_L_upperarm` translation
+    (−5.3, 0.1, −19.2) → `b_R_upperarm` → … → `Save cached pose FirstPersonPoseNotPassive`.
+  - Passive chain: Local→Component → `b_spine_3`, Rotation = `…FirstPersonPassive` (15 %) → `b_neck_1`, Rotation = the same 15 % → `b_head`, Translation =
+    `HeadFOVAdjustments` → Component→Local → `Save cached pose FirstPersonPosePassive`.
+  - The selector: `Blend Poses by bool`, `bActiveValue` = `Get isPassive` (True → the Passive pose), then `isSwimming` and `isThirdPerson` blends above it.
+  - `isPassive` / `isAggressive` / `isAttacking` are written by the combat component (`CombatBP->UpdateVarsFromConanCharacter`), not computed in the anim blueprint.
+- **The game's own bow test** (`BaseBPCombat::EvaluateMovement_RangeCombat`, `uaj func` + `kpseudo.py`, 14:2x): `RangedCombat = IsAttacking AND
+  GetWeaponItemActive()->GetWeaponArcheType() == 3` — 3 = `WeaponArcheTypes::TwoHanded_Ranged` (`/Script/ConanSandbox.WeaponArcheTypes`); a bow draw is an attack.
+  In the anim blueprint: `GetWeaponItemPrimary(CombatBP)` is a native function of its parent `AnimInstanceHumanMalePlayer`, `GetWeaponArcheType` a native one of
+  `GameItem`. `HandleHeldBow` (the same class) only drives the draw montage's sections — no flag there.
+- **No overlap:** `AB_human_male` is in the vanilla `pakchunk0` only among the build's 107 containers (`retoc list --path`, 14:2x) — no mod of the build overrides it.
+- **The edit (FORK: options <the selector's pin logic in the AnimGraph | a member bool set in the EventGraph> · price of error <a per-frame cost on every human NPC
+  (the EventGraph runs for all) vs one off-fast-path pin for the first-person player only> · consulted <own reasoning; the price is small and measured by case B9 —
+  decided on the spot by the fourth door's small-price clause>):** `bActiveValue = isPassive OR (GetWeaponArcheType(GetWeaponItemPrimary(CombatBP)) == 3 AND NOT
+  isAttacking)` — `_config/devkit/kit-ab-fp-upright.py`, saved into `KrinikConanArchery` (its `Local/CookInfo.ini` gets the `AB_human_male` line). Cases B1–B9 in the TC.
+  **On the move to 3.1.0 the edit is re-run on the new kit** — the override is a whole copy of the hero's anim blueprint.
+- **The kit runs of the edit (2026-11-13 14:31–15:0x; every run stops before the save, reports `_config/devkit/kit-ab-fp-upright.run*.json` / `.bis_*.json`):**
+  1. 14:31 — the condition as pure nodes on the selector's AnimGraph pin: all 10 links made, compile False, no `LogBlueprint` error line, no new node mark.
+  2. 14:35 — control: the UNTOUCHED vanilla asset compiles True in this kit (two old warnings: looping animations under automatic transition rules).
+  3. 14:39 — control: the same pin rewiring with thread-safe math only (`isPassive OR NOT isAttacking`) compiles True; `use_multi_threaded_animation_update` True.
+  4. 14:44 — the condition moved to the EventGraph (a member `KrinikFirstPersonUpright` set at the head of `BlueprintUpdateAnimation` behind
+     `Branch(isThirdPerson OR isNPC)`; the pin reads the member): 21 links made, compile False — so not thread safety alone.
+  5. Bisection of 4: v1 (no game functions) True · v2 (+ `GetWeaponItemPrimary`, the item into `IsValid`) True · v3 (+ `GetWeaponArcheType` → `EqualEqual_ByteByte`
+     with 3) False. The game itself calls `GetWeaponItemPrimary` in its EventGraph exactly so (`Character` ← `CombatBP`, `self` empty).
+  So the failing piece is the `GetWeaponArcheType` call or its enum into a byte pin — split next: v3a (the call, output unused) · v3b (the enum → `Conv_ByteToInt` →
+  `EqualEqual_IntInt`). **v3a True (15:0x)** — the call compiles; the failure is the enum output wired into the byte pin of `EqualEqual_ByteByte` (the Python link
+  says True, the compiler refuses silently).
+- **The owner's question 15:00–15:01** (`[OWNER]` «мне кажется, его отключили в каком-то из наших модов, потому что взглыд упирался в части тела» · «Отключение, как я
+  понимаю, было неправильным слишком простых фиксом» · «а лук и руки не прячет?»): read in the live game 15:0x, first person — `CharacterMesh0` hidden bones
+  `b_neck_1`, `b_head`, `b_headcam` (KrinikConanCamera, bug 69: the camera inside the neck looking up); NOT hidden: `b_spine_3`, both clavicles, `b_L_upperarm`, both
+  hands, `b_L_prop`, `b_R_prop`; the bow `BP_bow_2h_C` visible (`IsVisible` true, no owner-no-see). The bow is drawn but out of the frame by the pose. The two symptoms
+  share one root — the full-pitch bend of the upper body in the combat first person (looking up: the camera into the neck; looking down: the hands behind the
+  camera); a case after option B: the neck un-hidden in the upright pose looking up — if the camera stays clear, the bug-69 crutch goes (HOUSE_RULES rule 24).
+
+- **BUILT and seen 2026-11-13 15:07–15:17:** the edit saved (compile True, marks unchanged), the archery pak 220 KB → 9.1 MB (`AB_human_male` cooked for both platforms),
+  deployed 15:14: `KrinikFirstPersonUpright` true with the bow held and not drawn; the bow hand 34° off the centre at −55 and 9° at −80 (vanilla 78° / 77°); looking up with
+  the neck un-hidden — clean sky. TC B1–B3, B10 pass; B4 (the draw) waits for a free PC.
+- **The owner's remarks on the look 15:19–15:22** (`[OWNER]` «у тебя камера прямо вниз смотрит из центра головы - так не бывает в реальности» · «глаза всегда чуть
+  вынесены вперёд от наклонившейся вниз головы.» · «Поищи в интернетте, как такое делают в индустрии.» · «можно нахуй тело не рисовать, если так проще. только руки и
+  лук в руках, например, или руки и мечь в руках» · «в общем - руки и оружие, если так проще»): recon `researches/first-person-body-camera/README.md` (the camera at the
+  eyes, the pitch spread spine → neck → head); the two ways A (the body, the industry way) and B (arms and weapon only — experiment 15:23, forearms cut at the elbow)
+  shown in review folder 84; **the owner picked A 15:25** (`[OWNER]` «A — тело видно, сделано по-индустриальному.» · «покажи»).
+- **T-POSE — the edit broke the hero, ROLLED BACK 15:27** (`[OWNER]` 15:26 «а почему герой в т позе стоит? это ты считаешь достойным для моего отсмотра?» · «а не
+  беру!»): the heroine's anim instance is `AB_human_female_C` — a CHILD of `AB_human_male`; overriding the parent alone leaves every child's cooked data stale —
+  `ConanSandbox.log`: «Anim BP 'AB_human_werewolf_C' has inconsistent folded node data at node 519 (AnimNode_RotationMultiplier): expected 19 entries but cooked data has 6.
+  This usually means a parent/root anim BP was over[ridden]…»; the hero stood in the bind pose (frame `tpose_check`). Missed by the agent: after the deploy only
+  first-person frames were looked at — no third-person frame, no NPC, no log read before the show. The archery pak is back to the 2026-11-02 build (220 KB).
+  A parent anim BP override must ship with every child anim BP re-cooked against it (or the edit goes into the child the hero uses).
+- **How to show** (`[OWNER]` 15:28 «не понимаю, что смотреть в этой папке, что ты открыл. Отвратительно» · «хочешь что-то такое показать и пояснить - HTML страницей с
+  подписями») — HOUSE_RULES rule 32.
 
 ## Options (the owner's choice — the look of first person)
 

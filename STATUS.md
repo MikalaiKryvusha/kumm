@@ -36,7 +36,10 @@
 > работаем дат сборкой конана» · «она 1_ должна работать стабильно 2_ моды не должны конфликтовать, должны быть рабочими 3_ не должно быть
 > явных просадок производительности из-за модов» · 2026-10-26. Work order — "Where to continue", item 0.
 >
-> 🆕 **Conan 3.1.0 is out (2026-11-12, Part Three of the Giant-Kings arc); the build still lives on 3.0.1, the new game is NOT downloaded.** Web recon 2026-11-13 09:09 —
+> 🆕 **Conan 3.1.0 is out (2026-11-12, Part Three of the Giant-Kings arc); the build still lives on 3.0.1. THE OWNER IS DOWNLOADING 3.1.0 (his word 2026-11-13 14:13 +03:00)**
+> (`[OWNER]` «так как я качаю 3» · «3,1,0» · «и нам нужно будет место»); D: cleaned for it the same minute — 46 GB of old profiler traces, old bench videos, the 0.9.0
+> GitHub parts (all 7 verified uploaded on the release) and `mods/OLD` deleted (D free 59.6 → 108.7 GB); the Windows crash dump moved back to `C:\dump` (HOUSE_RULES
+> dossier), `D:\dump` goes at the next boot (+8 GB). The move itself — the checklist below, when the download lands. Web recon 2026-11-13 09:09 —
 > `researches/conan_patch_3_1_0/README.md` (§3 is the move checklist): the top risk is «only ModController classes are loaded at startup» (our
 > `krinik_hub_controller.lua:80` and `krinik_mod_settings.lua:1046/1054` reach other mods' classes by `StaticFindObject`); stale vanilla tables (new item rows);
 > UE4SS on the new exe; the kit revision. No staff known-issues list yet, players wait for a hotfix — when to move is the owner's call.
@@ -145,6 +148,35 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **HANDOVER 2026-11-13 16:0x +03:00 — this chat closes at ≈ 83 % context. FIRST next chat:**
+>   1. Plan 52 step 4 — the post-process look is BUILT and DEPLOYED (archery pak 1.48 MB: sound + montage + `ABP_KrinikFirstPersonLook`, NO vanilla anim override) and
+>      seen working live 16:00: `_config/fp-look-pp.lua` sets it on the hero only (`LoadAsset` needs the FULL object path), `PitchNow` follows the view, `Alpha` blends,
+>      third person with it attached and off — no bind pose, log 0 anim errors; first person −55 with `Active` on (Alpha 0.58 mid-blend) — the bow hand 49° (vanilla 78°).
+>      The frame was blocked by the «Снаряжение» window that opened by itself at the world entry (closing it by `ActivateModule(...,false)` failed — close with a real
+>      Esc when the PC is free). NEXT: full-alpha frames −55 / −80, tune `NeckShare` / `EyeX/Y/Z` live (the eye axis unknown — try 8 cm on each), third person + NPCs +
+>      the log again, then step 3 (KrinikConanArchery Lua: set the PP class at the hero's birth, `Active` on events: first person · bow in hand · no draw), then ONE HTML
+>      page with captions to the owner (rule 32). The kit's active mod is KrinikConanArchery.
+>   2. Bug 97 (new, the owner 16:01): journeys locked after the tutorial except fishing — design or a mod: recon first.
+>   3. Bug 96 round-2 fixes are tested in game (TC run 4) — pack Lua committed with this closure, the quiet-machine cost number and a fresh judge round on the diff OWED.
+>   4. The owner downloads Conan 3.1.0 — the move checklist `researches/conan_patch_3_1_0/README.md` §3 when it lands.
+> **NOW 2026-11-13 15:0x +03:00 (chat after `resume`, the owner's «делаем конана»):**
+>   - Bug 95 option B — the kit edit FOUND after a bisection (`_config/devkit/kit-ab-fp-upright.py`: a member `KrinikFirstPersonUpright` set in `BlueprintUpdateAnimation`
+>     behind `Branch(isThirdPerson OR isNPC)`, the first-person selector reads it; the enum via `Conv_ByteToInt`, EXP-0510); the saving run + the archery pak cook were
+>     running at 15:0x (kit active mod = KrinikConanArchery — put `active.txt` back to KrinikConanUI after). Next: deploy, cases B1–B10 (TC `TC_conan_fp_bow_visible_…`).
+>     The owner's question 15:00 answered: no mod hides the bow or the arms (live read); the neck hiding of bug 69 is a crutch over the same full-bend combat pose.
+>     15:14 BUILT + deployed (pack Lua/pak NOT committed yet): the bow in the frame looking down (B1–B3, B10 pass). The owner 15:19–15:22: the camera looks down from the
+>     head's centre — not real; recon `researches/first-person-body-camera/`; his pick A (body, eyes forward, neck bends) or B (arms + weapon only) — review folder 84.
+>     **15:25 the owner picked A; 15:26 he saw the heroine in a T-POSE — the parent override broke the child anim BPs (EXP-0511); ROLLED BACK 15:27 (archery pak = the
+>     2026-11-02 build, verified by a third-person frame; the kit's archery folder cleaned of the override and its cook line).** Now: plan 52 — our own post-process anim
+>     blueprint on the hero's mesh only (`SetOverridePostProcessAnimBP`); step 1 kit recon running 15:3x. Shows go as ONE HTML page with captions (HOUSE_RULES rule 32).
+>     **15:4x step 2 in flight:** `_config/devkit/kit-pp-fp-look.py` (trial run without save; `KRINIK_PP_SAVE=1` saves + adds the cook line) builds
+>     `/Game/Mods/KrinikConanArchery/ABP_KrinikFirstPersonLook` (Input → L2C → spine counter (Roll = Pitch × SpineUndo) → neck (Roll = −min(Pitch,0) × NeckShare) → head
+>     eye offset → C2L; `Active` set by Lua on events, `Alpha` blended in its EventGraph from the main anim's native `Pitch`). Then step 3: KrinikConanArchery Lua sets
+>     the PP class on the hero + writes `Active`; step 4: cases C1–C5 (third person + NPCs + the log FIRST), tune live, ONE HTML page to the owner.
+>     Kit active mod = KrinikConanArchery (`active.txt` back to KrinikConanUI when the archery kit work ends). Game closed. Machine lock «kumm» until 16:07.
+>   - Bug 96 judge round 2 — applied and run (TC run 4: F1 real E, F3, F4, R3, R5 pass; differential SAME 24); finding 5 refuted (the cameras read inactive between
+>     inputs). Owed: the quiet-machine cost number, then the commit (pack Lua not committed yet).
+>   - The game of this chat (PID 10568, background) stays open for the bow cases; machine lock «kumm» until 15:26.
 > **HANDOVER 2026-11-13 11:08 +03:00 — the dayloop chat of 2026-11-13 closes by the owner's word (`[OWNER]` 11:06 «тот чат закрывай, в новом продолжаем»).** DONE:
 >   - **Bow sprint in the owner's order (bug 93) — WORKS by his own play (open cases remain)** (`[OWNER]` 11:01 «спринт и стрельба работают»): build 7 of `krinik_bow_sprint.lua` (the gate
 >     open from substate 11; a third lever tried and removed), S1b, S3, S6 by real input (report `testcases/reports/2026-11-13_conan-bow-sprint-sprint-then-draw.md`),

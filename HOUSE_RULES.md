@@ -185,6 +185,10 @@
 31. **Every large work and every commit of code goes to an independent judge, round after round, until the judge has almost nothing left to find; its
     findings are verified before fixing** — the steps live in the canon, `AGENT_GUIDE.md` → Notes from the human. `[OWNER]` 2026-11-10 01:41–01:43.
 
+32. **A show WITH an explanation is one local HTML page with a caption under every frame.** Variants to pick, before / after, a defect: build one self-contained page from
+    `.kaif/_explain-page-template.html` (images embedded, the question at the top, a Russian caption under each image saying what it shows and what to look at), open it for
+    the owner, one chat line on what is there. A folder of files with a notes file beside it is not a show. `[OWNER]` 2026-11-13 15:28 · verbatim in `bugs/95_…`.
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —
 WebP, never PNG). The context-budget hook's hint is obeyed (`CLAUDE.md`).
@@ -214,6 +218,7 @@ the dossier step).
 | Frame-time capture | only `D:\work\ai_sandbox\_tools\PresentMon-2.5.1-x64.exe`, its own `--session_name`; a hung session — `logman stop <name> -ets`; the agent's shell is elevated | `& '<path>' --help` |
 | Auto-lock | off | `(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System').InactivityTimeoutSecs` |
 | `TEMP` | `D:\Temp`; Claude home `%USERPROFILE%\.claude` → `F:\Claude\.claude` | `[Environment]::GetEnvironmentVariable('TEMP','User')` |
+| Crash dump | kernel dump (`CrashDumpEnabled` 2, `AutoReboot` 0) into the dedicated 8 GB file `C:\dump\MEMORY.DMP` — moved back from `D:\dump` on 2026-11-13 14:10 by the owner's word (C has room, D does not); takes effect at the next boot, `D:\dump` is queued for deletion at that boot (`PendingFileRenameOperations`). The file is pre-allocated at boot and held open — 8 GB on disk is the reserve, not a crash | `(Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\CrashControl').DedicatedDumpFile`; `Test-Path D:\dump` |
 | Shells | Windows PowerShell 5.1 (no `pwsh`) · Git Bash 5.2.21 · `cmd` | `$PSVersionTable`; `bash --version` |
 | Encodings | console UTF-8; ANSI 1251 — `Set-Content`/`Add-Content` only with `-Encoding utf8`; PowerShell `ru-RU` | `[Console]::OutputEncoding.WebName` |
 | Tools | Node v24.15.0 · npm 10.8.2 · git 2.43.0 · gh 2.95.0 · `winget` | `node -v; git --version; gh --version` |
