@@ -47,9 +47,27 @@ the shadow too) — that waits for plan 52's eye offset (the camera ahead of the
 2. By the cause: a native lever at the game's first-person switch; the neck/head hiding (ours) replaced by a way that keeps the head's shadow (the owner-no-see
    head + `bCastHiddenShadow`, the UE first-person-body practice) — recon before the choice.
 
+## The fix in code — judge round 1 and the redesign (2026-11-13 19:1x–19:2x, NOT run in game)
+
+The first fix (17:19, `restore_fp_shadows`: 50 ms after the switch every mesh under the hero with the shadow off got `SetCastShadow(true)`, the invisible ones also
+`SetCastHiddenShadow(true)`) went to a judge (round 1, read-only, a mock harness in `KUMM/.work/judgeA/`). Confirmed by the code, all fixed:
+- C1 — the hidden shadow went to EVERY invisible mesh (an arrow hidden between draws, the leader pose if the game turns it off) and was never reset → dropped (the head's
+  shadow is plan 52's, the neck-bone hide collapses it anyway).
+- C2 — meshes off BY DESIGN got a shadow (a torch flame card, enemy arrows stuck in the hero, buff effects), and a switch back to third person within 50 ms made the
+  walk run in third person → the pre-hook (it runs BEFORE the blueprint body, still in third person) records the full names of the meshes WITH a shadow; the delayed
+  step lights only those that are now off; a generation counter bumped by both switches cancels a pending step. Names, not objects, cross the delay.
+- C3 — errors were swallowed (the outer pcall), one bad child stopped its siblings → per-branch pcall, the error count and the first text in the log line.
+- C5 — the walk's cost was not logged → both walks' times in the log line.
+Desk test `KUMM/.work/fp_shadow_desk.lua` (the real block of `main.lua` on mocks): body, bow, arrow lit; the torch flame stays dark; a switch back cancels; an error on
+one branch keeps its siblings — ALL PASS. Judge round 2 in flight.
+**Owed in game (cases of the next stand, plan 53 world entry):** C4 — the game may turn the shadows off again later (a latent node, a bow draw, an equip): read
+`_config/fp-shadow-flags.lua` ≈ 1 s after the switch and during a draw; C6 — the restored shadow shows the first-person pose (the torso pitched with the view, the arms
+shifted, no head): frames of the ground looking down and up, for the owner's eye, before DONE.
+
 ## Decisions made without the owner
 
 (filled at closing)
+- `[AI]` 2026-11-13: no hidden-shadow on the head now — it waits for plan 52 (the camera at the eyes), so the shadow is the body without the head until then.
 
 ## Links
 

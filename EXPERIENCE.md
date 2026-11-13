@@ -91,6 +91,23 @@
 
 ## Entries
 
+### EXP-0514 · 2026-11-13 · ❌→✅ · #hooks #transcript #owner-presence #judge #turn-origin
+class: skip-instead-of-stop
+mechanized: yes — `tools/hooks/owner-presence.mjs` `humanRecord` / `askVerdict` + `node tools/test-guards.mjs` part M (cases F1–F11, 228 of 228)
+**Lesson:** when a guard looks back for «the owner's last word», a turn HE did not start (a loop wake-up, a task notification, a peer's message — a typed-text user
+record whose origin is not human) must END the search, not be skipped: skipping walked back to his ask of ten minutes earlier and let the agent bring the game forward
+in a turn its own machinery had started (judge round 3, the defect). And a permission token must be ONE-SHOT and younger than the word it rests on — a quote file kept
+for 20 min unlocked every later launch, and an old quote matched a later message that happened to contain it.
+
+### EXP-0513 · 2026-11-13 · ❌→✅ · #conan #migration #hardcoded-path #twins #tools #game-version
+class: hardcoded-install-path-outlives-install (the second time — EXP-0329)
+mechanized: yes — `ConanExiles/_config/game-target.sh` (bash), `game-target.ps1`, `game_target.py` `GAME_NAME` / `PAKS_VIEW`; check before a move:
+`grep -rn "Conan Exiles <old version>" ConanExiles/_config --include=*.ps1 --include=*.sh --include=*.py`
+**Lesson:** EXP-0329 (2026-10-25) moved 21 Python tools onto `targets.json` and called the class closed — on the move to 3.1.0 the same grep found «Conan Exiles 3.0.1»
+written into 14 shell tools, 5 PowerShell tools and one Python, the pak patcher's view hard-coded to `_paksview-3.0.1` (the level-mod builder to `_paksview-2.2.3`),
+and the launch stamp and 15 tools' work folders in `%TEMP%` / `D:\Temp`. A class is closed per LANGUAGE and per KIND of path (install, derived views, temp), each
+with its helper; the sweep runs at the START of the next move, before the first deploy.
+
 ### EXP-0512 · 2026-11-13 · ❌→✅ · #hooks #transcript #owner-presence #judge
 class: tool-format-assumed
 mechanized: yes — `tools/hooks/owner-presence.mjs` `ownerText` + `node tools/test-guards.mjs` part M (19 cases, fixture transcripts)

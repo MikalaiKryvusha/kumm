@@ -36,7 +36,7 @@
 > работаем дат сборкой конана» · «она 1_ должна работать стабильно 2_ моды не должны конфликтовать, должны быть рабочими 3_ не должно быть
 > явных просадок производительности из-за модов» · 2026-10-26. Work order — "Where to continue", item 0.
 >
-> 🆕 **Conan 3.1.0 is out (2026-11-12, Part Three of the Giant-Kings arc); the build still lives on 3.0.1. THE OWNER IS DOWNLOADING 3.1.0 (his word 2026-11-13 14:13 +03:00)**
+> 🆕 **Conan 3.1.0 is out (2026-11-12, Part Three of the Giant-Kings arc); THE MOVE IS UNDER WAY since 2026-11-13 18:52 — `plans/53_conan_move_3.1.0.md` (the build still runs on 3.0.1 until it is accepted). Downloaded by the owner (his word 2026-11-13 14:13 +03:00)**
 > (`[OWNER]` «так как я качаю 3» · «3,1,0» · «и нам нужно будет место»); D: cleaned for it the same minute — 46 GB of old profiler traces, old bench videos, the 0.9.0
 > GitHub parts (all 7 verified uploaded on the release) and `mods/OLD` deleted (D free 59.6 → 108.7 GB); the Windows crash dump moved back to `C:\dump` (HOUSE_RULES
 > dossier), `D:\dump` goes at the next boot (+8 GB). The move itself — the checklist below, when the download lands. Web recon 2026-11-13 09:09 —
@@ -148,6 +148,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-13 19:1x +03:00 — DAYLOOP (the owner 18:52 «комп твой, работай автономно. Замерами не занимаемся, занимаемся развитием сборки»): the move onto 3.1.0, plan 53.**
+>   - 3.1.0 = `CL-383024`, installed IN PLACE in the owner's download folder `D:\Instals\<…>` (his 18:53 word; the name stays out of this repo, it is in the pack's
+>     `targets.json` once set) — still being written at 19:1x (files newer than 2 min); deploy only when it stops.
+>   - Step 1 done: 12 Workshop mods newer than our copies (4 KRINIK MODIFIED: Severe Weather, LBPR, Immersive Warriors, EAA — recipes to re-apply); steamcmd into
+>     `D:\Games\Conan Exiles Mods\workshop-3.1.0` running (9 of 12 at 19:10). Nexus 6 of 6 unchanged. UE4SS v4.0.0 downloaded to `mods/_incoming/UE4SS_v4.0.0`
+>     (a separate step after the first launch on 1181). The late-class fix in KrinikConanUI (`find_loaded`, hub controller) — written, `[NOT-TESTED]`, cases L1–L6.
+>   - **The owner 18:57: D:\Temp is HIS folder** — the agent's work only in `KUMM\.work\` and the pack's `_scratch\` (HOUSE_RULES rule 15; 15 pack tools retargeted,
+>     pack `3010045`); this session still has `TEMP=D:\Temp` — set `TEMP`/`TMP`/`TMPDIR` to `.work/tmp` in commands; the harness itself keeps background-task
+>     output under `D:\Temp\claude\…` (not ours to move mid-session; the new `env` in `settings.local.json` applies from the next start).
+>   - Judges running on the 17:xx code (camera shadow, pickup plate rounds 3–4, game-front `-OwnerAsked`; the owner-presence hook redesign) — then commit.
 > **NOW 2026-11-13 16:2x +03:00 (chat after `resume`, the owner's «продолжаем делать сборку Конана"):** the game PID 30492 (launched by the previous chat «for his check»)
 > was held open for an hour by mistake — closed 17:04 by his word «ты игру открыл, ты и закрывай, игра у тебя в разработке» (memory `dont-kill-game-owner-is-in`); lock released.
 >   - Bug 75 REOPENED (the owner 16:07): the 2026-11-07 instant `AnimSelect` is in the deployed pak — another path; the read-only `quickloot-rim-trace.lua` is loaded

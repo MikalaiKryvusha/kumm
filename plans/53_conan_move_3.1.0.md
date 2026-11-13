@@ -32,8 +32,14 @@ new game enters the world without a crash, every mod's function intact. No frame
       Less Building Placement Restrictions*, Beyond Decor: Rustic Edition, Thrall_Peeper, Female New Faces; before it: Immersive Warriors Enhanced*, Rideable
       Pets, Shemite City State, Highmane's Arsenal, Enhanced Armory and Arsenal* (23:01 vs our 18:04 copy of the same day), Riding Thralls (* = KRINIK MODIFIED —
       our patch to re-apply). Doubled Storage Size is still gone from the Workshop (Double Storage Space replaces it).
-- [ ] 2. **Download the 12** — steamcmd anonymous into `D:\Games\Conan Exiles Mods\workshop-3.1.0` (a separate folder; the old copies stay until the move is accepted).
-- [ ] 3. **Library:** the old copies of the 8 plain mods → `mods/OLD/_workshop-3.0.1/<id>`, the new → `mods/_workshop/<id>`; the 4 patched: new original into
+- [x] 2. **Download the 12** — steamcmd anonymous into `D:\Games\Conan Exiles Mods\workshop-3.1.0` (a separate folder; the old copies stay until the move is accepted).
+      Done 19:12: 12 × «Success» (sizes changed most for Immersive Warriors 359 → 265 MB and Severe Weather 24 → 17 MB).
+- [x] 3a. **Library swap** done 19:2x by the new tool `ConanExiles/_config/workshop-swap.py` (dry run clean — 24 moves, then `--apply`); `check-mod-updates.py` after:
+      «Новее наших копий: 0». Severe Weather got its machine recipe `krinikBuild` (it had it in prose only); the recipe rebuilt our 3.0.1 pak byte for byte
+      (196 chunks, `rebuild-krinik-paks.py --only SevereWeatherEnhanced`, 19:2x). The patcher's paks view now follows the target (`game_target.py` `PAKS_VIEW`).
+- [ ] 3b. **Rebuild the 4 patched** on the 3.1.0 target, after the first launch (the view needs its `Saved/ExtractedMods`): `rebuild-krinik-paks.py --only <C>
+      --against-original` for SevereWeatherEnhanced, No_Building_Placement_Restrictions, IMM_WAR, EnhancedArmoryAndArsenal.
+- [ ] 3. **Library (the description the steps above follow):** the old copies of the 8 plain mods → `mods/OLD/_workshop-3.0.1/<id>`, the new → `mods/_workshop/<id>`; the 4 patched: new original into
       `_patch-originals/<Container>.pak` (old one kept as `<Container>.3.0.1.pak` until accepted), then `patch-mod-asset.py build` by each `krinikBuild` recipe;
       every recipe that fails on the new pak is a finding (the author changed the patched asset).
 - [ ] 4. **Our Lua against late classes** (research §3 A.1): `KrinikConanUI/krinik_hub_controller.lua:80` and `krinik_mod_settings.lua:1046, 1054` reach other
@@ -42,8 +48,12 @@ new game enters the world without a crash, every mod's function intact. No frame
 - [ ] 5. **The new install read-only:** the exe build string (`++exiles+release-CL-…`), the pak header UE version, the default `modlist.txt`/`Mods` folder; the
       vanilla tables our whole-table mods ship (research §3 A.3) — hashes against 3.0.1.
 - [ ] 6. **`targets.json`:** the 3.1.0 target = the download folder (the owner's word), the 3.0.1 target `enabled: false` (kept on disk until the owner says).
-- [ ] 7. **Deploy:** `-Deploy -DryRun`, then `-Deploy -WithEngineIni` and every config of the pack (EXP-0324: all configs + launch in one move), `-Verify`.
-- [ ] 8. **First launch** under the machine lock: UE4SS log, game log, the main menu, the mod list; the «missing imports» baseline.
+- [ ] 7. **Deploy:** `-Deploy -DryRun` (done 19:3x on the download folder: 75 / 75 mods, 66 paks, «Dry run clean»), then `-Deploy` WITHOUT `-WithEngineIni` for the
+      first launch, `-Verify`.
+- [ ] 8. **First launch** under the machine lock: UE4SS log, game log, the main menu, the mod list; the «missing imports» baseline. The game writes its own
+      `ConanSandbox/Saved/Config/Windows/Engine.ini` → its `[Core.System] Paths=` lines against our pack Engine.ini's (taken from 3.0.1 by
+      `_config/swap-core-paths.py`, plan 33 step 12: 2.1.1 had 80 paths, 3.0.1 90) — differ → `swap-core-paths.py <pack Engine.ini> <3.1.0's>`; then
+      `-Deploy -WithEngineIni` + `deploy-config.py` (Game.ini / GameUserSettings.ini, EXP-0324) and the second launch.
 - [ ] 9. **New game → world**: the Krinik mods' cases, the hub pages, the map page, the localization (`deploy-localization.py --check`; vanilla overrides
       `vanilla-override.py --check` against 3.1.0's `ru/Exiles_UI.locres`, research §3 C.8).
 - [ ] 10. **Whole-asset vanilla overrides of the kit** (research §3 A.3a): re-run every `kit-*-edit.py` that saves a vanilla asset on the 3.1.0 kit — only when
