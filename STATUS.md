@@ -36,7 +36,7 @@
 > работаем дат сборкой конана» · «она 1_ должна работать стабильно 2_ моды не должны конфликтовать, должны быть рабочими 3_ не должно быть
 > явных просадок производительности из-за модов» · 2026-10-26. Work order — "Where to continue", item 0.
 >
-> 🆕 **Conan 3.1.0 is out (2026-11-12, Part Three of the Giant-Kings arc); THE MOVE IS UNDER WAY since 2026-11-13 18:52 — `plans/53_conan_move_3.1.0.md` (the build still runs on 3.0.1 until it is accepted). Downloaded by the owner (his word 2026-11-13 14:13 +03:00)**
+> 🆕 **Conan 3.1.0 is out (2026-11-12, Part Three of the Giant-Kings arc); THE MOVE IS UNDER WAY since 2026-11-13 18:52 — `plans/53_conan_move_3.1.0.md` (the build runs on 3.1.0 since 2026-11-13 20:0x — 66/66 mods, the owner's world; the 3.0.1 install kept on disk as the way back). Downloaded by the owner (his word 2026-11-13 14:13 +03:00)**
 > (`[OWNER]` «так как я качаю 3» · «3,1,0» · «и нам нужно будет место»); D: cleaned for it the same minute — 46 GB of old profiler traces, old bench videos, the 0.9.0
 > GitHub parts (all 7 verified uploaded on the release) and `mods/OLD` deleted (D free 59.6 → 108.7 GB); the Windows crash dump moved back to `C:\dump` (HOUSE_RULES
 > dossier), `D:\dump` goes at the next boot (+8 GB). The move itself — the checklist below, when the download lands. Web recon 2026-11-13 09:09 —
@@ -148,143 +148,35 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **PARKED 2026-11-13 21:44 +03:00 — plan 53 step 12 (other authors' stale vanilla copies), for a couple of days by the owner's word** (`[OWNER]` 21:43 «давай пока нашши
-> моды делать» · 21:44 «пару дней дадим остальным мөд5рам их моды обновить»). State: 3 of 11 done and installed, not seen in game (Storage Reach and LegitReligious tables
-> rebuilt on 3.1.0; EAA's crafting station = the game's chunk, new plan line `game-chunk:`); BMNB animal pen, LBPR ×2, 4 map tiles, MSCasaDesFlores' orb — the table in
-> plan 53 step 12. Resume: `check-mod-updates.py --since 2026-11-03 --all` first (21:4x: 6 of 66 authors updated since the beta; Hair We Go's 21:36 upload taken and
-> deployed). NOW: our own mods (KrinikConanGraphics `M_Foliage` stale on 3.1.0, the «3.0.1» under the menu logo — KrinikConanUI kit build, list below).
-> **The kit updates 378787 → 383024 (= the 3.1.0 game) via the Epic launcher since 21:50** (the owner 21:47) — every kit build (Graphics `M_Foliage`, UI widgets,
-> Archery) waits for it: plan 53 step 10. KUMM `aac1d15` pushed (voice rule + hooks); the PACK commit (stale-copy-check.py, `game-chunk:`, EAA recipe) waits for
-> its judge round 2. In-game checks L1–L6 + the three fixes — the game in FRONT when the owner is idle (the hook refused twice at 22:0x while he typed).
-> The game, when launched, goes in FRONT (`launch-fg.ps1`, the owner 21:13). Voice comments during all work (HOUSE_RULES rule 13, the owner 21:30).
-> ⚠️ Закрыто принудительно 2026-11-13 20:1x +03:00 на 85 % контекста: церемонии пропущены (проход судьи по передаче, обрезка STATUS, README, линтеры витрины) — долг
-> платит первый /end-chat-soft. Ложных утверждений на месте: нет (ложь «перехват срабатывает до тела функции» исправлена в bug 98 и конспекте камеры).
-> FIRST next chat: the NEXT list below from item (3); my game is closed, the machine lock released; packs pushed (KUMM `cc458d8`+, pack `459a7c5`).
-> The harness keeps its background-task output under `D:\Temp\claude\…` (the owner's folder). CHECKED 2026-11-13 21:1x: the settings `env` does NOT move it — the harness
-> overrides `TEMP` / `TMP` / `TMPDIR` of its shells (`D:\Temp`) while the other `env` lines arrive (`KAIF_VOICE=eugene` seen); commands set them per call (rule 15).
-> **NOW 2026-11-13 20:0x +03:00 — THE BUILD RUNS ON 3.1.0 (pack `ff30fb9`, plan 53).** Target `D:\Games\Conan Exiles 3.1.0` (a junction onto the owner's download
-> folder — its name stays out of git); deployed 75/75, UE4SS 1181 on the new exe, main menu Revision 383,024 in Russian, «СБОРКА: моды 66/66» (the 3.1.0 log format
-> fixed in KrinikConanModPackManager), the owner's world `Game_1` + mod saves + his `config.lua` files copied from 3.0.1 (hash-checked), world entered three times; no
-> «too old», no missing imports. Machine lock released, no game of mine open. **NEXT (in order):** (1) DONE 20:05 (the camera records at the HUD's birth, «вернули 10» right after loading; owed C4 draw, C6 frames) —
-> record at the HUD's birth (bug 98, notes «Open»); (2) DONE 20:07, seen in game 20:08 (mounted, 66/66, no new errors) rebuild the 4 patched mods on the new originals — `rebuild-krinik-paks.py --only <C> --against-original`
-> (SevereWeatherEnhanced, No_Building_Placement_Restrictions, IMM_WAR, EnhancedArmoryAndArsenal; the 3.1.0 view needs `Saved/ExtractedMods` — exists now);
-> (3) the 11 vanilla assets the patch changed under mods' whole copies (`_config/patch-rollback.py`, list in plan 53 step 5): our `M_Foliage` (KrinikConanGraphics),
-> EAA's `BP_PL_Crafting_Station` (3.1.0's crafting-queue fix), LegitReligious' stat table, Storage Reach's console table, LBPR (after its rebuild), map tiles of
-> Shemite / Ymir's / Caverns of Set — judge each by `researches/mod-reconciliation/GUIDE.md` kind 6; (4) the «3.0.1» under our menu logo — `GAME_VERSION` set to 3.1.0 (pack `_config/devkit/kit-conanui-edit.py`, `459a7c5`), the KIT BUILD is owed: `active.txt` → KrinikConanUI, then the KrinikConanUI kit
-> rebuild (`kit-conanui-edit.py` game version); (5) Pickup+ admin widget error new in 3.1.0 (`ComboBox_DrawDebugline` class missing); (6) UE4SS v4.0.0
-> (`mods/_incoming/UE4SS_v4.0.0`) as its own step; (7) judges' open findings in the pack commit message (B2 journal, B3 per-asset proof, B4 level-mod view).
-> **NOW 2026-11-13 19:1x +03:00 — DAYLOOP (the owner 18:52 «комп твой, работай автономно. Замерами не занимаемся, занимаемся развитием сборки»): the move onto 3.1.0, plan 53.**
->   - 3.1.0 = `CL-383024`, installed IN PLACE in the owner's download folder `D:\Instals\<…>` (his 18:53 word; the name stays out of this repo, it is in the pack's
->     `targets.json` once set) — still being written at 19:1x (files newer than 2 min); deploy only when it stops.
->   - Step 1 done: 12 Workshop mods newer than our copies (4 KRINIK MODIFIED: Severe Weather, LBPR, Immersive Warriors, EAA — recipes to re-apply); steamcmd into
->     `D:\Games\Conan Exiles Mods\workshop-3.1.0` running (9 of 12 at 19:10). Nexus 6 of 6 unchanged. UE4SS v4.0.0 downloaded to `mods/_incoming/UE4SS_v4.0.0`
->     (a separate step after the first launch on 1181). The late-class fix in KrinikConanUI (`find_loaded`, hub controller) — written, `[NOT-TESTED]`, cases L1–L6.
->   - **The owner 18:57: D:\Temp is HIS folder** — the agent's work only in `KUMM\.work\` and the pack's `_scratch\` (HOUSE_RULES rule 15; 15 pack tools retargeted,
->     pack `3010045`); this session still has `TEMP=D:\Temp` — set `TEMP`/`TMP`/`TMPDIR` to `.work/tmp` in commands; the harness itself keeps background-task
->     output under `D:\Temp\claude\…` (not ours to move mid-session; the new `env` in `settings.local.json` applies from the next start).
->   - Judges running on the 17:xx code (camera shadow, pickup plate rounds 3–4, game-front `-OwnerAsked`; the owner-presence hook redesign) — then commit.
-> **NOW 2026-11-13 16:2x +03:00 (chat after `resume`, the owner's «продолжаем делать сборку Конана"):** the game PID 30492 (launched by the previous chat «for his check»)
-> was held open for an hour by mistake — closed 17:04 by his word «ты игру открыл, ты и закрывай, игра у тебя в разработке» (memory `dont-kill-game-owner-is-in`); lock released.
->   - Bug 75 REOPENED (the owner 16:07): the 2026-11-07 instant `AnimSelect` is in the deployed pak — another path; the read-only `quickloot-rim-trace.lua` is loaded
->     into his game (`grep '\[QLR\]' UE4SS.log` — 0 lines at 16:23, he took nothing yet). Next: read his takes once, else my own stand (R3 + variants) when his game closes.
->   - Bug 98 filed (first-person shadow): flags read (all visible parts cast; camera mode unknown) — stand when the game is mine. Bug 97 read: the game's design (feats /
->     levels), one check left on his hero (feat 6 «Archer» known and the Archer journey still locked = a defect).
->   - Plan 52 step 3 needs a live recon of the bow wield / sheath event (plan 52 step 3 note). The owner 16:25 asked for the head + neck SHADOW without them in the
->     first-person view — the way: `researches/first-person-body-camera/README.md` §4 (owner-no-see + hidden shadow on the head parts; first read `FirstPersonPrimitiveType`).
->   - Owner-presence hook: rounds 1–2 refuted the text-guessing pass → redesigned BY QUOTE (the agent writes his verbatim words into `tools/hooks/.owner-ask.txt`, the
->     command carries `-OwnerAsked`; the hook checks the words stand in his last human message < 20 min) + the git-chain and enter-world gaps closed; part M 27 cases,
->     211/211; round 3 running → then commit KUMM + the pack's `game-front.ps1`, `launch-fg.ps1` (`-OwnerAsked` param), `fp-shadow-flags.lua`, `pickup-cost-parts.lua`.
->   - `krinik_pickup_prompt.lua` (bug 96): rounds 3–4 applied in the working tree (not committed, not run in game); bug 99: 0.6 ms a check once a second — the «over
->     budget» reading RETRACTED 17:1x (the owner was right; other sections show the same 2–3 ms worst readings; HudBlink costs 3× more). Next: judge round 5 → commit; then bug 75, bug 98, plan 52.
-> ⚠️ Закрыто принудительно 2026-11-13 16:06: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft.
-> Ложных утверждений на месте: нет.
-> **16:05 the owner's order** (`[OWNER]` «ПЕРЕДЕЛАТЬ ХУК!!!!!!!» · «он должен быть тебе помощником, а не препятствием!» · «я тебя явно попросил запустить мне игру, а хук
-> тупой не понимает этого!»): `tools/hooks/owner-presence.mjs` lets `launch-fg` / `game-front` through when the owner's LAST chat message asks for the game (it reads the
-> transcript); `ConanExiles/_config/game-front.ps1 -OwnerAsked` skips its own presence check (pack, uncommitted at the close — commit it first). Seen working 16:06: the
-> game (PID 30492, launched 16:04 for the owner's own check) brought forward. The owner checks the build himself and gives feedback in the next chat — the game
-> stays OPEN for him (his run now); machine lock «kumm» until 17:04. Owed: a guard self-test case for the new pass (`tools/test-guards.mjs`).
-> **The owner's note 16:06 (his own frame, first person, the bow held):** `[OWNER]` «от стрелы тень есть, а где от всего остального?» — the arrow casts a shadow, the
-> arm, the bow and the body do not (the remote read 2026-11-13: the hero's mesh components carry `bCastHiddenShadow=false`, the head is hidden). Recon next chat:
-> first-person shadow of the hidden / owner-only body parts (UE `bCastHiddenShadow`, the game's first-person shadow setting) — bug doc to file.
-> **The owner 16:07:** `[OWNER]` «по окну квиклута баг сохраняется, что рамка првыгает в последнюю клетку» — the quick-loot selection frame jumps to the last cell
-> (the open item «quick-loot R3 (last cell of a row)» of the 2026-11-07 handover) — still live in his play; a bug doc + a fix in the next chat.
-> **The owner 16:08 (his frame, first person, the bow held, looking straight up):** `[OWNER]` «что это слева на экране, когда камеру вертикально вверх поднимаешь?» — the
-> hero's own shoulder / neck base from inside (the combat pose's full bend; KrinikConanCamera hides only `b_neck_1` and below — the shoulder is the torso mesh). Same
-> root as bug 95 (B10 baseline frames); plan 52's spine counter-bend is the fix to verify with this exact view (case B10 on the post-process route).
-> **HANDOVER 2026-11-13 16:0x +03:00 — this chat closes at ≈ 83 % context. FIRST next chat:**
->   1. Plan 52 step 4 — the post-process look is BUILT and DEPLOYED (archery pak 1.48 MB: sound + montage + `ABP_KrinikFirstPersonLook`, NO vanilla anim override) and
->      seen working live 16:00: `_config/fp-look-pp.lua` sets it on the hero only (`LoadAsset` needs the FULL object path), `PitchNow` follows the view, `Alpha` blends,
->      third person with it attached and off — no bind pose, log 0 anim errors; first person −55 with `Active` on (Alpha 0.58 mid-blend) — the bow hand 49° (vanilla 78°).
->      The frame was blocked by the «Снаряжение» window that opened by itself at the world entry (closing it by `ActivateModule(...,false)` failed — close with a real
->      Esc when the PC is free). NEXT: full-alpha frames −55 / −80, tune `NeckShare` / `EyeX/Y/Z` live (the eye axis unknown — try 8 cm on each), third person + NPCs +
->      the log again, then step 3 (KrinikConanArchery Lua: set the PP class at the hero's birth, `Active` on events: first person · bow in hand · no draw), then ONE HTML
->      page with captions to the owner (rule 32). The kit's active mod is KrinikConanArchery.
->   2. Bug 97 (new, the owner 16:01): journeys locked after the tutorial except fishing — design or a mod: recon first.
->   3. Bug 96 round-2 fixes are tested in game (TC run 4) — pack Lua committed with this closure, the quiet-machine cost number and a fresh judge round on the diff OWED.
->   4. The owner downloads Conan 3.1.0 — the move checklist `researches/conan_patch_3_1_0/README.md` §3 when it lands.
-> **NOW 2026-11-13 15:0x +03:00 (chat after `resume`, the owner's «делаем конана»):**
->   - Bug 95 option B — the kit edit FOUND after a bisection (`_config/devkit/kit-ab-fp-upright.py`: a member `KrinikFirstPersonUpright` set in `BlueprintUpdateAnimation`
->     behind `Branch(isThirdPerson OR isNPC)`, the first-person selector reads it; the enum via `Conv_ByteToInt`, EXP-0510); the saving run + the archery pak cook were
->     running at 15:0x (kit active mod = KrinikConanArchery — put `active.txt` back to KrinikConanUI after). Next: deploy, cases B1–B10 (TC `TC_conan_fp_bow_visible_…`).
->     The owner's question 15:00 answered: no mod hides the bow or the arms (live read); the neck hiding of bug 69 is a crutch over the same full-bend combat pose.
->     15:14 BUILT + deployed (pack Lua/pak NOT committed yet): the bow in the frame looking down (B1–B3, B10 pass). The owner 15:19–15:22: the camera looks down from the
->     head's centre — not real; recon `researches/first-person-body-camera/`; his pick A (body, eyes forward, neck bends) or B (arms + weapon only) — review folder 84.
->     **15:25 the owner picked A; 15:26 he saw the heroine in a T-POSE — the parent override broke the child anim BPs (EXP-0511); ROLLED BACK 15:27 (archery pak = the
->     2026-11-02 build, verified by a third-person frame; the kit's archery folder cleaned of the override and its cook line).** Now: plan 52 — our own post-process anim
->     blueprint on the hero's mesh only (`SetOverridePostProcessAnimBP`); step 1 kit recon running 15:3x. Shows go as ONE HTML page with captions (HOUSE_RULES rule 32).
->     **15:4x step 2 in flight:** `_config/devkit/kit-pp-fp-look.py` (trial run without save; `KRINIK_PP_SAVE=1` saves + adds the cook line) builds
->     `/Game/Mods/KrinikConanArchery/ABP_KrinikFirstPersonLook` (Input → L2C → spine counter (Roll = Pitch × SpineUndo) → neck (Roll = −min(Pitch,0) × NeckShare) → head
->     eye offset → C2L; `Active` set by Lua on events, `Alpha` blended in its EventGraph from the main anim's native `Pitch`). Then step 3: KrinikConanArchery Lua sets
->     the PP class on the hero + writes `Active`; step 4: cases C1–C5 (third person + NPCs + the log FIRST), tune live, ONE HTML page to the owner.
->     Kit active mod = KrinikConanArchery (`active.txt` back to KrinikConanUI when the archery kit work ends). Game closed. Machine lock «kumm» until 16:07.
->   - Bug 96 judge round 2 — applied and run (TC run 4: F1 real E, F3, F4, R3, R5 pass; differential SAME 24); finding 5 refuted (the cameras read inactive between
->     inputs). Owed: the quiet-machine cost number, then the commit (pack Lua not committed yet).
->   - The game of this chat (PID 10568, background) stays open for the bow cases; machine lock «kumm» until 15:26.
-> **HANDOVER 2026-11-13 11:08 +03:00 — the dayloop chat of 2026-11-13 closes by the owner's word (`[OWNER]` 11:06 «тот чат закрывай, в новом продолжаем»).** DONE:
->   - **Bow sprint in the owner's order (bug 93) — WORKS by his own play (open cases remain)** (`[OWNER]` 11:01 «спринт и стрельба работают»): build 7 of `krinik_bow_sprint.lua` (the gate
->     open from substate 11; a third lever tried and removed), S1b, S3, S6 by real input (report `testcases/reports/2026-11-13_conan-bow-sprint-sprint-then-draw.md`),
->     5 judge rounds, pack `d3e92f9`. Open: S8 overloaded, S9 sheathed bow, the cost (worst callback 2 ms at a 1 ms clock step → a frame-time A-B).
->   - **Conan 3.1.0 recon** (out 2026-11-12, not downloaded): `researches/conan_patch_3_1_0/README.md`, §3 = the move checklist (`[OWNER]` 11:02 «за разведку 3.1.0 спасибо»).
->   - **Nexus quarantine — the third letter** written and SENT by the owner (11:02).
->   - KrinikConanUI: placeholder-perk widget hooks only with the placeholders on (pack `ca3cdef`); the page arrows' generator in Conan gold (pack `d6c2897`).
->   - The evening chat of 2026-11-10 left its work uncommitted — committed this chat (KUMM `02571b3`, pack `d3e92f9`).
-> **HANDOVER 2026-11-13 13:30 +03:00 — chat force-closed by the owner's word (`[OWNER]` 13:29 «этот чат пора закрывать через минут 5, продолжим в новом»).**
-> ⚠️ Закрыто принудительно 2026-11-13 13:30: церемонии пропущены (проход судьи по передаче, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft.
-> Ложных утверждений на месте: нет.
-> FIRST next chat: (a) bug 95 option B — read `ConanExiles/_config/devkit/kit-probe-ab-fp-look.json` (the kit probe started 13:28 in the background, read-only;
-> if the file is missing or `"ok": false`, re-run the command in the script header under the machine lock) → the AnimGraph node that bends the upper body by
-> `…FirstPersonAgressive` and what selects Passive vs NotPassive → the smallest native kit edit → build → first-person frames looking down (TC
-> `testcases/TC_conan_fp_bow_visible_2026-11-13.md`). **The probe's first run ended 13:31: `"ok": false` — the AnimGraph has 492 nodes, 5 watched getters were
-> found, then a traceback at script line 75 (inside the downstream walk `hop`) — read the traceback in the JSON, fix, re-run; the lock is released;** (b) bug 96 judge ROUND 2 DONE 13:3x — no defect; 4 risk/quality findings recorded in `bugs/96_…`
-> «Judge round 2» (the cost reorder first) — verify, apply, re-run F1–F5 + a many-hit cost measurement, then the owner's play closes the bug; (c) then the handover list below from item 2. The machine lock «kumm» expires by itself at 13:48; the game is closed.
-> **Done this chat (2026-11-13 11:46 until the close):** bug 96 fixed (below); bug 95 cause found and option B chosen; bug 74 twin-checked (eggs spawn no actor);
-> KUMM `5423161`, `1a0c2a6`, `439e990`, `8e00173`, `e28f31a` + the closing commit; pack `26f4cfa` + the probe script commit.
-> **Bug 96 (was NOW 11:46):** FOUND and FIXED, pack `26f4cfa` pushed and deployed: a pickup bush touched once by E becomes a
-> `BP_ResourceActor_C` with the same look, E keeps gathering from it, and the plate asked only the foliage probe; `krinik_pickup_prompt.lua` now asks the game's
-> actor branch first (`GetIsPickupResource`). Runs 2–3 pass (`testcases/TC_conan_no_take_prompt_bush_2026-11-13.md`, report
-> `testcases/reports/2026-11-13_conan-bush-prompt-resource-actor.md`); review folder 83 holds the 4K frame. Judge round 1: 9 findings, all fixed; **round 2 OWED** —
-> two fresh judges failed to start (API 403, 12:4x); the bug closes DONE after a clean round 2 and the owner's play. Open there: F6 (a tool-hit resource actor).
-> **FIRST next chat (in order; the owner asked 11:06 «квик вины?» — offered: his two bugs first, then the «+», then quick wins; his pick decides):**
->   0. `bugs/96_…` — the owner's 11:09: no «E Взять» over a bush — see NOW above.
->   1. `bugs/95_…` — CAUSE FOUND 13:1x (the owner clarified 12:59: the HELD bow when looking down; the drawn one is seen): in the game's first person the upper
->      body pitches with the view as one piece, the held bow stays ≈ 75° below the frame's centre at every pitch — the game's design, not our mods; no ready mod
->      found. **The owner chose B 13:20** (upright upper body while the bow is held and not drawn). Recon so far (bug 95 «Recon of the anim blueprint»): `AB_human_male`
->      sets `AdjustForLookingUpAndDownFirstPersonAgressive` = the full view pitch, `…Passive` = 15 % of it; cached poses `FirstPersonPosePassive` / `…NotPassive`.
->      NEXT: a kit probe (`BlueprintEditorLibrary.list_graphs` / `list_output_pins` on the AnimGraph getters, method of `_config/devkit/kit-probe-bp-graph-api.py`)
->      → the bone-modify node and what selects Passive vs NotPassive → the smallest native edit → kit build → first-person frames looking down. Before: the lead is KrinikConanArchery's first-person arm shift (`fp_aim_offset` Y 16 Z 6, `fp_hip_offset` Y 24 Z 11) + the aim's
->      narrower view. Stand: the honest bow (game map «Stand gear»: the hero CRAFTS bow 51401; `AddItemTemplate` weapons cannot be wielded), the run direction along
->      the shore (game map «Sprint stand direction»). Frames first person, bow drawn, shift on vs off.
->   1a. The owner's wish 11:07 (relayed by KCCP, verbatim in `bugs/93_…` «The owner's next wish»): no aim zoom while sprinting with the bow — sprint first, then draw
->      still zooms (draw first, then sprint already drops it, and he likes that). Pairs with item 1 (both are the bow's first-person / FOV camera).
->   2. `bugs/94_…` — hub craft: the owner crafts in the «Снаряжение» column with «Сделать 10» / «Сделать много» (his frame 11:03); hypothesis 2 — one queue entry for the
->      whole batch reads the hub's 0.03 multiplier once; test by a real F in the open hub, `ConanExiles/_config/craft-close-test.sh` as the counter.
->   3. The «+» and the page arrows in Conan gold — one kit session (plan 49, the 2026-11-13 line).
->   4. Quick wins — `researches/ue5-guru-tweaks-2026-11/README.md` §2 ranked candidates (A2–A5, B1–B7), each by an A-B-A-B measurement (HOUSE_RULES rule 11 6b–6e).
->   5. From the 2026-11-10 handover (chronicle entry 2026-11-13 11:08 +03:00): the KrinikConanUI key binds (recon F1, a route choice), the wall jump at `desert_arch`, the simple melee air swing.
-> Rules learned this chat (EXPERIENCE 0507, 0508): cases cover BOTH input orders; prove the stand gear by a control case before any conclusion; the owner-presence hook
-> counts the agent's own `mouse-seq` input — wait ≥ 10 s between real-input calls; re-place the hero before each case and keep runs ≤ 3 s.
-> State at the close: the game was left open for the owner (build 7); at 11:10 no Conan process ran — he closed it; the machine lock released; KUMM `HEAD`, pack `ca3cdef` pushed.
->
+> **HANDOVER 2026-11-13 22:0x +03:00 — chat closed by the owner's word (`[OWNER]` 22:02 «закрывайчат»), /end-chat-soft with all ceremonies. FIRST next chat:**
+>   1. **The 3.1.0 devkit IS INSTALLED** (CL **383024**, was 378787 — older than 3.0.1's game): the Epic launcher began the update 21:50 by the owner's 21:47 «если да,
+>      запускай эпик лаунчер, обновляй» and finished 22:00:09 (its log `%LOCALAPPDATA%\EpicGamesLauncher\Saved\Logs\EpicGamesLauncher.log`: `HandleTaskComplete …
+>      912a768dddac4142b862ad0fc2ad98df AlertCode=[ok] IncompleteInstall=0`; the Epic manifest `C:\ProgramData\Epic\EpicGamesLauncher\Data\Manifests\*.item` —
+>      `AppVersionString` 383024, `bIsIncompleteInstall` false). `Build.version` alone does not prove a finished install (written mid-download). First: open the kit
+>      once and see our mod folders `UE4\Content\Mods\Krinik*` intact. Then our kit builds, in order (plan 53 step 10): KrinikConanGraphics `M_Foliage` (`kit-foliage-wpo.py` + the Nanite raster shader
+>      patch, notes `games/ConanExiles/mods/KrinikConanGraphics.md` — the game's 3.1.0 `M_Foliage` changed), KrinikConanUI (`kit-conanui-edit.py`: «3.1.0» under the menu
+>      logo + every vanilla widget it saves; `active.txt` sits in KrinikConanArchery now), KrinikConanArchery.
+>   2. **PARKED until ≈ 2026-11-15 by the owner's word** (`[OWNER]` 21:43 «давай пока нашши моды делать» · 21:44 «пару дней дадим остальным мөд5рам их моды обновить»):
+>      plan 53 step 12 — other authors' stale vanilla copies. 3 of 11 done; read in the 3.1.0 world 22:01 (`_config/move310-checks.lua`): `FollowerPerk`, `SRE.show` and
+>      `Grimoire` live in the console table (129 rows — other mods merge into it; the script's «want 29» was the file's count), the stat table 3425 rows = 3404 + 21; EAA's
+>      station class loaded — which copy loaded is NOT shown by that (its `BindRunningState` exists in 3.0.1 too); the queue pausing on a full output not walked. The rest in the step's table. Resume: `python -I -X utf8 _config/check-mod-updates.py
+>      --since 2026-11-03 --all` first (21:4x: 6 of 66 authors updated since the beta; Hair We Go's 21:36 upload taken and deployed).
+>   3. The open list of the day (moved blocks below): Pickup+ admin widget error new in 3.1.0 (`ComboBox_DrawDebugline`); UE4SS v4.0.0 (`mods/_incoming/UE4SS_v4.0.0`)
+>      as its own step; bug 75 (the quick-loot rim jumps to the last cell — reopened by the owner 16:07); bug 98 C4 / C6 (first-person shadow); plan 52 steps 3–4 (the
+>      first-person look); bug 97 (journeys locked after the tutorial); bug 94 (hub craft batch); bug 93 S8 / S9; plan 49 G1 (the «+» in Conan gold, to build); the pack
+>      judges' open findings B2–B4 (pack commit `ff30fb9` message); L1–L5 of `TC_conan_move_3.1.0_2026-11-13.md` (L6 read 22:00: the five foreign classes are ALREADY
+>      loaded at world entry — the `find_loaded` change is harmless, not proven needed); bug 96 (the «E Взять» plate over a touched bush — fix pending verification:
+>      the owner's play + a judge round owed, `bugs/96_…`); the owner's bug 93 wish — no aim zoom while sprinting with the bow (`bugs/93_…` «The owner's next wish»);
+>      the quick wins, each by an A-B-A-B measurement (`researches/ue5-guru-tweaks-2026-11/README.md` §2).
+>   Rules born this chat: HOUSE_RULES 13 (voice comments during ALL work; `voice-reminder.mjs --always` reminds after 5 min of silence), 13.3 (`silero_tts/say.py`
+>   with Glass, never the beeps), 15 (`TEMP` / `TMP` set in every command — the harness overrides them, the project `env` does not reach the shells); the game
+>   launches in FRONT (`launch-fg.ps1`, the owner 21:13) and waits while he types (`owner-presence` refuses). New tools: pack `_config/stale-copy-check.py`, the plan
+>   line `game-chunk:<sha1>` of `patch-mod-asset.py` (`_config/krinik_patches/EnhancedArmoryAndArsenal__BP_PL_Crafting_Station.tsv`).
+>   State at the close: my game closed 22:02 (no crash window), the machine lock released, KUMM and pack `09e38fc` pushed; the Epic launcher left open (the kit
+>   update is finished).
+> **Moved verbatim to the chronicle (entry 2026-11-13 22:0x +03:00):** the 2026-11-13 blocks from the forced closure of 20:1x back to the HANDOVER of 11:08 (three
+> forced closures — their skipped ceremonies paid by this soft closure — the NOW / HANDOVER blocks of the move onto 3.1.0, bugs 93–99, plan 52); their open items
+> are in item 3 above.
 > **Moved verbatim to the chronicle (entry 2026-11-13 11:08 +03:00):** the HANDOVER 2026-11-10 19:58 block (bonsai trim). Still open from it: the KrinikConanUI key binds
 > (recon F1), the wall jump, the simple air swing, a new-game smoke before the owner's long test play.
 > **Moved verbatim to the chronicle (entry 2026-11-10 19:58 +03:00):** the blocks HANDOVER 2026-11-10 13:48, NOW 12:38, HANDOVER 11:17, NOW 09:4x, the night block 02:25 and HANDOVER

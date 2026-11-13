@@ -26,8 +26,11 @@ running; machine lock «kumm» taken at 21:18 for 40 minutes.
 ## Checks
 
 Hygiene: both tools exit as their headers say; the drafts removed file by file (counts printed).
-Functional run: the tools read the real installed paks of the build on the real 3.1.0 game and the real 3.0.1 game; what was READ is in the table. Not in game:
-none of the three fixes is seen in the running game yet (the in-game cases wait for the next launch — `testcases/TC_conan_move_3.1.0_2026-11-13.md`).
+Functional run: the tools read the real installed paks of the build on the real 3.1.0 game and the real 3.0.1 game; what was READ is in the table. In game
+(added 22:1x): the 3.1.0 world entered 22:01 (`launch-fg.ps1`, `_config/enter-world-remote.sh`), `_config/move310-checks.lua` by the remote — the live console table
+holds `FollowerPerk`, `SRE.show`, `Grimoire` (129 rows: other mods merge into it at world load; the script's «want 29» was the file's count, a wrong expectation),
+the live stat table 3425 rows = the 3.0.1 world's 3404 + 21; EAA's station class loaded — which copy is NOT shown by that (`BindRunningState` exists in 3.0.1 too);
+a crafting queue pausing on a full output — not walked; `UE4SS.log` no Lua error, `ConanSandbox.log` 0 «too old» / fatal / missing imports; my game closed 22:02.
 
 | Case | Expected | Seen | Status |
 |---|---|---|---|
@@ -35,7 +38,7 @@ none of the three fixes is seen in the running game yet (the in-game cases wait 
 | T1c the author's original (control) | red | lacks 6 (`Corruption`, `FollowerPerk`, `Grimoire`, `GrimoireEldritch`, `LoadoutGranter`, `SetDurability`) — exit 1 | pass |
 | T2 LegitReligious stat table after the rebuild | = the game | 1725 = 1725, 0 / 0 / 0, imports 5 = 5 — exit 0 | pass |
 | T2c the author's original (control) | red | lacks 72 game rows, 1 row other values — exit 1 | pass |
-| B1 EAA station read three ways | the mod's own edit named | only the «crafting ended» sound switch lacks recipe categories 13–15 (3.0.1 and 2.2.3 have 8 cases, EAA 5); every other export = 3.0.1; 3.1.0 rewrote the event graph +108 −89 ~47 of 262 | pass (read) |
+| B1 EAA station read three ways | the mod's own edit named | only the «crafting ended» sound switch lacks recipe categories 13–15 (3.0.1 and 2.2.3 have 8 cases, EAA 5); every other export = 3.0.1; 3.1.0 rewrote the event graph +108 −89 ~47 of 262. By raw bytes the patch «changed» 60 of 70 exports (the name map shifted) — by meaning 19 functions, 17 of them entry-offset stubs | pass (read) |
 | B1v a view of global + the mod only (the first version) | — | `/Engine/UnknownPackage` in the mod's copy and false «edits» in two thrall-bonus functions → the view rebuilt as game + `<Mod>_P`; the false edits gone | defect found and fixed |
 | B2 EAA rebuilt with `game-chunk:` | the station = 3.1.0 | built pak: imports 192 = 192 equal, IDENTICAL — exit 0; the installed pak: imports 192 = 192, none unresolved | pass |
 | B2c EAA's original (control) | differs | imports equal, «differs» — exit 1 | pass |
@@ -60,5 +63,5 @@ none of the three fixes is seen in the running game yet (the in-game cases wait 
 
 ## Verdict
 
-partial — the three fixes pass every file-level check and control; the in-game cases (the 3.1.0 console command, the stat rows live, a crafting queue pausing on
-a full output) wait for the next launch; 8 of the 11 assets are parked by the owner's word (21:44).
+partial — the three fixes pass every file-level check and control; in game the two tables are seen live (22:01); the crafting queue pausing on a full output is
+not walked; 8 of the 11 assets are parked by the owner's word (21:44).

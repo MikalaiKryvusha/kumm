@@ -91,6 +91,25 @@
 
 ## Entries
 
+### EXP-0517 · 2026-11-13 · ❌→✅ · #conan #iostore #retoc #stale-copy #reconciliation #patch #game-chunk
+class: a mod's whole copy of a vanilla asset read by the wrong view or by bytes alone
+mechanized: yes — `ConanExiles/_config/stale-copy-check.py` (the `<Mod>_P` view, imports compared, bytecode by meaning, «does the mod ship the path»), `patch-mod-asset.py` `game-chunk:<sha1>` (the in-build imported-package-names guard)
+**Lesson:** three traps in one evening, each caught by a control or a judge, not by the first run. (1) A view of global + the mod's container alone printed
+`/Engine/UnknownPackage` and false «edits» — read a mod's vanilla copy with ALL game containers + the mod as `<Mod>_P` (EXP-0462 again). (2) Export bytes shift
+whenever the patch adds a name to the name map — 60 of 70 exports «changed» where 1 function really did; compare functions by their statements with names resolved,
+and an event-graph stub's only change is its entry offset. (3) `retoc pack-raw` copies the container's OLD ContainerHeader: a replaced chunk keeps its old store entry
+(imported packages) — the import tables must be equal, checked in the build and by the reader. And the decision «this copy is stale» is pinned to the sha1 of the
+chunk it was made on. The EAA crafting station (the parent of every station) was an old-devkit copy that undid 3.1.0's queue fix for ALL stations.
+**Trigger:** a game patch changed an asset that a mod ships whole (`patch-rollback.py` «ИЗМЕНЁН ПАТЧЕМ»).
+
+### EXP-0516 · 2026-11-13 · ❌→✅ · #harness #env #temp #claude-code #voice #hooks
+class: a project setting assumed to reach the harness's shells
+mechanized: partly — HOUSE_RULES rule 15 (TEMP set in every command), the dossier row; `voice-reminder.mjs --always` holds the voice rule
+**Lesson:** the `env` of `.claude/settings.local.json` reached the shells (`KAIF_VOICE=eugene`) but `TEMP` / `TMP` / `TMPDIR` did not — the harness sets them itself
+(`D:\Temp`, `/d/Temp`); a setting is checked by printing it in a fresh session, not by the file. The same evening the owner asked for voice comments five times in
+half an hour before it became a hook-held rule: a rule the owner repeats is moved into a hook at the FIRST repeat, not the fifth.
+**Trigger:** writing a harness-level setting into the project, or the owner repeating a «do X while you work» order.
+
 ### EXP-0515 · 2026-11-13 · ❌ · #conan #ue4ss #registerhook #hook-order #game-map #bug98
 class: assumed-instead-of-read-the-map
 mechanized: no — the rule lives in the game map (GAME_ARCHITECTURE_INTERNAL_MAP, the FOV section: a hook on a BP function fires AFTER its body) and in bug 98

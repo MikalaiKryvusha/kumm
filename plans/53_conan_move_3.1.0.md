@@ -86,8 +86,8 @@ new game enters the world without a crash, every mod's function intact. No frame
       Funcom ships a 3.1.0 devkit; until then the 3.0.1 copies stay and the list of what they may undo is written here.
       **The 3.1.0 kit EXISTS** (read 2026-11-13 21:5x in the Epic launcher log `%LOCALAPPDATA%\EpicGamesLauncher\Saved\Logs\EpicGamesLauncher.log`: «Conan
       Exiles Enhanced Dev Kit» `912a768dddac4142b862ad0fc2ad98df` **378787 → 383024**, «Action: Update», queued 21:50 after the owner's 21:47 «если да, запускай эпик
-      лаунчер, обновляй»; our kit `F:\CEUE5Devkit` was CL 378787 — older than 3.0.1's game CL 379176). Downloading (`F:\CEUE5Devkit\.egstore\bps`). When it lands:
-      `F:\CEUE5Devkit\Engine\Build\Build.version` Changelist 383024; then, in order: KrinikConanGraphics `M_Foliage` (`kit-foliage-wpo.py` + the Nanite raster shader
+      лаунчер, обновляй»; our kit `F:\CEUE5Devkit` was CL 378787 — older than 3.0.1's game CL 379176). **INSTALLED 22:00:09** (the launcher log `HandleTaskComplete … AlertCode=[ok]
+      IncompleteInstall=0`; the Epic manifest `AppVersionString` 383024, `bIsIncompleteInstall` false — `Build.version` alone was written mid-download). Then, in order: KrinikConanGraphics `M_Foliage` (`kit-foliage-wpo.py` + the Nanite raster shader
       patch, notes `KrinikConanGraphics.md` — the game's 3.1.0 `M_Foliage` changed, plan 53 step 12), KrinikConanUI (`kit-conanui-edit.py` — the «3.1.0» line and
       every vanilla widget it saves; `kit-attribute-*`, `kit-krinik-modsettings.py`), KrinikConanArchery (its kit overrides). Risk: the update replaces kit files our
       scripts patch in place (backups `kit_asset_backups/`, the shader `.orig`) — the scripts re-apply; our mod folders `UE4/Content/Mods/*` are user files.
