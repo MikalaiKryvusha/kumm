@@ -160,7 +160,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > two fresh judges failed to start (API 403, 12:4x); the bug closes DONE after a clean round 2 and the owner's play. Open there: F6 (a tool-hit resource actor).
 > **FIRST next chat (in order; the owner asked 11:06 «квик вины?» — offered: his two bugs first, then the «+», then quick wins; his pick decides):**
 >   0. `bugs/96_…` — the owner's 11:09: no «E Взять» over a bush — see NOW above.
->   1. `bugs/95_…` — the bow unseen in first person: the lead is KrinikConanArchery's first-person arm shift (`fp_aim_offset` Y 16 Z 6, `fp_hip_offset` Y 24 Z 11) + the aim's
+>   1. `bugs/95_…` — CAUSE FOUND 13:1x (the owner clarified 12:59: the HELD bow when looking down; the drawn one is seen): in the game's first person the upper
+>      body pitches with the view as one piece, the held bow stays ≈ 75° below the frame's centre at every pitch — the game's design, not our mods; no ready mod
+>      found. Options A (keep) / B (upright upper body in first person — AnimBP recon, recommended) / C (a viewmodel) asked of the owner in chat. Before: the lead is KrinikConanArchery's first-person arm shift (`fp_aim_offset` Y 16 Z 6, `fp_hip_offset` Y 24 Z 11) + the aim's
 >      narrower view. Stand: the honest bow (game map «Stand gear»: the hero CRAFTS bow 51401; `AddItemTemplate` weapons cannot be wielded), the run direction along
 >      the shore (game map «Sprint stand direction»). Frames first person, bow drawn, shift on vs off.
 >   1a. The owner's wish 11:07 (relayed by KCCP, verbatim in `bugs/93_…` «The owner's next wish»): no aim zoom while sprinting with the bow — sprint first, then draw

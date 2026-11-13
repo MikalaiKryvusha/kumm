@@ -581,6 +581,12 @@ Simple Minimap ставит карту во время игры: центр сл
 штанги (`fp_hip_offset` Z 11). Обзор лука ведёт `BP_PlayerFovController`: цель 0/1 (`SetFieldOfViewTarget`), уведомление монтажа
 `BP_FieldOfViewChangeForDuration`; при новом натяжении с зажатой ПКМ монтаж перезапускается, и между концом старого уведомления (цель 0) и
 началом нового (цель 1) проходит кадр — без удержания обзор успевает отъехать 75° → 80,8°.
+**First person and the held weapon (2026-11-13, bug 95, remote `b95c.lua`):** in first person the camera sits at `b_head`, and the upper body above `b_spine_3`
+pitches WITH the view as one rigid piece — at view pitch 0 / −30 / −55 / −80 the head stands 14 / 37 / 51 / 57 cm ahead of the actor origin while the bow hand
+`b_L_prop` swings 39 / 12 / −12 / −33; the held bow therefore keeps one place in the camera's frame, ≈ 75° below the centre (half vertical view 37.5° at FOV 107.5) —
+never on screen while only held; a draw brings it up (the owner: «по ПКМ лук появляется»). `CharacterMesh0` is invisible in first person (the drawn body is
+`MergedLodMesh` + batched followers). **Stand trap:** with no real input the idle camera orbits after ≈ 30 s and ignores `SetControlRotation` — stop it with
+`GUIModuleController:EnableVanityCameraMode(false)` before first-person readings.
 Монтаж натяжки `AM_combat_2h_bow_combo_heavy_c0` (7,05 с, кит, 2026-10-28): `BP_SetChargeHold` 0,517 (1,333 с) и 1,851 (3,963 с — полный
 заряд), `BP_PowerCharge` 0,552 (1,28 с), выстрел `ProjectileAttack` 5,865, `BP_QueueWindow` 6,346. Монтаж общий с NPC-лучниками: звук,
 положенный в монтаж, слышен и у врагов — «дзинь» полного заряда `KrinikConanArchery` играет герою из Lua, уведомление в монтаже немое.
