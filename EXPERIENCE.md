@@ -91,6 +91,18 @@
 
 ## Entries
 
+### EXP-0512 · 2026-11-13 · ❌→✅ · #hooks #transcript #owner-presence #judge
+class: tool-format-assumed
+mechanized: yes — `tools/hooks/owner-presence.mjs` `ownerText` + `node tools/test-guards.mjs` part M (19 cases, fixture transcripts)
+**Lesson:** «the owner's last message» in a Claude Code transcript is NOT the last `type:"user"` line: Stop-hook feedback and skill bodies are `isMeta` user lines, task
+notifications are user lines starting `<task-notification>`, and what he types MID-TURN is an `attachment` (`queued_command`, `origin.kind:"human"`). The first pass of
+the presence hook read the newest user line and took hook feedback with «игры» in it for his ask (a judge's replay: 353 passes over one session, 29 from his asks); and a
+pass decided on a WHOLE command lets a chained real-input tool ride along. Read the record shape, cut the command to the part the pass is for, test on real transcripts.
+Round 2 refuted the regex of «he asks for the game» itself («почему ты запустил игру?», pasted agent text, loop wake-ups passed): intent in Russian is the MODEL's
+judgment — the hook now checks only that the agent's verbatim quote stands in his last human-origin message (`tools/hooks/.owner-ask.txt`).
+**Repro:** `node tools/test-guards.mjs` (part M must print 19 «ok»).
+**Trigger:** any hook or tool that reads the transcript for the owner's word.
+
 ### EXP-0511 · 2026-11-13 · ❌ · #conan #kit #animbp #override #children #mods #tpose #owner-saw-first
 class: verified-on-a-slice-of-the-product
 mechanized: no — the carrier is plan 52 (the post-process route) and the game map line «children of AB_human_male»

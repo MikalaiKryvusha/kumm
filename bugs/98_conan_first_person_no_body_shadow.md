@@ -22,8 +22,20 @@ yet the owner saw only the arrow's shadow — so the flag set alone does not exp
 **Our own part:** `KrinikConanCamera` hides `b_neck_1` and below by `Mesh:HideBoneByName('b_neck_1', 0)` on `SwitchToFirstPersonCamera` — a hidden bone is collapsed
 for shadows too, so even with every shadow on the first-person shadow would be headless (game map, «First-person camera and the neck»).
 
+`[OWNER]` 2026-11-13 16:25 «нужна будет тень головы и шеи, но чтобы голова и шея не мещали обзору камеры от перовго лица. Нужно придумать, как это сделать» — the
+way and its sources: `researches/first-person-body-camera/README.md` §4 (owner-no-see + hidden shadow on the head parts, or the engine's `WorldSpaceRepresentation`).
+
+**CAUSE READ 2026-11-13 17:16 (my game, the hero switched by the remote `SwitchToFirstPersonCamera()`, `fp-shadow-flags.lua` with the first-person type):** in first person
+the GAME turns `CastShadow` OFF on every body piece (`SkeletalMeshComponent*` / `…Batched_*` under `CharacterMesh0`), on the bow (`BP_bow_2h_C`) and on its nocked arrow
+(`ThrowingKnife`); two pieces are invisible (`vis 0` — the head / hair family); `FirstPersonPrimitiveType` = 0 on all (hypothesis 0 refuted); `MergedLodMesh` keeps
+casting. The read of 16:1x (all casting) was third person. The arrow shadow the owner saw is the FIRED arrow (a separate projectile actor).
+**Fix way:** a post-hook of `SwitchToFirstPersonCamera` (KrinikConanCamera already hooks it for the neck): `SetCastShadow(true)` on the visible pieces and the held weapon,
+`SetCastShadow(true)` + `SetCastHiddenShadow(true)` on the invisible head pieces; the head's shadow needs the camera mod's `b_neck_1` bone hide gone (a hidden bone collapses
+the shadow too) — that waits for plan 52's eye offset (the camera ahead of the neck). Step 1 now: the body, arms and bow shadow; step 2: the head with plan 52.
+
 ## Hypotheses (ranked)
 
+0. (REFUTED 17:16) The game's first person marks the hero's parts `FirstPersonPrimitiveType = FirstPerson` (UE 5.5+: no world shadow by design); the arrow is a plain component (recon §4).
 1. The game's first-person switch turns the hero's shadow off by another lever than the flags read (a per-view rule, `bCastDynamicShadow` set only in first
    person, a shadow-distance or a capsule-shadow setting) — read the same probe in first person and in third person on one stand, then the switch's bytecode.
 2. The read above WAS in first person and the shadows exist but fall where the owner did not look (the sun behind him) — a control frame with the sun in front.

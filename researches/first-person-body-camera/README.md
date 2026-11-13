@@ -38,8 +38,31 @@
   the experiment 15:23 (review folder 84): the forearms end at the elbow — stumps at the frame's lower edge at −80; the hair shows from above (to hide as well). Armour pieces
   (chest, gloves) are other components — the rule must pick by slot, not by the naked mesh names.
 
+## 4. The head's shadow without the head in the view (the owner 2026-11-13 16:25, bug 98)
+
+`[OWNER]` 2026-11-13 16:25 «нужна будет тень головы и шеи, но чтобы голова и шея не мещали обзору камеры от перовго лица. Нужно придумать, как это сделать»
+
+Industry practice (UE, sources below): a part the owner's camera must not see but whose shadow must stay is NOT collapsed by a bone hide (a hidden bone collapses the
+shadow too) — it gets **`bOwnerNoSee` + `bCastHiddenShadow`** (the "true first person" head: a separate head component, owner-no-see, casts a hidden shadow). Since UE 5.5
+the engine's own route is **`FirstPersonPrimitiveType`**: `FirstPerson` (the visible first-person body, no world shadow) and `WorldSpaceRepresentation` (invisible to the
+owner's camera, casts the world shadow — the engine sets owner-no-see itself). Field reports on 5.7–5.8: an owner-no-see part with a hidden shadow loses the shadow for its
+owner's camera with Nanite + virtual shadow maps; a `WorldSpaceRepresentation` mesh cast no shadow after a 5.7 upgrade. Fallback: a shadow twin (a copy following the hero's
+pose, not drawn in the main pass, shadow only).
+**For Conan:** the head, the hair, the beard and the helmet are separate components (section 2) — the flags can be set from Lua at the camera switch, no asset edit;
+KrinikConanCamera's `b_neck_1` hide goes. The neck: gone with the head if it is in the head mesh; if it is the torso's — the camera at the eyes ahead of it (plan 52's eye
+offset). **Hypothesis for bug 98:** the game's first person marks the hero's parts `FirstPerson` (no world shadow by design) while the arrow is a plain component — read
+`FirstPersonPrimitiveType` of every part in both views first.
+**Stand (when the game is mine):** read the head component, whether it holds the neck, every part's `FirstPersonPrimitiveType` and shadow flags in first and third person;
+then owner-no-see + hidden shadow on the head parts with the bone hide off; frames: the ground shadow, looking up, looking down — one HTML page to the owner.
+
 ## Sources
 
+- Epic, First Person Rendering (5.5+, `FirstPerson` / `WorldSpaceRepresentation`): https://dev.epicgames.com/documentation/unreal-engine/first-person-rendering · the enum:
+  https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/Engine/EFirstPersonPrimitiveType
+- Owner-no-see head + cast hidden shadow: https://forums.unrealengine.com/t/hide-mesh-from-owner-but-keep-shadow-rendered/132825 ·
+  https://forums.unrealengine.com/t/first-person-inside-head-hide/1965165/4
+- 5.7–5.8 field reports: https://forums.unrealengine.com/t/5-8-nanite-owner-no-see-mesh-with-cast-hidden-shadow-casts-no-shadow-for-its-owners-camera-virtual-shadow-maps/2845872 ·
+  https://forums.unrealengine.com/t/no-shadows-from-world-space-representation-first-person-rendering/2701045
 - Mirror's Edge camera in the eyes: https://www.wurb.com/stack/?p=669 · DICE GDC 2009 «Creating First Person Movement for Mirror's Edge»: https://gdcvault.com/play/1012171/Creating-First-Person-Movement-for · Battlefield 3: https://www.engadget.com/2012/08/13/how-mirrors-edge-gave-legs-and-more-to-battlefield-3/
 - Froyok, True First Person Camera in UE4: https://www.gamedeveloper.com/programming/true-first-person-camera-in-unreal-engine-4
 - Head pivot vs the capture point between the eyes: https://forums.unrealengine.com/t/modifying-the-distance-between-the-cameras-pivot-point-and-its-capture-point/135811

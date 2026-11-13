@@ -671,7 +671,9 @@ mods (guard `check-lua-game-thread.py`). Gameplay keys on the game thread: `/Gam
 - **The hero's component tree (2026-11-13, KUMM bug 98, `_config/fp-shadow-flags.lua`).** `CharacterMesh0` is the INVISIBLE leader pose (cast shadow on); the
   visible body is its children `SkeletalMeshComponentBatched_*` / `SkeletalMeshComponent_*` (armour pieces); a held bow is a separate actor `BP_bow_2h_C`
   attached to the mesh (its `SkeletalMeshComponent` + `ThrowingKnife` = the nocked arrow mesh); also `MergedLodMesh` (visible), the trails, particles,
-  `FloatingName` / `Healthbar`. Every visible part read CastShadow 1 · dynamic 1 · hidden-shadow 0 · ownerNoSee 0 (camera mode of that read unknown).
+  `FloatingName` / `Healthbar`. Third person: every visible part CastShadow 1 · hidden-shadow 0 · ownerNoSee 0. **First person (17:16): the game's
+  `SwitchToFirstPersonCamera` sets CastShadow 0 on every body piece, the bow and its nocked arrow; the head / hair pieces go invisible; `FirstPersonPrimitiveType` 0
+  everywhere** (the engine's first-person rendering is not used); `MergedLodMesh` keeps casting.
 - **Journeys — how one unlocks (2026-11-13, KUMM bug 97).** `/Game/Systems/Progression/DT_NewJourney` (51 rows, `JourneyTableRow`): a journey opens by
   `UnlockedByFeat` (a learned feat of `/Game/Items/Feats/FeatTable`, 974 rows), `UnlockedAtLevel`, `UnlockedByFindingMapMarker`, or the previous row's
   `UnlockTheseJourneysWhenCompleted`; `StartHidden` rows show only once unlocked. Right after the tutorial (`Survivor`) every visible journey is locked by design:

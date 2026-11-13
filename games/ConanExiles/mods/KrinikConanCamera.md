@@ -54,6 +54,14 @@ the game thread; Ctrl by the controller's `IsInputKeyDown(LeftControl / RightCon
 SEPARATE delayed action of the same 1600 ms never ran (21:39 run, K4 fail). Log «клавиши камеры: событие героя «любая клавиша» подписано». Cases K4–K8 of
 `testcases/TC_conan_keybind_lua_off_input_thread_2026-11-07.md` — at the next launch. Note: a deploy of this mod OVERWRITES the owner's `config.lua` (seen 21:38) — copy out, restore.
 
+## The first-person shadow (bug 98, 2026-11-13, NOT RUN in game yet)
+
+The game's `SwitchToFirstPersonCamera` turns `CastShadow` OFF on every body piece, the held bow and its nocked arrow (remote read 17:16, `_config/fp-shadow-flags.lua`).
+`restore_fp_shadows` (main.lua, next to the neck hooks) runs `FP_SHADOW_DELAY_MS` 50 ms after the switch (our hook fires before the function body): every
+`SkinnedMeshComponent` / `StaticMeshComponent` under the hero's mesh with the shadow off gets `SetCastShadow(true)`, the invisible ones also `SetCastHiddenShadow(true)`;
+trails, particles and widget components untouched. Log «тень от первого лица: включена у N частей (невидимых — M)». The head stays collapsed by the `b_neck_1` hide —
+its shadow comes with plan 52 (the camera at the eyes). A weapon taken up in first person waits for the next switch (no equip event known).
+
 ## Checks
 
 - In game 2026-10-31 16:41: `[KrinikConanCamera]` 81 log lines, «config.lua прочитан», «ВЫБРАН компонент: SpringArmComponent …». Cases of the camera work —

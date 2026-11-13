@@ -77,6 +77,9 @@
         cost, measured 2026-11-09: traced base 67 hitches / 55.7 FPS vs untraced 35–59 / 58–59); (3) the profiler writes into memory or another disk, never the game's
         disk, during the flight; (4) nothing of ours runs inside the measured window — no voice, no remote calls, no neighbour work; (5) every lightening of the probe is
         proven by one control pair. `[OWNER]` 2026-11-09 21:26–21:27.
+    6f. **A mod's cost (its own `os.clock` summaries, any per-call timing) is measured with the game IN FRONT.** A background window gets a smaller CPU share from
+        Windows (no foreground boost, background power throttling), and wall-clock timers count the waits as the mod's cost — background numbers are not a measurement.
+        A report of a cost names the path it was taken on. `[OWNER]` 2026-11-13 17:15 · verbatim in `bugs/99_conan_pickup_plate_check_cost.md`.
     6d. **A graphics option is compared by an A-B VIDEO:** the same still view, 3 s option A, 3 s option B, switched 5 times in a row, the current option labelled on
         the video; the game in front, desktop HDR off for the recording. A frame series or an animation does not replace it. **Frames for a comparison go into ONE flat
         folder**, named so the pair stands next to each other (`01_river_bend_A.webp`, `01_river_bend_B.webp`) — the owner flips them with the mouse wheel; no subfolders.

@@ -100,6 +100,16 @@ from `pc:K2_GetPawn()` per check. 5 the wording — applied («плашка го
 a normal view (after the idle orbit), while the game asks only at the E press, when real input has re-activated the camera — the copy darkened the plate over a bush
 E takes; reverted, the reason at the code line. Cases: F1 (real E, the bush became an actor, plate on), F3, F4, R5 (first person) pass.
 
+## Judge round 3 (2026-11-13 16:3x, the diff of pack `cdf8ef0`)
+
+No defect in the diff; the reorder confirmed exact against the game's `UpdateHighlightTarget`. Verified against the code and FIXED in the working tree: (F1) the self-measure
+timed only checks that reached the end — the early returns and errors (where `FindFirstOf` re-runs while a cache is empty) were invisible → the clock now wraps every chain
+step in `tick`; (F2) the summary went out every 60 steps — every 6 s while the plate is lit, not once a minute (HOUSE_RULES rule 7) → a 60 s clock window; (F3) the pawn was
+used without the game's cast to `BasePlayerChar` → `IsA` check, no plate for another pawn; (F4) `GetIsPickupResource` failures after the first were uncounted → counted in the
+summary; (F5) stale comments; (F6, outside the diff) the crosshair used 600 ms after its birth without `valid(w)` — a stale object can crash the game → checked. Declined:
+(F7) `os.clock` has a 1 ms step on this machine (known — `KrinikConanUI.md`); a finer engine timer is a separate change. `luac -p` passes; the run in game is owed (the
+owner's game is open for his check) — then judge round 4 (running) and the commit.
+
 ## Decisions made without the owner
 
 - `[AI]` The plate copies the game's actor branch from the 3.0.1 kit bytecode instead of calling `UpdateHighlightTarget` itself: calling the game's function once a
