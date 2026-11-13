@@ -73,6 +73,15 @@ lever is the native stop itself (who clears `bTrySprint` on the draw) — not a 
 REAL WORLD: accumulated — the owner's own build and his test save `Game_1` (his new game of 2026-11-10); data and machine — his PC; path — real keys and mouse into the
 game. S1b verified on the real world; the owner's own play of build 6 not yet.
 
+## The owner's next wish — the aim zoom in a sprint (2026-11-13 11:07–11:08, typed into the KCCP chat by mistake, relayed verbatim by the KCCP session)
+
+`[OWNER]` «кстати, нравится, что в спринте приближение камеры уходит при прилцеливании» · «ведь не может идти речи ни о какой точности при стрельбе в спринте =)» ·
+«аааа, только это не всегда работает» · «если уже спринт и прицелиться - есть приближение» · «если сразу прицеливание, а затем спринт - уходит приближение - вот это
+нравится» · «если уже спринт и прицелиться - есть приближение / Вот тут, если можно. я бы вбирал приближение».
+So: draw first, then sprint — the aim zoom goes (liked); sprint first, then draw — the zoom stays; he wants it gone there too (no aim zoom while sprinting with the
+bow). Lead: the zoom is `BP_PlayerFovController` (`SetFieldOfViewTarget` 0/1) + the montage notify `BP_FieldOfViewChangeForDuration`, and KrinikConanArchery's aim
+FOV (game map «Лук и камера»); in the sprint-first order the notify fires at the draw's start while the hero is already sprinting. NEXT session, with bug 95.
+
 ## Open from judge round 2
 
 - Finding 1: the K2_CanSprint override also skips the game's other refusals (an overloaded hero, low stamina at the start, mounted) — case S8 owed.

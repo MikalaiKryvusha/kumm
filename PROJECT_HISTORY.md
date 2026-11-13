@@ -3,6 +3,41 @@
 
 
 
+## 2026-11-13 11:08 +03:00 — STATUS «Where to continue»: the HANDOVER 2026-11-10 19:58 block, moved verbatim at the bonsai trim of the 2026-11-13 dayloop closure
+
+### STATUS.md lines 161–190 (before the trim)
+
+> **HANDOVER 2026-11-10 19:58 +03:00 — the evening chat of 2026-11-10 closes by the owner's word (`[OWNER]` 19:56 «пода доводить до стеза и закрывать чат»).**
+> The owner's goal for today (19:02–19:03, verbatim): «было бы хорошо, чтобы у меня была сегодня более-менее играбельная сборка без заметных багов, я бы начал новую
+> игру тестовую и немного поиграл бы, час, два, для отладки» · «особенно мне важно - спринт с луком, прыжки с луком, бесконечная прокачка атрибутов, прыжки от полжания по
+> стенам». DONE this chat:
+>   - **Bow jump — closed by the owner's own play** (19:10 «Я много раз прыгал и стрелял, работает, стрелы летят» · «супер механика получилась»).
+>   - **Placeholder perks 21–40 OFF** (19:09 «Заглушки с перков пока что можно убрать, запомнить, как они делаются»): `krinik_mod_settings.lua` `PLACEHOLDER_PERKS = false`;
+>     the recipe for future perk rows — plan 49 «Recipe: perk rows past 20». Deployed; not re-seen on «Хар-ки» in game.
+>   - **Sprint with the bow drawn — BUILT** (`KrinikConanLocomotion` section `krinik_bow_sprint.lua`, manifest verify line): the game's movement row table and
+>     `EvaluateMovementType` read (game map «The movement row»); levers: native `K2_CanSprint` post-hook + `EvaluateMovement_RangeCombat` → false under ONE gate.
+>     Real input on builds 1–2: sprint 735 with the draw kept, a shot on the run fired. Build 3 (after judge round 1, 8 of 10 findings fixed) is deployed; only S0 and
+>     the cost line (14–67 ms a minute; worst 1 ms in the agent's minutes, 2 ms in the owner's — corrected 2026-11-13) were seen on it — S1, S2, S3, S4, S6, S7 owed (the owner was at the keyboard).
+>     Judge round 2 ran 2026-11-13 (7 findings). **The owner's bug 2026-11-13 09:14 — a sprint started before the draw breaks at the draw: `bugs/93_…`, build 4 deployed, case S1b owed.**
+>     TC `testcases/TC_conan_bow_sprint_2026-11-10.md`, report `testcases/reports/2026-11-10_conan-bow-sprint.md`.
+>   - **Bow-kill crash — code recon done** (`researches/conan-bow-kill-crash-recon/README.md`, the owner 19:10 «разведка кода, поиск слабых мест»): top finding F1 — six
+>     live `RegisterKeyBind` in KrinikConanUI (LMB in feedback / mods button / mod settings fire on EVERY LMB = every bow shot; Esc, Tab), the guard misses
+>     `pcall(RegisterKeyBind, …)`; F3 — UE4SS sample `Keybinds` mod was on (Ctrl+numpad dumpers off-thread) → **switched OFF** (`mods.txt`, deployed; notes
+>     `games/ConanExiles/mods/UE4SS.md`, new). A crash at 19:14 in the agent's run (same Lua-VM victim position as bug 85) — most likely the agent's own probe
+>     `LoopAsync` that never stopped (bug 85 forensics); `sprint-run-probe.lua` rewritten to a game-thread chain, new `sprint-bow-sample.lua`.
+>   - Wall jump — recon only: `Climb(false)` by the remote sets `bWantsToClimb` but no climb starts; a vertical-wall stand found (`desert_arch`, game map «Climbing»).
+>   - The owner's note: the melee air swing must be ONE simple animation (19:10 «нужна простая») — Locomotion notes «TO DO — a SIMPLE air swing».
+> **FIRST next chat (in order), the owner's playable-build goal:**
+>   1. Free PC → the owed sprint cases on build 3: `ConanExiles/_config` · `owner-idle.ps1` FREE once → a batch of `mouse-seq.ps1 -MinIdle 0` sequences with
+>      `sprint-bow-sample.lua` (the `run_case` loop in the run report §3); stand `tp_ground.sh 98739 205258` + yaw 225 (open ground). S6 (standing) and S4 (sideways)
+>      must show NO substate 7. Then judge round 3 if round 2 had confirmed findings.
+>   2. The KrinikConanUI key binds (recon F1) — the fix route is a choice: game-thread clicks only while our window / menu is shown (poll `WasInputKeyJustPressed` while
+>      shown) vs the hero's AnyKey event (Camera pattern, gameplay keys only). Ask the owner in one line if not obvious; the feedback plate's LMB first (fires on every shot).
+>   3. Wall jump: real input to start climbing at `desert_arch` (which key — W into the wall? Space?), read `CurrentWall` and the movement mode while on it, then the
+>      `StartJump` hook (air_combat) → `ExitClimbing()` + `LaunchCharacter(normal × small + up × small)`.
+>   4. «+» and our page arrows in Conan gold (the owner's G1, confirmed again 19:11 «да, делаем, и наши стрелочки листания в таком же стиле») — spec in plan 49.
+>   5. The simple melee air swing; then a new-game smoke by the agent before the owner's 1–2 h test play.
+
 ## 2026-11-10 20:02 +03:00 — STATUS «Where to continue»: the blocks of the 2026-11-10 chats (night, morning, midday) and HANDOVER 2026-11-09 22:45, moved verbatim at the bonsai trim of the evening closure
 
 ### STATUS.md lines 148–217 (before the trim)

@@ -145,49 +145,33 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW 2026-11-13 10:36 — the dayloop chat of 2026-11-13 (`[OWNER]` 09:45 «работай автономно в дневном цикле» · «буду нужен - зови голосом»):**
->   - Bug 93 (the owner's: a sprint started before the draw broke at the draw) — **build 7 PASSES S1b, S3, S6 by real input** with a bow the hero crafted
->     (`bugs/93_…`, TC, report `2026-11-13_conan-bow-sprint-sprint-then-draw.md`); pack `d3e92f9` pushed. Owed: S8 overloaded, S9 sheathed bow, the cost
->     (worst 2 ms at a 1 ms clock step → a frame-time A-B), the owner's own play.
->   - Bug 94 (the owner's: items crafted in the hub finish instantly on close) — the multiplier is read at item START (measured); the first hypothesis refuted;
->     waiting for the owner's answer where he crafted (inventory or a station) and what; on his save the hero's crafting is near-instant even without the hub.
->   - The «+» and the page arrows in Conan gold (the owner's G1): the arrow generator's colours set and the TGAs regenerated (pack `d6c2897`); NEXT — one kit
->     session: import the six arrows, the «+» tint in `W_Attribute`, build KrinikConanUI, deploy, frames 4K + 1080p (plan 49, the 2026-11-13 line).
->   - KrinikConanUI: the placeholder-perk widget hooks only with the placeholders on (pack `ca3cdef`).
->   - **The owner played build 7: `[OWNER]` 11:01 «спринт и стрельба работают»** — and filed: the bow is not seen in first person → `bugs/95_…` (leads: our first-person
->     camera arm shift / FOV in KrinikConanArchery); FIRST next session with the «+» kit work.
->   - The game runs (background, build 7, the owner's test save `Game_1`, the crafted bow on slot 3); the machine lock is KUMM's until 11:15.
+> **HANDOVER 2026-11-13 11:08 +03:00 — the dayloop chat of 2026-11-13 closes by the owner's word (`[OWNER]` 11:06 «тот чат закрывай, в новом продолжаем»).** DONE:
+>   - **Bow sprint in the owner's order (bug 93) — CLOSED by his own play** (`[OWNER]` 11:01 «спринт и стрельба работают»): build 7 of `krinik_bow_sprint.lua` (the gate
+>     open from substate 11; a third lever tried and removed), S1b, S3, S6 by real input (report `testcases/reports/2026-11-13_conan-bow-sprint-sprint-then-draw.md`),
+>     5 judge rounds, pack `d3e92f9`. Open: S8 overloaded, S9 sheathed bow, the cost (worst callback 2 ms at a 1 ms clock step → a frame-time A-B).
+>   - **Conan 3.1.0 recon** (out 2026-11-12, not downloaded): `researches/conan_patch_3_1_0/README.md`, §3 = the move checklist (`[OWNER]` 11:02 «за разведку 3.1.0 спасибо»).
+>   - **Nexus quarantine — the third letter** written and SENT by the owner (11:02).
+>   - KrinikConanUI: placeholder-perk widget hooks only with the placeholders on (pack `ca3cdef`); the page arrows' generator in Conan gold (pack `d6c2897`).
+>   - The evening chat of 2026-11-10 left its work uncommitted — committed this chat (KUMM `02571b3`, pack `d3e92f9`).
+> **FIRST next chat (in order; the owner asked 11:06 «квик вины?» — offered: his two bugs first, then the «+», then quick wins; his pick decides):**
+>   0. `bugs/96_…` — the owner's 11:09 (his play, a frame): looking at a bush, no «E Взять» prompt — `[OWNER]` «смотрю на куст, нет E Взять - баг» · «проверь»; not
+>      checked yet. Leads: KrinikConanUI's prompt restyle (bug 83), the bug 80 / 82 family.
+>   1. `bugs/95_…` — the bow unseen in first person: the lead is KrinikConanArchery's first-person arm shift (`fp_aim_offset` Y 16 Z 6, `fp_hip_offset` Y 24 Z 11) + the aim's
+>      narrower view. Stand: the honest bow (game map «Stand gear»: the hero CRAFTS bow 51401; `AddItemTemplate` weapons cannot be wielded), the run direction along
+>      the shore (game map «Sprint stand direction»). Frames first person, bow drawn, shift on vs off.
+>   1a. The owner's wish 11:07 (relayed by KCCP, verbatim in `bugs/93_…` «The owner's next wish»): no aim zoom while sprinting with the bow — sprint first, then draw
+>      still zooms (draw first, then sprint already drops it, and he likes that). Pairs with item 1 (both are the bow's first-person / FOV camera).
+>   2. `bugs/94_…` — hub craft: the owner crafts in the «Снаряжение» column with «Сделать 10» / «Сделать много» (his frame 11:03); hypothesis 2 — one queue entry for the
+>      whole batch reads the hub's 0.03 multiplier once; test by a real F in the open hub, `ConanExiles/_config/craft-close-test.sh` as the counter.
+>   3. The «+» and the page arrows in Conan gold — one kit session (plan 49, the 2026-11-13 line).
+>   4. Quick wins — `researches/ue5-guru-tweaks-2026-11/README.md` §2 ranked candidates (A2–A5, B1–B7), each by an A-B-A-B measurement (HOUSE_RULES rule 11 6b–6e).
+>   5. From the 2026-11-10 handover (chronicle entry 2026-11-13 11:08 +03:00): the KrinikConanUI key binds (recon F1, a route choice), the wall jump at `desert_arch`, the simple melee air swing.
+> Rules learned this chat (EXPERIENCE 0507, 0508): cases cover BOTH input orders; prove the stand gear by a control case before any conclusion; the owner-presence hook
+> counts the agent's own `mouse-seq` input — wait ≥ 10 s between real-input calls; re-place the hero before each case and keep runs ≤ 3 s.
+> State at the close: the game is open (background, build 7, the owner played in it — left for him); the machine lock released; KUMM `HEAD`, pack `ca3cdef` pushed.
 >
-> **HANDOVER 2026-11-10 19:58 +03:00 — the evening chat of 2026-11-10 closes by the owner's word (`[OWNER]` 19:56 «пода доводить до стеза и закрывать чат»).**
-> The owner's goal for today (19:02–19:03, verbatim): «было бы хорошо, чтобы у меня была сегодня более-менее играбельная сборка без заметных багов, я бы начал новую
-> игру тестовую и немного поиграл бы, час, два, для отладки» · «особенно мне важно - спринт с луком, прыжки с луком, бесконечная прокачка атрибутов, прыжки от полжания по
-> стенам». DONE this chat:
->   - **Bow jump — closed by the owner's own play** (19:10 «Я много раз прыгал и стрелял, работает, стрелы летят» · «супер механика получилась»).
->   - **Placeholder perks 21–40 OFF** (19:09 «Заглушки с перков пока что можно убрать, запомнить, как они делаются»): `krinik_mod_settings.lua` `PLACEHOLDER_PERKS = false`;
->     the recipe for future perk rows — plan 49 «Recipe: perk rows past 20». Deployed; not re-seen on «Хар-ки» in game.
->   - **Sprint with the bow drawn — BUILT** (`KrinikConanLocomotion` section `krinik_bow_sprint.lua`, manifest verify line): the game's movement row table and
->     `EvaluateMovementType` read (game map «The movement row»); levers: native `K2_CanSprint` post-hook + `EvaluateMovement_RangeCombat` → false under ONE gate.
->     Real input on builds 1–2: sprint 735 with the draw kept, a shot on the run fired. Build 3 (after judge round 1, 8 of 10 findings fixed) is deployed; only S0 and
->     the cost line (14–67 ms a minute; worst 1 ms in the agent's minutes, 2 ms in the owner's — corrected 2026-11-13) were seen on it — S1, S2, S3, S4, S6, S7 owed (the owner was at the keyboard).
->     Judge round 2 ran 2026-11-13 (7 findings). **The owner's bug 2026-11-13 09:14 — a sprint started before the draw breaks at the draw: `bugs/93_…`, build 4 deployed, case S1b owed.**
->     TC `testcases/TC_conan_bow_sprint_2026-11-10.md`, report `testcases/reports/2026-11-10_conan-bow-sprint.md`.
->   - **Bow-kill crash — code recon done** (`researches/conan-bow-kill-crash-recon/README.md`, the owner 19:10 «разведка кода, поиск слабых мест»): top finding F1 — six
->     live `RegisterKeyBind` in KrinikConanUI (LMB in feedback / mods button / mod settings fire on EVERY LMB = every bow shot; Esc, Tab), the guard misses
->     `pcall(RegisterKeyBind, …)`; F3 — UE4SS sample `Keybinds` mod was on (Ctrl+numpad dumpers off-thread) → **switched OFF** (`mods.txt`, deployed; notes
->     `games/ConanExiles/mods/UE4SS.md`, new). A crash at 19:14 in the agent's run (same Lua-VM victim position as bug 85) — most likely the agent's own probe
->     `LoopAsync` that never stopped (bug 85 forensics); `sprint-run-probe.lua` rewritten to a game-thread chain, new `sprint-bow-sample.lua`.
->   - Wall jump — recon only: `Climb(false)` by the remote sets `bWantsToClimb` but no climb starts; a vertical-wall stand found (`desert_arch`, game map «Climbing»).
->   - The owner's note: the melee air swing must be ONE simple animation (19:10 «нужна простая») — Locomotion notes «TO DO — a SIMPLE air swing».
-> **FIRST next chat (in order), the owner's playable-build goal:**
->   1. Free PC → the owed sprint cases on build 3: `ConanExiles/_config` · `owner-idle.ps1` FREE once → a batch of `mouse-seq.ps1 -MinIdle 0` sequences with
->      `sprint-bow-sample.lua` (the `run_case` loop in the run report §3); stand `tp_ground.sh 98739 205258` + yaw 225 (open ground). S6 (standing) and S4 (sideways)
->      must show NO substate 7. Then judge round 3 if round 2 had confirmed findings.
->   2. The KrinikConanUI key binds (recon F1) — the fix route is a choice: game-thread clicks only while our window / menu is shown (poll `WasInputKeyJustPressed` while
->      shown) vs the hero's AnyKey event (Camera pattern, gameplay keys only). Ask the owner in one line if not obvious; the feedback plate's LMB first (fires on every shot).
->   3. Wall jump: real input to start climbing at `desert_arch` (which key — W into the wall? Space?), read `CurrentWall` and the movement mode while on it, then the
->      `StartJump` hook (air_combat) → `ExitClimbing()` + `LaunchCharacter(normal × small + up × small)`.
->   4. «+» and our page arrows in Conan gold (the owner's G1, confirmed again 19:11 «да, делаем, и наши стрелочки листания в таком же стиле») — spec in plan 49.
->   5. The simple melee air swing; then a new-game smoke by the agent before the owner's 1–2 h test play.
+> **Moved verbatim to the chronicle (entry 2026-11-13 11:08 +03:00):** the HANDOVER 2026-11-10 19:58 block (bonsai trim). Still open from it: the KrinikConanUI key binds
+> (recon F1), the wall jump, the simple air swing, a new-game smoke before the owner's long test play.
 > **Moved verbatim to the chronicle (entry 2026-11-10 19:58 +03:00):** the blocks HANDOVER 2026-11-10 13:48, NOW 12:38, HANDOVER 11:17, NOW 09:4x, the night block 02:25 and HANDOVER
 > 2026-11-09 22:45 (bonsai trim). Still open from them: bug 91 real-hover frame, the judge round on `kit-corruption-label-plate.py`, bug 88, bug 84 (the map), the hub
 > controller player path, sprint + bow (now built), the streaming-in hitches (future).
@@ -208,6 +192,8 @@ Files without the DONE tag — 29 (2026-10-18 13:45):
 - 🔴 `bugs/64_conan_mod_ui_wave_overlaps_untranslated.md` — the UI of the Conan 3.0.1 build's mods, 26 items: open 4, 5, 6, 12, 13 (partly),
   15 (🟡 hub controller in the build), 16–18, 23 (EAA class cards — text in textures), 26 (late emblem in the hub); closed by a frame 2, 3, 7, 21 (4K, 2026-11-07), 7b, 8 (again 2026-10-31 at 1080p, list 540), 9–11,
   14, 16, 19, 20, 22, 24, 25 — work order in plan 35.
+- 🔧 `bugs/93_…` — the bow sprint in the owner's order: build 7, `[OWNER]` 2026-11-13 11:01 «спринт и стрельба работают»; open cases S8, S9, the cost. 🔴 `bugs/94_…` — hub craft batch
+  finishes at once after the close (hypothesis 2 to test). 🔴 `bugs/95_…` — the bow unseen in first person (first next).
 - 🔧 `bugs/85_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: cause fixed in Archery + Camera; the KrinikConanUI twins open; the owner's gameplay is the check.
 - 🔴 `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; after plan 51.
 - 🔴 `bugs/86_…` (attribute tree caption under a node icon), `bugs/87_…` (beasts walk into the hero), `bugs/88_…` (corruption debuff line fonts) — 2026-11-07, the owner's frames.
