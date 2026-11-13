@@ -1,6 +1,6 @@
 # Bug 75 — the quick-loot selection rim jumps to the last cell for a moment when an item is taken with F
 
-**Status:** 🔧 the CAUSE fixed 2026-11-07 ≈11:27 +03:00 — the cell's `AnimSelect` (the rim's 0.3 s fade, played in reverse on the walk's last cell) made instant in the
+**Status:** 🔴 REOPENED 2026-11-13 16:07 +03:00 by the owner's play (section «Reopened 2026-11-13» below) · was: 🔧 the CAUSE fixed 2026-11-07 ≈11:27 +03:00 — the cell's `AnimSelect` (the rim's 0.3 s fade, played in reverse on the walk's last cell) made instant in the
 KrinikConanUI kit pak; the rim moves in one frame and stays through an F take, never hidden (R1, R2 of `testcases/TC_conan_quick_loot_rim_instant_2026-11-07.md`, report
 `2026-11-07_conan-quick-loot-rim-instant.md`); `krinik_loot_rim` OFF (`[OWNER]` 2026-11-07 10:57 «не нужно её прятать даже на короткий момент»); open: R3 (the last item) and the
 owner's eye · before: 🟡 PARTIAL — the jump HIDDEN 2026-11-03 21:52 +03:00 (section `krinik_loot_rim` 0.1.0, cases B2–B5 pass); OWED: the proper, pretty fix (`[OWNER]` 22:18 «там долг на будущее - сделать красиво» · «починить правильно») · **Severity:** S3 visual, filed as a document by the owner's word («это баг, нужно будет испрравить») · **Version/build:** pack ConanExiles
@@ -12,6 +12,18 @@ owner's eye · before: 🟡 PARTIAL — the jump HIDDEN 2026-11-03 21:52 +03:00 
 туда сюда» · «это баг, нужно будет испрравить» · 2026-11-02 09:10.
 
 `[OWNER]` 2026-11-06 17:48 «выделение в быстром луте прыгает при взятии на F; - ты это частично починил» — confirms the PARTIAL status above; the owed proper fix stands.
+
+## Reopened 2026-11-13
+
+`[OWNER]` 2026-11-13 16:07 «по окну квиклута баг сохраняется, что рамка првыгает в последнюю клетку» — in his own play of the current build (the game launched
+16:04 for his check).
+
+**What the build holds (read 2026-11-13 16:1x):** the deployed `KrinikConanUI.pak` is byte-equal to the built one (md5 `d0880dc5…`, built 2026-11-10 13:45); the
+kit asset `InventoryGridSlotView.uasset` was saved 2026-11-07 11:18 with the instant `AnimSelect` (`kit-conanui-edit.json`: «AnimSelect instant, end 0.000033 s»,
+`saved_gridslot` true) and its `FilesToCook` line stands in both `CookInfo.ini` copies — the 2026-11-07 fix is IN the build, so the jump the owner sees takes another
+path. Never run since 2026-11-07: R3 (the last item of a row), a take with the wheel selection off the first cell, a chest instead of a corpse, «Забрать все».
+**Fixing:** this session — the read-only trace `_config/quickloot-rim-trace.lua` loaded into the owner's running game 16:1x (his own F takes write «[QLR]» lines); then
+a stand of my own when his game is closed, the cases of `testcases/TC_conan_quick_loot_rim_instant_2026-11-07.md` R3 + the new variants.
 
 ## Symptom
 

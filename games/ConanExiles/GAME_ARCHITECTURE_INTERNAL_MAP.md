@@ -668,6 +668,10 @@ mods (guard `check-lua-game-thread.py`). Gameplay keys on the game thread: `/Gam
   the wheel path is `HideDisplay` → `RevealDisplay` (animation `Reveal` on `CanvasPanel_32.RenderOpacity`), auto-hide after `MinDisplayTime`.
   Trace recipe: a remote `lua` `RegisterHook("/Script/ConanSandbox.GUIModuleController:ActivateModule", …)` + `NotifyOnNewObject(<widget BP>)` printing
   `os.clock()` — every call, not only state changes (the pause mod logs changes only).
+- **Journeys — how one unlocks (2026-11-13, KUMM bug 97).** `/Game/Systems/Progression/DT_NewJourney` (51 rows, `JourneyTableRow`): a journey opens by
+  `UnlockedByFeat` (a learned feat of `/Game/Items/Feats/FeatTable`, 974 rows), `UnlockedAtLevel`, `UnlockedByFindingMapMarker`, or the previous row's
+  `UnlockTheseJourneysWhenCompleted`; `StartHidden` rows show only once unlocked. Right after the tutorial (`Survivor`) every visible journey is locked by design:
+  Warrior / Archer need the free level-1 feats 4 / 6 (not given on spawn), the rest feats of level 10–18 or levels 10–60. Mods add their own rows (Ironlight 7, JaarFishing 1).
 - **The hub carousel asset (2026-11-06, kit probes `_config/devkit/kit-probe-carousel.py` / `kit-probe-hub-windows.py`, JSON next to them).**
   `/Game/UI/HUD/Carousel/W_Carousel`: tree `Content` (Overlay) → `Background` (Image, material `M_UI_RadialBackgroundGradient` — the dark backing) +
   `VerticalBox_3` → `SizeBox_0` → `TabButtonBox` (9 `WBP_ButtonBase` tabs + `ImageLeft` / `ImageRight` Q/E glyphs) + `Img_Divider`. Class default

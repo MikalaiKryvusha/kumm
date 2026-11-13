@@ -25,6 +25,12 @@ _config/localization/il-event-phrases-ru.tsv _config/localization/asset-strings/
 - Its gathered strings (rows 1111–1130, 1209–1212 of `dm-fish-ru.tsv`) are Russian in game; the section headers «SETTLEMENT», «TRAINING & WORK», «NEEDS»,
   «SKILLS» and the buttons «SAVE» / «CLOSE» are English — they are not in `all-mods-ftext.csv` at all (frame 2026-11-07 09:12, a bare-module walk).
 
+## Journeys (read 2026-11-13, bug 97)
+
+`IL_DT_JourneyMerge` (struct `JourneyTableRow`) adds 7 OWN journeys — `IronlightFounding`, `IronlightTraining`, `IronlightFeeding`, `IronlightGathering`,
+`IronlightSkills`, `IronlightLogistics`, `IronlightSchedules` — each `UnlockedAtLevel` 10, `StartHidden` false; `IL_DT_JourneyStepsMerge` holds their steps. No row
+name of the vanilla `DT_NewJourney` is reused: the mod locks or unlocks no vanilla journey (kind 1 overlap — outcome: none shared). Also `IL_DT_JourneyEventMap`.
+
 ## How to look inside
 
 `python -I -X utf8 _config/devkit/patch-mod-asset.py extract Ironlight-Core <Asset> <work>` → `<work>/<Asset>.json`. `IL_WBP_AdminUI` (2026-11-07): 189 exports,
