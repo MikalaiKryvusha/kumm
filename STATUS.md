@@ -157,7 +157,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   Plan 53 step 13: the game's mod list got our texts back (66/66, the note of pak-less mods now derived from the manifest; seen in the «Моды» screen) — open:
 >   the KrinikConanGraphics row of `_config/public_release/mods-table.mjs` lacks the foliage-shadow fix (storefront text — the owner's proofreading), the paks
 >   uncompressed (judge finding — size only, next rebuild). My test click spent one free attribute point of the owner's hero on Сила (2 → 1 free). Bug 94: the
->   hero crafts INSTANTLY on this world (queue empty right after `CraftItems`) — find why first (`bugs/94_…` «Recon on 3.1.0»). Then item 3 below.
+>   hero crafts INSTANTLY on this world (queue empty right after `CraftItems`) — find why first (`bugs/94_…` «Recon on 3.1.0»). Bug 98: C4 PASS (01:38 — the
+>   first-person shadow flags stay on after the switch and mid-draw); C6 frame in review folder 85 (`pokaz.html`, opened for the owner 01:35 — whether it reached his
+>   screen is not checked) — his verdict closes the bug. PACK COMMIT PENDING: judge round 2 on the pack diff was still running at the closure — read its findings,
+>   fix, commit with `KUMM/.work/kit310/pack-commit.txt` (fill the review line; leave `_config/craft-*.lua` out — bug 94 WIP). Then item 3 below.
 > **HANDOVER 2026-11-13 22:0x +03:00 — chat closed by the owner's word (`[OWNER]` 22:02 «закрывайчат»), /end-chat-soft with all ceremonies. FIRST next chat:**
 >   1. **The 3.1.0 devkit IS INSTALLED** (CL **383024**, was 378787 — older than 3.0.1's game): the Epic launcher began the update 21:50 by the owner's 21:47 «если да,
 >      запускай эпик лаунчер, обновляй» and finished 22:00:09 (its log `%LOCALAPPDATA%\EpicGamesLauncher\Saved\Logs\EpicGamesLauncher.log`: `HandleTaskComplete …

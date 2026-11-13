@@ -68,6 +68,12 @@ one branch keeps its siblings — ALL PASS. Judge round 2 in flight.
 `_config/fp-shadow-flags.lua` ≈ 1 s after the switch and during a draw; C6 — the restored shadow shows the first-person pose (the torso pitched with the view, the arms
 shifted, no head): frames of the ground looking down and up, for the owner's eye, before DONE.
 
+**C4 PASS 2026-11-14 01:37–01:38 (the 3.1.0 build, remote + one real RMB draw):** `SwitchToFirstPersonCamera()` by the remote → the log «тень от первого лица:
+игра выключила, мы вернули 10»; `fp-shadow-flags.lua` 1.2 s later — every visible body / armour / bow mesh `cast 1` (`MergedLodMesh` the drawn body; `CharacterMesh0`
+vis 0); and MID-DRAW (a real RMB held 3.5 s, the aim on 01:37:59–01:38:02, read at ≈ 01:38:01) — the same, the held arrow `ProjectileMesh` cast 1: the game does not
+turn them off again on a draw. **C6:** a 4K frame looking down (pitch −45, 09:25 game time) shows the hero's long shadow with the bow — put before the owner in
+review folder 85 (`08_ten_ot_pervogo_lica.webp`, the page `pokaz.html`); his verdict closes the bug.
+
 ## Decisions made without the owner
 
 (filled at closing)
