@@ -60,6 +60,9 @@ The multiplier restored to 1.0 helps only items that START after the close.
 - Our stand tools send no craft cheat (grep of `ConanExiles/_config/*.{sh,lua,ps1,txt}` for instant / free craft, 02:0x). Hypothesis to read first: an admin
   flag of the owner's new save (the admin panel's cheats) — dump the boolean properties of `BasePlayerChar_C` and `FunCombat_PlayerController_C` whose names hold
   `Craft`, `Cheat`, `Free` or `Admin` (the `craft-queue-recon.lua` walk on those two classes), compare with a fresh new game.
+- **Read 2026-11-14 02:14 (`_config/craft-cheat-flags.lua`, the owner's world, remote):** no admin or cheat flag on the hero or his controller —
+  `m_IsAdmin=false`, `IsDemiGod=false`, `m_bCanBypassBpXpFromCheats=false`, `FreezeAllItems=false`, no craft-time property at all. The admin-flag hypothesis is
+  REFUTED for these two classes; still open: the world's own settings (the game state / `Game_0.db` rows), the recipe 14000 itself on 3.1.0, a fresh new game.
 - NEXT: find why the hero crafts instantly on this world (a world setting, a perk, a mod: list the hero's perks / feats and the mods that touch
   `RecipesTable` or the crafting component) — or test on a fresh new game; only then the hub case of hypothesis 2 by the player's path («Сделать 10»).
 
