@@ -76,7 +76,8 @@ game. S1b verified on the real world; the owner's own play of build 6 not yet.
 
 - Finding 1: the K2_CanSprint override also skips the game's other refusals (an overloaded hero, low stamina at the start, mounted) — case S8 owed.
 - Finding 3: the worst call read 2 ms in the owner's session (clock step 1 ms) — re-measure on build 4 by the minute line and a frame-time A-B.
-- Finding 6: `krinik_mod_settings.lua` registers the placeholder-perk widget hooks with the perks off — register only when `PLACEHOLDER_PERKS` is true.
+- Finding 6: `krinik_mod_settings.lua` registers the placeholder-perk widget hooks with the perks off — FIXED 2026-11-13 10:5x (pack `ca3cdef`, judge clean; live: hub
+  opened/closed, no KrinikConanUI errors, no «perks merge» lines).
 - Finding 7 (dev-only probe `sprint-run-probe.lua` swallows errors) — declined: not used for this case; the sampler is the instrument.
 
 ## Decisions made without the owner

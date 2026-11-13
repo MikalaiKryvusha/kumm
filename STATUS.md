@@ -153,6 +153,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >     waiting for the owner's answer where he crafted (inventory or a station) and what; on his save the hero's crafting is near-instant even without the hub.
 >   - The «+» and the page arrows in Conan gold (the owner's G1): the arrow generator's colours set and the TGAs regenerated (pack `d6c2897`); NEXT — one kit
 >     session: import the six arrows, the «+» tint in `W_Attribute`, build KrinikConanUI, deploy, frames 4K + 1080p (plan 49, the 2026-11-13 line).
+>   - KrinikConanUI: the placeholder-perk widget hooks only with the placeholders on (pack `ca3cdef`).
 >   - The game runs (background, build 7, the owner's test save `Game_1`, the crafted bow on slot 3); the machine lock is KUMM's until 11:15.
 >
 > **HANDOVER 2026-11-10 19:58 +03:00 — the evening chat of 2026-11-10 closes by the owner's word (`[OWNER]` 19:56 «пода доводить до стеза и закрывать чат»).**
