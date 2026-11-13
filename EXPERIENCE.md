@@ -91,6 +91,24 @@
 
 ## Entries
 
+### EXP-0506 · 2026-11-10 · ❌→✅ · #conan #ue4ss #movement #sprint #bow #hook #datatable
+class: tool-format-assumed
+mechanized: yes — `ConanExiles/_unpacked/KrinikConanLocomotion/ue4ss/Scripts/krinik_bow_sprint.lua` (header) + game map «The movement row»
+**Lesson:** a refusal can sit in DATA ORDER, not in the function you hook. Forcing the native `K2_CanSprint` true changed nothing: the game never asked it while the
+bow was drawn — `EvaluateMovementType` takes the FIRST valid row of `DT_CharacterMovement`, and «Ranged» stands before «Sprint»; each row is its condition AND its own
+direction window (`|GetAngleOfMovement|` in `DirectionRequirment`), so `EvaluateMovement_Sprint` has no direction test at all (taking «Ranged» away sent a sideways
+run to the «Side» row, 428). Read the deciding function's bytecode and the table it walks BEFORE writing the lever; count the hook's calls (10 calls = only the
+sampler's own) to learn whether the game asks at all. A gate on the hot path reads a property first (bTrySprint) and calls game functions only after — 690 → 14–67 ms
+a minute.
+
+### EXP-0505 · 2026-11-10 · ❌ · #conan #ue4ss #lua #probe #loopasync #crash #harness
+class: tool-format-assumed
+mechanized: yes — `ConanExiles/_config/sprint-run-probe.lua`, `sprint-bow-sample.lua` (game-thread chains; header lines name the trap)
+**Lesson:** the agent's own probe crashed the game. `LoopAsync(16, function() local done = false; ExecuteInGameThread(function() … done = true end); return done end)`
+never stops — `done` is re-made each step and the queued game-thread body sets it after the return — and it runs OFF the game thread in the remote's Lua state:
+the bug 85 race, made by the harness. Probes that step over time use a chain of `ExecuteInGameThreadWithDelay` that re-schedules itself and ends by its own clock;
+never `LoopAsync` in the remote.
+
 ### EXP-0504 · 2026-11-10 · ❌→✅ · #conan #ue4ss #lua #ui #widget #hide #canvas
 class: tool-format-assumed
 mechanized: yes — `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_attr_pips.lua` (each failed way commented at its line)

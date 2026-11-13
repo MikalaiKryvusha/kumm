@@ -18,6 +18,7 @@
 | combat in a jump — melee | new (section `krinik_air_combat`) | a melee weapon swings ONCE in the air (the combo advance window closed while airborne); a jump pressed mid-swing on the ground waits for the swing's end (the game's own rule — the owner 10:47) |
 | run and jump growth | `KrinikConanGameplay` section `krinik_oblivion_locomotion` | +3 cm/s to run, sprint and jump per Agility point (as in Oblivion) |
 | PLAN — a jump off a climbed wall | the owner's request of 2026-11-02 09:07 (game map «Climbing») | not built |
+| sprint with the bow drawn (section `krinik_bow_sprint`, 2026-11-10 19:54 +03:00) | the owner 2026-11-07 20:50 · 2026-11-10 19:09 «Спринт с луком делаем» | one gate (player, Shift held, bow drawn 15 / 16, moving, the angle inside the `Sprint` row's window from `DT_CharacterMovement`, on the ground, not exhausted) opens two doors: the native `K2_CanSprint` post-hook → true, and `EvaluateMovement_RangeCombat` → false only when the game's own `EvaluateMovement_Sprint` said yes through OUR door in that call. Game map «The movement row». TC `testcases/TC_conan_bow_sprint_2026-11-10.md`; judge round 1: 10 findings, 8 confirmed and fixed (the gate, the forced flag, cost, table read, retry, angle check, cost line, header), 1 declined (`IsLocallyControlled` — single-player build, as air_combat), 1 to check by eye (the crosshair on the run). Cost after the rework: 2160 calls / min, 67 ms, worst ≤ 1 ms tick |
 
 ## How the combat jump works (the game's two refusals — game map, «Атака в воздухе»)
 
@@ -38,6 +39,8 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
 
 ## Open
 
+- **M6 CLOSED 2026-11-10 19:10 +03:00 by the owner's own play** — `[OWNER]` 2026-11-10 19:10 «Я много раз прыгал и стрелял, работает, стрелы летят» · «супер механика получилась»:
+  the bow's shot in a jump by real input works (arrows leave the bow in the air). The agent's synthetic-input attempts below stay as the history of the stand.
 - **M6 try 2026-11-07 19:2x — FAILED TO EXERCISE (not a verdict on the mod):** `_config/m6-air-shot.sh` (owner-idle FREE → tp to the oasis → side `fixed-cam.lua` →
   `input.ps1 -Key 3` → 3 s window capture while `mouse-seq.ps1` sends Space · RMB down · LMB click · RMB up). The 12-frame sheet: the hero stands in one pose in all
   frames, no jump, no draw; the view stayed the normal third-person camera (the side camera did not apply); a game line «Всё пошло не так…» at the bottom (unread).
@@ -92,6 +95,10 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
   Found for it (10:51, the pak list of `IMM_WAR.pak`): the combo montages the hero plays with a greatsword are Immersive Warriors Enhanced's own
   (`/Game/Mods/IMM_WAR/Anims/ASM/Comb/Gswd/{L,H,FC}/DGS_Combo*_AM`), and the mod ships jump variants — `Gswd/FC/DGS_Skill_D_AM_Jmp`, `Gswd/H/DGS_ComboB5_AM_Jmp`,
   `BH/A/DH_Combo_A4_RM_AM_Jump` — the first candidates for the leap strike.
+- **TO DO — a SIMPLE air swing (the owner 2026-11-10 19:11 +03:00):** `[OWNER]` 2026-11-10 19:10 «такое же с мечо нужно будет, сейчас анимация махания слишком сложная в прыжке» ·
+  «нужна простая» — the melee swing in a jump must play ONE simple swing montage (pinned), not the combo step the game / IMM_WAR picks. Queued after sprint + bow and the
+  wall jump (STATUS NOW block). First: list the candidate one-swing montages per weapon class (vanilla light attack, e.g. the first step of the light combo) and
+  how the air press can force one (`PlayAnimMontage` on the hero instead of the combo, or the combo row's id) — recon before code.
 - **The air swing's animation** is chosen by the game + IMM_WAR's combo rows (`GetCombo`: the current `ComboID` chain or an opener); clearing `ComboID` to None
   before an air press still gave A3 / B3 (10:49) — the choice is not by the chain id alone. Shipped: one swing per jump, the animation left to the game; the look
   goes to the owner's eye on a clip; pinning one montage is the next step if he wants it.

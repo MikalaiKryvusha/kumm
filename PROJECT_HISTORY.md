@@ -3,6 +3,82 @@
 
 
 
+## 2026-11-10 20:02 +03:00 — STATUS «Where to continue»: the blocks of the 2026-11-10 chats (night, morning, midday) and HANDOVER 2026-11-09 22:45, moved verbatim at the bonsai trim of the evening closure
+
+### STATUS.md lines 148–217 (before the trim)
+
+> **HANDOVER 2026-11-10 13:48 +03:00 — the midday chat closes at its budget (the owner 13:41 «работай автономно, а затем закрывай чат в конеце»).** Game closed (own PID),
+> no crash window, lock released; pushed pack `df5352d` and KUMM. **FIRST next chat:** (1) BUILD the owner's G1 (13:41 «05 золото конана» · «и наши кнопочки
+> влево вправо к нему приведи»): `LevelAttributeButton` warm tint (rim `#E9C27A`, hover `#ECD97C`) + our page arrows redrawn in the same gold — spec in plan 49
+> («The «+» brighter»), palette in `researches/conan-ui-color-scheme/`; (2) the judge round on `kit-corruption-label-plate.py` (build 2) and the scrollbar-thumb
+> edit of `kit-attribute-info-scroll.py` (deployed, seen by the remote; a REAL hover frame of the plate and of the gold thumb owed); (3) bug 88 (the corruption
+> debuff row — the hero has the heavy buff, recon in the bug). Rule learned: every colour from the game's FS_ palette (memory + research).
+> ⚠️ Закрыто принудительно 2026-11-10 13:48 +03:00 по слову владельца: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) — долг платит первый
+> /end-chat-soft. Ложных утверждений на месте не осталось (запись «игра возвращает видимость вне хуков» исправлена в EXPERIENCE, конспекте мода, плане, кейсах и отчёте).
+> **NOW 2026-11-10 12:38 +03:00 — chat of 2026-11-10 midday («продолжаем делать Конана», dayloop by the owner's 11:29 order).** Plan 49 steps 2–5 DONE and seen live: placeholder
+> perks `Krinik_Vitality_25/30/35/40` (KrinikConanUI `DT_KrinikPerks` merged into `PerksTable`), the pips follow the row's page (Lua `krinik_attr_pips`, post callback
+> of the native `AttributeEntry:UpdatePipIcons`; EXP-0504), the right perk column scrolls (`SB_KrinikPerkScroll`); the arrows' owed checks D1 / D2 / M1 by real clicks,
+> frames at 1080p / 2K / 720p — report `testcases/reports/2026-11-10_conan-placeholder-perks-pages.md`. Judge: 3 rounds (the 3rd — no confirmed defect). Pushed: pack
+> `4c5548e` (mod) + `e57403d` (guide line, PDF, build-docs waits for Chrome). Bug 91 REPRODUCED by a real hover (the row's own `CorruptionLabel`, no plate; recon
+> in the bug), control done (the game's own branch), four looks in review folder 81 — waits for his pick. The WHEEL over a row BUILT 12:5x
+> (`kit-attribute-paging-wheel.py`, W1–W4 pass by a real wheel; the guide says it). Open for his eye: the column's bar look (Сила shows a bar for a 1.7-unit overflow).
+> The game runs (background, launch 12:56, the agent's run).
+> **HANDOVER 2026-11-10 11:17 +03:00 — chat closed by the owner («закрывай чат, продолжим в новом»); FORCE-closed at 85 %: the bonsai trim of STATUS was NOT done (debt for the
+> next /end-chat-soft).** Game closed, no lock, no crash window; pushed KUMM and pack `c6afcc9`; the owner ordered «работай автономно» (11:04).
+> **FIRST next chat:** (1) plan 49 step 2 owed checks — a click on a DIM arrow, an arrow click on a MIDDLE row, frames at 1080p / 2K / 720p; (2) the owner's 10:28 order —
+> placeholder perks 21–40 (our `DT_KrinikPerks`, row struct `PerksTableRow`, merged into `/Game/Systems/Perks/PerksTable` by `MergeDataTables`), pips per page, the right
+> column scrolls (plan 49 steps 2–5); (3) bug 91. Kit scripts: `kit-attribute-paging-step2.py` → `kit-attribute-paging-look.py` (each TWICE) → `kit-buildmod.py`.
+> **NOW 2026-11-10 09:4x +03:00 — chat of 2026-11-10 morning («продолжаем делать сборку конана»).**
+>   - **Bug 84 — the trait dialog under the attribute tree FIXED and seen (pack `ba5b348`):** reproduced by ten real «+» clicks; cause OURS — `krinik_hub_controller`
+>     added its pages at Z-order 41 over the game's modal (all hub modules and `PerkSelection` are Z 40); now 40 → the dialog on top (T2 pass). The owner's «map without
+>     tabs» NOT reproduced (Tab, Q, M — M opens the hub on «Карта» with tabs). TC `TC_conan_bug84_player_path_2026-11-10.md`; bug 84 stays 🟡 for the map.
+>   - **Plan 49 step 2 LIVE (pack `ba5b348`):** arrows ‹ › and «21–40» on rows past 20, pips hidden past page 0 — S1, S2, S4 pass; the wheel NOT built (kit refuses the
+>     nodes, routes in plan 49); one judge round, findings verified (commit message). **The LOOK — mockup V8 ACCEPTED 10:27** («макет принят, делаем в игре,
+>     шикарно!»): the full spec with numbers is in plan 49. **BUILT 10:52 and seen on a 4K frame** (`kit-attribute-paging-look.py`, textures
+>     `T_KrinikPageArrow*`, left / right numbers justified by the owner's 10:46 word) — the judge round on the look script runs; NEXT: frames at 1080p / 2K / 720p,
+>     the disabled-arrow click check, then the owner's 10:28 order (placeholder perks 21–40, pips per page, the right column scrolls — plan 49 steps 2–5); the wheel.
+>   - Bug 92 DONE (HUD bars magenta again, pack `3ac94a4`); bug 91 OPEN (the corruption «+» hover label) — after the arrows.
+>   - 11:00–11:07 the owner: numbers «слишком тяжелый вес, на -200» → the outline removed (plain PT Serif Regular); «цвет больше в бронзу» → (200, 135, 70) — rebuild
+>     running at 11:08 (`kit-attribute-paging-look.py`, frame to show). 11:01 «СВАЛКА на рабочем столе» — 11 «KUMM fixture» shortcuts from the night's stand runs:
+>     FIXED (KUMM `42ee2b8`: `KUMM_DESKTOP_DIR`, the stand checks the real desktop stays clean; EXP-0503). 11:04 «работай автономно» → dayloop after this cut.
+> **2026-11-10 02:25 +03:00 — chat of 2026-11-10 night (dayloop, the owner's order: the Conan build 1.0.0 backlog, autonomously).**
+>   - DONE: the rulebook cleaned of the owner's raw voice (AGENT_GUIDE, HOUSE_RULES, CLAUDE.md; verbatim → PROJECT_HISTORY entries 2026-11-10 01:52 / 01:55),
+>     the guard `tools/hooks/guide-no-raw-voice.mjs` (PreToolUse, live refusal seen; `--staged` in pre-commit), KAIF #196; the canon rules «code goes to an independent
+>     judge in rounds» and «the guide is a thesis handbook» (AGENT_GUIDE → Notes from the human). Reports `testcases/reports/2026-11-10_guide-no-raw-voice.md`.
+>   - DONE: item 1 of the handover below — `KrinikConanEngineTweaks` has its own manifest entry; KUMM merges a mod's `engineIni` part by section
+>     (`Deploy-ModPack.ps1`, `-EngineIniOut`, `-Verify` per key; fixture 47/47); the pack's `deploy-config.py` takes Engine.ini from the engine; deployed 02:17, the real
+>     `-Verify` clean; the guide (+ Locomotion and EngineTweaks rows, PDF rebuilt) and `README.draft.md` (mods-table, 9 Krinik mods). Report
+>     `testcases/reports/2026-11-10_engine-ini-mod-parts-merge.md`. Not re-read in a running game (the keys are those read live 2026-11-09 22:07).
+>   - Committed and pushed: KUMM `aa37127` (rulebook + guard), `1b54d81` (the ini merge, 4 judge rounds); pack `a451ad5`. The running game read the merged Engine.ini
+>     (02:33: async gathering true, both cvars set).
+>   - NEXT: item 2 below (plan 49 B2) — route A is viable: the kit's Python has `BlueprintGraphEditor` (call-function / branch / variable get-set / bound-event nodes,
+>     pin links; `_config/devkit/kit-probe-bp-graph-api.json`). DONE in the kit 02:55: step 1 — `_config/devkit/kit-attribute-paging-edit.py` added the int member `Page`
+>     and wired `FullValue − Page × MaxAttributePointAllotment` into `UpdateView` (read back, compiles, saved into the kit's `Mods/KrinikConanUI/Content/UI/Inventory/
+>     Attributes/W_Attribute.uasset`; no other build mod ships `W_Attribute` — `mod-overrides.py`). 03:0x built (`CookInfo` line, 0 missing refs), deployed, LIVE PASS
+>     (TC `TC_conan_attribute_paging_step1_2026-11-10.md`: `Page` 1 → 25 shows 5 of 20, 39 → 19 of 20; `Page` 0 → vanilla). Every row lives twice among the live
+>     widgets (bug 84?). Committed: pack `fca1f0c`, `28ed7a5`; KUMM `afe21fc`…`62da686`. Step 2 is DESIGNED in plan 49 (arrows = Buttons with bound OnClicked like the
+>     game's «+», `UpdateView` reuse, visibility past 20, pips re-placed in `PostPipsPlacedOnCanvas` by X = (req − 20p) / 20 × 858.2 — read live 03:10).
+>     The step-2 recon is COMPLETE (03:12–03:15, all nothing-saved probes): `add_component_bound_event_node` refuses widgets → the click goes by
+>     `create_node_from_name("Кнопка|Событие|AssignOnClicked", pos, [<button getter pin>])` in `Construct`; the wheel by `add_function_override(bp, "OnMouseWheel")`.
+>     NEXT: build step 2 in `kit-attribute-paging-edit.py` (a step-2 section: the two Buttons + label by `new_object` into `Progress`, run TWICE — GUID trap; the
+>     click and wheel handlers; the visibility past 20; the pips' X in `PostPipsPlacedOnCanvas`), judge rounds, build, live cases; then items 3, 4.
+>     Slip of 03:09: a short game run without the voice phrase (rule 13).
+>   - **Bug 84 (the owner's top debt) REPRODUCED 03:20:** open → close → open of the attribute module by `ActivateModule` leaves TWO live `W_Attributes` windows
+>     (12 visible rows; `_config/attr-rows-owners.lua`). Control 03:22: with `krinik_hub_controller` off the remote path STILL stacks two windows — the game's on
+>     that path. FIRST next: the player's path (Tab / hub tab keys, real input, front, owner-idle FREE) with and without our controller; then the cause fix.
+> **HANDOVER 2026-11-09 22:45 +03:00 — chat kumm-2d closed by the owner («закрывай чат»).** The game (launch 22:06, front) is the OWNER's — he plays in it; no machine lock held;
+>   KCCP closed its chat. Pushed: KUMM and the pack (`conan-exiles-modpack`). Report of the evening: N1 found by the profiler and SHIPPED in the new mod.
+>   **FIRST next chat (in order):**
+>   1. `KrinikConanEngineTweaks` into the guide (`ConanExiles/docs/guide/guide-3.0.1.html`) and the README mod list (HOUSE_RULES rule 20 · rule 19: Krinik mods at the top);
+>      then the deploy merge of several ini sources (KUMM `Deploy-ModPack.ps1` `engineIni` + a `tools/fixture-pack.mjs` case) so the mod ships its own file.
+>   2. Plan 49 B2 (the owner's pick): the kit edit of `W_Attribute` — `Page` var, the `UpdateView` shift, arrows, pips re-placed in `PostPipsPlacedOnCanvas` (recon in the plan).
+>   3. Sprint + bow: `sprint-run-probe.lua` with the bow in slot 1 (`InpActEvt_Shortcut0_…_25`), `_G.__srp_draw=true` → is `K2_CanSprint` the refusal.
+>   4. FUTURE (the owner 22:05): the streaming-in work of the remaining hitches — research doc «Future»; the light probe only.
+>   Traps of this chat: the voice is Cyrillic words only («Кей Ю Эм Эм», numbers in words — hook from this chat on); `close-game.ps1` may leave the game after 60 s — stop
+>   own PID; the game drops ini comments on exit; the heavy ETW probe distorts — `hitch-trace-light.ps1` only.
+>   - The detail bullets of this handover (A1, the profiler, N1, the log pair, the new mod, REA, the light probe) — moved verbatim to the chronicle, entry 2026-11-10 (bonsai trim).
+
+
 ## ⟦NOW⟧ — STATUS «Where to continue»: the detail bullets of the HANDOVER 2026-11-09 22:45 block, moved verbatim at the bonsai trim of 2026-11-10
 
 > The FIRST list of that handover stays in STATUS (its item 1 done 2026-11-10); these bullets record the closed evening of 2026-11-09.

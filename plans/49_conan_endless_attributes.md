@@ -252,6 +252,25 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
              step 2 did not try) and returns `Handled`; W1–W4 pass by a real wheel (TC step 2).
           5. [x] cases: page 2 of the placeholder attribute shows its pips at 25/30/35/40, page 1 the stock ones, the column scrolls; frames at 1080p / 2K / 720p (case R) —
              report `testcases/reports/2026-11-10_conan-placeholder-perks-pages.md`. The arrows' owed checks D1, D2, M1 pass by real clicks (12:3x), a reopen keeps the page.
+- [x] **Placeholder perks 21–40 switched OFF 2026-11-10 19:10 +03:00** — `[OWNER]` 2026-11-10 19:09 «Заглушки с перков пока что можно убрать, запомнить, как они делаются, мотом будем
+      придумывать новые ряды перков». `krinik_mod_settings.lua`: `PLACEHOLDER_PERKS = false` — `MERGES[2]` (the PerksTable merge) is not built, `recheck_perks` returns;
+      `DT_KrinikPerks` stays in the KrinikConanUI pak unused, as the sample. The paging, the per-page pips (`krinik_attr_pips`) and the scrolling column stay — they
+      work on any perk rows past 20.
+
+### Recipe: perk rows past 20 (for the owner's future perks)
+
+1. **Data.** Our own DataTable with the game's row struct `PerksTableRow` (`PerkName`, `PerkDescription`, `Icon`, `TargetIntStat` — the attribute's stat, e.g.
+   `AttributeHealth` for Живучесть, `AttributeAthleticism` for Проворство; `AttributePointsRequired` — 25, 30, …), made in the kit by
+   `ConanExiles/_config/devkit/kit-krinik-perks.py` (the sample: `Local/DT_KrinikPerks`, rows `Krinik_Vitality_25/30/35/40`) + its `CookInfo.ini` line. Never a row
+   in a copy of the vanilla `PerksTable`.
+2. **Merge.** `krinik_mod_settings.lua` → `MERGES[2]` (`ModController` CDO `MergeDataTables(PerksTable, <ours>)` at the main menu, re-checked at the HUD's and each
+   `W_Attribute`'s birth — the table loaded only by our `LoadAsset` is not rooted). Turn on by `PLACEHOLDER_PERKS = true` or point `ours` at the new table.
+3. **Effect.** A merged row has NO effect by itself: the game's effects ask `HasPerk(<row>)` in blueprints. A real perk needs its effect written (a Lua hook on
+   the stat recompute, or a pak edit of the system that asks `HasPerk`) — design per perk with the owner.
+4. **Screen.** Nothing to do: the C++ places the pip by `AttributePointsRequired`, `krinik_attr_pips` moves it to its page (X = (req − 20p) / 20 × 858.2), the
+   right column lists and scrolls all rows of the attribute. Check: «Хар-ки» page 2 of that attribute shows the pips at their levels; the log line
+   «perks merge (main menu): … rows N -> N+k».
+
 - [ ] **The «+» brighter, in Conan's style** — `[OWNER]` 2026-11-10 13:13 «смотри, как автивный + выглядит, и как твоя стрелочка.» · «Мне нравится яркость твой
       стрелки. Можно плюсы ярче сделать?» · «но чтобы сохранить стиль конана» (his crop: the «+» of a row next to our page arrow). Read 13:1x
       (`_config/devkit/kit-probe-plus-button.py` → `.json`): `LevelAttributeButton` normal = `T_Attributes_perk_button_default` TINTED 0.495 (linear), hovered =

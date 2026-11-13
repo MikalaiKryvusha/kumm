@@ -23,6 +23,15 @@ a rare crash.
   (`2fdb75`) → `Lua::call_function` (`b9f485`) → three nested Lua VM entries (callback → `pcall(rebirth)` → `pcall(inner)`) → `process_lua_function` (`ba2b5c`)
   → a UFunction call (`2c59fd`) → `push_structproperty` (`2c8db9`) → `convert_struct_to_lua_table` (`2c80dc`) → Lua VM (`c68759` → `c78437` → `c77a80`, the crash).
   So the crash is in the Lua VM while UE4SS fills a Lua table from a struct returned by a game function — NOT inside the game function.
+- **A second crash of the same SHAPE, 2026-11-10 19:17 +03:00, in the agent's run (no bow kill, no real input from the agent; the owner typing in VS Code):** `EXCEPTION_ACCESS_VIOLATION
+  reading address 0x000000000000000a`, folder `UECC-Windows-67A04B4E49867DEF115B83A157440469_0000` (19:14:34), crash-report window closed, PID 13820. Stack mapped by the
+  same method (the script re-made in the session scratchpad: `map_offsets.py <UE4SS.dll> <offsets…>`, pefile): game tick (`466aba`, `45d2ca`) → LuaMod delayed-action
+  dispatcher (`2fd818` / `2fc9d0` / `2fcb79`) → `Lua::call_function` (`b9f485`) → TWO nested Lua VM entries → `process_lua_function` (`ba2b5c`) → a LuaMod.cpp global
+  (`2f3dcb`) → `LuaType::auto_construct_object` (`2c6d04`) → `2ae670` → Lua VM (`c6a2ff`, the crash). About 1 s before, the agent sent the dev remote `funcs
+  BasePlayerChar_C` (`find_widget` = `FindAllOf("Widget")` + `pcall(GetFullName)` per widget — a run → pcall(funcs) nesting); its «исполнено» line never came. 0.7 s
+  before, KrinikConanArchery logged «стрелы в трупе: родился Corpse_C … копий 0» (an NPC died nearby). So: the same victim position as the 2026-11-07 crash — the Lua VM
+  dies while UE4SS builds a Lua value (a UObject wrapper here, a struct table there) inside a delayed game-thread action. Not settled: a heap race (which off-thread Lua
+  ran then?) or a wrapper of a dying object. Lesson kept for the stand: `funcs` is for WIDGETS only (it walks every live widget) — never aim it at a pawn class.
 - Refuted on the way: (1) «two corpses race» (the pair of lines is one corpse, above); (2) «garbage in the out `FHitResult` of `K2_SetRelativeLocationAndRotation`»
   — UE4SS `Memzero`s the param buffer (`LuaUObject.cpp:160` at `8333063`); (3) «the out table is collected mid-fill» — `Lua::get_table` leaves it on the stack.
 
