@@ -146,6 +146,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-13 10:36 — the dayloop chat of 2026-11-13 (`[OWNER]` 09:45 «работай автономно в дневном цикле» · «буду нужен - зови голосом»):**
+>   - Bug 93 (the owner's: a sprint started before the draw broke at the draw) — **build 6 PASSES S1b, S3, S6 by real input** with a bow the hero crafted
+>     (`bugs/93_…`, TC). The pack's code (`ConanExiles`: `krinik_bow_sprint.lua` build 6, Locomotion `main.lua`, `mods.txt` Keybinds off, `PLACEHOLDER_PERKS = false`,
+>     `modpack.json`, probes `sprint-bow-sample.lua`, `stop-sprint-probe.lua`, `craft-close-test.sh`) is UNCOMMITTED until judge round 4 (running at 10:3x) is clean;
+>     then commit + push the pack. Owed: S8 overloaded, S9 sheathed bow, the cost (worst 2 ms at a 1 ms clock step → a frame-time A-B), the owner's own play.
+>   - Bug 94 (the owner's: items crafted in the hub finish instantly on close) — the multiplier is read at item START (measured); the first hypothesis refuted;
+>     waiting for the owner's answer where he crafted (inventory or a station) and what; on his save the hero's crafting is near-instant even without the hub.
+>   - The game runs (background, build 6, the owner's test save `Game_1`); the machine lock is KUMM's until 11:15.
+>
 > **HANDOVER 2026-11-10 19:58 +03:00 — the evening chat of 2026-11-10 closes by the owner's word (`[OWNER]` 19:56 «пода доводить до стеза и закрывать чат»).**
 > The owner's goal for today (19:02–19:03, verbatim): «было бы хорошо, чтобы у меня была сегодня более-менее играбельная сборка без заметных багов, я бы начал новую
 > игру тестовую и немного поиграл бы, час, два, для отладки» · «особенно мне важно - спринт с луком, прыжки с луком, бесконечная прокачка атрибутов, прыжки от полжания по

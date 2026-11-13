@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0508 · 2026-11-13 · ❌→✅ · #conan #stand #weapon #bow #remote #control-case
+class: stand-gear-not-verified-before-conclusions
+mechanized: no — the carrier is the recipe in the game map «Stand gear» and the HOUSE_RULES_REFERENCE row «Conan tools of 2026-11-13»
+**Lesson:** prove the stand gear WORKS by a control case before reading any case result. An hour went into «reproductions» of bug 93 with no real bow: first
+fists (the owner caught it: «ты лук в руки не планируешь взять»), then a bow model the remote put into the equipment slot (attached on `Socket_Bow`, yet RMB
+played an unarmed attack), and two wrong conclusions were sent to the owner (build 4 refuted, WeaponEquipped as the cause). A weapon made by `AddItemTemplate`
+cannot be wielded by anyone; a bow the hero CRAFTS can. Control first: a standing draw must show 11 → 15 → 16 and the Archery shot line; only then the case.
+Also: the stand drifts — every run moves the hero (into palms, into the river: «ТЫ ЗАШЕЛ»); re-place him before each case and keep runs short.
+**Trigger:** any case that needs gear in the hero's hands (a weapon, a tool, a torch) on a fresh or foreign save.
+
 ### EXP-0507 · 2026-11-13 · ❌ · #conan #testing #testcases #input-order #sprint #bow #remote
 class: cases-miss-the-players-natural-order
 mechanized: no — the carrier is the TC row S1b (`testcases/TC_conan_bow_sprint_2026-11-10.md`) and bug 93
