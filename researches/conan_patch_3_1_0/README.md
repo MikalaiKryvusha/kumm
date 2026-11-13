@@ -137,3 +137,16 @@ a spear-speed hotfix they expect, Rift / thrall teleport and fall problems, a di
 The previous move followed a hotfix (3.0.0 → 3.0.1, crashes, before our move on 2026-10-25). For 3.1.0 on 2026-11-13: no staff known-issues list yet, players report
 random crashes and wait for a hotfix, the Russian of the new content is not out. The owner decides the moment; the recon's input: moving after the first hotfix costs
 nothing of our work (all checks of §3 are the same) and removes the crash noise from the move's acceptance run.
+
+## 5. What the move showed (2026-11-13 19:3x–20:08, plan 53)
+
+| Risk of §3 | Observed on 3.1.0 |
+|---|---|
+| A.1 late classes of other mods | not real for our hub pages in the world: the five classes we reach are loaded by the mods themselves at the world start (case L6); `find_loaded` stays a safety net. Arrow Quick Swap's class shell exists at script start without its UFunction — the hook arms at the component's birth |
+| A.3 / A.3a stale vanilla copies | 11 vanilla assets changed by the patch under mods' whole copies (`_config/patch-rollback.py`) — our `M_Foliage` among them; to judge one by one |
+| A.4 missing imports | none logged on three world entries |
+| B.5 UE4SS on the new exe | 1181 runs (engine 5.8, event loop); v4.0.0 kept for its own step |
+| B.6 kit revision | 1002 everywhere, no «too old» |
+| B.7 build id | `CL-383024` |
+| C.8 localization | every vanilla override still applies (`vanilla-override.py --check`: 0 changes) |
+| not in §3 | the mount lines of the game log changed («Mod '…' (<Pak>) mounted successfully from …») — the build line read 0 / 66 until KrinikConanModPackManager was fixed; Pickup+'s admin widget misses a class (`ComboBox_DrawDebugline`) — new error |
