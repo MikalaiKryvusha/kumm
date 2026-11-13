@@ -80,6 +80,18 @@ Cost watch after run 3: the plate's minute lines 12:47:49 · 12:48:49 · 12:49:5
 **15** ms (12:49:38) — a whole-game stall that landed on every Lua callback running through it, not the plate's branch (0.125 ms by 200 repeats); the game then
 closed cleanly at 12:50:01 («Event loop end», no crash folder). Watch the line in the owner's next play.
 
+**Judge round 2 (a fresh helper on pack `26f4cfa`, report 13:3x — after the chat's force-closure, recorded unverified):** NO defect; the copy matches the game at
+every deciding step (trace arguments, hit order, filter, |cos| choice, `CheckLineOfSight` order, the final target, lore, the foliage fallback; `GetIsPickupResource` =
+`HarvestableComponent_v2.isPickup` = what `InteractableActivate` checks). To VERIFY, then apply, next session:
+1. risk — cost grows with the hits: every hit pays 3–4 UFunction calls before the cosine test; the 0.125 ms was measured at a spot with few hits, and the minute sums
+   (22–35 ms / 60) put a check near 0.4–0.6 ms. Exact-equivalent fix: compute `c` from `h.ImpactPoint` first and skip the hit when `c <= best_cos`, only then
+   `Component` / `GetOwner` / interface / line of sight; measure at a camp with many interactables (repeats, not the 1 ms clock); an A-B-A per rule 7.
+2. quality — a check that keeps failing goes silent after 3 log lines and stops the minute summary: count errors in the summary.
+3. quality — a failing `GetIsPickupResource` call is silent: log its first failure once.
+4. risk, low — the traces ignore the cached hero, the game ignores the current pawn: use `pc:K2_GetPawn()` per check.
+5. cosmetic — the summary's «щуп нашёл предмет» now also counts actor targets → «плашка горела»; outside the diff: the game also checks
+   `CameraThirdPerson:IsActive()` (uht 73–76) — the code does not.
+
 ## Decisions made without the owner
 
 - `[AI]` The plate copies the game's actor branch from the 3.0.1 kit bytecode instead of calling `UpdateHighlightTarget` itself: calling the game's function once a

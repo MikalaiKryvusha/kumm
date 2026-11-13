@@ -160,8 +160,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > if the file is missing or `"ok": false`, re-run the command in the script header under the machine lock) → the AnimGraph node that bends the upper body by
 > `…FirstPersonAgressive` and what selects Passive vs NotPassive → the smallest native kit edit → build → first-person frames looking down (TC
 > `testcases/TC_conan_fp_bow_visible_2026-11-13.md`). **The probe's first run ended 13:31: `"ok": false` — the AnimGraph has 492 nodes, 5 watched getters were
-> found, then a traceback at script line 75 (inside the downstream walk `hop`) — read the traceback in the JSON, fix, re-run; the lock is released;** (b) bug 96 judge ROUND 2 still owed (relaunched 13:29, its answer dies with this chat) — run a fresh judge on
-> pack `26f4cfa`, then the owner's play closes the bug; (c) then the handover list below from item 2. The machine lock «kumm» expires by itself at 13:48; the game is closed.
+> found, then a traceback at script line 75 (inside the downstream walk `hop`) — read the traceback in the JSON, fix, re-run; the lock is released;** (b) bug 96 judge ROUND 2 DONE 13:3x — no defect; 4 risk/quality findings recorded in `bugs/96_…`
+> «Judge round 2» (the cost reorder first) — verify, apply, re-run F1–F5 + a many-hit cost measurement, then the owner's play closes the bug; (c) then the handover list below from item 2. The machine lock «kumm» expires by itself at 13:48; the game is closed.
 > **Done this chat (2026-11-13 11:46 until the close):** bug 96 fixed (below); bug 95 cause found and option B chosen; bug 74 twin-checked (eggs spawn no actor);
 > KUMM `5423161`, `1a0c2a6`, `439e990`, `8e00173`, `e28f31a` + the closing commit; pack `26f4cfa` + the probe script commit.
 > **Bug 96 (was NOW 11:46):** FOUND and FIXED, pack `26f4cfa` pushed and deployed: a pickup bush touched once by E becomes a
