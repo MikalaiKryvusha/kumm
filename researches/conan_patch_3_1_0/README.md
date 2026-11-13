@@ -107,6 +107,9 @@ a spear-speed hotfix they expect, Rift / thrall teleport and fall problems, a di
 6. **The mod kit revision.** If 3.1.0 raised the minimum `devkitRevisionNumber`, every older pak gets «Mod is too old and needs to be updated for this game version»
    (seen with revision 0, EXP of 2026-10-2x). Check: the main menu with the full mod list; `modinfo.json` of the mods re-uploaded after 2026-11-12; Funcom's devkit
    on the Epic launcher — a new version and its revision number.
+   **Read 2026-11-13 19:3x** (`repak get <pak> <…modinfo.json>`): `devkitRevisionNumber` **1002** in the five mods re-uploaded for 3.1.0 (Hair We Go, Beyond Decor,
+   Severe Weather, LBPR — 2026-11-12/13; Female New Faces — 11-07), in their 3.0.1 copies and in our `KrinikConanUI.pak` — the authors re-cooked on the same kit
+   revision; no «too old» is expected from the revision. The game's own minimum stays a launch check (S2).
 7. **Engine and build id:** read the new exe's build string (`++exiles+release-CL-…`, 3.0.1 was `CL-379176`) and the pak header UE version (EXP-0124), as in plan 33.
    **Read 2026-11-13 19:1x:** 3.1.0 = `++exiles+release-CL-383024` (`ConanSandbox/Binaries/Win64/ConanSandbox-Win64-Shipping.exe`, 205 322 232 bytes, UTF-16 string;
    the script `KUMM/.work/buildstr.py` — scratch).

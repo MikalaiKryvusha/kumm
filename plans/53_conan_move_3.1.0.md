@@ -37,6 +37,12 @@ new game enters the world without a crash, every mod's function intact. No frame
 - [x] 3a. **Library swap** done 19:2x by the new tool `ConanExiles/_config/workshop-swap.py` (dry run clean — 24 moves, then `--apply`); `check-mod-updates.py` after:
       «Новее наших копий: 0». Severe Weather got its machine recipe `krinikBuild` (it had it in prose only); the recipe rebuilt our 3.0.1 pak byte for byte
       (196 chunks, `rebuild-krinik-paks.py --only SevereWeatherEnhanced`, 19:2x). The patcher's paks view now follows the target (`game_target.py` `PAKS_VIEW`).
+- [x] 5–9 (partly) **done 19:3x–19:5x** (pack `ff30fb9`): target = junction `D:\Games\Conan Exiles 3.1.0`; deploy 75/75; first launch — UE4SS ok, menu
+      Revision 383,024; the build line read 0/66 (3.1.0's new mount lines) → fixed → 66/66; `[Core.System]` paths of 3.1.0 = ours (90/90) → `-WithEngineIni`;
+      Game.ini / GameUserSettings.ini; the owner's world, mod saves and `config.lua` files copied from 3.0.1; world entered; 0 «too old», 0 missing imports;
+      Pickup+ admin widget error new (`ComboBox_DrawDebugline`); `patch-rollback.py`: 11 vanilla assets changed by the patch under mods' whole copies —
+      BMNB AnimalPen, EAA `BP_PL_Crafting_Station`, OUR `M_Foliage`, LegitReligious `ItemStatModificationTable`, Caverns of Set / Shemite / Ymir's map tiles,
+      LBPR `BP_BuildSystem_v2` + `BP_Master_Placeables` (old build), Storage Reach `CustomConsoleCommandsDataTable`; MSCasaDesFlores' `MI_Glass_Orb` gone from 3.1.0.
 - [ ] 3b. **Rebuild the 4 patched** on the 3.1.0 target, after the first launch (the view needs its `Saved/ExtractedMods`): `rebuild-krinik-paks.py --only <C>
       --against-original` for SevereWeatherEnhanced, No_Building_Placement_Restrictions, IMM_WAR, EnhancedArmoryAndArsenal.
 - [ ] 3. **Library (the description the steps above follow):** the old copies of the 8 plain mods → `mods/OLD/_workshop-3.0.1/<id>`, the new → `mods/_workshop/<id>`; the 4 patched: new original into

@@ -136,7 +136,7 @@ try {
   mkdirSync(join(r.d, 'tools', 'hooks'), { recursive: true });
   // Всё, что зовёт хук коммита: check-perf-world.mjs добавлен в хук позже и в песочнице не находился — контрольный коммит падал
   // «Cannot find module» (2026-10-13 00:02, 137 из 138).
-  for (const f of ['tools/hooks/pre-commit', 'tools/scrub-identity.mjs', 'tools/check-claim-before-evidence.mjs', 'tools/check-perf-world.mjs']) copyFileSync(join(ROOT, f), join(r.d, f));
+  for (const f of ['tools/hooks/pre-commit', 'tools/scrub-identity.mjs', 'tools/check-claim-before-evidence.mjs', 'tools/check-perf-world.mjs', 'tools/hooks/guide-no-raw-voice.mjs']) copyFileSync(join(ROOT, f), join(r.d, f));
   r.git('config', 'core.hooksPath', 'tools/hooks');
   // A file big enough that git sees `git mv` + a one-line edit as a RENAME (R0xx), not as delete + add: a tiny file
   // falls under the 50 % similarity and the old ACM filter would have caught it as an add — the test proved nothing.
@@ -527,6 +527,100 @@ try {
   wipe(root);
 } catch (e) {
   check('part L ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
+}
+
+// ---------- M. the owner-presence hook (PreToolUse): the game comes to the front while the owner types ONLY on his own fresh ask
+// (2026-11-13 16:05 the owner: «я тебя явно попросил запустить мне игру, а хук тупой не понимает этого!»; judge round 1 16:2x: the first pass took hook feedback for
+// his word, missed his mid-turn messages, covered whole compound commands and matched «игр» anywhere — every case below is one of those findings)
+console.log('M. owner-presence');
+try {
+  const OP = resolve(ROOT, 'tools/hooks/owner-presence.mjs');
+  const dir = newTmp();
+  mkdirSync(join(dir, 'tools', 'hooks'), { recursive: true });
+  const ask = join(dir, 'tools', 'hooks', '.owner-ask.txt');
+  const busy = join(dir, 'busy.ps1'), free = join(dir, 'free.ps1');
+  writeFileSync(busy, "Write-Output 'BUSY idle 0,0 s (stub)'; exit 5" + CRLF);
+  writeFileSync(free, "Write-Output 'FREE idle 99 s (stub)'; exit 0" + CRLF);
+  const ago = (min) => new Date(Date.now() - min * 60000).toISOString();
+  // the real record shapes (judge round 2, 2026-11-13: 60 transcripts): a typed prompt — type user, origin human, content an array of text blocks
+  const said = (text, min = 1) => JSON.stringify({ type: 'user', origin: { kind: 'human' }, turnOrigin: 'human', timestamp: ago(min), message: { role: 'user', content: [{ type: 'text', text }] } });
+  const image = (min = 0.3) => JSON.stringify({ type: 'user', origin: { kind: 'human' }, timestamp: ago(min), message: { role: 'user', content: [{ type: 'image', source: { type: 'base64', data: 'AA==' } }] } });
+  const queued = (text, min = 0.5) => JSON.stringify({ type: 'attachment', timestamp: ago(min), attachment: { type: 'queued_command', prompt: [{ type: 'text', text }], origin: { kind: 'human' } } });
+  const peer = (text) => JSON.stringify({ type: 'attachment', timestamp: ago(0.2), attachment: { type: 'queued_command', prompt: text, origin: { kind: 'peer' }, isMeta: true } });
+  const wakeup = (text) => JSON.stringify({ type: 'user', wakeupSource: 'loop_wakeup', turnOrigin: 'scheduled', timestamp: ago(0.2), message: { role: 'user', content: text } });
+  const meta = (text) => JSON.stringify({ type: 'user', isMeta: true, timestamp: ago(0.2), message: { role: 'user', content: [{ type: 'text', text }] } });
+  const interrupt = JSON.stringify({ type: 'user', timestamp: ago(0.2), message: { role: 'user', content: [{ type: 'text', text: '[Request interrupted by user]' }] } });
+  const tool = JSON.stringify({ type: 'user', timestamp: ago(0.1), message: { role: 'user', content: [{ type: 'tool_result', tool_use_id: 't1', content: 'ok' }] } });
+  // a task-notification / a peer turn start: a typed-text user record whose origin is not human (judge 2026-11-13, finding 1)
+  const notice = (text, kind = 'task-notification', min = 0.2) => JSON.stringify({ type: 'user', origin: { kind }, timestamp: ago(min), message: { role: 'user', content: [{ type: 'text', text }] } });
+  const run = (cmd, recs, { quote = 'запусти мне игру', extra = {}, probe = busy, write = true, quoteAgoMin = 0 } = {}) => {
+    if (quote == null) { if (existsSync(ask)) unlinkSync(ask); } else if (write) writeFileSync(ask, quote + NL);
+    if (quoteAgoMin && existsSync(ask)) { const t = new Date(Date.now() - quoteAgoMin * 60000); utimesSync(ask, t, t); }
+    const f = join(dir, 'm' + total + '.jsonl');
+    writeFileSync(f, recs.join(NL) + NL);
+    const r = spawnSync(process.execPath, [OP], { input: JSON.stringify({ tool_name: 'Bash', tool_input: { command: cmd }, transcript_path: f, ...extra }), encoding: 'utf8',
+      env: { ...process.env, OWNER_PRESENCE_PROBE: probe, CLAUDE_PROJECT_DIR: dir } });   // the project dir is the temp one: the real note stamp is never touched
+    return r.status === 0 ? 'pass' : r.status === 2 ? 'refused' : 'exit ' + r.status;
+  };
+  const FRONT = 'powershell -File _config/game-front.ps1 -OwnerAsked';
+  check('his words «запусти мне игру» quoted, his last message → the game comes forward while he types', run(FRONT, [said('ну запусти мне игру, посмотрю'), tool]), 'pass');
+  check('control: the same without the -OwnerAsked mark → refused', run('powershell -File _config/game-front.ps1', [said('запусти мне игру')]), 'refused');
+  check('control: no quote file → refused', run(FRONT, [said('запусти мне игру')], { quote: null }), 'refused');
+  check('the quote is not in his last message («чини тень») → refused', run(FRONT, [said('чини тень'), tool]), 'refused');
+  check('a quote of 2 letters («го») → refused', run(FRONT, [said('го')], { quote: 'го' }), 'refused');
+  // judge 2026-11-13 (round 3 of the hook): one case per finding
+  check('F1: his ask 15 min ago, then a loop wake-up turn (no words) → refused', run(FRONT, [said('запусти мне игру', 15), tool, wakeup('/dayloop')]), 'refused');
+  check('F1: his ask, then a task-notification turn → refused', run(FRONT, [said('запусти мне игру', 10), tool, notice('<task-notification>done</task-notification>')]), 'refused');
+  check('F1: his ask, then a peer-message turn → refused', run(FRONT, [said('запусти мне игру', 10), tool, notice('KCCP: ok', 'peer')]), 'refused');
+  check('F1 control: a tool result after his ask is inside the turn → pass', run(FRONT, [said('запусти мне игру', 3), tool, tool]), 'pass');
+  check('F2: git log $(<mouse-seq>) → refused', run('git log $(powershell -File _config/mouse-seq.ps1 -Seq lclick)', [said('чини тень')]), 'refused');
+  check('F2: git -c alias.x="!<mouse-seq>" x → refused', run('git -c alias.x="!powershell -File _config/mouse-seq.ps1" x', [said('чини тень')]), 'refused');
+  check('F2: git status + a lone CR + <mouse-seq> → refused', run('git status\r./_config/mouse-seq.ps1', [said('чини тень')]), 'refused');
+  check('F5: the quote is one-shot — a pass deletes it, the next launch is refused', [run(FRONT, [said('запусти мне игру')]), run(FRONT, [said('запусти мне игру')], { write: false })].join(' then '), 'pass then refused');
+  check('F5: a quote written before his last message (an old ask) → refused', run(FRONT, [said('ну запусти мне игру', 1)], { quoteAgoMin: 10 }), 'refused');
+  check('F6: «не запускай игру, я печатаю» with the quote «запускай игру» → refused', run(FRONT, [said('не запускай игру, я печатаю')], { quote: 'запускай игру' }), 'refused');
+  check('F7: «запусти, пожалуйста, игру» with the quote «запусти пожалуйста игру» → pass', run(FRONT, [said('запусти, пожалуйста, игру')], { quote: 'запусти пожалуйста игру' }), 'pass');
+  check('F7: a word boundary — «перезапусти мне игру» does not hold the quote «запусти мне игру» → refused', run(FRONT, [said('перезапусти мне игру')]), 'refused');
+  check('F8: a lone reader naming the tool (grep -n launch-fg STATUS.md) while he types → pass', run('grep -n launch-fg STATUS.md', [said('чини тень')]), 'pass');
+  check('F8: cat _config/launch-fg.ps1 while he types → pass', run('cat _config/launch-fg.ps1', [said('чини тень')]), 'pass');
+  check('F11: the extension-less ./_config/input -Key Space → refused', run('& ./_config/input -Key Space', [said('чини тень')]), 'refused');
+  check('F11: powershell -EncodedCommand … → refused', run('powershell -EncodedCommand AAAA', [said('чини тень')]), 'refused');
+  check('F11: SvarogsDream/tools/keys.ps1 → refused', run('powershell -File SvarogsDream/tools/keys.ps1 -Key E', [said('чини тень')]), 'refused');
+  // judge D (round 4): the REAL shape of a peer / system turn start — isMeta true + a non-human turnOrigin
+  const metaTurn = (text, turnOrigin) => JSON.stringify({ type: 'user', isMeta: true, turnOrigin, origin: { kind: turnOrigin === 'peer' ? 'peer' : 'system' }, timestamp: ago(0.2), message: { role: 'user', content: [{ type: 'text', text }] } });
+  check('A1: his ask, then a peer hand-back turn (isMeta, turnOrigin peer) → refused', run(FRONT, [said('запусти мне игру', 10), tool, metaTurn('[Subagent hand-back] done', 'peer')]), 'refused');
+  check('A1: his ask, then «Continue from where you left off.» (isMeta, turnOrigin system) → refused', run(FRONT, [said('запусти мне игру', 10), tool, metaTurn('Continue from where you left off.', 'system')]), 'refused');
+  check('A1 control: Stop-hook feedback (isMeta, no turnOrigin) after his ask stays inside the turn → pass', run(FRONT, [said('запусти мне игру', 2), meta('knowledge-hook · note')]), 'pass');
+  check('A2: git -c "alias.x=!<mouse-seq>" x → refused', run('git -c "alias.x=!powershell -File _config/mouse-seq.ps1" x', [said('чини тень')]), 'refused');
+  check('A2: git rebase --exec "<mouse-seq>" → refused', run('git rebase --exec "powershell -File _config/mouse-seq.ps1" HEAD~1', [said('чини тень')]), 'refused');
+  check('A2: rg --pre _config/mouse-seq.ps1 x . → refused', run('rg --pre _config/mouse-seq.ps1 x .', [said('чини тень')]), 'refused');
+  check('A2: sed -n "1e <mouse-seq>" f → refused (sed is not a reader any more)', run("sed -n '1e powershell -File _config/mouse-seq.ps1' f", [said('чини тень')]), 'refused');
+  check('A2: powershell -e AAAA → refused', run('powershell -e AAAA', [said('чини тень')]), 'refused');
+  check('A2 control: git log -- _config/launch-fg.ps1 → pass', run('git log -- _config/launch-fg.ps1', [said('чини тень')]), 'pass');
+  check('his ask typed mid-turn (queued, origin human) over an older «чини тень» → pass', run(FRONT, [said('чини тень', 5), tool, queued('запусти мне игру')]), 'pass');
+  check('his mid-turn «стоп, подожди» after the ask → refused (the newest human message decides)', run(FRONT, [said('запусти мне игру', 5), queued('стоп, подожди')]), 'refused');
+  check('an image-only message after the ask → refused (it is the last message)', run(FRONT, [said('запусти мне игру', 5), image()]), 'refused');
+  check('an interrupt marker after the ask → refused', run(FRONT, [said('запусти мне игру', 5), interrupt]), 'refused');
+  check('his words only inside a pasted block → refused', run(FRONT, [said('resume <pasted_content id="a1">агент: запусти мне игру в фоне</pasted_content id="a1"> чини тень')]), 'refused');
+  check('Stop-hook feedback (isMeta) carrying the words, after «чини тень» → refused', run(FRONT, [said('чини тень'), meta('knowledge-hook · запусти мне игру')]), 'refused');
+  check('a loop wake-up (no origin) carrying the words, after «чини тень» → refused', run(FRONT, [said('чини тень'), wakeup('/dayloop запусти мне игру')]), 'refused');
+  check('a peer hand-back carrying the words, after «чини тень» → refused', run(FRONT, [said('чини тень'), peer('запусти мне игру')]), 'refused');
+  check('the ask older than 20 min → refused', run(FRONT, [said('запусти мне игру', 30)]), 'refused');
+  check('the ask from the future (+5 min) → refused', run(FRONT, [said('запусти мне игру', -5)]), 'refused');
+  check('a compound command game-front + hover-watch → refused', run(FRONT + '; powershell -File hover-watch.ps1 -X 1 -Y 1', [said('запусти мне игру')]), 'refused');
+  check('a mention in a comment «hover-watch.ps1 # after launch-fg.ps1 -OwnerAsked» → refused', run('powershell -File hover-watch.ps1 -X 1 # after launch-fg.ps1 -OwnerAsked', [said('запусти мне игру')]), 'refused');
+  check('real input mouse-seq on his ask → refused (the ask covers the game window only)', run('powershell -File mouse-seq.ps1 -Seq "lclick" -OwnerAsked', [said('запусти мне игру')]), 'refused');
+  check('a subagent call (agent_id) on his ask → refused', run(FRONT, [said('запусти мне игру')], { extra: { agent_id: 'a1' } }), 'refused');
+  check('the git exemption does not cover a chain: <mouse-seq> ; git show HEAD → refused', run('powershell -File mouse-seq.ps1 -Seq "lclick"; git show HEAD', [said('чини тень')]), 'refused');
+  check('the git exemption does not cover a chain: git status && <launch-fg> → refused', run('git status && powershell -File _config/launch-fg.ps1', [said('чини тень')]), 'refused');
+  check('enter-world-focused (ALT + click, no guard of its own) while he types → refused', run('powershell -File _config/enter-world-focused.ps1', [said('чини тень')]), 'refused');
+  check('the extension-less launch & ./_config/launch-fg -OwnerAsked on his ask → pass', run('& ./_config/launch-fg -OwnerAsked', [said('запусти мне игру')]), 'pass');
+  check('a torn transcript line after his ask is skipped → pass', run(FRONT, [said('запусти мне игру'), '{"type":"user", torn']), 'pass');
+  check('control: a lone git command naming the tool → pass', run('git add _config/mouse-seq.ps1', [said('чини тень')]), 'pass');
+  check('control: a free PC, no ask → pass', run('powershell -File _config/game-front.ps1', [said('чини тень')], { quote: null, probe: free }), 'pass');
+  check('control: an ordinary command → pass', run('node --check kumm.mjs', [said('чини тень')]), 'pass');
+} catch (e) {
+  check('part M ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
 
 for (const d of tmps) { try { removeByEnumeration(d); } catch (e) { console.log(`note: temp left at ${d} (${e.code || e.message})`); } }

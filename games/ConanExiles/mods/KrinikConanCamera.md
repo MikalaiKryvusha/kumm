@@ -57,10 +57,13 @@ SEPARATE delayed action of the same 1600 ms never ran (21:39 run, K4 fail). Log 
 ## The first-person shadow (bug 98, 2026-11-13, NOT RUN in game yet)
 
 The game's `SwitchToFirstPersonCamera` turns `CastShadow` OFF on every body piece, the held bow and its nocked arrow (remote read 17:16, `_config/fp-shadow-flags.lua`).
-`restore_fp_shadows` (main.lua, next to the neck hooks) runs `FP_SHADOW_DELAY_MS` 50 ms after the switch (our hook fires before the function body): every
-`SkinnedMeshComponent` / `StaticMeshComponent` under the hero's mesh with the shadow off gets `SetCastShadow(true)`, the invisible ones also `SetCastHiddenShadow(true)`;
-trails, particles and widget components untouched. Log «тень от первого лица: включена у N частей (невидимых — M)». The head stays collapsed by the `b_neck_1` hide —
-its shadow comes with plan 52 (the camera at the eyes). A weapon taken up in first person waits for the next switch (no equip event known).
+**The hook order (corrected 2026-11-13 19:5x — an earlier line here said the opposite):** UE4SS calls a hook on a BLUEPRINT function (`/Game/…`) AFTER its body
+(RegisterHook docs; judge round 2; seen in game 19:49 — a record in the first-person hook found the shadows already off). So `record_tp_shadows` keeps the full names
+of the meshes WITH a shadow when shadows are surely on — in the `SwitchToThirdPersonCamera` hook and at the hero's appearance — keyed by the hero's full name; the
+`SwitchToFirstPersonCamera` hook lights at once the recorded ones that are now off (`restore_fp_shadows`). No delay, no `CastHiddenShadow`. Seen 19:52: after a
+third-person switch «записано 11», then first person «вернули 10» — body, bow, arrow `cast 1`. **Open:** the game's own third-person switch at the hero's creation
+records an unbuilt tree (1 of 12 nodes), and the delayed «герой собран» record (6 s after the birth) did not run — the pawn is not possessed yet during the load;
+a first-person switch right after loading lit 0 (19:59). Next: record at the HUD's birth. The head stays collapsed by the `b_neck_1` hide — plan 52.
 
 ## Checks
 

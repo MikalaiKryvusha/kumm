@@ -148,6 +148,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-13 20:0x +03:00 — THE BUILD RUNS ON 3.1.0 (pack `ff30fb9`, plan 53).** Target `D:\Games\Conan Exiles 3.1.0` (a junction onto the owner's download
+> folder — its name stays out of git); deployed 75/75, UE4SS 1181 on the new exe, main menu Revision 383,024 in Russian, «СБОРКА: моды 66/66» (the 3.1.0 log format
+> fixed in KrinikConanModPackManager), the owner's world `Game_1` + mod saves + his `config.lua` files copied from 3.0.1 (hash-checked), world entered three times; no
+> «too old», no missing imports. Machine lock released, no game of mine open. **NEXT (in order):** (1) the camera's first-person shadow right after loading —
+> record at the HUD's birth (bug 98, notes «Open»); (2) rebuild the 4 patched mods on the new originals — `rebuild-krinik-paks.py --only <C> --against-original`
+> (SevereWeatherEnhanced, No_Building_Placement_Restrictions, IMM_WAR, EnhancedArmoryAndArsenal; the 3.1.0 view needs `Saved/ExtractedMods` — exists now);
+> (3) the 11 vanilla assets the patch changed under mods' whole copies (`_config/patch-rollback.py`, list in plan 53 step 5): our `M_Foliage` (KrinikConanGraphics),
+> EAA's `BP_PL_Crafting_Station` (3.1.0's crafting-queue fix), LegitReligious' stat table, Storage Reach's console table, LBPR (after its rebuild), map tiles of
+> Shemite / Ymir's / Caverns of Set — judge each by `researches/mod-reconciliation/GUIDE.md` kind 6; (4) the «3.0.1» under our menu logo → a KrinikConanUI kit
+> rebuild (`kit-conanui-edit.py` game version); (5) Pickup+ admin widget error new in 3.1.0 (`ComboBox_DrawDebugline` class missing); (6) UE4SS v4.0.0
+> (`mods/_incoming/UE4SS_v4.0.0`) as its own step; (7) judges' open findings in the pack commit message (B2 journal, B3 per-asset proof, B4 level-mod view).
 > **NOW 2026-11-13 19:1x +03:00 — DAYLOOP (the owner 18:52 «комп твой, работай автономно. Замерами не занимаемся, занимаемся развитием сборки»): the move onto 3.1.0, plan 53.**
 >   - 3.1.0 = `CL-383024`, installed IN PLACE in the owner's download folder `D:\Instals\<…>` (his 18:53 word; the name stays out of this repo, it is in the pack's
 >     `targets.json` once set) — still being written at 19:1x (files newer than 2 min); deploy only when it stops.
