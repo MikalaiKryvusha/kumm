@@ -174,6 +174,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   line `game-chunk:<sha1>` of `patch-mod-asset.py` (`_config/krinik_patches/EnhancedArmoryAndArsenal__BP_PL_Crafting_Station.tsv`).
 >   **After the close, 22:44:** the user `TEMP` / `TMP` → `F:\Temp` (the owner 22:43 «разве я не просил временную папку клода на E  или F перенести» — he had, on
 >   2026-10-25); the next VS Code start gives the harness `F:\Temp` — check `echo "$TEMP"` in the new chat (`D:\Temp` there = VS Code was not restarted).
+>   **22:5x `D:\Temp` cleaned by the owner's word** (`[OWNER]` 22:52 «д теемп чисти»): 367 609 files, 221 046 folders, 42 dangling junctions of the KAIF sandboxes
+>   removed file by file; D free 16.5 → 25.5 GB (the 56 GB `kumm-game-only-view` were hard links to the game's paks — names only). Left 8, all busy: `claude` (this
+>   session), the context-budget hook's `context-budget-<session>.json`, 6 `*.tmp` of other programs — remove them in the new chat (after the VS Code restart).
 >   State at the close: my game closed 22:02 (no crash window), the machine lock released, KUMM and pack `09e38fc` pushed; the Epic launcher left open (the kit
 >   update is finished).
 > **Moved verbatim to the chronicle (entry 2026-11-13 22:0x +03:00):** the 2026-11-13 blocks from the forced closure of 20:1x back to the HANDOVER of 11:08 (three

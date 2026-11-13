@@ -11,6 +11,9 @@ done that day: the user TEMP → `F:\Temp`, `.claude` → `F:\Claude\.claude`), 
 which does not reach the harness), not the harness's temp — the agent's error. Done 22:44: `[Environment]::SetEnvironmentVariable('TEMP'|'TMP','F:\Temp','User')`,
 `F:\Temp` created (F 121 GB free, E 100 GB; F named on 2026-10-25 and holding `.claude`); takes effect for processes started after it — VS Code (and the harness in it)
 after a restart. `D:\Temp` — the owner removes it himself (his 18:57 word).
+22:52 «что там в д темп? удаляем?» → the list shown (64 GB on paper: 56 GB hard links of `kumm-game-only-view`, ≈ 6.6 GB KAIF self-test sandboxes `kaif-sbx-*`,
+≈ 1.2 GB old rebuild and voice drafts, 1.1 GB `claude`, ≈ 0.5 GB other programs' temp) → «д теемп чисти»: everything but `claude` removed file by file (two
+passes — the sandboxes held dangling junctions `w*\.auth\profile`); D free 16.5 → 25.5 GB; 8 busy entries left for after the VS Code restart.
 
 ## 2026-11-13 22:0x +03:00 — STATUS bonsai trim (the /end-chat-soft of the dayloop chat after `resume`): the 2026-11-13 blocks of «Where to continue» from the forced closure of 20:1x back to the HANDOVER of 11:08, moved verbatim
 
