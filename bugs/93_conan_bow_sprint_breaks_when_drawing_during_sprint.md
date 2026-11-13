@@ -57,6 +57,21 @@ lever is the native stop itself (who clears `bTrySprint` on the draw) — not a 
   (RMB = an unarmed attack, substate 11 only, no shot, also standing — control 10:2x). The owner was asked to equip the hero his way (chat + voice 10:19).
 - Earlier runs of this session (09:47, 09:49) had NO bow in hand at all (the owner's catch «ты лук в руки не планируешь взять») — their conclusions were withdrawn.
 
+## Runs with a REAL bow — 2026-11-13 10:30–10:33 (the hero crafted bow 51401 by recipe 51401 and took it up by a real «3»)
+
+- **CORRECTION:** «build 4 refuted» above came from runs with no real bow (fists / a remote-attached model) — withdrawn. With a properly wielded bow an RMB in
+  a sprint does NOT call `WeaponEquipped` (no lever-c line in the build-6 run), the game does not clear `bTrySprint`, and the sprint holds through 7,11 →
+  7,11,15,16 at 660 with the shot fired — levers a and b with the gate open from substate 11. So the owner's break is most likely judge round 2's finding 2
+  (the gate shut during 11 — build 4's fix); not proven by a control run of build 3 on this stand.
+- **Build 6** (judge round 3: lever c only with substate 7 still set and a BOW item; IsPlayerControlled first): S1b, S3, S6 pass (TC). Lever c stays as cover
+  for the sheathed-bow path (case S9, owed).
+- Cost: the minute with the runs read «худший 2.000 мс» (clock step 1 ms) — finding 3 still open (frame-time A-B owed).
+- Stand lesson: a weapon made by `AddItemTemplate` cannot be wielded (neither by the agent nor by the owner, 10:21 «НЕ ПОЛУЧАЕТСЯ ЭТОТ ЛУК ВЗЯТЬ В РУКИ»); a bow the
+  hero CRAFTS (`CraftItems` of a known recipe, ingredients by `AddItemTemplate`) is wielded by a real hot-bar key. Arrows from the backpack.
+
+REAL WORLD: accumulated — the owner's own build and his test save `Game_1` (his new game of 2026-11-10); data and machine — his PC; path — real keys and mouse into the
+game. S1b verified on the real world; the owner's own play of build 6 not yet.
+
 ## Open from judge round 2
 
 - Finding 1: the K2_CanSprint override also skips the game's other refusals (an overloaded hero, low stamina at the start, mounted) — case S8 owed.

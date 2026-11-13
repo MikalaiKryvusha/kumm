@@ -152,8 +152,9 @@ test — the window is the row's. The native `K2_CanSprint` is false while drawi
 `kismet-trace.py`):** the instance flag `SprintKeyIsDown` is set True on the sprint press and False on the release; `SprintAction(Pressed)` → `ClientStartSprint` or
 `ClientStopSprint` (→ native `StopSprint`, then `ServerStopSprint`); the toggle press calls `SprintAction(NOT TrySprint())`; `ResetSprint` = if in 7 → exit 7, enter 7;
 `OnSubstateChanged_Attacking(11, Entered)` only calls `AdjustStaminaForAttack`. No blueprint path stops the sprint on a draw: a bow draw runs 11 (attack) → 15 →
-16, and a sprint the player was already in dies at the draw (the owner's play) — HYPOTHESIS, to confirm by case S1b: at the first substate (11) the Ranged row
-wins and native code clears `bTrySprint` (bug 93; the
+16, and a sprint the player was already in died at the draw (the owner's play, build 3 whose gate opened only in 15 / 16). With a properly wielded bow an RMB
+in a sprint does NOT call `WeaponEquipped` and `bTrySprint` stays true (2026-11-13 10:33); with the gate open from 11 the sprint holds through the whole draw
+and the shot (bug 93, build 6; the
 sampler `ConanExiles/_config/sprint-bow-sample.lua` reads `try` = bTrySprint and `key` = SprintKeyIsDown every 100 ms). Exports of this asset by a PowerShell `>`
 carry a BOM that `kismet.load` rejects — write `uaj exports` through Bash.
 **Taking a weapon up stops the sprint (seen live 2026-11-13 by `ConanExiles/_config/stop-sprint-probe.lua`):** an RMB in a sprint calls
@@ -163,7 +164,10 @@ Lever: KrinikConanLocomotion `krinik_bow_sprint` lever c (WeaponEquipped post-ho
 **Stand gear (2026-11-13):** a weapon added by `AddItemTemplate` to the shortcut bar did NOT come to hand — not by a real «1» (scan code or VK), not by
 `ShortcutBarInventory:UseShortcutItem(slot)`; `EquipmentInventory:AddItemTemplate(51405, 0, …)` (slot 0 = the main weapon) attaches `BP_bow_2h_C` on `Socket_Bow`, but the
 combat system does not wield it: RMB plays an unarmed attack (substate 11 ≈ 1 s with root motion, no 15 / 16, no shot). Arrows are taken from the BACKPACK
-(Arrow Quick Swap notes), not from an equipment slot (slot 1 did not persist a restart). An honest bow stand = a save whose hero holds the bow the game's way.
+(Arrow Quick Swap notes), not from an equipment slot (slot 1 did not persist a restart). Items made by `AddItemTemplate` cannot be wielded at all — the owner could
+not take such a bow up either (2026-11-13 10:21). **The recipe that works:** ingredients by `AddItemTemplate` (10012 × 7, 12001 × 7, 14174 × 7), then the hero CRAFTS
+the bow — `CraftingQueue:CraftItems(RecipeManager:GetItemByTemplateID(51401, 0))` → bow 51401 lands on the shortcut bar → a real hot-bar key («3» here) wields it
+(standing draw 11 → 11,15,16, the shot logged by KrinikConanArchery). Arrows 53612 in the backpack.
 Working route (KrinikConanArchery 0.7.0): at take-off `ExitSubstate(8)` for the player with the bow in hand; after a refused `StartJump` while
 attacking with the bow — `LaunchCharacter(0, 0, JumpZVelocity 420)`. Out params from Lua: `local o = {}; c:InSubstate(s, o); o.Success`. Bow in
 hand = an attached `BP_bow_2h_C` on `Socket_Bow` (on the back — `sheath_bow`).
