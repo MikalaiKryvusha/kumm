@@ -156,7 +156,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (SevereWeatherEnhanced, No_Building_Placement_Restrictions, IMM_WAR, EnhancedArmoryAndArsenal; the 3.1.0 view needs `Saved/ExtractedMods` — exists now);
 > (3) the 11 vanilla assets the patch changed under mods' whole copies (`_config/patch-rollback.py`, list in plan 53 step 5): our `M_Foliage` (KrinikConanGraphics),
 > EAA's `BP_PL_Crafting_Station` (3.1.0's crafting-queue fix), LegitReligious' stat table, Storage Reach's console table, LBPR (after its rebuild), map tiles of
-> Shemite / Ymir's / Caverns of Set — judge each by `researches/mod-reconciliation/GUIDE.md` kind 6; (4) the «3.0.1» under our menu logo → a KrinikConanUI kit
+> Shemite / Ymir's / Caverns of Set — judge each by `researches/mod-reconciliation/GUIDE.md` kind 6; (4) the «3.0.1» under our menu logo — `GAME_VERSION` set to 3.1.0 (pack `_config/devkit/kit-conanui-edit.py`, `459a7c5`), the KIT BUILD is owed: `active.txt` → KrinikConanUI, then the KrinikConanUI kit
 > rebuild (`kit-conanui-edit.py` game version); (5) Pickup+ admin widget error new in 3.1.0 (`ComboBox_DrawDebugline` class missing); (6) UE4SS v4.0.0
 > (`mods/_incoming/UE4SS_v4.0.0`) as its own step; (7) judges' open findings in the pack commit message (B2 journal, B3 per-asset proof, B4 level-mod view).
 > **NOW 2026-11-13 19:1x +03:00 — DAYLOOP (the owner 18:52 «комп твой, работай автономно. Замерами не занимаемся, занимаемся развитием сборки»): the move onto 3.1.0, plan 53.**
