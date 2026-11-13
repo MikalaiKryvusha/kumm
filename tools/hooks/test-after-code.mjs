@@ -315,7 +315,7 @@ if (argv[0] === '--selftest') {
     // 2026-10-26: `cp` of a pak into the game's Mods folder was no deploy at all
     const cp = ctx(bash('cp "D:/Games/Conan Exiles Mods/mods/_krinik-modified/3748867573/UIMod_Hosav.pak" "D:/Games/Conan Exiles 3.0.1/ConanSandbox/Mods/UIMod_Hosav.pak" && md5sum x'));
     if (!load(dir).debt['deploy:copy UIMod_Hosav.pak'] || !cp.includes('ПРОТЕСТИРУЙ')) fails.push(`cp into the game Mods folder is not deploy debt (${cp.slice(0, 40)})`);
-    bash('cp "D:/Games/Conan Exiles 3.0.1/ConanSandbox/Mods/UIMod_Hosav.pak" /d/Temp/scratch/x.pak');
+    bash('cp "D:/Games/Conan Exiles 3.0.1/ConanSandbox/Mods/UIMod_Hosav.pak" /d/work/ai_sandbox/KUMM/.work/x.pak');
     bash('cp "D:/Games/Conan Exiles Mods/mods/_workshop/1/A.pak" "D:/Games/Conan Exiles Mods/_patch-originals/A.pak"');
     if (Object.keys(load(dir).debt).length !== 1) fails.push(`a copy OUT of the game or into the library became deploy debt (${Object.keys(load(dir).debt)})`);
     bash('powershell -File _config/launch-bg.ps1');

@@ -97,10 +97,19 @@ a spear-speed hotfix they expect, Rift / thrall teleport and fall problems, a di
 
 5. **UE4SS on the new exe** — the game binary changed; UE4SS 1181's Conan Enhanced config may lose a signature. Check: the first lines of `UE4SS.log` (engine version,
    «Found …» signatures), our mods' «loaded» lines; a newer UE4SS build if the scan fails.
+   **UE4SS v4.0.0 is out (GitHub release 2026-11-12, asset `UE4SS_v4.0.0-6-gef15eba8.zip` + `zCustomGameConfigs.zip`, read 2026-11-13 19:1x by `gh api
+   repos/UE4SS-RE/RE-UE4SS/releases/tags/v4.0.0`):** the stable release of the experimental line our 1181 comes from. «Added support for UE Version 5.8»; every
+   BREAKING line is for C++ mods («Lua mods are unaffected; the Lua API is unchanged»); Lua 5.4.7; `UObjectBase` gets `__eq` (pointer equality — our
+   `GetAddress()` comparisons stay right); `ExecuteInGameThreadWithDelay` returns a handle, new `ExecuteInGameThreadAfterFrames`, `ExecuteAsync` / `LoopAsync`
+   deprecated (still work); **«Fixed random crashes (use-after-free) caused by the string intern pool storing dangling pointers to caller-owned strings, most
+   commonly Lua GC'd strings from UObject member access» (#1271)** — the class of the bow-kill crash (bug 85: a Lua-VM victim position) is a candidate.
+   Order: the first 3.1.0 launch on 1181 (one change at a time); the move to v4.0.0 a separate step with its own launch and the Lua mods' start lines.
 6. **The mod kit revision.** If 3.1.0 raised the minimum `devkitRevisionNumber`, every older pak gets «Mod is too old and needs to be updated for this game version»
    (seen with revision 0, EXP of 2026-10-2x). Check: the main menu with the full mod list; `modinfo.json` of the mods re-uploaded after 2026-11-12; Funcom's devkit
    on the Epic launcher — a new version and its revision number.
 7. **Engine and build id:** read the new exe's build string (`++exiles+release-CL-…`, 3.0.1 was `CL-379176`) and the pak header UE version (EXP-0124), as in plan 33.
+   **Read 2026-11-13 19:1x:** 3.1.0 = `++exiles+release-CL-383024` (`ConanSandbox/Binaries/Win64/ConanSandbox-Win64-Shipping.exe`, 205 322 232 bytes, UTF-16 string;
+   the script `KUMM/.work/buildstr.py` — scratch).
 
 **C. Localization.**
 
