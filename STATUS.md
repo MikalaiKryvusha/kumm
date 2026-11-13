@@ -148,7 +148,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW 2026-11-14 00:15–01:35 — dayloop by the owner's word (`[OWNER]` 2026-11-14 00:15 «работай авьономно в дневном цикле»), our Conan mods on the 3.1.0 kit.**
+> **CHAT CLOSED 2026-11-14 02:16 at the 85 % budget (dayloop): ceremonies SKIPPED — the bonsai trim of STATUS (244 lines), `check --gate-budgets`, the
+> experience lint; the next /end-chat-soft pays them. Game closed, machine lock free, KUMM and pack pushed. FIRST next chat: the owner's verdict on review
+> folder 85 (gold «+», first-person shadow), then bug 94 (instant crafting — `bugs/94_…`), then item 3 below.**
+> **NOW 2026-11-14 00:15–02:15 — dayloop by the owner's word (`[OWNER]` 2026-11-14 00:15 «работай авьономно в дневном цикле»), our Conan mods on the 3.1.0 kit.**
 >   DONE (deployed in the 3.1.0 game, run report `testcases/reports/2026-11-14_conan-kit-310-our-mods.md`): the three kit paks rebuilt on kit CL 383024 —
 >   KrinikConanGraphics (the kit update had reset our `M_Foliage` bound to 0 — re-applied, live 100), KrinikConanUI («3.1.0» under the menu logo; the «+» of
 >   «Хар-ки» in the owner's G1 gold by OUR baked textures — a brush tint above 1.0 is clamped on screen; page arrows in the same gold), KrinikConanArchery
