@@ -283,6 +283,10 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       (1.56, 0.99, 0.46) (rim → `#E9C27A`), hovered = the `#ECD97C` tint (1.61, 1.27, 0.47) on the hover texture's base, pressed darker (`#5E4A1F` role); (2) our page
       arrows `T_KrinikPageArrow*` redrawn in the same gold: rim `#E9C27A`, hover `#ECD97C`, dim as now (`_config/branding/make-page-arrows.py` colours →
       `import-logo-texture.py`), then frames at 4K and 1080p for his eye.
+      **2026-11-13 10:5x — step (2) half done:** `_config/branding/make-page-arrows.py` GOLD → (233, 194, 122) `#E9C27A`, HOVER_RIM → (236, 217, 124) `#ECD97C`
+      (pack commit «arrows in Conan gold»); the six TGAs regenerated and looked at (a sheet: warm gold rim, lighter hover, dim unchanged). NEXT, one kit session:
+      `import-logo-texture.py` the six `T_KrinikPageArrow*` into `Mods/KrinikConanUI/Content/Local/` → a kit edit of `W_Attribute`'s `LevelAttributeButton` style
+      tints (step 1, values above; the probe `kit-probe-plus-button.py` shows the brushes) → `kit-buildmod.py KrinikConanUI` → deploy → frames 4K + 1080p → the owner.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).

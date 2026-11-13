@@ -151,7 +151,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >     (worst 2 ms at a 1 ms clock step → a frame-time A-B), the owner's own play.
 >   - Bug 94 (the owner's: items crafted in the hub finish instantly on close) — the multiplier is read at item START (measured); the first hypothesis refuted;
 >     waiting for the owner's answer where he crafted (inventory or a station) and what; on his save the hero's crafting is near-instant even without the hub.
->   - The game runs (background, build 6, the owner's test save `Game_1`); the machine lock is KUMM's until 11:15.
+>   - The «+» and the page arrows in Conan gold (the owner's G1): the arrow generator's colours set and the TGAs regenerated (pack `d6c2897`); NEXT — one kit
+>     session: import the six arrows, the «+» tint in `W_Attribute`, build KrinikConanUI, deploy, frames 4K + 1080p (plan 49, the 2026-11-13 line).
+>   - The game runs (background, build 7, the owner's test save `Game_1`, the crafted bow on slot 3); the machine lock is KUMM's until 11:15.
 >
 > **HANDOVER 2026-11-10 19:58 +03:00 — the evening chat of 2026-11-10 closes by the owner's word (`[OWNER]` 19:56 «пода доводить до стеза и закрывать чат»).**
 > The owner's goal for today (19:02–19:03, verbatim): «было бы хорошо, чтобы у меня была сегодня более-менее играбельная сборка без заметных багов, я бы начал новую
