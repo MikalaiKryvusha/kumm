@@ -159,7 +159,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > FIRST next chat: (a) bug 95 option B — read `ConanExiles/_config/devkit/kit-probe-ab-fp-look.json` (the kit probe started 13:28 in the background, read-only;
 > if the file is missing or `"ok": false`, re-run the command in the script header under the machine lock) → the AnimGraph node that bends the upper body by
 > `…FirstPersonAgressive` and what selects Passive vs NotPassive → the smallest native kit edit → build → first-person frames looking down (TC
-> `testcases/TC_conan_fp_bow_visible_2026-11-13.md`); (b) bug 96 judge ROUND 2 still owed (relaunched 13:29, its answer dies with this chat) — run a fresh judge on
+> `testcases/TC_conan_fp_bow_visible_2026-11-13.md`). **The probe's first run ended 13:31: `"ok": false` — the AnimGraph has 492 nodes, 5 watched getters were
+> found, then a traceback at script line 75 (inside the downstream walk `hop`) — read the traceback in the JSON, fix, re-run; the lock is released;** (b) bug 96 judge ROUND 2 still owed (relaunched 13:29, its answer dies with this chat) — run a fresh judge on
 > pack `26f4cfa`, then the owner's play closes the bug; (c) then the handover list below from item 2. The machine lock «kumm» expires by itself at 13:48; the game is closed.
 > **Done this chat (2026-11-13 11:46 until the close):** bug 96 fixed (below); bug 95 cause found and option B chosen; bug 74 twin-checked (eggs spawn no actor);
 > KUMM `5423161`, `1a0c2a6`, `439e990`, `8e00173`, `e28f31a` + the closing commit; pack `26f4cfa` + the probe script commit.
