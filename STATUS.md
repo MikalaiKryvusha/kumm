@@ -159,8 +159,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   uncompressed (judge finding — size only, next rebuild). My test click spent one free attribute point of the owner's hero on Сила (2 → 1 free). Bug 94: the
 >   hero crafts INSTANTLY on this world (queue empty right after `CraftItems`) — find why first (`bugs/94_…` «Recon on 3.1.0»). Bug 98: C4 PASS (01:38 — the
 >   first-person shadow flags stay on after the switch and mid-draw); C6 frame in review folder 85 (`pokaz.html`, opened for the owner 01:35 — whether it reached his
->   screen is not checked) — his verdict closes the bug. PACK COMMIT PENDING: judge round 2 on the pack diff was still running at the closure — read its findings,
->   fix, commit with `KUMM/.work/kit310/pack-commit.txt` (fill the review line; leave `_config/craft-*.lua` out — bug 94 WIP). Then item 3 below.
+>   screen is not checked) — his verdict closes the bug. PACK COMMITTED `0f4b7dc` (pushed) after 3 judge rounds (31 findings: fixed 25, deferred 1 — paks
+>   uncompressed, refuted 5); **owed: judge round 4 on the round-3 edits** (small: the plus script's `-ModDevKit` check, kit-buildmod's last explicit exit and
+>   xxhash preflight, set-pak-modinfo per-pak `[fail]`, set-pak-version's no-entry case, two Lua argument guards) and the live run of `attr-arrows-show.lua` /
+>   `plus-tint-probe.lua` guards at the next game session. `_config/craft-*.lua` (bug 94 probes) stay uncommitted on disk. Rollback paks of the 3.0.1 kit:
+>   `KUMM/.work/kit310/old/` (19 MB). Then item 3 below.
 > **HANDOVER 2026-11-13 22:0x +03:00 — chat closed by the owner's word (`[OWNER]` 22:02 «закрывайчат»), /end-chat-soft with all ceremonies. FIRST next chat:**
 >   1. **The 3.1.0 devkit IS INSTALLED** (CL **383024**, was 378787 — older than 3.0.1's game): the Epic launcher began the update 21:50 by the owner's 21:47 «если да,
 >      запускай эпик лаунчер, обновляй» and finished 22:00:09 (its log `%LOCALAPPDATA%\EpicGamesLauncher\Saved\Logs\EpicGamesLauncher.log`: `HandleTaskComplete …

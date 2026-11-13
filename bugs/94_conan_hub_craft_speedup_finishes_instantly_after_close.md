@@ -54,6 +54,9 @@ The multiplier restored to 1.0 helps only items that START after the close.
 - `CraftItems` × 2 of recipe 14000 (`TimeToCraft` 10) with the hub CLOSED: right after the calls the queue's `ItemList` held 0 items — crafting is
   instant on this world on 3.1.0 too, so the hub's multiplier cannot be judged on it (probe `_config/craft-item-recon.lua`). `ServerSettings.ini` has no
   craft-time line (`ItemConvertionMultiplier=1`, `CraftingCostMultiplier=1`).
+- The same remote path (`CraftItems`) timed a bandage at ≈ a minute on 2026-10-31 (the older save) — the instant crafting came with the owner's NEW test save
+  of 2026-11-13; the mod notes name no craft-time edit (grep of `games/ConanExiles/mods/*.md`, 01:5x). So compare the two worlds first: the hero's perks / feats
+  (`BP_PerkSystemComponent`), the world's settings rows in `Game_0.db`, an admin or a cheat flag left by a stand.
 - NEXT: find why the hero crafts instantly on this world (a world setting, a perk, a mod: list the hero's perks / feats and the mods that touch
   `RecipesTable` or the crafting component) — or test on a fresh new game; only then the hub case of hypothesis 2 by the player's path («Сделать 10»).
 

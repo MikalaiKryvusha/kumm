@@ -20,7 +20,9 @@ byte-equal to `kit_asset_backups/M_Foliage.uasset.orig` (the 3.0.1-era original 
 every kit update: re-run `kit-foliage-wpo.py` (report «before 0.0, after 100.0, saved true»), then the build. The cooked result read against the game's 3.1.0
 `M_Foliage` (`stale-copy-check.py … --keep` → the two `M_Foliage.json` of uaj compared by tagged property): only `MaxWorldPositionOffsetDisplacement` (ours) and
 `StateId` (a GUID re-made by every save) differ — the material graph is the game's 3.1.0 one; the native tail (shader maps) differs in size, as any re-cook does.
-Pak 1 122 172 bytes (the 3.0.1-kit one 1 181 323). The shipped pak is git-ignored since 2026-11-14 (it sat untracked before).
+Pak 1 122 172 bytes (the 3.0.1-kit one 1 181 323). The shipped pak is git-ignored since 2026-11-14 (it sat untracked before); the kit mod's `modinfo.json` and
+`Local/CookInfo.ini` are copied into the pack as `_unpacked/KrinikConanGraphics/kit/` (a mirror of `F:\CEUE5Devkit\UE4\Content\Mods\KrinikConanGraphics`, as UI and
+Archery have — edit both; check `cmp`), so the pak can be rebuilt if the kit folder is lost.
 
 ## Kit pak — conservative shadow raster for foliage (REFUTED 2026-11-07 18:51 — did not reduce the blink; dropped; the patch stays in `engine_shader_patches/`; the kit's `modinfo.json` description no longer names it since 2026-11-14)
 

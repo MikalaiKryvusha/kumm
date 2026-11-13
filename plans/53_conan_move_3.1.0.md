@@ -82,7 +82,8 @@ new game enters the world without a crash, every mod's function intact. No frame
       `-Deploy -WithEngineIni` + `deploy-config.py` (Game.ini / GameUserSettings.ini, EXP-0324) and the second launch.
 - [ ] 9. **New game → world**: the Krinik mods' cases, the hub pages, the map page, the localization (`deploy-localization.py --check`; vanilla overrides
       `vanilla-override.py --check` against 3.1.0's `ru/Exiles_UI.locres`, research §3 C.8).
-- [ ] 10. **Whole-asset vanilla overrides of the kit** (research §3 A.3a): re-run every `kit-*-edit.py` that saves a vanilla asset on the 3.1.0 kit — only when
+- [x] 10. (DONE 2026-11-14 01:5x — the three kit paks rebuilt on kit 383024 and seen in game, K1–K10 of `testcases/TC_conan_kit_310_our_mods_2026-11-14.md`; pack
+      `0f4b7dc`.) **Whole-asset vanilla overrides of the kit** (research §3 A.3a): re-run every `kit-*-edit.py` that saves a vanilla asset on the 3.1.0 kit — only when
       Funcom ships a 3.1.0 devkit; until then the 3.0.1 copies stay and the list of what they may undo is written here.
       **The 3.1.0 kit EXISTS** (read 2026-11-13 21:5x in the Epic launcher log `%LOCALAPPDATA%\EpicGamesLauncher\Saved\Logs\EpicGamesLauncher.log`: «Conan
       Exiles Enhanced Dev Kit» `912a768dddac4142b862ad0fc2ad98df` **378787 → 383024**, «Action: Update», queued 21:50 after the owner's 21:47 «если да, запускай эпик
