@@ -36,6 +36,11 @@
 > работаем дат сборкой конана» · «она 1_ должна работать стабильно 2_ моды не должны конфликтовать, должны быть рабочими 3_ не должно быть
 > явных просадок производительности из-за модов» · 2026-10-26. Work order — "Where to continue", item 0.
 >
+> 🆕 **Conan 3.1.0 is out (2026-11-12, Part Three of the Giant-Kings arc); the build still lives on 3.0.1, the new game is NOT downloaded.** Web recon 2026-11-13 09:09 —
+> `researches/conan_patch_3_1_0/README.md` (§3 is the move checklist): the top risk is «only ModController classes are loaded at startup» (our
+> `krinik_hub_controller.lua:80` and `krinik_mod_settings.lua:1046/1054` reach other mods' classes by `StaticFindObject`); stale vanilla tables (new item rows);
+> UE4SS on the new exe; the kit revision. No staff known-issues list yet, players wait for a hotfix — when to move is the owner's call.
+>
 > **Svarog's Dream — the main work from 2026-10-09 to 2026-10-26** (`[OWNER]` «забей на Medieval Dynasty … мы работаем дальше над Сварогом» · 2026-10-09 ≈13:25;
 > scale: 16:9 at 720p, 1080p, 2K, 4K — `MASTER_PLAN.md`). Medieval Dynasty is paused; the paragraph below is for the return.
 >
@@ -89,6 +94,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 ## ❓ Awaiting human review (interviews / homework)
 
+- ✉️ **Nexus quarantine of mod 65 (0.9.0) — the THIRD letter is written 2026-11-13 09:09** (`[OWNER]` 09:03 «давай писать третье письмо»): `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_followup_2.txt`,
+  a reply in ticket 276571; the three SHA-256 in it re-hashed from the release zip (match). The owner sends it.
+- ⚠️ **The pack's code of the evening chat 2026-11-10 is UNCOMMITTED** (`ConanExiles`: bow sprint build 3, `mods.txt` Keybinds off, `PLACEHOLDER_PERKS = false`, `modpack.json`):
+  it waits for judge round 2 (handover item 1), then the commit and push.
 - ✅ **the «+» brightness (plan 49)** — decided 13:41 G1 (Conan gold `#E9C27A`), confirmed 19:11 with the page arrows in the same style; TO BUILD (handover item 4).
 - ✅ bug 91 — the owner picked V1 13:04 (a plate above the diamond); built in the kit, deployed 13:12 (pack `eef82bf`); the real-hover check waits for a free PC.
 - (done) **2026-11-10 12:49 +03:00 — the look of the corruption «+» hover label (bug 91), the owner's pick of four** — review folder `НА ОТСМОТР НИКОЛАЕМ/81_podpis_oskverneniya`
