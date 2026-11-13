@@ -118,6 +118,9 @@ What `BuildMod.cs` does, step by step (this is the pipeline we will drive):
    `ModCompat: empty cook output folder`, `ValidateMod`), then the IoStore container
    (`-CreateDLCContainer`, Oodle Kraken level 7 / Optimal3, shader archive renamed
    `ShaderArchive-<Mod>-…`).
+   **Since the 3.1.0 kit (CL 383024, read 2026-11-14):** no `ModCompat.bin` — the cook no longer writes it and `BuildMod.cs` packs only `AssetRegistry.bin` + the
+   `*.upipelinecache` files (not `Global_`, renamed to the mod). Every mod its author rebuilt on the 3.1.0 kit lacks it (Beyond Decor II, DeaHair, Thrall Scanner,
+   Severe Weather, LBPR — 6 of 66 installed paks, all mount); the 60 built on older kits still carry it. `kit-buildmod.py` follows (2026-11-14).
 5. **FinalPak:** wrapper `<Mod>.pak` (uncompressed) = `modinfo.json` + `manifest.json` (MD5 and
    XXH128 of every file) + the nine platform files. Output: `UE4/Saved/Mods/<Mod>/Output/<Mod>.pak`
    (or `-Output=`). Comment in the source: *"UnrealPak in 5.8 won't overwrite"*.
@@ -214,7 +217,7 @@ this licensee build — `web-recon.md` §8 lists them; the compiled-plugin ones 
 ├── modinfo.json                name · description (BBCode) · version · author · Steam ids ·
 │                               folderName · devkitRevisionNumber · minimumVersion
 ├── manifest.json               MD5 (+ "<xxh128>" block) of every file below
-├── <Mod>-Windows.pak           loose: AssetRegistry.bin, ModCompat.bin, pipeline caches
+├── <Mod>-Windows.pak           loose: AssetRegistry.bin, ModCompat.bin (kits before 3.1.0 only), pipeline caches
 ├── <Mod>-Windows.utoc/.ucas    IoStore: the cooked assets (Oodle) + ShaderArchive-<Mod>-…
 ├── <Mod>-WindowsServer.*       same for the dedicated server
 └── <Mod>-LinuxServer.*

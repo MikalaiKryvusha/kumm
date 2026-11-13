@@ -91,7 +91,27 @@ new game enters the world without a crash, every mod's function intact. No frame
       patch, notes `KrinikConanGraphics.md` — the game's 3.1.0 `M_Foliage` changed, plan 53 step 12), KrinikConanUI (`kit-conanui-edit.py` — the «3.1.0» line and
       every vanilla widget it saves; `kit-attribute-*`, `kit-krinik-modsettings.py`), KrinikConanArchery (its kit overrides). Risk: the update replaces kit files our
       scripts patch in place (backups `kit_asset_backups/`, the shader `.orig`) — the scripts re-apply; our mod folders `UE4/Content/Mods/*` are user files.
+      **2026-11-14 00:1x–00:2x (dayloop):** our four kit mod folders intact after the update. **Which overrides went stale — read, not guessed:** the launcher writes
+      only the files a version changed (or it repairs), so every kit content file with a time in the update window (2026-11-13 21:53–22:00) = the 3.1.0 kit's
+      changes: **1174 files**; intersected with our overrides (`Mods/<Mod>/Content/…` of KrinikConanUI — 13 widgets / 2 textures, KrinikConanArchery — the bow
+      montage): **none**. The one hit is `M_Foliage` — the launcher REPAIRED our in-place edit (byte-equal to the old original, bound 0). So: KrinikConanUI and
+      Archery need no re-basing on fresh vanilla, only a re-cook on the new kit (+ the «3.1.0» line); KrinikConanGraphics — the bound re-applied. **KrinikConanGraphics
+      DONE 00:22** (`kit-foliage-wpo.py` → `kit-buildmod.py`; the cook read against the game's 3.1.0 `M_Foliage` by tagged property: only our bound and `StateId`
+      differ — notes `KrinikConanGraphics.md`); installed into `_unpacked/`, not yet deployed. KrinikConanUI — in the kit (with plan 49 G1, the «+» in gold);
+      Archery next; then one game run — `testcases/TC_conan_kit_310_our_mods_2026-11-14.md`.
 - [ ] 11. `modpack.json` `builtFor` → 3.1.0; the guide's version line; STATUS.
+- [ ] 13. **The game's own mod list lost our texts in the move (found 2026-11-14 00:4x).** `set-pak-modinfo.py` (plan 44: Russian description, author, URL,
+      change note in each pak's `modinfo.json`) was run on 3.0.1's `Mods` folder by hand; the 3.1.0 deploy copied the library paks — read live: KrinikConanUI
+      author «», EAA's description raw BBCode «[img]https:…», Frequent_meteors «- rebuilt for update». Its only caller is `_config/release/make_volumes.sh`. Before
+      re-running it on the 3.1.0 `Mods`: read how `-Deploy` / `-Verify` treat a game pak that differs from the library — READ 00:4x: `Install-PakMod`
+      (`Deploy-ModPack.ps1:538`) copies every pak with `Copy-Item -Force` on each deploy, so an edit made in the game folder dies at the next full deploy — the
+      edit must live in what the deploy copies (the library copy, as `_krinik-modified/` does for patched paks) or in a step the deploy runs. Since 2026-11-14 the script also keeps the manifest's
+      `<xxh128>` entry of `modinfo.json` right (`kit_manifest.py`; before it updated the MD5 only — the loader then keeps the OLD extracted file, the
+      2026-10-26 lesson in `patch-mod-asset.py`); control run: the old script on a copy of Frequent_meteors left `modinfo.json` xxh128 DIFF, the new one 10 / 10.
+      **01:1x — applied to the 3.1.0 `Mods`** (game closed): `set-pak-modinfo.py "<game>/ConanSandbox/Mods"` — 66 of 66 written (dry run first: 66 would); the scan
+      of every wrapper's `modinfo.json` hashes (`.work/kit310/scan_modinfo_hashes.py`): 0 stale, 65 with `<xxh128>` + KrinikConanGameplay MD5-only (its own
+      builder). The rule «re-run after every deploy» is in the game map. OPEN: the mod list seen in game (main menu «Моды», a frame); where the step lives for good
+      (today: by hand after a deploy, as `deploy-localization.py`).
 
 ## Risks
 

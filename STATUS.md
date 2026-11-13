@@ -148,6 +148,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-14 00:15–01:35 — dayloop by the owner's word (`[OWNER]` 2026-11-14 00:15 «работай авьономно в дневном цикле»), our Conan mods on the 3.1.0 kit.**
+>   DONE (deployed in the 3.1.0 game, run report `testcases/reports/2026-11-14_conan-kit-310-our-mods.md`): the three kit paks rebuilt on kit CL 383024 —
+>   KrinikConanGraphics (the kit update had reset our `M_Foliage` bound to 0 — re-applied, live 100), KrinikConanUI («3.1.0» under the menu logo; the «+» of
+>   «Хар-ки» in the owner's G1 gold by OUR baked textures — a brush tint above 1.0 is clamped on screen; page arrows in the same gold), KrinikConanArchery
+>   (re-cook only). `kit-buildmod.py` aligned with the 3.1.0 `BuildMod.cs` (no ModCompat.bin, pipeline caches, the manifest's `<xxh128>`); the shared
+>   `kit_manifest.py` fixes the latent MD5-only manifest edit of `set-pak-version.py` / `set-pak-modinfo.py`. All cases K1–K10 pass (K9 — a real shot, 01:32).
+>   Plan 53 step 13: the game's mod list got our texts back (66/66, the note of pak-less mods now derived from the manifest; seen in the «Моды» screen) — open:
+>   the KrinikConanGraphics row of `_config/public_release/mods-table.mjs` lacks the foliage-shadow fix (storefront text — the owner's proofreading), the paks
+>   uncompressed (judge finding — size only, next rebuild). My test click spent one free attribute point of the owner's hero on Сила (2 → 1 free). Bug 94: the
+>   hero crafts INSTANTLY on this world (queue empty right after `CraftItems`) — find why first (`bugs/94_…` «Recon on 3.1.0»). Then item 3 below.
 > **HANDOVER 2026-11-13 22:0x +03:00 — chat closed by the owner's word (`[OWNER]` 22:02 «закрывайчат»), /end-chat-soft with all ceremonies. FIRST next chat:**
 >   1. **The 3.1.0 devkit IS INSTALLED** (CL **383024**, was 378787 — older than 3.0.1's game): the Epic launcher began the update 21:50 by the owner's 21:47 «если да,
 >      запускай эпик лаунчер, обновляй» and finished 22:00:09 (its log `%LOCALAPPDATA%\EpicGamesLauncher\Saved\Logs\EpicGamesLauncher.log`: `HandleTaskComplete …
@@ -163,7 +173,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >      --since 2026-11-03 --all` first (21:4x: 6 of 66 authors updated since the beta; Hair We Go's 21:36 upload taken and deployed).
 >   3. The open list of the day (moved blocks below): Pickup+ admin widget error new in 3.1.0 (`ComboBox_DrawDebugline`); UE4SS v4.0.0 (`mods/_incoming/UE4SS_v4.0.0`)
 >      as its own step; bug 75 (the quick-loot rim jumps to the last cell — reopened by the owner 16:07); bug 98 C4 / C6 (first-person shadow); plan 52 steps 3–4 (the
->      first-person look); bug 97 (journeys locked after the tutorial); bug 94 (hub craft batch); bug 93 S8 / S9; plan 49 G1 (the «+» in Conan gold, to build); the pack
+>      first-person look); bug 97 (journeys locked after the tutorial); bug 94 (hub craft batch); bug 93 S8 / S9; ~~plan 49 G1 (the «+» in Conan gold, to build)~~ built 2026-11-14 (NOW block); the pack
 >      judges' open findings B2–B4 (pack commit `ff30fb9` message); L1–L5 of `TC_conan_move_3.1.0_2026-11-13.md` (L6 read 22:00: the five foreign classes are ALREADY
 >      loaded at world entry — the `find_loaded` change is harmless, not proven needed); bug 96 (the «E Взять» plate over a touched bush — fix pending verification:
 >      the owner's play + a judge round owed, `bugs/96_…`); the owner's bug 93 wish — no aim zoom while sprinting with the bow (`bugs/93_…` «The owner's next wish»);

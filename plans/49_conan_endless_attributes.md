@@ -287,6 +287,16 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       (pack commit «arrows in Conan gold»); the six TGAs regenerated and looked at (a sheet: warm gold rim, lighter hover, dim unchanged). NEXT, one kit session:
       `import-logo-texture.py` the six `T_KrinikPageArrow*` into `Mods/KrinikConanUI/Content/Local/` → a kit edit of `W_Attribute`'s `LevelAttributeButton` style
       tints (step 1, values above; the probe `kit-probe-plus-button.py` shows the brushes) → `kit-buildmod.py KrinikConanUI` → deploy → frames 4K + 1080p → the owner.
+      **2026-11-14 00:2x — the kit session done on the 3.1.0 kit (dayloop):** the six TGAs regenerated (`make-page-arrows.py`, looked at on a sheet) and imported
+      (`KIT_TGA_DIR=… import-logo-texture.py`, 6 × saved); the «+» by the new `_config/devkit/kit-plus-button-gold.py` — it COMPUTES each state's tint as
+      0.495 × lin(target) / lin(rim (139, 142, 127)), the mockup's own formula: normal #E9C27A → (1.5623, 0.9872, 0.4539), hovered #ECD97C → (1.6082, 1.2698,
+      0.4701), pressed #5E4A1F → (0.2146, 0.1253, 0.0320) `[AI]` (the plan's «#5E4A1F role»); before: the game's grey 0.495 / 0.724 / 0.384; compiled, saved. The
+      purple corruption «+» untouched. Cook + deploy + frames — cases K5–K7 of `testcases/TC_conan_kit_310_our_mods_2026-11-14.md`.
+      **00:5x — the tint way FAILED in game, read and proven:** the live widget carried our tints (remote read N[1.562,0.987,0.454]), yet the rim read
+      (188, 194, 141) instead of ≈ (233, 194, 122); live R 1.0 gave the same pixels, R 0.3 changed them (133, 182, 131) — Slate clamps a brush tint at 1.0
+      per channel, so the mockup's «tint above 1» (V4 «Slate takes a tint above 1» above was never seen in game) cannot reach #E9C27A. Fix: the gains BAKED into
+      our textures `T_KrinikPlusGold` / `T_KrinikPlusGoldHover` (`_config/branding/make_plus_gold.py` from the game's 50 × 50 textures exported by
+      `kit-export-textures.py`), drawn at tint 1.0; pressed = the game's hover texture × (0.2146, 0.1253, 0.0320). The kit script and CookInfo updated.
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).

@@ -45,6 +45,18 @@ The multiplier restored to 1.0 helps only items that START after the close.
   after one piece → count the rest (`craft-close-test.sh` with the queue step replaced by the real key); then the fix (the batch rescaled on close, or the speed-up
   applied per piece).
 
+## Recon on 3.1.0 — 2026-11-14 01:2x (remote, background, the owner's world)
+
+- The hero's queue is `/Script/ConanSandbox.CraftingQueue` (an `ItemInventory`): 59 functions, among them `CraftItems`, `IsRunning`, `IsStarted`,
+  `MulticastStartStop`, `SignalItemStartedCrafting`, `SignalItemCrafted`; NO function or property that reads or writes the current item's progress or
+  start time; its numbers: `CraftTimeMultiplier` 1.0, `CraftResultMultiplier` 1.0, `MaterialUseMultiplier` 1.0, `m_ArtisanTimeToCraftModifier` 1.0,
+  `ItemList` (the queued items). Probe `ConanExiles/_config/craft-queue-recon.lua` (read-only).
+- `CraftItems` × 2 of recipe 14000 (`TimeToCraft` 10) with the hub CLOSED: right after the calls the queue's `ItemList` held 0 items — crafting is
+  instant on this world on 3.1.0 too, so the hub's multiplier cannot be judged on it (probe `_config/craft-item-recon.lua`). `ServerSettings.ini` has no
+  craft-time line (`ItemConvertionMultiplier=1`, `CraftingCostMultiplier=1`).
+- NEXT: find why the hero crafts instantly on this world (a world setting, a perk, a mod: list the hero's perks / feats and the mods that touch
+  `RecipesTable` or the crafting component) — or test on a fresh new game; only then the hub case of hypothesis 2 by the player's path («Сделать 10»).
+
 ## Fix plan
 
 1. Recon (remote, no real input): the `CraftingQueue` fields that hold the current item's duration / progress / start time; whether they are writable.

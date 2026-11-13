@@ -15,8 +15,14 @@ wind into the leaf cluster bounds, so the turning sun no longer drops leaflets f
 `-run=PythonScript -Script=_config/devkit/kit-foliage-wpo.py` (env `KRINIK_WPO_BOUND`) → move `active.txt` to `UE4/Content/Mods/KrinikConanGraphics` →
 `kit-buildmod.py KrinikConanGraphics <out>` → `active.txt` back to KrinikConanUI. The kit asset is modified in place (backup `kit_asset_backups/M_Foliage.uasset.orig`).
 Load order: before KrinikConanGameplay. All foliage on `M_Foliage` gets the bound.
+**Rebuilt on the 3.1.0 kit (CL 383024) 2026-11-14 00:2x (plan 53 step 10).** The Epic update REPAIRED our in-place edit: the kit's `M_Foliage.uasset` came back
+byte-equal to `kit_asset_backups/M_Foliage.uasset.orig` (the 3.0.1-era original — the source material did not change between the kits), bound 0 again. So after
+every kit update: re-run `kit-foliage-wpo.py` (report «before 0.0, after 100.0, saved true»), then the build. The cooked result read against the game's 3.1.0
+`M_Foliage` (`stale-copy-check.py … --keep` → the two `M_Foliage.json` of uaj compared by tagged property): only `MaxWorldPositionOffsetDisplacement` (ours) and
+`StateId` (a GUID re-made by every save) differ — the material graph is the game's 3.1.0 one; the native tail (shader maps) differs in size, as any re-cook does.
+Pak 1 122 172 bytes (the 3.0.1-kit one 1 181 323). The shipped pak is git-ignored since 2026-11-14 (it sat untracked before).
 
-## Kit pak — conservative shadow raster for foliage (REFUTED 2026-11-07 18:51 — did not reduce the blink; dropped; the patch stays in `engine_shader_patches/`)
+## Kit pak — conservative shadow raster for foliage (REFUTED 2026-11-07 18:51 — did not reduce the blink; dropped; the patch stays in `engine_shader_patches/`; the kit's `modinfo.json` description no longer names it since 2026-11-14)
 
 The owner's decision 2026-11-07 18:31 (bug 67, verbatim there): leaf shadows cast in every frame — conservative coverage in the Nanite shadow raster. The raster of
 WPO foliage is a MATERIAL shader, so the mod overrides `/FLX_Materials/Materials/Environment/Core/M_Foliage` (shared by all foliage) cooked by the kit with the patched

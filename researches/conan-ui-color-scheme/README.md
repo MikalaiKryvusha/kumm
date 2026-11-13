@@ -14,6 +14,9 @@
 2. **Brighten a game texture by a WARM per-channel tint matched to the palette, never by a grey tint.** The game's UI textures are olive / desaturated and the
    game darkens them by a grey tint (the «+»: 0.495); a grey gain above that turns the olive into cold cream (the owner's 13:18 crop). Match the rim to the
    role's colour per channel (linear gains), like `_config/mockups/plus_brightness_mockup.py` WARM.
+   **A gain above 1.0 cannot be a brush tint — bake it into our own texture** (2026-11-14, the 3.1.0 build): on screen a Slate brush tint is clamped at 1.0
+   per channel — the live «+» with tint R 1.5623 and 1.0 read the same rim pixels (188, 194, 141), a control R 0.3 changed them (133, 182, 131). So the warm
+   gain goes into a copy of the game's texture (`_config/branding/make_plus_gold.py`: linear × gain, clamp, alpha kept) drawn at tint 1.0; tints ≤ 1 stay tints.
 3. **Measure before you colour:** sample the element and its neighbours on a 4K frame (the brightest 40 pixels in a diamond / box) and state the numbers.
 
 ## Sources

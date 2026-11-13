@@ -91,6 +91,47 @@
 
 ## Entries
 
+### EXP-0520 · 2026-11-14 · ❌ · #conan #real-input #mouse-seq #hub #stand #owner-save
+class: a real-input step run on a screen state the remote assumed but did not read
+mechanized: no — the steps below; candidate: `mouse-seq.ps1` refusing an LMB while `CarouselWindow` is visible
+**Context:** case K9 (a real bow shot) right after the hub cases.
+**Tried / did:** the hub «closed» by `ActivateModule(FName('Inventory'), false, …)` (no error), the cursor left where the hover case put it (over Сила's «+»),
+then `mouse-seq` rdown → lclick → rup.
+**Result:** ❌ no shot; the LMB spent one free attribute point of the owner's hero (free 2 → 1, Сила 1 → 2). Read after: the hub was still open —
+neither `Inventory` nor `CharacterInventory` with `false` closes it. Run 3 (game relaunched — the hub closed at world entry, `move:0.5/0.5` first): the shot worked.
+**Lesson:** before any real LMB / key, READ the screen state the input assumes (the hub visible? which window has focus?) and park the cursor on empty
+space — a remote «close» that returns ok is not a closed window.
+**Trigger:** a real-input step after a stand that opened any window.
+
+### EXP-0519 · 2026-11-14 · ❌→✅ · #conan #umg #slate #tint #clamp #colour #mockup-vs-game #plan49
+class: a mockup's maths assumed an engine behaviour never seen in the engine
+mechanized: no — the rule lives in `researches/conan-ui-color-scheme/README.md` rule 2 (bake gains above 1 into a texture)
+**Context:** the attribute «+» in the owner's chosen gold #E9C27A by a per-channel brush tint (1.56, 0.99, 0.45), computed by the mockup's formula.
+**Tried / did:** the kit asset carried the tints (remote read of the live style), yet the rim read olive-yellow (188, 194, 141). Live A-B by the remote:
+R 1.5623 vs R 1.0 — the same pixels; control R 0.3 — different. Fix: the gain baked into our own textures (`make_plus_gold.py`), tint 1.0.
+**Result:** ✅ the clamp proven by a control pair; the way rebuilt in the same session.
+**Lesson:** a mockup that simulates an engine operation (here «display × tint») proves only the LOOK; the engine's own limits (a tint clamped at 1.0, an 8-bit
+vertex colour) are unknown until one live A-B pair checks the very lever — and a live lever probe costs a minute, a wrong build a kit session. Check the
+lever in game BEFORE the kit edit when the mockup's maths goes outside the default range of a parameter (here tint > 1).
+**Trigger:** a colour or brightness edit whose numbers come from a mockup and leave the parameter's ordinary range.
+
+### EXP-0518 · 2026-11-14 · ❌→✅ · #conan #devkit #kit-update #buildmod #mirror-drift #manifest #xxh128
+class: a hand-made mirror of a vendor pipeline drifts when the vendor's source changes
+mechanized: partly — `ConanExiles/_config/devkit/kit-buildmod.py` now follows BuildMod.cs 3.1.0; the check of a built pak's manifest — `KUMM/.work/kit310/check_manifest_hashes.py` (to move into `_config/devkit/` when reused)
+**Context:** rebuilding our kit paks after the Conan devkit update 378787 → 383024 (plan 53 step 10).
+**Tried / did:** (1) WHICH of our overrides went stale — not by re-running every edit script: the Epic launcher writes only the files a version changed (or repairs), so
+`find <kit>/UE4/Content <kit>/UE4/Plugins -newermt <update start>` = the update's change list (1174 files); intersected with `Mods/<Mod>/Content/…` → none of ours; the
+one hit, `M_Foliage`, was our IN-PLACE edit the launcher repaired (bound back to 0). (2) The new UI pak came out 4.3 MB smaller — read, not shrugged: the IoStore
+containers equal in size, the loose pak lost `ModCompat.bin`; `BuildMod.cs` of the new kit no longer packs it and the cook no longer writes it; our mirror still
+listed it and UnrealPak skipped the missing file SILENTLY. The diff of the mirror against BuildMod.cs also showed `*.upipelinecache` and the manifest's `<xxh128>` block
+(the latter already in the 3.0.1 kit — an older drift).
+**Result:** ✅ mirror aligned; our XXH128 = `xxh3_128().hexdigest()` proven 10 of 10 on an official mod (Frequent_meteors); 6 of 66 installed mods (all rebuilt by their
+authors on 3.1.0) lack `ModCompat.bin` and mount.
+**Lesson:** a mirror of a vendor script must be DIFFED against the vendor's source at every vendor update — its own green exit proves nothing, because a tool fed a
+missing input often skips it silently. A size jump of a rebuilt artifact is a finding to read file by file, never noise. And a kit/launcher update reverts in-place
+edits of vendor files: keep every such edit re-appliable by a script (ours was — `kit-foliage-wpo.py`).   → link: plans/53 step 10 · `researches/conan-devkit/README.md` §4 · `games/ConanExiles/mods/KrinikConanGraphics.md`
+**Trigger:** the Conan devkit (or any vendor toolchain we mirror) updated.
+
 ### EXP-0517 · 2026-11-13 · ❌→✅ · #conan #iostore #retoc #stale-copy #reconciliation #patch #game-chunk
 class: a mod's whole copy of a vanilla asset read by the wrong view or by bytes alone
 mechanized: yes — `ConanExiles/_config/stale-copy-check.py` (the `<Mod>_P` view, imports compared, bytecode by meaning, «does the mod ship the path»), `patch-mod-asset.py` `game-chunk:<sha1>` (the in-build imported-package-names guard)
