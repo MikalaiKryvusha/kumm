@@ -76,6 +76,9 @@ now follows `SelectObject` and asks `GetIsPickupResource` of a `PickupFoliage` t
 (3)(4)(6) comments: `InteractTargetOverride` (only the downed-ally revive), the sphere-hit gate, the channel's name `Trace_Interactable`; (5) the marker flipped to
 `[TESTED]` after run 3; (7) the hit shapes are written as observed; (8) `out.value` accepted too; (9) the stale header (5/s → 10/s, the cost). Refuted: none — all nine taken.
 Run 3 re-ran the cases on the revised code (TC «Run 3»).
+Cost watch after run 3: the plate's minute lines 12:47:49 · 12:48:49 · 12:49:50 — worst 1 · 2 · **8** ms; the 8 ms minute is shared with `KrinikConanUI:HudBlink` worst
+**15** ms (12:49:38) — a whole-game stall that landed on every Lua callback running through it, not the plate's branch (0.125 ms by 200 repeats); the game then
+closed cleanly at 12:50:01 («Event loop end», no crash folder). Watch the line in the owner's next play.
 
 ## Decisions made without the owner
 
