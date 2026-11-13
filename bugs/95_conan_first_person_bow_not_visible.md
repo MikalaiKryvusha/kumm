@@ -17,6 +17,10 @@ bow; the same frame with our first-person camera edits off (control) — the dif
 
 - KrinikConanArchery `KrinikArrowAim` moves the first-person camera arm `FirstPersonCameraArm` (`fp_hip_offset` Z 11) to cancel the shot pose's 10–11 cm head drop, and
   writes its own first-person field of view (`fp_aim_fov_scale`) — game map lines 438, 578–580.
+- The numbers (`KrinikConanArchery/ue4ss/Scripts/main.lua:74–85`, read 2026-11-13): `fp_aim_offset` X −5, Y 16, Z 6 (RMB aim; `[OWNER]` 2026-10-27 «камеру нужно
+  помещать над стрелой» · «левее»), `fp_hip_offset` X −5, Y 24, Z 11 (a draw without RMB; `[OWNER]` 2026-10-28 «может в обычной стрельбе нужно сильнее правее двигать»,
+  Y 24 an `[AI]` number «до первого взгляда владельца»); measured pose: the bow 82 forward, 22 right, 15 DOWN from the camera — the camera raised by 6–11 plus the aim's
+  narrower field of view may push the bow under the frame's lower edge. Hypothesis — frames with the shift and without it decide.
 - First person in combat is the game's `AllowFirstPersonCamera` / `AllowFirstPersonCameraInCombat` (pack reference: True since 2026-10-26).
 - The camera mod KrinikConanCamera (its first-person settings) — read its notes first.
 
