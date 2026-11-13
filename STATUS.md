@@ -160,6 +160,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > first-person shadow of the hidden / owner-only body parts (UE `bCastHiddenShadow`, the game's first-person shadow setting) — bug doc to file.
 > **The owner 16:07:** `[OWNER]` «по окну квиклута баг сохраняется, что рамка првыгает в последнюю клетку» — the quick-loot selection frame jumps to the last cell
 > (the open item «quick-loot R3 (last cell of a row)» of the 2026-11-07 handover) — still live in his play; a bug doc + a fix in the next chat.
+> **The owner 16:08 (his frame, first person, the bow held, looking straight up):** `[OWNER]` «что это слева на экране, когда камеру вертикально вверх поднимаешь?» — the
+> hero's own shoulder / neck base from inside (the combat pose's full bend; KrinikConanCamera hides only `b_neck_1` and below — the shoulder is the torso mesh). Same
+> root as bug 95 (B10 baseline frames); plan 52's spine counter-bend is the fix to verify with this exact view (case B10 on the post-process route).
 > **HANDOVER 2026-11-13 16:0x +03:00 — this chat closes at ≈ 83 % context. FIRST next chat:**
 >   1. Plan 52 step 4 — the post-process look is BUILT and DEPLOYED (archery pak 1.48 MB: sound + montage + `ABP_KrinikFirstPersonLook`, NO vanilla anim override) and
 >      seen working live 16:00: `_config/fp-look-pp.lua` sets it on the hero only (`LoadAsset` needs the FULL object path), `PitchNow` follows the view, `Alpha` blends,
