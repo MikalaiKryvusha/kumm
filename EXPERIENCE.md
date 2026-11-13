@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0509 · 2026-11-13 · ❌→✅ · #conan #ue4ss #prompt #pickup #foliage #bytecode #owner-frame
+class: partial-copy-of-game-decision
+mechanized: yes — `krinik_pickup_prompt.lua` `actor_target` (the game's actor branch copied in order); game map row «A pickup bush touched once becomes an ACTOR»
+**Lesson:** a mod that predicts what a key will do must copy the game's WHOLE target choice, in the game's order — not the one branch that fit the first case.
+The «E Взять» plate asked only the foliage probe (step 3 of `UpdateHighlightTarget`); the first E on a pickup bush swaps the instance for a `BP_ResourceActor_C`
+with the same look, E keeps gathering from it by step 2, and the plate went dark over a bush the eye still saw (bug 96). Found by the owner's own `UE4SS.log`
+first (the plate's minute line proved the probe said «nothing» at his frame — no gate stall), then by a real E and a look at what spawned at 0 cm. A visible
+object that survives its «taken» state is the sign: list actors at that spot before suspecting the renderer.
+**Trigger:** any prompt, hint or highlight of ours that forecasts a game action (E, F, R, a hold).
+
 ### EXP-0508 · 2026-11-13 · ❌→✅ · #conan #stand #weapon #bow #remote #control-case
 class: stand-gear-not-verified-before-conclusions
 mechanized: no — the carrier is the recipe in the game map «Stand gear» and the HOUSE_RULES_REFERENCE row «Conan tools of 2026-11-13»

@@ -153,9 +153,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   - **Nexus quarantine — the third letter** written and SENT by the owner (11:02).
 >   - KrinikConanUI: placeholder-perk widget hooks only with the placeholders on (pack `ca3cdef`); the page arrows' generator in Conan gold (pack `d6c2897`).
 >   - The evening chat of 2026-11-10 left its work uncommitted — committed this chat (KUMM `02571b3`, pack `d3e92f9`).
+> **NOW (chat of 2026-11-13 11:46):** bug 96 FOUND and FIXED, pack `26f4cfa` pushed and deployed: a pickup bush touched once by E becomes a
+> `BP_ResourceActor_C` with the same look, E keeps gathering from it, and the plate asked only the foliage probe; `krinik_pickup_prompt.lua` now asks the game's
+> actor branch first (`GetIsPickupResource`). Runs 2–3 pass (`testcases/TC_conan_no_take_prompt_bush_2026-11-13.md`, report
+> `testcases/reports/2026-11-13_conan-bush-prompt-resource-actor.md`); review folder 83 holds the 4K frame. Judge round 1: 9 findings, all fixed; **round 2 OWED** —
+> two fresh judges failed to start (API 403, 12:4x); the bug closes DONE after a clean round 2 and the owner's play. Open there: F6 (a tool-hit resource actor).
 > **FIRST next chat (in order; the owner asked 11:06 «квик вины?» — offered: his two bugs first, then the «+», then quick wins; his pick decides):**
->   0. `bugs/96_…` — the owner's 11:09 (his play, a frame): looking at a bush, no «E Взять» prompt — `[OWNER]` «смотрю на куст, нет E Взять - баг» · «проверь»; not
->      checked yet. Leads: KrinikConanUI's prompt restyle (bug 83), the bug 80 / 82 family.
+>   0. `bugs/96_…` — the owner's 11:09: no «E Взять» over a bush — see NOW above.
 >   1. `bugs/95_…` — the bow unseen in first person: the lead is KrinikConanArchery's first-person arm shift (`fp_aim_offset` Y 16 Z 6, `fp_hip_offset` Y 24 Z 11) + the aim's
 >      narrower view. Stand: the honest bow (game map «Stand gear»: the hero CRAFTS bow 51401; `AddItemTemplate` weapons cannot be wielded), the run direction along
 >      the shore (game map «Sprint stand direction»). Frames first person, bow drawn, shift on vs off.

@@ -33,6 +33,12 @@ foliage pickups and the plate is right to stay silent; then the take goes throug
   played at 08:59) → the probe there, also by mesh names without «egg» (the nest mesh itself with eggs) and the E target the game picks (trace the
   interaction under the crosshair at that nest).
 
+- **2026-11-13 12:2x — twin check from bug 96** (a touched pickup bush becomes a `BP_ResourceActor_C` that E keeps gathering; the plate now asks the game's actor
+  branch too): at the snake-egg nest by the bug-75 stand (3 eggs of `SM_SnakeEggs_single`, `PickupFoliageComponent_C_0` #15 at −41743 255720 −19848, hero 150 cm
+  off) the probe true and the plate shown; a real E → item 13011 «Egg» 0 → 1, live eggs 3 → 2, **no resource actor spawned** — eggs leave no look-alike, so this
+  bug is NOT bug 96's class. Bug 82 (DONE) closed the same symptom for these eggs; this document stays open only for the owner's own nest of 2026-11-02 08:59
+  if it was another kind — likely a duplicate of 82, to be closed with the owner's word or his spot.
+
 ## Hypotheses (ranked)
 
 1. The eggs are foliage instances of a component class or mesh outside the 55 (a nest-egg foliage type) — check the components near the hero for an egg mesh.
