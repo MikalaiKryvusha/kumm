@@ -168,6 +168,9 @@ combat system does not wield it: RMB plays an unarmed attack (substate 11 ≈ 1 
 not take such a bow up either (2026-11-13 10:21). **The recipe that works:** ingredients by `AddItemTemplate` (10012 × 7, 12001 × 7, 14174 × 7), then the hero CRAFTS
 the bow — `CraftingQueue:CraftItems(RecipeManager:GetItemByTemplateID(51401, 0))` → bow 51401 lands on the shortcut bar → a real hot-bar key («3» here) wields it
 (standing draw 11 → 11,15,16, the shot logged by KrinikConanArchery). Arrows 53612 in the backpack.
+**Sprint stand direction (2026-11-13):** from `tp_ground.sh 98739 205258` yaw 225 runs into the river after ≈ 3.5 s of sprint (the agent drowned the hero twice —
+`[OWNER]` 10:42 «я направил ебало героя вдоль берега» · «это должен был сзедать ты, чтобы не топить героя в воде»); the owner's direction ALONG the shore — control
+yaw ≈ 350 at (99277, 204713) — is the stand's run direction; keep runs ≤ 3 s.
 Working route (KrinikConanArchery 0.7.0): at take-off `ExitSubstate(8)` for the player with the bow in hand; after a refused `StartJump` while
 attacking with the bow — `LaunchCharacter(0, 0, JumpZVelocity 420)`. Out params from Lua: `local o = {}; c:InSubstate(s, o); o.Success`. Bow in
 hand = an attached `BP_bow_2h_C` on `Socket_Bow` (on the back — `sheath_bow`).
