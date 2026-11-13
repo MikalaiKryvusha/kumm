@@ -51,6 +51,22 @@ bow; the same frame with our first-person camera edits off (control) — the dif
 - Existing mods (web, 2026-11-13 13:1x, two searches): none for Conan Exiles that shows the held weapon in first person; a 2018 Steam thread says the game's first
   person shows no weapons in general (steamcommunity.com/app/440900/discussions/0/1694922526913807608). Sheathed-weapon mods (Wonderbody, IQoL) are another feature.
 
+**DECIDED 2026-11-13 13:20 — option B:** `[OWNER]` «Б (советую). Пока лук в руках и не натянут, верх тела не наклоняется, наклоняется только взгляд. Тогда, опустив
+голову, вы увидите грудь, руки и лук, как они видны со стороны. Правка в анимации героя через кит; сначала разведка анимации.» Next: recon of the hero's anim
+blueprint (where the first-person view pitch bends the upper body), then the kit edit.
+
+## Recon of the anim blueprint (2026-11-13 13:2x, kit 3.0.1 `F:/CEUE5Devkit/UE4/Content/Master_AnimBP/AB_human_male.uasset`, 18.5 MB, editor graphs present)
+
+- Read by `uaj tojson … VER_UE5_6` (names, exports) + `uaj func … ExecuteUbergraph_AB_human_male` → `_config/devkit/kpseudo.py` (2 025 lines). The hero's update
+  (ubergraph statements 1171–1221): third person — `AdjustForLookingUpAndDownThirdPerson` = `MakeRotator(Roll = −Pitch) × 0.15`; first person —
+  `AdjustForLookingUpAndDownFirstPersonAgressive` = `MakeRotator(Roll = −Pitch)` (the FULL view pitch) and `AdjustForLookingUpAndDownFirstPersonPassive` =
+  Aggressive × 0.15; `FirstPersonPelvisHeight` = (0, −8, 100) standing, (0, −12, 100 − crouched half height) crouched.
+- The AnimGraph reads them through property access (`AnimBlueprintExtension_PropertyAccess_0`) and keeps two cached poses `FirstPersonPosePassive`
+  (`AnimGraphNode_SaveCachedPose_83`) and `FirstPersonPoseNotPassive` (`_64`). Working reading: the bow held = the combat («not passive») pose with the FULL bend —
+  the measured rigid upper body; option B = the passive 15 % share while the bow is held and not drawn (the draw keeps the full bend — the aim follows the view).
+- NEXT: in the AnimGraph — which bone-modify node takes `…Agressive` / `…Passive` (bone, space), what selects Passive vs NotPassive (the blend's condition); then the
+  smallest native edit (the selection condition gets «bow drawn», or the Aggressive value = Passive while the bow is held and not drawn), kit build, frames.
+
 ## Options (the owner's choice — the look of first person)
 
 - A. Keep the game's first person: the bow is seen on the RMB draw only (as now) — the bug closes as the game's design.
