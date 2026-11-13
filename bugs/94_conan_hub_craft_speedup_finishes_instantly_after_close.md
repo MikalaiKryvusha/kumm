@@ -36,7 +36,14 @@ The multiplier restored to 1.0 helps only items that START after the close.
   53000 lands on the SHORTCUT BAR) in ≤ 1.5 s, with world dilation 1.0, `CraftTimeMultiplier` 1.0, `m_ArtisanTimeToCraftModifier` 1.0, no craft line in
   `ServerSettings.ini` — cause unknown (open). The 2026-10-31 run measured a bandage at ≈ a minute with the multiplier 1.0 in the open inventory.
 - In the open hub 10 × 14000 were done in < 4 s and 30 × 14000 before the first count (≈ 1.3 s).
-- Open question to the owner (chat 10:07): where he crafted (the hero's inventory or a station) and which item.
+- Open question to the owner (chat 10:07, asked again 11:02): where he crafted (the hero's inventory or a station) and which item.
+- **The owner's answer** — `[OWNER]` 2026-11-13 11:03 «вот тут изготавливал, на вкладке Снаряжение» with a frame: the hero's own crafting column «Создание предметов»
+  on the «Снаряжение» tab, buttons «Сделать» (R), «Сделать много» (Space), «Сделать 10» (F), «Очистить очередь» (X), the queue row «Очередь создания».
+- **Hypothesis 2 (to test next):** «Сделать 10» / «Сделать много» put ONE queue entry for many pieces; the multiplier read once at that entry's start applies to the
+  whole batch, so the batch's rest finishes almost at once after the close. The agent's runs queued N separate entries (`CraftItems` × N), each reading the
+  multiplier at its own start — why the burst did not show. Test by the owner's path: the hub open → a real F («Сделать 10») on a recipe of a few seconds → close
+  after one piece → count the rest (`craft-close-test.sh` with the queue step replaced by the real key); then the fix (the batch rescaled on close, or the speed-up
+  applied per piece).
 
 ## Fix plan
 

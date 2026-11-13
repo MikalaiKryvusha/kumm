@@ -95,7 +95,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 ## ❓ Awaiting human review (interviews / homework)
 
 - ✉️ **Nexus quarantine of mod 65 (0.9.0) — the THIRD letter is written 2026-11-13 09:09** (`[OWNER]` 09:03 «давай писать третье письмо»): `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_followup_2.txt`,
-  a reply in ticket 276571; the three SHA-256 in it re-hashed from the release zip (match). The owner sends it.
+  a reply in ticket 276571; the three SHA-256 in it re-hashed from the release zip (match). SENT by the owner (`[OWNER]` 2026-11-13 11:02 «пиьсмо я отправил, спасибо»).
 - ✅ The pack's code of the evening chat 2026-11-10 + bug 93 build 7 — committed and pushed 2026-11-13 10:5x (pack `d3e92f9`, 5 judge rounds, the last clean).
 - ✅ **the «+» brightness (plan 49)** — decided 13:41 G1 (Conan gold `#E9C27A`), confirmed 19:11 with the page arrows in the same style; TO BUILD (handover item 4).
 - ✅ bug 91 — the owner picked V1 13:04 (a plate above the diamond); built in the kit, deployed 13:12 (pack `eef82bf`); the real-hover check waits for a free PC.
@@ -154,6 +154,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   - The «+» and the page arrows in Conan gold (the owner's G1): the arrow generator's colours set and the TGAs regenerated (pack `d6c2897`); NEXT — one kit
 >     session: import the six arrows, the «+» tint in `W_Attribute`, build KrinikConanUI, deploy, frames 4K + 1080p (plan 49, the 2026-11-13 line).
 >   - KrinikConanUI: the placeholder-perk widget hooks only with the placeholders on (pack `ca3cdef`).
+>   - **The owner played build 7: `[OWNER]` 11:01 «спринт и стрельба работают»** — and filed: the bow is not seen in first person → `bugs/95_…` (leads: our first-person
+>     camera arm shift / FOV in KrinikConanArchery); FIRST next session with the «+» kit work.
 >   - The game runs (background, build 7, the owner's test save `Game_1`, the crafted bow on slot 3); the machine lock is KUMM's until 11:15.
 >
 > **HANDOVER 2026-11-10 19:58 +03:00 — the evening chat of 2026-11-10 closes by the owner's word (`[OWNER]` 19:56 «пода доводить до стеза и закрывать чат»).**

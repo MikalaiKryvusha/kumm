@@ -1,6 +1,7 @@
 # Bug 93 — Conan: a sprint started BEFORE the draw breaks at the draw (KrinikConanLocomotion · krinik_bow_sprint)
 
-**Status:** 🔧 build 7 deployed; S1b, S3, S6 PASS by real input 2026-11-13 10:43 (report `testcases/reports/2026-11-13_conan-bow-sprint-sprint-then-draw.md`); open: S8, S9, the cost, the owner's own play (build 4 deployed 09:32) · **Severity:** S2 (the owner's playtime on the feature he named
+**Status:** 🔧 build 7 deployed; S1b, S3, S6 PASS by real input 2026-11-13 10:43 (report `testcases/reports/2026-11-13_conan-bow-sprint-sprint-then-draw.md`); **the owner's own play confirms it** — `[OWNER]` 2026-11-13 11:01 «спринт и стрельба работают»; open: S8, S9, the cost (build 4 deployed 09:32); his next remark —
+the bow unseen in first person — is bug 95 · **Severity:** S2 (the owner's playtime on the feature he named
 most important) · **Version/build:** Conan Exiles 3.0.1, pack `ConanExiles` working tree, section build 3 (2026-11-10 19:54) → build 4 (2026-11-13) ·
 **When/context:** reported by the owner 2026-11-13 09:14–09:15 after his play of 2026-11-10 19:5x–20:4x · **Fixing:** this session
 
