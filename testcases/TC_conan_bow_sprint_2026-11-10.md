@@ -23,7 +23,7 @@ Dimensions: draw on/off × sprint key on/off × direction forward/sideways × sh
 | S4b draw + sprint diagonal | RMB held, W + D + LShift 2 s | sprint (46° is inside the window; vanilla sprints diagonally too) | pass build 2 |
 | S6 draw + Shift standing | RMB held, LShift 2 s, no W | no sub 7, no stamina drain beyond the draw (judge round 1, finding 1) | **pass build 6** (11,15,16, speed 0, try true, no 7); stamina not read |
 | S8 overloaded hero, draw + sprint | (judge round 2, finding 1) | the game's own refusal of sprint for weight stays | owed |
-| S9 bow sheathed in a sprint, RMB | the path where RMB takes the bow up again (`WeaponEquipped` → `StopSprint`) | lever c keeps the sprint | owed — not met with a properly wielded bow (no «лук взят на бегу» line 10:33); seen only with a remote-attached model |
+| S9 bow sheathed in a sprint, RMB | the path where RMB takes the bow up again (`WeaponEquipped` → `StopSprint`) | the sprint holds (the third lever that covered it was removed in build 7; bring it back only with this observation) | owed — not met with a properly wielded bow (no «лук взят на бегу» line 10:33); seen only with a remote-attached model |
 | S7 crosshair on the run | S1 with a frame | the aim crosshair and spread as when walking with the draw (judge finding 7) | owed |
 | S5 control — section off | `krinik_bow_sprint` out of SECTIONS (or remote: the same input without the mod in an earlier run) | max 214, no sub 7 | pass 19:2x (live remote, before the section existed) |
 | C1 cost | the section's minute line | sum well under 1 ms a minute of gameplay | |

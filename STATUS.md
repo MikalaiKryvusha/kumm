@@ -96,8 +96,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 - ✉️ **Nexus quarantine of mod 65 (0.9.0) — the THIRD letter is written 2026-11-13 09:09** (`[OWNER]` 09:03 «давай писать третье письмо»): `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_followup_2.txt`,
   a reply in ticket 276571; the three SHA-256 in it re-hashed from the release zip (match). The owner sends it.
-- ⚠️ **The pack's code of the evening chat 2026-11-10 is UNCOMMITTED** (`ConanExiles`: bow sprint build 3, `mods.txt` Keybinds off, `PLACEHOLDER_PERKS = false`, `modpack.json`):
-  it waits for judge round 2 (handover item 1), then the commit and push.
+- ✅ The pack's code of the evening chat 2026-11-10 + bug 93 build 7 — committed and pushed 2026-11-13 10:5x (pack `d3e92f9`, 5 judge rounds, the last clean).
 - ✅ **the «+» brightness (plan 49)** — decided 13:41 G1 (Conan gold `#E9C27A`), confirmed 19:11 with the page arrows in the same style; TO BUILD (handover item 4).
 - ✅ bug 91 — the owner picked V1 13:04 (a plate above the diamond); built in the kit, deployed 13:12 (pack `eef82bf`); the real-hover check waits for a free PC.
 - (done) **2026-11-10 12:49 +03:00 — the look of the corruption «+» hover label (bug 91), the owner's pick of four** — review folder `НА ОТСМОТР НИКОЛАЕМ/81_podpis_oskverneniya`
@@ -147,10 +146,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > commands, what to verify first.
 
 > **NOW 2026-11-13 10:36 — the dayloop chat of 2026-11-13 (`[OWNER]` 09:45 «работай автономно в дневном цикле» · «буду нужен - зови голосом»):**
->   - Bug 93 (the owner's: a sprint started before the draw broke at the draw) — **build 6 PASSES S1b, S3, S6 by real input** with a bow the hero crafted
->     (`bugs/93_…`, TC). The pack's code (`ConanExiles`: `krinik_bow_sprint.lua` build 6, Locomotion `main.lua`, `mods.txt` Keybinds off, `PLACEHOLDER_PERKS = false`,
->     `modpack.json`, probes `sprint-bow-sample.lua`, `stop-sprint-probe.lua`, `craft-close-test.sh`) is UNCOMMITTED until judge round 4 (running at 10:3x) is clean;
->     then commit + push the pack. Owed: S8 overloaded, S9 sheathed bow, the cost (worst 2 ms at a 1 ms clock step → a frame-time A-B), the owner's own play.
+>   - Bug 93 (the owner's: a sprint started before the draw broke at the draw) — **build 7 PASSES S1b, S3, S6 by real input** with a bow the hero crafted
+>     (`bugs/93_…`, TC, report `2026-11-13_conan-bow-sprint-sprint-then-draw.md`); pack `d3e92f9` pushed. Owed: S8 overloaded, S9 sheathed bow, the cost
+>     (worst 2 ms at a 1 ms clock step → a frame-time A-B), the owner's own play.
 >   - Bug 94 (the owner's: items crafted in the hub finish instantly on close) — the multiplier is read at item START (measured); the first hypothesis refuted;
 >     waiting for the owner's answer where he crafted (inventory or a station) and what; on his save the hero's crafting is near-instant even without the hub.
 >   - The game runs (background, build 6, the owner's test save `Game_1`); the machine lock is KUMM's until 11:15.
