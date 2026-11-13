@@ -148,6 +148,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> ⚠️ Закрыто принудительно 2026-11-13 20:1x +03:00 на 85 % контекста: церемонии пропущены (проход судьи по передаче, обрезка STATUS, README, линтеры витрины) — долг
+> платит первый /end-chat-soft. Ложных утверждений на месте: нет (ложь «перехват срабатывает до тела функции» исправлена в bug 98 и конспекте камеры).
+> FIRST next chat: the NEXT list below from item (3); my game is closed, the machine lock released; packs pushed (KUMM `cc458d8`+, pack `459a7c5`).
+> The harness keeps its background-task output under `D:\Temp\claude\…` (the owner's folder) — the settings `env` points TEMP at `KUMM\.work\tmp` from the next start; check it.
 > **NOW 2026-11-13 20:0x +03:00 — THE BUILD RUNS ON 3.1.0 (pack `ff30fb9`, plan 53).** Target `D:\Games\Conan Exiles 3.1.0` (a junction onto the owner's download
 > folder — its name stays out of git); deployed 75/75, UE4SS 1181 on the new exe, main menu Revision 383,024 in Russian, «СБОРКА: моды 66/66» (the 3.1.0 log format
 > fixed in KrinikConanModPackManager), the owner's world `Game_1` + mod saves + his `config.lua` files copied from 3.0.1 (hash-checked), world entered three times; no
