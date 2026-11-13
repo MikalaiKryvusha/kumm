@@ -162,7 +162,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   0. `bugs/96_…` — the owner's 11:09: no «E Взять» over a bush — see NOW above.
 >   1. `bugs/95_…` — CAUSE FOUND 13:1x (the owner clarified 12:59: the HELD bow when looking down; the drawn one is seen): in the game's first person the upper
 >      body pitches with the view as one piece, the held bow stays ≈ 75° below the frame's centre at every pitch — the game's design, not our mods; no ready mod
->      found. Options A (keep) / B (upright upper body in first person — AnimBP recon, recommended) / C (a viewmodel) asked of the owner in chat. Before: the lead is KrinikConanArchery's first-person arm shift (`fp_aim_offset` Y 16 Z 6, `fp_hip_offset` Y 24 Z 11) + the aim's
+>      found. **The owner chose B 13:20** (upright upper body while the bow is held and not drawn). Recon so far (bug 95 «Recon of the anim blueprint»): `AB_human_male`
+>      sets `AdjustForLookingUpAndDownFirstPersonAgressive` = the full view pitch, `…Passive` = 15 % of it; cached poses `FirstPersonPosePassive` / `…NotPassive`.
+>      NEXT: a kit probe (`BlueprintEditorLibrary.list_graphs` / `list_output_pins` on the AnimGraph getters, method of `_config/devkit/kit-probe-bp-graph-api.py`)
+>      → the bone-modify node and what selects Passive vs NotPassive → the smallest native edit → kit build → first-person frames looking down. Before: the lead is KrinikConanArchery's first-person arm shift (`fp_aim_offset` Y 16 Z 6, `fp_hip_offset` Y 24 Z 11) + the aim's
 >      narrower view. Stand: the honest bow (game map «Stand gear»: the hero CRAFTS bow 51401; `AddItemTemplate` weapons cannot be wielded), the run direction along
 >      the shore (game map «Sprint stand direction»). Frames first person, bow drawn, shift on vs off.
 >   1a. The owner's wish 11:07 (relayed by KCCP, verbatim in `bugs/93_…` «The owner's next wish»): no aim zoom while sprinting with the bow — sprint first, then draw
