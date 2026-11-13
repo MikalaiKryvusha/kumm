@@ -151,7 +151,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **NOW 2026-11-13 20:0x +03:00 — THE BUILD RUNS ON 3.1.0 (pack `ff30fb9`, plan 53).** Target `D:\Games\Conan Exiles 3.1.0` (a junction onto the owner's download
 > folder — its name stays out of git); deployed 75/75, UE4SS 1181 on the new exe, main menu Revision 383,024 in Russian, «СБОРКА: моды 66/66» (the 3.1.0 log format
 > fixed in KrinikConanModPackManager), the owner's world `Game_1` + mod saves + his `config.lua` files copied from 3.0.1 (hash-checked), world entered three times; no
-> «too old», no missing imports. Machine lock released, no game of mine open. **NEXT (in order):** (1) the camera's first-person shadow right after loading —
+> «too old», no missing imports. Machine lock released, no game of mine open. **NEXT (in order):** (1) DONE 20:05 (the camera records at the HUD's birth, «вернули 10» right after loading; owed C4 draw, C6 frames) —
 > record at the HUD's birth (bug 98, notes «Open»); (2) rebuild the 4 patched mods on the new originals — `rebuild-krinik-paks.py --only <C> --against-original`
 > (SevereWeatherEnhanced, No_Building_Placement_Restrictions, IMM_WAR, EnhancedArmoryAndArsenal; the 3.1.0 view needs `Saved/ExtractedMods` — exists now);
 > (3) the 11 vanilla assets the patch changed under mods' whole copies (`_config/patch-rollback.py`, list in plan 53 step 5): our `M_Foliage` (KrinikConanGraphics),

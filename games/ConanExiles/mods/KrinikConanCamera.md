@@ -63,7 +63,7 @@ of the meshes WITH a shadow when shadows are surely on — in the `SwitchToThird
 `SwitchToFirstPersonCamera` hook lights at once the recorded ones that are now off (`restore_fp_shadows`). No delay, no `CastHiddenShadow`. Seen 19:52: after a
 third-person switch «записано 11», then first person «вернули 10» — body, bow, arrow `cast 1`. **Open:** the game's own third-person switch at the hero's creation
 records an unbuilt tree (1 of 12 nodes), and the delayed «герой собран» record (6 s after the birth) did not run — the pawn is not possessed yet during the load;
-a first-person switch right after loading lit 0 (19:59). Next: record at the HUD's birth. The head stays collapsed by the `b_neck_1` hide — plan 52.
+a first-person switch right after loading lit 0 (19:59) — since 20:04 a record at the HUD's birth (Hosav W_NewHealthUI_C + 2 s): seen 20:05 «записано 11», then «вернули 10». The head stays collapsed by the `b_neck_1` hide — plan 52.
 
 ## Checks
 

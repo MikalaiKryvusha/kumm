@@ -57,8 +57,9 @@ The first fix (17:19, `restore_fp_shadows`: 50 ms after the switch every mesh un
   **Corrected 2026-11-13 19:5x:** this line first said «the pre-hook runs BEFORE the blueprint body» — FALSE. Judge round 2 (UE4SS docs: a non-`/Script/` hook runs
   AFTER the body) and the game (19:49: the record in the first-person hook saw the shadows already off, «вернули 0») refuted it. The code now records in the
   third-person hook and at the hero's appearance, and lights in the first-person hook at once. Seen 19:52: «записано 11» → «вернули 10», every piece `cast 1`.
-  Open: right after loading the record is of an unbuilt tree (1 of 12 nodes) and the delayed birth record did not run — a direct first-person switch then lit 0
-  (19:59); next — record at the HUD's birth.
+  Right after loading the record was of an unbuilt tree (1 of 12 nodes) and a delayed birth record did not run (19:59: lit 0) → since 20:04 a record at the HUD's
+  birth (Hosav `W_NewHealthUI_C` + 2 s): seen 20:05 «записано 11 (HUD героя)», a direct first-person switch «вернули 10». Owed: C4 (shadows turned off again on a
+  draw?) and C6 (the shadow's first-person pose — frames for the owner's eye) before DONE.
 - C3 — errors were swallowed (the outer pcall), one bad child stopped its siblings → per-branch pcall, the error count and the first text in the log line.
 - C5 — the walk's cost was not logged → both walks' times in the log line.
 Desk test `KUMM/.work/fp_shadow_desk.lua` (the real block of `main.lua` on mocks): body, bow, arrow lit; the torch flame stays dark; a switch back cancels; an error on

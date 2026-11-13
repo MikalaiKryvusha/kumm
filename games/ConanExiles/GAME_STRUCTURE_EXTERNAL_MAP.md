@@ -7,7 +7,8 @@
 
 | Что | Где |
 |---|---|
-| Игра | `D:\Games\Conan Exiles 3.0.1` (без подпапки `Conan Exiles`; путь — одно место: `ConanExiles/targets.json`, приборы читают через `_config/game_target.py`) |
+| Игра (с 2026-11-13) | **3.1.0** (`++exiles+release-CL-383024`): `D:\Games\Conan Exiles 3.1.0` — точка соединения (junction) на папку загрузки владельца (игра стоит там по его слову; имя загрузки не попадает в git). Журнал монтирования модов в 3.1.0 другой: «Mounting mod '<название>' (folder '<Пак>' …)», успех — «Mod '…' (<Пак>) mounted successfully from …/Mods/<Пак>.pak.»; 3.0.1 писала «Mounting mod pak file: …» (KUMM plans/53) |
+| Игра (3.0.1, запаркована до приёмки 3.1.0) | `D:\Games\Conan Exiles 3.0.1` (без подпапки `Conan Exiles`; путь — одно место: `ConanExiles/targets.json`, приборы читают через `_config/game_target.py`) |
 | Запуск | `ConanSandbox\Binaries\Win64\ConanSandbox-Win64-Shipping.exe` без ключей, рабочая папка — его же (так запускает `_config/launch-bg.ps1`); ярлык владельца «Conan Exiles» на рабочем столе — та же цель (2026-10-28, по его просьбе) |
 | Лаунчер сборки | `KrinikConanLauncher.exe` в корне игры (кладёт раскатка, 2026-11-02); ярлык «Krinik Conan» на рабочем столе ведёт к нему (цель прочитана из .lnk 2026-11-03). `install.cmd` в корне игры нет — он только в распакованном архиве сборки, поэтому лаунчер из корня игры без установленной сборки отвечает на «Установить сборку» подсказкой, откуда запустить лаунчер (KUMM report `2026-11-03_conan-launcher-install-button-gold.md`) |
 | Паки модов | `ConanSandbox\Mods\*.pak` + `modlist.txt`; игра распаковывает их в `ConanSandbox\Saved\ExtractedMods\<Мод>-Windows.{pak,utoc,ucas}` |

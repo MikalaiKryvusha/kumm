@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0515 · 2026-11-13 · ❌ · #conan #ue4ss #registerhook #hook-order #game-map #bug98
+class: assumed-instead-of-read-the-map
+mechanized: no — the rule lives in the game map (GAME_ARCHITECTURE_INTERNAL_MAP, the FOV section: a hook on a BP function fires AFTER its body) and in bug 98
+**Lesson:** a UE4SS `RegisterHook` on a BLUEPRINT function (`/Game/…`) fires AFTER the function's body (UE4SS docs: a non-`/Script/` path — «callback after»; the
+second callback never runs). The 17:19 first-person shadow fix and its first redesign both assumed «before the body»; the game map already said «after» for
+`SetFieldOfViewTarget`. A judge refuted it from the docs, the game confirmed it in one remote call (the record saw the shadows already off). Before code that
+depends on a hook's timing, grep the game map for the hook kind; the cheapest proof is one live read inside the callback.
+
 ### EXP-0514 · 2026-11-13 · ❌→✅ · #hooks #transcript #owner-presence #judge #turn-origin
 class: skip-instead-of-stop
 mechanized: yes — `tools/hooks/owner-presence.mjs` `humanRecord` / `askVerdict` + `node tools/test-guards.mjs` part M (cases F1–F11, 228 of 228)
