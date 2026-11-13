@@ -12,6 +12,10 @@ name — «мод KrinikConanAim переименовываем в KrinikConanAr
 - Kit pak `Mods/KrinikConanArchery.pak` (not in git): kit in mod mode `F:\CEUE5Devkit\UE4\Content\Mods\KrinikConanArchery` (`active.txt` — one active mod per
   kit) → `UnrealEditor-Cmd … -run=PythonScript -Script=_config/devkit/kit-archery-edit.py -ModDevKit -NullRHI` → `python _config/devkit/kit-buildmod.py
   KrinikConanArchery <out>` → copy into `_unpacked/KrinikConanArchery`. `modinfo.json` `devkitRevisionNumber` 1002 (else «Mod is too old», EXP-0354).
+- **Rebuilt on the 3.1.0 kit (CL 383024) 2026-11-14 00:4x** — a re-cook only (the bow montage's vanilla did not change in the kit update; the shipped
+  `ABP_KrinikFirstPersonLook` is the same as the 15:58 pak of 2026-11-13); pak 426 877 bytes (the 3.0.1-kit one 1 480 594: no `ModCompat.bin` since the 3.1.0
+  kit, a pipeline cache added; the IoStore container the same size). Seen in game 01:32: a real draw and shot, the aim held to the RMB release (case K9 of
+  `testcases/TC_conan_kit_310_our_mods_2026-11-14.md`). The kit copy `kit/CookInfo.ini` synced with the kit (it lacked the ABP line).
 - Lua half `_unpacked/KrinikConanArchery/ue4ss` → `ue4ss/Mods/KrinikConanArchery` (install step). Load order: before `KrinikConanGameplay` (that one last).
 
 ## What it changes (manifest, version line 0.5.0–0.7.0)
