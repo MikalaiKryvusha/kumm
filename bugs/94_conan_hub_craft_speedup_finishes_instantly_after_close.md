@@ -57,6 +57,9 @@ The multiplier restored to 1.0 helps only items that START after the close.
 - The same remote path (`CraftItems`) timed a bandage at ≈ a minute on 2026-10-31 (the older save) — the instant crafting came with the owner's NEW test save
   of 2026-11-13; the mod notes name no craft-time edit (grep of `games/ConanExiles/mods/*.md`, 01:5x). So compare the two worlds first: the hero's perks / feats
   (`BP_PerkSystemComponent`), the world's settings rows in `Game_0.db`, an admin or a cheat flag left by a stand.
+- Our stand tools send no craft cheat (grep of `ConanExiles/_config/*.{sh,lua,ps1,txt}` for instant / free craft, 02:0x). Hypothesis to read first: an admin
+  flag of the owner's new save (the admin panel's cheats) — dump the boolean properties of `BasePlayerChar_C` and `FunCombat_PlayerController_C` whose names hold
+  `Craft`, `Cheat`, `Free` or `Admin` (the `craft-queue-recon.lua` walk on those two classes), compare with a fresh new game.
 - NEXT: find why the hero crafts instantly on this world (a world setting, a perk, a mod: list the hero's perks / feats and the mods that touch
   `RecipesTable` or the crafting component) — or test on a fresh new game; only then the hub case of hypothesis 2 by the player's path («Сделать 10»).
 
