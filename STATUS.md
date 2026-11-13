@@ -148,6 +148,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> ⚠️ Закрыто принудительно 2026-11-13 16:06: церемонии пропущены (проход судьи, обрезка STATUS, README, линтеры витрины) — долг платит первый /end-chat-soft.
+> Ложных утверждений на месте: нет.
+> **16:05 the owner's order** (`[OWNER]` «ПЕРЕДЕЛАТЬ ХУК!!!!!!!» · «он должен быть тебе помощником, а не препятствием!» · «я тебя явно попросил запустить мне игру, а хук
+> тупой не понимает этого!»): `tools/hooks/owner-presence.mjs` lets `launch-fg` / `game-front` through when the owner's LAST chat message asks for the game (it reads the
+> transcript); `ConanExiles/_config/game-front.ps1 -OwnerAsked` skips its own presence check (pack, uncommitted at the close — commit it first). Seen working 16:06: the
+> game (PID 30492, launched 16:04 for the owner's own check) brought forward. The owner checks the build himself and gives feedback in the next chat — the game
+> stays OPEN for him (his run now); machine lock «kumm» until 17:04. Owed: a guard self-test case for the new pass (`tools/test-guards.mjs`).
 > **HANDOVER 2026-11-13 16:0x +03:00 — this chat closes at ≈ 83 % context. FIRST next chat:**
 >   1. Plan 52 step 4 — the post-process look is BUILT and DEPLOYED (archery pak 1.48 MB: sound + montage + `ABP_KrinikFirstPersonLook`, NO vanilla anim override) and
 >      seen working live 16:00: `_config/fp-look-pp.lua` sets it on the hero only (`LoadAsset` needs the FULL object path), `PitchNow` follows the view, `Alpha` blends,

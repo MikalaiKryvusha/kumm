@@ -31,10 +31,32 @@ function idle() {
   return { busy: r.status === 5, line: (r.stdout || '').trim() }
 }
 
+// The owner's own order beats his presence (2026-11-13 16:05, [OWNER] «я тебя явно попросил запустить мне игру, а хук тупой не понимает этого!» · «он должен быть тебе
+// помощником, а не препятствием»): bringing the GAME to the front (launch-fg, game-front) passes while he types when his LAST message in the chat asks for the game —
+// launch, show, run. The guard keeps blocking only the agent's own initiative and real clicks / keys.
+const GAME_FRONT = /(launch-fg|game-front)\.ps1/i
+const OWNER_ASKS_GAME = /(запуск|запусти|покажи|показ|открой|игр|launch|show)/i
+function ownerAskedForGame(transcript) {
+  try {
+    if (!transcript || !existsSync(transcript)) return false
+    const lines = readFileSync(transcript, 'utf8').split('\n').slice(-400).reverse()
+    for (const l of lines) {
+      if (!l.includes('"type":"user"')) continue
+      const m = JSON.parse(l)
+      const c = m?.message?.content
+      const text = typeof c === 'string' ? c : Array.isArray(c) ? c.filter((x) => x?.type === 'text').map((x) => x.text).join(' ') : ''
+      if (!text || text.includes('tool_use_id')) continue
+      return OWNER_ASKS_GAME.test(text)
+    }
+  } catch { /* no transcript — the strict rule stays */ }
+  return false
+}
+
 try {
   const ev = JSON.parse(readFileSync(0, 'utf8'))
   const cmd = String(ev?.tool_input?.command ?? '')
   if (REAL_INPUT.test(cmd) && !ONLY_GIT.test(cmd) && !/\bgit\s+(add|commit|diff|log|show)\b/i.test(cmd)) {
+    if (GAME_FRONT.test(cmd) && ownerAskedForGame(ev?.transcript_path)) process.exit(0)
     const s = idle()
     if (s.busy) {
       process.stderr.write(`owner-presence: за компьютером человек (${s.line}) — команда с настоящим вводом / игрой впереди отклонена ` +
