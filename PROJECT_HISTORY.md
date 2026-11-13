@@ -3,6 +3,14 @@
 
 
 
+## 2026-11-13 18:57 +03:00 — the owner forbids D:\Temp: the agent works only in its project folder (HOUSE_RULES rule 15)
+
+Verbatim, 18:57–18:58: «перестить работать  с D:\Temp\ это моя папка, и я не пускал туда агента!» · «у тебя есть для твоего проекта рабочая дитектория - там бля и
+работай!!!» · «я её уже нахуй удаляю D:\Temp\». Done the same minutes: the one file and the empty folder the agent had created there this turn removed; the
+nine allow rules for deleting under `D:\Temp` taken out of `.claude/settings.local.json`; `TEMP` / `TMP` / `TMPDIR` of the session's processes pointed at
+`KUMM/.work/tmp` (`env` of the same file, applies from the next session start); `/.work/` in `.gitignore`. It supersedes the 2026-11-09 arrangement «deletion only
+inside D:\Temp» (memory `agents-clean-up-their-own-garbage`).
+
 ## 2026-11-13 11:08 +03:00 — STATUS «Where to continue»: the HANDOVER 2026-11-10 19:58 block, moved verbatim at the bonsai trim of the 2026-11-13 dayloop closure
 
 ### STATUS.md lines 161–190 (before the trim)

@@ -101,11 +101,13 @@
 14. **In chat the owner is told the MEANING, never a bare number.** Every bug, plan, item, case or interview is named by what the player sees
     or what breaks, in Russian words. A number may follow in parentheses only for lookup. Before sending, scan the reply for «баг NN», «п. NN», «план NN», <!-- verbatim-ok: the patterns the agent greps in its own Russian reply -->
     «#NNN» and case codes (F4, H2) standing without their meaning — rewrite each.
-15. **The agent cleans up after itself on the owner's machine.** Working files live in the session scratchpad. When a piece of work is
-    done (committed, shipped), delete its heavy working files at once, file by file: unpacks, copies of paks, frames, builds. What a later
-    chat needs goes into a repository (STATUS, `plans/`, `researches/`, the pack), never into a scratchpad — scratchpads of sessions idle
-    for 24 h are swept at session start by `tools/hooks/scratch-sweep.mjs`. A work tree outside the scratchpad (`_paksview-*`, `_text-extract-*`)
-    is named in STATUS with its size and the task that needs it; when the task closes, the tree goes.
+15. **The agent works only inside its project folder and cleans up after itself.** Working files live in `D:\work\ai_sandbox\KUMM\.work\<topic>\`
+    (git-ignored); the processes' temp folder is `.work\tmp` (`TEMP` / `TMP` / `TMPDIR` in the `env` of `.claude/settings.local.json`; in a session started
+    before that, set them in the command). `D:\Temp` is the owner's folder: the agent never writes, reads or deletes there — not even the harness scratchpad
+    that lives under it. When a piece of work is done (committed, shipped), delete its heavy working files at once, file by file: unpacks, copies of paks,
+    frames, builds. What a later chat needs goes into a repository (STATUS, `plans/`, `researches/`, the pack), never into `.work\`. A work tree outside
+    `.work\` (`_paksview-*`, `_text-extract-*`) is named in STATUS with its size and the task that needs it; when the task closes, the tree goes.
+    `[OWNER]` 2026-11-13 18:57 · verbatim in `PROJECT_HISTORY.md` entry 2026-11-13 18:57.
 16. **A game is worked with in two ways — in front and in the background; the owner picks one at the moment, the agent masters both.**
     1. Launch by the path the owner named last: Conan — `launch-fg.ps1` (in front) or `launch-bg.ps1` (background), `HOUSE_RULES_REFERENCE.md` §6.
     2. The two paths differ ONLY in whether the owner sees the game on his screen. Every instrument and every kind of work — remote calls, frames,

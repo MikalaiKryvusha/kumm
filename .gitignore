@@ -55,3 +55,5 @@ interviews/decisions/*.lock
 /FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md.state
 tools/hooks/.owner-presence-note.stamp
 tools/hooks/.owner-ask.txt
+# the agent's working files - never D:\Temp (the owner's folder, 2026-11-13 18:57)
+/.work/

@@ -52,7 +52,12 @@ function removeByEnumeration(dir) {
   rmdirSync(dir);
 }
 
+// D:\Temp — папка владельца, агенту туда нельзя ни писать, ни удалять (`[OWNER]` 2026-11-13 18:57, HOUSE_RULES п. 15, дословно — хроника
+// того же часа). Временное агента — `KUMM\.work\tmp` (`TEMP` в env настроек); в сессии со старым `TEMP` = D:\Temp хук отказывает.
+export const OWNER_TEMP = /^d:[\\/]+temp([\\/]|$)/i;
+
 export function sweep({ root, session, now = Date.now(), dryRun = false, idleHours = IDLE_HOURS }) {
+  if (OWNER_TEMP.test(resolve(root))) return { refused: 'D:\\Temp — папка владельца (HOUSE_RULES п. 15)' };
   const base = resolve(tmpdir(), 'claude') + sep;
   if (!resolve(root).startsWith(base) && !process.env.SCRATCH_SWEEP_ANY_ROOT) return { refused: `корень вне ${base}` };
   if (!existsSync(root)) return { removed: [], kept: [] };
