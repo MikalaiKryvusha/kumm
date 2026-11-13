@@ -64,14 +64,14 @@ lever is the native stop itself (who clears `bTrySprint` on the draw) — not a 
   a sprint does NOT call `WeaponEquipped` (no lever-c line in the build-6 run), the game does not clear `bTrySprint`, and the sprint holds through 7,11 →
   7,11,15,16 at 660 with the shot fired — levers a and b with the gate open from substate 11. So the owner's break is most likely judge round 2's finding 2
   (the gate shut during 11 — build 4's fix); not proven by a control run of build 3 on this stand.
-- **Build 6** (judge round 3: lever c only with substate 7 still set and a BOW item; IsPlayerControlled first): S1b, S3, S6 pass (TC). Lever c stays as cover
+- **Build 6** (judge round 3: lever c only with substate 7 still set and a BOW item; IsPlayerControlled first): S1b, S3, S6 pass (TC). Lever c (later REMOVED in build 7 — it never fired with a wielded bow) was meant as cover
   for the sheathed-bow path (case S9, owed).
 - Cost: the minute with the runs read «худший 2.000 мс» (clock step 1 ms) — finding 3 still open (frame-time A-B owed).
 - Stand lesson: a weapon made by `AddItemTemplate` cannot be wielded (neither by the agent nor by the owner, 10:21 «НЕ ПОЛУЧАЕТСЯ ЭТОТ ЛУК ВЗЯТЬ В РУКИ»); a bow the
   hero CRAFTS (`CraftItems` of a known recipe, ingredients by `AddItemTemplate`) is wielded by a real hot-bar key. Arrows from the backpack.
 
 REAL WORLD: accumulated — the owner's own build and his test save `Game_1` (his new game of 2026-11-10); data and machine — his PC; path — real keys and mouse into the
-game. S1b verified on the real world; the owner's own play of build 6 not yet.
+game. S1b verified on the real world; the owner's own play of build 7 confirms it (2026-11-13 11:01).
 
 ## The owner's next wish — the aim zoom in a sprint (2026-11-13 11:07–11:08, typed into the KCCP chat by mistake, relayed verbatim by the KCCP session)
 
