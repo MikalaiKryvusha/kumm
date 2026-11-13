@@ -158,6 +158,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **The owner's note 16:06 (his own frame, first person, the bow held):** `[OWNER]` «от стрелы тень есть, а где от всего остального?» — the arrow casts a shadow, the
 > arm, the bow and the body do not (the remote read 2026-11-13: the hero's mesh components carry `bCastHiddenShadow=false`, the head is hidden). Recon next chat:
 > first-person shadow of the hidden / owner-only body parts (UE `bCastHiddenShadow`, the game's first-person shadow setting) — bug doc to file.
+> **The owner 16:07:** `[OWNER]` «по окну квиклута баг сохраняется, что рамка првыгает в последнюю клетку» — the quick-loot selection frame jumps to the last cell
+> (the open item «quick-loot R3 (last cell of a row)» of the 2026-11-07 handover) — still live in his play; a bug doc + a fix in the next chat.
 > **HANDOVER 2026-11-13 16:0x +03:00 — this chat closes at ≈ 83 % context. FIRST next chat:**
 >   1. Plan 52 step 4 — the post-process look is BUILT and DEPLOYED (archery pak 1.48 MB: sound + montage + `ABP_KrinikFirstPersonLook`, NO vanilla anim override) and
 >      seen working live 16:00: `_config/fp-look-pp.lua` sets it on the hero only (`LoadAsset` needs the FULL object path), `PitchNow` follows the view, `Alpha` blends,
