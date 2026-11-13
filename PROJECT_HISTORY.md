@@ -3,6 +3,15 @@
 
 
 
+## 2026-11-13 22:44 +03:00 — the Claude temp folder off D:\Temp: the user TEMP / TMP → F:\Temp
+
+Verbatim, 22:43 (after the chat's closure): «разве я не просил временную папку клода на E  или F перенести». He had: 2026-10-25 16:09 «TEMP Claude — на F» (plan 33 —
+done that day: the user TEMP → `F:\Temp`, `.claude` → `F:\Claude\.claude`), then the same evening the user TEMP went to `D:\Temp` (the chronicle line «вечером, слово
+владельца» — his words not recorded); 2026-11-13 18:57 he declared `D:\Temp` his own folder, and the agent fixed only its OWN work (rule 15, the project `env` —
+which does not reach the harness), not the harness's temp — the agent's error. Done 22:44: `[Environment]::SetEnvironmentVariable('TEMP'|'TMP','F:\Temp','User')`,
+`F:\Temp` created (F 121 GB free, E 100 GB; F named on 2026-10-25 and holding `.claude`); takes effect for processes started after it — VS Code (and the harness in it)
+after a restart. `D:\Temp` — the owner removes it himself (his 18:57 word).
+
 ## 2026-11-13 22:0x +03:00 — STATUS bonsai trim (the /end-chat-soft of the dayloop chat after `resume`): the 2026-11-13 blocks of «Where to continue» from the forced closure of 20:1x back to the HANDOVER of 11:08, moved verbatim
 
 > ⚠️ Закрыто принудительно 2026-11-13 20:1x +03:00 на 85 % контекста: церемонии пропущены (проход судьи по передаче, обрезка STATUS, README, линтеры витрины) — долг

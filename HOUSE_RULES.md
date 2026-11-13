@@ -108,7 +108,8 @@
 15. **The agent works only inside its project folder and cleans up after itself.** Working files live in `D:\work\ai_sandbox\KUMM\.work\<topic>\`
     (git-ignored); the processes' temp folder is `.work\tmp`, set in EVERY command that makes temp files (`TEMP='D:\work\ai_sandbox\KUMM\.work\tmp' TMP=… <cmd>`;
     the pack's tools — its `_scratch`): the harness overrides `TEMP` / `TMP` / `TMPDIR` of its shells, the `env` of `.claude/settings.local.json` does not reach
-    them (checked 2026-11-13 21:1x). `D:\Temp` is the owner's folder: the agent never writes, reads or deletes there — not even the harness scratchpad
+    them (checked 2026-11-13 21:1x). The harness's own temp (its scratchpad, background-task output) follows the Windows USER `TEMP` — `F:\Temp` since 2026-11-13
+    22:4x (dossier row `TEMP`), never `D:\Temp`. `D:\Temp` is the owner's folder: the agent never writes, reads or deletes there — not even the harness scratchpad
     that lives under it. When a piece of work is done (committed, shipped), delete its heavy working files at once, file by file: unpacks, copies of paks,
     frames, builds. What a later chat needs goes into a repository (STATUS, `plans/`, `researches/`, the pack), never into `.work\`. A work tree outside
     `.work\` (`_paksview-*`, `_text-extract-*`) is named in STATUS with its size and the task that needs it; when the task closes, the tree goes.
@@ -227,7 +228,7 @@ the dossier step).
 | Screen | TV 3840×2160 @ 144 Hz; desktop at 300 % DPI — a probe without `SetProcessDPIAware` sees 1280×720 | `Get-CimInstance Win32_VideoController \| % {$_.CurrentHorizontalResolution, $_.CurrentRefreshRate}` |
 | Frame-time capture | only `D:\work\ai_sandbox\_tools\PresentMon-2.5.1-x64.exe`, its own `--session_name`; a hung session — `logman stop <name> -ets`; the agent's shell is elevated | `& '<path>' --help` |
 | Auto-lock | off | `(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System').InactivityTimeoutSecs` |
-| `TEMP` | `D:\Temp` (the owner's folder — rule 15); the harness gives its shells `TEMP=D:\Temp`, `TMPDIR=/d/Temp` whatever the project `env` says (2026-11-13); Claude home `%USERPROFILE%\.claude` → `F:\Claude\.claude` | `[Environment]::GetEnvironmentVariable('TEMP','User')`; in a session — `echo "$TEMP $TMPDIR $KAIF_VOICE"` |
+| `TEMP` | the user `TEMP` / `TMP` = **`F:\Temp`** since 2026-11-13 22:44 by the owner's word (PROJECT_HISTORY entry 2026-11-13 22:44; was `D:\Temp` — the owner's folder, rule 15). The harness gives its shells the TEMP of the process that started VS Code — the project `env` does not move it; a session started before 22:44 keeps `D:\Temp` until VS Code restarts. Claude home `%USERPROFILE%\.claude` → `F:\Claude\.claude` | `[Environment]::GetEnvironmentVariable('TEMP','User')`; in a session — `echo "$TEMP $TMPDIR $KAIF_VOICE"` |
 | Crash dump | kernel dump (`CrashDumpEnabled` 2, `AutoReboot` 0) into the dedicated 8 GB file `C:\dump\MEMORY.DMP` — moved back from `D:\dump` on 2026-11-13 14:10 by the owner's word (C has room, D does not); takes effect at the next boot, `D:\dump` is queued for deletion at that boot (`PendingFileRenameOperations`). The file is pre-allocated at boot and held open — 8 GB on disk is the reserve, not a crash | `(Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\CrashControl').DedicatedDumpFile`; `Test-Path D:\dump` |
 | Shells | Windows PowerShell 5.1 (no `pwsh`) · Git Bash 5.2.21 · `cmd` | `$PSVersionTable`; `bash --version` |
 | Encodings | console UTF-8; ANSI 1251 — `Set-Content`/`Add-Content` only with `-Encoding utf8`; PowerShell `ru-RU` | `[Console]::OutputEncoding.WebName` |
