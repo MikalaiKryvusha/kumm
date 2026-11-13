@@ -157,7 +157,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   Plan 53 step 13: the game's mod list got our texts back (66/66, the note of pak-less mods now derived from the manifest; seen in the «Моды» screen) — open:
 >   the KrinikConanGraphics row of `_config/public_release/mods-table.mjs` lacks the foliage-shadow fix (storefront text — the owner's proofreading), the paks
 >   uncompressed (judge finding — size only, next rebuild). My test click spent one free attribute point of the owner's hero on Сила (2 → 1 free). Bug 94: the
->   hero crafts INSTANTLY on this world (queue empty right after `CraftItems`) — find why first (`bugs/94_…` «Recon on 3.1.0»). Bug 98: C4 PASS (01:38 — the
+>   hero crafts INSTANTLY on this world (queue empty right after `CraftItems`) — find why first (`bugs/94_…` «Recon on 3.1.0»;
+>   02:14: no admin / cheat flag on the hero or his controller — next: the world's settings rows, the recipe on 3.1.0, a fresh new game). Bug 98: C4 PASS (01:38 — the
 >   first-person shadow flags stay on after the switch and mid-draw); C6 frame in review folder 85 (`pokaz.html`, opened for the owner 01:35 — whether it reached his
 >   screen is not checked) — his verdict closes the bug. PACK COMMITTED `0f4b7dc` (pushed) after 3 judge rounds (31 findings: fixed 25, deferred 1 — paks
 >   uncompressed, refuted 5); judge round 4 (02:0x) — 2 low, fixed in pack `5bfd6de` (pushed; round 5 not run — two one-line
