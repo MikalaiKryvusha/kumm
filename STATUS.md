@@ -148,10 +148,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **PARKED 2026-11-13 21:44 +03:00 — plan 53 step 12 (other authors' stale vanilla copies), for a couple of days by the owner's word** (`[OWNER]` 21:43 «давай пока нашши
+> моды делать» · 21:44 «пару дней дадим остальным мөд5рам их моды обновить»). State: 3 of 11 done and installed, not seen in game (Storage Reach and LegitReligious tables
+> rebuilt on 3.1.0; EAA's crafting station = the game's chunk, new plan line `game-chunk:`); BMNB animal pen, LBPR ×2, 4 map tiles, MSCasaDesFlores' orb — the table in
+> plan 53 step 12. Resume: `check-mod-updates.py --since 2026-11-03 --all` first (21:4x: 6 of 66 authors updated since the beta; Hair We Go's 21:36 upload taken and
+> deployed). NOW: our own mods (KrinikConanGraphics `M_Foliage` stale on 3.1.0, the «3.0.1» under the menu logo — KrinikConanUI kit build, list below).
+> The game, when launched, goes in FRONT (`launch-fg.ps1`, the owner 21:13). Voice comments during all work (HOUSE_RULES rule 13, the owner 21:30).
 > ⚠️ Закрыто принудительно 2026-11-13 20:1x +03:00 на 85 % контекста: церемонии пропущены (проход судьи по передаче, обрезка STATUS, README, линтеры витрины) — долг
 > платит первый /end-chat-soft. Ложных утверждений на месте: нет (ложь «перехват срабатывает до тела функции» исправлена в bug 98 и конспекте камеры).
 > FIRST next chat: the NEXT list below from item (3); my game is closed, the machine lock released; packs pushed (KUMM `cc458d8`+, pack `459a7c5`).
-> The harness keeps its background-task output under `D:\Temp\claude\…` (the owner's folder) — the settings `env` points TEMP at `KUMM\.work\tmp` from the next start; check it.
+> The harness keeps its background-task output under `D:\Temp\claude\…` (the owner's folder). CHECKED 2026-11-13 21:1x: the settings `env` does NOT move it — the harness
+> overrides `TEMP` / `TMP` / `TMPDIR` of its shells (`D:\Temp`) while the other `env` lines arrive (`KAIF_VOICE=eugene` seen); commands set them per call (rule 15).
 > **NOW 2026-11-13 20:0x +03:00 — THE BUILD RUNS ON 3.1.0 (pack `ff30fb9`, plan 53).** Target `D:\Games\Conan Exiles 3.1.0` (a junction onto the owner's download
 > folder — its name stays out of git); deployed 75/75, UE4SS 1181 on the new exe, main menu Revision 383,024 in Russian, «СБОРКА: моды 66/66» (the 3.1.0 log format
 > fixed in KrinikConanModPackManager), the owner's world `Game_1` + mod saves + his `config.lua` files copied from 3.0.1 (hash-checked), world entered three times; no

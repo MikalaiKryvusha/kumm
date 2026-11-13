@@ -87,23 +87,28 @@
     7. How the stand was set up — one line in the game map.
 12. **The agent installs a CLI tool it needs by itself** (`winget`, `pip install --user`, `npm i -g`, `cargo install`), checks it by its
     version and writes one line into the reference.
-13. **While the game is open, the run is narrated by voice — in general, not every step.** At a run's start and when its purpose changes, one phrase: what is
-    tested and what will look different from the usual build (a mod part switched off for a control case, a stand teleport, killed NPCs). The owner sees
-    the game on his screen even on the background path. `[OWNER]` 2026-11-03 19:26–19:27.
+13. **The agent comments its work by voice REGULARLY — during all work, game or no game.** One or two sentences at every finished step, every finding and
+    every change of direction (what was done, what was found, what is next), and never more than 5 minutes of silence while working. With the game open, also
+    at a run's start and when its purpose changes: what is tested and what will look different from the usual build (a mod part switched off for a control
+    case, a stand teleport, killed NPCs). The text in chat repeats what was said. The hook `tools/hooks/voice-reminder.mjs --always` (PostToolUse, wired in
+    `.claude/settings.local.json`) reminds after 5 minutes of silence — the newest `voice/*.txt` is the last phrase. `[OWNER]` 2026-11-03 19:26–19:27 (with
+    the game) · 2026-11-13 21:12–21:30 (all work, a project rule; verbatim in `PROJECT_HISTORY.md` entry 2026-11-13 21:30).
     1. **The phrase is Cyrillic words only — no Latin letter, no digit, no unit sign.** The project is said in Cyrillic letter names (the voice file's
        phrase «Николай, это Кей Ю Эм Эм»); numbers and units in Russian words; never KUMM or KAIF in Latin, «A-B», a cvar, «31 %» or «140 мс». <!-- verbatim-ok: the spoken phrase itself -->
        The hook `tools/hooks/voice-cyrillic-gate.mjs` (PreToolUse, Bash | PowerShell) refuses a voice call whose phrase file holds any of them. `[OWNER]` 2026-11-09 20:15–20:16.
     2. **Voice — file first:** Write the phrase into `voice/<YYYY-MM-DD_HH-MM-SS>_<meaning>.txt` (Latin meaning, the folder is committed — the project's history).
-    3. Speak it: `node .kaif/tools/contour/voice-soft.mjs --file voice/<…>.txt --play` with the env of `.claude/settings.local.json` (`KAIF_VOICE_RENDER` = the
-       Silero v5 eugene renderer in `D:/work/ai_sandbox/tools/silero_tts`, its README; beeps 2.5) — in a shell without that env, export the three `KAIF_VOICE_*`
-       lines first. The tool is KAIF 2.10's (decision №156), taken ahead of the update; the timbre is the owner's tuned one. `[OWNER]` 2026-11-08 23:09–23:10.
-    4. Read its `voice log:` and `voice-soft:` lines and the exit code; a recording starts only after they were read.
+    3. Speak it IN THE BACKGROUND with the Glass chime (never the beeps): `D:/work/ai_sandbox/tools/silero_tts/venv/Scripts/python.exe -I
+       D:/work/ai_sandbox/tools/silero_tts/say.py --file voice/<…>.txt` with `TEMP`/`TMP` set to `.work/tmp` in the command (rule 15). The voice and its rules —
+       `D:/work/ai_sandbox/tools/silero_tts/VOICE_RULES.md` («мягкий голос с Glass», the owner's final pick of 2026-11-09). <!-- verbatim-ok: the name of the voice file -->
+       `[OWNER]` 2026-11-09 (memory `owner-voice-and-call-rules`) · 2026-11-13 21:13 (the beeps of `voice-soft.mjs` refused again).
+    4. Read its `soft voice:` line and the exit code; a recording starts only after they were read.
 14. **In chat the owner is told the MEANING, never a bare number.** Every bug, plan, item, case or interview is named by what the player sees
     or what breaks, in Russian words. A number may follow in parentheses only for lookup. Before sending, scan the reply for «баг NN», «п. NN», «план NN», <!-- verbatim-ok: the patterns the agent greps in its own Russian reply -->
     «#NNN» and case codes (F4, H2) standing without their meaning — rewrite each.
 15. **The agent works only inside its project folder and cleans up after itself.** Working files live in `D:\work\ai_sandbox\KUMM\.work\<topic>\`
-    (git-ignored); the processes' temp folder is `.work\tmp` (`TEMP` / `TMP` / `TMPDIR` in the `env` of `.claude/settings.local.json`; in a session started
-    before that, set them in the command). `D:\Temp` is the owner's folder: the agent never writes, reads or deletes there — not even the harness scratchpad
+    (git-ignored); the processes' temp folder is `.work\tmp`, set in EVERY command that makes temp files (`TEMP='D:\work\ai_sandbox\KUMM\.work\tmp' TMP=… <cmd>`;
+    the pack's tools — its `_scratch`): the harness overrides `TEMP` / `TMP` / `TMPDIR` of its shells, the `env` of `.claude/settings.local.json` does not reach
+    them (checked 2026-11-13 21:1x). `D:\Temp` is the owner's folder: the agent never writes, reads or deletes there — not even the harness scratchpad
     that lives under it. When a piece of work is done (committed, shipped), delete its heavy working files at once, file by file: unpacks, copies of paks,
     frames, builds. What a later chat needs goes into a repository (STATUS, `plans/`, `researches/`, the pack), never into `.work\`. A work tree outside
     `.work\` (`_paksview-*`, `_text-extract-*`) is named in STATUS with its size and the task that needs it; when the task closes, the tree goes.
@@ -222,7 +227,7 @@ the dossier step).
 | Screen | TV 3840×2160 @ 144 Hz; desktop at 300 % DPI — a probe without `SetProcessDPIAware` sees 1280×720 | `Get-CimInstance Win32_VideoController \| % {$_.CurrentHorizontalResolution, $_.CurrentRefreshRate}` |
 | Frame-time capture | only `D:\work\ai_sandbox\_tools\PresentMon-2.5.1-x64.exe`, its own `--session_name`; a hung session — `logman stop <name> -ets`; the agent's shell is elevated | `& '<path>' --help` |
 | Auto-lock | off | `(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System').InactivityTimeoutSecs` |
-| `TEMP` | `D:\Temp`; Claude home `%USERPROFILE%\.claude` → `F:\Claude\.claude` | `[Environment]::GetEnvironmentVariable('TEMP','User')` |
+| `TEMP` | `D:\Temp` (the owner's folder — rule 15); the harness gives its shells `TEMP=D:\Temp`, `TMPDIR=/d/Temp` whatever the project `env` says (2026-11-13); Claude home `%USERPROFILE%\.claude` → `F:\Claude\.claude` | `[Environment]::GetEnvironmentVariable('TEMP','User')`; in a session — `echo "$TEMP $TMPDIR $KAIF_VOICE"` |
 | Crash dump | kernel dump (`CrashDumpEnabled` 2, `AutoReboot` 0) into the dedicated 8 GB file `C:\dump\MEMORY.DMP` — moved back from `D:\dump` on 2026-11-13 14:10 by the owner's word (C has room, D does not); takes effect at the next boot, `D:\dump` is queued for deletion at that boot (`PendingFileRenameOperations`). The file is pre-allocated at boot and held open — 8 GB on disk is the reserve, not a crash | `(Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\CrashControl').DedicatedDumpFile`; `Test-Path D:\dump` |
 | Shells | Windows PowerShell 5.1 (no `pwsh`) · Git Bash 5.2.21 · `cmd` | `$PSVersionTable`; `bash --version` |
 | Encodings | console UTF-8; ANSI 1251 — `Set-Content`/`Add-Content` only with `-Encoding utf8`; PowerShell `ru-RU` | `[Console]::OutputEncoding.WebName` |

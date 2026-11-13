@@ -12,6 +12,11 @@
 - **`/Game/Systems/Thrall/BP_ThrallSystemComponent`** — a VANILLA path shipped whole (override matrix 2026-11-06 11:55 +03:00, `mod-overrides.py`); Bosses My New Besties ships the
   same path. Load order: BMNB 3rd, this mod 15th in `modlist.txt` → this mod's copy is the one the game loads (kind 3 — plan 45 step 8, being judged).
 
+- **Two more vanilla paths shipped whole** (found by `patch-rollback.py` on 3.1.0, read 2026-11-13 21:4x by `stale-copy-check.py --old`, plan 53 step 12):
+  `/Game/Systems/Building/Placeables/BP_Master_Placeables` — the mod edits `CanBePlaced` (+306 −77 ~493 of 583 statements against 3.0.1) and `PreCanBePlacedSuccess`
+  (+5); its `SetupForBrush` differs from 3.0.1 exactly as 3.1.0's does (the author took the patch's change there). `/Game/Systems/Building/BP_BuildSystem_v2` — the
+  mod's event graph +87 −82 ~96 of 899 against 3.0.1; 3.1.0 changed ~8 statements of it — whether the author's copy holds them is not read yet. Parked with step 12.
+
 ## Open
 
 - plan 45 step 8, read 2026-11-06 12:09 +03:00 (`uaj exports` sizes against the game's copy; names of the two copies): this mod changes 6 functions — `CanBePlaced`,

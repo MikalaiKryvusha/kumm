@@ -3,6 +3,17 @@
 
 
 
+## 2026-11-13 21:30 +03:00 — regular voice comments during all work become a project rule (HOUSE_RULES rule 13); the Glass voice, not the beeps
+
+Verbatim, the dayloop chat after `resume` (the owner's order 21:11 «работай автономно в циеле»): 21:12 «говори голлсом, что делаешь» · 21:13 «игру в  фореграунд» ·
+21:13 «звук гласс а не писки» · 21:24 «гголосом ккоммннтируй» · 21:26 «ну где комментарии» · 21:30 «хочу регулярные комментарии голосом. правило проекта».
+Done the same minutes: rule 13 rewritten — voice comments at every finished step, finding and change of direction, never more than 5 minutes of silence, game or
+no game; `tools/hooks/voice-reminder.mjs` got the `--always --voice-dir` mode (the newest `voice/*.txt` is the last phrase; part N of `tools/test-guards.mjs`, 9
+cases) and is wired in `.claude/settings.local.json` with 300 s / 120 s; rule 13.3 points at `silero_tts/say.py` (Glass) instead of `voice-soft.mjs` (beeps) — the
+09.11 choice the rulebook had not caught up with (a standing falsehood, corrected). The game, when launched, goes in FRONT (`launch-fg.ps1`, rule 16.1).
+Found the same turn: the harness overrides `TEMP` / `TMP` / `TMPDIR` of its shells (`D:\Temp`, `/d/Temp`) while the other `env` lines of
+`settings.local.json` arrive (`KAIF_VOICE=eugene` seen) — the project `env` cannot move them; commands set them per call (rule 15).
+
 ## 2026-11-13 18:57 +03:00 — the owner forbids D:\Temp: the agent works only in its project folder (HOUSE_RULES rule 15)
 
 Verbatim, 18:57–18:58: «перестить работать  с D:\Temp\ это моя папка, и я не пускал туда агента!» · «у тебя есть для твоего проекта рабочая дитектория - там бля и

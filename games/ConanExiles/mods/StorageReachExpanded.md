@@ -18,6 +18,10 @@ owner's pick of 2026-09-09; manifest). Its console commands `SRE.show`, `SRE.res
 = `vanilla+own:`, `krinikBuild` with `PATCH_VIEW`. Live: the 5 commands of 3.0.1 and the 3 `SRE.*` present. Original `_patch-originals/StorageReachExpanded.pak`,
 library copy `_krinik-modified/3733835102`.
 
+Rebuilt on 3.1.0 2026-11-13 21:2x (`rebuild-krinik-paks.py --only StorageReachExpanded --against-original --install`): the installed table = the 3.1.0 game's 26 rows
+(3.1.0 added `FollowerPerk`) + the 3 `SRE.*`; the author's original lacks 6 game rows — `python -I -X utf8 ConanExiles/_config/stale-copy-check.py
+StorageReachExpanded Systems/Cheats/CustomConsoleCommandsDataTable` (exit 0; with the original's path as the third argument — exit 1).
+
 ## Open
 
-- none.
+- The 3.1.0 table in game (`FollowerPerk` and `SRE.show` in the console) — not seen yet.

@@ -22,6 +22,11 @@ in the spawn tables.
 How to read this asset of this mod: `patch-mod-asset.py extract` returns the GAME's copy for a vanilla path (retoc ranks the game's containers higher) — use the
 `_P` view instead (`researches/mod-reconciliation/GUIDE.md` step 2, the read-a-mod's-vanilla-path note).
 
+`/Game/Systems/Building/Placeables/BP_PL_Crafting_Station_AnimalPen` — a second vanilla path shipped whole (read 2026-11-13 21:4x, plan 53 step 12): every export
+equals 3.0.1 AND 3.1.0, by bytes and by bytecode meaning; only the cooked package's header differs from 3.1.0's (its parent `BP_PL_Crafting_Station` changed in 3.1.0).
+A passenger, not an edit: the game's chunk should win (`game-chunk:`) — needs a `krinikBuild` for this mod first (it has none: original pak into `_patch-originals`,
+library copy into `_krinik-modified/`, KRINIK MODIFIED). Parked with plan 53 step 12.
+
 ## How to look inside
 
 `python -I -X utf8 ConanExiles/_config/devkit/patch-mod-asset.py extract BossesMyNewBesties BMNB_SpawnDataTable <work>`.

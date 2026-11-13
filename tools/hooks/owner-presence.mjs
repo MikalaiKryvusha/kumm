@@ -31,7 +31,21 @@ const PROBE = process.env.OWNER_PRESENCE_PROBE && inTmp(process.env.CLAUDE_PROJE
 // (judge round 2, 2026-11-13); `input` keeps its extension — the bare word is everywhere.
 // + (judge 2026-11-13, finding 11) the extension-less `./_config/input`, `-EncodedCommand` (hides any call), and the input tools of the sibling projects a KUMM
 // session runs: SvarogsDream / MedievalDynasty `keys.ps1`, `mouse.ps1`, `focus-game.ps1`, `route-restart-load.ps1`, `_tools/perf-harness/shot.ps1` (SetForegroundWindow).
-const REAL_INPUT = /(mouse-seq|hover-watch|launch-fg|esc-when-idle|game-front|enter-world-focused)(\.ps1)?\b|\binput\.ps1|[\\/]input(\.ps1)?\b|(loot-aim|loot-take-clip|hub_run|m6-air-shot)\.sh|\b(keys|mouse|focus-game|route-restart-load)\.ps1\b|perf-harness[\\/]shot\.ps1|\s-(e|ec|enc|encodedcommand)\s/i
+// The encoded-command switch counts only on a powershell / pwsh call (2026-11-13 21:1x: a bare `\s-e\s` refused `grep -E …` and `ls … | grep -E` twice while he
+// typed). PowerShell takes `-ec` and any PREFIX of -EncodedCommand (-e, -en, -enc … — never -Encoding, -ExecutionPolicy), `/` or an en / em dash for `-`, a quote
+// before it, after a space, a comma or a bracket (`"-enc"`, `-ArgumentList '-NoProfile','-enc',$b`, `@('-enc', $b)`); the scan stops at a pipe or a command
+// separator (`pwsh -File x | grep -E ok` is two programs). Line continuations (`\⏎`, `` `⏎ ``) are joined first — `REAL_INPUT.test(joinLines(cmd))` (judge
+// 2026-11-13 21:3x, rounds 1–2). GAP, named: a shell held in a variable (`$PS -enc …`, `powershell @args`) is not seen — a `$VAR` branch refused `robocopy $a $b /E`,
+// `[ -n "$x" -a -e "$f" ]`, `& $node -e …` (round 2, finding 2), and the hook guards against accidents, not against a hidden call. Round 3: the scan stops at
+// `-Command` / `-File` (`-c`, `-f`) — what follows is the inner program's (`powershell -Command "robocopy a b /E"`); a line ending in `,` or `(` continues in
+// PowerShell and is joined too. GAP, named: «powershell» as a WORD in another program's arguments (`grep -e powershell -e pwsh`, prose in `git commit -m`) still
+// counts — commit messages go by `-F <file>` (AGENT_GUIDE git hygiene); `-ArgumentList "-enc …" -FilePath powershell` (the switch before the name) is not seen.
+const ENC_PREFIXES = Array.from({ length: 'encodedcommand'.length }, (_, i) => 'encodedcommand'.slice(0, i + 1)).concat('ec').sort((a, b) => b.length - a.length)
+const ENC_SWITCH = '[\\s,(@]["\']?[-/\\u2013\\u2014\\u2015](' + ENC_PREFIXES.join('|') + ')(?=[\\s"\',)]|$)'
+const REAL_INPUT = new RegExp('(mouse-seq|hover-watch|launch-fg|esc-when-idle|game-front|enter-world-focused)(\\.ps1)?\\b|\\binput\\.ps1|[\\\\/]input(\\.ps1)?\\b|'
+  + '(loot-aim|loot-take-clip|hub_run|m6-air-shot)\\.sh|\\b(keys|mouse|focus-game|route-restart-load)\\.ps1\\b|perf-harness[\\\\/]shot\\.ps1|'
+  + '\\b(powershell|pwsh)(\\.exe)?\\b(?:(?![\\s,(]["\']?[-/](?:c|command|f|file)(?=[\\s"\']|$))[^\\r\\n|;&])*?' + ENC_SWITCH, 'i')
+export const joinLines = (cmd) => cmd.replace(/[\\`]\r?\n/g, ' ').replace(/([,(])[ \t]*\r?\n/g, '$1 ')
 // A read-only command that only NAMES a tool is exempt ALONE: git, or one reader (cat, grep, rg, head, tail, ls, wc, sed -n). No chaining (`;`, `&`, `|`, a newline or a
 // lone CR — PowerShell 5.1 runs both sides of a CR) and no command inside it (`$(…)`, backticks, `(…)`, `<(…)`) — `git log $(<mouse-seq>)` and `git -c alias.x="!…"`
 // passed the earlier form (judge 2026-11-13, finding 2); `grep -n launch-fg STATUS.md` was refused while he typed (finding 8).
@@ -94,7 +108,7 @@ function humanRecord(rec) {
   if (rec?.origin?.kind === 'human') return { text: t }   // his message, an image-only one too (then no quote is in it — refused)
   return t ? { stop: true } : null
 }
-export const onlyGameFront = (cmd) => GAME_FRONT.test(cmd) && /-OwnerAsked\b/i.test(cmd) && !REAL_INPUT.test(cmd.replace(GAME_FRONT_ALL, ''))
+export const onlyGameFront = (cmd) => GAME_FRONT.test(cmd) && /-OwnerAsked\b/i.test(cmd) && !REAL_INPUT.test(joinLines(cmd).replace(GAME_FRONT_ALL, ''))
 // → '' when his ask covers this command, otherwise the reason (said in the refusal — the agent knows what to fix instead of retrying blind; finding 10).
 // The quote is ONE-SHOT: written by the agent after reading his message (its time ≥ the message's), deleted by the pass (finding 5: one quote unlocked every later
 // launch for 20 min, and an old quote matched a later message that happened to contain it).
@@ -128,7 +142,7 @@ function askVerdict(transcript, now = Date.now()) {
 try {
   const ev = JSON.parse(readFileSync(0, 'utf8'))
   const cmd = String(ev?.tool_input?.command ?? '')
-  if (REAL_INPUT.test(cmd) && !onlyRead(cmd)) {
+  if (REAL_INPUT.test(joinLines(cmd)) && !onlyRead(cmd)) {
     let why = ''
     if (!ev?.agent_id && onlyGameFront(cmd)) {
       why = askVerdict(ev?.transcript_path)

@@ -4,7 +4,8 @@
 > приступать к переносу сборки 1.0.0 WIP на неё» · 18:52 «комп твой, работай автономно. Замерами не занимаемся, занимаемся развитием сборки» · 18:53 «новая версия
 > для сборки тут D:\Instals\<…>\» (the folder's name stays out of this public repository; it is in the pack's `targets.json`) · 18:53 «можешь уже пойти в Нексус и Стим и посмотреть, какие моды из нашей сборки
 > обновились» · **Parent:** `researches/conan_patch_3_1_0/README.md` §3 (the move checklist); the previous move — `plans/33_conan_pereezd_3.0.1.md`
-> · **Status:** 🔧 started 2026-11-13 18:52 — step 1 done 18:57 · **Outbound:** —
+> · **Status:** 🔧 started 2026-11-13 18:52 — step 1 done 18:57 · steps 3b, 5–9 (partly) done 20:07 · step 12: 3 of 11 done 21:3x, PARKED 21:44 for a couple of days
+> (the owner gives the other authors time to update; our own mods meanwhile) · **Outbound:** —
 
 ## Goal vector (Achieve)
 
@@ -46,6 +47,24 @@ new game enters the world without a crash, every mod's function intact. No frame
 - [x] 3b. DONE 20:07 — all four rebuilt on the authors' new versions with `--against-original --install` (library = game: SW 10.4 MB, LBPR 3.7, EAA 131.5, IMM_WAR 253.4; the drafts removed = every one matched); seen in game 20:08 — each «mounted successfully», «СБОРКА: моды 66/66», 0 too old / missing imports / fatal, the error lines as before (Pickup+ 2, Emberlight 2). (20:1x: Severe Weather on its 11-13 version against the NEW original — 201 chunks, exactly 1 changed (`SW_ModController`), wrapper equal; the four with
       `--install` running) **Rebuild the 4 patched** on the 3.1.0 target, after the first launch (the view needs its `Saved/ExtractedMods`): `rebuild-krinik-paks.py --only <C>
       --against-original` for SevereWeatherEnhanced, No_Building_Placement_Restrictions, IMM_WAR, EnhancedArmoryAndArsenal.
+- [ ] 12. **The 11 vanilla assets the patch changed under mods' whole copies** (`patch-rollback.py`, re-run 21:1x on the installed mods — the same 11 + one gone,
+      the authors' post-beta uploads of EAA and LBPR still ship old copies). Read by the new `ConanExiles/_config/stale-copy-check.py` (the mod's INSTALLED copy vs the
+      new game, `--old` = the three-way comparison by export and, for functions, by bytecode statements «by meaning» — kismet-graft's `sig`; «entry shift only» marks
+      a stub whose only change is the event graph's entry offset). **PARKED 2026-11-13 21:44 by the owner's word** (`[OWNER]` 21:43 «давай пока нашши моды делать» ·
+      21:44 «пару дней дадим остальным мөд5рам их моды обновить») — re-run `check-mod-updates.py --since 2026-11-03 --all` first when it resumes, then this table:
+
+      | Asset (mod) | Read | Outcome · state |
+      |---|---|---|
+      | `Systems/Cheats/CustomConsoleCommandsDataTable` (Storage Reach) | table: copy 26 game rows + 3 own (3.1.0 added `FollowerPerk`) | DONE 21:2x — `vanilla+own:` rebuilt on 3.1.0, installed; the author's original lacks 6 |
+      | `Items/ItemStatModificationTable` (LegitReligious) | table: 1725 = 3.1.0 (+21 rows vs 3.0.1) | DONE 21:2x — `vanilla:` rebuilt, installed; the original lacks 72 |
+      | `Systems/Building/Placeables/BP_PL_Crafting_Station` (EAA) — the parent of every station | an older-devkit copy: every export = 3.0.1 except the «crafting ended» sound switch lacking recipe categories 13–15; 3.1.0 rewrote the event graph (+108 −89 ~47 of 262 — the queue pauses when the output is full) | DONE 21:3x — new plan line `game-chunk:` (the game's cooked chunk byte for byte, `patch-mod-asset.py` `game_chunks`), EAA rebuilt and installed; the rebuilt copy = 3.1.0 IDENTICAL. `[AI]` FORK: game's copy wins vs graft the 3 deleted cases · price: 3 categories hear the stock sound again · consulted: GUIDE kind 6 + the three-way read |
+      | `…/Placeables/BP_PL_Crafting_Station_AnimalPen` (BMNB) | every export = 3.0.1 = 3.1.0 (by bytes and meaning); only the package header differs (its parent changed) | TO DO — `game-chunk:`; BMNB has no `krinikBuild` yet: original into `_patch-originals`, library copy `_krinik-modified/`, KRINIK MODIFIED |
+      | `Systems/Building/Placeables/BP_Master_Placeables` (LBPR) | the mod edits `CanBePlaced` (+306 −77 ~493 of 583), `PreCanBePlacedSuccess` (+5); `SetupForBrush` differs from 3.0.1 exactly as 3.1.0 does (the author took the patch there) | TO READ — whether the copy = 3.1.0 + LBPR's edits (then nothing to do) |
+      | `Systems/Building/BP_BuildSystem_v2` (LBPR) | the mod's event graph +87 −82 ~96 of 899 vs 3.0.1; the patch changed ~8 statements of it | TO READ — are the patch's 8 inside the author's copy (`--show ExecuteUbergraph_BP_BuildSystem_v2`) |
+      | `FLX_Materials/…/M_Foliage` (OUR KrinikConanGraphics) | not read | our mod — taken into «our mods» work |
+      | 4 map tiles `Heightmap_x2_y3` (Mines of Set), `x1_y4` (Shemite City State), `x2_y5`, `x3_y5` (Ymir's Respite) | not read | TO READ — level mods: actors of the mod vs the patch's terrain |
+      | `Items/Weapons/Orbs/Materials/FLX/MI_Glass_Orb` (MSCasaDesFlores) — gone from 3.1.0 | not read | TO READ — its parent material still in 3.1.0? |
+
 - [ ] 3. **Library (the description the steps above follow):** the old copies of the 8 plain mods → `mods/OLD/_workshop-3.0.1/<id>`, the new → `mods/_workshop/<id>`; the 4 patched: new original into
       `_patch-originals/<Container>.pak` (old one kept as `<Container>.3.0.1.pak` until accepted), then `patch-mod-asset.py build` by each `krinikBuild` recipe;
       every recipe that fails on the new pak is a finding (the author changed the patched asset).
@@ -80,3 +99,6 @@ new game enters the world without a crash, every mod's function intact. No frame
 
 - `[AI]` The updated mods are downloaded into a separate `workshop-3.1.0` folder, not over the library — the 3.0.1 build stays restorable until 3.1.0 is accepted
   (the pattern of plan 33 step 3).
+- `[AI]` EAA's stale `BP_PL_Crafting_Station`: the game's 3.1.0 copy wins whole (`game-chunk:`), the 3 missing sound cases are not grafted back — the read says an
+  older devkit's enum, not a feature; the queue fix of 3.1.0 reaches every crafting station.
+- `[AI]` Hair We Go re-uploaded 21:36 during the move — taken at once (21:43), deployed alone (`-Only`), not seen in game yet.

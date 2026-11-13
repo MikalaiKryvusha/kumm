@@ -37,3 +37,6 @@ NOT true as read below: it re-declares vanilla item rows and ships a vanilla tab
 The `ItemStatModificationTable` chunk is replaced by the GAME's own version at every build: `_config/krinik_patches/LegitReligious_Enhanced__ItemStatModificationTable.tsv`
 = `vanilla:` (a `patch-mod-asset.py` operation), `krinikBuild` with `PATCH_VIEW` (the shared view held the game's copy of the same path — the to-zen guard caught
 it). Live after: 51/51, total 3 404 rows. Original: `_patch-originals/LegitReligious_Enhanced.pak`; library copy `_krinik-modified/3720748663`.
+Rebuilt on 3.1.0 2026-11-13 21:2x (`rebuild-krinik-paks.py --only LegitReligious_Enhanced --against-original --install`): the installed table = the 3.1.0 game's 1 725 rows
+(3.0.1 had 1 704); the author's original lacks 72 of them — `ConanExiles/_config/stale-copy-check.py LegitReligious_Enhanced Items/ItemStatModificationTable`. In game — not
+seen on 3.1.0 yet (`live-rows.lua`).

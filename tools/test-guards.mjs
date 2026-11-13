@@ -596,6 +596,34 @@ try {
   check('A2: rg --pre _config/mouse-seq.ps1 x . → refused', run('rg --pre _config/mouse-seq.ps1 x .', [said('чини тень')]), 'refused');
   check('A2: sed -n "1e <mouse-seq>" f → refused (sed is not a reader any more)', run("sed -n '1e powershell -File _config/mouse-seq.ps1' f", [said('чини тень')]), 'refused');
   check('A2: powershell -e AAAA → refused', run('powershell -e AAAA', [said('чини тень')]), 'refused');
+  // 2026-11-13 21:1x: the encoded switch is a powershell / pwsh switch only — `grep -E` was refused twice while he typed (a false hit)
+  check('E1: grep -E pattern file while he types → pass', run("grep -E 'a|b' plans/53.md", [said('чини тень')]), 'pass');
+  check('E1: ls dir | grep -i -E x while he types → pass', run("ls games/ | grep -i -E 'legit|storage'", [said('чини тень')]), 'pass');
+  check('E1: powershell -NoProfile -enc AAAA → refused', run('powershell -NoProfile -enc AAAA', [said('чини тень')]), 'refused');
+  check('E1: pwsh.exe /ec AAAA → refused', run('pwsh.exe /ec AAAA', [said('чини тень')]), 'refused');
+  check('E1 control: powershell -ExecutionPolicy Bypass -File tools/x.ps1 → pass', run('powershell -ExecutionPolicy Bypass -File tools/x.ps1', [said('чини тень')]), 'pass');
+  // judge 2026-11-13 21:3x: -Encoding is not -EncodedCommand; a continued line, a quote, an en dash, a $VAR do not hide it; a pipe ends the powershell call
+  check('E2: powershell -Command "Get-Content a.txt -Encoding utf8" → pass', run('powershell -NoProfile -Command "Get-Content a.txt -Encoding utf8"', [said('чини тень')]), 'pass');
+  check('E2: pwsh -File tools/x.ps1 | grep -E ok → pass', run("pwsh -File tools/x.ps1 | grep -E 'ok|FAIL'", [said('чини тень')]), 'pass');
+  check('E2: powershell -NoProfile \\⏎ -EncodedCommand AAAA → refused', run('powershell -NoProfile \\\n -EncodedCommand AAAA', [said('чини тень')]), 'refused');
+  check('E2: powershell -NoProfile `⏎ -enc AAAA → refused', run('powershell -NoProfile `\r\n -enc AAAA', [said('чини тень')]), 'refused');
+  check('E2: powershell "-enc" AAAA → refused', run('powershell "-enc" AAAA', [said('чини тень')]), 'refused');
+  check('E2: Start-Process powershell -ArgumentList "-enc AAAA" → refused', run('Start-Process powershell -ArgumentList "-enc AAAA"', [said('чини тень')]), 'refused');
+  check('E2: powershell –enc AAAA (an en dash) → refused', run('powershell –enc AAAA', [said('чини тень')]), 'refused');
+  check('E2 control: [ -e "$f" ] in bash → pass', run('if [ -e "$f" ]; then echo y; fi', [said('чини тень')]), 'pass');
+  // judge round 2: no `$VAR` branch (it refused these while he typed); a comma or a bracket before the switch
+  check('E3: robocopy $src $dst /E /NFL → pass', run('robocopy $src $dst /E /NFL', [said('чини тень')]), 'pass');
+  check('E3: [ -n "$x" -a -e "$f" ] && echo y → pass', run('[ -n "$x" -a -e "$f" ] && echo y', [said('чини тень')]), 'pass');
+  check('E3: & $node -e "1" → pass', run('& $node -e "1"', [said('чини тень')]), 'pass');
+  check("E3: rg -n -e '$env:TEMP' -e GetTempPath tools/ → pass", run("rg -n -e '$env:TEMP' -e GetTempPath tools/", [said('чини тень')]), 'pass');
+  check("E3: Start-Process powershell -ArgumentList '-NoProfile','-enc',$b → refused", run("Start-Process powershell -ArgumentList '-NoProfile','-enc',$b", [said('чини тень')]), 'refused');
+  check("E3: powershell @('-enc', $b) → refused", run("powershell @('-enc', $b)", [said('чини тень')]), 'refused');
+  // round 3: the inner program's switches after -Command / -File are its own; a multi-line argument array is one call
+  check('E4: powershell -NoProfile -Command "robocopy src dst /E /NFL" → pass', run('powershell -NoProfile -Command "robocopy src dst /E /NFL"', [said('чини тень')]), 'pass');
+  check('E4: pwsh -Command "git grep -e TODO" → pass', run('pwsh -Command "git grep -e TODO"', [said('чини тень')]), 'pass');
+  check('E4: powershell -File x.ps1 -Mode e2e → pass', run('powershell -File x.ps1 -Mode e2e', [said('чини тень')]), 'pass');
+  check("E4: Start-Process powershell -ArgumentList @(⏎ '-NoProfile',⏎ '-enc', $b) → refused", run("Start-Process powershell -ArgumentList @(\n '-NoProfile',\n '-enc', $b)", [said('чини тень')]), 'refused');
+  check('E4: powershell -enc AAAA -Command x (the switch before -Command) → refused', run('powershell -NoProfile -enc AAAA', [said('чини тень')]), 'refused');
   check('A2 control: git log -- _config/launch-fg.ps1 → pass', run('git log -- _config/launch-fg.ps1', [said('чини тень')]), 'pass');
   check('his ask typed mid-turn (queued, origin human) over an older «чини тень» → pass', run(FRONT, [said('чини тень', 5), tool, queued('запусти мне игру')]), 'pass');
   check('his mid-turn «стоп, подожди» after the ask → refused (the newest human message decides)', run(FRONT, [said('запусти мне игру', 5), queued('стоп, подожди')]), 'refused');
@@ -621,6 +649,62 @@ try {
   check('control: an ordinary command → pass', run('node --check kumm.mjs', [said('чини тень')]), 'pass');
 } catch (e) {
   check('part M ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
+}
+
+// ---------- N. voice-reminder, the «always» mode (2026-11-13 21:30: regular voice comments during all work — HOUSE_RULES rule 13): the newest
+// voice/*.txt is the last spoken phrase; silent longer than --after → the reminder, at most once per --every; the game mode stays as it was
+console.log('N. voice-reminder --always');
+try {
+  const VR = resolve(ROOT, 'tools/hooks/voice-reminder.mjs');
+  const d = newTmp();
+  const voice = join(d, 'voice'); mkdirSync(voice);
+  const mark = join(d, 'voice-reminder.mark');
+  const ago = (p, s) => { const t = Date.now() / 1000 - s; utimesSync(p, t, t); };
+  const phrase = (name, s) => { const f = join(voice, name); writeFileSync(f, 'Николай, это проверка.'); ago(f, s); };
+  const vr = (...extra) => spawnSync(process.execPath, [VR, '--always', '--voice-dir', voice, '--mark', mark, '--after', '300', '--every', '120', ...extra], { encoding: 'utf8' }).stdout;
+  const said = (out) => (/VOICE \(HOUSE_RULES rule 13\)/.test(out) ? 'reminded' : 'silent');
+  const first = vr();   // one run, both facts read from it (judge 2026-11-13, finding 7: the old check could not fail on «the whole session»)
+  check('no phrase at all → reminded («the whole session»)', said(first) + (/the whole session/.test(first) ? '' : ' (no «the whole session»)'), 'reminded');
+  unlinkSync(mark);
+  phrase('2026-11-13_21-00-00_old.txt', 600);
+  check('the newest phrase 10 min old → reminded', said(vr()), 'reminded');
+  check('again within --every → silent (no spam)', said(vr()), 'silent');
+  ago(mark, 200);
+  check('the mark older than --every → reminded again', said(vr()), 'reminded');
+  unlinkSync(mark);
+  phrase('2026-11-13_21-09-00_fresh.txt', 60);
+  check('a phrase 1 min old among old ones → silent', said(vr()), 'silent');
+  check('a non-txt file does not count as a phrase', (() => { unlinkSync(join(voice, '2026-11-13_21-09-00_fresh.txt')); writeFileSync(join(voice, 'x.wav'), 'w'); return said(vr()); })(), 'reminded');
+  unlinkSync(mark);
+  check('control: without --always and without --log → off', said(spawnSync(process.execPath, [VR, '--voice-dir', voice, '--mark', mark, '--after', '300'], { encoding: 'utf8' }).stdout), 'silent');
+  const log = join(d, 'game.log'); writeFileSync(log, 'x'); ago(log, 600);
+  // any VOICE wording counts here — `said` knows only the rule-13 one, and a fresh log prints the game one (judge round 2, finding 1)
+  check('control: the game mode with a stale game log → silent', /VOICE/.test(spawnSync(process.execPath, [VR, '--log', log, '--voice-dir', voice, '--mark', mark, '--after', '300'], { encoding: 'utf8' }).stdout) ? 'spoke' : 'silent', 'silent');
+  writeFileSync(log, 'x');
+  check('control of the control: the same with a FRESH game log → a VOICE line', /VOICE/.test(spawnSync(process.execPath, [VR, '--log', log, '--voice-dir', voice, '--mark', join(d, 'm3.mark'), '--after', '300'], { encoding: 'utf8' }).stdout) ? 'spoke' : 'silent', 'spoke');
+  ago(log, 600);
+  check('a subagent tool call (agent_id on stdin) → silent, the mark untouched', (() => {
+    const m4 = join(d, 'm4.mark');
+    const out = spawnSync(process.execPath, [VR, '--always', '--voice-dir', voice, '--mark', m4, '--after', '300'], { input: JSON.stringify({ agent_id: 'a1', tool_name: 'Bash' }), encoding: 'utf8' }).stdout;
+    return said(out) + (existsSync(m4) ? ' (mark written)' : '');
+  })(), 'silent');
+  // the positive control of the subagent case: the REAL hook always gets an event JSON — the main session's (no agent_id) must still be reminded (round 3, gap 5)
+  check('a main-session event JSON (no agent_id) on stdin → reminded', (() => {
+    const out = spawnSync(process.execPath, [VR, '--always', '--voice-dir', voice, '--mark', join(d, 'm6.mark'), '--after', '300'], { input: JSON.stringify({ session_id: 's', tool_name: 'Bash', hook_event_name: 'PostToolUse' }), encoding: 'utf8' }).stdout;
+    return said(out);
+  })(), 'reminded');
+  check('a FILE given as --voice-dir → silent', said(spawnSync(process.execPath, [VR, '--always', '--voice-dir', log, '--mark', join(d, 'm5.mark'), '--after', '300'], { encoding: 'utf8' }).stdout), 'silent');
+  // the REAL game-mode wiring of settings.local.json (Svarog): --log <fresh> --stamp <stale> --after 90 → its own wording, its mark at <stamp>.reminded (finding 9)
+  const stamp = join(d, 'voice-last.stamp'); writeFileSync(stamp, ''); ago(stamp, 200); writeFileSync(log, 'x');
+  const game = spawnSync(process.execPath, [VR, '--log', log, '--stamp', stamp, '--after', '90'], { encoding: 'utf8' }).stdout;
+  check('game mode: fresh log + stamp 200 s old → the game wording, mark beside the stamp',
+    (/^\{.*VOICE: the game is open/.test(game) && !/say\.py/.test(game) && existsSync(stamp + '.reminded')) ? 'ok' : game.slice(0, 80), 'ok');
+  check('a missing --voice-dir → silent (never a reminder every --every)', said(spawnSync(process.execPath, [VR, '--always', '--voice-dir', join(d, 'no-such'), '--mark', join(d, 'm2.mark'), '--after', '300'], { encoding: 'utf8' }).stdout), 'silent');
+  const deep = join(d, 'fresh-clone', '.work', 'voice-reminder.mark');
+  check('the mark folder missing (a fresh clone) → still reminded, the folder made', said(spawnSync(process.execPath, [VR, '--always', '--voice-dir', voice, '--mark', deep, '--after', '300'], { encoding: 'utf8' }).stdout) + (existsSync(deep) ? '' : ' (no mark)'), 'reminded');
+  check('control: no arguments → exit 0, silent', (() => { const r = spawnSync(process.execPath, [VR], { encoding: 'utf8' }); return `${r.status} ${said(r.stdout)}`; })(), '0 silent');
+} catch (e) {
+  check('part N ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
 
 for (const d of tmps) { try { removeByEnumeration(d); } catch (e) { console.log(`note: temp left at ${d} (${e.code || e.message})`); } }
