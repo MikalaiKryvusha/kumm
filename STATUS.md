@@ -148,7 +148,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (controller = source, the rebuilt UI pak deployed). **Next in the hub audit:** the «Параметры» portrait (a control run with the section off first), the small
 > late strips under the tab row (the 69 ms top band after Снаряжение → Таланты), then G2 — the mod elements on hub pages and their first-frame check, cases M1–M8
 > written (`testcases/TC_conan_hub_mod_elements_first_frame_2026-11-14.md`, not run; the map page lacks Simple Minimap's `markerPing`), the embedding contract;
-> bug 101 item 4 mechanism read (the newborn feat page's selection reaches our kept page 66 ms after the switch); the Таланты selection card; then the night's open list (wall jump, bug 75). Pushed 13:2x: pack `df7c244` + `7df3568`, KUMM
+> bug 101 item 4 mechanism read (the newborn feat page's selection reaches our kept page 66 ms after the switch); the run-report linter still names two
+> morning reports (`2026-11-14_conan-craft-hub-close-rescale.md` — no run moments, `…_conan-esc-flag-reset.md` — no «Functional run:» line) — their moments
+> are in bug 94 / bug 100, fill them from there, never by feel; the Таланты selection card; then the night's open list (wall jump, bug 75). Pushed 13:2x: pack `df7c244` + `7df3568`, KUMM
 > `7db5795` (5 judge rounds, the last clean). Rollback of the UI pak: `.work/keybinds/old_KrinikConanUI_1124.pak`. (c) **the owner 12:24–12:32: the hub is an MVP — it needs work and tests**; goals: no lag /
 > no jump on navigation, an easy mod-embedding mechanism, mod elements on a page's FIRST frame → the hub audit, plan 48 «The owner's words 2026-11-14» (step 1
 > done; next: real-input 144 fps run of all 9 tabs, the mod-element list and its first-frame check, the embedding contract). (d) 52 voice files renamed by their
