@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0530 · 2026-11-14 · ❌→✅ · #conan #ue4ss #hook #order #input #walljump
+class: hook-after-event
+**Context:** the wall jump had to tell «a press that began while climbing» from «the release of the press that grabbed the wall» (judge round 1).
+**Tried / did:** stamped the press by UE4SS post-hooks on the hero's two `InpActEvt_Jump_*` events and compared it with the climb start in the `StartJump` hook.
+**Result:** ❌ live — `StartJump` runs INSIDE the first event's body, so it fires before that event's post-hook: every press read the PREVIOUS press's stamp (the
+first press on the wall did nothing, the second pushed). ✅ replaced by a state the hook can read at its own moment — the time on the wall (≥ 0.4 s).
+**Lesson:** a post-hook runs after the WHOLE body of its function, including every function the body calls — never stamp «the press» in an outer event's
+post-hook for use by an inner call. Use a state already set before the inner call (a mode-change hook, the time in a state), or a pre-hook.
+**Repro:** a remote debug hook printing in both the outer event and the inner function; the print order in `UE4SS.log` shows which runs first.
+**Trigger:** any rule that compares «when the key went down» with what the game does inside the same input event.
+
 ### EXP-0529 · 2026-11-14 · ❌→✅ · #conan #locres #kit #python #enum #perks #map-claim
 class: wrong-api-assumption
 **Context:** the owner's page of perk trees and hero variables (`ConanExiles/_config/perk-trees/`, review folder 86), read offline from the 3.1.0 paks and the kit.
