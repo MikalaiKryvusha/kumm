@@ -1,8 +1,8 @@
 # Bug 103 — the farewell hook loses the real farewell when the closing turn waits for a background judge or crosses an autocompaction
 
 **Status:** 🔴 OPEN — filed 2026-11-14 23:58 +03:00 · **Severity:** S2 (a closing chat's farewell is lost or stale; the next `/resume` reads the waiting text) · **Version/build:** KUMM
-`tools/hooks/farewell-capture.mjs` as of the closure-ladder change (2026-11-14) · **When/context:** judge rounds 3–4 of the closure-ladder work (the owner's order
-2026-11-14 22:29) · **Fixing:** after the closure-ladder commit — a separate change with its own judge rounds (out of that order's scope)
+`tools/hooks/farewell-capture.mjs` as of the closure-ladder change (2026-11-14) · **When/context:** judge rounds 3–4 of the closure-ladder work <!-- attribution-ok: the order's verbatim is in PROJECT_HISTORY entry 2026-11-14 22:3x -->
+(the order of 2026-11-14 22:29, verbatim in PROJECT_HISTORY entry 2026-11-14 22:3x) · **Fixing:** after the closure-ladder commit — a separate change with its own judge rounds (out of that order's scope)
 
 ## Goal vector
 
