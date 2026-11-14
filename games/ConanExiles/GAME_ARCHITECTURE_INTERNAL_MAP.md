@@ -1031,3 +1031,22 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
 - **NPCs frozen, not killed:** `_config/freeze-npcs.lua` — `CustomTimeDilation = 0` on the humanoid / wildlife Characters within a radius (`_G.__fz={undo=true}` unfreezes the LOADED ones it re-finds; NPCs frozen at a far
   place and unloaded since are skipped — storing their refs crashed the game 2026-11-09 16:06, EXP-0495);
   `stand-keeper.sh off` can lose its answer to another remote call — check `stand-keeper.sh last` / the UE4SS line «[stand-keeper] stopped».
+
+## Journeys (read live 2026-11-14 10:0x on 3.1.0, KUMM bug 97)
+
+- **Where the state lives:** the hero's component `BP_AC_ExilesJourney` (class `BP_AC_ExilesJourney_C` → native `NewJourneyComponent` → `ExilesJourneyComponent`).
+  `NewJourneyComponent.m_JourneyData` — one row per journey (61 with the build's mods): `Name`, `CurrentStep`, `Unlocked`, `CurrentStepCounter`, `NumSteps`,
+  `StepCompletionMask`, `StepCompletionCounters`; `m_ActiveJourneyName` — the tracked one (`Survivor` stays active after the tutorial is done, so the HUD tracker
+  keeps «Нажмите (j), чтобы выбрать путешествие»). Read: `.work`-style probe `FindFirstOf('NewJourneyComponent').m_JourneyData[i].Unlocked`.
+- **Functions** (signatures read by reflection): `GetJourneyUnlockStatus(Name) → bool`, `HasJourneyRequirements(Name, MapMarker) → bool`, `UnlockJourney(Name, Silent)`,
+  `TryToUnlockJourneys(MapMarker)`, `CompleteJourney(Name) → bool`, `ClaimJourney(Name)`, `SetActiveJourney`, `SkipJourney`, `SkipToThisStep`, `IsOwnerInCreativeMode`.
+- **The rule** (table `/Game/Systems/Progression/DT_NewJourney`, bug 97 recon): a journey opens by a learned feat (`UnlockedByFeat`), a level, a found map
+  marker, or the previous journey's completion (Survivor → SurvivalShelter, Homesteader, RegionTravel_EL). Feats are items of the hero's `FeatInventory`
+  (an `ItemInventory`): `HasItemByTemplateID(templateId, quantity)` — feat 4 Warrior, 6 Archer, 8 Armorer, 9 Tanner.
+- **Mods in the table:** JaarFishing adds `ExilesFishing`, Ironlight-Core 7 `Ironlight*` rows, the Pantheon mods `InvocationsAndDesecration` / `RelicsOfFaith`;
+  Caverns of Set OVERWRITES the vanilla row `Mountaineer` (game log, `MergeDataTables (BP_Caverns_of_Set_C)`).
+- **The window:** `/Game/UI/Widgets/Journey/W_NewJourneyWindow` (native `NewJourneyWindowBase`: `RefreshGrid(bHideCompletedJourneys)`, `OnDataReplicated`,
+  `GetHideCompletedJourneys`) — hub tab index 4 («Путешествие»). Its cards `W_NewJourneyEntry_C` (native `NewJourneyEntryBase`: `JourneyRowName`, `JourneyWindow`,
+  `StatusIcon` — the lock / claimed icon, Collapsed on an open journey) are filled when the grid is built; the game's page is born at every switch, OUR hub
+  controller's kept instance is refreshed by `RefreshGrid` on every show since 2026-11-14 (bug 97). A flag set by `UnlockJourney` reaches the cards only after a
+  delay (a fresh page right after the call still showed the lock); a feat bought by `BasePlayerChar:ServerPurchaseFeat(id)` shows at once.

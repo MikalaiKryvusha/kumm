@@ -148,6 +148,22 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NEW CHAT 2026-11-14 09:51 +03:00 — /resume done, the Conan backlog shown to the owner in chat. His pick 2026-11-14 09:53 +03:00: the bugs of his play are the work, the water
+> reflections (bug 89) go to the far drawer (`[OWNER]` 09:53, verbatim in bug 89). Order taken: instant crafting (94) first, then the rest of «Баги из вашей игры»; the wall jump (a jump off a climbed wall,
+> `KrinikConanLocomotion` PLAN row) added to the queue by the owner 09:54 («еще я хотел прыжки из карабкания по вертикальным поверхностям»).**
+> **09:56 DAYLOOP by the owner's word** (`[OWNER]` 09:55 «работай автономно в дневнгм цикле») **· the gold «+» ACCEPTED** («золото интеофнйса принято и одобряю», plan 49;
+> the first-person shadow of folder 85 — no verdict yet, bug 98 C6 stays) **· loop item 1: the page arrows' diamonds even, not squashed** (his word, plan 49) **· item 2: the locked journeys (bug 97) —** `[OWNER]` 09:56 «очень важно
+> разобраться с закрытыми путешесьвиями» **·** then bug 94
+> (recon 09:5x: the instant-craft world is slot `Game_1.db` (the owner's new game of 2026-11-13), the minute-bandage world `Game_0.db` (2026-11-10) — no craft row in either
+> `dw_settings`, no buffs, no craft property).
+> **10:50 progress:** item 1 DONE in game — the arrow buttons lost their sizing TextBlock, the brushes' `ImageSize` 34.27² (kit, pak 7/7, deployed): Next
+> 55 × 54 px at 4K (was 55 × 61), ≈ 26 × 26 at 1080p. Item 2 FIXED in game — our hub controller's kept journey page was stale; `REFRESH[5]` calls the page's
+> native `RefreshGrid` on every show (my first cause claim of 10:15 rested on an invalid case — corrected everywhere, that first fix reverted). Run report
+> `testcases/reports/2026-11-14_conan-page-arrows-square-and-journeys-refresh.md`; judge rounds 1–2 done (round 2: no correctness defect); PACK `9e6a826` pushed. Item 3 (bug 94): the
+> «instant without the hub» reading is confounded (bug 94 «Correction»); the player-path stand is ready (bug 94 «The player-path stand») — the F-batch case
+> waits for a free PC (owner-presence BUSY twice at 10:4x). The harness
+> TEMP is STILL `D:\Temp` (its background-task output lands in `D:\Temp\claude\…`): VS Code was not restarted after the user TEMP moved to `F:\Temp` — told
+> the owner; the 8 leftovers in `D:\Temp` wait for that restart. Untracked on entry, not mine: `researches/pc-usb-lag/`, a Svarog PDF in `researches/svarogs-dream/`.
 > **CHAT CLOSED 2026-11-14 02:16 at the 85 % budget (dayloop): ceremonies SKIPPED — the bonsai trim of STATUS (244 lines), `check --gate-budgets`, the
 > experience lint; the next /end-chat-soft pays them. Game closed, machine lock free, KUMM and pack pushed. FIRST next chat: the owner's verdict on review
 > folder 85 (gold «+», first-person shadow), then bug 94 (instant crafting — `bugs/94_…`), then item 3 below.**
@@ -226,7 +242,7 @@ Files without the DONE tag — 29 (2026-10-18 13:45):
 - 🔧 `bugs/93_…` — the bow sprint in the owner's order: build 7, `[OWNER]` 2026-11-13 11:01 «спринт и стрельба работают»; open cases S8, S9, the cost. 🔴 `bugs/94_…` — hub craft batch
   finishes at once after the close (hypothesis 2 to test). 🔴 `bugs/95_…` — the bow unseen in first person (first next).
 - 🔧 `bugs/85_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: cause fixed in Archery + Camera; the KrinikConanUI twins open; the owner's gameplay is the check.
-- 🔴 `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; after plan 51.
+- ⏸ `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; PARKED 2026-11-14 09:53 by the owner («в дальний ящик»).
 - 🔴 `bugs/86_…` (attribute tree caption under a node icon), `bugs/87_…` (beasts walk into the hero), `bugs/88_…` (corruption debuff line fonts) — 2026-11-07, the owner's frames.
 - 🔴 The owner's bugs 55–62 (2026-10-18 13:35–13:43, a wave in 5 minutes of play) — `bugs/55_…` – `bugs/62_…`; order and plan 32 — item 00000 above.
 

@@ -91,6 +91,43 @@
 
 ## Entries
 
+### EXP-0523 · 2026-11-14 · ❌→✅ · #conan #hub #cache #stale-ui #lifecycle #bug97 #owner-saw-first
+class: a cache of game UI built once and kept past the lifecycle point where the game rebuilds its own
+mechanized: no — the rule lives in the hub controller's comment (`check_closed`) and `KrinikConanUI.md`
+**Context:** the owner: after the tutorial every journey but fishing «под замком»; our hub controller (plan 48) builds its own page of 7 tabs once per world session.
+**Tried / did:** read the hero's journey data live (`NewJourneyComponent.m_JourneyData`: 13 unlocked) vs the window (right on a fresh entry); J1: page built →
+«closed» → `UnlockJourney('Tanner')` → reopened: still locked — declared the cause, a fix written (rebuild at every close) — then the control showed J1 was
+empty: the remote «close» never closed the hub (EXP-0520) and the flag reaches the cards late (the game's own fresh page showed the same lock). J1b, honest:
+our page shown → another tab → `ServerPurchaseFeat(9)` (the window's own call) → back: the game's newborn page open, our kept page locked.
+**Result:** the cause in our code after all, proven the second time; the fix — the page's native `RefreshGrid` on every show (17 ms); the first fix reverted
+(built on J1, stale within one opening, four judge findings). Standing claims corrected in the bug, the TC, the mod notes, the game map and by voice.
+**Lesson:** (1) a kept instance must be refreshed at the lifecycle point where the game rebuilds its original (every switch) — find the page's native
+refresh first; (2) before calling a reproduction proven, run its CONTROL on the game's own path: here the game's fresh page under the same «state change»
+would have shown the change was not one; (3) a remote «close» is proven only by its effect (the controller's close log line).
+**Trigger:** keeping / pooling a game widget, a window or a data snapshot across openings.
+
+### EXP-0522 · 2026-11-14 · ❌→✅ · #conan #umg #slate #button #layout #device-pixels #plan49
+class: a widget's size taken from an unrelated property (a font's line height) instead of its own box
+mechanized: no — `kit-attribute-paging-look.py` comment and `KrinikConanUI.md`
+**Context:** the page arrows' square diamond texture drawn on a Button whose content was an EMPTIED TextBlock (min width set, font 19 «to roughly match»).
+**Tried / did:** live: button 34.27 × 39.08 (the line height 35.08 + 4); a font fit — the line height snaps to device pixels (16 / 17 / 18 / 19 → 29.99 / 31.12 /
+32.82 / 35.08), so any font value is off by up to a pixel at another resolution; font 0 still leaves a 2-px line. A Button with NO content sizes itself by its
+style brush's `ImageSize` (`SButton::ComputeDesiredSize`) — 34.27 × 34.27 on visible and hidden rows alike.
+**Result:** ✅ the glyph removed, `ImageSize` square — exact at every resolution, no font involved. Kit Python: `ImageSize` is an `FDeprecateSlateVector2D` — a
+`Vector2D` is refused and its wrapper takes no positional args; take `brush.get_editor_property("image_size")`, set its fields, write it back.
+**Lesson:** size a UI element by its own box (brush `ImageSize`, a SizeBox), never by a side effect of a text metric; prove a size live by `GetDesiredSize`
+on the remote before the kit edit — a minute vs a kit session.
+**Trigger:** an image drawn on a Button / Border whose size comes from its content.
+
+### EXP-0521 · 2026-11-14 · ❌ · #devkit #kit #concurrency #background #tools
+class: a second run of a heavy single-instance tool started while the first was still running
+mechanized: no — candidate: the kit run script refusing to start while an `UnrealEditor-Cmd.exe` lives
+**Context:** a kit edit re-run in the background after a fix, while the first background run had moved on to its pak build.
+**Tried / did:** the second run truncated the shared output file and its editor overlapped the first's cook; the outputs mixed («build exit=1», a missing pak).
+**Result:** ❌ two wasted kit sessions; the stale editor stopped by its PID, the third run alone passed.
+**Lesson:** before a kit / cook / build run, check that no `UnrealEditor-Cmd.exe` of mine lives and wait for the first run's notification; one output file per run.
+**Trigger:** re-running any background build after a quick fix.
+
 ### EXP-0520 · 2026-11-14 · ❌ · #conan #real-input #mouse-seq #hub #stand #owner-save
 class: a real-input step run on a screen state the remote assumed but did not read
 mechanized: no — the steps below; candidate: `mouse-seq.ps1` refusing an LMB while `CarouselWindow` is visible

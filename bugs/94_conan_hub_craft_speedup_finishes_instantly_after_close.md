@@ -66,6 +66,31 @@ The multiplier restored to 1.0 helps only items that START after the close.
 - NEXT: find why the hero crafts instantly on this world (a world setting, a perk, a mod: list the hero's perks / feats and the mods that touch
   `RecipesTable` or the crafting component) — or test on a fresh new game; only then the hub case of hypothesis 2 by the player's path («Сделать 10»).
 
+## Correction 2026-11-14 10:20 +03:00 — the «refuted» above is NOT evidence
+
+The first hypothesis was «refuted» by remote `CraftItems` runs — and the same remote path crafts INSTANTLY on this world even with `CraftTimeMultiplier` 33.3
+(3 × recipe 14000 done in 1.5 s), so it could neither confirm nor refute anything about item durations. The owner's own words describe the opposite of
+«instant without the hub»: in the open hub the items were crafting at a visible pace, and only the CLOSE made them finish at once — exactly the first
+hypothesis (an item started under multiplier 0.03 keeps a 0.03 · T game-time duration; after the close the world runs 33 × faster in real time). Also read
+2026-11-14 10:0x: not creative mode (`IsOwnerInCreativeMode` false), no craft field on the PlayerState, CheatManager, GameState, GameMode; the world files
+`Game_0` / `Game_1` carry no craft setting (`dw_settings` 8 rows each, no buffs, no craft property). NEXT: the player's path — the hub's crafting column,
+the game's own «Сделать» / «Сделать 10» handlers (a direct call or a real key), the hub closed after one piece, the rest counted; and the remote path's
+instant crafting explained separately (what the UI's handler passes that the bare `CraftItems` call does not).
+
+## The player-path stand (2026-11-14 10:4x, live, the owner's world; probes in `KUMM/.work/arrows/`)
+
+- The hub's crafting column is the native `CraftingManagerGUI` (`W_CraftingManagerGUI_C`): the buttons' handlers `SlotCraftButton` («Сделать», R),
+  `SlotCraftAllButton` («Сделать много», Space), `SlotCraftTenButton` («Сделать 10», F), selection `m_CurrentlySelectedRecipe` (a `RecipeItem`, `TemplateID`),
+  the queue `m_CraftingQueue`. The queue itself has ONE entry point, `CraftingQueue:CraftItems(Recipe)` — no count; «10» / «много» are the GUI's own loops.
+- A recipe is selected by a REAL click on its icon (`mouse-seq.ps1`, the first click after bringing the game forward may only focus — click twice, then read
+  `m_CurrentlySelectedRecipe` by the remote before pressing a key). R crafted one twine 14174 in the open hub at a normal pace (count 5 → 4).
+- **The hub closes by `CraftingGUI_C:TryCloseWindow()`** (dilation and the multiplier back to 1.0 at once); real Esc sent by `mouse-seq` did not close it
+  (dilation stayed 0.03), `ActivateModule(Inventory, false)` neither (EXP-0520).
+- Counting made items: `ItemInventory:GetNumberOfItemsByTemplate(id)` on `BackpackInventory` / `ShortcutBarInventory` (`bow-count.lua`, it also gives the bow's
+  ingredients: 10012, 12001, 14174 × 7 per bow). `CraftingQueue.ItemList:GetArrayNum()` is NOT the queue's length (it read 1 with an empty queue on screen).
+- NEXT (when the PC is free — owner-presence refused at 10:4x): the bow 51401 selected (checked), F → 3 bows in the hub, 2 s, `TryCloseWindow`, count the bows
+  every ~0.5 s: all three within a second of the close = the bug reproduced by the player's path.
+
 ## Fix plan
 
 1. Recon (remote, no real input): the `CraftingQueue` fields that hold the current item's duration / progress / start time; whether they are writable.

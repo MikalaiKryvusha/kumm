@@ -1,6 +1,6 @@
 # Bug 89 — Conan: the reflections on the water flicker, like the palm-leaf shadows on the sand did
 
-**Status:** 🔴 OPEN · **Severity:** S2 (the look the owner picked for the build) · **Fixing:** this session, after plan 51's measurements (R, C1, D)
+**Status:** ⏸ PARKED 2026-11-14 09:53 +03:00 by the owner's word — `[OWNER]` 2026-11-14 09:53 «баги выглядят ценными кандидатами в работу, кроме бликов на воде, их в дальний ящик» · **Severity:** S2 (the look the owner picked for the build) · **Fixing:** not before the owner takes it out of the far drawer (was: this session, after plan 51's measurements (R, C1, D))
 **Version/build:** Conan 3.0.1 + the build, KrinikConanGraphics Engine.ini with software Lumen reflections (shipped 2026-11-09 01:48)
 **When/context:** 2026-11-09 15:45 +03:00, the owner watching plan 51's measured pass in front (five still river beaches, 11:00, weather frozen, NPCs frozen)
 

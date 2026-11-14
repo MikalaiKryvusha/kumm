@@ -297,6 +297,9 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       per channel, so the mockup's «tint above 1» (V4 «Slate takes a tint above 1» above was never seen in game) cannot reach #E9C27A. Fix: the gains BAKED into
       our textures `T_KrinikPlusGold` / `T_KrinikPlusGoldHover` (`_config/branding/make_plus_gold.py` from the game's 50 × 50 textures exported by
       `kit-export-textures.py`), drawn at tint 1.0; pressed = the game's hover texture × (0.2146, 0.1253, 0.0320). The kit script and CookInfo updated.
+      **ACCEPTED 2026-11-14 09:56 +03:00 by the owner (review folder 85):** `[OWNER]` 2026-11-14 09:55 «золото интеофнйса принято и одобряю» — G1 closed. Same message, a new
+      check: «наши стрелки листания проверь чтобы ромбы были ровными, не сплющенными» — the page arrows' diamonds must be even (equal width and height on
+      screen at 4K and 1080p), not squashed; in work (dayloop item 1).
 - [ ] **The «Хар-ки» screen UI rework, with the paging** — `[OWNER]` 2026-11-09 22:48 «Нужно будет там сильно чинить UI на этом экране... я накидывал скриншоты, что там и
       диалог страшный когда на развилке перк выбираешь. и фиолетовые навыки страннос строчка выглядит»: (a) the branched-perk choice dialog (`W_PerkSelection`; also bug 84 — it
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
