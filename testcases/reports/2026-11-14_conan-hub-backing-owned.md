@@ -45,7 +45,8 @@ path — real clicks on the tab row (his path), the hub opened by the remote ins
 
 ## 6. Traces
 
-Recordings `ConanExiles/_scratch/hubswitch/h69/audit1.mp4`, `fix1.mp4`, `fix2.mp4`, `fix3.mp4`; frame sheets `KUMM/.work/keybinds/g1_sheet.jpg`,
+Recordings `ConanExiles/_scratch/hubswitch/h69/audit1.mp4` (before) and `fix3.mp4` (after) — `fix1.mp4`, `fix2.mp4` deleted 13:4x after the measurement (their
+numbers are in this report and in bug 101); frame sheets `KUMM/.work/keybinds/g1_sheet.jpg`,
 `fix1_sheet.jpg`; kit log `KUMM/.work/keybinds/kit-edit.log`; the fix2 controller `KUMM/.work/keybinds/krinik_hub_controller_bug101_fix2.lua`.
 
 ## 7. Verdict
