@@ -17,11 +17,13 @@ entries × new / old on every multiplier change); remote `pult.sh`, probes `KUMM
 - 10:5x–11:00 — launch 4 (PID 18952): C2 before the fix (click + real F in one sequence, close after ≈ 2 s, bows counted); the hero `CustomTimeDilation` lever (ruled
   out); `queue-stats.lua` (stats 9 / 16 / 17); stat 16 set near the elapsed (`SetFloatStat(16, e + 0.02, true)`); stat 9 written and read back.
 - 11:02–11:2x — launch 5 (PID 40668) after `bash .work/arrows/deploy-ui.sh` with the fix: C2f (close after ≈ 2 s, 14 samples), C5 (close, reopen mid-batch, 10 samples).
+  Recorded moments (bug 94 and the STATUS block of that chat, now in PROJECT_HISTORY entry 2026-11-14 15:4x): C2f seen 2026-11-14 11:06 +03:00 (one bow per ≈ 3 s
+  after the close); C5 PASSED 2026-11-14 11:12 +03:00; E1 (the Esc menu does not rescale) PASSED 2026-11-14 11:28 +03:00.
 
 ## Checks
 
-- Hygiene: an independent judge round on the diff (round 3 of the day); the UE4SS log lines «крафт героя: очередь переведена A → B, записей N».
-- Functional run: the real game, the owner's path (the hub's crafting column, a real click on the bow, real F «Сделать 10»), READ by the remote (bow counts, stats,
+Hygiene: an independent judge round on the diff (round 3 of the day); the UE4SS log lines «крафт героя: очередь переведена A → B, записей N».
+Functional run: the real game, the owner's path (the hub's crafting column, a real click on the bow, real F «Сделать 10»), READ by the remote (bow counts, stats,
   dilation) and frames: C1 pass; C2 — the defect reproduced (nine bows within ≈ 2 s of the close, ≈ 22 s expected); C2f pass (one bow per ≈ 3 s after the close:
   t 163.4, 165.9, 169.0, 172.0, 175.1, 178.6); C5 pass (inside the reopened hub one bow per ≈ 3 s: t 519.5, 522.1, 525.1, 528.2). After judge round 3 (the Esc menu keeps the multiplier) — launch 7 (PID 7820):
   E1 pass (after the close ≈ 3 s a bow; in the Esc menu the batch stands; after it ≈ 3 s; «сбоев 0»); a first try with a separate scale variable failed (bug 100)

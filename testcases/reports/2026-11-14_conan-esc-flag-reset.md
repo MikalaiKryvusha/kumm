@@ -18,8 +18,8 @@ the remote `pult.sh`: the Esc menu by `GUIModuleController:ActivateModule(FName(
 
 ## Checks
 
-- Hygiene: an independent judge round on the diff.
-- Functional run: the real game, read in `UE4SS.log`: B100a — «модуль IngameMenu: открыт», «SML_ModList: открыт», «признак ESC-меню сброшен», then «меню открыто:
+Hygiene: an independent judge round on the diff.
+Functional run: the real game, read in `UE4SS.log`: B100a — «модуль IngameMenu: открыт», «SML_ModList: открыт», «признак ESC-меню сброшен», then «меню открыто:
   0.03» for the Esc menu itself — FAIL (the reset fired before the full-screen flag rose); B100b — «ESC-меню открыто: 0.0001», «SML_ModList: закрыт», «признак
   ESC-меню сброшен», «меню закрыто: 1.0», then the hub «меню открыто: 0.03», «меню закрыто: 1.0» — PASS.
 
