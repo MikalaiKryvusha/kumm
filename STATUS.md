@@ -133,6 +133,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **CHAT CLOSED 2026-11-14 13:45 (force, context 85 %).** ⚠️ Принудительное закрытие 2026-11-14 13:45: церемонии пропущены (проход судьи по итогам чата, подрезка
+> статуса, README, линтеры витрины) — долг оплачивает первое /end-chat-soft. Ложное утверждение, оставшееся в документах: нет (вывод «новые действия в 3.1.0»
+> и «устаревших вкладок нет» по первому прибору исправлены там, где стояли). No game of ours running, machine lock released, all commits pushed (pack
+> `fd74729`, KUMM — this commit). **FIRST NEXT CHAT:** (1) the owner's play — today's fixes: his six key bindings, the hub switches to / from «Снаряжение» in one
+> frame, the morning four (arrows, journeys, craft pace, Esc); (2) bug 101 item 4 (the feat selection card 66 ms late — the newborn's selection signal) and item
+> 3 («Параметры» portrait); (3) G2a cases M1–M7; (4) the night's list (wall jump, bug 75).
 > **NOW — chat of 2026-11-14 from 11:52 (DAYLOOP by the owner's word 11:53 «работай автономно, продолжаем фиксить баги в сборке конана»):**
 > (a) **plan 53 step 14 DONE 12:16** — the owner's six key bindings work in 3.1.0: his whole 3.0.1 `Input.ini` (the defaults of 3.0.1 and 3.1.0 are byte-identical;
 > the «new actions» reading was false — corrected) is the pack's `_config/Input.ini` and in the game; real keys on video + the defaults control — report
