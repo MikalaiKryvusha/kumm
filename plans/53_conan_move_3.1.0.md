@@ -101,7 +101,17 @@ new game enters the world without a crash, every mod's function intact. No frame
       differ — notes `KrinikConanGraphics.md`); installed into `_unpacked/`, not yet deployed. KrinikConanUI — in the kit (with plan 49 G1, the «+» in gold);
       Archery next; then one game run — `testcases/TC_conan_kit_310_our_mods_2026-11-14.md`.
 - [ ] 11. `modpack.json` `builtFor` → 3.1.0; the guide's version line; STATUS.
-- [ ] 14. **The owner's key bindings did not move (found 2026-11-14 11:12 +03:00).** `D:\Games\Conan Exiles 3.0.1\ConanSandbox\Saved\Config\Windows\Input.ini` (267 lines, 2026-11-13
+- [x] 14. (DONE 2026-11-14 12:16 in game with the defaults control — `testcases/TC_conan_owner_keybinds_310_2026-11-14.md`, report
+  `testcases/reports/2026-11-14_conan-owner-keybinds-310.md`; the owner's play is the final check.) **Correction 2026-11-14 12:11:** the
+  «new in 3.1.0, must NOT be copied whole» reading below was FALSE. `DefaultInput.ini` of 3.0.1 and 3.1.0 is byte-identical (so are the six other input configs
+  of `pakchunk0`; no other 3.1.0 pak carries one), and `HideGUI` / `HideGui`, `SkipGUI` / `SKipGUI` are ONE name each — an action name is an FName, its case is not
+  part of it; the old diff compared case-sensitive names and key sets. Read by the new `ConanExiles/_config/input-edits.py` (whole rows, case-insensitive): the
+  owner's file = the defaults + exactly his six edits. So the whole file went in: the pack's `_config/Input.ini` (was a stale 2.1.1 copy that a bare
+  `deploy-config.py` run would have shipped) = his live 3.0.1 file, deployed by `python -I -X utf8 _config/deploy-config.py Input.ini` (11:57). Seen in game:
+  the live table (`_config/keybinds-live.lua`) carries his six keys, real keys — no chat on numpad − / * / Enter, numpad − moves the camera, Left Ctrl crouches,
+  C does not, the side button fires the dodge («Вы перегружены» — the hero is overloaded), Left Alt does nothing, the middle button draws the bow; the game's
+  own exit rewrote the file byte-identical. The original text of the step:
+  **The owner's key bindings did not move (found 2026-11-14 11:12 +03:00).** `D:\Games\Conan Exiles 3.0.1\ConanSandbox\Saved\Config\Windows\Input.ini` (267 lines, 2026-11-13
   12:50: the chats `GlobalChat` / `GuildChat` / `Command1–5` → `None` — the numpad belongs to KrinikConanCamera — and his dodge on a mouse side button, game map /
   external map «Привязки клавиш игры») has no twin in the 3.1.0 `Saved\Config\Windows\` (only Engine, Game, GameUserSettings, ServerSettings). The 3.1.0 game runs on the
   default bindings — the numpad chats are back over the camera's keys. Not copied blindly: the file is the WHOLE action list, a 3.1.0 action missing from it

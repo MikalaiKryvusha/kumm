@@ -1,7 +1,7 @@
 # Bug 97 — Conan: after the tutorial every journey but fishing is locked in the Journeys window (J)
 
 **Status:** 🔧 fix pending the owner's play — OUR hub controller showed a stale journey page; the native `RefreshGrid` on every show, cases J1b–J6 pass 10:39
-(section «Root cause found»); the other kept tabs — twin list, unchecked · **Severity:** S2 (the
+(section «Root cause found»); the other kept tabs — twin list checked 2026-11-14 12:3x, none stale · **Severity:** S2 (the
 owner's play misled: the game said «choose a journey» while our page showed them locked)
 **Version/build:** Conan Exiles 3.0.1 build (pack as of 2026-11-13) · **When/context:** tossed by the owner mid-task, 2026-11-13 16:01, during the bug-95 work
 **Fixing:** this session — dayloop item 2 (after the page-arrow diamonds, before bug 94) by the owner's word `[OWNER]` 2026-11-14 09:56 «очень важно разобраться с
@@ -51,9 +51,12 @@ feat 6 (the bow recipe) and Archer stays locked, THAT is a defect.
   same lock right after it). **The honest case J1b (10:3x):** our page shown, then tab «Снаряжение», `ServerPurchaseFeat(9)` (the knowledge window's own call),
   back to «Путешествие»: the game's newborn page — «Кожевник» open; our kept page — locked. The page's native `RefreshGrid(bHideCompletedJourneys)` (17 ms)
   fixed ours on the spot.
-- **The class — the other kept tabs (twin list, not checked yet):** Таланты (`W_FeatWindow`), Хар-ки (`W_Attributes`), Клан (`W_GuildView`), Спутники
-  (`W_FollowersView` — a thrall placed while the hub was closed), Карта (`W_FullscreenMap`), Базар (`W_StoreWindow`). Each gets a check by the same method —
-  change the state the way the player does, compare our page with the game's newborn page — and, if stale, its own native refresh in `REFRESH`.
+- **The class — the other kept tabs (twin list) — CHECKED 2026-11-14 12:23–12:31** (`testcases/TC_conan_hub_kept_tabs_stale_2026-11-14.md`, probe
+  `ConanExiles/_config/hub-page-compare.lua` — our instance vs the game's newborn, widget by widget, what the player sees): `TWINS: searched the 6 other kept tabs
+  — found 0 stale data` (corrected 12:52: the first pass used probe v1, blind to list entries; re-run with v2, which reaches the cards — H0b, H8 of the TC; two
+  notes — the map page lacks Simple Minimap's ping marker, the feat list keeps more built rows). Хар-ки after a level-up (`BP_ConanCheatManager_C:LevelUp()`) — equal; Таланты after a feat learned (`ServerPurchaseFeat(51961)`) — equal, frames
+  identical; Клан, Спутники, Карта, Базар at rest — equal. Only «Путешествие» read its data at its birth alone. Not covered: Спутники with a new thrall, Карта with
+  a new marker (left for the hub audit of plan 48). A small note: our Таланты page kept the previous selection's card while the game's newborn opens with none.
 - A side finding, not this bug: Caverns of Set (`BP_Caverns_of_Set_C`) OVERWRITES the vanilla row `Mountaineer` of `DT_NewJourney` (game log «Found existing table
   entry … RowName: Mountaineer, overwriting from /Game/Mods/Mines_of_Set/Tables/Caverns_of_Set_Journey_Table») — the recon above («none overwrites a vanilla one»)
   was wrong for it; a stale-copy question for plan 53 step 12 (the mod's row vs the 3.1.0 one).

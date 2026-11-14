@@ -133,6 +133,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW — chat of 2026-11-14 from 11:52 (DAYLOOP by the owner's word 11:53 «работай автономно, продолжаем фиксить баги в сборке конана»):**
+> (a) **plan 53 step 14 DONE 12:16** — the owner's six key bindings work in 3.1.0: his whole 3.0.1 `Input.ini` (the defaults of 3.0.1 and 3.1.0 are byte-identical;
+> the «new actions» reading was false — corrected) is the pack's `_config/Input.ini` and in the game; real keys on video + the defaults control — report
+> `testcases/reports/2026-11-14_conan-owner-keybinds-310.md`; a full dodge roll not seen (the hero overloaded 268 %) — for his play. (b) **bug 97 twins checked
+> 12:3x–12:52 — no stale data** (probe v2 reaches list entries; `TC_conan_hub_kept_tabs_stale_2026-11-14.md`; notes: the map page lacks Simple Minimap's ping
+> marker, the feat list keeps more built rows). (b2) **bug 101 OPEN** — real clicks at 144 fps: to / from «Снаряжение» a page hangs over the bare world 34–166 ms
+> (the backing `W_Carousel` → `Background`, `MaskOffset` 1 only on «Снаряжение», switched natively a tick apart from our page); «Параметры» portrait late. (c) **the owner 12:24–12:32: the hub is an MVP — it needs work and tests**; goals: no lag /
+> no jump on navigation, an easy mod-embedding mechanism, mod elements on a page's FIRST frame → the hub audit, plan 48 «The owner's words 2026-11-14» (step 1
+> done; next: real-input 144 fps run of all 9 tabs, the mod-element list and its first-frame check, the embedding contract). (d) 52 voice files renamed by their
+> write time (names up to 77 min ahead of the clock) + `stamp-gate.mjs` v3 (EXP-0526). Code judged: round 1 — 2 defects + 6 quality fixed; round 2 running.
 > **FIRST NEXT CHAT (written 11:41):** (1) the owner's play is the check of today's four fixes — square page arrows, the hub's journey page refresh (bug 97),
 > hub crafting at the real pace after the close (bug 94), the Esc flag reset (bug 100); (2) restore his six key bindings on 3.1.0 (plan 53 step 14 — the rows are
 > listed there, real-key check); (3) bug 97 twins — the other kept hub tabs (Таланты, Клан, Спутники, Карта, Базар) checked by the same method; (4) the open list
@@ -161,7 +171,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > only `SML_ModList`) made the next hub run at 0.0001; `poll` clears `esc_open` on the full-screen close edge (run B100b). Game closed, machine lock released.
 > **Plan 53 step 14, recon done 11:37:** his six key edits listed against the 3.1.0 `DefaultInput.ini` (plan 53) — restore with a real-key check next chat.
 > **NEW finding (plan 53 step 14):** the owner's key bindings (`Input.ini` of 3.0.1 — chats off the
-> numpad, his dodge key) did not move to 3.1.0 — the game runs on defaults; carry his rows over onto the 3.1.0 action list, not the old file whole. Earlier: the
+> numpad, his dodge key) did not move to 3.1.0 — the game runs on defaults; ~~carry his rows over onto the 3.1.0 action list, not the old file whole~~ (FALSE —
+> corrected 2026-11-14 12:1x: the defaults of 3.0.1 and 3.1.0 are byte-identical, his whole file went in and works in game — plan 53 step 14). Earlier: the
 > «instant without the hub» reading is confounded (bug 94 «Correction»); the player-path stand is ready (bug 94 «The player-path stand») — the F-batch case
 > waits for a free PC (owner-presence BUSY twice at 10:4x). The harness
 > TEMP is STILL `D:\Temp` (its background-task output lands in `D:\Temp\claude\…`): VS Code was not restarted after the user TEMP moved to `F:\Temp` — told

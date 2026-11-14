@@ -348,6 +348,15 @@ try {
   check('control: Bash without a stamp passes', sg('Bash', { command: 'git status && date' }), 0);
   check('control: Bash with a past stamp passes', sg('Bash', { command: 'echo ' + PAST }), 0);
   check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [SG], { input: '{not json', encoding: 'utf8' }).status, 0);
+  // v3 (2026-11-14): штамп в ИМЕНИ файла — голосовые файлы `voice/<ГГГГ-ММ-ДД_ЧЧ-ММ-СС>_<смысл>.txt` двух чатов подряд названы по ощущению
+  // времени, до 77 минут впереди часов («13-00-00» записан в 11:43); содержимое без штампа, хук смотрел только текст
+  const nameStamp = (s) => s.slice(0, 10) + '_' + s.slice(11, 13) + '-' + s.slice(14, 16) + '-00';
+  check('Write to a file named with a future stamp: refused', sg('Write', { file_path: 'D:/w/KUMM/voice/' + nameStamp(FUT) + '_x.txt', content: 'фраза' }), 2);
+  check('Write to a file named with a past stamp: passes', sg('Write', { file_path: 'D:/w/KUMM/voice/' + nameStamp(PAST) + '_x.txt', content: 'фраза' }), 0);
+  check('control: a file named with a future stamp of TOMORROW (a plan): passes', sg('Write', { file_path: 'D:/w/KUMM/voice/' + TOMORROW.slice(0, 10) + '_23-59-00_x.txt', content: 'фраза' }), 0);
+  check('Write to a Windows path (backslashes) named with a future stamp: refused', sg('Write', { file_path: 'D:\\w\\KUMM\\voice\\' + nameStamp(FUT) + '_x.txt', content: 'фраза' }), 2);
+  check('control: Edit of an already named file with a future stamp passes (the name is fixed by a rename)', sg('Edit', { file_path: 'D:/w/KUMM/voice/' + nameStamp(FUT) + '_x.txt', old_string: 'a', new_string: 'b' }), 0);
+  check('control: a name with impossible minutes is not a stamp', sg('Write', { file_path: 'D:/w/KUMM/voice/' + FUT.slice(0, 10) + '_23-99-00_x.txt', content: 'фраза' }), 0);
 } catch (e) {
   check('part G ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }

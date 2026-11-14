@@ -19,6 +19,37 @@ The owner: «клик выполнен, видуального переключ�
 - The delay click → switch is measured and reported (the owner accepts a delay; the number goes into the report).
 - CPU: the work runs only between a click and its switch (opening windows — «лаг допустим», MASTER_PLAN); no cost while the hub stays on one page.
 
+## The owner's words 2026-11-14 — the hub is an MVP, it needs work and tests
+
+`[OWNER]` 2026-11-14 12:24 «хаб был сделан на коленке, мвп. там много багов и недоделок может быть.» · 12:28 «я ж говорю , наш хаб нуждается в доработках,
+тестах» · 12:30 «он задумывался для того, чтобы раз и навснгда пофиксиль лаги, дергания ui и текстов при навигации по хабу, и для лёгкого механизма удобного
+встраивания модов в наш хаб».
+
+12:32 «и элементы модов должны показываться мгновенно при открытии соответствующих страниц хаба, а не с задержкой ни в десятки ни в тысячи миллисекунд».
+
+**Acceptance criterion G2a (12:32):** Situation. Any hub page that carries a mod's element (the Era of Trials school icons on «Параметры», Hosav's «Настройки
+интерфейса», the Inventory Compactor buttons and the mods-list button on «Снаряжение», Simple Minimap's helper row on «Карта», Xevyr's tab, the late emblem —
+bug 64 item 26; the full list is the first step of G2). Action. The page is opened by the player's input. Result. The mod's element is on the page's FIRST frame —
+0 frames late at 60 fps, never tens or thousands of milliseconds. Check. A 60 fps (or 144 fps) recording of each opening, the element's region compared per
+frame against the page's first frame — 0 frames without the element.
+
+**So the hub has two goals, and the audit tests both:** (G1) navigation without lag and without any jump of the UI or of texts — every switch one frame, by the
+player's own input (mouse on the tabs, Q / E, Esc, Tab), the acceptance criteria above; (G2) an easy, convenient way to embed a mod into our pages — today one
+adapter (Simple Minimap's helper row on «Карта», `add_minimap_helper`); the mechanism is to be designed as a contract, not one function per mod. Plus (G0) our
+kept pages show the truth after the state changes (bug 97).
+
+**Audit 2026-11-14, step 1 — data freshness (G0), done 12:2x (`testcases/TC_conan_hub_kept_tabs_stale_2026-11-14.md`, probe `_config/hub-page-compare.lua` —
+our instance vs the game's newborn, widget by widget, what the player sees):** Хар-ки after a level-up — equal (the points follow live); Таланты after a feat learned
+by `ServerPurchaseFeat` (the knowledge window's own call) — equal, frames identical; Путешествие — equal (its `REFRESH[5]`); Клан, Спутники, Карта, Базар at rest —
+equal. Only Путешествие was stale (corrected 12:52: that pass used probe v1, blind to list entries; probe v2 re-run — the same, plus the map page lacking
+Simple Minimap's ping marker `markerPing` (G2) and the feat ListView keeping more built rows — TC H0b, H8). **Step 2 started 12:38 — real clicks at 144 fps: bug
+101** (switching to / from «Снаряжение» shows a page over the bare world 34–166 ms; «Параметры» finishes its portrait late). Small finding: our Таланты page kept the previous selection's card (a Highmane's building feat, cost 1) while the game's newborn
+page opens with none — gone after the next state change; to recheck by the player's path. Not yet: Спутники with a new thrall, Карта with a new marker.
+**Next steps of the audit:** (2) G1 by real input — the TC sequence of this plan at 144 fps, `hub_switches.py`, all 9 tabs, mouse + Q / E + Esc + Tab, with the
+remote's header artifact separated (after `SetCarouselIndex` by the remote the header stays lit on «Снаряжение» on the game's page too — not seen with real input
+yet); (3) G2 — a written embedding contract and the second adapter by it; (4) the open items below (the direct «Снаряжение» ↔ «Параметры» click, the helper's
+«Свои маркеры» click on our map).
+
 ## Constraints known
 
 - UE4SS hooks cannot cancel a native call: `CarouselWindow:Next/Prev/SetCarouselIndex` switch the module natively; the old window is removed and the new one

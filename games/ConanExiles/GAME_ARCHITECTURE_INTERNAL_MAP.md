@@ -858,6 +858,11 @@ Temperature (2026-10-30, live + Hosav bytecode): the hero's temperature is `BPEn
   `WBP_MainHotbar_C`, `W_SubtitleRenderer_C` at visibility 2; `FunCombat_PlayerController_C:ToggleHUD(<1 param>)` with true/false changed nothing;
   `SetVisibility(4)` by the remote restores each. Cause unknown (input action `HideGui` exists on the controller).
 
+- **3.1.0, 2026-11-14 (KUMM plan 48 audit):** `FindFirstOf('BP_ConanCheatManager_C'):LevelUp()` (no parameters) worked WITHOUT `MakeMeAdmin` in the owner's
+  world — «Доступные Очки» 0 → 2 on «Хар-ки», though the knowledge window still read «Ур.: 13» after it (not read further); the manager also has `LearnFeat(TemplateId)`,
+  `LearnAllFeats`, `ForgetFeat`, `GiveFollowerXP`, `LevelFollowerUpTo`. A feat by the knowledge window's own call: `BasePlayerChar:ServerPurchaseFeat(featID)` —
+  51961 (Thralltaker) learned (used points 11 → 14), 41020 (Tinkerer) refused silently (known false after; cause not read). Knowledge points:
+  `hero:GetIntStat(3, 0)` total, `GetIntStat(2, 0)` used.
 - **The cheat manager on a stand (2026-10-31, `BP_ConanCheatManager_C` = `FindFirstOf('PlayerController').CheatManager`, after `exec MakeMeAdmin`):** works when CALLED
   directly — `God()` (`_config/god-on.sh`), `SetLevel(65)` (badge 65, the uncapped XP step), `Summon('<full class path>')` (spawns ≈ 0.7 m before the hero;
   only an ALREADY-LOADED class — else «Failed to find class» in the game log; the figure needs ≈ 10 s to load its look — the owner 11:33; a plain

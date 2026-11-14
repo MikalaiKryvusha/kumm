@@ -91,6 +91,33 @@
 
 ## Entries
 
+### EXP-0527 · 2026-11-14 · ❌ · #conan #ue4ss #lua #crash #probe #brush
+class: a read-only remote probe that walked a struct property over every live object of a class crashed the game
+mechanized: no — the rule lives here and in bug 101
+**Context:** looking for the hub backing image: `FindAllOf('Image')` and `im.Brush.ResourceObject` on each.
+**Result:** ❌ access violation 0x18 inside UE4SS at once (crash folder of 12:42:15); the remote had taken the command and never answered.
+**Lesson:** a struct property (a Brush, a Buff) is read only on a NAMED live widget found by its full name — never across `FindAllOf` of a common class,
+where templates and dying widgets sit. Names, visibility and opacity across `FindAllOf` were safe the same day (`hub-page-compare.lua`).
+**Trigger:** a «find the widget whose brush is X» idea.
+
+### EXP-0526 · 2026-11-14 · ❌→✅ · #stamp #voice #filename #claim-before-evidence
+class: claim-before-evidence — a time in a FILE NAME written by feel, up to 77 min ahead of the clock (52 voice files over 2026-11-08…14)
+mechanized: yes — `tools/hooks/stamp-gate.mjs` v3 (today's `_HH-MM[-SS]` in the written file's name, ahead of the clock → refused; self-test part G)
+**Lesson:** a stamp in a name is a stamp; take it from `date` in the same move. → the guard caught the next voice file at 12:16 (named 12-17-30).
+
+### EXP-0525 · 2026-11-14 · ❌→✅ · #conan #input #ini #keybinds #fname #move #plan53 #falseok
+class: a diff that compared names case-sensitively and keys as sets — produced «new actions in 3.1.0» that did not exist
+mechanized: yes — `ConanExiles/_config/input-edits.py` (whole rows, case-insensitive names, an absent array kind = defaults)
+**Context:** the owner's key bindings did not move to 3.1.0; the previous chat diffed his `Input.ini` against the 3.1.0 `DefaultInput.ini` and found `HideGui`,
+`SKipGUI` «new», so it planned to rebuild his file on the new action list.
+**Tried / did:** hashed every input config of `pakchunk0` in 3.0.1 and 3.1.0 first — all seven byte-identical; `HideGUI`/`HideGui` are one FName. The whole file
+went in; checked by the live table (`keybinds-live.lua`) and real keys on video, with the defaults run as the control (numpad * opened the chat panel «Local»).
+**Result:** ✅ six edits restored, the game's own exit rewrote the file byte-identical. The «must not copy whole» claim corrected in plan 53 and STATUS.
+**Lesson:** before migrating a user config to a new game version, hash the DEFAULTS of both versions — equal defaults mean the user file applies as is. Unreal
+names (actions, rows, properties) are FNames: compare them case-insensitively. A file on disk is not the binding — read the running game's table, and prove the
+observation can fail (the same read and the same key on the defaults).
+**Trigger:** moving any user `.ini` to a new game build; diffing Unreal names; «the setting is in the file» as evidence.
+
 ### EXP-0524 · 2026-11-14 · ❌→✅ · #conan #state #twins #craft #bug94 #bug100 #remote-path
 class: a second copy of a state (a Lua variable beside the game's own value) that drifted when another component misjudged the mode
 mechanized: no — the rule lives in `krinik_pause_in_menu.lua` (`hero_craft_multiplier`, the live multiplier is the one scale)

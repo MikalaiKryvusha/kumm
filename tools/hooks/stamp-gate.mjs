@@ -28,6 +28,9 @@
 //                 тоже; подключён в местных .claude/settings.local.json, matcher Write|Edit|MultiEdit;
 //                 v2 — 2026-10-10 15:45 +03:00: matcher дополнен Bash|PowerShell; в живой сессии `echo "probe <сегодня> <через 14 минут>"`
 //                 из Bash остановлен до запуска («штамп впереди часов … сейчас … 15:45»)
+//                 v3 — 2026-11-14: штамп в имени РОЖДАЕМОГО файла (`<сегодня>_ЧЧ-ММ[-СС]` в последней части пути Write); часть G красная
+//                 до v3 («Write to a file named with a future stamp» 0 вместо 2), зелёная после. GAP v3: имя, данное оболочкой (`mv`, `cp`,
+//                 `Set-Content`, `echo >`), и штамп в папке пути не видны; Edit уже названного файла не держится (так задумано)
 import { readFileSync } from 'node:fs';
 
 const pad = (n) => String(n).padStart(2, '0');
@@ -59,6 +62,13 @@ try {
   const late = (h, m) => Number(h) < 24 && Number(h) * 60 + Number(m) > nowMin;
 
   const ahead = [];
+  // v3 (2026-11-14): штамп в ИМЕНИ создаваемого файла (Write) — `voice/<ГГГГ-ММ-ДД_ЧЧ-ММ-СС>_<смысл>.txt`. Утренний чат 2026-11-14 называл
+  // голосовые файлы по ощущению, до 77 минут впереди часов («13-00-00» записан в 11:43), следующий — ещё дважды; в тексте штампа нет, хук молчал.
+  // Только Write — рождение файла: правка уже названного файла (Edit) не держится, иначе неверное имя нельзя ни поправить внутри, ни увидеть отказ
+  // по делу (судья 2026-11-14); минуты и часы — только настоящие (`_11-99` — не время).
+  const NAME = new RegExp(today + String.raw`_([01]\d|2[0-3])-([0-5]\d)(?:-[0-5]\d)?(?!\d)`);
+  const nm = event.tool_name === 'Write' ? path.split('/').pop().match(NAME) : null;
+  if (nm && late(nm[1], nm[2])) ahead.push('имя файла ' + nm[0]);
   for (const line of text.split(/\r?\n/)) {
     if (line.includes('claim-ok:')) continue;
     for (const m of line.matchAll(STAMP)) {
