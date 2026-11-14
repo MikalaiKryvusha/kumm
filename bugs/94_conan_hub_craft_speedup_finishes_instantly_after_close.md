@@ -1,6 +1,7 @@
 # Bug 94 — Conan: items started in the hub finish INSTANTLY when the hub closes (KrinikConanUI · krinik_pause_in_menu craft speed-up)
 
-**Status:** 🔴 OPEN — filed 2026-11-13 09:47, recon of the crafting queue next · **Severity:** S2 (a mechanic of ours breaks the game's economy in the owner's play) ·
+**Status:** 🔧 fix pending the owner's play — reproduced by his path and fixed 11:11 (`rescale_queue`, cases C2f, C5 pass; report
+`testcases/reports/2026-11-14_conan-craft-hub-close-rescale.md`) · **Severity:** S2 (a mechanic of ours breaks the game's economy in the owner's play) ·
 **Version/build:** Conan Exiles 3.0.1 build, `KrinikConanUI/ue4ss/Scripts/krinik_pause_in_menu.lua` 0.17.0 · **When/context:** the owner's message 2026-11-13 09:46
 (tossed mid-task, during the bow-sprint run) · **Fixing:** this session, right after case S1b of bug 93
 
@@ -90,6 +91,30 @@ instant crafting explained separately (what the UI's handler passes that the bar
   ingredients: 10012, 12001, 14174 × 7 per bow). `CraftingQueue.ItemList:GetArrayNum()` is NOT the queue's length (it read 1 with an empty queue on screen).
 - NEXT (when the PC is free — owner-presence refused at 10:4x): the bow 51401 selected (checked), F → 3 bows in the hub, 2 s, `TryCloseWindow`, count the bows
   every ~0.5 s: all three within a second of the close = the bug reproduced by the player's path.
+
+## REPRODUCED by the player's path — 2026-11-14 10:56 +03:00 (TC `testcases/TC_conan_craft_hub_close_2026-11-14.md` C2)
+
+Bows 51401 (ingredients for 10 given by the stand), the bow selected by a real click and «Сделать 10» by a real F in the same input sequence: in the open hub
+the first bow took ≈ 2.5 s (a normal pace — the multiplier 0.03 compensates the world's 0.03); the hub closed by `TryCloseWindow`; within ≈ 2 s the other NINE bows
+were done (≈ 22 s expected). So every item of the batch — not only the one in progress — carries the hub's 0.03 factor past the close: the duration is fixed
+before the item's own start (at the batch's enqueue, or the batch is one entry). The 2026-11-13 «read at the item's start» measurement came from the
+confounded remote path (section «Correction») and does not hold for the GUI's batch.
+
+**The «instant without the hub» mystery — closed 11:18:** `CraftingQueue:CraftItems(RecipeManager:GetItemByTemplateID(51401, 0))` called by the remote crafts INSTANTLY
+in any state — even in the open hub (3 calls → backpack 35 → 38 at once, the queue empty). It is a property of that call path (no queue entry is made), not of
+the owner's world; the GUI's batch («Сделать 10») makes real entries and runs at the recipe's time. The world comparison `Game_0` / `Game_1` is not needed.
+
+## The queue's own data and the fix — 2026-11-14 11:04 +03:00
+
+- The queue's entries are `RecipeItem`s in `CraftingQueue.ItemList` (empty slots — null refs). «Сделать 10» → slot 1 the bow in progress + slot 2 a stack
+  (int stat 1 = 9). Float stats (`GameItem.HasFloatStat / GetFloatStat / SetFloatStat(statID, Value, Replicate)`): **16 — the duration in game seconds** (the game
+  reads it every tick: set just above the elapsed, the bow finished in ≈ 1.5 s; it is kept for the whole batch — the next bow inherited an edited 16), **9 — the
+  elapsed game seconds** of the item in progress (a written value sticks), **17 — the recipe's base duration** (3.0 s for the bow); 256+ ids mirror them.
+- Levers ruled out: the hero's `CustomTimeDilation` 33.3 with the multiplier 1.0 — the bow crept at the world's 0.03 (the queue runs on world time, not the
+  hero's tick); there is no progress API on the queue.
+- **Fix** (`krinik_pause_in_menu.lua` `hero_craft_multiplier`): on every change of the multiplier (a menu opens or closes) every entry's stats 16 and 9 are
+  multiplied by new / old before the new multiplier is set — the share done is kept, so a batch started in the hub goes on at the normal pace after the close,
+  and an item started before the hub goes on at its real-time pace inside it. Cases C2-fixed and C5 (an item queued before the hub) of the TC; judge round pending.
 
 ## Fix plan
 

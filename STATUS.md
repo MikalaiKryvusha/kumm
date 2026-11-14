@@ -159,7 +159,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **10:50 progress:** item 1 DONE in game — the arrow buttons lost their sizing TextBlock, the brushes' `ImageSize` 34.27² (kit, pak 7/7, deployed): Next
 > 55 × 54 px at 4K (was 55 × 61), ≈ 26 × 26 at 1080p. Item 2 FIXED in game — our hub controller's kept journey page was stale; `REFRESH[5]` calls the page's
 > native `RefreshGrid` on every show (my first cause claim of 10:15 rested on an invalid case — corrected everywhere, that first fix reverted). Run report
-> `testcases/reports/2026-11-14_conan-page-arrows-square-and-journeys-refresh.md`; judge rounds 1–2 done (round 2: no correctness defect); PACK `9e6a826` pushed. Item 3 (bug 94): the
+> `testcases/reports/2026-11-14_conan-page-arrows-square-and-journeys-refresh.md`; judge rounds 1–2 done (round 2: no correctness defect); PACK `9e6a826` pushed. **11:06 item 3 (bug 94) FIXED in game, not committed yet:** reproduced by the
+> owner's path (C2: «Сделать 10» on bows, hub closed → 9 bows in ≈ 2 s); the queue's data = `RecipeItem` stats 16 (duration) / 9 (elapsed); `krinik_pause_in_menu`
+> `rescale_queue` multiplies them by new/old on every multiplier change → C2f: after the close one bow per ≈ 3 s. Open: C5 (a reopen mid-batch — waits for a free
+> PC), judge round 3 running, then commit (TC `TC_conan_craft_hub_close_2026-11-14.md`). C5 PASSED 11:12 (a reopen mid-batch keeps ≈ 3 s a bow); run report
+> `testcases/reports/2026-11-14_conan-craft-hub-close-rescale.md`. Judge round 3 (11:18): mechanism confirmed; fixed in the working tree and DEPLOYED (game PID 29588):
+> the Esc menu no longer rescales (a separate `queue_scale`; Esc = pause, and a batch at 0.0001 would be saved on «quit to main menu» and finish at once after
+> the load), elapsed written before duration when shrinking, null slots by `IsValid`, failures counted; E1 PASSED 11:28 (the Esc menu: the batch stands; out: ≈ 3 s a
+> bow). **PACK `9de0b63` pushed — bug 94 fixed, waits for the owner's play.** The remote `CraftItems` crafts instantly in ANY state (no entry) — the «instant
+> world» was that. **NEW bug 100:** after an Esc-menu cycle (remote open + `TryCloseWindow`) the next hub opening was taken for the Esc menu (0.0001) — cause unread.
+> Game PID 7820 open (mine), machine lock «kumm» to 12:00.
+> **NEW finding (plan 53 step 14):** the owner's key bindings (`Input.ini` of 3.0.1 — chats off the
+> numpad, his dodge key) did not move to 3.1.0 — the game runs on defaults; carry his rows over onto the 3.1.0 action list, not the old file whole. Earlier: the
 > «instant without the hub» reading is confounded (bug 94 «Correction»); the player-path stand is ready (bug 94 «The player-path stand») — the F-batch case
 > waits for a free PC (owner-presence BUSY twice at 10:4x). The harness
 > TEMP is STILL `D:\Temp` (its background-task output lands in `D:\Temp\claude\…`): VS Code was not restarted after the user TEMP moved to `F:\Temp` — told

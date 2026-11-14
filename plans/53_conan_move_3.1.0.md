@@ -101,6 +101,13 @@ new game enters the world without a crash, every mod's function intact. No frame
       differ — notes `KrinikConanGraphics.md`); installed into `_unpacked/`, not yet deployed. KrinikConanUI — in the kit (with plan 49 G1, the «+» in gold);
       Archery next; then one game run — `testcases/TC_conan_kit_310_our_mods_2026-11-14.md`.
 - [ ] 11. `modpack.json` `builtFor` → 3.1.0; the guide's version line; STATUS.
+- [ ] 14. **The owner's key bindings did not move (found 2026-11-14 11:12 +03:00).** `D:\Games\Conan Exiles 3.0.1\ConanSandbox\Saved\Config\Windows\Input.ini` (267 lines, 2026-11-13
+  12:50: the chats `GlobalChat` / `GuildChat` / `Command1–5` → `None` — the numpad belongs to KrinikConanCamera — and his dodge on a mouse side button, game map /
+  external map «Привязки клавиш игры») has no twin in the 3.1.0 `Saved\Config\Windows\` (only Engine, Game, GameUserSettings, ServerSettings). The 3.1.0 game runs on the
+  default bindings — the numpad chats are back over the camera's keys. Not copied blindly: the file is the WHOLE action list, a 3.1.0 action missing from it
+  would end unbound. Steps: (1) list the 3.1.0 default action / axis names (the game's `DefaultInput.ini` from the paks, or a fresh Input.ini written by the game
+  after one key change in its own menu); (2) carry over only the owner's changed rows onto it, the game closed; (3) check in game: numpad − / * open no chat, the
+  dodge on his key; record in the external map row.
 - [ ] 13. **The game's own mod list lost our texts in the move (found 2026-11-14 00:4x).** `set-pak-modinfo.py` (plan 44: Russian description, author, URL,
       change note in each pak's `modinfo.json`) was run on 3.0.1's `Mods` folder by hand; the 3.1.0 deploy copied the library paks — read live: KrinikConanUI
       author «», EAA's description raw BBCode «[img]https:…», Frequent_meteors «- rebuilt for update». Its only caller is `_config/release/make_volumes.sh`. Before
