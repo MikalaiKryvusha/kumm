@@ -154,7 +154,15 @@ Climbing (remote recon 2026-11-02 14:1x, for the owner's 09:07 request «кно�
   `AM_combat_2h_bow_3rd_equip`, the bow on `Socket_Bow`) → back to 0 by a TIMER 1.35 s after the exit, airborne or not (a push up 750 landed at 1.78 s; a
   montage played ×3 ended at 0.21 s and changed nothing). Until then `ActionTry` refuses: `BaseBPCombat_C:DebugActionTryFailure(FailureType)` says
   «NotAggressive» — a post-hook on it names every refused action. (`ECharacterSubState` is 0–22: Failing 8, Attacking 11, PowerCharge 15, ChargeHold 16;
-  `InSubstate(40)` true beside 8 is an out-of-range artefact.) `CharacterMovement:ExitClimbing()` +
+  `InSubstate(40)` true beside 8 is an out-of-range artefact.) **The hero in the air (read live 2026-11-14 17:4x):** `CharacterMovement.AirControl` 0.60
+  (the game's own — WASD steers every jump: real D held 0.7 s in a standing jump → 100 cm sideways, 0.8 s after a wall push → 125 cm along the wall),
+  `FallingLateralFriction` 0.30, `BrakingDecelerationFalling` 0, `AirControlBoostMultiplier` 0, `GravityScale` 1.0 (measured ≈ 930 cm/s² from the samples),
+  `JumpZVelocity` 444 at Agility 8 (420 + 3 × Agility — `krinik_oblivion_locomotion`, re-set in a pre-hook of every native `Character:Jump`; the game resets
+  the property to its literal 420 after any damage, and on the wall no `Character:Jump` runs — so the wall jump reads the law, `_G.__krinik_hero_jump_z`,
+  shared by the mod's sections; the agent's remote is another Lua state and cannot see it). **`CharacterMovement.bWantsToClimb` on the wall (18:1x):** TRUE
+  after `Climb(false)` (the stand's climb start — the game's own climb function) and it stays true while climbing; with it cleared by the remote a REAL Space on
+  the wall never reached `StartJump` (no push), while the BP press event called by the remote still did — the player's Jump on the wall runs only with the wish
+  on. `CharacterMovement:ExitClimbing()` +
   `LaunchCharacter` leave the wall (mode 3, then 1 on landing). `CurrentWall`'s fields are not readable from Lua — the wall's normal comes from a forward line
   trace. Our wall jump: KrinikConanLocomotion `krinik_wall_jump`.
 **The movement row — how the hero's speed type is chosen (bytecode of `BaseBPCombat::EvaluateMovementType` + a live read of the table, 2026-11-10 19:4x):**

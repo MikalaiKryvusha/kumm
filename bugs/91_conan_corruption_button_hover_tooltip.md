@@ -36,6 +36,9 @@ y ≈ 572 (1080p), over the right perk column, with no plate behind it — the c
   plate covered «Оскверненн» only (frame `pl1c`); build 2 puts it on a HitTestInvisible CanvasPanel `Cnv_KrinikCorruptionPlate` (auto size, anchored at the
   diamond, aligned (0.5, 1), 26.7 units above) — frame `pl2c` 13:47 (the row's own `Select` by the remote, both live rows): the whole label on the plate,
   centred over the diamond. Left: a REAL hover frame (the PC was busy) and the plate's side padding by the owner's eye (the text sits close to the edges).
+- **2026-11-14 18:0x, the real-hover check tried on 3.1.0 — not done:** the hero (Agility 8, 3 free attribute points) shows the GOLDEN «+» diamonds only, no
+  purple corruption ones (13 `LevelCorruptionButton` alive, 12 «visible» by `IsVisible`, none on the frame); the owner came back to the keyboard twice before
+  the real hover. Next try: a free PC, a hero WITH a corruption point (the stand gives one by the remote first), `hover-watch.ps1 -At <the purple diamond>`.
 - **Bug 86 is the same defect** (the owner's frame of 2026-11-07 21:45: the caption over a perk icon of the right column) — one fix closes both.
 - **Variants for the owner 2026-11-10 12:5x:** review folder `НА ОТСМОТР НИКОЛАЕМ/81_podpis_oskverneniya` (V1 plate above · V2 under · V3 the game's place with a
   plate · V4 no label; `ConanExiles/_config/mockups/corruption_label_mockup.py` over a real 4K frame). Waiting for his pick (STATUS «Awaiting human review»).

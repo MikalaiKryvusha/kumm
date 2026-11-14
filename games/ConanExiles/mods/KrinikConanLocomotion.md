@@ -33,6 +33,10 @@ steer to the next wall, catch it, push again — the push must not wait on the n
 the air caught the wall, the next Space pushed again. **Air control: the game's own `CharacterMovement.AirControl` is 0.60** (read live) and steers every jump,
 the wall jump's flight too — real D held 0.8 s off the wall: 125 cm along it (W11), in a ground jump 100 cm (W14). Nothing of ours sets it (a mod value 0.35
 was tried and reverted 17:51 — lowering the game's value was not asked); a lighter or stronger steering is the owner's word.
+**Judge round 5 (18:0x):** the push height comes from the Agility LAW (`_G.__krinik_hero_jump_z`, exported by `krinik_oblivion_locomotion`), not from
+`JumpZVelocity` — the game resets that to 420 after any damage and nothing rewrites it on the wall (W15: the property forced to 420 → the push still 444); the
+push = 45 × 444 / jump speed, so the ≈ 0.5 m gap holds for a better jumper too `[AI]`; the wall guard 0.05 s (a fast second tap in a chain is not dropped).
+Owed: W11 / W13 on the final build (they ran with the mod's 0.35), a two-wall gap, the push at a high Agility.
 
 ## How the combat jump works (the game's two refusals — game map, «Атака в воздухе»)
 

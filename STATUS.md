@@ -144,7 +144,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **The owner's wall-jump design of 17:38–17:39 BUILT 17:53** (verbatim in `games/ConanExiles/mods/KrinikConanLocomotion.md`): the push ≈ 0.5 m (46–47 cm
 > measured), up = the hero's own jump (`JumpZVelocity` × 1.0, grows with Agility), the wall guard 0.15 s, wall-to-wall by real keys pass (W13); air control —
 > the game's OWN `AirControl` 0.60 steers every jump incl. the wall flight (real D: 125 cm), nothing of ours sets it — its strength is the owner's eye. Judge
-> round 5 running at 17:5x; NOT committed yet (pack: `krinik_wall_jump.lua`, `wall-stand.lua`, `hubswitch/close-hub.lua`). No game of ours runs, lock released.
+> round 5: 1 defect (the push read `JumpZVelocity`, reset to 420 after damage) → the Agility law now, W15 pass 18:06; push ∝ 1 / jump speed; guard 0.05 s.
+> PUSHED pack `12ac659` (6 judge rounds). **OWED (TC_conan_wall_jump row R6, first next):** the same 420-after-damage TWIN in `krinik_air_combat.lua` :88
+> (mid-draw launch → use `_G.__krinik_hero_jump_z()`); the push vs air friction at a cheat Agility ≈ 300 (measure); an overhang test; the height source in the
+> log; a row with W held at the press; W11 / W13 on the final build by real keys (the player's Space on the wall needs `bWantsToClimb` on — the game's
+> `Climb()` sets it; the owner's own climb is the final check). Bug 91 real hover (a hero with a corruption point). No game of ours runs, lock released.
 > **CHAT CLOSED 2026-11-14 15:59 +03:00 (force, context 85 %).** ⚠️ Принудительное закрытие 2026-11-14 15:59 +03:00: церемонии пропущены (проход судьи по итогам чата, README, линтеры
 > витрины) — долг оплачивает первое /end-chat-soft. Ложное утверждение, оставшееся в документах: нет (заглушки на странице перков, «20 Авторитет» и моя
 > формулировка про строки на 15 очков исправлены там, где стояли). Игры нашей нет, замок машины снят, всё отправлено (пак `456bfda`, KUMM — этот коммит).
