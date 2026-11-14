@@ -43,8 +43,8 @@ frames `capture-window.ps1`, real input `mouse-seq.ps1` (owner-idle FREE only).
 
 ## Traces
 
-Frames and probes `KUMM/.work/arrows/` (`after_live_4k.jpg`, `q5_after_4k.jpg`, `q5_zoom.webp`, `q6_1080.jpg`, `q6_zoom.webp`, `journey_tab_4k.jpg`, `j1h_cards.webp`,
-`j3_cards.webp`); kit logs `KUMM/.work/arrows/look1.log`, `s2test.log`, `looktest.log`, run outputs `run-arrows-kit3.out`, `run-step2-look.out`; the game's
+Frames and probes `KUMM/.work/arrows/` (the zooms and crops `q5_zoom.webp`, `q6_zoom.webp`, `j1h_cards.webp`, `j3_cards.webp`, `arrows_native_zoom.webp`; the full 4K /
+1080p jpg frames were deleted 11:30 when the work was committed — HOUSE_RULES rule 15); kit logs `KUMM/.work/arrows/look1.log`, `s2test.log`, `looktest.log`, run outputs `run-arrows-kit3.out`, `run-step2-look.out`; the game's
 `UE4SS.log` lines «[KrinikConanUI:HubController] хаб закрыт …» 10:35:56 and 10:49. Window closures: launches 1–3 closed by PID, no crash-report window.
 
 ## Verdict

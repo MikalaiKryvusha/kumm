@@ -108,6 +108,13 @@ new game enters the world without a crash, every mod's function intact. No frame
   would end unbound. Steps: (1) list the 3.1.0 default action / axis names (the game's `DefaultInput.ini` from the paks, or a fresh Input.ini written by the game
   after one key change in its own menu); (2) carry over only the owner's changed rows onto it, the game closed; (3) check in game: numpad − / * open no chat, the
   dodge on his key; record in the external map row.
+  **Step (1) done 11:37:** `ConanSandbox/Config/DefaultInput.ini` taken from `pakchunk0-Windows.pak` (`repak get`) into `KUMM/.work/input310/` and diffed by
+  `.work/input310/diff_input.py`: the owner's file 258 rows / 166 names, the 3.1.0 default 289 / 190. **His edits to carry (same action, his key vs the default):**
+  `CrouchMode` LeftControl (default C) · `DodgeActionV2` ThumbMouseButton (LeftAlt) · `SecondaryActionV2` MiddleMouseButton (LeftControl) · `GlobalChat` None (Enter) ·
+  `GuildChat` None (Subtract = numpad −) · `VicinityChat` None (Multiply = numpad *); gamepad rows unchanged. `SkipGUI` (his + mouse buttons) — 3.1.0 adds a separate
+  `SKipGUI` LMB / RMB; `HideGUI` became `HideGui`. New in 3.1.0 and absent from his file: `HideGui`, `SKipGUI` and 23 axis rows — so his old file must NOT be
+  copied whole. Next: write the 3.1.0 user file in the game's own format (the game writes it after one change in its key menu — take that as the base), apply the
+  six rows, check by real keys.
 - [ ] 13. **The game's own mod list lost our texts in the move (found 2026-11-14 00:4x).** `set-pak-modinfo.py` (plan 44: Russian description, author, URL,
       change note in each pak's `modinfo.json`) was run on 3.0.1's `Mods` folder by hand; the 3.1.0 deploy copied the library paks — read live: KrinikConanUI
       author «», EAA's description raw BBCode «[img]https:…», Frequent_meteors «- rebuilt for update». Its only caller is `_config/release/make_volumes.sh`. Before

@@ -167,8 +167,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the Esc menu no longer rescales (a separate `queue_scale`; Esc = pause, and a batch at 0.0001 would be saved on «quit to main menu» and finish at once after
 > the load), elapsed written before duration when shrinking, null slots by `IsValid`, failures counted; E1 PASSED 11:28 (the Esc menu: the batch stands; out: ≈ 3 s a
 > bow). **PACK `9de0b63` pushed — bug 94 fixed, waits for the owner's play.** The remote `CraftItems` crafts instantly in ANY state (no entry) — the «instant
-> world» was that. **NEW bug 100:** after an Esc-menu cycle (remote open + `TryCloseWindow`) the next hub opening was taken for the Esc menu (0.0001) — cause unread.
-> Game PID 7820 open (mine), machine lock «kumm» to 12:00.
+> world» was that. **Bug 100 FIXED in game 11:35 (not committed — judge round running):** a stuck `esc_open.IngameMenu` (the remote's activation, the game closed
+> only `SML_ModList`) made the next hub run at 0.0001; `poll` clears `esc_open` on the full-screen close edge (run B100b). Game closed, machine lock released.
+> **Plan 53 step 14, recon done 11:37:** his six key edits listed against the 3.1.0 `DefaultInput.ini` (plan 53) — restore with a real-key check next chat.
 > **NEW finding (plan 53 step 14):** the owner's key bindings (`Input.ini` of 3.0.1 — chats off the
 > numpad, his dodge key) did not move to 3.1.0 — the game runs on defaults; carry his rows over onto the 3.1.0 action list, not the old file whole. Earlier: the
 > «instant without the hub» reading is confounded (bug 94 «Correction»); the player-path stand is ready (bug 94 «The player-path stand») — the F-batch case

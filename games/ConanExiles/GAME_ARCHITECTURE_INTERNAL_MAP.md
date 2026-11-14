@@ -1050,3 +1050,14 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   `StatusIcon` — the lock / claimed icon, Collapsed on an open journey) are filled when the grid is built; the game's page is born at every switch, OUR hub
   controller's kept instance is refreshed by `RefreshGrid` on every show since 2026-11-14 (bug 97). A flag set by `UnlockJourney` reaches the cards only after a
   delay (a fresh page right after the call still showed the lock); a feat bought by `BasePlayerChar:ServerPurchaseFeat(id)` shows at once.
+
+## The hero's crafting queue (read live 2026-11-14 on 3.1.0, KUMM bug 94)
+
+- `BasePlayerChar_C.CraftingQueue` (native `CraftingQueue`): entries are `RecipeItem`s in `ItemList` (empty slots — null refs); one entry point `CraftItems(Recipe)`
+  (called by the remote it crafts INSTANTLY, no entry — not the player's path). The hub column (`W_CraftingManagerGUI_C`, native `CraftingManagerGUI`):
+  `SlotCraftButton` / `SlotCraftAllButton` / `SlotCraftTenButton`, selection `m_CurrentlySelectedRecipe`; «Сделать 10» = the item in progress + ONE stack entry.
+- Entry float stats (`GameItem.Get/SetFloatStat(statID, Value, Replicate)`): **16** duration in game seconds (read every tick; `CraftTimeMultiplier` is baked in at
+  enqueue), **9** elapsed on the item in progress, **17** the recipe's base duration (bow 51401 — 3.0 s); int stat **1** — the stack's count. The queue runs on WORLD
+  time (the hero's `CustomTimeDilation` does not move it). Our pause section rescales 16 / 9 on every multiplier change (`KrinikConanUI` notes).
+- The hub closes by `CraftingGUI_C:TryCloseWindow()`; the Esc menu opens by `GUIModuleController:ActivateModule(FName('IngameMenu'), true, false)` (the game shows
+  Simple Mod List's `SML_ModList`) and closes by `W_IngameMenu_C:TryCloseWindow()`.
