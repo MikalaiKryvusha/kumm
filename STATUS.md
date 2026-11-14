@@ -142,72 +142,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > pushed — Параметры → Снаряжение bare world gone); item 4 measured (only Снаряжение → Таланты, the game's inventory teardown clears the shared feat selection —
 > needs a native read, bug 101 «Item 4 measured»); item 3 — the portrait whole on the first frame here, late only the waist cloth; TC mod elements M1–M7 pass by the
 > background twin (M6 ping open); run report `testcases/reports/2026-11-14_conan-hub-game-pages-backing-and-feat-card.md`. **Wall jump recon 15:2x:** `Climb(false)`
-> in the air at a wall starts climbing (MovementMode 7); vanilla Jump while climbing does NOTHING (the key is free); `_config/wall-stand.lua` (find · climb · wallinfo ·
-> jumpwall) — next: prototype ExitClimbing + LaunchCharacter(wall normal by a forward trace × push + up), hook point `BaseBPCombat_C:StartJump` (check it fires on
-> the wall), then the section in KrinikConanLocomotion. Uncommitted pack tools (judge pending): `feat-select-probe.lua`, `hubswitch/{tab-switch.lua,hub_run_bg.sh,
-> open-tab.lua}`, `wall-stand.lua`, `perk-trees/`, `devkit/kit-probe-hero-stats.{py,json}`. The game runs (background, PID by `launch-bg.ps1`), machine lock to 16:05.
-> **CHAT CLOSED 2026-11-14 13:45 (force, context 85 %).** ⚠️ Принудительное закрытие 2026-11-14 13:45: церемонии пропущены (проход судьи по итогам чата, подрезка
-> статуса, README, линтеры витрины) — долг оплачивает первое /end-chat-soft. Ложное утверждение, оставшееся в документах: нет (вывод «новые действия в 3.1.0»
-> и «устаревших вкладок нет» по первому прибору исправлены там, где стояли). No game of ours running, machine lock released, all commits pushed (pack
-> `fd74729`, KUMM — this commit). **FIRST NEXT CHAT:** (1) the owner's play — today's fixes: his six key bindings, the hub switches to / from «Снаряжение» in one
-> frame, the morning four (arrows, journeys, craft pace, Esc); (2) bug 101 item 4 (the feat selection card 66 ms late — the newborn's selection signal) and item
-> 3 («Параметры» portrait); (3) G2a cases M1–M7; (4) the night's list (wall jump, bug 75).
-> **NOW — chat of 2026-11-14 from 11:52 (DAYLOOP by the owner's word 11:53 «работай автономно, продолжаем фиксить баги в сборке конана»):**
-> (a) **plan 53 step 14 DONE 12:16** — the owner's six key bindings work in 3.1.0: his whole 3.0.1 `Input.ini` (the defaults of 3.0.1 and 3.1.0 are byte-identical;
-> the «new actions» reading was false — corrected) is the pack's `_config/Input.ini` and in the game; real keys on video + the defaults control — report
-> `testcases/reports/2026-11-14_conan-owner-keybinds-310.md`; a full dodge roll not seen (the hero overloaded 268 %) — for his play. (b) **bug 97 twins checked
-> 12:3x–12:52 — no stale data** (probe v2 reaches list entries; `TC_conan_hub_kept_tabs_stale_2026-11-14.md`; notes: the map page lacks Simple Minimap's ping
-> marker, the feat list keeps more built rows). (b2) **bug 101 OPEN** — real clicks at 144 fps: to / from «Снаряжение» a page hangs over the bare world 34–166 ms
-> (the backing `W_Carousel` → `Background`, `MaskOffset` 1 only on «Снаряжение», switched natively a tick apart from our page); «Параметры» portrait late.
-> Two Lua attempts (write / re-assert `MaskOffset` from the controller) measured and REVERTED — the game's fade writes after our tick; **next: make the kit's
-> `AnimBackgroundFadeOut` a no-op and let the controller own `MaskOffset`** (bug 101 «Attempts», fix2 kept in `.work/keybinds/`). **13:27 items 1–2 FIXED in game**
-> (fix 3: `CAROUSEL_NOOP` in the kit, the pak rebuilt and deployed, the controller owns `MaskOffset`): every switch to / from «Снаряжение» one frame, no blend
-> (`fix3.mp4`); open: the «Параметры» portrait late, small late strips under the tab row, the owner's play. Pack `c3a700f` + `fd74729` PUSHED
-> (controller + kit script; judge round 1: 1 defect fixed — the hold on the hub opening; round 2 clean); KUMM `fe0e498` pushed. The game runs this build
-> (controller = source, the rebuilt UI pak deployed). **Next in the hub audit:** the «Параметры» portrait (a control run with the section off first), the small
-> late strips under the tab row (the 69 ms top band after Снаряжение → Таланты), then G2 — the mod elements on hub pages and their first-frame check, cases M1–M8
-> written (`testcases/TC_conan_hub_mod_elements_first_frame_2026-11-14.md`, not run; the map page lacks Simple Minimap's `markerPing`), the embedding contract;
-> bug 101 item 4 mechanism read (the newborn feat page's selection reaches our kept page 66 ms after the switch); the run-report linter still names two
-> morning reports (`2026-11-14_conan-craft-hub-close-rescale.md` — no run moments, `…_conan-esc-flag-reset.md` — no «Functional run:» line) — their moments
-> are in bug 94 / bug 100, fill them from there, never by feel; the Таланты selection card; then the night's open list (wall jump, bug 75). Pushed 13:2x: pack `df7c244` + `7df3568`, KUMM
-> `7db5795` (5 judge rounds, the last clean). Rollback of the UI pak: `.work/keybinds/old_KrinikConanUI_1124.pak`. (c) **the owner 12:24–12:32: the hub is an MVP — it needs work and tests**; goals: no lag /
-> no jump on navigation, an easy mod-embedding mechanism, mod elements on a page's FIRST frame → the hub audit, plan 48 «The owner's words 2026-11-14» (step 1
-> done; next: real-input 144 fps run of all 9 tabs, the mod-element list and its first-frame check, the embedding contract). (d) 52 voice files renamed by their
-> write time (names up to 77 min ahead of the clock) + `stamp-gate.mjs` v3 (EXP-0526). Code judged: round 1 — 2 defects + 6 quality fixed; round 2 running.
-> **FIRST NEXT CHAT (written 11:41):** (1) the owner's play is the check of today's four fixes — square page arrows, the hub's journey page refresh (bug 97),
-> hub crafting at the real pace after the close (bug 94), the Esc flag reset (bug 100); (2) restore his six key bindings on 3.1.0 (plan 53 step 14 — the rows are
-> listed there, real-key check); (3) bug 97 twins — the other kept hub tabs (Таланты, Клан, Спутники, Карта, Базар) checked by the same method; (4) the open list
-> of the night (pointer line below), the wall jump (`KrinikConanLocomotion` PLAN row), bug 75 (the quick-loot rim). Rollback of today's UI pak (the arrows):
-> `KUMM/.work/arrows/old_KrinikConanUI.pak` (12 MB; delete once the owner has played the build). The game and the source Lua are equal (cmp, 11:4x).
-> **NEW CHAT 2026-11-14 09:51 +03:00 — /resume done, the Conan backlog shown to the owner in chat. His pick 2026-11-14 09:53 +03:00: the bugs of his play are the work, the water
-> reflections (bug 89) go to the far drawer (`[OWNER]` 09:53, verbatim in bug 89). Order taken: instant crafting (94) first, then the rest of «Баги из вашей игры»; the wall jump (a jump off a climbed wall,
-> `KrinikConanLocomotion` PLAN row) added to the queue by the owner 09:54 («еще я хотел прыжки из карабкания по вертикальным поверхностям»).**
-> **09:56 DAYLOOP by the owner's word** (`[OWNER]` 09:55 «работай автономно в дневнгм цикле») **· the gold «+» ACCEPTED** («золото интеофнйса принято и одобряю», plan 49;
-> the first-person shadow of folder 85 — no verdict yet, bug 98 C6 stays) **· loop item 1: the page arrows' diamonds even, not squashed** (his word, plan 49) **· item 2: the locked journeys (bug 97) —** `[OWNER]` 09:56 «очень важно
-> разобраться с закрытыми путешесьвиями» **·** then bug 94
-> (recon 09:5x: the instant-craft world is slot `Game_1.db` (the owner's new game of 2026-11-13), the minute-bandage world `Game_0.db` (2026-11-10) — no craft row in either
-> `dw_settings`, no buffs, no craft property).
-> **10:50 progress:** item 1 DONE in game — the arrow buttons lost their sizing TextBlock, the brushes' `ImageSize` 34.27² (kit, pak 7/7, deployed): Next
-> 55 × 54 px at 4K (was 55 × 61), ≈ 26 × 26 at 1080p. Item 2 FIXED in game — our hub controller's kept journey page was stale; `REFRESH[5]` calls the page's
-> native `RefreshGrid` on every show (my first cause claim of 10:15 rested on an invalid case — corrected everywhere, that first fix reverted). Run report
-> `testcases/reports/2026-11-14_conan-page-arrows-square-and-journeys-refresh.md`; judge rounds 1–2 done (round 2: no correctness defect); PACK `9e6a826` pushed. **11:06 item 3 (bug 94) FIXED in game, not committed yet:** reproduced by the
-> owner's path (C2: «Сделать 10» on bows, hub closed → 9 bows in ≈ 2 s); the queue's data = `RecipeItem` stats 16 (duration) / 9 (elapsed); `krinik_pause_in_menu`
-> `rescale_queue` multiplies them by new/old on every multiplier change → C2f: after the close one bow per ≈ 3 s. Open: C5 (a reopen mid-batch — waits for a free
-> PC), judge round 3 running, then commit (TC `TC_conan_craft_hub_close_2026-11-14.md`). C5 PASSED 11:12 (a reopen mid-batch keeps ≈ 3 s a bow); run report
-> `testcases/reports/2026-11-14_conan-craft-hub-close-rescale.md`. Judge round 3 (11:18): mechanism confirmed; fixed in the working tree and DEPLOYED (game PID 29588):
-> the Esc menu no longer rescales (a separate `queue_scale`; Esc = pause, and a batch at 0.0001 would be saved on «quit to main menu» and finish at once after
-> the load), elapsed written before duration when shrinking, null slots by `IsValid`, failures counted; E1 PASSED 11:28 (the Esc menu: the batch stands; out: ≈ 3 s a
-> bow). **PACK `9de0b63` pushed — bug 94 fixed, waits for the owner's play.** The remote `CraftItems` crafts instantly in ANY state (no entry) — the «instant
-> world» was that. **Bug 100 FIXED in game 11:35, PACK `4a08d5e` pushed (two known limits in the bug):** a stuck `esc_open.IngameMenu` (the remote's activation, the game closed
-> only `SML_ModList`) made the next hub run at 0.0001; `poll` clears `esc_open` on the full-screen close edge (run B100b). Game closed, machine lock released.
-> **Plan 53 step 14, recon done 11:37:** his six key edits listed against the 3.1.0 `DefaultInput.ini` (plan 53) — restore with a real-key check next chat.
-> **NEW finding (plan 53 step 14):** the owner's key bindings (`Input.ini` of 3.0.1 — chats off the
-> numpad, his dodge key) did not move to 3.1.0 — the game runs on defaults; ~~carry his rows over onto the 3.1.0 action list, not the old file whole~~ (FALSE —
-> corrected 2026-11-14 12:1x: the defaults of 3.0.1 and 3.1.0 are byte-identical, his whole file went in and works in game — plan 53 step 14). Earlier: the
-> «instant without the hub» reading is confounded (bug 94 «Correction»); the player-path stand is ready (bug 94 «The player-path stand») — the F-batch case
-> waits for a free PC (owner-presence BUSY twice at 10:4x). The harness
-> TEMP is STILL `D:\Temp` (its background-task output lands in `D:\Temp\claude\…`): VS Code was not restarted after the user TEMP moved to `F:\Temp` — told
-> the owner; the 8 leftovers in `D:\Temp` wait for that restart. Untracked on entry, not mine: `researches/pc-usb-lag/`, a Svarog PDF in `researches/svarogs-dream/`.
+> in the air at a wall starts climbing (MovementMode 7); vanilla Jump while climbing does NOTHING (the key is free). **15:3x the WALL JUMP BUILT** — KrinikConanLocomotion
+> section `krinik_wall_jump` (deployed, not committed — judge running): Jump while climbing → forward trace for the wall normal → `ExitClimbing` + `LaunchCharacter(normal ×
+> 250 + up × 350)`; TC `testcases/TC_conan_wall_jump_2026-11-14.md` W1 (pushed off ≈ 1.6 m, +63 cm, clip `_scratch/walljump/wj1.mp4`), W2 control, W3 pass; open — W4
+> (a ceiling / slope), W5 the owner's real Space, W6 the bow air shot with both hooks. Pack: `6c4ce00` (hub backing) and `e288d2a` (perk-page tools, 5 judge rounds)
+> PUSHED. Uncommitted pack tools (judged with the wall jump): `feat-select-probe.lua`, `hubswitch/{tab-switch.lua,hub_run_bg.sh,open-tab.lua}`, `wall-stand.lua`. The game
+> runs (background, PID 31092), machine lock to 16:05.
+> **Moved verbatim to the chronicle (entry 2026-11-14 15:41 +03:00):** the blocks CHAT CLOSED 2026-11-14 13:45, NOW 11:52 (dayloop), FIRST NEXT CHAT (11:41) and NEW CHAT 09:51 of the morning chat. Still open from them: the owner's play — his six key bindings, the hub switches to / from «Снаряжение», the morning four (square page arrows, journeys refresh, craft pace after the close, Esc flag); the run-report linter's two morning reports (moments in bugs 94 / 100); plan 53 step 12 (parked to ≈ 2026-11-15); the rollback paks in `.work/keybinds/` and `.work/arrows/` (delete after the owner's play).
 > **Moved verbatim to the chronicle (entry 2026-11-14 11:40 +03:00):** the blocks CHAT CLOSED 2026-11-14 02:16, NOW 2026-11-14 00:15–02:15 and HANDOVER 2026-11-13 22:0x (the 3.1.0 kit rebuild, the devkit update, the D:\Temp cleanup). Still open from them: plan 53 step 12 (other authors' stale vanilla copies, 3 of 11 — parked until ≈ 2026-11-15 by the owner; resume `python -I -X utf8 _config/check-mod-updates.py --since 2026-11-03 --all`); the Pickup+ admin widget error (`ComboBox_DrawDebugline`); UE4SS v4.0.0 as its own step; bug 75 (the quick-loot rim, reopened); bug 98 C6 (the owner's verdict on the first-person shadow frame, review folder 85); plan 52 steps 3–4; bug 93 S8 / S9 and the no-zoom-on-sprint wish; bug 96 (the owner's play); the pack judges' B2–B4 (pack `ff30fb9` message); L1–L5 of `TC_conan_move_3.1.0_2026-11-13.md`; the quick wins by A-B-A-B; the mods-table storefront row (the foliage-shadow fix — the owner's proofreading); paks uncompressed (size only); the live run of the `attr-arrows-show.lua` / `plus-tint-probe.lua` guards; `_config/craft-*.lua` probes uncommitted; rollback paks `KUMM/.work/kit310/old/`; 6 `*.tmp` in `D:\Temp` (after a VS Code restart).
 > **Moved verbatim to the chronicle (entry 2026-11-13 22:0x +03:00):** the 2026-11-13 blocks from the forced closure of 20:1x back to the HANDOVER of 11:08 (three
 > forced closures — their skipped ceremonies paid by this soft closure — the NOW / HANDOVER blocks of the move onto 3.1.0, bugs 93–99, plan 52); their open items

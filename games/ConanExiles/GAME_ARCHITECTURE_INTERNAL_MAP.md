@@ -141,6 +141,12 @@ Climbing (remote recon 2026-11-02 14:1x, for the owner's 09:07 request «кно�
   (`tp_ground.sh 17929 244723`), the ring trace `scratchpad ring.lua` found a wall at yaw 135°, 5.7 m, normal (0.81, −0.59, −0.03); the oasis camp and the ostrich canyon
   point have slopes only (normal Z ≈ 0.8–0.98). A line trace by the remote: `Default__KismetSystemLibrary:LineTraceSingle(p, s, e, 0, false, {}, 0, hit, true, c, c, 0)` —
   `hit` IS the FHitResult (`hit.Distance`, `hit.ImpactNormal`), not `hit.OutHit`.
+  **2026-11-14 15:2x — the climb by the remote, no real input (`_config/wall-stand.lua`):** facing a vertical wall 60 cm off, the hero's own jump input event
+  (`InpActEvt_Jump_K2Node_InputActionEvent_27` then `_26`) + `AddMovementInput` into the wall + `Climb(false)` called WHILE AIRBORNE starts the climb: `MovementMode` 7
+  (custom), `CustomMovementMode` 0; forward input then climbs up. The game does NOTHING on Jump while climbing (mode 7, speed 0 for 1 s). `BaseBPCombat_C:StartJump`
+  still runs on that press (and on the ground jump) — after the SECOND of the two jump events, the same moment for both. `CharacterMovement:ExitClimbing()` +
+  `LaunchCharacter` leave the wall (mode 3, then 1 on landing). `CurrentWall`'s fields are not readable from Lua — the wall's normal comes from a forward line
+  trace. Our wall jump: KrinikConanLocomotion `krinik_wall_jump`.
 **The movement row — how the hero's speed type is chosen (bytecode of `BaseBPCombat::EvaluateMovementType` + a live read of the table, 2026-11-10 19:4x):**
 the hero's movement row is the FIRST valid row of `/Game/Systems/Combat/DirectionalMovement/DT_CharacterMovement` (row struct `STR_CharacterMovement`), in this
 order: `AttackingRootMotion` (IsRootMotionCombat, 0…0°, 225) · `UsingItem` (0…0°, 200) · `Casual` (0…180°, 150) · `Ranged` (RangedCombat, 0…180°, 225) · `Sprint`
