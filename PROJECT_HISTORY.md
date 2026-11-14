@@ -7243,3 +7243,56 @@ Their open items stay in STATUS as one pointer line. Verbatim:
 > rule (`SetVisibility` inside `OnChildActivated`) and narrowed the rest to the first native opening of a page with our instance + hooks present — NEXT
 > step in plan 48. **HOUSE_RULES 29 (new, the owner's word 00:03):** `pult.sh` exits 4 on a dead game; every series ends with `|| break`. Review folder 70 — the «Снаряжение» switches ×15. Tools
 > `ConanExiles/_config/hubswitch/` (`hub_run.sh <tag>`, `hub_switches.py`).
+
+## 2026-11-14 11:40 +03:00 — STATUS bonsai trim (chat of 2026-11-14 morning, dayloop): the blocks of the night 2026-11-13/14 moved verbatim
+
+> **CHAT CLOSED 2026-11-14 02:16 at the 85 % budget (dayloop): ceremonies SKIPPED — the bonsai trim of STATUS (244 lines), `check --gate-budgets`, the
+> experience lint; the next /end-chat-soft pays them. Game closed, machine lock free, KUMM and pack pushed. FIRST next chat: the owner's verdict on review
+> folder 85 (gold «+», first-person shadow), then bug 94 (instant crafting — `bugs/94_…`), then item 3 below.**
+> **NOW 2026-11-14 00:15–02:15 — dayloop by the owner's word (`[OWNER]` 2026-11-14 00:15 «работай авьономно в дневном цикле»), our Conan mods on the 3.1.0 kit.**
+>   DONE (deployed in the 3.1.0 game, run report `testcases/reports/2026-11-14_conan-kit-310-our-mods.md`): the three kit paks rebuilt on kit CL 383024 —
+>   KrinikConanGraphics (the kit update had reset our `M_Foliage` bound to 0 — re-applied, live 100), KrinikConanUI («3.1.0» under the menu logo; the «+» of
+>   «Хар-ки» in the owner's G1 gold by OUR baked textures — a brush tint above 1.0 is clamped on screen; page arrows in the same gold), KrinikConanArchery
+>   (re-cook only). `kit-buildmod.py` aligned with the 3.1.0 `BuildMod.cs` (no ModCompat.bin, pipeline caches, the manifest's `<xxh128>`); the shared
+>   `kit_manifest.py` fixes the latent MD5-only manifest edit of `set-pak-version.py` / `set-pak-modinfo.py`. All cases K1–K10 pass (K9 — a real shot, 01:32).
+>   Plan 53 step 13: the game's mod list got our texts back (66/66, the note of pak-less mods now derived from the manifest; seen in the «Моды» screen) — open:
+>   the KrinikConanGraphics row of `_config/public_release/mods-table.mjs` lacks the foliage-shadow fix (storefront text — the owner's proofreading), the paks
+>   uncompressed (judge finding — size only, next rebuild). My test click spent one free attribute point of the owner's hero on Сила (2 → 1 free). Bug 94: the
+>   hero crafts INSTANTLY on this world (queue empty right after `CraftItems`) — find why first (`bugs/94_…` «Recon on 3.1.0»;
+>   02:14: no admin / cheat flag on the hero or his controller — next: the world's settings rows, the recipe on 3.1.0, a fresh new game). Bug 98: C4 PASS (01:38 — the
+>   first-person shadow flags stay on after the switch and mid-draw); C6 frame in review folder 85 (`pokaz.html`, opened for the owner 01:35 — whether it reached his
+>   screen is not checked) — his verdict closes the bug. PACK COMMITTED `0f4b7dc` (pushed) after 3 judge rounds (31 findings: fixed 25, deferred 1 — paks
+>   uncompressed, refuted 5); judge round 4 (02:0x) — 2 low, fixed in pack `5bfd6de` (pushed; round 5 not run — two one-line
+>   guards); owed: the live run of the `attr-arrows-show.lua` / `plus-tint-probe.lua` argument guards at the next game session. `_config/craft-*.lua` (bug 94 probes) stay uncommitted on disk. Rollback paks of the 3.0.1 kit:
+>   `KUMM/.work/kit310/old/` (19 MB). Then item 3 below.
+> **HANDOVER 2026-11-13 22:0x +03:00 — chat closed by the owner's word (`[OWNER]` 22:02 «закрывайчат»), /end-chat-soft with all ceremonies. FIRST next chat:**
+>   1. **The 3.1.0 devkit IS INSTALLED** (CL **383024**, was 378787 — older than 3.0.1's game): the Epic launcher began the update 21:50 by the owner's 21:47 «если да,
+>      запускай эпик лаунчер, обновляй» and finished 22:00:09 (its log `%LOCALAPPDATA%\EpicGamesLauncher\Saved\Logs\EpicGamesLauncher.log`: `HandleTaskComplete …
+>      912a768dddac4142b862ad0fc2ad98df AlertCode=[ok] IncompleteInstall=0`; the Epic manifest `C:\ProgramData\Epic\EpicGamesLauncher\Data\Manifests\*.item` —
+>      `AppVersionString` 383024, `bIsIncompleteInstall` false). `Build.version` alone does not prove a finished install (written mid-download). First: open the kit
+>      once and see our mod folders `UE4\Content\Mods\Krinik*` intact. Then our kit builds, in order (plan 53 step 10): KrinikConanGraphics `M_Foliage` (`kit-foliage-wpo.py` + the Nanite raster shader
+>      patch, notes `games/ConanExiles/mods/KrinikConanGraphics.md` — the game's 3.1.0 `M_Foliage` changed), KrinikConanUI (`kit-conanui-edit.py`: «3.1.0» under the menu
+>      logo + every vanilla widget it saves; `active.txt` sits in KrinikConanArchery now), KrinikConanArchery.
+>   2. **PARKED until ≈ 2026-11-15 by the owner's word** (`[OWNER]` 21:43 «давай пока нашши моды делать» · 21:44 «пару дней дадим остальным мөд5рам их моды обновить»):
+>      plan 53 step 12 — other authors' stale vanilla copies. 3 of 11 done; read in the 3.1.0 world 22:01 (`_config/move310-checks.lua`): `FollowerPerk`, `SRE.show` and
+>      `Grimoire` live in the console table (129 rows — other mods merge into it; the script's «want 29» was the file's count), the stat table 3425 rows = 3404 + 21; EAA's
+>      station class loaded — which copy loaded is NOT shown by that (its `BindRunningState` exists in 3.0.1 too); the queue pausing on a full output not walked. The rest in the step's table. Resume: `python -I -X utf8 _config/check-mod-updates.py
+>      --since 2026-11-03 --all` first (21:4x: 6 of 66 authors updated since the beta; Hair We Go's 21:36 upload taken and deployed).
+>   3. The open list of the day (moved blocks below): Pickup+ admin widget error new in 3.1.0 (`ComboBox_DrawDebugline`); UE4SS v4.0.0 (`mods/_incoming/UE4SS_v4.0.0`)
+>      as its own step; bug 75 (the quick-loot rim jumps to the last cell — reopened by the owner 16:07); bug 98 C4 / C6 (first-person shadow); plan 52 steps 3–4 (the
+>      first-person look); bug 97 (journeys locked after the tutorial); bug 94 (hub craft batch); bug 93 S8 / S9; ~~plan 49 G1 (the «+» in Conan gold, to build)~~ built 2026-11-14 (NOW block); the pack
+>      judges' open findings B2–B4 (pack commit `ff30fb9` message); L1–L5 of `TC_conan_move_3.1.0_2026-11-13.md` (L6 read 22:00: the five foreign classes are ALREADY
+>      loaded at world entry — the `find_loaded` change is harmless, not proven needed); bug 96 (the «E Взять» plate over a touched bush — fix pending verification:
+>      the owner's play + a judge round owed, `bugs/96_…`); the owner's bug 93 wish — no aim zoom while sprinting with the bow (`bugs/93_…` «The owner's next wish»);
+>      the quick wins, each by an A-B-A-B measurement (`researches/ue5-guru-tweaks-2026-11/README.md` §2).
+>   Rules born this chat: HOUSE_RULES 13 (voice comments during ALL work; `voice-reminder.mjs --always` reminds after 5 min of silence), 13.3 (`silero_tts/say.py`
+>   with Glass, never the beeps), 15 (`TEMP` / `TMP` set in every command — the harness overrides them, the project `env` does not reach the shells); the game
+>   launches in FRONT (`launch-fg.ps1`, the owner 21:13) and waits while he types (`owner-presence` refuses). New tools: pack `_config/stale-copy-check.py`, the plan
+>   line `game-chunk:<sha1>` of `patch-mod-asset.py` (`_config/krinik_patches/EnhancedArmoryAndArsenal__BP_PL_Crafting_Station.tsv`).
+>   **After the close, 22:44:** the user `TEMP` / `TMP` → `F:\Temp` (the owner 22:43 «разве я не просил временную папку клода на E  или F перенести» — he had, on
+>   2026-10-25); the next VS Code start gives the harness `F:\Temp` — check `echo "$TEMP"` in the new chat (`D:\Temp` there = VS Code was not restarted).
+>   **22:5x `D:\Temp` cleaned by the owner's word** (`[OWNER]` 22:52 «д теемп чисти»): 367 609 files, 221 046 folders, 42 dangling junctions of the KAIF sandboxes
+>   removed file by file; D free 16.5 → 25.5 GB (the 56 GB `kumm-game-only-view` were hard links to the game's paks — names only). Left 8, all busy: `claude` (this
+>   session), the context-budget hook's `context-budget-<session>.json`, 6 `*.tmp` of other programs — remove them in the new chat (after the VS Code restart).
+>   State at the close: my game closed 22:02 (no crash window), the machine lock released, KUMM and pack `09e38fc` pushed; the Epic launcher left open (the kit
+>   update is finished).

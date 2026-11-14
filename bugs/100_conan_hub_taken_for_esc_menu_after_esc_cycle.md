@@ -22,6 +22,11 @@ dilation; the craft multiplier follows it) · **Version/build:** 3.1.0, KrinikCo
   the edge fixed it.
 - **Run B100b (11:34, game PID 38224):** remote Esc open → «ESC-меню открыто: 0.0001»; close → «признак ESC-меню сброшен»; hub → «меню открыто: 0.03»; hub closed → 1.0.
 
+- **Committed:** pack `4a08d5e` (judge round: no blocking defect). **Known limits (judge F1, F2):** (1) a hub closed and an Esc menu opened inside ONE 250 ms poll —
+  the new Esc state is cleared before the full-screen flag rises, the Esc menu runs at 0.03 (a weakening, not a breakage); (2) a stuck entry survives one
+  full-screen session when no poll sees the closed state between two menus (a fast close-then-Tab, or one remote call). A complete fix asks the game which module
+  is shown at poll time instead of keeping event flags — not done.
+
 ## First steps (done)
 
 1. Read the section's Esc detection (`ESC_MODULES` :72, the `esc` decision near :612, the module hook near :713) — which flag stays set after the close.
