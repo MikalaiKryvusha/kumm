@@ -23,10 +23,10 @@ machine lock «kumm»; the game launched by `launch-fg.ps1` (it stayed behind VS
 
 ## Checks
 
-- Hygiene: every built pak's manifest re-hashed by an independent pass (`check_manifest_hashes.py`: 7/7 for each of the three, run 2's UI 7/7); our XXH128 =
+Hygiene: every built pak's manifest re-hashed by an independent pass (`check_manifest_hashes.py`: 7/7 for each of the three, run 2's UI 7/7); our XXH128 =
   the kit's on an official build (Frequent_meteors 10/10); `set-pak-version.py` on a copy of an `<xxh128>` pak — 10/10, its control (the old script) — modinfo
   xxh128 DIFF; the cooked `M_Foliage` vs the game's 3.1.0 one by tagged property — only our bound and `StateId` differ.
-- Functional run: the 3.1.0 game with the owner's world, run by the remote and two real-input steps; READ: the game log (mounts), the UE4SS log, the remote's
+Functional run: the 3.1.0 game with the owner's world, run by the remote and two real-input steps; READ: the game log (mounts), the UE4SS log, the remote's
   live reads (the bound, the button's style tints, the strip's slot paddings), 4K frames by eye and by pixel samples.
 - K1 pass · K2 pass (bound 100.0 live) · K3 pass · K4 pass («3.1.0» · «0.9.0») · K5 fail → fixed → pass (run 1 tint clamped; run 2 rim (206, 175, 107) vs the
   owner's mockup 05 (209, 178, 118)) · K6 pass (hover (229, 206, 104)) · K7 pass by stand (arrows made visible by the remote; no row past 20 in this save) ·

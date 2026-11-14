@@ -26,9 +26,9 @@ frames `capture-window.ps1`, real input `mouse-seq.ps1` (owner-idle FREE only).
 
 ## Checks
 
-- Hygiene: kit compile + save every run; the pak's manifest 7/7 (`check_manifest_hashes.py`); two independent judge rounds (round 1: 5 Lua findings — all on the
+Hygiene: kit compile + save every run; the pak's manifest 7/7 (`check_manifest_hashes.py`); two independent judge rounds (round 1: 5 Lua findings — all on the
   reverted first fix — and 3 Python findings, fixed; round 2: no correctness defect, 4 low findings, fixed).
-- Functional run: the real game with the owner's world, read by the remote and by eye: Q1 34.27 × 39.08 → Q4 34.27 × 34.27; Q5 Next 55 × 54 px at 4K (was 55 × 61),
+Functional run: the real game with the owner's world, read by the remote and by eye: Q1 34.27 × 39.08 → Q4 34.27 × 34.27; Q5 Next 55 × 54 px at 4K (was 55 × 61),
   «+» 70 × 70; Q6 ≈ 26 × 26 at native 1080p; Q7 centre unchanged; Q8 step2 + look idempotent. J0 data = window on a fresh entry; J1 WITHDRAWN (method); J1b the
   stale page reproduced by a feat bought with the knowledge window's own call; J2 a feat between two switches — our page open; J3 after a real close — 40 / 40
   cards equal to the game's newborn page (control: the old off-screen game page differed); J4 6 / 6 bursts OK; J5 the minimap helper counted; J6 «ошибок 0»;
