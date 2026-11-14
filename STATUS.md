@@ -148,6 +148,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **FIRST NEXT CHAT (written 11:41):** (1) the owner's play is the check of today's four fixes — square page arrows, the hub's journey page refresh (bug 97),
+> hub crafting at the real pace after the close (bug 94), the Esc flag reset (bug 100); (2) restore his six key bindings on 3.1.0 (plan 53 step 14 — the rows are
+> listed there, real-key check); (3) bug 97 twins — the other kept hub tabs (Таланты, Клан, Спутники, Карта, Базар) checked by the same method; (4) the open list
+> of the night (pointer line below), the wall jump (`KrinikConanLocomotion` PLAN row), bug 75 (the quick-loot rim).
 > **NEW CHAT 2026-11-14 09:51 +03:00 — /resume done, the Conan backlog shown to the owner in chat. His pick 2026-11-14 09:53 +03:00: the bugs of his play are the work, the water
 > reflections (bug 89) go to the far drawer (`[OWNER]` 09:53, verbatim in bug 89). Order taken: instant crafting (94) first, then the rest of «Баги из вашей игры»; the wall jump (a jump off a climbed wall,
 > `KrinikConanLocomotion` PLAN row) added to the queue by the owner 09:54 («еще я хотел прыжки из карабкания по вертикальным поверхностям»).**
