@@ -133,6 +133,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW — chat of 2026-11-14 from 22:29 (`resume` + the owner's task), DAYLOOP by his word 22:33 «да, работай автономно в дневном лупе».** (1) The closure
+> ladder REDONE by his words 19:10 / 22:29 (verbatim — PROJECT_HISTORY entry 2026-11-14 22:3x): 70 / 75 % warnings only (no closing word); from 80 % finish the work,
+> then `/end-chat-soft` in full; `/end-chat-force` only from 92 % (the hook refuses it below); a REFUSED closure call is no closure for the farewell and autonomy
+> hooks. Judge rounds 1–2 found 6 defects, all fixed; round 3 running; NOT committed yet (KUMM: the three hooks, test-guards, CLAUDE.md, AGENT_GUIDE, maps, reference,
+> report `testcases/reports/2026-11-14_context-budget-soft-80-force-92.md`; KAIF #188 comment posted). Autocompaction measured at ≈ 96.7 % of 1 M.
+> (2) Interview #024 (Svarog night findings) status closed — its answers were applied on 2026-10-18. (3) Plan 52 (the first-person body look with a bow): C1a,
+> C2a–C2c pass on the post-process ABP (the heroine — a CHILD anim BP — no T-pose, 0 anim log lines); step 3 Lua WRITTEN in KrinikConanArchery («вид тела от первого
+> лица», deployed; S3a «real 3 takes the bow → on» and S3c pass; S3b put-away and C3 draw NOT run — the owner was at the keyboard); judge on the Lua running; the
+> look A / B → interview #036 (page: review folder 87 `index.html`), build default B. Found: `ToggleWieldWeapon()` wields by the remote without input (fires no equip
+> event); the real key fires `OnWeaponEquip` / `OnWeaponUnequip`. The game of this chat runs (background, PID 29760), machine lock «kumm» to 23:42.
 > **NOW — chat of 2026-11-14 from 16:24, DAYLOOP by the owner's word 16:25 «работай автономно» (task: «двигать сборку к стабильному состоянию, тестируем
 > наши моды, фиксим баги»).** Done 17:21: (0) wall jump — the stand had the jump PRESS / RELEASE swapped (`InpActEvt_Jump_…_26` is the press, `_27` the
 > release; `_config/input-bindings-probe.lua`), W1 / W7 re-run, **W5 by a real Space pass**, W8 / W9 pass; W6 (the bow in the flight after a push) BLOCKED by
@@ -222,4 +232,4 @@ open: #140 (`bugs/KAIF/09_*`, the origin moved it to 2.10) and three tickets of 
 #179 (`bugs/KAIF/19_*`, 2026-10-28): `/resume` costs ≈ 140 k tokens (measured 2026-10-29 10:08 by the transcript `usage`: 64 k → 181 k = 117 k,
 `EXPERIENCE.md` grepped by tag, not read whole) — proposed: read each document's "entry slice" at entry; rules as statements
 without rationale (the owner's word, in the ticket's comments); until the origin decides, the ritual reads everything. Since 2026-10-28 the hook
-`.claude/hooks/context-budget.mjs` runs (2026-10-30: #181 farewell hook, #182 autonomy guard, #183 the agent cleans up after itself — `bugs/KAIF/21–23`): at 70 % and 75 % — warnings only (the owner 2026-10-31 21:26), at 85 % — the closure (`CLAUDE.md`).
+`.claude/hooks/context-budget.mjs` runs (2026-10-30: #181 farewell hook, #182 autonomy guard, #183 the agent cleans up after itself — `bugs/KAIF/21–23`): at 70 % and 75 % — warnings only (the owner 2026-10-31 21:26); from 80 % — finish the work, then `/end-chat-soft` in full; `/end-chat-force` only from 92 % (the owner 2026-11-14 19:10 · 22:29; `CLAUDE.md`).

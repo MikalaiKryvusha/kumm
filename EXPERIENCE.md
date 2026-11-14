@@ -91,6 +91,21 @@
 
 ## Entries
 
+### EXP-0536 · 2026-11-14 · ❌→✅ · #tools #owner-presence #real-input #mouse-seq #remote-access
+class: the presence probe read the agent's own (and a keep-alive's) input as the owner at the keyboard
+**Result:** for an hour every second real-input sequence was refused «BUSY» and real tests waited; the owner: «я не на клавиатуре. я к омп час неприкосался».
+Measured: our own SendInput resets GetLastInputInfo; the remote-access hosts (Parsec, Sunshine) add one input every ≈ 50 s.
+**Lesson:** a «someone is at the PC» signal is checked against the agent's own actions first — the input tools mark their last tick (`owner-idle.ps1 -MarkOwn`)
+and the probe discounts it; a foreign periodic input is measured and named, not guessed. When the owner says he is away, probe the signal before arguing with him.
+mechanized: yes — `owner-idle.ps1 -MarkOwn` called by `mouse-seq.ps1` / `input.ps1` (report `testcases/reports/2026-11-14_owner-idle-own-input.md`)
+
+### EXP-0535 · 2026-11-14 · ❌→✅ · #conan #ue4ss #hook #anim #hang #defer
+class: an engine call that rebuilds state made synchronously inside a hooked game function
+**Result:** `SetOverridePostProcessAnimBP(cls, true)` (ReinitAnimInstances) inside a post-hook of `SwitchToFirstPersonCamera` hung the game at once; the first
+build, which called it via `ExecuteInGameThread`, never did. Killing the hung game corrupted the stand (fists + bow, no draw) until a reload.
+**Lesson:** in a UE4SS hook only READ and snapshot parameters; anything that rebuilds components, anim instances or the world goes to the next game-thread step.
+mechanized: no — the archery mod's hook wrapper defers every decision (comment at the wrapper); a guard would need a list of «rebuilding» calls
+
 ### EXP-0534 · 2026-11-14 · ❌ · #conan #real-input #mouse-seq #claim #control-case #walljump
 class: a rule about the game drawn from «the synthetic key did nothing» without a control that the key arrived at all
 **Result:** 18:10 two `mouse-seq` Spaces on the wall did nothing with `bWantsToClimb` cleared → written into the map as «the player's Jump runs only with the

@@ -29,3 +29,16 @@ closing vocabulary («доводи до среза», «пора закрыва�
 
 Ship the budget hook with one closure threshold and warnings that never use closing words; make the thresholds a deployment setting the owner states in his
 own words at install (some owners want the soft closure early, this one wants work to the end).
+
+## Superseded thresholds (KUMM, 2026-11-14 22:5x)
+
+The 85 % closure of this ticket proved too late for the SOFT closure: on 2026-11-14 18:35 a chat reached 85 % and had no room left for the judge pass, the
+trim and the farewell, so it force-closed. The owner moved the ladder (verbatim in KUMM `PROJECT_HISTORY.md`, entry 2026-11-14 22:3x): warnings at 70 % and
+75 % stay warnings (now with NO closing word at all, not even of the next step: the self-check greps the warning for any closing stem); from 80 % finish the
+current work to a cut and run the soft closure in full; the force closure only from 92 %, never earlier. The hook's gate refuses `/end-chat-soft` below 80 %
+and `/end-chat-force` below 92 % without the owner's word in the args.
+
+A second field defect surfaced with it: the Stop hooks (farewell capture, autonomy guard) read a closure from the `Skill` tool_use alone, so a closure call
+the gate REFUSED counted as a closure (the autonomy mode switched off, a false farewell written). Fixed: a closure counts only while its tool_result is not
+`is_error`. Proposal addendum for the origin: whatever gate a deployment puts on closure skills, the hooks that react to a closure must read the RESULT of the
+call, not the call.

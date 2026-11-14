@@ -7,17 +7,19 @@
 //
 //   UserPromptSubmit: «работай автономно / работай сам / автопилот» → режим ВКЛ (`.kaif/autonomy.json`); «стоп / пауза / хватит / остановись» в
 //                     начале сообщения → ВЫКЛ. Остальные реплики режим не трогают: вопрос посреди автономной работы — ответить и работать дальше.
-//   Stop:             режим ВКЛ → остановку не пускает: окно < 85 % — «работай дальше»; ≥ 85 % — «закрывай чат» (до 2026-10-31 21:26 — 75 %; слово владельца «на 70 и 75 я просил лишь предупреждать»). Ход, в котором
-//                     вызван навык закрытия, пускает и режим выключает. Объявленное исключение — строка `<!-- autonomy-pause: <почему> -->` в
+//   Stop:             режим ВКЛ → остановку не пускает: окно < 80 % — «работай дальше»; ≥ 80 % — «доделай работу и закрывай чат мягко», ≥ 92 % —
+//                     «закрывай срочно» (пороги PCT_SOFT / PCT_FORCE хука context-budget; до 2026-11-14 22:29 — 85 %, до 2026-10-31 21:26 — 75 %). Ход, в котором
+//                     ПРИНЯТ вызов навыка закрытия (отказанный хуком — не в счёт), пускает и режим выключает. Объявленное исключение — строка `<!-- autonomy-pause: <почему> -->` в
 //                     последнем сообщении (всё оставшееся ждёт владельца, и он позван голосом).
 //
 //   node autonomy-guard.mjs                 # событие на stdin; на любом неожиданном — молча 0
 //   node autonomy-guard.mjs --state <файл>  # где маркер (проверки tools/test-guards.mjs, часть K)
 //
-// [TESTED: 2026-10-30 · testcases/reports/2026-10-30_autonomy-guard-wider-order.md (verdict partial) · arming: part K 13 cases incl. the owner's «гоу автономно», red on the old pattern; the live marker flips on his words · a live Stop refused by the guard: NOT yet observed]
+// [TESTED: 2026-10-30 · testcases/reports/2026-10-30_autonomy-guard-wider-order.md (verdict partial) · arming: part K incl. the owner's «гоу автономно», red on the old pattern; the live marker flips on his words · a live Stop refused by the guard: NOT yet observed]
+// [TESTED: 2026-11-14 · testcases/reports/2026-11-14_context-budget-soft-80-force-92.md · the 80 / 92 % steps, the boundaries 79.9 / 80 / 91.9 / 92, a refused closure keeps the mode on (part K); a Stop on this live session's transcript blocked «не останавливайся»]
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { lastUsage, contextOf, WINDOW, PCT_FORCE } from '../../.claude/hooks/context-budget.mjs';
+import { lastUsage, contextOf, WINDOW, PCT_SOFT, PCT_FORCE, shown } from '../../.claude/hooks/context-budget.mjs';
 import { readTurn } from './farewell-capture.mjs';
 
 // Any «автономно / автономный…» is the order, whatever word stands before it («гоу автономно», «давай автономно», «работай автономно»):
@@ -32,8 +34,10 @@ export function decideStop({ on, pct, closed, text }) {
   if (!on) return null;
   if (closed) return { off: true };
   if (text && PAUSE_MARK.test(text)) return null;
-  if (pct >= PCT_FORCE) return { block: `autonomy-guard: автономный режим и окно ${pct.toFixed(0)} % ≥ ${PCT_FORCE} % — закрывай чат: /end-chat-soft (передача дел, коммит, прощальное сообщение — его запишет хук прощания).` };
-  return { block: `autonomy-guard: владелец велел работать автономно, окно ${pct.toFixed(0)} % < ${PCT_FORCE} % — не останавливайся. Бери следующий пункт беклога (/dayloop: STATUS «Where to continue», план 36) и работай; чат закрывается только на ${PCT_FORCE} % окна или по слову владельца. Всё оставшееся ждёт владельца — позови голосом (node .kaif/tools/contour/review.mjs --call "<что нужно>") и поставь в последнем сообщении <!-- autonomy-pause: <почему> -->.` };
+  const p = shown(pct);   // вниз до десятой: «окно 80 % < 80 %» на 79.6 % звало закрываться (судья 2026-11-14)
+  if (pct >= PCT_FORCE) return { block: `autonomy-guard: автономный режим и окно ${p} % ≥ ${PCT_FORCE} % — закрывай чат срочно: /end-chat-force (короткая передача дел, коммит, пуш, прощание — его запишет хук прощания).` };
+  if (pct >= PCT_SOFT) return { block: `autonomy-guard: автономный режим и окно ${p} % ≥ ${PCT_SOFT} % — не останавливайся: доделай текущую работу до среза и закрывай чат мягко: /end-chat-soft целиком (судья, передача дел, коммит, пуш, прощальное сообщение — его запишет хук прощания).` };
+  return { block: `autonomy-guard: владелец велел работать автономно, окно ${p} % < ${PCT_SOFT} % — не останавливайся. Бери следующий пункт беклога (/dayloop: STATUS «Where to continue», план 36) и работай в обычном темпе. Всё оставшееся ждёт владельца — позови голосом (node .kaif/tools/contour/review.mjs --call "<что нужно>") и поставь в последнем сообщении <!-- autonomy-pause: <почему> -->.` };
 }
 
 function main() {

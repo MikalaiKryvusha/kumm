@@ -3,6 +3,21 @@
 
 
 
+## 2026-11-14 22:3x +03:00 — the context-budget closure moves: from 80 % finish the work and run the soft closure, the force closure only from 92 %
+
+Verbatim, 2026-11-14 19:10 (transcript `4be8d21c…`, after the 18:35 forced closure at 85 % had no room left for the soft one): «неправильно хук закрытия чата по
+переполнению контеста работает. ты так и не смог корректно софт закрытие сделать. исправляем хук, может раньше начинай, на 80% начинай доделывать и мягкое закрытие
+запускать». That chat edited `.claude/hooks/context-budget.mjs` (a `PCT_SOFT = 80` step, uncommitted) and ended; its comment pointed to a chronicle entry that was never
+written — this entry is it.
+
+Verbatim, 2026-11-14 22:29 (the next chat, under `resume`): «переделываем лук автозакрытия, чтобы на 80% ты приступал к доделыванию текущих работ и затем к началу
+закрытия часа, судейству и так далее. быстрое закрытие только при 92%, не раньше» · 22:30 «и после этого продолжаем делать сборку конана, чиним баги, тестируем».
+
+The new ladder (window 1 M, `CONTEXT_BUDGET_WINDOW`): 70 % and 75 % — warnings only (his word of 2026-10-31 21:26 stands); from 80 % — finish the current work to a
+cut, start nothing new, then `/end-chat-soft` in full (the judge pass, the handover, the bonsai trim, commit, push, the farewell); from 92 % — `/end-chat-force`. The
+hook's gate refuses `/end-chat-soft` below 80 % and `/end-chat-force` below 92 % unless the skill's args carry his own closing word; the autonomy guard blocks a stop
+with «close» from 80 %. Supersedes the 85 % closure of 2026-10-31 21:26.
+
 ## 2026-11-13 22:44 +03:00 — the Claude temp folder off D:\Temp: the user TEMP / TMP → F:\Temp
 
 Verbatim, 22:43 (after the chat's closure): «разве я не просил временную папку клода на E  или F перенести». He had: 2026-10-25 16:09 «TEMP Claude — на F» (plan 33 —

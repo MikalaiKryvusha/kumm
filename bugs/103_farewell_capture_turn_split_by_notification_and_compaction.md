@@ -1,0 +1,46 @@
+# Bug 103 — the farewell hook loses the real farewell when the closing turn waits for a background judge or crosses an autocompaction
+
+**Status:** 🔴 OPEN — filed 2026-11-14 23:58 +03:00 · **Severity:** S2 (a closing chat's farewell is lost or stale; the next `/resume` reads the waiting text) · **Version/build:** KUMM
+`tools/hooks/farewell-capture.mjs` as of the closure-ladder change (2026-11-14) · **When/context:** judge rounds 3–4 of the closure-ladder work (the owner's order
+2026-11-14 22:29) · **Fixing:** after the closure-ladder commit — a separate change with its own judge rounds (out of that order's scope)
+
+## Goal vector
+
+Achieve: the farewell file holds the LAST message of a closing turn even when the closure waits for a background judge (task notifications, peer hand-backs) or
+crosses an autocompaction; a closure from an earlier turn never ends an autonomy order the owner gave later. Acceptance: replays of the real transcripts named
+below through `farewell-capture.mjs --out` write the real farewell; `tools/test-guards.mjs` parts J and K carry the multi-Stop sequences that happen live.
+
+## Symptom (the judges' replays of real transcripts, verified by them)
+
+- 2a24c0f4 (a soft closure at line 2382, Stops at 2553 / 2589 / 2780) and 5cbe3ee0 (line 39): the file stays the interim «Судья проверяет передачу…» /
+  «Судья работает в фоне…»; the real farewell is never written. Cause: Stop #1 fires on the waiting text and records closure id X; every later Stop of the same
+  closure is skipped by `if (turn.closureId && seen === turn.closureId) return;` (the guard that keeps a knowledge-hook «новых знаний нет» from overwriting).
+- A `<task-notification>` user record (isMeta false; 143 of 147 in the transcripts follow a Stop) splits the turn, so after it the closure is not seen at all.
+- A peer hand-back («Another Claude session sent a message…», isMeta true) does not reset the farewell tail: closure → «Жду судью.» → hand-back → «Прощание.»
+  gives «Жду судью.\n\nПрощание.» on the journal path.
+- An autocompaction summary (`isCompactSummary: true`, no isMeta) counts as the owner's prompt and splits the turn — a soft closure running into the
+  autocompaction (≈ 96.7 % of 1 M) loses its farewell, and in autonomy mode the guard orders «work on».
+
+## The tried fix and why it was rolled back (2026-11-14 23:5x)
+
+Treating `<task-notification>` as NOT the owner's prompt fixed the split but made a regression: an owner message typed mid-turn arrives as an `attachment`
+(`queued_command`, `origin.kind: human`) which `readTurn` never treats as a prompt — so an OLD closure now reached past the notification and switched off a NEW
+autonomy order (judge round 4, fixture with real shapes). Rolled back to the old behaviour; the J case that asserted the new behaviour was removed with it.
+
+## Fix plan
+
+1. One turn model for all the hooks that read turns: the owner's prompt = a user text record that is not meta, not a tool result, not a CLI caveat, not a task
+   notification, not a compaction summary — PLUS the queued `attachment` with `origin.kind: human` (it IS the owner's word).
+2. The farewell file is rewritten on every Stop of the same closure while the new text is longer than a knowledge-hook short answer (or: the knowledge-hook's
+   answer is recognised and skipped), so the last real farewell wins.
+3. The tail resets at a peer hand-back and a notification.
+4. Cases in parts J and K from the replays above (multi-Stop sequences, a queued owner order after an old closure, a compaction inside a closing turn).
+
+## Decisions made without the owner
+
+- `[AI]` Filed instead of fixed inside the closure-ladder change: the defects are older than it, and a fourth round of fixes in the turn model was already
+  producing new defects (`PHILOSOPHY.md` → the rule when stuck).
+
+## Links
+
+`testcases/reports/2026-11-14_context-budget-soft-80-force-92.md` (rounds 1–4) · KAIF bug 26 · `tools/hooks/autonomy-guard.mjs` (shares `readTurn`)

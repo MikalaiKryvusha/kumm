@@ -35,7 +35,9 @@ const DAY_LAST_MINUTE = DAY_START.getTime() + 86400000 - 60000;
 const FUT = localStamp(Math.min(Date.now() + 10 * 60000, DAY_LAST_MINUTE));
 const PAST = localStamp(Math.max(Date.now() - 10 * 60000, DAY_START.getTime()));
 const TOMORROW = localStamp(Date.now() + 26 * 3600000);
-const FUT_Z_FRAC = new Date(Date.now() + 10 * 60000).toISOString();   // 2026-…T…:…:….123Z
+// clamped to the local day like FUT: unclamped, «now + 10 min» after 23:50 lands TOMORROW and the today-only guard rightly ignores it — the case
+// went red at 23:57 on 2026-11-14 (a midnight flake of the fixture, not of the guard)
+const FUT_Z_FRAC = new Date(Math.min(Date.now() + 10 * 60000, DAY_LAST_MINUTE)).toISOString();   // 2026-…T…:…:….123Z
 const EXISTING_REPORT = 'testcases/reports/2026-09-18_kaif-update-sweep.md';
 
 let bad = 0, total = 0;
@@ -450,12 +452,31 @@ try {
   check('the FIRST stop after a closure writes the farewell even with stop_hook_active (an earlier hook blocked in that turn)', run(closing, { stop_hook_active: true }), 'Прощание целиком.' + NL);
   check('a second stop of the same closure (the knowledge-hook answer) keeps the farewell', run([...closing, A({ type: 'text', text: 'Новых знаний нет.' })], { stop_hook_active: true }), 'Прощание целиком.' + NL);
   check('control: another skill (resume) is not a closure', run([U('resume'), A(skill('resume')), result, A({ type: 'text', text: 'Начинаю.' })]), 'Прощание целиком.' + NL);
+  // 2026-11-14 22:4x (the judge): the context-budget gate refuses /end-chat-force below 92 % — a refused call must not count as a closure
+  const refused = (id) => U([{ type: 'tool_result', tool_use_id: id, is_error: true, content: 'context-budget: окно 86.0 % — меньше 92 %: срочное закрытие рано.' }]);
+  check('a refused /end-chat-force is not a closure: the farewell stays', run([
+    U('работай'), A(skill('end-chat-force', 'tu-ref')), refused('tu-ref'), A({ type: 'text', text: 'Хук отклонил срочное закрытие.' }),
+  ]), 'Прощание целиком.' + NL);
+  check('a refused force, then an accepted soft closure: the farewell is written', run([
+    U('работай'), A(skill('end-chat-force', 'tu-ref2')), refused('tu-ref2'), A(skill('end-chat-soft', 'tu-ok2')),
+    U([{ type: 'tool_result', tool_use_id: 'tu-ok2', content: 'Launching skill: end-chat-soft' }]), A({ type: 'text', text: 'Мягкое прощание.' }),
+  ]), 'Мягкое прощание.' + NL);
+  // judge round 3: two closure calls in one batch (one assistant record each, the results after) — the accepted one stands
+  check('a parallel batch: soft accepted + force refused, results after both calls → the farewell is written', run([
+    U('работай'), A(skill('end-chat-soft', 'tu-p1')), A(skill('end-chat-force', 'tu-p2')),
+    U([{ type: 'tool_result', tool_use_id: 'tu-p1', content: 'Launching skill: end-chat-soft' }]), refused('tu-p2'), A({ type: 'text', text: 'Прощание пачкой.' }),
+  ]), 'Прощание пачкой.' + NL);
+  // judge round 2: a refusal clears only its own call — an accepted soft closure followed by a refused force is still the closure
+  check('an accepted soft closure, then a refused force: still a closure, the farewell is written', run([
+    U('работай'), A(skill('end-chat-soft', 'tu-ok3')), U([{ type: 'tool_result', tool_use_id: 'tu-ok3', content: 'Launching skill: end-chat-soft' }]),
+    A(skill('end-chat-force', 'tu-ref3')), refused('tu-ref3'), A({ type: 'text', text: 'Прощание после отказа срочного.' }),
+  ]), 'Прощание после отказа срочного.' + NL);
   check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [FC, '--out', out], { input: '{not json', encoding: 'utf8' }).status, 0);
 } catch (e) {
   check('part J ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
 }
 
-// ---------- K. the autonomy-guard hook (UserPromptSubmit + Stop): «работай автономно» holds until 75 % of the window or a closure
+// ---------- K. the autonomy-guard hook (UserPromptSubmit + Stop): «работай автономно» holds until the soft closure (80 % of the window) or a closure skill
 // (2026-10-30: агент сам кончил ход при 68 % окна, не вошёл в /dayloop, и чат так и не закрылся — владелец: «Почему так не сработало?»)
 console.log('K. autonomy-guard');
 try {
@@ -474,15 +495,42 @@ try {
   const stop = (pct, extra = {}, lines) => {
     const r = spawnSync(process.execPath, [AG, '--state', st], { input: JSON.stringify({ hook_event_name: 'Stop', transcript_path: tp(pct, lines), ...extra }), encoding: 'utf8', env });
     const m = /"reason":"([^"]{0,200})/.exec(r.stdout || '');
-    return m ? (m[1].includes('закрывай') ? 'block-close' : 'block-work') : 'pass';
+    // the class names the skill too (judge round 2): a soft-zone block that named /end-chat-force would loop the agent between the guard and the gate
+    return m ? (m[1].includes('/end-chat-force') && !m[1].includes('/end-chat-soft') ? 'block-force'
+      : m[1].includes('/end-chat-soft') && !m[1].includes('/end-chat-force') ? 'block-close'
+      : /end-chat/.test(m[1]) ? 'block-mixed' : 'block-work') : 'pass';
   };
   check('no marker: the stop passes', stop(50), 'pass');
   prompt('работай автономно');
   check('«работай автономно» → a stop at 68 % is blocked: work on', stop(68), 'block-work');
-  // 2026-10-31 21:26 the owner: «на 70 и 75 я просил лишь предупреждать, а не закрываться» — 76 % is still work; the closure moved to 85 %
+  // 2026-10-31 21:26 the owner: «на 70 и 75 я просил лишь предупреждать, а не закрываться» — 76 % is still work.
+  // 2026-11-14 19:10 / 22:29 the owner: from 80 % finish the work and close softly, the force closure only from 92 %.
   check('at 76 % the stop is blocked: work on (75 % only warns)', stop(76), 'block-work');
-  check('at 86 % the stop is blocked: close the chat', stop(86), 'block-close');
+  check('at 79.9 % the stop is blocked: still work on', stop(79.9), 'block-work');
+  check('at 80.0 % the stop is blocked: finish and close softly', stop(80), 'block-close');
+  check('at 86 % the stop is blocked: still the soft closure, not the force one', stop(86), 'block-close');
+  check('at 91.9 % the stop is blocked: still the soft closure', stop(91.9), 'block-close');
+  check('at 92.0 % the stop is blocked: close the chat by force', stop(92), 'block-force');
   check('a declared autonomy-pause passes', stop(68, { last_assistant_message: 'Всё ждёт владельца. <!-- autonomy-pause: нужен его вход в Steam -->' }), 'pass');
+  check('a refused closure (the gate denied /end-chat-force) keeps the mode on and blocks', stop(86, {}, [
+    JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', id: 'tu-k-ref', name: 'Skill', input: { skill: 'end-chat-force' } }] } }),
+    JSON.stringify({ type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 'tu-k-ref', is_error: true, content: 'context-budget: окно 86.0 % — меньше 92 %' }] } })]), 'block-close');
+  check('an accepted soft closure, then a refused force: the stop passes (the closure stands)', stop(88, {}, [
+    JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', id: 'tu-k-ok', name: 'Skill', input: { skill: 'end-chat-soft' } }] } }),
+    JSON.stringify({ type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 'tu-k-ok', content: 'Launching skill: end-chat-soft' }] } }),
+    JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', id: 'tu-k-ref2', name: 'Skill', input: { skill: 'end-chat-force' } }] } }),
+    JSON.stringify({ type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 'tu-k-ref2', is_error: true, content: 'context-budget: окно 88.0 % — меньше 92 %' }] } })]), 'pass');
+  prompt('работай автономно');
+  check('a parallel batch (soft accepted, force refused): the stop passes', stop(86, {}, [
+    JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', id: 'tu-k-p1', name: 'Skill', input: { skill: 'end-chat-soft' } }] } }),
+    JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', id: 'tu-k-p2', name: 'Skill', input: { skill: 'end-chat-force' } }] } }),
+    JSON.stringify({ type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 'tu-k-p1', content: 'Launching skill: end-chat-soft' }] } }),
+    JSON.stringify({ type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 'tu-k-p2', is_error: true, content: 'context-budget: окно 86.0 % — меньше 92 %' }] } })]), 'pass');
+  prompt('работай автономно');
+  check('the «work on» block below 80 % carries no closing word', (() => {
+    const r = spawnSync(process.execPath, [AG, '--state', st], { input: JSON.stringify({ hook_event_name: 'Stop', transcript_path: tp(76) }), encoding: 'utf8', env });
+    return /закры|доде|сверн|мягк|end-chat/i.test(JSON.parse(r.stdout || '{}').reason || 'закры') ? 'closing word' : 'clean';
+  })(), 'clean');
   check('a turn that ran /end-chat-soft passes', stop(80, {}, [JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', name: 'Skill', input: { skill: 'end-chat-soft' } }] } })]), 'pass');
   check('…and the closure switched the mode off', stop(68), 'pass');
   prompt('работай сам, я занят');

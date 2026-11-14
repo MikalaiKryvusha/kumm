@@ -64,9 +64,10 @@ relies entirely on this document to get to work.
 > conditions. Do not enter a loop if the human just gave a specific interactive task.
 > **In KUMM the owner's order to work autonomously IS the order to enter `/dayloop` at once — after the tasks of the same message, never instead of
 > the loop.** The order is any phrase of the trigger pattern in `tools/hooks/autonomy-guard.mjs` (Stop + UserPromptSubmit), which refuses a voluntary
-> stop while the order stands. The loop ends only by his stop word or by the context-budget closure (85 % → `/end-chat-soft` / `-force`, whose farewell
-> the farewell hook files; 70 % and 75 % are warnings only). An interrupt (Esc) or a task given mid-loop does not end it: do the task, then go back
-> into the loop in the same turn. `[OWNER]` 2026-10-30 · 2026-10-31 21:26 · chronicle entry 2026-11-10 01:52; EXP-0379, EXP-0388.
+> stop while the order stands. The loop ends only by his stop word or by the context-budget closure (from 80 % finish the current work, then
+> `/end-chat-soft` in full; `/end-chat-force` only from 92 %; the farewell hook files the farewell; 70 % and 75 % are warnings only). An interrupt (Esc) or
+> a task given mid-loop does not end it: do the task, then go back into the loop in the same turn. `[OWNER]` 2026-10-30 · 2026-10-31 21:26 ·
+> 2026-11-14 22:29 · chronicle entries 2026-11-10 01:52, 2026-11-14 22:3x; EXP-0379, EXP-0388.
 
 > ⏰ **WORKING UNTIL A NAMED TIME — the deadline is the START of the soft closure, not a finish
 > line.** When the human names an end time for autonomous work ("work until 11", "work for an

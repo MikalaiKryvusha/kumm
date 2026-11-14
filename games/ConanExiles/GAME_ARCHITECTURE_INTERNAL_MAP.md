@@ -193,6 +193,22 @@ combat system does not wield it: RMB plays an unarmed attack (substate 11 ≈ 1 
 not take such a bow up either (2026-11-13 10:21). **The recipe that works:** ingredients by `AddItemTemplate` (10012 × 7, 12001 × 7, 14174 × 7), then the hero CRAFTS
 the bow — `CraftingQueue:CraftItems(RecipeManager:GetItemByTemplateID(51401, 0))` → bow 51401 lands on the shortcut bar → a real hot-bar key («3» here) wields it
 (standing draw 11 → 11,15,16, the shot logged by KrinikConanArchery). Arrows 53612 in the backpack.
+**Wield / sheathe WITHOUT input (2026-11-14 22:55, 3.1.0, the remote):** `BasePlayerChar_C:ToggleWieldWeapon()` (no parameters) takes the equipped main weapon from
+its sheath into the hands — the bow went `sheath_bow` → `Socket_Bow`, `HasWeaponsEquipped()` false → true; a second call puts it back. The background twin of the real
+hot-bar key for a weapon the hero already carries equipped. Related hero functions (`_config/class-funcs.lua`): `OnWeaponEquip(Item)` / `OnWeaponUnequip`,
+`Handle Auto Wield Sheathe`, `Unwield If During Combat`, `BaseBPCombat_C:ItemEquipTry / ItemEquipDo / ItemEquipEnd`, `WeaponEquipped` / `WeaponUnequipped` (+ their
+`Signal…__DelegateSignature`). Whether a draw works after it — case C3 of `testcases/TC_conan_fp_bow_visible_2026-11-13.md`.
+**Which events fire (2026-11-14 23:0x, 3.1.0, post-hooks by `_config/equip-hook-probe.lua`):** the REAL hot-bar key «3» on an equipped bow — taking it up fires
+`BasePlayerChar_C:OnWeaponEquip(Item)` and `BaseBPCombat_C:WeaponEquipped`; putting it away fires `OnWeaponUnequip` and `WeaponUnequipped`; `ToggleWieldWeapon` is NOT
+called by the key. The remote's `ToggleWieldWeapon()` fires NONE of the four (only itself) — it moves the weapon natively, so a mod listening to the equip events
+does not see it: test such a mod by the real key, or call the event's own path. (Bug 93's «WeaponEquipped does not fire for a properly wielded bow» was 3.0.1 and
+another path — this is the hot-bar toggle of a bow already equipped.) **A post-process anim BP set INSIDE a hooked hero function hangs the game (2026-11-14 23:41, 3.1.0):** `Mesh:SetOverridePostProcessAnimBP(cls, true)` (the
+bool is `ReinitAnimInstances` — the main anim instance is rebuilt) called synchronously from a Lua post-hook of `SwitchToFirstPersonCamera` → the process «not
+responding»; the same call one game-thread step later (`ExecuteInGameThread`) is safe. A killed hung game left the hero with fists AND the bow attached and the
+combat system not wielding the bow (no draw on RMB) until a reload. The bow's first charge notify (`BP_SetChargeHold`) comes ≈ 0.51 s after the draw montage
+starts — a «drawing» flag from the notify lags; the anim instance's `isAttacking` (a bool readable from Lua) is true for the whole draw.
+The combat class path is `/Game/Characters/BaseBPCombat.BaseBPCombat_C` (the hero's chain:
+`BasePlayerChar_C` → `BaseSurvivalChar_C` → `BaseBPCombat_C` → `BaseBPChar_C` → `ConanCharacter`).
 **Sprint stand direction (2026-11-13):** from `tp_ground.sh 98739 205258` yaw 225 runs into the river after ≈ 3.5 s of sprint (the agent drowned the hero twice —
 `[OWNER]` 10:42 «я направил ебало героя вдоль берега» · «это должен был сзедать ты, чтобы не топить героя в воде»); the owner's direction ALONG the shore — control
 yaw ≈ 350 at (99277, 204713) — is the stand's run direction; keep runs ≤ 3 s.

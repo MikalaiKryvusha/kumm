@@ -1,7 +1,10 @@
 # Plan 52 — Conan: the first-person body look done the industry way (post-process anim blueprint on the hero only)
 
 > **Created:** 2026-11-13 15:3x · **Parent:** `bugs/95_conan_first_person_bow_not_visible.md` (option B → the owner's pick A 15:25), recon `researches/first-person-body-camera/README.md`
-> **Status:** step 1 (recon of the vanilla bone-modify spaces and the kit's anim-node catalog) in progress 2026-11-13 15:3x
+> **Status:** steps 1–2 done 2026-11-13 15:37–15:5x (the post-process anim blueprint `ABP_KrinikFirstPersonLook` built, compile True); step 4's first build DEPLOYED and
+> seen 2026-11-13 16:00 by the remote `_config/fp-look-pp.lua` (no bind pose in third person, 0 anim errors, bow hand 49° at −55 mid-blend, vanilla 78° — PROJECT_HISTORY
+> entry «HANDOVER 2026-11-13 16:0x»); re-cooked on the 3.1.0 kit 2026-11-14 00:4x (`KrinikConanArchery.md`). OPEN: full-alpha frames, the neck / eye tuning, step 3 (the Lua
+> that sets the class at the hero's birth and drives `Active` on events), cases C1–C5, the HTML page (status corrected 2026-11-14 22:4x from the chronicle)
 > **Outbound:** the frames to the owner as ONE HTML page with captions (HOUSE_RULES rule 32)
 
 ## Goal vector
@@ -47,11 +50,19 @@ The kit's graph editor creates any action-menu node by `create_node_from_name("C
        Kit: create `ABP_KrinikFirstPersonLook` (parent `AnimInstance`, the hero skeleton) — Input Pose → spine counter-bend → neck bend (looking down) → eye point
        (`b_headcam` forward) → Output; alphas and amounts from members; the EventGraph reads the owner's main anim instance (`Pitch`, `isAttacking`, `isThirdPerson`) and
        the weapon archetype (3 = bow). Saved as a NEW asset of KrinikConanArchery — no vanilla asset touched.
-3. [ ] Lua (KrinikConanArchery): at the hero's birth `Mesh:SetOverridePostProcessAnimBP(<class>, true)` — once, an event.
+3. [x] Lua (KrinikConanArchery): at the hero's birth `Mesh:SetOverridePostProcessAnimBP(<class>, true)` — once, an event.
+       **DONE 2026-11-14 23:2x (section «вид тела от первого лица», deployed, pack not committed until its judge round):** the class is set on the first «on»
+       (and on a new mesh); `Active` by the equip events (the item's archetype 3 on equip, off at once on unequip), the camera-switch events and the draw
+       notifies. Cases S3a–S3d and C3 pass by the real key «3», a real RMB hold and the remote view switches (TC rows of 2026-11-14).
        **Desk read 2026-11-13 16:2x:** the anim's `Alpha` follows `Active` only (`kit-pp-fp-look.py` header) — Lua owns `Active` = first person AND bow in hand AND no draw.
        Events known in the mod: the camera switch (`BasePlayerChar_C:SwitchToFirstPersonCamera` / `SwitchToThirdPersonCamera`, hooked by KrinikConanCamera), the draw
        (`BP_PowerCharge` / `BP_SetChargeHold` notifies — `hip_on` / `hip_off`, the aim stance `fp_aim_shift`). The bow test exists (`krinik_bow_sprint.lua`
        `bow_in_hand`: a «bow» class attached, not on a sheath socket) but NO event for taking the bow up / putting it away is known — `WeaponEquipped` does not fire for
        a properly wielded bow (bug 93). Next: a live recon of which hero event or substate fires on wield / sheath, before the Lua.
+       **Recon done 2026-11-14 23:0x (game map «Which events fire»):** the real hot-bar key fires `BasePlayerChar_C:OnWeaponEquip` / `OnWeaponUnequip` (and
+       `BaseBPCombat_C:WeaponEquipped` / `WeaponUnequipped`) — the events for «bow in hand». The live tuning 2026-11-14 22:5x (`fp-bow-angle.lua`, the heroine, pitch −55 /
+       −80, the bow hand's angle off the view centre, half view 37.5°): vanilla 77° / 76° · A (neck 0.5, spine 0.85 — the build's values) 37° / 18° · B (neck 1.0,
+       spine 1.0) 31° / 11°; the eye offset moves `b_head` with the camera (eyes forward → the hand lower: +8 cm forward 41°, −8 cm 33°); spine 1.2 — 21° but the body
+       leans back. Frames A / B / vanilla in `KUMM/.work/fp52/` for the owner's page.
 4. [ ] Kit build → deploy → cases C1–C5 (TC `TC_conan_fp_bow_visible_2026-11-13.md`), the neck share and the eye offset tuned live by the remote; frames to the owner as
        one HTML page.
