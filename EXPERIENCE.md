@@ -91,6 +91,13 @@
 
 ## Entries
 
+### EXP-0537 · 2026-11-15 · ❌ · #autonomy-guard #background-agent #papercut
+class: the autonomy guard refuses a stop while the session waits for its own background judge (the notification would resume it)
+**Result:** 00:0x–00:1x the guard blocked five stops at 74–77 % while a judge subagent ran; each block cost a busy-work turn. S3 papercut.
+**Lesson:** while a background agent of the session runs, pick the next small pool item (a case, a doc row) rather than end the turn; a guard fix would read
+the transcript for an Agent launch without its completion notification in the same chat.
+none-cheap: rare (only in long judge waits) and the busy-work is real pool work
+
 ### EXP-0536 · 2026-11-14 · ❌→✅ · #tools #owner-presence #real-input #mouse-seq #remote-access
 class: the presence probe read the agent's own (and a keep-alive's) input as the owner at the keyboard
 **Result:** for an hour every second real-input sequence was refused «BUSY» and real tests waited; the owner: «я не на клавиатуре. я к омп час неприкосался».
@@ -113,6 +120,7 @@ wish on»; 18:33 a Space with the wish ON did nothing too → withdrawn in three
 **Lesson:** before reading a game rule from a real-input non-event, prove the key reached the game in the SAME run (a control press with a visible effect —
 a ground jump right before), and say «the synthetic key is unreliable» rather than invent a cause.
 **Trigger:** any «real key did nothing» result from `mouse-seq` / `input.ps1`.
+none-cheap: the control press is a stand step written in the case file; no tool can tell a «non-event» read from a real one
 
 ### EXP-0533 · 2026-11-14 · ❌→✅ · #conan #ue4ss #stand #hub #input #remote-path #mixed-path
 class: a stand that OPENED a UI by the player's path (real Tab) and CLOSED it by a remote shortcut (`ActivateModule(false)`) — the shortcut skipped the input release
@@ -155,6 +163,9 @@ first press on the wall did nothing, the second pushed). ✅ replaced by a state
 post-hook for use by an inner call. Use a state already set before the inner call (a mode-change hook, the time in a state), or a pre-hook.
 **Repro:** a remote debug hook printing in both the outer event and the inner function; the print order in `UE4SS.log` shows which runs first.
 **Trigger:** any rule that compares «when the key went down» with what the game does inside the same input event.
+none-cheap: the order is read once per hook pair by a debug print (Repro above); a static guard cannot know which function runs inside which
+<!-- class-ok: hook-after-event — two unlike faces (EXP-0429: a widget re-created ≈ 150 ms after the event; EXP-0530: an inner call inside the outer event's body); each fix lives in its own mod, and the price of a generic guard (knowing UE call graphs) is above the class's cost — re-checked 2026-11-15 00:0x -->
+
 
 ### EXP-0529 · 2026-11-14 · ❌→✅ · #conan #locres #kit #python #enum #perks #map-claim
 class: wrong-api-assumption
@@ -166,6 +177,7 @@ class: wrong-api-assumption
 **Lesson:** a game text → read the asset's (namespace, key), then search EVERY locres target of the pak (`repak list … | grep /ru/`), the build's loose file first;
 a kit enum → `unreal.<Name without E>`; a filter on member names → filter the one count member by its full name, never by a suffix real members share.
 **Repro:** `repak.exe list pakchunk0-Windows.pak | grep -E "/ru/.*locres"` · kit: `getattr(unreal, n) or getattr(unreal, n[1:])` (`kit-probe-hero-stats.py`).
+subject-lesson
 **Trigger:** reading game text or a native enum offline; a number in a map that came from a raise «against the screen» — confirm by the widget's own binding.
 **Not for:** texts of mods — those ARE in the build's loose `Game.locres`.
 

@@ -37,6 +37,11 @@ lines READ each time
 | a foreign input after our mark → BUSY | pass | run 4, 23:37:03 and 23:37:53 |
 | `input.ps1` marks its own input | not run | the mark is at the end of the script; no `input.ps1` send in this run |
 
+**Added 2026-11-15 00:08 — the focus proof of `mouse-seq.ps1`:** after the owner's remote session closed (≈ 23:55, the keep-alive stopped) the foreground
+stayed with `ShellExperienceHost`; the tool's RMB still reached the full-screen game under the cursor, but its keys went to the shell (23:47–23:52: keys 3 / 4
+«did nothing»). Now the tool sends nothing unless the game window IS the foreground: run `mouse-seq.ps1 -Seq "kdown:0x7E,kup:0x7E,wait:200"` with the shell in
+front → «GAME NOT IN FRONT: … nothing sent», exit 6 (seen 00:08). The send path with the game in front — not re-run after this edit.
+
 ## 5. Found
 
 - the agent's own input was read as the owner's presence (fixed here);

@@ -3,6 +3,48 @@
 
 
 
+## 2026-11-15 00:02 +03:00 — STATUS bonsai trim (the chat of 2026-11-14 22:29, ahead of its soft closure): the 2026-11-14 blocks NOW 16:24 … NOW 14:17, moved verbatim
+
+> **NOW — chat of 2026-11-14 from 16:24, DAYLOOP by the owner's word 16:25 «работай автономно» (task: «двигать сборку к стабильному состоянию, тестируем
+> наши моды, фиксим баги»).** Done 17:21: (0) wall jump — the stand had the jump PRESS / RELEASE swapped (`InpActEvt_Jump_…_26` is the press, `_27` the
+> release; `_config/input-bindings-probe.lua`), W1 / W7 re-run, **W5 by a real Space pass**, W8 / W9 pass; W6 (the bow in the flight after a push) BLOCKED by
+> the game's re-equip window (EquipItem 1.35 s after a climb) → **interview #035 (never shown yet — raise it)**; 2 judge rounds; pack `0b05b67` pushed.
+> The 3.1.0 move TC: S1–S4, V1, G1, L1–L5 pass (W1 partial). **Bug 102 DONE 17:4x** — the hero's move / look input left ignored was a STAND-only path (a
+> real-Tab open + the remote `ActivateModule(false)` close); the player's Tab path is clean; the stand closes the hub by `hubswitch/close-hub.lua` now.
+> **Pickup+** (notes `games/ConanExiles/mods/Pickup.md` new): 3.1.0 REMOVED `W_FCComboBoxString` → its admin window loses two options — on plan 53 step 12's
+> resume list (the owner parked the authors' updates until ≈ 2026-11-15).
+> **The owner's wall-jump design of 17:38–17:39 BUILT 17:53** (verbatim in `games/ConanExiles/mods/KrinikConanLocomotion.md`): the push ≈ 0.5 m (46–47 cm
+> measured), up = the hero's own jump (`JumpZVelocity` × 1.0, grows with Agility), the wall guard 0.15 s, wall-to-wall by real keys pass (W13); air control —
+> the game's OWN `AirControl` 0.60 steers every jump incl. the wall flight (real D: 125 cm), nothing of ours sets it — its strength is the owner's eye. Judge
+> round 5: 1 defect (the push read `JumpZVelocity`, reset to 420 after damage) → the Agility law now, W15 pass 18:06; push ∝ 1 / jump speed; guard 0.05 s.
+> PUSHED pack `12ac659` (6 judge rounds) + `fde47f7` (the air-combat TWIN of the 420-after-damage fix, tested 18:19) + `f8dd35f` (the height source in the log). **OWED (TC_conan_wall_jump row R6,
+> first next):** pack `635766c` clears `bWantsToClimb` at the push (a 720 flight then lands 98 cm off instead of re-catching the wall; a press in the air sets it and catches) — the press's RELEASE clears the wish again; a REAL chain by `mouse-seq` (18:33) gave no push at all, even the first press with the wish on — the synthetic Space is unreliable here, so the chain needs the OWNER's own keys (TC R6 (1)); an overhang test; the height source in the
+> log; a row with W held at the press; W11 / W13 on the final build by real keys (synthetic Space unreliable — the owner's own climb is the check). Bug 91 real hover (a hero with a corruption point). No game of ours runs, lock released.
+> **CHAT CLOSED 2026-11-14 15:59 +03:00 (force, context 85 %).** ⚠️ Принудительное закрытие 2026-11-14 15:59 +03:00: церемонии пропущены (проход судьи по итогам чата, README, линтеры
+> витрины) — долг оплачивает первое /end-chat-soft. Ложное утверждение, оставшееся в документах: нет (заглушки на странице перков, «20 Авторитет» и моя
+> формулировка про строки на 15 очков исправлены там, где стояли). Игры нашей нет, замок машины снят, всё отправлено (пак `456bfda`, KUMM — этот коммит).
+> **FIRST NEXT CHAT (written 15:5x, context 84 %):** (0) re-run wall-jump W1 + W7 on pack `456bfda` (judge round-2 edit deployed, not run); (1) the owner's eye — the perk page (review folder 86, his perk ideas 25–40 → plan 49) and the wall jump
+> by his own Space (W5; the numbers 250 / 350 and «≥ 0.4 s on the wall» are mine); (2) judge round 2 on `krinik_wall_jump.lua`, then W6 (an arrow after the push)
+> and the hook after a world re-entry; (3) bug 101 item 4 — a native read of what the inventory page's teardown calls on the feat windows; item 3 by real clicks;
+> (4) bug 75 (the quick-loot rim) by real F on a free PC; M6 ping on our map. No game of ours runs, the machine lock is released, everything is pushed.
+> **NOW — chat of 2026-11-14 from 14:17, DAYLOOP by the owner's word 14:17 «продолжай делать сборку конана, автономный дневной цикл».** The owner's switch 14:32–14:34
+> («сверсрстай мне, плиз, в html текущие древья перков из игры …» · «… какие переменные можно будет качать нашими деревьями» · «одной страницей с табами») DONE 14:47:
+> one local page with two tabs «Деревья перков» · «Параметры героя» (review folder `86_perki_i_parametry_geroya/`, tools `ConanExiles/_config/perk-trees/`, plan 49
+> «The owner's words»; game map «Hero stat enums» — the old «20 Авторитет» corrected to 27); waits for his perk ideas 25–40. The page's first version claimed our
+> placeholders at 25–40 — false (off since 2026-11-10), caught by the judge, rebuilt 14:59; 5 judge rounds on the tools (round 5 running at 15:3x).
+> **Loop 14:52–15:30 (background game, the owner's world, remote switches + window capture `hubswitch/hub_run_bg.sh`):** bug 101 item 5 NEW + FIXED (pack `6c4ce00`
+> pushed — Параметры → Снаряжение bare world gone); item 4 measured (only Снаряжение → Таланты, the game's inventory teardown clears the shared feat selection —
+> needs a native read, bug 101 «Item 4 measured»); item 3 — the portrait whole on the first frame here, late only the waist cloth; TC mod elements M1–M7 pass by the
+> background twin (M6 ping open); run report `testcases/reports/2026-11-14_conan-hub-game-pages-backing-and-feat-card.md`. **Wall jump recon 15:2x:** `Climb(false)`
+> in the air at a wall starts climbing (MovementMode 7); vanilla Jump while climbing does NOTHING (the key is free). **15:3x the WALL JUMP BUILT** — KrinikConanLocomotion
+> section `krinik_wall_jump` (deployed, not committed — judge running): Jump while climbing → forward trace for the wall normal → `ExitClimbing` + `LaunchCharacter(normal ×
+> 250 + up × 350)`; TC `testcases/TC_conan_wall_jump_2026-11-14.md` W1 (pushed off ≈ 1.6 m, +63 cm, clip `_scratch/walljump/wj1.mp4`), W2 control, W3 pass; open — W4
+> (a ceiling / slope), W5 the owner's real Space, W6 the bow air shot with both hooks. **15:53 PUSHED pack `ea414b7`** (wall jump + the loop's tools) after the judge's
+> blocker (the grab's release threw the hero off) was fixed by «≥ 0.4 s on the wall» (W4, W7 pass); OWED: judge round 2 on `krinik_wall_jump.lua`, W5 / W6 by real
+> input, the hook re-registration after a world re-entry (the air_combat pattern). Pack: `6c4ce00` (hub backing) and `e288d2a` (perk-page tools, 5 judge rounds)
+> PUSHED. Uncommitted pack tools (judged with the wall jump): `feat-select-probe.lua`, `hubswitch/{tab-switch.lua,hub_run_bg.sh,open-tab.lua}`, `wall-stand.lua`. The game
+> runs (background, PID 31092), machine lock to 16:05.
+
 ## 2026-11-14 22:3x +03:00 — the context-budget closure moves: from 80 % finish the work and run the soft closure, the force closure only from 92 %
 
 Verbatim, 2026-11-14 19:10 (transcript `4be8d21c…`, after the 18:35 forced closure at 85 % had no room left for the soft one): «неправильно хук закрытия чата по

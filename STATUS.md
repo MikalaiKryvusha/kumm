@@ -136,52 +136,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **NOW — chat of 2026-11-14 from 22:29 (`resume` + the owner's task), DAYLOOP by his word 22:33 «да, работай автономно в дневном лупе».** (1) The closure
 > ladder REDONE by his words 19:10 / 22:29 (verbatim — PROJECT_HISTORY entry 2026-11-14 22:3x): 70 / 75 % warnings only (no closing word); from 80 % finish the work,
 > then `/end-chat-soft` in full; `/end-chat-force` only from 92 % (the hook refuses it below); a REFUSED closure call is no closure for the farewell and autonomy
-> hooks. Judge rounds 1–2 found 6 defects, all fixed; round 3 running; NOT committed yet (KUMM: the three hooks, test-guards, CLAUDE.md, AGENT_GUIDE, maps, reference,
-> report `testcases/reports/2026-11-14_context-budget-soft-80-force-92.md`; KAIF #188 comment posted). Autocompaction measured at ≈ 96.7 % of 1 M.
+> hooks. COMMITTED + PUSHED KUMM `30a8a12` after 4 judge rounds; the older turn-model holes of the farewell hook (a closing turn that waits for a background
+> judge or crosses an autocompaction loses its farewell) → `bugs/103_…` OPEN. KAIF #188 comment posted. Autocompaction measured at ≈ 96.7 % of 1 M. The new 70 %
+> warning text seen live at 23:51 («Предупреждение: работай дальше в обычном темпе.»). (1b) The presence probe `_tools/owner-idle.ps1` (not under git) discounts
+> the agent's own input (`-MarkOwn` from `mouse-seq.ps1` / `input.ps1`); the remote-access hosts send a foreign input every ≈ 50 s (report
+> `testcases/reports/2026-11-14_owner-idle-own-input.md`).
 > (2) Interview #024 (Svarog night findings) status closed — its answers were applied on 2026-10-18. (3) Plan 52 (the first-person body look with a bow): C1a,
-> C2a–C2c pass on the post-process ABP (the heroine — a CHILD anim BP — no T-pose, 0 anim log lines); step 3 Lua WRITTEN in KrinikConanArchery («вид тела от первого
-> лица», deployed; S3a «real 3 takes the bow → on» and S3c pass; S3b put-away and C3 draw NOT run — the owner was at the keyboard); judge on the Lua running; the
-> look A / B → interview #036 (page: review folder 87 `index.html`), build default B. Found: `ToggleWieldWeapon()` wields by the remote without input (fires no equip
-> event); the real key fires `OnWeaponEquip` / `OnWeaponUnequip`. The game of this chat runs (background, PID 29760), machine lock «kumm» to 23:42.
-> **NOW — chat of 2026-11-14 from 16:24, DAYLOOP by the owner's word 16:25 «работай автономно» (task: «двигать сборку к стабильному состоянию, тестируем
-> наши моды, фиксим баги»).** Done 17:21: (0) wall jump — the stand had the jump PRESS / RELEASE swapped (`InpActEvt_Jump_…_26` is the press, `_27` the
-> release; `_config/input-bindings-probe.lua`), W1 / W7 re-run, **W5 by a real Space pass**, W8 / W9 pass; W6 (the bow in the flight after a push) BLOCKED by
-> the game's re-equip window (EquipItem 1.35 s after a climb) → **interview #035 (never shown yet — raise it)**; 2 judge rounds; pack `0b05b67` pushed.
-> The 3.1.0 move TC: S1–S4, V1, G1, L1–L5 pass (W1 partial). **Bug 102 DONE 17:4x** — the hero's move / look input left ignored was a STAND-only path (a
-> real-Tab open + the remote `ActivateModule(false)` close); the player's Tab path is clean; the stand closes the hub by `hubswitch/close-hub.lua` now.
-> **Pickup+** (notes `games/ConanExiles/mods/Pickup.md` new): 3.1.0 REMOVED `W_FCComboBoxString` → its admin window loses two options — on plan 53 step 12's
-> resume list (the owner parked the authors' updates until ≈ 2026-11-15).
-> **The owner's wall-jump design of 17:38–17:39 BUILT 17:53** (verbatim in `games/ConanExiles/mods/KrinikConanLocomotion.md`): the push ≈ 0.5 m (46–47 cm
-> measured), up = the hero's own jump (`JumpZVelocity` × 1.0, grows with Agility), the wall guard 0.15 s, wall-to-wall by real keys pass (W13); air control —
-> the game's OWN `AirControl` 0.60 steers every jump incl. the wall flight (real D: 125 cm), nothing of ours sets it — its strength is the owner's eye. Judge
-> round 5: 1 defect (the push read `JumpZVelocity`, reset to 420 after damage) → the Agility law now, W15 pass 18:06; push ∝ 1 / jump speed; guard 0.05 s.
-> PUSHED pack `12ac659` (6 judge rounds) + `fde47f7` (the air-combat TWIN of the 420-after-damage fix, tested 18:19) + `f8dd35f` (the height source in the log). **OWED (TC_conan_wall_jump row R6,
-> first next):** pack `635766c` clears `bWantsToClimb` at the push (a 720 flight then lands 98 cm off instead of re-catching the wall; a press in the air sets it and catches) — the press's RELEASE clears the wish again; a REAL chain by `mouse-seq` (18:33) gave no push at all, even the first press with the wish on — the synthetic Space is unreliable here, so the chain needs the OWNER's own keys (TC R6 (1)); an overhang test; the height source in the
-> log; a row with W held at the press; W11 / W13 on the final build by real keys (synthetic Space unreliable — the owner's own climb is the check). Bug 91 real hover (a hero with a corruption point). No game of ours runs, lock released.
-> **CHAT CLOSED 2026-11-14 15:59 +03:00 (force, context 85 %).** ⚠️ Принудительное закрытие 2026-11-14 15:59 +03:00: церемонии пропущены (проход судьи по итогам чата, README, линтеры
-> витрины) — долг оплачивает первое /end-chat-soft. Ложное утверждение, оставшееся в документах: нет (заглушки на странице перков, «20 Авторитет» и моя
-> формулировка про строки на 15 очков исправлены там, где стояли). Игры нашей нет, замок машины снят, всё отправлено (пак `456bfda`, KUMM — этот коммит).
-> **FIRST NEXT CHAT (written 15:5x, context 84 %):** (0) re-run wall-jump W1 + W7 on pack `456bfda` (judge round-2 edit deployed, not run); (1) the owner's eye — the perk page (review folder 86, his perk ideas 25–40 → plan 49) and the wall jump
-> by his own Space (W5; the numbers 250 / 350 and «≥ 0.4 s on the wall» are mine); (2) judge round 2 on `krinik_wall_jump.lua`, then W6 (an arrow after the push)
-> and the hook after a world re-entry; (3) bug 101 item 4 — a native read of what the inventory page's teardown calls on the feat windows; item 3 by real clicks;
-> (4) bug 75 (the quick-loot rim) by real F on a free PC; M6 ping on our map. No game of ours runs, the machine lock is released, everything is pushed.
-> **NOW — chat of 2026-11-14 from 14:17, DAYLOOP by the owner's word 14:17 «продолжай делать сборку конана, автономный дневной цикл».** The owner's switch 14:32–14:34
-> («сверсрстай мне, плиз, в html текущие древья перков из игры …» · «… какие переменные можно будет качать нашими деревьями» · «одной страницей с табами») DONE 14:47:
-> one local page with two tabs «Деревья перков» · «Параметры героя» (review folder `86_perki_i_parametry_geroya/`, tools `ConanExiles/_config/perk-trees/`, plan 49
-> «The owner's words»; game map «Hero stat enums» — the old «20 Авторитет» corrected to 27); waits for his perk ideas 25–40. The page's first version claimed our
-> placeholders at 25–40 — false (off since 2026-11-10), caught by the judge, rebuilt 14:59; 5 judge rounds on the tools (round 5 running at 15:3x).
-> **Loop 14:52–15:30 (background game, the owner's world, remote switches + window capture `hubswitch/hub_run_bg.sh`):** bug 101 item 5 NEW + FIXED (pack `6c4ce00`
-> pushed — Параметры → Снаряжение bare world gone); item 4 measured (only Снаряжение → Таланты, the game's inventory teardown clears the shared feat selection —
-> needs a native read, bug 101 «Item 4 measured»); item 3 — the portrait whole on the first frame here, late only the waist cloth; TC mod elements M1–M7 pass by the
-> background twin (M6 ping open); run report `testcases/reports/2026-11-14_conan-hub-game-pages-backing-and-feat-card.md`. **Wall jump recon 15:2x:** `Climb(false)`
-> in the air at a wall starts climbing (MovementMode 7); vanilla Jump while climbing does NOTHING (the key is free). **15:3x the WALL JUMP BUILT** — KrinikConanLocomotion
-> section `krinik_wall_jump` (deployed, not committed — judge running): Jump while climbing → forward trace for the wall normal → `ExitClimbing` + `LaunchCharacter(normal ×
-> 250 + up × 350)`; TC `testcases/TC_conan_wall_jump_2026-11-14.md` W1 (pushed off ≈ 1.6 m, +63 cm, clip `_scratch/walljump/wj1.mp4`), W2 control, W3 pass; open — W4
-> (a ceiling / slope), W5 the owner's real Space, W6 the bow air shot with both hooks. **15:53 PUSHED pack `ea414b7`** (wall jump + the loop's tools) after the judge's
-> blocker (the grab's release threw the hero off) was fixed by «≥ 0.4 s on the wall» (W4, W7 pass); OWED: judge round 2 on `krinik_wall_jump.lua`, W5 / W6 by real
-> input, the hook re-registration after a world re-entry (the air_combat pattern). Pack: `6c4ce00` (hub backing) and `e288d2a` (perk-page tools, 5 judge rounds)
-> PUSHED. Uncommitted pack tools (judged with the wall jump): `feat-select-probe.lua`, `hubswitch/{tab-switch.lua,hub_run_bg.sh,open-tab.lua}`, `wall-stand.lua`. The game
-> runs (background, PID 31092), machine lock to 16:05.
+> C2a–C2c, C3 pass on the post-process ABP (the heroine — a CHILD anim BP — no T-pose, 0 anim log lines); step 3 Lua in KrinikConanArchery («вид тела от первого
+> лица», a `do … end` block after judge round 1, deployed; S3a–S3e pass; the put-away by a real key NOT re-run on the reworked build); judge round 2 on the Lua
+> running; the PACK IS NOT COMMITTED (main.lua, `_config/{bow-stand,class-funcs,equip-hook-probe}.lua`, `mouse-seq.ps1` / `input.ps1` -MarkOwn). The look A / B →
+> interview #036 (page: review folder 87 `index.html`, not yet opened for the owner), build default B. No game of ours runs, the lock is released.
+> **Moved verbatim to the chronicle (entry 2026-11-15 00:02 +03:00):** the blocks NOW 2026-11-14 16:24 (dayloop: wall jump, bug 102, Pickup+), CHAT CLOSED 15:59, FIRST NEXT CHAT 15:5x and NOW 14:17 (perk page, bug 101, the first wall jump). Still open from them: interview #035 (the bow after the wall push — the owner's answer); the wall-jump TC row R6 by the owner's own keys (the synthetic Space is unreliable there), an overhang case, W11 / W13 on the final build; bug 91 real hover; the perk page (review folder 86, his perk ideas 25–40 → plan 49); bug 101 item 4 (a native read of the inventory teardown); bug 75 (quick-loot rim); M6 ping; the Pickup+ admin window (plan 53 step 12, parked to ≈ 2026-11-15); the morning items listed in the 2026-11-14 15:41 pointer below.
 > **Moved verbatim to the chronicle (entry 2026-11-14 15:41 +03:00):** the blocks CHAT CLOSED 2026-11-14 13:45, NOW 11:52 (dayloop), FIRST NEXT CHAT (11:41) and NEW CHAT 09:51 of the morning chat. Still open from them: the owner's play — his six key bindings, the hub switches to / from «Снаряжение», the morning four (square page arrows, journeys refresh, craft pace after the close, Esc flag); (the run-report linter's two morning reports — fixed 15:4x); plan 53 step 12 (parked to ≈ 2026-11-15); the rollback paks in `.work/keybinds/` and `.work/arrows/` (delete after the owner's play).
 > **Moved verbatim to the chronicle (entry 2026-11-14 11:40 +03:00):** the blocks CHAT CLOSED 2026-11-14 02:16, NOW 2026-11-14 00:15–02:15 and HANDOVER 2026-11-13 22:0x (the 3.1.0 kit rebuild, the devkit update, the D:\Temp cleanup). Still open from them: plan 53 step 12 (other authors' stale vanilla copies, 3 of 11 — parked until ≈ 2026-11-15 by the owner; resume `python -I -X utf8 _config/check-mod-updates.py --since 2026-11-03 --all`); the Pickup+ admin widget error (`ComboBox_DrawDebugline`); UE4SS v4.0.0 as its own step; bug 75 (the quick-loot rim, reopened); bug 98 C6 (the owner's verdict on the first-person shadow frame, review folder 85); plan 52 steps 3–4; bug 93 S8 / S9 and the no-zoom-on-sprint wish; bug 96 (the owner's play); the pack judges' B2–B4 (pack `ff30fb9` message); L1–L5 of `TC_conan_move_3.1.0_2026-11-13.md`; the quick wins by A-B-A-B; the mods-table storefront row (the foliage-shadow fix — the owner's proofreading); paks uncompressed (size only); the live run of the `attr-arrows-show.lua` / `plus-tint-probe.lua` guards; `_config/craft-*.lua` probes uncommitted; rollback paks `KUMM/.work/kit310/old/`; 6 `*.tmp` in `D:\Temp` (after a VS Code restart).
 > **Moved verbatim to the chronicle (entry 2026-11-13 22:0x +03:00):** the 2026-11-13 blocks from the forced closure of 20:1x back to the HANDOVER of 11:08 (three
@@ -204,7 +169,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 ## Open bugs
 
-Files without the DONE tag — 29 (2026-10-18 13:45):
+Files without the DONE tag — 50 (counted 2026-11-15 00:06 +03:00; was 29 on 2026-10-18 13:45). The Conan-era open ones: 64, 70, 74, 75, 79, 83–91, 93–101, 103 (the farewell
+hook's turn splitting, new 2026-11-15) — the list below names the ones with live symptoms; the rest are paused games' bugs:
 
 - 🔴 `bugs/64_conan_mod_ui_wave_overlaps_untranslated.md` — the UI of the Conan 3.0.1 build's mods, 26 items: open 4, 5, 6, 12, 13 (partly),
   15 (🟡 hub controller in the build), 16–18, 23 (EAA class cards — text in textures), 26 (late emblem in the hub); closed by a frame 2, 3, 7, 21 (4K, 2026-11-07), 7b, 8 (again 2026-10-31 at 1080p, list 540), 9–11,

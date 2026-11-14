@@ -54,6 +54,11 @@ The kit's graph editor creates any action-menu node by `create_node_from_name("C
        **DONE 2026-11-14 23:2x (section «вид тела от первого лица», deployed, pack not committed until its judge round):** the class is set on the first «on»
        (and on a new mesh); `Active` by the equip events (the item's archetype 3 on equip, off at once on unequip), the camera-switch events and the draw
        notifies. Cases S3a–S3d and C3 pass by the real key «3», a real RMB hold and the remote view switches (TC rows of 2026-11-14).
+       **Reworked 2026-11-14 23:4x after judge round 1** (a `do … end` block — the mod's main chunk is near Lua's 200-locals limit; every decision on the next
+       game-thread step — a synchronous class set inside the camera hook HUNG the game; the draw from `isAttacking`; state reset at hero birth; a socket re-read
+       1.5 s after each equip event): S3e pass 23:52, C4 pass by state 2026-11-15 00:05 (46 NPCs, none with our class). OPEN: judge round 2 on the Lua, the pack
+       commit, the put-away re-run (blocked 00:08: the Windows shell held the foreground — `mouse-seq.ps1` now refuses, exit 6), C1b sword, C5 cost, the
+       owner's look pick (interview #036, page in review folder 87 — shown 2026-11-15 00:0x).
        **Desk read 2026-11-13 16:2x:** the anim's `Alpha` follows `Active` only (`kit-pp-fp-look.py` header) — Lua owns `Active` = first person AND bow in hand AND no draw.
        Events known in the mod: the camera switch (`BasePlayerChar_C:SwitchToFirstPersonCamera` / `SwitchToThirdPersonCamera`, hooked by KrinikConanCamera), the draw
        (`BP_PowerCharge` / `BP_SetChargeHold` notifies — `hip_on` / `hip_off`, the aim stance `fp_aim_shift`). The bow test exists (`krinik_bow_sprint.lua`

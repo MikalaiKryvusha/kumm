@@ -89,6 +89,10 @@ Found by the independent judges (rounds 1–2) and fixed in this work, each re-r
 Run outputs in this chat's transcript (`85089563-6b62-4081-9eda-4252a86e6fd3.jsonl`); the mutant copies under `.work/cbmut/` and `.work/tmp/ag-live.json` were deleted
 after the runs.
 
+**Seen live in this chat after the commit `30a8a12`:** 2026-11-14 23:51 the hook's real 70 % line «context-budget · контекст ≈ 700 тыс. токенов = 70.0 % окна
+1000 тыс. Предупреждение: работай дальше в обычном темпе.»; 2026-11-15 00:0x the autonomy guard REFUSED a real Stop at 74.1 % with «не останавливайся. Бери
+следующий пункт беклога … работай в обычном темпе» (no closing word); the farewell hook on the same transcript wrote nothing (no closure in the turn).
+
 ## 7. Verdict
 
 partial — every case passes and the live path answers on the real transcript; the soft and force zones themselves are proven on fixtures only. The first live
