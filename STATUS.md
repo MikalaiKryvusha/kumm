@@ -133,6 +133,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **CHAT CLOSED 2026-11-14 15:59 +03:00 (force, context 85 %).** ⚠️ Принудительное закрытие 2026-11-14 15:59 +03:00: церемонии пропущены (проход судьи по итогам чата, README, линтеры
+> витрины) — долг оплачивает первое /end-chat-soft. Ложное утверждение, оставшееся в документах: нет (заглушки на странице перков, «20 Авторитет» и моя
+> формулировка про строки на 15 очков исправлены там, где стояли). Игры нашей нет, замок машины снят, всё отправлено (пак `456bfda`, KUMM — этот коммит).
 > **FIRST NEXT CHAT (written 15:5x, context 84 %):** (0) re-run wall-jump W1 + W7 on pack `456bfda` (judge round-2 edit deployed, not run); (1) the owner's eye — the perk page (review folder 86, his perk ideas 25–40 → plan 49) and the wall jump
 > by his own Space (W5; the numbers 250 / 350 and «≥ 0.4 s on the wall» are mine); (2) judge round 2 on `krinik_wall_jump.lua`, then W6 (an arrow after the push)
 > and the hook after a world re-entry; (3) bug 101 item 4 — a native read of what the inventory page's teardown calls on the feat windows; item 3 by real clicks;
