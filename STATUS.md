@@ -133,6 +133,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW — chat of 2026-11-14 from 16:24, DAYLOOP by the owner's word 16:25 «работай автономно» (task: «двигать сборку к стабильному состоянию, тестируем
+> наши моды, фиксим баги»).** Done 17:21: (0) wall jump — the stand had the jump PRESS / RELEASE swapped (`InpActEvt_Jump_…_26` is the press, `_27` the
+> release; `_config/input-bindings-probe.lua`), W1 / W7 re-run, **W5 by a real Space pass**, W8 / W9 pass; W6 (the bow in the flight after a push) BLOCKED by
+> the game's re-equip window (EquipItem 1.35 s after a climb) → **interview #035 (never shown yet — raise it)**; 2 judge rounds; pack `0b05b67` pushed.
+> The 3.1.0 move TC: S1–S4, V1, G1, L1–L5 pass (W1 partial). **Bug 102** (move / look input left ignored after a hub session — variants A–D clean, E needs real
+> clicks on a free PC). The game of the run: PID 10788 (background), machine lock to 17:28. Next: bug 102 variant E; the FIRST NEXT CHAT items (2)–(4) below.
 > **CHAT CLOSED 2026-11-14 15:59 +03:00 (force, context 85 %).** ⚠️ Принудительное закрытие 2026-11-14 15:59 +03:00: церемонии пропущены (проход судьи по итогам чата, README, линтеры
 > витрины) — долг оплачивает первое /end-chat-soft. Ложное утверждение, оставшееся в документах: нет (заглушки на странице перков, «20 Авторитет» и моя
 > формулировка про строки на 15 очков исправлены там, где стояли). Игры нашей нет, замок машины снят, всё отправлено (пак `456bfda`, KUMM — этот коммит).

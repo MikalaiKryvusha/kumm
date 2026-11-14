@@ -91,6 +91,28 @@
 
 ## Entries
 
+### EXP-0532 · 2026-11-14 · ❌→✅ · #conan #ue4ss #actiontry #debug #hook #walljump #claim #judge
+class: «the hook does not run» written from a MISSING log line — the line was absent because the hook ran and its own condition said no
+mechanized: no — the rule lives here and in the game map («The character state across a climb»)
+**Context:** W6 (the bow after a wall push): no AirCombat log line after the pushes → I wrote «AirCombat's mode-change hook does not run on our climb exit».
+**Result:** ❌ the judge offered another reading; a guarded debug post-hook on `HandleOnMovementModeChanged` showed it RUNS (twice) — with the bow still on
+`sheath_bow`, so `bow_in_hand` said no. ✅ The refusal itself was named by a post-hook on `BaseBPCombat_C:DebugActionTryFailure(FailureType)` → «NotAggressive»
+(state EquipItem for 1.35 s after a climb).
+**Lesson:** a silent log line proves only that the logging branch was not taken; before writing «X does not run», put a one-off print on X itself (guarded by a
+`_G` flag, gone at the next start). For «the game refuses an action», hook `DebugActionTryFailure` first — the game says why.
+**Trigger:** any conclusion drawn from the ABSENCE of a log line; an attack / action that «does nothing».
+
+### EXP-0531 · 2026-11-14 · ❌→✅ · #conan #ue4ss #input #stand #press-release #walljump #falseok
+class: a remote stand that emulated an input event by an ASSUMED role (press / release) — the two were swapped, and a judge's blocker plus its fix grew on it
+mechanized: yes — `ConanExiles/_config/input-bindings-probe.lua` (the class's own bindings: action, InputKeyEvent, bound event); `wall-stand.lua` fixed
+**Context:** the wall jump stand pressed `InpActEvt_Jump_…_27` as «the press» and `_26` as «the release»; a judge then worried that «the release of the grab
+press» would push the hero off, a 0.4 s rule was built against it, and EXP-0530 explained a failed fix by the same order.
+**Result:** the class's `DynamicBindingObjects` → `InputActionDelegateBinding` said PRESS = `_26` (event 0), RELEASE = `_27` (event 1); StartJump runs inside the
+press. Re-run in the true order: the release never calls StartJump; a REAL Space on the wall pushed (W5). EXP-0530's «first event» is the press `_26`.
+**Lesson:** before a stand fires a blueprint input event by name, read its role from the class's bindings — `K2Node_InputActionEvent_N` numbers say nothing about
+press / release. A blocker found against a stand is re-checked against the real input path before the code bends around it.
+**Trigger:** any remote twin of a key press (`InpActEvt_*`), a judge finding about «press / release order».
+
 ### EXP-0530 · 2026-11-14 · ❌→✅ · #conan #ue4ss #hook #order #input #walljump
 class: hook-after-event
 **Context:** the wall jump had to tell «a press that began while climbing» from «the release of the press that grabbed the wall» (judge round 1).

@@ -144,7 +144,17 @@ Climbing (remote recon 2026-11-02 14:1x, for the owner's 09:07 request «кно�
   **2026-11-14 15:2x — the climb by the remote, no real input (`_config/wall-stand.lua`):** facing a vertical wall 60 cm off, the hero's own jump input event
   (`InpActEvt_Jump_K2Node_InputActionEvent_27` then `_26`) + `AddMovementInput` into the wall + `Climb(false)` called WHILE AIRBORNE starts the climb: `MovementMode` 7
   (custom), `CustomMovementMode` 0; forward input then climbs up. The game does NOTHING on Jump while climbing (mode 7, speed 0 for 1 s). `BaseBPCombat_C:StartJump`
-  still runs on that press (and on the ground jump) — after the SECOND of the two jump events, the same moment for both. `CharacterMovement:ExitClimbing()` +
+  still runs on that press (and on the ground jump) — inside the PRESS event. **The hero's jump events (read 2026-11-14 16:3x from `BasePlayerChar_C.DynamicBindingObjects`
+  → `InputActionDelegateBinding`, `_config/input-bindings-probe.lua`): PRESS = `InpActEvt_Jump_K2Node_InputActionEvent_26` (InputKeyEvent 0), RELEASE = `_27` (1);** the
+  release never calls StartJump. (The 15:2x stand called `_27` first as «the press» — swapped; corrected the same day.) Other input roles (same probe):
+  Primary (LMB) `InpActEvt_PrimaryActionV2_…_9` press / `_10` release, Special (RMB, the bow's draw) `_7` / `_8`, Secondary `_5` / `_6`, Dodge `_35` press.
+  **The character state across a climb (2026-11-14 16:4x–17:02, remote samples + guarded debug hooks):** `ConanCharacter:GetCharacterState()`
+  (`ECharacterState`: 0 Aggressive · 3 EquipItem · 4 Passive · 12 Climbing …) is 12 while climbing, the bow on `sheath_bow`; `ExitClimbing()` →
+  `HandleOnMovementModeChanged` (mode 3, twice) with state 4 and the bow still sheathed, substate 8 set → within 0.1 s state 3 (EquipItem, montage
+  `AM_combat_2h_bow_3rd_equip`, the bow on `Socket_Bow`) → back to 0 by a TIMER 1.35 s after the exit, airborne or not (a push up 750 landed at 1.78 s; a
+  montage played ×3 ended at 0.21 s and changed nothing). Until then `ActionTry` refuses: `BaseBPCombat_C:DebugActionTryFailure(FailureType)` says
+  «NotAggressive» — a post-hook on it names every refused action. (`ECharacterSubState` is 0–22: Failing 8, Attacking 11, PowerCharge 15, ChargeHold 16;
+  `InSubstate(40)` true beside 8 is an out-of-range artefact.) `CharacterMovement:ExitClimbing()` +
   `LaunchCharacter` leave the wall (mode 3, then 1 on landing). `CurrentWall`'s fields are not readable from Lua — the wall's normal comes from a forward line
   trace. Our wall jump: KrinikConanLocomotion `krinik_wall_jump`.
 **The movement row — how the hero's speed type is chosen (bytecode of `BaseBPCombat::EvaluateMovementType` + a live read of the table, 2026-11-10 19:4x):**
