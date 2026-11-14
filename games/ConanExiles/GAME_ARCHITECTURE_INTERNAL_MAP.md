@@ -719,6 +719,11 @@ mods (guard `check-lua-game-thread.py`). Gameplay keys on the game thread: `/Gam
   still rebuilds its content on every show (lists, cells, perks: the same late changes, run 9). The page's refresh on activation is the assembly's cause.
   `CraftingGUI_C` rebuilds its centre/right panels (`BP_Handle*PanelWidgetCreated`) on the MODULE ACTIVATION, not on a plain `AddToViewport`; a page that
   STAYS in the viewport and is only Collapsed / shown re-creates nothing on later shows (0 births, 3 cycles — `hubswitch/collapse-test.lua`, 23:45).
+  **Opening and closing the hub vs the hero's input (2026-11-14 17:3x, KUMM bug 102):** the native Tab that opens the inventory adds one IgnoreMoveInput and
+  one IgnoreLookInput to the PlayerController (`IsMoveInputIgnored()` true while open), the closing Tab removes them; `GUIModuleController:ActivateModule('Inventory',
+  false)` closes the module but removes neither and leaves the carousel alive (the next Tab closes it instead of opening the hub); the game's own
+  `ForceDeactivateFullscreenModules()` closes the hub and releases the input within ≈ 1 s; `ToggleModule('Inventory')` does nothing (the Tab action is native,
+  not bound in `BasePlayerChar_C`). The stand closes the hub by `hubswitch/close-hub.lua`.
   A page instance created by OUR code (`WidgetBlueprintLibrary:Create(pc, <class>, pc)` + `AddToViewport`) builds COMPLETE without the module controller
   (`W_FeatWindow`, `CraftingGUI` — frames 2026-11-06 23:56–23:57); 9 such extra instances do not disturb native switches (bisect 2026-11-07 00:10).
   **CRASH RULE (bisect 00:10, 5 steps):** `SetVisibility` on ANY widget inside a `CarouselWindow:OnChildActivated` hook (inside the native switch) crashes

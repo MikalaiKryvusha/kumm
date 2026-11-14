@@ -137,8 +137,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > наши моды, фиксим баги»).** Done 17:21: (0) wall jump — the stand had the jump PRESS / RELEASE swapped (`InpActEvt_Jump_…_26` is the press, `_27` the
 > release; `_config/input-bindings-probe.lua`), W1 / W7 re-run, **W5 by a real Space pass**, W8 / W9 pass; W6 (the bow in the flight after a push) BLOCKED by
 > the game's re-equip window (EquipItem 1.35 s after a climb) → **interview #035 (never shown yet — raise it)**; 2 judge rounds; pack `0b05b67` pushed.
-> The 3.1.0 move TC: S1–S4, V1, G1, L1–L5 pass (W1 partial). **Bug 102** (move / look input left ignored after a hub session — variants A–D clean, E needs real
-> clicks on a free PC). The game of the run: PID 10788 (background), machine lock to 17:28. Next: bug 102 variant E; the FIRST NEXT CHAT items (2)–(4) below.
+> The 3.1.0 move TC: S1–S4, V1, G1, L1–L5 pass (W1 partial). **Bug 102 DONE 17:4x** — the hero's move / look input left ignored was a STAND-only path (a
+> real-Tab open + the remote `ActivateModule(false)` close); the player's Tab path is clean; the stand closes the hub by `hubswitch/close-hub.lua` now.
+> **Pickup+** (notes `games/ConanExiles/mods/Pickup.md` new): 3.1.0 REMOVED `W_FCComboBoxString` → its admin window loses two options — on plan 53 step 12's
+> resume list (the owner parked the authors' updates until ≈ 2026-11-15).
+> **The owner's wall-jump design of 17:38–17:39 BUILT 17:53** (verbatim in `games/ConanExiles/mods/KrinikConanLocomotion.md`): the push ≈ 0.5 m (46–47 cm
+> measured), up = the hero's own jump (`JumpZVelocity` × 1.0, grows with Agility), the wall guard 0.15 s, wall-to-wall by real keys pass (W13); air control —
+> the game's OWN `AirControl` 0.60 steers every jump incl. the wall flight (real D: 125 cm), nothing of ours sets it — its strength is the owner's eye. Judge
+> round 5 running at 17:5x; NOT committed yet (pack: `krinik_wall_jump.lua`, `wall-stand.lua`, `hubswitch/close-hub.lua`). No game of ours runs, lock released.
 > **CHAT CLOSED 2026-11-14 15:59 +03:00 (force, context 85 %).** ⚠️ Принудительное закрытие 2026-11-14 15:59 +03:00: церемонии пропущены (проход судьи по итогам чата, README, линтеры
 > витрины) — долг оплачивает первое /end-chat-soft. Ложное утверждение, оставшееся в документах: нет (заглушки на странице перков, «20 Авторитет» и моя
 > формулировка про строки на 15 очков исправлены там, где стояли). Игры нашей нет, замок машины снят, всё отправлено (пак `456bfda`, KUMM — этот коммит).

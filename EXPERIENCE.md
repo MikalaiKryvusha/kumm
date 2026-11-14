@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0533 · 2026-11-14 · ❌→✅ · #conan #ue4ss #stand #hub #input #remote-path #mixed-path
+class: a stand that OPENED a UI by the player's path (real Tab) and CLOSED it by a remote shortcut (`ActivateModule(false)`) — the shortcut skipped the input release
+mechanized: yes — `ConanExiles/_config/hubswitch/close-hub.lua` (the game's own force-close + a checked reset), the rule in the reference row and the game map
+**Result:** the hero stood frozen (move / look ignored) and every later stand case read «no jump» — first suspected as a build bug (bug 102). E1 (Tab / Tab)
+clean, E3 (Tab / remote close) reproduced it; the game's `ForceDeactivateFullscreenModules` releases it.
+**Lesson:** open and close a game UI by the SAME path — both real, or both the game's own functions; a remote shortcut is a different path (as EXP-0524 says
+for crafting). After any UI work in a run, read `IsMoveInputIgnored()` before blaming the next case.
+**Trigger:** a stand case that «does nothing» after the hub or a menu was open in the same run.
+
 ### EXP-0532 · 2026-11-14 · ❌→✅ · #conan #ue4ss #actiontry #debug #hook #walljump #claim #judge
 class: «the hook does not run» written from a MISSING log line — the line was absent because the hook ran and its own condition said no
 mechanized: no — the rule lives here and in the game map («The character state across a climb»)
