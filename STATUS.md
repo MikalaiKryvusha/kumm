@@ -145,7 +145,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > measured), up = the hero's own jump (`JumpZVelocity` × 1.0, grows with Agility), the wall guard 0.15 s, wall-to-wall by real keys pass (W13); air control —
 > the game's OWN `AirControl` 0.60 steers every jump incl. the wall flight (real D: 125 cm), nothing of ours sets it — its strength is the owner's eye. Judge
 > round 5: 1 defect (the push read `JumpZVelocity`, reset to 420 after damage) → the Agility law now, W15 pass 18:06; push ∝ 1 / jump speed; guard 0.05 s.
-> PUSHED pack `12ac659` (6 judge rounds) + `fde47f7` (the air-combat TWIN of the 420-after-damage fix, tested 18:19). **OWED (TC_conan_wall_jump row R6,
+> PUSHED pack `12ac659` (6 judge rounds) + `fde47f7` (the air-combat TWIN of the 420-after-damage fix, tested 18:19) + `f8dd35f` (the height source in the log). **OWED (TC_conan_wall_jump row R6,
 > first next):** the push vs air friction at a cheat Agility ≈ 300 (measure); an overhang test; the height source in the
 > log; a row with W held at the press; W11 / W13 on the final build by real keys (the player's Space on the wall needs `bWantsToClimb` on — the game's
 > `Climb()` sets it; the owner's own climb is the final check). Bug 91 real hover (a hero with a corruption point). No game of ours runs, lock released.
