@@ -87,8 +87,12 @@ with a card — «Строительство: Highmane's A…», «Уровен�
 opens with nothing selected (the same difference as TC `TC_conan_hub_kept_tabs_stale_2026-11-14.md` H1 / H8 «selection card»). So our kept page selects its
 first feat a few ticks after it is shown (a key-navigation select on activation reaching the shown page — to read: `KeyNavSelectFirstGridChild` /
 `KeyNavMakeSelected` on `W_FeatWindow_C` when our page is shown) — a visible jump on every visit. Also on the same frame the tab row shows the underline glow
-under «Снаряжение» and «Таланты» at once for a frame (the native tab indicator — to check against the game alone). Next: a hook on the select call of the
-kept page, a control run with the section off.
+under «Снаряжение» and «Таланты» at once for a frame (the native tab indicator — to check against the game alone). **13:41 the mechanism read** (a remote post-hook on
+`/Script/ConanSandbox.FeatWindow:SlotFeatSelectionChanged`, `[FSC]` lines in UE4SS.log): switch to «Таланты» at os.clock 100.072 → the slot fires on OUR kept page
+(`…450814`, opacity 0 — not shown yet) at 100.552, then at 100.618 on the game's NEWBORN (`…440874`) and on ours again in the same tick — 66 ms after the switch,
+the band's late change. So the newborn's selection on its construct reaches our page as a shared selection signal and our page fills its card late. Next: find
+the signal's source (the feat window's selection delegate / the shared feat inventory) and keep our page out of the newborn's selection, or apply the selection
+before our page is shown; a control run with the section off.
 
 ## Decisions made without the owner
 
