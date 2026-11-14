@@ -80,6 +80,16 @@ game = source) + `set-pak-modinfo.py` 66 / 66. Live: on «Снаряжение»
 120–436 px) — to read; Карта, Хар-ки, Спутники, Клан, Путешествие — clean. **Still open:** item 3 (Параметры portrait +35 / +69 / +104 ms), item 4 (small late
 strips under the tab row, 28–69 ms), and the owner's play.
 
+## Item 4 read 2026-11-14 13:4x — the late band after «Снаряжение» → «Таланты» is OUR page selecting a feat
+
+Frames of `fix3.mp4` at 53.46 / 53.53 (top band crop, `KUMM/.work/keybinds/band_pair.jpg`): 69 ms after the switch the right column of OUR «Таланты» page fills
+with a card — «Строительство: Highmane's A…», «Уровень 1», «Стоимость: 1» — where the first frame showed «Уровень -- · Стоимость: --». The game's newborn page
+opens with nothing selected (the same difference as TC `TC_conan_hub_kept_tabs_stale_2026-11-14.md` H1 / H8 «selection card»). So our kept page selects its
+first feat a few ticks after it is shown (a key-navigation select on activation reaching the shown page — to read: `KeyNavSelectFirstGridChild` /
+`KeyNavMakeSelected` on `W_FeatWindow_C` when our page is shown) — a visible jump on every visit. Also on the same frame the tab row shows the underline glow
+under «Снаряжение» and «Таланты» at once for a frame (the native tab indicator — to check against the game alone). Next: a hook on the select call of the
+kept page, a control run with the section off.
+
 ## Decisions made without the owner
 
 - `[AI]` 13:17 — the hub's backing is owned by our hub controller, not by the game's carousel fade: `kit-conanui-edit.py` `CAROUSEL_NOOP` makes
