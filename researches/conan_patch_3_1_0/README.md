@@ -149,4 +149,4 @@ nothing of our work (all checks of §3 are the same) and removes the crash noise
 | B.6 kit revision | 1002 everywhere, no «too old» |
 | B.7 build id | `CL-383024` |
 | C.8 localization | every vanilla override still applies (`vanilla-override.py --check`: 0 changes) |
-| not in §3 | the mount lines of the game log changed («Mod '…' (<Pak>) mounted successfully from …») — the build line read 0 / 66 until KrinikConanModPackManager was fixed; Pickup+'s admin widget misses a class (`ComboBox_DrawDebugline`) — new error |
+| not in §3 | the mount lines of the game log changed («Mod '…' (<Pak>) mounted successfully from …») — the build line read 0 / 66 until KrinikConanModPackManager was fixed; Pickup+'s admin widget misses a class (`ComboBox_DrawDebugline`) — new error; **cause 2026-11-14:** 3.1.0 REMOVED `/Game/UI/Framework/W_FCComboBoxString` (id `E74E07CCEC0447E7` in 3.0.1, absent in 3.1.0) — any mod widget built on it loses those controls (`games/ConanExiles/mods/Pickup.md`) |

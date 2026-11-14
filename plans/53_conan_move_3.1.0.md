@@ -51,7 +51,10 @@ new game enters the world without a crash, every mod's function intact. No frame
       the authors' post-beta uploads of EAA and LBPR still ship old copies). Read by the new `ConanExiles/_config/stale-copy-check.py` (the mod's INSTALLED copy vs the
       new game, `--old` = the three-way comparison by export and, for functions, by bytecode statements «by meaning» — kismet-graft's `sig`; «entry shift only» marks
       a stub whose only change is the event graph's entry offset). **PARKED 2026-11-13 21:44 by the owner's word** (`[OWNER]` 21:43 «давай пока нашши моды делать» ·
-      21:44 «пару дней дадим остальным мөд5рам их моды обновить») — re-run `check-mod-updates.py --since 2026-11-03 --all` first when it resumes, then this table:
+      21:44 «пару дней дадим остальным мөд5рам их моды обновить») — re-run `check-mod-updates.py --since 2026-11-03 --all` first when it resumes, then this table.
+      Also on resume (found 2026-11-14 17:2x): **Pickup+** — the patch REMOVED the game's `/Game/UI/Framework/W_FCComboBoxString`, so its admin widget loses the
+      combo boxes «DrawDebug?» and «NakedThrall» (the two `CreateExport … Could not find class object` errors of every start); an author update first, else
+      the outcome is ours (notes `games/ConanExiles/mods/Pickup.md`):
 
       | Asset (mod) | Read | Outcome · state |
       |---|---|---|
