@@ -151,7 +151,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **FIRST NEXT CHAT (written 11:41):** (1) the owner's play is the check of today's four fixes — square page arrows, the hub's journey page refresh (bug 97),
 > hub crafting at the real pace after the close (bug 94), the Esc flag reset (bug 100); (2) restore his six key bindings on 3.1.0 (plan 53 step 14 — the rows are
 > listed there, real-key check); (3) bug 97 twins — the other kept hub tabs (Таланты, Клан, Спутники, Карта, Базар) checked by the same method; (4) the open list
-> of the night (pointer line below), the wall jump (`KrinikConanLocomotion` PLAN row), bug 75 (the quick-loot rim).
+> of the night (pointer line below), the wall jump (`KrinikConanLocomotion` PLAN row), bug 75 (the quick-loot rim). Rollback of today's UI pak (the arrows):
+> `KUMM/.work/arrows/old_KrinikConanUI.pak` (12 MB; delete once the owner has played the build). The game and the source Lua are equal (cmp, 11:4x).
 > **NEW CHAT 2026-11-14 09:51 +03:00 — /resume done, the Conan backlog shown to the owner in chat. His pick 2026-11-14 09:53 +03:00: the bugs of his play are the work, the water
 > reflections (bug 89) go to the far drawer (`[OWNER]` 09:53, verbatim in bug 89). Order taken: instant crafting (94) first, then the rest of «Баги из вашей игры»; the wall jump (a jump off a climbed wall,
 > `KrinikConanLocomotion` PLAN row) added to the queue by the owner 09:54 («еще я хотел прыжки из карабкания по вертикальным поверхностям»).**
