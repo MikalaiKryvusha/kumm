@@ -7296,3 +7296,21 @@ Their open items stay in STATUS as one pointer line. Verbatim:
 >   session), the context-budget hook's `context-budget-<session>.json`, 6 `*.tmp` of other programs — remove them in the new chat (after the VS Code restart).
 >   State at the close: my game closed 22:02 (no crash window), the machine lock released, KUMM and pack `09e38fc` pushed; the Epic launcher left open (the kit
 >   update is finished).
+
+## 2026-11-14 11:43 +03:00 — STATUS bonsai trim (closing of 2026-11-14 morning): closed items of «Awaiting human review» moved verbatim
+
+- (done) **2026-11-10 12:49 +03:00 — the look of the corruption «+» hover label (bug 91), the owner's pick of four** — review folder `НА ОТСМОТР НИКОЛАЕМ/81_podpis_oskverneniya`
+  (`chto_smotret.md`; mockup `ConanExiles/_config/mockups/corruption_label_mockup.py`): V1 a plate above the diamond · V2 under it · V3 the game's place with a plate ·
+  V4 no label. To show him when he is free (he was at the keyboard at 12:5x); then the kit edit of `W_Attribute`'s `CorruptionLabel` branch.
+- ⚠️ **CHAT 70dda2b5 FORCE-CLOSED 2026-11-02 00:31 +03:00 at 85.5 % (the hook's number).** Last step NOT done: the left-list seam fix (`SC_KrinikMods.Slot:SetVerticalAlignment(1)`
+      in `fill_window`) left the hub window EMPTY in game (frame 00:30) — reverted to `dd73239` and redeployed; the cause is not read (check UE4SS.log for the
+      fill error first). **Resolved 2026-11-02 07:3x:** the empty window was opened during the world load (log «module opened, but no visible …»), not the edit; the real
+      cause of the seam — the hidden pages' list rows stayed (32 units each); `fill_window` now collapses `HB_KrinikModItem_<key>`. Game closed, machine lock released, everything pushed. Закрыто принудительно: церемонии (проход судьи, обрезка STATUS, README, линтеры
+      витрины) пропущены — долг платит первый /end-chat-soft. Ложных утверждений на месте не осталось.
+- (superseded) 🟡 **2026-11-02 00:02 +03:00 — the loot part BUILT (pack `0663f2f`):** arrows sit in the body (no shafts in the air — the owner's 23:46 frame fixed), one arrow per
+      shaft goes into the corpse's loot (seen 4/4), a real Q takes them; the shafts go after a real Q — seen 00:10 (TC A13 pass); owed: a clean side frame of the shafts in a body (A11).
+- (was) 🔴 **OWNER'S DEBT — interview #030 answered 2026-11-01 23:41 — A:** `[OWNER]` «тогда делаем, что воткнытые в трум стрелы идут в инвентарь трупа». To apply, in
+      order: (1) a read-only remote recon of the corpse's inventory — its component class and the add-item UFunction (`scratchpad` probe `corpse_probe.lua` lists
+      the corpse's components; `pult.sh "funcs <component>"`); (2) KrinikConanArchery `on_corpse_born` / `rebirth`: one arrow item (`ProjectileItemTemplateID` of
+      the copy) into the corpse's loot per copy kept; (3) when the arrows leave the loot (`QuickLootPanel:SlotItemAddedOrRemoved`), the shafts go; cases in
+      `TC_conan_arrows_stay_in_corpse_2026-11-01.md`. Not built yet.
