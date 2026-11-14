@@ -104,7 +104,7 @@ class: the presence probe read the agent's own (and a keep-alive's) input as the
 Measured: our own SendInput resets GetLastInputInfo; the remote-access hosts (Parsec, Sunshine) add one input every ≈ 50 s.
 **Lesson:** a «someone is at the PC» signal is checked against the agent's own actions first — the input tools mark their last tick (`owner-idle.ps1 -MarkOwn`)
 and the probe discounts it; a foreign periodic input is measured and named, not guessed. When the owner says he is away, probe the signal before arguing with him.
-mechanized: yes — `owner-idle.ps1 -MarkOwn` called by `mouse-seq.ps1` / `input.ps1` (report `testcases/reports/2026-11-14_owner-idle-own-input.md`)
+mechanized: yes — `owner-idle.ps1 -MarkOwn -Tick` called by `mouse-seq.ps1` with the tick of its own last event (report `testcases/reports/2026-11-14_owner-idle-own-input.md`)
 
 ### EXP-0535 · 2026-11-14 · ❌→✅ · #conan #ue4ss #hook #anim #hang #defer
 class: an engine call that rebuilds state made synchronously inside a hooked game function

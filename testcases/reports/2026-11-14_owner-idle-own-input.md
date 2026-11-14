@@ -35,7 +35,7 @@ lines READ each time
 | own input right after a sequence → FREE | pass | run 3, «the last input was the agent's own» |
 | a second sequence within 10 s is sent | pass | run 3, exit 0 (refused with exit 5 at 23:16 and 23:20 before the fix) |
 | a foreign input after our mark → BUSY | pass | run 4, 23:37:03 and 23:37:53 |
-| `input.ps1` marks its own input | not run | the mark is at the end of the script; no `input.ps1` send in this run |
+| `input.ps1` marks its own input | dropped | the mark was removed 2026-11-15 after the judge (a separate process read «whatever input is last» ≈ 0.3 s later); `mouse-seq.ps1` now passes its exact tick (`-MarkOwn -Tick`) |
 
 **Added 2026-11-15 00:08 — the focus proof of `mouse-seq.ps1`:** after the owner's remote session closed (≈ 23:55, the keep-alive stopped) the foreground
 stayed with `ShellExperienceHost`; the tool's RMB still reached the full-screen game under the cursor, but its keys went to the shell (23:47–23:52: keys 3 / 4
