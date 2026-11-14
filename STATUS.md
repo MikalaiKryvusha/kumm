@@ -133,6 +133,19 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW — chat of 2026-11-14 from 14:17, DAYLOOP by the owner's word 14:17 «продолжай делать сборку конана, автономный дневной цикл».** The owner's switch 14:32–14:34
+> («сверсрстай мне, плиз, в html текущие древья перков из игры …» · «… какие переменные можно будет качать нашими деревьями» · «одной страницей с табами») DONE 14:47:
+> one local page with two tabs «Деревья перков» · «Параметры героя» (review folder `86_perki_i_parametry_geroya/`, tools `ConanExiles/_config/perk-trees/`, plan 49
+> «The owner's words»; game map «Hero stat enums» — the old «20 Авторитет» corrected to 27); waits for his perk ideas 25–40. The page's first version claimed our
+> placeholders at 25–40 — false (off since 2026-11-10), caught by the judge, rebuilt 14:59; 5 judge rounds on the tools (round 5 running at 15:3x).
+> **Loop 14:52–15:30 (background game, the owner's world, remote switches + window capture `hubswitch/hub_run_bg.sh`):** bug 101 item 5 NEW + FIXED (pack `6c4ce00`
+> pushed — Параметры → Снаряжение bare world gone); item 4 measured (only Снаряжение → Таланты, the game's inventory teardown clears the shared feat selection —
+> needs a native read, bug 101 «Item 4 measured»); item 3 — the portrait whole on the first frame here, late only the waist cloth; TC mod elements M1–M7 pass by the
+> background twin (M6 ping open); run report `testcases/reports/2026-11-14_conan-hub-game-pages-backing-and-feat-card.md`. **Wall jump recon 15:2x:** `Climb(false)`
+> in the air at a wall starts climbing (MovementMode 7); vanilla Jump while climbing does NOTHING (the key is free); `_config/wall-stand.lua` (find · climb · wallinfo ·
+> jumpwall) — next: prototype ExitClimbing + LaunchCharacter(wall normal by a forward trace × push + up), hook point `BaseBPCombat_C:StartJump` (check it fires on
+> the wall), then the section in KrinikConanLocomotion. Uncommitted pack tools (judge pending): `feat-select-probe.lua`, `hubswitch/{tab-switch.lua,hub_run_bg.sh,
+> open-tab.lua}`, `wall-stand.lua`, `perk-trees/`, `devkit/kit-probe-hero-stats.{py,json}`. The game runs (background, PID by `launch-bg.ps1`), machine lock to 16:05.
 > **CHAT CLOSED 2026-11-14 13:45 (force, context 85 %).** ⚠️ Принудительное закрытие 2026-11-14 13:45: церемонии пропущены (проход судьи по итогам чата, подрезка
 > статуса, README, линтеры витрины) — долг оплачивает первое /end-chat-soft. Ложное утверждение, оставшееся в документах: нет (вывод «новые действия в 3.1.0»
 > и «устаревших вкладок нет» по первому прибору исправлены там, где стояли). No game of ours running, machine lock released, all commits pushed (pack

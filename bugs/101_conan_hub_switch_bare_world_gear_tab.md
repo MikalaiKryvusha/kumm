@@ -94,6 +94,37 @@ the band's late change. So the newborn's selection on its construct reaches our 
 the signal's source (the feat window's selection delegate / the shared feat inventory) and keep our page out of the newborn's selection, or apply the selection
 before our page is shown; a control run with the section off.
 
+## Item 4 measured 2026-11-14 14:53–15:04 — the card changes after the first frame ONLY on «Снаряжение» → «Таланты»
+
+Probe `ConanExiles/_config/feat-select-probe.lua` (a post-hook on `FeatWindow:SlotFeatSelectionChanged` + counts of the window's other native handlers + per-tick
+samples of every feat page's `FeatNameView` and of `CraftingGUI_C`), the remote's `SetCarouselIndex`, background game, the owner's world. TC
+`TC_conan_feat_card_first_frame_2026-11-14.md` F0.
+
+- `SlotFeatSelectionChanged(inventory, Index, Item)` — the selection belongs to the shared FEAT INVENTORY: the event fires on our kept page and on the game's newborn
+  within 1 ms of each other. The newborn builds its grid over the first two ticks (`SlotCompareItems` 337, `SlotDimItem` 93 + 42) on every path.
+- **Карта → Таланты, Параметры → Таланты, Клан → Таланты:** our page is shown at tick 1 WITH the last selection's card («Строительство: Highmane's A…») and the card
+  stays to tick 40 — no change after the first frame.
+- **Снаряжение → Таланты (the path of `fix3.mp4` 53.444):** our page shown at tick 1 with the card, at tick 2 the card is EMPTY and stays empty — with no
+  selection event on our page. `CraftingGUI_C` is out of the viewport already at tick 1 (removed inside the native switch) and is destroyed at tick 2, the same tick
+  the card empties: the game's inventory page, torn down, clears the shared selection, and our page's card follows by a native path that is not a UFunction.
+  The real-click recording showed the mirror order on the same path («--» first, filled 69 ms later) — the order of the teardown and the selection restore races.
+- Leaving «Таланты» for any tab empties our hidden page's card a tick later (invisible).
+- **Why no hold:** the old page is gone at tick 1 on this path — holding our page would show the bare backing (items 1–2 of this bug). **Next:** a native read of
+  what `CraftingGUI` teardown calls on the feat windows (Ghidra on `FeatWindow` handlers — `/bug-research`), or the owner's eye on whether one frame of the old card
+  on this one path is worth more work; real-click F4 when the PC is free.
+
+## Item 3 and a new item 5, measured 2026-11-14 15:04–15:12 by background window capture (`hubswitch/hub_run_bg.sh`, remote switches, ≈ 40–43 fps)
+
+- **Item 3 «Параметры» portrait:** from Клан and Спутники the hero is WHOLE on the first frame (`stat1.mp4` 7.60, `stat2.mp4` 7.42); the only late change is the
+  waist cloth settling (+33 … +133 ms, box 1852–2000 × 532–1112 px of 4K) — cloth physics of the portrait actor. The «head first» of the real-click `audit1.mp4`
+  did not reproduce on this path; to re-check by real clicks (F4 of `TC_conan_feat_card_first_frame_2026-11-14.md`) when the PC is free.
+- **Item 5 (new) — Параметры ↔ Снаряжение, both the game's pages:** `stat2.mp4` 12.14–12.33: Параметры → Снаряжение showed the dark backing, then the BARE WORLD for
+  two frames (luma 103), then the inventory — three states, 178 ms; Снаряжение → Параметры — ≈ 84 ms of the dark backing. Cause: the old game page leaves inside the
+  native switch, the newborn is held until built, and the hold's backing followed the newborn — off for the see-through inventory. **Fixed 15:09 (controller):**
+  after an old GAME page the backing stays on during the hold and goes off in the tick the inventory shows. `fix5.mp4`: Параметры → Снаряжение = dark backing
+  ≈ 150 ms → the inventory (no bare-world frame, frames 3.33–3.52); Снаряжение → Параметры unchanged (dark ≈ 117 ms → page). Fast burst 6 / 6 OK after the
+  change. **Still open:** the dark gap itself on these two switches (nothing of ours can stand on screen there — the game removes its old page).
+
 ## Decisions made without the owner
 
 - `[AI]` 13:17 — the hub's backing is owned by our hub controller, not by the game's carousel fade: `kit-conanui-edit.py` `CAROUSEL_NOOP` makes

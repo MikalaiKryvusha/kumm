@@ -23,6 +23,12 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
 
 - `[OWNER]` 2026-11-07 22:03 «в будущем будем сильно развивать систему перков, создавать новые перки для уровеней аттрибутов выше 20-го» — the paging is built for
   future perks past 20: a page is driven by the perk data (nodes at the levels the data names), not by hard-coded 5/10/15/20; pages without perks yet show the bare scale.
+- `[OWNER]` 2026-11-14 14:32 «сверсрстай мне, плиз, в html текущие древья перков из игры. я хочу их вычиьать и подумать, какие придумать для более высоких уровней» ·
+  14:34 «и дополниьельно страницей какие есть переменнын в игре по герою, чтобы я понимал, какие переменные можно будет качать нашими деревьями» · 14:34 «можешь одной
+  страницей с табами». **Delivered 14:47:** one local page, two tabs — review folder `86_perki_i_parametry_geroya/perki_i_parametry_geroya.html`; built by
+  `ConanExiles/_config/perk-trees/` (README — the rebuild steps). Its data is the input for designing perks 25–40: 48 game perks (36 in the six attributes, 12 in the three corrupted
+  branches; our placeholders are off since 2026-11-10 and not shown), the hero's 34 int and 42 float stats (game map «Hero stat enums»). Corrected 15:0x after the
+  judge: the first version of the page claimed our placeholders at 25–40 in «Живучесть» — false; rebuilt and replaced in the same folder. The owner's perk ideas come next — a new perk = a row in the table + our code that changes one stat.
 
 ## Acceptance criteria
 

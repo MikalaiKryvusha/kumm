@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0529 · 2026-11-14 · ❌→✅ · #conan #locres #kit #python #enum #perks #map-claim
+class: wrong-api-assumption
+**Context:** the owner's page of perk trees and hero variables (`ConanExiles/_config/perk-trees/`, review folder 86), read offline from the 3.1.0 paks and the kit.
+**Tried / did:** (1) the perk texts looked up in the loose `Game.locres` — 0 of 51 found: the vanilla Russian lives in `Exiles_UI` inside `pakchunk0-Windows.pak`
+(the loose file is the build's own); (2) `getattr(unreal, 'ECharIntStatID')` in the kit — NOT FOUND: UE's Python drops the leading «E» (`unreal.CharIntStatID`);
+(3) the page's first draft filtered `*_MAX` members and lost HealthMax, StaminaMax, ConsciousnessMax, EnduranceMax — caught on the agent's own screenshot.
+**Result:** ✅ 48 + 3 perks with Russian, 34 int + 42 float stats with kit values; the game map's «20 Авторитет» was false (27; 20 = AttributeMetabolism) — corrected.
+**Lesson:** a game text → read the asset's (namespace, key), then search EVERY locres target of the pak (`repak list … | grep /ru/`), the build's loose file first;
+a kit enum → `unreal.<Name without E>`; a filter on member names → filter the one count member by its full name, never by a suffix real members share.
+**Repro:** `repak.exe list pakchunk0-Windows.pak | grep -E "/ru/.*locres"` · kit: `getattr(unreal, n) or getattr(unreal, n[1:])` (`kit-probe-hero-stats.py`).
+**Trigger:** reading game text or a native enum offline; a number in a map that came from a raise «against the screen» — confirm by the widget's own binding.
+**Not for:** texts of mods — those ARE in the build's loose `Game.locres`.
+
 ### EXP-0528 · 2026-11-14 · ❌→✅ · #conan #ue4ss #umg #animation #race #hub #bug101
 class: a Lua write racing a widget animation the game plays later — the animation wins every time
 mechanized: no — the fix lives in `kit-conanui-edit.py` `CAROUSEL_NOOP` and bug 101

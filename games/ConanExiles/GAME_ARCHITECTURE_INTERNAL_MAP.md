@@ -654,7 +654,10 @@ mods (guard `check-lua-game-thread.py`). Gameplay keys on the game thread: `/Gam
   (`ConanCharacter.ShowAttributeResetNotification`, `IsAttributeVersionUpToDate` = true) or 3.0.1 keeps attributes elsewhere. **Resolved 15:46:** the character
   window «Хар-ки» shows all six 0 and «Доступные очки 52» — the ids are right (19 = Agility), the points are unspent.
   **The six attribute ids (read 2026-11-10 09:3x, a value raised by `ServerGiveAttribute` against the screen):** 14 Живучесть (Vitality), 15 Выдержка (Grit),
-  16 Мастерство (row `A_Encumbrance`), 17 Сила, 19 Проворство, **20 Авторитет** (row `A_Leadership`); 18 takes points but no row shows it. A raise by
+  16 Мастерство (row `A_Encumbrance`), 17 Сила, 19 Проворство, **27 Авторитет** (row `A_Leadership`); 18 takes points but no row shows it. **Correction
+  2026-11-14 14:4x:** this line said «20 Авторитет» — false: the 3.1.0 `W_Attributes` row `A_Leadership` has `MyAttribute = AttributeLeadership`, and the kit's
+  enum (`_config/devkit/kit-probe-hero-stats.py`) gives `AttributeLeadership` = 27, 20 = `AttributeMetabolism` (no row). The whole stat list — section «Hero
+  stat enums» below. A raise by
   `ServerGiveAttribute` across a branch level (10) opens NO trait dialog, and a later real «+» on that row left the screen (2) and the server (9) disagreeing — a
   trait-dialog stand reaches the branch level by real «+» clicks only (`attr-cap-probe.lua` for reading, not for the stand).
 - **The key M opens the HUB on «Карта» (2026-11-10 09:29, frame):** the tab row stays on top — the game has no separate fullscreen map outside the carousel in 3.0.1;
@@ -1008,6 +1011,40 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   the row). A perk's description is a vanilla `Exiles_UI` string — our Russian over it goes through `vanilla-overrides-ru.tsv` (translation notes).
 - **Water with NO reflection path (RT 0 + ScreenTraces 0, `set-reflections.sh off`, oasis stand 2026-11-09 00:0x):** the water shows a grey-blue sky colour with its
   ripples and sparkle; the shore, palms and rocks are not reflected (as shipped, screen traces put the warm shore on the water). Review folder 75.
+
+## Hero stat enums, the «Параметры» window and the perk texts (read 2026-11-14 14:4x, Conan 3.1.0, for the owner's perk-tree page)
+
+- **`ECharIntStatID`** (C++ `StatHolder.h`; `GetIntStat(id, 0)`), values by the kit's Python (`unreal.CharIntStatID` — UE's Python drops the leading «E»),
+  `_config/devkit/kit-probe-hero-stats.py`: 0 HealthMax · 1 HealthCurrent · 2 FeatPointsUsed · 3 FeatPointsTotal · 4 Level · 5 StaminaCurrent · 6 StaminaMax ·
+  7 ConsciousnessCurrent · 8 ConsciousnessMax · 9 ThrallID · 10 ThrallTier · 11 Gender · 12 KnockbackDefense · 13 Faction · 14 AttributeHealth · 15 AttributeStamina ·
+  16 AttributeEncumbrance · 17 AttributeMight · 18 AttributeAccuracy · 19 AttributeAthleticism · 20 AttributeMetabolism · 21 AttributeResilience · 22 ItemContainerSize ·
+  23 HealthBarStyle · 24 EnduranceCurrent · 25 EnduranceMax · 26 StaggerResistance · 27 AttributeLeadership · 28 AttributeSummoning · 29 AttributeAbberation ·
+  30 AttributeScourge · 31 IdleEmote · 32 AutomationWorkorderLimit · 33 MinimumHealthCap.
+- **`ECharFloatStatID`** (`GetFloatStat(id, 0)`): 0 ThrallCraftingSpeed · 1 ThrallCraftingCost · 2 ThrallCraftingFuel · 3 ThrallEntertainerPotency · 4 DamageModifierMelee ·
+  5 DamageModifierRanged · 6 NaturalArmor · 7 ThrallCorruptionCleansePotency · 8 ThrallCorruptionCleanseLimit · 9 Armor · 10 EncumbranceWeight · 11 KilledXPModifier ·
+  12 CurrentEncumbrance · 13 TemperatureModification · 14 PenisScaleModifier · 15 KnockbackFragilityDR · 16 KnockbackThresholdDR · 17 BuildingDamageMultiplier ·
+  18 CreatureDamageUI · 19 CreaturePenetrationUI · 20 EnduranceDamageResistance · 21 StaggerSpeedReduction · 22 HeatInsulation · 23 ColdInsulation ·
+  24 MaxCorruptionIncrease · 25 MinimumCorruption · 26 ResistDancerCorruptionHeal · 27 BonusStrWeaponDmg · 28 BonusAgiWeaponDmg · 29 BonusCarryCapacity ·
+  30 BonusFollowerDamage · 31 BonusConcussiveDamage · 32 CorruptionRequirementReduction · 33 BonusSummonLifespan · 34 BonusSummonHealth · 35 BonusCorruptionDamage ·
+  36 BonusCarryWeight · 37 StabilityLossMultiplier · 38 AutomationRadius · 39 AutomationMovementSpeed · 40 WeaponMaxReachMultiplier · 41 ArmorPenetrationBonus.
+  The same names stand as ASCII strings in the shipping exe (`exe_enum_names.py`-style scan) — the order of the strings there matches these values.
+- `EPlayerPerks` (`ChallengeTableRow.h`) has ONE member, `Resourcefulness_15` — the native perk enum is not a perk list.
+- **The six attribute rows of «Хар-ки»** (`W_Attributes` 3.1.0, each row's `MyAttribute`): A_Strength AttributeMight · A_Agility AttributeAthleticism · A_Vitality
+  AttributeHealth · A_Grit AttributeStamina · A_Leadership AttributeLeadership · A_Encumbrance AttributeEncumbrance. Labels and descriptions —
+  `/Game/UI/Inventory/Attributes/AttributeDisplayData` (6 rows `AttributeInfo`: Label, Icon, Description; Russian: Сила, Проворство, Живучесть, Выдержка, Авторитет,
+  Мастерство). Era of Trials ships `EoT_DT_AttributeDisplayData` — two weapon-scaling rows «Гибкое» only, no attribute.
+- **«Параметры» = `W_CharacterStatsPanel`**: functions `UpdateMeleeDamageStats`, `UpdateArmorStats`, `UpdateHealthStats`, `UpdateStaminaStats`, `UpdateMovementStats`,
+  `UpdateCarryWeightStats`, `UpdateTemperatureStats`, `UpdateFollowerDamageStats`, `UpdateSpectralCurrentStats`, `UpdateRespawnPointStats`, `GetBonusStrengthDamage`,
+  `GetBonusAgilityDamage`, `GetTotalStaminaRegenMod`; its labels are cooked TextBlocks (`…Label`), Russian in `Exiles_UI`.
+- **Perk and attribute texts are in the `Exiles_UI` target inside `pakchunk0-Windows.pak`** (`repak get <pak> ConanSandbox/Content/Localization/Exiles_UI/ru/Exiles_UI.locres`),
+  not in the loose `Game.locres` — that one is our build's (mods' texts + our vanilla overrides by Exiles_UI key, e.g. Dead Shot «на 20% быстрее»). A text lookup:
+  our `Game.locres` first, then `Exiles_UI`, by (namespace, key) of the asset's TextProperty.
+- PerksTable's ROW ORDER puts `Grit_15` among the Agility rows and `Agility_15` among the Grit rows; each row's name matches its `TargetIntStat` (`Grit_15` «Легкий шаг» →
+  AttributeStamina, `Agility_15` «Защитная стойка» → AttributeAthleticism) — group perks by the stat, never by table position. (Corrected 2026-11-14 15:0x: the first
+  version of this line said the names were swapped against the stat — false, the judge's finding checked against `perks.json`.) EAA adds `EAA_1/2/3`
+  (AttributeResilience, points 1/2/3) with no name or description.
+- **Our placeholder perks `Krinik_Vitality_25…40` are OFF** since 2026-11-10 19:1x by the owner's word (`krinik_mod_settings.lua` `PLACEHOLDER_PERKS = false`; the table
+  `DT_KrinikPerks` stays in the pak as a sample) — the game shows no perk past 20.
 
 ## World ↔ the in-game map, beaches on the big river (2026-11-09 00:4x)
 
