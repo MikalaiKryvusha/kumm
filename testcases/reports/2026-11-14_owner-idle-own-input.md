@@ -1,7 +1,8 @@
 # Test run report — the presence probe tells the agent's own input from foreign input
 
 **Created:** 2026-11-14 23:38 +03:00 · **Run by:** the agent (claude-opus-5-5) · **Version/build:** `D:/work/ai_sandbox/_tools/owner-idle.ps1` (new `-MarkOwn`, own-input
-check), `ConanExiles/_config/mouse-seq.ps1` and `input.ps1` (call `-MarkOwn` after sending) — uncommitted
+check; `-Tick` since 2026-11-15, outside git), `ConanExiles/_config/mouse-seq.ps1` (calls `-MarkOwn -Tick` after sending; pack `b1b1779`); `input.ps1` does NOT
+mark (its first mark was removed after the judge, 2026-11-15)
 
 ## 1. Work
 

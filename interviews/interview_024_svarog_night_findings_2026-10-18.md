@@ -3,7 +3,7 @@
 > Topic: вопросы, накопленные за ночную работу (по вашему ответу Q7 интервью #022 — «вопросы копятся в одном интервью»)
 > Source of the idea: ночная работа по плану 31; ваши слова в моём запуске 02:28–02:41 (цитаты — в плане 31, пункты 13–17)
 > Created: 2026-10-18 03:05 +03:00
-> Status: **✅ CLOSED 2026-11-14 22:39 +03:00 — all five answers propagated.** Q3 and Q4 built 2026-10-18 09:14 and run in game 13:00–13:35 (`plans/31` rows 19б, 16б;
+> Status: **✅ CLOSED 2026-11-14 22:39 +03:00 — all five answers propagated.** Q3 and Q4 built 2026-10-18 09:14 and run in game 13:00–13:35 (Q4 S1–S5, S8, S8b pass; Q3 only partly — CD2 E pass, CD1 and Q blocked) (`plans/31` rows 19б, 16б;
 > `testcases/reports/2026-10-18_svarog-day-buff-strip-passes1-5.md`); Q5 — no change (variant A). What stays open lives at its answer target, not here: Q1 —
 > `bugs/54` closes after a week of the owner's play without the red panel (Svarog paused since 2026-10-26, so the week has not started); Q2 — the owner's own
 > open debt («покажу в другой раз»), `plans/31` row 6 «ждёт места от владельца».
