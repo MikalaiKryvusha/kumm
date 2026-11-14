@@ -160,9 +160,9 @@ Climbing (remote recon 2026-11-02 14:1x, for the owner's 09:07 request «кно�
   `JumpZVelocity` 444 at Agility 8 (420 + 3 × Agility — `krinik_oblivion_locomotion`, re-set in a pre-hook of every native `Character:Jump`; the game resets
   the property to its literal 420 after any damage, and on the wall no `Character:Jump` runs — so the wall jump reads the law, `_G.__krinik_hero_jump_z`,
   shared by the mod's sections; the agent's remote is another Lua state and cannot see it). **`CharacterMovement.bWantsToClimb` on the wall (18:1x):** TRUE
-  after `Climb(false)` (the stand's climb start — the game's own climb function) and it stays true while climbing; with it cleared by the remote a REAL Space on
-  the wall never reached `StartJump` (no push), while the BP press event called by the remote still did — the player's Jump on the wall runs only with the wish
-  on. `CharacterMovement:ExitClimbing()` +
+  after `Climb(false)` (the stand's climb start — the game's own climb function) and it stays true while climbing; a REAL Space (`mouse-seq.ps1`) on the wall did not push in three
+  tries 18:10–18:33 — with the wish cleared (2) AND with it on (1), while the remote press event pushed every time: the synthetic Space is unreliable here (as
+  in M6), so NOTHING follows about the wish (the 18:1x line «only with the wish on» was withdrawn 18:34). `CharacterMovement:ExitClimbing()` +
   `LaunchCharacter` leave the wall (mode 3, then 1 on landing). `CurrentWall`'s fields are not readable from Lua — the wall's normal comes from a forward line
   trace. Our wall jump: KrinikConanLocomotion `krinik_wall_jump`.
 **The movement row — how the hero's speed type is chosen (bytecode of `BaseBPCombat::EvaluateMovementType` + a live read of the table, 2026-11-10 19:4x):**
