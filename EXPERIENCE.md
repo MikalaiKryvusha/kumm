@@ -91,6 +91,18 @@
 
 ## Entries
 
+### EXP-0524 · 2026-11-14 · ❌→✅ · #conan #state #twins #craft #bug94 #bug100 #remote-path
+class: a second copy of a state (a Lua variable beside the game's own value) that drifted when another component misjudged the mode
+mechanized: no — the rule lives in `krinik_pause_in_menu.lua` (`hero_craft_multiplier`, the live multiplier is the one scale)
+**Context:** bug 94's rescale of the craft queue; judge round 3 asked the Esc menu not to rescale, so a variable `queue_scale` was added beside `CraftTimeMultiplier`.
+**Tried / did:** run E1: after a remote Esc cycle the pause section took the hub for the Esc menu (bug 100) — the batch was baked at 0.0001 while `queue_scale` said
+1.0; on close no rescale, ten bows at once. Fixed by dropping the variable: Esc keeps the multiplier, and the live multiplier IS the scale of every entry.
+**Result:** ✅ E1 pass; bug 100 found and fixed on the way (the stuck Esc flag). Also learned: the remote `CraftItems` crafts instantly in ANY state — it was
+the «instant world» of 2026-11-13; only the GUI's batch by real input reproduces the player's crafting.
+**Lesson:** keep ONE source of a state the game already stores; a shadow variable is correct only while every other component agrees on the mode. And a
+remote shortcut into a game system is a different path — reproduce a player's defect by the player's path before reading anything from it.
+**Trigger:** adding a Lua variable that mirrors a game property; testing a mechanic through a direct API call instead of the GUI.
+
 ### EXP-0523 · 2026-11-14 · ❌→✅ · #conan #hub #cache #stale-ui #lifecycle #bug97 #owner-saw-first
 class: a cache of game UI built once and kept past the lifecycle point where the game rebuilds its own
 mechanized: no — the rule lives in the hub controller's comment (`check_closed`) and `KrinikConanUI.md`
