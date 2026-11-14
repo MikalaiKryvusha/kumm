@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0534 · 2026-11-14 · ❌ · #conan #real-input #mouse-seq #claim #control-case #walljump
+class: a rule about the game drawn from «the synthetic key did nothing» without a control that the key arrived at all
+**Result:** 18:10 two `mouse-seq` Spaces on the wall did nothing with `bWantsToClimb` cleared → written into the map as «the player's Jump runs only with the
+wish on»; 18:33 a Space with the wish ON did nothing too → withdrawn in three documents.
+**Lesson:** before reading a game rule from a real-input non-event, prove the key reached the game in the SAME run (a control press with a visible effect —
+a ground jump right before), and say «the synthetic key is unreliable» rather than invent a cause.
+**Trigger:** any «real key did nothing» result from `mouse-seq` / `input.ps1`.
+
 ### EXP-0533 · 2026-11-14 · ❌→✅ · #conan #ue4ss #stand #hub #input #remote-path #mixed-path
 class: a stand that OPENED a UI by the player's path (real Tab) and CLOSED it by a remote shortcut (`ActivateModule(false)`) — the shortcut skipped the input release
 mechanized: yes — `ConanExiles/_config/hubswitch/close-hub.lua` (the game's own force-close + a checked reset), the rule in the reference row and the game map
