@@ -139,7 +139,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `testcases/reports/2026-11-14_conan-owner-keybinds-310.md`; a full dodge roll not seen (the hero overloaded 268 %) — for his play. (b) **bug 97 twins checked
 > 12:3x–12:52 — no stale data** (probe v2 reaches list entries; `TC_conan_hub_kept_tabs_stale_2026-11-14.md`; notes: the map page lacks Simple Minimap's ping
 > marker, the feat list keeps more built rows). (b2) **bug 101 OPEN** — real clicks at 144 fps: to / from «Снаряжение» a page hangs over the bare world 34–166 ms
-> (the backing `W_Carousel` → `Background`, `MaskOffset` 1 only on «Снаряжение», switched natively a tick apart from our page); «Параметры» portrait late. (c) **the owner 12:24–12:32: the hub is an MVP — it needs work and tests**; goals: no lag /
+> (the backing `W_Carousel` → `Background`, `MaskOffset` 1 only on «Снаряжение», switched natively a tick apart from our page); «Параметры» portrait late.
+> Two Lua attempts (write / re-assert `MaskOffset` from the controller) measured and REVERTED — the game's fade writes after our tick; **next: make the kit's
+> `AnimBackgroundFadeOut` a no-op and let the controller own `MaskOffset`** (bug 101 «Attempts», fix2 kept in `.work/keybinds/`). **13:27 items 1–2 FIXED in game**
+> (fix 3: `CAROUSEL_NOOP` in the kit, the pak rebuilt and deployed, the controller owns `MaskOffset`): every switch to / from «Снаряжение» one frame, no blend
+> (`fix3.mp4`); open: the «Параметры» portrait late, small late strips under the tab row, the owner's play. Controller + kit script judged, NOT committed yet. Pushed 13:2x: pack `df7c244` + `7df3568`, KUMM
+> `7db5795` (5 judge rounds, the last clean). Rollback of the UI pak: `.work/keybinds/old_KrinikConanUI_1124.pak`. (c) **the owner 12:24–12:32: the hub is an MVP — it needs work and tests**; goals: no lag /
 > no jump on navigation, an easy mod-embedding mechanism, mod elements on a page's FIRST frame → the hub audit, plan 48 «The owner's words 2026-11-14» (step 1
 > done; next: real-input 144 fps run of all 9 tabs, the mod-element list and its first-frame check, the embedding contract). (d) 52 voice files renamed by their
 > write time (names up to 77 min ahead of the clock) + `stamp-gate.mjs` v3 (EXP-0526). Code judged: round 1 — 2 defects + 6 quality fixed; round 2 running.

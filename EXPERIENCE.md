@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0528 · 2026-11-14 · ❌→✅ · #conan #ue4ss #umg #animation #race #hub #bug101
+class: a Lua write racing a widget animation the game plays later — the animation wins every time
+mechanized: no — the fix lives in `kit-conanui-edit.py` `CAROUSEL_NOOP` and bug 101
+**Context:** the hub backing (`W_Carousel` → `Background`, material `MaskOffset`) had to change in the same frame as our page.
+**Tried / did:** (1) write the parameter in our switch tick — no change on video (the log proved the write landed); (2) re-assert it every tick — 56 ms instead
+of 166 and one more visible state. (3) the game's fade made a no-op in the kit; the controller alone writes the parameter.
+**Result:** ✅ every switch to / from «Снаряжение» one frame (`fix3.mp4`).
+**Lesson:** when the game animates a value you need to own, do not race it from Lua — neutralize the animation in its asset (kit) and write the value yourself
+in the tick it belongs to. A log line «written» proves the write, not what the frame shows: judge by the recording.
+**Trigger:** a UI value that «does not stick» after a Lua write, a one-frame effect that comes late.
+
 ### EXP-0527 · 2026-11-14 · ❌ · #conan #ue4ss #lua #crash #probe #brush
 class: a read-only remote probe that walked a struct property over every live object of a class crashed the game
 mechanized: no — the rule lives here and in bug 101

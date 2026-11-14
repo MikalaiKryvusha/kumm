@@ -43,7 +43,9 @@ our instance vs the game's newborn, widget by widget, what the player sees):** �
 by `ServerPurchaseFeat` (the knowledge window's own call) — equal, frames identical; Путешествие — equal (its `REFRESH[5]`); Клан, Спутники, Карта, Базар at rest —
 equal. Only Путешествие was stale (corrected 12:52: that pass used probe v1, blind to list entries; probe v2 re-run — the same, plus the map page lacking
 Simple Minimap's ping marker `markerPing` (G2) and the feat ListView keeping more built rows — TC H0b, H8). **Step 2 started 12:38 — real clicks at 144 fps: bug
-101** (switching to / from «Снаряжение» shows a page over the bare world 34–166 ms; «Параметры» finishes its portrait late). Small finding: our Таланты page kept the previous selection's card (a Highmane's building feat, cost 1) while the game's newborn
+101** (switching to / from «Снаряжение» shows a page over the bare world 34–166 ms; «Параметры» finishes its portrait late). **13:27 bug 101 items 1–2 fixed**
+— the carousel fade made a no-op in the kit, the controller owns the backing; every switch to / from «Снаряжение» one frame (`fix3.mp4`, report
+`2026-11-14_conan-hub-backing-owned.md`); left: the «Параметры» portrait, small late strips under the tab row, then G2 (the mod-element list, first frame). Small finding: our Таланты page kept the previous selection's card (a Highmane's building feat, cost 1) while the game's newborn
 page opens with none — gone after the next state change; to recheck by the player's path. Not yet: Спутники with a new thrall, Карта with a new marker.
 **Next steps of the audit:** (2) G1 by real input — the TC sequence of this plan at 144 fps, `hub_switches.py`, all 9 tabs, mouse + Q / E + Esc + Tab, with the
 remote's header artifact separated (after `SetCarouselIndex` by the remote the header stays lit on «Снаряжение» on the game's page too — not seen with real input
