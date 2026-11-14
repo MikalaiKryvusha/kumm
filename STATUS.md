@@ -133,7 +133,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **FIRST NEXT CHAT (written 15:5x, context 84 %):** (1) the owner's eye — the perk page (review folder 86, his perk ideas 25–40 → plan 49) and the wall jump
+> **FIRST NEXT CHAT (written 15:5x, context 84 %):** (0) re-run wall-jump W1 + W7 on pack `456bfda` (judge round-2 edit deployed, not run); (1) the owner's eye — the perk page (review folder 86, his perk ideas 25–40 → plan 49) and the wall jump
 > by his own Space (W5; the numbers 250 / 350 and «≥ 0.4 s on the wall» are mine); (2) judge round 2 on `krinik_wall_jump.lua`, then W6 (an arrow after the push)
 > and the hook after a world re-entry; (3) bug 101 item 4 — a native read of what the inventory page's teardown calls on the feat windows; item 3 by real clicks;
 > (4) bug 75 (the quick-loot rim) by real F on a free PC; M6 ping on our map. No game of ours runs, the machine lock is released, everything is pushed.
