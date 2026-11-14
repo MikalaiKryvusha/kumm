@@ -27,7 +27,8 @@ path — real clicks on the tab row (his path), the hub opened by the remote ins
 
 ## 4. Checks
 
-`Hygiene:` the kit run «0 error(s)»; the pak differs from the 11:24 build. `Functional run:` the hub in the owner's world, real clicks, every switch read by
+Hygiene: the kit run «0 error(s)»; the pak differs from the 11:24 build.
+Functional run: the hub in the owner's world, real clicks, every switch read by
 `hub_switches.py` on the 144 fps recording; the backing read live by `_config/carousel-backing.lua` (`MaskOffset` 1 on «Снаряжение», written by our controller).
 
 | Switch | audit1 (before) | fix3 (after) |

@@ -36,9 +36,9 @@ remote world entry differ from his desktop shortcut and mouse click; the key pat
 
 ## 4. Checks
 
-`Hygiene:` `input-edits.py` on three inputs (owner 6, default vs itself 0, the empty game-written file 0 after the fix — before it 166, finding 2) and a missing
+Hygiene: `input-edits.py` on three inputs (owner 6, default vs itself 0, the empty game-written file 0 after the fix — before it 166, finding 2) and a missing
 file (exit 2); `node tools/test-guards.mjs` 280 of 280 (part G — the stamp-gate v3 cases, red before v3).
-`Functional run:` the owner's 3.1.0 game with his world, real keys by his path, read on video frame sheets (2 fps, `.work/keybinds/sheet_*.jpg`) and the live
+Functional run: the owner's 3.1.0 game with his world, real keys by his path, read on video frame sheets (2 fps, `.work/keybinds/sheet_*.jpg`) and the live
 mapping table through the remote.
 
 | Case | Status | Observation |
