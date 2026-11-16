@@ -1,7 +1,8 @@
 # Bug 105 — Conan: a hero in a jump who touches a wall does not grab it (hits and falls)
 
-**Status:** 🔧 fix built and pushed (pack `4367176`, 2026-11-16 23:23 +03:00), waits for the owner's final check and his choice on G7 (the bow drawn) · **Severity:** S2 (the owner's play, a movement feature of KrinikConanLocomotion — the wall jump family) · **Version/build:** the Conan build on 3.1.0,
-pack working tree of 2026-11-16 · **When/context:** the owner's message 2026-11-16 21:38 +03:00, mid-session, while the agent finished bug 93 · **Fixing:** the next session (the cause found 2026-11-16 21:43 by real input, the plan below; this chat closed by the owner's word 21:41)
+**Status:** 🔧 the grab built and pushed (pack `4367176`, 2026-11-16 23:23 +03:00); G7 (the bow drawn — decided by the owner 23:24) r10 pushed `68c8d11`, r11 (+ the montage
+stop) committed at the closure 23:5x; G7 OPEN (G7e to re-run on r11 by the owner's rule «while RMB is held»; the top-of-wall redraw — his question); then his final check · **Severity:** S2 (the owner's play, a movement feature of KrinikConanLocomotion — the wall jump family) · **Version/build:** the Conan build on 3.1.0,
+pack working tree of 2026-11-16 · **When/context:** the owner's message 2026-11-16 21:38 +03:00 <!-- attribution-ok: verbatim in the «Symptom» section of this file -->, mid-session, while the agent finished bug 93 · **Fixing:** the chat of 2026-11-16 22:12 built and pushed the grab and the G7 cancel; the rest — FIRST NEXT CHAT in `STATUS.md`
 
 ## Goal vector
 
@@ -65,20 +66,38 @@ stamina charge's rounding (`math.floor` of a negative cost) had a twin in `krini
 
 ## Next (in order)
 
-1. Control case: the same jump into the wall with Locomotion's sections out of the game copy — does vanilla grab? (rule 24: who makes the defect).
-2. The native way — per «Fix plan» above (CORRECTED after the recon: not at the wall touch): the game's own `Climb(false)` after the Space RELEASE while falling,
-   so the wish the release cleared stands for the flight; never a timer.
-3. Cases in a TC file before the run; the owner's hands only for the final check (memory `owner-offers-bow-testing`).
+1. ~~Control case~~ — done 22:22 (G3). ~~The native re-wish~~ — built (r1 → r7, pack `4367176`). ~~Cases in a TC file~~ — done.
+2. G7 by the owner's rule (STATUS FIRST NEXT CHAT): his answer on the top-of-wall redraw; G7e / G7 / G7c / G1 / G4 / G5b / G10 on r11 as a series of frames and reads
+   while RMB is held; the rest of judge round 2 of `cancel_draw`; then his final check.
 
 ## Decisions made without the owner
 
 - `[AI]` Wall to wall needs a Space tap in the push's flight: a re-wish there would let the pushed-off wall catch the hero again (G5b), and telling the same wall from
   the next one would be a correction after the game's grab (HOUSE_RULES rule 24).
 - `[AI]` The push is refused for the game's jump blockers (13 / 14 / 18) — a safety net: the game drops an exhausted hero off the wall itself (23:20).
+- `[AI]` The G7 cancel stops the hero's montage by `StopAnimMontage(nil)` — that stops ANY montage playing at the grab, not only the draw's (r11; seen keeping the climb).
 - `[AI]` The shipped 0.9.0 guide is not edited; the next release's guide takes the wall jump and the grab (mod notes carry the text's source).
 - G7 DECIDED by the owner: `[OWNER]` 2026-11-16 23:24 +03:00 «при натянутом луке и прыжке на стену - натяжение снимается, герой повисает на стене. ПКМ прикладка не
   работает в висе на стене» — grab (A); at the grab the draw is cancelled; while hanging, RMB does not start the aim. r7 grabs but keeps the draw (substates 11, 15, 16
   until RMB goes up) — TO BUILD: the draw's cancel at the climb's start and no aim on the wall (recon first: how the game ends a draw; does vanilla refuse RMB on a wall).
+  `[OWNER]` 23:31 «то что она с луком в лекоыв руке висит - ок» · «гдавное, чтобы не в стойке натяжения висела» · 23:32 «если стоять в натяжке перед стеной и прыгнуть с
+  натяжкой на стену, то пероснаж начинает в натяжении ползти по стене - вот это нужно фиксить, да».
+- **BUILT 2026-11-16 23:2x–23:4x (pack r10, `cancel_draw` in `krinik_wall_jump.lua`):** at the climb's start, a draw (15 / 16, or 11 with the bow in hand) is ended by
+  `ExitSubstate(16, 15, 11)` on the next game-thread step — the hero keeps hanging, the aim view returns by itself, a held RMB does not redraw on the wall (the game
+  refuses a draw there: G7b passes by the game itself). `CancelAttackTry()` was tried first (r8) and REJECTED: it throws the hero off the wall. Pass: G7 (run-up, r9),
+  G7c (the owner's case, r9; frame `KUMM/.work/wallgrab/g7c_r9.jpg`). **OPEN — G7e:** a draw begun ≈ 0.25 s before the touch comes back on the wall (the montage
+  plays on and enters 15 / 16 after our exit; r10 23:46). **The recipe, read 23:49 by the remote on that very state (the hero hanging, 15 / 16 back, RMB held):**
+  `StopAnimMontage(nil)` + `ExitSubstate(16, 15, 11)` → mode 7 kept, the substates gone, the view normal in 0.3 s, no redraw for 1.8 s with RMB held; the frame
+  `KUMM/.work/wallgrab/g7e_stop.jpg` — the climbing pose, the bow in the left hand. FIRST NEXT CHAT: add `c:StopAnimMontage(nil)` before the exits in `cancel_draw`,
+  re-run G7e / G7 / G7c / G1, a judge round, and the rest of judge round 2 (a shot's release read as a draw; 15 / 16 without the bow; the dropped pcall error in
+  `on_mode_changed`; the log line after an RMB release; `bow_in_hand` shared with air_combat through `_G`).
+- **2026-11-16 23:49–23:52 — the owner watching the agent's runs:** `[OWNER]` 23:49 «ты вот сейчас тестируешь - и я видел, как она в натяжке ползёт по стене» · 23:50
+  «ьг на месте» · «наверное ты неверно интерпретируешь - смотришь псоле отпускания ПКМ» · 23:51 «а нужно смотреть пока ПКМ ещё держишь - натяжка не должна
+  сохраняться». The 23:49 run was r10 G7e (the stance came back on the wall — the defect, stopped by the remote at 2.4 s). r11 (`StopAnimMontage(nil)` added, pack
+  working tree, committed at the closure 23:5x) run 23:52 with RMB HELD through the whole crawl: frame `KUMM/.work/wallgrab/held_1.jpg` (≈ 1.4 s, mode 7) — the climbing pose, the bow
+  lowered, no stance; frame `held_2.jpg` (≈ 2.3 s, RMB still held) — the hero came over the top of the lower ledge (z +380 cm, mode 3) and the HELD RMB redrew at
+  once in the air at the wall's top (substate 11, the aim view). **OPEN, ask the owner first:** is that top-of-wall redraw what he saw, and should a held RMB redraw
+  after the climb ends, or only a new press? Then the agent's frames are taken by the rule «while RMB is held», a series, not one read (the owner's 23:51).
 
 ## Links
 

@@ -31,7 +31,10 @@
 - **The push costs the game's jump stamina** (`[OWNER]` 2026-11-16 22:31, `bugs/106_…`): `GetStaminaJumpCost` → `AdjustStaminaCurrent` (−20 on the owner's hero, G10 79 → 59);
   an exhausted hero (substates 13 / 14 / 18) stays on the wall `[AI]`.
 - **UE4SS hooks `InpActEvt_Jump_…_26` and `_27` as ONE** (FName number; game map «Climbing», EXP-0542): one hook, the event told by its effect on the wish; a 5 ms dedupe.
-- Open: G6 (two walls), G7 (a jump with the bow drawn into a wall — the owner's choice asked 2026-11-16 22:19), the hang's stamina (`bugs/106_…` item 2).
+- **The bow's draw at a grab (G7, decided by the owner 2026-11-16 23:24 — verbatim in `bugs/105_…`):** `cancel_draw` at the climb's start — `StopAnimMontage(nil)` +
+  `ExitSubstate(16, 15, 11)` for a draw (15 / 16, or 11 with the bow in hand): the hero hangs with the bow in the left hand, no stance (r10 pack `68c8d11`, r11 + the
+  montage stop at the closure). `CancelAttackTry` rejected — it throws the hero off the wall. OPEN: G7e by his rule «while RMB is held»; the top-of-wall redraw.
+- Open: G6 (two walls), G7 (above), the hang's stamina (`bugs/106_…` item 2 — the owner's answer on a timer of ours owed).
 - The player guide of the next release carries: the jump off a wall (since 2026-11-14) and the grab in the air; the shipped 0.9.0 guide (`docs/guide/guide-3.0.1.html`) is
   left as released `[AI]`.
 

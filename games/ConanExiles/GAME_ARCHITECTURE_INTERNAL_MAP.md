@@ -158,6 +158,14 @@ Climbing (remote recon 2026-11-02 14:1x, for the owner's 09:07 request «кно�
   (isRegenPositive)` never reached a hook. Our wall push pays `GetStaminaJumpCost` (−20) itself; the stand's god mode (`stand-keeper.sh`) leaves the bar honest. An
   exhausted hero does not stay on a wall: `AdjustStaminaCurrent(−200)` while climbing (the bar went to −50 — below zero is allowed — substate 14) → the game dropped the
   hero at once (mode 1 within ≈ 1 s, 2026-11-16 23:20).
+  **The bow's draw on a wall (2026-11-16 23:2x–23:52, real input + the remote, bug 105 G7):** a hero who climbed with no draw had the bow on `sheath_bow` (23:37,
+  as in the 2026-11-14 line above) and a real «3» on the wall did not draw it; a new RMB press on the wall draws nothing (23:29); a draw begun before the grab goes on
+  on the wall (substates 11 / 15 / 16, the aim view 1 / 75, the bow in `Socket_Bow`) until RMB goes up. On the GROUND during a held draw `BaseBPCombat_C:StopSpecialAttack()`
+  and `EndAllAttacks()` changed nothing (23:28); `CancelAttackTry()` ends it, but the cancelled attack threw a CLIMBING hero off the wall (mode 3 in 7 ms, 23:33) — on a
+  hanging hero with no attack it kept the climb; `ExitSubstate(16, 15, 11)` ends the stance and keeps the climb, but the draw montage played on and re-entered 15 / 16
+  for a draw begun ≈ 0.25 s before the touch (observed once, 23:46); `StopAnimMontage(nil)` + the exits ended it on the wall in one remote read (1.8 s, RMB held, 23:49)
+  and one real-input run (23:52) — the view returns by itself in 0.3 s; over the wall's top the held RMB redraws in the air (23:52). On the ground a held RMB restarts
+  the draw within 1 s after `CancelAttackTry`.
   **2026-11-14 15:2x — the climb by the remote, no real input (`_config/wall-stand.lua`):** facing a vertical wall 60 cm off, the hero's own jump input event
   (`InpActEvt_Jump_K2Node_InputActionEvent_27` then `_26`) + `AddMovementInput` into the wall + `Climb(false)` called WHILE AIRBORNE starts the climb: `MovementMode` 7
   (custom), `CustomMovementMode` 0; forward input then climbs up. The game does NOTHING on Jump while climbing (mode 7, speed 0 for 1 s). `BaseBPCombat_C:StartJump`

@@ -1,8 +1,8 @@
 # Bug 106 — Conan: the jump off a wall and the hang on a wall cost no stamina
 
 **Status:** 🔴 OPEN · **Severity:** S2 (the owner's play rules for the climb, KrinikConanLocomotion — the wall family) · **Version/build:** the Conan build on 3.1.0,
-pack working tree of 2026-11-16 · **When/context:** the owner's two messages mid-turn, 2026-11-16 22:31 +03:00, while the agent built bug 105 · **Fixing:** this session —
-item 1 in the bug 105 diff (pack working tree), item 2 after a recon of how the game charges the climb
+pack working tree of 2026-11-16 · **When/context:** the owner's two messages mid-turn, 2026-11-16 22:31 +03:00, while the agent built bug 105 · **Fixing:** item 1 pushed
+(pack `4367176`, TC G10 79 → 59); item 2 — the fork asked of the owner in chat 2026-11-16 23:09 (a timer of ours, rule 7, and the rate −1 / −2 / −3 per second), no answer yet
 
 ## Symptom (the owner's words, verbatim)
 

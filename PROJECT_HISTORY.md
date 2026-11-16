@@ -3,6 +3,24 @@
 
 
 
+## 2026-11-16 23:53 +03:00 — STATUS bonsai trim (the soft closure of the chat of 2026-11-16 22:12): the block CHAT CLOSED 2026-11-16 21:46 (+ its FIRST NEXT CHAT), moved verbatim
+
+> **CHAT CLOSED 2026-11-16 21:46 +03:00 (soft, at 76 % by the owner's word: `[OWNER]` 2026-11-16 21:41 «работай автономно 10 минут. Через 10 минут начинай доделывать то, над чем будешь работать - и закрываем чат»).**
+> KUMM `724bbba` · `e31d691` + the closure commit, pack `49e78cd` — all pushed; no game of ours runs (closed 21:45); the machine lock released; the owner's grant file
+> `_tools/owner-free-grant.txt` expires at 21:48 by itself (claim-ok: the grant's own end line).
+> Done: bug 93 on 3.1.0 — the bow sprint works (the evening «no draw» was the stand), control S5b; the aim zoom vs sprint / jump / exhaustion reworked to ONE rule in
+> KrinikConanArchery `SZ` (give back only the zoom taken, decided by state) — Z7–Z10, Z1→Z3, Z8 pass by the agent's real input (report
+> `testcases/reports/2026-11-16_conan-bow-sprint-zoom-3.1.0-owner-hands.md`); the mid-draw jump costs stamina (Locomotion); 6 judge rounds. Bug 105 (a jump into a wall must
+> grab it, the owner 21:38) — cause found by real input, plan and cases written.
+> **FIRST NEXT CHAT:** (1) **`bugs/105_…`** — build the re-wish (the game's `Climb(false)` after the Space release while falling; guard the pushed-off wall), cases G1–G8
+> (`testcases/TC_conan_jump_wall_grab_2026-11-16.md`; G3 control and G7 «grab with the bow drawn?» — ask the owner before building G7), the judge, the agent's own real-input
+> run on the desert-arch stand (`tp_ground.sh 17929 244723`, `wall-stand.lua find` ×2, 3 m back along the normal), then the owner's final check. (2) **The bow-sprint section's
+> cost** — worst call 4–8 ms (bug 93 «Cost — recon from the code»: per-call allocations in `bow_in_hand` / `any_substate`; time the pieces, then keep «bow in hand» by the
+> equip events). (3) `bugs/104_…` (the hand off the string), plan 53 step 12 (the stale-copy table; read `researches/mod-reconciliation/GUIDE.md` first). (4) Older: interview #035,
+> plan 52 put-away by a real key, `bugs/103_…`; the owner's open question — should the Nexus call carry the public GitHub release link (v0.9.0)?
+> Tools of this chat (in `.work/bow310/`, git-ignored): `series-rec.lua` (a 15 ms change-only recorder: substates, sprint flags, FOV mode / angle, camera distance, movement
+> mode, `bWantsToClimb`, frame gaps), `hero-bow-state.lua`, `split.py`. The owner's rule of this chat — memory `owner-offers-bow-testing`: his hands are for the FINAL check.
+
 ## 2026-11-16 21:46 +03:00 — STATUS bonsai trim (the soft closure of the chat of 2026-11-16 20:26): the blocks NOW 2026-11-16 21:30 and CHAT CLOSED 2026-11-16 19:47 (+ its FIRST NEXT CHAT), moved verbatim
 
 > **NOW 2026-11-16 21:30 +03:00 — the chat of 2026-11-16 20:26 (resume → bug 93 on 3.1.0, the owner's hands, then the agent's own real input under his grant «комп твой»):**

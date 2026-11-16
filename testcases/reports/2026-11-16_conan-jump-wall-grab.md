@@ -1,7 +1,7 @@
 # Run report — Conan 3.1.0: a jump into a wall grabs it after a short Space tap (bug 105) and the wall push costs stamina (bug 106 item 1)
 
 **Created:** 2026-11-16 22:59 +03:00 · **Run by:** the agent, real input (`mouse-seq.ps1`) only while `owner-idle.ps1` said FREE · **Version/build:** the Conan build on 3.1.0,
-pack working tree — KrinikConanLocomotion `krinik_wall_jump.lua` builds r1 → r5
+pack working tree — KrinikConanLocomotion `krinik_wall_jump.lua` builds r1 → r7 (the G7 bow-draw builds r8 → r11 — their runs and frames in the TC rows G7 / G7c / G7e)
 
 ## 1. Work
 
@@ -57,5 +57,5 @@ Functional run: the real product (the owner's world, real keys), the recorder ro
 
 ## 7. Verdict
 
-partial — the grab after a tap, the push guard, the landing / climb-end clear and the push's stamina pass by real input on the final build; G6, G7, the exhausted
-refusal and a rock for G8 are not run; the owner's final check is owed.
+partial — the grab after a tap, the push guard, the landing / climb-end clear and the push's stamina pass by real input on r7 (r6 / r7 regression lines in Runs);
+the exhausted refusal is unreachable (the game drops the hero, r7 23:20); G6 and a rock for G8 are not run; G7 is OPEN (TC G7 / G7e); the owner's final check is owed.
