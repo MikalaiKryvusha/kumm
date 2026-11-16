@@ -1,7 +1,7 @@
 # Bug 105 — Conan: a hero in a jump who touches a wall does not grab it (hits and falls)
 
 **Status:** 🔴 OPEN · **Severity:** S2 (the owner's play, a movement feature of KrinikConanLocomotion — the wall jump family) · **Version/build:** the Conan build on 3.1.0,
-pack working tree of 2026-11-16 · **When/context:** the owner's message 2026-11-16 21:38 +03:00, mid-session, while the agent finished bug 93 · **Fixing:** this session, right after the bug 93 commit
+pack working tree of 2026-11-16 · **When/context:** the owner's message 2026-11-16 21:38 +03:00, mid-session, while the agent finished bug 93 · **Fixing:** the next session (the cause found 2026-11-16 21:43 by real input, the plan below; this chat closed by the owner's word 21:41)
 
 ## Goal vector
 
@@ -44,8 +44,8 @@ must not re-grab the SAME wall at once (the push is 0.5 m) — e.g. no re-wish f
 ## Next (in order)
 
 1. Control case: the same jump into the wall with Locomotion's sections out of the game copy — does vanilla grab? (rule 24: who makes the defect).
-2. If vanilla does not grab in the air by itself: the native way — the game's own `Climb(false)` at the wall touch while airborne (the event: a hit / `OnWalkingOffLedge`
-   / the capsule's blocking hit — read which one fires), never a timer.
+2. The native way — per «Fix plan» above (CORRECTED after the recon: not at the wall touch): the game's own `Climb(false)` after the Space RELEASE while falling,
+   so the wish the release cleared stands for the flight; never a timer.
 3. Cases in a TC file before the run; the owner's hands only for the final check (memory `owner-offers-bow-testing`).
 
 ## Links

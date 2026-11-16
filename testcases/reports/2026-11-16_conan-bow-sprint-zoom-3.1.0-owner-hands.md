@@ -24,10 +24,13 @@ All on 2026-11-16 (+03:00):
 - 20:45, 20:49, 20:53, 20:57, 21:01, 21:08, 21:12 · the owner's checks of fixes 1–5 · rows `fix_2045_rows.txt`, `fix2_2049_rows.txt`, `jump_2053_rows.txt`, `jump3_2057_rows.txt`, `stam_2101_rows.txt`, `final_2112_rows.txt`
 - 21:19:39–21:20:09 · the agent: `powershell -File .\mouse-seq.ps1 -Seq "<S1…S4>" -MinIdle 0` · rows `self_2119_rows.txt`
 - 21:23:00–21:23:24 · the agent: Z1→Z2→Z3 and Z8 by `mouse-seq.ps1` · rows `self2_2122_rows.txt`
+- 21:28:42–21:29:23 · the agent, regression after judge round 5 (S1, S2, Z1→Z3, S4, Z8) · rows `regr_2128_rows.txt`
+- 21:39:00–21:39:14 · the agent, after judge round 6 (the bow by a real «3», S1, S4) · rows `r6_2138_rows.txt`
+- Note: `UE4SS.log` is rewritten at every launch — its lines before the 21:37 launch are gone (the closing judge found them unverifiable); the recorder rows stay.
 
 ## 4. Checks
 
-Hygiene: `luac -p` of both mods after every edit; five judge rounds on the diffs (findings verified against the recorder rows before acting).
+Hygiene: `luac -p` of both mods after every edit; six judge rounds on the diffs (findings verified against the recorder rows before acting).
 Functional run: the real product (the owner's world, real keys and mouse), the recorder rows and `UE4SS.log` read per case:
 - ST1 stand — pass (the 19:05–19:18 «no draw on 3.1.0» was a bow that did not wield).
 - S5b control — pass: with the section out, RMB in a sprint ends 7 at once (max 237, aim 75°); the sprint through the draw is the section's work.

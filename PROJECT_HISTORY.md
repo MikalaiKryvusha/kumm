@@ -3,6 +3,33 @@
 
 
 
+## 2026-11-16 21:46 +03:00 — STATUS bonsai trim (the soft closure of the chat of 2026-11-16 20:26): the blocks NOW 2026-11-16 21:30 and CHAT CLOSED 2026-11-16 19:47 (+ its FIRST NEXT CHAT), moved verbatim
+
+> **NOW 2026-11-16 21:30 +03:00 — the chat of 2026-11-16 20:26 (resume → bug 93 on 3.1.0, the owner's hands, then the agent's own real input under his grant «комп твой»):**
+> the bow sprint on 3.1.0 WORKS (the 19:05 «no draw» was a bow that did not wield; control S5b proves the section does the work); the aim zoom vs the sprint reworked
+> five times on the owner's checks and ended as one rule in KrinikConanArchery `SZ` — give back only the zoom taken, decided by state; the mid-draw jump now costs stamina
+> (Locomotion); the exhaustion «микролаг» fixed (substate 14 → out of the aim at once). All cases pass by the agent's real input 21:19–21:29 (report
+> `testcases/reports/2026-11-16_conan-bow-sprint-zoom-3.1.0-owner-hands.md`, TC rows Z7–Z10, SELF). Judges: 6 rounds; pack `49e78cd` pushed (the two mod files only —
+> `_config/devkit/kit-conanui-edit.json` is modified in the pack tree and is NOT ours: left as found).
+> **Next:** (1) **`bugs/105_…` — a jump into a wall must grab it** (the owner 21:38, new) — CAUSE FOUND by real input 21:43: vanilla grabs in the air only while Space is
+> HELD (the release clears `bWantsToClimb`); the fix plan (re-wish by the game's `Climb(false)` after the release while falling, a guard against re-grabbing the pushed-off wall)
+> and the cases G1–G8 (`testcases/TC_conan_jump_wall_grab_2026-11-16.md`) are written — build, judge, own real-input run, then the owner's final check; (2) the bow-sprint section's cost — worst call 4–8 ms in the
+> owner's minutes (bug 93 «Cost»); (3) bug 104 (the hand off the string), plan 53 step 12. The game of the agent's launch is open (PID 29644) under the machine lock until 21:59.
+> The owner's rule of this chat: his hands are for the FINAL check — memory `owner-offers-bow-testing` (scenario table + judge + own real-input run first).
+> **CHAT CLOSED 2026-11-16 19:47 +03:00 (soft, at 75 % by the owner's word: `[OWNER]` 2026-11-16 19:46 «давай в новом чате этим займемся. Закрывай, передача дел в новый чат»).**
+> KUMM `80127fd` · `2d93a12` · `b6a443e` · `02545bf` + the closure commit, pack `a50662f` · `feb5e2a` — all pushed; no game of ours runs; the machine lock released.
+> Done: the 3.1.0 mod-update recon; the Nexus community call at the top of mod 65 (+ `tools/nexus-desc.mjs`, 4 judge rounds); the bow look re-shot in an open view
+> (review folder 88) → interview #036 ANSWERED — look B; EAA v1.3.13 + TDI_LegendaryRepair on their newest uploads (all our EAA edits re-applied, «СБОРКА: моды 66/66»);
+> the zoom-vs-sprint section in KrinikConanArchery (Z1 / Z2 / Z4 pass); the presence probe honours the owner's word (HOUSE_RULES rule 30.3, `_tools/owner-free-grant.txt`).
+> **FIRST NEXT CHAT (the owner's word 19:46):** (1) `bugs/93_…` — the bow sprint on 3.1.0: the draw ENDS at the Shift release; an RMB in a sprint does NOT draw (S1b passed on
+> 3.0.1 only). STAND FIRST — a bow the heroine can wield: after the agent's game kills the save has no bow in hand; `ToggleWieldWeapon()` and a real «3» failed (hot-bar slots
+> 3–8 show bows — maybe `AddItemTemplate` copies, which never wield); **`bow-stand.lua {craft = true}` CRASHED the game on 3.1.0 — do not run it** (bug 93, its header).
+> Ask the owner to take the bow in hand in his save, or read why the bar's bows do not wield. Then the control case (`krinik_bow_sprint` out of the GAME copy's section list
+> only, restore by `Deploy-ModPack.ps1 -Deploy -Only KrinikConanLocomotion`, md5 = the pack), `rmb_held` under SendInput, then Z3 / Z5 by real keys (recorder
+> `KUMM/.work/zoom-rec.lua`; bug 93 «NEXT (in order)»). (2) `bugs/104_…` — the right hand drifts off the string when moving in the aim (control case first). (3) plan 53
+> step 12 — the stale-copy table, ours to finish now (read `researches/mod-reconciliation/GUIDE.md` first, rule 27). (4) Older open items: interview #035 (the bow after the
+> wall push), plan 52 put-away by a real key, `bugs/103_…`; a show for the owner: should the Nexus call carry the public GitHub release link (v0.9.0)?
+
 ## 2026-11-16 19:47 +03:00 — STATUS bonsai trim (the soft closure of the chat of 2026-11-16 17:59): the blocks NOW 2026-11-16, CHAT CLOSED 2026-11-15 00:19 and NOW 2026-11-14 22:29, moved verbatim
 
 > **NOW — chat of 2026-11-16 from 17:59 (`resume` + the owner's tasks), recorded 2026-11-16 18:11 +03:00.** (1) DONE — the 3.1.0 mod-update recon (recon only, the owner's word

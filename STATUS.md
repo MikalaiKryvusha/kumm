@@ -133,30 +133,22 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW 2026-11-16 21:30 +03:00 — the chat of 2026-11-16 20:26 (resume → bug 93 on 3.1.0, the owner's hands, then the agent's own real input under his grant «комп твой»):**
-> the bow sprint on 3.1.0 WORKS (the 19:05 «no draw» was a bow that did not wield; control S5b proves the section does the work); the aim zoom vs the sprint reworked
-> five times on the owner's checks and ended as one rule in KrinikConanArchery `SZ` — give back only the zoom taken, decided by state; the mid-draw jump now costs stamina
-> (Locomotion); the exhaustion «микролаг» fixed (substate 14 → out of the aim at once). All cases pass by the agent's real input 21:19–21:29 (report
-> `testcases/reports/2026-11-16_conan-bow-sprint-zoom-3.1.0-owner-hands.md`, TC rows Z7–Z10, SELF). Judges: 6 rounds; pack `49e78cd` pushed (the two mod files only —
-> `_config/devkit/kit-conanui-edit.json` is modified in the pack tree and is NOT ours: left as found).
-> **Next:** (1) **`bugs/105_…` — a jump into a wall must grab it** (the owner 21:38, new) — CAUSE FOUND by real input 21:43: vanilla grabs in the air only while Space is
-> HELD (the release clears `bWantsToClimb`); the fix plan (re-wish by the game's `Climb(false)` after the release while falling, a guard against re-grabbing the pushed-off wall)
-> and the cases G1–G8 (`testcases/TC_conan_jump_wall_grab_2026-11-16.md`) are written — build, judge, own real-input run, then the owner's final check; (2) the bow-sprint section's cost — worst call 4–8 ms in the
-> owner's minutes (bug 93 «Cost»); (3) bug 104 (the hand off the string), plan 53 step 12. The game of the agent's launch is open (PID 29644) under the machine lock until 21:59.
-> The owner's rule of this chat: his hands are for the FINAL check — memory `owner-offers-bow-testing` (scenario table + judge + own real-input run first).
-> **CHAT CLOSED 2026-11-16 19:47 +03:00 (soft, at 75 % by the owner's word: `[OWNER]` 2026-11-16 19:46 «давай в новом чате этим займемся. Закрывай, передача дел в новый чат»).**
-> KUMM `80127fd` · `2d93a12` · `b6a443e` · `02545bf` + the closure commit, pack `a50662f` · `feb5e2a` — all pushed; no game of ours runs; the machine lock released.
-> Done: the 3.1.0 mod-update recon; the Nexus community call at the top of mod 65 (+ `tools/nexus-desc.mjs`, 4 judge rounds); the bow look re-shot in an open view
-> (review folder 88) → interview #036 ANSWERED — look B; EAA v1.3.13 + TDI_LegendaryRepair on their newest uploads (all our EAA edits re-applied, «СБОРКА: моды 66/66»);
-> the zoom-vs-sprint section in KrinikConanArchery (Z1 / Z2 / Z4 pass); the presence probe honours the owner's word (HOUSE_RULES rule 30.3, `_tools/owner-free-grant.txt`).
-> **FIRST NEXT CHAT (the owner's word 19:46):** (1) `bugs/93_…` — the bow sprint on 3.1.0: the draw ENDS at the Shift release; an RMB in a sprint does NOT draw (S1b passed on
-> 3.0.1 only). STAND FIRST — a bow the heroine can wield: after the agent's game kills the save has no bow in hand; `ToggleWieldWeapon()` and a real «3» failed (hot-bar slots
-> 3–8 show bows — maybe `AddItemTemplate` copies, which never wield); **`bow-stand.lua {craft = true}` CRASHED the game on 3.1.0 — do not run it** (bug 93, its header).
-> Ask the owner to take the bow in hand in his save, or read why the bar's bows do not wield. Then the control case (`krinik_bow_sprint` out of the GAME copy's section list
-> only, restore by `Deploy-ModPack.ps1 -Deploy -Only KrinikConanLocomotion`, md5 = the pack), `rmb_held` under SendInput, then Z3 / Z5 by real keys (recorder
-> `KUMM/.work/zoom-rec.lua`; bug 93 «NEXT (in order)»). (2) `bugs/104_…` — the right hand drifts off the string when moving in the aim (control case first). (3) plan 53
-> step 12 — the stale-copy table, ours to finish now (read `researches/mod-reconciliation/GUIDE.md` first, rule 27). (4) Older open items: interview #035 (the bow after the
-> wall push), plan 52 put-away by a real key, `bugs/103_…`; a show for the owner: should the Nexus call carry the public GitHub release link (v0.9.0)?
+> **CHAT CLOSED 2026-11-16 21:46 +03:00 (soft, at 76 % by the owner's word: `[OWNER]` 2026-11-16 21:41 «работай автономно 10 минут. Через 10 минут начинай доделывать то, над чем будешь работать - и закрываем чат»).**
+> KUMM `724bbba` · `e31d691` + the closure commit, pack `49e78cd` — all pushed; no game of ours runs (closed 21:45); the machine lock released; the owner's grant file
+> `_tools/owner-free-grant.txt` expires at 21:48 by itself (claim-ok: the grant's own end line).
+> Done: bug 93 on 3.1.0 — the bow sprint works (the evening «no draw» was the stand), control S5b; the aim zoom vs sprint / jump / exhaustion reworked to ONE rule in
+> KrinikConanArchery `SZ` (give back only the zoom taken, decided by state) — Z7–Z10, Z1→Z3, Z8 pass by the agent's real input (report
+> `testcases/reports/2026-11-16_conan-bow-sprint-zoom-3.1.0-owner-hands.md`); the mid-draw jump costs stamina (Locomotion); 6 judge rounds. Bug 105 (a jump into a wall must
+> grab it, the owner 21:38) — cause found by real input, plan and cases written.
+> **FIRST NEXT CHAT:** (1) **`bugs/105_…`** — build the re-wish (the game's `Climb(false)` after the Space release while falling; guard the pushed-off wall), cases G1–G8
+> (`testcases/TC_conan_jump_wall_grab_2026-11-16.md`; G3 control and G7 «grab with the bow drawn?» — ask the owner before building G7), the judge, the agent's own real-input
+> run on the desert-arch stand (`tp_ground.sh 17929 244723`, `wall-stand.lua find` ×2, 3 m back along the normal), then the owner's final check. (2) **The bow-sprint section's
+> cost** — worst call 4–8 ms (bug 93 «Cost — recon from the code»: per-call allocations in `bow_in_hand` / `any_substate`; time the pieces, then keep «bow in hand» by the
+> equip events). (3) `bugs/104_…` (the hand off the string), plan 53 step 12 (the stale-copy table; read `researches/mod-reconciliation/GUIDE.md` first). (4) Older: interview #035,
+> plan 52 put-away by a real key, `bugs/103_…`; the owner's open question — should the Nexus call carry the public GitHub release link (v0.9.0)?
+> Tools of this chat (in `.work/bow310/`, git-ignored): `series-rec.lua` (a 15 ms change-only recorder: substates, sprint flags, FOV mode / angle, camera distance, movement
+> mode, `bWantsToClimb`, frame gaps), `hero-bow-state.lua`, `split.py`. The owner's rule of this chat — memory `owner-offers-bow-testing`: his hands are for the FINAL check.
+> **Moved verbatim to the chronicle (entry 2026-11-16 21:46 +03:00):** the blocks NOW 2026-11-16 21:30 and CHAT CLOSED 2026-11-16 19:47 (+ its FIRST NEXT CHAT; its open items are in (3)–(4) above).
 > **Moved verbatim to the chronicle (entry 2026-11-16 19:47 +03:00):** the NOW block of the chat of 2026-11-16 17:59 and the blocks CHAT CLOSED 2026-11-15 00:19 and NOW 2026-11-14 22:29.
 > **Moved verbatim to the chronicle (entry 2026-11-15 00:02 +03:00):** the blocks NOW 2026-11-14 16:24 (dayloop: wall jump, bug 102, Pickup+), CHAT CLOSED 15:59, FIRST NEXT CHAT 15:5x and NOW 14:17 (perk page, bug 101, the first wall jump). Still open from them: interview #035 (the bow after the wall push — the owner's answer); the wall-jump TC row R6 by the owner's own keys (the synthetic Space is unreliable there), an overhang case, W11 / W13 on the final build; bug 91 real hover; the perk page (review folder 86, his perk ideas 25–40 → plan 49); bug 101 item 4 (a native read of the inventory teardown); bug 75 (quick-loot rim); M6 ping; the Pickup+ admin window (plan 53 step 12, parked to ≈ 2026-11-15); the morning items listed in the 2026-11-14 15:41 pointer below.
 > **Moved verbatim to the chronicle (entry 2026-11-14 15:41 +03:00):** the blocks CHAT CLOSED 2026-11-14 13:45, NOW 11:52 (dayloop), FIRST NEXT CHAT (11:41) and NEW CHAT 09:51 of the morning chat. Still open from them: the owner's play — his six key bindings, the hub switches to / from «Снаряжение», the morning four (square page arrows, journeys refresh, craft pace after the close, Esc flag); (the run-report linter's two morning reports — fixed 15:4x); plan 53 step 12 (parked to ≈ 2026-11-15); the rollback paks in `.work/keybinds/` and `.work/arrows/` (delete after the owner's play).
