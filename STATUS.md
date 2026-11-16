@@ -139,7 +139,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (Locomotion); the exhaustion «микролаг» fixed (substate 14 → out of the aim at once). All cases pass by the agent's real input 21:19–21:29 (report
 > `testcases/reports/2026-11-16_conan-bow-sprint-zoom-3.1.0-owner-hands.md`, TC rows Z7–Z10, SELF). Judges: 6 rounds; pack `49e78cd` pushed (the two mod files only —
 > `_config/devkit/kit-conanui-edit.json` is modified in the pack tree and is NOT ours: left as found).
-> **Next:** (1) **`bugs/105_…` — a jump into a wall must grab it** (the owner 21:38, new; control case first); (2) the bow-sprint section's cost — worst call 4–8 ms in the
+> **Next:** (1) **`bugs/105_…` — a jump into a wall must grab it** (the owner 21:38, new) — CAUSE FOUND by real input 21:43: vanilla grabs in the air only while Space is
+> HELD (the release clears `bWantsToClimb`); the fix plan (re-wish by the game's `Climb(false)` after the release while falling, a guard against re-grabbing the pushed-off wall)
+> and the cases G1–G8 (`testcases/TC_conan_jump_wall_grab_2026-11-16.md`) are written — build, judge, own real-input run, then the owner's final check; (2) the bow-sprint section's cost — worst call 4–8 ms in the
 > owner's minutes (bug 93 «Cost»); (3) bug 104 (the hand off the string), plan 53 step 12. The game of the agent's launch is open (PID 29644) under the machine lock until 21:59.
 > The owner's rule of this chat: his hands are for the FINAL check — memory `owner-offers-bow-testing` (scenario table + judge + own real-input run first).
 > **CHAT CLOSED 2026-11-16 19:47 +03:00 (soft, at 75 % by the owner's word: `[OWNER]` 2026-11-16 19:46 «давай в новом чате этим займемся. Закрывай, передача дел в новый чат»).**

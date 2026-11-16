@@ -144,6 +144,13 @@ by the owner's real «3», `HasWeaponsEquipped` true):
 only re-enables the wheel, the Archery hip shift is first-person only — the source of the small jerk is NOT known, a recorder with the camera's distance comes next) ·
 20:51 «если в спринте прыгать - камера приближается - не нужно, я же всё равно в спринте, хоть и прыгаю, я продолжаю держать спринт кнопку» (case Z9 — a jump in a
 sprint with Shift held must not change the view).
+**Cost — recon from the code (2026-11-16 21:45 +03:00, no run yet):** the minute lines read 1922–2113 calls, 168–268 ms a minute, worst 4–8 ms (game in front). The gate (cached
+`GATE_KEEP_MS`) runs `gate_now` → `any_substate` (a new `{}` per substate tested) → `running_with_bow` → `bow_in_hand`: `GetAttachedActors` + for EVERY attached actor
+`GetClass():GetFName():ToString():lower():find` and `GetAttachParentSocketName():ToString():lower()` — strings and wrappers allocated per evaluation. Hypotheses, horses
+first: (1) a Lua GC step landing inside a measured call (rare multi-ms spikes over a sub-0.1 ms mean fit this); (2) `bow_in_hand`'s walk itself on a hero with many
+attached actors. Next: time the pieces separately in the minute line (gate_now, bow_in_hand, the rest) and count `collectgarbage("count")` growth per minute; then the
+native fix — «bow in hand» kept by the equip events the game map names (`BasePlayerChar_C:OnWeaponEquip(Item)` / `OnWeaponUnequip`, `GetWeaponArcheType() == 3` — the way
+KrinikConanArchery's first-person section already does), out tables reused, no strings per call. Acceptance: the worst call ≤ 1 ms over 5 minutes of the owner's sprint play.
 **NEXT (in order):** (1) the bow sprint on 3.1.0 — control case with `krinik_bow_sprint` off (does a draw survive the Shift release; does RMB draw in a sprint); (2) `rmb_held`
 under SendInput; (3) Z3 / Z5 by real keys; (4) the judge's open risks.
 

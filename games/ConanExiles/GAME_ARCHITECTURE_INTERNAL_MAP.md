@@ -141,6 +141,9 @@ Climbing (remote recon 2026-11-02 14:1x, for the owner's 09:07 request «кно�
   (`tp_ground.sh 17929 244723`), the ring trace `scratchpad ring.lua` found a wall at yaw 135°, 5.7 m, normal (0.81, −0.59, −0.03); the oasis camp and the ostrich canyon
   point have slopes only (normal Z ≈ 0.8–0.98). A line trace by the remote: `Default__KismetSystemLibrary:LineTraceSingle(p, s, e, 0, false, {}, 0, hit, true, c, c, 0)` —
   `hit` IS the FHitResult (`hit.Distance`, `hit.ImpactNormal`), not `hit.OutHit`.
+  **2026-11-16 21:44 +03:00 — a grab IN THE AIR needs the jump key HELD (real input, desert arch, bug 105):** the Space press sets `bWantsToClimb`, the Space RELEASE clears it;
+  a run-up jump with a tapped Space hits the wall in mode 3 and falls; with Space held through the flight the touch starts the climb (mode 7). `HoldingClimbButtonTime`
+  (0.075) is not that window (0.8 changed nothing). Next to the wall (60 cm) a jump is a ground climb at once.
   **2026-11-14 15:2x — the climb by the remote, no real input (`_config/wall-stand.lua`):** facing a vertical wall 60 cm off, the hero's own jump input event
   (`InpActEvt_Jump_K2Node_InputActionEvent_27` then `_26`) + `AddMovementInput` into the wall + `Climb(false)` called WHILE AIRBORNE starts the climb: `MovementMode` 7
   (custom), `CustomMovementMode` 0; forward input then climbs up. The game does NOTHING on Jump while climbing (mode 7, speed 0 for 1 s). `BaseBPCombat_C:StartJump`
