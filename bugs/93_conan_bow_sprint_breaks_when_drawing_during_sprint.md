@@ -117,6 +117,33 @@ save no longer has the bow wielded. The copy restored by `-Deploy -Only KrinikCo
 `_G.__bs = {craft = true}; dofile('…/_config/bow-stand.lua')` (no «исполнено» line for it) — most likely the remote `CraftingQueue:CraftItems` on 3.1.0, whose patch rewrote the
 crafting queue (plan 53 step 12, the station's event graph). The crash window closed by PID 5580; the Locomotion copy restored (md5 = the pack). **Do not run `bow-stand.lua`
 `{craft = true}` on 3.1.0** until its craft call is re-read against the 3.1.0 queue; the other route — the owner's own bow in his save, or a bow crafted by him.
+**The owner's offer (2026-11-16 20:30 +03:00, chat, verbatim):** `[OWNER]` «рядом с компом, можешь меня просить потестить лук, мне это несложно» — the stand of the 3.1.0 cases may be
+the owner's own hands on the bow (he wields it, he presses the series); the agent prepares the game, the sampler and the log and reads them.
+**The owner's own try (2026-11-16 20:34 +03:00, chat, verbatim):** `[OWNER]` «если бежать в спринте, и делать ПКМ прикладку и отпускание - немного всё равно камера дергается» — Z4 / Z6
+(sprint first, RMB pressed and released) still shows a small camera jerk. Suspect: the FOV post-hook lets one tick of the aim view through before
+`FieldOfViewChange(0.1, 2)` on the NEXT tick (judge round 1's «5° pump» / «×1.9» risks). To be caught by a per-frame recorder of the camera's FOV angle.
+**Run 2026-11-16 20:35 — the owner's hands, the agent's recorder** (`KUMM/.work/bow310/series-rec.lua`, every 15 ms, a row per change; rows in
+`KUMM/.work/bow310/series_b_2035_rows.txt`; stand: the owner's world on 3.1.0, god, hunger off, the oasis beach; the bow — a crafted 51401 from quick slot 3 taken up
+by the owner's real «3», `HasWeaponsEquipped` true):
+- **The 3.1.0 «bow sprint broken» of 19:05 was the STAND, not the game or the section:** with a bow that really wields, 8 RMB presses in a sprint each went
+  7 → 7,11 → 7,11,16 → 7,11,15,16 at 810 (max 814, try true) — the draw holds in the sprint (S1b-310, draw part); a Shift release with the draw held kept 11,15,16, the
+  speed fell to the aim cap 237, the zoom came back by itself (mode 2 → 1, 102° → 75° — Z5 pass), the RMB release gave mode 0 (Z6 pass). The 19:05 series ran with
+  a bow that did not wield after the agent's kills.
+- **The camera jerk (Z7, new case) — found:** every RMB release in a sprint → the controller mode 0 (108°) though the hero still sprints with the key held; every
+  next press → mode 2 (102°): 6° each way in ≈ 80 ms. The aim notify's end sets the normal view; our `on_fov_target` handled only the aim ENTRY in a sprint. Fix
+  (KrinikConanArchery `on_fov_target`, 20:3x): mode 0 arriving in a sprint with `bTrySprint` still true → next game-thread step, the same three conditions re-read →
+  the native `FieldOfViewChange(0.1, 2)`. `[AI]` the condition is `bTrySprint`, not the substate alone — the game's own return to the normal view after a sprint
+  rides the sprint KEY release, and `bTrySprint` goes false before substate 7 ends (recorder t 35.55).
+- One press (t 16.56) gave substate 11 only, stopped the sprint (try false, key true) and the aim zoom came (mode 1) — no draw, no shot logged; the owner «наделал
+  разного», cause not read. Watch for it in the clean series.
+- **Cost (judge round 2 finding 3, confirmed with the game IN FRONT — the owner playing):** `[KrinikConanLocomotion:BowSprint]` «за минуту вызовов 2113, своё время
+  268.000 мс, худший 4.000 мс» (20:36:01) and «1934, 168.000 мс, худший 8.000 мс» (20:37:01) — a single call of 4–8 ms is over the 1 ms all-mods budget
+  (`MASTER_PLAN.md`); to be found (which call, which hook) after the camera fix.
+**The owner's checks of fix 2 (2026-11-16 20:52 +03:00, chat, verbatim):** `[OWNER]` 20:50 «дернулась когда просто стоял и ждал, чтобы выносливость закончилась - сразу мелкий дерг,
+затем зум уехал ожидаемо» (case Z8 — the recorder saw no FOV change at the hold break t 47.40 and the zoom-out 0.26 s later; KrinikConanCamera's «прицел лука: выход»
+only re-enables the wheel, the Archery hip shift is first-person only — the source of the small jerk is NOT known, a recorder with the camera's distance comes next) ·
+20:51 «если в спринте прыгать - камера приближается - не нужно, я же всё равно в спринте, хоть и прыгаю, я продолжаю держать спринт кнопку» (case Z9 — a jump in a
+sprint with Shift held must not change the view).
 **NEXT (in order):** (1) the bow sprint on 3.1.0 — control case with `krinik_bow_sprint` off (does a draw survive the Shift release; does RMB draw in a sprint); (2) `rmb_held`
 under SendInput; (3) Z3 / Z5 by real keys; (4) the judge's open risks.
 

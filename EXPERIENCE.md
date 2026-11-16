@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0541 · 2026-11-16 · ❌→✅ · #conan #owner-time #guess #recorder #state-over-events #bug93
+class: owner-hands-as-debugger — the owner's test rounds spent on the agent's unverified guesses
+**Result:** five fix rounds of the bow aim zoom vs the sprint ran on the owner's hands (20:35–21:13); one round broke the plain standing aim — a hook on
+`OnSubstateChanged_Exhausted` with GUESSED parameters fired at every aim entry (`[OWNER]` 21:09 «Намудрил ты» · 21:10 «ДАВАЙ ка ты не меня мучить будешь
+тестами, а сам хорошенько головой будешь думать»). What worked: a 15 ms recorder of every relevant state (substates, flags, FOV mode, camera angle, frame gaps)
+named each cause in one read; the final design decides by STATE (took / RMB / hold / sprinting), events only re-check; the agent's own `mouse-seq.ps1` run under
+the owner's grant found the last defect (the game's sprint view taking the aim) before the owner saw it.
+**Lesson:** before a round on the owner's hands — the scenario table walked through the code, a judge on the diff, and the agent's own real-input run when the PC
+is free; never ship a hook whose parameters were not read (fn-params / bytecode). Observe a STATE in the recorder rather than trusting an event's name.
+mechanized: no — memory `owner-offers-bow-testing` (the rule) + `KUMM/.work/bow310/series-rec.lua` (the recorder; to move into `ConanExiles/_config/` when reused)
+
 ### EXP-0540 · 2026-11-16 · ❌→✅ · #conan #fov #game-map #read-before-code #bug93
 class: code-from-recall-past-the-game-map — code written on a remembered meaning of a game function while the game map already said otherwise
 **Result:** the first sprint-zoom build used `FieldOfViewReset()` as «back to the normal view» and a bare `SetFieldOfViewTarget`; the remote probe showed the

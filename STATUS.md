@@ -133,6 +133,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-16 21:30 +03:00 — the chat of 2026-11-16 20:26 (resume → bug 93 on 3.1.0, the owner's hands, then the agent's own real input under his grant «комп твой»):**
+> the bow sprint on 3.1.0 WORKS (the 19:05 «no draw» was a bow that did not wield; control S5b proves the section does the work); the aim zoom vs the sprint reworked
+> five times on the owner's checks and ended as one rule in KrinikConanArchery `SZ` — give back only the zoom taken, decided by state; the mid-draw jump now costs stamina
+> (Locomotion); the exhaustion «микролаг» fixed (substate 14 → out of the aim at once). All cases pass by the agent's real input 21:19–21:29 (report
+> `testcases/reports/2026-11-16_conan-bow-sprint-zoom-3.1.0-owner-hands.md`, TC rows Z7–Z10, SELF). Judges: 6 rounds; pack `49e78cd` pushed (the two mod files only —
+> `_config/devkit/kit-conanui-edit.json` is modified in the pack tree and is NOT ours: left as found).
+> **Next:** (1) **`bugs/105_…` — a jump into a wall must grab it** (the owner 21:38, new; control case first); (2) the bow-sprint section's cost — worst call 4–8 ms in the
+> owner's minutes (bug 93 «Cost»); (3) bug 104 (the hand off the string), plan 53 step 12. The game of the agent's launch is open (PID 29644) under the machine lock until 21:59.
+> The owner's rule of this chat: his hands are for the FINAL check — memory `owner-offers-bow-testing` (scenario table + judge + own real-input run first).
 > **CHAT CLOSED 2026-11-16 19:47 +03:00 (soft, at 75 % by the owner's word: `[OWNER]` 2026-11-16 19:46 «давай в новом чате этим займемся. Закрывай, передача дел в новый чат»).**
 > KUMM `80127fd` · `2d93a12` · `b6a443e` · `02545bf` + the closure commit, pack `a50662f` · `feb5e2a` — all pushed; no game of ours runs; the machine lock released.
 > Done: the 3.1.0 mod-update recon; the Nexus community call at the top of mod 65 (+ `tools/nexus-desc.mjs`, 4 judge rounds); the bow look re-shot in an open view

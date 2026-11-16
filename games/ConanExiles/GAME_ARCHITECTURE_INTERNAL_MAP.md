@@ -193,6 +193,10 @@ combat system does not wield it: RMB plays an unarmed attack (substate 11 ≈ 1 
 not take such a bow up either (2026-11-13 10:21). **The recipe that works:** ingredients by `AddItemTemplate` (10012 × 7, 12001 × 7, 14174 × 7), then the hero CRAFTS
 the bow — `CraftingQueue:CraftItems(RecipeManager:GetItemByTemplateID(51401, 0))` → bow 51401 lands on the shortcut bar → a real hot-bar key («3» here) wields it
 (standing draw 11 → 11,15,16, the shot logged by KrinikConanArchery). Arrows 53612 in the backpack.
+**On 3.1.0 (2026-11-16 20:33 +03:00):** the remote's `CraftItems` crashed the game (bug 93, 19:18) — the craft recipe above is 3.0.1 only until re-read. The admin route still runs on 3.1.0:
+`exec MakeMeAdmin` + `exec SpawnItem 51405 1` → the bow lands in the first free quick slot, or in the BACKPACK when the bar is full (seen: backpack 0 → 1). Whether an
+admin-spawned bow wields on 3.1.0 — not yet seen (on 3.0.1 the archery stand of 2026-11-01 shot with one). Read-only state: `KUMM/.work/bow310/hero-bow-state.lua`
+(`HasWeaponsEquipped`, bows by template on the bar / in the backpack, arrows).
 **Wield / sheathe WITHOUT input (2026-11-14 22:55, 3.1.0, the remote):** `BasePlayerChar_C:ToggleWieldWeapon()` (no parameters) takes the equipped main weapon from
 its sheath into the hands — the bow went `sheath_bow` → `Socket_Bow`, `HasWeaponsEquipped()` false → true; a second call puts it back. The background twin of the real
 hot-bar key for a weapon the hero already carries equipped. Related hero functions (`_config/class-funcs.lua`): `OnWeaponEquip(Item)` / `OnWeaponUnequip`,
@@ -482,6 +486,25 @@ run 2026-10-30 10:43–10:45, 0.55 at +0.3/+0.6 s on 4 of 4 shots).
 начатый до спринта, со спринтом уходит. Бег пультом (`sprint-run-probe.lua`, `bTrySprint` без клавиши) оставляет режим 2 и после остановки — обычный обзор
 возвращает отпускание настоящей клавиши спринта. Событие смены спринта — `OnSubstateChanged_Sprint(Substate, Entered)`, перехват UE4SS встаёт только по пути
 `/Game/Characters/BaseBPCombat.BaseBPCombat_C:…` (по `BasePlayerChar_C` — «Tried to …», 2026-11-16). Зум и спринт в сборке — KrinikConanArchery, раздел `SZ` (баг 93).
+Correction and additions (2026-11-16 20:46 +03:00, 3.1.0, recorder `KUMM/.work/bow310/series-rec.lua` 15 ms, the owner's real keys): (1) a plain sprint ended by the REAL Shift
+release with no aim on the way left mode 2 — the controller stayed at 102.1° with the hero standing (control run 20:42, read again by the remote at rest), so «the
+real key release returns the normal view» above does not hold for every sprint end; what returns it — not read. (2) The END of a bow draw (the montage's FOV notify)
+sets mode 0 even while the hero sprints — in vanilla there is no draw in a sprint; with KrinikConanLocomotion's bow sprint it made a 6° swing on every RMB release
+(bug 93, case Z7). (3) `bTrySprint` goes false at the Shift release while substate 7 is still set (one 15 ms row), then 7 ends. (4) **Vanilla 3.1.0 still ends the
+sprint at a draw:** with `krinik_bow_sprint` out, RMB in a sprint → 7 gone at once, 11, MaxWalkSpeed 237, aim mode 1 (75°); after the RMB release 7 comes back by itself
+with Shift held (`bTrySprint` stays true — the «Ranged» row of `DT_CharacterMovement` simply wins while drawing). (5) **A jump leaves substate 7 for the
+flight** (`IsFalling` true) and the game re-enters 7 on landing while the key is held; an RMB pressed mid-air in a sprint jump read `bTrySprint` false with
+`SprintKeyIsDown` true (20:53). (6) The bow's charge hold (16, notify `BP_SetChargeHold`) comes ≈ 0.50 s after the RMB press (5 of 5 presses, 20:45); a stamina
+break drops 16 first, then `bTrySprint`, and 11 / 15 linger ≈ 0.25 s. (7) **Stamina by the game's own functions (remote, 21:0x, 3.1.0):** `BasePlayerChar_C:GetStaminaJumpCost(out)`
+→ `out.Value` = −20 on the owner's hero (a stamina CHANGE; the fields `StaminaJumpCost` 8, `JumpStaminaCostModifier` 1.0 — the function adds the game's modifiers);
+`ConanCharacter:AdjustStaminaCurrent(StaminaChange: int)`; `GetMinStamina`, `GetDodgeStaminaCost`, `HandleSprintStamina`, `ReceiveChargeHoldStaminaCostModifier`;
+the exhaustion event `BaseBPCombat_C:OnSubstateChanged_Exhausted` (hookable by that path, 21:07) and its look — `Start Exhaustion Desaturation Ease In / Out`,
+`ToggleExhaustedPostProcess`, `ToggleExhaustedSound`. A `LaunchCharacter` push is not the game's jump: no jump cost is charged by itself. (8) Stand: `god-on.sh` run right
+after `enter-world-remote.sh` can read the hero not ready («FAILED (bCanBeDamaged=UObject…)») — the second call takes. (9) **Substate 14 = exhausted** (observed 21:12 / 21:23):
+it enters in the same 15 ms recorder row in which the charge hold 16 leaves at a stamina break, persists for seconds, and RMB does not draw while it is set; the game ends
+the aim only with the draw's end ≈ 0.26 s later. A hook on `OnSubstateChanged_Exhausted` with guessed parameters fired at ordinary aim entries (21:08) — do not use it
+without reading its signature. (10) `BasePlayerChar_C:SprintAction(Pressed: bool)` — the sprint key's function (press and release), hookable (21:21); the input events
+`InpActEvt_Sprint_K2Node_InputActionEvent_16 / 17`, toggle `…_ToggleSprint_…_11 / 12`.
 После выстрела монтаж натяжки доигрывает сам, отпускание ПКМ его не прерывает: конец уведомления обзора раньше конца монтажа (родные 6,08,
 пробные 6,346) роняет зум при зажатой ПКМ (кейс N1 2026-10-28), поэтому `KrinikBowFixes` тянет уведомление до 7,05, а выход из прицела по
 отпусканию ПКМ после выстрела делает `KrinikArrowAim`. UE4SS `ExecuteWithDelay(16)` срабатывает раз в кадр игры (≈29 мс при 4K) — время
