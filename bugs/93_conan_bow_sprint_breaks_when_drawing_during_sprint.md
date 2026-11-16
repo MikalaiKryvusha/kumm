@@ -111,8 +111,8 @@ go to the log, the lazy hook in the FOV post-hook, `IsLocallyControlled`, the wo
 SendInput's button: check it (an RMB-held read during a real `rdown` with the bow drawn) before Z3 / Z5 can pass even with the bow sprint fixed.
 **Control case 19:14 — BLOCKED by the stand:** `krinik_bow_sprint` taken out of the GAME copy's section list only (the log: three sections loaded), the game in front —
 the bow did not come to hand: `HasWeaponsEquipped` false after the load, after `ToggleWieldWeapon()` (19:1x) and after a real «3» (19:15). After the agent's game kills the
-save no longer has the bow wielded. The copy restored by `-Deploy -Only KrinikConanLocomotion` (md5 = the pack source). Stand first next time: `_config/bow-stand.lua`
-(craft the bow — the game map «Stand gear»), a real hot-bar key, `HasWeaponsEquipped` true BEFORE any series.
+save no longer has the bow wielded. The copy restored by `-Deploy -Only KrinikConanLocomotion` (md5 = the pack source). Stand first next time: a bow the heroine can wield
+(NOT `bow-stand.lua`'s craft branch — it crashed the game, below), `HasWeaponsEquipped` true BEFORE any series.
 **CRASH in the agent's run 19:18:04 (the stand step):** `EXCEPTION_ACCESS_VIOLATION reading address 0x70` 2 s after `god-on.sh` executed (19:18:02), while the remote ran
 `_G.__bs = {craft = true}; dofile('…/_config/bow-stand.lua')` (no «исполнено» line for it) — most likely the remote `CraftingQueue:CraftItems` on 3.1.0, whose patch rewrote the
 crafting queue (plan 53 step 12, the station's event graph). The crash window closed by PID 5580; the Locomotion copy restored (md5 = the pack). **Do not run `bow-stand.lua`

@@ -4,7 +4,7 @@
 > приступать к переносу сборки 1.0.0 WIP на неё» · 18:52 «комп твой, работай автономно. Замерами не занимаемся, занимаемся развитием сборки» · 18:53 «новая версия
 > для сборки тут D:\Instals\<…>\» (the folder's name stays out of this public repository; it is in the pack's `targets.json`) · 18:53 «можешь уже пойти в Нексус и Стим и посмотреть, какие моды из нашей сборки
 > обновились» · **Parent:** `researches/conan_patch_3_1_0/README.md` §3 (the move checklist); the previous move — `plans/33_conan_pereezd_3.0.1.md`
-> · **Status:** 🔧 started 2026-11-13 18:52 — step 1 done 18:57 · steps 3b, 5–9 (partly) done 20:07 · step 12: 3 of 11 done 21:3x, PARKED 21:44 for a couple of days
+> · **Status:** 🔧 started 2026-11-13 18:52 — step 1 done 18:57 · steps 3b, 5–9 (partly) done 20:07 · step 12: 3 of 11 done 21:3x, PARKED 21:44 for a couple of days, UNPARKED 2026-11-16 18:47 by the owner (EAA v1.3.13 + TDI on their newest uploads 18:5x — 66/66; the rest of the table is ours)
 > (the owner gives the other authors time to update; our own mods meanwhile) · **Outbound:** —
 
 ## Goal vector (Achieve)
@@ -58,7 +58,8 @@ new game enters the world without a crash, every mod's function intact. No frame
       `D:\Games\Conan Exiles Mods\workshop-2026-11-16` (EAA 128 308 452 bytes, TDI 320 783); `workshop-swap.py … before-2026-11-16 3718199031 3723127994 --apply` — 4 moves
       (EAA's previous original → `_patch-originals/EnhancedArmoryAndArsenal.before-2026-11-16.pak`, TDI's old folder → `mods/OLD/_workshop-before-2026-11-16/`);
       `check-mod-updates.py` after: «Новее наших копий: 0»; TDI deployed (`-Deploy -Only TDI_LegendaryRepair`, verify 114 / 0 missing); EAA rebuild
-      `rebuild-krinik-paks.py --only EnhancedArmoryAndArsenal --against-original` running. TC `testcases/TC_conan_mod_updates_and_sprint_zoom_2026-11-16.md`.
+      `rebuild-krinik-paks.py --only EnhancedArmoryAndArsenal --against-original [--install]` — 1474 chunks byte for byte vs the new original, exactly the recipe's 5 changed,
+      installed; in game 18:54 «СБОРКА: моды 66/66», 0 «too old» (report `testcases/reports/2026-11-16_conan-eaa-tdi-update-and-sprint-zoom.md`; live table reads U3 / U4 owed). TC `testcases/TC_conan_mod_updates_and_sprint_zoom_2026-11-16.md`.
       **Re-run 2026-11-16 18:03 +03:00 (recon only, nothing downloaded — the owner's word «Ничего не делаем по сборке»):** 66 sources (Workshop 60, Nexus 6, unread 0).
       Republished after the 3.1.0 beta (2026-11-03): **8 of 66** — after the release (2026-11-12 15:00) 6: Enhanced Armory and Arsenal* (2026-11-16 11:57),
       TDI_LegendaryRepair (11-13 23:34), Hair We Go (11-13 21:36), Severe Weather Enhanced* (11-13 16:42), Less Building Placement Restrictions* (11-12 20:50),

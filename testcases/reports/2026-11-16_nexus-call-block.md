@@ -43,8 +43,8 @@ Functional run: the owner's path — the public mod page in a fresh tab, read as
 text recorded · the editor tampered (+«X») → `save` → «the editor text is not what `write` put there — refusing to save» exit 1 · `close` → the tab and the pending text gone ·
 a BOM file → the editor's first char `[` (91). **An incident inside the test:** the FIRST hardened `save` (no pending guard yet) was run as a «refusal expected» case on a fresh
 tab — Save was enabled there without an edit, and the tool SAVED: a fresh tab read the stored text after it — byte-identical to the text before (62 729, `cmp`), so the page
-did not change; the pending guard was added for exactly this. Not run with the hardened code: the click → toast path itself (an identical write leaves Save disabled — Nexus sees
-no change, the tool refuses with exit 1, seen); that path was seen working in run 2 (18:14) with the first version.
+did not change; the pending guard was added for exactly this. So the click → toast path ran ONCE in the hardened round-1 code (that accidental save, the toast seen); since the
+pending and proof guards it has not run with a publish (an identical write leaves Save disabled — Nexus sees no change, the tool refuses with exit 1, seen).
 
 **Judge round 2 (18:26) and the fixes (18:3x).** Confirmed and fixed: a `send` on a closed socket dropped the call and Node exited 0 (now rejects; `process.exitCode`
 1 until a success path sets 0); the pending text was not tied to its tab (now `{tabId, text}`, forgotten by `open` / `write` / `close`, `save` refuses another tab's);
@@ -76,7 +76,7 @@ The backups `current_live.bbcode` / `now_before_call.bbcode` are therefore conve
 
 ## 6. Traces
 
-`KUMM/.work/nexus-call/` (`current_live.bbcode` — the description before the edit, `full_with_call.bbcode`, `readback_fresh_tab.bbcode`); the live copy
+`KUMM/.work/nexus-call/` (`current_live.bbcode` — the description before the edit, `full_with_call.bbcode`, `readback_fresh_tab.bbcode` — the read-back); the WRITTEN description (= the read-back, whitespace aside) kept in the release folder as
 `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_Nexus\nexus_full_description_2026-11-16_live.bbcode`. Not looked at: the page as rendered pixels (the window is the
 owner's and minimized) — the text and the links were read from the DOM.
 

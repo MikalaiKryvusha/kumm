@@ -34,7 +34,7 @@ the FOV controller's mode and target read by the remote at fixed moments around 
 | U4 | not run | — |
 | Z0 | pass | the BaseBPCombat_C path hooked |
 | Z1, Z2, Z4 | pass by the remote | mode 1 / 75.0° · mode 2 / 102.1° · the aim asked in a sprint: 102.1° kept, mode 2 within 0.3 s |
-| Z3, Z5, Z6 | not run | the remote run never releases the sprint key — real keys on a FREE PC |
+| Z3, Z5, Z6 | not run here — SUPERSEDED: run by real keys 19:05–19:11 (bug 93, «Real keys 2026-11-16»): Z3 / Z5 fail (blocked) — the draw ended at the Shift release and an RMB in a sprint drew nothing; who ends the draw (our bow sprint or the game) is NOT proven (the control case was blocked by the stand); `rmb_held` read false under SendInput | — |
 
 ## 5. Found
 
@@ -44,7 +44,7 @@ the FOV controller's mode and target read by the remote at fixed moments around 
 
 ## 6. Traces
 
-`D:\Games\Conan Exiles 3.1.0\ConanSandbox\Saved\Logs\ConanSandbox.log` and `…\Binaries\Win64\ue4ss\UE4SS.log` (overwritten at the next launch — the key lines are quoted here);
+`D:\Games\Conan Exiles 3.1.0\ConanSandbox\Saved\Logs\ConanSandbox.log` and `…\Binaries\Win64\ue4ss\UE4SS.log` (overwritten at the next launch — the mounting line of EAA and the counters are quoted in section 4 and the TC);
 the probe `KUMM/.work/sprint-zoom-probe.lua`; EAA originals `D:\Games\Conan Exiles Mods\_patch-originals\EnhancedArmoryAndArsenal{,.before-2026-11-16}.pak`.
 
 ## 7. Verdict

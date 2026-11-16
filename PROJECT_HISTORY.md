@@ -3,6 +3,50 @@
 
 
 
+## 2026-11-16 19:47 +03:00 — STATUS bonsai trim (the soft closure of the chat of 2026-11-16 17:59): the blocks NOW 2026-11-16, CHAT CLOSED 2026-11-15 00:19 and NOW 2026-11-14 22:29, moved verbatim
+
+> **NOW — chat of 2026-11-16 from 17:59 (`resume` + the owner's tasks), recorded 2026-11-16 18:11 +03:00.** (1) DONE — the 3.1.0 mod-update recon (recon only, the owner's word
+> «Ничего не делаем по сборке»): 8 of 66 republished after the beta, 2 newer than our copies (EAA*, TDI_LegendaryRepair) — plan 53 step 12, the «Re-run 2026-11-16» line.
+> Not all mods need an author update: 3.1.0 accepted all 66 (0 «too old»); only the whole vanilla copies of step 12's table and Pickup+ need work, ours to do.
+> (2) DONE 18:14 — the owner's order 18:02: a community call (EN + RU) at the very top of the Nexus page of mod 65 (the 0.9.0 file still quarantined, «Some suspicious
+> files»): written by the voice portrait, §7B pass (14 fixed), shown, saved after his «я сохранил» / «давай, делай» — «Mod saved successfully.», read back on the public page
+> (report `testcases/reports/2026-11-16_nexus-call-block.md`); the description before the edit — `.work/nexus-call/current_live.bbcode`; the live copy — the release folder
+> `nexus_full_description_2026-11-16_live.bbcode`; new tool `tools/nexus-desc.mjs`. Open for him: add the public GitHub release link (v0.9.0, 7 parts) to the call?
+> (3) DONE 18:29 — the owner 18:05: the bow look A / B frames of folder 87 faced a rock («ничего там не понятно»); re-shot in the background game on open sand at the oasis
+> water (yaw 339), V / A / B × −55 / −80, the bow by the remote (no real input), page — review folder 88 `88_vid_luka_na_prostore/index.html`, opened for him (TC
+> `TC_conan_fp_bow_look_reshoot_2026-11-16.md`, report `2026-11-16_conan-bow-look-reshoot.md`). 18:30 his «дай в Б поиграть» — the build already ships B; the game launched
+> for him on the background path (PID 27440; he left it himself 18:40). **Interview #036 ANSWERED 18:40 — look B** (`[OWNER]` «хорошо, нравится.»; the build already ships B).
+> (4) DONE — `tools/nexus-desc.mjs`: 4 judge rounds (round 4 — no defect), every refusal and `verify` run live without a publish; the `save` → proof path runs for real at the
+> next description edit. (6) DONE 18:47–18:54 — the owner's order «давай тогда моды сборки обновлять … других авторов не жёдем»: EAA (v1.3.13, all 5 of our edits re-applied,
+> 1474 chunks verified) and TDI_LegendaryRepair on their newest uploads, «СБОРКА: моды 66/66», 0 too old (report `2026-11-16_conan-eaa-tdi-update-and-sprint-zoom.md`);
+> plan 53 step 12 UNPARKED — the rest of its stale-copy table is ours to finish. (7) The zoom vs sprint — pack `a50662f`: Z1 / Z2 / Z4 pass; Z3 / Z5 BLOCKED — the bow
+> sprint is broken on 3.1.0 (the draw ends at the Shift release; an RMB in a sprint does not draw) and `rmb_held` read false under SendInput — bug 93 «NEXT (in order)».
+> (8) The presence probe honours the owner's word (`_tools/owner-free-grant.txt`, HOUSE_RULES rule 30.3) after his 19:01 «ЗАЕБАЛ ТВОЙ ИНСТРУМЕНТ … ОН ВРЕТ».
+> (5) the owner's two archery orders of 18:40: the aim zoom vs the sprint (bug 93, section «The owner's order — the aim zoom and the sprint»,
+> cases Z1–Z6: the zoom off while sprinting, back by itself when the sprint ends with RMB held; recon done — the game's `SetFieldOfViewTarget(1)` at the draw, our post-hook
+> sets 75°, nothing restores it after a sprint) and the right hand drifting off the string when moving in the aim (`bugs/104_…`, control case first). Both need real RMB / Shift —
+> a FREE PC, the game in front.
+> **CHAT CLOSED 2026-11-15 00:19 +03:00 (soft, at 81 % by the new ladder — the first chat closed by it).** KUMM `30a8a12` + `70db2c7` + the closure commit,
+> pack `b1b1779` — all pushed; no game of ours runs; the machine lock released. **FIRST NEXT CHAT:** (0) the owner's answers — interview #036 (the bow look A / B,
+> page in review folder 87 `index.html`, shown 2026-11-15 00:0x) and #035 (the bow after the wall push); (1) plan 52: the put-away by a real key on the reworked
+> build (needs the GAME IN FRONT — `mouse-seq.ps1` now refuses with exit 6 while the Windows shell holds the foreground; launch with `launch-fg.ps1` on a free PC),
+> then C1b (a sword), C5 (the cost A-B, game in front, HOUSE_RULES 6b / 6c / 6f), the climb case (judge round 2, L4); (2) `bugs/103_…` (the farewell hook's turn
+> model: a closing turn that waits for a background judge loses its farewell; a queued owner message is an `attachment`); (3) the dayloop pool below.
+> **NOW — chat of 2026-11-14 from 22:29 (`resume` + the owner's task), DAYLOOP by his word 22:33 «да, работай автономно в дневном лупе».** (1) The closure
+> ladder REDONE by his words 19:10 / 22:29 (verbatim — PROJECT_HISTORY entry 2026-11-14 22:3x): 70 / 75 % warnings only (no closing word); from 80 % finish the work,
+> then `/end-chat-soft` in full; `/end-chat-force` only from 92 % (the hook refuses it below); a REFUSED closure call is no closure for the farewell and autonomy
+> hooks. COMMITTED + PUSHED KUMM `30a8a12` after 4 judge rounds; the older turn-model holes of the farewell hook (a closing turn that waits for a background
+> judge or crosses an autocompaction loses its farewell) → `bugs/103_…` OPEN. KAIF #188 comment posted. Autocompaction measured at ≈ 96.7 % of 1 M. The new 70 %
+> warning text seen live at 23:51 («Предупреждение: работай дальше в обычном темпе.»). (1b) The presence probe `_tools/owner-idle.ps1` (not under git) discounts
+> the agent's own input (`-MarkOwn -Tick` from `mouse-seq.ps1`; `input.ps1` does not mark); the remote-access hosts send a foreign input every ≈ 50 s (report
+> `testcases/reports/2026-11-14_owner-idle-own-input.md`).
+> (2) Interview #024 (Svarog night findings) status closed — its answers were applied on 2026-10-18. (3) Plan 52 (the first-person body look with a bow): C1a,
+> C2a–C2c, C3 pass on the post-process ABP (the heroine — a CHILD anim BP — no T-pose, 0 anim log lines); step 3 Lua in KrinikConanArchery («вид тела от первого
+> лица», a `do … end` block; 2 judge rounds on the Lua, the round-2 fixes seen 00:14 — S3f; S3a–S3f, C4 pass; the put-away by a real key NOT re-run on the
+> reworked build); COMMITTED + PUSHED pack `b1b1779` (with `_config/{bow-stand,class-funcs,equip-hook-probe}.lua` and `mouse-seq.ps1`: the exact own-input tick
+> `-MarkOwn -Tick`, exit 6 when the game is not in front). The look A / B → interview #036, build default B. A hang paid: an anim-rebuilding call inside a UE4SS
+> hook (EXP-0535).
+
 ## 2026-11-15 00:02 +03:00 — STATUS bonsai trim (the chat of 2026-11-14 22:29, ahead of its soft closure): the 2026-11-14 blocks NOW 16:24 … NOW 14:17, moved verbatim
 
 > **NOW — chat of 2026-11-14 from 16:24, DAYLOOP by the owner's word 16:25 «работай автономно» (task: «двигать сборку к стабильному состоянию, тестируем

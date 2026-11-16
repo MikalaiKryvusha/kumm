@@ -1,6 +1,6 @@
 // nexus-desc.mjs — the Nexus mod page description editor (SCEditor, BBCode) driven over CDP in the debug Chrome.
 // [TESTED: 2026-11-16 · open/read/write/save on mod 65 (conanexilesenhanced), Save → «Mod saved successfully.», the block read back on the public page
-// in a fresh tab; judge rounds 1–4 hardening re-run without a publish (the save → proof path itself not yet run with a publish) —
+// in a fresh tab; judge rounds 1–4 hardening re-run without a publish, except one accidental identical save in round 1 (the save → proof path not yet run with a publish) —
 // testcases/reports/2026-11-16_nexus-call-block.md]
 // Recipe: HOUSE_RULES_REFERENCE.md §2 (Nexus row, 2026-11-03): write in SOURCE mode (WYSIWYG rewrites [url=mailto:] into [email]),
 // then ONE real key event (a space) — only a real keystroke enables Save (a space + Backspace disables it again, so the saved text ends with that space);

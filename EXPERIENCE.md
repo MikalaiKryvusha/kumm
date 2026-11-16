@@ -92,7 +92,7 @@
 ## Entries
 
 ### EXP-0540 · 2026-11-16 · ❌→✅ · #conan #fov #game-map #read-before-code #bug93
-class: code written on a remembered meaning of a game function while the game map already said otherwise
+class: code-from-recall-past-the-game-map — code written on a remembered meaning of a game function while the game map already said otherwise
 **Result:** the first sprint-zoom build used `FieldOfViewReset()` as «back to the normal view» and a bare `SetFieldOfViewTarget`; the remote probe showed the
 controller stuck in mode 1 with the normal angle and the sprint FOV lost. The game map had it since 2026-10-28: `FieldOfViewReset` reverts to the PREVIOUS target (a
 toggle), only `FieldOfViewChange(d, mode)` moves the camera, mode 2 = ×0.95. Rebuilt on `FieldOfViewChange` — the probe passed Z1, Z2, Z4.
@@ -101,7 +101,7 @@ probing» covers writing code too; a function name that «obviously» means X is
 none-cheap: the knowledge-hook locks on mod notes, not on game-map classes; a grep habit
 
 ### EXP-0539 · 2026-11-16 · ❌→✅ · #bash #paths #capture #papercut
-class: a Windows path built in Git Bash with `\\` before `${VAR}` inside double quotes kept the `$` literal — every frame of a loop overwrote one file
+class: shell-path-mangled — a Windows path built in Git Bash with `\\` before `${VAR}` inside double quotes kept the `$` literal; every frame of a loop overwrote one file
 **Result:** `"$OUT\\${K}_m$P.jpg"` came out as `fp-reshoot${K}_m55.jpg`: six 4K captures of the bow look → two files, the series shot again (run report
 `testcases/reports/2026-11-16_conan-bow-look-reshoot.md`). Sibling of the heredoc backslash class (memory `bash-heredoc-collapses-backslashes`).
 **Lesson:** build a Windows path for a tool from Bash with `printf 'D:/…/%s_m%s.jpg' "$K" "$P"` (forward slashes — .NET and PowerShell take them); `ls` the output folder after
@@ -109,7 +109,7 @@ the FIRST frame of a loop, not after the loop.
 none-cheap: S3 papercut; the forward-slash `printf` form is the habit
 
 ### EXP-0538 · 2026-11-16 · ❌→✅ · #tools #nexus #outward #negative-test #publish
-class: a «refusal expected» case of a publishing tool run against the live site — the refusal did not come, and the tool published
+class: refusal-test-ran-the-outward-act — a «refusal expected» case of a publishing tool run against the live site; the refusal did not come, and the tool published
 **Result:** testing the hardened `tools/nexus-desc.mjs`, `save` on a fresh tab of the mod's edit page was expected to refuse («no enabled Save»); Nexus had Save enabled
 with no edit, the tool clicked it — «Mod saved successfully.». A fresh-tab read showed the stored text byte-identical to before, so the public page did not change.
 **Lesson:** the refusal path of a tool that publishes is proven only where the refusal comes BEFORE the outward act (a guard on the tool's own state: «save only what
