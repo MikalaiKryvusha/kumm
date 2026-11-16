@@ -39,6 +39,13 @@ EnhancedArmoryAndArsenal /Content/Systems/Building/Placeables/BP_PL_Crafting_Sta
 build (part of the `krinikBuild` recipe). After: `stale-copy-check.py` on the rebuilt pak — «the mod's copy vs the NEW game: IDENTICAL». Installed 21:3x; in game — not
 seen yet (the queue pausing on a full output is the case to walk).
 
+## The author's upload of 2026-11-16 11:57 (v1.3.13) — in the build since 2026-11-16 19:00 +03:00
+
+Downloaded by steamcmd, swapped into `_patch-originals` (the previous original kept as `EnhancedArmoryAndArsenal.before-2026-11-16.pak`), rebuilt by
+`rebuild-krinik-paks.py --only EnhancedArmoryAndArsenal --against-original --install`: 1474 chunks byte for byte vs the new original, exactly the recipe's 5 changed
+(`AC_EAA_Inventorybutton`, `AC_acs_AccessorySystem_Persistent`, `DT_EAA_UIModule`, `DT_EAA_Spawntable`, `BP_PL_Crafting_Station`) — all our edits applied on it. Mounted in
+game 18:54, «СБОРКА: моды 66/66». Live reads of the spawn merge and the station queue — owed (report `testcases/reports/2026-11-16_conan-eaa-tdi-update-and-sprint-zoom.md`).
+
 ## Our edits — the spawn merge (KRINIK MODIFIED, 2026-11-06 11:41 +03:00)
 
 BMNB's `ProfessionTemplate` / `StatTemplate` / `StatModifierTemplate` / `NPCClass` of those 7 rows copied into `DT_EAA_Spawntable` — 21 `copyprop:` lines,

@@ -92,6 +92,26 @@ Acceptance (the four transitions, both orders): Z1 aim (RMB held) → zoom in ·
 Z4 sprint first, then RMB → no zoom while sprinting · Z5 then the sprint stops with RMB held → zoom in by itself · Z6 RMB released → zoom out as in vanilla. «Будет перком»
 (the zoom strength by perk ranks) — a perk of the perk list (plan 49), not this bug: here the zoom is the current one, on or off.
 
+**Built 2026-11-16 18:58 (second version — CORRECTED 2026-11-16 19:07 +03:00: the first version of 18:48 used `FieldOfViewReset()` and a bare `SetFieldOfViewTarget` and was
+replaced the same session, EXP-0540)** (pack working tree, `KrinikConanArchery/ue4ss/scripts/main.lua`, section «зум прицела и спринт», table `SZ`; `luac -p` clean,
+main-chunk locals 196 of Lua's 200): `CFG.sprint_unzoom`; a post-hook of `OnSubstateChanged_Sprint` — the BaseBPCombat_C path takes (the BasePlayerChar_C one fails) →
+after 120 ms: sprint entered and the controller still in aim (mode 1) → the native `FieldOfViewChange(0.1, 2)` (the sprint view); sprint left, RMB held, the hero drawing
+(11 / 15 / 16), not in aim → `FieldOfViewChange(0.1, 1)` (Z3, Z5 — our FOV post-hook then sets 75°); in the FOV post-hook an aim entry while sprinting → target × 1.9 (the sprint
+angle) and `FieldOfViewChange(0.1, 2)` next tick (Z4); no redraw-hold while sprinting. Remote: Z1, Z2, Z4 pass.
+**Real keys 2026-11-16 19:05–19:06 (the owner's word «КОМПЬЮТЕР СВОБОДЕН!!!», `mouse-seq.ps1`, the recorder `KUMM/.work/zoom-rec.lua`):** series A (RMB → Shift + W → Shift up
+→ RMB up): mode 1 / 75° → mode 2 / 102° with substates 7, 15, 16 (the draw held in the sprint) → at the Shift release the DRAW ENDS (15 / 16 gone) and the mode goes to 0 —
+RMB still held, no draw, nothing to zoom: Z1, Z2 pass; Z3 FAILS by the bow sprint, not by the zoom. Series B (Shift + W → RMB → Shift up → RMB up): mode 2 all along, NO draw
+substate at all — an RMB in a sprint does not draw on 3.1.0 (S1b passed on 3.0.1, 2026-11-13 10:43, before the move). Open: the bow sprint on 3.1.0 (control case with
+`krinik_bow_sprint` off, then the native cause), then Z3 / Z5 again. Judge round 1 on the zoom code (19:06): risks — the game's own exit from the sprint view rides the sprint
+KEY, not the substate (the 120 ms order to check by real keys in both orders), silent failures (log the first N events), hot reload (lazy hook), the ×1.9 numbers (rule 24 —
+the hero's `FieldOfViewSubstateTrigger` is the native route), a 5° pump on a shot in a sprint, `IsLocallyControlled`. Fixed 2026-11-16 19:11 +03:00: the first N sprint events and any error
+go to the log, the lazy hook in the FOV post-hook, `IsLocallyControlled`, the working hook path first; open: the sprint-KEY order, ×1.9 → the native route, the shot pump.
+**Run 19:1x (real keys, the logging build):** the hook FIRES on the sprint start and end (each logged twice); `ToggleWieldWeapon()` did NOT wield the bow this time
+(`HasWeaponsEquipped` false — the RMB was an unarmed attack); the event line read **«ПКМ false» while `mouse-seq` held RMB** — `rmb_held` (`IsInputKeyDown`) may not see
+SendInput's button: check it (an RMB-held read during a real `rdown` with the bow drawn) before Z3 / Z5 can pass even with the bow sprint fixed.
+**NEXT (in order):** (1) the bow sprint on 3.1.0 — control case with `krinik_bow_sprint` off (does a draw survive the Shift release; does RMB draw in a sprint); (2) `rmb_held`
+under SendInput; (3) Z3 / Z5 by real keys; (4) the judge's open risks.
+
 ## Open from judge round 2
 
 - Finding 1: the K2_CanSprint override also skips the game's other refusals (an overloaded hero, low stamina at the start, mounted) — case S8 owed.

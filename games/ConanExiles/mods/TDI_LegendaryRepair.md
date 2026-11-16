@@ -18,6 +18,11 @@ not mean to change (`ThrallTier 0`, `StatTemplate None`) — the game keeps the 
 
 `python -I -X utf8 ConanExiles/_config/devkit/patch-mod-asset.py extract TDI_LegendaryRepair TDI_Legin_TemplateTableProfession <work>`.
 
+## Version in the build
+
+The author's upload of 2026-11-13 23:34 — in the build since 2026-11-16 19:00 +03:00 (steamcmd → `workshop-swap.py … --apply`, the old folder in `mods/OLD/_workshop-before-2026-11-16/`;
+`-Deploy -Only TDI_LegendaryRepair`, verify 114 / 0 missing; mounted in game 18:54). The repair kit in the tier-4 crafters' bonus recipes — not re-read live on it.
+
 ## Open
 
 - plan 45 step 5, judged live 2026-11-06 11:49 +03:00: its repair kit lives in `BonusRecipes` on all 47 tier-4 crafter rows it shares with Ancient Civilization (22120501

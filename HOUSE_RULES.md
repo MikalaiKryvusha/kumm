@@ -192,7 +192,10 @@
     2. The mechanical half: `mouse-seq.ps1` and `input.ps1` (since 2026-11-07 19:3x — it sent a real Space while the owner typed) refuse with exit 5 by the same probe; the hook
        `tools/hooks/owner-presence.mjs` (PreToolUse, Bash|PowerShell) refuses those commands while BUSY and notes «компьютер СВОБОДЕН / ЗАНЯТ» into the agent's <!-- verbatim-ok: the hook's own output line -->
        context at most once per 5 min.
-    `[OWNER]` 2026-11-07 12:36–12:37.
+    3. **The owner's word «the computer is free» beats the probe** (his typing in the chat is keyboard input — the probe reads BUSY while he orders a test): write
+       `D:/work/ai_sandbox/_tools/owner-free-grant.txt` — line 1 the grant's end (local `yyyy-MM-ddTHH:mm:ss`, 30 min after his word, `claim-ok:` after it), line 2 his words
+       verbatim; `owner-idle.ps1` then answers «FREE by the owner's word until HH:MM», so the hook and the input tools pass. Only under his explicit word.
+    `[OWNER]` 2026-11-07 12:36–12:37 · 2026-11-16 19:01 (verbatim in `bugs/93_…`, run 19:05).
 31. **Every large work and every commit of code goes to an independent judge, round after round, until the judge has almost nothing left to find; its
     findings are verified before fixing** — the steps live in the canon, `AGENT_GUIDE.md` → Notes from the human. `[OWNER]` 2026-11-10 01:41–01:43.
 

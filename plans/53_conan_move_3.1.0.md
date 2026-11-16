@@ -52,6 +52,13 @@ new game enters the world without a crash, every mod's function intact. No frame
       new game, `--old` = the three-way comparison by export and, for functions, by bytecode statements «by meaning» — kismet-graft's `sig`; «entry shift only» marks
       a stub whose only change is the event graph's entry offset). **PARKED 2026-11-13 21:44 by the owner's word** (`[OWNER]` 21:43 «давай пока нашши моды делать» ·
       21:44 «пару дней дадим остальным мөд5рам их моды обновить») — re-run `check-mod-updates.py --since 2026-11-03 --all` first when it resumes, then this table.
+      **UNPARKED 2026-11-16 18:48 +03:00 by the owner's word:** `[OWNER]` 2026-11-16 18:47 «хорошо, и давай тогда моды сборки обновлять от тех авторов, кто выпустил обновляения,
+      адаптируем их свежие версии под нашу сборку» · 18:47 «других авторов не жёдем, продолжаем сборку разрабатывать» — take the 2 newer uploads (EAA*, TDI_LegendaryRepair)
+      by steps 2–3b, then finish this table ourselves (rule 8), no more waiting for authors. **18:49–18:5x:** both downloaded by steamcmd into
+      `D:\Games\Conan Exiles Mods\workshop-2026-11-16` (EAA 128 308 452 bytes, TDI 320 783); `workshop-swap.py … before-2026-11-16 3718199031 3723127994 --apply` — 4 moves
+      (EAA's previous original → `_patch-originals/EnhancedArmoryAndArsenal.before-2026-11-16.pak`, TDI's old folder → `mods/OLD/_workshop-before-2026-11-16/`);
+      `check-mod-updates.py` after: «Новее наших копий: 0»; TDI deployed (`-Deploy -Only TDI_LegendaryRepair`, verify 114 / 0 missing); EAA rebuild
+      `rebuild-krinik-paks.py --only EnhancedArmoryAndArsenal --against-original` running. TC `testcases/TC_conan_mod_updates_and_sprint_zoom_2026-11-16.md`.
       **Re-run 2026-11-16 18:03 +03:00 (recon only, nothing downloaded — the owner's word «Ничего не делаем по сборке»):** 66 sources (Workshop 60, Nexus 6, unread 0).
       Republished after the 3.1.0 beta (2026-11-03): **8 of 66** — after the release (2026-11-12 15:00) 6: Enhanced Armory and Arsenal* (2026-11-16 11:57),
       TDI_LegendaryRepair (11-13 23:34), Hair We Go (11-13 21:36), Severe Weather Enhanced* (11-13 16:42), Less Building Placement Restrictions* (11-12 20:50),

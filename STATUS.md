@@ -145,7 +145,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `TC_conan_fp_bow_look_reshoot_2026-11-16.md`, report `2026-11-16_conan-bow-look-reshoot.md`). 18:30 his «дай в Б поиграть» — the build already ships B; the game launched
 > for him on the background path (PID 27440; he left it himself 18:40). **Interview #036 ANSWERED 18:40 — look B** (`[OWNER]` «хорошо, нравится.»; the build already ships B).
 > (4) DONE — `tools/nexus-desc.mjs`: 4 judge rounds (round 4 — no defect), every refusal and `verify` run live without a publish; the `save` → proof path runs for real at the
-> next description edit. (5) NEXT — the owner's two archery orders of 18:40: the aim zoom vs the sprint (bug 93, section «The owner's order — the aim zoom and the sprint»,
+> next description edit. (6) DONE 18:47–18:54 — the owner's order «давай тогда моды сборки обновлять … других авторов не жёдем»: EAA (v1.3.13, all 5 of our edits re-applied,
+> 1474 chunks verified) and TDI_LegendaryRepair on their newest uploads, «СБОРКА: моды 66/66», 0 too old (report `2026-11-16_conan-eaa-tdi-update-and-sprint-zoom.md`);
+> plan 53 step 12 UNPARKED — the rest of its stale-copy table is ours to finish. (7) The zoom vs sprint — pack `a50662f`: Z1 / Z2 / Z4 pass; Z3 / Z5 BLOCKED — the bow
+> sprint is broken on 3.1.0 (the draw ends at the Shift release; an RMB in a sprint does not draw) and `rmb_held` read false under SendInput — bug 93 «NEXT (in order)».
+> (8) The presence probe honours the owner's word (`_tools/owner-free-grant.txt`, HOUSE_RULES rule 30.3) after his 19:01 «ЗАЕБАЛ ТВОЙ ИНСТРУМЕНТ … ОН ВРЕТ».
+> (5) the owner's two archery orders of 18:40: the aim zoom vs the sprint (bug 93, section «The owner's order — the aim zoom and the sprint»,
 > cases Z1–Z6: the zoom off while sprinting, back by itself when the sprint ends with RMB held; recon done — the game's `SetFieldOfViewTarget(1)` at the draw, our post-hook
 > sets 75°, nothing restores it after a sprint) and the right hand drifting off the string when moving in the aim (`bugs/104_…`, control case first). Both need real RMB / Shift —
 > a FREE PC, the game in front.
