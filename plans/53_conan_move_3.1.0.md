@@ -52,6 +52,12 @@ new game enters the world without a crash, every mod's function intact. No frame
       new game, `--old` = the three-way comparison by export and, for functions, by bytecode statements «by meaning» — kismet-graft's `sig`; «entry shift only» marks
       a stub whose only change is the event graph's entry offset). **PARKED 2026-11-13 21:44 by the owner's word** (`[OWNER]` 21:43 «давай пока нашши моды делать» ·
       21:44 «пару дней дадим остальным мөд5рам их моды обновить») — re-run `check-mod-updates.py --since 2026-11-03 --all` first when it resumes, then this table.
+      **Re-run 2026-11-16 18:03 +03:00 (recon only, nothing downloaded — the owner's word «Ничего не делаем по сборке»):** 66 sources (Workshop 60, Nexus 6, unread 0).
+      Republished after the 3.1.0 beta (2026-11-03): **8 of 66** — after the release (2026-11-12 15:00) 6: Enhanced Armory and Arsenal* (2026-11-16 11:57),
+      TDI_LegendaryRepair (11-13 23:34), Hair We Go (11-13 21:36), Severe Weather Enhanced* (11-13 16:42), Less Building Placement Restrictions* (11-12 20:50),
+      Beyond Decor: Rustic Edition (11-12 19:01); during the beta 2: Thrall_Peeper, Female New Faces (11-07). **Newer than our copies: 2** — EAA* (a second post-release
+      upload; our patch to re-apply) and TDI_LegendaryRepair (never pulled since 2026-10-25). Not republished: 57, plus Doubled Storage Size still gone from the
+      Workshop. The 6 Nexus mods were read on Nexus only (their Workshop twins, EXP-0124, not asked). Raw output — `KUMM/.work/mod-updates-3.1.0/run_2026-11-16.txt`.
       Also on resume (found 2026-11-14 17:2x): **Pickup+** — the patch REMOVED the game's `/Game/UI/Framework/W_FCComboBoxString`, so its admin widget loses the
       combo boxes «DrawDebug?» and «NakedThrall» (the two `CreateExport … Could not find class object` errors of every start); an author update first, else
       the outcome is ours (notes `games/ConanExiles/mods/Pickup.md`):

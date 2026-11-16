@@ -91,6 +91,22 @@
 
 ## Entries
 
+### EXP-0539 · 2026-11-16 · ❌→✅ · #bash #paths #capture #papercut
+class: a Windows path built in Git Bash with `\\` before `${VAR}` inside double quotes kept the `$` literal — every frame of a loop overwrote one file
+**Result:** `"$OUT\\${K}_m$P.jpg"` came out as `fp-reshoot${K}_m55.jpg`: six 4K captures of the bow look → two files, the series shot again (run report
+`testcases/reports/2026-11-16_conan-bow-look-reshoot.md`). Sibling of the heredoc backslash class (memory `bash-heredoc-collapses-backslashes`).
+**Lesson:** build a Windows path for a tool from Bash with `printf 'D:/…/%s_m%s.jpg' "$K" "$P"` (forward slashes — .NET and PowerShell take them); `ls` the output folder after
+the FIRST frame of a loop, not after the loop.
+none-cheap: S3 papercut; the forward-slash `printf` form is the habit
+
+### EXP-0538 · 2026-11-16 · ❌→✅ · #tools #nexus #outward #negative-test #publish
+class: a «refusal expected» case of a publishing tool run against the live site — the refusal did not come, and the tool published
+**Result:** testing the hardened `tools/nexus-desc.mjs`, `save` on a fresh tab of the mod's edit page was expected to refuse («no enabled Save»); Nexus had Save enabled
+with no edit, the tool clicked it — «Mod saved successfully.». A fresh-tab read showed the stored text byte-identical to before, so the public page did not change.
+**Lesson:** the refusal path of a tool that publishes is proven only where the refusal comes BEFORE the outward act (a guard on the tool's own state: «save only what
+`write` put there»), never by pressing the real button and trusting the site to refuse; a precondition on someone else's page (a disabled button) is an assumption, read it.
+mechanized: yes — the pending-text guard of `tools/nexus-desc.mjs` (`save` exits 1 unless the editor holds exactly what `write` wrote; report `testcases/reports/2026-11-16_nexus-call-block.md`)
+
 ### EXP-0537 · 2026-11-15 · ❌ · #autonomy-guard #background-agent #papercut
 class: the autonomy guard refuses a stop while the session waits for its own background judge (the notification would resume it)
 **Result:** 00:0x–00:1x the guard blocked five stops at 74–77 % while a judge subagent ran; each block cost a busy-work turn. S3 papercut.

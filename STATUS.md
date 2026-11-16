@@ -133,6 +133,22 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW — chat of 2026-11-16 from 17:59 (`resume` + the owner's tasks), recorded 2026-11-16 18:11 +03:00.** (1) DONE — the 3.1.0 mod-update recon (recon only, the owner's word
+> «Ничего не делаем по сборке»): 8 of 66 republished after the beta, 2 newer than our copies (EAA*, TDI_LegendaryRepair) — plan 53 step 12, the «Re-run 2026-11-16» line.
+> Not all mods need an author update: 3.1.0 accepted all 66 (0 «too old»); only the whole vanilla copies of step 12's table and Pickup+ need work, ours to do.
+> (2) DONE 18:14 — the owner's order 18:02: a community call (EN + RU) at the very top of the Nexus page of mod 65 (the 0.9.0 file still quarantined, «Some suspicious
+> files»): written by the voice portrait, §7B pass (14 fixed), shown, saved after his «я сохранил» / «давай, делай» — «Mod saved successfully.», read back on the public page
+> (report `testcases/reports/2026-11-16_nexus-call-block.md`); the description before the edit — `.work/nexus-call/current_live.bbcode`; the live copy — the release folder
+> `nexus_full_description_2026-11-16_live.bbcode`; new tool `tools/nexus-desc.mjs`. Open for him: add the public GitHub release link (v0.9.0, 7 parts) to the call?
+> (3) DONE 18:29 — the owner 18:05: the bow look A / B frames of folder 87 faced a rock («ничего там не понятно»); re-shot in the background game on open sand at the oasis
+> water (yaw 339), V / A / B × −55 / −80, the bow by the remote (no real input), page — review folder 88 `88_vid_luka_na_prostore/index.html`, opened for him (TC
+> `TC_conan_fp_bow_look_reshoot_2026-11-16.md`, report `2026-11-16_conan-bow-look-reshoot.md`). 18:30 his «дай в Б поиграть» — the build already ships B; the game launched
+> for him on the background path (PID 27440; he left it himself 18:40). **Interview #036 ANSWERED 18:40 — look B** (`[OWNER]` «хорошо, нравится.»; the build already ships B).
+> (4) DONE — `tools/nexus-desc.mjs`: 4 judge rounds (round 4 — no defect), every refusal and `verify` run live without a publish; the `save` → proof path runs for real at the
+> next description edit. (5) NEXT — the owner's two archery orders of 18:40: the aim zoom vs the sprint (bug 93, section «The owner's order — the aim zoom and the sprint»,
+> cases Z1–Z6: the zoom off while sprinting, back by itself when the sprint ends with RMB held; recon done — the game's `SetFieldOfViewTarget(1)` at the draw, our post-hook
+> sets 75°, nothing restores it after a sprint) and the right hand drifting off the string when moving in the aim (`bugs/104_…`, control case first). Both need real RMB / Shift —
+> a FREE PC, the game in front.
 > **CHAT CLOSED 2026-11-15 00:19 +03:00 (soft, at 81 % by the new ladder — the first chat closed by it).** KUMM `30a8a12` + `70db2c7` + the closure commit,
 > pack `b1b1779` — all pushed; no game of ours runs; the machine lock released. **FIRST NEXT CHAT:** (0) the owner's answers — interview #036 (the bow look A / B,
 > page in review folder 87 `index.html`, shown 2026-11-15 00:0x) and #035 (the bow after the wall push); (1) plan 52: the put-away by a real key on the reworked

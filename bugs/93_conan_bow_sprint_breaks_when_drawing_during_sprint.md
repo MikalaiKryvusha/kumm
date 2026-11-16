@@ -82,6 +82,16 @@ So: draw first, then sprint — the aim zoom goes (liked); sprint first, then dr
 bow). Lead: the zoom is `BP_PlayerFovController` (`SetFieldOfViewTarget` 0/1) + the montage notify `BP_FieldOfViewChangeForDuration`, and KrinikConanArchery's aim
 FOV (game map «Лук и камера»); in the sprint-first order the notify fires at the draw's start while the hero is already sprinting. NEXT session, with bug 95.
 
+## The owner's order — the aim zoom and the sprint (2026-11-16 18:40, chat, verbatim)
+
+`[OWNER]` «2) нужно сделать адекватно зум в комбинации со спринтом.» · «- герой в прикладке - есть зум (будет перком, и чем больше ступеней перка, тем сильнее зум).
+Начали спринт - зум отменяется. Если ПКМ удерживается, а спринт закончился - возвращается зум автоматически.» · «- герой не в прикладке. Начали бежать спринтом.
+Делаем прикладку - зум не делается, так как герой в спринте. Спринт остановился, ПКМ прикладки удерживается - зум автоматически срабатывает.»
+
+Acceptance (the four transitions, both orders): Z1 aim (RMB held) → zoom in · Z2 aim, then sprint starts → zoom out · Z3 aim held, sprint ends → zoom back in by itself ·
+Z4 sprint first, then RMB → no zoom while sprinting · Z5 then the sprint stops with RMB held → zoom in by itself · Z6 RMB released → zoom out as in vanilla. «Будет перком»
+(the zoom strength by perk ranks) — a perk of the perk list (plan 49), not this bug: here the zoom is the current one, on or off.
+
 ## Open from judge round 2
 
 - Finding 1: the K2_CanSprint override also skips the game's other refusals (an overloaded hero, low stamina at the start, mounted) — case S8 owed.
