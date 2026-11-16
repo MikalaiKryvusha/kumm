@@ -143,7 +143,21 @@ Climbing (remote recon 2026-11-02 14:1x, for the owner's 09:07 request «кно�
   `hit` IS the FHitResult (`hit.Distance`, `hit.ImpactNormal`), not `hit.OutHit`.
   **2026-11-16 21:44 +03:00 — a grab IN THE AIR needs the jump key HELD (real input, desert arch, bug 105):** the Space press sets `bWantsToClimb`, the Space RELEASE clears it;
   a run-up jump with a tapped Space hits the wall in mode 3 and falls; with Space held through the flight the touch starts the climb (mode 7). `HoldingClimbButtonTime`
-  (0.075) is not that window (0.8 changed nothing). Next to the wall (60 cm) a jump is a ground climb at once.
+  (0.075) is not that window (0.8 changed nothing). Next to the wall (60 cm) a jump is a ground climb at once. The control 2026-11-16 22:22 (KrinikConanLocomotion out of
+  the game): the same — the tap bounces off; vanilla's own rule. The press on the wall that pushes (`krinik_wall_jump`): the rest of the press body after `StartJump` sets
+  the wish again (true 10 ms after the push, key still down). The release on the wall clears the wish; the climb goes on without it (mode 7, `wc` false — 22:35).
+  **UE4SS runs a hook registered on `InpActEvt_Jump_K2Node_InputActionEvent_27` for `_26` too, and the other way round (2026-11-16 22:38:12, debug probe
+  `KUMM/.work/wallgrab/hook-order.lua`: one real press printed «startjump, press, release», one real release «press, release»).** The two names differ only by the
+  number an FName keeps apart from its text, and the hook matches the text. A hook cannot tell the press from the release by its name — read the event's effect after
+  its body (the press sets `bWantsToClimb`, the release clears it). The same holds for every `…_K2Node_InputActionEvent_N` pair of one action (RMB `_7` / `_8`, LMB
+  `_9` / `_10`); different actions (`ZoomOut_…_28`, `ZoomIn_…_29`) have different texts. `BaseBPCombat_C:HandleOnMovementModeChanged` hooked once prints twice per
+  mode change (same moment) — keep its handlers idempotent.
+  **Stamina on the wall (2026-11-16 22:5x–23:08, the remote, bug 106):** the current / max bar is `GetIntStat(5, 0)` / `GetIntStat(6, 0)` (`ECharIntStatID` 5 / 6). Hanging
+  still costs NOTHING and regenerates nothing (81 / 108 for 15 s); moving along the wall costs ≈ 18 per second (88 → 79 for ≈ 0.5 s up). The game's regen tick —
+  `ConanCharacter:GetStaminaRegen() → float`, hookable, ≈ 10 calls a second on the ground — is NOT called at all on the wall (0 in 5.6 s); `K2_CanRegenerateStamina
+  (isRegenPositive)` never reached a hook. Our wall push pays `GetStaminaJumpCost` (−20) itself; the stand's god mode (`stand-keeper.sh`) leaves the bar honest. An
+  exhausted hero does not stay on a wall: `AdjustStaminaCurrent(−200)` while climbing (the bar went to −50 — below zero is allowed — substate 14) → the game dropped the
+  hero at once (mode 1 within ≈ 1 s, 2026-11-16 23:20).
   **2026-11-14 15:2x — the climb by the remote, no real input (`_config/wall-stand.lua`):** facing a vertical wall 60 cm off, the hero's own jump input event
   (`InpActEvt_Jump_K2Node_InputActionEvent_27` then `_26`) + `AddMovementInput` into the wall + `Climb(false)` called WHILE AIRBORNE starts the climb: `MovementMode` 7
   (custom), `CustomMovementMode` 0; forward input then climbs up. The game does NOTHING on Jump while climbing (mode 7, speed 0 for 1 s). `BaseBPCombat_C:StartJump`

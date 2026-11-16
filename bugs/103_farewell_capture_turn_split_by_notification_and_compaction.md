@@ -21,6 +21,10 @@ below through `farewell-capture.mjs --out` write the real farewell; `tools/test-
 - An autocompaction summary (`isCompactSummary: true`, no isMeta) counts as the owner's prompt and splits the turn — a soft closure running into the
   autocompaction (≈ 96.7 % of 1 M) loses its farewell, and in autonomy mode the guard orders «work on».
 
+- **Seen live again 2026-11-16** (the soft closure of 21:46): `FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md` (21:47) held the interim «Сообщение коммита закрытия готово.
+  Жду итог судьи, после него коммит и отправка.»; the real farewell came after the judge and was never written. The owner pasted it into the next chat by hand
+  (2026-11-16 22:12, «твои слова из прошлого чата») — the cost of this bug, paid by the owner. The first face above (Stop #1 on the waiting text, later Stops skipped).
+
 ## The tried fix and why it was rolled back (2026-11-14 23:5x)
 
 Treating `<task-notification>` as NOT the owner's prompt fixed the split but made a regression: an owner message typed mid-turn arrives as an `attachment`

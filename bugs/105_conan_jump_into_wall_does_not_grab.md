@@ -1,6 +1,6 @@
 # Bug 105 — Conan: a hero in a jump who touches a wall does not grab it (hits and falls)
 
-**Status:** 🔴 OPEN · **Severity:** S2 (the owner's play, a movement feature of KrinikConanLocomotion — the wall jump family) · **Version/build:** the Conan build on 3.1.0,
+**Status:** 🔧 fix built and pushed (pack `4367176`, 2026-11-16 23:23 +03:00), waits for the owner's final check and his choice on G7 (the bow drawn) · **Severity:** S2 (the owner's play, a movement feature of KrinikConanLocomotion — the wall jump family) · **Version/build:** the Conan build on 3.1.0,
 pack working tree of 2026-11-16 · **When/context:** the owner's message 2026-11-16 21:38 +03:00, mid-session, while the agent finished bug 93 · **Fixing:** the next session (the cause found 2026-11-16 21:43 by real input, the plan below; this chat closed by the owner's word 21:41)
 
 ## Goal vector
@@ -41,12 +41,44 @@ to start a climb while airborne, 2026-11-14). The wish ends at landing (the game
 must not re-grab the SAME wall at once (the push is 0.5 m) — e.g. no re-wish for the push's first 0.3 s or until moving toward a wall; the owner's wall-to-wall jumps
 («прыгать со стены на стену») then grab the NEXT wall without holding Space. Cases first (TC), the judge, the agent's own real-input run, then the owner's final check.
 
+## The fix as built (2026-11-16 22:1x–23:2x, `krinik_wall_jump.lua`, builds r1 → r7, pack `4367176`; TC `testcases/TC_conan_jump_wall_grab_2026-11-16.md`)
+
+Final r7 by real input: G1 ×4, G4, G5b, G5c, G9, G10 pass; G3 control pass. Judge: 4 rounds — 26 findings, fixed 16, declined 6, info 3, one to the owner (G7); round 4
+found no correctness defect. After round 2 a press is told from a release by the wish it leaves (`left_wc`, refreshed at every mode change), a release re-wishes only
+when it cleared a wish, the state belongs to one pawn (its address).
+
+TWINS: searched `RegisterHook` on `…_K2Node_InputActionEvent_N` in our mods — found 2 other sites: KrinikConanArchery RMB `_7` / `_8` (state-based — reads the held
+button 100 ms later, so the double call only repeats the check: no defect), KrinikConanCamera `ZoomOut_…_28` / `ZoomIn_…_29` (different texts — no collision). The
+stamina charge's rounding (`math.floor` of a negative cost) had a twin in `krinik_air_combat.lua` — fixed in the same commit.
+
+- **Control (G3, 22:22):** Locomotion out of the game — the tapped jump bounces off: the game's own rule, not ours (rule 24).
+- **The mechanism:** a post-hook on the hero's Jump event; after a RELEASE body (the wish cleared) while falling → the game's own `Climb(false)`. G1 passed on r1
+  (22:26, 22:29) and r4 (22:46, 22:49): the wish stands through the flight, mode 7 at the touch. OUR wish is taken back at the landing (G4 pass r4 22:44) and when the
+  climb it gave ends (the judge's round-1 item 1; seen at the push 22:47:43.4416 «лазание кончилось (режим 3) — … снято»).
+- **UE4SS hooks the press and the release as ONE event** (debug probe 22:38): `…InputActionEvent_26` and `_27` differ only by the FName number; a hook on either
+  fires for both. So the handler tells them apart by the effect (the press body sets the wish, the release clears it). Build r1 misread this as «the game sends a
+  second release at the push»; build r3 hooked both names and lost the landing clear (G4 fail). Game map «Climbing» carries the rule.
+- **The same wall after a push (G5b fail on r1, 22:29):** with W held the hero re-caught the wall 0.13 s after the push. Now: no re-wish in a push's flight until the
+  landing or a new press in it; the wish cleared again after the push press's body (its rest sets it).
+- **One key event may call the hook twice in the same moment** (22:47:43.5360 / .5362): a call within 5 ms of the previous is skipped (build r5).
+- **The push costs the game's jump stamina** (bug 106 item 1): log «… выносливость -20 …» 22:47:43.4425.
+
 ## Next (in order)
 
 1. Control case: the same jump into the wall with Locomotion's sections out of the game copy — does vanilla grab? (rule 24: who makes the defect).
 2. The native way — per «Fix plan» above (CORRECTED after the recon: not at the wall touch): the game's own `Climb(false)` after the Space RELEASE while falling,
    so the wish the release cleared stands for the flight; never a timer.
 3. Cases in a TC file before the run; the owner's hands only for the final check (memory `owner-offers-bow-testing`).
+
+## Decisions made without the owner
+
+- `[AI]` Wall to wall needs a Space tap in the push's flight: a re-wish there would let the pushed-off wall catch the hero again (G5b), and telling the same wall from
+  the next one would be a correction after the game's grab (HOUSE_RULES rule 24).
+- `[AI]` The push is refused for the game's jump blockers (13 / 14 / 18) — a safety net: the game drops an exhausted hero off the wall itself (23:20).
+- `[AI]` The shipped 0.9.0 guide is not edited; the next release's guide takes the wall jump and the grab (mod notes carry the text's source).
+- G7 DECIDED by the owner: `[OWNER]` 2026-11-16 23:24 +03:00 «при натянутом луке и прыжке на стену - натяжение снимается, герой повисает на стене. ПКМ прикладка не
+  работает в висе на стене» — grab (A); at the grab the draw is cancelled; while hanging, RMB does not start the aim. r7 grabs but keeps the draw (substates 11, 15, 16
+  until RMB goes up) — TO BUILD: the draw's cancel at the climb's start and no aim on the wall (recon first: how the game ends a draw; does vanilla refuse RMB on a wall).
 
 ## Links
 

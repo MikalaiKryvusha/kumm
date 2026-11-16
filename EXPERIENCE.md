@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0542 · 2026-11-16 · ❌→✅ · #conan #ue4ss #hook #input #press-release #fname #walljump #bug105 #falseok
+class: hook-name-collision — a UE4SS hook on one of two blueprint functions whose names differ only by the trailing `_N` fires for BOTH
+**Result:** a hook on the Jump RELEASE `InpActEvt_Jump_K2Node_InputActionEvent_27` fired at the press `_26` too: build r1 read it as «the game sends a second release at
+the push» (written into the code and the TC as a fact), build r3 hooked both names and its «press» handler ran right after every release, killing the landing clear
+(G4 fail). A debug probe in the remote's own Lua state (post-hooks on both names + StartJump, one print each) showed one real press → «startjump, press, release».
+**Lesson:** an FName keeps the trailing number apart from the text, and the hook matches the text — never tell a press from a release (or any `_N` pair of one input
+action) by the hook's name; read the event's EFFECT after its body, and keep handlers idempotent (one key event can reach a hook twice in the same moment).
+Before writing «the game does X twice», print on the hook itself (EXP-0532) — and count which hooks fired, not only which logged.
+**Trigger:** any RegisterHook on `…_K2Node_InputActionEvent_N`, or two hooks whose names share the text before the last `_`.
+mechanized: no — the rule lives in the game map «Climbing»; a guard would grep our mods for RegisterHook pairs with one base (cheap, not built: one finding so far)
+
 ### EXP-0541 · 2026-11-16 · ❌→✅ · #conan #owner-time #guess #recorder #state-over-events #bug93
 class: owner-hands-as-debugger — the owner's test rounds spent on the agent's unverified guesses
 **Result:** five fix rounds of the bow aim zoom vs the sprint ran on the owner's hands (20:35–21:13); one round broke the plain standing aim — a hook on

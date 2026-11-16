@@ -133,6 +133,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-16 23:0x +03:00 — the chat of 22:12 (the owner pasted the last farewell by hand: the farewell file held an interim line — bug 103, seen again).**
+> Bug 105 (a jump into a wall grabs it after a short Space tap) BUILT in `krinik_wall_jump.lua` (pack working tree, builds r1 → r6): after the release body, while falling,
+> the game's own `Climb(false)`; our wish taken back at the landing and when the climb it gave ends; no re-wish in a push's flight. **UE4SS fires a hook on
+> `InpActEvt_Jump_…_27` for `_26` too** (FName number — EXP-0542, game map «Climbing»): one hook, the event told by its effect. Cases G1, G3, G4, G5, G5b, G5c, G9, G10
+> pass by real input on the final r7 (report `testcases/reports/2026-11-16_conan-jump-wall-grab.md`); 4 judge rounds (round 4 clean); **pack `4367176` pushed 23:23**;
+> waits for the owner's final check. Our game closed, the machine lock released 23:23. Bug 106 (the owner
+> 22:31): item 1 — the push costs the game's jump stamina (−20, G10) — built, in the same pack commit; item 2 — the hang drains slowly — recon done: vanilla hanging
+> costs 0 and the game's regen tick does not run on the wall, so only a timer of ours (once a second, only while hanging) can do it — **asked the owner 23:09: allow
+> that timer (HOUSE_RULES rule 7) and the rate −1 / −2 / −3 per second?** Open: G6 (two walls); **G7 DECIDED 23:24 by the owner** (verbatim in bug 105): the grab
+> cancels the draw, RMB does not aim while hanging — TO BUILD (r7 grabs but keeps the draw), cases G7 / G7b; then the owner's final check of bug 105.
+>
 > **CHAT CLOSED 2026-11-16 21:46 +03:00 (soft, at 76 % by the owner's word: `[OWNER]` 2026-11-16 21:41 «работай автономно 10 минут. Через 10 минут начинай доделывать то, над чем будешь работать - и закрываем чат»).**
 > KUMM `724bbba` · `e31d691` + the closure commit, pack `49e78cd` — all pushed; no game of ours runs (closed 21:45); the machine lock released; the owner's grant file
 > `_tools/owner-free-grant.txt` expires at 21:48 by itself (claim-ok: the grant's own end line).
