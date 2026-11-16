@@ -109,6 +109,10 @@ go to the log, the lazy hook in the FOV post-hook, `IsLocallyControlled`, the wo
 **Run 19:1x (real keys, the logging build):** the hook FIRES on the sprint start and end (each logged twice); `ToggleWieldWeapon()` did NOT wield the bow this time
 (`HasWeaponsEquipped` false — the RMB was an unarmed attack); the event line read **«ПКМ false» while `mouse-seq` held RMB** — `rmb_held` (`IsInputKeyDown`) may not see
 SendInput's button: check it (an RMB-held read during a real `rdown` with the bow drawn) before Z3 / Z5 can pass even with the bow sprint fixed.
+**Control case 19:14 — BLOCKED by the stand:** `krinik_bow_sprint` taken out of the GAME copy's section list only (the log: three sections loaded), the game in front —
+the bow did not come to hand: `HasWeaponsEquipped` false after the load, after `ToggleWieldWeapon()` (19:1x) and after a real «3» (19:15). After the agent's game kills the
+save no longer has the bow wielded. The copy restored by `-Deploy -Only KrinikConanLocomotion` (md5 = the pack source). Stand first next time: `_config/bow-stand.lua`
+(craft the bow — the game map «Stand gear»), a real hot-bar key, `HasWeaponsEquipped` true BEFORE any series.
 **NEXT (in order):** (1) the bow sprint on 3.1.0 — control case with `krinik_bow_sprint` off (does a draw survive the Shift release; does RMB draw in a sprint); (2) `rmb_held`
 under SendInput; (3) Z3 / Z5 by real keys; (4) the judge's open risks.
 
