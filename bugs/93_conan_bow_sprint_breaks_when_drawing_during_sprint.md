@@ -113,6 +113,10 @@ SendInput's button: check it (an RMB-held read during a real `rdown` with the bo
 the bow did not come to hand: `HasWeaponsEquipped` false after the load, after `ToggleWieldWeapon()` (19:1x) and after a real «3» (19:15). After the agent's game kills the
 save no longer has the bow wielded. The copy restored by `-Deploy -Only KrinikConanLocomotion` (md5 = the pack source). Stand first next time: `_config/bow-stand.lua`
 (craft the bow — the game map «Stand gear»), a real hot-bar key, `HasWeaponsEquipped` true BEFORE any series.
+**CRASH in the agent's run 19:18:04 (the stand step):** `EXCEPTION_ACCESS_VIOLATION reading address 0x70` 2 s after `god-on.sh` executed (19:18:02), while the remote ran
+`_G.__bs = {craft = true}; dofile('…/_config/bow-stand.lua')` (no «исполнено» line for it) — most likely the remote `CraftingQueue:CraftItems` on 3.1.0, whose patch rewrote the
+crafting queue (plan 53 step 12, the station's event graph). The crash window closed by PID 5580; the Locomotion copy restored (md5 = the pack). **Do not run `bow-stand.lua`
+`{craft = true}` on 3.1.0** until its craft call is re-read against the 3.1.0 queue; the other route — the owner's own bow in his save, or a bow crafted by him.
 **NEXT (in order):** (1) the bow sprint on 3.1.0 — control case with `krinik_bow_sprint` off (does a draw survive the Shift release; does RMB draw in a sprint); (2) `rmb_held`
 under SendInput; (3) Z3 / Z5 by real keys; (4) the judge's open risks.
 
