@@ -3,6 +3,37 @@
 
 
 
+## 2026-11-17 06:33 +03:00 — STATUS bonsai trim (the soft closure of the chat of 2026-11-17 04:25): the block CHAT CLOSED 2026-11-16 23:53 (+ its FIRST NEXT CHAT) and the block of the chat of 2026-11-16 22:12, moved verbatim
+
+> **CHAT CLOSED 2026-11-16 23:53 +03:00 (soft, by the owner's word: `[OWNER]` 2026-11-16 23:38 «работай автономно 15 минут, а затем начинай доходить до логического
+> среза и закрытию чата по ритуалу»).** KUMM `06806a8` + the closure commit; pack `4367176`, `68c8d11`, `a3a6111` (r11) — pushed; no game of ours runs (closed
+> 23:52), the machine lock released.
+> **FIRST NEXT CHAT:** (1) **bug 105 G7 — the bow's draw at a wall grab.** r11 (`StopAnimMontage(nil)` + `ExitSubstate(16, 15, 11)` in `cancel_draw`) keeps the hero
+> hanging without the draw stance while RMB is HELD (frame `.work/wallgrab/held_1.jpg`). The owner's 23:49–23:51 words («в натяжке ползёт по стене», verbatim in
+> bug 105) were about the r10 run (the stance came back on the wall — what r11's montage stop answers); r11 itself showed a NEW question — over the ledge's top the
+> held RMB redraws in the air (`held_2.jpg`): ask him whether a held RMB may redraw after the climb ends. Then re-run G7e (a draw begun ≈ 0.25 s before the
+> touch), G7, G7c, G1, G4, G5b, G10 on r11 BY HIS RULE — frames and reads as a SERIES while RMB is still held, never after its release. The rest of judge round 2 of
+> `cancel_draw` (bug 105). (2) **Bug 106 item 2** — the hang drain: the owner's answer on a timer of ours (rule 7) and the rate is owed (asked 23:09). (3) The owner's
+> final check of bug 105 (G1 grab after a tap, G5b push, G10 stamina). (4) Older, from the closure of 21:46: the bow-sprint section's cost (worst call 4–8 ms, bug 93
+> «Cost — recon from the code»); `bugs/104_…` (the hand off the string); plan 53 step 12 (read `researches/mod-reconciliation/GUIDE.md` first); interview #035; plan 52
+> put-away by a real key; `bugs/103_…` (the farewell hook — it lost the farewell again 2026-11-16 21:47); the owner's open question — the GitHub release link in the Nexus call.
+> Tools of this chat (`.work/wallgrab/`, git-ignored): `case.sh` (recorder + real input + log of a case), `back.lua` (the hero N cm off the found wall), `hook-order.lua`,
+> `stamina-probe.lua`, `regen-probe.lua` (remote debug hooks); the stand — `tp_ground.sh 17929 244723`, `wall-stand.lua find` ×2, `back.lua` 300 cm, a 30 ms tap.
+>
+> **The chat of 2026-11-16 22:12 (resume; the owner pasted the last farewell by hand: the farewell file held an interim line — bug 103, seen again):**
+> Bug 105 (a jump into a wall grabs it after a short Space tap) BUILT in `krinik_wall_jump.lua` (pack working tree, builds r1 → r6): after the release body, while falling,
+> the game's own `Climb(false)`; our wish taken back at the landing and when the climb it gave ends; no re-wish in a push's flight. **UE4SS fires a hook on
+> `InpActEvt_Jump_…_27` for `_26` too** (FName number — EXP-0542, game map «Climbing»): one hook, the event told by its effect. G1, G4, G5b, G5c, G9, G10 pass by
+> real input on r7 (G3 control 22:22, G5 on r1) (report `testcases/reports/2026-11-16_conan-jump-wall-grab.md`); 4 judge rounds (round 4 clean); **pack `4367176` pushed 23:23**;
+> waits for the owner's final check. Our game closed, the machine lock released 23:23. Bug 106 (the owner
+> 22:31): item 1 — the push costs the game's jump stamina (−20, G10) — built, in the same pack commit; item 2 — the hang drains slowly — recon done: vanilla hanging
+> costs 0 and the game's regen tick does not run on the wall, so only a timer of ours (once a second, only while hanging) can do it — **asked the owner 23:09: allow
+> that timer (HOUSE_RULES rule 7) and the rate −1 / −2 / −3 per second?** Open: G6 (two walls); **G7 DECIDED 23:24 by the owner** (verbatim in bug 105): the grab
+> drops the draw stance (the bow may stay in the left hand), RMB does not aim while hanging — BUILT (pack r10, `ExitSubstate(16, 15, 11)` at the climb's start;
+> `CancelAttackTry` rejected — it throws the hero off the wall): G7, G7c (the owner's own case) pass, G7b passes by the game itself — **pack `68c8d11` pushed 23:47**; **G7e OPEN — a draw begun
+> ≈ 0.25 s before the touch came back on the wall (the montage played on) — r11 adds `StopAnimMontage(nil)` (the recipe read 23:49 by the remote), committed at
+> the closure; the owner's 23:49–23:51 words leave G7 OPEN (FIRST NEXT CHAT (1)).
+
 ## 2026-11-16 23:53 +03:00 — STATUS bonsai trim (the soft closure of the chat of 2026-11-16 22:12): the block CHAT CLOSED 2026-11-16 21:46 (+ its FIRST NEXT CHAT), moved verbatim
 
 > **CHAT CLOSED 2026-11-16 21:46 +03:00 (soft, at 76 % by the owner's word: `[OWNER]` 2026-11-16 21:41 «работай автономно 10 минут. Через 10 минут начинай доделывать то, над чем будешь работать - и закрываем чат»).**

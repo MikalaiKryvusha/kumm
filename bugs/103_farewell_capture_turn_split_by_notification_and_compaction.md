@@ -69,3 +69,5 @@ autonomy order (judge round 4, fixture with real shapes). Rolled back to the old
 ## Links
 
 `testcases/reports/2026-11-14_context-budget-soft-80-force-92.md` (rounds 1–4) · KAIF bug 26 · `tools/hooks/autonomy-guard.mjs` (shares `readTurn`)
+
+**Correction 2026-11-17 06:37 +03:00:** the commit `bb44eb3` says «review: 3 rounds»; there were TWO judge rounds — the turn-model attempt (refuted) and the mark's round 1 (2 defects fixed). The commit message stays as history; this line corrects it (the closing judge's caveat 4).

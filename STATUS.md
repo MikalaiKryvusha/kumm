@@ -133,7 +133,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW — the chat of 2026-11-17 04:25 (resume + «продолжаем делать сборку конана 1.0.0» + `[OWNER]` 04:26 «работай автономно в дневном цикле» → /dayloop).**
+> **CHAT CLOSED 2026-11-17 06:33 +03:00 (soft, at 80 % of the window — the context-budget rule; the dayloop by the owner's word `[OWNER]` 2026-11-17 04:26 «работай автономно в дневном цикле»).** KUMM `35d33ee` … `c3f3acb` + the closure commit; pack `9a33796`, `965f10f`, `6a16810` — all pushed; no game of ours runs, the machine lock released.
+> **FIRST NEXT CHAT:** (1) **The owner's answers** — interview #037 (Q1: a HELD RMB over the top of the wall — A only a new press draws; Q2: the hang's stamina — A a 1/s timer on the wall −2/s, B −1/s, C no timer) and #038 (the hand on the string when walking — the GAME's pose: A the standing draw kept, B only the hand on the string) → build each by his letter in `krinik_wall_jump.lua` / a new hang timer (rule 7 exception only with his yes) / the game's animation (#038). (2) **Bug 93, the held draw ends in a sprint** ≈ 0.8–1.6 s after the full hold (not Archery, not the new gate; stamina falls ≈ 32/s while drawn in the sprint) — read the game's reason (EndPowerCharge / the charge-hold stamina rule); every draw case first reads the bow's socket (`Socket_Bow`, EXP-0545). S9 (a sheathed bow) still owed. (3) **The first live marked farewell (bug 103):** this chat's closure — check that `FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md` holds this chat's farewell (it ends the closing turn with `<!-- farewell -->`); if it holds a waiting line, the mark path failed live — reopen bug 103. (4) The owner's final check of bug 105 (G1 grab after a tap, G5b push, G10 stamina, G7 with the bow) and G6 (two walls). (5) Older: plan 53 step 12 (read `researches/mod-reconciliation/GUIDE.md` first); interview #035; plan 52 put-away by a real key; the GitHub release link in the Nexus call (the owner's open question). Tools: `.work/wallgrab/case.sh` (recorder + real input), `.work/bow310/series-rec.lua` (now with `mt=` montage and `st=` stamina columns), `ConanExiles/_config/sprint-cost-run.sh`, `sprint-gate-microbench.lua`, `tools/farewell-replay.mjs`.
+>
+> **The chat of 2026-11-17 04:25 (resume + «продолжаем делать сборку конана 1.0.0» + `[OWNER]` 04:26 «работай автономно в дневном цикле» → /dayloop) — what it did:**
 > Done: (1) **bug 105 G7 closed on the agent's side** — the rest of judge round 2 + three fresh judge rounds (r12 → r15): the bow's draw montage stopped BY IDENTITY,
 > a second look 300 ms later, one shared `bow_in_hand`; G7 / G7e pass on r14 and r15 by real input read while RMB is held; **pack `9a33796` pushed** (report
 > `testcases/reports/2026-11-17_conan-wall-grab-bow-cancel-r14.md`). (2) **Interview #037 asked in chat 04:29** (shown, recorded): Q1 — may a HELD RMB redraw once
@@ -142,44 +145,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > transcripts (the owner typing during a closure lost 9 farewells) and rolled back at 05:38; the fix now in the working tree is an explicit mark — **the closure
 > skills end the farewell with the hidden line `<!-- farewell -->`** and the hook writes that message; unmarked closures unchanged (15 real ones compared);
 > `tools/farewell-replay.mjs` replays a transcript stop by stop. (4) Bug 93 cost: the bow-sprint gate reworked (one substate list, property reads, the bow kept per
-> draw) — full-path calls over the 1 ms step 45–64 % → 18–21 %, S1b / S3 / S6 and the exhaustion pass — **pack `965f10f` pushed**. (3) judged twice (the
+> draw) — full-path calls over the 1 ms step 45–64 % → 18–21 % measured on v3 (the pushed v4 adds the yes-only memo and IsMovingOnGround; its own cost run is
+> owed), S1b / S3 / S6 on v3 and the exhaustion on v4 pass — **pack `965f10f` pushed**. (3) the mark judged in one round after the refuted turn-model round (the
 > mark only at the END of the message and only after an accepted closure; autonomy-guard knows it) — committed with this block; its live proof is THIS chat's
 > closure: the farewell file must then hold the marked farewell; KAIF #181 got the field update (comment 6936948110). (5) **Bug 104 (the hand on the string
 > when walking in the draw): the cause is the GAME's own moving-aim pose** — side frames standing vs walking, and the same with Archery + Locomotion out (control);
 > **interview #038 shown as a page** (review folder 89): A — the standing draw kept while walking, B — only the hand kept on the string, C — something else.
 > Waiting for the owner: interview #037 (Q1 the top of the wall, Q2 the hang's stamina) and #038. (6) Bug 93, two unexplained observations (06:2x, written
-> in the bug): a held draw in a sprint ends by itself ≈ 1–1.5 s after the full hold (the old gate too; with KrinikConanArchery out too — not Archery; the stamina
+> in the bug): a held draw in a sprint ends by itself ≈ 0.8–1.6 s after the full hold (the old gate too; with KrinikConanArchery out too — not Archery; the stamina
 > falls ≈ 32/s while drawn in the sprint), and once RMB in a sprint did not start a draw — next: the game's reason (`DebugActionTryFailure`, `EndPowerCharge`). No game of ours runs, the machine lock released.
 >
-> **CHAT CLOSED 2026-11-16 23:53 +03:00 (soft, by the owner's word: `[OWNER]` 2026-11-16 23:38 «работай автономно 15 минут, а затем начинай доходить до логического
-> среза и закрытию чата по ритуалу»).** KUMM `06806a8` + the closure commit; pack `4367176`, `68c8d11`, `a3a6111` (r11) — pushed; no game of ours runs (closed
-> 23:52), the machine lock released.
-> **FIRST NEXT CHAT:** (1) **bug 105 G7 — the bow's draw at a wall grab.** r11 (`StopAnimMontage(nil)` + `ExitSubstate(16, 15, 11)` in `cancel_draw`) keeps the hero
-> hanging without the draw stance while RMB is HELD (frame `.work/wallgrab/held_1.jpg`). The owner's 23:49–23:51 words («в натяжке ползёт по стене», verbatim in
-> bug 105) were about the r10 run (the stance came back on the wall — what r11's montage stop answers); r11 itself showed a NEW question — over the ledge's top the
-> held RMB redraws in the air (`held_2.jpg`): ask him whether a held RMB may redraw after the climb ends. Then re-run G7e (a draw begun ≈ 0.25 s before the
-> touch), G7, G7c, G1, G4, G5b, G10 on r11 BY HIS RULE — frames and reads as a SERIES while RMB is still held, never after its release. The rest of judge round 2 of
-> `cancel_draw` (bug 105). (2) **Bug 106 item 2** — the hang drain: the owner's answer on a timer of ours (rule 7) and the rate is owed (asked 23:09). (3) The owner's
-> final check of bug 105 (G1 grab after a tap, G5b push, G10 stamina). (4) Older, from the closure of 21:46: the bow-sprint section's cost (worst call 4–8 ms, bug 93
-> «Cost — recon from the code»); `bugs/104_…` (the hand off the string); plan 53 step 12 (read `researches/mod-reconciliation/GUIDE.md` first); interview #035; plan 52
-> put-away by a real key; `bugs/103_…` (the farewell hook — it lost the farewell again 2026-11-16 21:47); the owner's open question — the GitHub release link in the Nexus call.
-> Tools of this chat (`.work/wallgrab/`, git-ignored): `case.sh` (recorder + real input + log of a case), `back.lua` (the hero N cm off the found wall), `hook-order.lua`,
-> `stamina-probe.lua`, `regen-probe.lua` (remote debug hooks); the stand — `tp_ground.sh 17929 244723`, `wall-stand.lua find` ×2, `back.lua` 300 cm, a 30 ms tap.
->
-> **The chat of 2026-11-16 22:12 (resume; the owner pasted the last farewell by hand: the farewell file held an interim line — bug 103, seen again):**
-> Bug 105 (a jump into a wall grabs it after a short Space tap) BUILT in `krinik_wall_jump.lua` (pack working tree, builds r1 → r6): after the release body, while falling,
-> the game's own `Climb(false)`; our wish taken back at the landing and when the climb it gave ends; no re-wish in a push's flight. **UE4SS fires a hook on
-> `InpActEvt_Jump_…_27` for `_26` too** (FName number — EXP-0542, game map «Climbing»): one hook, the event told by its effect. G1, G4, G5b, G5c, G9, G10 pass by
-> real input on r7 (G3 control 22:22, G5 on r1) (report `testcases/reports/2026-11-16_conan-jump-wall-grab.md`); 4 judge rounds (round 4 clean); **pack `4367176` pushed 23:23**;
-> waits for the owner's final check. Our game closed, the machine lock released 23:23. Bug 106 (the owner
-> 22:31): item 1 — the push costs the game's jump stamina (−20, G10) — built, in the same pack commit; item 2 — the hang drains slowly — recon done: vanilla hanging
-> costs 0 and the game's regen tick does not run on the wall, so only a timer of ours (once a second, only while hanging) can do it — **asked the owner 23:09: allow
-> that timer (HOUSE_RULES rule 7) and the rate −1 / −2 / −3 per second?** Open: G6 (two walls); **G7 DECIDED 23:24 by the owner** (verbatim in bug 105): the grab
-> drops the draw stance (the bow may stay in the left hand), RMB does not aim while hanging — BUILT (pack r10, `ExitSubstate(16, 15, 11)` at the climb's start;
-> `CancelAttackTry` rejected — it throws the hero off the wall): G7, G7c (the owner's own case) pass, G7b passes by the game itself — **pack `68c8d11` pushed 23:47**; **G7e OPEN — a draw begun
-> ≈ 0.25 s before the touch came back on the wall (the montage played on) — r11 adds `StopAnimMontage(nil)` (the recipe read 23:49 by the remote), committed at
-> the closure; the owner's 23:49–23:51 words leave G7 OPEN (FIRST NEXT CHAT (1)).
->
+> **Moved verbatim to the chronicle (entry 2026-11-17 06:33 +03:00):** the block CHAT CLOSED 2026-11-16 23:53 (+ its FIRST NEXT CHAT) and the block of the chat of 2026-11-16 22:12; their open items are carried in FIRST NEXT CHAT above (the bow on the wall — done; the hang's drain — interview #037 Q2; bug 105 final check; the older list).
 > **Moved verbatim to the chronicle (entry 2026-11-16 23:53 +03:00):** the block CHAT CLOSED 2026-11-16 21:46 (+ its FIRST NEXT CHAT and tools); its open items (2)–(4) are carried in FIRST NEXT CHAT above.
 > **Moved verbatim to the chronicle (entry 2026-11-16 21:46 +03:00):** the blocks NOW 2026-11-16 21:30 and CHAT CLOSED 2026-11-16 19:47 (+ its FIRST NEXT CHAT; its open items are in (3)–(4) above).
 > **Moved verbatim to the chronicle (entry 2026-11-16 19:47 +03:00):** the NOW block of the chat of 2026-11-16 17:59 and the blocks CHAT CLOSED 2026-11-15 00:19 and NOW 2026-11-14 22:29.
