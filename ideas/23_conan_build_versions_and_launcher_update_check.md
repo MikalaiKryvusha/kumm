@@ -12,7 +12,9 @@
 > repository with a fresh history (the old history's traces stop mattering; the audit covers the tree that goes there). `[AI]` recommended keeping the private
 > repo as the working one (deleting it is irreversible and loses the history) and asked the slug (`Krinik_ModPack_Conan_Exiles_Enhanced` proposed, rule 18)
 > · **NAMED 21:15:** `[OWNER]` «Krinik's Conan Exiles Enhanced ModPack» и адрес Kriniks_Conan_Exiles_Enhanced_ModPack · **Outbound:** keep-or-delete of the
-> private repo (`[AI]` keep — not answered)
+> private repo (`[AI]` keep — not answered) · **BUILT 2026-11-17 15:3x as plan 54** (steps 3 and 4 — the update check with a plate instead of a line, «Что нового»
+> under both versions, «Обновить сборку», «Обновить лаунчер»; stand cases pass, the real feed read over TLS 1.2) — open until a real release shows the plate to a
+> player (the first launcher / build release waits for the owner's word)
 
 ## Goal vector (Achieve)
 

@@ -91,6 +91,31 @@
 
 ## Entries
 
+### EXP-0550 · 2026-11-17 · ❌→✅ · #auto-relay #vscode #deep-link #environment #electron #hook #windows
+class: inherited-environment-changes-the-child — a variable of the host process silently turns a launched program into something else
+**Result:** corrects the cause in EXP-0547: the deep link opened no tab not because of the window choice or UIPI but because the hook's environment carries
+`ELECTRON_RUN_AS_NODE=1` from the VS Code extension host; `Start-Process "vscode://…"` passed it to the handler `Code.exe --open-url`, which ran as plain
+Node and dropped the URI. Without the variable the link arrived at once; `&windowId=<n>` (numbers from `code --status`) routes it to one window.
+**Lesson:** when a program launched from a hook or an extension «does nothing», diff the environment against a normal shell first (`env | grep -i
+electron\|vscode`) — `ELECTRON_RUN_AS_NODE`, `NODE_OPTIONS` and the like change what an Electron exe IS. → `.claude/auto-relay/open-chat.ps1` notes 4–5, KAIF #198
+
+### EXP-0549 · 2026-11-17 · ❌→✅ · #launcher #zip64 #test-data #stand #conan
+class: test-data-that-cannot-fail — a check whose data reads the same from a wrong place proves nothing
+**Result:** the launcher's build update read a 4.7 GB Zip64 archive (three 1.6 GB files of zeros) and «passed» by file sizes — but zeros read from a wrong
+offset are still zeros, and the only thing past the 4 GB mark was the zip's directory. Fixed the stand: a small file with unique text whose entry lies past
+4 GB (alphabetically after the big ones), compared byte for byte.
+**Lesson:** before trusting a pass on bulk test data, ask «would a wrong read produce the same bytes?» — fill or tail the data with something unique where the
+risky offsets are. → plan 54, TC B3; `_config/launcher/test/stand.mjs --big`
+
+### EXP-0548 · 2026-11-17 · ❌→✅ · #launcher #winforms #ui-automation #messagebox #test #windows
+class: tool-model-differs-from-the-app-model — UI Automation sees a custom WinForms window differently from its code
+**Result:** clicking the Krinik launcher's buttons by UI Automation: a WinForms `Name` does NOT reach UIA as AutomationId for the user-painted buttons (they are
+`Pane`s named by their caption, AutomationId = the hwnd number); a `MessageBox` owned by the launcher sits UNDER the owner window in the UIA tree and exposes
+only its title — no text, no buttons.
+**Lesson:** probe the tree first (`AutomationElement.FindAll(Descendants, True)` with Name/AutomationId/ControlType) before writing the clicker; press by
+caption (+ left-to-right index for twins) and read a message box by plain Win32 (`#32770`, text = item 65535, buttons by id 1/2/6/7) with `BM_CLICK`.
+→ `ConanExiles/_config/launcher/test/click.ps1`
+
 ### EXP-0547 · 2026-11-17 · ⚠️ · #auto-relay #vscode #deep-link #sendkeys #windows #kaif #hook
 class: proxy-check-passes-without-the-effect — the window title proved «our window is in front», not «the new chat tab exists»
 **Result:** the auto-relay opener (KAIF guide 4.3) raised the KUMM VS Code window, its title check passed, but `vscode://anthropic.claude-code/open?prompt=…`

@@ -65,6 +65,9 @@ export function statusCommittedSince(root, chatStartedAt) {
   return committedAfter(Number(String(ct.stdout).trim()), String(st.stdout).trim() !== '', chatStartedAt);
 }
 
+// open-chat.ps1's own waits: two idle gates (-IdleWaitSec 600 each), `code --status` (20 s), the window (15 s) — plus slack. Past it the opener is killed.
+const OPENER_TIMEOUT_MS = 25 * 60 * 1000;
+
 // Records that are bookkeeping of the harness, not a turn of the chat: they follow the final answer (stop_hook_summary) or precede a turn.
 const BOOKKEEPING = new Set(['system', 'api-request', 'api-request-blob', 'last-prompt', 'ai-title', 'custom-title', 'session-owner', 'atis-latch',
   'summary', 'file-history-snapshot', 'tag']);
@@ -125,10 +128,13 @@ function open() {
     if (done) {
       if (process.env.AUTO_RELAY_DRY === '1') { log(`open: [dry] would open a new chat in ${ROOT} with «${PROMPT}»`); return 0; }
       if (process.platform !== 'win32') { log(`open: only Windows is wired — open a chat and send «${PROMPT}» by hand`); return 1; }
-      // -NoEnter until TC L1 passes: on 2026-11-17 11:37 and 11:41 the deep link opened NO tab (four VS Code windows), the project window was in front
-      // all the same — an Enter would have gone into the RUNNING chat's input (a draft of the owner's would be sent). The title check is not enough.
+      // -NoEnter until TC L2 passes: on 2026-11-17 11:37 and 11:41 the deep link opened NO tab — the cause (found 15:21): ELECTRON_RUN_AS_NODE=1 from the
+      // extension host made the link's handler run as Node (open-chat.ps1 note 4, fixed). The next guard is the owner's: VS Code asks once «Allow …
+      // to open this URI?» — until he ticks «Do not ask me again», an Enter would answer that box, not send the prompt. The title check is not enough.
+      // The opener is bounded: two idle gates of up to 10 min each plus the open itself — a hung opener must not stall the relay silently (relay judge).
       const r = spawnSync('powershell.exe', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', join(DIR, 'open-chat.ps1'),
-        '-Folder', ROOT, '-Prompt', PROMPT, '-NoEnter'], { stdio: 'ignore', windowsHide: true });
+        '-Folder', ROOT, '-Prompt', PROMPT], { stdio: 'ignore', windowsHide: true, timeout: OPENER_TIMEOUT_MS });   // no -Enter yet (opt-in, note 7)
+      if (r.error) log(`open: open-chat.ps1 stopped: ${r.error.message}`);
       log(`open: open-chat.ps1 exit ${r.status}`);
       return r.status === 0 ? 0 : 1;
     }

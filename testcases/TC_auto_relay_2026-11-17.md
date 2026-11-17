@@ -37,7 +37,10 @@ never a key pressed into the owner's work.
 | G1 | `node tools/test-guards.mjs` · `node .claude/hooks/context-budget.mjs --check` after the `OFF` export | 308/308 · 38/38 | — |
 | M1 | mutant: `turnFinished` skips `user` records | E1 «blocked stop: no chat opened» goes red | — |
 | M2 | mutant: the Stop hook spawns without the farewell mark | E1 «a plain stop … nothing opened» goes red | — |
-| L1 | the deep link by hand: `Start-Process "vscode://anthropic.claude-code/open?prompt=…"` | a new chat tab with the text, not sent | — |
+| L1 | the deep link by hand: `Start-Process "vscode://anthropic.claude-code/open?prompt=…"` | a new chat tab with the text, not sent | fail 11:37 / 11:41 / 15:20 — no tab in any window. **Cause found 15:21:** `ELECTRON_RUN_AS_NODE=1` inherited from the extension host makes the handler `Code.exe --open-url` run as Node. |
+| L1′ | the link from a shell WITHOUT `ELECTRON_RUN_AS_NODE`, with `&windowId=2` (KUMM's number from `code --status`) | the link reaches the KUMM window | pass 15:21 — the KUMM window shows VS Code's «Allow 'Claude Code for VS Code' extension to open this URI?» (frame `.work/launcher54/relay_l1_kumm2.jpg`); the tab itself waits for the owner's «Open» / «Do not ask me again» (a security consent — his). NOT isolated (relay judge 15:33): KUMM was probably the last active window too, so windowId routing is read from VS Code's source, not observed — the isolating case is L1″ |
+| L1″ | after the owner's tick: KAIF focused last, the link with `windowId=2` | the tab opens in KUMM, not KAIF | — waits for the tick |
+| L0 | `open-chat.ps1 -Folder <KUMM> -WindowIdOnly` (the bounded `code --status` path of the script itself) | `relay.log` «window [2] is KUMM», nothing raised | pass 15:34 — found in 3.6 s, the temp file removed |
 | L2 | the opener by hand: `open-chat.ps1 -Folder <KUMM> -Prompt "Ответь одним словом: открылся"` from the elevated shell | the new chat answers; `relay.log` «sent» | — |
 | L3 | the live chain: a run's real closure → the next chat opens by itself and runs `relay.mjs continue` | `relay.log` relay → open → sent; the new chat's first command `continue` | — |
 | C5 | `CLAUDE_CODE_SESSION_ID` in the agent's shell (check 5) | not empty | — |

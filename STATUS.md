@@ -133,6 +133,20 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW (chat of 2026-11-17 14:40, `resume` + the owner's launcher task + «работай автономно» → /dayloop).** (1) **Plan 54 — the Conan launcher's «Что нового»
+> under both versions, the new-version plate, «Обновить сборку» and «Обновить лаунчер» — BUILT (phases 1–3)** in the pack (`_config/launcher/KrinikConanUpdates.cs`
+> new, `KrinikConanLauncher.cs`, `build-docs.py`, manifest key `launcher`): stand cases 19 of 20 pass (W1 partial — the Steam page's post not rendered headless),
+> after judge round 1's fixes the whole set re-run: 74 checks, 0 fail (report `testcases/reports/2026-11-17_conan-launcher-updates.md`). Show page for the owner —
+> review folder `90_launcher_chto_novogo` (opened at the end of this chat). **Pack `950b9e5` pushed after 2 judge rounds** (round 2 re-run 15:55: 74 / 0);
+> **4 RELEASE BLOCKERS in plan 54** (the update resets the player's settings via «Game config»; a new launcher that starts then dies is not rolled back; BuildInfo
+> values from the bundle; no update while an install console runs) — fix them before ANY real release. Left: the blockers; the first REAL launcher release
+> (`gh release create launcher-vX.Y.Z --latest=false`) and a real build release wait for the owner's word; phase 4 (release tooling, the old-bundle cleanup offer).
+> (2) **Auto-relay: the cause of «the deep link opens no tab» FOUND 15:21** — `ELECTRON_RUN_AS_NODE=1` inherited from the extension host made the link's handler run
+> as Node (EXP-0550); fixed in `open-chat.ps1` + the link now carries `windowId` of the project's window from `code --status` (VS Code routes by it). The link reached
+> KUMM and VS Code asked «Allow 'Claude Code for VS Code' extension to open this URI?» — **the owner's tick «Do not ask me again» is owed** (a security consent;
+> called by voice 15:23); until then `relay.mjs` keeps `-NoEnter`. After the tick: L1″ (windowId isolated), L2 (with Enter), L3 (a real chain). KAIF #198 comment 15:22.
+> Also: the game has hotfix 3.1.1 (2026-11-14/15) — `researches/conan_patch_3_1_0/README.md` §6.
+>
 > **NOW (chat of 2026-11-17 11:21) — item 1 BUILT, the live open owed.** `/auto-relay` — `.claude/auto-relay/{relay.mjs,open-chat.ps1,e2e.mjs}`,
 > `.claude/hooks/relay-hook.mjs` (wired in `.claude/settings.json`: UserPromptSubmit + Stop), `.claude/skills/auto-relay/SKILL.md`, one relay line in both closure
 > skills. Agreed with the KAIF session 11:26: no own gauge (context-budget 80 / 92), no HANDOVER.md (STATUS + farewell file), entry «resume auto-relay continue»;
@@ -141,8 +155,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **11:41 the real opener with `-NoEnter` raised the KUMM window over KAIF (log «opened … in 'KUMM - Visual Studio Code'») — yet NO new tab: the focus sat in
 > the RUNNING chat's input; an Enter would have gone there. `relay.mjs open` now passes `-NoEnter` until the link opens a tab (the handler: `Code.exe --open-url`,
 > the same install).** **Live L1 (the deep link by hand, 11:37) — the tab was NOT found** in the KUMM or KAIF window: FOUR VS Code windows are open (KAIF, KCCP, KUMM, the turbine),
-> the link goes to the last active one — the KCCP / turbine windows not checked. **Open:** find where the link lands (`code <folder>` first, then the link) →
-> L2 (the opener with Enter) → L3 (a real chain) → the field report to KAIF origin (check 6; the 4-window finding, UIPI / elevated, `code` without `-r`).
+> the link goes to the last active one — the KCCP / turbine windows not checked. **CORRECTED 15:21 (next chat): the window was not the cause — the link reached
+> NO window because of `ELECTRON_RUN_AS_NODE` (block above, EXP-0550).** Open: L2 (the opener with Enter) → L3 (a real chain) after the owner's tick.
 > Cases `testcases/TC_auto_relay_2026-11-17.md`. The 5-hour usage limit stood at 96 % at 11:39, the harness banner names its reset at 14:40 <!-- claim-ok: the reset time the harness banner printed, a future time by nature -->.
 >
 > **FIRST NEXT CHAT — item 1, the owner's task relayed by the KAIF session `kaif-6d` (2026-11-17 11:02, a peer's message; the owner's word as it quotes it, ≈ 10:55 in

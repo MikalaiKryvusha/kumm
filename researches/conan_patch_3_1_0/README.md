@@ -150,3 +150,9 @@ nothing of our work (all checks of §3 are the same) and removes the crash noise
 | B.7 build id | `CL-383024` |
 | C.8 localization | every vanilla override still applies (`vanilla-override.py --check`: 0 changes) |
 | not in §3 | the mount lines of the game log changed («Mod '…' (<Pak>) mounted successfully from …») — the build line read 0 / 66 until KrinikConanModPackManager was fixed; Pickup+'s admin widget misses a class (`ComboBox_DrawDebugline`) — new error; **cause 2026-11-14:** 3.1.0 REMOVED `/Game/UI/Framework/W_FCComboBoxString` (id `E74E07CCEC0447E7` in 3.0.1, absent in 3.1.0) — any mod widget built on it loses those controls (`games/ConanExiles/mods/Pickup.md`) |
+
+## 6. After the move — hotfix 3.1.1 (read 2026-11-17 14:4x)
+
+The Steam announcements of app 440900 (`ISteamNews/GetNewsForApp`, one anonymous call; table in `researches/conan-launcher-updates/README.md` §2): «November
+Hotfix 3.1.1» 2026-11-14 (BattlEye crashes on all servers and a few other issues), rolled back to 3.1.0 the next day, «(Re-release) November Hotfix 3.1.1»
+2026-11-15 with the same fixes plus more. The build runs on 3.1.0 (plan 53); whether to take 3.1.1 is the owner's download, as with 3.1.0.
