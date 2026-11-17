@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0553 · 2026-11-17 · ❌→✅ · #launcher #winforms #icon #taskbar #stand
+class: the-exe-icon-is-not-the-window-icon
+**Lesson:** `csc -win32icon:` gives the EXE its icon (Explorer, the desktop shortcut) but a WinForms window keeps the generic WinForms icon unless `Form.Icon`
+is set — the taskbar shows the WINDOW's icon. The owner saw it on a test launcher of ours left on his taskbar (`[OWNER]` 21:02 «что за ярлык некрасивый у
+лаунчера на панели задач???»). Fixed: the .ico also embedded as a managed resource (`res.app.ico`, all sizes 16–256) and set as `Form.Icon`; checked by
+`WM_GETICON` on the live window (64 px gold «K»). Second half: a stand launcher left running sat on the owner's taskbar 7 min — the batch now closes every
+process it started from its folder, by PID (`.work/launcher54/close_leftovers.ps1`).
+mechanized: `ConanExiles/_config/launcher/test/window_icon.ps1 -Exe <exe> -Out <dir>` (the live window's icon as an image)
+
 ### EXP-0552 · 2026-11-17 · ❌ · #cleanup #game-move #conan #cache #rule-25
 class: deleting-the-only-record-of-a-version-that-no-longer-exists
 **Lesson:** a cleanup deleted `ConanExiles/_scratch` whole («scratch» = disposable) — it held `paklist-<clean folder>.json`, the ONLY pak list of game 3.1.0 left

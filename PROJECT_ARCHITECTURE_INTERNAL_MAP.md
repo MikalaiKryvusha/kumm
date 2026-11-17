@@ -21,7 +21,7 @@
 | Abstraction | What it *is* (essence) | Responsibility |
 |-------------|------------------------|----------------|
 | **Pack** | A game build with mods, as a folder: manifest + config + archive library. Somebody's private collection; the engine only visits it. | Owns ALL state. `--root` / `-PackDir` name it. |
-| **Manifest** (`modpack.json`) | The pack's declaration: `nexusGame`, `gameExe`, `library`, `mods[]`, optional `engineIni`, `steamEmu`, `packName`, `builtFor`, and for `-Export` `guide`, `extras` (files/folders copied to the bundle root, e.g. wallpapers), `exportConfig`, `shortcut {name, target, icon}` (the bundle's `install.ps1` puts a desktop shortcut to a bundle-root program, the uninstaller removes it; 2026-11-01); per mod `"export": false` — installed by the deploy, left out of `-Export` (dev-only instruments, 2026-10-30); per mod `"engineIni": "<file in its source.folder>"` — the mod's own part of Engine.ini, merged section by section into `engineIni.file` on `-WithEngineIni`, checked line by line by `-Verify`, written alone by `-EngineIniOut <file>` (2026-11-10). | Single source of truth for both halves. |
+| **Manifest** (`modpack.json`) | The pack's declaration: `nexusGame`, `gameExe`, `library`, `mods[]`, optional `engineIni`, `steamEmu`, `packName`, `builtFor`, and for `-Export` `guide`, `extras` (files/folders copied to the bundle root, e.g. wallpapers), `exportConfig`, `shortcut {name, target, icon}` (the bundle's `install.ps1` puts a desktop shortcut to a bundle-root program, the uninstaller removes it; 2026-11-01); per mod `"export": false` — installed by the deploy, left out of `-Export` (dev-only instruments, 2026-10-30); per mod `"engineIni": "<file in its source.folder>"` — the mod's own part of Engine.ini, merged section by section into `engineIni.file` on `-WithEngineIni`, checked line by line by `-Verify`, written alone by `-EngineIniOut <file>` (2026-11-10); `configPolicy {managed[], strip{rel:[keys]}, never[]}` and per mod `playerConfig: true` (the bundle's 'Game config') — the player's settings across an upgrade (2026-11-17, epic 55). | Single source of truth for both halves. |
 | **Library** | The folder of downloaded archives (`library` key; may be an absolute path outside the pack) plus `_unpacked/` and `OLD/`. | Holds *what is installed*, encoded in the file names. |
 | **Archive** | One Nexus file on disk. Its NAME is a record: `<name> <ver> <modId> <ver> <ISO-date> <token>.<ext>`. | Carries mod identity + upload date without any database. |
 | **Card** | One file row on a Nexus mod page, read from `dt[data-id][data-name][data-version][data-date]`. | The remote counterpart of an Archive. |
@@ -76,6 +76,10 @@ by longest common prefix with the name already in the library, tie-broken by clo
 6. **The game is data.** Any hard-coded "Palworld" outside a documented default is a defect — Oblivion
    Remastered must need only a new manifest.
 7. **A deploy verifies itself** unless `-NoVerify`; a failed batch action exits 1.
+8. **A deploy never writes over a running game and never writes the player's own data.** Deploy and `-Restore` refuse while a process runs from the target folder
+   (a build bundle unpacked inside it excepted); `configPolicy.never` paths are refused at the one write door (`Save-Original`). `-Upgrade` (the bundle's
+   `install.ps1`) keeps every settings file the player changed since the install (dpkg conffiles rule: `_kumm_backupshipped.json` = what the build wrote;
+   aside in `_kumm_player` across the restore of the old build; the build's new version beside as `.krinik-new`; `managed` files — the build wins, the player's beside as `.player-<time>`).
 
 ## Key decisions embedded in the architecture
 

@@ -11,8 +11,8 @@
 //         KUMM_DEPLOY=<другой Deploy-ModPack.ps1> — прогнать стенд по копии скрипта.
 // 2026-10-14 14:36: 10 проверок прошли; копия скрипта с дефектом бага 03 (id ровно из четырёх цифр) — красные ровно две названные
 // заранее: «-DryRun: код 0» и «More Katanas (id 41) найден по nexusId». [NOT-TESTED]
-import { mkdirSync, writeFileSync, readFileSync, existsSync, unlinkSync, readdirSync } from 'node:fs'
-import { execFileSync } from 'node:child_process'
+import { mkdirSync, writeFileSync, readFileSync, existsSync, unlinkSync, readdirSync, copyFileSync } from 'node:fs'
+import { execFileSync, spawn } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -350,6 +350,118 @@ try { un2 = execFileSync('cmd', ['/c', SUN], { input: '\r\n\r\n', encoding: 'utf
 expect('ярлык: деинсталлятор игрока убрал ярлык, папка игры как до установки', !existsSync(LNK) && snap(SGAME) === sBefore, `${un2}\n${snap(SGAME)}`)
 expect('ярлык: на НАСТОЯЩЕМ рабочем столе владельца стенд не создал ничего', !existsSync(realLnk), realLnk)
 if (existsSync(LNK)) unlinkSync(LNK)
+
+// ---- обновление сборки сохраняет настройки игрока (-Upgrade в install.ps1; KUMM epic 55 B0/B1, слово владельца 2026-11-17 20:00 «не портил
+// настройки и сейвы игроков»). Путь игрока: выгрузка 1.0.0 → install.ps1 → игрок меняет настройки → выгрузка 1.0.1 → install.ps1 поверх.
+// Таблица решений — testcases/TC_conan_launcher_release_0_9_1_2026-11-17.md §2 (правило dpkg conffiles, researches/conan-launcher-modern-practice §4).
+const GDIR = path.join(DIR, 'upgradepack'), GSRC = path.join(GDIR, 'srcgame'), GG = path.join(GDIR, 'game')
+const CFG = 'Game/Saved/Config/Windows', SGD = 'Game/Saved/SaveGames'
+const at = (root, rel) => path.join(root, ...rel.split('/'))
+const rd = p => existsSync(p) ? readFileSync(p, 'utf8') : '(нет файла)'
+put(at(GSRC, 'FixtureGame.exe'), '')
+put(at(GSRC, `${CFG}/GameUserSettings.ini`), '[/Script/Engine.GameUserSettings]\r\nsg.ShadowQuality=4\r\nResolutionSizeX=1280\r\nResolutionSizeY=720\r\nFrameRateLimit=141.000000\r\n')
+put(at(GSRC, `${CFG}/Input.ini`), '[/Script/Engine.InputSettings]\r\nActionMappings=Jump:Space\r\n')
+put(at(GSRC, `${CFG}/Engine.ini`), '[SystemSettings]\r\nr.Pack=1\r\n')
+put(at(GSRC, `${CFG}/ServerSettings.ini`), '[ServerSettings]\r\nHarvest=1\r\n')
+put(at(GSRC, `${SGD}/ModSettings.sav`), 'mod settings v1')
+put(at(GG, 'FixtureGame.exe'), '')
+put(at(GG, `${SGD}/Markers.sav`), 'players markers')
+put(at(GG, 'Game/Saved/World.db'), 'players world')
+put(path.join(GDIR, 'alpha', 'AlphaArms.pak'), 'pak')
+mkdirSync(path.join(GDIR, 'mods'), { recursive: true })
+const gpack = ver => ({
+  packName: 'KUMM fixture upgrade pack', packVersion: ver, builtFor: 'fixture', nexusGame: 'fixturegame', gameExe: 'FixtureGame.exe', library: 'mods',
+  modsDir: 'Game/Mods', modList: 'Game/Mods/modlist.txt', engineIni: { target: `${CFG}/Engine.ini` },
+  exportConfig: [`${SGD}/ModSettings.sav`],
+  configPolicy: { managed: [`${CFG}/Engine.ini`], strip: { [`${CFG}/GameUserSettings.ini`]: ['ResolutionSizeX', 'ResolutionSizeY', 'FrameRateLimit'] },
+    never: [`${SGD}/Markers.sav`, 'Game/Saved/*.db'] },
+  uninstall: { cmd: 'Uninstall.cmd' },
+  mods: [{ name: 'Alpha', kind: 'pak', version: ver, source: { folder: 'alpha' } }],
+})
+writeFileSync(path.join(GDIR, 'modpack.json'), JSON.stringify(gpack('1.0.0'), null, 2))
+writeFileSync(path.join(GDIR, 'targets.json'), JSON.stringify({ targets: [{ name: 'fixture', path: GG }] }, null, 2))
+const gps = args => {
+  try { return { code: 0, out: execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', DEPLOY, '-PackDir', GDIR, ...args], { encoding: 'utf8' }) } }
+  catch (e) { return { code: e.status ?? 1, out: `${e.stdout ?? ''}${e.stderr ?? ''}` } }
+}
+const ginst = exp => {
+  try { return { code: 0, out: execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', path.join(exp, 'install.ps1'), '-GameDir', GG], { encoding: 'utf8' }) } }
+  catch (e) { return { code: e.status ?? 1, out: `${e.stdout ?? ''}${e.stderr ?? ''}` } }
+}
+const GX1 = path.join(DIR, 'upgrade-export-1'), GX2 = path.join(DIR, 'upgrade-export-2')
+const gx1 = gps(['-Export', GX1, '-ConfigFrom', GSRC])
+const shippedGus = rd(at(GX1, `pack/src/_game-config/${CFG}/GameUserSettings.ini`))
+expect('обновление: выгрузка не везёт ключи экрана (разрешение, 141 к/с), остальное везёт',
+  gx1.code === 0 && !/ResolutionSize|FrameRateLimit/.test(shippedGus) && /sg\.ShadowQuality=4/.test(shippedGus), `${gx1.out}\n${shippedGus}`)
+const g1 = ginst(GX1)
+const SHIP = at(GG, '_kumm_backup/shipped.json')
+expect('обновление: установка 1.0.0 записала shipped.json — пять файлов настроек',
+  g1.code === 0 && existsSync(SHIP) && Object.keys(JSON.parse(readFileSync(SHIP, 'utf8')).files).length === 5, `${g1.out}\n${rd(SHIP)}`)
+// игрок меняет: качество, клавишу, Engine.ini; ServerSettings и настройки мода не трогает
+const PLAYER_GUS = '[/Script/Engine.GameUserSettings]\r\nsg.ShadowQuality=1\r\nResolutionSizeX=2560\r\n'
+const PLAYER_IN = '[/Script/Engine.InputSettings]\r\nActionMappings=Jump:LeftAlt\r\n'
+writeFileSync(at(GG, `${CFG}/GameUserSettings.ini`), PLAYER_GUS)
+writeFileSync(at(GG, `${CFG}/Input.ini`), PLAYER_IN)
+writeFileSync(at(GG, `${CFG}/Engine.ini`), '[SystemSettings]\r\nr.Pack=1\r\nr.Player=1\r\n')
+// сборка 1.0.1 меняет: ServerSettings, Input (тот же файл, что игрок), Engine.ini (managed), настройки мода; GameUserSettings не меняет
+writeFileSync(at(GSRC, `${CFG}/ServerSettings.ini`), '[ServerSettings]\r\nHarvest=2\r\n')
+writeFileSync(at(GSRC, `${CFG}/Input.ini`), '[/Script/Engine.InputSettings]\r\nActionMappings=Jump:Space\r\nActionMappings=Roll:C\r\n')
+writeFileSync(at(GSRC, `${CFG}/Engine.ini`), '[SystemSettings]\r\nr.Pack=2\r\n')
+writeFileSync(at(GSRC, `${SGD}/ModSettings.sav`), 'mod settings v2')
+writeFileSync(path.join(GDIR, 'modpack.json'), JSON.stringify(gpack('1.0.1'), null, 2))
+const gx2 = gps(['-Export', GX2, '-ConfigFrom', GSRC])
+const worldBefore = rd(at(GG, 'Game/Saved/World.db')) + rd(at(GG, `${SGD}/Markers.sav`))
+const g2 = ginst(GX2)
+const cfg = rel => rd(at(GG, `${CFG}/${rel}`))
+const playerCopies = readdirSync(at(GG, CFG)).filter(n => n.startsWith('Engine.ini.player-'))
+expect('обновление: install.ps1 поверх 1.0.0 — откат старой и установка новой прошли', gx2.code === 0 && g2.code === 0 && /an installed build found/.test(g2.out), `${gx2.out}\n${g2.out}`)
+expect('обновление: игрок не трогал ServerSettings — новая версия сборки', cfg('ServerSettings.ini').includes('Harvest=2'), cfg('ServerSettings.ini'))
+expect('обновление: игрок поменял качество — его GameUserSettings на месте, рядом ничего (сборка файл не меняла)',
+  cfg('GameUserSettings.ini') === PLAYER_GUS && !existsSync(at(GG, `${CFG}/GameUserSettings.ini.krinik-new`)), `${cfg('GameUserSettings.ini')}\n${g2.out}`)
+expect('обновление: игрок и сборка оба поменяли Input — файл игрока, версия сборки рядом .krinik-new',
+  cfg('Input.ini') === PLAYER_IN && /Roll:C/.test(rd(at(GG, `${CFG}/Input.ini.krinik-new`))), `${cfg('Input.ini')}\n${g2.out}`)
+expect('обновление: Engine.ini (managed) — версия сборки, файл игрока рядом .player-<время>',
+  /r\.Pack=2/.test(cfg('Engine.ini')) && !/r\.Player/.test(cfg('Engine.ini')) && playerCopies.length === 1 && /r\.Player=1/.test(rd(at(GG, `${CFG}/${playerCopies[0]}`))), `${cfg('Engine.ini')}\n${playerCopies}`)
+expect('обновление: настройки мода игрок не трогал — версия сборки 1.0.1', rd(at(GG, `${SGD}/ModSettings.sav`)) === 'mod settings v2', rd(at(GG, `${SGD}/ModSettings.sav`)))
+expect('обновление: мир и метки карты байт в байт, папки отложенного не осталось',
+  rd(at(GG, 'Game/Saved/World.db')) + rd(at(GG, `${SGD}/Markers.sav`)) === worldBefore && !existsSync(at(GG, '_kumm_player')), `${g2.out}`)
+// путь 0.9.0: старая сборка не вела shipped.json — каждый файл игрока считается его, ничего не теряется
+if (existsSync(SHIP)) unlinkSync(SHIP)
+writeFileSync(at(GG, `${CFG}/ServerSettings.ini`), '[ServerSettings]\r\nHarvest=9\r\n')
+const g3 = ginst(GX2)
+expect('обновление: без shipped.json (сборка 0.9.0) — предупреждение, все файлы игрока на месте',
+  g3.code === 0 && /kept no record of the settings it shipped/.test(g3.out) && cfg('ServerSettings.ini').includes('Harvest=9') && cfg('GameUserSettings.ini') === PLAYER_GUS, g3.out)
+// данные игрока (configPolicy.never) сборка не пишет никогда — контроль: мод, который пытается, падает с причиной
+const mpN = gpack('1.0.2'); put(path.join(GDIR, 'evil', 'Markers.sav'), 'overwritten')
+mpN.mods.push({ name: 'Evil', kind: 'files', version: '1', source: { folder: 'evil' }, install: [{ from: 'Markers.sav', to: `${SGD}/Markers.sav` }], verify: [`${SGD}/Markers.sav`] })
+writeFileSync(path.join(GDIR, 'modpack.json'), JSON.stringify(mpN, null, 2))
+const g4 = gps(['-Deploy', '-NoVerify'])
+expect('обновление: мод, пишущий метки карты игрока (never), — отказ с причиной, файл игрока цел',
+  /refusing to write .*Markers\.sav.*configPolicy\.never/.test(g4.out) && rd(at(GG, `${SGD}/Markers.sav`)) === 'players markers', g4.out)
+// обновление, в котором один мод упал (Evil пишет в never), — отложенное игрока всё равно возвращается (судья, круг 1, п. 2)
+const g4u = gps(['-Deploy', '-Upgrade', '-NoVerify'])
+expect('обновление: мод упал посреди -Upgrade — настройки игрока всё равно на месте, отложенной папки нет',
+  /refusing to write/.test(g4u.out) && cfg('GameUserSettings.ini') === PLAYER_GUS && !existsSync(at(GG, '_kumm_player')) && !existsSync(at(GG, '_kumm_player.partial')), g4u.out)
+writeFileSync(path.join(GDIR, 'modpack.json'), JSON.stringify(gpack('1.0.1'), null, 2))
+// игра запущена из папки игры — раскатка и откат отказывают до первой записи (2026-11-17 20:30: 73 из 75 поверх живой игры)
+const FAKE = at(GG, 'Game/Binaries/FakeGame.exe')
+mkdirSync(path.dirname(FAKE), { recursive: true }); copyFileSync('C:\\Windows\\System32\\PING.EXE', FAKE)
+const fakeProc = spawn(FAKE, ['-n', '40', '127.0.0.1'], { detached: true, stdio: 'ignore' })
+const PAKG = at(GG, 'Game/Mods/AlphaArms.pak'), pakBefore = rd(PAKG), jrBefore = rd(at(GG, '_kumm_backup/journal.txt'))
+writeFileSync(path.join(GDIR, 'alpha', 'AlphaArms.pak'), 'pak v3')   // раскатка поверх игры обязана была бы его переписать (судья, п. 12)
+const g5 = gps(['-Deploy', '-NoVerify'])
+expect('обновление: игра запущена из папки — отказ «running from the game folder», пак в игре и журнал не тронуты',
+  g5.code !== 0 && /running from the game folder: FakeGame \(PID \d+\)/.test(g5.out) && rd(PAKG) === pakBefore && rd(at(GG, '_kumm_backup/journal.txt')) === jrBefore, `${g5.out}\n${rd(PAKG)}`)
+const g5r = gps(['-Restore', '-GameDir', GG])
+expect('обновление: откат при запущенной игре — отказ с кодом 1, журнал цел', g5r.code === 1 && /running from the game folder/.test(g5r.out) && existsSync(at(GG, '_kumm_backup/journal.txt')), g5r.out)
+try { process.kill(fakeProc.pid) } catch { }
+writeFileSync(path.join(GDIR, 'alpha', 'AlphaArms.pak'), 'pak')
+let gUn = ''
+try { gUn = execFileSync('cmd', ['/c', at(GG, 'Uninstall.cmd')], { input: '\r\n\r\n', encoding: 'utf8' }) } catch (e) { gUn = `${e.stdout ?? ''}${e.stderr ?? ''} code ${e.status}` }
+expect('обновление: деинсталлятор после обновления — .krinik-new убран, мир и метки целы, копия Engine.ini игрока осталась (его файл)',
+  !existsSync(at(GG, `${CFG}/Input.ini.krinik-new`)) && rd(at(GG, 'Game/Saved/World.db')) === 'players world' && rd(at(GG, `${SGD}/Markers.sav`)) === 'players markers' &&
+  existsSync(at(GG, CFG)) && readdirSync(at(GG, CFG)).some(n => n.startsWith('Engine.ini.player-') && /r\.Player=1/.test(rd(at(GG, `${CFG}/${n}`)))),
+  `${gUn}\n${existsSync(at(GG, CFG)) ? readdirSync(at(GG, CFG)) : '(нет папки)'}`)
 
 console.log(bad ? `\nСТЕНД: ${bad} провал(ов)` : '\nстенд: все проверки прошли')
 process.exit(bad ? 1 : 0)

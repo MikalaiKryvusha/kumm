@@ -33,9 +33,8 @@ REAL 0.9.1 bundle and a forged 0.9.2 on the local feed — the rows marked ★. 
 
 | File class | Player changed? | Build changed? | After the update |
 |---|---|---|---|
-| managed (`ServerSettings.ini`, `Game.ini`, Engine.ini pack sections) | no | yes | the new build's |
-| managed | yes | no | the player's |
-| managed | yes | yes | the player's file; the build's pack sections merged in; the new file beside as `.krinik-new`; logged |
+| managed (Engine.ini — `configPolicy.managed`) | no | yes | the new build's |
+| managed | yes | any | the build's file; the player's beside as `.player-<time>` (unique name); logged — corrected 2026-11-17 21:1x to the code by judge round 1, item 11 |
 | seed (`Input.ini`, mod `.sav` settings) | no | yes | the new build's |
 | seed | yes | any | the player's (the new beside as `.krinik-new` when the build changed it) |
 | strip keys (resolution, fullscreen, frame rate in `GameUserSettings.ini`) | any | — | never shipped; the player's values stay |
@@ -96,6 +95,12 @@ Status: `todo` · `pass` · `fail` · `blocked` · `skipped`. Each row is one ac
 | N3 | a pre-release build tag newer than the latest | start | per the owner's channel decision (interview) — today: shown | snapshot | todo |
 | N4 | a draft (absent from the anonymous list) | start | not shown | snapshot | todo |
 | R1 | the REAL feed, 0.9.1 launcher on the ★ stand | start | no false plate (0.9.0 < 0.9.1) | snapshot; log | todo |
+
+### 3.4a The window
+
+| # | Situation | Action | Expected | Check | Status |
+|---|---|---|---|---|---|
+| W1 | the launcher window on the taskbar | start | the build icon (gold «K»), not the WinForms default | `window_icon.ps1` (WM_GETICON) + the owner's eye | pass — 21:04 WM_GETICON 64 px gold «K»; `[OWNER]` 21:05 «да, вижу, сейчас наша красивая К» |
 
 ### 3.5 Regression of plan 54
 

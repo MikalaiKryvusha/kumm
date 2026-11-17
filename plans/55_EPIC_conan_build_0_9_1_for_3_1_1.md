@@ -66,7 +66,7 @@ Phase B and phase A run in parallel (B needs no game: the fixture stand). D need
 - [x] A3. (20:18, `save-restore.sh --check` «live save: ok») The world save and mod saves from `KUMM/.work/disk_d/save_3_1_0/` into the build (game closed; `save-restore.sh --check` on the db).
 - [x] A4. (20:26–20:33: UE4SS on CL-383549, 66/66 mounted, 0 too old / missing imports, paths 90 = 90, `-WithEngineIni` + `deploy-config.py`, the world in 14 s, «СБОРКА: моды 66/66») First start under the lock (background path): UE4SS log, game log, the menu, the mod list; `[Core.System]` paths vs the pack Engine.ini
       (`swap-core-paths.py`); then `-Deploy -WithEngineIni` + `deploy-config.py`; the second start; the world.
-- [ ] A5. (PARTLY 20:4x: the asset-level diff is BLOCKED — the 3.1.0 pak list is lost, EXP-0552; the kit is still 383024; `check-mod-updates.py` still to run) What the hotfix changed: `patch-rollback.py` on the installed mods; `check-mod-updates.py --since 2026-11-13 --all` (authors' 3.1.1 updates); the kit revision
+- [x] A5. (20:5x: `check-mod-updates.py --since 2026-11-13 --all` — newer than our copies 0; 4 rebuilt after the patch, all four ours; 61 not yet rebuilt by their authors (they load: 0 too old); Doubled Storage Size gone from the Workshop — our library copy stays; the asset-level diff BLOCKED — the 3.1.0 pak list is lost, EXP-0552; the kit is still 383024) What the hotfix changed: `patch-rollback.py` on the installed mods; `check-mod-updates.py --since 2026-11-13 --all` (authors' 3.1.1 updates); the kit revision
       of 3.1.1 (`F:\CEUE5Devkit` — an Epic update after 2026-11-14?) and whether our kit paks load («too old»).
 - [x] A6. (P1–P7 of the TC: 6 pass, P6 blocked; the hub pages with values) The Krinik mods' quick cases on 3.1.1 (the hub pages, the map, the bow, the wall grab) — a short TC `testcases/TC_conan_move_3.1.1_2026-11-17.md`.
 
@@ -91,6 +91,15 @@ The design inputs already read (local recon, 2026-11-17 20:1x): the deploy's und
 shipped config set is `Saved/Config/Windows/*.ini` + `exportConfig` (four mod `.sav`: Hosav UI, Simple Minimap settings, Proximity Party, Damage Meter); the
 map markers (`SimpleMinimap_MarkerData.sav`), the damage logs and `Game_0.db` are never written by the build, so the journal never touches them. The bundle's
 `install.ps1` (written by `Write-BundleInstaller`) runs `-Deploy` only — it knows nothing of an installed older build.
+
+### Phase E — publication: decided ahead
+
+- **0.9.1 is published as an ordinary GitHub release, NOT «Pre-release»**: the launcher's feed skips drafts and pre-releases (`ConanExiles/_config/launcher/KrinikConanUpdates.cs`
+  `Feed.Parse`), and `/releases/latest` (the build's «Что нового» fallback) ignores them too (research §1.4) — a pre-release 0.9.1 would be invisible to every
+  launcher. «Предварительная» goes into the release TITLE and the notes. 0.9.0 is for game 3.0.1, so 0.9.1 becomes «Latest» rightly. `[AI]` — named to the owner
+  in the report of 2026-11-17; his word overrides.
+- The Nexus file: the same bundle; the description says what the launcher downloads and from where (the 0.9.0 quarantine letters said «None of the scripts
+  downloads or runs anything from the internet» — no longer true; the new text must say it plainly).
 
 ## Risks
 

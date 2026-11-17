@@ -75,7 +75,8 @@ param(
     [string]$ConfigFrom,
     [switch]$Zip,
     [int]$ZipPartMB = 0,
-    [string]$EngineIniOut
+    [string]$EngineIniOut,
+    [switch]$Upgrade
 )
 
 $ErrorActionPreference = 'Stop'
@@ -134,7 +135,7 @@ function Read-Journal {
     # Строки журнала по порядку: @{ Kind; Rel }.
     param([string]$Root)
     $path = Get-JournalPath $Root
-    if (-not (Test-Path $path)) { return @() }
+    if (-not (Test-Path -LiteralPath $path)) { return @() }
     return @(foreach ($line in [System.IO.File]::ReadAllLines($path, [System.Text.Encoding]::UTF8)) {
         if (-not $line -or $line.StartsWith('#')) { continue }
         $p = $line -split "`t", 2
@@ -146,9 +147,9 @@ function Add-JournalLine {
     param([string]$Root, [string]$Kind, [string]$Rel)
     $path = Get-JournalPath $Root
     $dir = Split-Path $path -Parent
-    if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
+    if (-not (Test-Path -LiteralPath $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
     $utf8 = New-Object System.Text.UTF8Encoding($false)
-    if (-not (Test-Path $path)) {
+    if (-not (Test-Path -LiteralPath $path)) {
         $head = "# KUMM install journal - the state of this folder before the build. Undo: Deploy-ModPack.ps1 -Restore -GameDir <this game>`r`n"
         [System.IO.File]::WriteAllText($path, $head, $utf8)
     }
@@ -165,6 +166,13 @@ function Save-Original {
     if (-not $full.StartsWith($root + '\', [System.StringComparison]::OrdinalIgnoreCase)) { return }
     $rel = $full.Substring($root.Length + 1)
     if ($rel.StartsWith($script:BackupDirName + '\', [System.StringComparison]::OrdinalIgnoreCase)) { return }
+    # configPolicy.never - данные игрока (мир, метки карты, журналы боёв): сборка их не пишет никогда, значит и откат их не тронет.
+    # Отказ здесь, у единственной двери записи, а не надежда на то, что их нет в бандле (epic 55 B1). [NOT-TESTED]
+    if ($script:pack -and $script:pack.configPolicy) {
+        foreach ($x in @($script:pack.configPolicy.never)) {
+            if ($x -and (($rel -replace '\\', '/') -like ($x -replace '\\', '/'))) { throw "refusing to write $rel - the manifest marks it as the player's own data (configPolicy.never: $x)" }
+        }
+    }
     if (-not $script:Journals.ContainsKey($root)) {
         $map = @{}
         foreach ($e in (Read-Journal $root)) { $map[$e.Rel.ToLowerInvariant()] = $e.Kind }
@@ -190,13 +198,53 @@ function Save-Original {
     Add-JournalLine $root 'created' $rel
 }
 
+function Get-GameProcesses {
+    # Процессы, запущенные из папки игры. Раскатка поверх живой игры пишет половину: 2026-11-17 20:30 через 300 мс после
+    # Stop-Process легли 73 из 75 модов - dwmapi.dll UE4SS и плеер музыки были заняты (KUMM epic 55 B4, отчёт
+    # testcases/reports/2026-11-17_conan-move-3-1-1.md). Признак - путь exe под корнем цели. Исключение - папка сборки,
+    # распакованная в папку игры (в ней лежит pack\modpack.json): оттуда работает лаунчер, который и зовёт обновление. [NOT-TESTED]
+    # Судья 2026-11-17 (круг 1, п. 6): исключения — предки этого процесса (лаунчер, который ждёт установщик, где бы он ни лежал) и процесс, в чьей
+    # папке лежит pack\modpack.json (сборка распакована прямо в корень игры); путь, который не прочесть (игра запущена от администратора), — по имени:
+    # лист gameExe манифеста и *-Win64-Shipping.
+    param([string]$Root)
+    $r = $Root.TrimEnd('\') + '\'
+    $mine = @{}
+    try {
+        $all = @(Get-CimInstance Win32_Process -ErrorAction Stop | Select-Object ProcessId, ParentProcessId)
+        $par = @{}; foreach ($x in $all) { $par[[int]$x.ProcessId] = [int]$x.ParentProcessId }
+        $id = $PID
+        for ($i = 0; $i -lt 32 -and $id -and -not $mine.ContainsKey($id); $i++) { $mine[$id] = $true; $id = $par[$id] }
+    } catch { $mine[$PID] = $true }
+    $exeLeaf = if ($script:pack -and $script:pack.gameExe) { [System.IO.Path]::GetFileNameWithoutExtension(($script:pack.gameExe -replace '/', '\')) } else { '' }
+    return @(Get-Process -ErrorAction SilentlyContinue | Where-Object {
+        if ($mine.ContainsKey($_.Id)) { return $false }
+        $p = $null
+        try { $p = $_.Path } catch { }
+        if (-not $p) { return ($exeLeaf -and ($_.ProcessName -eq $exeLeaf -or $_.ProcessName -eq "$exeLeaf-Win64-Shipping")) }
+        if (-not $p.StartsWith($r, [System.StringComparison]::OrdinalIgnoreCase)) { return $false }
+        $top = ($p.Substring($r.Length) -split '\\', 2)[0]
+        if (Test-Path -LiteralPath (Join-Path (Split-Path $p -Parent) 'pack\modpack.json')) { return $false }
+        -not (Test-Path -LiteralPath (Join-Path (Join-Path $r $top) 'pack\modpack.json'))
+    })
+}
+
+function Test-GameIdle {
+    # $true - из папки игры ничего не запущено; иначе печатает, что держит папку, и $false.
+    param([string]$Root)
+    $gp = @(Get-GameProcesses $Root)
+    if ($gp.Count -eq 0) { return $true }
+    foreach ($p in $gp) { Bad "running from the game folder: $($p.ProcessName) (PID $($p.Id)) - close it first; nothing was written" }
+    return $false
+}
+
 function Invoke-Restore {
     # Откат папки игры по журналу: созданное - удалить, заменённое - вернуть копию, пустые новые папки - убрать.
-    # Код: 0 - откат полный, папка копий удалена; 1 - журнала нет или что-то не вернулось (копии остаются).
+    # Код: 0 - откат полный, папка копий удалена; 1 - журнала нет или что-то не вернулось (копии остаются); 1 и при живой игре.
     param([string]$GamePath)
     $root = (Resolve-Path $GamePath).Path.TrimEnd('\')
     $entries = @(Read-Journal $root)
     Head "restore  $root"
+    if (-not (Test-GameIdle $root)) { return 1 }
     if ($entries.Count -eq 0) { Bad "no install journal: $(Get-JournalPath $root) - this folder was not installed by a journaling KUMM"; return 1 }
     $store = Join-Path (Join-Path $root $script:BackupDirName) 'files'
     $restored = 0; $deleted = 0; $dirs = @(); $failed = 0
@@ -231,6 +279,163 @@ function Invoke-Restore {
     Remove-Item -LiteralPath (Join-Path $root $script:BackupDirName) -Recurse -Force
     Ok "the game folder is back to its state before the build; backup folder removed"
     return 0
+}
+
+# ------------------------------------------------------ player settings across an upgrade (-Upgrade)
+# Обновление сборки снимало старую (откат по журналу возвращает копии ДО сборки) и ставило новую (её умолчания): всё, что
+# игрок поменял после установки - качество, клавиши, настройки модов - пропадало (KUMM plan 54 blocker 2; слово владельца
+# 2026-11-17 20:00 «не портил настройки и сейвы игроков», epic 55 B1). Правило dpkg conffiles (researches/conan-launcher-
+# modern-practice §1.2, §4): установка записывает SHA-256 выданных файлов настроек в _kumm_backup\shipped.json; при -Upgrade
+#   файл совпадает с выданным старой сборкой  -> игрок не трогал: остаётся новая версия;
+#   отличается (или старая сборка записи не вела) -> файл игрока: откладывается в <игра>\_kumm_player\ до отката и
+#   возвращается после установки; если новая сборка этот файл поменяла - её версия ложится рядом, <файл>.krinik-new;
+#   configPolicy.managed (Engine.ini - настройка движка сборки) - наоборот: остаётся версия сборки, файл игрока - рядом,
+#   <файл>.player-<время>.
+# Файлы настроек = цели шагов install модов с "playerConfig": true (мод 'Game config' бандла) + записи старого shipped.json.
+# Папка _kumm_player переживает обрыв: найдена в начале -Upgrade - прошлое обновление не дошло, берём отложенное оттуда. [NOT-TESTED]
+$script:PlayerDirName = '_kumm_player'
+
+function Get-Sha256 { param([string]$Path) return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant() }
+function Get-ShippedPath { param([string]$Root) return (Join-Path (Join-Path $Root $script:BackupDirName) 'shipped.json') }
+
+function Read-Shipped {
+    # @{ rel -> sha256 } выданного старой сборкой или $null (сборка до 0.9.1 его не писала).
+    param([string]$Root)
+    $p = Get-ShippedPath $Root
+    if (-not (Test-Path -LiteralPath $p)) { return $null }
+    # Битый файл (обрыв записи) — не стоп на каждом повторе, а безопасный путь «всё — игрока» (судья, круг 1, п. 8).
+    try { $o = [System.IO.File]::ReadAllText($p, [System.Text.Encoding]::UTF8) | ConvertFrom-Json }
+    catch { Warn "shipped.json unreadable ($($_.Exception.Message)) - every settings file is treated as the player's"; return $null }
+    $h = @{}
+    foreach ($prop in $o.files.PSObject.Properties) { $h[$prop.Name] = [string]$prop.Value }
+    return $h
+}
+
+function Get-PlayerConfigRels {
+    # Относительные пути (через /) файлов настроек, которые кладёт сборка: шаги install модов с playerConfig.
+    param($Mods)
+    $rels = @()
+    foreach ($m in @($Mods)) {
+        if (-not $m.playerConfig) { continue }
+        foreach ($s in @($m.install)) { if ($s.to) { $rels += ($s.to -replace '\\', '/') } }
+    }
+    return $rels
+}
+
+function Test-ManagedConfig {
+    param([string]$Rel)
+    foreach ($x in @($script:pack.configPolicy.managed)) { if ($x -and ($Rel -replace '\\', '/') -like ($x -replace '\\', '/')) { return $true } }
+    return $false
+}
+
+function Save-PlayerConfig {
+    # ДО отката: файлы, которые игрок поменял, - в _kumm_player\<rel>. Возвращает число отложенных.
+    # Пишется в _kumm_player.partial и переименовывается целиком в конце: оборванная запись не выдаёт себя за полную (судья, круг 1, п. 1).
+    # Готовая _kumm_player от прошлого обрыва: файл игрока, который с тех пор менялся (не равен ни отложенному, ни выданному), — новее и побеждает;
+    # отложенная копия ложится рядом с ним как <файл>.player-<время> (п. 2) — ничего не теряется.
+    param([string]$Root, [string[]]$Rels, $Shipped)
+    $aside = Join-Path $Root $script:PlayerDirName
+    $partial = "$aside.partial"
+    if (Test-Path -LiteralPath $partial) { Remove-Tree $partial }
+    if (Test-Path -LiteralPath $aside) {
+        Warn "an unfinished upgrade left $script:PlayerDirName - its saved player files are used, newer edits since then win"
+        foreach ($rel in ($Rels | Sort-Object -Unique)) {
+            $full = Join-Path $Root ($rel -replace '/', '\'); $kept = Join-Path $aside ($rel -replace '/', '\')
+            if (-not (Test-Path -LiteralPath $full -PathType Leaf)) { continue }
+            $now = Get-Sha256 $full
+            $isShipped = $Shipped -and $Shipped.ContainsKey($rel) -and $Shipped[$rel] -eq $now
+            if ($isShipped) { continue }
+            if (Test-Path -LiteralPath $kept) {
+                if ((Get-Sha256 $kept) -eq $now) { continue }
+                Copy-Item -LiteralPath $kept (Get-FreeName "$kept.player-$(Get-Date -Format 'yyyyMMdd-HHmmss')") -Force
+            }
+            New-Item -ItemType Directory -Path (Split-Path $kept -Parent) -Force | Out-Null
+            Copy-Item -LiteralPath $full $kept -Force
+        }
+        return -1
+    }
+    $n = 0
+    foreach ($rel in ($Rels | Sort-Object -Unique)) {
+        $full = Join-Path $Root ($rel -replace '/', '\')
+        if (-not (Test-Path -LiteralPath $full -PathType Leaf)) { continue }
+        $key = $rel   # @{} PowerShell сравнивает ключи без учёта регистра
+        $changed = (-not $Shipped) -or (-not $Shipped.ContainsKey($key)) -or ($Shipped[$key] -ne (Get-Sha256 $full))
+        if (-not $changed) { continue }
+        $dst = Join-Path $partial ($rel -replace '/', '\')
+        New-Item -ItemType Directory -Path (Split-Path $dst -Parent) -Force | Out-Null
+        Copy-Item -LiteralPath $full $dst -Force
+        $n++
+    }
+    if ($n -gt 0) { Rename-Item -LiteralPath $partial -NewName (Split-Path $aside -Leaf) }
+    Ok "player settings: $n changed file(s) set aside in $script:PlayerDirName"
+    return $n
+}
+
+function Get-FreeName {
+    # Имя, которого ещё нет: <name>, иначе <name>-2, -3… (две копии в одну секунду не затирают друг друга — судья, круг 1, п. 4).
+    param([string]$Path)
+    if (-not (Test-Path -LiteralPath $Path)) { return $Path }
+    for ($i = 2; ; $i++) { if (-not (Test-Path -LiteralPath "$Path-$i")) { return "$Path-$i" } }
+}
+
+function Remove-Tree {
+    # Папка — пофайлово (рекурсивное удаление одним вызовом в проекте не принято).
+    param([string]$Dir)
+    foreach ($f in @(Get-ChildItem -LiteralPath $Dir -Recurse -File -Force)) { Remove-Item -LiteralPath $f.FullName -Force }
+    foreach ($d in @(Get-ChildItem -LiteralPath $Dir -Recurse -Directory -Force | Sort-Object { $_.FullName.Length } -Descending)) { Remove-Item -LiteralPath $d.FullName -Force }
+    Remove-Item -LiteralPath $Dir -Force
+}
+
+function Restore-PlayerConfig {
+    # ПОСЛЕ установки: отложенное игрока - на место по правилу выше; папка _kumm_player удаляется пофайлово.
+    param($Target, $OldShipped, $NewShipped)
+    $root = $Target.Path.TrimEnd('\')
+    $aside = Join-Path $root $script:PlayerDirName
+    if (-not (Test-Path -LiteralPath $aside)) { return }
+    $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+    foreach ($f in @(Get-ChildItem -LiteralPath $aside -Recurse -File)) {
+        $rel = $f.FullName.Substring($aside.Length + 1)
+        $relF = $rel -replace '\\', '/'
+        $dst = Join-Path $root $rel
+        # Отложенная копия «.player-<время>» (из повторного обрыва) — его файл, ложится рядом как есть.
+        if ($relF -match '\.player-\d{8}-\d{6}(-\d+)?$') { New-Item -ItemType Directory -Path (Split-Path $dst -Parent) -Force | Out-Null; Copy-Item -LiteralPath $f.FullName (Get-FreeName $dst) -Force; continue }
+        New-Item -ItemType Directory -Path (Split-Path $dst -Parent) -Force | Out-Null
+        if ((Test-ManagedConfig $relF) -and (Test-Path -LiteralPath $dst)) {
+            if ((Get-Sha256 $dst) -eq (Get-Sha256 $f.FullName)) { continue }
+            $beside = Get-FreeName "$dst.player-$stamp"
+            Copy-Item -LiteralPath $f.FullName $beside -Force
+            Ok "settings: the build's $relF kept; yours saved beside as $(Split-Path $beside -Leaf)"
+            continue
+        }
+        $key = $relF
+        # Новая сборка поменяла файл: в новой записи он есть, а в старой его нет, нет самой записи или хеш другой (судья, круг 1, п. 3).
+        $buildChanged = $NewShipped -and $NewShipped.ContainsKey($key) -and ((-not $OldShipped) -or (-not $OldShipped.ContainsKey($key)) -or ($OldShipped[$key] -ne $NewShipped[$key]))
+        if ((Test-Path -LiteralPath $dst) -and $buildChanged -and ((Get-Sha256 $dst) -ne (Get-Sha256 $f.FullName))) {
+            Save-Original -Target $Target -Path "$dst.krinik-new"
+            Copy-Item -LiteralPath $dst "$dst.krinik-new" -Force
+            Ok "settings: your $relF kept; the new build's version beside as $(Split-Path $dst -Leaf).krinik-new"
+        }
+        else { Ok "settings: your $relF kept" }
+        # Файл, которого новая сборка не кладёт, — в журнал до записи: деинсталлятор вернёт то, что было до сборки (п. 13).
+        if (-not (Test-Path -LiteralPath $dst)) { Save-Original -Target $Target -Path $dst }
+        Copy-Item -LiteralPath $f.FullName $dst -Force
+    }
+    Remove-Tree $aside
+}
+
+function Write-Shipped {
+    # SHA-256 файлов настроек, как их выдала ЭТА установка (до возврата файлов игрока) - в _kumm_backup\shipped.json.
+    param([string]$Root, [string[]]$Rels)
+    $h = [ordered]@{}; $lc = @{}
+    foreach ($rel in ($Rels | Sort-Object -Unique)) {
+        $full = Join-Path $Root ($rel -replace '/', '\')
+        if (Test-Path -LiteralPath $full -PathType Leaf) { $s = Get-Sha256 $full; $h[$rel] = $s; $lc[$rel] = $s }
+    }
+    $p = Get-ShippedPath $Root
+    New-Item -ItemType Directory -Path (Split-Path $p -Parent) -Force | Out-Null
+    $json = [pscustomobject]@{ comment = 'KUMM: SHA-256 of the settings files this build installed; an upgrade keeps every file the player changed since.'; files = [pscustomobject]$h } | ConvertTo-Json -Depth 5
+    [System.IO.File]::WriteAllText($p, $json, (New-Object System.Text.UTF8Encoding($false)))
+    return $lc
 }
 
 if ($Restore) {
@@ -999,7 +1204,7 @@ function Invoke-DeployTarget {
     # Текст - из шаблона пака (manifest.uninstall.template, UTF-8, {BACKUP} = папка копий): этот файл без BOM,
     # Windows PowerShell 5.1 прочёл бы кириллицу в его строках как ANSI.
     $un = $script:pack.uninstall
-    if (-not $Plan -and $un -and $un.cmd -and (Test-Path (Get-JournalPath $Target.Path.TrimEnd('\')))) {
+    if (-not $Plan -and $un -and $un.cmd -and (Test-Path -LiteralPath (Get-JournalPath $Target.Path.TrimEnd('\')))) {
         try {
             $bdir = Join-Path $Target.Path $script:BackupDirName
             Copy-Item $PSCommandPath (Join-Path $bdir 'Deploy-ModPack.ps1') -Force
@@ -1427,6 +1632,9 @@ function Invoke-Action {
 
     $problems = ($broken.Count -gt 0)
     $summary = @()
+    $script:SkipEngineIni = @()
+    # -Upgrade снимает ВСЮ прежнюю сборку — с -Only поставилось бы только подмножество (судья, круг 1, п. 9).
+    if ($Upgrade -and $script:OnlyMods) { throw '-Upgrade cannot be combined with -Only' }
 
     try {
         foreach ($t in $live) {
@@ -1444,7 +1652,7 @@ function Invoke-Action {
                 'remove' {
                     Head "remove  $($t.Name)  ->  $($t.Path)"
                     # Полное удаление при журнале отката = откат по журналу: вернуть заменённое, а не только стереть своё.
-                    if (-not $script:OnlyMods -and -not $Plan -and (Test-Path (Get-JournalPath $t.Path.TrimEnd('\')))) {
+                    if (-not $script:OnlyMods -and -not $Plan -and (Test-Path -LiteralPath (Get-JournalPath $t.Path.TrimEnd('\')))) {
                         $rc = Invoke-Restore -GamePath $t.Path
                         $unCmd = if ($pack.uninstall -and $pack.uninstall.cmd) { Join-Path $t.Path $pack.uninstall.cmd } else { $null }
                         if ($rc -eq 0 -and $unCmd -and (Test-Path -LiteralPath $unCmd)) { Remove-Item -LiteralPath $unCmd -Force; Ok "deleted $($pack.uninstall.cmd)" }
@@ -1457,7 +1665,55 @@ function Invoke-Action {
                 }
                 'deploy' {
                     Head "deploy  $($t.Name)  ->  $($t.Path)"
+                    $root = $t.Path.TrimEnd('\')
+                    if (-not $Plan -and -not (Test-GameIdle $root)) {
+                        $problems = $true
+                        $script:SkipEngineIni += $t.Name   # -WithEngineIni не пишет в отказанную цель (судья, круг 1, п. 5)
+                        $summary += [pscustomobject]@{ Name = $t.Name; Result = 'refused: the game runs from this folder'; Bad = $true }
+                        continue
+                    }
+                    # -Upgrade (install.ps1 бандла): поверх стоящей сборки - отложить настройки игрока, снять старую, поставить новую,
+                    # вернуть отложенное (блок «player settings across an upgrade» выше). Без журнала - чистая установка + shipped.json.
+                    $cfgRels = @(); $oldShipped = $null
+                    if ($Upgrade -and -not $Plan) {
+                        $cfgRels = @(Get-PlayerConfigRels $mods)
+                        if (Test-Path -LiteralPath (Get-JournalPath $root)) {
+                            Head "upgrade  $($t.Name): an installed build found - the player's settings are kept"
+                            $oldShipped = Read-Shipped $root
+                            if (-not $oldShipped) { Warn 'the installed build kept no record of the settings it shipped - every settings file you have is kept as yours' }
+                            $all = @($cfgRels) + @(if ($oldShipped) { $oldShipped.Keys })
+                            # Без записи (сборка 0.9.0): файлы настроек, которые вела СТАРАЯ сборка по журналу, тоже откладываются — иначе файл,
+                            # которого нет в новой сборке, откат удалил бы вместе с правкой игрока (судья, круг 1, п. 7).
+                            if (-not $oldShipped) {
+                                $cfgDir = Get-InstallConfigDir
+                                $exp = @($pack.exportConfig | Where-Object { $_ } | ForEach-Object { $_ -replace '\\', '/' })
+                                foreach ($e in (Read-Journal $root)) {
+                                    if ($e.Kind -eq 'dir') { continue }
+                                    $rf = $e.Rel -replace '\\', '/'
+                                    if (($cfgDir -and $rf.StartsWith($cfgDir + '/', [System.StringComparison]::OrdinalIgnoreCase)) -or ($exp -contains $rf)) { $all += $rf }
+                                }
+                            }
+                            $null = Save-PlayerConfig -Root $root -Rels $all -Shipped $oldShipped
+                            $rc = Invoke-Restore -GamePath $root
+                            if ($rc -ne 0) {
+                                Bad "the installed build did not uninstall - nothing new was installed; your settings stay in $script:PlayerDirName"
+                                $problems = $true
+                                $script:SkipEngineIni += $t.Name
+                                $summary += [pscustomobject]@{ Name = $t.Name; Result = 'upgrade stopped: the old build did not uninstall'; Bad = $true }
+                                continue
+                            }
+                            $script:Journals = @{}
+                        }
+                    }
                     $r = Invoke-DeployTarget -Target $t -Mods $mods -Plan:$Plan
+                    # Раскатка шла — отложенное игрока возвращается всегда, даже если какой-то мод упал: иначе его настройки лежали бы в
+                    # _kumm_player до следующей удачи, а игра шла бы на умолчаниях (судья, круг 1, п. 2). Запись выданного — только когда
+                    # мод настроек сам встал целиком.
+                    if ($Upgrade -and -not $Plan) {
+                        $cfgFailed = @($mods | Where-Object { $_.playerConfig -and ($r.Failed -contains $_.name) }).Count -gt 0
+                        $newShipped = if ($cfgFailed) { $null } else { Write-Shipped -Root $root -Rels $cfgRels }
+                        Restore-PlayerConfig -Target $t -OldShipped $oldShipped -NewShipped $newShipped
+                    }
                     if ($r.Failed.Count) { $problems = $true }
 
                     $res = "$($r.Installed)/$($mods.Count) mods"
@@ -1482,7 +1738,7 @@ function Invoke-Action {
         }
         elseif ($Action -eq 'deploy') {
             if ($AlsoEngineIni) {
-                try { Write-EngineIni -TargetList $live -Plan:$Plan }
+                try { Write-EngineIni -TargetList @($live | Where-Object { $script:SkipEngineIni -notcontains $_.Name }) -Plan:$Plan }
                 catch { Bad $_.Exception.Message; $problems = $true }
             }
             else {
@@ -1614,13 +1870,25 @@ function Export-Bundle {
         }
         $install = @(); $verify = @()
         foreach ($r in $rels) {
-            $null = Copy-Tree -From (Join-Path ($FromGame.TrimEnd('\')) ($r -replace '/', '\')) -To (Join-Path $cfgOut ($r -replace '/', '\'))
+            $outFile = Join-Path $cfgOut ($r -replace '/', '\')
+            $null = Copy-Tree -From (Join-Path ($FromGame.TrimEnd('\')) ($r -replace '/', '\')) -To $outFile
+            # configPolicy.strip {"<rel>": ["Key", ...]} - ключи экрана машины, с которой снят конфиг, игроку не едут:
+            # бандл 0.9.1 вёз бы 1280x720 и 141 к/с тестовых прогонов агента (KUMM epic 55 B0, 2026-11-17 20:22). [NOT-TESTED]
+            $stripKeys = $null
+            if ($pack.configPolicy -and $pack.configPolicy.strip) { $stripKeys = $pack.configPolicy.strip.$r }
+            if ($stripKeys) {
+                $lines = [System.IO.File]::ReadAllLines($outFile)
+                $keep = @($lines | Where-Object { $l = $_; -not (@($stripKeys) | Where-Object { $l -match ('^\s*' + [regex]::Escape($_) + '\s*=') }) })
+                [System.IO.File]::WriteAllLines($outFile, $keep, (New-Object System.Text.UTF8Encoding($false)))
+                Ok "config: $r - $($lines.Count - $keep.Count) display line(s) left out ($(@($stripKeys) -join ', '))"
+            }
             $install += [pscustomobject]@{ from = $r; to = $r }
             $verify += $r
         }
         $inis = $rels
         $outMods += [pscustomobject]@{
             name = 'Game config'
+            playerConfig = $true
             kind = 'files'
             version = "from $FromGame, $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
             source = [pscustomobject]@{ folder = 'src/_game-config' }
@@ -1745,7 +2013,8 @@ function Write-BundleInstaller {
         '    $GameDir = $answer.Trim().Trim(''"'')',
         '}',
         'Write-Host "Installing $($m.packName) into $GameDir" -ForegroundColor Cyan',
-        '& (Join-Path $here ''Deploy-ModPack.ps1'') -Deploy -PackDir $packDir -GameDir $GameDir',
+        '# -Upgrade: over an installed build the player''s changed settings files are kept (KUMM epic 55 B1).',
+        '& (Join-Path $here ''Deploy-ModPack.ps1'') -Deploy -Upgrade -PackDir $packDir -GameDir $GameDir',
         '# A script that ends without exit leaves $LASTEXITCODE empty; [int] makes that 0 (the fixture stand caught "$null -eq 0", 2026-11-01).',
         '$rc = [int]$LASTEXITCODE',
         '# manifest.shortcut {name, target, icon}: a desktop shortcut to the build''s own program (Krinik build 2026-11-01, the owner: "Krinik Conan").',

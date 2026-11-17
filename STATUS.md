@@ -138,7 +138,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > download hash list — 597 files, 3 775 / 3 775 pieces, exe CL-383549; our 525 files (30.5 GB) removed from it; deleted the junction `D:\Games\Conan Exiles 3.1.0`, the 3.0.1
 > game, the three `_paksview-*`, the 0.9.0 bundles (texts → pack `_config/release/published_0_9_0/`), `_text-extract-3.0.1`, old workshop copies, library `OLD`,
 > reviewed review folders (85–90 kept). D: free 96 → 258 GB. **There is NO game build on disk now** — the 3.1.0 world save is stashed in `KUMM/.work/disk_d/save_3_1_0/`;
-> `ConanExiles/targets.json` still names the removed 3.1.0 path. (2) **Next — the epic «0.9.1 for 3.1.1»** (the owner 20:00: «в ближайшие дни … выпустить предварительную
+> **20:1x–20:5x: the build on 3.1.1 made and checked** (`D:\Games\Conan Exiles 3.1.1`, targets.json → it; TC_conan_move_3.1.1 6 pass, P6 blocked — the 3.1.0 pak list
+> lost, EXP-0552; report `testcases/reports/2026-11-17_conan-move-3-1-1.md`). **Epic 55 written** (`plans/55_EPIC_…`, research `researches/conan-launcher-modern-practice/`,
+> cases `testcases/TC_conan_launcher_release_0_9_1_2026-11-17.md`). **Phase B coded, under test:** KUMM `Deploy-ModPack.ps1` `-Upgrade` (player settings kept across an
+> update, dpkg rule; `configPolicy` managed / strip / never; deploy and restore refuse a running game; export strips display keys) — fixture stand 67 / 67, 9 new checks
+> red on the old engine, judge round 1 running; pack: `configPolicy` in modpack.json, launcher — self-update handshake + start counter, values from the bundle's
+> manifest, consoles / mutex interlocks, the build update runs install.ps1 `-Upgrade` — batch `KUMM/.work/launcher54/batch55.sh` running. **KUMM is NOT pushed
+> since `82260a4`**: the harness refused the force-push that replaces the pushed commit whose MESSAGE held a forbidden word (amended locally) — the owner's call
+> (`git push --force-with-lease origin main`); new KUMM commits wait for it. Older history `5c300f3` holds the same word in plan 53 (history rewrite — the owner's call).
+> (2) **Next — the epic «0.9.1 for 3.1.1»** (the owner 20:00: «в ближайшие дни … выпустить предварительную
 > сборку 0.9.1 для версии 3.1.1 на ГитХаб и нексус»; the launcher «качественный и рабочий, без багов … не портил настройки и сейвы игроков»): the build copy
 > `D:\Games\Conan Exiles 3.1.1` + install, mods on 3.1.1, plan 54's four release blockers, release tooling, test plan and cases. Voice: plays (exit 0, `soft voice:`
 > printed) yet the owner did not hear it 19:52 — the default output is the TV (HDMI) / Realtek; Parsec and Sunshine are connected.
