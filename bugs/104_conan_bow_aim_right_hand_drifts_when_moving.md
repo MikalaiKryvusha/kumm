@@ -1,6 +1,6 @@
 # Bug 104 — Conan: in the bow aim (RMB), starting to move shifts the right hand with the arrow off the string to the right
 
-**Status:** 🔴 OPEN — filed 2026-11-16 18:41 +03:00 · **Severity:** S2 (the owner's play of the archery he named important) · **Version/build:** Conan Exiles Enhanced 3.1.0 with the
+**Status:** 🟡 the cause found 2026-11-17 06:15 — the game's own moving-aim pose (control with our mods out); the owner's choice asked on a page 06:2x · filed 2026-11-16 18:41 +03:00 · **Severity:** S2 (the owner's play of the archery he named important) · **Version/build:** Conan Exiles Enhanced 3.1.0 with the
 Krinik build (KrinikConanArchery, KrinikConanLocomotion, KrinikConanCamera) · **When/context:** the owner's word after his play of 2026-11-16 18:31–18:40 (look B) ·
 **Fixing:** this session — recon first (whose pose moves the hand: the game's moving-aim blend or ours), then the fix at the source (HOUSE_RULES rule 24)
 
@@ -36,6 +36,13 @@ as far as the frame shows. Whether this is the owner's «уходит с тет�
 walks, and from the game camera (behind, zoomed in by 3 wheel notches) the hotbar covered the hand and the view turned to the rock. NEXT: (1) the H7 / H8 control
 (vanilla vs ours — if vanilla shortens the draw the same way, it is the game's moving-aim animation); (2) a camera that follows the hero (re-placed relative to
 her before each frame, or the game camera with the HUD hidden) for a same-angle pair; (3) the pair to the owner on one HTML page («это тот сдвиг?»).
+
+**Control 2026-11-17 06:15 — the game's own animation (H7 + H8 together):** KrinikConanArchery and KrinikConanLocomotion out of the game copy (`enabled.txt` →
+`enabled.txt.control-off`, restored after; UE4SS.log: 0 lines of either), the same stand, the same side camera and the same input: `c1_stand_vanilla.webp`
+(standing — the right hand at the chin) and `c2_walk_vanilla.webp` (walking — the right hand forward in front of the face, the draw shorter) show the SAME change
+as with our mods (`s1` / `s2`). So the hand's move on walking comes from the game's moving-aim pose (the locomotion blend under the draw), not from our sections
+(HOUSE_RULES rule 24: the cause is the game's). A fix is an edit of the game's own animation data — the owner's call (what he wants: the standing draw kept while
+walking, or only the hand kept on the string), asked with the four frames on one page. **Shown 2026-11-17 06:2x** — the page `D:/Games/Conan Exiles Mods/НА ОТСМОТР НИКОЛАЕМ/89_ruka_na_tetive_na_hodu/ruka_na_tetive.html` opened for the owner (the four frames; A — the standing draw kept while walking; Б — only the hand and the arrow kept on the string; В — he meant something else). Waits for his answer.
 
 ## Hypotheses (ranked, none tested)
 

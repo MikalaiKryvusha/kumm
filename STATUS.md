@@ -144,8 +144,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `tools/farewell-replay.mjs` replays a transcript stop by stop. (4) Bug 93 cost: the bow-sprint gate reworked (one substate list, property reads, the bow kept per
 > draw) — full-path calls over the 1 ms step 45–64 % → 18–21 %, S1b / S3 / S6 and the exhaustion pass — **pack `965f10f` pushed**. (3) judged twice (the
 > mark only at the END of the message and only after an accepted closure; autonomy-guard knows it) — committed with this block; its live proof is THIS chat's
-> closure: the farewell file must then hold the marked farewell. (5) Bug 104 (the hand off the string): cases written, the first frames too far — a close side
-> camera next. No game of ours runs (closed 06:0x), the machine lock released.
+> closure: the farewell file must then hold the marked farewell; KAIF #181 got the field update (comment 6936948110). (5) **Bug 104 (the hand on the string
+> when walking in the draw): the cause is the GAME's own moving-aim pose** — side frames standing vs walking, and the same with Archery + Locomotion out (control);
+> **interview #038 shown as a page** (review folder 89): A — the standing draw kept while walking, B — only the hand kept on the string, C — something else.
+> Waiting for the owner: interview #037 (Q1 the top of the wall, Q2 the hang's stamina) and #038. No game of ours runs, the machine lock released.
 >
 > **CHAT CLOSED 2026-11-16 23:53 +03:00 (soft, by the owner's word: `[OWNER]` 2026-11-16 23:38 «работай автономно 15 минут, а затем начинай доходить до логического
 > среза и закрытию чата по ритуалу»).** KUMM `06806a8` + the closure commit; pack `4367176`, `68c8d11`, `a3a6111` (r11) — pushed; no game of ours runs (closed
