@@ -50,7 +50,7 @@ autonomy order (judge round 4, fixture with real shapes). Rolled back to the old
   mid-chat would overwrite the file) — FIXED: only at the END of the message and only in a chat with an accepted closure (`closedEver`); a test did not guard
   the marked path's state write — FIXED (a fresh-state case); the control cases depended on order — FIXED; autonomy-guard did not know the mark (a second
   ceremony after a split turn) — FIXED; the same-line mark — accepted; the skill sentence moved to the end of Step 5. test-guards 308/308, ten cases red on HEAD;
-  the mark injected into two real farewells writes them (HEAD: the waiting line); 15 unmarked closures unchanged.
+  the mark injected into two real farewells writes them (HEAD: the waiting line); 15 unmarked closures unchanged. Committed `bb44eb3`; the skills' mirrors for the other agent systems re-synced by `node .kaif/kaif-core.mjs sync` (`c3f3acb`); KAIF #181 field update posted.
 
 ## Fix plan (2026-11-14 — superseded by the mark of 2026-11-17)
 
