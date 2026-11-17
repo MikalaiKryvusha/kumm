@@ -704,6 +704,10 @@ gate on that flag between inputs (the game asks it only inside `UpdateHighlightT
 Монтаж натяжки `AM_combat_2h_bow_combo_heavy_c0` (7,05 с, кит, 2026-10-28): `BP_SetChargeHold` 0,517 (1,333 с) и 1,851 (3,963 с — полный
 заряд), `BP_PowerCharge` 0,552 (1,28 с), выстрел `ProjectileAttack` 5,865, `BP_QueueWindow` 6,346. Монтаж общий с NPC-лучниками: звук,
 положенный в монтаж, слышен и у врагов — «дзинь» полного заряда `KrinikConanArchery` играет герою из Lua, уведомление в монтаже немое.
+Live, by real input (a 15 ms recorder of `GetCurrentMontage()` + substates, 2026-11-17 04:4x, bug 105): the draw, the full hold, the shot's release tail and a redraw with RMB
+held are ONE montage on the hero — RMB → 11 (0.5 s) → 11,16 → 11,15,16; LMB → 16 ends at the click (the arrow is shot), 11,15 play on in the same montage ≈ 0.7 s,
+then none ≈ 0.25 s, then a held RMB starts it again from 11. So «the bow's montage is playing» (its name has `bow`) tells the bow's stance from a hit reaction or a
+climb montage; it does not tell a draw from a release tail.
 Опыт: `BP_ProgressionSystem` — `ExperiencePoints` (весь), `LevelStart`, `LevelEnd`; HUD Hosav показывает весь / `LevelEnd` (остаток), окно
 персонажа (`W_PaperdollPanel`) — родной шаблон `ST_UI_GeneralText` / `Level_ExpandedDetails` «({Percentage}% {CurrentXp}/{MaxXp})», значения внутри
 уровня, формируются кодом (2026-10-28).

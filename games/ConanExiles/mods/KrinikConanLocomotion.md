@@ -31,10 +31,15 @@
 - **The push costs the game's jump stamina** (`[OWNER]` 2026-11-16 22:31, `bugs/106_…`): `GetStaminaJumpCost` → `AdjustStaminaCurrent` (−20 on the owner's hero, G10 79 → 59);
   an exhausted hero (substates 13 / 14 / 18) stays on the wall `[AI]`.
 - **UE4SS hooks `InpActEvt_Jump_…_26` and `_27` as ONE** (FName number; game map «Climbing», EXP-0542): one hook, the event told by its effect on the wish; a 5 ms dedupe.
-- **The bow's draw at a grab (G7, decided by the owner 2026-11-16 23:24 — verbatim in `bugs/105_…`):** `cancel_draw` at the climb's start — `StopAnimMontage(nil)` +
-  `ExitSubstate(16, 15, 11)` for a draw (15 / 16, or 11 with the bow in hand): the hero hangs with the bow in the left hand, no stance (r10 pack `68c8d11`, r11 + the
-  montage stop at the closure). `CancelAttackTry` rejected — it throws the hero off the wall. OPEN: G7e by his rule «while RMB is held»; the top-of-wall redraw.
-- Open: G6 (two walls), G7 (above), the hang's stamina (`bugs/106_…` item 2 — the owner's answer on a timer of ours owed).
+- **The bow's draw at a grab (G7, decided by the owner 2026-11-16 23:24 — verbatim in `bugs/105_…`):** `cancel_draw` at the climb's start, on the next game-thread
+  step: with the bow in hand and any of its substates (11 / 15 / 16) — the bow's draw montage `AM_combat_2h_bow_combo_heavy_c0` stopped BY IDENTITY (the asset,
+  plus the current montage when it is a `2h_bow_combo` one; never «whatever is current» — a hit reaction started later would hide the draw), then
+  `ExitSubstate(16, 15, 11)`; 300 ms later one more look — a stance back on the wall is ended again. The hero hangs with the bow in the left hand, no stance.
+  `CancelAttackTry` rejected — it throws the hero off the wall. Builds r10 `68c8d11`, r11 `a3a6111`, r12–r15 2026-11-17 (four judge rounds) — r15 pack `9a33796`;
+  G7 and G7e pass on r14 and r15 by real input read while RMB is held (report `testcases/reports/2026-11-17_conan-wall-grab-bow-cancel-r14.md`). Melee and other weapons are left
+  alone `[AI]`. The three sections share ONE `bow_in_hand` — krinik_air_combat's, through `_G.__krinik_bow_in_hand` (read at call time). OPEN: the top of the
+  wall with RMB still held — the owner's choice (interview #037 Q1).
+- Open: G6 (two walls), the top of the wall (above), the hang's stamina (`bugs/106_…` item 2 — interview #037 Q2).
 - The player guide of the next release carries: the jump off a wall (since 2026-11-14) and the grab in the air; the shipped 0.9.0 guide (`docs/guide/guide-3.0.1.html`) is
   left as released `[AI]`.
 

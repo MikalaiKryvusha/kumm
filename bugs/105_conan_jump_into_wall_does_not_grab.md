@@ -1,7 +1,8 @@
 # Bug 105 — Conan: a hero in a jump who touches a wall does not grab it (hits and falls)
 
-**Status:** 🔧 the grab built and pushed (pack `4367176`, 2026-11-16 23:23 +03:00); G7 (the bow drawn — decided by the owner 23:24) r10 pushed `68c8d11`, r11 (+ the montage
-stop) committed at the closure 23:5x; G7 OPEN (G7e to re-run on r11 by the owner's rule «while RMB is held»; the top-of-wall redraw — his question); then his final check · **Severity:** S2 (the owner's play, a movement feature of KrinikConanLocomotion — the wall jump family) · **Version/build:** the Conan build on 3.1.0,
+**Status:** 🔧 the grab built and pushed (pack `4367176`, 2026-11-16 23:23 +03:00); G7 (the bow drawn — decided by the owner 23:24) r10 `68c8d11`, r11 `a3a6111`,
+**r15 pushed 2026-11-17 05:1x (pack `9a33796`) — G7 and G7e pass by real input read while RMB is held** (report `testcases/reports/2026-11-17_conan-wall-grab-bow-cancel-r14.md`); OPEN: the top
+of the wall with RMB held — the owner's choice (interview #037 Q1, asked 2026-11-17 04:29); then his final check · **Severity:** S2 (the owner's play, a movement feature of KrinikConanLocomotion — the wall jump family) · **Version/build:** the Conan build on 3.1.0,
 pack working tree of 2026-11-16 · **When/context:** the owner's message 2026-11-16 21:38 +03:00 <!-- attribution-ok: verbatim in the «Symptom» section of this file -->, mid-session, while the agent finished bug 93 · **Fixing:** the chat of 2026-11-16 22:12 built and pushed the grab and the G7 cancel; the rest — FIRST NEXT CHAT in `STATUS.md`
 
 ## Goal vector
@@ -67,15 +68,37 @@ stamina charge's rounding (`math.floor` of a negative cost) had a twin in `krini
 ## Next (in order)
 
 1. ~~Control case~~ — done 22:22 (G3). ~~The native re-wish~~ — built (r1 → r7, pack `4367176`). ~~Cases in a TC file~~ — done.
-2. G7 by the owner's rule (STATUS FIRST NEXT CHAT): his answer on the top-of-wall redraw; G7e / G7 / G7c / G1 / G4 / G5b / G10 on r11 as a series of frames and reads
-   while RMB is held; the rest of judge round 2 of `cancel_draw`; then his final check.
+2. ~~G7 by the owner's rule; the rest of judge round 2 of `cancel_draw`~~ — done 2026-11-17 (r12 → r14, below). Left: his answer on the top of the wall
+   (interview #037 Q1) → build it, then G7 over the top by the same rule; his final check (G1 grab after a tap, G5b push, G10 stamina, G7 with the bow).
+
+## 2026-11-17 — the rest of judge round 2 and two more judge rounds (r12 → r14, `krinik_wall_jump.lua`)
+
+- r12 — the judge round 2 items of 2026-11-16: the stance re-read on the deferred step (an RMB release before the step ends it by itself — nothing stopped, nothing
+  claimed); the log read back after the exits; the error of the grab call logged instead of dropped; ONE `bow_in_hand` (krinik_air_combat's, `_G.__krinik_bow_in_hand`).
+- Judge r12 (fresh, 11 findings, no defect): `StopAnimMontage(nil)` stops whatever is current; the read-back in the same step cannot see a relapse or a throw-off;
+  the attack flag may outlive the exits; 15 / 16 of another weapon was cancelled; the pre-read inside the hook; a third `bow_in_hand` copy in krinik_bow_sprint;
+  wording / counter / comment items; the `bow` substring matcher (declined — older code, out of scope: a class name with «bow» attached to the hero is not met in
+  the build). Checked against a run: the 15 ms recorder (new `mt=` column) showed the draw, the full hold, the shot's release tail and a redraw are ONE montage
+  `AM_combat_2h_bow_combo_heavy_c0`, and the arrow is shot when 16 ends at the LMB — so the «a shot's release cancelled loses the arrow» worry is refuted (the
+  release tail runs after the shot); the attack-flag worry refuted by G7g (dropped off, the game's jump ran, a new draw started; the flag read false).
+- r13 — the montage stopped only when it is the bow's; a 300 ms second read; only the bow's stance; always deferred; krinik_bow_sprint reads the shared function.
+  G7, G7e, G1, G7g, S1b pass by real input.
+- Judge r13 (fresh, no defect): `GetCurrentMontage` is the montage started LAST — a later montage in another slot would hide the draw; the 300 ms read only
+  logged. r14 — the draw stopped BY IDENTITY (the asset + a current `2h_bow_combo` montage, each only if playing); a stance back on the wall at 300 ms is ended
+  again, always; the stance logged as its substate list; honest wording. G7 and G7e pass on r14.
+- Judge r14 (fresh, no correctness defect): the log could disarm the re-check, duplicates told by short name, the re-check armed only with a stance, a paused
+  montage skipped; the matcher again (declined). r15 fixed the four; G7, G7e and G1 with the bow pass on r15; pack `9a33796` pushed (review: 4 rounds, 30 findings).
 
 ## Decisions made without the owner
 
 - `[AI]` Wall to wall needs a Space tap in the push's flight: a re-wish there would let the pushed-off wall catch the hero again (G5b), and telling the same wall from
   the next one would be a correction after the game's grab (HOUSE_RULES rule 24).
 - `[AI]` The push is refused for the game's jump blockers (13 / 14 / 18) — a safety net: the game drops an exhausted hero off the wall itself (23:20).
-- `[AI]` The G7 cancel stops the hero's montage by `StopAnimMontage(nil)` — that stops ANY montage playing at the grab, not only the draw's (r11; seen keeping the climb).
+- `[AI]` ~~The G7 cancel stops the hero's montage by `StopAnimMontage(nil)`~~ — replaced 2026-11-17 (r13 → r14): only the bow's draw montage, by identity.
+- `[AI]` 2026-11-17: only the BOW's stance is cancelled at a grab — another weapon's charge (15 / 16) and a melee swing are left as the game plays them (the owner
+  named the bow's stance).
+- `[AI]` 2026-11-17: a stance found back on the wall 300 ms after the cancel is ended once more (a safety net for a montage the identity stop could miss); never seen
+  live.
 - `[AI]` The shipped 0.9.0 guide is not edited; the next release's guide takes the wall jump and the grab (mod notes carry the text's source).
 - G7 DECIDED by the owner: `[OWNER]` 2026-11-16 23:24 +03:00 «при натянутом луке и прыжке на стену - натяжение снимается, герой повисает на стене. ПКМ прикладка не
   работает в висе на стене» — grab (A); at the grab the draw is cancelled; while hanging, RMB does not start the aim. r7 grabs but keeps the draw (substates 11, 15, 16

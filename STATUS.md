@@ -133,6 +133,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW — the chat of 2026-11-17 04:25 (resume + «продолжаем делать сборку конана 1.0.0» + `[OWNER]` 04:26 «работай автономно в дневном цикле» → /dayloop).**
+> Done: (1) **bug 105 G7 closed on the agent's side** — the rest of judge round 2 + three fresh judge rounds (r12 → r15): the bow's draw montage stopped BY IDENTITY,
+> a second look 300 ms later, one shared `bow_in_hand`; G7 / G7e pass on r14 and r15 by real input read while RMB is held; **pack `9a33796` pushed** (report
+> `testcases/reports/2026-11-17_conan-wall-grab-bow-cancel-r14.md`). (2) **Interview #037 asked in chat 04:29** (shown, recorded): Q1 — may a HELD RMB redraw once
+> the hero is over the top of the wall (A: only a new press, recommended); Q2 — the hang's stamina drain (A: a 1/s timer only on the wall, −2/s, recommended; B −1/s;
+> C no timer, charge at the push). Both wait for his answer → build. (3) Bug 103 (the farewell hook) — FIXED in the working tree: the turn starts only at the owner's
+> own prompt (a queued attachment with origin human counts; notifications / hand-backs / compaction do not split), the longest stop text of a closure wins;
+> `tools/farewell-replay.mjs` replays a real transcript stop by stop (b9342015, ea639d79, 2a24c0f4 now keep the real farewell); test-guards 307/307, the new cases
+> red on HEAD; judge round running. The game of ours runs (PID 34052, the wall stand), the machine lock taken till 05:35.
+>
 > **CHAT CLOSED 2026-11-16 23:53 +03:00 (soft, by the owner's word: `[OWNER]` 2026-11-16 23:38 «работай автономно 15 минут, а затем начинай доходить до логического
 > среза и закрытию чата по ритуалу»).** KUMM `06806a8` + the closure commit; pack `4367176`, `68c8d11`, `a3a6111` (r11) — pushed; no game of ours runs (closed
 > 23:52), the machine lock released.
