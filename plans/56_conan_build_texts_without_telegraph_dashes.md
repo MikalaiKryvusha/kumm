@@ -66,7 +66,9 @@ Not covered by the lint yet: strings inside our kit paks (widget texts set by `_
       norm's class; fix the four carried-over errors (14487 «не стали изгонять» inverts the meaning, 8430 Yog slithers himself, 8126 «естественном …
       естественно», 6965 the material name vs EN); a reviewer reads a fresh sample; the parity script stays (`.work/dash_fix/apply_dmfish.py`). The lint stays
       strict, so `build-docs.py` refuses the PDF until this step is done. The helper's output and the review are kept in `.work/dash_fix/` (`dm_fish_new.tsv`,
-      `sample.tsv`) for the next pass.
+      `sample.tsv`) for the next pass. **01:28 pass 2 started by a helper with that brief** → `.work/dash_fix/pass2/new.tsv` + `allowed.tsv` (class per kept dash);
+      then: `apply_dmfish.py` parity (point it at pass2), a clean-instance read of a fresh sample, the allowed rows into `dash_lint_allow.txt` with their class,
+      `make_locres_fix.py` → `locres-set-tr.py`, `deploy-localization.py`, the in-game sample.
 - [ ] 5. Grow the lint to the kit scripts' widget texts and to the built `Game.locres`; wire it into `build-docs.py`.
 - [ ] 6. Judge round on the whole diff; commit with `review:`.
 

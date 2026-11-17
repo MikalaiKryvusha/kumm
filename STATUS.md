@@ -141,7 +141,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > allows several; plan 56 step 4 holds the new brief, the four old errors, the kept work files in `.work/dash_fix/`. The lint stays strict, so the PDF build
 > is refused until that pass is done. (6) **Launcher judge round 3: D1 + R1, R3, R4, R6, C4, C8 fixed** (plan 55 B8 lists them and the OWED R2, R5, R7, C1–C3,
 > C5–C7); exe `c834b0d4…`; the stand now builds the launcher under test as 1.0.0 (`batch58.sh`, the manifest says 1.1.0). **In game NOT seen yet:** the hub
-> rows' new hints. Commit messages drafted: `.work/commit_pack_launcher.txt`, `commit_pack_texts.txt`.
+> rows' new hints. Pack LOCAL commits `8ec5b4a` (launcher: B7 judge fixes + B8 + round-3 fixes) and `28a2bc9` (L8 past the settle); the texts commit
+> drafted in `.work/commit_pack_texts.txt` (waits for the tooling judge).
+> **FIRST NEXT CHAT:** (a) a judge round on the launcher's last fixes (crash handler only before settle, guarded report start, seen stamp by creation time
+> in %LOCALAPPDATA%, keepOld refuses self-update), then push the pack; (b) dm-fish pass 2 — a helper started 01:28 writes `.work/dash_fix/pass2/new.tsv` +
+> `allowed.tsv`: parity by `apply_dmfish.py` (repoint it to pass2), a clean sample read, allow-list the kept dashes with their class, `make_locres_fix.py` →
+> `locres-set-tr.py`, `deploy-localization.py`; (c) ONE game run: the hub rows' new hints + a locres sample + the crash offer on the real build folder;
+> (d) epic 55 D4 — «Что нового» 0.9.1, known issues, release notes BY the owner's portrait (git log of the pack since 2026-11-02), a clean check, then shown
+> to him; (e) the owed launcher items R5, C1–C3, C5–C7 (plan 55 B8); (f) the KUMM force-push — still the owner's call.
 >
 > **CHAT CLOSED 2026-11-17 22:1x (opened 21:50 with the previous farewell pasted; closed by the owner's word 22:04–22:12, the judge recalled — `[OWNER]`
 > «отзывай судью, закрывай чат» · «нет времени на судейство» · «это будет наш долг»).** Done: **plan 55 B7 — the launcher judge's 4 defects fixed in the pack**

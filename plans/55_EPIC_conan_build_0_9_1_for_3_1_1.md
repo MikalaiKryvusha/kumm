@@ -123,9 +123,10 @@ Phase B and phase A run in parallel (B needs no game: the fixture stand). D need
       launcher on ANY UI exception, mid-install too → exit only before the window settles (the self-update case), later a box and the work goes on; R3 the
       seen stamp used the folder's mutable write time → creation time; R4 the state lived in %TEMP% (Disk Cleanup) → `%LOCALAPPDATA%\KrinikConanLauncher`,
       the stand overrides it (`KRINIK_LAUNCHER_STATE_DIR`); R6 the crash case's no-box checks could pass for a dead launcher → the log cleared per start, the
-      start waits for the offer's own decision line; C8 the batch's `tail -16` → `tail -40` + an EMPTY flag. **OWED (round 4 and beyond):** R2 the launcher
-      self-update deletes the kept `.old` in the keepOld state; R5 the space need after a stopped unpack is now too strict (subtract what is on disk); R7 L8 must
-      wait past the settle and assert `.old` + `.starting` stay; C1 the crash box has no owner window; C2 RestoreSlot's text names `.bad` even when only `.old`
+      start waits for the offer's own decision line; C8 the batch's `tail -16` → `tail -40` + an EMPTY flag; R2 the self-update is refused in the keepOld
+      state (compiled, no stand case); R7 L8 waits past the settle (8 / 0; control on the B7 exe fails the 2 new checks; pack `28a2bc9`). Stand batch58_r3 on
+      the round-3 source: 173 / 0. Pack commits `8ec5b4a`, `28a2bc9` — LOCAL, the push waits for a judge round on these last fixes. **OWED:** R5 the space
+      need after a stopped unpack is now too strict (subtract what is on disk); C1 the crash box has no owner window; C2 RestoreSlot's text names `.bad` even when only `.old`
       is left; C3 the old-bundle box and the crash box can stack at one start; C5 the marker write throws raw for an archive without `pack\`; C6 the plaque
       hard-codes the mail (BuildInfo.AuthorLinks carries it); C7 the no-marker-invented check cannot fail.
 - [x] D-fb (done with plan 56, 2026-11-18 01:0x): the second feedback path, GitHub Issues, in the report tool's console and box, `feedback_howto.txt`, the guide's
