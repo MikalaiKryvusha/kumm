@@ -139,6 +139,11 @@ A statement you corrected only in the chat is still standing in the artifact the
 the five steps BEFORE the farewell, never after it — and if a place could not be corrected, name the
 place and its missing retraction command instead of answering `none`.
 
+**KUMM: the farewell message ENDS with the hidden mark `<!-- farewell -->`** (the very last characters of the message). The farewell hook
+(`tools/hooks/farewell-capture.mjs`) writes the message that ends with it into `FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md`, whatever came before it in the turn
+(a waiting line, a judge's notification, the owner's words mid-closure — bug 103). Exactly one message carries the mark: the farewell itself, sent after every
+judge and push — never a waiting line, never a later reply.
+
 ## Notes
 
 - The family in one line: **/pause — the chat continues later; /end-chat-soft — finish properly,

@@ -45,6 +45,8 @@ retry once, and if it still fails, tell the human: the commit exists locally, no
 
 One line to the human: the commit hash, the single most important thing for the next chat, and
 the reminder that the ceremonies debt is recorded in `STATUS.md`. Goodbye.
+**KUMM: the farewell ENDS with the hidden mark `<!-- farewell -->`** (its very last characters) — the farewell hook writes the message that ends with it into
+`FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md` whatever came before it in the turn (bug 103); only the farewell itself carries it.
 
 ## What this skill refuses to skip
 
