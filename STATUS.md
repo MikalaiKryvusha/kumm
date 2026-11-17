@@ -133,6 +133,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **FIRST NEXT CHAT — item 1, the owner's task relayed by the KAIF session `kaif-6d` (2026-11-17 11:02, a peer's message; the owner's word as it quotes it, ≈ 10:55 in
+> the KAIF chat): «напиши агенту KUMM - ему задание на следующий чат - внедрить навык перехода из чата в чат в его KAIF. Так как 2.10 ещё в работе, и непонятно, когда
+> выйдет версия, а в KUMM мне УЖЕ нужен этот навык» (KAIF decision №160).** Build the auto-relay skill locally from the owner's document
+> `d:/work/ai_sandbox/KAIF/ideas/auto_relay_windows_guide.md` (KAIF `e34fd93`, read-only): `relay.mjs` · `relay-hook.mjs` · `open-chat.ps1` · `SKILL.md` (/auto-relay) ·
+> `e2e.mjs` · the settings.json wiring · `.gitignore`; acceptance §5, risks §6. Check first (KAIF's recon researches/44 — re-verify): (1) no second window gauge —
+> agree the relay threshold with `.claude/hooks/context-budget.mjs` (soft from 80 %, force from 92 %); (2) `autonomy-guard.mjs` + the relay Stop hook must not loop the
+> turn or block opening the next chat after `ready`; (3) one entry and one handover: «auto-relay continue» or the resume word, `HANDOVER.md` or STATUS — one, ask the
+> owner if unsure; (4) the hook's memory in `os.tmpdir()` must land in `F:\Temp`, never `D:\Temp`; (5) `node -e "console.log(process.env.CLAUDE_CODE_SESSION_ID)"` —
+> empty means the chat binding is off (§6); (6) a field report to KAIF origin (/report-bug, improvement request, «Local remediation») with what the first Windows run of
+> `open-chat.ps1` showed — the first run under the owner's eye (the VS Code window may not come forward, Enter may go elsewhere).
+>
 > **NOW — the chat of 2026-11-17 08:53 (resume + «начинаем с интервью по конану»; `[OWNER]` 10:27 «работай автономно до закрытия чата по переполнению контекста» → /dayloop).**
 > Done: interviews #035 / #037 / #038 answered by the owner 09:18 (verbatim in each); **the hang's stamina BUILT** as our reason flag in the game's own wall tick
 > (`[OWNER]` 09:33 «новый флаг разрабатываем»; pack `e6d1d97`, TC_conan_wall_hang_stamina H1–H5 pass, 2 judge rounds; the game's stamina degeneration bitmask mapped —

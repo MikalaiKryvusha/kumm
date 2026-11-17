@@ -78,8 +78,9 @@ standing and walking; melee and an empty-handed walk keep the game's chain. Then
 `Content/Master_AnimBP/` and its `Local/CookInfo.ini` no AB line (bug 95 shipped look B as the post-process `ABP_KrinikFirstPersonLook` instead). `AB_human_male` is the
 PARENT of `AB_human_female` (the heroine) and `AB_human_werewolf`; overriding it alone left the children's cooked data stale — the hero in the bind pose (bug 95,
 2026-11-14 15:26–15:27, the owner's words there). So the edit script `ConanExiles/_config/devkit/kit-ab-bow-draw-upper.py` (written, NEVER run) refuses to run unless
-`KRINIK_AB_WITH_CHILDREN=1`. **FORK** (the next chat): options <A: override the parent + re-compile and save both children into the same mod, three cook lines, re-made after
-every game patch · B: another lever without overriding the graph (e.g. the draw montage — already overridden by KrinikConanArchery — or a curve the graph reads) — recon
+`KRINIK_AB_WITH_CHILDREN=1`. **A is REFUTED by the project's own lesson EXP-0511 (2026-11-17 11:02 +03:00):** other mods ship children of `AB_human_male` too (Immersive Warriors' `IMWA_AB_MaleChildDrunk`) and
+they cannot be re-cooked without their sources — «never override a PARENT anim blueprint in a modded build»; the route is the post-process one (plan 52,
+`ABP_KrinikFirstPersonLook` — how bug 95 shipped). **FORK** (the next chat): options <~~A: override the parent + re-compile and save both children~~ · B: another lever without overriding the graph (e.g. the draw montage — already overridden by KrinikConanArchery — or a curve the graph reads) — recon
 first> · price of error: a T-pose hero, stale children after a patch, a conflict with any future mod touching the hero's graph · consulted: bug 95's run (the T-pose and
 its log line), `retoc list` (no mod of the build overrides `AB_human_male`); a frame of the hero in third person, an NPC and `ConanSandbox.log` are read BEFORE any show.
 
