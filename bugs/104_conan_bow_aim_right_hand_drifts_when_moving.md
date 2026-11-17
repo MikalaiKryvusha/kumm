@@ -64,6 +64,16 @@ compile). The walking-draw edit goes into the same override by the same pattern 
 LayeredBoneBlend (base `PostEquip…` — the locomotion with the equipped arms; layer `TorsoAttackPose`; mesh-space rotation blend ON) — walking: the legs from the
 locomotion, the torso from the draw. That layered branch is where the hand leaves the chin. Probe 2 (`devkit/kit-probe-ab-torso-blend.py`) reads its branch filters
 (bones, blend depths) and the bool that picks the branch.
+**Probe 2 read 2026-11-17 10:55 +03:00 (`devkit/kit-probe-ab-torso-blend.json`, the 6 LayeredBoneBlends fed by `TorsoAttackPose`):**
+- a `Blend Poses by bool` driven by **`isCrouching`** (blend 0.1 s): True → ONE layered blend — base `PostEquipPose`, layer `TorsoAttackPose`, filter `b_spine_1` depth 3,
+  weight 1.0, mesh-space rotation — the whole upper body from the draw over the legs; False → another bool blend → the standing / walking chain;
+- the walking chain is hand-tuned PARTIAL blends: `TorsoAttackPose` over `PostEquipPose` at `b_pelvis` depth 6 weight 0.7 → `b_pelvis` depth 1 (`b_L_clavicle` −1)
+  weight 0.33 → `b_spine_3` depth 1 weight 0.44, then TWO blends that take `b_R_clavicle` / `b_L_clavicle` (depth 2 and depth 1, weight 1.0) BACK from `PostEquipPose`
+  — the locomotion's shoulders and upper arms: the right arm follows the walk and the hand leaves the chin (the owner's symptom).
+**The build (next):** the pattern of `kit-ab-fp-upright.py` in the same KrinikConanArchery override — a member bool `KrinikBowDrawUpper`; the `isCrouching` selector's
+`bActiveValue` reads it; the EventGraph sets it at the head of Update Animation: `isCrouching OR (GetWeaponArcheType(GetWeaponItemPrimary(CombatBP)) == 3 AND
+isAttacking)` (the game's own bow test, `Conv_ByteToInt` for the enum — fp-upright runs 4 / v3b). A bow draw then takes the crouch branch's clean upper body while
+standing and walking; melee and an empty-handed walk keep the game's chain. Then: cook, the pak, W1–W6 by real RMB (the side camera), the control K1.
 
 ## Hypotheses (ranked, none tested)
 
