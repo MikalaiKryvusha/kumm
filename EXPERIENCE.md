@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0554 · 2026-11-17 · ❌→✅ · #launcher #winforms #snapshot #live-window #stand #owner-eye
+class: the-self-snapshot-hides-what-the-live-window-shows
+**Lesson:** the launcher's own snapshot (`KRINIK_LAUNCHER_SNAPSHOT` → `DrawToBitmap` of each control over the already drawn picture) showed the metal buttons'
+cut corners clean, while the LIVE window had black triangles there — `ButtonBase` sets `ControlStyles.Opaque`, so on screen nobody paints the background under
+the cut corners and the double buffer's black stays; DrawToBitmap draws onto a bitmap that already holds the picture and hides it. The owner saw it
+(`[OWNER]` 2026-11-17 22:06 «кнопки некрасивые - уголки какие-то темные у них есть, видишь?»); weeks of snapshot checks never could. Fixed:
+`SetStyle(ControlStyles.Opaque, false)` in `MetalButton`. Same chat, same class of «the stand's path is not the player's path»: an external `WM_CLOSE` reaches
+WinForms as `CloseReason.TaskManagerClosing`, not `UserClosing` (Alt+F4 / the system X send `WM_SYSCOMMAND SC_CLOSE` first) — a filter on `UserClosing` let the
+stand's close count as a crash.
+**Trigger:** any look-check of a custom-painted WinForms window — capture the LIVE window (`ConanExiles/_config/capture-window.ps1 -Process KrinikConanLauncher
+-Width 3840`, PrintWindow) and crop the edges ×4, never only the self-snapshot; any stand step that "closes like the player" — send what the player's input sends.
+mechanized: none yet — the snapshot cases of the launcher TC should add one live capture per state (owed, plan 55 B7 note)
+
 ### EXP-0553 · 2026-11-17 · ❌→✅ · #launcher #winforms #icon #taskbar #stand
 class: the-exe-icon-is-not-the-window-icon
 **Lesson:** `csc -win32icon:` gives the EXE its icon (Explorer, the desktop shortcut) but a WinForms window keeps the generic WinForms icon unless `Form.Icon`

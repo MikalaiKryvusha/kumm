@@ -58,6 +58,10 @@ Status: `todo` · `pass` · `fail` · `blocked` · `skipped`. Each row is one ac
 | L8 | feed has `launcher-v1.0.2` while 1.0.0 runs (skipped 1.0.1) | update | goes straight to 1.0.2 | exe hash | todo |
 | L9 | a second launcher instance is open | update in one | refused or the other closed first, named | box text; process list | todo |
 | L10 | a launcher self-updated sits in 0.9.1's folder | start | shows 0.9.1, game 3.1.1, its Steam post, guide, uninstaller name — from `pack\modpack.json` | snapshot text; click targets in the log | todo |
+| L11 | asset starts and HANGS — no window, no exit (stub `make_stub.py hang`) | «Обновить лаунчер» | after 30 s the old launcher kills it, puts itself back, stays open, box «не открыл окно» | log «не показал окно за 30 с»; exe hash; no process from the hung exe | todo |
+| L12 | good asset; the player closes the NEW window at once (X / «Играть»), then closes the 2nd ordinary start at once too | update, WM_CLOSE | no rollback: the old launcher leaves, the new exe stays, `.starting` cleared; the quick-closed 2nd start commits (`.old` gone) | log «окно закрыто игроком — сигнал…» / «…прежний лаунчер больше не нужен» (the close, not the timer: `KRINIK_LAUNCHER_SETTLE_MS` 15 s); exe hash | todo |
+| L13 | `.starting` = 2 with `.old` present, but `.old` held open without sharing (an antivirus scan) | start | the revert stops half-way and the NEW exe goes back to its place; `.old` kept; the window runs | exe present + hash; no `.bad`; log «новый лаунчер вернулся на своё место» | todo |
+| L14 | `--old-bundle` names a folder that is not a bundle: not `Krinik_…`, or holding `Saved` / `Content` | start | no delete offer, folder stays; a real bundle folder — the offer, default «Нет» | no box in 8 s; log «не похожа на распакованный архив»; `defbutton=7` | todo |
 
 ### 3.2 Build update through the launcher
 
@@ -76,6 +80,7 @@ Status: `todo` · `pass` · `fail` · `blocked` · `skipped`. Each row is one ac
 | B11′ | feed offers a build AND a launcher release | start | both lines on the plate; launcher first is advised | snapshot | todo |
 | B12′ | the launcher killed during the uninstall / install step | next start | says the update did not finish and offers to finish it (install again) | box text; game folder state | todo |
 | B13′ | a zip entry with `..` in its path | unpack | refused | message; nothing outside the folder | todo |
+| B14′ | the install failed after a whole unpack (plan 54 B4 `--broken`) | «Обновить сборку» again | the confirm box offers the unpacked bundle («уже скачана и распакована»), no download | box text | todo |
 
 ### 3.3 Manual paths (no launcher)
 

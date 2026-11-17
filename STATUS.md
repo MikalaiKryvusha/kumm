@@ -125,6 +125,24 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **CHAT CLOSED 2026-11-17 22:1x (opened 21:50 with the previous farewell pasted; closed by the owner's word 22:04–22:12, the judge recalled — `[OWNER]`
+> «отзывай судью, закрывай чат» · «нет времени на судейство» · «это будет наш долг»).** Done: **plan 55 B7 — the launcher judge's 4 defects fixed in the pack**
+> (`_config/launcher/KrinikConanUpdates.cs`, `KrinikConanLauncher.cs`): a closed window counts as «alive» (`SelfUpdate.Closed`, every CloseReason but
+> ApplicationExitCall); parts deleted only after the last refusals, a whole unpack (manifest written last) is reused by the retry; the half revert puts the new exe
+> back, `.old` never deleted with the exe missing; the old-bundle delete — `^Krinik_…$`, no Saved/Content/Binaries, default «Нет»; smaller items (cache lock,
+> the new bundle's uninstaller name, «после распаковки», the tail log line, `alive |= WaitOne(0)`). **Also fixed, the owner's eye 22:06: black triangles under the
+> buttons' cut corners on the LIVE window** (`MetalButton` — `SetStyle(Opaque, false)`; the self-snapshot hid it — EXP-0554). Stand (`.work/launcher54/batch57.sh`,
+> new cases L11–L14, B8′ second half, B14′ in the TC file, `test/make_stub.py`): run 1 on the pre-final exe **131 PASS / 7 FAIL — all L12 quick close** (the stand's
+> WM_CLOSE is TaskManagerClosing; filter widened, the stand now sends SC_CLOSE); run 2 on the FINAL exe `d6e507c2…` stopped at the owner's word after
+> **87 PASS / 0 FAIL** — S1–S3, L4, L5, L11 hang, **L12 quick close (passes now)**, L13, L14, B1, B4 + B14′ retry; **B8′ cut mid-run; B5′, B2, B5 not reached**
+> (`.work/launcher54/batch57_final.txt`; run 1 — `batch57_main.txt`).
+> **FIRST NEXT CHAT:** (a) **re-run `bash .work/launcher54/batch57.sh` on the final exe to the end** (B8′, B5′, B2, B5 are UNVERIFIED on it) and
+> **`CONTROL=1 bash .work/launcher54/batch57.sh`** (the new cases must FAIL on the 2f62b52 launcher — never run); (b) **capture the live window and look at the
+> button corners** (`ConanExiles/_config/capture-window.ps1 -Out <jpg> -Width 3840 -Process KrinikConanLauncher`, crop ×4) — the Opaque fix is NOT yet seen;
+> (c) **the judge round on the B7 diff — OWED by the owner's word** (stopped mid-read 22:10); (d) plan 55 **B8 — the crash report offers itself** at the next
+> launcher start (the owner 21:58 «было бы хорошо»; design in the plan); (e) the KUMM force-push — still the owner's call (KUMM not pushed since `82260a4`);
+> then the older list below (engine judge round 2, phase D). Bonsai trim NOT done at this closing (the owner's urgency) — owed.
+>
 > **NOW (chat of 2026-11-17 19:43, `resume` + the owner's D: order + «работай автономно» 20:00 → /dayloop).** (1) **D: put in order by the owner's four concepts**
 > (`HOUSE_RULES.md` rule 25 — clean version · shipment · source · build; chronicle entry 2026-11-17 19:43): the 3.1.1 download in `D:\Instals\` checked against its
 > download hash list — 597 files, 3 775 / 3 775 pieces, exe CL-383549; our 525 files (30.5 GB) removed from it; deleted the junction `D:\Games\Conan Exiles 3.1.0`, the 3.0.1
