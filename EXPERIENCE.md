@@ -91,15 +91,15 @@
 
 ## Entries
 
-### EXP-0546 · 2026-11-17 · ❌ · #conan #ue4ss #hook #native #state #action #bow #bug107
-class: state-forced-past-the-action — forcing a game state the game sets at an action's END skips the rest of that end
-**Result:** to make the bow ready in the flight after a wall, the hook set `SetCharacterState(Aggressive)` as soon as the game entered EquipItem: the draw and the
-shot then played in the air, but the flying arrow was born with speed 0 (the game's own end of the re-equip — an ACTION: EndAttackingFromItem → HandleItemInitialize →
-ActionEnd — had not run). Build r1 also never fired: a UE4SS hook on a NATIVE UFunction runs BEFORE its body, so the state read there was the old one (BP hooks run after).
-**Lesson:** a state is the visible end of an action, not the action — before setting it early, hook EVERY function of the actor and its weapon in the window where the game
-ends the thing (`window-probe.lua`), and judge the result by the effect the player needs (the arrow's speed at birth), not by the state or a log line. In a native hook
-read the new value from the call's parameter.
-**Trigger:** any «end the game's X early» edit; any hook on a `/Script/…` function that reads the object's state.
+### EXP-0546 · 2026-11-17 · ❌→✅ · #conan #ue4ss #hook #native #aim #bow #control-case #bug107
+class: test-geometry-blamed-on-code — the stand's own geometry made the defect, and four «fixes» were judged by it
+**Result:** an air shot right after a wall push «launched an arrow with speed 0»; I blamed my early end of the game's re-equip (the item's initialisation skipped) and
+wrote it into the bug, the map, this log and a commit — four tries «failed». The truth (10:3x): the hero still faced the wall she pushed off, the shot aims along the view,
+and the arrow stopped on that wall at birth. A climb with no re-equip at all gave the same v 0; the view turned 180° gave v 2499. Also true: a UE4SS hook on a NATIVE
+UFunction runs BEFORE its body (build r1 read the old state) — the new value is the call's parameter.
+**Lesson:** before blaming the code for a «dead» effect, run the control that removes the code's change (here: no re-equip at all) — if the defect stays, it is the stand.
+For anything that flies or aims, look where it points first (horses before zebras).
+**Trigger:** any shot / trace / projectile test right after a move that leaves the hero facing a surface.
 mechanized: no — the facts live in the game map «The character state across a climb» and `bugs/107_…`
 
 ### EXP-0545 · 2026-11-17 · ❌→✅ · #conan #stand #climb #weapon #papercut #bug105

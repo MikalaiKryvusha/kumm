@@ -44,6 +44,12 @@ Functional run: the game's own climb, push and shot events on the owner's save; 
 | B7 held RMB | skipped | real input |
 | K1 control | pass | TC_conan_wall_jump W6 (2026-11-14) |
 
+## ⚠️ Correction 2026-11-17 10:34 +03:00
+
+The «v 0» verdicts of runs 4–7 are the WALL IN FRONT: after the push the view faces the wall pushed off and the arrow stops on it at birth. With no re-equip at all
+(the bow kept in hand by a draw at the grab) the shot gave v 0 too; with the view turned 180° 0.15 s after the push — v 2499 in the flight (10:3x). The rearm is
+re-run with the view turned away — its own report.
+
 ## 5. Found
 
 - `bugs/107_conan_bow_not_ready_in_flight_after_wall.md` — the re-equip after a climb is an action that ends with the item's initialisation; a shot before it

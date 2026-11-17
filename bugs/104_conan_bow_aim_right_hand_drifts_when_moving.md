@@ -44,6 +44,17 @@ as with our mods (`s1` / `s2`). So the hand's move on walking comes from the gam
 (HOUSE_RULES rule 24: the cause is the game's). A fix is an edit of the game's own animation data — the owner's call (what he wants: the standing draw kept while
 walking, or only the hand kept on the string), asked with the four frames on one page. **Shown 2026-11-17 06:2x** — the page `D:/Games/Conan Exiles Mods/НА ОТСМОТР НИКОЛАЕМ/89_ruka_na_tetive_na_hodu/ruka_na_tetive.html` opened for the owner (the four frames; A — the standing draw kept while walking; Б — only the hand and the arrow kept on the string; В — he meant something else). Waits for his answer.
 
+## The owner's answer and the build's road (2026-11-17 10:40 +03:00)
+
+`[OWNER]` 2026-11-17 09:18 (interview #038): A — «Как стоя» (the standing draw kept while walking). Recon by the remote (10:39): the hero's anim class is
+`/Game/Master_AnimBP/AB_human_female.AB_human_female_C`, a child of `AB_human_male` (the graph lives there — `ConanExiles/_config/devkit/kit-probe-ab-children.json`);
+the draw montage `AM_combat_2h_bow_combo_heavy_c0` (7.05 s) plays in the slots `AttackMontageTorso3rd` / `AttackMontageTorso1st` — a TORSO slot layered over the
+locomotion, so walking mixes the locomotion's arm pose into the draw. The cause fix (rule 24) is in that layered blend of `AB_human_male`'s AnimGraph: the bow draw's
+arms taken whole from the montage while moving (the branch filter of the torso `LayeredBoneBlend` for the arm chains, or a bow-draw pose branch) — not a bone
+correction afterwards. NEXT: read the AnimGraph's torso slot → `LayeredBoneBlend` node and its branch filters by the kit (the node list and graph names are in
+`devkit/kit-probe-ab-fp-look.json`, `anim_graph_nodes`; the tool `kit-probe-ab-fp-look.py` already walks `LayeredBoneBlend` / `BlendListBy`), then a kit edit + cook
+of the AB into a Krinik pak, A-B frames standing / walking from the side camera (the stand of 06:11).
+
 ## Hypotheses (ranked, none tested)
 
 1. The game's own aim-while-moving blend (the bow's upper-body draw pose layered over the locomotion; the moving pose of the right arm differs) — vanilla; control

@@ -1,6 +1,6 @@
 # Bug 103 — the farewell hook loses the real farewell when the closing turn waits for a background judge or crosses an autocompaction
 
-**Status:** 🔧 FIX BUILT 2026-11-17 05:4x — an explicit farewell mark (below); the first live marked closure owed · filed 2026-11-14 23:58 +03:00 · **Severity:** S2 (a closing chat's farewell is lost or stale; the next `/resume` reads the waiting text) · **Version/build:** KUMM
+**Status:** 🔧 FIX BUILT 2026-11-17 05:4x — an explicit farewell mark (below); the first live marked closure PASSED (06:38, read 2026-11-17 by the next /resume) · filed 2026-11-14 23:58 +03:00 · **Severity:** S2 (a closing chat's farewell is lost or stale; the next `/resume` reads the waiting text) · **Version/build:** KUMM
 `tools/hooks/farewell-capture.mjs` as of the closure-ladder change (2026-11-14) · **When/context:** judge rounds 3–4 of the closure-ladder work <!-- attribution-ok: the order's verbatim is in PROJECT_HISTORY entry 2026-11-14 22:3x -->
 (the order of 2026-11-14 22:29, verbatim in PROJECT_HISTORY entry 2026-11-14 22:3x) · **Fixing:** after the closure-ladder commit — a separate change with its own judge rounds (out of that order's scope)
 
@@ -46,6 +46,9 @@ autonomy order (judge round 4, fixture with real shapes). Rolled back to the old
   the hook writes the message carrying it (on a line of its own), whatever came before in the turn; without the mark the committed logic runs unchanged.
   test-guards 301/301, the six new part-J cases red on HEAD; 15 real unmarked closures give the same file as HEAD (report
   `testcases/reports/2026-11-17_farewell-capture-marker.md`). Open: the first live marked closure (this chat's own); the old path's losses stay for an unmarked farewell.
+- **The first live marked closure — PASS, read 2026-11-17 10:40 +03:00 by the next chat's `/resume` step 0:** `FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md` (written 2026-11-17 06:38:30,
+  after the closing commit 06:37:44) holds the soft closure's farewell itself («Всё сделанное за чат проверено и отправлено на GitHub… Чат закрываю мягко…»), not a
+  waiting line; the mark path worked on the real path once. The old path stays the fallback for unmarked closures.
 - **Judge round 1 on the mark (06:0x, 2 defects, 4 risks, 2 cosmetic):** the mark counted on any line of any message (a code block showing the convention
   mid-chat would overwrite the file) — FIXED: only at the END of the message and only in a chat with an accepted closure (`closedEver`); a test did not guard
   the marked path's state write — FIXED (a fresh-state case); the control cases depended on order — FIXED; autonomy-guard did not know the mark (a second

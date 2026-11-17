@@ -191,8 +191,9 @@ Climbing (remote recon 2026-11-02 14:1x, for the owner's 09:07 request «кно�
   `AM_combat_2h_bow_3rd_equip`, the bow on `Socket_Bow`) → back to 0 by a TIMER 1.35 s after the exit, airborne or not (a push up 750 landed at 1.78 s; a
   montage played ×3 ended at 0.21 s and changed nothing). Until then `ActionTry` refuses: `BaseBPCombat_C:DebugActionTryFailure(FailureType)` says
   «NotAggressive» — a post-hook on it names every refused action. **The re-equip is an ACTION (2026-11-17, bug 107):** it ends ≈ 1.35 s after the exit with
-  EndAttackingFromItem → … → HandleItemInitialize → HandlePostAction → ActionEnd; a shot fired before that end (the state forced to 0 by us) launches the flying arrow
-  with NO speed (both `BP_Visual_BowProjectileBase_C` born v 0; the stuck copy lands at 0 0 0) — the equip montage `AM_combat_2h_bow_3rd_equip` is 1.333 s, sound notifies only.
+  EndAttackingFromItem → … → HandleItemInitialize → HandlePostAction → ActionEnd; the equip montage `AM_combat_2h_bow_3rd_equip` is 1.333 s, sound notifies only.
+  (CORRECTED 2026-11-17 10:33 +03:00: an air shot right after a push faces the wall pushed off — its arrow stops on the wall at birth (v 0); with the view turned away it flies v 2499.
+  Each shot births two `BP_Visual_BowProjectileBase_C`: the nocked one v 0 and the flying one.)
   **UE4SS hooks on a NATIVE UFunction run BEFORE its body** (`ConanCharacter:SetCharacterState(NewState, Replicate)`: the state read in the hook is the old one). (`ECharacterSubState` is 0–22: Failing 8, Attacking 11, PowerCharge 15, ChargeHold 16;
   `InSubstate(40)` true beside 8 is an out-of-range artefact.) **The hero in the air (read live 2026-11-14 17:4x):** `CharacterMovement.AirControl` 0.60
   (the game's own — WASD steers every jump: real D held 0.7 s in a standing jump → 100 cm sideways, 0.8 s after a wall push → 125 cm along the wall),

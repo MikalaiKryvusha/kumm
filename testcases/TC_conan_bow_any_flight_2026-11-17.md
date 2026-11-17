@@ -37,11 +37,12 @@ time, mode, substates, ECharacterState, the bow's socket. Logs `[KrinikConanLoco
 
 | # | Case (steps → expected) | Technique | Status + evidence |
 |---|---|---|---|
-| B1 | On the wall, `airshot` (draw 0.25, shot 0.75) → state 0 within ≈ 0.3 s, substates 11 / 15 in mode 3, the shot before mode 1; the line «полёт после стены: лук готов сразу …» | partition (wall) | **fail** (r1: the hook read the old state — never fired; r2: state 0 at 0.11 s, the draw and the light shot in the air, but the flying arrow born with v 0 — `arrow-birth-probe.lua`; 3 more tries v 0) — `bugs/107_…`, not shipped |
+| B1 | On the wall, `airshot` (draw 0.25, shot 0.75) → state 0 within ≈ 0.3 s, substates 11 / 15 in mode 3, the shot before mode 1; the line «полёт после стены: лук готов сразу …» | partition (wall) | **fail** (r1: the hook read the old state — never fired; r2: state 0 at 0.11 s, the draw and the light shot in the air, but the flying arrow born with v 0 — `arrow-birth-probe.lua`; 3 more tries v 0) — CORRECTED 2026-11-17 10:34 +03:00: v 0 = the arrow hit the wall the view faced; the case is re-run with the view turned away (`bugs/107_…`) |
+| B1′ | The same with the view turned 180° 0.15 s after the push (`SetControlRotation`), LMB at 0.3 s — the hero aims AWAY from the wall she pushed off | partition (wall, aimed away) | **pass** 2026-11-17 10:38 +03:00 (rearm r2): «полёт после стены: лук готов сразу …» 0.1 s after the exit, the light shot in mode 3, the flying arrow born v 2499, «#1 из лука» 0.67 s after the push, the landing at 1.29 s · report `testcases/reports/2026-11-17_conan-bow-any-flight-r2.md` |
 | B3 | On the ground, `airshot` → the draw and the shot in mode 3 (regression) | partition (ground jump) | partial · the remote's draw stays in 11 (RMB not held physically), the light shot's arrow left after the landing (#1, #2); real input — the owner's play 2026-11-10 (M6) |
 | B4 | The hero lifted 6 m by `K2_SetActorLocation`, RMB / LMB events in the fall → the draw and the shot in mode 3 | partition (fall) | partial · a light shot (LMB only) in the fall: the arrow born v 2499, «#3 из лука»; RMB + LMB by the remote → «CannotQueue» (the remote's draw, not held) |
-| B5 | On the wall, `airshot` with the shot at 1.6 s (`_G.__ws_end` 2.2) → 15 / 16 kept past 1.35 s; the shot fires | boundary (the game's timer) | blocked by B1 |
-| B6 | On the ground, `ToggleWieldWeapon()` ×2 (sheathe, wield) → state 3 lasts as the game's, no AirCombat «полёт после стены» line | partition (not a climb) | blocked by B1 (the rearm is not shipped) |
+| B5 | On the wall, `airshot` with the shot at 1.6 s (`_G.__ws_end` 2.2) → 15 / 16 kept past 1.35 s; the shot fires | boundary (the game's timer) | partial 2026-11-17 10:46 +03:00 — a light shot at 1.15 s (it replaced the equip montage at 1.20 s, the game's equip end around it) launched a flying arrow v 2499, «#2 из лука»; a HELD draw past 1.35 s — real input (B7) |
+| B6 | On the ground, `ToggleWieldWeapon()` ×2 (sheathe, wield) → state 3 lasts as the game's, no AirCombat «полёт после стены» line | partition (not a climb) | blocked — the remote's `ToggleWieldWeapon()` does not sheathe a wielded bow (state 0, `Socket_Bow` before and after, 2026-11-17 10:38 +03:00); by the code: `on_character_state` returns at once unless a climb ended in the air ≤ 2 s ago |
 | B7 | RMB held from the wall through the push — real keys | use-case (held) | skipped — real input; the owner at the keyboard (rule 30); for his play |
 
 ## 5. Control cases — MUST
@@ -52,5 +53,5 @@ time, mode, substates, ECharacterState, the bow's socket. Logs `[KrinikConanLoco
 
 ## 6. Verdict
 
-fail for the wall flight (B1) — research in `bugs/107_conan_bow_not_ready_in_flight_after_wall.md`; the rearm not shipped. Run report
-`testcases/reports/2026-11-17_conan-bow-any-flight-research.md`.
+B1′ pass on rearm r2 (the shot aimed away from the wall) — the earlier B1 «fail» was the wall in front (bug 107, Correction); B3 / B4 partial (the remote's draw),
+B5 / B6 blocked, B7 the owner's real keys. Reports `testcases/reports/2026-11-17_conan-bow-any-flight-research.md`, `…-r2.md`.

@@ -52,7 +52,12 @@ line now splits the full and the light path and prints the Lua heap's growth; pa
   itself. No timer of ours. The game's own reason bits cannot carry it: their rates are native (game map «How the game spends stamina over time»). One log line per
   hang: «вис кончился (режим …): N с на стене, расход виса M …». TC `testcases/TC_conan_wall_hang_stamina_2026-11-17.md` H1–H5 pass (report
   `testcases/reports/2026-11-17_conan-wall-hang-stamina.md`); two judge rounds.
-- Open: G6 (two walls); the hang's cost with the game in front; real keys (the owner's play).
+- **The bow ready in the flight after a wall** (`[OWNER]` 2026-11-17 09:18, interview #035 — any flight: ground, wall, a fall; `bugs/107_…`), section `krinik_air_combat`:
+  a climb that ends in the air arms a 0.5 s window for that hero; the hook on the native `SetCharacterState` (runs BEFORE the body — the new state is its `NewState`)
+  sees the game's re-equip (EquipItem), and on the next step, still falling with the bow in hand, `SetCharacterState(Aggressive, true)` + `ExitSubstate(8)`. A ground jump
+  and a fall needed nothing (the take-off branch). TC `testcases/TC_conan_bow_any_flight_2026-11-17.md` B1′ pass (the shot aimed away from the wall the hero pushed off —
+  aimed at it, the arrow stops on it at birth). Pack `ee7e31c`, judge round 1.
+- Open: G6 (two walls); the hang's cost with the game in front; real keys (the owner's play) — the hang, and RMB held through a push.
 - The player guide of the next release carries: the jump off a wall (since 2026-11-14) and the grab in the air; the shipped 0.9.0 guide (`docs/guide/guide-3.0.1.html`) is
   left as released `[AI]`.
 
