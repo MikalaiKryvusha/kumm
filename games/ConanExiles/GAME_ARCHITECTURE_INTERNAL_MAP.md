@@ -165,7 +165,10 @@ Climbing (remote recon 2026-11-02 14:1x, for the owner's 09:07 request «кно�
   hanging hero with no attack it kept the climb; `ExitSubstate(16, 15, 11)` ends the stance and keeps the climb, but the draw montage played on and re-entered 15 / 16
   for a draw begun ≈ 0.25 s before the touch (observed once, 23:46); `StopAnimMontage(nil)` + the exits ended it on the wall in one remote read (1.8 s, RMB held, 23:49)
   and one real-input run (23:52) — the view returns by itself in 0.3 s; over the wall's top the held RMB redraws in the air (23:52). On the ground a held RMB restarts
-  the draw within 1 s after `CancelAttackTry`.
+  the draw within 1 s after `CancelAttackTry`. **2026-11-17 (r14 / r15, real input, RMB held):** stop the draw montage BY IDENTITY — `c:StopAnimMontage(<the
+  AM_combat_2h_bow_combo_heavy_c0 asset>)`, active-checked by `Mesh:GetAnimInstance():Montage_IsActive` — then `ExitSubstate(16, 15, 11)`: the stance stays gone for
+  2–3 s of held RMB on the wall, `IsAttacking` reads false, and after climbing down the game's jump and a new draw work. `StopAnimMontage(nil)` stops whatever
+  montage started LAST (`GetCurrentMontage`), which a hit reaction in another slot could be.
   **2026-11-14 15:2x — the climb by the remote, no real input (`_config/wall-stand.lua`):** facing a vertical wall 60 cm off, the hero's own jump input event
   (`InpActEvt_Jump_K2Node_InputActionEvent_27` then `_26`) + `AddMovementInput` into the wall + `Climb(false)` called WHILE AIRBORNE starts the climb: `MovementMode` 7
   (custom), `CustomMovementMode` 0; forward input then climbs up. The game does NOTHING on Jump while climbing (mode 7, speed 0 for 1 s). `BaseBPCombat_C:StartJump`
