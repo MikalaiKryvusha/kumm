@@ -141,15 +141,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > allows several; plan 56 step 4 holds the new brief, the four old errors, the kept work files in `.work/dash_fix/`. The lint stays strict, so the PDF build
 > is refused until that pass is done. (6) **Launcher judge round 3: D1 + R1, R3, R4, R6, C4, C8 fixed** (plan 55 B8 lists them and the OWED R2, R5, R7, C1–C3,
 > C5–C7); exe `c834b0d4…`; the stand now builds the launcher under test as 1.0.0 (`batch58.sh`, the manifest says 1.1.0). **In game NOT seen yet:** the hub
-> rows' new hints. Pack LOCAL commits `8ec5b4a` (launcher: B7 judge fixes + B8 + round-3 fixes) and `28a2bc9` (L8 past the settle); the texts commit
-> drafted in `.work/commit_pack_texts.txt` (waits for the tooling judge).
+> rows' new hints. Pack LOCAL commits `8ec5b4a` (launcher: B7 judge fixes + B8 + round-3 fixes) and `28a2bc9` (L8 past the settle), `2d4b104` (texts, the dash lint, 0.9.1 numbers, the 3.1.1 guide), `926c887` (C1, C2, C3, C5, C6; stand 175 / 0) — all LOCAL.
+> The tooling judge round (dash_lint, build-docs gate, mods-table) was running at the closing — its report is owed to the next chat.
 > **FIRST NEXT CHAT:** (a) a judge round on the launcher's last fixes (crash handler only before settle, guarded report start, seen stamp by creation time
 > in %LOCALAPPDATA%, keepOld refuses self-update), then push the pack; (b) dm-fish pass 2 — a helper started 01:28 writes `.work/dash_fix/pass2/new.tsv` +
 > `allowed.tsv`: parity by `apply_dmfish.py` (repoint it to pass2), a clean sample read, allow-list the kept dashes with their class, `make_locres_fix.py` →
 > `locres-set-tr.py`, `deploy-localization.py`; (c) ONE game run: the hub rows' new hints + a locres sample + the crash offer on the real build folder;
 > (d) epic 55 D4 — «Что нового» 0.9.1, known issues, release notes BY the owner's portrait (git log of the pack since 2026-11-02), a clean check, then shown
-> to him; (e) the owed launcher items R5, C7 (plan 55 B8); C1, C2, C3, C5, C6 are fixed and compiled but UNCOMMITTED in the pack
-(`KrinikConanLauncher.cs`, `KrinikConanUpdates.cs`) — they go into the judge round of item (a) and its commit; (f) the KUMM force-push — still the owner's call.
+> to him; (e) the owed launcher items R5, C7 (plan 55 B8); C1, C2, C3, C5, C6 are fixed in `926c887`
+— they go into the judge round of item (a) before the push; (f) the KUMM force-push — still the owner's call.
 >
 > **Moved verbatim to the chronicle (entry 2026-11-18 01:37 +03:00):** the blocks CHAT CLOSED 2026-11-17 22:1x, NOW 19:43 and NOW 14:40. Still open from them: the walking bow draw (bug 104, the post-process route), the owner's real-key checks (wall hang drain, RMB through a wall push, bug 105 G1 / G5b / G10 / G7, G6), bug 93 (the held draw ends in a sprint); the auto-relay L1″ / L2 / L3 after the owner's «Do not ask me again» tick.
 > **Moved verbatim to the chronicle (entry 2026-11-17 21:3x +03:00):** the blocks FIRST NEXT CHAT item 1 (the auto-relay task — built; its L2 / L3 open in the NOW block of 14:40) and CHAT CLOSED 2026-11-17 11:04.
