@@ -154,15 +154,15 @@ KrinikConanArchery's first-person section already does), out tables reused, no s
 **Cost — measured 2026-11-17 05:1x–05:2x (the game in front, real input, the owner's world on 3.1.0):**
 - The minute line was split (pack working tree): the FULL path (the call computed the gate) vs the LIGHT one, each with its worst and its count over the 1 ms clock
   step, plus the Lua heap's growth. `os.clock` here steps by 1 ms (every reading is a whole ms) — a call of 0.3 ms reads «1 ms» three times in ten.
-- Six 25 s chunks of a sprint with the bow drawn (`KUMM/.work/sprintcost/run.sh 6 25000 draw`, the hero turned around between chunks, the stand keeper's kill timer off):
+- Six 25 s chunks of a sprint with the bow drawn (`ConanExiles/_config/sprint-cost-run.sh 6 25000 draw`, the hero turned around between chunks, the stand keeper's kill timer off):
   05:19 — 1854 calls, 206 ms, full path 299 calls, 136 over the step (45 %), light 12 of 1555 (0.8 %); 05:20 — full 67 of 107 (63 %); 05:21 — full 70 of 110 (64 %);
   worst 2–3 ms (the 1 ms step). So the spikes are OUR work — the light path, timed by the same clock in the same frames, almost never crosses the step.
-- Microbench of the gate's calls (N = 500 repeats on the game thread, `KUMM/.work/sprintcost/microbench.lua`, `microbench2.lua`): InSubstate 30–38 µs, IsPlayerControlled
+- Microbench of the gate's calls (N = 500 repeats on the game thread, one-off probes, results in the report `testcases/reports/2026-11-17_conan-bow-sprint-cost.md`): InSubstate 30–38 µs, IsPlayerControlled
   36, GetVelocity 42, GetAngleOfMovement 24, IsMovingOnGround 6, the attached-actor bow walk 54, GetSubstateList 36 (returns a table of wrappers: [11, 15, 16] in a full
   draw), property reads (bTrySprint, GetAddress) 0–2 µs. The gate made ≈ 10 calls — six InSubstate alone ≈ 0.2 ms; the whole full path ≈ 0.4 ms.
 - The fix (pack working tree, `krinik_bow_sprint.lua`): ONE `GetSubstateList()` for the draw and the exhaustion tests, `IsPlayerControlled` kept per pawn, the walking
   mode and the velocity read as properties of `CharacterMovement`; the bow walk last. Expected ≈ 0.12 ms for the full path — to be measured by the same chunks.
-- **v2 measured (05:27–05:29):** full-path crossings 32 / 51 / 49 %, the minute's own time 79–83 ms. `microbench3.lua` while sprinting drawn: the old gate 313 µs,
+- **v2 measured (05:27–05:29):** full-path crossings 32 / 51 / 49 %, the minute's own time 79–83 ms. `ConanExiles/_config/sprint-gate-microbench.lua` while sprinting drawn: the old gate 313 µs,
   the new 147 µs (GC stopped 130), of it the bow walk 67 µs and ≈ 5 KB of garbage a gate; a full Lua collect in the remote's state 2 ms (heap 2.3 MB).
 - **v3 (05:3x):** «the bow in hand» kept for one continuous draw (dropped at the first gate with no draw, recomputed after 100 ms without a gate — a weapon swap
   with Shift up must not find the old answer), the angle's out table reused. Measured 05:34–05:36: full-path crossings 50 / 265 (19 %), 31 / 146 (21 %), 26 / 144

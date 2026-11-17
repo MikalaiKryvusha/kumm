@@ -100,7 +100,7 @@ calls and the light path on 0.8 % — our work. A microbench (N = 500 repeats of
 InSubstate. The gate 313 → 147 µs, then the bow walk kept per continuous draw: full-path crossings 18–21 %, the minute's own time 96–105 → 38–52 ms.
 **Lesson:** in a UE4SS hot path count the CALLS, not the lines: every reflected call is tens of µs and leaves garbage; prefer one list call, property reads
 (`CharacterMovement.MovementMode`, `.Velocity`) and per-episode memo of facts that cannot change mid-episode. Measure with a light-path control in the same clock.
-**Repro:** `bash KUMM/.work/sprintcost/run.sh 6 25000 draw` (the game in front) → the BowSprint minute lines in UE4SS.log; `pult.sh "lua return dofile('…/microbench3.lua')"` while sprinting drawn.
+**Repro:** `bash ConanExiles/_config/sprint-cost-run.sh 6 25000 draw` (the game in front) → the BowSprint minute lines in UE4SS.log; `pult.sh "lua return dofile('D:/work/ai_sandbox/ConanExiles/_config/sprint-gate-microbench.lua')"` while sprinting drawn (report `testcases/reports/2026-11-17_conan-bow-sprint-cost.md`).
 **Trigger:** any mod hook that runs every movement tick or every frame (K2_CanSprint, EvaluateMovement_*, Tick-like events).
 none-cheap: the price list now lives in `krinik_bow_sprint.lua`'s gate comment and this entry; a lint cannot price calls
 
