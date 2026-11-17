@@ -94,6 +94,18 @@ Phase B and phase A run in parallel (B needs no game: the fixture stand). D need
       previous-bundle delete guard — require `^Krinik_[A-Za-z0-9_]+$`, refuse a folder holding Saved / Content / Binaries, default «Нет». Smaller: log «окно живо»
       only after a real Set; `alive |= ready.WaitOne(0)` after the wait loop; lock `Bundle.cache`; check the NEW bundle's uninstaller name after install; the confirm
       box «после установки … удалятся» → «после распаковки»; tests — the 30 s hang case, the quick-close case, B1 asserting the tail was checked (not null).
+      **Verification 2026-11-18 00:43–00:52** (report `testcases/reports/2026-11-18_conan-launcher-b7-verification.md`): the whole batch on the final exe
+      138 PASS / 0 FAIL (B8′, B5′, B2, B5 included); control on 2f62b52 — 26 FAIL in the new cases (L6 passes there: a new check of old behaviour) — corrected
+      01:09: first written as 153 / 32, a count that took the summary lines «ALL PASS» / «N FAILED» for checks; the live
+      window — the black corners gone. **Judge round (fresh helper, 2026-11-18 00:4x–01:00): no defect in the normal path; 7 risks, 5 cosmetic — all checked against
+      the code and confirmed:** R1 a UI-thread exception in the first 3 s counted as «alive» (the .NET error box runs a message loop, the settle timer fired
+      behind it) → `Application.ThreadException` → `SelfUpdate.Crash` (flag first, own box, exit 1); R2 the «whole unpack» test (install.ps1 + manifest of the
+      version) is also met by a manual 7-Zip extraction in progress → marker `pack\.krinik_unpacked` (tag + archive size) written last by `Unpack`, deleted
+      first; R3 no test for it → stand case `--half-bundle` (B15′), the B7′ check reads the marker; R4 the space need skipped the unpack when a stopped unpack left
+      the folder → `Total` counted whenever not Ready; R5 both revert moves failed → the exe slot is retried at settle (`RestoreSlot`), a box names the file to
+      rename; R6 L6 could not tell a hang from an exit → asserts «(код -1)»; R7 a half revert committed 3 s later → `keepOld`: that run keeps `.old` and the counter;
+      C1–C5 comments, a check name, stand leftovers (`rmtree $R` at the end), `make_stub.py` source cleanup, the fake game compiled before the update.
+      Rebuilt exe `45443b7a…`; batch `batch57_r2.txt` running at 01:04.
 - [ ] B8. **The crash report offers itself** — `[OWNER]` «падение само логи соберёт человеку для отправки нам в issues?» · «было бы хорошо» · 2026-11-17 21:58
       (tossed mid-B7). Today (read 21:58): nothing fires on a crash — the player presses «Отзыв» → «Собрать отчёт» (launcher) or «ОТЗЫВ» (game menu); the zip
       (`_config/player-report/collect_report.ps1`: game logs, `Saved/Crashes` of 7 days, UE4SS.log, identifiers scrubbed, no minidump) lands on the desktop and
@@ -103,6 +115,11 @@ Phase B and phase A run in parallel (B needs no game: the fixture stand). D need
       title prefilled (the zip is dragged in by the player — a URL cannot attach a file); «Нет» — recorded as seen, never asked again for that crash. Not at the
       crash itself: the crashed game runs nothing, and «Играть» closes the launcher (HOUSE_RULES rule 26). Cases on the stand: a fake `Crashes/<new>` folder →
       the box; the second start → no box; no folder → no box; the issue URL in the dry log. Goes into the D-fb feedback section of README and guide.
+      **BUILT 2026-11-18 01:0x** (`KrinikConanLauncher.cs` `OfferCrashReport`; the «seen» state in `%TEMP%\KrinikConanLauncher.crashes-<hash of the game folder>.seen`
+      because a file in the game folder would outlive the uninstaller): offered only for a crash folder NEWER by time than the one seen, once per crash whatever the
+      answer; stand case `crash` (B16′, C1–C6) in `.work/launcher54/batch58.sh`; judge round 2 running on it.
+- [x] D-fb (done with plan 56, 2026-11-18 01:0x): the second feedback path, GitHub Issues, in the report tool's console and box, `feedback_howto.txt`, the guide's
+      «Отзывы и обратная связь», the README template (both languages) and the launcher's «Отзыв» plaque; the author-links section untouched (rule 22).
 
 The design inputs already read (local recon, 2026-11-17 20:1x): the deploy's undo journal (`Deploy-ModPack.ps1` `Save-Original` / `Invoke-Restore`) records `replaced` /
 `created` / `dir` per file and the uninstall returns the pre-build copies — so every config file the player changed after the install is lost on an update; the

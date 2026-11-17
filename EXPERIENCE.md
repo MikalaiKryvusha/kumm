@@ -91,6 +91,24 @@
 
 ## Entries
 
+### EXP-0557 · 2026-11-18 · ❌→✅ · #launcher #marker #completeness #judge #update
+class: a-completeness-test-other-producers-also-pass
+**Lesson:** the launcher took «install.ps1 + pack\modpack.json of this version» as «the archive is unpacked whole» because ITS unpack wrote the manifest last;
+the judge (round on B7) showed that a player's 7-Zip extraction into the same folder name leaves both files in its first seconds (they come before 13 GB of
+mods in the archive) — a half folder passed as ready and the installer would run on it. A «done» marker must be a file only the finishing step of OUR
+producer writes (`pack\.krinik_unpacked`: tag + archive size, deleted first, written last), never a file that is part of the payload.
+**Trigger:** any «already done, skip it» shortcut (unpacked, downloaded, migrated, built) — ask who else can create the files it tests.
+mechanized: stand case `--half-bundle` (B15′) in `ConanExiles/_config/launcher/test/live.mjs`
+
+### EXP-0556 · 2026-11-18 · ❌ · #russian #owner-voice #text #launcher #guide
+class: telegraphic-dash-instead-of-a-verb
+**Lesson:** the agent wrote player text in a compressed telegraph style — «Игра не найдена: сборку — в папку игры», «Кнопки — в инвентаре», «Настройки —
+команда консоли» — 875 such lines across the launcher, the report tool, the mod settings, the guide, the README and our translations. The owner saw one in a
+stand window and ordered all of them out (`[OWNER]` 2026-11-18 00:44, `PROJECT_HISTORY.md`). A sentence names who does what with a verb; a dash may stand only
+where grammar needs it (direct speech, a range, a GOST caption, a mod's own name).
+**Trigger:** before writing any Russian line a person reads — `RUSSIAN_RULES.md` §11; before a release — the lint.
+mechanized: `python -I -X utf8 ConanExiles/_config/release/dash_lint.py` (exit 1 on a hit; `HOUSE_RULES.md` rule 33)
+
 ### EXP-0555 · 2026-11-17 · ❌→✅ · #stand #background #process-tree #owner-screen
 class: a-stopped-background-batch-keeps-running
 **Lesson:** stopping a background stand batch by the harness's task stop ended only its wrapper: `bash batch57.sh` (another PID) went on with the next

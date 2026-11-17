@@ -213,6 +213,15 @@
     `.kaif/_explain-page-template.html` (images embedded, the question at the top, a Russian caption under each image saying what it shows and what to look at), open it for
     the owner, one chat line on what is there. A folder of files with a notes file beside it is not a show. `[OWNER]` 2026-11-13 15:28 · verbatim in `bugs/95_…`.
 
+33. **A dash never stands in for a verb in Russian text.** Every Russian sentence the player or the owner reads — launcher, installer, uninstaller, report tool,
+    mod UI, locres fixes, guide, README, release notes, Nexus text, interviews, the chat — is a whole sentence with its verb.
+    1. Before writing, load the owner's voice portrait (`node .kaif/tools/kaif-voice-lint.mjs load`) and the Russian method (`researches/russian-writing/RUSSIAN_RULES.md` §11).
+    2. A dash that replaces a verb, a preposition or a «это» is rewritten as a full sentence: the line of the launcher «Игра не найдена: сборку — в папку игры» <!-- verbatim-ok: the defective line the owner quoted -->
+       becomes a sentence that says who does what («Игра не найдена. Распакуйте сборку в папку игры.»). <!-- verbatim-ok: the rewritten line -->
+    3. A dash stays only where Russian grammar requires it and no verb is missing (a direct-speech dash, a range of numbers).
+    4. The check: `python ConanExiles/_config/release/dash_lint.py` lists every Russian player string with a dash; a hit is rewritten, never waived silently.
+    `[OWNER]` 2026-11-18 00:44 · `PROJECT_HISTORY.md` entry 2026-11-18 00:44.
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —
 WebP, never PNG). The context-budget hook's hint is obeyed (`CLAUDE.md`).
