@@ -29,6 +29,14 @@ from behind at ≈ 1/6 of the frame height — too small to tell the hand on the
 after RMB, the full hold comes ≈ 0.55 s + the draw). NEXT: a close side camera on the hero's right shoulder (the camera remote / `fixed-cam.lua` at ≈ 1.2 m, the
 bow arm in frame), frames only in the FULL hold (substates 11,15,16 read by the 15 ms recorder at the frame's moment), standing vs walking in one sequence.
 
+**Side frames 2026-11-17 06:11** (a fixed camera 2.3 m to the hero's right and 1.7 m ahead, chest height, `fixed-cam.lua`; RMB held 3.2 s then W 2.4 s; frames
+`KUMM/.work/bowhand/s1_stand.webp` — 2.4 s, the full hold standing; `s2_walk.webp` — ≈ 1 s into W): standing, the right hand pulls the string to the chin, the
+nock at the hand; walking, the right hand sits further FORWARD, in front of the face, the draw visibly shorter, the string still meeting the hand at the nock
+as far as the frame shows. Whether this is the owner's «уходит с тетивы и тела лука вправо» is NOT settled — the fixed camera's angle to the hero changes as she
+walks, and from the game camera (behind, zoomed in by 3 wheel notches) the hotbar covered the hand and the view turned to the rock. NEXT: (1) the H7 / H8 control
+(vanilla vs ours — if vanilla shortens the draw the same way, it is the game's moving-aim animation); (2) a camera that follows the hero (re-placed relative to
+her before each frame, or the game camera with the HUD hidden) for a same-angle pair; (3) the pair to the owner on one HTML page («это тот сдвиг?»).
+
 ## Hypotheses (ranked, none tested)
 
 1. The game's own aim-while-moving blend (the bow's upper-body draw pose layered over the locomotion; the moving pose of the right arm differs) — vanilla; control

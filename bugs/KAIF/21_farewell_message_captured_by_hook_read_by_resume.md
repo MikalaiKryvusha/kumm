@@ -44,3 +44,9 @@ added to the deployed `/resume` in all five agent systems (`.claude`, `.agents`,
 `tools/test-guards.mjs` part J (9 cases; a mutant without the closure check reddens 3); functional run on the real transcript of the
 previous chat — the captured text is exactly the farewell the owner pasted (`testcases/reports/2026-10-30_farewell-capture-hook.md`). Reconcile
 at the next `/kaif-update`: the deployed `/resume` diverges from origin by Step 0.
+
+## Field update 2026-11-17 (posted: https://github.com/MikalaiKryvusha/KAIF/issues/181#issuecomment-6936948110)
+
+The hook kept a closure's waiting line three closures in a row (a judge in the closing turn); a turn-model fix was refuted on 78 real transcripts (9 closures
+lost their farewell when the owner typed during the closure); the fix that holds — the closure skills end the farewell with `<!-- farewell -->`, the hook writes
+the message whose END is the mark, only after an accepted closure; unmarked closures unchanged. Local remediation: KUMM bug 103, commit `bb44eb3`.
