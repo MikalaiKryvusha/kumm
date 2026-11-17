@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0546 · 2026-11-17 · ❌ · #conan #ue4ss #hook #native #state #action #bow #bug107
+class: state-forced-past-the-action — forcing a game state the game sets at an action's END skips the rest of that end
+**Result:** to make the bow ready in the flight after a wall, the hook set `SetCharacterState(Aggressive)` as soon as the game entered EquipItem: the draw and the
+shot then played in the air, but the flying arrow was born with speed 0 (the game's own end of the re-equip — an ACTION: EndAttackingFromItem → HandleItemInitialize →
+ActionEnd — had not run). Build r1 also never fired: a UE4SS hook on a NATIVE UFunction runs BEFORE its body, so the state read there was the old one (BP hooks run after).
+**Lesson:** a state is the visible end of an action, not the action — before setting it early, hook EVERY function of the actor and its weapon in the window where the game
+ends the thing (`window-probe.lua`), and judge the result by the effect the player needs (the arrow's speed at birth), not by the state or a log line. In a native hook
+read the new value from the call's parameter.
+**Trigger:** any «end the game's X early» edit; any hook on a `/Script/…` function that reads the object's state.
+mechanized: no — the facts live in the game map «The character state across a climb» and `bugs/107_…`
+
 ### EXP-0545 · 2026-11-17 · ❌→✅ · #conan #stand #climb #weapon #papercut #bug105
 class: stale-stand
 **Result:** after a restart the next case's hot-bar key and `ToggleWieldWeapon()` did nothing — the hero was still HANGING on the wall from the case before (the game keeps
