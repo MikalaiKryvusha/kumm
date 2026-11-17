@@ -162,7 +162,7 @@ new game enters the world without a crash, every mod's function intact. No frame
 - (a) A mod re-uploaded for 3.1.0 changed an asset we patch — the recipe breaks or silently patches the wrong row (step 3: every recipe's output read).
 - (b) UE4SS 1181 misses a signature on the new exe — the log says so at once; cure: a newer UE4SS build.
 - (b) The download still writes files while we deploy — deploy only after the folder stops changing (no file newer than 2 minutes).
-- (c) The torrent client re-checks the folder and «repairs» files we changed (UE4SS `dwmapi.dll`, No-Intro-Splash movies) — the owner's client; noted, not ours.
+- (c) The download client re-checks the folder and «repairs» files we changed (UE4SS `dwmapi.dll`, No-Intro-Splash movies) — the owner's client; noted, not ours.
 
 ## Decisions made without the owner
 

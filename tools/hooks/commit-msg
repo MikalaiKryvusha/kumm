@@ -1,0 +1,19 @@
+#!/bin/sh
+# commit-msg — the commit MESSAGE is published to the public GitHub exactly like the files, so it passes the same identity gate.
+# Paid for 2026-11-17 20:0x: pre-commit checked the files only, and a forbidden word inside a tool name in a commit message reached the public kumm
+# history (the owner: «ну не нужно такое в публиыный репозиторий!!!»). Active through core.hooksPath = tools/hooks
+# (node tools/scrub-identity.mjs --install-hook).
+# @guard commit-msg-identity
+# THREAT:         a word of the owner's local forbidden list or a machine identifier written into a commit message and pushed
+# PROVED-AGAINST: a message file holding the forbidden word -> exit 1; the same message reworded -> exit 0 (run 2026-11-17)
+# GAP:            a message edited after the hook (git commit --amend without -F still runs it; --no-verify skips every hook)
+# ON-REAL-PATH:   the next real commit of KUMM after 2026-11-17 20:1x
+if ! command -v node >/dev/null 2>&1; then
+  echo "commit-msg: node не найден — сообщение коммита проверить нечем." >&2
+  exit 1
+fi
+if ! node tools/scrub-identity.mjs --check "$1" >&2; then
+  echo "КОММИТ ОСТАНОВЛЕН: опознаватель в СООБЩЕНИИ коммита — перепиши текст сообщения нейтрально (файл сообщения: $1)." >&2
+  exit 1
+fi
+exit 0
