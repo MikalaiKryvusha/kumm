@@ -53,7 +53,17 @@ locomotion, so walking mixes the locomotion's arm pose into the draw. The cause 
 arms taken whole from the montage while moving (the branch filter of the torso `LayeredBoneBlend` for the arm chains, or a bow-draw pose branch) — not a bone
 correction afterwards. NEXT: read the AnimGraph's torso slot → `LayeredBoneBlend` node and its branch filters by the kit (the node list and graph names are in
 `devkit/kit-probe-ab-fp-look.json`, `anim_graph_nodes`; the tool `kit-probe-ab-fp-look.py` already walks `LayeredBoneBlend` / `BlendListBy`), then a kit edit + cook
-of the AB into a Krinik pak, A-B frames standing / walking from the side camera (the stand of 06:11).
+of the AB into a Krinik pak, A-B frames standing / walking from the side camera (the stand of 06:11). **The place of the edit already exists:** KrinikConanArchery ships a
+whole override of `AB_human_male` (bug 95, `ConanExiles/_config/devkit/kit-ab-fp-upright.py` — saved into `Mods/KrinikConanArchery/Content/Master_AnimBP/`, its cook
+line in that mod's `Local/CookInfo.ini`; logic only through member bools set in the EventGraph — the AnimGraph runs on worker threads, impure calls there fail the
+compile). The walking-draw edit goes into the same override by the same pattern (a member bool «bow drawn while moving» → the torso blend's branch). Cases
+`testcases/TC_conan_bow_draw_walking_pose_2026-11-17.md`. The probe `devkit/kit-probe-ab-torso-slot.py` (2026-11-17 10:48) reads the torso slot and every
+`LayeredBoneBlend`.
+**Probe 1 read 2026-11-17 10:51 +03:00 (`devkit/kit-probe-ab-torso-slot.json`, 492 AnimGraph nodes, 27 LayeredBoneBlend):** the slot `AttackMontageTorso3rd` is saved as the cached pose
+`TorsoAttackPose`; a «Blend Poses by bool» takes on one pose `TorsoAttackPose` WHOLE (standing — the full draw, the hand at the chin) and on the other a
+LayeredBoneBlend (base `PostEquip…` — the locomotion with the equipped arms; layer `TorsoAttackPose`; mesh-space rotation blend ON) — walking: the legs from the
+locomotion, the torso from the draw. That layered branch is where the hand leaves the chin. Probe 2 (`devkit/kit-probe-ab-torso-blend.py`) reads its branch filters
+(bones, blend depths) and the bool that picks the branch.
 
 ## Hypotheses (ranked, none tested)
 

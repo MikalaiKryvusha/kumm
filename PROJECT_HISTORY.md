@@ -7556,3 +7556,27 @@ Their open items stay in STATUS as one pointer line. Verbatim:
 > waits for a free PC (owner-presence BUSY twice at 10:4x). The harness
 > TEMP is STILL `D:\Temp` (its background-task output lands in `D:\Temp\claude\…`): VS Code was not restarted after the user TEMP moved to `F:\Temp` — told
 > the owner; the 8 leftovers in `D:\Temp` wait for that restart. Untracked on entry, not mine: `researches/pc-usb-lag/`, a Svarog PDF in `researches/svarogs-dream/`.
+
+## 2026-11-17 10:52 +03:00 — STATUS bonsai trim (chat of 2026-11-17 08:53, dayloop): the blocks of the chat of 2026-11-17 04:25 moved verbatim
+
+> **CHAT CLOSED 2026-11-17 06:33 +03:00 (soft, at 80 % of the window — the context-budget rule; the dayloop by the owner's word `[OWNER]` 2026-11-17 04:26 «работай автономно в дневном цикле»).** KUMM `35d33ee` … `c3f3acb` + the closure commit; pack `9a33796`, `965f10f`, `6a16810` — all pushed; no game of ours runs, the machine lock released.
+> **FIRST NEXT CHAT:** (1) **The owner's answers** — interview #037 (Q1: a HELD RMB over the top of the wall — A only a new press draws; Q2: the hang's stamina — A a 1/s timer on the wall −2/s, B −1/s, C no timer) and #038 (the hand on the string when walking — the GAME's pose: A the standing draw kept, B only the hand on the string) → build each by his letter in `krinik_wall_jump.lua` / a new hang timer (rule 7 exception only with his yes) / the game's animation (#038). (2) **Bug 93, the held draw ends in a sprint** ≈ 0.8–1.6 s after the full hold (not Archery, not the new gate; stamina falls ≈ 32/s while drawn in the sprint) — read the game's reason (EndPowerCharge / the charge-hold stamina rule); every draw case first reads the bow's socket (`Socket_Bow`, EXP-0545). S9 (a sheathed bow) still owed. (3) **The first live marked farewell (bug 103):** this chat's closure — check that `FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md` holds this chat's farewell (it ends the closing turn with `<!-- farewell -->`); if it holds a waiting line, the mark path failed live — reopen bug 103. (4) The owner's final check of bug 105 (G1 grab after a tap, G5b push, G10 stamina, G7 with the bow) and G6 (two walls). (5) Older: plan 53 step 12 (read `researches/mod-reconciliation/GUIDE.md` first); interview #035; plan 52 put-away by a real key; the GitHub release link in the Nexus call (the owner's open question). Tools: `.work/wallgrab/case.sh` (recorder + real input), `.work/bow310/series-rec.lua` (now with `mt=` montage and `st=` stamina columns), `ConanExiles/_config/sprint-cost-run.sh`, `sprint-gate-microbench.lua`, `tools/farewell-replay.mjs`.
+>
+> **The chat of 2026-11-17 04:25 (resume + «продолжаем делать сборку конана 1.0.0» + `[OWNER]` 04:26 «работай автономно в дневном цикле» → /dayloop) — what it did:**
+> Done: (1) **bug 105 G7 closed on the agent's side** — the rest of judge round 2 + three fresh judge rounds (r12 → r15): the bow's draw montage stopped BY IDENTITY,
+> a second look 300 ms later, one shared `bow_in_hand`; G7 / G7e pass on r14 and r15 by real input read while RMB is held; **pack `9a33796` pushed** (report
+> `testcases/reports/2026-11-17_conan-wall-grab-bow-cancel-r14.md`). (2) **Interview #037 asked in chat 04:29** (shown, recorded): Q1 — may a HELD RMB redraw once
+> the hero is over the top of the wall (A: only a new press, recommended); Q2 — the hang's stamina drain (A: a 1/s timer only on the wall, −2/s, recommended; B −1/s;
+> C no timer, charge at the push). Both wait for his answer → build. (3) Bug 103 (the farewell hook): a turn-model fix was REFUTED by the judge on 78 real
+> transcripts (the owner typing during a closure lost 9 farewells) and rolled back at 05:38; the fix now in the working tree is an explicit mark — **the closure
+> skills end the farewell with the hidden line `<!-- farewell -->`** and the hook writes that message; unmarked closures unchanged (15 real ones compared);
+> `tools/farewell-replay.mjs` replays a transcript stop by stop. (4) Bug 93 cost: the bow-sprint gate reworked (one substate list, property reads, the bow kept per
+> draw) — full-path calls over the 1 ms step 45–64 % → 18–21 % measured on v3 (the pushed v4 adds the yes-only memo and IsMovingOnGround; its own cost run is
+> owed), S1b / S3 / S6 on v3 and the exhaustion on v4 pass — **pack `965f10f` pushed**. (3) the mark judged in one round after the refuted turn-model round (the
+> mark only at the END of the message and only after an accepted closure; autonomy-guard knows it) — committed with this block; its live proof is THIS chat's
+> closure: the farewell file must then hold the marked farewell; KAIF #181 got the field update (comment 6936948110). (5) **Bug 104 (the hand on the string
+> when walking in the draw): the cause is the GAME's own moving-aim pose** — side frames standing vs walking, and the same with Archery + Locomotion out (control);
+> **interview #038 shown as a page** (review folder 89): A — the standing draw kept while walking, B — only the hand kept on the string, C — something else.
+> Waiting for the owner: interview #037 (Q1 the top of the wall, Q2 the hang's stamina) and #038. (6) Bug 93, two unexplained observations (06:2x, written
+> in the bug): a held draw in a sprint ends by itself ≈ 0.8–1.6 s after the full hold (the old gate too; with KrinikConanArchery out too — not Archery; the stamina
+> falls ≈ 32/s while drawn in the sprint), and once RMB in a sprint did not start a draw — next: the game's reason (`DebugActionTryFailure`, `EndPowerCharge`). No game of ours runs, the machine lock released.
