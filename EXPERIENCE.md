@@ -91,6 +91,24 @@
 
 ## Entries
 
+### EXP-0552 · 2026-11-17 · ❌ · #cleanup #game-move #conan #cache #rule-25
+class: deleting-the-only-record-of-a-version-that-no-longer-exists
+**Lesson:** a cleanup deleted `ConanExiles/_scratch` whole («scratch» = disposable) — it held `paklist-<clean folder>.json`, the ONLY pak list of game 3.1.0 left
+after the owner's 3.1.1 download overwrote 3.1.0 in place; `patch-rollback.py` (old list vs new list) then had nothing to compare and the hotfix's asset changes
+could not be named (TC_conan_move_3.1.1 P6 blocked). A cache of a version that is gone is not disposable: it is the old side of every diff of the next move.
+**Trigger:** before deleting a scratch / cache / view folder at a game move — list its files; anything named after a game version or a game folder (paklist-*,
+_paksview-*, *-3.1.0*) is copied into `<pack>/_config/game-versions/<version>/` (small lists) or its diff is taken FIRST.
+mechanized: none yet — the step is in `HOUSE_RULES.md` rule 25's text («everything else … deleted the moment its task closes») — add «a version's pak list is
+kept until the next version's diff is done» when the rule is next touched.
+
+### EXP-0551 · 2026-11-17 · ❌→✅ · #public-repo #anonymity #commit-message #hook
+class: a-gate-that-checks-files-but-not-the-message
+**Lesson:** pre-commit scanned the staged FILES for the owner's forbidden words; a tool name holding one of them went out in a commit MESSAGE to the public
+history (the owner: «ну не нужно такое в публиыный репозиторий!!!»). The local list also lacked the bare word (only two longer forms), so the hyphenated name
+slipped even past the file scan. Fixed: `tools/hooks/commit-msg` runs the same scan on the message; the bare word added to the ignored list; the pushed commit
+amended locally (its force-push refused by the harness — the owner's call).
+mechanized: `tools/hooks/commit-msg` (red on a message with the word, green reworded — 2026-11-17)
+
 ### EXP-0550 · 2026-11-17 · ❌→✅ · #auto-relay #vscode #deep-link #environment #electron #hook #windows
 class: inherited-environment-changes-the-child — a variable of the host process silently turns a launched program into something else
 **Result:** corrects the cause in EXP-0547: the deep link opened no tab not because of the window choice or UIPI but because the hook's environment carries

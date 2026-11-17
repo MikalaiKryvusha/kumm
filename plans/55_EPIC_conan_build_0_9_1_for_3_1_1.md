@@ -7,7 +7,7 @@
 > можно было выпустить предварительную сборку 0.9.1 для версии 3.1.1 на ГитХаб и нексус» · «работай автономно. Буду нужен - зови голосом» · 20:07 «веб разведка, как
 > соверменные лаунчеры делают, какие технологии, какая архитектура, как обновления он получает и ставит».
 > **Parent:** `plans/54_conan_launcher_updates.md` (phases 1–3 built, four release blockers, phase 4 open) · `plans/53_conan_move_3.1.0.md` (the move recipe) ·
-> `ideas/23_conan_build_versions_and_launcher_update_check.md` · **Status:** 🔧 started 2026-11-17 20:1x — phase A running (the 3.1.1 copy made), the research
+> `ideas/23_conan_build_versions_and_launcher_update_check.md` · **Status:** 🔧 started 2026-11-17 20:1x — phase A: the build runs on 3.1.1 (20:33, TC_conan_move_3.1.1 6 pass / P6 blocked), the mods' update check left; phase B designed (research §4), the research
 > `researches/conan-launcher-modern-practice/README.md` in progress · **Outbound:** the GitHub release and the Nexus upload wait for the owner's word (outward
 > publishes); the forks of interview #039 go to the owner.
 
@@ -61,14 +61,14 @@ Phase B and phase A run in parallel (B needs no game: the fixture stand). D need
 ### Phase A — the build on 3.1.1 (anchor: criterion 1)
 
 - [x] A1. Copy the clean version → `D:\Games\Conan Exiles 3.1.1` (robocopy under the machine lock, 2026-11-17 20:12); `targets.json` → the single target `3.1.1`.
-- [ ] A2. `Deploy-ModPack.ps1 -Deploy -DryRun -PackDir ConanExiles` → then `-Deploy` (no `-WithEngineIni` for the first start) → `-Verify`; `deploy-localization.py`;
+- [x] A2. (20:16–20:31: dry run 75/75; deploy 75/75, verify 114/0; localization equal; mod info 66/66) `Deploy-ModPack.ps1 -Deploy -DryRun -PackDir ConanExiles` → then `-Deploy` (no `-WithEngineIni` for the first start) → `-Verify`; `deploy-localization.py`;
       `set-pak-modinfo.py <Mods>`.
-- [ ] A3. The world save and mod saves from `KUMM/.work/disk_d/save_3_1_0/` into the build (game closed; `save-restore.sh --check` on the db).
-- [ ] A4. First start under the lock (background path): UE4SS log, game log, the menu, the mod list; `[Core.System]` paths vs the pack Engine.ini
+- [x] A3. (20:18, `save-restore.sh --check` «live save: ok») The world save and mod saves from `KUMM/.work/disk_d/save_3_1_0/` into the build (game closed; `save-restore.sh --check` on the db).
+- [x] A4. (20:26–20:33: UE4SS on CL-383549, 66/66 mounted, 0 too old / missing imports, paths 90 = 90, `-WithEngineIni` + `deploy-config.py`, the world in 14 s, «СБОРКА: моды 66/66») First start under the lock (background path): UE4SS log, game log, the menu, the mod list; `[Core.System]` paths vs the pack Engine.ini
       (`swap-core-paths.py`); then `-Deploy -WithEngineIni` + `deploy-config.py`; the second start; the world.
-- [ ] A5. What the hotfix changed: `patch-rollback.py` on the installed mods; `check-mod-updates.py --since 2026-11-13 --all` (authors' 3.1.1 updates); the kit revision
+- [ ] A5. (PARTLY 20:4x: the asset-level diff is BLOCKED — the 3.1.0 pak list is lost, EXP-0552; the kit is still 383024; `check-mod-updates.py` still to run) What the hotfix changed: `patch-rollback.py` on the installed mods; `check-mod-updates.py --since 2026-11-13 --all` (authors' 3.1.1 updates); the kit revision
       of 3.1.1 (`F:\CEUE5Devkit` — an Epic update after 2026-11-14?) and whether our kit paks load («too old»).
-- [ ] A6. The Krinik mods' quick cases on 3.1.1 (the hub pages, the map, the bow, the wall grab) — a short TC `testcases/TC_conan_move_3.1.1_2026-11-17.md`.
+- [x] A6. (P1–P7 of the TC: 6 pass, P6 blocked; the hub pages with values) The Krinik mods' quick cases on 3.1.1 (the hub pages, the map, the bow, the wall grab) — a short TC `testcases/TC_conan_move_3.1.1_2026-11-17.md`.
 
 ### Phase B — the launcher fit for players (anchor: criteria 2–6; decisions — `researches/conan-launcher-modern-practice/README.md` §4; cases —
 `testcases/TC_conan_launcher_release_0_9_1_2026-11-17.md`)
