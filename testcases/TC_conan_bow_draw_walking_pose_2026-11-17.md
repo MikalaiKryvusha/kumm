@@ -1,6 +1,7 @@
 # Test cases — Conan: the bow draw while walking keeps the standing draw (interview #038, bug 104)
 
-**Created:** 2026-11-17 · **Under test:** the edit of `AB_human_male`'s AnimGraph (the torso slot `AttackMontageTorso3rd` layered over the locomotion) in a Krinik pak ·
+**Created:** 2026-11-17 · **Under test:** the walking-draw fix — NOT an override of `AB_human_male` (refuted by EXP-0511: other mods ship its children; bug 104), the
+post-process route of plan 52 or another lever, chosen in the next chat ·
 **Version/build:** the Conan build on 3.1.0, pack `ee7e31c` + the edit (not built yet)
 **Test basis:** `[OWNER]` 2026-11-17 09:18 (interview #038, verbatim there): A — «Как стоя»: while walking in the draw the right hand stays at the chin and the string is fully drawn,
 as standing. The owner's symptom of 2026-11-16 18:40 (bug 104): the right hand with the arrow moves off the string when the hero starts moving.
