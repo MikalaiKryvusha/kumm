@@ -144,6 +144,11 @@ place and its missing retraction command instead of answering `none`.
 (a waiting line, a judge's notification, the owner's words mid-closure — bug 103). Exactly one message carries the mark: the farewell itself, sent after every
 judge and push — never a waiting line, never a later reply.
 
+**KUMM: an auto-relay run (`/auto-relay`).** Right before the farewell run `node .claude/auto-relay/relay.mjs status`. «auto-relay OFF» — nothing changes.
+Otherwise the farewell says the line it printed — the next chat opens itself, or the run ends with this chat, or the next chat will NOT open and why
+(usually STATUS.md not committed in this chat — fix that first) — instead of asking the owner to open a chat. After the farewell, nothing: the Stop hook
+opens the next chat once this one is quiet.
+
 ## Notes
 
 - The family in one line: **/pause — the chat continues later; /end-chat-soft — finish properly,

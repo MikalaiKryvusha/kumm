@@ -21,6 +21,8 @@ mods/
 # для проекта, при необходимости живут в .claude/settings.json.
 .claude/settings.local.json
 .claude/settings.local.json.bak-*
+# The state of an auto-relay run (.claude/auto-relay/relay.mjs) — this machine's chats; relay.log is caught by *.log
+.claude/auto-relay/state.json
 .kaif/update-journal.json
 .kaif/guarded-loop.json
 .kaif/update-rehearsal.json

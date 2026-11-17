@@ -80,6 +80,14 @@
               "${CLAUDE_PROJECT_DIR}/.claude/hooks/context-budget.mjs"
             ],
             "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/relay-hook.mjs"
+            ],
+            "timeout": 5
           }
         ]
       }
@@ -94,6 +102,14 @@
               "${CLAUDE_PROJECT_DIR}/.kaif/hooks/stop-status-guard.mjs"
             ],
             "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/relay-hook.mjs"
+            ],
+            "timeout": 10
           }
         ]
       }

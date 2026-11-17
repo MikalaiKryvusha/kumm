@@ -27,7 +27,7 @@ import { readTurn, FAREWELL_MARK, closedEver } from './farewell-capture.mjs';
 // (`[OWNER]` «а чего ты стал? … или я не говорил работать автономно?»). A negation right before it («не работай автономно») is not the order.
 const ON = /автономн|автопилот|(работай|работать)\s+сам/i;
 const NOT_ON = /(^|[\s,.!?])не\s+(работай\s+|работать\s+)?(автономн|сам)/i;
-const OFF = /^\s*(стоп|stop|пауза|хватит|остановись)(?=$|[\s,.!?])/i;   // \b в JS не видит границу кириллицы
+export const OFF = /^\s*(стоп|stop|пауза|хватит|остановись)(?=$|[\s,.!?])/i;   // \b в JS не видит границу кириллицы; the owner's stop word ends an auto-relay run too (.claude/hooks/relay-hook.mjs)
 const PAUSE_MARK = /<!--\s*autonomy-pause:\s*\S/;
 
 export function decideStop({ on, pct, closed, text }) {
@@ -68,5 +68,9 @@ function main() {
   process.stdout.write(JSON.stringify({ decision: 'block', reason: d.block }));
 }
 
-try { main(); } catch { /* fail-open */ }
-process.exit(0);
+// Direct run — the hook; an import (relay-hook takes OFF) — only the exports, no stdin, no exit.
+const isDirectRun = process.argv[1] && import.meta.url.endsWith(process.argv[1].split(/[\\/]/).pop());
+if (isDirectRun) {
+  try { main(); } catch { /* fail-open */ }
+  process.exit(0);
+}

@@ -47,6 +47,8 @@ One line to the human: the commit hash, the single most important thing for the 
 the reminder that the ceremonies debt is recorded in `STATUS.md`. Goodbye.
 **KUMM: the farewell ENDS with the hidden mark `<!-- farewell -->`** (its very last characters) — the farewell hook writes the message that ends with it into
 `FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md` whatever came before it in the turn (bug 103); only the farewell itself carries it.
+**KUMM: an auto-relay run** — before the farewell `node .claude/auto-relay/relay.mjs status`; unless it says «auto-relay OFF», the farewell carries its line
+(the next chat opens itself / the run ends / it will NOT open and why) instead of asking the owner to open a chat.
 
 ## What this skill refuses to skip
 
