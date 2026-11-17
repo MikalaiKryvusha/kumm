@@ -148,8 +148,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > when walking in the draw): the cause is the GAME's own moving-aim pose** — side frames standing vs walking, and the same with Archery + Locomotion out (control);
 > **interview #038 shown as a page** (review folder 89): A — the standing draw kept while walking, B — only the hand kept on the string, C — something else.
 > Waiting for the owner: interview #037 (Q1 the top of the wall, Q2 the hang's stamina) and #038. (6) Bug 93, two unexplained observations (06:2x, written
-> in the bug): a held draw in a sprint ends by itself ≈ 1 s after the full hold (the old gate too), and once RMB in a sprint did not start a draw — a control
-> without the section and the game's refusal reason first. No game of ours runs, the machine lock released.
+> in the bug): a held draw in a sprint ends by itself ≈ 1–1.5 s after the full hold (the old gate too; with KrinikConanArchery out too — not Archery; the stamina
+> falls ≈ 32/s while drawn in the sprint), and once RMB in a sprint did not start a draw — next: the game's reason (`DebugActionTryFailure`, `EndPowerCharge`). No game of ours runs, the machine lock released.
 >
 > **CHAT CLOSED 2026-11-16 23:53 +03:00 (soft, by the owner's word: `[OWNER]` 2026-11-16 23:38 «работай автономно 15 минут, а затем начинай доходить до логического
 > среза и закрытию чата по ритуалу»).** KUMM `06806a8` + the closure commit; pack `4367176`, `68c8d11`, `a3a6111` (r11) — pushed; no game of ours runs (closed
