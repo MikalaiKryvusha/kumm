@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0545 · 2026-11-17 · ❌→✅ · #conan #stand #climb #weapon #papercut #bug105
+class: stale-stand
+**Result:** after a restart the next case's hot-bar key and `ToggleWieldWeapon()` did nothing — the hero was still HANGING on the wall from the case before (the game keeps
+weapons sheathed while climbing); one case also ran unarmed (RMB → `AM_combat_2h_unarmed_3rd_heavy_c0`) and was nearly read as a bow result.
+**Lesson:** a wall case ends with `CharacterMovement:ExitClimbing()` + the bow's socket read (`Socket_Bow`) before the next case; a draw case is valid only when the
+recorder shows the bow's montage (`…2h_bow_combo…`).
+none-cheap: S3 papercut; the two reads are stand steps in the TC header
+
 ### EXP-0544 · 2026-11-17 · ❌→✅ · #conan #ue4ss #cost #perf #measure #bug93
 class: wrong-model-of-the-cost
 **Result:** the bow-sprint section's worst call read 2–8 ms; the guess was «GC or a preempted thread» (os.clock is the WALL clock on Windows and steps by 1 ms
