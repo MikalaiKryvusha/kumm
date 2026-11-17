@@ -98,6 +98,7 @@ weapons sheathed while climbing); one case also ran unarmed (RMB → `AM_combat_
 **Lesson:** a wall case ends with `CharacterMovement:ExitClimbing()` + the bow's socket read (`Socket_Bow`) before the next case; a draw case is valid only when the
 recorder shows the bow's montage (`…2h_bow_combo…`).
 none-cheap: S3 papercut; the two reads are stand steps in the TC header
+<!-- class-ok: stale-stand — the stale state differs per case (a hero left hanging, a sheathed weapon, drained stamina, an open UI — EXP-0405, EXP-0533); each case's required state is read in its own TC stand step, and a generic guard would have to know every case's state — re-checked 2026-11-17 06:2x -->
 
 ### EXP-0544 · 2026-11-17 · ❌→✅ · #conan #ue4ss #cost #perf #measure #bug93
 class: wrong-model-of-the-cost
