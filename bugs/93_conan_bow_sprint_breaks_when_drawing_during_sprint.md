@@ -179,6 +179,16 @@ KrinikConanArchery's first-person section already does), out tables reused, no s
   `InSubstate(14)` = yes (judge item 2 verified), the draw broken by the game, the sprint ended (384). **Pack `965f10f` pushed.** The v4 cost minute not re-run (the
   owner came to the PC); v4 differs from the measured v3 only by the yes-only memo and `IsMovingOnGround` (6 µs).
 
+**Two observations of 2026-11-17 06:2x, NOT explained (v4, real input, rows `KUMM/.work/wallgrab/s9_sheathed.txt`, `sprint_hold.txt`):**
+- A draw held in a sprint ENDS by itself while RMB is still held: 7,11,15,16 at 733 → 7 alone 0.8 s after the full hold (06:20, `s9_sheathed`); the same in
+  `v4_tired` (1.6 s after the full hold — before the stamina drain) and, by the minute lines, in the cost chunks (only 116–146 full-path calls a minute where a
+  draw held through 25 s chunks would give hundreds) — so the old gate shows it too (05:19: 299). Stamina is not out (106 → 78 over 4.5 s of sprint, `sprint_hold`).
+- In the next run RMB pressed 1.5 s into a sprint did not start a draw at all (rows: 7 with rmb = true for 4.5 s, no 11), the bow in hand (`Socket_Bow`,
+  `HasWeaponsEquipped` true) — while the same input drew in the runs before it.
+NEXT for them: a control without `krinik_bow_sprint` (does vanilla end a held draw when Shift is held?), the game's own reason by `DebugActionTryFailure` (EXP-0532)
+and the attack's end by a post-hook on `EndPowerCharge` / the Archery string hook — before any change; S9 (a sheathed bow) still owed: `ToggleWieldWeapon()` did not
+sheathe within 2 s in that run.
+
 **NEXT (in order):** (1) the bow sprint on 3.1.0 — control case with `krinik_bow_sprint` off (does a draw survive the Shift release; does RMB draw in a sprint); (2) `rmb_held`
 under SendInput; (3) Z3 / Z5 by real keys; (4) the judge's open risks.
 
