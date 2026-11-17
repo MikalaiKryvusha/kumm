@@ -185,6 +185,9 @@ KrinikConanArchery's first-person section already does), out tables reused, no s
   draw held through 25 s chunks would give hundreds) — so the old gate shows it too (05:19: 299). Stamina is not out (106 → 78 over 4.5 s of sprint, `sprint_hold`).
 - In the next run RMB pressed 1.5 s into a sprint did not start a draw at all (rows: 7 with rmb = true for 4.5 s, no 11), the bow in hand (`Socket_Bow`,
   `HasWeaponsEquipped` true) — while the same input drew in the runs before it.
+- **Control 06:27 — KrinikConanArchery OUT** (`enabled.txt` moved away, restored after; rows `KUMM/.work/wallgrab/ctl_noarch.txt`, the recorder now reads the stamina):
+  the held draw in a sprint still ends — 7,11,15,16 at 3.54 → 7 at 4.85 (1.3 s after the full hold) — so Archery is not the cause. The stamina falls ≈ 32 a second while
+  the draw is held in the sprint (84 → 42) and ≈ 3 a second in the sprint alone after it (42 → 34 over 3 s); the draw ended at 42, far from empty.
 NEXT for them: a control without `krinik_bow_sprint` (does vanilla end a held draw when Shift is held?), the game's own reason by `DebugActionTryFailure` (EXP-0532)
 and the attack's end by a post-hook on `EndPowerCharge` / the Archery string hook — before any change; S9 (a sheathed bow) still owed: `ToggleWieldWeapon()` did not
 sheathe within 2 s in that run.
