@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0547 · 2026-11-17 · ⚠️ · #auto-relay #vscode #deep-link #sendkeys #windows #kaif #hook
+class: proxy-check-passes-without-the-effect — the window title proved «our window is in front», not «the new chat tab exists»
+**Result:** the auto-relay opener (KAIF guide 4.3) raised the KUMM VS Code window, its title check passed, but `vscode://anthropic.claude-code/open?prompt=…`
+opened NO tab (four project windows open, VS Code elevated); the focus sat in the RUNNING chat's input — the guide's Enter would have sent the owner's draft there.
+Found by a `-NoEnter` run + a `PrintWindow` frame of the window (a non-DPI-aware PowerShell gets 1/3-size rects at 300 % — `SetProcessDPIAware` first).
+**Lesson:** a key press after an «open» must be gated on the opened thing itself (the new tab / its input holding the text), never on the window; run any
+input-sending tool first with its no-input switch and LOOK at the result. KUMM passes `-NoEnter` until the link opens a tab (TC L1). → bugs/KAIF/32, KAIF #198
+
 ### EXP-0546 · 2026-11-17 · ❌→✅ · #conan #ue4ss #hook #native #aim #bow #control-case #bug107
 class: test-geometry-blamed-on-code — the stand's own geometry made the defect, and four «fixes» were judged by it
 **Result:** an air shot right after a wall push «launched an arrow with speed 0»; I blamed my early end of the game's re-equip (the item's initialisation skipped) and
