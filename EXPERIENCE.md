@@ -125,6 +125,7 @@ class: inherited-environment-changes-the-child — a variable of the host proces
 Node and dropped the URI. Without the variable the link arrived at once; `&windowId=<n>` (numbers from `code --status`) routes it to one window.
 **Lesson:** when a program launched from a hook or an extension «does nothing», diff the environment against a normal shell first (`env | grep -i
 electron\|vscode`) — `ELECTRON_RUN_AS_NODE`, `NODE_OPTIONS` and the like change what an Electron exe IS. → `.claude/auto-relay/open-chat.ps1` notes 4–5, KAIF #198
+subject-lesson — a fact of its subject (recorded at the 2026-11-17 21:3x closing; the entry predates the field)
 
 ### EXP-0549 · 2026-11-17 · ❌→✅ · #launcher #zip64 #test-data #stand #conan
 class: test-data-that-cannot-fail — a check whose data reads the same from a wrong place proves nothing
@@ -133,6 +134,7 @@ offset are still zeros, and the only thing past the 4 GB mark was the zip's dire
 4 GB (alphabetically after the big ones), compared byte for byte.
 **Lesson:** before trusting a pass on bulk test data, ask «would a wrong read produce the same bytes?» — fill or tail the data with something unique where the
 risky offsets are. → plan 54, TC B3; `_config/launcher/test/stand.mjs --big`
+subject-lesson — a fact of its subject (recorded at the 2026-11-17 21:3x closing; the entry predates the field)
 
 ### EXP-0548 · 2026-11-17 · ❌→✅ · #launcher #winforms #ui-automation #messagebox #test #windows
 class: tool-model-differs-from-the-app-model — UI Automation sees a custom WinForms window differently from its code
@@ -142,6 +144,7 @@ only its title — no text, no buttons.
 **Lesson:** probe the tree first (`AutomationElement.FindAll(Descendants, True)` with Name/AutomationId/ControlType) before writing the clicker; press by
 caption (+ left-to-right index for twins) and read a message box by plain Win32 (`#32770`, text = item 65535, buttons by id 1/2/6/7) with `BM_CLICK`.
 → `ConanExiles/_config/launcher/test/click.ps1`
+subject-lesson — a fact of its subject (recorded at the 2026-11-17 21:3x closing; the entry predates the field)
 
 ### EXP-0547 · 2026-11-17 · ⚠️ · #auto-relay #vscode #deep-link #sendkeys #windows #kaif #hook
 class: proxy-check-passes-without-the-effect — the window title proved «our window is in front», not «the new chat tab exists»
@@ -150,6 +153,7 @@ opened NO tab (four project windows open, VS Code elevated); the focus sat in th
 Found by a `-NoEnter` run + a `PrintWindow` frame of the window (a non-DPI-aware PowerShell gets 1/3-size rects at 300 % — `SetProcessDPIAware` first).
 **Lesson:** a key press after an «open» must be gated on the opened thing itself (the new tab / its input holding the text), never on the window; run any
 input-sending tool first with its no-input switch and LOOK at the result. KUMM passes `-NoEnter` until the link opens a tab (TC L1). → bugs/KAIF/32, KAIF #198
+subject-lesson — a fact of its subject (recorded at the 2026-11-17 21:3x closing; the entry predates the field)
 
 ### EXP-0546 · 2026-11-17 · ❌→✅ · #conan #ue4ss #hook #native #aim #bow #control-case #bug107
 class: test-geometry-blamed-on-code — the stand's own geometry made the defect, and four «fixes» were judged by it

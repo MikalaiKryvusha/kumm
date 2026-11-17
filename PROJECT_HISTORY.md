@@ -7605,3 +7605,77 @@ save and settings stashed in `KUMM/.work/disk_d/save_3_1_0/` for the 3.1.1 build
 `D:\Games\Conan Exiles (2018)`, the agent's Conan save copies, the shipped 0.9.0 bundles (their publication texts and media moved first into the pack,
 `_config/release/published_0_9_0/`), `_text-extract-3.0.1`, `_bench`, the old workshop copies, the library's `OLD`, the reviewed review folders (85–90 kept — still
 waiting for the owner's eye), the pack's `_scratch`. D: free 96 → 258 GB. The rule — `HOUSE_RULES.md` rule 25.
+
+## 2026-11-17 21:3x +03:00 — STATUS bonsai trim (chat of 2026-11-17 19:43, dayloop): two blocks moved verbatim
+
+> **FIRST NEXT CHAT — item 1, the owner's task relayed by the KAIF session `kaif-6d` (2026-11-17 11:02, a peer's message; the owner's word as it quotes it, ≈ 10:55 in
+> the KAIF chat): «напиши агенту KUMM - ему задание на следующий чат - внедрить навык перехода из чата в чат в его KAIF. Так как 2.10 ещё в работе, и непонятно, когда
+> выйдет версия, а в KUMM мне УЖЕ нужен этот навык» (KAIF decision №160).** Build the auto-relay skill locally from the owner's document
+> `d:/work/ai_sandbox/KAIF/ideas/auto_relay_windows_guide.md` (KAIF `e34fd93`, read-only): `relay.mjs` · `relay-hook.mjs` · `open-chat.ps1` · `SKILL.md` (/auto-relay) ·
+> `e2e.mjs` · the settings.json wiring · `.gitignore`; acceptance §5, risks §6. Check first (KAIF's recon researches/44 — re-verify): (1) no second window gauge —
+> agree the relay threshold with `.claude/hooks/context-budget.mjs` (soft from 80 %, force from 92 %); (2) `autonomy-guard.mjs` + the relay Stop hook must not loop the
+> turn or block opening the next chat after `ready`; (3) one entry and one handover: «auto-relay continue» or the resume word, `HANDOVER.md` or STATUS — one, ask the
+> owner if unsure; (4) the hook's memory in `os.tmpdir()` must land in `F:\Temp`, never `D:\Temp`; (5) `node -e "console.log(process.env.CLAUDE_CODE_SESSION_ID)"` —
+> empty means the chat binding is off (§6); (6) a field report to KAIF origin (/report-bug, improvement request, «Local remediation») with what the first Windows run of
+> `open-chat.ps1` showed — the first run under the owner's eye (the VS Code window may not come forward, Enter may go elsewhere).
+>
+>
+> **CHAT CLOSED 2026-11-17 11:04 +03:00 (soft, at 80 % of the window). The chat of 2026-11-17 08:53 (resume + «начинаем с интервью по конану»; `[OWNER]` 10:27 «работай автономно до закрытия чата по переполнению контекста» → /dayloop).**
+> Done: interviews #035 / #037 / #038 answered by the owner 09:18 (verbatim in each); **the hang's stamina BUILT** as our reason flag in the game's own wall tick
+> (`[OWNER]` 09:33 «новый флаг разрабатываем»; pack `e6d1d97`, TC_conan_wall_hang_stamina H1–H5 pass, 2 judge rounds; the game's stamina degeneration bitmask mapped —
+> game map «Climbing»); #037 Q1 — B, nothing to change. **Bug 107** (the bow in the flight after a wall, #035): the re-equip blocks the bow 1.35 s; the «arrow with speed 0»
+> of the first four tries was the wall in front (CORRECTED 10:3x — the view faced the wall pushed off); re-checked 10:36: **the rearm WORKS — SHIPPED, pack `ee7e31c`**
+> (TC B1′ pass, judge round 1: no defect, 5 items applied); the owner's real keys (RMB held through the push) are the final check. #038 (the standing draw kept when walking): the cause read in
+> `AB_human_male`'s AnimGraph by two kit probes — the walking chain takes the shoulders back from the locomotion; the crouch branch takes the whole upper body
+> (`bugs/104_…`). The edit script `devkit/kit-ab-bow-draw-upper.py` is written and NOT run: a parent-only override is the bug-95 T-pose — **the FORK for the next
+> chat** is written in bug 104 — the parent override is OUT (EXP-0511), the post-process route or another lever. Bug 103: the first live marked farewell PASSED. Still open: bug 93 (the held draw
+> ends in a sprint — real input). KUMM — the closing commit after `b703824`, pack `1baf59f` pushed; no game of ours runs, the machine lock released.
+> The owner's question at the closing (11:08: how far is 1.0.0, which ideas are not built) — answered in chat from the documents, and the idea list was WRONG in four
+> of nine: the level without a cap (idea 04), endless attributes (plan 49) and the GUI installer (idea 22) — the owner 11:09–11:10 «Уже сделано оба. Ты не прав» ·
+> «Давным давно тобою сделано»; the run / jump growth from Agility (idea 03) — built in KrinikConanLocomotion `krinik_oblivion_locomotion`. All four tagged DONE.
+> **The next chat re-checks `ideas/` and the phases of epics 40 / 41 against what is built** before saying anything about 1.0.0 (their status lines are older than the work).
+>
+
+## 2026-11-17 21:3x +03:00 — STATUS bonsai trim, second part: the NOW block of 11:21 and the older pointer blocks moved verbatim
+
+> **NOW (chat of 2026-11-17 11:21) — item 1 BUILT, the live open owed.** `/auto-relay` — `.claude/auto-relay/{relay.mjs,open-chat.ps1,e2e.mjs}`,
+> `.claude/hooks/relay-hook.mjs` (wired in `.claude/settings.json`: UserPromptSubmit + Stop), `.claude/skills/auto-relay/SKILL.md`, one relay line in both closure
+> skills. Agreed with the KAIF session 11:26: no own gauge (context-budget 80 / 92), no HANDOVER.md (STATUS + farewell file), entry «resume auto-relay continue»;
+> the next chat opens only after the marked farewell, STATUS committed in the chat, and the old chat quiet (a Stop blocked by another hook waits). Checks: self-test
+> 22/22, e2e 21/21 (mutants M1–M3 red), test-guards 308/308, context-budget 38/38; check 4 (hooks' tmpdir `F:\Temp`) and 5 (session id visible) pass.
+> **11:41 the real opener with `-NoEnter` raised the KUMM window over KAIF (log «opened … in 'KUMM - Visual Studio Code'») — yet NO new tab: the focus sat in
+> the RUNNING chat's input; an Enter would have gone there. `relay.mjs open` now passes `-NoEnter` until the link opens a tab (the handler: `Code.exe --open-url`,
+> the same install).** **Live L1 (the deep link by hand, 11:37) — the tab was NOT found** in the KUMM or KAIF window: FOUR VS Code windows are open (KAIF, KCCP, KUMM, the turbine),
+> the link goes to the last active one — the KCCP / turbine windows not checked. **CORRECTED 15:21 (next chat): the window was not the cause — the link reached
+> NO window because of `ELECTRON_RUN_AS_NODE` (block above, EXP-0550).** Open: L2 (the opener with Enter) → L3 (a real chain) after the owner's tick.
+> Cases `testcases/TC_auto_relay_2026-11-17.md`. The 5-hour usage limit stood at 96 % at 11:39, the harness banner names its reset at 14:40 <!-- claim-ok: the reset time the harness banner printed, a future time by nature -->.
+>
+>
+> **Moved verbatim to the chronicle (entry 2026-11-14 11:40 +03:00):** the blocks CHAT CLOSED 2026-11-14 02:16, NOW 2026-11-14 00:15–02:15 and HANDOVER 2026-11-13 22:0x (the 3.1.0 kit rebuild, the devkit update, the D:\Temp cleanup). Still open from them: plan 53 step 12 (other authors' stale vanilla copies, 3 of 11 — parked until ≈ 2026-11-15 by the owner; resume `python -I -X utf8 _config/check-mod-updates.py --since 2026-11-03 --all`); the Pickup+ admin widget error (`ComboBox_DrawDebugline`); UE4SS v4.0.0 as its own step; bug 75 (the quick-loot rim, reopened); bug 98 C6 (the owner's verdict on the first-person shadow frame, review folder 85); plan 52 steps 3–4; bug 93 S8 / S9 and the no-zoom-on-sprint wish; bug 96 (the owner's play); the pack judges' B2–B4 (pack `ff30fb9` message); L1–L5 of `TC_conan_move_3.1.0_2026-11-13.md`; the quick wins by A-B-A-B; the mods-table storefront row (the foliage-shadow fix — the owner's proofreading); paks uncompressed (size only); the live run of the `attr-arrows-show.lua` / `plus-tint-probe.lua` guards; `_config/craft-*.lua` probes uncommitted; rollback paks `KUMM/.work/kit310/old/`; 6 `*.tmp` in `D:\Temp` (after a VS Code restart).
+> **Moved verbatim to the chronicle (entry 2026-11-13 22:0x +03:00):** the 2026-11-13 blocks from the forced closure of 20:1x back to the HANDOVER of 11:08 (three
+> forced closures — their skipped ceremonies paid by this soft closure — the NOW / HANDOVER blocks of the move onto 3.1.0, bugs 93–99, plan 52); their open items
+> are in item 3 above.
+> **Moved verbatim to the chronicle (entry 2026-11-13 11:08 +03:00):** the HANDOVER 2026-11-10 19:58 block (bonsai trim). Still open from it: the KrinikConanUI key binds
+> (recon F1), the wall jump, the simple air swing, a new-game smoke before the owner's long test play.
+> **Moved verbatim to the chronicle (entry 2026-11-10 19:58 +03:00):** the blocks HANDOVER 2026-11-10 13:48, NOW 12:38, HANDOVER 11:17, NOW 09:4x, the night block 02:25 and HANDOVER
+> 2026-11-09 22:45 (bonsai trim). Still open from them: bug 91 real-hover frame, the judge round on `kit-corruption-label-plate.py`, bug 88, bug 84 (the map), the hub
+> controller player path, sprint + bow (now built), the streaming-in hitches (future).
+> **Moved verbatim to the chronicle (entry 2026-11-09 22:44 +03:00):** the HANDOVER 2026-11-09 18:43 block (the quick-wins order of the first chat of 2026-11-09).
+> **Moved verbatim to the chronicle (entry 2026-11-09 18:43 +03:00):** the blocks DONE plan 51 of 2026-11-09 16:43 and HANDOVER 2026-11-09 02:02.
+> **Moved verbatim to the chronicle (entry 2026-11-09 02:02 +03:00):** the blocks NOW of 2026-11-08 22:58, DONE / IN FLIGHT of the night and HANDOVER of 2026-11-08 at 14.52.
+> **Moved verbatim to the chronicle (entry 2026-11-08 14:52 +03:00):** SIDE TASK nfsu2, HANDOVER 2026-11-07 23:03, items 0 / 0b / 0c and the NOW block of 2026-11-08.
+> **Moved verbatim to the chronicle (entry 2026-11-09 22:45 +03:00):** the owner's order of 2026-11-07 20:50 (FIRST NEXT CHAT: sprint + bow, attributes past 20) and THE OWNER'S QUEUE 19:48–20:00. Still open from them: bug 84 (the hub duplicates pages / the fullscreen map twice) · the lore stones' «E Читать» plate · grainy shadow on sand rocks · speckles on the oasis water · black far cave mouths (unfogged) · the bright SSR streak behind palm trunks · the rain from a small cloud over the hero (old debt, `plans/04_conan_ochered_zakazov.md`) · `_bench` 9.4 GB of old recordings waits for his «да»; sprint + bow and attribute paging — in the handover above.
+> **Blocks moved verbatim to the chronicle (entry 2026-11-07 19:28 +03:00):** the bug 67 handover blocks of 2026-11-07 14:47–19:19 (the bug is DONE) and the chat blocks of 2026-11-06 (fifth) … 2026-11-07 (second) (forced closures 09:46 and 12:43, the hub controller v4–v10, the dayloops of 06:24 / 10:12, the UPDATE lists). Still open from them: the hub controller player path with the game in FRONT; the minimap helper «Свои маркеры» click on our map; quick-loot R3 (last cell of a row); plan 45 step 4+ (boss / elite spawns); KrinikConanMusic M7 with bug 79 cases; mod windows of `_config/compat/ui-overflow-candidates.tsv`; the guide’s 1.0.0 list.
+> **The blocks of the 2026-11-06 chats 1-4 (forced closures of the third and the fourth, the q8 correction, the dayloops of 09:05, 12:46, 19:20, bug 67, the music mod, interview #034, plan 45 steps 1-3, Nexus quarantine) - moved verbatim to the chronicle, entry 2026-11-07 00:33 +03:00.** Still open from them: plan 45 step 4 onward (boss / elite spawns) and kinds 8-12; bug 67 palm shadows (re-shoot with hdr.ps1 off + SetTimeOfDay; build stays 2.0/-1.0); KrinikConanMusic death scene M7 with bug 79 cases (respawn, dungeon, waystone); q8 Nanite B data; G4 boss ghost by the thrall conversion path; Nexus ticket 276571 follow-up letters (sent by the owner 2026-11-06 and 2026-11-13); Northern Timber - the owner decides.
+> **The 2026-11-03 chat blocks (cb012770, ce994c74, the 1.0.0 resume of 19:51, the Nexus publication of 19:05) and the 0.9.0 release pointers — moved verbatim to the chronicle, entry 2026-11-06 12:34 +03:00.** Still open from them: nest eggs (bug 82), a real E over a corpse in a bush (bug 80), the rim on F done properly (bug 75), the rest of the guide's 1.0.0 list; Nexus — ticket 276571.
+> **Older pointer blocks (2026-10-26 … 2026-11-02: chat FIRST lists, the 1.0.0 orders, plan 35/36/34 queues, the measurement queue) — moved verbatim to the chronicle, entry 2026-11-03 20:58 +03:00 (second part).** The live backlog: the guide chapter «Известные проблемы и планы на 1.0.0», epics `plans/40_…` and `plans/41_…`, `plans/36_…` (W table), `plans/35_…`, `plans/34_…`; work trees `_paksview-3.0.1` (66 GB) and `Conan Exiles Mods/_text-extract-3.0.1` (20 GB) stay.
+
+## 2026-11-17 21:3x +03:00 — STATUS bonsai trim, third part: closed items of «Awaiting human review» moved verbatim
+
+- ✅ The pack's code of the evening chat 2026-11-10 + bug 93 build 7 — committed and pushed 2026-11-13 10:5x (pack `d3e92f9`, 5 judge rounds, the last clean).
+- ✅ **the «+» brightness (plan 49)** — decided 13:41 G1 (Conan gold `#E9C27A`), confirmed 19:11 with the page arrows in the same style; TO BUILD (handover item 4).
+- ✅ bug 91 — the owner picked V1 13:04 (a plate above the diamond); built in the kit, deployed 13:12 (pack `eef82bf`); the real-hover check waits for a free PC.
+
+- ❓ **2026-11-07 07:4x — the hub controller's player-path test needs the game in FRONT** (real mouse clicks on the tabs, Esc/Tab closing, a 144 fps recording
+  of the switches): the work of plan 48 runs background-only by the owner's word of 2026-11-06 23:32 <!-- attribution-ok: verbatim in plans/48 --> — SUPERSEDED 2026-11-07 13:46 by the owner (the machine is the agent's, the game may go to the front — verbatim in bug 67 DONE, STATUS chronicle entry). The section is proven
+  by the remote's switches only.
