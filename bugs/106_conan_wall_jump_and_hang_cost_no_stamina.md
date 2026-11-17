@@ -2,7 +2,7 @@
 
 **Status:** 🔧 both items built (item 2 — our reason flag, 2026-11-17 09:50, TC H1–H5 pass by the remote); the owner's play is the check · **Severity:** S2 (the owner's play rules for the climb, KrinikConanLocomotion — the wall family) · **Version/build:** the Conan build on 3.1.0,
 pack working tree of 2026-11-16 · **When/context:** the owner's two messages mid-turn, 2026-11-16 22:31 +03:00, while the agent built bug 105 · **Fixing:** item 1 pushed
-(pack `4367176`, TC G10 79 → 59); item 2 — the fork asked of the owner in chat 2026-11-16 23:09 (a timer of ours, rule 7, and the rate −1 / −2 / −3 per second), no answer yet
+(pack `4367176`, TC G10 79 → 59); item 2 — built 2026-11-17 09:50 (pack `e6d1d97`, our reason flag in the game's wall tick, the owner's design 09:18 / 09:33 — interview #037); left — the owner's real keys
 
 ## Symptom (the owner's words, verbatim)
 

@@ -70,7 +70,7 @@ locomotion, the torso from the draw. That layered branch is where the hand leave
 - the walking chain is hand-tuned PARTIAL blends: `TorsoAttackPose` over `PostEquipPose` at `b_pelvis` depth 6 weight 0.7 → `b_pelvis` depth 1 (`b_L_clavicle` −1)
   weight 0.33 → `b_spine_3` depth 1 weight 0.44, then TWO blends that take `b_R_clavicle` / `b_L_clavicle` (depth 2 and depth 1, weight 1.0) BACK from `PostEquipPose`
   — the locomotion's shoulders and upper arms: the right arm follows the walk and the hand leaves the chin (the owner's symptom).
-**The build (next):** the pattern of `kit-ab-fp-upright.py` in the same KrinikConanArchery override — a member bool `KrinikBowDrawUpper`; the `isCrouching` selector's
+**~~The build (next)~~ — SUPERSEDED (the parent override is refuted, below; kept as the record of the graph edit):** the pattern of `kit-ab-fp-upright.py` in the same KrinikConanArchery override — a member bool `KrinikBowDrawUpper`; the `isCrouching` selector's
 `bActiveValue` reads it; the EventGraph sets it at the head of Update Animation: `isCrouching OR (GetWeaponArcheType(GetWeaponItemPrimary(CombatBP)) == 3 AND
 isAttacking)` (the game's own bow test, `Conv_ByteToInt` for the enum — fp-upright runs 4 / v3b). A bow draw then takes the crouch branch's clean upper body while
 standing and walking; melee and an empty-handed walk keep the game's chain. Then: cook, the pak, W1–W6 by real RMB (the side camera), the control K1.

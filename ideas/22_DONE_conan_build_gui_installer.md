@@ -116,3 +116,7 @@ line. Later the same window grows into a launcher that updates itself and the bu
 ## Decisions made without the owner
 
 none yet
+
+## ✅ STATUS: DONE (2026-11-17 11:10 +03:00)
+
+`[OWNER]` 2026-11-17 11:10 (чат, на мой список «идеи не реализованы» на закрытии): «Давным давно тобою сделано» — графический установщик сборки готов давно. Отмечено DONE по его слову; агент ошибся, судя по файлу без отметки.

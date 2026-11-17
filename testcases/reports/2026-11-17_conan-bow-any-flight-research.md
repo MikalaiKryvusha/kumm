@@ -52,8 +52,8 @@ re-run with the view turned away — its own report.
 
 ## 5. Found
 
-- `bugs/107_conan_bow_not_ready_in_flight_after_wall.md` — the re-equip after a climb is an action that ends with the item's initialisation; a shot before it
-  launches an arrow with no speed; four tries failed → `/bug-research`.
+- `bugs/107_conan_bow_not_ready_in_flight_after_wall.md` — the re-equip after a climb is an action that ends with the item's initialisation; ~~a shot before it
+  launches an arrow with no speed; four tries failed~~ — WITHDRAWN by the Correction above (the wall in front); the rearm shipped later (`…-r2.md`).
 
 ## 6. Traces
 

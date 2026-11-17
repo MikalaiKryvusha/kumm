@@ -25,6 +25,8 @@ All on 2026-11-17 (+03:00), `bash pult.sh "lua …"` from `ConanExiles/_config`.
 | 3 | 10:32 | run 1 with the view turned 180° at 0.15 s | v 2499 — the Correction |
 | 4 | 10:35–10:36 | rearm r2 restored (`Copy-Item … rearm-r2.lua`), `Deploy-ModPack.ps1 -Deploy -Only KrinikConanLocomotion` (md5 = source), launch; climb with the bow sheathed, push, view turned, LMB 0.3 s | B1′ below |
 | 5 | 10:37–10:38 | `ToggleWieldWeapon()` on the ground (B6) | the remote's toggle does not sheathe |
+| 6 | 10:41–10:42 | still r2: push, the view turned, LMB at 1.15 s (judge r1's risk — the game's late equip end) | the light shot replaced the equip montage at 1.204 s; the flying arrow born v 2499, «#2 из лука» 10:42:22.396 |
+| 7 | 10:43–10:45 | **r3** (judge r1 items: the window 0.5 s, the hero's address, the hook through a global) deployed (md5 = source), launch; B1′ again | «полёт после стены: лук готов сразу …» 10:45:22.648; the flying arrow v 2499; «#1 из лука» 10:45:23.319 — before the landing; this is the shipped `ee7e31c` |
 
 ## 4. Checks
 
@@ -46,4 +48,4 @@ Functional run: the game's own climb, push, re-equip and shot on the owner's sav
 
 ## 7. Verdict
 
-pass for B1′ on the remote's path; real keys (held RMB through the push, B7) — the owner's play.
+pass for B1′ on r2 (run 4) and on the shipped r3 (run 7); B5 partial (run 6, a light shot past the equip end); real keys (held RMB through the push, B7) — the owner's play.

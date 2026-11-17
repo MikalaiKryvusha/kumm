@@ -42,7 +42,7 @@ time, mode, substates, ECharacterState, the bow's socket. Logs `[KrinikConanLoco
 | B3 | On the ground, `airshot` → the draw and the shot in mode 3 (regression) | partition (ground jump) | partial · the remote's draw stays in 11 (RMB not held physically), the light shot's arrow left after the landing (#1, #2); real input — the owner's play 2026-11-10 (M6) |
 | B4 | The hero lifted 6 m by `K2_SetActorLocation`, RMB / LMB events in the fall → the draw and the shot in mode 3 | partition (fall) | partial · a light shot (LMB only) in the fall: the arrow born v 2499, «#3 из лука»; RMB + LMB by the remote → «CannotQueue» (the remote's draw, not held) |
 | B5 | On the wall, `airshot` with the shot at 1.6 s (`_G.__ws_end` 2.2) → 15 / 16 kept past 1.35 s; the shot fires | boundary (the game's timer) | partial 2026-11-17 10:46 +03:00 — a light shot at 1.15 s (it replaced the equip montage at 1.20 s, the game's equip end around it) launched a flying arrow v 2499, «#2 из лука»; a HELD draw past 1.35 s — real input (B7) |
-| B6 | On the ground, `ToggleWieldWeapon()` ×2 (sheathe, wield) → state 3 lasts as the game's, no AirCombat «полёт после стены» line | partition (not a climb) | blocked — the remote's `ToggleWieldWeapon()` does not sheathe a wielded bow (state 0, `Socket_Bow` before and after, 2026-11-17 10:38 +03:00); by the code: `on_character_state` returns at once unless a climb ended in the air ≤ 2 s ago |
+| B6 | On the ground, `ToggleWieldWeapon()` ×2 (sheathe, wield) → state 3 lasts as the game's, no AirCombat «полёт после стены» line | partition (not a climb) | blocked — the remote's `ToggleWieldWeapon()` does not sheathe a wielded bow (state 0, `Socket_Bow` before and after, 2026-11-17 10:38 +03:00); by the code: `on_character_state` returns at once unless a climb of that hero ended in the air ≤ 0.5 s ago |
 | B7 | RMB held from the wall through the push — real keys | use-case (held) | skipped — real input; the owner at the keyboard (rule 30); for his play |
 
 ## 5. Control cases — MUST
@@ -54,4 +54,4 @@ time, mode, substates, ECharacterState, the bow's socket. Logs `[KrinikConanLoco
 ## 6. Verdict
 
 B1′ pass on rearm r2 (the shot aimed away from the wall) — the earlier B1 «fail» was the wall in front (bug 107, Correction); B3 / B4 partial (the remote's draw),
-B5 / B6 blocked, B7 the owner's real keys. Reports `testcases/reports/2026-11-17_conan-bow-any-flight-research.md`, `…-r2.md`.
+B5 partial, B6 blocked, B7 the owner's real keys; B1′ also passed on the shipped r3 (report `…-r2.md`, run 7). Reports `testcases/reports/2026-11-17_conan-bow-any-flight-research.md`, `…-r2.md`.

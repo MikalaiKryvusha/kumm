@@ -457,3 +457,7 @@ Lua-мод дотягивается без кука. Кит остаётся п�
 7. Мод камеры: `apply_zoom_range` в строке 990 молча не работает — показать владельцу.
 
 **Seen live 2026-10-31 12:05** (plan 36 item 27): with points spent in «Хар-ки», Athleticism 2 / 3 / 4 → `MaxWalkSpeed` 296.4 / 298.4 / 300.3 and `JumpZVelocity` 432 at 4 — the law of `KrinikConanGameplay` (450 + 3 and 420 + 3 per point) works in 3.0.1; report `testcases/reports/2026-10-31_conan-agility-law-live.md`.
+
+## ✅ STATUS: DONE (2026-11-17 11:10 +03:00)
+
+Built: KrinikConanLocomotion, section `krinik_oblivion_locomotion` — +3 cm/s to run, sprint and jump per Agility point, as in Oblivion (`games/ConanExiles/mods/KrinikConanLocomotion.md`, row «run and jump growth»). Tagged DONE at the closing of 2026-11-17, when my list «ideas not built» named it by its stale file and the owner asked what it was (11:10).

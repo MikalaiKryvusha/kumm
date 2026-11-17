@@ -2,7 +2,7 @@
 
 **Status:** 🔧 SHIPPED 2026-11-17 10:46 +03:00 — pack `ee7e31c` (rearm r3 after judge round 1; TC B1′ pass on r3, a shot at 1.15 s flies too); the owner's real keys (RMB held through the push) are the final check · **Severity:** S2 (the owner's design of the
 bow in any flight, KrinikConanLocomotion) · **Version/build:** the Conan build on 3.1.0, pack `e6d1d97` · **When/context:** applying the owner's answer to
-interview #035, 2026-11-17 09:56–10:26 · **Fixing:** next — `/bug-research` (the 3-attempts rule), then a build by the hypothesis below
+interview #035, 2026-11-17 09:56–10:26 · **Fixing:** done 2026-11-17 11:08 +03:00 (pack `ee7e31c`); left — the owner's real keys
 
 ## ⚠️ CORRECTION 2026-11-17 10:33 +03:00 — the «speed 0» arrows were arrows that hit the wall in front
 
@@ -48,7 +48,7 @@ substate 8 stays (our take-off branch saw the bow still sheathed). The flight la
 ## Tries (none shipped; the «v 0» verdicts below are the wall in front — Correction above)
 
 1. `SetCharacterState(Aggressive)` on the next step after the game enters EquipItem in the flight + `ExitSubstate(8)` (`.work/bowflight/krinik_air_combat.rearm-r2.lua`):
-   state 0 at 0.11 s, the draw starts in the air, the light shot plays in the air — **the arrow is born with v 0**. Worse than vanilla (a broken arrow, a copy at the origin).
+   state 0 at 0.11 s, the draw starts in the air, the light shot plays in the air — ~~**the arrow is born with v 0**. Worse than vanilla (a broken arrow, a copy at the origin).~~ — the shot aimed at the wall in front (Correction); aimed away — v 2499 (B1′).
 2. + `ActionEnd(0.1)` by the remote at 0.15 s — v 0.
 3. + the equip montage at ×3 (`Montage_SetPlayRate`, ended at 0.36 s), the shot at 0.65 s — v 0 (no Archery line).
 4. + `HandleItemInitialize(GetWeaponItemActive().CurrentWeapon, true)` by the remote at 0.15 s — v 0; its log line did not appear (the delayed call may have thrown —
@@ -56,11 +56,11 @@ substate 8 stays (our take-off branch saw the bow still sheathed). The flight la
 
 ## The fix (rearm r2) — verified aimed away from the wall, 2026-11-17 10:39 +03:00
 
-`krinik_air_combat.lua`: a climb that ends in the air arms `climb_exit_t` (the mode-change hook, ≤ 2 s); the hook on the native `SetCharacterState` reads the call's
+`krinik_air_combat.lua`: a climb that ends in the air arms `climb_exit_t` for that hero's address (the mode-change hook, ≤ 0.5 s since r3); the hook on the native `SetCharacterState` reads the call's
 `NewState` (the hook runs before the body) — EquipItem → on the next game-thread step, if the hero still falls with the bow in hand, `SetCharacterState(Aggressive, true)`
 (the call the game's own timer makes later) and `ExitSubstate(8)`. TC B1′ pass (report `testcases/reports/2026-11-17_conan-bow-any-flight-r2.md`): the arrow v 2499,
 «#1 из лука» 0.67 s after the push, before the landing. Open: the owner's real keys (RMB held through the push — B7); a ground hot-bar equip (B6) not reproducible by the
-remote — guarded by the code (nothing runs unless a climb ended in the air ≤ 2 s ago).
+remote — guarded by the code (nothing runs unless a climb ended in the air ≤ 0.5 s ago).
 
 ## Hypotheses for `/bug-research` (closed by the Correction — kept for the record)
 
@@ -72,7 +72,8 @@ remote — guarded by the code (nothing runs unless a climb ended in the air ≤
 
 ## Decisions made without the owner
 
-- `[AI]` The rearm (try 1) is not shipped: with it the shot after a wall launches a dead arrow; without it the game refuses for 1.35 s, as before.
+- ~~`[AI]` The rearm (try 1) is not shipped: with it the shot after a wall launches a dead arrow~~ — WITHDRAWN (the Correction: the arrow hit the wall in front); the rearm shipped in `ee7e31c`.
+- `[AI]` The rearm window 0.5 s (the game's re-equip came 0.06–0.11 s after the exit); the state set with `Replicate` true (the game's server path).
 
 ## Links
 

@@ -311,3 +311,7 @@ The build's levelling is endless (KrinikConanGameplay, 10 000 levels, XP curve b
       opened UNDER the attribute tree), (b) the purple corruption row (`W_AttributeCorruptionBar`, the diamond right of the scale), (c) the caption under a node icon (bug 86).
       First: find his earlier frames in the chat history / review folders, then a mockup with statuses (rule 23) before any build.
 - [ ] Build, cases, frames at four resolutions.
+
+## ✅ STATUS: DONE (2026-11-17 11:10 +03:00)
+
+`[OWNER]` 2026-11-17 11:09 (чат, на мой список «идеи не реализованы» на закрытии): «Уже сделано оба. Ты не прав» — уровень без потолка (идея 04) и атрибуты без потолка (план 49) уже в сборке. Отмечено DONE по его слову; агент ошибся, судя по файлу без отметки.

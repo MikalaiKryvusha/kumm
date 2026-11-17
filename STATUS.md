@@ -144,7 +144,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > empty means the chat binding is off (§6); (6) a field report to KAIF origin (/report-bug, improvement request, «Local remediation») with what the first Windows run of
 > `open-chat.ps1` showed — the first run under the owner's eye (the VS Code window may not come forward, Enter may go elsewhere).
 >
-> **NOW — the chat of 2026-11-17 08:53 (resume + «начинаем с интервью по конану»; `[OWNER]` 10:27 «работай автономно до закрытия чата по переполнению контекста» → /dayloop).**
+> **FIRST NEXT CHAT — items 2…:** (2) **The walking bow draw (#038 A — bug 104):** the cause is read (the walking chain of `AB_human_male` takes the shoulders back from the
+> locomotion), a parent-graph override is OUT (EXP-0511 — other mods ship its children); recon the post-process route (plan 52, `ABP_KrinikFirstPersonLook` in
+> KrinikConanArchery) or another lever, then build; cases `testcases/TC_conan_bow_draw_walking_pose_2026-11-17.md` (real RMB held, the side camera). (3) **The owner's
+> real-key checks** (he plays): the hang drains 2/s and an empty bar drops the hero (TC_conan_wall_hang_stamina); RMB held through a wall push draws in the flight
+> (TC_conan_bow_any_flight B7); bug 105 G1 / G5b / G10 / G7 and G6. (4) Bug 93 — the held draw ends ≈ 1 s after the full hold in a sprint (the game's reason by
+> `DebugActionTryFailure` / `EndPowerCharge`; the degeneration bits now known: sprint 2 −8/s, charge hold 32 −6.7/s). Tools of this chat: `.work/hangstamina/*.lua`,
+> `.work/bowflight/*.lua` (arrow-birth, refuse, window, equip probes), `ConanExiles/_config/devkit/kit-probe-ab-torso-*.py`.
+>
+> **CHAT CLOSED 2026-11-17 11:04 +03:00 (soft, at 80 % of the window). The chat of 2026-11-17 08:53 (resume + «начинаем с интервью по конану»; `[OWNER]` 10:27 «работай автономно до закрытия чата по переполнению контекста» → /dayloop).**
 > Done: interviews #035 / #037 / #038 answered by the owner 09:18 (verbatim in each); **the hang's stamina BUILT** as our reason flag in the game's own wall tick
 > (`[OWNER]` 09:33 «новый флаг разрабатываем»; pack `e6d1d97`, TC_conan_wall_hang_stamina H1–H5 pass, 2 judge rounds; the game's stamina degeneration bitmask mapped —
 > game map «Climbing»); #037 Q1 — B, nothing to change. **Bug 107** (the bow in the flight after a wall, #035): the re-equip blocks the bow 1.35 s; the «arrow with speed 0»
@@ -152,8 +160,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (TC B1′ pass, judge round 1: no defect, 5 items applied); the owner's real keys (RMB held through the push) are the final check. #038 (the standing draw kept when walking): the cause read in
 > `AB_human_male`'s AnimGraph by two kit probes — the walking chain takes the shoulders back from the locomotion; the crouch branch takes the whole upper body
 > (`bugs/104_…`). The edit script `devkit/kit-ab-bow-draw-upper.py` is written and NOT run: a parent-only override is the bug-95 T-pose — **the FORK for the next
-> chat** (parent + both children re-cooked, or another lever) is written in bug 104. Bug 103: the first live marked farewell PASSED. Still open: bug 93 (the held draw
-> ends in a sprint — real input). KUMM `bc770c3`, pack `155d79f` pushed; no game of ours runs, the machine lock released.
+> chat** is written in bug 104 — the parent override is OUT (EXP-0511), the post-process route or another lever. Bug 103: the first live marked farewell PASSED. Still open: bug 93 (the held draw
+> ends in a sprint — real input). KUMM — the closing commit after `b703824`, pack `1baf59f` pushed; no game of ours runs, the machine lock released.
+> The owner's question at the closing (11:08: how far is 1.0.0, which ideas are not built) — answered in chat from the documents, and the idea list was WRONG in four
+> of nine: the level without a cap (idea 04), endless attributes (plan 49) and the GUI installer (idea 22) — the owner 11:09–11:10 «Уже сделано оба. Ты не прав» ·
+> «Давным давно тобою сделано»; the run / jump growth from Agility (idea 03) — built in KrinikConanLocomotion `krinik_oblivion_locomotion`. All four tagged DONE.
+> **The next chat re-checks `ideas/` and the phases of epics 40 / 41 against what is built** before saying anything about 1.0.0 (their status lines are older than the work).
 >
 > **Moved verbatim to the chronicle (entry 2026-11-17 10:52 +03:00):** the block CHAT CLOSED 2026-11-17 06:33 (+ its FIRST NEXT CHAT) and the block of the chat of 2026-11-17 04:25. Their open items are carried in the NOW block above or stay here: bug 93 (the held draw ends in a sprint; S9) · bug 105 the owner's final check (G1, G5b, G10, G7 with the bow) and G6 · plan 53 step 12 (read `researches/mod-reconciliation/GUIDE.md` first) · plan 52 put-away by a real key · the GitHub release link in the Nexus call (the owner's question).
 > **Moved verbatim to the chronicle (entry 2026-11-17 06:33 +03:00):** the block CHAT CLOSED 2026-11-16 23:53 (+ its FIRST NEXT CHAT) and the block of the chat of 2026-11-16 22:12; their open items are carried in FIRST NEXT CHAT above (the bow on the wall — done; the hang's drain — interview #037 Q2; bug 105 final check; the older list).
