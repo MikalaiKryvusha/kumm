@@ -125,8 +125,10 @@ function open() {
     if (done) {
       if (process.env.AUTO_RELAY_DRY === '1') { log(`open: [dry] would open a new chat in ${ROOT} with «${PROMPT}»`); return 0; }
       if (process.platform !== 'win32') { log(`open: only Windows is wired — open a chat and send «${PROMPT}» by hand`); return 1; }
+      // -NoEnter until TC L1 passes: on 2026-11-17 11:37 and 11:41 the deep link opened NO tab (four VS Code windows), the project window was in front
+      // all the same — an Enter would have gone into the RUNNING chat's input (a draft of the owner's would be sent). The title check is not enough.
       const r = spawnSync('powershell.exe', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', join(DIR, 'open-chat.ps1'),
-        '-Folder', ROOT, '-Prompt', PROMPT], { stdio: 'ignore', windowsHide: true });
+        '-Folder', ROOT, '-Prompt', PROMPT, '-NoEnter'], { stdio: 'ignore', windowsHide: true });
       log(`open: open-chat.ps1 exit ${r.status}`);
       return r.status === 0 ? 0 : 1;
     }

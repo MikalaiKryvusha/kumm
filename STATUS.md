@@ -138,7 +138,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > skills. Agreed with the KAIF session 11:26: no own gauge (context-budget 80 / 92), no HANDOVER.md (STATUS + farewell file), entry «resume auto-relay continue»;
 > the next chat opens only after the marked farewell, STATUS committed in the chat, and the old chat quiet (a Stop blocked by another hook waits). Checks: self-test
 > 22/22, e2e 21/21 (mutants M1–M3 red), test-guards 308/308, context-budget 38/38; check 4 (hooks' tmpdir `F:\Temp`) and 5 (session id visible) pass.
-> **Live L1 (the deep link by hand, 11:37) — the tab was NOT found** in the KUMM or KAIF window: FOUR VS Code windows are open (KAIF, KCCP, KUMM, the turbine),
+> **11:41 the real opener with `-NoEnter` raised the KUMM window over KAIF (log «opened … in 'KUMM - Visual Studio Code'») — yet NO new tab: the focus sat in
+> the RUNNING chat's input; an Enter would have gone there. `relay.mjs open` now passes `-NoEnter` until the link opens a tab (the handler: `Code.exe --open-url`,
+> the same install).** **Live L1 (the deep link by hand, 11:37) — the tab was NOT found** in the KUMM or KAIF window: FOUR VS Code windows are open (KAIF, KCCP, KUMM, the turbine),
 > the link goes to the last active one — the KCCP / turbine windows not checked. **Open:** find where the link lands (`code <folder>` first, then the link) →
 > L2 (the opener with Enter) → L3 (a real chain) → the field report to KAIF origin (check 6; the 4-window finding, UIPI / elevated, `code` without `-r`).
 > Cases `testcases/TC_auto_relay_2026-11-17.md`. The 5-hour usage limit stood at 96 % at 11:39, the harness banner names its reset at 14:40 <!-- claim-ok: the reset time the harness banner printed, a future time by nature -->.
