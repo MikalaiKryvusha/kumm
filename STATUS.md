@@ -152,7 +152,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > manifest, consoles / mutex interlocks, the build update runs install.ps1 `-Upgrade` — batch `KUMM/.work/launcher54/batch55.sh` running. **KUMM is NOT pushed
 > since `82260a4`**: the harness refused the force-push that replaces the pushed commit whose MESSAGE held a forbidden word (amended locally) — the owner's call
 > (`git push --force-with-lease origin main`); new KUMM commits wait for it. Older history `5c300f3` holds the same word in plan 53 (history rewrite — the owner's call).
-> **FIRST NEXT CHAT:** (a) the owner's word on the KUMM force-push (local `d1aac90`, `9970a5d` … wait on it); (b) the launcher judge's findings and engine judge round 2;
+> **FIRST NEXT CHAT:** (a) the owner's word on the KUMM force-push (local `d1aac90`, `9970a5d` … wait on it); (b) **the launcher judge's 4 confirmed defects — plan 55 B7 (quick close = crash; parts deleted before the last refusal; a half revert; the old-bundle
+> delete guard) — fix FIRST, rebuild, `KUMM/.work/launcher54/batch55.sh`**, then engine judge round 2;
 > (c) the deferred engine items (display keys merged on a first install, the restore-side never list); (d) phase D: numbers 0.9.1 / 3.1.1 / launcher 1.1.0, the
 > feedback section in README + guide (the owner 21:11, plan 55 «D-fb»), release notes by the owner's portrait, `make_volumes.sh`; (e) phase E by his word.
 > (2) **Next — the epic «0.9.1 for 3.1.1»** (the owner 20:00: «в ближайшие дни … выпустить предварительную
