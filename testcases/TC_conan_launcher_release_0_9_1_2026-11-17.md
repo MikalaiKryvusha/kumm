@@ -83,6 +83,7 @@ Status: `todo` · `pass` · `fail` · `blocked` · `skipped`. Each row is one ac
 |---|---|---|---|---|---|
 | M1 ★ | 0.9.0 installed on 3.0.1-era files is not possible on 3.1.1 — instead: a 3.1.1 copy with 0.9.1, the player's changes as B1′ | the player runs 0.9.2's `install.cmd` | as B1′ | `settings-table.mjs` | todo |
 | M2 ★ | a copy with the 0.9.0 installer's journal and files (0.9.0 bundle from the GitHub release installed on the clean copy), player changes made | 0.9.1's `install.cmd` | 0.9.1 installed, the changes kept by the 0.9.0 hash table | `settings-table.mjs` | todo |
+| M0 ★ | REAL WORLD: the 3.1.1 build (`D:GamesConan Exiles 3.1.1`, installed by a plain deploy — a journal, no shipped.json = the 0.9.0 path) | `Deploy-ModPack.ps1 -Deploy -Upgrade -WithEngineIni` | old build restored, new deployed, the world and markers untouched | SHA-256 of Game_0/1.db, SimpleMinimap_MarkerData.sav, a DamageData .sav before / after | pass — 21:14: «no record» warning; 1 changed file set aside; restore returned 11 / deleted 165; 75 / 75, verify 114 / 0; Engine.ini — the build's, the game-rewritten one beside as `.player-20261117-211420`; the four hashes BYTE-IDENTICAL |
 | M3 | the player runs the uninstaller of 0.9.1 | uninstall | vanilla back; markers, `DamageData`, world byte-identical | hashes | todo |
 | M4 | fresh clean copy, no build | 0.9.1 `install.cmd` | installed; `GameUserSettings.ini` has no resolution keys from us | file read | todo |
 

@@ -92,6 +92,14 @@ shipped config set is `Saved/Config/Windows/*.ini` + `exportConfig` (four mod `.
 map markers (`SimpleMinimap_MarkerData.sav`), the damage logs and `Game_0.db` are never written by the build, so the journal never touches them. The bundle's
 `install.ps1` (written by `Write-BundleInstaller`) runs `-Deploy` only — it knows nothing of an installed older build.
 
+### Phase D — an item from the owner (2026-11-17 21:11, tossed mid-work)
+
+- [ ] D-fb. `[OWNER]` «в ридми нашем, в мануале, который в PDF собираем, должны быть описаны пути обратной связи и через ОТЗЫВ в лаунвере и сборке, и через
+      issues в GitHub - я принимаю отчёты об ошибках и запросы на улучшение и там и там» · 2026-11-17 21:11. The build's README (`ConanExiles/_config/public_release/README.template.md`)
+      and the PDF guide (`ConanExiles/docs/guide/guide-*.html` → PDF by `build-docs.py`) get a section «Обратная связь»: the «Отзыв» button of the launcher and of the
+      game menu (what it does — the report zip) and GitHub Issues of the public repo (bugs and improvement requests), both accepted. The author-links section stays
+      a section of links (HOUSE_RULES rule 22 — no sentence under it calls the links report addresses); the feedback section is its own heading.
+
 ### Phase E — publication: decided ahead
 
 - **0.9.1 is published as an ordinary GitHub release, NOT «Pre-release»**: the launcher's feed skips drafts and pre-releases (`ConanExiles/_config/launcher/KrinikConanUpdates.cs`

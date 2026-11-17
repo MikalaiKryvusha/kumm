@@ -140,7 +140,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > reviewed review folders (85–90 kept). D: free 96 → 258 GB. **There is NO game build on disk now** — the 3.1.0 world save is stashed in `KUMM/.work/disk_d/save_3_1_0/`;
 > **20:1x–20:5x: the build on 3.1.1 made and checked** (`D:\Games\Conan Exiles 3.1.1`, targets.json → it; TC_conan_move_3.1.1 6 pass, P6 blocked — the 3.1.0 pak list
 > lost, EXP-0552; report `testcases/reports/2026-11-17_conan-move-3-1-1.md`). **Epic 55 written** (`plans/55_EPIC_…`, research `researches/conan-launcher-modern-practice/`,
-> cases `testcases/TC_conan_launcher_release_0_9_1_2026-11-17.md`). **Phase B coded, under test:** KUMM `Deploy-ModPack.ps1` `-Upgrade` (player settings kept across an
+> cases `testcases/TC_conan_launcher_release_0_9_1_2026-11-17.md`). **21:1x — phase B engine DONE and committed locally (`d1aac90`):** `-Upgrade` etc. after judge
+> round 1 (13 findings, 10 fixed + TC table + stand; deferred: 13b display-key merge on a FIRST install, the 0.9.0 hash table, the restore-side never list;
+> **judge round 2 owed**); stand 69 / 69. **Launcher (pack, NOT yet committed at this line):** handshake / start counter / bundle values / interlocks / parts
+> deleted after unpack / missing-last-part check / previous-bundle offer / window icon (the owner confirmed the gold «K» on his taskbar 21:05) — launcher
+> stand batch 3: everything passed except B2 (stop + resume — the install.ps1 never reported); **B2 alone 21:11: 16 / 16 pass** (the cause of the batch
+> miss not found — one re-run, not «not reproduced»); progress lines made nouns by the owner's word 21:11 («скачивание»); batch 4 on the final build running; P6 of the move partly done by `stale-copy-check.py` (2 of 11 assets equal 3.1.1). Release numbers for phase D: 0.9.1, game 3.1.1, Steam
+> post `…/view/1849458702686207`; 0.9.1 must be an ORDINARY GitHub release (the feed skips pre-releases — epic 55 «Phase E»). **Before that — under test:** KUMM `Deploy-ModPack.ps1` `-Upgrade` (player settings kept across an
 > update, dpkg rule; `configPolicy` managed / strip / never; deploy and restore refuse a running game; export strips display keys) — fixture stand 67 / 67, 9 new checks
 > red on the old engine, judge round 1 running; pack: `configPolicy` in modpack.json, launcher — self-update handshake + start counter, values from the bundle's
 > manifest, consoles / mutex interlocks, the build update runs install.ps1 `-Upgrade` — batch `KUMM/.work/launcher54/batch55.sh` running. **KUMM is NOT pushed
