@@ -46,8 +46,12 @@ Modes: `/auto-relay <task>` — start · «resume auto-relay continue» — the 
    of asking him to open a chat.
 3. The farewell ends with `<!-- farewell -->`, as always. After it — nothing. The Stop hook starts the opener: it waits until this chat is quiet
    (≥ 10 s without a write and the last record a text answer — a stop blocked by another hook waits for your one-line answer), until the owner's
-   keyboard and mouse are idle 3 s, raises the VS Code window, opens a new chat with «resume auto-relay continue» and presses Enter only if that
-   window is in front. A failure is a `FAILED` line in `relay.log`; the owner then sends «resume auto-relay continue» by hand.
+   keyboard and mouse are idle 10 s (the project's presence threshold), raises the project's VS Code window, opens a new chat with «resume auto-relay
+   continue» by the extension link addressed to that window (`windowId` from `code --status`; `ELECTRON_RUN_AS_NODE` removed first — with it the link is
+   lost). Enter is OPT-IN (`open-chat.ps1 -Enter`) and is not passed yet: VS Code first asks the owner once «Allow 'Claude Code for VS Code' extension to
+   open this URI?» — until he ticks «Do not ask me again» and L2 passes (`testcases/TC_auto_relay_2026-11-17.md`), the new chat opens with the text and the
+   owner presses Enter. One keystroke of his after the idle gate aborts the open. A failure is a `FAILED` line in `relay.log`; the owner then sends
+   «resume auto-relay continue» by hand.
 
 ## Continue («resume auto-relay continue»)
 
