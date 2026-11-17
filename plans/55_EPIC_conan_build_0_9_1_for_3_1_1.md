@@ -117,7 +117,17 @@ Phase B and phase A run in parallel (B needs no game: the fixture stand). D need
       the box; the second start → no box; no folder → no box; the issue URL in the dry log. Goes into the D-fb feedback section of README and guide.
       **BUILT 2026-11-18 01:0x** (`KrinikConanLauncher.cs` `OfferCrashReport`; the «seen» state in `%TEMP%\KrinikConanLauncher.crashes-<hash of the game folder>.seen`
       because a file in the game folder would outlive the uninstaller): offered only for a crash folder NEWER by time than the one seen, once per crash whatever the
-      answer; stand case `crash` (B16′, C1–C6) in `.work/launcher54/batch58.sh`; judge round 2 running on it.
+      answer; stand case `crash` (B16′, C1–C6) in `.work/launcher54/batch58.sh`.
+      **Judge round 3 (on the round-2 fixes + B8, 2026-11-18 01:23): 1 defect, 7 risks, 8 cosmetic. Fixed the same hour:** D1 the report tool's start was
+      unguarded and the new crash handler turned its failure into a launcher exit → the guarded `Start` with `-GameDir` (C4); R1 the crash handler ended the
+      launcher on ANY UI exception, mid-install too → exit only before the window settles (the self-update case), later a box and the work goes on; R3 the
+      seen stamp used the folder's mutable write time → creation time; R4 the state lived in %TEMP% (Disk Cleanup) → `%LOCALAPPDATA%\KrinikConanLauncher`,
+      the stand overrides it (`KRINIK_LAUNCHER_STATE_DIR`); R6 the crash case's no-box checks could pass for a dead launcher → the log cleared per start, the
+      start waits for the offer's own decision line; C8 the batch's `tail -16` → `tail -40` + an EMPTY flag. **OWED (round 4 and beyond):** R2 the launcher
+      self-update deletes the kept `.old` in the keepOld state; R5 the space need after a stopped unpack is now too strict (subtract what is on disk); R7 L8 must
+      wait past the settle and assert `.old` + `.starting` stay; C1 the crash box has no owner window; C2 RestoreSlot's text names `.bad` even when only `.old`
+      is left; C3 the old-bundle box and the crash box can stack at one start; C5 the marker write throws raw for an archive without `pack\`; C6 the plaque
+      hard-codes the mail (BuildInfo.AuthorLinks carries it); C7 the no-marker-invented check cannot fail.
 - [x] D-fb (done with plan 56, 2026-11-18 01:0x): the second feedback path, GitHub Issues, in the report tool's console and box, `feedback_howto.txt`, the guide's
       «Отзывы и обратная связь», the README template (both languages) and the launcher's «Отзыв» plaque; the author-links section untouched (rule 22).
 
@@ -126,6 +136,18 @@ The design inputs already read (local recon, 2026-11-17 20:1x): the deploy's und
 shipped config set is `Saved/Config/Windows/*.ini` + `exportConfig` (four mod `.sav`: Hosav UI, Simple Minimap settings, Proximity Party, Damage Meter); the
 map markers (`SimpleMinimap_MarkerData.sav`), the damage logs and `Game_0.db` are never written by the build, so the journal never touches them. The bundle's
 `install.ps1` (written by `Write-BundleInstaller`) runs `-Deploy` only — it knows nothing of an installed older build.
+
+### Phase D — release tooling: state 2026-11-18 01:2x
+
+- [x] D1. Numbers in `modpack.json`: `packVersion` 0.9.1, `launcher.version` 1.1.0, `launcher.gameVersion` 3.1.1, `gameNotes` → the «(Re-release) November
+      Hotfix 3.1.1» post, `builtFor` rewritten without dashes (the installer prints it), `guide` → `Krinik-Conan-3.1.1-guide.pdf`; the launcher rebuilt with them.
+- [x] D2. The README template takes versions, the build id, the guide path and the mod counts from the manifest and the mods table (`{{…}}`, filled by
+      `mods-table.mjs`; the old text said 7 + 64 mods, the build has 9 + 63).
+- [x] D3. The guide source moved `guide-3.0.1.html` → `guide-3.1.1.html` (git mv; `build-docs.py`, `mods-table.mjs`, `build_nexus_description.py`, the manifest,
+      `feedback_howto.txt` point to it): title, heading, install line, the game-version table (3.1.0, 3.1.1 rows).
+- [ ] D4. **The guide's «Что нового» for 0.9.1, the «Известные проблемы» chapter, the README's history sentence and the release notes** — the owner's text:
+      written BY his portrait from the pack's history since 0.9.0 (`git log 2026-11-02..`), checked by a clean instance, then shown to him.
+- [ ] D5. `make_volumes.sh` run for 0.9.1 (the parts, the digests), the PDF printed (the lints gate it), the export bundle; reproducibility (criterion 8).
 
 ### Phase D — an item from the owner (2026-11-17 21:11, tossed mid-work)
 

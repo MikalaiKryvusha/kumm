@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0558 · 2026-11-18 · ❌ · #stand #background #process-tree #counting
+class: a-side-run-cleans-up-the-main-run
+**Lesson:** two slips of one stand hour. (1) A control run beside a running batch ended with `close_leftovers.ps1`, which kills every launcher started from
+`.work/launcher54/` — the batch's S2 died silently and printed nothing (re-run alone 4 / 0). (2) `grep -c PASS` counted the drivers' summary lines «ALL PASS» and
+«N FAILED» as checks: 153 / 32 reported, 138 / 26 true; corrected in the report and the plan within the hour.
+**Trigger:** a cleanup or a kill while another run of ours is alive — give the side run its own folder and close only its own PIDs; counting checks — anchor
+the pattern (`grep -c '^PASS'`) and print the per-case table, never a bare match count.
+mechanized: `.work/launcher54/batch58.sh` prints `== totals: checks PASS … FAIL …, cases with no output …` and an `EMPTY` line for a silent case (work file — move
+into the pack's `_config/launcher/test/` when the stand is next touched)
+
 ### EXP-0557 · 2026-11-18 · ❌→✅ · #launcher #marker #completeness #judge #update
 class: a-completeness-test-other-producers-also-pass
 **Lesson:** the launcher took «install.ps1 + pack\modpack.json of this version» as «the archive is unpacked whole» because ITS unpack wrote the manifest last;

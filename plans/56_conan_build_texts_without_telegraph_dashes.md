@@ -46,10 +46,27 @@ Not covered by the lint yet: strings inside our kit paks (widget texts set by `_
       build 00:57: both feedback paths printed), the perks and settlement log, the guide (29 lines + two `guide_lint.py` hits: a justification «так устроена сама
       игра» and «загрузчик UE4SS» in the license), the README template (13 lines + the feedback section with the second path in both languages), the launcher
       (3 lines, with B8); seen in place — the launcher window and the hub rows owed (the next launcher build, the next game run).
+- [x] 3a. Found on the way (rule 20 class): the README said «7 + 64 mods» while the build has 9 + 63, and its versions were typed by hand. Since 2026-11-18
+      01:1x the template carries `{{PACK_VERSION}}`, `{{GAME_VERSION}}`, `{{GAME_BUILD}}`, `{{GUIDE}}`, `{{OURS}}` / `{{OTHERS}}` and `{{OURS_RU}}` / `{{OTHERS_RU}}`
+      (Russian plural), filled by `_config/public_release/mods-table.mjs` from `modpack.json` and its own table; a placeholder left unfilled stops the script.
 - [x] 5a. `build-docs.py` runs `guide_lint.py` and `dash_lint.py` before printing the PDF; a red lint stops the print (control 01:05: «PDF не печатаю», exit 1).
       `guide_lint.py`'s header had promised that call since 2026-10-31 — it never existed (standing falsehood, corrected by making it true).
 - [ ] 4. `dm-fish-ru.tsv`: the helper's 800 rows applied by a script that checks key and token parity; then `build-ru-table.py` → `hosav-ru-entries.py` → the locres
       build (`_config/localization/README.md` steps 3–4); a sample of ten rows read in the game.
+      2026-11-18 01:1x: the helper rewrote 800 rows (798 changed, 11 direct-speech rows kept with reasons → `dash_lint_allow.txt`); the parity script
+      (`.work/dash_fix/apply_dmfish.py`: keys, `\n`, `{…}`, `%`, `<>`, no dash) — 800 ready, 0 problems — wrote them into `dm-fish-ru.tsv`; **the whole lint is 0**.
+      The direct `Game.locres` route instead of a full rebuild: `locres-fixes-2026-11-18.tsv` (741 pairs whose old text IS in the built file; 56 rows are not in
+      the built file at all — left for the next full rebuild), `locres-set-tr.py --check` exit 0; **not yet written** — an independent read of a 61-row sample runs
+      first. Then `deploy-localization.py` and the in-game sample.
+      **01:23 REJECTED and reverted** (`git checkout HEAD -- dm-fish-ru.tsv`, the 11 allow entries and the fix file removed): a clean instance read a 61-row
+      sample — 12 rows made worse by the rewrite, 4 old errors. Cause: MY brief said «no spaced dash except direct speech», stricter than the owner's norm
+      (portrait §2.4: a dash stands between two nominative nouns, before «это», for a consequence or a condition, for a summary, for a contrast) — the helper
+      turned allowed dashes into colons, repeated verbs and subjectless «и …», and broke meaning in places (6154, 2361, 3725 «до 10%», 3972 a hedge, 15642,
+      6177). **Next pass brief:** touch ONLY a dash that stands for a missing verb, preposition or «это»; keep the allowed ones and allow-list them with the
+      norm's class; fix the four carried-over errors (14487 «не стали изгонять» inverts the meaning, 8430 Yog slithers himself, 8126 «естественном …
+      естественно», 6965 the material name vs EN); a reviewer reads a fresh sample; the parity script stays (`.work/dash_fix/apply_dmfish.py`). The lint stays
+      strict, so `build-docs.py` refuses the PDF until this step is done. The helper's output and the review are kept in `.work/dash_fix/` (`dm_fish_new.tsv`,
+      `sample.tsv`) for the next pass.
 - [ ] 5. Grow the lint to the kit scripts' widget texts and to the built `Game.locres`; wire it into `build-docs.py`.
 - [ ] 6. Judge round on the whole diff; commit with `review:`.
 

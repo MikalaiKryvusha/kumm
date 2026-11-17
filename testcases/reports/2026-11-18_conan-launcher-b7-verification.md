@@ -63,3 +63,17 @@ run read the same way; the live window looked at by eye at ×4.
 **pass** for B7 on the stand: the four defects are fixed and every new check except L6 is proven able to fail; the corners are fixed on the live window.
 Open: the independent judge round on the B7 diff (running at the time of this report), REAL WORLD — the launcher on the owner's real build folder is not run
 (phase C).
+
+## Addendum 2026-11-18 01:15 +03:00 — after the judge round (R1–R7, C1–C5) and B8
+
+Runs (commands as above; `batch58.sh` = `batch57.sh` + `--half-bundle` (B15′) + `crash` (B16′) + `EXE_OVERRIDE`):
+
+| Run | Exe | Result (lines starting with PASS / FAIL) |
+|---|---|---|
+| 01:04–01:08 `batch57.sh` → `batch57_r2.txt` | `45443b7a…` (judge fixes, no B8) | 141 / 0 — L6 now asserts «(код -1)», B15′ 3 / 0 |
+| 01:09 control: `stand.mjs` + `live.mjs build … --half-bundle` | `d6e507c2…` (B7 exe) | 2 / **1** — the half-unpacked folder is offered as «уже скачана и распакована» there |
+| 01:09–01:14 `batch58.sh` → `batch58_r1.txt` | `0d6282b2…` (+ B8) | 148 / 0, B16′ 11 / 0; **S2 printed nothing**: my control's `close_leftovers.ps1` at 01:10 killed the batch's S2 processes (same folder). S2 re-run alone 01:14 — 4 / 0 |
+| 01:12 control: `live.mjs crash` | `d6e507c2…` | C1 «remembers» **FAIL**, C3 no box (the driver stopped on the missing box) |
+
+Found: no launcher defect. The S2 gap is a stand-procedure slip (a cleanup run beside a running batch). Verdict for the addendum: **pass** on the stand; judge
+round 2 on these changes running; REAL WORLD still phase C.

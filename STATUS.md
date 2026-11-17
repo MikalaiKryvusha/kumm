@@ -125,6 +125,24 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW (chat of 2026-11-18 00:40, `resume` + «работай автономно в дневном цикле до переполнения контекста - затем закрывай чат» → /dayloop).**
+> (1) **Epic 55 B7 verified** — batch on the final exe 138 / 0, control on 2f62b52 26 FAIL in the new cases, the button corners seen fixed on the live window
+> (report `testcases/reports/2026-11-18_conan-launcher-b7-verification.md`). **Judge round on B7 → 7 risks, 5 cosmetic, all confirmed and fixed in the pack**
+> (unpack marker `pack\.krinik_unpacked`, crash handler, keepOld / RestoreSlot, space formula, stand cases B15′ half bundle + control FAIL on the B7 exe;
+> plan 55 B7 lists them). **B8 the crash-report offer BUILT** (`OfferCrashReport`, stand case B16′ `crash`); exe `0d6282b2…`, `batch58.sh` running at 01:10;
+> **judge round 2 on the launcher running**. (2) **The owner's order 00:44 — no dash instead of a verb in any Russian text** (`HOUSE_RULES.md` 33, `RUSSIAN_RULES.md`
+> §11, plan 56, `ConanExiles/_config/release/dash_lint.py`, wired into `build-docs.py` before the PDF): rewritten — hub rows, report tool (+ GitHub Issues as the
+> second feedback path = D-fb), perks, settlement log, guide, README template, launcher strings; the camera mod's dev README left the shipment; **800 lines of
+> `dm-fish-ru.tsv` — a helper rewriting into `.work/dash_fix/dm_fish_new.tsv`**, then apply by script with key / token parity, locres rebuild, a sample in game.
+> (3) **Phase D: D1–D3 done** (plan 55 «Phase D — release tooling»): numbers 0.9.1 / launcher 1.1.0 / game 3.1.1 in `modpack.json`; README template fills
+> versions and mod counts (9 + 63) from the manifest; guide → `guide-3.1.1.html`. **D4 owed — «Что нового» 0.9.1, known issues, release notes: the owner's
+> text by his portrait.** (4) Show page for the owner opened 01:20: review folder `91_launcher_ugolki_i_tire` (corners before / after, the label).
+> (5) **dm-fish 800 rows: the helper's rewrite REJECTED by a clean sample read (12 of 61 rows worse) and reverted** — my brief banned every dash, the norm
+> allows several; plan 56 step 4 holds the new brief, the four old errors, the kept work files in `.work/dash_fix/`. The lint stays strict, so the PDF build
+> is refused until that pass is done. (6) **Launcher judge round 3: D1 + R1, R3, R4, R6, C4, C8 fixed** (plan 55 B8 lists them and the OWED R2, R5, R7, C1–C3,
+> C5–C7); exe `c834b0d4…`; the stand now builds the launcher under test as 1.0.0 (`batch58.sh`, the manifest says 1.1.0). **In game NOT seen yet:** the hub
+> rows' new hints. Commit messages drafted: `.work/commit_pack_launcher.txt`, `commit_pack_texts.txt`.
+>
 > **CHAT CLOSED 2026-11-17 22:1x (opened 21:50 with the previous farewell pasted; closed by the owner's word 22:04–22:12, the judge recalled — `[OWNER]`
 > «отзывай судью, закрывай чат» · «нет времени на судейство» · «это будет наш долг»).** Done: **plan 55 B7 — the launcher judge's 4 defects fixed in the pack**
 > (`_config/launcher/KrinikConanUpdates.cs`, `KrinikConanLauncher.cs`): a closed window counts as «alive» (`SelfUpdate.Closed`, every CloseReason but

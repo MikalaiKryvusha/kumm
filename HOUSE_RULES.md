@@ -218,7 +218,10 @@
     1. Before writing, load the owner's voice portrait (`node .kaif/tools/kaif-voice-lint.mjs load`) and the Russian method (`researches/russian-writing/RUSSIAN_RULES.md` §11).
     2. A dash that replaces a verb, a preposition or a «это» is rewritten as a full sentence: the line of the launcher «Игра не найдена: сборку — в папку игры» <!-- verbatim-ok: the defective line the owner quoted -->
        becomes a sentence that says who does what («Игра не найдена. Распакуйте сборку в папку игры.»). <!-- verbatim-ok: the rewritten line -->
-    3. A dash stays only where Russian grammar requires it and no verb is missing (a direct-speech dash, a range of numbers).
+    3. A dash stays where the Russian norm (the owner's portrait §2.4) puts it and no word is missing: direct speech, a range of numbers, a GOST caption,
+       before the particle that introduces a definition, between two nouns in the nominative, before a summary, for a contrast, between a condition and its
+       consequence. Such a line goes to `dash_lint_allow.txt` with its class. Turning an allowed dash into a colon, a repeated verb or a subjectless
+       conjunction is a defect (the sample review of 2026-11-18 01:23, plan 56 step 4).
     4. The check: `python ConanExiles/_config/release/dash_lint.py` lists every Russian player string with a dash; a hit is rewritten, never waived silently.
     `[OWNER]` 2026-11-18 00:44 · `PROJECT_HISTORY.md` entry 2026-11-18 00:44.
 
