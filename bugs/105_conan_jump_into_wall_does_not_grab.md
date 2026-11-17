@@ -1,8 +1,8 @@
 # Bug 105 — Conan: a hero in a jump who touches a wall does not grab it (hits and falls)
 
 **Status:** 🔧 the grab built and pushed (pack `4367176`, 2026-11-16 23:23 +03:00); G7 (the bow drawn — decided by the owner 23:24) r10 `68c8d11`, r11 `a3a6111`,
-**r15 pushed 2026-11-17 05:1x (pack `9a33796`) — G7 and G7e pass by real input read while RMB is held** (report `testcases/reports/2026-11-17_conan-wall-grab-bow-cancel-r14.md`); OPEN: the top
-of the wall with RMB held — the owner's choice (interview #037 Q1, asked 2026-11-17 04:29); then his final check · **Severity:** S2 (the owner's play, a movement feature of KrinikConanLocomotion — the wall jump family) · **Version/build:** the Conan build on 3.1.0,
+**r15 pushed 2026-11-17 05:1x (pack `9a33796`) — G7 and G7e pass by real input read while RMB is held** (report `testcases/reports/2026-11-17_conan-wall-grab-bow-cancel-r14.md`); the top
+of the wall with RMB held — DECIDED B `[OWNER]` 2026-11-17 09:18 (interview #037 Q1: «Зажатая ПКМ натягивает» — the build's behaviour, nothing to change); OPEN: his final check · **Severity:** S2 (the owner's play, a movement feature of KrinikConanLocomotion — the wall jump family) · **Version/build:** the Conan build on 3.1.0,
 pack working tree of 2026-11-16 · **When/context:** the owner's message 2026-11-16 21:38 +03:00 <!-- attribution-ok: verbatim in the «Symptom» section of this file -->, mid-session, while the agent finished bug 93 · **Fixing:** the chat of 2026-11-16 22:12 built and pushed the grab and the G7 cancel; the rest — FIRST NEXT CHAT in `STATUS.md`
 
 ## Goal vector
@@ -68,8 +68,9 @@ stamina charge's rounding (`math.floor` of a negative cost) had a twin in `krini
 ## Next (in order)
 
 1. ~~Control case~~ — done 22:22 (G3). ~~The native re-wish~~ — built (r1 → r7, pack `4367176`). ~~Cases in a TC file~~ — done.
-2. ~~G7 by the owner's rule; the rest of judge round 2 of `cancel_draw`~~ — done 2026-11-17 (r12 → r14, below). Left: his answer on the top of the wall
-   (interview #037 Q1) → build it, then G7 over the top by the same rule; his final check (G1 grab after a tap, G5b push, G10 stamina, G7 with the bow).
+2. ~~G7 by the owner's rule; the rest of judge round 2 of `cancel_draw`~~ — done 2026-11-17 (r12 → r14, below). ~~his answer on the top of the wall
+   (interview #037 Q1)~~ — B 2026-11-17 09:18, a held RMB draws over the top (seen on r11, frame `held_2.jpg`; r15 not re-checked over the top — the over-the-top
+   run needs real input, owed with his final check); left: his final check (G1 grab after a tap, G5b push, G10 stamina, G7 with the bow).
 
 ## 2026-11-17 — the rest of judge round 2 and two more judge rounds (r12 → r14, `krinik_wall_jump.lua`)
 

@@ -43,7 +43,16 @@ line now splits the full and the light path and prints the Lua heap's growth; pa
   G7 and G7e pass on r14 and r15 by real input read while RMB is held (report `testcases/reports/2026-11-17_conan-wall-grab-bow-cancel-r14.md`). Melee and other weapons are left
   alone `[AI]`. The three sections share ONE `bow_in_hand` — krinik_air_combat's, through `_G.__krinik_bow_in_hand` (read at call time). OPEN: the top of the
   wall with RMB still held — the owner's choice (interview #037 Q1).
-- Open: G6 (two walls), the top of the wall (above), the hang's stamina (`bugs/106_…` item 2 — interview #037 Q2).
+- **The top of the wall with RMB held — DECIDED B** (`[OWNER]` 2026-11-17 09:18, interview #037 Q1): a held RMB draws as soon as the hero has left the wall over its top,
+  as the build does now — nothing to change.
+- **The hang costs stamina — OUR reason flag** (`[OWNER]` 2026-11-17 09:18 «можно без таймера? … следить за событием "повис на стене" и за событием "слез со стены"» · 09:33
+  «новый флаг разрабатываем»; verbatim in interview #037, `bugs/106_…`): `hang_on` goes up at the grab and down at the climb's end (the mode-change events, also the push
+  and a respawn); while it stands, the game's own stamina tick on the wall — `BasePlayerChar_C:ReceiveClimbingStaminaCostModifier`, ≈ 10 calls a second while climbing,
+  none off a wall — takes `HANG_PER_S` 2.0 `[AI]` × the real time since its previous tick (≤ 0.25 s per tick), never below 0; an empty bar → the game drops the hero
+  itself. No timer of ours. The game's own reason bits cannot carry it: their rates are native (game map «How the game spends stamina over time»). One log line per
+  hang: «вис кончился (режим …): N с на стене, расход виса M …». TC `testcases/TC_conan_wall_hang_stamina_2026-11-17.md` H1–H5 pass (report
+  `testcases/reports/2026-11-17_conan-wall-hang-stamina.md`); two judge rounds.
+- Open: G6 (two walls); the hang's cost with the game in front; real keys (the owner's play).
 - The player guide of the next release carries: the jump off a wall (since 2026-11-14) and the grab in the air; the shipped 0.9.0 guide (`docs/guide/guide-3.0.1.html`) is
   left as released `[AI]`.
 

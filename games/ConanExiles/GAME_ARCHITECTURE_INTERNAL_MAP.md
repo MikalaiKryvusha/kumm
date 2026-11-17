@@ -158,6 +158,15 @@ Climbing (remote recon 2026-11-02 14:1x, for the owner's 09:07 request «кно�
   (isRegenPositive)` never reached a hook. Our wall push pays `GetStaminaJumpCost` (−20) itself; the stand's god mode (`stand-keeper.sh`) leaves the bar honest. An
   exhausted hero does not stay on a wall: `AdjustStaminaCurrent(−200)` while climbing (the bar went to −50 — below zero is allowed — substate 14) → the game dropped the
   hero at once (mode 1 within ≈ 1 s, 2026-11-16 23:20).
+  **How the game spends stamina over time — the DEGENERATION BITMASK (2026-11-17 09:32 +03:00, the remote, background game, bug 106; probes
+  `KUMM/.work/hangstamina/stamina-calls-probe.lua`, `degen-bits-probe.lua`):** a cost over time is NOT a timer: a blueprint sets a reason bit ONCE at the event —
+  `ConanCharacter:StaminaDegenerationBitmaskSet(BitMask: int)` (sprint start → `Set(2)` ×1; entering water → `Set(4)`), clears it at the end
+  (`StaminaDegenerationBitmaskClear(6)` when the sprint / swim ends; `Toggle` exists) — and the game's own stamina tick (≈ 10 Hz, bar steps of 1) applies
+  `GetStaminaDegen() → float`, the sum of the set reasons' rates: **bit 2 = −8.0 / s (= the hero's field `SprintStaminacost` 8.0), bit 4 = −2.5 / s (= `SwimStaminacost`
+  2.5), bit 32 = −6.7 / s (reason not named yet); bits 1, 8, 16, 64 … 1024 = 0** (bit 1 is cleared ≈ every frame by NPCs). Sprint on the ground: 108 → 92 in 1.95 s. **The tick
+  runs on the wall:** a hero hanging still with `Set(4)` by the remote lost 1 per 0.4 s (27 → 0 in 10.4 s), and at 0 the game dropped the hero itself (mode 7 → 3 → 1);
+  with `Set(2)` −8 / s. **A set bit outlives the climb** — the drain went on after the drop (−14 on the ground) until `Clear(4)`. On the wall, still, the game also calls
+  `ReceiveClimbingStaminaCostModifier` ≈ 10 / s and `ShouldUseHealthForClimbingStaminaConsumption` ≈ every frame (the climb's own cost path, 0 while still); `ShouldUseStamina` → true.
   **The bow's draw on a wall (2026-11-16 23:2x–23:52, real input + the remote, bug 105 G7):** a hero who climbed with no draw had the bow on `sheath_bow` (23:37,
   as in the 2026-11-14 line above) and a real «3» on the wall did not draw it; a new RMB press on the wall draws nothing (23:29); a draw begun before the grab goes on
   on the wall (substates 11 / 15 / 16, the aim view 1 / 75, the bow in `Socket_Bow`) until RMB goes up. On the GROUND during a held draw `BaseBPCombat_C:StopSpecialAttack()`

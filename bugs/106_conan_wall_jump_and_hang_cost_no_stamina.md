@@ -1,6 +1,6 @@
 # Bug 106 — Conan: the jump off a wall and the hang on a wall cost no stamina
 
-**Status:** 🔴 OPEN · **Severity:** S2 (the owner's play rules for the climb, KrinikConanLocomotion — the wall family) · **Version/build:** the Conan build on 3.1.0,
+**Status:** 🔧 both items built (item 2 — our reason flag, 2026-11-17 09:50, TC H1–H5 pass by the remote); the owner's play is the check · **Severity:** S2 (the owner's play rules for the climb, KrinikConanLocomotion — the wall family) · **Version/build:** the Conan build on 3.1.0,
 pack working tree of 2026-11-16 · **When/context:** the owner's two messages mid-turn, 2026-11-16 22:31 +03:00, while the agent built bug 105 · **Fixing:** item 1 pushed
 (pack `4367176`, TC G10 79 → 59); item 2 — the fork asked of the owner in chat 2026-11-16 23:09 (a timer of ours, rule 7, and the rate −1 / −2 / −3 per second), no answer yet
 
@@ -51,6 +51,23 @@ Acceptance: (1) a push with honest stamina takes the jump cost off the bar (the 
   `AdjustStaminaCurrent`. Cost: one call a second while hanging, nothing otherwise. The rate «медленно» is the owner's number: e.g. −1 / s (a full bar of 108 holds
   ≈ 1 min 48 s), −2 / s (≈ 54 s), −3 / s (≈ 36 s); the climbing cost for comparison ≈ 18 / s.
 
+## Recon 2 (2026-11-17 09:33 +03:00) — the owner's counter-question: «можно без таймера? … следить за событием "повис на стене" и за событием "слез со стены", а в промежутке - снимать выносливость с определённой скоростью» (interview #037 Q2, verbatim there) and «в спринте как сейчас игра тратит выносливость? вря ди таймерами»
+
+- **YES, without a timer of ours.** The game's own cost-over-time mechanism is the stamina DEGENERATION BITMASK (game map «Climbing», the paragraph «How the game
+  spends stamina over time»): the sprint sets bit 2 ONCE at its start and the game's own ≈ 10 Hz stamina tick applies `GetStaminaDegen` (−8 / s); the swim — bit 4 (−2.5 / s).
+- **The tick runs on the wall:** bit 4 set by the remote on a hero hanging still drained 27 → 0 in 10.4 s, and at 0 the game dropped the hero itself. The bit outlives the
+  climb — the mod must clear it when the hero leaves the wall.
+- So the build would be: the mode-change hook already in `krinik_wall_jump` — entering mode 7 → `StaminaDegenerationBitmaskSet(<bit>)`, leaving 7 → `Clear(<bit>)`
+  (not when the new mode is swimming, 4, whose own bit the game set); no per-tick Lua at all. The rate is a bit's: 4 → −2.5 / s (a full bar 108 ≈ 43 s), 32 → −6.7,
+  2 → −8. Climbing in motion would pay the game's ≈ 18 / s plus the bit's rate. Asked in chat 2026-11-17 09:33 +03:00 which bit; the owner's answer the same minute:
+  `[OWNER]` «новый флаг разрабатываем.» · «"собирать ли так" - нет такого понятия. Есть моя идея-требование на фичу. Ты делаешь эту фичу корректно без багов.»
+- **A new bit cannot carry a rate:** the rates are native — bits 1, 8, 16, 64 … 1024 give `GetStaminaDegen` 0 (`StaminaData` holds `ClimbingStaminaCost` 5.0,
+  `ChargeHoldStaminaCost` 10.0, `StaminaAccumulation`, `StaminaDegenerationSourceBitmask`; the hero — `SprintStaminacost` 8.0, `SwimStaminacost` 2.5).
+- **BUILT 2026-11-17 09:53 +03:00 — our reason flag** in `krinik_wall_jump.lua` (pack, r1 → r3, two judge rounds): `hang_on` up at the grab, down at the climb's end (the mode-change
+  events, the push, a respawn); the drain in the game's own wall tick `BasePlayerChar_C:ReceiveClimbingStaminaCostModifier` (≈ 10 / s while climbing, none off a wall):
+  2.0 / s `[AI]` × the real time since the previous tick, never below 0. TC `testcases/TC_conan_wall_hang_stamina_2026-11-17.md` H1–H5 + K1 pass, H6 partial (report
+  `testcases/reports/2026-11-17_conan-wall-hang-stamina.md`). Open: the cost in front, real keys (the owner's play).
+
 ## Plan
 
 1. Item 1 — built 2026-11-16 22:32 in `krinik_wall_jump.lua` (the push: the game's jump blockers 13 / 14 / 18, then the jump cost) — TC row G10 of
@@ -64,6 +81,9 @@ Acceptance: (1) a push with honest stamina takes the jump cost off the bar (the 
 
 - `[AI]` The push is refused while the hero is exhausted (the game's own jump blockers, the same set as the mid-draw jump) — the owner asked for the cost; the refusal is
   the game's rule for any jump.
+- `[AI]` The hang's rate 2.0 / s (a full bar 108 ≈ 54 s) — the recommendation of interview #037 Q2; the owner named no number. One constant `HANG_PER_S`.
+- `[AI]` The whole time on the wall pays, still or crawling («в промежутке» between the two events), on top of the game's own crawl cost.
+- `[AI]` One tick takes at most 0.25 s (a hitch or a pause never lands as a lump).
 
 ## Links
 
