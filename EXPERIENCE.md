@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0555 · 2026-11-17 · ❌→✅ · #stand #background #process-tree #owner-screen
+class: a-stopped-background-batch-keeps-running
+**Lesson:** stopping a background stand batch by the harness's task stop ended only its wrapper: `bash batch57.sh` (another PID) went on with the next
+cases, and its PowerShell calls, left without a console, opened windows on the owner's screen after the chat was closed (`[OWNER]` 22:15 «какого хуя окна
+повершелл в системе запускаются какие-то?»). Fixed: the tree killed by PID (`taskkill /PID <bash> /T /F`), checked empty by command line.
+**Trigger:** stopping any background run of ours — find its processes by command line (`Get-CimInstance Win32_Process` | CommandLine match the batch / tool
+path), kill the tree by the top PID, re-list until empty; then `close_leftovers.ps1`.
+mechanized: none yet — `.work/launcher54/close_leftovers.ps1` should also kill `bash`/`node` whose command line names the batch (owed)
+
 ### EXP-0554 · 2026-11-17 · ❌→✅ · #launcher #winforms #snapshot #live-window #stand #owner-eye
 class: the-self-snapshot-hides-what-the-live-window-shows
 **Lesson:** the launcher's own snapshot (`KRINIK_LAUNCHER_SNAPSHOT` → `DrawToBitmap` of each control over the already drawn picture) showed the metal buttons'
