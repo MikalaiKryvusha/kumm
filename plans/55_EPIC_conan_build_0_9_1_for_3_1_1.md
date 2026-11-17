@@ -126,9 +126,10 @@ Phase B and phase A run in parallel (B needs no game: the fixture stand). D need
       start waits for the offer's own decision line; C8 the batch's `tail -16` → `tail -40` + an EMPTY flag; R2 the self-update is refused in the keepOld
       state (compiled, no stand case); R7 L8 waits past the settle (8 / 0; control on the B7 exe fails the 2 new checks; pack `28a2bc9`). Stand batch58_r3 on
       the round-3 source: 173 / 0. Pack commits `8ec5b4a`, `28a2bc9` — LOCAL, the push waits for a judge round on these last fixes. **OWED:** R5 the space
-      need after a stopped unpack is now too strict (subtract what is on disk); C1 the crash box has no owner window; C2 RestoreSlot's text names `.bad` even when only `.old`
-      is left; C3 the old-bundle box and the crash box can stack at one start; C5 the marker write throws raw for an archive without `pack\`; C6 the plaque
-      hard-codes the mail (BuildInfo.AuthorLinks carries it); C7 the no-marker-invented check cannot fail.
+      need after a stopped unpack is now too strict (subtract what is on disk); (C2 the rename hint names the file that exists, C5 the marker folder is created,
+      C1 the crash box has an owner, C3 the two start offers run one after the other — done 01:33–01:35, compiled, uncommitted; regression batch58_r4 started
+      before C1 / C3); C6 the plaque takes the mail from BuildInfo.AuthorLinks (01:37, compiled); still owed: R5 and C7 the no-marker-invented check
+      cannot fail.
 - [x] D-fb (done with plan 56, 2026-11-18 01:0x): the second feedback path, GitHub Issues, in the report tool's console and box, `feedback_howto.txt`, the guide's
       «Отзывы и обратная связь», the README template (both languages) and the launcher's «Отзыв» plaque; the author-links section untouched (rule 22).
 

@@ -7693,3 +7693,78 @@ Seen by the owner in the launcher window during the stand run of epic 55: the li
 > ЭТО НЕ КОРПУС ГОЛОСА НИКОЛАЯ, И НЕ АКАДЕМИЧЕСКАЯ БЛЯТЬ РУССКАЯ РЕЧЬ!
 
 The rule taken from it — `HOUSE_RULES.md` rule 33; the method — `researches/russian-writing/RUSSIAN_RULES.md` §11; the sweep of every Russian string of the build — `plans/56_conan_build_texts_without_telegraph_dashes.md`.
+
+## 2026-11-18 01:37 +03:00 — STATUS bonsai trim (chat of 2026-11-18 00:40, dayloop): three blocks moved verbatim
+
+The blocks CHAT CLOSED 2026-11-17 22:1x (+ its FIRST NEXT CHAT), NOW 2026-11-17 19:43 (+ its FIRST NEXT CHAT) and NOW 2026-11-17 14:40 (+ FIRST NEXT CHAT
+items 2…). Their open items are carried in STATUS: the launcher list → the NOW block of 2026-11-18 00:40; the game items (the walking bow draw, bug 104;
+the owner's real-key checks; bug 93) → the pointer line left in STATUS.
+
+> **CHAT CLOSED 2026-11-17 22:1x (opened 21:50 with the previous farewell pasted; closed by the owner's word 22:04–22:12, the judge recalled — `[OWNER]`
+> «отзывай судью, закрывай чат» · «нет времени на судейство» · «это будет наш долг»).** Done: **plan 55 B7 — the launcher judge's 4 defects fixed in the pack**
+> (`_config/launcher/KrinikConanUpdates.cs`, `KrinikConanLauncher.cs`): a closed window counts as «alive» (`SelfUpdate.Closed`, every CloseReason but
+> ApplicationExitCall); parts deleted only after the last refusals, a whole unpack (manifest written last) is reused by the retry; the half revert puts the new exe
+> back, `.old` never deleted with the exe missing; the old-bundle delete — `^Krinik_…$`, no Saved/Content/Binaries, default «Нет»; smaller items (cache lock,
+> the new bundle's uninstaller name, «после распаковки», the tail log line, `alive |= WaitOne(0)`). **Also fixed, the owner's eye 22:06: black triangles under the
+> buttons' cut corners on the LIVE window** (`MetalButton` — `SetStyle(Opaque, false)`; the self-snapshot hid it — EXP-0554). Stand (`.work/launcher54/batch57.sh`,
+> new cases L11–L14, B8′ second half, B14′ in the TC file, `test/make_stub.py`): run 1 on the pre-final exe **131 PASS / 7 FAIL — all L12 quick close** (the stand's
+> WM_CLOSE is TaskManagerClosing; filter widened, the stand now sends SC_CLOSE); run 2 on the FINAL exe `d6e507c2…` stopped at the owner's word after
+> **87 PASS / 0 FAIL** — S1–S3, L4, L5, L11 hang, **L12 quick close (passes now)**, L13, L14, B1, B4 + B14′ retry; **B8′ cut mid-run; B5′, B2, B5 not reached**
+> (`.work/launcher54/batch57_final.txt`; run 1 — `batch57_main.txt`).
+> **FIRST NEXT CHAT:** (a) **re-run `bash .work/launcher54/batch57.sh` on the final exe to the end** (B8′, B5′, B2, B5 are UNVERIFIED on it) and
+> **`CONTROL=1 bash .work/launcher54/batch57.sh`** (the new cases must FAIL on the 2f62b52 launcher — never run); (b) **capture the live window and look at the
+> button corners** (`ConanExiles/_config/capture-window.ps1 -Out <jpg> -Width 3840 -Process KrinikConanLauncher`, crop ×4) — the Opaque fix is NOT yet seen;
+> (c) **the judge round on the B7 diff — OWED by the owner's word** (stopped mid-read 22:10); (d) plan 55 **B8 — the crash report offers itself** at the next
+> launcher start (the owner 21:58 «было бы хорошо»; design in the plan); (e) the KUMM force-push — still the owner's call (KUMM not pushed since `82260a4`);
+> then the older list below (engine judge round 2, phase D). Bonsai trim NOT done at this closing (the owner's urgency) — owed.
+>
+> **NOW (chat of 2026-11-17 19:43, `resume` + the owner's D: order + «работай автономно» 20:00 → /dayloop).** (1) **D: put in order by the owner's four concepts**
+> (`HOUSE_RULES.md` rule 25 — clean version · shipment · source · build; chronicle entry 2026-11-17 19:43): the 3.1.1 download in `D:\Instals\` checked against its
+> download hash list — 597 files, 3 775 / 3 775 pieces, exe CL-383549; our 525 files (30.5 GB) removed from it; deleted the junction `D:\Games\Conan Exiles 3.1.0`, the 3.0.1
+> game, the three `_paksview-*`, the 0.9.0 bundles (texts → pack `_config/release/published_0_9_0/`), `_text-extract-3.0.1`, old workshop copies, library `OLD`,
+> reviewed review folders (85–90 kept). D: free 96 → 258 GB. **There is NO game build on disk now** — the 3.1.0 world save is stashed in `KUMM/.work/disk_d/save_3_1_0/`;
+> **20:1x–20:5x: the build on 3.1.1 made and checked** (`D:\Games\Conan Exiles 3.1.1`, targets.json → it; TC_conan_move_3.1.1 6 pass, P6 blocked — the 3.1.0 pak list
+> lost, EXP-0552; report `testcases/reports/2026-11-17_conan-move-3-1-1.md`). **Epic 55 written** (`plans/55_EPIC_…`, research `researches/conan-launcher-modern-practice/`,
+> cases `testcases/TC_conan_launcher_release_0_9_1_2026-11-17.md`). **21:1x — phase B engine DONE and committed locally (`d1aac90`):** `-Upgrade` etc. after judge
+> round 1 (13 findings, 10 fixed + TC table + stand; deferred: 13b display-key merge on a FIRST install, the 0.9.0 hash table, the restore-side never list;
+> **judge round 2 owed**); stand 69 / 69. **Launcher — pack `2f62b52` PUSHED (21:15; final stand batch 88 / 0; the real 3.1.1 build upgraded by `-Upgrade` — world and markers byte-identical, report `testcases/reports/2026-11-17_conan-launcher-release-0-9-1-phase-b.md`; judge round on the launcher diff running at 21:16):** handshake / start counter / bundle values / interlocks / parts
+> deleted after unpack / missing-last-part check / previous-bundle offer / window icon (the owner confirmed the gold «K» on his taskbar 21:05) — launcher
+> stand batch 3: everything passed except B2 (stop + resume — the install.ps1 never reported); **B2 alone 21:11: 16 / 16 pass** (the cause of the batch
+> miss not found — one re-run, not «not reproduced»); progress lines made nouns by the owner's word 21:11 («скачивание»); batch 4 on the final build running; P6 of the move partly done by `stale-copy-check.py` (2 of 11 assets equal 3.1.1). Release numbers for phase D: 0.9.1, game 3.1.1, Steam
+> post `…/view/1849458702686207`; 0.9.1 must be an ORDINARY GitHub release (the feed skips pre-releases — epic 55 «Phase E»). **Before that — under test:** KUMM `Deploy-ModPack.ps1` `-Upgrade` (player settings kept across an
+> update, dpkg rule; `configPolicy` managed / strip / never; deploy and restore refuse a running game; export strips display keys) — fixture stand 67 / 67, 9 new checks
+> red on the old engine, judge round 1 running; pack: `configPolicy` in modpack.json, launcher — self-update handshake + start counter, values from the bundle's
+> manifest, consoles / mutex interlocks, the build update runs install.ps1 `-Upgrade` — batch `KUMM/.work/launcher54/batch55.sh` running. **KUMM is NOT pushed
+> since `82260a4`**: the harness refused the force-push that replaces the pushed commit whose MESSAGE held a forbidden word (amended locally) — the owner's call
+> (`git push --force-with-lease origin main`); new KUMM commits wait for it. Older history `5c300f3` holds the same word in plan 53 (history rewrite — the owner's call).
+> **FIRST NEXT CHAT:** (a) the owner's word on the KUMM force-push (local `d1aac90`, `9970a5d` … wait on it); (b) **the launcher judge's 4 confirmed defects — plan 55 B7 (quick close = crash; parts deleted before the last refusal; a half revert; the old-bundle
+> delete guard) — fix FIRST, rebuild, `KUMM/.work/launcher54/batch55.sh`**, then engine judge round 2;
+> (c) the deferred engine items (display keys merged on a first install, the restore-side never list); (d) phase D: numbers 0.9.1 / 3.1.1 / launcher 1.1.0, the
+> feedback section in README + guide (the owner 21:11, plan 55 «D-fb»), release notes by the owner's portrait, `make_volumes.sh`; (e) phase E by his word.
+> (2) **Next — the epic «0.9.1 for 3.1.1»** (the owner 20:00: «в ближайшие дни … выпустить предварительную
+> сборку 0.9.1 для версии 3.1.1 на ГитХаб и нексус»; the launcher «качественный и рабочий, без багов … не портил настройки и сейвы игроков»): the build copy
+> `D:\Games\Conan Exiles 3.1.1` + install, mods on 3.1.1, plan 54's four release blockers, release tooling, test plan and cases. Voice: plays (exit 0, `soft voice:`
+> printed) yet the owner did not hear it 19:52 — the default output is the TV (HDMI) / Realtek; Parsec and Sunshine are connected.
+>
+> **NOW (chat of 2026-11-17 14:40, `resume` + the owner's launcher task + «работай автономно» → /dayloop).** (1) **Plan 54 — the Conan launcher's «Что нового»
+> under both versions, the new-version plate, «Обновить сборку» and «Обновить лаунчер» — BUILT (phases 1–3)** in the pack (`_config/launcher/KrinikConanUpdates.cs`
+> new, `KrinikConanLauncher.cs`, `build-docs.py`, manifest key `launcher`): stand cases 19 of 20 pass (W1 partial — the Steam page's post not rendered headless),
+> after judge round 1's fixes the whole set re-run: 74 checks, 0 fail (report `testcases/reports/2026-11-17_conan-launcher-updates.md`). Show page for the owner —
+> review folder `90_launcher_chto_novogo` (opened at the end of this chat). **Pack `950b9e5` pushed after 2 judge rounds** (round 2 re-run 15:55: 74 / 0);
+> **4 RELEASE BLOCKERS in plan 54** (the update resets the player's settings via «Game config»; a new launcher that starts then dies is not rolled back; BuildInfo
+> values from the bundle; no update while an install console runs) — fix them before ANY real release. Left: the blockers; the first REAL launcher release
+> (`gh release create launcher-vX.Y.Z --latest=false`) and a real build release wait for the owner's word; phase 4 (release tooling, the old-bundle cleanup offer).
+> (2) **Auto-relay: the cause of «the deep link opens no tab» FOUND 15:21** — `ELECTRON_RUN_AS_NODE=1` inherited from the extension host made the link's handler run
+> as Node (EXP-0550); fixed in `open-chat.ps1` + the link now carries `windowId` of the project's window from `code --status` (VS Code routes by it). The link reached
+> KUMM and VS Code asked «Allow 'Claude Code for VS Code' extension to open this URI?» — **the owner's tick «Do not ask me again» is owed** (a security consent;
+> called by voice 15:23); until then `relay.mjs` keeps `-NoEnter`. After the tick: L1″ (windowId isolated), L2 (with Enter), L3 (a real chain). KAIF #198 comment 15:22.
+> Also: the game has hotfix 3.1.1 (2026-11-14/15) — `researches/conan_patch_3_1_0/README.md` §6.
+>
+> **FIRST NEXT CHAT — items 2…:** (2) **The walking bow draw (#038 A — bug 104):** the cause is read (the walking chain of `AB_human_male` takes the shoulders back from the
+> locomotion), a parent-graph override is OUT (EXP-0511 — other mods ship its children); recon the post-process route (plan 52, `ABP_KrinikFirstPersonLook` in
+> KrinikConanArchery) or another lever, then build; cases `testcases/TC_conan_bow_draw_walking_pose_2026-11-17.md` (real RMB held, the side camera). (3) **The owner's
+> real-key checks** (he plays): the hang drains 2/s and an empty bar drops the hero (TC_conan_wall_hang_stamina); RMB held through a wall push draws in the flight
+> (TC_conan_bow_any_flight B7); bug 105 G1 / G5b / G10 / G7 and G6. (4) Bug 93 — the held draw ends ≈ 1 s after the full hold in a sprint (the game's reason by
+> `DebugActionTryFailure` / `EndPowerCharge`; the degeneration bits now known: sprint 2 −8/s, charge hold 32 −6.7/s). Tools of this chat: `.work/hangstamina/*.lua`,
+> `.work/bowflight/*.lua` (arrow-birth, refuse, window, equip probes), `ConanExiles/_config/devkit/kit-probe-ab-torso-*.py`.
+>
