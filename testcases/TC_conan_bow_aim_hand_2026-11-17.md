@@ -15,8 +15,8 @@ Left out: first person (the owner named the hero's model, third person), gamepad
 
 | Case | Steps | Expected | Status |
 |---|---|---|---|
-| H1 standing aim | RMB held 2.5 s, frames at 1.5 s and 2.2 s | the right hand at the bow, the nock on the string — the reference | **done** 2026-11-17 06:11 (side camera, frame at 2.4 s): the right hand at the chin, the nock at the hand (`KUMM/.work/bowhand/s1_stand.webp`) |
-| H2 walking forward in the aim | RMB held, after 1.5 s W held 1.5 s, frames 0.5 s and 1.2 s into W | the hand where H1 has it (the owner: it moves right) | **differs** 06:11: the right hand forward in front of the face, the draw shorter (`s2_walk.webp`) — the owner's symptom in this view |
+| H1 standing aim | RMB held 2.5 s, frames at 1.5 s and 2.2 s | the right hand at the bow, the nock on the string — the reference | **done** 2026-11-17 06:11 (side camera, frame at 2.4 s): the right hand at the chin, the nock at the hand (`НА ОТСМОТР НИКОЛАЕМ/89_ruka_na_tetive_na_hodu/s1_stand.webp`) |
+| H2 walking forward in the aim | RMB held, after 1.5 s W held 1.5 s, frames 0.5 s and 1.2 s into W | the hand where H1 has it (the owner: it moves right) | **differs** 06:11: the right hand forward in front of the face, the draw shorter (`s2_walk.webp`) — most likely the owner's symptom — his answer settles it (interview #038) |
 | H3 strafing left | as H2 with A | as H1 | [NOT-TESTED] |
 | H4 strafing right | as H2 with D | as H1 | [NOT-TESTED] |
 | H5 backwards | as H2 with S | as H1 | [NOT-TESTED] |

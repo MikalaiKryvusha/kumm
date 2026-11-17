@@ -24,13 +24,13 @@ RMB is a tap (bug 93, `sprint-bow-sample.lua` header); a FREE PC and the game in
 ## First frames 2026-11-17 05:48 (inconclusive)
 
 Cases written — `testcases/TC_conan_bow_aim_hand_2026-11-17.md` (H1 standing, H2–H5 moving W / A / D / S, H6 sprinting, H7 / H8 controls with Archery / Locomotion out).
-A first try (third person, the default camera behind the hero, `KUMM/.work/bowhand/h1_stand.jpg`, `h2_walk.jpg`, 1920 wide): the bow and the right hand are seen
+A first try (third person, the default camera behind the hero, two frames 1920 wide, deleted after the side frames replaced them): the bow and the right hand are seen
 from behind at ≈ 1/6 of the frame height — too small to tell the hand on the string from off it, and the «standing» frame fell inside the draw (taken 1.4 s
 after RMB, the full hold comes ≈ 0.55 s + the draw). NEXT: a close side camera on the hero's right shoulder (the camera remote / `fixed-cam.lua` at ≈ 1.2 m, the
 bow arm in frame), frames only in the FULL hold (substates 11,15,16 read by the 15 ms recorder at the frame's moment), standing vs walking in one sequence.
 
 **Side frames 2026-11-17 06:11** (a fixed camera 2.3 m to the hero's right and 1.7 m ahead, chest height, `fixed-cam.lua`; RMB held 3.2 s then W 2.4 s; frames
-`KUMM/.work/bowhand/s1_stand.webp` — 2.4 s, the full hold standing; `s2_walk.webp` — ≈ 1 s into W): standing, the right hand pulls the string to the chin, the
+`НА ОТСМОТР НИКОЛАЕМ/89_ruka_na_tetive_na_hodu/s1_stand.webp` — 2.4 s, the full hold standing; `s2_walk.webp` — ≈ 1 s into W): standing, the right hand pulls the string to the chin, the
 nock at the hand; walking, the right hand sits further FORWARD, in front of the face, the draw visibly shorter, the string still meeting the hand at the nock
 as far as the frame shows. Whether this is the owner's «уходит с тетивы и тела лука вправо» is NOT settled — the fixed camera's angle to the hero changes as she
 walks, and from the game camera (behind, zoomed in by 3 wheel notches) the hotbar covered the hand and the view turned to the rock. NEXT: (1) the H7 / H8 control
