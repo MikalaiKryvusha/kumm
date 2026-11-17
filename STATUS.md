@@ -142,7 +142,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > is refused until that pass is done. (6) **Launcher judge round 3: D1 + R1, R3, R4, R6, C4, C8 fixed** (plan 55 B8 lists them and the OWED R2, R5, R7, C1–C3,
 > C5–C7); exe `c834b0d4…`; the stand now builds the launcher under test as 1.0.0 (`batch58.sh`, the manifest says 1.1.0). **In game NOT seen yet:** the hub
 > rows' new hints. Pack LOCAL commits `8ec5b4a` (launcher: B7 judge fixes + B8 + round-3 fixes) and `28a2bc9` (L8 past the settle), `2d4b104` (texts, the dash lint, 0.9.1 numbers, the 3.1.1 guide), `926c887` (C1, C2, C3, C5, C6; stand 175 / 0) — all LOCAL.
-> The tooling judge round (dash_lint, build-docs gate, mods-table) was running at the closing — its report is owed to the next chat.
+> The tooling judge round (01:40) found coverage gaps — asset-strings, the Hosav locres, the installer's mod versions, no lint on `--no-pdf` launcher builds (plan 56 «Judge round on the tooling»): FIRST text item of the next chat.
 > **FIRST NEXT CHAT:** (a) a judge round on the launcher's last fixes (crash handler only before settle, guarded report start, seen stamp by creation time
 > in %LOCALAPPDATA%, keepOld refuses self-update), then push the pack; (b) dm-fish pass 2 — a helper started 01:28 writes `.work/dash_fix/pass2/new.tsv` +
 > `allowed.tsv`: parity by `apply_dmfish.py` (repoint it to pass2), a clean sample read, allow-list the kept dashes with their class, `make_locres_fix.py` →

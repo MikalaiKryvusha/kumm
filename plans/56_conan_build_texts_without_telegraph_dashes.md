@@ -72,6 +72,19 @@ Not covered by the lint yet: strings inside our kit paks (widget texts set by `_
 - [ ] 5. Grow the lint to the kit scripts' widget texts and to the built `Game.locres`; wire it into `build-docs.py`.
 - [ ] 6. Judge round on the whole diff; commit with `review:`.
 
+## Judge round on the tooling (2026-11-18 01:40, pack `2d4b104`) — to act on first
+
+Checked against real data by the judge; to verify and fix in the next chat:
+- D1 `_config/localization/asset-strings/*.tsv` (34 files patched into KRINIK MODIFIED assets) are not scanned (non-recursive glob) — 8 dashes ship today.
+- D2 the Hosav translation reaches `Game.locres` through `kit-saved-loc/KrinikRU/ru_table.lua` from interviews 002 / 003 — not scanned; 9 dashes ship
+  today. The robust fix: lint the shipped `Game.locres` itself.
+- D3 `Deploy-ModPack.ps1` prints each mod's `version` from `modpack.json` on the player's install — not scanned; 4 Russian versions carry a dash.
+- D4 `build-docs.py --no-pdf` (the route of every launcher build) runs no lint; D5 a full build now stops on the dm-fish lines and skips the launcher too,
+  and hits are printed cut at 220 characters, so long allow entries cannot be copied.
+- Risks R1–R11 (a literal starting with a dash read as a list marker; C# char literals `'"'` / `'('` desync the tokenizer; `@$"…"`; Lua `[==[` strings;
+  dash forms U+2212 / U+2015 / narrow space; the allow list is global and tab-blind; mods-table pairs GAME_VERSION with the first CL of builtFor unchecked).
+  The full report is this chat's judge hand-back (summarised here).
+
 ## Decisions made without the owner
 
 `[AI]` (revisable): the camera mod's developer README leaves the shipment instead of being rewritten (the guide is the player's document); the lint treats a hyphen
