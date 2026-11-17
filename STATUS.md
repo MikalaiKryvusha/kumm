@@ -142,7 +142,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > lost, EXP-0552; report `testcases/reports/2026-11-17_conan-move-3-1-1.md`). **Epic 55 written** (`plans/55_EPIC_…`, research `researches/conan-launcher-modern-practice/`,
 > cases `testcases/TC_conan_launcher_release_0_9_1_2026-11-17.md`). **21:1x — phase B engine DONE and committed locally (`d1aac90`):** `-Upgrade` etc. after judge
 > round 1 (13 findings, 10 fixed + TC table + stand; deferred: 13b display-key merge on a FIRST install, the 0.9.0 hash table, the restore-side never list;
-> **judge round 2 owed**); stand 69 / 69. **Launcher (pack, NOT yet committed at this line):** handshake / start counter / bundle values / interlocks / parts
+> **judge round 2 owed**); stand 69 / 69. **Launcher — pack `2f62b52` PUSHED (21:15; final stand batch 88 / 0; the real 3.1.1 build upgraded by `-Upgrade` — world and markers byte-identical, report `testcases/reports/2026-11-17_conan-launcher-release-0-9-1-phase-b.md`; judge round on the launcher diff running at 21:16):** handshake / start counter / bundle values / interlocks / parts
 > deleted after unpack / missing-last-part check / previous-bundle offer / window icon (the owner confirmed the gold «K» on his taskbar 21:05) — launcher
 > stand batch 3: everything passed except B2 (stop + resume — the install.ps1 never reported); **B2 alone 21:11: 16 / 16 pass** (the cause of the batch
 > miss not found — one re-run, not «not reproduced»); progress lines made nouns by the owner's word 21:11 («скачивание»); batch 4 on the final build running; P6 of the move partly done by `stale-copy-check.py` (2 of 11 assets equal 3.1.1). Release numbers for phase D: 0.9.1, game 3.1.1, Steam
@@ -152,6 +152,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > manifest, consoles / mutex interlocks, the build update runs install.ps1 `-Upgrade` — batch `KUMM/.work/launcher54/batch55.sh` running. **KUMM is NOT pushed
 > since `82260a4`**: the harness refused the force-push that replaces the pushed commit whose MESSAGE held a forbidden word (amended locally) — the owner's call
 > (`git push --force-with-lease origin main`); new KUMM commits wait for it. Older history `5c300f3` holds the same word in plan 53 (history rewrite — the owner's call).
+> **FIRST NEXT CHAT:** (a) the owner's word on the KUMM force-push (local `d1aac90`, `9970a5d` … wait on it); (b) the launcher judge's findings and engine judge round 2;
+> (c) the deferred engine items (display keys merged on a first install, the restore-side never list); (d) phase D: numbers 0.9.1 / 3.1.1 / launcher 1.1.0, the
+> feedback section in README + guide (the owner 21:11, plan 55 «D-fb»), release notes by the owner's portrait, `make_volumes.sh`; (e) phase E by his word.
 > (2) **Next — the epic «0.9.1 for 3.1.1»** (the owner 20:00: «в ближайшие дни … выпустить предварительную
 > сборку 0.9.1 для версии 3.1.1 на ГитХаб и нексус»; the launcher «качественный и рабочий, без багов … не портил настройки и сейвы игроков»): the build copy
 > `D:\Games\Conan Exiles 3.1.1` + install, mods on 3.1.1, plan 54's four release blockers, release tooling, test plan and cases. Voice: plays (exit 0, `soft voice:`
