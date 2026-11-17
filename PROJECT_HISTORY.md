@@ -7580,3 +7580,28 @@ Their open items stay in STATUS as one pointer line. Verbatim:
 > Waiting for the owner: interview #037 (Q1 the top of the wall, Q2 the hang's stamina) and #038. (6) Bug 93, two unexplained observations (06:2x, written
 > in the bug): a held draw in a sprint ends by itself ≈ 0.8–1.6 s after the full hold (the old gate too; with KrinikConanArchery out too — not Archery; the stamina
 > falls ≈ 32/s while drawn in the sprint), and once RMB in a sprint did not start a draw — next: the game's reason (`DebugActionTryFailure`, `EndPowerCharge`). No game of ours runs, the machine lock released.
+
+## 2026-11-17 19:43 +03:00 — the owner's four concepts of a build on disk D (decided 19:43–19:44, recorded 20:03)
+
+The owner's words verbatim (chat 2026-11-17 19:43–19:52; the clean folder's own name is replaced by `<clean>` — a download name never enters this public repo, EXP-0440):
+
+> `[OWNER]` «И у меня к тебе просьба: НАМЕДИ ПОРЯДОК СО СБОРКАМИ НА ДИСКЕ D, у тебя зачем-то и в D:\Games\ много папок по игре лежит
+> и зачем-то в D:\Instals\<clean>\ тыв что-то положил, хотя я не просил и не разрешал!!!
+> в D:\Instals\<clean>\ я тебе качаю ЧИСТУЮ версию, чтобы ты на неё мог тестировать установку сборки.
+> есть четыре понятия:
+> - чистая версия - в неё ничего не нужно ставить, её только копировать для твоих тестов
+> - поставка - это наши моды упакованные в архивы для поставки игрокам - после выполнения отгрузки можно удалять это
+> - исходный код сборки - сырые моды, код. ассеты и так далее - то, из чего можно собрать поставку
+> - сборка - чистая версия на которую установлена поставка сборки
+> ВСЁ, кроме этого ничего больше хранить НЕ НУЖНО
+> и я скачал в D:\Instals\<clean>\ вроде как последнюю версию 3.1.1» · «проверь, что версия скачалась корректно» · «проверяй, какие доработки по ней требуются» ·
+> «и продолжаем делать версию сборки 1.0.0 для версии игры 3.1.1» · «НАВЕДИ ПОРЯДОК НА ДИСК D!!!! ПРЕКРАТИ ПЛОДИТЬ ТЯЖЕЛЫЕ ПАПКИ С ХЕР ПОЙМИ ЧЕМ!!!» · «РАЗРЕШАЮ УДАЛИТЬ!» · 2026-11-17 19:43–19:44.
+
+What the agent had done wrong: the 3.1.0 build was installed INTO the owner's clean download (plan 53, 2026-11-13 — `D:\Games\Conan Exiles 3.1.0` was a junction onto it), and
+finished work trees were never deleted (rule 15). What was done 19:44–20:02: the download checked against the hash list it was downloaded with — 597 files, every size, 3 775 pieces of
+16 MiB SHA-1 equal, the game exe `++exiles+release-CL-383549` (3.1.0 was CL-383024) — tool `ConanExiles/_config/download-check.mjs` (`list` · `verify` · `clean`, its self-test
+corrupts one byte); the 525 files outside the download list (30.5 GB: our mods, ExtractedMods, UE4SS, saves, logs, `_kumm_backup`, the uninstaller) removed from the clean folder, the world
+save and settings stashed in `KUMM/.work/disk_d/save_3_1_0/` for the 3.1.1 build; deleted: the junction, `_paksview-2.2.3` / `-3.0.1` / `-3.1.0`, `D:\Games\Conan Exiles 3.0.1`,
+`D:\Games\Conan Exiles (2018)`, the agent's Conan save copies, the shipped 0.9.0 bundles (their publication texts and media moved first into the pack,
+`_config/release/published_0_9_0/`), `_text-extract-3.0.1`, `_bench`, the old workshop copies, the library's `OLD`, the reviewed review folders (85–90 kept — still
+waiting for the owner's eye), the pack's `_scratch`. D: free 96 → 258 GB. The rule — `HOUSE_RULES.md` rule 25.

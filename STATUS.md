@@ -133,6 +133,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW (chat of 2026-11-17 19:43, `resume` + the owner's D: order + «работай автономно» 20:00 → /dayloop).** (1) **D: put in order by the owner's four concepts**
+> (`HOUSE_RULES.md` rule 25 — clean version · shipment · source · build; chronicle entry 2026-11-17 19:43): the 3.1.1 download in `D:\Instals\` checked against its
+> download hash list — 597 files, 3 775 / 3 775 pieces, exe CL-383549; our 525 files (30.5 GB) removed from it; deleted the junction `D:\Games\Conan Exiles 3.1.0`, the 3.0.1
+> game, the three `_paksview-*`, the 0.9.0 bundles (texts → pack `_config/release/published_0_9_0/`), `_text-extract-3.0.1`, old workshop copies, library `OLD`,
+> reviewed review folders (85–90 kept). D: free 96 → 258 GB. **There is NO game build on disk now** — the 3.1.0 world save is stashed in `KUMM/.work/disk_d/save_3_1_0/`;
+> `ConanExiles/targets.json` still names the removed 3.1.0 path. (2) **Next — the epic «0.9.1 for 3.1.1»** (the owner 20:00: «в ближайшие дни … выпустить предварительную
+> сборку 0.9.1 для версии 3.1.1 на ГитХаб и нексус»; the launcher «качественный и рабочий, без багов … не портил настройки и сейвы игроков»): the build copy
+> `D:\Games\Conan Exiles 3.1.1` + install, mods on 3.1.1, plan 54's four release blockers, release tooling, test plan and cases. Voice: plays (exit 0, `soft voice:`
+> printed) yet the owner did not hear it 19:52 — the default output is the TV (HDMI) / Realtek; Parsec and Sunshine are connected.
+>
 > **NOW (chat of 2026-11-17 14:40, `resume` + the owner's launcher task + «работай автономно» → /dayloop).** (1) **Plan 54 — the Conan launcher's «Что нового»
 > under both versions, the new-version plate, «Обновить сборку» and «Обновить лаунчер» — BUILT (phases 1–3)** in the pack (`_config/launcher/KrinikConanUpdates.cs`
 > new, `KrinikConanLauncher.cs`, `build-docs.py`, manifest key `launcher`): stand cases 19 of 20 pass (W1 partial — the Steam page's post not rendered headless),

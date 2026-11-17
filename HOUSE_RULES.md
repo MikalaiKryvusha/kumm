@@ -162,10 +162,20 @@
     3. A correction applied AFTER the game did its work (move, re-set, re-colour by a timer), tuned by numbers per surface or per creature, is a crutch:
        it is not shipped; an existing one is listed and replaced by the cause fix.
     `[OWNER]` 2026-11-01 15:07–15:08.
-25. **The build's install, uninstall and the launcher's buttons are tested on a COPY of the owner's clean game** — the copy `D:\Games\Conan_Exiles_3_0_1_clean_test`
-    (robocopy); never on the working game `D:\Games\Conan Exiles 3.0.1`. Since 2026-11-07 ≈20:00 the original clean install is gone (the owner freed D:) — the copy is
-    the ONLY clean Conan: no test runs on it directly any more; a test copies it first (59 GB free needed) or waits for the owner's word. `[OWNER]` 2026-11-01 13:41 ·
-    2026-11-02 08:37 (plan 40.7).
+25. **A game build lives on disk as exactly four things; nothing else of it is kept.**
+    1. **The clean version** — the owner's download, the only Conan folder in `D:\Instals\`. Nothing is installed, written, linked or run in it; it is only COPIED for
+       a test or a build (`robocopy <clean> <target> /E`). Its integrity is checked against the hash list it was downloaded with: `node ConanExiles/_config/download-check.mjs verify <hash list> <clean>`
+       (every piece) and `list` (no file outside the download list); `clean` removes what is not the download list's. Whole folders go by `node ConanExiles/_config/rm-tree.mjs <dir>…`
+       (file by file, links unlinked, never followed; the clean version and the source refused).
+    2. **The shipment** — our mods packed into the archives players get (the export bundle, the GitHub / Nexus parts). Deleted once the release is shipped; its
+       publication texts (release notes, Nexus description, letters) go into the pack first (`_config/release/published_<version>/`).
+    3. **The build's source** — the pack repo `D:\work\ai_sandbox\ConanExiles`, the mod library `D:\Games\Conan Exiles Mods\mods` (without `OLD`) and the originals of
+       the mods we patch `D:\Games\Conan Exiles Mods\_patch-originals` — everything a shipment is built from.
+    4. **The build** — a copy of the clean version with the shipment installed: `D:\Games\Conan Exiles <game version>` (a real folder, never a junction), the one
+       game the agent runs and tests in; `ConanExiles/targets.json` names it. Install, uninstall and launcher tests run on a fresh copy of the clean version or on
+       this build, never on the clean version.
+    Everything else (old game versions, pak views of a removed game, work extracts, bench output, reviewed review folders, save copies) is deleted the moment its
+    task closes, file by file. `[OWNER]` 2026-11-17 19:43–19:44 · `PROJECT_HISTORY.md` entry 2026-11-17 19:43 (supersedes the clean-copy rule of 2026-11-01 13:41 · 2026-11-02 08:37).
 26. **The launcher: «Играть» starts the game and closes the launcher; «Удалить сборку» keeps the launcher open** (it swaps back to «Установить сборку» when <!-- verbatim-ok: the launcher's button labels -->
     the uninstaller's window closes). `[OWNER]` 2026-11-02 08:35–08:36.
 27. **The mods of a build are consistent with each other — reconciled by `researches/mod-reconciliation/GUIDE.md`.**
