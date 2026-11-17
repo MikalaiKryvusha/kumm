@@ -188,6 +188,10 @@ KrinikConanArchery's first-person section already does), out tables reused, no s
 - **Control 06:27 — KrinikConanArchery OUT** (`enabled.txt` moved away, restored after; rows `KUMM/.work/wallgrab/ctl_noarch.txt`, the recorder now reads the stamina):
   the held draw in a sprint still ends — 7,11,15,16 at 3.54 → 7 at 4.85 (1.3 s after the full hold) — so Archery is not the cause. The stamina falls ≈ 32 a second while
   the draw is held in the sprint (84 → 42) and ≈ 3 a second in the sprint alone after it (42 → 34 over 3 s); the draw ended at 42, far from empty.
+- **Probe 06:30** (`KUMM/.work/wallgrab/draw-end-probe.lua`: remote post-hooks on DebugActionTryFailure, EndPowerCharge, OnSubstateChanged_Attacking, StopSprint;
+  rows `probe_draw_end.txt`): that run had the bow on its SHEATH (read after: `sheath_bow`, HasWeaponsEquipped false) — RMB in the sprint played an unarmed attack
+  (11 alone 1.7 s, max 213) and the game called StopSprint at once; no DebugActionTryFailure fired. Not S9 and not the held-draw end — the stand must read the
+  bow's socket before every draw case (EXP-0545). The draw-end question stays open.
 NEXT for them: a control without `krinik_bow_sprint` (does vanilla end a held draw when Shift is held?), the game's own reason by `DebugActionTryFailure` (EXP-0532)
 and the attack's end by a post-hook on `EndPowerCharge` / the Archery string hook — before any change; S9 (a sheathed bow) still owed: `ToggleWieldWeapon()` did not
 sheathe within 2 s in that run.
