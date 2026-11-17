@@ -58,7 +58,8 @@ line now splits the full and the light path and prints the Lua heap's growth; pa
   and a fall needed nothing (the take-off branch). TC `testcases/TC_conan_bow_any_flight_2026-11-17.md` B1′ pass (the shot aimed away from the wall the hero pushed off —
   aimed at it, the arrow stops on it at birth). Pack `ee7e31c`, judge round 1.
 - Open: G6 (two walls); the hang's cost with the game in front; real keys (the owner's play) — the hang, and RMB held through a push.
-- The player guide of the next release carries: the jump off a wall (since 2026-11-14) and the grab in the air; the shipped 0.9.0 guide (`docs/guide/guide-3.0.1.html`) is
+- The player guide of the next release carries: the jump off a wall (since 2026-11-14) and the grab in the air; the hang on a wall spends stamina slowly and an
+  empty bar drops the hero (2026-11-17); the bow shoots in the flight after a wall push too (2026-11-17); the shipped 0.9.0 guide (`docs/guide/guide-3.0.1.html`) is
   left as released `[AI]`.
 
 ## The wall jump and air control — the owner's design of 2026-11-14 17:38–17:39 +03:00 (verbatim)
