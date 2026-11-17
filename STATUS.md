@@ -138,9 +138,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (`[OWNER]` 09:33 «новый флаг разрабатываем»; pack `e6d1d97`, TC_conan_wall_hang_stamina H1–H5 pass, 2 judge rounds; the game's stamina degeneration bitmask mapped —
 > game map «Climbing»); #037 Q1 — B, nothing to change. **Bug 107** (the bow in the flight after a wall, #035): the re-equip blocks the bow 1.35 s; the «arrow with speed 0»
 > of the first four tries was the wall in front (CORRECTED 10:3x — the view faced the wall pushed off); re-checked 10:36: **the rearm WORKS — SHIPPED, pack `ee7e31c`**
-> (TC B1′ pass, judge round 1: no defect, 5 items applied); the owner's real keys (RMB held through the push) are the final check. #038 (the standing draw kept when walking): the draw plays in the torso slot `AttackMontageTorso3rd` of
-> `AB_human_male`'s AnimGraph — the fix is its layered blend, a kit edit (road in `bugs/104_…`). Bug 103: the first live marked farewell PASSED. Still open: bug 93
-> (the held draw ends in a sprint — real input). KUMM `cdc3453`, pack `ee7e31c` pushed.
+> (TC B1′ pass, judge round 1: no defect, 5 items applied); the owner's real keys (RMB held through the push) are the final check. #038 (the standing draw kept when walking): the cause read in
+> `AB_human_male`'s AnimGraph by two kit probes — the walking chain takes the shoulders back from the locomotion; the crouch branch takes the whole upper body
+> (`bugs/104_…`). The edit script `devkit/kit-ab-bow-draw-upper.py` is written and NOT run: a parent-only override is the bug-95 T-pose — **the FORK for the next
+> chat** (parent + both children re-cooked, or another lever) is written in bug 104. Bug 103: the first live marked farewell PASSED. Still open: bug 93 (the held draw
+> ends in a sprint — real input). KUMM `bc770c3`, pack `155d79f` pushed; no game of ours runs, the machine lock released.
 >
 > **Moved verbatim to the chronicle (entry 2026-11-17 10:52 +03:00):** the block CHAT CLOSED 2026-11-17 06:33 (+ its FIRST NEXT CHAT) and the block of the chat of 2026-11-17 04:25. Their open items are carried in the NOW block above or stay here: bug 93 (the held draw ends in a sprint; S9) · bug 105 the owner's final check (G1, G5b, G10, G7 with the bow) and G6 · plan 53 step 12 (read `researches/mod-reconciliation/GUIDE.md` first) · plan 52 put-away by a real key · the GitHub release link in the Nexus call (the owner's question).
 > **Moved verbatim to the chronicle (entry 2026-11-17 06:33 +03:00):** the block CHAT CLOSED 2026-11-16 23:53 (+ its FIRST NEXT CHAT) and the block of the chat of 2026-11-16 22:12; their open items are carried in FIRST NEXT CHAT above (the bow on the wall — done; the hang's drain — interview #037 Q2; bug 105 final check; the older list).
