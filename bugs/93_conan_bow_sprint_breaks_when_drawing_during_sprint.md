@@ -151,6 +151,34 @@ first: (1) a Lua GC step landing inside a measured call (rare multi-ms spikes ov
 attached actors. Next: time the pieces separately in the minute line (gate_now, bow_in_hand, the rest) and count `collectgarbage("count")` growth per minute; then the
 native fix — «bow in hand» kept by the equip events the game map names (`BasePlayerChar_C:OnWeaponEquip(Item)` / `OnWeaponUnequip`, `GetWeaponArcheType() == 3` — the way
 KrinikConanArchery's first-person section already does), out tables reused, no strings per call. Acceptance: the worst call ≤ 1 ms over 5 minutes of the owner's sprint play.
+**Cost — measured 2026-11-17 05:1x–05:2x (the game in front, real input, the owner's world on 3.1.0):**
+- The minute line was split (pack working tree): the FULL path (the call computed the gate) vs the LIGHT one, each with its worst and its count over the 1 ms clock
+  step, plus the Lua heap's growth. `os.clock` here steps by 1 ms (every reading is a whole ms) — a call of 0.3 ms reads «1 ms» three times in ten.
+- Six 25 s chunks of a sprint with the bow drawn (`KUMM/.work/sprintcost/run.sh 6 25000 draw`, the hero turned around between chunks, the stand keeper's kill timer off):
+  05:19 — 1854 calls, 206 ms, full path 299 calls, 136 over the step (45 %), light 12 of 1555 (0.8 %); 05:20 — full 67 of 107 (63 %); 05:21 — full 70 of 110 (64 %);
+  worst 2–3 ms (the 1 ms step). So the spikes are OUR work — the light path, timed by the same clock in the same frames, almost never crosses the step.
+- Microbench of the gate's calls (N = 500 repeats on the game thread, `KUMM/.work/sprintcost/microbench.lua`, `microbench2.lua`): InSubstate 30–38 µs, IsPlayerControlled
+  36, GetVelocity 42, GetAngleOfMovement 24, IsMovingOnGround 6, the attached-actor bow walk 54, GetSubstateList 36 (returns a table of wrappers: [11, 15, 16] in a full
+  draw), property reads (bTrySprint, GetAddress) 0–2 µs. The gate made ≈ 10 calls — six InSubstate alone ≈ 0.2 ms; the whole full path ≈ 0.4 ms.
+- The fix (pack working tree, `krinik_bow_sprint.lua`): ONE `GetSubstateList()` for the draw and the exhaustion tests, `IsPlayerControlled` kept per pawn, the walking
+  mode and the velocity read as properties of `CharacterMovement`; the bow walk last. Expected ≈ 0.12 ms for the full path — to be measured by the same chunks.
+- **v2 measured (05:27–05:29):** full-path crossings 32 / 51 / 49 %, the minute's own time 79–83 ms. `microbench3.lua` while sprinting drawn: the old gate 313 µs,
+  the new 147 µs (GC stopped 130), of it the bow walk 67 µs and ≈ 5 KB of garbage a gate; a full Lua collect in the remote's state 2 ms (heap 2.3 MB).
+- **v3 (05:3x):** «the bow in hand» kept for one continuous draw (dropped at the first gate with no draw, recomputed after 100 ms without a gate — a weapon swap
+  with Shift up must not find the old answer), the angle's out table reused. Measured 05:34–05:36: full-path crossings 50 / 265 (19 %), 31 / 146 (21 %), 26 / 144
+  (18 %); the minute's own time 99 → 52 → 38 ms; worst 1 ms in the steady minutes (2 ms in the first, 1 ms step). Functional on v3 (05:45, real input, rows
+  `KUMM/.work/wallgrab/v3_s1b_s3_s6.txt`): S1b — 7 at 660 through 7,11 → 7,11,15,16 → the shot «#1 из лука» → 7,11,15 at 660; S3 — the draw then W: 192, no 7; S6 —
+  the draw then Shift standing: no 7.
+- **Judge round 1 on the rework (no defect; 5 risks, 2 cosmetic):** (1) a «no bow» cached for the whole draw would lose the sprint (the draw's first gate may see
+  the bow still on its sheath) — FIXED: only a yes is kept; (2) the exhaustion test moved to list membership — to verify live (13 / 14 / 18 in the list vs
+  `InSubstate`); (3) the mode 1 / 2 compare instead of `IsMovingOnGround` — FIXED: the engine's call is back (Funcom's mode enum differs, 6 µs); (4) the player memo
+  across a respawn at a freed address — FIXED: every per-pawn memo reset at the hero's birth; (5) the comment on when the yes is dropped — FIXED; (6) only the table
+  shape of the list — FIXED: a TArray read by ForEach too; (7) the heap line counts the whole mod's Lua state — label FIXED. Checked by the judge, no defect: two
+  pawns asking alternately, the reused out table, the cost bookkeeping, `CharacterMovement.Velocity` vs `GetVelocity`, a melee weapon opening the gate.
+- **v4 live (05:52, real input):** the sprint with the bow drawn at 660 (7,11,15,16); stamina drained by the remote mid-run → the list read [3, 14] with
+  `InSubstate(14)` = yes (judge item 2 verified), the draw broken by the game, the sprint ended (384). **Pack `965f10f` pushed.** The v4 cost minute not re-run (the
+  owner came to the PC); v4 differs from the measured v3 only by the yes-only memo and `IsMovingOnGround` (6 µs).
+
 **NEXT (in order):** (1) the bow sprint on 3.1.0 — control case with `krinik_bow_sprint` off (does a draw survive the Shift release; does RMB draw in a sprint); (2) `rmb_held`
 under SendInput; (3) Z3 / Z5 by real keys; (4) the judge's open risks.
 

@@ -138,10 +138,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > a second look 300 ms later, one shared `bow_in_hand`; G7 / G7e pass on r14 and r15 by real input read while RMB is held; **pack `9a33796` pushed** (report
 > `testcases/reports/2026-11-17_conan-wall-grab-bow-cancel-r14.md`). (2) **Interview #037 asked in chat 04:29** (shown, recorded): Q1 — may a HELD RMB redraw once
 > the hero is over the top of the wall (A: only a new press, recommended); Q2 — the hang's stamina drain (A: a 1/s timer only on the wall, −2/s, recommended; B −1/s;
-> C no timer, charge at the push). Both wait for his answer → build. (3) Bug 103 (the farewell hook) — FIXED in the working tree: the turn starts only at the owner's
-> own prompt (a queued attachment with origin human counts; notifications / hand-backs / compaction do not split), the longest stop text of a closure wins;
-> `tools/farewell-replay.mjs` replays a real transcript stop by stop (b9342015, ea639d79, 2a24c0f4 now keep the real farewell); test-guards 307/307, the new cases
-> red on HEAD; judge round running. The game of ours runs (PID 34052, the wall stand), the machine lock taken till 05:35.
+> C no timer, charge at the push). Both wait for his answer → build. (3) Bug 103 (the farewell hook): a turn-model fix was REFUTED by the judge on 78 real
+> transcripts (the owner typing during a closure lost 9 farewells) and rolled back at 05:38; the fix now in the working tree is an explicit mark — **the closure
+> skills end the farewell with the hidden line `<!-- farewell -->`** and the hook writes that message; unmarked closures unchanged (15 real ones compared);
+> `tools/farewell-replay.mjs` replays a transcript stop by stop. (4) Bug 93 cost: the bow-sprint gate reworked (one substate list, property reads, the bow kept per
+> draw) — full-path calls over the 1 ms step 45–64 % → 18–21 %, S1b / S3 / S6 and the exhaustion pass — **pack `965f10f` pushed**. (3) judged twice (the
+> mark only at the END of the message and only after an accepted closure; autonomy-guard knows it) — committed with this block; its live proof is THIS chat's
+> closure: the farewell file must then hold the marked farewell. (5) Bug 104 (the hand off the string): cases written, the first frames too far — a close side
+> camera next. No game of ours runs (closed 06:0x), the machine lock released.
 >
 > **CHAT CLOSED 2026-11-16 23:53 +03:00 (soft, by the owner's word: `[OWNER]` 2026-11-16 23:38 «работай автономно 15 минут, а затем начинай доходить до логического
 > среза и закрытию чата по ритуалу»).** KUMM `06806a8` + the closure commit; pack `4367176`, `68c8d11`, `a3a6111` (r11) — pushed; no game of ours runs (closed

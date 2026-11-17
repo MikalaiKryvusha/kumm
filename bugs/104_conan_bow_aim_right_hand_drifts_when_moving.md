@@ -21,6 +21,14 @@ string in every frame; a control case with our archery / locomotion / first-pers
 Bow in hand → RMB held (the draw, the aim camera) → W (or A / D) → the right hand with the arrow moves right, off the string. Real input (a held RMB) — the remote's
 RMB is a tap (bug 93, `sprint-bow-sample.lua` header); a FREE PC and the game in front (HOUSE_RULES rule 30), or the owner's frame.
 
+## First frames 2026-11-17 05:48 (inconclusive)
+
+Cases written — `testcases/TC_conan_bow_aim_hand_2026-11-17.md` (H1 standing, H2–H5 moving W / A / D / S, H6 sprinting, H7 / H8 controls with Archery / Locomotion out).
+A first try (third person, the default camera behind the hero, `KUMM/.work/bowhand/h1_stand.jpg`, `h2_walk.jpg`, 1920 wide): the bow and the right hand are seen
+from behind at ≈ 1/6 of the frame height — too small to tell the hand on the string from off it, and the «standing» frame fell inside the draw (taken 1.4 s
+after RMB, the full hold comes ≈ 0.55 s + the draw). NEXT: a close side camera on the hero's right shoulder (the camera remote / `fixed-cam.lua` at ≈ 1.2 m, the
+bow arm in frame), frames only in the FULL hold (substates 11,15,16 read by the 15 ms recorder at the frame's moment), standing vs walking in one sequence.
+
 ## Hypotheses (ranked, none tested)
 
 1. The game's own aim-while-moving blend (the bow's upper-body draw pose layered over the locomotion; the moving pose of the right arm differs) — vanilla; control

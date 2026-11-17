@@ -22,8 +22,36 @@ import { readFileSync, writeFileSync, renameSync } from 'node:fs';
 import { join } from 'node:path';
 
 export const FAREWELL_FILE = 'FAREWELL_MESSAGE_FROM_THE_PREVIOUS_CHAT.md';
+// Явная метка прощания (баг 103, 2026-11-17): навыки /end-chat-soft и /end-chat-force кончают прощальное сообщение скрытой строкой `<!-- farewell -->`, и
+// сообщение с ней пишется в файл ВСЕГДА — что бы ни было в ходе до него: строка ожидания судьи, уведомление фоновой задачи, отчёт помощника, слова владельца
+// посреди закрытия (журналы b9342015, ea639d79, 2a24c0f4 — строка ожидания побеждала; попытка вывести прощание из модели хода — граница по источнику записи и
+// «самое длинное побеждает» — опровергнута судьёй на 78 журналах: 9 закрытий теряли прощание из-за слов владельца посреди закрытия, 1 — ответ после прощания
+// длиннее его). Без метки — прежнее поведение ниже, без изменений. [TESTED: 2026-11-17 · 15 настоящих закрытий прогнаны остановка за остановкой
+// (tools/farewell-replay.mjs): без метки файл тот же, что у прежней версии · testcases/reports/2026-11-17_farewell-capture-marker.md] — путь метки: только
+// фикстуры test-guards J (после строки ожидания, уведомления, слов владельца посреди закрытия; длинный ответ после метки не затирает), живое закрытие [NOT-TESTED]
+// The mark counts only as the END of the message (judge 2026-11-17: a mark on any line let a code block that shows the convention, mid-chat, overwrite the
+// file), on its own line or after the last words («…До встречи. <!-- farewell -->»), and only in a chat that HAS an accepted closure (closedEver below).
+export const FAREWELL_MARK = /<!--\s*farewell\s*-->\s*$/;
 const CLOSURE_SKILL = /^(?:[\w-]+:)?end-chat-(?:soft|force)$/;
 const CLOSURE_COMMAND = /<command-name>\/?end-chat-(?:soft|force)<\/command-name>/;
+
+// → true when the whole transcript has an accepted closure (the Skill call's result not is_error, or the owner's /end-chat-… command) — the mark's licence.
+export function closedEver(lines) {
+  const pending = new Set();
+  for (const l of lines) {
+    if (!l.includes('end-chat-') && !l.includes('tool_result')) continue;   // cheap pre-filter: the transcript is megabytes
+    let rec; try { rec = JSON.parse(l); } catch { continue; }
+    const c = rec && rec.message ? rec.message.content : undefined;
+    const bs = Array.isArray(c) ? c : typeof c === 'string' ? [{ type: 'text', text: c }] : [];
+    if (rec.type === 'user' && !rec.isMeta && bs.some((b) => b && b.type === 'text' && CLOSURE_COMMAND.test(b.text || ''))) return true;
+    for (const b of bs) {
+      if (!b) continue;
+      if (rec.type === 'assistant' && b.type === 'tool_use' && b.name === 'Skill' && b.input && CLOSURE_SKILL.test(String(b.input.skill || '').trim())) pending.add(String(b.id));
+      if (rec.type === 'user' && b.type === 'tool_result' && pending.has(String(b.tool_use_id)) && b.is_error !== true) return true;
+    }
+  }
+  return false;
+}
 
 const contentOf = (rec) => (rec && rec.message ? rec.message.content : undefined);
 const blocks = (c) => (Array.isArray(c) ? c.filter(Boolean) : typeof c === 'string' ? [{ type: 'text', text: c }] : []);
@@ -91,9 +119,21 @@ function main() {
   // пустил остановку (2026-10-30 11:4x: закрытие после отказов стража автономности — прощание не записалось, владелец: «опять расходится
   // твое сообщение с тем, что в FAREWELL_MESSAGE…»). Защита от «новых знаний нет» — номер закрытия: одно закрытие пишет файл один раз.
   if (!event.transcript_path) return;
-  const turn = readTurn(readFileSync(event.transcript_path, 'utf8').split('\n'));
-  if (!turn.closed) return;
+  const lines = readFileSync(event.transcript_path, 'utf8').split('\n');
+  const turn = readTurn(lines);
   const stateFile = (outArg >= 0 && args[outArg + 1] ? args[outArg + 1] : join(process.env.CLAUDE_PROJECT_DIR || event.cwd || process.cwd(), FAREWELL_FILE)) + '.state';
+  const last = typeof event.last_assistant_message === 'string' ? event.last_assistant_message : '';
+  // помеченное прощание — всегда, если в чате было принятое закрытие (метка в шапке файла); состояние — номер закрытия хода, чтобы остановки после него его не затёрли
+  if (FAREWELL_MARK.test(last) && (turn.closed || closedEver(lines))) {
+    const marked = last.replace(FAREWELL_MARK, '').trim();
+    if (!marked) return;
+    const outM = outArg >= 0 && args[outArg + 1] ? args[outArg + 1] : join(process.env.CLAUDE_PROJECT_DIR || event.cwd || process.cwd(), FAREWELL_FILE);
+    writeFileSync(outM + '.tmp', marked + '\n', 'utf8');
+    renameSync(outM + '.tmp', outM);
+    writeFileSync(stateFile, JSON.stringify({ closureId: turn.closureId || 'marked', marked: true, at: new Date().toISOString() }));
+    return;
+  }
+  if (!turn.closed) return;
   let seen = '';
   try { seen = JSON.parse(readFileSync(stateFile, 'utf8')).closureId || ''; } catch { /* нет записи */ }
   if (turn.closureId && seen === turn.closureId) return;   // вторая остановка того же закрытия

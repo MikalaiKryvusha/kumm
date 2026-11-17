@@ -91,6 +91,31 @@
 
 ## Entries
 
+### EXP-0544 · 2026-11-17 · ❌→✅ · #conan #ue4ss #cost #perf #measure #bug93
+class: wrong-model-of-the-cost
+**Result:** the bow-sprint section's worst call read 2–8 ms; the guess was «GC or a preempted thread» (os.clock is the WALL clock on Windows and steps by 1 ms
+here). A split minute line (the full path vs the light one, each with its count over the step) showed the full path crossing the 1 ms step on 45–64 % of its
+calls and the light path on 0.8 % — our work. A microbench (N = 500 repeats of one call on the game thread through the remote) priced every UE4SS call at 25–42 µs
+(InSubstate 34, IsPlayerControlled 36, GetVelocity 42, the attached-actor walk 54–67) and a property read at 0–3 µs; one GetSubstateList (36 µs) replaces six
+InSubstate. The gate 313 → 147 µs, then the bow walk kept per continuous draw: full-path crossings 18–21 %, the minute's own time 96–105 → 38–52 ms.
+**Lesson:** in a UE4SS hot path count the CALLS, not the lines: every reflected call is tens of µs and leaves garbage; prefer one list call, property reads
+(`CharacterMovement.MovementMode`, `.Velocity`) and per-episode memo of facts that cannot change mid-episode. Measure with a light-path control in the same clock.
+**Repro:** `bash KUMM/.work/sprintcost/run.sh 6 25000 draw` (the game in front) → the BowSprint minute lines in UE4SS.log; `pult.sh "lua return dofile('…/microbench3.lua')"` while sprinting drawn.
+**Trigger:** any mod hook that runs every movement tick or every frame (K2_CanSprint, EvaluateMovement_*, Tick-like events).
+none-cheap: the price list now lives in `krinik_bow_sprint.lua`'s gate comment and this entry; a lint cannot price calls
+
+### EXP-0543 · 2026-11-17 · ❌→✅ · #hooks #farewell #transcript #turn-model #judge #bug103
+class: census-by-own-pattern
+**Result:** a fix of the farewell hook derived «which message is the farewell» from the transcript's turn shape (origin kinds, queued attachments, the longest stop
+text). It passed its own fixtures and the three transcripts it was written against; an independent judge replayed all 78 closure transcripts and refuted it —
+9 closures lost the farewell because the owner typed DURING the closure (the most common real case), one took a later, longer reply. The working fix: the
+producer marks it — the closure skills end the farewell with `<!-- farewell -->` and the hook writes the marked message; without the mark the old logic runs,
+so the 15 compared real closures give the same file as before by construction.
+**Lesson:** when a consumer must find ONE message among many, let the producer mark it instead of inferring it from structure; and judge a transcript-reading
+fix on the WHOLE corpus of real transcripts (`tools/farewell-replay.mjs` stop by stop, old vs new), never on the cases it was written for.
+**Repro:** `for t in F:/Claude/.claude/projects/d--work-ai-sandbox-KUMM/*.jsonl; do node tools/farewell-replay.mjs "$t" --quiet; done` against `--hook <old copy>`.
+mechanized: yes — test-guards part J (the mark cases, red on the old hook) + `tools/farewell-replay.mjs`
+
 ### EXP-0542 · 2026-11-16 · ❌→✅ · #conan #ue4ss #hook #input #press-release #fname #walljump #bug105 #falseok
 class: hook-name-collision — a UE4SS hook on one of two blueprint functions whose names differ only by the trailing `_N` fires for BOTH
 **Result:** a hook on the Jump RELEASE `InpActEvt_Jump_K2Node_InputActionEvent_27` fired at the press `_26` too: build r1 read it as «the game sends a second release at

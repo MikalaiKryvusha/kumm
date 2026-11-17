@@ -471,6 +471,42 @@ try {
     U('работай'), A(skill('end-chat-soft', 'tu-ok3')), U([{ type: 'tool_result', tool_use_id: 'tu-ok3', content: 'Launching skill: end-chat-soft' }]),
     A(skill('end-chat-force', 'tu-ref3')), refused('tu-ref3'), A({ type: 'text', text: 'Прощание после отказа срочного.' }),
   ]), 'Прощание после отказа срочного.' + NL);
+  // bug 103 (2026-11-17): the closure skills end the farewell with the hidden line «<!-- farewell -->», and the hook writes that message whatever came before
+  // it in the turn. The record shapes are the real ones (transcripts b9342015, ea639d79, b50f4e05): a queued attachment for a notification, a hand-back or the
+  // owner's words typed mid-turn (origin task-notification / peer / human), a «<task-notification>» user record after a turn that already ended.
+  const MARK = NL + '<!-- farewell -->';
+  const Q = (prompt, kind) => JSON.stringify({ type: 'attachment', attachment: { type: 'queued_command', prompt, origin: { kind } } });
+  const NOTE = '<task-notification>' + NL + '<status>completed</status>' + NL + '</task-notification>';
+  // the result carries the call's id, as every real tool_result does (closedEver matches the accepted call by it)
+  const cl = (id) => [U('закрывай'), A(skill('end-chat-soft', id)), U([{ type: 'tool_result', tool_use_id: id, content: 'Launching skill: end-chat-soft' }])];
+  run([...cl('tu-m1'), A({ type: 'text', text: 'Жду итог судьи.' })]);
+  check('bug 103: the marked farewell replaces the waiting line of the same closure', run([...cl('tu-m1'), A({ type: 'text', text: 'Жду итог судьи.' }), result,
+    A({ type: 'text', text: 'Прощание M1.' + MARK })], { last_assistant_message: 'Прощание M1.' + MARK }), 'Прощание M1.' + NL);
+  check('bug 103: a later, LONGER unmarked stop of that closure keeps the marked farewell', run([...cl('tu-m1'), A({ type: 'text', text: 'Прощание M1.' + MARK }),
+    A({ type: 'text', text: 'Длинный ответ после прощания, он не прощание и не должен его затереть.' })],
+    { last_assistant_message: 'Длинный ответ после прощания, он не прощание и не должен его затереть.' }), 'Прощание M1.' + NL);
+  check('bug 103: the marked farewell after a «<task-notification>» user record (the turn split) is written', run([...cl('tu-m2'), A({ type: 'text', text: 'Жду.' }),
+    U(NOTE), A({ type: 'text', text: 'Прощание M2.' + MARK })], { last_assistant_message: 'Прощание M2.' + MARK }), 'Прощание M2.' + NL);
+  check('bug 103: the marked farewell after the owner\'s words typed mid-closure (queued, origin human) is written', run([...cl('tu-m3'), A({ type: 'text', text: 'Жду.' }),
+    Q([{ type: 'text', text: 'я играл, прости' }], 'human'), A({ type: 'text', text: 'Прощание M3.' + MARK })], { last_assistant_message: 'Прощание M3.' + MARK }), 'Прощание M3.' + NL);
+  check('bug 103: the marked farewell after a hand-back (queued, origin peer) is written', run([...cl('tu-m4'), A({ type: 'text', text: 'Жду.' }),
+    Q('<agent-message from="j">report</agent-message>', 'peer'), A({ type: 'text', text: 'Прощание M4.' + MARK })], { last_assistant_message: 'Прощание M4.' + MARK }), 'Прощание M4.' + NL);
+  // judge round 1 of the mark (2026-11-17): a fresh state, the mark only at the END, only in a chat with an accepted closure; each control starts from a known file
+  writeFileSync(out + '.state', '{}');
+  const STOPREC = JSON.stringify({ type: 'system', subtype: 'stop_hook_summary', hookCount: 7 });
+  const m0 = [...cl('tu-m0'), A({ type: 'text', text: 'Прощание M0.' + MARK })];
+  check('bug 103: a marked farewell as the FIRST stop of a closure is written (fresh state)', run(m0, { last_assistant_message: 'Прощание M0.' + MARK }), 'Прощание M0.' + NL);
+  check('bug 103: …then the next stop (a hook answer) keeps it — the marked path wrote the closure into the state', run([...m0, STOPREC,
+    A({ type: 'text', text: 'Новых знаний нет.' })], { last_assistant_message: 'Новых знаний нет.' }), 'Прощание M0.' + NL);
+  writeFileSync(out, 'KEEP' + NL);
+  check('bug 103: control — the mark mid-line (quoted in a sentence) is not a farewell mark', run([U('что за метка?'), A({ type: 'text', text: 'Метка <!-- farewell --> ставится в конце.' })],
+    { last_assistant_message: 'Метка <!-- farewell --> ставится в конце.' }), 'KEEP' + NL);
+  check('bug 103: control — a message ending with the mark in a chat with NO closure leaves the file alone', run([U('покажи соглашение'),
+    A({ type: 'text', text: 'Пример прощания:' + MARK })], { last_assistant_message: 'Пример прощания:' + MARK }), 'KEEP' + NL);
+  check('bug 103: the mark after the last words on the same line is a mark (stripped)', run([...cl('tu-m5'), A({ type: 'text', text: 'Пока. <!-- farewell -->' })],
+    { last_assistant_message: 'Пока. <!-- farewell -->' }), 'Пока.' + NL);
+  check('bug 103: a code block that merely SHOWS the mark mid-message is not a mark', run([U('как пишут метку?'), A({ type: 'text', text: 'x' })],
+    { last_assistant_message: 'Метку пишут так:' + NL + '```' + NL + '<!-- farewell -->' + NL + '```' + NL + 'и всё.' }), 'Пока.' + NL);
   check('control: garbage on stdin (fail-open)', spawnSync(process.execPath, [FC, '--out', out], { input: '{not json', encoding: 'utf8' }).status, 0);
 } catch (e) {
   check('part J ran to the end', 'crashed: ' + String(e && e.message).split(NL)[0].slice(0, 80), 'completed');
@@ -527,6 +563,17 @@ try {
     JSON.stringify({ type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 'tu-k-p1', content: 'Launching skill: end-chat-soft' }] } }),
     JSON.stringify({ type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 'tu-k-p2', is_error: true, content: 'context-budget: окно 86.0 % — меньше 92 %' }] } })]), 'pass');
   prompt('работай автономно');
+  // bug 103 (2026-11-17): a notification after the closure splits the turn (a «<task-notification>» user record); the farewell that ENDS with the mark is the
+  // closure all the same — the guard must not order a second ceremony
+  check('bug 103: a marked farewell after a notification split the turn → the stop passes (the closure)', stop(85, { last_assistant_message: 'Прощание.\n<!-- farewell -->' }, [
+    JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', id: 'tu-k-m', name: 'Skill', input: { skill: 'end-chat-soft' } }] } }),
+    JSON.stringify({ type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 'tu-k-m', content: 'Launching skill: end-chat-soft' }] } }),
+    JSON.stringify({ type: 'user', message: { content: '<task-notification>\n<status>completed</status>\n</task-notification>' } })]), 'pass');
+  prompt('работай автономно');
+  check('control: the same split turn WITHOUT the mark → blocked (finish and close softly)', stop(85, { last_assistant_message: 'Прощание без метки.' }, [
+    JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', id: 'tu-k-m2', name: 'Skill', input: { skill: 'end-chat-soft' } }] } }),
+    JSON.stringify({ type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 'tu-k-m2', content: 'Launching skill: end-chat-soft' }] } }),
+    JSON.stringify({ type: 'user', message: { content: '<task-notification>\n<status>completed</status>\n</task-notification>' } })]), 'block-close');
   check('the «work on» block below 80 % carries no closing word', (() => {
     const r = spawnSync(process.execPath, [AG, '--state', st], { input: JSON.stringify({ hook_event_name: 'Stop', transcript_path: tp(76) }), encoding: 'utf8', env });
     return /закры|доде|сверн|мягк|end-chat/i.test(JSON.parse(r.stdout || '{}').reason || 'закры') ? 'closing word' : 'clean';

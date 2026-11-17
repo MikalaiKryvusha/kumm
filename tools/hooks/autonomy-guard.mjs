@@ -20,7 +20,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { lastUsage, contextOf, WINDOW, PCT_SOFT, PCT_FORCE, shown } from '../../.claude/hooks/context-budget.mjs';
-import { readTurn } from './farewell-capture.mjs';
+import { readTurn, FAREWELL_MARK, closedEver } from './farewell-capture.mjs';
 
 // Any «автономно / автономный…» is the order, whatever word stands before it («гоу автономно», «давай автономно», «работай автономно»):
 // 2026-10-30 ≈16:00 «гоу автономно, делаем дальше сборку» slipped past the old «работай автономно» pattern and the agent stopped
@@ -57,9 +57,12 @@ function main() {
   if (ev.hook_event_name !== 'Stop' || !st.on) return;
   const usage = ev.transcript_path ? lastUsage(ev.transcript_path) : null;
   const pct = usage ? (contextOf(usage) / WINDOW) * 100 : 0;
-  const turn = ev.transcript_path ? readTurn(readFileSync(ev.transcript_path, 'utf8').split('\n')) : { closed: false, text: '' };
+  const lines = ev.transcript_path ? readFileSync(ev.transcript_path, 'utf8').split('\n') : [];
+  const turn = lines.length ? readTurn(lines) : { closed: false, text: '' };
   const text = typeof ev.last_assistant_message === 'string' && ev.last_assistant_message ? ev.last_assistant_message : turn.text;
-  const d = decideStop({ on: st.on, pct, closed: turn.closed, text });
+  // The marked farewell is a closure too when a notification split the turn (judge 2026-11-17, bug 103): without it the guard would order a second ceremony.
+  const closed = turn.closed || (FAREWELL_MARK.test(text) && closedEver(lines));
+  const d = decideStop({ on: st.on, pct, closed, text });
   if (!d) return;
   if (d.off) { writeFileSync(state, JSON.stringify({ on: false, at: new Date().toISOString(), by: 'closure skill' })); return; }
   process.stdout.write(JSON.stringify({ decision: 'block', reason: d.block }));
