@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0570 · 2026-11-18 · ❌ · #ue4ss #crash #probe #flx #keybind #bug85
+class: a UFunction's parameters probed blindly from Lua — and a Lua-created FLX button assumed clickable
+mechanized: `KUMM/.work/bug85/func-params.lua` calls `GetPropertyClass` only on object / class properties (a probe file, not a guard)
+**Lesson:** the remote's `GetPropertyClass()` on a StructProperty (the return of `GUIModuleController:K2_GetGUIPanelRow`) read garbage and crashed the game
+natively (2026-11-18 20:20, `EXCEPTION_ACCESS_VIOLATION reading 0xff010011`, all frames in UE4SS; `pcall` catches no access violation) — branch on the property's
+class first. And before building on a Lua-created FLX button (`WidgetBlueprintLibrary:Create(pc, class, pc)`), check the 2026-10-30 spike S11: such a button
+lives under the GameInstance and stayed DEAD to a real click inside a live window; 48 of 49 live FLX buttons live in a window's WidgetTree. The judge of bug 85
+found it from the project's own records — read the research of a widget class before designing on it.
+
 ### EXP-0568 · 2026-11-18 · ❌→✅ · #winforms #dpi #cursor #launcher
 class: a-winforms-stock-cursor-is-not-the-system-cursor
 **Lesson:** at 300 % the owner saw the launcher's cursor change size on every button. `.NET Framework`'s `Cursors.Hand` is WinForms' own fixed 32×32 cursor,

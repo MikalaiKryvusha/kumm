@@ -126,3 +126,16 @@ popups binding their buttons):** kit script `_config/devkit/kit-krinik-click-eve
    `TryCloseWindow` (its Escape shortcut and the «Закрыть» click — both dead until now).
 4. `W_MainMenu_MainMenu`, `W_IngameMenu`: `Btn_KrinikFeedback.OnClicked` → `KrinikFeedbackClicked`.
 5. Lua: the five `RegisterKeyBind` removed; the hub controller keeps `ActivateModule` only.
+
+## 2026-11-18 20:1x–20:3x — judge round 1 and what it changed
+
+Judge round 1 (fresh helper on the Lua + kit + post-key diff; report kept in the session scratchpad `judge_bug85_r1.md`): **D1** refuted by then (kit run 5
+saved W_KrinikButton); **D2 CONFIRMED by a run** (20:22, `KUMM/.work/bug85/esc-closer-test.lua`): a Lua-made FLX button never pressed on Esc — owner the
+GameInstance and owner the window (its outer then IS the window's WidgetTree) — so the design moved to a plain-UserWidget wrap (`W_KrinikClickWrap`,
+preview press → `KrinikPreview` → the old IsHovered route) and our window's own `OnPreviewKeyDown` → `KrinikEsc`; other mods' windows lose Esc → bug 108;
+**D3, R1, R2, R6** (address-keyed armed set, the 100 × 30 hidden button, the nested ActivateModule, box names) — moot: the closer buttons are gone; **R3**
+(a broad `NotifyOnNewObject(WindowRoot)`, possibly off the game thread) — gone with them; **R4** (Esc skipping `close_window`) — fixed: `KrinikEsc` calls
+`close_window`; **R5** (the outside press narrower) — accepted: the catcher covers the inventory window, a press elsewhere (the tab row) changes the tab and
+closes the list by its event; in our window a press outside the frame no longer closes an open option list or palette (the next press inside does);
+**R7** — accepted (a failed part never saves); **R8** — fixed (LoadAsset by the asset path first); cosmetics fixed (post-key header). A recon probe of mine
+crashed the game 20:20 (`GetPropertyClass` on a struct return — EXP-0570), not the build.

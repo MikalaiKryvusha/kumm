@@ -152,6 +152,20 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **UPDATE 20:3x — the design changed after judge round 1 (`F:\Temp\…\scratchpad\judge_bug85_r1.md`, findings D1–D3, R1–R8 — summary in bug 85):** D2 CONFIRMED in
+> the game 20:22 — a Lua-made FLX button (`W_KrinikButton`, Create with the GameInstance AND with the window as owner) never pressed on Esc; so: **(a)** the mods
+> button and its list = vanilla `WBP_ButtonBase` inside a kit wrap `W_KrinikClickWrap` (Overlay root, `OnPreviewMouseButtonDown` → `KrinikPreview`, Unhandled) →
+> `on_click` by IsHovered (the old route, now on the game thread); the outside press = `W_KrinikClickCatcher`; **(b)** our window's Esc = kit
+> `OnPreviewKeyDown` → `KrinikEsc` → `close_window` (Lua hook at the first opening); **(c)** Esc of OTHER mods' windows (fishing, Hosav, AMR, LLH, PrP, DN,
+> Emberlight, EAA, PIFC) is DROPPED until a native pak fix — `[AI]` 20:3x, said to the owner in chat (crash > convenience), bug 108 to file (with his EAA note);
+> `W_KrinikButton` removed from the kit (the uasset deleted, the CookInfo line dropped). Kit run 7 crashed the kit editor in `AddCallFunctionNode` 1 s in
+> (probably the stale registry entry of the deleted asset) — run 8 running 20:3x. Lua rewritten (the guard on the source: 0): `krinik_click.lua` (wrap +
+> catcher), `krinik_mods_button.lua`, `krinik_pause_in_menu.lua` (the Esc block → a note), `krinik_mod_settings.lua` (KrinikEsc). The deployed build still
+> has the 20:17 pak + the first Lua (W_KrinikButton) — redeploy after run 8 + `kit-buildmod.py`. Owed: K1–K8 by the player's path (the real mouse — owner
+> FREE), judge round 2 on the new diff, pack commit, bug 108. My recon probe crashed the game at 20:20 (GetPropertyClass on a struct, EXP-0570) — not the build.
+> Also this chat: the owner's sunset picture graded like v2 (D:\Sunset_Ancient_Valley_{Realism,Warm}.webp) and his two upscales cut into
+> `art/wallpapers(_source)` as `V2_female_beta` (pack, NOT committed yet).
+>
 > **NOW — chat of 2026-11-18 19:24 (`resume` + the previous farewell's order).** (1) **Bug 85, the five KrinikConanUI key binds — code written, NOT yet built or
 > run:** recon R1–R2 by the remote + `ConanExiles/_config/post-key.ps1` (a key posted into the game's window: the game acts, UE4SS binds do not see it) —
 > bug 85 section 2026-11-18 19:3x–19:4x; the hub's close passes `ActivateModule` (Esc and Tab); ten mod windows swallow Esc natively (EAA among them — the owner
