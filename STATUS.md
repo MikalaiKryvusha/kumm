@@ -171,6 +171,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `krinik_mods_button.lua:285`, `krinik_mod_settings.lua:1380`, `krinik_pause_in_menu.lua:680`, `krinik_hub_controller.lua:354`); found 18:58: `FLXButtonBase` has
 > NO click UFunction (Signal* are delegates; the click is native C++), so the replacement is research: a kit-bound custom event per button (as the attribute page
 > arrows, `kit-attribute-paging-step2.py`), the game's own Esc / Tab handling for the two key binds; hook the hero's AnyKey only in gameplay (the camera's way).
+> **Corrections by the closing judge (19:21):** «every Krinik mod 0.9.1» = the 10 at the build version, KrinikConanMusic stays 0.1.0 (not shipped); all KUMM
+> commits of this chat are PUSHED (`e468a17`); the test-release question was ANSWERED 19:08 / 19:11 (RC1 in our repo, Linux format) — not owed; judge round 2
+> is DONE (not running); plan 57 «Judge round 2» box and plan 55 R1, R2, R6 (deploy + menu frame) boxes are stale-unchecked — tick them next chat. The r12–r14
+> stand runs have no saved totals (chat output only).
 > **Judge round 2 DONE 19:1x — `reports/2026-11-18_judge_launcher_round2.md`, NOT yet verified against the code, NOT fixed (the chat closed at 80 %):** D1
 > `make_release.sh` / `make_volumes.sh` have no `pipefail` (a failed build-docs / export hides behind `| tail`); D2 `make_release.sh` does not pass
 > `KRINIK_VOLUME_BYTES` and still splits a second 13 GB copy; D3 the installed build's game half comes from the found copy (0.9.1 «для 3.2.0» after a patch —
