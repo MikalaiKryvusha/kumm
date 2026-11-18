@@ -171,7 +171,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `krinik_mods_button.lua:285`, `krinik_mod_settings.lua:1380`, `krinik_pause_in_menu.lua:680`, `krinik_hub_controller.lua:354`); found 18:58: `FLXButtonBase` has
 > NO click UFunction (Signal* are delegates; the click is native C++), so the replacement is research: a kit-bound custom event per button (as the attribute page
 > arrows, `kit-attribute-paging-step2.py`), the game's own Esc / Tab handling for the two key binds; hook the hero's AnyKey only in gameplay (the camera's way).
-> NEXT: judge round 2 → fixes → pushes; bug 85; the owner's page (texts + proposals + D6); his answer on the test release → `make_release.sh` → the test release →
+> **Judge round 2 DONE 19:1x — `reports/2026-11-18_judge_launcher_round2.md`, NOT yet verified against the code, NOT fixed (the chat closed at 80 %):** D1
+> `make_release.sh` / `make_volumes.sh` have no `pipefail` (a failed build-docs / export hides behind `| tail`); D2 `make_release.sh` does not pass
+> `KRINIK_VOLUME_BYTES` and still splits a second 13 GB copy; D3 the installed build's game half comes from the found copy (0.9.1 «для 3.2.0» after a patch —
+> record the build's gameVersion); R4 a quoted line in never.txt is skipped silently; R5 RunJob deletes the stop mark before Run's refusals; R6 `/pressed/` in
+> `self.mjs` matches «not pressed» (use `/^pressed/`); R7 the U1 stub uninstaller exits before the probes; R8 416 now dead-ends (delete the part, refetch) and
+> 408 / 429 should stay «net»; C9 a bundle in a forbidden folder offers install; C10 the watcher gate runs the case on a timeout. The pack commits `9d2a8b4`,
+> `5f1544f` stay LOCAL until these are fixed and a round 3 is clean (the owner's judge rule).
+> NEXT: round 2's fixes → round 3 → pushes; bug 85; the owner's page (texts + proposals + D6); his answer on the test release → `make_release.sh` → the test release →
 > the launcher downloads it on a fresh copy of the clean 3.1.1.
 >
 > **CHAT CLOSED 2026-11-18 16:0x +03:00 (chat of 14:59: the pasted farewell → «resume» → /resume in full; the owner present and steering all along; soft closure by
