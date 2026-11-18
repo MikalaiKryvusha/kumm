@@ -234,7 +234,11 @@
     2. `node D:/work/ai_sandbox/KUIPS/bin/kuips.mjs shoot --root <dir>` (scale 4, the owner's 4K TV) → `layout` → `build` → `check` (0 defects), then the agent looks
        at the frames and the whole sheet itself, then opens `design/flow-map.html` for the owner.
     3. The built sheet and the frames are rebuilt by these commands and stay out of git; the page and the manifest are committed.
-    `[OWNER]` 2026-11-18 08:16 · 08:19 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11.
+    4. The flow runs left to right (GOST 19.701-90 / ISO 5807 flow direction): the user's path is ONE row of the manifest's `layout`, its main line on
+       tier 0 column after column, the forks on tiers above and below the step they branch from; a new row only for a different process. Before
+       `kuips build`, a link from the last column of a row into the first column of the next row means the path was cut into rows — merge them.
+       Upstream recommendation: KUIPS issue #1.
+    `[OWNER]` 2026-11-18 08:16 · 08:19 · 10:20 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11.
 
 35. **The agent's own Russian is academic, strict and clear; text the player or the owner reads as the build's goes by the owner's portrait.**
     1. Every Russian text of the agent (chat, voice, documents for the owner, interviews) is written by `researches/russian-writing/RUSSIAN_RULES.md` and the

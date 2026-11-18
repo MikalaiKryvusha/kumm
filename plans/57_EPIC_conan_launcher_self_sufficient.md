@@ -62,6 +62,9 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
       background, the gold «Обновить сборку» centred. Sheet rebuilt and reopened 08:46, `check` 0.
 - [x] 2026-11-18 09:3x: the mockup strings re-read with the owner's portrait loaded (rule 35): four seams fixed (a pronoun for a name, two colons in a
       line, a cause joined by a comma, a cognate repetition); pack `a6b9540` also carries the 08:37–08:44 iterations, which had stayed uncommitted.
+- [x] 2026-11-18 10:24 +03:00: the owner's remarks 10:16–10:20 applied (pack `92a661d`): the version line 8 px lower in a light plate; no state list on `installed` and
+      `update` (the versions stand under the logos, the path distracts the player); the sheet is one left-to-right row (rule 34.4). Phase 2 carries the
+      plate and the bare column into `KrinikConanLauncher.cs` (today the real launcher still draws the line at `LVER_GAP` 6 with no plate).
 - [ ] The owner's verdict → fix the mockups → phase 1 (recon helper running 09:3x → `researches/conan-launcher-self-sufficient/README.md` §2–3). <!-- attribution-ok: a step waiting for the owner's verdict, no decision of his is claimed -->
 
 ## Decisions made without the owner
