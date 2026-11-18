@@ -171,6 +171,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `krinik_mods_button.lua:285`, `krinik_mod_settings.lua:1380`, `krinik_pause_in_menu.lua:680`, `krinik_hub_controller.lua:354`); found 18:58: `FLXButtonBase` has
 > NO click UFunction (Signal* are delegates; the click is native C++), so the replacement is research: a kit-bound custom event per button (as the attribute page
 > arrows, `kit-attribute-paging-step2.py`), the game's own Esc / Tab handling for the two key binds; hook the hero's AnyKey only in gameplay (the camera's way).
+> **ORDER FOR THE NEXT CHAT (`[OWNER]` 2026-11-18 19:23, verbatim: «Падение 85. Научить лаунчер порядку номеров RC. и после этого только Провести третий круг
+> судьи и отправить пак на GitHub.»):** 1) bug 85 — the five KrinikConanUI key binds; 2) the launcher's RC ordering (0.9.1-RC1 < RC2 < 0.9.1); 3) the round-2
+> findings fixed with them; ONLY THEN 4) judge round 3 and the pack push; then RC1 by `make_release.sh` → the release → the launcher on a fresh clean 3.1.1.
 > **Corrections by the closing judge (19:21):** «every Krinik mod 0.9.1» = the 10 at the build version, KrinikConanMusic stays 0.1.0 (not shipped); all KUMM
 > commits of this chat are PUSHED (`e468a17`); the test-release question was ANSWERED 19:08 / 19:11 (RC1 in our repo, Linux format) — not owed; judge round 2
 > is DONE (not running); plan 57 «Judge round 2» box and plan 55 R1, R2, R6 (deploy + menu frame) boxes are stale-unchecked — tick them next chat. The r12–r14
