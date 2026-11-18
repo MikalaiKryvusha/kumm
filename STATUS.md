@@ -168,14 +168,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    build the dropdown (`LangSwitch` in `KrinikConanWidgets.cs`, geometry of the mockup screen `language`); X1 `bash .work/launcher54/batch58.sh`; K1 on
 >    `.work/launcher57/old/`; judge rounds on `590495e`; a clean-instance read of its new Russian strings; show the owner its three screens not on the mockups
 >    (rule 23: «проверяет выпуски», «не связался с GitHub» + «Проверить ещё раз», «Вы остановили скачивание»). Found: on this machine the launcher offers the clean
->    version in `D:\Instals` as an install target — exclude it (rule 25); never quote the name of the clean version's subfolder (it names where the download came from) in a committed text. Owner fork: the version — the helper
->    recommends 1.0.0 (his words 09:12 and 15:42 «Реализм идет в лаунчер 1.0.0»), nothing changed yet.
+>    version in `D:\Instals` as an install target — exclude it (rule 25); never quote the name of the clean version's subfolder (it names where the download came from) in a committed text. The version is DECIDED: 1.0.0
+>    (the owner 16:18; manifest, mockups and the sheet changed in pack `eec880b`) — the launcher's TC version lines and two code comments that say 1.1.0 follow.
 > 3. **Interview #040 Q2 — one `art/` folder at the pack root** (logos, icons, wallpapers, wallpapers_source, screenshots): `_config/release/build-docs.py` is committed (pack
 >    `590495e`), so the move is free: first `git -C D:/work/ai_sandbox/ConanExiles status` clean; then move the art, update `make-res.py` (`BRANDING`), `build-docs.py` (`LAUNCHER_ICON`),
 >    `modpack.json` extras (the bundle folder name stays «Wallpapers»), `icon/make_icons.py`, `logos-on-shot.py`, the devkit comments; verify: make-res rebuilds `res/*`
 >    byte-identical, every extras path resolves, `make_public_tree.py` run; `build_nexus_description.py` RAW logo path moves in the SAME release as the public tree.
-> 4. **The owner's open questions:** do the v1 «3.0.1» wallpapers stay in the player's `Wallpapers` folder next to V2; what the no-release screen tells the player
->    (wait / roll the game back / nothing); the launcher version 1.0.0 (his word) vs 1.1.0 (manifest) — the self-update rule `Feed.Newer`.
+> 4. **The owner's answers of 16:18 (applied, pack `eec880b`):** the v1 wallpapers stay for players, renamed V1; the no-release screen gets NO hint for the player;
+>    the launcher is 1.0.0 («так как это его первое появление на свет будет»).
 > 5. **Judges owed:** `tools/text-fact-parity.mjs` (judge round 1 at the closure: its cited runs reproduce; 9 code findings, fix next — MEDIUM: a stray `<` in Markdown prose hides the facts after it
 >    (line 34 strips «<…>» across lines); a missing file or a bad rev exits 1 (the code for «facts missing») instead of 2; facts the patterns cannot see — `1080p`,
 >    `3840x2160`, lowercase Latin names, unquoted Cyrillic names, `alt` text, single-quoted `href`, hex entities; LOW: Cyrillic words read as units («10 стрел» → `10 с`),

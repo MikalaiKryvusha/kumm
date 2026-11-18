@@ -8366,3 +8366,20 @@ Correction to this entry (the closing judge, 2026-11-18 16:1x): the moved NOW bl
 репозитории» — that is a paraphrase in quote marks; his words verbatim are «было бы хорошо, чтобы ты навёл порядок в локальном и удалённом репозитории»
 (also in interview #040). The moved block also says «Q2 owed … waits for the launcher helper's commit of `build-docs.py`» — that commit landed 16:01 (pack `590495e`).
 
+## 2026-11-18 16:18 +03:00 — the owner answers the three questions of the farewell (recorded 16:2x)
+
+`[OWNER]` verbatim (he quoted each question and answered under it):
+
+> оставлять ли игрокам старые обои 3.0.1 рядом с V2;
+>
+> да, назвать их V1
+>
+> что подсказывать игроку на экране «Сборка для игры 3.2.0 ещё не вышла»;
+> ничего
+>
+> номер лаунчера: 1.0.0, так как это его первое появление на свет будет
+
+Where it went: pack `eec880b` — the v1 wallpapers and sources renamed `Krinik_Conan_Exiles_Wallpaper_V1_*`, `modpack.json` `launcher.version` 1.0.0, «Лаунчер: 1.0.0»
+on the mockups and the KUIPS sheet (check 0); plan 57 criterion 6 (no hint on the no-release screen, the version 1.0.0); STATUS FIRST NEXT CHAT items 2 and 4.
+
+

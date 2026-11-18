@@ -31,6 +31,8 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
 5. Build files absent → «Установить сборку» downloads the parts of the latest release built for the found game version, verifies them, unpacks and installs.
    Check: local test feed (`_config/launcher/test/feed.mjs`) serving parts; the log and the frames of each phase.
 6. No release for the found game version → the window names the version the latest build was made for and installs nothing. Check: stand game version 3.2.0.
+   The screen gives the player NO further hint (`[OWNER]` 2026-11-18 16:18 «ничего»). The launcher's own version is 1.0.0 (`[OWNER]` 2026-11-18 16:18 «номер лаунчера:
+   1.0.0, так как это его первое появление на свет будет»; manifest and mockups changed, pack `eec880b`).
 7. Every process (search, download, update, install) shows a progress bar with percentages; a download also shows «N из M ГБ», speed, remaining and elapsed
    time. Check: frames during each phase at 4K; the numbers move between two frames.
 8. A broken connection keeps the downloaded parts and offers «Продолжить скачивание», which resumes. Check: the feed cut mid-part on the stand.
