@@ -202,6 +202,13 @@ map markers (`SimpleMinimap_MarkerData.sav`), the damage logs and `Game_0.db` ar
 
 ### Phase E — publication: decided ahead
 
+- **The test release is 0.9.1-RC1 in OUR repository; every later fix is the next RC — RC2, RC3 …** (`[OWNER]` 2026-11-18 19:08 «нет, тестовый выпуск делаем
+  в наш репозиторий.» · «Это будет 0.9.1-RC1» · «все последующие фиксы получают выше номер RCx»; chronicle entry 2026-11-18 19:08). Built by
+  `_config/release/make_release.sh`, published as an ORDINARY release (the feed skips pre-releases) titled «0.9.1-RC1 (тестовая сборка)», tag `v0.9.1-RC1`; then
+  the launcher 1.0.0 downloads and installs it on a fresh copy of the clean 3.1.1 by the player's path (the owner 19:02 «тестировать качание через лаунчер по
+  боевому пути - из релиза ГХ» · «и установка на чистую версию»). OWED before RC1 goes out: `Feed.ParseVersion` cuts at the dash — it must order
+  RC1 < RC2 < … < 0.9.1 (the manifest's `packVersion` «0.9.1-RC1», the archive name, the menu line and `pack_version.txt` carry the RC too), with stand cases.
+
 - **0.9.1 is published as an ordinary GitHub release, NOT «Pre-release»**: the launcher's feed skips drafts and pre-releases (`ConanExiles/_config/launcher/KrinikConanUpdates.cs`
   `Feed.Parse`), and `/releases/latest` (the build's «Что нового» fallback) ignores them too (research §1.4) — a pre-release 0.9.1 would be invisible to every
   launcher. «Предварительная» goes into the release TITLE and the notes. 0.9.0 is for game 3.0.1, so 0.9.1 becomes «Latest» rightly. `[AI]` — named to the owner

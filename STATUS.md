@@ -166,7 +166,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the owner asked 18:55 why 50 GB). KUMM `236a886`, `32e58e9` (idea 26 — the plate in the world over the item, the owner 19:06) — LOCAL.
 > **The owner's orders 19:02 (verbatim in the chat; chronicle owed):** «и нужно будет тестовую сборку собирать и тестировать качание через лаунчер по боевому пути -
 > из релиза ГХ» · «и установка на чистую версию». ASKED 19:1x in chat: where the test release lives — A a separate public test repo (recommended), B a draft /
-> pre-release in the main repo (the launcher does not see them), C the real v0.9.1 at once. Outward — waits for his word.
+> pre-release in the main repo (the launcher does not see them), C the real v0.9.1 at once. ANSWERED 19:08: OUR repository, «0.9.1-RC1», every later fix RC2, RC3 … (plan 55 phase E; the RC ordering in the launcher owed).
 > **Bug 85 (the crash class) — NOT fixed, the first item of the next chat:** five `RegisterKeyBind` in KrinikConanUI (`krinik_feedback.lua:91`,
 > `krinik_mods_button.lua:285`, `krinik_mod_settings.lua:1380`, `krinik_pause_in_menu.lua:680`, `krinik_hub_controller.lua:354`); found 18:58: `FLXButtonBase` has
 > NO click UFunction (Signal* are delegates; the click is native C++), so the replacement is research: a kit-bound custom event per button (as the attribute page

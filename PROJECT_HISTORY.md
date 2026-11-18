@@ -8454,3 +8454,17 @@ HOUSE_RULES rule 38 and the STATUS line carry it.
 Where it went: STATUS NOW (the next steps); the agent asked in chat where the test release lives (A a separate public test repo — recommended, B a draft /
 pre-release in the main repo — invisible to the launcher by design, C the real v0.9.1 at once); the outward step waits for his word. Also 18:55: «почему 50
 гигабайт? я помню, что архив около 13 весил» — answered (four temporary copies at the peak); `make_volumes.sh` now cuts the volumes at the release part size.
+
+## 2026-11-18 19:08 +03:00 — the owner: the test release goes into our repository as 0.9.1-RC1, every later fix gets the next RC number (recorded 19:09)
+
+`[OWNER]` verbatim:
+
+> нет, тестовый выпуск делаем в наш репозиторий.
+>
+> Это будет 0.9.1-RC1
+
+> все последующие фиксы получают выше номер RCx
+
+Where it went: plan 55 phase E and STATUS NOW. Said to him in chat: the launcher's feed skips drafts and pre-releases (`Feed.Parse`), so RC1 is published as an
+ordinary release titled «0.9.1-RC1 (тестовая сборка)» for the real-path test; the launcher reads a version up to the dash (`ParseVersion`) — it must learn the
+order RC1 < RC2 < … < 0.9.1 so an RC player sees the next RC and the final as updates (owed, before RC2).
