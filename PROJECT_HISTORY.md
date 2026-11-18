@@ -8523,3 +8523,39 @@ The owner, 19:11 (verbatim): «мы делаем как Линус, без то�
 ## 2026-11-18 19:2x +03:00 — the owner: the agent deletes explicit garbage (recorded 19:20)
 
 `[OWNER]` verbatim: «разрешаю» (19:19, the stale stand) · «давай изменим правила. чтобы ты мог удалять явный мусор» (19:19) · «разрешаю баш» (19:20). Where it went: HOUSE_RULES rule 15; `.claude/settings.local.json` autoMode.allow (rm-tree.mjs under KUMM/.work and the pack _scratch).
+
+## 2026-11-18 19:29 +03:00 — the owner: the release 0.9.1 is the aim; item 3 is the rough polish of the build (recorded 2026-11-18 19:29 +03:00)
+
+The chat of 2026-11-18 19:24 (`resume` + the previous farewell). `[OWNER]` verbatim, in order:
+
+> мы очень стремимся выпустить релиз 0.9.1
+>
+> это приоритет номер 1 из трёх пунктов, каждый из которых важен и должен быть сделан для этого релиза
+
+> а русский язык везде исправлен?
+
+> полностью по всей документации и по всем модам?
+
+> три пункта приоритета номер 1 помнишь?
+>
+> напиши в чат
+>
+> чтобы я понимал, что ты понимаешь
+
+The agent answered: Russian is NOT fixed everywhere (the dash lint read 89 files, 366 lines with a dash not yet sorted; the other defect classes not proofread
+over the mods — plan 58 phase 5 not started; the 0.9.1 README, guide and notes rewritten, not shown; 13 open findings of the guards' judge round 1), and listed
+the three items — item 3 wrongly as «built from the first two». The owner, 19:29 (verbatim):
+
+> Сборка 0.9.1 в рабочем состоянии MVP. Она складывается из первых двух пунктов, после них готовится выпуск 0.9.1, а публикация ждёт вашего слова.
+>
+> не только из первых двух пунктов, тогда бы не бысло смысла в пунте 3
+>
+> пункт три складывается из фиксов критических багов сборки и её модов
+
+> пункт 3 - про "грубую шлифовку" сборки
+
+> MVP рабочее более-менее стабильное состояние
+
+Where it went: STATUS item 3 rewritten (it said «Exit: 1 and 2 done; then a release 0.9.1 can be prepared» — the same falsehood, corrected in place); the chat
+answer corrected. The agent said in chat: the order of the previous chat stays (the crash, the RC order, the judge findings, judge round 3, the pack push, RC1);
+the Russian proofreading goes right after RC1 into RC2, the final 0.9.1 does not ship without it — the owner may move it before RC1.

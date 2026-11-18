@@ -51,8 +51,10 @@
 > says 1.1.0 today: settle the number with the self-update rule (`Feed.Newer`) before the release. Exit: a written case set for every function, a functional
 > run by the player's path on a real copy of the clean 3.1.1 (`HOUSE_RULES.md` 25) — every case PASS, the run reports in `testcases/reports/`.
 >
-> **3. The build 0.9.1 in a working MVP state as of 2026-11-18** — epic 55. Exit: 1 and 2 done; then a release 0.9.1 can be prepared (correct Russian, MVP
-> functions, the full launcher 1.0.0) — the publication itself waits for the owner's word.
+> **3. The build 0.9.1 in a working MVP state — the ROUGH POLISH of the build: the critical bugs of the build and its mods fixed** (critical = HOUSE_RULES 38:
+> crashes, slowdowns, lags, errors, dead buttons, dead ends, no save, no load) — a working, more-or-less stable state; epic 55. Item 3 is its own work, NOT the sum
+> of items 1 and 2 (`[OWNER]` 2026-11-18 19:29, chronicle entry 2026-11-18 19:29; corrected 2026-11-18 19:29 +03:00 — this line said «Exit: 1 and 2 done» until then). The release
+> 0.9.1 is assembled from all three; the publication itself waits for the owner's word.
 >
 > **Progress of the chats of 2026-11-18:** the latest is the block «CHAT CLOSED 2026-11-18 16:0x» in «Where to continue» below; the block CHAT CLOSED 14:3x and the earlier progress lines — chronicle, entries 2026-11-18 14:3x and 16:0x.
 > Note: other projects read the core from `D:/work/ai_sandbox/krinik_voice` (an older clone of the same repo) — it needs a `git pull` by its owner session.
