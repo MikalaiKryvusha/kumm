@@ -8442,3 +8442,15 @@ The owner's definition, 18:59 (verbatim):
 > критическое то - что касается технического состояния ПО. Креши, тормоза, лаги, не запускается, падает, ошибки, нет окна, лишние окна, не нажимается кнопка, блоккер, тупик, невозможно продолжить, не сохраняется, не загружается и так далее
 
 HOUSE_RULES rule 38 and the STATUS line carry it.
+
+## 2026-11-18 19:02 +03:00 — the owner on testing the release by the real path (recorded 19:1x)
+
+`[OWNER]` verbatim (two messages):
+
+> и нужно будет тестовую сборку собирать и тестировать качание через лаунчер по боевому пути - из релиза ГХ
+>
+> и установка на чистую версию
+
+Where it went: STATUS NOW (the next steps); the agent asked in chat where the test release lives (A a separate public test repo — recommended, B a draft /
+pre-release in the main repo — invisible to the launcher by design, C the real v0.9.1 at once); the outward step waits for his word. Also 18:55: «почему 50
+гигабайт? я помню, что архив около 13 весил» — answered (four temporary copies at the peak); `make_volumes.sh` now cuts the volumes at the release part size.

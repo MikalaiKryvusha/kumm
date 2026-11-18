@@ -158,12 +158,21 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (WH_CBT) and `live.mjs` runs in frames mode; `self.mjs` 18 cases: the full run r11 242 / 2 → both fixed (r12, r13), never 8 / 8; `batch58` 187 / 2 (never.txt
 > written mid-run; the «error» mark on a refusal → `u.Started`, fixed, NOT re-run). Versions: every Krinik mod 0.9.1 (`[OWNER]` 18:52; manifest, kit modinfo ×6,
 > Lua headers; paks Graphics / Archery / Gameplay by `set-pak-version.py`, UI rebuilt in the kit — menu lines from the manifest; originals in `.work/kit091/orig`);
-> deployed into `D:\Games\Conan Exiles 3.1.1` 4 / 4, verify 114 / 0; smoke in game RUNNING 19:01 (PID 33140, machine lock to 19:41, the owner's grant to 19:30).
+> deployed into `D:\Games\Conan Exiles 3.1.1` 4 / 4, verify 114 / 0; SMOKE PASSED 19:01–19:05 (the menu shows 3.1.1 / 0.9.1 under the logos at 4K —
+> `.work/kit091/menu_091*.webp`; the world in 8 s; 66 / 66 mounted, 0 too old / missing import; HUD, minimap, «E Взять» on a world frame; the game closed cleanly).
 > Texts: clean read (`reports/2026-11-18_clean_read_three_texts_091.md`) → the writer helper rewrote README / guide for 0.9.1 + the notes
-> `_config/release/draft_0_9_1/github_release_notes_0_9_1.md` (marker line 1); the owner's lines → `.work/texts091/owner_proposals.md` (page owed); the first-person
-> bow (look B, accepted 16.11) still to add to «Что нового». Release tooling: `_config/release/make_release.sh` (one command, [NOT-TESTED]) + `make_volumes.sh`
-> `KRINIK_VOLUME_BYTES`. NEXT: smoke → bug 85 (five `RegisterKeyBind` in KrinikConanUI → game-thread events) → judge round 2 → commits + pushes → owner page
-> (texts, D6) → `make_release.sh` → install test on a copy of the clean 3.1.1.
+> `_config/release/draft_0_9_1/github_release_notes_0_9_1.md` (marker line 1, the first-person bow added); the owner's lines → `.work/texts091/owner_proposals.md`
+> (page owed). Release tooling: `_config/release/make_release.sh` (one command, [NOT-TESTED]) + `make_volumes.sh` `KRINIK_VOLUME_BYTES` (no second 13 GB copy —
+> the owner asked 18:55 why 50 GB). KUMM `236a886`, `32e58e9` (idea 26 — the plate in the world over the item, the owner 19:06) — LOCAL.
+> **The owner's orders 19:02 (verbatim in the chat; chronicle owed):** «и нужно будет тестовую сборку собирать и тестировать качание через лаунчер по боевому пути -
+> из релиза ГХ» · «и установка на чистую версию». ASKED 19:1x in chat: where the test release lives — A a separate public test repo (recommended), B a draft /
+> pre-release in the main repo (the launcher does not see them), C the real v0.9.1 at once. Outward — waits for his word.
+> **Bug 85 (the crash class) — NOT fixed, the first item of the next chat:** five `RegisterKeyBind` in KrinikConanUI (`krinik_feedback.lua:91`,
+> `krinik_mods_button.lua:285`, `krinik_mod_settings.lua:1380`, `krinik_pause_in_menu.lua:680`, `krinik_hub_controller.lua:354`); found 18:58: `FLXButtonBase` has
+> NO click UFunction (Signal* are delegates; the click is native C++), so the replacement is research: a kit-bound custom event per button (as the attribute page
+> arrows, `kit-attribute-paging-step2.py`), the game's own Esc / Tab handling for the two key binds; hook the hero's AnyKey only in gameplay (the camera's way).
+> NEXT: judge round 2 → fixes → pushes; bug 85; the owner's page (texts + proposals + D6); his answer on the test release → `make_release.sh` → the test release →
+> the launcher downloads it on a fresh copy of the clean 3.1.1.
 >
 > **CHAT CLOSED 2026-11-18 16:0x +03:00 (chat of 14:59: the pasted farewell → «resume» → /resume in full; the owner present and steering all along; soft closure by
 > his word 16:00 «пора загругляться … Продолжим в новом чате с этого места» at ≈ 65 % of the context). The NOW block of this chat — chronicle, entry 2026-11-18 16:0x.**

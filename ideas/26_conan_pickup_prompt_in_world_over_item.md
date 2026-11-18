@@ -26,6 +26,12 @@ points at, stays over it while the hero moves near it, and grows and shrinks wit
    Check: the plate's height at 1 m and 4 m in frames, the ratio ≈ the ratio of the projected sizes.
 3. The cost stays within the build's CPU budget (MASTER_PLAN: 1 ms for all mods in the worst gameplay frame).
 
+## The reference the owner named (2026-11-18 19:07)
+
+`[OWNER]` «так сделано в Veloren, у них открытый исходный код, можно будет подсмотреть реализацию - это по моей фиче E Взять». Veloren (an open-source voxel
+RPG, Rust) draws its interaction prompts over the item in the world — the recon starts from its source (how it projects the item's position, scales the label
+by distance, keeps it over a moving camera).
+
 ## Notes for the future recon (not decided)
 
 Two industry ways to recon first: a world-space widget component on an actor spawned at the item (UMG `WidgetComponent`, Space = World — real perspective), or a
