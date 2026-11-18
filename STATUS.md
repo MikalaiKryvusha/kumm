@@ -49,31 +49,7 @@
 > **3. The build 0.9.1 in a working MVP state as of 2026-11-18** — epic 55. Exit: 1 and 2 done; then a release 0.9.1 can be prepared (correct Russian, MVP
 > functions, the full launcher 1.0.0) — the publication itself waits for the owner's word.
 >
-> **Progress (2026-11-18 10:47 +03:00, chat of 10:07 closed):** 1 — the blind quality A/B of the core works: `krinik-stylometry/eval/quality/REVIEWER_BRIEF.md` +
-> `eval/quality-prep.mjs` (judge round 1 fixed, selftest 17/17; round 2 findings OPEN — plan 58). Run 1 none vs v22 (texts of 2026-09-25): none better in
-> 18 of 24 pairs; without typography 5.82 vs 5.18 violations per 1000 words; the core's loss is the typography of the tested draft (ГЛ15 / ГЛ16, removed by
-> the owner 2026-09-25, texts never regenerated) plus noun repetition; the core cuts incomplete phrases (4 vs 10). Run 2 texts written today by one model:
-> `eval/runs/none_1118/` (24) and `eval/runs/core_1118/` (24; 01–06 expanded after their last lint). 2 — epic 57 phase 1 recon COMPLETE (the game's CL is in
-> `ProductVersion` of the Shipping exe); the owner's mockup remarks 10:16–10:36 applied (pack `c05aa51`): the version plate lower, the buttons' metal muted,
-> no state list on an installed build, the sheet one left-to-right row; KUIPS issues #1–#3. Earlier progress lines of 2026-11-18 — chronicle entry
-> 2026-11-18 10:48 (bonsai trim of the chat of 10:07).
-> **Progress 2026-11-18 14:07 +03:00 (chat of 13:13, by the owner's order of 13:35):** the Russian manuals live in the core (`krinik-stylometry/russian_norms/`,
-> core `cc3b391` pushed; KUMM `11779e3`): RUSSIAN_RULES, AI_RUSSIAN_DEFECTS, MEASURING moved; NATIVE_RUSSIAN_STYLE written (Nora Gal + corpus studies, measured on
-> 242 708 words of the owner — no §8 rows: the owner writes bureaucratic turns more than the machine); GOST_TECHNICAL_RUSSIAN written (66 rules, СТП БГУИР) and
-> BUILT IN — §8 +16 norm rows (48 now), §4 three judgment rules, §7B q13, core `ab89ba1` pushed; ACADEMIC_RUSSIAN is being written by a helper (then: its rows
-> into §8, rules into §2.4 / §7, push). A judge runs on the guards diff `.work/judges/guards.diff`; judge round 4 of quality-prep (`.work/judges/round4_quality_prep.diff`) owed.
-> ACADEMIC_RUSSIAN written (44 rules, 24 machine-checkable), core `28ec340` pushed — all SIX manuals live in the core; its ten lowest-noise rows (§4 of the
-> manual: A43, A44, A25, A24, A30, A31, A16, A18, A10, A11) are NOT yet in §8 — test them on the stand texts and the owner's corpus, then insert like the GOST
-> rows (`.work/ru-recon/gost/insert_rows.mjs`). For the owner through the contour (an interview, page in the BACKGROUND): the core's voice rows («поэтому»,
-> «обычно», «во-первых», «в заключение») vs the connectives the scientific style calls normal; «%» at every number of a range (GOST 8.417 row G28) vs Milchin 6.4.2.
-> The manuals are written in the language they teach (the owner 14:22): their own prose cleaned by the 48-row core, core `34dcfbd` pushed; a telegraphic
-> dash in a DOCUMENT has no machine row (only the build's dash_lint) — a clean-instance §7B read of all six manuals is the next check. UNCOMMITTED code waiting
-> for the judge: KUMM `tools/hooks/ru-build-text-check.mjs`, `tools/hooks/contour-page-lock.mjs` (wired, seen refusing live), core `tools/voice-check.mjs` (ЖЯ),
-> pack `_config/release/dash_lint.py`, `build-docs.py`, `modpack.json` (version notes out); core `eval/quality-prep.mjs` + brief (round 4). The register follows the purpose (interview #039 A, `HOUSE_RULES.md` 35.4):
-> the game's art text = living prose; strict rules and requirements keep bureaucratic turns for completeness; text for a person is soft and friendly. Rule 36: the
-> owner is talked to in chat, decisions go through the contour, an open page owns its document. Guards: `ru-build-text-check` now also reads the owner's Russian
-> documents (interviews, homeworks, voice, `*_ru.md`, the core's manuals) by genre — UNCOMMITTED, judge owed; `dash_lint.py` D1–D3, D5 — 370 lines found, UNCOMMITTED,
-> judge owed (plan 56). Report `testcases/reports/2026-11-18_russian-norms-guards.md`.
+> **Progress of the chat of 2026-11-18 13:13 (closed 14:3x):** the block «CHAT CLOSED 2026-11-18 14:3x» in «Where to continue» below; the earlier progress lines of 2026-11-18 — chronicle, entry 2026-11-18 14:3x.
 > Note: other projects read the core from `D:/work/ai_sandbox/krinik_voice` (an older clone of the same repo) — it needs a `git pull` by its owner session.
 >
 > 🎯 **The Conan 3.0.1 build is the main work since 2026-10-26 ≈08:30; every other game is out of priority.** `[OWNER]` «все игры пока не в приоритере, мы
@@ -169,28 +145,28 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **PARKED: 2026-11-18 13:36 +03:00 — the quality A/B instrument, switched to the owner's order «Делай то по русскому языку, что я тебя спросил выше» (13:35):**
-> `krinik-stylometry/eval/quality-prep.mjs` + `eval/quality/REVIEWER_BRIEF.md` carry the fixes of judge rounds 2 and 3, UNCOMMITTED (selftest 40/40; the run-1 tally
-> byte-identical, 110 records; diff `.work/core-eval/round4.diff`); next: judge round 4 on that diff → commit + push of the core; run-2 sheets are prepared
-> (`eval/quality/none_1118_vs_core_1118/`, key in `eval/quality-keys/`), the two blind reviewers not started. `tools/hooks/ru-reply-check.mjs` — the «check each record
-> once» change was REVERTED 13:42 (its judge: a hit first seen at a repeat Stop is never blocked; the next attempt is described in plan 58). `dash_lint.py` does NOT read
-> `kit-saved-loc/KrinikRU/ru_table.lua` (807 Russian values with a spaced dash), `asset-strings/*.tsv` (8 rows), manifest `version` notes (13 mods print dev notes on
-> the player's install) — plan 56 judge items D1–D5, not started. Resume: these four, in this order, after the Russian manuals.
-> **CHAT CLOSED 2026-11-18 10:48 +03:00 (chat of 10:07, opened by the pasted farewell → /resume; the owner's closing word 10:44–10:45 «пора закрывать это  чат, сразу после
-> твоих суб-агентов. без судейства.» — the closure's judge pass skipped by his word; his remarks 10:16–10:45 are notes at the end of the chronicle).**
-> Done: recon §2–3 checked, its last item closed by a probe; the mockups changed by his remarks 10:16–10:36 (pack `92a661d`, `d4eb0b0`, `c05aa51`);
-> `HOUSE_RULES.md` 34.2 (the sheet is opened once, a rebuild says «F5») and 34.4 (the flow runs left to right); KUIPS issues #1 (flow direction), #2 (favicon),
-> #3 (refresh an open sheet); the core quality instrument and run 1 (plan 58); EXP-0562 (a stand measures the core version that wrote its texts).
-> **FIRST NEXT CHAT** (the 🔥 block above is the order): (a) the core — fix the judge's round 2 findings in `krinik-stylometry/eval/quality-prep.mjs` (plan 58
-> list, the two defects first) and send the diff to a fresh judge; re-run `node krinik-stylometry/tools/voice-check.mjs --genre document` on
-> `eval/runs/core_1118/01–06` and measure their words; then `node krinik-stylometry/eval/quality-prep.mjs none_1118 core_1118` → two clean reviewers, blind,
-> odd / even pairs, by `eval/quality/REVIEWER_BRIEF.md` (the run-1 prompts are in this chat's plan 58 record) → `--tally none_1118 core_1118` → plan 58 run 2 and
-> a row in the core's `METHODOLOGY.md` §7 → act on the result (the «тот же» row's noun repetition, «Так,» commas); then phase 5 — proofread every agent text of
-> the build, surface by surface; (b) the owner's verdict on the mockups → epic 57 phase 2 (it carries the muted version plate and the bare installed column into
-> `KrinikConanLauncher.cs`); (c) ONE game run: the dm-fish locres sample + the hub rows' hints + the crash offer on the real build folder; (d) owed: launcher
-> R3, R5, four stale comments; `ru-reply-check` risks (plan 58, corrected 2026-11-18 13:42: repeat Stops re-read checked text, 17 of 1175 records never checked; one log record 2026-11-18 06:32Z with a JSON
-> parse error of the hook's input).
-> **Moved verbatim to the chronicle (entry 2026-11-18 10:48 +03:00):** the NOW block of the chat of 10:07, the block CHAT CLOSED 2026-11-18 09:3x with its
+> **CHAT CLOSED 2026-11-18 14:3x +03:00 (chat of 13:13, opened by the pasted farewell → /resume; /dayloop on the 🔥 priority; soft closure at 81 % of the context).**
+> Done: the owner's order of 13:35 — all SIX Russian manuals live in the core `krinik-stylometry/russian_norms/` (RUSSIAN_RULES, AI_RUSSIAN_DEFECTS, MEASURING moved;
+> NATIVE_RUSSIAN_STYLE, GOST_TECHNICAL_RUSSIAN, ACADEMIC_RUSSIAN written; their own prose cleaned by the core); core §2.4 register by purpose (interview #039, A) and ЖЯ1–ЖЯ6,
+> §4 three GOST judgment rules, §7B questions 10–13, §8 +16 GOST norm rows (48); HOUSE_RULES 35.4 (register by purpose), 35.5 (ALL Russian strictly by the manuals),
+> 36 (chat conversation; decisions through the contour; an open page owns its document); guards: `contour-page-lock` (new), `ru-build-text-check` reads the owner's
+> Russian documents; the pack's dash lint reads the mods' translation (366 untriaged lines), the launcher is linted; the instrument quality-prep after judge rounds 2–3.
+> Commits: core `cc3b391` `ab89ba1` `34dcfbd` `28ec340` `4b4e9c5`; KUMM `3899627` `11779e3` `b8c6a52` `21e2b7c` `17681cd` + the closure; pack `d2eb476`.
+> **FIRST NEXT CHAT (the owner's order of 14:31–14:32 first, then the 🔥 block):**
+> 1. **The rewrite by the manuals of the build's README, the 0.9.0 release notes and the user guide** — two helpers of this chat wrote into the pack's working tree:
+>    `_config/public_release/README.template.md`, `_config/release/published_0_9_0/github/github_release_notes_2026-11-18.md` (new), `docs/guide/guide-3.1.1.html`.
+>    First make sure they finished (`git -C D:/work/ai_sandbox/ConanExiles status --short`; the files stop changing). Then: the three checks (`kaif-voice-lint.mjs check`,
+>    `krinik-stylometry/tools/voice-check.mjs --genre document`, `dash_lint.py --only`), a parity check of facts against `git diff`, a clean-instance read, then SHOW the owner
+>    (one HTML page, `HOUSE_RULES.md` 32 / 1a); publication (`gh release edit`, the public README) only after his word. `HOUSE_RULES.md` 35.5 governs all of it.
+> 2. **Fix the guards judge's open findings** — plans/58 «Guards judge round 1»: 3–8, 10–16 (the owner-text check flags his recorded words; ru-ok spelling; multi-line comments;
+>    BUILD_TEXT paths; the D5 copy-paste of `\n` hits; the generated `ru_table.lua`; silent fail-open); then run `python -I -X utf8 _config/release/build-docs.py` by the owner's
+>    path (expected: PDF refused, launcher built, exit 1 naming the cause) and a second judge round.
+> 3. **The academic rows into §8** — the ten of `ACADEMIC_RUSSIAN.md` §4 (A43, A44, A25, A24, A30, A31, A16, A18, A10, A11), tested on the stand texts and the owner's corpus,
+>    inserted like `.work/ru-recon/gost/insert_rows.mjs`; and an interview through the contour (page in the BACKGROUND, never under `timeout`) for two forks: the core's voice
+>    rows («поэтому», «обычно», «во-первых», «в заключение») vs the scientific style's connectives; «%» at every number of a range (GOST 8.417) vs Milchin 6.4.2.
+> 4. A clean-instance §7B read of all six manuals (a telegraphic dash in a document has no machine row); the 366 translation lines by the pass-3 method (plan 56);
+>    judge round 4 of quality-prep, then run 2 (two blind reviewers, `eval/quality/none_1118_vs_core_1118/`, the run-1 prompts in plan 58), `--tally`, act on it.
+> 5. Then the 🔥 items 2–3: the launcher (epic 57 phase 2 after the owner's verdict on the mockups), the build 0.9.1.
 > FIRST NEXT CHAT, and the progress paragraphs of 09:25 and 10:25. Their open items are carried in FIRST NEXT CHAT above.
 > **Moved verbatim to the chronicle (entry 2026-11-18 09:34 +03:00):** the NOW block of the chat of 2026-11-18 00:40. Still open from it: ONE game run (the hub rows' new hints, a locres sample of the dm-fish rows, the crash offer on the real build folder); epic 55 D4 («Что нового» 0.9.1, known issues, release notes by the owner's portrait); launcher R5 (the space need after a stopped unpack). Done in the chat of 08:10: the launcher judge round + the push, dm-fish (pass 3, in the build), the KUMM force-push.
 > **Moved verbatim to the chronicle (entry 2026-11-18 01:37 +03:00):** the blocks CHAT CLOSED 2026-11-17 22:1x, NOW 19:43 and NOW 14:40. Still open from them: the walking bow draw (bug 104, the post-process route), the owner's real-key checks (wall hang drain, RMB through a wall push, bug 105 G1 / G5b / G10 / G7, G6), bug 93 (the held draw ends in a sprint); the auto-relay L1″ / L2 / L3 after the owner's «Do not ask me again» tick.
