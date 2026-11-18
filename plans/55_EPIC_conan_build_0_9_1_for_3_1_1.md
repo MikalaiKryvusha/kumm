@@ -209,7 +209,9 @@ map markers (`SimpleMinimap_MarkerData.sav`), the damage logs and `Game_0.db` ar
   боевому пути - из релиза ГХ» · «и установка на чистую версию»). The ordering is classic software versioning (`[OWNER]` 2026-11-18 19:09 «это классические правила версионирования ПО») — SemVer 2.0.0 §11: a
   pre-release sorts below its release; the RC number compares as a number (RC10 after RC9). Web check 2026-11-18 19:10 (a quick one, the owner's ask): SemVer
   orders `1.0.0-rc.1 < 1.0.0-rc.2 < 1.0.0` (https://semver.org/ — numeric identifiers compare numerically only when dot-separated: `rc.10` > `rc.2`, but the
-  text `RC10` < `RC2`); RC1, RC2 … each with the fixes of the round before is common practice (Windows Vista's RC1 → RC2, Linux `6.11-rc1` … `-rc7`, WooCommerce). OWED before RC1 goes out: `Feed.ParseVersion` cuts at the dash — it must order
+  text `RC10` < `RC2`); RC1, RC2 … each with the fixes of the round before is common practice (Windows Vista's RC1 → RC2, Linux `6.11-rc1` … `-rc7`, WooCommerce).
+  **The format is the Linux kernel's, no dot: `0.9.1-RC1`, `0.9.1-RC2`** (`[OWNER]` 2026-11-18 19:11 «мы делаем как Линус, без точки») — the launcher reads the
+  digits after `RC` as a number, so the order holds without the dot. OWED before RC1 goes out: `Feed.ParseVersion` cuts at the dash — it must order
   RC1 < RC2 < … < 0.9.1 (the manifest's `packVersion` «0.9.1-RC1», the archive name, the menu line and `pack_version.txt` carry the RC too), with stand cases.
 
 - **0.9.1 is published as an ordinary GitHub release, NOT «Pre-release»**: the launcher's feed skips drafts and pre-releases (`ConanExiles/_config/launcher/KrinikConanUpdates.cs`

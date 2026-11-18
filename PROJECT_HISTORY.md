@@ -8470,3 +8470,5 @@ ordinary release titled «0.9.1-RC1 (тестовая сборка)» for the re
 order RC1 < RC2 < … < 0.9.1 so an RC player sees the next RC and the final as updates (owed, before RC2).
 
 The owner, 19:09 (verbatim): «это классические правила версионирования ПО» — plan 55 phase E: SemVer 2.0.0 §11 precedence, the RC number compared as a number.
+
+The owner, 19:11 (verbatim): «мы делаем как Линус, без точки» — the RC format is 0.9.1-RC1 (plan 55 phase E).
