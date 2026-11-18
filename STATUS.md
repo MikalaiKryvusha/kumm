@@ -132,8 +132,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > in `KrinikConanLauncher.cs` (`LVER_*`, `capsCenter`), seen on a 4K snapshot; judge round running, pack commit after it. (4) **NEW EPIC — `plans/57_EPIC_conan_launcher_self_sufficient.md`**
 > (08:18–08:22): the launcher finds the game on the disks, sees / downloads the latest release for the found game version, installs; a Conan-coloured
 > progress bar with %, download speed, remaining and elapsed time. **Phase 0: 12 mockups in KUIPS** (`HOUSE_RULES.md` 34; `ConanExiles/_config/launcher/design/`,
-> sheet `design/flow-map.html` opened for the owner 08:29) — **waiting for his verdict**, then phase 1 recon. (5) Still open from the chat of 00:40 (below): the launcher
-> judge round + the pack push; dm-fish pass 2 under the new scope; the game run; D4 notes; the KUMM force-push (the owner's call).
+> sheet `design/flow-map.html` opened for the owner 08:29) — his remarks 08:37–08:44 applied (modal copy picker, bulleted aligned metrics, gold CTA at the column
+> top, gold centred update plate), sheet reopened 08:46 — **waiting for his verdict**, then phase 1 recon (`researches/conan-launcher-self-sufficient/`).
+> (5) **0.9.1 waits for epic 57** (the owner 08:35). (6) **Pack PUSHED 08:55 `bd7f96c..bd515fe`** — judge round 4 fixed (the stand wrote 8 files into the
+> owner's %LOCALAPPDATA%, removed; stand 191 / 0 with an owner-folder check; report `testcases/reports/2026-11-18_conan-launcher-judge4-fixes.md`); owed: R3,
+> 4 stale comments. (7) **dm-fish pass 3 READY, not applied** (plan 56: 83 OK + 26 merged, legal dashes kept; `.work/dash_fix/pass3/`); next: write, allow list,
+> locres, in-game sample; then restore the legal dashes of `2d4b104` (plan 56 list). Still open: the game run; D4 notes; the KUMM force-push (the owner's call).
 >
 > **NOW (chat of 2026-11-18 00:40, `resume` + «работай автономно в дневном цикле до переполнения контекста - затем закрывай чат» → /dayloop).**
 > (1) **Epic 55 B7 verified** — batch on the final exe 138 / 0, control on 2f62b52 26 FAIL in the new cases, the button corners seen fixed on the live window
