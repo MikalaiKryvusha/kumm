@@ -57,7 +57,9 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
       bulleted grid (dot · label · value, values on one vertical, tabular figures, so changing numbers do not move the line); the gold CTA at the top of the
       column on a fixed place, the state under it, «Руководство» / «Отзыв» / «Удалить сборку» at the bottom; the update plate — 3 px metal frame, lighter
       background, the gold «Обновить сборку» centred. Sheet rebuilt and reopened 08:46, `check` 0.
-- [ ] The owner's verdict → fix the mockups → phase 1.
+- [x] 2026-11-18 09:3x: the mockup strings re-read with the owner's portrait loaded (rule 35): four seams fixed (a pronoun for a name, two colons in a
+      line, a cause joined by a comma, a cognate repetition); pack `a6b9540` also carries the 08:37–08:44 iterations, which had stayed uncommitted.
+- [ ] The owner's verdict → fix the mockups → phase 1 (recon helper running 09:3x → `researches/conan-launcher-self-sufficient/README.md` §2–3).
 
 ## Decisions made without the owner
 
