@@ -137,7 +137,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (5) **0.9.1 waits for epic 57** (the owner 08:35). (6) **Pack PUSHED 08:55 `bd7f96c..bd515fe`** — judge round 4 fixed (the stand wrote 8 files into the
 > owner's %LOCALAPPDATA%, removed; stand 191 / 0 with an owner-folder check; report `testcases/reports/2026-11-18_conan-launcher-judge4-fixes.md`); owed: R3,
 > 4 stale comments. (7) **dm-fish pass 3 READY, not applied** (plan 56: 83 OK + 26 merged, legal dashes kept; `.work/dash_fix/pass3/`); next: write, allow list,
-> locres, in-game sample; then restore the legal dashes of `2d4b104` (plan 56 list). Still open: the game run; D4 notes; the KUMM force-push (the owner's call).
+> locres, in-game sample; then restore the legal dashes of `2d4b104` (plan 56 list). Still open: the game run; D4 notes. (8) **KUMM force-pushed 09:00 by the owner's
+> word** (`2eba534...3e6a76e`; the replaced commit = local `82260a4`, same tree, message cleaned) — KUMM pushes normally again.
 >
 > **NOW (chat of 2026-11-18 00:40, `resume` + «работай автономно в дневном цикле до переполнения контекста - затем закрывай чат» → /dayloop).**
 > (1) **Epic 55 B7 verified** — batch on the final exe 138 / 0, control on 2f62b52 26 FAIL in the new cases, the button corners seen fixed on the live window

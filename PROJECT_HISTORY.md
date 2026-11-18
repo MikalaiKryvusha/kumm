@@ -7872,3 +7872,11 @@ Where it went: the `choose` screen of the KUIPS mockups is a modal dialog with a
 > Все метрики в колонку на своих строках, чтобы НЕ ПРЫГАЛИ, когда в них блять цифры меняться будут, т.е. равнение по левому краю
 
 Where it went (mockups, sheet reopened 08:46): state as a bulleted grid (dot · label · value, values on one vertical, tabular figures); the gold CTA at the top of the column on a fixed place, the state under it, «Руководство», «Отзыв», «Удалить сборку» at the bottom (`[AI]` reading of «всё место над ней» as the space under the CTA, said to him in chat); the update plate — 3 px metal frame, lighter background, the gold «Обновить сборку» centred.
+
+**08:59 — the KUMM force-push authorised.** `[OWNER]` verbatim (the second line typed in the English layout, «РАЗРЕШАЮ»):
+
+> git push --force-with-lease origin main
+>
+> HFPHTIF>
+
+Done 09:00: `2eba534...3e6a76e (forced update)`; the replaced remote commit `2eba534` had the same tree as local `82260a4` (0 files differ), only its message held a word that must not stand in the public history. `origin/main...main` = 0 / 0 after the push.
