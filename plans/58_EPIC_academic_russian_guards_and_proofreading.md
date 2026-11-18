@@ -16,26 +16,30 @@
 Instrument: `krinik-stylometry/eval/quality/REVIEWER_BRIEF.md` (nine classes after Головин incl. completeness and coherence, ФИПИ-style counts, every record
 quotes its place) + `eval/quality-prep.mjs` (blind sheets without the author's reference, key apart, sha freeze, quotes checked by script); TC
 `testcases/TC_core_quality_ab_2026-11-18.md`. Run: none (no core) vs v22 (texts of 2026-09-25 written by «core 2.2 under test»), 24 tasks, two clean
-reviewers (odd / even pairs, all six genres each). All 141 quotes found in their texts, 0 dropped.
+reviewers (odd / even pairs, all six genres each). All 110 records (57 + 53) kept: every quote found in its text, also under the stricter checks of
+the judged instrument (whole words, 3–12 words, typography matched without folding dashes and quotes). Corrected 2026-11-18 10:42 +03:00: this line said «141 quotes» at
+10:28 (and so did the body of KUMM commit `64acdc7`); the reviewers' own totals are 57 and 53.
+
+Numbers by the judged instrument (2026-11-18 10:42 +03:00; list numbers are no longer counted as words, so the per-1000 values moved by ≤ 0.2 against the 10:28 draft):
 
 | Measure | none | v22 |
 |---|---|---|
 | Pairs judged better | 18 | 5 (1 tie) |
-| Violations per 1000 words, all | 5.77 (22 / 3814) | 23.8 (88 / 3697) |
+| Violations per 1000 words, all | 5.82 (22 / 3782) | 23.99 (88 / 3668) |
 | Typography (hyphen for the dash, straight quotes) | 0 | 69 |
-| Violations per 1000 words without typography | 5.77 (22) | 5.14 (19) |
+| Violations per 1000 words without typography | 5.82 (22) | 5.18 (19) |
 | Completeness (полнота) | 10 | 4 |
 | Coherence (связность) | 3 | 0 |
 | Correctness (правильность) without typography | 4 | 12 («Так» = «например» without a comma ×5, status lines without a full stop ×3, …) |
-| Seams of the current §8, per 1000 words (machine) | 8.13 | 0 |
+| Seams of the current §8, per 1000 words (machine) | 8.20 | 0 |
 
 Reading: (1) the typography loss belongs to the tested draft, not to the current core: «core 2.2 under test» carried ГЛ15 / ГЛ16 (write the author's
 hyphen and straight quotes), the owner removed them the same day (core journal 2026-09-25, interview 039), and the stand's texts were never regenerated;
-(2) without typography the variants are close (5.14 vs 5.77), the core cuts incomplete phrases (4 vs 10) and loses on punctuation; (3) both reviewers
+(2) without typography the variants are close (5.18 vs 5.82), the core cuts incomplete phrases (4 vs 10) and loses on punctuation; (3) both reviewers
 named obtrusive repetition of nouns and terms in the core's texts as a reason for the verdict, every time on the v22 side (sheets 01, 05 · 02, 04; checked
 against the key; repetition is not one of the nine classes) — a candidate side effect of the
-§8 row against «тот же» («name the thing again»). Next: regenerate the 24 texts with the CURRENT core and repeat the A/B; a typography class of its own in
-the brief.
+§8 row against «тот же» («name the thing again»). Next: regenerate the 24 texts with the CURRENT core and repeat the A/B (run 2: `none_1118` written
+2026-11-18 10:42 +03:00, `core_1118` in progress); the brief has a typography class of its own since 2026-11-18 10:42 +03:00.
 
 ## Goal vector (Avoid + Achieve)
 

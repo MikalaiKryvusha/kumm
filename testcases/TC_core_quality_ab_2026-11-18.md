@@ -32,10 +32,11 @@ number with quotes behind it, not an impression.
 
 | # | Case (steps → expected) | Technique | Status + evidence |
 |---|---|---|---|
-| C1 | `node eval/quality-prep.mjs --selftest` → 6/6 | guess + partition | pass — 2026-11-18 10:14, 6/6 |
+| C1 | `node eval/quality-prep.mjs --selftest` → all pass | guess + partition | pass — 2026-11-18 10:14, 6/6; after the judge's round 1 2026-11-18 10:43 +03:00 17/17 |
 | C2 | `node eval/quality-prep.mjs none v22` → 24 sheets, 12 flipped, no «Эталон» on a sheet | boundary | pass — 2026-11-18 10:15: «пар: 24 · в обратном порядке: 12»; grep «Эталон» empty |
-| C3 | Two reviewers write `verdicts_odd.json`, `verdicts_even.json` (12 keys each) → `--tally none v22` prints wins, violations per 1000 words by class, dropped records | use-case walk | [NOT-TESTED] — reviewers running |
-| C4 | Read 5 random kept records against the texts by eye → each is a real violation of its class | error guessing | [NOT-TESTED] |
+| C3 | Two reviewers write `verdicts_odd.json`, `verdicts_even.json` (12 keys each) → `--tally none v22` prints wins, violations per 1000 words by class, dropped records | use-case walk | pass — 2026-11-18 10:43 +03:00 after the judge's round 1 fixes: 24 of 24 pairs, 110 records kept, 0 dropped; none 18 · v22 5 · tie 1; typography in its own class (v22 69) |
+| C4 | Read the kept records against the texts by eye → each is a real violation of its class | error guessing | pass with a finding — 2026-11-18 10:27: all non-typography records of both variants read; the even reviewer tagged hyphen-for-dash as правильность without row 33 → the typography class and the legacy rule `isTypo` (why mentions «дефис вместо тире» / «прямые кавычки») |
+| C5 | Re-prepare over existing verdicts; tally with the variants swapped | error guessing | pass — 2026-11-18 10:43 +03:00: both refuse with exit 2 and a reason |
 
 ## 5. Control cases
 
