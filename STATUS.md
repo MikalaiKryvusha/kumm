@@ -181,50 +181,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > NEXT: round 2's fixes → round 3 → pushes; bug 85; the owner's page (texts + proposals + D6); his answer on the test release → `make_release.sh` → the test release →
 > the launcher downloads it on a fresh copy of the clean 3.1.1.
 >
-> **CHAT CLOSED 2026-11-18 16:0x +03:00 (chat of 14:59: the pasted farewell → «resume» → /resume in full; the owner present and steering all along; soft closure by
-> his word 16:00 «пора загругляться … Продолжим в новом чате с этого места» at ≈ 65 % of the context). The NOW block of this chat — chronicle, entry 2026-11-18 16:0x.**
-> Done: the 🔥 priority answered (none of the three closed); the launcher mockups ACCEPTED 15:03 → strings rewritten by whole sentences + a clean-instance read, the
-> language DROPDOWN (screen «language»), plan 57 criteria 10–13 (languages; Windows UI language first, the choice saved; window centred; taskbar button, the stand
-> invisible); `HOUSE_RULES.md` 35.6 (rewrite by whole sentences / blocks, facts by `tools/text-fact-parity.mjs`) and 37 (images: WebP where readable, JPEG 95
-> otherwise; one `art/` folder); interview #040 answered (Q1 B, Q3, Q4 applied; Q2 owed); the wallpapers moved into the pack; V2 «Тёплый» / «Реализм» from his
-> upscales, Realism = the launcher's background and the 0.9.1 covers (draft, digits with a light shadow); README / notes 0.9.0 / guide rewritten by 35.6 (DRAFT);
-> the pack tidy pass 1. Pack: `8651fce` `95f8b52` `75b310e` `2ccd63f` `c8b177f` `711846c` `104bef6` `09d5c40` `37a2263` (+ the launcher helper's `590495e`); KUMM up to the closure commit.
-> **FIRST NEXT CHAT («с этого места»):**
-> 1. **The three texts (pack `37a2263`, DRAFT, not shown):** a clean-instance §7B read of README / notes 0.9.0 / guide, then ONE page of whole-block pairs for the owner
->    (`.work/rewrite_by_blocks/{readme,notes,guide}.pairs.json` — 11 / 26 / 75 pairs; rebuild scripts in the same folder); his word on the 4 guide fact edits («собиралась под
->    каждую её версию из таблицы ниже», «Версия 0.9.0 вышла…», the shader line without «а не при первом появлении эффекта», «Себя лаунчер обновляет отдельно от сборки»); open: the notes' English half has no «Links» section; README items
->    still say 3.0.1 (from the original — fix at the 0.9.1 step). Publication only by his word.
-> 2. **The launcher (epic 57):** the helper's pack `590495e` + KUMM `639594f` (TC `testcases/TC_conan_launcher_self_sufficient_2026-11-18.md`, run report
->    `testcases/reports/2026-11-18_conan-launcher-self-sufficient.md`, verdict PARTIAL): game search on every drive (Steam registry + both `libraryfolders.vdf` formats,
->    `X:\Games`, Program Files, a 15 s drive walk), the version by the Shipping exe's CL, release matching by a line `<!-- krinik-game: 3.1.1 CL-383549 -->` in the
->    release body (epic 55 D must WRITE it; v0.9.0 has none), download with resume, one progress bar, RU / EN tables, the choice saved. Criteria 1–11 pass on stand
->    builds; the 16:00 fixes (window placement, the folder dialog off the frames stand, list paths) are NOT re-run on the final exe; 12 computed and logged only; 13 not
->    run; the language DROPDOWN not built (still the RU | EN plate). Next, in order: rebuild the stand exe `python -I -X utf8 ConanExiles/_config/launcher/test/make_variant.py
->    D:/work/ai_sandbox/KUMM/.work/launcher57/build 1.1.0` (TEMP/TMP `.work\tmp`); the full re-run (commands in the run report: `batch1.sh` with the 16 cases, then `shots.sh`);
->    build the dropdown (`LangSwitch` in `KrinikConanWidgets.cs`, geometry of the mockup screen `language`); X1 `bash .work/launcher54/batch58.sh`; K1 on
->    `.work/launcher57/old/`; judge rounds on `590495e`; a clean-instance read of its new Russian strings; show the owner its three screens not on the mockups
->    (rule 23: «проверяет выпуски», «не связался с GitHub» + «Проверить ещё раз», «Вы остановили скачивание»). Found: on this machine the launcher offers the clean
->    version in `D:\Instals` as an install target — exclude it (rule 25); never quote the name of the clean version's subfolder (it names where the download came from) in a committed text. The version is DECIDED: 1.0.0
->    (the owner 16:18; manifest, mockups and the sheet changed in pack `eec880b`) — the launcher's TC version lines and two code comments that say 1.1.0 follow.
-> 3. **Interview #040 Q2 — one `art/` folder at the pack root** (logos, icons, wallpapers, wallpapers_source, screenshots): `_config/release/build-docs.py` is committed (pack
->    `590495e`), so the move is free: first `git -C D:/work/ai_sandbox/ConanExiles status` clean; then move the art, update `make-res.py` (`BRANDING`), `build-docs.py` (`LAUNCHER_ICON`),
->    `modpack.json` extras (the bundle folder name stays «Wallpapers»), `icon/make_icons.py`, `logos-on-shot.py`, the devkit comments; verify: make-res rebuilds `res/*`
->    byte-identical, every extras path resolves, `make_public_tree.py` run; `build_nexus_description.py` RAW logo path moves in the SAME release as the public tree.
-> 3a. **A dev launcher for the owner (his ask 16:20 «а мне на рабочйи стол положите ярлык лаунчера? хоть какую-то любую текущую версию дев»):** built 16:21 by
->    `make_variant.py` (1.0.0, V2 Realism q95) into `.work/launcher_dev/`, copied to `D:\Games\Conan Exiles 3.1.1\Krinik_Launcher_dev\` (+ the build icon); his desktop has
->    «Krinik Conan (dev).lnk» → that exe. Not started by the agent. Replace it with each new launcher build; remove both when the real 1.0.0 ships.
->    16:23: the owner saw the cursor change size on the buttons → pack `21075fb` (the system IDC_HAND instead of WinForms' fixed `Cursors.Hand`; reflection check
->    `.work/launcher_dev/check_hand.ps1` OK, control on the old exe FAIL); the dev copy replaced — his eye confirms the size; judge owed with `590495e`.
-> 4. **The owner's answers of 16:18 (applied, pack `eec880b`):** the v1 wallpapers stay for players, renamed V1; the no-release screen gets NO hint for the player;
->    the launcher is 1.0.0 («так как это его первое появление на свет будет»).
-> 5. **Judges owed:** `tools/text-fact-parity.mjs` (judge round 1 at the closure: its cited runs reproduce; 9 code findings, fix next — MEDIUM: a stray `<` in Markdown prose hides the facts after it
->    (line 34 strips «<…>» across lines); a missing file or a bad rev exits 1 (the code for «facts missing») instead of 2; facts the patterns cannot see — `1080p`,
->    `3840x2160`, lowercase Latin names, unquoted Cyrillic names, `alt` text, single-quoted `href`, hex entities; LOW: Cyrillic words read as units («10 стрел» → `10 с`),
->    Latin names merge with the next number, overlapping `3.1.1` / `1.1`, entity decode order, the header still `[NOT-TESTED]`, no fixture); the launcher helper's commits.
-> 6. **Older still-open items** (verbatim in the chronicle, entry 2026-11-18 16:0x): plan 58 guards judge findings 3–8, 10–16, then `build-docs.py` by the owner's path and a
->    second judge round; the ten academic rows into the core's §8 + the interview on «поэтому / во-первых» and «%» in a range; a clean §7B read of the six manuals; the 366
->    translation lines (plan 56 pass 3); quality A/B run 2; ONE game run (hub hints, dm-fish locres, the crash offer); epic 55 D4; launcher R5; bugs 104, 105 (G1 G5b G10
->    G7, G6), 93; plan 53 step 12; plan 52 put-away; the auto-relay L1″ / L2 / L3; interview #035; the wall-jump R6; bugs 91, 101 item 4, 75; M6 ping; the owner's play items.
+> The block «CHAT CLOSED 2026-11-18 16:0x» (the chat of 14:59, its FIRST NEXT CHAT list) — moved verbatim to the chronicle, entry 2026-11-18 19:2x.
 
 ## Open bugs
 
