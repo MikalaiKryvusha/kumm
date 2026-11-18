@@ -56,6 +56,12 @@
 > `MEASURING_RUSSIAN_TEXT.md`. Next for 1: the judge round on the hook + core change (running); restore the legal dashes of `2d4b104` (plan 56 list); a write
 > gate for the build's text files; the reviewer brief by the measure; the in-game sample. 2 — mockups wait for the owner's verdict; phase 1 recon started.
 > Note: other projects read the core from `D:/work/ai_sandbox/krinik_voice` (an older clone of the same repo) — it needs a `git pull` by its owner session.
+> **Progress (2026-11-18 10:25 +03:00, chat of 10:07):** 1 — the blind quality A/B of the core built: `krinik-stylometry/eval/quality/REVIEWER_BRIEF.md` (Головин's qualities +
+> completeness + coherence, ФИПИ-style counts, quotes checked by script) and `eval/quality-prep.mjs` (selftest 6/6, control K1 pass); first run none vs v22
+> (24 pairs, two clean reviewers, odd / even) — running; machine half by the current §8: none 8.13 seams / 1000 words, v22 0, v21 0, v12 3.23
+> (`.work/core-ab/seams.mjs`); TC `testcases/TC_core_quality_ab_2026-11-18.md`. 2 — phase 1 recon COMPLETE (the CL is in `ProductVersion`, 1.1 ms);
+> the owner's mockup remarks 10:16–10:20 applied (pack `92a661d`): version line lower in a light plate, no state list on an installed build, the sheet one
+> left-to-right row (rule 34.4); upstream improvement KUIPS issue #1 (his word 10:20).
 >
 > 🎯 **The Conan 3.0.1 build is the main work since 2026-10-26 ≈08:30; every other game is out of priority.** `[OWNER]` «все игры пока не в приоритере, мы
 > работаем дат сборкой конана» · «она 1_ должна работать стабильно 2_ моды не должны конфликтовать, должны быть рабочими 3_ не должно быть
@@ -150,6 +156,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW — chat of 2026-11-18 10:07** (opened by the pasted farewell; /resume). Done: (a) recon §2–3 checked, its last open item closed by a probe;
+> the 10:16–10:20 mockup remarks; KUIPS #1. In flight: the core quality A/B (C3, C4 of the TC) → tally `node krinik-stylometry/eval/quality-prep.mjs --tally none v22`
+> → write the result into plan 58 and the core's METHODOLOGY journal → commit in the core repo (REVIEWER_BRIEF, quality-prep, sheets, key, verdicts, result).
+> Next: a new generation run with the CURRENT core (2.2 + 11 rows) on the 24 briefs, the same A/B; the guard log `.work/ru-reply-log.jsonl` has one record
+> 2026-11-18 06:32Z with `error: Bad control character in string literal` instead of hits — check `ru-reply-check.mjs` input parsing.
 > **CHAT CLOSED 2026-11-18 09:3x (chat of 08:10, `выполни resume` → the owner's words 08:11–09:13 → `работай автономно` → /dayloop; chronicle entry 2026-11-18 08:11).**
 > Done: the dash rule scoped (`HOUSE_RULES.md` 33.5); launcher version line + judge round 4 (stand kept out of the owner's %LOCALAPPDATA%; 191 / 0), pack pushed;
 > epic 57 opened, 12 KUIPS mockups with his remarks applied (`ConanExiles/_config/launcher/design/`, sheet `design/flow-map.html`); 0.9.1 waits for epic 57;
