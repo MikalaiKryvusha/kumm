@@ -8575,6 +8575,44 @@ next version; the two items left are the full launcher 1.0.0 and the rough polis
 after RC1 into RC2» goes with it to the next version. Plan 58's header carries the move. Rules 33 and 35 and the hooks that already run stay in force — the
 move takes the WORK item (the proofreading of every string, the exit criteria) out of 0.9.1, not the rules.
 
+## 2026-11-18 20:54 +03:00 — the owner: RC1 is built in THIS chat and uploaded to GitHub to test the full install path (recorded 2026-11-18 20:55 +03:00)
+
+`[OWNER]` verbatim (mid-turn, while the agent recorded the 20:51 word):
+
+> нужно стремиться к тому, чтобы в этом чате собрать RC1 и для теста полного пути установки сборки залить его в GH
+
+Where it went: STATUS «Where to continue» — the aim of the chat; it is also the owner's word for the outward step of plan 55 phase E (the release 0.9.1-RC1 in
+our repository, 19:08), so the upload needs no further question once RC1 is built and verified.
+
+## 2026-11-18 20:57–21:08 +03:00 — the owner: judges after every code step; the release texts; the bilingual user guide (recorded 2026-11-18 21:08 +03:00)
+
+`[OWNER]` verbatim, in order (mid-turn, while the agent worked on the RC1 order the 20:54 entry names):
+
+> Номер 0.9.1-RC1 появится в манифесте и модах,
+>
+> после этого тоже судейство и ревью кода и фиксинг
+
+> Лаунчер должен понимать порядок версий RC1 < RC2 < 0.9.1.
+>
+> то есть, после этого
+
+> юзер мануал
+> README
+> релиз ноутсы 0.9.1
+>
+> Переписаны корректным русским языком и английским ???
+
+> мы готовимся к выпуску
+
+> делаем юзермануал двуязычным
+>
+> после русских страниц - ставим EN страницы
+
+Where it went: STATUS «AIM OF THE CHAT» order — a judge round, code review and fixes after the launcher's RC order AND after the 0.9.1-RC1 version step; the
+answer on the texts (pack `5f1544f`, 19:05: the guide Russian only, README and notes RU + EN, all DRAFT — written by the portrait, machine checks 0, never read by a
+clean instance, never shown; the English halves checked by nobody) and the step «clean read RU + EN → fixes → one page of pairs» before RC1; the guide gets
+English pages after the Russian ones (plan 55 R4 / D4).
+
 ## 2026-11-18 19:40–20:01 +03:00 — the owner: EAA's window and Esc; review and manual testing of new code; «where are the arts» (recorded 2026-11-18 20:07 +03:00)
 
 `[OWNER]` verbatim, in order:

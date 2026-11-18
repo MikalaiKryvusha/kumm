@@ -31,7 +31,7 @@ Input source (real mouse / real key · the remote) × place (main menu · Esc me
 | R1 | Recon by the remote: the UFunctions of `WindowRoot`, `GUIModuleController`, `FLXButtonBase` whose names hold close / shortcut / signal / module | a list in the bug document | — |
 | R2 | Recon by real keys: with probe hooks on the candidates of R1, Esc and Tab close the hub; Esc closes our window | the hooks that fire on each path, in the bug document | — |
 | K1 | Main menu: a real click on the feedback plate | the section logs the click in `W_MainMenu_MainMenu_C`, the collector starts once; a second click within 5 s is ignored | — |
-| K2 | Esc menu: a real click on the feedback plate | the same in `W_IngameMenu_C` | — |
+| K2 | Esc menu: a real click on the feedback plate | the same in `W_IngameMenu_C` | PASS 2026-11-18 21:17 — a real click on «ОТЗЫВ» in the Esc menu: the collector started, the second press 0.25 s later «click ignored (debounce)»; the collector stopped by PID, the desktop unchanged (report `2026-11-18_conan-keybinds-judge2-run.md`) |
 | K3 | Gameplay: 20 real LMB attacks | no line of the feedback, settings-window or mods-button sections; the guard prints zero | — |
 | K4 | Our window: real clicks on a checkbox, a mod name, an «i», the reset, save, save-and-close and close buttons | each does what it did with the key bind; the close button closes the window (new: it did nothing before) | — |
 | K5 | Our window over the hub: a real Esc | the window closes, the hub stays | — |
@@ -48,9 +48,21 @@ Input source (real mouse / real key · the remote) × place (main menu · Esc me
 | N1 | Main menu: «Продолжить», «Новая игра», «Настройки», the mod list (Simple Modlist) — real clicks (the kit added nodes to the menu's Construct chain) | each opens as before; the backdrop movie plays (bug 71) | — |
 | N2 | Esc menu: «Вернуться», «Настройки», «Выйти в меню» — real clicks; the Krinik mods at the top of the mod list | as before | — |
 | N3 | Inventory: the world slows (0.03) and returns to 1.0 on close; craft at real speed | the pause section's log lines as before | — |
-| N4 | Hub: tab switches by mouse, Q / E; close by Esc, Tab and the close button | our pages collapse on every close (log «хаб закрыт»), no bare-world frame | — |
+| N4 | Hub: tab switches by mouse, Q / E; close by Esc, Tab and the close button | our pages collapse on every close (log «хаб закрыт»), no bare-world frame | PASS 2026-11-18 21:24 — a tab by the mouse (Хар-ки), E then Q twice (Параметры → Хар-ки → Таланты), a real Esc closed the hub: «хаб закрыт», the world 1.0 |
 | N5 | The inventory's bottom bar: the other buttons (Hosav «Настройки интерфейса» collapsed, Inventory Compactor) click as before beside our wrapped button | as before; the wrap takes no extra width | — |
-| N6 | Our window: drag a slider, pick a key in the key selector — the preview mouse / key overrides return Unhandled | the slider moves, the key is taken (the busy plate for a taken key) | — |
-| N7 | Our window over the hub: Esc closes it, the camera / pack-manager hooks see the close (a camera row change applies at once) | as before (H1–H8 of `TC_conan_hub_rows_audit_2026-11-01.md`) | — |
+| N6 | Our window: drag a slider, pick a key in the key selector — the preview mouse / key overrides return Unhandled | the slider moves, the key is taken (the busy plate for a taken key) | PASS 2026-11-18 21:22 — a real drag moved «Высота камеры» 75 → 140 (frame `r2_n6.jpg`); the key selector not run |
+| N7 | Our window over the hub: Esc closes it, the camera / pack-manager hooks see the close (a camera row change applies at once) | as before (H1–H8 of `TC_conan_hub_rows_audit_2026-11-01.md`) | PASS 2026-11-18 21:23 — a real Esc: «closed (Esc)», the module close seen by the pause section, the hub stayed; the unsaved changes dropped |
 | N8 | A mod window from the list (EAA) — closes by its own close button; Esc does nothing (bug 108, known) | no crash, the hub stays | — |
 | N9 | 10 min of gameplay with LMB attacks and Esc / Tab in and out of menus | no crash, no new Lua error in UE4SS.log | — |
+
+## After judge round 2 (2026-11-18 21:1x) — the fixes and their cases
+
+| ID | Case | Expected | Status |
+|---|---|---|---|
+| J1 | Our window: a real double click (two presses < 300 ms) on one checkbox | it toggles twice — ends as it started; two log lines «click: check …» | FAIL 2026-11-18 21:21 on the 20:38 pak — one «click: check cam_sharp» for two presses 120 ms apart (judge finding 1 confirmed); a re-run on the pak with the double-click overrides owed |
+| J2 | The mods button: two presses < 300 ms | the list opens and closes (the second press lands on the catcher as a double click) | FAIL 2026-11-18 21:20 on the 20:38 pak — the list opened and stayed open (judge finding 1 confirmed); a re-run owed |
+| J3 | The guard on the pre-fix tree (bddc495) | exit 1, all five binds listed, the `pcall(RegisterKeyBind, …)` form among them | PASS 2026-11-18 21:1x — bddc495: exit 1, five binds, the pcall form among them |
+| J4 | The guard on `_unpacked` (the `ue4ss/Scripts` layout) | KrinikConanUI and the other Krinik mods scanned, 0 in them | PASS 2026-11-18 21:1x — `_unpacked`: the Krinik mods scanned (ue4ss/Scripts), 0 in them |
+| J5 | The mods button after a world re-entry (exit to the menu, Continue): open the list twice | the list opens each time (a handler is never erased by the old window's late off) | — |
+| J6 | The inventory bar on another tab («Хар-ки») | no gap where the hidden mods button stood (the wrap collapses, not the button) | PASS (weak) 2026-11-18 21:23 — «Хар-ки»: no mods button, no gap seen; this tab has no other button in the left container, so a gap could not show either way |
+| J7 | K1 / K2 run: a real click on the feedback plate starts the collector; a second press 0.2 s later is ignored; the collector is stopped by PID before its zip (no window, no zip on the owner's desktop) | log «click» once, «ignored» once; the collector PID seen and stopped; the desktop unchanged | K2 part PASS (above); the K1 part owed |

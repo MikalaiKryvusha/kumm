@@ -91,6 +91,22 @@
 
 ## Entries
 
+### EXP-0572 · 2026-11-18 · ❌→✅ · #input #mouse-seq #game-front #minimized #owner-screen #stand #bug85
+class: a real-input tool trusted «the game is the foreground window» while the game was MINIMIZED
+mechanized: `ConanExiles/_config/game-front.ps1` and `mouse-seq.ps1` restore a minimized game (SW_RESTORE 9) and refuse while it stays minimized (IsIconic)
+**Lesson:** a minimized window can still be the foreground window: `game-front.ps1` (SW_SHOW 5) printed «front» and `mouse-seq.ps1`'s focus proof passed while
+the game lay on the taskbar (the feedback collector minimizes it at its start) — a real click went to the owner's screen under the cursor (2026-11-18 21:18).
+After anything that can minimize the game (the «ОТЗЫВ» collector, a crash reporter, Alt+Tab), check the window is not iconic before real input. Also:
+`game-front.ps1`'s own F24 tap makes `owner-idle.ps1` read BUSY for 10 s — a refusal right after it is my input, not the owner's.
+
+### EXP-0571 · 2026-11-18 · ❌→✅ · #devkit #kit #crash #python #blueprint #bug85
+class: the kit editor crashing in `AddCallFunctionNode` read as «this override cannot be built»
+mechanized: `kit-krinik-click-events.py` `say()` writes each step to the editor log at once (`[kit-click]`), not only to the end-of-run report
+**Lesson:** the dev kit's editor crashed (`EXCEPTION_ACCESS_VIOLATION 0x0`, script stack `BlueprintGraphEditor.AddCallFunctionNode`) twice in a row while adding
+the `OnMouseButtonDoubleClick` overrides — yet each crashed run had SAVED the part before the crash (wrap, then catcher), and the third run built the last part
+and finished green. With idempotent parts, re-run until a run ends with exit 0 and every part «built» or «already … skipped» in the log; the JSON report of a
+crashed run is the PREVIOUS run's — never read it as this run's result.
+
 ### EXP-0570 · 2026-11-18 · ❌ · #ue4ss #crash #probe #flx #keybind #bug85
 class: a UFunction's parameters probed blindly from Lua — and a Lua-created FLX button assumed clickable
 mechanized: `KUMM/.work/bug85/func-params.lua` calls `GetPropertyClass` only on object / class properties (a probe file, not a guard)

@@ -151,6 +151,23 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **🎯 AIM OF THE CHAT OF 2026-11-18 20:51 — 0.9.1-RC1 built AND uploaded to our GitHub repository, then the full install path tested from it** (`[OWNER]` 20:54
+> «нужно стремиться к тому, чтобы в этом чате собрать RC1 и для теста полного пути установки сборки залить его в GH», chronicle entry 2026-11-18 20:54 — the
+> word for the outward step). Order: bug 85 rest + judge round 2 → pack push → the launcher's RC order + round-2 findings → **a judge round, code review, fixes** (`[OWNER]` 20:58 «то
+> есть, после этого») → versions 0.9.1-RC1 → **a judge round
+> and code review of the version change, fixes** (`[OWNER]` 20:57 «после этого тоже судейство и ревью кода и фиксинг») → **the three release texts (the guide —
+> Russian only, the README and the 0.9.1 notes — RU + EN; DRAFT of pack `5f1544f`, never read by a clean instance, never shown): a clean read of RU and EN, fixes,
+> one page of pairs for the owner** (`[OWNER]` 21:07 «юзер мануал · README · релиз ноутсы 0.9.1 · Переписаны корректным русским языком и английским ???» · «мы
+> готовимся к выпуску»); **the user guide becomes BILINGUAL — the English pages after the Russian ones** (`[OWNER]` 21:08 «делаем юзермануал двуязычным» ·
+> «после русских страниц - ставим EN страницы») → paks, guide, launcher exe → volumes →
+> `make_release.sh` → GitHub → the launcher on a fresh copy of the clean 3.1.1.
+> **Progress 21:28:** launcher RC order DONE (pack `feat(launcher): release candidates ordered…`, report `testcases/reports/2026-11-18_conan-launcher-rc-order.md`); the
+> round-2 launcher findings — a helper fixing them (working tree of the pack, not committed); bug 85 judge round 2 — 8 findings, all confirmed and fixed in the working
+> tree (guard, click handler names, focus steps, wrap visibility, catcher order, the double-click overrides in the kit — the pak `KUMM/.work/bug85/build3` cooking),
+> J1 / J2 FAILED on the old pak (the finding is real), K2 N4 N6 N7 PASS (report `2026-11-18_conan-keybinds-judge2-run.md`); found and fixed: `game-front.ps1` /
+> `mouse-seq.ps1` passed a MINIMIZED game (a click reached the owner's screen, EXP-0572), Simple Modlist's Krinik-on-top broken since Graphics loads first; the texts —
+> clean read r2 done (40 findings, `reports/2026-11-18_clean_read_texts_091_r2.md`), a writer helper applying them + the English guide pages; R1 started
+> (`build-level-mod.py` reads X.Y.Z of «0.9.1-RC1», `mods-table.mjs` `PACK_VERSION_BADGE`). Next: deploy build3 → J1 J2 K1 N1 J5 N9 → judge round 3 on bug 85 → R1.
 > **RUN 20:39–20:44 (after the handover, the owner's word 20:41 «комп и клава твои»): the wrap design DEPLOYED and run by the player's path — K3, K4, K5, K6, K8, K9, N3 PASS (report `testcases/reports/2026-11-18_conan-keybinds-wrap-run.md`); found and fixed: our window took no keyboard focus (pack commit «our settings window takes the keyboard focus»). Step 1 below is DONE; owed: K1, K2, C1, N1, N2, N4–N9 (K7 not run by decision — bug 108), judge round 2, the pack push.**
 > **CHAT CLOSED 2026-11-18 20:4x (`resume` 19:24 + the previous farewell's order; soft closure at 80 %).** Its working blocks and the block of the 18:16 chat —
 > chronicle, entry «2026-11-18 20:4x — STATUS bonsai trim». **FIRST in the next chat — bug 85 by the player's path:**
