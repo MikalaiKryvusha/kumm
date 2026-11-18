@@ -3,6 +3,8 @@
 > **Created:** 2026-11-18 · on the owner's words 2026-11-18 08:18–08:22 (verbatim — `PROJECT_HISTORY.md` entry 2026-11-18 08:11)
 > **Parent:** the launcher of epic 55 (`plans/55_EPIC_conan_build_0_9_1_for_3_1_1.md`); the frame the owner questioned 08:12 (an impossible state on the stand)
 > **Status:** 🔧 phase 0 — mockups in KUIPS shown 2026-11-18 08:29 (12 screens, `ConanExiles/_config/launcher/design/`), waiting for the owner's verdict
+> (his remarks 10:04 and 10:06 applied); phase 1 recon COMPLETE 2026-11-18 10:10 +03:00 — `researches/conan-launcher-self-sufficient/README.md`, its last open item closed by a
+> read-only probe: the game's CL is in `ProductVersion` of the Shipping exe (1.1 ms), no 200 MB scan needed
 > **Outbound:** the owner's verdict on the mockups (phase 0 gate); release 0.9.1 does not ship before this launcher is done — read from the owner's question
 > 2026-11-18 08:35 «сборку на гитхаб ты собрался какую отправлять? 0.9.1?! ОНА КОГОВА? ПО ЛАУНЧЕРУ ВСЕ СДЕЛАНО, ЧТО Я ПОЖЕЛАЛ?» (`[AI]` reading, said to him in chat)
 

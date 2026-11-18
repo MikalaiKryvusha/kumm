@@ -3,7 +3,8 @@
 > **Created:** 2026-11-18 · for epic 57 phase 1 (`plans/57_EPIC_conan_launcher_self_sufficient.md`)
 > **Parent:** the owner's words 2026-11-18 08:18–08:22 (`PROJECT_HISTORY.md` entry 2026-11-18 08:11)
 > **Status:** 🔬 started 2026-11-18 08:3x — local facts collected; web part answered 2026-11-18 09:38 by a helper (§2.1–2.5, sources and five probes
-> on this PC; §3 — eleven recommendations for phase 2); to verify before phase 2: whether Funcom's Shipping exe carries the CL in `ProductVersion`
+> on this PC; §3 — eleven recommendations for phase 2); the last open item closed 2026-11-18 10:10 +03:00 by a read-only probe: Funcom's Shipping exe AND the root
+> `ConanSandbox.exe` carry the CL in `ProductVersion` (§2.3)
 > **Outbound:** the phase-2 design of the game search and the version match
 
 ## 1. Local facts (read from this project, 2026-11-18)
@@ -118,7 +119,10 @@ CKAN on ValveKeyValue https://www.nuget.org/packages/ValveKeyValue · Epic manif
 - **`FileVersionInfo`** reads only the PE version resource. Measured on `C:\Windows\System32\MRT.exe` (230 MB, .NET Framework 4.8 through PowerShell 5.1): **6.2 ms**.
   In Unreal, `BUILD_VERSION` defaults to `{BranchName}-CL-{Changelist}` from `Build/Build.version`, which is exactly the shape of `++exiles+release-CL-383549`.
   An Epic issue (UE-195983) says `BUILD_VERSION` fills `ProductVersion` in `Default.rc2`, and a UE4 report shows a ProductVersion of `++UE4+Release-4.21-CL-4753647`.
-  Whether Funcom's Shipping exe carries the CL in `ProductVersion` is **not verified**: this pass opened no game folder. The first phase-2 step reads it once.
+  **Verified 2026-11-18 10:10 +03:00 (read-only, PowerShell 5.1, the build folder `D:\Games\Conan Exiles 3.1.1`):** the Shipping exe (205 324 792 bytes) reports
+  `ProductVersion` = `FileVersion` = `++exiles+release-CL-383549`, `ProductName` `ConanSandbox`, read in 1.1 ms; the root `ConanSandbox.exe` reports the same
+  `++exiles+release-CL-383549` in both fields. One probe on one version (3.1.1, the only one left on disk by rule 25); a second version is checked when the
+  next patch lands.
 - **Stream search** over the whole file. Measured on the same 230 MB exe: 1 MB chunks decoded as UTF-16 and searched with an ordinal `IndexOf` took
   **977 ms and 918 ms** (two passes, warm cache). The robust form is a byte search for the UTF-16LE bytes of `++exiles+release-CL-`. It keeps
   (pattern length − 1) bytes of overlap between chunks, is independent of alignment, stops at the first hit, and reads the digits after the hit.
@@ -126,7 +130,8 @@ CKAN on ValveKeyValue https://www.nuget.org/packages/ValveKeyValue · Epic manif
 - **The game log** `ConanSandbox\Saved\Logs\ConanSandbox.log` has the line `LogInit: Build: ++exiles+release-CL-…` (seen in bug 07). It exists only after
   the game has run and goes stale after an update, so it is a hint only.
 
-Recommendation: use `ProductVersion` if the phase-2 read shows the CL there; otherwise run the byte scan on a background thread. Either way, cache
+Recommendation: read `ProductVersion` of the Shipping exe (verified above; the root exe agrees on 3.1.1, and on a disagreement the Shipping exe wins,
+because it is the binary that runs); the byte scan stays only as the fallback for a `ProductVersion` without `-CL-`. Either way, cache
 `(full path, size, LastWriteTimeUtc) → CL` in the launcher's settings and rescan only when the exe changes. Steam's `buildid` can serve as an extra change signal.
 
 Sources: https://ikrima.dev/ue4guide/build-guide/ubt/engine-versionbuildid/ · https://issues.unrealengine.com/issue/UE-195983 ·
@@ -191,8 +196,8 @@ https://github.com/curl/curl/blob/master/lib/progress.c · https://tqdm.github.i
   about 15 s in total; cancellable.
 - **A minimal VDF reader** of about 40 lines with case-insensitive keys, escapes and comments, tested on the old and new samples and on a broken file.
   `LastOwner` is never logged.
-- **The CL:** first read `FileVersionInfo.ProductVersion` of the real Shipping exe once (one read-only check). If it carries `++exiles+release-CL-…`, that is
-  the 6 ms path; otherwise use the UTF-16LE byte scan (about 1 s per 220 MB, measured). Cache the CL by path, size and modification time.
+- **The CL:** `FileVersionInfo.ProductVersion` of the Shipping exe — it carries `++exiles+release-CL-383549` on 3.1.1 (read 2026-11-18 10:10 +03:00, 1.1 ms); parse the digits
+  after `-CL-`. The UTF-16LE byte scan (about 1 s per 220 MB, measured) stays as the fallback when `-CL-` is missing. Cache the CL by path, size and modification time.
 - **Every build release states its game CL** in a machine-readable form: a marker line in the release body, which the list call already returns at no
   extra cost, plus `launcher.gameCL` in `modpack.json`. The launcher takes the newest build release whose CL equals the installed one. With no such release,
   it names the game version the newest build needs.
