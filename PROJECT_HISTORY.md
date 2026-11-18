@@ -8283,3 +8283,82 @@ the second with a crop of the RU | EN switch):
 Where it went: `make-wallpapers.py --shadow`, the 0.9.1 covers rebuilt (pack `09d5c40`); the switch is a dropdown, KUIPS screen «language» (same commit); the window he saw
 was the launcher helper's frames-stand window that left its off-screen place (one stand process 10 min old stopped by PID) — plan 57 criteria 12 (centred on the
 working area, inside the screen) and 13 (a taskbar button in a normal start; the stand window never on a monitor), both handed to the helper.
+
+## 2026-11-18 16:0x +03:00 — STATUS bonsai trim (soft closure of the chat of 2026-11-18 14:59, the owner's word 16:00): the NOW block of this chat, the block CHAT CLOSED 14:3x with its FIRST NEXT CHAT and the «Moved verbatim» pointers moved verbatim
+
+> **NOW — chat of 2026-11-18 14:59 (opened by the pasted farewell → «resume» → /resume in full; the owner present and steering).**
+> Done: the priority answered in chat 15:01 (none of the three 🔥 items closed); the launcher mockups ACCEPTED by the owner 15:03 with «fix the Russian» →
+> the strings rewritten by whole sentences, a clean-instance read (7 findings: 5 applied, «Отзыв» refuted as the owner's own word, 1 for him), the language
+> switch RU | EN left of the window buttons (owner 15:08: multilingual launcher, Windows UI language first, the player's choice remembered → plan 57
+> criteria 10–11); pack `95f8b52`, `75b310e`, sheet rebuilt (kuips check 0). `HOUSE_RULES.md` 35.6 (owner 15:04–15:05): rewrite by whole sentences and
+> blocks, never patch inside an old sentence; the idea is kept, the form may be new — the drafts of README / notes 0.9.0 / guide (pack `6b58761`, `319c17c`,
+> `0e1ae7a`) are phrase patches and are REDONE by 35.6 (not started). The wallpapers moved into the pack (owner 15:16 «why not in the repo»): pack `8651fce`,
+> `_config/branding/Wallpapers` (shipped JPEG) + `_config/branding/wallpapers_source` (lossless WebP, pixel-identical); the library's `_extras` deleted.
+> RUNNING: one helper on epic 57 phases 2+ (owner 15:05 «one subagent, full resume»; told: no helpers of its own, no STATUS edits, forks reported).
+> RUNNING (15:37): a second helper rewrites README / notes 0.9.0 / guide by 35.6 from the ORIGINALS (README `6b58761^` + the owner's 14:50 line, notes from
+> `published_0_9_0/github/github_release_notes.md`, guide `0e1ae7a^` + the 4 fact edits pending the owner); it writes the files and
+> `.work/rewrite_by_blocks/*.pairs.json`, does NOT commit (the main session commits by path: `git commit -F <msg> -- <paths>`, the launcher helper stages in the
+> same repo). Then: the main session checks parity (`tools/text-fact-parity.mjs`, new, pushed `6425705`, judge round owed), a clean-instance read, a page of
+> whole-block pairs for the owner. Interview #040 (the pack's order) ANSWERED 15:38: Q1 B — the camera page images WebP in the tree, history untouched (DONE,
+> pack `c8b177f`, 262 → 30 MB); Q4 A — the root screenshot → `docs/refs/offline_play_dialog_2026-09-09.jpg`, public tree excludes `docs/refs` (DONE, checked by a
+> public-tree run); Q3 own — the wallpapers ship in the format the upscale gives, WebP where it can be read, JPEG 95 where it cannot; **Q2 A — ONE `art/` folder at
+> the pack root (logos, icons, wallpapers, wallpapers_source, screenshots) — OWED, waits for the launcher helper's commit of `build-docs.py`** (it holds the icon
+> path); the live Nexus description loads the logo from the PUBLIC repo path `_config/branding/krinik-modpack-logo.webp` — move the Nexus text
+> (`build_nexus_description.py` RAW path) in the same release as the public tree.
+> DONE 15:4x: wallpapers V2 «Тёплый» / «Реализм» (his upscales; 3 sizes PNG + WebP masters, pack `711846c`), the launcher's background = V2 Realism, the
+> 0.9.1 covers from Realism (pack `104bef6`, draft; wiring — plan 55 D-art). OPEN for him: does v1 «3.0.1» stay in the player's Wallpapers folder.
+> 15:5x (pack `09d5c40`): the cover digits got a light shadow (`make-wallpapers.py --shadow`); the language switch is a DROPDOWN (KUIPS screen «language»);
+> plan 57 criteria 12 (window centred on the working area, inside the screen) and 13 (taskbar button; the frames stand never on a monitor) — handed to the
+> launcher helper together with the owner's sighting of a stand window on his screen (a 10-min-old stand process stopped by PID 15:57).
+> (history) WAITING for the owner's pick: the v2 wallpaper `D:\Варвары над древним городом.png` (1672×941; he upscales it himself, 15:30) — six grades A–F
+> (`.work/wallpaper_v2/grade.py`), the page `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\92_oboi_v2_cvetokorrekciya\oboi_v2_cvetokorrekciya.html` opened 15:31;
+> his pick → the final grade at full size into `_config/branding/wallpapers_source/` (the art lives in the pack, 15:16). 15:33: he likes B (depth) and C (the v1
+> palette) — both lossless at 1672×941 in `НА ОТСМОТР НИКОЛАЕМ\93_oboi_v2_B_i_C\` (opened); he upscales and picks; the final one goes into the pack.
+> Pack tidy, pass 1 DONE (pack `2ccd63f`): the experiment records the bugs cite committed, rdoc outputs and `pakstore.json` ignored, the root camera-diagram
+> duplicate and the orphan `KrinikBowFixes.pak` removed. The owner's decisions left: the 15 camera-page PNGs (≈ 270 MB in git and history), one home for all art,
+> PNG vs JPEG wallpapers for players, `Без имени-1.jpg` at the root (his menu screenshot, excluded from the public tree by `make_public_tree.py`).
+> OPEN for the owner: the no-release screen's next step for the player (asked in chat 15:28); the repo tidy of the pack (owner 15:14 «навести порядок в
+> локальном и удалённом репозитории») — inventory in progress: untracked agent files (17 devkit kit-*.json, 2 recon lua, rdoc outputs, a built pak, guide
+> screens), the owner's two stray images at the pack root (`Без имени-1.jpg` tracked since 2026-09-09, `kamera-os-i-smeschenie.jpg`), 15 camera-page PNGs of
+> ≈ 18 MB each in git (remote ≈ 550 MB), the arts spread over 5 folders; players get JPEG wallpapers while the owner asked PNG quality (2026-10-25).
+> **CHAT CLOSED 2026-11-18 14:3x +03:00 (chat of 13:13, opened by the pasted farewell → /resume; /dayloop on the 🔥 priority; soft closure at 81 % of the context).**
+> Done: the owner's order of 13:35 — all SIX Russian manuals live in the core `krinik-stylometry/russian_norms/` (RUSSIAN_RULES, AI_RUSSIAN_DEFECTS, MEASURING moved;
+> NATIVE_RUSSIAN_STYLE, GOST_TECHNICAL_RUSSIAN, ACADEMIC_RUSSIAN written; their own prose cleaned by the core); core §2.4 register by purpose (interview #039, A) and ЖЯ1–ЖЯ6,
+> §4 three GOST judgment rules, §7B questions 10–13, §8 +16 GOST norm rows (48); HOUSE_RULES 35.4 (register by purpose), 35.5 (ALL Russian strictly by the manuals),
+> 36 (chat conversation; decisions through the contour; an open page owns its document); guards: `contour-page-lock` (new), `ru-build-text-check` reads the owner's
+> Russian documents; the pack's dash lint reads the mods' translation (366 untriaged lines), the launcher is linted; the instrument quality-prep after judge rounds 2–3.
+> Commits: core `cc3b391` `ab89ba1` `34dcfbd` `28ec340` `4b4e9c5`; KUMM `3899627` `11779e3` `b8c6a52` `21e2b7c` `17681cd` + the closure; pack `d2eb476`.
+> **FIRST NEXT CHAT (the owner's order of 14:31–14:32 first, then the 🔥 block):**
+> 1. **The rewrite by the manuals of the build's README, the 0.9.0 release notes and the user guide** — two helpers of this chat wrote into the pack's working tree:
+>    `_config/public_release/README.template.md`, `_config/release/published_0_9_0/github/github_release_notes_2026-11-18.md` (new), `docs/guide/guide-3.1.1.html`.
+>    README + release notes DONE as a draft (pack `6b58761`: 25 / 49 Russian sentences reworded, parity passes, the three tools clean, the README nav anchors 6→7,
+>    7→8 fixed; the nav still lacks «6. Ссылки»; the helper's own read only — a clean-instance read is owed). The owner saw 15 before/after pairs of it on
+>    `.work/show/bylo_stalo.html` (14:47, built by `.work/show/build_page.mjs`). README line on other authors' mods fixed by the owner's remark 14:50 (pack `319c17c`:
+>    the player gets every mod in the archive). The guide DONE as a draft (pack `0e1ae7a`: 96 of 346 units, parity PASS, 4 fact edits to confirm — «три версии» →
+>    «каждую версию из таблицы» (Table 3 lists five), «выходит» → «вышла», the shader line, the launcher self-update line; rule 20: the same items in README / notes).
+>    Then for all three: the three checks (`kaif-voice-lint.mjs check`,
+>    `krinik-stylometry/tools/voice-check.mjs --genre document`, `dash_lint.py --only`), a parity check of facts against `git diff`, a clean-instance read, then SHOW the owner
+>    (one HTML page, `HOUSE_RULES.md` 32 / 1a); publication (`gh release edit`, the public README) only after his word. `HOUSE_RULES.md` 35.5 governs all of it.
+> 2. **Fix the guards judge's open findings** — plans/58 «Guards judge round 1»: 3–8, 10–16 (the owner-text check flags his recorded words; ru-ok spelling; multi-line comments;
+>    BUILD_TEXT paths; the D5 copy-paste of `\n` hits; the generated `ru_table.lua`; silent fail-open); then run `python -I -X utf8 _config/release/build-docs.py` by the owner's
+>    path (expected: PDF refused, launcher built, exit 1 naming the cause) and a second judge round.
+> 3. **The academic rows into §8** — the ten of `ACADEMIC_RUSSIAN.md` §4 (A43, A44, A25, A24, A30, A31, A16, A18, A10, A11), tested on the stand texts and the owner's corpus,
+>    inserted like `.work/ru-recon/gost/insert_rows.mjs`; and an interview through the contour (page in the BACKGROUND, never under `timeout`) for two forks: the core's voice
+>    rows («поэтому», «обычно», «во-первых», «в заключение») vs the scientific style's connectives; «%» at every number of a range (GOST 8.417) vs Milchin 6.4.2.
+> 4. A clean-instance §7B read of all six manuals (a telegraphic dash in a document has no machine row); the 366 translation lines by the pass-3 method (plan 56);
+>    judge round 4 of quality-prep, then run 2 (two blind reviewers, `eval/quality/none_1118_vs_core_1118/`, the run-1 prompts in plan 58), `--tally`, act on it.
+> 5. Then the 🔥 items 2–3: the launcher (epic 57 phase 2 after the owner's verdict on the mockups), the build 0.9.1.
+> FIRST NEXT CHAT, and the progress paragraphs of 09:25 and 10:25. Their open items are carried in FIRST NEXT CHAT above.
+> **Moved verbatim to the chronicle (entry 2026-11-18 09:34 +03:00):** the NOW block of the chat of 2026-11-18 00:40. Still open from it: ONE game run (the hub rows' new hints, a locres sample of the dm-fish rows, the crash offer on the real build folder); epic 55 D4 («Что нового» 0.9.1, known issues, release notes by the owner's portrait); launcher R5 (the space need after a stopped unpack). Done in the chat of 08:10: the launcher judge round + the push, dm-fish (pass 3, in the build), the KUMM force-push.
+> **Moved verbatim to the chronicle (entry 2026-11-18 01:37 +03:00):** the blocks CHAT CLOSED 2026-11-17 22:1x, NOW 19:43 and NOW 14:40. Still open from them: the walking bow draw (bug 104, the post-process route), the owner's real-key checks (wall hang drain, RMB through a wall push, bug 105 G1 / G5b / G10 / G7, G6), bug 93 (the held draw ends in a sprint); the auto-relay L1″ / L2 / L3 after the owner's «Do not ask me again» tick.
+> **Moved verbatim to the chronicle (entry 2026-11-17 21:3x +03:00):** the blocks FIRST NEXT CHAT item 1 (the auto-relay task — built; its L2 / L3 open in the NOW block of 14:40) and CHAT CLOSED 2026-11-17 11:04.
+> **Moved verbatim to the chronicle (entry 2026-11-17 10:52 +03:00):** the block CHAT CLOSED 2026-11-17 06:33 (+ its FIRST NEXT CHAT) and the block of the chat of 2026-11-17 04:25. Their open items are carried in the NOW block above or stay here: bug 93 (the held draw ends in a sprint; S9) · bug 105 the owner's final check (G1, G5b, G10, G7 with the bow) and G6 · plan 53 step 12 (read `researches/mod-reconciliation/GUIDE.md` first) · plan 52 put-away by a real key · the GitHub release link in the Nexus call (the owner's question).
+> **Moved verbatim to the chronicle (entry 2026-11-17 06:33 +03:00):** the block CHAT CLOSED 2026-11-16 23:53 (+ its FIRST NEXT CHAT) and the block of the chat of 2026-11-16 22:12; their open items are carried in FIRST NEXT CHAT above (the bow on the wall — done; the hang's drain — interview #037 Q2; bug 105 final check; the older list).
+> **Moved verbatim to the chronicle (entry 2026-11-16 23:53 +03:00):** the block CHAT CLOSED 2026-11-16 21:46 (+ its FIRST NEXT CHAT and tools); its open items (2)–(4) are carried in FIRST NEXT CHAT above.
+> **Moved verbatim to the chronicle (entry 2026-11-16 21:46 +03:00):** the blocks NOW 2026-11-16 21:30 and CHAT CLOSED 2026-11-16 19:47 (+ its FIRST NEXT CHAT; its open items are in (3)–(4) above).
+> **Moved verbatim to the chronicle (entry 2026-11-16 19:47 +03:00):** the NOW block of the chat of 2026-11-16 17:59 and the blocks CHAT CLOSED 2026-11-15 00:19 and NOW 2026-11-14 22:29.
+> **Moved verbatim to the chronicle (entry 2026-11-15 00:02 +03:00):** the blocks NOW 2026-11-14 16:24 (dayloop: wall jump, bug 102, Pickup+), CHAT CLOSED 15:59, FIRST NEXT CHAT 15:5x and NOW 14:17 (perk page, bug 101, the first wall jump). Still open from them: interview #035 (the bow after the wall push — the owner's answer); the wall-jump TC row R6 by the owner's own keys (the synthetic Space is unreliable there), an overhang case, W11 / W13 on the final build; bug 91 real hover; the perk page (review folder 86, his perk ideas 25–40 → plan 49); bug 101 item 4 (a native read of the inventory teardown); bug 75 (quick-loot rim); M6 ping; the Pickup+ admin window (plan 53 step 12, parked to ≈ 2026-11-15); the morning items listed in the 2026-11-14 15:41 pointer below.
+> **Moved verbatim to the chronicle (entry 2026-11-14 15:41 +03:00):** the blocks CHAT CLOSED 2026-11-14 13:45, NOW 11:52 (dayloop), FIRST NEXT CHAT (11:41) and NEW CHAT 09:51 of the morning chat. Still open from them: the owner's play — his six key bindings, the hub switches to / from «Снаряжение», the morning four (square page arrows, journeys refresh, craft pace after the close, Esc flag); (the run-report linter's two morning reports — fixed 15:4x); plan 53 step 12 (parked to ≈ 2026-11-15); the rollback paks in `.work/keybinds/` and `.work/arrows/` (delete after the owner's play).
+
+> **Older pointer blocks (2026-11-03 … 2026-11-14, with their «still open» lists) and the NOW block of 2026-11-17 11:21 — moved verbatim to the chronicle, entry 2026-11-17 21:3x (second part).**
+

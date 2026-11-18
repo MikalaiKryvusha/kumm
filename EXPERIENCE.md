@@ -91,6 +91,34 @@
 
 ## Entries
 
+### EXP-0567 · 2026-11-18 · ❌ · #stand #owner-screen #launcher #helper #process
+class: a-stand-window-left-the-off-screen-place-and-sat-on-the-owners-screen
+**Lesson:** the owner saw a launcher window with no taskbar button, bottom-right, cut by the screen edges — a helper's frames-stand window. The stand places the
+form at (-20000, -20000) and hides its taskbar button, but the form still came back onto a monitor (hypothesis: `WM_DPICHANGED` / the relayout sets `Location`),
+and one stand process stayed alive 10 minutes after its case. An «invisible» stand is a claim to prove: assert that the window rect intersects no
+`Screen.AllScreens` bound for its whole life, and close every started process by its PID at the case's end. The owner's screen is not a stand.
+**Trigger:** any stand that starts a real window (WinForms, a browser, a game) while the owner works at the same machine.
+mechanized: no — handed to the launcher helper as plan 57 criterion 13 (2026-11-18 15:56); the guard is owed
+
+### EXP-0566 · 2026-11-18 · ❌ · #russian #rewrite #owner-text #seams
+class: a-rewrite-by-patches-inside-old-sentences
+**Lesson:** the README / release notes / guide drafts changed 25 of 49 and 96 of 346 units by patching phrases inside the old sentences, so that no number or
+link was lost; the owner read the before / after page and refused the seams («берёшь часть предложения и пытаешься в него встроить»). A rewrite reads each
+block for its idea, keeps a good sentence untouched, rewrites a defective sentence WHOLE and a block that does not hold WHOLE; the facts are kept by a
+script (`tools/text-fact-parity.mjs`), never by keeping the old wording.
+**Trigger:** any rewrite of an existing Russian text by new rules (README, notes, guide, launcher strings, interviews).
+mechanized: `HOUSE_RULES.md` 35.6 + `tools/text-fact-parity.mjs` (the facts); the «whole sentence» judgement stays the reader's
+
+### EXP-0565 · 2026-11-18 · ❌→✅ · #launcher #stand #winforms #check #false-pass
+class: a-check-passed-on-the-products-own-error-box
+**Lesson:** plan 57 case G0 («the press opens the folder dialog») looked for any `#32770` window of the launcher and passed — the window was the launcher's own
+crash box («Лаунчер столкнулся с ошибкой и сейчас закроется. Недопустимый параметр.»: `GraphicsPath.AddPath` throws on an EMPTY path, a frame capture drew an
+empty text run). A check that something «appeared» must name WHICH thing (its title or text), and every case of a product with an error log must end by
+asserting the log holds no error line; a GDI+ path of an empty string is skipped before `AddPath`.
+**Trigger:** any stand check of a dialog, a box or a window «showing up»; any GDI+ code that merges text paths.
+mechanized: `ConanExiles/_config/launcher/test/self.mjs` — G0 refuses a box with «ошибк|error», every case ends with «no error inside the launcher during the case»;
+`Look.Lettered` / `MetalWindow.DrawLettering` skip empty paths
+
 ### EXP-0564 · 2026-11-18 · ❌ · #contour #owner-page #background #timeout #owner-trust
 class: a-live-page-killed-by-its-launcher-and-edited-under-the-owner
 **Lesson:** the agent opened interview #039 with `timeout 60 node .kaif/tools/contour/review.mjs <doc>` in the foreground, then wrote the answer the owner
