@@ -8519,3 +8519,7 @@ The owner, 19:11 (verbatim): «мы делаем как Линус, без то�
 >    second judge round; the ten academic rows into the core's §8 + the interview on «поэтому / во-первых» and «%» in a range; a clean §7B read of the six manuals; the 366
 >    translation lines (plan 56 pass 3); quality A/B run 2; ONE game run (hub hints, dm-fish locres, the crash offer); epic 55 D4; launcher R5; bugs 104, 105 (G1 G5b G10
 >    G7, G6), 93; plan 53 step 12; plan 52 put-away; the auto-relay L1″ / L2 / L3; interview #035; the wall-jump R6; bugs 91, 101 item 4, 75; M6 ping; the owner's play items.
+
+## 2026-11-18 19:2x +03:00 — the owner: the agent deletes explicit garbage (recorded 19:20)
+
+`[OWNER]` verbatim: «разрешаю» (19:19, the stale stand) · «давай изменим правила. чтобы ты мог удалять явный мусор» (19:19) · «разрешаю баш» (19:20). Where it went: HOUSE_RULES rule 15; `.claude/settings.local.json` autoMode.allow (rm-tree.mjs under KUMM/.work and the pack _scratch).

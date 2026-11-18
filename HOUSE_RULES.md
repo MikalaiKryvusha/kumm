@@ -113,7 +113,9 @@
     that lives under it. When a piece of work is done (committed, shipped), delete its heavy working files at once, file by file: unpacks, copies of paks,
     frames, builds. What a later chat needs goes into a repository (STATUS, `plans/`, `researches/`, the pack), never into `.work\`. A work tree outside
     `.work\` (`_paksview-*`, `_text-extract-*`) is named in STATUS with its size and the task that needs it; when the task closes, the tree goes.
-    `[OWNER]` 2026-11-13 18:57 · verbatim in `PROJECT_HISTORY.md` entry 2026-11-13 18:57.
+    Explicit garbage of the agent's own work (a stale stand, a build, an unpack, frames, logs under `KUMM\.work\` or the pack's `_scratch\`) is deleted at once
+    without asking, by `node ConanExiles/_config/rm-tree.mjs <dir>`; the auto-mode classifier allows exactly this (`.claude/settings.local.json` → `autoMode.allow`).
+    `[OWNER]` 2026-11-13 18:57 · verbatim in `PROJECT_HISTORY.md` entry 2026-11-13 18:57 · 2026-11-18 19:19–19:20 (entry 2026-11-18 19:2x).
 16. **A game is worked with in two ways — in front and in the background; the owner picks one at the moment, the agent masters both.**
     1. Launch by the path the owner named last: Conan — `launch-fg.ps1` (in front) or `launch-bg.ps1` (background), `HOUSE_RULES_REFERENCE.md` §6.
     2. The two paths differ ONLY in whether the owner sees the game on his screen. Every instrument and every kind of work — remote calls, frames,
