@@ -239,7 +239,9 @@
 35. **The agent's own Russian is academic, strict and clear; text the player or the owner reads as the build's goes by the owner's portrait.**
     1. Every Russian text of the agent (chat, voice, documents for the owner, interviews) is written by `researches/russian-writing/RUSSIAN_RULES.md` and the
        catalogue of AI-Russian defects `researches/russian-writing/AI_RUSSIAN_DEFECTS.md` (calques of English syntax, telegraphic dashes, bureaucratese, the
-       "not just X but Y" frame, filler, false enthusiasm); before sending, the text is read against the catalogue's checklist.
+       "not just X but Y" frame, filler, false enthusiasm); before sending, the text is read against the catalogue's checklist. The Stop hook
+       `tools/hooks/ru-reply-check.mjs` checks the turn's text by the core's §8 (genre `reply`), blocks once on a hit and logs every turn to
+       `.work/ru-reply-log.jsonl` (the measure of plan 58 criterion 6); a quoted defect carries `<!-- ru-ok: <reason> -->` on its line.
     2. Text of the build (launcher, installer, report tool, mod UI, guide, README, release notes, Nexus text, mockup strings) — `node .kaif/tools/kaif-voice-lint.mjs load`
        before the first word, written by the portrait, `kaif-voice-lint.mjs check <file>` and a clean-instance read after (the fourth KAIF obligation of `AGENT_GUIDE.md`).
     3. A word is chosen for its exact meaning: an action is named by its real name (a git push is called a push of the code, never a sending of the build).

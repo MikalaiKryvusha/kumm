@@ -3,7 +3,12 @@
 > **Created:** 2026-11-18 · on the owner's words 2026-11-18 09:00–09:02 (verbatim — `PROJECT_HISTORY.md` entry 2026-11-18 08:11)
 > **Parent:** `HOUSE_RULES.md` rules 33 (dash), 35 (academic Russian); `researches/russian-writing/RUSSIAN_RULES.md`; the owner's portrait
 > `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (via `node .kaif/tools/kaif-voice-lint.mjs`)
-> **Status:** 🔧 phase 1 started 2026-11-18 09:01 — a helper's web recon of how the Russian-speaking community criticises Claude's / LLM Russian
+> **Status:** 🔧 phase 1 DONE 2026-11-18 09:23 — `researches/russian-writing/AI_RUSSIAN_DEFECTS.md` (42 defects, 28 sources) and
+> `MEASURING_RUSSIAN_TEXT.md` (Головин's communicative qualities, ФИПИ violation counts, readability for Russian, coherence); phases 2–3 STARTED 09:2x —
+> the core's §8 + 11 rows from the catalogue, its own gate fixed (CRLF: 66 false lint-core findings → 0, selftest 17/17; core `2b99012` pushed),
+> KAIF reads the KUMM clone of the core; the Stop hook `tools/hooks/ru-reply-check.mjs` (selftest 5/5, wired in `.claude/settings.local.json`).
+> Next: a write gate for the build's text files; the measure from `MEASURING_RUSSIAN_TEXT.md` (violation classes, completeness, coherence) into a
+> clean-reviewer brief; ru-text (MIT, model-applied skill) as the reviewer's reference; the A/B on the core's `eval/`; phase 5 proofreading.
 > **Outbound:** —
 
 ## Goal vector (Avoid + Achieve)
