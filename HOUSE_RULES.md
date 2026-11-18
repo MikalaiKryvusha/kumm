@@ -301,6 +301,14 @@
     added → the other sections on the same function; a layout changed → the controls beside it) — each a short case run in the same session as the change's own.
     `[OWNER]` 2026-11-18 20:35 · `PROJECT_HISTORY.md` entry 2026-11-18 20:35.
 
+40. **Every Krinik mod pak carries its fields of the game's own mod list — author, author URL, change note — filled, and the change note is kept per release.**
+    1. The fields live in the mod's SOURCE (its `kit/modinfo.json`, or the build script that writes the modinfo) and in one change-note table of the pack; the build of
+       the pak writes them, so no rebuild can leave them empty.
+    2. The change note of each Krinik mod says what changed in THAT mod in the current release; a new release adds its line before the paks are built.
+    3. The guard: a Krinik pak with an empty author, author URL or change note fails the release (`make_release.sh`) and the check of the working game; the main menu's
+       mods screen of the working game is looked at once per release.
+    `[OWNER]` 2026-11-03 12:58–12:59 (plan 44) · 2026-11-18 21:35–21:36 · `PROJECT_HISTORY.md` entry 2026-11-18 21:35.
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —
 WebP, never PNG; for the build's own images rule 37 above governs). The context-budget hook's hint is obeyed (`CLAUDE.md`).

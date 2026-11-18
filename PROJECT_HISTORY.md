@@ -8613,6 +8613,25 @@ answer on the texts (pack `5f1544f`, 19:05: the guide Russian only, README and n
 clean instance, never shown; the English halves checked by nobody) and the step «clean read RU + EN → fixes → one page of pairs» before RC1; the guide gets
 English pages after the Russian ones (plan 55 R4 / D4).
 
+## 2026-11-18 21:35 +03:00 — the owner: the Krinik mods' fields in the game's own mod list are STILL empty — fill them and keep them (recorded 2026-11-18 21:36 +03:00)
+
+`[OWNER]` verbatim (three messages):
+
+> я видел то у наших модов Криника в ванильном мод менеджере "Моды" с главного меню ДО СИХ ПОР не заполнены поля метаданных.
+
+> Это возмутительно! Я давно просил заполнить их и вести
+
+> не забывать про них
+
+The earlier order: 2026-11-03 12:58–12:59 (plan 44, verbatim there) — `set-pak-modinfo.py` was built and run on the RELEASE export only (`make_volumes.sh` step 2b);
+every kit rebuild since wrote the source `kit/modinfo.json` (author, authorUrl, changeNote empty) into the pak, and the working game showed «Автор --», «URL автора --»,
+«Список изменений --» (seen by the agent too on its frame of 21:30, KrinikConanGraphics). Where it went: HOUSE_RULES rule 40; the fields written by the BUILD of every
+Krinik pak (the source modinfo and the build scripts), the change note kept per mod per release, a guard on the release and the working game.
+
+Then, 21:36–21:37 (verbatim): «и этот чат пора закрывать... не успели вложиться в окно....» · «придётся опять доделывать в новом чате» · «на судейство нет токенов» ·
+«зря ты запустил ещё одного субагента». Where it went: the soft closure at 57 % of the window by his word; both helpers stopped; the closing judge not run; memory
+`helpers-cost-owner-tokens`.
+
 ## 2026-11-18 19:40–20:01 +03:00 — the owner: EAA's window and Esc; review and manual testing of new code; «where are the arts» (recorded 2026-11-18 20:07 +03:00)
 
 `[OWNER]` verbatim, in order:
@@ -8719,3 +8738,44 @@ block of the 18:16 chat moved verbatim
 > NEXT: round 2's fixes → round 3 → pushes; bug 85; the owner's page (texts + proposals + D6); his answer on the test release → `make_release.sh` → the test release →
 > the launcher downloads it on a fresh copy of the clean 3.1.1.
 >
+
+## 2026-11-18 21:3x +03:00 — STATUS bonsai trim (closure of the chat of 2026-11-18 20:51 by the owner's word 21:36): the progress block 21:28, the run 20:39–20:44 and the handover of 20:4x moved verbatim
+
+> **Progress 21:28:** launcher RC order DONE (pack `feat(launcher): release candidates ordered…`, report `testcases/reports/2026-11-18_conan-launcher-rc-order.md`); the
+> round-2 launcher findings — a helper fixing them (working tree of the pack, not committed); bug 85 judge round 2 — 8 findings, all confirmed and fixed in the working
+> tree (guard, click handler names, focus steps, wrap visibility, catcher order, the double-click overrides in the kit — the pak `KUMM/.work/bug85/build3` cooking),
+> J1 / J2 FAILED on the old pak (the finding is real), K2 N4 N6 N7 PASS (report `2026-11-18_conan-keybinds-judge2-run.md`); found and fixed: `game-front.ps1` /
+> `mouse-seq.ps1` passed a MINIMIZED game (a click reached the owner's screen, EXP-0572), Simple Modlist's Krinik-on-top broken since Graphics loads first; the texts —
+> clean read r2 done (40 findings, `reports/2026-11-18_clean_read_texts_091_r2.md`), a writer helper applying them + the English guide pages; R1 started
+> (`build-level-mod.py` reads X.Y.Z of «0.9.1-RC1», `mods-table.mjs` `PACK_VERSION_BADGE`). Next: deploy build3 → J1 J2 K1 N1 J5 N9 → judge round 3 on bug 85 → R1.
+> **RUN 20:39–20:44 (after the handover, the owner's word 20:41 «комп и клава твои»): the wrap design DEPLOYED and run by the player's path — K3, K4, K5, K6, K8, K9, N3 PASS (report `testcases/reports/2026-11-18_conan-keybinds-wrap-run.md`); found and fixed: our window took no keyboard focus (pack commit «our settings window takes the keyboard focus»). Step 1 below is DONE; owed: K1, K2, C1, N1, N2, N4–N9 (K7 not run by decision — bug 108), judge round 2, the pack push.**
+> **CHAT CLOSED 2026-11-18 20:4x (`resume` 19:24 + the previous farewell's order; soft closure at 80 %).** Its working blocks and the block of the 18:16 chat —
+> chronicle, entry «2026-11-18 20:4x — STATUS bonsai trim». **FIRST in the next chat — bug 85 by the player's path:**
+> 1. The pak of the wrap design: `KUMM/.work/bug85/build/KrinikConanUI.pak` (built 20:38 by `kit-buildmod.py`; if the build log `.work/bug85/buildmod2.log`
+>    ends without «KrinikConanUI.pak», run `python -I -X utf8 _config/devkit/kit-buildmod.py KrinikConanUI D:/work/ai_sandbox/KUMM/.work/bug85/build` from the pack)
+>    → copy into `ConanExiles/_unpacked/KrinikConanUI/` → `Deploy-ModPack.ps1 -PackDir D:\work\ai_sandbox\ConanExiles -Deploy -Only KrinikConanUI` (the build has
+>    the 20:17 pak + the first Lua until then — the deployed Lua expects W_KrinikButton, which is gone).
+> 2. TC `testcases/TC_conan_keybinds_to_game_events_2026-11-18.md`: K1–K9 and the neighbours N1–N9 (HOUSE_RULES 39, the owner 20:35) — the mouse cases need the
+>    game in front and `owner-idle.ps1` FREE; background: `post-key.ps1 -Key Escape|Tab` (our window's Esc = K5, hub closes = K8). Then judge round 2 on the pack
+>    commit `fix(KrinikConanUI): bug 85 …` (LOCAL, with the art move and the female_beta wallpapers) → fixes → the pack push.
+> 3. Then the farewell order of 19:23 goes on: the launcher's RC order (0.9.1-RC1 < RC2 < 0.9.1), the round-2 launcher findings (`reports/2026-11-18_judge_launcher_round2.md`),
+>    judge round 3, the pack push, RC1 (`make_release.sh` → our repo → the launcher on a fresh copy of the clean 3.1.1). The Russian proofreading is NOT in 0.9.1
+>    any more — the next version (`[OWNER]` 2026-11-18 20:51).
+> **Done this chat:** item 3 of the priority (item 2 since 20:51) corrected (rough polish = critical bugs); bug 85 recon (posted keys, the escape stack, the Esc census) and the fix
+> (kit `kit-krinik-click-events.py`: W_KrinikClickWrap, W_KrinikClickCatcher, our window's KrinikMouseDown / KrinikEsc, the menus' KrinikFeedbackClicked; Lua
+> `krinik_click.lua` + five sections; the guard 0); judge round 1 (D2 confirmed in the game — a Lua-made FLX button never presses) → the wrap design; bug 108
+> (other mods' windows lose Esc until native fixes — the owner told 20:3x); the art folder `ConanExiles/art/` (the owner's debt of 15:38); the sunset graded like
+> v2 (D: root) and his upscales → `art/wallpapers(_source)` `V2_female_beta`; HOUSE_RULES 39; EXP-0570 (my probe crashed the game 20:20 — not the build).
+> Release step owed with the 0.9.1 public tree: `build_nexus_description.py` raw logo URL → `art/logos/…` and the Nexus page updated in the same release.
+>
+> The block «CHAT CLOSED 2026-11-18 16:0x» (the chat of 14:59, its FIRST NEXT CHAT list) — moved verbatim to the chronicle, entry 2026-11-18 19:2x.
+
+## 2026-11-18 21:3x +03:00 — STATUS bonsai trim, part 2: two closed items of «Awaiting human review» moved verbatim
+
+- ✉️ **Nexus quarantine of mod 65 (0.9.0) — the THIRD letter is written 2026-11-13 09:09** (`[OWNER]` 09:03 «давай писать третье письмо»): `D:\Games\Conan Exiles Mods\Krinik_Mod_Pack_0_9_0_Nexus\nexus_support_quarantine_followup_2.txt`,
+  a reply in ticket 276571; the three SHA-256 in it re-hashed from the release zip (match). SENT by the owner (`[OWNER]` 2026-11-13 11:02 «пиьсмо я отправил, спасибо»).
+- ✅ **2026-11-02 00:22 — interview #030 APPLIED and seen (packs `0663f2f`, `fb6cc6a`):** arrows sit in the body (side frame, folder 56 `04_…`), one arrow per shaft
+      in the corpse's loot, the shafts go when the arrows are taken (real E + Q) — TC A11, A12, A13 pass. **00:27 the Damage Meter page in the Xevyr hub works** (pack `dd73239`):
+      D1, D2 pass (the author's values; a real Save writes the mod's slot through the author's window, which now closes after it), D3 flash not measured;
+      the remote opens the Xevyr hub by the shared variable `KrinikHubRequest`. Next: the other four Xevyr pages (I6.3), then the list's Xevyr entry → the hub;
+      ~~the left-list seam (the name mid-height)~~ FIXED 2026-11-02 07:34 +03:00 (cases L0–L2, report `2026-11-02_conan-hub-left-list-seam.md`); then the 13 blocks to 1.0.0.
