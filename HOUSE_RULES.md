@@ -242,6 +242,7 @@
        "not just X but Y" frame, filler, false enthusiasm); before sending, the text is read against the catalogue's checklist. The Stop hook
        `tools/hooks/ru-reply-check.mjs` checks the turn's text by the core's §8 (genre `reply`), blocks once on a hit and logs every turn to
        `.work/ru-reply-log.jsonl` (the measure of plan 58 criterion 6); a quoted defect carries `<!-- ru-ok: <reason> -->` on its line.
+       The PostToolUse hook `tools/hooks/ru-build-text-check.mjs` runs the dash lint and the core's §8 on every written file of the build's player texts.
     2. Text of the build (launcher, installer, report tool, mod UI, guide, README, release notes, Nexus text, mockup strings) — `node .kaif/tools/kaif-voice-lint.mjs load`
        before the first word, written by the portrait, `kaif-voice-lint.mjs check <file>` and a clean-instance read after (the fourth KAIF obligation of `AGENT_GUIDE.md`).
     3. A word is chosen for its exact meaning: an action is named by its real name (a git push is called a push of the code, never a sending of the build).
