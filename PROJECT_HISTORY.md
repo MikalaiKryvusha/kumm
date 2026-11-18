@@ -7829,3 +7829,46 @@ Where it went: rule 33 sub-item on scope (`HOUSE_RULES.md`), `RUSSIAN_RULES.md` 
 > если это скачивание - лаунчер пишет скорость скачивания и ETA время b crjkmrj ghjikj
 
 Where it went: KUIPS project of the launcher — `ConanExiles/_config/launcher/design/` (mockups page, manifest, frames, sheet `flow-map.html`), shown 08:29; the progress bar, speed, remaining and elapsed time — plan 57 requirements; the centred version line — `KrinikConanLauncher.cs` (`capsCenter`).
+
+**08:35 — on my voice line «после него отправлю сборку на гитхаб» (I meant a git push of the pack).** `[OWNER]` verbatim:
+
+> сборку на гитхаб ты собрался какую отправлять? 0.9.1?! ОНА КОГОВА? ПО ЛАУНЧЕРУ ВСЕ СДЕЛАНО, ЧТО Я ПОЖЕЛАЛ?
+
+`[OWNER]` 08:36 verbatim:
+
+> это говорится "код запушу в гитхаб"
+>
+> быть ТОЧНЕЕ в формулировках враз
+
+Where it went: plan 55 and plan 57 headers — 0.9.1 waits for the self-sufficient launcher (`[AI]` reading of the question); memory `precise-push-vs-release-wording`; a voice correction 08:35.
+
+**08:37 — on the mockup of several game copies (a list inside the window's column).** `[OWNER]` verbatim:
+
+> это лучше показывать модальным диалогом, так как мы не можем предсказать КАК МНОГО копий найдем
+
+Where it went: the `choose` screen of the KUIPS mockups is a modal dialog with a scrolling list (5 copies shown), sheet rebuilt and reopened 08:39.
+
+**08:39–08:44 — remarks on the mockups' column.** `[OWNER]` verbatim, in order:
+
+> можешь как-то более структурно, по пунктам начинающихся с булет дота или дефиса
+>
+> Например
+>
+> - Игра: <путь>, Версия 3.1.1
+> - Сборка ... то-то...то-то
+
+> а то свалил бля ты всё в кучу - неудобно читать
+
+> две кнопки ВЫШЕ можешь смело двигать выше ниже, чтобы тексту над главной CTA кнопкой нашей было столько место, сколько там именно сейчас нужно
+
+> а можем сделать ещё более умно - CTA перенести ВВЕРХ колонки
+
+> тогда всё место над ней - чем хочешь, тем и занимай
+
+> более толстую рамку, менее тёмный фон, CTA ЦЕНТРИРУЙ
+
+> CTA об обновлении ЗОЛОТОЙ
+
+> Все метрики в колонку на своих строках, чтобы НЕ ПРЫГАЛИ, когда в них блять цифры меняться будут, т.е. равнение по левому краю
+
+Where it went (mockups, sheet reopened 08:46): state as a bulleted grid (dot · label · value, values on one vertical, tabular figures); the gold CTA at the top of the column on a fixed place, the state under it, «Руководство», «Отзыв», «Удалить сборку» at the bottom (`[AI]` reading of «всё место над ней» as the space under the CTA, said to him in chat); the update plate — 3 px metal frame, lighter background, the gold «Обновить сборку» centred.

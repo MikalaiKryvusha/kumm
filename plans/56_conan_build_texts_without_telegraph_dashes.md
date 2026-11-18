@@ -80,8 +80,32 @@ Only text the agent wrote, and only a dash that was wrong from the start. Conseq
   The Hosav table of interviews 002 / 003 is the agent's draft accepted by the owner: in scope, and every change there is shown to him (write-gate).
 - Pass 2 of `dm-fish-ru.tsv` already keeps the legal dashes (663 rows with their class in `allowed.tsv`) and changes 175 rows: it is checked row by row
   against BOTH conditions before it is applied.
+  **Checked 2026-11-18 08:50:** parity `pass2/apply_pass2.py` — 800 ready, 0 problems; a clean-instance read of the 175 changed rows
+  (`KUMM/.work/dash_fix/pass2/review_verdicts.tsv`, a reason per row): **OK 83 · LEGAL 66 · WORSE 26**. Pass 3 (next): take RU_new for the 83 OK rows; keep RU_old
+  for the 66 LEGAL rows (they join the allow list with the class the reviewer named: two nominatives, credit lines, headings / list separators copying the EN
+  layout, parallel ellipsis, ellipsis from the previous sentence, a dash between full clauses, explanatory); merge the 26 WORSE rows by the reviewer's note
+  (keep the legal part of RU_old, the telegraph fix of RU_new; 4459, 8126, 12421–12423 get the reviewer's suggested wording, checked against EN). Then parity,
+  `make_locres_fix.py` → `locres-set-tr.py`, `deploy-localization.py`, the in-game sample.
 - [ ] Re-read the rewrites already committed in the pack (`2d4b104`: launcher, report tool, hub rows, perks, settlement log, guide, README template) for a legal
   dash that was turned into something else; such a line goes back to its original wording and into the allow list with its class.
+  **Read 2026-11-18 08:4x** (pairs in `KUMM/.work/dash_fix/c2d4b104_pairs.txt`, `guide_pairs_2d4b104.txt`). To restore from `2d4b104^` (the dash was legal; class):
+  - README template: «Krinik Mod Pack — сборка модов для …» (two nominatives; keep the placeholders and the counts), «Krinik Mod Pack 0.9.0 от 02.11.2026 — первый
+    выпуск …» (two nominatives; keep the fix of «… — в главе» after it), «Их источник — Мастерская Steam и Nexus Mods» (two nominatives), «Запасной путь
+    установки — файл `install.cmd` …», «Запасной путь удаления — файл …» (two nominatives), «правообладателям — авторам модов …» (apposition; the colon made of it
+    is a rule-33.3 defect), «Его работа в сборке — подбор модов …» (two nominatives), «[MIT](LICENSE) — © 2026 …» in both languages.
+  - Guide 3.1.1: the same five storefront lines (install, uninstall, rights holders, his work, MIT), «Настройка HUD — кнопка «Настройки интерфейса» …»,
+    «Настройки — команда консоли dc SW_config», «dc PIFCSettings — настройки прохода сквозь спутников, dc SW_config — настройки погоды», «Версия 0.9.0 — первый
+    выпуск …» (keep «его планы описаны в главе …»).
+  - `eot-perks-ru.tsv`: «… не восстанавливается — взамен вы восполняете …» (consequence; the rewrite repeats «запас сил»), «Перезарядка — 90 с.» (subject and a
+    number phrase), «урон вас не берёт — до тех пор, пока не встанете» (explanation). `il-event-phrases-ru.tsv`: «{name} в восторге: {item} — объедение!» (two nominatives).
+  - `collect_report.ps1`: «… ID компьютера и аккаунтов — так устроен каждый отчёт» (before the summarising «так»), the mail body «… на рабочем столе — перетащите его
+    в это письмо» (consequence). `feedback_howto.txt`: «Откройте папку сборки — ту, где лежат …» (apposition), «… красное сообщение — тогда пришлите …» (condition and
+    consequence). Hub `krinik_mod_settings.lua`: «Включено — колесо переставляет камеру сразу; выключено — камера доезжает плавно.» (condition and consequence).
+  - Kept as fixed (the dash stood for a verb, preposition or «это»): «ноль — как в игре», «больше — быстрее», «1 — мир не замедляется», «влево — меньше нуля …»,
+    «100 % — как в игре», «меньше — живее …», «Кнопки — в инвентаре», «Радиус сортировки — в …», «Открытие — в знаниях», «Рецепты — у кузнеца», «Сложность
+    рыбалки — в окне», «Ниже — то, что …», «слева — список всех модов», «ссылки — в главе», «{need} — ранг {count}», PackRat «— сбор …», the license's parallel
+    «UE4SS — MIT, шрифты — SIL …». Lines whose content changed for another reason (the GitHub feedback path, the placeholders) keep their new content.
+  - Then `dash_lint.py` shows the restored lines → each goes to `dash_lint_allow.txt` with its class; the guide PDF and README are rebuilt.
 
 ## Judge round on the tooling (2026-11-18 01:40, pack `2d4b104`) — to act on first
 

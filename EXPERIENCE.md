@@ -91,6 +91,23 @@
 
 ## Entries
 
+### EXP-0560 · 2026-11-18 · ❌→✅ · #stand #isolation #owner-folders #launcher #env
+class: an-isolation-variable-set-in-one-case-only
+**Lesson:** the launcher stand isolated the launcher's state folder (`KRINIK_LAUNCHER_STATE_DIR`) only in the case written for it (crash); the build cases
+started the same exe next to a fake game, the crash check ran there too, and 8 files landed in the owner's `%LOCALAPPDATA%` — found by the judge, not by the stand.
+An isolation variable belongs in the ONE launch function every case uses, and the stand proves it at the end by comparing the owner's folder before and after.
+**Trigger:** a product writes per-user state (AppData, registry, Documents) and a stand overrides the location — put the override in the shared launcher of the
+stand, add a before / after check of the real folder.
+mechanized: `ConanExiles/_config/launcher/test/live.mjs` — `launch()` sets the state folder for every start; the run ends with «the owner's
+%LOCALAPPDATA%\KrinikConanLauncher is untouched»
+
+### EXP-0559 · 2026-11-18 · ❌ · #mockup #state #stand #look-at-what-you-made
+class: a-forced-stand-state-shown-as-the-product
+**Lesson:** a stand flag (`KRINIK_LAUNCHER_STATE=installed`) drew «Удалить сборку» and a live «Играть» under «Игра не найдена» — a window no player can see;
+I checked only the button corners on that frame and showed it to the owner, who read the whole window. A frame shown to the owner is read whole, as the player
+reads it, and every stand state is built from real files, never forced.
+**Trigger:** any frame of a window that goes to the owner — read every line of it for a contradiction before the corner you came for.
+
 ### EXP-0558 · 2026-11-18 · ❌ · #stand #background #process-tree #counting
 class: a-side-run-cleans-up-the-main-run
 **Lesson:** two slips of one stand hour. (1) A control run beside a running batch ended with `close_leftovers.ps1`, which kills every launcher started from

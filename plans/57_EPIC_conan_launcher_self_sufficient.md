@@ -3,7 +3,8 @@
 > **Created:** 2026-11-18 · on the owner's words 2026-11-18 08:18–08:22 (verbatim — `PROJECT_HISTORY.md` entry 2026-11-18 08:11)
 > **Parent:** the launcher of epic 55 (`plans/55_EPIC_conan_build_0_9_1_for_3_1_1.md`); the frame the owner questioned 08:12 (an impossible state on the stand)
 > **Status:** 🔧 phase 0 — mockups in KUIPS shown 2026-11-18 08:29 (12 screens, `ConanExiles/_config/launcher/design/`), waiting for the owner's verdict
-> **Outbound:** the owner's verdict on the mockups (phase 0 gate); his word on whether release 0.9.1 waits for this launcher or ships with launcher 1.1.0
+> **Outbound:** the owner's verdict on the mockups (phase 0 gate); release 0.9.1 does not ship before this launcher is done — read from the owner's question
+> 2026-11-18 08:35 «сборку на гитхаб ты собрался какую отправлять? 0.9.1?! ОНА КОГОВА? ПО ЛАУНЧЕРУ ВСЕ СДЕЛАНО, ЧТО Я ПОЖЕЛАЛ?» (`[AI]` reading, said to him in chat)
 
 ## Goal vector (Achieve)
 
@@ -52,6 +53,10 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
 
 - [x] KUIPS found (`D:\work\ai_sandbox\KUIPS`, 1.3.1); the launcher's KUIPS project `ConanExiles/_config/launcher/design/` — `mockups.html` (the window of
       mockup 11 + what the launcher gained later), `flow-map/flow-map.json`; `kuips shoot` (4K), `layout`, `build`, `check` 0 defects; sheet opened for the owner 08:29.
+- [x] The owner's remarks 08:37–08:44 applied (chronicle entry 2026-11-18 08:11): several copies — a modal dialog with a scrolling list; the state as a
+      bulleted grid (dot · label · value, values on one vertical, tabular figures, so changing numbers do not move the line); the gold CTA at the top of the
+      column on a fixed place, the state under it, «Руководство» / «Отзыв» / «Удалить сборку» at the bottom; the update plate — 3 px metal frame, lighter
+      background, the gold «Обновить сборку» centred. Sheet rebuilt and reopened 08:46, `check` 0.
 - [ ] The owner's verdict → fix the mockups → phase 1.
 
 ## Decisions made without the owner

@@ -9,7 +9,8 @@
 > **Parent:** `plans/54_conan_launcher_updates.md` (phases 1–3 built, four release blockers, phase 4 open) · `plans/53_conan_move_3.1.0.md` (the move recipe) ·
 > `ideas/23_conan_build_versions_and_launcher_update_check.md` · **Status:** 🔧 started 2026-11-17 20:1x — phase A: the build runs on 3.1.1 (20:33, TC_conan_move_3.1.1 6 pass / P6 blocked), the mods' update check left; phase B designed (research §4), the research
 > `researches/conan-launcher-modern-practice/README.md` in progress · **Outbound:** the GitHub release and the Nexus upload wait for the owner's word (outward
-> publishes); the forks of interview #039 go to the owner.
+> publishes); the forks of interview #039 go to the owner. **2026-11-18 08:35: 0.9.1 waits for the self-sufficient launcher — `plans/57_EPIC_conan_launcher_self_sufficient.md`**
+> (the owner's question 08:35, verbatim in plan 57's header: the launcher must be done as he wished before the release).
 
 ## Goal vector (Achieve + Avoid)
 
@@ -130,6 +131,16 @@ Phase B and phase A run in parallel (B needs no game: the fixture stand). D need
       C1 the crash box has an owner, C3 the two start offers run one after the other — done 01:33–01:35, compiled, uncommitted; regression batch58_r4 started
       before C1 / C3); C6 the plaque takes the mail from BuildInfo.AuthorLinks (01:37, compiled); still owed: R5 and C7 the no-marker-invented check
       cannot fail.
+      **Judge round 4 (on `bd7f96c..871b4c9`, 2026-11-18 08:4x): no product defect; 1 stand DEFECT, 5 risks, cosmetics.** Verified against the code and fixed
+      08:4x (uncommitted until the batch): the STAND wrote 8 `crashes-*.seen` files into the owner's `%LOCALAPPDATA%\KrinikConanLauncher` (only the crash case set
+      `KRINIK_LAUNCHER_STATE_DIR`) → the 8 files and the folder removed by literal path, `launch()` gives every start the stand's own state folder, and the run
+      ends with a check that the owner's folder is unchanged; R1 `CrashesSeenFile` → `StateDir` created the folder outside any try (an exception before the
+      settle = exit and an update revert on every start) → guarded; R2 a failed report start only logged → `StartReport` shows the player a box with the manual
+      way; R4 a game at a drive root broke the quoted `-GameDir "D:\"` → passed as `D:\.`; R5 the plaque's «Собрать отчёт» started the tool without the game
+      folder → the same `StartReport`; stand C3 tested a Dry-only branch → the Dry branch removed (Start logs the arguments), C3 asserts `-GameDir "<dir>"`.
+      Not fixed: R3 two launchers started together may both show the crash box (no single-instance guard; low harm). Owed cosmetics: four stale comments
+      (Launcher.cs «временная папка», Updates.cs «modpack.json последним», «места не просит», the `Unpack` header), `Start()`'s log text «новый лаунчер не
+      запустился» for any program, `afterPid == 0 && keepOld`, `[NOT-TESTED]` → `[TESTED]` where stand cases pass. Regression batch58_r5 running 08:49.
 - [x] D-fb (done with plan 56, 2026-11-18 01:0x): the second feedback path, GitHub Issues, in the report tool's console and box, `feedback_howto.txt`, the guide's
       «Отзывы и обратная связь», the README template (both languages) and the launcher's «Отзыв» plaque; the author-links section untouched (rule 22).
 
