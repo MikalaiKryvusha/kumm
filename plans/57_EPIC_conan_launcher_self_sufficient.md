@@ -84,6 +84,18 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
       plate and the bare column into `KrinikConanLauncher.cs` (today the real launcher still draws the line at `LVER_GAP` 6 with no plate).
 - [ ] The owner's verdict → fix the mockups → phase 1 (recon helper running 09:3x → `researches/conan-launcher-self-sufficient/README.md` §2–3). <!-- attribution-ok: a step waiting for the owner's verdict, no decision of his is claimed -->
 
+## Steps (phases 2–4) — the helper session of 2026-11-18 15:07–16:02
+
+- [x] 2026-11-18 16:01 +03:00: game search, CL, copies, the state model, RU / EN table, KUIPS column, download / parts beside / bundle beside, resume, the bar,
+      hidden installer with mod count, window placement — pack `590495e` (pushed). Run report `testcases/reports/2026-11-18_conan-launcher-self-sufficient.md`.
+- [ ] Full re-run on the final exe: `bash .work/launcher57/batch1.sh` with `CASES` = all 16 plan-57 cases, then `shots.sh` (the 16:00 fixes are not re-run).
+- [ ] The language DROPDOWN (`[OWNER]` 2026-11-18 15:55, passed by the main session): replace `LangSwitch` (`KrinikConanWidgets.cs`) by a field «RU ▾» at
+      top 18 / right 110 / height 28 and a list opening down (top 50, right 110, width 176) «Русский  RU», «English  EN», the current with the gold left bar —
+      geometry from the mockup screen `language` of `design/mockups.html`.
+- [ ] C13 (a visible normal start: taskbar button + icon, centred) — only with the owner away; K1 control on `c05aa51` (`.work/launcher57/old/`); X1 regression
+      `batch58.sh`; the release body marker `<!-- krinik-game: <v> CL-<n> -->` in the release tooling (epic 55 D); R2 a real install on a copy of the clean 3.1.1.
+- [ ] Judge rounds on `590495e` (main session).
+
 ## Decisions made without the owner
 
 `[AI]` (revisable, all shown on the mockups): the scan's progress counts drives; several copies are a pick list with version and state; no game → «Указать
