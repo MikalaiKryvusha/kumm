@@ -40,8 +40,9 @@ Build: `KrinikConanLauncher.cs` strings, `collect_report.ps1`, `feedback_howto.t
 `dm-fish-ru.tsv` (plan 56 pass 3), `asset-strings/*.tsv`, `eot-perks-ru.tsv`, `il-event-phrases-ru.tsv`, the Hosav table (interviews 002 / 003 — owner-accepted,
 write-gate), the KUIPS mockup strings. **First material** (the owner 09:03, chronicle): the agent's chat messages of 2026-11-18 — a clean instance lists every
 wrong phrase (incomplete, illogical, calqued, internal jargon, tautology, cliché, typo) with a correction; the patterns feed the lint and the Stop hook.
-**The measure** (the owner 09:03): Russian text is beautiful, clear, elegant, complete and coherent — the lint checks completeness, calques, clichés and
-repetitions; the clean reviewer and the owner's eye judge the rest. Owner-facing: `interviews/*.md`, every `*_ru.md`, `homeworks/`, review pages. Chat and voice: the Stop gate from phase 3.
+**The measure comes from the authorities, not from the owner's examples** (the owner 09:04: his five words of 09:03 were a direction, the measure is to be
+found on the web): recon `researches/russian-writing/MEASURING_RUSSIAN_TEXT.md` (communicative qualities of speech after Б. Н. Головин, readability indices
+adapted to Russian, editors' tools, coherence, norms of instructions and interface text); corrected 09:05 — at 09:04 this line wrongly called his examples «the measure». Owner-facing: `interviews/*.md`, every `*_ru.md`, `homeworks/`, review pages. Chat and voice: the Stop gate from phase 3.
 
 ## Decisions made without the owner
 

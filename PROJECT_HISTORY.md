@@ -7903,3 +7903,10 @@ Where it went: `plans/58_EPIC_academic_russian_guards_and_proofreading.md` (reco
 
 Where it went: the agent named five of its own phrases of this chat in the reply (an internal word, a tautology, a fragment without a predicate, a cliché, a
 typo); plan 58 — the first material is the agent's chat messages of the day, the measure is the owner's five qualities.
+
+**09:04 — the measure is found, not taken from examples.** `[OWNER]` verbatim:
+
+> как мерять  - в интернете найди! Я лишь примеры привёл, чтобы дать тебе направление в понимании того, чем мне не нравится твой язык
+
+Correction of the 09:03 note above: its line «the measure is the owner's five qualities» was the agent's reading, and it is wrong — the five words are a
+direction; the measure comes from a recon of the authorities (`researches/russian-writing/MEASURING_RUSSIAN_TEXT.md`, a helper started 09:05); plan 58 corrected.
