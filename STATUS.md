@@ -166,6 +166,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (`build_nexus_description.py` RAW path) in the same release as the public tree.
 > DONE 15:4x: wallpapers V2 «Тёплый» / «Реализм» (his upscales; 3 sizes PNG + WebP masters, pack `711846c`), the launcher's background = V2 Realism, the
 > 0.9.1 covers from Realism (pack `104bef6`, draft; wiring — plan 55 D-art). OPEN for him: does v1 «3.0.1» stay in the player's Wallpapers folder.
+> 15:5x (pack `09d5c40`): the cover digits got a light shadow (`make-wallpapers.py --shadow`); the language switch is a DROPDOWN (KUIPS screen «language»);
+> plan 57 criteria 12 (window centred on the working area, inside the screen) and 13 (taskbar button; the frames stand never on a monitor) — handed to the
+> launcher helper together with the owner's sighting of a stand window on his screen (a 10-min-old stand process stopped by PID 15:57).
 > (history) WAITING for the owner's pick: the v2 wallpaper `D:\Варвары над древним городом.png` (1672×941; he upscales it himself, 15:30) — six grades A–F
 > (`.work/wallpaper_v2/grade.py`), the page `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\92_oboi_v2_cvetokorrekciya\oboi_v2_cvetokorrekciya.html` opened 15:31;
 > his pick → the final grade at full size into `_config/branding/wallpapers_source/` (the art lives in the pack, 15:16). 15:33: he likes B (depth) and C (the v1
