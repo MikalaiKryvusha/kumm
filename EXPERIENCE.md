@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0562 · 2026-11-18 · ❌ · #eval #stylometry #stale-stand #ab #measure
+class: a-measurement-stand-measures-the-version-its-texts-were-written-with
+**Lesson:** the first blind quality A/B of the core (none vs v22) lost 18 : 5, and 69 of the core's 88 records were the hyphen for the dash and straight
+quotes. The stand's v22 texts had been written 2026-09-25 by «core 2.2 under test», which still carried ГЛ15 / ГЛ16 (write the author's hyphen); the owner
+removed both rules the same day, and nobody regenerated the texts. Every number on an eval stand belongs to the core version that WROTE its texts, not
+to the core on disk: before an A/B, diff the variant's `core-*-under-test.md` against the current core, and after any core edit regenerate both variants
+with one model on one day. Typography is counted apart from the language classes, or it buries them.
+**Trigger:** any A/B of a prompt, portrait or rulebook whose variant texts were produced earlier than its last edit.
+mechanized: no — `eval/quality-prep.mjs` freezes texts by sha but cannot know which core wrote them; the rule lives here and in plan 58 «run 1»
+
 ### EXP-0561 · 2026-11-18 · ❌→✅ · #guard #crlf #windows #stylometry #rot
 class: a-guard-red-for-months-is-a-guard-nobody-reads
 **Lesson:** the stylometric core's own gate (`voice-check.mjs --lint-core`) printed 66 «dangling references» on every Windows checkout since September:
