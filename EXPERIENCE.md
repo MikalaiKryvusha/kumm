@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0561 · 2026-11-18 · ❌→✅ · #guard #crlf #windows #stylometry #rot
+class: a-guard-red-for-months-is-a-guard-nobody-reads
+**Lesson:** the stylometric core's own gate (`voice-check.mjs --lint-core`) printed 66 «dangling references» on every Windows checkout since September:
+`md.split('\n')` left `\r` at the end of each line and the bullet definitions (`- **МШ8 …**`, matched with `(.*)$`) never registered. Nobody read the
+red, the core «did not work» in the owner's words, and the cause was one line. A text tool that splits lines splits on `\r?\n`; a gate that is red on
+the first run of a session is fixed before anything is built on it.
+**Trigger:** any parser of markdown or text in a repo cloned on Windows (`core.autocrlf=true`); a gate whose red output is long and old.
+mechanized: `krinik-stylometry/tools/voice-check.mjs` splits on `\r?\n` (core `2b99012`); lint-core 0 on the Windows clone
+
 ### EXP-0560 · 2026-11-18 · ❌→✅ · #stand #isolation #owner-folders #launcher #env
 class: an-isolation-variable-set-in-one-case-only
 **Lesson:** the launcher stand isolated the launcher's state folder (`KRINIK_LAUNCHER_STATE_DIR`) only in the case written for it (crash); the build cases
