@@ -283,6 +283,10 @@
     4. When his answer arrives in the chat, the agent closes the page itself: `node .kaif/tools/contour/review.mjs <doc> --close`, then records the answer.
     `[OWNER]` 2026-11-18 13:50–13:58 · `PROJECT_HISTORY.md` entry 2026-11-18 13:55.
 
+37. **Images of the build: WebP wherever the reader can open it (the launcher, documents, pages), JPEG quality 95 where WebP cannot be used; a wallpaper ships
+    in the format its final upscale gives.** All art sources live in ONE folder `art/` at the pack root (logos, icons, wallpapers, wallpapers_source,
+    screenshots); scripts and published copies read from there. `[OWNER]` 2026-11-18 15:38 · interview #040 Q2, Q3.
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —
 WebP, never PNG). The context-budget hook's hint is obeyed (`CLAUDE.md`).

@@ -164,7 +164,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the pack root (logos, icons, wallpapers, wallpapers_source, screenshots) — OWED, waits for the launcher helper's commit of `build-docs.py`** (it holds the icon
 > path); the live Nexus description loads the logo from the PUBLIC repo path `_config/branding/krinik-modpack-logo.webp` — move the Nexus text
 > (`build_nexus_description.py` RAW path) in the same release as the public tree.
-> WAITING for the owner's pick: the v2 wallpaper `D:\Варвары над древним городом.png` (1672×941; he upscales it himself, 15:30) — six grades A–F
+> DONE 15:4x: wallpapers V2 «Тёплый» / «Реализм» (his upscales; 3 sizes PNG + WebP masters, pack `711846c`), the launcher's background = V2 Realism, the
+> 0.9.1 covers from Realism (pack `104bef6`, draft; wiring — plan 55 D-art). OPEN for him: does v1 «3.0.1» stay in the player's Wallpapers folder.
+> (history) WAITING for the owner's pick: the v2 wallpaper `D:\Варвары над древним городом.png` (1672×941; he upscales it himself, 15:30) — six grades A–F
 > (`.work/wallpaper_v2/grade.py`), the page `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\92_oboi_v2_cvetokorrekciya\oboi_v2_cvetokorrekciya.html` opened 15:31;
 > his pick → the final grade at full size into `_config/branding/wallpapers_source/` (the art lives in the pack, 15:16). 15:33: he likes B (depth) and C (the v1
 > palette) — both lossless at 1672×941 in `НА ОТСМОТР НИКОЛАЕМ\93_oboi_v2_B_i_C\` (opened); he upscales and picks; the final one goes into the pack.

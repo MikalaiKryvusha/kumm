@@ -8236,3 +8236,35 @@ everything around them so that no number or link was lost, and the seams show.
 Where it went: plan 57 criteria 10 (string tables, the switch left of the window buttons and the version plate) and 11 (the Windows UI language first, the player's
 choice saved); the mockups get the switch (`.lang`); the launcher helper got both by message. `[AI]` said in chat 15:09: Russian and English, any other system
 language falls back to English — open to his word.
+
+**15:28–15:45 — the second wallpaper.** `[OWNER]` verbatim, in order:
+
+> на D есть v2 нашего wallpaper
+>
+> Варвары над древним городом.png
+>
+> vможешь его посмотреть фото инструментами и предложить варианты цветокоррекции?
+>
+> Откроесь мне сранвние в HTML
+
+> апскейл я сделаю сам
+
+> B C нравятся, открой мне их  в отдельной папке
+
+> сделал апскейлы
+> D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\93_oboi_v2_B_i_C
+>
+> красиво их переименовать V2 и название сбоки, одно Теплый, второе реализм.
+>
+> Реализм идет в лаунчер 1.0.0
+>
+> по обоим картинкам 3 варианта разрешения, как и раньше
+
+> и это реализм вариант идёи и на обои витрим - релизы, гитхаб, нексус, ридми - везде, где нужно
+
+Where it went: six grades A–F on a page (review folder 92); B and C lossless (folder 93); his upscales → `Krinik_Conan_Exiles_Wallpaper_V2_{Warm,Realism}`
+in 4K / 2K / 1080p PNG + lossless WebP masters (pack `711846c`; `[AI]` Warm = B, Realism = C, said in chat); the launcher's background = V2 Realism 4K
+(`make-res.py`); the 0.9.1 covers from Realism (pack `104bef6`, `_config/release/draft_0_9_1/nexus_media/`, review folder 94) — wired into README, the
+notes and the Nexus text at the release, after the rewrite of those texts.
+
+**15:38 — interview #040 answered on its page** (the pack's order): Q1 B, Q2 A, Q3 his own text (in the interview), Q4 A → `HOUSE_RULES.md` 37.

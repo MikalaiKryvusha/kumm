@@ -170,6 +170,13 @@ map markers (`SimpleMinimap_MarkerData.sav`), the damage logs and `Game_0.db` ar
       game menu (what it does — the report zip) and GitHub Issues of the public repo (bugs and improvement requests), both accepted. The author-links section stays
       a section of links (HOUSE_RULES rule 22 — no sentence under it calls the links report addresses); the feedback section is its own heading.
 
+- [ ] D-art. **The storefront covers of 0.9.1 come from the V2 «Реализм» wallpaper** (`[OWNER]` 2026-11-18 15:45 «и это реализм вариант идёи и на обои
+      витрим - релизы, гитхаб, нексус, ридми - везде, где нужно», verbatim — `PROJECT_HISTORY.md` entry 2026-11-18 15:03). Made (pack `104bef6`, DRAFT):
+      `_config/release/draft_0_9_1/nexus_media/` — `02_cover_0_9_1.jpg` (Nexus, JPEG 95), `cover_0_9_1.webp` (GitHub, README), `cover_0_9_1_4k.webp`,
+      `00_header_1300x372.jpg`. To wire: the README picture, the 0.9.1 release notes, `build_nexus_description.py` (`img('cover_0_9_0.webp')` →
+      0.9.1; the RAW logo path `_config/branding/krinik-modpack-logo.webp` moves with interview #040 Q2's `art/` — change the Nexus text in the same
+      release as the public tree). The player's `Wallpapers` folder holds v1 (3.0.1, JPEG) and V2 Warm / Realism (PNG): whether v1 stays — ask the owner.
+
 ### Phase E — publication: decided ahead
 
 - **0.9.1 is published as an ordinary GitHub release, NOT «Pre-release»**: the launcher's feed skips drafts and pre-releases (`ConanExiles/_config/launcher/KrinikConanUpdates.cs`
