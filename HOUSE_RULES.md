@@ -296,6 +296,11 @@
     bug's status is read from its file together with its interview and plan before it is said to the owner (an accepted fix whose bug file was never updated is
     the failure this guards). `[OWNER]` 2026-11-18 18:58 · 18:59 · `PROJECT_HISTORY.md` entry 2026-11-18 19:0x.
 
+39. **A test walks next door: every functional run also checks the neighbouring functions the change could break.** The case set of a change carries a
+    «Neighbours» section — the functions that share the edited code, assets, hooks, widgets or events (a blueprint edited → its other buttons and events; a hook
+    added → the other sections on the same function; a layout changed → the controls beside it) — each a short case run in the same session as the change's own.
+    `[OWNER]` 2026-11-18 20:35 · `PROJECT_HISTORY.md` entry 2026-11-18 20:35.
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —
 WebP, never PNG; for the build's own images rule 37 above governs). The context-budget hook's hint is obeyed (`CLAUDE.md`).

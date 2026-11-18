@@ -8582,3 +8582,17 @@ the Russian proofreading goes right after RC1 into RC2, the final 0.9.1 does not
 Where it went: EAA → bug 85 (the posted-Esc census of every listed mod window: ten swallow Esc, EAA among them; one fix for the class); review + manual run →
 TC `testcases/TC_conan_keybinds_to_game_events_2026-11-18.md` and the judge rounds (STATUS NOW); the arts — his answer of 15:38 (interview #040 Q2 A: one
 `art/` folder at the pack root) had never been applied while HOUSE_RULES 37 already stated it as done: applied 20:0x (pack commit, STATUS NOW item 2).
+
+## 2026-11-18 20:35 +03:00 — the owner: a test walks next door (recorded 20:3x)
+
+`[OWNER]` verbatim (said while bug 85's rewrite was being built):
+
+> тестирование обязано "ходить рядом" - проверя немного соседнего функционала, что могло сломаться
+>
+> то есть, и тестирование нового функционала, и небольшая рекгрессия рядом
+
+Where it went: HOUSE_RULES rule 39; the «Neighbours» section of `testcases/TC_conan_keybinds_to_game_events_2026-11-18.md` (N1–N9).
+Also this chat, 20:14–20:33 (verbatim): «на D есть / Закат над древней долиной.png / сдлеай такие же две цветокореккции, как для v2 делали, реализм и теплый» ·
+«там же в D положи их» · «этот исходник может отличаться от исходника v2» · «может код 1 в 1 не сработает» · «цель: цвета получились такие же, как в наших
+коррекциях v2» · «сделал два апскейла, они идут в поставку обоев как V2_female_beta» · «beta или betta как пишут?» · «Windows 11 на рабоем столе webp умеет
+отображать?» — graded to the target look, the files at the root of disk D, the upscales cut into `art/wallpapers(_source)` (pack commit), answers in chat.
