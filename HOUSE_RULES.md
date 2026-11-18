@@ -236,6 +236,15 @@
     3. The built sheet and the frames are rebuilt by these commands and stay out of git; the page and the manifest are committed.
     `[OWNER]` 2026-11-18 08:16 · 08:19 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11.
 
+35. **The agent's own Russian is academic, strict and clear; text the player or the owner reads as the build's goes by the owner's portrait.**
+    1. Every Russian text of the agent (chat, voice, documents for the owner, interviews) is written by `researches/russian-writing/RUSSIAN_RULES.md` and the
+       catalogue of AI-Russian defects `researches/russian-writing/AI_RUSSIAN_DEFECTS.md` (calques of English syntax, telegraphic dashes, bureaucratese, the
+       "not just X but Y" frame, filler, false enthusiasm); before sending, the text is read against the catalogue's checklist.
+    2. Text of the build (launcher, installer, report tool, mod UI, guide, README, release notes, Nexus text, mockup strings) — `node .kaif/tools/kaif-voice-lint.mjs load`
+       before the first word, written by the portrait, `kaif-voice-lint.mjs check <file>` and a clean-instance read after (the fourth KAIF obligation of `AGENT_GUIDE.md`).
+    3. A word is chosen for its exact meaning: an action is named by its real name (a git push is called a push of the code, never a sending of the build).
+    `[OWNER]` 2026-11-18 09:00–09:01 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11.
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —
 WebP, never PNG). The context-budget hook's hint is obeyed (`CLAUDE.md`).

@@ -7880,3 +7880,11 @@ Where it went (mockups, sheet reopened 08:46): state as a bulleted grid (dot · 
 > HFPHTIF>
 
 Done 09:00: `2eba534...3e6a76e (forced update)`; the replaced remote commit `2eba534` had the same tree as local `82260a4` (0 files differ), only its message held a word that must not stand in the public history. `origin/main...main` = 0 / 0 after the push.
+
+**09:00–09:01 — the agent's own Russian.** `[OWNER]` verbatim:
+
+> касательно ТВОИХ текстов есть требование: АКАДЕМИЧЕСКИЙ СТРОГИЙ ПОНЯТНЫЙ ЯЗЫК. Никакой обсебятины ИИ Claode языка. Иди в интернет и почитай, как русскоговорящее сообщество ругается на КРИВОЙ Claude русский язык
+
+> и пойми, почему я так настойчиво от тебя требую академичесокго русского и русского по моему стилометрическому ядру!
+
+Where it went: a web recon by a helper → `researches/russian-writing/AI_RUSSIAN_DEFECTS.md`; the rule — `HOUSE_RULES.md` rule 35; the agent's understanding said in chat 09:02 (the texts go out under his name and the community reads AI text as hack work; strict language is unambiguous for a player who follows an instruction literally; one voice across README, guide, launcher; the chat costs his attention).
