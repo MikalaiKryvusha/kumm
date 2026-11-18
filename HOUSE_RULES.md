@@ -262,7 +262,11 @@
           another deverbal noun, text about the text) → the turn is replaced; precision or completeness lost → it stays.
        3. Text addressed to a person (the interface, the launcher, the installer, messages to the player, replies to the owner in chat) is soft, elegant and
           friendly, without bureaucratese.
-    `[OWNER]` 2026-11-18 09:00–09:01 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11 · 4: `[OWNER]` 2026-11-18 13:50–13:59 · entry 2026-11-18 13:55 · interview #039.
+    5. **Every piece of work that touches Russian follows the manuals of the core `krinik-stylometry/russian_norms/` — strictly, with no exception.** Release
+       notes, README updates and the user guide of every next release are written only in this language: the owner's portrait loaded before the first word
+       (`node .kaif/tools/kaif-voice-lint.mjs load`), the register of 35.4, the manuals' rules, then `kaif-voice-lint.mjs check`, the core's
+       `tools/voice-check.mjs`, `dash_lint.py` for build texts and a clean-instance read; only then the text goes to the owner, and to a publication after his word.
+    `[OWNER]` 2026-11-18 09:00–09:01 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11 · 4: `[OWNER]` 2026-11-18 13:50–13:59 · entry 2026-11-18 13:55 · interview #039 · 5: `[OWNER]` 2026-11-18 14:31–14:32 · entry 2026-11-18 13:55 (continued).
 
 36. **The owner is talked to in the chat; a question for his decision goes through the interactive contour, never a dialog of the harness.**
     1. A clarification is plain text in the chat, and the agent answers his messages as a conversation, not as a report.

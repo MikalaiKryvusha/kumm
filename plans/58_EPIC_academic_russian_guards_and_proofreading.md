@@ -14,6 +14,19 @@
 > `ru-build-text-check` reads the owner's Russian documents by genre, `contour-page-lock` (new), `dash_lint.py` D1–D5 (370 lines found) — judges owed.
 > **Outbound:** —
 
+## Guards judge round 1 (2026-11-18 14:32 +03:00) — 16 findings; fixed 1, 2, 9; OPEN for the next chat
+
+Fixed: (1) `contour-page-lock` looked for a homework's lock in `homeworks/decisions` — review.mjs writes every lock into `interviews/decisions`; (2) the queue
+page's `_queue.lock` now refuses too (selftest 7/7); (9) a red full lint no longer stops `build_docs_and_launcher.cmd` before the launcher — the PDF is refused, the
+launcher is built, exit 1 names the cause (NOT run yet: the guide was being rewritten by a helper; run `python -I -X utf8 _config/release/build-docs.py` next chat).
+Open: (3) the owner-text check flags the owner's own recorded words — `**Комментарий владельца**`, `**Answer:**`, `[OWNER]` quotes, «» quotes over several lines;
+(4) the selftest's ru-ok case passes without the marker (the 3-word «» quote is dropped anyway); (5) only the exact `<!-- ru-ok:` spelling is honoured; (6) a
+multi-line HTML comment shifts line numbers and leaks text that mentions ru-ok; (7) `BUILD_TEXT` misses `asset-strings/`, `ru_table.lua`, `modpack.json`; (8) D5 not
+fixed — a hit printed with `\n` cannot be pasted into the allow list (286 of 349 KrinikRU hits hold real newlines); (10) `ru_table.lua` is generated — fixes go
+to its source tables; (11) manifest line numbers and a broken JSON → exit 1 instead of 2; (12) `= "…"` values skipped, a commented entry read, a renamed table
+dropped silently; (13) the owner check fails open silently; (14) the ЖЯ selftest hard-codes 6; (15) build-docs labels every lint failure as a dash; (16)
+`OWNER_TEXT` also matches `.work/` and `.kaif/backup-*`. The judge's probes: `.work/judges/guards/`.
+
 ## The first blind quality A/B (2026-11-18 10:28 +03:00) — criterion 6, run 1
 
 Instrument: `krinik-stylometry/eval/quality/REVIEWER_BRIEF.md` (nine classes after Головин incl. completeness and coherence, ФИПИ-style counts, every record

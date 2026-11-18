@@ -8128,3 +8128,9 @@ Continued (recorded 2026-11-18 14:00 +03:00):
 - 13:58 «пиздец...» · «ты закрыть не мог? ты видишь что я тебе ответы дал уже»
 - 13:59 «А» (six messages)
 The page's answer was picked up from the window's storage at 13:58 (recorded as «B)» after the refused save); the owner's chat word A is applied — interview #039, `HOUSE_RULES.md` 35.4 and 36.
+
+Continued (recorded 2026-11-18 14:32 +03:00):
+- 14:22 «саму методичку этим же языком и пишете, надеюсь?»
+- 14:31 «этим же языкаом переписать README в гитхабе, релиз ноутсы выпущенного релиза, руководство пользователя»
+- 14:32 «и только этим языком писать следующие релизноутсы и обновления РИДМИ и руководства пользователя, и вся разработка ВСЕГО, что касается русского языка ведётся ТОЛЬКО СОГЛАСНО РУКОВОДСТВАМ ПО РУССКОМУ ЯЗЫКУ!!! СТРОГО!!!»
+Rule: `HOUSE_RULES.md` 35.5. The rewrite of the build's README, the 0.9.0 release notes and the user guide is given to helpers (portrait + manuals); publication waits for the owner's look.
