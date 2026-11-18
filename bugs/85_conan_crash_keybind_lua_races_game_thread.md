@@ -80,3 +80,14 @@ Lua mods of the build: only UE4SS's own samples (`BPModLoaderMod`, `Keybinds`, `
 ## Links
 
 - `games/ConanExiles/mods/KrinikConanArchery.md` (the corpse-arrows section) · `ConanExiles/_config/check-lua-game-thread.py` · EXP-0062 (UE4SS #1180) · STATUS item 00.
+
+## 2026-11-18 18:58 — the five KrinikConanUI binds: what the replacement can hook
+
+Still open for 0.9.1 (the guard `check-lua-game-thread.py` lists 5: `krinik_feedback.lua:91`, `krinik_mods_button.lua:285`, `krinik_mod_settings.lua:1380`,
+`krinik_pause_in_menu.lua:680`, `krinik_hub_controller.lua:354`). Every LMB in gameplay runs the feedback bind's Lua off the game thread while this mod runs
+game-thread Lua often (the FPS counter every 250 ms, the pickup check every second) — the class of the 2026-11-07 crash. Read 18:58: the native `FLXButtonBase`
+(under `WBP_ButtonBase`) has NO click UFunction — `SignalClicked/Pressed/Released` are delegate properties and the click is native C++
+(`researches/conan-mod-settings-hub/vanilla-settings-widgets.md` line 23), so a RegisterHook on «the button's click» does not exist. Replacement candidates for
+the next chat: a kit-bound custom event per OUR button (the attribute page arrows' way, `kit-attribute-paging-step2.py` — the click calls a BP event, Lua hooks
+it on the game thread); for Esc / Tab — the game's own handling (`GUIModuleController:ActivateModule` is already hooked by the hub controller); gameplay keys —
+the hero's AnyKey event (KrinikConanCamera's way). Fixing: the next chat, first item (STATUS NOW).

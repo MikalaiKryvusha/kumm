@@ -6207,3 +6207,10 @@ never `/tmp`.   → link: AGENT_GUIDE.md → "Document & text hygiene", face 4
 **Result:** ✅ — the experience log is live and greppable.
 **Lesson:** capture lessons at the level of *approach* (what worked / what to avoid), not defect detail
 (that lives in `bugs/`); one short entry beats a long story.   → link: (none)
+
+### EXP-0569 · 2026-11-18 · ❌→✅ · #launcher #stand #owner-screen #stale-exe
+A stand that installs a test bundle runs the bundle's OWN launcher after the install — and that exe was built hours earlier (st.json 15:41), before the stand
+learned to park windows off the monitors, so its window showed on the owner's screen while the exe under test was clean. Rebuild the stand bundle from the
+exe under test whenever the launcher's window or stand behaviour changes (`stand.mjs <dir> --launcher <exe>`); the screen watcher (`offscreen.ps1`) caught it
+only because it watches every launcher under the case folder. Same day: Windows question boxes centre on the monitor even when their owner window is
+off-screen — the frames stand moves `#32770` boxes by a WH_CBT hook.
