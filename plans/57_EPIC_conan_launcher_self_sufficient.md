@@ -98,7 +98,23 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
       geometry from the mockup screen `language` of `design/mockups.html`.
 - [ ] C13 (a visible normal start: taskbar button + icon, centred) — only with the owner away; K1 control on `c05aa51` (`.work/launcher57/old/`); X1 regression
       `batch58.sh`; the release body marker `<!-- krinik-game: <v> CL-<n> -->` in the release tooling (epic 55 D); R2 a real install on a copy of the clean 3.1.1.
-- [ ] Judge rounds on `590495e` (main session).
+- [x] 2026-11-18 18:2x: the language DROPDOWN built (`LangSwitch` field «RU ▾» + `LangList` / `LangItem`, the mockup screen `language`; closed by a pick, a second
+      press, Esc, a click outside, the window going to the background); stand case `lang` LG1–LG4 25 / 25, the open-list frame matches the mockup (place, width,
+      row height); not carried: the list's drop shadow (a transparent WinForms edge shows only the window picture, not the version plate beside it — rule 23).
+- [x] Judge round 1 on `c05aa51..21075fb` (2026-11-18 18:32, report `reports/2026-11-18_judge_launcher_c05aa51_21075fb.md`), each finding verified in the code:
+      D1 the reference copy — FIXED by `never.txt` in the launcher's state folder (search, the remembered copy and the install refuse it; this PC: `D:\Instals`);
+      D2 the installed version — FIXED: KUMM `Deploy-ModPack.ps1` writes `_kumm_backup\pack_version.txt`, the launcher reads it (0.9.0 installs: the hand-unpacked
+      bundle wins); D3 every unfinished download read «связь прервалась» — FIXED (marks `net` / `user` / `error`, no mark → «Лаунчер не закончил скачивание
+      сборки.»); D4 PARTLY REFUTED — the accepted mockups keep the header on the build's own game («0.9.1 · 3.1.1» on «noversion»); the real defect, the title
+      «0.9.1 для … 3.0.1», FIXED (pack and game shown as one pair); D5 Play / Uninstall live while the uninstaller runs — FIXED (screen «removing»); D6 a
+      remembered copy is final — needs a new UI element not on the mockups → the owner; R7 Steam half-installed, R8 the CL cut at a chunk end, R9 the CL scan on
+      every Refresh, R10 `per_page=30`, R11 4xx read as a broken connection, R14 the window no longer centred after growth — FIXED; R12 REFUTED (the old-bundle
+      delete is asked, default «Нет», with the folder and its size, and the hand-unpacked 0.9.0 folder is its main case); R13 ACCEPTED as a risk (a watchdog
+      killing a long 13 GB install would leave a half-installed game); the strings guard skipped exception texts — FIXED (two Russian exception texts that
+      reach the player moved into the table, the rest are English log text). New stand cases: `refused` (V1 V2), `removing` (U1), `never` (N1 N2), D4b in
+      `fresh-cut`; the frames stand now also hides the Windows question boxes (a WH_CBT hook — the uninstall question had shown on the owner's screen 18:44)
+      and the watcher's readiness line; the update stand `live.mjs` runs in the frames mode too. Full `self.mjs` run (18 cases) — see the run report.
+- [ ] Judge round 2 on the new diff.
 
 ## Decisions made without the owner
 

@@ -8383,3 +8383,62 @@ Where it went: pack `eec880b` — the v1 wallpapers and sources renamed `Krinik_
 on the mockups and the KUIPS sheet (check 0); plan 57 criterion 6 (no hint on the no-release screen, the version 1.0.0); STATUS FIRST NEXT CHAT items 2 and 4.
 
 
+
+## 2026-11-18 18:17 +03:00 — the owner moves the build 0.9.1 with the launcher 1.0.0 to the first place (decided 18:16–18:17, recorded 18:19)
+
+`[OWNER]` verbatim, four messages typed while the agent ran /resume (chat of 18:16, first word «resume»):
+
+> КРИТИЧЕСКИ ВАЖНО СОБРАТЬ СБОРКУ 0.9.1 с лаунчером 1.0.0
+>
+> стремимся это сделать!!!
+>
+> фокусируемся на этой работе
+>
+> это приоритет #1 из трех пунктов
+
+Where it went: STATUS «PRIORITY OF THE COMING DAYS» — item 3 of the three (the build 0.9.1) is now first and the only focus; items 1 (the Russian of the build) and
+2 (the launcher 1.0.0) serve it. `[AI]` reading, said in chat: «собрать» is the shipment built and verified, the publication on GitHub and Nexus still waits for his word.
+
+Correction of the entry above (2026-11-18 18:19 +03:00): its «Where it went» line read «items 1 and 2 serve it», which narrowed them. The owner's next message, 18:19:
+
+> там три связанных пункта вместе
+
+So the three items are one linked goal done together; nothing of items 1 (the Russian of the build and the working stylometric core) and 2 (the full launcher
+1.0.0) is cut. STATUS rewritten the same minute.
+
+The owner names the three, 18:19:
+
+> сборка 0.9.1
+> лайнчер 1.0.0
+> корректный русский
+
+## 2026-11-18 18:52 +03:00 — the owner: every Krinik mod at 0.9.1 (recorded 18:53)
+
+`[OWNER]` verbatim, typed while the agent worked on the launcher judge's findings:
+
+> всем нашим мобам версии подними до 0.9.1
+
+(«мобам» is «модам».) Where it went: plan 55 R1 — the `[AI]` reading «every Krinik mod goes to 0.9.1 as in 0.9.0» is now his word: `modpack.json` Krinik entries,
+the modinfo of the four Krinik paks (Graphics, Archery, UI, Gameplay — `set-pak-version.py`; UI also by the kit for the menu's version lines), the Lua headers.
+
+## 2026-11-18 19:0x +03:00 — the owner on «critical» and on the first-person bow (said 18:58, recorded 19:0x)
+
+The agent listed a «top 5 critical» that held a cosmetic bug and called bug 95 open. `[OWNER]` verbatim:
+
+> Лук не виден от первого лица (ошибка 95). Не исправлено, а стрельбу из лука вы называли важной.
+>
+> разве не пофикшено??? Странно, а ты мне скриншоты показывал
+
+> Звери при атаке заходят телом в героя (ошибка 87). Не исправлено, бой со зверями выглядит сломанным.
+>
+> это не критическое, это косметика. Ты не правильно понимаешь "критическое"
+
+Where it went: bug 95 header and STATUS corrected (the look B ships, accepted 2026-11-16 18:40, interview #036 — the bug file had kept «🔴 OPEN»); STATUS gains the
+definition «critical = a crash, a freeze, lost saves or settings, a main function that does not work; a visual defect is cosmetic» and the three critical bugs open
+for 0.9.1 (85, 79, 100); HOUSE_RULES rule 38.
+
+The owner's definition, 18:59 (verbatim):
+
+> критическое то - что касается технического состояния ПО. Креши, тормоза, лаги, не запускается, падает, ошибки, нет окна, лишние окна, не нажимается кнопка, блоккер, тупик, невозможно продолжить, не сохраняется, не загружается и так далее
+
+HOUSE_RULES rule 38 and the STATUS line carry it.

@@ -2,7 +2,7 @@
 
 **Created:** 2026-11-18 · **Under test:** `ConanExiles/_config/launcher/` — `KrinikConanLauncher.cs` (the window and the `Launcher` controller), `KrinikConanGames.cs`
 (search, CL, state folder), `KrinikConanUpdates.cs` (feed markers, `Job` / `Meter`, `BuildUpdate`), `KrinikConanWidgets.cs` (state panel, progress bar,
-update plate, language switch, copies list), `KrinikConanText.cs` (the RU / EN table) · **Version/build:** launcher 1.1.0 (number not settled — plan 57 FORK),
+update plate, language switch, copies list), `KrinikConanText.cs` (the RU / EN table) · **Version/build:** launcher 1.0.0 (the owner 2026-11-18 16:18, plan 57 criterion 6),
 pack 0.9.1, the fixture build 1.0.1 of `test/stand.mjs`
 **Test basis:** `plans/57_EPIC_conan_launcher_self_sufficient.md` criteria 1–11 (10–11: the owner 2026-11-18 15:08, passed by the main session); the accepted
 KUIPS mockups `ConanExiles/_config/launcher/design/mockups.html` (pack `95f8b52` + `75b310e`, strings final); `researches/conan-launcher-self-sufficient/README.md`

@@ -397,6 +397,9 @@ const g1 = ginst(GX1)
 const SHIP = at(GG, '_kumm_backup/shipped.json')
 expect('обновление: установка 1.0.0 записала shipped.json — пять файлов настроек',
   g1.code === 0 && existsSync(SHIP) && Object.keys(JSON.parse(readFileSync(SHIP, 'utf8')).files).length === 5, `${g1.out}\n${rd(SHIP)}`)
+// номер поставленной сборки — для лаунчера (судья лаунчера 2026-11-18, находка 2: распакованное и не поставленное обновление выдавало себя за поставленное)
+const PVER = at(GG, '_kumm_backup/pack_version.txt')
+expect('обновление: установка 1.0.0 записала номер поставленной сборки', rd(PVER) === '1.0.0', rd(PVER))
 // игрок меняет: качество, клавишу, Engine.ini; ServerSettings и настройки мода не трогает
 const PLAYER_GUS = '[/Script/Engine.GameUserSettings]\r\nsg.ShadowQuality=1\r\nResolutionSizeX=2560\r\n'
 const PLAYER_IN = '[/Script/Engine.InputSettings]\r\nActionMappings=Jump:LeftAlt\r\n'
@@ -415,6 +418,7 @@ const g2 = ginst(GX2)
 const cfg = rel => rd(at(GG, `${CFG}/${rel}`))
 const playerCopies = readdirSync(at(GG, CFG)).filter(n => n.startsWith('Engine.ini.player-'))
 expect('обновление: install.ps1 поверх 1.0.0 — откат старой и установка новой прошли', gx2.code === 0 && g2.code === 0 && /an installed build found/.test(g2.out), `${gx2.out}\n${g2.out}`)
+expect('обновление: номер поставленной сборки теперь 1.0.1', rd(PVER) === '1.0.1', rd(PVER))
 expect('обновление: игрок не трогал ServerSettings — новая версия сборки', cfg('ServerSettings.ini').includes('Harvest=2'), cfg('ServerSettings.ini'))
 expect('обновление: игрок поменял качество — его GameUserSettings на месте, рядом ничего (сборка файл не меняла)',
   cfg('GameUserSettings.ini') === PLAYER_GUS && !existsSync(at(GG, `${CFG}/GameUserSettings.ini.krinik-new`)), `${cfg('GameUserSettings.ini')}\n${g2.out}`)

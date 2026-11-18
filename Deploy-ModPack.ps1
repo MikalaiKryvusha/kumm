@@ -1208,6 +1208,10 @@ function Invoke-DeployTarget {
         try {
             $bdir = Join-Path $Target.Path $script:BackupDirName
             Copy-Item $PSCommandPath (Join-Path $bdir 'Deploy-ModPack.ps1') -Force
+            # Какая сборка стоит - номер пака в _kumm_backup\pack_version.txt: лаунчер берёт номер поставленной сборки отсюда, а не по распакованным папкам
+            # рядом с игрой (судья лаунчера 2026-11-18, находка 2: распакованное, но не поставленное обновление выдавало себя за поставленное).
+            # Удаление сборки (-Restore) уносит файл вместе с папкой копий. [NOT-TESTED]
+            if ($pack.packVersion) { [System.IO.File]::WriteAllText((Join-Path $bdir 'pack_version.txt'), [string]$pack.packVersion, (New-Object System.Text.UTF8Encoding($false))) }
             if ($un.template) { $body = [System.IO.File]::ReadAllText((Resolve-UnderRoot $un.template), [System.Text.Encoding]::UTF8) }
             else {
                 $body = @(

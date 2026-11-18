@@ -35,6 +35,11 @@
 > # 🔥 PRIORITY OF THE COMING DAYS — WE DO NOT REST UNTIL ALL THREE ARE DONE
 > `[OWNER]` 2026-11-18 09:12–09:13 (verbatim — `PROJECT_HISTORY.md` entry 2026-11-18 08:11, notes 09:12 and 09:13). Autonomous work (/dayloop) on exactly this, in this order:
 >
+> **⚡ 2026-11-18 18:17–18:19 — the build 0.9.1 with the launcher 1.0.0 is the focus, and the three items below are ONE linked goal, done together** (`[OWNER]`
+> «КРИТИЧЕСКИ ВАЖНО СОБРАТЬ СБОРКУ 0.9.1 с лаунчером 1.0.0» · «стремимся это сделать!!!» · «фокусируемся на этой работе» · «это приоритет #1 из трех пунктов» · 18:17 ·
+> «там три связанных пункта вместе» · 18:19; chronicle entry 2026-11-18 18:17). Nothing of items 1 and 2 is cut: the build is assembled from all three. «Собрать» =
+> the shipment built and verified (launcher 1.0.0 exe, export bundle, parts, digests, PDF guide, release notes) — publication still waits for his word.
+>
 > **1. Correct Russian in the Krinik build + a stylometric core that WORKS** — `plans/58_EPIC_academic_russian_guards_and_proofreading.md`, `HOUSE_RULES.md` 33, 35.
 > Tools, machinery, rules, hooks — anything that improves Claude's Russian goes into the core (`KUMM/krinik-stylometry/`, private repo, git-ignored by KUMM;
 > commit and push in its own repo). Exit: every Russian string of the build rewritten through the core and the guards, the lint 0 or allow-listed, the
@@ -145,6 +150,21 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW — chat of 2026-11-18 18:16 (`resume` → the owner: «КРИТИЧЕСКИ ВАЖНО СОБРАТЬ СБОРКУ 0.9.1 с лаунчером 1.0.0», the three items one goal). Done by 19:0x
+> (pack committed `9d2a8b4` launcher + versions + tooling, `5f1544f` texts — LOCAL, the push waits for judge round 2 running 19:1x → `reports/2026-11-18_judge_launcher_round2.md`):** the launcher: the language DROPDOWN (stand `lang` 25 / 25); judge round 1 (`reports/2026-11-18_judge_launcher_
+> c05aa51_21075fb.md`) — D1 `never.txt` (this PC: `%LOCALAPPDATA%\KrinikConanLauncher\never.txt` = `D:\Instals`), D2 the installed version from KUMM
+> `Deploy-ModPack.ps1` → `_kumm_backup\pack_version.txt` (fixture-pack 71 / 71), D3 stop marks + «не закончил скачивание», D4 title pair (header per the mockups),
+> D5 screen «removing», R7–R11, R14 fixed; R12 refuted, R13 accepted risk, D6 (switch the remembered copy) → the owner; the frames stand hides question boxes
+> (WH_CBT) and `live.mjs` runs in frames mode; `self.mjs` 18 cases: the full run r11 242 / 2 → both fixed (r12, r13), never 8 / 8; `batch58` 187 / 2 (never.txt
+> written mid-run; the «error» mark on a refusal → `u.Started`, fixed, NOT re-run). Versions: every Krinik mod 0.9.1 (`[OWNER]` 18:52; manifest, kit modinfo ×6,
+> Lua headers; paks Graphics / Archery / Gameplay by `set-pak-version.py`, UI rebuilt in the kit — menu lines from the manifest; originals in `.work/kit091/orig`);
+> deployed into `D:\Games\Conan Exiles 3.1.1` 4 / 4, verify 114 / 0; smoke in game RUNNING 19:01 (PID 33140, machine lock to 19:41, the owner's grant to 19:30).
+> Texts: clean read (`reports/2026-11-18_clean_read_three_texts_091.md`) → the writer helper rewrote README / guide for 0.9.1 + the notes
+> `_config/release/draft_0_9_1/github_release_notes_0_9_1.md` (marker line 1); the owner's lines → `.work/texts091/owner_proposals.md` (page owed); the first-person
+> bow (look B, accepted 16.11) still to add to «Что нового». Release tooling: `_config/release/make_release.sh` (one command, [NOT-TESTED]) + `make_volumes.sh`
+> `KRINIK_VOLUME_BYTES`. NEXT: smoke → bug 85 (five `RegisterKeyBind` in KrinikConanUI → game-thread events) → judge round 2 → commits + pushes → owner page
+> (texts, D6) → `make_release.sh` → install test on a copy of the clean 3.1.1.
+>
 > **CHAT CLOSED 2026-11-18 16:0x +03:00 (chat of 14:59: the pasted farewell → «resume» → /resume in full; the owner present and steering all along; soft closure by
 > his word 16:00 «пора загругляться … Продолжим в новом чате с этого места» at ≈ 65 % of the context). The NOW block of this chat — chronicle, entry 2026-11-18 16:0x.**
 > Done: the 🔥 priority answered (none of the three closed); the launcher mockups ACCEPTED 15:03 → strings rewritten by whole sentences + a clean-instance read, the
@@ -200,7 +220,13 @@ final check, interview #037 Q1), 106 (the climb's stamina — interview #037 Q2)
   15 (🟡 hub controller in the build), 16–18, 23 (EAA class cards — text in textures), 26 (late emblem in the hub); closed by a frame 2, 3, 7, 21 (4K, 2026-11-07), 7b, 8 (again 2026-10-31 at 1080p, list 540), 9–11,
   14, 16, 19, 20, 22, 24, 25 — work order in plan 35.
 - 🔧 `bugs/93_…` — the bow sprint in the owner's order: build 7, `[OWNER]` 2026-11-13 11:01 «спринт и стрельба работают»; open cases S8, S9, the cost. 🔴 `bugs/94_…` — hub craft batch
-  finishes at once after the close (hypothesis 2 to test). 🔴 `bugs/95_…` — the bow unseen in first person (first next).
+  finishes at once after the close (fixed 2026-11-14, waits for the owner's play). ✅ `bugs/95_…` — the bow in first person: look B ships, the owner accepted it 2026-11-16 18:40
+  (interview #036; this line said «🔴 first next» until 2026-11-18 19:0x — corrected after the owner caught it).
+- **Critical = the software's technical state: crashes, slowdowns, lags, does not start, falls, errors, no window, extra windows, a button that does not press,
+  blockers, dead ends, cannot continue, does not save, does not load; a visual defect is cosmetic** (`[OWNER]` 2026-11-18 18:58 · 18:59, chronicle entry
+  2026-11-18 19:0x; HOUSE_RULES 38). Fixed and waiting for the owner's play: `bugs/101_…` (the hub flashes the bare world on a switch), `bugs/97_…` (journeys locked
+  after the tutorial). The critical ones open for 0.9.1: `bugs/85_…` the rare crash from key binds — five binds left in KrinikConanUI; `bugs/79_…` the world freeze
+  after an in-game loading screen — waystone and dungeon cases not run; `bugs/100_…` the hub at the Esc menu's time — fixed, judge owed.
 - 🔧 `bugs/85_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: cause fixed in Archery + Camera; the KrinikConanUI twins open; the owner's gameplay is the check.
 - ⏸ `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; PARKED 2026-11-14 09:53 by the owner («в дальний ящик»).
 - 🔴 `bugs/86_…` (attribute tree caption under a node icon), `bugs/87_…` (beasts walk into the hero), `bugs/88_…` (corruption debuff line fonts) — 2026-11-07, the owner's frames.

@@ -288,6 +288,12 @@
     gives.** All art sources live in ONE folder `art/` at the pack root (logos, icons, wallpapers, wallpapers_source,
     screenshots); scripts and published copies read from there. `[OWNER]` 2026-11-18 15:38 · interview #040 Q2, Q3.
 
+38. **A critical bug is a defect of the software's technical state: a crash, a slowdown, a lag, a program that does not start or falls, an error, a missing
+    window, an extra window, a button that does not press, a blocker, a dead end, a state the player cannot continue from, a save that does not save, a load that
+    does not load — and the like. A visual defect is cosmetic, however visible.** A list of critical bugs is drawn from the bug files by this test, and every
+    bug's status is read from its file together with its interview and plan before it is said to the owner (an accepted fix whose bug file was never updated is
+    the failure this guards). `[OWNER]` 2026-11-18 18:58 · 18:59 · `PROJECT_HISTORY.md` entry 2026-11-18 19:0x.
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —
 WebP, never PNG; for the build's own images rule 37 above governs). The context-budget hook's hint is obeyed (`CLAUDE.md`).

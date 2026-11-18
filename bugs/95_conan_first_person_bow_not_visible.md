@@ -1,6 +1,10 @@
 # Bug 95 — Conan: in the first-person view the bow is not visible in the hero's hands
 
-**Status:** 🔴 OPEN — filed 2026-11-13 11:02 · **Severity:** S2 (the owner's play, the archery he named important) · **Version/build:** Conan Exiles 3.0.1 build,
+**Status:** ✅ FIXED and accepted by the owner — the look B ships in the build (plan 52: the post-process anim blueprint `ABP_KrinikFirstPersonLook` +
+the KrinikConanArchery Lua section «вид тела от первого лица»); the owner played it 2026-11-16 18:30–18:40 and answered `[OWNER]` «хорошо, нравится.» (interview #036,
+«ОТВЕЧЕНО 2026-11-16 18:40 — вид Б»). Corrected 2026-11-18 19:0x: this line read «🔴 OPEN» two days after the acceptance, and the agent repeated it to the owner as
+an open bug (standing falsehood, corrected here and in STATUS). Left open in plan 52: C1b sword, C5 cost, the judge round 2 on the Lua — not a visible defect ·
+was: 🔴 OPEN — filed 2026-11-13 11:02 · **Severity:** S2 (the owner's play, the archery he named important) · **Version/build:** Conan Exiles 3.0.1 build,
 KrinikConanLocomotion build 7, KrinikConanArchery / KrinikConanCamera as shipped · **When/context:** the owner's message 2026-11-13 11:01 after his own play of the
 bow sprint · **Fixing:** the next session (this one closes near the context limit)
 
