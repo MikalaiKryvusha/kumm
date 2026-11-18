@@ -31,6 +31,9 @@ text), the owner's voice by his portrait (every text of the build and every text
    language per working day and lint hits per reply; Meter — the chronicle and the Stop hook's log; Target — both fall over the next working days.
    The core is cloned into `KUMM/krinik-stylometry/` (private repo `MikalaiKryvusha/krinik-stylometry`, git-ignored by KUMM; the owner 09:05 «ПРАВИТЬ И
    ДОРАБАТЫВАТЬ ЕГО»): its edits are committed and pushed in its own repository.
+   **The core's purpose** (the owner 09:06): without the core the agent writes Russian badly, with it the agent must write beautifully. Check — an A/B on the
+   same tasks: a text written with the core loaded and applied vs without it, judged blind by a clean instance against the measure of
+   `MEASURING_RUSSIAN_TEXT.md` and the defect catalogue, the owner's eye last; start from the core's own `eval/` folder.
 
 ## Phases and gates
 

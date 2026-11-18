@@ -7921,3 +7921,13 @@ direction; the measure comes from a recon of the authorities (`researches/russia
 
 Where it went: the core (private `MikalaiKryvusha/krinik-stylometry`) cloned into `KUMM/krinik-stylometry/`, ignored by KUMM's git (ignore line first); plan 58
 criterion 6 — the core works when its compact rules are applied by hooks to files and to every chat reply and the owner's language remarks fall.
+
+**09:06 — the purpose of the core.** `[OWNER]` verbatim:
+
+> так как его цель сделать так - чтобы ИИ АГЕНТ Claude писал по русски КРАСИВО
+
+> без этого проекта ты пишешь некрасиво
+
+> а С НИМ ДОЛЖЕН ПИСАТЬ КРАСИВО!!!
+
+Where it went: plan 58 criterion 6 — an A/B check of texts written with and without the core, judged blind, starting from the core's `eval/` folder.
