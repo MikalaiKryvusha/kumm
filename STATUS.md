@@ -179,7 +179,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 6. **Then** `build-docs.py` → deploy + `-Verify` → `make_release.sh <empty work dir on D:>` → the release `v0.9.1-RC1` in `MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack`
 >    (an ordinary release titled «0.9.1-RC1 (тестовая сборка)»; AUTH — the owner's word 20:54) → the launcher on a fresh copy of the clean 3.1.1 (rule 25).
 > **Done this chat:** the priority narrowed to two items (correct Russian → the next version); the launcher's RC order (pack `50b4bce`, `testcases/reports/2026-11-18_conan-launcher-rc-order.md`);
-> bug 85 judge round 2 — 8 findings fixed (pack `9378982`), K1 K2 N1 N2 N4 N6 N7 J2 J3 J4 PASS, J1 FAIL → bug 109 (`testcases/reports/2026-11-18_conan-keybinds-judge2-run.md`);
+> bug 85 judge round 2 — 8 findings fixed (pack `9378982`), K1 K2 N1 N4 N6 N7 J2 J3 J4 PASS, N2 partial (Settings and Exit by real clicks, Krinik on top seen; «Продолжить
+> игру» not pressed), J1 FAIL → bug 109; the run of 21:29–21:35 (K1, N1, N2, J1, J2 on the new pak) is NOT yet in the TC rows and the run report
+> `testcases/reports/2026-11-18_conan-keybinds-judge2-run.md` — write it there from the chronicle entry 2026-11-18 21:3x and the farewell;
 > Simple Modlist's Krinik-on-top fixed; the input tools no longer click a minimized game (EXP-0572); the kit crash pattern (EXP-0571); HOUSE_RULES 40; the clean read of the texts.
 
 ## Open bugs
