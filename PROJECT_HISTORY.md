@@ -8268,3 +8268,18 @@ in 4K / 2K / 1080p PNG + lossless WebP masters (pack `711846c`; `[AI]` Warm = B,
 notes and the Nexus text at the release, after the rewrite of those texts.
 
 **15:38 — interview #040 answered on its page** (the pack's order): Q1 B, Q2 A, Q3 his own text (in the interview), Q4 A → `HOUSE_RULES.md` 37.
+
+**15:54–15:56 — the cover digits, the language dropdown, the window on his screen.** `[OWNER]` verbatim, in order (the first with a crop of the cover's «3.1.1»,
+the second with a crop of the RU | EN switch):
+
+> не читается, нужна лёгкая тень
+
+> выпадайкой, так как языков будет МНОГО в будущем
+
+> как так лаунчер запущен, что у меня в винде на панели задач нет иконки???
+
+> и нужно, чтобы он по центру работчего стола открывался. А то сейчас как-то внизу справа открывается обрезанный краями экрана
+
+Where it went: `make-wallpapers.py --shadow`, the 0.9.1 covers rebuilt (pack `09d5c40`); the switch is a dropdown, KUIPS screen «language» (same commit); the window he saw
+was the launcher helper's frames-stand window that left its off-screen place (one stand process 10 min old stopped by PID) — plan 57 criteria 12 (centred on the
+working area, inside the screen) and 13 (a taskbar button in a normal start; the stand window never on a monitor), both handed to the helper.

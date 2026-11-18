@@ -42,6 +42,14 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
 11. The first start follows the Windows UI language (ru → Russian, any other → English, `[AI]` fallback); a choice the player made is saved and every later start
     opens in it. Check: stand runs with `CurrentUICulture` ru-RU, en-US, de-DE and no saved choice; then a switch, a restart, the saved language; the save lands in
     the launcher's state location (`KRINIK_LAUNCHER_STATE_DIR` on the stand), never in the owner's AppData.
+    The switch is a DROPDOWN (`[OWNER]` 2026-11-18 15:55 «выпадайкой, так как языков будет МНОГО в будущем»): the closed field shows the current code and a
+    chevron; the list opens down from the field over the window, each language named in itself; mockup screen `language`.
+12. The window opens CENTRED on the desktop working area of its monitor, the whole window inside the screen (`[OWNER]` 2026-11-18 15:56 «нужно, чтобы он по центру
+    работчего стола открывался. А то сейчас как-то внизу справа открывается обрезанный краями экрана»). Check: starts at 100 %, 200 %, 300 % scale and 720p / 1080p /
+    4K — the window rect lies inside `Screen.WorkingArea` and its centre is the area's centre ±2 px; the log line names both rects.
+13. A normal start always has its taskbar button with the build icon (`[OWNER]` 2026-11-18 15:55 «как так лаунчер запущен, что у меня в винде на панели задач нет
+    иконки???»); only the frames stand is invisible — its window never intersects a monitor (the owner saw stand windows on his screen 15:55; one, 10 min old, was
+    stopped by PID). Check: a normal start → the taskbar button exists (UI Automation); a frames run → the window rect intersects no `Screen.AllScreens` bounds.
 
 ## Phases and gates
 
