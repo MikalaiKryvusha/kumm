@@ -7980,3 +7980,11 @@ Where it went: the 🔥 block at the top of STATUS «Where we are now»; /dayloo
 > Его часто будут ставить в C/Games или D/Gamse
 
 Where it went: plan 57 criterion 1 and the research doc §3 search order — the `Games` folder at the root of every fixed drive is searched right after Steam.
+
+**10:06 — the update plate of the mockups.** `[OWNER]` verbatim:
+
+> демнее фон плашки Вышла сборка0.9.2для игры 3.1.1.
+> точку в конце убрать
+> контур - нашим рубленным металлом, что делали для всего лаунчера
+
+Where it went: the `update` screen of the KUIPS mockups (pack `278038c`): darker background, no full stop, the window's rough metal strips `res/frame_*.png` as the frame; sheet reopened 10:07.
