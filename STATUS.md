@@ -51,7 +51,8 @@
 >
 > **Progress (2026-11-18 09:25 +03:00):** 1 — dm-fish translation pass 3 IN the build (pack `46c9b42`: 108 rows, 738 legal dashes allow-listed, Game.locres 174
 > entries, deployed; the in-game sample owed); the core: §8 + 11 rows from the defect catalogue, its gate fixed (CRLF, 66 false findings → 0), pushed
-> `2b99012`; KAIF reads `KUMM/krinik-stylometry/`; Stop hook `ru-reply-check.mjs` live (KUMM `d8f3f5a`); research `AI_RUSSIAN_DEFECTS.md` +
+> `2b99012`; KAIF reads `KUMM/krinik-stylometry/`; Stop hook `ru-reply-check.mjs` live (KUMM `d8f3f5a`; first real catch 09:29 — «поэтому» in the agent's
+> own reply, corrected) and PostToolUse `ru-build-text-check.mjs` on the build's text files (`0b5c2c7`); the whole build `dash_lint` 0 (pack `0e47ec7`); research `AI_RUSSIAN_DEFECTS.md` +
 > `MEASURING_RUSSIAN_TEXT.md`. Next for 1: the judge round on the hook + core change (running); restore the legal dashes of `2d4b104` (plan 56 list); a write
 > gate for the build's text files; the reviewer brief by the measure; the in-game sample. 2 — mockups wait for the owner's verdict; phase 1 recon started.
 > Note: other projects read the core from `D:/work/ai_sandbox/krinik_voice` (an older clone of the same repo) — it needs a `git pull` by its owner session.
