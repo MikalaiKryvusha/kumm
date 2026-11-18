@@ -41,6 +41,10 @@ against the key; repetition is not one of the nine classes) — a candidate side
 §8 row against «тот же» («name the thing again»). Next: regenerate the 24 texts with the CURRENT core and repeat the A/B (run 2: `none_1118` written
 2026-11-18 10:42 +03:00, `core_1118` in progress); the brief has a typography class of its own since 2026-11-18 10:42 +03:00.
 
+**Known risk of `ru-reply-check` (observed 2026-11-18 10:44 +03:00):** the owner's messages typed mid-turn do not start a new turn for the hook (the turn begins at the last
+real prompt record), so a phrase corrected an hour earlier («Тот же номер стоит…», 10:10, corrected in chat at 10:31) blocked two later stops again. <!-- ru-ok: the quoted defect itself -->
+Fix to weigh: treat a mid-turn owner message as a turn boundary, or skip text already followed by a correction the hook itself demanded.
+
 ## Goal vector (Avoid + Achieve)
 
 Avoid: a Russian line of the agent — in the build, in a document for the owner, in the chat or the voice — that a Russian reader recognises as a neural
