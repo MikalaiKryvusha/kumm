@@ -152,6 +152,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **PARKED: 2026-11-18 13:36 +03:00 — the quality A/B instrument, switched to the owner's order «Делай то по русскому языку, что я тебя спросил выше» (13:35):**
+> `krinik-stylometry/eval/quality-prep.mjs` + `eval/quality/REVIEWER_BRIEF.md` carry the fixes of judge rounds 2 and 3, UNCOMMITTED (selftest 40/40; the run-1 tally
+> byte-identical, 110 records; diff `.work/core-eval/round4.diff`); next: judge round 4 on that diff → commit + push of the core; run-2 sheets are prepared
+> (`eval/quality/none_1118_vs_core_1118/`, key in `eval/quality-keys/`), the two blind reviewers not started. `tools/hooks/ru-reply-check.mjs` — the «check each record
+> once» change was REVERTED 13:42 (its judge: a hit first seen at a repeat Stop is never blocked; the next attempt is described in plan 58). `dash_lint.py` does NOT read
+> `kit-saved-loc/KrinikRU/ru_table.lua` (807 Russian values with a spaced dash), `asset-strings/*.tsv` (8 rows), manifest `version` notes (13 mods print dev notes on
+> the player's install) — plan 56 judge items D1–D5, not started. Resume: these four, in this order, after the Russian manuals.
 > **CHAT CLOSED 2026-11-18 10:48 +03:00 (chat of 10:07, opened by the pasted farewell → /resume; the owner's closing word 10:44–10:45 «пора закрывать это  чат, сразу после
 > твоих суб-агентов. без судейства.» — the closure's judge pass skipped by his word; his remarks 10:16–10:45 are notes at the end of the chronicle).**
 > Done: recon §2–3 checked, its last item closed by a probe; the mockups changed by his remarks 10:16–10:36 (pack `92a661d`, `d4eb0b0`, `c05aa51`);
@@ -164,7 +171,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > a row in the core's `METHODOLOGY.md` §7 → act on the result (the «тот же» row's noun repetition, «Так,» commas); then phase 5 — proofread every agent text of
 > the build, surface by surface; (b) the owner's verdict on the mockups → epic 57 phase 2 (it carries the muted version plate and the bare installed column into
 > `KrinikConanLauncher.cs`); (c) ONE game run: the dm-fish locres sample + the hub rows' hints + the crash offer on the real build folder; (d) owed: launcher
-> R3, R5, four stale comments; `ru-reply-check` risks (plan 58: mid-turn owner messages do not reset the turn; one log record 2026-11-18 06:32Z with a JSON
+> R3, R5, four stale comments; `ru-reply-check` risks (plan 58, corrected 2026-11-18 13:42: repeat Stops re-read checked text, 17 of 1175 records never checked; one log record 2026-11-18 06:32Z with a JSON
 > parse error of the hook's input).
 > **Moved verbatim to the chronicle (entry 2026-11-18 10:48 +03:00):** the NOW block of the chat of 10:07, the block CHAT CLOSED 2026-11-18 09:3x with its
 > FIRST NEXT CHAT, and the progress paragraphs of 09:25 and 10:25. Their open items are carried in FIRST NEXT CHAT above.

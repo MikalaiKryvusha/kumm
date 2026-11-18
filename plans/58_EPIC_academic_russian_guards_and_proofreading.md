@@ -50,9 +50,14 @@ no ё/е folding for typography; in-file duplicate ids missed when the value is 
 `catalog: true` / «33.0» accepted; v1 === v2 not refused; the catalog-range selftest passes for the wrong reason; selftest failure exits 1; the brief's
 pair-level `why` and record `fix` not enforced. Not reviewed: prep (genre parse, `--force`, task added), briefs outside the freeze, unknown flags.
 
-**Known risk of `ru-reply-check` (observed 2026-11-18 10:44 +03:00):** the owner's messages typed mid-turn do not start a new turn for the hook (the turn begins at the last
-real prompt record), so a phrase corrected an hour earlier («Тот же номер стоит…», 10:10, corrected in chat at 10:31) blocked two later stops again. <!-- ru-ok: the quoted defect itself -->
-Fix to weigh: treat a mid-turn owner message as a turn boundary, or skip text already followed by a correction the hook itself demanded.
+**Known risk of `ru-reply-check` — CORRECTED 2026-11-18 13:42 +03:00.** The line written here at 10:44 («a phrase corrected an hour earlier blocked two later
+stops again») was false: a judge replayed transcript `2bb5c734` and the agent checked it — a real owner prompt at 10:33:33 started a new turn, and the 10:43:49 block hit
+a NEW «тот же» written at 10:33:48 (record `5b207415`); the 10:44:29 Stop was a repeat and only logged. <!-- ru-ok: the quoted defect itself --> What is real (the judge's scan
+of 25 transcripts): the owner's mid-turn messages are `attachment` / `queued_command` records, not prompts, so 31 of 213 Stops re-read text a previous non-blocking Stop had
+already checked, and the repeat Stop (`stop_hook_active`) logs the whole turn again; 17 of 1175 Cyrillic text records are never checked (no Stop before the next prompt).
+A «check each record once» change (diff `.work/ru-reply-stand/judge.diff`) was REVERTED the same minute: its judge found that a defect first seen at a repeat Stop is never
+blocked — and `autonomy-guard` makes most Stops of an autonomous run repeats — plus a state file without atomic writes. Next attempt: block on the first non-repeat Stop
+after a hit (keep unblocked hits pending), one state file per transcript written by rename, the final message recorded in the state; selftest drives the hook end to end.
 
 ## Goal vector (Avoid + Achieve)
 
