@@ -3,7 +3,9 @@
 > **Created:** 2026-11-18 · on the owner's words 2026-11-18 09:00–09:02 (verbatim — `PROJECT_HISTORY.md` entry 2026-11-18 08:11)
 > **Parent:** `HOUSE_RULES.md` rules 33 (dash), 35 (academic Russian); `krinik-stylometry/russian_norms/RUSSIAN_RULES.md`; the owner's portrait
 > `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (via `node .kaif/tools/kaif-voice-lint.mjs`)
-> **Status:** 🔧 phase 1 DONE 2026-11-18 09:23 — `krinik-stylometry/russian_norms/AI_RUSSIAN_DEFECTS.md` (42 defects, 28 sources) and
+> **Status:** ⏭ MOVED TO THE NEXT VERSION 2026-11-18 20:51 by the owner's word (chronicle entry 2026-11-18 20:51): this epic is no longer an item of the
+> release 0.9.1 priority; the guards and hooks already built keep running, the build-wide proofreading (phase 5) waits for the next version.
+> 🔧 phase 1 DONE 2026-11-18 09:23 — `krinik-stylometry/russian_norms/AI_RUSSIAN_DEFECTS.md` (42 defects, 28 sources) and
 > `MEASURING_RUSSIAN_TEXT.md` (Головин's communicative qualities, ФИПИ violation counts, readability for Russian, coherence); phases 2–3 STARTED 09:2x —
 > the core's §8 + 11 rows from the catalogue, its own gate fixed (CRLF: 66 false lint-core findings → 0, selftest 17/17; core `2b99012` pushed),
 > KAIF reads the KUMM clone of the core; the Stop hook `tools/hooks/ru-reply-check.mjs` (selftest 5/5, wired in `.claude/settings.local.json`).

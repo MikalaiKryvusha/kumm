@@ -32,29 +32,28 @@
 
 ## Where we are now
 
-> # 🔥 PRIORITY OF THE COMING DAYS — WE DO NOT REST UNTIL ALL THREE ARE DONE
+> # 🔥 PRIORITY OF THE COMING DAYS — WE DO NOT REST UNTIL BOTH ARE DONE
 > `[OWNER]` 2026-11-18 09:12–09:13 (verbatim — `PROJECT_HISTORY.md` entry 2026-11-18 08:11, notes 09:12 and 09:13). Autonomous work (/dayloop) on exactly this, in this order:
 >
-> **⚡ 2026-11-18 18:17–18:19 — the build 0.9.1 with the launcher 1.0.0 is the focus, and the three items below are ONE linked goal, done together** (`[OWNER]`
+> **⚡ 2026-11-18 18:17–18:19 — the build 0.9.1 with the launcher 1.0.0 is the focus, the items below are ONE linked goal, done together** (`[OWNER]`
 > «КРИТИЧЕСКИ ВАЖНО СОБРАТЬ СБОРКУ 0.9.1 с лаунчером 1.0.0» · «стремимся это сделать!!!» · «фокусируемся на этой работе» · «это приоритет #1 из трех пунктов» · 18:17 ·
-> «там три связанных пункта вместе» · 18:19; chronicle entry 2026-11-18 18:17). Nothing of items 1 and 2 is cut: the build is assembled from all three. «Собрать» =
+> «там три связанных пункта вместе» · 18:19; chronicle entry 2026-11-18 18:17). «Собрать» =
 > the shipment built and verified (launcher 1.0.0 exe, export bundle, parts, digests, PDF guide, release notes) — publication still waits for his word.
 >
-> **1. Correct Russian in the Krinik build + a stylometric core that WORKS** — `plans/58_EPIC_academic_russian_guards_and_proofreading.md`, `HOUSE_RULES.md` 33, 35.
-> Tools, machinery, rules, hooks — anything that improves Claude's Russian goes into the core (`KUMM/krinik-stylometry/`, private repo, git-ignored by KUMM;
-> commit and push in its own repo). Exit: every Russian string of the build rewritten through the core and the guards, the lint 0 or allow-listed, the
-> strings SEEN in the game, the launcher, the PDF; the core checks every chat reply before it goes out (Stop hook).
+> **⏭ 2026-11-18 20:51 — TWO items are left; the correct-Russian item (plan 58: every string through the core, the proofreading after RC1 into RC2) is OUT of
+> 0.9.1 and moves to the next version** (`[OWNER]` 20:51, chronicle entry 2026-11-18 20:51). Rules 33 and 35 and the hooks already running stay in force for any
+> text written now; the proofreading of the whole build is not a gate of 0.9.1.
 >
-> **2. The full launcher 1.0.0 with ALL the owner's wishes, every function tested** — `plans/57_EPIC_conan_launcher_self_sufficient.md` (+ epic 55 phase B):
+> **1. The full launcher 1.0.0 with ALL the owner's wishes, every function tested** — `plans/57_EPIC_conan_launcher_self_sufficient.md` (+ epic 55 phase B):
 > finds the game on the disks, sees / downloads the latest release for the found game version, installs, updates, uninstalls, the progress bar with %, speed,
 > remaining and elapsed time, the version line, no impossible window state, the KUIPS mockups as the design. The owner names it **1.0.0** (09:12) — the manifest
 > says 1.1.0 today: settle the number with the self-update rule (`Feed.Newer`) before the release. Exit: a written case set for every function, a functional
 > run by the player's path on a real copy of the clean 3.1.1 (`HOUSE_RULES.md` 25) — every case PASS, the run reports in `testcases/reports/`.
 >
-> **3. The build 0.9.1 in a working MVP state — the ROUGH POLISH of the build: the critical bugs of the build and its mods fixed** (critical = HOUSE_RULES 38:
-> crashes, slowdowns, lags, errors, dead buttons, dead ends, no save, no load) — a working, more-or-less stable state; epic 55. Item 3 is its own work, NOT the sum
-> of items 1 and 2 (`[OWNER]` 2026-11-18 19:29, chronicle entry 2026-11-18 19:29; corrected 2026-11-18 19:29 +03:00 — this line said «Exit: 1 and 2 done» until then). The release
-> 0.9.1 is assembled from all three; the publication itself waits for the owner's word.
+> **2. The build 0.9.1 in a working MVP state — the ROUGH POLISH, FIXING AND TESTING of the build: the critical bugs of the build and its mods fixed** (critical = HOUSE_RULES 38:
+> crashes, slowdowns, lags, errors, dead buttons, dead ends, no save, no load) — a working, more-or-less stable state; epic 55. This item is its own work, NOT the sum
+> of the others (`[OWNER]` 2026-11-18 19:29, chronicle entry 2026-11-18 19:29; «грубая полировка, фиксинг и тестирование 0.9.1» · 20:51). The release
+> 0.9.1 is assembled from both items; the publication itself waits for the owner's word.
 >
 > **Progress of the chats of 2026-11-18:** the latest is the block «CHAT CLOSED 2026-11-18 20:4x» in «Where to continue» below (corrected 20:4x — it named the 16:0x block); the block CHAT CLOSED 14:3x and the earlier progress lines — chronicle, entries 2026-11-18 14:3x and 16:0x.
 > Note: other projects read the core from `D:/work/ai_sandbox/krinik_voice` (an older clone of the same repo) — it needs a `git pull` by its owner session.
@@ -163,8 +162,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    game in front and `owner-idle.ps1` FREE; background: `post-key.ps1 -Key Escape|Tab` (our window's Esc = K5, hub closes = K8). Then judge round 2 on the pack
 >    commit `fix(KrinikConanUI): bug 85 …` (LOCAL, with the art move and the female_beta wallpapers) → fixes → the pack push.
 > 3. Then the farewell order of 19:23 goes on: the launcher's RC order (0.9.1-RC1 < RC2 < 0.9.1), the round-2 launcher findings (`reports/2026-11-18_judge_launcher_round2.md`),
->    judge round 3, the pack push, RC1 (`make_release.sh` → our repo → the launcher on a fresh copy of the clean 3.1.1); the Russian proofreading after RC1 into RC2.
-> **Done this chat:** item 3 of the priority corrected (rough polish = critical bugs); bug 85 recon (posted keys, the escape stack, the Esc census) and the fix
+>    judge round 3, the pack push, RC1 (`make_release.sh` → our repo → the launcher on a fresh copy of the clean 3.1.1). The Russian proofreading is NOT in 0.9.1
+>    any more — the next version (`[OWNER]` 2026-11-18 20:51).
+> **Done this chat:** item 3 of the priority (item 2 since 20:51) corrected (rough polish = critical bugs); bug 85 recon (posted keys, the escape stack, the Esc census) and the fix
 > (kit `kit-krinik-click-events.py`: W_KrinikClickWrap, W_KrinikClickCatcher, our window's KrinikMouseDown / KrinikEsc, the menus' KrinikFeedbackClicked; Lua
 > `krinik_click.lua` + five sections; the guard 0); judge round 1 (D2 confirmed in the game — a Lua-made FLX button never presses) → the wrap design; bug 108
 > (other mods' windows lose Esc until native fixes — the owner told 20:3x); the art folder `ConanExiles/art/` (the owner's debt of 15:38); the sunset graded like

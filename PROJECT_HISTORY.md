@@ -8560,6 +8560,21 @@ Where it went: STATUS item 3 rewritten (it said «Exit: 1 and 2 done; then a rel
 answer corrected. The agent said in chat: the order of the previous chat stays (the crash, the RC order, the judge findings, judge round 3, the pack push, RC1);
 the Russian proofreading goes right after RC1 into RC2, the final 0.9.1 does not ship without it — the owner may move it before RC1.
 
+## 2026-11-18 20:51 +03:00 — the owner: the correct-Russian item leaves priority #1 and moves to the next version (recorded 2026-11-18 20:53 +03:00)
+
+The chat of 2026-11-18 20:51 (`resume` + the previous farewell pasted). `[OWNER]` verbatim:
+
+> из приоритера #1 исключаем пунт про корректный руский - переходит на следующую версию.
+>
+> Оставляем два пункта
+> - 1.0.0 полноценный лаунчен
+> - грубая полировка, фиксинг и тестирование 0.9.1
+
+Where it went: STATUS priority block — item 1 (correct Russian + the working stylometric core, plan 58) removed from the release 0.9.1 and parked for the
+next version; the two items left are the full launcher 1.0.0 and the rough polish, fixing and testing of 0.9.1. The farewell order «the Russian proofreading
+after RC1 into RC2» goes with it to the next version. Plan 58's header carries the move. Rules 33 and 35 and the hooks that already run stay in force — the
+move takes the WORK item (the proofreading of every string, the exit criteria) out of 0.9.1, not the rules.
+
 ## 2026-11-18 19:40–20:01 +03:00 — the owner: EAA's window and Esc; review and manual testing of new code; «where are the arts» (recorded 2026-11-18 20:07 +03:00)
 
 `[OWNER]` verbatim, in order:

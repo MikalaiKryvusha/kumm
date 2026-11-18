@@ -163,7 +163,7 @@ map markers (`SimpleMinimap_MarkerData.sav`), the damage logs and `Game_0.db` ar
 - [ ] D5. `make_volumes.sh` run for 0.9.1 (the parts, the digests), the PDF printed (the lints gate it), the export bundle; reproducibility (criterion 8).
 
 ### Phase D — the assembly of 0.9.1 with the launcher 1.0.0 (2026-11-18 18:3x; anchor: criterion 8 and the owner's 18:17–18:19, STATUS ⚡ — the build, the launcher
-### 1.0.0 and correct Russian are one linked goal). The recipe is plan 43's (0.9.0), run for 0.9.1; publication (phase E) waits for the owner's word.
+### 1.0.0 and correct Russian are one linked goal; since 2026-11-18 20:51 correct Russian is out — the next version). The recipe is plan 43's (0.9.0), run for 0.9.1; publication (phase E) waits for the owner's word.
 
 - [ ] R1. Versions 0.9.1, read from the manifest where a script had a constant (DRY): `modpack.json` Krinik entries; kit modinfo (UI, Archery — kit and
       `_unpacked/*/kit` copies); `kit-conanui-edit.py` `GAME_VERSION` (still 3.1.0!) and `PACK_VERSION` (0.9.0) → from `launcher.gameVersion` / `packVersion`;
@@ -174,10 +174,10 @@ map markers (`SimpleMinimap_MarkerData.sav`), the damage logs and `Game_0.db` ar
 - [ ] R3. Launcher 1.0.0 final: the language DROPDOWN (built 18:2x, stand case `lang` 25 / 25); the judge's findings on `c05aa51..21075fb` verified and fixed;
       the clean version under `D:\Instals` never offered as an install target; the full stand re-run on the final exe (`batch1.sh` all 16 + `shots.sh`), X1
       `batch58.sh`, K1 control; a second judge round on the new diff.
-- [ ] R4. Correct Russian (item 1 of the three): the three rewritten texts after the clean-instance read (running 18:2x) → the owner's page of whole-block
-      pairs and his word on the four guide fact edits; the 0.9.1 texts — «Что нового» 0.9.1, «Известные проблемы», the README history line, the release notes
-      0.9.1 with the marker `<!-- krinik-game: 3.1.1 CL-383549 -->` — by the owner's portrait, `kaif-voice-lint check`, the core's `voice-check`, `dash_lint`,
-      a clean-instance read, then the owner.
+- [ ] R4. The 0.9.1 texts — «Что нового» 0.9.1, «Известные проблемы», the README history line, the release notes 0.9.1 with the marker
+      `<!-- krinik-game: 3.1.1 CL-383549 -->` — written by rules 33 and 35 (the owner's portrait, `kaif-voice-lint check`, the core's `voice-check`, `dash_lint`,
+      a clean-instance read), then the owner. ⏭ The correct-Russian item itself (the build-wide proofreading, the page of whole-block pairs of the three rewritten
+      texts, his word on the four guide fact edits) LEFT 0.9.1 for the next version — `[OWNER]` 2026-11-18 20:51, chronicle entry 2026-11-18 20:51.
 - [ ] R5. Interview #040 Q2 — one `art/` folder at the pack root (before R6–R8, so the shipment is built from the final tree).
 - [ ] R6. `build-docs.py` → the guide PDF + the launcher exe 1.0.0; deploy into the working game, `-Verify`; a main-menu frame (3.1.1 / 0.9.1 under the logos).
 - [ ] R7. `make_volumes.sh <work> Krinik_Mod_Pack_0_9_1` (`OK: <N> files, hashes equal`); GitHub parts < 2 GiB by `split`; SHA-256 of every asset.
