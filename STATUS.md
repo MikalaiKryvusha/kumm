@@ -152,71 +152,23 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **UPDATE 20:3x — the design changed after judge round 1 (`F:\Temp\…\scratchpad\judge_bug85_r1.md`, findings D1–D3, R1–R8 — summary in bug 85):** D2 CONFIRMED in
-> the game 20:22 — a Lua-made FLX button (`W_KrinikButton`, Create with the GameInstance AND with the window as owner) never pressed on Esc; so: **(a)** the mods
-> button and its list = vanilla `WBP_ButtonBase` inside a kit wrap `W_KrinikClickWrap` (Overlay root, `OnPreviewMouseButtonDown` → `KrinikPreview`, Unhandled) →
-> `on_click` by IsHovered (the old route, now on the game thread); the outside press = `W_KrinikClickCatcher`; **(b)** our window's Esc = kit
-> `OnPreviewKeyDown` → `KrinikEsc` → `close_window` (Lua hook at the first opening); **(c)** Esc of OTHER mods' windows (fishing, Hosav, AMR, LLH, PrP, DN,
-> Emberlight, EAA, PIFC) is DROPPED until a native pak fix — `[AI]` 20:3x, said to the owner in chat (crash > convenience), bug 108 to file (with his EAA note);
-> `W_KrinikButton` removed from the kit (the uasset deleted, the CookInfo line dropped). Kit run 7 crashed the kit editor in `AddCallFunctionNode` 1 s in
-> (probably the stale registry entry of the deleted asset) — run 8 running 20:3x. Lua rewritten (the guard on the source: 0): `krinik_click.lua` (wrap +
-> catcher), `krinik_mods_button.lua`, `krinik_pause_in_menu.lua` (the Esc block → a note), `krinik_mod_settings.lua` (KrinikEsc). The deployed build still
-> has the 20:17 pak + the first Lua (W_KrinikButton) — redeploy after run 8 + `kit-buildmod.py`. Owed: K1–K8 by the player's path (the real mouse — owner
-> FREE), judge round 2 on the new diff, pack commit, bug 108. My recon probe crashed the game at 20:20 (GetPropertyClass on a struct, EXP-0570) — not the build.
-> Also this chat: the owner's sunset picture graded like v2 (D:\Sunset_Ancient_Valley_{Realism,Warm}.webp) and his two upscales cut into
-> `art/wallpapers(_source)` as `V2_female_beta` (pack, NOT committed yet).
->
-> **NOW — chat of 2026-11-18 19:24 (`resume` + the previous farewell's order).** (1) **Bug 85, the five KrinikConanUI key binds — code written, NOT yet built or
-> run:** recon R1–R2 by the remote + `ConanExiles/_config/post-key.ps1` (a key posted into the game's window: the game acts, UE4SS binds do not see it) —
-> bug 85 section 2026-11-18 19:3x–19:4x; the hub's close passes `ActivateModule` (Esc and Tab); ten mod windows swallow Esc natively (EAA among them — the owner
-> 19:40, the same class), LBPR closes the hub instead. Fix = blueprint events on the game thread: kit `_config/devkit/kit-krinik-click-events.py` (saved: the click
-> catcher, `W_KrinikModSettings` preview-mouse event, both menus' feedback event; `W_KrinikButton` — runs 1–5, the last pick «События|AssignSignalClicked»),
-> Lua module `krinik_click.lua` + five sections rewritten (the guard on the source: 0). Mod notes: `games/ConanExiles/mods/KrinikConanUI.md` «Clicks and Esc
-> without key binds». TC `testcases/TC_conan_keybinds_to_game_events_2026-11-18.md` (R1, R2 done; K1–K9, C1 owed). Next: the kit green → `kit-buildmod.py
-> KrinikConanUI` → copy the pak → `Deploy-ModPack.ps1 -Deploy -Only KrinikConanUI` → the TC by the player's path (real mouse needs the game in front and
-> `owner-idle.ps1` FREE) → judge rounds (round 1 running on the Lua + kit + post-key diff; the owner 19:48: new code and architecture need a good independent review
-> and a manual functional run). (2) **The art folder — the owner's debt of 15:38 applied 20:0x** (he could not find the arts 20:00): pack commit — `art/logos`, `icons`,
-> `wallpapers`, `wallpapers_source`, `screenshots`; scripts and the manifest moved; launcher res images and both icons rebuilt byte-identical. LOCAL, rides with the
-> pack push. Release step owed: the public tree of 0.9.1 and `build_nexus_description.py` (raw logo URL → `art/logos/…`) go out in the SAME release, the Nexus page
-> updated with them. (3) Item 3 of the priority is the rough polish (critical bugs) — corrected 19:29 (the line above). The Russian proofreading goes after RC1 into RC2.
->
-> **Chat of 2026-11-18 18:16 (`resume` → the owner: «КРИТИЧЕСКИ ВАЖНО СОБРАТЬ СБОРКУ 0.9.1 с лаунчером 1.0.0», the three items one goal). Done by 19:0x
-> (pack committed `9d2a8b4` launcher + versions + tooling, `5f1544f` texts — LOCAL, the push waits for judge round 2 running 19:1x → `reports/2026-11-18_judge_launcher_round2.md`):** the launcher: the language DROPDOWN (stand `lang` 25 / 25); judge round 1 (`reports/2026-11-18_judge_launcher_
-> c05aa51_21075fb.md`) — D1 `never.txt` (this PC: `%LOCALAPPDATA%\KrinikConanLauncher\never.txt` = `D:\Instals`), D2 the installed version from KUMM
-> `Deploy-ModPack.ps1` → `_kumm_backup\pack_version.txt` (fixture-pack 71 / 71), D3 stop marks + «не закончил скачивание», D4 title pair (header per the mockups),
-> D5 screen «removing», R7–R11, R14 fixed; R12 refuted, R13 accepted risk, D6 (switch the remembered copy) → the owner; the frames stand hides question boxes
-> (WH_CBT) and `live.mjs` runs in frames mode; `self.mjs` 18 cases: the full run r11 242 / 2 → both fixed (r12, r13), never 8 / 8; `batch58` 187 / 2 (never.txt
-> written mid-run; the «error» mark on a refusal → `u.Started`, fixed, NOT re-run). Versions: every Krinik mod 0.9.1 (`[OWNER]` 18:52; manifest, kit modinfo ×6,
-> Lua headers; paks Graphics / Archery / Gameplay by `set-pak-version.py`, UI rebuilt in the kit — menu lines from the manifest; originals in `.work/kit091/orig`);
-> deployed into `D:\Games\Conan Exiles 3.1.1` 4 / 4, verify 114 / 0; SMOKE PASSED 19:01–19:05 (the menu shows 3.1.1 / 0.9.1 under the logos at 4K —
-> `.work/kit091/menu_091*.webp`; the world in 8 s; 66 / 66 mounted, 0 too old / missing import; HUD, minimap, «E Взять» on a world frame; the game closed cleanly).
-> Texts: clean read (`reports/2026-11-18_clean_read_three_texts_091.md`) → the writer helper rewrote README / guide for 0.9.1 + the notes
-> `_config/release/draft_0_9_1/github_release_notes_0_9_1.md` (marker line 1, the first-person bow added); the owner's lines → `.work/texts091/owner_proposals.md`
-> (page owed). Release tooling: `_config/release/make_release.sh` (one command, [NOT-TESTED]) + `make_volumes.sh` `KRINIK_VOLUME_BYTES` (no second 13 GB copy —
-> the owner asked 18:55 why 50 GB). KUMM `236a886`, `32e58e9` (idea 26 — the plate in the world over the item, the owner 19:06) — LOCAL.
-> **The owner's orders 19:02 (verbatim in the chat; chronicle owed):** «и нужно будет тестовую сборку собирать и тестировать качание через лаунчер по боевому пути -
-> из релиза ГХ» · «и установка на чистую версию». ASKED 19:1x in chat: where the test release lives — A a separate public test repo (recommended), B a draft /
-> pre-release in the main repo (the launcher does not see them), C the real v0.9.1 at once. ANSWERED 19:08: OUR repository, «0.9.1-RC1», every later fix RC2, RC3 … (plan 55 phase E; the RC ordering in the launcher owed).
-> **Bug 85 (the crash class) — NOT fixed, the first item of the next chat:** five `RegisterKeyBind` in KrinikConanUI (`krinik_feedback.lua:91`,
-> `krinik_mods_button.lua:285`, `krinik_mod_settings.lua:1380`, `krinik_pause_in_menu.lua:680`, `krinik_hub_controller.lua:354`); found 18:58: `FLXButtonBase` has
-> NO click UFunction (Signal* are delegates; the click is native C++), so the replacement is research: a kit-bound custom event per button (as the attribute page
-> arrows, `kit-attribute-paging-step2.py`), the game's own Esc / Tab handling for the two key binds; hook the hero's AnyKey only in gameplay (the camera's way).
-> **ORDER FOR THE NEXT CHAT (`[OWNER]` 2026-11-18 19:23, verbatim: «Падение 85. Научить лаунчер порядку номеров RC. и после этого только Провести третий круг
-> судьи и отправить пак на GitHub.»):** 1) bug 85 — the five KrinikConanUI key binds; 2) the launcher's RC ordering (0.9.1-RC1 < RC2 < 0.9.1); 3) the round-2
-> findings fixed with them; ONLY THEN 4) judge round 3 and the pack push; then RC1 by `make_release.sh` → the release → the launcher on a fresh clean 3.1.1.
-> **Corrections by the closing judge (19:21):** «every Krinik mod 0.9.1» = the 10 at the build version, KrinikConanMusic stays 0.1.0 (not shipped); all KUMM
-> commits of this chat are PUSHED (`e468a17`); the test-release question was ANSWERED 19:08 / 19:11 (RC1 in our repo, Linux format) — not owed; judge round 2
-> is DONE (not running); plan 57 «Judge round 2» box and plan 55 R1, R2, R6 (deploy + menu frame) boxes are stale-unchecked — tick them next chat. The r12–r14
-> stand runs have no saved totals (chat output only).
-> **Judge round 2 DONE 19:1x — `reports/2026-11-18_judge_launcher_round2.md`, NOT yet verified against the code, NOT fixed (the chat closed at 80 %):** D1
-> `make_release.sh` / `make_volumes.sh` have no `pipefail` (a failed build-docs / export hides behind `| tail`); D2 `make_release.sh` does not pass
-> `KRINIK_VOLUME_BYTES` and still splits a second 13 GB copy; D3 the installed build's game half comes from the found copy (0.9.1 «для 3.2.0» after a patch —
-> record the build's gameVersion); R4 a quoted line in never.txt is skipped silently; R5 RunJob deletes the stop mark before Run's refusals; R6 `/pressed/` in
-> `self.mjs` matches «not pressed» (use `/^pressed/`); R7 the U1 stub uninstaller exits before the probes; R8 416 now dead-ends (delete the part, refetch) and
-> 408 / 429 should stay «net»; C9 a bundle in a forbidden folder offers install; C10 the watcher gate runs the case on a timeout. The pack commits `9d2a8b4`,
-> `5f1544f` stay LOCAL until these are fixed and a round 3 is clean (the owner's judge rule).
-> NEXT: round 2's fixes → round 3 → pushes; bug 85; the owner's page (texts + proposals + D6); his answer on the test release → `make_release.sh` → the test release →
-> the launcher downloads it on a fresh copy of the clean 3.1.1.
+> **CHAT CLOSED 2026-11-18 20:4x (`resume` 19:24 + the previous farewell's order; soft closure at 80 %).** Its working blocks and the block of the 18:16 chat —
+> chronicle, entry «2026-11-18 20:4x — STATUS bonsai trim». **FIRST in the next chat — bug 85 by the player's path:**
+> 1. The pak of the wrap design: `KUMM/.work/bug85/build/KrinikConanUI.pak` (built 20:4x by `kit-buildmod.py`; if the build log `.work/bug85/buildmod2.log`
+>    ends without «KrinikConanUI.pak», run `python -I -X utf8 _config/devkit/kit-buildmod.py KrinikConanUI D:/work/ai_sandbox/KUMM/.work/bug85/build` from the pack)
+>    → copy into `ConanExiles/_unpacked/KrinikConanUI/` → `Deploy-ModPack.ps1 -PackDir D:\work\ai_sandbox\ConanExiles -Deploy -Only KrinikConanUI` (the build has
+>    the 20:17 pak + the first Lua until then — the deployed Lua expects W_KrinikButton, which is gone).
+> 2. TC `testcases/TC_conan_keybinds_to_game_events_2026-11-18.md`: K1–K9 and the neighbours N1–N9 (HOUSE_RULES 39, the owner 20:35) — the mouse cases need the
+>    game in front and `owner-idle.ps1` FREE; background: `post-key.ps1 -Key Escape|Tab` (our window's Esc = K5, hub closes = K8). Then judge round 2 on the pack
+>    commit `fix(KrinikConanUI): bug 85 …` (LOCAL, with the art move and the female_beta wallpapers) → fixes → the pack push.
+> 3. Then the farewell order of 19:23 goes on: the launcher's RC order (0.9.1-RC1 < RC2 < 0.9.1), the round-2 launcher findings (`reports/2026-11-18_judge_launcher_round2.md`),
+>    judge round 3, the pack push, RC1 (`make_release.sh` → our repo → the launcher on a fresh copy of the clean 3.1.1); the Russian proofreading after RC1 into RC2.
+> **Done this chat:** item 3 of the priority corrected (rough polish = critical bugs); bug 85 recon (posted keys, the escape stack, the Esc census) and the fix
+> (kit `kit-krinik-click-events.py`: W_KrinikClickWrap, W_KrinikClickCatcher, our window's KrinikMouseDown / KrinikEsc, the menus' KrinikFeedbackClicked; Lua
+> `krinik_click.lua` + five sections; the guard 0); judge round 1 (D2 confirmed in the game — a Lua-made FLX button never presses) → the wrap design; bug 108
+> (other mods' windows lose Esc until native fixes — the owner told 20:3x); the art folder `ConanExiles/art/` (the owner's debt of 15:38); the sunset graded like
+> v2 (D: root) and his upscales → `art/wallpapers(_source)` `V2_female_beta`; HOUSE_RULES 39; EXP-0570 (my probe crashed the game 20:20 — not the build).
+> Release step owed with the 0.9.1 public tree: `build_nexus_description.py` raw logo URL → `art/logos/…` and the Nexus page updated in the same release.
 >
 > The block «CHAT CLOSED 2026-11-18 16:0x» (the chat of 14:59, its FIRST NEXT CHAT list) — moved verbatim to the chronicle, entry 2026-11-18 19:2x.
 
