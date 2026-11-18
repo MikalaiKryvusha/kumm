@@ -7998,3 +7998,28 @@ Where it went: the `update` screen of the KUIPS mockups (pack `278038c`): darker
 > и можно в небольшой контейнер поместить лёгкий
 
 Where it went: the version line goes lower under the window buttons and sits in a small light plate: the KUIPS mockups first, then `KrinikConanLauncher.cs` (rule 34).
+
+**10:18 — the state list on an installed build.** `[OWNER]` verbatim (with a crop of the state list «Игра: C:\Program Files (x86)\Steam\steamapps\common\Conan Exiles, версия 3.1.1 · Сборка: 0.9.1, установлена»):
+
+> нет смысла это писать на уже установленной сборке, версию дублируешь, текст пути отвлекает внимание игрока
+
+**10:19:** `[OWNER]` verbatim:
+
+> версии и так уже в лаунчере пишутся вверху слева
+
+Where it went: the screens `installed` and `update` of the KUIPS mockups lose the state list; the column keeps the gold «Играть» and the bottom buttons.
+
+**10:20 — the flow direction on a KUIPS sheet.** `[OWNER]` verbatim, three messages:
+
+> флоу в KUIPS рисуй не сверху вниз, а слева-направо.
+>
+> быстро поищи в интернете, почему дизайнеры именно так рисуют флоу
+
+> потому что процессы протекают на схемах слева направо, сверху вниз, это ГОСТ стандарт блять диаграм, схем, чертежей
+
+> заведи это импрувментом в апстрим KUIPS как рекомендация агентам по работе с KUIPS
+
+Where it went: the launcher sheet is one row «Путь игрока» with the forks on tiers (pack `92a661d`, sheet 5260×7688 → 8830×5900, `kuips check` 0);
+`HOUSE_RULES.md` rule 34.4; the upstream improvement https://github.com/MikalaiKryvusha/KUIPS/issues/1 (recommendation for agents + a `kuips check`
+warning for a path cut into rows). The quick search: GOST 19.701-90 = ISO 5807:1985 (gostinfo.ru); a SciTePress 2014 paper on flow direction in
+process models (best results for left to right, then top to bottom); the exact GOST clause was not re-read.
