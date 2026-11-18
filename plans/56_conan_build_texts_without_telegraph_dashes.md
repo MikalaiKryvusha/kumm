@@ -86,6 +86,12 @@ Only text the agent wrote, and only a dash that was wrong from the start. Conseq
   layout, parallel ellipsis, ellipsis from the previous sentence, a dash between full clauses, explanatory); merge the 26 WORSE rows by the reviewer's note
   (keep the legal part of RU_old, the telegraph fix of RU_new; 4459, 8126, 12421–12423 get the reviewer's suggested wording, checked against EN). Then parity,
   `make_locres_fix.py` → `locres-set-tr.py`, `deploy-localization.py`, the in-game sample.
+  **08:5x pass 3 built** — `KUMM/.work/dash_fix/pass3/new.tsv` (83 OK rows from pass 2, the other 717 as in the source), parity `pass3/apply_pass3.py` 800 ready /
+  0 problems, NOT written into the source yet; the 26 rows to merge with EN, both versions and the reviewer's reason — `pass3/worse.tsv`.
+  **08:5x the 26 merged** by `pass3/merge_worse.py` (each rule asserts its text; legal parts of RU_old kept, telegraph fixes of RU_new kept; 4459 and 12421–12423
+  reworded, 12421 without the repeated «вы получаете»; 8126 and the five «время восстановления — 3 мин» rows stay RU_old); parity 800 / 0. **Next:**
+  `apply_pass3.py --write` into `dm-fish-ru.tsv`, the kept legal dashes of these rows into `dash_lint_allow.txt` with their class, `make_locres_fix.py` →
+  `locres-set-tr.py --check` → write, `deploy-localization.py`, the in-game sample of ten rows.
 - [ ] Re-read the rewrites already committed in the pack (`2d4b104`: launcher, report tool, hub rows, perks, settlement log, guide, README template) for a legal
   dash that was turned into something else; such a line goes back to its original wording and into the allow list with its class.
   **Read 2026-11-18 08:4x** (pairs in `KUMM/.work/dash_fix/c2d4b104_pairs.txt`, `guide_pairs_2d4b104.txt`). To restore from `2d4b104^` (the dash was legal; class):
