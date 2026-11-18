@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0568 · 2026-11-18 · ❌→✅ · #winforms #dpi #cursor #launcher
+class: a-winforms-stock-cursor-is-not-the-system-cursor
+**Lesson:** at 300 % the owner saw the launcher's cursor change size on every button. `.NET Framework`'s `Cursors.Hand` is WinForms' own fixed 32×32 cursor,
+not the system hand, so it ignores the display scale and the user's pointer size while the system arrow follows them. Take the system cursor —
+`new Cursor(LoadCursor(IntPtr.Zero, (IntPtr)32649))` (IDC_HAND) — once, shared; check it by comparing handles with `LoadCursor` (reflection), the size by eye.
+**Trigger:** any WinForms window that sets `Cursors.Hand` (or another stock cursor) and runs on a scaled display.
+mechanized: `Metal.Hand` in `ConanExiles/_config/launcher/KrinikConanLauncher.cs` (pack `21075fb`); check `KUMM/.work/launcher_dev/check_hand.ps1` (not committed)
+
 ### EXP-0567 · 2026-11-18 · ❌ · #stand #owner-screen #launcher #helper #process
 class: a-stand-window-left-the-off-screen-place-and-sat-on-the-owners-screen
 **Lesson:** the owner saw a launcher window with no taskbar button, bottom-right, cut by the screen edges — a helper's frames-stand window. The stand places the

@@ -177,6 +177,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 3a. **A dev launcher for the owner (his ask 16:20 «а мне на рабочйи стол положите ярлык лаунчера? хоть какую-то любую текущую версию дев»):** built 16:21 by
 >    `make_variant.py` (1.0.0, V2 Realism q95) into `.work/launcher_dev/`, copied to `D:\Games\Conan Exiles 3.1.1\Krinik_Launcher_dev\` (+ the build icon); his desktop has
 >    «Krinik Conan (dev).lnk» → that exe. Not started by the agent. Replace it with each new launcher build; remove both when the real 1.0.0 ships.
+>    16:23: the owner saw the cursor change size on the buttons → pack `21075fb` (the system IDC_HAND instead of WinForms' fixed `Cursors.Hand`; reflection check
+>    `.work/launcher_dev/check_hand.ps1` OK, control on the old exe FAIL); the dev copy replaced — his eye confirms the size; judge owed with `590495e`.
 > 4. **The owner's answers of 16:18 (applied, pack `eec880b`):** the v1 wallpapers stay for players, renamed V1; the no-release screen gets NO hint for the player;
 >    the launcher is 1.0.0 («так как это его первое появление на свет будет»).
 > 5. **Judges owed:** `tools/text-fact-parity.mjs` (judge round 1 at the closure: its cited runs reproduce; 9 code findings, fix next — MEDIUM: a stray `<` in Markdown prose hides the facts after it
