@@ -155,7 +155,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **FIRST NEXT CHAT (the owner's order of 14:31–14:32 first, then the 🔥 block):**
 > 1. **The rewrite by the manuals of the build's README, the 0.9.0 release notes and the user guide** — two helpers of this chat wrote into the pack's working tree:
 >    `_config/public_release/README.template.md`, `_config/release/published_0_9_0/github/github_release_notes_2026-11-18.md` (new), `docs/guide/guide-3.1.1.html`.
->    First make sure they finished (`git -C D:/work/ai_sandbox/ConanExiles status --short`; the files stop changing). Then: the three checks (`kaif-voice-lint.mjs check`,
+>    README + release notes DONE as a draft (pack `6b58761`: 25 / 49 Russian sentences reworded, parity passes, the three tools clean, the README nav anchors 6→7,
+>    7→8 fixed; the nav still lacks «6. Ссылки»; the helper's own read only — a clean-instance read is owed). The owner saw 15 before/after pairs of it on
+>    `.work/show/bylo_stalo.html` (14:47, built by `.work/show/build_page.mjs`). The guide's helper may still be writing `docs/guide/guide-3.1.1.html` —
+>    first make sure it finished (`git -C D:/work/ai_sandbox/ConanExiles status --short`; the file stops changing). Then: the three checks (`kaif-voice-lint.mjs check`,
 >    `krinik-stylometry/tools/voice-check.mjs --genre document`, `dash_lint.py --only`), a parity check of facts against `git diff`, a clean-instance read, then SHOW the owner
 >    (one HTML page, `HOUSE_RULES.md` 32 / 1a); publication (`gh release edit`, the public README) only after his word. `HOUSE_RULES.md` 35.5 governs all of it.
 > 2. **Fix the guards judge's open findings** — plans/58 «Guards judge round 1»: 3–8, 10–16 (the owner-text check flags his recorded words; ru-ok spelling; multi-line comments;
