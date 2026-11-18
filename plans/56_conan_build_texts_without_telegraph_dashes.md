@@ -127,7 +127,9 @@ Only text the agent wrote, and only a dash that was wrong from the start. Conseq
 - D3 DONE: the 13 mods' `version` fields held developer notes the player's installer printed («0.9.0 (2026-11-02: the first release …)»); the notes moved into
   `$comment_version` (`.work/dash_fix/version_notes_out.mjs`), `version` keeps the number; `Deploy-ModPack.ps1 -ListMods` shows «KrinikConanArchery … 0.9.0»;
   the lint reads the manifest's `version` from now on.
-- D5 DONE: a hit is printed whole, line breaks as `\n`, so it can be copied into the allow list.
+- D5 PARTLY: a hit is printed whole, line breaks as `\n`. CORRECTED 2026-11-18 14:39 +03:00 — the line written here at 14:07 said «so it can be copied into the
+  allow list»: false (guards judge, finding 8) — the allow list compares the raw string with real newlines, so a pasted `\n` line never matches (286 of 349
+  KrinikRU hits hold newlines). Open: the allow list must read `\n` back as a newline.
 - D4 OPEN: `build-docs.py --no-pdf` still runs no lint.
 - The whole lint: **86 files, 370 lines** (was 49 files, 0 lines) — the PDF print is refused until the 366 translation rows are judged by the pass-3 method
   (touch only a dash that replaces a verb, a preposition or «это»; allow-list the legal ones with their class; `HOUSE_RULES.md` 33.5).
