@@ -34,6 +34,14 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
 8. A broken connection keeps the downloaded parts and offers «Продолжить скачивание», which resumes. Check: the feed cut mid-part on the stand.
 9. Window states come from the real state only: the stand-only flag `KRINIK_LAUNCHER_STATE` is removed; every stand state is built from real files.
    Check: `grep KRINIK_LAUNCHER_STATE` in the launcher source prints nothing; the stand cases still pass.
+10. Languages (`[OWNER]` 2026-11-18 15:08, verbatim — `PROJECT_HISTORY.md` entry 2026-11-18 15:03): every player-visible string comes from a per-language table
+    (Russian and English; `[AI]` the set said to the owner in chat 15:09, open to his word); a language switch stands to the left of the block of the window buttons
+    and the version plate (mockup element `.lang`). Action: the player picks the other language. Result: the whole window re-renders in it at once, no restart;
+    every state screen fits at 720p–4K. Check: a grep of the launcher source finds no player-visible Cyrillic or English literal outside the tables; frames of
+    every state in both languages.
+11. The first start follows the Windows UI language (ru → Russian, any other → English, `[AI]` fallback); a choice the player made is saved and every later start
+    opens in it. Check: stand runs with `CurrentUICulture` ru-RU, en-US, de-DE and no saved choice; then a switch, a restart, the saved language; the save lands in
+    the launcher's state location (`KRINIK_LAUNCHER_STATE_DIR` on the stand), never in the owner's AppData.
 
 ## Phases and gates
 

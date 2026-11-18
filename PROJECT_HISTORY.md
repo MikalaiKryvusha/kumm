@@ -8223,5 +8223,16 @@ block by block; the launcher mockup strings are written the same way. 15:04, the
 > может где-то не нужно будет переписывать, а где-то нужно будет целиком предложение переписать
 
 (→ 35.6.1: a good sentence stays, a defective sentence is rewritten whole, a block that does not hold together is rewritten whole; only a patch inside an old
-sentence is banned.) The agent's reading said in chat 15:05: the helpers changed only the units with a defect and kept
+sentence is banned.) 15:05, `[OWNER]` verbatim: «отправь одного субагента лаунчер делать. Ему полный резюм поручи выполнить» (→ one helper on epic 57, its
+prompt orders the full /resume Step 1 first). The agent's reading said in chat 15:05: the helpers changed only the units with a defect and kept
 everything around them so that no number or link was lost, and the seams show.
+
+**15:08 — the launcher speaks several languages.** `[OWNER]` verbatim, two messages:
+
+> лаунчер должен будет поддерживать многоязычность. В нем должен быть свитч языка слева от блока кнопок закрытия, разворачивания и номера версии
+
+> лаунчер по-умолчанию запускается в языке системы юзера. Если настройку юзер поменял - лаунчер запоминает настройку юзера и запускается в выбранном юзером языке
+
+Where it went: plan 57 criteria 10 (string tables, the switch left of the window buttons and the version plate) and 11 (the Windows UI language first, the player's
+choice saved); the mockups get the switch (`.lang`); the launcher helper got both by message. `[AI]` said in chat 15:09: Russian and English, any other system
+language falls back to English — open to his word.

@@ -145,6 +145,26 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW — chat of 2026-11-18 14:59 (opened by the pasted farewell → «resume» → /resume in full; the owner present and steering).**
+> Done: the priority answered in chat 15:01 (none of the three 🔥 items closed); the launcher mockups ACCEPTED by the owner 15:03 with «fix the Russian» →
+> the strings rewritten by whole sentences, a clean-instance read (7 findings: 5 applied, «Отзыв» refuted as the owner's own word, 1 for him), the language
+> switch RU | EN left of the window buttons (owner 15:08: multilingual launcher, Windows UI language first, the player's choice remembered → plan 57
+> criteria 10–11); pack `95f8b52`, `75b310e`, sheet rebuilt (kuips check 0). `HOUSE_RULES.md` 35.6 (owner 15:04–15:05): rewrite by whole sentences and
+> blocks, never patch inside an old sentence; the idea is kept, the form may be new — the drafts of README / notes 0.9.0 / guide (pack `6b58761`, `319c17c`,
+> `0e1ae7a`) are phrase patches and are REDONE by 35.6 (not started). The wallpapers moved into the pack (owner 15:16 «why not in the repo»): pack `8651fce`,
+> `_config/branding/Wallpapers` (shipped JPEG) + `_config/branding/wallpapers_source` (lossless WebP, pixel-identical); the library's `_extras` deleted.
+> RUNNING: one helper on epic 57 phases 2+ (owner 15:05 «one subagent, full resume»; told: no helpers of its own, no STATUS edits, forks reported).
+> WAITING for the owner's pick: the v2 wallpaper `D:\Варвары над древним городом.png` (1672×941; he upscales it himself, 15:30) — six grades A–F
+> (`.work/wallpaper_v2/grade.py`), the page `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\92_oboi_v2_cvetokorrekciya\oboi_v2_cvetokorrekciya.html` opened 15:31;
+> his pick → the final grade at full size into `_config/branding/wallpapers_source/` (the art lives in the pack, 15:16). 15:33: he likes B (depth) and C (the v1
+> palette) — both lossless at 1672×941 in `НА ОТСМОТР НИКОЛАЕМ\93_oboi_v2_B_i_C\` (opened); he upscales and picks; the final one goes into the pack.
+> Pack tidy, pass 1 DONE (pack `2ccd63f`): the experiment records the bugs cite committed, rdoc outputs and `pakstore.json` ignored, the root camera-diagram
+> duplicate and the orphan `KrinikBowFixes.pak` removed. The owner's decisions left: the 15 camera-page PNGs (≈ 270 MB in git and history), one home for all art,
+> PNG vs JPEG wallpapers for players, `Без имени-1.jpg` at the root (his menu screenshot, excluded from the public tree by `make_public_tree.py`).
+> OPEN for the owner: the no-release screen's next step for the player (asked in chat 15:28); the repo tidy of the pack (owner 15:14 «навести порядок в
+> локальном и удалённом репозитории») — inventory in progress: untracked agent files (17 devkit kit-*.json, 2 recon lua, rdoc outputs, a built pak, guide
+> screens), the owner's two stray images at the pack root (`Без имени-1.jpg` tracked since 2026-09-09, `kamera-os-i-smeschenie.jpg`), 15 camera-page PNGs of
+> ≈ 18 MB each in git (remote ≈ 550 MB), the arts spread over 5 folders; players get JPEG wallpapers while the owner asked PNG quality (2026-10-25).
 > **CHAT CLOSED 2026-11-18 14:3x +03:00 (chat of 13:13, opened by the pasted farewell → /resume; /dayloop on the 🔥 priority; soft closure at 81 % of the context).**
 > Done: the owner's order of 13:35 — all SIX Russian manuals live in the core `krinik-stylometry/russian_norms/` (RUSSIAN_RULES, AI_RUSSIAN_DEFECTS, MEASURING moved;
 > NATIVE_RUSSIAN_STYLE, GOST_TECHNICAL_RUSSIAN, ACADEMIC_RUSSIAN written; their own prose cleaned by the core); core §2.4 register by purpose (interview #039, A) and ЖЯ1–ЖЯ6,
