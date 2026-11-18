@@ -72,6 +72,17 @@ Not covered by the lint yet: strings inside our kit paks (widget texts set by `_
 - [ ] 5. Grow the lint to the kit scripts' widget texts and to the built `Game.locres`; wire it into `build-docs.py`.
 - [ ] 6. Judge round on the whole diff; commit with `review:`.
 
+## Scope set by the owner 2026-11-18 08:11 (verbatim — `PROJECT_HISTORY.md` entry 2026-11-18 08:11; `HOUSE_RULES.md` 33.5)
+
+Only text the agent wrote, and only a dash that was wrong from the start. Consequences for this plan:
+- Every surface of the inventory gets an author column before any rewrite: the agent's (launcher, report tool, hub rows, our translation tables
+  `dm-fish-ru.tsv`, `asset-strings/*.tsv`, the guide, the README template) — in scope; another author's (a mod's own Russian, the game's) — out of scope.
+  The Hosav table of interviews 002 / 003 is the agent's draft accepted by the owner: in scope, and every change there is shown to him (write-gate).
+- Pass 2 of `dm-fish-ru.tsv` already keeps the legal dashes (663 rows with their class in `allowed.tsv`) and changes 175 rows: it is checked row by row
+  against BOTH conditions before it is applied.
+- [ ] Re-read the rewrites already committed in the pack (`2d4b104`: launcher, report tool, hub rows, perks, settlement log, guide, README template) for a legal
+  dash that was turned into something else; such a line goes back to its original wording and into the allow list with its class.
+
 ## Judge round on the tooling (2026-11-18 01:40, pack `2d4b104`) — to act on first
 
 Checked against real data by the judge; to verify and fix in the next chat:

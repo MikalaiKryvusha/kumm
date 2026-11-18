@@ -223,7 +223,18 @@
        consequence. Such a line goes to `dash_lint_allow.txt` with its class. Turning an allowed dash into a colon, a repeated verb or a subjectless
        conjunction is a defect (the sample review of 2026-11-18 01:23, plan 56 step 4).
     4. The check: `python ConanExiles/_config/release/dash_lint.py` lists every Russian player string with a dash; a hit is rewritten, never waived silently.
+    5. **Scope: only text the agent wrote, and only a dash that was wrong from the start.** Text of other authors (a mod's own strings, the game's, the owner's
+       words) is not touched by this rule; a dash that stood legally in the agent's own text stays as it was and goes to the allow list with its class.
+       `[OWNER]` 2026-11-18 08:11 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11.
     `[OWNER]` 2026-11-18 00:44 · `PROJECT_HISTORY.md` entry 2026-11-18 00:44.
+
+34. **Mockups of a UI are made in KUIPS** (`D:\work\ai_sandbox\KUIPS`, the owner's prototyping system), never as ASCII sketches in the chat.
+    1. The project's KUIPS folder lives next to the UI's source (the Conan launcher: `ConanExiles/_config/launcher/design/` — `mockups.html`, one
+       `[data-screen]` element per state, and `flow-map/flow-map.json`); the window is drawn by the real one's numbers, its states differ only where the state does.
+    2. `node D:/work/ai_sandbox/KUIPS/bin/kuips.mjs shoot --root <dir>` (scale 4, the owner's 4K TV) → `layout` → `build` → `check` (0 defects), then the agent looks
+       at the frames and the whole sheet itself, then opens `design/flow-map.html` for the owner.
+    3. The built sheet and the frames are rebuilt by these commands and stay out of git; the page and the manifest are committed.
+    `[OWNER]` 2026-11-18 08:16 · 08:19 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11.
 
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —

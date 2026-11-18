@@ -125,6 +125,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW (chat of 2026-11-18 08:10, `выполни resume`; the owner's words of 08:11–08:22 — chronicle entry 2026-11-18 08:11).** (1) **Dash rule scoped**
+> (`HOUSE_RULES.md` 33.5, `RUSSIAN_RULES.md` §11, plan 56 «Scope»): only text the agent wrote, only a dash wrong from the start; re-read `2d4b104` for legal dashes
+> that were changed. (2) **The 08:12 frame was an impossible state** (stand flag `KRINIK_LAUNCHER_STATE=installed` with no game) + the unpack-anywhere chain
+> (installer README vs guide) — both closed by plan 57. (3) **Launcher version line «Лаунчер: 1.1.0»** under the window buttons, centred on the pair (08:13, 08:20) —
+> in `KrinikConanLauncher.cs` (`LVER_*`, `capsCenter`), seen on a 4K snapshot; judge round running, pack commit after it. (4) **NEW EPIC — `plans/57_EPIC_conan_launcher_self_sufficient.md`**
+> (08:18–08:22): the launcher finds the game on the disks, sees / downloads the latest release for the found game version, installs; a Conan-coloured
+> progress bar with %, download speed, remaining and elapsed time. **Phase 0: 12 mockups in KUIPS** (`HOUSE_RULES.md` 34; `ConanExiles/_config/launcher/design/`,
+> sheet `design/flow-map.html` opened for the owner 08:29) — **waiting for his verdict**, then phase 1 recon. (5) Still open from the chat of 00:40 (below): the launcher
+> judge round + the pack push; dm-fish pass 2 under the new scope; the game run; D4 notes; the KUMM force-push (the owner's call).
+>
 > **NOW (chat of 2026-11-18 00:40, `resume` + «работай автономно в дневном цикле до переполнения контекста - затем закрывай чат» → /dayloop).**
 > (1) **Epic 55 B7 verified** — batch on the final exe 138 / 0, control on 2f62b52 26 FAIL in the new cases, the button corners seen fixed on the live window
 > (report `testcases/reports/2026-11-18_conan-launcher-b7-verification.md`). **Judge round on B7 → 7 risks, 5 cosmetic, all confirmed and fixed in the pack**

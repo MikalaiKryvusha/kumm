@@ -7768,3 +7768,64 @@ the owner's real-key checks; bug 93) → the pointer line left in STATUS.
 > `DebugActionTryFailure` / `EndPowerCharge`; the degeneration bits now known: sprint 2 −8/s, charge hold 32 −6.7/s). Tools of this chat: `.work/hangstamina/*.lua`,
 > `.work/bowflight/*.lua` (arrow-birth, refuse, window, equip probes), `ConanExiles/_config/devkit/kit-probe-ab-torso-*.py`.
 >
+
+## 2026-11-18 08:11 +03:00 — the owner's morning words: the dash rule's scope, the launcher's state logic, the version line, the self-sufficient launcher (recorded 08:19)
+
+Chat of 2026-11-18 08:10 (`выполни resume`). The words arrived mid-turn while the resume ritual ran; the moments are the clock-now hook's stamps of each message.
+
+**08:11 — the scope of the dash rule (HOUSE_RULES 33).** `[OWNER]` verbatim:
+
+> по тире: исправлять нужно только там, где ТЫ сам это писал
+
+`[OWNER]` 08:11 verbatim:
+
+> там где тире было ихначально законно - там не нужно исправлять
+
+**08:12 — the launcher frame of the previous chat** (review folder `91_launcher_ugolki_i_tire`: «Удалить сборку» above, «Игра не найдена. Распакуйте сборку в папку игры.», the gold «Играть» below). `[OWNER]` verbatim:
+
+> Этот скриншот ты мне открыл в браузере в прошлом чаты. Ничего тебя тут не смущает?
+>
+> меня смущает твоя логика в твоей цифровой голове
+
+What it showed: an impossible state — the stand forced `KRINIK_LAUNCHER_STATE=installed` with no game beside the exe, so «Удалить сборку» and a live «Играть» stood under «Игра не найдена». The agent had looked at the button corners only. Found on the way: the installer's `README.txt` says «unpack anywhere» and `install.cmd` asks for the game path, while the guide and the launcher expect the build inside the game folder — after such an install the launcher never finds the game.
+
+**08:13 — the launcher's version line.** `[OWNER]` verbatim:
+
+> Делаем вверху справа под кнопка закрытия и сворачивания строку с версий лаунчера, мелким текстом, типа
+>
+> Лаунчер: 1.0.0
+
+**≈ 08:16 — answer to an ASCII sketch of three variants** (an AskUserQuestion with text previews). `[OWNER]` verbatim:
+
+> макеты рисуй, а не  блядское ASCII
+
+**08:18 — the launcher works without a downloaded build.** `[OWNER]` verbatim:
+
+> Далее: лаунчер должен быть самодостаточен без скаченной сборки. Он должен уметь:
+>
+> 1) просканировать диски ПК в поисках директории, где установлена игра Conan - часто это стандартные пути Windows, куда игры ставятся в винде - там и ищем
+>
+> 2) должен уметь самостоятельно ВИДЕТЬ наличие файлов сборки LATEST релиза в GH. Если лаунчер видит файлы сборки - то ничего качать он не предлагает, а [Установить сборку] сразу выполняет деплой сборки в папку чистой игры.
+> Если файлы сборки не скачены, то лаунчен по [Установить сборку] сам запускает скачивание архивов сборки из GH ПОД НАЙДЕННУЮ версию игры пользователя
+
+Where it went: rule 33 sub-item on scope (`HOUSE_RULES.md`), `RUSSIAN_RULES.md` §11, plan 56; the version line — `KrinikConanLauncher.cs` (`LVER_*`); the self-sufficient launcher — its own plan in `plans/`.
+
+**08:19 — mockups in KUIPS.** `[OWNER]` verbatim:
+
+> рисуй макеты в  KUIPS. Если KUIPS у тебя нет, то ищи KUIPS локально на этом компе, начинай с ним работать - оформляй макеты нашего лаучена в нем, и мне приноси на отсмотр
+
+**08:20 — the version line, about a frame of it right-aligned under the window buttons.** `[OWNER]` verbatim:
+
+> Текст ниже
+>
+> Тест центрировать относительно кнопок
+
+**08:21 — processes show a progress bar.** `[OWNER]` verbatim:
+
+> процессы скачивания, обновления, установки - лаунчер показывает прогресс-баром в цвет конана, с процентами
+
+**08:22 — the download line.** `[OWNER]` verbatim (the tail typed in the English layout; «b crjkmrj ghjikj» reads «и сколько прошло»):
+
+> если это скачивание - лаунчер пишет скорость скачивания и ETA время b crjkmrj ghjikj
+
+Where it went: KUIPS project of the launcher — `ConanExiles/_config/launcher/design/` (mockups page, manifest, frames, sheet `flow-map.html`), shown 08:29; the progress bar, speed, remaining and elapsed time — plan 57 requirements; the centred version line — `KrinikConanLauncher.cs` (`capsCenter`).
