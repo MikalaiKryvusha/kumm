@@ -85,6 +85,23 @@ edited vanilla widget without its line is saved into the mod's Content and silen
 
 Live check of the pak: the remote reads `…WBP_ContainerInfo_C:WidgetTree.Overlay_Main.OverlaySlot_5` padding = 120.
 
+## Clicks and Esc without key binds (bug 85, 2026-11-18) `[NOT-TESTED]` until the cases of `testcases/TC_conan_keybinds_to_game_events_2026-11-18.md` pass
+
+The mod has NO `RegisterKeyBind` (guard `python -I -X utf8 _config/check-lua-game-thread.py _unpacked/KrinikConanUI` → 0): a key-bind callback runs Lua on UE4SS's
+event-loop thread while this mod's game-thread Lua runs — one `lua_State`, no lock — the crash class of bug 85. Every click and Esc is a blueprint event on the game thread:
+
+| Need | Kit (`_config/devkit/kit-krinik-click-events.py`, after `kit-conanui-edit.py` and `kit-krinik-modsettings.py`, twice) | Lua |
+|---|---|---|
+| the «ОТЗЫВ» plate | both menus: Construct → `GetWidgetFromName("Btn_KrinikFeedback")` → Cast To Button → Bind OnClicked → `KrinikFeedbackClicked` | `krinik_feedback`: `RegisterHook(<menu class>:KrinikFeedbackClicked)` at the menu class's first birth |
+| clicks in our settings window | `W_KrinikModSettings` `OnPreviewMouseButtonDown`: LMB → `KrinikMouseDown`, returns Unhandled | `krinik_mod_settings`: `RegisterHook(…W_KrinikModSettings_C:KrinikMouseDown)` at the first opening → `on_click` (routing by hover, unchanged) |
+| the mods-settings button and its list | `Local/W_KrinikButton` — a child blueprint of `WBP_ButtonBase`: Construct → «Assign Signal Clicked» (the delegate's own event, one parameter) → `KrinikClicked` | module `krinik_click.lua`: `C.button()` creates it, `C.on(w, fn)` — one `RegisterHook(…W_KrinikButton_C:KrinikClicked)`, the context's address picks the handler |
+| the click outside the list | `Local/W_KrinikClickCatcher` — a Visible empty canvas; `OnMouseButtonDown` → `KrinikMouseDown`, returns Handled | `krinik_mods_button`: the catcher is the FIRST child of the inventory's root `Overlay_0` (2282 × 1272 at 4K — the whole window) under the list box, Visible only while the list is open |
+| Esc in a mod window over the hub | — | `krinik_pause_in_menu`: at `ActivateModule(<listed module>, true)` (pre-hook marks, `NotifyOnNewObject(WindowRoot)` collects the newborn window, post callback arms it) a `W_KrinikButton` with `SetKeyShortcutName('Escape')` in a 0 × 0 `SizeBox` goes into the window's root — the vanilla popups' cancel-button way; its `KrinikClicked` closes the window (`TryCloseWindow` for fishing, Hosav and ours; `ActivateModule(m, false, false)` for the list's other modules). Simple Minimap and Night Terrors close on Esc themselves — not armed |
+| the hub's close for our pages | — | `krinik_hub_controller`: the `ActivateModule` hook alone (recon R2: Esc and Tab closes pass through it) |
+
+Recon behind it (bug 85, section 2026-11-18 19:3x–19:4x): `post-key.ps1` posts a key into the game's window — the game acts on it in the background and UE4SS key
+binds do not see it; ten mod windows of the list swallow Esc natively; `LBPRWidgetID` — Esc closes the hub and leaves the LBPR window open.
+
 ## Lua sections (`ue4ss/Scripts/`, loaded by `main.lua` with `pcall(require)`, log prefix `[KrinikConanUI:<section>]`)
 
 | Section | What | Hooks / events | Numbers |

@@ -8559,3 +8559,26 @@ the three items — item 3 wrongly as «built from the first two». The owner, 1
 Where it went: STATUS item 3 rewritten (it said «Exit: 1 and 2 done; then a release 0.9.1 can be prepared» — the same falsehood, corrected in place); the chat
 answer corrected. The agent said in chat: the order of the previous chat stays (the crash, the RC order, the judge findings, judge round 3, the pack push, RC1);
 the Russian proofreading goes right after RC1 into RC2, the final 0.9.1 does not ship without it — the owner may move it before RC1.
+
+## 2026-11-18 19:40–20:01 +03:00 — the owner: EAA's window and Esc; review and manual testing of new code; «where are the arts» (recorded 2026-11-18 20:07 +03:00)
+
+`[OWNER]` verbatim, in order:
+
+> еще баг на будущее по модам EAA: их окно ESC не закрывает. А должен закрывать.
+>
+> Это про эту же историю, что ты сейчас делаешь
+
+> ты пишешь новый код и новые архитектуры - это потребует хорошего ревью независимого и твоего тестирования функционального мануального
+
+> слушай, я опять зашёл в
+> D:\work\ai_sandbox\ConanExiles\
+>
+> в поисках артов, и не нахожу их
+
+> где они блять?
+
+> я же просил тебя навести порядок
+
+Where it went: EAA → bug 85 (the posted-Esc census of every listed mod window: ten swallow Esc, EAA among them; one fix for the class); review + manual run →
+TC `testcases/TC_conan_keybinds_to_game_events_2026-11-18.md` and the judge rounds (STATUS NOW); the arts — his answer of 15:38 (interview #040 Q2 A: one
+`art/` folder at the pack root) had never been applied while HOUSE_RULES 37 already stated it as done: applied 20:0x (pack commit, STATUS NOW item 2).

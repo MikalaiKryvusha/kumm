@@ -152,7 +152,21 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW — chat of 2026-11-18 18:16 (`resume` → the owner: «КРИТИЧЕСКИ ВАЖНО СОБРАТЬ СБОРКУ 0.9.1 с лаунчером 1.0.0», the three items one goal). Done by 19:0x
+> **NOW — chat of 2026-11-18 19:24 (`resume` + the previous farewell's order).** (1) **Bug 85, the five KrinikConanUI key binds — code written, NOT yet built or
+> run:** recon R1–R2 by the remote + `ConanExiles/_config/post-key.ps1` (a key posted into the game's window: the game acts, UE4SS binds do not see it) —
+> bug 85 section 2026-11-18 19:3x–19:4x; the hub's close passes `ActivateModule` (Esc and Tab); ten mod windows swallow Esc natively (EAA among them — the owner
+> 19:40, the same class), LBPR closes the hub instead. Fix = blueprint events on the game thread: kit `_config/devkit/kit-krinik-click-events.py` (saved: the click
+> catcher, `W_KrinikModSettings` preview-mouse event, both menus' feedback event; `W_KrinikButton` — runs 1–5, the last pick «События|AssignSignalClicked»),
+> Lua module `krinik_click.lua` + five sections rewritten (the guard on the source: 0). Mod notes: `games/ConanExiles/mods/KrinikConanUI.md` «Clicks and Esc
+> without key binds». TC `testcases/TC_conan_keybinds_to_game_events_2026-11-18.md` (R1, R2 done; K1–K9, C1 owed). Next: the kit green → `kit-buildmod.py
+> KrinikConanUI` → copy the pak → `Deploy-ModPack.ps1 -Deploy -Only KrinikConanUI` → the TC by the player's path (real mouse needs the game in front and
+> `owner-idle.ps1` FREE) → judge rounds (round 1 running on the Lua + kit + post-key diff; the owner 19:48: new code and architecture need a good independent review
+> and a manual functional run). (2) **The art folder — the owner's debt of 15:38 applied 20:0x** (he could not find the arts 20:00): pack commit — `art/logos`, `icons`,
+> `wallpapers`, `wallpapers_source`, `screenshots`; scripts and the manifest moved; launcher res images and both icons rebuilt byte-identical. LOCAL, rides with the
+> pack push. Release step owed: the public tree of 0.9.1 and `build_nexus_description.py` (raw logo URL → `art/logos/…`) go out in the SAME release, the Nexus page
+> updated with them. (3) Item 3 of the priority is the rough polish (critical bugs) — corrected 19:29 (the line above). The Russian proofreading goes after RC1 into RC2.
+>
+> **Chat of 2026-11-18 18:16 (`resume` → the owner: «КРИТИЧЕСКИ ВАЖНО СОБРАТЬ СБОРКУ 0.9.1 с лаунчером 1.0.0», the three items one goal). Done by 19:0x
 > (pack committed `9d2a8b4` launcher + versions + tooling, `5f1544f` texts — LOCAL, the push waits for judge round 2 running 19:1x → `reports/2026-11-18_judge_launcher_round2.md`):** the launcher: the language DROPDOWN (stand `lang` 25 / 25); judge round 1 (`reports/2026-11-18_judge_launcher_
 > c05aa51_21075fb.md`) — D1 `never.txt` (this PC: `%LOCALAPPDATA%\KrinikConanLauncher\never.txt` = `D:\Instals`), D2 the installed version from KUMM
 > `Deploy-ModPack.ps1` → `_kumm_backup\pack_version.txt` (fixture-pack 71 / 71), D3 stop marks + «не закончил скачивание», D4 title pair (header per the mockups),

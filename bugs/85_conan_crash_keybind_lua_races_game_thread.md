@@ -91,3 +91,38 @@ game-thread Lua often (the FPS counter every 250 ms, the pickup check every seco
 the next chat: a kit-bound custom event per OUR button (the attribute page arrows' way, `kit-attribute-paging-step2.py` — the click calls a BP event, Lua hooks
 it on the game thread); for Esc / Tab — the game's own handling (`GUIModuleController:ActivateModule` is already hooked by the hub controller); gameplay keys —
 the hero's AnyKey event (KrinikConanCamera's way). Fixing: the next chat, first item (STATUS NOW).
+
+## 2026-11-18 19:3x–19:4x — recon R1, R2 (TC `testcases/TC_conan_keybinds_to_game_events_2026-11-18.md`), background game, the remote + posted keys
+
+Tool born for it: `ConanExiles/_config/post-key.ps1 -Key Escape|Tab` — PostMessage WM_KEYDOWN / WM_KEYUP into the game's window: the game ACTS on it in the background
+(the hub closed), and UE4SS key binds do NOT see it (our Esc bind left our window open) — a clean probe of the game's native path with our binds bypassed.
+Probes (KUMM `.work/bug85/`, recon only): `close-hooks-probe.lua` (post-hooks on the close / escape / toggle UFunctions, counters), `escape-stack.lua`, `func-params.lua`,
+`class-props.lua`.
+
+- **R1 — what the game offers.** `GUIModuleController`: an ESCAPE STACK — `m_EscapeStack` (array of `EscapeStackNode`: delegates `SignalActivated`, `SignalActivatedBP`,
+  bool `ShouldEatInput`), `PushEscapeStackNode()`, `PopEscapeStackNode()`, `RemoveEscapeStackNode(Node)`, `ProcessEscapeStack()`; also `ToggleModule(ModuleName)`,
+  `MainMenuPressed()`, `DeactivateFullscreenModules(moduleToIgnore)`, the multicast `ModulesChanged`. `WindowRoot`: `Close(Force)`, `Open`, multicast `SignalClosing(Window)`,
+  `SignalOpened`. `FLXButtonBase`: multicast `SignalClicked` (one parameter, the button — the main menu's `…B_Continue…_SignalClicked__DelegateSignature` takes it),
+  `SetKeyShortcutName(Name)`; NO click UFunction; `WBP_ButtonBase_C` has no functions of its own — a click is seen only by a blueprint binding of `SignalClicked`.
+- **R2 — the hub's close.** Hub open: 1 node on the escape stack (pushed in C++ — the Push hook stays silent). A posted Esc → `WindowRoot:Close` on `CraftingGUI_C`
+  and `GUIModuleController:ActivateModule` (post-hooks, game thread); a posted Tab → `ActivateModule`. So the hub controller's existing `ActivateModule` hook already sees
+  both closes: its ESCAPE / TAB key binds (`krinik_hub_controller.lua:354`) are redundant. `ProcessEscapeStack` / `ToggleModule` hooks stay silent (called in C++).
+- **R2 — Esc in a mod window over the hub (posted Esc, the game's native path):** the vanilla `InventorySettingsPopup` closes (its cancel button carries
+  `KeyShortcutName` Escape and is bound in its blueprint), the hub stays. Close by themselves: `SM_UI_Settings` (Simple Minimap), `NightTerrorsSettings`. Swallow Esc —
+  the window stays, the hub stays: `KrinikModSettings` (OUR window: `B_KrinikClose` has the Escape shortcut but no binding), `AMR_Settings`, `LLH_Settings`,
+  `PrP_Settings`, `DN_UI_Settings`, `EmberlightMasterConfig`, `EAA_Armorsettings` (the owner's report of 19:40, the same class), `PIFC_Settings`, `ExilesFishingTuning`,
+  `HosavUIsettings`. `LBPRWidgetID`: Esc closes the HUB and leaves the LBPR window open (module active, the hub gone) — a separate defect of the same class.
+  Today the two Lua Esc binds (`krinik_pause_in_menu.lua:680` MOD_WINDOWS — fishing, Hosav, ours; `krinik_mods_button.lua` `__krinik_mods_menu_esc` — the list's
+  modules) close some of them on a REAL Esc.
+
+**The fix (FORK closed in chat 19:3x: kit-bound blueprint events, the project's proven path of the attribute arrows and wheel; the game's own pattern of vanilla
+popups binding their buttons):** kit script `_config/devkit/kit-krinik-click-events.py`:
+1. `W_KrinikButton` — a child blueprint of `WBP_ButtonBase`: Construct binds its own `SignalClicked` to the custom event `KrinikClicked`. Lua creates it where it
+   created `WBP_ButtonBase` (the mods button, the list entries) and as an invisible Esc closer (`SetKeyShortcutName('Escape')`) inside every mod window of the list
+   when it opens; a `RegisterHook` on `KrinikClicked` (game thread) tells by the context which one.
+2. `W_KrinikClickCatcher` — a transparent full-size widget whose `OnMouseButtonDown` calls `KrinikMouseDown` and returns Handled: under the mods list in the
+   inventory's root `Overlay_0` (2282 × 1272 — the whole window) while the list is open — the click outside.
+3. `W_KrinikModSettings`: `OnPreviewMouseButtonDown` → `KrinikMouseDown` (Unhandled — the routing by hover stays in Lua); `B_KrinikClose.SignalClicked` →
+   `TryCloseWindow` (its Escape shortcut and the «Закрыть» click — both dead until now).
+4. `W_MainMenu_MainMenu`, `W_IngameMenu`: `Btn_KrinikFeedback.OnClicked` → `KrinikFeedbackClicked`.
+5. Lua: the five `RegisterKeyBind` removed; the hub controller keeps `ActivateModule` only.
