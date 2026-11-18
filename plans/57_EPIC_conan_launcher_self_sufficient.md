@@ -15,7 +15,8 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
 
 ## Acceptance criteria
 
-1. Game search. Situation: a PC where Conan Exiles lies in a Steam library on any drive, or in a standard Windows install folder. Action: the player starts the
+1. Game search. Situation: a PC where Conan Exiles lies in a Steam library on any drive, or in `X:\Games\<any name>` on any fixed drive (the owner
+   2026-11-18 10:04: copies are often installed in `C:\Games` or `D:\Games` — searched right after Steam), or in a standard Windows install folder. Action: the player starts the
    launcher from any folder (desktop, Downloads). Result: the window shows the game's folder and version without the player pointing at it. Check: a stand with
    a stub game in a fake Steam library (`libraryfolders.vdf`) on a second path; the launcher's log names the found folder; a frame of the window.
 2. Several copies: each copy is listed with its version and state (clean / build installed / other mods); the player picks one. Check: stand with two stubs.

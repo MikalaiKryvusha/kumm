@@ -7972,3 +7972,11 @@ Where it went: the 🔥 block at the top of STATUS «Where we are now»; /dayloo
 > (d) epic 55 D4 — «Что нового» 0.9.1, known issues, release notes BY the owner's portrait (git log of the pack since 2026-11-02), a clean check, then shown
 > to him; (e) the owed launcher items R5, C7 (plan 55 B8); C1, C2, C3, C5, C6 are fixed in `926c887`
 — they go into the judge round of item (a) before the push; (f) the KUMM force-push — still the owner's call.
+
+**10:04 — where the game is installed.** `[OWNER]` verbatim:
+
+> Conan Exiles Enhanced продаётся только в Steam.
+>
+> Его часто будут ставить в C/Games или D/Gamse
+
+Where it went: plan 57 criterion 1 and the research doc §3 search order — the `Games` folder at the root of every fixed drive is searched right after Steam.

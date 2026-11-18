@@ -181,7 +181,10 @@ https://github.com/curl/curl/blob/master/lib/progress.c · https://tqdm.github.i
 
 - **Search order**, all on a background thread while the window is already open: the launcher's own folder walk-up (today's 3 levels), then the paths
   remembered from earlier runs, then Steam (both registry views, both `libraryfolders.vdf` copies and formats, `appmanifest_440900.acf` with `StateFlags & 4`),
-  then the bounded fixed-drive walk of §2.2, and last a "choose folder" button whose answer is remembered.
+  then the `Games` folder at the root of every fixed drive (`C:\Games`, `D:\Games`, …: the game folder itself or one level below it, any name such as
+  `Conan Exiles`, `Conan Exiles Enhanced`, `Conan Exiles 3.1.1`), then the bounded fixed-drive walk of §2.2, and last a "choose folder" button whose answer
+  is remembered. The `Games` roots come right after Steam by the owner's word (2026-11-18 10:04, chronicle entry 2026-11-18 08:11): copies outside a Steam
+  library are often installed in `C:\Games` or `D:\Games`.
 - **One install is** a folder with `ConanSandbox.exe` and the Shipping exe. Show every install found with its CL, preselect the one that matches the newest
   build, and let the player switch.
 - **The bounded walk:** fixed, ready drives; priority roots first; depth 4 at most; system folders and reparse points skipped; errors caught per folder;
