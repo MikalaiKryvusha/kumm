@@ -7944,3 +7944,31 @@ Where it went: plan 58 criterion 6 — an A/B check of texts written with and wi
 > думаю что это может растянуться на несколько чатов - ВЫСЕКИ КРУПНО ЭТО В СТАТУС. Это наше приоритет на ближайшие дни! пока это не сделаем, мы не можем успокоиться!
 
 Where it went: the 🔥 block at the top of STATUS «Where we are now»; /dayloop on it.
+
+## 2026-11-18 09:34 +03:00 — STATUS bonsai trim (soft closure of the chat of 2026-11-18 08:10): the NOW block of the chat of 00:40 moved verbatim
+
+> **NOW (chat of 2026-11-18 00:40, `resume` + «работай автономно в дневном цикле до переполнения контекста - затем закрывай чат» → /dayloop).**
+> (1) **Epic 55 B7 verified** — batch on the final exe 138 / 0, control on 2f62b52 26 FAIL in the new cases, the button corners seen fixed on the live window
+> (report `testcases/reports/2026-11-18_conan-launcher-b7-verification.md`). **Judge round on B7 → 7 risks, 5 cosmetic, all confirmed and fixed in the pack**
+> (unpack marker `pack\.krinik_unpacked`, crash handler, keepOld / RestoreSlot, space formula, stand cases B15′ half bundle + control FAIL on the B7 exe;
+> plan 55 B7 lists them). **B8 the crash-report offer BUILT** (`OfferCrashReport`, stand case B16′ `crash`); exe `0d6282b2…`, `batch58.sh` running at 01:10;
+> **judge round 2 on the launcher running**. (2) **The owner's order 00:44 — no dash instead of a verb in any Russian text** (`HOUSE_RULES.md` 33, `RUSSIAN_RULES.md`
+> §11, plan 56, `ConanExiles/_config/release/dash_lint.py`, wired into `build-docs.py` before the PDF): rewritten — hub rows, report tool (+ GitHub Issues as the
+> second feedback path = D-fb), perks, settlement log, guide, README template, launcher strings; the camera mod's dev README left the shipment; **800 lines of
+> `dm-fish-ru.tsv` — a helper rewriting into `.work/dash_fix/dm_fish_new.tsv`**, then apply by script with key / token parity, locres rebuild, a sample in game.
+> (3) **Phase D: D1–D3 done** (plan 55 «Phase D — release tooling»): numbers 0.9.1 / launcher 1.1.0 / game 3.1.1 in `modpack.json`; README template fills
+> versions and mod counts (9 + 63) from the manifest; guide → `guide-3.1.1.html`. **D4 owed — «Что нового» 0.9.1, known issues, release notes: the owner's
+> text by his portrait.** (4) Show page for the owner opened 01:20: review folder `91_launcher_ugolki_i_tire` (corners before / after, the label).
+> (5) **dm-fish 800 rows: the helper's rewrite REJECTED by a clean sample read (12 of 61 rows worse) and reverted** — my brief banned every dash, the norm
+> allows several; plan 56 step 4 holds the new brief, the four old errors, the kept work files in `.work/dash_fix/`. The lint stays strict, so the PDF build
+> is refused until that pass is done. (6) **Launcher judge round 3: D1 + R1, R3, R4, R6, C4, C8 fixed** (plan 55 B8 lists them and the OWED R2, R5, R7, C1–C3,
+> C5–C7); exe `c834b0d4…`; the stand now builds the launcher under test as 1.0.0 (`batch58.sh`, the manifest says 1.1.0). **In game NOT seen yet:** the hub
+> rows' new hints. Pack LOCAL commits `8ec5b4a` (launcher: B7 judge fixes + B8 + round-3 fixes) and `28a2bc9` (L8 past the settle), `2d4b104` (texts, the dash lint, 0.9.1 numbers, the 3.1.1 guide), `926c887` (C1, C2, C3, C5, C6; stand 175 / 0) — all LOCAL.
+> The tooling judge round (01:40) found coverage gaps — asset-strings, the Hosav locres, the installer's mod versions, no lint on `--no-pdf` launcher builds (plan 56 «Judge round on the tooling»): FIRST text item of the next chat.
+> **FIRST NEXT CHAT:** (a) a judge round on the launcher's last fixes (crash handler only before settle, guarded report start, seen stamp by creation time
+> in %LOCALAPPDATA%, keepOld refuses self-update), then push the pack; (b) dm-fish pass 2 — DONE 01:5x by the helper (175 rows changed, 663 rows keep a dash with its class in allowed.tsv, incl. classes beyond the brief: apposition, parallel ellipsis, explanation, addition; 6965 left as «Древний камень» on purpose, the literal-EN option in optional_6965.tsv; review it first via diff.txt) — it wrote `.work/dash_fix/pass2/new.tsv` +
+> `allowed.tsv`: parity by `apply_dmfish.py` (repoint it to pass2), a clean sample read, allow-list the kept dashes with their class, `make_locres_fix.py` →
+> `locres-set-tr.py`, `deploy-localization.py`; (c) ONE game run: the hub rows' new hints + a locres sample + the crash offer on the real build folder;
+> (d) epic 55 D4 — «Что нового» 0.9.1, known issues, release notes BY the owner's portrait (git log of the pack since 2026-11-02), a clean check, then shown
+> to him; (e) the owed launcher items R5, C7 (plan 55 B8); C1, C2, C3, C5, C6 are fixed in `926c887`
+— they go into the judge round of item (a) before the push; (f) the KUMM force-push — still the owner's call.

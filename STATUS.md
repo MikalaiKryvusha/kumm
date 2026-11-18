@@ -150,50 +150,19 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW (chat of 2026-11-18 08:10, `выполни resume`; the owner's words of 08:11–08:22 — chronicle entry 2026-11-18 08:11).** (1) **Dash rule scoped**
-> (`HOUSE_RULES.md` 33.5, `RUSSIAN_RULES.md` §11, plan 56 «Scope»): only text the agent wrote, only a dash wrong from the start; re-read `2d4b104` for legal dashes
-> that were changed. (2) **The 08:12 frame was an impossible state** (stand flag `KRINIK_LAUNCHER_STATE=installed` with no game) + the unpack-anywhere chain
-> (installer README vs guide) — both closed by plan 57. (3) **Launcher version line «Лаунчер: 1.1.0»** under the window buttons, centred on the pair (08:13, 08:20) —
-> in `KrinikConanLauncher.cs` (`LVER_*`, `capsCenter`), seen on a 4K snapshot; judge round running, pack commit after it. (4) **NEW EPIC — `plans/57_EPIC_conan_launcher_self_sufficient.md`**
-> (08:18–08:22): the launcher finds the game on the disks, sees / downloads the latest release for the found game version, installs; a Conan-coloured
-> progress bar with %, download speed, remaining and elapsed time. **Phase 0: 12 mockups in KUIPS** (`HOUSE_RULES.md` 34; `ConanExiles/_config/launcher/design/`,
-> sheet `design/flow-map.html` opened for the owner 08:29) — his remarks 08:37–08:44 applied (modal copy picker, bulleted aligned metrics, gold CTA at the column
-> top, gold centred update plate), sheet reopened 08:46 — **waiting for his verdict**, then phase 1 recon (`researches/conan-launcher-self-sufficient/`).
-> (5) **0.9.1 waits for epic 57** (the owner 08:35). (6) **Pack PUSHED 08:55 `bd7f96c..bd515fe`** — judge round 4 fixed (the stand wrote 8 files into the
-> owner's %LOCALAPPDATA%, removed; stand 191 / 0 with an owner-folder check; report `testcases/reports/2026-11-18_conan-launcher-judge4-fixes.md`); owed: R3,
-> 4 stale comments. (7) **dm-fish pass 3 READY, not applied** (plan 56: 83 OK + 26 merged, legal dashes kept; `.work/dash_fix/pass3/`); next: write, allow list,
-> locres, in-game sample; then restore the legal dashes of `2d4b104` (plan 56 list). Still open: the game run; D4 notes. (8) **KUMM force-pushed 09:00 by the owner's
-> word** (`2eba534...3e6a76e`; the replaced commit = local `82260a4`, same tree, message cleaned) — KUMM pushes normally again. (9) **NEW EPIC 58 — academic
-> Russian** (the owner 09:00–09:02; `HOUSE_RULES.md` 35): recon of AI-Russian defects (helper → `researches/russian-writing/AI_RUSSIAN_DEFECTS.md`) → a lint →
-> write and Stop hooks → a skill → proofread EVERY agent-written text. Build texts are written by his portrait (`kaif-voice-lint load`) — the KUIPS mockup
-> strings of plan 57 were written without it: rewrite them through it.
->
-> **NOW (chat of 2026-11-18 00:40, `resume` + «работай автономно в дневном цикле до переполнения контекста - затем закрывай чат» → /dayloop).**
-> (1) **Epic 55 B7 verified** — batch on the final exe 138 / 0, control on 2f62b52 26 FAIL in the new cases, the button corners seen fixed on the live window
-> (report `testcases/reports/2026-11-18_conan-launcher-b7-verification.md`). **Judge round on B7 → 7 risks, 5 cosmetic, all confirmed and fixed in the pack**
-> (unpack marker `pack\.krinik_unpacked`, crash handler, keepOld / RestoreSlot, space formula, stand cases B15′ half bundle + control FAIL on the B7 exe;
-> plan 55 B7 lists them). **B8 the crash-report offer BUILT** (`OfferCrashReport`, stand case B16′ `crash`); exe `0d6282b2…`, `batch58.sh` running at 01:10;
-> **judge round 2 on the launcher running**. (2) **The owner's order 00:44 — no dash instead of a verb in any Russian text** (`HOUSE_RULES.md` 33, `RUSSIAN_RULES.md`
-> §11, plan 56, `ConanExiles/_config/release/dash_lint.py`, wired into `build-docs.py` before the PDF): rewritten — hub rows, report tool (+ GitHub Issues as the
-> second feedback path = D-fb), perks, settlement log, guide, README template, launcher strings; the camera mod's dev README left the shipment; **800 lines of
-> `dm-fish-ru.tsv` — a helper rewriting into `.work/dash_fix/dm_fish_new.tsv`**, then apply by script with key / token parity, locres rebuild, a sample in game.
-> (3) **Phase D: D1–D3 done** (plan 55 «Phase D — release tooling»): numbers 0.9.1 / launcher 1.1.0 / game 3.1.1 in `modpack.json`; README template fills
-> versions and mod counts (9 + 63) from the manifest; guide → `guide-3.1.1.html`. **D4 owed — «Что нового» 0.9.1, known issues, release notes: the owner's
-> text by his portrait.** (4) Show page for the owner opened 01:20: review folder `91_launcher_ugolki_i_tire` (corners before / after, the label).
-> (5) **dm-fish 800 rows: the helper's rewrite REJECTED by a clean sample read (12 of 61 rows worse) and reverted** — my brief banned every dash, the norm
-> allows several; plan 56 step 4 holds the new brief, the four old errors, the kept work files in `.work/dash_fix/`. The lint stays strict, so the PDF build
-> is refused until that pass is done. (6) **Launcher judge round 3: D1 + R1, R3, R4, R6, C4, C8 fixed** (plan 55 B8 lists them and the OWED R2, R5, R7, C1–C3,
-> C5–C7); exe `c834b0d4…`; the stand now builds the launcher under test as 1.0.0 (`batch58.sh`, the manifest says 1.1.0). **In game NOT seen yet:** the hub
-> rows' new hints. Pack LOCAL commits `8ec5b4a` (launcher: B7 judge fixes + B8 + round-3 fixes) and `28a2bc9` (L8 past the settle), `2d4b104` (texts, the dash lint, 0.9.1 numbers, the 3.1.1 guide), `926c887` (C1, C2, C3, C5, C6; stand 175 / 0) — all LOCAL.
-> The tooling judge round (01:40) found coverage gaps — asset-strings, the Hosav locres, the installer's mod versions, no lint on `--no-pdf` launcher builds (plan 56 «Judge round on the tooling»): FIRST text item of the next chat.
-> **FIRST NEXT CHAT:** (a) a judge round on the launcher's last fixes (crash handler only before settle, guarded report start, seen stamp by creation time
-> in %LOCALAPPDATA%, keepOld refuses self-update), then push the pack; (b) dm-fish pass 2 — DONE 01:5x by the helper (175 rows changed, 663 rows keep a dash with its class in allowed.tsv, incl. classes beyond the brief: apposition, parallel ellipsis, explanation, addition; 6965 left as «Древний камень» on purpose, the literal-EN option in optional_6965.tsv; review it first via diff.txt) — it wrote `.work/dash_fix/pass2/new.tsv` +
-> `allowed.tsv`: parity by `apply_dmfish.py` (repoint it to pass2), a clean sample read, allow-list the kept dashes with their class, `make_locres_fix.py` →
-> `locres-set-tr.py`, `deploy-localization.py`; (c) ONE game run: the hub rows' new hints + a locres sample + the crash offer on the real build folder;
-> (d) epic 55 D4 — «Что нового» 0.9.1, known issues, release notes BY the owner's portrait (git log of the pack since 2026-11-02), a clean check, then shown
-> to him; (e) the owed launcher items R5, C7 (plan 55 B8); C1, C2, C3, C5, C6 are fixed in `926c887`
-— they go into the judge round of item (a) before the push; (f) the KUMM force-push — still the owner's call.
->
+> **CHAT CLOSED 2026-11-18 09:3x (chat of 08:10, `выполни resume` → the owner's words 08:11–09:13 → `работай автономно` → /dayloop; chronicle entry 2026-11-18 08:11).**
+> Done: the dash rule scoped (`HOUSE_RULES.md` 33.5); launcher version line + judge round 4 (stand kept out of the owner's %LOCALAPPDATA%; 191 / 0), pack pushed;
+> epic 57 opened, 12 KUIPS mockups with his remarks applied (`ConanExiles/_config/launcher/design/`, sheet `design/flow-map.html`); 0.9.1 waits for epic 57;
+> dm-fish pass 3 IN the build (pack `46c9b42`); three legal dashes restored, the whole build `dash_lint` 0 (`0e47ec7`); KUMM force-pushed by his word; epic 58
+> opened (rule 35, mockups rule 34): two web recons, the core improved and its gate fixed (core `57605a4`), guards `ru-reply-check` (Stop) and
+> `ru-build-text-check` (PostToolUse) live; a recon helper of epic 57 phase 1 was still writing `researches/conan-launcher-self-sufficient/README.md` §2–3 at the close.
+> **FIRST NEXT CHAT** (the 🔥 block above is the order): (a) read `researches/conan-launcher-self-sufficient/README.md` §2–3 (the helper's answers) and check
+> them against sources; (b) epic 58: the clean-reviewer brief by `researches/russian-writing/MEASURING_RUSSIAN_TEXT.md` (violation classes by Головин, completeness,
+> coherence) into the core (`krinik-stylometry/`), ru-text (MIT, model-applied skill, cloned in `.work/vendor/ru-text`) as the reviewer's reference, the A/B on the
+> core's `eval/`, then phase 5 — proofread every agent text of the build, surface by surface; read `.work/ru-reply-log.jsonl` (the measure); (c) ONE game run:
+> the dm-fish locres sample + the hub rows' hints + the crash offer on the real build folder; (d) epic 57 phase 2 after the owner's verdict on the mockups;
+> (e) owed: launcher R3, R5, four stale comments; known risks of `ru-reply-check` (plan 58 / the KUMM commit `30b6799` message).
+> **Moved verbatim to the chronicle (entry 2026-11-18 09:34 +03:00):** the NOW block of the chat of 2026-11-18 00:40. Still open from it: ONE game run (the hub rows' new hints, a locres sample of the dm-fish rows, the crash offer on the real build folder); epic 55 D4 («Что нового» 0.9.1, known issues, release notes by the owner's portrait); launcher R5 (the space need after a stopped unpack). Done in the chat of 08:10: the launcher judge round + the push, dm-fish (pass 3, in the build), the KUMM force-push.
 > **Moved verbatim to the chronicle (entry 2026-11-18 01:37 +03:00):** the blocks CHAT CLOSED 2026-11-17 22:1x, NOW 19:43 and NOW 14:40. Still open from them: the walking bow draw (bug 104, the post-process route), the owner's real-key checks (wall hang drain, RMB through a wall push, bug 105 G1 / G5b / G10 / G7, G6), bug 93 (the held draw ends in a sprint); the auto-relay L1″ / L2 / L3 after the owner's «Do not ask me again» tick.
 > **Moved verbatim to the chronicle (entry 2026-11-17 21:3x +03:00):** the blocks FIRST NEXT CHAT item 1 (the auto-relay task — built; its L2 / L3 open in the NOW block of 14:40) and CHAT CLOSED 2026-11-17 11:04.
 > **Moved verbatim to the chronicle (entry 2026-11-17 10:52 +03:00):** the block CHAT CLOSED 2026-11-17 06:33 (+ its FIRST NEXT CHAT) and the block of the chat of 2026-11-17 04:25. Their open items are carried in the NOW block above or stay here: bug 93 (the held draw ends in a sprint; S9) · bug 105 the owner's final check (G1, G5b, G10, G7 with the bow) and G6 · plan 53 step 12 (read `researches/mod-reconciliation/GUIDE.md` first) · plan 52 put-away by a real key · the GitHub release link in the Nexus call (the owner's question).

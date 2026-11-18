@@ -116,6 +116,7 @@ class: a-forced-stand-state-shown-as-the-product
 I checked only the button corners on that frame and showed it to the owner, who read the whole window. A frame shown to the owner is read whole, as the player
 reads it, and every stand state is built from real files, never forced.
 **Trigger:** any frame of a window that goes to the owner — read every line of it for a contradiction before the corner you came for.
+none-cheap: reading a frame whole is judgement; the forcing flag itself leaves the launcher in plan 57 (criterion 9, a grep that prints nothing)
 
 ### EXP-0558 · 2026-11-18 · ❌ · #stand #background #process-tree #counting
 class: a-side-run-cleans-up-the-main-run
