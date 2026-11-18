@@ -32,6 +32,23 @@
 
 ## Where we are now
 
+> # 🔥 PRIORITY OF THE COMING DAYS — WE DO NOT REST UNTIL ALL THREE ARE DONE
+> `[OWNER]` 2026-11-18 09:12–09:13 (verbatim — `PROJECT_HISTORY.md` entry 2026-11-18 08:11, notes 09:12 and 09:13). Autonomous work (/dayloop) on exactly this, in this order:
+>
+> **1. Correct Russian in the Krinik build + a stylometric core that WORKS** — `plans/58_EPIC_academic_russian_guards_and_proofreading.md`, `HOUSE_RULES.md` 33, 35.
+> Tools, machinery, rules, hooks — anything that improves Claude's Russian goes into the core (`KUMM/krinik-stylometry/`, private repo, git-ignored by KUMM;
+> commit and push in its own repo). Exit: every Russian string of the build rewritten through the core and the guards, the lint 0 or allow-listed, the
+> strings SEEN in the game, the launcher, the PDF; the core checks every chat reply before it goes out (Stop hook).
+>
+> **2. The full launcher 1.0.0 with ALL the owner's wishes, every function tested** — `plans/57_EPIC_conan_launcher_self_sufficient.md` (+ epic 55 phase B):
+> finds the game on the disks, sees / downloads the latest release for the found game version, installs, updates, uninstalls, the progress bar with %, speed,
+> remaining and elapsed time, the version line, no impossible window state, the KUIPS mockups as the design. The owner names it **1.0.0** (09:12) — the manifest
+> says 1.1.0 today: settle the number with the self-update rule (`Feed.Newer`) before the release. Exit: a written case set for every function, a functional
+> run by the player's path on a real copy of the clean 3.1.1 (`HOUSE_RULES.md` 25) — every case PASS, the run reports in `testcases/reports/`.
+>
+> **3. The build 0.9.1 in a working MVP state as of 2026-11-18** — epic 55. Exit: 1 and 2 done; then a release 0.9.1 can be prepared (correct Russian, MVP
+> functions, the full launcher 1.0.0) — the publication itself waits for the owner's word.
+>
 > 🎯 **The Conan 3.0.1 build is the main work since 2026-10-26 ≈08:30; every other game is out of priority.** `[OWNER]` «все игры пока не в приоритере, мы
 > работаем дат сборкой конана» · «она 1_ должна работать стабильно 2_ моды не должны конфликтовать, должны быть рабочими 3_ не должно быть
 > явных просадок производительности из-за модов» · 2026-10-26. Work order — "Where to continue", item 0.
