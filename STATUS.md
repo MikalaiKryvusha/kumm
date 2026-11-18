@@ -152,6 +152,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **RUN 20:39–20:44 (after the handover, the owner's word 20:41 «комп и клава твои»): the wrap design DEPLOYED and run by the player's path — K3, K4, K5, K6, K8, K9, N3 PASS (report `testcases/reports/2026-11-18_conan-keybinds-wrap-run.md`); found and fixed: our window took no keyboard focus (pack commit «our settings window takes the keyboard focus»). Steps 1 below are DONE; owed: K1, K2, N1, N2, N4–N9, judge round 2, the pack push.**
 > **CHAT CLOSED 2026-11-18 20:4x (`resume` 19:24 + the previous farewell's order; soft closure at 80 %).** Its working blocks and the block of the 18:16 chat —
 > chronicle, entry «2026-11-18 20:4x — STATUS bonsai trim». **FIRST in the next chat — bug 85 by the player's path:**
 > 1. The pak of the wrap design: `KUMM/.work/bug85/build/KrinikConanUI.pak` (built 20:4x by `kit-buildmod.py`; if the build log `.work/bug85/buildmod2.log`
