@@ -7988,3 +7988,13 @@ Where it went: plan 57 criterion 1 and the research doc §3 search order — the
 > контур - нашим рубленным металлом, что делали для всего лаунчера
 
 Where it went: the `update` screen of the KUIPS mockups (pack `278038c`): darker background, no full stop, the window's rough metal strips `res/frame_*.png` as the frame; sheet reopened 10:07.
+
+**10:16 — the launcher version line.** `[OWNER]` verbatim (with a crop of the window buttons and the line «Лаунчер: 1.1.0» under them):
+
+> еще ниже строку с версией
+
+**10:16:** `[OWNER]` verbatim:
+
+> и можно в небольшой контейнер поместить лёгкий
+
+Where it went: the version line goes lower under the window buttons and sits in a small light plate: the KUIPS mockups first, then `KrinikConanLauncher.cs` (rule 34).
