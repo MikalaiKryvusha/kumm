@@ -266,7 +266,15 @@
        notes, README updates and the user guide of every next release are written only in this language: the owner's portrait loaded before the first word
        (`node .kaif/tools/kaif-voice-lint.mjs load`), the register of 35.4, the manuals' rules, then `kaif-voice-lint.mjs check`, the core's
        `tools/voice-check.mjs`, `dash_lint.py` for build texts and a clean-instance read; only then the text goes to the owner, and to a publication after his word.
-    `[OWNER]` 2026-11-18 09:00–09:01 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11 · 4: `[OWNER]` 2026-11-18 13:50–13:59 · entry 2026-11-18 13:55 · interview #039 · 5: `[OWNER]` 2026-11-18 14:31–14:32 · entry 2026-11-18 13:55 (continued).
+    6. **A text is rewritten by whole sentences and whole blocks, never by patching a phrase inside an old sentence.**
+       1. Each block (a section, a paragraph, a list, a table, one screen of a UI) is read for its idea first, then judged: a sentence that already says its
+          part well by the manuals stays untouched; a sentence with a defect is rewritten whole; a block whose sentences do not hold together is rewritten whole.
+       2. Before writing, state in one line what the sentence or block must tell its reader; then write it anew from that meaning by the manuals, without the old
+          wording open. The idea is what is kept; the form — the words, the sentences, their order, the block's structure — may be entirely new.
+       3. The facts are kept by a script, not by keeping sentences: every number, version, path, link, name and key of the old block is found in the new one
+          (a parity check of tokens), and every fact the new block drops is listed with the reason.
+       4. A before / after show pairs whole sentences or whole blocks, as they were rewritten.
+    `[OWNER]` 2026-11-18 09:00–09:01 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11 · 4: `[OWNER]` 2026-11-18 13:50–13:59 · entry 2026-11-18 13:55 · interview #039 · 5: `[OWNER]` 2026-11-18 14:31–14:32 · entry 2026-11-18 13:55 (continued) · 6: `[OWNER]` 2026-11-18 15:04 · entry 2026-11-18 15:03.
 
 36. **The owner is talked to in the chat; a question for his decision goes through the interactive contour, never a dialog of the harness.**
     1. A clarification is plain text in the chat, and the agent answers his messages as a conversation, not as a report.

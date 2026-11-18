@@ -8185,3 +8185,43 @@ Rule: `HOUSE_RULES.md` 35.5. The rewrite of the build's README, the 0.9.0 releas
 > R3, R5, four stale comments; `ru-reply-check` risks (plan 58, corrected 2026-11-18 13:42: repeat Stops re-read checked text, 17 of 1175 records never checked; one log record 2026-11-18 06:32Z with a JSON
 > parse error of the hook's input).
 > **Moved verbatim to the chronicle (entry 2026-11-18 10:48 +03:00):** the NOW block of the chat of 10:07, the block CHAT CLOSED 2026-11-18 09:3x with its
+
+## 2026-11-18 15:03 +03:00 — the owner's verdict on the launcher mockups and his question on the priority (decided 14:59–15:03, recorded 15:04)
+
+**14:59–15:00 — the question on the priority.** `[OWNER]` verbatim, in order (the pasted farewell of the previous chat came first, then «твои слова»):
+
+> насколько мы движемся успешно по приоритету #1 ???
+
+> что сделано, какие оценки?
+
+> мой вопрос не про русский язык, а по приоритету #1
+
+Where it went: answered in chat 15:01 — the 🔥 block as a whole (the build's Russian, the launcher 1.0.0, the build 0.9.1), none of the three closed; what is done and
+what is not for each, from the plans' records, not re-run that minute; the A/B loss 18 : 5 explained by the stale stand (EXP-0562).
+
+**15:03 — the launcher mockups accepted.** `[OWNER]` verbatim:
+
+> макеты ОК лаунчера, только русския язык исправь
+
+Where it went: plan 57 phase 0 gate passed (header status); the mockup strings rewritten by the core's manuals (`HOUSE_RULES.md` 35.4.3 — text for a person, soft
+and friendly), then epic 57 phase 2.
+
+**15:04 — rewrite by whole blocks, never by patched phrases.** `[OWNER]` verbatim (after reading the before / after page `.work/show/bylo_stalo.html` of 14:47):
+
+> я почитал, что ты мне открыл. Мне не нравится, что ты берёшь часть предложения, и пытаешься в него встроить переделанные красивые правила.
+>
+> Почему бы тебе крупнее нахуй, целыми блоками не переписывать текста по новым правилам?
+
+Where it went: `HOUSE_RULES.md` 35.6 (a text is rewritten block by block from its meaning; the facts are kept by a script check, not by keeping the old sentences);
+the drafts of README, the 0.9.0 release notes and the guide (pack `6b58761`, `319c17c`, `0e1ae7a` — phrase-level patches, 96 of 346 units in the guide) are redone
+block by block; the launcher mockup strings are written the same way. 15:04, the same thought continued, `[OWNER]` verbatim:
+
+> не цепляться за старое, главное - идея. А форма - язык, может быть и новая полностью
+
+(→ 35.6.2: the idea is kept, the form may be entirely new.) 15:05, `[OWNER]` verbatim:
+
+> может где-то не нужно будет переписывать, а где-то нужно будет целиком предложение переписать
+
+(→ 35.6.1: a good sentence stays, a defective sentence is rewritten whole, a block that does not hold together is rewritten whole; only a patch inside an old
+sentence is banned.) The agent's reading said in chat 15:05: the helpers changed only the units with a defect and kept
+everything around them so that no number or link was lost, and the seams show.
