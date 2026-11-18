@@ -232,7 +232,9 @@
     1. The project's KUIPS folder lives next to the UI's source (the Conan launcher: `ConanExiles/_config/launcher/design/` — `mockups.html`, one
        `[data-screen]` element per state, and `flow-map/flow-map.json`); the window is drawn by the real one's numbers, its states differ only where the state does.
     2. `node D:/work/ai_sandbox/KUIPS/bin/kuips.mjs shoot --root <dir>` (scale 4, the owner's 4K TV) → `layout` → `build` → `check` (0 defects), then the agent looks
-       at the frames and the whole sheet itself, then opens `design/flow-map.html` for the owner.
+       at the frames and the whole sheet itself, then opens `design/flow-map.html` for the owner ONCE. A rebuild never opens a new tab: the owner keeps
+       the sheet open, and the agent says in chat that the sheet is rebuilt and the open tab needs F5 (until KUIPS refreshes an open sheet by itself).
+       `[OWNER]` 2026-11-18 10:35.
     3. The built sheet and the frames are rebuilt by these commands and stay out of git; the page and the manifest are committed.
     4. The flow runs left to right (GOST 19.701-90 / ISO 5807 flow direction): the user's path is ONE row of the manifest's `layout`, its main line on
        tier 0 column after column, the forks on tiers above and below the step they branch from; a new row only for a different process. Before

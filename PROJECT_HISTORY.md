@@ -8023,3 +8023,31 @@ Where it went: the launcher sheet is one row «Путь игрока» with the 
 `HOUSE_RULES.md` rule 34.4; the upstream improvement https://github.com/MikalaiKryvusha/KUIPS/issues/1 (recommendation for agents + a `kuips check`
 warning for a path cut into rows). The quick search: GOST 19.701-90 = ISO 5807:1985 (gostinfo.ru); a SciTePress 2014 paper on flow direction in
 process models (best results for left to right, then top to bottom); the exact GOST clause was not re-read.
+
+**10:33 — the version plate's style.** `[OWNER]` verbatim (with a crop of the window buttons and the light plate «Лаунчер: 1.1.0» under them):
+
+> а хули не в таком же стиле?
+
+Where it went: the plate is the window buttons' own metal component `.pl` of the KUIPS mockups (chamfered corners, gold edge, dark fill), at least as
+wide as the pair of buttons, centred under it.
+
+**10:35 — the sheet reopened in a new tab every time.** `[OWNER]` verbatim (with a crop of three browser tabs «Krinik Conan Launcher: Само…»):
+
+> нахуя переоткрываешь KUIPS?
+> тебе религия не позволят обновить уже открытый? чтобы не засирать мне браузер?
+
+**10:36:** `[OWNER]` verbatim (with a crop of the metal plate «Лаунчер: 1.1.0»):
+
+> можно чуть-чуть приглушить цвета контейнера версии?
+> чтобы не был на кнопку похож
+
+Where it went: `HOUSE_RULES.md` rule 34.2 — the sheet is opened once, a rebuild never opens a new tab; the plate muted (the dim edge of an unselected
+row of the copies list, thinner, no top highlight, no text shadow); a KUIPS upstream improvement for refreshing an open sheet —
+https://github.com/MikalaiKryvusha/KUIPS/issues/3.
+
+**10:37 — the sheet's tab icon.** `[OWNER]` verbatim (with a crop of a tab with the generic globe icon):
+
+> хули у KUIPS нет Favicon по его логотипу?
+
+Where it went: https://github.com/MikalaiKryvusha/KUIPS/issues/2 — the sheet's `<head>` (`src/sheet.mjs`) has a `<title>` and no `<link rel="icon">`,
+while the home page has one; the proposal embeds the logo `src/home/kuips-icon.svg` as a data URI and adds a `kuips check` row.
