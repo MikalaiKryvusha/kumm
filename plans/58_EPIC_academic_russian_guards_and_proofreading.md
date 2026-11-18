@@ -1,9 +1,9 @@
 # Plan 58 — EPIC: the agent's Russian is academic and free of AI-Claude defects — guards, hooks, a skill, and a proofreading of every text the agent wrote
 
 > **Created:** 2026-11-18 · on the owner's words 2026-11-18 09:00–09:02 (verbatim — `PROJECT_HISTORY.md` entry 2026-11-18 08:11)
-> **Parent:** `HOUSE_RULES.md` rules 33 (dash), 35 (academic Russian); `researches/russian-writing/RUSSIAN_RULES.md`; the owner's portrait
+> **Parent:** `HOUSE_RULES.md` rules 33 (dash), 35 (academic Russian); `krinik-stylometry/russian_norms/RUSSIAN_RULES.md`; the owner's portrait
 > `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (via `node .kaif/tools/kaif-voice-lint.mjs`)
-> **Status:** 🔧 phase 1 DONE 2026-11-18 09:23 — `researches/russian-writing/AI_RUSSIAN_DEFECTS.md` (42 defects, 28 sources) and
+> **Status:** 🔧 phase 1 DONE 2026-11-18 09:23 — `krinik-stylometry/russian_norms/AI_RUSSIAN_DEFECTS.md` (42 defects, 28 sources) and
 > `MEASURING_RUSSIAN_TEXT.md` (Головин's communicative qualities, ФИПИ violation counts, readability for Russian, coherence); phases 2–3 STARTED 09:2x —
 > the core's §8 + 11 rows from the catalogue, its own gate fixed (CRLF: 66 false lint-core findings → 0, selftest 17/17; core `2b99012` pushed),
 > KAIF reads the KUMM clone of the core; the Stop hook `tools/hooks/ru-reply-check.mjs` (selftest 5/5, wired in `.claude/settings.local.json`).
@@ -68,7 +68,7 @@ text), the owner's voice by his portrait (every text of the build and every text
 
 ## Acceptance criteria
 
-1. A catalogue of defects with sources exists: `researches/russian-writing/AI_RUSSIAN_DEFECTS.md` (each defect: example, why, fix).
+1. A catalogue of defects with sources exists: `krinik-stylometry/russian_norms/AI_RUSSIAN_DEFECTS.md` (each defect: example, why, fix).
 2. A lint finds every machine-detectable defect of the catalogue: `python tools/ru_ai_lint.py <files>` (name to settle in phase 2) exits 1 on a hit; its
    self-test reddens on a fixture of each class and stays green on the norm's legal forms (two nominatives, direct speech, ranges).
 3. Hooks: a PreToolUse hook refuses a Write / Edit of Russian text into the build's text files with a lint hit; a Stop hook reads the agent's last chat reply
@@ -105,7 +105,7 @@ Build: `KrinikConanLauncher.cs` strings, `collect_report.ps1`, `feedback_howto.t
 write-gate), the KUIPS mockup strings. **First material** (the owner 09:03, chronicle): the agent's chat messages of 2026-11-18 — a clean instance lists every
 wrong phrase (incomplete, illogical, calqued, internal jargon, tautology, cliché, typo) with a correction; the patterns feed the lint and the Stop hook.
 **The measure comes from the authorities, not from the owner's examples** (the owner 09:04: his five words of 09:03 were a direction, the measure is to be
-found on the web): recon `researches/russian-writing/MEASURING_RUSSIAN_TEXT.md` (communicative qualities of speech after Б. Н. Головин, readability indices
+found on the web): recon `krinik-stylometry/russian_norms/MEASURING_RUSSIAN_TEXT.md` (communicative qualities of speech after Б. Н. Головин, readability indices
 adapted to Russian, editors' tools, coherence, norms of instructions and interface text); corrected 09:05 — at 09:04 this line wrongly called his examples «the measure». Owner-facing: `interviews/*.md`, every `*_ru.md`, `homeworks/`, review pages. Chat and voice: the Stop gate from phase 3.
 
 ## Decisions made without the owner

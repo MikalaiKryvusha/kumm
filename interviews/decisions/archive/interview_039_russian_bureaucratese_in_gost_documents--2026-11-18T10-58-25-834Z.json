@@ -1,0 +1,18 @@
+{
+  "kind": "interview",
+  "document": "interviews/interview_039_russian_bureaucratese_in_gost_documents.md",
+  "by": "Mikalai Kryvusha (KOT KRINIK)",
+  "at": "2026-11-18T10:58:25.834Z",
+  "atHuman": "18 ноября 2026, 13:58 (+03:00)",
+  "comment": "",
+  "answers": {
+    "Q1": {
+      "choice": "B",
+      "text": "",
+      "comment": "гибко. Где строгое описание правил - можно пользоваться для полноты описания правила по ВСЕМ ТРЕБОВАНИЯМ ОПИСАНИЯ ТРЕБОВАНИЙ, полнота, непротиворечивость, и так далее. Где обращение к пользователю, интерфейсы - там можно мягче и изящнее, без канцеляритов. Интерфейсы UI должны быть дружелюбны."
+    }
+  },
+  "recovered": true,
+  "rev": "75372e37b2d87a3f248203ff51b9c3ba01b6fe4acc99af530ea20f9ae2609d93",
+  "revAfter": "fb02b7dc50007c48f699eb7facbaa0f0b897ace1dc7d85d34c37d5903cbf52b7"
+}

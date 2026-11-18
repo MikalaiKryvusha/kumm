@@ -75,7 +75,7 @@ const REASON = opt('--reason', 'Правило владельца 2026-10-06: «
 const CMDS_OPT = opt('--cmds');
 const GATED = PATHS_OPT ? [new RegExp(PATHS_OPT)] : PATHS;
 const GATED_TOOLS = CMDS_OPT ? [new RegExp(CMDS_OPT)] : PATHS_OPT ? [] : TOOLS;
-// Третье применение — методичка русского языка (KUMM/researches/russian-writing/RUSSIAN_RULES.md): `[OWNER]` «и хук на то, чтобы
+// Третье применение — методичка русского языка (KUMM/krinik-stylometry/russian_norms/RUSSIAN_RULES.md): `[OWNER]` «и хук на то, чтобы
 // читать эту методичку каждый раз, когда что-то пишешь по-русски» · 2026-10-13. Путь «русского» файла не узнать, поэтому
 // --cyrillic судит по ТЕКСТУ: Write/Edit, чей новый текст несёт кириллицу (в любом файле), и Bash с кириллицей в команде.
 // --remind (UserPromptSubmit): ответ в чате файлом не пишется — на каждое сообщение владельца при несвежей метке хук печатает

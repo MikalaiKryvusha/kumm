@@ -215,7 +215,7 @@
 
 33. **A dash never stands in for a verb in Russian text.** Every Russian sentence the player or the owner reads — launcher, installer, uninstaller, report tool,
     mod UI, locres fixes, guide, README, release notes, Nexus text, interviews, the chat — is a whole sentence with its verb.
-    1. Before writing, load the owner's voice portrait (`node .kaif/tools/kaif-voice-lint.mjs load`) and the Russian method (`researches/russian-writing/RUSSIAN_RULES.md` §11).
+    1. Before writing, load the owner's voice portrait (`node .kaif/tools/kaif-voice-lint.mjs load`) and the Russian method (`krinik-stylometry/russian_norms/RUSSIAN_RULES.md` §11).
     2. A dash that replaces a verb, a preposition or a «это» is rewritten as a full sentence: the line of the launcher «Игра не найдена: сборку — в папку игры» <!-- verbatim-ok: the defective line the owner quoted -->
        becomes a sentence that says who does what («Игра не найдена. Распакуйте сборку в папку игры.»). <!-- verbatim-ok: the rewritten line -->
     3. A dash stays where the Russian norm (the owner's portrait §2.4) puts it and no word is missing: direct speech, a range of numbers, a GOST caption,
@@ -243,8 +243,9 @@
     `[OWNER]` 2026-11-18 08:16 · 08:19 · 10:20 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11.
 
 35. **The agent's own Russian is academic, strict and clear; text the player or the owner reads as the build's goes by the owner's portrait.**
-    1. Every Russian text of the agent (chat, voice, documents for the owner, interviews) is written by `researches/russian-writing/RUSSIAN_RULES.md` and the
-       catalogue of AI-Russian defects `researches/russian-writing/AI_RUSSIAN_DEFECTS.md` (calques of English syntax, telegraphic dashes, bureaucratese, the
+    1. Every Russian text of the agent (chat, voice, documents for the owner, interviews) is written by the manuals of the owner's core
+       `krinik-stylometry/russian_norms/` — `RUSSIAN_RULES.md`, `NATIVE_RUSSIAN_STYLE.md`, `ACADEMIC_RUSSIAN.md`, `GOST_TECHNICAL_RUSSIAN.md` — and the
+       catalogue of AI-Russian defects `krinik-stylometry/russian_norms/AI_RUSSIAN_DEFECTS.md` (calques of English syntax, telegraphic dashes, bureaucratese, the
        "not just X but Y" frame, filler, false enthusiasm); before sending, the text is read against the catalogue's checklist. The Stop hook
        `tools/hooks/ru-reply-check.mjs` checks the turn's text by the core's §8 (genre `reply`), blocks once on a hit and logs every turn to
        `.work/ru-reply-log.jsonl` (the measure of plan 58 criterion 6); a quoted defect carries `<!-- ru-ok: <reason> -->` on its line.
@@ -252,7 +253,23 @@
     2. Text of the build (launcher, installer, report tool, mod UI, guide, README, release notes, Nexus text, mockup strings) — `node .kaif/tools/kaif-voice-lint.mjs load`
        before the first word, written by the portrait, `kaif-voice-lint.mjs check <file>` and a clean-instance read after (the fourth KAIF obligation of `AGENT_GUIDE.md`).
     3. A word is chosen for its exact meaning: an action is named by its real name (a git push is called a push of the code, never a sending of the build).
-    `[OWNER]` 2026-11-18 09:00–09:01 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11.
+    4. **The register follows the purpose of the text — three purposes, never confused.**
+       1. The game's art text (dialogues, characters' speech, in-game books) is living prose: it follows the native-language rules of the core
+          (`krinik-stylometry/russian_norms/NATIVE_RUSSIAN_STYLE.md`, the core's §2.4).
+       2. A strict description of rules and requirements (documents, plans, specifications, test cases, tickets, rulebooks, all of the technical project of an
+          Unreal Engine game) may use bureaucratic turns where they make the requirement complete, consistent and unambiguous (`REQUIREMENTS_FRAMEWORK.md`).
+          The test: replace the turn with a verb and ask what the requirement lost. Nothing lost (a split predicate where the verb exists, a «process» before <!-- verbatim-ok: the term under test -->
+          another deverbal noun, text about the text) → the turn is replaced; precision or completeness lost → it stays.
+       3. Text addressed to a person (the interface, the launcher, the installer, messages to the player, replies to the owner in chat) is soft, elegant and
+          friendly, without bureaucratese.
+    `[OWNER]` 2026-11-18 09:00–09:01 · `PROJECT_HISTORY.md` entry 2026-11-18 08:11 · 4: `[OWNER]` 2026-11-18 13:50–13:59 · entry 2026-11-18 13:55 · interview #039.
+
+36. **The owner is talked to in the chat; a question for his decision goes through the interactive contour, never a dialog of the harness.**
+    1. A clarification is plain text in the chat, and the agent answers his messages as a conversation, not as a report.
+    2. A decision is an interview in `interviews/`, checked by `node .kaif/tools/contour/review.mjs <doc> --check` and shown by the contour.
+    3. While a page is open (`interviews/decisions/<doc>.lock` exists), the document belongs to the page: the agent does not edit it.
+    4. When his answer arrives in the chat, the agent closes the page itself: `node .kaif/tools/contour/review.mjs <doc> --close`, then records the answer.
+    `[OWNER]` 2026-11-18 13:50–13:58 · `PROJECT_HISTORY.md` entry 2026-11-18 13:55.
 
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —

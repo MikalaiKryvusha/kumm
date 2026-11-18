@@ -8102,3 +8102,29 @@ did not do; `/end-chat-soft` with the owner's closing word, the judge pass of th
 > core's `eval/`, then phase 5 — proofread every agent text of the build, surface by surface; read `.work/ru-reply-log.jsonl` (the measure); (c) ONE game run:
 > the dm-fish locres sample + the hub rows' hints + the crash offer on the real build folder; (d) epic 57 phase 2 after the owner's verdict on the mockups;
 > (e) owed: launcher R3, R5, four stale comments; known risks of `ru-reply-check` (plan 58 / the KUMM commit `30b6799` message).
+
+## 2026-11-18 13:55 +03:00 — the owner on the Russian manuals, the core as the home of beautiful Russian, strict bureaucratese and the line between art text and the technical project (decided 13:33–13:54, recorded 13:55)
+
+Verbatim, in the order typed (chat; the agent was in /dayloop on the 🔥 priority):
+
+- 13:33 «ты нашёл методички на темы - как красиво писать на русском языке аля ностиель - аккаудемический русский язык - тихнический русский язык в ГОСТ ? Встроил их все в стилометрическое ядро николая? запушил стилометрическое ядро в гитхаб? Построил сторожей, линтеры, машинерию, хуки вокруг этого усиленного стилометрического ядра по этим руководствам?»
+- 13:35 «Делай то по русскому языку, что я тебя спросил выше. Мой вопрос был и вопросом, и укором, так как я подозревал, что ты это НЕ СДЕЛАЛ!»
+- 13:42 «и эти твои наработки должны попасть в апстим стилометрического языка николая. Это проект уже больше, чем просто голос николая. Это ещё и правила красивого русского языка.»
+- 13:49 «давай тут вопрос, быстро разберёмся, что с канцеляритами»
+- 13:50 (the agent had opened the harness question dialog) «обсуждаем в чате, не вопросом твоего харнеса. Хочешь вопрос - пиздуй в интерактивный контур»
+- 13:50 «я часто их использую для того, чтобы язык был строг, чтобы МЫСЛЬ БЫЛА ЧЕТКО И ПОЛНО СВОРМУЛИРОВАНА»
+- 13:51 «я тебе в чат пишу в надёжде на взаимное общение»
+- 13:51 «а вопросы, будь любезен, неси через наш интерактивный контур» · «покажи примеры моих канцеляритов» · «которые тебя смущают»
+- 13:52 «у нас не живая проза. У нас проект игры»
+- 13:52 «живая проза - арт текста в игре, в диалогах, в речи героев, в книгах. Всё остальное _ТИХНИЧЕСКИЕ ПРОЕКТ ИГРЫ НА UNREAL ENGINE, пожалуйста, нахуй, не путай!!!»
+- 13:54 (on the column «Как читалось бы без оборота» of the agent's table of his lines) «да, тут у тебя красивее и лояльнее»
+- 13:54 (the agent wrote the answer into the interview file while his page of interview #039 was open) «НАХУЯ ТЫ КОНТУР СЛОМАЛ!!!!» · «Я ЖЕ ТЕБЕ БЛЯТЬ ОТВЕТ ПИШУ!!!»
+
+What followed: the three manuals moved from `researches/russian-writing/` into the core `krinik-stylometry/russian_norms/` (a pointer README stays); the native-style manual written there with a measurement on 242 708 words of the owner; two helpers write the academic and the GOST manuals; interview #039 (the test that tells a strict turn from an empty one) shown by the contour; the agent's edit of the open interview reverted at 13:55, the page's draft kept. Rules: `HOUSE_RULES.md` 35.4–35.6; memory `questions-in-chat-or-contour-not-harness`.
+
+Continued (recorded 2026-11-18 14:00 +03:00):
+- 13:55 «А + гибко. Где строгое описание правил - можно пользоваться для полноты описания правила по ВСЕМ ТРЕБОВАНИЯМ ОПИСАНИЯ ТРЕБОВАНИЙ, полнота, непротиворечивость, и так далее. Где обращение к пользователю, интерфейсы - там можно мягче и изящнее, без канцеляритов. Интерфейсы UI должны быть дружелюбны.»
+- 13:55 «жма, ты говоришь, толь ко там красная плашка открылась, и нихуя не сохранило и не закрылась по моему клику» · 13:56 (pasted from the page) «Сервер недоступен — ответ сохранён на этом компьютере (в папке проекта); агент его заберёт. Окно можно закрыть.»
+- 13:58 «пиздец...» · «ты закрыть не мог? ты видишь что я тебе ответы дал уже»
+- 13:59 «А» (six messages)
+The page's answer was picked up from the window's storage at 13:58 (recorded as «B)» after the refused save); the owner's chat word A is applied — interview #039, `HOUSE_RULES.md` 35.4 and 36.
