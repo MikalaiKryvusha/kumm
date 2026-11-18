@@ -1,0 +1,32 @@
+{
+  "kind": "interview",
+  "document": "interviews/interview_040_conan_pack_repo_order.md",
+  "by": "Mikalai Kryvusha (KOT KRINIK)",
+  "at": "2026-11-18T12:38:44.621Z",
+  "atHuman": "18 ноября 2026, 15:38 (+03:00)",
+  "comment": "",
+  "answers": {
+    "Q1": {
+      "choice": "B",
+      "text": "",
+      "comment": ""
+    },
+    "Q2": {
+      "choice": "A",
+      "text": "",
+      "comment": ""
+    },
+    "Q3": {
+      "choice": "D",
+      "text": "сейчас после апскейла в каком формате будут - в таком и поставляем. Мы же в лаунчер встраиваем WebP, и в документах мы везде пользуемся WebP, где можем. Где не моожем webp, там используем JPEG 95",
+      "comment": ""
+    },
+    "Q4": {
+      "choice": "A",
+      "text": "",
+      "comment": ""
+    }
+  },
+  "rev": "92cc6d1fa9233a99edb66daddf58dd3f0ee3df600078a90c9e5b3a3829d1378f",
+  "revAfter": "04a5482a8ccbf8de177bdb28d56a8dfd31552fadf7ab322c292ae09dcd2ed0dc"
+}

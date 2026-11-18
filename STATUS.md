@@ -154,6 +154,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `0e1ae7a`) are phrase patches and are REDONE by 35.6 (not started). The wallpapers moved into the pack (owner 15:16 «why not in the repo»): pack `8651fce`,
 > `_config/branding/Wallpapers` (shipped JPEG) + `_config/branding/wallpapers_source` (lossless WebP, pixel-identical); the library's `_extras` deleted.
 > RUNNING: one helper on epic 57 phases 2+ (owner 15:05 «one subagent, full resume»; told: no helpers of its own, no STATUS edits, forks reported).
+> RUNNING (15:37): a second helper rewrites README / notes 0.9.0 / guide by 35.6 from the ORIGINALS (README `6b58761^` + the owner's 14:50 line, notes from
+> `published_0_9_0/github/github_release_notes.md`, guide `0e1ae7a^` + the 4 fact edits pending the owner); it writes the files and
+> `.work/rewrite_by_blocks/*.pairs.json`, does NOT commit (the main session commits by path: `git commit -F <msg> -- <paths>`, the launcher helper stages in the
+> same repo). Then: the main session checks parity (`tools/text-fact-parity.mjs`, new, pushed `6425705`, judge round owed), a clean-instance read, a page of
+> whole-block pairs for the owner. Interview #040 (the pack's order) ANSWERED 15:38: Q1 B — the camera page images WebP in the tree, history untouched (DONE,
+> pack `c8b177f`, 262 → 30 MB); Q4 A — the root screenshot → `docs/refs/offline_play_dialog_2026-09-09.jpg`, public tree excludes `docs/refs` (DONE, checked by a
+> public-tree run); Q3 own — the wallpapers ship in the format the upscale gives, WebP where it can be read, JPEG 95 where it cannot; **Q2 A — ONE `art/` folder at
+> the pack root (logos, icons, wallpapers, wallpapers_source, screenshots) — OWED, waits for the launcher helper's commit of `build-docs.py`** (it holds the icon
+> path); the live Nexus description loads the logo from the PUBLIC repo path `_config/branding/krinik-modpack-logo.webp` — move the Nexus text
+> (`build_nexus_description.py` RAW path) in the same release as the public tree.
 > WAITING for the owner's pick: the v2 wallpaper `D:\Варвары над древним городом.png` (1672×941; he upscales it himself, 15:30) — six grades A–F
 > (`.work/wallpaper_v2/grade.py`), the page `D:\Games\Conan Exiles Mods\НА ОТСМОТР НИКОЛАЕМ\92_oboi_v2_cvetokorrekciya\oboi_v2_cvetokorrekciya.html` opened 15:31;
 > his pick → the final grade at full size into `_config/branding/wallpapers_source/` (the art lives in the pack, 15:16). 15:33: he likes B (depth) and C (the v1
