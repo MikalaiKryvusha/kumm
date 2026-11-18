@@ -8,7 +8,8 @@
 // (the measure: hits per reply over days), and on a hit blocks ONCE with the list (the agent writes a corrected message); a second Stop
 // in the same chain (`stop_hook_active`) only logs. A line carrying `<!-- ru-ok: <reason> -->` is not checked (a quoted defect, a citation).
 // Self-test: node tools/hooks/ru-reply-check.mjs --selftest
-// [NOT-TESTED]
+// [TESTED: 2026-11-18 · selftest 5/5; first live catch 09:29 («поэтому» in the agent's reply, corrected); a judge replayed 13 real turns of three
+//  transcripts, no loop, 52 MB transcript parsed in 309 ms · KUMM testcases/reports/2026-11-18_conan-launcher-judge4-fixes.md lists the stand of the day]
 import { readFileSync, appendFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -86,8 +87,11 @@ try {
   const event = JSON.parse(readFileSync(0, 'utf8') || '{}');
   // The transcript keeps only part of the turn's text (a text block sent together with a tool call was not in it, 2026-11-18), so the
   // final message the harness hands to the hook is checked always, the transcript's text of the turn in addition.
-  const last = typeof event.last_assistant_message === 'string' ? event.last_assistant_message : '';
-  const fromTranscript = event.transcript_path ? turnText(readFileSync(event.transcript_path, 'utf8')) : '';
+  const last = typeof event.last_assistant_message === 'string' ? event.last_assistant_message.trim() : '';
+  // A missing or unreadable transcript must not leave the final message unchecked (judge 2026-11-18, risk 5).
+  let fromTranscript = '';
+  try { fromTranscript = event.transcript_path ? turnText(readFileSync(event.transcript_path, 'utf8')).trim() : ''; } catch { fromTranscript = ''; }
+  // Trimmed on both sides: a trailing newline made the same defect count twice (judge 2026-11-18, item 4).
   const text = fromTranscript.includes(last) ? fromTranscript : [fromTranscript, last].filter(Boolean).join('\n');
   if (!/[а-яё]/i.test(text)) process.exit(0);
   const { hits } = await check(text);
