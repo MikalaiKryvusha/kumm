@@ -8362,3 +8362,7 @@ working area, inside the screen) and 13 (a taskbar button in a normal start; the
 
 > **Older pointer blocks (2026-11-03 … 2026-11-14, with their «still open» lists) and the NOW block of 2026-11-17 11:21 — moved verbatim to the chronicle, entry 2026-11-17 21:3x (second part).**
 
+Correction to this entry (the closing judge, 2026-11-18 16:1x): the moved NOW block above quotes the owner 15:14 as «навести порядок в локальном и удалённом
+репозитории» — that is a paraphrase in quote marks; his words verbatim are «было бы хорошо, чтобы ты навёл порядок в локальном и удалённом репозитории»
+(also in interview #040). The moved block also says «Q2 owed … waits for the launcher helper's commit of `build-docs.py`» — that commit landed 16:01 (pack `590495e`).
+

@@ -49,7 +49,7 @@
 > **3. The build 0.9.1 in a working MVP state as of 2026-11-18** — epic 55. Exit: 1 and 2 done; then a release 0.9.1 can be prepared (correct Russian, MVP
 > functions, the full launcher 1.0.0) — the publication itself waits for the owner's word.
 >
-> **Progress of the chat of 2026-11-18 13:13 (closed 14:3x):** the block «CHAT CLOSED 2026-11-18 14:3x» in «Where to continue» below; the earlier progress lines of 2026-11-18 — chronicle, entry 2026-11-18 14:3x.
+> **Progress of the chats of 2026-11-18:** the latest is the block «CHAT CLOSED 2026-11-18 16:0x» in «Where to continue» below; the block CHAT CLOSED 14:3x and the earlier progress lines — chronicle, entries 2026-11-18 14:3x and 16:0x.
 > Note: other projects read the core from `D:/work/ai_sandbox/krinik_voice` (an older clone of the same repo) — it needs a `git pull` by its owner session.
 >
 > 🎯 **The Conan 3.0.1 build is the main work since 2026-10-26 ≈08:30; every other game is out of priority.** `[OWNER]` «все игры пока не в приоритере, мы
@@ -168,7 +168,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    build the dropdown (`LangSwitch` in `KrinikConanWidgets.cs`, geometry of the mockup screen `language`); X1 `bash .work/launcher54/batch58.sh`; K1 on
 >    `.work/launcher57/old/`; judge rounds on `590495e`; a clean-instance read of its new Russian strings; show the owner its three screens not on the mockups
 >    (rule 23: «проверяет выпуски», «не связался с GitHub» + «Проверить ещё раз», «Вы остановили скачивание»). Found: on this machine the launcher offers the clean
->    version in `D:\Instals` as an install target — exclude it (rule 25); never quote that folder's name in a committed text. Owner fork: the version — the helper
+>    version in `D:\Instals` as an install target — exclude it (rule 25); never quote the name of the clean version's subfolder (it names where the download came from) in a committed text. Owner fork: the version — the helper
 >    recommends 1.0.0 (his words 09:12 and 15:42 «Реализм идет в лаунчер 1.0.0»), nothing changed yet.
 > 3. **Interview #040 Q2 — one `art/` folder at the pack root** (logos, icons, wallpapers, wallpapers_source, screenshots): `_config/release/build-docs.py` is committed (pack
 >    `590495e`), so the move is free: first `git -C D:/work/ai_sandbox/ConanExiles status` clean; then move the art, update `make-res.py` (`BRANDING`), `build-docs.py` (`LAUNCHER_ICON`),
@@ -176,7 +176,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    byte-identical, every extras path resolves, `make_public_tree.py` run; `build_nexus_description.py` RAW logo path moves in the SAME release as the public tree.
 > 4. **The owner's open questions:** do the v1 «3.0.1» wallpapers stay in the player's `Wallpapers` folder next to V2; what the no-release screen tells the player
 >    (wait / roll the game back / nothing); the launcher version 1.0.0 (his word) vs 1.1.0 (manifest) — the self-update rule `Feed.Newer`.
-> 5. **Judges owed:** `tools/text-fact-parity.mjs` (round 1 ran at the closure — JUDGE_RESULT); the launcher helper's commits.
+> 5. **Judges owed:** `tools/text-fact-parity.mjs` (judge round 1 at the closure: its cited runs reproduce; 9 code findings, fix next — MEDIUM: a stray `<` in Markdown prose hides the facts after it
+>    (line 34 strips «<…>» across lines); a missing file or a bad rev exits 1 (the code for «facts missing») instead of 2; facts the patterns cannot see — `1080p`,
+>    `3840x2160`, lowercase Latin names, unquoted Cyrillic names, `alt` text, single-quoted `href`, hex entities; LOW: Cyrillic words read as units («10 стрел» → `10 с`),
+>    Latin names merge with the next number, overlapping `3.1.1` / `1.1`, entity decode order, the header still `[NOT-TESTED]`, no fixture); the launcher helper's commits.
 > 6. **Older still-open items** (verbatim in the chronicle, entry 2026-11-18 16:0x): plan 58 guards judge findings 3–8, 10–16, then `build-docs.py` by the owner's path and a
 >    second judge round; the ten academic rows into the core's §8 + the interview on «поэтому / во-первых» and «%» in a range; a clean §7B read of the six manuals; the 366
 >    translation lines (plan 56 pass 3); quality A/B run 2; ONE game run (hub hints, dm-fish locres, the crash offer); epic 55 D4; launcher R5; bugs 104, 105 (G1 G5b G10
