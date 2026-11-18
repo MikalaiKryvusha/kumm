@@ -9,6 +9,9 @@
 > KAIF reads the KUMM clone of the core; the Stop hook `tools/hooks/ru-reply-check.mjs` (selftest 5/5, wired in `.claude/settings.local.json`).
 > Next: a write gate for the build's text files; the measure from `MEASURING_RUSSIAN_TEXT.md` (violation classes, completeness, coherence) into a
 > clean-reviewer brief; ru-text (MIT, model-applied skill) as the reviewer's reference; the A/B on the core's `eval/`; phase 5 proofreading.
+> 2026-11-18 14:12 +03:00 (the owner's order of 13:35): the manuals moved into the core `krinik-stylometry/russian_norms/` (core `cc3b391`), NATIVE_RUSSIAN_STYLE
+> written, ACADEMIC_RUSSIAN and GOST_TECHNICAL_RUSSIAN in progress (two helpers); the register follows the purpose (interview #039 A, `HOUSE_RULES.md` 35.4); guards:
+> `ru-build-text-check` reads the owner's Russian documents by genre, `contour-page-lock` (new), `dash_lint.py` D1–D5 (370 lines found) — judges owed.
 > **Outbound:** —
 
 ## The first blind quality A/B (2026-11-18 10:28 +03:00) — criterion 6, run 1

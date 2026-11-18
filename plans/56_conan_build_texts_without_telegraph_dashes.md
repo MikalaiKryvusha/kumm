@@ -118,6 +118,20 @@ Only text the agent wrote, and only a dash that was wrong from the start. Conseq
   and the repetition «половина запаса сил … За это» (perks). The three lines are allow-listed with their class; **the whole build's `dash_lint.py` is 0
   (49 files)**, so the guide PDF print is no longer refused.
 
+## Judge items D1–D5 — acted on 2026-11-18 14:07 +03:00 (pack working tree, not committed yet: judge round owed)
+
+- D1 DONE: `dash_lint.py` reads `_config/localization/asset-strings/*.tsv`; a `#` line of any table is the agent's note and is skipped — 8 rows found.
+- D2 DONE: `kit-saved-loc/KrinikRU/ru_table.lua` and `HosavRU/ru_table.lua` are read value by value (Lua long brackets, the English key skipped) —
+  KrinikRU 807 dashed values, 458 of them already in the allow list (the legal dm-fish rows), **349 to judge**; HosavRU 9 to judge (the owner-accepted table of
+  interviews 002 / 003: every change shown to him, write-gate).
+- D3 DONE: the 13 mods' `version` fields held developer notes the player's installer printed («0.9.0 (2026-11-02: the first release …)»); the notes moved into
+  `$comment_version` (`.work/dash_fix/version_notes_out.mjs`), `version` keeps the number; `Deploy-ModPack.ps1 -ListMods` shows «KrinikConanArchery … 0.9.0»;
+  the lint reads the manifest's `version` from now on.
+- D5 DONE: a hit is printed whole, line breaks as `\n`, so it can be copied into the allow list.
+- D4 OPEN: `build-docs.py --no-pdf` still runs no lint.
+- The whole lint: **86 files, 370 lines** (was 49 files, 0 lines) — the PDF print is refused until the 366 translation rows are judged by the pass-3 method
+  (touch only a dash that replaces a verb, a preposition or «это»; allow-list the legal ones with their class; `HOUSE_RULES.md` 33.5).
+
 ## Judge round on the tooling (2026-11-18 01:40, pack `2d4b104`) — to act on first
 
 Checked against real data by the judge; to verify and fix in the next chat:

@@ -57,6 +57,19 @@
 > `ProductVersion` of the Shipping exe); the owner's mockup remarks 10:16–10:36 applied (pack `c05aa51`): the version plate lower, the buttons' metal muted,
 > no state list on an installed build, the sheet one left-to-right row; KUIPS issues #1–#3. Earlier progress lines of 2026-11-18 — chronicle entry
 > 2026-11-18 10:48 (bonsai trim of the chat of 10:07).
+> **Progress 2026-11-18 14:07 +03:00 (chat of 13:13, by the owner's order of 13:35):** the Russian manuals live in the core (`krinik-stylometry/russian_norms/`,
+> core `cc3b391` pushed; KUMM `11779e3`): RUSSIAN_RULES, AI_RUSSIAN_DEFECTS, MEASURING moved; NATIVE_RUSSIAN_STYLE written (Nora Gal + corpus studies, measured on
+> 242 708 words of the owner — no §8 rows: the owner writes bureaucratic turns more than the machine); GOST_TECHNICAL_RUSSIAN written (66 rules, СТП БГУИР) and
+> BUILT IN — §8 +16 norm rows (48 now), §4 three judgment rules, §7B q13, core `ab89ba1` pushed; ACADEMIC_RUSSIAN is being written by a helper (then: its rows
+> into §8, rules into §2.4 / §7, push). A judge runs on the guards diff `.work/judges/guards.diff`; judge round 4 of quality-prep (`.work/judges/round4_quality_prep.diff`) owed.
+> The manuals are written in the language they teach (the owner 14:22): their own prose cleaned by the 48-row core, core `34dcfbd` pushed; a telegraphic
+> dash in a DOCUMENT has no machine row (only the build's dash_lint) — a clean-instance §7B read of all six manuals is the next check. UNCOMMITTED code waiting
+> for the judge: KUMM `tools/hooks/ru-build-text-check.mjs`, `tools/hooks/contour-page-lock.mjs` (wired, seen refusing live), core `tools/voice-check.mjs` (ЖЯ),
+> pack `_config/release/dash_lint.py`, `build-docs.py`, `modpack.json` (version notes out); core `eval/quality-prep.mjs` + brief (round 4). The register follows the purpose (interview #039 A, `HOUSE_RULES.md` 35.4):
+> the game's art text = living prose; strict rules and requirements keep bureaucratic turns for completeness; text for a person is soft and friendly. Rule 36: the
+> owner is talked to in chat, decisions go through the contour, an open page owns its document. Guards: `ru-build-text-check` now also reads the owner's Russian
+> documents (interviews, homeworks, voice, `*_ru.md`, the core's manuals) by genre — UNCOMMITTED, judge owed; `dash_lint.py` D1–D3, D5 — 370 lines found, UNCOMMITTED,
+> judge owed (plan 56). Report `testcases/reports/2026-11-18_russian-norms-guards.md`.
 > Note: other projects read the core from `D:/work/ai_sandbox/krinik_voice` (an older clone of the same repo) — it needs a `git pull` by its owner session.
 >
 > 🎯 **The Conan 3.0.1 build is the main work since 2026-10-26 ≈08:30; every other game is out of priority.** `[OWNER]` «все игры пока не в приоритере, мы

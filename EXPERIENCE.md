@@ -91,6 +91,27 @@
 
 ## Entries
 
+### EXP-0564 · 2026-11-18 · ❌ · #contour #owner-page #background #timeout #owner-trust
+class: a-live-page-killed-by-its-launcher-and-edited-under-the-owner
+**Lesson:** the agent opened interview #039 with `timeout 60 node .kaif/tools/contour/review.mjs <doc>` in the foreground, then wrote the answer the owner
+had just given in chat into the document while he was typing it on the page. His save got 409 (the page was built from another revision), the timeout
+had already killed the server, and the answer survived only in the window's storage («НАХУЯ ТЫ КОНТУР СЛОМАЛ!!!!»); the agent then asked him to close the
+window it could close itself («ты закрыть не мог?»). The skill's table says it plainly: in Claude Code the page runs with `run_in_background: true`,
+never in the foreground and never under a timeout; an open page (`interviews/decisions/<doc>.lock`) owns its document; an answer that comes in chat is
+applied after `review.mjs <doc> --close`.
+**Trigger:** any `review.mjs <doc>` launch; any edit of a file under `interviews/` while a `.lock` of it exists.
+mechanized: no — HOUSE_RULES 36 and memory `questions-in-chat-or-contour-not-harness`; a PreToolUse guard on Edit/Write of an interview with a live lock is owed (plan 58)
+
+### EXP-0563 · 2026-11-18 · ❌ · #stylometry #measure #owner-voice #bureaucratese #norm
+class: a-norm-from-a-book-checked-against-the-owner-corpus-first
+**Lesson:** the native-style recon brought Nora Gal's rules against bureaucratese and the corpus findings on translated Russian (pronouns, «который»,
+modal predicates). Measured on 242 708 words of the owner against 26 676 machine words, none of them separated the owner from the machine, and the owner
+writes «данный», «процесс», «при этом» and deverbal nouns MORE often than the machine — on purpose, for strict and complete requirements (his word
+2026-11-18 13:50). A rule from an authority enters the core only after the owner's corpus is measured with it; a rule his own texts break by design is a
+fork for him, and the answer (interview #039: the register follows the purpose) is what the core keeps.
+**Trigger:** any rule of style or norm proposed for the core, a linter or a reviewer brief.
+mechanized: no — the measuring scripts live in `.work/ru-recon/native/` (`measure.mjs`, `keyness_candidates.mjs`); the admission rule is §8's own (3× machine vs author)
+
 ### EXP-0562 · 2026-11-18 · ❌ · #eval #stylometry #stale-stand #ab #measure
 class: a-measurement-stand-measures-the-version-its-texts-were-written-with
 **Lesson:** the first blind quality A/B of the core (none vs v22) lost 18 : 5, and 69 of the core's 88 records were the hyphen for the dash and straight
