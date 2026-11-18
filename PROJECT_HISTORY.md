@@ -7894,3 +7894,12 @@ Where it went: a web recon by a helper → `researches/russian-writing/AI_RUSSIA
 > и те текста, которые ты писал - всё  вычитать, и ВСЕ причесать по тому, что ты узнаешь и оформишь в сторожей, хуков, навыки по АКАДЕМИЧЕСКОМУ РУССКОМУ ЯЗЫКУ, и НЕ-ИИ-CLAUDE-КРИВОМУ-ЯЗЫКУ, и ЯЗЫКУ-КРИНИКА
 
 Where it went: `plans/58_EPIC_academic_russian_guards_and_proofreading.md` (recon → lint → hooks → skill → inventory and proofreading).
+
+**09:03 — the agent's phrases.** `[OWNER]` verbatim:
+
+> ты фразы строишь неправильно. Русские так не говорят и не пишут, как ты фразы пишешь. Они некрасивые у тебя, нелогичные, неполные, странные!
+
+> Русские пишут красиво, понятно, изящно, полно, связзно
+
+Where it went: the agent named five of its own phrases of this chat in the reply (an internal word, a tautology, a fragment without a predicate, a cliché, a
+typo); plan 58 — the first material is the agent's chat messages of the day, the measure is the owner's five qualities.

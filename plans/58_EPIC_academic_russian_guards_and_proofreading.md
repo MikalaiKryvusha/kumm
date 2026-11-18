@@ -38,7 +38,10 @@ text), the owner's voice by his portrait (every text of the build and every text
 
 Build: `KrinikConanLauncher.cs` strings, `collect_report.ps1`, `feedback_howto.txt`, `krinik_mod_settings.lua`, `guide-3.1.1.html`, `README.template.md`,
 `dm-fish-ru.tsv` (plan 56 pass 3), `asset-strings/*.tsv`, `eot-perks-ru.tsv`, `il-event-phrases-ru.tsv`, the Hosav table (interviews 002 / 003 — owner-accepted,
-write-gate), the KUIPS mockup strings. Owner-facing: `interviews/*.md`, every `*_ru.md`, `homeworks/`, review pages. Chat and voice: the Stop gate from phase 3.
+write-gate), the KUIPS mockup strings. **First material** (the owner 09:03, chronicle): the agent's chat messages of 2026-11-18 — a clean instance lists every
+wrong phrase (incomplete, illogical, calqued, internal jargon, tautology, cliché, typo) with a correction; the patterns feed the lint and the Stop hook.
+**The measure** (the owner 09:03): Russian text is beautiful, clear, elegant, complete and coherent — the lint checks completeness, calques, clichés and
+repetitions; the clean reviewer and the owner's eye judge the rest. Owner-facing: `interviews/*.md`, every `*_ru.md`, `homeworks/`, review pages. Chat and voice: the Stop gate from phase 3.
 
 ## Decisions made without the owner
 
