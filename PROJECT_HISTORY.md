@@ -7888,3 +7888,9 @@ Done 09:00: `2eba534...3e6a76e (forced update)`; the replaced remote commit `2eb
 > и пойми, почему я так настойчиво от тебя требую академичесокго русского и русского по моему стилометрическому ядру!
 
 Where it went: a web recon by a helper → `researches/russian-writing/AI_RUSSIAN_DEFECTS.md`; the rule — `HOUSE_RULES.md` rule 35; the agent's understanding said in chat 09:02 (the texts go out under his name and the community reads AI text as hack work; strict language is unambiguous for a player who follows an instruction literally; one voice across README, guide, launcher; the chat costs his attention).
+
+**09:02 — proofread every agent text by the new guards.** `[OWNER]` verbatim:
+
+> и те текста, которые ты писал - всё  вычитать, и ВСЕ причесать по тому, что ты узнаешь и оформишь в сторожей, хуков, навыки по АКАДЕМИЧЕСКОМУ РУССКОМУ ЯЗЫКУ, и НЕ-ИИ-CLAUDE-КРИВОМУ-ЯЗЫКУ, и ЯЗЫКУ-КРИНИКА
+
+Where it went: `plans/58_EPIC_academic_russian_guards_and_proofreading.md` (recon → lint → hooks → skill → inventory and proofreading).
