@@ -62,6 +62,10 @@
 > 242 708 words of the owner — no §8 rows: the owner writes bureaucratic turns more than the machine); GOST_TECHNICAL_RUSSIAN written (66 rules, СТП БГУИР) and
 > BUILT IN — §8 +16 norm rows (48 now), §4 three judgment rules, §7B q13, core `ab89ba1` pushed; ACADEMIC_RUSSIAN is being written by a helper (then: its rows
 > into §8, rules into §2.4 / §7, push). A judge runs on the guards diff `.work/judges/guards.diff`; judge round 4 of quality-prep (`.work/judges/round4_quality_prep.diff`) owed.
+> ACADEMIC_RUSSIAN written (44 rules, 24 machine-checkable), core `28ec340` pushed — all SIX manuals live in the core; its ten lowest-noise rows (§4 of the
+> manual: A43, A44, A25, A24, A30, A31, A16, A18, A10, A11) are NOT yet in §8 — test them on the stand texts and the owner's corpus, then insert like the GOST
+> rows (`.work/ru-recon/gost/insert_rows.mjs`). For the owner through the contour (an interview, page in the BACKGROUND): the core's voice rows («поэтому»,
+> «обычно», «во-первых», «в заключение») vs the connectives the scientific style calls normal; «%» at every number of a range (GOST 8.417 row G28) vs Milchin 6.4.2.
 > The manuals are written in the language they teach (the owner 14:22): their own prose cleaned by the 48-row core, core `34dcfbd` pushed; a telegraphic
 > dash in a DOCUMENT has no machine row (only the build's dash_lint) — a clean-instance §7B read of all six manuals is the next check. UNCOMMITTED code waiting
 > for the judge: KUMM `tools/hooks/ru-build-text-check.mjs`, `tools/hooks/contour-page-lock.mjs` (wired, seen refusing live), core `tools/voice-check.mjs` (ЖЯ),
