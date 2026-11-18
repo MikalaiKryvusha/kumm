@@ -56,7 +56,7 @@
 > of items 1 and 2 (`[OWNER]` 2026-11-18 19:29, chronicle entry 2026-11-18 19:29; corrected 2026-11-18 19:29 +03:00 — this line said «Exit: 1 and 2 done» until then). The release
 > 0.9.1 is assembled from all three; the publication itself waits for the owner's word.
 >
-> **Progress of the chats of 2026-11-18:** the latest is the block «CHAT CLOSED 2026-11-18 16:0x» in «Where to continue» below; the block CHAT CLOSED 14:3x and the earlier progress lines — chronicle, entries 2026-11-18 14:3x and 16:0x.
+> **Progress of the chats of 2026-11-18:** the latest is the block «CHAT CLOSED 2026-11-18 20:4x» in «Where to continue» below (corrected 20:4x — it named the 16:0x block); the block CHAT CLOSED 14:3x and the earlier progress lines — chronicle, entries 2026-11-18 14:3x and 16:0x.
 > Note: other projects read the core from `D:/work/ai_sandbox/krinik_voice` (an older clone of the same repo) — it needs a `git pull` by its owner session.
 >
 > 🎯 **The Conan 3.0.1 build is the main work since 2026-10-26 ≈08:30; every other game is out of priority.** `[OWNER]` «все игры пока не в приоритере, мы
@@ -152,10 +152,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **RUN 20:39–20:44 (after the handover, the owner's word 20:41 «комп и клава твои»): the wrap design DEPLOYED and run by the player's path — K3, K4, K5, K6, K8, K9, N3 PASS (report `testcases/reports/2026-11-18_conan-keybinds-wrap-run.md`); found and fixed: our window took no keyboard focus (pack commit «our settings window takes the keyboard focus»). Steps 1 below are DONE; owed: K1, K2, N1, N2, N4–N9, judge round 2, the pack push.**
+> **RUN 20:39–20:44 (after the handover, the owner's word 20:41 «комп и клава твои»): the wrap design DEPLOYED and run by the player's path — K3, K4, K5, K6, K8, K9, N3 PASS (report `testcases/reports/2026-11-18_conan-keybinds-wrap-run.md`); found and fixed: our window took no keyboard focus (pack commit «our settings window takes the keyboard focus»). Step 1 below is DONE; owed: K1, K2, C1, N1, N2, N4–N9 (K7 not run by decision — bug 108), judge round 2, the pack push.**
 > **CHAT CLOSED 2026-11-18 20:4x (`resume` 19:24 + the previous farewell's order; soft closure at 80 %).** Its working blocks and the block of the 18:16 chat —
 > chronicle, entry «2026-11-18 20:4x — STATUS bonsai trim». **FIRST in the next chat — bug 85 by the player's path:**
-> 1. The pak of the wrap design: `KUMM/.work/bug85/build/KrinikConanUI.pak` (built 20:4x by `kit-buildmod.py`; if the build log `.work/bug85/buildmod2.log`
+> 1. The pak of the wrap design: `KUMM/.work/bug85/build/KrinikConanUI.pak` (built 20:38 by `kit-buildmod.py`; if the build log `.work/bug85/buildmod2.log`
 >    ends without «KrinikConanUI.pak», run `python -I -X utf8 _config/devkit/kit-buildmod.py KrinikConanUI D:/work/ai_sandbox/KUMM/.work/bug85/build` from the pack)
 >    → copy into `ConanExiles/_unpacked/KrinikConanUI/` → `Deploy-ModPack.ps1 -PackDir D:\work\ai_sandbox\ConanExiles -Deploy -Only KrinikConanUI` (the build has
 >    the 20:17 pak + the first Lua until then — the deployed Lua expects W_KrinikButton, which is gone).
