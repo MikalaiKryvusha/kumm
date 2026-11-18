@@ -41,6 +41,15 @@ against the key; repetition is not one of the nine classes) — a candidate side
 §8 row against «тот же» («name the thing again»). Next: regenerate the 24 texts with the CURRENT core and repeat the A/B (run 2: `none_1118` written
 2026-11-18 10:42 +03:00, `core_1118` in progress); the brief has a typography class of its own since 2026-11-18 10:42 +03:00.
 
+**Judge round 2 of `krinik-stylometry/eval/quality-prep.mjs` — OPEN, fix in the next chat** (2026-11-18 10:46 +03:00; stopped early by the closure; its in-memory tally of
+none_vs_v22 matched the result file exactly — 110 kept, 0 dropped). Defects: (1) the legacy key's 48 hashes are CRLF-only — on an LF clone every text
+reads stale (accept `sha(t.replace(/\r?\n/g, '\r\n'))` or rewrite the key to LF hashes once); (2) `plain()` strips a leading «- » of a typography quote
+as a list marker, so an invented hyphen passes the strict check. Risks: one hyphen counted twice when written as both правильность+33 and типографика
+(dedupe by the counted class); a Cyrillic «А» side lost silently when a Latin «A» is also present; a quote that copies a mid-quote list marker is rejected;
+no ё/е folding for typography; in-file duplicate ids missed when the value is an array or a string; a hyphenated word's tail passes as whole words;
+`catalog: true` / «33.0» accepted; v1 === v2 not refused; the catalog-range selftest passes for the wrong reason; selftest failure exits 1; the brief's
+pair-level `why` and record `fix` not enforced. Not reviewed: prep (genre parse, `--force`, task added), briefs outside the freeze, unknown flags.
+
 **Known risk of `ru-reply-check` (observed 2026-11-18 10:44 +03:00):** the owner's messages typed mid-turn do not start a new turn for the hook (the turn begins at the last
 real prompt record), so a phrase corrected an hour earlier («Тот же номер стоит…», 10:10, corrected in chat at 10:31) blocked two later stops again. <!-- ru-ok: the quoted defect itself -->
 Fix to weigh: treat a mid-turn owner message as a turn boundary, or skip text already followed by a correction the hook itself demanded.

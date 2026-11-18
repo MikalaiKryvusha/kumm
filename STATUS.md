@@ -49,19 +49,15 @@
 > **3. The build 0.9.1 in a working MVP state as of 2026-11-18** — epic 55. Exit: 1 and 2 done; then a release 0.9.1 can be prepared (correct Russian, MVP
 > functions, the full launcher 1.0.0) — the publication itself waits for the owner's word.
 >
-> **Progress (2026-11-18 09:25 +03:00):** 1 — dm-fish translation pass 3 IN the build (pack `46c9b42`: 108 rows, 738 legal dashes allow-listed, Game.locres 174
-> entries, deployed; the in-game sample owed); the core: §8 + 11 rows from the defect catalogue, its gate fixed (CRLF, 66 false findings → 0), pushed
-> `2b99012`; KAIF reads `KUMM/krinik-stylometry/`; Stop hook `ru-reply-check.mjs` live (KUMM `d8f3f5a`; first real catch 09:29 — «поэтому» in the agent's
-> own reply, corrected) and PostToolUse `ru-build-text-check.mjs` on the build's text files (`0b5c2c7`); the whole build `dash_lint` 0 (pack `0e47ec7`); research `AI_RUSSIAN_DEFECTS.md` +
-> `MEASURING_RUSSIAN_TEXT.md`. Next for 1: the judge round on the hook + core change (running); restore the legal dashes of `2d4b104` (plan 56 list); a write
-> gate for the build's text files; the reviewer brief by the measure; the in-game sample. 2 — mockups wait for the owner's verdict; phase 1 recon started.
+> **Progress (2026-11-18 10:47 +03:00, chat of 10:07 closed):** 1 — the blind quality A/B of the core works: `krinik-stylometry/eval/quality/REVIEWER_BRIEF.md` +
+> `eval/quality-prep.mjs` (judge round 1 fixed, selftest 17/17; round 2 findings OPEN — plan 58). Run 1 none vs v22 (texts of 2026-09-25): none better in
+> 18 of 24 pairs; without typography 5.82 vs 5.18 violations per 1000 words; the core's loss is the typography of the tested draft (ГЛ15 / ГЛ16, removed by
+> the owner 2026-09-25, texts never regenerated) plus noun repetition; the core cuts incomplete phrases (4 vs 10). Run 2 texts written today by one model:
+> `eval/runs/none_1118/` (24) and `eval/runs/core_1118/` (24; 01–06 expanded after their last lint). 2 — epic 57 phase 1 recon COMPLETE (the game's CL is in
+> `ProductVersion` of the Shipping exe); the owner's mockup remarks 10:16–10:36 applied (pack `c05aa51`): the version plate lower, the buttons' metal muted,
+> no state list on an installed build, the sheet one left-to-right row; KUIPS issues #1–#3. Earlier progress lines of 2026-11-18 — chronicle entry
+> 2026-11-18 10:48 (bonsai trim of the chat of 10:07).
 > Note: other projects read the core from `D:/work/ai_sandbox/krinik_voice` (an older clone of the same repo) — it needs a `git pull` by its owner session.
-> **Progress (2026-11-18 10:25 +03:00, chat of 10:07):** 1 — the blind quality A/B of the core built: `krinik-stylometry/eval/quality/REVIEWER_BRIEF.md` (Головин's qualities +
-> completeness + coherence, ФИПИ-style counts, quotes checked by script) and `eval/quality-prep.mjs` (selftest 6/6, control K1 pass); first run none vs v22
-> (24 pairs, two clean reviewers, odd / even) — running; machine half by the current §8: none 8.13 seams / 1000 words, v22 0, v21 0, v12 3.23
-> (`.work/core-ab/seams.mjs`); TC `testcases/TC_core_quality_ab_2026-11-18.md`. 2 — phase 1 recon COMPLETE (the CL is in `ProductVersion`, 1.1 ms);
-> the owner's mockup remarks 10:16–10:20 applied (pack `92a661d`): version line lower in a light plate, no state list on an installed build, the sheet one
-> left-to-right row (rule 34.4); upstream improvement KUIPS issue #1 (his word 10:20).
 >
 > 🎯 **The Conan 3.0.1 build is the main work since 2026-10-26 ≈08:30; every other game is out of priority.** `[OWNER]` «все игры пока не в приоритере, мы
 > работаем дат сборкой конана» · «она 1_ должна работать стабильно 2_ моды не должны конфликтовать, должны быть рабочими 3_ не должно быть
@@ -156,23 +152,22 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW — chat of 2026-11-18 10:07** (opened by the pasted farewell; /resume). Done: (a) recon §2–3 checked, its last open item closed by a probe;
-> the 10:16–10:20 mockup remarks; KUIPS #1. In flight: the core quality A/B (C3, C4 of the TC) → tally `node krinik-stylometry/eval/quality-prep.mjs --tally none v22`
-> → write the result into plan 58 and the core's METHODOLOGY journal → commit in the core repo (REVIEWER_BRIEF, quality-prep, sheets, key, verdicts, result).
-> Next: a new generation run with the CURRENT core (2.2 + 11 rows) on the 24 briefs, the same A/B; the guard log `.work/ru-reply-log.jsonl` has one record
-> 2026-11-18 06:32Z with `error: Bad control character in string literal` instead of hits — check `ru-reply-check.mjs` input parsing.
-> **CHAT CLOSED 2026-11-18 09:3x (chat of 08:10, `выполни resume` → the owner's words 08:11–09:13 → `работай автономно` → /dayloop; chronicle entry 2026-11-18 08:11).**
-> Done: the dash rule scoped (`HOUSE_RULES.md` 33.5); launcher version line + judge round 4 (stand kept out of the owner's %LOCALAPPDATA%; 191 / 0), pack pushed;
-> epic 57 opened, 12 KUIPS mockups with his remarks applied (`ConanExiles/_config/launcher/design/`, sheet `design/flow-map.html`); 0.9.1 waits for epic 57;
-> dm-fish pass 3 IN the build (pack `46c9b42`); three legal dashes restored, the whole build `dash_lint` 0 (`0e47ec7`); KUMM force-pushed by his word; epic 58
-> opened (rule 35, mockups rule 34): two web recons, the core improved and its gate fixed (core `57605a4`), guards `ru-reply-check` (Stop) and
-> `ru-build-text-check` (PostToolUse) live; a recon helper of epic 57 phase 1 was still writing `researches/conan-launcher-self-sufficient/README.md` §2–3 at the close.
-> **FIRST NEXT CHAT** (the 🔥 block above is the order): (a) read `researches/conan-launcher-self-sufficient/README.md` §2–3 (the helper's answers) and check
-> them against sources; (b) epic 58: the clean-reviewer brief by `researches/russian-writing/MEASURING_RUSSIAN_TEXT.md` (violation classes by Головин, completeness,
-> coherence) into the core (`krinik-stylometry/`), ru-text (MIT, model-applied skill, cloned in `.work/vendor/ru-text`) as the reviewer's reference, the A/B on the
-> core's `eval/`, then phase 5 — proofread every agent text of the build, surface by surface; read `.work/ru-reply-log.jsonl` (the measure); (c) ONE game run:
-> the dm-fish locres sample + the hub rows' hints + the crash offer on the real build folder; (d) epic 57 phase 2 after the owner's verdict on the mockups;
-> (e) owed: launcher R3, R5, four stale comments; known risks of `ru-reply-check` (plan 58 / the KUMM commit `30b6799` message).
+> **CHAT CLOSED 2026-11-18 10:48 +03:00 (chat of 10:07, opened by the pasted farewell → /resume; the owner's closing word 10:44–10:45 «пора закрывать это  чат, сразу после
+> твоих суб-агентов. без судейства.» — the closure's judge pass skipped by his word; his remarks 10:16–10:45 are notes at the end of the chronicle).**
+> Done: recon §2–3 checked, its last item closed by a probe; the mockups changed by his remarks 10:16–10:36 (pack `92a661d`, `d4eb0b0`, `c05aa51`);
+> `HOUSE_RULES.md` 34.2 (the sheet is opened once, a rebuild says «F5») and 34.4 (the flow runs left to right); KUIPS issues #1 (flow direction), #2 (favicon),
+> #3 (refresh an open sheet); the core quality instrument and run 1 (plan 58); EXP-0562 (a stand measures the core version that wrote its texts).
+> **FIRST NEXT CHAT** (the 🔥 block above is the order): (a) the core — fix the judge's round 2 findings in `krinik-stylometry/eval/quality-prep.mjs` (plan 58
+> list, the two defects first) and send the diff to a fresh judge; re-run `node krinik-stylometry/tools/voice-check.mjs --genre document` on
+> `eval/runs/core_1118/01–06` and measure their words; then `node krinik-stylometry/eval/quality-prep.mjs none_1118 core_1118` → two clean reviewers, blind,
+> odd / even pairs, by `eval/quality/REVIEWER_BRIEF.md` (the run-1 prompts are in this chat's plan 58 record) → `--tally none_1118 core_1118` → plan 58 run 2 and
+> a row in the core's `METHODOLOGY.md` §7 → act on the result (the «тот же» row's noun repetition, «Так,» commas); then phase 5 — proofread every agent text of
+> the build, surface by surface; (b) the owner's verdict on the mockups → epic 57 phase 2 (it carries the muted version plate and the bare installed column into
+> `KrinikConanLauncher.cs`); (c) ONE game run: the dm-fish locres sample + the hub rows' hints + the crash offer on the real build folder; (d) owed: launcher
+> R3, R5, four stale comments; `ru-reply-check` risks (plan 58: mid-turn owner messages do not reset the turn; one log record 2026-11-18 06:32Z with a JSON
+> parse error of the hook's input).
+> **Moved verbatim to the chronicle (entry 2026-11-18 10:48 +03:00):** the NOW block of the chat of 10:07, the block CHAT CLOSED 2026-11-18 09:3x with its
+> FIRST NEXT CHAT, and the progress paragraphs of 09:25 and 10:25. Their open items are carried in FIRST NEXT CHAT above.
 > **Moved verbatim to the chronicle (entry 2026-11-18 09:34 +03:00):** the NOW block of the chat of 2026-11-18 00:40. Still open from it: ONE game run (the hub rows' new hints, a locres sample of the dm-fish rows, the crash offer on the real build folder); epic 55 D4 («Что нового» 0.9.1, known issues, release notes by the owner's portrait); launcher R5 (the space need after a stopped unpack). Done in the chat of 08:10: the launcher judge round + the push, dm-fish (pass 3, in the build), the KUMM force-push.
 > **Moved verbatim to the chronicle (entry 2026-11-18 01:37 +03:00):** the blocks CHAT CLOSED 2026-11-17 22:1x, NOW 19:43 and NOW 14:40. Still open from them: the walking bow draw (bug 104, the post-process route), the owner's real-key checks (wall hang drain, RMB through a wall push, bug 105 G1 / G5b / G10 / G7, G6), bug 93 (the held draw ends in a sprint); the auto-relay L1″ / L2 / L3 after the owner's «Do not ask me again» tick.
 > **Moved verbatim to the chronicle (entry 2026-11-17 21:3x +03:00):** the blocks FIRST NEXT CHAT item 1 (the auto-relay task — built; its L2 / L3 open in the NOW block of 14:40) and CHAT CLOSED 2026-11-17 11:04.
