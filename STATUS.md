@@ -174,6 +174,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    `590495e`), so the move is free: first `git -C D:/work/ai_sandbox/ConanExiles status` clean; then move the art, update `make-res.py` (`BRANDING`), `build-docs.py` (`LAUNCHER_ICON`),
 >    `modpack.json` extras (the bundle folder name stays «Wallpapers»), `icon/make_icons.py`, `logos-on-shot.py`, the devkit comments; verify: make-res rebuilds `res/*`
 >    byte-identical, every extras path resolves, `make_public_tree.py` run; `build_nexus_description.py` RAW logo path moves in the SAME release as the public tree.
+> 3a. **A dev launcher for the owner (his ask 16:20 «а мне на рабочйи стол положите ярлык лаунчера? хоть какую-то любую текущую версию дев»):** built 16:21 by
+>    `make_variant.py` (1.0.0, V2 Realism q95) into `.work/launcher_dev/`, copied to `D:\Games\Conan Exiles 3.1.1\Krinik_Launcher_dev\` (+ the build icon); his desktop has
+>    «Krinik Conan (dev).lnk» → that exe. Not started by the agent. Replace it with each new launcher build; remove both when the real 1.0.0 ships.
 > 4. **The owner's answers of 16:18 (applied, pack `eec880b`):** the v1 wallpapers stay for players, renamed V1; the no-release screen gets NO hint for the player;
 >    the launcher is 1.0.0 («так как это его первое появление на свет будет»).
 > 5. **Judges owed:** `tools/text-fact-parity.mjs` (judge round 1 at the closure: its cited runs reproduce; 9 code findings, fix next — MEDIUM: a stray `<` in Markdown prose hides the facts after it
