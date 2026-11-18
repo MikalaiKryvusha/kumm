@@ -112,6 +112,11 @@ Only text the agent wrote, and only a dash that was wrong from the start. Conseq
     рыбалки — в окне», «Ниже — то, что …», «слева — список всех модов», «ссылки — в главе», «{need} — ранг {count}», PackRat «— сбор …», the license's parallel
     «UE4SS — MIT, шрифты — SIL …». Lines whose content changed for another reason (the GitHub feedback path, the placeholders) keep their new content.
   - Then `dash_lint.py` shows the restored lines → each goes to `dash_lint_allow.txt` with its class; the guide PDF and README are rebuilt.
+  **Narrowed and DONE 2026-11-18 09:3x** after a check against the owner's portrait (loaded 09:13): most rewrites above made a legal dash into a whole
+  sentence that the portrait prefers (ДК4 imperative instructions; З1 — the anonymity line no longer defends itself; §2.4 — «Перезарядка длится 90 с», no dash
+  at a number with a unit), so they stay. Restored only the rule-33.3 defect classes: the colon «правообладателям: авторам модов» (README template, guide)
+  and the repetition «половина запаса сил … За это» (perks). The three lines are allow-listed with their class; **the whole build's `dash_lint.py` is 0
+  (49 files)**, so the guide PDF print is no longer refused.
 
 ## Judge round on the tooling (2026-11-18 01:40, pack `2d4b104`) — to act on first
 

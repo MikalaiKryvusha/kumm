@@ -49,6 +49,13 @@
 > **3. The build 0.9.1 in a working MVP state as of 2026-11-18** — epic 55. Exit: 1 and 2 done; then a release 0.9.1 can be prepared (correct Russian, MVP
 > functions, the full launcher 1.0.0) — the publication itself waits for the owner's word.
 >
+> **Progress (2026-11-18 09:25 +03:00):** 1 — dm-fish translation pass 3 IN the build (pack `46c9b42`: 108 rows, 738 legal dashes allow-listed, Game.locres 174
+> entries, deployed; the in-game sample owed); the core: §8 + 11 rows from the defect catalogue, its gate fixed (CRLF, 66 false findings → 0), pushed
+> `2b99012`; KAIF reads `KUMM/krinik-stylometry/`; Stop hook `ru-reply-check.mjs` live (KUMM `d8f3f5a`); research `AI_RUSSIAN_DEFECTS.md` +
+> `MEASURING_RUSSIAN_TEXT.md`. Next for 1: the judge round on the hook + core change (running); restore the legal dashes of `2d4b104` (plan 56 list); a write
+> gate for the build's text files; the reviewer brief by the measure; the in-game sample. 2 — mockups wait for the owner's verdict; phase 1 recon started.
+> Note: other projects read the core from `D:/work/ai_sandbox/krinik_voice` (an older clone of the same repo) — it needs a `git pull` by its owner session.
+>
 > 🎯 **The Conan 3.0.1 build is the main work since 2026-10-26 ≈08:30; every other game is out of priority.** `[OWNER]` «все игры пока не в приоритере, мы
 > работаем дат сборкой конана» · «она 1_ должна работать стабильно 2_ моды не должны конфликтовать, должны быть рабочими 3_ не должно быть
 > явных просадок производительности из-за модов» · 2026-10-26. Work order — "Where to continue", item 0.
