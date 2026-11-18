@@ -7910,3 +7910,14 @@ typo); plan 58 — the first material is the agent's chat messages of the day, t
 
 Correction of the 09:03 note above: its line «the measure is the owner's five qualities» was the agent's reading, and it is wrong — the five words are a
 direction; the measure comes from a recon of the authorities (`researches/russian-writing/MEASURING_RUSSIAN_TEXT.md`, a helper started 09:05); plan 58 corrected.
+
+**09:05–09:06 — the stylometric core.** `[OWNER]` verbatim:
+
+> и можешь по этому писать ресерч, качать проект стилометрического ядра николая - полностью под гитигнор, и ПРАВИТЬ И ДОРАБАТЫВАТЬ ЕГО
+
+> так как оно у нас уже есть, и вроде бы как я понимаю, ты им пользуешься - И НЕ ПОМАГАЕТ ДО СИХ ПОР НИХУЯ ОНО ТЕБЕ.
+
+> из чего я делаю вывод, что проект стилометрического ядра пока что НЕ РАБОАЕТ!!!
+
+Where it went: the core (private `MikalaiKryvusha/krinik-stylometry`) cloned into `KUMM/krinik-stylometry/`, ignored by KUMM's git (ignore line first); plan 58
+criterion 6 — the core works when its compact rules are applied by hooks to files and to every chat reply and the owner's language remarks fall.

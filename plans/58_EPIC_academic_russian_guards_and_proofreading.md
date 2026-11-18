@@ -24,6 +24,14 @@ text), the owner's voice by his portrait (every text of the build and every text
 5. Every Russian text the agent wrote is inventoried (a table: file · author · audience · lines) and proofread; the lint is 0 on all of them or every kept
    line is in the allow list with its class; each proofread surface is seen in its real place (game, launcher window, PDF).
 
+6. **The owner's stylometric core works** (the owner 09:05–09:06: it exists, the agent «uses» it, and it does not help — «проект стилометрического ядра
+   пока что НЕ РАБОТАЕТ»). Facts of 2026-11-18: the core was not loaded once in this chat; `kaif-voice-lint check` reads files only, so no chat reply is ever
+   checked; the portrait is a large prose document (87 KB) that a model follows poorly at the moment of writing. Fit: the core yields a compact set of
+   machine-checkable rules that the write and Stop hooks of phase 3 apply to files AND to every chat reply; Scale — the owner's remarks about the agent's
+   language per working day and lint hits per reply; Meter — the chronicle and the Stop hook's log; Target — both fall over the next working days.
+   The core is cloned into `KUMM/krinik-stylometry/` (private repo `MikalaiKryvusha/krinik-stylometry`, git-ignored by KUMM; the owner 09:05 «ПРАВИТЬ И
+   ДОРАБАТЫВАТЬ ЕГО»): its edits are committed and pushed in its own repository.
+
 ## Phases and gates
 
 | Phase | What | Gate |

@@ -59,3 +59,6 @@ tools/hooks/.owner-presence-note.stamp
 tools/hooks/.owner-ask.txt
 # the agent's working files - never D:\Temp (the owner's folder, 2026-11-13 18:57)
 /.work/
+
+# The owner's stylometric core (private repo MikalaiKryvusha/krinik-stylometry): cloned here to work on it, never part of the public KUMM (the owner 2026-11-18 09:05)
+/krinik-stylometry/
