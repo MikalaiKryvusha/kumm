@@ -301,8 +301,9 @@ main-menu frame 18:56 (TC `TC_conan_release_0.9.0_2026-11-02.md` V3).
   `GAME_PAGE` + tabs 5 «Путешествие» and 8 «Карта» — the game's own pages instead of our standalone copies (our «Карта»: the first marker away from the click,
   no second marker, the reset dead); (2) `krinik_pause_in_menu.lua` `NO_SLOW_MODULES = { NPCDialogueWindow }` — a dialogue keeps the world at 1.0 the whole time
   (the owner's session log: `NPCDialogueWindow` 18:39:48 → «замедление 0.03» to 18:40:02). Run the control cases first: `testcases/TC_conan_hub_game_pages_map_journey_2026-11-20.md`
-  M0, D0, then M1–M2, J0–J1, D1, N1–N3. The session log of 18:31–19:05 also shows `KrinikConanCamera` writing «ЗУМ: …» once a second (a per-second log, check its
-  timer against HOUSE_RULES 7).
+  M0, D0, then M1–M2, J0–J1, D1, N1–N3. The session log of 18:31–19:05 also shows `KrinikConanCamera` writing «ЗУМ: …» once a second — checked 19:5x: it is
+  the zoom measurement inside the camera's existing loop (`KrinikConanCamera/Scripts/main.lua` ≈1134, `last_zoom_report`), no timer of its own; the detailed log is
+  the owner's standing wish (memory `mods-log-in-detail-for-the-agent`) — not a defect.
 
 - **The owner's word 2026-11-02 09:04 — the pickup check rate while the plate shows:** `[OWNER]` «при открытой плашке E Взять, частота опросов должна повышаться
   до 5 раз в секунду - для того, чтобы в случае увода луча с Берущегося предмета - плашка закрывалась быстрее». DONE — `CHECK_SHOWN_MS` 200; seen 2026-11-02
