@@ -3,6 +3,11 @@
 
 
 
+## 2026-11-20 16:17 +03:00 — the owner on the RC1 release page: a published release is marked «Latest»
+
+> The agent published v0.9.1-RC1 with --latest=false (my default, the two questions of 14:4x unanswered). The owner 16:16–16:17:
+> «ты не выпустил версию» · «релиза НЕТ в гитхабе» · «он должен был быть помечен как последний блять!». RC1 made Latest 16:17; HOUSE_RULES 25.2.
+
 ## 2026-11-20 16:15 +03:00 — STATUS bonsai trim, part 5 (the soft closure of the chat of 2026-11-20 14:10): the NOW block of that chat and the FIRST list of the chat of 2026-11-20 11:04, moved verbatim
 
 > **NOW (chat of 2026-11-20 14:10, 14:49) — the owner 14:43–14:44: «ДЕЛАЕМ СБОРКУ!!!», people on Nexus are waiting; the Nexus email fix later.**

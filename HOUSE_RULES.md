@@ -170,7 +170,9 @@
        (every piece) and `list` (no file outside the download list); `clean` removes what is not the download list's. Whole folders go by `node ConanExiles/_config/rm-tree.mjs <dir>…`
        (file by file, links unlinked, never followed; the clean version and the source refused).
     2. **The shipment** — our mods packed into the archives players get (the export bundle, the GitHub / Nexus parts). Deleted once the release is shipped; its
-       publication texts (release notes, Nexus description, letters) go into the pack first (`_config/release/published_<version>/`).
+       publication texts (release notes, Nexus description, letters) go into the pack first (`_config/release/published_<version>/`). Every published GitHub
+       release of the build, an RC included, is marked as the repository's latest release (`gh release create` with `--latest`). `[OWNER]` 2026-11-20 16:17 ·
+       chronicle entry 2026-11-20 16:17.
     3. **The build's source** — the pack repo `D:\work\ai_sandbox\ConanExiles`, the mod library `D:\work\ai_sandbox\ConanExiles\_library\mods` (without `OLD`) and the
        originals of the mods we patch `…\_library\_patch-originals` — everything a shipment is built from. The library lives inside the pack folder, git-ignored
        (`/_library/`), since 2026-11-20 16:08 by the owner's choice (it was `D:\Games\Conan Exiles Mods`).
