@@ -149,13 +149,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > «после русских страниц - ставим EN страницы») → paks, guide, launcher exe → volumes →
 > `make_release.sh` → GitHub → the launcher on a fresh copy of the clean 3.1.1.
 > The progress block of the chat of 2026-11-20 09:09 — moved verbatim to the chronicle, entry «2026-11-20 11:0x — STATUS bonsai trim, part 2».
-> **FIRST in the next chat (handover of 2026-11-20):**
-> 0. **The owner's word 2026-11-20 11:37–11:46 (chronicle entry of that time):** work proportional to the change — HOUSE_RULES 41, the rulebook
->    `researches/efficient-code/EFFICIENT_CODE.md` (the hook `efficient-code-gate` refuses code edits until it is read within the hour), KAIF issue #200.
->    **Bug 110 (the launcher's slow feedback) FIXED in the pack working tree, not committed yet:** picture cached by input keys in two layers, text blocks and
->    `SolidBox` once, the state list's lines cached, fonts and widths cached, `KRINIK_LAUNCHER_PERF=1` timers; stand case `perf` green on the fixed exe
->    (`KUMM/.work/launcher_r6/build`), red on the pre-fix timed copy; the full stand `batch_r6.txt` running (case `many` printed nothing once — re-run it alone).
->    Then: run report `testcases/reports/2026-11-20_conan-launcher-slowness-fix.md`, commit, and the «О проекте» plate (plan 57, KUIPS mockup first).
+> **NOW (chat of 2026-11-20 14:10, 14:49) — the owner 14:43–14:44: «ДЕЛАЕМ СБОРКУ!!!», people on Nexus are waiting; the Nexus email fix later.**
+> - Interview 041 (the owner's own lines) CLOSED: all A, in pack `e416d1e`. The four Krinik paks' mod-list fields rebuilt and deployed (guard 4 / 4 in the game).
+> - **Judge round 5** (on `7c72d78..HEAD`): 1 state list not repainted on a same-shape screen change → `StatePanel.Set` invalidates on any content change;
+>   2 the `perf` case read the second launcher's lines → `[pid]` on every log line, the stand judges the first pid; 3 refuted (the interaction's own disk work
+>   belongs to its 16 ms); 4 the mods button called old-window widgets by raw pointers → `_G.__krinik_hub_gen` + `forget_old_window()`; 5, 6 comments fixed.
+>   All in the pack WORKING TREE, not committed. New stand check D7b proven: green on the fix, red on a control build (`KUMM/.work/launcher_r7/control`).
+>   Running: the full stand `KUMM/.work/launcher_r3/batch_r7.txt` on `launcher_r7/build`, and judge round 6 on the uncommitted diff.
+> - Next: the game check G1–G5 (`testcases/TC_conan_keybinds_to_game_events_2026-11-18.md`, the mods button after a world re-entry) → commit → `git push` of
+>   the pack → `make_release.sh <empty dir on D:>` → GitHub release v0.9.1-RC1 → install test on a fresh copy of the clean 3.1.1. Asked the owner 14:4x:
+>   0.9.0 stays «Latest»? the guide's English pages into RC2? The «О проекте» mockup is built in KUIPS (screen `about`), not in RC1 unless he accepts it first.
 > 1. **Pack:** judge round 4 fixed and committed (`513a21f`; stand 340 / 340; report `testcases/reports/2026-11-20_conan-launcher-judge4-fixes.md`); **judge
 >    round 5** on `7c72d78..HEAD` (round 4's fixes + bug 110 + bug 85's token fix + the mark guard) → fixes → `git push` of the pack (15+ local commits).
 > 2. **Texts:** the writer's r4 applied the clean read r3 (`reports/2026-11-20_clean_read_texts_091_r3.md`; summary `KUMM/.work/texts091r4/REPORT.md`) — in the
