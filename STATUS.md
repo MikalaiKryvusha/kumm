@@ -178,6 +178,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > files in one zip, files over 2 GiB split (`Shemite_City_State.pak` 2 396 312 301 B); the launcher hashes local files, stages, downloads only the difference,
 > verifies, renames once, runs today's installer; the old bundle kept until success. GitHub: asset < 2 GiB, ≤ 1000 assets, Range works (single ranges),
 > the signed asset URL lives ≈ 1 h. RC1/RC2 launchers know only the volumes — the self-update brings the new launcher first.
+> Guard defect (S3): `tools/check-claim-before-evidence.mjs` read the zone offset «+03:00» after a date as a clock time «03:00» ahead of the clock (the recon's
+> two lines were rewritten «(UTC+3)» to pass) — fix the pattern with a mutant case.
 > Also from the uninstall check 00:28–00:32 (the same report): the game returned to clean (hash list: missing 0, bad 0); the RC1 bundle (13.7 GB) stays
 > after the update; after the uninstall the launcher showed «installed» instead of «Установить сборку» (HOUSE_RULES 26) — reproduce, file, fix.
 > Owed next: the issues #3 #11 #12 #33 get «вошло в v0.9.1-RC2» comments (close only after their open cases M2, N1, N3, D2); the RC1 bundle folder stays beside
