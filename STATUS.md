@@ -149,6 +149,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Respite, the Al-Merayah fortress) shot in the working game, plus a new hub frame (the old one shows the test name «еуые»), shown to the owner as a page before
 > they go in the README; the working game's in-game check (menu «0.9.1-RC1», his world `Game_1`) needs the owner FREE. RC2 notes: the launcher counts 72 of 74
 > mods in its progress while the installer says 74/74; the game's `Saved/ExtractedMods` (12.8 GB) stays after an uninstall.
+> **FIRST after the pause — the owner's bugs from his own play of the RC1 build (18:33–18:34): `bugs/112_…` the «Начать приключение (Пробел)» button does not
+> work (critical), then `bugs/111_…` a name plate in replacement diamonds and katakana.** The desktop: «Krinik Conan.lnk» → the release launcher is there since 17:5x
+> (the owner launches from the desktop); the old «Krinik Conan (dev).lnk» and `Krinik_Launcher_dev` in the game folder are still there (its deletion was refused
+> by auto mode — ask the owner or he deletes it).
 >
 > **CHAT CLOSED 2026-11-20 ≈17:2x (the chat of 16:20, «делаем сборку Конана»; soft closure at the 80 % budget).** Done: the 0.9.1 notes, the guide's «Версия 0.9.1»,
 > the README mods table and the mod-list change notes rebuilt by large features with measured facts (pack `75ba95d`; the owner's line-by-line reading, chronicle
