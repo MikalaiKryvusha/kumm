@@ -158,7 +158,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > and 42 (a release updates all its meta information in sync); EXP-0579–0581; memory `own-the-result-check-before-done`. The full NOW list — chronicle, entry
 > «STATUS bonsai trim, part 6».
 > **FIRST in the next chat:**
-> 1. **The owner's request 16:54: «мою рабочую игру ты тоже, пожалуйста, преврати в 3.1.1 + 0.9.1-RC1».** The working game `D:\Games\Conan Exiles 3.1.1` still holds the
+> 1. ✅ **DONE 2026-11-20 17:38 — see the PARKED line above.** Why the 17:19 «Удалить сборку» did nothing: `Uninstall()` first shows a Yes / No box and logs
+>    nothing before «Да»; UI Automation does not see that box's buttons — `click.ps1 -Dialog -Press 6` answers it. The button then starts the uninstaller in a
+>    window whose final `pause` waits for a key (the launcher's update path passes `< nul`). The old text of this item, kept for the record:
+>    **The owner's request 16:54: «мою рабочую игру ты тоже, пожалуйста, преврати в 3.1.1 + 0.9.1-RC1».** The working game `D:\Games\Conan Exiles 3.1.1` still holds the
 >    dev deploy (pack_version 0.9.1-RC1, `-Verify` clean, dev-only mods in); his saves are copied to `KUMM/.work/save_backup_2026-11-20` (7.7 MB). The release parts
 >    and the launcher are downloaded in `KUMM/.work/rc1_dl` (13.7 GB). Start: `node KUMM/.work/rc1_run/run.mjs start D:/work/ai_sandbox/KUMM/.work/rc1_dl "D:\Games"`
 >    (the search root HOLDS the game folder) → screen `installed`. The `remove` press at 17:19 changed nothing (no log line, no dialog seen by
