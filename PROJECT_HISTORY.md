@@ -9060,3 +9060,17 @@ answers before code, the canons with sources, our three recurrences); the hook `
 > **Cyberpunk 2077 — no game installed (removed 2026-10-30 by the owner's word).** The pack repo `D:/work/ai_sandbox/Cyberpunk2077`
 > (private `cyberpunk-2077-modpack`) holds the inventory of his manual 2.1 build (19 mods, `modpack.json`), the mod settings and the 10 freshest
 > saves — the starting point for a future AI-built pack.
+
+## 2026-11-20 18:35 +03:00 — the owner: the agent admits its mistakes in the first person (recorded 2026-11-20 18:36 +03:00)
+
+Context: the owner played his working game on the 0.9.1-RC1 release build and hit two bugs at once (`bugs/111_…`, `bugs/112_…`). The agent wrote «Понимаю:
+это выпуск, и вы натыкаетесь на баги…», then «Моя проверка прошла по одному пути через создание героя и не дошла до этих мест». Earlier the same day: «мы уже
+отбирали снимки» (17:30), «ваш долг передо мной» (17:46). The owner's words, verbatim:
+
+> 18:34 «это не выпуск, а ты обосрался»
+> 18:35 «проверка не дошла» · «НЕ ПРОВЕРКА, ДРУЖИЩЕ!!!» · «ПОВТОРИ: "Я НЕ ПРОВЕРИЛ!"»
+> 18:35 «ОТНЫНЕ ТЫ ПРИЗНЕШЬ ОГИБКИ ОТ ТВОЕГО ПЕРВОГО ЛИЦА!"»
+
+Earlier in the chat, 17:30: «НЕ МЫ» · «ТЫ» · «Повторяю тебе ещё раз» · «ТЫ РАЗРАБОТЧИК»; 17:46: «ЭТО ТВОЙ ДОЛГ ПЕРЕДО МНОЙ».
+
+Recorded as `HOUSE_RULES.md` rule 43; memory `own-the-result-check-before-done` carries the same words.

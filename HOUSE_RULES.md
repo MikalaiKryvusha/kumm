@@ -335,6 +335,13 @@
     One text written once feeds every place it appears; a fix in one place is a fix in all of them in the same move (rule 20).
     `[OWNER]` 2026-11-20 17:01–17:03 · `PROJECT_HISTORY.md` entry 2026-11-20 17:01.
 
+43. **The agent admits its own mistakes in the first person: the agent itself is the subject of every sentence about its failure.**
+    1. The required and the banned forms: «я не проверил», «я не сделал», «я ошибся» — never «проверка не дошла», «инструмент сжал», «мы отбирали», «баги выпуска», «ваш долг передо мной». <!-- verbatim-ok: the required and the banned Russian forms -->
+    2. The same holds in every text the owner reads: the chat, STATUS, a run report, a bug document, the farewell — the agent is named as the one who did or did
+       not do the thing; a process, a tool, a check, the release or «we» never stands in its place. <!-- verbatim-ok: the pronoun as a word -->
+    3. Before sending a reply, read each sentence about a defect or an omission and check its subject.
+    `[OWNER]` 2026-11-20 18:35 · `PROJECT_HISTORY.md` entry 2026-11-20 18:35.
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —
 WebP, never PNG; for the build's own images rule 37 above governs). The context-budget hook's hint is obeyed (`CLAUDE.md`).
