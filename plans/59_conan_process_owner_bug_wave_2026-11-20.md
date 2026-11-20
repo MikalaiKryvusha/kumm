@@ -53,13 +53,15 @@ release ever read.
 - [x] 1. File every open bug of the build as an issue (HOUSE_RULES 44) — DONE 2026-11-20 19:25: 42 issues #2–#43, index `bugs/GITHUB_ISSUES.md`.
 - [ ] 2. The matrix file `testcases/TC_conan_play_matrix.md` from the nine mods' notes + the owner's bugs of 2026-11-20 and every open issue; rows / columns
       as remedy 2; show it to the owner as a page before the first play run.
-- [ ] 3. The play-report template and its check (`testcases/_play-report-template.md`, a check script the gate calls); prove the check red on the RC1 install
+- [x] 3. (DONE 2026-11-20 20:4x: `testcases/_play-report-template.md`, `ConanExiles/_config/release/check_play_report.py`, self-test `_config/release/t_play_report.py` —
+      green fixture from the real matrix + 7 mutants refused; RC1 refused: no report) The play-report template and its check (`testcases/_play-report-template.md`, a check script the gate calls); prove the check red on the RC1 install
       report (a narrow pass, no «Not covered:», no play hour).
-- [ ] 4. The gate in `make_release.sh` and in the publication step; prove it red on the current RC1 tree, green on a report that fills the template.
+- [~] 4. (2026-11-20 20:4x: `make_release.sh` step 0 runs the check and stopped on RC1 — red proven on the real tree; the green on a real filled report waits for
+      the first play run; the publication step (`gh release create`) has no script of its own yet — owed) The gate in `make_release.sh` and in the publication step; prove it red on the current RC1 tree, green on a report that fills the template.
 - [x] 5. `god-on.sh off` + the read line in the stand teardown; check the owner's working save for damage (bug: the immortal heroine) — first, before any fix.
       DONE 2026-11-20 20:31: the save keeps god mode (G0, G3); `enter-world-remote.sh` reads the flag at every agent entry (G4 red and green); the owner's save
       left with god OFF; issue #6 commented, its retest is a fight with humanoids and his play (report `testcases/reports/2026-11-20_conan-immortal-heroine-save.md`).
-- [ ] 6. KAIF improvement request: a process remedy left as a document (plans 32, 47, 59) — the class and the gate (remedy 5).
+- [x] 6. (DONE 2026-11-20 20:36: `bugs/KAIF/34_*`, delivered as KAIF issue #201) KAIF improvement request: a process remedy left as a document (plans 32, 47, 59) — the class and the gate (remedy 5).
 - [ ] 7. The health metric: the owner's next half hour of play on RC2 brings fewer findings than this one (≥ 12 in 30 min); not fewer — revise §3.
 
 ## 5. Decisions made without the owner

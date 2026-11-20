@@ -41,10 +41,10 @@ RussianTranslation (RU), ModPackManager (MPM).
 | # | Issue | Row to walk | Status |
 |---|---|---|---|
 | R1 | #2 | P5: drink water with the bow in the hands — the bow stays visible | — |
-| R2 | #3 | P8: a dialogue — the world keeps its pace (`NO_SLOW_MODULES`, pack `dc79053`) | — |
+| R2 | #3 | P8: a dialogue — the world keeps its pace (both talk windows, pack `29a612b`); a reply option shows its text — PASS of the pace 2026-11-20 20:06 (report `2026-11-20_conan-dialogue-world-pace.md`), the reply option not walked | partial |
 | R3 | #4 | P4: first person — the bow on the back is not in front of the camera | — |
 | R4 | #5 | P3: use the knife, then take the bow — the bow is visible | — |
-| R5 | #6 | P6: enemies deal damage (god mode off and its line read first) | — |
+| R5 | #6 | P6: enemies deal damage (god mode off and its line read first) — beasts PASS 2026-11-20 20:18 (report `2026-11-20_conan-immortal-heroine-save.md`), humanoids not walked | partial |
 | R6 | #8, #9 | P2: draw from a crouch — the hero stays crouched; then a standing draw — no lift off the ground | — |
 | R7 | #10 | the name plate of every NPC met — readable letters | — |
 | R8 | #11 | P9: «Путешествие» → «Начать путешествие» starts the journey — PASS 2026-11-20 19:38 (report `2026-11-20_conan-hub-game-pages-map-journey.md`) | pass |
