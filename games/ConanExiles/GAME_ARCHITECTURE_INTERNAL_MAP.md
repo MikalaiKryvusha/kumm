@@ -1047,6 +1047,11 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   Workshop BBCode and links are drawn raw; Cyrillic renders. The fields live in the outer wrapper (`ConanSandbox/Mods/modinfo.json` next to `manifest.json`
   with the MD5 of every file); `_config/devkit/set-pak-modinfo.py` rewrites them without a re-cook (the file list and every other file byte-equal).
 - Opening the list by the remote: `call W_MainMenu_MainMenu_C_<N> BndEvt__W_MainMenu_MainMenu_B_Mods_K2Node_ComponentBoundEvent_1_SignalClicked__DelegateSignature WidgetTree_<M>.B_Mods`.
+  The names come from `lua local m=FindFirstOf('W_MainMenu_MainMenu_C') return m:GetFullName()..' '..m.B_Mods:GetFullName()` (2026-11-20).
+- The details panel is `WBP_ModMenu_C_<N>.WidgetTree_<M>.ModDetailView.WidgetTree_<K>.ScrollBox` (at 4K the panel ends at offset ≈ 792): the author, author URL
+  and change note stand below the description, so a frame of them needs `ScrollBox:SetScrollOffset(500)` (and 792 for the end) by the remote first —
+  `ScrollToEnd()` did not move it within the same call. The panel shows no version field; «Предпросмотр» is empty for our paks (2026-11-20, report
+  `KUMM/testcases/reports/2026-11-20_conan-rc1-menu-and-mods-screen-look.md`).
 - Only cooked mods are listed. A wrapper with only modinfo/manifest → «Incompatible Mods Detected … Missing platform-specific pak»; with tiny legacy
   `<Mod>-Windows.pak` / `-WindowsServer.pak` → «Missing AssetRegistry.bin in mod folder» (the modal blocks a clean close). A Lua-only mod needs a kit-cooked
   empty mod to appear (`kit-buildmod.py`).
