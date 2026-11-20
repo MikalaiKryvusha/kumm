@@ -138,15 +138,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **CHAT CLOSED 2026-11-20 ≈19:5x (the chat of 17:22 «resume»; soft closure at the 80 % budget).** Done: the working game `D:\Games\Conan Exiles 3.1.1` moved to
-> the 0.9.1-RC1 release build (uninstall by the launcher's own `< nul` path, install from the parts by the RC1 launcher off-screen, saves 26/26 equal); the public
-> README's four identical oasis frames replaced by one row of three captioned shots (public `2a86cad`); after the owner's 30-min play of RC1: HOUSE_RULES 43 (mistakes
-> in the first person) and 44 (every build bug is an issue of the public repo) — 42 issues #2–#43 filed (index `bugs/GITHUB_ISSUES.md`, every local bug names its
-> issue), issue #1 answered and closed; process plan `plans/59_…` (+ `_ru.md`): two earlier remedies (plans 32, 47) were never executed, the cure is a release gate
-> on a play report; the play matrix skeleton `testcases/TC_conan_play_matrix.md`; FIXED and seen by real input (pack `dc79053`, report
-> `testcases/reports/2026-11-20_conan-hub-game-pages-map-journey.md`): the hub's «Карта» and «Путешествие» are the game's own pages again (issues #11, #12, #33);
-> HOUSE_RULES 30 cancelled by the owner 19:37 (no busy-keyboard rule, hook unwired, guards removed). This chat's progress lines verbatim — chronicle, entry
-> «STATUS bonsai trim, part 8».
+> **CHAT CLOSED 2026-11-20 ≈21:2x (the chat of 19:53 «resume», autonomous; soft closure at the 80 % budget).** Done (packs `29a612b`, `e1c0691`, `d7e2583`,
+> `4d1d867`; reports `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`, `…_conan-immortal-heroine-save.md`): issue #3 — talks keep the world at 1.0
+> (both talk windows) AND the NPC's answers in a talk are visible again (my `krinik_shout_fade` hid them since 2026-10-31; control, fix, retest at the Iruk
+> merchant); issue #6 — the save keeps my god mode, the owner's save is mortal, `enter-world-remote.sh` warns at every entry; the release gate on a play report
+> (`check_play_report.py`, 29 cases, step 0 of `make_release.sh`, waiver by the owner's word); HOUSE_RULES 44.4 (the retest is my own play); plan 60 (skills +
+> play driver), recon `researches/ai-agent-plays-game/`; idea 27 = issue #44; KAIF #201. Detail of this chat — chronicle, entry «STATUS bonsai trim, part 9».
 > **FIRST in the next chat (the owner ordered autonomous work 19:37):**
 > 0. **🔥 0.9.1-RC2 — the owner's order 21:09–21:14 («собираем RC2» · notes super short, only what RC2 fixed + a link to RC1 · «собирай без часа» — the play gate
 >    waived by his word through `KRINIK_PLAY_GATE_WAIVER` · «отгрузили игрокам сломанное гавно» · «максимально быстро чинить» · «это будет новый релиз формально»).**
@@ -159,21 +156,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    (notes, title, `--latest`, parts + launcher + guide PDF + SHA256SUMS), README / public tree, the guide's version (HTML + PDF), read back each in its medium;
 >    then I check the launcher's update RC1 → RC2 on a copy of the game with RC1 (the owner's purpose of RC2). Judge round of 21:14 owed fixes: the NPC's FIRST
 >    line of a talk may be born before `IsModuleActive` turns true and stay hidden (check the greeting by a burst); `t_play_report.py` depends on a clean tree;
->    the gate does not watch the git-ignored built paks and `docs/guide/guide-3.1.1.html`; `dialogue-stand.lua` `_G.__ds_far` / `__ds_class` persist across calls.
-> 1. **Chat of 19:53 (resume, autonomous) — done, pack `29a612b` pushed, judge 2 rounds:** issue #3 — my first fix (`dc79053`) missed: the oasis campfire talk
->    opens `NPCDialogueWindow2`; the poll now asks the game for both talk windows (`IsModuleActive`), the owner's word 20:03 «лучше убрать паузу во время
->    диалогов»; D1, D3 pass in his world, D2 (a talk with reply options) blocked — MY retest owed: find a talker with options (report `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`).
->    Issue #6 — the save keeps my god mode across sessions; his save is mortal again; `enter-world-remote.sh` reads the flag at every entry (report
->    `testcases/reports/2026-11-20_conan-immortal-heroine-save.md`; my stand killed the heroine once, restored from the game's backup; a 4 HP corruption mark
->    of my run stays). Both issues commented, open until MY retest by the player's path (D2, G1) — the owner 20:37: the retest is the agent's game, never his. The dev harness (remote, menu probe) is installed in his working game since 19:57 —
->    remove it (`ue4ss/Mods/KrinikAgentRemote`, `KrinikMenuProbe`, `KrinikConanBench`) when the game work of the chat ends. The owner plays other games on this
->    PC (20:28 Underground 2): launch Conan by the BACKGROUND path only, keys by `post-key.ps1` (E added).
->    Next: N1 (switches between the four game pages — the empty backing risk of judge round 1), N3 (every button of the five copied tabs), M2; then the dead
->    REFRESH / minimap adapter code of `krinik_hub_controller.lua` goes with N3's decision.
-> 2. ~~The judge round owed on pack `dc79053`~~ — done 20:15 together with the dialogue fix (2 rounds, `29a612b`).
+>    the gate does not watch the git-ignored built paks and `docs/guide/guide-3.1.1.html`. The NPC answers in a talk are visible again (fix in `e1c0691`, seen at the Iruk merchant 21:05).
+> 1. **Owed retests and judge findings of this chat:** G1 (a humanoid hits the heroine, god OFF) for issue #6; the talk GREETING line (born before
+>    `IsModuleActive` turns true?) by a burst; N1 (switches between the four game pages), N3 (every button of the five copied tabs), M2; `dialogue-stand.lua`
+>    one-call flags not yet run in the game. The dev harness (`ue4ss/Mods/KrinikAgentRemote`, `KrinikMenuProbe`, `KrinikConanBench`) is in the owner's working
+>    game since 19:57 — remove it when the RC2 checks end. The owner plays other games on this PC: Conan by the BACKGROUND path only (`post-key.ps1`, E added).
 > 3. The next roots (plan 59, issue clusters): the bow states (#2, #5, #8, #9, #30, #40); first person and shadows (#4, #13, #34); the name plate (#10). Every fix: control case, real input, comment on its issue, a matrix row.
-> 4. Plan 59 steps 2–6: fill the matrix from the nine mods' notes and show it to the owner as a page; the play-report template and its check; the gate in
->    `make_release.sh`; the KAIF improvement request.
+> 4. Plan 59: steps 3, 4 (the gate in `make_release.sh`), 5, 6 done 2026-11-20; step 2 owed — fill the matrix from the nine mods' notes and show it to the owner as a page.
 > 5. Owed to the owner (17:40): views of the mods' NEW locations (Shemite City State, Caverns of Set / Akhlut Outpost, Ymir's Respite, the Al-Merayah fortress) and a
 >    new hub frame, shown as a page before they go into the README.
 > 6. The desktop: «Krinik Conan.lnk» → the release launcher; the old «Krinik Conan (dev).lnk» and `Krinik_Launcher_dev` in the game folder stay (auto mode
@@ -186,8 +175,6 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 2. **The RC1 checks not run yet** (on the fresh clean copy `KUMM/.work/rc1_install/Conan_311`, 59 GB, kept for this): the uninstall back to the clean game, the
 >    update over an older build, a short play of the main features, the menu tab text jitter by a 60 fps video (bug 64 row 6 — decides its known-issue line).
 >    Then remove `rc1_install`, `rc1_dl`, `rc1_run` and `save_backup_2026-11-20` by `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs D:/work/ai_sandbox/KUMM/.work/<dir>`.
-> 3. **Release meta not yet in sync** (HOUSE_RULES 42): the change notes inside the paks (`krinik_change_notes.json` → the next pak build) and the guide PDF inside
->    the archive parts — both land with RC2.
 > 4. **Cleanup is the agent's duty** (the owner 16:50–16:51): `KUMM/.work/svarog_cleanup.cmd` (SvarogsDream `_harness` 20.5 GB, review folders, `src/*/bin|obj`) —
 >    the auto-mode allow list was widened 17:2x by `node KUMM/.work/automode_rule.mjs` (the owner 16:51, chronicle entry 2026-11-20 16:50): run the cleanup
 >    yourself — `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs <named folders>`, alone in its call; never hand it to the owner.

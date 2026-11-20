@@ -9172,3 +9172,29 @@ The agent wrote in chat that the five issues fixed and checked (#3, #6, #11, #12
 Applied the same minute: the lines that handed the retest to the owner (STATUS, the KrinikConanUI notes, the D2 case, both run reports, the issue index, plan 59)
 now name the agent; the public comment on issue #6 («…и в игре игрока») was edited in place; HOUSE_RULES 44.3 carries the rule. The owed retests: D2 (a talk with
 reply options — the agent finds such a talker) and G1 (a fight with humanoids, god mode off).
+
+## 2026-11-20 21:2x +03:00 — STATUS bonsai trim, part 9: the closed summary of the chat of 17:22 and the item 1 of the chat of 19:53, moved verbatim
+
+> **CHAT CLOSED 2026-11-20 ≈19:5x (the chat of 17:22 «resume»; soft closure at the 80 % budget).** Done: the working game `D:\Games\Conan Exiles 3.1.1` moved to
+> the 0.9.1-RC1 release build (uninstall by the launcher's own `< nul` path, install from the parts by the RC1 launcher off-screen, saves 26/26 equal); the public
+> README's four identical oasis frames replaced by one row of three captioned shots (public `2a86cad`); after the owner's 30-min play of RC1: HOUSE_RULES 43 (mistakes
+> in the first person) and 44 (every build bug is an issue of the public repo) — 42 issues #2–#43 filed (index `bugs/GITHUB_ISSUES.md`, every local bug names its
+> issue), issue #1 answered and closed; process plan `plans/59_…` (+ `_ru.md`): two earlier remedies (plans 32, 47) were never executed, the cure is a release gate
+> on a play report; the play matrix skeleton `testcases/TC_conan_play_matrix.md`; FIXED and seen by real input (pack `dc79053`, report
+> `testcases/reports/2026-11-20_conan-hub-game-pages-map-journey.md`): the hub's «Карта» and «Путешествие» are the game's own pages again (issues #11, #12, #33);
+> HOUSE_RULES 30 cancelled by the owner 19:37 (no busy-keyboard rule, hook unwired, guards removed). This chat's progress lines verbatim — chronicle, entry
+> «STATUS bonsai trim, part 8».
+>
+> 1. **Chat of 19:53 (resume, autonomous) — done, pack `29a612b` pushed, judge 2 rounds:** issue #3 — my first fix (`dc79053`) missed: the oasis campfire talk
+>    opens `NPCDialogueWindow2`; the poll now asks the game for both talk windows (`IsModuleActive`), the owner's word 20:03 «лучше убрать паузу во время
+>    диалогов»; D1, D3 pass in his world, D2 (a talk with reply options) blocked — MY retest owed: find a talker with options (report `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`).
+>    Issue #6 — the save keeps my god mode across sessions; his save is mortal again; `enter-world-remote.sh` reads the flag at every entry (report
+>    `testcases/reports/2026-11-20_conan-immortal-heroine-save.md`; my stand killed the heroine once, restored from the game's backup; a 4 HP corruption mark
+>    of my run stays). Both issues commented, open until MY retest by the player's path (D2, G1) — the owner 20:37: the retest is the agent's game, never his. The dev harness (remote, menu probe) is installed in his working game since 19:57 —
+>    remove it (`ue4ss/Mods/KrinikAgentRemote`, `KrinikMenuProbe`, `KrinikConanBench`) when the game work of the chat ends. The owner plays other games on this
+>    PC (20:28 Underground 2): launch Conan by the BACKGROUND path only, keys by `post-key.ps1` (E added).
+>    Next: N1 (switches between the four game pages — the empty backing risk of judge round 1), N3 (every button of the five copied tabs), M2; then the dead
+>    REFRESH / minimap adapter code of `krinik_hub_controller.lua` goes with N3's decision.
+> 2. ~~The judge round owed on pack `dc79053`~~ — done 20:15 together with the dialogue fix (2 rounds, `29a612b`).
+> 3. **Release meta not yet in sync** (HOUSE_RULES 42): the change notes inside the paks (`krinik_change_notes.json` → the next pak build) and the guide PDF inside
+>    the archive parts — both land with RC2.
