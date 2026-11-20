@@ -1210,7 +1210,9 @@ This is the working order of KUMM's game modding.
 3. **Repeat the round on the new diff** (a fresh judge each time) until a round brings no confirmed defect — at most cosmetic remarks the agent may
    decline with a line why. A finding that survives three rounds of fixing is a stop: `/bug-research` (`PHILOSOPHY.md` → the rule when stuck).
 4. The commit message carries `review: <R> rounds — <N> findings, fixed <K>, refuted <M>` (or `review: skipped — <why>` for a trivial edit: a
-   typo, a comment).
+   typo, a comment). A verdict reached after the push goes into a git note — `git notes append -m "review: …" <hash>`, then
+   `git push origin refs/notes/commits`; the Conan pack's `release_checklist.py` reads the last `review:` paragraph of the note first, then of the message,
+   and holds the release on a review written as owed, pending or planned, on a skip of a `feat` commit, and on a code commit with no verdict.
 
 `[OWNER]` 2026-11-10 01:41–01:43 · chronicle entry 2026-11-10 01:52.
 

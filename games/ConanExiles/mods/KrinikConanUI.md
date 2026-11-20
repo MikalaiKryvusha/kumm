@@ -288,6 +288,12 @@ reads it — see `SimpleModlist.md`; seen «v1.0.0» 15:51 (report `testcases/re
 **Since 2026-11-02 18:5x the build version is 0.9.0** (`[OWNER]` 18:40 «Все моды Krinik опускаем до версии 0.9.0», plan 43): `kit/modinfo.json` 0.9.0 (and the kit's copy),
 `kit-conanui-edit.py` `PACK_VERSION` «0.9.0» → the line under our logo in both menus; the pak rebuilt (kit edit + `kit-buildmod.py`); seen «0.9.0» on the
 main-menu frame 18:56 (TC `TC_conan_release_0.9.0_2026-11-02.md` V3).
+**0.9.1-RC2, 2026-11-20 22:4x:** `kit-conanui-edit.py` reads `PACK_VERSION` from `modpack.json` `packVersion` at the KIT build, so a new version needs the whole
+chain — `kit-conanui-edit.py` → `kit-krinik-modsettings.py` ×2 → `kit-krinik-click-events.py` ×2 → `kit-buildmod.py` (one script: `KUMM/.work/rc2/kit_chain.sh`,
+≈17 min, every step «Success - 0 error(s)») → copy into `_unpacked` → `Deploy -Only KrinikConanUI` → `set-pak-modinfo.py --only KrinikConanUI.pak`. Checks: the
+pak's file list equal to the previous build's (`repak list`), «0.9.1-RC2» found 4 times in the pak and «0.9.1-RC1» none; seen «0.9.1-RC2» under the KRINIK MOD PACK
+logo on the main-menu frame (background launch, `capture-window.ps1 -Width 3840`). The release ritual's B line watches that the pak is newer than the commit of
+`packVersion`.
 
 ## Tests and runs
 

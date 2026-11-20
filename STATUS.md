@@ -147,11 +147,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > language servers), LSP for Python, Lua and JS (JS after `typescript` 7.0.2 → 5.9.3: TypeScript 7 ships no `tsserver.js`); LSP for C# serves only C# under
 > the session folder and KUMM has none — C# stays a text grep (`researches/agent-skill-packs/README.md`). Still owed: the independent judge on `tools/skill-packs.mjs` and `.claude/skills/game-hunt/SKILL.md` (skipped — the owner moved to a new session at 21:59; the script
 > was run red/green with three mutants).
-> **PARKED 2026-11-20 21:35 +03:00 — the owner's task «скачай и разверни в KUMM … Claude-BugHunter … интегрируй в KAIF» (21:35) taken first.** RC2 stands at: Krinik mod versions
-> 0.9.1-RC2 in `ConanExiles/modpack.json` (NOT committed), `release_checklist.py` reads git notes + only shipped mods (NOT committed), note on `c27e3a7` (NOT pushed:
-> `git push origin refs/notes/commits`); kit step 1 `kit-conanui-edit.py` running in the background (log `KUMM/.work/rc2/logs/01_conanui_edit.log`), then
-> modsettings ×2, click-events ×2, `kit-buildmod.py`; the guide read whole — owed edits: «Лаунчер говорит», «сообщает», «моды говорят по-русски», «учит героя»,
-> the Graphics row undersold, no RC2 in the title / history / fixes. Machine lock `kumm` to 22:34.
+> **NOW 2026-11-20 22:39 +03:00 — RC2 resumed in the chat of 22:07.** Done: mod versions committed (pack `3ac54fc`), the `c27e3a7` note pushed; the UI kit chain ran
+> (`KUMM/.work/rc2/kit_chain.sh`: steps 1–5 «Success - 0 error(s)», logs `KUMM/.work/rc2/logs/`, then `kit-buildmod.py` → `KUMM/.work/rc2/kit_out`); the guide read whole
+> and edited by the portrait (the four human verbs of programs, the Graphics row, RC2 in the history / what's new, the block «Исправлено в тестовой сборке
+> 0.9.1-RC2»; voice-lint: 15 old false hits — CSS percentages, the game term «уникальных», an HTML comment), its clean read at a helper; README.draft RC1 → RC2
+> (the draft is regenerated from `README.template.md` by `mods-table.mjs` after `make_release.sh`). `release_checklist.py` (NOT committed, judge rounds 1–2 done,
+> round 3 at a helper): the review check takes the verdict paragraph, finds code commits by files; it found reviews owed — notes to add after round 3:
+> `dc79053` (its judge round done 22:3x: D1–D3, Q1 fixed in `29a612b`; Q3 the busy-keyboard refusal left in `game-front.ps1` — removed, NOT committed; deferred:
+> H1 the dark backing between hub tabs 4↔5 (issue #36), H2 the map's hold timeout unmeasured, P1 `FindAllOf('W_Carousel_C')` per tick during a hold, Q2 dead
+> REFRESH / MAP_PAGE code), `e1c0691` (its round of 21:14, 3 findings deferred to item 1 below), `033d419` (the ritual itself — rounds of today), comment-only
+> skips `292f129`, `4d1d867`, `d7e2583` (a dev stand). Next: copy the pak into `_unpacked/KrinikConanUI`, deploy `-Only KrinikConanUI`, `set-pak-modinfo.py`,
+> look at the menu line «0.9.1-RC2»; `build-docs.py` (guide PDF + launcher BuildInfo); `make_release.sh` into an empty dir; publish; the launcher update RC1 → RC2.
+> Machine lock `kumm` to 23:39.
 >
 > **CHAT CLOSED 2026-11-20 ≈21:2x (the chat of 19:53 «resume», autonomous; soft closure at the 80 % budget).** Done (packs `29a612b`, `e1c0691`, `d7e2583`,
 > `4d1d867`; reports `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`, `…_conan-immortal-heroine-save.md`): issue #3 — talks keep the world at 1.0
