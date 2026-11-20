@@ -1,5 +1,7 @@
 # Bug 108 — Esc does not close other mods' settings windows over the hub (EAA, fishing, Hosav and seven more)
 
+> **GitHub issue:** [#41](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/41) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔴 OPEN — known regression of 0.9.1 by decision (bug 85): the Lua Esc key bind that closed them was the crash class
 **Severity:** S3 by impact (a window closes by its own close button; no crash, no lost data) — kept as a document because a native fix per mod is real work
 **Version/build:** Conan Exiles 3.1.1 build, KrinikConanUI 0.9.1 · **When/context:** 2026-11-18 19:40 — the owner: «еще баг на будущее по модам EAA: их окно ESC не закрывает. А должен закрывать.» · «Это про эту же историю, что ты сейчас делаешь»

@@ -1,5 +1,7 @@
 # Bug 88 — the corruption debuff line: two font sizes in one caption, the red plate covers two thirds
 
+> **GitHub issue:** [#26](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/26) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔴 OPEN — recorded from the owner's frame (tossed mid-test, not worked yet)
 **Severity:** S3-visible
 **Version/build:** Conan Exiles 3.0.1 build · **When/context:** 2026-11-07 22:41 +03:00 — `[OWNER]` «странный вид виджета» + a frame, during the headshot stand

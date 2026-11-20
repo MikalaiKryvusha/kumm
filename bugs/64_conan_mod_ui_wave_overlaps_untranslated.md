@@ -1,5 +1,7 @@
 # Bug 64 — Conan 3.0.1: wave of mod UI defects found by the owner in 5 minutes (overlaps, untranslated strings, jitter)
 
+> **GitHub issue:** [#18](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/18) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔴 OPEN · **Severity:** S2 (an owner's hour lost; his trust that "smoke passed" means "it looks right") ·
 **Version/build:** Conan Exiles 3.0.1 CL-379176, pack `ConanExiles` 64 paks + 8 Lua mods, `Game.locres` of 2026-10-25 ·
 **When/context:** 2026-10-26 08:58–09:04, smoke run 1 (`testcases/TC_conan_build_stability_compat_perf_2026-10-26.md`); the owner

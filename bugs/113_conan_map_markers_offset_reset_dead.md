@@ -1,5 +1,7 @@
 # Bug 113 — map markers: the first lands away from the click, a second one is not placed, the reset does nothing
 
+> **GitHub issue:** [#12](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/12) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔴 OPEN — recorded only; the chat is paused by the owner, no investigation started
 **Severity:** S2 by the ladder; CRITICAL by HOUSE_RULES 38 (a function that does not work: the reset and the second marker)
 **Version/build:** Krinik Mod Pack 0.9.1-RC1 (the release build), Conan Exiles Enhanced 3.1.1, the owner's working game `D:\Games\Conan Exiles 3.1.1`
@@ -21,11 +23,18 @@ point is a classic scale / DPI or a wrong-widget-geometry defect).
 
 ## Forensics
 
-None yet. To read: the `UE4SS.log` of the owner's session ≈18:3x, the marker save file's time and size before / after a placement.
+Code read 2026-11-20 19:2x (no game run): `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_hub_controller.lua` — the «Карта» tab (index 8,
+`W_FullscreenMap_C`) is OUR page: `build()` makes it by `WidgetBlueprintLibrary:Create(pc, class, pc)` and `AddToViewport(40)` — a standalone widget outside
+the hub's carousel, never activated by the game's GUI module system; the game's own newborn map page is kept at opacity 0 and `HitTestInvisible`
+(`on_switch`), so every click goes to OUR copy. The mod notes `games/ConanExiles/mods/KrinikConanUI.md` (the hub controller row) list as never tested:
+«the helper's «Свои маркеры» click on our map», and «the map page lacks Simple Minimap's ping marker — G2». The likely cause therefore: the marker logic of
+the map page (and of Simple Minimap's helper on it) depends on what the game gives its own page at activation (geometry in the carousel, the module) — our
+copy lacks it. Not verified in the game yet. To read: the `UE4SS.log` of the owner's session ≈18:3x, the marker save file's time and size before / after a placement.
 
 ## Root cause / Hypotheses
 
-Not investigated (the pause). Cheapest first:
+The owner 2026-11-20 19:20 (verbatim): «карта нахуй тоже сломана», right after his hypothesis for bug 112 — «это или наш контроллер хаба. или замедление
+времени в хабе». The hub controller and the hub's time pause are checked FIRST for the map too. Then, cheapest first:
 1. Our hub hosts the map page inside its own window: the click is converted with the hub's geometry or scale, not the map widget's — the offset; the second
    placement and the reset fail on the same wrong geometry or on input the hub consumes. Control case: the same clicks on the game's own map with our UI mod off
    (HOUSE_RULES 24).

@@ -1,5 +1,7 @@
 # Bug 105 — Conan: a hero in a jump who touches a wall does not grab it (hits and falls)
 
+> **GitHub issue:** [#38](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/38) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔧 the grab built and pushed (pack `4367176`, 2026-11-16 23:23 +03:00); G7 (the bow drawn — decided by the owner 23:24) r10 `68c8d11`, r11 `a3a6111`,
 **r15 pushed 2026-11-17 05:1x (pack `9a33796`) — G7 and G7e pass by real input read while RMB is held** (report `testcases/reports/2026-11-17_conan-wall-grab-bow-cancel-r14.md`); the top
 of the wall with RMB held — DECIDED B `[OWNER]` 2026-11-17 09:18 (interview #037 Q1: «Зажатая ПКМ натягивает» — the build's behaviour, nothing to change); OPEN: his final check · **Severity:** S2 (the owner's play, a movement feature of KrinikConanLocomotion — the wall jump family) · **Version/build:** the Conan build on 3.1.0,

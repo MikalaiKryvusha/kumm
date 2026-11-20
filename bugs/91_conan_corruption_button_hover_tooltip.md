@@ -1,5 +1,7 @@
 # Bug 91 — Conan «Хар-ки»: hovering the purple corruption «+» shows a stray «Оскверненные Характеристики» label in mid-screen
 
+> **GitHub issue:** [#29](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/29) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔴 OPEN · **Severity:** S2 · **Fixing:** after the attribute arrows look pass (plan 49 step 2), same screen
 **Version/build:** Conan 3.0.1 build, pack `ba5b348` · **When/context:** tossed by the owner mid-task, 2026-11-10 10:04 +03:00, with a crop of the purple diamond «+» right of the
 Сила / Живучесть rows

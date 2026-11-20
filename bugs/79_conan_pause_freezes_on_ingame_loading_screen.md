@@ -1,5 +1,7 @@
 # Bug 79 — the hub pause takes the in-game loading screen for a menu and freezes the world
 
+> **GitHub issue:** [#21](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/21) — the public tracker of this defect (HOUSE_RULES 44)
+
 > **Created:** 2026-11-03 12:53 +03:00 · **Parent:** plan 43 item 20 (the Nexus screenshot stand) · **Status:** 🟡 fixed 2026-11-03 13:11 on the teleport stand (time 1.00 through it, landed in 4 s); respawn case passed 2026-11-07 07:41 (no freeze); waystone and dungeon cases still to run
 > **Outbound:** —
 

@@ -1,5 +1,7 @@
 # Bug 94 — Conan: items started in the hub finish INSTANTLY when the hub closes (KrinikConanUI · krinik_pause_in_menu craft speed-up)
 
+> **GitHub issue:** [#31](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/31) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔧 fix pending the owner's play — reproduced by his path and fixed 11:11 (`rescale_queue`, cases C2f, C5 pass; report
 `testcases/reports/2026-11-14_conan-craft-hub-close-rescale.md`) · **Severity:** S2 (a mechanic of ours breaks the game's economy in the owner's play) ·
 **Version/build:** Conan Exiles 3.0.1 build, `KrinikConanUI/ue4ss/Scripts/krinik_pause_in_menu.lua` 0.17.0 · **When/context:** the owner's message 2026-11-13 09:46

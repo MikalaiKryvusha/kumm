@@ -1,5 +1,7 @@
 # Bug 98 — Conan: in first person the arrow casts a shadow, the arm, the bow and the body do not
 
+> **GitHub issue:** [#34](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/34) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔬 OPEN — recon · **Severity:** S3 (visual) until the cause is read
 **Version/build:** Conan Exiles 3.0.1 build, pack `cdf8ef0` + the plan-52 post-process look · **When/context:** the owner's own play 2026-11-13 16:06 +03:00 (his frame,
 first person, the bow held), during the plan-52 check

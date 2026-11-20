@@ -1,5 +1,7 @@
 # Bug 109 — a fast double click inside the «Моды Krinik'а» settings window counts as ONE click
 
+> **GitHub issue:** [#42](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/42) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔴 OPEN · **Severity:** S3-class papercut by impact, filed as a document because it is a judge finding with a confirmed run · **Fixing:** RC2 (after 0.9.1-RC1)
 **Version/build:** 0.9.1 working tree, KrinikConanUI pak of 2026-11-18 21:28 (with the double-click overrides) · **When/context:** 2026-11-18 21:31, bug 85 judge round 2, case J1
 

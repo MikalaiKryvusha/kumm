@@ -1,5 +1,7 @@
 # Bug 75 — the quick-loot selection rim jumps to the last cell for a moment when an item is taken with F
 
+> **GitHub issue:** [#20](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/20) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔴 REOPENED 2026-11-13 16:07 +03:00 by the owner's play (section «Reopened 2026-11-13» below) · was: 🔧 the CAUSE fixed 2026-11-07 ≈11:27 +03:00 — the cell's `AnimSelect` (the rim's 0.3 s fade, played in reverse on the walk's last cell) made instant in the
 KrinikConanUI kit pak; the rim moves in one frame and stays through an F take, never hidden (R1, R2 of `testcases/TC_conan_quick_loot_rim_instant_2026-11-07.md`, report
 `2026-11-07_conan-quick-loot-rim-instant.md`); `krinik_loot_rim` OFF (`[OWNER]` 2026-11-07 10:57 «не нужно её прятать даже на короткий момент»); open: R3 (the last item) and the

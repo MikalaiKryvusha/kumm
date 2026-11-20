@@ -1,5 +1,7 @@
 # Bug 101 — Conan hub: switching to and from «Снаряжение» shows a page over the bare world for 34–166 ms; «Параметры» finishes its portrait late
 
+> **GitHub issue:** [#36](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/36) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔧 items 1–2 FIXED in game 13:27 (fix 3 — the backing owned by the hub controller); item 5 (Параметры → Снаряжение bare world) FIXED 15:09, pack
 `6c4ce00`; items 3–4 measured 15:0x, open (item 4 needs a native read; item 3 — real clicks) · **Severity:** S2 (the owner's stated purpose of the hub — navigation without jumps — fails on the most used tab)
 **Version/build:** Conan Exiles 3.1.0, the Krinik build, KrinikConanUI `krinik_hub_controller` as of pack `4a08d5e` · **When/context:** 2026-11-14 12:38, the hub audit of

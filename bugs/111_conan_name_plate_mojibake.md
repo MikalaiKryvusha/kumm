@@ -1,5 +1,7 @@
 # Bug 111 — a character's name on a plate shows replacement diamonds and katakana instead of letters
 
+> **GitHub issue:** [#10](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/10) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔴 OPEN — recorded only; the chat is paused by the owner, no investigation started
 **Severity:** S3 by the ladder (a visual defect: cosmetic by HOUSE_RULES 38, not critical) — but the owner flagged it, so it is the owner's debt
 **Version/build:** Krinik Mod Pack 0.9.1-RC1 (the release build), Conan Exiles Enhanced 3.1.1, the owner's working game `D:\Games\Conan Exiles 3.1.1`

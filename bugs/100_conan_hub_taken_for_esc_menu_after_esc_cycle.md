@@ -1,5 +1,7 @@
 # Bug 100 — Conan: after an Esc-menu cycle the next hub opening is taken for the Esc menu (world at 0.0001 in the hub)
 
+> **GitHub issue:** [#35](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/35) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔧 fixed 11:35 (the Esc flag cleared on the full-screen close edge; run B100b), judge round running · was: found 2026-11-14 11:24 +03:00 during bug 94's tests · **Severity:** S2 (the hub runs at the Esc menu's 0.0001 — bug 12 says clicks die at that
 dilation; the craft multiplier follows it) · **Version/build:** 3.1.0, KrinikConanUI `krinik_pause_in_menu.lua` 0.17.0 + the bug 94 rescale (working tree) ·
 **When/context:** the agent's remote run, the owner's world · **Fixing:** after bug 94's commit (next session if this one closes)

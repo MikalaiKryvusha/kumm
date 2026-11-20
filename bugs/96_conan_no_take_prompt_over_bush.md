@@ -1,5 +1,7 @@
 # Bug 96 — Conan: looking at a bush, the «E Взять» prompt does not show
 
+> **GitHub issue:** [#32](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/32) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔧 fix pending verification — filed 2026-11-13 11:10; cause found and fixed 12:4x (pack `26f4cfa`, deployed); judge round 2 owed (API 403 twice),
 then the owner's play · **Severity:** S2 (gathering — a core loop of the owner's test play) ·
 **Version/build:** Conan Exiles 3.0.1 build, KrinikConanUI as of pack `ca3cdef` · **When/context:** the owner's play of 2026-11-13 11:09, his frame · **Fixing:** first

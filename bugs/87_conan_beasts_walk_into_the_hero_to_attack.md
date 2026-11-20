@@ -1,5 +1,7 @@
 # Bug 87 — beasts walk INTO the hero to attack (the body overlaps the hero)
 
+> **GitHub issue:** [#25](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/25) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔴 OPEN — recorded from the owner's frame and words
 **Severity:** S2-visible (combat looks broken; the owner: «это выглядит как баг»)
 **Version/build:** Conan Exiles 3.0.1 build · **When/context:** 2026-11-07 22:22 +03:00 — the owner's frame in chat during the agent's stand run (a feral tiger attacking the hero)

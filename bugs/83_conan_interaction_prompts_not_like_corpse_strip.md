@@ -1,5 +1,7 @@
 # Bug 83 — the NPC talk prompt (and other interaction strips) still sits centred, large, on a dense backing — not like the corpse strip
 
+> **GitHub issue:** [#22](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/22) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔧 FIXED 2026-11-06 09:0x (functional pass, the owner's eye pending — review folder 65) · **Severity:** S2 (the owner's standing ask not carried to every widget) · **Version/build:** pack ConanExiles `1d6a62c`, KrinikConanUI
 `krinik_ui_fixes` (the corpse strip only) · **When/context:** the owner's frame 2026-11-03 23:30, recorded 2026-11-03 23:31 +03:00 (chat cb012770)
 **Fixing:** the next chat, first after the owner's queue

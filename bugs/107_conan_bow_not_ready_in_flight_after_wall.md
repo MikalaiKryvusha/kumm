@@ -1,5 +1,7 @@
 # Bug 107 — Conan: after a wall push the bow is not ready in the flight (the game re-equips for 1.35 s)
 
+> **GitHub issue:** [#40](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/40) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔧 SHIPPED 2026-11-17 10:46 +03:00 — pack `ee7e31c` (rearm r3 after judge round 1; TC B1′ pass on r3, a shot at 1.15 s flies too); the owner's real keys (RMB held through the push) are the final check · **Severity:** S2 (the owner's design of the
 bow in any flight, KrinikConanLocomotion) · **Version/build:** the Conan build on 3.1.0, pack `e6d1d97` · **When/context:** applying the owner's answer to
 interview #035, 2026-11-17 09:56–10:26 · **Fixing:** done 2026-11-17 11:08 +03:00 (pack `ee7e31c`); left — the owner's real keys

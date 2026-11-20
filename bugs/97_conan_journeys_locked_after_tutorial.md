@@ -1,5 +1,7 @@
 # Bug 97 — Conan: after the tutorial every journey but fishing is locked in the Journeys window (J)
 
+> **GitHub issue:** [#33](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/33) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔧 fix pending the owner's play — OUR hub controller showed a stale journey page; the native `RefreshGrid` on every show, cases J1b–J6 pass 10:39
 (section «Root cause found»); the other kept tabs — twin list checked 2026-11-14 12:3x, none stale · **Severity:** S2 (the
 owner's play misled: the game said «choose a journey» while our page showed them locked)

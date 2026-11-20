@@ -1,5 +1,7 @@
 # Bug 104 — Conan: in the bow aim (RMB), starting to move shifts the right hand with the arrow off the string to the right
 
+> **GitHub issue:** [#37](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/37) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🟡 the cause found 2026-11-17 06:15 — the game's own moving-aim pose (control with our mods out); the owner's choice asked on a page 06:2x · filed 2026-11-16 18:41 +03:00 · **Severity:** S2 (the owner's play of the archery he named important) · **Version/build:** Conan Exiles Enhanced 3.1.0 with the
 Krinik build (KrinikConanArchery, KrinikConanLocomotion, KrinikConanCamera) · **When/context:** the owner's word after his play of 2026-11-16 18:31–18:40 (look B) ·
 **Fixing:** this session — recon first (whose pose moves the hand: the game's moving-aim blend or ours), then the fix at the source (HOUSE_RULES rule 24)

@@ -1,5 +1,7 @@
 # Bug 85 — the game crashes in UE4SS when a key-bind Lua callback runs while the same mod's game-thread Lua runs (bow kill → «arrows in the corpse»)
 
+> **GitHub issue:** [#24](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/24) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔧 fix pending verification — cause found by source; KrinikConanArchery keybinds removed; twins in KrinikConanUI and KrinikConanCamera open
 **Severity:** S2 (the owner's play session lost to a crash; the class already cost a crash on 2026-10-28)
 **Version/build:** Conan Exiles 3.0.1 build, UE4SS 3.0.1 experimental build 1181 (`g83330635`, 2026-10-17) · **When/context:** 2026-11-07, the owner playing (bow kills of Imps), 21:17 +03:00

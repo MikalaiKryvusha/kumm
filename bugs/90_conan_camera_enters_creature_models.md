@@ -1,5 +1,7 @@
 # Bug 90 — Conan: the third-person camera goes inside creature models (a crocodile fills the screen with its skin)
 
+> **GitHub issue:** [#28](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/28) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔴 OPEN — cause found, PARKED by the owner: `[OWNER]` 2026-11-09 19:52 «просто в баг запиши, и вернись к твоей работе»; the fix waits for his pick of A / B
 **Severity:** S2 (the player loses the view in a fight)
 **Version/build:** Conan 3.0.1 + the Krinik build (pack after `e961480`) · **When/context:** 2026-11-09 19:52 +03:00, the owner's play in the agent's launch L6 of the quick-win series

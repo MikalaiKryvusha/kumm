@@ -1,5 +1,7 @@
 # Bug 74 — «E Взять» does not show over eggs in a nest that E takes
 
+> **GitHub issue:** [#19](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/19) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🔴 OPEN · **Severity:** S2 · **Version/build:** pack ConanExiles `2e75ec0`, KrinikConanUI 1.0.0 (`krinik_pickup_prompt`) · **When/context:** 2026-11-02 09:00 +03:00, the owner's play
 in the agent's run; `[OWNER]` «вот яйца, их пожно брать, а плашки Взять не появилось» · «баг» (his frame: two large eggs in a palm-leaf nest, the hero beside it,
 camera above)

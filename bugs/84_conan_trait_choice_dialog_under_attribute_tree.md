@@ -1,5 +1,7 @@
 # Bug 84 — Conan: the «Выберите Черту» (choose a trait) dialog is drawn UNDER the attribute tree and the tutorial header
 
+> **GitHub issue:** [#23](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/23) — the public tracker of this defect (HOUSE_RULES 44)
+
 **Status:** 🟡 the dialog part FIXED and seen 2026-11-10 10:0x (our pages' Z-order 41 → 40; T1 fail → T2 pass); the map «without tabs» not reproduced ·
 **Severity:** S2 · **Fixing:** the map symptom — when the owner sees it again (a frame and the keys he pressed), or by a wider hunt (mouse tab clicks, RMB on the map)
 **Version/build:** Conan 3.0.1 build, KrinikConanUI with `krinik_hub_controller` (plan 48), 2026-11-07 · **When/context:** the owner's screenshot in chat
