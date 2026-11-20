@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0579 · 2026-11-20 · ❌→✅ · #russian #release-notes #owner-text #storefront #calque #personification
+class: text-in-agents-world
+mechanized: no — the voice lint and a clean-instance read both passed «Лаунчер говорит» and «тени идут за солнцем»; only the owner's reading caught them
+**Context:** the owner read the published 0.9.1-RC1 page line by line (2026-11-20 16:19–16:34, chronicle entry 16:23–16:25) and stopped at five lines.
+**Result:** ❌→✅ — three defect classes, none caught by the linters: (1) a program, a material or a shadow given a human or living verb («лаунчер говорит», <!-- ru-ok: the defective phrases quoted -->
+«материал не сообщает», «тени идут за солнцем») — «люди говорят, а не программа»; (2) a large work described by one vague line («игра реже замирает на миг», <!-- ru-ok: the defective phrases quoted -->
+«тени плавно движутся вслед за солнцем») while the measured facts sat in the run reports; (3) a private detail of a feature standing as its own item (the
+sprint zoom). The notes were rebuilt by large features, each with its facts and numbers (pack `75ba95d`).
+**Lesson:** before the first word of a storefront text, list the version's big works and pull each one's numbers from its run report; write one paragraph per
+feature; a sentence whose subject is a program, a file or a natural thing takes a verb that the thing can do («показывает», «устраняет», «движется»), never
+«говорит», «сообщает», «идёт за»; a line that only refines another line folds into it. Read every sentence aloud and ask «would a Russian say this?».
+**Trigger:** writing release notes, a README, a guide section or a launcher string.
+
 ### EXP-0578 · 2026-11-20 · ❌ · #chat #language #owner-trust #long-session #guard
 class: text-in-agents-world
 mechanized: none yet — `tools/hooks/ru-reply-check.mjs` checks Russian text and passes an English reply whole; owed: a Stop-hook check that refuses a reply to the owner written mostly in Latin letters
