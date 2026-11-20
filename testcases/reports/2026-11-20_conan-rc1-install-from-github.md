@@ -66,7 +66,8 @@ Functional run: the released launcher on a fresh 3.1.1 copy, walked by its own b
 ## 6. Traces
 
 `KUMM/.work/rc1_install/tmp/KrinikConanLauncher.log` · `KUMM/.work/rc1_install/Conan_311/ConanSandbox/Binaries/Win64/ue4ss/UE4SS.log` ·
-`KUMM/.work/rc1_install/frames/menu1.jpg` (the pack's splash), `frames/menu2.jpg` (the main menu) — git-ignored work files, removed with the copy after the run.
+`KUMM/.work/rc1_install/frames/menu1.jpg` (the pack's splash), `frames/menu2.jpg` (the main menu), `frames/single*.jpg` (the path into the world) — git-ignored work
+files, removed with the copy at 16:51 (rm-tree: rc1_install 103.43 GB, rc1_release 13.75 GB); what they showed is written in the Checks table above.
 
 ## 7. Verdict
 

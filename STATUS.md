@@ -163,7 +163,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    Open from his questions: the menu tab text jitter (bug 64 row 6) was never re-tested after the hub rework — a 60 fps video on the RC1 copy decides the known-issue line.
 > 1. **RC1 install test from GitHub — PASS, the whole player path** (report `testcases/reports/2026-11-20_conan-rc1-install-from-github.md`): download 21 min,
 >    unpack 1 min, install 74/74, «Играть», the menu «0.9.1-RC1», a new world with 66/66 mods and the pack's HUD (16:49). The game closed by PID, the lock released.
->    The classifier refused removing `KUMM/.work/rc1_install` + `rc1_release` (≈ 93 GB, D: had 13 GB free at 16:49): the owner runs `KUMM/.work/rc1_cleanup.cmd`.
+>    `KUMM/.work/rc1_install` + `rc1_release` removed 16:51 (117 GB; D: 134 GB free) by rm-tree in the allowed form (HOUSE_RULES 15, EXP-0580).
 >    Three S3 findings in the report (no log line for «Играть»; the installer's misleading «Engine.ini not touched»; «Подтвердить» over its Enter badge).
 > 2. **Cleanup the classifier refused me:** `KUMM/.work/svarog_cleanup.cmd` (SvarogsDream `_harness` 20.5 GB, «НА ОТСМОТР НИКОЛАЕМ», `src/*/bin|obj`) — the owner
 >    ordered it («чисти мусор», «отсмотр удаляй» 16:12) and runs it himself; `KUMM/.work/automode_rule.mjs` adds his standing cleanup permission («разрешаю»

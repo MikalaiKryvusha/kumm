@@ -115,7 +115,10 @@
     `.work\` (`_paksview-*`, `_text-extract-*`) is named in STATUS with its size and the task that needs it; when the task closes, the tree goes.
     Explicit garbage of the agent's own work (a stale stand, a build, an unpack, frames, logs under `KUMM\.work\` or the pack's `_scratch\`) is deleted at once
     without asking, by `node ConanExiles/_config/rm-tree.mjs <dir>`; the auto-mode classifier allows exactly this (`.claude/settings.local.json` → `autoMode.allow`).
-    `[OWNER]` 2026-11-13 18:57 · verbatim in `PROJECT_HISTORY.md` entry 2026-11-13 18:57 · 2026-11-18 19:19–19:20 (entry 2026-11-18 19:2x).
+    The permission matches one written form only, so the command is sent alone in its tool call, with absolute `D:/` paths:
+    `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs D:/work/ai_sandbox/KUMM/.work/<dir> …` — no `/d/…` spelling, no relative path, no pipe or second command
+    after it (each of them made the classifier refuse the cleanup twice on 2026-11-20). Cleaning up is the agent's duty; a refusal is fixed by the form, never handed to the owner.
+    `[OWNER]` 2026-11-13 18:57 · verbatim in `PROJECT_HISTORY.md` entry 2026-11-13 18:57 · 2026-11-18 19:19–19:20 (entry 2026-11-18 19:2x) · 2026-11-20 16:50–16:51 (entry 2026-11-20 16:50).
 16. **A game is worked with in two ways — in front and in the background; the owner picks one at the moment, the agent masters both.**
     1. Launch by the path the owner named last: Conan — `launch-fg.ps1` (in front) or `launch-bg.ps1` (background), `HOUSE_RULES_REFERENCE.md` §6.
     2. The two paths differ ONLY in whether the owner sees the game on his screen. Every instrument and every kind of work — remote calls, frames,

@@ -3,6 +3,14 @@
 
 
 
+## 2026-11-20 16:50 +03:00 — the owner on the cleanup handed to him: cleaning up is the agent's duty
+
+> The agent's rm-tree of `KUMM/.work/rc1_install` + `rc1_release` was refused by the classifier twice; the agent wrote a `.cmd` for the owner. The owner 16:50–16:51:
+> «запускай ты» · «ЭТО НАХУЙ ТВОЯ ОБЯЗАННОСТЬ!Й!!!/» · «я сейчас клавиатуру сломаю!!! Я ЗАЕБАЛСЯ ТЕБЕ ПРИКАЗЫВАТЬ ТО ЧТО ПО СТО РАЗ ГОВОРИЛ ТЕБЕ ДЕЛАТЬ!!!!\» ·
+> «РАЗРЕШАЮ!» · «МЕНЯЕМ ПРАВИЛА!"» · «правь свои ебучие settings!!!!!». Found: the permission existed since 2026-11-18 (`Bash(node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs
+> D:/work/ai_sandbox/KUMM/.work/*)`); the refused commands spelled the path `/d/…`, relative, with a pipe. The same command in the allowed form ran at 16:51 and removed
+> 117 GB (rc1_install 103.43 GB, rc1_release 13.75 GB). HOUSE_RULES rule 15 now carries the exact form.
+
 ## 2026-11-20 16:23–16:25 +03:00 — the owner reads the RC1 notes line by line: a program does not «speak», the big work is undersold, a detail is not a feature
 
 > On «Лаунчер говорит по-русски и по-английски» (16:23): «никто так из русских людей не пишет» · «говорят Лаунчер поддерживает мультиязычность» · «не пишут

@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0580 · 2026-11-20 · ❌→✅ · #cleanup #permissions #classifier #auto-mode #owner-trust
+class: a refused command read as a missing permission, while only its spelling missed the existing rule
+mechanized: HOUSE_RULES rule 15 names the one allowed form; no guard yet
+**Context:** removing the RC1 test copy (103 GB) and the release work files (14 GB) after the install test.
+**Result:** ❌→✅ — the classifier refused `cd … && node /d/work/…/rm-tree.mjs .work/rc1_install … | tail; df` twice; the agent handed a `.cmd` to the owner, who
+had ordered the cleanup as the agent's duty more than once and exploded (chronicle entry 2026-11-20 16:50). The allow rule existed since 2026-11-18:
+`Bash(node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs D:/work/ai_sandbox/KUMM/.work/*)`. The same command alone, with absolute `D:/` paths, ran at once.
+**Lesson:** before calling a refusal a missing permission, read the allow list (`.claude/settings.local.json` → `permissions.allow`, `autoMode.allow`) and send
+the command in exactly the allowed spelling, alone in its call; handing the agent's own duty to the owner is the failure, not the refusal.
+**Trigger:** any refused cleanup, deletion or other action the owner has already permitted.
+
 ### EXP-0579 · 2026-11-20 · ❌→✅ · #russian #release-notes #owner-text #storefront #calque #personification
 class: text-in-agents-world
 mechanized: no — the voice lint and a clean-instance read both passed «Лаунчер говорит» and «тени идут за солнцем»; only the owner's reading caught them
