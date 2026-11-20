@@ -80,6 +80,13 @@ expand the collapsed meter — the player expands it by holding F1 and clicking 
 пультом: `exec dc PIFCSettings` и т. п.; консоль игры 3.0.1 — `~` (на русской раскладке Ё) и F10 (живые `InputSettings.ConsoleKeys`:
 Tilde, ё, F10).
 
+**NPC talk windows (read live 2026-11-20 20:02, 3.1.1, KUMM issue #3):** the table holds TWO — `NPCDialogueWindow` and `NPCDialogueWindow2`; the oasis campfire NPC
+«Поборник Внешней тьмы» (`BP_HumanoidDialogueNPC_C`, −82361, 231375) opens the SECOND by a real E. Both are full-screen (`IsFullscreenGUIActive` true); which one is
+open — `FindFirstOf('GUIModuleController'):IsModuleActive(FName('NPCDialogueWindow2'))` (true while the talk is open). Other «dialog» rows are not NPC talks:
+`DialogueNPCInfo` (the floating «Нажмите E, чтобы говорить» prompt), `PasswordDialog`, `PlayerMarkerDialog`, `ConnectingDialog`, the store and PackRat dialogs,
+`IronlightTalkToClaude` (a window of the Ironlight mod, not opened yet). HYPOTHESIS, not observed (case D2 blocked): a talk's reply text waits on game time, so a world
+slowed by a mod stretches it (the owner 2026-11-20 20:02: a chosen reply «did nothing» while the voice played). Stand: `ConanExiles/_config/dialogue-stand.lua`.
+
 Вкладки хаба (снято 2026-10-26): Q/E = `W_Carousel_C:NextCarouselWindow()` / `PrevCarouselWindow()` (пультом, без клавиш). Вкладку «Снаряжение»
 выдаёт модуль `XCS_Panel` (боковая панель «Моды Xevyr»): открыт с хабом на «Снаряжении», закрывается при уходе на другую вкладку. Окно модуля —
 `XCS_W_Container_C` (`WindowRoot`, класс `/Game/ModsShared/Xevyr_Shared/CommonSettings/XCS_W_Container`): создаётся заново при каждом входе на «Снаряжение»,

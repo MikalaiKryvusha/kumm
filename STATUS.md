@@ -148,11 +148,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > HOUSE_RULES 30 cancelled by the owner 19:37 (no busy-keyboard rule, hook unwired, guards removed). This chat's progress lines verbatim — chronicle, entry
 > «STATUS bonsai trim, part 8».
 > **FIRST in the next chat (the owner ordered autonomous work 19:37):**
-> 1. Case D1 of `testcases/TC_conan_hub_game_pages_map_journey_2026-11-20.md` — a dialogue keeps the world at 1.0 (`NO_SLOW_MODULES` in `krinik_pause_in_menu.lua`,
->    deployed in the working game) → issue #3; then N1, N3 (every button of the five other copied hub tabs — the next suspects of the same root), M2.
-> 2. The judge round owed on pack `dc79053` (skipped late in this chat — memory `helpers-cost-owner-tokens`).
-> 3. The next roots (plan 59, issue clusters): the bow states (#2, #5, #8, #9, #30, #40); first person and shadows (#4, #13, #34); the immortal heroine (#6 — first
->    check whether my dev god mode stayed in his save); the name plate (#10). Every fix: control case, real input, comment on its issue, a matrix row.
+> 1. **Chat of 19:53 (resume, autonomous) — done, pack `29a612b` pushed, judge 2 rounds:** issue #3 — my first fix (`dc79053`) missed: the oasis campfire talk
+>    opens `NPCDialogueWindow2`; the poll now asks the game for both talk windows (`IsModuleActive`), the owner's word 20:03 «лучше убрать паузу во время
+>    диалогов»; D1, D3 pass in his world, D2 (his reply-option talk) blocked — his retest (report `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`).
+>    Issue #6 — the save keeps my god mode across sessions; his save is mortal again; `enter-world-remote.sh` reads the flag at every entry (report
+>    `testcases/reports/2026-11-20_conan-immortal-heroine-save.md`; my stand killed the heroine once, restored from the game's backup; a 4 HP corruption mark
+>    of my run stays). Both issues commented, open until the retest. The dev harness (remote, menu probe) is installed in his working game since 19:57 —
+>    remove it (`ue4ss/Mods/KrinikAgentRemote`, `KrinikMenuProbe`, `KrinikConanBench`) when the game work of the chat ends. The owner plays other games on this
+>    PC (20:28 Underground 2): launch Conan by the BACKGROUND path only, keys by `post-key.ps1` (E added).
+>    Next: N1 (switches between the four game pages — the empty backing risk of judge round 1), N3 (every button of the five copied tabs), M2; then the dead
+>    REFRESH / minimap adapter code of `krinik_hub_controller.lua` goes with N3's decision.
+> 2. ~~The judge round owed on pack `dc79053`~~ — done 20:15 together with the dialogue fix (2 rounds, `29a612b`).
+> 3. The next roots (plan 59, issue clusters): the bow states (#2, #5, #8, #9, #30, #40); first person and shadows (#4, #13, #34); the name plate (#10). Every fix: control case, real input, comment on its issue, a matrix row.
 > 4. Plan 59 steps 2–6: fill the matrix from the nine mods' notes and show it to the owner as a page; the play-report template and its check; the gate in
 >    `make_release.sh`; the KAIF improvement request.
 > 5. Owed to the owner (17:40): views of the mods' NEW locations (Shemite City State, Caverns of Set / Akhlut Outpost, Ymir's Respite, the Al-Merayah fortress) and a

@@ -6,10 +6,10 @@
 | Issue | Title | Local document |
 |---|---|---|
 | [#2](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/2) | Archery: the bow in the hands vanishes during an animation and abruptly reappears | — |
-| [#3](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/3) | Dialogues: the world pauses during NPC dialogues (check whether this is intended and whether it breaks dialogues) | — |
+| [#3](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/3) | Dialogues: the world pauses during NPC dialogues (check whether this is intended and whether it breaks dialogues) | `testcases/TC_conan_hub_game_pages_map_journey_2026-11-20.md` D0–D3, report `testcases/reports/2026-11-20_conan-dialogue-world-pace.md` — fixed (pack `29a612b`), the owner's reply-option retest open |
 | [#4](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/4) | First-person view: the bow slung on the back is visible in front of the camera | — |
 | [#5](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/5) | Archery: the bow model in the hands is invisible after the knife is used | — |
-| [#6](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/6) | Combat: enemies deal no damage to the hero | — |
+| [#6](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/6) | Combat: enemies deal no damage to the hero | `testcases/TC_conan_immortal_heroine_2026-11-20.md`, report `testcases/reports/2026-11-20_conan-immortal-heroine-save.md` — cause: the save keeps my god mode; guard at entry (pack `29a612b`); retest open |
 | [#7](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/7) | Quick loot: the selection rim stands on the first item as soon as the window appears | — |
 | [#8](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/8) | Archery: drawing the bow from a crouch makes the hero stand up | — |
 | [#9](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/9) | Archery: after a draw from a crouch every standing draw lifts the hero slightly off the ground | — |

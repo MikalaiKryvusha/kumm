@@ -91,6 +91,26 @@
 
 ## Entries
 
+### EXP-0587 · 2026-11-20 · ❌→✅ · #conan #stand #damage #owner-save #death
+class: a damage check run against a crowd with sparse reads
+mechanized: no — the stand rule: one creature, reads every 0.5 s, god back on below half health
+**Lesson:** to see that the hero takes damage I put the owner's heroine next to a kappa PACK and read her health every 4 s — she died in 16 s (215 → 0)
+and her gear lay on the corpse. A damage check needs one weak creature and dense reads with a stop (god on) at a threshold; the world save rotates
+`Game_1_backup_<n>.db` about every 5 minutes, and `save-restore.sh` from the newest backup before the death put her back.
+
+### EXP-0586 · 2026-11-20 · ❌→✅ · #conan #save #god-mode #stand #owner-trust #issue6
+class: a dev cheat state that the game's save keeps
+mechanized: `ConanExiles/_config/enter-world-remote.sh` reads `bCanBeDamaged` after every agent entry and prints «ВНИМАНИЕ…» when god mode is on
+**Lesson:** Conan's world save keeps the hero's god mode across sessions (`CheatManager:God()` → `bCanBeDamaged` false survives a fresh launch);
+my stands switched it on and ended by killing the game, so the owner's heroine stayed immortal (issue #6). A cheat of a run is undone and SAVED
+before the run ends, and the entry path reads it, so a leftover is seen at the next entry instead of in the owner's play.
+
+### EXP-0585 · 2026-11-20 · ❌→✅ · #conan #ui #modules #twins #issue3
+class: a fix keyed by one module name where the game has siblings
+mechanized: no — the twin step: list the class from the live `DT_UIModuleTable` (`ForEachRow`) before writing a name list
+**Lesson:** my first fix of the talk slowdown named `NPCDialogueWindow` from one log line; the oasis campfire talk opens `NPCDialogueWindow2` and the
+world still went to 0.03. One live read of the module table (254 rows) gave both names in a second; a fix by name starts from the inventory of names.
+
 ### EXP-0584 · 2026-11-20 · ❌→✅ · #github #issues #publish #look-at-what-leaves
 class: a batch tool sent what appeared after the agent's reading
 mechanized: `.work/issues/file_issues.mjs file <names…>` files only the drafts named after reading (refuses with no names)

@@ -56,7 +56,9 @@ release ever read.
 - [ ] 3. The play-report template and its check (`testcases/_play-report-template.md`, a check script the gate calls); prove the check red on the RC1 install
       report (a narrow pass, no «Not covered:», no play hour).
 - [ ] 4. The gate in `make_release.sh` and in the publication step; prove it red on the current RC1 tree, green on a report that fills the template.
-- [ ] 5. `god-on.sh off` + the read line in the stand teardown; check the owner's working save for damage (bug: the immortal heroine) — first, before any fix.
+- [x] 5. `god-on.sh off` + the read line in the stand teardown; check the owner's working save for damage (bug: the immortal heroine) — first, before any fix.
+      DONE 2026-11-20 20:31: the save keeps god mode (G0, G3); `enter-world-remote.sh` reads the flag at every agent entry (G4 red and green); the owner's save
+      left with god OFF; issue #6 commented, its retest is a fight with humanoids and his play (report `testcases/reports/2026-11-20_conan-immortal-heroine-save.md`).
 - [ ] 6. KAIF improvement request: a process remedy left as a document (plans 32, 47, 59) — the class and the gate (remedy 5).
 - [ ] 7. The health metric: the owner's next half hour of play on RC2 brings fewer findings than this one (≥ 12 in 30 min); not fewer — revise §3.
 
