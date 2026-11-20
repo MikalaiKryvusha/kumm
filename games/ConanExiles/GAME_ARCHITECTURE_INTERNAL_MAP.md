@@ -952,6 +952,12 @@ Temperature (2026-10-30, live + Hosav bytecode): the hero's temperature is `BPEn
   keyboard back, then the remote ran `W_IngameMenu_C:CloseAndReturnToMainMenu` → the same `Subresource … [8, 8, 1]` copy check → `D3D12CommandList.cpp:244
   E_INVALIDARG` fatal, no Lua or Blueprint on the stack. Rule: ANY map transition (world entry, return to the menu) runs with the window restored; to hand the
   keyboard back, start by `launch-bg.ps1` (the window stays behind, not minimized) instead of minimizing a running game.
+- **A fresh install's path into a world** (2026-11-20 16:41–16:49, game 3.1.1, the RC1 install test, real clicks by `mouse-seq.ps1` at fractions of a 4K screen):
+  «Продолжить» stands in the menu even with no save and does nothing (the game log: `UConanGameInstance::ContinuePreviousClientSession: No save game profiles
+  found`). The new-player path: «Одиночная/Совместная игра» (0.17, 0.523) → adventure slot 1 (0.24, 0.51) → «Одиночный режим» (0.656, 0.437) → «Запустить
+  игру» (0.745, 0.963) → «Подтвердить» (0.5, 0.507) → the world loads ≈ 50 s → «Мужчина» (0.348, 0.766) → «Персонаж готов» (0.93, 0.963) → the name plate:
+  «Изменить» (0.495, 0.818), type, Enter, «Подтвердить» (0.59, 0.818) → the intro film ≈ 3 min → the hero in the world. Typed letters follow the active keyboard
+  layout (TEST came out as «еуые» under the Russian layout).
 - **`WBP_QueuedNotificationWindow_C` lives under the GAME INSTANCE**, one instance from the main menu on (`…GameInstance…WBP_QueuedNotificationWindow_C_<N>`),
   visibility 4 (SelfHitTestInvisible) — whatever collapses it in the menu keeps it collapsed in the world. `KrinikMenuProbe` did so 25 s after every
   start from 2026-10-25 to 2026-10-31 (a refuted experiment left in; removed).
