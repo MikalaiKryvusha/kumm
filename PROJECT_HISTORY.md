@@ -1,5 +1,17 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-21 00:28 +03:00 — the owner on the launcher's update: a small update must not download the whole 13 GB (recorded 00:28)
+
+After my report that the RC1 launcher updated to RC2 by downloading the whole 12,8 GB archive in 21 minutes, the owner, verbatim:
+
+> для такого мелко обновления нужно все 13 гигов перекачивать?????? что за бред
+>
+> (00:29) нужно делать умную систему
+
+What RC2 changed against RC1: the KrinikConanUI pak (12,7 MB), its Lua scripts, the manifest, the guide — the rest of the 13 GB is byte-identical. The
+launcher 1.0.0 knows only the whole archive (plan 54 case B). Taken as the owner's requirement for the launcher: an update downloads only what changed
+(a per-file manifest with hashes, or a patch archive from the previous release); recon of the industry's way (Steam depots, itch.io butler, zsync) first,
+then a plan; the first item of the next chat (STATUS).
 
 
 

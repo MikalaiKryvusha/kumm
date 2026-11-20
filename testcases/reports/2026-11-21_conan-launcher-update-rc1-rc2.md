@@ -47,6 +47,15 @@ installer's summary READ, the player's settings file and the installed UI pak re
 - The RC1 bundle folder `Krinik_Mod_Pack_0_9_1_RC1` stays in the game folder beside the RC2 one after the update; the launcher offers to delete a previous
   bundle by its own dialog (plan 54 L9) — not seen in this run, the restarted launcher showed no such box in its log. Not a defect yet: noted to look at.
 
+- **The uninstall after the update (run 8, 2026-11-21 00:28–00:32):** the RC2 launcher's «Удалить сборку» → its box «Удалить сборку Krinik и вернуть игру в тот
+  вид, в каком она была до установки сборки?» → «Да»; the uninstaller's console removed the mods and UE4SS and stopped on its final `pause`; I closed that console
+  by PID instead of a key press (a key needs the console in front of the owner's screen), so its self-delete did not run. `download-check.mjs list` against the
+  download's hash list: missing 0, bad size 0, extra 377 files = the two bundle folders `Krinik_Mod_Pack_0_9_1_RC1` and `…_RC2` (13 722 796 657 B and 13 722 825 809 B)
+  and `uninstall_krinik_build.cmd` — the game itself is back to clean.
+- **The RC1 bundle stays after the update** — 13.7 GB left beside RC2 (the launcher's previous-bundle delete offer did not show).
+- **After the uninstall the launcher showed the screen «installed»** (log 00:31:31) where HOUSE_RULES 26 expects «Установить сборку» — the game is clean by the
+  hash list; a defect candidate to reproduce and file.
+
 ## 6. Traces
 
 `KUMM/.work/rc2_update/tmp/KrinikConanLauncher.log` (both launchers' lines), `KUMM/.work/rc2_update/dialog1.txt` (the confirmation box), the copy

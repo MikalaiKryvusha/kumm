@@ -168,6 +168,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > texts kept in `_config/release/published_0_9_1-RC2`); the shipment dir and the RC1 parts deleted. U1 pass (RC1 from local parts, 74/74, 0 missing), U2 pass
 > (the RC1 launcher: «новейшая 0.9.1-RC2», screen `update`), **U3 pass 00:22** (21 min download, 74/74, 0 missing), **U5 pass** (the player's marker kept), U4
 > by proxy (the installed UI pak carries «0.9.1-RC2») — report `testcases/reports/2026-11-21_conan-launcher-update-rc1-rc2.md`. The machine lock released 00:27.
+> **🔥 OWNER'S WORD 2026-11-21 00:28 — FIRST next: the launcher's update must download only what changed, never the whole 13 GB for a small update**
+> (verbatim — chronicle entry 2026-11-21 00:28). Recon (Steam depots / itch.io butler / zsync / a patch archive from the previous release) → a plan in the
+> launcher epic (plans/57, plan 54 case B) → code → the update RC1 → RC2 again on the copy, measured in MB; a GitHub issue «Launcher: an update downloads the
+> whole archive» by rule 44. The recon is at a helper since 00:30 → `researches/conan-launcher-delta-update/README.md` (read it first).
+> Also from the uninstall check 00:28–00:32 (the same report): the game returned to clean (hash list: missing 0, bad 0); the RC1 bundle (13.7 GB) stays
+> after the update; after the uninstall the launcher showed «installed» instead of «Установить сборку» (HOUSE_RULES 26) — reproduce, file, fix.
 > Owed next: the issues #3 #11 #12 #33 get «вошло в v0.9.1-RC2» comments (close only after their open cases M2, N1, N3, D2); the RC1 bundle folder stays beside
 > RC2 in the copy (look at the L9 delete offer); the test copy `KUMM/.work/rc1_install` (≈ 59 GB + 2 bundles) and `KUMM/.work/rc2_update` to remove when the
 > RC1/RC2 install checks close (the uninstall back to the clean game is the one left); the Svarog cleanup needs a wider auto-mode rule or the owner's hand.
