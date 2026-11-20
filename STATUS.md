@@ -152,7 +152,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    waived by his word through `KRINIK_PLAY_GATE_WAIVER` · «отгрузили игрокам сломанное гавно» · «максимально быстро чинить» · «это будет новый релиз формально»).**
 >    Done: packVersion 0.9.1-RC2, notes `ConanExiles/_config/release/draft_0_9_1/github_release_notes_0_9_1_RC2.md` (four fixes worded «был баг — исправлен» by his
 >    21:12 word, voice-lint 0), KrinikConanUI change note + the RC2 lines, pack `e1c0691` pushed (judge round of 21:14 read, its findings below).
->    A `make_release.sh` run started 21:14 into `KUMM/.work/rc2_release` (log `KUMM/.work/rc2_release.log`) — BUT its KrinikConanUI pak carries the menu
+>    A `make_release.sh` run of 21:14 (log `KUMM/.work/rc2_release.log`) was STOPPED by me at step 2b — the partial export lies in `KUMM/.work/rc2_release` (empty it by `rm-tree.mjs` first); its KrinikConanUI pak carries the menu
 >    version line «0.9.1-RC1» (kit `kit-conanui-edit.py` PACK_VERSION is read at the KIT build): **first** rebuild the UI kit pak (`kit-conanui-edit.py`,
 >    `kit-krinik-modsettings.py` ×2, `kit-krinik-click-events.py` ×2, `kit-buildmod.py KrinikConanUI`, copy into `_unpacked`, deploy, `set-pak-modinfo.py`),
 >    then a clean `make_release.sh` again (empty the work dir file by file, `rm-tree.mjs`). Then the whole HOUSE_RULES 42 list: the GitHub release `v0.9.1-RC2`
