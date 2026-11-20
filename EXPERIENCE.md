@@ -91,6 +91,26 @@
 
 ## Entries
 
+### EXP-0584 · 2026-11-20 · ❌→✅ · #github #issues #publish #look-at-what-leaves
+class: a batch tool sent what appeared after the agent's reading
+mechanized: `.work/issues/file_issues.mjs file <names…>` files only the drafts named after reading (refuses with no names)
+**Lesson:** a filing script that sends «every draft not yet filed» also sends the drafts a helper wrote while the agent read the first ones — five public issues
+went out unread (2026-11-20 19:22). A tool that publishes takes the exact list the agent read, never «everything present».
+
+### EXP-0583 · 2026-11-20 · ❌→✅ · #conan #hub #ue4ss #widget #copy #module
+class: a copy of a native page made by `WidgetBlueprintLibrary:Create` is not the game's module
+mechanized: `krinik_hub_controller.lua` `GAME_PAGE` (tabs 1, 4, 5, 8 are the game's own pages; pack `dc79053`); the five other copies — case N3 owed
+**Lesson:** our hub kept standalone copies of the game's tab pages (Create + AddToViewport) — the game never activated them as its GUI modules, and their
+functions died where they depend on that: the map's markers (#12), «Начать путешествие» (#11). A copied native page is a picture until EVERY button of it is
+walked by a real click; the shadow-page design was tested only by remote switches, never by the player's clicks.
+
+### EXP-0582 · 2026-11-20 · ❌ · #process #testing #remedy #owner-trust #release
+class: a process remedy left as a document
+mechanized: no — owed by plan 59 step 4 (the release gate in `make_release.sh` on a play report)
+**Lesson:** the owner's bug waves of 2026-10-18 and 2026-11-20 had ONE root («the check went from my edit, not from the player»); plan 32 named it and plan 47
+ordered play instead of fly-throughs — neither had a single step done, and RC1 shipped with blockers the owner found in 30 min. A remedy that no step of the
+release reads does nothing: it becomes a gate, a hook or a script in the same move, or it is debt named at every closing.
+
 ### EXP-0581 · 2026-11-20 · ❌→✅ · #chatgpt #image #art #readme #alpha
 class: variants of one design generated in separate requests
 mechanized: no

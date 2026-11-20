@@ -138,36 +138,29 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **PARKED 2026-11-20 17:42 +03:00 (the owner: pause now, no ceremonies).** Done this chat: the working game `D:\Games\Conan Exiles 3.1.1` is on the RELEASE build 0.9.1-RC1
-> (uninstall of the dev deploy by the launcher's own `cmd /c "… < nul"` — 11 files back, 166 removed, `download-check list` missing 0 / badSize 0; the RC1 launcher
-> off-screen installed from the parts in `.work/rc1_dl`: «74/74 mods · verify 115 present, 0 missing», screen `installed`; saves 26/26 identical before / after;
-> dev leftovers in `ue4ss/Mods` removed; work files `.work/wg_rc1`). README: the four identical oasis frames replaced (pack `6047b6e`, `494d16c`) by one row of
-> three — oasis, first-person bow, Xevyr's mods settings; the bow calque fixed in the README table, notes draft, change notes, guide HTML. NOT YET: the public
-> repo commit — the tree is mirrored into `.work/public_repo` (scan 0, README diff read), `git add -A` there is NOT used: add README.md, the 3 changed texts
-> and `art/screenshots/{bow_first_person,fishing_settings,mods_settings}.webp`, commit, push, then look at the rendered page; LICENSE shows as modified by line
-> endings only — leave it out. OWED (the owner 17:40): views of the NEW locations the mods add (Shemite City State, Caverns of Set / Akhlut Outpost, Ymir's
-> Respite, the Al-Merayah fortress) shot in the working game, plus a new hub frame (the old one shows the test name «еуые»), shown to the owner as a page before
-> they go in the README; the working game's in-game check (menu «0.9.1-RC1», his world `Game_1`) needs the owner FREE. RC2 notes: the launcher counts 72 of 74
-> mods in its progress while the installer says 74/74; the game's `Saved/ExtractedMods` (12.8 GB) stays after an uninstall.
-> **19:1x — the owner's verdict on RC1 («неиграбельное дерьмо», 12+ bugs in 30 min of his play): HOUSE_RULES 44 — every bug of the build becomes an issue of
-> the public repo; two helpers draft them into `.work/issues/` (BRIEF.md), `node .work/issues/file_issues.mjs scan` → `file` files them (scan proven red on a
-> control draft); issue #1 answered and closed by his word. Process — `plans/59_…` (+ `_ru.md`): the release gate on a play report, the coverage matrix,
-> cheats never stay; the two earlier remedies (plans 32, 47) were never executed — that is the diagnosis.**
-> **19:42 — FIXED and seen by real input on the owner's game (pack `dc79053`, report `testcases/reports/2026-11-20_conan-hub-game-pages-map-journey.md`): the hub's
-> «Карта» and «Путешествие» are the game's own pages — «Начать путешествие» (the owner's «Начать приключение», issue #11) starts the journey; two markers at their clicks
-> and the reset work (issue #12); journeys page fresh (issue #33). Owed: case D1 (the dialogue without slowdown, `NO_SLOW_MODULES` deployed, not run), N1 / N3 / M2,
-> the judge round on `dc79053` (skipped late in the chat), comments on issues #11 / #12 / #33 / #3 after the retest. Rule 30 CANCELLED by the owner 19:37
-> (hook unwired, guards removed) — real input does not wait for an idle keyboard. Autonomous work ordered 19:37.**
-> **19:3x — 42 issues filed (#2–#43, index `bugs/GITHUB_ISSUES.md`; every local bug names its issue). The first root: the hub controller's standalone page
-> copies. DEPLOYED into the working game 19:31 (`Deploy-ModPack.ps1 -Deploy -Only KrinikConanUI`; verify: only the dev-only Music / Harness files missing, as for
-the release build), NOT committed in the pack, NOT run yet — the game was left in the main menu at 19:32 when the owner came back to the keyboard (machine lock
-`kumm` to 20:31): `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_hub_controller.lua` `GAME_PAGE` + tabs 5 (Путешествие)
-> and 8 (Карта); and `krinik_pause_in_menu.lua` `NO_SLOW_MODULES = { NPCDialogueWindow }` (issue #3: the log shows the dialogue slowed to 0.03). Run
-> `testcases/TC_conan_hub_game_pages_map_journey_2026-11-20.md` M0 and D0 (the CONTROLS on the current build) first, when the owner frees the game.**
-> **FIRST after the pause — the owner's bugs from his own play of the RC1 build (18:33–18:34): `bugs/112_…` the «Начать приключение (Пробел)» button does not
-> work (critical), then `bugs/111_…` a name plate in replacement diamonds and katakana.** The desktop: «Krinik Conan.lnk» → the release launcher is there since 17:5x
-> (the owner launches from the desktop); the old «Krinik Conan (dev).lnk» and `Krinik_Launcher_dev` in the game folder are still there (its deletion was refused
-> by auto mode — ask the owner or he deletes it).
+> **CHAT CLOSED 2026-11-20 ≈19:5x (the chat of 17:22 «resume»; soft closure at the 80 % budget).** Done: the working game `D:\Games\Conan Exiles 3.1.1` moved to
+> the 0.9.1-RC1 release build (uninstall by the launcher's own `< nul` path, install from the parts by the RC1 launcher off-screen, saves 26/26 equal); the public
+> README's four identical oasis frames replaced by one row of three captioned shots (public `2a86cad`); after the owner's 30-min play of RC1: HOUSE_RULES 43 (mistakes
+> in the first person) and 44 (every build bug is an issue of the public repo) — 42 issues #2–#43 filed (index `bugs/GITHUB_ISSUES.md`, every local bug names its
+> issue), issue #1 answered and closed; process plan `plans/59_…` (+ `_ru.md`): two earlier remedies (plans 32, 47) were never executed, the cure is a release gate
+> on a play report; the play matrix skeleton `testcases/TC_conan_play_matrix.md`; FIXED and seen by real input (pack `dc79053`, report
+> `testcases/reports/2026-11-20_conan-hub-game-pages-map-journey.md`): the hub's «Карта» and «Путешествие» are the game's own pages again (issues #11, #12, #33);
+> HOUSE_RULES 30 cancelled by the owner 19:37 (no busy-keyboard rule, hook unwired, guards removed). This chat's progress lines verbatim — chronicle, entry
+> «STATUS bonsai trim, part 8».
+> **FIRST in the next chat (the owner ordered autonomous work 19:37):**
+> 1. Case D1 of `testcases/TC_conan_hub_game_pages_map_journey_2026-11-20.md` — a dialogue keeps the world at 1.0 (`NO_SLOW_MODULES` in `krinik_pause_in_menu.lua`,
+>    deployed in the working game) → issue #3; then N1, N3 (every button of the five other copied hub tabs — the next suspects of the same root), M2.
+> 2. The judge round owed on pack `dc79053` (skipped late in this chat — memory `helpers-cost-owner-tokens`).
+> 3. The next roots (plan 59, issue clusters): the bow states (#2, #5, #8, #9, #30, #40); first person and shadows (#4, #13, #34); the immortal heroine (#6 — first
+>    check whether my dev god mode stayed in his save); the name plate (#10). Every fix: control case, real input, comment on its issue, a matrix row.
+> 4. Plan 59 steps 2–6: fill the matrix from the nine mods' notes and show it to the owner as a page; the play-report template and its check; the gate in
+>    `make_release.sh`; the KAIF improvement request.
+> 5. Owed to the owner (17:40): views of the mods' NEW locations (Shemite City State, Caverns of Set / Akhlut Outpost, Ymir's Respite, the Al-Merayah fortress) and a
+>    new hub frame, shown as a page before they go into the README.
+> 6. The desktop: «Krinik Conan.lnk» → the release launcher; the old «Krinik Conan (dev).lnk» and `Krinik_Launcher_dev` in the game folder stay (auto mode
+>    refused the deletion — the owner may delete them).
+> 7. Work files to remove when their tasks close (file by file, `rm-tree.mjs`): `KUMM/.work/wg_rc1`, `.work/public_repo`, `.work/public_tree`, `.work/readme_shots`,
+>    `.work/issues` (keep `filed.json` until the index is trusted).
 >
 > **Still open from the chat of 16:20** (its closed summary and the done item 1 — chronicle, entry «STATUS bonsai trim, part 7»; item 5 is now issue #17, the
 > «Подтвердить» finding of item 6 is issue #14):
