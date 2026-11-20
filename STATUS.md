@@ -164,7 +164,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > its run waits for the Nexus step after the release (the owner 14:44).
 > **23:20 — released parts built** (`make_release.sh` exit 0, `KUMM/.work/rc2_release/release`: 7 parts, launcher, guide PDF, SHA256SUMS; run report
 > `testcases/reports/2026-11-20_conan-rc2-build.md`), pack `2c7c5e4` (the twins, README sizes and the synced Graphics row), the public repo `39896bd` pushed;
-> **`gh release create v0.9.1-RC2 --latest` is uploading** (a Draft until the assets finish; check `gh release view v0.9.1-RC2 --json isDraft,assets`).
+> **v0.9.1-RC2 PUBLISHED 2026-11-20 23:57, Latest, 10 assets (13 745 398 619 B)**; the ritual `--published`: 0 TODO, 9 OK (the Latest line fixed, pack `4bb6932`;
+> texts kept in `_config/release/published_0_9_1-RC2`); the shipment dir and the RC1 parts deleted. U1 pass (RC1 from local parts, 74/74, 0 missing), U2 pass
+> (the RC1 launcher: «новейшая 0.9.1-RC2», screen `update`), **U3 pass 00:22** (21 min download, 74/74, 0 missing), **U5 pass** (the player's marker kept), U4
+> by proxy (the installed UI pak carries «0.9.1-RC2») — report `testcases/reports/2026-11-21_conan-launcher-update-rc1-rc2.md`. The machine lock released 00:27.
+> Owed next: the issues #3 #11 #12 #33 get «вошло в v0.9.1-RC2» comments (close only after their open cases M2, N1, N3, D2); the RC1 bundle folder stays beside
+> RC2 in the copy (look at the L9 delete offer); the test copy `KUMM/.work/rc1_install` (≈ 59 GB + 2 bundles) and `KUMM/.work/rc2_update` to remove when the
+> RC1/RC2 install checks close (the uninstall back to the clean game is the one left); the Svarog cleanup needs a wider auto-mode rule or the owner's hand.
 > The update test (cases `testcases/TC_conan_launcher_update_rc1_to_rc2_2026-11-20.md`): the RC1 launcher and parts moved into `KUMM/.work/rc1_install/Conan_311/rc1_launcher`,
 > started by `KUMM/.work/rc2_update/start.ps1` (TEMP, state, desktop, search roots, Steam isolated; log `KUMM/.work/rc2_update/tmp/KrinikConanLauncher.log`),
 > buttons by `node KUMM/.work/rc2_update/click.mjs <pid> install|update|play`; U1 (RC1 from local parts) started 23:20. After the upload: delete
