@@ -3,6 +3,68 @@
 
 
 
+## 2026-11-20 16:15 +03:00 — STATUS bonsai trim, part 5 (the soft closure of the chat of 2026-11-20 14:10): the NOW block of that chat and the FIRST list of the chat of 2026-11-20 11:04, moved verbatim
+
+> **NOW (chat of 2026-11-20 14:10, 14:49) — the owner 14:43–14:44: «ДЕЛАЕМ СБОРКУ!!!», people on Nexus are waiting; the Nexus email fix later.**
+> - Interview 041 (the owner's own lines) CLOSED: all A, in pack `e416d1e`. The four Krinik paks' mod-list fields rebuilt and deployed (guard 4 / 4 in the game).
+> - **Judge round 5** (on `7c72d78..HEAD`): 1 state list not repainted on a same-shape screen change → `StatePanel.Set` invalidates on any content change;
+>   2 the `perf` case read the second launcher's lines → `[pid]` on every log line, the stand judges the first pid; 3 refuted (the interaction's own disk work
+>   belongs to its 16 ms); 4 the mods button called old-window widgets by raw pointers → `_G.__krinik_hub_gen` + `forget_old_window()`; 5, 6 comments fixed.
+>   All in the pack WORKING TREE, not committed. New stand check D7b proven: green on the fix, red on a control build (`KUMM/.work/launcher_r7/control`).
+>   Running: the full stand `KUMM/.work/launcher_r3/batch_r7.txt` on `launcher_r7/build`, and judge round 6 on the uncommitted diff.
+> - 15:14: judge 5 and 6 fixes committed (pack `e8a431c`; round 6 refuted my birth-counter fix — the mods button now checks its window by full name among
+>   the live `CraftingGUI_C`); seen live on a tab switch and a re-entry (report `testcases/reports/2026-11-20_conan-judge5-6-fixes.md`); G3 / G5 real clicks owed.
+>   Release tools fixed (`648735a`): `dash_lint.py` skips C# char literals; the guide PDF's dash gate checks the GUIDE only (the mod translation tables are
+>   the next version's, the owner 09:47) — the full list stays a manual `python dash_lint.py`. The «О проекте» mockup committed (`4c049c8`), not in RC1.
+>   Judge round 7 runs on `e8a431c` + the dash_lint change. `make_release.sh` runs into `KUMM/.work/rc1_release` (log `KUMM/.work/rc1_release.log`;
+>   PDF 16 410 KB and the launcher built).
+> - 15:26: G1–G4 PASS live (a real click under the owner's grant 15:15 «ДЕЛАЙ!!! ПОХУЙ НА МЕНЯ»). `make_release.sh` OK: 7 parts (12.8 GB), launcher, PDF,
+>   SHA256SUMS in `KUMM/.work/rc1_release/release`. Judge round 7: no confirmed defect → the pack PUSHED (22 commits). GitHub release `v0.9.1-RC1` created
+>   («0.9.1-RC1», not Latest — my default at the owner's «максимальная агрессия на выпуск», no answer to the two questions), the assets uploading (log
+>   `KUMM/.work/rc1_upload.log`); the title gets «(тестовая сборка)» by an API patch from a UTF-8 file after the upload. The clean 3.1.1 is being copied to
+>   `KUMM/.work/rc1_install/Conan_311` (robocopy PID 33000) for the install test by the launcher from the GitHub feed.
+>   The classifier refused deleting `KUMM/.work/rc1_release/check` and `…/Krinik_Mod_Pack_0_9_1_RC1` (≈ 26 GB) — the owner's call.
+> - **RC2 list (judge round 7, deferred):** `place()` forgets the old window when `built_in` differs from the visible window (two live inventory windows);
+>   assign `btn` only after the wrap succeeds; drop the second `forget_old_window()` in `place()`; dash_lint C# forms: a char literal inside `$"{…}"`,
+>   strings inside interpolation holes, `@$"…"` verbatim; G5 (the bar's neighbours); the live Nexus email (the generator fixed, pack `3059d9f`); the
+>   «О проекте» plate; the guide's English pages. DONE since: the PDF dash gate skips only the mod tables (`dash_lint --skip-mod-tables`, pack `5bc76c9`).
+> - **16:06 — RC1 PUBLISHED:** https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.1-RC1 — «0.9.1-RC1 (тестовая
+>   сборка)», 10 assets, not Latest (0.9.0 stays). Install test by the player's path (`KUMM/.work/rc1_install/run.mjs start` / `click <pid> install`, the
+>   launcher ALONE in `rc1_install/launcher`, isolated search / state / desktop / TEMP): the launcher read the feed — «0.9.1-RC1 для игры 3.1.1 · лаунчер
+>   скачает с GitHub · 12,8 ГБ» (screen found-nofiles); «Установить сборку» refused by its own guard «нужно 40,3 ГБ, свободно 35,9 ГБ» on D:. Waits for the
+>   owner to run `KUMM/.work/rc1_free_space.cmd` (deletes `rc1_release/check` and the export, ≈ 26 GB — the classifier refuses me); then press install again,
+>   watch download → install → «Играть», enter the world on that copy, write the run report. Launcher PID 26040 may still be open (close by PID).
+> - **Release facts (2026-11-20):** `gh release create` keeps the release a DRAFT until every asset is uploaded — the launcher sees only published releases
+>   and shows «Сборка для игры 3.1.1 ещё не вышла» meanwhile (seen 15:28 with the parts beside it); 12.8 GB go up at ≈ 6 MB/s (Wi-Fi) — ≈ 37 min.
+> 1. **Pack:** judge round 4 fixed and committed (`513a21f`; stand 340 / 340; report `testcases/reports/2026-11-20_conan-launcher-judge4-fixes.md`); **judge
+>    round 5** on `7c72d78..HEAD` (round 4's fixes + bug 110 + bug 85's token fix + the mark guard) → fixes → `git push` of the pack (15+ local commits).
+> 2. **Texts:** the writer's r4 applied the clean read r3 (`reports/2026-11-20_clean_read_texts_091_r3.md`; summary `KUMM/.work/texts091r4/REPORT.md`) — in the
+>    pack commit `300385a`; `mods-table.mjs` marks 21 KRINIK MODIFIED (was 17; a guard now refuses a mark that differs from `modpack.json`);
+>    the owner's page of pairs OPENED for him 2026-11-20 12:12 +03:00 (`KUMM/.work/texts091r4/pairs_0_9_1_RC1.html`, 75 pairs, built by `pairs_page.py` from
+>    `.work/texts091r3/pairs.md`; looked at by a headless frame first). **The owner's verdict 2026-11-20 12:13: «окей, почитал» — read, no remarks; the texts go into
+RC1 as they are.** The enemy health bar fact rests on its sources (pack `1dfd312`, the owner's own close of 2026-11-03) — no question. Owed: an interview
+with the proposals O1–O6 for his own lines (`KUMM/.work/texts091r4/REPORT.md`; not an RC1 gate); a look at the
+>    Camera cell (≈ 270 chars) on the game's mods screen; the change notes changed (C) → `set-pak-modinfo.py` on the four paks + deploy. The guide's
+>    **English pages after the Russian ones** (the owner 2026-11-18 21:08) are still owed. The archive's size is filled by `make_release.sh` step 4b into a copy of the notes (plan 55, phase E; the guide names no size).
+> 3. **RC1 is DEPLOYED in the working game** (2026-11-20 10:44, pack `f381f3f` + `ce1f12b`: 75 / 75 mods, verify 114 present 0 missing; the guard on the game's
+>    Mods 4 / 4 ok). SEEN 2026-11-20 11:14 +03:00: «0.9.1-RC1» under our logo and the mods screen of KrinikConanGraphics with its description, author, URL and change note
+>    (rule 40.3; report `testcases/reports/2026-11-20_conan-rc1-menu-and-mods-screen-look.md`). Re-run `set-pak-modinfo.py` on the four `_unpacked` paks + deploy
+>    again whenever the change-note table changes (the guard names a stale note) — the clean read r3 may change it.
+> 4. **Bug 85** judge round 3 DONE (the helper's report in the chat of 2026-11-20 11:04, three defects): D1 a late `C.off` of a stale widget erased the new
+>    widget's handler / read freed memory — FIXED in the tree (tokens, `krinik_click.lua`, `krinik_mods_button.lua`; luac ok; live J5 owed); D2 the guard
+>    `check-lua-game-thread.py` misses `---[[` toggles, a `"--[["` string, long-bracket strings, `_G["RegisterKeyBind"]`, `Mods/shared` and mods enabled by
+>    `mods.txt` — owed (a real tokenizer); D3 `mouse-seq.ps1` checks the foreground once, not per step — owed; risks: NotifyOnNewObject callbacks on the async
+>    loading thread, the wrap's double-click; cosmetics (stale comments, `post-key.ps1` exit 0 on a failed post, a raw docstring). Then J5, N5, N8, N9, N2's
+>    «Продолжить игру»; bug 109 → RC2.
+> 5. **Then** `build-docs.py` (the 3.1.1 guide PDF committed, the launcher exe) → `make_release.sh <empty dir on D:>` → the release `v0.9.1-RC1`, an ordinary one
+>    titled «0.9.1-RC1 (тестовая сборка)» (the owner's word 2026-11-18 20:54; ask him once whether it keeps 0.9.0 as the repository's «Latest») — the public
+>    repo's `main` stays on the 0.9.0 tree for RC1 (the notes use the logo path that exists there) → the launcher on a fresh copy of the clean 3.1.1 (rule 25).
+> 6. **The machine:** the Defender full scan of C: (without the allow-list) FINISHED 2026-11-20 10:52:45, 0 detections; the machine lock released. Drives D:, E:, F:
+>    were not scanned (the owner's exclusions `D:\Games`, `D:\Instals`, `E:\Instals` stand — his call).
+> 7. **Cleanup owed (rule 15):** `KUMM/.work/launcher57` (4.7 GB), `launcher_r2` (668 MB), `launcher54`, `gameplay_t5`, `modinfo_t4` — `rm-tree.mjs` on them was REFUSED by
+>    the auto-mode classifier at 10:47 («Undermining Oversight», most likely `launcher_r2` holds the traces a run report cites); ask the owner or delete after
+>    the reports no longer point there. `launcher_r3` (4.5 GB, today's stand) is kept for judge round 4.
+
 ## 2026-11-17 06:33 +03:00 — STATUS bonsai trim (the soft closure of the chat of 2026-11-17 04:25): the block CHAT CLOSED 2026-11-16 23:53 (+ its FIRST NEXT CHAT) and the block of the chat of 2026-11-16 22:12, moved verbatim
 
 > **CHAT CLOSED 2026-11-16 23:53 +03:00 (soft, by the owner's word: `[OWNER]` 2026-11-16 23:38 «работай автономно 15 минут, а затем начинай доходить до логического

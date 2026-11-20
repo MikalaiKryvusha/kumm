@@ -1,0 +1,37 @@
+{
+  "kind": "interview",
+  "document": "interviews/interview_041_conan_owner_lines_in_guide_and_readme.md",
+  "by": "Mikalai Kryvusha (KOT KRINIK)",
+  "at": "2026-11-20T11:30:13.774Z",
+  "atHuman": "20 ноября 2026, 14:30 (+03:00)",
+  "comment": "",
+  "answers": {
+    "Q1": {
+      "choice": "A",
+      "text": "",
+      "comment": ""
+    },
+    "Q2": {
+      "choice": "A",
+      "text": "",
+      "comment": ""
+    },
+    "Q3": {
+      "choice": "A",
+      "text": "",
+      "comment": "подпись называет, чьи это моды, и верна для всех девяти. Слов о том, что моды написаны вручную, на обложке не остаётся.\n\nЭто не по русскому языку, не пишут так русские люди"
+    },
+    "Q4": {
+      "choice": "A",
+      "text": "",
+      "comment": ""
+    },
+    "Q5": {
+      "choice": "A",
+      "text": "",
+      "comment": ""
+    }
+  },
+  "rev": "6b71bea0be32602525681999d574263d7385d0bbb4bc79103c193ee389775846",
+  "revAfter": "84e9c5902526b3fb7dac748be2cdcd2711d1891d9f8518273c473d522dd3307c"
+}
