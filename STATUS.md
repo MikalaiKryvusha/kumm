@@ -153,6 +153,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the public repo; two helpers draft them into `.work/issues/` (BRIEF.md), `node .work/issues/file_issues.mjs scan` → `file` files them (scan proven red on a
 > control draft); issue #1 answered and closed by his word. Process — `plans/59_…` (+ `_ru.md`): the release gate on a play report, the coverage matrix,
 > cheats never stay; the two earlier remedies (plans 32, 47) were never executed — that is the diagnosis.**
+> **19:42 — FIXED and seen by real input on the owner's game (pack `dc79053`, report `testcases/reports/2026-11-20_conan-hub-game-pages-map-journey.md`): the hub's
+> «Карта» and «Путешествие» are the game's own pages — «Начать путешествие» (the owner's «Начать приключение», issue #11) starts the journey; two markers at their clicks
+> and the reset work (issue #12); journeys page fresh (issue #33). Owed: case D1 (the dialogue without slowdown, `NO_SLOW_MODULES` deployed, not run), N1 / N3 / M2,
+> the judge round on `dc79053` (skipped late in the chat), comments on issues #11 / #12 / #33 / #3 after the retest. Rule 30 CANCELLED by the owner 19:37
+> (hook unwired, guards removed) — real input does not wait for an idle keyboard. Autonomous work ordered 19:37.**
 > **19:3x — 42 issues filed (#2–#43, index `bugs/GITHUB_ISSUES.md`; every local bug names its issue). The first root: the hub controller's standalone page
 > copies. DEPLOYED into the working game 19:31 (`Deploy-ModPack.ps1 -Deploy -Only KrinikConanUI`; verify: only the dev-only Music / Harness files missing, as for
 the release build), NOT committed in the pack, NOT run yet — the game was left in the main menu at 19:32 when the owner came back to the keyboard (machine lock

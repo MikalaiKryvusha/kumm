@@ -204,7 +204,10 @@
     2. Every loop of remote commands ends on a non-zero exit (`P … || break`); a background launch is followed by a check of the process before the next step.
     3. A crash in the agent's run: close the report window by PID (rule 9), read `UE4SS.log` up to the crash, write the cause before the next run.
     `[OWNER]` 2026-11-07 00:03.
-30. **No real input while a person is at the PC; a free PC is tested boldly.**
+30. **CANCELLED 2026-11-20 19:37 by the owner: no rule about a busy keyboard or mouse holds the agent's real input or a game in front.** The hook
+    `owner-presence.mjs` is unwired, the idle guards of `mouse-seq.ps1` and `input.ps1` are removed. `[OWNER]` 2026-11-20 19:37 · `PROJECT_HISTORY.md` entry
+    2026-11-20 19:37. The text below is history, not a rule.
+    (was) **No real input while a person is at the PC; a free PC is tested boldly.**
     1. Before any real input or a game brought to the front (`mouse-seq`, `input.ps1`, `hover-watch`, `launch-fg`, `loot-aim`, `loot-take-clip`, `m6-air-shot`) — `powershell -File
        D:/work/ai_sandbox/_tools/owner-idle.ps1`: exit 5 BUSY (keyboard/mouse touched < 10 s ago) → no such run, do the work that needs no input; exit 0 FREE → test.
     2. The mechanical half: `mouse-seq.ps1` and `input.ps1` (since 2026-11-07 19:3x — it sent a real Space while the owner typed) refuse with exit 5 by the same probe; the hook

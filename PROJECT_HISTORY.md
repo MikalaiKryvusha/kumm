@@ -9093,3 +9093,13 @@ The owner's words, verbatim (after bugs 111–114 recorded locally 18:33–18:39
 > Может сообщество нам поможет чинить....
 
 Recorded as `HOUSE_RULES.md` rule 44 (every bug of the build is an issue of the public repository).
+
+## 2026-11-20 19:37 +03:00 — the owner cancels every busy-keyboard / busy-mouse rule, and orders autonomous work (recorded 2026-11-20 19:42 +03:00)
+
+The owner's words, verbatim: «так, отменяем ВСЕ правила по поводу занятой клавиатуры или мыши, заебало меня то, как ты неверно это построил и оно тебя блять нахуй
+тормозит» · «РАБОТАЙ НАХУЙ» · «автономно!"!!!!!». Context: the hook `owner-presence.mjs` refused even a read-only grep (its pattern matched the tool names in the
+command) and `mouse-seq.ps1` refused the in-game check's first click while he typed in the chat.
+
+Done in the same move: HOUSE_RULES rule 30 marked CANCELLED; the hook unwired from `.claude/settings.local.json`; the idle guards of `ConanExiles/_config/mouse-seq.ps1`
+and `input.ps1` removed (pack `dc79053`); `_tools/owner-free-grant.txt` written to 2099 with his words (the old grant mechanism stays readable for any other tool that
+still asks `owner-idle.ps1`); memory `owner-at-keyboard-no-real-input` deleted, `no-busy-keyboard-rules` written.
