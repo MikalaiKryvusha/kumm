@@ -171,7 +171,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **🔥 OWNER'S WORD 2026-11-21 00:28 — FIRST next: the launcher's update must download only what changed, never the whole 13 GB for a small update**
 > (verbatim — chronicle entry 2026-11-21 00:28). Recon (Steam depots / itch.io butler / zsync / a patch archive from the previous release) → a plan in the
 > launcher epic (plans/57, plan 54 case B) → code → the update RC1 → RC2 again on the copy, measured in MB; a GitHub issue «Launcher: an update downloads the
-> whole archive» by rule 44. The recon is at a helper since 00:30 → `researches/conan-launcher-delta-update/README.md` (read it first).
+> whole archive» by rule 44. **Recon DONE 00:45 → `researches/conan-launcher-delta-update/README.md` (read it first):** RC1 → RC2 really changed 12 files,
+> 37.3 MB, but 62 third-party paks (13.56 GB) differ byte-wise at the same size — the export's `set-pak-modinfo.py` rewrites every pak wrapper in a non-fixed
+> order (checked: `UIMod_Hosav.pak` 26 599 644 B in both, sha256 d79254b1… vs e5ebbe20…). **Step 0: a reproducible export** (fixed entry order, no rewrite when
+> nothing changed; a guard: export twice, compare). Then option A: a per-file manifest (path, size, sha256) with each big file as its own release asset, small
+> files in one zip, files over 2 GiB split (`Shemite_City_State.pak` 2 396 312 301 B); the launcher hashes local files, stages, downloads only the difference,
+> verifies, renames once, runs today's installer; the old bundle kept until success. GitHub: asset < 2 GiB, ≤ 1000 assets, Range works (single ranges),
+> the signed asset URL lives ≈ 1 h. RC1/RC2 launchers know only the volumes — the self-update brings the new launcher first.
 > Also from the uninstall check 00:28–00:32 (the same report): the game returned to clean (hash list: missing 0, bad 0); the RC1 bundle (13.7 GB) stays
 > after the update; after the uninstall the launcher showed «installed» instead of «Установить сборку» (HOUSE_RULES 26) — reproduce, file, fix.
 > Owed next: the issues #3 #11 #12 #33 get «вошло в v0.9.1-RC2» comments (close only after their open cases M2, N1, N3, D2); the RC1 bundle folder stays beside
