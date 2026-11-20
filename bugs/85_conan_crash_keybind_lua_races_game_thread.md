@@ -139,3 +139,18 @@ preview press → `KrinikPreview` → the old IsHovered route) and our window's 
 closes the list by its event; in our window a press outside the frame no longer closes an open option list or palette (the next press inside does);
 **R7** — accepted (a failed part never saves); **R8** — fixed (LoadAsset by the asset path first); cosmetics fixed (post-key header). A recon probe of mine
 crashed the game 20:20 (`GetPropertyClass` on a struct return — EXP-0570), not the build.
+
+## 2026-11-20 11:2x–12:1x — judge round 3 (`bddc495..9378982`) and what it changed
+
+Findings (the helper's report, chat of 2026-11-20 11:04): **D1** a late `C.off` of a stale widget reference (a raw pointer) erased the NEW widget's handler when
+the address was reused (the mods button dead after one press — the round-2 symptom) and read freed memory when it was not — **fixed in the tree**: `C.on`
+returns a token, `C.off(token)` removes the entry only if it is still the same table (identity), no call on the old widget (`krinik_click.lua`,
+`krinik_mods_button.lua`: the wrap, the catcher and the bar button keep their tokens; luac ok; live J5 owed). TWINS: searched `click.on|click.off` — 4 sites, all
+converted; the same class (a method on a possibly freed widget ref) also stands in `krinik_mods_button.lua:142` (`valid(menu.bar)` + `GetFullName()` on the
+old list) — listed, not fixed yet. **D2** the guard `check-lua-game-thread.py` misses `---[[` toggles, a `"--[["` string before a call, long-bracket strings,
+`_G["RegisterKeyBind"]` / `rawget(_G, …)`, the `Mods/shared` folder, and mods enabled by `mods.txt` without `enabled.txt` (BPModLoaderMod holds a key bind on
+INS one `: 1` away) — owed (a real Lua tokenizer). **D3** the real-mouse sequence tool proves the foreground once, not before each step — owed. Risks:
+`NotifyOnNewObject` callbacks may run on the async loading thread (`s.AsyncLoadingThreadEnabled 1`) — unproven; the wrap's double-click may be shadowed by the
+FLX button (J1-like). Cosmetics: a dead `btn:IsVisible()` check (`:228`), a stale load-log claim in `krinik_pause_in_menu.lua:755`, a stale comment
+`krinik_mod_settings.lua:383`, a non-raw docstring in the guard (line 23), the key-post tool exits 0 on a failed post. Commit-message corrections: `9378982`
+item 3 («a late off … never erases») was false until this fix; its title's «reaches … the wrap» is unproven (only the catcher path, J2).

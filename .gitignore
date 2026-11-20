@@ -62,3 +62,5 @@ tools/hooks/.owner-ask.txt
 
 # The owner's stylometric core (private repo MikalaiKryvusha/krinik-stylometry): cloned here to work on it, never part of the public KUMM (the owner 2026-11-18 09:05)
 /krinik-stylometry/
+tools/hooks/.efficient-code-read.stamp
+tools/hooks/.mod-reconciliation-read.stamp

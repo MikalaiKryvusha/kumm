@@ -163,17 +163,29 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `make_release.sh` → GitHub → the launcher on a fresh copy of the clean 3.1.1.
 > The progress block of the chat of 2026-11-20 09:09 — moved verbatim to the chronicle, entry «2026-11-20 11:0x — STATUS bonsai trim, part 2».
 > **FIRST in the next chat (handover of 2026-11-20):**
-> 1. **Pack:** the round-3 fixes + R1 committed (`f381f3f`; the stand re-run 66 / 66, the H2 control red — report `testcases/reports/2026-11-20_conan-launcher-judge3-fixes.md`),
->    the writer's texts committed as DRAFT (`ce1f12b`), the paks' description sentence without the dash (`7c72d78`, redeployed, the guard on the game 4 / 4);
->    **judge round 4** on `00c795d..7c72d78` (rule 31) → fixes → `git push` of the pack (14 local commits, bug 85's included).
-> 2. **Texts (the owner's META-texts order 09:47):** a clean-instance read (§7B) of N, R, G, C as the writer left them (`KUMM/.work/texts091r3/REPORT.md` — its
->    decisions 1–6); fixes; the owner's page of pairs from `pairs.md` (rule 32: one HTML page); his word on his own lines (REPORT «The owner's lines»). The guide's
+> 0. **The owner's word 2026-11-20 11:37–11:46 (chronicle entry of that time):** work proportional to the change — HOUSE_RULES 41, the rulebook
+>    `researches/efficient-code/EFFICIENT_CODE.md` (the hook `efficient-code-gate` refuses code edits until it is read within the hour), KAIF issue #200.
+>    **Bug 110 (the launcher's slow feedback) FIXED in the pack working tree, not committed yet:** picture cached by input keys in two layers, text blocks and
+>    `SolidBox` once, the state list's lines cached, fonts and widths cached, `KRINIK_LAUNCHER_PERF=1` timers; stand case `perf` green on the fixed exe
+>    (`KUMM/.work/launcher_r6/build`), red on the pre-fix timed copy; the full stand `batch_r6.txt` running (case `many` printed nothing once — re-run it alone).
+>    Then: run report `testcases/reports/2026-11-20_conan-launcher-slowness-fix.md`, commit, and the «О проекте» plate (plan 57, KUIPS mockup first).
+> 1. **Pack:** judge round 4 fixed and committed (`513a21f`; stand 340 / 340; report `testcases/reports/2026-11-20_conan-launcher-judge4-fixes.md`); **judge
+>    round 5** on `7c72d78..HEAD` (round 4's fixes + bug 110 + bug 85's token fix + the mark guard) → fixes → `git push` of the pack (15+ local commits).
+> 2. **Texts:** the writer's r4 applied the clean read r3 (`reports/2026-11-20_clean_read_texts_091_r3.md`; summary `KUMM/.work/texts091r4/REPORT.md`) — in the
+>    pack working tree, NOT committed; `mods-table.mjs` marks 21 KRINIK MODIFIED (was 17; a guard now refuses a mark that differs from `modpack.json`);
+>    `pairs.md` regenerated. Owed: commit; the owner's page of pairs (rule 32); his word on O1–O6 (his own lines) and the enemy health bar fact; a look at the
+>    Camera cell (≈ 270 chars) on the game's mods screen; the change notes changed (C) → `set-pak-modinfo.py` on the four paks + deploy. The guide's
 >    **English pages after the Russian ones** (the owner 2026-11-18 21:08) are still owed. The archive's size is filled by `make_release.sh` step 4b into a copy of the notes (plan 55, phase E; the guide names no size).
 > 3. **RC1 is DEPLOYED in the working game** (2026-11-20 10:44, pack `f381f3f` + `ce1f12b`: 75 / 75 mods, verify 114 present 0 missing; the guard on the game's
 >    Mods 4 / 4 ok). SEEN 2026-11-20 11:14 +03:00: «0.9.1-RC1» under our logo and the mods screen of KrinikConanGraphics with its description, author, URL and change note
 >    (rule 40.3; report `testcases/reports/2026-11-20_conan-rc1-menu-and-mods-screen-look.md`). Re-run `set-pak-modinfo.py` on the four `_unpacked` paks + deploy
 >    again whenever the change-note table changes (the guard names a stale note) — the clean read r3 may change it.
-> 4. **Bug 85** judge round 3 on `bddc495..9378982` (owed); J5, N5, N8, N9, N2's «Продолжить игру»; bug 109 → RC2.
+> 4. **Bug 85** judge round 3 DONE (the helper's report in the chat of 2026-11-20 11:04, three defects): D1 a late `C.off` of a stale widget erased the new
+>    widget's handler / read freed memory — FIXED in the tree (tokens, `krinik_click.lua`, `krinik_mods_button.lua`; luac ok; live J5 owed); D2 the guard
+>    `check-lua-game-thread.py` misses `---[[` toggles, a `"--[["` string, long-bracket strings, `_G["RegisterKeyBind"]`, `Mods/shared` and mods enabled by
+>    `mods.txt` — owed (a real tokenizer); D3 `mouse-seq.ps1` checks the foreground once, not per step — owed; risks: NotifyOnNewObject callbacks on the async
+>    loading thread, the wrap's double-click; cosmetics (stale comments, `post-key.ps1` exit 0 on a failed post, a raw docstring). Then J5, N5, N8, N9, N2's
+>    «Продолжить игру»; bug 109 → RC2.
 > 5. **Then** `build-docs.py` (the 3.1.1 guide PDF committed, the launcher exe) → `make_release.sh <empty dir on D:>` → the release `v0.9.1-RC1`, an ordinary one
 >    titled «0.9.1-RC1 (тестовая сборка)» (the owner's word 2026-11-18 20:54; ask him once whether it keeps 0.9.0 as the repository's «Latest») — the public
 >    repo's `main` stays on the 0.9.0 tree for RC1 (the notes use the logo path that exists there) → the launcher on a fresh copy of the clean 3.1.1 (rule 25).

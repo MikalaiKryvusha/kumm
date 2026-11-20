@@ -309,6 +309,16 @@
        mods screen of the working game is looked at once per release.
     `[OWNER]` 2026-11-03 12:58–12:59 (plan 44) · 2026-11-18 21:35–21:36 · `PROJECT_HISTORY.md` entry 2026-11-18 21:35.
 
+41. **The work a piece of code does is proportional to what changed, never to what exists.** A full pass (every widget, row, object of the scene, the whole
+    window's drawing, every pixel of an image) on every event, frame, tick or click is forbidden; it is legal only at birth or when everything really changed
+    (size, language, map).
+    1. Before building or changing an algorithm or a program entity, read `researches/efficient-code/EFFICIENT_CODE.md` in full and answer its six questions
+       (trigger · inputs · N per event · static vs volatile · budget · measurement) in the plan step or the commit body.
+    2. The hook `efficient-code-gate` (`tools/hooks/style-gate.mjs`, PreToolUse Write | Edit) refuses a code file until the rulebook was read whole within
+       60 minutes.
+    3. Every judge brief (rule 31) hunts «work not proportional to the change» as its own class; an interface carries a stand case with a time budget.
+    `[OWNER]` 2026-11-20 11:43–11:46 · `PROJECT_HISTORY.md` entry 2026-11-20 11:37–11:46.
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —
 WebP, never PNG; for the build's own images rule 37 above governs). The context-budget hook's hint is obeyed (`CLAUDE.md`).

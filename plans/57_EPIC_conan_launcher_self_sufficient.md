@@ -116,6 +116,20 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
       and the watcher's readiness line; the update stand `live.mjs` runs in the frames mode too. Full `self.mjs` run (18 cases) — see the run report.
 - [ ] Judge round 2 on the new diff.
 
+## The owner's remarks of 2026-11-20 on the RC1 launcher
+
+1. **Buttons react slowly and elements show slowly** (`[OWNER]` 2026-11-20 11:37: «есть замечание по лаунчеру -  в нём как-то медленно нажимаются кромки и
+   показываются элементы-  это особенность фронтенд движка на котором он собран?» — «кромки» = «кнопки»). Answered in chat: WinForms itself is not slow, the
+   cause is ours; candidates named, not yet measured. A slowdown is critical (HOUSE_RULES 38) → `bugs/110_conan_launcher_slow_button_feedback.md`.
+   - [ ] measure the paint and refresh times on the stand at 300 % · [ ] fix the cause · [ ] stand + frames at the four resolutions · [ ] judge
+2. **«О проекте» instead of the links list at the bottom left** (`[OWNER]` 2026-11-20 11:38: «и внизу слева есть список контактов, было бы хорошо его превратить
+   в кнопку [О проекте] - по которому бы открывался модальный диалог, или плашка, как у нас уже есть под это - и там контакты, ссылки, авторство описать, чтобы
+   не занимать место на окне лаунчера»). The plate is the same overlay as the copies chooser; it holds the authorship and the links section (HOUSE_RULES 22: a
+   section of links under «Ссылки», never «контакты» in the UI). Order (HOUSE_RULES 34, 23): KUIPS mockup in `ConanExiles/_config/launcher/design/` (a
+   button state on the main screens + the open plate) → `kuips shoot / layout / build / check` → my look → the owner's look → build → stand + frames at the
+   four resolutions → judge. In RC1 if accepted before the archive is built, otherwise in RC2 (said to the owner 11:38).
+   - [ ] mockup · [ ] the owner's verdict · [ ] build · [ ] stand · [ ] judge
+
 ## Decisions made without the owner
 
 `[AI]` (revisable, all shown on the mockups): the scan's progress counts drives; several copies are a pick list with version and state; no game → «Указать

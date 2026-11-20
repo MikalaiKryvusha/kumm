@@ -8855,3 +8855,24 @@ Plan 58's header and plan 55 carry the scope. Supersedes, for the meta texts onl
 > `researches/conan_patch_3_1_0/README.md` (§3 is the move checklist): the top risk is «only ModController classes are loaded at startup» (our
 > `krinik_hub_controller.lua:80` and `krinik_mod_settings.lua:1046/1054` reach other mods' classes by `StaticFindObject`); stale vanilla tables (new item rows);
 > UE4SS on the new exe; the kit revision. No staff known-issues list yet, players wait for a hotfix — when to move is the owner's call.
+
+## 2026-11-20 11:37–11:46 +03:00 — the owner on the launcher's slowness: work proportional to the change, the efficient-code rulebook and its hook, a KAIF improvement (recorded 2026-11-20 11:5x +03:00)
+
+The owner's words, verbatim, in the order they came (the chat of 2026-11-20 11:04):
+
+- 11:37 «есть замечание по лаунчеру -  в нём как-то медленно нажимаются кромки и показываются элементы-  это особенность фронтенд движка на котором он собран?»
+- 11:38 «и внизу слева есть список контактов, было бы хорошо его превратить в кнопку [О проекте] - по которому бы открывался модальный диалог, или плашка, как у нас уже есть под это - и там контакты, ссылки, авторство описать, чтобы не занимать место на окне лаунчера»
+- 11:43 «Я устал от того, что ты постоянно допускаешь эти ошибки. и в свароге с этого начали»
+- 11:43 «и в конане потом»
+- 11:43 «и вот опыть ты лаунчер так построил»
+- 11:44 «ты делаешь какие-то O(N) полные циклы всегда - это КРАЙНЕ КРАЙНЕ ПЛОХАЯ ПРАКТИКА!!!!!»
+- 11:44 «какие каноны эффективного кода ты нарушаешь?»
+- 11:44 «разведка в интернете»
+- 11:45 «заводи это импрувментом в апстрим KAIF»
+- 11:45 «себе пиши конспект методичку по эффективному программированию, или дополняй уже имеющуюся»
+- 11:45 «и регистрируй ХУК - требующий её перечитывать и соблюдать перед построением новых алгоритмов и програмных сущностей»
+
+What was done: bug 110 (`bugs/110_conan_launcher_slow_button_feedback.md`); the rulebook `researches/efficient-code/EFFICIENT_CODE.md` (web recon, the six
+answers before code, the canons with sources, our three recurrences); the hook `efficient-code-gate` (`tools/hooks/style-gate.mjs`, wired in
+`.claude/settings.local.json`; a live refusal at 11:5x before the rulebook was read); HOUSE_RULES rule 41; the KAIF improvement request
+`bugs/KAIF/33_*`; plan 57 «The owner's remarks of 2026-11-20» (the slowness and the «О проекте» plate).
