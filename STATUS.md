@@ -170,8 +170,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    decisions 1–6); fixes; the owner's page of pairs from `pairs.md` (rule 32: one HTML page); his word on his own lines (REPORT «The owner's lines»). The guide's
 >    **English pages after the Russian ones** (the owner 2026-11-18 21:08) are still owed. `{{ARCHIVE_SIZE}}` is filled after `make_release.sh`.
 > 3. **RC1 is DEPLOYED in the working game** (2026-11-20 10:44, pack `f381f3f` + `ce1f12b`: 75 / 75 mods, verify 114 present 0 missing; the guard on the game's
->    Mods 4 / 4 ok). Owed: the main menu by eye — «0.9.1-RC1» under our logo, the game's mods screen with the author, URL and change note (rule 40.3);
->    re-run `set-pak-modinfo.py` on the four `_unpacked` paks + deploy again whenever the change-note table changes (the guard names a stale note).
+>    Mods 4 / 4 ok). SEEN 2026-11-20 11:14 +03:00: «0.9.1-RC1» under our logo and the mods screen of KrinikConanGraphics with its description, author, URL and change note
+>    (rule 40.3; report `testcases/reports/2026-11-20_conan-rc1-menu-and-mods-screen-look.md`). Re-run `set-pak-modinfo.py` on the four `_unpacked` paks + deploy
+>    again whenever the change-note table changes (the guard names a stale note) — the clean read r3 may change it.
 > 4. **Bug 85** judge round 3 on `bddc495..9378982` (owed); J5, N5, N8, N9, N2's «Продолжить игру»; bug 109 → RC2.
 > 5. **Then** `build-docs.py` (the 3.1.1 guide PDF committed, the launcher exe) → `make_release.sh <empty dir on D:>` → the release `v0.9.1-RC1`, an ordinary one
 >    titled «0.9.1-RC1 (тестовая сборка)» (the owner's word 2026-11-18 20:54; ask him once whether it keeps 0.9.0 as the repository's «Latest») — the public
