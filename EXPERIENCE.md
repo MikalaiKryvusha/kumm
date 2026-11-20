@@ -91,6 +91,12 @@
 
 ## Entries
 
+### EXP-0592 · 2026-11-20 · ❌→✅ · #lsp #dotnet-tool #csharp #install
+`dotnet tool install -g csharp-ls` (0.29.0, the latest) fails on SDK 10.0.402 with «DotnetToolSettings.xml not found in the package» — the package, not
+the machine; `--version 0.28.0` installs and answers. When the newest release of a tool will not install, try the previous version before debugging the
+machine. The other trap of the same hour: a server installed by winget is on the NEW PATH only — the agent's running shell does not see it; probe it from a
+fresh PATH (`$env:Path = Machine + User`) before calling it missing.
+
 ### EXP-0591 · 2026-11-20 · ✅ · #skills #claude-code #symlink #tools #packs
 A third-party skill linked into `.claude/skills` as a directory SYMLINK to its folder in `D:/work/ai_sandbox/_tools` is the documented Claude Code way
 (skills.md «Symlinked folders») and is picked up LIVE — the six linked skills appeared in the session's list within a minute. A plugin is worse for a

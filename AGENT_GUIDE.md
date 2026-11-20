@@ -449,6 +449,7 @@ They are called HERE, at the moment of the ritual — never as a second ritual s
 | the judge's findings come back | `receiving-code-review` (verify each, push back on a wrong one, no performative agreement) | fix, rerun, report |
 | a question about a game binary, an assembly, IL2CPP metadata, a pak's code | REA (MCP `rea`, skill `reverse-engineer-anything`; Ghidra 12.2 + JDK 25) before guessing | the game map, `researches/` |
 | a library API — UE4SS, BepInEx, Harmony, Unity, Unreal, Lua, WPF, the Nexus API | Context7 (MCP `context7`) before recall | code by the source, not by memory |
+| where a C#, Lua, Python or JS symbol is defined and who calls it | the LSP tool (plugins `csharp-lsp`, `lua-lsp`, `pyright-lsp`, `typescript-lsp`) before a text grep | the blast radius in `PROJECT_ARCHITECTURE_INTERNAL_MAP.md` |
 | writing or editing a skill (KAIF or KUMM) | `writing-skills` (pressure-test it before it ships) | `/fable-judge suite <skill>` |
 
 A linked superpowers skill that names a skill KUMM did not take reads it as: `superpowers:test-driven-development` → `TESTING_FRAMEWORK.md` (the work

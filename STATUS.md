@@ -142,8 +142,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > KUMM links to them: superpowers ×5 skills and REA's skill symlinked into `.claude/skills` (`node tools/skill-packs.mjs check` — 10/10 OK), MCP `rea` (6.10.1,
 > Ghidra 12.2) and `context7` at local scope (both «✔ Connected» by `claude mcp get`; their tools load in the NEXT session), KUMM's own `/game-hunt` (Claude-BugHunter's
 > method for game testing), the call points — `AGENT_GUIDE.md` → "Third-party skill packs at their call points"; JDK 25 machine-wide (the owner 21:52). Recon and
-> what was left out — `researches/agent-skill-packs/README.md`. Owed: the owner's word on the official LSP plugins (`csharp-lsp`, `lua-lsp`, `pyright-lsp`,
-> `typescript-lsp`) instead of Serena; the first real use of REA (MCP) and Context7 in the next session — a restart of VS Code loads them and the new PATH;
+> what was left out — `researches/agent-skill-packs/README.md`. The official LSP plugins (`csharp-lsp`, `lua-lsp`, `pyright-lsp`, `typescript-lsp`) instead of Serena — installed by the owner's word 22:02 (local scope, servers
+> machine-wide). Owed: the first real use of the LSP tool and of REA (MCP) and Context7 in the next session — a restart of VS Code loads them and the new PATH;
 > the independent judge on `tools/skill-packs.mjs` and `.claude/skills/game-hunt/SKILL.md` (skipped — the owner moved to a new session at 21:59; the script
 > was run red/green with three mutants).
 > **PARKED 2026-11-20 21:35 +03:00 — the owner's task «скачай и разверни в KUMM … Claude-BugHunter … интегрируй в KAIF» (21:35) taken first.** RC2 stands at: Krinik mod versions

@@ -88,7 +88,11 @@ Ghidra 12.2.0 carries the provider defect `ghidra-9996` (some `-O0` switch table
   Lua, Ghidra, WPF, the Nexus Mods API. A real question (`RegisterKeyBind`) returned the official UE4SS page with both overloads and an example (21:52).
 - **Serena — not taken.** 40+ languages incl. C#, Lua, Python, PowerShell, but its core (symbol navigation over LSP) duplicates what Claude Code does
   natively through the official LSP plugins (`claude-plugins-official`: `csharp-lsp`, `lua-lsp`, `pyright-lsp`, `typescript-lsp`); it needs `uv` + Python
-  and adds ~20 tools and a memory of its own next to ours. The official LSP plugins are the better path — proposed to the owner, not installed.
+  and adds ~20 tools and a memory of its own next to ours. The official LSP plugins are the better path — the owner: «Ставь» (22:02). Installed at local scope of KUMM: `csharp-lsp`, `lua-lsp`,
+  `pyright-lsp`, `typescript-lsp`; their servers machine-wide: csharp-ls 0.28.0 (`dotnet tool install -g csharp-ls --version 0.28.0` — 0.29.0 fails
+  «DotnetToolSettings.xml not found» on SDK 10.0.402), lua-language-server 3.19.2 (`winget install LuaLS.lua-language-server`), pyright 1.1.414 and
+  typescript-language-server 6.1.0 (`npm i -g pyright typescript-language-server typescript`). Each answers `--version` from a fresh PATH; the LSP tool
+  itself loads at the next session start.
 
 ## Updating
 
