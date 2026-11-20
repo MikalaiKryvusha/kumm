@@ -152,7 +152,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **CHAT CLOSED 2026-11-20 ≈16:2x (the chat of 14:10; soft closure at the context budget).** Done: interview 041 (the owner's own lines, all A, pack `e416d1e`);
 > the four Krinik paks' mod-list fields rebuilt and deployed; judge rounds 5–7 on the launcher, the stand, the mods button and the release tools — fixes
 > `e8a431c`, `648735a`, `5bc76c9`; stand 366 / 0; the mods button G1–G4 PASS live; **RC1 BUILT AND PUBLISHED** —
-> https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.1-RC1 («0.9.1-RC1 (тестовая сборка)», 10 assets, 0.9.0 stays Latest);
+> https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.1-RC1 («0.9.1-RC1 (тестовая сборка)», 10 assets; made «Latest» 16:17 after the owner «релиза НЕТ в гитхабе»);
 > the pack pushed; the mod library moved into `ConanExiles/_library` (git-ignored; pack `d7bdff5`, HOUSE_RULES 25); the «О проекте» mockup (`4c049c8`);
 > a language guard in `tools/hooks/ru-reply-check.mjs` (EXP-0578). Verbatim progress — chronicle, entry «STATUS bonsai trim, part 5».
 > **FIRST in the next chat:**
@@ -167,7 +167,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    Nexus publication of 0.9.1 — only by the owner's word.
 > 4. **RC2 list:** judge 7's deferred risks (`place()` two live windows, `btn` after a failed wrap, the second `forget_old_window()`, dash_lint C# forms),
 >    G5, bug 85 D2 / D3, the «О проекте» plate (mockup waits for his look), the guide's English pages (asked 14:4x, no answer), the Camera cell look.
-> 5. **Asked, not answered:** 0.9.0 as «Latest» (I kept it), the guide's English pages into RC2.
+> 5. **Asked, not answered:** the guide's English pages into RC2.
 > The block «CHAT CLOSED 2026-11-18 21:3x», its FIRST list and its «Done this chat» — moved verbatim to the chronicle, entry «2026-11-20 11:0x — STATUS bonsai trim».
 
 ## Open bugs
