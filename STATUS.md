@@ -161,8 +161,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   Release tools fixed (`648735a`): `dash_lint.py` skips C# char literals; the guide PDF's dash gate checks the GUIDE only (the mod translation tables are
 >   the next version's, the owner 09:47) — the full list stays a manual `python dash_lint.py`. The «О проекте» mockup committed (`4c049c8`), not in RC1.
 >   Judge round 7 runs on `e8a431c` + the dash_lint change. `make_release.sh` runs into `KUMM/.work/rc1_release` (log `KUMM/.work/rc1_release.log`;
->   PDF 16 410 KB and the launcher built). Then: `git push` of the pack after round 7 → GitHub release v0.9.1-RC1 after the owner's two answers (0.9.0 stays
->   «Latest»? the guide's English pages into RC2?) → install test on a fresh copy of the clean 3.1.1.
+>   PDF 16 410 KB and the launcher built).
+> - 15:26: G1–G4 PASS live (a real click under the owner's grant 15:15 «ДЕЛАЙ!!! ПОХУЙ НА МЕНЯ»). `make_release.sh` OK: 7 parts (12.8 GB), launcher, PDF,
+>   SHA256SUMS in `KUMM/.work/rc1_release/release`. Judge round 7: no confirmed defect → the pack PUSHED (22 commits). GitHub release `v0.9.1-RC1` created
+>   («0.9.1-RC1», not Latest — my default at the owner's «максимальная агрессия на выпуск», no answer to the two questions), the assets uploading (log
+>   `KUMM/.work/rc1_upload.log`); the title gets «(тестовая сборка)» by an API patch from a UTF-8 file after the upload. The clean 3.1.1 is being copied to
+>   `KUMM/.work/rc1_install/Conan_311` (robocopy PID 33000) for the install test by the launcher from the GitHub feed.
+>   The classifier refused deleting `KUMM/.work/rc1_release/check` and `…/Krinik_Mod_Pack_0_9_1_RC1` (≈ 26 GB) — the owner's call.
+> - **RC2 list (judge round 7, deferred):** `place()` forgets the old window when `built_in` differs from the visible window (two live inventory windows);
+>   assign `btn` only after the wrap succeeds; drop the second `forget_old_window()` in `place()`; the PDF dash gate excludes only the mod tables (not
+>   `--only guide`); dash_lint C# forms: a char literal inside `$"{…}"`, strings inside interpolation holes, `@$"…"` verbatim; G5 (the bar's neighbours);
+>   the Nexus email; the «О проекте» plate; the guide's English pages.
 > 1. **Pack:** judge round 4 fixed and committed (`513a21f`; stand 340 / 340; report `testcases/reports/2026-11-20_conan-launcher-judge4-fixes.md`); **judge
 >    round 5** on `7c72d78..HEAD` (round 4's fixes + bug 110 + bug 85's token fix + the mark guard) → fixes → `git push` of the pack (15+ local commits).
 > 2. **Texts:** the writer's r4 applied the clean read r3 (`reports/2026-11-20_clean_read_texts_091_r3.md`; summary `KUMM/.work/texts091r4/REPORT.md`) — in the
