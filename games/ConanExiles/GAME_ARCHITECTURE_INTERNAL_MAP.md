@@ -948,6 +948,10 @@ Temperature (2026-10-30, live + Hosav bytecode): the hero's temperature is `BPEn
   dimensions [8, 8, 1], copying from [0, 0, 0] to [1920, 1080, 1]` → D3D12 `E_INVALIDARG` fatal in a background worker. Control the same session: not
   minimized → enters fine; minimized 10 s IN the world → lives. A player cannot press a button of a minimized window, so this is the agent's path only:
   `_config/enter-world-remote.sh` restores a minimized window (SW_SHOWNOACTIVATE) before the press.
+  **The RETURN to the main menu crashes the same way** (2026-11-20 14:56:45, game 3.1.1): the agent minimized the game (`ShowWindow` 6) to give the owner his
+  keyboard back, then the remote ran `W_IngameMenu_C:CloseAndReturnToMainMenu` → the same `Subresource … [8, 8, 1]` copy check → `D3D12CommandList.cpp:244
+  E_INVALIDARG` fatal, no Lua or Blueprint on the stack. Rule: ANY map transition (world entry, return to the menu) runs with the window restored; to hand the
+  keyboard back, start by `launch-bg.ps1` (the window stays behind, not minimized) instead of minimizing a running game.
 - **`WBP_QueuedNotificationWindow_C` lives under the GAME INSTANCE**, one instance from the main menu on (`…GameInstance…WBP_QueuedNotificationWindow_C_<N>`),
   visibility 4 (SelfHitTestInvisible) — whatever collapses it in the menu keeps it collapsed in the world. `KrinikMenuProbe` did so 25 s after every
   start from 2026-10-25 to 2026-10-31 (a refuted experiment left in; removed).
