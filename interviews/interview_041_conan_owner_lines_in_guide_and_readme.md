@@ -41,7 +41,7 @@ README `_config/public_release/README.template.md`), README соберётся �
 - **C) Оставить абзац как есть**
 - **D) свой ответ**
 
-**Answer:**
+**Answer:** A) <!-- owner-review: by Mikalai Kryvusha (KOT KRINIK) · 20 ноября 2026, 14:30 (+03:00) -->
 
 ### Q2. Как записать абзац о работе над интерфейсом?
 
@@ -64,7 +64,7 @@ README `_config/public_release/README.template.md`), README соберётся �
 - **C) Оставить абзац как есть**
 - **D) свой ответ**
 
-**Answer:**
+**Answer:** A) <!-- owner-review: by Mikalai Kryvusha (KOT KRINIK) · 20 ноября 2026, 14:30 (+03:00) -->
 
 ### Q3. Какую подпись поставить под числом 9 на обложке руководства?
 
@@ -85,7 +85,12 @@ README `_config/public_release/README.template.md`), README соберётся �
 - **C) Оставить подпись как есть**
 - **D) свой ответ**
 
-**Answer:**
+**Answer:** A) <!-- owner-review: by Mikalai Kryvusha (KOT KRINIK) · 20 ноября 2026, 14:30 (+03:00) -->
+
+
+**Комментарий владельца (20 ноября 2026, 14:30 (+03:00)):** подпись называет, чьи это моды, и верна для всех девяти. Слов о том, что моды написаны вручную, на обложке не остаётся.
+
+Это не по русскому языку, не пишут так русские люди <!-- owner-review: by Mikalai Kryvusha (KOT KRINIK) · 20 ноября 2026, 14:30 (+03:00) -->
 
 ### Q4. Как поправить английскую половину разделов об ответственности и о лицензии в README?
 
@@ -108,7 +113,7 @@ README `_config/public_release/README.template.md`), README соберётся �
 - **C) Оставить английский текст как есть**
 - **D) свой ответ**
 
-**Answer:**
+**Answer:** A) <!-- owner-review: by Mikalai Kryvusha (KOT KRINIK) · 20 ноября 2026, 14:30 (+03:00) -->
 
 ### Q5. Как убрать повтор слова «распространяется» в абзаце о лицензии?
 
@@ -134,7 +139,7 @@ README `_config/public_release/README.template.md`), README соберётся �
 - **B) Оставить абзац как есть**
 - **C) свой ответ**
 
-**Answer:**
+**Answer:** A) <!-- owner-review: by Mikalai Kryvusha (KOT KRINIK) · 20 ноября 2026, 14:30 (+03:00) -->
 
 ## Что агент сделает после ответов
 
