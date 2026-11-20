@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0581 · 2026-11-20 · ❌→✅ · #chatgpt #image #art #readme #alpha
+class: variants of one design generated in separate requests
+mechanized: no
+**Lesson:** images that must match (one button in two languages, a set of icons) are asked for in ONE ChatGPT request — on one picture, then cut apart; two
+requests draw two different frames and fonts (the owner 2026-11-20 17:12). `SvarogsDream/tools/gpt_edit.sh` squashes the reply to a 1024 square and drops
+alpha (RGB); for a wide or transparent picture, take the raw data URL it leaves in `SvarogsDream/_harness/color/gpt_img.txt` and decode it with PIL as RGBA
+(the 2065×761 button with a transparent background came out clean), crop by the alpha box, save WebP with alpha.
+The owner 17:13–17:14: the squashed references were MY defect, not the tool's («не инструмент. ТЫ!») — before any send to ChatGPT, look at the exact files that
+leave (`SvarogsDream/_harness/color/gpt_in_*.jpg`) and attach only what the picture needs (the logos were enough; the launcher screen was noise). Since
+2026-11-20 17:13 `gpt_edit.sh` keeps the attachments' proportions and `gpt_grab.sh` keeps the reply's proportions and alpha.
+
 ### EXP-0580 · 2026-11-20 · ❌→✅ · #cleanup #permissions #classifier #auto-mode #owner-trust
 class: a refused command read as a missing permission, while only its spelling missed the existing rule
 mechanized: HOUSE_RULES rule 15 names the one allowed form; no guard yet

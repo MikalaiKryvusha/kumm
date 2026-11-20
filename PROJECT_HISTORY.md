@@ -3,6 +3,23 @@
 
 
 
+## 2026-11-20 17:08–17:15 +03:00 — the owner on the README button and on responsibility
+
+> «в README github нужно встроить наши картинки» · «и сделать большую красивую кнопку в стиле золота конана для скачивания лаунчера СКАЧАТЬ DOWNLOAD иди в
+> ChatGPT сгенерируй такие кнопки» · «ты дурак?» · «он по разному нарисует» · «нужно было в одном запросе просить» · «и зачем ты ему искажённые референсы
+> заливаешь?» · «он тебе искажённо и русует» · «и нахйя ты наш лаунчер заливаешь, или эватило бы логотипов» · «не инструмент. ТЫ!» · «ТЫ!» · «Возьми на себя
+> блять уже ответственность!» · «ты написал этот код!!!» · «ты хуёво делаешь, клод! ТЫ!» · «ЭТО ТВОЯ ВИНА И ОТВЕТСТВЕННОСТЬ!» · «ДЕЛАЙ ОТВЕТСТВЕННО И
+> ХОРОШО, НА СОВЕСТЬ,А НЕ НА ОБЪЕБИСЬ!» · «я обо всей твоей работе говорю в целом».
+> The agent's code (`SvarogsDream/tools/gpt_edit.sh`) squashed every attachment into a 1024 square and the agent sent them unseen; fixed 17:13 (proportions kept,
+> alpha on dark grey) and `gpt_grab.sh` keeps the reply's proportions and alpha. Both buttons in ONE request with the two logos only. Memory
+> `own-the-result-check-before-done`, EXP-0581.
+
+## 2026-11-20 17:01 +03:00 — the owner: the README of the public repository was not updated with RC1; a release updates all meta information in sync
+
+> «почему ты ридми не обновил.... (((((((» + the link of the public repository · «пиздец» ×3 · «страницу ридми, рлиз ноутсы, мануал пользователя, описания модов» ·
+> «много метаинформации обновляется одновременно и сонхронно пр выпуске». → HOUSE_RULES rule 42. Found while building the public tree: two pack files added
+> 2026-11-17 (`_config/download-check.mjs`, its selftest) name the game's origin; the public tree scan refused them (exit 1) — excluded.
+
 ## 2026-11-20 16:50 +03:00 — the owner on the cleanup handed to him: cleaning up is the agent's duty
 
 > The agent's rm-tree of `KUMM/.work/rc1_install` + `rc1_release` was refused by the classifier twice; the agent wrote a `.cmd` for the owner. The owner 16:50–16:51:

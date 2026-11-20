@@ -165,6 +165,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    unpack 1 min, install 74/74, «Играть», the menu «0.9.1-RC1», a new world with 66/66 mods and the pack's HUD (16:49). The game closed by PID, the lock released.
 >    `KUMM/.work/rc1_install` + `rc1_release` removed 16:51 (117 GB; D: 134 GB free) by rm-tree in the allowed form (HOUSE_RULES 15, EXP-0580).
 >    Three S3 findings in the report (no log line for «Играть»; the installer's misleading «Engine.ini not touched»; «Подтвердить» over its Enter badge).
+>    The new notes are LIVE on the `v0.9.1-RC1` page (16:5x, read back = the draft; still Latest).
+> 2. **IN FLIGHT 16:56 — the owner: «мою рабочую игру ты тоже, пожалуйста, преврати в 3.1.1 + 0.9.1-RC1».** The working game `D:\Games\Conan Exiles 3.1.1` carries the
+>    dev deploy (pack_version 0.9.1-RC1, `-Verify` clean, dev-only mods in). Plan: `gh release download v0.9.1-RC1` → `KUMM/.work/rc1_dl` (running); the owner's saves
+>    copied to `KUMM/.work/save_backup_2026-11-20` (7.7 MB); then `node KUMM/.work/rc1_run/run.mjs start KUMM/.work/rc1_dl "D:\Games\Conan Exiles 3.1.1"` →
+>    «Удалить сборку» → «Установить сборку» (the parts beside the launcher, no download) → «Играть» → his world `Game_1` → frame. Tests the uninstall, the install
+>    from local parts and the saves kept. Parallel: a fresh clean copy `KUMM/.work/rc1_install/Conan_311` (robocopy running) for the update / reinstall cases.
+>    After: the dev harness (KrinikConanHarness, export:false) is gone from the working game — `Deploy-ModPack.ps1 -Deploy -Only KrinikConanHarness` before remote tests.
+> 3. **Release meta in sync (HOUSE_RULES 42, the owner 17:01–17:08):** the public repo got the 0.9.1-RC1 tree (`027ab9c`, scan clean after excluding
+>    download-check); the notes' logo path fixed (art/logos) and re-published; the guide PDF rebuilt and replaced on the release + SHA256SUMS.txt updated.
+>    IN FLIGHT: the README gets our images (cover + 4 oasis shots, template edited) and a big gold «СКАЧАТЬ» / «DOWNLOAD» button (ChatGPT via
+>    `SvarogsDream/tools/gpt_edit.sh`, the debug Chrome 9223; raw grab with alpha from `_harness/color/gpt_img.txt`; `art/buttons/download_ru.webp` done,
+>    EN generating) linking `releases/latest/download/KrinikConanLauncher.exe`. Then regenerate README.draft (fill_readme.mjs), make_public_tree, push the public repo.
 > 2. **Cleanup the classifier refused me:** `KUMM/.work/svarog_cleanup.cmd` (SvarogsDream `_harness` 20.5 GB, «НА ОТСМОТР НИКОЛАЕМ», `src/*/bin|obj`) — the owner
 >    ordered it («чисти мусор», «отсмотр удаляй» 16:12) and runs it himself; `KUMM/.work/automode_rule.mjs` adds his standing cleanup permission («разрешаю»
 >    16:13) to `.claude/settings.local.json` — the classifier refuses the agent editing its own permissions, the owner runs it.

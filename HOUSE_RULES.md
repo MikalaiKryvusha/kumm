@@ -325,6 +325,16 @@
     3. Every judge brief (rule 31) hunts «work not proportional to the change» as its own class; an interface carries a stand case with a time budget.
     `[OWNER]` 2026-11-20 11:43–11:46 · `PROJECT_HISTORY.md` entry 2026-11-20 11:37–11:46.
 
+42. **A release updates all its meta information in one move, in sync: the release is not published until every item below carries the new version and was read
+    back in its medium.**
+    1. The GitHub release: the notes (RU + EN), the title, «Latest» (rule 25.2), the assets (parts, launcher, the guide PDF, checksums).
+    2. The public repository: the README and the public tree (`make_public_tree.py` → a commit on top of the public history).
+    3. The user guide: the HTML source, the PDF in the pack's archive and the PDF asset of the release.
+    4. The mods' descriptions: the README and guide tables, the change notes of the game's mod list (`krinik_change_notes.json` → the paks).
+    5. The Nexus page, when the release goes to Nexus (rule 25.2 and the owner's word for the Nexus publication).
+    One text written once feeds every place it appears; a fix in one place is a fix in all of them in the same move (rule 20).
+    `[OWNER]` 2026-11-20 17:01–17:03 · `PROJECT_HISTORY.md` entry 2026-11-20 17:01.
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —
 WebP, never PNG; for the build's own images rule 37 above governs). The context-budget hook's hint is obeyed (`CLAUDE.md`).
