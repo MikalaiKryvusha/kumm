@@ -2,7 +2,9 @@
 
 > **GitHub issue:** [#33](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/33) — the public tracker of this defect (HOUSE_RULES 44)
 
-**Status:** 🔧 fix pending the owner's play — OUR hub controller showed a stale journey page; the native `RefreshGrid` on every show, cases J1b–J6 pass 10:39
+**Status:** 🔧 since 2026-11-20 19:3x (pack `dc79053`) the cause is gone at its root: «Путешествие» is the GAME's own page again (`GAME_PAGE` 5 in
+`krinik_hub_controller.lua`), born fresh at every switch — no kept copy can go stale; the `RefreshGrid` patch below no longer runs for this tab. Retest owed: a journey
+opened during the session shows open (issue #33). History: fix pending the owner's play — OUR hub controller showed a stale journey page; the native `RefreshGrid` on every show, cases J1b–J6 pass 10:39
 (section «Root cause found»); the other kept tabs — twin list checked 2026-11-14 12:3x, none stale · **Severity:** S2 (the
 owner's play misled: the game said «choose a journey» while our page showed them locked)
 **Version/build:** Conan Exiles 3.0.1 build (pack as of 2026-11-13) · **When/context:** tossed by the owner mid-task, 2026-11-13 16:01, during the bug-95 work
