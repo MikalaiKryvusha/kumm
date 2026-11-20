@@ -3,6 +3,16 @@
 
 
 
+## 2026-11-20 16:23–16:25 +03:00 — the owner reads the RC1 notes line by line: a program does not «speak», the big work is undersold, a detail is not a feature
+
+> On «Лаунчер говорит по-русски и по-английски» (16:23): «никто так из русских людей не пишет» · «говорят Лаунчер поддерживает мультиязычность» · «не пишут
+> "говорит"» · «он не говорят блять» · «люди говорят» · «а не программа».
+> On «Тени плавно движутся вслед за солнцем.» (16:25): «очень скромно. Мы ОХУЕННУЮ работу проделали, чтобы починить сломанные тени в конане, и чтобы сонце плавно двигалось».
+> On «Пока герой бежит спринтом, прицел не приближает вид. Если после спринта правая кнопка мыши ещё зажата и лук натянут, приближение возвращается само.» (16:25):
+> «нахуя вот это писать, если это просто частная деталь кнупной фичи».
+> The agent's reading: the notes list is rebuilt by large features (one paragraph each: what the player gets, with its facts and numbers), private details fold into
+> their feature or leave; no human verb for a program; the launcher line takes the owner's own wording.
+
 ## 2026-11-20 16:19 +03:00 — the owner on the RC1 notes: the optimization work is described as nothing
 
 > On the line of the 0.9.1-RC1 notes «игра реже замирает на миг, когда герой путешествует по миру» the owner wrote: «Это полная хуйня а не описание

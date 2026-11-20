@@ -155,15 +155,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.1-RC1 («0.9.1-RC1 (тестовая сборка)», 10 assets; made «Latest» 16:17 after the owner «релиза НЕТ в гитхабе»);
 > the pack pushed; the mod library moved into `ConanExiles/_library` (git-ignored; pack `d7bdff5`, HOUSE_RULES 25); the «О проекте» mockup (`4c049c8`);
 > a language guard in `tools/hooks/ru-reply-check.mjs` (EXP-0578). Verbatim progress — chronicle, entry «STATUS bonsai trim, part 5».
-> **FIRST in the next chat:**
-> 0. **The owner 16:19: the RC1 notes describe the optimization work as nothing** (chronicle entry 2026-11-20 16:19, verbatim). Rewrite the performance
->    paragraph of the 0.9.1 notes (`ConanExiles/_config/release/draft_0_9_1/github_release_notes_0_9_1.md`, RU + EN), the README and the guide by the owner's
->    portrait: every optimization with its fact and number from the sources (KrinikConanEngineTweaks notes: N1 async navmesh gathering, A1 Niagara shaders on
->    load, the Chaos physics queue; plan 51: view distance 2.0 → 1.5, +4.7 % FPS; the mods' CPU budget work), clean read, then `gh release edit v0.9.1-RC1 --notes-file <the filled notes copy>`.
-> 1. **Finish the RC1 install test** (the full player path from GitHub): the released launcher (PID 26040 at the close, `KUMM/.work/rc1_install/launcher`, isolated by
->    `rc1_install/run.mjs`) was DOWNLOADING 0.9.1-RC1 into the fresh clean copy `KUMM/.work/rc1_install/Conan_311` (log `rc1_install/tmp/KrinikConanLauncher.log`).
->    Read the log: download → verify → install → «Играть»; then start the game on that copy (launch-bg, the window not minimized), see «0.9.1-RC1» in the
->    menu and enter the world; write the run report; then remove `rc1_install` and `rc1_release` (the owner's `.cmd` way if the classifier refuses).
+> **NOW (chat of 2026-11-20 16:20, «делаем сборку Конана»):**
+> 0. **DONE in the pack, NOT yet on the GitHub page:** the 0.9.1 notes, the guide's «Версия 0.9.1», the README mods table and `krinik_change_notes.json` rebuilt by
+>    large features with facts and numbers (pack `75ba95d`, pushed) after the owner's line-by-line reading 16:19–16:34 (chronicle entry 2026-11-20 16:23–16:25:
+>    no human verb for a program, big work not undersold, a detail is not a feature). Voice lint clean, a clean-instance read done and verified. The live page
+>    `v0.9.1-RC1` still carries the old text: `gh release edit v0.9.1-RC1 --notes-file <a copy with {{ARCHIVE_SIZE}} = 12,8 ГБ>` after the owner's word on the new text.
+>    Open from his questions: the menu tab text jitter (bug 64 row 6) was never re-tested after the hub rework — a 60 fps video on the RC1 copy decides the known-issue line.
+> 1. **RC1 install test from GitHub — PASS up to the main menu** (report `testcases/reports/2026-11-20_conan-rc1-install-from-github.md`): download 21 min, unpack
+>    1 min, install 74/74, «Играть» starts the game, the menu shows «0.9.1-RC1». World entry by real clicks (new adventure, single player) — loading at 16:43.
+>    Then: close the game by PID, release the machine lock, remove `rc1_install` and `rc1_release` (≈ 80 GB; the owner's `.cmd` way if the classifier refuses).
 > 2. **Cleanup the classifier refused me:** `KUMM/.work/svarog_cleanup.cmd` (SvarogsDream `_harness` 20.5 GB, «НА ОТСМОТР НИКОЛАЕМ», `src/*/bin|obj`) — the owner
 >    ordered it («чисти мусор», «отсмотр удаляй» 16:12) and runs it himself; `KUMM/.work/automode_rule.mjs` adds his standing cleanup permission («разрешаю»
 >    16:13) to `.claude/settings.local.json` — the classifier refuses the agent editing its own permissions, the owner runs it.
