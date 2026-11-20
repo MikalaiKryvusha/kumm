@@ -91,8 +91,23 @@ Ghidra 12.2.0 carries the provider defect `ghidra-9996` (some `-O0` switch table
   and adds ~20 tools and a memory of its own next to ours. The official LSP plugins are the better path — the owner: «Ставь» (22:02). Installed at local scope of KUMM: `csharp-lsp`, `lua-lsp`,
   `pyright-lsp`, `typescript-lsp`; their servers machine-wide: csharp-ls 0.28.0 (`dotnet tool install -g csharp-ls --version 0.28.0` — 0.29.0 fails
   «DotnetToolSettings.xml not found» on SDK 10.0.402), lua-language-server 3.19.2 (`winget install LuaLS.lua-language-server`), pyright 1.1.414 and
-  typescript-language-server 6.1.0 (`npm i -g pyright typescript-language-server typescript`). Each answers `--version` from a fresh PATH; the LSP tool
+  typescript-language-server 6.1.0 (`npm i -g pyright typescript-language-server typescript@5.9.3`). Each answers `--version` from a fresh PATH; the LSP tool
   itself loads at the next session start.
+- **First real use — 2026-11-20 22:19 +03:00, the session after the restart.** Python, Lua and JS answer; C# does not reach our code:
+  - **Python** (pyright) — `documentSymbol` of `ConanExiles/_config/release/release_checklist.py` whole, and its diagnostics arrive by themselves after an edit
+    or a read (the first one: line 42 calls `.group` on a match that may be `None`).
+  - **Lua** (lua-language-server) — `documentSymbol` of a UE4SS mod's `Scripts/main.lua` outside KUMM, with the `RegisterKeyBind` calls.
+  - **JS** (typescript-language-server) — failed at first: «Could not find a valid TypeScript installation». The plain `typescript` installed on 22:03 was
+    7.0.2, the native (Go) TypeScript, which ships no `lib/tsserver.js`; the server resolves user setting → workspace → fallback → bundled and finds no
+    `tsserver.js` anywhere (its source, read through Context7). `npm i -g typescript@5.9.3` (the last 5.x) fixed it in the running session: `kumm.mjs`
+    symbols and `findReferences` of `parseArchive` (3 places). Keep `typescript@5` global until typescript-language-server supports 7.
+  - **C#** (csharp-ls 0.28.0) — answers only for a document INSIDE the session's root folder: it loads a folder's `.sln` / `.csproj` lazily, on the first
+    request for a document under that folder, and a document outside every folder starts nothing (probe: the same server with the root
+    `SvarogsDream/src/KrinikDevHarness` loaded its `.csproj` and answered in 4 s; with the root KUMM and the launcher's file it never looked for a project in
+    120 s). Claude Code starts the server from the session folder KUMM and does not pass the session's additional folders (a `.cs` of `_tools/src/uaj` with its
+    own `.csproj` — no symbols). KUMM holds no C#, our C# lives in the pack (the launcher, compiled by `csc` without a project) and in SvarogsDream, so in a
+    KUMM session C# navigation stays a text grep; a `.csproj` for the launcher under KUMM was built (0 errors) and removed — it cannot help while the
+    document lies outside the root.
 
 ## Updating
 

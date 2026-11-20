@@ -143,8 +143,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Ghidra 12.2) and `context7` at local scope (both «✔ Connected» by `claude mcp get`; their tools load in the NEXT session), KUMM's own `/game-hunt` (Claude-BugHunter's
 > method for game testing), the call points — `AGENT_GUIDE.md` → "Third-party skill packs at their call points"; JDK 25 machine-wide (the owner 21:52). Recon and
 > what was left out — `researches/agent-skill-packs/README.md`. The official LSP plugins (`csharp-lsp`, `lua-lsp`, `pyright-lsp`, `typescript-lsp`) instead of Serena — installed by the owner's word 22:02 (local scope, servers
-> machine-wide). Owed: the first real use of the LSP tool and of REA (MCP) and Context7 in the next session — a restart of VS Code loads them and the new PATH;
-> the independent judge on `tools/skill-packs.mjs` and `.claude/skills/game-hunt/SKILL.md` (skipped — the owner moved to a new session at 21:59; the script
+> machine-wide). First real use DONE 2026-11-20 22:19 +03:00 (the session after the restart): REA (the launcher exe — 88 types, 588 methods), Context7 (the sources of two
+> language servers), LSP for Python, Lua and JS (JS after `typescript` 7.0.2 → 5.9.3: TypeScript 7 ships no `tsserver.js`); LSP for C# serves only C# under
+> the session folder and KUMM has none — C# stays a text grep (`researches/agent-skill-packs/README.md`). Still owed: the independent judge on `tools/skill-packs.mjs` and `.claude/skills/game-hunt/SKILL.md` (skipped — the owner moved to a new session at 21:59; the script
 > was run red/green with three mutants).
 > **PARKED 2026-11-20 21:35 +03:00 — the owner's task «скачай и разверни в KUMM … Claude-BugHunter … интегрируй в KAIF» (21:35) taken first.** RC2 stands at: Krinik mod versions
 > 0.9.1-RC2 in `ConanExiles/modpack.json` (NOT committed), `release_checklist.py` reads git notes + only shipped mods (NOT committed), note on `c27e3a7` (NOT pushed:

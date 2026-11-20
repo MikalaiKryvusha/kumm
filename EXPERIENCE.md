@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0593 · 2026-11-20 · ❌→✅ · #lsp #typescript #csharp #install #claude-code
+An install that only answers `--version` is not a working tool: the first real LSP calls found two failures the version probes hid. (1) The plain
+`npm i -g typescript` brings 7.x, the native TypeScript with no `lib/tsserver.js`, and typescript-language-server 6 refuses to start («Could not find a valid
+TypeScript installation»); pin `typescript@5.9.3`. (2) csharp-ls answers only for a document inside a workspace folder, and Claude Code gives it the session
+folder alone (additional folders are not passed) — a `.csproj` for outside code built clean and still gave no symbols; check where the code lives against the
+session root before adding project files. Probe a language server outside the session with a 60-line stdio client (initialize · didOpen · documentSymbol)
+and a control root that holds its own project.
+
 ### EXP-0592 · 2026-11-20 · ❌→✅ · #lsp #dotnet-tool #csharp #install
 `dotnet tool install -g csharp-ls` (0.29.0, the latest) fails on SDK 10.0.402 with «DotnetToolSettings.xml not found in the package» — the package, not
 the machine; `--version 0.28.0` installs and answers. When the newest release of a tool will not install, try the previous version before debugging the
