@@ -138,6 +138,20 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **DONE 2026-11-20 ≈22:0x — the owner's side task of 21:35 (skill packs into KAIF), then RC2 resumes from the line below.** Packs live in `D:/work/ai_sandbox/_tools`,
+> KUMM links to them: superpowers ×5 skills and REA's skill symlinked into `.claude/skills` (`node tools/skill-packs.mjs check` — 10/10 OK), MCP `rea` (6.10.1,
+> Ghidra 12.2) and `context7` at local scope (both «✔ Connected» by `claude mcp get`; their tools load in the NEXT session), KUMM's own `/game-hunt` (Claude-BugHunter's
+> method for game testing), the call points — `AGENT_GUIDE.md` → "Third-party skill packs at their call points"; JDK 25 machine-wide (the owner 21:52). Recon and
+> what was left out — `researches/agent-skill-packs/README.md`. Owed: the owner's word on the official LSP plugins (`csharp-lsp`, `lua-lsp`, `pyright-lsp`,
+> `typescript-lsp`) instead of Serena; the first real use of REA (MCP) and Context7 in the next session — a restart of VS Code loads them and the new PATH;
+> the independent judge on `tools/skill-packs.mjs` and `.claude/skills/game-hunt/SKILL.md` (skipped — the owner moved to a new session at 21:59; the script
+> was run red/green with three mutants).
+> **PARKED 2026-11-20 21:35 +03:00 — the owner's task «скачай и разверни в KUMM … Claude-BugHunter … интегрируй в KAIF» (21:35) taken first.** RC2 stands at: Krinik mod versions
+> 0.9.1-RC2 in `ConanExiles/modpack.json` (NOT committed), `release_checklist.py` reads git notes + only shipped mods (NOT committed), note on `c27e3a7` (NOT pushed:
+> `git push origin refs/notes/commits`); kit step 1 `kit-conanui-edit.py` running in the background (log `KUMM/.work/rc2/logs/01_conanui_edit.log`), then
+> modsettings ×2, click-events ×2, `kit-buildmod.py`; the guide read whole — owed edits: «Лаунчер говорит», «сообщает», «моды говорят по-русски», «учит героя»,
+> the Graphics row undersold, no RC2 in the title / history / fixes. Machine lock `kumm` to 22:34.
+>
 > **CHAT CLOSED 2026-11-20 ≈21:2x (the chat of 19:53 «resume», autonomous; soft closure at the 80 % budget).** Done (packs `29a612b`, `e1c0691`, `d7e2583`,
 > `4d1d867`; reports `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`, `…_conan-immortal-heroine-save.md`): issue #3 — talks keep the world at 1.0
 > (both talk windows) AND the NPC's answers in a talk are visible again (my `krinik_shout_fade` hid them since 2026-10-31; control, fix, retest at the Iruk

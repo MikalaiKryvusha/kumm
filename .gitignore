@@ -64,3 +64,11 @@ tools/hooks/.owner-ask.txt
 /krinik-stylometry/
 tools/hooks/.efficient-code-read.stamp
 tools/hooks/.mod-reconciliation-read.stamp
+
+# Third-party skills linked from D:/work/ai_sandbox/_tools (machine-local symlinks; recreate and check: node tools/skill-packs.mjs link | check)
+.claude/skills/systematic-debugging
+.claude/skills/verification-before-completion
+.claude/skills/receiving-code-review
+.claude/skills/requesting-code-review
+.claude/skills/writing-skills
+.claude/skills/reverse-engineer-anything

@@ -434,6 +434,26 @@ The additions live here, at the CALL POINT, on purpose: the skills are vendored 
 ritual in their headers can diff against upstream — never weave a KAIF clause into their text. The sphere
 library plays the role of their domain adapters for the same reason.
 
+### Third-party skill packs at their call points
+
+Packs from GitHub live in `D:/work/ai_sandbox/_tools`, KUMM only links to them (`[OWNER]` 2026-11-20 21:47): the skills are symlinked into
+`.claude/skills` (git-ignored; recreate and check — `node tools/skill-packs.mjs link | check`), the MCP servers are registered at local scope.
+They are called HERE, at the moment of the ritual — never as a second ritual set; what was left out and why — `researches/agent-skill-packs/README.md`.
+
+| Moment of the work | Call | Then KAIF goes on with |
+|---|---|---|
+| a bug, a failing check or an unexpected behaviour, before any fix | `systematic-debugging` (root cause first; 3 failed fixes → question the architecture) | `BUG_FIXING_FRAMEWORK.md`, `/bug-research` when it resists |
+| testing a build or a mod by play; the play report of a candidate; the owner says bugs remain | `/game-hunt` (KUMM's adaptation of Claude-BugHunter's method) | the play matrix, `/report-bug`, the play report |
+| about to say "done", "fixed", "passing" | `verification-before-completion` (fresh evidence in this message) | `/fable-judge`; the fifth obligation (a claim no wider than the observation) |
+| a piece of code is written | the judge's brief from `requesting-code-review` (`code-reviewer.md`) | the independent judge (memory: every piece of code) |
+| the judge's findings come back | `receiving-code-review` (verify each, push back on a wrong one, no performative agreement) | fix, rerun, report |
+| a question about a game binary, an assembly, IL2CPP metadata, a pak's code | REA (MCP `rea`, skill `reverse-engineer-anything`; Ghidra 12.2 + JDK 25) before guessing | the game map, `researches/` |
+| a library API — UE4SS, BepInEx, Harmony, Unity, Unreal, Lua, WPF, the Nexus API | Context7 (MCP `context7`) before recall | code by the source, not by memory |
+| writing or editing a skill (KAIF or KUMM) | `writing-skills` (pressure-test it before it ships) | `/fable-judge suite <skill>` |
+
+A linked superpowers skill that names a skill KUMM did not take reads it as: `superpowers:test-driven-development` → `TESTING_FRAMEWORK.md` (the work
+produces its own check; the owner's order "write all the code, then test in a batch" stands).
+
 ### Planning discipline — the task ladder (`/plan-task` · `/plan-epic`)
 
 **A major epic feature starts with a web recon of the industry's golden practices and a research doc in

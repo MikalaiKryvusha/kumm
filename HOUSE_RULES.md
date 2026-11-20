@@ -397,6 +397,8 @@ the dossier step).
 | Shells | Windows PowerShell 5.1 (no `pwsh`) · Git Bash 5.2.21 · `cmd` | `$PSVersionTable`; `bash --version` |
 | Encodings | console UTF-8; ANSI 1251 — `Set-Content`/`Add-Content` only with `-Encoding utf8`; PowerShell `ru-RU` | `[Console]::OutputEncoding.WebName` |
 | Tools | Node v24.15.0 · npm 10.8.2 · git 2.43.0 · gh 2.95.0 · `winget` | `node -v; git --version; gh --version` |
+| Java | **JDK 25 machine-wide since 2026-11-20 21:53** (the owner's word 21:52): `C:\Program Files\Microsoft\jdk-25.0.5.102-hotspot`, first in the machine PATH, machine `JAVA_HOME`; JDK 21 stays on disk, off PATH; the user `JAVA_HOME` (bubblewrap's JDK 17) removed — the restore line is in `researches/agent-skill-packs/README.md` | `java -version`; `[Environment]::GetEnvironmentVariable('JAVA_HOME','Machine')` |
+| Agent tool packs | in `D:/work/ai_sandbox/_tools`: `superpowers`, `claude-bughunter` (git clones), REA 6.10.1 on the portable Node 24.22.2 (`node24/rea`; the global Node 24.15 serves pm2), Ghidra 12.2; MCP `rea` and `context7` at local scope of KUMM; skills symlinked into `.claude/skills` | `node tools/skill-packs.mjs check`; `claude mcp list` |
 | `tar` / `curl` | PowerShell: `tar` is bsdtar (`D:\…` = a remote host), `curl` is an alias of `Invoke-WebRequest`; Git Bash: GNU `tar`, real `curl` | `Get-Command tar,curl`; `type -p tar curl` |
 | Line endings | `core.autocrlf = true` | `git config --get core.autocrlf` |
 

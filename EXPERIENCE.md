@@ -91,6 +91,23 @@
 
 ## Entries
 
+### EXP-0591 · 2026-11-20 · ✅ · #skills #claude-code #symlink #tools #packs
+A third-party skill linked into `.claude/skills` as a directory SYMLINK to its folder in `D:/work/ai_sandbox/_tools` is the documented Claude Code way
+(skills.md «Symlinked folders») and is picked up LIVE — the six linked skills appeared in the session's list within a minute. A plugin is worse for a
+subset: custom hook paths merge with the pack's `hooks/hooks.json`, links out of a plugin are rejected, so it means drifting copies. Junctions are
+undocumented. Recreate and check: `node tools/skill-packs.mjs link | check`; the why — `researches/agent-skill-packs/README.md`.
+
+### EXP-0590 · 2026-11-20 · ❌→✅ · #ghidra #java #rea #reverse-engineering
+Ghidra 12.2 declares `application.java.min=25`, so the Ghidra installed on 2026-11-09 next to JDK 21 could never have started; the REA doctor said it
+(«ghidra-java … JDK 25 or newer»). JDK 25 is machine-wide since 21:53. Before relying on a downloaded tool, run its own doctor or `--version` the
+same day — an install that was never started is a hypothesis, not a tool.
+
+### EXP-0589 · 2026-11-20 · ❌ · #safeguards #security-text #recon #bughunter
+Reading the README and the attack-skill list of a web-security bug-bounty kit (Claude-BugHunter: XSS, SSRF, OAuth payloads) tripped the model's safeguards
+and PAUSED the session (21:40, the owner's screenshot) — even though the purpose was to repurpose its method for game testing. Read only the METHOD files
+of such a pack (`bb-methodology`, `triage-validation`, `evidence-hygiene`, `commands/`), never its `hunt-*` payload skills; KUMM's adaptation is
+`.claude/skills/game-hunt/SKILL.md`.
+
 ### EXP-0588 · 2026-11-20 · ❌ · #owner-trust #release #gate #question #order
 class: a question about my own gate after the owner already ordered the act it blocks
 mechanized: `make_release.sh` `KRINIK_PLAY_GATE_WAIVER` — the owner's order is passed as the waiver text, no question
