@@ -38,6 +38,7 @@ D:\work\ai_sandbox\KUMM/          # the engine repo — shipped, public
 ├── games/                         # per-game dossiers; games/<Game>/mods/<Mod>.md — one notes file per mod of a build (2026-10-30)
 ├── .kaif/                         # framework core: kaif.json, kaif-core.mjs, spheres/, tools/ (10 lints + contour/), hooks/
 ├── .claude/skills/ .agents/skills/ .grok/skills/ .cline/skills/ .roo/  # 37 skills × 5 agent systems
+├── .claude/skills/game-hunt/       # KUMM's own: Claude-BugHunter's method for game testing (2026-11-20); six more skills are git-ignored SYMLINKS into D:/work/ai_sandbox/_tools (superpowers ×5, REA) — tools/skill-packs.mjs link | check, researches/agent-skill-packs/
 ├── CLAUDE.md · AGENTS.md · .clinerules/ · .roo/rules/                 # context pointers
 ├── .claude/settings.json · .codex/hooks.json                          # KAIF refresh hooks (wired 2026-10-16) + context-budget (2026-10-28); the project's other own hooks live in the git-ignored .claude/settings.local.json
 ├── .claude/hooks/context-budget.mjs  # context-window watcher: 70 % / 75 % warn · 80 % finish the work + /end-chat-soft · 92 % /end-chat-force; refuses a closure skill below its threshold (self-check: --check)

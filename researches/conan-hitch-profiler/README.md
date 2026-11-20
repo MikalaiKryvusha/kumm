@@ -99,7 +99,7 @@ loss stated and below 1 %).
   flags), the trace written to another disk (C: or F:), and which mod logs at that moment (UE4SS.log line times).
 - **Next (a new chat):** (1) N1: untraced A-B-A-B launches (background path, as A1) — the per-thread read is DONE above; (2) candidates to A-B on flights AND on a running-hero route:
   `DataGatheringMode` Instant vs Lazy, async gathering on, fewer simultaneous jobs, a smaller invoker radius (the invokers' `TileGenerationRadius` /
-  `TileRemovalRadius` on the hero and NPCs); (3) only then REA + Ghidra (`_tools/node24/rea/rea.cmd`, REA 6.8.0 installed; Ghidra 12.2 in `_tools/ghidra`) on
+  `TileRemovalRadius` on the hero and NPCs); (3) only then REA + Ghidra (`_tools/node24/rea/rea.cmd`, REA 6.8.0 installed; Ghidra 12.2 in `_tools/ghidra` — 2026-11-20: REA 6.10.1, MCP `rea` at KUMM local scope, Ghidra 12.2 needs JDK 25 — machine-wide since then; `researches/agent-skill-packs/README.md`) on
   `ExportGeometry` and the scan at RVA `0x26EEC30`.
 
 ## REA — the tool the owner pointed to (2026-11-09 20:35–20:36)
