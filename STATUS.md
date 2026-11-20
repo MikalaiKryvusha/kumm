@@ -174,9 +174,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    After: the dev harness (KrinikConanHarness, export:false) is gone from the working game — `Deploy-ModPack.ps1 -Deploy -Only KrinikConanHarness` before remote tests.
 > 3. **Release meta in sync (HOUSE_RULES 42, the owner 17:01–17:08):** the public repo got the 0.9.1-RC1 tree (`027ab9c`, scan clean after excluding
 >    download-check); the notes' logo path fixed (art/logos) and re-published; the guide PDF rebuilt and replaced on the release + SHA256SUMS.txt updated.
->    IN FLIGHT: the README gets our images (cover + 4 oasis shots, template edited) and a big gold «СКАЧАТЬ» / «DOWNLOAD» button (ChatGPT via
->    `SvarogsDream/tools/gpt_edit.sh`, the debug Chrome 9223; raw grab with alpha from `_harness/color/gpt_img.txt`; `art/buttons/download_ru.webp` done,
->    EN generating) linking `releases/latest/download/KrinikConanLauncher.exe`. Then regenerate README.draft (fill_readme.mjs), make_public_tree, push the public repo.
+>    DONE 17:18: the public README carries our images (the 0.9.1 cover, four oasis shots) and the gold «СКАЧАТЬ» / «DOWNLOAD» buttons (one ChatGPT request with
+>    the two logos, `art/buttons/`, pack `28436e1`) linking `releases/latest/download/KrinikConanLauncher.exe`; public repo `37c1176`; every image link 200; the
+>    rendered page looked at (headless Chrome). Not yet in sync: the mods' change notes inside the paks (next pak build) and the guide PDF inside the archive parts (RC2).
+>    Item 2 (the working game → the release build) NOT started: the parts are downloaded in `KUMM/.work/rc1_dl` (13.7 GB, kept for it) and the fresh clean copy
+>    `KUMM/.work/rc1_install/Conan_311` (59 GB, kept for the update / reinstall cases); D: ≈ 60 GB free.
 > 2. **Cleanup the classifier refused me:** `KUMM/.work/svarog_cleanup.cmd` (SvarogsDream `_harness` 20.5 GB, «НА ОТСМОТР НИКОЛАЕМ», `src/*/bin|obj`) — the owner
 >    ordered it («чисти мусор», «отсмотр удаляй» 16:12) and runs it himself; `KUMM/.work/automode_rule.mjs` adds his standing cleanup permission («разрешаю»
 >    16:13) to `.claude/settings.local.json` — the classifier refuses the agent editing its own permissions, the owner runs it.
