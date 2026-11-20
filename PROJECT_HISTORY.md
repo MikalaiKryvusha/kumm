@@ -8876,3 +8876,24 @@ What was done: bug 110 (`bugs/110_conan_launcher_slow_button_feedback.md`); the 
 answers before code, the canons with sources, our three recurrences); the hook `efficient-code-gate` (`tools/hooks/style-gate.mjs`, wired in
 `.claude/settings.local.json`; a live refusal at 11:5x before the rulebook was read); HOUSE_RULES rule 41; the KAIF improvement request
 `bugs/KAIF/33_*`; plan 57 «The owner's remarks of 2026-11-20» (the slowness and the «О проекте» plate).
+
+## 2026-11-20 12:2x +03:00 — STATUS bonsai trim, part 4 (closure of the chat of 2026-11-20 11:04): the paused games paragraphs moved verbatim
+
+> **Svarog's Dream — the main work from 2026-10-09 to 2026-10-26** (`[OWNER]` «забей на Medieval Dynasty … мы работаем дальше над Сварогом» · 2026-10-09 ≈13:25;
+> scale: 16:9 at 720p, 1080p, 2K, 4K — `MASTER_PLAN.md`). Medieval Dynasty is paused; the paragraph below is for the return.
+>
+> **Medieval Dynasty (paused)** — pack `D:/work/ai_sandbox/MedievalDynasty`, epic 15 (`plans/15_…`, phase 0 — `plans/16_…`),
+> bug 29 (HDR) open; return checklist — chronicle, entries 2026-10-09 19:41 and 2026-10-10 03:38.
+>
+> **Svarog's Dream** — dossier `games/SvarogsDream/README.md`, backlog `plans/18_svarog_backlog_checklist.md`. Run rules — `HOUSE_RULES_REFERENCE.md`
+> §5 "Svarog run": since 2026-10-18 the saves are the agent's to use (the owner does not play for progress, interview #022, Q5); after `h.sh kill` —
+> `bash tools/reg-snap.sh restore`; remote cheats — only inside a run, with a banner (Q6); never stop time (memory
+> `svarog-no-timescale-zero`); HDR, if turned off for recording — `powershell -File tools/hdr.ps1 on`.
+>
+> **Mafia II** — paused, dossier `games/Mafia2/README.md` (section «Дальше»); the agent does not start the story.
+>
+> **Conan 2.2.3** — dossier `games/ConanExiles/README.md`. Palworld — in daily use, no edits pending.
+> **Oblivion Remastered is parked until its patch** — do not go there until the owner says so.
+> **Cyberpunk 2077 — no game installed (removed 2026-10-30 by the owner's word).** The pack repo `D:/work/ai_sandbox/Cyberpunk2077`
+> (private `cyberpunk-2077-modpack`) holds the inventory of his manual 2.1 build (19 mods, `modpack.json`), the mod settings and the 10 freshest
+> saves — the starting point for a future AI-built pack.

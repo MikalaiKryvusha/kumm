@@ -128,7 +128,8 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
    section of links under «Ссылки», never «контакты» in the UI). Order (HOUSE_RULES 34, 23): KUIPS mockup in `ConanExiles/_config/launcher/design/` (a
    button state on the main screens + the open plate) → `kuips shoot / layout / build / check` → my look → the owner's look → build → stand + frames at the
    four resolutions → judge. In RC1 if accepted before the archive is built, otherwise in RC2 (said to the owner 11:38).
-   - [ ] mockup · [ ] the owner's verdict · [ ] build · [ ] stand · [ ] judge
+   - [ ] mockup · [ ] the owner's verdict · [ ] build · [ ] stand · [ ] judge <!-- attribution-ok: a step to come; his words of 11:38 are quoted in this item above -->
+
 
 ## Decisions made without the owner
 

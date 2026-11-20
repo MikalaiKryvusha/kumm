@@ -68,24 +68,8 @@
 >
 >
 > The move to 3.1.0 (done; the build runs on 3.1.1) and the 2026-11-18 progress pointer — chronicle, entry «2026-11-20 11:0x — STATUS bonsai trim, part 3».
-> **Svarog's Dream — the main work from 2026-10-09 to 2026-10-26** (`[OWNER]` «забей на Medieval Dynasty … мы работаем дальше над Сварогом» · 2026-10-09 ≈13:25;
-> scale: 16:9 at 720p, 1080p, 2K, 4K — `MASTER_PLAN.md`). Medieval Dynasty is paused; the paragraph below is for the return.
->
-> **Medieval Dynasty (paused)** — pack `D:/work/ai_sandbox/MedievalDynasty`, epic 15 (`plans/15_…`, phase 0 — `plans/16_…`),
-> bug 29 (HDR) open; return checklist — chronicle, entries 2026-10-09 19:41 and 2026-10-10 03:38.
->
-> **Svarog's Dream** — dossier `games/SvarogsDream/README.md`, backlog `plans/18_svarog_backlog_checklist.md`. Run rules — `HOUSE_RULES_REFERENCE.md`
-> §5 "Svarog run": since 2026-10-18 the saves are the agent's to use (the owner does not play for progress, interview #022, Q5); after `h.sh kill` —
-> `bash tools/reg-snap.sh restore`; remote cheats — only inside a run, with a banner (Q6); never stop time (memory
-> `svarog-no-timescale-zero`); HDR, if turned off for recording — `powershell -File tools/hdr.ps1 on`.
->
-> **Mafia II** — paused, dossier `games/Mafia2/README.md` (section «Дальше»); the agent does not start the story.
->
-> **Conan 2.2.3** — dossier `games/ConanExiles/README.md`. Palworld — in daily use, no edits pending.
-> **Oblivion Remastered is parked until its patch** — do not go there until the owner says so.
-> **Cyberpunk 2077 — no game installed (removed 2026-10-30 by the owner's word).** The pack repo `D:/work/ai_sandbox/Cyberpunk2077`
-> (private `cyberpunk-2077-modpack`) holds the inventory of his manual 2.1 build (19 mods, `modpack.json`), the mod settings and the 10 freshest
-> saves — the starting point for a future AI-built pack.
+> The paused games (Svarog's Dream, Medieval Dynasty, Mafia II, Conan 2.2.3, Oblivion Remastered parked until its patch, Cyberpunk 2077 with no game
+> installed) — their return pointers moved verbatim to the chronicle, entry «2026-11-20 12:2x — STATUS bonsai trim, part 4».
 
 The engine works and the owner uses it daily for Palworld. It checks its pure core (the first test since 2026-09-08, four since 2026-10-14):
 `node test-parse-archive.mjs`, `test-archive-roundtrip.mjs`, `test-pick-card.mjs`, `test-help-commands.mjs` (exit 0 = green), and the game
@@ -174,7 +158,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 2. **Texts:** the writer's r4 applied the clean read r3 (`reports/2026-11-20_clean_read_texts_091_r3.md`; summary `KUMM/.work/texts091r4/REPORT.md`) — in the
 >    pack commit `300385a`; `mods-table.mjs` marks 21 KRINIK MODIFIED (was 17; a guard now refuses a mark that differs from `modpack.json`);
 >    the owner's page of pairs OPENED for him 2026-11-20 12:12 +03:00 (`KUMM/.work/texts091r4/pairs_0_9_1_RC1.html`, 75 pairs, built by `pairs_page.py` from
->    `.work/texts091r3/pairs.md`; looked at by a headless frame first). Owed: his verdict on the page; his word on O1–O6 (his own lines) and the enemy health bar fact; a look at the
+>    `.work/texts091r3/pairs.md`; looked at by a headless frame first). **The owner's verdict 2026-11-20 12:13: «окей, почитал» — read, no remarks; the texts go into
+RC1 as they are.** The enemy health bar fact rests on its sources (pack `1dfd312`, the owner's own close of 2026-11-03) — no question. Owed: an interview
+with the proposals O1–O6 for his own lines (`KUMM/.work/texts091r4/REPORT.md`; not an RC1 gate); a look at the
 >    Camera cell (≈ 270 chars) on the game's mods screen; the change notes changed (C) → `set-pak-modinfo.py` on the four paks + deploy. The guide's
 >    **English pages after the Russian ones** (the owner 2026-11-18 21:08) are still owed. The archive's size is filled by `make_release.sh` step 4b into a copy of the notes (plan 55, phase E; the guide names no size).
 > 3. **RC1 is DEPLOYED in the working game** (2026-11-20 10:44, pack `f381f3f` + `ce1f12b`: 75 / 75 mods, verify 114 present 0 missing; the guard on the game's
