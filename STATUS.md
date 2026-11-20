@@ -138,6 +138,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **PARKED 2026-11-20 17:42 +03:00 (the owner: pause now, no ceremonies).** Done this chat: the working game `D:\Games\Conan Exiles 3.1.1` is on the RELEASE build 0.9.1-RC1
+> (uninstall of the dev deploy by the launcher's own `cmd /c "… < nul"` — 11 files back, 166 removed, `download-check list` missing 0 / badSize 0; the RC1 launcher
+> off-screen installed from the parts in `.work/rc1_dl`: «74/74 mods · verify 115 present, 0 missing», screen `installed`; saves 26/26 identical before / after;
+> dev leftovers in `ue4ss/Mods` removed; work files `.work/wg_rc1`). README: the four identical oasis frames replaced (pack `6047b6e`, `494d16c`) by one row of
+> three — oasis, first-person bow, Xevyr's mods settings; the bow calque fixed in the README table, notes draft, change notes, guide HTML. NOT YET: the public
+> repo commit — the tree is mirrored into `.work/public_repo` (scan 0, README diff read), `git add -A` there is NOT used: add README.md, the 3 changed texts
+> and `art/screenshots/{bow_first_person,fishing_settings,mods_settings}.webp`, commit, push, then look at the rendered page; LICENSE shows as modified by line
+> endings only — leave it out. OWED (the owner 17:40): views of the NEW locations the mods add (Shemite City State, Caverns of Set / Akhlut Outpost, Ymir's
+> Respite, the Al-Merayah fortress) shot in the working game, plus a new hub frame (the old one shows the test name «еуые»), shown to the owner as a page before
+> they go in the README; the working game's in-game check (menu «0.9.1-RC1», his world `Game_1`) needs the owner FREE. RC2 notes: the launcher counts 72 of 74
+> mods in its progress while the installer says 74/74; the game's `Saved/ExtractedMods` (12.8 GB) stays after an uninstall.
+>
 > **CHAT CLOSED 2026-11-20 ≈17:2x (the chat of 16:20, «делаем сборку Конана»; soft closure at the 80 % budget).** Done: the 0.9.1 notes, the guide's «Версия 0.9.1»,
 > the README mods table and the mod-list change notes rebuilt by large features with measured facts (pack `75ba95d`; the owner's line-by-line reading, chronicle
 > 16:23–16:25); the RC1 page carries the new notes and the fixed logo path, the guide PDF and `SHA256SUMS.txt` on the release replaced; the RC1 install test from
