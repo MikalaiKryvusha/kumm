@@ -168,7 +168,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    **judge round 4** on `00c795d..7c72d78` (rule 31) → fixes → `git push` of the pack (14 local commits, bug 85's included).
 > 2. **Texts (the owner's META-texts order 09:47):** a clean-instance read (§7B) of N, R, G, C as the writer left them (`KUMM/.work/texts091r3/REPORT.md` — its
 >    decisions 1–6); fixes; the owner's page of pairs from `pairs.md` (rule 32: one HTML page); his word on his own lines (REPORT «The owner's lines»). The guide's
->    **English pages after the Russian ones** (the owner 2026-11-18 21:08) are still owed. `{{ARCHIVE_SIZE}}` is filled after `make_release.sh`.
+>    **English pages after the Russian ones** (the owner 2026-11-18 21:08) are still owed. The archive's size is filled by `make_release.sh` step 4b into a copy of the notes (plan 55, phase E; the guide names no size).
 > 3. **RC1 is DEPLOYED in the working game** (2026-11-20 10:44, pack `f381f3f` + `ce1f12b`: 75 / 75 mods, verify 114 present 0 missing; the guard on the game's
 >    Mods 4 / 4 ok). SEEN 2026-11-20 11:14 +03:00: «0.9.1-RC1» under our logo and the mods screen of KrinikConanGraphics with its description, author, URL and change note
 >    (rule 40.3; report `testcases/reports/2026-11-20_conan-rc1-menu-and-mods-screen-look.md`). Re-run `set-pak-modinfo.py` on the four `_unpacked` paks + deploy

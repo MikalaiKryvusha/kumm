@@ -91,6 +91,22 @@
 
 ## Entries
 
+### EXP-0575 · 2026-11-20 · ❌→✅ · #launcher #dotnet #http #stand #loopback #judge #release #placeholder
+class: verified-on-the-easy-case
+mechanized: `ConanExiles/_config/release/make_release.sh` (step 1 refuses a guide with a placeholder, step 4b refuses notes with one) and `ConanExiles/_config/public_release/make_public_tree.py` (refuses a README draft with one); the error responses — `Feed.Respond` in `KrinikConanUpdates.cs`
+**Context:** judge round 4 on the launcher and the release scripts of 0.9.1-RC1.
+**Result:** ❌→✅ — two fixes of round 3 had closed only the places the judge had named: (1) the error response was closed in the two outer catches of
+`BuildUpdate.Run`, while the tail check of the archive and the self-update left theirs open; (2) `{{ARCHIVE_SIZE}}` was let through by the README generator
+«to be filled after the release», and no script filled it — the PDF, the notes and the README would have shipped the literal. And the stand case meant to guard
+(1) passed on the pre-fix exe: its feed listens on 127.0.0.1, where most likely the per-host two-connection limit of .NET Framework does not apply.
+**Lesson:** close a resource class at its SOURCE (each request closes its own error response — `Feed.Respond`), not at the catch sites a reviewer happened to
+list; a placeholder «filled later» needs the script that fills it and a guard that refuses it left, in the same commit; a stand case is a guard only after it
+was seen red on the pre-fix build — a loopback feed cannot show a connection-limit defect.
+**Repro:** `grep -n "GetResponse()" ConanExiles/_config/launcher/*.cs` — every hit sits inside `Feed.Respond` or `Feed.Download` with a `CloseResponse` catch;
+`bash KUMM/.work/judge4fix/t_release.sh` (while it exists) or `grep -c "{{" <release notes copy>` after `make_release.sh` prints 0.
+**Trigger:** writing «filled later», «closed in the catch», or a stand case named after a defect → name the filler / the source / the red run.
+**Not for:** catch sites that genuinely need the response (the 416 branch reads its status before closing).
+
 ### EXP-0574 · 2026-11-20 · ❌→✅ · #windows #tasklist #process #guard #release
 class: a process check that greps tasklist's TABLE for a long image name never matches
 mechanized: `ConanExiles/_config/release/make_volumes.sh` uses `tasklist //FO CSV //NH | grep '^"ConanSandbox'`; the launcher stand's machine guard the same CSV form

@@ -221,6 +221,12 @@ map markers (`SimpleMinimap_MarkerData.sav`), the damage logs and `Game_0.db` ar
   `Feed.Parse`), and `/releases/latest` (the build's «Что нового» fallback) ignores them too (research §1.4) — a pre-release 0.9.1 would be invisible to every
   launcher. «Предварительная» goes into the release TITLE and the notes. 0.9.0 is for game 3.0.1, so 0.9.1 becomes «Latest» rightly. `[AI]` — named to the owner
   in the report of 2026-11-17; his word overrides.
+- **The archive's total size reaches the texts by the release script, never by hand** (2026-11-20 11:32 +03:00, the judge's round 4, finding 1: nothing filled
+  `{{ARCHIVE_SIZE}}`). `make_release.sh` step 4b sums the parts' sizes (in GiB, as Windows shows them: «12,4 ГБ» / «12.4 GB») and writes the notes for the release
+  page as a COPY, `<work>/release_notes_<stem>.md` — `{{ARCHIVE_SIZE}}` in the RU half, `{{ARCHIVE_SIZE_EN}}` in the EN half; the draft stays the template for the
+  next RC. It prints the command for the README: `KRINIK_ARCHIVE_SIZE='…' KRINIK_ARCHIVE_SIZE_EN='…' node _config/public_release/mods-table.mjs …`;
+  `make_public_tree.py` refuses a README draft with any placeholder. The guide PDF ships INSIDE the archive and is printed before the archive exists, so the
+  guide names no total size; step 1 refuses a guide with a placeholder and notes that name another release's parts (the notes file is shared by RC1, RC2 …).
 - The Nexus file: the same bundle; the description says what the launcher downloads and from where (the 0.9.0 quarantine letters said «None of the scripts
   downloads or runs anything from the internet» — no longer true; the new text must say it plainly).
 
