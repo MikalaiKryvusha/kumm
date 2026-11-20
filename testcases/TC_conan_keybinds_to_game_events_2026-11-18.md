@@ -66,3 +66,17 @@ Input source (real mouse / real key · the remote) × place (main menu · Esc me
 | J5 | The mods button after a world re-entry (exit to the menu, Continue): open the list twice | the list opens each time (a handler is never erased by the old window's late off) | — |
 | J6 | The inventory bar on another tab («Хар-ки») | no gap where the hidden mods button stood (the wrap collapses, not the button) | PASS (weak) 2026-11-18 21:23 — «Хар-ки»: no mods button, no gap seen; this tab has no other button in the left container, so a gap could not show either way |
 | J7 | K1 / K2 run: a real click on the feedback plate starts the collector; a second press 0.2 s later is ignored; the collector is stopped by PID before its zip (no window, no zip on the owner's desktop) | log «click» once, «ignored» once; the collector PID seen and stopped; the desktop unchanged | K2 part PASS (above); the K1 part owed |
+
+## After judge round 5 (2026-11-20 14:3x) — the old window's widgets are forgotten, never called
+
+The mods button keeps raw pointers to its button, wrap, list and catcher; after a world re-entry another object can live at an old address. Since the fix
+`krinik_ui_fixes` counts the inventory window's births (`_G.__krinik_hub_gen`), and `krinik_mods_button` forgets the older window's widgets when the number
+changes (handlers removed by their tokens). Stand: the working game 3.1.1, the owner's save, the background path or the game in front when the PC is free.
+
+| ID | Case | Expected | Status |
+|---|---|---|---|
+| G1 | Open the inventory («Снаряжение»), then close it | the mods button stands in the bar; no line «родилось заново» on the first opening of the session; no Lua error | — |
+| G2 | Exit to the main menu, «Продолжить», open the inventory again | UE4SS.log «окно инвентаря родилось заново (поколение A → B): виджеты прежнего окна забыты…» then «кнопка «Настройки модов» поставлена…»; the button stands | — |
+| G3 | After G2: open the list by a real click, then close the inventory with the list open | the list opens (J5); the close collapses the list and the button wrap; no error | — |
+| G4 | After G2: close the inventory WITHOUT opening it on «Снаряжение» first (Tab straight to «Хар-ки», then Esc) | no call on an old widget: no Lua error, no crash | — |
+| G5 | Neighbours: the Hosav «Настройки интерфейса» button and the Inventory Compactor buttons in the same bar | click as before | — |

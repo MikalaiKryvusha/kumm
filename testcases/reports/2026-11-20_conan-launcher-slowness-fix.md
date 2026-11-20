@@ -41,6 +41,11 @@ switch), its log's `perf:` lines and its window frames READ.
 | state-list repaint on a download tick | 14–31 ms | 4–14 ms |
 | a screen change in total | ≈ 350 ms | ≈ 30–40 ms (the new screen's list drawn once: 18–34 ms) |
 
+Correction 2026-11-20 14:4x (judge round 5 and the stand's own log): the stand's window sits off-screen and gets no WM_PAINT, so every «state-list repaint»
+above is the list drawn into a frame by DrawToBitmap — the same `PaintNow` code, the same cost, but not a repaint on a screen. The numbers stand as the cost of
+drawing the list; the claim «the list repaints on every tick» was never observed by this stand. Since the round-5 fix the stand reads the repaint request
+(`StatePanel.Invalidate`, case `offline` D7b) and labels the frame's drawing `StatePanel.Print`.
+
 - **P (the budget case), run 5:** fixed — «PASS P1 … 285.6 ms, 61.6 ms», «PASS P2 … 6.5, 7.6, 5.8, 1.8», «PASS P3 … 6.4, 7.7, 5.3, 5, 7.6, 5.3, 5.3, 13.8»;
   pre-fix control — «FAIL P1 … 282.7, 269.1, 309.8, 322.5 ms», «FAIL P2 … 52.3, 52.5, 140.5, 55.8», «FAIL P3 … 16.5 … 19.6, 16.7, 17.1».
 - **The look, run 4:** lang 6 / 6 frames equal within antialiasing (max channel diff 2–5 of 255); fresh-feed — equal except the state list where the TEXT

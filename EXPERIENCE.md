@@ -91,6 +91,18 @@
 
 ## Entries
 
+### EXP-0577 · 2026-11-20 · ❌→✅ · #launcher #winforms #stand #offscreen #guard #control #judge #false-pass
+class: guard-not-proven-against-threat
+mechanized: `ConanExiles/_config/launcher/test/self.mjs` case `offline` D7b (reads the `StatePanel.Invalidate` mark between the «feed-wait» and the second «offline» line); the frame's drawing is labelled `StatePanel.Print` (`MetalWindow.InPicture`)
+**Context:** judge round 5 found that the state list kept the old screen's text when a screen change did not change its size (bug 110's fix dropped the
+whole-window repaint). I wrote a stand check «a StatePanel.OnPaint line after the screen line».
+**Result:** ❌→✅ — the check passed on the OLD exe three times for three different reasons: (1) the first «offline» comes from «search», a different shape,
+which repaints on any build; (2) every paint line was the frame writer's DrawToBitmap — the off-screen stand window gets NO WM_PAINT at all; (3) the
+launcher writes the screen line AFTER it applied the screen, so a mark of that screen stands BEFORE its line. Only after labelling the frame's drawing,
+marking the Invalidate call and building a control exe that differs from the fix by the one line did the check go green on the fix and red on the control.
+**Lesson:** a guard of a repaint on an off-screen stand reads the repaint REQUEST, not a paint; locate the event in the log by where the program writes
+it, not where you expect it; and prove the guard against a control build that differs from the fix only by the fixed line — an older exe differs in more.
+
 ### EXP-0576 · 2026-11-20 · ❌ · #russian #owner-text #interview #calque #clean-read
 class: text-in-agents-world
 mechanized: none — the voice lint and the clean-instance read both passed the sentence; the checks judged the variants, the owner read the explanation too
