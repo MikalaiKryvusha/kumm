@@ -60,21 +60,14 @@
 > of the others (`[OWNER]` 2026-11-18 19:29, chronicle entry 2026-11-18 19:29; «грубая полировка, фиксинг и тестирование 0.9.1» · 20:51). The release
 > 0.9.1 is assembled from both items; the publication itself waits for the owner's word.
 >
-> **Progress of the chats of 2026-11-18:** the latest is the block «CHAT CLOSED 2026-11-18 20:4x» in «Where to continue» below (corrected 20:4x — it named the 16:0x block); the block CHAT CLOSED 14:3x and the earlier progress lines — chronicle, entries 2026-11-18 14:3x and 16:0x.
 > Note: other projects read the core from `D:/work/ai_sandbox/krinik_voice` (an older clone of the same repo) — it needs a `git pull` by its owner session.
 >
 > 🎯 **The Conan 3.0.1 build is the main work since 2026-10-26 ≈08:30; every other game is out of priority.** `[OWNER]` «все игры пока не в приоритере, мы
 > работаем дат сборкой конана» · «она 1_ должна работать стабильно 2_ моды не должны конфликтовать, должны быть рабочими 3_ не должно быть
 > явных просадок производительности из-за модов» · 2026-10-26. Work order — "Where to continue", item 0.
 >
-> 🆕 **Conan 3.1.0 is out (2026-11-12, Part Three of the Giant-Kings arc); THE MOVE IS UNDER WAY since 2026-11-13 18:52 — `plans/53_conan_move_3.1.0.md` (the build runs on 3.1.0 since 2026-11-13 20:0x — 66/66 mods, the owner's world; the 3.0.1 install kept on disk as the way back). Downloaded by the owner (his word 2026-11-13 14:13 +03:00)**
-> (`[OWNER]` «так как я качаю 3» · «3,1,0» · «и нам нужно будет место»); D: cleaned for it the same minute — 46 GB of old profiler traces, old bench videos, the 0.9.0
-> GitHub parts (all 7 verified uploaded on the release) and `mods/OLD` deleted (D free 59.6 → 108.7 GB); the Windows crash dump moved back to `C:\dump` (HOUSE_RULES
-> dossier), `D:\dump` goes at the next boot (+8 GB). The move itself — the checklist below, when the download lands. Web recon 2026-11-13 09:09 —
-> `researches/conan_patch_3_1_0/README.md` (§3 is the move checklist): the top risk is «only ModController classes are loaded at startup» (our
-> `krinik_hub_controller.lua:80` and `krinik_mod_settings.lua:1046/1054` reach other mods' classes by `StaticFindObject`); stale vanilla tables (new item rows);
-> UE4SS on the new exe; the kit revision. No staff known-issues list yet, players wait for a hotfix — when to move is the owner's call.
 >
+> The move to 3.1.0 (done; the build runs on 3.1.1) and the 2026-11-18 progress pointer — chronicle, entry «2026-11-20 11:0x — STATUS bonsai trim, part 3».
 > **Svarog's Dream — the main work from 2026-10-09 to 2026-10-26** (`[OWNER]` «забей на Medieval Dynasty … мы работаем дальше над Сварогом» · 2026-10-09 ≈13:25;
 > scale: 16:9 at 720p, 1080p, 2K, 4K — `MASTER_PLAN.md`). Medieval Dynasty is paused; the paragraph below is for the return.
 >
@@ -139,6 +132,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
       helper backs up, cleans the local policy file and the live policy values, turns protection back on, restarts the full scan, revokes the 8 spam
       notification grants; Tamper Protection is the owner's own switch in Windows Security. Details are private and stay out
       of this public repo: `KUMM/.work/malware_check/report.md` (git-ignored). A full scan of C: runs detached (Defender, under the machine lock `kumm` to 13:47).
+- ❓ **2026-11-20 10:58 — the owner asked whether our five pak-less mods (Camera, EngineTweaks, Locomotion, ModPackManager, RussianTranslation) should get small
+      «visiting-card» paks so the game's mod list shows each with its description, author and change note.** Answered in chat: possible (plan 44 step 4,
+      moved to 1.0.0; a kit-cooked pak is required — the game refuses a wrapper without AssetRegistry.bin, probes 2026-11-03), recommended for 1.0.0,
+      not to hold 0.9.1-RC1; waits for his word whether he wants them in 0.9.1.
 - 🧹 Disk cleanup 2026-10-25 — the "your call" items of `C:\REVISIONS\…_ИТОГ.md`, `D:\REVISIONS\…_ИТОГ.md` are the owner's (chronicle, 2026-10-25 22:15).
 - 🔴 **Do NOT run `Clear-Quarantine.ps1 -Stamp 2026-08-17_2335 -Execute`**: the quarantine holds the only
       copy of an Elden Ring save and the personal video `ref.mp4`.
@@ -164,27 +161,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > готовимся к выпуску»); **the user guide becomes BILINGUAL — the English pages after the Russian ones** (`[OWNER]` 21:08 «делаем юзермануал двуязычным» ·
 > «после русских страниц - ставим EN страницы») → paks, guide, launcher exe → volumes →
 > `make_release.sh` → GitHub → the launcher on a fresh copy of the clean 3.1.1.
-> **CHAT CLOSED 2026-11-18 21:3x (`resume` 20:51; closed by the owner's word 21:36 at 57 % of the window, chronicle entry 2026-11-18 21:3x; the CLOSING JUDGE NOT RUN —
-> `[OWNER]` 21:37 «на судейство нет токенов»).** Its progress blocks and the 20:4x handover — chronicle, entry «2026-11-18 21:3x — STATUS bonsai trim». The AIM above stands.
-> **CHAT OF 2026-11-20 09:09 (`resume`) — progress:** item 1 DONE — pack `d473023` (the launcher's round-2 fixes: the helper's four «failing» download cases
-> failed only because the main session's real game ran on the machine — `GameRunning()` is machine-wide; re-run on a free machine 24 cases / 330 checks PASS,
-> the control on the pre-fix exe 31 FAIL; the stand now refuses a machine with a ConanSandbox process; report `testcases/reports/2026-11-20_conan-launcher-judge2-fixes.md`;
-> the stray guide JPEG deleted). Item 2 DONE but the kit builds — pack `00c795d` (rule 40: `_config/devkit/krinik_modinfo.py` + `_config/release/krinik_change_notes.json`
-> are the one source; kit-buildmod / build-level-mod write the fields, `set-pak-modinfo.py --check-krinik` guards `make_release.sh` 2b (working game) and
-> `make_volumes.sh` 2c (export); the working game reads 4 of 4 empty until RC1's pak builds + deploy; report `testcases/reports/2026-11-20_conan-krinik-pak-modinfo-fields.md`;
-> the 0.9.1 change-note texts need the clean read with the release texts). Judge round 3 on both (`reports/2026-11-20_judge_round3_launcher_and_pak_modinfo.md`):
-> 2 defects (RC part names invisible to the launcher; the release's running-game refusal never fired — tasklist cuts names at 25 chars, EXP-0574) + 5 risks —
-> all fixed in the working tree, run report `testcases/reports/2026-11-20_conan-launcher-judge3-fixes.md` (finding 6 not reproducible on the loopback stand).
-> R1 DONE in the tree: `packVersion` 0.9.1-RC1 and every shipped Krinik mod's manifest version (the owner 2026-11-18 20:57 «в манифесте и модах»; modinfo keeps
-> 0 9 1), parts stem `Krinik_Mod_Pack_0_9_1_RC1`, the UI pak rebuilt by the kit with «0.9.1-RC1» under the logo (kit-buildmod's rule-40 step seen live), all
-> four `_unpacked` Krinik paks carry the fields (`set-pak-modinfo.py _unpacked --check-krinik` 4 / 4). Texts: the writer helper rewrote N, R (template + 30 cells,
-> README.draft regenerated), G (RU) and C by the portrait — `KUMM/.work/texts091r3/REPORT.md` (decisions, the owner's lines as proposals), `pairs.md` (58 pairs);
-> the guide's ENGLISH pages are NOT written yet (the brief left them out). Side errand (the owner's «УБРАТЬ!» ×3) DONE: Defender back on, Tamper Protection on by the
-> owner, the January policy set and the 8 spam grants removed, a full scan of C: running (PID 14044 from 10:15, the machine lock `kumm` to 13:47 — release it
-> after); private details `KUMM/.work/malware_check/report.md`.
+> The progress block of the chat of 2026-11-20 09:09 — moved verbatim to the chronicle, entry «2026-11-20 11:0x — STATUS bonsai trim, part 2».
 > **FIRST in the next chat (handover of 2026-11-20):**
 > 1. **Pack:** the round-3 fixes + R1 committed (`f381f3f`; the stand re-run 66 / 66, the H2 control red — report `testcases/reports/2026-11-20_conan-launcher-judge3-fixes.md`),
->    the writer's texts committed as DRAFT (`ce1f12b`); **judge round 4** on `00c795d..f381f3f` (rule 31) → fixes → `git push` of the pack (13 local commits, bug 85's included).
+>    the writer's texts committed as DRAFT (`ce1f12b`), the paks' description sentence without the dash (`7c72d78`, redeployed, the guard on the game 4 / 4);
+>    **judge round 4** on `00c795d..7c72d78` (rule 31) → fixes → `git push` of the pack (14 local commits, bug 85's included).
 > 2. **Texts (the owner's META-texts order 09:47):** a clean-instance read (§7B) of N, R, G, C as the writer left them (`KUMM/.work/texts091r3/REPORT.md` — its
 >    decisions 1–6); fixes; the owner's page of pairs from `pairs.md` (rule 32: one HTML page); his word on his own lines (REPORT «The owner's lines»). The guide's
 >    **English pages after the Russian ones** (the owner 2026-11-18 21:08) are still owed. `{{ARCHIVE_SIZE}}` is filled after `make_release.sh`.
@@ -195,35 +176,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 5. **Then** `build-docs.py` (the 3.1.1 guide PDF committed, the launcher exe) → `make_release.sh <empty dir on D:>` → the release `v0.9.1-RC1`, an ordinary one
 >    titled «0.9.1-RC1 (тестовая сборка)» (the owner's word 2026-11-18 20:54; ask him once whether it keeps 0.9.0 as the repository's «Latest») — the public
 >    repo's `main` stays on the 0.9.0 tree for RC1 (the notes use the logo path that exists there) → the launcher on a fresh copy of the clean 3.1.1 (rule 25).
-> 6. **The machine:** the Defender full scan of C: (PID 14044) — read `Get-MpThreatDetection` after 10:15 when it ends, then `machine-lock.mjs release --who kumm`.
-> **The list below is SUPERSEDED by the list above — it moves verbatim to the chronicle at this chat's closure (bonsai trim).**
-> **FIRST in the next chat:**
-> 1. **The pack's working tree is UNCOMMITTED — review it first** (`git -C D:/work/ai_sandbox/ConanExiles status`): (a) the launcher round-2 fixes of a STOPPED helper —
->    `_config/launcher/KrinikConanGames.cs`, `KrinikConanLauncher.cs`, `KrinikConanUpdates.cs`, `test/click.ps1`, `test/feed.mjs`, `test/self.mjs`, `_config/release/make_release.sh`,
->    `make_volumes.sh`; its last word: after its changes the stand cases with a break or a stop FAIL (four), `fresh-feed` passes. Read the diff against the list
->    `reports/2026-11-18_judge_launcher_round2.md`, keep what is right, fix or revert, re-run the stand (`KUMM/.work/launcher57/batch1.sh` + `rc`, `never`, `refused`, the U1
->    case) on a fresh `make_variant.py` exe. (b) R1 started, untested: `_config/devkit/build-level-mod.py` (X.Y.Z of «0.9.1-RC1»), `_config/public_release/mods-table.mjs`
->    (`PACK_VERSION_BADGE` — the template's badge line still uses `PACK_VERSION`). (c) untracked `docs/guide/Krinik-Conan-3.0.1-0.9.0-page1.jpg` — find what made it, delete.
-> 2. **Rule 40 — the owner's debt of 21:35:** the Krinik paks' fields of the game's mod list (author, author URL, a change note per mod) into the SOURCE — `kit/modinfo.json`
->    of KrinikConanArchery, KrinikConanGraphics, KrinikConanUI and the modinfo `build-level-mod.py` writes for KrinikConanGameplay; a per-mod change-note table for 0.9.1;
->    every pak build writes them (`set-pak-modinfo.py` exists — author «Кот Криник (KOT KRINIK)», URL the Nexus page, note = the build line — but ran on the release
->    export only); the guard in `make_release.sh` and on the working game; the main menu's mods screen looked at.
-> 3. **Bug 85:** pack `9378982` LOCAL (9 local commits) — judge round 3 on `bddc495..9378982` when tokens allow; owed cases J5 (world re-entry, the mods button twice), N5,
->    N8, N9 (ten minutes of play); bug 109 (a double click inside our settings window counts once) — RC2. Then the pack push.
-> 4. **R1 — the version 0.9.1-RC1:** `modpack.json` `packVersion` (the mods' own versions stay 0.9.1 — a modinfo holds three numbers); `make_release.sh` / `make_volumes.sh` —
->    the stem `Krinik_Mod_Pack_0_9_1_RC1` (no hyphen: the launcher's part pattern `Krinik_[A-Za-z0-9_]+`), the default notes path by X.Y.Z; `kit-conanui-edit.py` (the
->    menu line) → `kit-krinik-click-events.py` (idempotent; the kit editor may crash in AddCallFunctionNode — re-run, EXP-0571) → `kit-buildmod.py KrinikConanUI`; a judge
->    round on the version change (the owner 20:57).
-> 5. **The texts:** the clean read r2 `reports/2026-11-18_clean_read_texts_091_r2.md` — 40 findings, facts first (the launcher is not new in 0.9.1; «Верная рука» is a cut, not
->    a buff; the RC naming; `README.draft.md` stale; the guide PDF untracked; the 7-Zip step); the writer helper was STOPPED before it changed a file. The guide gets the
->    English pages after the Russian ones (the owner 21:08); one page of pairs for the owner.
-> 6. **Then** `build-docs.py` → deploy + `-Verify` → `make_release.sh <empty work dir on D:>` → the release `v0.9.1-RC1` in `MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack`
->    (an ordinary release titled «0.9.1-RC1 (тестовая сборка)»; AUTH — the owner's word 20:54) → the launcher on a fresh copy of the clean 3.1.1 (rule 25).
-> **Done this chat:** the priority narrowed to two items (correct Russian → the next version); the launcher's RC order (pack `50b4bce`, `testcases/reports/2026-11-18_conan-launcher-rc-order.md`);
-> bug 85 judge round 2 — 8 findings fixed (pack `9378982`), K1 K2 N1 N4 N6 N7 J2 J3 J4 PASS, N2 partial (Settings and Exit by real clicks, Krinik on top seen; «Продолжить
-> игру» not pressed), J1 FAIL → bug 109; the run of 21:29–21:35 (K1, N1, N2, J1, J2 on the new pak) is NOT yet in the TC rows and the run report
-> `testcases/reports/2026-11-18_conan-keybinds-judge2-run.md` — write it there from the chronicle entry 2026-11-18 21:3x and the farewell;
-> Simple Modlist's Krinik-on-top fixed; the input tools no longer click a minimized game (EXP-0572); the kit crash pattern (EXP-0571); HOUSE_RULES 40; the clean read of the texts.
+> 6. **The machine:** the Defender full scan of C: (without the allow-list) FINISHED 2026-11-20 10:52:45, 0 detections; the machine lock released. Drives D:, E:, F:
+>    were not scanned (the owner's exclusions `D:\Games`, `D:\Instals`, `E:\Instals` stand — his call).
+> 7. **Cleanup owed (rule 15):** `KUMM/.work/launcher57` (4.7 GB), `launcher_r2` (668 MB), `launcher54`, `gameplay_t5`, `modinfo_t4` — `rm-tree.mjs` on them was REFUSED by
+>    the auto-mode classifier at 10:47 («Undermining Oversight», most likely `launcher_r2` holds the traces a run report cites); ask the owner or delete after
+>    the reports no longer point there. `launcher_r3` (4.5 GB, today's stand) is kept for judge round 4.
+> The block «CHAT CLOSED 2026-11-18 21:3x», its FIRST list and its «Done this chat» — moved verbatim to the chronicle, entry «2026-11-20 11:0x — STATUS bonsai trim».
 
 ## Open bugs
 
