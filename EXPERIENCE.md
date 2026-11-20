@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0576 · 2026-11-20 · ❌ · #russian #owner-text #interview #calque #clean-read
+class: text-in-agents-world
+mechanized: none — the voice lint and the clean-instance read both passed the sentence; the checks judged the variants, the owner read the explanation too
+**Context:** interview 041, the cover caption question; under option A the agent explained the variant in its own sentence.
+**Result:** ❌ — the owner chose A and wrote under it, about the explanation (verbatim in the interview, 2026-11-20 14:30): «Это не по русскому языку, не пишут так
+русские люди». The sentence was «подпись называет, чьи это моды, и верна для всех девяти. Слов о том, что моды написаны вручную, на обложке не остаётся»: <!-- ru-ok: the defective sentence quoted -->
+a caption that "names" (English *names*), and a genitive-of-negation frame «слов о том … не остаётся» built from «no words remain about». <!-- ru-ok: the defective frame quoted -->
+**Lesson:** every line of an interview the owner reads is his Russian text, the agent's explanations under options included — write it from the meaning
+with the subject he sees: «Из подписи видно, чьи это моды, и она верна для всех девяти. О ручной работе обложка больше не говорит.» Give the clean-instance
+reader the explanations as explicitly as the variants, and ask it «would a Russian say this aloud?» for each of them.
+
 ### EXP-0575 · 2026-11-20 · ❌→✅ · #launcher #dotnet #http #stand #loopback #judge #release #placeholder
 class: verified-on-the-easy-case
 mechanized: `ConanExiles/_config/release/make_release.sh` (step 1 refuses a guide with a placeholder, step 4b refuses notes with one) and `ConanExiles/_config/public_release/make_public_tree.py` (refuses a README draft with one); the error responses — `Feed.Respond` in `KrinikConanUpdates.cs`
