@@ -169,24 +169,8 @@ the release build), NOT committed in the pack, NOT run yet — the game was left
 > (the owner launches from the desktop); the old «Krinik Conan (dev).lnk» and `Krinik_Launcher_dev` in the game folder are still there (its deletion was refused
 > by auto mode — ask the owner or he deletes it).
 >
-> **CHAT CLOSED 2026-11-20 ≈17:2x (the chat of 16:20, «делаем сборку Конана»; soft closure at the 80 % budget).** Done: the 0.9.1 notes, the guide's «Версия 0.9.1»,
-> the README mods table and the mod-list change notes rebuilt by large features with measured facts (pack `75ba95d`; the owner's line-by-line reading, chronicle
-> 16:23–16:25); the RC1 page carries the new notes and the fixed logo path, the guide PDF and `SHA256SUMS.txt` on the release replaced; the RC1 install test from
-> GitHub PASSES the whole player path (report `testcases/reports/2026-11-20_conan-rc1-install-from-github.md`); the public repo got the 0.9.1-RC1 tree and a README
-> with our images and gold «СКАЧАТЬ» / «DOWNLOAD» buttons (public `027ab9c`, `37c1176`; pack `dcc6b43`, `28436e1`); HOUSE_RULES 15 (the cleanup's one allowed form)
-> and 42 (a release updates all its meta information in sync); EXP-0579–0581; memory `own-the-result-check-before-done`. The full NOW list — chronicle, entry
-> «STATUS bonsai trim, part 6».
-> **FIRST in the next chat:**
-> 1. ✅ **DONE 2026-11-20 17:38 — see the PARKED line above.** Why the 17:19 «Удалить сборку» did nothing: `Uninstall()` first shows a Yes / No box and logs
->    nothing before «Да»; UI Automation does not see that box's buttons — `click.ps1 -Dialog -Press 6` answers it. The button then starts the uninstaller in a
->    window whose final `pause` waits for a key (the launcher's update path passes `< nul`). The old text of this item, kept for the record:
->    **The owner's request 16:54: «мою рабочую игру ты тоже, пожалуйста, преврати в 3.1.1 + 0.9.1-RC1».** The working game `D:\Games\Conan Exiles 3.1.1` still holds the
->    dev deploy (pack_version 0.9.1-RC1, `-Verify` clean, dev-only mods in); his saves are copied to `KUMM/.work/save_backup_2026-11-20` (7.7 MB). The release parts
->    and the launcher are downloaded in `KUMM/.work/rc1_dl` (13.7 GB). Start: `node KUMM/.work/rc1_run/run.mjs start D:/work/ai_sandbox/KUMM/.work/rc1_dl "D:\Games"`
->    (the search root HOLDS the game folder) → screen `installed`. The `remove` press at 17:19 changed nothing (no log line, no dialog seen by
->    `KUMM/.work/rc1_run/dialog_buttons.ps1`): read the remove handler and its confirmation in `ConanExiles/_config/launcher/KrinikConanLauncher.cs` first, then
->    «Удалить сборку» → «Установить сборку» from the local parts → «Играть» → his world `Game_1` → a frame; the saves must stay. After it: the dev harness
->    (KrinikConanHarness, export:false) is gone — `Deploy-ModPack.ps1 -Deploy -Only KrinikConanHarness` before remote tests.
+> **Still open from the chat of 16:20** (its closed summary and the done item 1 — chronicle, entry «STATUS bonsai trim, part 7»; item 5 is now issue #17, the
+> «Подтвердить» finding of item 6 is issue #14):
 > 2. **The RC1 checks not run yet** (on the fresh clean copy `KUMM/.work/rc1_install/Conan_311`, 59 GB, kept for this): the uninstall back to the clean game, the
 >    update over an older build, a short play of the main features, the menu tab text jitter by a 60 fps video (bug 64 row 6 — decides its known-issue line).
 >    Then remove `rc1_install`, `rc1_dl`, `rc1_run` and `save_backup_2026-11-20` by `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs D:/work/ai_sandbox/KUMM/.work/<dir>`.
