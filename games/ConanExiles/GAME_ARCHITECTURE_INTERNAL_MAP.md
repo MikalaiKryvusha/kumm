@@ -88,7 +88,7 @@ open — `FindFirstOf('GUIModuleController'):IsModuleActive(FName('NPCDialogueWi
 `WBP_ButtonDialogue_C` (an `FLXButtonBase`; `GetLabel()` — the text, `GetDialogueNode()`), «Попрощаться» is `ButtonGoodbye` (`WBP_ButtonBase_C`); a reply is chosen by
 the window's own `HandleButtonClicked(Button)` — its body casts the button, reads `GetDialogueNode`, and acts only if `IsReadyForPlayerInput` is true, then
 `GetNextNPCNode` / `ReportNodeSelected`. So a choice made before the talk is READY (the NPC's line still running in game time) is dropped — with the world slowed
-to 0.03 by a mod, that is the owner's «a chosen reply did nothing» of 2026-11-20 20:02 (read from the handler; not reproduced). The campfire NPC's reply «Отправь
+to 0.03 by a mod, a choice could be dropped (read from the handler, never reproduced). The owner.s «a chosen reply did nothing» of 2026-11-20 20:02 had ANOTHER cause, proven by a control: my `krinik_shout_fade` hid every talk subtitle line (case D2b, fixed in pack `e1c0691`). The campfire NPC's reply «Отправь
 меня на остров Сиптаха.» travels to the island at once (a loading screen, ≈ 3 s). The campfire NPC streams in ≈ 30 s AFTER world entry — a stand that looks for
 it at once finds only farther talkers. Stand: `ConanExiles/_config/dialogue-stand.lua` (exact class only; «place» refuses a talker farther than 300 m).
 
