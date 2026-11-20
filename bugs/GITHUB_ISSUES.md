@@ -47,3 +47,4 @@
 | [#41](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/41) | Hub: Esc does not close other mods' settings windows | `bugs/108_conan_esc_does_not_close_mod_windows_over_hub.md` |
 | [#42](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/42) | Mod settings: a fast double click in the «Krinik's mods» window counts as one click | `bugs/109_conan_settings_window_double_click_counts_once.md` |
 | [#43](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/43) | Launcher: buttons and screens respond slowly | `bugs/110_conan_launcher_slow_button_feedback.md` |
+| [#44](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/44) | Dialogues: NPC lines in a talk should fade in and out and stay on screen longer | `ideas/27_conan_talk_lines_fade_and_hold.md` — the owner's idea for a later version |

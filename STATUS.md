@@ -148,6 +148,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > HOUSE_RULES 30 cancelled by the owner 19:37 (no busy-keyboard rule, hook unwired, guards removed). This chat's progress lines verbatim — chronicle, entry
 > «STATUS bonsai trim, part 8».
 > **FIRST in the next chat (the owner ordered autonomous work 19:37):**
+> 0. **🔥 0.9.1-RC2 — the owner's order 21:09–21:14 («собираем RC2» · notes super short, only what RC2 fixed + a link to RC1 · «собирай без часа» — the play gate
+>    waived by his word through `KRINIK_PLAY_GATE_WAIVER` · «отгрузили игрокам сломанное гавно» · «максимально быстро чинить» · «это будет новый релиз формально»).**
+>    Done: packVersion 0.9.1-RC2, notes `ConanExiles/_config/release/draft_0_9_1/github_release_notes_0_9_1_RC2.md` (four fixes worded «был баг — исправлен» by his
+>    21:12 word, voice-lint 0), KrinikConanUI change note + the RC2 lines, pack `e1c0691` pushed (judge round of 21:14 read, its findings below).
+>    A `make_release.sh` run started 21:14 into `KUMM/.work/rc2_release` (log `KUMM/.work/rc2_release.log`) — BUT its KrinikConanUI pak carries the menu
+>    version line «0.9.1-RC1» (kit `kit-conanui-edit.py` PACK_VERSION is read at the KIT build): **first** rebuild the UI kit pak (`kit-conanui-edit.py`,
+>    `kit-krinik-modsettings.py` ×2, `kit-krinik-click-events.py` ×2, `kit-buildmod.py KrinikConanUI`, copy into `_unpacked`, deploy, `set-pak-modinfo.py`),
+>    then a clean `make_release.sh` again (empty the work dir file by file, `rm-tree.mjs`). Then the whole HOUSE_RULES 42 list: the GitHub release `v0.9.1-RC2`
+>    (notes, title, `--latest`, parts + launcher + guide PDF + SHA256SUMS), README / public tree, the guide's version (HTML + PDF), read back each in its medium;
+>    then I check the launcher's update RC1 → RC2 on a copy of the game with RC1 (the owner's purpose of RC2). Judge round of 21:14 owed fixes: the NPC's FIRST
+>    line of a talk may be born before `IsModuleActive` turns true and stay hidden (check the greeting by a burst); `t_play_report.py` depends on a clean tree;
+>    the gate does not watch the git-ignored built paks and `docs/guide/guide-3.1.1.html`; `dialogue-stand.lua` `_G.__ds_far` / `__ds_class` persist across calls.
 > 1. **Chat of 19:53 (resume, autonomous) — done, pack `29a612b` pushed, judge 2 rounds:** issue #3 — my first fix (`dc79053`) missed: the oasis campfire talk
 >    opens `NPCDialogueWindow2`; the poll now asks the game for both talk windows (`IsModuleActive`), the owner's word 20:03 «лучше убрать паузу во время
 >    диалогов»; D1, D3 pass in his world, D2 (a talk with reply options) blocked — MY retest owed: find a talker with options (report `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`).

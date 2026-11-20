@@ -84,8 +84,13 @@ Tilde, ё, F10).
 «Поборник Внешней тьмы» (`BP_HumanoidDialogueNPC_C`, −82361, 231375) opens the SECOND by a real E. Both are full-screen (`IsFullscreenGUIActive` true); which one is
 open — `FindFirstOf('GUIModuleController'):IsModuleActive(FName('NPCDialogueWindow2'))` (true while the talk is open). Other «dialog» rows are not NPC talks:
 `DialogueNPCInfo` (the floating «Нажмите E, чтобы говорить» prompt), `PasswordDialog`, `PlayerMarkerDialog`, `ConnectingDialog`, the store and PackRat dialogs,
-`IronlightTalkToClaude` (a window of the Ironlight mod, not opened yet). HYPOTHESIS, not observed (case D2 blocked): a talk's reply text waits on game time, so a world
-slowed by a mod stretches it (the owner 2026-11-20 20:02: a chosen reply «did nothing» while the voice played). Stand: `ConanExiles/_config/dialogue-stand.lua`.
+`IronlightTalkToClaude` (a window of the Ironlight mod, not opened yet). **The talk window `W_NPCDialogue2_C` (read live 2026-11-20 20:46):** the replies are
+`WBP_ButtonDialogue_C` (an `FLXButtonBase`; `GetLabel()` — the text, `GetDialogueNode()`), «Попрощаться» is `ButtonGoodbye` (`WBP_ButtonBase_C`); a reply is chosen by
+the window's own `HandleButtonClicked(Button)` — its body casts the button, reads `GetDialogueNode`, and acts only if `IsReadyForPlayerInput` is true, then
+`GetNextNPCNode` / `ReportNodeSelected`. So a choice made before the talk is READY (the NPC's line still running in game time) is dropped — with the world slowed
+to 0.03 by a mod, that is the owner's «a chosen reply did nothing» of 2026-11-20 20:02 (read from the handler; not reproduced). The campfire NPC's reply «Отправь
+меня на остров Сиптаха.» travels to the island at once (a loading screen, ≈ 3 s). The campfire NPC streams in ≈ 30 s AFTER world entry — a stand that looks for
+it at once finds only farther talkers. Stand: `ConanExiles/_config/dialogue-stand.lua` (exact class only; «place» refuses a talker farther than 300 m).
 
 Вкладки хаба (снято 2026-10-26): Q/E = `W_Carousel_C:NextCarouselWindow()` / `PrevCarouselWindow()` (пультом, без клавиш). Вкладку «Снаряжение»
 выдаёт модуль `XCS_Panel` (боковая панель «Моды Xevyr»): открыт с хабом на «Снаряжении», закрывается при уходе на другую вкладку. Окно модуля —

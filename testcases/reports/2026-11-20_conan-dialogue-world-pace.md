@@ -61,3 +61,18 @@ after the talk, a 16 s clip watched by its sheet.
 
 partial — D1 pass (the world keeps its pace during a talk, the hub still slows), D2 blocked (the owner's reply-option case waits for his NPC; issue #3 stays open
 until my retest of D2 on a talker with reply options).
+
+## Addendum 2026-11-20 20:43–21:07 — case D2b: the NPC's answer in a talk was invisible (the owner's report), cause and fix
+
+- Work: the owner 20:52–20:53 — the reply that leads the talk on inside the open window; case D2b of the same case file.
+- Runs: Iruk (−256273, −31735) by `tp_ground.sh`, the merchant «Байбар Подонок» (`W_NPCDialogue_C`) by `dialogue-stand.lua place` + `post-key.ps1 -Key E`; «Говорить» by
+  `.work/d1/talk_press.lua` (the window's `BndEvt__…ButtonTalk…SignalClicked(Button)`); frames by `capture-window.ps1`, bursts by `capture-burst.ps1 -IntervalMs 150`.
+- Checks: 20:56 at dilation 1.0 — no answer text on frames at 1 s and 3 s; the line exists with RenderOpacity 0 and no mirror. Control 21:00 (`krinik_shout_fade`
+  out of `main.lua` in the game copy) — the answer «Можешь выйти отсюда с покупкой, а можешь — с кислой рожей. Решать тебе.» from ≈ 1 050 ms. Probe — SetTextActive
+  0 calls for a talk line. Fix 21:03 (a line born while a talk is open is left to the game) — retest 21:05: «Что тебе предложить?» from ≈ 1 050 ms. Neighbour 21:06 —
+  the oasis boss's shouts still hidden and mirrored («зеркало построено», «фраза снята через 1.07 с»). God mode off and saved through the menu at the end
+  («режим бога в сохранении: ВЫКЛ» on re-entry).
+- Found: my section `krinik_shout_fade` hid every NPC answer in a talk since 2026-10-31 (issue #3, the owner's 20:02 report). Also: the 20:47 «Siptah» reply is an
+  action, not the owner's case (his correction 20:52).
+- Traces: `KUMM/.work/d1/burst_off_sheet.webp` (control), `KUMM/.work/d1/burst_fix2_sheet.webp` (after the fix), frames `13_talk_1s.jpg`, `14_talk_3s.jpg`.
+- Verdict: pass for D2b.
