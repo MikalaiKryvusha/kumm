@@ -172,8 +172,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 1. **Pack:** judge round 4 fixed and committed (`513a21f`; stand 340 / 340; report `testcases/reports/2026-11-20_conan-launcher-judge4-fixes.md`); **judge
 >    round 5** on `7c72d78..HEAD` (round 4's fixes + bug 110 + bug 85's token fix + the mark guard) → fixes → `git push` of the pack (15+ local commits).
 > 2. **Texts:** the writer's r4 applied the clean read r3 (`reports/2026-11-20_clean_read_texts_091_r3.md`; summary `KUMM/.work/texts091r4/REPORT.md`) — in the
->    pack working tree, NOT committed; `mods-table.mjs` marks 21 KRINIK MODIFIED (was 17; a guard now refuses a mark that differs from `modpack.json`);
->    `pairs.md` regenerated. Owed: commit; the owner's page of pairs (rule 32); his word on O1–O6 (his own lines) and the enemy health bar fact; a look at the
+>    pack commit `300385a`; `mods-table.mjs` marks 21 KRINIK MODIFIED (was 17; a guard now refuses a mark that differs from `modpack.json`);
+>    the owner's page of pairs OPENED for him 2026-11-20 12:12 +03:00 (`KUMM/.work/texts091r4/pairs_0_9_1_RC1.html`, 75 pairs, built by `pairs_page.py` from
+>    `.work/texts091r3/pairs.md`; looked at by a headless frame first). Owed: his verdict on the page; his word on O1–O6 (his own lines) and the enemy health bar fact; a look at the
 >    Camera cell (≈ 270 chars) on the game's mods screen; the change notes changed (C) → `set-pak-modinfo.py` on the four paks + deploy. The guide's
 >    **English pages after the Russian ones** (the owner 2026-11-18 21:08) are still owed. The archive's size is filled by `make_release.sh` step 4b into a copy of the notes (plan 55, phase E; the guide names no size).
 > 3. **RC1 is DEPLOYED in the working game** (2026-11-20 10:44, pack `f381f3f` + `ce1f12b`: 75 / 75 mods, verify 114 present 0 missing; the guard on the game's
