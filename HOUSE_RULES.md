@@ -336,6 +336,11 @@
     4. The mods' descriptions: the README and guide tables, the change notes of the game's mod list (`krinik_change_notes.json` → the paks).
     5. The Nexus page, when the release goes to Nexus (rule 25.2 and the owner's word for the Nexus publication).
     One text written once feeds every place it appears; a fix in one place is a fix in all of them in the same move (rule 20).
+    **The ritual is code:** `python -I -X utf8 ConanExiles/_config/release/release_checklist.py [--published]` — stages A (what the release carries: changes,
+    judge rounds, my retests, the play report), B (versions: every Krinik mod, the menu line in the UI kit pak, the launcher), C (texts: notes, change notes,
+    guide read against the owner's remarks, README, descriptions, what's new / fixed, Nexus, lints), D (deploy + verify, `make_release.sh`, install and update
+    through the launcher), E (published, Latest, assets, tag, kept texts, read back, issues commented, cleanup). `make_release.sh` step 0b stops on a TODO; the
+    hook `tools/hooks/release-ritual-gate.mjs` refuses `gh release create` on a TODO. `[OWNER]` 2026-11-20 21:22–21:25 · `PROJECT_HISTORY.md` entry 2026-11-20 21:2x.
     `[OWNER]` 2026-11-20 17:01–17:03 · `PROJECT_HISTORY.md` entry 2026-11-20 17:01.
 
 43. **The agent admits its own mistakes in the first person: the agent itself is the subject of every sentence about its failure.**

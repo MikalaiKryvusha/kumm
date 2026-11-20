@@ -152,7 +152,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    A `make_release.sh` run of 21:14 (log `KUMM/.work/rc2_release.log`) was STOPPED by me at step 2b — the partial export lies in `KUMM/.work/rc2_release` (empty it by `rm-tree.mjs` first); its KrinikConanUI pak carries the menu
 >    version line «0.9.1-RC1» (kit `kit-conanui-edit.py` PACK_VERSION is read at the KIT build): **first** rebuild the UI kit pak (`kit-conanui-edit.py`,
 >    `kit-krinik-modsettings.py` ×2, `kit-krinik-click-events.py` ×2, `kit-buildmod.py KrinikConanUI`, copy into `_unpacked`, deploy, `set-pak-modinfo.py`),
->    then a clean `make_release.sh` again (empty the work dir file by file, `rm-tree.mjs`). Then the whole HOUSE_RULES 42 list: the GitHub release `v0.9.1-RC2`
+>    then a clean `make_release.sh` again (empty the work dir file by file, `rm-tree.mjs`). FIRST run the release ritual `python -I -X utf8 ConanExiles/_config/release/release_checklist.py` (5 TODO on 21:2x: Krinik mod versions, the menu line, the guide, the README, a code commit without review) and READ THE GUIDE against the owner's RC1 remarks (he: «НУ И ЗРЯ!», 21:24). Then the whole HOUSE_RULES 42 list: the GitHub release `v0.9.1-RC2`
 >    (notes, title, `--latest`, parts + launcher + guide PDF + SHA256SUMS), README / public tree, the guide's version (HTML + PDF), read back each in its medium;
 >    then I check the launcher's update RC1 → RC2 on a copy of the game with RC1 (the owner's purpose of RC2). Judge round of 21:14 owed fixes: the NPC's FIRST
 >    line of a talk may be born before `IsModuleActive` turns true and stay hidden (check the greeting by a burst); `t_play_report.py` depends on a clean tree;

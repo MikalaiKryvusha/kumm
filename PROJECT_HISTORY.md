@@ -9198,3 +9198,22 @@ reply options — the agent finds such a talker) and G1 (a fight with humanoids,
 > 2. ~~The judge round owed on pack `dc79053`~~ — done 20:15 together with the dialogue fix (2 rounds, `29a612b`).
 > 3. **Release meta not yet in sync** (HOUSE_RULES 42): the change notes inside the paks (`krinik_change_notes.json` → the next pak build) and the guide PDF inside
 >    the archive parts — both land with RC2.
+
+
+## 2026-11-20 21:2x +03:00 — the owner: the release ritual as a hook and a todo list (recorded 21:2x)
+
+After my farewell said the RC2 build was stopped because the UI kit pak still carried «0.9.1-RC1» in the menu, the owner, verbatim:
+
+> У иебя должен быть хук-рутуал-тудулист ЧТО НУЖНО ОБНОВИТЬ И ГДЕ И ЧЕМ ПРИ ВЫПУСКЕ ОЧЕРЕДНОГО РЕЛИЗА
+>
+> СДЕЛАТЬ ТАКОЙ НЕМЕДЛЕННО В ЖТОМ ЧАТЕ!
+>
+> НЕТ!! НЕТ! НЕТ!!! · НЕ ТОЛЬКО ВЕРСИЯ · ЭТО ЦЕЛЫЙ РИТУАЛ  МНОГО ЧЕГО!!!
+>
+> описания, версия, что нового, что исправили, теги · дохуя чего делается для нового релиза!
+>
+> (on the guide) и в юзер мануале ты всё исправил по описаниям, что я критиковал в релиз ноутсах RC1 ? · НУ И ЗРЯ!
+
+Done the same chat: `ConanExiles/_config/release/release_checklist.py` (stages A–E, OK / TODO / MANUAL), step 0b of `make_release.sh`, the hook
+`KUMM/tools/hooks/release-ritual-gate.mjs` on `gh release create` (wired in `.claude/settings.local.json`), HOUSE_RULES 42 «The ritual is code». First run on
+0.9.1-RC2: 5 TODO (a code commit without «review:» — c27e3a7; every Krinik mod's version still RC1; the menu line in the UI kit pak; the guide; the README).
