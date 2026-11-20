@@ -34,6 +34,8 @@ journeys (the tab's buttons, the journey that is open) × the same two builds. N
 | M2 | The full-screen map by its own key, both builds | the same as M1 on both (a defect here on the changed build means the cause is not the hub copy) | — |
 | J0 | CONTROL, the current build: tab «Путешествие» — an open journey, its buttons (track / start), and whether «Начать приключение (Пробел)» lives here | the button's window named; its state on the current build recorded | — |
 | J1 | The changed build: the same | the journey buttons act; a journey opened during the session shows open at once | — |
+| D0 | CONTROL, the current build: talk to an NPC (`NPCDialogueWindow`), watch the world behind the dialogue (an animal, water, an NPC walking) and read the log | the log line «меню открыто: замедление времени 0.03» at the dialogue's opening (seen in the owner's session 18:39:48) | — |
+| D1 | The changed `krinik_pause_in_menu.lua` (`NO_SLOW_MODULES`): the same dialogue; then the hub opened right after it | no slowdown line while the dialogue is open, the world moves at its pace; the hub after it still slows to 0.03 | — |
 | N1 | Neighbours (HOUSE_RULES 39): switches to and from «Карта» and «Путешествие» by mouse, Q / E and Tab; Esc and Tab close the hub from both | no frame of the bare world, the dark backing as on the game's own pages, the hub closes | — |
 | N2 | Neighbours: Simple Minimap's helper row on the map, the minimap's own markers | the row in its place (the mod adds it to the game's page itself) | — |
 | N3 | Neighbours: the other five copied tabs («Таланты», «Хар-ки», «Клан», «Спутники», «Базар») — every button of each page by a real click | each button does what it does in the game without our controller; a dead one is a new issue | — |

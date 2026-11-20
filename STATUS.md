@@ -155,7 +155,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > cheats never stay; the two earlier remedies (plans 32, 47) were never executed — that is the diagnosis.**
 > **19:3x — 42 issues filed (#2–#43, index `bugs/GITHUB_ISSUES.md`; every local bug names its issue). The first root: the hub controller's standalone page
 > copies. PREPARED, NOT deployed, NOT committed: `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_hub_controller.lua` `GAME_PAGE` + tabs 5 (Путешествие)
-> and 8 (Карта); run `testcases/TC_conan_hub_game_pages_map_journey_2026-11-20.md` M0 (the CONTROL on the current build) first, when the owner frees the game.**
+> and 8 (Карта); and `krinik_pause_in_menu.lua` `NO_SLOW_MODULES = { NPCDialogueWindow }` (issue #3: the log shows the dialogue slowed to 0.03). Run
+> `testcases/TC_conan_hub_game_pages_map_journey_2026-11-20.md` M0 and D0 (the CONTROLS on the current build) first, when the owner frees the game.**
 > **FIRST after the pause — the owner's bugs from his own play of the RC1 build (18:33–18:34): `bugs/112_…` the «Начать приключение (Пробел)» button does not
 > work (critical), then `bugs/111_…` a name plate in replacement diamonds and katakana.** The desktop: «Krinik Conan.lnk» → the release launcher is there since 17:5x
 > (the owner launches from the desktop); the old «Krinik Conan (dev).lnk» and `Krinik_Launcher_dev` in the game folder are still there (its deletion was refused
