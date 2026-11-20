@@ -342,6 +342,17 @@
     3. Before sending a reply, read each sentence about a defect or an omission and check its subject.
     `[OWNER]` 2026-11-20 18:35 · `PROJECT_HISTORY.md` entry 2026-11-20 18:35.
 
+44. **Every bug and improvement of the Conan build lives as an issue of the public repository `MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack`,
+    so nothing is forgotten, every one is taken into repair and retested after the fix, and the community can help.**
+    1. A defect the owner names or the agent finds is filed there at once: the title in English «Area: essence»; the body in Russian by the owner's bug-report
+       genre (portrait §2.5 — description, steps, actual result, expected result last) with the build and game version; labels `bug` / `enhancement`, and
+       `critical` for a defect of HOUSE_RULES 38.
+    2. Before filing, the text is scanned for what the public repository must not carry (the owner's identity, local paths, the game copy's origin — the
+       pattern list of `make_public_tree.py`) and checked by `kaif-voice-lint.mjs check`.
+    3. The local bug document (`bugs/NN_…`) keeps the agent's working notes and names its issue; the issue's state follows the fix: closed only after the
+       retest by the player's path.
+    `[OWNER]` 2026-11-20 18:42–19:10 · `PROJECT_HISTORY.md` entry 2026-11-20 18:42.
+
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
 handbook · two maps for every game · KAIF feedback without asking), "Git workflow" (anonymisation by code and hook), "Document & text hygiene" (images —
 WebP, never PNG; for the build's own images rule 37 above governs). The context-budget hook's hint is obeyed (`CLAUDE.md`).
