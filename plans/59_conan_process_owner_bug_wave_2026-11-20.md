@@ -18,7 +18,7 @@
 | # | What I did | What passed by because of it |
 |---|---|---|
 | D1 | I derived every test case from MY change (a mod's edit → its cases). I never derived cases from what a player does. | Ordinary play: drawing the bow from a crouch, the bow after the knife, a dialogue, two map markers, the shadow in first person, «Начать приключение». |
-| D2 | I ran my checks with god mode, teleports and the remote. | Damage, falls, real input, real focus — the game the player gets. The owner's heroine takes no damage: possibly my god mode left in his save. |
+| D2 | I ran ALL my checks with god mode, teleports and the remote — never a stretch of play without them. | Damage, falls, real input, real focus — the game the player gets. The owner's heroine takes no damage: possibly my god mode left in his save. |
 | D3 | I called a narrow pass «PASS» and did not say what I left out. | The RC1 install report walked one road into the world and was read as «the build works». |
 | D4 | I tested each of our mods alone. | Their crossings: archery × locomotion × camera × UI act on the same hero, keys and states — none of the crossings was walked. |
 | D5 | **I wrote the remedy twice and executed it zero times.** Plan 32 (2026-10-18) named the same root — «the check went from my edit, not from the player» — and its seven steps stand unticked; plan 47 (2026-11-06, the owner's order: a crash check is active play) stands unticked, and its design leaned on god mode and the remote — the very blind spot of D2. | Everything above. A remedy written as a document did nothing; the release went out with no gate that asked for play. |
@@ -29,8 +29,11 @@ release ever read.
 ## 3. Remedies — process changes held by code, not by memory
 
 1. **The release gate.** `ConanExiles/_config/release/make_release.sh` and the GitHub publication refuse a build without a fresh **play report**: a run report
-   (`testcases/reports/<date>_conan-play-<version>.md`) of at least one hour of play on the release build itself, by the player's path, with real input, no
-   god mode, no teleport, no remote command during the play, a video of the session, and the coverage matrix of remedy 2 filled — every row a status.
+   (`testcases/reports/<date>_conan-play-<version>.md`) of at least one hour of play on the release build itself, by the player's path, with real input, a
+   video of the session, and the coverage matrix of remedy 2 filled — every row a status. The play varies: some of it with god mode or a teleport (to reach
+   places and explore), some of it without; the report says which part ran which way, and the rows about damage, death and combat are walked without god
+   mode (`[OWNER]` 2026-11-20 19:18 «иногда с бесмертием, иногда без бесмертия, не будь таким категоричным» · «многие вещи ты не протестируешь по боевому
+   пути без бесмертия, тебя крокодиля скушают нахуй»).
    The gate reads the report's fields; a missing row or a `pass` without a seen observation stops the release.
 2. **The coverage matrix — the source of test ideas.** One file `testcases/TC_conan_play_matrix.md`: rows = what a player does (stances: stand, crouch,
    sprint, jump, swim, climb, fall; views: first and third person; weapons and tools: bow, melee, knife, tools, switching between them; windows: inventory,
@@ -38,8 +41,8 @@ release ever read.
    every function of our nine mods (from their notes `games/ConanExiles/mods/*.md`). A cell is a case. Ideas come from the named techniques
    (`TESTING_FRAMEWORK.md` step 2: pairwise over stance × view × weapon, state transitions for windows, error guessing from every owner bug). Every owner
    bug and every issue adds its row as a regression case.
-3. **Cheats are setup only, and never stay.** God mode, teleports and spawned items prepare a stand; before any acceptance run and before the agent leaves
-   a save, `god-on.sh off` is run and its «bCanBeDamaged=true» line read; the play report carries that line.
+3. **Cheats never stay.** God mode, teleports and spawned items are used where a case does not concern them, and every run names what it used; before the
+   agent leaves a save, `god-on.sh off` is run and its «bCanBeDamaged=true» line read; the play report carries that line.
 4. **«Pass» names its boundary.** Every run report carries «Not covered:» — the rows of the matrix not walked; a report without it is `partial`
    (`kaif-testrun-lint` already refuses `pass` without a functional run — the line extends it).
 5. **A remedy is code in the same move.** A process plan is closed only when each remedy is a gate, a hook or a script that refuses the old way, committed
