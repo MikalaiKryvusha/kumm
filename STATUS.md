@@ -161,9 +161,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    no human verb for a program, big work not undersold, a detail is not a feature). Voice lint clean, a clean-instance read done and verified. The live page
 >    `v0.9.1-RC1` still carries the old text: `gh release edit v0.9.1-RC1 --notes-file <a copy with {{ARCHIVE_SIZE}} = 12,8 ГБ>` after the owner's word on the new text.
 >    Open from his questions: the menu tab text jitter (bug 64 row 6) was never re-tested after the hub rework — a 60 fps video on the RC1 copy decides the known-issue line.
-> 1. **RC1 install test from GitHub — PASS up to the main menu** (report `testcases/reports/2026-11-20_conan-rc1-install-from-github.md`): download 21 min, unpack
->    1 min, install 74/74, «Играть» starts the game, the menu shows «0.9.1-RC1». World entry by real clicks (new adventure, single player) — loading at 16:43.
->    Then: close the game by PID, release the machine lock, remove `rc1_install` and `rc1_release` (≈ 80 GB; the owner's `.cmd` way if the classifier refuses).
+> 1. **RC1 install test from GitHub — PASS, the whole player path** (report `testcases/reports/2026-11-20_conan-rc1-install-from-github.md`): download 21 min,
+>    unpack 1 min, install 74/74, «Играть», the menu «0.9.1-RC1», a new world with 66/66 mods and the pack's HUD (16:49). The game closed by PID, the lock released.
+>    The classifier refused removing `KUMM/.work/rc1_install` + `rc1_release` (≈ 93 GB, D: had 13 GB free at 16:49): the owner runs `KUMM/.work/rc1_cleanup.cmd`.
+>    Three S3 findings in the report (no log line for «Играть»; the installer's misleading «Engine.ini not touched»; «Подтвердить» over its Enter badge).
 > 2. **Cleanup the classifier refused me:** `KUMM/.work/svarog_cleanup.cmd` (SvarogsDream `_harness` 20.5 GB, «НА ОТСМОТР НИКОЛАЕМ», `src/*/bin|obj`) — the owner
 >    ordered it («чисти мусор», «отсмотр удаляй» 16:12) and runs it himself; `KUMM/.work/automode_rule.mjs` adds his standing cleanup permission («разрешаю»
 >    16:13) to `.claude/settings.local.json` — the classifier refuses the agent editing its own permissions, the owner runs it.

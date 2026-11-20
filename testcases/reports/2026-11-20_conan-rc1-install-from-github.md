@@ -33,6 +33,8 @@ launcher's own buttons pressed by `BM_CLICK` (the same handler as a mouse click,
 | 9 | 2026-11-20 16:41 +03:00 | `mouse-seq.ps1 -Seq "move:0.104/0.404,…,lclick,…"` («Продолжить») | the game log: «ContinuePreviousClientSession: No save game profiles found» — the vanilla behaviour of a fresh install |
 | 10 | 2026-11-20 16:42–16:44 +03:00 | `mouse-seq.ps1` clicks: «Одиночная/Совместная игра» → slot 1 → «Одиночный режим» → «Запустить игру» → «Подтвердить» | the world loads (≈ 50 s, the loading screen «Осталось: 546…»), the desert start with «Мужчина» / «Женщина» (`frames/single6.jpg`), memory 7,5 GB |
 | 11 | 2026-11-20 16:44 +03:00 | `mouse-seq.ps1` «Мужчина» → «Персонаж готов» | the character creator in Russian (`frames/single7.jpg`), the sentence plate with an empty name (`frames/single8.jpg`) |
+| 12 | 2026-11-20 16:45–16:49 +03:00 | `mouse-seq.ps1` «Изменить», a name typed, Enter, «Подтвердить» | the game's intro film, then the hero in the world (`frames/single18.jpg`) |
+| 13 | 2026-11-20 16:49 +03:00 | `Stop-Process -Id 31460` / `-Id 1412`; `machine-lock.mjs release --who kumm` | the test game closed by PID, no crash-report window, the lock released |
 
 ## 4. Checks
 
@@ -50,7 +52,7 @@ Functional run: the released launcher on a fresh 3.1.1 copy, walked by its own b
 | «Играть» | the game starts, the launcher closes (rule 26) | both seen | pass |
 | Main menu | «0.9.1-RC1» under the pack logo, game 3.1.1, «Отзыв» | `frames/menu2.jpg`: «3.1.1» · «0.9.1-RC1» · «ОТЗЫВ», menu in Russian; `UE4SS.log` without errors | pass |
 | New game, world load | a new single-player world loads with the pack's mods | the world loaded, the desert start, the creator; `UE4SS.log` without errors | pass |
-| The hero in the world | the hero stands in the world, the pack's HUD on screen | the name entry waits for a free keyboard (rule 30) | blocked |
+| The hero in the world | the hero stands in the world, the pack's HUD on screen | `frames/single18.jpg` 16:49: the hero in the desert, the camera behind his back; the Hosav HUD (XP 3 / 1 000, health 200 / 200, stamina 100 / 100, temperature), the minimap, the frame counter 72 top right, the notice «Открыто новое путешествие — Рыбак», the Russian tutorial; `UE4SS.log`: «СБОРКА: моды 66/66 (эталон 66 модов)» | pass |
 
 ## 5. Found
 
@@ -68,4 +70,5 @@ Functional run: the released launcher on a fresh 3.1.1 copy, walked by its own b
 
 ## 7. Verdict
 
-partial — the whole install path from GitHub to the main menu passes; the world entry waits for a free keyboard.
+pass — the whole player path of the release passes: the launcher alone finds the game, downloads 12,8 GB from GitHub, installs 74 / 74 mods, «Играть» starts
+the game, the menu shows «0.9.1-RC1», a new world loads with all 66 mods and the pack's HUD. Found: three S3 / cosmetic items above, none blocks the release.
