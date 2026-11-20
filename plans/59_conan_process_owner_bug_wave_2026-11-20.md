@@ -50,7 +50,7 @@ release ever read.
 
 ## 4. Steps
 
-- [ ] 1. File every open bug of the build as an issue (HOUSE_RULES 44) — in progress 2026-11-20.
+- [x] 1. File every open bug of the build as an issue (HOUSE_RULES 44) — DONE 2026-11-20 19:25: 42 issues #2–#43, index `bugs/GITHUB_ISSUES.md`.
 - [ ] 2. The matrix file `testcases/TC_conan_play_matrix.md` from the nine mods' notes + the owner's bugs of 2026-11-20 and every open issue; rows / columns
       as remedy 2; show it to the owner as a page before the first play run.
 - [ ] 3. The play-report template and its check (`testcases/_play-report-template.md`, a check script the gate calls); prove the check red on the RC1 install
