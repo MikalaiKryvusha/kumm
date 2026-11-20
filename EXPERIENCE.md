@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0574 · 2026-11-20 · ❌→✅ · #windows #tasklist #process #guard #release
+class: a process check that greps tasklist's TABLE for a long image name never matches
+mechanized: `ConanExiles/_config/release/make_volumes.sh` uses `tasklist //FO CSV //NH | grep '^"ConanSandbox'`; the launcher stand's machine guard the same CSV form
+**Lesson:** tasklist's table cuts the image name to 25 characters (`ConanSandbox-Win64-Shippi`), so `tasklist | grep ConanSandbox-Win64-Shipping`
+stayed silent with the game running and the release script would have overwritten the live game's ini files (the judge's round 3, 2026-11-20; proved
+by a hidden stub of that name: the old line silent, the CSV line fires). Read processes by the CSV form (or `Get-Process`), and prove a «refuse while
+X runs» guard red with a stand-in process of the full name. In Git Bash a Windows switch needs `//`.
+
 ### EXP-0573 · 2026-11-20 · ❌→✅ · #launcher #stand #interference #game-running #helper #false-fail
 class: a stand's cases failed by a machine-wide condition another session created, read as a defect of the code under test
 mechanized: `ConanExiles/_config/launcher/test/self.mjs` refuses with ONE named FAIL when a ConanSandbox process runs on the machine (pack `d473023`)

@@ -134,6 +134,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 - 🎯 **Oblivion-style archery — raised by the owner 2026-10-28** (a discussion, not work: `[OWNER]` «пока обсуждаем»): arrow speed — Conan's,
       the drop — Oblivion's. Vanilla `ArrowGravityScale` 0.55 and `ArrowInitialSpeedMultiplier` 5000 (Remastered) found; waits for his choice of what
       the draw does (shot power, as in Remastered, or a flatter flight, as in Conan). Recon — `researches/conan-archery/README.md`.
+- 🛡️ **2026-11-20 09:5x — the owner's side errand (a browser game, then «check C for malware»): the game planted nothing, the Chrome cache is cleared; leftovers of
+      an EARLIER infection weaken the machine's antivirus.** The owner ordered the removal (10:10–10:13, «УБРАТЬ!» ×3, Chrome closed by him 10:13): the
+      helper backs up, cleans the local policy file and the live policy values, turns protection back on, restarts the full scan, revokes the 8 spam
+      notification grants; Tamper Protection is the owner's own switch in Windows Security. Details are private and stay out
+      of this public repo: `KUMM/.work/malware_check/report.md` (git-ignored). A full scan of C: runs detached (Defender, under the machine lock `kumm` to 13:47).
 - 🧹 Disk cleanup 2026-10-25 — the "your call" items of `C:\REVISIONS\…_ИТОГ.md`, `D:\REVISIONS\…_ИТОГ.md` are the owner's (chronicle, 2026-10-25 22:15).
 - 🔴 **Do NOT run `Clear-Quarantine.ps1 -Stamp 2026-08-17_2335 -Execute`**: the quarantine holds the only
       copy of an Elden Ring save and the personal video `ref.mp4`.
@@ -167,9 +172,31 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the stray guide JPEG deleted). Item 2 DONE but the kit builds — pack `00c795d` (rule 40: `_config/devkit/krinik_modinfo.py` + `_config/release/krinik_change_notes.json`
 > are the one source; kit-buildmod / build-level-mod write the fields, `set-pak-modinfo.py --check-krinik` guards `make_release.sh` 2b (working game) and
 > `make_volumes.sh` 2c (export); the working game reads 4 of 4 empty until RC1's pak builds + deploy; report `testcases/reports/2026-11-20_conan-krinik-pak-modinfo-fields.md`;
-> the 0.9.1 change-note texts need the clean read with the release texts). RUNNING: a judge on `d473023` + `00c795d` (report → `reports/2026-11-20_judge_round3_launcher_and_pak_modinfo.md`);
-> a helper on the owner's side errand (browser cache after a browser game, a malware check of C:, a detached Defender scan of C: under the machine lock —
-> `KUMM/.work/malware_check/report.md`). Pack: 11 local commits, push after the judge. Next: item 4 (R1) — then item 3 (bug 85 judge round 3).
+> the 0.9.1 change-note texts need the clean read with the release texts). Judge round 3 on both (`reports/2026-11-20_judge_round3_launcher_and_pak_modinfo.md`):
+> 2 defects (RC part names invisible to the launcher; the release's running-game refusal never fired — tasklist cuts names at 25 chars, EXP-0574) + 5 risks —
+> all fixed in the working tree, run report `testcases/reports/2026-11-20_conan-launcher-judge3-fixes.md` (finding 6 not reproducible on the loopback stand).
+> R1 DONE in the tree: `packVersion` 0.9.1-RC1 and every shipped Krinik mod's manifest version (the owner 2026-11-18 20:57 «в манифесте и модах»; modinfo keeps
+> 0 9 1), parts stem `Krinik_Mod_Pack_0_9_1_RC1`, the UI pak rebuilt by the kit with «0.9.1-RC1» under the logo (kit-buildmod's rule-40 step seen live), all
+> four `_unpacked` Krinik paks carry the fields (`set-pak-modinfo.py _unpacked --check-krinik` 4 / 4). Texts: the writer helper rewrote N, R (template + 30 cells,
+> README.draft regenerated), G (RU) and C by the portrait — `KUMM/.work/texts091r3/REPORT.md` (decisions, the owner's lines as proposals), `pairs.md` (58 pairs);
+> the guide's ENGLISH pages are NOT written yet (the brief left them out). Side errand (the owner's «УБРАТЬ!» ×3) DONE: Defender back on, Tamper Protection on by the
+> owner, the January policy set and the 8 spam grants removed, a full scan of C: running (PID 14044 from 10:15, the machine lock `kumm` to 13:47 — release it
+> after); private details `KUMM/.work/malware_check/report.md`.
+> **FIRST in the next chat (handover of 2026-11-20):**
+> 1. **Pack:** the round-3 fixes + R1 committed (`f381f3f`; the stand re-run 66 / 66, the H2 control red — report `testcases/reports/2026-11-20_conan-launcher-judge3-fixes.md`),
+>    the writer's texts committed as DRAFT (`ce1f12b`); **judge round 4** on `00c795d..f381f3f` (rule 31) → fixes → `git push` of the pack (13 local commits, bug 85's included).
+> 2. **Texts (the owner's META-texts order 09:47):** a clean-instance read (§7B) of N, R, G, C as the writer left them (`KUMM/.work/texts091r3/REPORT.md` — its
+>    decisions 1–6); fixes; the owner's page of pairs from `pairs.md` (rule 32: one HTML page); his word on his own lines (REPORT «The owner's lines»). The guide's
+>    **English pages after the Russian ones** (the owner 2026-11-18 21:08) are still owed. `{{ARCHIVE_SIZE}}` is filled after `make_release.sh`.
+> 3. **RC1 is DEPLOYED in the working game** (2026-11-20 10:44, pack `f381f3f` + `ce1f12b`: 75 / 75 mods, verify 114 present 0 missing; the guard on the game's
+>    Mods 4 / 4 ok). Owed: the main menu by eye — «0.9.1-RC1» under our logo, the game's mods screen with the author, URL and change note (rule 40.3);
+>    re-run `set-pak-modinfo.py` on the four `_unpacked` paks + deploy again whenever the change-note table changes (the guard names a stale note).
+> 4. **Bug 85** judge round 3 on `bddc495..9378982` (owed); J5, N5, N8, N9, N2's «Продолжить игру»; bug 109 → RC2.
+> 5. **Then** `build-docs.py` (the 3.1.1 guide PDF committed, the launcher exe) → `make_release.sh <empty dir on D:>` → the release `v0.9.1-RC1`, an ordinary one
+>    titled «0.9.1-RC1 (тестовая сборка)» (the owner's word 2026-11-18 20:54; ask him once whether it keeps 0.9.0 as the repository's «Latest») — the public
+>    repo's `main` stays on the 0.9.0 tree for RC1 (the notes use the logo path that exists there) → the launcher on a fresh copy of the clean 3.1.1 (rule 25).
+> 6. **The machine:** the Defender full scan of C: (PID 14044) — read `Get-MpThreatDetection` after 10:15 when it ends, then `machine-lock.mjs release --who kumm`.
+> **The list below is SUPERSEDED by the list above — it moves verbatim to the chronicle at this chat's closure (bonsai trim).**
 > **FIRST in the next chat:**
 > 1. **The pack's working tree is UNCOMMITTED — review it first** (`git -C D:/work/ai_sandbox/ConanExiles status`): (a) the launcher round-2 fixes of a STOPPED helper —
 >    `_config/launcher/KrinikConanGames.cs`, `KrinikConanLauncher.cs`, `KrinikConanUpdates.cs`, `test/click.ps1`, `test/feed.mjs`, `test/self.mjs`, `_config/release/make_release.sh`,

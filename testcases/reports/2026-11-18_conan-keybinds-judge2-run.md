@@ -55,6 +55,21 @@ Functional run: the real game by the player's path, the real mouse and keys, the
 `D:/Games/Conan Exiles 3.1.1/ConanSandbox/Binaries/Win64/ue4ss/UE4SS.log` (21:13–21:22); frames `KUMM/.work/bug85/r2_menu.jpg`, `r2_esc.jpg`, `r2_inv.jpg`,
 `r2_j2.jpg`, `r2_win.jpg`; kit logs `KUMM/.work/bug85/kit_dbl_run1.log`, `kit_dbl_run2.log`.
 
+## Run 2 — the pak with the double-click overrides (2026-11-18, the game session that began 21:29:27) <!-- claim-ok: times of 2026-11-18 -->
+
+Written 2026-11-20 from the UE4SS.log of that session (`D:/Games/Conan Exiles 3.1.1/ConanSandbox/Binaries/Win64/ue4ss/UE4SS.log`, 3 854 lines, its first line
+«2026-11-18 21:29:27 Console created», no game session after it) and that chat's closing message; the stand was the same (the game in front, real mouse).
+
+- K1 — PASS: 21:30:46.92 «click in W_MainMenu_MainMenu_C -> start … collect_report.ps1», 21:30:47.15 «click ignored (debounce)». <!-- claim-ok: times of 2026-11-18 -->
+- N1 — PASS (closing message): the main menu's buttons by real clicks; the world entered — the inventory's mods button placed 21:31:33. <!-- claim-ok: times of 2026-11-18 -->
+- J2 — PASS: 21:31:37.91 «список построен в окне инвентаря», 21:31:38.06 «щелчок мимо списка — список закрыт»: the double click's second press reached the catcher. <!-- claim-ok: times of 2026-11-18 -->
+- J1 — FAIL: 21:31:52.97 our window opened from «Моды Krinik'а»; 21:31:56.66 ONE line «click: check cam_sharp → true» for a double click — bug 109 (RC2). <!-- claim-ok: times of 2026-11-18 -->
+- K5 again — PASS: 21:32:49.49 «closed (Esc)»; 21:32:50.69 «хаб закрыт: переключений 1 … срывов 0». <!-- claim-ok: times of 2026-11-18 -->
+- N2 — PARTIAL: «Настройки» and «Выйти» by real clicks (closing message); the Krinik mods on top — 21:32:52 and 21:33:45 «список модов: Криник наверху <!-- claim-ok: times of 2026-11-18 -->
+  (4 из 66 строк)» (Found 4's fix seen); «Продолжить игру» not pressed.
+- No crash; the session ended by a normal exit (the log's last write 21:36:56). <!-- claim-ok: times of 2026-11-18 -->
+
 ## Verdict
 
-partial — in progress (K1, N1, N2, N4–N9, J5, J6 and the double-click fix owed).
+partial — K1, K2, N1, N4, N6, N7, J2 PASS on the pak with the double-click overrides; J1 FAIL → bug 109 (RC2); owed: N2's «Продолжить игру», N5, N8, N9, J5,
+judge round 3 on `bddc495..9378982`.

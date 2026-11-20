@@ -30,7 +30,7 @@ Input source (real mouse / real key · the remote) × place (main menu · Esc me
 |---|---|---|---|
 | R1 | Recon by the remote: the UFunctions of `WindowRoot`, `GUIModuleController`, `FLXButtonBase` whose names hold close / shortcut / signal / module | a list in the bug document | — |
 | R2 | Recon by real keys: with probe hooks on the candidates of R1, Esc and Tab close the hub; Esc closes our window | the hooks that fire on each path, in the bug document | — |
-| K1 | Main menu: a real click on the feedback plate | the section logs the click in `W_MainMenu_MainMenu_C`, the collector starts once; a second click within 5 s is ignored | — |
+| K1 | Main menu: a real click on the feedback plate | the section logs the click in `W_MainMenu_MainMenu_C`, the collector starts once; a second click within 5 s is ignored | PASS 2026-11-18 21:30 on the pak with the double-click overrides — UE4SS.log 21:30:46.92 «click in W_MainMenu_MainMenu_C -> start … collect_report.ps1», 21:30:47.15 «click ignored (debounce)» (read 2026-11-20 from the log of that session; report `2026-11-18_conan-keybinds-judge2-run.md`, run 2) |
 | K2 | Esc menu: a real click on the feedback plate | the same in `W_IngameMenu_C` | PASS 2026-11-18 21:17 — a real click on «ОТЗЫВ» in the Esc menu: the collector started, the second press 0.25 s later «click ignored (debounce)»; the collector stopped by PID, the desktop unchanged (report `2026-11-18_conan-keybinds-judge2-run.md`) |
 | K3 | Gameplay: 20 real LMB attacks | no line of the feedback, settings-window or mods-button sections; the guard prints zero | — |
 | K4 | Our window: real clicks on a checkbox, a mod name, an «i», the reset, save, save-and-close and close buttons | each does what it did with the key bind; the close button closes the window (new: it did nothing before) | — |
@@ -45,8 +45,8 @@ Input source (real mouse / real key · the remote) × place (main menu · Esc me
 
 | ID | Case | Expected | Status |
 |---|---|---|---|
-| N1 | Main menu: «Продолжить», «Новая игра», «Настройки», the mod list (Simple Modlist) — real clicks (the kit added nodes to the menu's Construct chain) | each opens as before; the backdrop movie plays (bug 71) | — |
-| N2 | Esc menu: «Вернуться», «Настройки», «Выйти в меню» — real clicks; the Krinik mods at the top of the mod list | as before | — |
+| N1 | Main menu: «Продолжить», «Новая игра», «Настройки», the mod list (Simple Modlist) — real clicks (the kit added nodes to the menu's Construct chain) | each opens as before; the backdrop movie plays (bug 71) | PASS 2026-11-18 21:3x — the main menu's buttons by real clicks, the world entered (the inventory's mods button placed 21:31:33); recorded in that chat's closing message, the clicks themselves leave no log line |
+| N2 | Esc menu: «Вернуться», «Настройки», «Выйти в меню» — real clicks; the Krinik mods at the top of the mod list | as before | PARTIAL 2026-11-18 21:3x — «Настройки» and «Выйти» by real clicks (closing message of that chat); the Krinik mods on top: UE4SS.log 21:32:52 and 21:33:45 «список модов: Криник наверху (4 из 66 строк)»; «Продолжить игру» NOT pressed — owed |
 | N3 | Inventory: the world slows (0.03) and returns to 1.0 on close; craft at real speed | the pause section's log lines as before | — |
 | N4 | Hub: tab switches by mouse, Q / E; close by Esc, Tab and the close button | our pages collapse on every close (log «хаб закрыт»), no bare-world frame | PASS 2026-11-18 21:24 — a tab by the mouse (Хар-ки), E then Q twice (Параметры → Хар-ки → Таланты), a real Esc closed the hub: «хаб закрыт», the world 1.0 |
 | N5 | The inventory's bottom bar: the other buttons (Hosav «Настройки интерфейса» collapsed, Inventory Compactor) click as before beside our wrapped button | as before; the wrap takes no extra width | — |
@@ -59,8 +59,8 @@ Input source (real mouse / real key · the remote) × place (main menu · Esc me
 
 | ID | Case | Expected | Status |
 |---|---|---|---|
-| J1 | Our window: a real double click (two presses < 300 ms) on one checkbox | it toggles twice — ends as it started; two log lines «click: check …» | FAIL 2026-11-18 21:21 on the 20:38 pak — one «click: check cam_sharp» for two presses 120 ms apart (judge finding 1 confirmed); a re-run on the pak with the double-click overrides owed |
-| J2 | The mods button: two presses < 300 ms | the list opens and closes (the second press lands on the catcher as a double click) | FAIL 2026-11-18 21:20 on the 20:38 pak — the list opened and stayed open (judge finding 1 confirmed); a re-run owed |
+| J1 | Our window: a real double click (two presses < 300 ms) on one checkbox | it toggles twice — ends as it started; two log lines «click: check …» | FAIL 2026-11-18 21:21 on the 20:38 pak — one «click: check cam_sharp» for two presses 120 ms apart (judge finding 1 confirmed); a re-run on the pak with the double-click overrides owed. FAIL again 2026-11-18 21:31:56 on that pak — one «click: check cam_sharp → true» for the double click (UE4SS.log): the window's own double-click path does not reach the click handler → bug 109, RC2 |
+| J2 | The mods button: two presses < 300 ms | the list opens and closes (the second press lands on the catcher as a double click) | FAIL 2026-11-18 21:20 on the 20:38 pak — the list opened and stayed open (judge finding 1 confirmed). PASS 2026-11-18 21:31:38 on the pak with the double-click overrides — UE4SS.log 21:31:37.91 «список построен…», 21:31:38.06 «щелчок мимо списка — список закрыт» (the second press reached the catcher) |
 | J3 | The guard on the pre-fix tree (bddc495) | exit 1, all five binds listed, the `pcall(RegisterKeyBind, …)` form among them | PASS 2026-11-18 21:1x — bddc495: exit 1, five binds, the pcall form among them |
 | J4 | The guard on `_unpacked` (the `ue4ss/Scripts` layout) | KrinikConanUI and the other Krinik mods scanned, 0 in them | PASS 2026-11-18 21:1x — `_unpacked`: the Krinik mods scanned (ue4ss/Scripts), 0 in them |
 | J5 | The mods button after a world re-entry (exit to the menu, Continue): open the list twice | the list opens each time (a handler is never erased by the old window's late off) | — |
