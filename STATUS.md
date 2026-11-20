@@ -169,9 +169,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   `KUMM/.work/rc1_install/Conan_311` (robocopy PID 33000) for the install test by the launcher from the GitHub feed.
 >   The classifier refused deleting `KUMM/.work/rc1_release/check` and `…/Krinik_Mod_Pack_0_9_1_RC1` (≈ 26 GB) — the owner's call.
 > - **RC2 list (judge round 7, deferred):** `place()` forgets the old window when `built_in` differs from the visible window (two live inventory windows);
->   assign `btn` only after the wrap succeeds; drop the second `forget_old_window()` in `place()`; the PDF dash gate excludes only the mod tables (not
->   `--only guide`); dash_lint C# forms: a char literal inside `$"{…}"`, strings inside interpolation holes, `@$"…"` verbatim; G5 (the bar's neighbours);
->   the Nexus email; the «О проекте» plate; the guide's English pages.
+>   assign `btn` only after the wrap succeeds; drop the second `forget_old_window()` in `place()`; dash_lint C# forms: a char literal inside `$"{…}"`,
+>   strings inside interpolation holes, `@$"…"` verbatim; G5 (the bar's neighbours); the live Nexus email (the generator fixed, pack `3059d9f`); the
+>   «О проекте» plate; the guide's English pages. DONE since: the PDF dash gate skips only the mod tables (`dash_lint --skip-mod-tables`, pack `5bc76c9`).
+> - **Release facts (2026-11-20):** `gh release create` keeps the release a DRAFT until every asset is uploaded — the launcher sees only published releases
+>   and shows «Сборка для игры 3.1.1 ещё не вышла» meanwhile (seen 15:28 with the parts beside it); 12.8 GB go up at ≈ 6 MB/s (Wi-Fi) — ≈ 37 min.
 > 1. **Pack:** judge round 4 fixed and committed (`513a21f`; stand 340 / 340; report `testcases/reports/2026-11-20_conan-launcher-judge4-fixes.md`); **judge
 >    round 5** on `7c72d78..HEAD` (round 4's fixes + bug 110 + bug 85's token fix + the mark guard) → fixes → `git push` of the pack (15+ local commits).
 > 2. **Texts:** the writer's r4 applied the clean read r3 (`reports/2026-11-20_clean_read_texts_091_r3.md`; summary `KUMM/.work/texts091r4/REPORT.md`) — in the
