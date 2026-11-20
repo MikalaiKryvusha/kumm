@@ -11,8 +11,9 @@ The release build <packVersion> against the play matrix `testcases/TC_conan_play
 - Played: <minutes> min
 - Video: <absolute path of the session video>
 - God mode and teleports: <which rows ran with god mode or a teleport, which without; damage, death and combat rows — without>
-- God mode off at the end: <the line of `god-on.sh off`, e.g. «god off: ok (bCanBeDamaged=true)»>
-- Not covered: <the matrix rows not walked and why — or «none»>
+- God mode off at the end: <the exact line `god-on.sh off` printed at the end of the session>
+- Pack commit: <`git -C ConanExiles rev-parse HEAD` of the build that was played — the gate refuses when `_unpacked/` or `modpack.json` changed after it>
+- Not covered: <every skipped or blocked row by its ID, with why — or «none»>
 
 ## Contour
 

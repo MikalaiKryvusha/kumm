@@ -9158,3 +9158,17 @@ the release build), NOT committed in the pack, NOT run yet — the game was left
 > (the owner launches from the desktop); the old «Krinik Conan (dev).lnk» and `Krinik_Launcher_dev` in the game folder are still there (its deletion was refused
 > by auto mode — ask the owner or he deletes it).
 >
+
+
+## 2026-11-20 20:37 +03:00 — the owner: the retest of a fixed build bug is the agent's own game, never his (recorded 20:38)
+
+The agent wrote in chat that the five issues fixed and checked (#3, #6, #11, #12, #33) stay open until a retest by the player's path, «и для части из них это
+ваша игра». The owner, verbatim:
+
+> и для части из них это ваша игра
+>
+> твоя игра
+
+Applied the same minute: the lines that handed the retest to the owner (STATUS, the KrinikConanUI notes, the D2 case, both run reports, the issue index, plan 59)
+now name the agent; the public comment on issue #6 («…и в игре игрока») was edited in place; HOUSE_RULES 44.3 carries the rule. The owed retests: D2 (a talk with
+reply options — the agent finds such a talker) and G1 (a fight with humanoids, god mode off).

@@ -150,10 +150,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **FIRST in the next chat (the owner ordered autonomous work 19:37):**
 > 1. **Chat of 19:53 (resume, autonomous) — done, pack `29a612b` pushed, judge 2 rounds:** issue #3 — my first fix (`dc79053`) missed: the oasis campfire talk
 >    opens `NPCDialogueWindow2`; the poll now asks the game for both talk windows (`IsModuleActive`), the owner's word 20:03 «лучше убрать паузу во время
->    диалогов»; D1, D3 pass in his world, D2 (his reply-option talk) blocked — his retest (report `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`).
+>    диалогов»; D1, D3 pass in his world, D2 (a talk with reply options) blocked — MY retest owed: find a talker with options (report `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`).
 >    Issue #6 — the save keeps my god mode across sessions; his save is mortal again; `enter-world-remote.sh` reads the flag at every entry (report
 >    `testcases/reports/2026-11-20_conan-immortal-heroine-save.md`; my stand killed the heroine once, restored from the game's backup; a 4 HP corruption mark
->    of my run stays). Both issues commented, open until the retest. The dev harness (remote, menu probe) is installed in his working game since 19:57 —
+>    of my run stays). Both issues commented, open until MY retest by the player's path (D2, G1) — the owner 20:37: the retest is the agent's game, never his. The dev harness (remote, menu probe) is installed in his working game since 19:57 —
 >    remove it (`ue4ss/Mods/KrinikAgentRemote`, `KrinikMenuProbe`, `KrinikConanBench`) when the game work of the chat ends. The owner plays other games on this
 >    PC (20:28 Underground 2): launch Conan by the BACKGROUND path only, keys by `post-key.ps1` (E added).
 >    Next: N1 (switches between the four game pages — the empty backing risk of judge round 1), N3 (every button of the five copied tabs), M2; then the dead

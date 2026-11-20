@@ -60,4 +60,4 @@ after the talk, a 16 s clip watched by its sheet.
 ## Verdict
 
 partial — D1 pass (the world keeps its pace during a talk, the hub still slows), D2 blocked (the owner's reply-option case waits for his NPC; issue #3 stays open
-until his retest).
+until my retest of D2 on a talker with reply options).

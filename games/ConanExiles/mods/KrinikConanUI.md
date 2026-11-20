@@ -303,7 +303,7 @@ main-menu frame 18:56 (TC `TC_conan_release_0.9.0_2026-11-02.md` V3).
   (`[OWNER]` 2026-11-20 20:03 «лучше убрать паузу во время диалогов»): the game has TWO NPC talk windows in `DT_UIModuleTable` — `NPCDialogueWindow` and
   `NPCDialogueWindow2` (the oasis campfire talk opens the second); the first fix (`dc79053`) named only the first and missed (case D0, 20:01); since 20:04 the poll
   asks `GUIModuleController:IsModuleActive` for both, only while a full-screen UI is open — no open/close bookkeeping. D1 pass (report
-  `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`); the owner's reply-option case (a chosen reply «did nothing» while the voice played; the slowdown is the likely cause, not observed) — D2 blocked, his retest. Stand
+  `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`); the owner's reply-option case (a chosen reply «did nothing» while the voice played; the slowdown is the likely cause, not observed) — D2 blocked, my retest owed (a talker with reply options). Stand
   `_config/dialogue-stand.lua` (`find` · `place` · `speed`, `_G.__ds_class` for another talker class). Still owed of the case set: N1, N3, M2.
   The session log of 18:31–19:05 also shows `KrinikConanCamera` writing «ЗУМ: …» once a second — checked 19:5x: it is
   the zoom measurement inside the camera's existing loop (`KrinikConanCamera/Scripts/main.lua` ≈1134, `last_zoom_report`), no timer of its own; the detailed log is

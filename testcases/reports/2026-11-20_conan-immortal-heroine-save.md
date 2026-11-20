@@ -50,5 +50,5 @@ entered and looked at.
 
 ## Verdict
 
-partial — the mechanism is proven (G0 + G3) and the owner's save is mortal again (fresh-process read true); a humanoid hit (G1) and the owner's own play are the
-retest of issue #6.
+partial — the mechanism is proven (G0 + G3) and the owner's save is mortal again (fresh-process read true); my humanoid hit (G1) is the retest of
+issue #6 — the retest is the agent's own play, never the owner's (his word 2026-11-20 20:37).

@@ -354,6 +354,9 @@
        pattern list of `make_public_tree.py`) and checked by `kaif-voice-lint.mjs check`.
     3. The local bug document (`bugs/NN_…`) keeps the agent's working notes and names its issue; the issue's state follows the fix: closed only after the
        retest by the player's path.
+    4. **The retest is the agent's own play by the player's path — never handed to the owner.** A case the agent cannot reach yet (no NPC of that kind nearby,
+       a fight without god mode) is the agent's owed work, named as such in the report and in STATUS. `[OWNER]` 2026-11-20 20:37 · `PROJECT_HISTORY.md` entry
+       2026-11-20 20:37.
     `[OWNER]` 2026-11-20 18:42–19:10 · `PROJECT_HISTORY.md` entry 2026-11-20 18:42.
 
 The owner's rules in `AGENT_GUIDE.md`: "Notes from the human" (never ask permission for your own work · the independent judge · the guide is a thesis
