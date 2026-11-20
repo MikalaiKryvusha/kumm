@@ -172,6 +172,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   assign `btn` only after the wrap succeeds; drop the second `forget_old_window()` in `place()`; dash_lint C# forms: a char literal inside `$"{…}"`,
 >   strings inside interpolation holes, `@$"…"` verbatim; G5 (the bar's neighbours); the live Nexus email (the generator fixed, pack `3059d9f`); the
 >   «О проекте» plate; the guide's English pages. DONE since: the PDF dash gate skips only the mod tables (`dash_lint --skip-mod-tables`, pack `5bc76c9`).
+> - **16:06 — RC1 PUBLISHED:** https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.1-RC1 — «0.9.1-RC1 (тестовая
+>   сборка)», 10 assets, not Latest (0.9.0 stays). Install test by the player's path (`KUMM/.work/rc1_install/run.mjs start` / `click <pid> install`, the
+>   launcher ALONE in `rc1_install/launcher`, isolated search / state / desktop / TEMP): the launcher read the feed — «0.9.1-RC1 для игры 3.1.1 · лаунчер
+>   скачает с GitHub · 12,8 ГБ» (screen found-nofiles); «Установить сборку» refused by its own guard «нужно 40,3 ГБ, свободно 35,9 ГБ» on D:. Waits for the
+>   owner to run `KUMM/.work/rc1_free_space.cmd` (deletes `rc1_release/check` and the export, ≈ 26 GB — the classifier refuses me); then press install again,
+>   watch download → install → «Играть», enter the world on that copy, write the run report. Launcher PID 26040 may still be open (close by PID).
 > - **Release facts (2026-11-20):** `gh release create` keeps the release a DRAFT until every asset is uploaded — the launcher sees only published releases
 >   and shows «Сборка для игры 3.1.1 ещё не вышла» meanwhile (seen 15:28 with the parts beside it); 12.8 GB go up at ≈ 6 MB/s (Wi-Fi) — ≈ 37 min.
 > 1. **Pack:** judge round 4 fixed and committed (`513a21f`; stand 340 / 340; report `testcases/reports/2026-11-20_conan-launcher-judge4-fixes.md`); **judge
