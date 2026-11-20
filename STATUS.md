@@ -177,7 +177,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    DONE 17:18: the public README carries our images (the 0.9.1 cover, four oasis shots) and the gold «СКАЧАТЬ» / «DOWNLOAD» buttons (one ChatGPT request with
 >    the two logos, `art/buttons/`, pack `28436e1`) linking `releases/latest/download/KrinikConanLauncher.exe`; public repo `37c1176`; every image link 200; the
 >    rendered page looked at (headless Chrome). Not yet in sync: the mods' change notes inside the paks (next pak build) and the guide PDF inside the archive parts (RC2).
->    Item 2 (the working game → the release build) NOT started: the parts are downloaded in `KUMM/.work/rc1_dl` (13.7 GB, kept for it) and the fresh clean copy
+>    Item 2 (the working game → the release build) STARTED 17:19, stopped at the 80 % budget with the game untouched (still the dev deploy, pack_version 0.9.1-RC1):
+>    `node KUMM/.work/rc1_run/run.mjs start D:/work/ai_sandbox/KUMM/.work/rc1_dl "D:\Games"` (the search root is the folder that HOLDS the game folder) → screen
+>    `installed`; `run.mjs click <pid> remove` printed «pressed #0 of 1» but the log showed no new screen and UI Automation saw no dialog
+>    (`KUMM/.work/rc1_run/dialog_buttons.ps1`) — find how «Удалить сборку» confirms (read KrinikConanLauncher.cs: the remove handler, its confirmation) before the next press. the parts are downloaded in `KUMM/.work/rc1_dl` (13.7 GB, kept for it) and the fresh clean copy
 >    `KUMM/.work/rc1_install/Conan_311` (59 GB, kept for the update / reinstall cases); D: ≈ 60 GB free.
 > 2. **Cleanup the classifier refused me:** `KUMM/.work/svarog_cleanup.cmd` (SvarogsDream `_harness` 20.5 GB, «НА ОТСМОТР НИКОЛАЕМ», `src/*/bin|obj`) — the owner
 >    ordered it («чисти мусор», «отсмотр удаляй» 16:12) and runs it himself; `KUMM/.work/automode_rule.mjs` adds his standing cleanup permission («разрешаю»
