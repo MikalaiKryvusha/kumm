@@ -138,59 +138,33 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **🎯 AIM OF THE CHAT OF 2026-11-18 20:51 — 0.9.1-RC1 built AND uploaded to our GitHub repository, then the full install path tested from it** (`[OWNER]` 20:54
-> «нужно стремиться к тому, чтобы в этом чате собрать RC1 и для теста полного пути установки сборки залить его в GH», chronicle entry 2026-11-18 20:54 — the
-> word for the outward step). Order: bug 85 rest + judge round 2 → pack push → the launcher's RC order + round-2 findings → **a judge round, code review, fixes** (`[OWNER]` 20:58 «то
-> есть, после этого») → versions 0.9.1-RC1 → **a judge round
-> and code review of the version change, fixes** (`[OWNER]` 20:57 «после этого тоже судейство и ревью кода и фиксинг») → **the three release texts (the guide —
-> Russian only, the README and the 0.9.1 notes — RU + EN; DRAFT of pack `5f1544f`, never read by a clean instance, never shown): a clean read of RU and EN, fixes,
-> one page of pairs for the owner** (`[OWNER]` 21:07 «юзер мануал · README · релиз ноутсы 0.9.1 · Переписаны корректным русским языком и английским ???» · «мы
-> готовимся к выпуску»); **the user guide becomes BILINGUAL — the English pages after the Russian ones** (`[OWNER]` 21:08 «делаем юзермануал двуязычным» ·
-> «после русских страниц - ставим EN страницы») → paks, guide, launcher exe → volumes →
-> `make_release.sh` → GitHub → the launcher on a fresh copy of the clean 3.1.1.
-> The progress block of the chat of 2026-11-20 09:09 — moved verbatim to the chronicle, entry «2026-11-20 11:0x — STATUS bonsai trim, part 2».
-> **CHAT CLOSED 2026-11-20 ≈16:2x (the chat of 14:10; soft closure at the context budget).** Done: interview 041 (the owner's own lines, all A, pack `e416d1e`);
-> the four Krinik paks' mod-list fields rebuilt and deployed; judge rounds 5–7 on the launcher, the stand, the mods button and the release tools — fixes
-> `e8a431c`, `648735a`, `5bc76c9`; stand 366 / 0; the mods button G1–G4 PASS live; **RC1 BUILT AND PUBLISHED** —
-> https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.1-RC1 («0.9.1-RC1 (тестовая сборка)», 10 assets; made «Latest» 16:17 after the owner «релиза НЕТ в гитхабе»);
-> the pack pushed; the mod library moved into `ConanExiles/_library` (git-ignored; pack `d7bdff5`, HOUSE_RULES 25); the «О проекте» mockup (`4c049c8`);
-> a language guard in `tools/hooks/ru-reply-check.mjs` (EXP-0578). Verbatim progress — chronicle, entry «STATUS bonsai trim, part 5».
-> **NOW (chat of 2026-11-20 16:20, «делаем сборку Конана»):**
-> 0. **DONE in the pack, NOT yet on the GitHub page:** the 0.9.1 notes, the guide's «Версия 0.9.1», the README mods table and `krinik_change_notes.json` rebuilt by
->    large features with facts and numbers (pack `75ba95d`, pushed) after the owner's line-by-line reading 16:19–16:34 (chronicle entry 2026-11-20 16:23–16:25:
->    no human verb for a program, big work not undersold, a detail is not a feature). Voice lint clean, a clean-instance read done and verified. The live page
->    `v0.9.1-RC1` still carries the old text: `gh release edit v0.9.1-RC1 --notes-file <a copy with {{ARCHIVE_SIZE}} = 12,8 ГБ>` after the owner's word on the new text.
->    Open from his questions: the menu tab text jitter (bug 64 row 6) was never re-tested after the hub rework — a 60 fps video on the RC1 copy decides the known-issue line.
-> 1. **RC1 install test from GitHub — PASS, the whole player path** (report `testcases/reports/2026-11-20_conan-rc1-install-from-github.md`): download 21 min,
->    unpack 1 min, install 74/74, «Играть», the menu «0.9.1-RC1», a new world with 66/66 mods and the pack's HUD (16:49). The game closed by PID, the lock released.
->    `KUMM/.work/rc1_install` + `rc1_release` removed 16:51 (117 GB; D: 134 GB free) by rm-tree in the allowed form (HOUSE_RULES 15, EXP-0580).
->    Three S3 findings in the report (no log line for «Играть»; the installer's misleading «Engine.ini not touched»; «Подтвердить» over its Enter badge).
->    The new notes are LIVE on the `v0.9.1-RC1` page (16:5x, read back = the draft; still Latest).
-> 2. **IN FLIGHT 16:56 — the owner: «мою рабочую игру ты тоже, пожалуйста, преврати в 3.1.1 + 0.9.1-RC1».** The working game `D:\Games\Conan Exiles 3.1.1` carries the
->    dev deploy (pack_version 0.9.1-RC1, `-Verify` clean, dev-only mods in). Plan: `gh release download v0.9.1-RC1` → `KUMM/.work/rc1_dl` (running); the owner's saves
->    copied to `KUMM/.work/save_backup_2026-11-20` (7.7 MB); then `node KUMM/.work/rc1_run/run.mjs start KUMM/.work/rc1_dl "D:\Games\Conan Exiles 3.1.1"` →
->    «Удалить сборку» → «Установить сборку» (the parts beside the launcher, no download) → «Играть» → his world `Game_1` → frame. Tests the uninstall, the install
->    from local parts and the saves kept. Parallel: a fresh clean copy `KUMM/.work/rc1_install/Conan_311` (robocopy running) for the update / reinstall cases.
->    After: the dev harness (KrinikConanHarness, export:false) is gone from the working game — `Deploy-ModPack.ps1 -Deploy -Only KrinikConanHarness` before remote tests.
-> 3. **Release meta in sync (HOUSE_RULES 42, the owner 17:01–17:08):** the public repo got the 0.9.1-RC1 tree (`027ab9c`, scan clean after excluding
->    download-check); the notes' logo path fixed (art/logos) and re-published; the guide PDF rebuilt and replaced on the release + SHA256SUMS.txt updated.
->    DONE 17:18: the public README carries our images (the 0.9.1 cover, four oasis shots) and the gold «СКАЧАТЬ» / «DOWNLOAD» buttons (one ChatGPT request with
->    the two logos, `art/buttons/`, pack `28436e1`) linking `releases/latest/download/KrinikConanLauncher.exe`; public repo `37c1176`; every image link 200; the
->    rendered page looked at (headless Chrome). Not yet in sync: the mods' change notes inside the paks (next pak build) and the guide PDF inside the archive parts (RC2).
->    Item 2 (the working game → the release build) STARTED 17:19, stopped at the 80 % budget with the game untouched (still the dev deploy, pack_version 0.9.1-RC1):
->    `node KUMM/.work/rc1_run/run.mjs start D:/work/ai_sandbox/KUMM/.work/rc1_dl "D:\Games"` (the search root is the folder that HOLDS the game folder) → screen
->    `installed`; `run.mjs click <pid> remove` printed «pressed #0 of 1» but the log showed no new screen and UI Automation saw no dialog
->    (`KUMM/.work/rc1_run/dialog_buttons.ps1`) — find how «Удалить сборку» confirms (read KrinikConanLauncher.cs: the remove handler, its confirmation) before the next press. the parts are downloaded in `KUMM/.work/rc1_dl` (13.7 GB, kept for it) and the fresh clean copy
->    `KUMM/.work/rc1_install/Conan_311` (59 GB, kept for the update / reinstall cases); D: ≈ 60 GB free.
-> 2. **Cleanup the classifier refused me:** `KUMM/.work/svarog_cleanup.cmd` (SvarogsDream `_harness` 20.5 GB, «НА ОТСМОТР НИКОЛАЕМ», `src/*/bin|obj`) — the owner
->    ordered it («чисти мусор», «отсмотр удаляй» 16:12) and runs it himself; `KUMM/.work/automode_rule.mjs` adds his standing cleanup permission («разрешаю»
->    16:13) to `.claude/settings.local.json` — the classifier refuses the agent editing its own permissions, the owner runs it.
-> 3. **Nexus:** the live 0.9.0 page shows `[email=…]` raw — fix by `tools/nexus-desc.mjs` (the generator already writes plain text, pack `3059d9f`); the
->    Nexus publication of 0.9.1 — only by the owner's word.
-> 4. **RC2 list:** judge 7's deferred risks (`place()` two live windows, `btn` after a failed wrap, the second `forget_old_window()`, dash_lint C# forms),
->    G5, bug 85 D2 / D3, the «О проекте» plate (mockup waits for his look), the guide's English pages (asked 14:4x, no answer), the Camera cell look.
-> 5. **Asked, not answered:** the guide's English pages into RC2.
-> The block «CHAT CLOSED 2026-11-18 21:3x», its FIRST list and its «Done this chat» — moved verbatim to the chronicle, entry «2026-11-20 11:0x — STATUS bonsai trim».
+> **CHAT CLOSED 2026-11-20 ≈17:2x (the chat of 16:20, «делаем сборку Конана»; soft closure at the 80 % budget).** Done: the 0.9.1 notes, the guide's «Версия 0.9.1»,
+> the README mods table and the mod-list change notes rebuilt by large features with measured facts (pack `75ba95d`; the owner's line-by-line reading, chronicle
+> 16:23–16:25); the RC1 page carries the new notes and the fixed logo path, the guide PDF and `SHA256SUMS.txt` on the release replaced; the RC1 install test from
+> GitHub PASSES the whole player path (report `testcases/reports/2026-11-20_conan-rc1-install-from-github.md`); the public repo got the 0.9.1-RC1 tree and a README
+> with our images and gold «СКАЧАТЬ» / «DOWNLOAD» buttons (public `027ab9c`, `37c1176`; pack `dcc6b43`, `28436e1`); HOUSE_RULES 15 (the cleanup's one allowed form)
+> and 42 (a release updates all its meta information in sync); EXP-0579–0581; memory `own-the-result-check-before-done`. The full NOW list — chronicle, entry
+> «STATUS bonsai trim, part 6».
+> **FIRST in the next chat:**
+> 1. **The owner's request 16:54: «мою рабочую игру ты тоже, пожалуйста, преврати в 3.1.1 + 0.9.1-RC1».** The working game `D:\Games\Conan Exiles 3.1.1` still holds the
+>    dev deploy (pack_version 0.9.1-RC1, `-Verify` clean, dev-only mods in); his saves are copied to `KUMM/.work/save_backup_2026-11-20` (7.7 MB). The release parts
+>    and the launcher are downloaded in `KUMM/.work/rc1_dl` (13.7 GB). Start: `node KUMM/.work/rc1_run/run.mjs start D:/work/ai_sandbox/KUMM/.work/rc1_dl "D:\Games"`
+>    (the search root HOLDS the game folder) → screen `installed`. The `remove` press at 17:19 changed nothing (no log line, no dialog seen by
+>    `KUMM/.work/rc1_run/dialog_buttons.ps1`): read the remove handler and its confirmation in `ConanExiles/_config/launcher/KrinikConanLauncher.cs` first, then
+>    «Удалить сборку» → «Установить сборку» from the local parts → «Играть» → his world `Game_1` → a frame; the saves must stay. After it: the dev harness
+>    (KrinikConanHarness, export:false) is gone — `Deploy-ModPack.ps1 -Deploy -Only KrinikConanHarness` before remote tests.
+> 2. **The RC1 checks not run yet** (on the fresh clean copy `KUMM/.work/rc1_install/Conan_311`, 59 GB, kept for this): the uninstall back to the clean game, the
+>    update over an older build, a short play of the main features, the menu tab text jitter by a 60 fps video (bug 64 row 6 — decides its known-issue line).
+>    Then remove `rc1_install`, `rc1_dl`, `rc1_run` and `save_backup_2026-11-20` by `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs D:/work/ai_sandbox/KUMM/.work/<dir>`.
+> 3. **Release meta not yet in sync** (HOUSE_RULES 42): the change notes inside the paks (`krinik_change_notes.json` → the next pak build) and the guide PDF inside
+>    the archive parts — both land with RC2.
+> 4. **Cleanup is the agent's duty** (the owner 16:50–16:51): `KUMM/.work/svarog_cleanup.cmd` (SvarogsDream `_harness` 20.5 GB, review folders, `src/*/bin|obj`) —
+>    the auto-mode allow list was widened 17:2x by `node KUMM/.work/automode_rule.mjs` (the owner 16:51, chronicle entry 2026-11-20 16:50): run the cleanup
+>    yourself — `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs <named folders>`, alone in its call; never hand it to the owner.
+> 5. **Nexus:** the live 0.9.0 page shows `[email=…]` raw — fix by `tools/nexus-desc.mjs`; the Nexus publication of 0.9.1 only by the owner's word.
+> 6. **RC2 list:** judge 7's deferred risks (`place()` two live windows, `btn` after a failed wrap, the second `forget_old_window()`, dash_lint C# forms), G5, bug 85
+>    D2 / D3, the «О проекте» plate (mockup waits for his look), the guide's English pages (asked 14:4x, no answer), the Camera cell look, the three S3 findings of
+>    the install report (no log line for «Играть»; «Engine.ini not touched» misleads; «Подтвердить» over its Enter badge).
 
 ## Open bugs
 
