@@ -93,6 +93,15 @@ try {
   try { fromTranscript = event.transcript_path ? turnText(readFileSync(event.transcript_path, 'utf8')).trim() : ''; } catch { fromTranscript = ''; }
   // Trimmed on both sides: a trailing newline made the same defect count twice (judge 2026-11-18, item 4).
   const text = fromTranscript.includes(last) ? fromTranscript : [fromTranscript, last].filter(Boolean).join('\n');
+  // The chat is Russian (CLAUDE.md, HOUSE_RULES 1): a reply written mostly in English is refused once. Counted on the prose only — code spans, fenced
+  // blocks, URLs and paths are dropped. Paid 2026-11-20 15:3x–16:13: four replies to the owner went out in English («НА РУССКОМ ЯЗЫК…», EXP-0578). [NOT-TESTED]
+  const prose = text.replace(/```[\s\S]*?```/g, ' ').replace(/`[^`]*`/g, ' ').replace(/https?:\/\/\S+/g, ' ').replace(/[A-Za-z]:[\\/]\S+/g, ' ');
+  const lat = (prose.match(/[a-z]/gi) || []).length, cyr = (prose.match(/[а-яё]/gi) || []).length;
+  if (lat > 60 && lat > cyr && !event.stop_hook_active) {
+    process.stdout.write(JSON.stringify({ decision: 'block',
+      reason: `ru-reply-check: ответ владельцу написан не по-русски (латиница ${lat}, кириллица ${cyr}). Чат — по-русски (CLAUDE.md, правило дома 1): перепиши этот ответ по-русски целиком.` }));
+    process.exit(0);
+  }
   if (!/[а-яё]/i.test(text)) process.exit(0);
   const { hits } = await check(text);
   mkdirSync(dirname(LOG), { recursive: true });

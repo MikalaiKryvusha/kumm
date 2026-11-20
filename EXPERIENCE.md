@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0578 · 2026-11-20 · ❌ · #chat #language #owner-trust #long-session #guard
+class: text-in-agents-world
+mechanized: none yet — `tools/hooks/ru-reply-check.mjs` checks Russian text and passes an English reply whole; owed: a Stop-hook check that refuses a reply to the owner written mostly in Latin letters
+**Context:** the chat of 2026-11-20 14:10, past 75 % of the context, with the agent working in English in tools and commit messages for hours.
+**Result:** ❌ — three chat replies to the owner went out in English (15:3x status, the correction note, 16:08 the cleanup file's description); the owner:
+«Это ты с кем разговариваешь?», «С кем это ты общаешься? с каким нахуй американцем???». The language rule (CLAUDE.md, HOUSE_RULES 1) was known; the
+drift came from the surrounding English work, and no guard reads the reply's language.
+**Lesson:** before sending, the reply's first line is checked for its language; a rule known by heart drifts under load — it needs a hook that reddens
+on an English reply, not one more line of memory.
+
 ### EXP-0577 · 2026-11-20 · ❌→✅ · #launcher #winforms #stand #offscreen #guard #control #judge #false-pass
 class: guard-not-proven-against-threat
 mechanized: `ConanExiles/_config/launcher/test/self.mjs` case `offline` D7b (reads the `StatePanel.Invalidate` mark between the «feed-wait» and the second «offline» line); the frame's drawing is labelled `StatePanel.Print` (`MetalWindow.InPicture`)

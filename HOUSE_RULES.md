@@ -171,8 +171,9 @@
        (file by file, links unlinked, never followed; the clean version and the source refused).
     2. **The shipment** — our mods packed into the archives players get (the export bundle, the GitHub / Nexus parts). Deleted once the release is shipped; its
        publication texts (release notes, Nexus description, letters) go into the pack first (`_config/release/published_<version>/`).
-    3. **The build's source** — the pack repo `D:\work\ai_sandbox\ConanExiles`, the mod library `D:\Games\Conan Exiles Mods\mods` (without `OLD`) and the originals of
-       the mods we patch `D:\Games\Conan Exiles Mods\_patch-originals` — everything a shipment is built from.
+    3. **The build's source** — the pack repo `D:\work\ai_sandbox\ConanExiles`, the mod library `D:\work\ai_sandbox\ConanExiles\_library\mods` (without `OLD`) and the
+       originals of the mods we patch `…\_library\_patch-originals` — everything a shipment is built from. The library lives inside the pack folder, git-ignored
+       (`/_library/`), since 2026-11-20 16:08 by the owner's choice (it was `D:\Games\Conan Exiles Mods`).
     4. **The build** — a copy of the clean version with the shipment installed: `D:\Games\Conan Exiles <game version>` (a real folder, never a junction), the one
        game the agent runs and tests in; `ConanExiles/targets.json` names it. Install, uninstall and launcher tests run on a fresh copy of the clean version or on
        this build, never on the clean version.
