@@ -1,5 +1,7 @@
 # Bug 86 — the attribute tree: the «Осквернённые характеристики» label lies under a node icon; the side description runs off and overlaps
 
+> **GitHub issue:** [#29](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/29) — shared with bug 91: one defect, one fix (HOUSE_RULES 44)
+
 **Status:** 🔴 OPEN — recorded from the owner's frame
 **Severity:** S3-visible (a UI seam the owner flagged; owner's debt → first in the UI queue)
 **Version/build:** Conan Exiles 3.0.1 build · **When/context:** 2026-11-07 21:45 +03:00 — the owner's frame in chat (no words), while he played after the bug 85 deploy
