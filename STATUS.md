@@ -156,6 +156,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the pack pushed; the mod library moved into `ConanExiles/_library` (git-ignored; pack `d7bdff5`, HOUSE_RULES 25); the «О проекте» mockup (`4c049c8`);
 > a language guard in `tools/hooks/ru-reply-check.mjs` (EXP-0578). Verbatim progress — chronicle, entry «STATUS bonsai trim, part 5».
 > **FIRST in the next chat:**
+> 0. **The owner 16:19: the RC1 notes describe the optimization work as nothing** (chronicle entry 2026-11-20 16:19, verbatim). Rewrite the performance
+>    paragraph of the 0.9.1 notes (, RU + EN), the README and the guide by the owner's
+>    portrait: every optimization with its fact and number from the sources (KrinikConanEngineTweaks notes: N1 async navmesh gathering, A1 Niagara shaders on
+>    load, the Chaos physics queue; plan 51: view distance 2.0 → 1.5, +4.7 % FPS; the mods' CPU budget work), clean read, then .
 > 1. **Finish the RC1 install test** (the full player path from GitHub): the released launcher (PID 26040 at the close, `KUMM/.work/rc1_install/launcher`, isolated by
 >    `rc1_install/run.mjs`) was DOWNLOADING 0.9.1-RC1 into the fresh clean copy `KUMM/.work/rc1_install/Conan_311` (log `rc1_install/tmp/KrinikConanLauncher.log`).
 >    Read the log: download → verify → install → «Играть»; then start the game on that copy (launch-bg, the window not minimized), see «0.9.1-RC1» in the

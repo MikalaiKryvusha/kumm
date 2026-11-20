@@ -3,6 +3,11 @@
 
 
 
+## 2026-11-20 16:19 +03:00 — the owner on the RC1 notes: the optimization work is described as nothing
+
+> On the line of the 0.9.1-RC1 notes «игра реже замирает на миг, когда герой путешествует по миру» the owner wrote: «Это полная хуйня а не описание
+> колласальной работы по превнесению значительных оптимизаций, которые мы сделали». The next chat rewrites the performance paragraph (notes, README, guide).
+
 ## 2026-11-20 16:17 +03:00 — the owner on the RC1 release page: a published release is marked «Latest»
 
 > The agent published v0.9.1-RC1 with --latest=false (my default, the two questions of 14:4x unanswered). The owner 16:16–16:17:
