@@ -156,9 +156,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   belongs to its 16 ms); 4 the mods button called old-window widgets by raw pointers → `_G.__krinik_hub_gen` + `forget_old_window()`; 5, 6 comments fixed.
 >   All in the pack WORKING TREE, not committed. New stand check D7b proven: green on the fix, red on a control build (`KUMM/.work/launcher_r7/control`).
 >   Running: the full stand `KUMM/.work/launcher_r3/batch_r7.txt` on `launcher_r7/build`, and judge round 6 on the uncommitted diff.
-> - Next: the game check G1–G5 (`testcases/TC_conan_keybinds_to_game_events_2026-11-18.md`, the mods button after a world re-entry) → commit → `git push` of
->   the pack → `make_release.sh <empty dir on D:>` → GitHub release v0.9.1-RC1 → install test on a fresh copy of the clean 3.1.1. Asked the owner 14:4x:
->   0.9.0 stays «Latest»? the guide's English pages into RC2? The «О проекте» mockup is built in KUIPS (screen `about`), not in RC1 unless he accepts it first.
+> - 15:14: judge 5 and 6 fixes committed (pack `e8a431c`; round 6 refuted my birth-counter fix — the mods button now checks its window by full name among
+>   the live `CraftingGUI_C`); seen live on a tab switch and a re-entry (report `testcases/reports/2026-11-20_conan-judge5-6-fixes.md`); G3 / G5 real clicks owed.
+>   Release tools fixed (`648735a`): `dash_lint.py` skips C# char literals; the guide PDF's dash gate checks the GUIDE only (the mod translation tables are
+>   the next version's, the owner 09:47) — the full list stays a manual `python dash_lint.py`. The «О проекте» mockup committed (`4c049c8`), not in RC1.
+>   Judge round 7 runs on `e8a431c` + the dash_lint change. `make_release.sh` runs into `KUMM/.work/rc1_release` (log `KUMM/.work/rc1_release.log`;
+>   PDF 16 410 KB and the launcher built). Then: `git push` of the pack after round 7 → GitHub release v0.9.1-RC1 after the owner's two answers (0.9.0 stays
+>   «Latest»? the guide's English pages into RC2?) → install test on a fresh copy of the clean 3.1.1.
 > 1. **Pack:** judge round 4 fixed and committed (`513a21f`; stand 340 / 340; report `testcases/reports/2026-11-20_conan-launcher-judge4-fixes.md`); **judge
 >    round 5** on `7c72d78..HEAD` (round 4's fixes + bug 110 + bug 85's token fix + the mark guard) → fixes → `git push` of the pack (15+ local commits).
 > 2. **Texts:** the writer's r4 applied the clean read r3 (`reports/2026-11-20_clean_read_texts_091_r3.md`; summary `KUMM/.work/texts091r4/REPORT.md`) — in the
