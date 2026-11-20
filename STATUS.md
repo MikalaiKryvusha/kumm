@@ -152,13 +152,24 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > and edited by the portrait (the four human verbs of programs, the Graphics row, RC2 in the history / what's new, the block «Исправлено в тестовой сборке
 > 0.9.1-RC2»; voice-lint: 15 old false hits — CSS percentages, the game term «уникальных», an HTML comment), its clean read at a helper; README.draft RC1 → RC2
 > (the draft is regenerated from `README.template.md` by `mods-table.mjs` after `make_release.sh`). `release_checklist.py` (NOT committed, judge rounds 1–2 done,
-> round 3 at a helper): the review check takes the verdict paragraph, finds code commits by files; it found reviews owed — notes to add after round 3:
-> `dc79053` (its judge round done 22:3x: D1–D3, Q1 fixed in `29a612b`; Q3 the busy-keyboard refusal left in `game-front.ps1` — removed, NOT committed; deferred:
-> H1 the dark backing between hub tabs 4↔5 (issue #36), H2 the map's hold timeout unmeasured, P1 `FindAllOf('W_Carousel_C')` per tick during a hold, Q2 dead
-> REFRESH / MAP_PAGE code), `e1c0691` (its round of 21:14, 3 findings deferred to item 1 below), `033d419` (the ritual itself — rounds of today), comment-only
-> skips `292f129`, `4d1d867`, `d7e2583` (a dev stand). Next: copy the pak into `_unpacked/KrinikConanUI`, deploy `-Only KrinikConanUI`, `set-pak-modinfo.py`,
-> look at the menu line «0.9.1-RC2»; `build-docs.py` (guide PDF + launcher BuildInfo); `make_release.sh` into an empty dir; publish; the launcher update RC1 → RC2.
-> Machine lock `kumm` to 23:39.
+> 4 judge rounds, committed pack `1bc593d` with the guide, README.draft, `game-front.ps1`): the review check takes the verdict paragraph (note first), finds code
+> commits by files, the window starts at the newest build release `v*`; verdict notes on `033d419`, `dc79053`, `e1c0691`, `1bc593d`, `292f129`, `4d1d867`,
+> `d7e2583` pushed. **The ritual: 0 TODO, 13 MANUAL, 6 OK (22:57).** The UI pak deployed, «0.9.1-RC2» seen under our logo in the main menu (frame
+> `KUMM/.work/rc2/menu_rc2.webp`). `dc79053`'s deferred findings: H1 the dark backing between hub tabs 4↔5 (issue #36), H2 the map's hold timeout unmeasured,
+> P1 `FindAllOf('W_Carousel_C')` on every tick of a hold, Q2 dead REFRESH / MAP_PAGE code. **Twins removed 23:04 (NOT committed, at the judge):** the
+> busy-keyboard waits and refusals left after the owner's 19:37 cancel — `sprint-cost-run.sh`, `m6-air-shot.sh`, `ab-launch.sh`, `n1-launch.sh`, `ab-video.sh`,
+> `hubswitch/hub_run.sh`, `loot-take-clip.sh`, `aim-shot.sh`, the `hover-watch.ps1` comment, and `mouse-seq.ps1`'s `-MarkOwn` calls (no reader left); kept on
+> purpose: `esc-when-idle.ps1` (its job is pressing Esc when the keyboard is free). Owed: a functional run of `mouse-seq.ps1` with the game after the build.
+> `build_nexus_description.py`: the guide link's label said 3.0.1 while the URL is 3.1.1 — fixed (NOT committed); the email as plain text was already there,
+> its run waits for the Nexus step after the release (the owner 14:44).
+> **23:20 — released parts built** (`make_release.sh` exit 0, `KUMM/.work/rc2_release/release`: 7 parts, launcher, guide PDF, SHA256SUMS; run report
+> `testcases/reports/2026-11-20_conan-rc2-build.md`), pack `2c7c5e4` (the twins, README sizes and the synced Graphics row), the public repo `39896bd` pushed;
+> **`gh release create v0.9.1-RC2 --latest` is uploading** (a Draft until the assets finish; check `gh release view v0.9.1-RC2 --json isDraft,assets`).
+> The update test (cases `testcases/TC_conan_launcher_update_rc1_to_rc2_2026-11-20.md`): the RC1 launcher and parts moved into `KUMM/.work/rc1_install/Conan_311/rc1_launcher`,
+> started by `KUMM/.work/rc2_update/start.ps1` (TEMP, state, desktop, search roots, Steam isolated; log `KUMM/.work/rc2_update/tmp/KrinikConanLauncher.log`),
+> buttons by `node KUMM/.work/rc2_update/click.mjs <pid> install|update|play`; U1 (RC1 from local parts) started 23:20. After the upload: delete
+> `KUMM/.work/rc2_release` and `Conan_311/rc1_launcher` (D: had 36 GB free), U2–U5, the ritual `--published`, issues #3 #11 #12 #33 commented and closed after the
+> retest. The Svarog cleanup (`SvarogsDream/_harness` 20.5 GB) was refused by the auto-mode classifier — its allow rule covers `KUMM/.work` only. Machine lock to 00:27.
 >
 > **CHAT CLOSED 2026-11-20 ≈21:2x (the chat of 19:53 «resume», autonomous; soft closure at the 80 % budget).** Done (packs `29a612b`, `e1c0691`, `d7e2583`,
 > `4d1d867`; reports `testcases/reports/2026-11-20_conan-dialogue-world-pace.md`, `…_conan-immortal-heroine-save.md`): issue #3 — talks keep the world at 1.0

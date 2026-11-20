@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0594 · 2026-11-20 · ✅ · #release #launcher #github #update-test #conan
+`gh release create … <assets>` keeps the release a DRAFT until every asset is uploaded (13 GB ≈ half an hour here), so the launcher's GitHub feed still names
+the previous release as the newest: that window is the moment to install the OLD candidate into a test copy from its local parts, then press «Обновить
+сборку» after the publish. A real-feed launcher test stays off the owner's folders by placing the launcher folder INSIDE the test game copy (`Around()`
+takes the game it lies in) and starting it with `TEMP`/`TMP`, `KRINIK_LAUNCHER_STATE_DIR`, `KUMM_DESKTOP_DIR`, `KRINIK_LAUNCHER_SEARCH_ROOTS`,
+`KRINIK_LAUNCHER_STEAM` and `KRINIK_LAUNCHER_NOACTIVATE=1` in its environment (`KUMM/.work/rc2_update/start.ps1`); buttons by `click.ps1` with the Cyrillic
+caption passed from a node file. A `make_release.sh` work dir peaks at ≈ 3× the archive (export + unpack check + parts): free the first two the moment the
+parts exist.
+
 ### EXP-0593 · 2026-11-20 · ❌→✅ · #lsp #typescript #csharp #install #claude-code
 An install that only answers `--version` is not a working tool: the first real LSP calls found two failures the version probes hid. (1) The plain
 `npm i -g typescript` brings 7.x, the native TypeScript with no `lib/tsserver.js`, and typescript-language-server 6 refuses to start («Could not find a valid
