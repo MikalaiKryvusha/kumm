@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0573 · 2026-11-20 · ❌→✅ · #launcher #stand #interference #game-running #helper #false-fail
+class: a stand's cases failed by a machine-wide condition another session created, read as a defect of the code under test
+mechanized: `ConanExiles/_config/launcher/test/self.mjs` refuses with ONE named FAIL when a ConanSandbox process runs on the machine (pack `d473023`)
+**Lesson:** a helper's last word was «after my fixes four download cases fail»; the next chat nearly took it as a code defect. The launcher's
+`GameRunning()` looks for the game's processes machine-wide, and the main session ran the real game for its own tests at the same minutes
+(2026-11-18 evening): every download was refused before its first request — the feed log held only `GET /releases`. On a free machine the same exe passed
+24 of 24 cases. Before believing a failing stand run, read what the product saw (its log, the feed log) and what else ran on the machine at that time;
+a stand checks its own preconditions and fails once, by name, instead of fifteen confusing lines.
+**Trigger:** any stand run that shares the machine with another session, a game, or a helper; any «it fails after my change» from a stopped helper.
+
 ### EXP-0572 · 2026-11-18 · ❌→✅ · #input #mouse-seq #game-front #minimized #owner-screen #stand #bug85
 class: a real-input tool trusted «the game is the foreground window» while the game was MINIMIZED
 mechanized: `ConanExiles/_config/game-front.ps1` and `mouse-seq.ps1` restore a minimized game (SW_RESTORE 9) and refuse while it stays minimized (IsIconic)

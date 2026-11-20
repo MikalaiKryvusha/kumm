@@ -178,6 +178,9 @@ map markers (`SimpleMinimap_MarkerData.sav`), the damage logs and `Game_0.db` ar
       `<!-- krinik-game: 3.1.1 CL-383549 -->` — written by rules 33 and 35 (the owner's portrait, `kaif-voice-lint check`, the core's `voice-check`, `dash_lint`,
       a clean-instance read), then the owner. ⏭ The correct-Russian item itself (the build-wide proofreading, the page of whole-block pairs of the three rewritten
       texts, his word on the four guide fact edits) LEFT 0.9.1 for the next version — `[OWNER]` 2026-11-18 20:51, chronicle entry 2026-11-18 20:51.
+      ⏮ BACK for the META texts 2026-11-20 09:47 (`[OWNER]`, chronicle entry 2026-11-20 09:47): README, the guide (RU + the English pages after the
+      Russian ones), the release notes RU + EN, the Nexus page, the mods' descriptions, the Krinik paks' change notes (`_config/release/krinik_change_notes.json`),
+      the wallpapers' names — correct Russian by the portrait, the clean read, the owner's page of pairs; the mods' in-game strings stay out.
 - [ ] R5. Interview #040 Q2 — one `art/` folder at the pack root (before R6–R8, so the shipment is built from the final tree).
 - [ ] R6. `build-docs.py` → the guide PDF + the launcher exe 1.0.0; deploy into the working game, `-Verify`; a main-menu frame (3.1.1 / 0.9.1 under the logos).
 - [ ] R7. `make_volumes.sh <work> Krinik_Mod_Pack_0_9_1` (`OK: <N> files, hashes equal`); GitHub parts < 2 GiB by `split`; SHA-256 of every asset.

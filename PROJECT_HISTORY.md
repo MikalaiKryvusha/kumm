@@ -8779,3 +8779,17 @@ block of the 18:16 chat moved verbatim
       D1, D2 pass (the author's values; a real Save writes the mod's slot through the author's window, which now closes after it), D3 flash not measured;
       the remote opens the Xevyr hub by the shared variable `KrinikHubRequest`. Next: the other four Xevyr pages (I6.3), then the list's Xevyr entry → the hub;
       ~~the left-list seam (the name mid-height)~~ FIXED 2026-11-02 07:34 +03:00 (cases L0–L2, report `2026-11-02_conan-hub-left-list-seam.md`); then the 13 blocks to 1.0.0.
+
+## 2026-11-20 09:47 +03:00 — the owner: the correct-Russian item comes back into 0.9.1, scoped to the build's META information, not the mods (recorded 2026-11-20 09:48 +03:00)
+
+The chat of 2026-11-20 09:09 (`resume`). `[OWNER]` verbatim (mid-turn, while the agent worked on RC1):
+
+> возвращаем пункт про корретный русский голос, но распространяем его НЕ НА МОДЫ, а на МЕТА ИНФОРМАЦИЮ сборки - ридми, руководства, релиз ноутсы, описания модов и так далее
+
+Where it went: STATUS priority block — a third item of 0.9.1 next to the launcher 1.0.0 and the rough polish: the build's meta information is written in
+correct Russian by the owner's voice (the portrait loaded, rules 33 and 35, whole-sentence rewrite 35.6, `kaif-voice-lint check`, a clean-instance read,
+the page of pairs for the owner). `[AI]` reading of the scope, said to the owner in chat at 09:47: IN — README, the user guide, the release notes, the
+Nexus page, the mods' descriptions (README and guide tables, the game's own mod list — `set-pak-modinfo.py`), the Krinik paks' change notes (rule 40),
+the wallpapers' names; OUT — the mods' own in-game strings and the translation tables (plan 58's proofreading of every string stays in the next
+version). The launcher's and installer's strings were not named by the owner; they stay under rules 33 and 35 as before — the owner may widen it.
+Plan 58's header and plan 55 carry the scope. Supersedes, for the meta texts only, the 2026-11-18 20:51 move.

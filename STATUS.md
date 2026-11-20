@@ -44,6 +44,11 @@
 > 0.9.1 and moves to the next version** (`[OWNER]` 20:51, chronicle entry 2026-11-18 20:51). Rules 33 and 35 and the hooks already running stay in force for any
 > text written now; the proofreading of the whole build is not a gate of 0.9.1.
 >
+> **⏮ 2026-11-20 09:47 — the correct-Russian item COMES BACK into 0.9.1, but for the build's META information only, not the mods** (`[OWNER]` 09:47, chronicle
+> entry 2026-11-20 09:47): README, the user guide, the release notes, the Nexus page, the mods' descriptions (README / guide tables, the game's mod list),
+> the Krinik paks' change notes, the wallpapers' names — written by the owner's portrait, rules 33 · 35 · 35.6, `kaif-voice-lint check`, a clean read, the
+> page of pairs for the owner. OUT: the mods' in-game strings and translation tables (plan 58's every-string proofreading stays in the next version).
+>
 > **1. The full launcher 1.0.0 with ALL the owner's wishes, every function tested** — `plans/57_EPIC_conan_launcher_self_sufficient.md` (+ epic 55 phase B):
 > finds the game on the disks, sees / downloads the latest release for the found game version, installs, updates, uninstalls, the progress bar with %, speed,
 > remaining and elapsed time, the version line, no impossible window state, the KUIPS mockups as the design. The owner names it **1.0.0** (09:12) — the manifest
@@ -156,6 +161,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `make_release.sh` → GitHub → the launcher on a fresh copy of the clean 3.1.1.
 > **CHAT CLOSED 2026-11-18 21:3x (`resume` 20:51; closed by the owner's word 21:36 at 57 % of the window, chronicle entry 2026-11-18 21:3x; the CLOSING JUDGE NOT RUN —
 > `[OWNER]` 21:37 «на судейство нет токенов»).** Its progress blocks and the 20:4x handover — chronicle, entry «2026-11-18 21:3x — STATUS bonsai trim». The AIM above stands.
+> **CHAT OF 2026-11-20 09:09 (`resume`) — progress:** item 1 DONE — pack `d473023` (the launcher's round-2 fixes: the helper's four «failing» download cases
+> failed only because the main session's real game ran on the machine — `GameRunning()` is machine-wide; re-run on a free machine 24 cases / 330 checks PASS,
+> the control on the pre-fix exe 31 FAIL; the stand now refuses a machine with a ConanSandbox process; report `testcases/reports/2026-11-20_conan-launcher-judge2-fixes.md`;
+> the stray guide JPEG deleted). Item 2 DONE but the kit builds — pack `00c795d` (rule 40: `_config/devkit/krinik_modinfo.py` + `_config/release/krinik_change_notes.json`
+> are the one source; kit-buildmod / build-level-mod write the fields, `set-pak-modinfo.py --check-krinik` guards `make_release.sh` 2b (working game) and
+> `make_volumes.sh` 2c (export); the working game reads 4 of 4 empty until RC1's pak builds + deploy; report `testcases/reports/2026-11-20_conan-krinik-pak-modinfo-fields.md`;
+> the 0.9.1 change-note texts need the clean read with the release texts). RUNNING: a judge on `d473023` + `00c795d` (report → `reports/2026-11-20_judge_round3_launcher_and_pak_modinfo.md`);
+> a helper on the owner's side errand (browser cache after a browser game, a malware check of C:, a detached Defender scan of C: under the machine lock —
+> `KUMM/.work/malware_check/report.md`). Pack: 11 local commits, push after the judge. Next: item 4 (R1) — then item 3 (bug 85 judge round 3).
 > **FIRST in the next chat:**
 > 1. **The pack's working tree is UNCOMMITTED — review it first** (`git -C D:/work/ai_sandbox/ConanExiles status`): (a) the launcher round-2 fixes of a STOPPED helper —
 >    `_config/launcher/KrinikConanGames.cs`, `KrinikConanLauncher.cs`, `KrinikConanUpdates.cs`, `test/click.ps1`, `test/feed.mjs`, `test/self.mjs`, `_config/release/make_release.sh`,

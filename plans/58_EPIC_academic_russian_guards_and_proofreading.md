@@ -5,6 +5,10 @@
 > `D:/work/ai_sandbox/krinik_voice/AUTHOR_STYLOMETRY.md` (via `node .kaif/tools/kaif-voice-lint.mjs`)
 > **Status:** ⏭ MOVED TO THE NEXT VERSION 2026-11-18 20:51 by the owner's word (chronicle entry 2026-11-18 20:51): this epic is no longer an item of the
 > release 0.9.1 priority; the guards and hooks already built keep running, the build-wide proofreading (phase 5) waits for the next version.
+> ⏮ **PARTLY BACK 2026-11-20 09:47** (`[OWNER]`, chronicle entry 2026-11-20 09:47): the build's META information — README, the user guide, the release
+> notes, the Nexus page, the mods' descriptions, the Krinik paks' change notes, the wallpapers' names — is written in correct Russian for 0.9.1 (the
+> portrait, rules 33 · 35 · 35.6, voice-lint, a clean read, the owner's page of pairs). The mods' in-game strings and translation tables stay in phase 5,
+> the next version.
 > 🔧 phase 1 DONE 2026-11-18 09:23 — `krinik-stylometry/russian_norms/AI_RUSSIAN_DEFECTS.md` (42 defects, 28 sources) and
 > `MEASURING_RUSSIAN_TEXT.md` (Головин's communicative qualities, ФИПИ violation counts, readability for Russian, coherence); phases 2–3 STARTED 09:2x —
 > the core's §8 + 11 rows from the catalogue, its own gate fixed (CRLF: 66 false lint-core findings → 0, selftest 17/17; core `2b99012` pushed),
