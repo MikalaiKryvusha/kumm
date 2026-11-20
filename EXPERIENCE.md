@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0588 · 2026-11-20 · ❌ · #owner-trust #release #gate #question #order
+class: a question about my own gate after the owner already ordered the act it blocks
+mechanized: `make_release.sh` `KRINIK_PLAY_GATE_WAIVER` — the owner's order is passed as the waiver text, no question
+**Lesson:** the owner ordered «собираем RC2»; my own play gate of the same day blocked it, and I asked him whether to build without the hour — «если я просил
+выше, то нахуя ты спрашиваешь?» (21:12). An order of the owner IS the decision over a remedy the agent built: act, record his words as the waiver, say so in one
+line. Twin: «исправлена работа карты», «исправлен баг…», «исправлена кнопка…» were WORDING of the notes, and I answered them as questions — read a short owner
+line next to the text being written as an edit of that text first.
+
 ### EXP-0587 · 2026-11-20 · ❌→✅ · #conan #stand #damage #owner-save #death
 class: a damage check run against a crowd with sparse reads
 mechanized: no — the stand rule: one creature, reads every 0.5 s, god back on below half health
