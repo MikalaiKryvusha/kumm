@@ -154,7 +154,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > control draft); issue #1 answered and closed by his word. Process — `plans/59_…` (+ `_ru.md`): the release gate on a play report, the coverage matrix,
 > cheats never stay; the two earlier remedies (plans 32, 47) were never executed — that is the diagnosis.**
 > **19:3x — 42 issues filed (#2–#43, index `bugs/GITHUB_ISSUES.md`; every local bug names its issue). The first root: the hub controller's standalone page
-> copies. PREPARED, NOT deployed, NOT committed: `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_hub_controller.lua` `GAME_PAGE` + tabs 5 (Путешествие)
+> copies. DEPLOYED into the working game 19:31 (`Deploy-ModPack.ps1 -Deploy -Only KrinikConanUI`; verify: only the dev-only Music / Harness files missing, as for
+the release build), NOT committed in the pack, NOT run yet — the game was left in the main menu at 19:32 when the owner came back to the keyboard (machine lock
+`kumm` to 20:31): `ConanExiles/_unpacked/KrinikConanUI/ue4ss/Scripts/krinik_hub_controller.lua` `GAME_PAGE` + tabs 5 (Путешествие)
 > and 8 (Карта); and `krinik_pause_in_menu.lua` `NO_SLOW_MODULES = { NPCDialogueWindow }` (issue #3: the log shows the dialogue slowed to 0.03). Run
 > `testcases/TC_conan_hub_game_pages_map_journey_2026-11-20.md` M0 and D0 (the CONTROLS on the current build) first, when the owner frees the game.**
 > **FIRST after the pause — the owner's bugs from his own play of the RC1 build (18:33–18:34): `bugs/112_…` the «Начать приключение (Пробел)» button does not
