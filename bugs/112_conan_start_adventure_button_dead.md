@@ -2,7 +2,8 @@
 
 > **GitHub issue:** [#11](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/11) — the public tracker of this defect (HOUSE_RULES 44)
 
-**Status:** 🔴 OPEN — recorded only; the chat is paused by the owner, no investigation started
+**Status:** 🔧 FIXED and seen 2026-11-20 19:38 (pack `dc79053`): the button is «Начать путешествие» (Space) of the hub's «Путешествие» tab; our standalone page copy
+was dead, the game's own page starts the journey (report `testcases/reports/2026-11-20_conan-hub-game-pages-map-journey.md`, case J1). Open until the release with the fix.
 **Severity:** S2 by the ladder; CRITICAL by HOUSE_RULES 38 (a button that does not press — possibly a blocker on the way into the game)
 **Version/build:** Krinik Mod Pack 0.9.1-RC1 (the release build), Conan Exiles Enhanced 3.1.1, the owner's working game `D:\Games\Conan Exiles 3.1.1`
 **When/context:** 2026-11-20 18:34 +03:00, the owner's own play right after bug 111; his words (verbatim): «не работает кнопка Начать приключение Пробел...» and then «пиздец»

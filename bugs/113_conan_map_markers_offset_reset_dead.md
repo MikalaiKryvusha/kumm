@@ -2,7 +2,8 @@
 
 > **GitHub issue:** [#12](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/12) — the public tracker of this defect (HOUSE_RULES 44)
 
-**Status:** 🔴 OPEN — recorded only; the chat is paused by the owner, no investigation started
+**Status:** 🔧 FIXED and seen 2026-11-20 19:40 (pack `dc79053`): the hub's «Карта» is the game's own page — a right click adds a marker at the click, the second too, the
+reset removes both (report `testcases/reports/2026-11-20_conan-hub-game-pages-map-journey.md`, case M1). Owed: the full-screen map by its key (M2). Open until the release.
 **Severity:** S2 by the ladder; CRITICAL by HOUSE_RULES 38 (a function that does not work: the reset and the second marker)
 **Version/build:** Krinik Mod Pack 0.9.1-RC1 (the release build), Conan Exiles Enhanced 3.1.1, the owner's working game `D:\Games\Conan Exiles 3.1.1`
 **When/context:** 2026-11-20 18:38 +03:00, the owner's own play of the RC1 build, after bugs 111 and 112; his words (verbatim): «на карте не работает сборос маркеров и
