@@ -75,8 +75,8 @@ changes (handlers removed by their tokens). Stand: the working game 3.1.1, the o
 
 | ID | Case | Expected | Status |
 |---|---|---|---|
-| G1 | Open the inventory («Снаряжение»), then close it | the mods button stands in the bar; no line «родилось заново» on the first opening of the session; no Lua error | — |
-| G2 | Exit to the main menu, «Продолжить», open the inventory again | UE4SS.log «окно инвентаря родилось заново (поколение A → B): виджеты прежнего окна забыты…» then «кнопка «Настройки модов» поставлена…»; the button stands | — |
-| G3 | After G2: open the list by a real click, then close the inventory with the list open | the list opens (J5); the close collapses the list and the button wrap; no error | — |
-| G4 | After G2: close the inventory WITHOUT opening it on «Снаряжение» first (Tab straight to «Хар-ки», then Esc) | no call on an old widget: no Lua error, no crash | — |
-| G5 | Neighbours: the Hosav «Настройки интерфейса» button and the Inventory Compactor buttons in the same bar | click as before | — |
+| G1 | Open the inventory («Снаряжение»), then close it | the mods button stands in the bar; no «закрыто игрой» line on the first opening of the session; no Lua error | PASS 2026-11-20 15:07:34 (the live-window build of judge round 6): placed in CraftingGUI_C_2147452451, close clean |
+| G2 | Exit to the main menu, «Продолжить», open the inventory again | UE4SS.log «окно инвентаря <old> закрыто игрой: виджеты в нём забыты…» then «кнопка «Настройки модов» поставлена…»; the button stands | PASS 2026-11-20 15:08:29 — «…CraftingGUI_C_2147441317 закрыто игрой…», placed in CraftingGUI_C_2147411796 |
+| G3 | After G2: open the list by a real click, then close the inventory with the list open | the list opens (J5); the close collapses the list and the button wrap; no error | PASS 2026-11-20 15:18:36 — a real click: «список построен…», the frame shows four items; after a tab switch and back (15:18:59 «…закрыто игрой…», a new button) a second real click 15:19:04 — the list in the new window (J5 covered); a real Esc 15:19:26 closed the inventory with the list open, no error |
+| G4 | After G2: close the inventory WITHOUT opening it on «Снаряжение» first (Tab straight to «Хар-ки», then Esc) | no call on an old widget: no Lua error, no crash | PASS (by its path) 2026-11-20 15:07:42 — the hide call ran before the new window was born and forgot the old window's widgets |
+| G5 | Neighbours: the Hosav «Настройки интерфейса» button and the Inventory Compactor buttons in the same bar | click as before | not run — the release first (the owner 15:16) |
