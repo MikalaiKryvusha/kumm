@@ -91,6 +91,30 @@
 
 ## Entries
 
+### EXP-0598 · 2026-11-21 · ❌→✅ · #launcher #uninstall #state-marker #conan
+class: wrong-state-marker
+**Context:** the launcher decided «the build is installed» by the uninstaller `uninstall_krinik_build.cmd` in the game root (bug 115, issue #46).
+**Tried / did:** the uninstall check of 00:28 closed the uninstaller's console at its last `pause` without a key; the launcher then showed «installed» on a clean game.
+**Result:** ❌ the uninstaller deletes itself on its LAST line, after `pause` — closing the console by its X (the usual way) skips it, and the marker outlives
+the state it marks → ✅ the sign is the journal `_kumm_backup\journal.txt`, which the restore removes with the backup folder only when it succeeds; the leftover
+uninstaller is removed on the window's exit. Stand case U-X: red on the old exe, green on the fix.
+**Lesson:** a file that a script deletes at its own end is not a state marker — every early exit (X, kill, crash) leaves it behind. Mark state by what the
+state change itself removes or writes, atomically with the change.   → link: bugs/115_conan_launcher_installed_after_uninstall_window_closed.md
+**Trigger:** a state is detected by the presence of a script, a lock or a temp file that is cleaned up «at the end».
+**Not for:** markers written and removed by the same atomic step (a rename of a finished folder).
+
+### EXP-0597 · 2026-11-21 · ❌→✅ · #stand #test-driver #launcher #delta-update #conan
+class: wrong-side-blamed
+**Context:** eight new stand cases of the launcher's update by the file list ran for the first time (`KUMM/.work/delta/run_r3.sh`, run 8).
+**Tried / did:** three cases went red; before touching the launcher, each red line was read against the launcher's own log and the feed's request log.
+**Result:** ❌ all three were the driver's expectations: the file list is downloaded afresh on every start by design (counted as a repeat), a release the window
+rejects on its plate offers no install button (the case pressed it), a launcher outside the game folder logs the feed line before the game is chosen
+(the case waited for the after-choice wording) → ✅ the checks rewritten to what the product promises; run 9 all green with the launcher unchanged.
+**Lesson:** a new case's first red is a claim about two parties — read the product's log line by line before deciding which one is wrong; a driver written
+from memory of the product fails where the product is better than remembered.   → link: testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md run 8
+**Trigger:** the first run of a freshly written stand case goes red.
+**Not for:** a case that was green before a product change — there the change is the first suspect.
+
 ### EXP-0596 · 2026-11-21 · ❌→✅ · #launcher #hardlink #ntfs #delta-update #conan #judge
 class: shared-state-two-owners
 **Context:** the delta update builds the new bundle from the old one by hardlinks (no second 13.7 GB on disk).

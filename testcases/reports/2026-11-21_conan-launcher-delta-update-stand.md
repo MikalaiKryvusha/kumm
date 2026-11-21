@@ -45,6 +45,38 @@ monitor), its state, TEMP and desktop inside the stand; the owner's `%LOCALAPPDA
    checks the volume path's space; the scan keys by the file's refreshed size; a `.staging` is not an installed build): `bash KUMM/.work/delta/run_r2.sh` — D2, D1,
    D6 all pass; D6 answered «Скачать сборку 1.0.1 (15,6 МБ) и поставить её вместо 1.0.0? Архив скачается в папку игры…» before the volumes. Pack `2137cae`.
 
+8. 2026-11-21 12:20–12:24 +03:00 — after the round-2 owed items were built (the fallback on an asset failing after the plan, the hardlink probe and the
+   copies with their space and progress, the bundle outside the game folder as a seed, the manifest's two tries, the tidy exits, the freed size in the
+   delete offer): `bash KUMM/.work/delta/run_r3.sh`, one fresh stand per case (`KUMM/.work/delta/r3`). The launcher passed every check of D1, D2, D3, D5a,
+   D5b, D6, D7, D8; three driver expectations failed, not the launcher: D3 counted the manifest's download on each start as a repeat (it is asked afresh
+   by design), D4b pressed an install button the screen rightly did not offer (the window names the reason on the plate), D8 waited for the feed line
+   «для этой игры 1.0.1», which a launcher outside the game folder logs before the game is chosen. The driver fixed; the log line no longer prints
+   «копий 0, 0,1 МБ» (`Ui.Size` floors at 0.1 MB).
+9. 2026-11-21 12:24–12:27 +03:00 — `RUN_DIR=KUMM/.work/delta/r4 bash KUMM/.work/delta/run_r3.sh` on the final code: D2, D1, D6, D3, D4, D5a, D5b, D7, D8 —
+   ALL PASS (verdict PASS).
+10. 2026-11-21 16:51–16:57 +03:00 — after the judge's round 3 fixes, bug 115 and the new cases: `bash KUMM/.work/delta/run_r5.sh` (log
+   `KUMM/.work/delta/r5_run.log`, one fresh stand per case in `KUMM/.work/delta/r5`): D2, D1, D6, D3, D4, D5a, D5b, D7, D8, **D5c**, **D9**, **U-X** — ALL PASS
+   (verdict PASS). D5c: «путь по списку файлов негоден, обновление идёт частями архива: В выпуске 1.0.1 файл a6233e42216c7fdf-change.pak отличается от записи…»,
+   the box «Лаунчер не смог обновить только изменившиеся файлы. Скачать всю сборку 1.0.1 (15,6 МБ)…», the asset never requested — but the two launcher-exe parts
+   were downloaded before the loop reached it (the pre-check runs per asset inside the download loop; owed: compare every digest before the first download).
+   D9: «лента: сборок 2, новейшая 1.0.2 (у нас 1.0.0)», the box «Обновить сборку с 1.0.0 до 1.0.2?», 7 requests — `manifest.json`, `huge.pak` p1 + p2,
+   `change.pak`, the launcher exe parts, the group — nothing of release 1.0.1, not `same.pak`; the game holds the 1.0.2 files. U-X: screens
+   `installed → removing → found-files`, «оставшийся деинсталлятор убран».
+11. 2026-11-21 17:12–17:17 +03:00 — after the judge's round 4 fixes (`BuildUpdate.Installed` with the journal, every asset checked before the question,
+   the staging removed after «Да» with its own bytes counted free, the no-links switch at every link point, U-X2): `bash KUMM/.work/delta/run_r6.sh`
+   (log `KUMM/.work/delta/r6_run.log`): D2, D1, D6, D4, D5a, D5b, D7, D8, D9, **U-X2**, U-X — PASS; two red lines, both read against the launcher's log
+   before any change (EXP-0597):
+   - D3 «0 of 2097152 B» after the kill: the asset order follows the asset names (hash first), the rebuilt launcher exe's hash moved it last, and a
+     2 MiB asset came first — its half (1 MiB) sat whole in the launcher's 1 MiB FileStream buffer at the kill. The product loses at most that buffer and
+     resumes from the bytes on disk; the stand fixed (`feed.mjs --slow` pauses before the last 64 KiB). Rerun alone (`KUMM/.work/delta/r6d3`): PASS —
+     «1048576 of 2097152 B», «12.6 MB → 11.6 MB», `range=bytes=1048576-`.
+   - D5c: the box «Обновление уже идёт в другом окне лаунчера» — my D3 rerun ran at the same time in another stand, and the launcher's one-update guard
+     rightly refused. Rerun alone (`KUMM/.work/delta/r6d5c`): PASS — no box before the fallback, only `manifest.json` requested, «Лаунчер не смог обновить
+     сборку по изменившимся файлам. Скачать всю сборку 1.0.1 (15,6 МБ)…».
+   Control: U-X2 on the launcher of run 10 (`KUMM/.work/delta/r6c`) — FAIL «D4b a manifest-only release is refused» (screen `found-nofiles`): the round-4
+   finding 1 reproduced; green on the fix (screen `release-bad`). The uninstaller template's missing-engine case `KUMM/.work/uninst/errorlevel.mjs`: red on
+   the old template (exit 0, «Готово», the file gone), green on the new (exit 1, the file kept).
+
 ## Checks
 
 - **Hygiene:** the launcher compiled (csc, no error); `make_manifest.py` self-test 20 / 20 (its own report).
@@ -60,6 +92,16 @@ monitor), its state, TEMP and desktop inside the stand; the owner's `%LOCALAPPDA
 | D1 (run 6) | pass | the box «Нужно скачать 12,6 МБ (файлов: 7)» (the 1.0.1 exe changed now: 2 parts); 7 requests, none twice; the unchanged pak of the new bundle IS the old bundle's file (one file id 7599824372987001) |
 | D6 (run 6) | pass | log «список файлов выпуска не прочитан: manifest: a bad root «»» then «обновление идёт частями архива»; build 1.0.1 installed from the volumes, ModA/a.txt «mod A 1.0.1» |
 
+| D1′ (run 9) | pass | the new launcher's offer «…Удалить её? На диске освободится 12,4 МБ. Файлы, которые новая сборка взяла из прежней, останутся в новой сборке.»; the old bundle's files with one name sum to 12.44 MB; default «Нет» |
+| D2 (run 9) | pass | + no `<bundle>.staging` left after «Нет» |
+| D3 (run 9) | pass | killed by PID with 1 048 576 of 4 194 304 B of the first asset in `.staging\.dl`; old bundle and game unchanged; the second box 12,6 → 11,6 МБ; second plan «уже собрано 5»; `range=bytes=1048576-` for the half asset; no other asset twice, the manifest once per start; 1.0.1 installed, the old bundle unchanged |
+| D4 (run 9) | pass | D4b: screen `release-bad` «В выпуске 1.0.1 нет полного архива сборки…», no file requested; D4a: «Установить сборку» → 251 volume parts, no `manifest.json` request, ModA 1.0.1 and ModB in the game |
+| D5a (run 9) | pass | the flipped asset requested twice; «выпуск не сошёлся со своим списком файлов, обновление идёт частями архива»; the box «Скачать сборку 1.0.1 (15,6 МБ)… Обновить только изменившиеся файлы не получилось.» → 1.0.1 from the volumes; no `.staging`; old bundle unchanged |
+| D5b (run 9) | pass | the box «Файл a6233e42…-change.pak дважды скачался с ошибкой. Проверьте сеть и нажмите «Обновить сборку» ещё раз.»; the game keeps 1.0.0; the launcher open |
+| D6 (run 9) | pass | + the archive question carries «Обновить только изменившиеся файлы не получилось»; no `.staging` left |
+| D7 (run 9) | pass | plan «из прежних сборок 5 (копий 5, 3,1 МБ)»; the unchanged pak of the new bundle has another file id and the 1.0.1 bytes; the offer names 15,6 МБ (the whole old bundle) with no shared-files line |
+| D8 (run 9) | pass | the launcher in `<stand>\elsewhere\Krinik_Mod_Pack_1_0_0` found the game by the search roots; plan «из прежних сборок 5»; the unchanged pak not downloaded and IS the outside bundle's file (one file id) |
+
 ## Found
 
 In the code — the launcher judge's round 1, all checked against the code and fixed (run 6). My stand's first form (2 MiB parts) did not cover the one-asset
@@ -72,5 +114,5 @@ files, not committed), `KUMM/.work/delta/stand.json`.
 
 ## Verdict
 
-**partial** — D1, D2, D6 pass on the stand; owed: D3 a stop and a resume mid-download, D4 a first install with a manifest release (must take the volumes),
-D5 a corrupt asset, the launcher judge's round 2 (running), and the real build (13.7 GB) on a copy of the game (phase 6 step 5).
+**partial** — D1–D8 pass on the stand (run 9, the final code of this round); owed: the launcher judge's round 3, a real FAT32 / exFAT volume (D7 used the
+stand switch), and the real build (13.7 GB) on a copy of the game (phase 6 step 5, after the owner's answer in interview #042).

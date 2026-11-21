@@ -52,7 +52,9 @@ const LF = String.fromCharCode(10);
 const STAMP = /(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(?:\s*(Z|[+-]\d{2}:?\d{2})(?![\d:]))?/g;
 const TESTED = /\[TESTED:\s*\d{4}-\d{2}-\d{2}/;
 const DATE = /\d{4}-\d{2}-\d{2}/g;
-const HM = /(?<![\d:])([01]?\d|2[0-3]):([0-5]\d)(?![\d:])/g;
+// A sign-led HH:MM («+03:00», «UTC−05:00», « -05:00») is a zone offset, not a clock time: «2026-11-21 00:4x +03:00» was refused as «03:00 ahead of
+// the clock» (2026-11-21). A hyphen glued to a digit («10:00-12:00») stays a range, so its right end is still a time.
+const HM = /(?<![\d:])(?<!\+)(?<!(?:^|[^\d])[-−])([01]?\d|2[0-3]):([0-5]\d)(?![\d:])/g;
 const LOOSE = /≈\s*\d{1,2}:\d{2}|между\s+\d{1,2}:\d{2}\s+и\s+\d{1,2}:\d{2}/g;
 const REPORT = /testcases\/reports\/[^\s\]`'"»)]+\.md/g;
 const OK_MARK = 'claim-ok';

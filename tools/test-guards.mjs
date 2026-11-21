@@ -106,6 +106,11 @@ guardFile('future-after-date-approx.md', `opened ${TODAY_D} ≈${FUT_HM}${NL}`, 
 guardFile('future-bare-approx.md', `opened ≈${FUT_HM}${NL}`, 1);
 guardFile('future-bare-window.md', `said между ${PAST_HM} и ${FUT_HM}${NL}`, 1);
 guardFile('controls-loose-times.md', `opened ≈${PAST_HM}${NL}said между ${PAST_HM} и ${PAST_HM}${NL}meeting at ${FUT_HM}${NL}${TOMORROW.slice(0, 10)} ≈${FUT_HM}${NL}`, 0);
+// 2026-11-21 00:4x: «Recon DONE 2026-11-21 00:4x +03:00» was refused — the zone offset after an approximate time read as the clock time 03:00 ahead
+// of the clock (00:45); the recon's lines were reworded «(UTC+3)» to pass. A sign-led HH:MM is a zone, never a time. The offset here is FUT_HM so the
+// case is red at any hour against that version; a hyphen range glued to a digit stays a time (the last case must still be refused).
+guardFile('control-zone-offset-after-approx-time.md', `done ${TODAY_D} ${PAST_HM.slice(0, 4)}x +${FUT_HM}${NL}done ${TODAY_D} ${PAST_HM.slice(0, 4)}x (UTC−${FUT_HM})${NL}`, 0);
+guardFile('future-hyphen-range-after-date.md', `said ${TODAY_D}, ${PAST_HM}-${FUT_HM}${NL}`, 1);
 // a paragraph about another day: its date stands on the line above, the bare «≈HH:MM» continues it (STATUS.md, 2026-10-05 ≈20:27)
 guardFile('control-bare-time-other-day-above.md', `note 2000-01-01 morning,${NL}word · ≈${FUT_HM}${NL}`, 0);
 guardFile('bare-time-today-above.md', `note ${TODAY_D} evening,${NL}word · ≈${FUT_HM}${NL}`, 1);

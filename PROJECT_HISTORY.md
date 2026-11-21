@@ -1,5 +1,45 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-21 17:07–17:10 +03:00 — the owner on the files' weight and on aligning them (recorded 17:1x)
+
+After the answer C, the owner, verbatim:
+
+> (17:07) у нас не получится сильного разбаланса по весу файлов?
+>
+> (17:08) система стим, вероятно, умная и файлы в каком-то их уникальном формате? или нет?
+>
+> (17:10) мы можем наши файлы выравнивать по 1 мегабайту? или это безумно сложная работа?
+>
+> (17:10) или хотя бы по 100 мб выравнивать
+
+My answers: the RC2 set is uneven (117 files under 1 MB in one zip; 6 files over 1 GiB hold 9 GB, 70 %); a changed big pak downloads whole. Steam keeps the
+game's files ordinary on disk and moves ≈ 1 MB chunks, so its developers align paks to 1 MB (recon §2.1). Alignment alone gives a whole-file updater
+nothing, repak has no such option, and 12.6 GB are third-party paks; a content-defined chunk index (itch.io butler, zsync) would. Proposed: measure at the
+next update of a big mod, then decide — plan 57 phase 6 step 7.
+
+## 2026-11-21 16:44–16:58 +03:00 — the owner on the release page and the updater: one format in the end, the per-file set (recorded 16:5x)
+
+Interview #042 (what the next release page carries while players have the RC1 / RC2 launchers) was asked in the chat at 16:43 with options A / B / C. The
+owner, verbatim:
+
+> (16:44) а
+>
+> (16:46) короче, я не знаю, как делают системы обновления, но должно работать, так как делают такие системы
+>
+> (16:46) пропустил несколько обновлений, запускаешь лаунчер - предлагает обновиться. Жмёшь обвновиться - и оно докачивает то. что тебе нужно, чтобы с твоей версии обновиться до последней
+>
+> (16:47) есть понимание, как такое делают?
+>
+> (16:56) а зачем архивы, если есть вайлы по одному?
+>
+> (16:58) да, согласен, чтобы не дублировать работу, желательно перейти в одному какому-то формату. Если дифф обновления требуют файлов, то, вероятно это вариант с файлами
+
+Between 16:47 and 16:58 I answered: the three shapes of the industry (Steam: a per-file / per-chunk list diffed against the installed state; Velopack: a
+full package and a delta per release; itch.io butler and zsync: block signatures), ours is the Steam shape by whole files; the archive is needed today by
+the RC1 / RC2 launchers, the first install and Nexus / the manual install; I proposed C. Recorded: interview #042 answered C (A at 16:44), plan 57 phase 6
+criterion 6 (decided C), criterion 7 (a skipped release in one press — stand case D9, PASS 16:57), step 6 (the first install by the file list, required),
+the recon's «Transition» paragraph.
+
 ## 2026-11-21 00:28 +03:00 — the owner on the launcher's update: a small update must not download the whole 13 GB (recorded 00:28)
 
 After my report that the RC1 launcher updated to RC2 by downloading the whole 12,8 GB archive in 21 minutes, the owner, verbatim:

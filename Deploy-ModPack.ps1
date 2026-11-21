@@ -1218,7 +1218,9 @@ function Invoke-DeployTarget {
                     '@echo off',
                     'echo Removing the mod build: the game folder returns to its state before the install.',
                     'powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0{BACKUP}\Deploy-ModPack.ps1" -Restore -GameDir "%~dp0."',
-                    'if errorlevel 1 ( echo Undo not complete - {BACKUP} is kept. & pause & exit /b 1 )',
+                    # %errorlevel% neq 0, not «errorlevel 1»: powershell on a missing -File exits with a NEGATIVE code (-196608), which «errorlevel 1» lets
+                    # through to «Done» and the self-delete on a still-modded game (KUMM launcher judge 2026-11-21, round 4, finding 4).
+                    'if %errorlevel% neq 0 ( echo Undo not complete - {BACKUP} is kept. & pause & exit /b 1 )',
                     'echo Done.',
                     'pause',
                     '(goto) 2>nul & del "%~f0"'

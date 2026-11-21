@@ -155,6 +155,19 @@ has beside the game, verify them, and switch the bundle in one step; an RC-sized
    the release ships no volumes and the old launcher self-updates first (plan 54 step 2.1)> · price of error <an old launcher finds no parts and cannot
    update; a double upload costs ≈ 37 min per release> · consulted <recon §5 «Transition», Velopack «1 full + 1 delta per release»>; the volumes also serve the
    manual download and Nexus — what the release page offers the player is the owner's word (asked when step 5 is reached).
+   **DECIDED 2026-11-21 16:58 — C, ONE format in the end: the per-file set** (`[OWNER]` «да, согласен, чтобы не дублировать работу, желательно перейти в
+   одному какому-то формату. Если дифф обновления требуют файлов, то, вероятно это вариант с файлами»; interview #042; his first answer of 16:44 was A).
+   The next release carries both sets (the players' RC1 / RC2 launchers know only the volumes); the launcher learns the first install by the file list
+   (criterion 5, now REQUIRED); after that release the GitHub page carries the per-file set alone, Nexus keeps one archive of its own, and the guide's manual
+   install changes with it. The owner's rule for the whole update path, 16:46: «я не знаю, как делают
+   системы обновления, но должно работать, так как делают такие системы» — every open question of the updater is settled by the industry's practice
+   (Velopack, Steam depots, itch.io butler, zsync — the recon), not by a new invention.
+7. **A player who skipped several releases updates in one press** (`[OWNER]` 2026-11-21 16:46: «пропустил несколько обновлений, запускаешь лаунчер - предлагает
+   обновиться. Жмёшь обвновиться - и оно докачивает то. что тебе нужно, чтобы с твоей версии обновиться до последней»): the launcher compares the installed
+   files with the LATEST release's file list and downloads only the files that differ, whatever versions lie between (the Steam depot shape: a diff of
+   states, not a chain of patches); every release page carries every per-file asset (criterion 6). Check: stand case D9 — 1.0.0 installed, the feed
+   offers 1.0.2, files changed in 1.0.1 AND in 1.0.2; one press installs 1.0.2, only the files that differ from 1.0.0 are requested, none of 1.0.1's.
+   PASS 2026-11-21 16:57 (run 10, report `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`).
 
 **Steps (the next ones only; the rest are written when these close).**
 
@@ -175,19 +188,45 @@ has beside the game, verify them, and switch the bundle in one step; an RC-sized
       today (the guard red on the real broken pair), the 62 third-party paks among them.
 - [x] 2. DONE in pack `d85e388` — `make_release.sh` step 4c (`--part-size RELEASE_PART`, `--previous-from`, `--allow-changed`); SHA256SUMS (step 6) covers the
       new assets. Owed: the ritual's stage E checks `manifest.json` among the published assets and keeps it in `published_<v>/`.
-- [ ] 3. BUILT 2026-11-21 11:1x, NOT committed (judge round 1 running): `ConanExiles/_config/launcher/KrinikConanDelta.cs` + `BuildUpdate.RunByManifest`, the
-      question with the real size after the check (`box.delta.ask`), «Нет» → back with no error; stand D1 19 / 19 and D2 7 / 7 pass
-      (`testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`). The launcher reads `manifest.json` of the release (its asset `digest` first), hashes the local bundle files (a cache by path · size · mtime in its
-      state folder), plans (hardlink or copy into `<root>.staging` · download the rest), downloads with `Range: bytes=N-` (the signed URL re-asked per resume),
-      verifies every file, renames once, runs the bundle's installer as today; no manifest → today's volume path.
-- [ ] 4. Stand cases of criteria 3–5 with the local feed; frames of the confirmation and the progress at 4K.
-- [ ] 5. The transition fork of criterion 6 → then a real update on a copy of the clean 3.1.1, measured in MB; GitHub issue «Launcher: an update downloads
-      the whole archive» by HOUSE_RULES 44 (filed at step 0).
+- [x] 3. DONE 2026-11-21 11:5x — pack `6dc79ee` + `2137cae` (judge 2 rounds): `ConanExiles/_config/launcher/KrinikConanDelta.cs` + `BuildUpdate.RunByManifest`,
+      the question with the real size after the check (`box.delta.ask`), «Нет» → back with no error. The launcher reads `manifest.json` of the release (its
+      asset `digest` first), hashes the bundle folders beside the game (a cache by path · size · mtime in each folder), plans (hardlink or copy into
+      `<root>.staging` · download the rest), downloads with `Range: bytes=N-`, verifies every file, renames once, runs the bundle's installer as today; no
+      manifest, or a broken one beside the volumes → today's volume path. Only an INSTALLED build takes this path; a first install keeps the volumes.
+- [ ] 4. Stand cases of criteria 3–5 — D1–D8 PASS 2026-11-21 12:29 on the code of round 3 (NOT committed, judge round 3 running): the round-2 owed items built —
+      an asset failing after the plan falls back to the volumes (`Delta.Mismatch`), a hardlink probe per seed folder with the copies counted in the space and
+      copied with progress (`Job.Stage.Copy`, «Скопировано»), the bundle the launcher runs from outside the game folder as a seed, the manifest's two tries,
+      the tidy exits (no `.staging` after «Нет» or after the volumes), the delete offer names the freed bytes («На диске освободится …»). Cases
+      `testcases/TC_conan_launcher_delta_update_2026-11-21.md`, report `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md` (runs 8–9). Criterion 5
+      is NOT met as written: a first install takes the volumes (D4) — whether it moves to the file list waits on interview #042. Owed: frames of the
+      confirmation and the progress at 4K; a real FAT32 / exFAT volume (D7 used the switch `KRINIK_LAUNCHER_NO_HARDLINKS=1`).
+- [ ] 5. The transition fork of criterion 6 — ANSWERED 2026-11-21 16:58: C (interview #042; A at 16:44). The ritual's stage E checks the per-file set
+      beside the volumes (`release_checklist.py`, built 16:5x: TODO on the published RC2, which has no manifest — as expected); `make_release.sh` already writes
+      both sets into `<work>/release`. Then a real update on a copy of the clean 3.1.1 from the installed RC2 to a locally built next build, measured in MB;
+      GitHub issue #45 «Launcher: an update downloads the whole archive» by HOUSE_RULES 44 (filed at step 0).
+- [ ] 6. The first install by the file list (criterion 5, required by answer C): with no installed build the launcher downloads every asset of the list into
+      `<bundle>.staging` through the same path (no seeds), verifies, renames, runs the installer; the volumes stay its fallback while they exist. Then the
+      files-only release mode of `make_release.sh` (no volume upload; Nexus gets its own archive), the ritual's stage E for a files-only page, the guide's
+      manual install rewritten (download the launcher, press «Установить сборку»). Stand: D4 turns into «a first install by the file list» (D4b today
+      expects a refusal).
+- [ ] 7. MEASURE FIRST, then decide — a chunked download inside a big pak (the owner 2026-11-21 17:07–17:10 on the weight imbalance and on aligning our
+      files by 1 MB or 100 MB; chronicle entry 2026-11-21 17:07). Facts: 187 files, 6 over 1 GiB hold 9 GB of 12.8 GB (70 %); a changed big pak downloads
+      whole. Alignment alone gives nothing to a whole-file updater, repak 0.2.3 has no alignment option, and 12.6 GB are third-party paks their authors
+      repack. What would help is a content-defined chunk index per big file (itch.io butler, zsync) with HTTP Range reads from the per-file asset already on
+      GitHub. The measurement: at the next update of a big third-party mod, chunk its old and new pak offline and count the bytes a chunked download would
+      fetch; a big gain → an idea for the owner, then a step here.
 
 ## Decisions made without the owner
 
 `[AI]` (phase 6, revisable): repak on one thread rather than a packer of our own (one environment line, proven by R1); the per-file assets are hardlinks of
 the export; the plan writes only steps 0–5 of phase 6.
+
+`[AI]` (phase 6 step 4, round 3, revisable): an asset whose bytes fail its hash twice counts as the release not matching its list and falls back to the
+volumes, asking the archive question first (a network fault twice in a row costs the player one more question, never a silent 13.7 GB); the hardlink is
+probed once per seed folder by a real link (a drive letter cannot tell exFAT from NTFS); the stand forces «no links» by the environment switch
+`KRINIK_LAUNCHER_NO_HARDLINKS=1`, as the launcher's other stand switches; the fallback box gets one reason line «Обновить только изменившиеся файлы не
+получилось.» and the delete offer names the freed bytes plus «Файлы, которые новая сборка взяла из прежней, останутся в новой сборке.» when files are
+shared; the copies of old files show the row «Скопировано».
 
 `[AI]` (revisable, all shown on the mockups): the scan's progress counts drives; several copies are a pick list with version and state; no game → «Указать
 папку игры»; install has no «Отменить» (a half-installed game), download and update do; «Отменить» keeps the downloaded parts; the progress bar sits in the

@@ -181,6 +181,11 @@ and comparing SHA-256 of every file, and by printing «changed vs the previous r
 
 **Transition.** The RC1/RC2 launchers understand only volumes: either publish the volumes beside the files until the manifest-aware launcher has
 self-updated (plan 54 step 2.1 already swaps the exe by digest), or make the next release's launcher arrive first through that self-update.
+**Decided 2026-11-21 by the owner (interview #042): C** — both sets on the next release page (16:44 he chose A, the Velopack shape), then ONE format, the
+per-file set alone, once the launcher installs from the file list from zero (16:58: «желательно перейти в одному какому-то формату… вероятно это вариант с
+файлами» — the Steam shape, where the per-file set is the full package); and at 16:46 the rule for the whole
+updater: it works the way the industry's systems work (plan 57, criteria 6 and 7). A skipped release needs no chain: the diff is between the installed state
+and the latest file list (the Steam depot shape), case D9.
 
 ## 6. Risks (Murphy, tiered)
 

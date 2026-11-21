@@ -138,25 +138,43 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW 2026-11-21 10:4x — the delta update, plan 57 PHASE 6 (the chat of 10:20 «resume»; the chat of 00:4x did not close — no farewell after the recon).**
+> **NOW 2026-11-21 16:5x — the chat of 16:34 («продолжаем делать сборку Конана»).** Interview #042 ANSWERED: **C** (16:58; A at 16:44) — ONE format in the
+> end, the per-file set: the next release carries both sets (RC1 / RC2 launchers), the launcher learns the first install by the file list (plan 57 phase 6
+> step 6), then the volumes leave the GitHub page, Nexus keeps one archive; the owner 16:46: the updater works «так, как делают такие системы», and a player
+> who skipped releases updates in one press to the latest (plan 57 criteria 6 and 7; case D9 PASS). **Pack `4da1a28` PUSHED** — the launcher's update by
+> the file list with judge rounds 3 and 4 fixed (21 findings, 0 defects; «review: 2 rounds» in the message): every asset checked before the question,
+> `Unusable` → the volumes on any unusable list (4xx, bad digest, mismatch), the staging's own bytes counted free and removed after «Да», read-only and
+> exFAT bundles, `Pour` progress and stop, the strings by the clean reads, the ritual's stage E checks the per-file set and the kept manifest's digest;
+> bug 115 / issue #46 (commented): `Describe` AND `Installed` need the journal, the leftover removed, the uninstaller template `if %errorlevel% neq 0`.
+> Stand run 11 (D1–D9, D5c, U-X2, U-X; report `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`). NEXT: plan 57 phase 6 step 6 — the first
+> install by the file list (then the files-only mode of `make_release.sh`, the guide's manual install, D4 rewritten); step 5's real update on a copy of the
+> clean 3.1.1; step 7 is a measurement at the next big-mod update. Also done: the claim guard reads «+03:00» as a zone (`tools/check-claim-before-evidence.mjs`,
+> 310/310, judged in round 4); `make-info-pak.py` removed (pack `e41dfd0`). The stand folders `KUMM/.work/delta/r*`, `.work/uninst` go after this commit.
+>
+> **2026-11-21 12:29 — the chat of 12:06 (the owner pasted the previous chat's farewell): the round-2 owed items of the launcher's update by the file list
+> are BUILT and D1–D8 PASS on the stand (run 9; report `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`), NOT committed — judge round 3
+> running (code + a clean read of the four new strings). Changed in the pack: `_config/launcher/KrinikConanDelta.cs` (`Mismatch` → the volumes, the hardlink
+> probe, copies with progress, the outside bundle as a seed, `Links`), `KrinikConanUpdates.cs` (`RunByManifest` two tries, `Tidy`, `Job.Stage.Copy`),
+> `KrinikConanLauncher.cs` (the freed size in the delete offer, «Скопировано», the reason line of the fallback box), `KrinikConanText.cs`, `test/feed.mjs`
+> (`--corrupt`), `test/live.mjs` (delta D1–D8). Stand runner `KUMM/.work/delta/run_r3.sh` (`RUN_DIR=…`, one stand per case, ≈ 4 min). The transition fork
+> asked as `interviews/interview_042_conan_release_page_archive_or_file_list.md` (page opened 12:27, closed without an answer). NEXT: the judge's findings →
+> fix → rerun → commit + push the pack with the review line → then, by the owner's answer, the real update on a copy of the game.**
+>
+> **2026-11-21 10:4x — the delta update, plan 57 PHASE 6 (the chat of 10:20 «resume»; the chat of 00:4x did not close — no farewell after the recon).**
 > Step 0 DONE, pack `23e9015` pushed: the cause of the 13.56 GB re-download is repak_cli 0.2.3 packing on rayon threads in finish order (one folder → three
 > SHA-256; one thread → one, same speed); `ConanExiles/_config/devkit/repak_tool.py` `env_for(args)` — one thread for `repak pack` and `retoc to-zen` only
 > (judge round 1: on every child it made `retoc pack-raw` ≈ 4× slower) — passed by the `run()` of six devkit scripts; guard `devkit/t_repak_one_thread.py`.
-> Owed from the judge: `make-info-pak.py` raises AttributeError (fields moved to `krinik_modinfo.py`; older than this, no caller). Step 1 built:
+> Step 1 built:
 > `_config/release/make_manifest.py` (per-file manifest, hardlinked assets, parts over 2 GiB, the stored small-files zip, `--previous` → «changed vs»), step 4c of
 > `make_release.sh`, the RC2 manifest kept as the previous one (`published_0_9_1-RC2/manifest.json`, computed from the bundle). Cases
 > `testcases/TC_conan_reproducible_export_2026-11-21.md`, report `testcases/reports/2026-11-21_conan-reproducible-export.md` (partial: R5 at the next release;
 > `kit-buildmod.py` and `patch-mod-asset.py` owed a run at their next use). Issue #45 «Launcher: an update downloads the whole archive…» filed, its first comment
 > (the pak order fixed) posted after the push. The manifest code is committed, pack `d85e388` (judge 2 rounds). Step 3 DONE and PUSHED, pack `6dc79ee` + `2137cae` (launcher judge round 1: 2 defects +
-> 8 risks fixed; round 2: 1 defect (the fallback asked nothing) + 2 risks fixed; the strings' clean read: 5 applied). OWED from round 2 (a round 3 owed too):
-> R2 an asset failing after the plan does not fall back to the volumes; R3 seed copies on a file system without hardlinks — no space budget, no progress;
-> R6 a launcher bundle outside the game folder is not a seed; cosmetics: the one-try manifest digest worded «дважды», the old-bundle offer's size after
-> hardlinks, leftovers (`.dl\manifest.json` after «Нет», the same-version `.staging` after a fallback), D6 overwrites its stand's manifest. `ConanExiles/_config/launcher/KrinikConanDelta.cs` +
+> 8 risks fixed; round 2: 1 defect (the fallback asked nothing) + 2 risks fixed; the strings' clean read: 5 applied). The round-2 owed items (R2, R3, R6 and
+> the cosmetics) — built in the chat of 12:06, see the NOW line above. `ConanExiles/_config/launcher/KrinikConanDelta.cs` +
 > `BuildUpdate.RunByManifest` (only for an INSTALLED build with no started volume download; a broken manifest falls back to the volumes) + the question with the
 > real size after the check; the stand (`stand.mjs --delta`, `feed.mjs --assets`, `live.mjs delta [--decline|--bad-list]`) D1, D2, D6 pass (report
-> `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`, runs 6–7). NEXT: the owed round-2 items + judge round 3; cases D3 (stop and resume), D4 (first
-> install of a manifest release takes the volumes), D5 (corrupt asset); then the transition fork (plan 57 phase 6 criterion 6) to the owner and a real update on a copy of
-> the game. The stand: `KUMM/.work/delta/run_r2.sh` (rebuilds the exe into `.work/delta/bin`, stands A and B; ≈ 40 s). RC2's paks are multi-thread packed, so the first
+> `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`, runs 6–7). RC2's paks are multi-thread packed, so the first
 > manifest update downloads the third-party paks once more. The stand files `KUMM/.work/repro/` (≈ 12 GB of copies, hardlinks and parts) go after the commit.
 >
 > **DONE 2026-11-20 ≈22:0x — the owner's side task of 21:35 (skill packs into KAIF), then RC2 resumes from the line below.** Packs live in `D:/work/ai_sandbox/_tools`,
@@ -199,8 +217,6 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > files in one zip, files over 2 GiB split (`Shemite_City_State.pak` 2 396 312 301 B); the launcher hashes local files, stages, downloads only the difference,
 > verifies, renames once, runs today's installer; the old bundle kept until success. GitHub: asset < 2 GiB, ≤ 1000 assets, Range works (single ranges),
 > the signed asset URL lives ≈ 1 h. RC1/RC2 launchers know only the volumes — the self-update brings the new launcher first.
-> Guard defect (S3): `tools/check-claim-before-evidence.mjs` read the zone offset «+03:00» after a date as a clock time «03:00» ahead of the clock (the recon's
-> two lines were rewritten «(UTC+3)» to pass) — fix the pattern with a mutant case.
 > Also from the uninstall check 00:28–00:32 (the same report): the game returned to clean (hash list: missing 0, bad 0); the RC1 bundle (13.7 GB) stays
 > after the update; after the uninstall the launcher showed «installed» instead of «Установить сборку» (HOUSE_RULES 26) — reproduce, file, fix.
 > Owed next: the issues #3 #11 #12 #33 get «вошло в v0.9.1-RC2» comments (close only after their open cases M2, N1, N3, D2); the RC1 bundle folder stays beside
@@ -274,6 +290,8 @@ final check, interview #037 Q1), 106 (the climb's stamina — interview #037 Q2)
   2026-11-18 19:0x; HOUSE_RULES 38). Fixed and waiting for the owner's play: `bugs/101_…` (the hub flashes the bare world on a switch), `bugs/97_…` (journeys locked
   after the tutorial). The critical ones open for 0.9.1: `bugs/85_…` the rare crash from key binds — five binds left in KrinikConanUI; `bugs/79_…` the world freeze
   after an in-game loading screen — waystone and dungeon cases not run; `bugs/100_…` the hub at the Esc menu's time — fixed, judge owed.
+- 🔧 `bugs/115_conan_launcher_installed_after_uninstall_window_closed.md` (issue #46, critical — a dead end): the uninstaller's console closed by its X left the
+  launcher on «installed»; fixed 2026-11-21 (the journal is the sign, the leftover is removed), stand case U-X; commit with the round-3 launcher work.
 - 🔧 `bugs/85_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: cause fixed in Archery + Camera; the KrinikConanUI twins open; the owner's gameplay is the check.
 - ⏸ `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; PARKED 2026-11-14 09:53 by the owner («в дальний ящик»).
 - 🔴 `bugs/86_…` (attribute tree caption under a node icon), `bugs/87_…` (beasts walk into the hero), `bugs/88_…` (corruption debuff line fonts) — 2026-11-07, the owner's frames.
