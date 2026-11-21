@@ -148,7 +148,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > bug 115 / issue #46 (commented): `Describe` AND `Installed` need the journal, the leftover removed, the uninstaller template `if %errorlevel% neq 0`.
 > Stand run 11 (D1–D9, D5c, U-X2, U-X; report `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`). **Pack `65950b9` PUSHED — the first
 > install by the file list** (plan 57 phase 6 step 6; judge round 5: 2 defects + 3 nits fixed; the strings by a clean read; runs 12–13, 13 of 13 PASS;
-> owed cases D4c a stopped first install, D4d a first install falling back to the volumes). **NEXT — RC3** (the owner 17:26 «RC3 скоро?»; the answer in
+> owed cases D4c a stopped first install, D4d a first install falling back to the volumes). **RC3 IN PROGRESS (17:4x, the owner 17:41 «давай, делай» —
+> launcher 1.1.0, no mod fix):** pack `13ab873` (packVersion 0.9.1-RC3, 9 Krinik mods, launcher 1.1.0, the notes
+> `_config/release/draft_0_9_1/github_release_notes_0_9_1_RC3.md`, voice-lint 0), `cc8e260` (the guide: RC3 block, the launcher 1.1.0 text); review notes
+> appended to 23e9015, 6dc79ee, 2137cae, e6b4243 (pushed to refs/notes/commits). The ritual: 2 TODO — the menu line (the UI kit chain
+> `KUMM/.work/rc3/kit_chain.sh` runs under the machine lock `kumm` to 18:28, log `.work/rc3/logs/kit_chain.log`; then copy the pak into `_unpacked`,
+> `Deploy -Only KrinikConanUI`, `set-pak-modinfo.py`, the menu frame) and the README (after `make_release.sh`, `KUMM/.work/rc2/regen_readme.sh` as the
+> recipe). **Asked the owner 17:42: the play gate for RC3 — his waiver or my hour of play (no mod changed, only the launcher)** — `make_release.sh` waits
+> on it. Then the real check on the copy, the ritual `--published`, publication only by his word. Plan before RC3 — (the owner 17:26 «RC3 скоро?»; the answer in
 > chat named the path): build RC3 locally by `make_release.sh` (both sets), the real check on a copy of the clean 3.1.1 by the player's path (RC2 → RC3
 > update and a first install from zero, measured in MB), the release ritual (RC3 everywhere, the notes, the guide, the README, the LAUNCHER NUMBER UP so
 > the RC1 / RC2 launchers offer their self-update), publication only by the owner's word. The RC2 → RC3 update still downloads the third-party paks

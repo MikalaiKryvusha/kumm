@@ -1,5 +1,16 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-21 17:26–17:41 +03:00 — the owner: RC3 now, the launcher number and the scope as proposed (recorded 17:4x)
+
+> (17:26) как движется работа? RC3 скоро?
+>
+> (17:41) давай, делай
+
+Asked at 17:41 before his word: the new launcher's number — 1.1.0 proposed (a new function: the update and the first install by the file list), 1.0.1
+possible, 1.0.0 impossible (the RC1 / RC2 launchers are 1.0.0 and self-update only to a higher number); RC3's scope — the launcher and the release tools
+only, no mod fix since RC2, «name them if you want mod fixes». Taken as: launcher 1.1.0, RC3 without mod fixes, build it now (said so in the chat for his
+correction). Publication still waits for his word.
+
 ## 2026-11-21 17:07–17:10 +03:00 — the owner on the files' weight and on aligning them (recorded 17:1x)
 
 After the answer C, the owner, verbatim:
