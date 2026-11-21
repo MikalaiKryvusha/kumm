@@ -1,5 +1,21 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-21 18:16–19:07 +03:00 — the owner: build RC3 without the hour, free the disk, publish (recorded 19:1x)
+
+> (18:16) час не нужен, собираем
+>
+> (18:35) удаляй мусор, ищи место
+>
+> (18:38) разрешаю удалить SvarogsDream\_harness
+>
+> (19:00) версию лаунчеру поднял до 1.1.0?
+>
+> (19:07) гоу, релиз
+
+Done on his words: the play gate of RC3 waived (`KUMM/.work/rc3/waiver.txt`); the old stands, the RC1 bundle in the test copy, the RC3 export and — after his
+explicit permission, the classifier had refused twice — `SvarogsDream\_harness` (22.2 GB) removed; RC3 built twice (the second with the space fix), the real
+check RC2 → RC3 passed on the copy (report `testcases/reports/2026-11-21_conan-rc3-real-update.md`); the public tree pushed, the release upload started 19:09.
+
 ## 2026-11-21 17:26–17:41 +03:00 — the owner: RC3 now, the launcher number and the scope as proposed (recorded 17:4x)
 
 > (17:26) как движется работа? RC3 скоро?
