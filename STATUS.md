@@ -182,7 +182,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > old-bundle offer shown («Нет»). The copy now holds RC3 installed + the RC2 and RC3 bundle folders; D: 13.5 GB free. NEXT (the next chat): a first install
 > from zero on the copy (uninstall RC3, move both bundle folders out, the 1.1.0 launcher alone, the feed as above) or skip it by the owner's word; the ritual
 > `--published` after the publication; PUBLICATION ONLY BY THE OWNER'S WORD: `gh release create v0.9.1-RC3 --latest` with every file of `release/` and the
-> notes file, plus `launcher-v1.1.0` (`--latest=false`) with the launcher exe; then the README / public tree commit, the issues #45 #46 comments. **Asked the owner 17:42: the play gate for RC3 — his waiver or my hour of play (no mod changed, only the launcher)** — `make_release.sh` waits
+> notes file, plus `launcher-v1.1.0` (`--latest=false`) with the launcher exe; then the README / public tree commit, the issues #45 #46 comments.
+> **19:07 — THE OWNER: «гоу, релиз». PUBLICATION IN PROGRESS:** the public tree (scan 0; the allow file's wording fixed — the scan forbids «repack») pushed
+> to the public repo `5040b57`; `gh release create v0.9.1-RC3 --latest --title "0.9.1-RC3" --notes-file <rc3_release>/release_notes_…RC3.md release/*`
+> RUNS in the background since 19:08 (83 files ≈ 26 GB; log `KUMM/.work/rc3/logs/gh_release.log` — «exit 0» and the end time at its tail when done);
+> the published notes and `manifest.json` kept in `_config/release/published_0_9_1-RC3/` (pack `befba63`; `-text` for the kept manifests, `db58ee8`).
+> AFTER THE UPLOAD: (1) `gh release view v0.9.1-RC3 --json assets` — 83 assets, Latest; (2) `gh release create launcher-v1.1.0 --latest=false --title
+> "Krinik launcher 1.1.0" --notes "<short RU/EN note>" <rc3_release>/release/KrinikConanLauncher.exe` (the RC1 / RC2 launchers self-update from it);
+> (3) the ritual `release_checklist.py --published` (the per-file line compares the kept manifest with the GitHub digest), the body as published into
+> `published_0_9_1-RC3/github_release_body_as_published.md`; (4) issues #45 and #46: «вошло в v0.9.1-RC3» comments (close after the retest on the
+> published release); (5) remove `KUMM/.work/rc3_release` only after the upload is verified; the copy `rc1_install` holds RC3 + the RC2/RC3 bundles. **Asked the owner 17:42: the play gate for RC3 — his waiver or my hour of play (no mod changed, only the launcher)** — `make_release.sh` waits
 > on it. Then the real check on the copy, the ritual `--published`, publication only by his word. Plan before RC3 — (the owner 17:26 «RC3 скоро?»; the answer in
 > chat named the path): build RC3 locally by `make_release.sh` (both sets), the real check on a copy of the clean 3.1.1 by the player's path (RC2 → RC3
 > update and a first install from zero, measured in MB), the release ritual (RC3 everywhere, the notes, the guide, the README, the LAUNCHER NUMBER UP so
