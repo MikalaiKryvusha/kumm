@@ -144,7 +144,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `KUMM/.work/rc3/github_release_notes_0_9_1_RC3_fixed.md` — both approved by the owner 20:18 «да, публикуй» (review page 95, chronicle entry 20:18);
 > (c) the comments `KUMM/.work/rc3/issue_45_comment.md`, `issue_46_comment.md` (voice-lint, voice-check and `node KUMM/.work/rc3/scan_public.mjs` clean).
 > Found and fixed: the public ban list of `.work/issues/file_issues.mjs` never matched a Russian word (JS `\b`, EXP-0600); its re-scan of the live repo
-> found «стенд» / «коммит» in our comments on #6 and #46 — edit them after the publication (`gh api -X PATCH repos/<repo>/issues/comments/<id> -F body=@<file>`).
+> found «стенд» / «коммит» in our comments on #6 and #46 — both edited 20:20 (`gh api -X PATCH`), the live re-scan is clean (only the player's own #1).
+> The guide source `ConanExiles/docs/guide/guide-3.1.1.html` lines 457–459 carry the same corrected sentences (uncommitted until the publication commit);
+> the guide PDF inside the RC3 archive and on its page keeps the old wording until the next release.
 >
 > **CHAT CLOSED 2026-11-21 ≈20:0x (the chat of 16:34 «продолжаем делать сборку Конана»; soft closure at the 80 % budget). Its progress lines — chronicle,
 > entry «STATUS bonsai trim, part 11»; the owner's words — entries 2026-11-21 16:44–16:58, 17:07–17:10, 17:26–17:41, 18:16–19:07.**
@@ -154,7 +156,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **REAL CHECK PASSED** — the RC2 launcher updated itself to 1.1.0, then the build RC2 → RC3 by the file list on the clean copy (12 967.8 MB, 3.4 min, no
 > volume; report `testcases/reports/2026-11-21_conan-rc3-real-update.md`); the public tree pushed (public repo `5040b57`); the kept notes and manifest in
 > `ConanExiles/_config/release/published_0_9_1-RC3/` (byte-exact, `-text`).
-> **FIRST in the next chat — finish the RC3 publication (the owner 19:07 «гоу, релиз»):**
+> **FIRST in the next chat — finish the RC3 publication (the owner 19:07 «гоу, релиз»). STEP 1 DONE 20:29: v0.9.1-RC3 PUBLISHED, Latest, 83 assets, not a draft** — https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.1-RC3; go to step 2:
 > 1. The upload `gh release create v0.9.1-RC3 …` ran in the background from 19:09 (log `KUMM/.work/rc3/logs/gh_release.log`; 56 of 83 assets at 20:00 (the closing judge; 46 / 8.7 GB at
 >    19:55), 1.5–4 MB/s; a DRAFT until the last file; the gh process may die with the chat). Check: `gh release view v0.9.1-RC3 -R MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --json
 >    isDraft,assets`. If it died with the chat: upload the missing files of `KUMM/.work/rc3_release/release` by `gh release upload v0.9.1-RC3 <files>`, then
