@@ -2,7 +2,7 @@
 
 > **Run:** 2026-11-21 16:44 +03:00 · **Who:** the agent · **Object:** the Conan launcher 1.0.0 (build 0.9.1 line), the fixture stand of
 > `ConanExiles/_config/launcher/test/stand.mjs` (the real engine `Deploy-ModPack.ps1`, the real uninstaller template `_config/uninstall/uninstall.cmd`)
-> **Bug:** `bugs/115_conan_launcher_installed_after_uninstall_window_closed.md`
+> **Bug:** `bugs/115_DONE_conan_launcher_installed_after_uninstall_window_closed.md`
 
 ## 1. What was checked
 

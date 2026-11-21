@@ -141,7 +141,7 @@ class: wrong-state-marker
 the state it marks → ✅ the sign is the journal `_kumm_backup\journal.txt`, which the restore removes with the backup folder only when it succeeds; the leftover
 uninstaller is removed on the window's exit. Stand case U-X: red on the old exe, green on the fix.
 **Lesson:** a file that a script deletes at its own end is not a state marker — every early exit (X, kill, crash) leaves it behind. Mark state by what the
-state change itself removes or writes, atomically with the change.   → link: bugs/115_conan_launcher_installed_after_uninstall_window_closed.md
+state change itself removes or writes, atomically with the change.   → link: bugs/115_DONE_conan_launcher_installed_after_uninstall_window_closed.md
 **Trigger:** a state is detected by the presence of a script, a lock or a temp file that is cleaned up «at the end».
 **Not for:** markers written and removed by the same atomic step (a rename of a finished folder).
 mechanized: stand cases U-X and U-X2 (ConanExiles/_config/launcher/test/live.mjs mode uninstall, delta --leftover)

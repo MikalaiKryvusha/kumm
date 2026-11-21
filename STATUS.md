@@ -148,19 +148,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - Found and fixed: the public ban list never matched a Russian word (JS `\b`, EXP-0600); our comments on #6 and #46 edited; the live re-scan is clean.
 > - The guide source carries the corrected RC3 lines; the RC3 archive's guide PDF keeps the old wording until the next release.
 >
-> **IN PROGRESS 21:1x — the retest** (`testcases/TC_conan_rc3_published_retest_2026-11-21.md`, lock `kumm` to 22:07 <!-- claim-ok: the lock's planned end -->): P0 done (RC3 uninstalled, its bundle
-> removed, RC2 installed by the FULL path of its `install.cmd`, the RC2 bundle's launcher = the v0.9.1-RC2 asset `ab4856b6…`), P1 PASS (the real feed: 4
-> builds, newest RC3, launcher 1.1.0), P2 PASS (self-update 20:58), P3 running (`KUMM/.work/rc3/realcheck_github.mjs` → `logs/realcheck_github.out`,
-> 12.7 GB from GitHub, 72 % at 21:16). Then P4: `node ConanExiles/_config/launcher/test/live.mjs uninstall KUMM/.work/rc3/stand_published.json`, the run
-> report, close #45/#46 with a comment. **Incident 20:38 (S1, bugs/116):** nvm's `install.cmd` ran by its bare name and cut the machine PATH; restored 20:50,
+> **DONE 21:23 — the retest on the PUBLISHED release** (report `testcases/reports/2026-11-21_conan-rc3-published-retest.md`, cases
+> `testcases/TC_conan_rc3_published_retest_2026-11-21.md` P0–P4 pass): the RC2 launcher 1.0.0 (the v0.9.1-RC2 asset) read the real GitHub feed, updated itself
+> from `launcher-v1.1.0`, then updated the build RC2 → RC3 by the file list from GitHub (70 files, 12.7 GB, 21.0 min, no volume, 117 files from the old
+> bundle); the uninstall window closed by its X → «Установить сборку», the leftover removed (7 / 7). **Issues #45 and #46 CLOSED** with these observations;
+> bug 115 DONE. Lock released 21:22. **Incident 20:38 (S1, bugs/116):** nvm's `install.cmd` ran by its bare name and cut the machine PATH; restored 20:50,
 > verified; guard `tools/hooks/no-bare-cmd-script.mjs` (3 judge rounds, KUMM `79b6c81f`); leftovers waiting for the owner's word: machine `NVM_HOME`
 > (empty), `NVM_SYMLINK`, `D:\PATH.txt`, `D:\settings.txt`. HOUSE_RULES 14.1 (answer «what are you working on» by the task first).
 >
-> **NEXT — the retest on the PUBLISHED release (HOUSE_RULES 44.4), then close #45 and #46:**
-> 1. On a copy of the clean 3.1.1 under `KUMM/.work/` (D: 38.7 GB free at 20:34; `KUMM/.work/rc1_install/Conan_311` holds RC3 + the RC2 and RC3 bundle
->    folders): the RC2 launcher 1.0.0 against the REAL GitHub feed (no `KRINIK_LAUNCHER_FEED`) → «Обновить лаунчер» from `launcher-v1.1.0` → «Обновить
->    сборку» RC2 → RC3 downloading from GitHub; a first install from zero by the file list; the removal window closed by its X → «Установить сборку».
->    Driver `KUMM/.work/rc3/realcheck.mjs` (the stand's TEMP, state dir, desktop, search roots — EXP-0594), machine lock `kumm`, a run report.
+> **NEXT:**
+> 1. A first install from zero by the file list from the published release on the copy (`KUMM/.work/rc1_install/Conan_311` holds RC3 uninstalled → a clean
+>    game with the RC2 and RC3 bundle folders beside it; remove the bundle folders first, or install from a fresh copy), the drivers `KUMM/.work/rc3/realcheck_github.mjs`
+>    (feed and stand env) and `ConanExiles/_config/launcher/test/live.mjs`; machine lock `kumm`; a run report.
 > 2. Then: the owed cases D4c / D4d, plan 57 step 8 risks R1 / R2, step 7 (measure chunking at the next big-mod update), the files-only release mode.
 >
 > The closed entries of 2026-11-20 22:07 – 2026-11-21 12:29 (RC2 built and published, the delta update recon, steps 0–3, the round-2 items) —
@@ -198,8 +197,7 @@ final check, interview #037 Q1), 106 (the climb's stamina — interview #037 Q2)
   2026-11-18 19:0x; HOUSE_RULES 38). Fixed and waiting for the owner's play: `bugs/101_…` (the hub flashes the bare world on a switch), `bugs/97_…` (journeys locked
   after the tutorial). The critical ones open for 0.9.1: `bugs/85_…` the rare crash from key binds — five binds left in KrinikConanUI; `bugs/79_…` the world freeze
   after an in-game loading screen — waystone and dungeon cases not run; `bugs/100_…` the hub at the Esc menu's time — fixed, judge owed.
-- 🔧 `bugs/115_conan_launcher_installed_after_uninstall_window_closed.md` (issue #46, critical — a dead end): the uninstaller's console closed by its X left the
-  launcher on «installed»; fixed 2026-11-21 (the journal is the sign, the leftover is removed), stand case U-X; commit with the round-3 launcher work.
+- ✅ `bugs/115_DONE_conan_launcher_installed_after_uninstall_window_closed.md` (issue #46): DONE 2026-11-21 21:23 — retested on the published 0.9.1-RC3, issue closed.
 - 🔧 `bugs/85_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: cause fixed in Archery + Camera; the KrinikConanUI twins open; the owner's gameplay is the check.
 - ⏸ `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; PARKED 2026-11-14 09:53 by the owner («в дальний ящик»).
 - 🔴 `bugs/86_…` (attribute tree caption under a node icon), `bugs/87_…` (beasts walk into the hero), `bugs/88_…` (corruption debuff line fonts) — 2026-11-07, the owner's frames.

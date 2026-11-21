@@ -2,7 +2,7 @@
 
 > **GitHub issue:** [#46](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/46) — the public tracker of this defect (HOUSE_RULES 44)
 
-**Status:** 🔧 fix built 2026-11-21, the stand case is the check (below)
+**Status:** ✅ DONE 2026-11-21 21:23 — retested on the published 0.9.1-RC3, issue #46 closed (closing section at the end)
 **Severity:** S2 — a dead end by HOUSE_RULES 38: the launcher offers «Играть» and «Удалить сборку» for a clean game and never «Установить сборку» again
 **Version/build:** launcher 1.0.0 of builds 0.9.1-RC1 and 0.9.1-RC2, Conan Exiles Enhanced 3.1.1 · **When/context:** 2026-11-21 00:31, the uninstall check after
 the update RC1 → RC2 on the test copy (report `testcases/reports/2026-11-21_conan-launcher-update-rc1-rc2.md`, run 8)
@@ -41,3 +41,16 @@ then kills the console by PID, as the X closes it. Expected: the log line «ок
 «Установить сборку»; no uninstaller left in the game root. Control: the same case with the launcher built before the fix shows `installed` (red).
 Case U-X2 (`live.mjs delta --leftover`): the leftover lies in the clean game before the launcher starts — no `installed` screen, a manifest-only release
 refused as a first install (this is what `BuildUpdate.Installed` decides), the leftover untouched.
+
+## ✅ STATUS: DONE (2026-11-21 21:23 +03:00)
+
+Hygiene: the stand cases U-X and U-X2 (`live.mjs uninstall`, `live.mjs delta --leftover`) green since the fix (report `testcases/reports/2026-11-21_conan-launcher-uninstall-x-close.md`).
+Functional run: the published 0.9.1-RC3 on the test copy of the clean 3.1.1, the launcher 1.1.0 that came from GitHub with the build: «Удалить сборку» → «Да»,
+the console closed at its last line by PID (the player's X) → the screen `found-files` with «Установить сборку», the leftover uninstaller removed — 7 / 7
+(report `testcases/reports/2026-11-21_conan-rc3-published-retest.md`, case P4). Issue #46 closed with that observation.
+
+## Decisions made without the owner
+
+- `[AI]` the sign of an installed build is the uninstaller AND the install journal together (`Games.Describe`, `BuildUpdate.Installed`), and the launcher
+  removes a leftover uninstaller when the uninstall window closes — chosen in the fix round, judged by the independent judge.
+- `[AI]` the retest used the launcher in the stand's isolated environment with the feed off: the uninstall path does not touch the feed.
