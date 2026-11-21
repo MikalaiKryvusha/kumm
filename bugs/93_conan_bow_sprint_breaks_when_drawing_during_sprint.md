@@ -203,7 +203,7 @@ under SendInput; (3) Z3 / Z5 by real keys; (4) the judge's open risks.
 
 ## Open from judge round 2
 
-- Finding 1: the K2_CanSprint override also skips the game's other refusals (an overloaded hero, low stamina at the start, mounted) — case S8 owed.
+- Finding 1: the K2_CanSprint override also skips the game's other refusals (an overloaded hero, low stamina at the start, mounted) — case S8 PASS 2026-11-21 23:23 on 0.9.1-RC3: the game has no weight refusal (overloaded, native K2_CanSprint true, the speed ×0.3); overloaded with the bow drawn our gate stays shut (83.2) — report `testcases/reports/2026-11-21_conan-rc3-critical-retest.md` §9. Low stamina at the start and mounted stay unmeasured.
 - Finding 3: the worst call read 2 ms in the owner's session (clock step 1 ms) — re-measure on build 4 by the minute line and a frame-time A-B.
 - Finding 6: `krinik_mod_settings.lua` registers the placeholder-perk widget hooks with the perks off — FIXED 2026-11-13 10:5x (pack `ca3cdef`, judge clean; live: hub
   opened/closed, no KrinikConanUI errors, no «perks merge» lines).

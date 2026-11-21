@@ -226,6 +226,9 @@ function (`EvaluateMovement_RangeCombat`, `_Sprint`, `_Walk`, `_UsingItem`, `_Is
 (BP, out `Value`, degrees: W 0, W+D ≈ 46, D 90) lies inside its `DirectionRequirment` (X min, Y max). The speed is the row's `Speed` through `ApplyNewMovementSpeed`
 (× perk, snares, encumbrance — `ideas/03`). So a drawn bow (Ranged before Sprint) walks at 214 and never sprints; `EvaluateMovement_Sprint` itself has no direction
 test — the window is the row's. The native `K2_CanSprint` is false while drawing (15 / 16). KrinikConanLocomotion `krinik_bow_sprint` uses exactly these two doors.
+**Weight never refuses a sprint** (live 2026-11-21 23:24 +03:00, 3.1.1): overloaded to 154 of 76 the native `K2_CanSprint` stays true and substate 7 is entered; the encumbrance only
+multiplies the row's speed (sprint MaxWalkSpeed 659.5 → 197.9; a drawn bow's Ranged row → 83.2). `GetFloatStat(12, 0)` = the current load (64 in the owner's
+save); `GetFloatStat(10, 0)` (EncumbranceWeight) read 0 — the bar's limit is computed elsewhere.
 **The sprint key in `BasePlayerChar` (bytecode, 2026-11-13, `retoc-5.8 to-legacy --filter BasePlayerChar` → `uaj exports` → UAssetGUI `tojson VER_UE5_8` →
 `kismet-trace.py`):** the instance flag `SprintKeyIsDown` is set True on the sprint press and False on the release; `SprintAction(Pressed)` → `ClientStartSprint` or
 `ClientStopSprint` (→ native `StopSprint`, then `ServerStopSprint`); the toggle press calls `SprintAction(NOT TrySprint())`; `ResetSprint` = if in 7 → exit 7, enter 7;

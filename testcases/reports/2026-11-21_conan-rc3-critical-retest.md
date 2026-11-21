@@ -72,6 +72,18 @@ Total: **15 bow kills with real shots; 18 «к трупу прицеплено»
 Found: my two stand defects (EXP-0605, EXP-0606); `aim-shot.sh` fixed in the pack (`2e0499b`): a shot past the 10th — «1 · 1», exit 0; inventory open — «0 · 0», exit 1.
 Verdict: pass — #24 can be closed.
 
+## 9. Addendum — case S8 of the bow sprint (#30, bug 93), 23:17–23:24
+
+Contour: the same working build, game PIDs 4916 and 41812 (background launch; `mouse-seq.ps1` brings the game forward for the real keys), the save copied
+with its `-wal` before the stones (`KUMM/.work/rc3_retest/save_s8`) and put back after; machine lock `kumm` 23:17–23:24.
+Runs: `sprint-run-probe.lua` (remote movement, no draw) unloaded and with `exec SpawnItem 10001 1500` (load 154 vs the bar's 76); real keys
+`mouse-seq.ps1 "…kdown:W…kdown:0x10…rdown,wait:1500,lclick…"` overloaded and unloaded; the Locomotion lines of `UE4SS.log` read.
+Checks — Functional run: unloaded sprint — substate 7, MaxWalkSpeed 659.5; overloaded sprint — native `K2_CanSprint` true, substate 7, MaxWalkSpeed 197.9 (no
+weight refusal, a multiplier); overloaded + bow drawn by real keys — 83.2, no BowSprint line (our gate stayed shut); unloaded + bow drawn by real keys —
+659.5 held, «лук натянут и спринт зажат: тип движения — спринт» ×5. The remote probe's own draw does not draw (no 11 / 15 / 16) — real keys only.
+Found: none in the build. Verdict: S8 pass — the weight's effect stays with our bow sprint; the judge's worry (the override bypasses a weight refusal) has
+no refusal to bypass. #30 keeps one owed case, S9 (a sheathed bow in a sprint).
+
 ## 7. Verdict
 
 pass for #6, #11, #12, #33, #35 — each issue's own case passed by the player's path on the published RC3 bytes; the issues can be closed. #21 stays open (waystone

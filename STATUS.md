@@ -171,8 +171,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    of our mods); R24b — 15 bow kills with real shots in a row, 18 arrows re-attached to corpses, no crash (report section 8). My two stand defects on the
 >    way: the bow not in hand in run 1 (the owner caught it 22:51, EXP-0605) and `aim-shot.sh` blind after the 10th shot (fixed, pack `2e0499b`, EXP-0606).
 >    Open critical now (5): #21 the world frozen behind a loading screen (waystone and dungeon cases owed) · #41 Esc over other mods' windows (bug 108, needs a
->    non-Lua path) · #30 bow sprint cases S8 / S9 (bug 93; S8 is likely a real defect, not a retest: the `K2_CanSprint` gate checks exhaustion and not the weight, judge round 2
-finding 1 — first read how the game refuses a sprint to an overloaded hero, then the gate, then S8 by real keys with the hero overloaded) · #23 the map stuck without the hub tabs (bug 84, not reproduced: hunt first) · #48 the locomotion
+>    non-Lua path) · #30 bow sprint — S8 PASS 23:23 (weight never refuses a sprint, it multiplies the speed; overloaded, our bow sprint stays shut — report §9), S9 a sheathed bow still owed (bug 93) · #23 the map stuck without the hub tabs (bug 84, not reproduced: hunt first) · #48 the locomotion
 >    error while dead (fixed in the pack, closes after the next build's retest). #43 the slow launcher (bug 110) waits for the owner's eye. Then the 33
 >    non-critical (incl. #47) by the same test.
 >
