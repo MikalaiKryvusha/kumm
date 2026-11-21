@@ -148,7 +148,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >
 > **FIRST in the next chat — a first install from zero by the file list from the PUBLISHED release** (the owner 21:28: in a new chat):
 > 1. The copy `KUMM/.work/rc1_install/Conan_311` is a clean 3.1.1 now (RC3 uninstalled 21:22) with the bundle folders `Krinik_Mod_Pack_0_9_1_RC2` and
->    `…_RC3` beside it — remove both by `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs <dir>` (alone in its call), so nothing is reused.
+>    `…_RC3` inside it — remove both by `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs <dir>` (alone in its call), so nothing is reused.
 > 2. Download the launcher as a player does (`gh release download v0.9.1-RC3 --pattern KrinikConanLauncher.exe` into a new folder inside the copy) and
 >    drive it on the REAL feed with the stand's environment — model: `KUMM/.work/rc3/realcheck_github.mjs` (state, TEMP, desktop, search roots, Steam;
 >    no `KRINIK_LAUNCHER_FEED`); press «Установить сборку» → the box names the size → «Да» → «сборка 0.9.1-RC3 поставлена»; no volume; ≈ 13 GB from
