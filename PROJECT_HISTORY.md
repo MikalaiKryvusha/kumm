@@ -1,5 +1,38 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-21 20:3x +03:00 — STATUS bonsai trim, part 12: the CHAT CLOSED block of the chat of 16:34 and the first NOW block of the chat of 20:02, moved verbatim when the RC3 publication closed
+
+> **NOW 2026-11-21 20:2x — the chat of 20:02 (resume: finish the RC3 publication).** The upload of 19:09 did NOT die with the chat: `gh` PID 34340 lives and
+> ends by itself (`--latest`, the log gets «exit N»); 73 of 83 assets, 18.9 of 25.6 GB at 20:17, sizes equal to the local files. Ready to send right after it:
+> (a) `launcher-v1.1.0` with `ConanExiles/_config/release/draft_0_9_1/github_release_notes_launcher_1_1_0.md` and (b) the RC3 body replaced by
+> `KUMM/.work/rc3/github_release_notes_0_9_1_RC3_fixed.md` — both approved by the owner 20:18 «да, публикуй» (review page 95, chronicle entry 20:18);
+> (c) the comments `KUMM/.work/rc3/issue_45_comment.md`, `issue_46_comment.md` (voice-lint, voice-check and `node KUMM/.work/rc3/scan_public.mjs` clean).
+> Found and fixed: the public ban list of `.work/issues/file_issues.mjs` never matched a Russian word (JS `\b`, EXP-0600); its re-scan of the live repo
+> found «стенд» / «коммит» in our comments on #6 and #46 — both edited 20:20 (`gh api -X PATCH`), the live re-scan is clean (only the player's own #1).
+> The guide source `ConanExiles/docs/guide/guide-3.1.1.html` lines 457–459 carry the same corrected sentences (uncommitted until the publication commit);
+> the guide PDF inside the RC3 archive and on its page keeps the old wording until the next release.
+>
+> **CHAT CLOSED 2026-11-21 ≈20:0x (the chat of 16:34 «продолжаем делать сборку Конана»; soft closure at the 80 % budget). Its progress lines — chronicle,
+> entry «STATUS bonsai trim, part 11»; the owner's words — entries 2026-11-21 16:44–16:58, 17:07–17:10, 17:26–17:41, 18:16–19:07.**
+> Done: interview #042 answered **C** (one format in the end, the per-file set); the update by the file list judged in rounds 3–6 and the FIRST INSTALL by the
+> file list built (plan 57 phase 6 steps 4, 6, 8; packs 4da1a28, 65950b9, 6891744, 025cf2b; stand runs 10–14: 13 cases + U-X, U-X2); bug 115 / issue #46
+> fixed; the claim guard reads «+03:00» as a zone; launcher **1.1.0**, RC3 versions, notes, guide, the UI menu line «0.9.1-RC3» seen; **RC3 BUILT** and the
+> **REAL CHECK PASSED** — the RC2 launcher updated itself to 1.1.0, then the build RC2 → RC3 by the file list on the clean copy (12 967.8 MB, 3.4 min, no
+> volume; report `testcases/reports/2026-11-21_conan-rc3-real-update.md`); the public tree pushed (public repo `5040b57`); the kept notes and manifest in
+> `ConanExiles/_config/release/published_0_9_1-RC3/` (byte-exact, `-text`).
+> **FIRST in the next chat — finish the RC3 publication (the owner 19:07 «гоу, релиз»). STEP 1 DONE 20:29: v0.9.1-RC3 PUBLISHED, Latest, 83 assets, not a draft** — https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.1-RC3; go to step 2:
+> 1. The upload `gh release create v0.9.1-RC3 …` ran in the background from 19:09 (log `KUMM/.work/rc3/logs/gh_release.log`; 56 of 83 assets at 20:00 (the closing judge; 46 / 8.7 GB at
+>    19:55), 1.5–4 MB/s; a DRAFT until the last file; the gh process may die with the chat). Check: `gh release view v0.9.1-RC3 -R MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --json
+>    isDraft,assets`. If it died with the chat: upload the missing files of `KUMM/.work/rc3_release/release` by `gh release upload v0.9.1-RC3 <files>`, then
+>    `gh release edit v0.9.1-RC3 --draft=false --latest`. Never delete `rc3_release` before the 83 assets are verified.
+> 2. `gh release create launcher-v1.1.0 --latest=false --title "Krinik launcher 1.1.0" --notes "<RU/EN: the update and the first install by the release
+>    files>" KUMM/.work/rc3_release/release/KrinikConanLauncher.exe` — the RC1 / RC2 launchers self-update from it (seen on the copy with the local feed).
+> 3. `python -I -X utf8 ConanExiles/_config/release/release_checklist.py --published` (the per-file line compares the kept manifest with the GitHub
+>    digest); the body as published → `published_0_9_1-RC3/github_release_body_as_published.md`; commit.
+> 4. Issues #45 and #46: «вошло в v0.9.1-RC3» comments (close after the retest on the published release).
+> 5. Then: a first install from zero on the copy (`KUMM/.work/rc1_install/Conan_311` holds RC3 installed + the RC2 and RC3 bundle folders), the owed cases
+>    D4c / D4d, plan 57 step 8 risks R1 / R2, step 7 (measure chunking at the next big-mod update), the files-only release mode after this transition.
+
 ## 2026-11-21 20:18 +03:00 — the owner: publish the launcher 1.1.0 notes and the corrected RC3 lines (recorded 20:18)
 
 > (20:18) да, публикуй
