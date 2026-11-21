@@ -213,6 +213,12 @@ has beside the game, verify them, and switch the bundle in one step; an RC-sized
       files-only release mode of `make_release.sh` (no volume upload; Nexus gets its own archive), the ritual's stage E for a files-only page, the guide's
       manual install rewritten (download the launcher, press «Установить сборку»). Stand: D4 turns into «a first install by the file list» (D4b today
       expects a refusal).
+- [ ] 8. OWED (found 2026-11-21 18:2x while planning the RC3 check on the copy): `RunByManifest`'s space check counts the whole download twice —
+      `(plan.Bytes - have) + plan.Bytes + …` — while only the files joined from parts and the group zip's files are written a second time; the assets go
+      into the staging as hardlinks from `.dl` (same volume). For the RC2 → RC3 update that is ≈ 29 GB asked against ≈ 18 GB really needed (13.6 GB of
+      third-party paks + the 2.3 GB pak joined from its two parts + reserve): a player with 20 GB free is refused. Fix: count the rewrite as the sizes of
+      `Fetch` entries with `Parts` or `Group`, plus the assets only when the staging volume gives no hardlinks (`Link` / the probe); a stand case with a
+      limited free space (the stand's `KRINIK_LAUNCHER_FREE` or a small VHD).
 - [ ] 7. MEASURE FIRST, then decide — a chunked download inside a big pak (the owner 2026-11-21 17:07–17:10 on the weight imbalance and on aligning our
       files by 1 MB or 100 MB; chronicle entry 2026-11-21 17:07). Facts: 187 files, 6 over 1 GiB hold 9 GB of 12.8 GB (70 %); a changed big pak downloads
       whole. Alignment alone gives nothing to a whole-file updater, repak 0.2.3 has no alignment option, and 12.6 GB are third-party paks their authors

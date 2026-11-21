@@ -153,7 +153,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `_config/release/draft_0_9_1/github_release_notes_0_9_1_RC3.md`, voice-lint 0), `cc8e260` (the guide: RC3 block, the launcher 1.1.0 text); review notes
 > appended to 23e9015, 6dc79ee, 2137cae, e6b4243 (pushed to refs/notes/commits). The menu line DONE 18:10 (the UI kit chain `KUMM/.work/rc3/kit_chain.sh`
 > all «Success», the pak in `_unpacked` and deployed, mod info written, «0.9.1-RC3» seen — `KUMM/.work/rc3/menu_rc3.webp`; the machine lock released). The
-> ritual: 1 TODO — the README (after `make_release.sh`, `KUMM/.work/rc2/regen_readme.sh` as the recipe). **Asked the owner 17:42: the play gate for RC3 — his waiver or my hour of play (no mod changed, only the launcher)** — `make_release.sh` waits
+> ritual: 1 TODO — the README (after `make_release.sh`, `KUMM/.work/rc2/regen_readme.sh` as the recipe).
+> **RC3 BUILT 18:30** (the owner 18:16 «час не нужен, собираем» — the play gate waived, `KUMM/.work/rc3/waiver.txt`): `make_release.sh` OK into
+> `KUMM/.work/rc3_release/release` — 83 files: 7 volumes, 72 per-file assets + `manifest.json` (187 files; «changed vs 0.9.1-RC2: 71 files, 13603.4 MB» —
+> the third-party paks of RC2's multi-thread packing, allowed by `draft_0_9_1/changed_paks_0_9_1_RC3.txt`), the launcher 1.1.0, the guide PDF, SHA256SUMS;
+> README at RC3 (12,8 ГБ) — pack `ae16b04`; the ritual 0 TODO, 13 MANUAL, 6 OK; the verification unpack `check` removed; the machine lock released.
+> Space freed for it: the old launcher stands (≈ 18 GB) and the RC1 bundle in the copy (13.7 GB). D: 16.5 GB free — the real check on the copy (install RC2,
+> update to RC3, a first install from zero) needs ≈ 30 GB more: the owner asked 18:29 to run `KUMM/.work/svarog_cleanup.cmd` or allow `_harness`.
+> NEXT: the real check → the ritual `--published` items → publication by his word (the release `v0.9.1-RC3` with every file of `release/` AND the
+> launcher release `launcher-v1.1.0`, so the RC1 / RC2 launchers see their self-update). **Asked the owner 17:42: the play gate for RC3 — his waiver or my hour of play (no mod changed, only the launcher)** — `make_release.sh` waits
 > on it. Then the real check on the copy, the ritual `--published`, publication only by his word. Plan before RC3 — (the owner 17:26 «RC3 скоро?»; the answer in
 > chat named the path): build RC3 locally by `make_release.sh` (both sets), the real check on a copy of the clean 3.1.1 by the player's path (RC2 → RC3
 > update and a first install from zero, measured in MB), the release ritual (RC3 everywhere, the notes, the guide, the README, the LAUNCHER NUMBER UP so
@@ -281,6 +289,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 4. **Cleanup is the agent's duty** (the owner 16:50–16:51): `KUMM/.work/svarog_cleanup.cmd` (SvarogsDream `_harness` 20.5 GB, review folders, `src/*/bin|obj`) —
 >    the auto-mode allow list was widened 17:2x by `node KUMM/.work/automode_rule.mjs` (the owner 16:51, chronicle entry 2026-11-20 16:50): run the cleanup
 >    yourself — `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs <named folders>`, alone in its call; never hand it to the owner.
+>    **2026-11-21 18:2x the auto-mode classifier REFUSED `rm-tree.mjs D:/work/ai_sandbox/SvarogsDream/_harness`** (Destructive or Unwanted Actions) — the
+>    widened rule does not reach it; not worked around. D: had 44 GB free before the RC3 release; the RC3 check on the copy needs ≈ 30 GB more — asked the owner.
 > 5. **Nexus:** the live 0.9.0 page shows `[email=…]` raw — fix by `tools/nexus-desc.mjs`; the Nexus publication of 0.9.1 only by the owner's word.
 > 6. **RC2 list:** judge 7's deferred risks (`place()` two live windows, `btn` after a failed wrap, the second `forget_old_window()`, dash_lint C# forms), G5, bug 85
 >    D2 / D3, the «О проекте» plate (mockup waits for his look), the guide's English pages (asked 14:4x, no answer), the Camera cell look, the three S3 findings of
