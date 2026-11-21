@@ -65,6 +65,7 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
 | 3 | Build files beside / download from GitHub with resume + progress bar | stand cases with the local feed, frames of each phase |
 | 4 | Install / update through the same progress bar; texts by the owner's portrait | stand + one real install on a copy of the clean game |
 | 5 | Judge rounds, release of the launcher | owner's word on the release |
+| 6 | An update downloads only what changed (`[OWNER]` 2026-11-21 00:28–00:30, verbatim — `PROJECT_HISTORY.md` entry 2026-11-21 00:28); recon `researches/conan-launcher-delta-update/README.md` | a stand update with the local feed downloads only the changed files; then a real update on a copy of the game, measured in MB |
 
 ## Found on the way (2026-11-18 08:1x) — the chain that this epic closes
 
@@ -131,7 +132,56 @@ two states that cannot both be true (the 08:12 frame: «Игра не найде
    - [ ] mockup · [ ] the owner's verdict · [ ] build · [ ] stand · [ ] judge <!-- attribution-ok: a step to come; his words of 11:38 are quoted in this item above -->
 
 
+## Phase 6 — an update downloads only what changed
+
+**Goal vector (Achieve).** The RC1 → RC2 update downloaded 12.8 GB in 22 min while 12 files / 37.3 MB changed (run report
+`testcases/reports/2026-11-21_conan-launcher-update-rc1-rc2.md`). The launcher shall download only the files whose bytes differ from what the player already
+has beside the game, verify them, and switch the bundle in one step; an RC-sized update costs tens of MB.
+
+**Acceptance criteria.**
+
+1. Reproducible build. The same sources give the same pak bytes. Check: cases R1–R4 of `testcases/TC_conan_reproducible_export_2026-11-21.md`; at every
+   release the line «changed vs <previous>: N files, X MB» lists only the files whose source changed (case R5).
+2. The release carries `manifest.json` (path · size · SHA-256 · asset, or parts for a file over 2 GiB, or the small-files group), uploaded LAST; the publisher
+   reads the asset list back and every name and `digest` matches the manifest. Check: a script over `gh release view <tag> --json assets` and the manifest.
+3. Update by hashes. Situation: a bundle of release N beside the game; the feed holds release N+1 that differs in K files. Action: the player presses
+   «Обновить сборку». Result: the confirmation names the real download size; the feed log shows requests for those K assets (and the small-files group when
+   a small file changed) and nothing else; the new bundle tree equals the manifest. Check: the stand with the local feed (`_config/launcher/test/feed.mjs`),
+   its request log and a tree hash of the new bundle.
+4. An interrupted update (the process killed mid-download) resumes on the next start from the staging folder; the old bundle stays untouched until the
+   installer reports success. Check: the stand, a kill by PID, the second start's log and the old bundle's tree hash before/after.
+5. A fresh install with no old bundle downloads every asset through the same path. Check: the stand with an empty game folder.
+6. The launchers already shipped (RC1, RC2) keep a working update path. FORK: options <the volumes stay beside the per-file assets during a transition |
+   the release ships no volumes and the old launcher self-updates first (plan 54 step 2.1)> · price of error <an old launcher finds no parts and cannot
+   update; a double upload costs ≈ 37 min per release> · consulted <recon §5 «Transition», Velopack «1 full + 1 delta per release»>; the volumes also serve the
+   manual download and Nexus — what the release page offers the player is the owner's word (asked when step 5 is reached).
+
+**Steps (the next ones only; the rest are written when these close).**
+
+- [x] 0. 2026-11-21 10:31 +03:00 — reproducible paks: repak_cli 0.2.3 packs on rayon threads in the order they finish (one folder packed three times → three
+      SHA-256; `RAYON_NUM_THREADS=1` → one, at the same speed). `ConanExiles/_config/devkit/repak_tool.py` (`ENV`) passed by the `run()` of `set-pak-modinfo.py`,
+      `set-pak-version.py`, `kit-buildmod.py`, `build-level-mod.py`, `patch-mod-asset.py`; report `testcases/reports/2026-11-21_conan-reproducible-export.md`
+      (R1–R4, N1–N3 pass; `kit-buildmod.py` and `patch-mod-asset.py` owed a run at their next use). RC2's third-party paks were packed on many threads, so the
+      first update after this change downloads them once more. Judge round 1 (0 defects, 3 risks, 5 cosmetic): the env narrowed to `repak pack` and `retoc
+      to-zen` (`env_for`), `make-loc-mod.py` covered, guard `devkit/t_repak_one_thread.py` (red on the pre-fix `make-loc-mod.py`); re-run passed; pack `23e9015`;
+      issue #45 of the public repo filed and commented.
+- [ ] 1. `ConanExiles/_config/release/make_manifest.py <export> --tag <tag> --out <release dir> [--previous <manifest.json>]`: SHA-256 of every file; files
+      under 1 MB in one stored zip `small-<hash16>.zip` written in sorted order with fixed timestamps; files over 2 GiB cut into parts; asset name
+      `<hash16>-<basename reduced to [A-Za-z0-9._-]>`; the assets HARDLINKED from the export (same volume — no second 13.7 GB); `--previous` prints «changed
+      vs <previous>: N files, X MB» and the list. Self-test: two runs on the RC2 bundle → the same `manifest.json`; RC1 vs RC2 → the 74 changed files of
+      today (the guard red on the real broken pair), the 62 third-party paks among them.
+- [ ] 2. `make_release.sh`: after the volumes, `make_manifest.py` into `release/`; SHA256SUMS covers the new assets; the ritual prints the «changed vs» line.
+- [ ] 3. The launcher reads `manifest.json` of the release (its asset `digest` first), hashes the local bundle files (a cache by path · size · mtime in its
+      state folder), plans (hardlink or copy into `<root>.staging` · download the rest), downloads with `Range: bytes=N-` (the signed URL re-asked per resume),
+      verifies every file, renames once, runs the bundle's installer as today; no manifest → today's volume path.
+- [ ] 4. Stand cases of criteria 3–5 with the local feed; frames of the confirmation and the progress at 4K.
+- [ ] 5. The transition fork of criterion 6 → then a real update on a copy of the clean 3.1.1, measured in MB; GitHub issue «Launcher: an update downloads
+      the whole archive» by HOUSE_RULES 44 (filed at step 0).
+
 ## Decisions made without the owner
+
+`[AI]` (phase 6, revisable): repak on one thread rather than a packer of our own (one environment line, proven by R1); the per-file assets are hardlinks of
+the export; the plan writes only steps 0–5 of phase 6.
 
 `[AI]` (revisable, all shown on the mockups): the scan's progress counts drives; several copies are a pick list with version and state; no game → «Указать
 папку игры»; install has no «Отменить» (a half-installed game), download and update do; «Отменить» keeps the downloaded parts; the progress bar sits in the

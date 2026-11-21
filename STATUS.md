@@ -138,6 +138,19 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-21 10:4x — the delta update, plan 57 PHASE 6 (the chat of 10:20 «resume»; the chat of 00:4x did not close — no farewell after the recon).**
+> Step 0 DONE, pack `23e9015` pushed: the cause of the 13.56 GB re-download is repak_cli 0.2.3 packing on rayon threads in finish order (one folder → three
+> SHA-256; one thread → one, same speed); `ConanExiles/_config/devkit/repak_tool.py` `env_for(args)` — one thread for `repak pack` and `retoc to-zen` only
+> (judge round 1: on every child it made `retoc pack-raw` ≈ 4× slower) — passed by the `run()` of six devkit scripts; guard `devkit/t_repak_one_thread.py`.
+> Owed from the judge: `make-info-pak.py` raises AttributeError (fields moved to `krinik_modinfo.py`; older than this, no caller). Step 1 built:
+> `_config/release/make_manifest.py` (per-file manifest, hardlinked assets, parts over 2 GiB, the stored small-files zip, `--previous` → «changed vs»), step 4c of
+> `make_release.sh`, the RC2 manifest kept as the previous one (`published_0_9_1-RC2/manifest.json`, computed from the bundle). Cases
+> `testcases/TC_conan_reproducible_export_2026-11-21.md`, report `testcases/reports/2026-11-21_conan-reproducible-export.md` (partial: R5 at the next release;
+> `kit-buildmod.py` and `patch-mod-asset.py` owed a run at their next use). Issue #45 «Launcher: an update downloads the whole archive…» filed, its first comment
+> (the pak order fixed) posted after the push. The manifest code (`make_manifest.py`, step 4c, the RC2 manifest) is NOT committed — its judge round 1 runs. NEXT: step 3, the
+> launcher reads `manifest.json` (C#, `ConanExiles/_config/launcher/`), then the stand cases with the local feed. RC2's paks are multi-thread packed, so the first
+> manifest update downloads the third-party paks once more. The stand files `KUMM/.work/repro/` (≈ 12 GB of copies, hardlinks and parts) go after the commit.
+>
 > **DONE 2026-11-20 ≈22:0x — the owner's side task of 21:35 (skill packs into KAIF), then RC2 resumes from the line below.** Packs live in `D:/work/ai_sandbox/_tools`,
 > KUMM links to them: superpowers ×5 skills and REA's skill symlinked into `.claude/skills` (`node tools/skill-packs.mjs check` — 10/10 OK), MCP `rea` (6.10.1,
 > Ghidra 12.2) and `context7` at local scope (both «✔ Connected» by `claude mcp get`; their tools load in the NEXT session), KUMM's own `/game-hunt` (Claude-BugHunter's
