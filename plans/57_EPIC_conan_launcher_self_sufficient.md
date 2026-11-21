@@ -204,7 +204,11 @@ has beside the game, verify them, and switch the bundle in one step; an RC-sized
       beside the volumes (`release_checklist.py`, built 16:5x: TODO on the published RC2, which has no manifest — as expected); `make_release.sh` already writes
       both sets into `<work>/release`. Then a real update on a copy of the clean 3.1.1 from the installed RC2 to a locally built next build, measured in MB;
       GitHub issue #45 «Launcher: an update downloads the whole archive» by HOUSE_RULES 44 (filed at step 0).
-- [ ] 6. The first install by the file list (criterion 5, required by answer C): with no installed build the launcher downloads every asset of the list into
+- [ ] 6. CODE PUSHED 2026-11-21 17:4x, pack 65950b9 (judge round 5: 2 defects + 3 nits fixed — the screen and the question name the real size after the check, a stopped first install says so; stand runs 12–13, 13 of 13 PASS). Owed cases: a stop of a first install by the list, a first install that falls back to the volumes. `BuildUpdate.ByManifest` no longer needs an installed build, the space check adds
+      the mods' copy into the game on a first install; no question before a first install (as on the volume path). Stand (`KUMM/.work/delta/r8`): D4b — a
+      first install from zero from a manifest-only release: 8 requests for 7 assets, «из прежних сборок 0», the journal and the uninstaller written; D4a —
+      a reinstall after an uninstall from a release with both sets: only `manifest.json` downloaded (every file from the bundle left in the game, no
+      volume); U-X2, D1, D2 pass. Left: the files-only mode of `make_release.sh` and the guide after the transition release. Was: The first install by the file list (criterion 5, required by answer C): with no installed build the launcher downloads every asset of the list into
       `<bundle>.staging` through the same path (no seeds), verifies, renames, runs the installer; the volumes stay its fallback while they exist. Then the
       files-only release mode of `make_release.sh` (no volume upload; Nexus gets its own archive), the ritual's stage E for a files-only page, the guide's
       manual install rewritten (download the launcher, press «Установить сборку»). Stand: D4 turns into «a first install by the file list» (D4b today

@@ -76,6 +76,18 @@ monitor), its state, TEMP and desktop inside the stand; the owner's `%LOCALAPPDA
    Control: U-X2 on the launcher of run 10 (`KUMM/.work/delta/r6c`) — FAIL «D4b a manifest-only release is refused» (screen `found-nofiles`): the round-4
    finding 1 reproduced; green on the fix (screen `release-bad`). The uninstaller template's missing-engine case `KUMM/.work/uninst/errorlevel.mjs`: red on
    the old template (exit 0, «Готово», the file gone), green on the new (exit 1, the file kept).
+12. 2026-11-21 17:24–17:29 +03:00 — the first install by the file list (plan 57 phase 6 step 6, answer C; D4 rewritten, U-X2 now installs too): D4, U-X2,
+   D2, D1 alone in `KUMM/.work/delta/r8` (17:24 — D4b «8 requests for 7 assets», «из прежних сборок 0», journal and uninstaller written; D4a only
+   `manifest.json`), then the whole set `RUN_DIR=KUMM/.work/delta/r9 bash KUMM/.work/delta/run_r6.sh` (log `KUMM/.work/delta/r9_run.log`): D2, D1, D6, D3,
+   D4, D5a, D5b, D7, D8, D5c, D9, U-X2, U-X — ALL PASS (verdict PASS).
+13. 2026-11-21 17:3x +03:00 — after the judge's round 5 (the first install named «Нужно скачать: 0,1 МБ» and asked nothing; a stopped first install went
+   back to the start screen silently): the screen row «Нужно скачать: лаунчер посчитает, когда сверит файлы», the question `box.delta.install` with the real
+   size after the check (none when nothing downloads), the stop box `u.stopped.install`, the fallback question `box.install.ask.whole`, the log line «по
+   списку файлов: первая установка / обновление поставленной сборки» (U-X2 asserts it and a new uninstaller). `KUMM/.work/delta/r10`: D4, U-X2, D2, D1,
+   D5c PASS; the whole set `KUMM/.work/delta/r11` (log `r11_run.log`): 13 of 13 PASS; the strings after their clean read: D4, U-X2 PASS
+   (`KUMM/.work/delta/r12`) — «Установить сборку 1.0.1? Лаунчер сверил папку игры со списком файлов сборки. Нужно скачать 15,6 МБ (файлов: 12).».
+   Not covered by a case yet: a STOP of a first install by the file list (the box `u.stopped.install`) and a first install that falls back to the volumes
+   (`box.install.ask.whole`).
 
 ## Checks
 

@@ -146,9 +146,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `Unusable` → the volumes on any unusable list (4xx, bad digest, mismatch), the staging's own bytes counted free and removed after «Да», read-only and
 > exFAT bundles, `Pour` progress and stop, the strings by the clean reads, the ritual's stage E checks the per-file set and the kept manifest's digest;
 > bug 115 / issue #46 (commented): `Describe` AND `Installed` need the journal, the leftover removed, the uninstaller template `if %errorlevel% neq 0`.
-> Stand run 11 (D1–D9, D5c, U-X2, U-X; report `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`). NEXT: plan 57 phase 6 step 6 — the first
-> install by the file list (then the files-only mode of `make_release.sh`, the guide's manual install, D4 rewritten); step 5's real update on a copy of the
-> clean 3.1.1; step 7 is a measurement at the next big-mod update. Also done: the claim guard reads «+03:00» as a zone (`tools/check-claim-before-evidence.mjs`,
+> Stand run 11 (D1–D9, D5c, U-X2, U-X; report `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`). **Pack `65950b9` PUSHED — the first
+> install by the file list** (plan 57 phase 6 step 6; judge round 5: 2 defects + 3 nits fixed; the strings by a clean read; runs 12–13, 13 of 13 PASS;
+> owed cases D4c a stopped first install, D4d a first install falling back to the volumes). **NEXT — RC3** (the owner 17:26 «RC3 скоро?»; the answer in
+> chat named the path): build RC3 locally by `make_release.sh` (both sets), the real check on a copy of the clean 3.1.1 by the player's path (RC2 → RC3
+> update and a first install from zero, measured in MB), the release ritual (RC3 everywhere, the notes, the guide, the README, the LAUNCHER NUMBER UP so
+> the RC1 / RC2 launchers offer their self-update), publication only by the owner's word. The RC2 → RC3 update still downloads the third-party paks
+> once more (≈ 13 GB: RC2 was packed on many threads); from RC3 on only the difference. Asked the owner whether RC3 takes mod fixes too — no answer yet.
+> Later: the files-only mode of `make_release.sh` and the guide's manual install (after the transition release); step 7 is a measurement at the next
+> big-mod update. Also done: the claim guard reads «+03:00» as a zone (`tools/check-claim-before-evidence.mjs`,
 > 310/310, judged in round 4); `make-info-pak.py` removed (pack `e41dfd0`); D6 waits for the new launcher (pack `e6b4243` — a stand launcher had stayed
 > running). The stand folders and `.work/repro` removed 17:2x (≈ 10 GB); the runners `.work/delta/run_r6.sh` and `.work/uninst/errorlevel.mjs` stay.
 >
