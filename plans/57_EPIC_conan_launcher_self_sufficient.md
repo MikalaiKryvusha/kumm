@@ -165,13 +165,19 @@ has beside the game, verify them, and switch the bundle in one step; an RC-sized
       first update after this change downloads them once more. Judge round 1 (0 defects, 3 risks, 5 cosmetic): the env narrowed to `repak pack` and `retoc
       to-zen` (`env_for`), `make-loc-mod.py` covered, guard `devkit/t_repak_one_thread.py` (red on the pre-fix `make-loc-mod.py`); re-run passed; pack `23e9015`;
       issue #45 of the public repo filed and commented.
-- [ ] 1. `ConanExiles/_config/release/make_manifest.py <export> --tag <tag> --out <release dir> [--previous <manifest.json>]`: SHA-256 of every file; files
+- [x] 1. DONE 2026-11-21 11:10 — pack `d85e388`: self-test `t_make_manifest.py` 20 / 20 (red on three mutations), the real bundles: two runs equal, RC1 → RC2
+      stopped by the guard on 62 unexpected paks; judge 2 rounds (round 1: 1 defect fixed; round 2: 0 defects). The first release after it needs
+      `ConanExiles/_config/release/draft_0_9_1/changed_paks_<v>.txt` with «pack/src/*  # RC2 was packed on many threads» (RC2's paks differ byte-wise).
+      `ConanExiles/_config/release/make_manifest.py <export> --tag <tag> --out <release dir> [--previous <manifest.json>]`: SHA-256 of every file; files
       under 1 MB in one stored zip `small-<hash16>.zip` written in sorted order with fixed timestamps; files over 2 GiB cut into parts; asset name
       `<hash16>-<basename reduced to [A-Za-z0-9._-]>`; the assets HARDLINKED from the export (same volume — no second 13.7 GB); `--previous` prints «changed
       vs <previous>: N files, X MB» and the list. Self-test: two runs on the RC2 bundle → the same `manifest.json`; RC1 vs RC2 → the 74 changed files of
       today (the guard red on the real broken pair), the 62 third-party paks among them.
-- [ ] 2. `make_release.sh`: after the volumes, `make_manifest.py` into `release/`; SHA256SUMS covers the new assets; the ritual prints the «changed vs» line.
-- [ ] 3. The launcher reads `manifest.json` of the release (its asset `digest` first), hashes the local bundle files (a cache by path · size · mtime in its
+- [x] 2. DONE in pack `d85e388` — `make_release.sh` step 4c (`--part-size RELEASE_PART`, `--previous-from`, `--allow-changed`); SHA256SUMS (step 6) covers the
+      new assets. Owed: the ritual's stage E checks `manifest.json` among the published assets and keeps it in `published_<v>/`.
+- [ ] 3. BUILT 2026-11-21 11:1x, NOT committed (judge round 1 running): `ConanExiles/_config/launcher/KrinikConanDelta.cs` + `BuildUpdate.RunByManifest`, the
+      question with the real size after the check (`box.delta.ask`), «Нет» → back with no error; stand D1 19 / 19 and D2 7 / 7 pass
+      (`testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`). The launcher reads `manifest.json` of the release (its asset `digest` first), hashes the local bundle files (a cache by path · size · mtime in its
       state folder), plans (hardlink or copy into `<root>.staging` · download the rest), downloads with `Range: bytes=N-` (the signed URL re-asked per resume),
       verifies every file, renames once, runs the bundle's installer as today; no manifest → today's volume path.
 - [ ] 4. Stand cases of criteria 3–5 with the local feed; frames of the confirmation and the progress at 4K.

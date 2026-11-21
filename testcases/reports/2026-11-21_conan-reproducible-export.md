@@ -41,6 +41,12 @@ The game was not running; nothing was written under a game folder.
    `env_for` on nine commands, R2 / R4 / N2 again (`run_r2.sh`, its old first form of R3 still inside and still «DIFFERS» — the script's overall FAIL comes from that line
    only), N1b the gameplay pak twice; G4 the guard on the pre-fix `make-loc-mod.py` (`git show HEAD:…` into `repro/guard_red`).
 
+10. 2026-11-21 10:54:54–10:57:14 +03:00 — after the manifest judge's round 1 (1 defect, 6 risks, 5 cosmetic; `make_manifest.py` rewritten: the check-only estimate
+    counts the group, the previous release picked by version, paths compared case-insensitively, stale assets removed, the BOM accepted, the parts read back,
+    the zip attributes set, THE GUARD: an unexpected third-party pak stops the run; `make_release.sh` 4c uses `--previous-from` / `--allow-changed`, logs stderr;
+    the RC2 manifest rewritten files-only): `bash KUMM/.work/repro/run_round3.sh` (log `run_round3.log`) — S the new self-test
+    `ConanExiles/_config/release/t_make_manifest.py`, M1, M2, M2b, M4.
+
 ## Checks
 
 - **Hygiene:** N1 — 93 devkit scripts parse, 0 failed.
@@ -64,6 +70,11 @@ The game was not running; nothing was written under a game folder.
 | M1 | pass | two runs on the RC2 bundle: `manifest.json` byte-equal, 73 / 73 assets equal; 188 files hashed in 8–11 s (1.2–1.7 GB/s) |
 | M2 | pass | «changed vs 0.9.1-RC1: 74 files, 13592.8 MB to download»; from the manifests: 62 third-party paks / 13.56 GB + 12 files / 37.3 MB — the recon's numbers, the guard red on the real broken pair |
 | M3 | pass | `7z t`: 118 files, 10 567 307 B |
+| S (round 3) | pass | `t_make_manifest.py` 14 / 14: determinism, parts at PART / 2·PART+1, the group's members, the check-only group estimate, a case-only rename, stale assets, a BOM, the previous by release order (RC2 < RC3 < RC10 < final), the guard red / allowed / Krinik exempt. Two of my own case expectations were wrong on the first runs (the MB rounding of a 238 B group, then the OLD group's size instead of the new one) — the code was right, the expectations were rewritten with the reason in the case |
+| M1 (round 3) | pass | two runs on RC2: `manifest.json` and 73 / 73 files equal; 72 assets (69 hardlinks, 2 parts, the group `small-b7ab3639…` — a new hash since the zip attributes are set explicitly) |
+| M2 (round 3) | pass | RC1 → RC2 with no allow file: «changed vs 0.9.1-RC1: 74 files, 13603.4 MB (13603380277 B)», `[fail] 62 third-party pak(s)`, 62 «NOT EXPECTED» lines, exit 1 — the guard stops on the real broken pair; the estimate now carries the 10.6 MB group |
+| M2b (round 3) | pass | the same with `pack/src/*   # …` in the allow file: 62 «[allowed: …]» lines, exit 0 |
+| M4 (round 3) | pass | the real step 4c: «previous manifest: …published_0_9_1-RC2\manifest.json» picked by version for 0.9.1-RC3, «changed vs 0.9.1-RC2: 1 files, 10.6 MB (10588533 B; added 1)» — the launcher's marker, not a pak; exit 0 |
 | M4 | pass | the step found `published_0_9_1-RC2/manifest.json`; «changed vs 0.9.1-RC2: 1 files, 10.6 MB (added 1)» — the launcher's marker `pack/.krinik_unpacked`, present in the stand bundle only; exit 0 |
 
 Not run functionally: `kit-buildmod.py` (needs the kit cook) and `patch-mod-asset.py` (the KRINIK MODIFIED builder) — the same one-line `env=` change as the
@@ -76,6 +87,11 @@ three twins above; both are owed a run at their next use.
    fixed by `env_for`; `make-loc-mod.py` packed without it — fixed and the class guarded; `make-info-pak.py` cannot run since `KRINIK_NOTE` / `KRINIK_AUTHOR` /
    `NEXUS` moved to `krinik_modinfo.py` (an AttributeError before any repak call; older than this change, the script has no caller) — owed; four comment
    overclaims fixed; `build-level-mod.py`'s `setdefault` kept with a comment (no caller passes its own env).
+1b. The manifest judge's round 1 (1 defect, 6 risks, 5 cosmetic), each checked against the code: DEFECT — `--check-only --previous` left the group out of
+   the estimate (13592.8 MB printed vs 13603.4 MB) — fixed (the group is built in a temp folder); risks fixed — the previous manifest by file date (now by
+   version), case-sensitive paths, stale assets on a rerun, the guard that only printed (now exit 1), the group entries' root (the contract written), a BOM;
+   cosmetic fixed — comments, the never-copying `link`, the asset counts and the per-path estimate, the inconsistent RC2 manifest (now files-only), stderr
+   missing from the log. Round 2 — running.
 2. My case R3 named the wrong original (`_workshop` instead of `_krinik-modified`) — corrected in the run, no defect of the code.
 3. Consequence for the players: RC2's third-party paks were packed on many threads, so the first update after this change still downloads them once
    (≈ 13.6 GB); from then on only changed files.
