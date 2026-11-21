@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0596 · 2026-11-21 · ❌→✅ · #launcher #hardlink #ntfs #delta-update #conan #judge
+class: shared-state-two-owners
+**Context:** the delta update builds the new bundle from the old one by hardlinks (no second 13.7 GB on disk).
+**Tried / did:** the judge (round 1) traced every writer into a bundle: the archive `Unpack` opened its target with `FileMode.Create` — a truncate of THE SAME file.
+**Result:** ❌ a later archive install over a hardlinked bundle would have rewritten (or, on a stop, truncated) the old bundle's files too; NTFS also updates the
+other link's directory entry lazily, so a cache keyed by the enumerated size and time could keep the old hash → ✅ delete-then-create in `Unpack`,
+`FileInfo.Refresh()` in the cache.
+**Lesson:** once files are shared by hardlinks, every writer into either tree must delete-then-create (or tmp + move), never write in place; read size and
+time from the file, not from the directory listing.   → link: plans/57 phase 6 · ConanExiles/_config/launcher/KrinikConanDelta.cs
+**Repro:** `grep -n "FileMode.Create\|FileMode.Open.*Write\|FileMode.Append" ConanExiles/_config/launcher/*.cs` — each hit writing into a bundle path must follow a `File.Delete`.
+**Trigger:** introducing hardlinks between two trees → list every writer of both trees before the first link.
+**Not for:** downloads into the private `.dl` folder (never linked from an old tree).
+
 ### EXP-0595 · 2026-11-21 · ❌→✅ · #repak #retoc #reproducible #release #delta-update #conan #pak
 class: wrong-model-of-the-cost
 **Context:** the launcher's RC1 → RC2 update downloaded 12.8 GB while 12 files / 37.3 MB changed; 62 third-party paks were byte-different with equal content.
