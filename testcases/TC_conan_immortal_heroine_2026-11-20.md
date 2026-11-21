@@ -1,7 +1,8 @@
 # TC — enemies deal no damage to the heroine (issue #6)
 
 > **Created:** 2026-11-20 · **Parent:** issue #6 (the owner's play of 0.9.1-RC1, 2026-11-20 ≈18:3x), plan 59 step 5
-> **Status:** written 2026-11-20 20:13 — run 20:14–20:20: G0 fail, G2 pass, G3 pass, G1 and N1 not run; report `testcases/reports/2026-11-20_conan-immortal-heroine-save.md`
+> **Status:** written 2026-11-20 20:13 — run 20:14–20:20: G0 fail, G2 pass, G3 pass, G1 and N1 not run; report `testcases/reports/2026-11-20_conan-immortal-heroine-save.md` ·
+> 2026-11-21 22:16: G1 pass as R6 of the RC3 retest (issue #6 closed); N1 still not run
 > **Outbound:** the result goes to issue #6 as a comment
 
 ## Test basis
