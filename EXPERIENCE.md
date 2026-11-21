@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0602 · 2026-11-21 · ❌ · #launcher #powershell #encoding #installer #conan #s3
+class: shell-lied
+The first install of the published 0.9.1-RC3 (case P1, 22:01) ended its install stage at «модов в строках установщика 72 из 74» while `install.ps1` said «74/74 mods»:
+Windows PowerShell 5.1 writes a redirected stdout in the console code page, so the em dash of «MSCasaDesFlores — Weapons & Armors» / «— Nails Station» arrives
+as «-», and `RunInstaller` (KrinikConanUpdates.cs) compares the names verbatim. Lesson: a reader of another process's redirected output compares names
+after folding the dashes and quotes the code page can lose (or sets UTF-8 on both ends); a non-ASCII mod name is a test row.
+**Repro:** `node KUMM/.work/rc3_fresh/mods_unseen.mjs <bundle>/pack/modpack.json <launcher log>` prints the two unseen names.
+none-cheap: one defect, the fix and its stand row ride with the next launcher change (issue filed).
+
 ### EXP-0601 · 2026-11-21 · ❌→✅ · #powershell #cmd #path #machine #elevated #s1
 class: environment-assumed-not-probed
 **Context:** installing RC2 into a test copy: `Push-Location <bundle>; cmd.exe /d /s /c "install.cmd `"<game>`" < nul"` in the PowerShell tool.

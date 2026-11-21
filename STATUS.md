@@ -145,15 +145,29 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **issues #45 and #46 CLOSED**, bug 115 DONE; the public ban list fixed (EXP-0600); **incident S1 bugs/116** (the machine PATH cut by nvm's `install.cmd`,
 > restored, guard `tools/hooks/no-bare-cmd-script.mjs`, machine NVM_HOME / NVM_SYMLINK removed on the owner's word); HOUSE_RULES 14.1.
 > **Owner's errand:** delete `D:\PATH.txt` and `D:\settings.txt` (nvm's output; the harness refuses removal under a drive root) — asked in chat 21:28.
+> The owner allowed it in chat 21:46; `rm /d/PATH.txt` was still refused 21:46 by Claude Code's BUILT-IN safety check (a drive root counts as a critical
+> directory; only a person's approval in its own prompt passes, a chat word does not) — not worked around; the two files stay for the owner's own hand.
 >
-> **FIRST in the next chat — a first install from zero by the file list from the PUBLISHED release** (the owner 21:28: in a new chat):
-> 1. The copy `KUMM/.work/rc1_install/Conan_311` is a clean 3.1.1 now (RC3 uninstalled 21:22) with the bundle folders `Krinik_Mod_Pack_0_9_1_RC2` and
->    `…_RC3` inside it — remove both by `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs <dir>` (alone in its call), so nothing is reused.
-> 2. Download the launcher as a player does (`gh release download v0.9.1-RC3 --pattern KrinikConanLauncher.exe` into a new folder inside the copy) and
->    drive it on the REAL feed with the stand's environment — model: `KUMM/.work/rc3/realcheck_github.mjs` (state, TEMP, desktop, search roots, Steam;
->    no `KRINIK_LAUNCHER_FEED`); press «Установить сборку» → the box names the size → «Да» → «сборка 0.9.1-RC3 поставлена»; no volume; ≈ 13 GB from
->    GitHub (D: 33.6 GB free at 21:22). Machine lock `kumm`; a run report; start every `.cmd` by its FULL path (bugs/116, the guard refuses bare names).
-> 3. Then: the owed cases D4c / D4d, plan 57 step 8 risks R1 / R2, step 7 (measure chunking at the next big-mod update), the files-only release mode.
+> **DONE 2026-11-21 22:02 +03:00 (the chat of 21:33, `resume`) — the first install from zero of the PUBLISHED 0.9.1-RC3 by its file list PASSES** (case P1 of
+> `testcases/TC_conan_launcher_delta_update_2026-11-21.md`, report `testcases/reports/2026-11-21_conan-rc3-first-install-from-zero.md`): the launcher asset
+> (SHA-256 = `SHA256SUMS.txt`) in `Conan_311/Krinik_Launcher/` → `found-nofiles` → the box «Нужно скачать 12,8 ГБ (файлов: 186)» → «Да» → 21.2 min from GitHub,
+> no volume → «сборка 0.9.1-RC3 поставлена» → the bundle launcher on `installed` (frame looked at). The copy now HOLDS RC3 installed. Found S3: the install
+> row ends at «72 из 74» (em dash lost by PowerShell 5.1's redirected output — EXP-0602; issue to file, the fix with the next launcher change).
+> The EMPTY folder `Conan_311/Krinik_Mod_Pack_0_9_1_RC2` stays: `rm-tree` EBUSY, no process names it in its command line; hypothesis — a still-open older
+> Claude chat whose session cwd sits there (this session's primary working directory moved with a `cd`: keep `cd` out of stand folders);
+> `winget install Microsoft.Sysinternals.Handle` refused by the auto-mode classifier, not worked around. Still owed from the launcher list: the cases D4c / D4d,
+> plan 57 step 8 risks R1 / R2, step 7, the files-only release mode.
+>
+> **NEXT after P1 — the 11 open `critical` issues of the public tracker** (43 open in all, counted 21:49; the owner asked 21:47 «будем сборку конана
+> дальше фиксить?»). Ranked by: what the player loses (crash > freeze / dead end > broken mechanic > dead button > slowness) · how many players meet it ·
+> a workaround · the cost to close (fixed-and-only-retest goes first, in a batch). The order told to the owner 21:49:
+> 1. ONE game session on RC3 — in the working build `D:\Games\Conan Exiles 3.1.1` (pack_version 0.9.1-RC3 + the dev remote the stand needs; its shipped
+>    files first compared by hash with the published RC3 now installed in `Conan_311`): retest the fixed ones by the player's path — #6 no damage (cause: the save kept my god mode,
+>    entry guard `29a612b`), #11 «Начать путешествие», #12 map markers, #33 journeys locked, #35 hub at the Esc menu's time (judge owed) — close what passes
+>    (HOUSE_RULES 44.4); in the same session the waystone and dungeon cases of #21 (bug 79) and a watch for the bow-kill crash #24.
+> 2. Repair: #24 the bow-kill crash (bug 85: five Lua key binds left in KrinikConanUI) → #21 if it repeats → #41 Esc over other mods' windows (bug 108, needs a
+>    non-Lua path) → #30 bow sprint cases S8 / S9 (bug 93) → #23 the map stuck without the hub tabs (bug 84, not reproduced: hunt first). #43 the slow
+>    launcher (bug 110) waits for the owner's eye. Then the 32 non-critical by the same test.
 >
 > The closed entries of 2026-11-20 22:07 – 2026-11-21 12:29 (RC2 built and published, the delta update recon, steps 0–3, the round-2 items) —
 > chronicle, entry «STATUS bonsai trim, part 10».
