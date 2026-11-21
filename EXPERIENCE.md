@@ -101,6 +101,7 @@ verdict paragraph, so «0 owed» and «one wait» read as debts → ✅ the note
 writing to it.   → link: ConanExiles/_config/release/release_checklist.py REVIEW_OWED
 **Trigger:** writing a «review:» line or note that the release ritual will read.
 **Not for:** a verdict that really owes work — there the debt word is the point.
+none-cheap: the gate prints the commit as owed at once; reading its one regex before writing a note costs less than a guard
 
 ### EXP-0598 · 2026-11-21 · ❌→✅ · #launcher #uninstall #state-marker #conan
 class: wrong-state-marker
@@ -113,6 +114,7 @@ uninstaller is removed on the window's exit. Stand case U-X: red on the old exe,
 state change itself removes or writes, atomically with the change.   → link: bugs/115_conan_launcher_installed_after_uninstall_window_closed.md
 **Trigger:** a state is detected by the presence of a script, a lock or a temp file that is cleaned up «at the end».
 **Not for:** markers written and removed by the same atomic step (a rename of a finished folder).
+mechanized: stand cases U-X and U-X2 (ConanExiles/_config/launcher/test/live.mjs mode uninstall, delta --leftover)
 
 ### EXP-0597 · 2026-11-21 · ❌→✅ · #stand #test-driver #launcher #delta-update #conan
 class: wrong-side-blamed
@@ -125,6 +127,7 @@ rejects on its plate offers no install button (the case pressed it), a launcher 
 from memory of the product fails where the product is better than remembered.   → link: testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md run 8
 **Trigger:** the first run of a freshly written stand case goes red.
 **Not for:** a case that was green before a product change — there the change is the first suspect.
+subject-lesson
 
 ### EXP-0596 · 2026-11-21 · ❌→✅ · #launcher #hardlink #ntfs #delta-update #conan #judge
 class: shared-state-two-owners
@@ -138,6 +141,7 @@ time from the file, not from the directory listing.   → link: plans/57 phase 6
 **Repro:** `grep -n "FileMode.Create\|FileMode.Open.*Write\|FileMode.Append" ConanExiles/_config/launcher/*.cs` — each hit writing into a bundle path must follow a `File.Delete`.
 **Trigger:** introducing hardlinks between two trees → list every writer of both trees before the first link.
 **Not for:** downloads into the private `.dl` folder (never linked from an old tree).
+mechanized: Delta.Replace / Delta.Erase — every write into the staging is delete-then-create (packs 6dc79ee, 4da1a28)
 
 ### EXP-0595 · 2026-11-21 · ❌→✅ · #repak #retoc #reproducible #release #delta-update #conan #pak
 class: wrong-model-of-the-cost
