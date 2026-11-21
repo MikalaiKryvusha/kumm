@@ -169,7 +169,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > with this launcher: `rm` done → after the judge: `git notes append -m "review: 1 round — …" 6891744` + push notes → `bash KUMM/.work/rc3/run_release.sh`
 > (the waiver file is there) → `bash KUMM/.work/rc3/regen_readme.sh` → commit README → the real check on `KUMM/.work/rc1_install/Conan_311` (clean game +
 > the RC2 bundle folder: RC2's `install.cmd "<copy>" < nul`, then the 1.1.0 launcher against a local `feed.mjs --build 0.9.1-RC3 --assets <release>
-> --parts <release> --launcher 1.1.0 --exe <release exe>`, measured in MB). Owed: the driver's own asserts of the space line (D1, D7). **Asked the owner 17:42: the play gate for RC3 — his waiver or my hour of play (no mod changed, only the launcher)** — `make_release.sh` waits
+> --parts <release> --launcher 1.1.0 --exe <release exe>`, measured in MB). Owed: the driver's own asserts of the space line (D1, D7).
+> **18:55 — RC3 REBUILT with the launcher of `6891744`** (judge 1 round: 0 defects, note on the commit; the ritual 0 TODO): `KUMM/.work/rc3_release/release`
+> (OK, «changed vs 0.9.1-RC2: 71 files, 13603.4 MB», 72 assets + manifest; `check` and the export removed, D: 39.6 GB free; README unchanged). The real check
+> STARTED: RC2's own `install.cmd` into `KUMM/.work/rc1_install/Conan_311` (the copy was clean with the bug-115 leftover uninstaller; desktop =
+> `KUMM/.work/rc3/desk`; log `.work/rc3/logs/rc2_install.log`; machine lock `kumm`). Next: the RC2 launcher of the copy (its bundle folder) against a local
+> `feed.mjs` serving `release/` (build + launcher 1.1.0) → the plate «Вышел лаунчер 1.1.0» → «Обновить лаунчер» → «Обновить сборку» → the update by files,
+> measured (requests, MB, minutes), the game's files vs the manifest; then uninstall and a first install from zero (move the bundles out); a run report. **Asked the owner 17:42: the play gate for RC3 — his waiver or my hour of play (no mod changed, only the launcher)** — `make_release.sh` waits
 > on it. Then the real check on the copy, the ritual `--published`, publication only by his word. Plan before RC3 — (the owner 17:26 «RC3 скоро?»; the answer in
 > chat named the path): build RC3 locally by `make_release.sh` (both sets), the real check on a copy of the clean 3.1.1 by the player's path (RC2 → RC3
 > update and a first install from zero, measured in MB), the release ritual (RC3 everywhere, the notes, the guide, the README, the LAUNCHER NUMBER UP so
