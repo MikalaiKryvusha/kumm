@@ -41,7 +41,13 @@ the owner's screen (child of the cmd).
    `where powershell`, `where gh`, `where node` resolve.
 4. Notepad (PID 33916) closed by PID.
 
-## Leftovers — the auto-mode classifier refused their removal; they wait for the owner's word
+## Leftovers — resolved 2026-11-21 21:28 on the owner's word «даю разрешение» (21:27)
+
+- Machine `NVM_HOME` and `NVM_SYMLINK` REMOVED 21:28 (read back: absent; the user variables of the same names untouched; WM_SETTINGCHANGE broadcast).
+- `D:\PATH.txt`, `D:\settings.txt` — the harness refuses any removal under a drive root («This path is protected from removal»); not worked around; the
+  owner was asked to delete the two files himself. Copies stay in `.work/path_incident/`.
+
+The original list (as it stood before the owner's word):
 
 - Machine variables `NVM_HOME` (empty string) and `NVM_SYMLINK` (`C:\Program Files\nodejs`): harmless — the user variables of the same names override them;
   whether they existed in the machine scope before 20:38 is not known.

@@ -138,29 +138,22 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **NOW 2026-11-21 20:3x — the chat of 20:02 (resume): the RC3 PUBLICATION IS DONE** (the owner 19:07 «гоу, релиз», 20:18 «да, публикуй»; chronicle entries
-> 2026-11-21 20:18 and «STATUS bonsai trim, part 12» — the CHAT CLOSED block of the chat of 16:34, verbatim).
-> - **v0.9.1-RC3** published 20:29 by the gh run of 19:09 (it outlived the chat): Latest, 83 assets, every GitHub digest = the local SHA-256 (`KUMM/.work/rc3/
->   remote_sha256.txt` vs `local_sha256.txt`); the body replaced 20:30 by the corrected notes (two clean-read rounds; review page 95); read back on GitHub.
-> - **launcher-v1.1.0** published 20:31 (`--latest=false`, the RC3 exe `d49c710b…`): the public feed lists RC3 (game marker), launcher 1.1.0, RC2, RC1.
-> - Ritual `release_checklist.py --published`: 0 TODO, stage E OK ×4; kept in the pack `published_0_9_1-RC3/` (notes = live body, both bodies as published),
->   pack `30df549`. Issues #45, #46 commented «вошло в 0.9.1-RC3», still OPEN until my retest on the published release. `KUMM/.work/rc3_release` removed (27.5 GB).
-> - Found and fixed: the public ban list never matched a Russian word (JS `\b`, EXP-0600); our comments on #6 and #46 edited; the live re-scan is clean.
-> - The guide source carries the corrected RC3 lines; the RC3 archive's guide PDF keeps the old wording until the next release.
+> **CHAT CLOSED 2026-11-21 ≈21:3x (the chat of 20:02, `resume`: finish the RC3 publication; soft closure on the owner's word 21:28 «давай в новом чате»).
+> Its detail — chronicle, entry «STATUS bonsai trim, part 13»; the owner's words — entries 2026-11-21 20:18, 20:50–21:00, 21:27–21:28.**
+> Done: **0.9.1-RC3 PUBLISHED** (Latest, 83 assets verified by SHA-256, the body corrected on the owner's «да, публикуй»); **launcher-v1.1.0** published;
+> ritual `--published` 0 TODO; **retested on the published release** (report `testcases/reports/2026-11-21_conan-rc3-published-retest.md`, P0–P4 pass) —
+> **issues #45 and #46 CLOSED**, bug 115 DONE; the public ban list fixed (EXP-0600); **incident S1 bugs/116** (the machine PATH cut by nvm's `install.cmd`,
+> restored, guard `tools/hooks/no-bare-cmd-script.mjs`, machine NVM_HOME / NVM_SYMLINK removed on the owner's word); HOUSE_RULES 14.1.
+> **Owner's errand:** delete `D:\PATH.txt` and `D:\settings.txt` (nvm's output; the harness refuses removal under a drive root) — asked in chat 21:28.
 >
-> **DONE 21:23 — the retest on the PUBLISHED release** (report `testcases/reports/2026-11-21_conan-rc3-published-retest.md`, cases
-> `testcases/TC_conan_rc3_published_retest_2026-11-21.md` P0–P4 pass): the RC2 launcher 1.0.0 (the v0.9.1-RC2 asset) read the real GitHub feed, updated itself
-> from `launcher-v1.1.0`, then updated the build RC2 → RC3 by the file list from GitHub (70 files, 12.7 GB, 21.0 min, no volume, 117 files from the old
-> bundle); the uninstall window closed by its X → «Установить сборку», the leftover removed (7 / 7). **Issues #45 and #46 CLOSED** with these observations;
-> bug 115 DONE. Lock released 21:22. **Incident 20:38 (S1, bugs/116):** nvm's `install.cmd` ran by its bare name and cut the machine PATH; restored 20:50,
-> verified; guard `tools/hooks/no-bare-cmd-script.mjs` (3 judge rounds, KUMM `79b6c81f`); leftovers waiting for the owner's word: machine `NVM_HOME`
-> (empty), `NVM_SYMLINK`, `D:\PATH.txt`, `D:\settings.txt`. HOUSE_RULES 14.1 (answer «what are you working on» by the task first).
->
-> **NEXT:**
-> 1. A first install from zero by the file list from the published release on the copy (`KUMM/.work/rc1_install/Conan_311` holds RC3 uninstalled → a clean
->    game with the RC2 and RC3 bundle folders beside it; remove the bundle folders first, or install from a fresh copy), the drivers `KUMM/.work/rc3/realcheck_github.mjs`
->    (feed and stand env) and `ConanExiles/_config/launcher/test/live.mjs`; machine lock `kumm`; a run report.
-> 2. Then: the owed cases D4c / D4d, plan 57 step 8 risks R1 / R2, step 7 (measure chunking at the next big-mod update), the files-only release mode.
+> **FIRST in the next chat — a first install from zero by the file list from the PUBLISHED release** (the owner 21:28: in a new chat):
+> 1. The copy `KUMM/.work/rc1_install/Conan_311` is a clean 3.1.1 now (RC3 uninstalled 21:22) with the bundle folders `Krinik_Mod_Pack_0_9_1_RC2` and
+>    `…_RC3` beside it — remove both by `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs <dir>` (alone in its call), so nothing is reused.
+> 2. Download the launcher as a player does (`gh release download v0.9.1-RC3 --pattern KrinikConanLauncher.exe` into a new folder inside the copy) and
+>    drive it on the REAL feed with the stand's environment — model: `KUMM/.work/rc3/realcheck_github.mjs` (state, TEMP, desktop, search roots, Steam;
+>    no `KRINIK_LAUNCHER_FEED`); press «Установить сборку» → the box names the size → «Да» → «сборка 0.9.1-RC3 поставлена»; no volume; ≈ 13 GB from
+>    GitHub (D: 33.6 GB free at 21:22). Machine lock `kumm`; a run report; start every `.cmd` by its FULL path (bugs/116, the guard refuses bare names).
+> 3. Then: the owed cases D4c / D4d, plan 57 step 8 risks R1 / R2, step 7 (measure chunking at the next big-mod update), the files-only release mode.
 >
 > The closed entries of 2026-11-20 22:07 – 2026-11-21 12:29 (RC2 built and published, the delta update recon, steps 0–3, the round-2 items) —
 > chronicle, entry «STATUS bonsai trim, part 10».

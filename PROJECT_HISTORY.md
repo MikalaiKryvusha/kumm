@@ -1,5 +1,36 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-21 21:3x +03:00 — STATUS bonsai trim, part 13: the NOW and DONE blocks of the chat of 20:02 (the RC3 publication, the retest, incident 116), moved verbatim at its closure
+
+> **NOW 2026-11-21 20:3x — the chat of 20:02 (resume): the RC3 PUBLICATION IS DONE** (the owner 19:07 «гоу, релиз», 20:18 «да, публикуй»; chronicle entries
+> 2026-11-21 20:18 and «STATUS bonsai trim, part 12» — the CHAT CLOSED block of the chat of 16:34, verbatim).
+> - **v0.9.1-RC3** published 20:29 by the gh run of 19:09 (it outlived the chat): Latest, 83 assets, every GitHub digest = the local SHA-256 (`KUMM/.work/rc3/
+>   remote_sha256.txt` vs `local_sha256.txt`); the body replaced 20:30 by the corrected notes (two clean-read rounds; review page 95); read back on GitHub.
+> - **launcher-v1.1.0** published 20:31 (`--latest=false`, the RC3 exe `d49c710b…`): the public feed lists RC3 (game marker), launcher 1.1.0, RC2, RC1.
+> - Ritual `release_checklist.py --published`: 0 TODO, stage E OK ×4; kept in the pack `published_0_9_1-RC3/` (notes = live body, both bodies as published),
+>   pack `30df549`. Issues #45, #46 commented «вошло в 0.9.1-RC3», still OPEN until my retest on the published release. `KUMM/.work/rc3_release` removed (27.5 GB).
+> - Found and fixed: the public ban list never matched a Russian word (JS `\b`, EXP-0600); our comments on #6 and #46 edited; the live re-scan is clean.
+> - The guide source carries the corrected RC3 lines; the RC3 archive's guide PDF keeps the old wording until the next release.
+>
+> **DONE 21:23 — the retest on the PUBLISHED release** (report `testcases/reports/2026-11-21_conan-rc3-published-retest.md`, cases
+> `testcases/TC_conan_rc3_published_retest_2026-11-21.md` P0–P4 pass): the RC2 launcher 1.0.0 (the v0.9.1-RC2 asset) read the real GitHub feed, updated itself
+> from `launcher-v1.1.0`, then updated the build RC2 → RC3 by the file list from GitHub (70 files, 12.7 GB, 21.0 min, no volume, 117 files from the old
+> bundle); the uninstall window closed by its X → «Установить сборку», the leftover removed (7 / 7). **Issues #45 and #46 CLOSED** with these observations;
+> bug 115 DONE. Lock released 21:22. **Incident 20:38 (S1, bugs/116):** nvm's `install.cmd` ran by its bare name and cut the machine PATH; restored 20:50,
+> verified; guard `tools/hooks/no-bare-cmd-script.mjs` (3 judge rounds, KUMM `79b6c81f`); leftovers waiting for the owner's word: machine `NVM_HOME`
+> (empty), `NVM_SYMLINK`, `D:\PATH.txt`, `D:\settings.txt`. HOUSE_RULES 14.1 (answer «what are you working on» by the task first).
+
+## 2026-11-21 21:27–21:28 +03:00 — the owner: the incident leftovers removed, the first install from zero in a new chat (recorded 21:28)
+
+> (21:27) пустая системная переменная NVM_HOME и системная NVM_SYMLINK; файлы D:\PATH.txt и D:\settings.txt. — lf. hfphtitybt
+>
+> (21:28) даю разрешение
+>
+> (21:28) [quoting my line «Следующий шаг по STATUS — первая установка сборки с нуля …»] давай в новом чате
+
+«lf. hfphtitybt» is «даю разрешение» typed in the Latin layout. Done on his words: the machine `NVM_HOME` and `NVM_SYMLINK` removed (bugs/116); the two
+files under `D:\` are refused by the harness's drive-root protection — asked of him. The chat closed by `/end-chat-soft` (his closing word).
+
 ## 2026-11-21 20:50–21:00 +03:00 — the owner: «над чем работаешь?» asked three times (recorded 21:08)
 
 > (20:50) yfl xtv hf,jnftim&
