@@ -1,7 +1,9 @@
 # Research — the launcher's delta update: download only what changed
 > **Created:** 2026-11-21 · on the owner's words 2026-11-21 00:28–00:30 («для такого мелко обновления нужно все 13 гигов перекачивать?????? что за бред» · «нужно делать умную систему» · «гугли как такое делают»)
 > **Parent:** the RC1 → RC2 update test (KUMM testcases/reports/2026-11-21_conan-launcher-update-rc1-rc2.md)
-> **Status:** recon written 2026-11-21; no code yet
+> **Status:** recon written 2026-11-21 00:45; step 0 DONE 2026-11-21 10:4x — the cause of §1's re-ordering is repak_cli 0.2.3 packing on rayon threads (one
+> folder packed three times → three SHA-256, `RAYON_NUM_THREADS=1` → one), fixed by `ConanExiles/_config/devkit/repak_tool.py` (pack `23e9015`); step 1 (the
+> manifest, `ConanExiles/_config/release/make_manifest.py`) built and run — KUMM `testcases/reports/2026-11-21_conan-reproducible-export.md`
 > **Outbound:** a plan step in the launcher epic (KUMM plans/57) and a GitHub issue
 
 ## 1. The problem in numbers

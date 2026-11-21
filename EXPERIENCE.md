@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0595 · 2026-11-21 · ❌→✅ · #repak #retoc #reproducible #release #delta-update #conan #pak
+class: wrong-model-of-the-cost
+**Context:** the launcher's RC1 → RC2 update downloaded 12.8 GB while 12 files / 37.3 MB changed; 62 third-party paks were byte-different with equal content.
+**Tried / did:** packed one unpacked folder three times with repak_cli 0.2.3 on its default threads, then three times with `RAYON_NUM_THREADS=1`.
+**Result:** ❌ three different SHA-256 by default (repak writes the entries in the order its rayon threads finish; `retoc to-zen` does the same) → ✅ one SHA-256
+on one thread, at the same speed. `retoc pack-raw` keeps its order on many threads and costs ≈ 4× on one — so the one-thread env goes to the pak WRITERS only.
+**Lesson:** a tool that writes a container in parallel is non-reproducible until proven otherwise; pack twice and compare before trusting «same input → same
+bytes», and give one thread only to the commands that are proven to vary.   → link: plans/57 phase 6 · researches/conan-launcher-delta-update
+**Repro:** `R=D:/work/ai_sandbox/_tools/repak/repak.exe; for i in 1 2 3; do $R pack -q --version V11 <dir> o$i.pak; done; sha256sum o*.pak` (then with `RAYON_NUM_THREADS=1`).
+**Trigger:** a build script writes a pak (`repak pack`, `retoc to-zen`) → `python -I -X utf8 ConanExiles/_config/devkit/t_repak_one_thread.py`.
+**Not for:** readers (`repak list/get/unpack`, `retoc to-legacy`) — their order does not reach a shipped file.
+mechanized: `ConanExiles/_config/devkit/t_repak_one_thread.py` (guard) · `ConanExiles/_config/release/make_manifest.py --previous` (the release-level «changed vs» line)
+
 ### EXP-0594 · 2026-11-20 · ✅ · #release #launcher #github #update-test #conan
 `gh release create … <assets>` keeps the release a DRAFT until every asset is uploaded (13 GB ≈ half an hour here), so the launcher's GitHub feed still names
 the previous release as the newest: that window is the moment to install the OLD candidate into a test copy from its local parts, then press «Обновить
