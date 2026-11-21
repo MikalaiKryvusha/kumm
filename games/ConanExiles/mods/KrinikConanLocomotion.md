@@ -99,6 +99,12 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
 
 ## Open
 
+- **FIXED 2026-11-21 22:29 +03:00 — the error while the hero is dead** (`krinik_oblivion_locomotion`, `tick()`): the death pawn has no movement component, UE4SS returned an object
+  for `hero.CharacterMovement.MaxWalkSpeed`, and the unguarded `math.abs(mws - last_mws)` logged «шаг упал: …:242: attempt to perform arithmetic on a UObject»
+  once a second until the respawn (9 lines, seen 22:16 in the RC3 retest). Guard `type(mws) == "number"`; case L1 of `testcases/TC_conan_rc3_critical_retest_2026-11-21.md`
+  pass (0 lines while dead). Judge round 1: no defect; the twin `math.abs(cm.JumpZVelocity - want)` in `on_jump` sits inside the hook's pcall (one log line per jump at
+  worst, and a dead hero does not jump) — left as is `[AI]`; `last_mws` is not reset on a new hero (cosmetic, pre-existing). Ships with the next build (RC3 has the old code).
+
 - **M6 CLOSED 2026-11-10 19:10 +03:00 by the owner's own play** — `[OWNER]` 2026-11-10 19:10 «Я много раз прыгал и стрелял, работает, стрелы летят» · «супер механика получилась»:
   the bow's shot in a jump by real input works (arrows leave the bow in the air). The agent's synthetic-input attempts below stay as the history of the stand.
 - **M6 try 2026-11-07 19:2x — FAILED TO EXERCISE (not a verdict on the mod):** `_config/m6-air-shot.sh` (owner-idle FREE → tp to the oasis → side `fixed-cam.lua` →

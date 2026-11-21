@@ -161,10 +161,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **NEXT after P1 — the 11 open `critical` issues of the public tracker** (43 open in all, counted 21:49; the owner asked 21:47 «будем сборку конана
 > дальше фиксить?»). Ranked by: what the player loses (crash > freeze / dead end > broken mechanic > dead button > slowness) · how many players meet it ·
 > a workaround · the cost to close (fixed-and-only-retest goes first, in a batch). The order told to the owner 21:49:
-> 1. ONE game session on RC3 — in the working build `D:\Games\Conan Exiles 3.1.1` (pack_version 0.9.1-RC3 + the dev remote the stand needs; its shipped
->    files first compared by hash with the published RC3 now installed in `Conan_311`): retest the fixed ones by the player's path — #6 no damage (cause: the save kept my god mode,
->    entry guard `29a612b`), #11 «Начать путешествие», #12 map markers, #33 journeys locked, #35 hub at the Esc menu's time (judge owed) — close what passes
->    (HOUSE_RULES 44.4); in the same session the waystone and dungeon cases of #21 (bug 79) and a watch for the bow-kill crash #24.
+> 1. DONE 2026-11-21 22:34 +03:00 — the retest on the published RC3 bytes (report `testcases/reports/2026-11-21_conan-rc3-critical-retest.md`): **#6, #11, #12, #33, #35 PASS and
+>    CLOSED** (each commented «Протестировано на билде 0.9.1-RC3 …»; bugs 97, 100, 112, 113 tagged DONE). The working build `D:\Games\Conan Exiles 3.1.1` had
+>    drifted into a mixture (66 of 147 shipped files not RC3) — aligned to the published bytes 22:05 (`KUMM/.work/rc3_fresh/align_to_published.mjs`). Found and
+>    fixed: KrinikConanLocomotion's error while the hero is dead (issue **#48**, pack `b99409a`, ships with the next build); the launcher's 72-of-74 counter filed
+>    as **#47**. #21's waystone and dungeon cases NOT run (Waystones Enhanced has no notes file; a waystone is player-built) — owed. My mistake again: the heroine
+>    died in the damage case (EXP-0603 — the next damage case needs the `damage-window.lua` tool first); the save backups lag the live world (EXP-0604).
 > 2. Repair: #24 the bow-kill crash (bug 85: five Lua key binds left in KrinikConanUI) → #21 if it repeats → #41 Esc over other mods' windows (bug 108, needs a
 >    non-Lua path) → #30 bow sprint cases S8 / S9 (bug 93) → #23 the map stuck without the hub tabs (bug 84, not reproduced: hunt first). #43 the slow
 >    launcher (bug 110) waits for the owner's eye. Then the 32 non-critical by the same test.
@@ -201,9 +203,9 @@ final check, interview #037 Q1), 106 (the climb's stamina — interview #037 Q2)
   (interview #036; this line said «🔴 first next» until 2026-11-18 19:0x — corrected after the owner caught it).
 - **Critical = the software's technical state: crashes, slowdowns, lags, does not start, falls, errors, no window, extra windows, a button that does not press,
   blockers, dead ends, cannot continue, does not save, does not load; a visual defect is cosmetic** (`[OWNER]` 2026-11-18 18:58 · 18:59, chronicle entry
-  2026-11-18 19:0x; HOUSE_RULES 38). Fixed and waiting for the owner's play: `bugs/101_…` (the hub flashes the bare world on a switch), `bugs/97_…` (journeys locked
-  after the tutorial). The critical ones open for 0.9.1: `bugs/85_…` the rare crash from key binds — five binds left in KrinikConanUI; `bugs/79_…` the world freeze
-  after an in-game loading screen — waystone and dungeon cases not run; `bugs/100_…` the hub at the Esc menu's time — fixed, judge owed.
+  2026-11-18 19:0x; HOUSE_RULES 38). Fixed and waiting for the owner's play: `bugs/101_…` (the hub flashes the bare world on a switch). Closed 2026-11-21 by the RC3
+  retest: bugs 97, 100, 112, 113 (DONE). The critical ones open for 0.9.1: `bugs/85_…` the rare crash from key binds — five binds left in KrinikConanUI; `bugs/79_…`
+  the world freeze after an in-game loading screen — waystone and dungeon cases not run.
 - ✅ `bugs/115_DONE_conan_launcher_installed_after_uninstall_window_closed.md` (issue #46): DONE 2026-11-21 21:23 — retested on the published 0.9.1-RC3, issue closed.
 - 🔧 `bugs/85_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: cause fixed in Archery + Camera; the KrinikConanUI twins open; the owner's gameplay is the check.
 - ⏸ `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; PARKED 2026-11-14 09:53 by the owner («в дальний ящик»).

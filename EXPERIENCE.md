@@ -91,6 +91,22 @@
 
 ## Entries
 
+### EXP-0604 · 2026-11-21 · ❌ · #conan #save #sqlite #wal #stand
+class: etalon-from-dirty-tree
+A restore from `Game_1_backup_1.db` (written 22:14) put the heroine back at her 22:09 entry spot, without the walk to the water and the journey started at 22:11:
+the game's backup copies the main `.db` file while the newest rows still sit in `Game_1.db-wal`, so a backup lags the live world (the 2026-11-20 restore lost
+the journey of J1 the same way). Lesson: a known state to return to is made by saving through the menu and copying `Game_1.db` WITH its `-wal` while the
+game is closed (or after a return to the main menu) — never by trusting the newest `_backup_N` to hold the last minutes.
+none-cheap: one line in the stand step; the restore tool already deletes the stale `-wal` of the target.
+
+### EXP-0603 · 2026-11-21 · ❌ · #conan #stand #damage #god-mode #repeat
+class: guard-not-proven-against-threat
+R6 (#6 retest): god off 4 m from «Киммерийский бронник I», frames every 2 s, god back only after the series — health 146 → 81 in 2 s, dead within 10 s. The
+SAME mistake as G2 of 2026-11-20 (kappas, reads every 4 s). A camp humanoid deals ≈ 30 a second to a level-25 heroine in light armour. Lesson: a damage
+window is closed by the GAME, not by my reads — one remote call that switches god off AND starts a game-thread loop which switches god on the moment health
+falls under half; the frames only watch. A second repeat of a lesson is a guard owed, not a third note.
+mechanize: a `damage-window.lua` stand tool (god off → `LoopInGameThreadWithDelay` 100 ms → god on below 50 % → the health trace into `_G`) before the next damage case.
+
 ### EXP-0602 · 2026-11-21 · ❌ · #launcher #powershell #encoding #installer #conan #s3
 class: shell-lied
 The first install of the published 0.9.1-RC3 (case P1, 22:01) ended its install stage at «модов в строках установщика 72 из 74» while `install.ps1` said «74/74 mods»:

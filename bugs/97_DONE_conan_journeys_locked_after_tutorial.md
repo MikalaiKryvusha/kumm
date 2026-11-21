@@ -77,3 +77,14 @@ feat 6 (the bow recipe) and Archer stays locked, THAT is a defect.
 2. Which mods touch journeys / the tutorial / Exiles Fishing (it is the only unlocked one — the fishing mod adds its own journey?): the reconciliation register,
    `who-overwrites-table.py journey`.
 3. A control: the same save without the suspected mod.
+
+## ✅ STATUS: DONE (2026-11-21 22:34 +03:00)
+
+Issue #33 closed after the retest on the PUBLISHED 0.9.1-RC3 by the player's path (case R33 of `testcases/TC_conan_rc3_critical_retest_2026-11-21.md`, report `testcases/reports/2026-11-21_conan-rc3-critical-retest.md`).
+
+- Hygiene: none beyond the stand scripts.
+- Functional run: real keys and mouse on the owner's save, the working build aligned byte-for-byte to the published release (146 of 147 shipped files); frames and `UE4SS.log` read.
+
+### Decisions made without the owner
+
+- `[AI]` The retest ran on the working build after copying the published bytes into it (the dev remote kept), not on a second clean copy — the stand needs the remote.

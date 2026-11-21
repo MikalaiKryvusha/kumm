@@ -1,6 +1,6 @@
 # TC — the hub's «Карта» and «Путешествие» tabs on the game's own pages (bug 113 / issue #12, bug 112 / issue #11, issue #33)
 
-> **Created:** 2026-11-20 · **Parent:** `bugs/113_conan_map_markers_offset_reset_dead.md`, `bugs/112_conan_start_adventure_button_dead.md`, `plans/59_…` (the matrix)
+> **Created:** 2026-11-20 · **Parent:** `bugs/113_DONE_conan_map_markers_offset_reset_dead.md`, `bugs/112_DONE_conan_start_adventure_button_dead.md`, `plans/59_…` (the matrix)
 > **Status:** written 2026-11-20 19:28 +03:00 — not run (the owner plays the working game); the control case M0 first
 > **Outbound:** the results go to the issues #12, #11, #33 as comments after the retest
 

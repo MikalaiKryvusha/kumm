@@ -1,6 +1,6 @@
 # TC — Conan: the hub's other kept tabs show the truth after the state changes (bug 97 — the twin list)
 
-> **Created:** 2026-11-14 · **Parent:** `bugs/97_conan_journeys_locked_after_tutorial.md` (section «The class — the other kept tabs») · **Status:** written 12:22,
+> **Created:** 2026-11-14 · **Parent:** `bugs/97_DONE_conan_journeys_locked_after_tutorial.md` (section «The class — the other kept tabs») · **Status:** written 12:22,
 > run 12:23–12:31 (game PID 37712) — H0–H5 pass, notes H1 / H6; **H0–H5 ran with probe v1, which did not reach list entries
 > (judge round 2, 12:47) — re-run with v2 12:49–12:52: H0b, H8** · **Outbound:** —
 

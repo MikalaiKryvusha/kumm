@@ -38,3 +38,14 @@ dilation; the craft multiplier follows it) · **Version/build:** 3.1.0, KrinikCo
 ## Links
 
 bug 94 (the craft rescale relies on the menu kind), bug 12 (0.0001 in a menu kills clicks)
+
+## ✅ STATUS: DONE (2026-11-21 22:34 +03:00)
+
+Issue #35 closed after the retest on the PUBLISHED 0.9.1-RC3 by the player's path (case R35 of `testcases/TC_conan_rc3_critical_retest_2026-11-21.md`, report `testcases/reports/2026-11-21_conan-rc3-critical-retest.md`).
+
+- Hygiene: none beyond the stand scripts.
+- Functional run: real keys and mouse on the owner's save, the working build aligned byte-for-byte to the published release (146 of 147 shipped files); frames and `UE4SS.log` read.
+
+### Decisions made without the owner
+
+- `[AI]` The retest ran on the working build after copying the published bytes into it (the dev remote kept), not on a second clean copy — the stand needs the remote.

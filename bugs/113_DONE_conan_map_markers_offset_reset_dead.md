@@ -56,3 +56,14 @@ places two markers at named points and resets them, checked by a frame at 4K / 3
 - `bugs/111_…`, `bugs/112_…` — the same session of the owner's play
 - the chronicle (entry 2026-11-09 22:45) names an older open item «the hub duplicates pages / the full-screen map twice» — a possible neighbour; its bug file
   is not found under the number the chronicle gives (84 is another bug), to locate when the work starts
+
+## ✅ STATUS: DONE (2026-11-21 22:34 +03:00)
+
+Issue #12 closed after the retest on the PUBLISHED 0.9.1-RC3 by the player's path (case R12 of `testcases/TC_conan_rc3_critical_retest_2026-11-21.md`, report `testcases/reports/2026-11-21_conan-rc3-critical-retest.md`).
+
+- Hygiene: none beyond the stand scripts.
+- Functional run: real keys and mouse on the owner's save, the working build aligned byte-for-byte to the published release (146 of 147 shipped files); frames and `UE4SS.log` read.
+
+### Decisions made without the owner
+
+- `[AI]` The retest ran on the working build after copying the published bytes into it (the dev remote kept), not on a second clean copy — the stand needs the remote.

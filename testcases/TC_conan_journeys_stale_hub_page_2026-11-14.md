@@ -1,6 +1,6 @@
 # TC — Conan: the hub's journey page shows the journeys' CURRENT unlock state (bug 97 — our hub controller kept a stale page)
 
-> **Created:** 2026-11-14 · **Parent:** `bugs/97_conan_journeys_locked_after_tutorial.md` · **Status:** written 10:14 after J0–J1; J1 withdrawn 10:4x (method), J1b–J6 run
+> **Created:** 2026-11-14 · **Parent:** `bugs/97_DONE_conan_journeys_locked_after_tutorial.md` · **Status:** written 10:14 after J0–J1; J1 withdrawn 10:4x (method), J1b–J6 run
 > 10:39 — the fix is `REFRESH` in `krinik_hub_controller.lua` (the page's native `RefreshGrid` on every show; the first fix «rebuild at every close» reverted) ·
 > **Outbound:** — (the owner's own play is the final check)
 
