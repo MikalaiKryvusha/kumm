@@ -102,3 +102,17 @@ own path, then one real «+». The owner's «map without tabs» stays unreproduc
 
 - `[AI]` Read as a defect report: the owner sent only the frame.
 - `[AI]` Our pages take the game's layer 40 (not «below 40»): the game's own pages live there, and a modal added later lands on top, as in the game without mods.
+
+## 2026-11-21 23:29–23:30 — the reproduction hunt on 0.9.1-RC3 (#23), not reproduced
+
+The working build aligned to the published RC3 bytes, the owner's save, the game in front, real keys by `mouse-seq.ps1`; `W_FullscreenMap_C` counted by the remote
+(`IsInViewport`) after each step. The 2026-11-07 stuck state had TWO map widgets in the viewport (op 1 / op 0); since pack `dc79053` the hub's «Карта» is the game's
+own page (no standalone copy of ours). Variants tried, each with its outcome:
+1. J → the «Карта» tab by a mouse click: 2 widgets, 1 in the viewport; Esc closed the hub — 0 in the viewport.
+2. M (the map's own key) from the world: the hub opens ON «Карта» WITH its tab row (frame `KUMM/.work/rc3_retest/f30_map_key.jpg`); 3 widgets, 1 in the viewport;
+   Esc — 0 in the viewport.
+3. (22:13, case R12) right clicks on the map, the «Добавить маркер» dialog twice, «Сброс маркеров» → «Да», Q / E switches to and from «Карта», Tab and Esc closes — no
+   stuck map (report `testcases/reports/2026-11-21_conan-rc3-critical-retest.md`).
+Verdict: not reproduced in three variants; the double-in-viewport state of the old cause never appeared (at most one map widget in the viewport). A new widget per
+open (2 → 3) with the old ones out of the viewport is the game's own page life, not a stuck copy. #23 stays open until the owner's eye or a wider hunt
+(the gamepad, a map open during a loading screen, the map over a dialogue).

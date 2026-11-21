@@ -71,6 +71,7 @@ Exiles Fishing (`JaarFishing`, 2026-10-26): у мода своя таблица 
 Reading the rows live (2026-10-31 16:20): `StaticFindObject('/Game/UI/Data/DataTables/DT_UIModuleTable.DT_UIModuleTable'):ForEachRow(function(name,row) … end)` —
 255 rows (`GetRowNames` is not exposed to UE4SS Lua — fails). Map / minimap / meter modules: `FullscreenMap`, `PlayerMarkerDialog`, `SM_Minimap`, `SM_UI_Settings`,
 `SM_Tutorial`, `SM_MarkerTutorial`, `SM_UI_CustomMarkerMenu`, `SM_UI_AddMapMarker`, `SM_DEBUG`, `WSEMap` (Waystones map; notes `games/ConanExiles/mods/WaystonesEnhanced.md`), `DN_UI_DmgWidget` (opens but does NOT
+  The map key M (live 2026-11-21 23:30, RC3 build) opens the hub ON «Карта» with its tab row; every open of the map page makes a NEW `W_FullscreenMap_C` (2 → 3), the old ones leave the viewport — at most one is in the viewport (the 2026-11-07 stuck map had two there, bug 84).
 expand the collapsed meter — the player expands it by holding F1 and clicking its expand button; the meter's notes `games/ConanExiles/mods/DamageNumber.md`), `DN_UI_Settings`, `DN_UI_ColorPicker`, `DN_UI_FNContainer`, `DN_UI_FakeEmpty`; no row for Edit Appearance.
 
 255 строк живой таблицы `/Game/UI/Data/DataTables/DT_UIModuleTable` — имена модулей (игра + моды: `CharacterInventory` — хаб, `IngameMenu`,
