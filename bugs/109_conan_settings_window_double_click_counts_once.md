@@ -41,5 +41,5 @@ Put a `W_KrinikClickWrap` (its double-click override already calls KrinikPreview
 
 ## Links
 
-`bugs/85_conan_crash_keybind_lua_races_game_thread.md`; `testcases/TC_conan_keybinds_to_game_events_2026-11-18.md` J1, J2; run report
+`bugs/85_DONE_conan_crash_keybind_lua_races_game_thread.md`; `testcases/TC_conan_keybinds_to_game_events_2026-11-18.md` J1, J2; run report
 `testcases/reports/2026-11-18_conan-keybinds-judge2-run.md`.

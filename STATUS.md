@@ -167,9 +167,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    fixed: KrinikConanLocomotion's error while the hero is dead (issue **#48**, pack `b99409a`, ships with the next build); the launcher's 72-of-74 counter filed
 >    as **#47**. #21's waystone and dungeon cases NOT run (Waystones Enhanced has no notes file; a waystone is player-built) — owed. My mistake again: the heroine
 >    died in the damage case (EXP-0603 — the next damage case needs the `damage-window.lua` tool first); the save backups lag the live world (EXP-0604).
-> 2. Repair: #24 the bow-kill crash (bug 85: five Lua key binds left in KrinikConanUI) → #21 if it repeats → #41 Esc over other mods' windows (bug 108, needs a
->    non-Lua path) → #30 bow sprint cases S8 / S9 (bug 93) → #23 the map stuck without the hub tabs (bug 84, not reproduced: hunt first). #43 the slow
->    launcher (bug 110) waits for the owner's eye. Then the 32 non-critical by the same test.
+> 2. DONE 2026-11-21 23:12 +03:00 — **#24 the bow-kill crash CLOSED** (bug 85 DONE): the cause class is closed in RC3 (the guard 0 calls, `RegisterKeyBind` only in comments
+>    of our mods); R24b — 15 bow kills with real shots in a row, 18 arrows re-attached to corpses, no crash (report section 8). My two stand defects on the
+>    way: the bow not in hand in run 1 (the owner caught it 22:51, EXP-0605) and `aim-shot.sh` blind after the 10th shot (fixed, pack `2e0499b`, EXP-0606).
+>    Open critical now (5): #21 the world frozen behind a loading screen (waystone and dungeon cases owed) · #41 Esc over other mods' windows (bug 108, needs a
+>    non-Lua path) · #30 bow sprint cases S8 / S9 (bug 93) · #23 the map stuck without the hub tabs (bug 84, not reproduced: hunt first) · #48 the locomotion
+>    error while dead (fixed in the pack, closes after the next build's retest). #43 the slow launcher (bug 110) waits for the owner's eye. Then the 33
+>    non-critical (incl. #47) by the same test.
 >
 > The closed entries of 2026-11-20 22:07 – 2026-11-21 12:29 (RC2 built and published, the delta update recon, steps 0–3, the round-2 items) —
 > chronicle, entry «STATUS bonsai trim, part 10».
@@ -204,10 +208,10 @@ final check, interview #037 Q1), 106 (the climb's stamina — interview #037 Q2)
 - **Critical = the software's technical state: crashes, slowdowns, lags, does not start, falls, errors, no window, extra windows, a button that does not press,
   blockers, dead ends, cannot continue, does not save, does not load; a visual defect is cosmetic** (`[OWNER]` 2026-11-18 18:58 · 18:59, chronicle entry
   2026-11-18 19:0x; HOUSE_RULES 38). Fixed and waiting for the owner's play: `bugs/101_…` (the hub flashes the bare world on a switch). Closed 2026-11-21 by the RC3
-  retest: bugs 97, 100, 112, 113 (DONE). The critical ones open for 0.9.1: `bugs/85_…` the rare crash from key binds — five binds left in KrinikConanUI; `bugs/79_…`
+  retest: bugs 85, 97, 100, 112, 113 (DONE). The critical ones open for 0.9.1: `bugs/79_…`
   the world freeze after an in-game loading screen — waystone and dungeon cases not run.
 - ✅ `bugs/115_DONE_conan_launcher_installed_after_uninstall_window_closed.md` (issue #46): DONE 2026-11-21 21:23 — retested on the published 0.9.1-RC3, issue closed.
-- 🔧 `bugs/85_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: cause fixed in Archery + Camera; the KrinikConanUI twins open; the owner's gameplay is the check.
+- ✅ `bugs/85_DONE_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: DONE 2026-11-21 23:12 (issue #24 closed after 15 bow kills by real shots, no crash).
 - ⏸ `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; PARKED 2026-11-14 09:53 by the owner («в дальний ящик»).
 - 🔴 `bugs/86_…` (attribute tree caption under a node icon), `bugs/87_…` (beasts walk into the hero), `bugs/88_…` (corruption debuff line fonts) — 2026-11-07, the owner's frames.
 - 🔴 The owner's bugs 55–62 (2026-10-18 13:35–13:43, a wave in 5 minutes of play) — `bugs/55_…` – `bugs/62_…`; order and plan 32 — item 00000 above.

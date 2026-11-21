@@ -60,6 +60,18 @@ world for R0–R12 and R35; R6 and L1 on the same save (restored after each deat
 
 Frames `KUMM/.work/rc3_retest/f01–f22.jpg` (work folder); the UE4SS log of each session in the game folder; `KUMM/.work/rc3_fresh/compare.out`.
 
+## 8. Addendum — case R24b, the bow-kill crash (#24), 22:37–23:10
+
+Contour: the same working build (Archery = published RC3 bytes; Locomotion with the L1 guard), game PID 31104 in front, machine lock `kumm` 22:37–23:10.
+Runs: `KUMM/.work/rc3_retest/bow_kill_soak.sh` ×4 (outputs `soak.out`, `soak3.out`), then `ConanExiles/_config/aim-shot.sh` (fixed) once plus its control.
+Checks — Functional run: per cycle a green Kappa summoned, placed 6 m ahead on the dry beach camp and frozen, two real shots (RMB, LMB), `KillCharacter`,
+4 s, a liveness call. Run 1 — 15 deaths with no shot (the bow not in hand; the owner caught it 22:51: «если в руки лук не брать, то выстрелов из лука не
+будет»). Run 2 — 4 kills / 7 shots, stopped by the no-shot guard. Run 3 — hits the detector did not see (`log_shots = 10`). Run 4 — 11 kills / 22 shots.
+Total: **15 bow kills with real shots; 18 «к трупу прицеплено»; no crash, no crash-report window, no archery Lua error**. The cause class is closed in RC3
+(no `RegisterKeyBind` call in our mods, the guard 0). The crash was rare, so 15 kills lower the risk and do not prove its absence.
+Found: my two stand defects (EXP-0605, EXP-0606); `aim-shot.sh` fixed in the pack (`2e0499b`): a shot past the 10th — «1 · 1», exit 0; inventory open — «0 · 0», exit 1.
+Verdict: pass — #24 can be closed.
+
 ## 7. Verdict
 
 pass for #6, #11, #12, #33, #35 — each issue's own case passed by the player's path on the published RC3 bytes; the issues can be closed. #21 stays open (waystone

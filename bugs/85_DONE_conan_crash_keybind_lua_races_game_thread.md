@@ -2,7 +2,10 @@
 
 > **GitHub issue:** [#24](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/24) — the public tracker of this defect (HOUSE_RULES 44)
 
-**Status:** 🔧 fix pending verification — cause found by source; KrinikConanArchery keybinds removed; twins in KrinikConanUI and KrinikConanCamera open
+**Status:** 🔧 fix shipped in 0.9.1-RC3 — read 2026-11-21 22:40 +03:00 on the working build aligned to the published RC3 bytes: `check-lua-game-thread.py` «вызовов рабочего
+потока: 0»; `RegisterKeyBind` stands only in comments of our mods (Archery, Camera, UI); the UE4SS sample mods that hold binds are off in `mods.txt`. The
+retest by the player's path (case R24b of `testcases/TC_conan_rc3_critical_retest_2026-11-21.md`, real bow shots and kills in a row) decides issue #24.
+(Was: KrinikConanArchery keybinds removed; twins in KrinikConanUI and KrinikConanCamera open — closed by the kit-bound events of 2026-11-18…20, rounds 1–3 below.)
 **Severity:** S2 (the owner's play session lost to a crash; the class already cost a crash on 2026-10-28)
 **Version/build:** Conan Exiles 3.0.1 build, UE4SS 3.0.1 experimental build 1181 (`g83330635`, 2026-10-17) · **When/context:** 2026-11-07, the owner playing (bow kills of Imps), 21:17 +03:00
 **Fixing:** this session
@@ -156,3 +159,17 @@ INS one `: 1` away) — owed (a real Lua tokenizer). **D3** the real-mouse seque
 FLX button (J1-like). Cosmetics: a dead `btn:IsVisible()` check (`:228`), a stale load-log claim in `krinik_pause_in_menu.lua:755`, a stale comment
 `krinik_mod_settings.lua:383`, a non-raw docstring in the guard (line 23), the key-post tool exits 0 on a failed post. Commit-message corrections: `9378982`
 item 3 («a late off … never erases») was false until this fix; its title's «reaches … the wrap» is unproven (only the catcher path, J2).
+
+## ✅ STATUS: DONE (2026-11-21 23:12 +03:00)
+
+Issue #24 closed after the retest on the PUBLISHED 0.9.1-RC3 by the player's path: case R24b of `testcases/TC_conan_rc3_critical_retest_2026-11-21.md`
+(report `testcases/reports/2026-11-21_conan-rc3-critical-retest.md`, section 8) — 15 bow kills with real shots in a row, 18 lines «к трупу прицеплено»,
+no crash, no crash-report window. The cause class is closed in RC3: `check-lua-game-thread.py` 0 calls; `RegisterKeyBind` only in comments of our mods;
+the UE4SS sample mods with binds are off. The crash was rare: the series lowers the risk and does not prove its absence — a recurrence reopens #24.
+
+- Hygiene: `check-lua-game-thread.py` (0 calls) on the installed build.
+- Functional run: four soak runs in the owner's save on the published bytes; run 4 — 11 kills, 22 real shots; frames f23–f28 and `UE4SS.log` read.
+
+### Decisions made without the owner
+
+- `[AI]` The issue is closed on 15 consecutive bow kills plus the removed cause; a longer play session (N9 of the 2026-11-18 set) stays a neighbour case, not a gate.

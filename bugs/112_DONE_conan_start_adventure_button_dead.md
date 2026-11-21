@@ -52,7 +52,7 @@ that presses the button by the player's path → the owner's own press.
 ## Links
 
 - `bugs/111_conan_name_plate_mojibake.md` — reported by the owner a minute before, same session
-- `bugs/85_conan_crash_keybind_lua_races_game_thread.md` — KrinikConanUI moved off key binds (a possible neighbour)
+- `bugs/85_DONE_conan_crash_keybind_lua_races_game_thread.md` — KrinikConanUI moved off key binds (a possible neighbour)
 
 ## ✅ STATUS: DONE (2026-11-21 22:34 +03:00)
 

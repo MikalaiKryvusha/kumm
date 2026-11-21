@@ -91,6 +91,26 @@
 
 ## Entries
 
+### EXP-0606 · 2026-11-21 · ❌→✅ · #conan #stand #log #detector #bow
+class: tool-reads-words-not-meaning
+R24b runs 2–3: `aim-shot.sh` answered «вход в прицел: 0 · выстрелов: 0» from the 11th shot of the session on, while the arrows hit (blood under the Kappa,
+«удар:», KrinikConanCamera «прицел лука: вход»): it grepped «прицел: обзор» and «#N из лука, заряд», which KrinikConanArchery writes for the first
+`CFG.log_shots = 10` shots only. → ✅ the detector counts lines written at EVERY shot (the camera's aim entry; the archery «удар:» / «стрела упала»).
+Lesson: before a tool counts a log line, check the writer has no cap or throttle on it (`log_shots`, «first N», once-per-minute summaries) — a capped
+line is a detector that goes blind mid-run.
+mechanized: `ConanExiles/_config/aim-shot.sh` (the every-shot lines), `KUMM/.work/rc3_retest/bow_kill_soak.sh`.
+
+### EXP-0605 · 2026-11-21 · ❌→✅ · #conan #stand #soak #bow #false-pass
+class: guard-not-proven-against-threat
+R24b run 1 (22:40): 15 «kills» by `KillCharacter`, the game alive — and «real shots seen 0/2» in every cycle: the bow was never in the heroine's hands (I read
+a frame with the bow on her back as «in hand»; the mod logged «взято оружие, тип 0»), and a summoned Kappa at 0.7 m pushed her into the oasis. The driver
+counted on and printed «killed · game alive». The owner 22:51: «если в руки лук не брать, то выстрелов из лука не будет». → ✅ the driver puts the heroine
+back on a dry spot every cycle, asks the game `HasWeaponsEquipped()`, and a cycle with no shot seen ENDS the series; one cycle with a frame first (the Kappa
+at 11 / 73 after two shots).
+Lesson: a soak driver asserts the case's own ingredient (here: a real shot) in every cycle and stops without it — a count of the side effects (kills, corpse
+lines) is not the case; the weapon in hand is asked of the game, never read off a frame.
+mechanized: `KUMM/.work/rc3_retest/bow_kill_soak.sh` (the stop on «NO SHOT SEEN») — stand-local.
+
 ### EXP-0604 · 2026-11-21 · ❌ · #conan #save #sqlite #wal #stand
 class: etalon-from-dirty-tree
 A restore from `Game_1_backup_1.db` (written 22:14) put the heroine back at her 22:09 entry spot, without the walk to the water and the journey started at 22:11:

@@ -1,6 +1,6 @@
 # TC — key binds leave UE4SS's input thread (bug 85)
 
-> **Created:** 2026-11-07 · **Parent:** `bugs/85_conan_crash_keybind_lua_races_game_thread.md`
+> **Created:** 2026-11-07 · **Parent:** `bugs/85_DONE_conan_crash_keybind_lua_races_game_thread.md`
 > **Status:** cases written 2026-11-07 21:37 +03:00; run below
 > **Outbound:** —
 

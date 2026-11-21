@@ -1,6 +1,6 @@
 # TC — KrinikConanUI without key binds: clicks and Esc / Tab on game-thread events (bug 85)
 
-> **Created:** 2026-11-18 · **Parent:** `bugs/85_conan_crash_keybind_lua_races_game_thread.md` (the five KrinikConanUI binds), STATUS item 3 (critical bugs of 0.9.1)
+> **Created:** 2026-11-18 · **Parent:** `bugs/85_DONE_conan_crash_keybind_lua_races_game_thread.md` (the five KrinikConanUI binds), STATUS item 3 (critical bugs of 0.9.1)
 > **Status:** recon cases R1–R2 first, then the functional cases after the kit and Lua change · **Outbound:** —
 
 ## Test basis

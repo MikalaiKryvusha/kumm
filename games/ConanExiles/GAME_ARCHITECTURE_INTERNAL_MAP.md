@@ -1016,6 +1016,11 @@ Temperature (2026-10-30, live + Hosav bytecode): the hero's temperature is `BPEn
   eaten by the window's activation, EXP-0412 — otherwise the quick-slot key toggles the bow out of sync); a shot = `rdown,wait:1000,lclick,wait:400,rup`;
   the save's bow in slot 1 broke in the stands — a new «Мощный охотничий лук» by `exec MakeMeAdmin` + `exec SpawnItem 51405 1` lands in quick slot 3. A flight
   of 8 m lasts ≈ 3 frames at 60 fps: record with `ddagrab` and the desktop HDR off (`SvarogsDream/tools/hdr.ps1 off`, `on` after).
+  A bow-kill series (2026-11-21 22:54 +03:00, case R24b, `KUMM/.work/rc3_retest/bow_kill_soak.sh`): the summoned Kappa appears 0.7 m from the hero and can shove her into the
+  oasis — put her back every cycle on the dry beach camp `{X=-82309,Y=231568,Z=-20000}`, control yaw 213 (inland, the rock wall), `place 6`; ask the game
+  `BasePlayerChar_C:HasWeaponsEquipped()` before shooting (a frame of the bow on the back reads like «in hand»; the quick-slot key toggles); two shots of
+  `aim-shot.sh 1200` take a green Kappa from 73 to ≈ 11 health. `arrow-stand.sh summon` prints the NEAREST live Kappa, not the new one: a Kappa left alive by
+  a stopped cycle makes the next cycle place and shoot the wrong one (run 3, 22:59 — both arrows fell) — kill every Kappa within 30 m before a series.
 
 ## Loot generation (read 2026-11-01 08:5x from `/Game/Systems/Loot/New/Culture/RelicHunters/DT_LC_RelicHunter`, 22 rows)
 
