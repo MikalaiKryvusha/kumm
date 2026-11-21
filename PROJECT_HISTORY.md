@@ -1,5 +1,15 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-21 20:18 +03:00 — the owner: publish the launcher 1.1.0 notes and the corrected RC3 lines (recorded 20:18)
+
+> (20:18) да, публикуй
+
+The answer to review page 95 (`ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/95_zametki_launcher_1_1_0/zametki_launcher_1_1_0.html`), opened 20:17 with the
+question «Опубликовать выпуск «лаунчер 1.1.0» с текстом из раздела 1 и заменить на странице RC3 пять строк из раздела 2?»: the launcher release
+`launcher-v1.1.0` with `ConanExiles/_config/release/draft_0_9_1/github_release_notes_launcher_1_1_0.md` (two clean-read rounds, 2026-11-21 20:09 and 20:12),
+and the RC3 page's body replaced by `KUMM/.work/rc3/github_release_notes_0_9_1_RC3_fixed.md` (agreement «изменилось несколько файлов», the tense of the
+removal line, one verb «устанавливает», the step between «Обновить лаунчер» and «Обновить сборку»; the English lines likewise, «mod pack» as on the buttons).
+
 ## 2026-11-21 20:0x +03:00 — STATUS bonsai trim, part 11: the progress lines of the chat of 16:34 (RC3), moved verbatim at its closure
 
 > **NOW 2026-11-21 16:5x — the chat of 16:34 («продолжаем делать сборку Конана»).** Interview #042 ANSWERED: **C** (16:58; A at 16:44) — ONE format in the

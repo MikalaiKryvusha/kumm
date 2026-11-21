@@ -91,6 +91,21 @@
 
 ## Entries
 
+### EXP-0600 · 2026-11-21 · ❌→✅ · #public #scan #regex #js #cyrillic #issues #conan
+class: guard-not-proven-against-threat
+**Context:** before posting two issue comments I copied the public-repo ban list of `.work/issues/file_issues.mjs` into a scan and ran a control line
+«шаг стенда … коммит».
+**Result:** ❌ the control was caught by «коммит» only: every Russian stem written as `\bстенд`, `\bагент`, `\bплан \d`, `\bсудь[яи]` never matched, because a
+JS `\b` is an ASCII word boundary and a Cyrillic letter is not `\w` (the `u` flag does not change that). The list had passed the 42 drafts filed through it; a re-scan of the live
+repo found «стенд» / «коммит» in two of our comments (#6, #46). → ✅ each Russian stem got `(?<![\p{L}\p{N}_])` under the `u` flag; the control now hits
+both words, the 42 drafts stay clean.
+**Lesson:** a word boundary before a Russian word in a JS regex is a lookbehind over `\p{L}` with the `u` flag, never `\b`; a ban list is trusted only after
+a control line with each banned word has been seen red.   → link: .work/issues/file_issues.mjs BAN · .work/rc3/scan_public.mjs
+**Repro:** `node .work/rc3/scan_public.mjs .work/rc3/scan_control.md` prints HIT on the стенд/агент pattern (exit 1).
+**Trigger:** writing a JS / TS regex that names a Russian word → write the lookbehind form and run one control line before trusting the green.
+**Not for:** Python `re` on `str` (its `\b` is Unicode-aware) and .NET `Regex` (Unicode `\w` by default).
+mechanized: `.work/issues/file_issues.mjs` and `.work/rc3/scan_public.mjs` (the lookbehind form); the control file `.work/rc3/scan_control.md`
+
 ### EXP-0599 · 2026-11-21 · ❌→✅ · #release #ritual #review-note #conan
 class: tool-reads-words-not-meaning
 **Context:** the RC3 ritual's stage A flagged four commits «review owed or unclear»; I appended git notes with their verdicts.

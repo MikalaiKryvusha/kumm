@@ -138,6 +138,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **NOW 2026-11-21 20:2x — the chat of 20:02 (resume: finish the RC3 publication).** The upload of 19:09 did NOT die with the chat: `gh` PID 34340 lives and
+> ends by itself (`--latest`, the log gets «exit N»); 73 of 83 assets, 18.9 of 25.6 GB at 20:17, sizes equal to the local files. Ready to send right after it:
+> (a) `launcher-v1.1.0` with `ConanExiles/_config/release/draft_0_9_1/github_release_notes_launcher_1_1_0.md` and (b) the RC3 body replaced by
+> `KUMM/.work/rc3/github_release_notes_0_9_1_RC3_fixed.md` — both approved by the owner 20:18 «да, публикуй» (review page 95, chronicle entry 20:18);
+> (c) the comments `KUMM/.work/rc3/issue_45_comment.md`, `issue_46_comment.md` (voice-lint, voice-check and `node KUMM/.work/rc3/scan_public.mjs` clean).
+> Found and fixed: the public ban list of `.work/issues/file_issues.mjs` never matched a Russian word (JS `\b`, EXP-0600); its re-scan of the live repo
+> found «стенд» / «коммит» in our comments on #6 and #46 — edit them after the publication (`gh api -X PATCH repos/<repo>/issues/comments/<id> -F body=@<file>`).
+>
 > **CHAT CLOSED 2026-11-21 ≈20:0x (the chat of 16:34 «продолжаем делать сборку Конана»; soft closure at the 80 % budget). Its progress lines — chronicle,
 > entry «STATUS bonsai trim, part 11»; the owner's words — entries 2026-11-21 16:44–16:58, 17:07–17:10, 17:26–17:41, 18:16–19:07.**
 > Done: interview #042 answered **C** (one format in the end, the per-file set); the update by the file list judged in rounds 3–6 and the FIRST INSTALL by the
