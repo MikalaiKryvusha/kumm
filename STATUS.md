@@ -187,6 +187,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > to the public repo `5040b57`; `gh release create v0.9.1-RC3 --latest --title "0.9.1-RC3" --notes-file <rc3_release>/release_notes_…RC3.md release/*`
 > RUNS in the background since 19:08 (83 files ≈ 26 GB; log `KUMM/.work/rc3/logs/gh_release.log` — «exit 0» and the end time at its tail when done);
 > the published notes and `manifest.json` kept in `_config/release/published_0_9_1-RC3/` (pack `befba63`; `-text` for the kept manifests, `db58ee8`).
+> 19:37 — 45 of 83 assets uploaded (7.1 GB in 28 min, ≈ 4.2 MB/s; the release is a DRAFT until gh uploads the last file). IF THE UPLOAD DIED with the
+> chat: `gh release view v0.9.1-RC3 --json assets --jq '[.assets[].name]'` → upload the missing files of `KUMM/.work/rc3_release/release` with
+> `gh release upload v0.9.1-RC3 <files>` → `gh release edit v0.9.1-RC3 --draft=false --latest`.
 > AFTER THE UPLOAD: (1) `gh release view v0.9.1-RC3 --json assets` — 83 assets, Latest; (2) `gh release create launcher-v1.1.0 --latest=false --title
 > "Krinik launcher 1.1.0" --notes "<short RU/EN note>" <rc3_release>/release/KrinikConanLauncher.exe` (the RC1 / RC2 launchers self-update from it);
 > (3) the ritual `release_checklist.py --published` (the per-file line compares the kept manifest with the GitHub digest), the body as published into
