@@ -148,6 +148,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - Found and fixed: the public ban list never matched a Russian word (JS `\b`, EXP-0600); our comments on #6 and #46 edited; the live re-scan is clean.
 > - The guide source carries the corrected RC3 lines; the RC3 archive's guide PDF keeps the old wording until the next release.
 >
+> **IN PROGRESS 21:1x — the retest** (`testcases/TC_conan_rc3_published_retest_2026-11-21.md`, lock `kumm` to 22:07 <!-- claim-ok: the lock's planned end -->): P0 done (RC3 uninstalled, its bundle
+> removed, RC2 installed by the FULL path of its `install.cmd`, the RC2 bundle's launcher = the v0.9.1-RC2 asset `ab4856b6…`), P1 PASS (the real feed: 4
+> builds, newest RC3, launcher 1.1.0), P2 PASS (self-update 20:58), P3 running (`KUMM/.work/rc3/realcheck_github.mjs` → `logs/realcheck_github.out`,
+> 12.7 GB from GitHub, 72 % at 21:16). Then P4: `node ConanExiles/_config/launcher/test/live.mjs uninstall KUMM/.work/rc3/stand_published.json`, the run
+> report, close #45/#46 with a comment. **Incident 20:38 (S1, bugs/116):** nvm's `install.cmd` ran by its bare name and cut the machine PATH; restored 20:50,
+> verified; guard `tools/hooks/no-bare-cmd-script.mjs` (3 judge rounds, KUMM `79b6c81f`); leftovers waiting for the owner's word: machine `NVM_HOME`
+> (empty), `NVM_SYMLINK`, `D:\PATH.txt`, `D:\settings.txt`. HOUSE_RULES 14.1 (answer «what are you working on» by the task first).
+>
 > **NEXT — the retest on the PUBLISHED release (HOUSE_RULES 44.4), then close #45 and #46:**
 > 1. On a copy of the clean 3.1.1 under `KUMM/.work/` (D: 38.7 GB free at 20:34; `KUMM/.work/rc1_install/Conan_311` holds RC3 + the RC2 and RC3 bundle
 >    folders): the RC2 launcher 1.0.0 against the REAL GitHub feed (no `KRINIK_LAUNCHER_FEED`) → «Обновить лаунчер» from `launcher-v1.1.0` → «Обновить
