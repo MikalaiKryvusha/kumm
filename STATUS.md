@@ -166,7 +166,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    drifted into a mixture (66 of 147 shipped files not RC3) — aligned to the published bytes 22:05 (`KUMM/.work/rc3_fresh/align_to_published.mjs`). Found and
 >    fixed: KrinikConanLocomotion's error while the hero is dead (issue **#48**, pack `b99409a`, ships with the next build); the launcher's 72-of-74 counter filed
 >    as **#47**. #21's waystone and dungeon cases NOT run (Waystones Enhanced has no notes file; a waystone is player-built) — owed. My mistake again: the heroine
->    died in the damage case (EXP-0603 — the next damage case needs the `damage-window.lua` tool first); the save backups lag the live world (EXP-0604).
+>    died in the damage case (EXP-0603 — the next damage case needs the `damage-window.lua` tool first: god off + a `LoopInGameThreadWithDelay` 100 ms that calls `CheatManager:God()` when `GetIntStat(1,0)` < half of `GetIntStat(0,0)`; until it exists `kaif-experience-lint` reds on EXP-0603 «no mechanization field», and on the class shell-lied (EXP-0602 + EXP-0123) until #47 is fixed with its stand row); the save backups lag the live world (EXP-0604).
 > 2. DONE 2026-11-21 23:12 +03:00 — **#24 the bow-kill crash CLOSED** (bug 85 DONE): the cause class is closed in RC3 (the guard 0 calls, `RegisterKeyBind` only in comments
 >    of our mods); R24b — 15 bow kills with real shots in a row, 18 arrows re-attached to corpses, no crash (report section 8). My two stand defects on the
 >    way: the bow not in hand in run 1 (the owner caught it 22:51, EXP-0605) and `aim-shot.sh` blind after the 10th shot (fixed, pack `2e0499b`, EXP-0606).
