@@ -294,6 +294,10 @@ chain — `kit-conanui-edit.py` → `kit-krinik-modsettings.py` ×2 → `kit-kri
 pak's file list equal to the previous build's (`repak list`), «0.9.1-RC2» found 4 times in the pak and «0.9.1-RC1» none; seen «0.9.1-RC2» under the KRINIK MOD PACK
 logo on the main-menu frame (background launch, `capture-window.ps1 -Width 3840`). The release ritual's B line watches that the pak is newer than the commit of
 `packVersion`.
+**0.9.1-RC3, 2026-11-21 17:43–18:10:** the same chain as `KUMM/.work/rc3/kit_chain.sh` (step 01 `kit-conanui-edit.py` added to it; 23 min, every step «Success -
+0 error(s)»; the log folder must exist before the run — the redirect fires before the script's own mkdir), pak 12 710 188 B, the file list equal to RC2's
+(8), «0.9.1-RC3» ×4 and «0.9.1-RC2» ×0; deployed (`verify 110 present, 4 missing` — the four of KrinikConanMusic, not deployed in this game, as at RC2),
+`set-pak-modinfo.py --only KrinikConanUI.pak` and `--check-krinik` (4 of 4); seen «0.9.1-RC3» under the logo, frame `KUMM/.work/rc3/menu_rc3.webp`.
 
 ## Tests and runs
 

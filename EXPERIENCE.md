@@ -91,6 +91,17 @@
 
 ## Entries
 
+### EXP-0599 · 2026-11-21 · ❌→✅ · #release #ritual #review-note #conan
+class: tool-reads-words-not-meaning
+**Context:** the RC3 ritual's stage A flagged four commits «review owed or unclear»; I appended git notes with their verdicts.
+**Tried / did:** notes «review: 3 rounds — … 0 owed» and «review: skipped — … one wait (until + pidOf) …».
+**Result:** ❌ still owed: `release_checklist.py` `REVIEW_OWED` matches the bare words owed / pending / wait(s) / planned / later / running anywhere in the
+verdict paragraph, so «0 owed» and «one wait» read as debts → ✅ the notes rewritten without those words; stage A turned MANUAL (skips only).
+**Lesson:** a verdict line for a word-matching gate states what was done and names no debt word at all, not even negated; read the gate's pattern before
+writing to it.   → link: ConanExiles/_config/release/release_checklist.py REVIEW_OWED
+**Trigger:** writing a «review:» line or note that the release ritual will read.
+**Not for:** a verdict that really owes work — there the debt word is the point.
+
 ### EXP-0598 · 2026-11-21 · ❌→✅ · #launcher #uninstall #state-marker #conan
 class: wrong-state-marker
 **Context:** the launcher decided «the build is installed» by the uninstaller `uninstall_krinik_build.cmd` in the game root (bug 115, issue #46).
