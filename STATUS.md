@@ -149,7 +149,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Stand run 11 (D1–D9, D5c, U-X2, U-X; report `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`). NEXT: plan 57 phase 6 step 6 — the first
 > install by the file list (then the files-only mode of `make_release.sh`, the guide's manual install, D4 rewritten); step 5's real update on a copy of the
 > clean 3.1.1; step 7 is a measurement at the next big-mod update. Also done: the claim guard reads «+03:00» as a zone (`tools/check-claim-before-evidence.mjs`,
-> 310/310, judged in round 4); `make-info-pak.py` removed (pack `e41dfd0`). The stand folders `KUMM/.work/delta/r*`, `.work/uninst` go after this commit.
+> 310/310, judged in round 4); `make-info-pak.py` removed (pack `e41dfd0`); D6 waits for the new launcher (pack `e6b4243` — a stand launcher had stayed
+> running). The stand folders and `.work/repro` removed 17:2x (≈ 10 GB); the runners `.work/delta/run_r6.sh` and `.work/uninst/errorlevel.mjs` stay.
 >
 > **2026-11-21 12:29 — the chat of 12:06 (the owner pasted the previous chat's farewell): the round-2 owed items of the launcher's update by the file list
 > are BUILT and D1–D8 PASS on the stand (run 9; report `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`), NOT committed — judge round 3
