@@ -105,6 +105,9 @@
 14. **In chat the owner is told the MEANING, never a bare number.** Every bug, plan, item, case or interview is named by what the player sees
     or what breaks, in Russian words. A number may follow in parentheses only for lookup. Before sending, scan the reply for «баг NN», «п. NN», «план NN», <!-- verbatim-ok: the patterns the agent greps in its own Russian reply -->
     «#NNN» and case codes (F4, H2) standing without their meaning — rewrite each.
+    14.1. **The question «what are you working on?» is answered by the task first:** sentence one names the task and why it is done now (above all right
+          after a milestone the owner considers closed), sentence two says where it stands; incidents and details come after.
+          `[OWNER]` 2026-11-21 20:59 · `PROJECT_HISTORY.md` entry 2026-11-21 20:50–21:00.
 15. **The agent works only inside its project folder and cleans up after itself.** Working files live in `D:\work\ai_sandbox\KUMM\.work\<topic>\`
     (git-ignored); the processes' temp folder is `.work\tmp`, set in EVERY command that makes temp files (`TEMP='D:\work\ai_sandbox\KUMM\.work\tmp' TMP=… <cmd>`;
     the pack's tools — its `_scratch`): the harness overrides `TEMP` / `TMP` / `TMPDIR` of its shells, the `env` of `.claude/settings.local.json` does not reach

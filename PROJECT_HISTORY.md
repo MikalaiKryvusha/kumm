@@ -1,5 +1,24 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-21 20:50–21:00 +03:00 — the owner: «над чем работаешь?» asked three times (recorded 21:08)
+
+> (20:50) yfl xtv hf,jnftim&
+>
+> (20:53) над чем работаешь?
+>
+> (20:58) стоп
+>
+> (20:59) поясни, над чем работаешь. RC3 выпущено
+>
+> (20:59) ек мешает. продолжай.
+>
+> Я хотел знать, над чем ты работаешь, и пришлось трижды тебя спросить, чтобы поолучить ответ
+>
+> (21:00) не мешает
+
+The first message is «над чем работаешь?» typed in the Latin layout. My first two answers told the PATH incident and never named the task (the retest of
+RC3 on the published release, to close issues #45 / #46) nor why work went on after the release. Rule — HOUSE_RULES 14.1; memory `what-are-you-working-on-task-first`.
+
 ## 2026-11-21 20:3x +03:00 — STATUS bonsai trim, part 12: the CHAT CLOSED block of the chat of 16:34 and the first NOW block of the chat of 20:02, moved verbatim when the RC3 publication closed
 
 > **NOW 2026-11-21 20:2x — the chat of 20:02 (resume: finish the RC3 publication).** The upload of 19:09 did NOT die with the chat: `gh` PID 34340 lives and
