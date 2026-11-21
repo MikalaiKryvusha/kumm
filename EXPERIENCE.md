@@ -94,15 +94,16 @@
 ### EXP-0601 · 2026-11-21 · ❌→✅ · #powershell #cmd #path #machine #elevated #s1
 class: environment-assumed-not-probed
 **Context:** installing RC2 into a test copy: `Push-Location <bundle>; cmd.exe /d /s /c "install.cmd `"<game>`" < nul"` in the PowerShell tool.
-**Result:** ❌ PowerShell 5.1 never hands its location to a native child (the process directory stayed KUMM), so cmd found `install.cmd` through PATH —
-nvm's manual installer — and it ran `setx /M PATH …` from the elevated shell: the machine PATH cut to 1024 characters, system32 and 16 more entries lost
+**Result:** ❌ the session's processes carry `NoDefaultCurrentDirectoryInExePath=1`, so cmd skipped the bundle folder (which PowerShell did hand it) and
+found `install.cmd` through PATH — nvm's manual installer — and it ran `setx /M PATH …` from the elevated shell: the machine PATH cut to 1024 characters, system32 and 16 more entries lost
 (bugs/116). → ✅ rebuilt from the environment of a process started before the damage (process PATH = old machine part + user part), verified by expansion,
 written back as REG_EXPAND_SZ, WM_SETTINGCHANGE broadcast.
-**Lesson:** a script is started by its FULL path, never by its bare name — a bare name in `cmd /c` or `Start-Process` is a PATH lookup, and PowerShell's
-`Set-Location` / `Push-Location` do not move the child's directory; the working folder goes into the call itself (`cmd /c "cd /d <dir> && <full path>"`).
+**Lesson:** a script is started by its FULL path, never by its bare name — with `NoDefaultCurrentDirectoryInExePath` set (it is, in this harness) a bare
+name in `cmd /c` or `Start-Process` is a pure PATH lookup, whatever the current folder. (Corrected 2026-11-21 ≈20:59: the first text blamed
+`Push-Location`; a probe refuted it.)
 **Repro:** `node tools/hooks/no-bare-cmd-script.mjs --selftest` (the verbatim 20:38 command is refused).
 **Trigger:** any `cmd /c`, `Start-Process` or call of a `.cmd` / `.bat` from the PowerShell or Bash tool.
-**Not for:** Git Bash `cd`, which does move the child's directory (a bare name there still searches PATH after the current folder).
+**Not for:** a script name that carries a path (`.\x.cmd`, `D:\…\x.cmd`) — cmd runs exactly that file.
 mechanized: `tools/hooks/no-bare-cmd-script.mjs` (PreToolUse Bash | PowerShell, the live refusal ≈ 2026-11-21 20:53)
 
 ### EXP-0600 · 2026-11-21 · ❌→✅ · #public #scan #regex #js #cyrillic #issues #conan

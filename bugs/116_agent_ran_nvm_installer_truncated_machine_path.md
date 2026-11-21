@@ -14,10 +14,11 @@ the owner's screen (child of the cmd).
 
 ## Root cause
 
-1. PowerShell 5.1 `Push-Location` / `Set-Location` change the PowerShell location only; the process current directory a native child inherits stayed
-   `D:\work\ai_sandbox\KUMM` (`[Environment]::CurrentDirectory`).
-2. `cmd /c install.cmd` with a bare name searches the current directory, then PATH: it found `%APPDATA%\nvm\install.cmd` (nvm-windows'
-   manual installer, 2023-01-26).
+1. The processes of this agent session carry `NoDefaultCurrentDirectoryInExePath=1` (probed 2026-11-21 ≈20:58). With it, cmd never looks for a bare
+   command name in its current directory. PowerShell did hand the bundle folder to the child (probe: `Push-Location <dir>; cmd.exe /d /c cd` prints
+   `<dir>`). Correction 2026-11-21 ≈20:59: the first text of this item blamed `Push-Location` for not moving the child's directory — the judge of the
+   guard doubted it and the probe refuted it.
+2. So `cmd /c install.cmd` with a bare name went straight to PATH and found `%APPDATA%\nvm\install.cmd` (nvm-windows' manual installer, 2023-01-26).
 3. That script reads the nvm folder with `set /P` (stdin `nul` → empty), then from the elevated shell: `setx /M NVM_HOME ""`, `setx /M NVM_SYMLINK
    "C:\Program Files\nodejs"`, `echo PATH=%PATH% > \PATH.txt`, `setx /M PATH "<machine Path>;%NVM_HOME%;%NVM_SYMLINK%"` — setx keeps 1024 characters —,
    writes `\settings.txt` and opens it in Notepad. With the current drive D: the files landed in `D:\`.
