@@ -153,7 +153,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (SHA-256 = `SHA256SUMS.txt`) in `Conan_311/Krinik_Launcher/` → `found-nofiles` → the box «Нужно скачать 12,8 ГБ (файлов: 186)» → «Да» → 21.2 min from GitHub,
 > no volume → «сборка 0.9.1-RC3 поставлена» → the bundle launcher on `installed` (frame looked at). The copy now HOLDS RC3 installed. Found S3: the install
 > row ends at «72 из 74» (em dash lost by PowerShell 5.1's redirected output — EXP-0602; issue to file, the fix with the next launcher change).
-> The EMPTY folder `Conan_311/Krinik_Mod_Pack_0_9_1_RC2` stays: `rm-tree` EBUSY, no process names it in its command line; hypothesis — a still-open older
+> The EMPTY folder `Conan_311/Krinik_Mod_Pack_0_9_1_RC2` was held (EBUSY) until 23:33, then removed by `rm-tree` — who held it is not proven; hypothesis — a still-open older
 > Claude chat whose session cwd sits there (this session's primary working directory moved with a `cd`: keep `cd` out of stand folders);
 > `winget install Microsoft.Sysinternals.Handle` refused by the auto-mode classifier, not worked around. Still owed from the launcher list: the cases D4c / D4d,
 > plan 57 step 8 risks R1 / R2, step 7, the files-only release mode.
