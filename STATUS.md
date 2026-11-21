@@ -138,42 +138,29 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **CHAT CLOSED 2026-11-21 ≈21:3x (the chat of 20:02, `resume`: finish the RC3 publication; soft closure on the owner's word 21:28 «давай в новом чате»).
-> Its detail — chronicle, entry «STATUS bonsai trim, part 13»; the owner's words — entries 2026-11-21 20:18, 20:50–21:00, 21:27–21:28.**
-> Done: **0.9.1-RC3 PUBLISHED** (Latest, 83 assets verified by SHA-256, the body corrected on the owner's «да, публикуй»); **launcher-v1.1.0** published;
-> ritual `--published` 0 TODO; **retested on the published release** (report `testcases/reports/2026-11-21_conan-rc3-published-retest.md`, P0–P4 pass) —
-> **issues #45 and #46 CLOSED**, bug 115 DONE; the public ban list fixed (EXP-0600); **incident S1 bugs/116** (the machine PATH cut by nvm's `install.cmd`,
-> restored, guard `tools/hooks/no-bare-cmd-script.mjs`, machine NVM_HOME / NVM_SYMLINK removed on the owner's word); HOUSE_RULES 14.1.
-> **Owner's errand:** delete `D:\PATH.txt` and `D:\settings.txt` (nvm's output; the harness refuses removal under a drive root) — asked in chat 21:28.
-> The owner allowed it in chat 21:46; `rm /d/PATH.txt` was still refused 21:46 by Claude Code's BUILT-IN safety check (a drive root counts as a critical
-> directory; only a person's approval in its own prompt passes, a chat word does not) — not worked around; the two files stay for the owner's own hand.
+> **CHAT CLOSED 2026-11-21 ≈23:4x (the chat of 21:33, `resume`: the first install from zero, then the critical issues; soft closure on the owner's word 23:24
+> «работай автономно 15 минут, а затем закрывай чат»). Its detail — chronicle, entry «STATUS bonsai trim, part 14»; reports
+> `testcases/reports/2026-11-21_conan-rc3-first-install-from-zero.md` and `testcases/reports/2026-11-21_conan-rc3-critical-retest.md` (§8 the bow kills, §9 bow sprint S8).**
+> Done: the first install from zero of the PUBLISHED RC3 by its file list PASSES (21.2 min from GitHub, no volume); **6 critical issues closed** after my
+> retests on the published bytes — #6, #11, #12, #33, #35 (22:31) and #24 the bow-kill crash (23:12, 15 cycles of real bow hits, each Kappa finished by `KillCharacter`); bugs 85, 97, 100, 112, 113 DONE; new
+> #47 (the launcher's 72-of-74 counter) and #48 (the locomotion error while dead — fixed, pack `b99409a`); `aim-shot.sh` fixed (pack `2e0499b`); bow sprint S8
+> pass; the waystone mod notes; the stuck map not reproduced. The working build `D:\Games\Conan Exiles 3.1.1` = the published RC3 bytes (aligned 22:05) + the
+> Locomotion fix + the dev remote. The copy `KUMM/.work/rc1_install/Conan_311` holds RC3 installed by the launcher (its RC2 folder removed 23:33).
+> **Owner's errand:** delete `D:\PATH.txt` and `D:\settings.txt` (Claude Code's built-in check refuses a removal at a drive root even with his chat word, 21:46).
 >
-> **DONE 2026-11-21 22:02 +03:00 (the chat of 21:33, `resume`) — the first install from zero of the PUBLISHED 0.9.1-RC3 by its file list PASSES** (case P1 of
-> `testcases/TC_conan_launcher_delta_update_2026-11-21.md`, report `testcases/reports/2026-11-21_conan-rc3-first-install-from-zero.md`): the launcher asset
-> (SHA-256 = `SHA256SUMS.txt`) in `Conan_311/Krinik_Launcher/` → `found-nofiles` → the box «Нужно скачать 12,8 ГБ (файлов: 186)» → «Да» → 21.2 min from GitHub,
-> no volume → «сборка 0.9.1-RC3 поставлена» → the bundle launcher on `installed` (frame looked at). The copy now HOLDS RC3 installed. Found S3: the install
-> row ends at «72 из 74» (em dash lost by PowerShell 5.1's redirected output — EXP-0602; issue to file, the fix with the next launcher change).
-> The EMPTY folder `Conan_311/Krinik_Mod_Pack_0_9_1_RC2` was held (EBUSY) until 23:33, then removed by `rm-tree` — who held it is not proven; hypothesis — a still-open older
-> Claude chat whose session cwd sits there (this session's primary working directory moved with a `cd`: keep `cd` out of stand folders);
-> `winget install Microsoft.Sysinternals.Handle` refused by the auto-mode classifier, not worked around. Still owed from the launcher list: the cases D4c / D4d,
-> plan 57 step 8 risks R1 / R2, step 7, the files-only release mode.
->
-> **NEXT after P1 — the 11 open `critical` issues of the public tracker** (43 open in all, counted 21:49; the owner asked 21:47 «будем сборку конана
-> дальше фиксить?»). Ranked by: what the player loses (crash > freeze / dead end > broken mechanic > dead button > slowness) · how many players meet it ·
-> a workaround · the cost to close (fixed-and-only-retest goes first, in a batch). The order told to the owner 21:49:
-> 1. DONE 2026-11-21 22:34 +03:00 — the retest on the published RC3 bytes (report `testcases/reports/2026-11-21_conan-rc3-critical-retest.md`): **#6, #11, #12, #33, #35 PASS and
->    CLOSED** (each commented «Протестировано на билде 0.9.1-RC3 …»; bugs 97, 100, 112, 113 tagged DONE). The working build `D:\Games\Conan Exiles 3.1.1` had
->    drifted into a mixture (66 of 147 shipped files not RC3) — aligned to the published bytes 22:05 (`KUMM/.work/rc3_fresh/align_to_published.mjs`). Found and
->    fixed: KrinikConanLocomotion's error while the hero is dead (issue **#48**, pack `b99409a`, ships with the next build); the launcher's 72-of-74 counter filed
->    as **#47**. #21's waystone and dungeon cases NOT run (Waystones Enhanced has no notes file; a waystone is player-built) — owed. My mistake again: the heroine
->    died in the damage case (EXP-0603 — the next damage case needs the `damage-window.lua` tool first: god off + a `LoopInGameThreadWithDelay` 100 ms that calls `CheatManager:God()` when `GetIntStat(1,0)` < half of `GetIntStat(0,0)`; until it exists `kaif-experience-lint` reds on EXP-0603 «no mechanization field», and on the class shell-lied (EXP-0602 + EXP-0123) until #47 is fixed with its stand row); the save backups lag the live world (EXP-0604).
-> 2. DONE 2026-11-21 23:12 +03:00 — **#24 the bow-kill crash CLOSED** (bug 85 DONE): the cause class is closed in RC3 (the guard 0 calls, `RegisterKeyBind` only in comments
->    of our mods); R24b — 15 bow kills with real shots in a row, 18 arrows re-attached to corpses, no crash (report section 8). My two stand defects on the
->    way: the bow not in hand in run 1 (the owner caught it 22:51, EXP-0605) and `aim-shot.sh` blind after the 10th shot (fixed, pack `2e0499b`, EXP-0606).
->    Open critical now (5): #21 the world frozen behind a loading screen (waystone and dungeon cases owed; the waystone mod's notes and stand route written 23:2x — `games/ConanExiles/mods/WaystonesEnhanced.md`) · #41 Esc over other mods' windows (bug 108 — the owner called it «на будущее», not a release blocker, while the tracker labels it critical: settle the label with him; needs a
->    non-Lua path) · #30 bow sprint — S8 PASS 23:23 (weight never refuses a sprint, it multiplies the speed; overloaded, our bow sprint stays shut — report §9), S9 a sheathed bow still owed (bug 93; the stand: sheathe by the quick-slot key and prove it by `HasWeaponsEquipped()` false, real W + Shift, then RMB — read whether the game re-wields the bow and the sprint holds, by the Locomotion speed lines and BowSprint lines; the bow-kill stand of the game map for the spot) · #23 the map stuck without the hub tabs (bug 84 — hunt 23:30 on RC3: not reproduced in three variants, never two map widgets in the viewport — the old cause; open for the owner's eye or a wider hunt) · #48 the locomotion
->    error while dead (fixed in the pack, closes after the next build's retest). #43 the slow launcher (bug 110) waits for the owner's eye. Then the 33
->    non-critical (incl. #47) by the same test.
+> **FIRST in the next chat — the open critical issues** (ranked: what the player loses · how many meet it · a workaround · the cost to close):
+> 1. **#21 the world frozen behind an in-game loading screen** — waystone travel and a dungeon entrance (bug 79); the stand route in
+>    `games/ConanExiles/mods/WaystonesEnhanced.md` (names by `retoc to-legacy` with the game's `global.utoc`; the Wayfinder feat — candidate 7770001 — or the
+>    item spawned; two waystones placed; travel; the world time read 5 s after the arrival).
+> 2. **#30 bow sprint S9** (a sheathed bow in a sprint; bug 93): sheathe by the quick-slot key, prove it by `HasWeaponsEquipped()` false, real W + Shift, then
+>    RMB — the Locomotion speed lines and the BowSprint lines; the spot — the beach camp of the game map's bow stand, yaw 123 along the shore.
+> 3. **#23 the stuck map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue) or his eye.
+> 4. **#41 Esc over other mods' windows** (bug 108): the owner called it «на будущее», the tracker labels it critical — settle the label; a non-Lua path.
+> 5. **#48** closes after the next build's retest; **#43** the slow launcher waits for the owner's eye. Then the 33 non-critical (#47: the fix site in
+>    `bugs/GITHUB_ISSUES.md`).
+> Stand lessons to obey: EXP-0603 (build `damage-window.lua` before any damage case — its mechanization field says «none yet — OWED»; the class shell-lied declared
+> class-ok: two mechanisms), EXP-0604 (copy the save WITH its `-wal`), EXP-0605 (assert the case's ingredient every cycle; ask the game for the weapon in hand), EXP-0606
+> (no capped log line as a detector). Still owed from the launcher list: cases D4c / D4d, plan 57 step 8 risks R1 / R2, step 7, the files-only release mode.
 >
 > The closed entries of 2026-11-20 22:07 – 2026-11-21 12:29 (RC2 built and published, the delta update recon, steps 0–3, the round-2 items) —
 > chronicle, entry «STATUS bonsai trim, part 10».
@@ -211,7 +198,7 @@ final check, interview #037 Q1), 106 (the climb's stamina — interview #037 Q2)
   retest: bugs 85, 97, 100, 112, 113 (DONE). The critical ones open for 0.9.1: `bugs/79_…`
   the world freeze after an in-game loading screen — waystone and dungeon cases not run.
 - ✅ `bugs/115_DONE_conan_launcher_installed_after_uninstall_window_closed.md` (issue #46): DONE 2026-11-21 21:23 — retested on the published 0.9.1-RC3, issue closed.
-- ✅ `bugs/85_DONE_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: DONE 2026-11-21 23:12 (issue #24 closed after 15 bow kills by real shots, no crash).
+- ✅ `bugs/85_DONE_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: DONE 2026-11-21 23:12 (issue #24 closed after 15 cycles of real bow hits finished by `KillCharacter`, no crash).
 - ⏸ `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; PARKED 2026-11-14 09:53 by the owner («в дальний ящик»).
 - 🔴 `bugs/86_…` (attribute tree caption under a node icon), `bugs/87_…` (beasts walk into the hero), `bugs/88_…` (corruption debuff line fonts) — 2026-11-07, the owner's frames.
 - 🔴 The owner's bugs 55–62 (2026-10-18 13:35–13:43, a wave in 5 minutes of play) — `bugs/55_…` – `bugs/62_…`; order and plan 32 — item 00000 above.

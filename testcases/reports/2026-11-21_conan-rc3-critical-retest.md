@@ -41,7 +41,7 @@ Functional run: the player's path on the published bytes with real input, frames
 - R6 pass (#6) — next to «Киммерийский бронник I» with god off: health 146 → 81 in 2 s, death within 10 s. My mistake: reads every 2 s, god back only after the series.
 - L1 pass — with the guard deployed, a death by `exec suicide`: «шаг упал» 0 (was 9 in R6); after the respawn «скорость сменилась», «взведено: герой в мире».
 - N1 pass by end frames — Q / E switch «Карта» ⇄ «Путешествие», Tab and Esc close the hub; the frames in between not recorded on video.
-- R21a / R21b not run (owed); the respawn neighbour passed twice. R24 partial: no bow kill happened, no crash in three processes.
+- R21a / R21b not run (owed); the respawn neighbour passed twice. R24 (passive) partial: no bow kill in this session — the active case R24b passed later (§8).
 
 REAL WORLD: accumulated — the owner's save with his heroine (level 25, journeys, markers, starving 0 % food and water), a working build that had drifted into a
 mixture of releases; data and machine — his save, this machine, the published RC3 bytes; path — real keys and mouse, the game in front. Verified on the real
@@ -67,7 +67,7 @@ Runs: `KUMM/.work/rc3_retest/bow_kill_soak.sh` ×4 (outputs `soak.out`, `soak3.o
 Checks — Functional run: per cycle a green Kappa summoned, placed 6 m ahead on the dry beach camp and frozen, two real shots (RMB, LMB), `KillCharacter`,
 4 s, a liveness call. Run 1 — 15 deaths with no shot (the bow not in hand; the owner caught it 22:51: «если в руки лук не брать, то выстрелов из лука не
 будет»). Run 2 — 4 kills / 7 shots, stopped by the no-shot guard. Run 3 — hits the detector did not see (`log_shots = 10`). Run 4 — 11 kills / 22 shots.
-Total: **15 bow kills with real shots; 18 «к трупу прицеплено»; no crash, no crash-report window, no archery Lua error**. The cause class is closed in RC3
+Total: **15 cycles of real bow hits (22 + 7 shots; one cycle had one), each Kappa finished by `KillCharacter`; 18 «к трупу прицеплено»; no crash, no crash-report window, no archery Lua error**. The cause class is closed in RC3
 (no `RegisterKeyBind` call in our mods, the guard 0). The crash was rare, so 15 kills lower the risk and do not prove its absence.
 Found: my two stand defects (EXP-0605, EXP-0606); `aim-shot.sh` fixed in the pack (`2e0499b`): a shot past the 10th — «1 · 1», exit 0; inventory open — «0 · 0», exit 1.
 Verdict: pass — #24 can be closed.
@@ -86,5 +86,5 @@ no refusal to bypass. #30 keeps one owed case, S9 (a sheathed bow in a sprint).
 
 ## 7. Verdict
 
-pass for #6, #11, #12, #33, #35 — each issue's own case passed by the player's path on the published RC3 bytes; the issues can be closed. #21 stays open (waystone
+pass for #6, #11, #12, #33, #35, and for #24 by §8 — each issue's own case passed by the player's path on the published RC3 bytes; the issues can be closed. #21 stays open (waystone
 and dungeon owed). One new defect found and fixed in the pack (the locomotion error while dead).

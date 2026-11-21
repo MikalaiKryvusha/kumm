@@ -163,12 +163,12 @@ item 3 («a late off … never erases») was false until this fix; its title's �
 ## ✅ STATUS: DONE (2026-11-21 23:12 +03:00)
 
 Issue #24 closed after the retest on the PUBLISHED 0.9.1-RC3 by the player's path: case R24b of `testcases/TC_conan_rc3_critical_retest_2026-11-21.md`
-(report `testcases/reports/2026-11-21_conan-rc3-critical-retest.md`, section 8) — 15 bow kills with real shots in a row, 18 lines «к трупу прицеплено»,
+(report `testcases/reports/2026-11-21_conan-rc3-critical-retest.md`, section 8) — 15 cycles in a row of real bow hits (two shots in 14, one in 1), each Kappa then finished by `KillCharacter`, 18 lines «к трупу прицеплено»,
 no crash, no crash-report window. The cause class is closed in RC3: `check-lua-game-thread.py` 0 calls; `RegisterKeyBind` only in comments of our mods;
 the UE4SS sample mods with binds are off. The crash was rare: the series lowers the risk and does not prove its absence — a recurrence reopens #24.
 
 - Hygiene: `check-lua-game-thread.py` (0 calls) on the installed build.
-- Functional run: four soak runs in the owner's save on the published bytes; run 4 — 11 kills, 22 real shots; frames f23–f28 and `UE4SS.log` read.
+- Functional run: four soak runs in the owner's save on the published bytes plus the Locomotion death guard and the dev remote; run 4 — 11 kills, 22 real shots; frames f23–f28 and `UE4SS.log` read.
 
 ### Decisions made without the owner
 

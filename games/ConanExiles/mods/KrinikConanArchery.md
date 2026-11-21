@@ -119,7 +119,7 @@ The shafts sync used `RegisterKeyBind(E / Q / LMB)`; a key-bind callback runs Lu
 unlocked, in one Lua state — the crash of 2026-11-07 21:17 (bug 85, root cause from the UE4SS source). Removed; the guard `_config/check-lua-game-thread.py`
 now refuses `RegisterKeyBind`. Kept: the quick-loot trigger (`QuickLootPanel:SlotItemAddedOrRemoved`, seen working 21:40:54 in the owner's play). Lost until a
 game-thread trigger is found: the shafts after the full loot window and after a beast harvest stay in the corpse until it vanishes.
-**Retested 2026-11-21 23:08 on the published 0.9.1-RC3 (issue #24 closed, bug 85 DONE):** 15 bow kills by real shots in a row, 18 «к трупу прицеплено» (the corpse
+**Retested 2026-11-21 23:08 on the published 0.9.1-RC3 (issue #24 closed, bug 85 DONE):** 15 cycles in a row of real bow hits, each Kappa finished by `KillCharacter`, 18 «к трупу прицеплено» (the corpse
 pass that crashed), no crash. For stands: this mod logs «прицел: обзор» and «#N из лука, заряд» for the first `CFG.log_shots` = 10 shots of a session only (EXP-0606).
 
 **Arrows into an already dead body (written 2026-11-07 21:42 +03:00, `[OWNER]` 21:41 «когда моб умер, но в его тело ещё стреляют - эти стрелы тоже нужно класть в добычу моба»):**

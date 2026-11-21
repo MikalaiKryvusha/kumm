@@ -1,5 +1,46 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-21 23:40 +03:00 — STATUS bonsai trim, part 14: the CHAT CLOSED block of the chat of 20:02 and the DONE / NEXT blocks of the chat of 21:33 (the first install from zero, six critical issues closed), moved verbatim at its closure
+
+> Correction (the closing judge, 23:44): in the moved text below «15 bow kills with real shots» means 15 cycles of real bow hits, each Kappa then finished by `KillCharacter` (one cycle had one shot); «7 critical issues» in the same chat's drafts was six (#45, #46 closed by the chat of 20:02).
+
+> **CHAT CLOSED 2026-11-21 ≈21:3x (the chat of 20:02, `resume`: finish the RC3 publication; soft closure on the owner's word 21:28 «давай в новом чате»).
+> Its detail — chronicle, entry «STATUS bonsai trim, part 13»; the owner's words — entries 2026-11-21 20:18, 20:50–21:00, 21:27–21:28.**
+> Done: **0.9.1-RC3 PUBLISHED** (Latest, 83 assets verified by SHA-256, the body corrected on the owner's «да, публикуй»); **launcher-v1.1.0** published;
+> ritual `--published` 0 TODO; **retested on the published release** (report `testcases/reports/2026-11-21_conan-rc3-published-retest.md`, P0–P4 pass) —
+> **issues #45 and #46 CLOSED**, bug 115 DONE; the public ban list fixed (EXP-0600); **incident S1 bugs/116** (the machine PATH cut by nvm's `install.cmd`,
+> restored, guard `tools/hooks/no-bare-cmd-script.mjs`, machine NVM_HOME / NVM_SYMLINK removed on the owner's word); HOUSE_RULES 14.1.
+> **Owner's errand:** delete `D:\PATH.txt` and `D:\settings.txt` (nvm's output; the harness refuses removal under a drive root) — asked in chat 21:28.
+> The owner allowed it in chat 21:46; `rm /d/PATH.txt` was still refused 21:46 by Claude Code's BUILT-IN safety check (a drive root counts as a critical
+> directory; only a person's approval in its own prompt passes, a chat word does not) — not worked around; the two files stay for the owner's own hand.
+>
+> **DONE 2026-11-21 22:02 +03:00 (the chat of 21:33, `resume`) — the first install from zero of the PUBLISHED 0.9.1-RC3 by its file list PASSES** (case P1 of
+> `testcases/TC_conan_launcher_delta_update_2026-11-21.md`, report `testcases/reports/2026-11-21_conan-rc3-first-install-from-zero.md`): the launcher asset
+> (SHA-256 = `SHA256SUMS.txt`) in `Conan_311/Krinik_Launcher/` → `found-nofiles` → the box «Нужно скачать 12,8 ГБ (файлов: 186)» → «Да» → 21.2 min from GitHub,
+> no volume → «сборка 0.9.1-RC3 поставлена» → the bundle launcher on `installed` (frame looked at). The copy now HOLDS RC3 installed. Found S3: the install
+> row ends at «72 из 74» (em dash lost by PowerShell 5.1's redirected output — EXP-0602; issue to file, the fix with the next launcher change).
+> The EMPTY folder `Conan_311/Krinik_Mod_Pack_0_9_1_RC2` was held (EBUSY) until 23:33, then removed by `rm-tree` — who held it is not proven; hypothesis — a still-open older
+> Claude chat whose session cwd sits there (this session's primary working directory moved with a `cd`: keep `cd` out of stand folders);
+> `winget install Microsoft.Sysinternals.Handle` refused by the auto-mode classifier, not worked around. Still owed from the launcher list: the cases D4c / D4d,
+> plan 57 step 8 risks R1 / R2, step 7, the files-only release mode.
+>
+> **NEXT after P1 — the 11 open `critical` issues of the public tracker** (43 open in all, counted 21:49; the owner asked 21:47 «будем сборку конана
+> дальше фиксить?»). Ranked by: what the player loses (crash > freeze / dead end > broken mechanic > dead button > slowness) · how many players meet it ·
+> a workaround · the cost to close (fixed-and-only-retest goes first, in a batch). The order told to the owner 21:49:
+> 1. DONE 2026-11-21 22:34 +03:00 — the retest on the published RC3 bytes (report `testcases/reports/2026-11-21_conan-rc3-critical-retest.md`): **#6, #11, #12, #33, #35 PASS and
+>    CLOSED** (each commented «Протестировано на билде 0.9.1-RC3 …»; bugs 97, 100, 112, 113 tagged DONE). The working build `D:\Games\Conan Exiles 3.1.1` had
+>    drifted into a mixture (66 of 147 shipped files not RC3) — aligned to the published bytes 22:05 (`KUMM/.work/rc3_fresh/align_to_published.mjs`). Found and
+>    fixed: KrinikConanLocomotion's error while the hero is dead (issue **#48**, pack `b99409a`, ships with the next build); the launcher's 72-of-74 counter filed
+>    as **#47**. #21's waystone and dungeon cases NOT run (Waystones Enhanced has no notes file; a waystone is player-built) — owed. My mistake again: the heroine
+>    died in the damage case (EXP-0603 — the next damage case needs the `damage-window.lua` tool first: god off + a `LoopInGameThreadWithDelay` 100 ms that calls `CheatManager:God()` when `GetIntStat(1,0)` < half of `GetIntStat(0,0)`; until it exists `kaif-experience-lint` reds on EXP-0603 «no mechanization field», and on the class shell-lied (EXP-0602 + EXP-0123) until #47 is fixed with its stand row); the save backups lag the live world (EXP-0604).
+> 2. DONE 2026-11-21 23:12 +03:00 — **#24 the bow-kill crash CLOSED** (bug 85 DONE): the cause class is closed in RC3 (the guard 0 calls, `RegisterKeyBind` only in comments
+>    of our mods); R24b — 15 bow kills with real shots in a row, 18 arrows re-attached to corpses, no crash (report section 8). My two stand defects on the
+>    way: the bow not in hand in run 1 (the owner caught it 22:51, EXP-0605) and `aim-shot.sh` blind after the 10th shot (fixed, pack `2e0499b`, EXP-0606).
+>    Open critical now (5): #21 the world frozen behind a loading screen (waystone and dungeon cases owed; the waystone mod's notes and stand route written 23:2x — `games/ConanExiles/mods/WaystonesEnhanced.md`) · #41 Esc over other mods' windows (bug 108 — the owner called it «на будущее», not a release blocker, while the tracker labels it critical: settle the label with him; needs a
+>    non-Lua path) · #30 bow sprint — S8 PASS 23:23 (weight never refuses a sprint, it multiplies the speed; overloaded, our bow sprint stays shut — report §9), S9 a sheathed bow still owed (bug 93; the stand: sheathe by the quick-slot key and prove it by `HasWeaponsEquipped()` false, real W + Shift, then RMB — read whether the game re-wields the bow and the sprint holds, by the Locomotion speed lines and BowSprint lines; the bow-kill stand of the game map for the spot) · #23 the map stuck without the hub tabs (bug 84 — hunt 23:30 on RC3: not reproduced in three variants, never two map widgets in the viewport — the old cause; open for the owner's eye or a wider hunt) · #48 the locomotion
+>    error while dead (fixed in the pack, closes after the next build's retest). #43 the slow launcher (bug 110) waits for the owner's eye. Then the 33
+>    non-critical (incl. #47) by the same test.
+
 ## 2026-11-21 21:3x +03:00 — STATUS bonsai trim, part 13: the NOW and DONE blocks of the chat of 20:02 (the RC3 publication, the retest, incident 116), moved verbatim at its closure
 
 > **NOW 2026-11-21 20:3x — the chat of 20:02 (resume): the RC3 PUBLICATION IS DONE** (the owner 19:07 «гоу, релиз», 20:18 «да, публикуй»; chronicle entries

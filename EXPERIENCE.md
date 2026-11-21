@@ -125,7 +125,7 @@ R6 (#6 retest): god off 4 m from «Киммерийский бронник I», 
 SAME mistake as G2 of 2026-11-20 (kappas, reads every 4 s). A camp humanoid deals ≈ 30 a second to a level-25 heroine in light armour. Lesson: a damage
 window is closed by the GAME, not by my reads — one remote call that switches god off AND starts a game-thread loop which switches god on the moment health
 falls under half; the frames only watch. A second repeat of a lesson is a guard owed, not a third note.
-mechanize: a `damage-window.lua` stand tool (god off → `LoopInGameThreadWithDelay` 100 ms → god on below 50 % → the health trace into `_G`) before the next damage case.
+mechanized: none yet — OWED: a `damage-window.lua` stand tool (god off → `LoopInGameThreadWithDelay` 100 ms → god on when `GetIntStat(1,0)` < half of `GetIntStat(0,0)`) before the next damage case (STATUS «FIRST», the stand lessons).
 
 ### EXP-0602 · 2026-11-21 · ❌ · #launcher #powershell #encoding #installer #conan #s3
 class: shell-lied
@@ -134,7 +134,9 @@ Windows PowerShell 5.1 writes a redirected stdout in the console code page, so t
 as «-», and `RunInstaller` (KrinikConanUpdates.cs) compares the names verbatim. Lesson: a reader of another process's redirected output compares names
 after folding the dashes and quotes the code page can lose (or sets UTF-8 on both ends); a non-ASCII mod name is a test row.
 **Repro:** `node KUMM/.work/rc3_fresh/mods_unseen.mjs <bundle>/pack/modpack.json <launcher log>` prints the two unseen names.
-none-cheap: one defect, the fix and its stand row ride with the next launcher change (issue filed).
+none-cheap: one defect, the fix and its stand row ride with the next launcher change (issue #47 filed).
+<!-- class-ok: shell-lied — EXP-0602 (PowerShell 5.1's redirected output in the console code page) and EXP-0123 (a bare program name resolved in System32 before PATH) are two different mechanisms; no single guard covers both; EXP-0602's own fix is #47 -->
+
 
 ### EXP-0601 · 2026-11-21 · ❌→✅ · #powershell #cmd #path #machine #elevated #s1
 class: environment-assumed-not-probed
