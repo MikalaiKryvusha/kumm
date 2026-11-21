@@ -54,7 +54,7 @@ feed, the download and the install; the owner's own game folder and launcher sta
 
 ## 6. Traces
 
-`KUMM/.work/rc3_fresh/fresh.out` and the launcher log (kept until the issue of Found is filed); the 600 frames (`KUMM/.work/rc3_fresh/frames/`, 5.2 GB) removed
+`KUMM/.work/rc3_fresh/fresh.out` (kept); the launcher log removed 23:34 after the issue of Found was filed (#47, its lines quoted there and above); the 600 frames (`KUMM/.work/rc3_fresh/frames/`, 5.2 GB) removed
 after the final frame was looked at (HOUSE_RULES 15) — the key lines are quoted above.
 
 ## 7. Verdict
