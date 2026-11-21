@@ -219,6 +219,10 @@ has beside the game, verify them, and switch the bundle in one step; an RC-sized
       third-party paks + the 2.3 GB pak joined from its two parts + reserve): a player with 20 GB free is refused. Fix: count the rewrite as the sizes of
       `Fetch` entries with `Parts` or `Group`, plus the assets only when the staging volume gives no hardlinks (`Link` / the probe); a stand case with a
       limited free space (the stand's `KRINIK_LAUNCHER_FREE` or a small VHD).
+      DONE 2026-11-21 18:4x, pack `6891744` (`Plan.RewriteBytes`, `Delta.LinksOn`; D1 / D7 logs read). Judge 1 round: 0 defects. Left for later: (R1) a game
+      folder that is a junction / mount onto exFAT — `LinksOn` reads the drive letter, `ReadFree` too: decide links by a real probe on `.dl\manifest.json`
+      and read the free space by `GetDiskFreeSpaceEx(staging)`; (R2) a per-file link failure on NTFS falls back to a silent copy (log the Win32 error,
+      re-check the space); NITs: ReFS counted as no links, the `-Upgrade` installer's growth covered only by the reserve, the driver's asserts of the logged sums.
 - [ ] 7. MEASURE FIRST, then decide — a chunked download inside a big pak (the owner 2026-11-21 17:07–17:10 on the weight imbalance and on aligning our
       files by 1 MB or 100 MB; chronicle entry 2026-11-21 17:07). Facts: 187 files, 6 over 1 GiB hold 9 GB of 12.8 GB (70 %); a changed big pak downloads
       whole. Alignment alone gives nothing to a whole-file updater, repak 0.2.3 has no alignment option, and 12.6 GB are third-party paks their authors
