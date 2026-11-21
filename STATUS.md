@@ -147,12 +147,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `make_release.sh`, the RC2 manifest kept as the previous one (`published_0_9_1-RC2/manifest.json`, computed from the bundle). Cases
 > `testcases/TC_conan_reproducible_export_2026-11-21.md`, report `testcases/reports/2026-11-21_conan-reproducible-export.md` (partial: R5 at the next release;
 > `kit-buildmod.py` and `patch-mod-asset.py` owed a run at their next use). Issue #45 «Launcher: an update downloads the whole archive…» filed, its first comment
-> (the pak order fixed) posted after the push. The manifest code is committed, pack `d85e388` (judge 2 rounds). Step 3 BUILT (launcher judge round 1: 2 defects + 8 risks, all fixed;
-> the strings' clean read: 5, all applied), committed LOCALLY, push waits for the judge's round 2 (running 11:35): `ConanExiles/_config/launcher/KrinikConanDelta.cs` +
+> (the pak order fixed) posted after the push. The manifest code is committed, pack `d85e388` (judge 2 rounds). Step 3 DONE and PUSHED, pack `6dc79ee` + `2137cae` (launcher judge round 1: 2 defects +
+> 8 risks fixed; round 2: 1 defect (the fallback asked nothing) + 2 risks fixed; the strings' clean read: 5 applied). OWED from round 2 (a round 3 owed too):
+> R2 an asset failing after the plan does not fall back to the volumes; R3 seed copies on a file system without hardlinks — no space budget, no progress;
+> R6 a launcher bundle outside the game folder is not a seed; cosmetics: the one-try manifest digest worded «дважды», the old-bundle offer's size after
+> hardlinks, leftovers (`.dl\manifest.json` after «Нет», the same-version `.staging` after a fallback), D6 overwrites its stand's manifest. `ConanExiles/_config/launcher/KrinikConanDelta.cs` +
 > `BuildUpdate.RunByManifest` (only for an INSTALLED build with no started volume download; a broken manifest falls back to the volumes) + the question with the
 > real size after the check; the stand (`stand.mjs --delta`, `feed.mjs --assets`, `live.mjs delta [--decline|--bad-list]`) D1, D2, D6 pass (report
-> `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`, run 6). NEXT: the round-2 findings → push; cases D3 (stop and resume), D4 (first install of a
-> manifest release takes the volumes), D5 (corrupt asset); then the transition fork (plan 57 phase 6 criterion 6) to the owner and a real update on a copy of the game. RC2's paks are multi-thread packed, so the first
+> `testcases/reports/2026-11-21_conan-launcher-delta-update-stand.md`, runs 6–7). NEXT: the owed round-2 items + judge round 3; cases D3 (stop and resume), D4 (first
+> install of a manifest release takes the volumes), D5 (corrupt asset); then the transition fork (plan 57 phase 6 criterion 6) to the owner and a real update on a copy of
+> the game. The stand: `KUMM/.work/delta/run_r2.sh` (rebuilds the exe into `.work/delta/bin`, stands A and B; ≈ 40 s). RC2's paks are multi-thread packed, so the first
 > manifest update downloads the third-party paks once more. The stand files `KUMM/.work/repro/` (≈ 12 GB of copies, hardlinks and parts) go after the commit.
 >
 > **DONE 2026-11-20 ≈22:0x — the owner's side task of 21:35 (skill packs into KAIF), then RC2 resumes from the line below.** Packs live in `D:/work/ai_sandbox/_tools`,

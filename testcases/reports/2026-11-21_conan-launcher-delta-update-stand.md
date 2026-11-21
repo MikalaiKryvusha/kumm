@@ -41,6 +41,10 @@ monitor), its state, TEMP and desktop inside the stand; the owner's `%LOCALAPPDA
    release; the stand also cuts volumes) — D2, D1 (the first form counted D2's manifest download in D1's feed log: the driver now empties the log per case),
    D6 (`--bad-list`: the volumes plus a manifest with no root).
 
+7. 2026-11-21 11:50:43–11:51:20 +03:00 — after the launcher judge's round 2 (1 defect, 5 risks, 4 cosmetic; fixed: the fallback asks the archive question and
+   checks the volume path's space; the scan keys by the file's refreshed size; a `.staging` is not an installed build): `bash KUMM/.work/delta/run_r2.sh` — D2, D1,
+   D6 all pass; D6 answered «Скачать сборку 1.0.1 (15,6 МБ) и поставить её вместо 1.0.0? Архив скачается в папку игры…» before the volumes. Pack `2137cae`.
+
 ## Checks
 
 - **Hygiene:** the launcher compiled (csc, no error); `make_manifest.py` self-test 20 / 20 (its own report).
