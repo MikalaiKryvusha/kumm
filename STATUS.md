@@ -138,6 +138,20 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **CHAT OF 2026-11-22 09:34 (`resume`, then the owner 09:37 «работай автономно в дневном цикле» — /dayloop):**
+> - **The owner's debt first (his words 09:40): the first-person head shadow (bug 114, #13) and the bow on the back in the first-person view (bug 117, #4)** —
+>   fixed in KrinikConanCamera (`main.lua`, the first-person section: hidden shadow on the game-hidden head, the neck bone hidden only above 70° pitch, a
+>   sheathed weapon invisible with its shadow, the view state read at `EventOnThirdPersonChange` — the idle vanity camera path). All cases pass on the working
+>   build (`testcases/TC_conan_fp_head_shadow_sheathed_bow_2026-11-22.md`, report `testcases/reports/2026-11-22_conan-fp-head-shadow-sheathed-bow.md`); four
+>   judge rounds; pack `388b127`; the show page `ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/96_ten_golovy_i_luk_za_spinoj/pokaz.html`. Issues #13 / #4: a comment
+>   with the fix posted, closed after his look (the fix ships in the next build).
+> - **The damage-window stand tool** `ConanExiles/_config/damage-window.lua` (EXP-0603 mechanized; pack `949588b`): DW0–DW0c pass, DW1 (real hits) owed.
+> - **#21 (bug 79) in flight:** the Waystones Enhanced recon done (item / feat / recipe 7770001, travel by `TeleportPlayerServer`); R21a (place two waystones —
+>   the placement by the remote is not solved yet: a building item needs the build mode) and R21b (find a dungeon entrance in the live world) not run.
+> - **New, not fixed yet:** KrinikConanArchery logs a caught Lua error at the heroine's death («вид тела от первого лица: ошибка (сокет после экипировки) —
+>   `GetPostProcessInstance`», `main.lua:1859`); `-Verify` names 4 KrinikConanMusic files missing in the build (not in the RC3 bytes).
+> - The heal by the remote: `CheatManager:SetStat('HealthCurrent', <v>)` (the console form does nothing).
+>
 > **CHAT CLOSED 2026-11-21 ≈23:4x (the chat of 21:33, `resume`: the first install from zero, then the critical issues; soft closure on the owner's word 23:24
 > «работай автономно 15 минут, а затем закрывай чат»). Its detail — chronicle, entry «STATUS bonsai trim, part 14»; reports
 > `testcases/reports/2026-11-21_conan-rc3-first-install-from-zero.md` and `testcases/reports/2026-11-21_conan-rc3-critical-retest.md` (§8 the bow kills, §9 bow sprint S8).**

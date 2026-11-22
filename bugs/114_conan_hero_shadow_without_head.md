@@ -34,9 +34,27 @@ game's own first-person mode is the control.
 The camera mode and the hiding component by the control case → keep the head hidden from the camera and casting its shadow (at the source, HOUSE_RULES 24) →
 neighbours (HOUSE_RULES 39: the helmet, the hair, the bow in first person, the third-person view) → a frame of the shadow before / after from one place.
 
+## Work 2026-11-22 (the owner 09:40: «почему бы тебе тень головы от первого лица не починить?» — taken first, as his debt)
+
+**Cause, observed.** KrinikConanCamera hid the bone `b_neck_1` for the whole first-person view (bug 69: the camera entered the neck looking up); a hidden bone
+collapses the shadow with the mesh. The game itself makes the head and the hair invisible in first person, and an invisible mesh casts no shadow without
+`CastHiddenShadow`. Live proof by hand (remote 10:0x, old code): the bone opened + `CastHiddenShadow` on the two invisible own meshes → the shadow with the head and
+the hair (`KUMM/.work/fp_bow_back/sheet_ab.jpg`, top: before / after).
+**The neck.** With the bone open the camera is in the neck from ≈ 76° up (74° sky, 78° / 81° / 85° skin; the bone hidden → sky at 85°) — so the bone is
+hidden only while the view pitch is above 70° and shown below 66°; looking at the sky, the head's shadow on the ground is out of view anyway.
+**The fix** (KrinikConanCamera `main.lua`, the first-person section; notes `games/ConanExiles/mods/KrinikConanCamera.md`): the hidden shadow on the game-hidden
+own meshes that had a shadow in third person; the neck by pitch in the per-frame hold loop (3.5 µs a frame measured in a batch, first person only); the view state read from the
+game at `EventOnThirdPersonChange` (the vanity camera path); a fallback for a respawn straight into first person. The sheathed bow of issue #4 rides in the same
+section (`bugs/117_…`).
+**Cases:** `testcases/TC_conan_fp_head_shadow_sheathed_bow_2026-11-22.md` — F1 (the shadow with the head), F6 (no neck at 85°, the bone open again below),
+V1 (the vanity view keeps the head), D1 (a death and a respawn straight into first person: head and body cast), C1 (the cost), N1–N3; judge rounds — the pack commit.
+Fixing: this session.
+
 ## Decisions made without the owner
 
 - `[AI]` Severity S3 (cosmetic by HOUSE_RULES 38); queued after the critical bugs 112 and 113.
+- `[AI]` 2026-11-22: the neck thresholds 70° / 66° (measured entry ≈ 76°); above 70° the head's shadow is lost while the camera looks at the sky.
+- `[AI]` 2026-11-22: the hidden shadow, not `OwnerNoSee` (the latter removed the shadow as well — remote 10:0x).
 
 ## Links
 

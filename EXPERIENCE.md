@@ -91,6 +91,32 @@
 
 ## Entries
 
+### EXP-0609 · 2026-11-22 · ❌ · #conan #ue4ss #probe #crash #repeat
+class: wrong-api-assumption
+My throwaway probe `KUMM/.work/tmp/list_teleports.lua` read EVERY property of `BP_TriggerTeleport_C` (`a[pn]` for each name from `ForEachProperty`, each in
+pcall) — the game fell 10:44:14 with EXCEPTION_ACCESS_VIOLATION reading 0x18, the stack all in UE4SS (crash folder `UECC-Windows-43D496B1…`). The same class as
+the crash of 16.09 (EXP-0113): pcall does not catch an access violation in native code, and an unknown property (a delegate, a weak or soft pointer, a native
+struct) read from Lua can be one. Lesson: a probe reads only the properties it names, after their types are known (`fn-params.lua`-style type listing first:
+`p:GetClass():GetFName()` of each `FProperty`, no value read); a blind read of all properties of a game class is a crash risk, never a recon step.
+none-cheap: the rule is a habit line; a property-type lister without reads would be the tool (owed if this repeats).
+
+### EXP-0608 · 2026-11-22 · ❌ · #search #issues #owner #claim
+class: false-negative-search
+The owner asked about the bow on the back in the first-person view; I answered «такой записи у меня нет, это новый дефект» after `ls bugs | grep` by file names.
+It was issue #4 of the public tracker since 2026-11-20 (the owner's frame of 18:4x), listed in `bugs/GITHUB_ISSUES.md` with no local bug file. Corrected in
+the chat the same turn. Lesson: before saying a defect is new, grep `bugs/GITHUB_ISSUES.md`, the bug files' CONTENT and `PROJECT_HISTORY.md` by its words
+(«спин», «back», «sheath») — the issue registry is the list of everything the owner reported since HOUSE_RULES 44, and most of it has no local file.
+none-cheap: one grep line in the habit; the registry is one file.
+
+### EXP-0607 · 2026-11-22 · ❌→✅ · #conan #camera #first-person #hook #state
+class: hook-after-event
+KrinikConanCamera v1 of the first-person shadow and sheathed-bow fix kept «first person» as a flag set by the `SwitchToFirstPersonCamera` hook and cleared by
+`SwitchToThirdPersonCamera`. The idle vanity camera leaves first person through `EventOnThirdPersonChange` / `SetThirdPerson` without either — the bow hidden for
+first person stayed invisible in the orbit view (frame `KUMM/.work/fp_after/sheet_f34.jpg`), and the older neck-bone hide had left the heroine headless there for
+weeks. → ✅ v2 asks the game (`GetIsInThirdPerson()`) at the state-change event itself. Lesson: a mode a mod reacts to is read from the game at the game's own
+change event, never mirrored from a pair of entry / exit hooks — every other path into the mode (idle, cutscene, mount, death) bypasses the pair.
+mechanized: `ConanExiles/_unpacked/KrinikConanCamera/Scripts/main.lua` `sync_view` on `EventOnThirdPersonChange`; case V1 of `testcases/TC_conan_fp_head_shadow_sheathed_bow_2026-11-22.md`.
+
 ### EXP-0606 · 2026-11-21 · ❌→✅ · #conan #stand #log #detector #bow
 class: tool-reads-words-not-meaning
 R24b runs 2–3: `aim-shot.sh` answered «вход в прицел: 0 · выстрелов: 0» from the 11th shot of the session on, while the arrows hit (blood under the Kappa,
