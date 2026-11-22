@@ -184,12 +184,14 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    ticked. Open (cosmetic): the camera jerk at the stamina's end, the sprint-jump view (FOV 102.1 → 107.5 kept after the landing — read KrinikConanArchery's
 >    sprint-view FOV first; bug 93). The old text: **#30 the bow sprint** (bug 93): cases S8, S9 — the bow sheathed by its quick slot (`h:InpActEvt_Shortcut0_K2Node_InputActionEvent_25({KeyName=FName('One')})`),
 >    real W + Shift and RMB, the Locomotion and BowSprint log lines.
-> 3. **#23 the stuck full-screen map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue).
+> 3. 🟡 2026-11-22 20:4x: M1 (the hub on «Карта» = tab index 7, a loading screen over it) pass — nothing stuck after the load; M2 (the map + a dialogue) owed;
+>    since 2026-11-20 the map is the game's own page (our duplicate copy — the class of the 11-07 stuck map — is gone). The old text: **#23 the stuck full-screen map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue).
 > 4. **#41 Esc over other mods' windows** (bug 108): in scope by the 15:07 word — native pak fixes of those windows (the Lua path is dead: KrinikConanUI.md «Clicks and Esc»).
 > 5. ✅ **The KrinikConanArchery Lua error at the heroine's death** — fixed in `b42090f`, A49 / A49n pass 2026-11-22 19:55–19:59, issue #49 closed.
 > 6. **#43 — the launcher's feedback-instructions window is slow** (`bugs/110_*`): measure it at 300 % (open, first frame, a press), fix, retest.
-> Also owed: comments on issues #13, #4, #21 (the owner's bug-report genre, the portrait check — HOUSE_RULES 44); #48 closes after the RC4 retest; `-Verify` names 4
-> KrinikConanMusic files missing in the build; DW1 of the damage window (real hits); the owner's errand — delete `D:\PATH.txt` and `D:\settings.txt`.
+> Also owed: comments on issues #13, #4 (the owner's bug-report genre, the portrait check — HOUSE_RULES 44; #21 commented 2026-11-22 20:2x); #48 closes after
+> the RC4 retest; ✅ `-Verify` clean again since pack `5d844b3` (KrinikConanMusic `"enabled": false` — unfinished, not installed; 110 present, 0 missing);
+> DW1 of the damage window (real hits); ✅ the owner's errand — `D:\PATH.txt` and `D:\settings.txt` are gone (checked 2026-11-22 20:5x, `ls`: no such file).
 > Markers owed (comment-only pack commits): the camera's first-person section `[NOT-TESTED]` → `[TESTED: 2026-11-22 · TC_conan_fp_shadow_always_owner_no_see S1–S7 ·
 > testcases/reports/2026-11-22_conan-fp-shadow-always-owner-no-see.md]`; the pause's loading-screen block → `[TESTED: … R21d, N1 …]`; its comment «держит САМЫЙ
 > НОВЫЙ … один IsInViewport» → «до трёх последних» (the closing judge 15:14).
