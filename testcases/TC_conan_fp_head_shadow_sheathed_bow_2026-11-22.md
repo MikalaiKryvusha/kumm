@@ -2,8 +2,9 @@
 
 > **Created:** 2026-11-22 · **Parent:** `bugs/114_conan_hero_shadow_without_head.md` (issue #13), issue #4 (the bow on the back in the first-person view),
 > `bugs/98_conan_first_person_no_body_shadow.md` step 2; the owner's words 2026-11-22 09:40
-> **Status:** written 2026-11-22 10:07 +03:00 before the run of the new KrinikConanCamera code; run 10:09–10:47 on v1 … v7 — every case passes on the final code
-> (pack `388b127`), report `testcases/reports/2026-11-22_conan-fp-head-shadow-sheathed-bow.md`
+> **Status:** written 2026-11-22 10:07 +03:00 before the run of the new KrinikConanCamera code; run 10:09–10:47 on v1 … v7: F1–F6, V1, N1–N3 passed on v2, C1 on v3+,
+> D1 on v6; the committed v7 (pack `388b127`) got a smoke only (report run 10: neck by pitch, a death looking up, respawn, third person) — report
+> `testcases/reports/2026-11-22_conan-fp-head-shadow-sheathed-bow.md`
 > **Outbound:** issues #13 and #4 — closed only after these cases pass by the player's path (HOUSE_RULES 44.3)
 
 **Test basis.** The owner: the first-person shadow has no head (2026-11-20 18:39, his frame `bugs/114_frames/owner_2026_11_20_1839.webp`); «и лук на спине —

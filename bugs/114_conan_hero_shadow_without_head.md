@@ -2,7 +2,7 @@
 
 > **GitHub issue:** [#13](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/13) — the public tracker of this defect (HOUSE_RULES 44)
 
-**Status:** 🔴 OPEN — recorded only; the chat is paused by the owner, no investigation started
+**Status:** 🔧 fixed 2026-11-22 (KrinikConanCamera, pack 388b127, four judge rounds), cases pass (TC_conan_fp_head_shadow_sheathed_bow_2026-11-22.md), comment on #13 posted; closes after the owner's look and the next build
 **Severity:** S3 by the ladder (a visual defect: cosmetic by HOUSE_RULES 38) — flagged by the owner, so it is the owner's debt
 **Version/build:** Krinik Mod Pack 0.9.1-RC1 (the release build), Conan Exiles Enhanced 3.1.1, the owner's working game `D:\Games\Conan Exiles 3.1.1`
 **When/context:** 2026-11-20 18:39 +03:00, the owner's own play of the RC1 build, after bugs 111–113; his words (verbatim): «у тени героя нет головы»; his frame

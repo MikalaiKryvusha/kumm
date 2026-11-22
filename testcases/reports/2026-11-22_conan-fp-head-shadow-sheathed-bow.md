@@ -1,7 +1,7 @@
 # Test run report — first person: the head's shadow and the sheathed bow out of the view (KrinikConanCamera)
 
 **Created:** 2026-11-22 10:40 +03:00 · **Run by:** the agent (Claude Opus 5.5) · **Version/build:** Krinik Mod Pack 0.9.1-RC3 published bytes + the Locomotion fix + the dev remote,
-KrinikConanCamera from the pack's source (v1 … v6 of the change, deployed `-Only KrinikConanCamera`), Conan Exiles Enhanced 3.1.1 (`D:\Games\Conan Exiles 3.1.1`)
+KrinikConanCamera from the pack's source (v1 … v7 of the change, deployed `-Only KrinikConanCamera`), Conan Exiles Enhanced 3.1.1 (`D:\Games\Conan Exiles 3.1.1`)
 
 ## 1. Work
 
@@ -31,8 +31,8 @@ deploy and back after (md5 `f9f59b7c…` equal every time). Six game launches 09
 
 ## 4. Checks
 
-- Hygiene: `luac -p` clean on every version; `luac -l` — no accidental global in the new section after judge round 3.
-- Functional run: the real game, the heroine's quick-slot events, the view switches, the vanity camera, a death and a respawn — the frames looked at and the
+Hygiene: `luac -p` clean on every version; `luac -l` — no accidental global in the new section after judge round 3.
+Functional run: the real game, the heroine's quick-slot events, the view switches, the vanity camera, a death and a respawn — the frames looked at and the
   `[KrinikConanCamera]` lines read.
 - F1, F2, F3, F4, F5, F6, V1, D1, C1, N1, N2, N3 — **pass** (details per case in the case set).
 - The control: the same angles on the old code (run 1, run 2 «off») show the defects — headless shadow, the bow in the view.
@@ -55,4 +55,4 @@ owner's show; `UE4SS.log` of the build (`[KrinikConanCamera] первое лиц
 
 ## 7. Verdict
 
-pass — every case of the set passes on v6 by the player's path in the real game; the owner's eye on the look is still to come (the show page).
+pass — every case of the set passed by the player's path in the real game (v2 … v6, see the case set), v7 smoked (run 10); the owner's eye on the look is still to come (the show page).

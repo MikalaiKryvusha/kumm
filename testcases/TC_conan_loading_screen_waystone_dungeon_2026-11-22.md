@@ -11,7 +11,7 @@ streaming behind the loading screen. The fix (2026-11-03, `krinik_pause_in_menu.
 stands on the ground. Waystones Enhanced travels by the game's own `TeleportPlayerServer` (`WSE_PlayerComponent`, recon 2026-11-22 —
 `games/ConanExiles/mods/WaystonesEnhanced.md`). EXP-0603: a damage window is closed by the game (god back on under half health), never by the agent's reads.
 
-**Dimensions.** Paths that show the loading screen: waystone travel (R21a), a dungeon entrance and its exit (R21b). Already passed: the admin teleport
+**Dimensions.** Paths that show the loading screen: waystone travel (R21a), a dungeon entrance and its exit (R21b). Already passed (but slowed again 2026-11-22 10:57 and 11:00 — bug 79): the admin teleport
 (2026-11-03), death and respawn (2026-11-07, 2026-11-21). The damage-window tool: the time-out close without damage (control, DW0) and the close under half
 health by real hits (DW1). Not covered: the map-room teleport (Siptah), multiplayer, a dedicated server.
 

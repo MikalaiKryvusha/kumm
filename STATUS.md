@@ -142,8 +142,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 80 % context budget). Reports: `testcases/reports/2026-11-22_conan-damage-window-and-waystone-recon.md`, `…_conan-fp-head-shadow-sheathed-bow.md`.**
 > - **The owner's debt first (his words 09:40): the first-person head shadow (bug 114, #13) and the bow on the back in the first-person view (bug 117, #4)** —
 >   fixed in KrinikConanCamera (`main.lua`, the first-person section: hidden shadow on the game-hidden head, the neck bone hidden only above 70° pitch, a
->   sheathed weapon invisible with its shadow, the view state read at `EventOnThirdPersonChange` — the idle vanity camera path). All cases pass on the working
->   build (`testcases/TC_conan_fp_head_shadow_sheathed_bow_2026-11-22.md`, report `testcases/reports/2026-11-22_conan-fp-head-shadow-sheathed-bow.md`); four
+>   sheathed weapon invisible with its shadow, the view state read at `EventOnThirdPersonChange` — the idle vanity camera path). The cases passed on the working
+>   build on v2 … v6, the committed v7 smoked (`testcases/TC_conan_fp_head_shadow_sheathed_bow_2026-11-22.md`, report `testcases/reports/2026-11-22_conan-fp-head-shadow-sheathed-bow.md`); four
 >   judge rounds; pack `388b127`; the show page `ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/96_ten_golovy_i_luk_za_spinoj/pokaz.html`. Issues #13 / #4: a comment
 >   with the fix posted, closed after his look (the fix ships in the next build).
 > - **The damage-window stand tool** `ConanExiles/_config/damage-window.lua` (EXP-0603 mechanized; pack `949588b`): DW0–DW0c pass, DW1 (real hits) owed.
@@ -162,7 +162,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 3. **#41 Esc over other mods' windows** (bug 108): the owner called it «на будущее», the tracker labels it critical — settle the label.
 > 4. KrinikConanArchery: the caught Lua error at the heroine's death (`main.lua:1859`, `h.Mesh:GetPostProcessInstance()` on a dying pawn — guard the mesh);
 >    `-Verify` names 4 KrinikConanMusic files missing in the build. DW1 of the damage window (real hits) owed. #48 closes after the next build's retest;
->    #43 the slow launcher waits for his eye.
+>    #43 the slow launcher waits for his eye. The `[NOT-TESTED]` markers of the camera's new section (pack 388b127) flip to `[TESTED: … report]` — a comment-only pack commit.
 > 5. **The owner's errand still open:** delete `D:\PATH.txt` and `D:\settings.txt` (Claude Code refuses a removal at a drive root).
 >
 > The CHAT CLOSED block of 2026-11-21 ≈23:4x (its FIRST list, the stand lessons) — chronicle, entry «STATUS bonsai trim, part 15»; its open items
