@@ -125,81 +125,27 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **THE CHAT OF 23:47 (2026-11-22) — finishing the RC4 publication.** The 23:09 upload did NOT die with the chat: `gh` PID 39600 alive at 23:48, 47 of 83 assets
-> on the draft (the volumes `.zip.001`–`.007` and the a–f per-file assets still going; 65 at 00:06), waited on by `Wait-Process` in the background (EXP-0616).
-> **The update RC3 → RC4 through the launcher on the copy PASSED** (report `testcases/reports/2026-11-23_conan-launcher-update-rc3-rc4.md`): the launcher
-> 1.1.0 → 1.1.1 by itself, 11 files / 39,0 МБ fetched, no volume, 74/74 deployed, verify 115 / 0, the RC4 screen; the installer's exit 1 of run 1 was my stand's
-> missing `desk` folder (driver fixed), run 2 exit 0 with the shortcut. Not filed yet: `install.ps1` returns 1 when only the shortcut fails (minor). The copy
-> `rc1_install/Conan_311` now holds RC4 — the next update test from the PUBLISHED release needs RC3 back or waits for RC5.
-> **The owner's desktop shortcut** «Krinik Conan.lnk» (changed 2026-11-20 17:38) opens the RC1 launcher 1.0.0 in the working game
-> (`D:\Games\Conan Exiles 3.1.1\Krinik_Mod_Pack_0_9_1_RC1\KrinikConanLauncher.exe`), while the game holds RC4 (`pack_version.txt`, put by `Deploy-ModPack.ps1`,
-> which makes no shortcut). After the draft is lifted: start that launcher, «Обновить лаунчер» from the real GitHub feed → 1.1.1 in place, the shortcut then
-> opens 1.1.1 (promised to the owner 00:19). Upload at 00:20: 79 of 83, 21.3 GB; left `.zip.006`, `.zip.007`, Shemite `.p1`, `.p2`. The «вошло в v0.9.1-RC4» comments for issues #4 #13 #21 #43 #48 drafted in `.work/rc4/issue_comments/` (voice-lint 0, core 0;
-> the clean read's findings being applied), the issue #52 body rewritten by the portrait in `52_body_new.md` (not yet edited on GitHub). The owner's 23:08
-> question «which bugs are critical» answered in chat against the bug files and the open issues (23:5x): #21 waystone owed, #23 the stuck map (the one real
-> dead end, not reproduced), #30 not reproduced by real input, #43 / #48 retest; #41 Esc is comfort by the owner's word 00:00 (label `critical` removed,
-> scale `researches/bug-severity/README.md`, HOUSE_RULES 38.1; whether #30 #43 #48 keep `critical` — asked in chat 00:0x); **owed: a bug file + issue for the first-person view switch ≈ 3 ms in
-> one frame (over the 1 ms budget; camera notes line 123)**.
->
-> **2026-11-23 00:29 — v0.9.1-RC4 PUBLISHED:** the upload ended `exit=0` at 00:29:36; `gh release view` reads draft=false, 83 assets, Latest = v0.9.1-RC4
-> (https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.1-RC4). (That line and its commit 59cefa0e came from the previous
-> chat's session kumm-82, woken by its own upload's end; told 00:31 that this chat owns the publication.)
->
-> **2026-11-23 00:30–00:39 — THE PUBLICATION STEPS DONE (this chat):** the 83 assets compared with the release dir by name and size, all `uploaded`;
-> `launcher-v1.1.1` published 00:30 (`--latest=false`, exe 5 706 240 B, digest = the local SHA-256; Latest stays v0.9.1-RC4); **the owner's working-game
-> launcher updated 1.0.0 → 1.1.1 from the REAL feed** 00:33 (his desktop shortcut's target replaced in place; I answered «Нет» to the crash-report question
-> about MY stand crash of 20:57:23 first); the «вошло в v0.9.1-RC4» comments posted on #4 #13 #21 #43 #48 and read back; #52's body replaced by the portrait
-> rewrite; the launcher notes kept in `published_0_9_1-RC4/`; `release_checklist.py --published` — 0 TODO, 15 MANUAL, 10 OK; the release pages and the public
-> README read back (RC4); `rc4_release` (41 GB), `public_tree_rc4`, `rc4/kit_out`, `rc4/keep` removed (D: 61 GB free). **New tool:** the upload progress page
-> `ConanExiles/_config/release/upload_progress.mjs` (the owner's wish 00:21; report `testcases/reports/2026-11-23_conan-release-upload-progress-page.md`;
-> judge rounds 1–4 fixed, round 5 running; NOT committed yet). **Left of the RC4 list:** the issues close only after the retest on the published release
-> (#21 needs the real waystone travel); the owner's answer on `critical` for #30 #43 #48 (asked 00:0x, none yet).
->
-> **2026-11-23 00:52 — the owner: «работай автономно до переполнения контекста, выпускай RC4 и затем закрывай чат» → /dayloop, then /end-chat-soft at 80 %.**
-> Done in the loop: (1) **#43 retested on the PUBLISHED launcher 1.1.1 in the working game** — a repeated plate open 20–38 ms, the FIRST open 134–390 ms
-> (the stand said 10.9–14.0 / ≈ 100 ms); the owner 01:09 «d 1.1.1 первое открытие медленное, да, баг есть» → **standing falsehood corrected 01:1x** in the
-> RC4 and launcher-v1.1.1 release bodies, the #43 comment (with a «Поправка» paragraph), the pack's draft / published notes and the guide source (the guide
-> PDF asset keeps the old line — hashed in `manifest.json`); bug 110 has the section and the open item (the first open ≤ 16 ms). (2) **issue #53** filed —
-> the first-person view switch ≈ 3 ms (S3, `bug`); the game retest 01:23 confirms it for the FIRST switch after world entry (4.5 ms of lines, «2 мс»), the
-> second costs 1.7 ms. (3) **engine `6a24c151`:** `install.ps1` warns and keeps exit 0 when the shortcut cannot be written (missing folder, empty Desktop
-> path, missing drive; fixture cases at the END of `tools/fixture-pack.mjs`); `Invoke-FileRetry` in `Deploy-ModPack.ps1` retries the rename of
-> `_kumm_player.partial` and the removal of `_kumm_backup` (the stand's «Access denied» / «being used» in 3 runs of 6; after the fix 4 / 4 clean, 74 checks);
-> judge rounds 4–5. (4) **the upload page committed** — pack `b30cee1`, 5 judge rounds. (5) **the game retest on the published RC4** (case file
-> `testcases/TC_conan_rc4_retest_published_2026-11-23.md`, report `testcases/reports/2026-11-23_conan-rc4-retest-published.md`): **#48, #4 and #13 pass and
-> are CLOSED** (comments posted; their clean read skipped — said in the report); N2 (a first-person weapon swap) owed — the slot-2 remote call did nothing,
-> and after R48's death the heroine respawned without her gear (bow and hatchet on the corpse in the owner's save). **Owed next:** #21 (the real waystone travel) retest; #43's first open (bug 110 open item); judge round 5's older risk FIXED (`Deploy-ModPack.ps1` deletes the journal before the backup folder; the partial-removal path itself not simulated) — was: a
-> failed backup removal can leave `journal.txt` with half of `files\` (delete the journal first); the owner's answer on `critical` for #30 #43 #48.
->
-> **CHAT CLOSED 2026-11-22 ≈23:1x — RC4 PUBLICATION IN PROGRESS** (`[OWNER]` 23:07 «публикуем релиз РЦ4»): the public tree (scan 0) pushed to the public repo
-> `1bdac32`; `gh release create v0.9.1-RC4 --latest --title "0.9.1-RC4" --notes-file KUMM/.work/rc4_release/release_notes_Krinik_Mod_Pack_0_9_1_RC4.md
-> release/*` started 23:09:22 in the background (83 files ≈ 26 GB; a DRAFT until the last file; log `KUMM/.work/rc4/logs/gh_release.log`). **FIRST in the next
-> chat:** (1) `gh release view v0.9.1-RC4 -R MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack --json isDraft,assets --jq '"draft=\(.isDraft) assets=\(.assets|length)"'`
-> — 83 assets and draft false = done; if the upload died with the chat: `gh release upload v0.9.1-RC4 <the missing files of KUMM/.work/rc4_release/release>` →
-> `gh release edit v0.9.1-RC4 --draft=false --latest`; (2) `gh release create launcher-v1.1.1 --latest=false --title "Krinik launcher 1.1.1" --notes-file
-> ConanExiles/_config/release/draft_0_9_1/github_release_notes_launcher_1_1_1.md KUMM/.work/rc4_release/release/KrinikConanLauncher.exe`; (3) the body as published
-> into `_config/release/published_0_9_1-RC4/` (the notes and `manifest.json` are already there — pack commit of this closing); (4) `release_checklist.py --published`;
-> (5) issues #4 #13 #21 #43 #48 — «вошло в v0.9.1-RC4» comments, closed after the retest on the published release (#21 needs the real waystone travel);
-> (6) the update RC3 → RC4 through the launcher on `KUMM/.work/rc1_install/Conan_311`: `node KUMM/.work/rc4/realcheck.mjs` (the local feed; never run yet);
-> (7) cleanup `KUMM/.work/rc4_release` (41 GB) only after the upload is verified; `public_tree_rc4`, `rc4/kit_out`, `rc4/keep` (the camera config copy, the
-> `KrinikMenuProbe` `enabled.txt`) — remove; (8) the RC4 notes have no update-size line (12 files, 46.6 MB) — published without it.
-> Then the carried items of the 18:55 chat: plan 61 step 2 (our kit «Esc catcher» on EAA); the real waystone travel (#21); a talk with an NPC over the map started
-> by a REAL E (M2); #30 the sprint-jump view; issue #52 (the first-person bow stance — for later, by the owner's word 22:39); the issue #52 text re-checked by the
-> portrait (filed with the portrait loaded > 1 h earlier). The owner asked 23:08 which bugs are critical for comfortable play — answered from STATUS in chat
-> (the waystone travel, Esc in mods' windows, the first-person view switch ≈ 3 ms, the talk over the map by E); a list checked against every bug file is owed.
->
-> **RC4 BUILT 23:06** — the owner 22:56 waived the play hour («час не нужно, собираем так, так как мы пока хотфиксингом занимается»; `KUMM/.work/rc4/waiver.txt`,
-> `KRINIK_PLAY_GATE_WAIVER`): `make_release.sh` OK into `KUMM/.work/rc4_release/release` (7 volumes, 83 per-file assets + `manifest.json`, the guide PDF, the
-> launcher 1.1.1, SHA256SUMS; stream `c3c34837…`, 13 723 733 770 B = «12,8 ГБ»; **changed vs 0.9.1-RC3: 12 files, 46.6 MB**); the release-page notes with sizes
-> `KUMM/.work/rc4_release/release_notes_Krinik_Mod_Pack_0_9_1_RC4.md`; README.draft unchanged (the same 12,8 ГБ). The work dir is 41 GB, D: 21 GB free. Log
-> `KUMM/.work/rc4/logs/07_make_release.log`. **NEXT:** (1) one line about the update size in the RC4 notes (both halves, by the portrait: «Обновление с RC3 скачает
-> 12 изменившихся файлов, около 47 МБ») — draft + the copy in the work dir; (2) the update RC3 → RC4 through the launcher on the copy `KUMM/.work/rc1_install/Conan_311`:
-> `node KUMM/.work/rc4/realcheck.mjs` (adapted, never run); (3) the owner's word for the publication — then `gh release create v0.9.1-RC4 --latest` with every file
-> of the release dir, `launcher-v1.1.1` (`--latest=false`, `draft_0_9_1/github_release_notes_launcher_1_1_1.md`), `release_checklist.py --published`, the
-> public tree (`make_public_tree.py`), issues #4 #13 #21 #43 #48 commented and closed after the retest; (4) cleanup of `KUMM/.work/rc4_release` after the upload. Owed in game: a weapon swap in first person on the new pass («просмотрено N» small),
-> quit to menu and back. `KrinikMenuProbe` disabled in the working game (its `enabled.txt` in `KUMM/.work/rc4/keep/`). The owner plays another game 22:19 —
-> no real input, no voice until he frees the machine. Next: THE PLAY HOUR (`testcases/TC_conan_play_matrix.md`, rows R11–R13 added; recorder `KUMM/.work/rc4/play/rec_session.sh`; report
-> `testcases/reports/2026-11-22_conan-play-0.9.1-RC4.md`; the gate `check_play_report.py`) → `make_release.sh` → the update RC3 → RC4 on the copy
-> `KUMM/.work/rc1_install/Conan_311` (RC3 installed; driver `KUMM/.work/rc3/realcheck.mjs` to adapt) → the owner's word for the publication.
+> **CHAT CLOSED 2026-11-23 ≈01:4x — v0.9.1-RC4 PUBLISHED, the publication finished** (`[OWNER]` 2026-11-22 23:07 «публикуем релиз РЦ4» · 2026-11-23 00:52
+> «работай автономно до переполнения контекста, выпускай RC4 и затем закрывай чат»). Done: v0.9.1-RC4 (83 assets, Latest) and `launcher-v1.1.1` on GitHub; the
+> owner's working-game launcher updated to 1.1.1 from the real feed (his desktop shortcut opens it); the update RC3 → RC4 through the launcher on the copy passed
+> (`testcases/reports/2026-11-23_conan-launcher-update-rc3-rc4.md`); the release ritual 0 TODO; #4 #13 #48 retested on the published build and CLOSED
+> (`testcases/reports/2026-11-23_conan-rc4-retest-published.md`); the feedback-plate claim of the notes corrected on GitHub and in the pack (standing falsehood,
+> EXP-0618); issue #53 filed; engine `6a24c151` + `9b63fd39` (the shortcut warning, `Invoke-FileRetry`, the journal deleted first); the upload progress page
+> (pack `b30cee1`, `node _config/release/upload_progress.mjs --tag <tag> --dir <release dir>`); the bug severity scale (`researches/bug-severity/README.md`,
+> HOUSE_RULES 38.1 — #41 Esc is comfort). The blocks themselves — chronicle, entry «2026-11-23 01:4x — STATUS bonsai trim, part 21».
+> **FIRST in the next chat:**
+> 1. The owner's answer on the `critical` label of #30 (the bow sprint) and #43 (the launcher): asked in chat 00:0x by the industry scale, no answer yet.
+> 2. #43 — the feedback plate's FIRST open after a start, 134–390 ms on the owner's machine (bug 110's open item; the owner 01:09 «баг есть»): build the plate's
+>    windows and faces ahead at the launcher's idle; the case — the first open ≤ 16 ms on his screen (`.work/rc4/retest43.mjs` measures it). The next launcher.
+> 3. #21 — the real waystone travel retest (two placed waystones need the building mode with real input).
+> 4. N2 — a weapon swap in first person on the published build: the heroine of the owner's save respawned without her gear after the R48 death (her corpse
+>    holds the bow and the hatchet near -82919, 231984) — spawn gear by the remote first.
+> 5. #53 — the first view switch after world entry costs 2–4.5 ms (the camera's three walks; the second switch 1.7 ms).
+> 6. Carried from the chat of 18:55: plan 61 step 2 (our kit «Esc catcher» on EAA — comfort now, #41); M2 (a talk with an NPC over the map started by a REAL E —
+>    the stuck-map hunt, #23, the one real dead end); #52 (the first-person bow stance) — for later by the owner's word 2026-11-22 22:39.
+> 7. The owner's queue warns about the Svarog interviews 011–021 (answered, not applied — the game is paused); the contour has no «parked» status, so they stay.
+> 8. The RC4 guide PDF asset keeps the old plate line (hashed in `manifest.json`); the next release's PDF carries the fix. The copy
+>    `KUMM/.work/rc1_install/Conan_311` (59 GB) holds RC4 now — keep for the RC5 update test (it then needs RC3 → RC4 reversed) or remove by rm-tree.
 >
 > The block «THE CHAT OF 18:55 (2026-11-22)» — chronicle, entry «2026-11-22 23:1x — STATUS bonsai trim, part 19»; its open items are carried in the RC4 block above.
 >
