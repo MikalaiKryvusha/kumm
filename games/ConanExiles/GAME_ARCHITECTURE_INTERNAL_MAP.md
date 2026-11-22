@@ -1278,3 +1278,13 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   time (the hero's `CustomTimeDilation` does not move it). Our pause section rescales 16 / 9 on every multiplier change (`KrinikConanUI` notes).
 - The hub closes by `CraftingGUI_C:TryCloseWindow()`; the Esc menu opens by `GUIModuleController:ActivateModule(FName('IngameMenu'), true, false)` (the game shows
   Simple Mod List's `SML_ModList`) and closes by `W_IngameMenu_C:TryCloseWindow()`.
+
+## Esc and the escape stack (read live 2026-11-22, bug 108 «Recon 2026-11-22»)
+
+- `GUIModuleController.m_EscapeStack` holds one `EscapeStackNode` per active module; its `SignalActivated` is bound to that module's `GUIModule:SlotESCPressed`.
+  A posted Esc reaches the stack: the top vanilla popup (`InventorySettingsPopup`, root `InventorySettingsBase`) closes, the hub (`CraftingGUI_C`) closes when alone.
+- A mod window whose root derives from `WindowRoot` directly closes on Esc only if its blueprint listens for the game's input action «Escape» itself
+  (`SM_UI_Settings_C` → `InpActEvt_Escape_K2Node_InputActionEvent_0`); `EAA_Armorsettings` (`BP_EAA_Armorscaling_C`) does not, its close button `Button_Close`
+  is a plain UMG Button with the handler `BndEvt__Button_81_…_OnButtonClickedEvent__DelegateSignature` (no parameters).
+- UE4SS hooks on `/Script/UMG.UserWidget:OnPreviewKeyDown` and `/Script/ConanSandbox.GUIModule:SlotESCPressed` never fire (native call paths).
+- Opening `EAA_Armorsettings` over the hub with KrinikConanCamera on crashed UE4SS repeatedly (bug 118, open).
