@@ -91,6 +91,15 @@
 
 ## Entries
 
+### EXP-0618 · 2026-11-23 · ❌→✅ · #performance #launcher #release-notes #real-world #standing-falsehood
+The RC4 and launcher 1.1.1 notes promised the feedback plate «0.08 → 0.01 s, the first open 0.1 s» — the agent's stand numbers (an off-screen window, the
+owner's 300 % scale, paint spans only). On the owner's real machine the published launcher measured 20–38 ms for a repeated open and 134–390 ms for the first
+(`retest43.mjs`, `ab43.mjs`): 2–4× the stand; the owner confirmed the first open is a bug. The numbers were already on two GitHub release pages, an issue
+comment and the guide, so the correction had to be made in six places, and the guide PDF asset could not be fixed at all (hashed in `manifest.json`). Lesson:
+a timing that goes into a text for players is measured on the owner's real machine with the build as shipped, the same spans before and after; a stand number
+goes out only with its condition («на стенде»). A «before» that the old build cannot report (launcher 1.1.0 had no plate spans) is said as unmeasured.
+none-cheap: measure on the owner's machine before writing the notes line; no guard
+
 ### EXP-0617 · 2026-11-23 · ❌→✅ · #handover #sessions #github #release #background
 Two traps at the end of a release. (1) The previous chat's session (kumm-82) was woken at 00:29:36 by its OWN background upload ending and committed a STATUS
 line (59cefa0e, «next: the launcher release») a minute after this chat had taken the publication over — two sessions on one release could have posted the

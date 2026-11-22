@@ -2,7 +2,8 @@
 
 > **GitHub issue:** [#43](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/43) — the public tracker of this defect (HOUSE_RULES 44)
 
-**Status:** 🔧 fix pending verification (built and measured on the stand 2026-11-20; the owner's eye on the real launcher is the check)
+**Status:** 🟡 partly fixed — the screen change (1.0.x, RC2) and the repeated plate open (1.1.1, RC4: 20–38 ms on the owner's machine) are fixed; the plate's
+FIRST open after a start (134–390 ms) is open by the owner's word 2026-11-23 01:09 (section «The published 1.1.1 on the owner's machine»)
 **Severity:** S2 (a slowdown — critical by HOUSE_RULES 38; the owner's time: the third recurrence of the same class)
 **Version/build:** launcher 1.0.0 of build 0.9.1-RC1 (pack `513a21f`) · **When/context:** 2026-11-20 11:37, the owner using the RC1 launcher
 **Fixing:** this session
