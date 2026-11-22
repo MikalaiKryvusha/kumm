@@ -200,7 +200,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    point 7); first the inventory of the 13 windows, then spike A (our kit «Esc catcher» taking focus) on EAA. The old text: **#41 Esc over other mods' windows** (bug 108): in scope by the 15:07 word — native pak fixes of those windows (the Lua path is dead: KrinikConanUI.md «Clicks and Esc»).
 > 5. ✅ **The KrinikConanArchery Lua error at the heroine's death** — fixed in `b42090f`, A49 / A49n pass 2026-11-22 19:55–19:59, issue #49 closed.
 > 6. **#43 — the launcher's feedback-instructions window is slow** (`bugs/110_*`): measure it at 300 % (open, first frame, a press), fix, retest.
-> Also owed: comments on issues #13, #4 (the owner's bug-report genre, the portrait check — HOUSE_RULES 44; #21 commented 2026-11-22 20:2x); #48 closes after
+> ✅ Issues #13 and #4 commented 2026-11-22 21:1x (the 25dff5d fix as it is now; #13 corrected the morning «neck bone above 70°»), #21 commented 20:2x; #48 closes after
 > the RC4 retest; ✅ `-Verify` clean again since pack `5d844b3` (KrinikConanMusic `"enabled": false` — unfinished, not installed; 110 present, 0 missing);
 > DW1 of the damage window (real hits); ✅ the owner's errand — `D:\PATH.txt` and `D:\settings.txt` are gone (checked 2026-11-22 20:5x, `ls`: no such file).
 > Markers owed (comment-only pack commits): the camera's first-person section `[NOT-TESTED]` → `[TESTED: 2026-11-22 · TC_conan_fp_shadow_always_owner_no_see S1–S7 ·
