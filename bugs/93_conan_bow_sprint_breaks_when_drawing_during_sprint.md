@@ -19,6 +19,13 @@ game sets `NewTargetArmLength` 480 for one sample at the take-off, the camera mo
 107.5 after the landing. 102.1 was there before the sprint started (left by the previous sprint runs — KrinikConanArchery's «обзор спринта держится»), so the
 jump ends a held sprint view rather than zooming in. The owner's «приближает» is not reproduced as such; the view does change in the jump. Next: read
 KrinikConanArchery's sprint-view FOV section (when it sets 102.1, what resets it) before any change.
+**Re-run 2026-11-22 21:03 (a fresh game, the same real keys, the heroine really sprinting):** FOV 107.5 at rest with the bow in hand → 102.1 when the sprint starts →
+**102.1 through the whole jump and after the landing** (the sprint resumes, the arm 230) — the sprint jump changes nothing, issue #30 item 4 is NOT reproduced (the
+20:4x run jumped from a stale 102.1 at rest). **The real finding instead: the sprint view STICKS after the sprint** — Shift released at ≈ 4.7 s, the heroine
+standing, and the FOV still 102.1 twenty seconds later (21:04:07), where it was 107.5 before the sprint. The game returns the normal view on the release of the
+sprint key (the Archery section's comment, «Режим 2»); something keeps mode 2. The next jump / draw then resets it to 107.5 — the view «moves» on an action the
+player did not link to the camera. Next: the control with KrinikConanArchery OFF (does vanilla keep 102 after a sprint with the bow in hand?), then read the
+SZ sprint-view hold (`main.lua` ≈ 1510–1557: the freeze of `FieldOfViewTarget` while `SZ.held`) — the likely holder.
 **Status:** 🔧 build 7 deployed; S1b, S3, S6 PASS by real input 2026-11-13 10:43 (report `testcases/reports/2026-11-13_conan-bow-sprint-sprint-then-draw.md`); **the owner's own play confirms it** — `[OWNER]` 2026-11-13 11:01 «спринт и стрельба работают»; open: S8, S9, the cost (build 4 deployed 09:32); his next remark —
 the bow unseen in first person — is bug 95 · **Severity:** S2 (the owner's playtime on the feature he named
 most important) · **Version/build:** Conan Exiles 3.0.1, pack `ConanExiles` working tree, section build 3 (2026-11-10 19:54) → build 4 (2026-11-13) ·
