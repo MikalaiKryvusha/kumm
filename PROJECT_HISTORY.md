@@ -9673,3 +9673,26 @@ After my farewell said the RC2 build was stopped because the UI kit pak still ca
 Done the same chat: `ConanExiles/_config/release/release_checklist.py` (stages A–E, OK / TODO / MANUAL), step 0b of `make_release.sh`, the hook
 `KUMM/tools/hooks/release-ritual-gate.mjs` on `gh release create` (wired in `.claude/settings.local.json`), HOUSE_RULES 42 «The ritual is code». First run on
 0.9.1-RC2: 5 TODO (a code commit without «review:» — c27e3a7; every Krinik mod's version still RC1; the menu line in the UI kit pak; the guide; the README).
+
+## 2026-11-22 21:1x +03:00 — STATUS bonsai trim, part 17: the chat of 15:18 (part 1) and the closed block of ≈15:1x, moved verbatim
+
+> **THE CHAT OF 15:18 (2026-11-22) — the RC4 scope, part 1 (pack `b42090f`).** (a) bug 118 — solved in the chat of 18:55 above (the camera's registry stays as
+> the cheaper design, not as a crash fix). (b) **#49 the archery
+> error at death** — filed, fixed (mesh guard), the death case A49 NOT run in game yet. (c) **#43 the feedback window** — a later open 13.2–13.7 ms (was 76–83 ms
+> at 300 %), the first open still 92 ms (owed: draw the faces at idle after the window shows); `perf-report` stand case; the owner's eye decides the issue.
+> (d) **#41 Esc** — recon in bug 108: Lua key hooks never fire; the working native path is the game's own input action «Escape» on the window
+> (`SM_UI_Settings_C` does it) bound to the window's own close handler (`BndEvt__Button_81_…` closes EAA) — `ListenForInputAction` with a delegate table NOT tried
+> yet (every try met crash 118 first). Not started: #21 the waystones / dungeon (R21a/R21b), #30 the bow sprint S9, #23 the stuck map. The RC4 build path for the
+> new launcher already exists: `make_release.sh` → `make_manifest.py --previous-from` (RC3's `published_0_9_1-RC3/manifest.json`). The game's mods folder: every
+> Krinik mod back on; `KrinikMenuProbe` (a dev leftover, «after reading — delete the mod») still enabled in the build. Case file `testcases/TC_conan_rc4_scope_2026-11-22.md`.
+>
+> **CHAT CLOSED 2026-11-22 ≈15:1x (the chat of 13:06 — the previous farewell pasted as the entry; soft closure by the owner's word 15:07 at 78 % context).
+> Reports: `testcases/reports/2026-11-22_conan-fp-shadow-always-owner-no-see.md`; cases R21c / R21d / N1 of `testcases/TC_conan_loading_screen_waystone_dungeon_2026-11-22.md`.**
+> - **The owner's debt (13:10–13:11, verbatim in `bugs/114_*`): the first-person shadow ALWAYS, everything visible to other players** — KrinikConanCamera (pack
+>   `25dff5d`): no bone hide; the first-person camera moves forward 0 → 10 cm from 55° to 75° pitch (the morning's «neck» was an armour collar); the sheathed
+>   weapon OwnerNoSee + CastHiddenShadow; the held item's shadow back; own hero by `IsLocalController`. S1–S7 pass on v1 / v2 (S3, N1, N2 on v2 only), regressions on v3 / v4 (S1, S2, S5–S7 / S1, the push, S5, S6), four judge rounds. The show page
+>   `ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/97_ten_vsegda_ot_pervogo_lica/pokaz.html` — opened 14:10, his look awaited. His 14:52 question on the axe's shadow —
+>   answered by frames: the raised first-person pose and the blade edge-on to the sun (the game map). Not covered: a second player's client, a mount, the drawn aim.
+> - **Bug 79 (#21) — the admin-teleport path FIXED** (pack `b7d984a`): two live loading screens during a load; the pause keeps up to 3 recent births and no
+>   longer re-arms behind a loading screen; R21d and N1 pass; the dungeon and the waystones not run on this version.
+> - **The owner's look at the launcher 15:06:** fast except the window that explains the feedback instructions (`bugs/110_*` «The owner's look»).
