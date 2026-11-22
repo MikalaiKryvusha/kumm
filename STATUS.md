@@ -155,7 +155,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > at 20:57 — crash-forensics named it at once), all live. Packs `d8c42ed` `5d844b3` `1d9cff5` `290e6f0`.
 > **NEXT (in order):** (1) **build RC4** by the release ritual (`release_checklist.py`, HOUSE_RULES 42) for the file-updating launcher — a fresh chat: the
 > ritual is long; publication waits for the owner's word; (2) plan 61 step 2 — spike A (our kit «Esc catcher») on EAA; (3) the real waystone travel (R21a,
-> real input for the placement); M2 (start the talk by a REAL E); #30: the sprint view STICKS after a sprint with the bow (FOV 102.1 at rest 20 s later; the sprint jump itself is fine) — control with KrinikConanArchery off, then the SZ hold (bug 93); #43's first open
+> real input for the placement); M2 (start the talk by a REAL E); #30 camera: the sprint jump keeps the view; the sprint view sticking after a sprint is the GAME (control 21:06 without KrinikConanArchery) — the owner decides whether he wants it changed (bug 93); #43's first open
 > (≈ 100 ms; the plaque is laid out only when shown — the owner's eye on RC4 decides).
 >
 > **THE CHAT OF 15:18 (2026-11-22) — the RC4 scope, part 1 (pack `b42090f`).** (a) bug 118 — solved in the chat of 18:55 above (the camera's registry stays as

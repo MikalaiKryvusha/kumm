@@ -24,8 +24,11 @@ KrinikConanArchery's sprint-view FOV section (when it sets 102.1, what resets it
 20:4x run jumped from a stale 102.1 at rest). **The real finding instead: the sprint view STICKS after the sprint** — Shift released at ≈ 4.7 s, the heroine
 standing, and the FOV still 102.1 twenty seconds later (21:04:07), where it was 107.5 before the sprint. The game returns the normal view on the release of the
 sprint key (the Archery section's comment, «Режим 2»); something keeps mode 2. The next jump / draw then resets it to 107.5 — the view «moves» on an action the
-player did not link to the camera. Next: the control with KrinikConanArchery OFF (does vanilla keep 102 after a sprint with the bow in hand?), then read the
-SZ sprint-view hold (`main.lua` ≈ 1510–1557: the freeze of `FieldOfViewTarget` while `SZ.held`) — the likely holder.
+player did not link to the camera.
+**Control 21:06 — KrinikConanArchery OFF (0 of its log lines): the sprint view sticks the same** (107.5 → 102.1 at the sprint, Shift up ≈ 5 s, still 102.1 at
+9 s) — the game's own behaviour with the bow in hand, not our archery section. Issue #30's camera items rest with the game: the sprint jump keeps the view,
+the sprint view stays until the next action resets it. Not fixed by us `[AI]` (a vanilla FOV mode; changing it is a feature, not a repair — the owner's word
+if he wants the normal view back at the sprint's end).
 **Status:** 🔧 build 7 deployed; S1b, S3, S6 PASS by real input 2026-11-13 10:43 (report `testcases/reports/2026-11-13_conan-bow-sprint-sprint-then-draw.md`); **the owner's own play confirms it** — `[OWNER]` 2026-11-13 11:01 «спринт и стрельба работают»; open: S8, S9, the cost (build 4 deployed 09:32); his next remark —
 the bow unseen in first person — is bug 95 · **Severity:** S2 (the owner's playtime on the feature he named
 most important) · **Version/build:** Conan Exiles 3.0.1, pack `ConanExiles` working tree, section build 3 (2026-11-10 19:54) → build 4 (2026-11-13) ·
