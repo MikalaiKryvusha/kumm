@@ -98,6 +98,17 @@ of `Scripts/main.lua` (`fp_pass`, `sync_view`, `fp_cam_tick`, `fp_weapon_changed
   and without a record the hero's own skinned meshes count as body (their shadow back, the head's hidden shadow).
 - Cases and frames: `testcases/TC_conan_fp_head_shadow_sheathed_bow_2026-11-22.md`; the before/after frames in `KUMM/.work/fp_bow_back/` and `KUMM/.work/fp_v2/`.
 
+## EAA's camera components — learned by birth, not searched (bug 118 · issue #50, 2026-11-22)
+
+`mute_foreign_camera` (once a second inside the 30 ms target watch) used to `FindAllOf("EAA_CamDistance_C")` and `FindAllOf("EAA_Zoom_C")` and call
+`IsComponentTickEnabled` / `SetComponentTickEnabled(false)` on everything found; with EAA's settings window open over the hub the game crashed in UE4SS in 6 of 7
+sessions, and never with this mod off (bisection, bug 118). Now: `NotifyOnNewObject` on `/Game/Mods/EnhancedArmoryAndArsenal/Cam/EAA_CamDistance.EAA_CamDistance_C`
+and `…/Cam/EAA_Zoom.EAA_Zoom_C` once the class is loaded (`StaticFindObject`), one `FindAllOf` per class per session for the ones born before, a registry
+`FOREIGN_CAM_CLASSES.reg` of `{ c, full name }`, the tick calls only on a same-name object. Seen 17:16:32 and 17:41:26: «слежка за рождением встала» ×2, «чужая камера
+заглушена: EAA_Zoom_C». The kept spring arm is compared with its full name at adoption (`arm_full`) every tick; another name → the recovery branch. Owed: the
+variant `mute_foreign_camera = false` with the camera on (is the tick call itself the crash?), a death / respawn and a world reload with the registry, and the
+judge's A2 — the birth callback runs Lua on the thread that constructs the object.
+
 ## Checks
 
 - In game 2026-10-31 16:41: `[KrinikConanCamera]` 81 log lines, «config.lua прочитан», «ВЫБРАН компонент: SpringArmComponent …». Cases of the camera work —

@@ -60,6 +60,24 @@ except the lines whose TEXT differs between the two runs (the stand folder's nam
 real launcher everywhere except the window that explains how to send feedback — that window still opens or reacts slowly. **Owed:** measure that window
 on the stand (open, first frame, a press) at 300 %, find what it rebuilds (EFFICIENT_CODE §1), fix, retest; issue #43 stays open until then.
 
+## The feedback window — measured and fixed (2026-11-22 15:2x–15:34, the owner's look of 15:06)
+
+Stand case `perf-report` (`_config/launcher/test/self.mjs`, the stand's 288 dpi = the owner's 300 %): «Отзыв» pressed six times on the found-game screen, the
+timers `Feedback.Toggle`, `ReportPlaque.Background`, `OutlinedLabel.OnPaint`, `MetalWindow.Render` read per press. The window does not grow when the plaque opens
+(2880 × 1620 both ways) — no whole-picture render.
+
+| Press | Before (timers only) | After (cached faces) |
+|---|---|---|
+| 1st open | toggle 23.5 ms · plaque ×8 22.6 ms · labels ×6 54.1 ms | toggle 22.9 ms · plaque ×8 20.9 ms · labels ×6 54.2 ms |
+| later opens | plaque ×8 23.2 / 25.0 ms · labels ×6 52.8 / 58.0 ms (76.0 / 83.0 ms per open) | plaque ×8 11.8 / 8.8 ms · labels ×6 2.2 / 2.1 ms (14.0 / 10.9 ms) |
+| closes | toggle 1.1–1.3 ms, nothing drawn | toggle 1.1–1.4 ms, nothing drawn |
+
+Cause: the plaque's labels are transparent, so WinForms paints the plaque's metal under EACH label (8 plaque paints per open), and every label rebuilt its glyph
+path and stroked it with a wide pen on every paint. Fix: `ReportPlaque` keeps its metal as one bitmap keyed by size and scale and copies only the asked part;
+`OutlinedLabel` keeps its finished face keyed by text, font, colour, size and DPI; `Metal.Blit` copies 1:1 in pixels. The look: the frames before / after differ on the
+plaque by at most 1 of 255 in luminance (rounding); the only larger difference is the stand folder's name in the state text. The first open after a start still
+costs ≈ 100 ms (the windows of the plaque are created and the faces drawn once) — not cached ahead. Report `testcases/reports/2026-11-22_conan-launcher-feedback-window.md`.
+
 ## Decisions made without the owner
 
 - `[AI]` The budget numbers: 16 ms (one 60 Hz frame) for a refresh and a list repaint; the first paint of a new screen's list (18–34 ms, all lines new) is

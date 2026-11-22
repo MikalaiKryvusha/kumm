@@ -24,6 +24,27 @@ The windows have no FLX button with `KeyShortcutName` Escape (the vanilla popups
 From Lua: a UE4SS key bind works but is the crash class of bug 85 (removed 2026-11-18); a Lua-made FLX button with the Escape shortcut inside the window never
 presses (run 20:22, owner = GameInstance and owner = the window).
 
+## Recon 2026-11-22 15:38–15:50 (RC4 scope; cases E0 of `testcases/TC_conan_rc4_scope_2026-11-22.md`)
+
+How Esc reaches a window, read live by the remote (the hub and `EAA_Armorsettings` open):
+1. Every active module has a node in `GUIModuleController.m_EscapeStack` (`EscapeStackNode`, `SignalActivated` bound to its `GUIModule:SlotESCPressed`). A posted Esc
+   reaches the stack: the vanilla `InventorySettingsPopup` on top closes and the hub stays; with only the hub, the hub closes. With EAA on top nothing happens —
+   EAA's node is there (`CloseOnESC` true, Category 3, the same flags as the vanilla popup), its window simply does not close.
+2. The difference is in the window blueprint: `SM_UI_Settings_C` (closes by itself) has the input action event `InpActEvt_Escape_K2Node_InputActionEvent_0` — it listens
+   for the game's «Escape» input action in its own input component; EAA (`BP_EAA_Armorscaling_C`, parent `WindowRoot` directly) has no such event. The vanilla popup's
+   root is the native `InventorySettingsBase`.
+3. EAA's close button is a plain UMG `Button` (`Button_Close`, no FLX `KeyShortcutName`); its click handler is `BndEvt__Button_81_K2Node_ComponentBoundEvent_63_
+   OnButtonClickedEvent__DelegateSignature` (the original variable name stayed in the event name) — called directly by the remote it closes EAA and leaves the hub
+   (15:47). A click handler of `OnButtonClickedEvent` takes no parameters, the signature of `FOnInputAction`.
+4. Dead ends (do not repeat): UE4SS hooks on `/Script/UMG.UserWidget:OnPreviewKeyDown` and `/Script/ConanSandbox.GUIModule:SlotESCPressed` never fired (posted Esc
+   in the background, a real Esc in front); the blueprint input events of the player controller and the hero whose names speak of escape / menu / any key do not fire
+   while a mod window is on top. The game crashed at 15:48:25 (`EXCEPTION_ACCESS_VIOLATION reading 0xffffffffffffffff` inside UE4SS, 10 s after EAA opened, no remote
+   command running); I first took it for one of these probe hooks, which was wrong: a fresh game with no probe crashed the same way, at the same UE4SS
+   addresses, 9 s after EAA opened over the hub (15:51:26) — a crash of its own, filed separately.
+5. Candidate fix (native, the window's own close): when a mod window opens, `root:ListenForInputAction(FName("Escape"), IE_Pressed, true, {Object = root,
+   FunctionName = <its close-button click handler>})` — the engine's own input-action binding, the same mechanism as `SM_UI_Settings`; Lua only sets it once per
+   window birth, the key press itself runs in the engine. Delegate values as Lua tables `{Object, FunctionName}` — Re-UE4SS docs, DelegateProperty.
+
 ## Fix plan
 
 Native, per mod (HOUSE_RULES rule 8): in each mod's window blueprint add (or bind) a cancel `WBP_ButtonBase` with `KeyShortcutName` Escape that closes its module

@@ -91,6 +91,19 @@
 
 ## Entries
 
+### EXP-0612 · 2026-11-22 · ❌→✅ · #conan #ue4ss #crash #stale-wrapper #isvalid #registry
+class: held-reference-outlives-object
+While hunting a crash (bug 118, issue #50) I saw live that a Lua wrapper kept across frames passes `IsValid()` for a FOREIGN object: the pause section kept the
+wrappers of the three loading screens born at world entry, the game destroyed them, and 7 s later one of them pointed at a `W_HotkeyIcon_C` (logged «на его месте
+W_HotkeyIcon_C»). Lesson: `IsValid()` on a kept wrapper proves an object lives at that address, not that it is the object you kept — before any method on a
+wrapper kept across frames, check its class name (or drop the reference when its life ends); the same in every birth registry. This hazard did NOT explain the
+crash: the game crashed the same way with the check in place and with KrinikConanUI switched off (16:10, 16:19). Two errors of mine on the way: I blamed my probe
+hook for the first crash, then the UI mod after one clean control window — each time a single run was read as a cause. A stochastic crash is localized only by
+repeated runs per variant (bisection of the mods), never by one clean window.
+The crash itself was localized later by bisection to KrinikConanCamera's once-a-second `FindAllOf` over EAA's camera components with method calls (bug 118).
+mechanized: the full name recorded at birth and compared before any call — `krinik_pause_in_menu.lua` (`still_loading_screen`), `krinik_pickup_prompt.lua`
+(`strip_on_screen`), KrinikConanCamera (`FOREIGN_CAM_CLASSES.reg`, `arm_full`).
+
 ### EXP-0611 · 2026-11-22 · ❌→✅ · #conan #camera #first-person #repro #gear
 class: repro-state-not-recorded
 The morning measured «78–85° — the whole frame is neck skin with the bone open» and built a bone hide on it; at 13:2x the same angles with the bow, the axe

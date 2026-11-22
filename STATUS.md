@@ -138,6 +138,19 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **THE CHAT OF 15:18 (2026-11-22) — the RC4 scope, part 1 (pack `b42090f`).** Done and checked: (a) **a crash found and fixed — bug 118 / issue #50
+> (critical):** with EAA's settings window open over the hub the game crashed in UE4SS in 6 of 7 sessions; bisection of the Lua mods (UI off → crash; Camera,
+> Locomotion, Archery off → clean 10 min; Camera only off → clean 10 + 24 min) → KrinikConanCamera's once-a-second `FindAllOf` over EAA's camera components with
+> tick calls → now a birth registry with full-name checks; every mod on + the fix: two clean 10-minute soaks. Owed: the variant `mute_foreign_camera = false`, a
+> respawn and a world reload with the registry, the judge's twin list (bug 118 «Owed», 23 rows of round 1 + round 2 A2/A4/A5/B1/C2–C4). (b) **#49 the archery
+> error at death** — filed, fixed (mesh guard), the death case A49 NOT run in game yet. (c) **#43 the feedback window** — a later open 13.2–13.7 ms (was 76–83 ms
+> at 300 %), the first open still 92 ms (owed: draw the faces at idle after the window shows); `perf-report` stand case; the owner's eye decides the issue.
+> (d) **#41 Esc** — recon in bug 108: Lua key hooks never fire; the working native path is the game's own input action «Escape» on the window
+> (`SM_UI_Settings_C` does it) bound to the window's own close handler (`BndEvt__Button_81_…` closes EAA) — `ListenForInputAction` with a delegate table NOT tried
+> yet (every try met crash 118 first). Not started: #21 the waystones / dungeon (R21a/R21b), #30 the bow sprint S9, #23 the stuck map. The RC4 build path for the
+> new launcher already exists: `make_release.sh` → `make_manifest.py --previous-from` (RC3's `published_0_9_1-RC3/manifest.json`). The game's mods folder: every
+> Krinik mod back on; `KrinikMenuProbe` (a dev leftover, «after reading — delete the mod») still enabled in the build. Case file `testcases/TC_conan_rc4_scope_2026-11-22.md`.
+>
 > **CHAT CLOSED 2026-11-22 ≈15:1x (the chat of 13:06 — the previous farewell pasted as the entry; soft closure by the owner's word 15:07 at 78 % context).
 > Reports: `testcases/reports/2026-11-22_conan-fp-shadow-always-owner-no-see.md`; cases R21c / R21d / N1 of `testcases/TC_conan_loading_screen_waystone_dungeon_2026-11-22.md`.**
 > - **The owner's debt (13:10–13:11, verbatim in `bugs/114_*`): the first-person shadow ALWAYS, everything visible to other players** — KrinikConanCamera (pack
