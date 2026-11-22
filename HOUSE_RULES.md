@@ -307,6 +307,10 @@
     does not load — and the like. A visual defect is cosmetic, however visible.** A list of critical bugs is drawn from the bug files by this test, and every
     bug's status is read from its file together with its interview and plan before it is said to the owner (an accepted fix whose bug file was never updated is
     the failure this guards). `[OWNER]` 2026-11-18 18:58 · 18:59 · `PROJECT_HISTORY.md` entry 2026-11-18 19:0x.
+    1. **The workaround question comes first: a defect the player can get past by a workaround in reach is comfort, not critical** (Esc that does not close
+       another mod's window over the hub, while the window's own button closes it). Critical keeps the player from going on: a crash, a hang, a lost save, a
+       softlock or dead end, a core function with no workaround. The scale and its sources — `researches/bug-severity/README.md`. `[OWNER]` 2026-11-23 00:00 ·
+       `PROJECT_HISTORY.md` entry «2026-11-23 00:0x — the severity of a bug».
 
 39. **A test walks next door: every functional run also checks the neighbouring functions the change could break.** The case set of a change carries a
     «Neighbours» section — the functions that share the edited code, assets, hooks, widgets or events (a blueprint edited → its other buttons and events; a hook

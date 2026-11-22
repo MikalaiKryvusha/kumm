@@ -125,6 +125,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **THE CHAT OF 23:47 (2026-11-22) — finishing the RC4 publication.** The 23:09 upload did NOT die with the chat: `gh` PID 39600 alive at 23:48, 47 of 83 assets
+> on the draft (the volumes `.zip.001`–`.007` and the a–f per-file assets still going; 65 at 00:06), waited on by `Wait-Process` in the background (EXP-0616).
+> **The update RC3 → RC4 through the launcher on the copy PASSED** (report `testcases/reports/2026-11-23_conan-launcher-update-rc3-rc4.md`): the launcher
+> 1.1.0 → 1.1.1 by itself, 11 files / 39,0 МБ fetched, no volume, 74/74 deployed, verify 115 / 0, the RC4 screen; the installer's exit 1 of run 1 was my stand's
+> missing `desk` folder (driver fixed), run 2 exit 0 with the shortcut. Not filed yet: `install.ps1` returns 1 when only the shortcut fails (minor). The copy
+> `rc1_install/Conan_311` now holds RC4 — the next update test from the PUBLISHED release needs RC3 back or waits for RC5. The «вошло в v0.9.1-RC4» comments for issues #4 #13 #21 #43 #48 drafted in `.work/rc4/issue_comments/` (voice-lint 0, core 0;
+> the clean read's findings being applied), the issue #52 body rewritten by the portrait in `52_body_new.md` (not yet edited on GitHub). The owner's 23:08
+> question «which bugs are critical» answered in chat against the bug files and the open issues (23:5x): #21 waystone owed, #23 the stuck map (the one real
+> dead end, not reproduced), #30 not reproduced by real input, #43 / #48 retest; #41 Esc is comfort by the owner's word 00:00 (label `critical` removed,
+> scale `researches/bug-severity/README.md`, HOUSE_RULES 38.1; whether #30 #43 #48 keep `critical` — asked in chat 00:0x); **owed: a bug file + issue for the first-person view switch ≈ 3 ms in
+> one frame (over the 1 ms budget; camera notes line 123)**.
+>
 > **CHAT CLOSED 2026-11-22 ≈23:1x — RC4 PUBLICATION IN PROGRESS** (`[OWNER]` 23:07 «публикуем релиз РЦ4»): the public tree (scan 0) pushed to the public repo
 > `1bdac32`; `gh release create v0.9.1-RC4 --latest --title "0.9.1-RC4" --notes-file KUMM/.work/rc4_release/release_notes_Krinik_Mod_Pack_0_9_1_RC4.md
 > release/*` started 23:09:22 in the background (83 files ≈ 26 GB; a DRAFT until the last file; log `KUMM/.work/rc4/logs/gh_release.log`). **FIRST in the next

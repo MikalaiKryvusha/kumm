@@ -1,5 +1,18 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-23 00:0x +03:00 — the severity of a bug: a workaround in reach makes it comfort, not critical
+
+The owner, 2026-11-23 00:00, in chat, on my list of critical bugs (verbatim, quoting my line first):
+
+> Esc не закрывает окна настроек других модов поверх хаба. На GitHub у задачи стоит метка «критичный
+>
+> это не критичейский баг, а комфорт, иди в интернет за конспектом понимания критичности багов
+
+Done the same minutes: the label `critical` removed from issue #41 (read back: `bug`); the web recon written into `researches/bug-severity/README.md` (the
+industry scales — Bugzilla, Mozilla S1–S4, Unity user pain, game QA S0 crash / S1 softlock — and our scale: the workaround question first); HOUSE_RULES rule 38
+got the workaround line. The literal rule 38 also names «a slowdown» and «an error» critical; whether issues #30 (the bow sprint, a workaround and not
+reproduced by real input), #43 (the launcher, a slow screen outside play) and #48 (a log line while dead, nothing on screen) keep `critical` was asked in chat.
+
 ## 2026-11-22 15:1x +03:00 — STATUS bonsai trim, part 16: the CHAT CLOSED block of the chat of 2026-11-22 09:34 (moved verbatim at the closure of the chat of 13:06)
 
 > **CHAT CLOSED 2026-11-22 ≈11:0x (the chat of 09:34, `resume`, then the owner 09:37 «работай автономно в дневном цикле» — /dayloop; soft closure at the

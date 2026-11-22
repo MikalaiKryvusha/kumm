@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0616 · 2026-11-22 · ✅ · #release #github #upload #handover #background
+A `gh release create … <83 assets>` started in the background at 23:09 OUTLIVED the chat's closure: at 23:48 the next chat found PID 39600 alive (started
+23:09:22), 47 of 83 assets uploaded, ≈ 5.7 MB/s read by the process. The handover said «if the upload died with the chat, upload the missing files» — a
+second `gh release upload` beside the live one would have raced it on the same assets. Lesson: before re-uploading, find the uploader by its command line
+(`Get-CimInstance Win32_Process -Filter "Name='gh.exe'"` → `CommandLine`, `CreationDate`), sample its `ReadTransferCount` twice to see it moving, and wait on its
+PID (`Wait-Process -Id <pid>` in the background); compare the remote asset list with the local dir only after it exits.
+none-cheap: two probe commands before any re-upload; no guard
+
 ### EXP-0615 · 2026-11-22 · ❌ · #real-input #focus #owner-screen #conan #stand
 Real-key cases (`mouse-seq.ps1`) at 22:16–22:18 while the owner was playing another game in Chrome (cloud NFS — the foreground process read `chrome`): each
 sequence pulled Conan in front and stole his focus; two sequences of weapon keys reached nothing in Conan (no OnWeaponEquip in the log) because his input took the
