@@ -138,15 +138,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **PARKED 2026-11-22 13:10 +03:00 — bug 79 (#21) admin-teleport path — CAUSE FOUND 13:17 (probe R21c, `bugs/79_*` «The admin-teleport cause found»):** two
-> live `W_IngameLoadingScreen_C` instances during a load (the previous load's one still valid); `loading_screen_up()` in `krinik_pause_in_menu.lua` caches the
-> first and trusts its `IsInViewport()` false. **Fix owed:** look for ANY live instance in the viewport while the full-screen flag is on; then R21c / R21d, N1, the judge.
+> **Bug 79 (#21) admin-teleport path — FIXED 2026-11-22 14:15 +03:00 (`bugs/79_*` «The fix»):** two live `W_IngameLoadingScreen_C` during a load; `krinik_pause_in_menu.lua` now
+> keeps up to 3 recent births (`watch_loading_screen`), and a loading screen no longer re-arms the pause; judge round 1 — 3 risks fixed (pack `b7d984a`).
+> R21d (101 samples at 1.0, 74 behind the loading screen) and N1 (inventory 0.03 / 1.0) pass. Owed: the dungeon entrance and R21a waystones on this version.
 >
 > **2026-11-22 13:10–14:0x — the owner's debt: the first-person shadow ALWAYS** (`[OWNER]` 13:10–13:11, verbatim in `bugs/114_*`): KrinikConanCamera v1→v4 in
 > the pack's working tree — no bone hide; the first-person camera moves forward 0→10 cm from 55° to 75° pitch (the «neck» was an armour collar); the sheathed
 > weapon OwnerNoSee + CastHiddenShadow (other players see it); the held item's shadow back; own hero by `IsLocalController`. Cases
 > `testcases/TC_conan_fp_shadow_always_owner_no_see_2026-11-22.md` pass on v1–v3 (report `testcases/reports/2026-11-22_conan-fp-shadow-always-owner-no-see.md`);
-> judge rounds 1–3 fixed, round 4 running; the show page `ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/97_ten_vsegda_ot_pervogo_lica/pokaz.html`. Not covered: a
+> judge rounds 1–4 (pack `25dff5d`, pushed); the show page (opened for the owner 14:10, his look awaited) `ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/97_ten_vsegda_ot_pervogo_lica/pokaz.html`. Not covered: a
 > second player's client, a mount, the drawn bow aim at a steep pitch.
 >
 > **CHAT CLOSED 2026-11-22 ≈11:0x (the chat of 09:34, `resume`, then the owner 09:37 «работай автономно в дневном цикле» — /dayloop; soft closure at the

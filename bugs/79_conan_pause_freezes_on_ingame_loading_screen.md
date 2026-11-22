@@ -67,6 +67,20 @@ it dies — when that is the stale instance of an earlier load, `IsInViewport()`
 the stale one is collected. **Fix owed:** a cached instance that is not in the viewport is not proof — look for ANY live instance in the viewport (2 objects)
 while the full-screen flag is on; then R21c / R21d again. (The probe's duplicate sample lines are the probe's own double schedule, not the game.)
 
+## The fix (2026-11-22 14:15 +03:00, `krinik_pause_in_menu.lua`, KrinikConanUI)
+
+`watch_loading_screen()`: `NotifyOnNewObject(/Game/UI/HUD/W_IngameLoadingScreen.W_IngameLoadingScreen_C)` keeps the NEWEST instance in `loading_obj` (the
+game makes a new widget per load); the search fallback (no birth seen yet — a mod reload mid-world) now prefers an instance that is in the viewport. Seen:
+world entry «экран загрузки родился (2), (3)»; R21d 14:12 — the admin teleport out of the beach, 101 samples `tdil 1.0000` behind the loading screen, no
+«ОТКРЫТ», landed; N1 14:14 — the inventory by a posted Tab 0.03, closed 1.0. TWINS: searched cached first-found instances (`FindAllOf` loops) in
+KrinikConanUI — 0 other sites of this class (the damage meter picks the one in the viewport, the hub by full name / visibility, the journey tracker by birth).
+**Judge round 1 (4 risks, 3 fixed, pack `b7d984a`):** a world entry makes three births, so the mod keeps up to 3 recent births and asks each; the
+fallback search trusts only an instance in the viewport and caches nothing; a poll that sees the loading screen no longer re-arms the pause (it had
+disarmed and re-armed in the same poll — the loading screen defeated the world-entry guard of 13.09, and «взведено» went to the log every poll). Declined:
+a raw-pointer reuse risk (pre-existing). Retest 14:23: world entry — one «взведено» line after the three births; R21d — 101 samples at 1.0 (74 of them
+behind the loading screen), landed, one arming line; N1 — 0.03 / 1.0. **Open:** the dungeon entrance and the waystones (R21a) on this version; issue #21
+closes after them.
+
 ## Respawn case (2026-11-07 07:41, background game, pack `374b90d`)
 
 Death by `pult.sh "exec suicide"` → the respawn selection → the respawn by itself 8 s later (no bedroll) → «взведено: герой в мире» — no «полноэкранный интерфейс: ОТКРЫТ»,
