@@ -138,10 +138,12 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **THE CHAT OF 15:18 (2026-11-22) — the RC4 scope, part 1 (pack `b42090f`).** Done and checked: (a) **a crash found and fixed — bug 118 / issue #50
-> (critical):** with EAA's settings window open over the hub the game crashed in UE4SS in 6 of 7 sessions; bisection of the Lua mods (UI off → crash; Camera,
-> Locomotion, Archery off → clean 10 min; Camera only off → clean 10 + 24 min) → KrinikConanCamera's once-a-second `FindAllOf` over EAA's camera components with
-> tick calls → now a birth registry with full-name checks; every mod on + the fix: two clean 10-minute soaks. Owed: the variant `mute_foreign_camera = false`, a
+> **THE CHAT OF 15:18 (2026-11-22) — the RC4 scope, part 1 (pack `b42090f`).** (a) **a crash found, NOT fixed — bug 118 / issue #50 (critical, FIRST
+> next):** with EAA's settings window open over the hub the game crashes in UE4SS in 6 of 7 sessions; bisection of the Lua mods (UI off → crash; Camera,
+> Locomotion, Archery off → clean 10 min; Camera only off → clean 10 + 24 min) → KrinikConanCamera; its once-a-second `FindAllOf` over EAA's camera components
+> is now a birth registry with full-name checks — two clean 10-minute soaks, then **crash 7 at 17:45:04, 7 s after EAA opened, with the fix in** (the owner saw
+> the report window). So the search was not (the whole) cause; next: the judge's variant — camera on, `mute_foreign_camera = false` (no tick calls on EAA's
+> components at all), then the birth callback's thread (round 2 A2). Owed also: a
 > respawn and a world reload with the registry, the judge's twin list (bug 118 «Owed», 23 rows of round 1 + round 2 A2/A4/A5/B1/C2–C4). (b) **#49 the archery
 > error at death** — filed, fixed (mesh guard), the death case A49 NOT run in game yet. (c) **#43 the feedback window** — a later open 13.2–13.7 ms (was 76–83 ms
 > at 300 %), the first open still 92 ms (owed: draw the faces at idle after the window shows); `perf-report` stand case; the owner's eye decides the issue.

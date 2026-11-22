@@ -105,7 +105,8 @@ of `Scripts/main.lua` (`fp_pass`, `sync_view`, `fp_cam_tick`, `fp_weapon_changed
 sessions, and never with this mod off (bisection, bug 118). Now: `NotifyOnNewObject` on `/Game/Mods/EnhancedArmoryAndArsenal/Cam/EAA_CamDistance.EAA_CamDistance_C`
 and `…/Cam/EAA_Zoom.EAA_Zoom_C` once the class is loaded (`StaticFindObject`), one `FindAllOf` per class per session for the ones born before, a registry
 `FOREIGN_CAM_CLASSES.reg` of `{ c, full name }`, the tick calls only on a same-name object. Seen 17:16:32 and 17:41:26: «слежка за рождением встала» ×2, «чужая камера
-заглушена: EAA_Zoom_C». The kept spring arm is compared with its full name at adoption (`arm_full`) every tick; another name → the recovery branch. Owed: the
+заглушена: EAA_Zoom_C». The kept spring arm is compared with its full name at adoption (`arm_full`) every tick; another name → the recovery branch.
+**The crash came back with this change in** (17:45:04, 7 s after EAA's window opened) — the search was not the whole cause. Owed: the
 variant `mute_foreign_camera = false` with the camera on (is the tick call itself the crash?), a death / respawn and a world reload with the registry, and the
 judge's A2 — the birth callback runs Lua on the thread that constructs the object.
 

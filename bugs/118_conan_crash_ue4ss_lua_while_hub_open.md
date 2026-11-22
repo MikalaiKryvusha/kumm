@@ -2,8 +2,9 @@
 
 > **GitHub issue:** [#50](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/50) — the public tracker of this defect (HOUSE_RULES 44)
 
-**Status:** 🔧 the cause localized by bisection to KrinikConanCamera (its per-second scene search over EAA's camera components), fixed 2026-11-22 17:1x, the
-verification soak runs — not DONE until two clean 10-minute soaks with every mod on and the judge's rounds are through
+**Status:** 🔴 OPEN — localized by bisection to KrinikConanCamera; the per-second scene search replaced by a birth registry (pack `b42090f`), two clean
+10-minute soaks, then **crash 7 at 17:45:04 with the fix in** (7 s after EAA opened, folder `UECC-Windows-F47D5DE3…`) — the search was not the whole cause.
+Next: camera on with `mute_foreign_camera = false` (no tick calls on EAA's components), then the birth callback's thread (judge round 2, A2)
 **Severity:** S1 (a crash — critical by HOUSE_RULES 38)
 **Version/build:** the working build after 0.9.1-RC3 (pause `b7d984a`), Conan Exiles Enhanced 3.1.1 · **When/context:** 2026-11-22 15:48, the RC4 scope run (Esc over
 mod windows, `testcases/TC_conan_rc4_scope_2026-11-22.md`)

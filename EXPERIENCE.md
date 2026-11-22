@@ -100,7 +100,9 @@ wrapper kept across frames, check its class name (or drop the reference when its
 crash: the game crashed the same way with the check in place and with KrinikConanUI switched off (16:10, 16:19). Two errors of mine on the way: I blamed my probe
 hook for the first crash, then the UI mod after one clean control window — each time a single run was read as a cause. A stochastic crash is localized only by
 repeated runs per variant (bisection of the mods), never by one clean window.
-The crash itself was localized later by bisection to KrinikConanCamera's once-a-second `FindAllOf` over EAA's camera components with method calls (bug 118).
+The crash itself was localized later by bisection to KrinikConanCamera; replacing its once-a-second `FindAllOf` over EAA's camera components did NOT end it
+(two clean 10-minute soaks, then crash 7 at 17:45 — bug 118). Third error of mine the same day: two clean soaks read as «fixed» — a stochastic crash needs
+the discriminating variant (the suspected call switched off) before the word.
 mechanized: the full name recorded at birth and compared before any call — `krinik_pause_in_menu.lua` (`still_loading_screen`), `krinik_pickup_prompt.lua`
 (`strip_on_screen`), KrinikConanCamera (`FOREIGN_CAM_CLASSES.reg`, `arm_full`).
 
