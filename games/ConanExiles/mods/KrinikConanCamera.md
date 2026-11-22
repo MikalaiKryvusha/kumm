@@ -109,6 +109,9 @@ and `…/Cam/EAA_Zoom.EAA_Zoom_C` once the class is loaded (`StaticFindObject`),
 **The crash came back with this change in** (17:45:04, 7 s after EAA's window opened) — the search was not the whole cause. Owed: the
 variant `mute_foreign_camera = false` with the camera on (is the tick call itself the crash?), a death / respawn and a world reload with the registry, and the
 judge's A2 — the birth callback runs Lua on the thread that constructs the object.
+**2026-11-22 19:31 — this mod is NOT the crash's cause (proven, bug 118 «Root cause»):** the crash is the agent's Esc probe `esc_listen.lua` (a
+`ListenForInputAction` bind with a Lua-table delegate); reproduced on demand with every mod on AND with this mod off, the stack equal to all seven crashes.
+The registry stays as the cheaper design; the code comment says so. `mute_foreign_camera = false` ran 10 min clean plus 15 EAA reopen cycles (no probe).
 
 ## Checks
 

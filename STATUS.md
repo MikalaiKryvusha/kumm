@@ -138,13 +138,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **THE CHAT OF 15:18 (2026-11-22) — the RC4 scope, part 1 (pack `b42090f`).** (a) **a crash found, NOT fixed — bug 118 / issue #50 (critical, FIRST
-> next):** with EAA's settings window open over the hub the game crashes in UE4SS in 6 of 7 sessions; bisection of the Lua mods (UI off → crash; Camera,
-> Locomotion, Archery off → clean 10 min; Camera only off → clean 10 + 24 min) → KrinikConanCamera; its once-a-second `FindAllOf` over EAA's camera components
-> is now a birth registry with full-name checks — two clean 10-minute soaks, then **crash 7 at 17:45:04, 7 s after EAA opened, with the fix in** (the owner saw
-> the report window). So the search was not (the whole) cause; next: the judge's variant — camera on, `mute_foreign_camera = false` (no tick calls on EAA's
-> components at all), then the birth callback's thread (round 2 A2). Owed also: a
-> respawn and a world reload with the registry, the judge's twin list (bug 118 «Owed», 23 rows of round 1 + round 2 A2/A4/A5/B1/C2–C4). (b) **#49 the archery
+> **THE CHAT OF 18:55 (2026-11-22) — bug 118 SOLVED: not a defect of the build.** The seven UE4SS crashes with EAA over the hub were the agent's OWN Esc
+> probe `.work/tmp/esc_listen.lua` (`ListenForInputAction` with a Lua-table delegate) sent by the remote: one stack hash in all seven, the stack's Lua shape
+> («`pcall` → `return dofile` → `pcall` → UFunction») and the probe's command in every minidump; reproduced on demand twice (19:28 all mods on, 19:31 camera
+> OFF). Without the probe: 10 min + 15 EAA reopen cycles clean. Tools: `ConanExiles/_config/crash-forensics.py` (stack hash + the remote commands per crash
+> folder — run it FIRST after any crash in our run); the remote refuses a table delegate (guard `no-table-delegate`, G1–G3 pass 19:53). EXP-0613. Bug 108's E0b
+> path (Lua `ListenForInputAction`) is dead — the Esc of mod windows is the native pak fix. **Issue #50 closed** (not planned — not a build defect).
+> Also: **#49 closed** — A49 (death with the bow in first person) and A49n (empty hands) pass; **#51 filed** — KrinikConanLocomotion wrote the dead pawn's movement
+> component (two `[Error] … nullptr` lines per death), fixed (`tick()` waits for a live component), L2 pass 19:59 — closes after its pack commit. The owner's save
+> restored from `KUMM/.work/bug118/save_before_death` after the deaths (integrity ok). Case file rows A49, A49n, L2, G1–G3.
+>
+> **THE CHAT OF 15:18 (2026-11-22) — the RC4 scope, part 1 (pack `b42090f`).** (a) bug 118 — solved in the chat of 18:55 above (the camera's registry stays as
+> the cheaper design, not as a crash fix). (b) **#49 the archery
 > error at death** — filed, fixed (mesh guard), the death case A49 NOT run in game yet. (c) **#43 the feedback window** — a later open 13.2–13.7 ms (was 76–83 ms
 > at 300 %), the first open still 92 ms (owed: draw the faces at idle after the window shows); `perf-report` stand case; the owner's eye decides the issue.
 > (d) **#41 Esc** — recon in bug 108: Lua key hooks never fire; the working native path is the game's own input action «Escape» on the window
@@ -168,15 +173,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > six, then build RC4 by the release ritual (`release_checklist.py`, HOUSE_RULES 42). **`[OWNER]` 15:16: «RC4 уже будем собирать под новый лаунчер, который
 > обновляется по файлам»** — the release is built for the launcher that updates by changed files (issue #45, closed 2026-11-21; launcher 1.1.0): read how
 > that launcher's file update consumes a release (its feed / manifest) before the RC4 build and make the RC4 assets match it.
-> 1. **#21 the waystones** (R21a; Waystones Enhanced item 7770001, travel by `TeleportPlayerServer` — `games/ConanExiles/mods/WaystonesEnhanced.md`) and the dungeon
+> 1. 🟡 **2026-11-22 20:1x: the dungeon (the Dregs, IN and OUT — R21e), the admin teleport (R21d) and a teleport with the waystone map open (R21a-sim) pass on
+>    `b7d984a`; owed only the REAL waystone travel between two placed waystones (placing needs the building mode with real input); issue #21 commented, open.
+>    The Wine Cellar is gated by a world event (`RequiredEventTag`) — use the Dregs (`BP_TriggerTeleport_InFromEntrance` / `…_OutFromEntrance`). Stand trap: an
+>    admin teleport INTO a teleport trigger makes two teleports in one frame and a loading screen stuck at 99 % (not a defect).** The old text: **#21 the waystones** (R21a; Waystones Enhanced item 7770001, travel by `TeleportPlayerServer` — `games/ConanExiles/mods/WaystonesEnhanced.md`) and the dungeon
 >    entrance (R21b stand: `KUMM/.work/tmp/list_teleports.lua`, the heroine set into the Wine Cellar trigger by `K2_SetActorLocation`) on the final pause version;
 >    the probe `KUMM/.work/tmp/tp_widget_probe.lua` samples the time behind a load. Then close #21.
 > 2. **#30 the bow sprint** (bug 93): cases S8, S9 — the bow sheathed by its quick slot (`h:InpActEvt_Shortcut0_K2Node_InputActionEvent_25({KeyName=FName('One')})`),
 >    real W + Shift and RMB, the Locomotion and BowSprint log lines.
 > 3. **#23 the stuck full-screen map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue).
 > 4. **#41 Esc over other mods' windows** (bug 108): in scope by the 15:07 word — native pak fixes of those windows (the Lua path is dead: KrinikConanUI.md «Clicks and Esc»).
-> 5. **The KrinikConanArchery Lua error at the heroine's death** (`main.lua:1859`, `h.Mesh:GetPostProcessInstance()` on a dying pawn — guard the mesh): file the
->    issue first (HOUSE_RULES 44).
+> 5. ✅ **The KrinikConanArchery Lua error at the heroine's death** — fixed in `b42090f`, A49 / A49n pass 2026-11-22 19:55–19:59, issue #49 closed.
 > 6. **#43 — the launcher's feedback-instructions window is slow** (`bugs/110_*`): measure it at 300 % (open, first frame, a press), fix, retest.
 > Also owed: comments on issues #13, #4, #21 (the owner's bug-report genre, the portrait check — HOUSE_RULES 44); #48 closes after the RC4 retest; `-Verify` names 4
 > KrinikConanMusic files missing in the build; DW1 of the damage window (real hits); the owner's errand — delete `D:\PATH.txt` and `D:\settings.txt`.

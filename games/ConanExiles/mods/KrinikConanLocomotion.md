@@ -99,6 +99,11 @@ owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
 
 ## Open
 
+- **FIXED 2026-11-22 19:5x — the twin in `apply()`: two UE4SS errors at every death** (found in case A49 of `testcases/TC_conan_rc4_scope_2026-11-22.md`): the dead
+  pawn's Agility reads 0, the tick saw «Проворство 8 → 0» and `apply()` wrote `BrakingDecelerationWalking` and `JumpZVelocity` into the missing movement component —
+  «[Lua][Error] Tried setting member variable … but UObject instance is nullptr» ×2 (19:55:09). Now `tick()` returns at once while `hero.CharacterMovement` is not
+  `IsValid()` (no read, no write, no state change); the respawned heroine comes with her own name → «герой появился». Case L2 / A49n pass 19:59 (0 error lines).
+  The line below («the twin … left as is») missed this second writer.
 - **FIXED 2026-11-21 22:29 +03:00 — the error while the hero is dead** (`krinik_oblivion_locomotion`, `tick()`): the death pawn has no movement component, UE4SS returned an object
   for `hero.CharacterMovement.MaxWalkSpeed`, and the unguarded `math.abs(mws - last_mws)` logged «шаг упал: …:242: attempt to perform arithmetic on a UObject»
   once a second until the respawn (9 lines, seen 22:16 in the RC3 retest). Guard `type(mws) == "number"`; case L1 of `testcases/TC_conan_rc3_critical_retest_2026-11-21.md`

@@ -20,6 +20,11 @@ loose folders in `_unpacked/`, deployed by hand). Why not shipped: the remote ru
 - `Deploy-ModPack.ps1 -PackDir ConanExiles -Deploy -Only KrinikConanHarness` installs the three folders (copy over: files the game folder holds and the
   source does not — the bench's `enabled.txt`, logs — stay).
 - `-Export` prints «dev-only, not exported: KrinikConanHarness» and leaves it out (engine 2026-10-30, fixture checks «экспорт: …»).
+- One entry per `-Only` call: `-Only KrinikConanLocomotion,KrinikConanHarness` passed through `powershell -File` installed neither (2026-11-22 20:0x, the game
+  copies stayed old — checked by diff); two calls installed both.
+- **The remote's guards** (`Scripts/main.lua`, `lua_chunk`): `no-component-sweep` (EXP-0330) and since 2026-11-22 `no-table-delegate` — a command, or a file it
+  loads by `dofile('…')`, that calls `ListenForInputAction(` with a `{` on the same line is refused («отказ: ListenForInputAction с делегатом-таблицей…»): that call
+  crashed UE4SS natively in all the crashes of KUMM bug 118 (EXP-0613). Cases G1–G3 of `testcases/TC_conan_rc4_scope_2026-11-22.md` pass.
 
 ## Open
 

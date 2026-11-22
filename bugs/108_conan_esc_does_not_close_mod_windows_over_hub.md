@@ -41,7 +41,11 @@ How Esc reaches a window, read live by the remote (the hub and `EAA_Armorsetting
    while a mod window is on top. The game crashed at 15:48:25 (`EXCEPTION_ACCESS_VIOLATION reading 0xffffffffffffffff` inside UE4SS, 10 s after EAA opened, no remote
    command running); I first took it for one of these probe hooks, which was wrong: a fresh game with no probe crashed the same way, at the same UE4SS
    addresses, 9 s after EAA opened over the hub (15:51:26) — a crash of its own, filed separately.
-5. Candidate fix (native, the window's own close): when a mod window opens, `root:ListenForInputAction(FName("Escape"), IE_Pressed, true, {Object = root,
+5. **Correction 2026-11-22 19:31 (bug 118, proven):** the crashes that «met» the E0b bind attempts were CAUSED by them. `root:ListenForInputAction(FName("Escape"),
+   0, true, { Object = root, FunctionName = FName(<handler>) })` from Lua crashes UE4SS natively 1.5 s after the call (`EXCEPTION_ACCESS_VIOLATION reading
+   0xffffffffffffffff`, `pcall` does not catch it), reproduced twice, one run with KrinikConanCamera off. **E0b is a dead end:** a delegate parameter passed as a
+   Lua table does not work in this UE4SS build. The Esc of mod windows stays with the native pak fix below.
+6. Candidate fix (native, the window's own close): when a mod window opens, `root:ListenForInputAction(FName("Escape"), IE_Pressed, true, {Object = root,
    FunctionName = <its close-button click handler>})` — the engine's own input-action binding, the same mechanism as `SM_UI_Settings`; Lua only sets it once per
    window birth, the key press itself runs in the engine. Delegate values as Lua tables `{Object, FunctionName}` — Re-UE4SS docs, DelegateProperty.
 

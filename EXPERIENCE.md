@@ -91,7 +91,22 @@
 
 ## Entries
 
+### EXP-0613 · 2026-11-22 · ❌→✅ · #conan #ue4ss #crash #bisection #minidump #agent-probe #forensics
+class: own-tool-is-the-variable
+Bug 118: seven crashes in UE4SS with EAA's window over the hub; a day of bisection blamed my probe hooks, then the UI mod, then the camera mod, and a fix of the
+camera «worked» for two soaks. The real cause was MY OWN remote command — the Esc probe `esc_listen.lua` (`ListenForInputAction` with a Lua-table delegate),
+sent in every run that crashed and in none that stayed clean. Found in one hour by evidence the crash leaves, not by more runs: (1) the `<PCallStack>` of every
+crash hashed — all seven identical, one call site; (2) the UE4SS frames disassembled (capstone) to the Lua VM's own functions — the shape «`pcall` → `return
+dofile` → `pcall` → UFunction» is the remote's `lua … return dofile(…)`; (3) the strings of every `UEMinidump.dmp` — the probe's command in all seven;
+(4) a repro on demand, twice, once without the suspected mod. Lesson: when a crash comes during the agent's own experiments, the FIRST suspect is the agent's
+own command; before bisecting mods, hash the stacks, read the minidump strings and list what the agent sent in each crashed run. A variant table that does not
+record the agent's commands cannot see the one variable that really changed.
+mechanized: `ConanExiles/_config/crash-forensics.py` (stack hash, depth, the remote commands in each minidump, per crash folder); the remote refuses
+`ListenForInputAction` with a table argument (KrinikAgentRemote guard, bug 118).
+
 ### EXP-0612 · 2026-11-22 · ❌→✅ · #conan #ue4ss #crash #stale-wrapper #isvalid #registry
+**Correction 2026-11-22 19:31 (EXP-0613):** the lines below that localize the crash «by bisection to KrinikConanCamera» are wrong — the crash was the agent's
+Esc probe; the stale-wrapper hazard itself stays a real, separate lesson.
 class: held-reference-outlives-object
 While hunting a crash (bug 118, issue #50) I saw live that a Lua wrapper kept across frames passes `IsValid()` for a FOREIGN object: the pause section kept the
 wrappers of the three loading screens born at world entry, the game destroyed them, and 7 s later one of them pointed at a `W_HotkeyIcon_C` (logged «на его месте
