@@ -1,5 +1,37 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-22 15:1x +03:00 — STATUS bonsai trim, part 16: the CHAT CLOSED block of the chat of 2026-11-22 09:34 (moved verbatim at the closure of the chat of 13:06)
+
+> **CHAT CLOSED 2026-11-22 ≈11:0x (the chat of 09:34, `resume`, then the owner 09:37 «работай автономно в дневном цикле» — /dayloop; soft closure at the
+> 80 % context budget). Reports: `testcases/reports/2026-11-22_conan-damage-window-and-waystone-recon.md`, `…_conan-fp-head-shadow-sheathed-bow.md`.**
+> - **The owner's debt first (his words 09:40): the first-person head shadow (bug 114, #13) and the bow on the back in the first-person view (bug 117, #4)** —
+>   fixed in KrinikConanCamera (`main.lua`, the first-person section: hidden shadow on the game-hidden head, the neck bone hidden only above 70° pitch, a
+>   sheathed weapon invisible with its shadow, the view state read at `EventOnThirdPersonChange` — the idle vanity camera path). The cases passed on the working
+>   build on v2 … v6, the committed v7 smoked (`testcases/TC_conan_fp_head_shadow_sheathed_bow_2026-11-22.md`, report `testcases/reports/2026-11-22_conan-fp-head-shadow-sheathed-bow.md`); four
+>   judge rounds; pack `388b127`; the show page `ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/96_ten_golovy_i_luk_za_spinoj/pokaz.html`. Issues #13 / #4: a comment
+>   with the fix posted, closed after his look (the fix ships in the next build).
+> - **The damage-window stand tool** `ConanExiles/_config/damage-window.lua` (EXP-0603 mechanized; pack `949588b`): DW0–DW0c pass, DW1 (real hits) owed.
+> - **#21 (bug 79) in flight — FIRST next chat:** the dungeon path REPRODUCED 10:53 (Wine Cellar: the world at 0.03 ≈ 2 s behind the loading screen) and fixed
+>   in `krinik_pause_in_menu.lua` (pack commit with `review: owed`): the dungeon passes twice. Still owed (bug 79 «The fix in progress»): the admin teleport
+>   still slows ≈ 3 s — read which widget is in the viewport during its load; the inventory neighbour (the module name for `ActivateModule`); the judge round;
+>   R21a waystones (the build-mode placement by the remote is not solved). Dungeon stand: `BP_TriggerTeleport_C` list (`KUMM/.work/tmp/list_teleports.lua`),
+>   the Wine Cellar door is closed — the heroine set into the trigger by `K2_SetActorLocation`. My all-property probe crashed the game 10:44 (EXP-0609).
+> - **New, not fixed yet:** KrinikConanArchery logs a caught Lua error at the heroine's death («вид тела от первого лица: ошибка (сокет после экипировки) —
+>   `GetPostProcessInstance`», `main.lua:1859`); `-Verify` names 4 KrinikConanMusic files missing in the build (not in the RC3 bytes).
+>
+> **FIRST in the next chat (after #21 above):**
+> 1. **#30 bow sprint S9** (bug 93): the bow is sheathed by pressing its quick slot again (`h:InpActEvt_Shortcut0_K2Node_InputActionEvent_25({KeyName=FName('One')})`,
+>    `HasWeaponsEquipped()` false, the bow at `sheath_bow` — recipes in `HOUSE_RULES_REFERENCE.md` §6); then real W + Shift and RMB, the Locomotion and BowSprint lines.
+> 2. **#23 the stuck map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue) or his eye.
+> 3. **#41 Esc over other mods' windows** (bug 108): the owner called it «на будущее», the tracker labels it critical — settle the label.
+> 4. KrinikConanArchery: the caught Lua error at the heroine's death (`main.lua:1859`, `h.Mesh:GetPostProcessInstance()` on a dying pawn — guard the mesh);
+>    `-Verify` names 4 KrinikConanMusic files missing in the build. DW1 of the damage window (real hits) owed. #48 closes after the next build's retest;
+>    #43 the slow launcher waits for his eye. The `[NOT-TESTED]` markers of the camera's new section (pack 388b127) flip to `[TESTED: … report]` — a comment-only pack commit.
+> 5. **The owner's errand still open:** delete `D:\PATH.txt` and `D:\settings.txt` (Claude Code refuses a removal at a drive root).
+>
+> The CHAT CLOSED block of 2026-11-21 ≈23:4x (its FIRST list, the stand lessons) — chronicle, entry «STATUS bonsai trim, part 15»; its open items
+> are carried into the chat of 2026-11-22 above.
+
 ## 2026-11-22 11:03 +03:00 — STATUS bonsai trim, part 15: the CHAT CLOSED block of the chat of 2026-11-21 21:33 (moved verbatim at the closure of the chat of 2026-11-22 09:34)
 
 > **CHAT CLOSED 2026-11-21 ≈23:4x (the chat of 21:33, `resume`: the first install from zero, then the critical issues; soft closure on the owner's word 23:24

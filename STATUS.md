@@ -138,58 +138,34 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **Bug 79 (#21) admin-teleport path — FIXED 2026-11-22 14:15 +03:00 (`bugs/79_*` «The fix»):** two live `W_IngameLoadingScreen_C` during a load; `krinik_pause_in_menu.lua` now
-> keeps up to 3 recent births (`watch_loading_screen`), and a loading screen no longer re-arms the pause; judge round 1 — 3 risks fixed (pack `b7d984a`).
-> R21d (101 samples at 1.0, 74 behind the loading screen) and N1 (inventory 0.03 / 1.0) pass. Owed: the dungeon entrance and R21a waystones on this version.
+> **CHAT CLOSED 2026-11-22 ≈15:1x (the chat of 13:06 — the previous farewell pasted as the entry; soft closure by the owner's word 15:07 at 78 % context).
+> Reports: `testcases/reports/2026-11-22_conan-fp-shadow-always-owner-no-see.md`; cases R21c / R21d / N1 of `testcases/TC_conan_loading_screen_waystone_dungeon_2026-11-22.md`.**
+> - **The owner's debt (13:10–13:11, verbatim in `bugs/114_*`): the first-person shadow ALWAYS, everything visible to other players** — KrinikConanCamera (pack
+>   `25dff5d`): no bone hide; the first-person camera moves forward 0 → 10 cm from 55° to 75° pitch (the morning's «neck» was an armour collar); the sheathed
+>   weapon OwnerNoSee + CastHiddenShadow; the held item's shadow back; own hero by `IsLocalController`. S1–S7 pass (v1–v4), four judge rounds. The show page
+>   `ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/97_ten_vsegda_ot_pervogo_lica/pokaz.html` — opened 14:10, his look awaited. His 14:52 question on the axe's shadow —
+>   answered by frames: the raised first-person pose and the blade edge-on to the sun (the game map). Not covered: a second player's client, a mount, the drawn aim.
+> - **Bug 79 (#21) — the admin-teleport path FIXED** (pack `b7d984a`): two live loading screens during a load; the pause keeps up to 3 recent births and no
+>   longer re-arms behind a loading screen; R21d and N1 pass; the dungeon and the waystones not run on this version.
+> - **The owner's look at the launcher 15:06:** fast except the window that explains the feedback instructions (`bugs/110_*` «The owner's look»).
 >
-> **🎯 THE RC4 SCOPE — `[OWNER]` 2026-11-22 15:07** (verbatim: «чиним остальное все это в следующем чате...двух, и это будет скоуп на RC4», under his quote of
-> the open-critical list): fix in the next one or two chats, then build RC4 — (1) #21 waystones (+ the dungeon on the final pause version), (2) #30 bow
-> sprint (the two open cases S8, S9), (3) #23 the stuck full-screen map, (4) #41 Esc over other mods' windows (in scope by this word), (5) the
-> KrinikConanArchery Lua error at the heroine's death (file the issue first), (6) #43's last slow window — the feedback instructions (the owner 15:06).
+> **🎯 FIRST in the next chat — THE RC4 SCOPE (`[OWNER]` 2026-11-22 15:07 «чиним остальное все это в следующем чате...двух, и это будет скоуп на RC4»):** fix all
+> six, then build RC4 by the release ritual (`release_checklist.py`, HOUSE_RULES 42):
+> 1. **#21 the waystones** (R21a; Waystones Enhanced item 7770001, travel by `TeleportPlayerServer` — `games/ConanExiles/mods/WaystonesEnhanced.md`) and the dungeon
+>    entrance (R21b stand: `KUMM/.work/tmp/list_teleports.lua`, the heroine set into the Wine Cellar trigger by `K2_SetActorLocation`) on the final pause version;
+>    the probe `KUMM/.work/tmp/tp_widget_probe.lua` samples the time behind a load. Then close #21.
+> 2. **#30 the bow sprint** (bug 93): cases S8, S9 — the bow sheathed by its quick slot (`h:InpActEvt_Shortcut0_K2Node_InputActionEvent_25({KeyName=FName('One')})`),
+>    real W + Shift and RMB, the Locomotion and BowSprint log lines.
+> 3. **#23 the stuck full-screen map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue).
+> 4. **#41 Esc over other mods' windows** (bug 108): in scope by the 15:07 word — native pak fixes of those windows (the Lua path is dead: KrinikConanUI.md «Clicks and Esc»).
+> 5. **The KrinikConanArchery Lua error at the heroine's death** (`main.lua:1859`, `h.Mesh:GetPostProcessInstance()` on a dying pawn — guard the mesh): file the
+>    issue first (HOUSE_RULES 44).
+> 6. **#43 — the launcher's feedback-instructions window is slow** (`bugs/110_*`): measure it at 300 % (open, first frame, a press), fix, retest.
+> Also owed: comments on issues #13, #4, #21 (the owner's bug-report genre, the portrait check — HOUSE_RULES 44); #48 closes after the RC4 retest; `-Verify` names 4
+> KrinikConanMusic files missing in the build; DW1 of the damage window (real hits); the owner's errand — delete `D:\PATH.txt` and `D:\settings.txt`.
+> Stand helpers of this chat: `KUMM/.work/fp_nosee/shot.sh` (pitch / yaw / 4K frame), `KUMM/.work/tmp/weapons_now.lua`, `fp_nosee_try.lua`, `find_rows.lua` (item search).
 >
-> **RC4 readiness (the owner asked 15:04; RC3 published 2026-11-21 20:29):** fixed since RC3 in the pack — the world freeze behind the loading screen (#21:
-> dungeon `3b5e1e6`, admin teleport `b7d984a`; waystones not checked), the Locomotion Lua error while dead (#48, `b99409a`, closes after the build retest),
-> the first-person shadow and the sheathed bow (#13, #4 — cosmetic, `388b127` → `25dff5d`). Open critical issues: #21 (waystones), #30 bow sprint (S8, S9),
-> #23 the stuck map (not reproduced in 3 variants), #41 Esc over other mods' windows (the owner called it «на будущее» — label to settle), #43 the slow
-> launcher — `[OWNER]` 15:06: fast now except the window that explains the feedback instructions (`bugs/110_*` «The owner's look»; owed: measure and fix it); not filed yet — the KrinikConanArchery Lua error at the heroine's death (`main.lua:1859`). Recommended before RC4: the archery death
-> guard, #21 waystones + the dungeon on the final version, #30 S9 — then build; the owner's decision awaited.
->
-> **2026-11-22 13:10–14:0x — the owner's debt: the first-person shadow ALWAYS** (`[OWNER]` 13:10–13:11, verbatim in `bugs/114_*`): KrinikConanCamera v1→v4 in
-> the pack's working tree — no bone hide; the first-person camera moves forward 0→10 cm from 55° to 75° pitch (the «neck» was an armour collar); the sheathed
-> weapon OwnerNoSee + CastHiddenShadow (other players see it); the held item's shadow back; own hero by `IsLocalController`. Cases
-> `testcases/TC_conan_fp_shadow_always_owner_no_see_2026-11-22.md` pass on v1–v3 (report `testcases/reports/2026-11-22_conan-fp-shadow-always-owner-no-see.md`);
-> judge rounds 1–4 (pack `25dff5d`, pushed); the show page (opened for the owner 14:10, his look awaited) `ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/97_ten_vsegda_ot_pervogo_lica/pokaz.html`. Not covered: a
-> second player's client, a mount, the drawn bow aim at a steep pitch.
->
-> **CHAT CLOSED 2026-11-22 ≈11:0x (the chat of 09:34, `resume`, then the owner 09:37 «работай автономно в дневном цикле» — /dayloop; soft closure at the
-> 80 % context budget). Reports: `testcases/reports/2026-11-22_conan-damage-window-and-waystone-recon.md`, `…_conan-fp-head-shadow-sheathed-bow.md`.**
-> - **The owner's debt first (his words 09:40): the first-person head shadow (bug 114, #13) and the bow on the back in the first-person view (bug 117, #4)** —
->   fixed in KrinikConanCamera (`main.lua`, the first-person section: hidden shadow on the game-hidden head, the neck bone hidden only above 70° pitch, a
->   sheathed weapon invisible with its shadow, the view state read at `EventOnThirdPersonChange` — the idle vanity camera path). The cases passed on the working
->   build on v2 … v6, the committed v7 smoked (`testcases/TC_conan_fp_head_shadow_sheathed_bow_2026-11-22.md`, report `testcases/reports/2026-11-22_conan-fp-head-shadow-sheathed-bow.md`); four
->   judge rounds; pack `388b127`; the show page `ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/96_ten_golovy_i_luk_za_spinoj/pokaz.html`. Issues #13 / #4: a comment
->   with the fix posted, closed after his look (the fix ships in the next build).
-> - **The damage-window stand tool** `ConanExiles/_config/damage-window.lua` (EXP-0603 mechanized; pack `949588b`): DW0–DW0c pass, DW1 (real hits) owed.
-> - **#21 (bug 79) in flight — FIRST next chat:** the dungeon path REPRODUCED 10:53 (Wine Cellar: the world at 0.03 ≈ 2 s behind the loading screen) and fixed
->   in `krinik_pause_in_menu.lua` (pack commit with `review: owed`): the dungeon passes twice. Still owed (bug 79 «The fix in progress»): the admin teleport
->   still slows ≈ 3 s — read which widget is in the viewport during its load; the inventory neighbour (the module name for `ActivateModule`); the judge round;
->   R21a waystones (the build-mode placement by the remote is not solved). Dungeon stand: `BP_TriggerTeleport_C` list (`KUMM/.work/tmp/list_teleports.lua`),
->   the Wine Cellar door is closed — the heroine set into the trigger by `K2_SetActorLocation`. My all-property probe crashed the game 10:44 (EXP-0609).
-> - **New, not fixed yet:** KrinikConanArchery logs a caught Lua error at the heroine's death («вид тела от первого лица: ошибка (сокет после экипировки) —
->   `GetPostProcessInstance`», `main.lua:1859`); `-Verify` names 4 KrinikConanMusic files missing in the build (not in the RC3 bytes).
->
-> **FIRST in the next chat (after #21 above):**
-> 1. **#30 bow sprint S9** (bug 93): the bow is sheathed by pressing its quick slot again (`h:InpActEvt_Shortcut0_K2Node_InputActionEvent_25({KeyName=FName('One')})`,
->    `HasWeaponsEquipped()` false, the bow at `sheath_bow` — recipes in `HOUSE_RULES_REFERENCE.md` §6); then real W + Shift and RMB, the Locomotion and BowSprint lines.
-> 2. **#23 the stuck map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue) or his eye.
-> 3. **#41 Esc over other mods' windows** (bug 108): the owner called it «на будущее», the tracker labels it critical — settle the label.
-> 4. KrinikConanArchery: the caught Lua error at the heroine's death (`main.lua:1859`, `h.Mesh:GetPostProcessInstance()` on a dying pawn — guard the mesh);
->    `-Verify` names 4 KrinikConanMusic files missing in the build. DW1 of the damage window (real hits) owed. #48 closes after the next build's retest;
->    #43 the slow launcher waits for his eye. The `[NOT-TESTED]` markers of the camera's new section (pack 388b127) flip to `[TESTED: … report]` — a comment-only pack commit.
-> 5. **The owner's errand still open:** delete `D:\PATH.txt` and `D:\settings.txt` (Claude Code refuses a removal at a drive root).
->
-> The CHAT CLOSED block of 2026-11-21 ≈23:4x (its FIRST list, the stand lessons) — chronicle, entry «STATUS bonsai trim, part 15»; its open items
-> are carried into the chat of 2026-11-22 above.
+> The CHAT CLOSED block of 2026-11-22 ≈11:0x (the chat of 09:34, its FIRST list) — chronicle, entry «STATUS bonsai trim, part 16»; its open items are carried above.
 >
 > **Still open from the chat of 16:20** (its closed summary and the done item 1 — chronicle, entry «STATUS bonsai trim, part 7»; item 5 is now issue #17, the
 > «Подтвердить» finding of item 6 is issue #14):
