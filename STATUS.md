@@ -142,6 +142,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > keeps up to 3 recent births (`watch_loading_screen`), and a loading screen no longer re-arms the pause; judge round 1 — 3 risks fixed (pack `b7d984a`).
 > R21d (101 samples at 1.0, 74 behind the loading screen) and N1 (inventory 0.03 / 1.0) pass. Owed: the dungeon entrance and R21a waystones on this version.
 >
+> **🎯 THE RC4 SCOPE — `[OWNER]` 2026-11-22 15:07** (verbatim: «чиним остальное все это в следующем чате...двух, и это будет скоуп на RC4», under his quote of
+> the open-critical list): fix in the next one or two chats, then build RC4 — (1) #21 waystones (+ the dungeon on the final pause version), (2) #30 bow
+> sprint (the two open cases S8, S9), (3) #23 the stuck full-screen map, (4) #41 Esc over other mods' windows (in scope by this word), (5) the
+> KrinikConanArchery Lua error at the heroine's death (file the issue first), (6) #43's last slow window — the feedback instructions (the owner 15:06).
+>
 > **RC4 readiness (the owner asked 15:04; RC3 published 2026-11-21 20:29):** fixed since RC3 in the pack — the world freeze behind the loading screen (#21:
 > dungeon `3b5e1e6`, admin teleport `b7d984a`; waystones not checked), the Locomotion Lua error while dead (#48, `b99409a`, closes after the build retest),
 > the first-person shadow and the sheathed bow (#13, #4 — cosmetic, `388b127` → `25dff5d`). Open critical issues: #21 (waystones), #30 bow sprint (S8, S9),
