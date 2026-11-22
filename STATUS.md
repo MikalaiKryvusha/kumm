@@ -146,7 +146,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > dungeon `3b5e1e6`, admin teleport `b7d984a`; waystones not checked), the Locomotion Lua error while dead (#48, `b99409a`, closes after the build retest),
 > the first-person shadow and the sheathed bow (#13, #4 — cosmetic, `388b127` → `25dff5d`). Open critical issues: #21 (waystones), #30 bow sprint (S8, S9),
 > #23 the stuck map (not reproduced in 3 variants), #41 Esc over other mods' windows (the owner called it «на будущее» — label to settle), #43 the slow
-> launcher (his eye); not filed yet — the KrinikConanArchery Lua error at the heroine's death (`main.lua:1859`). Recommended before RC4: the archery death
+> launcher — `[OWNER]` 15:06: fast now except the window that explains the feedback instructions (`bugs/110_*` «The owner's look»; owed: measure and fix it); not filed yet — the KrinikConanArchery Lua error at the heroine's death (`main.lua:1859`). Recommended before RC4: the archery death
 > guard, #21 waystones + the dungeon on the final version, #30 S9 — then build; the owner's decision awaited.
 >
 > **2026-11-22 13:10–14:0x — the owner's debt: the first-person shadow ALWAYS** (`[OWNER]` 13:10–13:11, verbatim in `bugs/114_*`): KrinikConanCamera v1→v4 in

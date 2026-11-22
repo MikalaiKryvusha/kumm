@@ -54,6 +54,12 @@ After (same flow, 300 %): picture renders 2 (285 ms at birth, 62 ms when the fou
 change ≈ 30–40 ms instead of ≈ 350 ms. Frames: the pixel diff of 13 stand frames before / after — identical within antialiasing (max channel difference 2–5)
 except the lines whose TEXT differs between the two runs (the stand folder's name, the live download numbers); a side-by-side look at the download screen.
 
+## The owner's look (2026-11-22 15:07 +03:00, issue #43)
+
+`[OWNER]` 2026-11-22 15:06 «лаунчер стал быстрым, кроме окна, в котором поясняется инструкция про отзыв, в остальном стал быстрым». The fix holds on his
+real launcher everywhere except the window that explains how to send feedback — that window still opens or reacts slowly. **Owed:** measure that window
+on the stand (open, first frame, a press) at 300 %, find what it rebuilds (EFFICIENT_CODE §1), fix, retest; issue #43 stays open until then.
+
 ## Decisions made without the owner
 
 - `[AI]` The budget numbers: 16 ms (one 60 Hz frame) for a refresh and a list repaint; the first paint of a new screen's list (18–34 ms, all lines new) is
