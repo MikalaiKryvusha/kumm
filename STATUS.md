@@ -179,7 +179,10 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    admin teleport INTO a teleport trigger makes two teleports in one frame and a loading screen stuck at 99 % (not a defect).** The old text: **#21 the waystones** (R21a; Waystones Enhanced item 7770001, travel by `TeleportPlayerServer` — `games/ConanExiles/mods/WaystonesEnhanced.md`) and the dungeon
 >    entrance (R21b stand: `KUMM/.work/tmp/list_teleports.lua`, the heroine set into the Wine Cellar trigger by `K2_SetActorLocation`) on the final pause version;
 >    the probe `KUMM/.work/tmp/tp_widget_probe.lua` samples the time behind a load. Then close #21.
-> 2. **#30 the bow sprint** (bug 93): cases S8, S9 — the bow sheathed by its quick slot (`h:InpActEvt_Shortcut0_K2Node_InputActionEvent_25({KeyName=FName('One')})`),
+> 2. 🟡 **2026-11-22 20:2x–20:4x: #30 items 1–2 answered, not defects** — the draw holds in a sprint by REAL input (the «drops by itself» rows came from the
+>    remote, which cannot hold RMB); «RMB does not draw» = the bow on its sheath (a punch, vanilla) or `NotAmmo`; S9 answered; issue #30 commented, items 1–2
+>    ticked. Open (cosmetic): the camera jerk at the stamina's end, the sprint-jump view (FOV 102.1 → 107.5 kept after the landing — read KrinikConanArchery's
+>    sprint-view FOV first; bug 93). The old text: **#30 the bow sprint** (bug 93): cases S8, S9 — the bow sheathed by its quick slot (`h:InpActEvt_Shortcut0_K2Node_InputActionEvent_25({KeyName=FName('One')})`),
 >    real W + Shift and RMB, the Locomotion and BowSprint log lines.
 > 3. **#23 the stuck full-screen map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue).
 > 4. **#41 Esc over other mods' windows** (bug 108): in scope by the 15:07 word — native pak fixes of those windows (the Lua path is dead: KrinikConanUI.md «Clicks and Esc»).

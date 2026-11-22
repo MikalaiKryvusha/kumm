@@ -103,6 +103,10 @@ own command; before bisecting mods, hash the stacks, read the minidump strings a
 record the agent's commands cannot see the one variable that really changed.
 mechanized: `ConanExiles/_config/crash-forensics.py` (stack hash, depth, the remote commands in each minidump, per crash folder); the remote refuses
 `ListenForInputAction` with a table argument (KrinikAgentRemote guard, bug 118).
+Second instance the same evening (bug 93 / issue #30): «the held draw ends by itself in a sprint after 0.8–1.6 s» was filed from REMOTE-driven runs — the
+remote's input event cannot hold a key (the game reads the physical RMB), so the game ends every remote draw; by real input (`mouse-seq.ps1`) the draw holds
+as long as RMB is held. Before filing a symptom seen through an instrument, name what the instrument cannot do (hold a key, a real cursor, the focus) and
+re-run the case without it.
 
 ### EXP-0612 · 2026-11-22 · ❌→✅ · #conan #ue4ss #crash #stale-wrapper #isvalid #registry
 **Correction 2026-11-22 19:31 (EXP-0613):** the lines below that localize the crash «by bisection to KrinikConanCamera» are wrong — the crash was the agent's

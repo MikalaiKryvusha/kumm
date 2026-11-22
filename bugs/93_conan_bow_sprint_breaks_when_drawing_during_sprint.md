@@ -2,6 +2,23 @@
 
 > **GitHub issue:** [#30](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/30) — the public tracker of this defect (HOUSE_RULES 44)
 
+**2026-11-22 20:2x — S9 answered: not a defect.** With the bow on its sheath RMB is an UNARMED attack in the game itself (substate 11, the bow stays on the
+back; a control with every Krinik Lua mod off shows the same); in a sprint the punch slows the heroine to 213 for ≈ 1.5 s and the sprint resumes while Shift is
+held. So «RMB in a sprint sometimes does not draw» (issue #30, item 2) was the sheathed bow of the 06:30 run (EXP-0545: read the bow's socket before a draw case).
+Case S9 of `testcases/TC_conan_rc4_scope_2026-11-22.md`.
+**2026-11-22 20:3x — «the held draw ends by itself in a sprint» is a STAND ARTIFACT, not a defect.** The remote cannot hold RMB (`mouse-seq.ps1` header: the game
+reads the physical key by `IsInputKeyDown`): a remote RMB-down in a sprint started the draw (11, the arrow nocked) and the game ended it 0.54 s later, never
+reaching 15 / 16 — the 06:20 rows above came from the same remote. By REAL input (`mouse-seq.ps1 -Seq "kdown:W,kdown:0xA0,wait:1200,rdown,wait:3000,rup,…"`,
+the probe `KUMM/.work/tmp/s9_probe.lua` watching, rows `s9_real_input_draw.txt`): the sprint at 660, RMB → 11 → 15,16 within 0.4 s, the full draw held 2.6 s
+until the release, `EndPowerCharge` exactly at the release, the sprint kept throughout (stamina 103 → 50). Two more stand facts: a draw refused by the game
+logs `DebugActionTryFailure` with the reason as an FString — `NotAmmo` when the selected arrows are missing (Arrow Quick Swap's selection:
+`AQS_Actor_Component_C:Server_ApplyAmmoType(<template id>)`); `exec SpawnItem` and `TeleportPlayer` need `exec MakeMeAdmin` first (answered «ok» and did
+nothing without it). Still open for #30 (cosmetic, HOUSE_RULES 38): the camera jerk at the stamina's end with a drawn bow, the zoom of a sprint jump.
+**Sprint-jump measurement 2026-11-22 20:4x** (real W + Shift + Space, `KUMM/.work/tmp/cam_watch.lua` every 50 ms, the bow in hand): the arm length stays 230 (the
+game sets `NewTargetArmLength` 480 for one sample at the take-off, the camera mod puts 230 back); the FieldOfView goes 102.1 → 107.5 at the take-off and STAYS
+107.5 after the landing. 102.1 was there before the sprint started (left by the previous sprint runs — KrinikConanArchery's «обзор спринта держится»), so the
+jump ends a held sprint view rather than zooming in. The owner's «приближает» is not reproduced as such; the view does change in the jump. Next: read
+KrinikConanArchery's sprint-view FOV section (when it sets 102.1, what resets it) before any change.
 **Status:** 🔧 build 7 deployed; S1b, S3, S6 PASS by real input 2026-11-13 10:43 (report `testcases/reports/2026-11-13_conan-bow-sprint-sprint-then-draw.md`); **the owner's own play confirms it** — `[OWNER]` 2026-11-13 11:01 «спринт и стрельба работают»; open: S8, S9, the cost (build 4 deployed 09:32); his next remark —
 the bow unseen in first person — is bug 95 · **Severity:** S2 (the owner's playtime on the feature he named
 most important) · **Version/build:** Conan Exiles 3.0.1, pack `ConanExiles` working tree, section build 3 (2026-11-10 19:54) → build 4 (2026-11-13) ·
