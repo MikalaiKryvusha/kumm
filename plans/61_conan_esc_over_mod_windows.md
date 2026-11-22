@@ -56,7 +56,18 @@ pass the window — a catcher (option A) must also stop the hub from taking that
 
 1. ✅ **Inventory (no code)** — done, the table above: for each of the 13 windows — open over the hub by the remote (`walk-mod-windows.sh` pattern), post Esc, record closes / not; a
    frame of each. Result table into bug 108.
-2. **Spike A on EAA** (cheapest, all ours): the catcher widget by a kit script (`kit-krinik-click-events.py` style), focus taken on the mod window's open,
+2. **Spike A on EAA — the concrete recipe (read 2026-11-22 21:1x from `_config/devkit/kit-krinik-click-events.py`):**
+   - kit: `new_widget("W_KrinikEscCatcher", unreal.CanvasPanel, VISIBLE-or-SELF_HIT_TEST_INVISIBLE)` + `custom_event(ed, "KrinikEsc", …)` + compile +
+     `key_override(bp, gen, "OnKeyDown", "InKeyEvent", "/Script/Engine.KismetInputLibrary:GetKey", "Escape", "KrinikEsc", "Handled", part)` — Handled, so the
+     hub does not take the same Esc (the LBPR row of the inventory); the widget must be focusable (find the kit property: `IsFocusable` on the generated
+     class's default object); one more `FilesToCook` line in `Local/CookInfo.ini`; build by the KrinikConanUI recipe (notes «Where things are»), twice for GUIDs.
+   - Lua (KrinikConanUI, the pause section's existing `ActivateModule` hook — no new timer): a module of the 10-window list opens → `WidgetBlueprintLibrary:
+     Create` the catcher once, `AddToViewport` above the mod window, `SetKeyboardFocus`; `RegisterHook(…W_KrinikEscCatcher_C:KrinikEsc)` → `ActivateModule(<top
+     mod module>, false)` (or the window's own close handler where `false` leaves state — EAA's `BndEvt__Button_81_…`); the module closes → the catcher leaves.
+   - The focus risk measured FIRST: open EAA, click a slider by real input (`mouse-seq.ps1`), then Esc — does the key still reach the catcher? If the click
+     moved focus to EAA's button, re-focus in the pause section's existing 250 ms poll (only while a list window is open) — but that steals keys from a text
+     field: the neighbour case 4 decides whether A can ship.
+   The old step text: **Spike A on EAA** (cheapest, all ours): the catcher widget by a kit script (`kit-krinik-click-events.py` style), focus taken on the mod window's open,
    the Esc event hooked from Lua; cases of acceptance 2 and neighbours 4 on EAA alone; the focus-after-click risk measured (click a slider, then Esc).
 3. Decide by the spike: A holds → roll out to every window of the inventory that does not close natively; A fails on focus → spike C on one window; C
    fails → B needs a tooling step (a plan of its own) or D with the owner.
