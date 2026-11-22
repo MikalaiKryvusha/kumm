@@ -107,6 +107,8 @@ Second instance the same evening (bug 93 / issue #30): «the held draw ends by i
 remote's input event cannot hold a key (the game reads the physical RMB), so the game ends every remote draw; by real input (`mouse-seq.ps1`) the draw holds
 as long as RMB is held. Before filing a symptom seen through an instrument, name what the instrument cannot do (hold a key, a real cursor, the focus) and
 re-run the case without it.
+Third instance, 20:57: `npc:InteractableActivate(nil, hero, 0, false)` sent by the remote crashed the game on a dialogue NPC; `crash-forensics.py` named the
+command from the minidump in one run (a new stack hash), so the attribution took a minute instead of a day — the tool pays. The remote refuses that call now.
 
 ### EXP-0612 · 2026-11-22 · ❌→✅ · #conan #ue4ss #crash #stale-wrapper #isvalid #registry
 **Correction 2026-11-22 19:31 (EXP-0613):** the lines below that localize the crash «by bisection to KrinikConanCamera» are wrong — the crash was the agent's
