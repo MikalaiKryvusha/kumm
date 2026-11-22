@@ -92,12 +92,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 
 - Done pool items (launch guard, archive-name round trip, `pickCard` cases, the `help` command, the 20-check fixture pack) — chronicle,
   entries 2026-10-14 23:22 and 2026-10-16 23:39.
-- [x] **Warn when a mod overrides `Engine.ini` at runtime** — FIRST SLICE DONE 2026-10-30 16:3x: `-Verify` warns «<Mod> sets <cvar>=<v> at runtime (<file>:<line>); the pack's Engine.ini sets <v>» for `source.folder` mods (report `testcases/reports/2026-10-30_engine-ini-runtime-cvar-warning.md`; next slices: archives / Workshop paks, blueprint bytecode). Both ailments of 21.08 were invisible to the engine:
-      the deploy checked every file and still shipped a build whose graphics a Lua mod rewrites in the world.
-      A cheap first slice needs no running game: scan the mods' sources for
-      `[SystemSettings]` and `r.*` assignments and report which collide with the pack's `Engine.ini`.
-      Field arguments (Palworld `r.ViewDistanceScale` in four places; in Conan the rival is the game itself) — chronicle,
-      entry 2026-10-06 23:38, section «Доводы к пункту Engine.ini».
+- [x] The `Engine.ini` runtime-cvar warning — first slice done 2026-10-30 (its text — chronicle, entry «STATUS bonsai trim, part 18»).
 - [ ] **Rewrite old Russian working documents in English when taken into work** (plans, bugs, researches, game maps) — the owner's word
       2026-10-28; the KAIF entry documents were rewritten the same evening.
 
@@ -108,14 +103,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Decisions the agent must not make alone (brand/UX/architecture), or actions only the human can do
 > (test on real hardware, external accounts). Filed in `interviews/` and `homeworks/`.
 
-- 🎯 **Oblivion-style archery — raised by the owner 2026-10-28** (a discussion, not work: `[OWNER]` «пока обсуждаем»): arrow speed — Conan's,
-      the drop — Oblivion's. Vanilla `ArrowGravityScale` 0.55 and `ArrowInitialSpeedMultiplier` 5000 (Remastered) found; waits for his choice of what
-      the draw does (shot power, as in Remastered, or a flatter flight, as in Conan). Recon — `researches/conan-archery/README.md`.
-- 🛡️ **2026-11-20 09:5x — the owner's side errand (a browser game, then «check C for malware»): the game planted nothing, the Chrome cache is cleared; leftovers of
-      an EARLIER infection weaken the machine's antivirus.** The owner ordered the removal (10:10–10:13, «УБРАТЬ!» ×3, Chrome closed by him 10:13): the
-      helper backs up, cleans the local policy file and the live policy values, turns protection back on, restarts the full scan, revokes the 8 spam
-      notification grants; Tamper Protection is the owner's own switch in Windows Security. Details are private and stay out
-      of this public repo: `KUMM/.work/malware_check/report.md` (git-ignored). A full scan of C: runs detached (Defender, under the machine lock `kumm` to 13:47).
+- 🎯 Oblivion-style archery (the owner 2026-10-28, a discussion, his choice of what the draw does) — chronicle, entry «STATUS bonsai trim, part 18»; recon `researches/conan-archery/README.md`.
+- 🛡️ The owner's side errand of 2026-11-20 (malware check, the removal he ordered) — chronicle, entry «STATUS bonsai trim, part 18»; private report `KUMM/.work/malware_check/report.md`.
 - ❓ **2026-11-20 10:58 — the owner asked whether our five pak-less mods (Camera, EngineTweaks, Locomotion, ModPackManager, RussianTranslation) should get small
       «visiting-card» paks so the game's mod list shows each with its description, author and change note.** Answered in chat: possible (plan 44 step 4,
       moved to 1.0.0; a kit-cooked pak is required — the game refuses a wrapper without AssetRegistry.bin, probes 2026-11-03), recommended for 1.0.0,
@@ -123,11 +112,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 - 📧 **2026-11-20 14:44 — the live Nexus page of 0.9.0 shows the email as raw BBCode** `[email=<author's address>]…[/email]` (the owner's frame; Nexus has no
       `[email]` tag; its WYSIWYG editor rewrites our `[url=mailto:]` into it). Fix: the address as plain text after «Email:» / «Почта:» in
       `ConanExiles/_config/release/build_nexus_description.py` (lines 177, 183) and on the live page by `tools/nexus-desc.mjs`. The owner 14:44: later, the build first.
-- 🧹 Disk cleanup 2026-10-25 — the "your call" items of `C:\REVISIONS\…_ИТОГ.md`, `D:\REVISIONS\…_ИТОГ.md` are the owner's (chronicle, 2026-10-25 22:15).
+- 🗂️ The owner's older open items (the disk cleanup «your call» list of 2026-10-25; the questions of the 17.08 cleanup, Palworld, Oblivion) — chronicle, entry «STATUS bonsai trim, part 18».
 - 🔴 **Do NOT run `Clear-Quarantine.ps1 -Stamp 2026-08-17_2335 -Execute`**: the quarantine holds the only
       copy of an Elden Ring save and the personal video `ref.mp4`.
-- 🗂️ **Old questions to the owner** (cleanup 17.08 — malware, RTSS, iTunes, quarantine; Palworld `LoadingRange` 25600 — what to restore;
-      Oblivion — mod-list rows and reshades; the "not a Steam install" line and the anonymisation rule) — chronicle, entry 2026-10-12 19:22.
 - 🧰 Anything needing a real Nexus login, a real game install, or the owner's own mod pack is his to
       run — the agent can build the fixture path but cannot verify the live path alone.
 
@@ -153,6 +140,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (KrinikConanMusic disabled, pack `5d844b3`); plan 61 for Esc over mod windows + its step 1 inventory (3 close, LBPR closes the hub, 9 ignore Esc); the
 > remote's guards `no-table-delegate` (widened after the judge) and `no-nil-interactable` (my `InteractableActivate(nil)` crashed the game on a dialogue NPC
 > at 20:57 — crash-forensics named it at once), all live. Packs `d8c42ed` `5d844b3` `1d9cff5` `290e6f0`.
+> Late: bug 118 DONE; KAIF #202; the stand probes in the pack `_config/` (`b0aa7a9`); #13 / #4 commented; the #30 sprint view = the game; bonsai 17–18.
 > **NEXT (in order):** (1) **build RC4** by the release ritual (`release_checklist.py`, HOUSE_RULES 42) for the file-updating launcher — a fresh chat: the
 > ritual is long; publication waits for the owner's word; (2) plan 61 step 2 — spike A (our kit «Esc catcher») on EAA; (3) the real waystone travel (R21a,
 > real input for the placement); M2 (start the talk by a REAL E); #30 camera: the sprint jump keeps the view; the sprint view sticking after a sprint is the GAME (control 21:06 without KrinikConanArchery) — the owner decides whether he wants it changed (bug 93); #43's first open
@@ -167,18 +155,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 1. 🟡 **2026-11-22 20:1x: the dungeon (the Dregs, IN and OUT — R21e), the admin teleport (R21d) and a teleport with the waystone map open (R21a-sim) pass on
 >    `b7d984a`; owed only the REAL waystone travel between two placed waystones (placing needs the building mode with real input); issue #21 commented, open.
 >    The Wine Cellar is gated by a world event (`RequiredEventTag`) — use the Dregs (`BP_TriggerTeleport_InFromEntrance` / `…_OutFromEntrance`). Stand trap: an
->    admin teleport INTO a teleport trigger makes two teleports in one frame and a loading screen stuck at 99 % (not a defect).** The old text: **#21 the waystones** (R21a; Waystones Enhanced item 7770001, travel by `TeleportPlayerServer` — `games/ConanExiles/mods/WaystonesEnhanced.md`) and the dungeon
->    entrance (R21b stand: `KUMM/.work/tmp/list_teleports.lua`, the heroine set into the Wine Cellar trigger by `K2_SetActorLocation`) on the final pause version;
->    the probe `KUMM/.work/tmp/tp_widget_probe.lua` samples the time behind a load. Then close #21.
+>    admin teleport INTO a teleport trigger makes two teleports in one frame and a loading screen stuck at 99 % (not a defect).**
 > 2. 🟡 **2026-11-22 20:2x–20:4x: #30 items 1–2 answered, not defects** — the draw holds in a sprint by REAL input (the «drops by itself» rows came from the
 >    remote, which cannot hold RMB); «RMB does not draw» = the bow on its sheath (a punch, vanilla) or `NotAmmo`; S9 answered; issue #30 commented, items 1–2
 >    ticked. Open (cosmetic): the camera jerk at the stamina's end, the sprint-jump view (FOV 102.1 → 107.5 kept after the landing — read KrinikConanArchery's
->    sprint-view FOV first; bug 93). The old text: **#30 the bow sprint** (bug 93): cases S8, S9 — the bow sheathed by its quick slot (`h:InpActEvt_Shortcut0_K2Node_InputActionEvent_25({KeyName=FName('One')})`),
->    real W + Shift and RMB, the Locomotion and BowSprint log lines.
+>    sprint-view FOV first; bug 93).
 > 3. 🟡 2026-11-22 20:4x: M1 (the hub on «Карта» = tab index 7, a loading screen over it) pass — nothing stuck after the load; M2 (the map + a dialogue) owed;
->    since 2026-11-20 the map is the game's own page (our duplicate copy — the class of the 11-07 stuck map — is gone). The old text: **#23 the stuck full-screen map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue).
+>    since 2026-11-20 the map is the game's own page (our duplicate copy — the class of the 11-07 stuck map — is gone).
 > 4. 🔲 2026-11-22 20:5x: **planned — `plans/61_conan_esc_over_mod_windows.md`** (no Lua path exists: recon of WindowRoot / GUIModule / EscapeStackNode, bug 108
->    point 7); first the inventory of the 13 windows, then spike A (our kit «Esc catcher» taking focus) on EAA. The old text: **#41 Esc over other mods' windows** (bug 108): in scope by the 15:07 word — native pak fixes of those windows (the Lua path is dead: KrinikConanUI.md «Clicks and Esc»).
+>    point 7); first the inventory of the 13 windows, then spike A (our kit «Esc catcher» taking focus) on EAA.
 > 5. ✅ **The KrinikConanArchery Lua error at the heroine's death** — fixed in `b42090f`, A49 / A49n pass 2026-11-22 19:55–19:59, issue #49 closed.
 > 6. **#43 — the launcher's feedback-instructions window is slow** (`bugs/110_*`): measure it at 300 % (open, first frame, a press), fix, retest.
 > ✅ Issues #13 and #4 commented 2026-11-22 21:1x (the 25dff5d fix as it is now; #13 corrected the morning «neck bone above 70°»), #21 commented 20:2x; #48 closes after
@@ -223,8 +208,7 @@ final check, interview #037 Q1), 106 (the climb's stamina — interview #037 Q2)
   2026-11-18 19:0x; HOUSE_RULES 38). Fixed and waiting for the owner's play: `bugs/101_…` (the hub flashes the bare world on a switch). Closed 2026-11-21 by the RC3
   retest: bugs 85, 97, 100, 112, 113 (DONE). The critical ones open for 0.9.1: `bugs/79_…`
   the world freeze after an in-game loading screen — the admin teleport fixed (pack b7d984a), the Dregs dungeon IN and OUT and a teleport with the waystone map open pass on b7d984a (2026-11-22 20:1x, R21e, R21a-sim); only the real waystone travel owed.
-- ✅ `bugs/115_DONE_conan_launcher_installed_after_uninstall_window_closed.md` (issue #46): DONE 2026-11-21 21:23 — retested on the published 0.9.1-RC3, issue closed.
-- ✅ `bugs/85_DONE_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: DONE 2026-11-21 23:12 (issue #24 closed after 15 cycles of real bow hits finished by `KillCharacter`, no crash).
+- ✅ Closed: bugs 115, 85 (DONE 2026-11-21), the camera jitter / menu abort / config override (2026-10-29), bug 118 (DONE 2026-11-22, not a build defect) — chronicle, entry «STATUS bonsai trim, part 18».
 - ⏸ `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; PARKED 2026-11-14 09:53 by the owner («в дальний ящик»).
 - 🔴 `bugs/86_…` (attribute tree caption under a node icon), `bugs/87_…` (beasts walk into the hero), `bugs/88_…` (corruption debuff line fonts) — 2026-11-07, the owner's frames.
 - 🔴 The owner's bugs 55–62 (2026-10-18 13:35–13:43, a wave in 5 minutes of play) — `bugs/55_…` – `bugs/62_…`; order and plan 32 — item 00000 above.
@@ -234,15 +218,8 @@ final check, interview #037 Q1), 106 (the climb's stamina — interview #037 Q2)
 - 🔧 `bugs/14_pickcard_exact_name_pins_old_file.md` (fixed 2026-10-15, waits for a live `kumm check`) — `kumm check` holds on to an old file if the author once
   put the version into the file name (Bosses My New Besties, 02.10). A bug of the engine itself; the fix plan and the case are in the document.
 - 🟡 `bugs/07_conan_probe_kills_ue4ss_lua_layer.md` — the symptom removed by turning the mod off, the cause not found.
-- ✅ Camera jitter at rest, the menu abort, the config file overriding the camera code — DONE 2026-10-29 by the owner's word («давно исправлено»).
 
 ## KAIF — feedback and tickets
 
-KAIF 2.9 since 2026-10-16 (from 2.7 in one step; report `reports/KAIF_UPDATES/KUMM_KAIF_2.9_UPDATE_REPORT.md`): project facts — in
-`HOUSE_RULES.md`, the KAIF hooks are wired in `.claude/settings.json` (the client reads them at session start). KAIF feedback — without asking
-the owner (`AGENT_GUIDE.md` → Notes from the human, his word of 18.09). Tickets #72, #73, #78–#82 closed by the origin in 2.8 (`bugs/KAIF/03–08_DONE_*`);
-open: #140 (`bugs/KAIF/09_*`, the origin moved it to 2.10) and three tickets of that update — #150–#152 (`bugs/KAIF/10–12_*`).
-#179 (`bugs/KAIF/19_*`, 2026-10-28): `/resume` costs ≈ 140 k tokens (measured 2026-10-29 10:08 by the transcript `usage`: 64 k → 181 k = 117 k,
-`EXPERIENCE.md` grepped by tag, not read whole) — proposed: read each document's "entry slice" at entry; rules as statements
-without rationale (the owner's word, in the ticket's comments); until the origin decides, the ritual reads everything. Since 2026-10-28 the hook
-`.claude/hooks/context-budget.mjs` runs (2026-10-30: #181 farewell hook, #182 autonomy guard, #183 the agent cleans up after itself — `bugs/KAIF/21–23`): at 70 % and 75 % — warnings only (the owner 2026-10-31 21:26); from 80 % — finish the work, then `/end-chat-soft` in full; `/end-chat-force` only from 92 % (the owner 2026-11-14 19:10 · 22:29; `CLAUDE.md`).
+KAIF 2.9 since 2026-10-16; the hooks are wired in `.claude/settings.json`; tickets live in `bugs/KAIF/` (the newest: 35 → origin issue #202, 2026-11-22) and go
+to the origin without asking (`AGENT_GUIDE.md` → Notes from the human). The section's history — chronicle, entry «STATUS bonsai trim, part 18».

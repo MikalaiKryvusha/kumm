@@ -9696,3 +9696,54 @@ Done the same chat: `ConanExiles/_config/release/release_checklist.py` (stages A
 > - **Bug 79 (#21) — the admin-teleport path FIXED** (pack `b7d984a`): two live loading screens during a load; the pause keeps up to 3 recent births and no
 >   longer re-arms behind a loading screen; R21d and N1 pass; the dungeon and the waystones not run on this version.
 > - **The owner's look at the launcher 15:06:** fast except the window that explains the feedback instructions (`bugs/110_*` «The owner's look»).
+
+## 2026-11-22 21:3x +03:00 — STATUS bonsai trim, part 18: superseded RC4 item texts, the done backlog item, closed bug lines, the KAIF section body
+
+RC4 item, the superseded text: **#21 the waystones** (R21a; Waystones Enhanced item 7770001, travel by `TeleportPlayerServer` — `games/ConanExiles/mods/WaystonesEnhanced.md`) and the dungeon
+>    entrance (R21b stand: `KUMM/.work/tmp/list_teleports.lua`, the heroine set into the Wine Cellar trigger by `K2_SetActorLocation`) on the final pause version;
+>    the probe `KUMM/.work/tmp/tp_widget_probe.lua` samples the time behind a load. Then close #21.
+RC4 item, the superseded text: **#30 the bow sprint** (bug 93): cases S8, S9 — the bow sheathed by its quick slot (`h:InpActEvt_Shortcut0_K2Node_InputActionEvent_25({KeyName=FName('One')})`),
+>    real W + Shift and RMB, the Locomotion and BowSprint log lines.
+RC4 item, the superseded text: **#23 the stuck full-screen map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue).
+RC4 item, the superseded text: **#41 Esc over other mods' windows** (bug 108): in scope by the 15:07 word — native pak fixes of those windows (the Lua path is dead: KrinikConanUI.md «Clicks and Esc»).
+
+The backlog pool's done item:
+- [x] **Warn when a mod overrides `Engine.ini` at runtime** — FIRST SLICE DONE 2026-10-30 16:3x: `-Verify` warns «<Mod> sets <cvar>=<v> at runtime (<file>:<line>); the pack's Engine.ini sets <v>» for `source.folder` mods (report `testcases/reports/2026-10-30_engine-ini-runtime-cvar-warning.md`; next slices: archives / Workshop paks, blueprint bytecode). Both ailments of 21.08 were invisible to the engine:
+      the deploy checked every file and still shipped a build whose graphics a Lua mod rewrites in the world.
+      A cheap first slice needs no running game: scan the mods' sources for
+      `[SystemSettings]` and `r.*` assignments and report which collide with the pack's `Engine.ini`.
+      Field arguments (Palworld `r.ViewDistanceScale` in four places; in Conan the rival is the game itself) — chronicle,
+      entry 2026-10-06 23:38, section «Доводы к пункту Engine.ini».
+
+Closed lines of «Open bugs»:
+- ✅ `bugs/115_DONE_conan_launcher_installed_after_uninstall_window_closed.md` (issue #46): DONE 2026-11-21 21:23 — retested on the published 0.9.1-RC3, issue closed.
+- ✅ `bugs/85_DONE_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: DONE 2026-11-21 23:12 (issue #24 closed after 15 cycles of real bow hits finished by `KillCharacter`, no crash).
+- ✅ Camera jitter at rest, the menu abort, the config file overriding the camera code — DONE 2026-10-29 by the owner's word («давно исправлено»).
+
+## KAIF — feedback and tickets (the section body)
+
+KAIF 2.9 since 2026-10-16 (from 2.7 in one step; report `reports/KAIF_UPDATES/KUMM_KAIF_2.9_UPDATE_REPORT.md`): project facts — in
+`HOUSE_RULES.md`, the KAIF hooks are wired in `.claude/settings.json` (the client reads them at session start). KAIF feedback — without asking
+the owner (`AGENT_GUIDE.md` → Notes from the human, his word of 18.09). Tickets #72, #73, #78–#82 closed by the origin in 2.8 (`bugs/KAIF/03–08_DONE_*`);
+open: #140 (`bugs/KAIF/09_*`, the origin moved it to 2.10) and three tickets of that update — #150–#152 (`bugs/KAIF/10–12_*`).
+#179 (`bugs/KAIF/19_*`, 2026-10-28): `/resume` costs ≈ 140 k tokens (measured 2026-10-29 10:08 by the transcript `usage`: 64 k → 181 k = 117 k,
+`EXPERIENCE.md` grepped by tag, not read whole) — proposed: read each document's "entry slice" at entry; rules as statements
+without rationale (the owner's word, in the ticket's comments); until the origin decides, the ritual reads everything. Since 2026-10-28 the hook
+`.claude/hooks/context-budget.mjs` runs (2026-10-30: #181 farewell hook, #182 autonomy guard, #183 the agent cleans up after itself — `bugs/KAIF/21–23`): at 70 % and 75 % — warnings only (the owner 2026-10-31 21:26); from 80 % — finish the work, then `/end-chat-soft` in full; `/end-chat-force` only from 92 % (the owner 2026-11-14 19:10 · 22:29; `CLAUDE.md`).
+
+Two old «Awaiting human review» items (same trim, part 18):
+
+- 🎯 **Oblivion-style archery — raised by the owner 2026-10-28** (a discussion, not work: `[OWNER]` «пока обсуждаем»): arrow speed — Conan's,
+      the drop — Oblivion's. Vanilla `ArrowGravityScale` 0.55 and `ArrowInitialSpeedMultiplier` 5000 (Remastered) found; waits for his choice of what
+      the draw does (shot power, as in Remastered, or a flatter flight, as in Conan). Recon — `researches/conan-archery/README.md`.
+- 🛡️ **2026-11-20 09:5x — the owner's side errand (a browser game, then «check C for malware»): the game planted nothing, the Chrome cache is cleared; leftovers of
+      an EARLIER infection weaken the machine's antivirus.** The owner ordered the removal (10:10–10:13, «УБРАТЬ!» ×3, Chrome closed by him 10:13): the
+      helper backs up, cleans the local policy file and the live policy values, turns protection back on, restarts the full scan, revokes the 8 spam
+      notification grants; Tamper Protection is the owner's own switch in Windows Security. Details are private and stay out
+      of this public repo: `KUMM/.work/malware_check/report.md` (git-ignored). A full scan of C: runs detached (Defender, under the machine lock `kumm` to 13:47).
+
+Two older pointer items (same trim, part 18):
+
+- 🧹 Disk cleanup 2026-10-25 — the "your call" items of `C:\REVISIONS\…_ИТОГ.md`, `D:\REVISIONS\…_ИТОГ.md` are the owner's (chronicle, 2026-10-25 22:15).
+- 🗂️ **Old questions to the owner** (cleanup 17.08 — malware, RTSS, iTunes, quarantine; Palworld `LoadingRange` 25600 — what to restore;
+      Oblivion — mod-list rows and reshades; the "not a Steam install" line and the anonymisation rule) — chronicle, entry 2026-10-12 19:22.
