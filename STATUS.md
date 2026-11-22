@@ -142,6 +142,13 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > keeps up to 3 recent births (`watch_loading_screen`), and a loading screen no longer re-arms the pause; judge round 1 — 3 risks fixed (pack `b7d984a`).
 > R21d (101 samples at 1.0, 74 behind the loading screen) and N1 (inventory 0.03 / 1.0) pass. Owed: the dungeon entrance and R21a waystones on this version.
 >
+> **RC4 readiness (the owner asked 15:04; RC3 published 2026-11-21 20:29):** fixed since RC3 in the pack — the world freeze behind the loading screen (#21:
+> dungeon `3b5e1e6`, admin teleport `b7d984a`; waystones not checked), the Locomotion Lua error while dead (#48, `b99409a`, closes after the build retest),
+> the first-person shadow and the sheathed bow (#13, #4 — cosmetic, `388b127` → `25dff5d`). Open critical issues: #21 (waystones), #30 bow sprint (S8, S9),
+> #23 the stuck map (not reproduced in 3 variants), #41 Esc over other mods' windows (the owner called it «на будущее» — label to settle), #43 the slow
+> launcher (his eye); not filed yet — the KrinikConanArchery Lua error at the heroine's death (`main.lua:1859`). Recommended before RC4: the archery death
+> guard, #21 waystones + the dungeon on the final version, #30 S9 — then build; the owner's decision awaited.
+>
 > **2026-11-22 13:10–14:0x — the owner's debt: the first-person shadow ALWAYS** (`[OWNER]` 13:10–13:11, verbatim in `bugs/114_*`): KrinikConanCamera v1→v4 in
 > the pack's working tree — no bone hide; the first-person camera moves forward 0→10 cm from 55° to 75° pitch (the «neck» was an armour collar); the sheathed
 > weapon OwnerNoSee + CastHiddenShadow (other players see it); the held item's shadow back; own hero by `IsLocalController`. Cases
