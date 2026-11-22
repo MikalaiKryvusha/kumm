@@ -160,10 +160,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (the stand said 10.9–14.0 / ≈ 100 ms); the owner 01:09 «d 1.1.1 первое открытие медленное, да, баг есть» → **standing falsehood corrected 01:1x** in the
 > RC4 and launcher-v1.1.1 release bodies, the #43 comment (with a «Поправка» paragraph), the pack's draft / published notes and the guide source (the guide
 > PDF asset keeps the old line — hashed in `manifest.json`); bug 110 has the section and the open item (the first open ≤ 16 ms). (2) **issue #53** filed —
-> the first-person view switch ≈ 3 ms (S3, `bug`). (3) **engine, not committed yet:** `install.ps1` warns and keeps exit 0 when the shortcut cannot be
-> written (missing folder, empty Desktop path, missing drive; fixture cases at the END of `tools/fixture-pack.mjs`); `Invoke-FileRetry` in
-> `Deploy-ModPack.ps1` retries the rename of `_kumm_player.partial` and the removal of `_kumm_backup` (the stand's «Access denied» / «being used» in 3 runs of 6;
-> after the fix 3 / 3 clean, 74 checks).
+> the first-person view switch ≈ 3 ms (S3, `bug`); the game retest 01:23 confirms it for the FIRST switch after world entry (4.5 ms of lines, «2 мс»), the
+> second costs 1.7 ms. (3) **engine `6a24c151`:** `install.ps1` warns and keeps exit 0 when the shortcut cannot be written (missing folder, empty Desktop
+> path, missing drive; fixture cases at the END of `tools/fixture-pack.mjs`); `Invoke-FileRetry` in `Deploy-ModPack.ps1` retries the rename of
+> `_kumm_player.partial` and the removal of `_kumm_backup` (the stand's «Access denied» / «being used» in 3 runs of 6; after the fix 4 / 4 clean, 74 checks);
+> judge rounds 4–5. (4) **the upload page committed** — pack `b30cee1`, 5 judge rounds. (5) **the game retest on the published RC4** (case file
+> `testcases/TC_conan_rc4_retest_published_2026-11-23.md`, report `testcases/reports/2026-11-23_conan-rc4-retest-published.md`): **#48 and #4 pass and are
+> CLOSED** (comments posted; their clean read skipped — said in the report); N2 (a first-person weapon swap) owed — the slot-2 remote call did nothing.
+> **Owed next:** #13 (the shadow's head) and #21 (the real waystone travel) retests; #43's first open (bug 110 open item); judge round 5's older risk FIXED (`Deploy-ModPack.ps1` deletes the journal before the backup folder; the partial-removal path itself not simulated) — was: a
+> failed backup removal can leave `journal.txt` with half of `files\` (delete the journal first); the owner's answer on `critical` for #30 #43 #48.
 >
 > **CHAT CLOSED 2026-11-22 ≈23:1x — RC4 PUBLICATION IN PROGRESS** (`[OWNER]` 23:07 «публикуем релиз РЦ4»): the public tree (scan 0) pushed to the public repo
 > `1bdac32`; `gh release create v0.9.1-RC4 --latest --title "0.9.1-RC4" --notes-file KUMM/.work/rc4_release/release_notes_Krinik_Mod_Pack_0_9_1_RC4.md

@@ -276,6 +276,9 @@ function Invoke-Restore {
     }
     Ok "returned $restored file(s), deleted $deleted file(s) the build had added"
     if ($failed) { Bad "$failed step(s) failed - the backup folder is kept: $(Join-Path $root $script:BackupDirName)"; return 1 }
+    # Журнал — первым: если удаление папки сорвётся на полпути, журнал без половины копий заставил бы следующий -Upgrade / -Remove отказывать каждый
+    # раз («backup copy missing»); без журнала остаток папки — просто мусор, а откат уже сделан (судья 2026-11-23, круг 5). [NOT-TESTED]
+    Invoke-FileRetry { Remove-Item -LiteralPath (Get-JournalPath $root) -Force -ErrorAction Stop }
     Invoke-FileRetry { Remove-Item -LiteralPath (Join-Path $root $script:BackupDirName) -Recurse -Force -ErrorAction Stop }
     Ok "the game folder is back to its state before the build; backup folder removed"
     return 0
