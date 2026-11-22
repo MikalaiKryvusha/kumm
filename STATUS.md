@@ -125,6 +125,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **THE CHAT OF 21:22 (2026-11-22) — RC4 by the release ritual, in progress.** Done: pack `f16c3e9` (packVersion 0.9.1-RC4, every shipped Krinik mod's
+> version with its change, the launcher 1.1.1 — the launcher changed for #43), pack `495daef` (the RC4 notes rewritten after the clean read, the launcher
+> 1.1.1 notes `draft_0_9_1/github_release_notes_launcher_1_1_1.md`, the guide's «Исправлено в тестовой сборке 0.9.1-RC4», the change notes); README.draft
+> rendered for RC4 with RC3's archive size (re-render after the build: `bash KUMM/.work/rc4/regen_readme.sh`). Running: the KrinikConanUI kit chain
+> `KUMM/.work/rc4/kit_chain.sh` (the menu line), a judge round on the shipped diff RC3 → now (`KUMM/.work/rc4/judge/`). Next: the judge's findings →
+> deploy + `-Verify` → THE PLAY HOUR (`testcases/TC_conan_play_matrix.md`, rows R11–R13 added; recorder `KUMM/.work/rc4/play/rec_session.sh`; report
+> `testcases/reports/2026-11-22_conan-play-0.9.1-RC4.md`; the gate `check_play_report.py`) → `make_release.sh` → the update RC3 → RC4 on the copy
+> `KUMM/.work/rc1_install/Conan_311` (RC3 installed; driver `KUMM/.work/rc3/realcheck.mjs` to adapt) → the owner's word for the publication.
+>
 > **THE CHAT OF 18:55 (2026-11-22) — bug 118 SOLVED: not a defect of the build.** The seven UE4SS crashes with EAA over the hub were the agent's OWN Esc
 > probe `.work/tmp/esc_listen.lua` (`ListenForInputAction` with a Lua-table delegate) sent by the remote: one stack hash in all seven, the stack's Lua shape
 > («`pcall` → `return dofile` → `pcall` → UFunction») and the probe's command in every minidump; reproduced on demand twice (19:28 all mods on, 19:31 camera

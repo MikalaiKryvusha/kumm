@@ -50,3 +50,11 @@ RussianTranslation (RU), ModPackManager (MPM).
 | R8 | #11 | P9: «Путешествие» → «Начать путешествие» starts the journey — PASS 2026-11-20 19:38 (report `2026-11-20_conan-hub-game-pages-map-journey.md`) | pass |
 | R9 | #12, #23 | P10: two markers at their clicks, the reset; the full-screen map does not stick — markers PASS 19:40 | partial |
 | R10 | #13, #34 | P4: the hero's shadow has a head and a body in first person | — |
+
+## Regression rows — issues filed 2026-11-21 … 2026-11-22 (added 2026-11-22 21:36 before the RC4 play run)
+
+| # | Issue | Row to walk | Status |
+|---|---|---|---|
+| R11 | #21 | P14: a dungeon in and out, a waystone travel between two waystones, a death and its respawn — after each loading screen the world runs at its pace (the hero walks, NPCs move; the pause section's log has no «arming» line behind the load) | — |
+| R12 | #48, #49, #51 | P6: a death with the bow in first person and one with empty hands — no `[Error]` line and no Lua error of our mods in `UE4SS.log` from the death to the respawn | — |
+| R13 | #30 | P2: a sprint with the bow drawn by a real held RMB — the draw holds while RMB is held | — |
