@@ -42,4 +42,19 @@ condition seen in a browser (the condition is the same booleans T1 returns).
 
 **Traces.** `KUMM/.work/rc4/upl_test/cases.mjs`, `live.mjs` (their console output above) · `KUMM/.work/rc4/frames/upload_page.webp` (version 1 on the live upload).
 
-**Verdict.** pass — the page reads a real upload and real releases correctly in every case run; judge round 2 on version 2 is running.
+**Round 3 (after judge round 2), 2026-11-23 00:45–00:46** — the same commands, `live.mjs` changed to name the file to gh by a MASK (`<dir>/*`, expanded by gh
+itself) and to check «Прошло времени» after the upload and the page after the draft is deleted:
+
+| # | Case | Expected | Observed | Status |
+|---|---|---|---|---|
+| T1 T3–T6 | as above | as above | the same five results | pass |
+| T2′ | the file given by a mask | bytes never ahead: no file counted twice | 30.1 → 68.8 → 103.6 → 140.5 → 150.0 MiB, 0/1, then `finishing=true` («GitHub принимает последний файл») until gh exited 0, then 1/1 | pass |
+| T7 | elapsed after the upload | frozen | `elapsed=30` at the end and 10 s later | pass |
+| T8 | the polled release deleted | the page turns to «нет выпуска», no stale assets | `missing=true 0/1 error=null stale=null`; no draft left on GitHub (0) | pass |
+
+Judge round 2 (6 correctness findings, 3 efficiency, 6 cosmetic): fixed — the mask / no-name command line, the 404 on the polled id, elapsed frozen, a
+20 s timeout on every child, a failed process query kept with a note, the slack 60 s, polling every 30 s while idle, `per_page=20` for the lookup, the
+plural, the wording of the stale, wrong-file and error lines, «Пока выпуск остаётся черновиком», the marker, one lookup in the digest filter. Declined: one
+long-lived PowerShell child (≈ 0.4 s every 5 s only while the page is open and an upload runs — not worth a persistent process).
+
+**Verdict.** pass — the page reads real uploads and real releases correctly in every case run; judge round 3 is running.

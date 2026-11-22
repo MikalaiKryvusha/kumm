@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0617 · 2026-11-23 · ❌→✅ · #handover #sessions #github #release #background
+Two traps at the end of a release. (1) The previous chat's session (kumm-82) was woken at 00:29:36 by its OWN background upload ending and committed a STATUS
+line (59cefa0e, «next: the launcher release») a minute after this chat had taken the publication over — two sessions on one release could have posted the
+issue comments twice. On entering a chat whose handover names a background job of the old chat, `ListAgents` and SendMessage the old session «this chat owns
+X» before the job ends. (2) `gh release delete <draft> --cleanup-tag` deletes the draft and then fails with HTTP 422 «Reference does not exist» (a draft has
+no tag): the exit code says failure while the release is gone — read the releases list after it; drop `--cleanup-tag` for a draft.
+none-cheap: one SendMessage at entry; the list check after a delete; no guard
+
 ### EXP-0616 · 2026-11-22 · ✅ · #release #github #upload #handover #background
 A `gh release create … <83 assets>` started in the background at 23:09 OUTLIVED the chat's closure: at 23:48 the next chat found PID 39600 alive (started
 23:09:22), 47 of 83 assets uploaded, ≈ 5.7 MB/s read by the process. The handover said «if the upload died with the chat, upload the missing files» — a

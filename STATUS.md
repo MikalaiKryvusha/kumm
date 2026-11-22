@@ -152,9 +152,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > rewrite; the launcher notes kept in `published_0_9_1-RC4/`; `release_checklist.py --published` — 0 TODO, 15 MANUAL, 10 OK; the release pages and the public
 > README read back (RC4); `rc4_release` (41 GB), `public_tree_rc4`, `rc4/kit_out`, `rc4/keep` removed (D: 61 GB free). **New tool:** the upload progress page
 > `ConanExiles/_config/release/upload_progress.mjs` (the owner's wish 00:21; report `testcases/reports/2026-11-23_conan-release-upload-progress-page.md`;
-> judge round 1 fixed, round 2 running). **Left of the RC4 list:** the issues close only after the retest on the published release (#21 needs the real
-> waystone travel); the owner's answer on `critical` for #30 #43 #48; the bug file + issue for the view switch ≈ 3 ms; the minor `install.ps1` exit 1 on a
-> shortcut failure.
+> judge rounds 1–4 fixed, round 5 running; NOT committed yet). **Left of the RC4 list:** the issues close only after the retest on the published release
+> (#21 needs the real waystone travel); the owner's answer on `critical` for #30 #43 #48 (asked 00:0x, none yet).
+>
+> **2026-11-23 00:52 — the owner: «работай автономно до переполнения контекста, выпускай RC4 и затем закрывай чат» → /dayloop, then /end-chat-soft at 80 %.**
+> Done in the loop: (1) **#43 retested on the PUBLISHED launcher 1.1.1 in the working game** — a repeated plate open 20–38 ms, the FIRST open 134–390 ms
+> (the stand said 10.9–14.0 / ≈ 100 ms); the owner 01:09 «d 1.1.1 первое открытие медленное, да, баг есть» → **standing falsehood corrected 01:1x** in the
+> RC4 and launcher-v1.1.1 release bodies, the #43 comment (with a «Поправка» paragraph), the pack's draft / published notes and the guide source (the guide
+> PDF asset keeps the old line — hashed in `manifest.json`); bug 110 has the section and the open item (the first open ≤ 16 ms). (2) **issue #53** filed —
+> the first-person view switch ≈ 3 ms (S3, `bug`). (3) **engine, not committed yet:** `install.ps1` warns and keeps exit 0 when the shortcut cannot be
+> written (missing folder, empty Desktop path, missing drive; fixture cases at the END of `tools/fixture-pack.mjs`); `Invoke-FileRetry` in
+> `Deploy-ModPack.ps1` retries the rename of `_kumm_player.partial` and the removal of `_kumm_backup` (the stand's «Access denied» / «being used» in 3 runs of 6;
+> after the fix 3 / 3 clean, 74 checks).
 >
 > **CHAT CLOSED 2026-11-22 ≈23:1x — RC4 PUBLICATION IN PROGRESS** (`[OWNER]` 23:07 «публикуем релиз РЦ4»): the public tree (scan 0) pushed to the public repo
 > `1bdac32`; `gh release create v0.9.1-RC4 --latest --title "0.9.1-RC4" --notes-file KUMM/.work/rc4_release/release_notes_Krinik_Mod_Pack_0_9_1_RC4.md

@@ -78,6 +78,17 @@ path and stroked it with a wide pen on every paint. Fix: `ReportPlaque` keeps it
 plaque by at most 1 of 255 in luminance (rounding); the only larger difference is the stand folder's name in the state text. The first open after a start still
 costs ≈ 100 ms (the windows of the plaque are created and the faces drawn once) — not cached ahead. Report `testcases/reports/2026-11-22_conan-launcher-feedback-window.md`.
 
+## The published 1.1.1 on the owner's machine (2026-11-23 01:05–01:09) — the first open is the open item
+
+Measured on the launcher 1.1.1 that updated itself from the real GitHub feed in the working game (the 4K TV at 300 %), `KRINIK_LAUNCHER_PERF=1`, «Отзыв» by
+BM_CLICK (`KUMM/.work/rc4/retest43.mjs`, `ab43.mjs`; logs `.work/rc4/logs/retest43.log`, `ab43.log`): a repeated open — plaque and labels paint 16–33 ms plus
+the toggle 4–7 ms (20–38 ms in all); the FIRST open after a start — 134 ms and 390 ms (toggle 45 / 142 ms + paint 89 / 248 ms). The stand's 10.9–14.0 / ≈ 100 ms
+were 2–3× lower; the notes of RC4 and launcher 1.1.1, the guide and the #43 comment carried the stand's «≈ 0.01 s / 0.1 s» and were corrected 01:1x to
+«about 0.03 s on a 300 % screen; the first open is still slow, up to 0.4 s, a known issue» (the guide PDF asset of the release keeps the old line: it is hashed in
+`manifest.json`). Launcher 1.1.0 has no plaque perf spans, so the before / after pair on the owner's machine was not measurable by the log.
+`[OWNER]` 2026-11-23 01:09: «d 1.1.1 первое открытие медленное, да, баг есть». **Open:** the first open — create the plaque's windows and draw its faces ahead
+(at the launcher's idle after start) or cheaper; the case: the first open ≤ 16 ms on the owner's screen. #43 stays open.
+
 ## Decisions made without the owner
 
 - `[AI]` The budget numbers: 16 ms (one 60 Hz frame) for a refresh and a list repaint; the first paint of a new screen's list (18–34 ms, all lines new) is
