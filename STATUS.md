@@ -186,7 +186,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >    real W + Shift and RMB, the Locomotion and BowSprint log lines.
 > 3. 🟡 2026-11-22 20:4x: M1 (the hub on «Карта» = tab index 7, a loading screen over it) pass — nothing stuck after the load; M2 (the map + a dialogue) owed;
 >    since 2026-11-20 the map is the game's own page (our duplicate copy — the class of the 11-07 stuck map — is gone). The old text: **#23 the stuck full-screen map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue).
-> 4. **#41 Esc over other mods' windows** (bug 108): in scope by the 15:07 word — native pak fixes of those windows (the Lua path is dead: KrinikConanUI.md «Clicks and Esc»).
+> 4. 🔲 2026-11-22 20:5x: **planned — `plans/61_conan_esc_over_mod_windows.md`** (no Lua path exists: recon of WindowRoot / GUIModule / EscapeStackNode, bug 108
+>    point 7); first the inventory of the 13 windows, then spike A (our kit «Esc catcher» taking focus) on EAA. The old text: **#41 Esc over other mods' windows** (bug 108): in scope by the 15:07 word — native pak fixes of those windows (the Lua path is dead: KrinikConanUI.md «Clicks and Esc»).
 > 5. ✅ **The KrinikConanArchery Lua error at the heroine's death** — fixed in `b42090f`, A49 / A49n pass 2026-11-22 19:55–19:59, issue #49 closed.
 > 6. **#43 — the launcher's feedback-instructions window is slow** (`bugs/110_*`): measure it at 300 % (open, first frame, a press), fix, retest.
 > Also owed: comments on issues #13, #4 (the owner's bug-report genre, the portrait check — HOUSE_RULES 44; #21 commented 2026-11-22 20:2x); #48 closes after

@@ -45,7 +45,13 @@ How Esc reaches a window, read live by the remote (the hub and `EAA_Armorsetting
    0, true, { Object = root, FunctionName = FName(<handler>) })` from Lua crashes UE4SS natively 1.5 s after the call (`EXCEPTION_ACCESS_VIOLATION reading
    0xffffffffffffffff`, `pcall` does not catch it), reproduced twice, one run with KrinikConanCamera off. **E0b is a dead end:** a delegate parameter passed as a
    Lua table does not work in this UE4SS build. The Esc of mod windows stays with the native pak fix below.
-6. Candidate fix (native, the window's own close): when a mod window opens, `root:ListenForInputAction(FName("Escape"), IE_Pressed, true, {Object = root,
+7. **Recon 2026-11-22 20:44 — no Lua-hookable Esc event exists** (functions read live from the native classes): `WindowRoot` — Open, Close, IsOpen,
+   EnableInput / DisableInput, SetNeedMouseInput, SetBlockMoveInput, the pop-up window calls, Send…Notifications, SignalOpened / SignalClosing delegates (no
+   escape / back event); `GUIModule` — Toggle, SlotESCPressed, SlotActionShortcutPressed / Released, Activate, Enable, GetWindowRoot (the slots are native,
+   a UE4SS hook on SlotESCPressed never fired — point 4); `EscapeStackNode` — the delegates SignalActivated and SignalActivatedBP only (binding to them from
+   Lua needs a table delegate — the crash of point 5). With EAA focused the key does not even reach the stack (the hub does not close either): the focused
+   window swallows Esc. So the close must be wired INSIDE each window's blueprint (a kit / pak patch per mod window — the plan below), not from Lua.
+8. Candidate fix (native, the window's own close): when a mod window opens, `root:ListenForInputAction(FName("Escape"), IE_Pressed, true, {Object = root,
    FunctionName = <its close-button click handler>})` — the engine's own input-action binding, the same mechanism as `SM_UI_Settings`; Lua only sets it once per
    window birth, the key press itself runs in the engine. Delegate values as Lua tables `{Object, FunctionName}` — Re-UE4SS docs, DelegateProperty.
 
