@@ -272,7 +272,11 @@ sRGB → linear (`u()` and `lin()` in `kit-krinik-modsettings.py`):
 
 **After an in-game loading screen (2026-11-03, plan 44, bug 79).** A teleport / waystone / respawn shows `W_IngameLoadingScreen_C`; `IsFullscreenGUIActive` is
 true while it shows, and the pause section used to slow the world to 0.03 — the load never finished (the hero hung in the air). Since 2026-11-03 the poll
-skips it (`loading_screen_up()`, the object cached, searched only while full-screen and ≤ once per 2 s) and disarms as at a world load. After the same
+skips it (`loading_screen_up()`) and disarms as at a world load. **Since 2026-11-22 (pack `b7d984a`, bug 79):** the game makes a NEW widget per load
+(three at a world entry, one per teleport), and during a load the previous one is still valid but out of the viewport — the old cache of the first
+instance found trusted that stale one and slowed the world behind the loading screen. Now `watch_loading_screen()` keeps up to 3 recent births
+(`NotifyOnNewObject(/Game/UI/HUD/W_IngameLoadingScreen.W_IngameLoadingScreen_C)`) and asks each `IsInViewport()`; the search fallback (no birth seen yet)
+trusts only an on-screen instance; a poll that sees the loading screen does not re-arm the pause. After the same
 screen the game builds a NEW `DN_UI_DmgWidget_C` (the old one leaves the viewport) — the F1 label and the 20 % look were lost until `krinik_hud_outline`
 also applies them on that widget's birth (`NotifyOnNewObject(/Game/Mods/DamageNumber/UI/DN_UI_DmgWidget.DN_UI_DmgWidget_C)` + 500 ms). Seen 13:11: time 1.00
 through the teleport, landed in 4 s, the new widget «— F1» (frame). The owner's 12:55 «вод DPS вверху старый» was this loss after a teleport, not a stale build.
