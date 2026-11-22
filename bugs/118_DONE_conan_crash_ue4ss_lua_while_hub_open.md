@@ -137,3 +137,9 @@ Soak V1 (every mod on, the camera fix): hub + EAA 17:16:37 → 17:26:45 clean.
 ## Links
 
 Bug 85 (the same stack shape) · EXP-0612 · issue #50 · `testcases/TC_conan_rc4_scope_2026-11-22.md`
+
+## ✅ STATUS: DONE (2026-11-22 21:2x +03:00)
+
+Not a defect of the build: the crash is the agent's own Esc probe (`ListenForInputAction` with a Lua-table delegate), proven by two repros on demand
+(19:28, 19:31 with KrinikConanCamera off) and a clean shipped-state soak (19:33-19:51). Issue #50 closed as not planned. Guards born from it: the
+remote refuses the call (`no-table-delegate`), `crash-forensics.py` names the remote command of any crash in our run; EXP-0613.
