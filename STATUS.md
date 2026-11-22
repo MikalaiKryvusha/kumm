@@ -222,7 +222,7 @@ final check, interview #037 Q1), 106 (the climb's stamina — interview #037 Q2)
   blockers, dead ends, cannot continue, does not save, does not load; a visual defect is cosmetic** (`[OWNER]` 2026-11-18 18:58 · 18:59, chronicle entry
   2026-11-18 19:0x; HOUSE_RULES 38). Fixed and waiting for the owner's play: `bugs/101_…` (the hub flashes the bare world on a switch). Closed 2026-11-21 by the RC3
   retest: bugs 85, 97, 100, 112, 113 (DONE). The critical ones open for 0.9.1: `bugs/79_…`
-  the world freeze after an in-game loading screen — the admin teleport fixed (pack b7d984a), the dungeon passed on 3b5e1e6 and not re-run on b7d984a, the waystones not run.
+  the world freeze after an in-game loading screen — the admin teleport fixed (pack b7d984a), the Dregs dungeon IN and OUT and a teleport with the waystone map open pass on b7d984a (2026-11-22 20:1x, R21e, R21a-sim); only the real waystone travel owed.
 - ✅ `bugs/115_DONE_conan_launcher_installed_after_uninstall_window_closed.md` (issue #46): DONE 2026-11-21 21:23 — retested on the published 0.9.1-RC3, issue closed.
 - ✅ `bugs/85_DONE_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: DONE 2026-11-21 23:12 (issue #24 closed after 15 cycles of real bow hits finished by `KillCharacter`, no crash).
 - ⏸ `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; PARKED 2026-11-14 09:53 by the owner («в дальний ящик»).
