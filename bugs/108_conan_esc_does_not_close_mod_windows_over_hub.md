@@ -51,7 +51,10 @@ How Esc reaches a window, read live by the remote (the hub and `EAA_Armorsetting
    a UE4SS hook on SlotESCPressed never fired — point 4); `EscapeStackNode` — the delegates SignalActivated and SignalActivatedBP only (binding to them from
    Lua needs a table delegate — the crash of point 5). With EAA focused the key does not even reach the stack (the hub does not close either): the focused
    window swallows Esc. So the close must be wired INSIDE each window's blueprint (a kit / pak patch per mod window — the plan below), not from Lua.
-8. Candidate fix (native, the window's own close): when a mod window opens, `root:ListenForInputAction(FName("Escape"), IE_Pressed, true, {Object = root,
+8. **Inventory 2026-11-22 20:51 (plan 61 step 1):** of the 13 windows of the list, Esc closes 3 (ours, Simple Minimap, Night Terrors); LBPR keeps its window
+   and the hub behind it closes; 9 ignore Esc (fishing, AMR, LLH, Proximity Party, Damage Meter, Emberlight, EAA, Hosav, PIFC) — table in
+   `plans/61_conan_esc_over_mod_windows.md`.
+9. Candidate fix (native, the window's own close): when a mod window opens, `root:ListenForInputAction(FName("Escape"), IE_Pressed, true, {Object = root,
    FunctionName = <its close-button click handler>})` — the engine's own input-action binding, the same mechanism as `SM_UI_Settings`; Lua only sets it once per
    window birth, the key press itself runs in the engine. Delegate values as Lua tables `{Object, FunctionName}` — Re-UE4SS docs, DelegateProperty.
 

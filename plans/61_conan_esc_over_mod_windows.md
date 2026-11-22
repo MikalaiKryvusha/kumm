@@ -41,9 +41,20 @@ window closes, the hub stays, one log line names the window; no crash, no key bi
 | C | **Per window: the close button as a `WBP_ButtonBase` with `KeyShortcutName` Escape** in the window's WidgetTree (the game's buttons react to their shortcut natively) | a widget-tree edit of the mod's asset (replace / add a child) + its click wired to the window's close | the shortcut needs the FLX input routing that a Lua-made button lacked (spike S11) — may be dead in a cooked edit too |
 | D | Leave it: the windows close by their own «Закрыть» button; a known-issue line in the release notes | none | the owner's RC4 scope named it — his word decides |
 
+## Step 1 result — the inventory (2026-11-22 20:51, the shipped state, a posted Esc in the background; `KUMM/.work/tmp/esc_inventory.sh`, rows `esc_inventory.txt`)
+
+| Window (module) | Esc | The hub after |
+|---|---|---|
+| `KrinikModSettings` (ours), `SM_UI_Settings` (Simple Minimap), `NightTerrorsSettings` | closes | stays |
+| `LBPRWidgetID` (LBPR) | the window stays | **the hub closes behind it** |
+| `ExilesFishingTuning`, `AMR_Settings`, `LLH_Settings`, `PrP_Settings`, `DN_UI_Settings`, `EmberlightMasterConfig`, `EAA_Armorsettings`, `HosavUIsettings`, `PIFC_Settings` | nothing | stays |
+
+So the fix covers 10 windows: nine that ignore Esc and LBPR, where Esc reaches the hub instead of the window. The spike target stays EAA; LBPR shows the key CAN
+pass the window — a catcher (option A) must also stop the hub from taking that Esc.
+
 ## Steps
 
-1. **Inventory (no code):** for each of the 13 windows — open over the hub by the remote (`walk-mod-windows.sh` pattern), post Esc, record closes / not; a
+1. ✅ **Inventory (no code)** — done, the table above: for each of the 13 windows — open over the hub by the remote (`walk-mod-windows.sh` pattern), post Esc, record closes / not; a
    frame of each. Result table into bug 108.
 2. **Spike A on EAA** (cheapest, all ours): the catcher widget by a kit script (`kit-krinik-click-events.py` style), focus taken on the mod window's open,
    the Esc event hooked from Lua; cases of acceptance 2 and neighbours 4 on EAA alone; the focus-after-click risk measured (click a slider, then Esc).
