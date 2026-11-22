@@ -133,8 +133,18 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `-Deploy -Only <pak mod>` rewrite its modinfo: the raw pak brings the kit's old change note). Judge rounds on the shipped diff: round 1 (6 findings — confirmed
 > and fixed: the archery `FindAllOf` per attack end, kept references by full name in camera / pause / pickup / locomotion; the first-person pass cost MEASURED
 > live 22:10: a view switch ≈ 3 ms in one frame, a weapon swap two passes ≈ 1 ms each), round 2 (fixed: per-frame name checks → `RegisterLoadMapPreHook`
-> reset, seen firing 22:15 ×2; a weapon swap walks only the attached items; archery locals in `do … end`; pickup single checks), round 3 running. UNCOMMITTED
-> in the pack: those Lua fixes + the kit reports — commit after round 3. Owed in game: a weapon swap in first person on the new pass («просмотрено N» small),
+> reset, seen firing 22:15 ×2; a weapon swap walks only the attached items; archery locals in `do … end`; pickup single checks), round 3 (fixed 22:3x: the bow
+> by its class chain — `FindAllOf` matched subclasses; `item_roots` takes every attached actor; the loop stops when the controller gets a new hero; the dead
+> `fp_pc_name` removed; the mod notes in step), round 4 (3 minor, declined). **COMMITTED 22:5x — pack `18532f3`** (pushed; review notes on b42090f 3b5e1e6 d8c42ed
+> 290e6f0 1d9cff5 b0aa7a9 pushed; `release_checklist.py`: 0 TODO, 12 MANUAL, 7 OK — its «play report OK» only sees the skeleton FILE name, the real gate is
+> `check_play_report.py`). Seen in game 22:47 on `18532f3`'s code: a weapon swap in first person walks 7–9 nodes (was 25–27), «скрыто 2» / «возвращено 2» /
+> «в руке 1» hold. The game folder = `18532f3` (camera, archery, UI, locomotion deployed; `--check-krinik` 4/4). The owner's feature for LATER: the first-person
+> bow stance higher, the torso leaning when looking down — issue #52 (its text was filed with the portrait loaded > 1 h earlier; the portrait re-check owed).
+> **THE PLAY HOUR IS NEXT, on pack `18532f3`** (any later commit to a shipped path voids the report): HDR off → `bash KUMM/.work/rc4/play/rec_session.sh start`
+> → walk the matrix (31 rows; keys P view, Tab hub, J journey, M map, E interact, 1–8 slots, LMB / RMB, Shift, Space, LCtrl crouch) with the owed checks
+> (quit to menu and back — the LoadMap reset on the world → menu exit; a death with a third-person respawn; B1) → `rec_session.sh stop` + `join` → fill
+> `testcases/reports/2026-11-22_conan-play-0.9.1-RC4.md` (skeleton) → `god-on.sh off` (the save has god mode ON) → `check_play_report.py 0.9.1-RC4`.
+> Read the foreground process before a real-input series (EXP-0615). Owed in game: a weapon swap in first person on the new pass («просмотрено N» small),
 > quit to menu and back. `KrinikMenuProbe` disabled in the working game (its `enabled.txt` in `KUMM/.work/rc4/keep/`). The owner plays another game 22:19 —
 > no real input, no voice until he frees the machine. Next: THE PLAY HOUR (`testcases/TC_conan_play_matrix.md`, rows R11–R13 added; recorder `KUMM/.work/rc4/play/rec_session.sh`; report
 > `testcases/reports/2026-11-22_conan-play-0.9.1-RC4.md`; the gate `check_play_report.py`) → `make_release.sh` → the update RC3 → RC4 on the copy
