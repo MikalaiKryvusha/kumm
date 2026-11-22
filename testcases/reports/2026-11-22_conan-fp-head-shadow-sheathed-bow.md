@@ -19,7 +19,7 @@ deploy and back after (md5 `f9f59b7c…` equal every time). Six game launches 09
 | # | Moment | Command | Exit / outcome |
 |---|---|---|---|
 | 1 | 2026-11-22 09:58 +03:00 | quick slots by `h:InpActEvt_Shortcut0_…_25` / `Shortcut4_…_21`, `h:SwitchToFirstPersonCamera()`, `pc:SetControlRotation({Pitch=70,…})`, `capture-window.ps1` (old code) | the defect reproduced: the bow's limb and string fill the view (`.work/fp_bow_back/x_p70_y0.jpg`) |
-| 2 | 2026-11-22 10:00 +03:00 | `pult.sh "lua _G.__fft='on'|'off'; return dofile('KUMM/.work/tmp/fp_fix_try.lua')"` (the fix by hand, old code) | before / after: headless → head and hair in the shadow; the bow gone looking up (`sheet_ab.jpg`); `OwnerNoSee` removed the bow's shadow too |
+| 2 | 2026-11-22 10:00 +03:00 | `pult.sh "lua _G.__fft='on'|'off'; return dofile('KUMM/.work/tmp/fp_fix_try.lua')"` (the fix by hand, old code) | before / after: headless → head and hair in the shadow; the bow gone looking up (`sheet_ab.jpg`); `OwnerNoSee` removed the bow's shadow too (with `CastShadow` only — corrected 2026-11-22 13:3x: with `CastHiddenShadow` the shadow stays, EXP-0610) |
 | 3 | 2026-11-22 10:09 +03:00 | v1 deployed, F1–F4 | F1, F2 pass; the vanity camera then showed the bow invisible on the back (`fp_after/sheet_f34.jpg`) — a defect of v1 |
 | 4 | 2026-11-22 10:14 +03:00 | hooks on `EventOnThirdPersonChange` / `SetThirdPerson` / `SwitchCameraMode` (`KUMM/.work/tmp/view_events*.lua`), `h:SwitchToVanityCamera()` | the vanity path found: `EventOnThirdPersonChange tp=true`, no `SwitchToThirdPersonCamera` |
 | 5 | 2026-11-22 10:21 +03:00 | v2 deployed, F1–F6, V1 | all pass (frames `fp_v2/sheet_a.jpg`, `sheet_b.jpg`); the neck threshold measured 10:1x (`fp_after/sheet_f6b.jpg`) |

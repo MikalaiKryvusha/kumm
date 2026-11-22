@@ -721,7 +721,7 @@ and `isThirdPerson` blends above it. `isPassive` / `isAggressive` / `isAttacking
 3 = `TwoHanded_Ranged`; `GetWeaponArcheType` is native on `GameItem`); the anim blueprint reaches the weapon by its native parent's
 `AnimInstanceHumanMalePlayer::GetWeaponItemPrimary(Character)`. Gauge of «the held bow in frame»: `_config/fp-bow-angle.lua` (the bow hand's angle off the view centre
 against the half vertical view). **The neck clipping looking up (bug 69) has the same root** (2026-11-13 15:03, the neck un-hidden, pitch +89): the combat pose (bow
-held, `isPassive` false) — half the frame is skin; the peaceful pose (bare hands, the bow on `sheath_bow`) — clean sky. KrinikConanCamera's `b_neck_1` hiding is the
+held, `isPassive` false) — half the frame is skin; the peaceful pose (bare hands, the bow on `sheath_bow`) — clean sky. KrinikConanCamera's `b_neck_1` hiding (gone since 2026-11-22 13:3x — the camera push replaced it) was the
 crutch over the combat pose's full bend. **The hero's body is split into components** (remote read 2026-11-13 15:22, the naked female hero): `CharacterMesh0`
 (`SK_human_female`, invisible — the leader pose), `MergedLodMesh` (visible: the torso with the upper arms), batched `…_head_01` and `bg3hair10` (invisible in first person
 by the game), `…_forearms`, `…_hands`, `…_underwear_upperbody`, `…_underwear`, `…_legs`, `…_feet`; hiding all but forearms + hands leaves the arms cut at the elbow (review
@@ -768,7 +768,8 @@ mods (guard `check-lua-game-thread.py`). Gameplay keys on the game thread: `/Gam
 
 - **First-person camera and the neck.** The FP camera sits on bone `b_headcam` (child of `b_head`, `b_neck_2`, `b_neck_1`; hero mesh 174 bones). Looking straight up it is inside the neck. `Mesh:HideBoneByName('b_neck_1', 0)` hides the neck and head in rendering only; the `b_headcam` socket does not move (equal to 0.01 cm). `KrinikConanCamera` does it on `BasePlayerChar_C:SwitchToFirstPersonCamera` / `SwitchToThirdPersonCamera` (the real wheel calls them). In this mod `NotifyOnNewObject("/Script/ConanSandbox.BasePlayerChar")` does not fire; hooks on the hero class go in from `try_install_zoom_hook`.
   **2026-11-22 (remote, the 0.9.1-RC3 build):** a hidden bone collapses the shadow too (the headless first-person shadow, bug 114). With the bone open the camera
-  is in the neck from ≈ 76° up (74° sky, 78° / 81° / 85° skin), so KrinikConanCamera now hides it only above 70°. The view state: `BasePlayerChar_C:GetIsInThirdPerson()`;
+  is in the neck from ≈ 76° up (74° sky, 78° / 81° / 85° skin), so KrinikConanCamera now hides it only above 70°. **Superseded 2026-11-22 13:3x:** the «skin»
+  was a medium armour's collar — with no armour the neck never enters the view; no bone is hidden now, the camera is pushed forward (the «First-person camera» bullet below). The view state: `BasePlayerChar_C:GetIsInThirdPerson()`;
   `EventOnThirdPersonChange` → `HandleThirdPersonChange` → `SetThirdPerson` fire on every change, the idle vanity camera (`SwitchToVanityCamera`, ≈ 4 min without
   input) included, which never calls `SwitchToThirdPersonCamera`; `SwitchCameraMode` fires on weapon changes without changing the view. The controller's pitch:
   the `ControlRotation` property costs 1.5 µs a read, `GetControlRotation()` 17 µs (2000 reads in a row). `OnWeaponEquip` / `OnWeaponUnequip` fire on every

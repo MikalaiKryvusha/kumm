@@ -2,7 +2,7 @@
 
 > **GitHub issue:** [#21](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/21) — the public tracker of this defect (HOUSE_RULES 44)
 
-> **Created:** 2026-11-03 12:53 +03:00 · **Parent:** plan 43 item 20 (the Nexus screenshot stand) · **Status:** 🔴 2026-11-22: the dungeon path reproduced and fixed (pack 3b5e1e6, review owed), the admin teleport slows ≈ 3 s again (10:57, 11:00) — see «The fix in progress»; was 🟡 fixed 2026-11-03 13:11 on the teleport stand (time 1.00 through it, landed in 4 s); respawn case passed 2026-11-07 07:41 (no freeze); waystone and dungeon cases still to run
+> **Created:** 2026-11-03 12:53 +03:00 · **Parent:** plan 43 item 20 (the Nexus screenshot stand) · **Status:** 🔧 2026-11-22 14:23: the admin teleport fixed (pack b7d984a, judge round 1, R21d and N1 pass — «The fix»); the dungeon path passed on 3b5e1e6 and is not re-run on b7d984a; the waystones (R21a) not run — issue #21 open until both. History: the dungeon path reproduced and fixed (pack 3b5e1e6), the admin teleport slowed ≈ 3 s (10:57, 11:00) — see «The fix in progress»; was 🟡 fixed 2026-11-03 13:11 on the teleport stand (time 1.00 through it, landed in 4 s); respawn case passed 2026-11-07 07:41 (no freeze); waystone and dungeon cases still to run
 > **Outbound:** —
 
 ## What is seen

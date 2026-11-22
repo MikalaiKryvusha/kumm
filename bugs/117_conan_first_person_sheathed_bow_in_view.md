@@ -2,7 +2,7 @@
 
 > **GitHub issue:** [#4](https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/issues/4) — the public tracker of this defect (HOUSE_RULES 44)
 
-**Status:** 🔧 fix built 2026-11-22, cases pass on the working build; judged (four rounds) and pushed (pack 388b127), comment on #4 posted; closes after the owner's look and the next build
+**Status:** 🔧 fixed 2026-11-22 14:10 by the owner's words 13:10–13:11 — the sheathed weapon OwnerNoSee + CastHiddenShadow, visible to other players (pack 25dff5d, cases TC_conan_fp_shadow_always_owner_no_see_2026-11-22.md); the first fix (pack 388b127, SetVisibility) superseded; comment on #4 posted; closes after the owner's look and the next build
 **Severity:** S3 (a visual defect: cosmetic by HOUSE_RULES 38) — flagged by the owner, so it is the owner's debt
 **Version/build:** Krinik Mod Pack 0.9.1-RC1 … RC3, Conan Exiles Enhanced 3.1.1
 **When/context:** the owner's play 2026-11-20 18:4x («[frame] от первого лица видно лук на спине», `PROJECT_HISTORY.md` entry 2026-11-20 18:42); again

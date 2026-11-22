@@ -24,8 +24,8 @@ v1 (deployed 13:36), v2 (judge round 1 fixes, 13:46), v3 (judge round 2 fixes, 1
 
 ## 4. Checks
 
-Hygiene: `luac -p main.lua` OK; `luac -l -l` — no new global writes (only the old `hold_calls`); `check-lua-game-thread.py` 0 worker-thread calls; three
-independent judge rounds (findings in section 5).
+Hygiene: `luac -p main.lua` OK; `luac -l -l` — no new global writes (only the old `hold_calls`); `check-lua-game-thread.py` 0 worker-thread calls; four
+independent judge rounds (findings in section 5; round 4 — section 8 and the pack's git note on 25dff5d).
 Functional run: S1–S7 and N1–N2 walked on v1 and v2 in the real game by the remote on the background path, the frames read by eye and the flags read from
 the live components (the case set's Seen column); N3 partial (the drawn aim needs a held right mouse button).
 

@@ -142,7 +142,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > Reports: `testcases/reports/2026-11-22_conan-fp-shadow-always-owner-no-see.md`; cases R21c / R21d / N1 of `testcases/TC_conan_loading_screen_waystone_dungeon_2026-11-22.md`.**
 > - **The owner's debt (13:10–13:11, verbatim in `bugs/114_*`): the first-person shadow ALWAYS, everything visible to other players** — KrinikConanCamera (pack
 >   `25dff5d`): no bone hide; the first-person camera moves forward 0 → 10 cm from 55° to 75° pitch (the morning's «neck» was an armour collar); the sheathed
->   weapon OwnerNoSee + CastHiddenShadow; the held item's shadow back; own hero by `IsLocalController`. S1–S7 pass (v1–v4), four judge rounds. The show page
+>   weapon OwnerNoSee + CastHiddenShadow; the held item's shadow back; own hero by `IsLocalController`. S1–S7 pass on v1 / v2 (S3, N1, N2 on v2 only), regressions on v3 / v4 (S1, S2, S5–S7 / S1, the push, S5, S6), four judge rounds. The show page
 >   `ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/97_ten_vsegda_ot_pervogo_lica/pokaz.html` — opened 14:10, his look awaited. His 14:52 question on the axe's shadow —
 >   answered by frames: the raised first-person pose and the blade edge-on to the sun (the game map). Not covered: a second player's client, a mount, the drawn aim.
 > - **Bug 79 (#21) — the admin-teleport path FIXED** (pack `b7d984a`): two live loading screens during a load; the pause keeps up to 3 recent births and no
@@ -150,7 +150,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > - **The owner's look at the launcher 15:06:** fast except the window that explains the feedback instructions (`bugs/110_*` «The owner's look»).
 >
 > **🎯 FIRST in the next chat — THE RC4 SCOPE (`[OWNER]` 2026-11-22 15:07 «чиним остальное все это в следующем чате...двух, и это будет скоуп на RC4»):** fix all
-> six, then build RC4 by the release ritual (`release_checklist.py`, HOUSE_RULES 42):
+> six, then build RC4 by the release ritual (`release_checklist.py`, HOUSE_RULES 42). **`[OWNER]` 15:16: «RC4 уже будем собирать под новый лаунчер, который
+> обновляется по файлам»** — the release is built for the launcher that updates by changed files (issue #45, closed 2026-11-21; launcher 1.1.0): read how
+> that launcher's file update consumes a release (its feed / manifest) before the RC4 build and make the RC4 assets match it.
 > 1. **#21 the waystones** (R21a; Waystones Enhanced item 7770001, travel by `TeleportPlayerServer` — `games/ConanExiles/mods/WaystonesEnhanced.md`) and the dungeon
 >    entrance (R21b stand: `KUMM/.work/tmp/list_teleports.lua`, the heroine set into the Wine Cellar trigger by `K2_SetActorLocation`) on the final pause version;
 >    the probe `KUMM/.work/tmp/tp_widget_probe.lua` samples the time behind a load. Then close #21.
@@ -163,6 +165,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > 6. **#43 — the launcher's feedback-instructions window is slow** (`bugs/110_*`): measure it at 300 % (open, first frame, a press), fix, retest.
 > Also owed: comments on issues #13, #4, #21 (the owner's bug-report genre, the portrait check — HOUSE_RULES 44); #48 closes after the RC4 retest; `-Verify` names 4
 > KrinikConanMusic files missing in the build; DW1 of the damage window (real hits); the owner's errand — delete `D:\PATH.txt` and `D:\settings.txt`.
+> Markers owed (comment-only pack commits): the camera's first-person section `[NOT-TESTED]` → `[TESTED: 2026-11-22 · TC_conan_fp_shadow_always_owner_no_see S1–S7 ·
+> testcases/reports/2026-11-22_conan-fp-shadow-always-owner-no-see.md]`; the pause's loading-screen block → `[TESTED: … R21d, N1 …]`; its comment «держит САМЫЙ
+> НОВЫЙ … один IsInViewport» → «до трёх последних» (the closing judge 15:14).
 > Stand helpers of this chat: `KUMM/.work/fp_nosee/shot.sh` (pitch / yaw / 4K frame), `KUMM/.work/tmp/weapons_now.lua`, `fp_nosee_try.lua`, `find_rows.lua` (item search).
 >
 > The CHAT CLOSED block of 2026-11-22 ≈11:0x (the chat of 09:34, its FIRST list) — chronicle, entry «STATUS bonsai trim, part 16»; its open items are carried above.
@@ -198,7 +203,7 @@ final check, interview #037 Q1), 106 (the climb's stamina — interview #037 Q2)
   blockers, dead ends, cannot continue, does not save, does not load; a visual defect is cosmetic** (`[OWNER]` 2026-11-18 18:58 · 18:59, chronicle entry
   2026-11-18 19:0x; HOUSE_RULES 38). Fixed and waiting for the owner's play: `bugs/101_…` (the hub flashes the bare world on a switch). Closed 2026-11-21 by the RC3
   retest: bugs 85, 97, 100, 112, 113 (DONE). The critical ones open for 0.9.1: `bugs/79_…`
-  the world freeze after an in-game loading screen — waystone and dungeon cases not run.
+  the world freeze after an in-game loading screen — the admin teleport fixed (pack b7d984a), the dungeon passed on 3b5e1e6 and not re-run on b7d984a, the waystones not run.
 - ✅ `bugs/115_DONE_conan_launcher_installed_after_uninstall_window_closed.md` (issue #46): DONE 2026-11-21 21:23 — retested on the published 0.9.1-RC3, issue closed.
 - ✅ `bugs/85_DONE_conan_crash_keybind_lua_races_game_thread.md` — the bow-kill crash: DONE 2026-11-21 23:12 (issue #24 closed after 15 cycles of real bow hits finished by `KillCharacter`, no crash).
 - ⏸ `bugs/89_conan_water_reflection_flicker.md` — 2026-11-09 15:45, the owner's frame at `river_bend`: dark dashes / grain blinking over the water, «как тени листвы пальм»; PARKED 2026-11-14 09:53 by the owner («в дальний ящик»).
