@@ -142,7 +142,19 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > one frame (over the 1 ms budget; camera notes line 123)**.
 >
 > **2026-11-23 00:29 — v0.9.1-RC4 PUBLISHED:** the upload ended `exit=0` at 00:29:36; `gh release view` reads draft=false, 83 assets, Latest = v0.9.1-RC4
-> (https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.1-RC4). Step (1) below is done; continue from step (2), the launcher release.
+> (https://github.com/MikalaiKryvusha/Kriniks_Conan_Exiles_Enhanced_ModPack/releases/tag/v0.9.1-RC4). (That line and its commit 59cefa0e came from the previous
+> chat's session kumm-82, woken by its own upload's end; told 00:31 that this chat owns the publication.)
+>
+> **2026-11-23 00:30–00:39 — THE PUBLICATION STEPS DONE (this chat):** the 83 assets compared with the release dir by name and size, all `uploaded`;
+> `launcher-v1.1.1` published 00:30 (`--latest=false`, exe 5 706 240 B, digest = the local SHA-256; Latest stays v0.9.1-RC4); **the owner's working-game
+> launcher updated 1.0.0 → 1.1.1 from the REAL feed** 00:33 (his desktop shortcut's target replaced in place; I answered «Нет» to the crash-report question
+> about MY stand crash of 20:57:23 first); the «вошло в v0.9.1-RC4» comments posted on #4 #13 #21 #43 #48 and read back; #52's body replaced by the portrait
+> rewrite; the launcher notes kept in `published_0_9_1-RC4/`; `release_checklist.py --published` — 0 TODO, 15 MANUAL, 10 OK; the release pages and the public
+> README read back (RC4); `rc4_release` (41 GB), `public_tree_rc4`, `rc4/kit_out`, `rc4/keep` removed (D: 61 GB free). **New tool:** the upload progress page
+> `ConanExiles/_config/release/upload_progress.mjs` (the owner's wish 00:21; report `testcases/reports/2026-11-23_conan-release-upload-progress-page.md`;
+> judge round 1 fixed, round 2 running). **Left of the RC4 list:** the issues close only after the retest on the published release (#21 needs the real
+> waystone travel); the owner's answer on `critical` for #30 #43 #48; the bug file + issue for the view switch ≈ 3 ms; the minor `install.ps1` exit 1 on a
+> shortcut failure.
 >
 > **CHAT CLOSED 2026-11-22 ≈23:1x — RC4 PUBLICATION IN PROGRESS** (`[OWNER]` 23:07 «публикуем релиз РЦ4»): the public tree (scan 0) pushed to the public repo
 > `1bdac32`; `gh release create v0.9.1-RC4 --latest --title "0.9.1-RC4" --notes-file KUMM/.work/rc4_release/release_notes_Krinik_Mod_Pack_0_9_1_RC4.md
