@@ -1,5 +1,34 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-22 11:03 +03:00 — STATUS bonsai trim, part 15: the CHAT CLOSED block of the chat of 2026-11-21 21:33 (moved verbatim at the closure of the chat of 2026-11-22 09:34)
+
+> **CHAT CLOSED 2026-11-21 ≈23:4x (the chat of 21:33, `resume`: the first install from zero, then the critical issues; soft closure on the owner's word 23:24
+> «работай автономно 15 минут, а затем закрывай чат»). Its detail — chronicle, entry «STATUS bonsai trim, part 14»; reports
+> `testcases/reports/2026-11-21_conan-rc3-first-install-from-zero.md` and `testcases/reports/2026-11-21_conan-rc3-critical-retest.md` (§8 the bow kills, §9 bow sprint S8).**
+> Done: the first install from zero of the PUBLISHED RC3 by its file list PASSES (21.2 min from GitHub, no volume); **6 critical issues closed** after my
+> retests on the published bytes — #6, #11, #12, #33, #35 (22:31) and #24 the bow-kill crash (23:12, 15 cycles of real bow hits, each Kappa finished by `KillCharacter`); bugs 85, 97, 100, 112, 113 DONE; new
+> #47 (the launcher's 72-of-74 counter) and #48 (the locomotion error while dead — fixed, pack `b99409a`); `aim-shot.sh` fixed (pack `2e0499b`); bow sprint S8
+> pass; the waystone mod notes; the stuck map not reproduced. The working build `D:\Games\Conan Exiles 3.1.1` = the published RC3 bytes (aligned 22:05) + the
+> Locomotion fix + the dev remote. The copy `KUMM/.work/rc1_install/Conan_311` holds RC3 installed by the launcher (its RC2 folder removed 23:33).
+> **Owner's errand:** delete `D:\PATH.txt` and `D:\settings.txt` (Claude Code's built-in check refuses a removal at a drive root even with his chat word, 21:46).
+>
+> **FIRST in the next chat — the open critical issues** (ranked: what the player loses · how many meet it · a workaround · the cost to close):
+> 1. **#21 the world frozen behind an in-game loading screen** — waystone travel and a dungeon entrance (bug 79); the stand route in
+>    `games/ConanExiles/mods/WaystonesEnhanced.md` (names by `retoc to-legacy` with the game's `global.utoc`; the Wayfinder feat — candidate 7770001 — or the
+>    item spawned; two waystones placed; travel; the world time read 5 s after the arrival).
+> 2. **#30 bow sprint S9** (a sheathed bow in a sprint; bug 93): sheathe by the quick-slot key, prove it by `HasWeaponsEquipped()` false, real W + Shift, then
+>    RMB — the Locomotion speed lines and the BowSprint lines; the spot — the beach camp of the game map's bow stand, yaw 123 along the shore.
+> 3. **#23 the stuck map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue) or his eye.
+> 4. **#41 Esc over other mods' windows** (bug 108): the owner called it «на будущее», the tracker labels it critical — settle the label; a non-Lua path.
+> 5. **#48** closes after the next build's retest; **#43** the slow launcher waits for the owner's eye. Then the 33 non-critical (#47: the fix site in
+>    `bugs/GITHUB_ISSUES.md`).
+> Stand lessons to obey: EXP-0603 (build `damage-window.lua` before any damage case — its mechanization field says «none yet — OWED»; the class shell-lied declared
+> class-ok: two mechanisms), EXP-0604 (copy the save WITH its `-wal`), EXP-0605 (assert the case's ingredient every cycle; ask the game for the weapon in hand), EXP-0606
+> (no capped log line as a detector). Still owed from the launcher list: cases D4c / D4d, plan 57 step 8 risks R1 / R2, step 7, the files-only release mode.
+>
+> The closed entries of 2026-11-20 22:07 – 2026-11-21 12:29 (RC2 built and published, the delta update recon, steps 0–3, the round-2 items) —
+> chronicle, entry «STATUS bonsai trim, part 10».
+
 ## 2026-11-21 23:40 +03:00 — STATUS bonsai trim, part 14: the CHAT CLOSED block of the chat of 20:02 and the DONE / NEXT blocks of the chat of 21:33 (the first install from zero, six critical issues closed), moved verbatim at its closure
 
 > Correction (the closing judge, 23:44): in the moved text below «15 bow kills with real shots» means 15 cycles of real bow hits, each Kappa then finished by `KillCharacter` (one cycle had one shot); «7 critical issues» in the same chat's drafts was six (#45, #46 closed by the chat of 20:02).

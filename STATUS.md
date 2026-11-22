@@ -138,7 +138,8 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **CHAT OF 2026-11-22 09:34 (`resume`, then the owner 09:37 «работай автономно в дневном цикле» — /dayloop):**
+> **CHAT CLOSED 2026-11-22 ≈11:0x (the chat of 09:34, `resume`, then the owner 09:37 «работай автономно в дневном цикле» — /dayloop; soft closure at the
+> 80 % context budget). Reports: `testcases/reports/2026-11-22_conan-damage-window-and-waystone-recon.md`, `…_conan-fp-head-shadow-sheathed-bow.md`.**
 > - **The owner's debt first (his words 09:40): the first-person head shadow (bug 114, #13) and the bow on the back in the first-person view (bug 117, #4)** —
 >   fixed in KrinikConanCamera (`main.lua`, the first-person section: hidden shadow on the game-hidden head, the neck bone hidden only above 70° pitch, a
 >   sheathed weapon invisible with its shadow, the view state read at `EventOnThirdPersonChange` — the idle vanity camera path). All cases pass on the working
@@ -146,38 +147,26 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 >   judge rounds; pack `388b127`; the show page `ConanExiles/_library/НА ОТСМОТР НИКОЛАЕМ/96_ten_golovy_i_luk_za_spinoj/pokaz.html`. Issues #13 / #4: a comment
 >   with the fix posted, closed after his look (the fix ships in the next build).
 > - **The damage-window stand tool** `ConanExiles/_config/damage-window.lua` (EXP-0603 mechanized; pack `949588b`): DW0–DW0c pass, DW1 (real hits) owed.
-> - **#21 (bug 79) in flight:** the Waystones Enhanced recon done (item / feat / recipe 7770001, travel by `TeleportPlayerServer`); R21a (place two waystones —
->   the placement by the remote is not solved yet: a building item needs the build mode) and R21b (find a dungeon entrance in the live world) not run.
+> - **#21 (bug 79) in flight — FIRST next chat:** the dungeon path REPRODUCED 10:53 (Wine Cellar: the world at 0.03 ≈ 2 s behind the loading screen) and fixed
+>   in `krinik_pause_in_menu.lua` (pack commit with `review: owed`): the dungeon passes twice. Still owed (bug 79 «The fix in progress»): the admin teleport
+>   still slows ≈ 3 s — read which widget is in the viewport during its load; the inventory neighbour (the module name for `ActivateModule`); the judge round;
+>   R21a waystones (the build-mode placement by the remote is not solved). Dungeon stand: `BP_TriggerTeleport_C` list (`KUMM/.work/tmp/list_teleports.lua`),
+>   the Wine Cellar door is closed — the heroine set into the trigger by `K2_SetActorLocation`. My all-property probe crashed the game 10:44 (EXP-0609).
 > - **New, not fixed yet:** KrinikConanArchery logs a caught Lua error at the heroine's death («вид тела от первого лица: ошибка (сокет после экипировки) —
 >   `GetPostProcessInstance`», `main.lua:1859`); `-Verify` names 4 KrinikConanMusic files missing in the build (not in the RC3 bytes).
-> - The heal by the remote: `CheatManager:SetStat('HealthCurrent', <v>)` (the console form does nothing).
 >
-> **CHAT CLOSED 2026-11-21 ≈23:4x (the chat of 21:33, `resume`: the first install from zero, then the critical issues; soft closure on the owner's word 23:24
-> «работай автономно 15 минут, а затем закрывай чат»). Its detail — chronicle, entry «STATUS bonsai trim, part 14»; reports
-> `testcases/reports/2026-11-21_conan-rc3-first-install-from-zero.md` and `testcases/reports/2026-11-21_conan-rc3-critical-retest.md` (§8 the bow kills, §9 bow sprint S8).**
-> Done: the first install from zero of the PUBLISHED RC3 by its file list PASSES (21.2 min from GitHub, no volume); **6 critical issues closed** after my
-> retests on the published bytes — #6, #11, #12, #33, #35 (22:31) and #24 the bow-kill crash (23:12, 15 cycles of real bow hits, each Kappa finished by `KillCharacter`); bugs 85, 97, 100, 112, 113 DONE; new
-> #47 (the launcher's 72-of-74 counter) and #48 (the locomotion error while dead — fixed, pack `b99409a`); `aim-shot.sh` fixed (pack `2e0499b`); bow sprint S8
-> pass; the waystone mod notes; the stuck map not reproduced. The working build `D:\Games\Conan Exiles 3.1.1` = the published RC3 bytes (aligned 22:05) + the
-> Locomotion fix + the dev remote. The copy `KUMM/.work/rc1_install/Conan_311` holds RC3 installed by the launcher (its RC2 folder removed 23:33).
-> **Owner's errand:** delete `D:\PATH.txt` and `D:\settings.txt` (Claude Code's built-in check refuses a removal at a drive root even with his chat word, 21:46).
+> **FIRST in the next chat (after #21 above):**
+> 1. **#30 bow sprint S9** (bug 93): the bow is sheathed by pressing its quick slot again (`h:InpActEvt_Shortcut0_K2Node_InputActionEvent_25({KeyName=FName('One')})`,
+>    `HasWeaponsEquipped()` false, the bow at `sheath_bow` — recipes in `HOUSE_RULES_REFERENCE.md` §6); then real W + Shift and RMB, the Locomotion and BowSprint lines.
+> 2. **#23 the stuck map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue) or his eye.
+> 3. **#41 Esc over other mods' windows** (bug 108): the owner called it «на будущее», the tracker labels it critical — settle the label.
+> 4. KrinikConanArchery: the caught Lua error at the heroine's death (`main.lua:1859`, `h.Mesh:GetPostProcessInstance()` on a dying pawn — guard the mesh);
+>    `-Verify` names 4 KrinikConanMusic files missing in the build. DW1 of the damage window (real hits) owed. #48 closes after the next build's retest;
+>    #43 the slow launcher waits for his eye.
+> 5. **The owner's errand still open:** delete `D:\PATH.txt` and `D:\settings.txt` (Claude Code refuses a removal at a drive root).
 >
-> **FIRST in the next chat — the open critical issues** (ranked: what the player loses · how many meet it · a workaround · the cost to close):
-> 1. **#21 the world frozen behind an in-game loading screen** — waystone travel and a dungeon entrance (bug 79); the stand route in
->    `games/ConanExiles/mods/WaystonesEnhanced.md` (names by `retoc to-legacy` with the game's `global.utoc`; the Wayfinder feat — candidate 7770001 — or the
->    item spawned; two waystones placed; travel; the world time read 5 s after the arrival).
-> 2. **#30 bow sprint S9** (a sheathed bow in a sprint; bug 93): sheathe by the quick-slot key, prove it by `HasWeaponsEquipped()` false, real W + Shift, then
->    RMB — the Locomotion speed lines and the BowSprint lines; the spot — the beach camp of the game map's bow stand, yaw 123 along the shore.
-> 3. **#23 the stuck map** (bug 84): not reproduced in three variants on RC3 — a wider hunt (gamepad, the map over a loading screen or a dialogue) or his eye.
-> 4. **#41 Esc over other mods' windows** (bug 108): the owner called it «на будущее», the tracker labels it critical — settle the label; a non-Lua path.
-> 5. **#48** closes after the next build's retest; **#43** the slow launcher waits for the owner's eye. Then the 33 non-critical (#47: the fix site in
->    `bugs/GITHUB_ISSUES.md`).
-> Stand lessons to obey: EXP-0603 (build `damage-window.lua` before any damage case — its mechanization field says «none yet — OWED»; the class shell-lied declared
-> class-ok: two mechanisms), EXP-0604 (copy the save WITH its `-wal`), EXP-0605 (assert the case's ingredient every cycle; ask the game for the weapon in hand), EXP-0606
-> (no capped log line as a detector). Still owed from the launcher list: cases D4c / D4d, plan 57 step 8 risks R1 / R2, step 7, the files-only release mode.
->
-> The closed entries of 2026-11-20 22:07 – 2026-11-21 12:29 (RC2 built and published, the delta update recon, steps 0–3, the round-2 items) —
-> chronicle, entry «STATUS bonsai trim, part 10».
+> The CHAT CLOSED block of 2026-11-21 ≈23:4x (its FIRST list, the stand lessons) — chronicle, entry «STATUS bonsai trim, part 15»; its open items
+> are carried into the chat of 2026-11-22 above.
 >
 > **Still open from the chat of 16:20** (its closed summary and the done item 1 — chronicle, entry «STATUS bonsai trim, part 7»; item 5 is now issue #17, the
 > «Подтвердить» finding of item 6 is issue #14):

@@ -34,6 +34,29 @@ log lines above, `TimeDilation` read 5 s after.
 `PauseGameInMenu`: exclude `W_IngameLoadingScreen_C` (and any loading-screen class) from the full-screen check; rebuild KrinikConanUI's Lua (no pak);
 cases (1)–(3) plus the teleport stand. Needs the owner's word on timing — the fix changes the 0.9.0 archive (new archive, new uploads).
 
+## Dungeon case R21b (2026-11-22 10:53, the 0.9.1-RC3 build, background game) — REPRODUCED, the fix does not catch this path
+
+The Wine Cellar entrance (`BP_WineCellar_TriggerTeleport_From_Dungeon_Entrance` @ −186230 107319 −9746; its door is closed — walking past it does nothing,
+so the heroine was set into the trigger volume by `K2_SetActorLocation`) teleported her into the dungeon (207135 −318855). The log:
+`10:53:35.66 [KrinikConanUI:PauseGameInMenu] полноэкранный интерфейс: ОТКРЫТ` → `меню открыто: замедление времени 0.03` (+ `CraftTimeMultiplier = 0.03`);
+the remote read at 10:53:37 «tdil 0.03 loading true» (`W_IngameLoadingScreen_C` in the viewport); `10:53:37.71 взведено … полноэкранный интерфейс: закрыт` →
+time 1.0. The world ran at 0.03 for ≈ 2 s behind the in-game loading screen; this time the load finished and the time came back — on a longer streaming the
+deadlock of 2026-11-03 is the expected outcome. **Cause (reading `krinik_pause_in_menu.lua` lines 551–595):** `loading_screen_up()` searches for the
+widget only once in `SEARCH_EVERY` polls when nothing is cached; on the first poll with the full-screen GUI on, the wait counter makes it return false, and
+the pause applies at once. **Fix owed:** search at once on the poll where the full-screen GUI turns on (no throttle on the first look), then the case again.
+Frames: `KUMM/.work/fp_v2/wc_trigger.jpg`. Case R21b of `testcases/TC_conan_loading_screen_waystone_dungeon_2026-11-22.md`.
+
+## The fix in progress (2026-11-22 10:5x–11:01, `krinik_pause_in_menu.lua`, pack commit with `review: owed`)
+
+1. v1 (10:55): the search counter reset on the edge «full-screen GUI opened». Run 10:57: the dungeon entrance PASS (time 1.00 behind the loading screen,
+   no «ОТКРЫТ»); the admin teleport (`exec TeleportPlayer`) still «ОТКРЫТ → 0.03» for ≈ 3 s (10:57:06 → 10:57:08.9).
+2. v2 (10:59): the first 8 polls after the opening search every poll, the pause applies from the 2nd poll (placed AFTER the arming, so the world-load guard of
+   13.09 holds). Run 11:01: the dungeon entrance PASS again; the admin teleport STILL «ОТКРЫТ → 0.03» (11:00:58) — so on that path the loading widget is
+   not found within 2 s at all (another class or not in the viewport yet): **owed — read which widget is in the viewport during the admin teleport's load**.
+   The neighbour «the inventory pause» not proven (`ActivateModule(FName('Inventory'))` by the remote did not open it — the module name is to check); the pause
+   path itself still engages (the teleport's wrong 0.03 shows it). A log spam remains: «взведено …» every poll while a loading screen shows.
+3. Owed before DONE: the judge round on the diff, the admin-teleport path, the inventory neighbour, the waystone case R21a.
+
 ## Respawn case (2026-11-07 07:41, background game, pack `374b90d`)
 
 Death by `pult.sh "exec suicide"` → the respawn selection → the respawn by itself 8 s later (no bedroll) → «взведено: герой в мире» — no «полноэкранный интерфейс: ОТКРЫТ»,
