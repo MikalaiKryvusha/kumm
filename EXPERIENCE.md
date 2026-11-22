@@ -91,6 +91,21 @@
 
 ## Entries
 
+### EXP-0615 · 2026-11-22 · ❌ · #real-input #focus #owner-screen #conan #stand
+Real-key cases (`mouse-seq.ps1`) at 22:16–22:18 while the owner was playing another game in Chrome (cloud NFS — the foreground process read `chrome`): each
+sequence pulled Conan in front and stole his focus; two sequences of weapon keys reached nothing in Conan (no OnWeaponEquip in the log) because his input took the
+focus back. He asked 22:19 «я играю, не мешаю тебе?». `mouse-seq`'s focus proof passes at the start and cannot see a focus lost mid-sequence. Lesson: before a
+real-input series read the foreground process; a foreign app in front means the owner is at the machine — do the background work and run the real-input series
+when he frees it (rule 30 cancelled the idle guards, not the courtesy). A case whose effect is absent from the log after a «sent» exit is a lost focus first.
+none-cheap: one probe line before the series (`GetForegroundWindow` → process name); no guard
+
+### EXP-0614 · 2026-11-22 · ❌→✅ · #ffmpeg #recording #windows #play-report #s3
+A long screen recording for a play report: one `ffmpeg … -f segment -segment_time 600 … seg_%02d.mkv` stopped by `taskkill /F` left a 0-byte file after a
+6 s test (21:38) — a killed ffmpeg flushes nothing, the segment muxer included. Pieces of `-t 60`, each its own ffmpeg in a loop until a stop file, close by
+themselves; the concat demuxer joins them (4 s pieces: 3 pieces → 12 s, 21:40). The light setting for an hour (1080p 30 fps `hevc_nvenc -cq 30 -maxrate 6M`)
+keeps it ≈ 2–3 GB where `rec_clip.sh` (4K 60 fps near-lossless) would take up to 27 GB of the release disk.
+none-cheap: the tool `KUMM/.work/rc4/play/rec_session.sh` itself; one line, no guard
+
 ### EXP-0613 · 2026-11-22 · ❌→✅ · #conan #ue4ss #crash #bisection #minidump #agent-probe #forensics
 class: own-tool-is-the-variable
 Bug 118: seven crashes in UE4SS with EAA's window over the hub; a day of bisection blamed my probe hooks, then the UI mod, then the camera mod, and a fix of the

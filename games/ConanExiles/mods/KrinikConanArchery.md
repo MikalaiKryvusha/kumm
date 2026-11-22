@@ -113,6 +113,13 @@ actor's own big mesh; registry «actor address → mesh», cap 64. Seen: the log
 the owner's check in the running game (asked 21:11). The background twin of a real shot: the remote `FindFirstOf('BasePlayerChar_C'):LaunchProjectile()` fires the
 equipped bow from the hero with no input (21:05, seen in the archery log as a normal shot).
 
+## The stuck string check finds the bow on the hero (judge round on RC4, 2026-11-22 21:5x)
+
+`settle_if_stuck` (the end-of-attack hook, 100 ms later) used to run `FindAllOf("BP_bow_2h_C")` over the whole object array after EVERY attack end, melee swings
+included, once the bow had been aimed in the session. Now `bow_string_of` reads the hero's own attached actors (`GetAttachedActors(arr, true, false)`, class name
+`BP_bow_2h_C`), and a pawn that is not locally controlled is skipped (co-op). HOUSE_RULES 41. Case B1 of `testcases/reports/2026-11-02_conan-arrow-choice-and-bow-stance.md`
+re-runs on RC4.
+
 ## No key binds — bug 85 (2026-11-07 21:3x)
 
 The shafts sync used `RegisterKeyBind(E / Q / LMB)`; a key-bind callback runs Lua on UE4SS's input thread while this mod's game-thread Lua runs (corpse pass),

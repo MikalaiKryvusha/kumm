@@ -128,9 +128,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **THE CHAT OF 21:22 (2026-11-22) — RC4 by the release ritual, in progress.** Done: pack `f16c3e9` (packVersion 0.9.1-RC4, every shipped Krinik mod's
 > version with its change, the launcher 1.1.1 — the launcher changed for #43), pack `495daef` (the RC4 notes rewritten after the clean read, the launcher
 > 1.1.1 notes `draft_0_9_1/github_release_notes_launcher_1_1_1.md`, the guide's «Исправлено в тестовой сборке 0.9.1-RC4», the change notes); README.draft
-> rendered for RC4 with RC3's archive size (re-render after the build: `bash KUMM/.work/rc4/regen_readme.sh`). Running: the KrinikConanUI kit chain
-> `KUMM/.work/rc4/kit_chain.sh` (the menu line), a judge round on the shipped diff RC3 → now (`KUMM/.work/rc4/judge/`). Next: the judge's findings →
-> deploy + `-Verify` → THE PLAY HOUR (`testcases/TC_conan_play_matrix.md`, rows R11–R13 added; recorder `KUMM/.work/rc4/play/rec_session.sh`; report
+> rendered for RC4 with RC3's archive size (re-render after the build: `bash KUMM/.work/rc4/regen_readme.sh`). Done 22:03–22:2x: the UI kit pak with
+> «0.9.1-RC4» (×4, RC3 ×0, file list = RC3's) in `_unpacked`, the whole build deployed (74/74, verify 110 / 0), modinfo written and `--check-krinik` 4/4 (after a
+> `-Deploy -Only <pak mod>` rewrite its modinfo: the raw pak brings the kit's old change note). Judge rounds on the shipped diff: round 1 (6 findings — confirmed
+> and fixed: the archery `FindAllOf` per attack end, kept references by full name in camera / pause / pickup / locomotion; the first-person pass cost MEASURED
+> live 22:10: a view switch ≈ 3 ms in one frame, a weapon swap two passes ≈ 1 ms each), round 2 (fixed: per-frame name checks → `RegisterLoadMapPreHook`
+> reset, seen firing 22:15 ×2; a weapon swap walks only the attached items; archery locals in `do … end`; pickup single checks), round 3 running. UNCOMMITTED
+> in the pack: those Lua fixes + the kit reports — commit after round 3. Owed in game: a weapon swap in first person on the new pass («просмотрено N» small),
+> quit to menu and back. `KrinikMenuProbe` disabled in the working game (its `enabled.txt` in `KUMM/.work/rc4/keep/`). The owner plays another game 22:19 —
+> no real input, no voice until he frees the machine. Next: THE PLAY HOUR (`testcases/TC_conan_play_matrix.md`, rows R11–R13 added; recorder `KUMM/.work/rc4/play/rec_session.sh`; report
 > `testcases/reports/2026-11-22_conan-play-0.9.1-RC4.md`; the gate `check_play_report.py`) → `make_release.sh` → the update RC3 → RC4 on the copy
 > `KUMM/.work/rc1_install/Conan_311` (RC3 installed; driver `KUMM/.work/rc3/realcheck.mjs` to adapt) → the owner's word for the publication.
 >

@@ -303,6 +303,13 @@ logo on the main-menu frame (background launch, `capture-window.ps1 -Width 3840`
 (8), «0.9.1-RC3» ×4 and «0.9.1-RC2» ×0; deployed (`verify 110 present, 4 missing` — the four of KrinikConanMusic, not deployed in this game, as at RC2),
 `set-pak-modinfo.py --only KrinikConanUI.pak` and `--check-krinik` (4 of 4); seen «0.9.1-RC3» under the logo, frame `KUMM/.work/rc3/menu_rc3.webp`.
 
+**0.9.1-RC4, 2026-11-22 21:34–:** the same chain as `KUMM/.work/rc4/kit_chain.sh` (steps 01–05 «Success - 0 error(s)», 350 / 199 / 2xx / 258 / 278 s).
+
+**Kept references by full name (judge round on RC4, 2026-11-22 21:5x):** `krinik_pause_in_menu` keeps the hero and the `GUIModuleController` with the full name
+recorded at capture (`same_obj`, `hero_name`, `gmc_name`); `krinik_pickup_prompt` keeps the plate, the E rim, the controller and the GUI controller the same way
+(`keep(key, o)` / `kept(key, o)`). After a quit to the menu and a new world load a foreign object at the old address no longer passes for the kept one (EXP-0612);
+before, the pause's menu slowdown could stop for the session and `show(false)` could collapse a foreign widget. The dead `fullscreen_raw_was` removed.
+
 ## Tests and runs
 
 - `testcases/TC_conan_krinik_conan_ui_merge_2026-10-30.md` (U1–U8 pass), report `testcases/reports/2026-10-30_conan-krinik-conan-ui-merge.md`.

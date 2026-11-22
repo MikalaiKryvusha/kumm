@@ -97,6 +97,12 @@ starts in the air and the jump arc is unchanged (z −19959 → −19870 → lan
 REMEMBERED by the game and done right after the swing (seen: the hero airborne at the next probe's start) — kept as the game's behaviour `[AI]` (said to the
 owner 10:48). `HasWeaponsEquipped()` is true with the sword in hand.
 
+## Kept references are checked by full name (judge round on RC4, 2026-11-22 21:5x)
+
+`krinik_oblivion_locomotion`: the kept hero (`hero_obj`) and `BP_ServerSettings_C` (`server_obj`) are trusted only while the object at the address keeps the full name
+recorded at capture (`keep_name` / `still`), the same class as EXP-0612. Open: `local_hero()` takes the first live `BasePlayerChar_C` — in co-op it can be another
+player's hero (the camera mod picks by `IsLocalController`); single-player is the build's path, left as is `[AI]`.
+
 ## Open
 
 - **FIXED 2026-11-22 19:5x — the twin in `apply()`: two UE4SS errors at every death** (found in case A49 of `testcases/TC_conan_rc4_scope_2026-11-22.md`): the dead

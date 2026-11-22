@@ -113,6 +113,14 @@ judge's A2 — the birth callback runs Lua on the thread that constructs the obj
 `ListenForInputAction` bind with a Lua-table delegate); reproduced on demand with every mod on AND with this mod off, the stack equal to all seven crashes.
 The registry stays as the cheaper design; the code comment says so. `mute_foreign_camera = false` ran 10 min clean plus 15 EAA reopen cycles (no probe).
 
+## Kept references are checked by full name (judge round on RC4, 2026-11-22 21:5x)
+
+The local controller (`local_pc`), the first-person camera (`fp_cam`) and its controller (`fp_pc`) are trusted only while the object at the kept address still has
+the full name recorded at capture (`same_obj(o, name)` in `Scripts/main.lua`; `local_pc_name`, `fp_cam_name`, `fp_pc_name`): after a quit to the main menu and a new
+world load the old objects are destroyed and their addresses can hold foreign objects that pass `IsValid()` (EXP-0612). `fp_cam_tick` pays two `GetFullName` a frame,
+first person only. Open: the cost of `fp_pass` on a weapon swap in first person (one walk at once, two at 0.8 s / 1.6 s; the record walk logs «23 nodes, 2 ms» at the
+1 ms clock step) — to measure in game before RC4 ships (finding 2 of the same round).
+
 ## Checks
 
 - In game 2026-10-31 16:41: `[KrinikConanCamera]` 81 log lines, «config.lua прочитан», «ВЫБРАН компонент: SpringArmComponent …». Cases of the camera work —
