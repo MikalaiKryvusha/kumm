@@ -140,11 +140,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > `check_play_report.py`). Seen in game 22:47 on `18532f3`'s code: a weapon swap in first person walks 7–9 nodes (was 25–27), «скрыто 2» / «возвращено 2» /
 > «в руке 1» hold. The game folder = `18532f3` (camera, archery, UI, locomotion deployed; `--check-krinik` 4/4). The owner's feature for LATER: the first-person
 > bow stance higher, the torso leaning when looking down — issue #52 (its text was filed with the portrait loaded > 1 h earlier; the portrait re-check owed).
-> **THE PLAY HOUR IS NEXT, on pack `18532f3`** (any later commit to a shipped path voids the report): HDR off → `bash KUMM/.work/rc4/play/rec_session.sh start`
-> → walk the matrix (31 rows; keys P view, Tab hub, J journey, M map, E interact, 1–8 slots, LMB / RMB, Shift, Space, LCtrl crouch) with the owed checks
-> (quit to menu and back — the LoadMap reset on the world → menu exit; a death with a third-person respawn; B1) → `rec_session.sh stop` + `join` → fill
-> `testcases/reports/2026-11-22_conan-play-0.9.1-RC4.md` (skeleton) → `god-on.sh off` (the save has god mode ON) → `check_play_report.py 0.9.1-RC4`.
-> Read the foreground process before a real-input series (EXP-0615). Owed in game: a weapon swap in first person on the new pass («просмотрено N» small),
+> **RC4 BUILT 23:06** — the owner 22:56 waived the play hour («час не нужно, собираем так, так как мы пока хотфиксингом занимается»; `KUMM/.work/rc4/waiver.txt`,
+> `KRINIK_PLAY_GATE_WAIVER`): `make_release.sh` OK into `KUMM/.work/rc4_release/release` (7 volumes, 83 per-file assets + `manifest.json`, the guide PDF, the
+> launcher 1.1.1, SHA256SUMS; stream `c3c34837…`, 13 723 733 770 B = «12,8 ГБ»; **changed vs 0.9.1-RC3: 12 files, 46.6 MB**); the release-page notes with sizes
+> `KUMM/.work/rc4_release/release_notes_Krinik_Mod_Pack_0_9_1_RC4.md`; README.draft unchanged (the same 12,8 ГБ). The work dir is 41 GB, D: 21 GB free. Log
+> `KUMM/.work/rc4/logs/07_make_release.log`. **NEXT:** (1) one line about the update size in the RC4 notes (both halves, by the portrait: «Обновление с RC3 скачает
+> 12 изменившихся файлов, около 47 МБ») — draft + the copy in the work dir; (2) the update RC3 → RC4 through the launcher on the copy `KUMM/.work/rc1_install/Conan_311`:
+> `node KUMM/.work/rc4/realcheck.mjs` (adapted, never run); (3) the owner's word for the publication — then `gh release create v0.9.1-RC4 --latest` with every file
+> of the release dir, `launcher-v1.1.1` (`--latest=false`, `draft_0_9_1/github_release_notes_launcher_1_1_1.md`), `release_checklist.py --published`, the
+> public tree (`make_public_tree.py`), issues #4 #13 #21 #43 #48 commented and closed after the retest; (4) cleanup of `KUMM/.work/rc4_release` after the upload. Owed in game: a weapon swap in first person on the new pass («просмотрено N» small),
 > quit to menu and back. `KrinikMenuProbe` disabled in the working game (its `enabled.txt` in `KUMM/.work/rc4/keep/`). The owner plays another game 22:19 —
 > no real input, no voice until he frees the machine. Next: THE PLAY HOUR (`testcases/TC_conan_play_matrix.md`, rows R11–R13 added; recorder `KUMM/.work/rc4/play/rec_session.sh`; report
 > `testcases/reports/2026-11-22_conan-play-0.9.1-RC4.md`; the gate `check_play_report.py`) → `make_release.sh` → the update RC3 → RC4 on the copy
