@@ -144,9 +144,19 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > OFF). Without the probe: 10 min + 15 EAA reopen cycles clean. Tools: `ConanExiles/_config/crash-forensics.py` (stack hash + the remote commands per crash
 > folder — run it FIRST after any crash in our run); the remote refuses a table delegate (guard `no-table-delegate`, G1–G3 pass 19:53). EXP-0613. Bug 108's E0b
 > path (Lua `ListenForInputAction`) is dead — the Esc of mod windows is the native pak fix. **Issue #50 closed** (not planned — not a build defect).
-> Also: **#49 closed** — A49 (death with the bow in first person) and A49n (empty hands) pass; **#51 filed** — KrinikConanLocomotion wrote the dead pawn's movement
-> component (two `[Error] … nullptr` lines per death), fixed (`tick()` waits for a live component), L2 pass 19:59 — closes after its pack commit. The owner's save
-> restored from `KUMM/.work/bug118/save_before_death` after the deaths (integrity ok). Case file rows A49, A49n, L2, G1–G3.
+> Also: **#49 closed** — A49 (death with the bow in first person) and A49n (empty hands) pass; **#51 closed** — KrinikConanLocomotion wrote the dead pawn's
+> movement component (two `[Error] … nullptr` lines per death), fixed in pack `d8c42ed`, L2 pass 19:59. The owner's save restored from
+> `KUMM/.work/bug118/save_before_death` after every run that changed it (integrity ok each time).
+> **The /dayloop of 20:03 (the owner: «работай автономно в дневном цикле, фиксим баги, делаем сборку лучше») — done:** bug 79 R21e the Dregs dungeon IN and
+> OUT + R21a-sim (the waystone map open) pass, issue #21 commented (open for the REAL waystone travel only); #30 items 1–2 answered (the remote cannot hold
+> RMB; a sheathed bow punches; `NotAmmo`), ticked and commented; M1 the map over a loading screen passes (hub tab «Карта» = index 7); `-Verify` clean
+> (KrinikConanMusic disabled, pack `5d844b3`); plan 61 for Esc over mod windows + its step 1 inventory (3 close, LBPR closes the hub, 9 ignore Esc); the
+> remote's guards `no-table-delegate` (widened after the judge) and `no-nil-interactable` (my `InteractableActivate(nil)` crashed the game on a dialogue NPC
+> at 20:57 — crash-forensics named it at once), all live. Packs `d8c42ed` `5d844b3` `1d9cff5` `290e6f0`.
+> **NEXT (in order):** (1) **build RC4** by the release ritual (`release_checklist.py`, HOUSE_RULES 42) for the file-updating launcher — a fresh chat: the
+> ritual is long; publication waits for the owner's word; (2) plan 61 step 2 — spike A (our kit «Esc catcher») on EAA; (3) the real waystone travel (R21a,
+> real input for the placement); M2 (start the talk by a REAL E); #30 camera cosmetics (read KrinikConanArchery's sprint-view FOV first); #43's first open
+> (≈ 100 ms; the plaque is laid out only when shown — the owner's eye on RC4 decides).
 >
 > **THE CHAT OF 15:18 (2026-11-22) — the RC4 scope, part 1 (pack `b42090f`).** (a) bug 118 — solved in the chat of 18:55 above (the camera's registry stays as
 > the cheaper design, not as a crash fix). (b) **#49 the archery
