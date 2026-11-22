@@ -25,7 +25,8 @@ the same loop — `install.ps1` keeps exit 0 when only the desktop shortcut fail
 | R48 | pass — 0 Locomotion error lines from the death 01:25:14 to 25 s after; the respawn's Agility line present (N1 pass) → #48 closed |
 | R4 | pass — no bow in the first-person frame looking up 60°; control frame: the bow on her back in third person → #4 closed |
 | R53 | confirms #53 — the first switch after world entry 4.5 ms of camera lines («2 мс» by the mod), the second 1.7 ms («0 мс») |
-| N2 | not run — the slot-2 remote call left no weapon line |
+| R13 | pass (the second run from 01:32, PID 47500) — 10:00, first person, pitch −55 with the sun behind: the shadow has the head and the shoulders → #13 closed |
+| N2 | not run — the slot-2 remote call left no weapon line; in the second run the quick slots were empty (the gear stayed on R48's corpse) |
 | shortcut | missing folder and missing drive Z: — exit 0 with «Desktop shortcut not created»; the uninstaller returns the game folder (3 runs) |
 | retry | the upgrade section 3 / 3 clean after the fix (before: «Access denied» on `_kumm_player.partial`, «being used» on `_kumm_backup`) |
 
@@ -37,4 +38,4 @@ the journal first) is owed. (5) The clean-instance read of the two retest commen
 **Traces.** `.work/rc4/logs/retest43.log`, `ab43.log`, `r48_death.log`, `fixture_*.log`; frames `.work/rc4/frames/r4_fp_up.webp`, `r4_tp_control.webp`,
 `owner_launcher_111.webp`.
 
-**Verdict.** partial — #48 and #4 pass and are closed; #43 stays open on the first open (the owner's word); #53 confirmed; N2 owed.
+**Verdict.** partial — #48, #4 and #13 pass and are closed; #43 stays open on the first open (the owner's word); #53 confirmed; N2 owed.

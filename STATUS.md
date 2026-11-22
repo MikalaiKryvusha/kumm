@@ -165,9 +165,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > path, missing drive; fixture cases at the END of `tools/fixture-pack.mjs`); `Invoke-FileRetry` in `Deploy-ModPack.ps1` retries the rename of
 > `_kumm_player.partial` and the removal of `_kumm_backup` (the stand's «Access denied» / «being used» in 3 runs of 6; after the fix 4 / 4 clean, 74 checks);
 > judge rounds 4–5. (4) **the upload page committed** — pack `b30cee1`, 5 judge rounds. (5) **the game retest on the published RC4** (case file
-> `testcases/TC_conan_rc4_retest_published_2026-11-23.md`, report `testcases/reports/2026-11-23_conan-rc4-retest-published.md`): **#48 and #4 pass and are
-> CLOSED** (comments posted; their clean read skipped — said in the report); N2 (a first-person weapon swap) owed — the slot-2 remote call did nothing.
-> **Owed next:** #13 (the shadow's head) and #21 (the real waystone travel) retests; #43's first open (bug 110 open item); judge round 5's older risk FIXED (`Deploy-ModPack.ps1` deletes the journal before the backup folder; the partial-removal path itself not simulated) — was: a
+> `testcases/TC_conan_rc4_retest_published_2026-11-23.md`, report `testcases/reports/2026-11-23_conan-rc4-retest-published.md`): **#48, #4 and #13 pass and
+> are CLOSED** (comments posted; their clean read skipped — said in the report); N2 (a first-person weapon swap) owed — the slot-2 remote call did nothing,
+> and after R48's death the heroine respawned without her gear (bow and hatchet on the corpse in the owner's save). **Owed next:** #21 (the real waystone travel) retest; #43's first open (bug 110 open item); judge round 5's older risk FIXED (`Deploy-ModPack.ps1` deletes the journal before the backup folder; the partial-removal path itself not simulated) — was: a
 > failed backup removal can leave `journal.txt` with half of `files\` (delete the journal first); the owner's answer on `critical` for #30 #43 #48.
 >
 > **CHAT CLOSED 2026-11-22 ≈23:1x — RC4 PUBLICATION IN PROGRESS** (`[OWNER]` 23:07 «публикуем релиз РЦ4»): the public tree (scan 0) pushed to the public repo

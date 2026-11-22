@@ -24,9 +24,11 @@ death case; the stand keeper off in the death case. A bow in hand by the quick s
 | R4 | first person, a bow on the back (sheathed), daylight | the view turned up 60° | the bow is not in the frame (a frame looked at) | **pass** (01:24) | frame `.work/rc4/frames/r4_fp_up.webp`: sky and palm, no bow; control `r4_tp_control.webp` — third person, the bow on her back |
 | R53 | third person | first person switched on by the remote | the camera's log lines of that switch span ≤ 1 ms (informative: the issue expects ≈ 3 ms) | **fail — confirms #53** | the first switch after world entry: lines 01:23:15.0373 → .0418 (4.5 ms), the mod's own «просмотрено 27 … 2 мс»; the second switch 01:25:53: 1.7 ms, «просмотрено 22 … 0 мс» |
 
+| R13 | added 01:32 (the second run): 10:00, god on, first person | pitch −55 at yaw 0 and yaw 180 | the ground shadow shows the head (a frame looked at) | **pass** (01:34) | `.work/rc4/frames/r13_pair.webp`: at yaw 180 (the sun behind) the shadow on the sand has the head and the shoulders → #13 closed |
+
 ## Neighbours (HOUSE_RULES 39)
 
 | # | Function sharing the code | Check | Status |
 |---|---|---|---|
 | N1 | the respawn after the death (Locomotion's run and jump by Agility) | after the respawn the log shows the Agility line for the new heroine | **pass** — «герой появился: Проворство 8 → бег 474» 01:25:24 |
-| N2 | the weapon swap in first person (the camera's attached-items pass) | a swap in first person logs no error | **not run** — the slot-2 call (`Shortcut1_…_24`) left no weapon line in 6 s; owed |
+| N2 | the weapon swap in first person (the camera's attached-items pass) | a swap in first person logs no error | **not run** — the slot-2 call (`Shortcut1_…_24`) left no weapon line (the flushed log read after the game closed too); in the second run the heroine had respawned without her gear after R48's death (her items stay on the corpse), the quick slots empty; owed |
