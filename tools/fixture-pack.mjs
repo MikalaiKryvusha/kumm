@@ -467,5 +467,25 @@ expect('обновление: деинсталлятор после обновл
   existsSync(at(GG, CFG)) && readdirSync(at(GG, CFG)).some(n => n.startsWith('Engine.ini.player-') && /r\.Player=1/.test(rd(at(GG, `${CFG}/${n}`)))),
   `${gUn}\n${existsSync(at(GG, CFG)) ? readdirSync(at(GG, CFG)) : '(нет папки)'}`)
 
+// ---- ярлык не сохранился (папки «рабочего стола» нет): установка всё равно удачна — код 0, предупреждение, сборка стоит. До 2026-11-23 install.ps1
+// падал на $s.Save() с кодом 1 после полной раскатки, и лаунчер писал «код выхода 1» (отчёт KUMM 2026-11-23, обновление RC3 → RC4, случай U7).
+// Контроль — случай «ярлык» выше: с существующей папкой ярлык создаётся. Случай стоит последним: его установка и откат сразу перед разделом обновления
+// давали тому разделу «доступ запрещён» при переименовании свежей папки (два прогона из двух; без этого случая — чисто; гипотеза — сканер Windows
+// держит свежие файлы, не проверена). Второй вариант — «рабочий стол» на букве диска, которой нет: Join-Path падал вне try (судья 2026-11-23, круг 4).
+const noDrive = 'ZYXWVUTSRQPONMLKJ'.split('').find(L => !existsSync(`${L}:\\`))
+let instNoDrive
+try { instNoDrive = { code: 0, out: execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', path.join(UEXP, 'install.ps1'), '-GameDir', SGAME], { encoding: 'utf8', env: { ...process.env, KUMM_DESKTOP_DIR: `${noDrive}:\\no_desk` } }) } }
+catch (e) { instNoDrive = { code: e.status ?? 1, out: `${e.stdout ?? ''}${e.stderr ?? ''}` } }
+expect(`ярлык: «рабочий стол» на диске ${noDrive}:, которого нет, — установка удачна (код 0), предупреждение «Desktop shortcut not created»`,
+  instNoDrive.code === 0 && /Desktop shortcut not created/.test(instNoDrive.out) && /Deploy complete/.test(instNoDrive.out), instNoDrive.out)
+let instNoDesk
+try { instNoDesk = { code: 0, out: execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', path.join(UEXP, 'install.ps1'), '-GameDir', SGAME], { encoding: 'utf8', env: { ...process.env, KUMM_DESKTOP_DIR: path.join(DIR, 'no_such_desk') } }) } }
+catch (e) { instNoDesk = { code: e.status ?? 1, out: `${e.stdout ?? ''}${e.stderr ?? ''}` } }
+expect('ярлык: папки рабочего стола нет — установка удачна (код 0), предупреждение «Desktop shortcut not created», сборка развёрнута',
+  instNoDesk.code === 0 && /Desktop shortcut not created/.test(instNoDesk.out) && /Deploy complete/.test(instNoDesk.out) && existsSync(SUN), instNoDesk.out)
+let un3 = ''
+try { un3 = execFileSync('cmd', ['/c', SUN], { input: '\r\n\r\n', encoding: 'utf8' }) } catch (e) { un3 = `${e.stdout ?? ''}${e.stderr ?? ''} code ${e.status}` }
+expect('ярлык: после установки без ярлыка деинсталлятор вернул папку игры как до установки', snap(SGAME) === sBefore, `${un3}\n${snap(SGAME)}`)
+
 console.log(bad ? `\nСТЕНД: ${bad} провал(ов)` : '\nстенд: все проверки прошли')
 process.exit(bad ? 1 : 0)

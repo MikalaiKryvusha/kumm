@@ -276,7 +276,7 @@ function Invoke-Restore {
     }
     Ok "returned $restored file(s), deleted $deleted file(s) the build had added"
     if ($failed) { Bad "$failed step(s) failed - the backup folder is kept: $(Join-Path $root $script:BackupDirName)"; return 1 }
-    Remove-Item -LiteralPath (Join-Path $root $script:BackupDirName) -Recurse -Force
+    Invoke-FileRetry { Remove-Item -LiteralPath (Join-Path $root $script:BackupDirName) -Recurse -Force -ErrorAction Stop }
     Ok "the game folder is back to its state before the build; backup folder removed"
     return 0
 }
@@ -366,9 +366,27 @@ function Save-PlayerConfig {
         Copy-Item -LiteralPath $full $dst -Force
         $n++
     }
-    if ($n -gt 0) { Rename-Item -LiteralPath $partial -NewName (Split-Path $aside -Leaf) }
+    if ($n -gt 0) { Invoke-FileRetry { Rename-Item -LiteralPath $partial -NewName (Split-Path $aside -Leaf) -ErrorAction Stop } }
     Ok "player settings: $n changed file(s) set aside in $script:PlayerDirName"
     return $n
+}
+
+function Invoke-FileRetry {
+    # Переименование или удаление папки, которую только что записали: антивирус и индексатор Windows держат свежие файлы долю секунды, и
+    # Rename-Item / Remove-Item падают с «Access ... denied» или «being used by another process». Стенд fixture-pack ловил это в разделе обновления
+    # (_kumm_player.partial → _kumm_player, удаление _kumm_backup) в трёх прогонах из шести 2026-11-23; у игрока с антивирусом то же самое
+    # срывало бы обновление. До 8 попыток с паузами 250, 500 … 1750 мс (около 7 с в сумме); ошибка восьмой попытки уходит дальше как есть.
+    # [TESTED: 2026-11-23 · fixture-pack 3 прогона из 3 без провала раздела обновления (до правки — провал в 3 из 6); судья, круг 5: файл, отпущенный
+    # до третьей попытки, переименован; не отпущенный — 8 попыток и исходная ошибка · KUMM testcases/reports/2026-11-23_conan-rc4-retest-published.md]
+    param([scriptblock]$Action)
+    $maxTries = 8
+    for ($i = 1; $i -le $maxTries; $i++) {
+        try { & $Action; return }
+        catch [System.IO.IOException], [System.UnauthorizedAccessException] {
+            if ($i -eq $maxTries) { throw }
+            Start-Sleep -Milliseconds (250 * $i)
+        }
+    }
 }
 
 function Get-FreeName {
@@ -2025,15 +2043,23 @@ function Write-BundleInstaller {
         '$rc = [int]$LASTEXITCODE',
         '# manifest.shortcut {name, target, icon}: a desktop shortcut to the build''s own program (Krinik build 2026-11-01, the owner: "Krinik Conan").',
         'if ($rc -eq 0 -and $m.shortcut -and $m.shortcut.name -and $m.shortcut.target) {',
-        '    # KUMM_DESKTOP_DIR: a test stand''s own folder instead of the real desktop (the fixture stand left 11 shortcuts on the owner''s desktop, 2026-11-10)',
-        '    $desk = if ($env:KUMM_DESKTOP_DIR) { $env:KUMM_DESKTOP_DIR } else { [Environment]::GetFolderPath(''Desktop'') }',
-        '    $lnk = Join-Path $desk ($m.shortcut.name + ''.lnk'')',
-        '    $s = (New-Object -ComObject WScript.Shell).CreateShortcut($lnk)',
-        '    $s.TargetPath = Join-Path $here $m.shortcut.target',
-        '    $s.WorkingDirectory = $here',
-        '    if ($m.shortcut.icon) { $s.IconLocation = (Join-Path $here $m.shortcut.icon) + '',0'' }',
-        '    $s.Save()',
-        '    Write-Host "Desktop shortcut: $lnk" -ForegroundColor Green',
+        '    # The shortcut is a convenience: a desktop it cannot write to (a missing folder, an empty Desktop path, a drive that is not there) warns and',
+        '    # keeps the deploy''s exit code - an installed, verified build reported as a failed install misled the launcher (KUMM run report 2026-11-23,',
+        '    # the RC3 -> RC4 update, case U7). The path itself is computed inside the try: Join-Path fails on an empty path and on a missing drive.',
+        '    $lnk = $m.shortcut.name + ''.lnk''',
+        '    try {',
+        '        # KUMM_DESKTOP_DIR: a test stand''s own folder instead of the real desktop (the fixture stand left 11 shortcuts on the owner''s desktop, 2026-11-10)',
+        '        $desk = if ($env:KUMM_DESKTOP_DIR) { $env:KUMM_DESKTOP_DIR } else { [Environment]::GetFolderPath(''Desktop'') }',
+        '        $lnk = Join-Path $desk ($m.shortcut.name + ''.lnk'')',
+        '        $s = (New-Object -ComObject WScript.Shell).CreateShortcut($lnk)',
+        '        $s.TargetPath = Join-Path $here $m.shortcut.target',
+        '        $s.WorkingDirectory = $here',
+        '        if ($m.shortcut.icon) { $s.IconLocation = (Join-Path $here $m.shortcut.icon) + '',0'' }',
+        '        $s.Save()',
+        '        Write-Host "Desktop shortcut: $lnk" -ForegroundColor Green',
+        '    } catch {',
+        '        Write-Host "Desktop shortcut not created ($lnk): $($_.Exception.Message)" -ForegroundColor Yellow',
+        '    }',
         '}',
         'exit $rc'
     )
