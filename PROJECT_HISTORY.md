@@ -9674,6 +9674,77 @@ Done the same chat: `ConanExiles/_config/release/release_checklist.py` (stages A
 `KUMM/tools/hooks/release-ritual-gate.mjs` on `gh release create` (wired in `.claude/settings.local.json`), HOUSE_RULES 42 «The ritual is code». First run on
 0.9.1-RC2: 5 TODO (a code commit without «review:» — c27e3a7; every Krinik mod's version still RC1; the menu line in the UI kit pak; the guide; the README).
 
+## 2026-11-22 23:1x +03:00 — STATUS bonsai trim, part 20: the working block of the chat of 21:22 and the RC4 scope list, moved verbatim
+
+> **THE CHAT OF 21:22 (2026-11-22) — RC4 by the release ritual, in progress.** Done: pack `f16c3e9` (packVersion 0.9.1-RC4, every shipped Krinik mod's
+> version with its change, the launcher 1.1.1 — the launcher changed for #43), pack `495daef` (the RC4 notes rewritten after the clean read, the launcher
+> 1.1.1 notes `draft_0_9_1/github_release_notes_launcher_1_1_1.md`, the guide's «Исправлено в тестовой сборке 0.9.1-RC4», the change notes); README.draft
+> rendered for RC4 with RC3's archive size (re-render after the build: `bash KUMM/.work/rc4/regen_readme.sh`). Done 22:03–22:2x: the UI kit pak with
+> «0.9.1-RC4» (×4, RC3 ×0, file list = RC3's) in `_unpacked`, the whole build deployed (74/74, verify 110 / 0), modinfo written and `--check-krinik` 4/4 (after a
+> `-Deploy -Only <pak mod>` rewrite its modinfo: the raw pak brings the kit's old change note). Judge rounds on the shipped diff: round 1 (6 findings — confirmed
+> and fixed: the archery `FindAllOf` per attack end, kept references by full name in camera / pause / pickup / locomotion; the first-person pass cost MEASURED
+> live 22:10: a view switch ≈ 3 ms in one frame, a weapon swap two passes ≈ 1 ms each), round 2 (fixed: per-frame name checks → `RegisterLoadMapPreHook`
+> reset, seen firing 22:15 ×2; a weapon swap walks only the attached items; archery locals in `do … end`; pickup single checks), round 3 (fixed 22:3x: the bow
+> by its class chain — `FindAllOf` matched subclasses; `item_roots` takes every attached actor; the loop stops when the controller gets a new hero; the dead
+> `fp_pc_name` removed; the mod notes in step), round 4 (3 minor, declined). **COMMITTED 22:5x — pack `18532f3`** (pushed; review notes on b42090f 3b5e1e6 d8c42ed
+> 290e6f0 1d9cff5 b0aa7a9 pushed; `release_checklist.py`: 0 TODO, 12 MANUAL, 7 OK — its «play report OK» only sees the skeleton FILE name, the real gate is
+> `check_play_report.py`). Seen in game 22:47 on `18532f3`'s code: a weapon swap in first person walks 7–9 nodes (was 25–27), «скрыто 2» / «возвращено 2» /
+> «в руке 1» hold. The game folder = `18532f3` (camera, archery, UI, locomotion deployed; `--check-krinik` 4/4). The owner's feature for LATER: the first-person
+> bow stance higher, the torso leaning when looking down — issue #52 (its text was filed with the portrait loaded > 1 h earlier; the portrait re-check owed).
+>
+> **🎯 FIRST in the next chat — THE RC4 SCOPE (`[OWNER]` 2026-11-22 15:07 «чиним остальное все это в следующем чате...двух, и это будет скоуп на RC4»):** fix all
+> six, then build RC4 by the release ritual (`release_checklist.py`, HOUSE_RULES 42). **`[OWNER]` 15:16: «RC4 уже будем собирать под новый лаунчер, который
+> обновляется по файлам»** — the release is built for the launcher that updates by changed files (issue #45, closed 2026-11-21; launcher 1.1.0): read how
+> that launcher's file update consumes a release (its feed / manifest) before the RC4 build and make the RC4 assets match it.
+> 1. 🟡 **2026-11-22 20:1x: the dungeon (the Dregs, IN and OUT — R21e), the admin teleport (R21d) and a teleport with the waystone map open (R21a-sim) pass on
+>    `b7d984a`; owed only the REAL waystone travel between two placed waystones (placing needs the building mode with real input); issue #21 commented, open.
+>    The Wine Cellar is gated by a world event (`RequiredEventTag`) — use the Dregs (`BP_TriggerTeleport_InFromEntrance` / `…_OutFromEntrance`). Stand trap: an
+>    admin teleport INTO a teleport trigger makes two teleports in one frame and a loading screen stuck at 99 % (not a defect).**
+> 2. 🟡 **2026-11-22 20:2x–20:4x: #30 items 1–2 answered, not defects** — the draw holds in a sprint by REAL input (the «drops by itself» rows came from the
+>    remote, which cannot hold RMB); «RMB does not draw» = the bow on its sheath (a punch, vanilla) or `NotAmmo`; S9 answered; issue #30 commented, items 1–2
+>    ticked. Open (cosmetic): the camera jerk at the stamina's end, the sprint-jump view (FOV 102.1 → 107.5 kept after the landing — read KrinikConanArchery's
+>    sprint-view FOV first; bug 93).
+> 3. 🟡 2026-11-22 20:4x: M1 (the hub on «Карта» = tab index 7, a loading screen over it) pass — nothing stuck after the load; M2 (the map + a dialogue) owed;
+>    since 2026-11-20 the map is the game's own page (our duplicate copy — the class of the 11-07 stuck map — is gone).
+> 4. 🔲 2026-11-22 20:5x: **planned — `plans/61_conan_esc_over_mod_windows.md`** (no Lua path exists: recon of WindowRoot / GUIModule / EscapeStackNode, bug 108
+>    point 7); first the inventory of the 13 windows, then spike A (our kit «Esc catcher» taking focus) on EAA.
+> 5. ✅ **The KrinikConanArchery Lua error at the heroine's death** — fixed in `b42090f`, A49 / A49n pass 2026-11-22 19:55–19:59, issue #49 closed.
+> 6. **#43 — the launcher's feedback-instructions window is slow** (`bugs/110_*`): measure it at 300 % (open, first frame, a press), fix, retest.
+> ✅ Issues #13 and #4 commented 2026-11-22 21:1x (the 25dff5d fix as it is now; #13 corrected the morning «neck bone above 70°»), #21 commented 20:2x; #48 closes after
+> the RC4 retest; ✅ `-Verify` clean again since pack `5d844b3` (KrinikConanMusic `"enabled": false` — unfinished, not installed; 110 present, 0 missing);
+> DW1 of the damage window (real hits); ✅ the owner's errand — `D:\PATH.txt` and `D:\settings.txt` are gone (checked 2026-11-22 20:5x, `ls`: no such file).
+> Markers owed (comment-only pack commits): the camera's first-person section `[NOT-TESTED]` → `[TESTED: 2026-11-22 · TC_conan_fp_shadow_always_owner_no_see S1–S7 ·
+> testcases/reports/2026-11-22_conan-fp-shadow-always-owner-no-see.md]`; the pause's loading-screen block → `[TESTED: … R21d, N1 …]`; its comment «держит САМЫЙ
+> НОВЫЙ … один IsInViewport» → «до трёх последних» (the closing judge 15:14).
+> Stand helpers of this chat: `KUMM/.work/fp_nosee/shot.sh` (pitch / yaw / 4K frame), `KUMM/.work/tmp/weapons_now.lua`, `fp_nosee_try.lua`, `find_rows.lua` (item search).
+>
+
+## 2026-11-22 23:1x +03:00 — STATUS bonsai trim, part 19: the chat of 18:55, moved verbatim; the owner's words of the chat of 21:22
+
+**The owner's words of the chat of 21:22 (verbatim):** 22:19 «я играю, не мешаю тебе? в нфс играю» (the agent's real-input series had pulled Conan in front, EXP-0615) · 22:34 «комп твой» · 22:37 «давай лук в нейтральной позе внизу поднимем выше. Можно это сделать?» · «сейчас очень вниз опущенным держит» · «только для стойки от первого лица» · «и когда голову книз опускаешь - героиня и туловиде должна наклонять, чтобы и руки с луком немного вниз уходили» · 22:39 «на потом эта фича» (issue #52) · «сейчас работаем над RC4 с пачкой новых фиксов» · 22:56 «час не нужно, собираем так, так как мы пока хотфиксингом занимается» (the play gate waived, `KUMM/.work/rc4/waiver.txt`) · 23:07 «публикуем релиз РЦ4» · 23:08 «какие ещё баги знаешь и расценицаешь их критическими для комфортной игры ?»
+
+> **THE CHAT OF 18:55 (2026-11-22) — bug 118 SOLVED: not a defect of the build.** The seven UE4SS crashes with EAA over the hub were the agent's OWN Esc
+> probe `.work/tmp/esc_listen.lua` (`ListenForInputAction` with a Lua-table delegate) sent by the remote: one stack hash in all seven, the stack's Lua shape
+> («`pcall` → `return dofile` → `pcall` → UFunction») and the probe's command in every minidump; reproduced on demand twice (19:28 all mods on, 19:31 camera
+> OFF). Without the probe: 10 min + 15 EAA reopen cycles clean. Tools: `ConanExiles/_config/crash-forensics.py` (stack hash + the remote commands per crash
+> folder — run it FIRST after any crash in our run); the remote refuses a table delegate (guard `no-table-delegate`, G1–G3 pass 19:53). EXP-0613. Bug 108's E0b
+> path (Lua `ListenForInputAction`) is dead — the Esc of mod windows is the native pak fix. **Issue #50 closed** (not planned — not a build defect).
+> Also: **#49 closed** — A49 (death with the bow in first person) and A49n (empty hands) pass; **#51 closed** — KrinikConanLocomotion wrote the dead pawn's
+> movement component (two `[Error] … nullptr` lines per death), fixed in pack `d8c42ed`, L2 pass 19:59. The owner's save restored from
+> `KUMM/.work/bug118/save_before_death` after every run that changed it (integrity ok each time).
+> **The /dayloop of 20:03 (the owner: «работай автономно в дневном цикле, фиксим баги, делаем сборку лучше») — done:** bug 79 R21e the Dregs dungeon IN and
+> OUT + R21a-sim (the waystone map open) pass, issue #21 commented (open for the REAL waystone travel only); #30 items 1–2 answered (the remote cannot hold
+> RMB; a sheathed bow punches; `NotAmmo`), ticked and commented; M1 the map over a loading screen passes (hub tab «Карта» = index 7); `-Verify` clean
+> (KrinikConanMusic disabled, pack `5d844b3`); plan 61 for Esc over mod windows + its step 1 inventory (3 close, LBPR closes the hub, 9 ignore Esc); the
+> remote's guards `no-table-delegate` (widened after the judge) and `no-nil-interactable` (my `InteractableActivate(nil)` crashed the game on a dialogue NPC
+> at 20:57 — crash-forensics named it at once), all live. Packs `d8c42ed` `5d844b3` `1d9cff5` `290e6f0`.
+> Late: bug 118 DONE; KAIF #202; the stand probes in the pack `_config/` (`b0aa7a9`); #13 / #4 commented; the #30 sprint view = the game; bonsai 17–18.
+> **NEXT (in order):** (1) **build RC4** by the release ritual (`release_checklist.py`, HOUSE_RULES 42) for the file-updating launcher — a fresh chat: the
+> ritual is long; publication waits for the owner's word; (2) plan 61 step 2 — spike A (our kit «Esc catcher») on EAA; (3) the real waystone travel (R21a,
+> real input for the placement); M2 (start the talk by a REAL E); #30 camera: the sprint jump keeps the view; the sprint view sticking after a sprint is the GAME (control 21:06 without KrinikConanArchery) — the owner decides whether he wants it changed (bug 93); #43's first open
+> (≈ 100 ms; the plaque is laid out only when shown — the owner's eye on RC4 decides).
+>
+
 ## 2026-11-22 21:1x +03:00 — STATUS bonsai trim, part 17: the chat of 15:18 (part 1) and the closed block of ≈15:1x, moved verbatim
 
 > **THE CHAT OF 15:18 (2026-11-22) — the RC4 scope, part 1 (pack `b42090f`).** (a) bug 118 — solved in the chat of 18:55 above (the camera's registry stays as

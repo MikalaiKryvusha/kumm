@@ -116,8 +116,9 @@ equipped bow from the hero with no input (21:05, seen in the archery log as a no
 ## The stuck string check finds the bow on the hero (judge round on RC4, 2026-11-22 21:5x)
 
 `settle_if_stuck` (the end-of-attack hook, 100 ms later) used to run `FindAllOf("BP_bow_2h_C")` over the whole object array after EVERY attack end, melee swings
-included, once the bow had been aimed in the session. Now `bow_string_of` reads the hero's own attached actors (`GetAttachedActors(arr, true, false)`, class name
-`BP_bow_2h_C`), and a pawn that is not locally controlled is skipped (co-op). HOUSE_RULES 41. Case B1 of `testcases/reports/2026-11-02_conan-arrow-choice-and-bow-stance.md`
+included, once the bow had been aimed in the session. Now `bow_string_of` reads the hero's own attached actors (`GetAttachedActors(arr, true, false)`) and takes the
+one whose class chain holds `BP_bow_2h_C` (`GetSuperStruct`, as `FindAllOf` matched subclasses — a mod's bow derived from it counts); other players' heroes are still
+settled (the notify fixes this machine's copy). HOUSE_RULES 41. Case B1 of `testcases/reports/2026-11-02_conan-arrow-choice-and-bow-stance.md`
 re-runs on RC4.
 
 ## No key binds — bug 85 (2026-11-07 21:3x)

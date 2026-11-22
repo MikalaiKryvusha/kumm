@@ -117,9 +117,13 @@ The registry stays as the cheaper design; the code comment says so. `mute_foreig
 
 The local controller (`local_pc`), the first-person camera (`fp_cam`) and its controller (`fp_pc`) are trusted only while the object at the kept address still has
 the full name recorded at capture (`same_obj(o, name)` in `Scripts/main.lua`; `local_pc_name`, `fp_cam_name`, `fp_pc_name`): after a quit to the main menu and a new
-world load the old objects are destroyed and their addresses can hold foreign objects that pass `IsValid()` (EXP-0612). `fp_cam_tick` pays two `GetFullName` a frame,
-first person only. Open: the cost of `fp_pass` on a weapon swap in first person (one walk at once, two at 0.8 s / 1.6 s; the record walk logs «23 nodes, 2 ms» at the
-1 ms clock step) — to measure in game before RC4 ships (finding 2 of the same round).
+world load the old objects are destroyed and their addresses can hold foreign objects that pass `IsValid()` (EXP-0612). The per-frame `fp_cam_tick` checks only
+`IsValid()`: a `RegisterLoadMapPreHook` callback (after `player_hero`) forgets the first-person references and the local controller at every map load (seen firing
+2026-11-22 22:15 on the menu load and the world load; the world → menu exit not yet seen), and a controller that got a NEW `BasePlayerChar_C` (a respawn in third
+person) stops the loop. **The first-person pass cost, measured 2026-11-22 22:10 (log timestamps):** a view switch walks the whole tree three times in one event
+(≈ 3 ms); a weapon swap in first person walked it twice (≈ 1 ms each) plus two re-passes — since round 2 a weapon change and its re-passes walk only the actors
+attached to the hero (`item_roots`, every attached actor's `RootComponent`; «просмотрено N» small) — the run in game is owed (the line prints only when a pass changed
+something). The view switch's three walks stay as they were (a rare deliberate action).
 
 ## Checks
 
