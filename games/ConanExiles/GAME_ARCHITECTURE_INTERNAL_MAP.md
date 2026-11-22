@@ -1173,6 +1173,8 @@ nearest ≈70 m — a gathering-resource ACTOR, not foliage; the vulture nests (
   16 AttributeEncumbrance · 17 AttributeMight · 18 AttributeAccuracy · 19 AttributeAthleticism · 20 AttributeMetabolism · 21 AttributeResilience · 22 ItemContainerSize ·
   23 HealthBarStyle · 24 EnduranceCurrent · 25 EnduranceMax · 26 StaggerResistance · 27 AttributeLeadership · 28 AttributeSummoning · 29 AttributeAbberation ·
   30 AttributeScourge · 31 IdleEmote · 32 AutomationWorkorderLimit · 33 MinimumHealthCap.
+  **Setting a stat (2026-11-22 09:43, the remote, after `exec MakeMeAdmin`):** `CheatManager:SetStat(stat: Str, Value: Float)` (`/Script/ConanSandbox.ConanCheatManager`) takes these
+  enum NAMES — `SetStat('HealthCurrent', 236.0)` healed 56 → 236; the console `exec SetStat Health 236` answered «ok» and changed nothing.
 - **`ECharFloatStatID`** (`GetFloatStat(id, 0)`): 0 ThrallCraftingSpeed · 1 ThrallCraftingCost · 2 ThrallCraftingFuel · 3 ThrallEntertainerPotency · 4 DamageModifierMelee ·
   5 DamageModifierRanged · 6 NaturalArmor · 7 ThrallCorruptionCleansePotency · 8 ThrallCorruptionCleanseLimit · 9 Armor · 10 EncumbranceWeight · 11 KilledXPModifier ·
   12 CurrentEncumbrance · 13 TemperatureModification · 14 PenisScaleModifier · 15 KnockbackFragilityDR · 16 KnockbackThresholdDR · 17 BuildingDamageMultiplier ·

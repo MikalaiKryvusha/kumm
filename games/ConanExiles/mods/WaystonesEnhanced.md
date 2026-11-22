@@ -21,6 +21,13 @@
   and `WSE_ServerSettingsWindow`; the game map lists its map module `WSEMap` (GAME_ARCHITECTURE_INTERNAL_MAP, the module list). The waystone's placeable
   blueprint is loaded on demand — `FindAllOf('BlueprintGeneratedClass')` found none with the mod's path.
 - `retoc to-legacy` of the mod's container alone fails («Extracted 0 (18 failed)») — it needs the game's `global.utoc` beside it.
+- **Read 2026-11-22 09:3x** (`_tools/retoc-5.8/retoc.exe to-legacy --version UE5_7 --no-shaders <view> <out>`, the view = the game's `global.utoc/.ucas` + the
+  mod's `Saved/ExtractedMods/WaystonesEnhanced-Windows.{pak,ucas,utoc}` copied into one folder: «Extracted 18 (0 failed)»): the item, the feat and the recipe
+  share the row **7770001** (`WSE_ItemTable`, `WSE_FeatTable` — category Survival, `WSE_RecipesTable`); the placeable is `WSE_Waystone_C`
+  (`/Game/Mods/WaystonesEnhanced/Items/WSE_Waystone`, a child of `BP_Master_Placeables`, with `WSE_ArrivalPoint` and `WSE_ArrivalBuildingBlocker_C`);
+  `WSE_Controller_C` (the mod controller) keeps the registry (`WSE_Register` / `WSE_Unregister`, `WSE_MaxWaystonesPerOwner`, `WSE_TravelCooldownSeconds`);
+  `WSE_PlayerComponent_C` runs the travel: `Server_WSE_SubmitSelection` → `WSE_ValidateArrival` → the game's own **`TeleportPlayerServer`**; the map window
+  `WSE_NativeMapWindow` waits for `EventTeleportDone`. So the travel shows the same in-game loading screen as the admin teleport of bug 79.
 
 ## Our edits
 

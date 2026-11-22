@@ -125,7 +125,7 @@ R6 (#6 retest): god off 4 m from «Киммерийский бронник I», 
 SAME mistake as G2 of 2026-11-20 (kappas, reads every 4 s). A camp humanoid deals ≈ 30 a second to a level-25 heroine in light armour. Lesson: a damage
 window is closed by the GAME, not by my reads — one remote call that switches god off AND starts a game-thread loop which switches god on the moment health
 falls under half; the frames only watch. A second repeat of a lesson is a guard owed, not a third note.
-mechanized: none yet — OWED: a `damage-window.lua` stand tool (god off → `LoopInGameThreadWithDelay` 100 ms → god on when `GetIntStat(1,0)` < half of `GetIntStat(0,0)`) before the next damage case (STATUS «FIRST», the stand lessons).
+mechanized: `ConanExiles/_config/damage-window.lua` (2026-11-22: god off → `LoopAsync` 100 ms + `ExecuteInGameThread` → god on under half of max health, a time-out, a refusal at or under the floor; DW0 pass, DW1 by real hits owed — `testcases/reports/2026-11-22_conan-damage-window-and-waystone-recon.md`).
 
 ### EXP-0602 · 2026-11-21 · ❌ · #launcher #powershell #encoding #installer #conan #s3
 class: shell-lied
