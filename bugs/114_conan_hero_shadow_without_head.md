@@ -55,6 +55,12 @@ Fixing: this session.
 - `[AI]` Severity S3 (cosmetic by HOUSE_RULES 38); queued after the critical bugs 112 and 113.
 - `[AI]` 2026-11-22: the neck thresholds 70° / 66° (measured entry ≈ 76°); above 70° the head's shadow is lost while the camera looks at the sky.
 - `[AI]` 2026-11-22: the hidden shadow, not `OwnerNoSee` (the latter removed the shadow as well — remote 10:0x).
+- **Superseded 2026-11-22 13:37 +03:00 by the owner's words 13:10–13:11** (verbatim: «Это не решение, а костыль. Тень должна быть всегда! Её может не только солнце отбрасывать.
+  Придумай как это сделать!» · «игра мультиплеерная, так что для других игроков лук и все части тела должны быть видны всегда» · «для самого игрока от первого
+  лица можно делать его голову прозрачной, но чтобы отбрасывала тень. и лук на спине можно делать прозрачным - чтобы не мешал обзору, но чтобы отбрасывал тень»):
+  the neck-bone hide above 70° is removed — the first-person camera moves forward along the view from 55° (10 cm at 75°+) instead; the sheathed weapon gets
+  `OwnerNoSee` + `CastHiddenShadow`. **Correction:** the 10:0x probe set `OwnerNoSee` + `CastShadow` only; with `CastHiddenShadow` the shadow stays (13:2x,
+  `KUMM/.work/fp_nosee/sheet_c.jpg`) — the line above was wider than its observation. Cases `testcases/TC_conan_fp_shadow_always_owner_no_see_2026-11-22.md`.
 
 ## Links
 

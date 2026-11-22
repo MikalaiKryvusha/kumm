@@ -23,7 +23,9 @@ The game draws the sheathed weapon for its owner's first-person camera; the came
 ## Fix
 
 KrinikConanCamera, first-person section: a mesh on or under a `sheath*` socket is made invisible with `CastHiddenShadow` (its shadow stays; `OwnerNoSee`
-removed the shadow too — tried live 10:0x); only what the mod hid gets visibility back — when the weapon is drawn into the hands, and when the view leaves first
+removed the shadow too — tried live 10:0x **with `CastShadow` only; corrected 2026-11-22 13:37 +03:00: `OwnerNoSee` + `CastHiddenShadow` keeps the shadow (13:2x,
+`KUMM/.work/fp_nosee/sheet_c.jpg`), and since the owner's 13:11 word (multiplayer: the bow visible to other players always) the mod uses that pair instead of
+`SetVisibility(false)` — `testcases/TC_conan_fp_shadow_always_owner_no_see_2026-11-22.md`**); only what the mod hid gets visibility back — when the weapon is drawn into the hands, and when the view leaves first
 person, the idle vanity camera included (`EventOnThirdPersonChange`, EXP-0607). Re-passes 0.8 s and 1.6 s after `OnWeaponUnequip`: the bow reaches the back
 0.3–1 s after the event. Notes: `games/ConanExiles/mods/KrinikConanCamera.md`.
 

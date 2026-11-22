@@ -68,18 +68,32 @@ a first-person switch right after loading lit 0 (19:59) — since 20:04 a record
 ## The head's shadow and the sheathed weapon in first person (bug 114 · issues #13 and #4, 2026-11-22)
 
 The owner 2026-11-22 09:40: the head's shadow in first person, and the bow on the back in the view with an axe in hand. Both live in the first-person section
-of `Scripts/main.lua` (`fp_pass`, `sync_view`, `fp_neck_tick`, `fp_weapon_changed`, the hooks in `install_fp_neck_hooks`).
+of `Scripts/main.lua` (`fp_pass`, `sync_view`, `fp_cam_tick`, `fp_weapon_changed`, the hooks in `install_fp_hooks`).
 - **What the view is — asked of the game:** `not GetIsInThirdPerson()` at `EventOnThirdPersonChange`. The idle vanity camera (`SwitchToVanityCamera`, ≈ 4 min
   without input) goes to third person via `EventOnThirdPersonChange` / `HandleThirdPersonChange` / `SetThirdPerson` and never calls `SwitchToThirdPersonCamera`
   (remote 2026-11-22 10:1x) — a flag kept by the Switch* hooks alone left the bow invisible and the old code left the heroine headless in that view.
+- **The owner's word 2026-11-22 13:10–13:11 (verbatim in `bugs/114_*`):** the head's shadow must exist ALWAYS, from any light; the game is multiplayer — other
+  players see the bow and every body part always; for the player himself the head and the bow on the back may be invisible but cast a shadow.
 - **The head:** the game hides the head and the hair in first person (`SetVisibility(false)` inside `SwitchToFirstPersonCamera`); those meshes get
-  `CastHiddenShadow` (only if they had a shadow in the third-person record). The `b_neck_1` bone is hidden only while the view pitch is above 70° and shown below
-  66° (the camera enters the neck from ≈ 76°: 74° sky, 78° skin with the bone open), checked once per frame by the hold loop, first person only, reading the
-  controller's `ControlRotation` property (1.5 µs; `GetControlRotation()` costs 17 µs). The check's whole body costs 3.5 µs a frame (2000 runs in a batch); the
-  mod's minute line sums 1 ms clock steps and over-reads it (160 ms a minute) — an estimate only.
-- **The sheathed weapon:** a mesh on or under a `sheath*` socket (`sheath_bow`) is made invisible with a hidden shadow; only what the mod hid gets visibility back
-  — drawn into the hands, or out of first person. `OwnerNoSee` was tried first and removes the shadow too in this game. Re-passes 0.8 s and 1.6 s after
-  `OnWeaponUnequip` (the bow reaches the back 0.3–1 s later), timed by the per-frame loop.
+  `CastHiddenShadow` (only if they had a shadow in the third-person record). **No bone is hidden any more** (until 13:3x `b_neck_1` was hidden above 70° — it
+  collapsed the head and hair with their shadow).
+- **The neck and the armour collar (since 2026-11-22 13:3x):** with no armour the open neck never enters the view at 74–85°; a chest piece's collar does
+  (52442 at 78–85°). The first-person camera `AdjustableCamera` (child of the spring arm `FirstPersonCameraArm`, relative location 0 0 0) moves forward along its
+  X with the pitch: 0 below 55°, linear to 10 cm at 75° (`CAM_PUSH_FROM`, `CAM_PUSH_FULL`, `CAM_PUSH_CM`); 5 cm already clears 52442. `fp_cam_tick` in the
+  per-frame hold loop, first person only: the controller's `ControlRotation` and the camera's `RelativeLocation` read (properties), a write only on a
+  difference over 0.5 cm; the pawn of the controller compared by address (a corpse's camera is left alone); reset to 0 out of first person and for a new hero.
+  Rejected: `r.SetNearClipPlane` 20+ cuts the hand in the view.
+- **The sheathed weapon (since 2026-11-22 13:3x):** a VISIBLE mesh on or under a `sheath*` socket (`sheath_bow`) gets `OwnerNoSee` + `CastHiddenShadow` — hidden only
+  from the owner's camera; other players, other views and the shadow keep it. `CastShadow` is lit for it when it had a shadow in the third-person record or is the
+  item's main mesh (the actor's root). A mesh the game hides itself (`VisibleSheathedWeapons` = None: not `IsVisible()`, or the actor `bHidden`) is not touched,
+  and our flags come off if the game hides it later. The pair OwnerNoSee + CastHiddenShadow is the mod's marker: after a mod reload it is adopted on a sheath and
+  cleared off one. Cleared when drawn into the hand and on every exit of the own hero from first person. **Correction:** the 10:0x probe set `OwnerNoSee` +
+  `CastShadow` only and lost the shadow — that line here said «removes the shadow too in this game»; with `CastHiddenShadow` the shadow stays (13:2x).
+  Re-passes 0.8 s and 1.6 s after `OnWeaponUnequip` (the bow reaches the back 0.3–1 s later), timed by the per-frame loop.
+- **The item in hand:** the game turns `CastShadow` off on a held weapon in first person; the item's main mesh (owner `IsA` `/Script/ConanSandbox.InventoryItemBase`,
+  the actor's root component) gets it back; child meshes (torch fire) stay as they are.
+- **Own hero only:** `player_hero()` takes the pawn of the controller whose `IsLocalController()` is true (a listen-server host has every player's controller;
+  `FindFirstOf` could return another's); the search runs at most once a second until found, one log line on failure.
 - **Respawn straight into first person:** no third-person record exists, the mesh tree is unbuilt at creation — the pass runs again at the HUD's birth + 2 s,
   and without a record the hero's own skinned meshes count as body (their shadow back, the head's hidden shadow).
 - Cases and frames: `testcases/TC_conan_fp_head_shadow_sheathed_bow_2026-11-22.md`; the before/after frames in `KUMM/.work/fp_bow_back/` and `KUMM/.work/fp_v2/`.

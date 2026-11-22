@@ -57,6 +57,16 @@ Frames: `KUMM/.work/fp_v2/wc_trigger.jpg`. Case R21b of `testcases/TC_conan_load
    path itself still engages (the teleport's wrong 0.03 shows it). A log spam remains: «взведено …» every poll while a loading screen shows.
 3. Owed before DONE: the judge round on the diff, the admin-teleport path, the inventory neighbour, the waystone case R21a.
 
+## The admin-teleport cause found (2026-11-22 13:17 +03:00, probe R21c, the RC3 build with pack 3b5e1e6, background game)
+
+`KUMM/.work/tmp/tp_widget_probe.lua` sent `TeleportPlayer -186230 107319 -9500` (out of the Wine Cellar) and sampled every 100 ms
+(`KUMM/.work/tmp/tp_widget_probe.txt`): at +175 ms `IsFullscreenGUIActive` true and `W_IngameLoadingScreen_C` already IN the viewport — but TWO live
+instances exist (`ld=1/2`: the one of the previous load, still valid, not in the viewport, and the new one). +321…510 ms `tdil 0.0300`; at +495 ms the old
+instance is gone (`ld=1/1`) and at +615 ms the time is back to 1.0. **Cause:** `loading_screen_up()` caches the FIRST live instance and re-searches only when
+it dies — when that is the stale instance of an earlier load, `IsInViewport()` answers false while the real loading screen shows, and the pause applies until
+the stale one is collected. **Fix owed:** a cached instance that is not in the viewport is not proof — look for ANY live instance in the viewport (2 objects)
+while the full-screen flag is on; then R21c / R21d again. (The probe's duplicate sample lines are the probe's own double schedule, not the game.)
+
 ## Respawn case (2026-11-07 07:41, background game, pack `374b90d`)
 
 Death by `pult.sh "exec suicide"` → the respawn selection → the respawn by itself 8 s later (no bedroll) → «взведено: герой в мире» — no «полноэкранный интерфейс: ОТКРЫТ»,

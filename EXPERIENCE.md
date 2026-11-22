@@ -91,6 +91,23 @@
 
 ## Entries
 
+### EXP-0611 · 2026-11-22 · ❌→✅ · #conan #camera #first-person #repro #gear
+class: repro-state-not-recorded
+The morning measured «78–85° — the whole frame is neck skin with the bone open» and built a bone hide on it; at 13:2x the same angles with the bow, the axe
+and combat mode showed only sky — the morning heroine wore MEDIUM ARMOUR (HUD «Средняя / 35»), and what filled the frame was the armour around the neck; with a
+chest piece (52442) the collar came back at 78–85° and left with the camera 5 cm forward. Lesson: a measurement that justifies hiding or moving something writes
+down the gear and stance it was taken in (armour, weapon, combat mode), and the fix is checked across them — a defect seen in one outfit is not «the neck».
+none-cheap: one stand line (gear) in the case's Situation column.
+
+### EXP-0610 · 2026-11-22 · ❌→✅ · #conan #ue4ss #shadow #claim #first-person
+class: claim-wider-than-observation
+10:0x the probe set `OwnerNoSee` + `CastShadow` on the sheathed bow, the shadow vanished, and the code comment, the notes, the game map and two bug files
+said «OwnerNoSee removes the shadow too in this game». The engine casts a shadow for an owner-hidden mesh only with `bCastHiddenShadow` — the pair
+`OwnerNoSee` + `CastHiddenShadow` keeps it (13:2x, `KUMM/.work/fp_nosee/sheet_c.jpg`), and it is exactly what multiplayer needs (others see the mesh). Lesson:
+a negative result names the exact flag set tried, and «X does not work in this game» is written only after the documented combination was tried —
+corrected in all five places the same turn.
+none-cheap: the habit; the industry recon (`researches/first-person-body-camera` §4) already named the right pair.
+
 ### EXP-0609 · 2026-11-22 · ❌ · #conan #ue4ss #probe #crash #repeat
 class: wrong-api-assumption
 My throwaway probe `KUMM/.work/tmp/list_teleports.lua` read EVERY property of `BP_TriggerTeleport_C` (`a[pn]` for each name from `ForEachProperty`, each in

@@ -54,6 +54,10 @@ offset). **Hypothesis for bug 98:** the game's first person marks the hero's par
 `FirstPersonPrimitiveType` of every part in both views first.
 **Stand (when the game is mine):** read the head component, whether it holds the neck, every part's `FirstPersonPrimitiveType` and shadow flags in first and third person;
 then owner-no-see + hidden shadow on the head parts with the bone hide off; frames: the ground shadow, looking up, looking down — one HTML page to the owner.
+**Done 2026-11-22 13:1x–13:4x (the owner's words 13:10–13:11, KrinikConanCamera):** every part reads `FirstPersonPrimitiveType` 0 (the game does not use the 5.5
+route); owner-no-see + hidden shadow keeps the sheathed bow's shadow on this engine (no Nanite on the hero); the head stays the game's own invisible-with-hidden-
+shadow; the neck itself never enters the view with no armour — a chest piece's collar does and the camera 5 cm forward along the view clears it (the forum's
+"nudge forward"); a near-clip raise cuts the hand. The bone hide is gone. Frames `KUMM/.work/fp_nosee/`; cases `testcases/TC_conan_fp_shadow_always_owner_no_see_2026-11-22.md`.
 
 ## Sources
 

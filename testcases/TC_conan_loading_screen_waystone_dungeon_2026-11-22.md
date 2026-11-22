@@ -34,6 +34,9 @@ world, the heroine walked into it.
 | R21a | two waystones placed far apart, the heroine at one | travel by the waystone's own map to the other | the loading screen passes; 5 s after the arrival `TimeDilation` 1.0; no «ОТКРЫТ» for the loading screen; the heroine on her feet at the other waystone | not run | |
 | R21b | the heroine 5 m before a dungeon entrance | the heroine walks into the entrance, then out through its exit | the same as R21a, both ways | **fail** (10:53) | Wine Cellar: the door is closed, walking past does nothing; set into the trigger → teleported into the dungeon; «полноэкранный интерфейс: ОТКРЫТ» → «замедление времени 0.03» at 10:53:35.66, read «tdil 0.03 loading true» at 10:53:37, time back to 1.0 at 10:53:37.71 when the screen closed. The loading screen was taken for a menu for ≈ 2 s — bug 79's class on this path; the throttled search in `loading_screen_up()` misses the first poll. The exit not run. **Retest on the fix: pass** 10:57 (v1) and 11:01 (v2): «tdil 1.00 loading true», no «ОТКРЫТ». The admin teleport still slowed (bug 79, «The fix in progress») |
 
+| R21c | the heroine in the open world, god on; the build with pack `3b5e1e6` | `tp_widget_probe.lua` (`KUMM/.work/tmp/`): one remote call sends `TeleportPlayer -253750 18150 3000` and samples every 100 ms for 5 s | the sample list names the widget(s) in the viewport while `IsFullscreenGUIActive` is true; the loading-screen column says whether `W_IngameLoadingScreen_C` is in the viewport then | not run | |
+| R21d | the same, after the fix that follows R21c | the admin teleport by the same probe; then the dungeon entrance as in R21b | no «полноэкранный интерфейс: ОТКРЫТ» for the load; `tdil` 1.0000 in every sample; the heroine lands | not run | |
+
 ## Neighbours (HOUSE_RULES 39)
 
 | # | Neighbour of the change | Short case | Status | Seen |

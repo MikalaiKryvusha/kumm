@@ -775,8 +775,14 @@ mods (guard `check-lua-game-thread.py`). Gameplay keys on the game thread: `/Gam
   weapon change in the hands (a quick-slot press, a sheathe); the hero's input events `InpActEvt_Shortcut<N>_K2Node_InputActionEvent_<M>({KeyName=FName(…)})`
   press a quick slot from Lua (slot 1 = `Shortcut0_…_25`, slot 5 = `Shortcut4_…_21`); pressing the slot of the weapon in hand sheathes it to `sheath_bow`
   (Game.ini `VisibleSheathedWeapons`: 0 All · 1 OnlyMe · 2 None, enum `EVisibleSheathedWeapons`); the sheathed bow reaches its socket 0.3–1 s after
-  `OnWeaponUnequip`; taking another weapon (not a tool) from the bar puts the bow away instead. `OwnerNoSee` on a mesh removes its shadow as well in this game;
-  `SetVisibility(false)` + `SetCastHiddenShadow(true)` keeps the shadow.
+  `OnWeaponUnequip`; taking another weapon (not a tool) from the bar puts the bow away instead. `OwnerNoSee` + `CastShadow` alone removes the mesh's shadow
+  (remote 2026-11-22 10:0x); `OwnerNoSee` + `CastHiddenShadow` keeps it — the mesh is hidden only from the owner's camera, every other view and the shadow keep it
+  (remote 2026-11-22 13:2x, `KUMM/.work/fp_nosee/sheet_c.jpg`; corrected 2026-11-22 13:37 +03:00 — this line said «removes its shadow as well in this game»). `SetVisibility(false)` +
+  `SetCastHiddenShadow(true)` keeps the shadow too, but hides the mesh in every view of this client.
+- **First-person camera (2026-11-22 13:2x).** `AdjustableCamera` is a child of the spring arm `FirstPersonCameraArm`, relative location 0 0 0, at the `b_head`
+  position. With no armour the open neck never enters the view at 74–85° pitch (bow, axe, combat mode); a chest piece's collar does (52442 at 78–85°) and leaves
+  the view with the camera 5 cm forward along its X; `r.SetNearClipPlane` 20+ cuts the hand in the view. Weapons are `BaseWeapon_C` → `InventoryItemBase`; the
+  game turns a held weapon's `CastShadow` off in first person.
 - **Severe Weather night light.** `dc SW_config disable_custom_GI` → `SW_DataCmd_Actor` (string switch) → `SW_ModController` event «SW_config light»(False); the variable `light enabled` (default True). **Corrected 2026-10-29 11:42:** the console `dc SW_config …` does not reach the mod at all (the variable does not change, also as admin) — the 2026-10-26 «disable_custom_GI подан пультом» changed nothing. The event «SW_config light»(Visuals) sets `light enabled` and marks the controller's `PersistenceComponent` dirty (meant for the world save); call it by the remote: `local c=FindFirstOf('SW_ModController_C'); c['SW_config light'](c, false)`. A loop (Delay 1 s) applies the mod light to `Ultra_Dynamic_Sky_BP_C` only while `light enabled`. Night brightness at 23:11, same pose: mod light 21, vanilla 41. The pack ships `light enabled = False` (KRINIK MODIFIED).
 - **Clicks on our own widgets (2026-10-31, plan 36 W37).** `RegisterHook` on `/Script/UMG.UserWidget:OnMouseButtonDown` / `:OnMouseMove` registers
   without an error and never fires (real clicks on an image in the main menu; neither menu overrides those events). What works:
