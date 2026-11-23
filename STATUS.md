@@ -125,6 +125,11 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **THE CHAT OF 11:38 (2026-11-23) — the 0.9.1 readiness triage** (`[OWNER]` 11:38, the task: every open issue — what bothers the player, RC5 or the full
+> 0.9.1): `plans/62_conan_0_9_1_release_readiness.md`. Verdict: no open issue is a confirmed crash, hang, lost save or dead end with no workaround; the two
+> real `critical` ones (#21, #23) need a check, not a fix; proposed RC5 — #16 (uninstall leaves 12.8 GB), #47/#15 («72 из 74»), #43 (plate's first open),
+> #53 (first first-person switch over 1 ms) + my retest sweep of ten «fixed, not retested» issues; then 0.9.1 from the RC5 bytes. Waits for the owner's word.
+>
 > **CHAT CLOSED 2026-11-23 ≈01:4x — v0.9.1-RC4 PUBLISHED, the publication finished** (`[OWNER]` 2026-11-22 23:07 «публикуем релиз РЦ4» · 2026-11-23 00:52
 > «работай автономно до переполнения контекста, выпускай RC4 и затем закрывай чат»). Done: v0.9.1-RC4 (83 assets, Latest) and `launcher-v1.1.1` on GitHub; the
 > owner's working-game launcher updated to 1.1.1 from the real feed (his desktop shortcut opens it); the update RC3 → RC4 through the launcher on the copy passed
