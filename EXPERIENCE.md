@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0619 · 2026-11-23 · ❌ · #conan #ue4ss #lua #performance #measurement #camera
+class: benchmark-lies-about-hook-cost
+The camera's view switch made three walks of the hero's mesh tree (issue #53); merged into one, it still cost 0.67–1.38 ms by a start-of-pass log line in the
+game copy (UE4SS log stamps resolve 0.1 µs, `os.clock` steps 1 ms). A benchmark of the SAME walk with the same reads run from the remote's Lua state
+(`KUMM/.work/rc5/walk_bench.lua`) cost 0.1–0.35 ms, a shadow write 0.02 ms; stopping the mod's garbage collector and replacing full-name strings by addresses
+changed nothing. Lessons: (1) a micro-benchmark from another Lua state does not predict a mod's cost inside its hook — measure in the mod itself, with log
+stamps bracketing the code (one log call ≈ 0.09 ms, an upper bound); (2) `luac -p` of a large mod catches Lua's 200-locals limit of the main chunk
+before the game does — new top-level state goes into one table. The cause of ≈ 1 ms per walk inside the hook is open.
+none-cheap: the bracket probe is `KUMM/.work/rc5/apply_probe.mjs` (game copy only); no guard
+
 ### EXP-0618 · 2026-11-23 · ❌→✅ · #performance #launcher #release-notes #real-world #standing-falsehood
 The RC4 and launcher 1.1.1 notes promised the feedback plate «0.08 → 0.01 s, the first open 0.1 s» — the agent's stand numbers (an off-screen window, the
 owner's 300 % scale, paint spans only). On the owner's real machine the published launcher measured 20–38 ms for a repeated open and 134–390 ms for the first
