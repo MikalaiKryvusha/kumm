@@ -91,6 +91,14 @@
 
 ## Entries
 
+### EXP-0621 · 2026-11-23 · ❌ · #launcher #performance #owner-eye #release-notes #measurement
+The notes of the final 0.9.1 were drafted with the plaque line «готовит табличку заранее» and a number slot before the owner's screen was measured; the A-B on
+his screen then logged the 1.1.2 first open at 19.3 ms (paint 11.9 + toggle 7.4), and the owner, watching, said the first open was slow. The launcher's perf
+spans time our paint calls only; the window's own appearance (composition, the first frame on a 300 % screen) is outside them — the second time a span-based
+plaque number disagreed with his eye (EXP-0618). Lesson: a speed claim about a window goes into player text only after the OWNER saw it fast, or after a
+screen capture of the first open at 60 fps shows it; log spans are a proxy and are said as one. Draft such a line last, never first.
+none-cheap: ask for his look or film the first open before writing the line; no guard
+
 ### EXP-0620 · 2026-11-23 · ❌→✅ · #background #process #windows #bash #kit #stop
 The owner turned RC5 into the final 0.9.1 while the KrinikConanUI kit chain ran (`mkdir … && bash kit_chain.sh > chain.out`, a harness background task).
 TaskStop reported the task stopped, yet the chain went on: at 13:50:15 it started step 04 — the stop killed the harness's outer shell, and the inner

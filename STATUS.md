@@ -139,7 +139,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **CHAT CLOSED 2026-11-23 ≈13:3x — the 0.9.1 readiness triage and the four RC5 fixes, committed and run; RC5 NOT built yet** (`[OWNER]` 11:49
 > «делаем все 4 правки в RC5 сборки и лаунчер 1.1.2»). Done: the triage of 38 open issues (`plans/62_conan_0_9_1_release_readiness.md`); #16 the
 > uninstaller deletes the game's copies of the build's paks (engine `gameCache`, KUMM `a225dfa9`, fixture 78 / 78); #47/#15 the launcher's counter
-> folds the dashes (pack `8572e89`, «2 из 2», control «1 из 2»); #43 the plaque prepared in the idle (pack `8572e89`, the stand's first open 6.4–9.3 ms,
+> folds the dashes (pack `8572e89`, «2 из 2», control «1 из 2»); #43 the plaque prepared in the idle (pack `8572e89`, the stand's first open 6.4–9.3 ms — CORRECTED 2026-11-23 14:27: on the owner's screen the first open of 1.1.2 is still slow, #43 NOT fixed, a known issue of 0.9.1;
 > control 87 ms); #53 one walk per view switch (pack `6651e56`, ≈ 1 ms, accepted 12:44 — one-off actions are outside the 1 ms, `MASTER_PLAN.md`); judge
 > two rounds, no defect; run report `testcases/reports/2026-11-23_conan-rc5-fixes.md`; HOUSE_RULES 14.2 (theses in chat). The blocks of this chat and of
 > the RC4 chat — chronicle, entry «2026-11-23 13:3x — STATUS bonsai trim, part 22».

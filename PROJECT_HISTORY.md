@@ -22,6 +22,12 @@ The owner at 13:51, verbatim: «релиз 0.9.1 полноценный и с ф
 (the parts, the per-file assets, launcher 1.1.2, the guide PDF), the public README of the build updated, the notes in the full RC1 form with every change of
 RC2–RC5 folded in.
 
+At 14:26 the agent ran the plaque A-B (launcher 1.1.1 vs 1.1.2, `KUMM/.work/rc5/ab43.mjs`) on the owner's screen. The owner, verbatim, 14:27: «медленно первое
+открытие плашки инструкции было. Похуй. Заебало! Выпускм как есть.» · «заебал ты гавно делать» — `[OWNER]` 2026-11-23 14:27. The log spans of 1.1.2 said
+19.3 ms for the first open; his eye saw it slow, and the eye wins (EXP-0621). Applied: the plaque left the fixed lists of the notes, the launcher notes and
+the guide and stands as a known issue (pack `9583f39`); issue #43 stays open; the release is built as it is (`make_release.sh` from 14:28) and published on
+GitHub by «Выпускаем как есть»; Nexus waits for his own word.
+
 ## 2026-11-23 13:3x +03:00 — STATUS bonsai trim, part 22: the block of the chat of 11:38 (the readiness triage, the RC5 fixes) and the closed RC4 block of ≈01:4x, moved verbatim at the closure of the chat of 11:38
 
 > **THE CHAT OF 11:38 (2026-11-23) — the 0.9.1 readiness triage** (`[OWNER]` 11:38, the task: every open issue — what bothers the player, RC5 or the full

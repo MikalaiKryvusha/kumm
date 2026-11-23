@@ -35,7 +35,7 @@ Acceptance criteria:
       them and deletes the dropped paks' copies (also over a pre-RC5 journal); fixture stand 78 / 78 (report `testcases/reports/2026-11-23_conan-rc5-fixes.md`)
 - [x] #47 — the launcher folds dashes / quotes / NBSP on both sides of the name match; the stand's ModB is «ModB — dashed»: 1.1.2 «2 из 2», 1.1.1 «1 из 2»;
       closing #15 as its duplicate is owed with the RC5 retest
-- [x] #43 — the plaque prepared in the idle (and again after a new window picture, the plate, the language) with the window's picture baked in: the stand's
+- [ ] #43 — CORRECTED 2026-11-23 14:27: the owner saw the first open of 1.1.2 still slow on his screen, so this is NOT fixed (a known issue of 0.9.1; EXP-0621). Was: the plaque prepared in the idle (and again after a new window picture, the plate, the language) with the window's picture baked in: the stand's
       first open 8.4–9.3 ms, 0 face rebuilds (1.1.1: 87.2 ms); the owner's screen (`.work/rc4/retest43.mjs` on 1.1.2) is owed after the build
 - [x] #53 — one walk per switch in both directions (K1–K8 pass); the switch costs ≈ 1 ms (0.67–1.38, one 3.06 spike) instead of ≈ 3–4.5 ms; accepted:
       `[OWNER]` 2026-11-23 12:44 — a one-off action is outside the 1 ms, what happens often in play is inside it (`MASTER_PLAN.md`)
