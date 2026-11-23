@@ -125,7 +125,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
-> **THE CHAT OF 13:34 (2026-11-23) — NOW: the FINAL release 0.9.1 instead of RC5, then the work moves to 1.0.0; no more 0.9.1 updates** (`[OWNER]` 13:47 ·
+> **CHAT CLOSED 2026-11-23 ≈16:3x (the owner 16:28 «закрывай чат») — the FINAL release 0.9.1 PUBLISHED; the work moves to 1.0.0; no more 0.9.1 updates** (`[OWNER]` 13:47 ·
 > 13:48 · the full release with the parts, launcher 1.1.2, the updated guide and the README, the notes in the RC1 form with every change · 13:51; chronicle
 > entry of that moment). Done: pack `345c905` — packVersion and every shipped Krinik mod at 0.9.1 (`KUMM/.work/rc5/bump_final.mjs`), the launcher 1.1.2
 > (`2808b06`); the texts committed (pack `3d9f478`, `9583f39`: the full notes, the launcher 1.1.2 notes, the guide, the README template; voice-lint 0, the
@@ -141,27 +141,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > the «fixed, not retested» row), #43 the plaque's first open, the known issues of 0.9.1. Open with the owner: Nexus for 0.9.1 (his word; the page's e-mail
 > BBCode #17 first), the `critical` label of #30.
 >
-> **CHAT CLOSED 2026-11-23 ≈13:3x — the 0.9.1 readiness triage and the four RC5 fixes, committed and run; RC5 NOT built yet** (`[OWNER]` 11:49
-> «делаем все 4 правки в RC5 сборки и лаунчер 1.1.2»). Done: the triage of 38 open issues (`plans/62_conan_0_9_1_release_readiness.md`); #16 the
-> uninstaller deletes the game's copies of the build's paks (engine `gameCache`, KUMM `a225dfa9`, fixture 78 / 78); #47/#15 the launcher's counter
-> folds the dashes (pack `8572e89`, «2 из 2», control «1 из 2»); #43 the plaque prepared in the idle (pack `8572e89`, the stand's first open 6.4–9.3 ms — CORRECTED 2026-11-23 14:27: on the owner's screen the first open of 1.1.2 is still slow, #43 NOT fixed, a known issue of 0.9.1;
-> control 87 ms); #53 one walk per view switch (pack `6651e56`, ≈ 1 ms, accepted 12:44 — one-off actions are outside the 1 ms, `MASTER_PLAN.md`); judge
-> two rounds, no defect; run report `testcases/reports/2026-11-23_conan-rc5-fixes.md`; HOUSE_RULES 14.2 (theses in chat). The blocks of this chat and of
-> the RC4 chat — chronicle, entry «2026-11-23 13:3x — STATUS bonsai trim, part 22».
-> **FIRST in the next chat — the RC5 release (the owner 13:25 confirmed this order):**
-> 1. The release ritual for 0.9.1-RC5 + launcher 1.1.2: `python -I -X utf8 ConanExiles/_config/release/release_checklist.py` (13:2x on the RC4 state: 0 TODO,
->    13 MANUAL — the judge notes of `8572e89` `6651e56` `b30cee1` added); bump every Krinik mod and the menu line to 0.9.1-RC5, the launcher to 1.1.2
->    (`build-docs.py`); the notes RU/EN by the portrait (an RC: only its changes — #16, #47/#15, #43, #53 — plus a link to RC4); the guide with the
->    corrected plate line and its PDF; `make_release.sh` into an empty dir. The untracked `docs/guide/Krinik-Conan-3.1.1-guide.pdf` in the pack — find
->    what made it before the build.
-> 2. The update RC4 → RC5 through the launcher on `KUMM/.work/rc1_install/Conan_311` (holds RC4): `Saved/ExtractedMods` kept on the update, then the
->    uninstaller removes the build's copies (#16 on the real game); the counter «74 из 74» (#47).
-> 3. `node .work/rc4/retest43.mjs` on the owner's screen with launcher 1.1.2 (#43; the screen may be in Parsec's mode — re-probe, HOUSE_RULES dossier).
-> 4. The RC5 retest sweep (plan 62): the ten «fixed, not retested» issues (#3 #22 #29 #31 #32 #34 #36 #38 #39 #40), #21 the real waystone travel, #23 the
->    wider hunt; close #15 as #47's duplicate; comment the fixed issues.
-> 5. Still unanswered by the owner: the `critical` label of #30 (bow sprint) and #43 (launcher). Publication of RC5 / the full 0.9.1 — only by his word.
-> 6. The working game holds the RC4 mods + the pack's new camera `main.lua` (god off in the save); `KUMM/.work/rc5/` holds the stand dirs, launcher builds
->    and frames of this chat — remove by `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs D:/work/ai_sandbox/KUMM/.work/rc5` after the RC5 release.
+> **FIRST in the next chat:**
+> 1. The 1.0.0 work (`MASTER_PLAN.md`, plan 62's «1.0.0» verdicts): the retest sweep by the player's path — #21 the real waystone travel, #23 the wider hunt,
+>    the «fixed, not retested» row (#3 #22 #29 #31 #32 #34 #36 #38 #39 #40); #43 the plaque's first open — judged by the owner's eye or a 60 fps capture of the
+>    first open, never by the log spans (EXP-0621); the known issues of 0.9.1 (the notes' list). Plan 1.0.0 by `/plan-epic` when the owner names its scope.
+> 2. With the owner: Nexus for 0.9.1 (only by his word; issue #17, the page's e-mail as raw BBCode, is fixed first — `build_nexus_description.py` lines 177, 183,
+>    `tools/nexus-desc.mjs`); the `critical` label of #30.
+> 3. The working game `D:/Games/Conan Exiles 3.1.1` holds the dev deploy of 0.9.1; the test copy `KUMM/.work/rc1_install/Conan_311` is the clean 3.1.1 plus the
+>    bundle folders RC3, RC4 and 0.9.1 (no build installed); `KUMM/.work/rc5/` holds this chat's scripts and logs — remove by
+>    `node D:/work/ai_sandbox/ConanExiles/_config/rm-tree.mjs D:/work/ai_sandbox/KUMM/.work/rc5` once the 1.0.0 work no longer reads them.
+>
+> The block «CHAT CLOSED 2026-11-23 ≈13:3x» (the RC5 triage and fixes, its FIRST list) — chronicle, entry «2026-11-23 16:3x — STATUS bonsai trim, part 23»; its open items are carried in the block above (the retest sweep, the `critical` label of #30).
 >
 > The block «THE CHAT OF 18:55 (2026-11-22)» — chronicle, entry «2026-11-22 23:1x — STATUS bonsai trim, part 19»; its open items are carried in the RC4 block above.
 >
