@@ -24,6 +24,9 @@ The build is our turnkey product, and we edit other authors' mods in it directly
 подходов, а потом научились ПРАВИЛЬНО» · 2026-10-26. How — `HOUSE_RULES.md` §1 "Other authors' mod interfaces are fixed natively" and
 `researches/svarog-native-mod-architecture/`.
 
+**0.9.1 ships as its final release, then the build's work moves to 1.0.0; 0.9.1 gets no later update.** `[OWNER]` 2026-11-23 13:47 · 13:48 · chronicle
+entry of that moment (the planned RC5 became the final 0.9.1). `[AI]` The consequence: a defect found in 0.9.1 after its release is fixed in 1.0.0.
+
 **Svarog's Dream — the main focus from 2026-10-09 to 2026-10-26.** `[OWNER]` «забей на Medieval Dynasty. Ты разве не видишь, что мы работаем дальше над
 Сварогом, и я тебя по нему прошу делать и на нем сфокусироваться» · 2026-10-09 ≈13:25. Backlog — `plans/18_svarog_backlog_checklist.md`.
 Svarog's interface rule: everything scales at 16:9 on 720p, 1080p, 2K, 4K, including a resolution change in a running game

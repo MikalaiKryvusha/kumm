@@ -125,6 +125,17 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > A concrete checklist so the next session (empty context) can start immediately: which files, which
 > commands, what to verify first.
 
+> **THE CHAT OF 13:34 (2026-11-23) — NOW: the FINAL release 0.9.1 instead of RC5, then the work moves to 1.0.0; no more 0.9.1 updates** (`[OWNER]` 13:47 ·
+> 13:48 · the full release with the parts, launcher 1.1.2, the updated guide and the README, the notes in the RC1 form with every change · 13:51; chronicle
+> entry of that moment). Done: pack `345c905` — packVersion and every shipped Krinik mod at 0.9.1 (`KUMM/.work/rc5/bump_final.mjs`), the launcher 1.1.2
+> (`2808b06`); the full notes `_config/release/draft_0_9_1/github_release_notes_0_9_1.md` and the launcher notes `…_launcher_1_1_2.md` written (voice-lint 0,
+> the clean read running), the guide's 0.9.1 lines and the README template rewritten (uncommitted); the final kit chain `KUMM/.work/rc5/kit_chain_final.sh`
+> running since 13:54 (logs `kit_logs_final/`). Next: the kit pak → deploy + verify + modinfo; `KUMM/.work/rc5/ab43.mjs` (the plaque, 1.1.1 vs 1.1.2 on the
+> owner's screen) → fill `{{PLAQUE_OPEN}}` in the notes, the launcher notes and the guide; commit the texts; `KRINIK_PLAY_GATE_WAIVER='Владелец 2026-11-23
+> 13:49: «БЕЗ ЧАСА ИГРЫ!»' bash _config/release/make_release.sh D:/work/ai_sandbox/KUMM/.work/rc5_release`; the update RC4 → 0.9.1 by
+> `KUMM/.work/rc5/realcheck.mjs` (after a game run on the copy makes `ExtractedMods`), then «Удалить сборку» on the copy (#16 on the real game).
+> Publication only by the owner's command; Nexus only by his word.
+>
 > **CHAT CLOSED 2026-11-23 ≈13:3x — the 0.9.1 readiness triage and the four RC5 fixes, committed and run; RC5 NOT built yet** (`[OWNER]` 11:49
 > «делаем все 4 правки в RC5 сборки и лаунчер 1.1.2»). Done: the triage of 38 open issues (`plans/62_conan_0_9_1_release_readiness.md`); #16 the
 > uninstaller deletes the game's copies of the build's paks (engine `gameCache`, KUMM `a225dfa9`, fixture 78 / 78); #47/#15 the launcher's counter

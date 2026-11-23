@@ -39,9 +39,13 @@ Acceptance criteria:
       first open 8.4–9.3 ms, 0 face rebuilds (1.1.1: 87.2 ms); the owner's screen (`.work/rc4/retest43.mjs` on 1.1.2) is owed after the build
 - [x] #53 — one walk per switch in both directions (K1–K8 pass); the switch costs ≈ 1 ms (0.67–1.38, one 3.06 spike) instead of ≈ 3–4.5 ms; accepted:
       `[OWNER]` 2026-11-23 12:44 — a one-off action is outside the 1 ms, what happens often in play is inside it (`MASTER_PLAN.md`)
-- [ ] the judge rounds (rule 31: round 1 done, round 2 running), RC5 built, the update RC4 → RC5 through the launcher on the copy
-- [ ] the RC5 retest sweep by the player's path: #21 waystone travel, #23 the wider hunt, the «fixed, not retested» row above, N2 (a weapon swap in first person)
-- [ ] the owner's word → the full 0.9.1 from the RC5 bytes (release ritual, rule 42)
+- [x] the judge rounds (rule 31): two rounds, no defect (the closing commit of the chat of 11:38)
+- [ ] **superseded 2026-11-23 13:47 by the owner:** no RC5 — the four fixes ship as the FINAL 0.9.1 (`[OWNER]` «собирать не пятого кандидата, а финальный
+      релиз 0.9.1» · 13:47; «больше обновлений по 0.9.1 не выпускаем» · 13:48; «БЕЗ ЧАСА ИГРЫ!» · 13:49; the full notes in the RC1 form with every change ·
+      13:51 — chronicle entry 2026-11-23 13:47–13:48). Criterion 3 (the final = the last RC's bytes) is replaced by his word: 0.9.1 is built from RC4 + the
+      four fixes; the RC5 retest sweep below moves to 1.0.0 work, and the verdicts «0.9.2+» of the triage read «1.0.0».
+- [ ] the final 0.9.1 built (release ritual, rule 42), the update RC4 → 0.9.1 through the launcher on the copy, the plaque on the owner's screen
+- [ ] the retest sweep by the player's path (1.0.0 work now): #21 waystone travel, #23 the wider hunt, the «fixed, not retested» row above, N2
 
 ## Decisions made without the owner
 

@@ -1,5 +1,27 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-23 13:47–13:48 +03:00 — the owner's word: the final release 0.9.1 instead of RC5, then the work on 1.0.0; no more 0.9.1 updates (recorded 13:48)
+
+The agent had bumped the pack to 0.9.1-RC5 (pack `2808b06`), started the KrinikConanUI kit chain with the menu line «0.9.1-RC5» and asked whether RC5 is built
+without the hour of play, as RC4 was. The owner, verbatim:
+
+> собирать не пятого кандидата, а финальный релиз 0.9.1
+>
+> после этого будут вестиь работы над 1.0.0, больше обновлений по 0.9.1 не выпускаем
+
+`[OWNER]` 2026-11-23 13:47 · 13:48. Applied the same minute: the kit chain stopped after its step 02 (step 03's editor left to finish its write, nothing
+after it); the versions go to 0.9.1 (packVersion and every shipped Krinik mod), the launcher stays 1.1.2; the notes become the full notes of 0.9.1 against
+0.9.0 (the RC notes' delta form is for an RC only); `STATUS.md` and `MASTER_PLAN.md` carry the order «0.9.1 final → 1.0.0». The question of the hour of play
+stays open; the agent's recommendation changed to the hour, since 0.9.1 gets no later fix.
+
+The owner answered at 13:49, verbatim: «БЕЗ ЧАСА ИГРЫ!» — `[OWNER]` 2026-11-23 13:49. The final 0.9.1 is built without the hour of play; the words go into
+`KRINIK_PLAY_GATE_WAIVER` of `make_release.sh` (printed into the release log).
+
+The owner at 13:51, verbatim: «релиз 0.9.1 полноценный и с файлами и с паками и с последней версией версией лаунчера. и с последним обновленным мануалом,
+обновить ридми проекта. релиз ноутсы полностью поднобно написать, как было в RC1 но с учетом всех правок» — `[OWNER]` 2026-11-23 13:51. So: the full release
+(the parts, the per-file assets, launcher 1.1.2, the guide PDF), the public README of the build updated, the notes in the full RC1 form with every change of
+RC2–RC5 folded in.
+
 ## 2026-11-23 13:3x +03:00 — STATUS bonsai trim, part 22: the block of the chat of 11:38 (the readiness triage, the RC5 fixes) and the closed RC4 block of ≈01:4x, moved verbatim at the closure of the chat of 11:38
 
 > **THE CHAT OF 11:38 (2026-11-23) — the 0.9.1 readiness triage** (`[OWNER]` 11:38, the task: every open issue — what bothers the player, RC5 or the full

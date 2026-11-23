@@ -91,6 +91,16 @@
 
 ## Entries
 
+### EXP-0620 · 2026-11-23 · ❌→✅ · #background #process #windows #bash #kit #stop
+The owner turned RC5 into the final 0.9.1 while the KrinikConanUI kit chain ran (`mkdir … && bash kit_chain.sh > chain.out`, a harness background task).
+TaskStop reported the task stopped, yet the chain went on: at 13:50:15 it started step 04 — the stop killed the harness's outer shell, and the inner
+`bash kit_chain.sh` (PID 24252, its step subshell 32736) lived on as an orphan. Found by listing the processes whose command line holds the script's name
+(`Get-CimInstance Win32_Process | ? CommandLine -match kit_chain`), then `taskkill /PID 24252 /PID 32736 /F` without `/T`, so the editor step that was
+writing kit assets could finish its write. Lesson: after stopping a background script on Windows, list its processes by command line and kill the script
+itself by PID; a stopped task is a claim until the process list shows it gone. Do not kill a tool mid-write into a project it owns (the kit) — stop its
+parent and let the step end.
+none-cheap: one process listing after a stop; no guard
+
 ### EXP-0619 · 2026-11-23 · ❌ · #conan #ue4ss #lua #performance #measurement #camera
 class: benchmark-lies-about-hook-cost
 The camera's view switch made three walks of the hero's mesh tree (issue #53); merged into one, it still cost 0.67–1.38 ms by a start-of-pass log line in the
