@@ -43,6 +43,9 @@
     With -WithEngineIni the parts of the enabled mods are merged into engineIni.file section by section (a part's
     Key=Value replaces the same key of the same section); -Verify checks every Key=Value of a part, by section, in the game's file;
     -EngineIniOut <file> writes the merged text to a file without touching any target.
+    A game that copies installed paks somewhere itself (Conan Exiles Enhanced: Saved\ExtractedMods) names those copies in
+    "gameCache": { "dir": "<folder>", "names": ["{pak}-Windows.pak", ...] } - the install journals them for every NEW pak
+    of the build, -Restore deletes them, -Upgrade keeps them and deletes only the copies of paks the new build dropped.
     -Export <folder> writes a self-contained bundle of the build: every enabled mod
     already unpacked (no 7-Zip needed on the other machine), a manifest pointing at
     those folders, this script, and install.cmd. On a fresh game install the owner
@@ -238,16 +241,17 @@ function Test-GameIdle {
 }
 
 function Invoke-Restore {
-    # Откат папки игры по журналу: созданное - удалить, заменённое - вернуть копию, пустые новые папки - убрать.
+    # Откат папки игры по журналу: созданное - удалить, заменённое - вернуть копию, пустые новые папки - убрать; копии паков сборки,
+    # распакованные игрой (строки cache, блок manifest.gameCache), - удалить, кроме -KeepCache (обновление: новая сборка их переиспользует).
     # Код: 0 - откат полный, папка копий удалена; 1 - журнала нет или что-то не вернулось (копии остаются); 1 и при живой игре.
-    param([string]$GamePath)
+    param([string]$GamePath, [switch]$KeepCache)
     $root = (Resolve-Path $GamePath).Path.TrimEnd('\')
     $entries = @(Read-Journal $root)
     Head "restore  $root"
     if (-not (Test-GameIdle $root)) { return 1 }
     if ($entries.Count -eq 0) { Bad "no install journal: $(Get-JournalPath $root) - this folder was not installed by a journaling KUMM"; return 1 }
     $store = Join-Path (Join-Path $root $script:BackupDirName) 'files'
-    $restored = 0; $deleted = 0; $dirs = @(); $failed = 0
+    $restored = 0; $deleted = 0; $cleared = 0; $dirs = @(); $failed = 0
     for ($i = $entries.Count - 1; $i -ge 0; $i--) {
         $e = $entries[$i]
         $full = Join-Path $root $e.Rel
@@ -268,6 +272,19 @@ function Invoke-Restore {
                 }
             }
             elseif ($e.Kind -eq 'dir') { $dirs += $full }
+            elseif ($e.Kind -eq 'cache' -and -not $KeepCache) {
+                # Копия, которую держит другая программа (антивирус читает свежий .ucas в 1–2 ГБ), откат не срывает: это мусор игры, а не файл
+                # сборки или игрока. Попытки — как у папки копий (Invoke-FileRetry), потом строка «not deleted» и откат идёт дальше (судья RC5,
+                # круг 1, находка 5). [NOT-TESTED]
+                if (Test-Path -LiteralPath $full -PathType Leaf) {
+                    try {
+                        $it = Get-Item -LiteralPath $full; if ($it.IsReadOnly) { $it.IsReadOnly = $false }
+                        Invoke-FileRetry { Remove-Item -LiteralPath $full -Force -ErrorAction Stop }
+                        $cleared++
+                    }
+                    catch { Warn "could not be deleted (held by another program), delete it by hand: $full ($($_.Exception.Message))" }
+                }
+            }
         }
         catch { Bad "$($e.Kind) $($e.Rel): $($_.Exception.Message)"; $failed++ }
     }
@@ -275,6 +292,7 @@ function Invoke-Restore {
         if ((Test-Path -LiteralPath $d) -and -not (Get-ChildItem -LiteralPath $d -Force)) { Remove-Item -LiteralPath $d -Force }
     }
     Ok "returned $restored file(s), deleted $deleted file(s) the build had added"
+    if ($cleared) { Ok "deleted $cleared file(s) the game had extracted from the build's paks" }
     if ($failed) { Bad "$failed step(s) failed - the backup folder is kept: $(Join-Path $root $script:BackupDirName)"; return 1 }
     # Журнал — первым: если удаление папки сорвётся на полпути, журнал без половины копий заставил бы следующий -Upgrade / -Remove отказывать каждый
     # раз («backup copy missing»); без журнала остаток папки — просто мусор, а откат уже сделан (судья 2026-11-23, круг 5). [NOT-TESTED]
@@ -761,6 +779,37 @@ function Get-PakFiles {
              Where-Object { $_.Extension -in '.pak', '.utoc', '.ucas' })
 }
 
+# ------------------------------------------------------ the game's own copies of the build's paks (manifest.gameCache)
+# Conan Exiles Enhanced при запуске распаковывает каждый пак из Mods в Saved\ExtractedMods\<имя>-Windows.{pak,ucas,utoc}: у сборки 0.9.1 это
+# 198 файлов, 12,8 ГБ (issue #16 публичного репозитория, 2026-11-20). Эти файлы пишет ИГРА, мимо Save-Original, и откат по журналу о них не знал:
+# деинсталлятор оставлял их в папке игры. Теперь установка пишет в журнал строку cache<TAB><путь> на каждую будущую копию НОВОГО пака сборки
+# (пак, которого в игре не было: его строка - created). -Restore удаляет такие файлы, если они есть; -Upgrade их оставляет (игра не распаковывает
+# заново 12 ГБ на каждом обновлении) и удаляет только копии паков, которых в новой сборке нет. Копии паков игрока (их .pak не created) не трогаются.
+# Имена - из манифеста: gameCache.dir и gameCache.names, где {pak} - имя пака без .pak (игра - данные, не код). [NOT-TESTED]
+function Get-GameCacheRels {
+    # Пути (от корня игры) копий пака $PakRel, которые распакует игра, по manifest.gameCache; пусто — ключа нет или это не пак из modsDir.
+    param([string]$PakRel)
+    $gc = $script:pack.gameCache
+    if (-not $gc -or -not $gc.dir -or -not $gc.names -or -not $script:pack.modsDir) { return @() }
+    if (-not $PakRel.EndsWith('.pak', [System.StringComparison]::OrdinalIgnoreCase)) { return @() }
+    if ((Split-Path $PakRel -Parent) -ne ($script:pack.modsDir -replace '/', '\').TrimEnd('\')) { return @() }
+    $base = [System.IO.Path]::GetFileNameWithoutExtension($PakRel)
+    return @(foreach ($n in @($gc.names)) { Join-Path ($gc.dir -replace '/', '\') ([string]$n).Replace('{pak}', $base) })
+}
+
+function Add-GameCacheLines {
+    param($Target, [string]$PakPath)
+    $root = $Target.Path.TrimEnd('\')
+    if (-not $script:Journals.ContainsKey($root)) { return }
+    $full = [System.IO.Path]::GetFullPath($PakPath)
+    if (-not $full.StartsWith($root + '\', [System.StringComparison]::OrdinalIgnoreCase)) { return }
+    $pakRel = $full.Substring($root.Length + 1)
+    if ($script:Journals[$root][$pakRel.ToLowerInvariant()] -ne 'created') { return }
+    foreach ($rel in (Get-GameCacheRels $pakRel)) {
+        if (-not $script:Journals[$root].ContainsKey($rel.ToLowerInvariant())) { Add-JournalLine $root 'cache' $rel }
+    }
+}
+
 function Install-PakMod {
     # Копирует тройку в modsDir как есть. Возвращает имена .pak (без пути) -
     # именно они идут в modlist.txt.
@@ -775,6 +824,7 @@ function Install-PakMod {
         if ($f.Extension -eq '.pak') { $paks += $f.Name }
         if ($Plan) { Say "  would copy $($f.Name)  ->  $dir\$($f.Name)" DarkGray; continue }
         Save-Original -Target $Target -Path (Join-Path $dest $f.Name)
+        if ($f.Extension -eq '.pak') { Add-GameCacheLines -Target $Target -PakPath (Join-Path $dest $f.Name) }
         if (-not (Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force | Out-Null }
         Copy-Item $f.FullName (Join-Path $dest $f.Name) -Force
     }
@@ -1701,7 +1751,7 @@ function Invoke-Action {
                     }
                     # -Upgrade (install.ps1 бандла): поверх стоящей сборки - отложить настройки игрока, снять старую, поставить новую,
                     # вернуть отложенное (блок «player settings across an upgrade» выше). Без журнала - чистая установка + shipped.json.
-                    $cfgRels = @(); $oldShipped = $null
+                    $cfgRels = @(); $oldShipped = $null; $oldCache = @()
                     if ($Upgrade -and -not $Plan) {
                         $cfgRels = @(Get-PlayerConfigRels $mods)
                         if (Test-Path -LiteralPath (Get-JournalPath $root)) {
@@ -1721,7 +1771,14 @@ function Invoke-Action {
                                 }
                             }
                             $null = Save-PlayerConfig -Root $root -Rels $all -Shipped $oldShipped
-                            $rc = Invoke-Restore -GamePath $root
+                            # Копии паков, распакованные игрой, переживают обновление (KeepCache); после установки новой сборки удаляются копии тех
+                            # паков, которых в ней нет (их строки cache не вернулись в журнал). Журнал сборки до 0.9.1-RC5 строк cache не вёл: копии
+                            # её паков выводятся из строк created паков по gameCache новой сборки (судья RC5, круг 1, находка 6). [NOT-TESTED]
+                            $oldCache = @(foreach ($e in (Read-Journal $root)) {
+                                if ($e.Kind -eq 'cache') { $e.Rel }
+                                elseif ($e.Kind -eq 'created') { Get-GameCacheRels $e.Rel }
+                            })
+                            $rc = Invoke-Restore -GamePath $root -KeepCache
                             if ($rc -ne 0) {
                                 Bad "the installed build did not uninstall - nothing new was installed; your settings stay in $script:PlayerDirName"
                                 $problems = $true
@@ -1740,6 +1797,26 @@ function Invoke-Action {
                         $cfgFailed = @($mods | Where-Object { $_.playerConfig -and ($r.Failed -contains $_.name) }).Count -gt 0
                         $newShipped = if ($cfgFailed) { $null } else { Write-Shipped -Root $root -Rels $cfgRels }
                         Restore-PlayerConfig -Target $t -OldShipped $oldShipped -NewShipped $newShipped
+                        if ($oldCache.Count) {
+                            $now = @{}
+                            foreach ($e in (Read-Journal $root)) { if ($e.Kind -eq 'cache') { $now[$e.Rel.ToLowerInvariant()] = $true } }
+                            $gone = 0
+                            foreach ($rel in $oldCache) {
+                                if ($now.ContainsKey($rel.ToLowerInvariant())) { continue }
+                                $p = Join-Path $root $rel
+                                if (Test-Path -LiteralPath $p -PathType Leaf) {
+                                    # Удержанную копию (антивирус) — попытками, как в откате; не вышло — её строка cache уходит в НОВЫЙ журнал, чтобы её
+                                    # удалил следующий откат: старого журнала уже нет, и без строки копия осталась бы навсегда (судья RC5, круг 2, R2). [NOT-TESTED]
+                                    try { Invoke-FileRetry { Remove-Item -LiteralPath $p -Force -ErrorAction Stop }; $gone++ }
+                                    catch {
+                                        Warn "could not be deleted (held by another program), the uninstaller will retry: $p ($($_.Exception.Message))"
+                                        if (-not $script:Journals.ContainsKey($root)) { $script:Journals[$root] = @{} }
+                                        Add-JournalLine $root 'cache' $rel
+                                    }
+                                }
+                            }
+                            if ($gone) { Ok "deleted $gone file(s) the game had extracted from paks the new build no longer has" }
+                        }
                     }
                     if ($r.Failed.Count) { $problems = $true }
 

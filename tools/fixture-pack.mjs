@@ -175,6 +175,8 @@ put(path.join(UGAME, 'Game', 'Mods', 'modlist.txt'), 'PlayerOwn.pak\r\n')
 put(path.join(UGAME, 'Game', 'Mods', 'PlayerOwn.pak'), 'players own mod')
 put(path.join(UGAME, 'Game', 'Movies', 'Intro.bk2'), 'vanilla movie')
 put(path.join(UGAME, 'Game', 'Config', 'Engine.ini'), '[SystemSettings]\r\nr.Vanilla=1\r\n')
+// копия пака игрока, которую распаковала сама игра (manifest.gameCache, issue #16): откат обязан её оставить
+put(path.join(UGAME, 'Game', 'Saved', 'ExtractedMods', 'PlayerOwn-Windows.pak'), 'players extracted copy')
 mkdirSync(path.join(UGAME, 'Game', 'Localization', 'Game'), { recursive: true })
 put(path.join(UDIR, 'alpha', 'AlphaArms.pak'), 'pak')
 put(path.join(UDIR, 'nointro', 'Intro.bk2'), 'stub')
@@ -185,6 +187,7 @@ put(path.join(UDIR, 'un.cmd.txt'), '@echo off\r\nchcp 65001 >nul\r\necho Уда�
 writeFileSync(path.join(UDIR, 'modpack.json'), JSON.stringify({
   packName: 'KUMM fixture undo pack', builtFor: 'fixture', nexusGame: 'fixturegame', gameExe: 'FixtureGame.exe', library: 'mods',
   modsDir: 'Game/Mods', modList: 'Game/Mods/modlist.txt',
+  gameCache: { dir: 'Game/Saved/ExtractedMods', names: ['{pak}-Windows.pak', '{pak}-Windows.ucas', '{pak}-Windows.utoc'] },
   engineIni: { file: 'Engine.ini', target: 'Game/Config/Engine.ini', section: '[SystemSettings]' },
   uninstall: { cmd: 'Uninstall.cmd', template: 'un.cmd.txt' },
   mods: [
@@ -221,16 +224,26 @@ const jr = existsSync(JR) ? readFileSync(JR, 'utf8') : ''
 expect('откат: повторная раскатка не затирает копию оригинала (одна строка на путь, копия — ваниль)',
   u2.code === 0 && (jr.match(/replaced\tGame\\Movies\\Intro\.bk2/g) || []).length === 1 &&
   readFileSync(path.join(UGAME, '_kumm_backup', 'files', 'Game', 'Movies', 'Intro.bk2'), 'utf8') === 'vanilla movie', `${u2.out}\n${jr}`)
+// игра распаковала пак сборки (три файла) — журнал знает их по строкам cache, по одной на файл и после двух раскаток (issue #16)
+const XM = path.join(UGAME, 'Game', 'Saved', 'ExtractedMods')
+const extractAlpha = () => { for (const x of ['pak', 'ucas', 'utoc']) put(path.join(XM, `AlphaArms-Windows.${x}`), `extracted ${x}`) }
+extractAlpha()
+expect('копии паков: журнал знает три будущие копии нового пака сборки, по одной строке; пака игрока в нём нет',
+  ['pak', 'ucas', 'utoc'].every(x => (jr.match(new RegExp(`cache\\tGame\\\\Saved\\\\ExtractedMods\\\\AlphaArms-Windows\\.${x}`, 'g')) || []).length === 1) &&
+  !/PlayerOwn-Windows/.test(jr), jr)
 let cmdOut = ''
 try { cmdOut = execFileSync('cmd', ['/c', UN], { input: '\r\n\r\n', encoding: 'utf8' }) } catch (e) { cmdOut = `${e.stdout ?? ''}${e.stderr ?? ''} code ${e.status}` }
 const after = snap(UGAME)
 expect('откат: деинсталлятор игрока вернул папку игры побайтно (свой пак игрока, ролик, Engine.ini, пустая родная папка; без копий и без себя)',
   after === before, `${cmdOut}\n--- было\n${before}\n--- стало\n${after}`)
+expect('копии паков: деинсталлятор удалил три копии пака сборки и сказал об этом; копия пака игрока на месте',
+  /deleted 3 file\(s\) the game had extracted/.test(cmdOut) && !existsSync(path.join(XM, 'AlphaArms-Windows.pak')) && existsSync(path.join(XM, 'PlayerOwn-Windows.pak')), cmdOut)
 const u3 = ups(['-Restore', '-GameDir', UGAME])
 expect('откат: контроль — без журнала отказ с кодом 1', u3.code === 1 && /no install journal/.test(u3.out), u3.out)
 ups(['-Deploy', '-WithEngineIni', '-NoVerify'])
+extractAlpha()
 const u4 = ups(['-Remove'])
-expect('откат: -Remove при журнале = тот же откат, папка как до установки, деинсталлятор убран',
+expect('откат: -Remove при журнале = тот же откат, папка как до установки (копии пака сборки тоже убраны), деинсталлятор убран',
   u4.code === 0 && snap(UGAME) === before, `${u4.out}\n${snap(UGAME)}`)
 
 // ---- кусок Engine.ini, который несёт сам мод (поле engineIni мода; KrinikConanEngineTweaks, 2026-11-10): раскатка вливает его в Engine.ini
@@ -368,17 +381,21 @@ put(at(GG, 'FixtureGame.exe'), '')
 put(at(GG, `${SGD}/Markers.sav`), 'players markers')
 put(at(GG, 'Game/Saved/World.db'), 'players world')
 put(path.join(GDIR, 'alpha', 'AlphaArms.pak'), 'pak')
+put(path.join(GDIR, 'beta', 'BetaBows.pak'), 'pak b')
 mkdirSync(path.join(GDIR, 'mods'), { recursive: true })
-const gpack = ver => ({
+// withBeta — пак Beta есть только в 1.0.0: обновление на 1.0.1 его снимает, и копии Beta, распакованные игрой, обязаны уйти (issue #16)
+const gpack = (ver, withBeta = false) => ({
   packName: 'KUMM fixture upgrade pack', packVersion: ver, builtFor: 'fixture', nexusGame: 'fixturegame', gameExe: 'FixtureGame.exe', library: 'mods',
   modsDir: 'Game/Mods', modList: 'Game/Mods/modlist.txt', engineIni: { target: `${CFG}/Engine.ini` },
+  gameCache: { dir: 'Game/Saved/ExtractedMods', names: ['{pak}-Windows.pak', '{pak}-Windows.ucas', '{pak}-Windows.utoc'] },
   exportConfig: [`${SGD}/ModSettings.sav`],
   configPolicy: { managed: [`${CFG}/Engine.ini`], strip: { [`${CFG}/GameUserSettings.ini`]: ['ResolutionSizeX', 'ResolutionSizeY', 'FrameRateLimit'] },
     never: [`${SGD}/Markers.sav`, 'Game/Saved/*.db'] },
   uninstall: { cmd: 'Uninstall.cmd' },
-  mods: [{ name: 'Alpha', kind: 'pak', version: ver, source: { folder: 'alpha' } }],
+  mods: [{ name: 'Alpha', kind: 'pak', version: ver, source: { folder: 'alpha' } },
+    ...(withBeta ? [{ name: 'Beta', kind: 'pak', version: ver, source: { folder: 'beta' } }] : [])],
 })
-writeFileSync(path.join(GDIR, 'modpack.json'), JSON.stringify(gpack('1.0.0'), null, 2))
+writeFileSync(path.join(GDIR, 'modpack.json'), JSON.stringify(gpack('1.0.0', true), null, 2))
 writeFileSync(path.join(GDIR, 'targets.json'), JSON.stringify({ targets: [{ name: 'fixture', path: GG }] }, null, 2))
 const gps = args => {
   try { return { code: 0, out: execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', DEPLOY, '-PackDir', GDIR, ...args], { encoding: 'utf8' }) } }
@@ -400,6 +417,9 @@ expect('обновление: установка 1.0.0 записала shipped.
 // номер поставленной сборки — для лаунчера (судья лаунчера 2026-11-18, находка 2: распакованное и не поставленное обновление выдавало себя за поставленное)
 const PVER = at(GG, '_kumm_backup/pack_version.txt')
 expect('обновление: установка 1.0.0 записала номер поставленной сборки', rd(PVER) === '1.0.0', rd(PVER))
+// игра распаковала оба пака 1.0.0
+const GXM = at(GG, 'Game/Saved/ExtractedMods')
+for (const p of ['AlphaArms', 'BetaBows']) for (const x of ['pak', 'ucas', 'utoc']) put(path.join(GXM, `${p}-Windows.${x}`), `${p} ${x}`)
 // игрок меняет: качество, клавишу, Engine.ini; ServerSettings и настройки мода не трогает
 const PLAYER_GUS = '[/Script/Engine.GameUserSettings]\r\nsg.ShadowQuality=1\r\nResolutionSizeX=2560\r\n'
 const PLAYER_IN = '[/Script/Engine.InputSettings]\r\nActionMappings=Jump:LeftAlt\r\n'
@@ -414,11 +434,18 @@ writeFileSync(at(GSRC, `${SGD}/ModSettings.sav`), 'mod settings v2')
 writeFileSync(path.join(GDIR, 'modpack.json'), JSON.stringify(gpack('1.0.1'), null, 2))
 const gx2 = gps(['-Export', GX2, '-ConfigFrom', GSRC])
 const worldBefore = rd(at(GG, 'Game/Saved/World.db')) + rd(at(GG, `${SGD}/Markers.sav`))
+// журнал сборки до 0.9.1-RC5 строк cache не вёл: строки копий Beta убраны, копии Beta обновление обязано вывести из строки created её пака
+// (судья RC5, круг 1, находка 6); строки Alpha остаются — их хранит KeepCache
+const GJR = at(GG, '_kumm_backup/journal.txt')
+writeFileSync(GJR, rd(GJR).split('\r\n').filter(l => !/^cache\t.*BetaBows-Windows/.test(l)).join('\r\n'))
 const g2 = ginst(GX2)
 const cfg = rel => rd(at(GG, `${CFG}/${rel}`))
 const playerCopies = readdirSync(at(GG, CFG)).filter(n => n.startsWith('Engine.ini.player-'))
 expect('обновление: install.ps1 поверх 1.0.0 — откат старой и установка новой прошли', gx2.code === 0 && g2.code === 0 && /an installed build found/.test(g2.out), `${gx2.out}\n${g2.out}`)
 expect('обновление: номер поставленной сборки теперь 1.0.1', rd(PVER) === '1.0.1', rd(PVER))
+expect('копии паков: обновление оставило три копии пака Alpha (он в 1.0.1 есть) и удалило три копии Beta (в 1.0.1 его нет)',
+  ['pak', 'ucas', 'utoc'].every(x => rd(path.join(GXM, `AlphaArms-Windows.${x}`)) === `AlphaArms ${x}` && !existsSync(path.join(GXM, `BetaBows-Windows.${x}`))) &&
+  /deleted 3 file\(s\) the game had extracted from paks the new build no longer has/.test(g2.out), `${g2.out}\n${existsSync(GXM) ? readdirSync(GXM) : '(нет папки)'}`)
 expect('обновление: игрок не трогал ServerSettings — новая версия сборки', cfg('ServerSettings.ini').includes('Harvest=2'), cfg('ServerSettings.ini'))
 expect('обновление: игрок поменял качество — его GameUserSettings на месте, рядом ничего (сборка файл не меняла)',
   cfg('GameUserSettings.ini') === PLAYER_GUS && !existsSync(at(GG, `${CFG}/GameUserSettings.ini.krinik-new`)), `${cfg('GameUserSettings.ini')}\n${g2.out}`)
@@ -466,6 +493,8 @@ expect('обновление: деинсталлятор после обновл
   !existsSync(at(GG, `${CFG}/Input.ini.krinik-new`)) && rd(at(GG, 'Game/Saved/World.db')) === 'players world' && rd(at(GG, `${SGD}/Markers.sav`)) === 'players markers' &&
   existsSync(at(GG, CFG)) && readdirSync(at(GG, CFG)).some(n => n.startsWith('Engine.ini.player-') && /r\.Player=1/.test(rd(at(GG, `${CFG}/${n}`)))),
   `${gUn}\n${existsSync(at(GG, CFG)) ? readdirSync(at(GG, CFG)) : '(нет папки)'}`)
+expect('копии паков: деинсталлятор после обновления удалил копии Alpha, записанные новой установкой',
+  ['pak', 'ucas', 'utoc'].every(x => !existsSync(path.join(GXM, `AlphaArms-Windows.${x}`))), `${gUn}\n${existsSync(GXM) ? readdirSync(GXM) : '(нет папки)'}`)
 
 // ---- ярлык не сохранился (папки «рабочего стола» нет): установка всё равно удачна — код 0, предупреждение, сборка стоит. До 2026-11-23 install.ps1
 // падал на $s.Save() с кодом 1 после полной раскатки, и лаунчер писал «код выхода 1» (отчёт KUMM 2026-11-23, обновление RC3 → RC4, случай U7).
