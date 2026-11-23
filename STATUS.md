@@ -135,7 +135,9 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (K1–K8 pass), ≈ 1 ms per switch — accepted 12:44 (`[OWNER]`: a one-off action is outside the 1 ms, what happens often in play is inside; `MASTER_PLAN.md`). Judge round 1 done (no defect, F1–F10,
 > F12 addressed); round 2 (`.work/rc5/judge/round2.md`): no defect, R1 (the deferred event's hero object vs a map load), R2 (a held copy of a dropped
 > pak re-journaled), R3 (full path in the warning), R4 (labels warmed even when the plaque does not fit; `plate.SizeChanged`) fixed ≈12:58, the stands
-> and the camera's K9 re-run owed before the code commit. The working game holds the RC4 mods + the pack's new camera `main.lua`; god off in the save.
+> and K9 re-run ≈13:00 — all pass; CODE COMMITTED: KUMM `a225dfa9` (engine + stand), pack `8572e89` (launcher 1.1.2 sources + manifest `gameCache` +
+> stands), `6651e56` (camera). The working game holds the RC4 mods + the pack's new camera `main.lua`; god off in the save. Untracked in the pack:
+> `docs/guide/Krinik-Conan-3.1.1-guide.pdf` (not mine to commit — check what made it before the RC5 build).
 > **Next for RC5:** judge rounds to clean → commits (KUMM engine + stand; pack launcher + camera + manifest + stands) → the release ritual
 > (`release_checklist.py`, version bump to 0.9.1-RC5 and launcher 1.1.2, notes RU/EN by the portrait, the guide PDF with the corrected plate line,
 > `make_release.sh`) → the update RC4 → RC5 through the launcher on `KUMM/.work/rc1_install/Conan_311` (it holds RC4; check `Saved/ExtractedMods` kept
