@@ -128,7 +128,16 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > **THE CHAT OF 11:38 (2026-11-23) — the 0.9.1 readiness triage** (`[OWNER]` 11:38, the task: every open issue — what bothers the player, RC5 or the full
 > 0.9.1): `plans/62_conan_0_9_1_release_readiness.md`. Verdict: no open issue is a confirmed crash, hang, lost save or dead end with no workaround; the two
 > real `critical` ones (#21, #23) need a check, not a fix; proposed RC5 — #16 (uninstall leaves 12.8 GB), #47/#15 («72 из 74»), #43 (plate's first open),
-> #53 (first first-person switch over 1 ms) + my retest sweep of ten «fixed, not retested» issues; then 0.9.1 from the RC5 bytes. Waits for the owner's word.
+> #53 (first first-person switch over 1 ms) + my retest sweep of ten «fixed, not retested» issues; then 0.9.1 from the RC5 bytes. **ACCEPTED 11:49** (`[OWNER]`
+> «делаем все 4 правки в RC5 сборки и лаунчер 1.1.2»): the four fixes are in work by the steps of plan 62.
+> **State ≈12:4x:** the four fixes are written and run (report `testcases/reports/2026-11-23_conan-rc5-fixes.md`): #16 engine `gameCache` (fixture 78 / 78),
+> #47 launcher fold («2 из 2», control «1 из 2»), #43 plaque prepared in the idle (stand first open 8.4–9.3 ms, control 87 ms), #53 one walk per switch
+> (K1–K8 pass) but ≈ 1 ms per switch, the owner's 1 ms NOT reached (cause open — tell the owner, ask what next). Judge round 1 done (no defect, F1–F10,
+> F12 addressed), round 2 at the closure. The working game holds the RC4 mods + the pack's new camera `main.lua`; god off in the save.
+> **Next for RC5:** judge rounds to clean → commits (KUMM engine + stand; pack launcher + camera + manifest + stands) → the release ritual
+> (`release_checklist.py`, version bump to 0.9.1-RC5 and launcher 1.1.2, notes RU/EN by the portrait, the guide PDF with the corrected plate line,
+> `make_release.sh`) → the update RC4 → RC5 through the launcher on `KUMM/.work/rc1_install/Conan_311` (it holds RC4; check `Saved/ExtractedMods` kept
+> on the update, then the uninstaller removes the build's copies) → `retest43.mjs` on the owner's screen with 1.1.2 → publication only by his word.
 >
 > **CHAT CLOSED 2026-11-23 ≈01:4x — v0.9.1-RC4 PUBLISHED, the publication finished** (`[OWNER]` 2026-11-22 23:07 «публикуем релиз РЦ4» · 2026-11-23 00:52
 > «работай автономно до переполнения контекста, выпускай RC4 и затем закрывай чат»). Done: v0.9.1-RC4 (83 assets, Latest) and `launcher-v1.1.1` on GitHub; the

@@ -122,8 +122,24 @@ world load the old objects are destroyed and their addresses can hold foreign ob
 2026-11-22 22:15 on the menu load and the world load; the world → menu exit not yet seen), and a controller that got a NEW `BasePlayerChar_C` (a respawn in third
 person) stops the loop. **The first-person pass cost, measured 2026-11-22 22:10 (log timestamps):** a view switch walks the whole tree three times in one event
 (≈ 3 ms); a weapon swap in first person walked it twice (≈ 1 ms each) plus two re-passes — since round 2 a weapon change and its re-passes walk only the actors
-attached to the hero (`item_roots`, every attached actor's `RootComponent`; «просмотрено N» small) — the run in game is owed (the line prints only when a pass changed
-something). The view switch's three walks stay as they were (a rare deliberate action).
+attached to the hero (`item_roots`, every attached actor's `RootComponent`; «просмотрено N» small) — seen in game 2026-11-23 (K6: «корней обхода 2–3; просмотрено 7–9»).
+The view switch's three walks of 2026-11-22 are ONE walk since 2026-11-23 — the section below.
+
+## One walk per view switch (issue #53, 2026-11-23, RC5)
+
+- **Why three:** `EventOnThirdPersonChange` runs INSIDE `SwitchToFirstPersonCamera` / `SwitchToThirdPersonCamera` (before the game hides the head or restores
+  the shadows), and the mod made a pass there, then a separate walk (`restore_fp_shadows` → first person, `record_tp_shadows` → third person), then the pass
+  after the Switch* body.
+- **Now:** the shadow restore and the third-person record live in `fp_pass` (`record` flag; the restore of every recorded mesh at the start of each mesh's
+  protected call); the event waits `view.SETTLE_S` (0.1 s) in the per-frame loop (`view.on_event`, `view.tick`) and is dropped when the Switch* pass already ran
+  for the same hero and view (`view.last`); the event alone (the idle camera, `SetThirdPerson`) makes one pass 0.1 s later, keeping its hero object
+  (`same_obj`) even if the controller changed pawns meanwhile. All of it is one table `view` — the main chunk sits at Lua's 200-locals limit (`luac -p` caught
+  the first draft).
+- **Cost (the game in front, a temporary start-of-pass log line in the game copy):** one walk 0.67–1.38 ms, mean ≈ 1.0–1.15 ms, one spike 3.06 ms
+  (`testcases/TC_conan_rc5_camera_one_walk_2026-11-23.md` K3–K3c); before: three walks, ≈ 3–4.5 ms. **The owner's 1 ms is not reached.** Ruled out: the
+  garbage collector (stopped vs running — equal) and the full-name strings (address comparisons — no gain, reverted). The remote's benchmark of the same walk
+  (`KUMM/.work/rc5/walk_bench.lua`) costs 0.1–0.35 ms and a shadow write 0.02 ms — why the walk costs ≈ 1 ms inside the hook is open.
+- The log line of a pass now starts «тень возвращена N»; the third-person record prints «тень: записано … (вид: третье лицо, в том же обходе)».
 
 ## Checks
 

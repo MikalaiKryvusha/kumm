@@ -2,7 +2,7 @@
 
 > **Created:** 2026-11-23 · on the owner's task 2026-11-23 11:38 (study every open issue, find what bothers the player, decide RC5 vs the full 0.9.1)
 > **Parent:** HOUSE_RULES 38 / 38.1 · `researches/bug-severity/README.md` · issue registry `bugs/GITHUB_ISSUES.md`
-> **Status:** 🔧 triage written 2026-11-23 11:44 +03:00 from the 38 open issues of the public repo (bodies, comments, local bug files, the RC4 retest report); the RC5 scope waits for the owner's word
+> **Status:** 🔧 triage written 2026-11-23 11:44 +03:00 from the 38 open issues of the public repo (bodies, comments, local bug files, the RC4 retest report); the RC5 scope ACCEPTED by the owner 2026-11-23 11:49 +03:00 — `[OWNER]` «делаем все 4 правки в RC5 сборки и лаунчер 1.1.2» · 2026-11-23 11:49
 > **Outbound:** the RC5 scope and the two `critical` labels (#30, #43) — the owner's word; #53 by the 1 ms rule — the owner's word on its label
 
 ## Goal vector
@@ -31,11 +31,15 @@ Acceptance criteria:
 
 ## Steps (after the owner's word on the scope)
 
-- [ ] #16 — the uninstaller removes `Saved/ExtractedMods/<Mod>-Windows.{pak,ucas,utoc}` of the build's own mods only (names from the manifest), a stand case on the fixture pack (a foreign mod's files stay)
-- [ ] #47 — fold «—» and «–» to «-» on both sides of the launcher's name match; a stand row with a dashed mod name; close #15 as its duplicate
-- [ ] #43 — build the feedback plate ahead at the launcher's idle; the case: the first open ≤ 16 ms on the owner's screen (`.work/rc4/retest43.mjs`)
-- [ ] #53 — one walk of the hero's component tree per switch instead of three; the case: the first switch after world entry ≤ 1 ms of camera lines
-- [ ] the judge rounds (rule 31), RC5 built, the update RC4 → RC5 through the launcher on the copy
+- [x] #16 — the engine journals `cache` lines for the game's copies of every new pak (manifest `gameCache`), the uninstaller deletes them, an upgrade keeps
+      them and deletes the dropped paks' copies (also over a pre-RC5 journal); fixture stand 78 / 78 (report `testcases/reports/2026-11-23_conan-rc5-fixes.md`)
+- [x] #47 — the launcher folds dashes / quotes / NBSP on both sides of the name match; the stand's ModB is «ModB — dashed»: 1.1.2 «2 из 2», 1.1.1 «1 из 2»;
+      closing #15 as its duplicate is owed with the RC5 retest
+- [x] #43 — the plaque prepared in the idle (and again after a new window picture, the plate, the language) with the window's picture baked in: the stand's
+      first open 8.4–9.3 ms, 0 face rebuilds (1.1.1: 87.2 ms); the owner's screen (`.work/rc4/retest43.mjs` on 1.1.2) is owed after the build
+- [~] #53 — one walk per switch in both directions (K1–K8 pass); the switch costs ≈ 1 ms (0.67–1.38, one 3.06 spike) instead of ≈ 3–4.5 ms — the owner's
+      1 ms is NOT reached; the cause of the walk's ≈ 1 ms in the hook is open (the owner's word on what next)
+- [ ] the judge rounds (rule 31: round 1 done, round 2 running), RC5 built, the update RC4 → RC5 through the launcher on the copy
 - [ ] the RC5 retest sweep by the player's path: #21 waystone travel, #23 the wider hunt, the «fixed, not retested» row above, N2 (a weapon swap in first person)
 - [ ] the owner's word → the full 0.9.1 from the RC5 bytes (release ritual, rule 42)
 
