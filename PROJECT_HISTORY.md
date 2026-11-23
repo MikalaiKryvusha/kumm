@@ -1,5 +1,12 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-23 12:44 +03:00 — the owner's word: the 1 ms budget is for what happens often in play, not for one-off actions
+
+I reported that the camera's view switch (issue #53) became one walk instead of three, ≈ 1 ms instead of ≈ 3–4.5 ms, and that the owner's 1 ms was not
+reached. The owner, verbatim: `[OWNER]` «Похуй, для разовых историй, типа переключил камеру и дальше долго играешь в этом виде камеры - приемлимо. Выше 1 мс
+не приемлимо для того, что очень часто в потоке игры просиходит» · 2026-11-23 12:44. Recorded in `MASTER_PLAN.md` (where the budget applies); #53 is
+solved by the one walk.
+
 ## 2026-11-23 11:48 +03:00 — the owner's word: an explanation in chat is theses, short
 
 The owner asked «поясни правки!» about the four RC5 fixes of plan 62; I answered with four blocks of «Сейчас · Правка · Проверка · Риск», three to five

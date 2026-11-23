@@ -38,8 +38,9 @@ covered: a respawn straight into first person and a mod reload in first person (
 ## Verdict
 
 One walk per view switch in both directions and for the idle-camera event (K1, K2, K7, K8), the neighbours hold (K4–K6). The switch costs 0.67–1.38 ms
-(K3, K3b, K3c; the RC4 control: three walks, ≈ 3–4.5 ms) — **the owner's 1 ms is not reached**: one walk costs ≈ 1 ms in the mod's hook, and neither
-the collector nor the full-name strings explain it.
+(K3, K3b, K3c; the RC4 control: three walks, ≈ 3–4.5 ms) — the 1 ms is not reached: one walk costs ≈ 1 ms in the mod's hook, and neither
+the collector nor the full-name strings explain it. **Accepted** by the owner 2026-11-23 12:44: a view switch is a one-off action, outside the 1 ms budget,
+which binds what happens often in the flow of play (`MASTER_PLAN.md`).
 | K4 | first person, 10:00, the sun behind | the view pitched −55 at yaw 180 | the ground shadow shows the head and the shoulders (a frame looked at) | **pass** (12:16) | `.work/rc5/frames/k4_fp_down_yaw180.jpg`: the shadow on the sand shows the head and the shoulders |
 | K5 | first person, the bow sheathed (the hatchet in hand) | the view pitched up 60° | no bow in the frame; in third person (control) the bow is on her back | **pass** (12:16:5x; control — R4 of the RC4 retest) | `.work/rc5/frames/k5_fp_up_hatchet.jpg`: the hatchet in hand, sky and palms, no bow; the pass «оружие взято … убранного скрыто от глаз 2 … корней обхода 3; просмотрено 9» |
 | K6 | first person | the hero's weapon slot changed (hatchet → bow) | the pass «оружие взято» walks only the attached actors («корней обхода N»), the bow is visible in hand — N2 of STATUS | **pass** (12:17:09) | «оружие взято … возвращено 2 … корней обхода 2; просмотрено 7; 0 мс»; `fp-shadow-flags.lua`: `BP_bow_2h_C · SkeletalMeshComponent · sock Socket_Bow · vis 1 · noSee 0` — in the hand, visible, the owner sees it. The frames (`k6_*.jpg`) do not show the bow: the neutral first-person stance holds it below the view (issue #52, deferred by the owner); a draw was refused «Нечем стрелять» (no arrows spawned) |

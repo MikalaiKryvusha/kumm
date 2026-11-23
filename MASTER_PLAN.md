@@ -40,7 +40,9 @@ mod work — `perf` on/off: the main thread costs no more, the cost moved to the
 уважительными к процессору алгоритмами.» · 2026-10-14 ≈10:54. **Where it applies** — the owner's clarification: `[OWNER]` «При открытии - насрать.
 Лаг допустим.» · «Лаги не допустимы в игре, когда герой бегает а игрок играет, воюет, при геймплее основном» · 2026-10-14 ≈14:45. The limit is
 for the worst frame of core gameplay (running, combat, walking the world, streaming areas in on the move, villagers' lines), spikes included; opening
-windows is outside it. (The earlier `[AI]` reading "window creation counts toward the same 1 ms" is revoked by this.)
+windows is outside it. (The earlier `[AI]` reading "window creation counts toward the same 1 ms" is revoked by this.) **One-off actions are outside it too;
+what happens often in the flow of play is inside it:** `[OWNER]` «для разовых историй, типа переключил камеру и дальше долго играешь в этом виде камеры -
+приемлимо. Выше 1 мс не приемлимо для того, что очень часто в потоке игры просиходит» · 2026-11-23 12:44 (on the view switch of issue #53, ≈ 1 ms).
 **Mods extend the game, they are not crutches:** `[OWNER]` «нужно наши моды писать как продолжение игры, расширяющее её нативный код, а не как
 костыли. Можно свои новые структуры данных заводить. улучшать и переписывать старые - все во благо оптимизации и эффективности
 алгоритмов!!!!» · 2026-10-14 ≈21:00 (on plan 24's list: speech bubble 11–12 ms, scene searches every frame, a full pass over the letters window

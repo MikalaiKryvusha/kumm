@@ -37,8 +37,8 @@ Acceptance criteria:
       closing #15 as its duplicate is owed with the RC5 retest
 - [x] #43 — the plaque prepared in the idle (and again after a new window picture, the plate, the language) with the window's picture baked in: the stand's
       first open 8.4–9.3 ms, 0 face rebuilds (1.1.1: 87.2 ms); the owner's screen (`.work/rc4/retest43.mjs` on 1.1.2) is owed after the build
-- [~] #53 — one walk per switch in both directions (K1–K8 pass); the switch costs ≈ 1 ms (0.67–1.38, one 3.06 spike) instead of ≈ 3–4.5 ms — the owner's
-      1 ms is NOT reached; the cause of the walk's ≈ 1 ms in the hook is open (the owner's word on what next)
+- [x] #53 — one walk per switch in both directions (K1–K8 pass); the switch costs ≈ 1 ms (0.67–1.38, one 3.06 spike) instead of ≈ 3–4.5 ms; accepted:
+      `[OWNER]` 2026-11-23 12:44 — a one-off action is outside the 1 ms, what happens often in play is inside it (`MASTER_PLAN.md`)
 - [ ] the judge rounds (rule 31: round 1 done, round 2 running), RC5 built, the update RC4 → RC5 through the launcher on the copy
 - [ ] the RC5 retest sweep by the player's path: #21 waystone travel, #23 the wider hunt, the «fixed, not retested» row above, N2 (a weapon swap in first person)
 - [ ] the owner's word → the full 0.9.1 from the RC5 bytes (release ritual, rule 42)

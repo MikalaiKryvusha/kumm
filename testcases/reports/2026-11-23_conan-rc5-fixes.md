@@ -50,5 +50,5 @@ Conan game runs (seen 12:35) — the order «stands first, game after» holds.
 **Traces.** `.work/rc5/logs/fixture_1.log`, `fixture_2.log`; `.work/rc5/k3_lines.txt`, `k3b_lines.txt`, `k3c_lines.txt`; frames `.work/rc5/frames/k4_*.jpg`,
 `k5_*.jpg`, `k6_*.jpg`; `.work/rc5/judge/round1.md`; the launcher logs under `.work/rc5/fb*`, `fresh112*`.
 
-**Verdict.** partial — #16, #47/#15 and #43 pass with their controls red; #53 is three walks → one walk (≈ 3–4.5 ms → ≈ 1 ms) but not under the
-owner's 1 ms.
+**Verdict.** partial — #16, #47/#15 and #43 pass with their controls red; #53 is three walks → one walk (≈ 3–4.5 ms → ≈ 1 ms), not under 1 ms, and
+accepted by the owner 2026-11-23 12:44: a view switch is a one-off action, outside the 1 ms budget (`MASTER_PLAN.md`).

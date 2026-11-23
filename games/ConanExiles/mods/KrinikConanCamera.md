@@ -136,7 +136,8 @@ The view switch's three walks of 2026-11-22 are ONE walk since 2026-11-23 — th
   (`same_obj`) even if the controller changed pawns meanwhile. All of it is one table `view` — the main chunk sits at Lua's 200-locals limit (`luac -p` caught
   the first draft).
 - **Cost (the game in front, a temporary start-of-pass log line in the game copy):** one walk 0.67–1.38 ms, mean ≈ 1.0–1.15 ms, one spike 3.06 ms
-  (`testcases/TC_conan_rc5_camera_one_walk_2026-11-23.md` K3–K3c); before: three walks, ≈ 3–4.5 ms. **The owner's 1 ms is not reached.** Ruled out: the
+  (`testcases/TC_conan_rc5_camera_one_walk_2026-11-23.md` K3–K3c); before: three walks, ≈ 3–4.5 ms. Accepted by the owner 2026-11-23 12:44: a view switch is a
+  one-off action, outside the 1 ms (`MASTER_PLAN.md`); a walk like this in something that runs often would not be. Ruled out: the
   garbage collector (stopped vs running — equal) and the full-name strings (address comparisons — no gain, reverted). The remote's benchmark of the same walk
   (`KUMM/.work/rc5/walk_bench.lua`) costs 0.1–0.35 ms and a shadow write 0.02 ms — why the walk costs ≈ 1 ms inside the hook is open.
 - The log line of a pass now starts «тень возвращена N»; the third-person record prints «тень: записано … (вид: третье лицо, в том же обходе)».

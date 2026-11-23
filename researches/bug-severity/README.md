@@ -43,7 +43,8 @@ Rules of use:
    the industry scale: no functional impact. HOUSE_RULES 38 names «an error» critical — the reading of that word is the owner's (asked 2026-11-23).
 4. **A slowdown is judged by what it does to play.** A stutter in core gameplay over the owner's budget (1 ms of CPU for all mods in the worst gameplay frame,
    `MASTER_PLAN.md`) is the owner's standing rule and stays critical; a slow UI response outside play (a launcher screen in 350 ms) is comfort by the industry
-   scale — the owner's word decides it (asked 2026-11-23).
+   scale — the owner's word decides it (asked 2026-11-23). A one-off action the player then plays with for long (a view switch) is outside the 1 ms; what
+   happens often in the flow of play is inside it (`[OWNER]` 2026-11-23 12:44, `MASTER_PLAN.md`).
 5. **Severity is not the order of work.** The owner's word on what to fix first is the priority; a cosmetic item he wants now goes first without becoming critical.
 
 ## 3. The six issues labelled `critical` on 2026-11-23 00:0x, against the scale

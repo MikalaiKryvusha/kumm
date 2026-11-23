@@ -132,7 +132,7 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > «делаем все 4 правки в RC5 сборки и лаунчер 1.1.2»): the four fixes are in work by the steps of plan 62.
 > **State ≈12:4x:** the four fixes are written and run (report `testcases/reports/2026-11-23_conan-rc5-fixes.md`): #16 engine `gameCache` (fixture 78 / 78),
 > #47 launcher fold («2 из 2», control «1 из 2»), #43 plaque prepared in the idle (stand first open 8.4–9.3 ms, control 87 ms), #53 one walk per switch
-> (K1–K8 pass) but ≈ 1 ms per switch, the owner's 1 ms NOT reached (cause open — tell the owner, ask what next). Judge round 1 done (no defect, F1–F10,
+> (K1–K8 pass), ≈ 1 ms per switch — accepted 12:44 (`[OWNER]`: a one-off action is outside the 1 ms, what happens often in play is inside; `MASTER_PLAN.md`). Judge round 1 done (no defect, F1–F10,
 > F12 addressed), round 2 at the closure. The working game holds the RC4 mods + the pack's new camera `main.lua`; god off in the save.
 > **Next for RC5:** judge rounds to clean → commits (KUMM engine + stand; pack launcher + camera + manifest + stands) → the release ritual
 > (`release_checklist.py`, version bump to 0.9.1-RC5 and launcher 1.1.2, notes RU/EN by the portrait, the guide PDF with the corrected plate line,
