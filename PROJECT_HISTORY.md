@@ -1,5 +1,11 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-23 11:48 +03:00 — the owner's word: an explanation in chat is theses, short
+
+The owner asked «поясни правки!» about the four RC5 fixes of plan 62; I answered with four blocks of «Сейчас · Правка · Проверка · Риск», three to five
+sentences each. The owner, verbatim: `[OWNER]` «ТЕЗОСНО, БЛЯТЬ, КРАТКО!» · 2026-11-23 11:48. I rewrote the answer as four lines, one per fix: what the player
+gets and what I change. Rule — HOUSE_RULES 14.2.
+
 ## 2026-11-23 01:4x +03:00 — STATUS bonsai trim, part 21: the blocks of the chat of 2026-11-22 23:47 (the RC4 publication and the loop of 2026-11-23 00:52) and the closed RC4 blocks of 2026-11-22 23:06 / 23:1x, moved verbatim at its closure
 
 > **THE CHAT OF 23:47 (2026-11-22) — finishing the RC4 publication.** The 23:09 upload did NOT die with the chat: `gh` PID 39600 alive at 23:48, 47 of 83 assets
