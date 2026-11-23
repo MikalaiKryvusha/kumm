@@ -1,5 +1,48 @@
 # KUMM — Project History (the chronicle)
 
+## 2026-11-23 13:3x +03:00 — STATUS bonsai trim, part 22: the block of the chat of 11:38 (the readiness triage, the RC5 fixes) and the closed RC4 block of ≈01:4x, moved verbatim at the closure of the chat of 11:38
+
+> **THE CHAT OF 11:38 (2026-11-23) — the 0.9.1 readiness triage** (`[OWNER]` 11:38, the task: every open issue — what bothers the player, RC5 or the full
+> 0.9.1): `plans/62_conan_0_9_1_release_readiness.md`. Verdict: no open issue is a confirmed crash, hang, lost save or dead end with no workaround; the two
+> real `critical` ones (#21, #23) need a check, not a fix; proposed RC5 — #16 (uninstall leaves 12.8 GB), #47/#15 («72 из 74»), #43 (plate's first open),
+> #53 (first first-person switch over 1 ms) + my retest sweep of ten «fixed, not retested» issues; then 0.9.1 from the RC5 bytes. **ACCEPTED 11:49** (`[OWNER]`
+> «делаем все 4 правки в RC5 сборки и лаунчер 1.1.2»): the four fixes are in work by the steps of plan 62.
+> **State ≈12:4x:** the four fixes are written and run (report `testcases/reports/2026-11-23_conan-rc5-fixes.md`): #16 engine `gameCache` (fixture 78 / 78),
+> #47 launcher fold («2 из 2», control «1 из 2»), #43 plaque prepared in the idle (stand first open 8.4–9.3 ms, control 87 ms), #53 one walk per switch
+> (K1–K8 pass), ≈ 1 ms per switch — accepted 12:44 (`[OWNER]`: a one-off action is outside the 1 ms, what happens often in play is inside; `MASTER_PLAN.md`). Judge round 1 done (no defect, F1–F10,
+> F12 addressed); round 2 (`.work/rc5/judge/round2.md`): no defect, R1 (the deferred event's hero object vs a map load), R2 (a held copy of a dropped
+> pak re-journaled), R3 (full path in the warning), R4 (labels warmed even when the plaque does not fit; `plate.SizeChanged`) fixed ≈12:58, the stands
+> and K9 re-run ≈13:00 — all pass; CODE COMMITTED: KUMM `a225dfa9` (engine + stand), pack `8572e89` (launcher 1.1.2 sources + manifest `gameCache` +
+> stands), `6651e56` (camera). The working game holds the RC4 mods + the pack's new camera `main.lua`; god off in the save. Untracked in the pack:
+> `docs/guide/Krinik-Conan-3.1.1-guide.pdf` (not mine to commit — check what made it before the RC5 build).
+> **Next for RC5:** judge rounds to clean → commits (KUMM engine + stand; pack launcher + camera + manifest + stands) → the release ritual
+> (`release_checklist.py`, version bump to 0.9.1-RC5 and launcher 1.1.2, notes RU/EN by the portrait, the guide PDF with the corrected plate line,
+> `make_release.sh`) → the update RC4 → RC5 through the launcher on `KUMM/.work/rc1_install/Conan_311` (it holds RC4; check `Saved/ExtractedMods` kept
+> on the update, then the uninstaller removes the build's copies) → `retest43.mjs` on the owner's screen with 1.1.2 → publication only by his word.
+>
+> **CHAT CLOSED 2026-11-23 ≈01:4x — v0.9.1-RC4 PUBLISHED, the publication finished** (`[OWNER]` 2026-11-22 23:07 «публикуем релиз РЦ4» · 2026-11-23 00:52
+> «работай автономно до переполнения контекста, выпускай RC4 и затем закрывай чат»). Done: v0.9.1-RC4 (83 assets, Latest) and `launcher-v1.1.1` on GitHub; the
+> owner's working-game launcher updated to 1.1.1 from the real feed (his desktop shortcut opens it); the update RC3 → RC4 through the launcher on the copy passed
+> (`testcases/reports/2026-11-23_conan-launcher-update-rc3-rc4.md`); the release ritual 0 TODO; #4 #13 #48 retested on the published build and CLOSED
+> (`testcases/reports/2026-11-23_conan-rc4-retest-published.md`); the feedback-plate claim of the notes corrected on GitHub and in the pack (standing falsehood,
+> EXP-0618); issue #53 filed; engine `6a24c151` + `9b63fd39` (the shortcut warning, `Invoke-FileRetry`, the journal deleted first); the upload progress page
+> (pack `b30cee1`, `node _config/release/upload_progress.mjs --tag <tag> --dir <release dir>`); the bug severity scale (`researches/bug-severity/README.md`,
+> HOUSE_RULES 38.1 — #41 Esc is comfort). The blocks themselves — chronicle, entry «2026-11-23 01:4x — STATUS bonsai trim, part 21».
+> **FIRST in the next chat:**
+> 1. The owner's answer on the `critical` label of #30 (the bow sprint) and #43 (the launcher): asked in chat 00:0x by the industry scale, no answer yet.
+> 2. #43 — the feedback plate's FIRST open after a start, 134–390 ms on the owner's machine (bug 110's open item; the owner 01:09 «баг есть»): build the plate's
+>    windows and faces ahead at the launcher's idle; the case — the first open ≤ 16 ms on his screen (`.work/rc4/retest43.mjs` measures it). The next launcher.
+> 3. #21 — the real waystone travel retest (two placed waystones need the building mode with real input).
+> 4. N2 — a weapon swap in first person on the published build: the heroine of the owner's save respawned without her gear after the R48 death (her corpse
+>    holds the bow and the hatchet near -82919, 231984) — spawn gear by the remote first.
+> 5. #53 — the first view switch after world entry costs 2–4.5 ms (the camera's three walks; the second switch 1.7 ms).
+> 6. Carried from the chat of 18:55: plan 61 step 2 (our kit «Esc catcher» on EAA — comfort now, #41); M2 (a talk with an NPC over the map started by a REAL E —
+>    the stuck-map hunt, #23, the one real dead end); #52 (the first-person bow stance) — for later by the owner's word 2026-11-22 22:39.
+> 7. The owner's queue warns about the Svarog interviews 011–021 (answered, not applied — the game is paused); the contour has no «parked» status, so they stay.
+> 8. The RC4 guide PDF asset keeps the old plate line (hashed in `manifest.json`); the next release's PDF carries the fix. The copy
+>    `KUMM/.work/rc1_install/Conan_311` (59 GB) holds RC4 now — keep for the RC5 update test (it then needs RC3 → RC4 reversed) or remove by rm-tree.
+>
+
 ## 2026-11-23 12:44 +03:00 — the owner's word: the 1 ms budget is for what happens often in play, not for one-off actions
 
 I reported that the camera's view switch (issue #53) became one walk instead of three, ≈ 1 ms instead of ≈ 3–4.5 ms, and that the owner's 1 ms was not
