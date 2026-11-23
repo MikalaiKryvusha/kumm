@@ -131,11 +131,15 @@ half runs on a fake pack — `node tools/fixture-pack.mjs` (`-ListMods`, `-Deplo
 > (`2808b06`); the texts committed (pack `3d9f478`, `9583f39`: the full notes, the launcher 1.1.2 notes, the guide, the README template; voice-lint 0, the
 > clean read applied); the plaque's slow first open is a KNOWN ISSUE (the owner's eye 14:27 «медленно первое открытие плашки… Выпускм как есть»; #43 open);
 > the KrinikConanUI kit pak rebuilt with «0.9.1» (×4, no «-RC», 8 files = RC4's) and deployed: «74/74 mods · verify 110 present, 0 missing», modinfo 66/66,
-> check-krinik 4/4. RUNNING since 14:29: `make_release.sh` into `KUMM/.work/rc5_release` (log `KUMM/.work/rc5/logs/make_release.log`; the harness lost the task
-> at a session restart, the processes 46336 / 45764 live on). Next: the README sizes (`.work/rc4/regen_readme.sh <log>`), the public tree
-> (`make_public_tree.py` → mirror into `.work/public_repo`, add by name, push), `gh release create v0.9.1 --latest` with every file of `release/` and the notes
-> copy, `launcher-v1.1.2` (`--latest=false`), `release_checklist.py --published`, `published_0_9_1/` kept texts. PUBLICATION AUTHORIZED: `[OWNER]` 14:27
-> «Выпускм как есть» (GitHub; Nexus only by his own word). The update RC4 → 0.9.1 on the copy (`KUMM/.work/rc5/realcheck.mjs`) and #16 on the real game — after.
+> check-krinik 4/4. **0.9.1 PUBLISHED 2026-11-23 16:04** (`[OWNER]` 14:27 «Выпускм как есть»): GitHub `v0.9.1` Latest, 83 assets, every digest = the local
+> SHA256SUMS; `launcher-v1.1.2` (`--latest=false`); the public repo `0dff3ce` (README 0.9.1, the guide PDF now in `docs/guide/`); the release page and the README
+> read back as frames; `release_checklist.py --published` 0 TODO; kept texts pack `d3c90f2`. Verified on the test copy by the player's path (run report
+> `testcases/reports/2026-11-23_conan-0.9.1-final-release.md`): the RC4 launcher self-updates to 1.1.2, the update downloads 7 files / 39.0 MB, «74 из 74»,
+> the game's 141 pak copies kept by the update and deleted by the uninstaller. Issues #16 #47 #53 closed, #15 closed as #47's duplicate, #43 commented and OPEN.
+> Work dirs removed (`.work/rc5_release` 41 GB, the public tree, browser profiles, launcher frames); the test copy `.work/rc1_install/Conan_311` is the clean 3.1.1
+> plus the three bundle folders (kept for the 1.0.0 tests). **NEXT — 1.0.0** (`MASTER_PLAN.md`): the retest sweep of plan 62 (#21 the real waystone travel, #23,
+> the «fixed, not retested» row), #43 the plaque's first open, the known issues of 0.9.1. Open with the owner: Nexus for 0.9.1 (his word; the page's e-mail
+> BBCode #17 first), the `critical` label of #30.
 >
 > **CHAT CLOSED 2026-11-23 ≈13:3x — the 0.9.1 readiness triage and the four RC5 fixes, committed and run; RC5 NOT built yet** (`[OWNER]` 11:49
 > «делаем все 4 правки в RC5 сборки и лаунчер 1.1.2»). Done: the triage of 38 open issues (`plans/62_conan_0_9_1_release_readiness.md`); #16 the
